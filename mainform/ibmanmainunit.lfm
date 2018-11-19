@@ -1,12 +1,12 @@
 object fbManagerMainForm: TfbManagerMainForm
-  Left = 358
-  Height = 664
-  Top = 153
-  Width = 1190
+  Left = 359
+  Height = 763
+  Top = 125
+  Width = 1252
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'
-  ClientHeight = 639
-  ClientWidth = 1190
+  ClientHeight = 738
+  ClientWidth = 1252
   Constraints.MinHeight = 120
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
@@ -17,8 +17,8 @@ object fbManagerMainForm: TfbManagerMainForm
   object StatusBar1: TStatusBar
     Left = 0
     Height = 21
-    Top = 618
-    Width = 1190
+    Top = 717
+    Width = 1252
     Panels = <    
       item
         Width = 90
@@ -38,7 +38,7 @@ object fbManagerMainForm: TfbManagerMainForm
     Left = 0
     Height = 32
     Top = 0
-    Width = 1190
+    Width = 1252
     Items = <    
       item
         Action = dbConnect
@@ -168,14 +168,14 @@ object fbManagerMainForm: TfbManagerMainForm
     Align = alTop
     BorderWidth = 4
     ClientHeight = 32
-    ClientWidth = 1190
+    ClientWidth = 1252
     TabOrder = 0
     object RxMDICloseButton1: TRxMDICloseButton
       AnchorSideTop.Control = ToolPanel1
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 1162
+      Left = 1224
       Height = 22
       Top = 5
       Width = 23
@@ -204,11 +204,11 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object InspectorPanel: TPanel
     Left = 0
-    Height = 561
+    Height = 660
     Top = 32
     Width = 219
     Align = alLeft
-    ClientHeight = 561
+    ClientHeight = 660
     ClientWidth = 219
     TabOrder = 2
     object Panel1: TPanel
@@ -286,24 +286,24 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object Splitter1: TSplitter
     Left = 219
-    Height = 561
+    Height = 660
     Top = 32
     Width = 5
   end
   object RxMDITasks1: TRxMDITasks
     Left = 0
     Height = 25
-    Top = 593
-    Width = 1190
+    Top = 692
+    Width = 1252
     Align = alBottom
     FlatButton = False
     Options = []
   end
   object RxMDIPanel1: TRxMDIPanel
     Left = 224
-    Height = 561
+    Height = 660
     Top = 32
-    Width = 966
+    Width = 1028
     CloseButton = RxMDICloseButton1
     TaskPanel = RxMDITasks1
     Align = alClient
