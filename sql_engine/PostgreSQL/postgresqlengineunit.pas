@@ -6147,10 +6147,6 @@ initialization
 ALTER GROUP — изменить имя роли или членство
 ALTER MATERIALIZED VIEW — изменить определение материализованного представления
 ALTER POLICY — изменить определение политики защиты на уровне строк
-ALTER ROLE — изменить роль в базе данных
-ALTER SYSTEM — изменить параметр конфигурации сервера
-ALTER USER — изменить роль в базе данных
-ALTER USER MAPPING — изменить определение сопоставления пользователей
 
 COMMIT — зафиксировать текущую транзакцию
 COMMIT PREPARED — зафиксировать транзакцию, которая ранее была подготовлена для двухфазной фиксации
@@ -6372,12 +6368,9 @@ REFRESH MATERIALIZED VIEW — заменить содержимое матери
 
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommentOn, 'COMMENT ON');        //COMMENT — задать или изменить комментарий объекта
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLImportForeignSchema, 'IMPORT FOREIGN SCHEMA');
-(*
-  ALTER TEXT SEARCH CONFIGURATION — изменить определение конфигурации текстового поиска
-  ALTER TEXT SEARCH DICTIONARY — изменить определение словаря текстового поиска
-  ALTER TEXT SEARCH PARSER — изменить определение анализатора текстового поиска
-  ALTER TEXT SEARCH TEMPLATE — изменить определение шаблона текстового поиска
-*)
+
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterSystem, 'ALTER SYSTEM'); //изменить параметр конфигурации сервера
+
 finalization
 end.
 

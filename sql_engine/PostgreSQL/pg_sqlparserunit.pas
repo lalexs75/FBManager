@@ -2408,6 +2408,24 @@ type
     property Option:TPGSQLImportForeignSchemaOption read FOption write FOption;
   end;
 
+
+  { TPGSQLAlterSystem }
+  TPGSQLAlterSystemType = (astNone, astReset, astSet, astSetTO);
+
+  TPGSQLAlterSystem = class(TSQLCommandDDL)
+  private
+    FAlterSystemType: TPGSQLAlterSystemType;
+    FParamValue: string;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property AlterSystemType:TPGSQLAlterSystemType read FAlterSystemType write FAlterSystemType;
+    property ParamValue:string read FParamValue write FParamValue;
+  end;
+
 implementation
 uses strutils, rxstrutils;
 
@@ -2961,6 +2979,86 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLAlterSystem }
+
+procedure TPGSQLAlterSystem.InitParserTree;
+var
+  FSQLTokens, T, T1, T2: TSQLTokenRecord;
+begin
+(*
+ALTER SYSTEM SET параметр_конфигурации { TO | = } { значение | 'значение' | DEFAULT }
+
+ALTER SYSTEM RESET параметр_конфигурации
+ALTER SYSTEM RESET ALL
+*)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SYSTEM', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'RESET', [], 1);
+    AddSQLTokens(stKeyword, T, 'ALL', [], 1);
+    AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'SET', [], 2);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 3);
+  T1:=AddSQLTokens(stKeyword, T, 'TO', [], 4);
+  T2:=AddSQLTokens(stSymbol, T, '=', [], 5);
+    AddSQLTokens(stInteger, [T1, T2], '', [], 6);
+    AddSQLTokens(stIdentificator, [T1, T2], '', [], 6);
+    AddSQLTokens(stString, [T1, T2], '', [], 6);
+    AddSQLTokens(stKeyword, [T1, T2], 'DEFAULT', [], 6);
+end;
+
+procedure TPGSQLAlterSystem.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:begin
+        AlterSystemType:=astReset;
+        Name:=AWord;
+      end;
+    3:Name:=AWord;
+    4:AlterSystemType:=astSetTO;
+    5:AlterSystemType:=astSet;
+    6:ParamValue:=AWord;
+  end;
+end;
+
+procedure TPGSQLAlterSystem.MakeSQL;
+var
+  S: String;
+begin
+  (*
+  ALTER SYSTEM SET параметр_конфигурации { TO | = } { значение | 'значение' | DEFAULT }
+
+  ALTER SYSTEM RESET параметр_конфигурации
+  ALTER SYSTEM RESET ALL
+  *)
+  S:='ALTER SYSTEM';
+  if AlterSystemType = astReset then
+    S:=S + ' RESET '+Name
+  else
+  if AlterSystemType in [astSet, astSetTO] then
+  begin
+    S:=S + ' SET ' + Name;
+    if AlterSystemType = astSet then
+      S:=S + ' = '
+    else
+      S:=S + ' TO ';
+    S:=S+ParamValue;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterSystem.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterSystem then
+  begin
+    AlterSystemType:=TPGSQLAlterSystem(ASource).AlterSystemType;
+    ParamValue:=TPGSQLAlterSystem(ASource).ParamValue;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLCreateTablePartition }

@@ -2619,6 +2619,12 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'CREATE TYPE employee_type AS (name text, salary numeric);'
         )
+      end    
+      item
+        Caption = 'AlterSystem3'
+        Lines.Strings = (
+          'ALTER SYSTEM SET wal_level TO replica;'
+        )
       end>
     Left = 32
     Top = 496

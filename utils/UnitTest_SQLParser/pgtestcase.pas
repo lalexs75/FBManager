@@ -615,6 +615,7 @@ type
     //ALTER SYSTEM — изменить параметр конфигурации сервера
     procedure AlterSystem1;
     procedure AlterSystem2;
+    procedure AlterSystem3;
     //CREATE TABLE AS — создать таблицу из результатов запроса
     procedure CreateTableAs1;
     procedure CreateTableAs2;
@@ -2852,6 +2853,11 @@ end;
 procedure TPGSQLParserTest.AlterSystem2;
 begin
   DoTestSQL(PGSQLParserData.sSystem['AlterSystem2']);
+end;
+
+procedure TPGSQLParserTest.AlterSystem3;
+begin
+  DoTestSQL(PGSQLParserData.sSystem['AlterSystem3']);
 end;
 
 procedure TPGSQLParserTest.CreateTableAs1;
