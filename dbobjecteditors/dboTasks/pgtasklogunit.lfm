@@ -1,0 +1,394 @@
+inherited pgTaskLogPage: TpgTaskLogPage
+  Height = 503
+  Width = 763
+  ClientHeight = 503
+  ClientWidth = 763
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 45
+    Top = 0
+    Width = 763
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 45
+    ClientWidth = 763
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = RxDateEdit1
+      AnchorSideBottom.Side = asrBottom
+      Left = 7
+      Height = 19
+      Top = 19
+      Width = 68
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'From date'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = RxDateEdit1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideBottom.Control = RxDateEdit2
+      AnchorSideBottom.Side = asrBottom
+      Left = 214
+      Height = 19
+      Top = 19
+      Width = 49
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'To date'
+      ParentColor = False
+    end
+    object RxDateEdit1: TRxDateEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      Left = 81
+      Height = 31
+      Top = 7
+      Width = 127
+      BorderSpacing.Around = 6
+      ButtonWidth = 23
+      MaxLength = 10
+      PasswordChar = #0
+      PopupColor = clWindow
+      TabOrder = 0
+      Text = '  .  .    '
+    end
+    object RxDateEdit2: TRxDateEdit
+      AnchorSideLeft.Control = Label2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      Left = 269
+      Height = 31
+      Top = 7
+      Width = 149
+      BorderSpacing.Around = 6
+      ButtonWidth = 23
+      MaxLength = 10
+      PasswordChar = #0
+      PopupColor = clWindow
+      TabOrder = 1
+      Text = '  .  .    '
+    end
+    object BitBtn1: TBitBtn
+      AnchorSideLeft.Control = RxDateEdit2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      Left = 424
+      Height = 31
+      Top = 7
+      Width = 85
+      Action = actRefreshData
+      AutoSize = True
+      BorderSpacing.Around = 6
+      TabOrder = 2
+    end
+  end
+  object RxDBGrid1: TRxDBGrid[1]
+    Left = 0
+    Height = 458
+    Top = 45
+    Width = 763
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    OnGetCellProps = RxDBGrid1GetCellProps
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ID'
+        Width = 90
+        FieldName = 'jlgid'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Job ID'
+        FieldName = 'jlgjobid'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Start date'
+        Width = 130
+        FieldName = 'jlgstart'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Duration'
+        Width = 200
+        FieldName = 'jlgduration'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Status'
+        Width = 250
+        FieldName = 'jlgstatus'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsLogs
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
+    TabOrder = 1
+    TitleStyle = tsNative
+  end
+  object quLogs: TZReadOnlyQuery[2]
+    SQL.Strings = (
+      'select'
+      '  pga_joblog.jlgid,'
+      '  pga_joblog.jlgjobid,'
+      '  pga_joblog.jlgstatus,'
+      '  pga_joblog.jlgstart,'
+      '  pga_joblog.jlgduration'
+      'from'
+      '  "pgagent".pga_joblog'
+      'where'
+      '    pga_joblog.jlgjobid = :jlgjobid'
+      '  and'
+      '    pga_joblog.jlgstart BETWEEN :date_start and :date_end'
+      'order by'
+      '  pga_joblog.jlgstart    '
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'jlgjobid'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'date_start'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'date_end'
+        ParamType = ptUnknown
+      end>
+    Left = 165
+    Top = 179
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'jlgjobid'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'date_start'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'date_end'
+        ParamType = ptUnknown
+      end>
+    object quLogsjlgid: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'jlgid'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object quLogsjlgjobid: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'jlgjobid'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object quLogsjlgstatus: TStringField
+      DisplayWidth = 4
+      FieldKind = fkData
+      FieldName = 'jlgstatus'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = quLogsjlgstatusGetText
+      Size = 4
+    end
+    object quLogsjlgstart: TDateTimeField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'jlgstart'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object quLogsjlgduration: TStringField
+      DisplayWidth = 32
+      FieldKind = fkData
+      FieldName = 'jlgduration'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 32
+    end
+  end
+  object dsLogs: TDataSource[3]
+    DataSet = quLogs
+    Left = 128
+    Top = 179
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 128
+    Top = 261
+    object actRefreshData: TAction
+      Caption = 'Refresh'
+      Hint = 'Refresh data'
+      ImageIndex = 10
+      OnExecute = actRefreshDataExecute
+    end
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[5]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Export to speadsheet'
+    Options = []
+    Left = 278
+    Top = 71
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[6]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 320
+    Top = 72
+  end
+  object ZConnection1: TZConnection[7]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'postgres'
+    User = 'postgres'
+    Protocol = 'postgresql-9'
+    Left = 40
+    Top = 113
+  end
+end

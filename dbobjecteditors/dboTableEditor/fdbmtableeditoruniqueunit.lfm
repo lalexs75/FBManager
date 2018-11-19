@@ -1,0 +1,319 @@
+inherited fdbmTableEditorUniqueFrame: TfdbmTableEditorUniqueFrame
+  Height = 503
+  Width = 992
+  ClientHeight = 503
+  ClientWidth = 992
+  DesignLeft = 499
+  DesignTop = 203
+  object RxDBGrid1: TRxDBGrid[0]
+    Left = 0
+    Height = 503
+    Top = 0
+    Width = 992
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Name'
+        Width = 150
+        FieldName = 'Name'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Field'
+        Width = 250
+        FieldName = 'Field'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'IndexName'
+        Width = 150
+        FieldName = 'IndexName'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'IndexSort'
+        Width = 150
+        FieldName = 'IndexSort'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Description'
+        Width = 250
+        FieldName = 'Description'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsUnqList
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TitleStyle = tsNative
+  end
+  object dsUnqList: TDataSource[1]
+    DataSet = rxUnqList
+    Left = 84
+    Top = 198
+  end
+  object rxUnqList: TRxMemoryData[2]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'Field'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'IndexName'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'IndexSort'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Size = 250
+      end>
+    AfterOpen = rxUnqListAfterOpen
+    AfterClose = rxUnqListAfterOpen
+    AfterPost = rxUnqListAfterOpen
+    AfterDelete = rxUnqListAfterOpen
+    PacketRecords = 0
+    Left = 124
+    Top = 198
+    object rxUnqListName: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'Name'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxUnqListField: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Field'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxUnqListIndexName: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'IndexName'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxUnqListIndexSort: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'IndexSort'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUnqListDescription: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Description'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 249
+    Top = 198
+    object actNewUNQ: TAction
+      Caption = 'New unique constraint'
+      ImageIndex = 12
+      OnExecute = actNewUNQExecute
+    end
+    object actDropUNQ: TAction
+      Caption = 'Drop unique constraint'
+      ImageIndex = 13
+      OnExecute = actDropUNQExecute
+    end
+    object actPrintList: TAction
+      Caption = 'Print FK list'
+      ImageIndex = 14
+      OnExecute = actPrintListExecute
+    end
+    object actRefresh: TAction
+      Caption = 'actRefresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 300
+    Top = 198
+    object MenuItem1: TMenuItem
+      Action = actNewUNQ
+    end
+    object MenuItem2: TMenuItem
+      Action = actDropUNQ
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = actPrintList
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[5]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 160
+    Top = 110
+  end
+end

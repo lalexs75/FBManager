@@ -1,0 +1,358 @@
+object fbmShadowManagerForm: TfbmShadowManagerForm
+  Left = 341
+  Height = 416
+  Top = 215
+  Width = 563
+  ActiveControl = Panel1
+  Caption = 'Shadow manager'
+  ClientHeight = 391
+  ClientWidth = 563
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '2.1.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 45
+    Top = 0
+    Width = 563
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 45
+    ClientWidth = 563
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = ComboBox1
+      AnchorSideBottom.Side = asrBottom
+      Left = 7
+      Height = 19
+      Top = 19
+      Width = 63
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Database'
+      ParentColor = False
+    end
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 76
+      Height = 31
+      Top = 7
+      Width = 480
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = ComboBox1Change
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object RxDBGrid1: TRxDBGrid
+    Left = 0
+    Height = 315
+    Top = 76
+    Width = 563
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Shadow number'
+        Width = 100
+        FieldName = 'rdb$shadow_number'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'First file name'
+        Width = 300
+        FieldName = 'rdb$file_name'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = []
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = Datasource1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    TitleStyle = tsNative
+  end
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 45
+    Width = 563
+    Items = <    
+      item
+        Action = shdAdd
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 73
+        ShowCaption = True
+      end    
+      item
+        Action = shdDrop
+        Visible = True
+        Left = 78
+        Height = 21
+        Top = 5
+        Width = 61
+        ShowCaption = True
+      end    
+      item
+        Action = shdRefresh
+        Visible = True
+        Left = 139
+        Height = 21
+        Top = 5
+        Width = 79
+        ShowCaption = True
+      end    
+      item
+        Action = shdPrintList
+        Visible = True
+        Left = 218
+        Height = 21
+        Top = 5
+        Width = 60
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns, tpCustomizable]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 563
+    TabOrder = 2
+  end
+  object quShadowList: TFBDataSet
+    AfterOpen = quShadowListAfterOpen
+    AfterClose = quShadowListAfterOpen
+    AfterInsert = quShadowListAfterOpen
+    AfterDelete = quShadowListAfterOpen
+    MaxMEMOStringSize = 0
+    AutoUpdateOptions.WhenGetGenID = wgNever
+    AutoUpdateOptions.IncrementBy = 1
+    DefaultFormats.DisplayFormatNumeric = '#,##0.0'
+    DefaultFormats.DisplayFormatInteger = '#,##0'
+    DefaultFormats.EditFormatNumeric = '#0.0'
+    DefaultFormats.EditFormatInteger = '#0'
+    DetailConditions = []
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    UpdateRecordTypes = [cusUnmodified, cusModified, cusInserted]
+    SQLSelect.Strings = (
+      'select'
+      '  rdb$files.rdb$file_name,'
+      '  rdb$files.rdb$file_sequence,'
+      '  rdb$files.rdb$file_start,'
+      '  rdb$files.rdb$file_length,'
+      '  rdb$files.rdb$shadow_number'
+      'from'
+      '  rdb$files'
+      'where'
+      '    (rdb$files.rdb$shadow_number > 0)'
+      '  and'
+      '    (rdb$files.rdb$file_sequence = 0)'
+      'order by'
+      '  rdb$files.rdb$file_name'
+    )
+    Left = 176
+    Top = 208
+  end
+  object Datasource1: TDataSource
+    DataSet = quShadowList
+    Left = 136
+    Top = 208
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 88
+    Top = 88
+    object shdAdd: TAction
+      Caption = 'Create'
+      Hint = 'Create shadow'
+      ImageIndex = 12
+      OnExecute = shdAddExecute
+    end
+    object shdDrop: TAction
+      Caption = 'Drop'
+      Hint = 'Drop shadow'
+      ImageIndex = 13
+      OnExecute = shdDropExecute
+    end
+    object shdRefresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = shdRefreshExecute
+    end
+    object shdPrintList: TAction
+      Caption = 'Print'
+      Hint = 'Print shadow list'
+      ImageIndex = 14
+      OnExecute = shdPrintListExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 128
+    Top = 88
+    object MenuItem1: TMenuItem
+      Action = shdAdd
+      OnClick = shdAddExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = shdDrop
+      OnClick = shdDropExecute
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = shdRefresh
+      OnClick = shdRefreshExecute
+    end
+    object MenuItem12: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem13: TMenuItem
+      Action = shdPrintList
+      OnClick = shdPrintListExecute
+    end
+  end
+  object UIBTransaction1: TUIBTransaction
+    Options = [tpNowait, tpRead, tpWrite, tpReadCommitted]
+    Left = 216
+    Top = 208
+  end
+  object MainMenu1: TMainMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 48
+    Top = 88
+    object MenuItem5: TMenuItem
+      Caption = 'Shadow'
+      object MenuItem6: TMenuItem
+        Action = shdAdd
+        OnClick = shdAddExecute
+      end
+      object MenuItem9: TMenuItem
+        Action = shdDrop
+        OnClick = shdDropExecute
+      end
+      object MenuItem8: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem7: TMenuItem
+        Action = shdRefresh
+        OnClick = shdRefreshExecute
+      end
+      object MenuItem10: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem11: TMenuItem
+        Action = shdPrintList
+        OnClick = shdPrintListExecute
+      end
+    end
+  end
+  object frShadowList: TfrDBDataSet
+    DataSet = quShadowList
+    Left = 96
+    Top = 208
+  end
+end

@@ -1,0 +1,126 @@
+inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
+  Height = 314
+  Width = 568
+  ClientHeight = 314
+  ClientWidth = 568
+  DesignLeft = 429
+  DesignTop = 198
+  object Label10: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 134
+    BorderSpacing.Around = 6
+    Caption = 'Default character set'
+    ParentColor = False
+  end
+  object Label12: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CB_DefServer
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 142
+    Width = 118
+    BorderSpacing.Around = 6
+    Caption = 'Default user name'
+    ParentColor = False
+  end
+  object Label13: TLabel[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = CB_DefServer
+    AnchorSideTop.Side = asrBottom
+    Left = 290
+    Height = 20
+    Top = 142
+    Width = 112
+    BorderSpacing.Around = 6
+    Caption = 'Default password'
+    ParentColor = False
+  end
+  object Label16: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CB_CharSet
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 74
+    Width = 141
+    BorderSpacing.Around = 6
+    Caption = 'Default server version'
+    ParentColor = False
+  end
+  object CB_CharSet: TComboBox[4]
+    AnchorSideLeft.Control = Label10
+    AnchorSideTop.Control = Label10
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 32
+    Width = 550
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object edtDefUserName: TEdit[5]
+    AnchorSideLeft.Control = Label12
+    AnchorSideTop.Control = Label12
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 168
+    Width = 266
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object edtDefUserPassword: TEdit[6]
+    AnchorSideLeft.Control = Label13
+    AnchorSideTop.Control = Label13
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 296
+    Height = 37
+    Top = 168
+    Width = 266
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 2
+  end
+  object CB_DefServer: TComboBox[7]
+    AnchorSideLeft.Control = Label16
+    AnchorSideTop.Control = Label16
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 100
+    Width = 550
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object Label1: TLabel[8]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 284
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+end

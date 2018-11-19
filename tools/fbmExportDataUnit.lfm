@@ -1,0 +1,448 @@
+object fbmExportDataForm: TfbmExportDataForm
+  Left = 308
+  Height = 557
+  Top = 205
+  Width = 629
+  ActiveControl = TabSheet1
+  BorderIcons = [biSystemMenu]
+  Caption = 'Export data to script'
+  ClientHeight = 557
+  ClientWidth = 629
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Label1: TLabel
+    Left = 6
+    Height = 18
+    Top = 6
+    Width = 76
+    Caption = 'Export into'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 18
+    Top = 65
+    Width = 65
+    Caption = 'Export as'
+    FocusControl = ComboBox2
+    ParentColor = False
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 18
+    Top = 124
+    Width = 66
+    Caption = 'File name'
+    FocusControl = FileNameEdit1
+    ParentColor = False
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = FileNameEdit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 18
+    Top = 181
+    Width = 78
+    Caption = 'Table name'
+    FocusControl = Edit1
+    ParentColor = False
+  end
+  object Label8: TLabel
+    Left = 8
+    Height = 18
+    Top = 380
+    Width = 47
+    Caption = 'Label8'
+    ParentColor = False
+  end
+  object PageControl1: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Button1
+    Left = 6
+    Height = 280
+    Top = 238
+    Width = 617
+    ActivePage = TabSheet1
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Fields'
+      ClientHeight = 249
+      ClientWidth = 613
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 129
+        Top = 0
+        Width = 613
+        TitleButtons = False
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Width = 30
+            FieldName = 'PK'
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Width = 30
+            FieldName = 'I'
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Caption = 'Field name'
+            Title.Orientation = toHorizontal
+            Width = 164
+            FieldName = 'FieldName'
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Caption = 'Field type'
+            Title.Orientation = toHorizontal
+            Width = 164
+            FieldName = 'FieldType'
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+          end>
+        OptionsRx = []
+        FooterColor = clYellow
+        Align = alClient
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = Datasource1
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentColor = False
+        TabOrder = 0
+      end
+      object RxDBGrid2: TRxDBGrid
+        Left = 0
+        Height = 120
+        Top = 129
+        Width = 613
+        TitleButtons = False
+        AutoSort = False
+        OptionsRx = []
+        FooterColor = clYellow
+        Align = alBottom
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = Datasource2
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ParentColor = False
+        TabOrder = 1
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Options'
+      ClientHeight = 249
+      ClientWidth = 613
+      object Label5: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Control = CheckBox3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 13
+        Top = 84
+        Width = 64
+        BorderSpacing.Top = 6
+        Caption = 'Date format'
+        FocusControl = EditFormatDate
+        ParentColor = False
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = EditFormatDate
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label5
+        Left = 160
+        Height = 13
+        Top = 84
+        Width = 90
+        BorderSpacing.Left = 12
+        Caption = 'DateTime format'
+        FocusControl = EditFormatDateTime
+        ParentColor = False
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = EditFormatDateTime
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label5
+        Left = 330
+        Height = 13
+        Top = 84
+        Width = 111
+        BorderSpacing.Left = 12
+        Caption = 'Insert ''Commit" after'
+        FocusControl = SpinEdit1
+        ParentColor = False
+      end
+      object CheckBox1: TCheckBox
+        Left = 6
+        Height = 20
+        Top = 6
+        Width = 426
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Replace non printable symbols'
+        TabOrder = 0
+      end
+      object CheckBox2: TCheckBox
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 32
+        Width = 422
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 6
+        Caption = 'Remove trailing spaces and control characters from string values'
+        TabOrder = 1
+      end
+      object CheckBox3: TCheckBox
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 58
+        Width = 422
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 6
+        Caption = 'Use ANSI prefix for date/time values'
+        TabOrder = 2
+      end
+      object EditFormatDate: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 22
+        Top = 103
+        Width = 136
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'EditFormatDate'
+      end
+      object EditFormatDateTime: TEdit
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        Left = 166
+        Height = 22
+        Top = 103
+        Width = 152
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'EditFormatDateTime'
+      end
+      object CheckBox4: TCheckBox
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Control = EditFormatDate
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 131
+        Width = 203
+        BorderSpacing.Top = 6
+        Caption = 'Insert ''Delete form'' before script'
+        TabOrder = 5
+      end
+      object SpinEdit1: TSpinEdit
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        Left = 336
+        Height = 24
+        Top = 103
+        Width = 128
+        BorderSpacing.Around = 6
+        TabOrder = 6
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Options'
+    end
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 29
+    Top = 30
+    Width = 611
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'File'
+      'Clipboard'
+      'Script executive'
+    )
+    OnChange = ComboBox1Change
+    Style = csDropDownList
+    TabOrder = 1
+    Text = 'File'
+  end
+  object ComboBox2: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 29
+    Top = 89
+    Width = 611
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'INSERT Statements'
+      'UPDATE Statements'
+      'EXECUTE PROCEDURE Statements'
+    )
+    OnChange = ComboBox2Change
+    Style = csDropDownList
+    TabOrder = 2
+    Text = 'INSERT Statements'
+  end
+  object FileNameEdit1: TFileNameEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 27
+    Top = 148
+    Width = 588
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 23
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    TabOrder = 3
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 27
+    Top = 205
+    Width = 611
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+    Text = 'Edit1'
+  end
+  object Button1: TButton
+    AnchorSideRight.Control = Button2
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 470
+    Height = 27
+    Top = 524
+    Width = 51
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Export'
+    Default = True
+    OnClick = Button1Click
+    TabOrder = 5
+  end
+  object Button2: TButton
+    AnchorSideRight.Control = Button3
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 527
+    Height = 27
+    Top = 524
+    Width = 53
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 6
+  end
+  object Button3: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 586
+    Height = 27
+    Top = 524
+    Width = 37
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Help'
+    TabOrder = 7
+  end
+  object Datasource1: TDatasource
+    left = 208
+    top = 80
+  end
+  object RxMemoryData1: TRxMemoryData
+    AutoCalcFields = False
+    FieldDefs = <>
+    left = 336
+    top = 114
+  end
+  object Datasource2: TDatasource
+    DataSet = RxMemoryData1
+    left = 336
+    top = 80
+  end
+end

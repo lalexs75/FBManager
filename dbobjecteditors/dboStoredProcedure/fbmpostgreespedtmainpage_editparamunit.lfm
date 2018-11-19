@@ -1,0 +1,170 @@
+object fbmPostGreeSPedtMainPage_EditParamForm: TfbmPostGreeSPedtMainPage_EditParamForm
+  Left = 485
+  Height = 413
+  Top = 290
+  Width = 636
+  Caption = 'Param property'
+  ClientHeight = 413
+  ClientWidth = 636
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.5'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 38
+    BorderSpacing.Around = 6
+    Caption = 'Name'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 72
+    Width = 32
+    BorderSpacing.Around = 6
+    Caption = 'Type'
+    ParentColor = False
+  end
+  object cbType: TComboBox
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 99
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbType
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 138
+    Width = 86
+    BorderSpacing.Around = 6
+    Caption = 'Input/Output'
+    ParentColor = False
+  end
+  object cbInOut: TComboBox
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 165
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'Input'
+      'Output'
+      'Input/Output'
+      'Variadic'
+      'TABLE'
+    )
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbInOut
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 204
+    Width = 86
+    BorderSpacing.Around = 6
+    Caption = 'Default value'
+    ParentColor = False
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 231
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object Label5: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 270
+    Width = 73
+    BorderSpacing.Around = 6
+    Caption = 'Description'
+    ParentColor = False
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 12
+    Height = 62
+    Top = 297
+    Width = 618
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 365
+    Width = 624
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CloseButton.Enabled = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 5
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+end

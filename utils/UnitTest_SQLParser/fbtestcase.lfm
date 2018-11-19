@@ -1,0 +1,1704 @@
+object FBTestSQLData: TFBTestSQLData
+  OldCreateOrder = False
+  Height = 857
+  HorizontalOffset = 402
+  VerticalOffset = 103
+  Width = 1113
+  object sView: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'RecreateView1'
+        Lines.Strings = (
+          'RECREATE VIEW v_films AS'
+          'SELECT f.id, f.title, s.audio, v.video'
+          'FROM t_films f'
+          'LEFT JOIN t_sound s ON f.id = s.id'
+          'LEFT JOIN t_video v ON f.id = v.id;'
+        )
+      end    
+      item
+        Caption = 'RecreateView2'
+        Lines.Strings = (
+          'RECREATE VIEW PRICE_WITH_MARKUP ('
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST_WITH_MARKUP'
+          ')'
+          'AS'
+          'SELECT'
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST * 1.15'
+          'FROM PRICE;'
+        )
+      end    
+      item
+        Caption = 'DropView1'
+        Lines.Strings = (
+          'DROP VIEW viewname;'
+        )
+      end    
+      item
+        Caption = 'DropView2'
+        Lines.Strings = (
+          'DROP VIEW PRICE_WITH_MARKUP;'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterView1'
+        Lines.Strings = (
+          'CREATE OR ALTER VIEW PRICE_WITH_MARKUP ('
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST_WITH_MARKUP'
+          ') AS'
+          'SELECT'
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST * 1.15'
+          'FROM PRICE;'
+        )
+      end    
+      item
+        Caption = 'AlterView1'
+        Lines.Strings = (
+          'ALTER VIEW PRICE_WITH_MARKUP ('
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST_WITH_MARKUP'
+          ') AS'
+          'SELECT'
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST * 1.15'
+          'FROM PRICE;'
+        )
+      end    
+      item
+        Caption = 'CreateView1'
+        Lines.Strings = (
+          'CREATE VIEW ENTRY_LEVEL_JOBS AS'
+          'SELECT JOB_CODE, JOB_TITLE'
+          'FROM JOB'
+          'WHERE MAX_SALARY < 15000;'
+        )
+      end    
+      item
+        Caption = 'CreateView2'
+        Lines.Strings = (
+          'CREATE VIEW ENTRY_LEVEL_JOBS AS'
+          'SELECT JOB_CODE, JOB_TITLE'
+          'FROM JOB'
+          'WHERE MAX_SALARY < 15000'
+          'WITH CHECK OPTIONS;'
+        )
+      end    
+      item
+        Caption = 'CreateView3'
+        Lines.Strings = (
+          'CREATE VIEW PRICE_WITH_MARKUP ('
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST_WITH_MARKUP'
+          ') AS'
+          'SELECT'
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST * 1.1'
+          'FROM PRICE;'
+        )
+      end    
+      item
+        Caption = 'CreateView4'
+        Lines.Strings = (
+          'CREATE VIEW PRICE_WITH_MARKUP AS'
+          'SELECT'
+          '  CODE_PRICE,'
+          '  COST,'
+          '  COST * 1.1 AS COST_WITH_MARKUP'
+          'FROM PRICE;'
+        )
+      end    
+      item
+        Caption = 'CreateView5'
+        Lines.Strings = (
+          'CREATE VIEW GOODS_PRICE AS'
+          'SELECT'
+          '  goods.name AS goodsname,'
+          '  price.cost AS cost,'
+          '  b.quantity AS quantity'
+          'FROM'
+          '  goods'
+          '  JOIN price ON goods.code_goods = price.code_goods'
+          '  LEFT JOIN sp_get_balance(goods.code_goods) b ON 1 = 1;'
+        )
+      end>
+    Left = 32
+    Top = 16
+  end
+  object sDomain: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateDomain1'
+        Lines.Strings = (
+          'CREATE DOMAIN CUSTNO AS INTEGER DEFAULT 10000 CHECK (VALUE > 1000);'
+        )
+      end    
+      item
+        Caption = 'CreateDomain2'
+        Lines.Strings = (
+          'CREATE DOMAIN D_BOOLEAN AS CHAR(3) CHECK (VALUE IN (''Да'', ''Нет''));'
+        )
+      end    
+      item
+        Caption = 'CreateDomain3'
+        Lines.Strings = (
+          'CREATE DOMAIN FIRSTNAME AS VARCHAR(30) CHARACTER SET UTF8 COLLATE UNICODE_CI_AI;'
+        )
+      end    
+      item
+        Caption = 'CreateDomain4'
+        Lines.Strings = (
+          'CREATE DOMAIN D_DATE AS DATE DEFAULT CURRENT_DATE NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'CreateDomain5'
+        Lines.Strings = (
+          'CREATE DOMAIN D_POINT AS NUMERIC(18, 3) [2];'
+        )
+      end    
+      item
+        Caption = 'CreateDomain6'
+        Lines.Strings = (
+          'CREATE DOMAIN TYPE_BALANSE_ACCOUNT AS VARCHAR(6) CHARACTER SET WIN1251 NOT NULL CHECK (value>1) COLLATE WIN1251;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain1'
+        Lines.Strings = (
+          'ALTER DOMAIN CUSTNO INTEGER DEFAULT 2000;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain2'
+        Lines.Strings = (
+          'ALTER DOMAIN D_BOOLEAN TO D_BOOL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain3'
+        Lines.Strings = (
+          'ALTER DOMAIN D_DATE DROP DEFAULT ADD CONSTRAINT CHECK (VALUE >= date ''01.01.2000'');'
+        )
+      end    
+      item
+        Caption = 'AlterDomain4'
+        Lines.Strings = (
+          'ALTER DOMAIN D_DATE DROP CONSTRAINT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain5'
+        Lines.Strings = (
+          'ALTER DOMAIN D_DATE ADD CONSTRAINT CHECK (VALUE BETWEEN date ''01.01.1900'' AND date ''31.12.2100'');'
+        )
+      end    
+      item
+        Caption = 'AlterDomain6'
+        Lines.Strings = (
+          'ALTER DOMAIN FIRSTNAME TYPE VARCHAR(50) CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain7'
+        Lines.Strings = (
+          'ALTER DOMAIN FIRSTNAME SET NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain8'
+        Lines.Strings = (
+          'ALTER DOMAIN name ADD CONSTRAINT CHECK (values >1);'
+        )
+      end    
+      item
+        Caption = 'AlterDomain9'
+        Lines.Strings = (
+          'ALTER DOMAIN name DROP CONSTRAINT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain10'
+        Lines.Strings = (
+          'ALTER DOMAIN name DROP DEFAULT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain11'
+        Lines.Strings = (
+          'ALTER DOMAIN name SET DEFAULT USER;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain12'
+        Lines.Strings = (
+          'ALTER DOMAIN name SET DEFAULT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain13'
+        Lines.Strings = (
+          'ALTER DOMAIN name SET DEFAULT 123;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain14'
+        Lines.Strings = (
+          'ALTER DOMAIN name SET DEFAULT ''aa asd ыфа'';'
+        )
+      end    
+      item
+        Caption = 'DropDomain1'
+        Lines.Strings = (
+          'DROP DOMAIN COUNTRYNAME;'
+        )
+      end    
+      item
+        Caption = 'DropDomain2'
+        Lines.Strings = (
+          'DROP DOMAIN a123;'
+        )
+      end>
+    Left = 32
+    Top = 88
+  end
+  object sTable: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateTable1'
+        Lines.Strings = (
+          'CREATE TABLE COUNTRY('
+          '  COUNTRY COUNTRYNAME NOT NULL PRIMARY KEY,'
+          '  CURRENCY VARCHAR(10) NOT NULL'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable2'
+        Lines.Strings = (
+          'CREATE TABLE STOCK('
+          '  MODEL SMALLINT NOT NULL CONSTRAINT PK_STOCK PRIMARY KEY,'
+          '  MODELNAME CHAR(10) NOT NULL,'
+          '  ITEMID INTEGER NOT NULL,'
+          '  CONSTRAINT MOD_UNIQUE UNIQUE (MODELNAME, ITEMID)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable3'
+        Lines.Strings = (
+          'CREATE TABLE JOB ('
+          '  JOB_CODE'
+          '  JOBCODE NOT NULL,'
+          '  JOB_GRADE JOBGRADE NOT NULL,'
+          '  JOB_COUNTRY COUNTRYNAME,'
+          '  JOB_TITLE  VARCHAR(25) NOT NULL,'
+          '  MIN_SALARY NUMERIC(18, 2) DEFAULT 0 NOT NULL,'
+          '  MAX_SALARY NUMERIC(18, 2) NOT NULL,'
+          '  JOB_REQUIREMENT BLOB SUB_TYPE 1,'
+          '  LANGUAGE_REQ VARCHAR(15) [1:5],'
+          '  PRIMARY KEY (JOB_CODE, JOB_GRADE, JOB_COUNTRY),'
+          '  FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY (COUNTRY) ON UPDATE CASCADE ON DELETE SET NULL,'
+          '  CONSTRAINT CHK_SALARY CHECK (MIN_SALARY < MAX_SALARY)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable4'
+        Lines.Strings = (
+          'CREATE TABLE PROJECT ('
+          '  PROJ_ID PROJNO NOT NULL,'
+          '  PROJ_NAME VARCHAR(20) NOT NULL UNIQUE USING DESC INDEX IDX_PROJNAME,'
+          '  PROJ_DESC BLOB SUB_TYPE 1,'
+          '  TEAM_LEADER EMPNO,'
+          '  PRODUCT PRODTYPE,'
+          '  CONSTRAINT PK_PROJECT PRIMARY KEY (PROJ_ID) USING INDEX IDX_PROJ_ID,'
+          '  FOREIGN KEY (TEAM_LEADER) REFERENCES EMPLOYEE (EMP_NO) USING INDEX IDX_LEADER'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable5'
+        Lines.Strings = (
+          'CREATE TABLE objects ('
+          '  id INTEGER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,'
+          '  name VARCHAR(15)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable6'
+        Lines.Strings = (
+          'CREATE TABLE SALARY_HISTORY ('
+          '  EMP_NO EMPNO NOT NULL,'
+          '  CHANGE_DATE TIMESTAMP DEFAULT ''NOW'' NOT NULL,'
+          '  UPDATER_ID VARCHAR(20) NOT NULL,'
+          '  OLD_SALARY SALARY NOT NULL,'
+          '  PERCENT_CHANGE DOUBLE PRECISION DEFAULT 0 NOT NULL,'
+          '  SALARY_CHANGE GENERATED ALWAYS AS (OLD_SALARY * PERCENT_CHANGE / 100),'
+          '  NEW_SALARY COMPUTED BY (OLD_SALARY + OLD_SALARY * PERCENT_CHANGE / 100)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable7'
+        Lines.Strings = (
+          'CREATE GLOBAL TEMPORARY TABLE MYCONNGTT ('
+          '  ID INTEGER NOT NULL PRIMARY KEY,'
+          '  TXT VARCHAR(32),'
+          '  TS TIMESTAMP DEFAULT CURRENT_TIMESTAMP);'
+          'ON COMMIT PRESERVE ROWS;'
+        )
+      end    
+      item
+        Caption = 'CreateTable8'
+        Lines.Strings = (
+          'CREATE GLOBAL TEMPORARY TABLE MYTXGTT ('
+          '  ID INTEGER NOT NULL PRIMARY KEY,'
+          '  PARENT_ID INTEGER NOT NULL REFERENCES MYCONNGTT(ID),'
+          '  TXT VARCHAR(32),'
+          '  TS TIMESTAMP DEFAULT CURRENT_TIMESTAMP);'
+        )
+      end    
+      item
+        Caption = 'CreateTable9'
+        Lines.Strings = (
+          'CREATE TABLE ext_log'
+          '  EXTERNAL FILE ''d:\externals\log_me.txt'' ('
+          '  stamp CHAR(24),'
+          '  message CHAR(100),'
+          '  crlf CHAR(2)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'AlterTable1'
+        Lines.Strings = (
+          'ALTER TABLE COUNTRY ADD CAPITAL VARCHAR(25);'
+        )
+      end    
+      item
+        Caption = 'AlterTable2'
+        Lines.Strings = (
+          'ALTER TABLE COUNTRY ADD CAPITAL VARCHAR(25) UNIQUE, DROP CURRENCY;'
+        )
+      end    
+      item
+        Caption = 'AlterTable3'
+        Lines.Strings = (
+          'ALTER TABLE OBJECTS ADD QUANTITY INT DEFAULT 1 NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable4'
+        Lines.Strings = (
+          'ALTER TABLE JOB ADD CONSTRAINT CHK_SALARY CHECK (MIN_SALARY < MAX_SALARY), ADD FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY (COUNTRY);'
+        )
+      end    
+      item
+        Caption = 'AlterTable5'
+        Lines.Strings = (
+          'ALTER TABLE STOCK'
+          '  ALTER COLUMN MODEL SET DEFAULT 1,'
+          '  ALTER COLUMN ITEMID TYPE BIGINT,'
+          '  ALTER COLUMN ITEMID DROP NOT NULL,'
+          '  ALTER COLUMN PROPID SET NOT NULL,'
+          '  ALTER COLUMN MODELNAME TO NAME;'
+        )
+      end    
+      item
+        Caption = 'AlterTable6'
+        Lines.Strings = (
+          'ALTER TABLE objects ALTER ID RESTART WITH 100;'
+        )
+      end    
+      item
+        Caption = 'AlterTable7'
+        Lines.Strings = (
+          'ALTER TABLE SALARY_HISTORY ALTER NEW_SALARY GENERATED ALWAYS  AS (OLD_SALARY + OLD_SALARY * PERCENT_CHANGE / 100), ALTER SALARY_CHANGE COMPUTED BY (OLD_SALARY * PERCENT_CHANGE / 100);'
+        )
+      end    
+      item
+        Caption = 'DropTable1'
+        Lines.Strings = (
+          'DROP TABLE COUNTRY;'
+        )
+      end    
+      item
+        Caption = 'RecreateTable1'
+        Lines.Strings = (
+          'RECREATE TABLE COUNTRY ('
+          '  COUNTRY COUNTRYNAME NOT NULL PRIMARY KEY,'
+          '  CURRENCY VARCHAR(10) NOT NULL'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateIndex1'
+        Lines.Strings = (
+          'CREATE INDEX IDX_UPDATER ON SALARY_HISTORY (UPDATER_ID);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex2'
+        Lines.Strings = (
+          'CREATE DESCENDING INDEX IDX_CHANGE ON SALARY_HISTORY (CHANGE_DATE);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex3'
+        Lines.Strings = (
+          'CREATE INDEX IDX_SALESTAT ON SALES (ORDER_STATUS, PAID);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex4'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX UNQ_COUNTRY_NAME ON COUNTRY (NAME);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex5'
+        Lines.Strings = (
+          'CREATE INDEX IDX_NAME_UPPER ON PERSONS COMPUTED BY (UPPER (NAME));'
+        )
+      end    
+      item
+        Caption = 'AlterIndex1'
+        Lines.Strings = (
+          'ALTER INDEX IDX_UPDATER INACTIVE;'
+        )
+      end    
+      item
+        Caption = 'AlterIndex2'
+        Lines.Strings = (
+          'ALTER INDEX IDX_UPDATER ACTIVE;'
+        )
+      end    
+      item
+        Caption = 'DropIndex1'
+        Lines.Strings = (
+          'DROP INDEX IDX_UPDATER;'
+        )
+      end    
+      item
+        Caption = 'SetStatisticsIndex1'
+        Lines.Strings = (
+          'SET STATISTICS INDEX indexname;'
+        )
+      end>
+    Left = 32
+    Top = 159
+  end
+  object sProcedure: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateTrigger1'
+        Lines.Strings = (
+          'CREATE TRIGGER SET_CUST_NO FOR CUSTOMER'
+          'ACTIVE BEFORE INSERT POSITION 0'
+          'AS'
+          'BEGIN'
+          'IF (NEW.CUST_NO IS NULL) THEN'
+          'NEW.CUST_NO = GEN_ID(CUST_NO_GEN, 1);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger2'
+        Lines.Strings = (
+          'CREATE TRIGGER set_cust_no'
+          'ACTIVE BEFORE INSERT POSITION 0 ON customer'
+          'AS'
+          'BEGIN'
+          'IF (NEW.cust_no IS NULL) THEN'
+          'NEW.cust_no = GEN_ID(cust_no_gen, 1);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger3'
+        Lines.Strings = (
+          'CREATE TRIGGER TR_CUST_LOG'
+          'ACTIVE AFTER INSERT OR UPDATE OR DELETE POSITION 10'
+          'ON CUSTOMER'
+          'AS'
+          'BEGIN'
+          '  INSERT INTO CHANGE_LOG (LOG_ID,'
+          '  ID_TABLE,'
+          '  TABLE_NAME,'
+          '  MUTATION)'
+          'VALUES (NEXT VALUE FOR SEQ_CHANGE_LOG,'
+          '  OLD.CUST_NO,'
+          '  ''CUSTOMER'','
+          '  CASE'
+          '  WHEN INSERTING THEN ''INSERT'''
+          '  WHEN UPDATING THEN ''UPDATE'''
+          '  WHEN DELETING THEN ''DELETE'''
+          '  END);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger4'
+        Lines.Strings = (
+          'CREATE TRIGGER tr_log_connect'
+          'INACTIVE ON CONNECT POSITION 0'
+          'AS'
+          'BEGIN'
+          'INSERT INTO LOG_CONNECT (ID,'
+          'USERNAME,'
+          'ATIME)'
+          'VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT,'
+          'CURRENT_USER,'
+          'CURRENT_TIMESTAMP);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger5'
+        Lines.Strings = (
+          'CREATE TRIGGER TR_LIMIT_WORKTIME ACTIVE'
+          'ON CONNECT POSITION 1'
+          'AS'
+          'BEGIN'
+          'IF ((CURRENT_USER <> ''SYSDBA'') AND'
+          'NOT (CURRENT_TIME BETWEEN time ''9:00'' AND time ''17:00'')) THEN'
+          'EXCEPTION E_INCORRECT_WORKTIME;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger6'
+        Lines.Strings = (
+          'CREATE TRIGGER trig_ddl_sp BEFORE CREATE PROCEDURE'
+          'AS'
+          'BEGIN'
+          'IF (rdb$get_context(''DDL_TRIGGER'', ''OBJECT_NAME'')'
+          'NOT STARTING ''SP_'') THEN'
+          'EXCEPTION e_invalid_sp_name;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger7'
+        Lines.Strings = (
+          'CREATE TRIGGER trig_ddl BEFORE ANY DDL STATEMENT'
+          'AS'
+          'BEGIN'
+          'IF (current_user <> ''SUPER_USER'') THEN'
+          'EXCEPTION e_access_denied;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger8'
+        Lines.Strings = (
+          'CREATE TRIGGER trig_ddl_log_before BEFORE ANY DDL STATEMENT'
+          'AS'
+          'DECLARE id TYPE OF COLUMN ddl_log.id;'
+          'BEGIN'
+          '-- Мы должны производить изменения в AUTONOMOUS TRANSACTION,'
+          '-- таким образом, если произойдёт исключение и команда'
+          '-- не будет запущена, она всё равно будет зарегистрирована.'
+          'IN AUTONOMOUS TRANSACTION DO'
+          'BEGIN'
+          'INSERT INTO ddl_log ('
+          'id, moment, user_name, event_type, object_type, ddl_event,'
+          'object_name, old_object_name, new_object_name, sql_text, ok)'
+          'VALUES (NEXT VALUE FOR ddl_seq,'
+          'current_timestamp, current_user,'
+          'rdb$get_context(''DDL_TRIGGER'', ''EVENT_TYPE''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''OBJECT_TYPE''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''DDL_EVENT''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''OBJECT_NAME''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''OLD_OBJECT_NAME''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''NEW_OBJECT_NAME''),'
+          'rdb$get_context(''DDL_TRIGGER'', ''SQL_TEXT''),'
+          '''N'')'
+          'RETURNING id INTO id;'
+          'rdb$set_context(''USER_SESSION'', ''trig_ddl_log_id'', id);'
+          'END'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger9'
+        Lines.Strings = (
+          'CREATE TRIGGER trig_ddl_log_after AFTER ANY DDL STATEMENT'
+          'AS'
+          'BEGIN'
+          '-- Здесь нам требуется автономная транзакция,'
+          '-- потому что в оригинальной транзакции'
+          '-- мы не увидим запись, вставленную в'
+          '-- BEFORE триггере в автономной транзакции,'
+          '-- если пользовательская транзакции не запущена'
+          '-- с режимом изоляции READ COMMITTED.'
+          'IN AUTONOMOUS TRANSACTION DO'
+          'UPDATE ddl_log SET ok = ''Y'''
+          'WHERE'
+          'id = rdb$get_context(''USER_SESSION'', ''trig_ddl_log_id'');'
+          'END'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger1'
+        Lines.Strings = (
+          'ALTER TRIGGER set_cust_no INACTIVE;'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger2'
+        Lines.Strings = (
+          'ALTER TRIGGER set_cust_no POSITION 14;'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger3'
+        Lines.Strings = (
+          'ALTER TRIGGER TR_CUST_LOG'
+          'INACTIVE AFTER INSERT OR UPDATE;'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger4'
+        Lines.Strings = (
+          'ALTER TRIGGER tr_log_connect'
+          'ACTIVE POSITION 1'
+          'AS'
+          'BEGIN'
+          'INSERT INTO LOG_CONNECT (ID,'
+          'USERNAME,'
+          'ROLENAME,'
+          'ATIME)'
+          'VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT,'
+          'CURRENT_USER,'
+          'CURRENT_ROLE,'
+          'CURRENT_TIMESTAMP);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterTrigger1'
+        Lines.Strings = (
+          'CREATE OR ALTER TRIGGER set_cust_no'
+          'ACTIVE BEFORE INSERT POSITION 0 ON customer'
+          'AS'
+          'BEGIN'
+          'IF (NEW.cust_no IS NULL) THEN'
+          'NEW.cust_no = GEN_ID(cust_no_gen, 1);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DropTrigger1'
+        Lines.Strings = (
+          'DROP TRIGGER set_cust_no;'
+        )
+      end    
+      item
+        Caption = 'RecreateTrigger1'
+        Lines.Strings = (
+          'RECREATE TRIGGER set_cust_no'
+          'ACTIVE BEFORE INSERT POSITION 0 ON customer'
+          'AS'
+          'BEGIN'
+          'IF (NEW.cust_no IS NULL) THEN'
+          'NEW.cust_no = GEN_ID(cust_no_gen, 1);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure1'
+        Lines.Strings = (
+          'CREATE PROCEDURE ADD_BREED ('
+          'NAME D_BREEDNAME, /* Наследуются характеристики домена */'
+          'NAME_EN TYPE OF D_BREEDNAME, /* Наследуется только тип домена */'
+          'SHORTNAME TYPE OF COLUMN BREED.SHORTNAME, /* Наследуется тип столбца таблицы */'
+          'REMARK VARCHAR(120) CHARACTER SET WIN1251 COLLATE PXW_CYRL,'
+          'CODE_ANIMAL INT NOT NULL DEFAULT 1'
+          ')'
+          'RETURNS ('
+          'CODE_BREED INT'
+          ')'
+          'AS'
+          'BEGIN'
+          'INSERT INTO BREED ('
+          'CODE_ANIMAL, NAME, NAME_EN, SHORTNAME, REMARK)'
+          'VALUES ('
+          ':CODE_ANIMAL, :NAME, :NAME_EN, :SHORTNAME, :REMARK)'
+          'RETURNING CODE_BREED INTO CODE_BREED;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure2'
+        Lines.Strings = (
+          'CREATE PROCEDURE gen_rows ('
+          'start_n INTEGER NOT NULL,'
+          'end_n INTEGER NOT NULL'
+          ') RETURNS ('
+          'n INTEGER NOT NULL'
+          ')'
+          'EXTERNAL NAME ''udrcpp_example!gen_rows'''
+          'ENGINE udr;'
+        )
+      end    
+      item
+        Caption = 'AlterProcedure1'
+        Lines.Strings = (
+          'ALTER PROCEDURE GET_EMP_PROJ ('
+          'EMP_NO SMALLINT)'
+          'RETURNS ('
+          'PROJ_ID VARCHAR(20))'
+          'AS'
+          'BEGIN'
+          'FOR SELECT'
+          'PROJ_ID'
+          'FROM'
+          'EMPLOYEE_PROJECT'
+          'WHERE'
+          'EMP_NO = :emp_no'
+          'INTO :proj_id'
+          'DO'
+          'SUSPEND;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterProcedure1'
+        Lines.Strings = (
+          'CREATE OR ALTER PROCEDURE GET_EMP_PROJ ('
+          'EMP_NO SMALLINT)'
+          'RETURNS ('
+          'PROJ_ID VARCHAR(20))'
+          'AS'
+          'BEGIN'
+          'FOR SELECT'
+          'PROJ_ID'
+          'FROM'
+          'EMPLOYEE_PROJECT'
+          'WHERE'
+          'EMP_NO = :emp_no'
+          'INTO :proj_id'
+          'DO'
+          'SUSPEND;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DropProcedure1'
+        Lines.Strings = (
+          'DROP PROCEDURE GET_EMP_PROJ;'
+        )
+      end    
+      item
+        Caption = 'RecreateProcedure1'
+        Lines.Strings = (
+          'RECREATE PROCEDURE GET_EMP_PROJ ('
+          'EMP_NO SMALLINT)'
+          'RETURNS ('
+          'PROJ_ID VARCHAR(20))'
+          'AS'
+          'BEGIN'
+          'FOR SELECT'
+          'PROJ_ID'
+          'FROM'
+          'EMPLOYEE_PROJECT'
+          'WHERE'
+          'EMP_NO = :emp_no'
+          'INTO :proj_id'
+          'DO'
+          'SUSPEND;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateFunction1'
+        Lines.Strings = (
+          'CREATE FUNCTION FN_T'
+          'RETURNS DOUBLE PRECISION DETERMINISTIC'
+          'AS'
+          'BEGIN'
+          'RETURN rand();'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateFunction2'
+        Lines.Strings = (
+          'CREATE FUNCTION ADD_INT(A INT, B INT DEFAULT 0)'
+          'RETURNS INT'
+          'AS'
+          'BEGIN'
+          'RETURN A+B;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateFunction3'
+        Lines.Strings = (
+          'CREATE FUNCTION FN_E()'
+          'RETURNS DOUBLE PRECISION DETERMINISTIC'
+          'AS'
+          'BEGIN'
+          'RETURN EXP(1);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateFunction4'
+        Lines.Strings = (
+          'CREATE FUNCTION GET_MNEMONIC ('
+          'AFIELD_NAME TYPE OF COLUMN RDB$TYPES.RDB$FIELD_NAME,'
+          'ATYPE TYPE OF COLUMN RDB$TYPES.RDB$TYPE)'
+          'RETURNS TYPE OF COLUMN RDB$TYPES.RDB$TYPE_NAME'
+          'AS'
+          'BEGIN'
+          'RETURN (SELECT RDB$TYPE_NAME'
+          'FROM RDB$TYPES'
+          'WHERE RDB$FIELD_NAME = :AFIELD_NAME'
+          'AND RDB$TYPE = :ATYPE);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateFunction5'
+        Lines.Strings = (
+          'CREATE FUNCTION wait_event ('
+          'event_name varchar(31) CHARACTER SET ascii'
+          ') RETURNS INTEGER'
+          'EXTERNAL NAME ''udrcpp_example!wait_event'''
+          'ENGINE udr'
+        )
+      end    
+      item
+        Caption = 'CreateFunction6'
+        Lines.Strings = (
+          'CREATE FUNCTION INT_TO_HEX ('
+          'ANumber BIGINT,'
+          'AByte_Per_Number SMALLINT = 8)'
+          'RETURNS CHAR(66)'
+          'AS'
+          'DECLARE VARIABLE xMod SMALLINT;'
+          'DECLARE VARIABLE xResult VARCHAR(64);'
+          'DECLARE FUNCTION TO_HEX(ANum SMALLINT) RETURNS CHAR'
+          'AS'
+          'BEGIN'
+          'RETURN CASE ANum'
+          'WHEN 0 THEN ''0'''
+          'WHEN 1 THEN ''1'''
+          'WHEN 2 THEN ''2'''
+          'WHEN 3 THEN ''3'''
+          'WHEN 4 THEN ''4'''
+          'WHEN 5 THEN ''5'''
+          'WHEN 6 THEN ''6'''
+          'WHEN 7 THEN ''7'''
+          'WHEN 8 THEN ''8'''
+          'WHEN 9 THEN ''9'''
+          'WHEN 10 THEN ''A'''
+          'WHEN 11 THEN ''B'''
+          'WHEN 12 THEN ''C'''
+          'WHEN'
+          'WHEN'
+          'WHEN'
+          'ELSE'
+          'END;'
+          '13 THEN ''D'''
+          '14 THEN ''E'''
+          '15 THEN ''F'''
+          'NULL'
+          'END'
+          'BEGIN'
+          'xMod = MOD(ANumber, 16);'
+          'ANumber = ANumber / 16;'
+          'xResult = TO_HEX(xMod);'
+          'WHILE (ANUMBER > 0) DO'
+          'BEGIN'
+          'xMod = MOD(ANumber, 16);'
+          'ANumber = ANumber / 16;'
+          'xResult = TO_HEX(xMod) || xResult;'
+          'END'
+          'RETURN ''0x'' || LPAD(xResult, AByte_Per_Number * 2, ''0'');'
+          'END'
+        )
+      end    
+      item
+        Caption = 'AlterFunction1'
+        Lines.Strings = (
+          'ALTER FUNCTION ADD_INT(A INT, B INT, C INT)'
+          'RETURNS INT'
+          'AS'
+          'BEGIN'
+          'RETURN A+B+C;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterFunction1'
+        Lines.Strings = (
+          'CREATE OR ALTER FUNCTION ADD_INT(A INT, B INT DEFAULT 0)'
+          'RETURNS INT'
+          'AS'
+          'BEGIN'
+          'RETURN A+B;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DropFunction1'
+        Lines.Strings = (
+          'DROP FUNCTION ADD_INT;'
+        )
+      end    
+      item
+        Caption = 'RecreateFunction1'
+        Lines.Strings = (
+          'RECREATE FUNCTION ADD_INT(A INT, B INT DEFAULT 0)'
+          'RETURNS INT'
+          'AS'
+          'BEGIN'
+          'RETURN A+B;'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreatePackage1'
+        Lines.Strings = (
+          'CREATE PACKAGE APP_VAR'
+          'AS'
+          'BEGIN'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE DETERMINISTIC;'
+          '  FUNCTION GET_DATEEND() RETURNS DATE DETERMINISTIC;'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE DEFAULT CURRENT_DATE);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'AlterPackage1'
+        Lines.Strings = (
+          'ALTER PACKAGE APP_VAR'
+          'AS'
+          'BEGIN'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE DETERMINISTIC;'
+          '  FUNCTION GET_DATEEND() RETURNS DATE DETERMINISTIC;'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE DEFAULT CURRENT_DATE);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterPackage1'
+        Lines.Strings = (
+          'CREATE OR ALTER PACKAGE APP_VAR'
+          'AS'
+          'BEGIN'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE DETERMINISTIC;'
+          '  FUNCTION GET_DATEEND() RETURNS DATE DETERMINISTIC;'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE DEFAULT CURRENT_DATE);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DropPackage1'
+        Lines.Strings = (
+          'DROP PACKAGE APP_VAR;'
+        )
+      end    
+      item
+        Caption = 'RecreatePackage1'
+        Lines.Strings = (
+          'RECREATE PACKAGE APP_VAR'
+          'AS'
+          'BEGIN'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE DETERMINISTIC;'
+          '  FUNCTION GET_DATEEND() RETURNS DATE DETERMINISTIC;'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE DEFAULT CURRENT_DATE);'
+          'END'
+        )
+      end    
+      item
+        Caption = 'CreatePackageBody1'
+        Lines.Strings = (
+          'CREATE PACKAGE BODY APP_VAR'
+          'AS'
+          'BEGIN'
+          '  -- Возвращает дату начала периода'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'');'
+          '  END'
+          '  -- Возвращает дату окончания периода'
+          '  FUNCTION GET_DATEEND() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEEND'');'
+          '  END'
+          '  -- Устанавливает диапазон дат рабочего периодаPROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE)'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE)'
+          '  AS'
+          '  BEGIN'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'', ADATEBEGIN);'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEEND'', ADATEEND);'
+          '  END'
+          'END'
+        )
+      end    
+      item
+        Caption = 'AlterPackageBody1'
+        Lines.Strings = (
+          'ALTER PACKAGE BODY APP_VAR'
+          'AS'
+          'BEGIN'
+          '  -- Возвращает дату начала периода'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'');'
+          '  END'
+          '  -- Возвращает дату окончания периода'
+          '  FUNCTION GET_DATEEND() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEEND'');'
+          '  END'
+          '  -- Устанавливает диапазон дат рабочего периода'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE)'
+          '  AS'
+          '  BEGIN'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'', ADATEBEGIN);'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEEND'', ADATEEND);'
+          '  END'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DropPackageBody1'
+        Lines.Strings = (
+          'DROP PACKAGE BODY APP_VAR;'
+        )
+      end    
+      item
+        Caption = 'RecreatePackageBody1'
+        Lines.Strings = (
+          'RECREATE PACKAGE BODY APP_VAR'
+          'AS'
+          'BEGIN'
+          '  -- Возвращает дату начала периода'
+          '  FUNCTION GET_DATEBEGIN() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'');'
+          '  END'
+          '  -- Возвращает дату окончания периода'
+          '  FUNCTION GET_DATEEND() RETURNS DATE'
+          '  AS'
+          '  BEGIN'
+          '    RETURN RDB$GET_CONTEXT(''USER_SESSION'', ''DATEEND'');'
+          '  END'
+          '  -- Устанавливает диапазон дат рабочего периода'
+          '  PROCEDURE SET_DATERANGE(ADATEBEGIN DATE, ADATEEND DATE)'
+          '  AS'
+          '  BEGIN'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEBEGIN'', ADATEBEGIN);'
+          '    RDB$SET_CONTEXT(''USER_SESSION'', ''DATEEND'', ADATEEND);'
+          '  END'
+          'END'
+        )
+      end    
+      item
+        Caption = 'DeclareExternalFunction1'
+        Lines.Strings = (
+          'DECLARE EXTERNAL FUNCTION addDay'
+          'TIMESTAMP, INT'
+          'RETURNS TIMESTAMP'
+          'ENTRY_POINT ''addDay'' MODULE_NAME ''fbudf'';'
+        )
+      end    
+      item
+        Caption = 'DeclareExternalFunction2'
+        Lines.Strings = (
+          'DECLARE EXTERNAL FUNCTION invl'
+          'INT BY DESCRIPTOR, INT BY DESCRIPTOR'
+          'RETURNS INT BY DESCRIPTOR'
+          'ENTRY_POINT ''idNvl'' MODULE_NAME ''fbudf'';'
+        )
+      end    
+      item
+        Caption = 'DeclareExternalFunction3'
+        Lines.Strings = (
+          'DECLARE EXTERNAL FUNCTION isLeapYear'
+          'TIMESTAMP'
+          'RETURNS INT BY VALUE'
+          'ENTRY_POINT ''isLeapYear'' MODULE_NAME ''fbudf'';'
+        )
+      end    
+      item
+        Caption = 'DeclareExternalFunction4'
+        Lines.Strings = (
+          'DECLARE EXTERNAL FUNCTION i64Truncate'
+          'NUMERIC(18) BY DESCRIPTOR, NUMERIC(18) BY DESCRIPTOR'
+          'RETURNS PARAMETER 2'
+          'ENTRY_POINT ''fbtruncate'' MODULE_NAME ''fbudf'';'
+        )
+      end    
+      item
+        Caption = 'AlterExternalFunction1'
+        Lines.Strings = (
+          'ALTER EXTERNAL FUNCTION invl ENTRY_POINT ''intNvl'';'
+        )
+      end    
+      item
+        Caption = 'AlterExternalFunction2'
+        Lines.Strings = (
+          'ALTER EXTERNAL FUNCTION invl MODULE_NAME ''fbudf2'';'
+        )
+      end    
+      item
+        Caption = 'DropExternalFunction1'
+        Lines.Strings = (
+          'DROP EXTERNAL FUNCTION funcname ;'
+        )
+      end>
+    Left = 32
+    Top = 232
+  end
+  object sUsers: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Revoke1'
+        Lines.Strings = (
+          'REVOKE SELECT, UPDATE(a1, d3), REFERENCES(z1) ON TABLE table1 FROM a123, d12;'
+        )
+      end    
+      item
+        Caption = 'Graint1'
+        Lines.Strings = (
+          'GRANT SELECT, INSERT, UPDATE(TEST1_ID, TEST1_CODE, TEST1_NAME), DELETE, REFERENCES ON test1 TO alexs;'
+        )
+      end    
+      item
+        Caption = 'Graint2'
+        Lines.Strings = (
+          'GRANT SELECT, INSERT, UPDATE, DELETE ON test1 TO alexs;'
+        )
+      end    
+      item
+        Caption = 'Graint3'
+        Lines.Strings = (
+          'GRANT ALL PRIVILEGES ON test1 TO alexs, aa;'
+        )
+      end    
+      item
+        Caption = 'CreateRole1'
+        Lines.Strings = (
+          'CREATE ROLE SELLERS;'
+        )
+      end    
+      item
+        Caption = 'AlterRole1'
+        Lines.Strings = (
+          'ALTER ROLE RDB$ADMIN SET AUTO ADMIN MAPPING;'
+        )
+      end    
+      item
+        Caption = 'AlterRole2'
+        Lines.Strings = (
+          'ALTER ROLE RDB$ADMIN DROP AUTO ADMIN MAPPING;'
+        )
+      end    
+      item
+        Caption = 'DropRole1'
+        Lines.Strings = (
+          'DROP ROLE SELLERS;'
+        )
+      end>
+    Left = 32
+    Top = 319
+  end
+  object sGenerator: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateSequence1'
+        Lines.Strings = (
+          'CREATE SEQUENCE EMP_NO_GEN;'
+        )
+      end    
+      item
+        Caption = 'CreateSequence2'
+        Lines.Strings = (
+          'CREATE SEQUENCE EMP_NO_GEN START WITH 5;'
+        )
+      end    
+      item
+        Caption = 'CreateSequence3'
+        Lines.Strings = (
+          'CREATE SEQUENCE EMP_NO_GEN INCREMENT BY 10;'
+        )
+      end    
+      item
+        Caption = 'CreateSequence4'
+        Lines.Strings = (
+          'CREATE SEQUENCE EMP_NO_GEN START WITH 5 INCREMENT BY 10;'
+        )
+      end    
+      item
+        Caption = 'AlterSequence1'
+        Lines.Strings = (
+          'ALTER SEQUENCE EMP_NO_GEN RESTART WITH 145;'
+        )
+      end    
+      item
+        Caption = 'AlterSequence2'
+        Lines.Strings = (
+          'ALTER SEQUENCE EMP_NO_GEN RESTART;'
+        )
+      end    
+      item
+        Caption = 'AlterSequence3'
+        Lines.Strings = (
+          'ALTER SEQUENCE EMP_NO_GEN INCREMENT BY 10;'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterSequence1'
+        Lines.Strings = (
+          'CREATE OR ALTER SEQUENCE EMP_NO_GEN'
+          'START WITH 10'
+          'INCREMENT BY 1;'
+        )
+      end    
+      item
+        Caption = 'DropSequence1'
+        Lines.Strings = (
+          'DROP SEQUENCE EMP_NO_GEN;'
+        )
+      end    
+      item
+        Caption = 'RecreateSequence1'
+        Lines.Strings = (
+          'RECREATE SEQUENCE EMP_NO_GEN'
+          'START WITH 10'
+          'INCREMENT BY 1;'
+        )
+      end    
+      item
+        Caption = 'SetGenerator1'
+        Lines.Strings = (
+          'SET GENERATOR EMP_NO_GEN TO 145;'
+        )
+      end    
+      item
+        Caption = 'AlterSequence4'
+        Lines.Strings = (
+          'ALTER SEQUENCE GNID_SYS_CLIENT RESTART WITH 4139521;'
+        )
+      end    
+      item
+        Caption = 'DropSequence2'
+        Lines.Strings = (
+          'DROP SEQUENCE GNID_SYS_CLIENT;'
+        )
+      end>
+    Left = 128
+    Top = 16
+  end
+  object sDataBase: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateCollation1'
+        Lines.Strings = (
+          'CREATE COLLATION ISO8859_1_UNICODE FOR ISO8859_1;'
+        )
+      end    
+      item
+        Caption = 'CreateCollation2'
+        Lines.Strings = (
+          'CREATE COLLATION LAT_UNI'
+          'FOR ISO8859_1'
+          'FROM EXTERNAL (''ISO8859_1_UNICODE'');'
+        )
+      end    
+      item
+        Caption = 'CreateCollation3'
+        Lines.Strings = (
+          'CREATE COLLATION ES_ES_NOPAD_CI'
+          'FOR ISO8859_1'
+          'FROM ES_ES'
+          'NO PAD'
+          'CASE INSENSITIVE;'
+        )
+      end    
+      item
+        Caption = 'CreateCollation4'
+        Lines.Strings = (
+          'CREATE COLLATION ES_ES_CI_COMPR'
+          'FOR ISO8859_1'
+          'FROM ES_ES'
+          'CASE INSENSITIVE'
+          '''DISABLE-COMPRESSIONS=0'';'
+        )
+      end    
+      item
+        Caption = 'CreateCollation5'
+        Lines.Strings = (
+          'CREATE COLLATION ES_ES_CI_COMPR'
+          'FOR ISO8859_1'
+          'FROM ES_ES'
+          'CASE INSENSITIVE'
+          '''DISABLE-COMPRESSIONS=0'';'
+        )
+      end    
+      item
+        Caption = 'DropCollation1'
+        Lines.Strings = (
+          'DROP COLLATION ES_ES_NOPAD_CI;'
+        )
+      end    
+      item
+        Caption = 'AlterCharacterSet1'
+        Lines.Strings = (
+          'ALTER CHARACTER SET UTF8 SET DEFAULT COLLATION UNICODE_CI_AI;'
+        )
+      end    
+      item
+        Caption = 'DeclareFilter1'
+        Lines.Strings = (
+          'DECLARE FILTER DESC_FILTER'
+          'INPUT_TYPE 1'
+          'OUTPUT_TYPE -4'
+          'ENTRY_POINT ''desc_filter'''
+          'MODULE_NAME ''FILTERLIB'';'
+        )
+      end    
+      item
+        Caption = 'DeclareFilter2'
+        Lines.Strings = (
+          'DECLARE FILTER FUNNEL'
+          'INPUT_TYPE blr OUTPUT_TYPE text'
+          'ENTRY_POINT ''blr2asc'' MODULE_NAME ''myfilterlib'';'
+        )
+      end    
+      item
+        Caption = 'DropFilter1'
+        Lines.Strings = (
+          'DROP FILTER filtername ;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase1'
+        Lines.Strings = (
+          'CREATE DATABASE ''D:\test.fdb'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET WIN1251; '
+        )
+      end    
+      item
+        Caption = 'CreateDatabase2'
+        Lines.Strings = (
+          'CREATE DATABASE ''/home/firebird/test.fdb'' USER "wizard" PASSWORD ''player'' ROLE ''RDB$ADMIN'''
+          '  PAGE_SIZE = 4096'
+          '  DEFAULT CHARACTER SET UTF8'
+          '  COLLATION UNICODE_CI_AI;  '
+        )
+      end    
+      item
+        Caption = 'CreateDatabase3'
+        Lines.Strings = (
+          'CREATE DATABASE ''baseserver:test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8; '
+        )
+      end    
+      item
+        Caption = 'CreateDatabase4'
+        Lines.Strings = (
+          'CREATE DATABASE ''inet://baseserver:3050/test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase5'
+        Lines.Strings = (
+          'CREATE DATABASE ''inet://baseserver:gds_db/test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase6'
+        Lines.Strings = (
+          'CREATE DATABASE ''inet4://baseserver/test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase7'
+        Lines.Strings = (
+          'CREATE DATABASE ''inet6://baseserver/test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase8'
+        Lines.Strings = (
+          'CREATE DATABASE ''127:0:0:1:test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase9'
+        Lines.Strings = (
+          'CREATE DATABASE ''[::1]:test'' USER wizard PASSWORD ''player'' ROLE RDB$ADMIN'
+          '  DEFAULT CHARACTER SET UTF8;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase10'
+        Lines.Strings = (
+          'CREATE DATABASE ''baseserver:D:\test.fdb'' USER wizard PASSWORD ''player'' ROLE ''RDB$ADMIN'''
+          '  PAGE_SIZE = 8192'
+          '  DEFAULT CHARACTER SET UTF8'
+          '  FILE ''D:\test.fdb2'' STARTING AT PAGE 10001'
+          '  FILE ''D:\test.fdb3'' STARTING AT PAGE 20001;   '
+        )
+      end    
+      item
+        Caption = 'CreateDatabase11'
+        Lines.Strings = (
+          'CREATE DATABASE ''baseserver:D:\test.fdb'' USER wizard PASSWORD ''player'' ROLE ''RDB$ADMIN'''
+          '  PAGE_SIZE = 8192'
+          '  LENGTH 10000 PAGES'
+          '  DEFAULT CHARACTER SET UTF8'
+          '  FILE ''D:\test.fdb2'''
+          '  FILE ''D:\test.fdb3'' STARTING AT PAGE 20001;                                                 '
+        )
+      end    
+      item
+        Caption = 'AlterDatabase1'
+        Lines.Strings = (
+          'ALTER DATABASE'
+          '  ADD FILE ''D:\test.fdb4'' STARTING AT PAGE 30001;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase2'
+        Lines.Strings = (
+          'ALTER DATABASE'
+          ' ADD DIFFERENCE FILE ''D:\test.diff''; '
+        )
+      end    
+      item
+        Caption = 'AlterDatabase3'
+        Lines.Strings = (
+          'ALTER DATABASE DROP DIFFERENCE FILE;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase4'
+        Lines.Strings = (
+          'ALTER DATABASE BEGIN BACKUP;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase5'
+        Lines.Strings = (
+          'ALTER DATABASE END BACKUP;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase6'
+        Lines.Strings = (
+          'ALTER DATABASE SET DEFAULT CHARACTER SET WIN1251;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase7'
+        Lines.Strings = (
+          'ALTER DATABASE SET LINGER 30;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase8'
+        Lines.Strings = (
+          'ALTER DATABASE DROP LINGER;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase9'
+        Lines.Strings = (
+          'ALTER DATABASE SET LINGER 0;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase10'
+        Lines.Strings = (
+          'ALTER DATABASE ENCRYPT WITH DbCrypt;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase11'
+        Lines.Strings = (
+          'ALTER DATABASE DECRYPT;'
+        )
+      end    
+      item
+        Caption = 'DropDatabase1'
+        Lines.Strings = (
+          'DROP DATABASE;'
+        )
+      end    
+      item
+        Caption = 'CreateShadow1'
+        Lines.Strings = (
+          'CREATE SHADOW 1 ''g:\data\test.shd'';'
+        )
+      end    
+      item
+        Caption = 'CreateShadow2'
+        Lines.Strings = (
+          'CREATE SHADOW 2 ''g:\data\test.sh1'' LENGTH 8000 PAGES FILE ''g:\data\test.sh2'';'
+        )
+      end    
+      item
+        Caption = 'DropShadow1'
+        Lines.Strings = (
+          'DROP SHADOW 1;'
+        )
+      end>
+    Left = 32
+    Top = 400
+  end
+  object sException: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateException1'
+        Lines.Strings = (
+          'CREATE EXCEPTION E_LARGE_VALUE ''Значение превышает предельно допустимое'';'
+        )
+      end    
+      item
+        Caption = 'CreateException2'
+        Lines.Strings = (
+          'CREATE EXCEPTION E_INVALID_VALUE ''Неверное значение @1 для поля @2'';'
+        )
+      end    
+      item
+        Caption = 'AlterException1'
+        Lines.Strings = (
+          'ALTER EXCEPTION E_LARGE_VALUE ''Значение превышает максимально допустимое'';'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterException1'
+        Lines.Strings = (
+          'CREATE OR ALTER EXCEPTION E_LARGE_VALUE ''Значение превышает максимально допустимое'';'
+        )
+      end    
+      item
+        Caption = 'DropException1'
+        Lines.Strings = (
+          'DROP EXCEPTION E_LARGE_VALUE;'
+        )
+      end    
+      item
+        Caption = 'RecreateException'
+        Lines.Strings = (
+          'RECREATE EXCEPTION E_LARGE_VALUE ''Значение превышает максимально допустимое'';'
+        )
+      end    
+      item
+        Caption = 'CreateException3'
+        Lines.Strings = (
+          'CREATE EXCEPTION E_INCORRECT_WORKTIME ''The working day has not started yet.'';'
+        )
+      end    
+      item
+        Caption = 'CreateOrAlterException2'
+        Lines.Strings = (
+          'CREATE OR ALTER EXCEPTION exception_name ''message'';'
+        )
+      end    
+      item
+        Caption = 'AlterException2'
+        Lines.Strings = (
+          'ALTER EXCEPTION exception_name ''message 1 по русски'';'
+        )
+      end    
+      item
+        Caption = 'DropException2'
+        Lines.Strings = (
+          'DROP EXCEPTION exception_name;'
+        )
+      end>
+    Left = 32
+    Top = 472
+  end
+  object sComment: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CommentOn1'
+        Lines.Strings = (
+          'COMMENT ON DATABASE IS ''Это тестовая (''''my.fdb'''') БД'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn2'
+        Lines.Strings = (
+          'COMMENT ON TABLE METALS IS ''Справочник металлов'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn3'
+        Lines.Strings = (
+          'COMMENT ON COLUMN METALS.ISALLOY'
+          'IS ''0 = чистый металл, 1 = сплав'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn4'
+        Lines.Strings = (
+          'COMMENT ON PARAMETER ADD_EMP_PROJ.EMP_NO'
+          'IS ''Код сотрудника'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn5'
+        Lines.Strings = (
+          'COMMENT ON PACKAGE APP_VAR IS ''Переменные приложения'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn6'
+        Lines.Strings = (
+          'COMMENT ON FUNCTION APP_VAR.GET_DATEBEGIN'
+          'IS ''Возвращает дату начала периода'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn7'
+        Lines.Strings = (
+          'COMMENT ON PROCEDURE APP_VAR.SET_DATERANGE'
+          'IS ''Установка диапазона дат'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn8'
+        Lines.Strings = (
+          'COMMENT ON'
+          'PROCEDURE PARAMETER APP_VAR.SET_DATERANGE.ADATEBEGIN'
+          'IS ''Дата начала'';'
+        )
+      end>
+    Left = 41
+    Top = 539
+  end
+end

@@ -1,0 +1,116 @@
+object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
+  Left = 554
+  Height = 328
+  Top = 226
+  Width = 440
+  Caption = 'Memo value'
+  ClientHeight = 328
+  ClientWidth = 440
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 245
+    Top = 25
+    Width = 440
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'As text'
+      ClientHeight = 211
+      ClientWidth = 430
+      object DBMemo1: TDBMemo
+        Left = 0
+        Height = 211
+        Top = 0
+        Width = 430
+        Align = alClient
+        DataSource = Datasource1
+        TabOrder = 0
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'As image'
+      ClientHeight = 211
+      ClientWidth = 430
+      object DBImage1: TDBImage
+        Left = 0
+        Height = 211
+        Top = 0
+        Width = 430
+        Align = alClient
+        AutoDisplay = False
+        DataSource = Datasource1
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'As HTML'
+      ClientHeight = 211
+      ClientWidth = 430
+      object IpHtmlPanel1: TIpHtmlPanel
+        Left = 0
+        Height = 211
+        Top = 0
+        Width = 430
+        Align = alClient
+        FixedTypeface = 'Courier New'
+        DefaultTypeFace = 'default'
+        DefaultFontSize = 12
+        FlagErrors = False
+        PrintSettings.MarginLeft = 0.5
+        PrintSettings.MarginTop = 0.5
+        PrintSettings.MarginRight = 0.5
+        PrintSettings.MarginBottom = 0.5
+        PrintSettings.Preview.Left = 480
+        PrintSettings.Preview.Top = 270
+        PrintSettings.Preview.Width = 1440
+        PrintSettings.Preview.Height = 810
+        TabOrder = 0
+      end
+    end
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 276
+    Width = 428
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 1
+    ShowButtons = [pbClose, pbHelp]
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Height = 25
+    Top = 0
+    Width = 440
+    Align = alTop
+    BeforeAction = DBNavigator1BeforeAction
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 440
+    DataSource = Datasource1
+    Options = []
+    TabOrder = 2
+  end
+  object Datasource1: TDataSource
+    Left = 143
+    Top = 50
+  end
+end

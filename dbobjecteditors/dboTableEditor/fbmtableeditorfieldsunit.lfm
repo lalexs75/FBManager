@@ -1,0 +1,1509 @@
+inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
+  Height = 469
+  Width = 1070
+  ClientHeight = 469
+  ClientWidth = 1070
+  DesignLeft = 397
+  DesignTop = 251
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 119
+    Top = 350
+    Width = 1070
+    ActivePage = TabSheet1
+    Align = alBottom
+    TabIndex = 0
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'Description'
+      ClientHeight = 86
+      ClientWidth = 1060
+      object DBMemo1: TDBMemo
+        Left = 0
+        Height = 86
+        Top = 0
+        Width = 1060
+        Align = alClient
+        DataField = 'FIELD_DESCRIPTION'
+        DataSource = Datasource1
+        TabOrder = 0
+      end
+    end
+    object tabFieldDependencies: TTabSheet
+      Caption = 'Field Dependencies'
+      ClientHeight = 86
+      ClientWidth = 1060
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 85
+        Top = 0
+        Width = 1060
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'OBJECT_NAME'
+            Width = 522
+            FieldName = 'OBJECT_NAME'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'OBJECT_TYPE'
+            Width = 522
+            FieldName = 'OBJECT_TYPE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'UPD'
+            Width = 0
+            Visible = False
+            FieldName = 'UBJ_UPDATE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'DEL'
+            Width = 0
+            Visible = False
+            FieldName = 'OBJ_DEL'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Align = alClient
+        AutoFillColumns = True
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsFieldDeps
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+        ReadOnly = True
+        TabOrder = 0
+        OnDblClick = RxDBGrid1DblClick
+      end
+    end
+  end
+  object FieldListGrid: TRxDBGrid[1]
+    Left = 0
+    Height = 275
+    Top = 70
+    Width = 1070
+    ColumnDefValues.BlobText = '(примечание)'
+    TitleButtons = True
+    AutoSort = False
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = '##'
+        Width = 40
+        FieldName = 'FIELD_NO'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'PK'
+        Width = 35
+        FieldName = 'FIELD_PK'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'UNQ'
+        Width = 40
+        FieldName = 'FIELD_UNQ'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Field name'
+        Width = 150
+        FieldName = 'FIELD_NAME'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Field type'
+        Width = 120
+        FieldName = 'FIELD_TYPE'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Field domain'
+        Width = 130
+        FieldName = 'FIELD_DOMAIN'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'AutoInc'
+        Width = 60
+        FieldName = 'FIELD_AUTOINC'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Null'
+        Width = 50
+        FieldName = 'FIELD_NOT_NULL'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Size'
+        Width = 55
+        FieldName = 'FIELD_SIZE'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Prec'
+        Width = 55
+        FieldName = 'FIELD_PREC'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'IsLocal'
+        Width = 50
+        FieldName = 'FIELD_IS_LOCAL'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Description'
+        Width = 250
+        FieldName = 'FIELD_DESC_EX'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Char set'
+        Width = 120
+        FieldName = 'FIELD_CHARSET'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Collate'
+        Width = 120
+        FieldName = 'FIELD_COLLATE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Computed source'
+        Width = 150
+        FieldName = 'FIELD_COMPUTED_SOURCE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Active = True
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowDialogFind, rdgHighlightFocusCol, rdgHighlightFocusRow, rdgDblClickOptimizeColWidth, rdgFooterRows, rdgAllowQuickSearch, rdgAllowToolMenu]
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = Datasource1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook, dgAnyButtonCanSelect]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    TitleStyle = tsNative
+    OnDblClick = FieldListGridDblClick
+  end
+  object Splitter1: TSplitter[2]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 345
+    Width = 1070
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object Panel1: TPanel[3]
+    Left = 0
+    Height = 70
+    Top = 0
+    Width = 1070
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 70
+    ClientWidth = 1070
+    TabOrder = 3
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 19
+      Top = 7
+      Width = 77
+      BorderSpacing.Around = 6
+      Caption = 'Table name'
+      ParentColor = False
+    end
+    object edtTableName: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 31
+      Top = 32
+      Width = 1050
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 0
+    end
+  end
+  object rxFieldList: TRxMemoryData[4]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'FIELD_NO'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_PK'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_UNQ'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_SIZE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_PREC'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_NOT_NULL'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'FIELD_DESC_EX'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'FIELD_DEF_VALUE'
+        DataType = ftString
+        Precision = -1
+        Size = 512
+      end    
+      item
+        Name = 'FIELD_DESCRIPTION'
+        DataType = ftMemo
+        Precision = -1
+        Size = 512
+      end    
+      item
+        Name = 'FIELD_CHECK'
+        DataType = ftString
+        Precision = -1
+        Size = 500
+      end    
+      item
+        Name = 'FIELD_DOMAIN'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'FIELD_TYPE'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'FIELD_AUTOINC'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_IS_LOCAL'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_DESCRIPTION'
+        DataType = ftString
+        Precision = -1
+        Size = 512
+      end    
+      item
+        Name = 'OLD_FIELD_PK'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_UNQ'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_DOMAIN'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'OLD_FIELD_SIZE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_PREC'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_TYPE'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'OLD_FIELD_NOT_NULL'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'OLD_FIELD_DEF_VALUE'
+        DataType = ftString
+        Precision = -1
+        Size = 512
+      end    
+      item
+        Name = 'OLD_FIELD_AUTOINC'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_CHECK'
+        DataType = ftString
+        Precision = -1
+        Size = 500
+      end    
+      item
+        Name = 'FIELD_COLLATE'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'OLD_FIELD_COLLATE'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'FK_TABEL_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 120
+      end    
+      item
+        Name = 'FK_FIELDS'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'FK_RULE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'FK_INDEX_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'FK_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'FK_DESC'
+        DataType = ftMemo
+      end    
+      item
+        Name = 'FIELD_COMPUTED_SOURCE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_FIELD_COMPUTED_SOURCE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'FIELD_CHARSET'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'OLD_FIELD_CHARSET'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'AUTO_INC_GEN_TYPE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'AUTO_INC_GEN_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'AUTO_INC_CREATE_TRIGGER'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'AUTO_INC_TRIGGER_BODY'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'AUTO_INC_TRIGGER_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'AUTO_INC_TRIGGER_DESC'
+        DataType = ftMemo
+        Precision = -1
+        Size = 512
+      end    
+      item
+        Name = 'AUTO_INC_SEQ_INIT_VALUE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'AUTO_INC_GEN_TYPE_SEQ_PARAMS'
+        DataType = ftInteger
+      end>
+    AfterPost = rxFieldListAfterPost
+    AfterCancel = rxFieldListAfterCancel
+    AfterDelete = rxFieldListAfterDelete
+    AfterScroll = rxFieldListAfterScroll
+    PacketRecords = 0
+    Left = 80
+    Top = 48
+    object rxFieldListFIELD_NO: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'FIELD_NO'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListFIELD_PK: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'FIELD_PK'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListFIELD_UNQ: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'FIELD_UNQ'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListFIELD_SIZE: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'FIELD_SIZE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListFIELD_PREC: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'FIELD_PREC'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListFIELD_NOT_NULL: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'FIELD_NOT_NULL'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListFIELD_NAME: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'FIELD_NAME'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxFieldListFIELD_DESC_EX1: TStringField
+      DisplayWidth = 20
+      FieldKind = fkCalculated
+      FieldName = 'FIELD_DESC_EX'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnGetText = rxFieldListFIELD_DESC_EX1GetText
+    end
+    object rxFieldListFIELD_DEF_VALUE: TStringField
+      DisplayWidth = 512
+      FieldKind = fkData
+      FieldName = 'FIELD_DEF_VALUE'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 512
+    end
+    object rxFieldListFIELD_DESCRIPTION: TMemoField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'FIELD_DESCRIPTION'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Size = 512
+      Transliterate = False
+    end
+    object rxFieldListFIELD_CHECK: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_CHECK'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
+    object rxFieldListFIELD_DOMAIN: TStringField
+      DisplayWidth = 100
+      FieldKind = fkData
+      FieldName = 'FIELD_DOMAIN'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListFIELD_TYPE: TStringField
+      DisplayWidth = 100
+      FieldKind = fkData
+      FieldName = 'FIELD_TYPE'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListFIELD_AUTOINC: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'FIELD_AUTOINC'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListFIELD_IS_LOCAL: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'FIELD_IS_LOCAL'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListOLD_FIELD_DESCRIPTION: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_DESCRIPTION'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 512
+    end
+    object rxFieldListOLD_FIELD_PK: TBooleanField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_PK'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListOLD_FIELD_UNQ: TBooleanField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_UNQ'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListOLD_FIELD_DOMAIN: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_DOMAIN'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListOLD_FIELD_SIZE: TLongintField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_SIZE'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListOLD_FIELD_PREC: TLongintField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_PREC'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListOLD_FIELD_TYPE: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_TYPE'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListOLD_FIELD_NOT_NULL: TBooleanField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_NOT_NULL'
+      Index = 22
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListOLD_FIELD_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_NAME'
+      Index = 23
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListOLD_FIELD_DEF_VALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_DEF_VALUE'
+      Index = 24
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 512
+    end
+    object rxFieldListOLD_FIELD_AUTOINC: TBooleanField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_AUTOINC'
+      Index = 25
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListOLD_FIELD_CHECK: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_CHECK'
+      Index = 26
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
+    object rxFieldListFIELD_COLLATE: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_COLLATE'
+      Index = 27
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListOLD_FIELD_COLLATE: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_COLLATE'
+      Index = 28
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListFK_TABEL_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'FK_TABEL_NAME'
+      Index = 29
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+    object rxFieldListFK_FIELDS: TStringField
+      FieldKind = fkData
+      FieldName = 'FK_FIELDS'
+      Index = 30
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListFK_RULE: TLongintField
+      FieldKind = fkData
+      FieldName = 'FK_RULE'
+      Index = 31
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListFK_INDEX_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'FK_INDEX_NAME'
+      Index = 32
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListFK_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'FK_NAME'
+      Index = 33
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListFK_DESC: TMemoField
+      FieldKind = fkData
+      FieldName = 'FK_DESC'
+      Index = 34
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object rxFieldListFIELD_COMPUTED_SOURCE: TMemoField
+      FieldKind = fkData
+      FieldName = 'FIELD_COMPUTED_SOURCE'
+      Index = 35
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnGetText = rxFieldListFIELD_COMPUTED_SOURCEGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object rxFieldListOLD_FIELD_COMPUTED_SOURCE: TMemoField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_COMPUTED_SOURCE'
+      Index = 36
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object rxFieldListFIELD_CHARSET: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_CHARSET'
+      Index = 37
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListOLD_FIELD_CHARSET: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_FIELD_CHARSET'
+      Index = 38
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxFieldListAUTO_INC_GEN_TYPE: TLongintField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_GEN_TYPE'
+      Index = 39
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListAUTO_INC_GEN_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_GEN_NAME'
+      Index = 40
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListAUTO_INC_CREATE_TRIGGER: TBooleanField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_CREATE_TRIGGER'
+      Index = 41
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListAUTO_INC_TRIGGER_BODY: TMemoField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_TRIGGER_BODY'
+      Index = 42
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object rxFieldListAUTO_INC_TRIGGER_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_TRIGGER_NAME'
+      Index = 43
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListAUTO_INC_TRIGGER_DESC: TMemoField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_TRIGGER_DESC'
+      Index = 44
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Size = 512
+      Transliterate = False
+    end
+    object rxFieldListAUTO_INC_SEQ_INIT_VALUE: TLongintField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_SEQ_INIT_VALUE'
+      Index = 45
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListAUTO_INC_GEN_TYPE_SEQ_PARAMS: TLongintField
+      FieldKind = fkData
+      FieldName = 'AUTO_INC_GEN_TYPE_SEQ_PARAMS'
+      Index = 46
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object Datasource1: TDataSource[5]
+    DataSet = rxFieldList
+    Left = 46
+    Top = 47
+  end
+  object PopupMenu1: TPopupMenu[6]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 120
+    Top = 96
+    object MenuItem1: TMenuItem
+      Action = fldNew
+      OnClick = fldNewExecute
+    end
+    object MenuItem11: TMenuItem
+      Action = fldCopy
+    end
+    object MenuItem2: TMenuItem
+      Action = fldEdit
+      OnClick = fldEditExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = fldDelete
+      OnClick = fldDeleteExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = fldRefresh
+    end
+    object MenuItem6: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = fldPrint
+      OnClick = fldPrintExecute
+    end
+    object MenuItem10: TMenuItem
+      Action = fldCopyFieldName
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = fldOrder
+      OnClick = fldOrderExecute
+    end
+  end
+  object ActionList1: TActionList[7]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 168
+    Top = 96
+    object fldNew: TAction
+      Category = 'Editor'
+      Caption = 'New field'
+      ImageIndex = 12
+      OnExecute = fldNewExecute
+      ShortCut = 45
+    end
+    object fldEdit: TAction
+      Category = 'Editor'
+      Caption = 'Edit field'
+      ImageIndex = 62
+      OnExecute = fldEditExecute
+      ShortCut = 16453
+    end
+    object fldDelete: TAction
+      Category = 'Editor'
+      Caption = 'Drop field'
+      ImageIndex = 13
+      OnExecute = fldDeleteExecute
+      ShortCut = 24622
+    end
+    object fldPrint: TAction
+      Category = 'Editor'
+      Caption = 'Print field list'
+      ImageIndex = 14
+      OnExecute = fldPrintExecute
+    end
+    object fldRefresh: TAction
+      Category = 'Editor'
+      Caption = 'Refresh field list'
+      ImageIndex = 10
+      OnExecute = fldRefreshExecute
+      ShortCut = 116
+    end
+    object fldOrder: TAction
+      Category = 'Editor'
+      Caption = 'Fields order...'
+      Hint = 'Set fields order'
+      ImageIndex = 66
+      OnExecute = fldOrderExecute
+    end
+    object fldCopyFieldName: TAction
+      Category = 'Service'
+      Caption = 'Copy field name'
+      ImageIndex = 24
+      OnExecute = fldCopyFieldNameExecute
+    end
+    object fldCopy: TAction
+      Category = 'Editor'
+      Caption = 'fldCopy'
+      OnExecute = fldCopyExecute
+      ShortCut = 24643
+    end
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[8]
+    RxDBGrid = FieldListGrid
+    Caption = 'Export to speadsheet'
+    OnBeforeExecute = RxDBGridExportSpreadSheet1BeforeExecute
+    Options = [ressExportTitle, ressExportColors, ressExportFooter, ressOverwriteExisting]
+    Left = 168
+    Top = 176
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[9]
+    RxDBGrid = FieldListGrid
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 256
+    Top = 176
+  end
+  object RxDBGridExportPDF1: TRxDBGridExportPDF[10]
+    RxDBGrid = FieldListGrid
+    Caption = 'Экспорт в PDF файл'
+    FileName = 'field_list.pdf'
+    Options = [repExportTitle, repExportColors, repExportFooter, repOverwriteExisting, repExportImages]
+    PdfOptions.Options = []
+    OpenAfterExport = True
+    Left = 206
+    Top = 178
+  end
+  object RxDBGridFooterTools1: TRxDBGridFooterTools[11]
+    RxDBGrid = FieldListGrid
+    Caption = 'Всего строк'
+    ShowSetupForm = True
+    Left = 307
+    Top = 176
+  end
+  object rxFieldDeps: TRxMemoryData[12]
+    FieldDefs = <    
+      item
+        Name = 'OBJECT_NAME'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'OBJECT_TYPE'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'UBJ_UPDATE'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'OBJ_DEL'
+        DataType = ftBoolean
+      end>
+    PacketRecords = 0
+    Left = 456
+    Top = 400
+    object rxFieldDepsOBJECT_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'OBJECT_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldDepsOBJECT_TYPE: TStringField
+      FieldKind = fkData
+      FieldName = 'OBJECT_TYPE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldDepsUBJ_UPDATE: TBooleanField
+      FieldKind = fkData
+      FieldName = 'UBJ_UPDATE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldDepsOBJ_DEL: TBooleanField
+      FieldKind = fkData
+      FieldName = 'OBJ_DEL'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+  end
+  object dsFieldDeps: TDataSource[13]
+    DataSet = rxFieldDeps
+    Left = 416
+    Top = 400
+  end
+end

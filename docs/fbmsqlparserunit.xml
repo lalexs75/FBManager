@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="fbmSqlParserUnit"><element name="TSQLCommandGrant"><short>Объект отвечает за выдачу прав на объект БД для пользователя/роли/другого объекта</short><descr><li>Tables - список объектов, на которые выдаются првва (таблица, представление)</li><li>Params - список объектов, для которых выдаются права (оператор, роль и т.д.)</li>
+        </descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

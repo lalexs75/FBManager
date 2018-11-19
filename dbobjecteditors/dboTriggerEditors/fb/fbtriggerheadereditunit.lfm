@@ -1,0 +1,205 @@
+inherited fbTriggerHeaderEditFrame: TfbTriggerHeaderEditFrame
+  Height = 547
+  Width = 911
+  ClientHeight = 547
+  ClientWidth = 911
+  Color = clBtnFace
+  ParentColor = False
+  DesignLeft = 363
+  DesignTop = 235
+  object Splitter1: TSplitter[0]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 200
+    Width = 911
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object PageControl1: TPageControl[1]
+    Left = 0
+    Height = 200
+    Top = 0
+    Width = 911
+    ActivePage = TabSheet1
+    Align = alTop
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Declaration'
+      ClientHeight = 166
+      ClientWidth = 901
+      object Label1: TLabel
+        AnchorSideLeft.Control = edtTrgName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 244
+        Height = 20
+        Top = 6
+        Width = 37
+        BorderSpacing.Around = 6
+        Caption = 'Order'
+        FocusControl = edtOrder
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = edtTableName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 623
+        Height = 20
+        Top = 6
+        Width = 31
+        BorderSpacing.Around = 6
+        Caption = 'Type'
+        FocusControl = edtType
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 20
+        Top = 6
+        Width = 38
+        BorderSpacing.Around = 6
+        Caption = 'Name'
+        FocusControl = edtTrgName
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = edtOrder
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        Left = 342
+        Height = 20
+        Top = 6
+        Width = 74
+        BorderSpacing.Around = 6
+        Caption = 'Table name'
+        FocusControl = edtTableName
+        ParentColor = False
+      end
+      object cbActive: TCheckBox
+        AnchorSideLeft.Control = cbOnDelete
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtTrgName
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 297
+        Height = 24
+        Top = 75
+        Width = 114
+        BorderSpacing.Around = 6
+        Caption = 'Trigger Active'
+        TabOrder = 0
+      end
+      object edtOrder: TSpinEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        Left = 250
+        Height = 37
+        Top = 32
+        Width = 86
+        BorderSpacing.Around = 6
+        OnChange = edtOrderChange
+        TabOrder = 1
+        Value = 1
+      end
+      object edtType: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 629
+        Height = 32
+        Top = 32
+        Width = 266
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        ItemIndex = 0
+        Items.Strings = (
+          'Before'
+          'After'
+        )
+        OnChange = edtOrderChange
+        Style = csDropDownList
+        TabOrder = 2
+        Text = 'Before'
+      end
+      object cbOnInsert: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtTrgName
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 24
+        Top = 75
+        Width = 86
+        BorderSpacing.Left = 6
+        Caption = 'On Insert'
+        OnChange = edtOrderChange
+        TabOrder = 3
+      end
+      object cbOnUpdate: TCheckBox
+        AnchorSideLeft.Control = cbOnInsert
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtTrgName
+        AnchorSideTop.Side = asrBottom
+        Left = 98
+        Height = 24
+        Top = 75
+        Width = 95
+        BorderSpacing.Left = 6
+        Caption = 'On Update'
+        OnChange = edtOrderChange
+        TabOrder = 4
+      end
+      object cbOnDelete: TCheckBox
+        AnchorSideLeft.Control = cbOnUpdate
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtTrgName
+        AnchorSideTop.Side = asrBottom
+        Left = 199
+        Height = 24
+        Top = 75
+        Width = 92
+        BorderSpacing.Left = 6
+        Caption = 'On Delete'
+        OnChange = edtOrderChange
+        TabOrder = 5
+      end
+      object edtTrgName: TEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 37
+        Top = 32
+        Width = 226
+        BorderSpacing.Around = 6
+        Enabled = False
+        TabOrder = 6
+      end
+      object edtTableName: TComboBox
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        Left = 348
+        Height = 36
+        Top = 32
+        Width = 269
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        OnChange = edtOrderChange
+        Style = csDropDownList
+        TabOrder = 7
+      end
+    end
+    object tabLocalVar: TTabSheet
+      Caption = 'Local variables'
+    end
+  end
+end

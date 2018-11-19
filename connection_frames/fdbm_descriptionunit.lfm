@@ -1,0 +1,15 @@
+inherited fdbm_DescriptionConnectionDlgPage: Tfdbm_DescriptionConnectionDlgPage
+  DesignLeft = 552
+  DesignTop = 317
+  object Memo1: TMemo[0]
+    Left = 0
+    Height = 240
+    Top = 0
+    Width = 320
+    Align = alClient
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 0
+  end
+end

@@ -1,0 +1,88 @@
+object fbmpgTableCheckConstaint_EditForm: TfbmpgTableCheckConstaint_EditForm
+  Left = 457
+  Height = 488
+  Top = 138
+  Width = 575
+  Caption = 'Table check constaint'
+  ClientHeight = 488
+  ClientWidth = 575
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 436
+    Width = 563
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object lblCaption: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 38
+    BorderSpacing.Around = 6
+    Caption = 'Name'
+    ParentColor = False
+  end
+  object edtName: TEdit
+    AnchorSideLeft.Control = lblCaption
+    AnchorSideTop.Control = lblCaption
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 557
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'edtName'
+  end
+  object PageControl1: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 0
+    Height = 355
+    Top = 75
+    Width = 575
+    ActivePage = tabCode
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 2
+    object tabCode: TTabSheet
+      Caption = 'Code'
+    end
+    object tabDescription: TTabSheet
+      Caption = 'Description'
+      ClientHeight = 321
+      ClientWidth = 565
+      object edtDescr: TMemo
+        Left = 0
+        Height = 321
+        Top = 0
+        Width = 565
+        Align = alClient
+        Lines.Strings = (
+          'edtDescr'
+        )
+        TabOrder = 0
+      end
+    end
+  end
+end

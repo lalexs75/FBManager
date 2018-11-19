@@ -1,0 +1,57 @@
+object tlsProgressOperationForm: TtlsProgressOperationForm
+  Left = 700
+  Height = 90
+  Top = 468
+  Width = 481
+  BorderStyle = bsSizeToolWin
+  Caption = 'Operation progress...'
+  ClientHeight = 90
+  ClientWidth = 481
+  FormStyle = fsStayOnTop
+  Position = poScreenCenter
+  LCLVersion = '1.1'
+  object BitBtn1: TBitBtn
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = ProgressBar1
+    AnchorSideTop.Side = asrBottom
+    Left = 198
+    Height = 34
+    Top = 53
+    Width = 85
+    AutoSize = True
+    Cancel = True
+    DefaultCaption = True
+    Kind = bkCancel
+    ModalResult = 2
+    OnClick = BitBtn1Click
+    TabOrder = 0
+  end
+  object ProgressBar1: TProgressBar
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 27
+    Width = 469
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    Position = 65
+    Smooth = True
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 15
+    Top = 6
+    Width = 129
+    BorderSpacing.Around = 6
+    Caption = 'Operation progress...'
+    ParentColor = False
+  end
+end

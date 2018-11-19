@@ -1,0 +1,136 @@
+object fbmSQLParamValueEditorFrame: TfbmSQLParamValueEditorFrame
+  Left = 0
+  Height = 72
+  Top = 0
+  Width = 625
+  ClientHeight = 72
+  ClientWidth = 625
+  TabOrder = 0
+  DesignLeft = 747
+  DesignTop = 403
+  object lblParamName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 0
+    Width = 93
+    BorderSpacing.Left = 6
+    Caption = 'lblParamName'
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = CheckBox2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    Left = 73
+    Height = 32
+    Top = 26
+    Width = 116
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'String'
+      'Integer'
+      'Float'
+      'DateTime'
+      'Boolean'
+    )
+    OnChange = ComboBox1Change
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 195
+    Height = 37
+    Top = 26
+    Width = 424
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'Edit1'
+  end
+  object CheckBox1: TCheckBox
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    Left = 195
+    Height = 24
+    Top = 20
+    Width = 97
+    BorderSpacing.Left = 6
+    Caption = 'CheckBox1'
+    TabOrder = 2
+  end
+  object SpinEdit1: TSpinEdit
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    Left = 195
+    Height = 37
+    Top = 26
+    Width = 199
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object FloatSpinEdit1: TFloatSpinEdit
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    Left = 195
+    Height = 37
+    Top = 26
+    Width = 202
+    BorderSpacing.Around = 6
+    Increment = 1
+    MaxValue = 100
+    MinValue = 0
+    TabOrder = 4
+    Value = 0
+  end
+  object RxDateEdit1: TRxDateEdit
+    AnchorSideLeft.Control = ComboBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblParamName
+    AnchorSideTop.Side = asrBottom
+    Left = 195
+    Height = 37
+    Top = 26
+    Width = 139
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    ButtonWidth = 23
+    DialogTitle = 'Select a Date'
+    MaxLength = 10
+    NumGlyphs = 2
+    PasswordChar = #0
+    PopupColor = clWindow
+    TabOrder = 5
+    Text = '  .  .    '
+  end
+  object CheckBox2: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrCenter
+    Left = 6
+    Height = 24
+    Top = 30
+    Width = 61
+    BorderSpacing.Left = 6
+    Caption = 'NULL'
+    OnChange = CheckBox2Change
+    TabOrder = 6
+  end
+end

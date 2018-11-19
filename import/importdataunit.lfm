@@ -1,0 +1,623 @@
+object ImportDataForm: TImportDataForm
+  Left = 529
+  Height = 666
+  Top = 94
+  Width = 948
+  Caption = 'Import data...'
+  ClientHeight = 666
+  ClientWidth = 948
+  OnCloseQuery = FormCloseQuery
+  Position = poScreenCenter
+  SessionProperties = 'FileNameEdit1.Text;SpinEdit1.Value;SpinEdit2.Value;RadioGroup1.ItemIndex'
+  LCLVersion = '2.1.0.0'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 19
+    Top = 6
+    Width = 100
+    BorderSpacing.Around = 6
+    Caption = 'Import data file'
+    ParentColor = False
+    ParentFont = False
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 618
+    Width = 936
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = PageControl1
+    Left = 895
+    Height = 31
+    Top = 31
+    Width = 47
+    Action = actOpen
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 1
+    BorderSpacing.Around = 6
+    ParentFont = False
+    TabOrder = 1
+  end
+  object PageControl1: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = FileNameEdit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Splitter2
+    Left = 0
+    Height = 539
+    Top = 68
+    Width = 948
+    ActivePage = TabSheet2
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ParentFont = False
+    TabIndex = 1
+    TabOrder = 2
+    object TabSheet1: TTabSheet
+      Caption = 'Params'
+      ClientHeight = 506
+      ClientWidth = 938
+      ParentFont = False
+      object RadioGroup1: TRadioGroup
+        AnchorSideLeft.Control = SpinEdit1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideBottom.Control = SpinEdit2
+        AnchorSideBottom.Side = asrBottom
+        Left = 202
+        Height = 76
+        Top = 0
+        Width = 196
+        Anchors = [akTop, akLeft, akBottom]
+        AutoFill = True
+        AutoSize = True
+        Caption = 'Import'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 56
+        ClientWidth = 194
+        ItemIndex = 1
+        Items.Strings = (
+          'Import data'
+          'Generate INSERT script'
+        )
+        ParentFont = False
+        TabOrder = 0
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideBottom.Control = SpinEdit1
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 20
+        Width = 110
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Skip before rows'
+        FocusControl = SpinEdit1
+        ParentColor = False
+        ParentFont = False
+      end
+      object SpinEdit1: TSpinEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        Left = 122
+        Height = 31
+        Top = 8
+        Width = 74
+        BorderSpacing.Around = 6
+        OnChange = SpinEdit1Change
+        ParentFont = False
+        TabOrder = 1
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = SpinEdit2
+        AnchorSideBottom.Side = asrBottom
+        Left = 5
+        Height = 19
+        Top = 57
+        Width = 99
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 5
+        Caption = 'Skip after rows'
+        FocusControl = SpinEdit2
+        ParentColor = False
+        ParentFont = False
+      end
+      object SpinEdit2: TSpinEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = SpinEdit1
+        AnchorSideTop.Side = asrBottom
+        Left = 122
+        Height = 31
+        Top = 45
+        Width = 74
+        BorderSpacing.Around = 6
+        OnChange = SpinEdit1Change
+        ParentFont = False
+        TabOrder = 2
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Collumns'
+      ClientHeight = 506
+      ClientWidth = 938
+      ParentFont = False
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        Left = 6
+        Height = 19
+        Top = 6
+        Width = 122
+        BorderSpacing.Around = 6
+        Caption = 'Imported collumns'
+        ParentColor = False
+        ParentFont = False
+      end
+      object RxDBGrid1: TRxDBGrid
+        AnchorSideLeft.Control = Label4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet2
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = sWorkbookTabControl1
+        Left = 134
+        Height = 252
+        Top = 0
+        Width = 804
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            MaxSize = 200
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Field name'
+            Width = 200
+            FieldName = 'FieldName'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsPickList
+            MaxSize = 200
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Collumn name'
+            Width = 110
+            FieldName = 'ColName'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            MaxSize = 200
+            PickList.Strings = (
+              'Default'
+              'Integer'
+              'String'
+              'Date'
+              'Time'
+              'Timestamp'
+              'Float'
+              'Fill manual value :'
+            )
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Data type'
+            Width = 150
+            FieldName = 'DataType'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+            KeyList.Strings = (
+              '0'
+              '1'
+              '2'
+              '3'
+              '4'
+              '5'
+              '6'
+              '7'
+              '8'
+              '9'
+              '10'
+            )
+          end        
+          item
+            MaxSize = 200
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Default value'
+            Width = 250
+            FieldName = 'DefValue'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            MaxSize = 200
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Skip empty'
+            Width = 90
+            FieldName = 'SkipEmpty'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        PropertyStorage = RxIniPropStorage1
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsFieldList
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object sWorkbookTabControl1: TsWorkbookTabControl
+        Left = 0
+        Height = 254
+        Top = 252
+        Width = 938
+        TabIndex = 0
+        Tabs.Strings = (
+          'Sheet1'
+        )
+        Align = alBottom
+        ParentFont = False
+        TabOrder = 1
+        WorkbookSource = sWorkbookSource1
+        object Panel2: TPanel
+          Left = 2
+          Height = 37
+          Top = 31
+          Width = 934
+          Align = alTop
+          AutoSize = True
+          ClientHeight = 37
+          ClientWidth = 934
+          ParentFont = False
+          TabOrder = 1
+          object sCellIndicator1: TsCellIndicator
+            AnchorSideLeft.Control = Panel2
+            AnchorSideTop.Control = Panel2
+            Left = 1
+            Height = 35
+            Top = 1
+            Width = 80
+            WorkbookSource = sWorkbookSource1
+            AutoSize = False
+            ParentFont = False
+            TabOrder = 0
+            Text = 'A1'
+          end
+          object sCellEdit1: TsCellEdit
+            AnchorSideLeft.Control = sCellIndicator1
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = Panel2
+            AnchorSideRight.Control = Panel2
+            AnchorSideRight.Side = asrBottom
+            Left = 81
+            Height = 33
+            Top = 1
+            Width = 852
+            Anchors = [akTop, akLeft, akRight]
+            ParentFont = False
+            TabOrder = 1
+            WorkbookSource = sWorkbookSource1
+          end
+        end
+        object sWorksheetGrid1: TsWorksheetGrid
+          Left = 2
+          Height = 184
+          Top = 68
+          Width = 934
+          AutoCalc = True
+          FixedColWidth = 57
+          FrozenCols = 0
+          FrozenRows = 0
+          ReadFormulas = False
+          WorkbookSource = sWorkbookSource1
+          Align = alClient
+          AutoAdvance = aaDown
+          ColCount = 3
+          DefaultColWidth = 64
+          DefaultRowHeight = 27
+          ParentFont = False
+          PopupMenu = PopupMenu1
+          RowCount = 3
+          TabOrder = 2
+          TitleStyle = tsNative
+          OnPrepareCanvas = sWorksheetGrid1PrepareCanvas
+        end
+      end
+      object Splitter3: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 247
+        Width = 938
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+    end
+  end
+  object Splitter2: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 607
+    Width = 948
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object FileNameEdit1: TFileNameEdit
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = BitBtn1
+    Left = 15
+    Height = 31
+    Top = 31
+    Width = 873
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    ParentFont = False
+    Spacing = 0
+    TabOrder = 4
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 232
+    Top = 248
+    object actOpen: TAction
+      Category = 'File'
+      Caption = 'Open'
+      ImageIndex = 43
+      OnExecute = actOpenExecute
+    end
+  end
+  object rxFieldList: TRxMemoryData
+    FieldDefs = <    
+      item
+        Name = 'FieldName'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'ColName'
+        DataType = ftString
+        Size = 10
+      end    
+      item
+        Name = 'DataType'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'DefValue'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'SkipEmpty'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'FieldSize'
+        DataType = ftInteger
+      end>
+    AfterOpen = rxFieldListAfterOpen
+    AfterScroll = rxFieldListAfterScroll
+    PacketRecords = 0
+    Left = 342
+    Top = 159
+    object rxFieldListFieldName: TStringField
+      FieldKind = fkData
+      FieldName = 'FieldName'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListColName: TStringField
+      FieldKind = fkData
+      FieldName = 'ColName'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnChange = rxFieldListColNameChange
+      Size = 10
+    end
+    object rxFieldListDataType: TLongintField
+      Alignment = taLeftJustify
+      FieldKind = fkData
+      FieldName = 'DataType'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnChange = rxFieldListDataTypeChange
+    end
+    object rxFieldListDefValue: TStringField
+      FieldKind = fkData
+      FieldName = 'DefValue'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFieldListSkipEmpty: TBooleanField
+      FieldKind = fkData
+      FieldName = 'SkipEmpty'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFieldListFieldSize: TLongintField
+      FieldKind = fkData
+      FieldName = 'FieldSize'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object dsFieldList: TDataSource
+    DataSet = rxFieldList
+    Left = 304
+    Top = 159
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 342
+    Top = 448
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 96
+    Top = 224
+  end
+  object sWorkbookSource1: TsWorkbookSource
+    AutoDetectFormat = False
+    FileFormat = sfUser
+    Options = [boAutoCalc]
+    Left = 299
+    Top = 448
+  end
+end

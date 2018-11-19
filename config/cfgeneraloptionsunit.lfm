@@ -1,0 +1,156 @@
+inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
+  AnchorSideTop.Side = asrBottom
+  Height = 472
+  Width = 528
+  ClientHeight = 472
+  ClientWidth = 528
+  DesignLeft = 611
+  DesignTop = 305
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    Left = 6
+    Height = 13
+    Top = 6
+    Width = 92
+    BorderSpacing.Around = 6
+    Caption = 'Interface language'
+    ParentColor = False
+  end
+  object Label14: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 13
+    Top = 52
+    Width = 45
+    BorderSpacing.Around = 6
+    Caption = 'Hint color'
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 21
+    Top = 25
+    Width = 510
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 13
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object ColorBox1: TColorBox[3]
+    AnchorSideLeft.Control = Label14
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 24
+    Top = 71
+    Width = 510
+    Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 20
+    TabOrder = 1
+  end
+  object CheckBox1: TCheckBox[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ColorBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 101
+    Width = 189
+    BorderSpacing.Around = 6
+    Caption = 'Save desktop on disconect from DB'
+    TabOrder = 2
+  end
+  object rgShowBitBtnGlyph: TRadioGroup[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 47
+    Top = 124
+    Width = 516
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Button glyph'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 3
+    ClientHeight = 29
+    ClientWidth = 512
+    Columns = 3
+    Items.Strings = (
+      'Always show glyph'
+      'Never show glyph'
+      'Default'
+    )
+    TabOrder = 3
+  end
+  object CheckBox2: TCheckBox[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = rgShowBitBtnGlyph
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 177
+    Width = 208
+    BorderSpacing.Around = 6
+    Caption = 'Show object name in object editor form'
+    TabOrder = 4
+  end
+  object CheckBox3: TCheckBox[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 200
+    Width = 131
+    BorderSpacing.Around = 6
+    Caption = 'Flat buttons in task bar'
+    TabOrder = 5
+  end
+  object CheckBox4: TCheckBox[8]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 223
+    Width = 115
+    BorderSpacing.Around = 6
+    Caption = 'Close window by F4'
+    TabOrder = 6
+  end
+  object CheckBox5: TCheckBox[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox4
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 246
+    Width = 151
+    BorderSpacing.Around = 6
+    Caption = 'Switch window by Ctrl+Tab'
+    TabOrder = 7
+  end
+end

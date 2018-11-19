@@ -1,0 +1,159 @@
+inherited PGRuleEditorPage: TPGRuleEditorPage
+  Height = 457
+  Width = 705
+  ClientHeight = 457
+  ClientWidth = 705
+  DesignLeft = 479
+  DesignTop = 220
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 210
+    Top = 0
+    Width = 705
+    Align = alTop
+    ClientHeight = 210
+    ClientWidth = 705
+    TabOrder = 0
+    object CheckBox1: TCheckBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 23
+      Top = 70
+      Width = 80
+      BorderSpacing.Around = 6
+      Caption = 'INSTEAD'
+      OnChange = RadioGroup1Click
+      TabOrder = 0
+    end
+    object RadioGroup1: TRadioGroup
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = CheckBox1
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 122
+      Top = 99
+      Width = 89
+      AutoFill = True
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Caption = 'Rule event'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 104
+      ClientWidth = 87
+      Items.Strings = (
+        'SELECT'
+        'UPDATE'
+        'INSERT '
+        'DELETE'
+      )
+      OnClick = RadioGroup1Click
+      TabOrder = 1
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      Left = 13
+      Height = 34
+      Top = 30
+      Width = 302
+      BorderSpacing.Around = 6
+      TabOrder = 2
+      Text = 'Edit1'
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 17
+      Top = 7
+      Width = 62
+      BorderSpacing.Around = 6
+      Caption = 'Rule name'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = CheckBox2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Panel2
+      Left = 195
+      Height = 17
+      Top = 76
+      Width = 57
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Around = 6
+      Caption = 'Condition'
+      ParentColor = False
+    end
+    object Panel2: TPanel
+      AnchorSideLeft.Control = CheckBox2
+      AnchorSideTop.Control = CheckBox2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 108
+      Height = 104
+      Top = 99
+      Width = 590
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 6
+      TabOrder = 3
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = Edit1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      Left = 321
+      Height = 17
+      Top = 7
+      Width = 65
+      BorderSpacing.Around = 6
+      Caption = 'View name'
+      ParentColor = False
+    end
+    object cbTables: TComboBox
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 327
+      Height = 33
+      Top = 30
+      Width = 371
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = RadioGroup1Click
+      Style = csDropDownList
+      TabOrder = 4
+    end
+    object CheckBox2: TCheckBox
+      AnchorSideLeft.Control = RadioGroup1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Side = asrBottom
+      Left = 102
+      Height = 23
+      Top = 70
+      Width = 87
+      BorderSpacing.Around = 6
+      Caption = 'NOTHING'
+      OnChange = CheckBox2Change
+      TabOrder = 5
+    end
+  end
+end

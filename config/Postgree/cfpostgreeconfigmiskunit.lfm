@@ -1,0 +1,88 @@
+inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
+  Height = 439
+  Width = 556
+  ClientHeight = 439
+  ClientWidth = 556
+  DesignLeft = 538
+  DesignTop = 220
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 220
+    BorderSpacing.Around = 6
+    Caption = 'Show object on grant page default'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 32
+    Top = 32
+    Width = 538
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'Show all objects'
+      'Only show users'
+      'Only show groups'
+    )
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object CheckBox1: TCheckBox[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 70
+    Width = 205
+    BorderSpacing.Around = 6
+    Caption = 'Create index after create FK'
+    TabOrder = 1
+  end
+  object Label2: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 100
+    Width = 191
+    BorderSpacing.Around = 6
+    Caption = 'Initial value for new sequence'
+    ParentColor = False
+  end
+  object Edit1: TEdit[4]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label3
+    Left = 12
+    Height = 37
+    Top = 126
+    Width = 260
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object Label3: TLabel[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 278
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+end

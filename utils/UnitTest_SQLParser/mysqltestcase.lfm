@@ -1,0 +1,1142 @@
+object MySQLParserData: TMySQLParserData
+  OldCreateOrder = False
+  Height = 452
+  HorizontalOffset = 478
+  VerticalOffset = 209
+  Width = 614
+  object sTable: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'TruncateTable1'
+        Lines.Strings = (
+          'TRUNCATE tbl_name;'
+        )
+      end    
+      item
+        Caption = 'TruncateTable2'
+        Lines.Strings = (
+          'TRUNCATE TABLE tbl_name;'
+        )
+      end    
+      item
+        Caption = 'RenameTable1'
+        Lines.Strings = (
+          'RENAME TABLE old_table TO new_table;'
+        )
+      end    
+      item
+        Caption = 'RenameTable2'
+        Lines.Strings = (
+          'RENAME TABLE old_table1 TO new_table1, old_table2 TO new_table2, old_table3 TO new_table3;'
+        )
+      end    
+      item
+        Caption = 'RenameTable3'
+        Lines.Strings = (
+          'RENAME TABLE old_table TO tmp_table, new_table TO old_table, tmp_table TO new_table;'
+        )
+      end    
+      item
+        Caption = 'RenameTable4'
+        Lines.Strings = (
+          'RENAME TABLE old_table1 TO new_table1, new_table1 TO new_table2;'
+        )
+      end    
+      item
+        Caption = 'RenameTable5'
+        Lines.Strings = (
+          'RENAME TABLE old_table1 TO new_table1, new_table1 TO new_table2;'
+        )
+      end    
+      item
+        Caption = 'RenameTable6'
+        Lines.Strings = (
+          'RENAME TABLE current_db.tbl_name TO other_db.tbl_name;'
+        )
+      end    
+      item
+        Caption = 'DropIndex1'
+        Lines.Strings = (
+          'DROP INDEX `PRIMARY` ON t;'
+        )
+      end    
+      item
+        Caption = 'CreateIndex1'
+        Lines.Strings = (
+          'CREATE INDEX part_of_name ON customer (name(10));'
+        )
+      end    
+      item
+        Caption = 'CreateIndex2'
+        Lines.Strings = (
+          'CREATE INDEX idx1 ON t1 ((col1 + col2));'
+        )
+      end    
+      item
+        Caption = 'CreateIndex3'
+        Lines.Strings = (
+          'CREATE INDEX idx2 ON t1 ((col1 + col2), (col1 - col2), col1);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex4'
+        Lines.Strings = (
+          'CREATE INDEX id_index ON lookup (id) USING BTREE;'
+        )
+      end    
+      item
+        Caption = 'CreateIndex5'
+        Lines.Strings = (
+          'CREATE INDEX id_index ON t1 (id) COMMENT ''MERGE_THRESHOLD=40'';'
+        )
+      end    
+      item
+        Caption = 'DropTable1'
+        Lines.Strings = (
+          'DROP TABLE customers, suppliers;'
+        )
+      end    
+      item
+        Caption = 'DropTable2'
+        Lines.Strings = (
+          'DROP TABLE customers;'
+        )
+      end    
+      item
+        Caption = 'DropTable3'
+        Lines.Strings = (
+          'DROP TABLE IF EXISTS customers, suppliers;'
+        )
+      end    
+      item
+        Caption = 'DropTable4'
+        Lines.Strings = (
+          'DROP TEMPORARY TABLE IF EXISTS customers;'
+        )
+      end    
+      item
+        Caption = 'AlterTable1'
+        Lines.Strings = (
+          'ALTER TABLE t2 DROP COLUMN c, DROP COLUMN d;'
+        )
+      end    
+      item
+        Caption = 'AlterTable2'
+        Lines.Strings = (
+          'ALTER TABLE t1 ENGINE = InnoDB;'
+        )
+      end    
+      item
+        Caption = 'AlterTable3'
+        Lines.Strings = (
+          'ALTER TABLE t1 ROW_FORMAT = COMPRESSED;'
+        )
+      end    
+      item
+        Caption = 'AlterTable4'
+        Lines.Strings = (
+          'ALTER TABLE t1 ENCRYPTION=''Y'';'
+        )
+      end    
+      item
+        Caption = 'AlterTable5'
+        Lines.Strings = (
+          'ALTER TABLE t1 ENCRYPTION=''N'';'
+        )
+      end    
+      item
+        Caption = 'AlterTable6'
+        Lines.Strings = (
+          'ALTER TABLE t1 AUTO_INCREMENT = 13;'
+        )
+      end    
+      item
+        Caption = 'AlterTable7'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHARACTER SET = utf8;'
+        )
+      end    
+      item
+        Caption = 'AlterTable8'
+        Lines.Strings = (
+          'ALTER TABLE t1 COMMENT = ''New table comment'';'
+        )
+      end    
+      item
+        Caption = 'AlterTable9'
+        Lines.Strings = (
+          'ALTER TABLE t1 COMMENT = NDB_TABLE=READ_BACKUP=0,PARTITION_BALANCE=FOR_RA_BY_NODE;'
+        )
+      end    
+      item
+        Caption = 'AlterTable10'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHANGE a b BIGINT NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable11'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHANGE b b INT NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable12'
+        Lines.Strings = (
+          'ALTER TABLE t1 MODIFY b INT NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable13'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHANGE b a INT NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable14'
+        Lines.Strings = (
+          'ALTER TABLE t1 RENAME COLUMN b TO a;'
+        )
+      end    
+      item
+        Caption = 'AlterTable15'
+        Lines.Strings = (
+          'ALTER TABLE t1 RENAME COLUMN a TO b, RENAME COLUMN b TO a;'
+        )
+      end    
+      item
+        Caption = 'AlterTable16'
+        Lines.Strings = (
+          'ALTER TABLE t1 RENAME COLUMN a TO b, RENAME COLUMN b TO c, RENAME COLUMN c TO a;'
+        )
+      end    
+      item
+        Caption = 'AlterTable17'
+        Lines.Strings = (
+          'ALTER TABLE t1 MODIFY col1 BIGINT;'
+        )
+      end    
+      item
+        Caption = 'AlterTable18'
+        Lines.Strings = (
+          'ALTER TABLE t1 MODIFY col1 BIGINT UNSIGNED DEFAULT 1 COMMENT ''my column'';'
+        )
+      end    
+      item
+        Caption = 'AlterTable19'
+        Lines.Strings = (
+          'ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol;'
+        )
+      end    
+      item
+        Caption = 'AlterTable20'
+        Lines.Strings = (
+          'ALTER TABLE tbl_name CONVERT TO CHARACTER SET charset_name;'
+        )
+      end    
+      item
+        Caption = 'AlterTable21'
+        Lines.Strings = (
+          'ALTER TABLE t MODIFY latin1_text_col TEXT CHARACTER SET utf8;'
+        )
+      end    
+      item
+        Caption = 'AlterTable22'
+        Lines.Strings = (
+          'ALTER TABLE t MODIFY latin1_varchar_col VARCHAR(M) CHARACTER SET utf8;'
+        )
+      end    
+      item
+        Caption = 'AlterTable23'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHANGE c1 c1 BLOB;'
+        )
+      end    
+      item
+        Caption = 'AlterTable24'
+        Lines.Strings = (
+          'ALTER TABLE t1 CHANGE c1 c1 TEXT CHARACTER SET utf8;'
+        )
+      end    
+      item
+        Caption = 'AlterTable25'
+        Lines.Strings = (
+          'ALTER TABLE tbl_name DEFAULT CHARACTER SET charset_name;'
+        )
+      end    
+      item
+        Caption = 'AlterTable26'
+        Lines.Strings = (
+          'ALTER TABLE books ADD COLUMN `author` int(10) unsigned NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterTable27'
+        Lines.Strings = (
+          'ALTER TABLE books ADD INDEX (author);'
+        )
+      end    
+      item
+        Caption = 'AlterTable28'
+        Lines.Strings = (
+          'ALTER TABLE books ADD FOREIGN KEY (author) REFERENCES `users` (`id`) ;'
+        )
+      end    
+      item
+        Caption = 'AlterTable29'
+        Lines.Strings = (
+          'ALTER TABLE contacts'
+          '  ADD last_name varchar(40) NOT NULL'
+          '  AFTER contact_id;'
+        )
+      end    
+      item
+        Caption = 'AlterTable30'
+        Lines.Strings = (
+          'ALTER TABLE contacts'
+          'ADD last_name varchar(40) NOT NULL'
+          ' AFTER contact_id,'
+          'ADD first_name varchar(35) NULL'
+          ' AFTER last_name;'
+        )
+      end    
+      item
+        Caption = 'AlterTable31'
+        Lines.Strings = (
+          'ALTER TABLE contacts'
+          'ADD last_name varchar(40) NOT NULL'
+          '  AFTER contact_id,'
+          'ADD first_name varchar(35) NULL'
+          '  AFTER last_name;'
+        )
+      end    
+      item
+        Caption = 'AlterTable32'
+        Lines.Strings = (
+          'ALTER TABLE contacts'
+          '  ADD last_name varchar(40) NOT NULL AFTER contact_id,'
+          '  ADD first_name varchar(35) NULL AFTER last_name;'';'
+        )
+      end    
+      item
+        Caption = 'AlterTable33'
+        Lines.Strings = (
+          'ALTER TABLE contacts DROP COLUMN contact_type;'
+        )
+      end    
+      item
+        Caption = 'AlterTable34'
+        Lines.Strings = (
+          'ALTER TABLE contacts DROP COLUMN contact_type;'
+        )
+      end    
+      item
+        Caption = 'AlterTable35'
+        Lines.Strings = (
+          'ALTER TABLE contacts DROP COLUMN contact_type;'
+        )
+      end    
+      item
+        Caption = 'CreateTable1'
+        Lines.Strings = (
+          'CREATE TABLE t1 ('
+          '  s1 INT,'
+          '  s2 INT AS (EXP(s1)) STORED'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable2'
+        Lines.Strings = (
+          'CREATE TABLE lc ('
+          '  a INT NULL,'
+          '  b INT NULL'
+          ')'
+          'TABLESPACE = tablespace_name'
+          'PARTITION BY LIST COLUMNS(a,b) ('
+          'PARTITION p0 VALUES IN( (0,0), (NULL,NULL) ),''+LineEnding+'
+          'PARTITION p1 VALUES IN( (0,1), (0,2), (0,3), (1,1), (1,2) ),'
+          'PARTITION p2 VALUES IN( (1,0), (2,0), (2,1), (3,0), (3,1) ),'
+          'PARTITION p3 VALUES IN( (1,3), (2,2), (2,3), (3,2), (3,3) )'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable3'
+        Lines.Strings = (
+          'CREATE TABLE t1 (''+LineEnding+'
+          '  c1 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,''+LineEnding+'
+          ' C2 VARCHAR(100),''+LineEnding+'
+          '  c3 VARCHAR(100) )''+LineEnding+'
+          'ENGINE=NDB''+LineEnding+'
+          'COMMENT="NDB_TABLE=READ_BACKUP=0,PARTITION_BALANCE=FOR_RP_BY_NODE";'';'
+        )
+      end    
+      item
+        Caption = 'CreateTable4'
+        Lines.Strings = (
+          'CREATE TABLE lookup'
+          '  (id INT, INDEX USING BTREE (id))'
+          'ENGINE = MEMORY;'
+        )
+      end    
+      item
+        Caption = 'CreateTable5'
+        Lines.Strings = (
+          'CREATE TABLE t1 ('
+          '  c1 INT STORAGE DISK,'
+          '  c2 INT STORAGE MEMORY'
+          ') TABLESPACE ts_1 ENGINE NDB;'
+        )
+      end    
+      item
+        Caption = 'CreateTable6'
+        Lines.Strings = (
+          'CREATE TABLE test (blob_col BLOB, INDEX(blob_col(10)));'
+        )
+      end    
+      item
+        Caption = 'CreateTable7'
+        Lines.Strings = (
+          'CREATE TABLE new_tbl AS SELECT * FROM orig_tbl;'
+        )
+      end    
+      item
+        Caption = 'CreateTable8'
+        Lines.Strings = (
+          'CREATE TABLE new_tbl LIKE orig_tbl;'
+        )
+      end    
+      item
+        Caption = 'CreateTable9'
+        Lines.Strings = (
+          'CREATE TABLE rc ('
+          '  a INT NOT NULL,'
+          '  b INT NOT NULL'
+          ')'
+          'TABLESPACE  tablespace_name'
+          '  PARTITION BY RANGE COLUMNS(a,b) ('
+          '  PARTITION p0 VALUES LESS THAN (10,5),'
+          '  PARTITION p1 VALUES LESS THAN (20,10),'
+          '  PARTITION p2 VALUES LESS THAN (50,MAXVALUE),'
+          '  PARTITION p3 VALUES LESS THAN (65,MAXVALUE),'
+          '  PARTITION p4 VALUES LESS THAN (MAXVALUE,MAXVALUE)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable10'
+        Lines.Strings = (
+          'CREATE TABLE t1 ('
+          '  year_col  INT,'
+          '  some_data INT'
+          ')'
+          '  PARTITION BY RANGE (year_col) ('
+          '  PARTITION p0 VALUES LESS THAN (1991),'
+          '  PARTITION p1 VALUES LESS THAN (1995),'
+          '  PARTITION p2 VALUES LESS THAN (1999),'
+          '  PARTITION p3 VALUES LESS THAN (2002),'
+          '  PARTITION p4 VALUES LESS THAN (2006),'
+          '  PARTITION p5 VALUES LESS THAN MAXVALUE'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable11'
+        Lines.Strings = (
+          'CREATE TABLE t1 (col1 INT, col2 CHAR(5))'
+          '  PARTITION BY HASH(col1)'
+          '  ;'
+        )
+      end    
+      item
+        Caption = 'CreateTable12'
+        Lines.Strings = (
+          'CREATE TABLE t1 (col1 INT, col2 CHAR(5), col3 DATETIME)'
+          '  PARTITION BY HASH ( YEAR(col3) );'
+        )
+      end    
+      item
+        Caption = 'CreateTable13'
+        Lines.Strings = (
+          'CREATE TABLE tk (col1 INT, col2 CHAR(5), col3 DATE)'
+          '  PARTITION BY KEY(col3)'
+          '  PARTITIONS 4;'
+        )
+      end    
+      item
+        Caption = 'CreateTable14'
+        Lines.Strings = (
+          'CREATE TABLE t1 (a INT)'
+          ' /*!50100 PARTITION BY KEY */ /*!50611 ALGORITHM = 1 */ /*!50100 ()'
+          '    PARTITIONS 3 */;'
+        )
+      end    
+      item
+        Caption = 'CreateTable15'
+        Lines.Strings = (
+          'CREATE TABLE tk (col1 INT, col2 CHAR(5), col3 DATE)'
+          '      PARTITION BY LINEAR KEY(col3)'
+          '        PARTITIONS 5;'
+        )
+      end    
+      item
+        Caption = 'CreateTable16'
+        Lines.Strings = (
+          'CREATE TABLE client_firms ('
+          '  id   INT,'
+          '  name VARCHAR(35)'
+          ')'
+          '  COMMENT = ''Data for the years previous to 1999'''
+          '  PARTITION BY LIST (id) ('
+          '  PARTITION r0 VALUES IN (1, 5, 9, 13, 17, 21),'
+          '  PARTITION r1 VALUES IN (2, 6, 10, 14, 18, 22),'
+          '  PARTITION r2 VALUES IN (3, 7, 11, 15, 19, 23),'
+          '  PARTITION r3 VALUES IN (4, 8, 12, 16, 20, 24)'
+          ')'
+          '  PARTITION BY LIST (s2) ('
+          '  PARTITION p1 VALUES IN (1)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable17'
+        Lines.Strings = (
+          'CREATE TABLE th (id INT, name VARCHAR(30), adate DATE)'
+          '  PARTITION BY LIST(YEAR(adate))'
+          '('
+          '  PARTITION p1999 VALUES IN (1995, 1999, 2003)'
+          '    DATA DIRECTORY = ''/var/appdata/95/data'''
+          '    INDEX DIRECTORY = ''/var/appdata/95/idx'','
+          '  PARTITION p2000 VALUES IN (1996, 2000, 2004)'
+          '    DATA DIRECTORY = ''/var/appdata/96/data'''
+          '    INDEX DIRECTORY = ''/var/appdata/96/idx'','
+          '  PARTITION p2001 VALUES IN (1997, 2001, 2005)'
+          '    DATA DIRECTORY = ''/var/appdata/97/data'''
+          '    INDEX DIRECTORY = ''/var/appdata/97/idx'''','
+          '  PARTITION p2002 VALUES IN (1998, 2002, 2006)'
+          '    DATA DIRECTORY = ''/var/appdata/98/data'''
+          '    INDEX DIRECTORY = ''/var/appdata/98/idx'''
+          ');'
+        )
+      end>
+    Left = 48
+    Top = 32
+  end
+  object sFunction: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateProcedure1'
+        Lines.Strings = (
+          'CREATE PROCEDURE simpleproc (OUT param1 INT)'
+          'BEGIN'
+          '  SELECT COUNT(*) INTO param1 FROM t;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure2'
+        Lines.Strings = (
+          'CREATE FUNCTION hello (s CHAR(20))'
+          '  RETURNS CHAR(50) DETERMINISTIC'
+          '  RETURN CONCAT(''Hello, '',s,''!'');'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure3'
+        Lines.Strings = (
+          'CREATE DEFINER = ''admin''@''localhost'' PROCEDURE account_count()'
+          'BEGIN'
+          '  SELECT ''''Number of accounts:'''', COUNT(*) FROM mysql.user;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure4'
+        Lines.Strings = (
+          'CREATE DEFINER = ''admin''@''localhost'' PROCEDURE account_count()'
+          'SQL SECURITY INVOKER'
+          'BEGIN'
+          '  SELECT ''''Number of accounts:'''', COUNT(*) FROM mysql.user;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction2'
+        Lines.Strings = (
+          'CREATE FUNCTION hello (s CHAR(20))'
+          'RETURNS CHAR(50) DETERMINISTIC'
+          'RETURN CONCAT(''Hello, '',s,''!'');'
+        )
+      end    
+      item
+        Caption = 'CreateFunction3'
+        Lines.Strings = (
+          'CREATE DEFINER = ''''admin''''@''''localhost'''' PROCEDURE account_count()'
+          'BEGIN'
+          '  SELECT ''Number of accounts:'', COUNT(*) FROM mysql.user;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction4'
+        Lines.Strings = (
+          'CREATE DEFINER = ''admin''@''localhost'' PROCEDURE account_count()'
+          'SQL SECURITY INVOKER'
+          'BEGIN'
+          '  SELECT ''''Number of accounts:'''', COUNT(*) FROM mysql.user;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction5'
+        Lines.Strings = (
+          'CREATE FUNCTION db.fnfullname ( id smallint(5) unsigned ) RETURNS varchar(160) CHARACTER SET utf8'
+          'COMMENT ''Returns the full name of person in db.people table referenced by id where FirstName and FamilyName are not null but MiddleName may be null'''
+          'DETERMINISTIC'
+          'READS SQL DATA'
+          'BEGIN'
+          '  DECLARE fulname varchar(160) CHARACTER SET utf8;'
+          '  SELECT CONCAT_WS('''' '''', db.people.FirstName, db.people.MiddleName, db.people.FamilyName) into fulname from db.people where db.people.id=id;'
+          '  RETURN fulname;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction6'
+        Lines.Strings = (
+          'CREATE DEFINER=`root`@`localhost` PROCEDURE `add_error_log`('
+          '`error_level` int(11),'
+          '`error_level_name` varchar(512),'
+          '`error_message` longtext,'
+          '`error_file` text,'
+          '`error_line` int(11),'
+          '`error_context` longtext,'
+          '`error_query_string` longtext,'
+          '`error_time` text ,'
+          '`user_id` int(11),'
+          '`post_data` longtext,'
+          '`user_msg` text)'
+          'BEGIN'
+          '  INSERT INTO tbl_error_log(error_level, error_level_name, error_message, error_file,error_line, error_context,error_query_string,error_time, user_id, post_data, user_msg)'
+          '  values(error_level, error_level_name, error_message, error_file,error_line, error_context,error_query_string, error_time, user_id, post_data, user_msg);'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger1'
+        Lines.Strings = (
+          'DROP TRIGGER orders_before_insert;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger1'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_before_insert'
+          'BEFORE INSERT'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Найти персону username, осуществляющего INSERT в таблицу'
+          '  SELECT USER() INTO vUser;'
+          '  -- обновить поле create_date на текущую системную дату'
+          '  SET NEW.created_date = SYSDATE();'
+          '  -- обновить поле created_by на персону username осуществившую INSERT'
+          '  SET NEW.created_by = vUser;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger2'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_after_insert'
+          'AFTER INSERT'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Найти персону username, осуществляющую INSERT в таблицу'
+          '  SELECT USER() INTO vUser;'
+          '  -- вставка записи в таблицу contacts_audit'
+          '  INSERT INTO contacts_audit'
+          '   ( contact_id,'
+          '     deleted_date,'
+          '     deleted_by)'
+          '   VALUES'
+          '   ( NEW.contact_id,'
+          '     SYSDATE(),'
+          '     vUser );'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger3'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_after_insert'
+          'AFTER INSERT'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Найти персону username, осуществляющую INSERT в таблицу'
+          '  SELECT USER() INTO vUser;'
+          '  -- вставка записи в таблицу contacts_audit'
+          '  INSERT INTO contacts_audit'
+          '   ( contact_id,'
+          '     deleted_date,'
+          '     deleted_by)'
+          '   VALUES'
+          '   ( NEW.contact_id,'
+          '     SYSDATE(),'
+          '     vUser );'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger4'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_after_update'
+          'AFTER UPDATE'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Найти персону username, осуществляющего UPDATE в таблицу'
+          '  SELECT USER() INTO vUser;'
+          '  -- Вставить строку в таблицу contacts_audit'
+          '  INSERT INTO contacts_audit'
+          '  ( contact_id,'
+          '    updated_date,'
+          '    updated_by)'
+          '  VALUES'
+          '  ( NEW.contact_id,'
+          '    SYSDATE(),'
+          '    vUser );'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger5'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_before_delete'
+          'BEFORE DELETE'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Find username of person performing the DELETE into table'
+          '  SELECT USER() INTO vUser;'
+          '  -- Insert record into audit table'
+          '  INSERT INTO contacts_audit'
+          '  ( contact_id,'
+          '    deleted_date,'
+          '    deleted_by)'
+          '   VALUES'
+          '  ( OLD.contact_id,'
+          '    SYSDATE(),'
+          '    vUser );'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger6'
+        Lines.Strings = (
+          'CREATE TRIGGER contacts_before_update'
+          'BEFORE UPDATE'
+          '  ON contacts FOR EACH ROW'
+          'BEGIN'
+          '  DECLARE vUser varchar(50);'
+          '  -- Найти персону username, осуществляющего UPDATE в таблице'
+          '  SELECT USER() INTO vUser;'
+          '  -- вставка записи в таблицу contacts_audit'
+          '  INSERT INTO contacts_audit'
+          '    ( contact_id,'
+          '      updated_date,'
+          '      updated_by)'
+          '    VALUES'
+          '    ( NEW.contact_id,'
+          '      SYSDATE(),'
+          '      vUser );'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction1'
+        Lines.Strings = (
+          'CREATE PROCEDURE simpleproc (OUT param1 INT)'
+          'BEGIN'
+          '  SELECT COUNT(*) INTO param1 FROM t;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'DropProcedure1'
+        Lines.Strings = (
+          'DROP PROCEDURE sp_name;'
+        )
+      end    
+      item
+        Caption = 'DropProcedure2'
+        Lines.Strings = (
+          'DROP PROCEDURE IF EXISTS sp_name;'
+        )
+      end    
+      item
+        Caption = 'AlterProcedure1'
+        Lines.Strings = (
+          'ALTER PROCEDURE proc_name COMMENT ''string'' LANGUAGE SQL;'
+        )
+      end    
+      item
+        Caption = 'AlterProcedure2'
+        Lines.Strings = (
+          'ALTER PROCEDURE proc_name COMMENT ''string'' LANGUAGE SQL MODIFIES SQL DATA SQL SECURITY INVOKER;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction1'
+        Lines.Strings = (
+          'ALTER FUNCTION func_name COMMENT ''string'';'
+        )
+      end    
+      item
+        Caption = 'DropFunction1'
+        Lines.Strings = (
+          'DROP FUNCTION sp_name;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropFunction2'
+        Lines.Strings = (
+          'DROP FUNCTION IF EXISTS sp_name;'
+        )
+      end>
+    Left = 48
+    Top = 104
+  end
+  object sServer: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateDatabase1'
+        Lines.Strings = (
+          'CREATE DATABASE `my_db`;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase2'
+        Lines.Strings = (
+          'CREATE DATABASE `my_db` CHARACTER SET utf8 COLLATE utf8_general_ci;'
+        )
+      end    
+      item
+        Caption = 'DropDatabase1'
+        Lines.Strings = (
+          'DROP DATABASE IF EXISTS db_name;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase1'
+        Lines.Strings = (
+          'ALTER DATABASE `#mysql50#a-b-c` UPGRADE DATA DIRECTORY NAME;'
+        )
+      end    
+      item
+        Caption = 'AlterServer1'
+        Lines.Strings = (
+          'ALTER SERVER s OPTIONS (USER ''''sally'''');'
+        )
+      end    
+      item
+        Caption = 'CreateServer1'
+        Lines.Strings = (
+          'CREATE SERVER s'
+          'FOREIGN DATA WRAPPER mysql'
+          'OPTIONS (USER ''Remote'', HOST ''198.51.100.106'', DATABASE ''test'');'
+        )
+      end    
+      item
+        Caption = 'DropServer1'
+        Lines.Strings = (
+          'DROP SERVER server_name;'
+        )
+      end    
+      item
+        Caption = 'DropServer2'
+        Lines.Strings = (
+          'DROP SERVER IF EXISTS server_name;'
+        )
+      end    
+      item
+        Caption = 'AlterInstance1'
+        Lines.Strings = (
+          'ALTER INSTANCE ROTATE INNODB MASTER KEY;'
+        )
+      end    
+      item
+        Caption = 'DropLogfileGroup1'
+        Lines.Strings = (
+          'DROP LOGFILE GROUP logfile_group ENGINE engine_name;'
+        )
+      end    
+      item
+        Caption = 'DropLogfileGroup2'
+        Lines.Strings = (
+          'DROP LOGFILE GROUP logfile_group ENGINE = engine_name;'
+        )
+      end    
+      item
+        Caption = 'DropLogfileGroup3'
+        Lines.Strings = (
+          'DROP LOGFILE GROUP lg1 ENGINE = NDB;'
+        )
+      end    
+      item
+        Caption = 'AlterLogfileGroup1'
+        Lines.Strings = (
+          'ALTER LOGFILE GROUP lg_3 ADD UNDOFILE ''undo_10.dat'' INITIAL_SIZE=32M ENGINE=NDBCLUSTER;'
+        )
+      end    
+      item
+        Caption = 'CreateLogfileGroup1'
+        Lines.Strings = (
+          'CREATE LOGFILE GROUP lg1 ADD UNDOFILE ''''undo.dat'''' INITIAL_SIZE = 10M;'
+        )
+      end    
+      item
+        Caption = 'CreateLogfileGroup2'
+        Lines.Strings = (
+          'CREATE LOGFILE GROUP lg1 ADD UNDOFILE ''undo.dat'' INITIAL_SIZE = 10M ENGINE = NDB;'
+        )
+      end    
+      item
+        Caption = 'DropEvent1'
+        Lines.Strings = (
+          'DROP EVENT event_name;'
+        )
+      end    
+      item
+        Caption = 'DropEvent2'
+        Lines.Strings = (
+          'DROP EVENT IF EXISTS event_name;'
+        )
+      end    
+      item
+        Caption = 'CreateEvent1'
+        Lines.Strings = (
+          'CREATE EVENT myevent'
+          '    ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 HOUR'
+          '    DO'
+          '      UPDATE myschema.mytable SET mycol = mycol + 1;'
+        )
+      end    
+      item
+        Caption = 'CreateEvent2'
+        Lines.Strings = (
+          'CREATE EVENT e_totals'
+          '    ON SCHEDULE AT ''2006-02-10 23:59:00'''
+          '    DO INSERT INTO test.totals VALUES (NOW());'
+        )
+      end    
+      item
+        Caption = 'CreateEvent3'
+        Lines.Strings = (
+          'CREATE EVENT e_hourly'
+          '    ON SCHEDULE'
+          '      EVERY 1 HOUR'
+          '    COMMENT ''Clears out sessions table each hour.'''
+          '    DO'
+          '      DELETE FROM site_activity.sessions;'
+        )
+      end    
+      item
+        Caption = 'CreateEvent4'
+        Lines.Strings = (
+          'CREATE EVENT e_daily'
+          '    ON SCHEDULE'
+          '      EVERY 1 DAY'
+          '    COMMENT ''Saves total number of sessions then clears the table each day'''
+          '    DO'
+          '      BEGIN'
+          '        INSERT INTO site_activity.totals (time, total)'
+          '          SELECT CURRENT_TIMESTAMP, COUNT(*)'
+          '            FROM site_activity.sessions;'
+          '        DELETE FROM site_activity.sessions;'
+          '      END;'
+        )
+      end    
+      item
+        Caption = 'CreateEvent5'
+        Lines.Strings = (
+          'CREATE EVENT e'
+          '    ON SCHEDULE'
+          '      EVERY 5 SECOND'
+          '    DO'
+          '      BEGIN'
+          '        DECLARE v INTEGER;'
+          '        DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;'
+          '        SET v = 0;'
+          '        WHILE v < 5 DO'
+          '          INSERT INTO t1 VALUES (0);'
+          '          UPDATE t2 SET s1 = s1 + 1;'
+          '          SET v = v + 1;'
+          '        END WHILE;'
+          '    END;'
+        )
+      end    
+      item
+        Caption = 'CreateEvent6'
+        Lines.Strings = (
+          'CREATE EVENT e_call_myproc'
+          '    ON SCHEDULE'
+          '      AT CURRENT_TIMESTAMP + INTERVAL 1 DAY'
+          '    DO CALL myproc(5, 27);'
+        )
+      end    
+      item
+        Caption = 'AlterEvent1'
+        Lines.Strings = (
+          'ALTER EVENT no_such_event'
+          '   ON SCHEDULE'
+          '     EVERY ''2:3'' DAY_HOUR;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterEvent2'
+        Lines.Strings = (
+          'ALTER EVENT myevent'
+          '  ON SCHEDULE'
+          '    EVERY 12 HOUR'
+          '  STARTS CURRENT_TIMESTAMP + INTERVAL 4 HOUR;'
+        )
+      end    
+      item
+        Caption = 'AlterEvent3'
+        Lines.Strings = (
+          'ALTER EVENT myevent'
+          '  ON SCHEDULE'
+          '    AT CURRENT_TIMESTAMP + INTERVAL 1 DAY'
+          '  DO'
+          '    TRUNCATE TABLE myschema.mytable;'
+        )
+      end    
+      item
+        Caption = 'AlterEvent4'
+        Lines.Strings = (
+          'ALTER EVENT myevent DISABLE;'
+        )
+      end    
+      item
+        Caption = 'AlterEvent5'
+        Lines.Strings = (
+          'ALTER EVENT myevent RENAME TO yourevent;'
+        )
+      end    
+      item
+        Caption = 'AlterEvent6'
+        Lines.Strings = (
+          'ALTER EVENT olddb.myevent RENAME TO newdb.myevent;'
+        )
+      end    
+      item
+        Caption = 'DropTablespace1'
+        Lines.Strings = (
+          'DROP TABLESPACE ts1;'
+        )
+      end    
+      item
+        Caption = 'CreateTablespace1'
+        Lines.Strings = (
+          'CREATE TABLESPACE `ts1`'
+          '  ADD DATAFILE ''ts1.ibd'''
+          '  ENGINE=INNODB;'
+        )
+      end    
+      item
+        Caption = 'CreateTablespace2'
+        Lines.Strings = (
+          'CREATE TABLESPACE myts'
+          '    ADD DATAFILE ''mydata-1.dat'''
+          '    USE LOGFILE GROUP mylg'
+          '    ENGINE=NDB;'
+        )
+      end    
+      item
+        Caption = 'AlterTablespace1'
+        Lines.Strings = (
+          'ALTER TABLESPACE myts'
+          '  DROP DATAFILE ''mydata-1.dat'''
+          '  ENGINE=NDB;'
+        )
+      end>
+    Left = 48
+    Top = 192
+  end
+  object sView: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateView1'
+        Lines.Strings = (
+          'CREATE VIEW test.v AS SELECT * FROM t;'
+        )
+      end    
+      item
+        Caption = 'CreateView2'
+        Lines.Strings = (
+          'CREATE VIEW v_today (today) AS SELECT CURRENT_DATE;'
+        )
+      end    
+      item
+        Caption = 'CreateView3'
+        Lines.Strings = (
+          'CREATE VIEW v AS SELECT qty, price, qty*price AS value FROM t;'
+        )
+      end    
+      item
+        Caption = 'CreateView4'
+        Lines.Strings = (
+          'CREATE VIEW v (mycol) AS SELECT ''abc'';'
+        )
+      end    
+      item
+        Caption = 'CreateView5'
+        Lines.Strings = (
+          'CREATE VIEW v AS SELECT * FROM t WHERE t.id = f(t.name);'
+        )
+      end    
+      item
+        Caption = 'CreateView6'
+        Lines.Strings = (
+          'CREATE VIEW hardware_suppliers AS'
+          'SELECT supplier_id, supplier_name'
+          'FROM suppliers'
+          'WHERE category_type = ''Hardware'';'
+        )
+      end    
+      item
+        Caption = 'AlterView1'
+        Lines.Strings = (
+          'ALTER VIEW hardware_suppliers AS'
+          'SELECT supplier_id, supplier_name, address, city'
+          'FROM suppliers'
+          'WHERE category_type = ''Hardware'';'
+        )
+      end    
+      item
+        Caption = 'DropView1'
+        Lines.Strings = (
+          'DROP VIEW hardware_suppliers;'
+        )
+      end>
+    Left = 48
+    Top = 272
+  end
+  object sShow: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'ShowFullCollumns1'
+        Lines.Strings = (
+          'SHOW FULL COLUMNS FROM `v_test1`;'
+        )
+      end>
+    Left = 48
+    Top = 336
+  end
+end

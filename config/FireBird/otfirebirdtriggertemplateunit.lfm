@@ -1,0 +1,62 @@
+inherited otFirebirdTriggerTemplatePage: TotFirebirdTriggerTemplatePage
+  Height = 256
+  Width = 524
+  ClientHeight = 256
+  ClientWidth = 524
+  DesignLeft = 610
+  DesignTop = 399
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 77
+    Top = 0
+    Width = 524
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 77
+    ClientWidth = 524
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 20
+      Top = 7
+      Width = 145
+      BorderSpacing.Around = 6
+      Caption = 'Trigger name template'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Label2
+      Left = 13
+      Height = 37
+      Top = 33
+      Width = 209
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 0
+      Text = 'Edit1'
+    end
+    object Label2: TLabel
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 228
+      Height = 60
+      Top = 5
+      Width = 289
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      Caption = 'Avaliable tags:'#10'%TABLE_NAME% - Table name'#10'%TRIGGER_TYPE% - Trigger type (BI0, AUD1)'
+      ParentColor = False
+    end
+  end
+  object SynSQLSyn1: TSynSQLSyn[1]
+    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
+    SQLDialect = sqlInterbase6
+    Left = 216
+    Top = 8
+  end
+end

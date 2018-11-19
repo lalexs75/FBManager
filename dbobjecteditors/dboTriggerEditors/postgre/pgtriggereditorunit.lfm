@@ -1,0 +1,556 @@
+inherited pgTriggerEditorPage: TpgTriggerEditorPage
+  Height = 499
+  Width = 1013
+  ClientHeight = 499
+  ClientWidth = 1013
+  DesignLeft = 485
+  DesignTop = 242
+  object PageControl2: TPageControl[0]
+    Left = 0
+    Height = 232
+    Top = 0
+    Width = 1013
+    ActivePage = TabSheet5
+    Align = alTop
+    TabIndex = 1
+    TabOrder = 0
+    object TabSheet4: TTabSheet
+      Caption = 'Declaration'
+      ClientHeight = 198
+      ClientWidth = 1003
+      object PageControl1: TPageControl
+        AnchorSideLeft.Side = asrBottom
+        Left = 548
+        Height = 198
+        Top = 0
+        Width = 455
+        ActivePage = TabSheet1
+        Align = alRight
+        TabIndex = 0
+        TabOrder = 0
+        object TabSheet1: TTabSheet
+          Caption = 'События'
+          ClientHeight = 194
+          ClientWidth = 451
+          object rgRowScope: TRadioGroup
+            AnchorSideTop.Control = TabSheet1
+            AnchorSideRight.Control = TabSheet1
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = cbOnEvent
+            AnchorSideBottom.Side = asrBottom
+            Left = 332
+            Height = 111
+            Top = 6
+            Width = 107
+            Anchors = [akTop, akRight, akBottom]
+            AutoFill = True
+            AutoSize = True
+            BorderSpacing.Top = 6
+            BorderSpacing.Right = 6
+            Caption = 'For each'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 1
+            ClientHeight = 90
+            ClientWidth = 105
+            Items.Strings = (
+              'Row'
+              'Statement'
+            )
+            OnClick = cbOnEventClick
+            TabOrder = 0
+          end
+          object rgType: TRadioGroup
+            AnchorSideLeft.Control = rgRowScope
+            AnchorSideTop.Control = TabSheet1
+            AnchorSideRight.Control = rgRowScope
+            AnchorSideBottom.Control = cbOnEvent
+            AnchorSideBottom.Side = asrBottom
+            Left = 243
+            Height = 111
+            Top = 6
+            Width = 83
+            Anchors = [akTop, akRight, akBottom]
+            AutoFill = True
+            AutoSize = True
+            BorderSpacing.Top = 6
+            BorderSpacing.Right = 6
+            Caption = 'Type'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 1
+            ClientHeight = 90
+            ClientWidth = 81
+            Items.Strings = (
+              'Before'
+              'After'
+            )
+            OnClick = cbOnEventClick
+            TabOrder = 1
+          end
+          object cbOnEvent: TCheckGroup
+            AnchorSideLeft.Control = TabSheet1
+            AnchorSideTop.Control = cbEnabled
+            AnchorSideTop.Side = asrBottom
+            AnchorSideRight.Control = rgType
+            AnchorSideBottom.Control = rgRowScope
+            AnchorSideBottom.Side = asrBottom
+            Left = 6
+            Height = 81
+            Top = 36
+            Width = 231
+            Anchors = [akTop, akLeft, akRight]
+            AutoFill = True
+            AutoSize = True
+            BorderSpacing.Left = 6
+            BorderSpacing.Top = 6
+            BorderSpacing.Right = 6
+            Caption = 'On event'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 2
+            ClientHeight = 60
+            ClientWidth = 229
+            Columns = 2
+            Items.Strings = (
+              'Insert'
+              'Update'
+              'Delete'
+            )
+            OnClick = cbOnEventClick
+            OnItemClick = cbOnEventItemClick
+            TabOrder = 2
+            Data = {
+              03000000020202
+            }
+          end
+          object cbEnabled: TCheckBox
+            AnchorSideLeft.Control = TabSheet1
+            AnchorSideTop.Control = TabSheet1
+            Left = 6
+            Height = 24
+            Top = 6
+            Width = 65
+            BorderSpacing.Around = 6
+            Caption = 'Active'
+            TabOrder = 3
+          end
+        end
+        object TabSheet2: TTabSheet
+          Caption = 'Колонки'
+          ClientHeight = 194
+          ClientWidth = 451
+          object SpeedButton1: TSpeedButton
+            AnchorSideLeft.Control = TabSheet2
+            AnchorSideLeft.Side = asrCenter
+            AnchorSideTop.Control = TabSheet2
+            Left = 211
+            Height = 22
+            Top = 12
+            Width = 23
+            BorderSpacing.Top = 6
+            BorderSpacing.Around = 6
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00216324B81D5E2006FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF002A702F38256929F7216324D9FFFFFF00FFFFFF00FFFFFF00FFFFFF0061BE
+              6DFF5DB868FF58B162FF53A95CFF4DA156FF47994FFF419149FF3B8842FF3580
+              3BFF3F8845FF59A15EFF448B49FF216324CFFFFFFF00FFFFFF00FFFFFF0065C3
+              71FFA0D7A9FF9CD5A5FF98D3A1FF94D09DFF90CE98FF8BCB93FF87C98EFF82C6
+              89FF7EC384FF7AC180FF76BE7CFF458C4AFF216324C4FFFFFF00FFFFFF0068C7
+              74FFA5DAAEFFA2D8ABFF9ED6A7FF9AD4A3FF96D29FFF93CF9AFF8ECC95FF89CA
+              90FF85C78BFF81C587FF7DC282FF4A9150FF256929C9FFFFFF00FFFFFF0068C7
+              74FF68C774FF65C371FF61BE6DFF5DB868FF58B162FF53A95CFF4DA156FF4799
+              4FFF419149FF5AA362FF559D5CFF2F7835D1FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00419149F73B8842DBFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF0047994FBB41914906FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+            }
+            OnClick = SpeedButton1Click
+          end
+          object SpeedButton2: TSpeedButton
+            AnchorSideLeft.Control = TabSheet2
+            AnchorSideLeft.Side = asrCenter
+            AnchorSideTop.Control = SpeedButton1
+            AnchorSideTop.Side = asrBottom
+            Left = 211
+            Height = 22
+            Top = 40
+            Width = 23
+            BorderSpacing.Around = 6
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF004DA1560647994FB8FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF0053A95CD94DA156F747994F38FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF005DB868CF71BE7BFF7AC183FF5BAA64FF47994FFF419149FF3B8842FF3580
+              3BFF2F7835FF2A702FFF256929FF216324FF1D5E20FFFFFFFF00FFFFFF0065C3
+              71C47BC886FF9CD5A5FF98D3A1FF94D09DFF90CE98FF8BCB93FF87C98EFF82C6
+              89FF7EC384FF7AC180FF76BE7CFF72BD78FF216324FFFFFFFF00FFFFFF0068C7
+              74C97FCC8AFFA2D8ABFF9ED6A7FF9AD4A3FF96D29FFF93CF9AFF8ECC95FF89CA
+              90FF85C78BFF81C587FF7DC282FF78C07EFF256929FFFFFFFF00FFFFFF00FFFF
+              FF0068C774D180CD8BFF7CC987FF5DB868FF58B162FF53A95CFF4DA156FF4799
+              4FFF419149FF3B8842FF35803BFF2F7835FF2A702FFFFFFFFF00FFFFFF00FFFF
+              FF00FFFFFF0068C774DB65C371F7FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF0068C7740668C774BBFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+            }
+            OnClick = SpeedButton2Click
+          end
+          object SpeedButton3: TSpeedButton
+            AnchorSideLeft.Control = TabSheet2
+            AnchorSideLeft.Side = asrCenter
+            AnchorSideTop.Control = SpeedButton2
+            AnchorSideTop.Side = asrBottom
+            Left = 211
+            Height = 22
+            Top = 80
+            Width = 23
+            BorderSpacing.Top = 12
+            BorderSpacing.Around = 6
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00286E2DFF256929FF216425FF1E60
+              22FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF002D7533FF74BD7AFF72BD78FF2265
+              26FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00337D39FF79C07EFF76BF7CFF266B
+              2BFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0039853FFF7DC282FF7AC180FF2B72
+              30FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003F8D46FF81C587FF7EC385FF317A
+              36FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0045954CFF85C78CFF82C689FF3682
+              3DFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF004A9E53FF8ACA91FF87C98EFF3C8A
+              43FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0050A659FF8ECC95FF8BCB93FF4292
+              4AFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0056AD5FFF93CF9AFF90CE98FF489A
+              50FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005BB465FF96D29FFF94D09CFF5DAC
+              65FF499C5238FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF0065C371BB62BF6EF779C683FF9AD4A3FF98D3A1FF7DC3
+              86FF4FA458F74A9E53B8FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF0068C7740666C472DB7CCA87FF9ED6A7FF9CD4A5FF73C0
+              7DFF55AC5ED950A65906FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0066C572D17ECA88FF7BC885FF5DB8
+              68CFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0067C673C965C270C4FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+            }
+            OnClick = SpeedButton3Click
+          end
+          object SpeedButton4: TSpeedButton
+            AnchorSideLeft.Control = TabSheet2
+            AnchorSideLeft.Side = asrCenter
+            AnchorSideTop.Control = SpeedButton3
+            AnchorSideTop.Side = asrBottom
+            Left = 211
+            Height = 22
+            Top = 108
+            Width = 23
+            BorderSpacing.Around = 6
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00256929C4216425C9FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF002D7533CF488F4DFF458C4AFF2265
+              26D1FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF003C8A430638833ED9519957FF79C07EFF76BF7CFF468D
+              4BFF236627DB20622306FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF0042924AB83D8C45F765AD6CFF7DC282FF7AC180FF4B92
+              50FF276D2CF7246828BBFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF0043944B384E9A55FF81C587FF7EC385FF317A
+              36FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0045954CFF85C78CFF82C689FF3682
+              3DFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF004A9E53FF8ACA91FF87C98EFF3C8A
+              43FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0050A659FF8ECC95FF8BCB93FF4292
+              4AFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0056AD5FFF93CF9AFF90CE98FF489A
+              50FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005BB465FF96D29FFF94D09CFF4EA2
+              57FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005FBB6AFF9AD4A3FF98D3A1FF53AA
+              5DFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0063C06FFF9ED6A7FF9CD4A5FF59B2
+              63FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0066C572FFA2D8ABFFA0D7A9FF5DB8
+              68FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0068C774FF67C673FF65C270FF62BE
+              6DFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+              FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+            }
+            OnClick = SpeedButton4Click
+          end
+          object ListBox1: TListBox
+            AnchorSideLeft.Control = TabSheet2
+            AnchorSideTop.Control = TabSheet2
+            AnchorSideRight.Control = SpeedButton1
+            AnchorSideBottom.Control = TabSheet2
+            AnchorSideBottom.Side = asrBottom
+            Left = 0
+            Height = 164
+            Top = 0
+            Width = 205
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            ItemHeight = 0
+            OnDblClick = SpeedButton1Click
+            ScrollWidth = 201
+            TabOrder = 0
+            TopIndex = -1
+          end
+          object ListBox2: TListBox
+            AnchorSideLeft.Control = SpeedButton1
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = TabSheet2
+            AnchorSideRight.Control = TabSheet2
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = TabSheet2
+            AnchorSideBottom.Side = asrBottom
+            Left = 240
+            Height = 164
+            Top = 0
+            Width = 205
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            ItemHeight = 0
+            OnClick = ListBox2Click
+            OnDblClick = SpeedButton2Click
+            ScrollWidth = 201
+            TabOrder = 1
+            TopIndex = -1
+          end
+        end
+        object TabSheet3: TTabSheet
+          Caption = 'Условие'
+        end
+      end
+      object cbLang: TComboBox
+        AnchorSideLeft.Control = lblLanguage
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 403
+        Height = 36
+        Top = 160
+        Width = 134
+        Anchors = [akTop, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object lblLanguage: TLabel
+        AnchorSideLeft.Control = edtCaption
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Control = cbLang
+        AnchorSideBottom.Control = cbLang
+        AnchorSideBottom.Side = asrBottom
+        Left = 336
+        Height = 20
+        Top = 176
+        Width = 61
+        Anchors = [akRight, akBottom]
+        BorderSpacing.Top = 6
+        Caption = 'Language'
+        ParentColor = False
+      end
+      object cbProcList: TComboBox
+        AnchorSideLeft.Control = rbExistFunc
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbTables
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 173
+        Height = 36
+        Top = 118
+        Width = 364
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        OnChange = cbProcListChange
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object edtNewProcName: TEdit
+        AnchorSideLeft.Control = rbCreateNewFunc
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = lblLanguage
+        Left = 168
+        Height = 37
+        Top = 160
+        Width = 162
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 3
+      end
+      object lblForTable: TLabel
+        AnchorSideTop.Control = edtCaption
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = cbTables
+        AnchorSideBottom.Side = asrBottom
+        Left = 7
+        Height = 20
+        Top = 92
+        Width = 57
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'For table'
+        ParentColor = False
+      end
+      object lblTriggerName: TLabel
+        Left = 7
+        Height = 20
+        Top = 7
+        Width = 84
+        BorderSpacing.Around = 6
+        Caption = 'Trigger name'
+        ParentColor = False
+      end
+      object edtCaption: TEdit
+        AnchorSideLeft.Control = lblTriggerName
+        AnchorSideTop.Control = lblTriggerName
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 13
+        Height = 37
+        Top = 33
+        Width = 524
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'edtCaption'
+      end
+      object cbTables: TComboBox
+        AnchorSideLeft.Control = lblForTable
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtCaption
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 70
+        Height = 36
+        Top = 76
+        Width = 467
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 5
+      end
+      object rbExistFunc: TRadioButton
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrCenter
+        Left = 7
+        Height = 24
+        Top = 124
+        Width = 160
+        BorderSpacing.Left = 6
+        Caption = 'Use existing function'
+        Checked = True
+        OnChange = rbCreateNewFuncChange
+        TabOrder = 6
+        TabStop = True
+      end
+      object rbCreateNewFunc: TRadioButton
+        AnchorSideTop.Control = edtNewProcName
+        AnchorSideTop.Side = asrCenter
+        Left = 7
+        Height = 24
+        Top = 166
+        Width = 155
+        BorderSpacing.Left = 6
+        Caption = 'Create new function'
+        OnChange = rbCreateNewFuncChange
+        TabOrder = 7
+      end
+      object Splitter2: TSplitter
+        Left = 543
+        Height = 198
+        Top = 0
+        Width = 5
+        Align = alRight
+        ResizeAnchor = akRight
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'Local variables'
+    end
+  end
+  object Splitter1: TSplitter[1]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 232
+    Width = 1013
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+end

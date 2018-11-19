@@ -1,0 +1,60 @@
+inherited otMySQLTriggerTemplateFrame: TotMySQLTriggerTemplateFrame
+  Width = 539
+  ClientWidth = 539
+  DesignLeft = 766
+  DesignTop = 408
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 77
+    Top = 0
+    Width = 539
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 77
+    ClientWidth = 539
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 20
+      Top = 7
+      Width = 145
+      BorderSpacing.Around = 6
+      Caption = 'Trigger name template'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Label2
+      Left = 13
+      Height = 37
+      Top = 33
+      Width = 240
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 0
+      Text = 'Edit1'
+    end
+    object Label2: TLabel
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 259
+      Height = 60
+      Top = 5
+      Width = 273
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      Caption = 'Avaliable tags:'#10'%TABLE_NAME% - Table name'#10'%TRIGGER_TYPE% - Trigger type (BI, AUD)'
+      ParentColor = False
+    end
+  end
+  object SynSQLSyn1: TSynSQLSyn[1]
+    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
+    SQLDialect = sqlMySQL
+    Left = 244
+    Top = 36
+  end
+end

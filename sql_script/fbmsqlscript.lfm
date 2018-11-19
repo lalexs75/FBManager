@@ -1,0 +1,337 @@
+object FBMSqlScripForm: TFBMSqlScripForm
+  Left = 523
+  Height = 711
+  Top = 104
+  Width = 759
+  ActiveControl = ToolPanel1
+  Caption = 'Script Executive'
+  ClientHeight = 711
+  ClientWidth = 759
+  Icon.Data = {
+    9605000000000100010012120000010020008005000016000000280000001200
+    0000240000000100200000000000100500006400000064000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    00000000000000000000000000000000000000000000C6A5A5FF844242FF8463
+    42FF846342FF846342FF844242FF844242FF844242FF846342FF000000000000
+    000000000000000000000000000000000000000000000000000000000000C6A5
+    A5FFFFFFFFFFFFFFFFFFFFFFFFFFF7FFFFFFF7FFFFFFF7FFFFFFF7FFFFFF8463
+    42FF00000000000000000000000084A5C6FF0021A5FF84A5C6FF000000000000
+    000000000000C6A5A5FFFFFFFFFFC6C6C6FFC6C6A5FFF7FFFFFFC6C6A5FFC6C6
+    A5FFF7FFFFFF846342FF0000000000000000000000008484E7FF0042E7FF0021
+    A5FF000000000000000000000000C6C6A5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    FFFFF7FFFFFFF7FFFFFFF7FFFFFF846342FF000000000000000000000000C6C6
+    C6FF8484E7FFC6C6C6FF000000000000000000000000C6C6A5FFFFFFFFFFC6DE
+    C6FFF7CEA7FFFFFFFFFFC6C6A5FFC6C6A5FFF7FFFFFF846342FF000000000000
+    0000000000000000000084A5C6FF00000000000000000000000000000000C6C6
+    C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FFFFFF8463
+    42FF000000000000000000000000000000004263C6FF00000000000000000000
+    000000000000C6C6C6FFFFFFFFFFC6DEC6FFC6DEC6FFFFFFFFFFC6C6C6FFC6C6
+    C6FFF7FFFFFF846342FF00000000000000000000000084A5C6FF0042E7FF8484
+    A5FF000000000000000000000000C6C6C6FFFFFFFFFFFFFFFFFFFFFFFFFF84E7
+    E7FF84E7E7FF84E7E7FF42C6E7FF84E7E7FF84E7E7FFC6DEC6FF000000004242
+    C6FF0042E7FF0042A5FF000000000000000000000000F7CEA7FFF7CEA7FFF7CE
+    A7FFC6A584FFA5A5A5FF42C6E7FF84E7E7FF84C6E7FF84E7E7FF42C6E7FF84C6
+    C6FFC6A5E7FF4284E7FF0042E7FF0042E7FFC6C6C6FF0000000000000000F7CE
+    A7FFF7CEA7FFF7CEA7FFF7CEA7FF84E7E7FF84E7E7FFF7FFFFFFC6DEC6FFF7FF
+    FFFF84E7E7FF84E7E7FF8484C6FF4284E7FF0042E7FF0042E7FF8484A5FF0000
+    000000000000F7CEA7FFF7CEA7FFF7CEA7FFC6A584FF42A5E7FF42C6E7FFC6DE
+    C6FFF7FFFFFFC6DEC6FF42C6E7FF42C6E7FF4263E7FF84A5E7FF0063E7FF0042
+    E7FF0042A5FF00000000000000000000000000000000000000000000000084E7
+    E7FF84E7E7FFF7FFFFFFC6DEC6FFF7FFFFFF84E7E7FF84E7E7FF8484E7FF84A5
+    E7FF4263E7FF0063E7FF0042C6FF000000000000000000000000000000000000
+    00000000000084E7E7FF42C6E7FF84E7E7FF84C6E7FF84E7E7FF42C6E7FF84E7
+    E7FF8484E7FF84A5E7FF84A5E7FF8484E7FF4263A5FF00000000000000000000
+    000000000000000000000000000084C6E7FF84E7E7FF84E7E7FF42C6E7FF84E7
+    E7FF84E7E7FF84C6E7FF000000008484E7FF8484E7FF4263E7FF000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000
+  }
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  LCLVersion = '2.1.0.0'
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 759
+    Items = <    
+      item
+        Action = fileOpen
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 96
+        DropDownMenu = PopupMenu2
+        ShowCaption = True
+        ButtonStyle = tbrDropDownExtra
+      end    
+      item
+        Action = fileSave
+        Visible = True
+        Left = 101
+        Height = 21
+        Top = 5
+        Width = 77
+        ShowCaption = True
+      end    
+      item
+        Action = scriptRun
+        Visible = True
+        Left = 178
+        Height = 21
+        Top = 5
+        Width = 50
+        ShowCaption = True
+      end    
+      item
+        Action = scriptStop
+        Visible = True
+        Left = 228
+        Height = 21
+        Top = 5
+        Width = 56
+        ShowCaption = True
+      end    
+      item
+        Action = dbConnection
+        Visible = True
+        Left = 284
+        Height = 21
+        Top = 5
+        Width = 42
+        DropDownMenu = PopupMenu1
+        ShowCaption = True
+        ButtonStyle = tbrDropDown
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns, tpCustomizable, tpGlyphPopup, tpCaptionPopup]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 759
+    TabOrder = 0
+    object CheckBox1: TCheckBox
+      AnchorSideTop.Control = ToolPanel1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ToolPanel1
+      AnchorSideRight.Side = asrBottom
+      Left = 615
+      Height = 23
+      Top = 4
+      Width = 133
+      Action = vShowObjTree
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      TabOrder = 0
+    end
+    object ProgressBar1: TProgressBar
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ToolPanel1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ToolPanel1
+      AnchorSideRight.Side = asrBottom
+      Left = 380
+      Height = 20
+      Top = 5
+      Width = 374
+      Anchors = [akTop, akLeft, akRight]
+      Min = 1
+      Position = 40
+      Smooth = True
+      TabOrder = 1
+      Visible = False
+      BarShowText = True
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = ToolPanel1
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = ToolPanel1
+      Left = 379
+      Height = 1
+      Top = 5
+      Width = 1
+      ParentColor = False
+    end
+  end
+  object Memo1: TMemo
+    Left = 0
+    Height = 90
+    Top = 602
+    Width = 759
+    Align = alBottom
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 1
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 597
+    Width = 759
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object TreeView1: TTreeView
+    Left = 0
+    Height = 566
+    Top = 31
+    Width = 121
+    Align = alLeft
+    ExpandSignSize = 16
+    Images = fbManagerMainForm.ImageListNormal
+    PopupMenu = PopupMenu3
+    ReadOnly = True
+    TabOrder = 3
+    ToolTips = False
+    OnClick = TreeView1Click
+    OnDeletion = TreeView1Deletion
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoThemedDraw]
+  end
+  object Splitter2: TSplitter
+    Left = 121
+    Height = 566
+    Top = 31
+    Width = 5
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 19
+    Top = 692
+    Width = 759
+    Panels = <>
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 144
+    Top = 264
+    object fileOpen: TAction
+      Category = 'File'
+      Caption = 'Open file'
+      ImageIndex = 43
+      OnExecute = fileOpenExecute
+      ShortCut = 16463
+    end
+    object scriptRun: TAction
+      Category = 'Script'
+      Caption = 'Run'
+      ImageIndex = 16
+      OnExecute = scriptRunExecute
+    end
+    object scriptStop: TAction
+      Category = 'Script'
+      Caption = 'Stop'
+      ImageIndex = 18
+      OnExecute = scriptStopExecute
+    end
+    object fileSave: TAction
+      Category = 'File'
+      Caption = 'Save file'
+      ImageIndex = 11
+      OnExecute = fileSaveExecute
+      ShortCut = 16467
+    end
+    object fileSaveAs: TAction
+      Category = 'File'
+      Caption = 'Save as...'
+      ImageIndex = 58
+      OnExecute = fileSaveAsExecute
+      ShortCut = 24659
+    end
+    object dbConnection: TAction
+      Category = 'File'
+      Caption = 'db'
+      ImageIndex = 6
+    end
+    object vShowObjTree: TAction
+      Category = 'View'
+      Caption = 'Show objects tree'
+      OnExecute = vShowObjTreeExecute
+    end
+    object objTreeCommentCmd: TAction
+      Category = 'View'
+      Caption = 'objTreeCommentCmd'
+      OnExecute = objTreeCommentCmdExecute
+    end
+    object objTreeDeleteCmd: TAction
+      Category = 'View'
+      Caption = 'objTreeDeleteCmd'
+      OnExecute = objTreeDeleteCmdExecute
+    end
+    object objTreeShowDML: TAction
+      Category = 'View'
+      Caption = 'objTreeShowDML'
+      OnExecute = objTreeShowDMLExecute
+    end
+    object objTreeRefresh: TAction
+      Category = 'View'
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = objTreeRefreshExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 168
+    Top = 53
+    object MenuItem1: TMenuItem
+      Action = fileOpen
+      OnClick = fileOpenExecute
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'New Item2'
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'New Item3'
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = Timer1Timer
+    Left = 256
+    Top = 128
+  end
+  object PopupMenu3: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 32
+    Top = 248
+    object MenuItem8: TMenuItem
+      Action = objTreeCommentCmd
+    end
+    object MenuItem9: TMenuItem
+      Action = objTreeDeleteCmd
+    end
+    object MenuItem10: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem11: TMenuItem
+      Action = objTreeShowDML
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = objTreeRefresh
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 55
+    Top = 55
+  end
+end

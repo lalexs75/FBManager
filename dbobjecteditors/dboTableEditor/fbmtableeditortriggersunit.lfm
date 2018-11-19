@@ -1,0 +1,170 @@
+inherited fbmTableEditorTriggersFrame: TfbmTableEditorTriggersFrame
+  Height = 435
+  Width = 550
+  ClientHeight = 435
+  ClientWidth = 550
+  OnResize = FrameResize
+  DesignLeft = 819
+  DesignTop = 465
+  object TreeView1: TTreeView[0]
+    Left = 0
+    Height = 170
+    Top = 30
+    Width = 550
+    Align = alClient
+    ExpandSignSize = 16
+    Images = fbManagerMainForm.ImageList2
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 0
+    OnAdvancedCustomDrawItem = TreeView1AdvancedCustomDrawItem
+    OnClick = TreeView1Click
+    OnDblClick = TreeView1DblClick
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
+  end
+  object HeaderControl1: THeaderControl[1]
+    Left = 0
+    Height = 30
+    Top = 0
+    Width = 550
+    DragReorder = False
+    Sections = <    
+      item
+        Alignment = taLeftJustify
+        Text = 'Triggers'
+        Width = 300
+        Visible = True
+      end    
+      item
+        Alignment = taCenter
+        Text = 'Active'
+        Width = 60
+        Visible = True
+      end    
+      item
+        Alignment = taLeftJustify
+        Text = 'Description'
+        Width = 30
+        Visible = True
+      end>
+    OnSectionResize = HeaderControl1SectionResize
+    OnSectionTrack = HeaderControl1SectionTrack
+    Align = alTop
+  end
+  object Panel1: TPanel[2]
+    Left = 0
+    Height = 230
+    Top = 205
+    Width = 550
+    Align = alBottom
+    TabOrder = 2
+  end
+  object Splitter1: TSplitter[3]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 200
+    Width = 550
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 352
+    Top = 88
+    object trgDeActivate: TAction
+      Tag = 1
+      Category = 'Manage'
+      Caption = 'Deactivate trigger'
+      ImageIndex = 69
+      OnExecute = trgDeActivateExecute
+    end
+    object trgActivate: TAction
+      Category = 'Manage'
+      Caption = 'Activate trigger'
+      ImageIndex = 71
+      OnExecute = trgDeActivateExecute
+    end
+    object allTriggerActivate: TAction
+      Tag = 1
+      Category = 'All triggers'
+      Caption = 'Activate all triggers'
+      ImageIndex = 72
+      OnExecute = allTriggerActivateExecute
+    end
+    object allTriggerDeactivate: TAction
+      Category = 'All triggers'
+      Caption = 'Deactivate all trigger'
+      ImageIndex = 70
+      OnExecute = allTriggerActivateExecute
+    end
+    object allTriggersRecompile: TAction
+      Category = 'All triggers'
+      Caption = 'Recompile all triggers'
+    end
+    object edtTriggerNew: TAction
+      Category = 'Editor'
+      Caption = 'New trigger'
+      ImageIndex = 12
+      OnExecute = edtTriggerNewExecute
+    end
+    object edtTriggerEdit: TAction
+      Category = 'Editor'
+      Caption = 'Modifi trigger'
+      ImageIndex = 62
+      OnExecute = edtTriggerEditExecute
+    end
+    object edtTriggerDelete: TAction
+      Category = 'Editor'
+      Caption = 'Delete trigger'
+      ImageIndex = 13
+      OnExecute = edtTriggerDeleteExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 296
+    Top = 88
+    object MenuItem1: TMenuItem
+      Action = edtTriggerNew
+      OnClick = edtTriggerNewExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = edtTriggerEdit
+      OnClick = edtTriggerEditExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = edtTriggerDelete
+      OnClick = edtTriggerDeleteExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = trgActivate
+      OnClick = trgDeActivateExecute
+    end
+    object MenuItem7: TMenuItem
+      Action = trgDeActivate
+      OnClick = trgDeActivateExecute
+    end
+    object MenuItem6: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem8: TMenuItem
+      Action = allTriggerActivate
+      OnClick = allTriggerActivateExecute
+    end
+    object MenuItem9: TMenuItem
+      Action = allTriggerDeactivate
+      OnClick = allTriggerActivateExecute
+    end
+    object MenuItem10: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem11: TMenuItem
+      Action = allTriggersRecompile
+    end
+  end
+end

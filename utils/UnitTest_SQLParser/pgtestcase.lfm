@@ -1,0 +1,3211 @@
+object PGSQLParserData: TPGSQLParserData
+  OldCreateOrder = False
+  Height = 954
+  HorizontalOffset = 441
+  VerticalOffset = 21
+  Width = 1016
+  object sComment: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Comment1'
+        Lines.Strings = (
+          'COMMENT ON TABLE mytable IS ''Это моя таблица.'';'
+        )
+      end    
+      item
+        Caption = 'Comment2'
+        Lines.Strings = (
+          'COMMENT ON TABLE mytable IS NULL;'
+        )
+      end    
+      item
+        Caption = 'Comment3'
+        Lines.Strings = (
+          'COMMENT ON ACCESS METHOD rtree IS ''Метод доступа R-Tree'';'
+        )
+      end    
+      item
+        Caption = 'Comment4'
+        Lines.Strings = (
+          'COMMENT ON AGGREGATE my_aggregate(double precision) IS ''Вычисляет дисперсию выборки'';'
+        )
+      end    
+      item
+        Caption = 'Comment5'
+        Lines.Strings = (
+          'COMMENT ON CAST (text AS int4) IS ''Выполняет приведение строк к int4'';'
+        )
+      end    
+      item
+        Caption = 'Comment6'
+        Lines.Strings = (
+          'COMMENT ON COLLATION "fr_CA" IS ''Канадский французский'';'
+        )
+      end    
+      item
+        Caption = 'Comment7'
+        Lines.Strings = (
+          'COMMENT ON COLUMN my_table.my_column IS ''Порядковый номер сотрудника'';'
+        )
+      end    
+      item
+        Caption = 'Comment8'
+        Lines.Strings = (
+          'COMMENT ON CONVERSION my_conv IS ''Перекодировка в UTF8'';'
+        )
+      end    
+      item
+        Caption = 'Comment9'
+        Lines.Strings = (
+          'COMMENT ON CONSTRAINT bar_col_cons ON bar IS ''Ограничение столбца col'';'
+        )
+      end    
+      item
+        Caption = 'Comment10'
+        Lines.Strings = (
+          'COMMENT ON CONSTRAINT dom_col_constr ON DOMAIN dom IS ''Ограничение col для домена'';'
+        )
+      end    
+      item
+        Caption = 'Comment11'
+        Lines.Strings = (
+          'COMMENT ON DATABASE my_database IS ''База данных разработчиков'';'
+        )
+      end    
+      item
+        Caption = 'Comment12'
+        Lines.Strings = (
+          'COMMENT ON DOMAIN my_domain IS ''Домен почтового адреса'';'
+        )
+      end    
+      item
+        Caption = 'Comment13'
+        Lines.Strings = (
+          'COMMENT ON EXTENSION hstore IS ''Реализует тип данных hstore'';'
+        )
+      end    
+      item
+        Caption = 'Comment14'
+        Lines.Strings = (
+          'COMMENT ON FOREIGN DATA WRAPPER mywrapper IS ''Моя обёртка сторонних данных'';'
+        )
+      end    
+      item
+        Caption = 'Comment15'
+        Lines.Strings = (
+          'COMMENT ON FOREIGN TABLE my_foreign_table IS ''Информация о сотрудниках в другой БД'';'
+        )
+      end    
+      item
+        Caption = 'Comment16'
+        Lines.Strings = (
+          'COMMENT ON FUNCTION my_function( timestamp) IS ''Возвращает число римскими цифрами'';'
+        )
+      end    
+      item
+        Caption = 'Comment17'
+        Lines.Strings = (
+          'COMMENT ON INDEX my_index IS ''Обеспечивает уникальность по коду сотрудника'';'
+        )
+      end    
+      item
+        Caption = 'Comment18'
+        Lines.Strings = (
+          'COMMENT ON LANGUAGE plpython IS ''Поддержка Python для хранимых процедур'';'
+        )
+      end    
+      item
+        Caption = 'Comment19'
+        Lines.Strings = (
+          'COMMENT ON LARGE OBJECT 346344 IS ''Документ планирования'';'
+        )
+      end    
+      item
+        Caption = 'Comment20'
+        Lines.Strings = (
+          'COMMENT ON MATERIALIZED VIEW my_matview IS ''Сводка истории заказов'';'
+        )
+      end    
+      item
+        Caption = 'Comment21'
+        Lines.Strings = (
+          'COMMENT ON OPERATOR ^ (text, text) IS ''Вычисляет пересечение двух текстов'';'
+        )
+      end    
+      item
+        Caption = 'Comment22'
+        Lines.Strings = (
+          'COMMENT ON OPERATOR - (NONE, integer) IS ''Унарный минус'';'
+        )
+      end    
+      item
+        Caption = 'Comment23'
+        Lines.Strings = (
+          'COMMENT ON OPERATOR CLASS int4ops USING btree IS ''Операторы для четырёхбайтовых целых (для B-деревьев)'';'
+        )
+      end    
+      item
+        Caption = 'Comment24'
+        Lines.Strings = (
+          'COMMENT ON OPERATOR FAMILY integer_ops USING btree IS ''Все целочисленные операторы (для B-деревьев)'';'
+        )
+      end    
+      item
+        Caption = 'Comment25'
+        Lines.Strings = (
+          'COMMENT ON POLICY my_policy ON mytable IS ''Фильтр строк по пользователям'';'
+        )
+      end    
+      item
+        Caption = 'Comment26'
+        Lines.Strings = (
+          'COMMENT ON ROLE my_role IS ''Административная группа для таблиц бухгалтерии'';'
+        )
+      end    
+      item
+        Caption = 'Comment27'
+        Lines.Strings = (
+          'COMMENT ON RULE my_rule ON my_table IS ''Протоколирует изменения в записях сотрудников'';'
+        )
+      end    
+      item
+        Caption = 'Comment28'
+        Lines.Strings = (
+          'COMMENT ON SCHEMA my_schema IS ''Данные отдела'';'
+        )
+      end    
+      item
+        Caption = 'Comment29'
+        Lines.Strings = (
+          'COMMENT ON SEQUENCE my_sequence IS ''Предназначена для генерации первичных ключей'';'
+        )
+      end    
+      item
+        Caption = 'Comment30'
+        Lines.Strings = (
+          'COMMENT ON SERVER myserver IS ''Мой сторонний сервер'';'
+        )
+      end    
+      item
+        Caption = 'Comment31'
+        Lines.Strings = (
+          'COMMENT ON TABLE my_schema.my_table IS ''Данные сотрудников'';'
+        )
+      end    
+      item
+        Caption = 'Comment32'
+        Lines.Strings = (
+          'COMMENT ON TABLESPACE my_tablespace IS ''Табличное пространство для индексов'';'
+        )
+      end    
+      item
+        Caption = 'Comment33'
+        Lines.Strings = (
+          'COMMENT ON TEXT SEARCH CONFIGURATION my_config IS ''Фильтрация специальных слов'';'
+        )
+      end    
+      item
+        Caption = 'Comment34'
+        Lines.Strings = (
+          'COMMENT ON TEXT SEARCH DICTIONARY swedish IS ''Стеммер Snowball для шведского языка'';'
+        )
+      end    
+      item
+        Caption = 'Comment35'
+        Lines.Strings = (
+          'COMMENT ON TEXT SEARCH PARSER my_parser IS ''Разделяет текст на слова'';'
+        )
+      end    
+      item
+        Caption = 'Comment36'
+        Lines.Strings = (
+          'COMMENT ON TEXT SEARCH TEMPLATE snowball IS ''Стеммер Snowball'';'
+        )
+      end    
+      item
+        Caption = 'Comment37'
+        Lines.Strings = (
+          'COMMENT ON TRANSFORM FOR hstore LANGUAGE plpythonu IS ''Трансформирует данные из hstore в словарь языка Python'';'
+        )
+      end    
+      item
+        Caption = 'Comment38'
+        Lines.Strings = (
+          'COMMENT ON TRIGGER my_trigger ON my_table IS ''Обеспечивает ссылочную целостность'';'
+        )
+      end    
+      item
+        Caption = 'Comment39'
+        Lines.Strings = (
+          'COMMENT ON TYPE complex IS ''Тип данных комплексных чисел'';'
+        )
+      end    
+      item
+        Caption = 'Comment40'
+        Lines.Strings = (
+          'COMMENT ON VIEW my_view IS ''Представление расходов по отделам'';'
+        )
+      end    
+      item
+        Caption = 'Comment41'
+        Lines.Strings = (
+          'COMMENT ON ROLE test1 IS ''1231'';'
+        )
+      end>
+    Left = 24
+    Top = 10
+  end
+  object sSimpleCmd: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Load1'
+        Lines.Strings = (
+          'LOAD ''имя_файла'';'
+        )
+      end    
+      item
+        Caption = 'Abort1'
+        Lines.Strings = (
+          'ABORT;'
+        )
+      end    
+      item
+        Caption = 'Abort2'
+        Lines.Strings = (
+          'ABORT WORK;'
+        )
+      end    
+      item
+        Caption = 'Abort3'
+        Lines.Strings = (
+          'ABORT TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'Close1'
+        Lines.Strings = (
+          'CLOSE liahona;'
+        )
+      end    
+      item
+        Caption = 'Close2'
+        Lines.Strings = (
+          'CLOSE ALL;'
+        )
+      end    
+      item
+        Caption = 'Commit1'
+        Lines.Strings = (
+          'COMMIT;'
+        )
+      end    
+      item
+        Caption = 'Commit2'
+        Lines.Strings = (
+          'COMMIT WORK;'
+        )
+      end    
+      item
+        Caption = 'Commit3'
+        Lines.Strings = (
+          'COMMIT TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'Begin1'
+        Lines.Strings = (
+          'BEGIN;'
+        )
+      end    
+      item
+        Caption = 'Begin2'
+        Lines.Strings = (
+          'BEGIN TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'Begin3'
+        Lines.Strings = (
+          'BEGIN WORK;'
+        )
+      end    
+      item
+        Caption = 'CommitPrepared1'
+        Lines.Strings = (
+          'COMMIT PREPARED ''foobar'';'
+        )
+      end    
+      item
+        Caption = 'Copy1'
+        Lines.Strings = (
+          'COPY country TO STDOUT (DELIMITER ''|'');'
+        )
+      end    
+      item
+        Caption = 'Copy2'
+        Lines.Strings = (
+          'COPY country FROM ''/usr1/proj/bray/sql/country_data'';'
+        )
+      end    
+      item
+        Caption = 'Copy3'
+        Lines.Strings = (
+          'COPY (SELECT * FROM country WHERE country_name LIKE ''A%'') TO ''/usr1/proj/bray/sql/a_list_countries.copy'';'
+        )
+      end    
+      item
+        Caption = 'Copy4'
+        Lines.Strings = (
+          'COPY country TO PROGRAM ''gzip > /usr1/proj/bray/sql/country_data.gz'';'
+        )
+      end    
+      item
+        Caption = 'Discard1'
+        Lines.Strings = (
+          'DISCARD ALL;'
+        )
+      end    
+      item
+        Caption = 'Discard2'
+        Lines.Strings = (
+          'DISCARD PLANS;'
+        )
+      end    
+      item
+        Caption = 'Discard3'
+        Lines.Strings = (
+          'DISCARD SEQUENCES;'
+        )
+      end    
+      item
+        Caption = 'Discard4'
+        Lines.Strings = (
+          'DISCARD TEMPORARY;'
+        )
+      end    
+      item
+        Caption = 'Vacuum1'
+        Lines.Strings = (
+          'VACUUM (VERBOSE, ANALYZE) onek;'
+        )
+      end    
+      item
+        Caption = 'Analyze1'
+        Lines.Strings = (
+          'ANALYZE VERBOSE myschema.mytable;'
+        )
+      end    
+      item
+        Caption = 'Cluster1'
+        Lines.Strings = (
+          'CLUSTER employees USING employees_ind;'
+        )
+      end    
+      item
+        Caption = 'Cluster2'
+        Lines.Strings = (
+          'CLUSTER employees;'
+        )
+      end    
+      item
+        Caption = 'Cluster3'
+        Lines.Strings = (
+          'CLUSTER;'
+        )
+      end    
+      item
+        Caption = 'Checkpoint1'
+        Lines.Strings = (
+          'CHECKPOINT;'
+        )
+      end>
+    Left = 24
+    Top = 80
+  end
+  object sUserAcess: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Grant1'
+        Lines.Strings = (
+          'GRANT INSERT ON films TO PUBLIC;'
+        )
+      end    
+      item
+        Caption = 'Grant2'
+        Lines.Strings = (
+          'GRANT ALL PRIVILEGES ON kinds TO manuel;'
+        )
+      end    
+      item
+        Caption = 'Grant3'
+        Lines.Strings = (
+          'GRANT admins TO joe;'
+        )
+      end    
+      item
+        Caption = 'AlterRole1'
+        Lines.Strings = (
+          'ALTER ROLE davide WITH PASSWORD ''hu8jmn3'';'
+        )
+      end    
+      item
+        Caption = 'AlterRole2'
+        Lines.Strings = (
+          'ALTER ROLE davide WITH PASSWORD NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterRole3'
+        Lines.Strings = (
+          'ALTER ROLE chris VALID UNTIL ''May 4 12:00:00 2015 +1'';'
+        )
+      end    
+      item
+        Caption = 'AlterRole4'
+        Lines.Strings = (
+          'ALTER ROLE fred VALID UNTIL ''infinity'';'
+        )
+      end    
+      item
+        Caption = 'AlterRole5'
+        Lines.Strings = (
+          'ALTER ROLE miriam CREATEDB CREATEROLE;'
+        )
+      end    
+      item
+        Caption = 'AlterRole6'
+        Lines.Strings = (
+          'ALTER ROLE worker_bee SET maintenance_work_mem = 100000;'
+        )
+      end    
+      item
+        Caption = 'AlterRole7'
+        Lines.Strings = (
+          'ALTER ROLE fred IN DATABASE devel SET client_min_messages = DEBUG;'
+        )
+      end    
+      item
+        Caption = 'AlterUser1'
+        Lines.Strings = (
+          'ALTER USER test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterUser2'
+        Lines.Strings = (
+          'ALTER USER ALL IN DATABASE test1 RESET ALL;'
+        )
+      end    
+      item
+        Caption = 'CreateUser1'
+        Lines.Strings = (
+          'CREATE USER test1;'
+        )
+      end    
+      item
+        Caption = 'DropUser1'
+        Lines.Strings = (
+          'DROP USER IF EXISTS test1, test2, test3;'
+        )
+      end    
+      item
+        Caption = 'CreateGroup1'
+        Lines.Strings = (
+          'CREATE GROUP group_test2 NOLOGIN INHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION CONNECTION LIMIT -1;'
+        )
+      end    
+      item
+        Caption = 'CreateRole1'
+        Lines.Strings = (
+          'CREATE ROLE alexs LOGIN INHERIT SUPERUSER CREATEDB CREATEROLE NOCREATEUSER REPLICATION PASSWORD ''123'' VALID UNTIL ''31.12.1899'' CONNECTION LIMIT -1;'
+        )
+      end    
+      item
+        Caption = 'DropRole1'
+        Lines.Strings = (
+          'DROP ROLE jonathan;'
+        )
+      end    
+      item
+        Caption = 'ReassignOwned1'
+        Lines.Strings = (
+          'REASSIGN OWNED BY doomed_role TO successor_role;'
+        )
+      end    
+      item
+        Caption = 'Revoke1'
+        Lines.Strings = (
+          'REVOKE SELECT, UPDATE, DELETE, REFERENCES ON TABLE test1 FROM olga, olga1;'
+        )
+      end    
+      item
+        Caption = 'Revoke2'
+        Lines.Strings = (
+          'REVOKE SELECT(id), UPDATE(test1_code, test1_name), DELETE, REFERENCES(test1_id) ON TABLE test1 FROM olga, olga1;'
+        )
+      end    
+      item
+        Caption = 'Revoke3'
+        Lines.Strings = (
+          'REVOKE INSERT ON films FROM PUBLIC;'
+        )
+      end    
+      item
+        Caption = 'Revoke4'
+        Lines.Strings = (
+          'REVOKE ALL PRIVILEGES ON kinds FROM manuel;'
+        )
+      end    
+      item
+        Caption = 'Revoke5'
+        Lines.Strings = (
+          'REVOKE admins FROM joe;'
+        )
+      end    
+      item
+        Caption = 'AlterDefaultPrivileges1'
+        Lines.Strings = (
+          'ALTER DEFAULT PRIVILEGES IN SCHEMA myschema GRANT SELECT ON TABLES TO PUBLIC;'
+        )
+      end    
+      item
+        Caption = 'AlterDefaultPrivileges2'
+        Lines.Strings = (
+          'ALTER DEFAULT PRIVILEGES IN SCHEMA myschema GRANT INSERT ON TABLES TO webuser;'
+        )
+      end    
+      item
+        Caption = 'AlterDefaultPrivileges3'
+        Lines.Strings = (
+          'ALTER DEFAULT PRIVILEGES IN SCHEMA myschema REVOKE SELECT ON TABLES FROM PUBLIC;'
+        )
+      end    
+      item
+        Caption = 'AlterDefaultPrivileges4'
+        Lines.Strings = (
+          'ALTER DEFAULT PRIVILEGES IN SCHEMA myschema REVOKE INSERT ON TABLES FROM webuser;'
+        )
+      end    
+      item
+        Caption = 'AlterDefaultPrivileges5'
+        Lines.Strings = (
+          'ALTER DEFAULT PRIVILEGES FOR ROLE admin REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy1'
+        Lines.Strings = (
+          'CREATE POLICY account_managers ON accounts TO managers USING (manager = current_user);'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy2'
+        Lines.Strings = (
+          'CREATE POLICY user_policy ON users USING (user_name = current_user);'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy3'
+        Lines.Strings = (
+          'CREATE POLICY user_sel_policy ON users FOR SELECT USING (true);'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy4'
+        Lines.Strings = (
+          'CREATE POLICY admin_all ON passwd TO admin USING (true) WITH CHECK (true);'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy5'
+        Lines.Strings = (
+          'CREATE POLICY all_view ON passwd FOR SELECT USING (true);'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy6'
+        Lines.Strings = (
+          'CREATE POLICY user_mod ON passwd FOR UPDATE'
+          '  USING (current_user = user_name)'
+          '  WITH CHECK ('
+          '    current_user = user_name AND'
+          '    shell IN (''/bin/bash'',''/bin/sh'',''/bin/dash'''',''/bin/zsh'',''/bin/tcsh'')'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreatePolicy7'
+        Lines.Strings = (
+          'CREATE POLICY admin_local_only ON passwd AS RESTRICTIVE TO admin USING (pg_catalog.inet_client_addr() IS NULL);'
+        )
+      end    
+      item
+        Caption = 'AlterGroup1'
+        Lines.Strings = (
+          'ALTER GROUP staff ADD USER karl, john;'
+        )
+      end    
+      item
+        Caption = 'AlterGroup2'
+        Lines.Strings = (
+          'ALTER GROUP workers DROP USER beth;'
+        )
+      end    
+      item
+        Caption = 'CreateGroup1'
+        Lines.Strings = (
+          'CREATE GROUP group1;'
+        )
+      end    
+      item
+        Caption = 'DropGroup1'
+        Lines.Strings = (
+          'DROP GROUP IF EXISTS group1, grop2;'
+        )
+      end    
+      item
+        Caption = 'DropOwned1'
+        Lines.Strings = (
+          'DROP OWNED BY test1, test2 CASCADE;'
+        )
+      end    
+      item
+        Caption = 'DropPolicy1'
+        Lines.Strings = (
+          'DROP POLICY p1 ON my_table;'
+        )
+      end    
+      item
+        Caption = 'DropUserMapping1'
+        Lines.Strings = (
+          'DROP USER MAPPING IF EXISTS FOR bob SERVER foo;'
+        )
+      end    
+      item
+        Caption = 'CreateUserMapping1'
+        Lines.Strings = (
+          'CREATE USER MAPPING FOR bob SERVER foo OPTIONS (user ''bob'', password ''secret'');'
+        )
+      end    
+      item
+        Caption = 'AlterUserMapping1'
+        Lines.Strings = (
+          'ALTER USER MAPPING FOR bob SERVER foo OPTIONS (SET password ''public'');'
+        )
+      end    
+      item
+        Caption = 'AlterPolicy1'
+        Lines.Strings = (
+          'ALTER POLICY name ON table_name RENAME TO table_name_new'
+        )
+      end    
+      item
+        Caption = 'SetSessionAuthorization1'
+        Lines.Strings = (
+          'SET SESSION AUTHORIZATION ''paul'';'
+        )
+      end    
+      item
+        Caption = 'SetRole1'
+        Lines.Strings = (
+          'SET ROLE ''paul'';'
+        )
+      end    
+      item
+        Caption = 'SecurityLabel1'
+        Lines.Strings = (
+          'SECURITY LABEL FOR selinux ON TABLE mytable IS ''system_u:object_r:sepgsql_table_t:s0'';'
+        )
+      end>
+    Left = 104
+    Top = 8
+  end
+  object sDML: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Insert1'
+        Lines.Strings = (
+          'INSERT INTO films VALUES (''UA502'', ''Bananas'', 105, ''1971-07-13'', ''Comedy'', ''82 minutes'');'
+        )
+      end    
+      item
+        Caption = 'Insert2'
+        Lines.Strings = (
+          'INSERT INTO films (code, title, did, date_prod, kind) VALUES (''T_601'', ''Yojimbo'', 106, ''1961-06-16'', ''Drama'');'
+        )
+      end    
+      item
+        Caption = 'Insert3'
+        Lines.Strings = (
+          'INSERT INTO films VALUES (''UA502'', ''Bananas'', 105, DEFAULT, ''Comedy'', ''82 minutes'');'
+        )
+      end    
+      item
+        Caption = 'Insert4'
+        Lines.Strings = (
+          'INSERT INTO films (code, title, did, date_prod, kind) VALUES (''T_601'', ''Yojimbo'', 106, DEFAULT, ''Drama'');'
+        )
+      end    
+      item
+        Caption = 'Insert5'
+        Lines.Strings = (
+          'INSERT INTO films DEFAULT VALUES;'
+        )
+      end    
+      item
+        Caption = 'Insert6'
+        Lines.Strings = (
+          'INSERT INTO films (code, title, did, date_prod, kind) VALUES (''B6717'', ''Tampopo'', 110, ''1985-02-10'', ''Comedy''), (''HG120'', ''The Dinner Game'', 140, DEFAULT, ''Comedy'');'
+        )
+      end    
+      item
+        Caption = 'Insert7'
+        Lines.Strings = (
+          'INSERT INTO films SELECT * FROM tmp_films WHERE date_prod < ''2004-05-07'';'
+        )
+      end    
+      item
+        Caption = 'Insert8'
+        Lines.Strings = (
+          'INSERT INTO tictactoe (game, board[1:3][1:3]) VALUES (1, ''{{'','' , },{" "," "," "},{" "," "," "}}'''');'
+        )
+      end    
+      item
+        Caption = 'Insert9'
+        Lines.Strings = (
+          'INSERT INTO tictactoe (game, board) VALUES (2, ''{{X," "," "},{" ",O," "},{" ",X," "}}'');'
+        )
+      end    
+      item
+        Caption = 'Insert10'
+        Lines.Strings = (
+          'INSERT INTO distributors (did, dname) VALUES (DEFAULT, ''''XYZ Widgets'''') RETURNING did;'
+        )
+      end    
+      item
+        Caption = 'Insert11'
+        Lines.Strings = (
+          'WITH upd AS ( UPDATE employees SET sales_count = sales_count + 1 WHERE id = (SELECT sales_person FROM accounts WHERE name = ''''Acme Corporation'''') RETURNING *) INSERT INTO employees_log SELECT *, current_timestamp FROM upd;'
+        )
+      end    
+      item
+        Caption = 'Insert12'
+        Lines.Strings = (
+          'INSERT INTO distributors (did, dname) VALUES (7, ''''Redline GmbH'''') ON CONFLICT (did) DO NOTHING;'
+        )
+      end    
+      item
+        Caption = 'Insert13'
+        Lines.Strings = (
+          'INSERT INTO distributors (did, dname) VALUES (5, ''''Gizmo Transglobal''''), (6, ''''Associated Computing, Inc'''') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;'
+        )
+      end    
+      item
+        Caption = 'Insert14'
+        Lines.Strings = (
+          'INSERT INTO distributors AS d (did, dname) VALUES (8, ''''Anvil Distribution'''') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname || '''' (formerly '''' || d.dname || '''')''''    WHERE d.zipcode <> ''''21201'';'
+        )
+      end    
+      item
+        Caption = 'Insert15'
+        Lines.Strings = (
+          'INSERT INTO distributors (did, dname) VALUES (9, ''''Antwerp Design'''') ON CONFLICT ON CONSTRAINT distributors_pkey DO NOTHING;'
+        )
+      end    
+      item
+        Caption = 'Insert16'
+        Lines.Strings = (
+          'INSERT INTO distributors (did, dname) VALUES (10, ''Conrad International'') ON CONFLICT (did) WHERE is_active DO NOTHING;'
+        )
+      end    
+      item
+        Caption = 'Lock1'
+        Lines.Strings = (
+          'LOCK TABLE films IN SHARE MODE;'
+        )
+      end    
+      item
+        Caption = 'Lock2'
+        Lines.Strings = (
+          'LOCK TABLE films IN SHARE ROW EXCLUSIVE MODE;'
+        )
+      end    
+      item
+        Caption = 'Move1'
+        Lines.Strings = (
+          'MOVE FORWARD 5 IN liahona;'
+        )
+      end    
+      item
+        Caption = 'Move2'
+        Lines.Strings = (
+          'MOVE 5 aa;'
+        )
+      end    
+      item
+        Caption = 'Notify1'
+        Lines.Strings = (
+          'NOTIFY virtual;'
+        )
+      end    
+      item
+        Caption = 'Notify2'
+        Lines.Strings = (
+          'NOTIFY virtual, ''This is the payload'''
+        )
+      end    
+      item
+        Caption = 'Prepare1'
+        Lines.Strings = (
+          'PREPARE fooplan (int, text, bool, numeric) AS INSERT INTO foo VALUES($1, $2, $3, $4);'
+        )
+      end    
+      item
+        Caption = 'Prepare2'
+        Lines.Strings = (
+          'PREPARE usrrptplan (int) AS SELECT * FROM users u, logs l WHERE u.usrid=$1 AND u.usrid=l.usrid AND l.date = $2;'
+        )
+      end    
+      item
+        Caption = 'END1'
+        Lines.Strings = (
+          'END TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'END2'
+        Lines.Strings = (
+          'END WORK;'
+        )
+      end    
+      item
+        Caption = 'Execute1'
+        Lines.Strings = (
+          'EXECUTE fooplan(1, ''Hunter Valley'', ''t'', 200.00);'
+        )
+      end    
+      item
+        Caption = 'Execute2'
+        Lines.Strings = (
+          'EXECUTE usrrptplan(1, current_date);'
+        )
+      end    
+      item
+        Caption = 'Execute3'
+        Lines.Strings = (
+          'EXPLAIN SELECT * FROM foo;'
+        )
+      end    
+      item
+        Caption = 'Fetch1'
+        Lines.Strings = (
+          'FETCH FORWARD 5 FROM liahona;'
+        )
+      end    
+      item
+        Caption = 'Fetch2'
+        Lines.Strings = (
+          'FETCH PRIOR FROM liahona;'
+        )
+      end    
+      item
+        Caption = 'Explain1'
+        Lines.Strings = (
+          'EXPLAIN'
+          'SELECT * FROM foo;'
+        )
+      end    
+      item
+        Caption = 'Explain2'
+        Lines.Strings = (
+          'EXPLAIN'
+          'SELECT * FROM foo WHERE i = 4;'
+        )
+      end    
+      item
+        Caption = 'Savepoint1'
+        Lines.Strings = (
+          'SAVEPOINT my_savepoint;'
+        )
+      end    
+      item
+        Caption = 'Listen1'
+        Lines.Strings = (
+          'LISTEN virtual;'
+        )
+      end    
+      item
+        Caption = 'Delete1'
+        Lines.Strings = (
+          'DELETE FROM films USING producers WHERE producer_id = producers.id AND producers.name = ''foo'';'
+        )
+      end    
+      item
+        Caption = 'Delete2'
+        Lines.Strings = (
+          'DELETE FROM films WHERE producer_id IN (SELECT id FROM producers WHERE name = ''foo'');'
+        )
+      end    
+      item
+        Caption = 'Delete3'
+        Lines.Strings = (
+          'DELETE FROM films WHERE kind <> ''Musical'';'
+        )
+      end    
+      item
+        Caption = 'Delete4'
+        Lines.Strings = (
+          'DELETE FROM films;'
+        )
+      end    
+      item
+        Caption = 'Delete5'
+        Lines.Strings = (
+          'DELETE FROM tasks WHERE status = ''DONE'' RETURNING *;'
+        )
+      end    
+      item
+        Caption = 'Delete6'
+        Lines.Strings = (
+          'DELETE FROM tasks WHERE CURRENT OF c_tasks;'
+        )
+      end    
+      item
+        Caption = 'Declare1'
+        Lines.Strings = (
+          'DECLARE liahona CURSOR FOR SELECT * FROM films;'
+        )
+      end    
+      item
+        Caption = 'Deallocate1'
+        Lines.Strings = (
+          'DEALLOCATE PREPARE ALL;'
+        )
+      end    
+      item
+        Caption = 'DO1'
+        Lines.Strings = (
+          'DO'
+          '$$DECLARE r record;'
+          'BEGIN'
+          '    FOR r IN SELECT table_schema, table_name FROM information_schema.tables'
+          '             WHERE table_type = ''VIEW'' AND table_schema = ''public'''
+          '    LOOP'
+          '        EXECUTE ''GRANT ALL ON '' || quote_ident(r.table_schema) || ''.'' || quote_ident(r.table_name) || '' TO webuser'';'
+          '    END LOOP;'
+          'END$$;'
+        )
+      end    
+      item
+        Caption = 'Values1'
+        Lines.Strings = (
+          'VALUES'
+          '  (1, ''one''),'
+          '  (2, ''two''),'
+          '  (3, ''three'');'
+        )
+      end    
+      item
+        Caption = 'Values2'
+        Lines.Strings = (
+          'VALUES'
+          '  (''UA502'', ''Bananas'', 105, DEFAULT, ''Comedy'', ''82 minutes''),'
+          '  (''T_601'', ''Yojimbo'', 106, DEFAULT, ''Drama'', DEFAULT);'
+        )
+      end    
+      item
+        Caption = 'Update1'
+        Lines.Strings = (
+          'UPDATE films SET kind = ''Dramatic'' WHERE kind = ''Drama'';'
+        )
+      end    
+      item
+        Caption = 'Update2'
+        Lines.Strings = (
+          'UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT'
+          'WHERE city = ''San Francisco'' AND date = ''2003-07-03'';'
+        )
+      end    
+      item
+        Caption = 'Update3'
+        Lines.Strings = (
+          'UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT'
+          'WHERE city = ''San Francisco'' AND date = ''2003-07-03'''
+          'RETURNING temp_lo, temp_hi, prcp;'
+        )
+      end    
+      item
+        Caption = 'Update4'
+        Lines.Strings = (
+          'UPDATE weather SET (temp_lo, temp_hi, prcp) = (temp_lo+1, temp_lo+15, DEFAULT)'
+          'WHERE city = ''San Francisco'' AND date = ''2003-07-03'';'
+        )
+      end    
+      item
+        Caption = 'Update5'
+        Lines.Strings = (
+          'UPDATE employees SET sales_count = sales_count + 1 FROM accounts'
+          'WHERE accounts.name = ''Acme Corporation'''
+          'AND employees.id = accounts.sales_person;'
+        )
+      end    
+      item
+        Caption = 'Update6'
+        Lines.Strings = (
+          'UPDATE employees SET sales_count = sales_count + 1 WHERE id ='
+          '(SELECT sales_person FROM accounts WHERE name = ''Acme Corporation'');'
+        )
+      end    
+      item
+        Caption = 'Update7'
+        Lines.Strings = (
+          'UPDATE accounts SET (contact_first_name, contact_last_name) ='
+          '    (SELECT first_name, last_name FROM salesmen'
+          '     WHERE salesmen.id = accounts.sales_id);'
+        )
+      end    
+      item
+        Caption = 'Update8'
+        Lines.Strings = (
+          'UPDATE accounts SET contact_first_name = first_name,'
+          '                    contact_last_name = last_name'
+          '  FROM salesmen WHERE salesmen.id = accounts.sales_id;'
+        )
+      end    
+      item
+        Caption = 'Update9'
+        Lines.Strings = (
+          'UPDATE summary s SET (sum_x, sum_y, avg_x, avg_y) ='
+          '    (SELECT sum(x), sum(y), avg(x), avg(y) FROM data d'
+          '     WHERE d.group_id = s.group_id);'
+        )
+      end    
+      item
+        Caption = 'Update10'
+        Lines.Strings = (
+          'UPDATE films SET kind = ''Dramatic'' WHERE CURRENT OF c_films;'
+          '  sUnlisten = ''UNLISTEN virtual;'';'
+          '  sTruncate1 = ''TRUNCATE bigtable, fattable;'';'
+          '  sTruncate2 = ''TRUNCATE bigtable, fattable RESTART IDENTITY;'';'
+          '  sTruncate3 = ''TRUNCATE othertable CASCADE;'';'
+          '  sStartTransaction = ''START TRANSACTION ISOLATION LEVEL REPEATABLE READ;'';'
+          '  sSetTransaction = ''SET TRANSACTION SNAPSHOT ''''00000003-0000001B-1'''';'';'
+          '  sSelectInto = ''SELECT * INTO films_recent FROM films WHERE date_prod >= ''''2002-01-01'''';'';'
+        )
+      end    
+      item
+        Caption = 'Select1'
+        Lines.Strings = (
+          'SELECT f.title, f.did, d.name, f.date_prod, f.kind FROM distributors d, films f WHERE f.did = d.did'
+        )
+      end    
+      item
+        Caption = 'Select2'
+        Lines.Strings = (
+          'SELECT kind, sum(len) AS total FROM films GROUP BY kind;'
+        )
+      end    
+      item
+        Caption = 'Select3'
+        Lines.Strings = (
+          'SELECT kind, sum(len) AS total'
+          '    FROM films'
+          '    GROUP BY kind'
+          '    HAVING sum(len) < interval ''5 hours'';'
+        )
+      end    
+      item
+        Caption = 'Select4'
+        Lines.Strings = (
+          'SELECT * FROM distributors ORDER BY name;'
+        )
+      end    
+      item
+        Caption = 'Select5'
+        Lines.Strings = (
+          'SELECT * FROM distributors ORDER BY 2;'
+        )
+      end    
+      item
+        Caption = 'Select6'
+        Lines.Strings = (
+          'SELECT distributors.name'
+          '    FROM distributors'
+          '    WHERE distributors.name LIKE ''W%'''
+          'UNION'
+          'SELECT actors.name'
+          '    FROM actors'
+          '    WHERE actors.name LIKE ''W%'';'
+        )
+      end    
+      item
+        Caption = 'Select7'
+        Lines.Strings = (
+          'SELECT * FROM distributors(111);'
+        )
+      end    
+      item
+        Caption = 'Select8'
+        Lines.Strings = (
+          'SELECT * FROM distributors_2(111) AS (f1 int, f2 text);'
+        )
+      end    
+      item
+        Caption = 'Select9'
+        Lines.Strings = (
+          'SELECT * FROM unnest(ARRAY[''a'',''b'',''c'',''d'',''e'',''f'']) WITH ORDINALITY;'
+        )
+      end    
+      item
+        Caption = 'Select10'
+        Lines.Strings = (
+          'WITH t AS ('
+          '    SELECT random() as x FROM generate_series(1, 3)'
+          '  )'
+          'SELECT * FROM t'
+          'UNION ALL'
+          'SELECT * FROM t'
+        )
+      end    
+      item
+        Caption = 'Select11'
+        Lines.Strings = (
+          'WITH RECURSIVE employee_recursive(distance, employee_name, manager_name) AS ('
+          '    SELECT 1, employee_name, manager_name'
+          '    FROM employee'
+          '    WHERE manager_name = ''Mary'''
+          '  UNION ALL'
+          '    SELECT er.distance + 1, e.employee_name, e.manager_name'
+          '    FROM employee_recursive er, employee e'
+          '    WHERE er.employee_name = e.manager_name'
+          '  )'
+          'SELECT distance, employee_name FROM employee_recursive;'
+        )
+      end    
+      item
+        Caption = 'Select12'
+        Lines.Strings = (
+          'SELECT m.name AS mname, pname'
+          'FROM manufacturers m, LATERAL get_product_names(m.id) pname;'
+        )
+      end    
+      item
+        Caption = 'Select13'
+        Lines.Strings = (
+          'SELECT m.name AS mname, pname'
+          'FROM manufacturers m LEFT JOIN LATERAL get_product_names(m.id) pname ON true;'
+        )
+      end    
+      item
+        Caption = 'RollbackToSavepoint1'
+        Lines.Strings = (
+          'ROLLBACK TO SAVEPOINT foo;'
+        )
+      end    
+      item
+        Caption = 'RollbackPrepared1'
+        Lines.Strings = (
+          'ROLLBACK PREPARED ''foobar'';'
+        )
+      end    
+      item
+        Caption = 'Rollback1'
+        Lines.Strings = (
+          'ROLLBACK;'
+        )
+      end    
+      item
+        Caption = 'Rollback2'
+        Lines.Strings = (
+          'ROLLBACK WORK;'
+        )
+      end    
+      item
+        Caption = 'Rollback3'
+        Lines.Strings = (
+          'ROLLBACK TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'Truncate1'
+        Lines.Strings = (
+          'TRUNCATE bigtable, fattable;'
+        )
+      end    
+      item
+        Caption = 'Truncate2'
+        Lines.Strings = (
+          'TRUNCATE bigtable, fattable RESTART IDENTITY;'
+        )
+      end    
+      item
+        Caption = 'Truncate3'
+        Lines.Strings = (
+          'TRUNCATE othertable CASCADE;'
+        )
+      end    
+      item
+        Caption = 'SelectInto1'
+        Lines.Strings = (
+          'SELECT * INTO films_recent FROM films WHERE date_prod >= ''2002-01-01'';'
+        )
+      end    
+      item
+        Caption = 'SetTransaction1'
+        Lines.Strings = (
+          'SET TRANSACTION SNAPSHOT ''00000003-0000001B-1'';'
+        )
+      end    
+      item
+        Caption = 'StartTransaction1'
+        Lines.Strings = (
+          'START TRANSACTION ISOLATION LEVEL SERIALIZABLE;'
+        )
+      end    
+      item
+        Caption = 'Unlisten1'
+        Lines.Strings = (
+          'UNLISTEN virtual;'
+        )
+      end    
+      item
+        Caption = 'PrepareTransaction1'
+        Lines.Strings = (
+          'PREPARE TRANSACTION ''foobar'';'
+        )
+      end>
+    Left = 104
+    Top = 80
+  end
+  object sDomain: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateDomain1'
+        Lines.Strings = (
+          'CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ ''^\d{5}$'' OR VALUE ~ ''^\d{5}-\d{4}$);'
+        )
+      end    
+      item
+        Caption = 'AlterDomain1'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer SET DEFAULT 112;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain2'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer SET DEFAULT ''112'';'
+        )
+      end    
+      item
+        Caption = 'AlterDomain3'
+        Lines.Strings = (
+          'ALTER DOMAIN public.type_integer SET DEFAULT ''112'';'
+        )
+      end    
+      item
+        Caption = 'AlterDomain4'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer DROP DEFAULT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain5'
+        Lines.Strings = (
+          'ALTER DOMAIN public.type_integer DROP DEFAULT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain6'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer SET NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain7'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer DROP NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain8'
+        Lines.Strings = (
+          'ALTER DOMAIN public.type_integer SET NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain9'
+        Lines.Strings = (
+          'ALTER DOMAIN public.type_integer DROP NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain10'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer RENAME TO type_integer_ext;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain11'
+        Lines.Strings = (
+          'ALTER DOMAIN public.type_integer RENAME TO type_integer_ext;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain12'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer SET SCHEMA public;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain13'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer OWNER TO alexs;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain14'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer OWNER TO SESSION_USER;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain15'
+        Lines.Strings = (
+          'ALTER DOMAIN type_integer OWNER TO CURRENT_USER;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain16'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode RENAME CONSTRAINT zipchk TO zip_check;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain17'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode ADD CONSTRAINT zipchk CHECK (char_length(VALUE) = 5);'
+        )
+      end    
+      item
+        Caption = 'AlterDomain18'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode ADD CONSTRAINT zipchk CHECK (char_length(VALUE) = 5) NOT VALID;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain19'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode DROP CONSTRAINT zipchk;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain20'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode DROP CONSTRAINT IF EXISTS zipchk RESTRICT;'
+        )
+      end    
+      item
+        Caption = 'AlterDomain21'
+        Lines.Strings = (
+          'ALTER DOMAIN zipcode VALIDATE CONSTRAINT zipchk;'
+        )
+      end    
+      item
+        Caption = 'DropDomain1'
+        Lines.Strings = (
+          'DROP DOMAIN box;'
+        )
+      end>
+    Left = 24
+    Top = 168
+  end
+  object sTable: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateTable1'
+        Lines.Strings = (
+          'CREATE TABLE public.data_import('
+          '  id system.type_primary_key NOT NULL,'
+          '  code system.type_integer_nullable,'
+          '  ls system.type_varchar_50_nullabe,'
+          '  fio system.type_varchar_500_nullabe,'
+          '  street_num system.type_integer_nullable,'
+          '  house system.type_varchar_100_nullabe,'
+          '  phone1 system.type_varchar_250_nullabe,'
+          '  phone2 system.type_varchar_250_nullabe,'
+          '  square system.type_float_nullable,'
+          '  last_pay system.type_doc_date,'
+          '  value_electro system.type_float_nullable,'
+          '  value_water system.type_float_nullable,'
+          '  dolg_1_stolb system.type_float_nullable,'
+          '  dolg_2_vozm system.type_float_nullable,'
+          '  dolg_3_tp system.type_float_nullable,'
+          '  dolg_4_ch15_17 system.type_float_nullable,'
+          '  dolg_5_rem_prav_17 system.type_float_nullable,'
+          '  dolg_6_ul_osv_17 system.type_float_nullable,'
+          '  dolg_7_dorog_17 system.type_float_nullable,'
+          '  dolg_8_ch18 system.type_float_nullable,'
+          '  dolg_9_ul_osv_18 system.type_forign_key_nullable,'
+          '  dolg_10_dorog_18 system.type_float_nullable,'
+          '  dolg_11_musor system.type_float_nullable,'
+          '  CONSTRAINT data_import_pkey PRIMARY KEY (id)'
+          ')'
+          'WITH OIDS;'
+        )
+      end    
+      item
+        Caption = 'CreateTable2'
+        Lines.Strings = (
+          'CREATE TABLE films('
+          '  code char(5),'
+          '  title varchar(40) NOT NULL,'
+          '  did integer NOT NULL,'
+          '  date_prod date,'
+          '  kind varchar(10),'
+          '  len interval hour to minute,'
+          '  kind1 varchar(10),'
+          '  PRIMARY KEY (code)'
+          ');  '
+        )
+      end    
+      item
+        Caption = 'CreateTable3'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer PRIMARY KEY GENERATED BY DEFAULT AS IDENTITY,'
+          '  name varchar(40) NOT NULL CHECK (name <> '''')'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable4'
+        Lines.Strings = (
+          'CREATE TABLE array_int('
+          '  vector int[][]'
+          '); '
+        )
+      end    
+      item
+        Caption = 'CreateTable5'
+        Lines.Strings = (
+          'CREATE TABLE films('
+          '  code char(5),'
+          '  title varchar(40),'
+          '  did integer,'
+          '  date_prod date,'
+          '  kind varchar(10),'
+          '  len interval hour to minute,'
+          '  CONSTRAINT production UNIQUE (date_prod)'
+          ');     '
+        )
+      end    
+      item
+        Caption = 'CreateTable6'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer CHECK (did > 100),'
+          '  name varchar(40)'
+          '); '
+        )
+      end    
+      item
+        Caption = 'CreateTable7'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer,'
+          '  name varchar(40),'
+          '  CONSTRAINT con1 CHECK (did > 100 AND name <> '''')'
+          ');  '
+        )
+      end    
+      item
+        Caption = 'CreateTable8'
+        Lines.Strings = (
+          'CREATE TABLE films('
+          '  code char(5),'
+          '  title varchar(40),'
+          '  did integer,'
+          '  date_prod date,'
+          '  kind varchar(10),'
+          '  len interval hour to minute,'
+          '  CONSTRAINT code_title PRIMARY KEY (code, title)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable9'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer,'
+          '  name varchar(40),'
+          '  PRIMARY KEY (did)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable10'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer PRIMARY KEY,'
+          '  name varchar(40)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable11'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  name varchar(40) DEFAULT ''Luso Films'','
+          '  did integer DEFAULT nextval(''distributors_serial''),'
+          '  modtime timestamp DEFAULT current_timestamp'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable12'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer CONSTRAINT no_null NOT NULL,'
+          '  name varchar(40) NOT NULL'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable13'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer,'
+          '  name varchar(40) UNIQUE'
+          ');  '
+        )
+      end    
+      item
+        Caption = 'CreateTable14'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer,'
+          '  name varchar(40),'
+          '  UNIQUE (name)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable15'
+        Lines.Strings = (
+          'CREATE TABLE distributors('
+          '  did integer,'
+          '  name varchar(40),'
+          '  UNIQUE (name) WITH (fillfactor = 70)'
+          ')'
+          'WITH (fillfactor=70);'
+        )
+      end    
+      item
+        Caption = 'CreateTable16'
+        Lines.Strings = (
+          'CREATE TABLE circles ('
+          '    c circle,'
+          '    EXCLUDE USING gist (c WITH &&)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable17'
+        Lines.Strings = (
+          'CREATE TABLE cinemas('
+          '  id serial,'
+          '  name text,'
+          '  location text'
+          ')'
+          'TABLESPACE diskvol1;  '
+        )
+      end    
+      item
+        Caption = 'CreateTable18'
+        Lines.Strings = (
+          'CREATE TYPE employee_type AS (name text, salary numeric);'
+        )
+      end    
+      item
+        Caption = 'CreateTable19'
+        Lines.Strings = (
+          'CREATE TABLE employees OF employee_type ('
+          '    PRIMARY KEY (name),'
+          '    salary WITH OPTIONS DEFAULT 1000'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable20'
+        Lines.Strings = (
+          'CREATE TABLE measurement ('
+          '    logdate         date not null,'
+          '    peaktemp        int,'
+          '    unitsales       int'
+          ') PARTITION BY RANGE (logdate);'
+        )
+      end    
+      item
+        Caption = 'CreateTable21'
+        Lines.Strings = (
+          'CREATE TABLE measurement_year_month ('
+          '    logdate         date not null,'
+          '    peaktemp        int,'
+          '    unitsales       int'
+          ') PARTITION BY RANGE (EXTRACT(YEAR FROM logdate), EXTRACT(MONTH FROM logdate));'
+        )
+      end    
+      item
+        Caption = 'CreateTable22'
+        Lines.Strings = (
+          'CREATE TABLE cities ('
+          '    city_id      bigserial not null,'
+          '    name         text not null,'
+          '    population   bigint'
+          ') PARTITION BY LIST (left(lower(name), 1));'
+        )
+      end    
+      item
+        Caption = 'CreateTable23'
+        Lines.Strings = (
+          'CREATE TABLE measurement_y2016m07 '
+          '    PARTITION OF measurement ('
+          '    unitsales DEFAULT 0'
+          ') FOR VALUES FROM (''2016-07-01'') TO (''2016-08-01'');'
+        )
+      end    
+      item
+        Caption = 'CreateTable24'
+        Lines.Strings = (
+          'CREATE TABLE measurement_ym_older'
+          '    PARTITION OF measurement_year_month'
+          '    FOR VALUES FROM (MINVALUE, MINVALUE) TO (2016, 11);'
+        )
+      end    
+      item
+        Caption = 'CreateTable25'
+        Lines.Strings = (
+          'CREATE TABLE measurement_ym_y2016m11'
+          '    PARTITION OF measurement_year_month'
+          '    FOR VALUES FROM (2016, 11) TO (2016, 12);'
+        )
+      end    
+      item
+        Caption = 'CreateTable26'
+        Lines.Strings = (
+          'CREATE TABLE measurement_ym_y2016m12'
+          '    PARTITION OF measurement_year_month'
+          '    FOR VALUES FROM (2016, 12) TO (2017, 01);'
+        )
+      end    
+      item
+        Caption = 'CreateTable27'
+        Lines.Strings = (
+          'CREATE TABLE measurement_ym_y2017m01'
+          '    PARTITION OF measurement_year_month'
+          '    FOR VALUES FROM (2017, 01) TO (2017, 02);'
+        )
+      end    
+      item
+        Caption = 'CreateTable28'
+        Lines.Strings = (
+          'CREATE TABLE cities_ab'
+          '    PARTITION OF cities ('
+          '    CONSTRAINT city_id_nonzero CHECK (city_id != 0)'
+          ') FOR VALUES IN (''a'', ''b'');'
+        )
+      end    
+      item
+        Caption = 'CreateTable29'
+        Lines.Strings = (
+          'CREATE TABLE cities_ab'
+          '    PARTITION OF cities ('
+          '    CONSTRAINT city_id_nonzero CHECK (city_id != 0)'
+          ') FOR VALUES IN (''a'', ''b'') PARTITION BY RANGE (population);'
+        )
+      end    
+      item
+        Caption = 'CreateTable30'
+        Lines.Strings = (
+          'CREATE TABLE cities_ab_10000_to_100000'
+          '    PARTITION OF cities_ab FOR VALUES FROM (10000) TO (100000);'
+        )
+      end    
+      item
+        Caption = 'CreateTableAs1'
+        Lines.Strings = (
+          'CREATE TABLE films_recent AS SELECT * FROM films WHERE date_prod >= ''2002-01-01'';'
+        )
+      end    
+      item
+        Caption = 'CreateTableAs2'
+        Lines.Strings = (
+          'CREATE TABLE films2 AS TABLE films;'
+        )
+      end    
+      item
+        Caption = 'CreateTableAs3'
+        Lines.Strings = (
+          'CREATE TEMP TABLE films_recent WITH (OIDS) ON COMMIT DROP AS EXECUTE recentfilms(''2002-01-01'');'
+        )
+      end    
+      item
+        Caption = 'AlterTable1'
+        Lines.Strings = (
+          'ALTER TABLE viewer.tb_meter ADD COLUMN tb_meter_seal_number system.type_varchar_100_nullabe;'
+        )
+      end    
+      item
+        Caption = 'AlterTable2'
+        Lines.Strings = (
+          'ALTER TABLE viewer.tb_meter ADD COLUMN IF NOT EXISTS tb_meter_seal_number system.type_varchar_100_nullabe;'
+        )
+      end    
+      item
+        Caption = 'DropTable1'
+        Lines.Strings = (
+          'DROP TABLE films, distributors;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable2'
+        Lines.Strings = (
+          'DROP TABLE test1.films, public.distributors;'
+        )
+      end    
+      item
+        Caption = 'Reindex1'
+        Lines.Strings = (
+          'REINDEX TABLE my_table;'
+        )
+      end    
+      item
+        Caption = 'Reindex2'
+        Lines.Strings = (
+          'REINDEX DATABASE broken_db;'
+        )
+      end    
+      item
+        Caption = 'Reindex3'
+        Lines.Strings = (
+          'REINDEX INDEX my_index;'
+        )
+      end    
+      item
+        Caption = 'AlterSequence1'
+        Lines.Strings = (
+          'ALTER SEQUENCE serial RESTART WITH 105;'
+        )
+      end    
+      item
+        Caption = 'CreateSequence1'
+        Lines.Strings = (
+          'CREATE SEQUENCE serial START 101;'
+        )
+      end    
+      item
+        Caption = 'DropSequence1'
+        Lines.Strings = (
+          'DROP SEQUENCE serial;'
+        )
+      end    
+      item
+        Caption = 'AlterIndex1'
+        Lines.Strings = (
+          'ALTER INDEX distributors RENAME TO suppliers;'
+        )
+      end    
+      item
+        Caption = 'AlterIndex2'
+        Lines.Strings = (
+          'ALTER INDEX distributors SET TABLESPACE fasttablespace;'
+        )
+      end    
+      item
+        Caption = 'AlterIndex3'
+        Lines.Strings = (
+          'ALTER INDEX distributors SET (fillfactor = 75);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex1'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX title_idx ON films (title);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex2'
+        Lines.Strings = (
+          'CREATE INDEX ON films ((lower(title)));'
+        )
+      end    
+      item
+        Caption = 'CreateIndex3'
+        Lines.Strings = (
+          'CREATE INDEX title_idx_german ON films (title COLLATE "de_DE");'
+        )
+      end    
+      item
+        Caption = 'CreateIndex4'
+        Lines.Strings = (
+          'CREATE INDEX title_idx_nulls_low ON films (title NULLS FIRST);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex5'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX title_idx ON films (title) WITH (fillfactor = 70);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex6'
+        Lines.Strings = (
+          'CREATE INDEX gin_idx ON documents_table USING GIN (locations) WITH (fastupdate = off);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex7'
+        Lines.Strings = (
+          'CREATE INDEX code_idx ON films (code) TABLESPACE indexspace;'
+        )
+      end    
+      item
+        Caption = 'CreateIndex8'
+        Lines.Strings = (
+          'CREATE INDEX pointloc ON points USING gist (box(location,location));'
+        )
+      end    
+      item
+        Caption = 'CreateIndex9'
+        Lines.Strings = (
+          'CREATE INDEX CONCURRENTLY sales_quantity_index ON sales_table (quantity);'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex1'
+        Lines.Strings = (
+          'DROP INDEX title_idx;'
+        )
+      end    
+      item
+        Caption = 'CreateForeignDataWrapper1'
+        Lines.Strings = (
+          'CREATE FOREIGN DATA WRAPPER dummy;'
+        )
+      end    
+      item
+        Caption = 'CreateForeignDataWrapper2'
+        Lines.Strings = (
+          'CREATE FOREIGN DATA WRAPPER file HANDLER file_fdw_handler;'
+        )
+      end    
+      item
+        Caption = 'CreateForeignDataWrapper3'
+        Lines.Strings = (
+          'CREATE FOREIGN DATA WRAPPER mywrapper OPTIONS (debug ''true'');'
+        )
+      end    
+      item
+        Caption = 'CreateForeignTable1'
+        Lines.Strings = (
+          'CREATE FOREIGN TABLE films ('
+          '    code        char(5) NOT NULL,'
+          '    title       varchar(40) NOT NULL,'
+          '    did         integer NOT NULL,'
+          '    date_prod   date,'
+          '    kind        varchar(10),'
+          '    len         interval hour to minute'
+          ')'
+          'SERVER film_server;'
+        )
+      end    
+      item
+        Caption = 'CreateForeignTable2'
+        Lines.Strings = (
+          'CREATE FOREIGN TABLE measurement_y2016m07'
+          '  PARTITION OF measurement FOR VALUES FROM (''''2016-07-01'''') TO (''''2016-08-01'''')'
+          'SERVER server_07;'
+        )
+      end    
+      item
+        Caption = 'DropForeignDataWrapper1'
+        Lines.Strings = (
+          'DROP FOREIGN DATA WRAPPER dbi;'
+        )
+      end    
+      item
+        Caption = 'DropForeignTable1'
+        Lines.Strings = (
+          'DROP FOREIGN TABLE films, distributors;'
+        )
+      end    
+      item
+        Caption = 'AlterForeignTable1'
+        Lines.Strings = (
+          'ALTER FOREIGN TABLE distributors ALTER COLUMN street SET NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'AlterForeignTable2'
+        Lines.Strings = (
+          'ALTER FOREIGN TABLE myschema.distributors OPTIONS (ADD opt1 ''value'', SET opt2 ''value2'', DROP opt3 ''value3'');'
+        )
+      end    
+      item
+        Caption = 'AlterForeignDataWrapper1'
+        Lines.Strings = (
+          'ALTER FOREIGN DATA WRAPPER dbi OPTIONS (ADD foo ''1'', DROP ''bar'');'
+        )
+      end    
+      item
+        Caption = 'AlterForeignDataWrapper2'
+        Lines.Strings = (
+          'ALTER FOREIGN DATA WRAPPER dbi VALIDATOR bob.myvalidator;'
+        )
+      end    
+      item
+        Caption = 'DropRule1'
+        Lines.Strings = (
+          'DROP RULE newrule ON mytable;'
+        )
+      end    
+      item
+        Caption = 'CreateRule1'
+        Lines.Strings = (
+          'CREATE RULE "_RETURN" AS ON SELECT TO t1 DO INSTEAD SELECT * FROM t2;'
+        )
+      end    
+      item
+        Caption = 'CreateRule2'
+        Lines.Strings = (
+          'CREATE RULE "_RETURN" AS ON SELECT TO t2 DO INSTEAD SELECT * FROM t1;'
+        )
+      end    
+      item
+        Caption = 'CreateRule3'
+        Lines.Strings = (
+          'CREATE RULE notify_me AS ON UPDATE TO mytable DO ALSO NOTIFY mytable;'
+        )
+      end    
+      item
+        Caption = 'AlterRule1'
+        Lines.Strings = (
+          'ALTER RULE notify_all ON emp RENAME TO notify_me;'
+        )
+      end>
+    Left = 24
+    Top = 248
+  end
+  object sView: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'RefreshMaterializedView1'
+        Lines.Strings = (
+          'REFRESH MATERIALIZED VIEW order_summary;'
+        )
+      end    
+      item
+        Caption = 'RefreshMaterializedView2'
+        Lines.Strings = (
+          'REFRESH MATERIALIZED VIEW annual_statistics_basis WITH NO DATA;'
+        )
+      end    
+      item
+        Caption = 'DropMaterializedView1'
+        Lines.Strings = (
+          'DROP MATERIALIZED VIEW order_summary;'
+        )
+      end    
+      item
+        Caption = 'AlterMaterializedView1'
+        Lines.Strings = (
+          'ALTER MATERIALIZED VIEW foo RENAME TO bar;'
+        )
+      end    
+      item
+        Caption = 'CreateMaterializedView1'
+        Lines.Strings = (
+          'CREATE MATERIALIZED VIEW comedies AS'
+          'SELECT *'
+          'FROM films'
+          'WHERE kind = ''Comedy'';'
+        )
+      end    
+      item
+        Caption = 'DropView1'
+        Lines.Strings = (
+          'DROP VIEW kinds;'
+        )
+      end    
+      item
+        Caption = 'AlterView1'
+        Lines.Strings = (
+          'ALTER VIEW foo RENAME TO bar;'
+        )
+      end    
+      item
+        Caption = 'AlterView2'
+        Lines.Strings = (
+          'ALTER VIEW a_view ALTER COLUMN ts SET DEFAULT now();'
+        )
+      end    
+      item
+        Caption = 'CreateView1'
+        Lines.Strings = (
+          'CREATE VIEW comedies AS'
+          'SELECT *'
+          'FROM films'
+          'WHERE kind = ''Comedy'';'
+        )
+      end    
+      item
+        Caption = 'CreateView2'
+        Lines.Strings = (
+          'CREATE VIEW universal_comedies AS'
+          'SELECT *'
+          'FROM comedies'
+          'WHERE classification = ''U'''
+          'WITH LOCAL CHECK OPTION;'
+        )
+      end    
+      item
+        Caption = 'CreateView3'
+        Lines.Strings = (
+          'CREATE VIEW pg_comedies AS'
+          'SELECT *'
+          ' FROM comedies'
+          ' WHERE classification = ''PG'''
+          ' WITH CASCADED CHECK OPTION;'
+        )
+      end    
+      item
+        Caption = 'CreateView4'
+        Lines.Strings = (
+          'CREATE VIEW comedies AS'
+          'SELECT f.*,'
+          'country_code_to_name(f.country_code) AS country,'
+          '(SELECT avg(r.rating)'
+          'FROM user_ratings r'
+          'WHERE r.film_id = f.id) AS avg_rating'
+          'FROM films f'
+          'WHERE f.kind = ''Comedy'';'
+        )
+      end    
+      item
+        Caption = 'CreateView5'
+        Lines.Strings = (
+          'CREATE RECURSIVE VIEW public.nums_1_100 (n) AS'
+          'VALUES (1)'
+          'UNION ALL'
+          'SELECT n+1 FROM nums_1_100 WHERE n < 100;'
+        )
+      end>
+    Left = 24
+    Top = 328
+  end
+  object sSchema: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'ImportForeignSchema1'
+        Lines.Strings = (
+          'IMPORT FOREIGN SCHEMA foreign_films FROM SERVER film_server INTO films;'
+        )
+      end    
+      item
+        Caption = 'ImportForeignSchema2'
+        Lines.Strings = (
+          'IMPORT FOREIGN SCHEMA foreign_films LIMIT TO (actors, directors) FROM SERVER film_server INTO films;'
+        )
+      end    
+      item
+        Caption = 'AlterSchema1'
+        Lines.Strings = (
+          'ALTER SCHEMA test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterSchema2'
+        Lines.Strings = (
+          'ALTER SCHEMA test2 OWNER TO user1;'
+        )
+      end    
+      item
+        Caption = 'CreateSchema1'
+        Lines.Strings = (
+          'CREATE SCHEMA myschema;'
+        )
+      end    
+      item
+        Caption = 'CreateSchema2'
+        Lines.Strings = (
+          'CREATE SCHEMA AUTHORIZATION joe;'
+        )
+      end    
+      item
+        Caption = 'CreateSchema3'
+        Lines.Strings = (
+          'CREATE SCHEMA IF NOT EXISTS test AUTHORIZATION joe;'
+        )
+      end    
+      item
+        Caption = 'CreateSchema4'
+        Lines.Strings = (
+          'CREATE SCHEMA hollywood'
+          '  CREATE TABLE films (title text, release date, awards text[])'
+          '  CREATE VIEW winners AS'
+          '    SELECT title, release FROM films WHERE awards IS NOT NULL;'
+        )
+      end    
+      item
+        Caption = 'DropSchema1'
+        Lines.Strings = (
+          'DROP SCHEMA mystuff CASCADE;'
+        )
+      end>
+    Left = 32
+    Top = 408
+  end
+  object sSystem: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'Reset1'
+        Lines.Strings = (
+          'RESET timezone;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Reset2'
+        Lines.Strings = (
+          'RESET ALL;'
+        )
+      end    
+      item
+        Caption = 'Set1'
+        Lines.Strings = (
+          'SET search_path TO my_schema, public;'
+        )
+      end    
+      item
+        Caption = 'Set2'
+        Lines.Strings = (
+          'SET datestyle TO postgres, dmy;'
+        )
+      end    
+      item
+        Caption = 'Set3'
+        Lines.Strings = (
+          'SET TIME ZONE ''PST8PDT'';'
+        )
+      end    
+      item
+        Caption = 'Set4'
+        Lines.Strings = (
+          'SET TIME ZONE ''Europe/Rome'';'
+        )
+      end    
+      item
+        Caption = 'AlterSystem1'
+        Lines.Strings = (
+          'ALTER SYSTEM SET wal_level = replica;'
+        )
+      end    
+      item
+        Caption = 'AlterSystem2'
+        Lines.Strings = (
+          'ALTER SYSTEM RESET wal_level;'
+        )
+      end    
+      item
+        Caption = 'AlterLargeObject1'
+        Lines.Strings = (
+          'ALTER LARGE OBJECT 123 OWNER TO CURRENT_USER;'
+        )
+      end    
+      item
+        Caption = 'DropAccessMethod1'
+        Lines.Strings = (
+          'DROP ACCESS METHOD heptree;'
+        )
+      end    
+      item
+        Caption = 'CreateAccessMethod1'
+        Lines.Strings = (
+          'CREATE ACCESS METHOD heptree TYPE INDEX HANDLER heptree_handler;'
+        )
+      end    
+      item
+        Caption = 'DropCast1'
+        Lines.Strings = (
+          'DROP CAST (text AS int);'
+        )
+      end    
+      item
+        Caption = 'CreateCast1'
+        Lines.Strings = (
+          'CREATE CAST (bigint AS int4) WITH FUNCTION int4(bigint) AS ASSIGNMENT;'
+        )
+      end    
+      item
+        Caption = 'DropCollation1'
+        Lines.Strings = (
+          'DROP COLLATION german;'
+        )
+      end    
+      item
+        Caption = 'CreateCollation1'
+        Lines.Strings = (
+          'CREATE COLLATION french (locale = ''''fr_FR.utf8'''');'
+        )
+      end    
+      item
+        Caption = 'CreateCollation2'
+        Lines.Strings = (
+          'CREATE COLLATION german_phonebook (provider = icu, locale = ''''de-u-co-phonebk'''');'
+        )
+      end    
+      item
+        Caption = 'CreateCollation3'
+        Lines.Strings = (
+          'CREATE COLLATION german FROM "de_DE";'
+        )
+      end    
+      item
+        Caption = 'AlterCollation1'
+        Lines.Strings = (
+          'ALTER COLLATION "de_DE" RENAME TO german;'
+        )
+      end    
+      item
+        Caption = 'AlterCollation2'
+        Lines.Strings = (
+          'ALTER COLLATION "en_US" OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'CreateConversion1'
+        Lines.Strings = (
+          'CREATE CONVERSION myconv FOR ''''UTF8'''' TO ''''LATIN1'''' FROM myfunc;'
+        )
+      end    
+      item
+        Caption = 'AlterConversion1'
+        Lines.Strings = (
+          'ALTER CONVERSION iso_8859_1_to_utf8 RENAME TO latin1_to_unicode;'
+        )
+      end    
+      item
+        Caption = 'AlterConversion2'
+        Lines.Strings = (
+          'ALTER CONVERSION iso_8859_1_to_utf8 OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'DropConversion1'
+        Lines.Strings = (
+          'DROP CONVERSION myname;'
+        )
+      end    
+      item
+        Caption = 'DropExtension1'
+        Lines.Strings = (
+          'DROP EXTENSION hstore;'
+        )
+      end    
+      item
+        Caption = 'CreateExtension1'
+        Lines.Strings = (
+          'CREATE EXTENSION hstore;'
+        )
+      end    
+      item
+        Caption = 'CreateExtension2'
+        Lines.Strings = (
+          'CREATE EXTENSION hstore SCHEMA public FROM unpackaged;'
+        )
+      end    
+      item
+        Caption = 'AlterExtension1'
+        Lines.Strings = (
+          'ALTER EXTENSION hstore UPDATE TO ''2.0'';'
+        )
+      end    
+      item
+        Caption = 'AlterExtension2'
+        Lines.Strings = (
+          'ALTER EXTENSION hstore SET SCHEMA utils;'
+        )
+      end    
+      item
+        Caption = 'AlterExtension3'
+        Lines.Strings = (
+          'ALTER EXTENSION hstore ADD FUNCTION populate_record(anyelement, hstore);'
+        )
+      end    
+      item
+        Caption = 'DropOperatorFamily1'
+        Lines.Strings = (
+          'DROP OPERATOR FAMILY float_ops USING btree;'
+        )
+      end    
+      item
+        Caption = 'DropOperatorClass1'
+        Lines.Strings = (
+          'DROP OPERATOR CLASS widget_ops USING btree;'
+        )
+      end    
+      item
+        Caption = 'DropOperator1'
+        Lines.Strings = (
+          'DROP OPERATOR ^ (integer, integer);'
+        )
+      end    
+      item
+        Caption = 'DropOperator2'
+        Lines.Strings = (
+          'DROP OPERATOR ~ (none, bit);'
+        )
+      end    
+      item
+        Caption = 'DropOperator3'
+        Lines.Strings = (
+          'DROP OPERATOR ! (bigint, none);'
+        )
+      end    
+      item
+        Caption = 'DropOperator4'
+        Lines.Strings = (
+          'DROP OPERATOR ~ (none, bit), ! (bigint, none);'
+        )
+      end    
+      item
+        Caption = 'CreateOperatorFamily1'
+        Lines.Strings = (
+          'CREATE OPERATOR FAMILY integer_ops USING btree;'
+        )
+      end    
+      item
+        Caption = 'CreateOperatorClass1'
+        Lines.Strings = (
+          'CREATE OPERATOR CLASS gist__int_ops'
+          '    DEFAULT FOR TYPE _int4 USING gist AS'
+          '        OPERATOR        3       &&,'
+          '        OPERATOR        6       = (anyarray, anyarray),'
+          '        OPERATOR        7       @>,'
+          '        OPERATOR        8       <@,'
+          '        OPERATOR        20      @@ (_int4, query_int),'
+          '        FUNCTION        1       g_int_consistent (internal, _int4, smallint, oid, internal),'
+          '        FUNCTION        2       g_int_union (internal, internal),'
+          '        FUNCTION        3       g_int_compress (internal),'
+          '        FUNCTION        4       g_int_decompress (internal),'
+          '        FUNCTION        5       g_int_penalty (internal, internal, internal),'
+          '        FUNCTION        6       g_int_picksplit (internal, internal),'
+          '        FUNCTION        7       g_int_same (_int4, _int4, internal);'
+        )
+      end    
+      item
+        Caption = 'CreateOperator1'
+        Lines.Strings = (
+          'CREATE OPERATOR === ('
+          '    LEFTARG = box,'
+          '    RIGHTARG = box,'
+          '    PROCEDURE = area_equal_procedure,'
+          '    COMMUTATOR = ===,'
+          '    NEGATOR = !==,'
+          '    RESTRICT = area_restriction_procedure,'
+          '    JOIN = area_join_procedure,'
+          '    HASHES, MERGES'
+          ');'
+        )
+      end    
+      item
+        Caption = 'AlterOperatorFamily1'
+        Lines.Strings = (
+          'ALTER OPERATOR FAMILY integer_ops USING btree ADD'
+          '  -- int4 и int2'
+          '  OPERATOR 1 < (int4, int2) ,'
+          '  OPERATOR 2 <= (int4, int2) ,'
+          '  OPERATOR 3 = (int4, int2) ,'
+          '  OPERATOR 4 >= (int4, int2) ,'
+          '  OPERATOR 5 > (int4, int2) ,'
+          '  FUNCTION 1 btint42cmp(int4, int2) ,'
+          '  -- int2 и int4'
+          '  OPERATOR 1 < (int2, int4) ,'
+          '  OPERATOR 2 <= (int2, int4) ,'
+          '  OPERATOR 3 = (int2, int4) ,'
+          '  OPERATOR 4 >= (int2, int4) ,'
+          '  OPERATOR 5 > (int2, int4) ,'
+          '  FUNCTION 1 btint24cmp(int2, int4) ;'
+        )
+      end    
+      item
+        Caption = 'AlterOperatorFamily2'
+        Lines.Strings = (
+          'ALTER OPERATOR FAMILY integer_ops USING btree DROP'
+          '  -- int4 vs int2'
+          '  OPERATOR 1 (int4, int2) ,'
+          '  OPERATOR 2 (int4, int2) ,'
+          '  OPERATOR 3 (int4, int2) ,'
+          '  OPERATOR 4 (int4, int2) ,'
+          '  OPERATOR 5 (int4, int2) ,'
+          '  FUNCTION 1 (int4, int2) ,'''
+          '  -- int2 vs int4'
+          '  OPERATOR 1 (int2, int4) ,'
+          '  OPERATOR 2 (int2, int4) ,'
+          '  OPERATOR 3 (int2, int4) ,'
+          '  OPERATOR 4 (int2, int4) ,'
+          '  OPERATOR 5 (int2, int4) ,'
+          '  FUNCTION 1 (int2, int4) ;'
+        )
+      end    
+      item
+        Caption = 'AlterOperatorClass1'
+        Lines.Strings = (
+          'ALTER OPERATOR CLASS test USING btree RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterOperator1'
+        Lines.Strings = (
+          'ALTER OPERATOR @@ (text, text) OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'AlterOperator2'
+        Lines.Strings = (
+          'ALTER OPERATOR && (_int4, _int4) SET (RESTRICT = _int_contsel, JOIN = _int_contjoinsel);'
+        )
+      end    
+      item
+        Caption = 'DropTransform1'
+        Lines.Strings = (
+          'DROP TRANSFORM FOR hstore LANGUAGE plpythonu;'
+        )
+      end    
+      item
+        Caption = 'CreateTransform1'
+        Lines.Strings = (
+          'CREATE TRANSFORM FOR hstore LANGUAGE plpythonu ('
+          'FROM SQL WITH FUNCTION hstore_to_plpython(internal),'
+          'TO SQL WITH FUNCTION plpython_to_hstore(internal)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'DropType1'
+        Lines.Strings = (
+          'DROP TYPE box;'
+        )
+      end    
+      item
+        Caption = 'CreateType1'
+        Lines.Strings = (
+          'CREATE TYPE compfoo AS (f1 int, f2 text);'
+        )
+      end    
+      item
+        Caption = 'CreateType2'
+        Lines.Strings = (
+          'CREATE TYPE bug_status AS ENUM (''new'', ''open'', ''closed'');'
+        )
+      end    
+      item
+        Caption = 'CreateType3'
+        Lines.Strings = (
+          'CREATE TYPE float8_range AS RANGE (subtype = float8, subtype_diff = float8mi);'
+        )
+      end    
+      item
+        Caption = 'CreateType4'
+        Lines.Strings = (
+          'CREATE TYPE box;'
+        )
+      end    
+      item
+        Caption = 'CreateType5'
+        Lines.Strings = (
+          'CREATE TYPE box ('
+          '  INTERNALLENGTH = 16,'
+          '  INPUT = my_box_in_function,'
+          '  OUTPUT = my_box_out_function'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateType6'
+        Lines.Strings = (
+          'CREATE TYPE box ('
+          '  INTERNALLENGTH = 16,'
+          '  INPUT = my_box_in_function,'
+          '  OUTPUT = my_box_out_function,'
+          '  ELEMENT = float4'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateType7'
+        Lines.Strings = (
+          'CREATE TYPE bigobj ('
+          '  INPUT = lo_filein, OUTPUT = lo_fileout,'
+          '  INTERNALLENGTH = VARIABLE'
+          ');'
+        )
+      end    
+      item
+        Caption = 'AlterType1'
+        Lines.Strings = (
+          'ALTER TYPE electronic_mail RENAME TO email;'
+        )
+      end    
+      item
+        Caption = 'AlterType2'
+        Lines.Strings = (
+          'ALTER TYPE email OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'AlterType3'
+        Lines.Strings = (
+          'ALTER TYPE email SET SCHEMA customers;'
+        )
+      end    
+      item
+        Caption = 'AlterType4'
+        Lines.Strings = (
+          'ALTER TYPE compfoo ADD ATTRIBUTE f3 int;'
+        )
+      end    
+      item
+        Caption = 'AlterType5'
+        Lines.Strings = (
+          'ALTER TYPE colors ADD VALUE ''orange'' AFTER ''red'';'
+        )
+      end    
+      item
+        Caption = 'AlterType6'
+        Lines.Strings = (
+          'ALTER TYPE colors RENAME VALUE ''purple'' TO ''mauve'';'
+        )
+      end    
+      item
+        Caption = 'Show1'
+        Lines.Strings = (
+          'SHOW DateStyle;'
+        )
+      end    
+      item
+        Caption = 'Show2'
+        Lines.Strings = (
+          'SHOW geqo;'
+        )
+      end    
+      item
+        Caption = 'Show3'
+        Lines.Strings = (
+          'SHOW ALL;'
+        )
+      end    
+      item
+        Caption = 'SetConstraints1'
+        Lines.Strings = (
+          'SET CONSTRAINTS ALL DEFERRED;'
+        )
+      end    
+      item
+        Caption = 'CreateType8'
+        Lines.Strings = (
+          'CREATE TYPE employee_type AS (name text, salary numeric);'
+        )
+      end>
+    Left = 32
+    Top = 496
+  end
+  object sAggregate: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'AlterAggregate1'
+        Lines.Strings = (
+          'ALTER AGGREGATE myavg(integer) RENAME TO my_average;'
+        )
+      end    
+      item
+        Caption = 'AlterAggregate2'
+        Lines.Strings = (
+          'ALTER AGGREGATE myavg(integer) OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'AlterAggregate3'
+        Lines.Strings = (
+          'ALTER AGGREGATE mypercentile(float8 ORDER BY integer) SET SCHEMA myschema;'
+        )
+      end    
+      item
+        Caption = 'AlterAggregate4'
+        Lines.Strings = (
+          'ALTER AGGREGATE mypercentile(float8, integer) SET SCHEMA myschema;'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate1'
+        Lines.Strings = (
+          'CREATE AGGREGATE sum (complex)'
+          '('
+          '    sfunc = complex_add,'
+          '    stype = complex,'
+          '    initcond = ''(0,0)'''
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate2'
+        Lines.Strings = (
+          'CREATE AGGREGATE avg (float8)'
+          '('
+          '    sfunc = float8_accum,'
+          '    stype = float8[],'
+          '    finalfunc = float8_avg,'
+          '    initcond = ''{0,0,0}'''
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate3'
+        Lines.Strings = (
+          'CREATE AGGREGATE sum (complex)'
+          '('
+          '    sfunc = complex_add,'
+          '    stype = complex,'
+          '    initcond = ''(0,0)'','
+          '    msfunc = complex_add,'
+          '    minvfunc = complex_sub,'
+          '    mstype = complex,'
+          '    minitcond = ''(0,0)'''
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate4'
+        Lines.Strings = (
+          'CREATE AGGREGATE unsafe_sum (float8)'
+          '('
+          '    stype = float8,'
+          '    sfunc = float8pl,'
+          '    mstype = float8,'
+          '    msfunc = float8pl,'
+          '    minvfunc = float8mi'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate5'
+        Lines.Strings = (
+          'CREATE AGGREGATE array_accum (anyelement)'
+          '('
+          '   sfunc = array_append,'
+          '    stype = anyarray,'
+          '    initcond = ''{}'''
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate6'
+        Lines.Strings = (
+          'CREATE AGGREGATE array_agg (anynonarray)'
+          '('
+          '    sfunc = array_agg_transfn,'
+          '    stype = internal,'
+          '    finalfunc = array_agg_finalfn,'
+          '    finalfunc_extra'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateAggregate7'
+        Lines.Strings = (
+          'CREATE AGGREGATE percentile_disc (float8 ORDER BY anyelement)'
+          '('
+          '    sfunc = ordered_set_transition,'
+          '    stype = internal,'
+          '    finalfunc = percentile_disc_final,'
+          '    finalfunc_extra'
+          ');'
+        )
+      end    
+      item
+        Caption = 'DropAggregate1'
+        Lines.Strings = (
+          'DROP AGGREGATE myavg(integer);'
+        )
+      end    
+      item
+        Caption = 'DropAggregate2'
+        Lines.Strings = (
+          'DROP AGGREGATE myrank(VARIADIC any ORDER BY VARIADIC any);'
+        )
+      end    
+      item
+        Caption = 'DropAggregate3'
+        Lines.Strings = (
+          'DROP AGGREGATE myavg(integer), myavg(bigint);'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchTemplate1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH TEMPLATE thesaurus;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchParser1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH PARSER my_parser;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchDictionary1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH DICTIONARY english;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchConfiguration1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH CONFIGURATION my_english;'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchTemplate1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH TEMPLATE test1 ('
+          '  INIT = tst_func1,'
+          '  LEXIZE = tst_func2'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchParser1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH PARSER имя ('
+          '  START = функция_начала ,'
+          '  GETTOKEN = функция_выдачи_фрагмента ,'
+          '  END = функция_окончания ,'
+          '  LEXTYPES = функция_лекс_типов,''+LineEnding+'
+          '  HEADLINE = функция_выдержек'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchDictionary1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH DICTIONARY english_ispell ('
+          '  TEMPLATE = ispell,'
+          '  DictFile = english,'
+          '  AffFile = english,'
+          '  StopWords = english'
+          ');'
+        )
+      end    
+      item
+        Caption = 'sCreateTextSearchConfiguration1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH CONFIGURATION public.english'
+          '(COPY = pg_catalog.english );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchTemplate1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH TEMPLATE test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchTemplate2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH TEMPLATE test2 SET SCHEMA schema1;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER test1 SET SCHEMA schema2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( StopWords = newrussian );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( language = dutch, StopWords );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary3'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( dummy );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchConfiguration1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
+        )
+      end>
+    Left = 32
+    Top = 576
+  end
+  object sFunctions: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'DropEventTrigger1'
+        Lines.Strings = (
+          'DROP EVENT TRIGGER snitch;'
+        )
+      end    
+      item
+        Caption = 'CreateEventTrigger1'
+        Lines.Strings = (
+          'CREATE EVENT TRIGGER abort_ddl ON ddl_command_start EXECUTE PROCEDURE abort_any_command();'
+        )
+      end    
+      item
+        Caption = 'AlterEventTrigger1'
+        Lines.Strings = (
+          'ALTER EVENT TRIGGER test1 DISABLE;'
+        )
+      end    
+      item
+        Caption = 'AlterEventTrigger2'
+        Lines.Strings = (
+          'ALTER EVENT TRIGGER test1 ENABLE REPLICA;'
+        )
+      end    
+      item
+        Caption = 'AlterEventTrigger3'
+        Lines.Strings = (
+          'ALTER EVENT TRIGGER test1 OWNER TO CURRENT_USER;'
+        )
+      end    
+      item
+        Caption = 'AlterEventTrigger4'
+        Lines.Strings = (
+          'ALTER EVENT TRIGGER test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'DropLanguage1'
+        Lines.Strings = (
+          'DROP LANGUAGE plsample;'
+        )
+      end    
+      item
+        Caption = 'CreateLanguage1'
+        Lines.Strings = (
+          'CREATE LANGUAGE plperl;'
+        )
+      end    
+      item
+        Caption = 'CreateLanguage2'
+        Lines.Strings = (
+          'CREATE LANGUAGE plsample HANDLER plsample_call_handler;'
+        )
+      end    
+      item
+        Caption = 'AlterLanguage1'
+        Lines.Strings = (
+          'ALTER PROCEDURAL LANGUAGE plsamp RENAME TO plsample;'
+        )
+      end    
+      item
+        Caption = 'AlterLanguage2'
+        Lines.Strings = (
+          'ALTER LANGUAGE plsamp OWNER TO CURRENT_USER;'
+        )
+      end    
+      item
+        Caption = 'DropFunction1'
+        Lines.Strings = (
+          'DROP FUNCTION sqrt(integer);'
+        )
+      end    
+      item
+        Caption = 'DropFunction2'
+        Lines.Strings = (
+          'DROP FUNCTION sqrt(integer), sqrt(bigint);'
+        )
+      end    
+      item
+        Caption = 'DropFunction3'
+        Lines.Strings = (
+          'DROP FUNCTION update_employee_salaries;'
+        )
+      end    
+      item
+        Caption = 'DropFunction4'
+        Lines.Strings = (
+          'DROP FUNCTION update_employee_salaries();'
+        )
+      end    
+      item
+        Caption = 'CreateFunction1'
+        Lines.Strings = (
+          'CREATE FUNCTION add(integer, integer) RETURNS integer'
+          '  AS ''select $1 + $2;'''
+          '  LANGUAGE SQL'
+          '  IMMUTABLE'
+          '  RETURNS NULL ON NULL INPUT;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction2'
+        Lines.Strings = (
+          'CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$'
+          'BEGIN'
+          '  RETURN i + 1;'
+          'END;'
+          '$$ LANGUAGE plpgsql;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction3'
+        Lines.Strings = (
+          'CREATE FUNCTION dup(in int, out f1 int, out f2 text)'
+          'AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
+          'LANGUAGE SQL;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction4'
+        Lines.Strings = (
+          'CREATE TYPE dup_result AS (f1 int, f2 text);'
+        )
+      end    
+      item
+        Caption = 'CreateFunction5'
+        Lines.Strings = (
+          'CREATE FUNCTION dup(int) RETURNS dup_result'
+          '  AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
+          '  LANGUAGE SQL;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction6'
+        Lines.Strings = (
+          'CREATE FUNCTION dup(int) RETURNS TABLE(f1 int, f2 text)'
+          '  AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
+          'LANGUAGE SQL;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction1'
+        Lines.Strings = (
+          'ALTER FUNCTION sqrt(integer) RENAME TO square_root;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction2'
+        Lines.Strings = (
+          'ALTER FUNCTION sqrt(integer) OWNER TO joe;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction3'
+        Lines.Strings = (
+          'ALTER FUNCTION sqrt(integer) SET SCHEMA maths;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction4'
+        Lines.Strings = (
+          'ALTER FUNCTION sqrt(integer) DEPENDS ON EXTENSION mathlib;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction5'
+        Lines.Strings = (
+          'ALTER FUNCTION check_password(text) SET search_path = admin, pg_temp;'
+        )
+      end    
+      item
+        Caption = 'AlterFunction6'
+        Lines.Strings = (
+          'ALTER FUNCTION check_password(text) RESET search_path;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger1'
+        Lines.Strings = (
+          'DROP TRIGGER if_dist_exists ON films;'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger1'
+        Lines.Strings = (
+          'ALTER TRIGGER emp_stamp ON emp RENAME TO emp_track_chgs;'
+        )
+      end    
+      item
+        Caption = 'AlterTrigger2'
+        Lines.Strings = (
+          'ALTER TRIGGER emp_stamp ON emp DEPENDS ON EXTENSION emplib;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger1'
+        Lines.Strings = (
+          'CREATE TRIGGER check_update BEFORE UPDATE ON accounts FOR EACH ROW EXECUTE PROCEDURE check_account_update();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger2'
+        Lines.Strings = (
+          'CREATE TRIGGER check_update BEFORE UPDATE OF balance ON accounts FOR EACH ROW EXECUTE PROCEDURE check_account_update();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger3'
+        Lines.Strings = (
+          'CREATE TRIGGER check_update BEFORE UPDATE ON accounts FOR EACH ROW WHEN (OLD.balance IS DISTINCT FROM NEW.balance) EXECUTE PROCEDURE check_account_update();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger4'
+        Lines.Strings = (
+          'CREATE TRIGGER log_update AFTER UPDATE ON accounts FOR EACH ROW WHEN (OLD.* IS DISTINCT FROM NEW.*) EXECUTE PROCEDURE log_account_update();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger5'
+        Lines.Strings = (
+          'CREATE TRIGGER view_insert INSTEAD OF INSERT ON my_view FOR EACH ROW EXECUTE PROCEDURE view_insert_row();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger6'
+        Lines.Strings = (
+          'CREATE TRIGGER transfer_insert AFTER INSERT ON transfer REFERENCING NEW TABLE AS inserted FOR EACH STATEMENT EXECUTE PROCEDURE check_transfer_balances_to_zero();'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger7'
+        Lines.Strings = (
+          'CREATE TRIGGER paired_items_update AFTER UPDATE ON paired_items REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab FOR EACH ROW EXECUTE PROCEDURE check_matching_pairs();'
+        )
+      end>
+    Left = 32
+    Top = 648
+  end
+  object sDataBase: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'DropTablespace1'
+        Lines.Strings = (
+          'DROP TABLESPACE mystuff;'
+        )
+      end    
+      item
+        Caption = 'CreateTablespace1'
+        Lines.Strings = (
+          'CREATE TABLESPACE dbspace LOCATION ''/data/dbs'';'
+        )
+      end    
+      item
+        Caption = 'CreateTablespace2'
+        Lines.Strings = (
+          'CREATE TABLESPACE indexspace OWNER genevieve LOCATION ''/data/indexes'';'
+        )
+      end    
+      item
+        Caption = 'AlterTablespace1'
+        Lines.Strings = (
+          'ALTER TABLESPACE index_space RENAME TO fast_raid;'
+        )
+      end    
+      item
+        Caption = 'AlterTablespace2'
+        Lines.Strings = (
+          'ALTER TABLESPACE index_space OWNER TO mary;'
+        )
+      end    
+      item
+        Caption = 'DropDatabase1'
+        Lines.Strings = (
+          'DROP DATABASE IF EXISTS base_test1;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase1'
+        Lines.Strings = (
+          'ALTER DATABASE test SET enable_indexscan TO off;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase1'
+        Lines.Strings = (
+          'CREATE DATABASE lusiadas;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase2'
+        Lines.Strings = (
+          'CREATE DATABASE sales OWNER salesapp TABLESPACE salesspace;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase3'
+        Lines.Strings = (
+          'CREATE DATABASE music'
+          '  LC_COLLATE ''sv_SE.utf8'' LC_CTYPE ''sv_SE.utf8'''
+          '  TEMPLATE template0;'
+        )
+      end    
+      item
+        Caption = 'CreateDatabase4'
+        Lines.Strings = (
+          'CREATE DATABASE music2'
+          '  LC_COLLATE ''sv_SE.iso885915'' LC_CTYPE ''sv_SE.iso885915'''
+          '  ENCODING LATIN9'
+          '  TEMPLATE template0;'
+        )
+      end    
+      item
+        Caption = 'DropServer1'
+        Lines.Strings = (
+          'DROP SERVER IF EXISTS foo;'
+        )
+      end    
+      item
+        Caption = 'CreateServer1'
+        Lines.Strings = (
+          'CREATE SERVER myserver FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host ''foo'', dbname ''foodb'', port ''5432'');'
+        )
+      end    
+      item
+        Caption = 'AlterServer1'
+        Lines.Strings = (
+          'ALTER SERVER foo OPTIONS (host ''foo'', dbname ''foodb'');'
+        )
+      end    
+      item
+        Caption = 'AlterServer2'
+        Lines.Strings = (
+          'ALTER SERVER foo VERSION ''8.4'' OPTIONS (SET host ''baz'');'
+        )
+      end>
+    Left = 104
+    Top = 168
+  end
+end

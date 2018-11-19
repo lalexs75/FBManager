@@ -1,0 +1,62 @@
+inherited fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm
+  Height = 443
+  Width = 551
+  ClientHeight = 443
+  ClientWidth = 551
+  DesignLeft = 565
+  DesignTop = 246
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 11
+    Width = 91
+    BorderSpacing.Around = 6
+    Caption = 'Scheme name'
+    ParentColor = False
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtSchemeName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 80
+    Width = 90
+    BorderSpacing.Around = 6
+    Caption = 'Sheme owner'
+    ParentColor = False
+  end
+  object edtSchemeName: TEdit[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 37
+    Width = 533
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+    Text = 'edtSchemeName'
+  end
+  object edtOwnerName: TComboBox[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 106
+    Width = 533
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 1
+  end
+end

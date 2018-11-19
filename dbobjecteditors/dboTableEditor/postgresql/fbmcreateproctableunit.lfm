@@ -1,0 +1,493 @@
+object fbmCreateProcTableForm: TfbmCreateProcTableForm
+  Left = 719
+  Height = 577
+  Top = 275
+  Width = 829
+  Caption = 'Create procedure'
+  ClientHeight = 577
+  ClientWidth = 829
+  OnClose = FormClose
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object CheckGroup1: TCheckGroup
+    Left = 0
+    Height = 101
+    Top = 76
+    Width = 829
+    Align = alTop
+    AutoFill = True
+    AutoSize = True
+    Caption = 'Object types'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 81
+    ClientWidth = 827
+    Columns = 2
+    Items.Strings = (
+      'Create INSERT/UPDATE procedure'
+      'Create SELECT procedure'
+      'Create INSERT procedure'
+      'Create UPDATE procedure'
+      'Create DELETE procedure'
+      'Grant execute to'
+    )
+    OnItemClick = CheckGroup1ItemClick
+    TabOrder = 0
+    Data = {
+      06000000030202020202
+    }
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 400
+    Top = 177
+    Width = 829
+    ActivePage = tabD
+    Align = alClient
+    TabIndex = 4
+    TabOrder = 1
+    object tabIU: TTabSheet
+      Caption = 'Insert/Update'
+      ClientHeight = 367
+      ClientWidth = 819
+      object cbSPIU: TCheckListBox
+        Left = 0
+        Height = 120
+        Top = 51
+        Width = 819
+        Align = alTop
+        ItemHeight = 0
+        OnClickCheck = cbSPIUClickCheck
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Splitter1: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 171
+        Width = 819
+        Align = alTop
+        ResizeAnchor = akTop
+      end
+      object Panel2: TPanel
+        Left = 0
+        Height = 51
+        Top = 0
+        Width = 819
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 51
+        ClientWidth = 819
+        TabOrder = 2
+        object edtSPIUName: TEdit
+          AnchorSideLeft.Control = Label2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel2
+          AnchorSideRight.Control = Panel2
+          AnchorSideRight.Side = asrBottom
+          Left = 117
+          Height = 37
+          Top = 7
+          Width = 695
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          OnChange = cbSPIUClickCheck
+          TabOrder = 0
+          Text = 'edtSPIUName'
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = Panel2
+          AnchorSideBottom.Control = edtSPIUName
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 20
+          Top = 24
+          Width = 104
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Procedure name'
+          ParentColor = False
+        end
+      end
+    end
+    object tabS: TTabSheet
+      Caption = 'Select'
+      ClientHeight = 367
+      ClientWidth = 819
+      object cbSPSelect: TCheckListBox
+        Left = 0
+        Height = 120
+        Top = 51
+        Width = 819
+        Align = alTop
+        ItemHeight = 0
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Splitter2: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 171
+        Width = 819
+        Align = alTop
+        ResizeAnchor = akTop
+      end
+      object Panel3: TPanel
+        Left = 0
+        Height = 51
+        Top = 0
+        Width = 819
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 51
+        ClientWidth = 819
+        TabOrder = 2
+        object edtSPSName: TEdit
+          AnchorSideLeft.Control = Label3
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel3
+          AnchorSideRight.Control = Panel3
+          AnchorSideRight.Side = asrBottom
+          Left = 117
+          Height = 37
+          Top = 7
+          Width = 695
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          TabOrder = 0
+          Text = 'Edit1'
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = Panel3
+          AnchorSideBottom.Control = edtSPSName
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 20
+          Top = 24
+          Width = 104
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Procedure name'
+          ParentColor = False
+        end
+      end
+    end
+    object tabI: TTabSheet
+      Caption = 'Insert'
+      ClientHeight = 367
+      ClientWidth = 819
+      object cbSPInsert: TCheckListBox
+        Left = 0
+        Height = 120
+        Top = 51
+        Width = 819
+        Align = alTop
+        ItemHeight = 0
+        OnClickCheck = cbSPInsertClickCheck
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Splitter3: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 171
+        Width = 819
+        Align = alTop
+        ResizeAnchor = akTop
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 51
+        Top = 0
+        Width = 819
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 51
+        ClientWidth = 819
+        TabOrder = 2
+        object edtSPIName: TEdit
+          AnchorSideLeft.Control = Label4
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel4
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 117
+          Height = 37
+          Top = 7
+          Width = 695
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          TabOrder = 0
+          Text = 'Edit1'
+        end
+        object Label4: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideBottom.Control = edtSPIName
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 20
+          Top = 24
+          Width = 104
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Procedure name'
+          ParentColor = False
+        end
+      end
+    end
+    object tabU: TTabSheet
+      Caption = 'Update'
+      ClientHeight = 367
+      ClientWidth = 819
+      object CheckListBox4: TCheckListBox
+        Left = 0
+        Height = 120
+        Top = 51
+        Width = 819
+        Align = alTop
+        ItemHeight = 0
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Splitter4: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 171
+        Width = 819
+        Align = alTop
+        ResizeAnchor = akTop
+      end
+      object Panel5: TPanel
+        Left = 0
+        Height = 51
+        Top = 0
+        Width = 819
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 51
+        ClientWidth = 819
+        TabOrder = 2
+        object edtSPUName: TEdit
+          AnchorSideLeft.Control = Label5
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel5
+          AnchorSideRight.Control = Panel5
+          AnchorSideRight.Side = asrBottom
+          Left = 117
+          Height = 37
+          Top = 7
+          Width = 695
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          TabOrder = 0
+          Text = 'Edit1'
+        end
+        object Label5: TLabel
+          AnchorSideLeft.Control = Panel5
+          AnchorSideBottom.Control = edtSPUName
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 20
+          Top = 24
+          Width = 104
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Procedure name'
+          ParentColor = False
+        end
+      end
+    end
+    object tabD: TTabSheet
+      Caption = 'Delete'
+      ClientHeight = 367
+      ClientWidth = 819
+      object cbSPDelete: TCheckListBox
+        Left = 0
+        Height = 120
+        Top = 45
+        Width = 819
+        Align = alTop
+        ItemHeight = 0
+        OnClickCheck = cbSPDeleteClickCheck
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Splitter5: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 165
+        Width = 819
+        Align = alTop
+        ResizeAnchor = akTop
+      end
+      object Panel6: TPanel
+        Left = 0
+        Height = 45
+        Top = 0
+        Width = 819
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 45
+        ClientWidth = 819
+        TabOrder = 2
+        object edtSPDName: TEdit
+          AnchorSideLeft.Control = Label6
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel6
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 121
+          Height = 31
+          Top = 7
+          Width = 691
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          TabOrder = 0
+          Text = 'Edit1'
+        end
+        object Label6: TLabel
+          AnchorSideLeft.Control = Panel6
+          AnchorSideBottom.Control = edtSPDName
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 19
+          Top = 19
+          Width = 108
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Procedure name'
+          ParentColor = False
+        end
+      end
+    end
+    object TabSheet6: TTabSheet
+      Caption = 'Grant'
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 45
+    Top = 31
+    Width = 829
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 45
+    ClientWidth = 829
+    TabOrder = 2
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = edtTableName
+      AnchorSideBottom.Side = asrBottom
+      Left = 7
+      Height = 19
+      Top = 19
+      Width = 77
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Table name'
+      ParentColor = False
+    end
+    object edtTableName: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 90
+      Height = 31
+      Top = 7
+      Width = 732
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ReadOnly = True
+      TabOrder = 0
+      Text = 'edtTableName'
+    end
+  end
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 829
+    Items = <    
+      item
+        Action = actCompile
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 85
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListNormal
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 829
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 712
+    Top = 112
+    object actCompile: TAction
+      Caption = 'Compile'
+      ImageIndex = 61
+      OnExecute = actCompileExecute
+    end
+    object fldSelectAll: TAction
+      Tag = 1
+      Category = 'Fields selector'
+      Caption = 'Select all'
+      OnExecute = fldSelectAllExecute
+    end
+    object fldDeselectAll: TAction
+      Tag = -1
+      Category = 'Fields selector'
+      Caption = 'Unselect all'
+      OnExecute = fldSelectAllExecute
+    end
+    object fldInvertSelections: TAction
+      Category = 'Fields selector'
+      Caption = 'Invert selections'
+      OnExecute = fldSelectAllExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 144
+    Top = 304
+    object MenuItem1: TMenuItem
+      Action = fldSelectAll
+    end
+    object MenuItem2: TMenuItem
+      Action = fldDeselectAll
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = fldInvertSelections
+    end
+  end
+end

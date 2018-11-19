@@ -1,0 +1,64 @@
+inherited fdbmCFDbfMainFrame: TfdbmCFDbfMainFrame
+  Height = 452
+  Width = 502
+  ClientHeight = 452
+  ClientWidth = 502
+  DesignLeft = 430
+  DesignTop = 311
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 95
+    BorderSpacing.Around = 6
+    Caption = 'Dbf files folder'
+    ParentColor = False
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDirectory
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 72
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'Alias name'
+    ParentColor = False
+  end
+  object edtDirectory: TDirectoryEdit[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 484
+    ShowHidden = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    TabOrder = 0
+  end
+  object edtAlias: TEdit[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 99
+    Width = 484
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'edtAlias'
+  end
+end

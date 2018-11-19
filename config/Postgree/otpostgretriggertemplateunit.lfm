@@ -1,0 +1,37 @@
+inherited otPostgreTriggerTemplatePage: TotPostgreTriggerTemplatePage
+  Height = 376
+  Width = 551
+  ClientHeight = 376
+  ClientWidth = 551
+  DesignLeft = 529
+  DesignTop = 298
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 551
+    Align = alTop
+    TabOrder = 0
+  end
+  object SynSQLSyn1: TSynSQLSyn[1]
+    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
+    CommentAttri.FrameEdges = sfeAround
+    DataTypeAttri.FrameEdges = sfeAround
+    DefaultPackageAttri.FrameEdges = sfeAround
+    ExceptionAttri.FrameEdges = sfeAround
+    FunctionAttri.FrameEdges = sfeAround
+    IdentifierAttri.FrameEdges = sfeAround
+    KeyAttri.FrameEdges = sfeAround
+    NumberAttri.FrameEdges = sfeAround
+    PLSQLAttri.FrameEdges = sfeAround
+    SpaceAttri.FrameEdges = sfeAround
+    SQLPlusAttri.FrameEdges = sfeAround
+    StringAttri.FrameEdges = sfeAround
+    SymbolAttri.FrameEdges = sfeAround
+    TableNameAttri.FrameEdges = sfeAround
+    VariableAttri.FrameEdges = sfeAround
+    SQLDialect = sqlIngres
+    left = 200
+    top = 175
+  end
+end

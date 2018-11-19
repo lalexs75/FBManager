@@ -1,0 +1,272 @@
+object SQLite3ParserData: TSQLite3ParserData
+  OldCreateOrder = False
+  Height = 796
+  HorizontalOffset = 375
+  VerticalOffset = 148
+  Width = 576
+  object sViews: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'DropView1'
+        Lines.Strings = (
+          'DROP VIEW IF EXISTS my_view;'
+        )
+      end    
+      item
+        Caption = 'DropView2'
+        Lines.Strings = (
+          'DROP VIEW my_view;'
+        )
+      end    
+      item
+        Caption = 'DropView3'
+        Lines.Strings = (
+          'DROP VIEW IF EXISTS "Country Official Languages Limits";'
+        )
+      end    
+      item
+        Caption = 'CreateView1'
+        Lines.Strings = (
+          'CREATE VIEW "Country Languages"'
+          'AS'
+          'SELECT'
+          '  "Country"."Name" AS "Country",'
+          '  CountryLanguage"."Language" AS "Language'
+          'FROM'
+          '  "Country",'
+          '  CountryLanguage'
+          'WHERE'
+          '  Country"."Code" = "CountryLanguage"."CountryCode'
+          'ORDER BY'
+          '  Country", "Language;'
+        )
+      end    
+      item
+        Caption = 'CreateView2'
+        Lines.Strings = (
+          'CREATE VIEW "Country Official Languages"'
+          'AS'
+          'SELECT '
+          '  "Country"."Name" AS "Country", '
+          '  "CountryLanguage"."Language" AS "Language"'
+          'FROM '
+          '  "Country", '
+          '  "CountryLanguage"'
+          'WHERE '
+          '    "Country"."Code" = "CountryLanguage"."CountryCode" '
+          '  AND  '
+          '  "CountryLanguage"."IsOfficial"'
+          'ORDER BY'
+          '  "Country", "Language";'
+        )
+      end>
+    Left = 24
+    Top = 16
+  end
+  object sTrigger: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateTrigger1'
+        Lines.Strings = (
+          'CREATE TRIGGER update_customer_address UPDATE OF address ON customers'
+          'BEGIN'
+          '  UPDATE orders SET address = new.address WHERE customer_name = old.name;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'CreateTrigger2'
+        Lines.Strings = (
+          'CREATE TRIGGER cust_addr_chng INSTEAD OF UPDATE OF cust_addr ON customer_address'
+          'BEGIN'
+          '  UPDATE customer SET cust_addr=NEW.cust_addr'
+          '  WHERE cust_id=NEW.cust_id;'
+          'END;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger1'
+        Lines.Strings = (
+          'DROP TRIGGER IF EXISTS db_name.trigger_name;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger2'
+        Lines.Strings = (
+          'DROP TRIGGER trigger_name;'
+        )
+      end>
+    Left = 24
+    Top = 88
+  end
+  object sIndex: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateIndex1'
+        Lines.Strings = (
+          'CREATE INDEX index_population ON city(population);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex2'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX t1b ON t1(b);'
+        )
+      end    
+      item
+        Caption = 'DropIndex1'
+        Lines.Strings = (
+          'DROP INDEX IF EXISTS db_name.index_name;'
+        )
+      end>
+    Left = 24
+    Top = 160
+  end
+  object sTable: TRxTextHolder
+    Items = <    
+      item
+        Caption = 'CreateTable1'
+        Lines.Strings = (
+          'CREATE TABLE settings('
+          '  category VARCHAR(40),'
+          '  name VARCHAR(40),'
+          '  value VARCHAR(250)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable2'
+        Lines.Strings = (
+          'CREATE TABLE "GENERAL_INFO"('
+          '  "attribute" TEXT NOT NULL,'
+          '  "value" TEXT'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable3'
+        Lines.Strings = (
+          'CREATE TABLE test2('
+          '  id1 INTEGER PRIMARY KEY AUTOINCREMENT,'
+          '  code1 VARCHAR(20) DEFAULT ''1'','
+          '  aqaqa VARCHAR(111),'
+          '  X,'
+          '  A BLOB'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable4'
+        Lines.Strings = (
+          'CREATE TABLE t1('
+          '  a,'
+          '  b,'
+          ' UNIQUE (b)'
+          ');          '
+        )
+      end    
+      item
+        Caption = 'CreateTable5'
+        Lines.Strings = (
+          'CREATE TABLE t1('
+          '  a,'
+          '  b PRIMARY KEY'
+          ');'
+          '      '
+        )
+      end    
+      item
+        Caption = 'CreateTable6'
+        Lines.Strings = (
+          'CREATE TABLE t1('
+          '  a,'
+          '  b'
+          ');    '
+        )
+      end    
+      item
+        Caption = 'CreateTable7'
+        Lines.Strings = (
+          'CREATE TABLE t('
+          '  x INTEGER PRIMARY KEY ASC,'
+          '  y,'
+          '  z'
+          '); '
+        )
+      end    
+      item
+        Caption = 'CreateTable8'
+        Lines.Strings = (
+          'CREATE TABLE t('
+          '  x INTEGER PRIMARY KEY ASC,'
+          '  y,'
+          '  z'
+          '); '
+        )
+      end    
+      item
+        Caption = 'CreateTable9'
+        Lines.Strings = (
+          'CREATE TABLE t('
+          '  x INTEGER,'
+          '  y,'
+          '  z,'
+          ' PRIMARY KEY (x ASC)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable10'
+        Lines.Strings = (
+          'CREATE TABLE t('
+          '  x INTEGER,'
+          '  y,'
+          '  z,'
+          ' PRIMARY KEY (x DESC)'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable11'
+        Lines.Strings = (
+          'CREATE TABLE t('
+          '  x INTEGER PRIMARY KEY DESC,'
+          '  y,'
+          '  z'
+          ');'
+        )
+      end    
+      item
+        Caption = 'AlterTable1'
+        Lines.Strings = (
+          'ALTER TABLE aaa.A ADD COLUMN ss numeric(1, 1);'
+        )
+      end    
+      item
+        Caption = 'AlterTable2'
+        Lines.Strings = (
+          'ALTER TABLE aaa.A RENAME TO ss;'
+        )
+      end    
+      item
+        Caption = 'DropTable1'
+        Lines.Strings = (
+          'DROP TABLE IF EXISTS name_database.name_schema;'
+        )
+      end    
+      item
+        Caption = 'DropTable2'
+        Lines.Strings = (
+          'DROP TABLE IF EXISTS table_name;'
+        )
+      end    
+      item
+        Caption = 'DropTable3'
+        Lines.Strings = (
+          'DROP TABLE tbl_nm;'
+        )
+      end>
+    Left = 24
+    Top = 248
+  end
+end

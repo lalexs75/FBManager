@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="fdbm_SynEditorUnit"><element name="Tfdbm_SynEditorFrame"><short>Класс редактора текстов SQL запросов</short><descr>Класс редактора текстов SQL запросов
+Поддерживает раскраску синтаксиса, автодополнение и т.д.</descr>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

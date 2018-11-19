@@ -1,0 +1,35 @@
+inherited fbmEnvironmentOptionsForm: TfbmEnvironmentOptionsForm
+  Left = 256
+  Height = 487
+  Top = 175
+  Width = 848
+  Caption = 'Environment Options'
+  ClientHeight = 487
+  ClientWidth = 848
+  OnClose = ibmEnvironmentOptionsFormClose
+  OnCloseQuery = nil
+  OnKeyDown = nil
+  SessionProperties = 'Height;Left;Top;Width;ListBox1.Width'
+  ShowHint = True
+  inherited ButtonPanel1: TButtonPanel
+    Height = 46
+    Top = 435
+    Width = 836
+  end
+  inherited ListBox1: TListBox
+    Height = 429
+  end
+  inherited Splitter1: TSplitter
+    Height = 429
+  end
+  inherited Panel1: TPanel
+    Height = 429
+    Width = 711
+  end
+  object RxIniPropStorage1: TRxIniPropStorage[4]
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 180
+    Top = 324
+  end
+end

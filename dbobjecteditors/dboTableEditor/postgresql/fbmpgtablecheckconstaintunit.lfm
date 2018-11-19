@@ -1,0 +1,247 @@
+inherited fbmpgTableCheckConstaintPage: TfbmpgTableCheckConstaintPage
+  Height = 412
+  Width = 690
+  ClientHeight = 412
+  ClientWidth = 690
+  DesignLeft = 386
+  DesignTop = 179
+  object RxDBGrid1: TRxDBGrid[0]
+    Left = 0
+    Height = 412
+    Top = 0
+    Width = 690
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'CHECK_NAME'
+        Width = 250
+        FieldName = 'CHECK_NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'CHECK_BODY'
+        Width = 450
+        FieldName = 'CHECK_BODY'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'CHECK_DESK'
+        Width = 150
+        FieldName = 'CHECK_DESK'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsData
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 0
+    TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
+  end
+  object rxData: TRxMemoryData[1]
+    FieldDefs = <    
+      item
+        Name = 'CHECK_NAME'
+        DataType = ftString
+        Size = 150
+      end    
+      item
+        Name = 'CHECK_BODY'
+        DataType = ftString
+        Size = 1000
+      end    
+      item
+        Name = 'CHECK_DESK'
+        DataType = ftString
+        Size = 1000
+      end>
+    PacketRecords = 0
+    Left = 69
+    Top = 176
+    object rxDataCHECK_NAME: TStringField
+      DisplayWidth = 150
+      FieldKind = fkData
+      FieldName = 'CHECK_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 150
+    end
+    object rxDataCHECK_BODY: TStringField
+      DisplayWidth = 1000
+      FieldKind = fkData
+      FieldName = 'CHECK_BODY'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
+    object rxDataCHECK_DESK: TStringField
+      DisplayWidth = 1000
+      FieldKind = fkData
+      FieldName = 'CHECK_DESK'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
+  end
+  object dsData: TDataSource[2]
+    DataSet = rxData
+    Left = 32
+    Top = 176
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 199
+    Top = 91
+    object actNew: TAction
+      Caption = 'New constraint'
+      ImageIndex = 12
+      OnExecute = actNewExecute
+    end
+    object actEdit: TAction
+      Caption = 'Edit constraint'
+      ImageIndex = 62
+      OnExecute = actEditExecute
+    end
+    object actDelete: TAction
+      Caption = 'Delete constraint'
+      ImageIndex = 13
+      OnExecute = actDeleteExecute
+    end
+    object actPrint: TAction
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = actPrintExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 112
+    Top = 176
+    object MenuItem1: TMenuItem
+      Action = actNew
+    end
+    object MenuItem2: TMenuItem
+      Action = actEdit
+    end
+    object MenuItem3: TMenuItem
+      Action = actDelete
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = actPrint
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[5]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 224
+    Top = 186
+  end
+end

@@ -1,0 +1,4 @@
+inherited FBMConfigPageAbstract: TFBMConfigPageAbstract
+  TabOrder = 0
+  DesignTop = 6
+end

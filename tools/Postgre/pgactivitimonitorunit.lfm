@@ -1,0 +1,1576 @@
+inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
+  Left = 385
+  Height = 648
+  Top = 169
+  Width = 1181
+  Caption = 'Activiti monitor'
+  ClientHeight = 648
+  ClientWidth = 1181
+  OnClose = FormClose
+  OnCreate = FormCreate
+  inherited Panel1: TPanel
+    Height = 45
+    Width = 1181
+    ClientHeight = 45
+    ClientWidth = 1181
+    TabOrder = 1
+    inherited Label1: TLabel
+      Height = 19
+      Top = 19
+      Width = 63
+    end
+    inherited ComboBox1: TComboBox
+      Left = 76
+      Height = 31
+      Width = 1098
+    end
+  end
+  object PageControl1: TPageControl[1]
+    Left = 0
+    Height = 603
+    Top = 45
+    Width = 1181
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 2
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object tabDashboard: TTabSheet
+      Caption = 'Dashboard'
+      ClientHeight = 570
+      ClientWidth = 1171
+      object Chart1: TChart
+        AnchorSideLeft.Control = tabDashboard
+        AnchorSideTop.Control = tabDashboard
+        AnchorSideRight.Control = Label2
+        AnchorSideBottom.Control = Splitter2
+        Left = 0
+        Height = 315
+        Top = 0
+        Width = 585
+        AxisList = <        
+          item
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
+          end        
+          item
+            Alignment = calBottom
+            Marks.AtDataOnly = True
+            Marks.Format = '%2:s'
+            Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Source = DateTimeIntervalChartSource1
+            Marks.Style = smsLegend
+            Minors = <>
+            Title.LabelBrush.Style = bsClear
+          end>
+        Foot.Brush.Color = clBtnFace
+        Foot.Font.Color = clBlue
+        Legend.Alignment = laTopLeft
+        Legend.Visible = True
+        Title.Brush.Color = clBtnFace
+        Title.Font.Color = clBlue
+        Title.Text.Strings = (
+          'Database sessions'
+        )
+        Title.Visible = True
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        object Chart1LineSeries1: TLineSeries
+          Title = 'Active'
+          LinePen.Color = clMaroon
+          LinePen.Width = 2
+          Source = csActAct
+        end
+        object Chart1LineSeries2: TLineSeries
+          Title = 'Idle'
+          LinePen.Color = clTeal
+          LinePen.Width = 2
+          Source = csActIdl
+        end
+        object Chart1LineSeries3: TLineSeries
+          Title = 'Total'
+          LinePen.Color = clBlue
+          LinePen.Width = 2
+          Source = csActAll
+        end
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = tabDashboard
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = tabDashboard
+        AnchorSideTop.Side = asrCenter
+        Left = 585
+        Height = 1
+        Top = 285
+        Width = 1
+        ParentColor = False
+      end
+      object Chart2: TChart
+        AnchorSideLeft.Control = Label2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tabDashboard
+        AnchorSideRight.Control = tabDashboard
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Splitter2
+        Left = 586
+        Height = 315
+        Top = 0
+        Width = 585
+        AxisList = <        
+          item
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
+          end        
+          item
+            Alignment = calBottom
+            Marks.AtDataOnly = True
+            Marks.Format = '%2:s'
+            Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Source = DateTimeIntervalChartSource1
+            Marks.Style = smsLegend
+            Minors = <>
+            Title.LabelBrush.Style = bsClear
+          end>
+        Foot.Brush.Color = clBtnFace
+        Foot.Font.Color = clBlue
+        Legend.Visible = True
+        Title.Brush.Color = clBtnFace
+        Title.Font.Color = clBlue
+        Title.Text.Strings = (
+          'Transaction per second'
+        )
+        Title.Visible = True
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        object Chart2LineSeries1: TLineSeries
+          Title = 'Active'
+          LinePen.Color = clLime
+          LinePen.Width = 2
+          Source = csTransAct
+        end
+        object Chart2LineSeries2: TLineSeries
+          Title = 'Idle'
+          LinePen.Color = clNavy
+          LinePen.Width = 2
+        end
+        object Chart2LineSeries3: TLineSeries
+          Title = 'Rolback'
+          LinePen.Color = clRed
+          LinePen.Width = 2
+        end
+      end
+      object Panel3: TPanel
+        Left = 0
+        Height = 250
+        Top = 320
+        Width = 1171
+        Align = alBottom
+        ClientHeight = 250
+        ClientWidth = 1171
+        TabOrder = 2
+        object Splitter1: TSplitter
+          Left = 1165
+          Height = 248
+          Top = 1
+          Width = 5
+          Align = alRight
+          ResizeAnchor = akRight
+        end
+        object CheckBox1: TCheckBox
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = Panel3
+          Left = 1
+          Height = 23
+          Top = 1
+          Width = 171
+          Caption = 'Refresh active session'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+        object RxDBGrid2: TRxDBGrid
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = CheckBox1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Splitter1
+          AnchorSideBottom.Control = Panel3
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 225
+          Top = 24
+          Width = 1164
+          ColumnDefValues.BlobText = '(данные)'
+          TitleButtons = True
+          AutoSort = True
+          Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'datid'
+              Width = 70
+              FieldName = 'datid'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'datname'
+              Width = 150
+              FieldName = 'datname'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footer.DisplayFormat = 'Count: %d'
+              Footer.ValueType = fvtCount
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'usename'
+              Width = 150
+              FieldName = 'usename'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'application_name'
+              Width = 120
+              FieldName = 'application_name'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'client_addr'
+              Width = 90
+              FieldName = 'client_addr'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'client_hostname'
+              Width = 120
+              FieldName = 'client_hostname'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'client_port'
+              Width = 70
+              FieldName = 'client_port'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'backend_start'
+              Width = 100
+              FieldName = 'backend_start'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'query_start'
+              Width = 100
+              FieldName = 'query_start'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end>
+          KeyStrokes = <          
+            item
+              Command = rxgcShowFindDlg
+              ShortCut = 16454
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowColumnsDlg
+              ShortCut = 16471
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowFilterDlg
+              ShortCut = 16468
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowSortDlg
+              ShortCut = 16467
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowQuickFilter
+              ShortCut = 16465
+              Enabled = True
+            end          
+            item
+              Command = rxgcHideQuickFilter
+              ShortCut = 16456
+              Enabled = True
+            end          
+            item
+              Command = rxgcSelectAll
+              ShortCut = 16449
+              Enabled = True
+            end          
+            item
+              Command = rxgcDeSelectAll
+              ShortCut = 16429
+              Enabled = True
+            end          
+            item
+              Command = rxgcInvertSelection
+              ShortCut = 16426
+              Enabled = True
+            end          
+            item
+              Command = rxgcOptimizeColumnsWidth
+              ShortCut = 16427
+              Enabled = True
+            end          
+            item
+              Command = rxgcCopyCellValue
+              ShortCut = 16451
+              Enabled = True
+            end>
+          FooterOptions.Active = True
+          FooterOptions.Color = clYellow
+          FooterOptions.RowCount = 1
+          FooterOptions.Style = tsNative
+          FooterOptions.DrawFullLine = True
+          SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+          SearchOptions.FromStart = False
+          PropertyStorage = RxIniPropStorage1
+          OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+          FooterColor = clYellow
+          FooterRowCount = 1
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          Color = clWindow
+          DrawFullLine = True
+          FocusColor = clRed
+          SelectedColor = clHighlight
+          GridLineStyle = psSolid
+          DataSource = dsActiveSessions
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+          ReadOnly = True
+          TabOrder = 2
+          TitleStyle = tsNative
+        end
+      end
+      object Splitter2: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 315
+        Width = 1171
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Connections'
+      ClientHeight = 570
+      ClientWidth = 1171
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 520
+        Top = 50
+        Width = 1166
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = True
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'datid'
+            Width = 60
+            FieldName = 'datid'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.ValueType = fvtCount
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'datname'
+            Width = 150
+            FieldName = 'datname'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'usename'
+            Width = 150
+            FieldName = 'usename'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'application_name'
+            Width = 150
+            FieldName = 'application_name'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'state'
+            Width = 150
+            FieldName = 'state'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'client_addr'
+            Width = 150
+            FieldName = 'client_addr'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'client_hostname'
+            Width = 150
+            FieldName = 'client_hostname'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'client_port'
+            Width = 70
+            FieldName = 'client_port'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'backend_start'
+            Width = 90
+            FieldName = 'backend_start'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'query_start'
+            Width = 90
+            FieldName = 'query_start'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'pid'
+            Width = 65
+            FieldName = 'pid'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clYellow
+        FooterOptions.RowCount = 1
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        PropertyStorage = RxIniPropStorage1
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        FooterRowCount = 1
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = True
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsConnections
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 0
+        TitleStyle = tsNative
+      end
+      object Panel2: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 1171
+        Align = alTop
+        ClientHeight = 50
+        ClientWidth = 1171
+        TabOrder = 1
+        object CheckBox2: TCheckBox
+          AnchorSideLeft.Control = SpinEdit1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel2
+          AnchorSideTop.Side = asrCenter
+          Left = 365
+          Height = 23
+          Top = 14
+          Width = 77
+          BorderSpacing.Left = 6
+          Caption = 'Refresh'
+          TabOrder = 0
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = SpeedButton1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideBottom.Control = SpinEdit1
+          AnchorSideBottom.Side = asrBottom
+          Left = 84
+          Height = 19
+          Top = 19
+          Width = 183
+          Anchors = [akLeft, akBottom]
+          Caption = 'Refresh interval (in seconds)'
+          ParentColor = False
+        end
+        object SpinEdit1: TSpinEdit
+          AnchorSideLeft.Control = Label3
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel2
+          Left = 273
+          Height = 31
+          Top = 7
+          Width = 86
+          BorderSpacing.Around = 6
+          MaxValue = 10000
+          OnChange = SpinEdit1Change
+          TabOrder = 1
+          Value = 10
+        end
+        object SpeedButton1: TSpeedButton
+          AnchorSideLeft.Control = Panel2
+          AnchorSideTop.Control = Panel2
+          AnchorSideBottom.Control = Panel2
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 36
+          Top = 7
+          Width = 71
+          Action = tlsRefresh
+          Anchors = [akTop, akLeft, akBottom]
+          AutoSize = True
+          BorderSpacing.Around = 6
+          Flat = True
+        end
+      end
+      object Splitter3: TSplitter
+        Left = 1166
+        Height = 520
+        Top = 50
+        Width = 5
+        Align = alRight
+        ResizeAnchor = akRight
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Statistic'
+      ClientHeight = 570
+      ClientWidth = 1171
+      object RxDBGrid3: TRxDBGrid
+        Left = 0
+        Height = 570
+        Top = 0
+        Width = 1171
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = True
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'PARAM'
+            Width = 572
+            FieldName = 'PARAM'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'VALUE'
+            Width = 572
+            FieldName = 'VALUE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Align = alClient
+        AutoFillColumns = True
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsStatInfo
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+        ReadOnly = True
+        TabOrder = 0
+        TitleStyle = tsNative
+      end
+    end
+  end
+  inherited MainTimer: TTimer[2]
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 416
+    Top = 40
+    object tlsCancelQuery: TAction
+      Caption = 'Cancel query'
+      OnExecute = tlsCancelQueryExecute
+    end
+    object tlsDisconectConnection: TAction
+      Caption = 'Disconect connection'
+      OnExecute = tlsDisconectConnectionExecute
+    end
+    object tlsRefresh: TAction
+      Caption = 'tlsRefresh'
+      ImageIndex = 10
+      OnExecute = tlsRefreshExecute
+    end
+  end
+  object dsActiveSessions: TDataSource[4]
+    DataSet = quActiveSessions
+    Left = 160
+    Top = 520
+  end
+  object quActiveSessions: TZQuery[5]
+    Connection = pgStatDB
+    AfterOpen = quActiveSessionsAfterScroll
+    AfterScroll = quActiveSessionsAfterScroll
+    ReadOnly = True
+    SQL.Strings = (
+      'select'
+      '  pg_stat_activity.datid,'
+      '  pg_stat_activity.datname,'
+      '  pg_stat_activity.usename,'
+      '  pg_stat_activity.state,'
+      '  cast(pg_stat_activity.application_name as varchar(250)) as application_name,'
+      '  pg_stat_activity.client_addr,'
+      '  cast(pg_stat_activity.client_hostname as varchar(250)) as client_hostname,'
+      '  pg_stat_activity.client_port,'
+      '  pg_stat_activity.backend_start,'
+      '  pg_stat_activity.query_start,'
+      '  pg_stat_activity.query'
+      'from'
+      '  pg_stat_activity'
+      'where'
+      '  pg_stat_activity.state = ''active'''
+      'order by'
+      '  pg_stat_activity.datid,'
+      '  pg_stat_activity.usename  '
+    )
+    Params = <>
+    Left = 192
+    Top = 520
+    object quActiveSessionsdatid: TLongintField
+      FieldKind = fkData
+      FieldName = 'datid'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quActiveSessionsdatname: TStringField
+      FieldKind = fkData
+      FieldName = 'datname'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quActiveSessionsusename: TStringField
+      FieldKind = fkData
+      FieldName = 'usename'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quActiveSessionsapplication_name: TStringField
+      FieldKind = fkData
+      FieldName = 'application_name'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1000
+    end
+    object quActiveSessionsclient_addr: TStringField
+      FieldKind = fkData
+      FieldName = 'client_addr'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object quActiveSessionsclient_hostname: TStringField
+      FieldKind = fkData
+      FieldName = 'client_hostname'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1000
+    end
+    object quActiveSessionsclient_port: TLongintField
+      FieldKind = fkData
+      FieldName = 'client_port'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quActiveSessionsbackend_start: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'backend_start'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quActiveSessionsquery_start: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'query_start'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quActiveSessionsquery: TMemoField
+      FieldKind = fkData
+      FieldName = 'query'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object quActiveSessionsstate: TMemoField
+      FieldKind = fkData
+      FieldName = 'state'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object quActivConect: TZReadOnlyQuery[6]
+    Connection = pgStatDB
+    SQL.Strings = (
+      'select'
+      '  count(*) as c_all,'
+      '  sum(case when pg_stat_activity.xact_start is null then 1 else 0 end) c_idle,'
+      '  sum(case when pg_stat_activity.state = ''idle in transaction'' then 1 else 0 end) c_idle_in_tran,'
+      '  sum(case when pg_stat_activity.state = ''idle in transaction'' then 1 else 0 end) c_idle_in_rollback,'
+      '  sum(case when pg_stat_activity.state = ''active'' then 1 else 0 end) c_active_tran'
+      'from'
+      '  pg_stat_activity'
+      '                      '
+    )
+    Params = <>
+    Left = 40
+    Top = 248
+    object quActivConectc_all: TLargeintField
+      FieldKind = fkData
+      FieldName = 'c_all'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object quActivConectc_idle: TLargeintField
+      FieldKind = fkData
+      FieldName = 'c_idle'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object quActivConectc_idle_in_tran: TLargeintField
+      FieldKind = fkData
+      FieldName = 'c_idle_in_tran'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object quActivConectc_idle_in_rollback: TLargeintField
+      FieldKind = fkData
+      FieldName = 'c_idle_in_rollback'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object quActivConectc_active_tran: TLargeintField
+      FieldKind = fkData
+      FieldName = 'c_active_tran'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+  end
+  object pgStatDB: TZConnection[7]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+      'application_name=FBManager'
+      'codepage='
+      'controls_cp=CP_UTF8'
+    )
+    DesignConnection = True
+    BeforeConnect = pgStatDBBeforeConnect
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'postgres'
+    User = 'alexs'
+    Protocol = 'postgresql-9'
+    Left = 176
+    Top = 32
+  end
+  object quConnections: TZQuery[8]
+    Connection = pgStatDB
+    AfterOpen = quConnectionsAfterScroll
+    AfterScroll = quConnectionsAfterScroll
+    SQL.Strings = (
+      'select'
+      '  pg_stat_activity.pid,'
+      '  pg_stat_activity.datid,'
+      '  pg_stat_activity.datname,'
+      '  pg_stat_activity.usename,'
+      '  cast(pg_stat_activity.state as varchar(250)) as state,'
+      '  cast(pg_stat_activity.application_name as varchar(250)) as application_name,'
+      '  pg_stat_activity.client_addr,'
+      '  cast(pg_stat_activity.client_hostname as varchar(250)) as client_hostname,'
+      '  pg_stat_activity.client_port,'
+      '  pg_stat_activity.backend_start,'
+      '  pg_stat_activity.query_start,'
+      '  pg_stat_activity.query'
+      'from'
+      '  pg_stat_activity'
+    )
+    Params = <>
+    Left = 472
+    Top = 376
+    object quConnectionsdatid: TLongintField
+      FieldKind = fkData
+      FieldName = 'datid'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quConnectionsdatname: TStringField
+      FieldKind = fkData
+      FieldName = 'datname'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quConnectionsusename: TStringField
+      FieldKind = fkData
+      FieldName = 'usename'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quConnectionsapplication_name: TStringField
+      FieldKind = fkData
+      FieldName = 'application_name'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1000
+    end
+    object quConnectionsclient_addr: TStringField
+      FieldKind = fkData
+      FieldName = 'client_addr'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object quConnectionsclient_hostname: TStringField
+      FieldKind = fkData
+      FieldName = 'client_hostname'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1000
+    end
+    object quConnectionsclient_port: TLongintField
+      FieldKind = fkData
+      FieldName = 'client_port'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quConnectionsbackend_start: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'backend_start'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quConnectionsquery_start: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'query_start'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quConnectionsquery: TMemoField
+      FieldKind = fkData
+      FieldName = 'query'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object quConnectionsstate: TStringField
+      FieldKind = fkData
+      FieldName = 'state'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 1000
+    end
+    object quConnectionspid: TLongintField
+      FieldKind = fkData
+      FieldName = 'pid'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object csActAll: TDbChartSource[9]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'ALL'
+    Options = [dcsoDateTimeX]
+    Left = 96
+    Top = 328
+  end
+  object rxActivitiData: TRxMemoryData[10]
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'ACTIVE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'IDLE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'ALL'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'IN_TRANS_ACTIVE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'IN_TRANS_IDLE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'IN_TRANS_ROLBACK'
+        DataType = ftInteger
+      end>
+    PacketRecords = 0
+    Left = 136
+    Top = 280
+    object rxActivitiDataACTIVE: TLongintField
+      FieldKind = fkData
+      FieldName = 'ACTIVE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataIDLE: TLongintField
+      FieldKind = fkData
+      FieldName = 'IDLE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataALL: TLongintField
+      FieldKind = fkData
+      FieldName = 'ALL'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataIN_TRANS_ACTIVE: TLongintField
+      FieldKind = fkData
+      FieldName = 'IN_TRANS_ACTIVE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataIN_TRANS_IDLE: TLongintField
+      FieldKind = fkData
+      FieldName = 'IN_TRANS_IDLE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataIN_TRANS_ROLBACK: TLongintField
+      FieldKind = fkData
+      FieldName = 'IN_TRANS_ROLBACK'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxActivitiDataID: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayFormat = 'hh:MM:ss'
+    end
+  end
+  object dsActivitiData: TDataSource[11]
+    DataSet = rxActivitiData
+    Left = 96
+    Top = 280
+  end
+  object csActAct: TDbChartSource[12]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'ACTIVE'
+    Options = [dcsoDateTimeX]
+    Left = 128
+    Top = 328
+  end
+  object csActIdl: TDbChartSource[13]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'IDLE'
+    Options = [dcsoDateTimeX]
+    Left = 160
+    Top = 328
+  end
+  object csTransAct: TDbChartSource[14]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'IN_TRANS_ACTIVE'
+    Left = 600
+    Top = 336
+  end
+  object csTransIdle: TDbChartSource[15]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'IN_TRANS_IDLE'
+    Left = 640
+    Top = 336
+  end
+  object csTransRolback: TDbChartSource[16]
+    DataSource = dsActivitiData
+    FieldX = 'ID'
+    FieldY = 'IN_TRANS_ROLBACK'
+    Left = 680
+    Top = 336
+  end
+  object dsConnections: TDataSource[17]
+    DataSet = quConnections
+    Left = 432
+    Top = 376
+  end
+  object Timer2: TTimer[18]
+    Enabled = False
+    Interval = 10000
+    OnTimer = Timer2Timer
+    Left = 376
+    Top = 160
+  end
+  object RxIniPropStorage1: TRxIniPropStorage[19]
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 259
+    Top = 335
+  end
+  object quDBStat: TZReadOnlyQuery[20]
+    Connection = pgStatDB
+    SQL.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  pg_stat_database'
+      'where'
+      '  pg_stat_database.datname = :dbname'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'dbname'
+        ParamType = ptUnknown
+      end>
+    Left = 192
+    Top = 584
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'dbname'
+        ParamType = ptUnknown
+      end>
+  end
+  object rxStatInfo: TRxMemoryData[21]
+    FieldDefs = <    
+      item
+        Name = 'PARAM'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'VALUE'
+        DataType = ftString
+        Size = 250
+      end>
+    PacketRecords = 0
+    Left = 274
+    Top = 584
+    object rxStatInfoPARAM: TStringField
+      FieldKind = fkData
+      FieldName = 'PARAM'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxStatInfoVALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'VALUE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+  end
+  object dsStatInfo: TDataSource[22]
+    DataSet = rxStatInfo
+    Left = 240
+    Top = 584
+  end
+  object PopupMenu1: TPopupMenu[23]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 512
+    Top = 376
+    object MenuItem1: TMenuItem
+      Action = tlsCancelQuery
+    end
+    object MenuItem2: TMenuItem
+      Action = tlsDisconectConnection
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = tlsRefresh
+    end
+  end
+  object DateTimeIntervalChartSource1: TDateTimeIntervalChartSource[24]
+    Params.Count = 25
+    DateTimeStepFormat.SecondFormat = 'h:nn:ss'
+    Steps = [dtsSecond]
+    SuppressPrevUnit = False
+    Left = 128
+    Top = 384
+  end
+  object quCancelQuery: TZReadOnlyQuery[25]
+    Connection = pgStatDB
+    SQL.Strings = (
+      'select'
+      '  pg_cancel_backend(:pid)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'pid'
+        ParamType = ptUnknown
+      end>
+    Left = 472
+    Top = 440
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'pid'
+        ParamType = ptUnknown
+      end>
+  end
+  object quTerminate: TZReadOnlyQuery[26]
+    Connection = pgStatDB
+    SQL.Strings = (
+      'select'
+      '  pg_terminate_backend(:pid)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'pid'
+        ParamType = ptUnknown
+      end>
+    Left = 472
+    Top = 482
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'pid'
+        ParamType = ptUnknown
+      end>
+  end
+end

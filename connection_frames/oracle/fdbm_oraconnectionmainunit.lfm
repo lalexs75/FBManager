@@ -1,0 +1,247 @@
+inherited fdbmOraConnectionMainFrame: TfdbmOraConnectionMainFrame
+  Height = 434
+  Width = 567
+  ClientHeight = 434
+  ClientWidth = 567
+  DesignLeft = 303
+  DesignTop = 173
+  object Label3: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ComboBox1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 197
+    Width = 71
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Connect as'
+    ParentColor = False
+  end
+  object Label4: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ComboBox2
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 240
+    Width = 91
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Connect using'
+    ParentColor = False
+  end
+  object Label5: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = edtDBName
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 292
+    Width = 98
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Database name'
+    ParentColor = False
+  end
+  object Label6: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = edtAliasName
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 335
+    Width = 91
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Database alias'
+    ParentColor = False
+  end
+  object GroupBox1: TGroupBox[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 173
+    Top = 6
+    Width = 555
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Authentication'
+    ClientHeight = 152
+    ClientWidth = 553
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = RadioButton2
+      AnchorSideBottom.Control = edtUserName
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 20
+      Top = 83
+      Width = 69
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'User name'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = RadioButton2
+      AnchorSideBottom.Control = edtPasswd
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 20
+      Top = 126
+      Width = 61
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Password'
+      ParentColor = False
+    end
+    object RadioButton1: TRadioButton
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 6
+      Height = 24
+      Top = 6
+      Width = 179
+      BorderSpacing.Around = 6
+      Caption = 'Windows authentication'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object RadioButton2: TRadioButton
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = RadioButton1
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 24
+      Top = 36
+      Width = 162
+      BorderSpacing.Around = 6
+      Caption = 'Server authentication'
+      TabOrder = 1
+    end
+    object edtUserName: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RadioButton2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 87
+      Height = 37
+      Top = 66
+      Width = 460
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 2
+    end
+    object edtPasswd: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = edtUserName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 87
+      Height = 37
+      Top = 109
+      Width = 460
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      EchoMode = emPassword
+      PasswordChar = '*'
+      TabOrder = 3
+    end
+  end
+  object ComboBox1: TComboBox[5]
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = GroupBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 110
+    Height = 32
+    Top = 185
+    Width = 451
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'Normal'
+      'SYSDBA'
+      'SYSOPER'
+    )
+    Style = csDropDownList
+    TabOrder = 1
+    Text = 'Normal'
+  end
+  object ComboBox2: TComboBox[6]
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 110
+    Height = 37
+    Top = 223
+    Width = 451
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 2
+    Text = 'ComboBox2'
+  end
+  object edtAliasName: TEdit[7]
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtDBName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 110
+    Height = 37
+    Top = 318
+    Width = 451
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object edtDBName: TComboBox[8]
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Panel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 110
+    Height = 37
+    Top = 275
+    Width = 451
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnExit = edtDBNameExit
+    TabOrder = 4
+  end
+  object Panel1: TPanel[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 3
+    Top = 266
+    Width = 555
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 5
+  end
+end

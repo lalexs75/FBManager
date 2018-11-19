@@ -1,0 +1,31 @@
+object sqlite3_SQLText: Tsqlite3_SQLText
+  OldCreateOrder = False
+  Height = 296
+  HorizontalOffset = 651
+  VerticalOffset = 384
+  Width = 481
+  object sqlTables: TStrHolder
+    Capacity = 16
+    Macros = <>
+    Left = 24
+    Top = 8
+    StrData = (
+      ''
+      '73656c656374'
+      '202073716c6974655f6d61737465722e6e616d652c'
+      '202073716c6974655f6d61737465722e747970652c'
+      '202073716c6974655f6d61737465722e74626c5f6e616d652c'
+      '202073716c6974655f6d61737465722e73716c2c'
+      '20202873716c6974655f6d61737465722e6e616d65206c696b65202773716c6974655f2527292061732073797374656d5f74797065'
+      '66726f6d'
+      '202073716c6974655f6d6173746572'
+      '6f72646572206279'
+      '202073716c6974655f6d61737465722e6e616d65'
+    )
+  end
+  object StrHolder2: TStrHolder
+    Macros = <>
+    Left = 24
+    Top = 240
+  end
+end

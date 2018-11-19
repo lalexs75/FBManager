@@ -1,0 +1,10 @@
+object EditorPage: TEditorPage
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  LCLVersion = '1.9.0.0'
+  TabOrder = 0
+  DesignLeft = 487
+  DesignTop = 264
+end

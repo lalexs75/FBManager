@@ -1,0 +1,31 @@
+inherited fdbm_ShowObjectsPage: Tfdbm_ShowObjectsPage
+  Height = 436
+  Width = 676
+  ClientHeight = 436
+  ClientWidth = 676
+  object Memo1: TMemo[0]
+    Left = 506
+    Height = 436
+    Top = 0
+    Width = 170
+    Align = alClient
+    BorderStyle = bsNone
+    TabOrder = 0
+  end
+  object CheckListBox1: TCheckListBox[1]
+    Left = 0
+    Height = 436
+    Top = 0
+    Width = 501
+    Align = alLeft
+    ItemHeight = 0
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object Splitter1: TSplitter[2]
+    Left = 501
+    Height = 436
+    Top = 0
+    Width = 5
+  end
+end

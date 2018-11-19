@@ -1,0 +1,335 @@
+object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
+  Left = 0
+  Height = 151
+  Top = 0
+  Width = 995
+  ClientHeight = 151
+  ClientWidth = 995
+  TabOrder = 0
+  DesignLeft = 671
+  DesignTop = 437
+  object RxDBGrid2: TRxDBGrid
+    Left = 0
+    Height = 151
+    Top = 0
+    Width = 971
+    ColumnDefValues.BlobText = '(примечание)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'VAR_NAME'
+        Width = 200
+        FieldName = 'VAR_NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(All values)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        PickList.Strings = (
+          'integer'
+          'boolean'
+          'varchar'
+        )
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'VAR_TYPE'
+        Width = 150
+        FieldName = 'VAR_TYPE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(All values)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'VAR_DEV_VALUE'
+        Width = 250
+        FieldName = 'VAR_DEV_VALUE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(All values)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'VAR_DESC'
+        Width = 350
+        FieldName = 'VAR_DESC'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(All values)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsLocalVars
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu3
+    TabOrder = 0
+    OnColEnter = RxDBGrid2ColEnter
+  end
+  object ToolBar2: TToolBar
+    Left = 971
+    Height = 151
+    Top = 0
+    Width = 24
+    Align = alRight
+    AutoSize = True
+    Caption = 'ToolBar1'
+    Images = fbManagerMainForm.ImageListNormal
+    TabOrder = 1
+    object ToolButton7: TToolButton
+      Left = 1
+      Top = 2
+      Action = lvAdd
+    end
+    object ToolButton9: TToolButton
+      Left = 1
+      Top = 24
+      Action = lvDelete
+    end
+    object ToolButton10: TToolButton
+      Left = 1
+      Top = 46
+      Width = 23
+      Caption = 'ToolButton4'
+      Style = tbsSeparator
+    end
+    object ToolButton11: TToolButton
+      Left = 1
+      Top = 54
+      Action = lvUp
+    end
+    object ToolButton12: TToolButton
+      Left = 1
+      Top = 76
+      Action = lvDown
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 40
+    Top = 48
+    object lvAdd: TAction
+      Category = 'Local variables'
+      Caption = 'Add local variable'
+      ImageIndex = 12
+      OnExecute = lvAddExecute
+    end
+    object lvDelete: TAction
+      Category = 'Local variables'
+      Caption = 'Delete local variable'
+      ImageIndex = 13
+      OnExecute = lvDeleteExecute
+    end
+    object lvUp: TAction
+      Category = 'Local variables'
+      Caption = 'Up'
+      ImageIndex = 54
+      OnExecute = lvUpExecute
+    end
+    object lvDown: TAction
+      Category = 'Local variables'
+      Caption = 'Down'
+      ImageIndex = 52
+      OnExecute = lvDownExecute
+    end
+    object lvPrintList: TAction
+      Category = 'Local variables'
+      Caption = 'Print local variables list'
+      ImageIndex = 14
+    end
+  end
+  object dsLocalVars: TDataSource
+    DataSet = rxLocalVars
+    Left = 224
+    Top = 56
+  end
+  object rxLocalVars: TRxMemoryData
+    FieldDefs = <    
+      item
+        Name = 'VAR_NAME'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'VAR_TYPE'
+        DataType = ftString
+        Size = 200
+      end    
+      item
+        Name = 'VAR_DESC'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'VAR_DEV_VALUE'
+        DataType = ftString
+        Size = 250
+      end>
+    AfterOpen = rxLocalVarsAfterScroll
+    AfterClose = rxLocalVarsAfterScroll
+    AfterPost = rxLocalVarsAfterScroll
+    AfterDelete = rxLocalVarsAfterScroll
+    AfterScroll = rxLocalVarsAfterScroll
+    PacketRecords = 0
+    Left = 256
+    Top = 56
+    object rxLocalVarsVAR_NAME: TStringField
+      DisplayWidth = 100
+      FieldKind = fkData
+      FieldName = 'VAR_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object rxLocalVarsVAR_TYPE: TStringField
+      DisplayWidth = 200
+      FieldKind = fkData
+      FieldName = 'VAR_TYPE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object rxLocalVarsVAR_DESC: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'VAR_DESC'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxLocalVarsVAR_DEV_VALUE: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'VAR_DEV_VALUE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+  end
+  object PopupMenu3: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 296
+    Top = 56
+    object MenuItem10: TMenuItem
+      Action = lvAdd
+    end
+    object MenuItem12: TMenuItem
+      Action = lvDelete
+    end
+    object MenuItem13: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem14: TMenuItem
+      Action = lvUp
+    end
+    object MenuItem15: TMenuItem
+      Action = lvDown
+    end
+    object MenuItem16: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem17: TMenuItem
+      Action = lvPrintList
+    end
+  end
+end

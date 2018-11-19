@@ -1,0 +1,87 @@
+inherited fbmFTSConfigEditorPage: TfbmFTSConfigEditorPage
+  DesignLeft = 573
+  DesignTop = 336
+  object ComboBox1: TComboBox[0]
+    AnchorSideLeft.Control = RadioButton1
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 105
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object RadioButton1: TRadioButton[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 75
+    Width = 66
+    BorderSpacing.Around = 6
+    Caption = 'Parser'
+    Checked = True
+    OnChange = RadioButton1Change
+    TabOrder = 1
+    TabStop = True
+  end
+  object RadioButton2: TRadioButton[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 148
+    Width = 145
+    BorderSpacing.Around = 6
+    Caption = 'Copy configuration'
+    OnChange = RadioButton1Change
+    TabOrder = 2
+  end
+  object ComboBox2: TComboBox[3]
+    AnchorSideLeft.Control = RadioButton2
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 178
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 3
+  end
+  object Label1: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 151
+    BorderSpacing.Around = 6
+    Caption = 'FTS configuration name'
+    ParentColor = False
+  end
+  object Edit1: TEdit[5]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+end

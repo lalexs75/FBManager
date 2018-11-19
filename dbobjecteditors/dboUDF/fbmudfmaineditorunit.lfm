@@ -1,0 +1,330 @@
+inherited fbmUDFMainEditorFrame: TfbmUDFMainEditorFrame
+  Height = 538
+  Width = 668
+  ClientHeight = 538
+  ClientWidth = 668
+  DesignLeft = 455
+  DesignTop = 167
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 15
+    Top = 6
+    Width = 85
+    BorderSpacing.Around = 6
+    Caption = 'Function name'
+    ParentColor = False
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUdfName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 15
+    Top = 58
+    Width = 59
+    BorderSpacing.Around = 6
+    Caption = 'In module'
+    ParentColor = False
+  end
+  object Label3: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtLibName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 15
+    Top = 110
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Entry point'
+    ParentColor = False
+  end
+  object Label4: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtEntryName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 15
+    Top = 162
+    Width = 72
+    BorderSpacing.Around = 6
+    Caption = 'Input values'
+    ParentColor = False
+  end
+  object Label5: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RxDBGrid1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = cbReturnValue
+    Left = 6
+    Height = 15
+    Top = 402
+    Width = 37
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Around = 6
+    Caption = 'Return'
+    ParentColor = False
+  end
+  object Label6: TLabel[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbReturnValue
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = cbReturnMetod
+    Left = 6
+    Height = 15
+    Top = 458
+    Width = 80
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Around = 6
+    Caption = 'Return metod'
+    ParentColor = False
+  end
+  object edtUdfName: TEdit[6]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 25
+    Top = 27
+    Width = 650
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object edtLibName: TEdit[7]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 25
+    Top = 79
+    Width = 650
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object edtEntryName: TEdit[8]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 25
+    Top = 131
+    Width = 650
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object RxDBGrid1: TRxDBGrid[9]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Label5
+    Left = 12
+    Height = 213
+    Top = 183
+    Width = 650
+    TitleButtons = False
+    AutoSort = False
+    Columns = <    
+      item
+        PickList.Strings = (
+          'SMALLINT'
+          'INTEGER'
+          'QUAD'
+          'FLOAT'
+          'DATE'
+          'TIME'
+          'CHAR'
+          'BIGINT'
+          'DOUBLE PRECISION'
+          'TIMESTAMP'
+          'VARCHAR'
+          'CSTRING'
+          'BLOB_ID'
+          'BLOB'
+        )
+        Title.Alignment = taCenter
+        Title.Caption = 'INPUT_VALUE'
+        Title.Orientation = toHorizontal
+        Width = 630
+        FieldName = 'INPUT_VALUE'
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        EditButtons = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    OptionsRx = []
+    FooterColor = clYellow
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoFillColumns = True
+    BorderSpacing.Around = 6
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsInputValues
+    FixedCols = 0
+    Options = [dgEditing, dgTitles, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    ParentColor = False
+    TabOrder = 3
+    TitleStyle = tsNative
+  end
+  object cbReturnValue: TComboBox[10]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Label6
+    Left = 12
+    Height = 29
+    Top = 423
+    Width = 650
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 4
+  end
+  object cbReturnMetod: TComboBox[11]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = cbFreeIt
+    Left = 12
+    Height = 25
+    Top = 479
+    Width = 650
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'By Value'
+      'By Reference'
+      'By Descriptor'
+    )
+    Style = csDropDownList
+    TabOrder = 5
+  end
+  object cbFreeIt: TCheckBox[12]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbReturnMetod
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 22
+    Top = 510
+    Width = 64
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Around = 6
+    Caption = 'Free IT'
+    TabOrder = 6
+  end
+  object rxInputValues: TRxMemoryData[13]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'INPUT_VALUE'
+        DataType = ftString
+        Precision = 0
+        Size = 30
+      end>
+    PacketRecords = 0
+    left = 424
+    top = 184
+    object rxInputValuesINPUT_VALUE: TStringField
+      DisplayWidth = 30
+      FieldKind = fkData
+      FieldName = 'INPUT_VALUE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+  end
+  object dsInputValues: TDataSource[14]
+    DataSet = rxInputValues
+    left = 376
+    top = 184
+  end
+  object frInputValues: TfrDBDataSet[15]
+    DataSet = rxInputValues
+    left = 464
+    top = 184
+  end
+end

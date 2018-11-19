@@ -1,0 +1,8 @@
+inherited fbmDDLPage: TfbmDDLPage
+  Height = 376
+  Width = 417
+  Color = clBtnFace
+  ParentColor = False
+  DesignLeft = 567
+  DesignTop = 281
+end

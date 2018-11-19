@@ -1,0 +1,392 @@
+object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
+  Left = 638
+  Height = 517
+  Top = 184
+  Width = 702
+  Caption = 'mysql_CreateDatabaseForm'
+  ClientHeight = 517
+  ClientWidth = 702
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.9.0.0'
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 465
+    Width = 690
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 459
+    Top = 0
+    Width = 702
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'Create params'
+      ClientHeight = 425
+      ClientWidth = 692
+      object edtCodePage: TComboBox
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label6
+        Left = 12
+        Height = 37
+        Top = 216
+        Width = 328
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 4
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 190
+        Width = 49
+        BorderSpacing.Around = 6
+        Caption = 'Charset'
+        ParentColor = False
+      end
+      object edtPwd: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 322
+        Height = 37
+        Top = 121
+        Width = 364
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        OnChange = edtUserNameChange
+        TabOrder = 3
+      end
+      object edtUserName: TEdit
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label5
+        Left = 12
+        Height = 37
+        Top = 121
+        Width = 298
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        OnChange = edtUserNameChange
+        TabOrder = 2
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = edtDataBaseName
+        AnchorSideTop.Side = asrBottom
+        Left = 316
+        Height = 20
+        Top = 95
+        Width = 61
+        BorderSpacing.Top = 6
+        Caption = 'Password'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtDataBaseName
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 95
+        Width = 69
+        BorderSpacing.Around = 6
+        Caption = 'User name'
+        ParentColor = False
+      end
+      object edtPort: TSpinEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 588
+        Height = 37
+        Top = 52
+        Width = 98
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxValue = 65535
+        OnChange = edtUserNameChange
+        TabOrder = 1
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = cbServName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 582
+        Height = 20
+        Top = 26
+        Width = 26
+        BorderSpacing.Around = 6
+        Caption = 'Port'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = edtDataBaseName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 316
+        Height = 20
+        Top = 26
+        Width = 70
+        BorderSpacing.Around = 6
+        Caption = 'Host name'
+        ParentColor = False
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 24
+        Top = 285
+        Width = 157
+        BorderSpacing.Around = 6
+        Caption = 'Register after create'
+        TabOrder = 6
+      end
+      object edtDataBaseName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 37
+        Top = 52
+        Width = 298
+        BorderSpacing.Around = 6
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 20
+        Top = 26
+        Width = 98
+        BorderSpacing.Around = 6
+        Caption = 'Database name'
+        ParentColor = False
+      end
+      object CheckBox2: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 24
+        Top = 315
+        Width = 164
+        BorderSpacing.Around = 6
+        Caption = 'SQL metadata log file'
+        TabOrder = 7
+      end
+      object edtLogFile: TFileNameEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 37
+        Top = 345
+        Width = 674
+        DialogOptions = []
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxLength = 0
+        TabOrder = 8
+      end
+      object DividerBevel1: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 20
+        Top = 0
+        Width = 692
+        Caption = 'Connection params'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DividerBevel2: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtUserName
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 20
+        Top = 164
+        Width = 692
+        Caption = 'Databse property'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DividerBevel3: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtCollate
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 20
+        Top = 259
+        Width = 692
+        Caption = 'FBManager options'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label11: TLabel
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 352
+        Height = 20
+        Top = 190
+        Width = 45
+        BorderSpacing.Around = 6
+        Caption = 'Collate'
+        ParentColor = False
+      end
+      object edtCollate: TComboBox
+        AnchorSideLeft.Control = Label11
+        AnchorSideTop.Control = Label11
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 358
+        Height = 37
+        Top = 216
+        Width = 328
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 5
+      end
+      object cbServName: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        Left = 322
+        Height = 37
+        Top = 52
+        Width = 254
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        OnChange = edtUserNameChange
+        TabOrder = 9
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = TabSheet1
+        Left = 346
+        Height = 1
+        Top = 0
+        Width = 1
+        ParentColor = False
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'SQL'
+    end
+  end
+  object TestDB: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    Connected = True
+    HostName = '127.0.0.1'
+    Port = 0
+    Protocol = 'mysql'
+    Left = 144
+    Top = 148
+  end
+  object quCharsets: TZReadOnlyQuery
+    Connection = TestDB
+    SQL.Strings = (
+      'select'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME,'
+      '  CHARACTER_SETS.DEFAULT_COLLATE_NAME'
+      'from'
+      '  information_schema.CHARACTER_SETS'
+      'order by'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME'
+    )
+    Params = <>
+    Left = 144
+    Top = 216
+    object quCharsetsCHARACTER_SET_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'CHARACTER_SET_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 128
+    end
+    object quCharsetsDEFAULT_COLLATE_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'DEFAULT_COLLATE_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 128
+    end
+  end
+  object rxCollations: TRxMemoryData
+    FieldDefs = <>
+    PacketRecords = 0
+    Left = 216
+    Top = 280
+  end
+  object quCollations: TZReadOnlyQuery
+    Connection = TestDB
+    Params = <>
+    Left = 216
+    Top = 216
+  end
+end

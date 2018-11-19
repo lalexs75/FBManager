@@ -1,0 +1,5 @@
+inherited ConnectionDlgPage: TConnectionDlgPage
+  TabOrder = 0
+  DesignLeft = 401
+  DesignTop = 236
+end

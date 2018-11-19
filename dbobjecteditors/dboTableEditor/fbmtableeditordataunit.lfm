@@ -1,0 +1,366 @@
+inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
+  Height = 464
+  Width = 844
+  ClientHeight = 464
+  ClientWidth = 844
+  DesignLeft = 352
+  DesignTop = 314
+  object DataGrid: TRxDBGrid[0]
+    Left = 0
+    Height = 431
+    Top = 33
+    Width = 844
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = True
+    AutoSort = True
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = Datasource1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TitleStyle = tsNative
+    OnColumnSized = DataGridColumnSized
+    OnDblClick = DataGridDblClick
+    OnKeyDown = DataGridKeyDown
+    OnMouseUp = DataGridMouseUp
+  end
+  object Panel1: TPanel[1]
+    Left = 0
+    Height = 33
+    Top = 0
+    Width = 844
+    Align = alTop
+    ClientHeight = 33
+    ClientWidth = 844
+    TabOrder = 1
+    object SpeedButton1: TSpeedButton
+      AnchorSideLeft.Control = DBNavigator1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = DBNavigator1
+      AnchorSideBottom.Control = DBNavigator1
+      AnchorSideBottom.Side = asrBottom
+      Left = 242
+      Height = 31
+      Top = 1
+      Width = 196
+      Action = statRecordCount
+      Anchors = [akTop, akLeft, akBottom]
+    end
+    object DBNavigator1: TDBNavigator
+      Left = 1
+      Height = 31
+      Top = 1
+      Width = 241
+      Align = alLeft
+      BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
+      ClientHeight = 31
+      ClientWidth = 241
+      DataSource = Datasource1
+      Options = []
+      TabOrder = 0
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = SpeedButton1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideBottom.Control = SpinEdit1
+      AnchorSideBottom.Side = asrBottom
+      Left = 444
+      Height = 19
+      Top = 7
+      Width = 120
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Around = 6
+      Caption = 'Count row to fetch'
+      ParentColor = False
+    end
+    object SpinEdit1: TSpinEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Side = asrBottom
+      Left = 570
+      Height = 31
+      Top = 1
+      Width = 90
+      BorderSpacing.Left = 6
+      MaxValue = 2000000
+      TabOrder = 1
+      Value = 1000
+    end
+    object SpeedButton3: TSpeedButton
+      AnchorSideLeft.Control = SpinEdit1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 666
+      Height = 31
+      Top = 1
+      Width = 32
+      Action = statFilter
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Left = 6
+      ShowCaption = False
+    end
+    object SpeedButton4: TSpeedButton
+      AnchorSideLeft.Control = SpeedButton3
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 698
+      Height = 31
+      Top = 1
+      Width = 32
+      Action = statFunct
+      Anchors = [akTop, akLeft, akBottom]
+      ShowCaption = False
+    end
+  end
+  object Datasource1: TDataSource[2]
+    OnStateChange = Datasource1StateChange
+    Left = 116
+    Top = 102
+  end
+  object PopupMenu1: TPopupMenu[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 232
+    Top = 102
+    object MenuItem8: TMenuItem
+      Action = dataCopyCellFieldName
+    end
+    object MenuItem15: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem17: TMenuItem
+      Action = dataCopyRows
+    end
+    object MenuItem14: TMenuItem
+      Action = dataCopyAsInsert
+    end
+    object MenuItem16: TMenuItem
+      Action = dataCopyAsUpdate
+    end
+    object MenuItem7: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem1: TMenuItem
+      Action = dataExport
+      OnClick = dataExportExecute
+    end
+    object MenuItem4: TMenuItem
+      Action = dataExportToSpreadSheet
+    end
+    object MenuItem5: TMenuItem
+      Action = dataExportToPDF
+    end
+    object MenuItem10: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = dataImport
+    end
+    object MenuItem12: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem13: TMenuItem
+      Action = statFilter
+    end
+    object MenuItem11: TMenuItem
+      Action = statFunct
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = dataPrint
+      OnClick = dataPrintExecute
+    end
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 282
+    Top = 104
+    object dataPrint: TAction
+      Category = 'Result'
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = dataPrintExecute
+    end
+    object dataExport: TAction
+      Category = 'Result'
+      Caption = 'Export data...'
+      ImageIndex = 64
+      OnExecute = dataExportExecute
+    end
+    object statRecordCount: TAction
+      Category = 'Statistic'
+      Caption = 'Record count...'
+      ImageIndex = 49
+      OnExecute = statRecordCountExecute
+    end
+    object dataExportToSpreadSheet: TAction
+      Category = 'Result'
+      Caption = 'Export to spreadsheet'
+      OnExecute = dataExportToSpreadSheetExecute
+    end
+    object dataExportToPDF: TAction
+      Category = 'Result'
+      Caption = 'Export to PDF file'
+      OnExecute = dataExportToPDFExecute
+    end
+    object dataCopyCellFieldName: TAction
+      Category = 'Result'
+      Caption = 'Copy cell field name'
+      ImageIndex = 24
+      OnExecute = dataCopyCellFieldNameExecute
+    end
+    object dataImport: TAction
+      Category = 'data'
+      Caption = 'Import'
+      OnExecute = dataImportExecute
+    end
+    object statFunct: TAction
+      Category = 'Result'
+      Caption = 'Summary line'
+      ImageIndex = 50
+      OnExecute = statFunctExecute
+    end
+    object statFilter: TAction
+      Category = 'Result'
+      Caption = 'Filter in table'
+      ImageIndex = 33
+      OnExecute = statFilterExecute
+    end
+    object dataCopyRows: TAction
+      Category = 'Result'
+      Caption = 'dataCopyRows'
+      OnExecute = dataCopyRowsExecute
+    end
+    object dataCopyAsInsert: TAction
+      Category = 'Result'
+      Caption = 'dataCopyAsInsert'
+      OnExecute = dataCopyAsInsertExecute
+    end
+    object dataCopyAsUpdate: TAction
+      Category = 'Result'
+      Caption = 'dataCopyAsUpdate'
+      OnExecute = dataCopyAsUpdateExecute
+    end
+  end
+  object FPDataExporter1: TFPDataExporter[5]
+    Left = 136
+    Top = 163
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[6]
+    RxDBGrid = DataGrid
+    Caption = 'Export to speadsheet'
+    ShowSetupForm = True
+    OnBeforeExecute = RxDBGridExportSpreadSheet1BeforeExecute
+    FileName = 'data.ods'
+    Options = [ressExportTitle, ressExportColors, ressExportFooter, ressOverwriteExisting]
+    OpenAfterExport = True
+    Left = 184
+    Top = 163
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[7]
+    RxDBGrid = DataGrid
+    Caption = 'Печать списка'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    ReportTitle = 'Data'
+    Left = 232
+    Top = 163
+  end
+  object RxDBGridFooterTools1: TRxDBGridFooterTools[8]
+    RxDBGrid = DataGrid
+    Caption = 'Totals row'
+    ShowSetupForm = True
+    Left = 272
+    Top = 163
+  end
+  object RxDBGridExportPDF1: TRxDBGridExportPDF[9]
+    RxDBGrid = DataGrid
+    Caption = 'Экспорт в PDF файл'
+    ShowSetupForm = True
+    FileName = 'data.pdf'
+    Options = [repExportTitle, repExportColors, repExportFooter, repOverwriteExisting, repExportImages]
+    PdfOptions.Options = []
+    OpenAfterExport = True
+    Left = 312
+    Top = 163
+  end
+end

@@ -1,0 +1,101 @@
+inherited PGRuleListPage: TPGRuleListPage
+  Height = 483
+  Width = 623
+  ClientHeight = 483
+  ClientWidth = 623
+  OnResize = FrameResize
+  DesignLeft = 977
+  DesignTop = 152
+  object HeaderControl1: THeaderControl[0]
+    Left = 0
+    Height = 30
+    Top = 0
+    Width = 623
+    DragReorder = False
+    Sections = <    
+      item
+        Alignment = taLeftJustify
+        Text = 'Rules'
+        Width = 300
+        Visible = True
+      end    
+      item
+        Alignment = taLeftJustify
+        Text = 'Description'
+        Width = 30
+        Visible = True
+      end>
+    OnSectionResize = HeaderControl1SectionResize
+    OnSectionTrack = HeaderControl1SectionTrack
+    Align = alTop
+  end
+  object TreeView1: TTreeView[1]
+    Left = 0
+    Height = 130
+    Top = 30
+    Width = 623
+    Align = alClient
+    Images = fbManagerMainForm.ImageList2
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    OnAdvancedCustomDrawItem = TreeView1AdvancedCustomDrawItem
+    OnClick = TreeView1Click
+    OnDblClick = TreeView1DblClick
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+  end
+  object Panel1: TPanel[2]
+    Left = 0
+    Height = 318
+    Top = 165
+    Width = 623
+    Align = alBottom
+    BevelOuter = bvLowered
+    TabOrder = 2
+  end
+  object Splitter1: TSplitter[3]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 160
+    Width = 623
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object PopupMenu1: TPopupMenu[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 324
+    Top = 116
+    object MenuItem1: TMenuItem
+      Action = edtRuleNew
+    end
+    object MenuItem2: TMenuItem
+      Action = edtRuleEdit
+    end
+    object MenuItem3: TMenuItem
+      Action = edtRuleDelete
+    end
+  end
+  object ActionList1: TActionList[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 382
+    Top = 116
+    object edtRuleNew: TAction
+      Category = 'Editor'
+      Caption = 'New rule'
+      ImageIndex = 12
+      OnExecute = edtRuleNewExecute
+    end
+    object edtRuleEdit: TAction
+      Category = 'Editor'
+      Caption = 'Edit rule'
+      OnExecute = TreeView1DblClick
+    end
+    object edtRuleDelete: TAction
+      Category = 'Editor'
+      Caption = 'Delete rule'
+      ImageIndex = 13
+      OnExecute = edtRuleDeleteExecute
+    end
+  end
+end

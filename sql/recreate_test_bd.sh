@@ -1,0 +1,1 @@
+sqlite3 fbm_meta_base.db_test -init ./aa.sql

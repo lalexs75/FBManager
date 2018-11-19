@@ -1,0 +1,71 @@
+inherited fbmSPEdtMainPageFrame: TfbmSPEdtMainPageFrame
+  Height = 497
+  Width = 1038
+  ClientHeight = 497
+  ClientWidth = 1038
+  DesignLeft = 402
+  DesignTop = 242
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 200
+    Top = 0
+    Width = 1038
+    ActivePage = tabReturnParams
+    Align = alTop
+    TabIndex = 2
+    TabOrder = 0
+    object tabHeader: TTabSheet
+      Caption = 'tabHeader'
+      ClientHeight = 167
+      ClientWidth = 1028
+      object Label1: TLabel
+        AnchorSideLeft.Control = tabHeader
+        AnchorSideTop.Control = tabHeader
+        Left = 6
+        Height = 20
+        Top = 6
+        Width = 105
+        BorderSpacing.Around = 6
+        Caption = 'Procedure name'
+        ParentColor = False
+      end
+      object edtProcName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tabHeader
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 37
+        Top = 32
+        Width = 1010
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 0
+      end
+    end
+    object tabInputParams: TTabSheet
+      Caption = 'Input params'
+    end
+    object tabReturnParams: TTabSheet
+      Caption = 'Return params'
+    end
+    object tabLocalVars: TTabSheet
+      Caption = 'Local variables'
+    end
+  end
+  object Splitter1: TSplitter[1]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 200
+    Width = 1038
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object ActionList1: TActionList[2]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 396
+    Top = 264
+  end
+end

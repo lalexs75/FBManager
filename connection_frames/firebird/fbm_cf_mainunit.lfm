@@ -1,0 +1,507 @@
+inherited fbmCFMainFrame: TfbmCFMainFrame
+  Height = 583
+  Width = 668
+  ClientHeight = 583
+  ClientWidth = 668
+  DesignLeft = 374
+  DesignTop = 161
+  object Label2: TLabel[0]
+    AnchorSideLeft.Control = cbProtocol
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 145
+    Height = 20
+    Top = 6
+    Width = 81
+    BorderSpacing.Around = 6
+    Caption = 'Server name'
+    ParentColor = False
+  end
+  object Label3: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 53
+    BorderSpacing.Around = 6
+    Caption = 'Protocol'
+    ParentColor = False
+  end
+  object Label4: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbProtocol
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 70
+    Width = 83
+    BorderSpacing.Around = 6
+    Caption = 'Database file'
+    ParentColor = False
+  end
+  object Label5: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 200
+    Width = 91
+    BorderSpacing.Around = 6
+    Caption = 'Database alias'
+    ParentColor = False
+  end
+  object Label6: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = EditAliasName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 269
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object Label7: TLabel[5]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = EditAliasName
+    AnchorSideTop.Side = asrBottom
+    Left = 341
+    Height = 20
+    Top = 269
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label8: TLabel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = EditPassword
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 338
+    Width = 29
+    BorderSpacing.Around = 6
+    Caption = 'Role'
+    ParentColor = False
+  end
+  object Label9: TLabel[7]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label8
+    Left = 341
+    Height = 20
+    Top = 344
+    Width = 49
+    BorderSpacing.Around = 6
+    Caption = 'Charset'
+    ParentColor = False
+    Visible = False
+  end
+  object Label14: TLabel[8]
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 475
+    Height = 20
+    Top = 6
+    Width = 92
+    Anchors = [akTop]
+    BorderSpacing.Around = 6
+    Caption = 'Server version'
+    ParentColor = False
+  end
+  object cbProtocol: TComboBox[9]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 12
+    Height = 32
+    Top = 32
+    Width = 127
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 1
+    Items.Strings = (
+      'Local Host'
+      'TCP/IP'
+      'NetBEUI'
+    )
+    OnChange = cbProtocolChange
+    Style = csDropDownList
+    TabOrder = 0
+    Text = 'TCP/IP'
+  end
+  object EditAliasName: TEdit[10]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 226
+    Width = 650
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object EditUserName: TEdit[11]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 295
+    Width = 316
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object EditPassword: TEdit[12]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 347
+    Height = 37
+    Top = 295
+    Width = 315
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 3
+  end
+  object EditRole: TEdit[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 6
+    Height = 37
+    Top = 364
+    Width = 322
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object CB_CharSet: TComboBox[14]
+    AnchorSideLeft.Control = Label9
+    AnchorSideTop.Control = Label9
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = EditRole
+    AnchorSideBottom.Side = asrBottom
+    Left = 347
+    Height = 37
+    Top = 370
+    Width = 315
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'NONE'
+      'ASCII'
+      'BIG_5'
+      'CYRL'
+      'DOS437'
+      'WIN1250'
+      'WIN1251'
+      'WIN1252'
+      'WIN1253'
+      'WIN1254'
+      'UNICODE_FSS'
+    )
+    TabOrder = 5
+    Visible = False
+  end
+  object CB_ServerVersion: TComboBox[15]
+    AnchorSideLeft.Control = Label14
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 481
+    Height = 32
+    Top = 32
+    Width = 181
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 2
+    Items.Strings = (
+      'Unknown'
+      'Firebird 1.0'
+      'Firebird 1.5'
+      'Firebird 2.0'
+      'Firebird 2.1'
+      'InterBase 5.x'
+      'InterBase 6.1'
+      'InterBase 6.5'
+      'InterBase 7.0'
+      'InterBase 7.1'
+      'InterBase 7.5'
+      'Yaffil 1.0'
+    )
+    OnChange = edtDBNameChange
+    Style = csDropDownList
+    TabOrder = 6
+    Text = 'Firebird 1.5'
+  end
+  object cbShowSystemObjects: TCheckBox[16]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = EditRole
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 407
+    Width = 162
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    Caption = 'Show system objects'
+    TabOrder = 7
+  end
+  object cbServerName: TComboBox[17]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = edtPort
+    Left = 151
+    Height = 37
+    Top = 32
+    Width = 230
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    ItemHeight = 0
+    MaxLength = 65535
+    OnChange = edtDBNameChange
+    Sorted = True
+    TabOrder = 8
+  end
+  object edtDBName: TFileNameEdit[18]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 96
+    Width = 650
+    DialogTitle = 'Select database'
+    DialogOptions = []
+    Filter = 'Firebird database (*.fdb)|*.fdb|Interbase/Firebid (*.gdb)|*.gdb|Interbase database (*.ib)|*.ib|All files (*.*)|*.*'
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 9
+    OnChange = edtDBNameChange
+    OnExit = edtDBNameExit
+  end
+  object CheckBox1: TCheckBox[19]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbShowSystemObjects
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 437
+    Width = 210
+    BorderSpacing.Around = 6
+    Caption = 'Auto grant on compile object'
+    TabOrder = 10
+  end
+  object Label1: TLabel[20]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 334
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object Label10: TLabel[21]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 497
+    Width = 119
+    BorderSpacing.Around = 6
+    Caption = 'Client library name'
+    ParentColor = False
+  end
+  object FileNameEdit1: TFileNameEdit[22]
+    AnchorSideLeft.Control = Label10
+    AnchorSideTop.Control = Label10
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 523
+    Width = 650
+    FileName = 'FileNameEdit1'
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 11
+    Text = 'FileNameEdit1'
+  end
+  object CheckBox2: TCheckBox[23]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 467
+    Width = 291
+    BorderSpacing.Around = 6
+    Caption = 'Always capitalize database objects names'
+    TabOrder = 12
+  end
+  object Label11: TLabel[24]
+    AnchorSideLeft.Control = cbServerName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 387
+    Height = 20
+    Top = 6
+    Width = 72
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    Caption = 'Server port'
+    ParentColor = False
+  end
+  object edtPort: TSpinEdit[25]
+    AnchorSideLeft.Control = Label11
+    AnchorSideTop.Control = Label11
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label14
+    Left = 393
+    Height = 37
+    Top = 32
+    Width = 76
+    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 12
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    MaxValue = 65536
+    OnChange = edtDBNameChange
+    TabOrder = 13
+  end
+  object Edit1: TEdit[26]
+    AnchorSideLeft.Control = Label12
+    AnchorSideTop.Control = Label12
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton1
+    Left = 12
+    Height = 29
+    Top = 165
+    Width = 627
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    BorderStyle = bsNone
+    Color = clBtnFace
+    ReadOnly = True
+    TabOrder = 14
+  end
+  object Label12: TLabel[27]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDBName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 139
+    Width = 112
+    BorderSpacing.Around = 6
+    Caption = 'Connection string'
+    FocusControl = Edit1
+    ParentColor = False
+  end
+  object SpeedButton1: TSpeedButton[28]
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 639
+    Height = 29
+    Top = 165
+    Width = 23
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 6
+    Flat = True
+    Glyph.Data = {
+      36030000424D3803000000000000360000002800000010000000100000000100
+      18000000000000000000120B0000120B00000000000000000000FF00FFFF00FF
+      FF00FFFF00FFFF00FFA47874A47874A47874A47874A47874A47874A47874A478
+      74A478748C5D5CFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFA87C75FEE5CBFF
+      E2C4FFDFBEFFDCB8FFD9B1FED6ACFFD4A6FFD1A28C5D5CFF00FFFF00FFFF00FF
+      FF00FFFF00FFFF00FFAD8078FFEAD4E5A657E5A657E5A657E5A657E5A657E5A6
+      57FFD4A88C5D5CFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB4867AFEEEDDFF
+      EBD6FFE8CFFFE4C9FEE1C2FEDDBBFFDBB5FFD8AF8C5D5CFF00FFA47874A47874
+      A47874A47874A47874BA8D7DFEF2E5E5A657E5A657E5A657E5A657E5A657E5A6
+      57FEDCB78C5D5CFF00FFA87C75FEE5CBFFE2C4FFDFBEFFDCB8C29581FEF6ECFE
+      F3E6FEEFE1FFEDDAFEE9D4FEE6CCFFE2C6FEDFBF8C5D5CFF00FFAD8078FFEAD4
+      E5A657E5A657E5A657CA9B83FFF9F3E5A657E5A657E5A657E5A657E5A657E5A6
+      57FEE3C88C5D5CFF00FFB4867AFEEEDDFFEBD6FFE8CFFFE4C9D1A286FEFBF9FE
+      F9F4FEF7EFFEF5EAFEF1E4FEEEDEFEEBD7FEE8D08C5D5CFF00FFBA8D7DFEF2E5
+      E5A657E5A657E5A657D8A98AFEFEFDFEFCFAFEFAF6FEF8F1FEF5ECEBDFDBD3C2
+      C0BAA9AA8C5D5CFF00FFC29581FEF6ECFEF3E6FEEFE1FFEDDADFB08DFEFEFEFE
+      FEFEFEFCFBFEFBF7FEF8F2B48176B48176B48176B17F74FF00FFCA9B83FFF9F3
+      E5A657E5A657E5A657E4B58EFEFEFEFEFEFEFEFEFEFEFDFCFEFBF8B48176EBB5
+      6FE49B42FF00FFFF00FFD1A286FEFBF9FEF9F4FEF7EFFEF5EAE8B890DCA887DC
+      A887DCA887DCA887DCA887B48176F0B25EFF00FFFF00FFFF00FFD8A98AFEFEFD
+      FEFCFAFEFAF6FEF8F1FEF5ECEBDFDBD3C2C0BAA9AA8C5D5CFF00FFFF00FFFF00
+      FFFF00FFFF00FFFF00FFDFB08DFEFEFEFEFEFEFEFCFBFEFBF7FEF8F2B48176B4
+      8176B48176B17F74FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE4B58EFEFEFE
+      FEFEFEFEFEFEFEFDFCFEFBF8B48176EBB56FE49B42FF00FFFF00FFFF00FFFF00
+      FFFF00FFFF00FFFF00FFE8B890DCA887DCA887DCA887DCA887DCA887B48176F0
+      B25EFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+    }
+    OnClick = SpeedButton1Click
+  end
+  object UIBDataBaseTest: TUIBDataBase[29]
+    Params.Strings = (
+      'sql_dialect=3'
+      'lc_ctype=UTF8'
+      'user_name=sysdba'
+      'password=masterkey'
+    )
+    DatabaseName = '127.0.0.1/3050:/home/fbbase/ac.fdb'
+    CharacterSet = csUTF8
+    UserName = 'sysdba'
+    PassWord = 'masterkey'
+    StoreInDFM = False
+    Left = 360
+    Top = 376
+  end
+end

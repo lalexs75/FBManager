@@ -1,0 +1,371 @@
+object fbmCreateDataBaseForm: TfbmCreateDataBaseForm
+  Left = 490
+  Height = 516
+  Top = 217
+  Width = 663
+  ActiveControl = cbServName
+  AutoSize = True
+  Caption = 'Create database'
+  ClientHeight = 516
+  ClientWidth = 663
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  SessionProperties = 'Width;Top;Left;Height'
+  LCLVersion = '1.7'
+  object Label2: TLabel
+    AnchorSideLeft.Control = cbProtocol
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 223
+    Height = 20
+    Top = 6
+    Width = 81
+    BorderSpacing.Around = 6
+    Caption = 'Server name'
+    FocusControl = cbServName
+    ParentColor = False
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 53
+    BorderSpacing.Around = 6
+    Caption = 'Protocol'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbProtocol
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 74
+    Width = 98
+    BorderSpacing.Around = 6
+    Caption = 'Database name'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDBName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 143
+    Width = 119
+    BorderSpacing.Around = 6
+    Caption = 'Client library name'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 281
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    AnchorSideLeft.Control = edtUserName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 230
+    Height = 20
+    Top = 281
+    Width = 95
+    BorderSpacing.Around = 6
+    Caption = 'User password'
+    ParentColor = False
+  end
+  object Label8: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtLibName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 212
+    Width = 123
+    BorderSpacing.Around = 6
+    Caption = 'Database page size'
+    ParentColor = False
+  end
+  object Label9: TLabel
+    AnchorSideLeft.Control = ComboBox2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtLibName
+    AnchorSideTop.Side = asrBottom
+    Left = 190
+    Height = 20
+    Top = 212
+    Width = 68
+    BorderSpacing.Around = 6
+    Caption = 'Code page'
+    ParentColor = False
+  end
+  object Label10: TLabel
+    AnchorSideLeft.Control = ComboBox3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtLibName
+    AnchorSideTop.Side = asrBottom
+    Left = 408
+    Height = 20
+    Top = 212
+    Width = 105
+    BorderSpacing.Around = 6
+    Caption = 'Database dialect'
+    ParentColor = False
+  end
+  object Label11: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 380
+    Width = 86
+    BorderSpacing.Around = 6
+    Caption = 'Log file name'
+    ParentColor = False
+  end
+  object cbServName: TComboBox
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 229
+    Height = 37
+    Top = 32
+    Width = 428
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object cbProtocol: TComboBox
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 32
+    Width = 205
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnChange = cbServTypeChange
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object edtDBName: TFileNameEdit
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 100
+    Width = 645
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 2
+  end
+  object edtLibName: TFileNameEdit
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 169
+    Width = 645
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 3
+  end
+  object edtUserName: TEdit
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 307
+    Width = 212
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object edtUserPassword: TEdit
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    Left = 236
+    Height = 37
+    Top = 307
+    Width = 210
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 5
+  end
+  object ComboBox2: TComboBox
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 238
+    Width = 172
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 4
+    Items.Strings = (
+      '1024'
+      '2048'
+      '4096'
+      '8192'
+      '16384'
+    )
+    TabOrder = 6
+    Text = '16384'
+  end
+  object ComboBox3: TComboBox
+    AnchorSideLeft.Control = Label9
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    Left = 196
+    Height = 36
+    Top = 238
+    Width = 206
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 7
+  end
+  object ComboBox4: TComboBox
+    AnchorSideLeft.Control = Label10
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 414
+    Height = 32
+    Top = 238
+    Width = 243
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 1
+    Items.Strings = (
+      'Dialect 1'
+      'Dialect 3'
+    )
+    Style = csDropDownList
+    TabOrder = 8
+    Text = 'Dialect 3'
+  end
+  object CheckBox1: TCheckBox
+    AnchorSideLeft.Control = edtUserPassword
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    Left = 452
+    Height = 24
+    Top = 307
+    Width = 157
+    BorderSpacing.Around = 6
+    Caption = 'Register after create'
+    TabOrder = 9
+  end
+  object CheckBox2: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 350
+    Width = 179
+    BorderSpacing.Around = 6
+    Caption = 'Meta data loging enable'
+    TabOrder = 10
+  end
+  object edtLogName: TFileNameEdit
+    AnchorSideLeft.Control = Label11
+    AnchorSideTop.Control = Label11
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 406
+    Width = 645
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 11
+  end
+  object ButtonPanel1: TButtonPanel
+    AnchorSideTop.Control = edtLogName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 46
+    Top = 464
+    Width = 651
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CloseButton.Enabled = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 12
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object UIBDataBase1: TUIBDataBase
+    Params.Strings = (
+      'sql_dialect=3'
+      'lc_ctype=NONE'
+    )
+    DatabaseName = 'bigbrother:p45_etalon'
+    CharacterSet = csNONE
+    StoreInDFM = False
+    Left = 94
+    Top = 8
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 344
+  end
+end

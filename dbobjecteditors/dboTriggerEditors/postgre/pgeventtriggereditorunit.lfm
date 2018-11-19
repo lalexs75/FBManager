@@ -1,0 +1,208 @@
+inherited pgEventTriggerEditorPage: TpgEventTriggerEditorPage
+  Height = 363
+  Width = 1049
+  ClientHeight = 363
+  ClientWidth = 1049
+  DesignLeft = 415
+  DesignTop = 298
+  object PageControl2: TPageControl[0]
+    Left = 0
+    Height = 232
+    Top = 0
+    Width = 1049
+    ActivePage = TabSheet4
+    Align = alTop
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet4: TTabSheet
+      Caption = 'Declaration'
+      ClientHeight = 198
+      ClientWidth = 1039
+      object PageControl1: TPageControl
+        AnchorSideLeft.Side = asrBottom
+        Left = 584
+        Height = 198
+        Top = 0
+        Width = 455
+        ActivePage = TabSheet3
+        Align = alRight
+        TabIndex = 0
+        TabOrder = 0
+        object TabSheet3: TTabSheet
+          Caption = 'Условие'
+        end
+      end
+      object cbLang: TComboBox
+        AnchorSideLeft.Control = lblLanguage
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 439
+        Height = 36
+        Top = 156
+        Width = 134
+        Anchors = [akTop, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 1
+      end
+      object lblLanguage: TLabel
+        AnchorSideLeft.Control = edtCaption
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Control = cbLang
+        AnchorSideBottom.Control = cbLang
+        AnchorSideBottom.Side = asrBottom
+        Left = 372
+        Height = 20
+        Top = 172
+        Width = 61
+        Anchors = [akRight, akBottom]
+        BorderSpacing.Top = 6
+        Caption = 'Language'
+        ParentColor = False
+      end
+      object cbProcList: TComboBox
+        AnchorSideLeft.Control = rbExistFunc
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbEventTriggerType
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 173
+        Height = 36
+        Top = 114
+        Width = 400
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object edtNewProcName: TEdit
+        AnchorSideLeft.Control = rbCreateNewFunc
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = lblLanguage
+        Left = 168
+        Height = 37
+        Top = 156
+        Width = 198
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 3
+      end
+      object lblForEvent: TLabel
+        AnchorSideTop.Control = edtCaption
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = cbEventTriggerType
+        AnchorSideBottom.Side = asrBottom
+        Left = 7
+        Height = 20
+        Top = 88
+        Width = 61
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'For event'
+        ParentColor = False
+      end
+      object lblTriggerName: TLabel
+        Left = 7
+        Height = 20
+        Top = 7
+        Width = 84
+        BorderSpacing.Around = 6
+        Caption = 'Trigger name'
+        ParentColor = False
+      end
+      object edtCaption: TEdit
+        AnchorSideLeft.Control = lblTriggerName
+        AnchorSideTop.Control = lblTriggerName
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 13
+        Height = 37
+        Top = 33
+        Width = 560
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'edtCaption'
+      end
+      object cbEventTriggerType: TComboBox
+        AnchorSideLeft.Control = lblForEvent
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtCaption
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = cbEnabled
+        Left = 74
+        Height = 32
+        Top = 76
+        Width = 428
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Items.Strings = (
+          'ddl_command_start'
+          'ddl_command_end'
+          'table_rewrite'
+          'sql_drop'
+        )
+        OnChange = cbEventTriggerTypeChange
+        Style = csDropDownList
+        TabOrder = 5
+      end
+      object rbExistFunc: TRadioButton
+        AnchorSideTop.Control = cbProcList
+        AnchorSideTop.Side = asrCenter
+        Left = 7
+        Height = 24
+        Top = 120
+        Width = 160
+        BorderSpacing.Left = 6
+        Caption = 'Use existing function'
+        Checked = True
+        OnChange = rbCreateNewFuncChange
+        TabOrder = 6
+        TabStop = True
+      end
+      object rbCreateNewFunc: TRadioButton
+        AnchorSideTop.Control = edtNewProcName
+        AnchorSideTop.Side = asrCenter
+        Left = 7
+        Height = 24
+        Top = 162
+        Width = 155
+        BorderSpacing.Left = 6
+        Caption = 'Create new function'
+        OnChange = rbCreateNewFuncChange
+        TabOrder = 7
+      end
+      object Splitter2: TSplitter
+        Left = 579
+        Height = 198
+        Top = 0
+        Width = 5
+        Align = alRight
+        ResizeAnchor = akRight
+      end
+      object cbEnabled: TCheckBox
+        AnchorSideTop.Control = edtCaption
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Splitter2
+        Left = 508
+        Height = 24
+        Top = 76
+        Width = 65
+        Anchors = [akTop, akRight]
+        BorderSpacing.Around = 6
+        Caption = 'Active'
+        TabOrder = 9
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'Local variables'
+    end
+  end
+end

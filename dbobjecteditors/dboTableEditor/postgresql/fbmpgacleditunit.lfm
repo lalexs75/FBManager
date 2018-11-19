@@ -1,0 +1,1450 @@
+inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
+  Height = 610
+  Width = 1261
+  ClientHeight = 610
+  ClientWidth = 1261
+  DesignLeft = 432
+  DesignTop = 129
+  object ToolPanel1: TToolPanel[0]
+    Left = 0
+    Height = 34
+    Top = 0
+    Width = 1261
+    Items = <    
+      item
+        Action = grVL
+        Visible = True
+        Left = 5
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = grHL
+        Visible = True
+        Left = 29
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = grALL
+        Visible = True
+        Left = 53
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 77
+        Height = 24
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = revVL
+        Visible = True
+        Left = 84
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = revHL
+        Visible = True
+        Left = 108
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = revALL
+        Visible = True
+        Left = 132
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 34
+    ClientWidth = 1261
+    TabOrder = 0
+  end
+  object RxDBGrid1: TRxDBGrid[1]
+    Left = 0
+    Height = 510
+    Top = 100
+    Width = 1261
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = True
+    AutoSort = True
+    Columns = <    
+      item
+        ButtonStyle = cbsNone
+        Color = clSkyBlue
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = '...'
+        Width = 40
+        FieldName = 'UG_TYPE'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+        ImageList = fbManagerMainForm.ImageList2
+        KeyList.Strings = (
+          '1=48'
+          '2=50'
+        )
+      end    
+      item
+        ButtonStyle = cbsNone
+        Color = clSkyBlue
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Name'
+        Width = 200
+        FieldName = 'UG_NAME'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Select'
+        Width = 70
+        FieldName = 'ogSelect'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Update'
+        Width = 70
+        FieldName = 'ogUpdate'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Insert'
+        Width = 70
+        FieldName = 'ogInsert'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Delete'
+        Width = 70
+        FieldName = 'ogDelete'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Rule'
+        Width = 70
+        FieldName = 'ogRule'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'References'
+        Width = 80
+        FieldName = 'ogReference'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Trigger'
+        Width = 70
+        FieldName = 'ogTrigger'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Execute'
+        Width = 70
+        FieldName = 'ogExecute'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Usage'
+        Width = 70
+        FieldName = 'ogUsage'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Create'
+        Width = 80
+        FieldName = 'ogCreate'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Temporary'
+        Width = 80
+        FieldName = 'ogTemporary'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Alter Routine'
+        Width = 80
+        FieldName = 'ogAlterRoutine'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogTruncate'
+        Width = 80
+        FieldName = 'ogTruncate'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogConnect'
+        Width = 80
+        FieldName = 'ogConnect'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogAlter'
+        Width = 80
+        FieldName = 'ogAlter'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogCreateRoutine'
+        Width = 80
+        FieldName = 'ogCreateRoutine'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogCreateUser'
+        Width = 80
+        FieldName = 'ogCreateUser'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogCreateView'
+        Width = 80
+        FieldName = 'ogCreateView'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogDrop'
+        Width = 80
+        FieldName = 'ogDrop'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogEvent'
+        Width = 80
+        FieldName = 'ogEvent'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogFile'
+        Width = 80
+        FieldName = 'ogFile'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogIndex'
+        Width = 80
+        FieldName = 'ogIndex'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogLockTables'
+        Width = 80
+        FieldName = 'ogLockTables'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogProcess'
+        Width = 80
+        FieldName = 'ogProcess'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogProxy'
+        Width = 80
+        FieldName = 'ogProxy'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogReload'
+        Width = 80
+        FieldName = 'ogReload'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogReplicationClient'
+        Width = 80
+        FieldName = 'ogReplicationClient'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogReplicationSlave'
+        Width = 80
+        FieldName = 'ogReplicationSlave'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogShowDatabases'
+        Width = 80
+        FieldName = 'ogShowDatabases'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogShowView'
+        Width = 80
+        FieldName = 'ogShowView'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogShutdown'
+        Width = 80
+        FieldName = 'ogShutdown'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogSuper'
+        Width = 80
+        FieldName = 'ogSuper'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogMembership'
+        Width = 80
+        FieldName = 'ogMembership'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogWgr'
+        Width = 90
+        FieldName = 'ogWGO'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogCreateTablespace'
+        FieldName = 'ogCreateTablespace'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        ButtonStyle = cbsNone
+        Color = clTeal
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Grant own. user'
+        Width = 200
+        FieldName = 'OWNER_USER'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsUGList
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    TitleStyle = tsNative
+  end
+  object Panel1: TPanel[2]
+    Left = 0
+    Height = 66
+    Top = 34
+    Width = 1261
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 66
+    ClientWidth = 1261
+    TabOrder = 2
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 19
+      Top = 7
+      Width = 91
+      BorderSpacing.Around = 6
+      Caption = 'Users/Groups'
+      ParentColor = False
+    end
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 27
+      Top = 32
+      Width = 1241
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      ItemIndex = 0
+      Items.Strings = (
+        'Users and Groups'
+        'Only users'
+        'Only groups'
+      )
+      OnChange = ComboBox1Change
+      Style = csDropDownList
+      TabOrder = 0
+      Text = 'Users and Groups'
+    end
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 432
+    Top = 200
+    object edtPrint: TAction
+      Category = 'List'
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = edtPrintExecute
+    end
+    object grVL: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'grVL'
+      ImageIndex = 35
+      OnExecute = grVLExecute
+    end
+    object grHL: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'grHL'
+      ImageIndex = 36
+      OnExecute = grHLExecute
+    end
+    object grALL: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'grALL'
+      ImageIndex = 34
+      OnExecute = grALLExecute
+    end
+    object revVL: TAction
+      Category = 'Grants'
+      Caption = 'revVL'
+      ImageIndex = 37
+      OnExecute = grVLExecute
+    end
+    object revHL: TAction
+      Category = 'Grants'
+      Caption = 'revHL'
+      ImageIndex = 38
+      OnExecute = grHLExecute
+    end
+    object revALL: TAction
+      Category = 'Grants'
+      Caption = 'revALL'
+      ImageIndex = 41
+      OnExecute = grALLExecute
+    end
+  end
+  object dsUGList: TDataSource[4]
+    DataSet = rxUGList
+    Left = 208
+    Top = 280
+  end
+  object rxUGList: TRxMemoryData[5]
+    FieldDefs = <    
+      item
+        Name = 'UG_TYPE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'UG_NAME'
+        DataType = ftString
+        Size = 120
+      end    
+      item
+        Name = 'OWNER_USER'
+        DataType = ftString
+        Size = 120
+      end    
+      item
+        Name = 'ogSelect'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogInsert'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogUpdate'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogDelete'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogExecute'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReference'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreate'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogRule'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTemporary'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTruncate'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTrigger'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogAlterRoutine'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogUsage'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogConnect'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogAlter'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateRoutine'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateUser'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateView'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogDrop'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogEvent'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogFile'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogIndex'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogLockTables'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogProcess'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogProxy'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReload'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReplicationClient'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReplicationSlave'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShowDatabases'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShowView'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShutdown'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogSuper'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogMembership'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogWGO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateTablespace'
+        DataType = ftBoolean
+      end>
+    AfterPost = rxUGListAfterPost
+    OnFilterRecord = rxUGListFilterRecord
+    PacketRecords = 0
+    Left = 248
+    Top = 280
+    object rxUGListUG_TYPE: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'UG_TYPE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxUGListUG_NAME: TStringField
+      DisplayWidth = 120
+      FieldKind = fkData
+      FieldName = 'UG_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+    object rxUGListOWNER_USER: TStringField
+      FieldKind = fkData
+      FieldName = 'OWNER_USER'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 120
+    end
+    object rxUGListogSelect: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogSelect'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogInsert: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogInsert'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogUpdate: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogUpdate'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogDelete: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogDelete'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogExecute: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogExecute'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReference: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReference'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreate: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreate'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogRule: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogRule'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTemporary: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTemporary'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTruncate: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTruncate'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTrigger: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTrigger'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogAlterRoutine: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogAlterRoutine'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogUsage: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogUsage'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogConnect: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogConnect'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogAlter: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogAlter'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateRoutine: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateRoutine'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateUser: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateUser'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateView: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateView'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogDrop: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogDrop'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogEvent: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogEvent'
+      Index = 22
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogFile: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogFile'
+      Index = 23
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogIndex: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogIndex'
+      Index = 24
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogLockTables: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogLockTables'
+      Index = 25
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogProcess: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogProcess'
+      Index = 26
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogProxy: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogProxy'
+      Index = 27
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReload: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReload'
+      Index = 28
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReplicationClient: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReplicationClient'
+      Index = 29
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReplicationSlave: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReplicationSlave'
+      Index = 30
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShowDatabases: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShowDatabases'
+      Index = 31
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShowView: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShowView'
+      Index = 32
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShutdown: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShutdown'
+      Index = 33
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogSuper: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogSuper'
+      Index = 34
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogMembership: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogMembership'
+      Index = 35
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateTablespace: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateTablespace'
+      Index = 36
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogWGO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogWGO'
+      Index = 37
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+  end
+  object PopupMenu1: TPopupMenu[6]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 296
+    Top = 280
+    object MenuItem1: TMenuItem
+      Action = grVL
+    end
+    object MenuItem2: TMenuItem
+      Action = grHL
+    end
+    object MenuItem4: TMenuItem
+      Action = grALL
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = revVL
+    end
+    object MenuItem3: TMenuItem
+      Action = revHL
+    end
+    object MenuItem7: TMenuItem
+      Action = revALL
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = edtPrint
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[7]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 268
+    Top = 198
+  end
+end

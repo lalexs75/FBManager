@@ -1,0 +1,470 @@
+object fbManDataInpectorForm: TfbManDataInpectorForm
+  Left = 334
+  Height = 842
+  Top = 21
+  Width = 287
+  ActiveControl = Pagecontrol1
+  Caption = 'DB Inspector'
+  ClientHeight = 842
+  ClientWidth = 287
+  OnClose = IBManDataInpectorFormClose
+  OnCreate = IBManDataInpectorFormCreate
+  OnDestroy = IBManDataInpectorFormDestroy
+  SessionProperties = 'Top;Width;Left;Height'
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object Pagecontrol1: TPageControl
+    Left = 0
+    Height = 842
+    Top = 0
+    Width = 287
+    ActivePage = Tabsheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object Tabsheet1: TTabSheet
+      Caption = 'Databases'
+      ClientHeight = 811
+      ClientWidth = 277
+      object TreeView1: TTreeView
+        Left = 0
+        Height = 646
+        Top = 48
+        Width = 277
+        Align = alClient
+        DragMode = dmAutomatic
+        ExpandSignType = tvestPlusMinus
+        HideSelection = False
+        Images = fbManagerMainForm.ImageList2
+        MultiSelect = True
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        RightClickSelect = True
+        TabOrder = 0
+        OnChange = TreeView1Change
+        OnClick = TreeView1Click
+        OnCustomDrawItem = TreeView1CustomDrawItem
+        OnDblClick = objShowExecute
+        OnDragDrop = TreeView1DragDrop
+        OnDragOver = TreeView1DragOver
+        OnExpanding = TreeView1Expanding
+        OnMouseMove = TreeView1MouseMove
+        OnSelectionChanged = TreeView1SelectionChanged
+        Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
+        Items.Data = {
+          F9FFFFFF020002000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF020000000000
+          0000010F000000D0ADD0BBD0B5D0BCD0B5D0BDD18230FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF0000000000000000000F000000D0ADD0BBD0B5D0BCD0B5D0BDD1
+          8231FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010F000000D0
+          ADD0BBD0B5D0BCD0B5D0BDD18233FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
+          000000000000000F000000D0ADD0BBD0B5D0BCD0B5D0BDD18234FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF0000000000000000000F000000D0ADD0BBD0B5D0BCD0
+          B5D0BDD18232
+        }
+        TreeLinePenStyle = psSolid
+      end
+      object LB_SQLAssistent: TListBox
+        Left = 0
+        Height = 112
+        Top = 699
+        Width = 277
+        Align = alBottom
+        ClickOnSelChange = False
+        DragMode = dmAutomatic
+        ItemHeight = 0
+        MultiSelect = True
+        PopupMenu = PopupMenu2
+        ScrollWidth = 275
+        TabOrder = 1
+        TopIndex = -1
+      end
+      object Splitter1: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 694
+        Width = 277
+        Align = alBottom
+        Anchors = [akLeft, akBottom]
+        ResizeAnchor = akBottom
+      end
+      object Panel1: TPanel
+        Left = 0
+        Height = 48
+        Top = 0
+        Width = 277
+        Align = alTop
+        AutoSize = True
+        ClientHeight = 48
+        ClientWidth = 277
+        TabOrder = 3
+        object TreeFilterEdit1: TTreeFilterEdit
+          AnchorSideLeft.Control = Label1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel1
+          AnchorSideRight.Control = Panel1
+          AnchorSideRight.Side = asrBottom
+          Left = 37
+          Height = 34
+          Top = 7
+          Width = 233
+          ButtonWidth = 23
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          NumGlyphs = 1
+          MaxLength = 0
+          Spacing = 0
+          TabOrder = 0
+          FilteredTreeview = TreeView1
+        end
+        object Label1: TLabel
+          AnchorSideLeft.Control = Panel1
+          AnchorSideBottom.Control = TreeFilterEdit1
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 17
+          Top = 24
+          Width = 24
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 6
+          Caption = 'Find'
+          ParentColor = False
+        end
+      end
+    end
+    object Tabsheet2: TTabSheet
+      Caption = 'Windows'
+      ClientHeight = 811
+      ClientWidth = 277
+      object listWindows: TListBox
+        Left = 0
+        Height = 793
+        Top = 0
+        Width = 268
+        Align = alClient
+        ItemHeight = 0
+        OnClick = listWindowsClick
+        ScrollWidth = 266
+        TabOrder = 0
+        TopIndex = -1
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Recent'
+      ClientHeight = 811
+      ClientWidth = 277
+      object ListBox1: TListBox
+        Left = 0
+        Height = 793
+        Top = 0
+        Width = 268
+        Align = alClient
+        ItemHeight = 0
+        OnDblClick = ListBox1DblClick
+        ScrollWidth = 266
+        TabOrder = 0
+        TopIndex = -1
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 168
+    Top = 128
+    object dbRegister: TAction
+      Category = 'Database'
+      Caption = 'Register DB'
+      ImageIndex = 4
+      OnExecute = dbRegisterExecute
+    end
+    object dbRegitrationEdit: TAction
+      Category = 'Database'
+      Caption = 'Edit DB registration record'
+      OnExecute = dbRegitrationEditExecute
+    end
+    object dbUnregister: TAction
+      Category = 'Database'
+      Caption = 'Unregister DB'
+      ImageIndex = 5
+      OnExecute = dbUnregisterExecute
+    end
+    object dbConnect: TAction
+      Category = 'Database'
+      Caption = 'Connect'
+      ImageIndex = 1
+      OnExecute = dbConnectExecute
+    end
+    object dbDisconect: TAction
+      Category = 'Database'
+      Caption = 'Disconect'
+      ImageIndex = 2
+      OnExecute = dbDisconectExecute
+    end
+    object objShow: TAction
+      Category = 'Objects'
+      Caption = 'Show object'
+      ImageIndex = 1
+      OnExecute = objShowExecute
+    end
+    object editSQL: TAction
+      Category = 'Editors'
+      Caption = 'SQL Editor'
+      ImageIndex = 8
+      OnExecute = editSQLExecute
+    end
+    object objNew: TAction
+      Category = 'Objects'
+      Caption = 'New object...'
+      OnExecute = objNewExecute
+    end
+    object objDelete: TAction
+      Category = 'Objects'
+      Caption = 'Delete object...'
+      OnExecute = objDeleteExecute
+    end
+    object objRefresh: TAction
+      Category = 'Objects'
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = objRefreshExecute
+    end
+    object miskShowAssitent: TAction
+      Category = 'Misk'
+      Caption = 'Show SQL assistent'
+      OnExecute = miskShowAssitentExecute
+      ShortCut = 16449
+    end
+    object objGoDomains: TAction
+      Category = 'Objects'
+      Caption = 'Go to domains...'
+    end
+    object objGoTables: TAction
+      Category = 'Objects'
+      Caption = 'Go to tables...'
+    end
+    object objGoViews: TAction
+      Category = 'Objects'
+      Caption = 'Go to views...'
+    end
+    object objGoSP: TAction
+      Category = 'Objects'
+      Caption = 'Go to stored proc...'
+    end
+    object objGoTriggers: TAction
+      Category = 'Objects'
+      Caption = 'Go to triggers...'
+    end
+    object objFind: TAction
+      Category = 'Objects'
+      Caption = 'Find object'
+    end
+    object dbRegisterFromCopy: TAction
+      Category = 'Database'
+      Caption = 'Copy registration record...'
+      OnExecute = dbRegisterFromCopyExecute
+    end
+    object saCopyLine: TAction
+      Category = 'SQL Assistent'
+      Caption = 'Copy line to clipboard'
+      ImageIndex = 24
+      OnExecute = saCopyLineExecute
+    end
+    object saCopyAllLines: TAction
+      Category = 'SQL Assistent'
+      Caption = 'Copy all lines to clipboard'
+      OnExecute = saCopyAllLinesExecute
+    end
+    object saHideSQLAssistent: TAction
+      Category = 'SQL Assistent'
+      Caption = 'Hide SQL assistent'
+      OnExecute = saHideSQLAssistentExecute
+    end
+    object fldNew: TAction
+      Category = 'Folders'
+      Caption = 'New folder'
+      OnExecute = fldNewExecute
+    end
+    object fldEdit: TAction
+      Category = 'Folders'
+      Caption = 'Edit folder'
+      OnExecute = fldEditExecute
+    end
+    object fldRemove: TAction
+      Category = 'Folders'
+      Caption = 'Remove folder'
+      OnExecute = fldRemoveExecute
+    end
+    object fldExpandAll: TAction
+      Tag = 1
+      Category = 'Folders'
+      Caption = 'Expand all'
+      OnExecute = fldExpandAllExecute
+    end
+    object fldCollapseAll: TAction
+      Tag = -1
+      Category = 'Folders'
+      Caption = 'Collapse all'
+      OnExecute = fldExpandAllExecute
+    end
+    object objRename: TAction
+      Category = 'Objects'
+      Caption = 'Rename object...'
+      OnExecute = objRenameExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 120
+    Top = 128
+    object MenuItem10: TMenuItem
+      Action = objShow
+      OnClick = objShowExecute
+    end
+    object MenuItem13: TMenuItem
+      Action = objNew
+      OnClick = objNewExecute
+    end
+    object MenuItem14: TMenuItem
+      Action = objDelete
+      OnClick = objDeleteExecute
+    end
+    object MenuItem37: TMenuItem
+      Action = objRename
+    end
+    object MenuItem9: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem21: TMenuItem
+      Caption = 'Goto to object'
+      object MenuItem36: TMenuItem
+        Action = fldExpandAll
+      end
+      object MenuItem34: TMenuItem
+        Action = fldCollapseAll
+      end
+      object MenuItem35: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem25: TMenuItem
+        Action = objGoDomains
+      end
+      object MenuItem26: TMenuItem
+        Action = objGoTables
+      end
+      object MenuItem22: TMenuItem
+        Action = objGoViews
+      end
+      object MenuItem27: TMenuItem
+        Action = objGoSP
+      end
+      object MenuItem28: TMenuItem
+        Action = objGoTriggers
+      end
+      object MenuItem23: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem24: TMenuItem
+        Action = objFind
+      end
+    end
+    object MenuItem15: TMenuItem
+      Action = objRefresh
+      OnClick = objRefreshExecute
+    end
+    object MenuItem16: TMenuItem
+      Caption = '-'
+    end
+    object miRegisterDB: TMenuItem
+      Caption = 'Register DB'
+      ImageIndex = 4
+    end
+    object MenuItem29: TMenuItem
+      Action = dbRegisterFromCopy
+      OnClick = dbRegisterFromCopyExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = dbRegitrationEdit
+      OnClick = dbRegitrationEditExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = dbUnregister
+      OnClick = dbUnregisterExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object miCreateDB: TMenuItem
+      AutoCheck = True
+      Caption = 'Create Database'
+      Hint = 'Create new database'
+      ImageIndex = 6
+      OnClick = miCreateDBClick
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = dbConnect
+      OnClick = dbConnectExecute
+    end
+    object MenuItem6: TMenuItem
+      Action = dbDisconect
+      OnClick = dbDisconectExecute
+    end
+    object MenuItem11: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem12: TMenuItem
+      Action = editSQL
+      OnClick = editSQLExecute
+    end
+    object miContextTools: TMenuItem
+      Caption = 'Tools...'
+    end
+    object MenuItem20: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem31: TMenuItem
+      Action = fldNew
+    end
+    object MenuItem33: TMenuItem
+      Action = fldEdit
+    end
+    object MenuItem32: TMenuItem
+      Action = fldRemove
+    end
+    object MenuItem17: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem18: TMenuItem
+      Action = miskShowAssitent
+      OnClick = miskShowAssitentExecute
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 81
+    Top = 742
+    object MenuItem30: TMenuItem
+      Action = saCopyLine
+      OnClick = saCopyLineExecute
+    end
+    object MenuItem5: TMenuItem
+      Action = saCopyAllLines
+      OnClick = saCopyAllLinesExecute
+    end
+    object MenuItem19: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem1: TMenuItem
+      Action = saHideSQLAssistent
+      OnClick = saHideSQLAssistentExecute
+    end
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 112
+    Top = 320
+  end
+end

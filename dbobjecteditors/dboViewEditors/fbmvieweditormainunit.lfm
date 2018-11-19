@@ -1,0 +1,6 @@
+inherited fbmViewEditorMainFrame: TfbmViewEditorMainFrame
+  Height = 546
+  Width = 656
+  DesignLeft = 303
+  DesignTop = 173
+end

@@ -1,0 +1,58 @@
+inherited fbmConnectionEditForm: TfbmConnectionEditForm
+  Left = 515
+  Height = 607
+  Top = 265
+  Width = 793
+  Caption = 'Registration params'
+  ClientHeight = 607
+  ClientWidth = 793
+  OnClose = FormClose
+  OnCloseQuery = nil
+  OnCreate = FormCreate
+  OnKeyDown = nil
+  ShowHint = True
+  inherited ButtonPanel1: TButtonPanel
+    Height = 46
+    Top = 555
+    Width = 781
+    object BitBtn1: TBitBtn[0]
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 6
+      Height = 35
+      Hint = 'Test connection'
+      Top = 0
+      Width = 66
+      Anchors = [akTop, akLeft, akBottom]
+      AutoSize = True
+      BorderSpacing.Left = 6
+      Caption = 'Test'
+      Glyph.Data = {
+        4E010000424D4E01000000000000760000002800000012000000120000000100
+        040000000000D800000000000000000000000000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00EEEEEE78EEEE
+        EEEEEE000000EEEEEE778EEEEEEEEE000000EEEEEEE778EEEEEEEE000000EEEE
+        EEE7B78EEEEEEE000000EEEEE7777B78EEEEEE000000EEEEE7BBFBB78EEEEE00
+        0000EEEEEE7FB7777EEEEE000000EEEEEE7BFB78EEEEEE000000EEE77777BFB7
+        8EEEEE000000EEE7FBFBFBFB78EEEE000000EEEE7FBFB7777EEEEE000000EEEE
+        7BFBFB78EEEEEE000000EEEEE7BFBFB78EEEEE000000EEEEE7FFFBFF78EEEE00
+        0000EEEEEE7FBFFBF78EEE000000EEEEEE777777777EEE000000EEEEEEEEEEEE
+        EEEEEE000000EEEEEEEEEEEEEEEEEE000000
+      }
+      OnClick = BitBtn1Click
+      TabOrder = 4
+    end
+  end
+  inherited ListBox1: TListBox
+    Height = 549
+    OnClick = ListBox1Click
+  end
+  inherited Splitter1: TSplitter
+    Height = 549
+  end
+  inherited Panel1: TPanel
+    Height = 549
+    Width = 656
+  end
+end

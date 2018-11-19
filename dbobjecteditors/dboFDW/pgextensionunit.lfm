@@ -1,0 +1,135 @@
+inherited pgExtensionEditor: TpgExtensionEditor
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 62
+    BorderSpacing.Around = 6
+    Caption = 'Extension'
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 32
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnChange = ComboBox1Change
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 142
+    Width = 51
+    BorderSpacing.Around = 6
+    Caption = 'Schema'
+    ParentColor = False
+  end
+  object ComboBox2: TComboBox[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 168
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object Label3: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 74
+    Width = 48
+    BorderSpacing.Around = 6
+    Caption = 'Version'
+    ParentColor = False
+  end
+  object ComboBox3: TComboBox[5]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 36
+    Top = 100
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object quAvailExt: TZReadOnlyQuery[6]
+    SQL.Strings = (
+      'select'
+      '  pg_available_extensions.name,'
+      '  pg_available_extensions.default_version,'
+      '  pg_available_extensions.installed_version,'
+      '  pg_available_extensions.comment'
+      'from'
+      '  pg_available_extensions'
+      'order by'
+      '  pg_available_extensions.name  '
+    )
+    Params = <>
+    Left = 213
+    Top = 6
+  end
+  object quExtVers: TZReadOnlyQuery[7]
+    SQL.Strings = (
+      'select'
+      '  pg_available_extension_versions.name,'
+      '  pg_available_extension_versions.version,'
+      '  pg_available_extension_versions.installed,'
+      '  pg_available_extension_versions.superuser,'
+      '  pg_available_extension_versions.relocatable,'
+      '  pg_available_extension_versions.schema,'
+      '  pg_available_extension_versions.requires,'
+      '  pg_available_extension_versions.comment'
+      'from'
+      '  pg_catalog.pg_available_extension_versions'
+      'where'
+      '  pg_available_extension_versions.name = :name'
+      'order by'
+      '  pg_available_extension_versions.version'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'name'
+        ParamType = ptUnknown
+      end>
+    Left = 213
+    Top = 88
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'name'
+        ParamType = ptUnknown
+      end>
+  end
+end

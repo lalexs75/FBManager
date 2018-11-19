@@ -1,0 +1,166 @@
+inherited fdbmCFLogFrame: TfdbmCFLogFrame
+  Height = 507
+  Width = 585
+  ClientHeight = 507
+  ClientWidth = 585
+  DesignLeft = 719
+  DesignTop = 128
+  object Label10: TLabel[0]
+    AnchorSideLeft.Control = cbLogMeta
+    AnchorSideTop.Control = cbLogMeta
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 66
+    Width = 107
+    Caption = 'Metadata log file'
+    ParentColor = False
+  end
+  object Label11: TLabel[1]
+    AnchorSideLeft.Control = cbLogEditor
+    AnchorSideTop.Control = cbLogEditor
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 20
+    Top = 165
+    Width = 116
+    BorderSpacing.Around = 6
+    Caption = 'SQL editor log file'
+    ParentColor = False
+  end
+  object Label1: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtEditorLogName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 234
+    Width = 156
+    BorderSpacing.Around = 6
+    Caption = 'SQL editor history count'
+    ParentColor = False
+  end
+  object cbLogMeta: TCheckBox[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbWriteTimeStamp
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 36
+    Width = 232
+    BorderSpacing.Around = 6
+    Caption = 'Enable loggin metadata changes'
+    OnClick = cbLogEditorClick
+    TabOrder = 0
+  end
+  object cbLogEditor: TCheckBox[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtMetaLogName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 135
+    Width = 184
+    BorderSpacing.Around = 6
+    Caption = 'Enable loggin SQL editor'
+    OnClick = cbLogEditorClick
+    TabOrder = 1
+  end
+  object cbWriteTimeStamp: TCheckBox[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 184
+    BorderSpacing.Around = 6
+    Caption = 'Write timestamp into log'
+    TabOrder = 2
+  end
+  object edtMetaLogName: TFileNameEdit[6]
+    AnchorSideLeft.Control = cbWriteTimeStamp
+    AnchorSideTop.Control = Label10
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 92
+    Width = 567
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 3
+  end
+  object edtEditorLogName: TFileNameEdit[7]
+    AnchorSideLeft.Control = cbWriteTimeStamp
+    AnchorSideTop.Control = Label11
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 191
+    Width = 567
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 4
+  end
+  object edtSQLEdtCnt: TSpinEdit[8]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 260
+    Width = 90
+    BorderSpacing.Around = 6
+    MaxValue = 1000
+    TabOrder = 5
+  end
+  object CheckBox1: TCheckBox[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtSQLEdtCnt
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 303
+    Width = 233
+    BorderSpacing.Around = 6
+    Caption = 'Use custom codepage for loggin'
+    OnChange = CheckBox1Change
+    TabOrder = 6
+  end
+  object ComboBox1: TComboBox[10]
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 333
+    Width = 567
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'WINDOWS-1251'
+      'CP866'
+    )
+    TabOrder = 7
+  end
+end

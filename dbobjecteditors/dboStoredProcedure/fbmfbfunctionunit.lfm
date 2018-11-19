@@ -1,0 +1,384 @@
+inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
+  Height = 399
+  Width = 708
+  ClientHeight = 399
+  ClientWidth = 708
+  DesignLeft = 639
+  DesignTop = 201
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 239
+    Top = 0
+    Width = 708
+    ActivePage = tabHeader
+    Align = alTop
+    TabIndex = 0
+    TabOrder = 0
+    object tabHeader: TTabSheet
+      Caption = 'Header'
+      ClientHeight = 208
+      ClientWidth = 698
+      object Label1: TLabel
+        AnchorSideLeft.Control = tabHeader
+        AnchorSideTop.Control = tabHeader
+        Left = 6
+        Height = 17
+        Top = 6
+        Width = 85
+        BorderSpacing.Around = 6
+        Caption = 'Function name'
+        ParentColor = False
+      end
+      object edtFuncName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = CheckBox1
+        Left = 12
+        Height = 34
+        Top = 29
+        Width = 571
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 0
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideTop.Control = edtFuncName
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tabHeader
+        AnchorSideRight.Side = asrBottom
+        Left = 589
+        Height = 23
+        Top = 35
+        Width = 103
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 6
+        Caption = 'Deterministic'
+        TabOrder = 1
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = tabHeader
+        AnchorSideTop.Control = edtFuncName
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 69
+        Width = 68
+        BorderSpacing.Around = 6
+        Caption = 'Return type'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = edtFuncName
+        AnchorSideTop.Side = asrBottom
+        Left = 355
+        Height = 17
+        Top = 69
+        Width = 40
+        BorderSpacing.Around = 6
+        Caption = 'Collate'
+        ParentColor = False
+      end
+      object ComboBox1: TComboBox
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tabHeader
+        AnchorSideRight.Side = asrBottom
+        Left = 361
+        Height = 34
+        Top = 92
+        Width = 331
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 2
+      end
+      object ComboBox2: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label4
+        Left = 12
+        Height = 34
+        Top = 92
+        Width = 331
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 3
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = tabHeader
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = tabHeader
+        Left = 349
+        Height = 1
+        Top = 0
+        Width = 1
+        ParentColor = False
+      end
+    end
+    object tabInputParams: TTabSheet
+      Caption = 'Input params'
+    end
+    object tabLocalVar: TTabSheet
+      Caption = 'Local variables'
+    end
+    object tabSubRoutines: TTabSheet
+      Caption = 'Subroutines'
+      ClientHeight = 208
+      ClientWidth = 698
+      object PairSplitter1: TPairSplitter
+        Left = 0
+        Height = 208
+        Top = 0
+        Width = 698
+        Align = alClient
+        Position = 152
+        object PairSplitterSide1: TPairSplitterSide
+          Cursor = crArrow
+          Left = 0
+          Height = 208
+          Top = 0
+          Width = 152
+          ClientWidth = 152
+          ClientHeight = 208
+          object SpeedButton1: TSpeedButton
+            AnchorSideLeft.Control = PairSplitterSide1
+            AnchorSideTop.Control = PairSplitterSide1
+            Left = 6
+            Height = 4
+            Top = 6
+            Width = 4
+            Action = srNew
+            AutoSize = True
+            BorderSpacing.Around = 6
+            ShowCaption = False
+          end
+          object SpeedButton2: TSpeedButton
+            AnchorSideLeft.Control = PairSplitterSide1
+            AnchorSideTop.Control = SpeedButton1
+            AnchorSideTop.Side = asrBottom
+            Left = 6
+            Height = 4
+            Top = 16
+            Width = 4
+            Action = srDelete
+            AutoSize = True
+            BorderSpacing.Around = 6
+            ShowCaption = False
+          end
+          object RxDBGrid1: TRxDBGrid
+            AnchorSideLeft.Control = SpeedButton1
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = PairSplitterSide1
+            AnchorSideRight.Control = PairSplitterSide1
+            AnchorSideRight.Side = asrBottom
+            AnchorSideBottom.Control = PairSplitterSide1
+            AnchorSideBottom.Side = asrBottom
+            Left = 16
+            Height = 208
+            Top = 0
+            Width = 136
+            ColumnDefValues.BlobText = '(данные)'
+            TitleButtons = False
+            AutoSort = True
+            Columns = <            
+              item
+                Title.Alignment = taCenter
+                Title.Orientation = toHorizontal
+                Title.Caption = 'SR_NAME'
+                Width = 109
+                FieldName = 'SR_NAME'
+                EditButtons = <>
+                Filter.DropDownRows = 0
+                Filter.EmptyValue = '(Пусто)'
+                Filter.NotEmptyValue = '(Не пусто)'
+                Filter.AllValue = '(Все значения)'
+                Filter.EmptyFont.Style = [fsItalic]
+                Filter.ItemIndex = -1
+                Footers = <>
+              end>
+            KeyStrokes = <            
+              item
+                Command = rxgcShowFindDlg
+                ShortCut = 16454
+                Enabled = True
+              end            
+              item
+                Command = rxgcShowColumnsDlg
+                ShortCut = 16471
+                Enabled = True
+              end            
+              item
+                Command = rxgcShowFilterDlg
+                ShortCut = 16468
+                Enabled = True
+              end            
+              item
+                Command = rxgcShowSortDlg
+                ShortCut = 16467
+                Enabled = True
+              end            
+              item
+                Command = rxgcShowQuickFilter
+                ShortCut = 16465
+                Enabled = True
+              end            
+              item
+                Command = rxgcHideQuickFilter
+                ShortCut = 16456
+                Enabled = True
+              end            
+              item
+                Command = rxgcSelectAll
+                ShortCut = 16449
+                Enabled = True
+              end            
+              item
+                Command = rxgcDeSelectAll
+                ShortCut = 16429
+                Enabled = True
+              end            
+              item
+                Command = rxgcInvertSelection
+                ShortCut = 16426
+                Enabled = True
+              end            
+              item
+                Command = rxgcOptimizeColumnsWidth
+                ShortCut = 16427
+                Enabled = True
+              end            
+              item
+                Command = rxgcCopyCellValue
+                ShortCut = 16451
+                Enabled = True
+              end>
+            FooterOptions.DrawFullLine = False
+            SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+            SearchOptions.FromStart = False
+            OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+            Anchors = [akTop, akLeft, akRight, akBottom]
+            AutoFillColumns = True
+            Color = clWindow
+            DrawFullLine = False
+            FocusColor = clRed
+            SelectedColor = clHighlight
+            GridLineStyle = psSolid
+            DataSource = dsSubRout
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            PopupMenu = PopupMenu1
+            ReadOnly = True
+            TabOrder = 0
+          end
+        end
+        object PairSplitterSide2: TPairSplitterSide
+          Cursor = crArrow
+          Left = 157
+          Height = 208
+          Top = 0
+          Width = 541
+        end
+      end
+    end
+  end
+  object Splitter1: TSplitter[1]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 239
+    Width = 708
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object ActionList1: TActionList[2]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 480
+    Top = 153
+    object srNew: TAction
+      Category = 'Subroutines'
+      Caption = 'srNew'
+      ImageIndex = 12
+      OnExecute = srNewExecute
+    end
+    object srDelete: TAction
+      Category = 'Subroutines'
+      Caption = 'srDelete'
+      ImageIndex = 13
+      OnExecute = srDeleteExecute
+    end
+  end
+  object rxSubRout: TRxMemoryData[3]
+    FieldDefs = <    
+      item
+        Name = 'SR_TYPE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'SR_NAME'
+        DataType = ftString
+        Size = 50
+      end    
+      item
+        Name = 'SR_BODY'
+        DataType = ftMemo
+      end>
+    BeforeScroll = rxSubRoutBeforeScroll
+    AfterScroll = rxSubRoutAfterScroll
+    PacketRecords = 0
+    Left = 72
+    Top = 120
+    object rxSubRoutSR_TYPE: TLongintField
+      FieldKind = fkData
+      FieldName = 'SR_TYPE'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxSubRoutSR_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'SR_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object rxSubRoutSR_BODY: TMemoField
+      FieldKind = fkData
+      FieldName = 'SR_BODY'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object dsSubRout: TDataSource[4]
+    DataSet = rxSubRout
+    Left = 40
+    Top = 120
+  end
+  object PopupMenu1: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 112
+    Top = 120
+    object MenuItem1: TMenuItem
+      Action = srNew
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = srDelete
+    end
+  end
+end

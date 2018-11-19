@@ -1,0 +1,307 @@
+inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
+  Height = 547
+  Width = 569
+  ClientHeight = 547
+  ClientWidth = 569
+  DesignLeft = 330
+  DesignTop = 195
+  object GroupBox2: TGroupBox[0]
+    Left = 0
+    Height = 307
+    Top = 240
+    Width = 569
+    Align = alClient
+    Caption = 'Options'
+    ClientHeight = 286
+    ClientWidth = 567
+    TabOrder = 0
+    object Label13: TLabel
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideBottom.Control = edtRoPageSize
+      AnchorSideBottom.Side = asrBottom
+      Left = 6
+      Height = 20
+      Top = 153
+      Width = 60
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Page size'
+      ParentColor = False
+    end
+    object CheckGroup2: TCheckGroup
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = GroupBox2
+      AnchorSideRight.Control = GroupBox2
+      Left = 6
+      Height = 129
+      Top = 6
+      Width = 555
+      Align = alTop
+      AutoFill = True
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Caption = 'Restore options'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 108
+      ClientWidth = 553
+      Columns = 2
+      Items.Strings = (
+        'Deactivate Indexes'
+        'No Shadow'
+        'No Validity Check'
+        'One Relation At A Time'
+        'Replace'
+        'Create New DB'
+        'Use All Space'
+        'Validate'
+      )
+      TabOrder = 0
+      Data = {
+        080000000202020202020202
+      }
+    end
+    object CheckBox4: TCheckBox
+      AnchorSideLeft.Control = CheckBox7
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = edtRoPageSize
+      AnchorSideTop.Side = asrBottom
+      Left = 138
+      Height = 24
+      Top = 179
+      Width = 113
+      BorderSpacing.Left = 36
+      BorderSpacing.Around = 6
+      Caption = 'Log to screen'
+      TabOrder = 1
+    end
+    object CheckBox7: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = edtRoPageSize
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 24
+      Top = 179
+      Width = 90
+      BorderSpacing.Around = 6
+      Caption = 'Log to file'
+      TabOrder = 2
+    end
+    object edtRoVerboseFileName: TFileNameEdit
+      AnchorSideLeft.Control = CheckBox7
+      AnchorSideTop.Control = CheckBox7
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox2
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 37
+      Top = 209
+      Width = 549
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxLength = 0
+      TabOrder = 3
+    end
+    object edtRoPageSize: TComboBox
+      AnchorSideLeft.Control = Label13
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = CheckGroup2
+      AnchorSideTop.Side = asrBottom
+      Left = 72
+      Height = 32
+      Top = 141
+      Width = 100
+      BorderSpacing.Left = 6
+      BorderSpacing.Top = 6
+      ItemHeight = 0
+      ItemIndex = 2
+      Items.Strings = (
+        '1024'
+        '2048'
+        '4096'
+        '8192'
+        '16384'
+      )
+      Style = csDropDownList
+      TabOrder = 4
+      Text = '4096'
+    end
+  end
+  object GroupBox4: TGroupBox[1]
+    Left = 0
+    Height = 235
+    Top = 0
+    Width = 569
+    Align = alTop
+    Caption = 'Restore'
+    ClientHeight = 214
+    ClientWidth = 567
+    TabOrder = 1
+    object RadioButton3: TRadioButton
+      AnchorSideLeft.Control = GroupBox4
+      AnchorSideTop.Control = edtRoSingleFileName
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 24
+      Top = 79
+      Width = 123
+      BorderSpacing.Around = 6
+      Caption = 'Separeted files'
+      TabOrder = 0
+    end
+    object RadioButton4: TRadioButton
+      AnchorSideLeft.Control = GroupBox4
+      AnchorSideTop.Control = GroupBox4
+      Left = 6
+      Height = 24
+      Top = 6
+      Width = 140
+      BorderSpacing.Around = 6
+      Caption = 'Single file restore'
+      Checked = True
+      TabOrder = 1
+      TabStop = True
+    end
+    object edtRoSingleFileName: TFileNameEdit
+      AnchorSideLeft.Control = RadioButton4
+      AnchorSideTop.Control = RadioButton4
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox4
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 37
+      Top = 36
+      Width = 549
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxLength = 0
+      TabOrder = 2
+    end
+    object RxDBGrid2: TRxDBGrid
+      AnchorSideLeft.Control = RadioButton3
+      AnchorSideTop.Control = RadioButton3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox4
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = GroupBox4
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 99
+      Top = 109
+      Width = 549
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = False
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end      
+        item
+          Command = rxgcSelectAll
+          ShortCut = 16449
+          Enabled = True
+        end      
+        item
+          Command = rxgcDeSelectAll
+          ShortCut = 16429
+          Enabled = True
+        end      
+        item
+          Command = rxgcInvertSelection
+          ShortCut = 16426
+          Enabled = True
+        end      
+        item
+          Command = rxgcOptimizeColumnsWidth
+          ShortCut = 16427
+          Enabled = True
+        end      
+        item
+          Command = rxgcCopyCellValue
+          ShortCut = 16451
+          Enabled = True
+        end>
+      FooterOptions.Color = clYellow
+      FooterOptions.DrawFullLine = False
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = []
+      FooterColor = clYellow
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 6
+      Color = clWindow
+      DrawFullLine = False
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      Scrollbars = ssAutoBoth
+      TabOrder = 3
+      TitleStyle = tsNative
+      Visible = False
+    end
+  end
+  object Splitter2: TSplitter[2]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 235
+    Width = 569
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object Datasource1: TDataSource[3]
+    Left = 248
+    Top = 128
+  end
+  object RxMemoryData1: TRxMemoryData[4]
+    AutoCalcFields = False
+    FieldDefs = <>
+    PacketRecords = 0
+    Left = 283
+    Top = 128
+  end
+end

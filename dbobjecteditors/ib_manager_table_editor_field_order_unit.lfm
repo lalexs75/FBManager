@@ -1,0 +1,112 @@
+object fbmTableEditorFieldOrderForm: TfbmTableEditorFieldOrderForm
+  Left = 387
+  Height = 447
+  Top = 192
+  Width = 380
+  ActiveControl = ListBox1
+  BorderIcons = [biSystemMenu, biHelp]
+  Caption = 'Fields order...'
+  ClientHeight = 447
+  ClientWidth = 380
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object SpeedButton1: TSpeedButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 22
+    Top = 6
+    Width = 23
+    Action = fldMoveUp
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 6
+    ShowCaption = False
+  end
+  object SpeedButton2: TSpeedButton
+    AnchorSideLeft.Control = SpeedButton1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 35
+    Height = 22
+    Top = 6
+    Width = 23
+    Action = fldMoveDown
+    BorderSpacing.Top = 6
+    ShowCaption = False
+  end
+  object ListBox1: TListBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = SpeedButton1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 359
+    Top = 34
+    Width = 368
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    DragMode = dmAutomatic
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    OnDragDrop = ListBox1DragDrop
+    OnDragOver = ListBox1DragOver
+    PopupMenu = PopupMenu1
+    ScrollWidth = 366
+    TabOrder = 0
+    TopIndex = -1
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 399
+    Width = 368
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 168
+    Top = 112
+    object MenuItem1: TMenuItem
+      Action = fldMoveUp
+      OnClick = fldMoveUpExecute
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = fldMoveDown
+      OnClick = fldMoveDownExecute
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 216
+    Top = 112
+    object fldMoveUp: TAction
+      Caption = 'Move up...'
+      Hint = 'Move fields up...'
+      ImageIndex = 54
+      OnExecute = fldMoveUpExecute
+    end
+    object fldMoveDown: TAction
+      Caption = 'Move down...'
+      Hint = 'Move fields down...'
+      ImageIndex = 52
+      OnExecute = fldMoveDownExecute
+    end
+  end
+end

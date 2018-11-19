@@ -1,0 +1,270 @@
+inherited cfSQLEditorOptionsFrame: TcfSQLEditorOptionsFrame
+  Height = 512
+  Width = 567
+  ClientHeight = 512
+  ClientWidth = 567
+  DesignLeft = 468
+  DesignTop = 289
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = SpinEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 179
+    Width = 209
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Count SQL Editor history records'
+    ParentColor = False
+  end
+  object CheckBox3: TCheckBox[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 293
+    BorderSpacing.Around = 6
+    Caption = 'Use table name as alis in create SQL form'
+    TabOrder = 0
+  end
+  object GroupBox3: TGroupBox[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 90
+    Top = 66
+    Width = 555
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'SQL editor'
+    ClientHeight = 69
+    ClientWidth = 553
+    TabOrder = 1
+    object se_cdFetchAll: TCheckBox
+      AnchorSideLeft.Control = GroupBox3
+      AnchorSideTop.Control = GroupBox3
+      Left = 7
+      Height = 24
+      Top = 7
+      Width = 81
+      BorderSpacing.Around = 7
+      Caption = 'Fetch all'
+      TabOrder = 0
+    end
+    object se_cdGoToResult: TCheckBox
+      AnchorSideLeft.Control = GroupBox3
+      AnchorSideTop.Control = se_cdFetchAll
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 24
+      Top = 38
+      Width = 219
+      BorderSpacing.Around = 7
+      Caption = 'Go to Result tab after execute'
+      TabOrder = 1
+    end
+    object CheckBox2: TCheckBox
+      AnchorSideLeft.Control = LabelCenter1
+      AnchorSideTop.Control = GroupBox3
+      Left = 282
+      Height = 24
+      Top = 6
+      Width = 133
+      BorderSpacing.Around = 6
+      Caption = 'Show query plan'
+      TabOrder = 2
+    end
+    object LabelCenter1: TLabel
+      AnchorSideLeft.Control = GroupBox3
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = GroupBox3
+      Left = 276
+      Height = 1
+      Top = 0
+      Width = 1
+      ParentColor = False
+    end
+  end
+  object SpinEdit1: TSpinEdit[3]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = GroupBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 221
+    Height = 37
+    Top = 162
+    Width = 105
+    BorderSpacing.Around = 6
+    MaxValue = 100000
+    TabOrder = 2
+  end
+  object DividerBevel1: TDividerBevel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = SpinEdit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 20
+    Top = 205
+    Width = 567
+    Caption = 'SQL history colors'
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ColorBox1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 247
+    Width = 85
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'SELECT color'
+    FocusControl = ColorBox1
+    ParentColor = False
+  end
+  object Label3: TLabel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ColorBox2
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 289
+    Width = 85
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'INSERT color'
+    FocusControl = ColorBox2
+    ParentColor = False
+  end
+  object Label4: TLabel[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ColorBox3
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 331
+    Width = 89
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'UPDATE color'
+    FocusControl = ColorBox3
+    ParentColor = False
+  end
+  object Label5: TLabel[8]
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = ColorBox4
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 373
+    Width = 85
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'DELETE color'
+    FocusControl = ColorBox4
+    ParentColor = False
+  end
+  object ColorBox1: TColorBox[9]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DividerBevel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 221
+    Height = 36
+    Top = 231
+    Width = 340
+    Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbIncludeDefault, cbCustomColor, cbPrettyNames, cbCustomColors]
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 3
+  end
+  object ColorBox2: TColorBox[10]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 221
+    Height = 36
+    Top = 273
+    Width = 340
+    Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbIncludeDefault, cbCustomColor, cbPrettyNames, cbCustomColors]
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 4
+  end
+  object ColorBox3: TColorBox[11]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 221
+    Height = 36
+    Top = 315
+    Width = 340
+    Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbIncludeDefault, cbCustomColor, cbPrettyNames, cbCustomColors]
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 5
+  end
+  object ColorBox4: TColorBox[12]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 221
+    Height = 36
+    Top = 357
+    Width = 340
+    Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbIncludeDefault, cbCustomColor, cbPrettyNames, cbCustomColors]
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 6
+  end
+  object CheckBox1: TCheckBox[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 36
+    Width = 215
+    BorderSpacing.Around = 6
+    Caption = 'Show result grid on first page'
+    TabOrder = 7
+  end
+  object LabelCenter: TLabel[14]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 283
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+end

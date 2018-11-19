@@ -1,0 +1,19 @@
+inherited fdbmCFDisplayDataParamsPage: TfdbmCFDisplayDataParamsPage
+  Height = 320
+  Width = 439
+  ClientHeight = 320
+  ClientWidth = 439
+  DesignLeft = 479
+  DesignTop = 442
+  object cbFetchAllTableData: TCheckBox[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 183
+    BorderSpacing.Around = 6
+    Caption = 'Fetch all data from table'
+    TabOrder = 0
+  end
+end

@@ -1,0 +1,251 @@
+inherited fbmUserEditorForm: TfbmUserEditorForm
+  Height = 431
+  Width = 587
+  ClientHeight = 431
+  ClientWidth = 587
+  DesignLeft = 366
+  DesignTop = 121
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = edtObjID
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 149
+    Height = 20
+    Top = 6
+    Width = 38
+    BorderSpacing.Around = 6
+    Caption = 'Name'
+    ParentColor = False
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 60
+    BorderSpacing.Around = 6
+    Caption = 'Object ID'
+    ParentColor = False
+  end
+  object edtUserName: TEdit[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 155
+    Height = 37
+    Top = 32
+    Width = 426
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object edtObjID: TEdit[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 131
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'edtObjID'
+  end
+  object CheckBox1: TCheckBox[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtObjID
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 75
+    Width = 85
+    BorderSpacing.Around = 6
+    Caption = 'Can login'
+    Enabled = False
+    TabOrder = 2
+  end
+  object Label3: TLabel[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 105
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label4: TLabel[6]
+    AnchorSideLeft.Control = edtPwd
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 274
+    Height = 20
+    Top = 105
+    Width = 115
+    BorderSpacing.Around = 6
+    Caption = 'Confirm password'
+    ParentColor = False
+  end
+  object edtPwd: TEdit[7]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 131
+    Width = 256
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object edtPwdConfirm: TEdit[8]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 280
+    Height = 37
+    Top = 131
+    Width = 301
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object cbPwdNewer: TCheckBox[9]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = edtPwdDate
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 213
+    Width = 71
+    Anchors = [akLeft, akBottom]
+    Caption = 'Always'
+    OnChange = cbPwdNewerChange
+    TabOrder = 5
+  end
+  object Label5: TLabel[10]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtPwd
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 174
+    Width = 63
+    BorderSpacing.Around = 6
+    Caption = 'Valid until'
+    ParentColor = False
+  end
+  object edtPwdDate: TRxDateEdit[11]
+    AnchorSideLeft.Control = cbPwdNewer
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 83
+    Height = 37
+    Top = 200
+    Width = 121
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    ButtonWidth = 23
+    MaxLength = 10
+    PasswordChar = #0
+    PopupColor = clWindow
+    TabOrder = 6
+    Text = '  .  .    '
+  end
+  object edtPwdTime: TRxTimeEdit[12]
+    AnchorSideLeft.Control = edtPwdDate
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 236
+    Height = 37
+    Top = 200
+    Width = 120
+    ShowSecond = True
+    BorderSpacing.Left = 32
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    CharCase = ecNormal
+    MaxLength = 8
+    TabOrder = 7
+  end
+  object cgUserRigth: TCheckGroup[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtPwdDate
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 177
+    Top = 243
+    Width = 575
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Roles priveleges'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 156
+    ClientWidth = 573
+    Items.Strings = (
+      'Inherited right from parent role'
+      'Superuser'
+      'Can create database objects'
+      'Can create role'
+      'Can modyfi catalog directly'
+      'Allow create replications and backup'
+    )
+    OnItemClick = cgUserRigthItemClick
+    TabOrder = 8
+    Data = {
+      06000000020202020202
+    }
+  end
+  object Label6: TLabel[14]
+    AnchorSideLeft.Control = edtPwdTime
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtPwdConfirm
+    AnchorSideTop.Side = asrBottom
+    Left = 394
+    Height = 20
+    Top = 174
+    Width = 103
+    BorderSpacing.Left = 32
+    BorderSpacing.Around = 6
+    Caption = 'Connection limit'
+    ParentColor = False
+  end
+  object SpinEdit1: TSpinEdit[15]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    Left = 400
+    Height = 37
+    Top = 200
+    Width = 146
+    BorderSpacing.Around = 6
+    MaxValue = 65535
+    MinValue = -1
+    TabOrder = 9
+    Value = -1
+  end
+end

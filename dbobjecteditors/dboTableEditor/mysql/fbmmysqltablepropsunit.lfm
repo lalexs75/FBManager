@@ -1,0 +1,82 @@
+inherited fbmMySQLTablePropsFrame: TfbmMySQLTablePropsFrame
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 15
+    Top = 6
+    Width = 62
+    BorderSpacing.Around = 6
+    Caption = 'Table type'
+    ParentColor = False
+  end
+  object cbEngineName: TComboBox[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 27
+    Top = 27
+    Width = 236
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'InnoDB'
+      'MyISAM'
+    )
+    TabOrder = 0
+    Text = 'cbEngineName'
+  end
+  object Label2: TLabel[2]
+    AnchorSideTop.Side = asrBottom
+    Left = 26
+    Height = 15
+    Top = 95
+    Width = 68
+    BorderSpacing.Around = 6
+    Caption = 'Code page'
+    ParentColor = False
+  end
+  object ComboBox2: TComboBox[3]
+    AnchorSideTop.Side = asrBottom
+    Left = 104
+    Height = 27
+    Top = 80
+    Width = 100
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 1
+    Text = 'ComboBox2'
+  end
+  object Label3: TLabel[4]
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 136
+    Width = 52
+    BorderSpacing.Around = 6
+    Caption = 'Collation'
+    ParentColor = False
+  end
+  object ComboBox3: TComboBox[5]
+    AnchorSideTop.Side = asrBottom
+    Left = 92
+    Height = 27
+    Top = 128
+    Width = 100
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 2
+    Text = 'ComboBox3'
+  end
+  object CheckBox1: TCheckBox[6]
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 22
+    Top = 180
+    Width = 90
+    BorderSpacing.Around = 6
+    Caption = 'Temp table'
+    TabOrder = 3
+  end
+end

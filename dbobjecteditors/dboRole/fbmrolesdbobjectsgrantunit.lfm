@@ -1,0 +1,750 @@
+inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
+  Height = 598
+  Width = 913
+  ClientHeight = 598
+  ClientWidth = 913
+  DesignLeft = 429
+  DesignTop = 108
+  object Label2: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 44
+    Width = 44
+    BorderSpacing.Around = 6
+    Caption = 'Objects'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object RxDBGrid1: TRxDBGrid[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 496
+    Top = 102
+    Width = 913
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = True
+    AutoSort = True
+    OnGetCellProps = RxDBGrid1GetCellProps
+    Columns = <    
+      item
+        ButtonStyle = cbsNone
+        Color = clHighlight
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Object name'
+        Width = 200
+        FieldName = 'DBObjectName'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Select'
+        Width = 50
+        FieldName = 'Select'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Insert'
+        Width = 50
+        FieldName = 'Insert'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Update'
+        Width = 55
+        FieldName = 'Update'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Delete'
+        Width = 50
+        FieldName = 'Delete'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Execute'
+        Width = 60
+        FieldName = 'Execute'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Reference'
+        Width = 70
+        FieldName = 'Reference'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        ButtonStyle = cbsNone
+        Color = clAqua
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Description'
+        Width = 200
+        FieldName = 'Description'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Not empty)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowDialogFind, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowToolMenu]
+    FooterColor = clYellow
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsGrantsTable
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TitleStyle = tsNative
+  end
+  object ComboBox1: TComboBox[2]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 29
+    Top = 67
+    Width = 895
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'All objects'
+      'Tables'
+      'Views'
+      'Stored procedure'
+    )
+    OnChange = ComboBox1Change
+    Style = csDropDownList
+    TabOrder = 1
+    Text = 'All objects'
+  end
+  object ToolPanel1: TToolPanel[3]
+    Left = 0
+    Height = 34
+    Top = 0
+    Width = 913
+    Items = <    
+      item
+        Action = grnH
+        Visible = True
+        Left = 5
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = grnL
+        Visible = True
+        Left = 29
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 53
+        Height = 24
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = grnHA
+        Visible = True
+        Left = 60
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = grnHL
+        Visible = True
+        Left = 84
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 108
+        Height = 24
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = grnAll
+        Visible = True
+        Left = 115
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 139
+        Height = 24
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = revH
+        Visible = True
+        Left = 146
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = revL
+        Visible = True
+        Left = 170
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = revAll
+        Visible = True
+        Left = 194
+        Height = 24
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns, tpCustomizable, tpGlyphPopup]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 34
+    ClientWidth = 913
+    TabOrder = 2
+  end
+  object dsGrantsTable: TDataSource[4]
+    DataSet = rxGrantsTable
+    Left = 124
+    Top = 124
+  end
+  object rxGrantsTable: TRxMemoryData[5]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'DBObjectName'
+        DataType = ftString
+        Precision = -1
+        Size = 32
+      end    
+      item
+        Name = 'Type'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'Select'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Insert'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Update'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Delete'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Execute'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Reference'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'O_Ins'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'O_Upd'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'O_Del'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'O_Exec'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'O_Ref'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'O_Sel'
+        DataType = ftBoolean
+        Precision = -1
+      end>
+    AfterInsert = rxGrantsTableAfterInsert
+    OnFilterRecord = rxGrantsTableFilterRecordEx
+    PacketRecords = 0
+    Left = 156
+    Top = 124
+    object rxGrantsTableType: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'Type'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxGrantsTableSelect: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Select'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableInsert: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Insert'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableUpdate: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Update'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableDelete: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Delete'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableExecute: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Execute'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableReference: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Reference'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableDescription: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Description'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxGrantsTableO_Ins: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Ins'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableO_Upd: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Upd'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableO_Del: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Del'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableO_Exec: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Exec'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableO_Ref: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Ref'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableO_Sel: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'O_Sel'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxGrantsTableDBObjectName: TStringField
+      DisplayWidth = 32
+      FieldKind = fkData
+      FieldName = 'DBObjectName'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 32
+    end
+  end
+  object PopupMenu1: TPopupMenu[6]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 200
+    Top = 168
+    object MenuItem1: TMenuItem
+      Action = grnH
+      OnClick = grnHExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = grnL
+      OnClick = grnLExecute
+    end
+    object MenuItem7: TMenuItem
+      Action = grnAll
+      OnClick = revAllExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = grnHA
+    end
+    object MenuItem6: TMenuItem
+      Action = grnHL
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem8: TMenuItem
+      Action = grnH
+      OnClick = grnHExecute
+    end
+    object MenuItem9: TMenuItem
+      Action = revL
+      OnClick = grnLExecute
+    end
+    object MenuItem10: TMenuItem
+      Action = revAll
+      OnClick = revAllExecute
+    end
+  end
+  object ActionList1: TActionList[7]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 200
+    Top = 240
+    object edtPrint: TAction
+      Category = 'List'
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = edtPrintExecute
+    end
+    object grnH: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'Grant All'
+      ImageIndex = 36
+      OnExecute = grnHExecute
+    end
+    object grnL: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'Grant all'
+      ImageIndex = 35
+      OnExecute = grnLExecute
+    end
+    object grnHA: TAction
+      Tag = 3
+      Category = 'Grants'
+      Caption = 'Grant to All with GO'
+      ImageIndex = 38
+    end
+    object grnHL: TAction
+      Tag = 4
+      Category = 'Grants'
+      Caption = 'Grant All with GO'
+      ImageIndex = 37
+    end
+    object grnAll: TAction
+      Tag = 1
+      Category = 'Grants'
+      Caption = 'Grant All to All'
+      ImageIndex = 34
+      OnExecute = revAllExecute
+    end
+    object revH: TAction
+      Tag = 2
+      Category = 'Grants'
+      Caption = 'Revoke from all'
+      ImageIndex = 40
+      OnExecute = grnHExecute
+    end
+    object revL: TAction
+      Tag = 2
+      Category = 'Grants'
+      Caption = 'Revoke all'
+      ImageIndex = 39
+      OnExecute = grnLExecute
+    end
+    object revAll: TAction
+      Tag = 2
+      Category = 'Grants'
+      Caption = 'Revoke all from all'
+      ImageIndex = 41
+      OnExecute = revAllExecute
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[8]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 342
+    Top = 140
+  end
+end

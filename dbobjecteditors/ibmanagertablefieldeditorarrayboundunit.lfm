@@ -1,0 +1,72 @@
+object ibmanagertablefieldeditorArrayBoundForm: TibmanagertablefieldeditorArrayBoundForm
+  Left = 451
+  Height = 143
+  Top = 372
+  Width = 316
+  ActiveControl = SpinEdit1
+  Caption = 'Array Bound'
+  ClientHeight = 143
+  ClientWidth = 316
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.3'
+  object Label1: TLabel
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 39
+    Caption = 'Upper'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = SpinEdit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 144
+    Height = 21
+    Top = 6
+    Width = 40
+    BorderSpacing.Left = 32
+    BorderSpacing.Around = 6
+    Caption = 'Lower'
+    ParentColor = False
+  end
+  object SpinEdit1: TSpinEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 94
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object SpinEdit2: TSpinEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 150
+    Height = 33
+    Top = 33
+    Width = 94
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 95
+    Width = 304
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 2
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+end

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="11"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="SQL parser test"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+    </General>
+    <LazDoc Paths="../../docs"/>
+    <i18n>
+      <EnableI18N Value="True" LFM="False"/>
+      <OutDir Value="languages"/>
+    </i18n>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default"/>
+      </Modes>
+    </RunParams>
+    <RequiredPackages Count="10">
+      <Item1>
+        <PackageName Value="LazControls"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="lazreport"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="rxnew"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="fbdemofpc"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="UIBLaz"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="SynEdit"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="rx"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="rxtools"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="zcomponent"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="LCL"/>
+      </Item10>
+    </RequiredPackages>
+    <Units Count="22">
+      <Unit0>
+        <Filename Value="project1.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLEngineAbstractUnit"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PostgreSQLEngineUnit"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLEngineCommonTypesUnit"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../../sql_objects/sqlobjects.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlObjects"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../tools/fbmstrconstunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmStrConstUnit"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmSqlParserUnit"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <UnitName Value="pgSqlTextUnit"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FBSQLEngineUnit"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../sql_objects/sqlparserconsts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlParserConsts"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pg_SqlParserUnit"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../sql_engine/firebird/fbkeywordsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbKeywordsUnit"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fb_SqlParserUnit"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLite3EngineUnit"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_keywords.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlite3_SqlParserUnit"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="treeaddchildtokenunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="TreeAddChildTokenForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="TreeAddChildTokenUnit"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../sql_engine/mysql/mysql_engine.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../sql_engine/mysql/mysqlkeywords.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MySQLKeywords"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mysql_SqlParserUnit"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../sql_engine/mysql/mysql_types.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit21>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="project1"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="4">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+      <Item4>
+        <Name Value="RunError(216)"/>
+      </Item4>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

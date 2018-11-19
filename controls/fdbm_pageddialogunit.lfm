@@ -1,0 +1,57 @@
+object fdbm_PagedDialogForm: Tfdbm_PagedDialogForm
+  Left = 474
+  Height = 555
+  Top = 245
+  Width = 790
+  ActiveControl = ListBox1
+  Caption = 'fdbm_PagedDialogForm'
+  ClientHeight = 555
+  ClientWidth = 790
+  KeyPreview = True
+  OnCloseQuery = FormCloseQuery
+  OnKeyDown = FormKeyDown
+  Position = poScreenCenter
+  LCLVersion = '1.7'
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 507
+    Width = 778
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object ListBox1: TListBox
+    Left = 0
+    Height = 501
+    Top = 0
+    Width = 132
+    Align = alLeft
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    ScrollWidth = 130
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object Splitter1: TSplitter
+    Left = 132
+    Height = 501
+    Top = 0
+    Width = 5
+  end
+  object Panel1: TPanel
+    Left = 137
+    Height = 501
+    Top = 0
+    Width = 653
+    Align = alClient
+    TabOrder = 3
+  end
+end

@@ -1,0 +1,536 @@
+object pgCreateDatabaseForm: TpgCreateDatabaseForm
+  Left = 351
+  Height = 627
+  Top = 120
+  Width = 751
+  Caption = 'Create postgre database...'
+  ClientHeight = 627
+  ClientWidth = 751
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  PopupMode = pmAuto
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 579
+    Width = 739
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CloseButton.Enabled = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 573
+    Top = 0
+    Width = 751
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'Create params'
+      ClientHeight = 538
+      ClientWidth = 745
+      object edtConnectLimit: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Label10
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 514
+        Height = 27
+        Top = 239
+        Width = 225
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 8
+      end
+      object Label10: TLabel
+        AnchorSideLeft.Control = edtTblSpace
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtDBTemplate
+        AnchorSideTop.Side = asrBottom
+        Left = 508
+        Height = 17
+        Top = 216
+        Width = 107
+        BorderSpacing.Around = 6
+        Caption = 'Connection limit'
+        ParentColor = False
+      end
+      object edtTblSpace: TComboBox
+        AnchorSideLeft.Control = Label9
+        AnchorSideTop.Control = Label9
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 239
+        Width = 490
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 7
+      end
+      object Label9: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtDBTemplate
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 216
+        Width = 76
+        BorderSpacing.Around = 6
+        Caption = 'Table space'
+        ParentColor = False
+      end
+      object edtCodePage: TComboBox
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 460
+        Height = 29
+        Top = 181
+        Width = 279
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 6
+        Text = 'UTF8'
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = edtOwner
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 454
+        Height = 17
+        Top = 158
+        Width = 65
+        BorderSpacing.Around = 6
+        Caption = 'Codepage'
+        ParentColor = False
+      end
+      object edtOwner: TComboBox
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        Left = 236
+        Height = 29
+        Top = 181
+        Width = 212
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 5
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = edtDBTemplate
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 230
+        Height = 17
+        Top = 158
+        Width = 42
+        BorderSpacing.Around = 6
+        Caption = 'Owner'
+        ParentColor = False
+      end
+      object edtDBTemplate: TComboBox
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 181
+        Width = 212
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 4
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 158
+        Width = 60
+        BorderSpacing.Around = 6
+        Caption = 'Template'
+        ParentColor = False
+      end
+      object edtPwd: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 379
+        Height = 27
+        Top = 102
+        Width = 360
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        OnExit = edtUserNameChange
+        TabOrder = 3
+      end
+      object edtUserName: TEdit
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = CentrLabel
+        Left = 12
+        Height = 27
+        Top = 102
+        Width = 354
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        OnExit = edtUserNameChange
+        TabOrder = 2
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = CentrLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtDataBaseName
+        AnchorSideTop.Side = asrBottom
+        Left = 373
+        Height = 17
+        Top = 79
+        Width = 61
+        BorderSpacing.Top = 6
+        Caption = 'Password'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtDataBaseName
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 79
+        Width = 71
+        BorderSpacing.Around = 6
+        Caption = 'User name'
+        ParentColor = False
+      end
+      object edtPort: TSpinEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = CentrLabel
+        AnchorSideRight.Side = asrBottom
+        Left = 270
+        Height = 27
+        Top = 46
+        Width = 97
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxValue = 65535
+        OnExit = edtUserNameChange
+        TabOrder = 1
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = cbServName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 264
+        Height = 17
+        Top = 23
+        Width = 26
+        BorderSpacing.Around = 6
+        Caption = 'Port'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 23
+        Width = 71
+        BorderSpacing.Around = 6
+        Caption = 'Host name'
+        ParentColor = False
+      end
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = DividerBevel3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 22
+        Top = 355
+        Width = 157
+        BorderSpacing.Around = 6
+        Caption = 'Register after create'
+        TabOrder = 11
+      end
+      object edtDataBaseName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 385
+        Height = 27
+        Top = 46
+        Width = 354
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = CentrLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = DividerBevel1
+        AnchorSideTop.Side = asrBottom
+        Left = 379
+        Height = 17
+        Top = 23
+        Width = 103
+        BorderSpacing.Around = 6
+        Caption = 'Database name'
+        ParentColor = False
+      end
+      object CheckBox2: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 22
+        Top = 383
+        Width = 164
+        BorderSpacing.Around = 6
+        Caption = 'SQL metadata log file'
+        TabOrder = 12
+      end
+      object edtLogFile: TFileNameEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 27
+        Top = 411
+        Width = 727
+        DialogOptions = []
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxLength = 0
+        TabOrder = 13
+      end
+      object DividerBevel1: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 17
+        Top = 0
+        Width = 745
+        Caption = 'Connection params'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DividerBevel2: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtUserName
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 17
+        Top = 135
+        Width = 745
+        Caption = 'Databse property'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DividerBevel3: TDividerBevel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtCollate
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 17
+        Top = 332
+        Width = 745
+        Caption = 'FBManager options'
+        Anchors = [akTop, akLeft, akRight]
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label11: TLabel
+        AnchorSideTop.Control = edtTblSpace
+        AnchorSideTop.Side = asrBottom
+        Left = 8
+        Height = 17
+        Top = 274
+        Width = 46
+        BorderSpacing.Around = 6
+        Caption = 'Collate'
+        ParentColor = False
+      end
+      object Label12: TLabel
+        AnchorSideLeft.Control = CentrLabel
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtTblSpace
+        AnchorSideTop.Side = asrBottom
+        Left = 379
+        Height = 17
+        Top = 274
+        Width = 39
+        BorderSpacing.Around = 6
+        Caption = 'CType'
+        ParentColor = False
+      end
+      object edtCollate: TComboBox
+        AnchorSideLeft.Control = Label11
+        AnchorSideTop.Control = Label11
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = CentrLabel
+        Left = 14
+        Height = 29
+        Top = 297
+        Width = 352
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 9
+      end
+      object edtCType: TComboBox
+        AnchorSideLeft.Control = Label12
+        AnchorSideTop.Control = Label12
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 385
+        Height = 29
+        Top = 297
+        Width = 354
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 10
+      end
+      object cbServName: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 46
+        Width = 246
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 14
+      end
+      object CentrLabel: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = TabSheet1
+        Left = 372
+        Height = 1
+        Top = 0
+        Width = 1
+        ParentColor = False
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'SQL'
+    end
+  end
+  object TestDB: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    DesignConnection = True
+    Port = 0
+    User = 'postgres'
+    Protocol = 'postgresql-9'
+    Left = 146
+    Top = 163
+  end
+  object quUsers: TZReadOnlyQuery
+    Connection = TestDB
+    SQL.Strings = (
+      'select'
+      '  pg_user.usename'
+      'from'
+      '  pg_user'
+    )
+    Params = <>
+    Left = 146
+    Top = 111
+  end
+  object quDBTemplates: TZReadOnlyQuery
+    Connection = TestDB
+    SQL.Strings = (
+      'select'
+      '  pg_database.datname'
+      'from'
+      '  pg_database'
+    )
+    Params = <>
+    Left = 184
+    Top = 110
+  end
+  object quTableSpace: TZReadOnlyQuery
+    Connection = TestDB
+    SQL.Strings = (
+      'select'
+      '  pg_tablespace.spcname'
+      'from'
+      '  pg_tablespace'
+    )
+    Params = <>
+    Left = 227
+    Top = 110
+  end
+  object quEncodes: TZReadOnlyQuery
+    Connection = TestDB
+    SQL.Strings = (
+      'select pg_catalog.pg_encoding_to_char(contoencoding) as enc'
+      'from pg_catalog.pg_conversion'
+      'group by pg_catalog.pg_encoding_to_char(contoencoding)'
+      'order by'
+      '  1'
+    )
+    Params = <>
+    Left = 279
+    Top = 110
+    object quEncodesenc: TStringField
+      FieldKind = fkData
+      FieldName = 'enc'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 256
+    end
+  end
+end

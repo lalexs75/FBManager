@@ -1,0 +1,92 @@
+inherited fbmFirebirdTablePropsPage: TfbmFirebirdTablePropsPage
+  Width = 448
+  ClientWidth = 448
+  DesignLeft = 748
+  DesignTop = 339
+  object RadioButton1: TRadioButton[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 113
+    BorderSpacing.Around = 6
+    Caption = 'Normal mode'
+    Checked = True
+    OnChange = RadioButton1Change
+    TabOrder = 0
+  end
+  object RadioButton2: TRadioButton[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 122
+    Width = 102
+    BorderSpacing.Around = 6
+    Caption = 'External file'
+    OnChange = RadioButton1Change
+    TabOrder = 1
+  end
+  object FileNameEdit1: TFileNameEdit[2]
+    AnchorSideLeft.Control = RadioButton2
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 152
+    Width = 430
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 2
+  end
+  object CheckBox1: TCheckBox[3]
+    AnchorSideLeft.Control = RadioButton1
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 24
+    Top = 36
+    Width = 178
+    BorderSpacing.Around = 6
+    Caption = 'Global Temporary Table'
+    OnChange = RadioButton1Change
+    TabOrder = 3
+  end
+  object RadioGroup1: TRadioGroup[4]
+    AnchorSideLeft.Control = RadioButton1
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 50
+    Top = 66
+    Width = 241
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 48
+    ClientWidth = 239
+    ItemIndex = 0
+    Items.Strings = (
+      'ON COMMIT DELETE ROWS'
+      'ON COMMIT PRESERVE ROWS'
+    )
+    TabOrder = 4
+  end
+end

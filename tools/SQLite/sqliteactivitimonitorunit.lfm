@@ -1,0 +1,228 @@
+inherited SQLiteActivitiMonitorForm: TSQLiteActivitiMonitorForm
+  Height = 364
+  Width = 578
+  ClientHeight = 364
+  ClientWidth = 578
+  OnClose = FormClose
+  OnCreate = FormCreate
+  inherited Panel1: TPanel
+    Width = 578
+    ClientWidth = 578
+    inherited ComboBox1: TComboBox
+      Width = 499
+    end
+  end
+  object PageControl1: TPageControl[1]
+    Left = 0
+    Height = 314
+    Top = 50
+    Width = 578
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Statistic'
+      ClientHeight = 280
+      ClientWidth = 568
+      object RxDBGrid3: TRxDBGrid
+        Left = 0
+        Height = 280
+        Top = 0
+        Width = 568
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = True
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'PARAM'
+            Width = 270
+            FieldName = 'PARAM'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'VALUE'
+            Width = 271
+            FieldName = 'VALUE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Align = alClient
+        AutoFillColumns = True
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsStatInfo
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+        ReadOnly = True
+        TabOrder = 0
+        TitleStyle = tsNative
+      end
+    end
+  end
+  inherited MainTimer: TTimer[2]
+  end
+  object SQLiteStatDB: TZConnection[3]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+      'application_name=FBManager'
+      'codepage='
+      'controls_cp=CP_UTF8'
+    )
+    DesignConnection = True
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'postgres'
+    User = 'alexs'
+    Protocol = 'sqlite-3'
+    Left = 96
+    Top = 60
+  end
+  object quDBStat: TZReadOnlyQuery[4]
+    Connection = SQLiteStatDB
+    SQL.Strings = (
+      'select'
+      '  *'
+      'from'
+      '  pg_stat_database'
+      'where'
+      '  pg_stat_database.datname = :dbname'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'dbname'
+        ParamType = ptUnknown
+      end>
+    Left = 220
+    Top = 212
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'dbname'
+        ParamType = ptUnknown
+      end>
+  end
+  object rxStatInfo: TRxMemoryData[5]
+    FieldDefs = <    
+      item
+        Name = 'PARAM'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'VALUE'
+        DataType = ftString
+        Size = 250
+      end>
+    PacketRecords = 0
+    Left = 302
+    Top = 212
+    object rxStatInfoPARAM: TStringField
+      FieldKind = fkData
+      FieldName = 'PARAM'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxStatInfoVALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'VALUE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+  end
+  object dsStatInfo: TDataSource[6]
+    DataSet = rxStatInfo
+    Left = 268
+    Top = 212
+  end
+end

@@ -1,0 +1,454 @@
+inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
+  Height = 425
+  Width = 1311
+  ClientHeight = 425
+  ClientWidth = 1311
+  DesignLeft = 235
+  DesignTop = 182
+  object RxDBGrid1: TRxDBGrid[0]
+    Left = 0
+    Height = 330
+    Top = 0
+    Width = 1311
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = False
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Constraint name'
+        Width = 150
+        FieldName = 'Name'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'On field'
+        Width = 150
+        FieldName = 'Field'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'External table'
+        Width = 150
+        FieldName = 'FK_Table'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'External field'
+        Width = 150
+        FieldName = 'FK_Field'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Update rule'
+        Width = 150
+        FieldName = 'OnUpdate'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Delete rule'
+        Width = 150
+        FieldName = 'OnDelete'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Index name'
+        Width = 150
+        FieldName = 'IndexName'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Sort order'
+        Width = 150
+        FieldName = 'IndexSort'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = []
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsFKList
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisplayMemoText]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 0
+    TitleStyle = tsNative
+  end
+  object Splitter1: TSplitter[1]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 330
+    Width = 1311
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object DBMemo1: TDBMemo[2]
+    Left = 0
+    Height = 90
+    Top = 335
+    Width = 1311
+    Align = alBottom
+    DataField = 'Desc'
+    DataSource = dsFKList
+    TabOrder = 2
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 221
+    Top = 170
+    object actNewFK: TAction
+      Caption = 'New foreign key'
+      ImageIndex = 12
+      OnExecute = actNewFKExecute
+    end
+    object actDropFK: TAction
+      Caption = 'Drop foreign key'
+      ImageIndex = 13
+      OnExecute = actDropFKExecute
+    end
+    object actPrintList: TAction
+      Caption = 'Print FK list'
+      ImageIndex = 14
+      OnExecute = actPrintListExecute
+    end
+    object actRefresh: TAction
+      Caption = 'actRefresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+  end
+  object dsFKList: TDataSource[4]
+    DataSet = rxFKList
+    Left = 56
+    Top = 170
+  end
+  object PopupMenu1: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 272
+    Top = 170
+    object MenuItem1: TMenuItem
+      Action = actNewFK
+      OnClick = actNewFKExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = actDropFK
+      OnClick = actDropFKExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = actPrintList
+      OnClick = actPrintListExecute
+    end
+  end
+  object rxFKList: TRxMemoryData[6]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'Name'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'Field'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'FK_Table'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'FK_Field'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'OnUpdate'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'OnDelete'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'IndexName'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'IndexSort'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Desc'
+        DataType = ftMemo
+      end>
+    AfterOpen = rxFKListAfterPost
+    AfterPost = rxFKListAfterPost
+    AfterDelete = rxFKListAfterPost
+    PacketRecords = 0
+    Left = 96
+    Top = 170
+    object rxFKListName: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'Name'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxFKListField: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Field'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFKListFK_Table: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'FK_Table'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxFKListFK_Field: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'FK_Field'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxFKListOnUpdate: TStringField
+      DisplayWidth = 20
+      FieldKind = fkData
+      FieldName = 'OnUpdate'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFKListOnDelete: TStringField
+      DisplayWidth = 20
+      FieldKind = fkData
+      FieldName = 'OnDelete'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFKListIndexName: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'IndexName'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxFKListIndexSort: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'IndexSort'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxFKListDesc: TMemoField
+      FieldKind = fkData
+      FieldName = 'Desc'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[7]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 95
+    Top = 256
+  end
+end

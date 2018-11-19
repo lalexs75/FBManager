@@ -1,0 +1,350 @@
+inherited pg_con_MainPage: Tpg_con_MainPage
+  Height = 528
+  Width = 630
+  ClientHeight = 528
+  ClientWidth = 630
+  DesignLeft = 409
+  DesignTop = 328
+  object Label2: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 81
+    BorderSpacing.Around = 6
+    Caption = 'Server name'
+    ParentColor = False
+  end
+  object Label3: TLabel[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 322
+    Height = 20
+    Top = 6
+    Width = 72
+    BorderSpacing.Around = 6
+    Caption = 'Server port'
+    ParentColor = False
+  end
+  object Label4: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 208
+    Width = 98
+    BorderSpacing.Around = 6
+    Caption = 'Database name'
+    ParentColor = False
+  end
+  object Label5: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 338
+    Width = 91
+    BorderSpacing.Around = 6
+    Caption = 'Database alias'
+    ParentColor = False
+  end
+  object Label6: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CB_ServerVersion
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 139
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object Label7: TLabel[5]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CB_ServerVersion
+    AnchorSideTop.Side = asrBottom
+    Left = 322
+    Height = 20
+    Top = 139
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label14: TLabel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbServerName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 75
+    Width = 92
+    BorderSpacing.Around = 6
+    Caption = 'Server version'
+    ParentColor = False
+  end
+  object edtAliasName: TEdit[7]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 364
+    Width = 612
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 6
+  end
+  object edtPassword: TEdit[8]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 328
+    Height = 37
+    Top = 165
+    Width = 296
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    OnExit = cbServerNameExit
+    PasswordChar = '*'
+    TabOrder = 4
+  end
+  object CB_ServerVersion: TComboBox[9]
+    AnchorSideLeft.Control = Label14
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 12
+    Height = 32
+    Top = 101
+    Width = 612
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'Unknown'
+      'Postgres SQL 8.1'
+      'Postgres SQL 8.4'
+      'Postgres SQL 9.0'
+    )
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object cbServerName: TComboBox[10]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 297
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    MaxLength = 65535
+    OnChange = cbServerNameChange
+    OnExit = cbServerNameExit
+    Sorted = True
+    TabOrder = 0
+  end
+  object edtPort: TSpinEdit[11]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 328
+    Height = 37
+    Top = 32
+    Width = 296
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxValue = 65536
+    OnChange = cbServerNameChange
+    OnExit = cbServerNameExit
+    TabOrder = 1
+  end
+  object edtDBName: TComboBox[12]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 234
+    Width = 612
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnChange = cbServerNameChange
+    OnExit = edtDBNameExit
+    TabOrder = 5
+  end
+  object Label1: TLabel[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 315
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object edtUserName: TComboBox[14]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 165
+    Width = 297
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 3
+  end
+  object DividerBevel1: TDividerBevel[15]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtAliasName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 20
+    Top = 407
+    Width = 630
+    Caption = 'Other options'
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 6
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object cbShowSystemObjects: TCheckBox[16]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DividerBevel1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 433
+    Width = 162
+    BorderSpacing.Around = 6
+    Caption = 'Show system objects'
+    TabOrder = 7
+  end
+  object Label12: TLabel[17]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDBName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 277
+    Width = 112
+    BorderSpacing.Around = 6
+    Caption = 'Connection string'
+    FocusControl = Edit1
+    ParentColor = False
+  end
+  object Edit1: TEdit[18]
+    AnchorSideLeft.Control = Label12
+    AnchorSideTop.Control = Label12
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton1
+    Left = 12
+    Height = 29
+    Top = 303
+    Width = 589
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 6
+    BorderSpacing.Top = 6
+    BorderSpacing.Bottom = 6
+    BorderStyle = bsNone
+    Color = clBtnFace
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object SpeedButton1: TSpeedButton[19]
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 601
+    Height = 29
+    Top = 303
+    Width = 23
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 6
+    Flat = True
+    Glyph.Data = {
+      36030000424D3803000000000000360000002800000010000000100000000100
+      18000000000000000000120B0000120B00000000000000000000FF00FFFF00FF
+      FF00FFFF00FFFF00FFA47874A47874A47874A47874A47874A47874A47874A478
+      74A478748C5D5CFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFA87C75FEE5CBFF
+      E2C4FFDFBEFFDCB8FFD9B1FED6ACFFD4A6FFD1A28C5D5CFF00FFFF00FFFF00FF
+      FF00FFFF00FFFF00FFAD8078FFEAD4E5A657E5A657E5A657E5A657E5A657E5A6
+      57FFD4A88C5D5CFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFB4867AFEEEDDFF
+      EBD6FFE8CFFFE4C9FEE1C2FEDDBBFFDBB5FFD8AF8C5D5CFF00FFA47874A47874
+      A47874A47874A47874BA8D7DFEF2E5E5A657E5A657E5A657E5A657E5A657E5A6
+      57FEDCB78C5D5CFF00FFA87C75FEE5CBFFE2C4FFDFBEFFDCB8C29581FEF6ECFE
+      F3E6FEEFE1FFEDDAFEE9D4FEE6CCFFE2C6FEDFBF8C5D5CFF00FFAD8078FFEAD4
+      E5A657E5A657E5A657CA9B83FFF9F3E5A657E5A657E5A657E5A657E5A657E5A6
+      57FEE3C88C5D5CFF00FFB4867AFEEEDDFFEBD6FFE8CFFFE4C9D1A286FEFBF9FE
+      F9F4FEF7EFFEF5EAFEF1E4FEEEDEFEEBD7FEE8D08C5D5CFF00FFBA8D7DFEF2E5
+      E5A657E5A657E5A657D8A98AFEFEFDFEFCFAFEFAF6FEF8F1FEF5ECEBDFDBD3C2
+      C0BAA9AA8C5D5CFF00FFC29581FEF6ECFEF3E6FEEFE1FFEDDADFB08DFEFEFEFE
+      FEFEFEFCFBFEFBF7FEF8F2B48176B48176B48176B17F74FF00FFCA9B83FFF9F3
+      E5A657E5A657E5A657E4B58EFEFEFEFEFEFEFEFEFEFEFDFCFEFBF8B48176EBB5
+      6FE49B42FF00FFFF00FFD1A286FEFBF9FEF9F4FEF7EFFEF5EAE8B890DCA887DC
+      A887DCA887DCA887DCA887B48176F0B25EFF00FFFF00FFFF00FFD8A98AFEFEFD
+      FEFCFAFEFAF6FEF8F1FEF5ECEBDFDBD3C2C0BAA9AA8C5D5CFF00FFFF00FFFF00
+      FFFF00FFFF00FFFF00FFDFB08DFEFEFEFEFEFEFEFCFBFEFBF7FEF8F2B48176B4
+      8176B48176B17F74FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFE4B58EFEFEFE
+      FEFEFEFEFEFEFEFDFCFEFBF8B48176EBB56FE49B42FF00FFFF00FFFF00FFFF00
+      FFFF00FFFF00FFFF00FFE8B890DCA887DCA887DCA887DCA887DCA887B48176F0
+      B25EFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+    }
+    OnClick = SpeedButton1Click
+  end
+  object pgTest: TZConnection[20]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    Port = 0
+    Protocol = 'postgresql-8'
+    Left = 116
+    Top = 71
+  end
+  object quDBList: TZReadOnlyQuery[21]
+    Connection = pgTest
+    SQL.Strings = (
+      'select'
+      '  pg_database.datname'
+      'from'
+      '  pg_catalog.pg_database'
+      'order by'
+      '  pg_database.datname'
+    )
+    Params = <>
+    Left = 112
+    Top = 224
+  end
+end

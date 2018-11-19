@@ -1,0 +1,215 @@
+object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
+  Left = 504
+  Height = 371
+  Top = 273
+  Width = 555
+  Caption = 'Find in metadata'
+  ClientHeight = 371
+  ClientWidth = 555
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  SessionProperties = 'edtFind.Text;CheckBox1.Checked;CheckBox2.Checked;CheckBox3.Checked;CheckBox4.Checked;CheckBox5.Checked;CheckBox6.Checked'
+  LCLVersion = '1.3'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideBottom.Control = dbComboBox
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 104
+    BorderSpacing.Around = 6
+    Caption = 'Find in database'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = dbComboBox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = edtFind
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 72
+    Width = 75
+    BorderSpacing.Around = 6
+    Caption = 'Text to find'
+    ParentColor = False
+  end
+  object GroupBox1: TGroupBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtFind
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label4
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 179
+    Top = 138
+    Width = 263
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    Caption = 'Find options'
+    ClientHeight = 157
+    ClientWidth = 261
+    TabOrder = 0
+    object CheckBox6: TCheckBox
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 6
+      Height = 25
+      Top = 6
+      Width = 124
+      BorderSpacing.Around = 6
+      Caption = 'Case sensetive'
+      TabOrder = 0
+    end
+  end
+  object GroupBox2: TGroupBox
+    AnchorSideLeft.Control = Label4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtFind
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 285
+    Height = 179
+    Top = 138
+    Width = 264
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    Caption = 'Find in objects'
+    ClientHeight = 157
+    ClientWidth = 262
+    TabOrder = 1
+    object CheckBox1: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = GroupBox2
+      Left = 6
+      Height = 25
+      Top = 6
+      Width = 81
+      BorderSpacing.Around = 6
+      Caption = 'Domains'
+      TabOrder = 0
+    end
+    object CheckBox2: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = CheckBox1
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 25
+      Top = 37
+      Width = 68
+      BorderSpacing.Around = 6
+      Caption = 'Tables'
+      TabOrder = 1
+    end
+    object CheckBox3: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = CheckBox2
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 25
+      Top = 68
+      Width = 65
+      BorderSpacing.Around = 6
+      Caption = 'Views'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+    object CheckBox4: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = CheckBox3
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 25
+      Top = 99
+      Width = 109
+      BorderSpacing.Around = 6
+      Caption = 'Stored procs'
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+    end
+    object CheckBox5: TCheckBox
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = CheckBox4
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 25
+      Top = 130
+      Width = 70
+      BorderSpacing.Around = 6
+      Caption = 'Trigers'
+      Checked = True
+      State = cbChecked
+      TabOrder = 4
+    end
+  end
+  object dbComboBox: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 537
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object edtFind: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 99
+    Width = 537
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 323
+    Width = 543
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 4
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 275
+    Height = 21
+    Top = 0
+    Width = 4
+    Caption = ' '
+    ParentColor = False
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    left = 180
+    top = 208
+  end
+end

@@ -1,0 +1,1713 @@
+object fbmSQLEditorForm: TfbmSQLEditorForm
+  Left = 408
+  Height = 602
+  Top = 255
+  Width = 920
+  Caption = 'SQL Editor'
+  ClientHeight = 602
+  ClientWidth = 920
+  Icon.Data = {
+    7E04000000000100010010100000010020006804000016000000280000001000
+    0000200000000100200000000000000400006400000064000000000000000000
+    0000FFFFFF00FFFFFF0004844204058643EE048442FC048442FE048442FB0484
+    422704844206048543EF048442FC048442FC048542F004844208FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF0004844206048543FC3DCE84FF38CA80FF078946F40484
+    422A04844203048442FE1CB869FF17B464FF048542F90484420CFFFFFF00FFFF
+    FF00FFFFFF00FFFFFF0004844204048442FD43D289FF3DCE84FF078846F60484
+    424104844231048543FB21BB6CFF1CB869FF048542FA04844208FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF0004844202048442FE49D58DFF43D289FF27B16AFB098A
+    48F2078946F31AA75FF928BF72FF22BC6DFF048442FC04844205FFFFFF00FFFF
+    FF00FFFFFF000484420104844204048442FF4ED992FF49D58EFF43D289FF3ECE
+    84FF38CA80FF33C77BFF2DC377FF28BF72FF048442FE04844202FFFFFF00FFFF
+    FF0007874556078745F1048442FE0B8C4AF754DD97FF4ED992FF49D58EFF43D2
+    89FF3ECE84FF38CA80FF33C77BFF2DC377FF078946F6068744DC048543F70586
+    4496088946E94DCF8CFF64E8A5FF5EE39FFF59E19BFF54DD97FF4ED992FF49D5
+    8EFF43D289FF3ECE84FF38CA80FF33C77BFF29BD72FF20B267FF1EB467FF0485
+    43F7098947E550D290FF62E5A2FF63E7A4FF5FE4A0FF59E19BFF54DD97FF4ED9
+    92FF49D58EFF43D289FF3ECE84FF38CA80FF31C579FF2BC175FF26BC6FFF0484
+    42FB0A8B498E078846F1068644F80C8D4BF764E8A5FF5FE4A0FF59E19BFF54DD
+    97FF4ED992FF49D68EFF43D289FF3DCD83FF078846F8048543F9048442FD0687
+    44A7FFFFFF00FFFFFF0004844201048442FE66E9A6FF64E8A5FF5FE4A0FF59E1
+    9BFF54DD97FF4ED992FF49D68EFF42D188FF048442FDFFFFFF00FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF0004844204058543FC66E9A6FF65E8A5FF62E6A3FF5FE4
+    A0FF59E19BFF54DD97FF4ED992FF49D68EFF048442FD04844201FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF0004844203078745EC048442FD048442FD088846FA5DE1
+    9EFF5FE4A0FF0F904EF5048442FF048442FF068644EA04844203FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF00FFFFFF000484420304844201FFFFFF00078745F55EE1
+    9EFF64E8A5FF1FA15EF304844267FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00058543FB63E6
+    A3FF66E9A6FF4CCF8CFF098947DDFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00078846EF49CB
+    88FF56D996FF2CAD6BFA098947C9FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+    FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000787455C0A8A
+    48DD098947EA0A8A48AA04844217FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+    FF00000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000
+  }
+  KeyPreview = True
+  OnClose = IBManagerSQLFormClose
+  OnKeyDown = FormKeyDown
+  Position = poDefault
+  SessionProperties = 'RxDBGridExportSpreadSheet1.FileName;RxDBGridExportSpreadSheet1.OpenAfterExport;RxDBGridExportSpreadSheet1.Options;RxDBGridExportSpreadSheet1.PageName;Panel3.Width;Panel4.Height'
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object ToolPanel2: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 920
+    Items = <    
+      item
+        Action = editExecQury
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 93
+        ShowCaption = True
+      end    
+      item
+        Action = editExecQueryFetchAll
+        Visible = True
+        Left = 98
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = editShowPlan
+        Visible = True
+        Left = 122
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 146
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = edtCopy
+        Visible = True
+        Left = 153
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = edtCut
+        Visible = True
+        Left = 177
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = edtPaste
+        Visible = True
+        Left = 201
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 225
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = edtUndo
+        Visible = True
+        Left = 232
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = edtRedo
+        Visible = True
+        Left = 256
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 280
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = edtNewPage
+        Visible = True
+        Left = 287
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = edtOpen
+        Visible = True
+        Left = 311
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = edtSave
+        Visible = True
+        Left = 335
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Visible = True
+        Left = 359
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = resCommit
+        Visible = True
+        Left = 366
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end    
+      item
+        Action = resRolback
+        Visible = True
+        Left = 390
+        Height = 21
+        Top = 5
+        Width = 24
+        ShowCaption = False
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    PropertyStorage = RxIniPropStorage1
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns, tpCustomizable, tpGlyphPopup, tpCaptionPopup]
+    CustomizeShortCut = True
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 920
+    TabOrder = 0
+    object lblTimeInfo: TLabel
+      AnchorSideTop.Control = ToolPanel2
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ToolPanel2
+      AnchorSideRight.Side = asrBottom
+      Left = 834
+      Height = 19
+      Top = 6
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      Caption = 'lblTimeInfo'
+      ParentColor = False
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 571
+    Top = 31
+    Width = 745
+    Align = alClient
+    ClientHeight = 571
+    ClientWidth = 745
+    TabOrder = 1
+    object PageControl1: TPageControl
+      Left = 1
+      Height = 424
+      Top = 1
+      Width = 743
+      ActivePage = TabSqlEdit
+      Align = alClient
+      TabIndex = 0
+      TabOrder = 0
+      OnChange = PageControl1Change
+      object TabSqlEdit: TTabSheet
+        Caption = 'Editor'
+        ClientHeight = 391
+        ClientWidth = 733
+        object Splitter5: TSplitter
+          Cursor = crVSplit
+          Left = 0
+          Height = 5
+          Top = 386
+          Width = 733
+          Align = alBottom
+          ResizeAnchor = akBottom
+          Visible = False
+        end
+      end
+      object tabResult: TTabSheet
+        Caption = 'Result'
+        ClientHeight = 391
+        ClientWidth = 733
+        object Panel5: TPanel
+          Left = 0
+          Height = 393
+          Top = 0
+          Width = 733
+          Align = alClient
+          Caption = 'Panel5'
+          ClientHeight = 393
+          ClientWidth = 733
+          TabOrder = 0
+          object Panel2: TPanel
+            Left = 1
+            Height = 33
+            Top = 1
+            Width = 731
+            Align = alTop
+            ClientHeight = 33
+            ClientWidth = 731
+            TabOrder = 0
+            object SpeedButton1: TSpeedButton
+              Left = 81
+              Height = 31
+              Top = 1
+              Width = 4
+              Action = resPrint
+              Align = alLeft
+              AutoSize = True
+              Flat = True
+              ShowCaption = False
+            end
+            object DBNavigator1: TDBNavigator
+              Left = 1
+              Height = 31
+              Top = 1
+              Width = 80
+              Align = alLeft
+              AutoSize = True
+              BevelOuter = bvNone
+              ChildSizing.EnlargeHorizontal = crsScaleChilds
+              ChildSizing.EnlargeVertical = crsScaleChilds
+              ChildSizing.ShrinkHorizontal = crsScaleChilds
+              ChildSizing.ShrinkVertical = crsScaleChilds
+              ChildSizing.Layout = cclLeftToRightThenTopToBottom
+              ChildSizing.ControlsPerLine = 100
+              ClientHeight = 31
+              ClientWidth = 80
+              DataSource = Datasource1
+              Flat = True
+              Options = []
+              TabOrder = 0
+              VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            end
+            object Label1: TLabel
+              AnchorSideTop.Control = Panel2
+              AnchorSideTop.Side = asrCenter
+              AnchorSideRight.Control = Panel2
+              AnchorSideRight.Side = asrBottom
+              Left = 686
+              Height = 17
+              Top = 8
+              Width = 38
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              BorderSpacing.Right = 6
+              Caption = 'Label1'
+              ParentColor = False
+            end
+            object SpeedButton2: TSpeedButton
+              AnchorSideLeft.Control = DBNavigator1
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = DBNavigator1
+              AnchorSideBottom.Control = DBNavigator1
+              AnchorSideBottom.Side = asrBottom
+              Left = 81
+              Height = 31
+              Top = 1
+              Width = 196
+              Action = statRecordCount
+              Anchors = [akTop, akLeft, akBottom]
+            end
+            object SpeedButton3: TSpeedButton
+              AnchorSideLeft.Control = SpeedButton2
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel2
+              AnchorSideBottom.Control = Panel2
+              AnchorSideBottom.Side = asrBottom
+              Left = 277
+              Height = 31
+              Top = 1
+              Width = 32
+              Action = statFilter
+              Anchors = [akTop, akLeft, akBottom]
+              ShowCaption = False
+            end
+            object SpeedButton4: TSpeedButton
+              AnchorSideLeft.Control = SpeedButton3
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel2
+              AnchorSideBottom.Control = Panel2
+              AnchorSideBottom.Side = asrBottom
+              Left = 309
+              Height = 31
+              Top = 1
+              Width = 32
+              Action = statFunct
+              Anchors = [akTop, akLeft, akBottom]
+              ShowCaption = False
+            end
+          end
+          object PageControl2: TPageControl
+            Left = 1
+            Height = 358
+            Top = 34
+            Width = 731
+            ActivePage = TabSheet1
+            Align = alClient
+            TabIndex = 0
+            TabOrder = 1
+            TabPosition = tpBottom
+            object TabSheet1: TTabSheet
+              Caption = 'Grid'
+              ClientHeight = 354
+              ClientWidth = 727
+              object dbGrid1: TRxDBGrid
+                Left = 0
+                Height = 327
+                Top = 0
+                Width = 721
+                ColumnDefValues.BlobText = '(примечание)'
+                TitleButtons = True
+                AutoSort = True
+                KeyStrokes = <                
+                  item
+                    Command = rxgcShowFindDlg
+                    ShortCut = 16454
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcShowColumnsDlg
+                    ShortCut = 16471
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcShowFilterDlg
+                    ShortCut = 16468
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcShowSortDlg
+                    ShortCut = 16467
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcShowQuickFilter
+                    ShortCut = 16465
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcHideQuickFilter
+                    ShortCut = 16456
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcSelectAll
+                    ShortCut = 16449
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcDeSelectAll
+                    ShortCut = 16429
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcInvertSelection
+                    ShortCut = 16426
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcOptimizeColumnsWidth
+                    ShortCut = 16427
+                    Enabled = True
+                  end                
+                  item
+                    Command = rxgcCopyCellValue
+                    ShortCut = 16451
+                    Enabled = True
+                  end>
+                FooterOptions.Color = clYellow
+                FooterOptions.DrawFullLine = False
+                SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+                SearchOptions.FromStart = False
+                OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
+                FooterColor = clYellow
+                Align = alClient
+                Color = clWindow
+                DrawFullLine = False
+                FocusColor = clRed
+                SelectedColor = clHighlight
+                GridLineStyle = psSolid
+                DataSource = Datasource1
+                Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook]
+                PopupMenu = PopupMenu2
+                TabOrder = 0
+                OnDblClick = dbGrid1DblClick
+                OnKeyDown = dbGrid1KeyDown
+              end
+            end
+            object TabSheet2: TTabSheet
+              Caption = 'Form'
+              ClientHeight = 354
+              ClientWidth = 727
+              object RxDBVerticalGrid1: TRxDBVerticalGrid
+                Left = 0
+                Height = 321
+                Top = 0
+                Width = 721
+                Align = alClient
+                Color = clWindow
+                GridDefValues.BlobText = '(данные)'
+                DataCoumn.Title.Caption = 'Title'
+                DataSource = Datasource1
+                FocusColor = clRed
+                LabelCoumn.ReadOnly = True
+                LabelCoumn.Title.Caption = 'Title'
+                Options = []
+                Rows = <>
+              end
+            end
+          end
+        end
+      end
+      object TabStatistic: TTabSheet
+        Caption = 'Statistic'
+      end
+      object tabHistory: TTabSheet
+        Caption = 'History'
+        ClientHeight = 391
+        ClientWidth = 733
+        object RxDBGrid1: TRxDBGrid
+          Left = 0
+          Height = 295
+          Top = 0
+          Width = 733
+          ColumnDefValues.BlobText = '(примечание)'
+          TitleButtons = True
+          AutoSort = False
+          OnGetCellProps = RxDBGrid1GetCellProps
+          Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = '##'
+              Width = 65
+              FieldName = 'sql_editors_history_id'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Edit date'
+              Width = 200
+              FieldName = 'sql_editors_history_date'
+              DisplayFormat = 'dd.mm.yyyy HH:NN:SS'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'TEXT'
+              Width = 0
+              FieldName = 'sql_editors_history_sql_text'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'PLAN'
+              Width = 350
+              FieldName = 'sql_editors_history_sql_plan'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Exec. time'
+              Width = 120
+              FieldName = 'sql_editors_history_exec_time'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'src_page_name'
+              Width = 150
+              FieldName = 'sql_editors_history_sql_page_name'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end>
+          KeyStrokes = <          
+            item
+              Command = rxgcShowFindDlg
+              ShortCut = 16454
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowColumnsDlg
+              ShortCut = 16471
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowFilterDlg
+              ShortCut = 16468
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowSortDlg
+              ShortCut = 16467
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowQuickFilter
+              ShortCut = 16465
+              Enabled = True
+            end          
+            item
+              Command = rxgcHideQuickFilter
+              ShortCut = 16456
+              Enabled = True
+            end>
+          FooterOptions.Color = clYellow
+          FooterOptions.DrawFullLine = False
+          SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+          SearchOptions.FromStart = False
+          PropertyStorage = RxIniPropStorage1
+          OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgDblClickOptimizeColWidth, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowSortForm, rdgAllowToolMenu]
+          FooterColor = clYellow
+          Align = alClient
+          Color = clWindow
+          DrawFullLine = False
+          FocusColor = clRed
+          SelectedColor = clHighlight
+          GridLineStyle = psSolid
+          DataSource = dsHistory
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook, dgDisplayMemoText]
+          PopupMenu = PopupMenu4
+          ReadOnly = True
+          TabOrder = 0
+          OnDblClick = RxDBGrid1DblClick
+        end
+        object Splitter1: TSplitter
+          Cursor = crVSplit
+          Left = 0
+          Height = 5
+          Top = 295
+          Width = 733
+          Align = alBottom
+          ResizeAnchor = akBottom
+        end
+        object DBMemo1: TDBMemo
+          Left = 0
+          Height = 90
+          Top = 300
+          Width = 733
+          Align = alBottom
+          DataField = 'sql_editors_history_sql_text'
+          DataSource = dsHistory
+          ReadOnly = True
+          TabOrder = 2
+        end
+      end
+      object tabFindResult: TTabSheet
+        Caption = 'Find query'
+        ClientHeight = 391
+        ClientWidth = 733
+        object Label2: TLabel
+          AnchorSideLeft.Control = tabFindResult
+          AnchorSideTop.Control = tabFindResult
+          Left = 6
+          Height = 20
+          Top = 6
+          Width = 73
+          BorderSpacing.Around = 6
+          Caption = 'Text to find'
+          ParentColor = False
+        end
+        object EditButton1: TEditButton
+          AnchorSideLeft.Control = Label2
+          AnchorSideTop.Control = Label2
+          AnchorSideTop.Side = asrBottom
+          Left = 12
+          Height = 37
+          Top = 32
+          Width = 228
+          BorderSpacing.Around = 6
+          ButtonWidth = 23
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003E39
+            34FF393430FF332F2BFF2C2925FF272421FF201D1BFF1716141A110F0EDB0B0A
+            09FF070706FF040403FF000000FF000000FFFFFFFF00FFFFFF00FFFFFF004641
+            3BFF857A70FFC3B8AEFF7C7268FF7F756BFF36322DFF1E1C190F282522D49589
+            7DFFBAAEA2FF7C7268FF7F756BFF010101FFFFFFFF00FFFFFF00FFFFFF004D47
+            41FF83786FFFCCC3BAFF786F65FF7B7167FF2F2B28F9272421011D1B18EE9589
+            7DFFC2B8ADFF786F65FF7C7268FF060505FFFFFFFF00FFFFFF00FFFFFF00534C
+            46FC83786FFFCCC3BAFF797066FF71685FFF37332ED5FFFFFF00252220D5857A
+            70FFC2B8ADFF786F65FF7B7167FF0A0908FCFFFFFF00FFFFFF00FFFFFF005A52
+            4CC39F9286FFCCC3BAFFC0B4AAFFA6988BFF3E3934A8FFFFFF002C2925A89084
+            79FFC2B8ADFFC0B4AAFFA89B8EFF110F0EC3FFFFFF00FFFFFF00797066055C55
+            4EF9423D38FF58514AFF3D3833FF332F2BFF23201DE5171614301E1C19B51A18
+            16FF252220FF191715FF0F0E0DFF010101EE00000002FFFFFF009F9286059D91
+            85FFB1A396FF7F756BFF7C7268FF776D64FF6C635BFF2E2A26FF564F48FF8076
+            6CFF7C7268FF776D64FF70675EFF000000FE00000005FFFFFF00AB9D9004AFA1
+            94E1BAAEA2FF82776DFF82776DFFAA917BFFBAA794FFB7A48EFAB09781FF9F8D
+            7DFF836D5BFF716357FF95897DFF040403E000000003FFFFFF00B9ACA008877D
+            72489B8E82FF9D9185FF867B71FF564F48FF504A44FF80766CFF6E665DFF826C
+            58FFA6917DFF948474FF564F48FF0C0B0B7A07070601FFFFFF00FFFFFF00FFFF
+            FF00746B62FFA4978AFF95897DFF9F9286FF3E3934FFFFFFFF004C4640FF7E74
+            6AFF857A70FF3E3934FF453F3AA72522200C15131102FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF008E8378E2C3B8AEFF655D55FFFFFFFF007C7268FFA89B
+            8EFF9C8F83E4FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF009C8F83E2BCB0A4FF9D9185FFFFFFFF00AEA093FF9D91
+            85FF655D55DAFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+          }
+          MaxLength = 0
+          NumGlyphs = 1
+          OnButtonClick = fsFindQueryExecute
+          PasswordChar = #0
+          Spacing = 0
+          TabOrder = 0
+        end
+        object RxDBGrid2: TRxDBGrid
+          AnchorSideLeft.Control = EditButton1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = tabFindResult
+          AnchorSideRight.Control = tabFindResult
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Splitter6
+          Left = 246
+          Height = 440
+          Top = 0
+          Width = 486
+          ColumnDefValues.BlobText = '(blob)'
+          TitleButtons = True
+          AutoSort = True
+          Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = '##'
+              Width = 40
+              FieldName = 'sql_editors_id'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Database'
+              Width = 150
+              FieldName = 'db_database_caption'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footer.Alignment = taRightJustify
+              Footer.DisplayFormat = 'Total: %d'
+              Footer.ValueType = fvtCount
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'DB type'
+              Width = 100
+              FieldName = 'db_database_sql_engine'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'SQL page'
+              Width = 150
+              FieldName = 'sql_editors_caption'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Last exec'
+              Width = 120
+              FieldName = 'sql_editors_history_date'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end>
+          KeyStrokes = <          
+            item
+              Command = rxgcShowFindDlg
+              ShortCut = 16454
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowColumnsDlg
+              ShortCut = 16471
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowFilterDlg
+              ShortCut = 16468
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowSortDlg
+              ShortCut = 16467
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowQuickFilter
+              ShortCut = 16465
+              Enabled = True
+            end          
+            item
+              Command = rxgcHideQuickFilter
+              ShortCut = 16456
+              Enabled = True
+            end          
+            item
+              Command = rxgcSelectAll
+              ShortCut = 16449
+              Enabled = True
+            end          
+            item
+              Command = rxgcDeSelectAll
+              ShortCut = 16429
+              Enabled = True
+            end          
+            item
+              Command = rxgcInvertSelection
+              ShortCut = 16426
+              Enabled = True
+            end          
+            item
+              Command = rxgcOptimizeColumnsWidth
+              ShortCut = 16427
+              Enabled = True
+            end          
+            item
+              Command = rxgcCopyCellValue
+              ShortCut = 16451
+              Enabled = True
+            end>
+          FooterOptions.Active = True
+          FooterOptions.Color = clYellow
+          FooterOptions.RowCount = 1
+          FooterOptions.DrawFullLine = False
+          SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+          SearchOptions.FromStart = False
+          PropertyStorage = RxIniPropStorage1
+          OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+          FooterColor = clYellow
+          FooterRowCount = 1
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          Color = clWindow
+          DrawFullLine = False
+          FocusColor = clRed
+          SelectedColor = clHighlight
+          GridLineStyle = psSolid
+          DataSource = dsFindQuery
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook, dgDisableDelete, dgDisableInsert]
+          PopupMenu = PopupMenu5
+          TabOrder = 1
+          TitleStyle = tsNative
+          OnDblClick = RxDBGrid2DblClick
+        end
+        object CheckBox1: TCheckBox
+          AnchorSideLeft.Control = tabFindResult
+          AnchorSideTop.Control = EditButton1
+          AnchorSideTop.Side = asrBottom
+          Left = 6
+          Height = 24
+          Top = 75
+          Width = 117
+          BorderSpacing.Around = 6
+          Caption = 'Case sensitive'
+          TabOrder = 2
+        end
+        object Splitter6: TSplitter
+          Cursor = crVSplit
+          Left = 0
+          Height = 5
+          Top = 440
+          Width = 732
+          Align = alBottom
+          ResizeAnchor = akBottom
+        end
+        object CheckBox2: TCheckBox
+          AnchorSideLeft.Control = tabFindResult
+          AnchorSideTop.Control = CheckBox1
+          AnchorSideTop.Side = asrBottom
+          Left = 6
+          Height = 24
+          Top = 105
+          Width = 157
+          BorderSpacing.Around = 6
+          Caption = 'In all database types'
+          Checked = True
+          State = cbChecked
+          TabOrder = 4
+        end
+      end
+    end
+    object Splitter2: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 425
+      Width = 743
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+    object InfoPageControl: TPageControl
+      Left = 1
+      Height = 140
+      Top = 430
+      Width = 743
+      ActivePage = tabQueryFields
+      Align = alBottom
+      TabIndex = 1
+      TabOrder = 2
+      object tabMessages: TTabSheet
+        Caption = 'Messages'
+        ClientHeight = 107
+        ClientWidth = 733
+        object Memo1: TMemo
+          Left = 0
+          Height = 106
+          Top = 0
+          Width = 733
+          Align = alClient
+          TabOrder = 0
+        end
+      end
+      object tabQueryFields: TTabSheet
+        Caption = 'Query fields'
+        ClientHeight = 107
+        ClientWidth = 733
+        object Memo2: TMemo
+          AnchorSideLeft.Control = tabQueryFields
+          AnchorSideTop.Control = tabQueryFields
+          AnchorSideRight.Control = CheckBox3
+          AnchorSideBottom.Control = tabQueryFields
+          AnchorSideBottom.Side = asrBottom
+          Left = 0
+          Height = 107
+          Top = 0
+          Width = 600
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          TabOrder = 0
+        end
+        object CheckBox3: TCheckBox
+          AnchorSideTop.Control = tabQueryFields
+          AnchorSideRight.Control = tabQueryFields
+          AnchorSideRight.Side = asrBottom
+          Left = 606
+          Height = 23
+          Top = 6
+          Width = 121
+          Anchors = [akTop, akRight]
+          BorderSpacing.Around = 6
+          Caption = 'With data type'
+          OnClick = CheckBox3Click
+          TabOrder = 1
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = CheckBox3
+          AnchorSideTop.Control = CheckBox3
+          AnchorSideTop.Side = asrBottom
+          Left = 606
+          Height = 19
+          Top = 35
+          Width = 66
+          Caption = 'Separator'
+          FocusControl = Edit1
+          ParentColor = False
+        end
+        object Edit1: TEdit
+          AnchorSideLeft.Control = CheckBox3
+          AnchorSideTop.Control = Label3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = tabQueryFields
+          AnchorSideRight.Side = asrBottom
+          Left = 612
+          Height = 31
+          Top = 60
+          Width = 115
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 6
+          OnChange = Edit1Change
+          TabOrder = 2
+          Text = ','
+        end
+      end
+    end
+  end
+  object Splitter3: TSplitter
+    Left = 745
+    Height = 571
+    Top = 31
+    Width = 5
+    Align = alRight
+    ResizeAnchor = akRight
+  end
+  object Panel3: TPanel
+    Left = 750
+    Height = 571
+    Top = 31
+    Width = 170
+    Align = alRight
+    ClientHeight = 571
+    ClientWidth = 170
+    TabOrder = 3
+    object Panel4: TPanel
+      Left = 1
+      Height = 162
+      Top = 408
+      Width = 168
+      Align = alBottom
+      ClientHeight = 162
+      ClientWidth = 168
+      TabOrder = 0
+      object ComboBox1: TComboBox
+        Left = 1
+        Height = 31
+        Top = 1
+        Width = 166
+        Align = alTop
+        ItemHeight = 0
+        OnChange = ComboBox1Change
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object TreeView2: TTreeView
+        Left = 1
+        Height = 129
+        Top = 32
+        Width = 166
+        Align = alClient
+        DragMode = dmAutomatic
+        ExpandSignSize = 16
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 1
+        OnClick = TreeView1Click
+        OnDragDrop = TreeView1DragDrop
+        OnDragOver = TreeView1DragOver
+        Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      end
+    end
+    object Splitter4: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 403
+      Width = 168
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+    object TreeView1: TTreeView
+      Left = 1
+      Height = 402
+      Top = 1
+      Width = 168
+      Align = alClient
+      DragMode = dmAutomatic
+      ExpandSignSize = 16
+      PopupMenu = PopupMenu1
+      ReadOnly = True
+      TabOrder = 2
+      OnClick = TreeView1Click
+      OnDragDrop = TreeView1DragDrop
+      OnDragOver = TreeView1DragOver
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    end
+  end
+  object Datasource1: TDataSource
+    Left = 80
+    Top = 176
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 72
+    Top = 328
+    object MenuItem88: TMenuItem
+      Action = edtNewQuerySet
+    end
+    object MenuItem87: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = edtNewPage
+      AutoCheck = True
+      OnClick = edtNewPageExecute
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem1: TMenuItem
+      Action = edtClearCurrent
+      OnClick = edtClearCurrentExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = edtDelete
+      OnClick = edtDeleteExecute
+    end
+    object MenuItem7: TMenuItem
+      Action = edtDeleteAll
+      OnClick = edtDeleteAllExecute
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = edtRenameTab
+      OnClick = edtRenameTabExecute
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 176
+    Top = 227
+    object MenuItem14: TMenuItem
+      Action = rgCopyValue
+      OnClick = rgCopyValueExecute
+    end
+    object MenuItem9: TMenuItem
+      Action = rgCopyTitle
+    end
+    object MenuItem63: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem64: TMenuItem
+      Action = resPrint
+      OnClick = resPrintExecute
+    end
+    object MenuItem65: TMenuItem
+      Action = rgExport
+      OnClick = rgExportExecute
+    end
+    object MenuItem10: TMenuItem
+      Action = rgExportToSpreadsheet
+    end
+    object MenuItem11: TMenuItem
+      Action = rgExportToPDF
+    end
+    object MenuItem19: TMenuItem
+      Action = rgExportAsInsert
+    end
+    object MenuItem16: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem17: TMenuItem
+      Action = statFilter
+    end
+    object MenuItem18: TMenuItem
+      Action = statFunct
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 256
+    Top = 88
+    object ctrlCreateView: TAction
+      Category = 'Designer'
+      Caption = 'Create view'
+      Hint = 'Create new view from current select'
+      OnExecute = ctrlCreateViewExecute
+    end
+    object ctrlCreateSP: TAction
+      Category = 'Designer'
+      Caption = 'Create SP'
+      Hint = 'Create stored procedure from current query'
+      OnExecute = ctrlCreateSPExecute
+    end
+    object resCommit: TAction
+      Tag = 1
+      Category = 'Result'
+      Caption = 'Commit'
+      Hint = 'Commit transaction'
+      ImageIndex = 15
+      OnExecute = resCloseQueryExecute
+      ShortCut = 49219
+    end
+    object resRolback: TAction
+      Category = 'Result'
+      Caption = 'Rolback'
+      Hint = 'Rolback transaction'
+      ImageIndex = 46
+      OnExecute = resCloseQueryExecute
+      ShortCut = 49234
+    end
+    object resPrint: TAction
+      Category = 'Result'
+      Caption = 'Print'
+      Hint = 'Print query result'
+      ImageIndex = 14
+      OnExecute = resPrintExecute
+    end
+    object rgCopyValue: TAction
+      Category = 'Result grid'
+      Caption = 'Copy cell value'
+      ImageIndex = 24
+      OnExecute = rgCopyValueExecute
+    end
+    object edtClearCurrent: TAction
+      Category = 'Editor tabs'
+      Caption = 'Clear current query...'
+      ImageIndex = 45
+      OnExecute = edtClearCurrentExecute
+    end
+    object edtNewPage: TAction
+      Category = 'Editor tabs'
+      AutoCheck = True
+      Caption = 'New query'
+      Hint = 'New query'
+      ImageIndex = 9
+      OnExecute = edtNewPageExecute
+      ShortCut = 24654
+    end
+    object edtDelete: TAction
+      Category = 'Editor tabs'
+      Caption = 'Delete'
+      Hint = 'Delete query'
+      OnExecute = edtDeleteExecute
+      ShortCut = 16452
+    end
+    object edtDeleteAll: TAction
+      Category = 'Editor tabs'
+      Caption = 'Delete all'
+      Hint = 'Clear all query'
+      ImageIndex = 45
+      OnExecute = edtDeleteAllExecute
+      ShortCut = 24644
+    end
+    object edtRenameTab: TAction
+      Category = 'Editor tabs'
+      Caption = 'Rename tab'
+      Hint = 'Rename edit tab'
+      OnExecute = edtRenameTabExecute
+      ShortCut = 16497
+    end
+    object editExecQury: TAction
+      Category = 'Editor'
+      Caption = 'Run query'
+      ImageIndex = 16
+      OnExecute = editExecQuryExecute
+      ShortCut = 120
+    end
+    object editExecQueryFetchAll: TAction
+      Category = 'Editor'
+      Caption = 'Run query and fetch all'
+      Hint = 'Execute query and fetch all'
+      ImageIndex = 16
+      OnExecute = editExecQueryFetchAllExecute
+      ShortCut = 8312
+    end
+    object editShowPlan: TAction
+      Category = 'Editor'
+      Caption = 'Show query plan'
+      ImageIndex = 48
+      OnExecute = editShowPlanExecute
+      ShortCut = 16504
+    end
+    object edtOpen: TAction
+      Category = 'Editor'
+      Caption = 'Open'
+      Hint = 'Open file...'
+      ImageIndex = 43
+      OnExecute = edtOpenExecute
+    end
+    object edtSave: TAction
+      Category = 'Editor'
+      Caption = 'Save'
+      Hint = 'Save current text'
+      ImageIndex = 11
+      OnExecute = edtSaveExecute
+    end
+    object edtFind: TAction
+      Category = 'Editor'
+      Caption = 'Find'
+      Hint = 'Find text in editor'
+      ImageIndex = 22
+      OnExecute = edtFindExecute
+    end
+    object edtFindNext: TAction
+      Category = 'Editor'
+      Caption = 'Find next...'
+      Hint = 'Find next mathes of text'
+      ImageIndex = 23
+      OnExecute = edtFindNextExecute
+      ShortCut = 114
+    end
+    object edtReplace: TAction
+      Category = 'Editor'
+      Caption = 'Replace'
+      Hint = 'Replace text'
+      ImageIndex = 47
+      ShortCut = 16466
+    end
+    object histClear: TAction
+      Category = 'History'
+      Caption = 'Clear'
+      Hint = 'Clear history...'
+      OnExecute = histClearExecute
+    end
+    object histOpen: TAction
+      Category = 'History'
+      Caption = 'Open in editor'
+      Hint = 'Open text from history in SQL editor'
+      OnExecute = RxDBGrid1DblClick
+    end
+    object histDelete: TAction
+      Category = 'History'
+      Caption = 'Delete statement'
+      Hint = 'Delete current statement'
+      ImageIndex = 46
+      OnExecute = histDeleteExecute
+    end
+    object histCopyClip: TAction
+      Category = 'History'
+      Caption = 'Copy to clipboard'
+      Hint = 'Copy current statement to clipboard'
+      ImageIndex = 24
+      OnExecute = histCopyClipExecute
+    end
+    object histCopyAll: TAction
+      Category = 'History'
+      Caption = 'Copy all statement to clipboard'
+      Hint = 'Copy all statement to clipboard'
+      OnExecute = histCopyAllExecute
+    end
+    object edtNewQuerySet: TAction
+      Category = 'Editor tabs'
+      Caption = 'New query set'
+      OnExecute = edtNewQuerySetExecute
+    end
+    object statRecordCount: TAction
+      Category = 'Result'
+      Caption = 'Record count...'
+      ImageIndex = 49
+      OnExecute = statRecordCountExecute
+    end
+    object rgCopyTitle: TAction
+      Category = 'Result grid'
+      Caption = 'Copy field title'
+      OnExecute = rgCopyTitleExecute
+    end
+    object rgExport: TAction
+      Category = 'Result grid'
+      Caption = 'Export data'
+      OnExecute = rgExportExecute
+    end
+    object rgExportToSpreadsheet: TAction
+      Category = 'Result grid'
+      Caption = 'Export data to spreadsheet'
+      OnExecute = rgExportToSpreadsheetExecute
+    end
+    object rgExportToPDF: TAction
+      Category = 'Result grid'
+      Caption = 'Export data to PDF'
+      OnExecute = rgExportToPDFExecute
+    end
+    object fsFindQuery: TAction
+      Category = 'FindSQL'
+      Caption = 'fsFindQuery'
+      ImageIndex = 23
+      OnExecute = fsFindQueryExecute
+    end
+    object fsCopyTextToClip: TAction
+      Category = 'FindSQL'
+      Caption = 'Copy text to clipboard'
+      ImageIndex = 24
+      OnExecute = fsCopyTextToClipExecute
+    end
+    object fsTextToSQLEditor: TAction
+      Category = 'FindSQL'
+      Caption = 'Use in SQL editor'
+      OnExecute = fsTextToSQLEditorExecute
+    end
+    object statFunct: TAction
+      Category = 'Result'
+      Caption = 'Summary line'
+      ImageIndex = 50
+      OnExecute = statFunctExecute
+    end
+    object statFilter: TAction
+      Category = 'Result'
+      Caption = 'Filter in table'
+      ImageIndex = 33
+      OnExecute = statFilterExecute
+    end
+    object edtRedo: TAction
+      Category = 'Edit'
+      Caption = 'Redo'
+      Hint = 'Redo last operation'
+      ImageIndex = 19
+      OnExecute = edtRedoExecute
+      ShortCut = 24666
+    end
+    object rgExportAsInsert: TAction
+      Category = 'Result grid'
+      Caption = 'Export as INSERT script'
+      OnExecute = rgExportAsInsertExecute
+    end
+    object edtUndo: TAction
+      Category = 'Edit'
+      Caption = 'edtUndo'
+      ImageIndex = 20
+      OnExecute = edtUndoExecute
+    end
+    object edtCut: TAction
+      Category = 'Edit'
+      Caption = 'edtCut'
+      ImageIndex = 32
+      OnExecute = edtCutExecute
+    end
+    object edtCopy: TAction
+      Category = 'Edit'
+      Caption = 'edtCopy'
+      ImageIndex = 25
+      OnExecute = edtCopyExecute
+    end
+    object edtPaste: TAction
+      Category = 'Edit'
+      Caption = 'edtPaste'
+      ImageIndex = 24
+      OnExecute = edtPasteExecute
+    end
+  end
+  object FPDataExporter1: TFPDataExporter
+    Left = 232
+    Top = 227
+  end
+  object dsHistory: TDataSource
+    Left = 808
+    Top = 80
+  end
+  object PopupMenu4: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 488
+    Top = 280
+    object MenuItem89: TMenuItem
+      Action = histOpen
+      OnClick = RxDBGrid1DblClick
+    end
+    object MenuItem90: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem91: TMenuItem
+      Action = histCopyClip
+      OnClick = histCopyClipExecute
+    end
+    object MenuItem92: TMenuItem
+      Action = histCopyAll
+      OnClick = histCopyAllExecute
+    end
+    object MenuItem93: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem94: TMenuItem
+      Action = histDelete
+      OnClick = histDeleteExecute
+    end
+    object MenuItem95: TMenuItem
+      Action = histClear
+      OnClick = histClearExecute
+    end
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 157
+    Top = 323
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet
+    RxDBGrid = dbGrid1
+    Caption = 'Export to speadsheet'
+    ShowSetupForm = True
+    FileName = 'sqlresult.ods'
+    PageName = 'SQL result'
+    Options = [ressExportTitle, ressExportColors, ressExportFooter, ressOverwriteExisting]
+    OpenAfterExport = True
+    Left = 295
+    Top = 227
+  end
+  object RxDBGridPrint1: TRxDBGridPrint
+    RxDBGrid = dbGrid1
+    Caption = 'Печать списка'
+    ShowSetupForm = True
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle, rxpoHideZeroValues]
+    ShowProgress = True
+    ReportTitle = 'SQL Result'
+    ShowColumnHeaderOnAllPage = True
+    Left = 336
+    Top = 227
+  end
+  object RxDBGridFooterTools1: TRxDBGridFooterTools
+    RxDBGrid = dbGrid1
+    Caption = 'Totals row'
+    ShowSetupForm = True
+    Left = 384
+    Top = 227
+  end
+  object RxDBGridExportPDF1: TRxDBGridExportPDF
+    RxDBGrid = RxDBGrid1
+    Caption = 'Экспорт в PDF файл'
+    ShowSetupForm = True
+    FileName = 'data.pdf'
+    Options = []
+    PdfOptions.Options = []
+    OpenAfterExport = True
+    Left = 424
+    Top = 227
+  end
+  object dsFindQuery: TDataSource
+    DataSet = quFindQuery
+    Left = 384
+    Top = 358
+  end
+  object quFindQuery: TZMacroQuery
+    Connection = UserDBModule.UserDB
+    AfterOpen = quFindQueryAfterScroll
+    AfterScroll = quFindQueryAfterScroll
+    SQL.Strings = (
+      'select'
+      '  sql_editors.sql_editors_id,'
+      '  sql_editors.sql_editors_caption,'
+      '  sql_editors.sql_editors_body,'
+      '  db_database.db_database_id,'
+      '  db_database.db_database_sql_engine,'
+      '  db_database.db_database_caption,'
+      '  (select'
+      '     cast(max(sql_editors_history.sql_editors_history_date) as varchar(25))'
+      '   from'
+      '     sql_editors_history'
+      '   where'
+      '       sql_editors_history.db_database_id = db_database.db_database_id'
+      '     and'
+      '       sql_editors_history.sql_editors_history_sql_page_name = sql_editors.sql_editors_caption) as sql_editors_history_date'
+      'from'
+      '  sql_editors'
+      '  inner join db_database on (sql_editors.db_database_id = db_database.db_database_id)'
+      'where'
+      '  %Macro1'
+      'order by'
+      '  db_database.db_database_caption,'
+      '  sql_editors.sql_editors_caption'
+    )
+    Params = <>
+    MacroExprDef = '0=0'
+    Left = 424
+    Top = 358
+    object quFindQuerysql_editors_id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'sql_editors_id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quFindQuerysql_editors_caption: TStringField
+      FieldKind = fkData
+      FieldName = 'sql_editors_caption'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
+    object quFindQuerysql_editors_body: TMemoField
+      FieldKind = fkData
+      FieldName = 'sql_editors_body'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object quFindQuerydb_database_id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'db_database_id'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quFindQuerydb_database_sql_engine: TStringField
+      FieldKind = fkData
+      FieldName = 'db_database_sql_engine'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 400
+    end
+    object quFindQuerydb_database_caption: TStringField
+      FieldKind = fkData
+      FieldName = 'db_database_caption'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 1000
+    end
+    object quFindQuerysql_editors_history_date: TMemoField
+      FieldKind = fkData
+      FieldName = 'sql_editors_history_date'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      OnGetText = quFindQuerysql_editors_history_dateGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object PopupMenu5: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 464
+    Top = 358
+    object MenuItem12: TMenuItem
+      Action = fsTextToSQLEditor
+    end
+    object MenuItem15: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem13: TMenuItem
+      Action = fsCopyTextToClip
+    end
+  end
+  object ZReadOnlyQuery1: TZReadOnlyQuery
+    Connection = UserDBModule.UserDB
+    Params = <>
+    Left = 775
+    Top = 508
+  end
+end

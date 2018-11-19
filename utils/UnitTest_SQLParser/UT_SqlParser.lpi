@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="11"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="UT_SqlParser"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+    </General>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0"/>
+    </RunParams>
+    <RequiredPackages Count="10">
+      <Item1>
+        <PackageName Value="fbdemofpc"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="UIBLaz"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="rx"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="zeos_ex"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="LR_ZeosDB"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="rxtools"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="rxnew"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="fpcunittestrunner"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="LCL"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="FCL"/>
+      </Item10>
+    </RequiredPackages>
+    <Units Count="8">
+      <Unit0>
+        <Filename Value="UT_SqlParser.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="pgtestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PGSQLParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="PGTestCase"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PostgreSQLEngineUnit"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="fbmanager_define.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="fbtestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FBTestSQLData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="FBTestCase"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="mysqltestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MySQLParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="MySQLTestCase"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="sqlite3testcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SQLite3ParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="SQLite3TestCase"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="pgcopycmdcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PGCopyCmdCase"/>
+      </Unit7>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="UT_SqlParser"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="5">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+      <Item4>
+        <Name Value="EAssertionFailedError"/>
+      </Item4>
+      <Item5>
+        <Name Value="Exception"/>
+      </Item5>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

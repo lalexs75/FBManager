@@ -1,0 +1,196 @@
+inherited fbm_pgEditSequencePage: Tfbm_pgEditSequencePage
+  Height = 338
+  Width = 546
+  ClientHeight = 338
+  ClientWidth = 546
+  DesignLeft = 474
+  DesignTop = 201
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Sequence'
+    ParentColor = False
+  end
+  object edtSeqName: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 528
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+    Text = 'edtSeqName'
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtLastValue
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 144
+    Width = 31
+    BorderSpacing.Around = 6
+    Caption = 'Start'
+    ParentColor = False
+  end
+  object edtStart: TEdit[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 170
+    Width = 212
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object Label3: TLabel[4]
+    AnchorSideLeft.Control = edtStart
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtLastValue
+    AnchorSideTop.Side = asrBottom
+    Left = 230
+    Height = 20
+    Top = 144
+    Width = 65
+    BorderSpacing.Around = 6
+    Caption = 'Increment'
+    ParentColor = False
+  end
+  object edtInc: TEdit[5]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = cbCycle
+    Left = 236
+    Height = 37
+    Top = 170
+    Width = 237
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object edtMin: TEdit[6]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 239
+    Width = 212
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object Label4: TLabel[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtStart
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 213
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Min value'
+    ParentColor = False
+  end
+  object Label5: TLabel[8]
+    AnchorSideLeft.Control = edtMin
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtStart
+    AnchorSideTop.Side = asrBottom
+    Left = 230
+    Height = 20
+    Top = 213
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Max value'
+    ParentColor = False
+  end
+  object Label6: TLabel[9]
+    AnchorSideLeft.Control = edtMax
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtStart
+    AnchorSideTop.Side = asrBottom
+    Left = 450
+    Height = 20
+    Top = 213
+    Width = 39
+    BorderSpacing.Around = 6
+    Caption = 'Cashe'
+    ParentColor = False
+  end
+  object edtMax: TEdit[10]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    Left = 236
+    Height = 37
+    Top = 239
+    Width = 208
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object edtCashe: TEdit[11]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 456
+    Height = 37
+    Top = 239
+    Width = 84
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 5
+  end
+  object cbCycle: TCheckBox[12]
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 479
+    Height = 24
+    Top = 170
+    Width = 61
+    Anchors = [akTop, akRight]
+    BorderSpacing.Around = 6
+    Caption = 'Cycle'
+    TabOrder = 6
+  end
+  object Label7: TLabel[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtSeqName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 75
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Last value'
+    ParentColor = False
+  end
+  object edtLastValue: TSpinEdit[14]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 101
+    Width = 212
+    BorderSpacing.Around = 6
+    MaxValue = 2147483647
+    MinValue = -2147483648
+    TabOrder = 7
+  end
+end

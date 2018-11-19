@@ -1,0 +1,398 @@
+object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
+  Left = 520
+  Height = 569
+  Top = 225
+  Width = 912
+  Caption = 'Edit view'
+  ClientHeight = 569
+  ClientWidth = 912
+  OnClose = FormClose
+  Position = poScreenCenter
+  SessionProperties = 'ListBox1.Width'
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object Panel2: TPanel
+    Left = 216
+    Height = 440
+    Top = 64
+    Width = 680
+    ClientHeight = 440
+    ClientWidth = 680
+    TabOrder = 0
+    object ToolPanel1: TToolPanel
+      Left = 1
+      Height = 31
+      Top = 1
+      Width = 678
+      Items = <      
+        item
+          Action = edtCompile
+          Visible = True
+          Left = 5
+          Height = 21
+          Top = 5
+          Width = 83
+          ShowCaption = True
+        end      
+        item
+          Visible = True
+          Left = 88
+          Height = 21
+          Top = 5
+          Width = 7
+          ShowCaption = False
+          ButtonStyle = tbrSeparator
+        end      
+        item
+          Action = dtRefresh
+          Visible = True
+          Left = 95
+          Height = 21
+          Top = 5
+          Width = 79
+          ShowCaption = True
+        end      
+        item
+          Visible = True
+          Left = 174
+          Height = 21
+          Top = 5
+          Width = 7
+          ShowCaption = False
+          ButtonStyle = tbrSeparator
+        end      
+        item
+          Action = edtRun
+          Visible = True
+          Left = 181
+          Height = 21
+          Top = 5
+          Width = 24
+          ShowCaption = False
+        end      
+        item
+          Action = actCommit
+          Visible = True
+          Left = 205
+          Height = 21
+          Top = 5
+          Width = 39
+          DropDownMenu = PopupMenu2
+          ShowCaption = False
+          ButtonStyle = tbrDropDownExtra
+        end      
+        item
+          Action = actRollback
+          Visible = True
+          Left = 244
+          Height = 21
+          Top = 5
+          Width = 39
+          DropDownMenu = PopupMenu3
+          ShowCaption = False
+          ButtonStyle = tbrDropDownExtra
+        end      
+        item
+          Visible = True
+          Left = 283
+          Height = 21
+          Top = 5
+          Width = 7
+          ShowCaption = False
+          ButtonStyle = tbrSeparator
+        end      
+        item
+          Action = edtPrint
+          Visible = True
+          Left = 290
+          Height = 21
+          Top = 5
+          Width = 60
+          ShowCaption = True
+        end      
+        item
+          Action = dtExport
+          Visible = True
+          Left = 350
+          Height = 21
+          Top = 5
+          Width = 24
+          ShowCaption = False
+        end      
+        item
+          Visible = True
+          Left = 374
+          Height = 21
+          Top = 5
+          Width = 7
+          ShowCaption = False
+          ButtonStyle = tbrSeparator
+        end      
+        item
+          Action = edtAdd
+          Visible = True
+          Left = 381
+          Height = 21
+          Top = 5
+          Width = 66
+          ShowCaption = True
+        end      
+        item
+          Action = edtEdit
+          Visible = True
+          Left = 447
+          Height = 21
+          Top = 5
+          Width = 54
+          ShowCaption = True
+        end      
+        item
+          Action = edtDel
+          Visible = True
+          Left = 501
+          Height = 21
+          Top = 5
+          Width = 72
+          ShowCaption = True
+        end      
+        item
+          Visible = True
+          Left = 573
+          Height = 21
+          Top = 5
+          Width = 7
+          ShowCaption = False
+          ButtonStyle = tbrSeparator
+        end      
+        item
+          Action = edtComment
+          Visible = True
+          Left = 580
+          Height = 21
+          Top = 5
+          Width = 24
+          ShowCaption = False
+        end      
+        item
+          Action = edtUncomment
+          Visible = True
+          Left = 604
+          Height = 21
+          Top = 5
+          Width = 24
+          ShowCaption = False
+        end>
+      ImageList = fbManagerMainForm.ImageListMain
+      PropertyStorage = RxIniPropStorage1
+      ToolBarStyle = tbsWindowsXP
+      Options = [tpFlatBtns, tpCustomizable, tpGlyphPopup, tpCaptionPopup]
+      CustomizeShortCut = False
+      Align = alTop
+      BorderWidth = 4
+      ClientHeight = 31
+      ClientWidth = 678
+      TabOrder = 0
+    end
+  end
+  object ListBox1: TListBox
+    Left = 0
+    Height = 526
+    Top = 43
+    Width = 100
+    Align = alLeft
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    ScrollWidth = 98
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object Splitter1: TSplitter
+    Left = 100
+    Height = 526
+    Top = 43
+    Width = 5
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 43
+    Top = 0
+    Width = 912
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 43
+    ClientWidth = 912
+    TabOrder = 3
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = Edit1
+      AnchorSideBottom.Side = asrBottom
+      Left = 6
+      Height = 19
+      Top = 18
+      Width = 73
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'View name'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 85
+      Height = 31
+      Top = 6
+      Width = 821
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      Color = clMoneyGreen
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 200
+    Top = 144
+    object edtCompile: TAction
+      Category = 'Editor'
+      Caption = 'Compile'
+      Hint = 'Compile'
+      ImageIndex = 61
+      OnExecute = edtCompileExecute
+      ShortCut = 16504
+    end
+    object dtExport: TAction
+      Category = 'Data'
+      Caption = 'Export data...'
+      ImageIndex = 64
+      OnExecute = dtExportExecute
+    end
+    object actCommit: TAction
+      Category = 'Data'
+      Caption = 'Commit'
+      ImageIndex = 15
+      OnExecute = actCommitExecute
+    end
+    object actRollback: TAction
+      Category = 'Data'
+      Caption = 'Rollback'
+      ImageIndex = 46
+      OnExecute = actRolbackExecute
+    end
+    object actCommitAndClose: TAction
+      Category = 'Data'
+      Caption = 'Commit and close'
+      OnExecute = actCommitAndCloseExecute
+    end
+    object actRollbackAndClose: TAction
+      Category = 'Data'
+      Caption = 'Rollback and close'
+      OnExecute = actRollbackAndCloseExecute
+    end
+    object edtPrint: TAction
+      Category = 'Editor'
+      Caption = 'Print'
+      Hint = 'Print data...'
+      ImageIndex = 14
+      OnExecute = edtPrintExecute
+    end
+    object edtAdd: TAction
+      Category = 'Editor'
+      Caption = 'Add...'
+      Hint = 'Add...'
+      ImageIndex = 12
+      OnExecute = edtAddExecute
+    end
+    object edtEdit: TAction
+      Category = 'Editor'
+      Caption = 'Edit'
+      ImageIndex = 62
+      OnExecute = edtEditExecute
+    end
+    object edtDel: TAction
+      Category = 'Editor'
+      Caption = 'Delete'
+      Hint = 'Remove...'
+      ImageIndex = 13
+      OnExecute = edtDelExecute
+    end
+    object dtRefresh: TAction
+      Category = 'Data'
+      Caption = 'Refresh'
+      Hint = 'Refresh current data...'
+      ImageIndex = 10
+      OnExecute = dtRefreshExecute
+    end
+    object edtRun: TAction
+      Category = 'Editor'
+      Caption = 'Run'
+      ImageIndex = 16
+      OnExecute = edtRunExecute
+    end
+    object edtComment: TAction
+      Category = 'Editor'
+      Caption = 'Comment'
+      Hint = 'Comment selected code'
+      ImageIndex = 28
+      OnExecute = edtCommentExecute
+    end
+    object edtUncomment: TAction
+      Category = 'Editor'
+      Caption = 'Uncomment'
+      Hint = 'Uncomment selected code'
+      ImageIndex = 29
+      OnExecute = edtUncommentExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 197
+    Top = 208
+    object MenuItem1: TMenuItem
+      Action = dtExport
+      OnClick = dtExportExecute
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 160
+    Top = 266
+    object MenuItem4: TMenuItem
+      Action = actCommit
+      OnClick = actCommitExecute
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = actCommitAndClose
+      OnClick = actCommitAndCloseExecute
+    end
+  end
+  object PopupMenu3: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 197
+    Top = 266
+    object MenuItem7: TMenuItem
+      Action = actRollback
+      OnClick = actRolbackExecute
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = actRollbackAndClose
+      OnClick = actRollbackAndCloseExecute
+    end
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 264
+    Top = 266
+  end
+end

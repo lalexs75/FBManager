@@ -1,0 +1,345 @@
+inherited MySQL_con_MainPage: TMySQL_con_MainPage
+  Height = 568
+  Width = 593
+  ClientHeight = 568
+  ClientWidth = 593
+  DesignLeft = 387
+  DesignTop = 267
+  object Label2: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 81
+    BorderSpacing.Around = 6
+    Caption = 'Server name'
+    ParentColor = False
+  end
+  object Label3: TLabel[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 303
+    Height = 20
+    Top = 6
+    Width = 72
+    BorderSpacing.Around = 6
+    Caption = 'Server port'
+    ParentColor = False
+  end
+  object Label4: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 208
+    Width = 98
+    BorderSpacing.Around = 6
+    Caption = 'Database name'
+    ParentColor = False
+  end
+  object Label5: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDBName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 277
+    Width = 91
+    BorderSpacing.Around = 6
+    Caption = 'Database alias'
+    ParentColor = False
+  end
+  object Label6: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CB_ServerVersion
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 139
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object Label7: TLabel[5]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CB_ServerVersion
+    AnchorSideTop.Side = asrBottom
+    Left = 303
+    Height = 20
+    Top = 139
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label14: TLabel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbServerName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 75
+    Width = 92
+    BorderSpacing.Around = 6
+    Caption = 'Server version'
+    ParentColor = False
+  end
+  object edtAliasName: TEdit[7]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 303
+    Width = 575
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object edtUserName: TEdit[8]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 165
+    Width = 278
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    OnExit = cbServerNameExit
+    TabOrder = 1
+  end
+  object edtPassword: TEdit[9]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 309
+    Height = 37
+    Top = 165
+    Width = 278
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    OnExit = cbServerNameExit
+    PasswordChar = '*'
+    TabOrder = 2
+  end
+  object CB_ServerVersion: TComboBox[10]
+    AnchorSideLeft.Control = Label14
+    AnchorSideTop.Control = Label14
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 12
+    Height = 32
+    Top = 101
+    Width = 575
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'Unknown'
+      'MySQL 4'
+      'MySQL 4.1'
+      'MySQL 5'
+    )
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object cbServerName: TComboBox[11]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label1
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 278
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    MaxLength = 65535
+    OnExit = cbServerNameExit
+    Sorted = True
+    TabOrder = 4
+  end
+  object edtPort: TSpinEdit[12]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 309
+    Height = 37
+    Top = 32
+    Width = 278
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxValue = 65536
+    OnExit = cbServerNameExit
+    TabOrder = 5
+  end
+  object Label1: TLabel[13]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 296
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object CB_CharSet: TComboBox[14]
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 372
+    Width = 575
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 6
+  end
+  object Label8: TLabel[15]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtAliasName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 346
+    Width = 53
+    BorderSpacing.Around = 6
+    Caption = 'Char set'
+    ParentColor = False
+  end
+  object cbShowSystemObjects: TCheckBox[16]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CB_CharSet
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 415
+    Width = 162
+    BorderSpacing.Around = 6
+    Caption = 'Show system objects'
+    TabOrder = 7
+  end
+  object edtDBName: TComboBox[17]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 234
+    Width = 575
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnExit = edtDBNameExit
+    TabOrder = 8
+  end
+  object dbTest: TZConnection[18]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'information_schema'
+    User = 'root'
+    Protocol = 'mysql-5'
+    Left = 144
+    Top = 99
+  end
+  object quCharsets: TZReadOnlyQuery[19]
+    Connection = dbTest
+    SQL.Strings = (
+      'select'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME,'
+      '  CHARACTER_SETS.DEFAULT_COLLATE_NAME'
+      'from'
+      '  information_schema.CHARACTER_SETS'
+      'order by'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME'
+    )
+    Params = <>
+    Left = 144
+    Top = 352
+    object quCharsetsCHARACTER_SET_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'CHARACTER_SET_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 128
+    end
+    object quCharsetsDEFAULT_COLLATE_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'DEFAULT_COLLATE_NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 128
+    end
+  end
+  object quDatabases: TZReadOnlyQuery[20]
+    Connection = dbTest
+    SQL.Strings = (
+      'select'
+      '  SCHEMATA.SCHEMA_NAME'
+      'from'
+      '  information_schema.SCHEMATA'
+      'order by'
+      '  SCHEMATA.SCHEMA_NAME'
+    )
+    Params = <>
+    Left = 144
+    Top = 224
+    object quDatabasesSCHEMA_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'SCHEMA_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 256
+    end
+  end
+  object quCharsets2: TZReadOnlyQuery[21]
+    SQL.Strings = (
+      'select'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME,'
+      '  CHARACTER_SETS.DEFAULT_COLLATE_NAME'
+      'from'
+      '  information_schema.CHARACTER_SETS'
+      'order by'
+      '  CHARACTER_SETS.CHARACTER_SET_NAME'
+    )
+    Params = <>
+    Left = 48
+    Top = 160
+  end
+end

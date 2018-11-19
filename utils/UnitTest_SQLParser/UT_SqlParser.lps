@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="31">
+      <Unit0>
+        <Filename Value="UT_SqlParser.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="15"/>
+        <UsageCount Value="110"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="pgtestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PGSQLParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="PGTestCase"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="2220"/>
+        <CursorPos X="38" Y="2245"/>
+        <UsageCount Value="110"/>
+        <Bookmarks Count="1">
+          <Item0 Y="710" ID="3"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PostgreSQLEngineUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="6347"/>
+        <CursorPos X="57" Y="6373"/>
+        <UsageCount Value="110"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="fbmanager_define.inc"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="110"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="fbtestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FBTestSQLData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="FBTestCase"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="966"/>
+        <CursorPos X="64" Y="970"/>
+        <UsageCount Value="110"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="mysqltestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MySQLParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="MySQLTestCase"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="798"/>
+        <CursorPos Y="807"/>
+        <UsageCount Value="110"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="sqlite3testcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SQLite3ParserData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="SQLite3TestCase"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="184"/>
+        <CursorPos X="72" Y="196"/>
+        <UsageCount Value="110"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="pgcopycmdcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PGCopyCmdCase"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="362"/>
+        <CursorPos X="3" Y="418"/>
+        <UsageCount Value="108"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/fpcunit.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1113"/>
+        <CursorPos Y="1128"/>
+        <UsageCount Value="8"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../tools/fbmtoolsunit.pas"/>
+        <UnitName Value="fbmToolsUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="37" Y="29"/>
+        <UsageCount Value="6"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <UnitName Value="SQLEngineCommonTypesUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="630"/>
+        <UsageCount Value="6"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../tools/fbmstrconstunit.pas"/>
+        <UnitName Value="fbmStrConstUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1330"/>
+        <CursorPos Y="1361"/>
+        <UsageCount Value="6"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
+        <UnitName Value="SQLEngineAbstractUnit"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="6"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
+        <UnitName Value="SQLEngineInternalToolsUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="82"/>
+        <CursorPos X="27" Y="105"/>
+        <UsageCount Value="6"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="/usr/local/share/lazarus/components/lazutils/lazutf8.pas"/>
+        <UnitName Value="LazUTF8"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="6"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
+        <UnitName Value="pgSqlTextUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="32" Y="28"/>
+        <UsageCount Value="6"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
+        <UnitName Value="FBSQLEngineUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="66" Y="29"/>
+        <UsageCount Value="6"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../sql_engine/firebird/fb_charsetutils.pas"/>
+        <UnitName Value="fb_CharSetUtils"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="118"/>
+        <UsageCount Value="6"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <UnitName Value="pg_SqlParserUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3965"/>
+        <CursorPos X="31" Y="3995"/>
+        <UsageCount Value="12"/>
+        <Bookmarks Count="2">
+          <Item0 Y="931" ID="1"/>
+          <Item1 X="3" Y="1246" ID="2"/>
+        </Bookmarks>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <UnitName Value="fbmSqlParserUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2841"/>
+        <CursorPos Y="2857"/>
+        <UsageCount Value="7"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../sql_objects/sqlobjects.pas"/>
+        <UnitName Value="sqlObjects"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="123"/>
+        <CursorPos X="33" Y="139"/>
+        <UsageCount Value="6"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/testutils.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="7"/>
+        <UsageCount Value="8"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="../../sql_engine/PostgreSQL/pgtypes.pas"/>
+        <UnitName Value="pgTypes"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="8"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="unit1.pas"/>
+        <ComponentName Value="DataModule1"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="Unit1"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="16"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="unit1.lfm"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="4" Y="7"/>
+        <UsageCount Value="6"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="/usr/local/share/lazarus/lcl/forms.pp"/>
+        <UnitName Value="Forms"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1833"/>
+        <CursorPos X="3" Y="1849"/>
+        <UsageCount Value="6"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <UnitName Value="RxTextHolder"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="71"/>
+        <CursorPos X="79" Y="83"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/rxtextholder_editor.pas"/>
+        <ComponentName Value="RxTextHolder_EditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="RxTextHolder_Editor"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="136"/>
+        <CursorPos X="14" Y="151"/>
+        <UsageCount Value="9"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/registerrxtools.pas"/>
+        <UnitName Value="RegisterRxTools"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="44"/>
+        <CursorPos Y="88"/>
+        <UsageCount Value="7"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/register_rxtools.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="31"/>
+        <CursorPos X="86" Y="60"/>
+        <UsageCount Value="7"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="pgtestcase.lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2460"/>
+        <CursorPos X="36" Y="2484"/>
+        <UsageCount Value="8"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit30>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="108" Column="20" TopLine="84"/>
+      </Position1>
+      <Position2>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="1442" Column="3" TopLine="1438"/>
+      </Position2>
+      <Position3>
+        <Filename Value="pgtestcase.pas"/>
+      </Position3>
+      <Position4>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="124" Column="14" TopLine="99"/>
+      </Position4>
+      <Position5>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="801" Column="3" TopLine="788"/>
+      </Position5>
+      <Position6>
+        <Filename Value="pgtestcase.pas"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="127" Column="14" TopLine="102"/>
+      </Position7>
+      <Position8>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="804" Column="129" TopLine="798"/>
+      </Position8>
+      <Position9>
+        <Filename Value="pgtestcase.pas"/>
+      </Position9>
+      <Position10>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="112" Column="14" TopLine="87"/>
+      </Position10>
+      <Position11>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="1452" Column="3" TopLine="1448"/>
+      </Position11>
+      <Position12>
+        <Filename Value="pgtestcase.pas"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="160" Column="23" TopLine="136"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="951" Column="129" TopLine="928"/>
+      </Position14>
+      <Position15>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="2872" Column="30" TopLine="2851"/>
+      </Position15>
+      <Position16>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="624" Column="15" TopLine="610"/>
+      </Position16>
+      <Position17>
+        <Filename Value="pgtestcase.pas"/>
+      </Position17>
+      <Position18>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="420" Column="23" TopLine="396"/>
+      </Position18>
+      <Position19>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="2274" Column="3" TopLine="2270"/>
+      </Position19>
+      <Position20>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="420" Column="23" TopLine="406"/>
+      </Position20>
+      <Position21>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="680" Column="23" TopLine="656"/>
+      </Position21>
+      <Position22>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="786" Column="28" TopLine="768"/>
+      </Position22>
+      <Position23>
+        <Filename Value="pgtestcase.pas"/>
+      </Position23>
+      <Position24>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="664" Column="24" TopLine="640"/>
+      </Position24>
+      <Position25>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="727" Column="22" TopLine="713"/>
+      </Position25>
+      <Position26>
+        <Filename Value="pgtestcase.pas"/>
+      </Position26>
+      <Position27>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="375" Column="26" TopLine="351"/>
+      </Position27>
+      <Position28>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="2142" Column="129" TopLine="2130"/>
+      </Position28>
+      <Position29>
+        <Filename Value="pgtestcase.pas"/>
+      </Position29>
+      <Position30>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="405" Column="25" TopLine="381"/>
+      </Position30>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="S"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

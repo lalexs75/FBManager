@@ -1,0 +1,268 @@
+object ibmUserSecEditUserForm: TibmUserSecEditUserForm
+  Left = 579
+  Height = 580
+  Top = 279
+  Width = 578
+  ActiveControl = Edit1
+  Caption = 'Edit user'
+  ClientHeight = 580
+  ClientWidth = 578
+  OnCloseQuery = ibmUserSecEditUserFormCloseQuery
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  SessionProperties = 'Width;Top;Left;Height'
+  LCLVersion = '1.3'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 72
+    Width = 63
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 138
+    Width = 116
+    Caption = 'Confirm password'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 204
+    Width = 68
+    BorderSpacing.Top = 6
+    Caption = 'First name'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Edit4
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 270
+    Width = 82
+    Caption = 'Middle name'
+    ParentColor = False
+  end
+  object Label6: TLabel
+    AnchorSideTop.Control = Edit5
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 21
+    Top = 336
+    Width = 66
+    Caption = 'Last name'
+    ParentColor = False
+  end
+  object Label7: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit6
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 21
+    Top = 402
+    Width = 73
+    BorderSpacing.Around = 6
+    Caption = 'Description'
+    ParentColor = False
+  end
+  object Label8: TLabel
+    AnchorSideTop.Control = Label1
+    Left = 416
+    Height = 21
+    Top = 6
+    Width = 48
+    Anchors = [akTop, akRight]
+    Caption = 'User ID'
+    FocusControl = SpinEdit1
+    ParentColor = False
+  end
+  object Label9: TLabel
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = SpinEdit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpinEdit2
+    Left = 416
+    Height = 21
+    Top = 72
+    Width = 57
+    BorderSpacing.Right = 6
+    Caption = 'Group ID'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label8
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 398
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label8
+    Left = 12
+    Height = 33
+    Top = 99
+    Width = 398
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 1
+  end
+  object Edit3: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Label8
+    Left = 12
+    Height = 33
+    Top = 165
+    Width = 398
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    EchoMode = emPassword
+    PasswordChar = '*'
+    TabOrder = 2
+  end
+  object Edit4: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 231
+    Width = 560
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object Edit5: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 297
+    Width = 560
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object Edit6: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 363
+    Width = 560
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 5
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 97
+    Top = 429
+    Width = 564
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 6
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 6
+    TabOrder = 6
+  end
+  object SpinEdit1: TSpinEdit
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 422
+    Height = 33
+    Top = 33
+    Width = 150
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 7
+  end
+  object SpinEdit2: TSpinEdit
+    AnchorSideLeft.Control = SpinEdit1
+    AnchorSideTop.Control = Edit2
+    AnchorSideRight.Control = SpinEdit1
+    AnchorSideRight.Side = asrBottom
+    Left = 422
+    Height = 33
+    Top = 99
+    Width = 150
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 8
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 532
+    Width = 566
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 9
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    left = 424
+    top = 160
+  end
+end

@@ -1,0 +1,73 @@
+inherited fbmCFTransactionFrame: TfbmCFTransactionFrame
+  Height = 421
+  Width = 603
+  ClientHeight = 421
+  ClientWidth = 603
+  DesignLeft = 351
+  DesignTop = 204
+  object RadioGroup1: TRadioGroup[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 129
+    Top = 6
+    Width = 591
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Transaction property for data'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 108
+    ClientWidth = 589
+    Items.Strings = (
+      'Snapshot'
+      'Read commited'
+      'Read-only table stability'
+      'Read-write table stability'
+    )
+    TabOrder = 0
+  end
+  object RadioGroup2: TRadioGroup[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 129
+    Top = 141
+    Width = 591
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Transaction property for metadata'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 108
+    ClientWidth = 589
+    Items.Strings = (
+      'Snapshot'
+      'Read commited'
+      'Read-only table stability'
+      'Read-write table stability'
+    )
+    TabOrder = 1
+  end
+end

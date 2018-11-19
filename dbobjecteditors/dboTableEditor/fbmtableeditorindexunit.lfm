@@ -1,0 +1,402 @@
+inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
+  Height = 412
+  Width = 1151
+  ClientHeight = 412
+  ClientWidth = 1151
+  DesignLeft = 412
+  DesignTop = 277
+  object RxDBGrid1: TRxDBGrid[0]
+    Left = 0
+    Height = 412
+    Top = 0
+    Width = 1151
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = False
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = '##'
+        Width = 40
+        FieldName = 'Index_Num'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Index caption'
+        Width = 150
+        FieldName = 'CAPTION'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Index expression'
+        Width = 200
+        FieldName = 'EXPRESSION'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'On fields'
+        Width = 200
+        FieldName = 'Index_Fields'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Active'
+        Width = 80
+        FieldName = 'Active'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Descending'
+        Width = 90
+        FieldName = 'Descending'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Unique'
+        Width = 80
+        FieldName = 'Unique'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = []
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsIndexList
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 0
+    TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
+  end
+  object rxIndexList: TRxMemoryData[1]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'Unique'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Active'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Descending'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'Index_Num'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'Index_Fields'
+        DataType = ftString
+        Precision = -1
+        Size = 150
+      end    
+      item
+        Name = 'CAPTION'
+        DataType = ftString
+        Precision = -1
+        Size = 150
+      end    
+      item
+        Name = 'EXPRESSION'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end>
+    PacketRecords = 0
+    Left = 57
+    Top = 98
+    object rxIndexListUnique: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Unique'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxIndexListActive: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Active'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxIndexListDescending: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'Descending'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxIndexListIndex_Num: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'Index_Num'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxIndexListIndex_Fields: TStringField
+      DisplayWidth = 150
+      FieldKind = fkData
+      FieldName = 'Index_Fields'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 150
+    end
+    object rxIndexListCAPTION: TStringField
+      DisplayWidth = 150
+      FieldKind = fkData
+      FieldName = 'CAPTION'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 150
+    end
+    object rxIndexListEXPRESSION: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'EXPRESSION'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+  end
+  object dsIndexList: TDataSource[2]
+    DataSet = rxIndexList
+    Left = 24
+    Top = 98
+  end
+  object PopupMenu1: TPopupMenu[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 56
+    Top = 153
+    object MenuItem1: TMenuItem
+      Action = indNew
+      OnClick = indNewExecute
+    end
+    object MenuItem2: TMenuItem
+      Action = indEdit
+      OnClick = indEditExecute
+    end
+    object MenuItem3: TMenuItem
+      Action = indDelete
+      OnClick = indDeleteExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = indRefresh
+      OnClick = indRefreshExecute
+    end
+    object MenuItem6: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = indPrint
+      OnClick = indPrintExecute
+    end
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 120
+    Top = 153
+    object indNew: TAction
+      Caption = 'New index'
+      ImageIndex = 12
+      OnExecute = indNewExecute
+    end
+    object indEdit: TAction
+      Caption = 'Edit index'
+      ImageIndex = 62
+      OnExecute = indEditExecute
+    end
+    object indDelete: TAction
+      Caption = 'Delete index'
+      ImageIndex = 13
+      OnExecute = indDeleteExecute
+    end
+    object indPrint: TAction
+      Caption = 'Print index list'
+      ImageIndex = 14
+      OnExecute = indPrintExecute
+    end
+    object indRefresh: TAction
+      Caption = 'Refresh index list'
+      ImageIndex = 10
+      OnExecute = indRefreshExecute
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[5]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 180
+    Top = 102
+  end
+end

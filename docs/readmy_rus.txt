@@ -1,0 +1,35 @@
+﻿Лицензия:
+Эта программа идёт под лицензией GPL. Текст лицензии в файле COPYING.GPL
+
+Для компиляции необходимы дополнительные пакеты:
+RxNew - https://lazarus-ccr.svn.sourceforge.net/svnroot/lazarus-ccr/components/rx
+FBDataSet - svn://svn.shamangrad.net/FBDataSet/trunk
+lazdbexport - В поставке Lazarus
+lazreport - В поставке Lazarus
+UIBLaz - https://uib.svn.sourceforge.net/svnroot/uib/trunk
+wsrpc - svn://svn.shamangrad.net/pms/trunc/rpc/pascal
+fpc_tds - svn://svn.shamangrad.net/fpc_tds/trunk
+FreeTDS - freetds.cvs.sourceforge.net:/cvsroot/freetds
+SQLDBLaz
+TurboPowerIPro
+
+
+В IDE открывать файл IBManager.lpi
+
+
+Подерживаемые СУБД определяются макросами в файле fbmanager_define.inc
+
+{$DEFINE USE_FB} - СУБД Firebird/Interbase
+{$DEFINE USE_DBF} - Каталог с DBF файлами
+{$DEFINE ORACLE} - СУБД Oracle
+{$DEFINE MS_SQL} - СУБД MS SQL
+{$DEFINE PostgreSQL} - СУБД PostgreSQL
+
+{$DEFINE USE_SHAMANGRAD} - работа с багтрекером сервиса портала http://shamangrad.net
+
+Сторонние библиотеки
+  Curl (см. топик freepascal.ru http://freepascal.ru/forum/viewtopic.php?f=9&t=3999&p=29711&hilit=wsrpc#p29711)
+    wsrpc-contrib.zip - DLL библиотеки без которых демка работать не будет. 
+    Для nix* нужны пакеты libxml2, OpenSSL и libcurl, которые ставятся 
+    по умолчанию (может быть за исключением последней) практически во всех дистрибутивах.
+  Если отключить работу багтрекера шаманграда, эта зависимость не нужна

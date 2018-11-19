@@ -1,0 +1,19 @@
+inherited fbmObjectTemplatesForm: TfbmObjectTemplatesForm
+  Left = 482
+  Top = 247
+  Caption = 'Database object templates'
+  OnClose = FormClose
+  inherited ButtonPanel1: TButtonPanel
+    Height = 46
+    Top = 503
+  end
+  inherited ListBox1: TListBox
+    Height = 497
+  end
+  inherited Splitter1: TSplitter
+    Height = 497
+  end
+  inherited Panel1: TPanel
+    Height = 497
+  end
+end

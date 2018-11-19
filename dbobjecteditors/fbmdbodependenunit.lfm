@@ -1,0 +1,632 @@
+inherited DependenciesFrame: TDependenciesFrame
+  Height = 597
+  Width = 966
+  ClientHeight = 597
+  ClientWidth = 966
+  DesignLeft = 421
+  DesignTop = 246
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 597
+    Top = 0
+    Width = 419
+    Align = alLeft
+    ClientHeight = 597
+    ClientWidth = 419
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 1
+      Height = 20
+      Top = 1
+      Width = 417
+      Align = alTop
+      Caption = 'Objects, that depend on'
+      ParentColor = False
+    end
+    object RxDBGrid1: TRxDBGrid
+      Left = 1
+      Height = 470
+      Top = 21
+      Width = 417
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = True
+      Columns = <      
+        item
+          SizePriority = 0
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'OBJECT_TYPE'
+          Width = 30
+          FieldName = 'OBJECT_TYPE'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+          ImageList = fbManagerMainForm.ImageList2
+          KeyList.Strings = (
+            '0=2'
+            '1=3'
+            '2=4'
+            '3=5'
+            '4=6'
+            '5=7'
+          )
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'Object...'
+          Width = 373
+          FieldName = 'OBJECT_NAME'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = 'Count: %d'
+          Footer.ValueType = fvtCount
+          Footers = <>
+        end>
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end      
+        item
+          Command = rxgcSelectAll
+          ShortCut = 16449
+          Enabled = True
+        end      
+        item
+          Command = rxgcDeSelectAll
+          ShortCut = 16429
+          Enabled = True
+        end      
+        item
+          Command = rxgcInvertSelection
+          ShortCut = 16426
+          Enabled = True
+        end      
+        item
+          Command = rxgcOptimizeColumnsWidth
+          ShortCut = 16427
+          Enabled = True
+        end      
+        item
+          Command = rxgcCopyCellValue
+          ShortCut = 16451
+          Enabled = True
+        end>
+      FooterOptions.Active = True
+      FooterOptions.Color = clYellow
+      FooterOptions.RowCount = 1
+      FooterOptions.DrawFullLine = True
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = [rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
+      FooterColor = clYellow
+      FooterRowCount = 1
+      Align = alClient
+      AutoFillColumns = True
+      Color = clWindow
+      DrawFullLine = True
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      DataSource = dsObjDepend
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      Scrollbars = ssAutoVertical
+      TabOrder = 0
+      TitleStyle = tsNative
+      OnDblClick = RxDBGrid1DblClick
+    end
+    object RxDBGrid3: TRxDBGrid
+      Left = 1
+      Height = 100
+      Top = 496
+      Width = 417
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = True
+      Columns = <      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'FIELD_NAME'
+          Width = 390
+          FieldName = 'FIELD_NAME'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end>
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end>
+      FooterOptions.Color = clYellow
+      FooterOptions.DrawFullLine = False
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = []
+      FooterColor = clYellow
+      Align = alBottom
+      AutoFillColumns = True
+      Color = clWindow
+      DrawFullLine = False
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      DataSource = dsDependFields
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      Scrollbars = ssVertical
+      TabOrder = 1
+      TitleStyle = tsNative
+    end
+    object Splitter2: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 491
+      Width = 417
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+  end
+  object Splitter1: TSplitter[1]
+    Left = 419
+    Height = 597
+    Top = 0
+    Width = 5
+  end
+  object Panel2: TPanel[2]
+    Left = 424
+    Height = 597
+    Top = 0
+    Width = 542
+    Align = alClient
+    ClientHeight = 597
+    ClientWidth = 542
+    TabOrder = 2
+    object Label2: TLabel
+      Left = 1
+      Height = 20
+      Top = 1
+      Width = 540
+      Align = alTop
+      Caption = 'Objects,...'
+      ParentColor = False
+    end
+    object RxDBGrid2: TRxDBGrid
+      Left = 1
+      Height = 470
+      Top = 21
+      Width = 540
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = True
+      Columns = <      
+        item
+          SizePriority = 0
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'OBJECT_TYPE'
+          Width = 60
+          FieldName = 'OBJECT_TYPE'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+          ImageList = fbManagerMainForm.ImageList2
+          KeyList.Strings = (
+            '0=2'
+            '1=3'
+            '2=4'
+            '3=5'
+            '4=6'
+            '5=7'
+          )
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'OBJECT_NAME'
+          Width = 466
+          FieldName = 'OBJECT_NAME'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footer.Alignment = taRightJustify
+          Footer.DisplayFormat = 'Count: %d'
+          Footer.ValueType = fvtCount
+          Footers = <>
+        end>
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end>
+      FooterOptions.Active = True
+      FooterOptions.Color = clYellow
+      FooterOptions.RowCount = 1
+      FooterOptions.DrawFullLine = True
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = [rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
+      FooterColor = clYellow
+      FooterRowCount = 1
+      Align = alClient
+      AutoFillColumns = True
+      Color = clWindow
+      DrawFullLine = True
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      DataSource = dsObjDependOn
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      Scrollbars = ssAutoVertical
+      TabOrder = 0
+      TitleStyle = tsNative
+      OnDblClick = RxDBGrid1DblClick
+    end
+    object RxDBGrid4: TRxDBGrid
+      Left = 1
+      Height = 100
+      Top = 496
+      Width = 540
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = True
+      Columns = <      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'FIELD_NAME'
+          Width = 513
+          FieldName = 'FIELD_NAME'
+          EditButtons = <>
+          Filter.Font.Style = [fsItalic]
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Нет)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end>
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end>
+      FooterOptions.Color = clYellow
+      FooterOptions.DrawFullLine = False
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = []
+      FooterColor = clYellow
+      Align = alBottom
+      AutoFillColumns = True
+      Color = clWindow
+      DrawFullLine = False
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      DataSource = dsOnDepFields
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      Scrollbars = ssVertical
+      TabOrder = 1
+      TitleStyle = tsNative
+    end
+    object Splitter3: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 491
+      Width = 540
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+  end
+  object rxObjDepend: TRxMemoryData[3]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'OBJECT_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'OBJECT_TYPE'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    AfterScroll = rxObjDependAfterScroll
+    PacketRecords = 0
+    Left = 128
+    Top = 56
+    object rxObjDependOBJECT_NAME: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'OBJECT_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxObjDependOBJECT_TYPE: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'OBJECT_TYPE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object rxObjDependOn: TRxMemoryData[4]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'OBJECT_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'OBJECT_TYPE'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    PacketRecords = 0
+    Left = 501
+    Top = 56
+    object rxObjDependOnOBJECT_NAME: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'OBJECT_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxObjDependOnOBJECT_TYPE: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'OBJECT_TYPE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object dsObjDepend: TDataSource[5]
+    DataSet = rxObjDepend
+    Left = 88
+    Top = 56
+  end
+  object dsObjDependOn: TDataSource[6]
+    DataSet = rxObjDependOn
+    Left = 458
+    Top = 56
+  end
+  object dsDependFields: TDataSource[7]
+    DataSet = rxDependFields
+    Left = 88
+    Top = 376
+  end
+  object dsOnDepFields: TDataSource[8]
+    DataSet = rxOnDepFields
+    Left = 458
+    Top = 376
+  end
+  object rxDependFields: TRxMemoryData[9]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'FIELD_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end>
+    PacketRecords = 0
+    Left = 128
+    Top = 376
+    object rxDependFieldsFIELD_NAME: TStringField
+      DisplayWidth = 100
+      FieldKind = fkData
+      FieldName = 'FIELD_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+  end
+  object rxOnDepFields: TRxMemoryData[10]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'FIELD_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end>
+    PacketRecords = 0
+    Left = 501
+    Top = 376
+    object rxOnDepFieldsFIELD_NAME: TStringField
+      DisplayWidth = 100
+      FieldKind = fkData
+      FieldName = 'FIELD_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+  end
+  object frObjDepend: TfrDBDataSet[11]
+    DataSet = rxObjDepend
+    Left = 176
+    Top = 56
+  end
+  object frObjDependOn: TfrDBDataSet[12]
+    DataSet = rxObjDependOn
+    Left = 552
+    Top = 56
+  end
+  object frDependFields: TfrDBDataSet[13]
+    DataSet = rxDependFields
+    Left = 184
+    Top = 376
+  end
+  object frOnDepFields: TfrDBDataSet[14]
+    DataSet = rxOnDepFields
+    Left = 557
+    Top = 376
+  end
+end

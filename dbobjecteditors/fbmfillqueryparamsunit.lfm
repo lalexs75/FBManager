@@ -1,0 +1,134 @@
+object fbmFillQueryParamsForm: TfbmFillQueryParamsForm
+  Left = 268
+  Height = 657
+  Top = 183
+  Width = 987
+  ActiveControl = ToolPanel1
+  Caption = 'Fill query param'
+  ClientHeight = 657
+  ClientWidth = 987
+  OnKeyDown = FormKeyDown
+  Position = poScreenCenter
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 987
+    Items = <    
+      item
+        Action = prmSave
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 60
+        ShowCaption = True
+      end    
+      item
+        Action = prmLoad
+        Visible = True
+        Left = 65
+        Height = 21
+        Top = 5
+        Width = 60
+        ShowCaption = True
+      end    
+      item
+        Action = prmApply
+        Visible = True
+        Left = 125
+        Height = 21
+        Top = 5
+        Width = 65
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns, tpCustomizable, tpCaptionPopup]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 987
+    TabOrder = 0
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 572
+    Top = 31
+    Width = 987
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Params'
+      ClientHeight = 539
+      ClientWidth = 977
+      object ScrollBox1: TScrollBox
+        Left = 0
+        Height = 539
+        Top = 0
+        Width = 977
+        HorzScrollBar.Page = 1
+        VertScrollBar.Page = 1
+        Align = alClient
+        TabOrder = 0
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Params history'
+    end
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 609
+    Width = 975
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 2
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 208
+    Top = 232
+    object prmSave: TAction
+      Caption = 'Save'
+      ImageIndex = 11
+      OnExecute = prmSaveExecute
+    end
+    object prmLoad: TAction
+      Caption = 'Load'
+      ImageIndex = 43
+      OnExecute = prmLoadExecute
+    end
+    object prmApply: TAction
+      Caption = 'Apply'
+      ImageIndex = 15
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.*.*'
+    Filter = 'Text file (*.txt)|*.txt|All Fiels (*.*)|*.*'
+    FilterIndex = 0
+    Left = 152
+    Top = 273
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.txt'
+    Filter = 'Text file (*.txt)|*.txt|All Fiels (*.*)|*.*'
+    FilterIndex = 0
+    Left = 120
+    Top = 273
+  end
+end

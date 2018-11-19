@@ -1,0 +1,56 @@
+object fdbmMonitorAbstractForm: TfdbmMonitorAbstractForm
+  Left = 730
+  Height = 240
+  Top = 432
+  Width = 398
+  Caption = 'fdbmMonitorAbstractForm'
+  ClientHeight = 240
+  ClientWidth = 398
+  LCLVersion = '1.9.0.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 398
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 50
+    ClientWidth = 398
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideBottom.Control = ComboBox1
+      AnchorSideBottom.Side = asrBottom
+      Left = 7
+      Height = 20
+      Top = 23
+      Width = 59
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Database'
+      ParentColor = False
+    end
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 72
+      Height = 36
+      Top = 7
+      Width = 319
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = ComboBox1Change
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object MainTimer: TTimer
+    Enabled = False
+    OnTimer = MainTimerTimer
+    Left = 16
+  end
+end

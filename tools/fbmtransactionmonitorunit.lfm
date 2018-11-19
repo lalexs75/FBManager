@@ -1,0 +1,962 @@
+inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
+  Left = 393
+  Height = 826
+  Top = 128
+  Width = 1236
+  Caption = 'Transaction monitor'
+  ClientHeight = 826
+  ClientWidth = 1236
+  OnClose = FormClose
+  OnCreate = FormCreate
+  inherited Panel1: TPanel
+    Width = 1236
+    ClientWidth = 1236
+    inherited ComboBox1: TComboBox
+      Width = 1157
+    end
+  end
+  object PageControl1: TPageControl[1]
+    Left = 0
+    Height = 725
+    Top = 101
+    Width = 1236
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet2: TTabSheet
+      Caption = 'General'
+      ClientHeight = 691
+      ClientWidth = 1226
+      object Panel2: TPanel
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 1
+        Top = 26
+        Width = 1
+        AutoSize = True
+        BevelOuter = bvLowered
+        Caption = 'Panel2'
+        TabOrder = 0
+      end
+      object ComboBox2: TComboBox
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        Left = 6
+        Height = 37
+        Top = 47
+        Width = 1
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 0
+        TabOrder = 1
+        Text = 'ComboBox2'
+      end
+      object SpinEdit1: TSpinEdit
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        Left = 6
+        Height = 37
+        Top = 104
+        Width = 1
+        Anchors = [akTop, akLeft, akRight]
+        MaxValue = 0
+        TabOrder = 2
+      end
+      object Panel3: TPanel
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        Left = 6
+        Height = 1
+        Top = 161
+        Width = 1
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        BevelOuter = bvLowered
+        Caption = 'Panel2'
+        TabOrder = 3
+      end
+      object RxDBGrid1: TRxDBGrid
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = TabSheet2
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 333
+        Top = 352
+        Width = 1214
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Attachment ID'
+            Width = 90
+            FieldName = 'MON$ATTACHMENT_ID'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Attachment DB'
+            Width = 250
+            FieldName = 'MON$ATTACHMENT_NAME'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Start'
+            Width = 110
+            FieldName = 'MON$TIMESTAMP'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'User name'
+            Width = 100
+            FieldName = 'MON$USER'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'User role'
+            Width = 100
+            FieldName = 'MON$ROLE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Remote address'
+            Width = 120
+            FieldName = 'MON$REMOTE_ADDRESS'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Remote protocol'
+            Width = 100
+            FieldName = 'MON$REMOTE_PROTOCOL'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Remote process'
+            Width = 200
+            FieldName = 'MON$REMOTE_PROCESS'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = []
+        FooterColor = clYellow
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsUsers
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 4
+        TitleStyle = tsNative
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = TabSheet2
+        AnchorSideTop.Side = asrCenter
+        Left = 613
+        Height = 1
+        Top = 345
+        Width = 1
+        ParentColor = False
+      end
+      object Label9: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        Left = 6
+        Height = 20
+        Top = 6
+        Width = 50
+        BorderSpacing.Around = 6
+        Caption = 'General'
+        ParentColor = False
+      end
+      object Label10: TLabel
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = TabSheet2
+        Left = 619
+        Height = 20
+        Top = 6
+        Width = 78
+        BorderSpacing.Around = 6
+        Caption = 'Active users'
+        ParentColor = False
+      end
+      object Chart1: TChart
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        AnchorSideRight.Control = Label8
+        AnchorSideBottom.Control = Label8
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 334
+        Top = 6
+        Width = 601
+        AxisList = <        
+          item
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
+          end        
+          item
+            Alignment = calBottom
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelBrush.Style = bsClear
+          end>
+        Foot.Brush.Color = clBtnFace
+        Foot.Font.Color = clBlue
+        Legend.Visible = True
+        Title.Brush.Color = clBtnFace
+        Title.Font.Color = clBlue
+        Title.Text.Strings = (
+          'TAChart'
+        )
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        object Chart1LineSeries1: TLineSeries
+          Title = 'Next'
+          LinePen.Color = clMaroon
+          LinePen.Width = 2
+          Source = csNEXT_TRANS
+        end
+        object Chart1LineSeries2: TLineSeries
+          Title = 'Old active'
+          LinePen.Color = clGreen
+          LinePen.Width = 2
+          Source = csOLD_ACTIVE
+        end
+        object Chart1LineSeries3: TLineSeries
+          Title = 'Oldest'
+          LinePen.Color = clNavy
+          LinePen.Width = 2
+          Source = csOLD
+        end
+        object Chart1LineSeries4: TLineSeries
+          Title = 'Old snapshot'
+          LinePen.Color = clRed
+          LinePen.Width = 2
+          Source = csOLD_SNAPSHOT
+        end
+      end
+      object Chart2: TChart
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = TabSheet2
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Label8
+        Left = 619
+        Height = 333
+        Top = 6
+        Width = 601
+        AxisList = <        
+          item
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
+          end        
+          item
+            Alignment = calBottom
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelBrush.Style = bsClear
+          end>
+        Foot.Brush.Color = clBtnFace
+        Foot.Font.Color = clBlue
+        Legend.Visible = True
+        Title.Brush.Color = clBtnFace
+        Title.Font.Color = clBlue
+        Title.Text.Strings = (
+          'TAChart'
+        )
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        object Chart1LineSeries5: TLineSeries
+          Title = 'Next'
+          LinePen.Color = clMaroon
+          LinePen.Width = 2
+          Source = csNEXT_TRANS
+        end
+        object Chart1LineSeries6: TLineSeries
+          Title = 'Old active'
+          LinePen.Color = clGreen
+          LinePen.Width = 2
+          Source = csOLD_ACTIVE
+        end
+        object Chart1LineSeries7: TLineSeries
+          Title = 'Oldest'
+          LinePen.Color = clNavy
+          LinePen.Width = 2
+          Source = csOLD
+        end
+        object Chart1LineSeries8: TLineSeries
+          Title = 'Old snapshot'
+          LinePen.Color = clRed
+          LinePen.Width = 2
+          Source = csOLD_SNAPSHOT
+        end
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      ClientHeight = 691
+      ClientWidth = 1226
+      object Panel4: TPanel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = Label9
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Label8
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Label8
+        Left = 6
+        Height = 283
+        Top = 32
+        Width = 524
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        ClientHeight = 283
+        ClientWidth = 524
+        TabOrder = 0
+        object CheckBox1: TCheckBox
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Panel4
+          Left = 1
+          Height = 24
+          Top = 1
+          Width = 106
+          Caption = 'Forced write'
+          TabOrder = 0
+        end
+        object CheckBox2: TCheckBox
+          AnchorSideLeft.Control = CheckBox1
+          AnchorSideTop.Control = CheckBox1
+          AnchorSideTop.Side = asrBottom
+          Left = 1
+          Height = 24
+          Top = 25
+          Width = 89
+          Caption = 'Read only'
+          TabOrder = 1
+        end
+        object GroupBox1: TGroupBox
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = CheckBox2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = SpinEdit1
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 96
+          Top = 49
+          Width = 522
+          Anchors = [akTop, akLeft, akRight]
+          AutoSize = True
+          Caption = 'Buffers'
+          ClientHeight = 75
+          ClientWidth = 520
+          TabOrder = 2
+          object Label6: TLabel
+            AnchorSideLeft.Control = GroupBox1
+            AnchorSideTop.Control = GroupBox1
+            Left = 6
+            Height = 20
+            Top = 6
+            Width = 38
+            BorderSpacing.Around = 6
+            Caption = 'Pages'
+            FocusControl = SpinEdit2
+            ParentColor = False
+          end
+          object Label7: TLabel
+            AnchorSideLeft.Control = SpinEdit2
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = GroupBox1
+            Left = 108
+            Height = 20
+            Top = 6
+            Width = 18
+            BorderSpacing.Around = 6
+            Caption = 'KB'
+            FocusControl = SpinEdit3
+            ParentColor = False
+          end
+          object SpinEdit2: TSpinEdit
+            AnchorSideLeft.Control = Label6
+            AnchorSideTop.Control = Label6
+            AnchorSideTop.Side = asrBottom
+            Left = 12
+            Height = 37
+            Top = 32
+            Width = 90
+            BorderSpacing.Around = 6
+            TabOrder = 0
+          end
+          object SpinEdit3: TSpinEdit
+            AnchorSideLeft.Control = Label7
+            AnchorSideTop.Control = Label6
+            AnchorSideTop.Side = asrBottom
+            Left = 114
+            Height = 37
+            Top = 32
+            Width = 90
+            BorderSpacing.Around = 6
+            MaxValue = 0
+            TabOrder = 1
+          end
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = GroupBox1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Control = Edit1
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 20
+          Top = 162
+          Width = 60
+          Anchors = [akLeft, akBottom]
+          Caption = 'Page size'
+          FocusControl = Panel2
+          ParentColor = False
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Control = Edit2
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 20
+          Top = 199
+          Width = 75
+          Anchors = [akLeft, akBottom]
+          Caption = 'SQL Dialect'
+          FocusControl = ComboBox2
+          ParentColor = False
+        end
+        object Label4: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Control = Edit3
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 20
+          Top = 236
+          Width = 95
+          Anchors = [akLeft, akBottom]
+          Caption = 'Sweep interval'
+          FocusControl = SpinEdit1
+          ParentColor = False
+        end
+        object Label5: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label4
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Control = Edit4
+          AnchorSideBottom.Side = asrBottom
+          Left = 1
+          Height = 20
+          Top = 273
+          Width = 80
+          Anchors = [akLeft, akBottom]
+          Caption = 'ODS version'
+          FocusControl = Panel2
+          ParentColor = False
+        end
+        object Edit1: TEdit
+          AnchorSideLeft.Control = Label4
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = GroupBox1
+          AnchorSideTop.Side = asrBottom
+          Left = 96
+          Height = 37
+          Top = 145
+          Width = 80
+          TabOrder = 3
+          Text = 'Edit1'
+        end
+        object Edit2: TEdit
+          AnchorSideTop.Control = Edit1
+          AnchorSideTop.Side = asrBottom
+          Left = 96
+          Height = 37
+          Top = 182
+          Width = 80
+          TabOrder = 4
+          Text = 'Edit2'
+        end
+        object Edit3: TEdit
+          AnchorSideTop.Control = Edit2
+          AnchorSideTop.Side = asrBottom
+          Left = 96
+          Height = 37
+          Top = 219
+          Width = 80
+          TabOrder = 5
+          Text = 'Edit3'
+        end
+        object Edit4: TEdit
+          AnchorSideTop.Control = Edit3
+          AnchorSideTop.Side = asrBottom
+          Left = 96
+          Height = 37
+          Top = 256
+          Width = 80
+          TabOrder = 6
+          Text = 'Edit4'
+        end
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Server info'
+      ClientHeight = 691
+      ClientWidth = 1226
+      object Memo1: TMemo
+        Left = 0
+        Height = 691
+        Top = 0
+        Width = 1226
+        Align = alClient
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel5: TPanel[2]
+    Left = 0
+    Height = 51
+    Top = 50
+    Width = 1236
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 51
+    ClientWidth = 1236
+    TabOrder = 2
+    object CheckBox3: TCheckBox
+      AnchorSideLeft.Control = SpinEdit4
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = SpinEdit4
+      AnchorSideTop.Side = asrCenter
+      Left = 202
+      Height = 24
+      Top = 13
+      Width = 107
+      BorderSpacing.Left = 6
+      Caption = 'Refresh data'
+      Checked = True
+      OnChange = CheckBox3Change
+      State = cbChecked
+      TabOrder = 0
+    end
+    object Label11: TLabel
+      AnchorSideLeft.Control = Panel5
+      AnchorSideBottom.Control = SpinEdit4
+      AnchorSideBottom.Side = asrBottom
+      Left = 7
+      Height = 20
+      Top = 24
+      Width = 101
+      Anchors = [akLeft, akBottom]
+      BorderSpacing.Left = 6
+      Caption = 'Refresh interval'
+      ParentColor = False
+    end
+    object SpinEdit4: TSpinEdit
+      AnchorSideLeft.Control = Label11
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel5
+      Left = 114
+      Height = 37
+      Top = 7
+      Width = 82
+      BorderSpacing.Around = 6
+      MaxValue = 1000
+      MinValue = 1
+      OnChange = SpinEdit4Change
+      TabOrder = 1
+      Value = 5
+    end
+    object CheckBox4: TCheckBox
+      AnchorSideLeft.Control = CheckBox3
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = SpinEdit4
+      AnchorSideTop.Side = asrCenter
+      Left = 315
+      Height = 24
+      Top = 13
+      Width = 219
+      BorderSpacing.Left = 6
+      Caption = 'Commit transaction on refresh'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+  end
+  inherited MainTimer: TTimer[3]
+    Left = 40
+    Top = 176
+  end
+  object UIBDataBase1: TUIBDataBase[4]
+    Params.Strings = (
+      'sql_dialect=3'
+      'lc_ctype=NONE'
+      'user_name=sysdba'
+      'password=masterkey'
+    )
+    DatabaseName = '127.0.0.1/3050:employee'
+    CharacterSet = csNONE
+    UserName = 'sysdba'
+    PassWord = 'masterkey'
+    StoreInDFM = False
+    AfterConnect = UIBDataBase1AfterConnect
+    AllowStreamedConnected = False
+    DefTransactionRead = UIBTransaction1
+    Left = 496
+    Top = 104
+  end
+  object ImageList1: TImageList[5]
+    Height = 18
+    Width = 18
+    Left = 760
+    Top = 304
+    Bitmap = {
+      4C69010000001200000012000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000148CB6FF0F87B1FF1A80A3FF107699FF095B7AFF0B5D
+      7CFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000578390FF1088B2FF0078A2FF006487FF0058
+      7BFF075978FF004867FF2B4A53FF000000000000000000000000000000000000
+      000000000000000000000000000000000000168CB6FF1389B3FF0C7BA1FF006A
+      90FF00668BFF006186FF006385FF047FA1FF176F8DFF004260FF000000000000
+      00000000000000000000000000000000000000000000000000001288B2FF0F85
+      AFFF00648AFF208FB5FF30A5CAFF39AED3FF4BC6E8FF5ED9FBFF2D85A3FF0045
+      63FF000000000000000000000000000000000000000000000000000000000000
+      00001D8FB7FF0D7FA7FF006084FF2999BDFF56DAFFFF55D9FEFF68D8FCFF6EDE
+      FFFF3E8BA6FF004560FF00000000000000000000000000000000000000000000
+      000000000000000000001B8DB5FF0678A0FF006084FF4DBDE1FF56DAFFFF56DA
+      FFFF6BDBFFFF6DDDFFFF3B88A3FF00435EFF0000000000000000000000000000
+      000000000000000000000000000000000000477F91FF356D7FFF006486FF63C7
+      E9FF65D9FCFF69DDFFFF7ADDFFFF7ADDFFFF588294FF3A6476FF000000000000
+      000000000000000000000000000000000000000000000000000000000000326A
+      7CFF167A9CFF52B6D8FF60D4F7FF66DAFDFF73D6F8FF4BAED0FF537D8FFF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000A96868FFDE9D9DFFA4B6C7FFAABCCDFFE3B7B6FFAE82
+      81FF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000897374FFC88787FF9F5E5EFF8597A8FF95A7
+      B8FFD3A7A6FF7C504FFFAF5D5AFFB86663FF0000000000000000000000000000
+      000000000000000000000000000000000000DC726BFFFFA9A2FFFFABABFFF197
+      97FFD5533BFFFFA48CFFFFA881FFCE542DFFFB4E51FFFD5053FFBB6A6BFF0000
+      00000000000000000000000000000000000000000000BDA5A5FFFB918AFFFFAA
+      A3FFFFA8A8FFFCA2A2FFFF866EFFD4523AFFF57B54FFCB512AFFFF5659FFFC4F
+      52FFB66566FF000000000000000000000000000000000000000000000000C99D
+      9CFFFF9C9CFFFFA4A4FFFF9898FFFF9393FFFF8A86FFF3736FFFEC4A2DFFEE4C
+      2FFFFF5A59FFF95150FFBA7578FF000000000000000000000000000000000000
+      000000000000CB9F9EFFF08C8CFFFA9696FFF88A8AFFF58787FFFF827EFFFB7B
+      77FFFF7558FFFF6548FFFF5756FFFD5554FFCC878AFF00000000000000000000
+      000000000000000000000000000000000000E2A29EFFB57571FFF77D77FFF87E
+      78FFFF7B70FFFF7065FFFF6560FFFB5F5AFFC35E5BFFDA7572FF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000FF918BFFF37973FFFA6A5FFFF26257FFF65A55FFFF6D68FF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000
+    }
+  end
+  object csNEXT_TRANS: TDbChartSource[6]
+    FieldX = 'ID'
+    FieldY = 'NEXT_TRANS'
+    Left = 408
+    Top = 592
+  end
+  object csOLD_ACTIVE: TDbChartSource[7]
+    FieldX = 'ID'
+    FieldY = 'OLD_ACTIVE'
+    Left = 436
+    Top = 592
+  end
+  object csOLD: TDbChartSource[8]
+    FieldX = 'ID'
+    FieldY = 'OLD_ALL'
+    Left = 464
+    Top = 592
+  end
+  object csOLD_SNAPSHOT: TDbChartSource[9]
+    FieldX = 'ID'
+    FieldY = 'OLD_SNAPSHOT'
+    Left = 496
+    Top = 592
+  end
+  object quUsers: TFBDataSet[10]
+    MaxMEMOStringSize = 0
+    AutoUpdateOptions.WhenGetGenID = wgNever
+    AutoUpdateOptions.IncrementBy = 1
+    DefaultFormats.DisplayFormatNumeric = '#,##0.0'
+    DefaultFormats.DisplayFormatInteger = '#,##0'
+    DefaultFormats.EditFormatNumeric = '#0.0'
+    DefaultFormats.EditFormatInteger = '#0'
+    DetailConditions = []
+    DataBase = UIBDataBase1
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    Transaction = UIBTransaction1
+    UpdateTransaction = UIBTransaction1
+    UpdateRecordTypes = [cusUnmodified, cusModified, cusInserted]
+    SQLSelect.Strings = (
+      'SELECT'
+      '  mon$attachments.MON$ATTACHMENT_ID,'
+      '  mon$attachments.MON$STATE,'
+      '  mon$attachments.MON$ATTACHMENT_NAME,'
+      '  mon$attachments.MON$USER,'
+      '  mon$attachments.MON$ROLE,'
+      '  mon$attachments.MON$REMOTE_PROTOCOL,'
+      '  mon$attachments.MON$REMOTE_ADDRESS,'
+      '  mon$attachments.MON$REMOTE_PROCESS,'
+      '  mon$attachments.MON$TIMESTAMP,'
+      '  rdb$character_sets.RDB$CHARACTER_SET_NAME,'
+      '  mon$record_stats.*,'
+      '  mon$io_stats.*'
+      'from'
+      '  mon$attachments'
+      '  inner join rdb$character_sets on (mon$attachments.mon$character_set_id = rdb$character_sets.rdb$character_set_id)'
+      '  left join mon$record_stats on (mon$attachments.mon$stat_id = mon$record_stats.mon$stat_id)'
+      '  left join mon$io_stats on (mon$attachments.mon$stat_id = mon$io_stats.mon$stat_id)'
+      'order by'
+      '  mon$attachments.MON$ATTACHMENT_ID'
+    )
+    Left = 264
+    Top = 688
+  end
+  object dsUsers: TDataSource[11]
+    DataSet = quUsers
+    Left = 224
+    Top = 688
+  end
+  object rxTransInfo: TRxMemoryData[12]
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'NEXT_TRANS'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'OLD_ACTIVE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'OLD_SNAPSHOT'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'OLD_ALL'
+        DataType = ftInteger
+      end>
+    PacketRecords = 0
+    Left = 136
+    Top = 296
+    object rxTransInfoID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxTransInfoNEXT_TRANS: TLongintField
+      FieldKind = fkData
+      FieldName = 'NEXT_TRANS'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxTransInfoOLD_ACTIVE: TLongintField
+      FieldKind = fkData
+      FieldName = 'OLD_ACTIVE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxTransInfoOLD_SNAPSHOT: TLongintField
+      FieldKind = fkData
+      FieldName = 'OLD_SNAPSHOT'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxTransInfoOLD_ALL: TLongintField
+      FieldKind = fkData
+      FieldName = 'OLD_ALL'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object UIBTransaction1: TUIBTransaction[13]
+    DataBase = UIBDataBase1
+    Options = [tpNowait, tpRead, tpReadCommitted, tpRecVersion]
+    Left = 536
+    Top = 104
+  end
+  object UIBServerInfo1: TUIBServerInfo[14]
+    LibraryName = 'libfbclient.so'
+    OnInfoDbName = UIBServerInfo1InfoDbName
+    Left = 496
+    Top = 170
+  end
+end

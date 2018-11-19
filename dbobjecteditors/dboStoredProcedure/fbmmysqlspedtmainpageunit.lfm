@@ -1,0 +1,670 @@
+inherited fbmMySQLSPEdtMainPage: TfbmMySQLSPEdtMainPage
+  Height = 497
+  Width = 830
+  ClientHeight = 497
+  ClientWidth = 830
+  DesignLeft = 488
+  DesignTop = 268
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 213
+    Top = 0
+    Width = 830
+    ActivePage = TabSheet1
+    Align = alTop
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Declaration'
+      ClientHeight = 180
+      ClientWidth = 820
+      object Label1: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideBottom.Control = Edit1
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 18
+        Width = 97
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Function name'
+        ParentColor = False
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideRight.Control = RadioGroup2
+        Left = 109
+        Height = 31
+        Top = 6
+        Width = 445
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 0
+        Text = 'Edit1'
+      end
+      object RadioGroup1: TRadioGroup
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 724
+        Height = 78
+        Top = 6
+        Width = 90
+        Anchors = [akTop, akRight]
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Sql security'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 58
+        ClientWidth = 88
+        Items.Strings = (
+          'Definer'
+          'Invoker'
+        )
+        TabOrder = 1
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideBottom.Control = ComboBox1
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 55
+        Width = 75
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Return type'
+        ParentColor = False
+      end
+      object ComboBox1: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = RadioGroup2
+        Left = 87
+        Height = 31
+        Top = 43
+        Width = 467
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 2
+        Text = 'ComboBox1'
+      end
+      object RadioGroup2: TRadioGroup
+        AnchorSideTop.Control = TabSheet1
+        AnchorSideRight.Control = RadioGroup1
+        AnchorSideBottom.Control = RadioGroup1
+        AnchorSideBottom.Side = asrBottom
+        Left = 560
+        Height = 78
+        Top = 6
+        Width = 158
+        Anchors = [akTop, akRight, akBottom]
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Top = 6
+        BorderSpacing.Right = 6
+        Caption = 'Function type'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 58
+        ClientWidth = 156
+        Items.Strings = (
+          'Not determenistic'
+          'Determenistic'
+        )
+        TabOrder = 3
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideBottom.Control = ComboBox2
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 102
+        Width = 50
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Definer'
+        ParentColor = False
+      end
+      object ComboBox2: TComboBox
+        AnchorSideLeft.Control = Label3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = RadioGroup2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 62
+        Height = 31
+        Top = 90
+        Width = 752
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 4
+        Text = 'ComboBox2'
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideBottom.Control = ComboBox3
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 19
+        Top = 135
+        Width = 101
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'SQL data acess'
+        ParentColor = False
+      end
+      object ComboBox3: TComboBox
+        AnchorSideLeft.Control = Label4
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ComboBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 113
+        Height = 27
+        Top = 127
+        Width = 701
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Items.Strings = (
+          'CONTAINS SQL'
+          'NO SQL'
+          'READS SQL DATA'
+          'MODIFIES SQL DATA'
+        )
+        Style = csDropDownList
+        TabOrder = 5
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Params'
+      ClientHeight = 180
+      ClientWidth = 820
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 180
+        Top = 0
+        Width = 796
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = '##'
+            Width = 33
+            FieldName = 'ID'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Alignment = taCenter
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'I/O'
+            Width = 40
+            FieldName = 'InOut'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Param name'
+            Width = 150
+            FieldName = 'ParName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Type'
+            Width = 120
+            FieldName = 'Type'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'DefValue'
+            Width = 150
+            FieldName = 'DefValue'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            SizePriority = 2
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Desc'
+            Width = 276
+            FieldName = 'Desc'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        Align = alClient
+        AutoFillColumns = True
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsParamList
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+      end
+      object ToolBar1: TToolBar
+        Left = 796
+        Height = 180
+        Top = 0
+        Width = 24
+        Align = alRight
+        AutoSize = True
+        Caption = 'ToolBar1'
+        Images = fbManagerMainForm.ImageListNormal
+        TabOrder = 1
+        object ToolButton1: TToolButton
+          Left = 1
+          Top = 2
+          Action = parAdd
+        end
+        object ToolButton2: TToolButton
+          Left = 1
+          Top = 24
+          Action = parEdit
+        end
+        object ToolButton3: TToolButton
+          Left = 1
+          Top = 46
+          Action = parDel
+        end
+        object ToolButton4: TToolButton
+          Left = 1
+          Top = 68
+          Width = 23
+          Caption = 'ToolButton4'
+          Style = tbsSeparator
+        end
+        object ToolButton5: TToolButton
+          Left = 1
+          Top = 76
+          Action = parMoveUp
+        end
+        object ToolButton6: TToolButton
+          Left = 1
+          Top = 98
+          Action = parMoveDown
+        end
+      end
+    end
+  end
+  object Splitter1: TSplitter[1]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 213
+    Width = 830
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object ActionList1: TActionList[2]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 496
+    Top = 252
+    object parAdd: TAction
+      Tag = 1
+      Category = 'Parametrs'
+      Caption = 'Add param'
+      ImageIndex = 12
+    end
+    object parEdit: TAction
+      Category = 'Parametrs'
+      Caption = 'Edit param'
+      ImageIndex = 62
+    end
+    object parDel: TAction
+      Category = 'Parametrs'
+      Caption = 'Delete param'
+      ImageIndex = 13
+    end
+    object parMoveUp: TAction
+      Category = 'Parametrs'
+      Caption = 'Move up'
+      ImageIndex = 54
+    end
+    object parMoveDown: TAction
+      Category = 'Parametrs'
+      Caption = 'Move down'
+      ImageIndex = 52
+    end
+    object parPrintList: TAction
+      Category = 'Parametrs'
+      Caption = 'Print params'
+      ImageIndex = 14
+    end
+    object lvAdd: TAction
+      Category = 'Local variables'
+      Caption = 'Add local variable'
+      ImageIndex = 12
+    end
+    object lvDelete: TAction
+      Category = 'Local variables'
+      Caption = 'Delete local variable'
+      ImageIndex = 17
+    end
+    object lvUp: TAction
+      Category = 'Local variables'
+      Caption = 'Up'
+      ImageIndex = 54
+    end
+    object lvDown: TAction
+      Category = 'Local variables'
+      Caption = 'Down'
+      ImageIndex = 52
+    end
+    object lvPrintList: TAction
+      Category = 'Local variables'
+      Caption = 'Print local variables list'
+      ImageIndex = 14
+    end
+  end
+  object dsParamList: TDataSource[3]
+    DataSet = rxParamList
+    Left = 368
+    Top = 99
+  end
+  object rxParamList: TRxMemoryData[4]
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'ParName'
+        DataType = ftString
+        Size = 200
+      end    
+      item
+        Name = 'Type'
+        DataType = ftString
+        Precision = -1
+        Size = 220
+      end    
+      item
+        Name = 'InOut'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'Desc'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'OldParType'
+        DataType = ftString
+        Size = 220
+      end    
+      item
+        Name = 'OldParName'
+        DataType = ftString
+        Size = 200
+      end>
+    PacketRecords = 0
+    Left = 403
+    Top = 99
+    object rxParamListID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxParamListInOut: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'InOut'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxParamListDesc: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Desc'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxParamListType: TStringField
+      DisplayWidth = 220
+      FieldKind = fkData
+      FieldName = 'Type'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 220
+    end
+    object rxParamListParName: TStringField
+      DisplayWidth = 200
+      FieldKind = fkData
+      FieldName = 'ParName'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+    object rxParamListOldParType: TStringField
+      DisplayWidth = 220
+      FieldKind = fkData
+      FieldName = 'OldParType'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 220
+    end
+    object rxParamListOldParName: TStringField
+      DisplayWidth = 200
+      FieldKind = fkData
+      FieldName = 'OldParName'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
+    end
+  end
+  object PopupMenu1: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 448
+    Top = 96
+    object MenuItem1: TMenuItem
+      Action = parAdd
+    end
+    object MenuItem6: TMenuItem
+      Action = parEdit
+    end
+    object MenuItem5: TMenuItem
+      Action = parDel
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = parMoveDown
+    end
+    object MenuItem2: TMenuItem
+      Action = parMoveUp
+    end
+    object MenuItem7: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem8: TMenuItem
+      Action = parPrintList
+    end
+  end
+end

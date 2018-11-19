@@ -1,0 +1,88 @@
+object fbmCreateConnectionForm: TfbmCreateConnectionForm
+  Left = 416
+  Height = 411
+  Top = 256
+  Width = 438
+  ActiveControl = ListBox1
+  Caption = 'Select connection type'
+  ClientHeight = 411
+  ClientWidth = 438
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.7'
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 148
+    BorderSpacing.Around = 6
+    Caption = 'Select connection type'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ListBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 190
+    Width = 84
+    BorderSpacing.Around = 6
+    Caption = 'Description...'
+    ParentColor = False
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 359
+    Width = 426
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object ListBox1: TListBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 152
+    Top = 32
+    Width = 420
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    ScrollWidth = 418
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object Memo1: TMemo
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 12
+    Height = 137
+    Top = 216
+    Width = 420
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    Lines.Strings = (
+      'Memo1'
+    )
+    TabOrder = 2
+  end
+end

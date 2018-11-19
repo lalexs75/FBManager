@@ -1,0 +1,327 @@
+inherited fdmUserEditor_MySQLForm: TfdmUserEditor_MySQLForm
+  Height = 625
+  Width = 680
+  ClientHeight = 625
+  ClientWidth = 680
+  DesignLeft = 589
+  DesignTop = 196
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 20
+    Top = 6
+    Width = 69
+    BorderSpacing.Around = 6
+    Caption = 'User name'
+    ParentColor = False
+  end
+  object edtUserName: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = _Label
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 37
+    Top = 32
+    Width = 323
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object edtHostName: TEdit[2]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 352
+    Height = 37
+    Top = 32
+    Width = 322
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
+  object _Label: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 340
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object Label2: TLabel[4]
+    AnchorSideLeft.Control = _Label
+    AnchorSideTop.Control = Owner
+    Left = 346
+    Height = 20
+    Top = 6
+    Width = 70
+    BorderSpacing.Around = 6
+    Caption = 'Host name'
+    ParentColor = False
+  end
+  object Label3: TLabel[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 75
+    Width = 61
+    BorderSpacing.Around = 6
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object Label4: TLabel[6]
+    AnchorSideLeft.Control = _Label
+    AnchorSideTop.Control = edtUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 346
+    Height = 20
+    Top = 75
+    Width = 115
+    BorderSpacing.Around = 6
+    Caption = 'Confirm password'
+    ParentColor = False
+  end
+  object edtPassword: TEdit[7]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = _Label
+    Left = 12
+    Height = 37
+    Top = 101
+    Width = 322
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object edtPasswordConfirm: TEdit[8]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 352
+    Height = 37
+    Top = 101
+    Width = 322
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object CheckGroup1: TCheckGroup[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 374
+    Top = 174
+    Width = 668
+    Anchors = [akTop, akLeft, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 372
+    ClientWidth = 666
+    Columns = 2
+    Items.Strings = (
+      'msuoSelectPriv'
+      'msuoInsertPriv'
+      'msuoUpdatePriv'
+      'msuoDeletePriv'
+      'msuoCreatePriv'
+      'msuoDropPriv'
+      'msuoReloadPriv'
+      'msuoShutdownPriv'
+      'msuoProcessPriv'
+      'msuoFilePriv'
+      'msuoGrantPriv'
+      'msuoReferencesPriv'
+      'msuoIndexPriv'
+      'msuoAlterPriv'
+      'msuoShowDBPriv'
+      'msuoSuperPriv'
+      'msuoCreateTmpTablePriv'
+      'msuoLockTablesPriv'
+      'msuoExecutePriv'
+      'msuoReplSlavePriv'
+      'msuoReplClientPriv'
+      'msuoCreateViewPriv'
+      'msuoShowViewPriv'
+      'msuoCreateRoutinePriv'
+      'msuoAlterRroutinePriv'
+      'msuoCreateUserPriv'
+      'msuoEventPriv'
+      'msuoTriggerPriv'
+      'msuoCreateTablespacePriv'
+    )
+    TabOrder = 4
+    Data = {
+      1D00000002020202020202020202020202020202020202020202020202020202
+      02
+    }
+  end
+  object Label5: TLabel[10]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = edtMaxQueriesPerHour
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 571
+    Width = 129
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'MaxQueriesPerHour'
+    ParentColor = False
+  end
+  object edtMaxQueriesPerHour: TEdit[11]
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = _Label
+    Left = 141
+    Height = 37
+    Top = 554
+    Width = 193
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 5
+    Text = 'edtMaxQueriesPerHour'
+  end
+  object Label6: TLabel[12]
+    AnchorSideLeft.Control = _Label
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = edtMaxConnectionsPerHour
+    AnchorSideBottom.Side = asrBottom
+    Left = 341
+    Height = 20
+    Top = 571
+    Width = 158
+    Anchors = [akLeft, akBottom]
+    Caption = 'MaxConnectionsPerHour'
+    ParentColor = False
+  end
+  object edtMaxConnectionsPerHour: TEdit[13]
+    AnchorSideLeft.Control = Label6
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 505
+    Height = 37
+    Top = 554
+    Width = 169
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 6
+    Text = 'edtMaxConnectionsPerHour'
+  end
+  object Label7: TLabel[14]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = edtMaxUpdatePerHour
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 614
+    Width = 125
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'MaxUpdatePerHour'
+    ParentColor = False
+  end
+  object edtMaxUpdatePerHour: TEdit[15]
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtMaxQueriesPerHour
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = _Label
+    Left = 137
+    Height = 37
+    Top = 597
+    Width = 197
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 7
+    Text = 'edtMaxUpdatePerHour'
+  end
+  object Label8: TLabel[16]
+    AnchorSideLeft.Control = _Label
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = edtMaxUserConnections
+    AnchorSideBottom.Side = asrBottom
+    Left = 346
+    Height = 20
+    Top = 614
+    Width = 135
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'MaxUserConnections'
+    ParentColor = False
+  end
+  object edtMaxUserConnections: TEdit[17]
+    AnchorSideLeft.Control = Label8
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtMaxConnectionsPerHour
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 487
+    Height = 37
+    Top = 597
+    Width = 187
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 8
+    Text = 'edtMaxUserConnections'
+  end
+  object CheckBox1: TCheckBox[18]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtPassword
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 144
+    Width = 80
+    BorderSpacing.Around = 6
+    Caption = 'Grant all'
+    OnChange = CheckBox1Change
+    TabOrder = 9
+  end
+  object CheckBox2: TCheckBox[19]
+    AnchorSideLeft.Control = _Label
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtPassword
+    AnchorSideTop.Side = asrBottom
+    Left = 347
+    Height = 24
+    Top = 144
+    Width = 144
+    BorderSpacing.Around = 6
+    Caption = 'With grant options'
+    TabOrder = 10
+  end
+end

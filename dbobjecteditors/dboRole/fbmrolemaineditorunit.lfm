@@ -1,0 +1,33 @@
+inherited fbmRoleMainEditorFrame: TfbmRoleMainEditorFrame
+  Height = 478
+  Width = 636
+  ClientHeight = 478
+  ClientWidth = 636
+  DesignLeft = 303
+  DesignTop = 173
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 21
+    Top = 6
+    Width = 68
+    BorderSpacing.Around = 6
+    Caption = 'Role name'
+    ParentColor = False
+  end
+  object edtRoleName: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 33
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+end

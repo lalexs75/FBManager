@@ -1,0 +1,527 @@
+object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
+  Left = 389
+  Height = 595
+  Top = 212
+  Width = 724
+  ActiveControl = ToolPanel1
+  Caption = 'Free TDS Config editor'
+  ClientHeight = 572
+  ClientWidth = 724
+  Icon.Data = {
+    7E04000000000100010010100000010020006804000016000000280000001000
+    0000200000000100200000000000000400006400000064000000000000000000
+    0000000000000000000000000000676767FF6B6B6BFF6C6C6CFF6B6B6BFF0000
+    000000000000676767FF6B6B6BFF6B6B6BFF666666FF00000000000000000000
+    00000000000000000000000000006C6C6CFFB3B3B3FFAFAFAFFF6C6C6CFF0000
+    0000000000006C6C6CFF9B9B9BFF979797FF6A6A6AFF00000000000000000000
+    00000000000000000000000000006B6B6BFFB8B8B8FFB3B3B3FF6C6C6CFF0000
+    0000000000006C6C6CFF9F9F9FFF9B9B9BFF6B6B6BFF00000000000000000000
+    00000000000000000000000000006C6C6CFFBBBBBBFFB8B8B8FF959595FF6C6C
+    6CFF6C6C6CFF8A8A8AFFA3A3A3FFA0A0A0FF6B6B6BFF00000000000000000000
+    00000000000000000000000000006C6C6CFFBFBFBFFFBBBBBBFFB8B8B8FFB3B3
+    B3FFAFAFAFFFACACACFFA8A8A8FFA3A3A3FF6C6C6CFF00000000000000000000
+    000000000000696969FF6C6C6CFF717171FFC4C4C4FFBFBFBFFFBBBBBBFFB8B8
+    B8FFB3B3B3FFAFAFAFFFACACACFFA8A8A8FF6D6D6DFF5F5F5FFF6A6A6AFF4141
+    41FF676767FFB7B7B7FFD0D0D0FFCACACAFFC8C8C8FFC4C4C4FFBFBFBFFFBBBB
+    BBFFB8B8B8FFB3B3B3FFAFAFAFFFACACACFFA2A2A2FF979797FF989898FF6A6A
+    6AFF666666FFBABABAFFCDCDCDFFCFCFCFFFCBCBCBFFC8C8C8FFC4C4C4FFBFBF
+    BFFFBBBBBBFFB8B8B8FFB3B3B3FFAFAFAFFFAAAAAAFFA6A6A6FFA0A0A0FF6B6B
+    6BFF404040FF6A6A6AFF6B6B6BFF727272FFD0D0D0FFCBCBCBFFC8C8C8FFC4C4
+    C4FFBFBFBFFFBCBCBCFFB8B8B8FFB2B2B2FF6D6D6DFF6B6B6BFF6B6B6BFF4848
+    48FF0000000000000000000000006C6C6CFFD1D1D1FFD0D0D0FFCBCBCBFFC8C8
+    C8FFC4C4C4FFBFBFBFFFBCBCBCFFB7B7B7FF6B6B6BFF00000000000000000000
+    00000000000000000000000000006C6C6CFFD1D1D1FFD0D0D0FFCECECEFFCBCB
+    CBFFC8C8C8FFC4C4C4FFBFBFBFFFBCBCBCFF6B6B6BFF00000000000000000000
+    0000000000000000000000000000676767FF6B6B6BFF6B6B6BFF6E6E6EFFC9C9
+    C9FFCBCBCBFF737373FF6C6C6CFF6C6C6CFF656565FF00000000000000000000
+    00000000000000000000000000000000000000000000000000006B6B6BFFC9C9
+    C9FFD0D0D0FF828282FF00000000000000000000000000000000000000000000
+    00000000000000000000000000000000000000000000000000006C6C6CFFCECE
+    CEFFD1D1D1FFB7B7B7FF626262FF000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000696969FFB3B3
+    B3FFC1C1C1FF939393FF595959FF000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000006363
+    63FF686868FF4C4C4CFF00000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000
+  }
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.1'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 541
+    Top = 31
+    Width = 724
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 1
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Global'
+      ClientHeight = 508
+      ClientWidth = 718
+      object Label1: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 18
+        Top = 6
+        Width = 145
+        BorderSpacing.Around = 6
+        Caption = 'TDS protocol version'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = ComboBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 65
+        Width = 68
+        BorderSpacing.Around = 6
+        Caption = 'Dump file'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = FileNameEdit1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 124
+        Width = 86
+        BorderSpacing.Around = 6
+        Caption = 'Debug flags'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = Edit4
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 183
+        Width = 129
+        BorderSpacing.Around = 6
+        Caption = 'Command timeout'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = Edit2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 242
+        Width = 117
+        BorderSpacing.Around = 6
+        Caption = 'Connect timeout'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = Edit3
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 301
+        Width = 61
+        BorderSpacing.Around = 6
+        Caption = 'Text size'
+        ParentColor = False
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Hint = 'If you get out-of-memory errors, it may mean that your client'#10'is trying to allocate a huge buffer for a TEXT field.  '#10'Try setting ''text size'' to a more reasonable limit '
+        Top = 325
+        Width = 208
+        BorderSpacing.Around = 6
+        TabOrder = 0
+        Text = 'Edit1'
+      end
+      object FileNameEdit1: TFileNameEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 89
+        Width = 406
+        DialogOptions = []
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        BorderSpacing.Left = 6
+        BorderSpacing.Top = 6
+        MaxLength = 0
+        TabOrder = 1
+      end
+      object ComboBox1: TComboBox
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 30
+        Width = 408
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 2
+        Text = 'ComboBox1'
+      end
+      object Edit2: TEdit
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 207
+        Width = 208
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'Edit2'
+      end
+      object Edit3: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 266
+        Width = 208
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'Edit3'
+      end
+      object Edit4: TEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 29
+        Top = 148
+        Width = 208
+        BorderSpacing.Around = 6
+        TabOrder = 5
+        Text = 'Edit4'
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Aliases'
+      ClientHeight = 508
+      ClientWidth = 718
+      object ListBox1: TListBox
+        Left = 0
+        Height = 477
+        Top = 31
+        Width = 211
+        Align = alLeft
+        ItemHeight = 0
+        OnClick = ListBox1Click
+        ScrollWidth = 209
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object ToolPanel2: TToolPanel
+        Left = 0
+        Height = 31
+        Top = 0
+        Width = 718
+        Items = <        
+          item
+            Action = alAdd
+            Visible = True
+            Left = 5
+            Height = 21
+            Top = 5
+            Width = 63
+            ShowCaption = True
+          end        
+          item
+            Visible = True
+            Left = 68
+            Height = 21
+            Top = 5
+            Width = 7
+            ShowCaption = False
+            ButtonStyle = tbrSeparator
+          end        
+          item
+            Action = alDel
+            Visible = True
+            Left = 75
+            Height = 21
+            Top = 5
+            Width = 70
+            ShowCaption = True
+          end>
+        ImageList = fbManagerMainForm.ImageListNormal
+        ImageListSelected = fbManagerMainForm.ImageListSelected
+        ToolBarStyle = tbsWindowsXP
+        Options = [tpFlatBtns]
+        Align = alTop
+        BorderWidth = 4
+        ClientHeight = 31
+        ClientWidth = 718
+        TabOrder = 1
+      end
+      object Splitter1: TSplitter
+        Left = 211
+        Height = 477
+        Top = 31
+        Width = 5
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = Splitter1
+        AnchorSideTop.Control = ToolPanel2
+        AnchorSideTop.Side = asrBottom
+        Left = 217
+        Height = 15
+        Top = 37
+        Width = 27
+        BorderSpacing.Around = 6
+        Caption = 'Host'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = Splitter1
+        AnchorSideTop.Control = Edit5
+        AnchorSideTop.Side = asrBottom
+        Left = 217
+        Height = 15
+        Top = 89
+        Width = 23
+        BorderSpacing.Around = 6
+        Caption = 'Port'
+        ParentColor = False
+      end
+      object Label9: TLabel
+        AnchorSideLeft.Control = Splitter1
+        AnchorSideTop.Control = Edit6
+        AnchorSideTop.Side = asrBottom
+        Left = 217
+        Height = 15
+        Top = 141
+        Width = 73
+        BorderSpacing.Around = 6
+        Caption = 'TDS Version'
+        ParentColor = False
+      end
+      object Label10: TLabel
+        AnchorSideLeft.Control = Splitter1
+        AnchorSideTop.Control = ComboBox3
+        AnchorSideTop.Side = asrBottom
+        Left = 217
+        Height = 15
+        Top = 195
+        Width = 83
+        BorderSpacing.Around = 6
+        Caption = 'Client charset'
+        ParentColor = False
+      end
+      object Edit5: TEdit
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 223
+        Height = 25
+        Top = 58
+        Width = 489
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'Edit5'
+      end
+      object Edit6: TEdit
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 223
+        Height = 25
+        Top = 110
+        Width = 489
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'Edit6'
+      end
+      object ComboBox2: TComboBox
+        AnchorSideLeft.Control = Label9
+        AnchorSideTop.Control = Label10
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 223
+        Height = 27
+        Top = 216
+        Width = 489
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 5
+        Text = 'ComboBox2'
+      end
+      object ComboBox3: TComboBox
+        AnchorSideLeft.Control = Label9
+        AnchorSideTop.Control = Label9
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 223
+        Height = 27
+        Top = 162
+        Width = 489
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        TabOrder = 6
+        Text = 'ComboBox3'
+      end
+    end
+  end
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 724
+    Items = <    
+      item
+        Action = flOpen
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 63
+        ShowCaption = True
+      end    
+      item
+        Action = flSave
+        Visible = True
+        Left = 68
+        Height = 21
+        Top = 5
+        Width = 69
+        ShowCaption = True
+      end    
+      item
+        Visible = True
+        Left = 137
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = flSaveAs
+        Visible = True
+        Left = 144
+        Height = 21
+        Top = 5
+        Width = 26
+        ShowCaption = False
+      end>
+    ImageList = fbManagerMainForm.ImageListNormal
+    ImageListSelected = fbManagerMainForm.ImageListSelected
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 724
+    TabOrder = 1
+  end
+  object MainMenu1: TMainMenu
+    Images = fbManagerMainForm.ImageListNormal
+    left = 248
+    top = 32
+    object MenuItem1: TMenuItem
+      Caption = 'Window'
+      object MenuItem2: TMenuItem
+        Action = wndClose
+        OnClick = wndCloseExecute
+      end
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'File'
+      object MenuItem5: TMenuItem
+        Action = flOpen
+        OnClick = flOpenExecute
+      end
+      object MenuItem6: TMenuItem
+        Action = flSave
+        OnClick = flSaveExecute
+      end
+      object MenuItem7: TMenuItem
+        Action = flSaveAs
+        OnClick = flSaveAsExecute
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListNormal
+    left = 304
+    top = 32
+    object wndClose: TAction
+      Category = 'Window'
+      Caption = 'Close'
+      OnExecute = wndCloseExecute
+    end
+    object flSave: TAction
+      Category = 'File'
+      Caption = 'Save...'
+      Hint = 'Save current config'
+      ImageIndex = 28
+      OnExecute = flSaveExecute
+    end
+    object flOpen: TAction
+      Category = 'File'
+      Caption = 'Open'
+      ImageIndex = 26
+      OnExecute = flOpenExecute
+    end
+    object flSaveAs: TAction
+      Category = 'File'
+      Caption = 'Save as...'
+      ImageIndex = 58
+      OnExecute = flSaveAsExecute
+    end
+    object alAdd: TAction
+      Category = 'Alias'
+      Caption = 'Add...'
+      Hint = 'Add new alias'
+      ImageIndex = 16
+      OnExecute = alAddExecute
+    end
+    object alDel: TAction
+      Category = 'Alias'
+      Caption = 'Delete'
+      Hint = 'Delete current alias'
+      ImageIndex = 17
+      OnExecute = alDelExecute
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.cfg'
+    left = 305
+    top = 97
+  end
+  object SaveDialog1: TSaveDialog
+    left = 368
+    top = 97
+  end
+end

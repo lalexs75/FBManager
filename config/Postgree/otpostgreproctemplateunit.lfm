@@ -1,0 +1,23 @@
+inherited otPostgreProcTemplatePage: TotPostgreProcTemplatePage
+  Height = 500
+  Width = 594
+  ClientHeight = 500
+  ClientWidth = 594
+  DesignLeft = 486
+  DesignTop = 263
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 50
+    Top = 0
+    Width = 594
+    Align = alTop
+    TabOrder = 0
+  end
+  object SynSQLSyn1: TSynSQLSyn[1]
+    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
+    Enabled = False
+    SQLDialect = sqlPostgres
+    Left = 249
+    Top = 159
+  end
+end

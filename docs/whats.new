@@ -1,0 +1,52 @@
+21.07.2009 - version 0.7.1
+  + In rgistration params new options - fetch all data for tables
+  + In SQL editor optinos add options for char case
+  + new page for DB objects - DDL
+  + In table editor add editor for PK
+  + In enviroment options - options for thousand separator
+  + afte inset sql text from dialog box "inser SQL" char case for new text used system params
+  + CodeCompletion - find code on type text
+  + CodeCompletion - new paint 
+  + Show / hide tabs in SQL editor
+  + FireBird engine - Add DDL page for domains
+  + FireBird engine - Add DDL page for triggers
+  - FireBird engine - On FB2.0 open code with correct codepage
+  + FireBird engine - On FB2.0 open description with correct codepage
+  + CodeCompletion - fill list whit keywords and standart functions
+  + More work on SQL parser
+  - FireBird engine - for execute block statament  fix error in get plan
+  + ALl window open on screen center
+09.07.2009 - version 0.7
+  + new event handler
+  + In data page for table/views allow local sorting data in grid
+  + rewrite code fo save history of SQL window
+  + allow save desktop state (list of open window) before close application and disconet from database
+  + new code fosend error messages to Shamangrad bugtreker
+  + new code for display news of progect
+  + FireBird engine - in role editor grant for DB objects
+  + new status bar in SQL editor
+  + FireBird engine - allow drop tables
+  + FireBird engine - в инструментах работает отображение роли на оператора в окне управления пользователями
+  + Добавлен в настройках крыж на сохранение рабочего стола
+  + FireBird engine - editor for trigger
+  + FireBird engine - editor for Stored procedure
+  + fix in SQL parser
+  + FireBird engine - page dependensis of object
+
+03.04.2006
+ + Create backup and restore tools (detail restore and backup options not work - in progres... )
+ + In Database registartion add data for backup and restore 
+ + In SQL editor work set bookmark/goto bookmark
+ + work Connect/Disconect/Refresh buttons
+ + in SQL editor work parametr in query
+ + create shadow manager
+ + add default user name and password for register new DB
+19.02.2006
+ + Realization params query is started
+17.02.2006
+ + Rewrite user manager
+ + Print user list and role list from user manager
+14.02.2006
+ + Add form for database statistc (read only)
+ + redesign SQL editor
+ + SQL assistent show information for all database objects group

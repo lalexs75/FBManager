@@ -1,0 +1,162 @@
+object fbmReportManagerForm: TfbmReportManagerForm
+  Left = 496
+  Height = 456
+  Top = 273
+  Width = 786
+  Caption = 'Report manager'
+  ClientHeight = 456
+  ClientWidth = 786
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object Splitter1: TSplitter
+    Left = 211
+    Height = 425
+    Top = 31
+    Width = 5
+  end
+  object TreeView1: TTreeView
+    Left = 0
+    Height = 425
+    Top = 31
+    Width = 211
+    Align = alLeft
+    Images = fbManagerMainForm.ImageListNormal
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    OnDblClick = TreeView1DblClick
+    OnDeletion = TreeView1Deletion
+    OnSelectionChanged = TreeView1SelectionChanged
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+  end
+  object frPreview1: TfrPreview
+    Left = 216
+    Height = 425
+    Top = 31
+    Width = 570
+    Align = alClient
+    BevelOuter = bvLowered
+    Caption = 'frPreview1'
+    ClientHeight = 425
+    ClientWidth = 570
+    TabOrder = 2
+    ScrollBars = ssBoth
+    object Label1: TLabel
+      Left = 178
+      Height = 19
+      Top = 118
+      Width = 43
+      Caption = 'Label1'
+      ParentColor = False
+    end
+  end
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 786
+    Items = <    
+      item
+        Action = actRun
+        Visible = True
+        Left = 5
+        Height = 21
+        Top = 5
+        Width = 53
+        ShowCaption = True
+      end    
+      item
+        Action = actDesign
+        Visible = True
+        Left = 58
+        Height = 21
+        Top = 5
+        Width = 74
+        ShowCaption = True
+      end    
+      item
+        Visible = True
+        Left = 132
+        Height = 21
+        Top = 5
+        Width = 7
+        ShowCaption = False
+        ButtonStyle = tbrSeparator
+      end    
+      item
+        Action = actRefresh
+        Visible = True
+        Left = 139
+        Height = 21
+        Top = 5
+        Width = 79
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 31
+    ClientWidth = 786
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 374
+    Top = 133
+    object actRun: TAction
+      Caption = 'Run'
+      Hint = 'Show report'
+      ImageIndex = 16
+      OnExecute = actRunExecute
+    end
+    object actDesign: TAction
+      Caption = 'Design'
+      Hint = 'Design report'
+      ImageIndex = 27
+      OnExecute = actDesignExecute
+    end
+    object actSelectRoot: TAction
+      Caption = 'Select root folder'
+      OnExecute = actSelectRootExecute
+    end
+    object actRefresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 40
+    Top = 179
+    object MenuItem1: TMenuItem
+      Action = actRun
+    end
+    object MenuItem2: TMenuItem
+      Action = actDesign
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = actSelectRoot
+    end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Left = 368
+    Top = 64
+  end
+  object frReport1: TfrReport
+    InitialZoom = pzDefault
+    Options = []
+    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
+    DataType = dtDataSet
+    Left = 288
+    Top = 133
+  end
+end

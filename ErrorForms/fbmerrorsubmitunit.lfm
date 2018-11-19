@@ -1,0 +1,329 @@
+object fbmErrorSubmitForm: TfbmErrorSubmitForm
+  Left = 351
+  Height = 466
+  Top = 125
+  Width = 610
+  ActiveControl = PageControl1
+  Caption = 'Submit error to bugtracker'
+  ClientHeight = 466
+  ClientWidth = 610
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '0.9.31'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 412
+    Top = 0
+    Width = 610
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    OnPageChanged = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'Submit message'
+      ClientHeight = 377
+      ClientWidth = 604
+      object Label5: TLabel
+        AnchorSideLeft.Control = edtUserName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = RadioButton2
+        AnchorSideTop.Side = asrBottom
+        Left = 224
+        Height = 18
+        Top = 62
+        Width = 63
+        BorderSpacing.Around = 6
+        Caption = 'Password'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtSabject
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 237
+        Width = 95
+        BorderSpacing.Around = 6
+        Caption = 'Describe error'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = cbSection
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 180
+        Width = 189
+        BorderSpacing.Around = 6
+        Caption = 'Enter short caption for error'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = edtPasswd
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 119
+        Width = 159
+        BorderSpacing.Around = 6
+        Caption = 'Select message section'
+        ParentColor = False
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = RadioButton2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 62
+        Width = 71
+        BorderSpacing.Around = 6
+        Caption = 'User name'
+        ParentColor = False
+      end
+      object Memo1: TMemo
+        AnchorSideLeft.Control = Label4
+        AnchorSideTop.Control = Label4
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = TabSheet1
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 110
+        Top = 261
+        Width = 586
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 6
+        Lines.Strings = (
+          'Memo1'
+        )
+        TabOrder = 0
+      end
+      object edtSabject: TEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 27
+        Top = 204
+        Width = 586
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        TabOrder = 1
+      end
+      object cbSection: TComboBox
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 12
+        Height = 31
+        Top = 143
+        Width = 586
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        ItemHeight = 0
+        Style = csDropDownList
+        TabOrder = 2
+      end
+      object edtPasswd: TEdit
+        AnchorSideLeft.Control = Label5
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 230
+        Height = 27
+        Top = 86
+        Width = 368
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        EchoMode = emPassword
+        PasswordChar = '*'
+        TabOrder = 3
+      end
+      object edtUserName: TEdit
+        AnchorSideLeft.Control = Label1
+        AnchorSideTop.Control = Label5
+        AnchorSideTop.Side = asrBottom
+        Left = 12
+        Height = 27
+        Top = 86
+        Width = 206
+        BorderSpacing.Around = 6
+        TabOrder = 4
+      end
+      object RadioButton2: TRadioButton
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = RadioButton1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 22
+        Top = 34
+        Width = 318
+        BorderSpacing.Around = 6
+        Caption = 'You have account on http://shamangrad.net'
+        OnChange = RadioButton1Change
+        TabOrder = 5
+      end
+      object RadioButton1: TRadioButton
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 22
+        Top = 6
+        Width = 205
+        BorderSpacing.Around = 6
+        Caption = 'Use internal autentification'
+        Checked = True
+        OnChange = RadioButton1Change
+        TabOrder = 6
+        TabStop = True
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Result message'
+      ClientHeight = 377
+      ClientWidth = 604
+      object Label6: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        Left = 6
+        Height = 18
+        Top = 0
+        Width = 37
+        BorderSpacing.Left = 6
+        Caption = 'From:'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = StaticText1
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 39
+        Width = 53
+        BorderSpacing.Left = 6
+        Caption = 'Subject:'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = StaticText2
+        AnchorSideTop.Side = asrBottom
+        Left = 6
+        Height = 18
+        Top = 78
+        Width = 96
+        BorderSpacing.Left = 6
+        Caption = 'Message body:'
+        ParentColor = False
+      end
+      object StaticText1: TStaticText
+        AnchorSideLeft.Control = Label6
+        AnchorSideTop.Control = Label6
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 11
+        Height = 21
+        Top = 18
+        Width = 595
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        BorderSpacing.Left = 5
+        BorderStyle = sbsSingle
+        Caption = 'StaticText11'
+        Color = clWhite
+        Font.Style = [fsBold]
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 0
+      end
+      object StaticText2: TStaticText
+        AnchorSideLeft.Control = Label7
+        AnchorSideTop.Control = Label7
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        Left = 11
+        Height = 21
+        Top = 57
+        Width = 595
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        BorderSpacing.Left = 5
+        BorderStyle = sbsSingle
+        Caption = 'StaticText11'
+        Color = clWhite
+        Font.Style = [fsBold]
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+      end
+      object StaticText3: TStaticText
+        AnchorSideLeft.Control = Label8
+        AnchorSideTop.Control = Label8
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = TabSheet2
+        AnchorSideBottom.Side = asrBottom
+        Left = 11
+        Height = 287
+        Top = 96
+        Width = 595
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        AutoSize = True
+        BorderSpacing.Left = 5
+        BorderStyle = sbsSingle
+        Caption = '1'
+        Color = clWhite
+        ParentColor = False
+        TabOrder = 2
+      end
+    end
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 418
+    Width = 598
+    OKButton.Name = 'OKButton'
+    OKButton.Caption = '&ОК'
+    HelpButton.Name = 'HelpButton'
+    HelpButton.Caption = '&Справка'
+    CloseButton.Name = 'CloseButton'
+    CloseButton.Caption = '&Закрыть'
+    CloseButton.Enabled = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.Caption = 'Отмена'
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object Gate1: TWSCurlGate
+    GateURL = 'https://shamangrad.net/rpc.php'
+    AuthType = atBasic
+    left = 384
+    top = 24
+  end
+  object BugTracker1: TBugTracker
+    Gate = Gate1
+    left = 448
+    top = 24
+  end
+  object RxVersionInfo1: TRxVersionInfo
+    left = 347
+    top = 200
+  end
+end

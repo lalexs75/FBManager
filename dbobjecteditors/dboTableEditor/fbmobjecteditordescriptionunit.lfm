@@ -1,0 +1,6 @@
+inherited fbmObjectEditorDescriptionFrame: TfbmObjectEditorDescriptionFrame
+  Height = 568
+  Width = 531
+  DesignLeft = 303
+  DesignTop = 173
+end

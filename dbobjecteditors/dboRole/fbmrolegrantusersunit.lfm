@@ -1,0 +1,312 @@
+inherited fbmRoleGrantUsersFrame: TfbmRoleGrantUsersFrame
+  Height = 355
+  Width = 736
+  ClientHeight = 355
+  ClientWidth = 736
+  DesignLeft = 338
+  DesignTop = 315
+  object RxDBGrid2: TRxDBGrid[0]
+    Left = 0
+    Height = 355
+    Top = 0
+    Width = 736
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = False
+    Columns = <    
+      item
+        ButtonStyle = cbsNone
+        Color = clLime
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'User name'
+        Width = 150
+        FieldName = 'USER_NAME'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Grant'
+        Width = 66
+        FieldName = 'GRANT'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'with Grant Options'
+        Width = 130
+        FieldName = 'G_A'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Grantor'
+        Width = 350
+        FieldName = 'GRANT_USER_NAME'
+        EditButtons = <>
+        Filter.Font.Style = [fsItalic]
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Нет)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clYellow
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = []
+    FooterColor = clYellow
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsUsersTable
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TitleStyle = tsNative
+  end
+  object dsUsersTable: TDataSource[1]
+    DataSet = rxUsersTable
+    Left = 124
+    Top = 164
+  end
+  object rxUsersTable: TRxMemoryData[2]
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'USER_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 60
+      end    
+      item
+        Name = 'GRANT'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'G_A'
+        DataType = ftBoolean
+        Precision = -1
+      end    
+      item
+        Name = 'OLD_G'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'OLD_G_A'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'GRANT_USER_NAME'
+        DataType = ftString
+        Size = 90
+      end>
+    AfterInsert = rxUsersTableAfterInsert
+    AfterPost = rxUsersTableAfterPost
+    PacketRecords = 0
+    Left = 160
+    Top = 164
+    object rxUsersTableUSER_NAME: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'USER_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxUsersTableGRANT: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'GRANT'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUsersTableG_A: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'G_A'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUsersTableOLD_G: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'OLD_G'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUsersTableOLD_G_A: TBooleanField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'OLD_G_A'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUsersTableGRANT_USER_NAME: TStringField
+      DisplayWidth = 90
+      FieldKind = fkData
+      FieldName = 'GRANT_USER_NAME'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 90
+    end
+  end
+  object PopupMenu1: TPopupMenu[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 205
+    Top = 164
+    object MenuItem1: TMenuItem
+      Action = edtCompile
+    end
+    object MenuItem2: TMenuItem
+      Action = edtPrint
+      OnClick = edtPrintExecute
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = edtRefresh
+      OnClick = edtRefreshExecute
+    end
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 256
+    Top = 164
+    object edtCompile: TAction
+      Caption = 'Compile'
+      ImageIndex = 61
+    end
+    object edtRefresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = edtRefreshExecute
+    end
+    object edtPrint: TAction
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = edtPrintExecute
+    end
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[5]
+    RxDBGrid = RxDBGrid2
+    Caption = 'Print grid'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    Left = 360
+    Top = 164
+  end
+end

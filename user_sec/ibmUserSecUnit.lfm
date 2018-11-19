@@ -1,0 +1,1151 @@
+object ibmUserSecForm: TibmUserSecForm
+  Left = 562
+  Height = 564
+  Top = 211
+  Width = 638
+  ActiveControl = Button1
+  Caption = 'IB & FB user manager'
+  ClientHeight = 564
+  ClientWidth = 638
+  OnClose = ibmUserSecFormClose
+  OnCreate = ibmUserSecFormCreate
+  ShowHint = True
+  LCLVersion = '2.1.0.0'
+  object PageControl1: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 426
+    Top = 138
+    Width = 638
+    ActivePage = TabMembers
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Top = 6
+    TabIndex = 2
+    TabOrder = 0
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'User list'
+      ClientHeight = 393
+      ClientWidth = 628
+      object ToolPanel2: TToolPanel
+        Left = 0
+        Height = 31
+        Top = 0
+        Width = 628
+        Items = <        
+          item
+            Action = usrAdd
+            Visible = True
+            Left = 5
+            Height = 21
+            Top = 5
+            Width = 54
+            ShowCaption = True
+          end        
+          item
+            Action = usrEdit
+            Visible = True
+            Left = 59
+            Height = 21
+            Top = 5
+            Width = 54
+            ShowCaption = True
+          end        
+          item
+            Action = usrDel
+            Visible = True
+            Left = 113
+            Height = 21
+            Top = 5
+            Width = 72
+            ShowCaption = True
+          end        
+          item
+            Action = usrPrint
+            Visible = True
+            Left = 185
+            Height = 21
+            Top = 5
+            Width = 60
+            ShowCaption = True
+          end>
+        ImageList = fbManagerMainForm.ImageListMain
+        ToolBarStyle = tbsWindowsXP
+        Options = [tpFlatBtns, tpCustomizable]
+        CustomizeShortCut = False
+        Align = alTop
+        BorderWidth = 4
+        ClientHeight = 31
+        ClientWidth = 628
+        TabOrder = 0
+      end
+      object RxDBGrid2: TRxDBGrid
+        Left = 0
+        Height = 362
+        Top = 31
+        Width = 628
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = True
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'User name'
+            Width = 120
+            FieldName = 'UserName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'First name'
+            Width = 100
+            FieldName = 'FirstName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Middle name'
+            Width = 100
+            FieldName = 'MiddleName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Last name'
+            Width = 100
+            FieldName = 'LastName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        PropertyStorage = RxIniPropStorage1
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgDblClickOptimizeColWidth, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowToolMenu]
+        FooterColor = clYellow
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsUsersList
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+        PopupMenu = PopupMenu2
+        ReadOnly = True
+        TabOrder = 1
+        TitleStyle = tsNative
+        OnDblClick = usrEditExecute
+      end
+    end
+    object TabRoles: TTabSheet
+      Caption = 'Roles'
+      ClientHeight = 393
+      ClientWidth = 628
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 362
+        Top = 31
+        Width = 628
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = False
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Role name'
+            Width = 300
+            FieldName = 'ROLE_NAME'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = []
+        FooterColor = clYellow
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsRolesList
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 0
+        TitleStyle = tsNative
+      end
+      object ToolPanel1: TToolPanel
+        Left = 0
+        Height = 31
+        Top = 0
+        Width = 628
+        Items = <        
+          item
+            Action = roleNew
+            Visible = True
+            Left = 5
+            Height = 21
+            Top = 5
+            Width = 88
+            ShowCaption = True
+          end        
+          item
+            Action = roleDelete
+            Visible = True
+            Left = 93
+            Height = 21
+            Top = 5
+            Width = 101
+            ShowCaption = True
+          end        
+          item
+            Action = rolePrint
+            Visible = True
+            Left = 194
+            Height = 21
+            Top = 5
+            Width = 60
+            ShowCaption = True
+          end>
+        ImageList = fbManagerMainForm.ImageListMain
+        ToolBarStyle = tbsWindowsXP
+        Options = [tpFlatBtns, tpCustomizable]
+        CustomizeShortCut = False
+        Align = alTop
+        BorderWidth = 4
+        ClientHeight = 31
+        ClientWidth = 628
+        TabOrder = 1
+      end
+    end
+    object TabMembers: TTabSheet
+      Caption = 'Member'
+      ClientHeight = 393
+      ClientWidth = 628
+      object RxDBGrid3: TRxDBGrid
+        Left = 0
+        Height = 362
+        Top = 31
+        Width = 172
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = False
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'User name'
+            Width = 135
+            FieldName = 'UserName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = []
+        FooterColor = clYellow
+        Align = alLeft
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsUsersListRoles
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleStyle = tsNative
+      end
+      object Splitter1: TSplitter
+        Left = 172
+        Height = 362
+        Top = 31
+        Width = 5
+      end
+      object RxDBGrid4: TRxDBGrid
+        Left = 177
+        Height = 362
+        Top = 31
+        Width = 451
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = False
+        AutoSort = False
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Role name'
+            Width = 120
+            FieldName = 'ROLE_NAME'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsCheckboxColumn
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'G'
+            FieldName = 'G'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsCheckboxColumn
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'AO'
+            FieldName = 'AO'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = []
+        FooterColor = clYellow
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsUserRoles
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleStyle = tsNative
+      end
+      object ToolPanel3: TToolPanel
+        Left = 0
+        Height = 31
+        Top = 0
+        Width = 628
+        Items = <        
+          item
+            Action = urPrintList
+            Visible = True
+            Left = 5
+            Height = 21
+            Top = 5
+            Width = 83
+            ShowCaption = True
+          end>
+        ImageList = fbManagerMainForm.ImageListMain
+        ToolBarStyle = tbsWindowsXP
+        Options = [tpFlatBtns, tpCustomizable, tpCaptionPopup]
+        CustomizeShortCut = False
+        Align = alTop
+        BorderWidth = 4
+        ClientHeight = 31
+        ClientWidth = 628
+        TabOrder = 2
+      end
+    end
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = RadioButton2
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Button1
+    Left = 12
+    Height = 31
+    Top = 101
+    Width = 496
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Right = 6
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 1
+  end
+  object ComboBox2: TComboBox
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 31
+    Top = 35
+    Width = 622
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnChange = ComboBox2Change
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object Button1: TButton
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 520
+    Height = 32
+    Top = 101
+    Width = 112
+    Action = srvConnect
+    Anchors = [akTop, akRight]
+    BorderSpacing.Around = 6
+    BorderSpacing.InnerBorder = 4
+    TabOrder = 3
+  end
+  object RadioButton1: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 23
+    Top = 6
+    Width = 89
+    BorderSpacing.Around = 6
+    Caption = 'Database'
+    Checked = True
+    OnClick = RadioButton1Click
+    TabOrder = 4
+    TabStop = True
+  end
+  object RadioButton2: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 72
+    Width = 110
+    BorderSpacing.Around = 6
+    Caption = 'Server name'
+    OnClick = RadioButton1Click
+    TabOrder = 5
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 56
+    Top = 352
+    object srvConnect: TAction
+      Category = 'Server'
+      Caption = 'Connect'
+    end
+    object usrAdd: TAction
+      Category = 'Users'
+      Caption = 'Add'
+      Hint = 'Add user to server user list'
+      ImageIndex = 12
+      OnExecute = usrAddExecute
+    end
+    object usrEdit: TAction
+      Category = 'Users'
+      Caption = 'Edit'
+      Hint = 'Edit user in list'
+      ImageIndex = 62
+      OnExecute = usrEditExecute
+    end
+    object usrDel: TAction
+      Category = 'Users'
+      Caption = 'Delete'
+      Hint = 'Delete user from server user list'
+      ImageIndex = 13
+      OnExecute = usrDelExecute
+    end
+    object roleNew: TAction
+      Category = 'Roles'
+      Caption = 'New role'
+      ImageIndex = 12
+    end
+    object roleDelete: TAction
+      Category = 'Roles'
+      Caption = 'Delete role'
+      ImageIndex = 13
+    end
+    object rolePrint: TAction
+      Category = 'Roles'
+      AutoCheck = True
+      Caption = 'Print'
+      ImageIndex = 14
+      OnExecute = rolePrintExecute
+    end
+    object usrPrint: TAction
+      Category = 'Users'
+      Caption = 'Print'
+      Hint = 'Print user list'
+      ImageIndex = 14
+      OnExecute = usrPrintExecute
+    end
+    object urPrintList: TAction
+      Category = 'UserRoles'
+      Caption = 'Print list'
+      Hint = 'Print list of all user and roles'
+      ImageIndex = 14
+      OnExecute = urPrintListExecute
+    end
+    object roleCopy: TAction
+      Category = 'Roles'
+      Caption = 'Copy'
+      Hint = 'Copy role name to clipboard'
+      OnExecute = roleCopyExecute
+    end
+  end
+  object UIBSecurity1: TUIBSecurity
+    LibraryName = 'gds32.dll'
+    UserID = 0
+    GroupID = 0
+    Admin = False
+    Left = 304
+    Top = 80
+  end
+  object dsRolesList: TDataSource
+    DataSet = rxRolesList
+    Left = 128
+    Top = 368
+  end
+  object rxRolesList: TRxMemoryData
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'ROLE_NAME'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end>
+    PacketRecords = 0
+    Left = 160
+    Top = 368
+    object rxRolesListROLE_NAME1: TStringField
+      DisplayWidth = 40
+      FieldKind = fkData
+      FieldName = 'ROLE_NAME'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 224
+    Top = 368
+    object MenuItem1: TMenuItem
+      Action = roleNew
+    end
+    object MenuItem3: TMenuItem
+      Action = roleDelete
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = roleCopy
+      OnClick = roleCopyExecute
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem2: TMenuItem
+      Action = rolePrint
+      AutoCheck = True
+      OnClick = rolePrintExecute
+    end
+  end
+  object frRolesList: TfrDBDataSet
+    DataSet = rxRolesList
+    Left = 192
+    Top = 368
+  end
+  object rxUsersList: TRxMemoryData
+    Active = True
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'UserName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'FirstName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'MiddleName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'LastName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'UserID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'GroupID'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    PacketRecords = 0
+    Left = 72
+    Top = 457
+    object rxUsersListUserName: TStringField
+      DisplayWidth = 30
+      FieldKind = fkData
+      FieldName = 'UserName'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object rxUsersListFirstName: TStringField
+      DisplayWidth = 30
+      FieldKind = fkData
+      FieldName = 'FirstName'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object rxUsersListMiddleName: TStringField
+      DisplayWidth = 30
+      FieldKind = fkData
+      FieldName = 'MiddleName'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object rxUsersListLastName: TStringField
+      DisplayWidth = 30
+      FieldKind = fkData
+      FieldName = 'LastName'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object rxUsersListDescription: TStringField
+      DisplayWidth = 250
+      FieldKind = fkData
+      FieldName = 'Description'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxUsersListUserID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'UserID'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxUsersListGroupID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'GroupID'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object frUserList: TfrDBDataSet
+    DataSet = rxUsersList
+    Left = 104
+    Top = 457
+  end
+  object dsUsersList: TDataSource
+    DataSet = rxUsersList
+    Left = 40
+    Top = 457
+  end
+  object dsUsersListRoles: TDataSource
+    DataSet = rxUsersListRoles
+    Left = 320
+    Top = 320
+  end
+  object frUsersListRoles: TfrDBDataSet
+    DataSet = rxUsersListRoles
+    Left = 400
+    Top = 320
+  end
+  object rxUsersListRoles: TRxMemoryData
+    Active = True
+    AutoCalcFields = False
+    FieldDefs = <    
+      item
+        Name = 'UserName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'FirstName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'MiddleName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'LastName'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Precision = -1
+        Size = 250
+      end    
+      item
+        Name = 'UserID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'GroupID'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    PacketRecords = 0
+    Left = 360
+    Top = 320
+  end
+  object quUserRoles: TFBDataSet
+    MaxMEMOStringSize = 0
+    AutoUpdateOptions.WhenGetGenID = wgNever
+    AutoUpdateOptions.IncrementBy = 1
+    DataSource = dsUsersListRoles
+    DefaultFormats.DisplayFormatNumeric = '#,##0.0'
+    DefaultFormats.DisplayFormatInteger = '#,##0'
+    DefaultFormats.EditFormatNumeric = '#0.0'
+    DefaultFormats.EditFormatInteger = '#0'
+    DetailConditions = []
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    UpdateRecordTypes = [cusUnmodified, cusModified, cusInserted]
+    SQLSelect.Strings = (
+      'select'
+      '  rdb$roles.rdb$role_name as ROLE_NAME,'
+      '  (select'
+      '      1'
+      '   from'
+      '     rdb$user_privileges'
+      '   where'
+      '       (rdb$user_privileges.rdb$user = :UserName)'
+      '     and'
+      '       (rdb$user_privileges.rdb$privilege = ''M'')'
+      '     and'
+      '       (rdb$user_privileges.rdb$relation_name = rdb$roles.rdb$role_name)'
+      '   ) as G,'
+      '   0 as AO'
+      'from'
+      '  rdb$roles'
+      'order by'
+      '  rdb$roles.rdb$role_name'
+    )
+    Left = 368
+    Top = 256
+  end
+  object dsUserRoles: TDataSource
+    DataSet = quUserRoles
+    Left = 328
+    Top = 256
+  end
+  object frUserRoles: TfrDBDataSet
+    DataSet = quUserRoles
+    Left = 408
+    Top = 256
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 464
+    Top = 256
+  end
+  object PopupMenu2: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 147
+    Top = 457
+    object MenuItem7: TMenuItem
+      Action = usrAdd
+    end
+    object MenuItem8: TMenuItem
+      Action = usrEdit
+    end
+    object MenuItem9: TMenuItem
+      Action = usrDel
+    end
+    object MenuItem10: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem11: TMenuItem
+      Action = usrPrint
+    end
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet
+    RxDBGrid = RxDBGrid2
+    Caption = 'Экспорт в электронную таблицу'
+    ShowSetupForm = True
+    FileName = 'user_list.ods'
+    PageName = 'Users'
+    Options = [ressExportTitle, ressExportColors, ressOverwriteExisting]
+    OpenAfterExport = True
+    Left = 184
+    Top = 457
+  end
+  object RxDBGridPrint1: TRxDBGridPrint
+    RxDBGrid = RxDBGrid2
+    Caption = 'Печать списка'
+    ShowSetupForm = True
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
+    ShowProgress = True
+    ReportTitle = 'Список пользователей'
+    ShowColumnHeaderOnAllPage = True
+    Left = 224
+    Top = 457
+  end
+  object RxDBGridFooterTools1: TRxDBGridFooterTools
+    RxDBGrid = RxDBGrid2
+    Caption = 'Всего строк'
+    ShowSetupForm = True
+    Left = 256
+    Top = 456
+  end
+end

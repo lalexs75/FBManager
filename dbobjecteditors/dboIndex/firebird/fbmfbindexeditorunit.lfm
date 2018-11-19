@@ -1,0 +1,515 @@
+inherited fbmFBIndexEditorPage: TfbmFBIndexEditorPage
+  Height = 599
+  Width = 636
+  ClientHeight = 599
+  ClientWidth = 636
+  DesignLeft = 605
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 19
+    Top = 6
+    Width = 75
+    BorderSpacing.Around = 6
+    Caption = 'Index name'
+    ParentColor = False
+  end
+  object edtIndexName: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CheckGroup1
+    Left = 12
+    Height = 31
+    Top = 31
+    Width = 526
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object CheckGroup1: TCheckGroup[2]
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 544
+    Height = 60
+    Top = 6
+    Width = 86
+    Anchors = [akTop, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 58
+    ClientWidth = 84
+    Items.Strings = (
+      'Unique'
+      'Active'
+    )
+    TabOrder = 1
+    Data = {
+      020000000202
+    }
+  end
+  object Label4: TLabel[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtIndexName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 19
+    Top = 68
+    Width = 59
+    BorderSpacing.Around = 6
+    Caption = 'For table'
+    ParentColor = False
+  end
+  object cbTables: TComboBox[4]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = RadioGroup1
+    Left = 12
+    Height = 31
+    Top = 93
+    Width = 495
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    OnChange = cbTablesChange
+    Style = csDropDownList
+    TabOrder = 2
+  end
+  object Memo1: TMemo[5]
+    AnchorSideLeft.Control = RadioButton1
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 115
+    Top = 159
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object Panel1: TPanel[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 284
+    Top = 309
+    Width = 624
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    ClientHeight = 284
+    ClientWidth = 624
+    TabOrder = 4
+    object lbFieldList: TListBox
+      Left = 1
+      Height = 282
+      Top = 1
+      Width = 236
+      Align = alLeft
+      ItemHeight = 0
+      OnDblClick = lbFieldListDblClick
+      ScrollWidth = 234
+      TabOrder = 0
+      TopIndex = -1
+    end
+    object Splitter1: TSplitter
+      Left = 237
+      Height = 282
+      Top = 1
+      Width = 5
+    end
+    object Panel2: TPanel
+      Left = 242
+      Height = 282
+      Top = 1
+      Width = 381
+      Align = alClient
+      ClientHeight = 282
+      ClientWidth = 381
+      TabOrder = 2
+      object SpeedButton1: TSpeedButton
+        AnchorSideLeft.Control = Panel2
+        AnchorSideTop.Control = Panel2
+        Left = 7
+        Height = 28
+        Top = 7
+        Width = 39
+        Action = fldAdd
+        BorderSpacing.Around = 6
+        ShowCaption = False
+      end
+      object SpeedButton2: TSpeedButton
+        AnchorSideLeft.Control = Panel2
+        AnchorSideTop.Control = SpeedButton1
+        AnchorSideTop.Side = asrBottom
+        Left = 7
+        Height = 28
+        Top = 41
+        Width = 39
+        Action = fldAddAll
+        BorderSpacing.Around = 6
+        ShowCaption = False
+      end
+      object SpeedButton3: TSpeedButton
+        AnchorSideLeft.Control = Panel2
+        AnchorSideTop.Control = SpeedButton2
+        AnchorSideTop.Side = asrBottom
+        Left = 7
+        Height = 28
+        Top = 75
+        Width = 39
+        Action = fldRemove
+        BorderSpacing.Around = 6
+        ShowCaption = False
+      end
+      object SpeedButton4: TSpeedButton
+        AnchorSideLeft.Control = Panel2
+        AnchorSideTop.Control = SpeedButton3
+        AnchorSideTop.Side = asrBottom
+        Left = 7
+        Height = 28
+        Top = 109
+        Width = 39
+        Action = fldRemoveAll
+        BorderSpacing.Around = 6
+        ShowCaption = False
+      end
+      object RxDBGrid1: TRxDBGrid
+        AnchorSideLeft.Control = SpeedButton1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Panel2
+        AnchorSideRight.Control = Panel2
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Panel2
+        AnchorSideBottom.Side = asrBottom
+        Left = 52
+        Height = 280
+        Top = 1
+        Width = 328
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Field name'
+            Width = 301
+            FieldName = 'FieldName'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsPickList
+            PickList.Strings = (
+              'ASC'
+              'DESC'
+            )
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Sort order'
+            Width = 0
+            Visible = False
+            FieldName = 'SortOrder'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsPickList
+            PickList.Strings = (
+              ''
+              'First'
+              'Last'
+            )
+            SizePriority = 0
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Nulls pos'
+            Width = 0
+            Visible = False
+            FieldName = 'NullsPos'
+            EditButtons = <>
+            Filter.Font.Style = [fsItalic]
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Нет)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Color = clYellow
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        AutoFillColumns = True
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsIndexFields
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        OnDblClick = RxDBGrid1DblClick
+      end
+    end
+  end
+  object RadioGroup1: TRadioGroup[7]
+    AnchorSideTop.Control = CheckGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 513
+    Height = 66
+    Top = 72
+    Width = 117
+    Anchors = [akTop, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Sort order'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 46
+    ClientWidth = 115
+    Items.Strings = (
+      'Ascending'
+      'Descending'
+    )
+    TabOrder = 5
+  end
+  object RadioButton1: TRadioButton[8]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbTables
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 130
+    Width = 130
+    BorderSpacing.Around = 6
+    Caption = 'COMPUTED BY'
+    OnChange = RadioButton1Change
+    TabOrder = 6
+  end
+  object RadioButton2: TRadioButton[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Memo1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 280
+    Width = 100
+    BorderSpacing.Around = 6
+    Caption = 'Index fields'
+    Checked = True
+    OnChange = RadioButton1Change
+    TabOrder = 7
+    TabStop = True
+  end
+  object PopupMenu1: TPopupMenu[10]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 80
+    Top = 337
+    object MenuItem2: TMenuItem
+      Action = fldAdd
+    end
+    object MenuItem3: TMenuItem
+      Action = fldAddAll
+    end
+  end
+  object PopupMenu2: TPopupMenu[11]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 329
+    Top = 337
+    object MenuItem4: TMenuItem
+      Action = fldRemove
+    end
+    object MenuItem1: TMenuItem
+      Action = fldRemoveAll
+    end
+  end
+  object ActionList1: TActionList[12]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 436
+    Top = 200
+    object fldAdd: TAction
+      Caption = 'Add field'
+      ImageIndex = 53
+      OnExecute = fldAddExecute
+    end
+    object fldAddAll: TAction
+      Caption = 'Add all fields'
+      ImageIndex = 60
+      OnExecute = fldAddAllExecute
+    end
+    object fldRemove: TAction
+      Caption = 'Remove field'
+      ImageIndex = 51
+      OnExecute = fldRemoveExecute
+    end
+    object fldRemoveAll: TAction
+      Caption = 'Remove all fields'
+      ImageIndex = 59
+      OnExecute = fldRemoveAllExecute
+    end
+  end
+  object dsIndexFields: TDataSource[13]
+    DataSet = rxIndexFields
+    Left = 329
+    Top = 408
+  end
+  object rxIndexFields: TRxMemoryData[14]
+    FieldDefs = <    
+      item
+        Name = 'FieldName'
+        DataType = ftString
+        Size = 60
+      end    
+      item
+        Name = 'SortOrder'
+        DataType = ftString
+        Size = 5
+      end    
+      item
+        Name = 'NullsPos'
+        DataType = ftString
+        Size = 10
+      end>
+    PacketRecords = 0
+    Left = 372
+    Top = 408
+    object rxIndexFieldsFieldName: TStringField
+      DisplayWidth = 60
+      FieldKind = fkData
+      FieldName = 'FieldName'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 60
+    end
+    object rxIndexFieldsSortOrder: TStringField
+      DisplayWidth = 5
+      FieldKind = fkData
+      FieldName = 'SortOrder'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 5
+    end
+    object rxIndexFieldsNullsPos: TStringField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'NullsPos'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+  end
+end

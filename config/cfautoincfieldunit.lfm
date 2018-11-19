@@ -1,0 +1,182 @@
+inherited cfAutoIncFieldFrame: TcfAutoIncFieldFrame
+  Height = 429
+  Width = 585
+  ClientHeight = 429
+  ClientWidth = 585
+  DesignLeft = 657
+  DesignTop = 362
+  object Panel1: TPanel[0]
+    Left = 0
+    Height = 258
+    Top = 0
+    Width = 585
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 258
+    ClientWidth = 585
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = DividerBevel1
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 131
+      Width = 149
+      BorderSpacing.Around = 6
+      Caption = 'Generator name template'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 34
+      Top = 154
+      Width = 565
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 0
+      Text = 'Edit1'
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 194
+      Width = 132
+      BorderSpacing.Around = 6
+      Caption = 'Trigger name template'
+      ParentColor = False
+    end
+    object Edit2: TEdit
+      AnchorSideLeft.Control = Label2
+      AnchorSideTop.Control = Label2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 34
+      Top = 217
+      Width = 565
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 1
+      Text = 'Edit2'
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 1
+      Height = 17
+      Top = 1
+      Width = 80
+      Caption = 'Avallable tags:'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 18
+      Width = 232
+      BorderSpacing.Left = 6
+      Caption = '%TABLE_NAME% - to insert table name'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label4
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 35
+      Width = 224
+      BorderSpacing.Left = 6
+      Caption = '%FIELD_NAME% - to insert field name'
+      ParentColor = False
+    end
+    object DividerBevel1: TDividerBevel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label9
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 1
+      Height = 17
+      Top = 108
+      Width = 583
+      Caption = 'Templates'
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 5
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label7: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label5
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 52
+      Width = 257
+      BorderSpacing.Left = 6
+      Caption = '%TRIGGER_NAME% - to insert trigger name'
+      ParentColor = False
+    end
+    object Label8: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label7
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 69
+      Width = 298
+      BorderSpacing.Left = 6
+      Caption = '%GENERATOR_NAME% - to insert generator name'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label8
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 86
+      Width = 333
+      BorderSpacing.Left = 6
+      Caption = '%TABLE_SCHEMA_NAME% - to insert table shema name'
+      ParentColor = False
+    end
+  end
+  object PageControl1: TPageControl[1]
+    Left = 0
+    Height = 171
+    Top = 258
+    Width = 585
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Trigger text'
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Default description'
+    end
+  end
+  object SynSQLSyn1: TSynSQLSyn[2]
+    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
+    Enabled = False
+    SQLDialect = sqlPostgres
+    Left = 277
+    Top = 187
+  end
+end

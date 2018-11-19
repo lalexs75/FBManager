@@ -1,0 +1,107 @@
+inherited cfSystemConfirmationFrame: TcfSystemConfirmationFrame
+  Height = 475
+  Width = 644
+  ClientHeight = 475
+  ClientWidth = 644
+  DesignLeft = 573
+  DesignTop = 181
+  object CheckBox1: TCheckBox[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 103
+    BorderSpacing.Around = 6
+    Caption = 'Confirm exit'
+    TabOrder = 0
+  end
+  object CheckBox2: TCheckBox[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 36
+    Width = 247
+    BorderSpacing.Around = 6
+    Caption = 'Confirm compile object description'
+    TabOrder = 1
+  end
+  object DividerBevel1: TDividerBevel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 20
+    Top = 126
+    Width = 632
+    Caption = 'MDI options'
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object CheckBox3: TCheckBox[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DividerBevel1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 152
+    Width = 165
+    BorderSpacing.Around = 6
+    Caption = 'Midle click close form'
+    TabOrder = 2
+  end
+  object CheckBox4: TCheckBox[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 182
+    Width = 153
+    BorderSpacing.Around = 6
+    Caption = 'Show form captions'
+    TabOrder = 3
+  end
+  object CheckBox5: TCheckBox[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox4
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 212
+    Width = 146
+    BorderSpacing.Around = 6
+    Caption = 'Show close button'
+    TabOrder = 4
+  end
+  object CheckBox6: TCheckBox[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 66
+    Width = 217
+    BorderSpacing.Around = 6
+    Caption = 'Confirm compile object grants'
+    TabOrder = 5
+  end
+  object CheckBox7: TCheckBox[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox6
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 96
+    Width = 348
+    BorderSpacing.Around = 6
+    Caption = 'Enable set "With Grant Options" from popup menu'
+    TabOrder = 6
+  end
+end

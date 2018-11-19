@@ -1,0 +1,262 @@
+inherited fbmCFBackupFrame: TfbmCFBackupFrame
+  Height = 562
+  Width = 621
+  ClientHeight = 562
+  ClientWidth = 621
+  DesignLeft = 325
+  DesignTop = 200
+  object GroupBox1: TGroupBox[0]
+    Left = 0
+    Height = 251
+    Top = 0
+    Width = 621
+    Align = alTop
+    Caption = 'Backup'
+    ClientHeight = 230
+    ClientWidth = 619
+    TabOrder = 0
+    object RadioButton1: TRadioButton
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = edtBkSingleFileName
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 24
+      Top = 79
+      Width = 123
+      BorderSpacing.Around = 6
+      Caption = 'Separeted files'
+      TabOrder = 0
+    end
+    object RadioButton2: TRadioButton
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 6
+      Height = 24
+      Top = 6
+      Width = 139
+      BorderSpacing.Around = 6
+      Caption = 'Single file backup'
+      Checked = True
+      TabOrder = 1
+      TabStop = True
+    end
+    object edtBkSingleFileName: TFileNameEdit
+      AnchorSideLeft.Control = RadioButton2
+      AnchorSideTop.Control = RadioButton2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 37
+      Top = 36
+      Width = 601
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxLength = 0
+      Spacing = 0
+      TabOrder = 2
+    end
+    object RxDBGrid1: TRxDBGrid
+      AnchorSideLeft.Control = RadioButton1
+      AnchorSideTop.Control = RadioButton1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = GroupBox1
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 115
+      Top = 109
+      Width = 601
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = False
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end      
+        item
+          Command = rxgcSelectAll
+          ShortCut = 16449
+          Enabled = True
+        end      
+        item
+          Command = rxgcDeSelectAll
+          ShortCut = 16429
+          Enabled = True
+        end      
+        item
+          Command = rxgcInvertSelection
+          ShortCut = 16426
+          Enabled = True
+        end      
+        item
+          Command = rxgcOptimizeColumnsWidth
+          ShortCut = 16427
+          Enabled = True
+        end      
+        item
+          Command = rxgcCopyCellValue
+          ShortCut = 16451
+          Enabled = True
+        end>
+      FooterOptions.Color = clYellow
+      FooterOptions.DrawFullLine = False
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = []
+      FooterColor = clYellow
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 6
+      Color = clWindow
+      DrawFullLine = False
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      Scrollbars = ssAutoBoth
+      TabOrder = 3
+      TitleStyle = tsNative
+      Visible = False
+    end
+  end
+  object GroupBox3: TGroupBox[1]
+    Left = 0
+    Height = 306
+    Top = 256
+    Width = 621
+    Align = alClient
+    Caption = 'Options'
+    ClientHeight = 285
+    ClientWidth = 619
+    TabOrder = 1
+    object edtBkVerboseFileName: TFileNameEdit
+      AnchorSideLeft.Control = CheckBox5
+      AnchorSideTop.Control = CheckBox5
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox3
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 37
+      Top = 171
+      Width = 601
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxLength = 0
+      Spacing = 0
+      TabOrder = 0
+    end
+    object CheckBox5: TCheckBox
+      AnchorSideLeft.Control = GroupBox3
+      AnchorSideTop.Control = CheckGroup1
+      AnchorSideTop.Side = asrBottom
+      Left = 6
+      Height = 24
+      Top = 141
+      Width = 90
+      BorderSpacing.Around = 6
+      Caption = 'Log to file'
+      TabOrder = 1
+    end
+    object CheckBox6: TCheckBox
+      AnchorSideLeft.Control = CheckBox5
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = CheckGroup1
+      AnchorSideTop.Side = asrBottom
+      Left = 138
+      Height = 24
+      Top = 141
+      Width = 113
+      BorderSpacing.Left = 36
+      BorderSpacing.Around = 6
+      Caption = 'Log to screen'
+      TabOrder = 2
+    end
+    object CheckGroup1: TCheckGroup
+      AnchorSideLeft.Control = GroupBox3
+      AnchorSideTop.Control = GroupBox3
+      AnchorSideRight.Control = GroupBox3
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 129
+      Top = 6
+      Width = 607
+      Anchors = [akTop, akLeft, akRight]
+      AutoFill = True
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Caption = 'Buckup options'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 2
+      ClientHeight = 108
+      ClientWidth = 605
+      Columns = 2
+      Items.Strings = (
+        'Ignore Checksums'
+        'Ignore Limbo'
+        'Metadata Only'
+        'No Garbage Collection'
+        'Old Metadata Desc'
+        'Non Transportable'
+        'Convert Ext Tables'
+        'Expand'
+      )
+      TabOrder = 3
+      Data = {
+        080000000202020202020202
+      }
+    end
+  end
+  object Splitter1: TSplitter[2]
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 251
+    Width = 621
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+end
