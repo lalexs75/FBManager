@@ -1,0 +1,59 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uibeditorsconsts.scharactersetlbl
+msgid "&Character Set"
+msgstr "Набор символов"
+
+#: uibeditorsconsts.scommons
+msgid "Commons"
+msgstr "Общее"
+
+#: uibeditorsconsts.sconnection
+msgid "Connection"
+msgstr "Подключение"
+
+#: uibeditorsconsts.sdatabaselbl
+msgid "&Database name"
+msgstr "Имя базы данных"
+
+#: uibeditorsconsts.slibrarynamelbl
+msgid "&Library name"
+msgstr "Файл библиотеки"
+
+#: uibeditorsconsts.smodelbl
+msgid "&Mode"
+msgstr "Режим"
+
+#: uibeditorsconsts.spasswordlbl
+msgid "Pass&word"
+msgstr "Пароль"
+
+#: uibeditorsconsts.sportlbl
+msgid "&Port"
+msgstr "Порт"
+
+#: uibeditorsconsts.sselectdatabasefile
+msgid "Select database file"
+msgstr "Выберите файл БД"
+
+#: uibeditorsconsts.sselectlibraryfilename
+msgid "Select library file name"
+msgstr "Выберите файл библиотеки"
+
+#: uibeditorsconsts.sserverlbl
+msgid "&Server"
+msgstr "Сервер"
+
+#: uibeditorsconsts.ssqlrolelbl
+msgid "SQL &Role"
+msgstr "Роль"
+
+#: uibeditorsconsts.suibdatabaseeditor
+msgid "UIB Database Editor"
+msgstr "UIB:Редактор параметров подключения к БД"
+
+#: uibeditorsconsts.susernamelbl
+msgid "&User Name"
+msgstr "Имя пользователя"
+

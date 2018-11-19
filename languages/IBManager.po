@@ -1,0 +1,5237 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: fbmstrconstunit.aidentityfield
+msgid "IDENTITY field"
+msgstr ""
+
+#: fbmstrconstunit.anoaction
+msgid "No action"
+msgstr ""
+
+#: fbmstrconstunit.saborted
+msgid " - aborted"
+msgstr ""
+
+#: fbmstrconstunit.sabout
+msgctxt "fbmstrconstunit.sabout"
+msgid "About"
+msgstr ""
+
+#: fbmstrconstunit.saccessmetod
+msgid "Access metod"
+msgstr ""
+
+#: fbmstrconstunit.sacledit
+msgid "ACL edit"
+msgstr ""
+
+#: fbmstrconstunit.sactivatealltriggers
+msgctxt "fbmstrconstunit.sactivatealltriggers"
+msgid "Activate all triggers"
+msgstr ""
+
+#: fbmstrconstunit.sactivatetrigger
+msgctxt "fbmstrconstunit.sactivatetrigger"
+msgid "Activate trigger"
+msgstr ""
+
+#: fbmstrconstunit.sactive
+msgctxt "fbmstrconstunit.sactive"
+msgid "Active"
+msgstr ""
+
+#: fbmstrconstunit.sactiveusers
+msgid "Active users"
+msgstr ""
+
+#: fbmstrconstunit.sactivitimonitor
+msgid "Activiti monitor"
+msgstr ""
+
+#: fbmstrconstunit.sadd
+msgid "Add"
+msgstr ""
+
+#: fbmstrconstunit.saddallfields
+msgid "Add all fields"
+msgstr ""
+
+#: fbmstrconstunit.saddfield
+msgid "Add field"
+msgstr ""
+
+#: fbmstrconstunit.saddlocalvar
+msgctxt "fbmstrconstunit.saddlocalvar"
+msgid "Add local variable"
+msgstr ""
+
+#: fbmstrconstunit.saddparam
+msgctxt "fbmstrconstunit.saddparam"
+msgid "Add param"
+msgstr ""
+
+#: fbmstrconstunit.saddtemplate
+msgid "Add template"
+msgstr ""
+
+#: fbmstrconstunit.sadduserhint
+msgid "Add user to server user list"
+msgstr ""
+
+#: fbmstrconstunit.safter
+msgid "After"
+msgstr ""
+
+#: fbmstrconstunit.safterdelete
+msgid "After delete"
+msgstr ""
+
+#: fbmstrconstunit.safterinsert
+msgid "After insert"
+msgstr ""
+
+#: fbmstrconstunit.safterupdate
+msgid "After update"
+msgstr ""
+
+#: fbmstrconstunit.salias
+msgid "Alias"
+msgstr ""
+
+#: fbmstrconstunit.saliasofdb
+msgctxt "fbmstrconstunit.saliasofdb"
+msgid "Alias of %s"
+msgstr ""
+
+#: fbmstrconstunit.saliasofobj
+msgctxt "fbmstrconstunit.saliasofobj"
+msgid "Alias of %s"
+msgstr ""
+
+#: fbmstrconstunit.salloobjects
+msgid "All objects"
+msgstr ""
+
+#: fbmstrconstunit.sallowmultiselect
+msgid "Allow multiselect"
+msgstr ""
+
+#: fbmstrconstunit.salter
+msgid "Alter"
+msgstr ""
+
+#: fbmstrconstunit.salternatecolor
+msgid "Alternate color"
+msgstr ""
+
+#: fbmstrconstunit.salterrroutine
+msgid "Alter routine"
+msgstr ""
+
+#: fbmstrconstunit.salwayscapitalizedbobjectsnames
+msgid "Always capitalize database objects names"
+msgstr ""
+
+#: fbmstrconstunit.salwaysshowglyph
+msgid "Always show glyph"
+msgstr ""
+
+#: fbmstrconstunit.sappendfunctionhint
+msgid "Create new nested function"
+msgstr ""
+
+#: fbmstrconstunit.sappendfunctionq
+msgid "Create new nested function?"
+msgstr ""
+
+#: fbmstrconstunit.sapplicationname
+msgid "Application name"
+msgstr ""
+
+#: fbmstrconstunit.sapply
+msgid "Apply"
+msgstr ""
+
+#: fbmstrconstunit.sapplyscript
+msgid "Apply script"
+msgstr ""
+
+#: fbmstrconstunit.sappversion
+msgctxt "fbmstrconstunit.sappversion"
+msgid "Version : "
+msgstr ""
+
+#: fbmstrconstunit.sarray
+msgid "Array"
+msgstr ""
+
+#: fbmstrconstunit.sarraybound
+msgid "Array bound"
+msgstr ""
+
+#: fbmstrconstunit.sascending
+msgid "Ascending"
+msgstr ""
+
+#: fbmstrconstunit.sasimage
+msgid "As image"
+msgstr ""
+
+#: fbmstrconstunit.sastext
+msgid "As text"
+msgstr ""
+
+#: fbmstrconstunit.sattachmentdb
+msgid "Attachment DB"
+msgstr ""
+
+#: fbmstrconstunit.sattachmentid
+msgid "Attachment ID"
+msgstr ""
+
+#: fbmstrconstunit.sautograntoncompileobject
+msgid "Auto grant on compile object"
+msgstr ""
+
+#: fbmstrconstunit.sautoincfield
+msgid "Auto increment field"
+msgstr ""
+
+#: fbmstrconstunit.sautoincremet
+msgid "Autoincremet"
+msgstr ""
+
+#: fbmstrconstunit.sautovacuum
+msgid "Auto vacuum"
+msgstr ""
+
+#: fbmstrconstunit.savallabletags
+msgid "Avallable tags:"
+msgstr ""
+
+#: fbmstrconstunit.savglines
+msgctxt "fbmstrconstunit.savglines"
+msgid "AVG lines"
+msgstr ""
+
+#: fbmstrconstunit.savgtime
+msgctxt "fbmstrconstunit.savgtime"
+msgid "AVG Time"
+msgstr ""
+
+#: fbmstrconstunit.sbackendstart
+msgid "Backend start"
+msgstr ""
+
+#: fbmstrconstunit.sbackground
+msgid "Background"
+msgstr ""
+
+#: fbmstrconstunit.sbackup
+msgctxt "fbmstrconstunit.sbackup"
+msgid "Backup"
+msgstr ""
+
+#: fbmstrconstunit.sbackupoptions
+msgid "Backup options"
+msgstr ""
+
+#: fbmstrconstunit.sbackupsuccessfullyfinished
+msgid "Backup successfully finished"
+msgstr ""
+
+#: fbmstrconstunit.sbackward
+msgid "&Backward"
+msgstr ""
+
+#: fbmstrconstunit.sbefore
+msgctxt "fbmstrconstunit.sbefore"
+msgid "Before"
+msgstr ""
+
+#: fbmstrconstunit.sbeforedelete
+msgid "Before delete"
+msgstr ""
+
+#: fbmstrconstunit.sbeforeinsert
+msgid "Before insert"
+msgstr ""
+
+#: fbmstrconstunit.sbeforeupdate
+msgid "Before update"
+msgstr ""
+
+#: fbmstrconstunit.sblkreadtime
+msgid "Time spent reading data file blocks by backends in this database, in milliseconds"
+msgstr ""
+
+#: fbmstrconstunit.sblkshit
+msgid "Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system's file system cache)"
+msgstr ""
+
+#: fbmstrconstunit.sblkwritetime
+msgid "Time spent writing data file blocks by backends in this database, in milliseconds"
+msgstr ""
+
+#: fbmstrconstunit.sbody
+msgid "Body"
+msgstr ""
+
+#: fbmstrconstunit.sboth
+msgid "Both"
+msgstr ""
+
+#: fbmstrconstunit.sbuffers
+msgid "Buffers"
+msgstr ""
+
+#: fbmstrconstunit.sbugtrackerservname
+msgid "Shamangrad bugtracker service..."
+msgstr ""
+
+#: fbmstrconstunit.sbuildconnectionstring
+msgctxt "fbmstrconstunit.sbuildconnectionstring"
+msgid "Build connection string"
+msgstr ""
+
+#: fbmstrconstunit.sbuilddate
+msgid "Build date : "
+msgstr ""
+
+#: fbmstrconstunit.sbuilder
+msgid "Builder"
+msgstr ""
+
+#: fbmstrconstunit.sbuttonglyph
+msgid "Button glyph"
+msgstr ""
+
+#: fbmstrconstunit.scache
+msgid "Cache"
+msgstr ""
+
+#: fbmstrconstunit.scachesize
+msgid "Cache size"
+msgstr ""
+
+#: fbmstrconstunit.scalculated
+msgid "Calculated"
+msgstr ""
+
+#: fbmstrconstunit.scancelquery
+msgctxt "fbmstrconstunit.scancelquery"
+msgid "Cancel query"
+msgstr ""
+
+#: fbmstrconstunit.scancelqueryquestion
+msgctxt "fbmstrconstunit.scancelqueryquestion"
+msgid "Cancel a running query?"
+msgstr ""
+
+#: fbmstrconstunit.scaption
+msgctxt "fbmstrconstunit.scaption"
+msgid "Caption"
+msgstr ""
+
+#: fbmstrconstunit.scaretalwaysvisible
+msgid "Caret always visible"
+msgstr ""
+
+#: fbmstrconstunit.scasesensetive
+msgid "Case sensetive"
+msgstr ""
+
+#: fbmstrconstunit.scharset
+msgid "Char set"
+msgstr ""
+
+#: fbmstrconstunit.scheck
+msgid "Check"
+msgstr ""
+
+#: fbmstrconstunit.scheckbody
+msgid "Check body"
+msgstr ""
+
+#: fbmstrconstunit.scheckconstraint
+msgid "Check constraint"
+msgstr ""
+
+#: fbmstrconstunit.scheckname
+msgid "Check name"
+msgstr ""
+
+#: fbmstrconstunit.sclear
+msgid "Clear"
+msgstr ""
+
+#: fbmstrconstunit.sclearcurrentquery
+msgid "Clear current query..."
+msgstr ""
+
+#: fbmstrconstunit.sclientaddress
+msgid "Client address"
+msgstr ""
+
+#: fbmstrconstunit.sclienthostname
+msgid "Client hostname"
+msgstr ""
+
+#: fbmstrconstunit.sclientlib
+msgid "Client lib     = "
+msgstr ""
+
+#: fbmstrconstunit.sclientlibraryname
+msgid "Client library name"
+msgstr ""
+
+#: fbmstrconstunit.sclientport
+msgid "Client port"
+msgstr ""
+
+#: fbmstrconstunit.scloseallexceptthis
+msgctxt "fbmstrconstunit.scloseallexceptthis"
+msgid "Close all except this"
+msgstr ""
+
+#: fbmstrconstunit.scloseallwindows
+msgctxt "fbmstrconstunit.scloseallwindows"
+msgid "Close all"
+msgstr ""
+
+#: fbmstrconstunit.sclosewindows
+msgctxt "fbmstrconstunit.sclosewindows"
+msgid "Close"
+msgstr ""
+
+#: fbmstrconstunit.scodeexploer
+msgctxt "fbmstrconstunit.scodeexploer"
+msgid "Code exploer"
+msgstr ""
+
+#: fbmstrconstunit.scodepage
+msgid "Codepage"
+msgstr ""
+
+#: fbmstrconstunit.scollapseall
+msgid "Collapse all"
+msgstr ""
+
+#: fbmstrconstunit.scollate
+msgid "Collate"
+msgstr ""
+
+#: fbmstrconstunit.scollationlist
+msgid "Collation list"
+msgstr ""
+
+#: fbmstrconstunit.scollumnname
+msgid "Collumn name"
+msgstr ""
+
+#: fbmstrconstunit.scollumns
+msgid "Collumns"
+msgstr ""
+
+#: fbmstrconstunit.scolor
+msgid "Color"
+msgstr ""
+
+#: fbmstrconstunit.scomfbmstyle
+msgid "Use FBManager style /*$$FBMC$$*/"
+msgstr ""
+
+#: fbmstrconstunit.scomibestyle
+msgid "Use IBExpert style /*$$IBEC$$*/"
+msgstr ""
+
+#: fbmstrconstunit.scomment
+msgid "Comment"
+msgstr ""
+
+#: fbmstrconstunit.scommentcmd
+msgid "Comment selection"
+msgstr ""
+
+#: fbmstrconstunit.scommit
+msgid "Commit"
+msgstr ""
+
+#: fbmstrconstunit.scommitandclose
+msgid "Commit and close"
+msgstr ""
+
+#: fbmstrconstunit.scommitandclosehint
+msgid "Commit and close transaction"
+msgstr ""
+
+#: fbmstrconstunit.scommithint
+msgid "Commit transaction"
+msgstr ""
+
+#: fbmstrconstunit.scommittransactiononrefresh
+msgid "Commit transaction on refresh"
+msgstr ""
+
+#: fbmstrconstunit.scommonquery
+msgid "Common query"
+msgstr ""
+
+#: fbmstrconstunit.scompatibility
+msgid "Compatibility"
+msgstr ""
+
+#: fbmstrconstunit.scompile
+msgid "Compile"
+msgstr ""
+
+#: fbmstrconstunit.scompileoptions
+msgid "Compile options"
+msgstr ""
+
+#: fbmstrconstunit.sconditionforpartialindex
+msgid "Condition for partial index"
+msgstr ""
+
+#: fbmstrconstunit.sconditions
+msgid "Conditions"
+msgstr ""
+
+#: fbmstrconstunit.sconfirm
+msgid "Confirm"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmcompileobjectgrants
+msgid "Confirm compile object grants"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmcompileobjectsdescription
+msgid "Confirm compile objects description"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmexit
+msgid "Confirm exit"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmexitquestion
+msgid "You sure you exit the program?"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmoptions
+msgid "Confirmation"
+msgstr ""
+
+#: fbmstrconstunit.sconfirmpassword
+msgctxt "fbmstrconstunit.sconfirmpassword"
+msgid "Confirm password"
+msgstr ""
+
+#: fbmstrconstunit.sconflicts
+msgid "Number of queries canceled due to conflicts with recovery in this database. (Conflicts occur only on standby servers; see pg_stat_database_conflicts for details.)"
+msgstr ""
+
+#: fbmstrconstunit.sconnect
+msgctxt "fbmstrconstunit.sconnect"
+msgid "Connect"
+msgstr ""
+
+#: fbmstrconstunit.sconnectionlimit
+msgid "Connection limit"
+msgstr ""
+
+#: fbmstrconstunit.sconnectionparams
+msgid "Connection params"
+msgstr ""
+
+#: fbmstrconstunit.sconnections
+msgid "Connections"
+msgstr ""
+
+#: fbmstrconstunit.sconnectionstring
+msgctxt "fbmstrconstunit.sconnectionstring"
+msgid "Connection string"
+msgstr ""
+
+#: fbmstrconstunit.sconnectionstringcopied
+msgid "Connection string has been successfully copied to clipboard."
+msgstr ""
+
+#: fbmstrconstunit.sconstraintdelete
+msgctxt "fbmstrconstunit.sconstraintdelete"
+msgid "Delete constraint"
+msgstr ""
+
+#: fbmstrconstunit.sconstraintedit
+msgctxt "fbmstrconstunit.sconstraintedit"
+msgid "Edit constraint"
+msgstr ""
+
+#: fbmstrconstunit.sconstraintname
+msgctxt "fbmstrconstunit.sconstraintname"
+msgid "Constraint name"
+msgstr ""
+
+#: fbmstrconstunit.sconstraintnew
+msgctxt "fbmstrconstunit.sconstraintnew"
+msgid "New constraint"
+msgstr ""
+
+#: fbmstrconstunit.sconvertexttables
+msgctxt "fbmstrconstunit.sconvertexttables"
+msgid "Convert Ext Tables"
+msgstr ""
+
+#: fbmstrconstunit.scopy
+msgctxt "fbmstrconstunit.scopy"
+msgid "Copy"
+msgstr ""
+
+#: fbmstrconstunit.scopyallstatementtoclip
+msgctxt "fbmstrconstunit.scopyallstatementtoclip"
+msgid "Copy all statement to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopyallstatementtocliphint
+msgctxt "fbmstrconstunit.scopyallstatementtocliphint"
+msgid "Copy all statement to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopycellvalue
+msgid "Copy cell value"
+msgstr ""
+
+#: fbmstrconstunit.scopycollumnfieldtitle
+msgid "Copy collumn field title"
+msgstr ""
+
+#: fbmstrconstunit.scopyconnectionstring
+msgid "Copy connection string"
+msgstr ""
+
+#: fbmstrconstunit.scopyfield
+msgid "Copy field..."
+msgstr ""
+
+#: fbmstrconstunit.scopyfieldname
+msgid "Copy field name"
+msgstr ""
+
+#: fbmstrconstunit.scopylisttoclipboard
+msgid "Copy list to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopylisttoclipboardhint
+msgid "Copy of objects list to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopyof
+msgid "Copy of : "
+msgstr ""
+
+#: fbmstrconstunit.scopyrolenametoclipboard
+msgid "Copy role name to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopyselectedrecordasinsert
+msgid "Copy selected record(s) as INSERT"
+msgstr ""
+
+#: fbmstrconstunit.scopyselectedrecordasupdate
+msgid "Copy selected record(s) as UPDATE"
+msgstr ""
+
+#: fbmstrconstunit.scopytoclipboard
+msgid "Copy to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scopytoclipboardhint
+msgid "Copy current statement to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.scountrowtofetch
+msgid "Count row to fetch"
+msgstr ""
+
+#: fbmstrconstunit.scountsqleditorhistoryrecords
+msgid "Count SQL Editor history records"
+msgstr ""
+
+#: fbmstrconstunit.screate
+msgid "Create"
+msgstr ""
+
+#: fbmstrconstunit.screatedb
+msgid "Create "
+msgstr ""
+
+#: fbmstrconstunit.screatedeleteprocedure
+msgid "Create DELETE procedure"
+msgstr ""
+
+#: fbmstrconstunit.screateindex
+msgid "Create index"
+msgstr ""
+
+#: fbmstrconstunit.screateindexaftercreatefk
+msgid "Create index after create FK"
+msgstr ""
+
+#: fbmstrconstunit.screateinsertorupdateprocedure
+msgid "Create INSERT/UPDATE procedure"
+msgstr ""
+
+#: fbmstrconstunit.screateinsertprocedure
+msgid "Create INSERT procedure"
+msgstr ""
+
+#: fbmstrconstunit.screatemysqldatabase
+msgid "Create MySQL database..."
+msgstr ""
+
+#: fbmstrconstunit.screatenewdb
+msgctxt "fbmstrconstunit.screatenewdb"
+msgid "Create New DB"
+msgstr ""
+
+#: fbmstrconstunit.screatenewfoldertext
+msgid "Enter DB folder name"
+msgstr ""
+
+#: fbmstrconstunit.screatenewfoldertitle
+msgid "Create DB folder"
+msgstr ""
+
+#: fbmstrconstunit.screatenewfunction
+msgid "Create new function"
+msgstr ""
+
+#: fbmstrconstunit.screatenewgenerator
+msgid "Create new generator"
+msgstr ""
+
+#: fbmstrconstunit.screatenewprocedure
+msgid "Create new procedure"
+msgstr ""
+
+#: fbmstrconstunit.screateparams
+msgid "Create params"
+msgstr ""
+
+#: fbmstrconstunit.screatepostgredatabase
+msgid "Create postgre database..."
+msgstr ""
+
+#: fbmstrconstunit.screateroutine
+msgid "Create routine"
+msgstr ""
+
+#: fbmstrconstunit.screateselectprocedure
+msgid "Create SELECT procedure"
+msgstr ""
+
+#: fbmstrconstunit.screateshadow
+msgid "Create shadow?"
+msgstr ""
+
+#: fbmstrconstunit.screatesp
+msgid "Create SP"
+msgstr ""
+
+#: fbmstrconstunit.screatesphint
+msgid "Create stored procedure from current query"
+msgstr ""
+
+#: fbmstrconstunit.screatetablespace
+msgid "Create tablespace"
+msgstr ""
+
+#: fbmstrconstunit.screatetmptable
+msgid "Create temp. tables"
+msgstr ""
+
+#: fbmstrconstunit.screatetriggerforautoinc
+msgid "Create trigger for AUTOINC"
+msgstr ""
+
+#: fbmstrconstunit.screateupdateprocedure
+msgid "Create UPDATE procedure"
+msgstr ""
+
+#: fbmstrconstunit.screateuser
+msgid "Create user"
+msgstr ""
+
+#: fbmstrconstunit.screateview
+msgid "Create view"
+msgstr ""
+
+#: fbmstrconstunit.screateviewhint
+msgid "Create new view from current select"
+msgstr ""
+
+#: fbmstrconstunit.scriteria
+msgid "Criteria"
+msgstr ""
+
+#: fbmstrconstunit.sctype
+msgid "CType"
+msgstr ""
+
+#: fbmstrconstunit.scustomtype
+msgid "Custom type"
+msgstr ""
+
+#: fbmstrconstunit.scut
+msgid "Cut"
+msgstr ""
+
+#: fbmstrconstunit.sdashboard
+msgid "Dashboard"
+msgstr ""
+
+#: fbmstrconstunit.sdata
+msgctxt "fbmstrconstunit.sdata"
+msgid "Data"
+msgstr ""
+
+#: fbmstrconstunit.sdatabase
+msgid "Database"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasealias
+msgid "Database alias"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasedialect
+msgid "Database dialect"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasefile
+msgid "Database file"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaseid
+msgid "Database ID"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaselist
+msgid "Database list"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasename
+msgctxt "fbmstrconstunit.sdatabasename"
+msgid "Database name"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasenumbackends
+msgid "Database backends"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaseobjecttemplates
+msgid "Database object templates"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaseoncurrentserver
+msgctxt "fbmstrconstunit.sdatabaseoncurrentserver"
+msgid "Database on current server"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasepagesize
+msgid "Database page size"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaseproperty
+msgid "Database property"
+msgstr ""
+
+#: fbmstrconstunit.sdatabasesessions
+msgid "Database sessions"
+msgstr ""
+
+#: fbmstrconstunit.sdatablocksread
+msgid "Data blocks read from disk"
+msgstr ""
+
+#: fbmstrconstunit.sdatatype
+msgid "Data type"
+msgstr ""
+
+#: fbmstrconstunit.sdataversion
+msgid "Data version"
+msgstr ""
+
+#: fbmstrconstunit.sdate
+msgid "Date"
+msgstr ""
+
+#: fbmstrconstunit.sdatecreated
+msgctxt "fbmstrconstunit.sdatecreated"
+msgid "Date created"
+msgstr ""
+
+#: fbmstrconstunit.sdatefinish
+msgctxt "fbmstrconstunit.sdatefinish"
+msgid "Date finish"
+msgstr ""
+
+#: fbmstrconstunit.sdatemodified
+msgctxt "fbmstrconstunit.sdatemodified"
+msgid "Date modified"
+msgstr ""
+
+#: fbmstrconstunit.sdateseparator
+msgid "Date separator"
+msgstr ""
+
+#: fbmstrconstunit.sdatestart
+msgctxt "fbmstrconstunit.sdatestart"
+msgid "Date start"
+msgstr ""
+
+#: fbmstrconstunit.sdayofmonth
+msgctxt "fbmstrconstunit.sdayofmonth"
+msgid "Day of month"
+msgstr ""
+
+#: fbmstrconstunit.sdayofweek
+msgctxt "fbmstrconstunit.sdayofweek"
+msgid "Day of week"
+msgstr ""
+
+#: fbmstrconstunit.sdays
+msgctxt "fbmstrconstunit.sdays"
+msgid "Days"
+msgstr ""
+
+#: fbmstrconstunit.sdbcharset
+msgid "DB Char Set    = "
+msgstr ""
+
+#: fbmstrconstunit.sdbffilesfolder
+msgid "Dbf files folder"
+msgstr ""
+
+#: fbmstrconstunit.sdbfilesize
+msgid "DB file size   = "
+msgstr ""
+
+#: fbmstrconstunit.sdbname
+msgid "Data base name = "
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintcancel
+msgctxt "fbmstrconstunit.sdbnavhintcancel"
+msgid "Cancel"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintdelete
+msgctxt "fbmstrconstunit.sdbnavhintdelete"
+msgid "Delete"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintedit
+msgctxt "fbmstrconstunit.sdbnavhintedit"
+msgid "Edit"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintfirst
+msgid "First"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintinsert
+msgctxt "fbmstrconstunit.sdbnavhintinsert"
+msgid "Insert"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintlast
+msgid "Last"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintnext
+msgctxt "fbmstrconstunit.sdbnavhintnext"
+msgid "Next"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintpost
+msgid "Post"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintprior
+msgid "Prior"
+msgstr ""
+
+#: fbmstrconstunit.sdbnavhintrefresh
+msgctxt "fbmstrconstunit.sdbnavhintrefresh"
+msgid "Refresh"
+msgstr ""
+
+#: fbmstrconstunit.sdeactivatealltrigger
+msgctxt "fbmstrconstunit.sdeactivatealltrigger"
+msgid "Deactivate all trigger"
+msgstr ""
+
+#: fbmstrconstunit.sdeactivateindexes
+msgctxt "fbmstrconstunit.sdeactivateindexes"
+msgid "Deactivate Indexes"
+msgstr ""
+
+#: fbmstrconstunit.sdeactivatetrigger
+msgctxt "fbmstrconstunit.sdeactivatetrigger"
+msgid "Deactivate trigger"
+msgstr ""
+
+#: fbmstrconstunit.sdeadlocks
+msgid "Number of deadlocks detected in this database"
+msgstr ""
+
+#: fbmstrconstunit.sdeclaration
+msgctxt "fbmstrconstunit.sdeclaration"
+msgid "Declaration"
+msgstr ""
+
+#: fbmstrconstunit.sdefault
+msgid "Default"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultcachesize
+msgid "Default cache size"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultcharacterset
+msgid "Default character set"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultpassword
+msgid "Default password"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultqueryset
+msgid "< Default query set >"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultserverversion
+msgid "Default server version"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultusername
+msgid "Default user name"
+msgstr ""
+
+#: fbmstrconstunit.sdefaultvalue
+msgid "Default value"
+msgstr ""
+
+#: fbmstrconstunit.sdefineinoutparam
+msgid "Define In/Out param"
+msgstr ""
+
+#: fbmstrconstunit.sdefineinparam
+msgid "Define input param"
+msgstr ""
+
+#: fbmstrconstunit.sdefineoutparam
+msgid "Define output param"
+msgstr ""
+
+#: fbmstrconstunit.sdefiner
+msgid "Definer"
+msgstr ""
+
+#: fbmstrconstunit.sdefinevariable
+msgid "Define variable"
+msgstr ""
+
+#: fbmstrconstunit.sdelbfolder
+msgctxt "fbmstrconstunit.sdelbfolder"
+msgid "Delete DB folder"
+msgstr ""
+
+#: fbmstrconstunit.sdelete
+msgctxt "fbmstrconstunit.sdelete"
+msgid "Delete"
+msgstr ""
+
+#: fbmstrconstunit.sdeleteall
+msgid "Delete all"
+msgstr ""
+
+#: fbmstrconstunit.sdeletecheckqst
+msgid "Delete this check constraint?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletecmd
+msgid "Remove selection"
+msgstr ""
+
+#: fbmstrconstunit.sdeletecolor
+msgid "DELETE color"
+msgstr ""
+
+#: fbmstrconstunit.sdeletedbfolder
+msgid "Delete this folder?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletedrowsinfo
+msgid "Deleted rows : %d"
+msgstr ""
+
+#: fbmstrconstunit.sdeletefield
+msgid "Delete field \"%s\"?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletefunctionhint
+msgid "Delete nested function"
+msgstr ""
+
+#: fbmstrconstunit.sdeletefunctionq
+msgctxt "fbmstrconstunit.sdeletefunctionq"
+msgid "Delete function \"%s\"?"
+msgstr ""
+
+#: fbmstrconstunit.sdeleteindex
+msgid "Delete index"
+msgstr ""
+
+#: fbmstrconstunit.sdeletelocalvar
+msgctxt "fbmstrconstunit.sdeletelocalvar"
+msgid "Delete local variable"
+msgstr ""
+
+#: fbmstrconstunit.sdeletelocalvarquest
+msgid "Delete local variable %s?"
+msgstr ""
+
+#: fbmstrconstunit.sdeleteparam
+msgctxt "fbmstrconstunit.sdeleteparam"
+msgid "Delete param"
+msgstr ""
+
+#: fbmstrconstunit.sdeleteparamqst
+msgid "Delete this parametr?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletequery
+msgid "Delete wthis query?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletequeryset
+msgid "Delete wthis query set an it's query's?"
+msgstr ""
+
+#: fbmstrconstunit.sdeleterole
+msgid "Delete role"
+msgstr ""
+
+#: fbmstrconstunit.sdeleterows
+msgid "Delete rows"
+msgstr ""
+
+#: fbmstrconstunit.sdeleterule
+msgctxt "fbmstrconstunit.sdeleterule"
+msgid "Delete rule"
+msgstr ""
+
+#: fbmstrconstunit.sdeletestatement
+msgid "Delete statement"
+msgstr ""
+
+#: fbmstrconstunit.sdeletestatementhint
+msgid "Delete current statement"
+msgstr ""
+
+#: fbmstrconstunit.sdeletetable
+msgid "Delete table"
+msgstr ""
+
+#: fbmstrconstunit.sdeletetemplate
+msgid "Delete template"
+msgstr ""
+
+#: fbmstrconstunit.sdeletetemplateq
+msgid "Delete template?"
+msgstr ""
+
+#: fbmstrconstunit.sdeletetrigger
+msgctxt "fbmstrconstunit.sdeletetrigger"
+msgid "Delete trigger"
+msgstr ""
+
+#: fbmstrconstunit.sdeleteuserfromserveruserlist
+msgid "Delete user from server user list"
+msgstr ""
+
+#: fbmstrconstunit.sdeluserconfirm
+msgid "Are you sure thet want to delete user %s?"
+msgstr ""
+
+#: fbmstrconstunit.sdependcaption1
+msgid "Objects, that depend on %s"
+msgstr ""
+
+#: fbmstrconstunit.sdependcaption2
+msgid "Objects, that %s depends on"
+msgstr ""
+
+#: fbmstrconstunit.sdependencies
+msgid "Dependencies"
+msgstr ""
+
+#: fbmstrconstunit.sdescending
+msgctxt "fbmstrconstunit.sdescending"
+msgid "Descending"
+msgstr ""
+
+#: fbmstrconstunit.sdescription
+msgctxt "fbmstrconstunit.sdescription"
+msgid "Description"
+msgstr ""
+
+#: fbmstrconstunit.sdescriptionchange
+msgid "Description change"
+msgstr ""
+
+#: fbmstrconstunit.sdescriptionchangeq
+msgid "Description change. Save it?"
+msgstr ""
+
+#: fbmstrconstunit.sdesc_new
+msgctxt "fbmstrconstunit.sdesc_new"
+msgid "Variable holding the new database row for INSERT/UPDATE operations in row-level triggers. This variable is NULL in statement-level triggers and for DELETE operations."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_old
+msgctxt "fbmstrconstunit.sdesc_old"
+msgid "Variable holding the old database row for UPDATE/DELETE operations in row-level triggers. This variable is NULL in statement-level triggers and for INSERT operations."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_argv
+msgctxt "fbmstrconstunit.sdesc_tg_argv"
+msgid "The arguments from the CREATE TRIGGER statement. The index counts from 0. Invalid indexes (less than 0 or greater than or equal to tg_nargs) result in a null value."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_event
+msgid "A string representing the event the trigger is fired for."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_level
+msgctxt "fbmstrconstunit.sdesc_tg_level"
+msgid "A string of either ROW or STATEMENT depending on the trigger's definition."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_name
+msgctxt "fbmstrconstunit.sdesc_tg_name"
+msgid "Variable that contains the name of the trigger actually fired."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_nargs
+msgctxt "fbmstrconstunit.sdesc_tg_nargs"
+msgid "The number of arguments given to the trigger procedure in the CREATE TRIGGER statement."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_op
+msgctxt "fbmstrconstunit.sdesc_tg_op"
+msgid "A string of INSERT, UPDATE, DELETE, or TRUNCATE telling for which operation the trigger was fired."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_relid
+msgctxt "fbmstrconstunit.sdesc_tg_relid"
+msgid "The object ID of the table that caused the trigger invocation."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_relname
+msgctxt "fbmstrconstunit.sdesc_tg_relname"
+msgid "The name of the table that caused the trigger invocation. This is now deprecated, and could disappear in a future release. Use TG_TABLE_NAME instead."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_table_name
+msgctxt "fbmstrconstunit.sdesc_tg_table_name"
+msgid "The name of the table that caused the trigger invocation."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_table_schema
+msgctxt "fbmstrconstunit.sdesc_tg_table_schema"
+msgid "The name of the schema of the table that caused the trigger invocation."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_tag
+msgid "Variable that contains the command tag for which the trigger is fired."
+msgstr ""
+
+#: fbmstrconstunit.sdesc_tg_when
+msgctxt "fbmstrconstunit.sdesc_tg_when"
+msgid "A string of BEFORE, AFTER, or INSTEAD OF, depending on the trigger's definition."
+msgstr ""
+
+#: fbmstrconstunit.sdesignreport
+msgid "Design report"
+msgstr ""
+
+#: fbmstrconstunit.sdeterministic
+msgid "Deterministic"
+msgstr ""
+
+#: fbmstrconstunit.sdialect
+msgid "Dialect        = "
+msgstr ""
+
+#: fbmstrconstunit.sdialog
+msgid "Dialog"
+msgstr ""
+
+#: fbmstrconstunit.sdisableantialiased
+msgid "Disable antialiased"
+msgstr ""
+
+#: fbmstrconstunit.sdisableresize
+msgid "Disable resize"
+msgstr ""
+
+#: fbmstrconstunit.sdisconectconnection
+msgid "Disconect connection"
+msgstr ""
+
+#: fbmstrconstunit.sdisplay
+msgid "Display"
+msgstr ""
+
+#: fbmstrconstunit.sdisplayfont
+msgid "Display font"
+msgstr ""
+
+#: fbmstrconstunit.sdisplaymemovaluesastext
+msgid "Display memo values as text"
+msgstr ""
+
+#: fbmstrconstunit.sdisplaytabledataproperties
+msgid "Display data properties"
+msgstr ""
+
+#: fbmstrconstunit.sdomain
+msgctxt "fbmstrconstunit.sdomain"
+msgid "Domain"
+msgstr ""
+
+#: fbmstrconstunit.sdomainname
+msgctxt "fbmstrconstunit.sdomainname"
+msgid "Domain name"
+msgstr ""
+
+#: fbmstrconstunit.sdomains
+msgctxt "fbmstrconstunit.sdomains"
+msgid "Domains"
+msgstr ""
+
+#: fbmstrconstunit.sdontlockoncreation
+msgid "Dont lock on creation"
+msgstr ""
+
+#: fbmstrconstunit.sdrop
+msgid "Drop "
+msgstr ""
+
+#: fbmstrconstunit.sdropfield
+msgid "Drop field"
+msgstr ""
+
+#: fbmstrconstunit.sdropforeignkey
+msgctxt "fbmstrconstunit.sdropforeignkey"
+msgid "Drop foreign key"
+msgstr ""
+
+#: fbmstrconstunit.sdropobject
+msgid "Drop object"
+msgstr ""
+
+#: fbmstrconstunit.sdropprimarykey
+msgid "Drop primary key"
+msgstr ""
+
+#: fbmstrconstunit.sdropprimarykeyhint
+msgid "Drop primary key for table"
+msgstr ""
+
+#: fbmstrconstunit.sdropshadow
+msgid "Drop shadow?"
+msgstr ""
+
+#: fbmstrconstunit.sdroptable
+msgid "Drop table"
+msgstr ""
+
+#: fbmstrconstunit.sdropuniqueconstraint
+msgid "Drop unique constraint"
+msgstr ""
+
+#: fbmstrconstunit.sduplicateindexname
+msgid "Duplicate index name"
+msgstr ""
+
+#: fbmstrconstunit.sduration
+msgctxt "fbmstrconstunit.sduration"
+msgid "Duration"
+msgstr ""
+
+#: fbmstrconstunit.sedit
+msgctxt "fbmstrconstunit.sedit"
+msgid "Edit"
+msgstr ""
+
+#: fbmstrconstunit.seditdbfolder
+msgctxt "fbmstrconstunit.seditdbfolder"
+msgid "Edit DB folder"
+msgstr ""
+
+#: fbmstrconstunit.seditfield
+msgid "Edit field"
+msgstr ""
+
+#: fbmstrconstunit.seditfolderdesc
+msgid "DB folder description"
+msgstr ""
+
+#: fbmstrconstunit.seditindex
+msgid "Edit index"
+msgstr ""
+
+#: fbmstrconstunit.seditlocalvar
+msgid "Edit local variable"
+msgstr ""
+
+#: fbmstrconstunit.seditor
+msgid "Editor"
+msgstr ""
+
+#: fbmstrconstunit.seditoroptions
+msgid "Editor options"
+msgstr ""
+
+#: fbmstrconstunit.seditparam
+msgctxt "fbmstrconstunit.seditparam"
+msgid "Edit param"
+msgstr ""
+
+#: fbmstrconstunit.sedittemplate
+msgid "Edit template"
+msgstr ""
+
+#: fbmstrconstunit.sedituser
+msgid "Edit user"
+msgstr ""
+
+#: fbmstrconstunit.sedituserinlist
+msgid "Edit user in list"
+msgstr ""
+
+#: fbmstrconstunit.senableautocompletion
+msgctxt "fbmstrconstunit.senableautocompletion"
+msgid "Enable autocompletion"
+msgstr ""
+
+#: fbmstrconstunit.senabled
+msgctxt "fbmstrconstunit.senabled"
+msgid "Enabled"
+msgstr ""
+
+#: fbmstrconstunit.senablelogginmetadatachanges
+msgid "Enable loggin metadata changes"
+msgstr ""
+
+#: fbmstrconstunit.senablelogginsqleditor
+msgid "Enable loggin SQL editor"
+msgstr ""
+
+#: fbmstrconstunit.senablesetwgofrompopup
+msgid "Enable set \"With Grant Options\" from popup menu"
+msgstr ""
+
+#: fbmstrconstunit.senabletooltips
+msgid "Enable tooltips"
+msgstr ""
+
+#: fbmstrconstunit.sencoding
+msgid "Encoding"
+msgstr ""
+
+#: fbmstrconstunit.senterdefvalue
+msgid "Enter default value"
+msgstr ""
+
+#: fbmstrconstunit.senterdefvaluefornotnull
+msgid "Enter default value for NOT NULL field. String field needs \"'\"."
+msgstr ""
+
+#: fbmstrconstunit.senterfolderdata
+msgid "Enter DB folder data"
+msgstr ""
+
+#: fbmstrconstunit.sentername
+msgid "Enter name"
+msgstr ""
+
+#: fbmstrconstunit.senterquerysetname
+msgid "Enter query set name"
+msgstr ""
+
+#: fbmstrconstunit.sentertablename
+msgid "Enter table name"
+msgstr ""
+
+#: fbmstrconstunit.sentertemplatename
+msgid "Enter template name"
+msgstr ""
+
+#: fbmstrconstunit.sentervalues
+msgctxt "fbmstrconstunit.sentervalues"
+msgid "Enter values"
+msgstr ""
+
+#: fbmstrconstunit.senvironmentoptions
+msgid "Environment Options"
+msgstr ""
+
+#: fbmstrconstunit.serror
+msgctxt "fbmstrconstunit.serror"
+msgid "Error"
+msgstr ""
+
+#: fbmstrconstunit.sevent
+msgid "Event"
+msgstr ""
+
+#: fbmstrconstunit.seventtrigger
+msgid "Event trigger"
+msgstr ""
+
+#: fbmstrconstunit.seventtriggers
+msgid "Event triggers"
+msgstr ""
+
+#: fbmstrconstunit.sexcep
+msgid "Excep"
+msgstr ""
+
+#: fbmstrconstunit.sexception
+msgid "Exception"
+msgstr ""
+
+#: fbmstrconstunit.sexceptionmessage
+msgid "Exception message"
+msgstr ""
+
+#: fbmstrconstunit.sexceptionname
+msgid "Exception name"
+msgstr ""
+
+#: fbmstrconstunit.sexceptions
+msgid "Exceptions"
+msgstr ""
+
+#: fbmstrconstunit.sexeccomplete
+msgid "Exec complete."
+msgstr ""
+
+#: fbmstrconstunit.sexectime
+msgid "Exec time :"
+msgstr ""
+
+#: fbmstrconstunit.sexecute
+msgid "Execute"
+msgstr ""
+
+#: fbmstrconstunit.sexecutequery
+msgid "Execute query"
+msgstr ""
+
+#: fbmstrconstunit.sexecutequeryfetchall
+msgctxt "fbmstrconstunit.sexecutequeryfetchall"
+msgid "Run query and fetch all"
+msgstr ""
+
+#: fbmstrconstunit.sexecutequeryfetchallhint
+msgctxt "fbmstrconstunit.sexecutequeryfetchallhint"
+msgid "Run query and fetch all"
+msgstr ""
+
+#: fbmstrconstunit.sexecutequeryhint
+msgid "Execute query from current editor"
+msgstr ""
+
+#: fbmstrconstunit.sexecutioncomplete
+msgid "Execution complete. Execute time : %s."
+msgstr ""
+
+#: fbmstrconstunit.sexit
+msgctxt "fbmstrconstunit.sexit"
+msgid "Close"
+msgstr ""
+
+#: fbmstrconstunit.sexithint
+msgid "Exit application..."
+msgstr ""
+
+#: fbmstrconstunit.sexpand
+msgctxt "fbmstrconstunit.sexpand"
+msgid "Expand"
+msgstr ""
+
+#: fbmstrconstunit.sexpandall
+msgid "Expand all"
+msgstr ""
+
+#: fbmstrconstunit.sexportdata
+msgctxt "fbmstrconstunit.sexportdata"
+msgid "Export data..."
+msgstr ""
+
+#: fbmstrconstunit.sexportdatatopdf
+msgid "Export data to PDF"
+msgstr ""
+
+#: fbmstrconstunit.sexportdatatospreadsheet
+msgid "Export data to Spreadsheet"
+msgstr ""
+
+#: fbmstrconstunit.sexporttospreadsheet
+msgid "Export to spreadsheet"
+msgstr ""
+
+#: fbmstrconstunit.sextension
+msgid "Extension"
+msgstr ""
+
+#: fbmstrconstunit.sextensions
+msgid "Extensions"
+msgstr ""
+
+#: fbmstrconstunit.sextractall
+msgid "Extract all"
+msgstr ""
+
+#: fbmstrconstunit.sextractmetaform
+msgid "Extract metadata from DB"
+msgstr ""
+
+#: fbmstrconstunit.sextrenalfield
+msgid "External field"
+msgstr ""
+
+#: fbmstrconstunit.sextrenalfile
+msgid "Extrenal file"
+msgstr ""
+
+#: fbmstrconstunit.sextrenaltable
+msgid "External table"
+msgstr ""
+
+#: fbmstrconstunit.sfailed
+msgid " - failed"
+msgstr ""
+
+#: fbmstrconstunit.sfbgloballtransactionproperties
+msgctxt "fbmstrconstunit.sfbgloballtransactionproperties"
+msgid "Transaction properties"
+msgstr ""
+
+#: fbmstrconstunit.sfbmanageroptions
+msgid "FBManager options"
+msgstr ""
+
+#: fbmstrconstunit.sfbmanagerwebsite
+msgid "FBManager web site..."
+msgstr ""
+
+#: fbmstrconstunit.sfbsqlfunction
+msgid "FB : function"
+msgstr ""
+
+#: fbmstrconstunit.sfbsqlfunctionlazy
+msgid "FB : function lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.sfbsqlpackage
+msgid "FB : package"
+msgstr ""
+
+#: fbmstrconstunit.sfbsqlpackagelazy
+msgid "FB : package lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.sfbsqltrigger
+msgid "FB : trigger"
+msgstr ""
+
+#: fbmstrconstunit.sfbsqltriggerlazy
+msgid "FB : trigger lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.sfbtrannexttrans
+msgid "Next transaction"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranoldestactive
+msgid "Oldest active"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranoldestsnaps
+msgid "Oldest snapshot"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranoldesttran
+msgid "Oldest transaction"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranparamsreadcommited
+msgid "Read commited"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranparamsreadonlytablestab
+msgid "Read-only table stability"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranparamsreadwritetablestab
+msgid "Read-write table stability"
+msgstr ""
+
+#: fbmstrconstunit.sfbtranparamssnapshot
+msgid "Snapshot"
+msgstr ""
+
+#: fbmstrconstunit.sfbtransactionproperties
+msgctxt "fbmstrconstunit.sfbtransactionproperties"
+msgid "Transaction properties"
+msgstr ""
+
+#: fbmstrconstunit.sfetchall
+msgid "Fetch all"
+msgstr ""
+
+#: fbmstrconstunit.sfetchalldatafromtable
+msgid "Fetch all data from table"
+msgstr ""
+
+#: fbmstrconstunit.sfield
+msgid "Field"
+msgstr ""
+
+#: fbmstrconstunit.sfieldcount
+msgid "Field count: %d"
+msgstr ""
+
+#: fbmstrconstunit.sfielddependencies
+msgid "Field Dependencies"
+msgstr ""
+
+#: fbmstrconstunit.sfieldinitialvaluereq
+msgid "For NOT NULL fields you must specify an initial value"
+msgstr ""
+
+#: fbmstrconstunit.sfieldname
+msgctxt "fbmstrconstunit.sfieldname"
+msgid "Field name"
+msgstr ""
+
+#: fbmstrconstunit.sfieldnamereq
+msgid "Requared field name."
+msgstr ""
+
+#: fbmstrconstunit.sfields
+msgctxt "fbmstrconstunit.sfields"
+msgid "Fields"
+msgstr ""
+
+#: fbmstrconstunit.sfieldsformat
+msgid "Fields format"
+msgstr ""
+
+#: fbmstrconstunit.sfieldsorder
+msgid "Fields order..."
+msgstr ""
+
+#: fbmstrconstunit.sfieldsparameterslist
+msgid "Fields/Parameters list"
+msgstr ""
+
+#: fbmstrconstunit.sfieldtype
+msgid "Field type"
+msgstr ""
+
+#: fbmstrconstunit.sfieldtypereq
+msgid "Requared field type or domain."
+msgstr ""
+
+#: fbmstrconstunit.sfile
+msgid "File"
+msgstr ""
+
+#: fbmstrconstunit.sfilefolder
+msgid "File folder"
+msgstr ""
+
+#: fbmstrconstunit.sfilename
+msgid "File name"
+msgstr ""
+
+#: fbmstrconstunit.sfilenotfound
+msgid "File %s not found."
+msgstr ""
+
+#: fbmstrconstunit.sfilesfiltercfg
+msgid "Config files (*.cfg)|*.cfg|All files (*)|*"
+msgstr ""
+
+#: fbmstrconstunit.sfilesfiltersql
+msgid "Sql files (*.sql)|*.sql|All files (*)|*"
+msgstr ""
+
+#: fbmstrconstunit.sfillfactor
+msgid "Fillfactor"
+msgstr ""
+
+#: fbmstrconstunit.sfilterintable
+msgid "Filter in table"
+msgstr ""
+
+#: fbmstrconstunit.sfilterintablehint
+msgid "Show filter in table"
+msgstr ""
+
+#: fbmstrconstunit.sfilterstyle
+msgid "Filter style"
+msgstr ""
+
+#: fbmstrconstunit.sfind
+msgctxt "fbmstrconstunit.sfind"
+msgid "Find"
+msgstr ""
+
+#: fbmstrconstunit.sfindindatabase
+msgid "Find in database"
+msgstr ""
+
+#: fbmstrconstunit.sfindinmetatada
+msgid "Find in metadata"
+msgstr ""
+
+#: fbmstrconstunit.sfindinmetatadaresult
+msgid "Find in metadata result"
+msgstr ""
+
+#: fbmstrconstunit.sfindinobjects
+msgid "Find in objects"
+msgstr ""
+
+#: fbmstrconstunit.sfindnext
+msgctxt "fbmstrconstunit.sfindnext"
+msgid "Find next"
+msgstr ""
+
+#: fbmstrconstunit.sfindoptions
+msgid "Find options"
+msgstr ""
+
+#: fbmstrconstunit.sfindquery
+msgid "Find query"
+msgstr ""
+
+#: fbmstrconstunit.sfindtext
+msgid "Text to find"
+msgstr ""
+
+#: fbmstrconstunit.sfirebireddbbackup
+msgid "Firebird Database Backup"
+msgstr ""
+
+#: fbmstrconstunit.sfirebireddbrestore
+msgid "Firebird Database Restore"
+msgstr ""
+
+#: fbmstrconstunit.sfirebireddbshadman
+msgid "Firebird DB Shadow manager"
+msgstr ""
+
+#: fbmstrconstunit.sfirebireddbstat
+msgid "Firebird DB Statistic"
+msgstr ""
+
+#: fbmstrconstunit.sfirebireddbtransmon
+msgid "Firebird Tranaction monitor"
+msgstr ""
+
+#: fbmstrconstunit.sfirebiredusermanag
+msgid "Firebird user manager"
+msgstr ""
+
+#: fbmstrconstunit.sfirstletter
+msgid "First letter"
+msgstr ""
+
+#: fbmstrconstunit.sfirstname
+msgid "First name"
+msgstr ""
+
+#: fbmstrconstunit.sfkdlgerr1
+msgid "Not define FK field on main table"
+msgstr ""
+
+#: fbmstrconstunit.sfkdlgerr2
+msgid "Not define FK field on external table"
+msgstr ""
+
+#: fbmstrconstunit.sfkname
+msgid "Forign key name"
+msgstr ""
+
+#: fbmstrconstunit.sflatbuttonsintaskbar
+msgid "Flat buttons in task bar"
+msgstr ""
+
+#: fbmstrconstunit.sfontsize
+msgid "Font size"
+msgstr ""
+
+#: fbmstrconstunit.sforcedwrite
+msgid "Forced write"
+msgstr ""
+
+#: fbmstrconstunit.sforeground
+msgid "Foreground"
+msgstr ""
+
+#: fbmstrconstunit.sforeigndatawrapper
+msgid "Foreign data wrapper"
+msgstr ""
+
+#: fbmstrconstunit.sforeignkey
+msgctxt "fbmstrconstunit.sforeignkey"
+msgid "Foreign key"
+msgstr ""
+
+#: fbmstrconstunit.sforeignkeyrule
+msgid "Foreign key rule"
+msgstr ""
+
+#: fbmstrconstunit.sforeignkeys
+msgctxt "fbmstrconstunit.sforeignkeys"
+msgid "Foreign keys"
+msgstr ""
+
+#: fbmstrconstunit.sfortable
+msgctxt "fbmstrconstunit.sfortable"
+msgid "For table"
+msgstr ""
+
+#: fbmstrconstunit.sforward
+msgid "&Forward"
+msgstr ""
+
+#: fbmstrconstunit.sfpcversion
+msgid "FPC version : "
+msgstr ""
+
+#: fbmstrconstunit.sfreetdsconfigeditor
+msgid "Free tds config editor..."
+msgstr ""
+
+#: fbmstrconstunit.sfreetdsdeletealias
+msgid "Delete this alias?"
+msgstr ""
+
+#: fbmstrconstunit.sfromdate
+msgctxt "fbmstrconstunit.sfromdate"
+msgid "From date"
+msgstr ""
+
+#: fbmstrconstunit.sfucntnotcomplete
+msgid "Function not complete..."
+msgstr ""
+
+#: fbmstrconstunit.sfullfsync
+msgid "Full file sync"
+msgstr ""
+
+#: fbmstrconstunit.sfunction
+msgid "Function"
+msgstr ""
+
+#: fbmstrconstunit.sfunctionname
+msgid "Function name"
+msgstr ""
+
+#: fbmstrconstunit.sfunctions
+msgid "Functions"
+msgstr ""
+
+#: fbmstrconstunit.sfunctiontype
+msgid "Function type"
+msgstr ""
+
+#: fbmstrconstunit.sfuntionnotcomplete
+msgid "Funtion not complete..."
+msgstr ""
+
+#: fbmstrconstunit.sgeneral
+msgctxt "fbmstrconstunit.sgeneral"
+msgid "General"
+msgstr ""
+
+#: fbmstrconstunit.sgenerateinsertscript
+msgid "Generate INSERT script"
+msgstr ""
+
+#: fbmstrconstunit.sgenerator
+msgid "Generator"
+msgstr ""
+
+#: fbmstrconstunit.sgeneratorname
+msgid "Generator name"
+msgstr ""
+
+#: fbmstrconstunit.sgeneratornametemplate
+msgid "Generator name template"
+msgstr ""
+
+#: fbmstrconstunit.sgenerators
+msgid "Generators"
+msgstr ""
+
+#: fbmstrconstunit.sgeneratorvalue
+msgid "Generator value"
+msgstr ""
+
+#: fbmstrconstunit.sglobal
+msgid "Global"
+msgstr ""
+
+#: fbmstrconstunit.sglobaltemporarytable
+msgid "Global Temporary Table"
+msgstr ""
+
+#: fbmstrconstunit.sgotobookmark
+msgid "Goto bookmark "
+msgstr ""
+
+#: fbmstrconstunit.sgotoresulttabafterexecute
+msgid "Go to Result tab after execute"
+msgstr ""
+
+#: fbmstrconstunit.sgrant
+msgid "Grant"
+msgstr ""
+
+#: fbmstrconstunit.sgrantall
+msgid "Grant all"
+msgstr ""
+
+#: fbmstrconstunit.sgrantallgo
+msgid "Grant All with GO"
+msgstr ""
+
+#: fbmstrconstunit.sgrantalltoall
+msgid "Grant All to All"
+msgstr ""
+
+#: fbmstrconstunit.sgrantexecuteto
+msgid "Grant execute to"
+msgstr ""
+
+#: fbmstrconstunit.sgrantforall
+msgid "Grant for all"
+msgstr ""
+
+#: fbmstrconstunit.sgrantforallgo
+msgid "Grant to All with GO"
+msgstr ""
+
+#: fbmstrconstunit.sgrantor
+msgid "Grantor"
+msgstr ""
+
+#: fbmstrconstunit.sgrantownuser
+msgid "Grant own. user"
+msgstr ""
+
+#: fbmstrconstunit.sgridoptions
+msgid "Grid options"
+msgstr ""
+
+#: fbmstrconstunit.sgridstile
+msgid "Grid stile"
+msgstr ""
+
+#: fbmstrconstunit.sgroup
+msgid "Group"
+msgstr ""
+
+#: fbmstrconstunit.sgroupid
+msgid "Group ID"
+msgstr ""
+
+#: fbmstrconstunit.sgroupname
+msgctxt "fbmstrconstunit.sgroupname"
+msgid "Group name"
+msgstr ""
+
+#: fbmstrconstunit.sgroups
+msgid "Groups"
+msgstr ""
+
+#: fbmstrconstunit.sgslazarus
+msgid "Lazarus"
+msgstr ""
+
+#: fbmstrconstunit.sgsnative
+msgctxt "fbmstrconstunit.sgsnative"
+msgid "Native"
+msgstr ""
+
+#: fbmstrconstunit.sgsstandart
+msgctxt "fbmstrconstunit.sgsstandart"
+msgid "Standart"
+msgstr ""
+
+#: fbmstrconstunit.shandlerfunction
+msgid "Handler function"
+msgstr ""
+
+#: fbmstrconstunit.shighlightcurrentword
+msgctxt "fbmstrconstunit.shighlightcurrentword"
+msgid "Highlight current word"
+msgstr ""
+
+#: fbmstrconstunit.shighlightdelay
+msgid "delay %d ms"
+msgstr ""
+
+#: fbmstrconstunit.shintcolor
+msgid "Hint color"
+msgstr ""
+
+#: fbmstrconstunit.shistory
+msgid "History"
+msgstr ""
+
+#: fbmstrconstunit.shostname
+msgctxt "fbmstrconstunit.shostname"
+msgid "Host name"
+msgstr ""
+
+#: fbmstrconstunit.shottrack
+msgid "Hot track mouse cursor"
+msgstr ""
+
+#: fbmstrconstunit.shours
+msgid "Hours"
+msgstr ""
+
+#: fbmstrconstunit.sid
+msgctxt "fbmstrconstunit.sid"
+msgid "ID"
+msgstr ""
+
+#: fbmstrconstunit.sidentifierscharcase
+msgctxt "fbmstrconstunit.sidentifierscharcase"
+msgid "Identifiers char case"
+msgstr ""
+
+#: fbmstrconstunit.sidle
+msgid "Idle"
+msgstr ""
+
+#: fbmstrconstunit.signorechecksums
+msgid "Ignore checksums"
+msgstr ""
+
+#: fbmstrconstunit.signorelimbo
+msgctxt "fbmstrconstunit.signorelimbo"
+msgid "Ignore Limbo"
+msgstr ""
+
+#: fbmstrconstunit.simport
+msgid "Import"
+msgstr ""
+
+#: fbmstrconstunit.simportdata
+msgid "Import data"
+msgstr ""
+
+#: fbmstrconstunit.simportdatafile
+msgid "Import data file"
+msgstr ""
+
+#: fbmstrconstunit.simportdatatotable
+msgid "Import data to table"
+msgstr ""
+
+#: fbmstrconstunit.simportedcollumns
+msgid "Imported collumns"
+msgstr ""
+
+#: fbmstrconstunit.simportfromfile
+msgid "Import from file \"%s\""
+msgstr ""
+
+#: fbmstrconstunit.sincludeallfrom
+msgctxt "fbmstrconstunit.sincludeallfrom"
+msgid "Include all from %s"
+msgstr ""
+
+#: fbmstrconstunit.sincrement
+msgctxt "fbmstrconstunit.sincrement"
+msgid "Increment"
+msgstr ""
+
+#: fbmstrconstunit.sindex
+msgctxt "fbmstrconstunit.sindex"
+msgid "Index"
+msgstr ""
+
+#: fbmstrconstunit.sindexcaption
+msgid "Index caption"
+msgstr ""
+
+#: fbmstrconstunit.sindexexpression
+msgid "Index expression"
+msgstr ""
+
+#: fbmstrconstunit.sindexname
+msgctxt "fbmstrconstunit.sindexname"
+msgid "Index name"
+msgstr ""
+
+#: fbmstrconstunit.sindexnameisempty
+msgid "Index name is empty"
+msgstr ""
+
+#: fbmstrconstunit.sindexontable
+msgid "Indexs on table : "
+msgstr ""
+
+#: fbmstrconstunit.sindexs
+msgctxt "fbmstrconstunit.sindexs"
+msgid "Indexs"
+msgstr ""
+
+#: fbmstrconstunit.sindexsort
+msgid "Index sort"
+msgstr ""
+
+#: fbmstrconstunit.sinformation
+msgid "Information"
+msgstr ""
+
+#: fbmstrconstunit.sinheritstablefrom
+msgctxt "fbmstrconstunit.sinheritstablefrom"
+msgid "Inherits table from"
+msgstr ""
+
+#: fbmstrconstunit.sinitialvaluefornewsequence
+msgid "Initial value for new sequence"
+msgstr ""
+
+#: fbmstrconstunit.sinput
+msgid "Input"
+msgstr ""
+
+#: fbmstrconstunit.sinputoutput
+msgid "Input/Output"
+msgstr ""
+
+#: fbmstrconstunit.sinputparams
+msgid "Input params"
+msgstr ""
+
+#: fbmstrconstunit.sins
+msgid "INS"
+msgstr ""
+
+#: fbmstrconstunit.sinsert
+msgctxt "fbmstrconstunit.sinsert"
+msgid "Insert"
+msgstr ""
+
+#: fbmstrconstunit.sinsertcolor
+msgid "INSERT color"
+msgstr ""
+
+#: fbmstrconstunit.sinsertedrowsinfo
+msgid "Inserted rows : %d"
+msgstr ""
+
+#: fbmstrconstunit.sinsertorupdate
+msgid "Insert/Update"
+msgstr ""
+
+#: fbmstrconstunit.sinteger
+msgid "Integer"
+msgstr ""
+
+#: fbmstrconstunit.sinterfacelanguage
+msgid "Interface language"
+msgstr ""
+
+#: fbmstrconstunit.sinvalidpath
+msgid "Path %s is not valid"
+msgstr ""
+
+#: fbmstrconstunit.sinvertcase
+msgctxt "fbmstrconstunit.sinvertcase"
+msgid "Invert case"
+msgstr ""
+
+#: fbmstrconstunit.sinvertselections
+msgid "Invert selections"
+msgstr ""
+
+#: fbmstrconstunit.sinvoker
+msgid "Invoker"
+msgstr ""
+
+#: fbmstrconstunit.siscycled
+msgid "Is cycled"
+msgstr ""
+
+#: fbmstrconstunit.sislocal
+msgid "Is local"
+msgstr ""
+
+#: fbmstrconstunit.siswindowfunction
+msgctxt "fbmstrconstunit.siswindowfunction"
+msgid "Is window function"
+msgstr ""
+
+#: fbmstrconstunit.sitsexample
+msgid "Its example"
+msgstr ""
+
+#: fbmstrconstunit.sjobid
+msgctxt "fbmstrconstunit.sjobid"
+msgid "Job ID"
+msgstr ""
+
+#: fbmstrconstunit.sjointablesand
+msgctxt "fbmstrconstunit.sjointablesand"
+msgid "Join tables: %s and %s"
+msgstr ""
+
+#: fbmstrconstunit.sjournalmode
+msgid "Journal mode"
+msgstr ""
+
+#: fbmstrconstunit.sjournalsizelimit
+msgid "Journal size limit"
+msgstr ""
+
+#: fbmstrconstunit.skb
+msgid "KB"
+msgstr ""
+
+#: fbmstrconstunit.skeyboardtemplates
+msgid "Keyboard templates"
+msgstr ""
+
+#: fbmstrconstunit.skeyfunction
+msgid "function"
+msgstr ""
+
+#: fbmstrconstunit.skeytypes
+msgid "types"
+msgstr ""
+
+#: fbmstrconstunit.skeyword
+msgid "keyword"
+msgstr ""
+
+#: fbmstrconstunit.skeywordcharcase
+msgctxt "fbmstrconstunit.skeywordcharcase"
+msgid "Keyword  char case"
+msgstr ""
+
+#: fbmstrconstunit.slanguage
+msgctxt "fbmstrconstunit.slanguage"
+msgid "Language"
+msgstr ""
+
+#: fbmstrconstunit.slanguagename
+msgid "Language name"
+msgstr ""
+
+#: fbmstrconstunit.slastname
+msgid "Last name"
+msgstr ""
+
+#: fbmstrconstunit.slastrun
+msgctxt "fbmstrconstunit.slastrun"
+msgid "Last run"
+msgstr ""
+
+#: fbmstrconstunit.slastvalue
+msgctxt "fbmstrconstunit.slastvalue"
+msgid "Last value"
+msgstr ""
+
+#: fbmstrconstunit.slazarus
+msgid "Lazarus style"
+msgstr ""
+
+#: fbmstrconstunit.slazzymodelocalvariablessp
+msgid "Lazzy mode local variables in SP"
+msgstr ""
+
+#: fbmstrconstunit.slazzymodelocalvariablestrigger
+msgid "Lazzy mode local variables in triggers"
+msgstr ""
+
+#: fbmstrconstunit.slclversion
+msgid "LCL Version: "
+msgstr ""
+
+#: fbmstrconstunit.slegacyfileformat
+msgid "Legacy file format"
+msgstr ""
+
+#: fbmstrconstunit.slicense
+msgctxt "fbmstrconstunit.slicense"
+msgid "License"
+msgstr ""
+
+#: fbmstrconstunit.slinkpropertys
+msgid "Link propertys"
+msgstr ""
+
+#: fbmstrconstunit.slinkpropincludeallfrom
+msgctxt "fbmstrconstunit.slinkpropincludeallfrom"
+msgid "Include all from %s"
+msgstr ""
+
+#: fbmstrconstunit.slinkproplabel1
+msgctxt "fbmstrconstunit.slinkproplabel1"
+msgid "Join tables: %s and %s"
+msgstr ""
+
+#: fbmstrconstunit.sload
+msgid "Load"
+msgstr ""
+
+#: fbmstrconstunit.sloaddefault
+msgid "Load default"
+msgstr ""
+
+#: fbmstrconstunit.sloaddefaulttemplatesq
+msgid "Load default templates?"
+msgstr ""
+
+#: fbmstrconstunit.slocalvariables
+msgid "Local variables"
+msgstr ""
+
+#: fbmstrconstunit.slockingmode
+msgid "Locking mode"
+msgstr ""
+
+#: fbmstrconstunit.slocktables
+msgid "Lock tables"
+msgstr ""
+
+#: fbmstrconstunit.slogfiles
+msgid "Log files"
+msgstr ""
+
+#: fbmstrconstunit.sloginform
+msgid "Login form"
+msgstr ""
+
+#: fbmstrconstunit.slogs
+msgid "Logs"
+msgstr ""
+
+#: fbmstrconstunit.slogtofile
+msgid "Log to file"
+msgstr ""
+
+#: fbmstrconstunit.slogtoscreen
+msgid "Log to screen"
+msgstr ""
+
+#: fbmstrconstunit.slower
+msgid "Lower"
+msgstr ""
+
+#: fbmstrconstunit.slowercase
+msgctxt "fbmstrconstunit.slowercase"
+msgid "Lower case"
+msgstr ""
+
+#: fbmstrconstunit.smaincaption
+msgctxt "fbmstrconstunit.smaincaption"
+msgid "Free Database Manager"
+msgstr ""
+
+#: fbmstrconstunit.smainslogan
+msgctxt "fbmstrconstunit.smainslogan"
+msgid "Easy and free control you database"
+msgstr ""
+
+#: fbmstrconstunit.smakedefsqltext
+msgid "Make SQL text"
+msgstr ""
+
+#: fbmstrconstunit.smanualedit
+msgid "Manual edit"
+msgstr ""
+
+#: fbmstrconstunit.smaterializedviews
+msgid "Materialized View"
+msgstr ""
+
+#: fbmstrconstunit.smaxconnectionsperhour
+msgid "Max connections per hour"
+msgstr ""
+
+#: fbmstrconstunit.smaxpagecount
+msgid "Max page count"
+msgstr ""
+
+#: fbmstrconstunit.smaxqueriesperhour
+msgid "Max queries per hour"
+msgstr ""
+
+#: fbmstrconstunit.smaxupdateperhour
+msgid "Max update per hour"
+msgstr ""
+
+#: fbmstrconstunit.smaxuserconnections
+msgid "Max user connections"
+msgstr ""
+
+#: fbmstrconstunit.smaxvalue
+msgctxt "fbmstrconstunit.smaxvalue"
+msgid "Max value"
+msgstr ""
+
+#: fbmstrconstunit.smdiclosebyf4
+msgid "Close child window by Ctrl+F4"
+msgstr ""
+
+#: fbmstrconstunit.smdimidleclickcloseform
+msgid "Midle click close form"
+msgstr ""
+
+#: fbmstrconstunit.smdioptions
+msgid "MDI options"
+msgstr ""
+
+#: fbmstrconstunit.smdishowclosebutton
+msgid "Show close button"
+msgstr ""
+
+#: fbmstrconstunit.smdishowformcaptions
+msgid "Show form captions"
+msgstr ""
+
+#: fbmstrconstunit.smdiswitchbytab
+msgid "Switch child windows by Ctrl+Tab"
+msgstr ""
+
+#: fbmstrconstunit.smembers
+msgid "Members"
+msgstr ""
+
+#: fbmstrconstunit.smembership
+msgid "Membership"
+msgstr ""
+
+#: fbmstrconstunit.smemovalue
+msgid "Memo value"
+msgstr ""
+
+#: fbmstrconstunit.smenuabout
+msgid "About..."
+msgstr ""
+
+#: fbmstrconstunit.smenuabouthint
+msgid "About of application"
+msgstr ""
+
+#: fbmstrconstunit.smenucloseall
+msgctxt "fbmstrconstunit.smenucloseall"
+msgid "Close all"
+msgstr ""
+
+#: fbmstrconstunit.smenucloseallhint
+msgid "Close all window"
+msgstr ""
+
+#: fbmstrconstunit.smenuconnectdb
+msgctxt "fbmstrconstunit.smenuconnectdb"
+msgid "Connect"
+msgstr ""
+
+#: fbmstrconstunit.smenuconnectdbhint
+msgid "Connect to database"
+msgstr ""
+
+#: fbmstrconstunit.smenucreatedb
+msgid "Create Database"
+msgstr ""
+
+#: fbmstrconstunit.smenucreatedbhint
+msgid "Create new database"
+msgstr ""
+
+#: fbmstrconstunit.smenucustomizetoolbar
+msgctxt "fbmstrconstunit.smenucustomizetoolbar"
+msgid "Customize toolbar"
+msgstr ""
+
+#: fbmstrconstunit.smenucustomizetoolbarhint
+msgctxt "fbmstrconstunit.smenucustomizetoolbarhint"
+msgid "Customize toolbar"
+msgstr ""
+
+#: fbmstrconstunit.smenudbinspector
+msgid "DB Inspector"
+msgstr ""
+
+#: fbmstrconstunit.smenudbinspectorhint
+msgid "Show database inspector"
+msgstr ""
+
+#: fbmstrconstunit.smenudisconnectdb
+msgid "Disconnect"
+msgstr ""
+
+#: fbmstrconstunit.smenudisconnectdbhint
+msgid "Disconect from database"
+msgstr ""
+
+#: fbmstrconstunit.smenuextractmetadata
+msgctxt "fbmstrconstunit.smenuextractmetadata"
+msgid "Extract metadata..."
+msgstr ""
+
+#: fbmstrconstunit.smenuextractmetadatahint
+msgctxt "fbmstrconstunit.smenuextractmetadatahint"
+msgid "Extract metadata..."
+msgstr ""
+
+#: fbmstrconstunit.smenuhelp
+msgid "Help"
+msgstr ""
+
+#: fbmstrconstunit.smenukeyboardtemplates
+msgctxt "fbmstrconstunit.smenukeyboardtemplates"
+msgid "Keyboard templates..."
+msgstr ""
+
+#: fbmstrconstunit.smenukeyboardtemplateshint
+msgctxt "fbmstrconstunit.smenukeyboardtemplateshint"
+msgid "Keyboard templates..."
+msgstr ""
+
+#: fbmstrconstunit.smenunews
+msgid "Latest news..."
+msgstr ""
+
+#: fbmstrconstunit.smenunewshint
+msgid "Show latest news..."
+msgstr ""
+
+#: fbmstrconstunit.smenuobjecttemplates
+msgctxt "fbmstrconstunit.smenuobjecttemplates"
+msgid "Object templates"
+msgstr ""
+
+#: fbmstrconstunit.smenuobjecttemplateshint
+msgctxt "fbmstrconstunit.smenuobjecttemplateshint"
+msgid "Object templates"
+msgstr ""
+
+#: fbmstrconstunit.smenuopteditors
+msgid "Editor options..."
+msgstr ""
+
+#: fbmstrconstunit.smenuopteditorshint
+msgid "Show editor options..."
+msgstr ""
+
+#: fbmstrconstunit.smenuoptenironment
+msgid "Environment Options..."
+msgstr ""
+
+#: fbmstrconstunit.smenuoptenironmenthint
+msgid "Show environment options..."
+msgstr ""
+
+#: fbmstrconstunit.smenuoptions
+msgctxt "fbmstrconstunit.smenuoptions"
+msgid "Options"
+msgstr ""
+
+#: fbmstrconstunit.smenurefresh
+msgctxt "fbmstrconstunit.smenurefresh"
+msgid "Refresh"
+msgstr ""
+
+#: fbmstrconstunit.smenurefreshhint
+msgid "Refresh current opbject"
+msgstr ""
+
+#: fbmstrconstunit.smenuregisterdb
+msgid "Register database"
+msgstr ""
+
+#: fbmstrconstunit.smenuregisterdbhint
+msgid "Register existing database"
+msgstr ""
+
+#: fbmstrconstunit.smenureorder
+msgid "Reorder"
+msgstr ""
+
+#: fbmstrconstunit.smenureorderhint
+msgid "Reorder open window"
+msgstr ""
+
+#: fbmstrconstunit.smenureportmanager
+msgctxt "fbmstrconstunit.smenureportmanager"
+msgid "Report manager"
+msgstr ""
+
+#: fbmstrconstunit.smenureportmanagerhint
+msgctxt "fbmstrconstunit.smenureportmanagerhint"
+msgid "Report manager"
+msgstr ""
+
+#: fbmstrconstunit.smenusearchinmetadata
+msgid "Search in metadata..."
+msgstr ""
+
+#: fbmstrconstunit.smenusearchinmetadatahint
+msgid "Search in metadata"
+msgstr ""
+
+#: fbmstrconstunit.smenusendbugreport
+msgctxt "fbmstrconstunit.smenusendbugreport"
+msgid "Send bug report"
+msgstr ""
+
+#: fbmstrconstunit.smenusendbugreporthint
+msgctxt "fbmstrconstunit.smenusendbugreporthint"
+msgid "Send bug report"
+msgstr ""
+
+#: fbmstrconstunit.smenusqlbuilder
+msgid "SQL builder..."
+msgstr ""
+
+#: fbmstrconstunit.smenusqlbuilderhint
+msgid "Show SQL builder window"
+msgstr ""
+
+#: fbmstrconstunit.smenusqleditor
+msgid "SQL Editor"
+msgstr ""
+
+#: fbmstrconstunit.smenusqleditorhint
+msgid "Show sql editor"
+msgstr ""
+
+#: fbmstrconstunit.smenusqlscript
+msgid "SQL script..."
+msgstr ""
+
+#: fbmstrconstunit.smenusqlscripthint
+msgid "Show SQL script window"
+msgstr ""
+
+#: fbmstrconstunit.smenusystem
+msgid "System"
+msgstr ""
+
+#: fbmstrconstunit.smenutools
+msgid "Tools"
+msgstr ""
+
+#: fbmstrconstunit.smenuunregisterdb
+msgid "Unregister  database"
+msgstr ""
+
+#: fbmstrconstunit.smenuunregisterdbhint
+msgid "Unregister current database"
+msgstr ""
+
+#: fbmstrconstunit.smenuvisittowebsite
+msgctxt "fbmstrconstunit.smenuvisittowebsite"
+msgid "Visit to web site..."
+msgstr ""
+
+#: fbmstrconstunit.smenuvisittowebsitehint
+msgctxt "fbmstrconstunit.smenuvisittowebsitehint"
+msgid "Visit to web site..."
+msgstr ""
+
+#: fbmstrconstunit.smenuwindows
+msgctxt "fbmstrconstunit.smenuwindows"
+msgid "Windows"
+msgstr ""
+
+#: fbmstrconstunit.smessages
+msgid "Messages"
+msgstr ""
+
+#: fbmstrconstunit.smetadatalogingenable
+msgid "Meta data loging enable"
+msgstr ""
+
+#: fbmstrconstunit.smetadataonly
+msgctxt "fbmstrconstunit.smetadataonly"
+msgid "Metadata Only"
+msgstr ""
+
+#: fbmstrconstunit.smiddlename
+msgid "Middle name"
+msgstr ""
+
+#: fbmstrconstunit.sminutes
+msgctxt "fbmstrconstunit.sminutes"
+msgid "Minutes"
+msgstr ""
+
+#: fbmstrconstunit.sminvalue
+msgctxt "fbmstrconstunit.sminvalue"
+msgid "Min value"
+msgstr ""
+
+#: fbmstrconstunit.smisk
+msgid "Misk"
+msgstr ""
+
+#: fbmstrconstunit.smodified
+msgid "Modified"
+msgstr ""
+
+#: fbmstrconstunit.smodifirule
+msgid "Modifi rule"
+msgstr ""
+
+#: fbmstrconstunit.smodifitrigger
+msgctxt "fbmstrconstunit.smodifitrigger"
+msgid "Modifi trigger"
+msgstr ""
+
+#: fbmstrconstunit.smonth
+msgctxt "fbmstrconstunit.smonth"
+msgid "Month"
+msgstr ""
+
+#: fbmstrconstunit.smovedown
+msgctxt "fbmstrconstunit.smovedown"
+msgid "Move down"
+msgstr ""
+
+#: fbmstrconstunit.smovedownhint
+msgid "Move fields down..."
+msgstr ""
+
+#: fbmstrconstunit.smovedownlocalvar
+msgid "Move down local variable"
+msgstr ""
+
+#: fbmstrconstunit.smoveup
+msgctxt "fbmstrconstunit.smoveup"
+msgid "Move up"
+msgstr ""
+
+#: fbmstrconstunit.smoveuphint
+msgid "Move fields up..."
+msgstr ""
+
+#: fbmstrconstunit.smoveuplocalvar
+msgid "Move up local variable"
+msgstr ""
+
+#: fbmstrconstunit.smysqlsqltrigger
+msgid "MySQL : trigger"
+msgstr ""
+
+#: fbmstrconstunit.smysqlsqltriggerlazy
+msgid "MySQL : trigger lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.sname
+msgid "Name"
+msgstr ""
+
+#: fbmstrconstunit.snamecase
+msgctxt "fbmstrconstunit.snamecase"
+msgid "Name case"
+msgstr ""
+
+#: fbmstrconstunit.snameuserrole
+msgid "Name of user/role"
+msgstr ""
+
+#: fbmstrconstunit.snative
+msgctxt "fbmstrconstunit.snative"
+msgid "Native"
+msgstr ""
+
+#: fbmstrconstunit.sneedrestartconfigch
+msgid "You are need restart for apply you changes..."
+msgstr ""
+
+#: fbmstrconstunit.snevershowglyph
+msgid "Never show glyph"
+msgstr ""
+
+#: fbmstrconstunit.snew
+msgid "New "
+msgstr ""
+
+#: fbmstrconstunit.snewdbfolder
+msgctxt "fbmstrconstunit.snewdbfolder"
+msgid "New DB folder"
+msgstr ""
+
+#: fbmstrconstunit.snewdomain
+msgid "New Domain"
+msgstr ""
+
+#: fbmstrconstunit.snewfield
+msgid "New field"
+msgstr ""
+
+#: fbmstrconstunit.snewforeignkey
+msgctxt "fbmstrconstunit.snewforeignkey"
+msgid "New foreign key"
+msgstr ""
+
+#: fbmstrconstunit.snewindex
+msgid "New index"
+msgstr ""
+
+#: fbmstrconstunit.snewobject
+msgid "New object"
+msgstr ""
+
+#: fbmstrconstunit.snewpk
+msgid "New primary key"
+msgstr ""
+
+#: fbmstrconstunit.snewpkhint
+msgid "New primary key for table"
+msgstr ""
+
+#: fbmstrconstunit.snewquery
+msgid "New query"
+msgstr ""
+
+#: fbmstrconstunit.snewqueryset
+msgctxt "fbmstrconstunit.snewqueryset"
+msgid "New query set"
+msgstr ""
+
+#: fbmstrconstunit.snewquerysethint
+msgctxt "fbmstrconstunit.snewquerysethint"
+msgid "New query set"
+msgstr ""
+
+#: fbmstrconstunit.snewrole
+msgid "New role"
+msgstr ""
+
+#: fbmstrconstunit.snewrule
+msgctxt "fbmstrconstunit.snewrule"
+msgid "New rule"
+msgstr ""
+
+#: fbmstrconstunit.snewtrigger
+msgctxt "fbmstrconstunit.snewtrigger"
+msgid "New trigger"
+msgstr ""
+
+#: fbmstrconstunit.snewuniqueconstraint
+msgid "New unique constraint"
+msgstr ""
+
+#: fbmstrconstunit.snext
+msgctxt "fbmstrconstunit.snext"
+msgid "Next"
+msgstr ""
+
+#: fbmstrconstunit.snextrun
+msgctxt "fbmstrconstunit.snextrun"
+msgid "Next run"
+msgstr ""
+
+#: fbmstrconstunit.snogarbagecollection
+msgctxt "fbmstrconstunit.snogarbagecollection"
+msgid "No Garbage Collection"
+msgstr ""
+
+#: fbmstrconstunit.snontransportable
+msgctxt "fbmstrconstunit.snontransportable"
+msgid "Non Transportable"
+msgstr ""
+
+#: fbmstrconstunit.snormalmode
+msgid "Normal mode"
+msgstr ""
+
+#: fbmstrconstunit.snoshadow
+msgctxt "fbmstrconstunit.snoshadow"
+msgid "No Shadow"
+msgstr ""
+
+#: fbmstrconstunit.snostepstoexecute
+msgid " - no steps to execute"
+msgstr ""
+
+#: fbmstrconstunit.snotconnected
+msgid "Not connected..."
+msgstr ""
+
+#: fbmstrconstunit.snotnull
+msgctxt "fbmstrconstunit.snotnull"
+msgid "Not null"
+msgstr ""
+
+#: fbmstrconstunit.snovaliditycheck
+msgctxt "fbmstrconstunit.snovaliditycheck"
+msgid "No Validity Check"
+msgstr ""
+
+#: fbmstrconstunit.snullspos
+msgid "Nulls pos"
+msgstr ""
+
+#: fbmstrconstunit.snumbers
+msgid "Numbers"
+msgstr ""
+
+#: fbmstrconstunit.snumeric
+msgid "Numeric"
+msgstr ""
+
+#: fbmstrconstunit.sobjectid
+msgctxt "fbmstrconstunit.sobjectid"
+msgid "Object ID"
+msgstr ""
+
+#: fbmstrconstunit.sobjectinspector
+msgctxt "fbmstrconstunit.sobjectinspector"
+msgid "Object inspector"
+msgstr ""
+
+#: fbmstrconstunit.sobjectkindnotdefined
+msgid "ObjectKind not defined for class %s. Object : %"
+msgstr ""
+
+#: fbmstrconstunit.sobjectname
+msgctxt "fbmstrconstunit.sobjectname"
+msgid "Object name"
+msgstr ""
+
+#: fbmstrconstunit.sobjects
+msgid "Objects"
+msgstr ""
+
+#: fbmstrconstunit.sobjecttype
+msgid "Object type"
+msgstr ""
+
+#: fbmstrconstunit.sobjecttypes
+msgid "Object type's"
+msgstr ""
+
+#: fbmstrconstunit.sodsversion
+msgid "ODS version    = "
+msgstr ""
+
+#: fbmstrconstunit.soicopyalllines
+msgctxt "fbmstrconstunit.soicopyalllines"
+msgid "Copy all lines to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.soicopyalllineshint
+msgctxt "fbmstrconstunit.soicopyalllineshint"
+msgid "Copy all lines to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.soicopyline
+msgctxt "fbmstrconstunit.soicopyline"
+msgid "Copy line to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.soicopylinehint
+msgctxt "fbmstrconstunit.soicopylinehint"
+msgid "Copy line to clipboard"
+msgstr ""
+
+#: fbmstrconstunit.soicopyregistration
+msgctxt "fbmstrconstunit.soicopyregistration"
+msgid "Copy registration record..."
+msgstr ""
+
+#: fbmstrconstunit.soicopyregistrationhint
+msgctxt "fbmstrconstunit.soicopyregistrationhint"
+msgid "Copy registration record..."
+msgstr ""
+
+#: fbmstrconstunit.soidatabases
+msgid "Databases"
+msgstr ""
+
+#: fbmstrconstunit.soieditdbregistration
+msgctxt "fbmstrconstunit.soieditdbregistration"
+msgid "Edit DB registration record"
+msgstr ""
+
+#: fbmstrconstunit.soieditdbregistrationhint
+msgctxt "fbmstrconstunit.soieditdbregistrationhint"
+msgid "Edit DB registration record"
+msgstr ""
+
+#: fbmstrconstunit.soifindobject
+msgctxt "fbmstrconstunit.soifindobject"
+msgid "Find object"
+msgstr ""
+
+#: fbmstrconstunit.soifindobjecthint
+msgctxt "fbmstrconstunit.soifindobjecthint"
+msgid "Find object"
+msgstr ""
+
+#: fbmstrconstunit.soigotodomains
+msgctxt "fbmstrconstunit.soigotodomains"
+msgid "Go to domains..."
+msgstr ""
+
+#: fbmstrconstunit.soigotodomainshint
+msgctxt "fbmstrconstunit.soigotodomainshint"
+msgid "Go to domains..."
+msgstr ""
+
+#: fbmstrconstunit.soigotosp
+msgctxt "fbmstrconstunit.soigotosp"
+msgid "Go to stored proc..."
+msgstr ""
+
+#: fbmstrconstunit.soigotosphint
+msgctxt "fbmstrconstunit.soigotosphint"
+msgid "Go to stored proc..."
+msgstr ""
+
+#: fbmstrconstunit.soigototables
+msgctxt "fbmstrconstunit.soigototables"
+msgid "Go to tables..."
+msgstr ""
+
+#: fbmstrconstunit.soigototableshint
+msgctxt "fbmstrconstunit.soigototableshint"
+msgid "Go to tables..."
+msgstr ""
+
+#: fbmstrconstunit.soigototoobject
+msgid "Goto to object"
+msgstr ""
+
+#: fbmstrconstunit.soigototriggers
+msgctxt "fbmstrconstunit.soigototriggers"
+msgid "Go to triggers..."
+msgstr ""
+
+#: fbmstrconstunit.soigototriggershint
+msgctxt "fbmstrconstunit.soigototriggershint"
+msgid "Go to triggers..."
+msgstr ""
+
+#: fbmstrconstunit.soigotoviews
+msgctxt "fbmstrconstunit.soigotoviews"
+msgid "Go to views..."
+msgstr ""
+
+#: fbmstrconstunit.soigotoviewshint
+msgctxt "fbmstrconstunit.soigotoviewshint"
+msgid "Go to views..."
+msgstr ""
+
+#: fbmstrconstunit.soihidesqlassistent
+msgctxt "fbmstrconstunit.soihidesqlassistent"
+msgid "Hide SQL assistent"
+msgstr ""
+
+#: fbmstrconstunit.soihidesqlassistenthint
+msgctxt "fbmstrconstunit.soihidesqlassistenthint"
+msgid "Hide SQL assistent"
+msgstr ""
+
+#: fbmstrconstunit.soirecent
+msgid "Recent"
+msgstr ""
+
+#: fbmstrconstunit.soiregisterdb
+msgid "Register DB"
+msgstr ""
+
+#: fbmstrconstunit.soishowobject
+msgctxt "fbmstrconstunit.soishowobject"
+msgid "Show object"
+msgstr ""
+
+#: fbmstrconstunit.soishowobjecthint
+msgctxt "fbmstrconstunit.soishowobjecthint"
+msgid "Show object"
+msgstr ""
+
+#: fbmstrconstunit.soishowsqlassistent
+msgctxt "fbmstrconstunit.soishowsqlassistent"
+msgid "Show SQL assistent"
+msgstr ""
+
+#: fbmstrconstunit.soishowsqlassistenthint
+msgctxt "fbmstrconstunit.soishowsqlassistenthint"
+msgid "Show SQL assistent"
+msgstr ""
+
+#: fbmstrconstunit.soiwindows
+msgctxt "fbmstrconstunit.soiwindows"
+msgid "Windows"
+msgstr ""
+
+#: fbmstrconstunit.soldactive
+msgid "Old active"
+msgstr ""
+
+#: fbmstrconstunit.soldest
+msgid "Oldest"
+msgstr ""
+
+#: fbmstrconstunit.soldmetadatadesc
+msgctxt "fbmstrconstunit.soldmetadatadesc"
+msgid "Old Metadata Desc"
+msgstr ""
+
+#: fbmstrconstunit.soldsnapshot
+msgid "Old snapshot"
+msgstr ""
+
+#: fbmstrconstunit.soncommitdeleterows
+msgid "ON COMMIT DELETE ROWS"
+msgstr ""
+
+#: fbmstrconstunit.soncommitpreserverows
+msgid "ON COMMIT PRESERVE ROWS"
+msgstr ""
+
+#: fbmstrconstunit.sondelete
+msgid "On Delete"
+msgstr ""
+
+#: fbmstrconstunit.sonerelationatatime
+msgctxt "fbmstrconstunit.sonerelationatatime"
+msgid "One Relation At A Time"
+msgstr ""
+
+#: fbmstrconstunit.sonevent
+msgid "On event"
+msgstr ""
+
+#: fbmstrconstunit.sonfield
+msgid "On field"
+msgstr ""
+
+#: fbmstrconstunit.sonfields
+msgid "On fields"
+msgstr ""
+
+#: fbmstrconstunit.sonlygroups
+msgid "Only groups"
+msgstr ""
+
+#: fbmstrconstunit.sonlyshowgroups
+msgid "Only show groups"
+msgstr ""
+
+#: fbmstrconstunit.sonlyshowusers
+msgid "Only show users"
+msgstr ""
+
+#: fbmstrconstunit.sonlyusers
+msgid "Only users"
+msgstr ""
+
+#: fbmstrconstunit.sontable
+msgid "On table"
+msgstr ""
+
+#: fbmstrconstunit.sonupdate
+msgid "On Update"
+msgstr ""
+
+#: fbmstrconstunit.sopen
+msgctxt "fbmstrconstunit.sopen"
+msgid "Open"
+msgstr ""
+
+#: fbmstrconstunit.sopenfile
+msgctxt "fbmstrconstunit.sopenfile"
+msgid "Open file"
+msgstr ""
+
+#: fbmstrconstunit.sopenineditor
+msgid "Open in editor"
+msgstr ""
+
+#: fbmstrconstunit.sopenineditorhint
+msgid "Open text from history in SQL editor"
+msgstr ""
+
+#: fbmstrconstunit.soptions
+msgctxt "fbmstrconstunit.soptions"
+msgid "Options"
+msgstr ""
+
+#: fbmstrconstunit.sother
+msgid "Other"
+msgstr ""
+
+#: fbmstrconstunit.sotheroptions
+msgid "Other options"
+msgstr ""
+
+#: fbmstrconstunit.soutput
+msgid "Output"
+msgstr ""
+
+#: fbmstrconstunit.sowner
+msgid "Owner"
+msgstr ""
+
+#: fbmstrconstunit.spackage
+msgid "Package"
+msgstr ""
+
+#: fbmstrconstunit.spackagebody
+msgid "Package body"
+msgstr ""
+
+#: fbmstrconstunit.spackageheader
+msgid "Package header"
+msgstr ""
+
+#: fbmstrconstunit.spackages
+msgid "Packages"
+msgstr ""
+
+#: fbmstrconstunit.spage
+msgid "Page "
+msgstr ""
+
+#: fbmstrconstunit.spagecount
+msgid "Page count     = "
+msgstr ""
+
+#: fbmstrconstunit.spages
+msgid "Pages"
+msgstr ""
+
+#: fbmstrconstunit.spagesize
+msgid "Page size      = "
+msgstr ""
+
+#: fbmstrconstunit.spagesize1
+msgid "Page size"
+msgstr ""
+
+#: fbmstrconstunit.sparamname
+msgid "Param name"
+msgstr ""
+
+#: fbmstrconstunit.sparamprop
+msgid "Param property"
+msgstr ""
+
+#: fbmstrconstunit.sparams
+msgctxt "fbmstrconstunit.sparams"
+msgid "Params"
+msgstr ""
+
+#: fbmstrconstunit.sparamshistory
+msgid "Params history"
+msgstr ""
+
+#: fbmstrconstunit.sparamtype
+msgid "Param type"
+msgstr ""
+
+#: fbmstrconstunit.sparamvalue
+msgid "Param value"
+msgstr ""
+
+#: fbmstrconstunit.spassword
+msgctxt "fbmstrconstunit.spassword"
+msgid "Password"
+msgstr ""
+
+#: fbmstrconstunit.spasswordmismath
+msgid "Password mismath."
+msgstr ""
+
+#: fbmstrconstunit.spaste
+msgid "Paste"
+msgstr ""
+
+#: fbmstrconstunit.spgallowchangesystemcatalog
+msgid "Allow change system catalog directly"
+msgstr ""
+
+#: fbmstrconstunit.spgallowcreatedbobjects
+msgid "Allow create database objects"
+msgstr ""
+
+#: fbmstrconstunit.spgallowcreatereplications
+msgid "Allow create replications and backup"
+msgstr ""
+
+#: fbmstrconstunit.spgallowcreateroles
+msgid "Allow create roles"
+msgstr ""
+
+#: fbmstrconstunit.spgconfirmpassword
+msgctxt "fbmstrconstunit.spgconfirmpassword"
+msgid "Confirm password"
+msgstr ""
+
+#: fbmstrconstunit.spginheritedright
+msgid "Inherited right from owner roles"
+msgstr ""
+
+#: fbmstrconstunit.spgloginenabled
+msgid "Login enabled"
+msgstr ""
+
+#: fbmstrconstunit.spgmaxconnection
+msgctxt "fbmstrconstunit.spgmaxconnection"
+msgid "Max. connections"
+msgstr ""
+
+#: fbmstrconstunit.spgneverexpired
+msgid "Never expired"
+msgstr ""
+
+#: fbmstrconstunit.spgpassword
+msgctxt "fbmstrconstunit.spgpassword"
+msgid "Password"
+msgstr ""
+
+#: fbmstrconstunit.spgpgsqlfunction
+msgid "PG : function"
+msgstr ""
+
+#: fbmstrconstunit.spgpgsqlfunctionlazy
+msgid "PG : function lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.spgpgsqltrigger
+msgid "PG : trigger"
+msgstr ""
+
+#: fbmstrconstunit.spgroleprivilege
+msgctxt "fbmstrconstunit.spgroleprivilege"
+msgid "Role privilege"
+msgstr ""
+
+#: fbmstrconstunit.spgsuperuser
+msgid "Superuser"
+msgstr ""
+
+#: fbmstrconstunit.spgusername
+msgctxt "fbmstrconstunit.spgusername"
+msgid "User name"
+msgstr ""
+
+#: fbmstrconstunit.spgvaliduntil
+msgctxt "fbmstrconstunit.spgvaliduntil"
+msgid "Valid until"
+msgstr ""
+
+#: fbmstrconstunit.spk
+msgid "PK"
+msgstr ""
+
+#: fbmstrconstunit.spkdlgerr1
+msgid "Not define PK field on main table"
+msgstr ""
+
+#: fbmstrconstunit.spkname
+msgid "Primary key name"
+msgstr ""
+
+#: fbmstrconstunit.sport
+msgctxt "fbmstrconstunit.sport"
+msgid "Port"
+msgstr ""
+
+#: fbmstrconstunit.spostgresdbanaliz
+msgid "PG DB Analiz"
+msgstr ""
+
+#: fbmstrconstunit.spostgresqldbstat
+msgid "Postgres server status"
+msgstr ""
+
+#: fbmstrconstunit.spostgresqltablecreateproc
+msgctxt "fbmstrconstunit.spostgresqltablecreateproc"
+msgid "Create procedure"
+msgstr ""
+
+#: fbmstrconstunit.sprec
+msgid "Prec"
+msgstr ""
+
+#: fbmstrconstunit.sprecompileerror
+msgid "Precompiler error."
+msgstr ""
+
+#: fbmstrconstunit.spreparequery
+msgctxt "fbmstrconstunit.spreparequery"
+msgid "Prepare query"
+msgstr ""
+
+#: fbmstrconstunit.spreparequeryhint
+msgctxt "fbmstrconstunit.spreparequeryhint"
+msgid "Prepare query"
+msgstr ""
+
+#: fbmstrconstunit.spreserverows
+msgid "Preserve rows"
+msgstr ""
+
+#: fbmstrconstunit.spressshiftspacetoactivate
+msgid "Press Shift+Space to activate"
+msgstr ""
+
+#: fbmstrconstunit.sprimarykey
+msgid "Primary key"
+msgstr ""
+
+#: fbmstrconstunit.sprimarykeys
+msgid "Primary keys"
+msgstr ""
+
+#: fbmstrconstunit.sprint
+msgid "Print"
+msgstr ""
+
+#: fbmstrconstunit.sprintfieldfist
+msgid "Print field list"
+msgstr ""
+
+#: fbmstrconstunit.sprintfklist
+msgctxt "fbmstrconstunit.sprintfklist"
+msgid "Print FK list"
+msgstr ""
+
+#: fbmstrconstunit.sprintindexlist
+msgid "Print index list"
+msgstr ""
+
+#: fbmstrconstunit.sprintlist
+msgid "Print list"
+msgstr ""
+
+#: fbmstrconstunit.sprintlistofalluserandroles
+msgid "Print list of all user and roles"
+msgstr ""
+
+#: fbmstrconstunit.sprintlistofprimarykeyshint
+msgid "Print list of primary keys..."
+msgstr ""
+
+#: fbmstrconstunit.sprintlocalvar
+msgid "Print local variable"
+msgstr ""
+
+#: fbmstrconstunit.sprintparams
+msgctxt "fbmstrconstunit.sprintparams"
+msgid "Print params"
+msgstr ""
+
+#: fbmstrconstunit.sprintqueryresult
+msgid "Print query result"
+msgstr ""
+
+#: fbmstrconstunit.sprintunqlist
+msgid "Print unique constraint list"
+msgstr ""
+
+#: fbmstrconstunit.sprintuserlist
+msgid "Print user list"
+msgstr ""
+
+#: fbmstrconstunit.sprocedure
+msgid "Procedure"
+msgstr ""
+
+#: fbmstrconstunit.sprocedurename
+msgctxt "fbmstrconstunit.sprocedurename"
+msgid "Procedure name"
+msgstr ""
+
+#: fbmstrconstunit.sprocedures
+msgid "Procedures"
+msgstr ""
+
+#: fbmstrconstunit.sproceduretype
+msgid "Procedure type"
+msgstr ""
+
+#: fbmstrconstunit.sprocess
+msgid "Process"
+msgstr ""
+
+#: fbmstrconstunit.sprogres
+msgid "Progres"
+msgstr ""
+
+#: fbmstrconstunit.sproperty
+msgctxt "fbmstrconstunit.sproperty"
+msgid "Property"
+msgstr ""
+
+#: fbmstrconstunit.sprotocol
+msgid "Protocol"
+msgstr ""
+
+#: fbmstrconstunit.sproxy
+msgid "Proxy"
+msgstr ""
+
+#: fbmstrconstunit.squery
+msgid "Query"
+msgstr ""
+
+#: fbmstrconstunit.squeryfields
+msgid "Query fields"
+msgstr ""
+
+#: fbmstrconstunit.squerysetname
+msgid "Query set name"
+msgstr ""
+
+#: fbmstrconstunit.squerystart
+msgid "Query start"
+msgstr ""
+
+#: fbmstrconstunit.squestion
+msgid "Question"
+msgstr ""
+
+#: fbmstrconstunit.sreadonly
+msgid "Read only"
+msgstr ""
+
+#: fbmstrconstunit.srecfromtable
+msgid "Records from table : "
+msgstr ""
+
+#: fbmstrconstunit.srecompilealltriggers
+msgctxt "fbmstrconstunit.srecompilealltriggers"
+msgid "Recompile all triggers"
+msgstr ""
+
+#: fbmstrconstunit.srecordcount
+msgid "%d records in table"
+msgstr ""
+
+#: fbmstrconstunit.srecordcountget
+msgid "Get record count"
+msgstr ""
+
+#: fbmstrconstunit.srecordfetched
+msgid "%d record fetched"
+msgstr ""
+
+#: fbmstrconstunit.srecordfetchedwithselected
+msgid "%d record fetched (%d selected)"
+msgstr ""
+
+#: fbmstrconstunit.srecordforfetch
+msgid "Record for fetch"
+msgstr ""
+
+#: fbmstrconstunit.srecords
+msgid "records"
+msgstr ""
+
+#: fbmstrconstunit.sredo
+msgctxt "fbmstrconstunit.sredo"
+msgid "Redo"
+msgstr ""
+
+#: fbmstrconstunit.sredohint
+msgid "Redo last editor changes"
+msgstr ""
+
+#: fbmstrconstunit.sreferences
+msgid "References"
+msgstr ""
+
+#: fbmstrconstunit.sreferencesto
+msgid "References to"
+msgstr ""
+
+#: fbmstrconstunit.srefresh
+msgctxt "fbmstrconstunit.srefresh"
+msgid "Refresh"
+msgstr ""
+
+#: fbmstrconstunit.srefreshdatahint
+msgctxt "fbmstrconstunit.srefreshdatahint"
+msgid "Refresh data"
+msgstr ""
+
+#: fbmstrconstunit.srefreshfieldfist
+msgid "Refresh field list"
+msgstr ""
+
+#: fbmstrconstunit.srefreshindexlist
+msgid "Refresh index list"
+msgstr ""
+
+#: fbmstrconstunit.srefreshinterval
+msgid "Refresh interval"
+msgstr ""
+
+#: fbmstrconstunit.srefreshintervalinseconds
+msgid "Refresh interval (in seconds)"
+msgstr ""
+
+#: fbmstrconstunit.srefreslistpk
+msgid "Refres primary key list"
+msgstr ""
+
+#: fbmstrconstunit.srefreslistpkhint
+msgid "Refres primary keys list"
+msgstr ""
+
+#: fbmstrconstunit.sregister
+msgid "Register "
+msgstr ""
+
+#: fbmstrconstunit.sregisteraftercreate
+msgid "Register after create"
+msgstr ""
+
+#: fbmstrconstunit.sregistrationparams
+msgid "Registration params"
+msgstr ""
+
+#: fbmstrconstunit.sregistreddatabase
+msgctxt "fbmstrconstunit.sregistreddatabase"
+msgid "Registred database"
+msgstr ""
+
+#: fbmstrconstunit.srelationname
+msgid "Relation name"
+msgstr ""
+
+#: fbmstrconstunit.sreload
+msgid "Reload"
+msgstr ""
+
+#: fbmstrconstunit.sremoteaddress
+msgid "Remote address"
+msgstr ""
+
+#: fbmstrconstunit.sremoteprocess
+msgid "Remote process"
+msgstr ""
+
+#: fbmstrconstunit.sremoteprotocol
+msgid "Remote protocol"
+msgstr ""
+
+#: fbmstrconstunit.sremove
+msgid "Remove"
+msgstr ""
+
+#: fbmstrconstunit.sremoveallfields
+msgid "Remove all fields"
+msgstr ""
+
+#: fbmstrconstunit.sremovefield
+msgid "Remove field"
+msgstr ""
+
+#: fbmstrconstunit.srename
+msgid "Rename %s \"%s\""
+msgstr ""
+
+#: fbmstrconstunit.srenameobject
+msgid "Rename object"
+msgstr ""
+
+#: fbmstrconstunit.srenametab
+msgid "Rename tab"
+msgstr ""
+
+#: fbmstrconstunit.srenametabhint
+msgid "Rename edit tab"
+msgstr ""
+
+#: fbmstrconstunit.srenametable
+msgid "Rename table"
+msgstr ""
+
+#: fbmstrconstunit.srepl
+msgid "REPL"
+msgstr ""
+
+#: fbmstrconstunit.sreplace
+msgctxt "fbmstrconstunit.sreplace"
+msgid "Replace"
+msgstr ""
+
+#: fbmstrconstunit.sreplclient
+msgid "Repl. client"
+msgstr ""
+
+#: fbmstrconstunit.sreplslave
+msgid "Repl. slave"
+msgstr ""
+
+#: fbmstrconstunit.sreportfolder
+msgid "Report folder"
+msgstr ""
+
+#: fbmstrconstunit.sreportmanager
+msgctxt "fbmstrconstunit.sreportmanager"
+msgid "Report manager"
+msgstr ""
+
+#: fbmstrconstunit.sreportsoptions
+msgid "Reports options"
+msgstr ""
+
+#: fbmstrconstunit.srestore
+msgctxt "fbmstrconstunit.srestore"
+msgid "Restore"
+msgstr ""
+
+#: fbmstrconstunit.srestoreoptons
+msgid "Restore optons"
+msgstr ""
+
+#: fbmstrconstunit.srestoresuccessfullyfinished
+msgid "Restore successfully finished"
+msgstr ""
+
+#: fbmstrconstunit.sresult
+msgid "Result"
+msgstr ""
+
+#: fbmstrconstunit.sresultform
+msgid "Form"
+msgstr ""
+
+#: fbmstrconstunit.sresultgrid
+msgid "Grid"
+msgstr ""
+
+#: fbmstrconstunit.sreturnnullforemptyresult
+msgctxt "fbmstrconstunit.sreturnnullforemptyresult"
+msgid "Return null for empty result"
+msgstr ""
+
+#: fbmstrconstunit.sreturnparams
+msgid "Return params"
+msgstr ""
+
+#: fbmstrconstunit.sreturntype
+msgctxt "fbmstrconstunit.sreturntype"
+msgid "Return type"
+msgstr ""
+
+#: fbmstrconstunit.srevokeall
+msgid "Revoke all"
+msgstr ""
+
+#: fbmstrconstunit.srevokeallfromall
+msgid "Revoke all from all"
+msgstr ""
+
+#: fbmstrconstunit.srevokefromall
+msgid "Revoke from all"
+msgstr ""
+
+#: fbmstrconstunit.srolback
+msgid "Rolback"
+msgstr ""
+
+#: fbmstrconstunit.srolbackandclose
+msgid "Rolback and close"
+msgstr ""
+
+#: fbmstrconstunit.srolbackandclosehint
+msgid "Rolback and close transaction"
+msgstr ""
+
+#: fbmstrconstunit.srolbackhint
+msgid "Rolback transaction"
+msgstr ""
+
+#: fbmstrconstunit.srole
+msgctxt "fbmstrconstunit.srole"
+msgid "Role"
+msgstr ""
+
+#: fbmstrconstunit.srolegrantforobjects
+msgid "Grant for objects"
+msgstr ""
+
+#: fbmstrconstunit.srolegrantforuser
+msgid "Grant for user"
+msgstr ""
+
+#: fbmstrconstunit.srolename
+msgid "Role           = "
+msgstr ""
+
+#: fbmstrconstunit.srolename1
+msgid "Role name"
+msgstr ""
+
+#: fbmstrconstunit.srolepropertys
+msgid "Role propertys"
+msgstr ""
+
+#: fbmstrconstunit.sroles
+msgctxt "fbmstrconstunit.sroles"
+msgid "Roles"
+msgstr ""
+
+#: fbmstrconstunit.srow
+msgid "Row"
+msgstr ""
+
+#: fbmstrconstunit.srowcountdeleted
+msgid "Rows count deleted"
+msgstr ""
+
+#: fbmstrconstunit.srowcountupdated
+msgid "Rows count updated"
+msgstr ""
+
+#: fbmstrconstunit.srowscope
+msgid "For each"
+msgstr ""
+
+#: fbmstrconstunit.srule
+msgctxt "fbmstrconstunit.srule"
+msgid "Rule"
+msgstr ""
+
+#: fbmstrconstunit.srulename
+msgctxt "fbmstrconstunit.srulename"
+msgid "Rule name"
+msgstr ""
+
+#: fbmstrconstunit.srules
+msgctxt "fbmstrconstunit.srules"
+msgid "Rules"
+msgstr ""
+
+#: fbmstrconstunit.srun
+msgid "Run"
+msgstr ""
+
+#: fbmstrconstunit.srunasowner
+msgctxt "fbmstrconstunit.srunasowner"
+msgid "Run as owner"
+msgstr ""
+
+#: fbmstrconstunit.sruning
+msgid " - running"
+msgstr ""
+
+#: fbmstrconstunit.ssave
+msgctxt "fbmstrconstunit.ssave"
+msgid "Save"
+msgstr ""
+
+#: fbmstrconstunit.ssaveas
+msgid "Save as ..."
+msgstr ""
+
+#: fbmstrconstunit.ssavedesktopondisconectfromdb
+msgid "Save desktop on disconect from DB"
+msgstr ""
+
+#: fbmstrconstunit.ssavefile
+msgctxt "fbmstrconstunit.ssavefile"
+msgid "Save file"
+msgstr ""
+
+#: fbmstrconstunit.ssavetofile
+msgid "Save to file..."
+msgstr ""
+
+#: fbmstrconstunit.sscale
+msgctxt "fbmstrconstunit.sscale"
+msgid "Scale"
+msgstr ""
+
+#: fbmstrconstunit.sscheme
+msgid "Scheme"
+msgstr ""
+
+#: fbmstrconstunit.sschemename
+msgctxt "fbmstrconstunit.sschemename"
+msgid "Scheme name"
+msgstr ""
+
+#: fbmstrconstunit.sschemeowner
+msgid "Scheme owner"
+msgstr ""
+
+#: fbmstrconstunit.sschemes
+msgid "Schemes"
+msgstr ""
+
+#: fbmstrconstunit.sscripttextmodified
+msgid "Script modified. Save?"
+msgstr ""
+
+#: fbmstrconstunit.ssearchcaption
+msgctxt "fbmstrconstunit.ssearchcaption"
+msgid "Search"
+msgstr ""
+
+#: fbmstrconstunit.ssearchreplace
+msgctxt "fbmstrconstunit.ssearchreplace"
+msgid "Replace"
+msgstr ""
+
+#: fbmstrconstunit.ssecurity
+msgctxt "fbmstrconstunit.ssecurity"
+msgid "Security"
+msgstr ""
+
+#: fbmstrconstunit.sselect
+msgid "Select"
+msgstr ""
+
+#: fbmstrconstunit.sselectall
+msgid "Select all"
+msgstr ""
+
+#: fbmstrconstunit.sselectcolor
+msgid "SELECT color"
+msgstr ""
+
+#: fbmstrconstunit.sselectconnectiontype
+msgid "Select connection type"
+msgstr ""
+
+#: fbmstrconstunit.sselectdatabase
+msgid "Select database"
+msgstr ""
+
+#: fbmstrconstunit.sselectedrowsinfo
+msgid "Selected rows : %d"
+msgstr ""
+
+#: fbmstrconstunit.sselectfont
+msgid "Select font"
+msgstr ""
+
+#: fbmstrconstunit.sselectfontforprint
+msgid "Select font for print"
+msgstr ""
+
+#: fbmstrconstunit.sselections
+msgid "Selections"
+msgstr ""
+
+#: fbmstrconstunit.sselectrootfolder
+msgid "Select root folder"
+msgstr ""
+
+#: fbmstrconstunit.sseparatedppages
+msgid "Separated pages"
+msgstr ""
+
+#: fbmstrconstunit.sseparator
+msgid "Separator"
+msgstr ""
+
+#: fbmstrconstunit.sseparetedfiles
+msgid "Separeted files"
+msgstr ""
+
+#: fbmstrconstunit.ssequence
+msgctxt "fbmstrconstunit.ssequence"
+msgid "Sequence"
+msgstr ""
+
+#: fbmstrconstunit.ssequences
+msgid "Sequences"
+msgstr ""
+
+#: fbmstrconstunit.sservername
+msgid "Server name    = "
+msgstr ""
+
+#: fbmstrconstunit.sservername1
+msgid "Server name"
+msgstr ""
+
+#: fbmstrconstunit.sserverversion
+msgid "Server version = "
+msgstr ""
+
+#: fbmstrconstunit.sserverversion1
+msgid "Server version"
+msgstr ""
+
+#: fbmstrconstunit.ssetbookmarknum
+msgid "Set/Remove bookmark "
+msgstr ""
+
+#: fbmstrconstunit.sshedule
+msgid "Shedule"
+msgstr ""
+
+#: fbmstrconstunit.sshowallobjects
+msgid "Show all objects"
+msgstr ""
+
+#: fbmstrconstunit.sshowdb
+msgid "Show databses"
+msgstr ""
+
+#: fbmstrconstunit.sshowdesigner
+msgid "Show designer"
+msgstr ""
+
+#: fbmstrconstunit.sshowdml
+msgid "Show DML statemenst"
+msgstr ""
+
+#: fbmstrconstunit.sshowlinenumbers
+msgid "Show line numbers"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjectdescriptionsashint
+msgid "Show object descriptions as hint"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjectnameinobjecteditorform
+msgid "Show object name in object editor form"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjectongrantpagedefault
+msgid "Show object on grant page default"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjects
+msgid "Show objects"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjtree
+msgid "Show objects tree"
+msgstr ""
+
+#: fbmstrconstunit.sshowonlylinenumber
+msgid "Show only line number"
+msgstr ""
+
+#: fbmstrconstunit.sshowqueryplan
+msgid "Show query plan"
+msgstr ""
+
+#: fbmstrconstunit.sshowresultgridonfirstpage
+msgid "Show result grid on first page"
+msgstr ""
+
+#: fbmstrconstunit.sshowrightborder
+msgid "Show right border"
+msgstr ""
+
+#: fbmstrconstunit.sshowsystemobjects
+msgid "Show system objects"
+msgstr ""
+
+#: fbmstrconstunit.sshowview
+msgid "Show view"
+msgstr ""
+
+#: fbmstrconstunit.sshutdown
+msgid "Shutdown"
+msgstr ""
+
+#: fbmstrconstunit.ssimple
+msgid "Simple"
+msgstr ""
+
+#: fbmstrconstunit.ssinglefilebackup
+msgid "Single file backup"
+msgstr ""
+
+#: fbmstrconstunit.ssinglefilerestore
+msgid "Single file restore"
+msgstr ""
+
+#: fbmstrconstunit.ssize
+msgctxt "fbmstrconstunit.ssize"
+msgid "Size"
+msgstr ""
+
+#: fbmstrconstunit.sskipafterrows
+msgid "Skip after rows"
+msgstr ""
+
+#: fbmstrconstunit.sskipbeforerows
+msgid "Skip before rows"
+msgstr ""
+
+#: fbmstrconstunit.sskipempty
+msgid "Skip empty"
+msgstr ""
+
+#: fbmstrconstunit.ssorting
+msgid "Sorting"
+msgstr ""
+
+#: fbmstrconstunit.ssortorder
+msgctxt "fbmstrconstunit.ssortorder"
+msgid "Sort order"
+msgstr ""
+
+#: fbmstrconstunit.ssqlbody
+msgid "Sql body"
+msgstr ""
+
+#: fbmstrconstunit.ssqlbuilder
+msgid "SQL builder"
+msgstr ""
+
+#: fbmstrconstunit.ssqldataacess
+msgid "SQL data acess"
+msgstr ""
+
+#: fbmstrconstunit.ssqldialect
+msgid "SQL Dialect"
+msgstr ""
+
+#: fbmstrconstunit.ssqleditor
+msgctxt "fbmstrconstunit.ssqleditor"
+msgid "SQL editor"
+msgstr ""
+
+#: fbmstrconstunit.ssqleditorhistorycount
+msgid "SQL editor history count"
+msgstr ""
+
+#: fbmstrconstunit.ssqleditorlogfile
+msgid "SQL editor log file"
+msgstr ""
+
+#: fbmstrconstunit.ssqleditoroptions
+msgid "SQL editor options"
+msgstr ""
+
+#: fbmstrconstunit.ssqlhistorycolors
+msgid "SQL history colors"
+msgstr ""
+
+#: fbmstrconstunit.ssqlitedbstat
+msgid "SQLite database status"
+msgstr ""
+
+#: fbmstrconstunit.ssqlmetadatalogfile
+msgid "SQL metadata log file"
+msgstr ""
+
+#: fbmstrconstunit.ssqlpagename
+msgid "SQL page name"
+msgstr ""
+
+#: fbmstrconstunit.ssqlparseerror
+msgid "Error in SQL text"
+msgstr ""
+
+#: fbmstrconstunit.ssqlsecurity
+msgid "Sql security"
+msgstr ""
+
+#: fbmstrconstunit.ssrcpagename
+msgid "Source page name"
+msgstr ""
+
+#: fbmstrconstunit.sstandart
+msgctxt "fbmstrconstunit.sstandart"
+msgid "Standart"
+msgstr ""
+
+#: fbmstrconstunit.sstart
+msgctxt "fbmstrconstunit.sstart"
+msgid "Start date"
+msgstr ""
+
+#: fbmstrconstunit.sstart1
+msgid "Start"
+msgstr ""
+
+#: fbmstrconstunit.sstartvalue
+msgid "Start value"
+msgstr ""
+
+#: fbmstrconstunit.sstartwith
+msgid "START WITH"
+msgstr ""
+
+#: fbmstrconstunit.sstatament
+msgctxt "fbmstrconstunit.sstatament"
+msgid "Statament"
+msgstr ""
+
+#: fbmstrconstunit.sstate
+msgid "State"
+msgstr ""
+
+#: fbmstrconstunit.sstatistic
+msgid "Statistic"
+msgstr ""
+
+#: fbmstrconstunit.sstatsdatetime
+msgid "Stats date"
+msgstr ""
+
+#: fbmstrconstunit.sstatus
+msgctxt "fbmstrconstunit.sstatus"
+msgid "Status"
+msgstr ""
+
+#: fbmstrconstunit.sstep
+msgid "Step"
+msgstr ""
+
+#: fbmstrconstunit.sstepname
+msgctxt "fbmstrconstunit.sstepname"
+msgid "Step name"
+msgstr ""
+
+#: fbmstrconstunit.ssteps
+msgid "Steps"
+msgstr ""
+
+#: fbmstrconstunit.sstop
+msgid "Stop"
+msgstr ""
+
+#: fbmstrconstunit.sstoredprocedure
+msgctxt "fbmstrconstunit.sstoredprocedure"
+msgid "Stored procedure"
+msgstr ""
+
+#: fbmstrconstunit.sstoredprocedurename
+msgctxt "fbmstrconstunit.sstoredprocedurename"
+msgid "Procedure name"
+msgstr ""
+
+#: fbmstrconstunit.sstoredprocedures
+msgid "Stored procedures"
+msgstr ""
+
+#: fbmstrconstunit.sstrings
+msgid "Strings"
+msgstr ""
+
+#: fbmstrconstunit.sstripygrids
+msgid "Stripy grids"
+msgstr ""
+
+#: fbmstrconstunit.ssubroutines
+msgid "Nested function/procedures"
+msgstr ""
+
+#: fbmstrconstunit.ssubtype
+msgid "Sub type"
+msgstr ""
+
+#: fbmstrconstunit.ssuccesconnection
+msgid "Successful connection"
+msgstr ""
+
+#: fbmstrconstunit.ssuccessfullyfinished
+msgid " - successfully finished"
+msgstr ""
+
+#: fbmstrconstunit.ssummaryline
+msgid "Summary line"
+msgstr ""
+
+#: fbmstrconstunit.ssummarylinehint
+msgid "Show summary line"
+msgstr ""
+
+#: fbmstrconstunit.ssuper
+msgid "Super"
+msgstr ""
+
+#: fbmstrconstunit.ssvnrevision
+msgid "SVN revision : "
+msgstr ""
+
+#: fbmstrconstunit.ssweepinterval
+msgid "Sweep interval"
+msgstr ""
+
+#: fbmstrconstunit.ssynchronous
+msgid "Synchronous"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdescreatedomain
+msgid "Create domain"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesdecldatevar
+msgid "Declare date variable"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesdeclintvar
+msgid "Declare integer variable"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesdeclvar
+msgid "Declare variable"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesexecblock
+msgid "Execute block"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesexecproc
+msgid "Execute procedure"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesforignkey
+msgid "Forign key"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesgrantall
+msgid "Grant all for object"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesgroupby
+msgid "group by "
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesinstable
+msgid "Insert into table"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdesiteratetable
+msgid "Iterate table"
+msgstr ""
+
+#: fbmstrconstunit.ssyntaxhighlight
+msgid "Syntax highlight"
+msgstr ""
+
+#: fbmstrconstunit.ssystemcatalog
+msgid "System catalog"
+msgstr ""
+
+#: fbmstrconstunit.ssystemcommentstyle
+msgid "System comment style"
+msgstr ""
+
+#: fbmstrconstunit.ssystemdomains
+msgid "System domains"
+msgstr ""
+
+#: fbmstrconstunit.ssystemindex
+msgid "System index"
+msgstr ""
+
+#: fbmstrconstunit.ssystemtables
+msgid "System tables"
+msgstr ""
+
+#: fbmstrconstunit.stabcodecompletionparams
+msgctxt "fbmstrconstunit.stabcodecompletionparams"
+msgid "Codetools and auto code completion"
+msgstr ""
+
+#: fbmstrconstunit.stable
+msgctxt "fbmstrconstunit.stable"
+msgid "Table"
+msgstr ""
+
+#: fbmstrconstunit.stable1
+msgid "Table : "
+msgstr ""
+
+#: fbmstrconstunit.stablecheckconstraint
+msgid "Table check constraint"
+msgstr ""
+
+#: fbmstrconstunit.stableeditor
+msgid "Table editor"
+msgstr ""
+
+#: fbmstrconstunit.stablename
+msgctxt "fbmstrconstunit.stablename"
+msgid "Table name"
+msgstr ""
+
+#: fbmstrconstunit.stableowner
+msgctxt "fbmstrconstunit.stableowner"
+msgid "Table owner"
+msgstr ""
+
+#: fbmstrconstunit.stables
+msgctxt "fbmstrconstunit.stables"
+msgid "Tables"
+msgstr ""
+
+#: fbmstrconstunit.stablespace
+msgctxt "fbmstrconstunit.stablespace"
+msgid "Table space"
+msgstr ""
+
+#: fbmstrconstunit.stablespacename
+msgid "Table space name"
+msgstr ""
+
+#: fbmstrconstunit.stargetcpu
+msgid "Target CPU : "
+msgstr ""
+
+#: fbmstrconstunit.stargetos
+msgid "Target OS : "
+msgstr ""
+
+#: fbmstrconstunit.stask
+msgid "Task"
+msgstr ""
+
+#: fbmstrconstunit.staskclass
+msgctxt "fbmstrconstunit.staskclass"
+msgid "Task class"
+msgstr ""
+
+#: fbmstrconstunit.staskid
+msgctxt "fbmstrconstunit.staskid"
+msgid "Task ID"
+msgstr ""
+
+#: fbmstrconstunit.staskname
+msgctxt "fbmstrconstunit.staskname"
+msgid "Task name"
+msgstr ""
+
+#: fbmstrconstunit.stasks
+msgctxt "fbmstrconstunit.stasks"
+msgid "Tasks"
+msgstr ""
+
+#: fbmstrconstunit.stempbytes
+msgid "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting."
+msgstr ""
+
+#: fbmstrconstunit.stempfiles
+msgid "Number of temporary files created by queries in this database. All temporary files are counted, regardless of why the temporary file was created (e.g., sorting or hashing), and regardless of the log_temp_files setting."
+msgstr ""
+
+#: fbmstrconstunit.stemplate
+msgid "Template"
+msgstr ""
+
+#: fbmstrconstunit.stemplatename
+msgid "Template name"
+msgstr ""
+
+#: fbmstrconstunit.stemplates
+msgid "Templates"
+msgstr ""
+
+#: fbmstrconstunit.stemporary
+msgctxt "fbmstrconstunit.stemporary"
+msgid "Temporary"
+msgstr ""
+
+#: fbmstrconstunit.stempstoredirectory
+msgid "Temp store directory"
+msgstr ""
+
+#: fbmstrconstunit.sterminatequeryquestion
+msgctxt "fbmstrconstunit.sterminatequeryquestion"
+msgid "Terminate a running query?"
+msgstr ""
+
+#: fbmstrconstunit.stest
+msgid "Test"
+msgstr ""
+
+#: fbmstrconstunit.stexttosqleditor
+msgid "Text to SQL editor"
+msgstr ""
+
+#: fbmstrconstunit.sthousandseparator
+msgid "Thousand separator"
+msgstr ""
+
+#: fbmstrconstunit.stime
+msgctxt "fbmstrconstunit.stime"
+msgid "Time"
+msgstr ""
+
+#: fbmstrconstunit.stimelife
+msgctxt "fbmstrconstunit.stimelife"
+msgid "Time life"
+msgstr ""
+
+#: fbmstrconstunit.stimes
+msgctxt "fbmstrconstunit.stimes"
+msgid "Times"
+msgstr ""
+
+#: fbmstrconstunit.stimestamp
+msgid "TimeStamp"
+msgstr ""
+
+#: fbmstrconstunit.stodate
+msgctxt "fbmstrconstunit.stodate"
+msgid "To date"
+msgstr ""
+
+#: fbmstrconstunit.stoinsertfieldname
+msgid "%FIELD_NAME% - to insert field name"
+msgstr ""
+
+#: fbmstrconstunit.stoinsertgeneratorname
+msgid "%GENERATOR_NAME% - to insert generator name"
+msgstr ""
+
+#: fbmstrconstunit.stoinserttablename
+msgid "%TABLE_NAME% - to insert table name"
+msgstr ""
+
+#: fbmstrconstunit.stoinserttableshemaname
+msgid "%TABLE_SCHEMA_NAME% - to insert table shema name"
+msgstr ""
+
+#: fbmstrconstunit.stoinserttriggername
+msgid "%TRIGGER_NAME% - to insert trigger name"
+msgstr ""
+
+#: fbmstrconstunit.stotal
+msgid "Total"
+msgstr ""
+
+#: fbmstrconstunit.stransactionpersecond
+msgid "Transaction per second"
+msgstr ""
+
+#: fbmstrconstunit.stransactionpropertyfordata
+msgid "Transaction property for data"
+msgstr ""
+
+#: fbmstrconstunit.stransactionpropertyformetadata
+msgid "Transaction property for metadata"
+msgstr ""
+
+#: fbmstrconstunit.stransactionpropertyforscripteditor
+msgid "Transaction property for script editor"
+msgstr ""
+
+#: fbmstrconstunit.stransactionscommit
+msgid "Transactions commit"
+msgstr ""
+
+#: fbmstrconstunit.stransactionsrollback
+msgid "Transactions rollback"
+msgstr ""
+
+#: fbmstrconstunit.strigger
+msgctxt "fbmstrconstunit.strigger"
+msgid "Trigger"
+msgstr ""
+
+#: fbmstrconstunit.striggeractive
+msgctxt "fbmstrconstunit.striggeractive"
+msgid "Active"
+msgstr ""
+
+#: fbmstrconstunit.striggerbody
+msgid "Trigger body"
+msgstr ""
+
+#: fbmstrconstunit.striggerdescription
+msgid "Trigger description"
+msgstr ""
+
+#: fbmstrconstunit.striggerforevent
+msgid "For event"
+msgstr ""
+
+#: fbmstrconstunit.striggername
+msgid "Trigger name"
+msgstr ""
+
+#: fbmstrconstunit.striggernametags
+msgid ""
+"Avaliable tags:\n"
+"%TABLE_NAME% - Table name\n"
+"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
+msgstr ""
+
+#: fbmstrconstunit.striggernametemplate
+msgid "Trigger name template"
+msgstr ""
+
+#: fbmstrconstunit.striggerondelete
+msgctxt "fbmstrconstunit.striggerondelete"
+msgid "On delete"
+msgstr ""
+
+#: fbmstrconstunit.striggeroninsert
+msgid "On insert"
+msgstr ""
+
+#: fbmstrconstunit.striggeronupdate
+msgid "On update"
+msgstr ""
+
+#: fbmstrconstunit.striggerorder
+msgctxt "fbmstrconstunit.striggerorder"
+msgid "Order"
+msgstr ""
+
+#: fbmstrconstunit.striggerproc
+msgid "Trigger procedures"
+msgstr ""
+
+#: fbmstrconstunit.striggers
+msgctxt "fbmstrconstunit.striggers"
+msgid "Triggers"
+msgstr ""
+
+#: fbmstrconstunit.striggerslist
+msgid "Triggers list"
+msgstr ""
+
+#: fbmstrconstunit.striggertable
+msgctxt "fbmstrconstunit.striggertable"
+msgid "For table"
+msgstr ""
+
+#: fbmstrconstunit.striggertext
+msgid "Trigger text"
+msgstr ""
+
+#: fbmstrconstunit.striggertype
+msgid "Trigger type"
+msgstr ""
+
+#: fbmstrconstunit.struncate
+msgid "Truncate"
+msgstr ""
+
+#: fbmstrconstunit.strusted
+msgid "Trusted"
+msgstr ""
+
+#: fbmstrconstunit.stupfetched
+msgid "Number of rows fetched by queries in this database"
+msgstr ""
+
+#: fbmstrconstunit.stupinserted
+msgid "Number of rows inserted by queries in this database"
+msgstr ""
+
+#: fbmstrconstunit.stupreturned
+msgid "Number of rows returned by queries in this database"
+msgstr ""
+
+#: fbmstrconstunit.stype
+msgctxt "fbmstrconstunit.stype"
+msgid "Type"
+msgstr ""
+
+#: fbmstrconstunit.stypeof
+msgid "TypeOf"
+msgstr ""
+
+#: fbmstrconstunit.stypereturns
+msgctxt "fbmstrconstunit.stypereturns"
+msgid "Type returns"
+msgstr ""
+
+#: fbmstrconstunit.stypereturns1
+msgid "Single value"
+msgstr ""
+
+#: fbmstrconstunit.stypereturns2
+msgid "Set of values"
+msgstr ""
+
+#: fbmstrconstunit.stypereturns3
+msgctxt "fbmstrconstunit.stypereturns3"
+msgid "Table"
+msgstr ""
+
+#: fbmstrconstunit.sudf
+msgid "UDF"
+msgstr ""
+
+#: fbmstrconstunit.sudfs
+msgid "UDFs"
+msgstr ""
+
+#: fbmstrconstunit.suncommentcmd
+msgid "Uncomment selection"
+msgstr ""
+
+#: fbmstrconstunit.sunderline
+msgid "Underline"
+msgstr ""
+
+#: fbmstrconstunit.sundo
+msgid "Undo"
+msgstr ""
+
+#: fbmstrconstunit.sundohint
+msgid "Undo last editor changes"
+msgstr ""
+
+#: fbmstrconstunit.sunique
+msgctxt "fbmstrconstunit.sunique"
+msgid "Unique"
+msgstr ""
+
+#: fbmstrconstunit.suniqueconstraint
+msgid "Unique constraint"
+msgstr ""
+
+#: fbmstrconstunit.suniqueconstraintname
+msgid "Unique constraint name"
+msgstr ""
+
+#: fbmstrconstunit.sunkonwpgfunccategor
+msgid "Unknow function category - %d"
+msgstr ""
+
+#: fbmstrconstunit.sunlinktable
+msgid "Unlink table"
+msgstr ""
+
+#: fbmstrconstunit.sunq
+msgid "UNQ"
+msgstr ""
+
+#: fbmstrconstunit.sunregisterdatabase
+msgid "Unregister database?"
+msgstr ""
+
+#: fbmstrconstunit.sunselectall
+msgid "Unselect all"
+msgstr ""
+
+#: fbmstrconstunit.supdate
+msgctxt "fbmstrconstunit.supdate"
+msgid "Update"
+msgstr ""
+
+#: fbmstrconstunit.supdatecolor
+msgid "UPDATE color"
+msgstr ""
+
+#: fbmstrconstunit.supdatedrowsinfo
+msgid "Updated rows : %d"
+msgstr ""
+
+#: fbmstrconstunit.supdaterule
+msgid "Update rule"
+msgstr ""
+
+#: fbmstrconstunit.supper
+msgid "Upper"
+msgstr ""
+
+#: fbmstrconstunit.suppercase
+msgctxt "fbmstrconstunit.suppercase"
+msgid "Upper case"
+msgstr ""
+
+#: fbmstrconstunit.susage
+msgid "Usage"
+msgstr ""
+
+#: fbmstrconstunit.suseallspace
+msgctxt "fbmstrconstunit.suseallspace"
+msgid "Use All Space"
+msgstr ""
+
+#: fbmstrconstunit.susecustomcodepageforloggin
+msgid "Use custom codepage for loggin"
+msgstr ""
+
+#: fbmstrconstunit.susedeffillfactor
+msgctxt "fbmstrconstunit.susedeffillfactor"
+msgid "Use default fill factor"
+msgstr ""
+
+#: fbmstrconstunit.suseexistingfunction
+msgid "Use existing function"
+msgstr ""
+
+#: fbmstrconstunit.suseexistinggenerator
+msgid "Use existing generator"
+msgstr ""
+
+#: fbmstrconstunit.susepgshedule
+msgid "Use pgShedule (if avaliable)"
+msgstr ""
+
+#: fbmstrconstunit.suser
+msgid "User"
+msgstr ""
+
+#: fbmstrconstunit.suserid
+msgid "User ID"
+msgstr ""
+
+#: fbmstrconstunit.suserlist
+msgid "User list"
+msgstr ""
+
+#: fbmstrconstunit.susername
+msgid "UserName       = "
+msgstr ""
+
+#: fbmstrconstunit.susername1
+msgctxt "fbmstrconstunit.susername1"
+msgid "User name"
+msgstr ""
+
+#: fbmstrconstunit.suserpassword
+msgid "User password"
+msgstr ""
+
+#: fbmstrconstunit.suserrole
+msgid "User role"
+msgstr ""
+
+#: fbmstrconstunit.susers
+msgid "Users"
+msgstr ""
+
+#: fbmstrconstunit.susersandgroups
+msgid "Users and Groups"
+msgstr ""
+
+#: fbmstrconstunit.susersgroups
+msgid "Users/Groups"
+msgstr ""
+
+#: fbmstrconstunit.susetablealisincreatesqlform
+msgid "Use table name as alis in create SQL form"
+msgstr ""
+
+#: fbmstrconstunit.svalidate
+msgctxt "fbmstrconstunit.svalidate"
+msgid "Validate"
+msgstr ""
+
+#: fbmstrconstunit.svalidatorfuncation
+msgid "Validator funcation"
+msgstr ""
+
+#: fbmstrconstunit.svardefvalue
+msgid "Variable default value"
+msgstr ""
+
+#: fbmstrconstunit.svarname
+msgid "Variable name"
+msgstr ""
+
+#: fbmstrconstunit.svarprefix
+msgid "Variable prefix"
+msgstr ""
+
+#: fbmstrconstunit.svartype
+msgid "Variable type"
+msgstr ""
+
+#: fbmstrconstunit.sview
+msgctxt "fbmstrconstunit.sview"
+msgid "View"
+msgstr ""
+
+#: fbmstrconstunit.sviews
+msgctxt "fbmstrconstunit.sviews"
+msgid "Views"
+msgstr ""
+
+#: fbmstrconstunit.swidget
+msgid "Widget : "
+msgstr ""
+
+#: fbmstrconstunit.swithdatatype
+msgid "With data type"
+msgstr ""
+
+#: fbmstrconstunit.swithgrantoptions
+msgid "With Grant Options"
+msgstr ""
+
+#: fbmstrconstunit.swithoids
+msgctxt "fbmstrconstunit.swithoids"
+msgid "With OIDs"
+msgstr ""
+
+#: fbmstrconstunit.swritetimestampintolog
+msgid "Write timestamp into log"
+msgstr ""
+
+#: fb_utils.sdescbigint
+msgid "8-byte integer type"
+msgstr ""
+
+#: fb_utils.sdescchar
+msgid "Size in bytes depends on the encoding, the number of bytes in a character. from 1 to 32,767 bytes. A fixed-length character data type. When its data is displayed, trailing spaces are added to the string up to the specified length. Trailing spaces are not stored in the database but are restored to match the defined length when the column is displayed on the client side. Network traffic is reduced by not sending spaces over the LAN. If the number of characters is not specified, 1 is used by default."
+msgstr ""
+
+#: fb_utils.sdescdate
+msgid "The DATE data type stores the date. From 01.01.0001 AD to 31.12.9999. Date only, no time element"
+msgstr ""
+
+#: fb_utils.sdescinteger
+msgid "Integer (whole number) data from -231 (-2,147,483,648) through 231 - 1 (2,147,483,647)."
+msgstr ""
+
+#: fb_utils.sdescsmallint
+msgid "Integer data from -215 (-32,768) through 215 - 1 (32,767)."
+msgstr ""
+
+#: fb_utils.sdesctime
+msgid "The TIME data type stores the time of day within the range from 00:00:00.0000 to 23:59:59.9999."
+msgstr ""
+
+#: fb_utils.sdesctimestamp
+msgid "Date and time data from January 1, 1900, through June 6, 2079, with an accuracy of one minute. Firebird's has greater range and accuracy."
+msgstr ""
+
+#: fb_utils.sdescvarchar
+msgid "Variable-length data with a maximum of 32,765 characters."
+msgstr ""
+
+#: pg_utils.s_pg_any
+msgid "Indicates that a function accepts any input data type."
+msgstr ""
+
+#: pg_utils.s_pg_anyarray
+msgid "Indicates that a function accepts any array data type (see Section 35.2.5)."
+msgstr ""
+
+#: pg_utils.s_pg_anyelement
+msgid "Indicates that a function accepts any data type (see Section 35.2.5)."
+msgstr ""
+
+#: pg_utils.s_pg_anyenum
+msgid "Indicates that a function accepts any enum data type (see Section 35.2.5 and Section 8.7)."
+msgstr ""
+
+#: pg_utils.s_pg_anynonarray
+msgid "Indicates that a function accepts any non-array data type (see Section 35.2.5)."
+msgstr ""
+
+#: pg_utils.s_pg_bigint
+msgid "signed eight-byte integer"
+msgstr ""
+
+#: pg_utils.s_pg_bigserial
+msgid "autoincrementing eight-byte integer"
+msgstr ""
+
+#: pg_utils.s_pg_bit
+msgid "fixed-length bit string"
+msgstr ""
+
+#: pg_utils.s_pg_bit_varying
+msgid "variable-length bit string"
+msgstr ""
+
+#: pg_utils.s_pg_boolean
+msgid "logical Boolean (true/false)"
+msgstr ""
+
+#: pg_utils.s_pg_box
+msgid "rectangular box on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_bytea
+msgid "binary data (\"byte array\")"
+msgstr ""
+
+#: pg_utils.s_pg_char
+msgid "fixed-length character string"
+msgstr ""
+
+#: pg_utils.s_pg_cidr
+msgid "IPv4 or IPv6 network address"
+msgstr ""
+
+#: pg_utils.s_pg_circle
+msgid "circle on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_cstring
+msgid "Indicates that a function accepts or returns a null-terminated C string."
+msgstr ""
+
+#: pg_utils.s_pg_date
+msgid "calendar date (year, month, day)"
+msgstr ""
+
+#: pg_utils.s_pg_double_precision
+msgid "double precision floating-point number (8 bytes)"
+msgstr ""
+
+#: pg_utils.s_pg_inet
+msgid "IPv4 or IPv6 host address"
+msgstr ""
+
+#: pg_utils.s_pg_integer
+msgid "signed four-byte integer"
+msgstr ""
+
+#: pg_utils.s_pg_internal
+msgid "Indicates that a function accepts or returns a server-internal data type."
+msgstr ""
+
+#: pg_utils.s_pg_interval
+msgid "interval [ fields ] [ (p) ] - time span"
+msgstr ""
+
+#: pg_utils.s_pg_language_handler
+msgid "A procedural language call handler is declared to return language_handler."
+msgstr ""
+
+#: pg_utils.s_pg_line
+msgid "infinite line on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_lseg
+msgid "line segment on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_macaddr
+msgid "MAC (Media Access Control) address"
+msgstr ""
+
+#: pg_utils.s_pg_money
+msgid "currency amount"
+msgstr ""
+
+#: pg_utils.s_pg_numeric
+msgid "exact numeric of selectable precision"
+msgstr ""
+
+#: pg_utils.s_pg_opaque
+msgid "An obsolete type name that formerly served all the above purposes."
+msgstr ""
+
+#: pg_utils.s_pg_path
+msgid "geometric path on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_point
+msgid "geometric point on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_polygon
+msgid "closed geometric path on a plane"
+msgstr ""
+
+#: pg_utils.s_pg_real
+msgid "single precision floating-point number (4 bytes)"
+msgstr ""
+
+#: pg_utils.s_pg_record
+msgid "Identifies a function returning an unspecified row type."
+msgstr ""
+
+#: pg_utils.s_pg_serial
+msgid "autoincrementing four-byte integer"
+msgstr ""
+
+#: pg_utils.s_pg_smallint
+msgid "signed two-byte integer"
+msgstr ""
+
+#: pg_utils.s_pg_text
+msgctxt "pg_utils.s_pg_text"
+msgid "variable-length character string"
+msgstr ""
+
+#: pg_utils.s_pg_time
+msgid "time of day (no time zone)"
+msgstr ""
+
+#: pg_utils.s_pg_timestamp
+msgid "date and time (no time zone)"
+msgstr ""
+
+#: pg_utils.s_pg_timestamp_wtz
+msgid "date and time, including time zone"
+msgstr ""
+
+#: pg_utils.s_pg_time_wtz
+msgid "time of day, including time zone"
+msgstr ""
+
+#: pg_utils.s_pg_trigger
+msgid "A trigger function is declared to return trigger."
+msgstr ""
+
+#: pg_utils.s_pg_tsquery
+msgid "text search query"
+msgstr ""
+
+#: pg_utils.s_pg_tsvector
+msgid "text search document"
+msgstr ""
+
+#: pg_utils.s_pg_txid_snapshot
+msgid "user-level transaction ID snapshot"
+msgstr ""
+
+#: pg_utils.s_pg_unknowdata
+msgid "Unknow data"
+msgstr ""
+
+#: pg_utils.s_pg_uuid
+msgid "universally unique identifier"
+msgstr ""
+
+#: pg_utils.s_pg_varchar
+msgctxt "pg_utils.s_pg_varchar"
+msgid "variable-length character string"
+msgstr ""
+
+#: pg_utils.s_pg_void
+msgid "Indicates that a function returns no value."
+msgstr ""
+
+#: pg_utils.s_pg_xmldata
+msgid "XML data"
+msgstr ""
+

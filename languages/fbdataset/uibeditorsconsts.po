@@ -1,0 +1,59 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uibeditorsconsts.scharactersetlbl
+msgid "&Character Set"
+msgstr ""
+
+#: uibeditorsconsts.scommons
+msgid "Commons"
+msgstr ""
+
+#: uibeditorsconsts.sconnection
+msgid "Connection"
+msgstr ""
+
+#: uibeditorsconsts.sdatabaselbl
+msgid "&Database name"
+msgstr ""
+
+#: uibeditorsconsts.slibrarynamelbl
+msgid "&Library name"
+msgstr ""
+
+#: uibeditorsconsts.smodelbl
+msgid "&Mode"
+msgstr ""
+
+#: uibeditorsconsts.spasswordlbl
+msgid "Pass&word"
+msgstr ""
+
+#: uibeditorsconsts.sportlbl
+msgid "&Port"
+msgstr ""
+
+#: uibeditorsconsts.sselectdatabasefile
+msgid "Select database file"
+msgstr ""
+
+#: uibeditorsconsts.sselectlibraryfilename
+msgid "Select library file name"
+msgstr ""
+
+#: uibeditorsconsts.sserverlbl
+msgid "&Server"
+msgstr ""
+
+#: uibeditorsconsts.ssqlrolelbl
+msgid "SQL &Role"
+msgstr ""
+
+#: uibeditorsconsts.suibdatabaseeditor
+msgid "UIB Database Editor"
+msgstr ""
+
+#: uibeditorsconsts.susernamelbl
+msgid "&User Name"
+msgstr ""
+

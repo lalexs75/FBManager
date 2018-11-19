@@ -1,0 +1,454 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Péter Gábor <ptrg@freemail.hu>\n"
+"Language-Team: Magyar (Hungarian)\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: fpsstrings.rsallexcelfiles
+msgid "All Excel files"
+msgstr "Minden Excel fájl"
+
+#: fpsstrings.rsallspreadsheetfiles
+msgid "All spreadsheet files"
+msgstr "Minden táblázat fájl"
+
+#: fpsstrings.rsambiguousdecthouseparator
+msgid "Assuming usage of decimal separator in \"%s\"."
+msgstr "Tizedeselválasztó használata feltételezve ebben: \"%s\"."
+
+#: fpsstrings.rsbadquotes
+msgid "Unterminated string"
+msgstr "Lezáratlan karakterlánc"
+
+#: fpsstrings.rsblack
+msgid "black"
+msgstr "fekete"
+
+#: fpsstrings.rsblue
+msgid "blue"
+msgstr "kék"
+
+#: fpsstrings.rscannotreadfile
+msgid "Cannot read file \"%s\". Wrong, unknown or defective file format?"
+msgstr "A(z) \"%s\" fájl nem olvasható. Rossz, ismeretlen formátumú vagy sérült a fájl?"
+
+#: fpsstrings.rscannotsortmerged
+msgid "The cell range cannot be sorted because it contains merged cells."
+msgstr "A cellatartomány nem rendezhető sorba, mert összevont cellákat tartalaz."
+
+#: fpsstrings.rscircularreference
+msgid "Circular reference found when calculating worksheet formula in cell %s"
+msgstr "Körkörös hivatkozás érzékelve a(z) %s cellában található munkalap-formula kiszámításakor."
+
+#: fpsstrings.rscodepagenotsupported
+msgid "Code page \"%s\" is not supported. Using \"cp1252\" (Latin 1) instead."
+msgstr "A(z) \"%s\" kódlap nincs támogatva, helyette a \"cp1252\" (Latin1) lesz használva."
+
+#: fpsstrings.rscolumnstylenotfound
+msgid "Column style not found."
+msgstr "Oszlop stílus nem található."
+
+#: fpsstrings.rscommaexpected
+msgid "Expected comma (,) at position %d, but got %s"
+msgstr "Vessző (,) szükséges a(z) %d. pozícióban, de %s található"
+
+#: fpsstrings.rscyan
+msgid "cyan"
+msgstr "ciánkék"
+
+#: fpsstrings.rsdarkblue
+msgid "dark blue"
+msgstr "sötétkék"
+
+#: fpsstrings.rsdarkgreen
+msgid "dark green"
+msgstr "sötétzöld"
+
+#: fpsstrings.rsdarkred
+msgid "dark red"
+msgstr "sötétvörös"
+
+#: fpsstrings.rsdefaultsheetname
+msgid "Sheet%d"
+msgstr "Lap%d"
+
+#: fpsstrings.rsdefectiveinternalfilestructure
+msgid "Defective internal structure of %s file."
+msgstr "A(z) %s fájl belső szerkezete sérült."
+
+#: fpsstrings.rsdifferentsheetprintrange
+msgid "Print range \"%s\" requires a different worksheet."
+msgstr "A(z) \"%s\" nyomtatási tartományhoz szükség van egy másik munkalapra."
+
+#: fpsstrings.rsduplicateidentifier
+msgid "An identifier with name \"%s\" already exists."
+msgstr "Már létezik egy azonosító \"%s\" névvel."
+
+#: fpsstrings.rsduplicateworksheetname
+msgid "Duplicate worksheet \"%s\"."
+msgstr ""
+
+#: fpsstrings.rsemptyhyperlink
+msgid "The hyperlink is not specified."
+msgstr "A hiperhivatkozás nincs megadva."
+
+#: fpsstrings.rserrorinexpression
+msgid "Cannot evaluate: error in expression"
+msgstr "Kiértékelhetetlen: hibás kifejezés"
+
+#: fpsstrings.rsexportfileisrequired
+msgid "Export file name is required."
+msgstr "Az exportáláshoz fájlnév szükséges."
+
+#: fpsstrings.rsexpressionempty
+msgid "Cannot evaluate: empty expression"
+msgstr "Kiértékelhetetlen: üres kifejezés"
+
+#: fpsstrings.rsfilealreadyexists
+msgid "File \"%s\" already exists."
+msgstr "A(z) \"%s\" fájl már létezik."
+
+#: fpsstrings.rsfileformatnotsupported
+msgid "File format of \"%s\" not supported."
+msgstr "A(z) \"%s\" fájl formátuma nincs támogatva."
+
+#: fpsstrings.rsfilenotfound
+msgid "File \"%s\" not found."
+msgstr "A(z) \"%s\" fájl nem található."
+
+#: fpsstrings.rsfiles
+msgid "files"
+msgstr "fájl"
+
+#: fpsstrings.rsfilestructureerror
+msgid "File structure error in %s record, position %d."
+msgstr "Fájl szerkezeti hiba a(z) %s rekord %d. pozíciójában."
+
+#: fpsstrings.rsfooter
+msgid "Footer"
+msgstr "Lábléc"
+
+#: fpsstrings.rsformulanotsupported
+msgid "The formula in cell %s is not supported by this file format: %s"
+msgstr "A(z) %s cellában megadott formula nincs támogatva ezen fájltípusban: %s"
+
+#: fpsstrings.rsfpsexportdescription
+msgid "Spreadsheet file"
+msgstr "Táblázat fájl"
+
+#: fpsstrings.rsgray
+msgid "gray"
+msgstr "szürke"
+
+#: fpsstrings.rsgreen
+msgid "green"
+msgstr "zöld"
+
+#: fpsstrings.rsheader
+msgid "Header"
+msgstr "Fejléc"
+
+#: fpsstrings.rsillegalodscellrange
+msgid "Illegal structure of an OpenDocument cell range."
+msgstr ""
+
+#: fpsstrings.rsimageformatnotsupported
+msgid "Image format not supported."
+msgstr "A kép formátuma nincs támogatva."
+
+#: fpsstrings.rsincorrectpositionofimageinheaderfooter
+msgid "Incorrect position of %%G code in %s"
+msgstr "A %%G kód pozíciója érvénytelen ebben: %s"
+
+#: fpsstrings.rsindexinsstoutofrange
+msgid "Index %d in SST out of range (0-%d)."
+msgstr "A(z) %d index az SST-ben kívül esik az érvényes tartományon (0-%d)."
+
+#: fpsstrings.rsinvalidargumentcount
+msgid "Invalid argument count for function %s"
+msgstr "Az argumentumok száma nem megfelelő a(z) %s függvény számára"
+
+#: fpsstrings.rsinvalidcharacterincell
+msgid "Invalid character(s) in cell %s."
+msgstr "Érvénytelen karakter(ek) a(z) %s cellában."
+
+#: fpsstrings.rsinvalidcharacterincellcomment
+msgid "Invalid character(s) in cell comment \"%s\"."
+msgstr "Érvénytelen karakter(ek) a(z) %s cella megjegyzésében."
+
+#: fpsstrings.rsinvaliddatetimeformat
+msgid "Trying to use an incompatible date/time format."
+msgstr "Kísérlet össze nem egyeztethető dátum/idő formátum használatára."
+
+#: fpsstrings.rsinvalidextension
+msgid "Attempting to save a spreadsheet by extension, but the extension %s is not valid."
+msgstr "Kísérlet a táblázat kiterjesztés alapján történő mentésére, de a(z) %s nem érvényes kiterjesztés."
+
+#: fpsstrings.rsinvalidfloat
+msgid "%s is not a valid floating-point value"
+msgstr "A(z) %s nem érvényes lebegőpontos érték"
+
+#: fpsstrings.rsinvalidfontindex
+msgid "Invalid font index"
+msgstr "Érvénytelen betűkészlet index"
+
+#: fpsstrings.rsinvalidnumber
+msgid "Invalid numerical value : %s"
+msgstr "Érvénytelen számérték: %s"
+
+#: fpsstrings.rsinvalidnumberchar
+msgid "Unexpected character in number : %s"
+msgstr "Váratlan, számként nem értelmezhető karakter: %s"
+
+#: fpsstrings.rsinvalidnumberformat
+msgid "Trying to use an incompatible number format."
+msgstr "Kísérlet össze nem egyeztethető szám formátum használatára."
+
+#: fpsstrings.rsinvalidresultcharacter
+msgid "\"%s\" is not a valid return type indicator"
+msgstr "A(z) \"%s\" nem érvényes visszatérési típus jelző."
+
+#: fpsstrings.rsinvalidresulttype
+msgid "Invalid result type: %s"
+msgstr "Érvénytelen visszaadott típus: %s"
+
+#: fpsstrings.rsinvalidspreadsheetfile
+msgid "\"%s\" is not a valid spreadsheet file"
+msgstr "A(z) \"%s\" nem érvényes táblázatfájl."
+
+#: fpsstrings.rsinvalidworksheetname
+msgid "\"%s\" is not a valid worksheet name."
+msgstr "A(z) \"%s\" nem érvényes munkalapnév."
+
+#: fpsstrings.rsleftbracketexpected
+msgid "Expected left bracket at position %d, but got %s"
+msgstr "Bal oldali zárójel szükséges a(z) %d. pozícióban, de %s található"
+
+#: fpsstrings.rslocalfilehyperlinkabs
+msgid "The hyperlink \"%s\" points to a local file. In case of an absolute path the protocol \"file:\" must be specified."
+msgstr "A(z) \"%s\" hiperhivatkozás egy helyi fájlra mutat. Abszolút útvonal esetén a \"file:\" protokollazonosítót meg kell adni."
+
+#: fpsstrings.rsmagenta
+msgid "magenta"
+msgstr "lila"
+
+#: fpsstrings.rsmaxcolsexceeded
+msgid "This workbook contains %d columns, but the selected file format does not support more than %d columns."
+msgstr "Ez a munkafüzet %d oszlopot tartalmaz, de a kiválasztott fájlformátum nem támogat %d oszlopnál többet."
+
+#: fpsstrings.rsmaxrowsexceeded
+msgid "This workbook contains %d rows, but the selected file format does not support more than %d rows."
+msgstr "Ez a munkafüzet %d sort tartalmaz, de a kiválasztott fájlformátum nem támogat %d sornál többet."
+
+#: fpsstrings.rsmultiplesheetsonlywithrestoreposition
+msgid "Export to multiple sheets is possible only if position is restored."
+msgstr "A több lapra történő exportálás csak a pozíció visszaállítása esetén lehetséges."
+
+#: fpsstrings.rsnooperand
+msgid "No operand for unary operation %s"
+msgstr "Nincs adat az egytényezős %s művelet számára"
+
+#: fpsstrings.rsnopercentoperation
+msgid "Cannot perform percent operation on expression of type %s: %s"
+msgstr "Nem lehet elvégezni %s típusú kifejezésen a százalékszámítást: %s"
+
+#: fpsstrings.rsnotdefined
+msgid "not defined"
+msgstr "nincs megadva"
+
+#: fpsstrings.rsnovalidcelladdress
+msgid "\"%s\" is not a valid cell address."
+msgstr "A(z) \"%s\" nem érvényes cella cím."
+
+#: fpsstrings.rsnovalidcellrangeaddress
+msgid "\"%s\" is not a valid cell range address."
+msgstr "A(z) \"%s\" nem érvényes cellatartomány cím."
+
+#: fpsstrings.rsnovalidcellrangeorcelladdress
+msgid "\"%s\" is not a valid cell or cell range address."
+msgstr "A(z) \"%s\" nem érvényes cella vagy cellatartomány cím."
+
+#: fpsstrings.rsnovalidhyperlinkinternal
+msgid "The hyperlink \"%s\" is not a valid cell address."
+msgstr "A(z) \"%s\" hiperhivatkozás nem érvényes cellacím."
+
+#: fpsstrings.rsnovalidhyperlinkuri
+msgid "The hyperlink \"%s\" is not a valid URI."
+msgstr "A(z) \"%s\" hiperhivatkozás nem érvényes URI."
+
+#: fpsstrings.rsnovalidnumberformatstring
+msgid "No valid number format string."
+msgstr "Nincs érvényes számformázó karakterlánc."
+
+#: fpsstrings.rsnovariable
+msgid "Identifier %s is not a variable"
+msgstr "Az azonosító nem egy változó: %s"
+
+#: fpsstrings.rsodshyperlinksoftextcellsonly
+msgid "Cell %s: OpenDocument supports hyperlinks for text cells only."
+msgstr "%s cella: az OpenDocument formátum csak szövegcellákban támogatja a hiperhivatkozásokat."
+
+#: fpsstrings.rsolive
+msgid "olive"
+msgstr "olíva"
+
+#: fpsstrings.rsonlyoneheaderfooterimageallowed
+msgid "Only one image per %s section allowed."
+msgstr "Csak egy kép lehet %s szakaszonként."
+
+#: fpsstrings.rsoperationexceedscolcount
+#, fuzzy,badformat
+#| msgid "This operation exceeds the range of defined grid columns."
+msgid "This operation at index %d exceeds the range of defined grid columns (%d)."
+msgstr "A művelet túllépi a rács oszlopainak tartományát."
+
+#: fpsstrings.rsoperationexceedsrowcount
+#, fuzzy,badformat
+#| msgid "This operation exceeds the range of defined grid rows."
+msgid "This operation at index %d exceeds the range of defined grid rows (%d)."
+msgstr "A művelet túllépi a rács sorainak tartományát."
+
+#: fpsstrings.rspaletteindex
+msgid "Palette index %d"
+msgstr "Paletta index: %d"
+
+#: fpsstrings.rspasswordremoved_biff2
+msgid "Password removed (BIFF2 requires matching workbook and worksheet passwords)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_excel
+msgid "Password removed (Hashing algorithm not compatible with Excel)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_notvalid
+msgid "Password removed (Not valid)."
+msgstr ""
+
+#: fpsstrings.rspurple
+msgid "purple"
+msgstr "bíbor"
+
+#: fpsstrings.rsreadernotfound
+msgid "Reader not found for file \"%s\""
+msgstr "Nem található olvasó a(z) \"%s\" fájlhoz."
+
+#: fpsstrings.rsred
+msgid "red"
+msgstr "piros"
+
+#: fpsstrings.rsrightbracketexpected
+msgid "Expected right bracket at position %d, but got %s"
+msgstr "Jobb oldali zárójel szükséges a(z) %d. pozícióban, de %s található"
+
+#: fpsstrings.rsrightsquarebracketexpected
+msgid "Expected right square bracket at positon %d, but got %s"
+msgstr ""
+
+#: fpsstrings.rsrowstylenotfound
+msgid "Row style not found."
+msgstr "Sor stílus nem található."
+
+#: fpsstrings.rssilver
+msgid "silver"
+msgstr "ezüst"
+
+#: fpsstrings.rsstdhyperlinktooltip
+msgid "Hold the left mouse button down for a short time to activate the hyperlink."
+msgstr "A hiperhivatkozás aktiválásához rövid ideig nyomva kell tartani az egér bal gombját."
+
+#: fpsstrings.rsteal
+msgid "teal"
+msgstr "kékeszöld"
+
+#: fpsstrings.rstoomanypalettecolors
+msgid "This workbook contains more colors (%d) than supported by the file format (%d). The additional colors are replaced by the best-matching palette colors."
+msgstr "Ez a munkafüzet több színt (%d) tartalmaz, mint amennyit a fájl formátuma támogat (%d). A hozzáadott színek le lettek cserélve a paletta legjobban hasonlító színére."
+
+#: fpsstrings.rstransparent
+msgid "transparent"
+msgstr "átlátszó"
+
+#: fpsstrings.rstruncatetoolongcelltext
+#, fuzzy,badformat
+msgid "Text value exceeds the %d character limit in cell %s and has been truncated."
+msgstr "A szöveg hosszabb mint a(z) 15 karakteres korlát a(z) %s cellában, ezért csonkolva lett."
+
+#: fpsstrings.rstruncatetoolongtext
+msgid "Text value exceeds the %d character limit and has been truncated."
+msgstr ""
+
+#: fpsstrings.rsunexpectedendofexpression
+msgid "Unexpected end of expression"
+msgstr "A kifejezés váratlanul ért véget"
+
+#: fpsstrings.rsunknowncharacter
+msgid "Unknown character at pos %d: \"%s\""
+msgstr "A(z) %d karakter ismeretlen: \"%s\""
+
+#: fpsstrings.rsunknowncomparison
+msgid "Internal error: Unknown comparison"
+msgstr "Belső hiba: Ismeretlen összehasonítás"
+
+#: fpsstrings.rsunknowndatatype
+msgid "Unknown data type."
+msgstr "Ismeretlen adattípus."
+
+#: fpsstrings.rsunknowndelimiter
+msgid "Unknown delimiter character: \"%s\""
+msgstr "Ismeretlen határoló karakter: \"%s\""
+
+#: fpsstrings.rsunknownerrortype
+msgid "Unknown error type."
+msgstr "Ismeretlen hibatípus."
+
+#: fpsstrings.rsunknownidentifier
+msgid "Unknown identifier: %s"
+msgstr "Ismeretlen azonosító: %s"
+
+#: fpsstrings.rsunknowntokenatpos
+msgid "Unknown token at pos %d : %s"
+msgstr "A(z) %d. token ismeretlen: %s"
+
+#: fpsstrings.rsunsupportedreadformat
+msgid "Tried to read a spreadsheet using an unsupported format"
+msgstr "Kísérlet történt egy ismeretlen formátumú táblázat olvasására"
+
+#: fpsstrings.rsunsupportedwriteformat
+msgid "Tried to write a spreadsheet using an unsupported format"
+msgstr "Kísérlet történt egy ismeretlen formátumú táblázat írására"
+
+#: fpsstrings.rsunterminatedexpression
+msgid "Badly terminated expression. Found token at position %d : %s"
+msgstr "Rosszul lezárt kifejezés. A(z) %d. token: %s "
+
+#: fpsstrings.rsutf8textexpectedbutansifoundincell
+msgid "Expected UTF8 text, but probably ANSI text found in cell %s."
+msgstr "UTF8 szöveg az elvárt, de valószínűleg ANSI szöveg található a(z) %s cellában."
+
+#: fpsstrings.rswhite
+msgid "white"
+msgstr "fehér"
+
+#: fpsstrings.rsworksheetnotfound
+msgid "Worksheet \"%s\" not found."
+msgstr "A(z) \"%s\" munkalap nem található."
+
+#: fpsstrings.rsworksheetnotfound1
+msgid "Worksheet not found."
+msgstr "A munkalap nem található."
+
+#: fpsstrings.rswriteerror_worksheetnametoolong
+msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
+msgstr ""
+
+#: fpsstrings.rsyellow
+msgid "yellow"
+msgstr "sárga"
+

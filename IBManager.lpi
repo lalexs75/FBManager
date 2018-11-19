@@ -1,0 +1,1761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="11"/>
+    <General>
+      <Flags>
+        <SaveOnlyProjectUnits Value="True"/>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <AutoCreateForms Value="False"/>
+      <Title Value="Free Database Manager"/>
+      <Scaled Value="True"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <TextName Value="AlexsSoft.FBManager.FBManager"/>
+        <TextDesc Value="Free Database Manager"/>
+      </XPManifest>
+      <Icon Value="0"/>
+    </General>
+    <LazDoc Paths="./docs"/>
+    <i18n>
+      <EnableI18N Value="True" LFM="False"/>
+      <OutDir Value="languages"/>
+    </i18n>
+    <VersionInfo>
+      <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
+      <MinorVersionNr Value="9"/>
+      <RevisionNr Value="10"/>
+      <BuildNr Value="5494"/>
+      <Language Value="0419"/>
+      <Attributes pvaPreRelease="True"/>
+      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.9.10"/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default">
+          <local>
+            <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+          </local>
+        </Mode0>
+      </Modes>
+    </RunParams>
+    <RequiredPackages Count="32">
+      <Item1>
+        <PackageName Value="lr_pdfexport"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="laz_fpspreadsheet_visual"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="fbdemofpc"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="lrSpreadSheetExport"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="laz_fpspreadsheetexport_visual"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="LR_ZeosDB"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="lr_OfficeImport"/>
+      </Item7>
+      <Item8>
+        <PackageName Value="lr_DialogDesign"/>
+      </Item8>
+      <Item9>
+        <PackageName Value="lrEmailExport"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="rxdbgrid_print"/>
+      </Item10>
+      <Item11>
+        <PackageName Value="rxdbgrid_export_spreadsheet"/>
+      </Item11>
+      <Item12>
+        <PackageName Value="TAChartLazarusPkg"/>
+      </Item12>
+      <Item13>
+        <PackageName Value="lrcairoexport"/>
+      </Item13>
+      <Item14>
+        <PackageName Value="lr_extexp"/>
+      </Item14>
+      <Item15>
+        <PackageName Value="rx_sort_zeos"/>
+      </Item15>
+      <Item16>
+        <PackageName Value="rx_sort_fbdataset"/>
+      </Item16>
+      <Item17>
+        <PackageName Value="zcomponent"/>
+      </Item17>
+      <Item18>
+        <PackageName Value="zeos_ex"/>
+      </Item18>
+      <Item19>
+        <PackageName Value="CodeTools"/>
+      </Item19>
+      <Item20>
+        <PackageName Value="lr_add_function"/>
+      </Item20>
+      <Item21>
+        <PackageName Value="LazControls"/>
+        <MinVersion Valid="True"/>
+      </Item21>
+      <Item22>
+        <PackageName Value="SQLDBLaz"/>
+        <MinVersion Major="1" Release="1" Valid="True"/>
+      </Item22>
+      <Item23>
+        <PackageName Value="LCLBase"/>
+        <MinVersion Major="1" Release="1" Valid="True"/>
+      </Item23>
+      <Item24>
+        <PackageName Value="TurboPowerIPro"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item24>
+      <Item25>
+        <PackageName Value="lazdbexport"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item25>
+      <Item26>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item26>
+      <Item27>
+        <PackageName Value="lazreport"/>
+        <MinVersion Minor="9" Valid="True"/>
+      </Item27>
+      <Item28>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item28>
+      <Item29>
+        <PackageName Value="rx"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item29>
+      <Item30>
+        <PackageName Value="RxNew"/>
+        <MinVersion Major="1" Release="2" Build="3" Valid="True"/>
+      </Item30>
+      <Item31>
+        <PackageName Value="SynEdit"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item31>
+      <Item32>
+        <PackageName Value="UIBLaz"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item32>
+    </RequiredPackages>
+    <Units Count="215">
+      <Unit0>
+        <Filename Value="IBManager.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="mainform/ibmanmainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbManagerMainForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="IBManMainUnit"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="SqlEditor/fbmsqleditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmSQLEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmSQLEditorUnit"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="tools/ibmanagertypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="help_forms/fdmaboutunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fdmAboutForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fdmAboutUnit"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="tools/fbmtoolsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="fbmToolsUnit"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="user_sec/ibmUserSecUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="ibmUserSecForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="user_sec/ibmUserSecEditUserUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="ibmUserSecEditUserForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="options/fbmenvironmentoptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmEnvironmentOptionsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmEnvironmentOptionsUnit"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="tools/ibmsqlutilsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="ibmSqlUtilsUnit"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="tools/ibmsqltextsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="tools/fbmcompileqestunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmCompileQestForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmCompileQestUnit"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="options/fbmeditoroptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmEditorOptionsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmEditorOptionsUnit"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="controls/firebird/fbmcreatedatabaseunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmCreateDataBaseForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmCreateDataBaseUnit"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="tools/fbmuserdatabaseunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="UserDBModule"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="fbmUserDataBaseUnit"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="tools/fbmExportDataUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmExportDataForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="dbobjecteditors/dboTableEditor/firebird/fbmtablefieldeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmTableFieldEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmTableFieldEditorUnit"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="dbobjecteditors/ibmanagertablefieldeditorarrayboundunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ibmanagertablefieldeditorArrayBoundForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ibmanagertablefieldeditorArrayBoundunit"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="dbobjecteditors/fbmtableeditorindexeditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmIndexEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmTableEditorIndexEditUnit"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="dbobjecteditors/ibmanagertableeditorpkunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmTableEditorPkForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ibmanagertableeditorPkunit"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmmanagertableeditorfkunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmManagerTableEditorFKForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmManagerTableEditorFKUnit"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="tools/ibm_loginform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="ibmLoginForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="dbobjecteditors/ib_manager_table_editor_field_order_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmTableEditorFieldOrderForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="sql_script/fbmsqlscript.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="FBMSqlScripForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="dbobjecteditors/fbmfillqueryparamsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFillQueryParamsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="dbobjecteditors/fbmdbobjecteditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmDBObjectEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmDBObjectEditorUnit"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="tools/fbmbuckupunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmBackupForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="tools/fbmrestoreunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmRestoreForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="tools/fbmshadowmanagerunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmShadowManagerForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="tools/fbmshadowmanager_editunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmShadowManagerEditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="tools/fbminsertdefsqlunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmInsertDefSqlForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmInsertDefSqlUnit"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="tools/fbmtransactionmonitorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmTransactionMonitorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmTransactionMonitorUnit"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="dbobjecteditors/IBManDataInspectorUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbManDataInpectorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="sql_engine/sqlengineabstractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLEngineAbstractUnit"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="sql_engine/firebird/fbsqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FBSQLEngineUnit"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="sql_engine/dbf/dbf_engineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="sql_engine/sql_enigines_list.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="mainform/fbmcreateconnectionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCreateConnectionForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmCreateConnectionUnit"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="dbobjecteditors/fdmabstracteditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="EditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdmAbstractEditorUnit"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmtableeditordataunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmTableEditorDataFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTableEditorDataUnit"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmtableeditorfieldsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmTableEditorFieldsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTableEditorFieldsUnit"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmtableeditorindexunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmTableEditorIndexFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTableEditorIndexUnit"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="sql_engine/firebird/fb_utils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="tools/fbmstrconstunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="fbmStrConstUnit"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmtableeditortriggersunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmTableEditorTriggersFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTableEditorTriggersUnit"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmobjecteditordescriptionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmObjectEditorDescriptionFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmObjectEditorDescriptionUnit"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="tools/fbmconnectioneditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmConnectionEditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmConnectionEditUnit"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="connection_frames/firebird/fbm_cf_mainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCFMainFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="connection_frames/fdbm_cf_logunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmCFLogFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_cf_LogUnit"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="connection_frames/firebird/fbm_cf_buckupunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCFBackupFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbm_cf_BuckupUnit"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="connection_frames/firebird/fbm_cf_restoreunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCFRestoreFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbm_cf_RestoreUnit"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="connection_frames/dbf/fdbm_cf_dbfmainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmCFDbfMainFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_cf_DbfMainUnit"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="sql_engine/sqlenginecommontypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="SQLEngineCommonTypesUnit"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="dbobjecteditors/dboTriggerEditors/fb/fbtriggerheadereditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbTriggerHeaderEditFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbTriggerHeaderEditUnit"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="dbobjecteditors/dboTableEditor/fdbmtableeditorpklistunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmTableEditorPKListFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbmTableEditorPKListUnit"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="dbobjecteditors/dboTableEditor/fdbmtableeditorforeignkeyunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fdbmTableEditorForeignKeyFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbmTableEditorForeignKeyUnit"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="sql_engine/oracle/oraclesqlengine.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="OracleSQLEngine"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="connection_frames/oracle/fdbm_oraconnectionmainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmOraConnectionMainFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_OraConnectionMainUnit"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="controls/ora_VisualToolsCallUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmspedtmainpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmSPEdtMainPageFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmSPEdtMainPageUnit"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="dbobjecteditors/dboViewEditors/fbmvieweditormainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmViewEditorMainFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmViewEditorMainUnit"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="sql_engine/fbmsqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmSqlParserUnit"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="dbobjecteditors/dboDomain/fbmdomainmaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmDomainMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmDomainMainEditorUnit"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="dbobjecteditors/dboRole/fbmrolemaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmRoleMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmRoleMainEditorUnit"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="dbobjecteditors/dboException/fbmexceptionmaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmExceptionMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmExceptionMainEditorUnit"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="dbobjecteditors/dboGenerator/fbmgeneratormaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmGeneratorMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmGeneratorMainEditorUnit"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="dbobjecteditors/dboUDF/fbmudfmaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmUDFMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmUDFMainEditorUnit"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="sql_engine/firebird/fb_charsetutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fb_CharSetUtils"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="sql_engine/oracle/oracle_sql_lines_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="oracle_Sql_Lines_Unit"/>
+      </Unit68>
+      <Unit69>
+        <Filename Value="config/cfoiunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfOIFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfOIUnit"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="config/cfabstractconfigframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FBMConfigPageAbstract"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfAbstractConfigFrameUnit"/>
+      </Unit70>
+      <Unit71>
+        <Filename Value="config/cfgridoptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfGridOptionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfGridOptionsUnit"/>
+      </Unit71>
+      <Unit72>
+        <Filename Value="config/cfreportsoptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfReportsOptionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfReportsOptionsUnit"/>
+      </Unit72>
+      <Unit73>
+        <Filename Value="config/cfgeneraloptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfGeneralOptionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfGeneralOptionsUnit"/>
+      </Unit73>
+      <Unit74>
+        <Filename Value="config/FireBird/cffirebirdoptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfFireBirdOptionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfFireBirdOptionsUnit"/>
+      </Unit74>
+      <Unit75>
+        <Filename Value="config/cfsqleditoroptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfSQLEditorOptionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfSQLEditorOptionsUnit"/>
+      </Unit75>
+      <Unit76>
+        <Filename Value="SqlEditor/feditsearch.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmEditSearchReplace"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fEditSearch"/>
+      </Unit76>
+      <Unit77>
+        <Filename Value="config/FireBird/cffirebirdtransactionsparamsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfFirebirdTransactionsParamsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfFirebirdTransactionsParamsUnit"/>
+      </Unit77>
+      <Unit78>
+        <Filename Value="connection_frames/fdbm_connectionabstractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ConnectionDlgPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_ConnectionAbstractUnit"/>
+      </Unit78>
+      <Unit79>
+        <Filename Value="controls/fdbm_pageddialogunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbm_PagedDialogForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fdbm_PagedDialogUnit"/>
+      </Unit79>
+      <Unit80>
+        <Filename Value="controls/fdbm_pageddialogpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PagedDialogPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_PagedDialogPageUnit"/>
+      </Unit80>
+      <Unit81>
+        <Filename Value="connection_frames/firebird/fbm_cf_transactionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCFTransactionFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbm_cf_TransactionUnit"/>
+      </Unit81>
+      <Unit82>
+        <Filename Value="sql_engine/firebird/fb_constunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fb_ConstUnit"/>
+      </Unit82>
+      <Unit83>
+        <Filename Value="ErrorForms/fbmerrorboxunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmErrorBoxForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmErrorBoxUnit"/>
+      </Unit83>
+      <Unit84>
+        <Filename Value="ErrorForms/fbmerrorsubmitunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmErrorSubmitForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmErrorSubmitUnit"/>
+      </Unit84>
+      <Unit85>
+        <Filename Value="dbobjecteditors/dboRole/fbmrolegrantusersunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmRoleGrantUsersFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmRoleGrantUsersUnit"/>
+      </Unit85>
+      <Unit86>
+        <Filename Value="SqlEditor/fbmsqleditorclassesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmSQLEditorClassesUnit"/>
+      </Unit86>
+      <Unit87>
+        <Filename Value="help_forms/fbmshownewunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmShowNewForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmShowNewUnit"/>
+      </Unit87>
+      <Unit88>
+        <Filename Value="help_forms/fbmfileproviderunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmFileProviderUnit"/>
+      </Unit88>
+      <Unit89>
+        <Filename Value="dbobjecteditors/dboRole/fbmrolesdbobjectsgrantunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmRolesDBObjectsGrantForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmRolesDBObjectsGrantUnit"/>
+      </Unit89>
+      <Unit90>
+        <Filename Value="controls/fdbm_syneditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fdbm_SynEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_SynEditorUnit"/>
+      </Unit90>
+      <Unit91>
+        <Filename Value="dbobjecteditors/fbmdbodependenunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DependenciesFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmdboDependenUnit"/>
+      </Unit91>
+      <Unit92>
+        <Filename Value="connection_frames/fdbm_cf_displaydataparamsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmCFDisplayDataParamsPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_cf_DisplayDataParamsUnit"/>
+      </Unit92>
+      <Unit93>
+        <Filename Value="dbobjecteditors/fbmddlpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmDDLPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmDDLPageUnit"/>
+      </Unit93>
+      <Unit94>
+        <Filename Value="sql_engine/firebird/fbkeywordsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="fbKeywordsUnit"/>
+      </Unit94>
+      <Unit95>
+        <Filename Value="sql_engine/oracle/oracle_keywords.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+      </Unit95>
+      <Unit96>
+        <Filename Value="tools/fdbmsynautocompletionslists.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="fdbmSynAutoCompletionsLists"/>
+      </Unit96>
+      <Unit97>
+        <Filename Value="config/cfkeyboardtemplatesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfKeyboardTemplatesForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="cfKeyboardTemplatesUnit"/>
+      </Unit97>
+      <Unit98>
+        <Filename Value="sql_engine/mssql/mssq_engine.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+      </Unit98>
+      <Unit99>
+        <Filename Value="connection_frames/mssql/cf_mssql_mainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cf_mssql_main_frame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cf_mssql_mainUnit"/>
+      </Unit99>
+      <Unit100>
+        <Filename Value="sql_engine/mssql/mssql_sql_lines_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+      </Unit100>
+      <Unit101>
+        <Filename Value="SqlEditor/dsdesignerunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="SQLBuilderForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="dsDesignerUnit"/>
+      </Unit101>
+      <Unit102>
+        <Filename Value="SqlEditor/dsobjectsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dsObjectsUnit"/>
+      </Unit102>
+      <Unit103>
+        <Filename Value="SqlEditor/dslinkpropertysunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="dsLinkPropertysForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="dsLinkPropertysUnit"/>
+      </Unit103>
+      <Unit104>
+        <Filename Value="sql_engine/mssql/mssql_objectslist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="mssql_ObjectsList"/>
+      </Unit104>
+      <Unit105>
+        <Filename Value="sql_engine/mssql/mssql_freetdsconfig_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="mssqlFreeTDSConfigForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="mssql_FreeTDSConfig_Unit"/>
+      </Unit105>
+      <Unit106>
+        <Filename Value="sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PostgreSQLEngineUnit"/>
+      </Unit106>
+      <Unit107>
+        <Filename Value="sql_engine/sqlengineinternaltoolsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <UnitName Value="SQLEngineInternalToolsUnit"/>
+      </Unit107>
+      <Unit108>
+        <Filename Value="fbmanager_define.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit108>
+      <Unit109>
+        <Filename Value="sql_engine/PostgreSQL/pg_sql_lines_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit109>
+      <Unit110>
+        <Filename Value="dbobjecteditors/dboRole/fbmusereditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmUserEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmUserEditorUnit"/>
+      </Unit110>
+      <Unit111>
+        <Filename Value="dbobjecteditors/dboGroups/fbmgroupeditframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmGroupEditFrameEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmGroupEditFrameUnit"/>
+      </Unit111>
+      <Unit112>
+        <Filename Value="connection_frames/fdbm_showobjectsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbm_ShowObjectsPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_ShowObjectsUnit"/>
+      </Unit112>
+      <Unit113>
+        <Filename Value="sql_engine/PostgreSQL/pgkeywordsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PGKeywordsUnit"/>
+      </Unit113>
+      <Unit114>
+        <Filename Value="sql_engine/PostgreSQL/pgsqlenginesecurityunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pgSqlEngineSecurityUnit"/>
+      </Unit114>
+      <Unit115>
+        <Filename Value="connection_frames/postgre/pg_con_mainpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pg_con_MainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pg_con_MainPageUnit"/>
+      </Unit115>
+      <Unit116>
+        <Filename Value="dbobjecteditors/dboScheme/fdbm_schemeeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fdbm_SchemeEditorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_SchemeEditorUnit"/>
+      </Unit116>
+      <Unit117>
+        <Filename Value="sql_engine/PostgreSQL/pg_utils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit117>
+      <Unit118>
+        <Filename Value="dbobjecteditors/dboTriggerEditors/postgre/pgtriggereditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="pgTriggerEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTriggerEditorUnit"/>
+      </Unit118>
+      <Unit119>
+        <Filename Value="dbobjecteditors/dboTableEditor/fdbmtableeditoruniqueunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmTableEditorUniqueFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbmTableEditorUniqueUnit"/>
+      </Unit119>
+      <Unit120>
+        <Filename Value="dbobjecteditors/dboGenerator/postgres/fbm_pgeditsequenceunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbm_pgEditSequencePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbm_pgEditSequenceUnit"/>
+      </Unit120>
+      <Unit121>
+        <Filename Value="config/cfsystemconfirmationunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfSystemConfirmationFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfSystemConfirmationUnit"/>
+      </Unit121>
+      <Unit122>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmpostgreespedtmainpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmPostGreeFunctionEdtMainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPostGreeSPedtMainPageUnit"/>
+      </Unit122>
+      <Unit123>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmpostgreespedtmainpage_editparamunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmPostGreeSPedtMainPage_EditParamForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmPostGreeSPedtMainPage_EditParamUnit"/>
+      </Unit123>
+      <Unit124>
+        <Filename Value="sql_engine/PostgreSQL/pgtypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pgTypes"/>
+      </Unit124>
+      <Unit125>
+        <Filename Value="sql_engine/PostgreSQL/pgsqltextunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgSqlTextModule"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="pgSqlTextUnit"/>
+      </Unit125>
+      <Unit126>
+        <Filename Value="controls/PostgreSQL/pgcreatedatabaseunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgCreateDatabaseForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pgCreateDatabaseUnit"/>
+      </Unit126>
+      <Unit127>
+        <Filename Value="tools/Postgre/pgactivitimonitorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgActivitiMonitorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pgActivitiMonitorUnit"/>
+      </Unit127>
+      <Unit128>
+        <Filename Value="controls/PostgreSQL/pg_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pg_VisualToolsCallUnit"/>
+      </Unit128>
+      <Unit129>
+        <Filename Value="dbobjecteditors/dboIndex/postgre/pgindexeditorframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgIndexEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgIndexEditorFrameUnit"/>
+      </Unit129>
+      <Unit130>
+        <Filename Value="dbobjecteditors/dboTableSpace/pgtablespaceeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTableSpaceEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTableSpaceEditorUnit"/>
+      </Unit130>
+      <Unit131>
+        <Filename Value="options/fbmobjecttemplatesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmObjectTemplatesForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmObjectTemplatesunit"/>
+      </Unit131>
+      <Unit132>
+        <Filename Value="tools/fbmsqltextcommonunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmSQLTextCommonUnit"/>
+      </Unit132>
+      <Unit133>
+        <Filename Value="docs/whats.new.rus"/>
+        <IsPartOfProject Value="True"/>
+      </Unit133>
+      <Unit134>
+        <Filename Value="docs/errors.txt"/>
+        <IsPartOfProject Value="True"/>
+      </Unit134>
+      <Unit135>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgacleditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmpgACLEditEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmpgACLEditUnit"/>
+      </Unit135>
+      <Unit136>
+        <Filename Value="dbobjecteditors/dboLanguages/Postgre/fbmpglanguageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmPGLanguagePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPGLanguageUnit"/>
+      </Unit136>
+      <Unit137>
+        <Filename Value="config/Postgree/cfpostgreeconfigmiskunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfPostgreeConfigMiskFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfPostgreeConfigMiskUnit"/>
+      </Unit137>
+      <Unit138>
+        <Filename Value="config/Postgree/otpostgreproctemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otPostgreProcTemplatePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otPostgreProcTemplateUnit"/>
+      </Unit138>
+      <Unit139>
+        <Filename Value="config/Postgree/otpostgretriggertemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otPostgreTriggerTemplatePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otPostgreTriggerTemplateUnit"/>
+      </Unit139>
+      <Unit140>
+        <Filename Value="connection_frames/postgre/pg_con_editorprefunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pg_con_EditorPrefPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pg_con_EditorPrefUnit"/>
+      </Unit140>
+      <Unit141>
+        <Filename Value="SqlEditor/fbmsqlparamvalueeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmSQLParamValueEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmSQLParamValueEditorUnit"/>
+      </Unit141>
+      <Unit142>
+        <Filename Value="controls/fdbm_syneditorcompletionhintunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fdbm_SynEditorCompletionHintUnit"/>
+      </Unit142>
+      <Unit143>
+        <Filename Value="tools/tlssearchinmetatdataparamsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="tlsSearchInMetatDataParamsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="tlsSearchInMetatDataParamsUnit"/>
+      </Unit143>
+      <Unit144>
+        <Filename Value="tools/tlssearchinmetatdataresultunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="tlsSearchInMetatDataResultForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="tlsSearchInMetatDataResultUnit"/>
+      </Unit144>
+      <Unit145>
+        <Filename Value="tools/tlsprogressoperationunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="tlsProgressOperationForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="tlsProgressOperationUnit"/>
+      </Unit145>
+      <Unit146>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtablepropertysunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmpgTablePropertysFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit146>
+      <Unit147>
+        <Filename Value="sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fb_SqlParserUnit"/>
+      </Unit147>
+      <Unit148>
+        <Filename Value="sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pg_SqlParserUnit"/>
+      </Unit148>
+      <Unit149>
+        <Filename Value="sql_engine/mysql/mysql_engine.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit149>
+      <Unit150>
+        <Filename Value="sql_engine/mysql/mysql_types.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit150>
+      <Unit151>
+        <Filename Value="connection_frames/mysql/mysql_con_mainpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MySQL_con_MainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="MySQL_con_MainPageUnit"/>
+      </Unit151>
+      <Unit152>
+        <Filename Value="sql_engine/mysql/mysqldatamoduleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MySqlDM"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="mysqlDataModuleUnit"/>
+      </Unit152>
+      <Unit153>
+        <Filename Value="sql_engine/mysql/mysqlkeywords.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MySQLKeywords"/>
+      </Unit153>
+      <Unit154>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmmysqlspedtmainpageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmMySQLSPEdtMainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmMySQLSPEdtMainPageUnit"/>
+      </Unit154>
+      <Unit155>
+        <Filename Value="dbobjecteditors/dboTableEditor/mysql/fbmmysqltablepropsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmMySQLTablePropsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmMySQLTablePropsUnit"/>
+      </Unit155>
+      <Unit156>
+        <Filename Value="dbobjecteditors/dboRule/fbmpgruleeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PGRuleEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPGRuleEditorUnit"/>
+      </Unit156>
+      <Unit157>
+        <Filename Value="dbobjecteditors/dboRule/fbmpgrulelistunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PGRuleListPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPGRuleListUnit"/>
+      </Unit157>
+      <Unit158>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtablecheckconstaintunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmpgTableCheckConstaintPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmpgTableCheckConstaintUnit"/>
+      </Unit158>
+      <Unit159>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtablecheckconstaint_editunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmpgTableCheckConstaint_EditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmpgTableCheckConstaint_EditUnit"/>
+      </Unit159>
+      <Unit160>
+        <Filename Value="SqlEditor/fbmsqleditor_showmemounit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="fbmSQLEditor_ShowMemoForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmSQLEditor_ShowMemoUnit"/>
+      </Unit160>
+      <Unit161>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmcreateproctableunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCreateProcTableForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmCreateProcTableUnit"/>
+      </Unit161>
+      <Unit162>
+        <Filename Value="sql_engine/PostgreSQL/pg_tasks.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit162>
+      <Unit163>
+        <Filename Value="dbobjecteditors/dboTasks/pgtaskmainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTaskMainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTaskMainUnit"/>
+      </Unit163>
+      <Unit164>
+        <Filename Value="dbobjecteditors/dboTasks/pgtaskstepsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTaskStepsPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTaskStepsUnit"/>
+      </Unit164>
+      <Unit165>
+        <Filename Value="dbobjecteditors/dboTasks/pgtasktasksunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTaskShedulePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTaskTasksUnit"/>
+      </Unit165>
+      <Unit166>
+        <Filename Value="dbobjecteditors/dboTasks/pgtasklogunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTaskLogPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgTaskLogUnit"/>
+      </Unit166>
+      <Unit167>
+        <Filename Value="dbobjecteditors/dboTasks/pgtaskstepsbuildconnectionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgTaskStepsBuildConnectionForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pgTaskStepsBuildConnectionUnit"/>
+      </Unit167>
+      <Unit168>
+        <Filename Value="tools/fbmextractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmExtractForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmExtractUnit"/>
+      </Unit168>
+      <Unit169>
+        <Filename Value="tools/fbmreportmanagerunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmReportManagerForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmReportManagerUnit"/>
+      </Unit169>
+      <Unit170>
+        <Filename Value="mainform/fbmoifoldersunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmOIFoldersUnit"/>
+      </Unit170>
+      <Unit171>
+        <Filename Value="tools/fbmoifolder_editunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmOIFolder_EditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmOIFolder_EditUnit"/>
+      </Unit171>
+      <Unit172>
+        <Filename Value="sql_engine/firebird/fbsqltextunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbSqlTextData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="fbSqlTextUnit"/>
+      </Unit172>
+      <Unit173>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmpglocalvarseditorframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmPGLocalVarsEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPGLocalVarsEditorFrameUnit"/>
+      </Unit173>
+      <Unit174>
+        <Filename Value="config/fbmcompatibilitysystemunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCompatibilitySystemFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmCompatibilitySystemUnit"/>
+      </Unit174>
+      <Unit175>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmfbvariableframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFBVariableFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFBVariableFrameUnit"/>
+      </Unit175>
+      <Unit176>
+        <Filename Value="sql_objects/sqlobjects.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlObjects"/>
+      </Unit176>
+      <Unit177>
+        <Filename Value="controls/fbm_visualeditorsabstractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbm_VisualEditorsAbstractUnit"/>
+      </Unit177>
+      <Unit178>
+        <Filename Value="controls/dbf_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit178>
+      <Unit179>
+        <Filename Value="controls/firebird/fb_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fb_VisualToolsCallUnit"/>
+      </Unit179>
+      <Unit180>
+        <Filename Value="controls/MySQL/mysql_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mysql_VisualToolsCallUnit"/>
+      </Unit180>
+      <Unit181>
+        <Filename Value="sql_engine/sqlite3/sqlite3engineunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLite3EngineUnit"/>
+      </Unit181>
+      <Unit182>
+        <Filename Value="controls/sqlite3/sqlite3_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlite3_VisualToolsCallUnit"/>
+      </Unit182>
+      <Unit183>
+        <Filename Value="connection_frames/sqlite3/sqlite3_cf_mainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ConnectionSQLite3MainPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit183>
+      <Unit184>
+        <Filename Value="sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlite3_SqlParserUnit"/>
+      </Unit184>
+      <Unit185>
+        <Filename Value="sql_engine/sqlite3/sqlite3_keywords.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit185>
+      <Unit186>
+        <Filename Value="dbobjecteditors/dboTriggerEditors/SQLite3/sqlite3triggerheadereditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SQLite3TriggerHeaderEditFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="SQLite3TriggerHeaderEditUnit"/>
+      </Unit186>
+      <Unit187>
+        <Filename Value="controls/sqlite3/sqlite3_createdatabaseunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="sqlite3_CreateDatabaseForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="sqlite3_CreateDatabaseUnit"/>
+      </Unit187>
+      <Unit188>
+        <Filename Value="dbobjecteditors/dboIndex/sqlite3/sqlite3indexeditorframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="sqlite3IndexEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="sqlite3IndexEditorFrameUnit"/>
+      </Unit188>
+      <Unit189>
+        <Filename Value="sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mysql_SqlParserUnit"/>
+      </Unit189>
+      <Unit190>
+        <Filename Value="controls/MySQL/mysql_createdatabaseunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="mysql_CreateDatabaseForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="mysql_CreateDatabaseUnit"/>
+      </Unit190>
+      <Unit191>
+        <Filename Value="dbobjecteditors/dboTriggerEditors/MySQL/mysqltriggerheadereditunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MySQLTriggerHeaderEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="MySQLTriggerHeaderEditUnit"/>
+      </Unit191>
+      <Unit192>
+        <Filename Value="import/importdataunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="ImportDataForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ImportDataUnit"/>
+      </Unit192>
+      <Unit193>
+        <Filename Value="controls/fdbm_monitorabstractunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbmMonitorAbstractForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit193>
+      <Unit194>
+        <Filename Value="sql_engine/sqlite3/sqlite3_sqltextunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="sqlite3_SQLText"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="sqlite3_SQLTextUnit"/>
+      </Unit194>
+      <Unit195>
+        <Filename Value="dbobjecteditors/dboTriggerEditors/postgre/pgeventtriggereditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgEventTriggerEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgEventTriggerEditorUnit"/>
+      </Unit195>
+      <Unit196>
+        <Filename Value="config/FireBird/otfirebirdtriggertemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otFirebirdTriggerTemplatePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otFirebirdTriggerTemplateUnit"/>
+      </Unit196>
+      <Unit197>
+        <Filename Value="dbobjecteditors/dboTableEditor/firebird/fbmfirebirdtablepropsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFirebirdTablePropsPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFirebirdTablePropsUnit"/>
+      </Unit197>
+      <Unit198>
+        <Filename Value="dbobjecteditors/dboIndex/firebird/fbmfbindexeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFBIndexEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFBIndexEditorUnit"/>
+      </Unit198>
+      <Unit199>
+        <Filename Value="sql_engine/PostgreSQL/pgsqlenginefts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pgSQLEngineFTS"/>
+      </Unit199>
+      <Unit200>
+        <Filename Value="dbobjecteditors/dboFTS/fbmftsconfigunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFTSConfigEditorPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFTSConfigUnit"/>
+      </Unit200>
+      <Unit201>
+        <Filename Value="sql_engine/PostgreSQL/pgsqlenginefdw.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pgSQLEngineFDW"/>
+      </Unit201>
+      <Unit202>
+        <Filename Value="dbobjecteditors/dboFDW/pgforeigndw.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgForeignDataWrap"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgForeignDW"/>
+      </Unit202>
+      <Unit203>
+        <Filename Value="dbobjecteditors/dboFDW/pgextensionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgExtensionEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgExtensionUnit"/>
+      </Unit203>
+      <Unit204>
+        <Filename Value="dbobjecteditors/dboPackage/fbmfirebirdpackageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFirebirdPackageEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFirebirdPackageUnit"/>
+      </Unit204>
+      <Unit205>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/fbmfbfunctionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFBFunctionEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFBFunctionUnit"/>
+      </Unit205>
+      <Unit206>
+        <Filename Value="config/FireBird/otfirebirdfunctiontemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otFirebirdFunctionTemplatePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otFirebirdFunctionTemplateUnit"/>
+      </Unit206>
+      <Unit207>
+        <Filename Value="config/FireBird/otfirebirdpackagetemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otFirebirdPackageTemplatePage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otFirebirdPackageTemplateUnit"/>
+      </Unit207>
+      <Unit208>
+        <Filename Value="config/cfautoincfieldunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="cfAutoIncFieldFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="cfAutoIncFieldUnit"/>
+      </Unit208>
+      <Unit209>
+        <Filename Value="utils/pg/pg_export/fbmmakesqlfromdatasetunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmMakeSQLFromDataSetUnit"/>
+      </Unit209>
+      <Unit210>
+        <Filename Value="connection_frames/fdbm_descriptionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbm_DescriptionConnectionDlgPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_DescriptionUnit"/>
+      </Unit210>
+      <Unit211>
+        <Filename Value="dbobjecteditors/dboRole/fdmusereditor_mysqlunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdmUserEditor_MySQLForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdmUserEditor_MySQLUnit"/>
+      </Unit211>
+      <Unit212>
+        <Filename Value="config/MySQL/otmysqltriggertemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otMySQLTriggerTemplateFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otMySQLTriggerTemplateUnit"/>
+      </Unit212>
+      <Unit213>
+        <Filename Value="tools/SQLite/sqliteactivitimonitorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SQLiteActivitiMonitorForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="SQLiteActivitiMonitorUnit"/>
+      </Unit213>
+      <Unit214>
+        <Filename Value="tools/fbmrefreshobjtreeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmRefreshObjTreeUnit"/>
+      </Unit214>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="IBManager"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="sql_engine"/>
+      <OtherUnitFiles Value="config/FireBird;controls;dbobjecteditors/dboDomain;dbobjecteditors/dboException;dbobjecteditors/dboGenerator;dbobjecteditors/dboRole;dbobjecteditors/dboStoredProcedure;dbobjecteditors/dboTableEditor/firebird;dbobjecteditors/dboTableEditor;dbobjecteditors/dboTriggerEditors/fb;dbobjecteditors/dboTriggerEditors;dbobjecteditors/dboUDF;dbobjecteditors/dboViewEditors;dbobjecteditors;ErrorForms;firebird_forms;help_forms;mainform;options;Servises;SqlEditor;sql_engine/firebird;sql_engine/mssql;sql_engine/oracle;sql_engine/PostgreSQL;sql_engine;sql_script;tools;user_sec;config;connection_frames;connection_frames/dbf;connection_frames/firebird;connection_frames/mssql;connection_frames/oracle;dbobjecteditors/dboGroups;connection_frames/postgre;dbobjecteditors/dboTableEditor/postgresql;dbobjecteditors/dboScheme;dbobjecteditors/dboTriggerEditors/postgre;dbobjecteditors/dboGenerator/postgres;tools/Postgre;dbobjecteditors/dboIndex/postgre;dbobjecteditors/dboTableSpace;dbobjecteditors/dboLanguages/Postgre;config/Postgree;sql_engine/mysql;connection_frames/mysql;dbobjecteditors/dboTableEditor/mysql;dbobjecteditors/dboRule;dbobjecteditors/dboTasks;sql_objects;sql_engine/dbf;sql_engine/sqlite3;connection_frames/sqlite3;dbobjecteditors/dboTriggerEditors/SQLite3;controls/sqlite3;controls/firebird;controls/PostgreSQL;dbobjecteditors/dboIndex/sqlite3;controls/MySQL;dbobjecteditors/dboTriggerEditors/MySQL;import;dbobjecteditors/dboIndex/firebird;dbobjecteditors/dboFTS;dbobjecteditors/dboFDW;dbobjecteditors/dboPackage;utils/pg/pg_export;config/MySQL;tools/SQLite"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="1">
+      <Item1>
+        <Name Value="EInvalidOperation"/>
+      </Item1>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,79 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: dcl_fb_id_strconsts.dcl_fb_scheck
+msgid "Check"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sdescription
+msgid "Description"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sfbdataseteditor
+msgid "FBDataSet SQL Editor"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sfilter
+msgid "Filter"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sgenerate
+msgid "Generate"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_smodified
+msgid "Modified"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_splan
+msgid "Plan"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sreplacesql
+msgid "Replace sql"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sresult
+msgid "Result"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_sshowinfo
+msgid "Show info"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqldelete
+msgid "Delete SQL"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqledit
+msgid "Edit SQL"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqleditor
+msgid "SQL editor..."
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlinsert
+msgid "Insert SQL"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlrefresh
+msgid "Refresh SQL"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlselect
+msgid "Select SQL"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqltest
+msgid "SQL test..."
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_stablealias
+msgid "Table alias"
+msgstr ""
+
+#: dcl_fb_id_strconsts.dcl_fb_stest
+msgid "Test"
+msgstr ""
+

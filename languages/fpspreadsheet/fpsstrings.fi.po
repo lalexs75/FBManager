@@ -1,0 +1,439 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: fpsstrings.rsallexcelfiles
+msgid "All Excel files"
+msgstr "Kaikki Excel tiedostot"
+
+#: fpsstrings.rsallspreadsheetfiles
+msgid "All spreadsheet files"
+msgstr "Kaikki taulukkolaskenta tiedostot"
+
+#: fpsstrings.rsambiguousdecthouseparator
+msgid "Assuming usage of decimal separator in \"%s\"."
+msgstr ""
+
+#: fpsstrings.rsbadquotes
+msgid "Unterminated string"
+msgstr ""
+
+#: fpsstrings.rsblack
+msgid "black"
+msgstr "musta"
+
+#: fpsstrings.rsblue
+msgid "blue"
+msgstr "sininen"
+
+#: fpsstrings.rscannotreadfile
+msgid "Cannot read file \"%s\". Wrong, unknown or defective file format?"
+msgstr ""
+
+#: fpsstrings.rscannotsortmerged
+msgid "The cell range cannot be sorted because it contains merged cells."
+msgstr ""
+
+#: fpsstrings.rscircularreference
+msgid "Circular reference found when calculating worksheet formula in cell %s"
+msgstr ""
+
+#: fpsstrings.rscodepagenotsupported
+msgid "Code page \"%s\" is not supported. Using \"cp1252\" (Latin 1) instead."
+msgstr "Merkistökoodisivua \"%s\" ei tueta. Käytetään \"cp1252\" (Latin 1) sen sijaan."
+
+#: fpsstrings.rscolumnstylenotfound
+msgid "Column style not found."
+msgstr ""
+
+#: fpsstrings.rscommaexpected
+msgid "Expected comma (,) at position %d, but got %s"
+msgstr "Odotettiin pilkkua (,) kohdassa %d mutta saatiin %s"
+
+#: fpsstrings.rscyan
+msgid "cyan"
+msgstr "syaani"
+
+#: fpsstrings.rsdarkblue
+msgid "dark blue"
+msgstr "tumman sininen"
+
+#: fpsstrings.rsdarkgreen
+msgid "dark green"
+msgstr "tumman vihreä"
+
+#: fpsstrings.rsdarkred
+msgid "dark red"
+msgstr "tumman punainen"
+
+#: fpsstrings.rsdefaultsheetname
+msgid "Sheet%d"
+msgstr "Sivu %d"
+
+#: fpsstrings.rsdefectiveinternalfilestructure
+msgid "Defective internal structure of %s file."
+msgstr ""
+
+#: fpsstrings.rsdifferentsheetprintrange
+msgid "Print range \"%s\" requires a different worksheet."
+msgstr ""
+
+#: fpsstrings.rsduplicateidentifier
+msgid "An identifier with name \"%s\" already exists."
+msgstr ""
+
+#: fpsstrings.rsduplicateworksheetname
+msgid "Duplicate worksheet \"%s\"."
+msgstr ""
+
+#: fpsstrings.rsemptyhyperlink
+msgid "The hyperlink is not specified."
+msgstr ""
+
+#: fpsstrings.rserrorinexpression
+msgid "Cannot evaluate: error in expression"
+msgstr ""
+
+#: fpsstrings.rsexportfileisrequired
+msgid "Export file name is required."
+msgstr ""
+
+#: fpsstrings.rsexpressionempty
+msgid "Cannot evaluate: empty expression"
+msgstr ""
+
+#: fpsstrings.rsfilealreadyexists
+msgid "File \"%s\" already exists."
+msgstr ""
+
+#: fpsstrings.rsfileformatnotsupported
+msgid "File format of \"%s\" not supported."
+msgstr "Tiedostoformaattia \"%s\" ei ole tuettu"
+
+#: fpsstrings.rsfilenotfound
+msgid "File \"%s\" not found."
+msgstr "Tiedostoa \"%s\" ei löydetty."
+
+#: fpsstrings.rsfiles
+msgid "files"
+msgstr "tiedostot"
+
+#: fpsstrings.rsfilestructureerror
+msgid "File structure error in %s record, position %d."
+msgstr ""
+
+#: fpsstrings.rsfooter
+msgid "Footer"
+msgstr "Alatunniste"
+
+#: fpsstrings.rsformulanotsupported
+msgid "The formula in cell %s is not supported by this file format: %s"
+msgstr "Laskentakaava solussa %s ei ole tuettu tässä tiedostoformaatissa: %s"
+
+#: fpsstrings.rsfpsexportdescription
+msgid "Spreadsheet file"
+msgstr "Taulukkolaskentatiedosto"
+
+#: fpsstrings.rsgray
+msgid "gray"
+msgstr "harmaa"
+
+#: fpsstrings.rsgreen
+msgid "green"
+msgstr "vihreä"
+
+#: fpsstrings.rsheader
+msgid "Header"
+msgstr "Otsikko"
+
+#: fpsstrings.rsillegalodscellrange
+msgid "Illegal structure of an OpenDocument cell range."
+msgstr ""
+
+#: fpsstrings.rsimageformatnotsupported
+msgid "Image format not supported."
+msgstr "Kuvatiedostoformaattia ei ole tuettu"
+
+#: fpsstrings.rsincorrectpositionofimageinheaderfooter
+msgid "Incorrect position of %%G code in %s"
+msgstr ""
+
+#: fpsstrings.rsindexinsstoutofrange
+msgid "Index %d in SST out of range (0-%d)."
+msgstr ""
+
+#: fpsstrings.rsinvalidargumentcount
+msgid "Invalid argument count for function %s"
+msgstr ""
+
+#: fpsstrings.rsinvalidcharacterincell
+msgid "Invalid character(s) in cell %s."
+msgstr ""
+
+#: fpsstrings.rsinvalidcharacterincellcomment
+msgid "Invalid character(s) in cell comment \"%s\"."
+msgstr ""
+
+#: fpsstrings.rsinvaliddatetimeformat
+msgid "Trying to use an incompatible date/time format."
+msgstr ""
+
+#: fpsstrings.rsinvalidextension
+msgid "Attempting to save a spreadsheet by extension, but the extension %s is not valid."
+msgstr ""
+
+#: fpsstrings.rsinvalidfloat
+msgid "%s is not a valid floating-point value"
+msgstr ""
+
+#: fpsstrings.rsinvalidfontindex
+msgid "Invalid font index"
+msgstr ""
+
+#: fpsstrings.rsinvalidnumber
+msgid "Invalid numerical value : %s"
+msgstr ""
+
+#: fpsstrings.rsinvalidnumberchar
+msgid "Unexpected character in number : %s"
+msgstr ""
+
+#: fpsstrings.rsinvalidnumberformat
+msgid "Trying to use an incompatible number format."
+msgstr ""
+
+#: fpsstrings.rsinvalidresultcharacter
+msgid "\"%s\" is not a valid return type indicator"
+msgstr ""
+
+#: fpsstrings.rsinvalidresulttype
+msgid "Invalid result type: %s"
+msgstr ""
+
+#: fpsstrings.rsinvalidspreadsheetfile
+msgid "\"%s\" is not a valid spreadsheet file"
+msgstr "\"%s\" ei ole sallittu taulukkolaskentatiedosto"
+
+#: fpsstrings.rsinvalidworksheetname
+msgid "\"%s\" is not a valid worksheet name."
+msgstr ""
+
+#: fpsstrings.rsleftbracketexpected
+msgid "Expected left bracket at position %d, but got %s"
+msgstr "Odotettiin vasenta suljetta kohdassa %d mutta saatiin %s"
+
+#: fpsstrings.rslocalfilehyperlinkabs
+msgid "The hyperlink \"%s\" points to a local file. In case of an absolute path the protocol \"file:\" must be specified."
+msgstr ""
+
+#: fpsstrings.rsmagenta
+msgid "magenta"
+msgstr ""
+
+#: fpsstrings.rsmaxcolsexceeded
+msgid "This workbook contains %d columns, but the selected file format does not support more than %d columns."
+msgstr "Tämä asiakirja sisältää %d saraketta, mutta valittu tiedostoformaatti ei tue enempää kuin %d saraketta."
+
+#: fpsstrings.rsmaxrowsexceeded
+msgid "This workbook contains %d rows, but the selected file format does not support more than %d rows."
+msgstr "Tämä asiakirja sisältää %d riviä, mutta valittu tiedostoformaatti ei tue enempää kuin %d riviä."
+
+#: fpsstrings.rsmultiplesheetsonlywithrestoreposition
+msgid "Export to multiple sheets is possible only if position is restored."
+msgstr ""
+
+#: fpsstrings.rsnooperand
+msgid "No operand for unary operation %s"
+msgstr ""
+
+#: fpsstrings.rsnopercentoperation
+msgid "Cannot perform percent operation on expression of type %s: %s"
+msgstr ""
+
+#: fpsstrings.rsnotdefined
+msgid "not defined"
+msgstr "ei määritelty"
+
+#: fpsstrings.rsnovalidcelladdress
+msgid "\"%s\" is not a valid cell address."
+msgstr "\"%s\" ei ole sallittu soluosoite."
+
+#: fpsstrings.rsnovalidcellrangeaddress
+msgid "\"%s\" is not a valid cell range address."
+msgstr ""
+
+#: fpsstrings.rsnovalidcellrangeorcelladdress
+msgid "\"%s\" is not a valid cell or cell range address."
+msgstr ""
+
+#: fpsstrings.rsnovalidhyperlinkinternal
+msgid "The hyperlink \"%s\" is not a valid cell address."
+msgstr ""
+
+#: fpsstrings.rsnovalidhyperlinkuri
+msgid "The hyperlink \"%s\" is not a valid URI."
+msgstr ""
+
+#: fpsstrings.rsnovalidnumberformatstring
+msgid "No valid number format string."
+msgstr ""
+
+#: fpsstrings.rsnovariable
+msgid "Identifier %s is not a variable"
+msgstr "Tunniste %s ei ole muuttuja"
+
+#: fpsstrings.rsodshyperlinksoftextcellsonly
+msgid "Cell %s: OpenDocument supports hyperlinks for text cells only."
+msgstr "Solu %s: OpenDocument tukee hyperlinkkejä ainoastaan tekstisoluissa"
+
+#: fpsstrings.rsolive
+msgid "olive"
+msgstr "oliivi"
+
+#: fpsstrings.rsonlyoneheaderfooterimageallowed
+msgid "Only one image per %s section allowed."
+msgstr ""
+
+#: fpsstrings.rsoperationexceedscolcount
+msgid "This operation at index %d exceeds the range of defined grid columns (%d)."
+msgstr ""
+
+#: fpsstrings.rsoperationexceedsrowcount
+msgid "This operation at index %d exceeds the range of defined grid rows (%d)."
+msgstr ""
+
+#: fpsstrings.rspaletteindex
+msgid "Palette index %d"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_biff2
+msgid "Password removed (BIFF2 requires matching workbook and worksheet passwords)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_excel
+msgid "Password removed (Hashing algorithm not compatible with Excel)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_notvalid
+msgid "Password removed (Not valid)."
+msgstr ""
+
+#: fpsstrings.rspurple
+msgid "purple"
+msgstr ""
+
+#: fpsstrings.rsreadernotfound
+msgid "Reader not found for file \"%s\""
+msgstr ""
+
+#: fpsstrings.rsred
+msgid "red"
+msgstr "punainen"
+
+#: fpsstrings.rsrightbracketexpected
+msgid "Expected right bracket at position %d, but got %s"
+msgstr "Odotettiin oikeata suljetta kohdassa %d mutta saatiin %s"
+
+#: fpsstrings.rsrightsquarebracketexpected
+msgid "Expected right square bracket at positon %d, but got %s"
+msgstr ""
+
+#: fpsstrings.rsrowstylenotfound
+msgid "Row style not found."
+msgstr "Rivin tyyliä ei löydetty."
+
+#: fpsstrings.rssilver
+msgid "silver"
+msgstr "hopea"
+
+#: fpsstrings.rsstdhyperlinktooltip
+msgid "Hold the left mouse button down for a short time to activate the hyperlink."
+msgstr "Pidä vasen hiiren painike alhaalla lyhyen ajan aktivoidaksesi hyperlinkin."
+
+#: fpsstrings.rsteal
+msgid "teal"
+msgstr ""
+
+#: fpsstrings.rstoomanypalettecolors
+msgid "This workbook contains more colors (%d) than supported by the file format (%d). The additional colors are replaced by the best-matching palette colors."
+msgstr "Tämä asiakirja sisältää enemmän värejä (%d) kuin  on tuettuna fiedostohormaatissa (%d). Ylimääräiset värit on korvattu parhaalla mahdollisella väripaletin värillä."
+
+#: fpsstrings.rstransparent
+msgid "transparent"
+msgstr "läpinäkyvä"
+
+#: fpsstrings.rstruncatetoolongcelltext
+msgid "Text value exceeds the %d character limit in cell %s and has been truncated."
+msgstr ""
+
+#: fpsstrings.rstruncatetoolongtext
+msgid "Text value exceeds the %d character limit and has been truncated."
+msgstr ""
+
+#: fpsstrings.rsunexpectedendofexpression
+msgid "Unexpected end of expression"
+msgstr ""
+
+#: fpsstrings.rsunknowncharacter
+msgid "Unknown character at pos %d: \"%s\""
+msgstr ""
+
+#: fpsstrings.rsunknowncomparison
+msgid "Internal error: Unknown comparison"
+msgstr ""
+
+#: fpsstrings.rsunknowndatatype
+msgid "Unknown data type."
+msgstr "Tuntematon datatyyppi"
+
+#: fpsstrings.rsunknowndelimiter
+msgid "Unknown delimiter character: \"%s\""
+msgstr ""
+
+#: fpsstrings.rsunknownerrortype
+msgid "Unknown error type."
+msgstr ""
+
+#: fpsstrings.rsunknownidentifier
+msgid "Unknown identifier: %s"
+msgstr ""
+
+#: fpsstrings.rsunknowntokenatpos
+msgid "Unknown token at pos %d : %s"
+msgstr ""
+
+#: fpsstrings.rsunsupportedreadformat
+msgid "Tried to read a spreadsheet using an unsupported format"
+msgstr ""
+
+#: fpsstrings.rsunsupportedwriteformat
+msgid "Tried to write a spreadsheet using an unsupported format"
+msgstr ""
+
+#: fpsstrings.rsunterminatedexpression
+msgid "Badly terminated expression. Found token at position %d : %s"
+msgstr ""
+
+#: fpsstrings.rsutf8textexpectedbutansifoundincell
+msgid "Expected UTF8 text, but probably ANSI text found in cell %s."
+msgstr "Oletettiin UTF8 tekstikoodausta mutta luultavasti löydettiin ANSI koodattua tekstiä solussa %s."
+
+#: fpsstrings.rswhite
+msgid "white"
+msgstr "valkoinen"
+
+#: fpsstrings.rsworksheetnotfound
+msgid "Worksheet \"%s\" not found."
+msgstr ""
+
+#: fpsstrings.rsworksheetnotfound1
+msgid "Worksheet not found."
+msgstr ""
+
+#: fpsstrings.rswriteerror_worksheetnametoolong
+msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
+msgstr ""
+
+#: fpsstrings.rsyellow
+msgid "yellow"
+msgstr "keltainen"
+

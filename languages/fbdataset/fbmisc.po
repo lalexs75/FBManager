@@ -1,0 +1,131 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: fbmisc.eaccessincorectblobcachemsg
+msgid "TBLOBList: access to unregistred BLOBCache cell"
+msgstr ""
+
+#: fbmisc.efieldnotfoundinds
+msgid "Field %s not found in dataset %s"
+msgstr ""
+
+#: fbmisc.eindexnotfoundmsg
+msgid "index %s cant be found"
+msgstr ""
+
+#: fbmisc.eprepareerrormsg
+msgid "Prepare %s.%s : %s %s"
+msgstr ""
+
+#: fbmisc.ereferencedblobcacheloosemsg
+msgid "TBLOBCache:try to destroy used cache"
+msgstr ""
+
+#: fbmisc.ereferenceddatsetrecordbufferloosemsg
+msgid "try to free referenced DatSet record buffer"
+msgstr ""
+
+#: fbmisc.ereferencedrecordbufferloosemsg
+msgid "try to free referenced record buffer"
+msgstr ""
+
+#: fbmisc.esomeblobcacheloosedmsg
+msgid "Some BLOBCache cells loosed"
+msgstr ""
+
+#: fbmisc.eunsupportedcomparemsg
+msgid "sort/lookup on %s field type notsupported"
+msgstr ""
+
+#: fbmisc.sautoupdateoptions
+msgid "Auto update options"
+msgstr ""
+
+#: fbmisc.sbeforepost
+msgid "Before post"
+msgstr ""
+
+#: fbmisc.sfbeblobcannotbewritten
+msgid "Blob stream cannot be written."
+msgstr ""
+
+#: fbmisc.sfbecannotinsert
+msgid "Cannot Insert %s."
+msgstr ""
+
+#: fbmisc.sfbecircularreference
+msgid "The cyclic reference a component is forbidden (%s)."
+msgstr ""
+
+#: fbmisc.sfbedatabasenotassigned
+msgid "Database not assigned (%s)"
+msgstr ""
+
+#: fbmisc.sfbeemptysqledit
+msgid "Empty edit SQL statament (%s)."
+msgstr ""
+
+#: fbmisc.sfbeerrorexecuteq
+msgid "Error execute query %s (%s)."
+msgstr ""
+
+#: fbmisc.sfbegetrecordinvalidrec
+msgid "GetRecord: Invalid record"
+msgstr ""
+
+#: fbmisc.sfbenotcachedupdates
+msgid "Not Cached Updates (%s)"
+msgstr ""
+
+#: fbmisc.sfbeothererror
+msgid "Other error"
+msgstr ""
+
+#: fbmisc.sfbeparameternotfound
+msgid "Parameter not found (%s)"
+msgstr ""
+
+#: fbmisc.sfbetransactionnotassigned
+msgid "Transaction not assigned (%s)"
+msgstr ""
+
+#: fbmisc.sfbeuserabort
+msgid "User abort"
+msgstr ""
+
+#: fbmisc.slccancel
+msgid "Cancel"
+msgstr ""
+
+#: fbmisc.slcgeneratorname
+msgid "Generator name"
+msgstr ""
+
+#: fbmisc.slchelp
+msgid "Help"
+msgstr ""
+
+#: fbmisc.slcincrementby
+msgid "Increment by"
+msgstr ""
+
+#: fbmisc.slcok
+msgid "OK"
+msgstr ""
+
+#: fbmisc.slcupdatedfield
+msgid "Updated field"
+msgstr ""
+
+#: fbmisc.snever
+msgid "Never"
+msgstr ""
+
+#: fbmisc.sonnewrecord
+msgid "On new record"
+msgstr ""
+
+#: fbmisc.supdateaction
+msgid "Update action"
+msgstr ""
+

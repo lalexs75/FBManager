@@ -1,0 +1,443 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: fpsstrings.rsallexcelfiles
+msgid "All Excel files"
+msgstr "Все файлы Excel"
+
+#: fpsstrings.rsallspreadsheetfiles
+msgid "All spreadsheet files"
+msgstr "Все файлы электронных таблиц"
+
+#: fpsstrings.rsambiguousdecthouseparator
+msgid "Assuming usage of decimal separator in \"%s\"."
+msgstr "Предпологается использование десятичного разеделителя в \"%s\"."
+
+#: fpsstrings.rsbadquotes
+msgid "Unterminated string"
+msgstr "Не законченная строка"
+
+#: fpsstrings.rsblack
+msgid "black"
+msgstr "чёрный"
+
+#: fpsstrings.rsblue
+msgid "blue"
+msgstr "голубой"
+
+#: fpsstrings.rscannotreadfile
+msgid "Cannot read file \"%s\". Wrong, unknown or defective file format?"
+msgstr "Ошибка чтения файла \"%s\". Файл повреждён либо неизвестный формат файла?"
+
+#: fpsstrings.rscannotsortmerged
+msgid "The cell range cannot be sorted because it contains merged cells."
+msgstr "Нельзя сортировать диапазон ячеек, поскольку он содержит объединённые ячейки"
+
+#: fpsstrings.rscircularreference
+msgid "Circular reference found when calculating worksheet formula in cell %s"
+msgstr "Циклическая ссылка найдена при подсчёте формулы в ячейке %s"
+
+#: fpsstrings.rscodepagenotsupported
+msgid "Code page \"%s\" is not supported. Using \"cp1252\" (Latin 1) instead."
+msgstr "Кодовая страница \"%s\" не поддерживается. Используем \"cp1252\" (Latin 1) по умолчанию."
+
+#: fpsstrings.rscolumnstylenotfound
+msgid "Column style not found."
+msgstr "Стиль столбца не найден."
+
+#: fpsstrings.rscommaexpected
+msgid "Expected comma (,) at position %d, but got %s"
+msgstr "Ожидайется запятая (,) в позиции %d, но найдено %s"
+
+#: fpsstrings.rscyan
+msgid "cyan"
+msgstr "бирюзовый"
+
+#: fpsstrings.rsdarkblue
+msgid "dark blue"
+msgstr "тёмно-голубой"
+
+#: fpsstrings.rsdarkgreen
+msgid "dark green"
+msgstr "тёмно-зелёный"
+
+#: fpsstrings.rsdarkred
+msgid "dark red"
+msgstr "тёмно-красный"
+
+#: fpsstrings.rsdefaultsheetname
+msgid "Sheet%d"
+msgstr "Лист%d"
+
+#: fpsstrings.rsdefectiveinternalfilestructure
+msgid "Defective internal structure of %s file."
+msgstr "Повреждённая внутренняя структура файла %s."
+
+#: fpsstrings.rsdifferentsheetprintrange
+msgid "Print range \"%s\" requires a different worksheet."
+msgstr "Диапазон печати \"%s\" требует раличных таблиц."
+
+#: fpsstrings.rsduplicateidentifier
+msgid "An identifier with name \"%s\" already exists."
+msgstr "Переменная с именем \"%s\" уже существует."
+
+#: fpsstrings.rsduplicateworksheetname
+msgid "Duplicate worksheet \"%s\"."
+msgstr ""
+
+#: fpsstrings.rsemptyhyperlink
+msgid "The hyperlink is not specified."
+msgstr "Гиперссылка не указана."
+
+#: fpsstrings.rserrorinexpression
+msgid "Cannot evaluate: error in expression"
+msgstr "Расчёт не возможен: ошибка в выражении"
+
+#: fpsstrings.rsexportfileisrequired
+msgid "Export file name is required."
+msgstr "Необходимо указать имя файла экспорта"
+
+#: fpsstrings.rsexpressionempty
+msgid "Cannot evaluate: empty expression"
+msgstr "Расчёт не возможен: пустое выражение"
+
+#: fpsstrings.rsfilealreadyexists
+msgid "File \"%s\" already exists."
+msgstr "Файл \"%s\" уже существует."
+
+#: fpsstrings.rsfileformatnotsupported
+msgid "File format of \"%s\" not supported."
+msgstr "Не поддерживаемый форма файла \"%s\"."
+
+#: fpsstrings.rsfilenotfound
+msgid "File \"%s\" not found."
+msgstr "Файл \"%s\" не найден."
+
+#: fpsstrings.rsfiles
+msgid "files"
+msgstr "файлы"
+
+#: fpsstrings.rsfilestructureerror
+msgid "File structure error in %s record, position %d."
+msgstr "Ошибка структуры файла в %s записе, позиция %d."
+
+#: fpsstrings.rsfooter
+msgid "Footer"
+msgstr "Итог"
+
+#: fpsstrings.rsformulanotsupported
+msgid "The formula in cell %s is not supported by this file format: %s"
+msgstr "Формула в ячейке %s не поддерживается форматом файла: %s"
+
+#: fpsstrings.rsfpsexportdescription
+msgid "Spreadsheet file"
+msgstr "Файл электронной таблицы"
+
+#: fpsstrings.rsgray
+msgid "gray"
+msgstr "серый"
+
+#: fpsstrings.rsgreen
+msgid "green"
+msgstr "зелёный"
+
+#: fpsstrings.rsheader
+msgid "Header"
+msgstr "Заголовок"
+
+#: fpsstrings.rsillegalodscellrange
+msgid "Illegal structure of an OpenDocument cell range."
+msgstr ""
+
+#: fpsstrings.rsimageformatnotsupported
+msgid "Image format not supported."
+msgstr "Формат изображения не поддерживается"
+
+#: fpsstrings.rsincorrectpositionofimageinheaderfooter
+msgid "Incorrect position of %%G code in %s"
+msgstr "Неверная позиция %%G кода в %s"
+
+#: fpsstrings.rsindexinsstoutofrange
+msgid "Index %d in SST out of range (0-%d)."
+msgstr "Индекс %d в SST выходит за пределы диапазона (0-%d)."
+
+#: fpsstrings.rsinvalidargumentcount
+msgid "Invalid argument count for function %s"
+msgstr "Не верный аргумент для функции %s"
+
+#: fpsstrings.rsinvalidcharacterincell
+msgid "Invalid character(s) in cell %s."
+msgstr "Не верные символ(ы) в ячейке %s."
+
+#: fpsstrings.rsinvalidcharacterincellcomment
+msgid "Invalid character(s) in cell comment \"%s\"."
+msgstr "Не верные символ(ы) в коментарии к ячейке \"%s\"."
+
+#: fpsstrings.rsinvaliddatetimeformat
+msgid "Trying to use an incompatible date/time format."
+msgstr "Попытка использования не определённого формата даты/времени."
+
+#: fpsstrings.rsinvalidextension
+msgid "Attempting to save a spreadsheet by extension, but the extension %s is not valid."
+msgstr "Попытка определения формата таблицы при сохранения по расширению файла, но расширение %s не верно."
+
+#: fpsstrings.rsinvalidfloat
+msgid "%s is not a valid floating-point value"
+msgstr "Не верное значение %s для вещественного числа"
+
+#: fpsstrings.rsinvalidfontindex
+msgid "Invalid font index"
+msgstr "Ошибка индекса шрифта"
+
+#: fpsstrings.rsinvalidnumber
+msgid "Invalid numerical value : %s"
+msgstr "Ошибка в числовом значении : %s"
+
+#: fpsstrings.rsinvalidnumberchar
+msgid "Unexpected character in number : %s"
+msgstr "Отсутсвует символ в числе : %s"
+
+#: fpsstrings.rsinvalidnumberformat
+msgid "Trying to use an incompatible number format."
+msgstr "Попытка использования не соместимого формата числа"
+
+#: fpsstrings.rsinvalidresultcharacter
+msgid "\"%s\" is not a valid return type indicator"
+msgstr ""
+
+#: fpsstrings.rsinvalidresulttype
+msgid "Invalid result type: %s"
+msgstr "Не верный результирующий тип: %s"
+
+#: fpsstrings.rsinvalidspreadsheetfile
+msgid "\"%s\" is not a valid spreadsheet file"
+msgstr "\"%s\" не верный файл электронной таблицы"
+
+#: fpsstrings.rsinvalidworksheetname
+msgid "\"%s\" is not a valid worksheet name."
+msgstr "\"%s\" не верное имя таблицы."
+
+#: fpsstrings.rsleftbracketexpected
+msgid "Expected left bracket at position %d, but got %s"
+msgstr "Ожидается левая скобка в позиции %d, но найдено %s"
+
+#: fpsstrings.rslocalfilehyperlinkabs
+msgid "The hyperlink \"%s\" points to a local file. In case of an absolute path the protocol \"file:\" must be specified."
+msgstr "Гиперссылка \"%s\" указывает на локальный файл. Необходимо указать протокол \"file:\"."
+
+#: fpsstrings.rsmagenta
+msgid "magenta"
+msgstr "фуксин"
+
+#: fpsstrings.rsmaxcolsexceeded
+msgid "This workbook contains %d columns, but the selected file format does not support more than %d columns."
+msgstr "Таблица содержит %d столбцов, но указанный форма не поодерживает более %d столбцов."
+
+#: fpsstrings.rsmaxrowsexceeded
+msgid "This workbook contains %d rows, but the selected file format does not support more than %d rows."
+msgstr "Таблица содержит %d строк, но указанный форма не поддерживает более %d строк."
+
+#: fpsstrings.rsmultiplesheetsonlywithrestoreposition
+msgid "Export to multiple sheets is possible only if position is restored."
+msgstr "Экспорт в несколько листов возможен только в случае если позиция восстанавливается."
+
+#: fpsstrings.rsnooperand
+msgid "No operand for unary operation %s"
+msgstr "Не указан операнд для унарной операции %s"
+
+#: fpsstrings.rsnopercentoperation
+msgid "Cannot perform percent operation on expression of type %s: %s"
+msgstr "Не возможно выполнить операцию процента в выражении типа %s: %s"
+
+#: fpsstrings.rsnotdefined
+msgid "not defined"
+msgstr "не определено"
+
+#: fpsstrings.rsnovalidcelladdress
+msgid "\"%s\" is not a valid cell address."
+msgstr "\"%s\" не верный адрес ячейки."
+
+#: fpsstrings.rsnovalidcellrangeaddress
+msgid "\"%s\" is not a valid cell range address."
+msgstr "\"%s\" не верный адрес диапазона ячеек."
+
+#: fpsstrings.rsnovalidcellrangeorcelladdress
+msgid "\"%s\" is not a valid cell or cell range address."
+msgstr "\"%s\" не верный адрес для чейки или диапазона ячеек."
+
+#: fpsstrings.rsnovalidhyperlinkinternal
+msgid "The hyperlink \"%s\" is not a valid cell address."
+msgstr "Гиперссылка \"%s\" не содержит верный адрес ячейки."
+
+#: fpsstrings.rsnovalidhyperlinkuri
+msgid "The hyperlink \"%s\" is not a valid URI."
+msgstr "Гиперссылка \"%s\" не является правильным URI."
+
+#: fpsstrings.rsnovalidnumberformatstring
+msgid "No valid number format string."
+msgstr "Не верная строка формата для чисел"
+
+#: fpsstrings.rsnovariable
+msgid "Identifier %s is not a variable"
+msgstr "Идентификатор %s не переменная"
+
+#: fpsstrings.rsodshyperlinksoftextcellsonly
+msgid "Cell %s: OpenDocument supports hyperlinks for text cells only."
+msgstr "Ячейка %s: OpenDocument поддерживает гиперссылки только для текстовых ячеек."
+
+#: fpsstrings.rsolive
+msgid "olive"
+msgstr "оливковый"
+
+#: fpsstrings.rsonlyoneheaderfooterimageallowed
+msgid "Only one image per %s section allowed."
+msgstr "Разрешено только одно изображения для секции %s."
+
+#: fpsstrings.rsoperationexceedscolcount
+#, fuzzy,badformat
+#| msgid "This operation exceeds the range of defined grid columns."
+msgid "This operation at index %d exceeds the range of defined grid columns (%d)."
+msgstr "Эта операция превышает диапазон определенных столбцов таблицы"
+
+#: fpsstrings.rsoperationexceedsrowcount
+#, fuzzy,badformat
+#| msgid "This operation exceeds the range of defined grid rows."
+msgid "This operation at index %d exceeds the range of defined grid rows (%d)."
+msgstr "Эта операция превышает диапазон определенных столбцов таблицы"
+
+#: fpsstrings.rspaletteindex
+msgid "Palette index %d"
+msgstr "Индекс палитры %d"
+
+#: fpsstrings.rspasswordremoved_biff2
+msgid "Password removed (BIFF2 requires matching workbook and worksheet passwords)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_excel
+msgid "Password removed (Hashing algorithm not compatible with Excel)"
+msgstr ""
+
+#: fpsstrings.rspasswordremoved_notvalid
+msgid "Password removed (Not valid)."
+msgstr ""
+
+#: fpsstrings.rspurple
+msgid "purple"
+msgstr ""
+
+#: fpsstrings.rsreadernotfound
+msgid "Reader not found for file \"%s\""
+msgstr "Не найден модуль чтения для файла \"%s\""
+
+#: fpsstrings.rsred
+msgid "red"
+msgstr "красный"
+
+#: fpsstrings.rsrightbracketexpected
+msgid "Expected right bracket at position %d, but got %s"
+msgstr "Ожидается правая скобка в позиции %d, но найдено %s"
+
+#: fpsstrings.rsrightsquarebracketexpected
+msgid "Expected right square bracket at positon %d, but got %s"
+msgstr ""
+
+#: fpsstrings.rsrowstylenotfound
+msgid "Row style not found."
+msgstr "Стиль строки не найден"
+
+#: fpsstrings.rssilver
+msgid "silver"
+msgstr "серебрянный"
+
+#: fpsstrings.rsstdhyperlinktooltip
+msgid "Hold the left mouse button down for a short time to activate the hyperlink."
+msgstr "Нажмите и удерживайте некоторое время левую кнопку мышки для активации гиперссылки"
+
+#: fpsstrings.rsteal
+msgid "teal"
+msgstr ""
+
+#: fpsstrings.rstoomanypalettecolors
+msgid "This workbook contains more colors (%d) than supported by the file format (%d). The additional colors are replaced by the best-matching palette colors."
+msgstr "Таблица содержит больше цветов (%d) чем поддерживается данным форматом (%d). Дополнительные цвета будут заменены аналогичными."
+
+#: fpsstrings.rstransparent
+msgid "transparent"
+msgstr "прозрачно"
+
+#: fpsstrings.rstruncatetoolongcelltext
+msgid "Text value exceeds the %d character limit in cell %s and has been truncated."
+msgstr "Текстовое выражения ограничено %d символами в ячейке %s и будет уменьшено."
+
+#: fpsstrings.rstruncatetoolongtext
+msgid "Text value exceeds the %d character limit and has been truncated."
+msgstr ""
+
+#: fpsstrings.rsunexpectedendofexpression
+msgid "Unexpected end of expression"
+msgstr "Ожидается конец выражения"
+
+#: fpsstrings.rsunknowncharacter
+msgid "Unknown character at pos %d: \"%s\""
+msgstr "Не известный символ в позиции %d: \"%s\""
+
+#: fpsstrings.rsunknowncomparison
+msgid "Internal error: Unknown comparison"
+msgstr "Внутрення ошибка: Не определённое сравнение"
+
+#: fpsstrings.rsunknowndatatype
+msgid "Unknown data type."
+msgstr "Не определённый тип"
+
+#: fpsstrings.rsunknowndelimiter
+msgid "Unknown delimiter character: \"%s\""
+msgstr "Не известный разделитель: \"%s\""
+
+#: fpsstrings.rsunknownerrortype
+msgid "Unknown error type."
+msgstr "Не известный тип ошибки"
+
+#: fpsstrings.rsunknownidentifier
+msgid "Unknown identifier: %s"
+msgstr "Не известная переменная: %s"
+
+#: fpsstrings.rsunknowntokenatpos
+msgid "Unknown token at pos %d : %s"
+msgstr "Не известный символ в позиции %d : %s"
+
+#: fpsstrings.rsunsupportedreadformat
+msgid "Tried to read a spreadsheet using an unsupported format"
+msgstr "Попытка прочитать таблицу используя не поддерживаемый формат"
+
+#: fpsstrings.rsunsupportedwriteformat
+msgid "Tried to write a spreadsheet using an unsupported format"
+msgstr "Попытка записать таблицу используя не поддерживаемый формат"
+
+#: fpsstrings.rsunterminatedexpression
+msgid "Badly terminated expression. Found token at position %d : %s"
+msgstr "Не верное окончание выражения. Найден символ в позиции %d : %s"
+
+#: fpsstrings.rsutf8textexpectedbutansifoundincell
+msgid "Expected UTF8 text, but probably ANSI text found in cell %s."
+msgstr "Ожидается текст в UTF8 кодировке, но в ячейке %s возможно найден текст ANSI кодировке"
+
+#: fpsstrings.rswhite
+msgid "white"
+msgstr "белый"
+
+#: fpsstrings.rsworksheetnotfound
+msgid "Worksheet \"%s\" not found."
+msgstr "Лист таблицы \"%s\" не найден."
+
+#: fpsstrings.rsworksheetnotfound1
+msgid "Worksheet not found."
+msgstr "Лист таблицы не найден"
+
+#: fpsstrings.rswriteerror_worksheetnametoolong
+msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
+msgstr "Документ не может быть сохранён. Имя Имя листа \"%0:s\" очень большое (максимум %1:d символов)"
+
+#: fpsstrings.rsyellow
+msgid "yellow"
+msgstr "жёлтый"
+

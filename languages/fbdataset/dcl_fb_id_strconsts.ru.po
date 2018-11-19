@@ -1,0 +1,79 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: dcl_fb_id_strconsts.dcl_fb_scheck
+msgid "Check"
+msgstr "Проверка"
+
+#: dcl_fb_id_strconsts.dcl_fb_sdescription
+msgid "Description"
+msgstr "Описание"
+
+#: dcl_fb_id_strconsts.dcl_fb_sfbdataseteditor
+msgid "FBDataSet SQL Editor"
+msgstr "Редактор SQL для FBDataSet"
+
+#: dcl_fb_id_strconsts.dcl_fb_sfilter
+msgid "Filter"
+msgstr "Фильтр"
+
+#: dcl_fb_id_strconsts.dcl_fb_sgenerate
+msgid "Generate"
+msgstr "Создать"
+
+#: dcl_fb_id_strconsts.dcl_fb_smodified
+msgid "Modified"
+msgstr "Изменено"
+
+#: dcl_fb_id_strconsts.dcl_fb_splan
+msgid "Plan"
+msgstr "План запроса"
+
+#: dcl_fb_id_strconsts.dcl_fb_sreplacesql
+msgid "Replace sql"
+msgstr "Заменить sql"
+
+#: dcl_fb_id_strconsts.dcl_fb_sresult
+msgid "Result"
+msgstr "Результат"
+
+#: dcl_fb_id_strconsts.dcl_fb_sshowinfo
+msgid "Show info"
+msgstr "Отображать информацию"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqldelete
+msgid "Delete SQL"
+msgstr "SQL на удаление"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqledit
+msgid "Edit SQL"
+msgstr "SQL на редактирование"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqleditor
+msgid "SQL editor..."
+msgstr "Редактор SQL..."
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlinsert
+msgid "Insert SQL"
+msgstr "SQL на вставку"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlrefresh
+msgid "Refresh SQL"
+msgstr "SQL на обновление"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqlselect
+msgid "Select SQL"
+msgstr "SQL на выборку"
+
+#: dcl_fb_id_strconsts.dcl_fb_ssqltest
+msgid "SQL test..."
+msgstr "Проверка SQL"
+
+#: dcl_fb_id_strconsts.dcl_fb_stablealias
+msgid "Table alias"
+msgstr "Алиас таблицы"
+
+#: dcl_fb_id_strconsts.dcl_fb_stest
+msgid "Test"
+msgstr "Результат"
+

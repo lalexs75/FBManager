@@ -1,0 +1,143 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uibconst.euib_blobfieldnotfound
+msgid "Blob field num: %d not found."
+msgstr ""
+
+#: uibconst.euib_cachedfetchnotset
+msgid "CachedFetch property not set to True."
+msgstr ""
+
+#: uibconst.euib_cantloadlib
+msgid "Can't load library: %s."
+msgstr ""
+
+#: uibconst.euib_casterror
+msgid "Cast error."
+msgstr ""
+
+#: uibconst.euib_charsetnotfound
+msgid "CharacterSet %s not found."
+msgstr ""
+
+#: uibconst.euib_databasenotdef
+msgid "Database not assigned."
+msgstr ""
+
+#: uibconst.euib_dbhandlealreadyset
+msgid "Database handle already assigned, first disconnect database."
+msgstr ""
+
+#: uibconst.euib_domainstrnotfound
+msgid "Domain %s not found."
+msgstr ""
+
+#: uibconst.euib_exceptionnotfound
+msgid "Exception name %s, not found."
+msgstr ""
+
+#: uibconst.euib_explicittrans
+msgid "Transaction must be started explicitly."
+msgstr ""
+
+#: uibconst.euib_exptionregistered
+msgid "Exception: %d already registered"
+msgstr ""
+
+#: uibconst.euib_fetchblobnotset
+msgid "FetchBlob property must be set to use this method."
+msgstr ""
+
+#: uibconst.euib_fieldnumnotfound
+msgid "Field num: %d not found."
+msgstr ""
+
+#: uibconst.euib_fieldstrnotfound
+msgid "Field \"%s\" not found."
+msgstr ""
+
+#: uibconst.euib_indexerror
+msgid "Index out of bound (%d)"
+msgstr ""
+
+#: uibconst.euib_invalideibversion
+msgid "Incorrect Database Server version, check compiler options."
+msgstr ""
+
+#: uibconst.euib_invalidusername
+msgid "Invalid user name : \"%s\"."
+msgstr ""
+
+#: uibconst.euib_mustbeopen
+msgid "The query must be opened first."
+msgstr ""
+
+#: uibconst.euib_mustbeprepared
+msgid "The query must be prepared first."
+msgstr ""
+
+#: uibconst.euib_noautostop
+msgid "Transaction must be closed explicitly."
+msgstr ""
+
+#: uibconst.euib_nofield
+msgid "Field not found."
+msgstr ""
+
+#: uibconst.euib_nogenerator
+msgid "Generator %s not found."
+msgstr ""
+
+#: uibconst.euib_paramstrnotfound
+msgid "Parameter \"%s\" not found."
+msgstr ""
+
+#: uibconst.euib_parsesetnames
+msgid "Parse error: SET NAMES"
+msgstr ""
+
+#: uibconst.euib_parsesqldialect
+msgid "Parse error: SET SQL DIALECT"
+msgstr ""
+
+#: uibconst.euib_procstrnotfound
+msgid "Procedure %s not found."
+msgstr ""
+
+#: uibconst.euib_querynotopen
+msgid "Query not open."
+msgstr ""
+
+#: uibconst.euib_servicesparsing
+msgid "Error while parsing Services API output."
+msgstr ""
+
+#: uibconst.euib_sizename
+msgid "Size name too big (%s)"
+msgstr ""
+
+#: uibconst.euib_tablestrnotfound
+msgid "Table \"%s\" not found."
+msgstr ""
+
+#: uibconst.euib_transactionnotdef
+msgid "Transaction not assigned."
+msgstr ""
+
+#: uibconst.euib_unexpectedcasterror
+msgid "Unexpected cast error."
+msgstr ""
+
+#: uibconst.euib_unexpectederror
+msgid "Unexpected error."
+msgstr ""
+
+#: uibconst.suibfalse
+msgid "False"
+msgstr ""
+
+#: uibconst.suibtrue
+msgid "True"
+msgstr ""
+

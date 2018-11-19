@@ -1,0 +1,295 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: rxconst.sabout
+msgid "About"
+msgstr "О системе"
+
+#: rxconst.sappversion
+msgid "Version : "
+msgstr "Версия : "
+
+#: rxconst.savaliablebuttons
+msgid "Avaliable buttons"
+msgstr "Доступные кнопки"
+
+#: rxconst.sbrowse
+msgid "Browse"
+msgstr "Обзор"
+
+#: rxconst.sbuilddate
+msgid "Build date : "
+msgstr "Дата сборки : "
+
+#: rxconst.sbuttonalign
+msgid "Button align"
+msgstr "Выравнивание кнопок"
+
+#: rxconst.sbuttonalign1
+msgid "None"
+msgstr "Нет"
+
+#: rxconst.sbuttonalign2
+msgid "Left"
+msgstr "Влево"
+
+#: rxconst.sbuttonalign3
+msgid "Right"
+msgstr "Вправо"
+
+#: rxconst.sclose
+msgid "Close"
+msgstr "Закрыть"
+
+#: rxconst.scloseaftersec
+msgid "Close after %d sec"
+msgstr "Будет закрыто через %d секунд"
+
+#: rxconst.scloseallexceptthis
+msgid "Close all except this"
+msgstr "Закрыть все окна, за исключением этого"
+
+#: rxconst.scloseallwindows
+msgid "Close all windows"
+msgstr "Закрыть все окна"
+
+#: rxconst.sclosemessagehint
+msgid "Close message"
+msgstr "Закрыть сообщение"
+
+#: rxconst.sclosevaliderror
+msgid "Error. Expected values..."
+msgstr "Ошибка. Ожидается значение..."
+
+#: rxconst.sclosewindows
+msgid "Close window"
+msgstr "Закрыть окно"
+
+#: rxconst.sdatedlgtitle
+msgid "Select a Date"
+msgstr "Выберите дату"
+
+#: rxconst.sdefaultfilter
+msgid "All files (*.*)|*.*"
+msgstr "Все файлы (*.*)|*.*"
+
+#: rxconst.sdetails
+msgid "Details"
+msgstr "Подробно"
+
+#: rxconst.sduallistcaption
+msgid "Dual list dialog"
+msgstr "Управление списками"
+
+#: rxconst.sduallistdestcaption
+msgid "Destination"
+msgstr "Выбор"
+
+#: rxconst.sduallistsrccaption
+msgid "Source"
+msgstr "Источник"
+
+#: rxconst.serrorlinkedtaskpanel
+msgid "Not assigned task panel"
+msgstr "Не указана панель задач"
+
+#: rxconst.sexptcontrolnotfound
+msgid "Control not found in validate %s."
+msgstr "Элемент управления не найден в валидаторе %s"
+
+#: rxconst.sfilenotexec
+msgid "File specified is not an executable file, dynamic-link library, or icon file"
+msgstr "Указанный файл не исполняемый, не библиотека и не иконка"
+
+#: rxconst.sfirsthalfofyear
+msgid "First half of year"
+msgstr "Первая половина года"
+
+#: rxconst.sfirstquarter
+msgid "First quarter"
+msgstr "Первый квартал"
+
+#: rxconst.sflatbuttons
+msgid "Flat buttons"
+msgstr "Плавающие кнопки"
+
+#: rxconst.sfolderlistererr
+msgid "%s. Not assigned property MenuItem"
+msgstr "%s. Не определено свойство MenuItem"
+
+#: rxconst.sfourthquarter
+msgid "Fourth quarter"
+msgstr "Четвёртый квартал"
+
+#: rxconst.sfpcversion
+msgid "FPC version : "
+msgstr "Версия FPC : "
+
+#: rxconst.sgeneral
+msgid "General"
+msgstr "Общее"
+
+#: rxconst.shistorydesc
+msgid "History - \"%s\""
+msgstr "История - \"%s\""
+
+#: rxconst.slclversion
+msgid "LCL Version: "
+msgstr "Версия LCL : "
+
+#: rxconst.slicense
+msgid "License"
+msgstr "Лицензия"
+
+#: rxconst.sloadliberror
+msgid "Could not load '%s' library"
+msgstr "Невозможно загрузить библиотеку '%s'"
+
+#: rxconst.snextmonth
+msgid "Next Month|"
+msgstr "Следующий месяц|"
+
+#: rxconst.snextyear
+msgid "Next Year|"
+msgstr "Следующий год|"
+
+#: rxconst.snotimplemented
+msgid "Function not yet implemented"
+msgstr "Функция не реализована"
+
+#: rxconst.soptions
+msgid "Options"
+msgstr "Параметры"
+
+#: rxconst.soutofrange
+msgid "Out of range %d %d %d %d"
+msgstr "За границами диапазона %d %d %d %d"
+
+#: rxconst.sprevmonth
+msgid "Previous Month|"
+msgstr "Превыдущий месяц|"
+
+#: rxconst.sprevyear
+msgid "Previous Year|"
+msgstr "Превыдущий год|"
+
+#: rxconst.sreqvalue
+msgid "Error. Expected value for field %s."
+msgstr "Поле %s. Требуется значение"
+
+#: rxconst.srxstrholdertexteditor
+msgid "Rx string holder editor"
+msgstr "Редактор RxStrHolder"
+
+#: rxconst.srxtextfolderitem
+msgid "Item "
+msgstr "Строка "
+
+#: rxconst.srxtextholderadd
+msgid "Add"
+msgstr "Добавить"
+
+#: rxconst.srxtextholdereditor
+msgid "RxTextHolder editor"
+msgstr "Редактор RxTextHolder"
+
+#: rxconst.srxtextholderremove
+msgid "Remove"
+msgstr "Удалить"
+
+#: rxconst.srxtextholdertextcaption
+msgid "Caption"
+msgstr "Название"
+
+#: rxconst.srxtextholdertexteditor
+msgid "Rx text holder editor"
+msgstr "Редактор RxTextHolder"
+
+#: rxconst.ssecondhalfofyear
+msgid "Second half of year"
+msgstr "Вторая половина года"
+
+#: rxconst.ssecondquarter
+msgid "Second quarter"
+msgstr "Второй квартал"
+
+#: rxconst.sshowcaption
+msgid "Show caption"
+msgstr "Отображать заголовок"
+
+#: rxconst.sshowhint
+msgid "Show hint"
+msgstr "Отображать подсказки"
+
+#: rxconst.stargetcpu
+msgid "Target CPU : "
+msgstr "Целевой процессор : "
+
+#: rxconst.stargetos
+msgid "Target OS : "
+msgstr "Целевая ОС : "
+
+#: rxconst.sthirdquarter
+msgid "Third quarter"
+msgstr "Третий квартал"
+
+#: rxconst.stocurdate
+msgid "Set current date"
+msgstr "Установить текущую дату"
+
+#: rxconst.stoolbarstyle
+msgid "Tool bar style"
+msgstr "Стиль панели инструментов"
+
+#: rxconst.stoolbarstyle1
+msgid "Standard"
+msgstr "Стандартный"
+
+#: rxconst.stoolbarstyle2
+msgid "Windows XP"
+msgstr "Windows XP"
+
+#: rxconst.stoolbarstyle3
+msgid "Native"
+msgstr "Из текущей темы"
+
+#: rxconst.stoolpanelsetup
+msgid "Tool panel setup"
+msgstr "Настройка панели инструментов"
+
+#: rxconst.stransparent
+msgid "Transparent"
+msgstr "Прозрачно"
+
+#: rxconst.svariableisnotboolean
+msgid "Variable %s is not boolean"
+msgstr "Переменная %s не логического типа"
+
+#: rxconst.svariableisnotdt
+msgid "Variable %s is not date/time"
+msgstr "Переменная %s не дата/время"
+
+#: rxconst.svariableisnotfloat
+msgid "Variable %s is not float"
+msgstr "Переменная %s не число"
+
+#: rxconst.svariableisnotinteger
+msgid "Variable %s is not integer"
+msgstr "Переменная %s не целое число"
+
+#: rxconst.svariableisnotstring
+msgid "Variable %s is not string"
+msgstr "Переменная %s не строка"
+
+#: rxconst.svisiblebuttons
+msgid "Visible buttons"
+msgstr "Отображаемые кнопки"
+
+#: rxconst.swidget
+msgid "Widget : "
+msgstr "Интерфейс : "
+
+#: rxconst.swindowsicofiles
+msgid "Windows Ico files (*.ico)|*.ico|All files (*.*)|*.*"
+msgstr "Файлы иконок Windows (*.ico)|*.ico|Все файлы (*.*)|*.*"
+

@@ -1,0 +1,295 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: rxconst.sabout
+msgid "About"
+msgstr ""
+
+#: rxconst.sappversion
+msgid "Version : "
+msgstr ""
+
+#: rxconst.savaliablebuttons
+msgid "Avaliable buttons"
+msgstr ""
+
+#: rxconst.sbrowse
+msgid "Browse"
+msgstr ""
+
+#: rxconst.sbuilddate
+msgid "Build date : "
+msgstr ""
+
+#: rxconst.sbuttonalign
+msgid "Button align"
+msgstr ""
+
+#: rxconst.sbuttonalign1
+msgid "None"
+msgstr ""
+
+#: rxconst.sbuttonalign2
+msgid "Left"
+msgstr ""
+
+#: rxconst.sbuttonalign3
+msgid "Right"
+msgstr ""
+
+#: rxconst.sclose
+msgid "Close"
+msgstr ""
+
+#: rxconst.scloseaftersec
+msgid "Close after %d sec"
+msgstr ""
+
+#: rxconst.scloseallexceptthis
+msgid "Close all except this"
+msgstr ""
+
+#: rxconst.scloseallwindows
+msgid "Close all windows"
+msgstr ""
+
+#: rxconst.sclosemessagehint
+msgid "Close message"
+msgstr ""
+
+#: rxconst.sclosevaliderror
+msgid "Error. Expected values..."
+msgstr ""
+
+#: rxconst.sclosewindows
+msgid "Close window"
+msgstr ""
+
+#: rxconst.sdatedlgtitle
+msgid "Select a Date"
+msgstr ""
+
+#: rxconst.sdefaultfilter
+msgid "All files (*.*)|*.*"
+msgstr ""
+
+#: rxconst.sdetails
+msgid "Details"
+msgstr ""
+
+#: rxconst.sduallistcaption
+msgid "Dual list dialog"
+msgstr ""
+
+#: rxconst.sduallistdestcaption
+msgid "Destination"
+msgstr ""
+
+#: rxconst.sduallistsrccaption
+msgid "Source"
+msgstr ""
+
+#: rxconst.serrorlinkedtaskpanel
+msgid "Not assigned task panel"
+msgstr ""
+
+#: rxconst.sexptcontrolnotfound
+msgid "Control not found in validate %s."
+msgstr ""
+
+#: rxconst.sfilenotexec
+msgid "File specified is not an executable file, dynamic-link library, or icon file"
+msgstr ""
+
+#: rxconst.sfirsthalfofyear
+msgid "First half of year"
+msgstr ""
+
+#: rxconst.sfirstquarter
+msgid "First quarter"
+msgstr ""
+
+#: rxconst.sflatbuttons
+msgid "Flat buttons"
+msgstr ""
+
+#: rxconst.sfolderlistererr
+msgid "%s. Not assigned property MenuItem"
+msgstr ""
+
+#: rxconst.sfourthquarter
+msgid "Fourth quarter"
+msgstr ""
+
+#: rxconst.sfpcversion
+msgid "FPC version : "
+msgstr ""
+
+#: rxconst.sgeneral
+msgid "General"
+msgstr ""
+
+#: rxconst.shistorydesc
+msgid "History - \"%s\""
+msgstr ""
+
+#: rxconst.slclversion
+msgid "LCL Version: "
+msgstr ""
+
+#: rxconst.slicense
+msgid "License"
+msgstr ""
+
+#: rxconst.sloadliberror
+msgid "Could not load '%s' library"
+msgstr ""
+
+#: rxconst.snextmonth
+msgid "Next Month|"
+msgstr ""
+
+#: rxconst.snextyear
+msgid "Next Year|"
+msgstr ""
+
+#: rxconst.snotimplemented
+msgid "Function not yet implemented"
+msgstr ""
+
+#: rxconst.soptions
+msgid "Options"
+msgstr ""
+
+#: rxconst.soutofrange
+msgid "Out of range %d %d %d %d"
+msgstr ""
+
+#: rxconst.sprevmonth
+msgid "Previous Month|"
+msgstr ""
+
+#: rxconst.sprevyear
+msgid "Previous Year|"
+msgstr ""
+
+#: rxconst.sreqvalue
+msgid "Error. Expected value for field %s."
+msgstr ""
+
+#: rxconst.srxstrholdertexteditor
+msgid "Rx string holder editor"
+msgstr ""
+
+#: rxconst.srxtextfolderitem
+msgid "Item "
+msgstr ""
+
+#: rxconst.srxtextholderadd
+msgid "Add"
+msgstr ""
+
+#: rxconst.srxtextholdereditor
+msgid "RxTextHolder editor"
+msgstr ""
+
+#: rxconst.srxtextholderremove
+msgid "Remove"
+msgstr ""
+
+#: rxconst.srxtextholdertextcaption
+msgid "Caption"
+msgstr ""
+
+#: rxconst.srxtextholdertexteditor
+msgid "Rx text holder editor"
+msgstr ""
+
+#: rxconst.ssecondhalfofyear
+msgid "Second half of year"
+msgstr ""
+
+#: rxconst.ssecondquarter
+msgid "Second quarter"
+msgstr ""
+
+#: rxconst.sshowcaption
+msgid "Show caption"
+msgstr ""
+
+#: rxconst.sshowhint
+msgid "Show hint"
+msgstr ""
+
+#: rxconst.stargetcpu
+msgid "Target CPU : "
+msgstr ""
+
+#: rxconst.stargetos
+msgid "Target OS : "
+msgstr ""
+
+#: rxconst.sthirdquarter
+msgid "Third quarter"
+msgstr ""
+
+#: rxconst.stocurdate
+msgid "Set current date"
+msgstr ""
+
+#: rxconst.stoolbarstyle
+msgid "Tool bar style"
+msgstr ""
+
+#: rxconst.stoolbarstyle1
+msgid "Standard"
+msgstr ""
+
+#: rxconst.stoolbarstyle2
+msgid "Windows XP"
+msgstr ""
+
+#: rxconst.stoolbarstyle3
+msgid "Native"
+msgstr ""
+
+#: rxconst.stoolpanelsetup
+msgid "Tool panel setup"
+msgstr ""
+
+#: rxconst.stransparent
+msgid "Transparent"
+msgstr ""
+
+#: rxconst.svariableisnotboolean
+msgid "Variable %s is not boolean"
+msgstr ""
+
+#: rxconst.svariableisnotdt
+msgid "Variable %s is not date/time"
+msgstr ""
+
+#: rxconst.svariableisnotfloat
+msgid "Variable %s is not float"
+msgstr ""
+
+#: rxconst.svariableisnotinteger
+msgid "Variable %s is not integer"
+msgstr ""
+
+#: rxconst.svariableisnotstring
+msgid "Variable %s is not string"
+msgstr ""
+
+#: rxconst.svisiblebuttons
+msgid "Visible buttons"
+msgstr ""
+
+#: rxconst.swidget
+msgid "Widget : "
+msgstr ""
+
+#: rxconst.swindowsicofiles
+msgid "Windows Ico files (*.ico)|*.ico|All files (*.*)|*.*"
+msgstr ""
+

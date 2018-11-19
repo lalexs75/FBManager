@@ -1,0 +1,768 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: rxdconst.sallvalues
+msgid "All values"
+msgstr "Все значения"
+
+#: rxdconst.sapptitlelabel
+msgid "Application \"%s\""
+msgstr "Программа \"%s\""
+
+#: rxdconst.sascending
+msgid "Ascending"
+msgstr "По возрастанию"
+
+#: rxdconst.sblobtext
+msgid "(blob)"
+msgstr "(данные)"
+
+#: rxdconst.sbottomcaption
+msgid "Bottom"
+msgstr "Снизу"
+
+#: rxdconst.sbrowsedata
+msgid "browse"
+msgstr "просмотр"
+
+#: rxdconst.scalcfieldsdata
+msgid "calc"
+msgstr "вычисление"
+
+#: rxdconst.scapturefilter
+msgid "Control locked by filter"
+msgstr "Элементы управления захвачены фильтром"
+
+#: rxdconst.schangepassword
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: rxdconst.scirculardatalink
+msgid "Circular data link"
+msgstr "Перекрёстная ссылка данных"
+
+#: rxdconst.sclearfilter
+msgctxt "rxdconst.sclearfilter"
+msgid "Clear filter"
+msgstr "Очистить фильтр"
+
+#: rxdconst.scollumnname
+msgid "Column name"
+msgstr "Имя столбца"
+
+#: rxdconst.scompressfonts
+msgid "Compress fonts"
+msgstr "Сжимать шрифты"
+
+#: rxdconst.scompressimages
+msgid "Compress images"
+msgstr "Сжимать изображения"
+
+#: rxdconst.scompresstext
+msgid "Compress text"
+msgstr "Сжимать текст"
+
+#: rxdconst.sconfirmpasswordlabel
+msgid "&Confirm:"
+msgstr "&Подтверждение:"
+
+#: rxdconst.sconfirmsave
+msgid "Data changed. Save?"
+msgstr "Данные были изменены. Сохранить?"
+
+#: rxdconst.sdatabasename
+msgid "Database locked: %s"
+msgstr "База данных блокирована: %s"
+
+#: rxdconst.sdatabasename1
+msgid "Database"
+msgstr "Имя базы данных"
+
+#: rxdconst.sdbcomboboxfieldnotassigned
+msgid "%s:TDBComboBox - DataField not assigned"
+msgstr "%s:TDBComboBox - Не присвоено свойство DataField"
+
+#: rxdconst.sdbexceptcaption
+msgid "Error in DB engine"
+msgstr "Ошибка ядры БД"
+
+#: rxdconst.sdeletemultiplerecords
+msgid "Delete all selected records?"
+msgstr "Удалить все выделенные записи"
+
+#: rxdconst.sdeleterecordquestion
+msgid "Delete record?"
+msgstr "Удалить запись"
+
+#: rxdconst.sdescending
+msgctxt "rxdconst.sdescending"
+msgid "Descending"
+msgstr "По убыванию"
+
+#: rxdconst.seditdata
+msgid "editing"
+msgstr "редактирование"
+
+#: rxdconst.semptyvalues
+msgid "Empty values"
+msgstr "Пустые значения"
+
+#: rxdconst.serrormsglabel
+msgid "Error message"
+msgstr "Сообщение об ошибке"
+
+#: rxdconst.sexportcellcolors
+msgid "Export cell colors"
+msgstr "Экспорт цвета ячейки"
+
+#: rxdconst.sexportcolumnfooter
+msgid "Export column footer"
+msgstr "Экспорт итогов"
+
+#: rxdconst.sexportcolumnheader
+msgid "Export column header"
+msgstr "Экспорт заголовков стобцов"
+
+#: rxdconst.sexportfilename
+msgid "Export file name"
+msgstr "Имя файла экспорта"
+
+#: rxdconst.sexportformula
+msgid "Export footer formula"
+msgstr "Экспортирововать формулы итоговой строки"
+
+#: rxdconst.sexportgroupdata
+msgid "Export group data"
+msgstr "Экспорт данных группировки"
+
+#: rxdconst.sexporthidezerovalues
+msgctxt "rxdconst.sexporthidezerovalues"
+msgid "Hide zero values"
+msgstr "Не отображать нулевые значения"
+
+#: rxdconst.sexportimages
+msgid "Export images"
+msgstr "Экспорт изображений"
+
+#: rxdconst.sexportparams
+msgid "Export params"
+msgstr "Параметры экспорта"
+
+#: rxdconst.sexportselectedrows
+msgid "Export only selected rows"
+msgstr "Экспорт только помеченных строк"
+
+#: rxdconst.sexprbadcompare
+msgid "Compare opertion needs field and const"
+msgstr "Операции сравнения требуют наличия поля и константы"
+
+#: rxdconst.sexprbadfield
+msgid "Field '%s' not used in filter expression"
+msgstr "Поле '%s' не может быть использовано в выражении фильтрации"
+
+#: rxdconst.sexprbadnulltest
+msgid "NULL-values enabled in '=' and '<>'"
+msgstr "NULL-значения разрешены только в выражениях '=' и '<>'"
+
+#: rxdconst.sexprexpected
+msgid "Error %s"
+msgstr "Ожидалось выражение, а встречено %s"
+
+#: rxdconst.sexprincorrect
+msgid "Error in filter expression"
+msgstr "Ошибка в выражении фильтра"
+
+#: rxdconst.sexprinvalidchar
+msgid "Error symbol in expression: '%s'"
+msgstr "Ошибочный символ в выражении: '%s'"
+
+#: rxdconst.sexprnameerror
+msgid "Error in filed name"
+msgstr "Ошибка в имени поля"
+
+#: rxdconst.sexprnorparen
+msgid "Error ')', error: %s"
+msgstr "Ожидалось ')', а встречено: %s"
+
+#: rxdconst.sexprnotboolean
+msgid "Field '%s' is not boolean"
+msgstr "Поле '%s' не логического типа"
+
+#: rxdconst.sexprstringerror
+msgid "Error in string const"
+msgstr "Ошибка в строковой константе"
+
+#: rxdconst.sexprtermination
+msgid "Error in filter end"
+msgstr "Ошибка в окончании выражения фильтра"
+
+#: rxdconst.sfieldreadonly
+msgid "SFieldReadOnly %s"
+msgstr "Поле %s только для чтения"
+
+#: rxdconst.sfieldrequired
+msgid "Field '%s' must have a value"
+msgstr "Поле '%s' ожидает значение"
+
+#: rxdconst.sfieldtypemismatch
+msgid "Type mismatch for field '%s', expecting: %s actual: %s"
+msgstr "Несоответсвие типов для поля '%s', необходимо: %s введено: %s"
+
+#: rxdconst.sfooterrowcolor
+msgid "Footer row color"
+msgstr "Цвет итоговой строки"
+
+#: rxdconst.sfunction
+msgid "Function"
+msgstr "Функция"
+
+#: rxdconst.sfvtavg
+msgid "AVG"
+msgstr "Среднее"
+
+#: rxdconst.sfvtcount
+msgid "Count"
+msgstr "Количество"
+
+#: rxdconst.sfvtfieldvalue
+msgid "Field value"
+msgstr "Значение поля"
+
+#: rxdconst.sfvtmax
+msgid "Max value"
+msgstr "Максимум"
+
+#: rxdconst.sfvtmin
+msgid "Min value"
+msgstr "Минимум"
+
+#: rxdconst.sfvtnon
+msgid "None"
+msgstr "Нет"
+
+#: rxdconst.sfvtrecno
+msgid "Record no"
+msgstr "Номер строки"
+
+#: rxdconst.sfvtstatictext
+msgid "Static text"
+msgstr "Текст"
+
+#: rxdconst.sfvtsum
+msgid "Sum"
+msgstr "Сумма"
+
+#: rxdconst.sglobal
+msgid "Global"
+msgstr "Общее"
+
+#: rxdconst.shidezerovalues
+msgctxt "rxdconst.shidezerovalues"
+msgid "Hide zero values"
+msgstr "Не отображать нулевые значения"
+
+#: rxdconst.shinthideonlycurrentitem
+msgid "Hide only current item"
+msgstr "Скрыть только текущий элемент"
+
+#: rxdconst.shintlabel
+msgid "Enter your user name and password"
+msgstr "Введите ваше имя и пароль"
+
+#: rxdconst.shintshowonlycurrentitem
+msgid "Show only current item"
+msgstr "Показать только текущий элемент"
+
+#: rxdconst.sinactivedata
+msgid "inactive"
+msgstr "не активный"
+
+#: rxdconst.sinsertdata
+msgid "append"
+msgstr "вставка"
+
+#: rxdconst.sinvaliddate
+msgid "Invalid Date"
+msgstr "Неверная дата"
+
+#: rxdconst.sinvalidfields
+msgid "No fields defined"
+msgstr "Нет объявления полей"
+
+#: rxdconst.sinvalidusername
+msgid "User name or password is not valid"
+msgstr "Ошибка в имени пользователя или пароле"
+
+#: rxdconst.slandscape
+msgid "Landscape"
+msgstr "Ландшафт"
+
+#: rxdconst.sleftcaption
+msgid "Left"
+msgstr "Слева"
+
+#: rxdconst.slocaldatabase
+msgid "Unable complete this operation on local dataset"
+msgstr "Невозможно произвести эту операцию с локальной базой данных"
+
+#: rxdconst.smemnorecords
+msgid "No data found"
+msgstr "Данных не найдено"
+
+#: rxdconst.smergecells
+msgid "Merge cell's"
+msgstr "Объединять ячейки"
+
+#: rxdconst.smore1
+msgid "&More >>"
+msgstr "&Больше >>"
+
+#: rxdconst.smore2
+msgid "&Less <<"
+msgstr "&Меньше <<"
+
+#: rxdconst.snewpasswordlabel
+msgid "&New password:"
+msgstr "&Новый пароль:"
+
+#: rxdconst.snextbutton
+msgid "&Next"
+msgstr "&Дальше"
+
+#: rxdconst.snotcapturefilter
+msgid "Control needs to be locked by filter"
+msgstr "Элементы управления должны быть захвачены фильтром"
+
+#: rxdconst.snotediting
+msgid "Dataset not in edit or insert mode"
+msgstr "Набор данных не в режиме редактирования или вставки"
+
+#: rxdconst.snotempty
+msgid "Not empty"
+msgstr "Не пусто"
+
+#: rxdconst.soldpasswordlabel
+msgid "&Old password:"
+msgstr "&Старый пароль"
+
+#: rxdconst.sopenafterexport
+msgid "Open after export"
+msgstr "Открыть после экспорта"
+
+#: rxdconst.sorientation
+msgid "Orientation"
+msgstr "Ориентация"
+
+#: rxdconst.sotheroptions
+msgid "Other options"
+msgstr "Прочие параметры"
+
+#: rxdconst.soutline
+msgid "Out line"
+msgstr "Контуры"
+
+#: rxdconst.soverwriteexisting
+msgid "Overwrite existing"
+msgstr "Перезаписать существующее"
+
+#: rxdconst.spagemargins
+msgid "Page margins"
+msgstr "Отступы на странице"
+
+#: rxdconst.spagename
+msgid "Page name"
+msgstr "Имя страницы"
+
+#: rxdconst.spapertype
+msgid "Paper type"
+msgstr "Тип бумаги"
+
+#: rxdconst.spasswordchanged
+msgid "Password changed"
+msgstr "Пароль изменён"
+
+#: rxdconst.spasswordlabel
+msgid "&Password:"
+msgstr "&Пароль:"
+
+#: rxdconst.spasswordnotchanged
+msgid "Password not changed"
+msgstr "Пароль не изменён"
+
+#: rxdconst.spasswordsmismatch
+msgid "New password and confirmation not equal"
+msgstr "Новый пароль и подтверждение не совпадают"
+
+#: rxdconst.spdfoptions
+msgid "PDF options"
+msgstr "Параметры PDF"
+
+#: rxdconst.sportrait
+msgid "Portrait"
+msgstr "Портрет"
+
+#: rxdconst.sprevbutton
+msgid "&Prior"
+msgstr "&Превыдущие"
+
+#: rxdconst.sprintgrid
+msgid "Print grid"
+msgstr "Печать списка"
+
+#: rxdconst.sprintoptions
+msgid "Print options"
+msgstr "Параметры печати"
+
+#: rxdconst.squickfilter
+msgid "Quick filter"
+msgstr "Быстрый фильтр"
+
+#: rxdconst.sregistration
+msgid "Register"
+msgstr "Регистрация"
+
+#: rxdconst.sreporttitle
+msgid "Report title"
+msgstr "Заголовок отчёта"
+
+#: rxdconst.sretrylogin
+msgid "Retry to connect with database?"
+msgstr "Вы хотите повторить попытку соединения с базой данных?"
+
+#: rxdconst.srightcaption
+msgid "Right"
+msgstr "Справа"
+
+#: rxdconst.srxallfields
+msgid "All fields"
+msgstr "Все поля"
+
+#: rxdconst.srxascendign
+msgid "Ascendign"
+msgstr "По возрастанию"
+
+#: rxdconst.srxborrowstructure
+msgid "Borrow structure..."
+msgstr "Обзор структуры..."
+
+#: rxdconst.srxcopyonlymetadata
+msgid "Copy only metadata"
+msgstr "Копировать только метаданные..."
+
+#: rxdconst.srxdbgridallfilter
+msgid "(All values)"
+msgstr "(Все значения)"
+
+#: rxdconst.srxdbgridcopycellvalue
+msgid "Copy cell value"
+msgstr "Копировать значение ячейки"
+
+#: rxdconst.srxdbgridemptyfilter
+msgid "(Empty)"
+msgstr "(Пусто)"
+
+#: rxdconst.srxdbgridfilter
+msgid "Filter data"
+msgstr "Фильтр данных"
+
+#: rxdconst.srxdbgridfilterclear
+msgctxt "rxdconst.srxdbgridfilterclear"
+msgid "Clear filter"
+msgstr "Очистить фильтр"
+
+#: rxdconst.srxdbgridfiltersimple
+msgid "Filter in table"
+msgstr "Фильтр в таблице"
+
+#: rxdconst.srxdbgridfind
+msgctxt "rxdconst.srxdbgridfind"
+msgid "Find data"
+msgstr "Поиск данных"
+
+#: rxdconst.srxdbgridfindcaption
+msgctxt "rxdconst.srxdbgridfindcaption"
+msgid "Find data"
+msgstr "Поиск данных"
+
+#: rxdconst.srxdbgridfindcasesens
+msgid "Case sensetive"
+msgstr "Регистро-зависимо"
+
+#: rxdconst.srxdbgridfinddirecion
+msgid "Direction"
+msgstr "Направление"
+
+#: rxdconst.srxdbgridfindonfield
+msgid "Find on field"
+msgstr "Искать по полю"
+
+#: rxdconst.srxdbgridfindpartial
+msgid "Partial key"
+msgstr "Поиск по вхождению"
+
+#: rxdconst.srxdbgridfindrangeall
+msgid "All"
+msgstr "Всё"
+
+#: rxdconst.srxdbgridfindrangeback
+msgid "Backward"
+msgstr "Назад"
+
+#: rxdconst.srxdbgridfindrangeforw
+msgid "Forward"
+msgstr "Вперёд"
+
+#: rxdconst.srxdbgridfindtext
+msgid "Text to find"
+msgstr "Текст для поиска"
+
+#: rxdconst.srxdbgridnotemptyfilter
+msgid "(Not empty)"
+msgstr "(Не пусто)"
+
+#: rxdconst.srxdbgridoptimizecolwidth
+msgid "Optimize column width"
+msgstr "Подобрать ширину колонки"
+
+#: rxdconst.srxdbgridselapplycaption
+msgctxt "rxdconst.srxdbgridselapplycaption"
+msgid "Apply"
+msgstr "Применить"
+
+#: rxdconst.srxdbgridselapplyhint
+msgid "Apply current column settings"
+msgstr "Применить текущие настройки столбца"
+
+#: rxdconst.srxdbgridselcolcaption
+msgid "Grid columns"
+msgstr "Поля таблицы"
+
+#: rxdconst.srxdbgridselcolhint1
+msgid "Move selected column up"
+msgstr "Переместить выбранное поле выше"
+
+#: rxdconst.srxdbgridselcolhint2
+msgid "Move selected column down"
+msgstr "Переместить выбранное поле ниже"
+
+#: rxdconst.srxdbgridselectallrows
+msgid "Select all rows"
+msgstr "Выделить все строки"
+
+#: rxdconst.srxdbgridselectcolumns
+msgid "Select visible columns"
+msgstr "Выбор столбцов для отображения"
+
+#: rxdconst.srxdbgridsortbycolumns
+msgid "Sort data for columns"
+msgstr "Сортировать данные по колонкам"
+
+#: rxdconst.srxdbgridtoolscaption
+msgid "Totals row"
+msgstr "Всего строк"
+
+#: rxdconst.srxdescending
+msgctxt "rxdconst.srxdescending"
+msgid "Descending"
+msgstr "По убыванию"
+
+#: rxdconst.srxfieldslookupdisplay
+msgid "Fields as LookupDisplay"
+msgstr "Поля в свойстве LookupDisplay"
+
+#: rxdconst.srxfillfieldslookupdisp
+msgid "Fill fields in LookupDisplay property"
+msgstr "Заполните список для поля LookupDisplay"
+
+#: rxdconst.srxfillsortfieldsdisp
+msgid "Fill fields in SortField property"
+msgstr "Заполните список для поля SortField"
+
+#: rxdconst.srxfilterformapply
+msgctxt "rxdconst.srxfilterformapply"
+msgid "Apply"
+msgstr "Применить"
+
+#: rxdconst.srxfilterformcancel
+msgid "Cancel"
+msgstr "Отмена"
+
+#: rxdconst.srxfilterformcaption
+msgid "Filter conditions"
+msgstr "Выражение фильтра"
+
+#: rxdconst.srxfilterformclear
+msgctxt "rxdconst.srxfilterformclear"
+msgid "Clear filter"
+msgstr "Очистить фильтр"
+
+#: rxdconst.srxfilterformcondition
+msgid "Condition :"
+msgstr "Выражение :"
+
+#: rxdconst.srxfilterformend
+msgid "end."
+msgstr "конец."
+
+#: rxdconst.srxfilterformonfield
+msgid "On field :"
+msgstr "На поле :"
+
+#: rxdconst.srxfilterformoperaion
+msgid "Operation :"
+msgstr "Операция :"
+
+#: rxdconst.srxfilterformoperand
+msgid "Operand :"
+msgstr "Операнд :"
+
+#: rxdconst.srxfilterformselectexp
+msgid "Enter filter expression for data in table:"
+msgstr "Введите выражение фильтрации данных в таблице:"
+
+#: rxdconst.srxfindmore
+msgid "Find more"
+msgstr "Искать далее"
+
+#: rxdconst.srxselectdatasetstruct
+msgid "Select dataset to copy to"
+msgstr "Выберите таблицу для копирования"
+
+#: rxdconst.srxsortbyformaddfield
+msgid "&Add field"
+msgstr "&Добавить поле"
+
+#: rxdconst.srxsortbyformallfields
+msgid "&Fields in dataset:"
+msgstr "&Поля в таблице"
+
+#: rxdconst.srxsortbyformcaption
+msgid "Sort on field"
+msgstr "Сортировать по полям"
+
+#: rxdconst.srxsortbyformcaseinsens
+msgid "&Case insensitive sort"
+msgstr "&Сортировка без учёта регистра"
+
+#: rxdconst.srxsortbyformmovednfield
+msgid "&Down"
+msgstr "&Вниз"
+
+#: rxdconst.srxsortbyformmoveupfield
+msgid "&Up"
+msgstr "&Вверх"
+
+#: rxdconst.srxsortbyformremovefield
+msgid "&Remove"
+msgstr "&Убрать"
+
+#: rxdconst.srxsortbyformsortfields
+msgid "&Selected fields:"
+msgstr "&Выбранные поля"
+
+#: rxdconst.srxsortbyformsortorder
+msgid "Select f&ield for sort data:"
+msgstr "Укажите поля для сортировки данных :"
+
+#: rxdconst.srxsortfieldsdisplay
+msgid "Fields as SortField"
+msgstr "Поля для сортировки"
+
+#: rxdconst.srxsourcedataset
+msgid "Source dataset"
+msgstr "Искодный источник данных"
+
+#: rxdconst.sservererrorlabel
+msgid "Server error"
+msgstr "Ошибка сервера"
+
+#: rxdconst.ssetkeydata
+msgid "find"
+msgstr "поиск"
+
+#: rxdconst.ssetuptotalrow
+msgid "Setup total row"
+msgstr "Настроки итоговой строки"
+
+#: rxdconst.sshowcolumnheaderonallpage
+msgid "Show column header on all pages"
+msgstr "Отображать заголовки столбцов на всех страницах"
+
+#: rxdconst.sshowfooter
+msgid "Show footer"
+msgstr "Отображать итоги"
+
+#: rxdconst.sshowfootercolor
+msgid "Show footer color"
+msgstr "Отображать цвет итогов"
+
+#: rxdconst.sshowgridcolor
+msgid "Show grid color"
+msgstr "Отображать цвета таблицы"
+
+#: rxdconst.sshowreporttitle
+msgid "Show report title"
+msgstr "Отображать заголовок отчёта"
+
+#: rxdconst.sshowtitle
+msgid "Show column title"
+msgstr "Отображать заголовки столбцов"
+
+#: rxdconst.ssorting
+msgid "Sorting"
+msgstr "Сортировка"
+
+#: rxdconst.sstandartfilter
+msgid "Standart filter"
+msgstr "Стандартный фильтр"
+
+#: rxdconst.stitlecolor
+msgid "Title color"
+msgstr "Цвет заголовков"
+
+#: rxdconst.stoolsexportpdf
+msgid "Export to PDF file"
+msgstr "Экспорт в PDF файл"
+
+#: rxdconst.stoolsexportspeadsheet
+msgid "Export to speadsheet"
+msgstr "Экспорт в электронную таблицу"
+
+#: rxdconst.stopcaption
+msgid "Top"
+msgstr "Сверху"
+
+#: rxdconst.sunknownfieldtype
+msgid "SUnknownFieldType %s"
+msgstr "Не определён тип данных для поля %s"
+
+#: rxdconst.sunknownxmldatasetformat
+msgid "Unknown XML Dataset format"
+msgstr "Не известный формат XML данных"
+
+#: rxdconst.sunlockcaption
+msgid "Unlock"
+msgstr "Разблокировать"
+
+#: rxdconst.sunlockhint
+msgid "Enter your password"
+msgstr "Введите ваш пароль"
+
+#: rxdconst.suserawjpeg
+msgid "Use raw JPEG"
+msgstr "Использовать сырой JPEG"
+
+#: rxdconst.susernamelabel
+msgid "&User name:"
+msgstr "&Имя пользователя"
+

@@ -1,0 +1,312 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: rxconst.sabout
+msgid "About"
+msgstr "Про систему"
+
+#: rxconst.sappversion
+msgid "Version : "
+msgstr "Версія : "
+
+#: rxconst.savaliablebuttons
+msgid "Avaliable buttons"
+msgstr "Доступні кнопки"
+
+#: rxconst.sbrowse
+msgid "Browse"
+msgstr "Перегляд"
+
+#: rxconst.sbuilddate
+msgid "Build date : "
+msgstr "Збірка : "
+
+#: rxconst.sbuttonalign
+msgid "Button align"
+msgstr "Вирівнювання кнопок"
+
+#: rxconst.sbuttonalign1
+msgid "None"
+msgstr "Ні"
+
+#: rxconst.sbuttonalign2
+msgid "Left"
+msgstr "Ліворуч"
+
+#: rxconst.sbuttonalign3
+#, fuzzy
+#| msgid "Rignt"
+msgid "Right"
+msgstr "Праворуч"
+
+#: rxconst.sclose
+msgid "Close"
+msgstr ""
+
+#: rxconst.scloseaftersec
+msgid "Close after %d sec"
+msgstr ""
+
+#: rxconst.scloseallexceptthis
+msgid "Close all except this"
+msgstr "Закрити всі вікна, за виключенням цього"
+
+#: rxconst.scloseallwindows
+msgid "Close all windows"
+msgstr "Закрити всі вікна"
+
+#: rxconst.sclosemessagehint
+msgid "Close message"
+msgstr ""
+
+#: rxconst.sclosevaliderror
+#, fuzzy
+#| msgid "Error. Expected vailes..."
+msgid "Error. Expected values..."
+msgstr "Помилка. Очікується значеня..."
+
+#: rxconst.sclosewindows
+msgid "Close window"
+msgstr "Закрити вікно"
+
+#: rxconst.sdatedlgtitle
+msgid "Select a Date"
+msgstr "Выберіть дату"
+
+#: rxconst.sdefaultfilter
+msgid "All files (*.*)|*.*"
+msgstr "Всі файли (*.*)|*.*"
+
+#: rxconst.sdetails
+msgid "Details"
+msgstr "Детальніше"
+
+#: rxconst.sduallistcaption
+msgid "Dual list dialog"
+msgstr "Діалог з двома списками"
+
+#: rxconst.sduallistdestcaption
+msgid "Destination"
+msgstr "Призначення"
+
+#: rxconst.sduallistsrccaption
+msgid "Source"
+msgstr "Джерело"
+
+#: rxconst.serrorlinkedtaskpanel
+msgid "Not assigned task panel"
+msgstr ""
+
+#: rxconst.sexptcontrolnotfound
+msgid "Control not found in validate %s."
+msgstr "Елемент управління не знайдений в валідаторі %s"
+
+#: rxconst.sfilenotexec
+msgid "File specified is not an executable file, dynamic-link library, or icon file"
+msgstr "Вказаний файл не виконуваний, не бібліотека і не іконка"
+
+#: rxconst.sfirsthalfofyear
+msgid "First half of year"
+msgstr ""
+
+#: rxconst.sfirstquarter
+msgid "First quarter"
+msgstr ""
+
+#: rxconst.sflatbuttons
+msgid "Flat buttons"
+msgstr "Плаваючі кнопки"
+
+#: rxconst.sfolderlistererr
+msgid "%s. Not assigned property MenuItem"
+msgstr ""
+
+#: rxconst.sfourthquarter
+msgid "Fourth quarter"
+msgstr ""
+
+#: rxconst.sfpcversion
+msgid "FPC version : "
+msgstr "Версія FPC : "
+
+#: rxconst.sgeneral
+msgid "General"
+msgstr "Загальне"
+
+#: rxconst.shistorydesc
+msgid "History - \"%s\""
+msgstr "Історія - \"%s\""
+
+#: rxconst.slclversion
+msgid "LCL Version: "
+msgstr "Версія LCL : "
+
+#: rxconst.slicense
+msgid "License"
+msgstr "Ліцензія"
+
+#: rxconst.sloadliberror
+msgid "Could not load '%s' library"
+msgstr "Неможливо завантажити бібліотеку '%s'"
+
+#: rxconst.snextmonth
+msgid "Next Month|"
+msgstr "Слідуючий місяць|"
+
+#: rxconst.snextyear
+msgid "Next Year|"
+msgstr "Слідуючий рік|"
+
+#: rxconst.snotimplemented
+msgid "Function not yet implemented"
+msgstr "Функція не реалізована"
+
+#: rxconst.soptions
+msgid "Options"
+msgstr "Параметри"
+
+#: rxconst.soutofrange
+msgid "Out of range %d %d %d %d"
+msgstr ""
+
+#: rxconst.sprevmonth
+msgid "Previous Month|"
+msgstr "Попередній місяць|"
+
+#: rxconst.sprevyear
+msgid "Previous Year|"
+msgstr "Попередній місяць|"
+
+#: rxconst.sreqvalue
+#, fuzzy
+#| msgid "Error. Expected value for filed %s."
+msgid "Error. Expected value for field %s."
+msgstr "Поле %s. Вимагається значення"
+
+#: rxconst.srxstrholdertexteditor
+msgid "Rx string holder editor"
+msgstr ""
+
+#: rxconst.srxtextfolderitem
+msgid "Item "
+msgstr ""
+
+#: rxconst.srxtextholderadd
+msgid "Add"
+msgstr ""
+
+#: rxconst.srxtextholdereditor
+msgid "RxTextHolder editor"
+msgstr ""
+
+#: rxconst.srxtextholderremove
+msgid "Remove"
+msgstr ""
+
+#: rxconst.srxtextholdertextcaption
+msgid "Caption"
+msgstr ""
+
+#: rxconst.srxtextholdertexteditor
+msgid "Rx text holder editor"
+msgstr ""
+
+#: rxconst.ssecondhalfofyear
+msgid "Second half of year"
+msgstr ""
+
+#: rxconst.ssecondquarter
+msgid "Second quarter"
+msgstr ""
+
+#: rxconst.sshowcaption
+msgid "Show caption"
+msgstr "Показати заголовок"
+
+#: rxconst.sshowhint
+msgid "Show hint"
+msgstr "Показувати підказку"
+
+#: rxconst.stargetcpu
+msgid "Target CPU : "
+msgstr "Цільовий CPU : "
+
+#: rxconst.stargetos
+msgid "Target OS : "
+msgstr "Цільова OS : "
+
+#: rxconst.sthirdquarter
+msgid "Third quarter"
+msgstr ""
+
+#: rxconst.stocurdate
+msgid "Set current date"
+msgstr "Встановити поточну дату"
+
+#: rxconst.stoolbarstyle
+msgid "Tool bar style"
+msgstr "Стиль панелі інструментів "
+
+#: rxconst.stoolbarstyle1
+#, fuzzy
+#| msgid "Standart"
+msgid "Standard"
+msgstr "Стандартний"
+
+#: rxconst.stoolbarstyle2
+msgid "Windows XP"
+msgstr "Windows XP"
+
+#: rxconst.stoolbarstyle3
+msgid "Native"
+msgstr "З поточної теми"
+
+#: rxconst.stoolpanelsetup
+msgid "Tool panel setup"
+msgstr "Налаштування панелі інструментів"
+
+#: rxconst.stransparent
+msgid "Transparent"
+msgstr "Прозоро"
+
+#: rxconst.svariableisnotboolean
+msgid "Variable %s is not boolean"
+msgstr ""
+
+#: rxconst.svariableisnotdt
+msgid "Variable %s is not date/time"
+msgstr ""
+
+#: rxconst.svariableisnotfloat
+msgid "Variable %s is not float"
+msgstr ""
+
+#: rxconst.svariableisnotinteger
+msgid "Variable %s is not integer"
+msgstr ""
+
+#: rxconst.svariableisnotstring
+msgid "Variable %s is not string"
+msgstr ""
+
+#: rxconst.svisiblebuttons
+msgid "Visible buttons"
+msgstr "Видимі кнопки"
+
+#: rxconst.swidget
+msgid "Widget : "
+msgstr ""
+
+#: rxconst.swindowsicofiles
+msgid "Windows Ico files (*.ico)|*.ico|All files (*.*)|*.*"
+msgstr "Файли іконок Windows (*.ico)|*.ico|Всі файли (*.*)|*.*"
+

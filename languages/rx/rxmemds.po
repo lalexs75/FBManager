@@ -1,0 +1,11 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: rxmemds.sinvalidfields
+msgid "No fields defined"
+msgstr ""
+
+#: rxmemds.smemnorecords
+msgid "No data found"
+msgstr ""
+

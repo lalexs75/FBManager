@@ -1,0 +1,11 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: register_rxctrl.sloadicon
+msgid "Load icon"
+msgstr ""
+
+#: register_rxctrl.stesttrxlogindialog
+msgid "Test TRxLoginDialog"
+msgstr ""
+

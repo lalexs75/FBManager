@@ -1,0 +1,132 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: fbmisc.eaccessincorectblobcachemsg
+msgid "TBLOBList: access to unregistred BLOBCache cell"
+msgstr "TBLOBList: доступ к незарегистрированному элементу BLOBCache"
+
+#: fbmisc.efieldnotfoundinds
+msgid "Field %s not found in dataset %s"
+msgstr ""
+
+#: fbmisc.eindexnotfoundmsg
+#, fuzzy,badformat
+msgid "index %s cant be found"
+msgstr "индек % не найден"
+
+#: fbmisc.eprepareerrormsg
+msgid "Prepare %s.%s : %s %s"
+msgstr "Подготовка %s.%s : %s %s"
+
+#: fbmisc.ereferencedblobcacheloosemsg
+msgid "TBLOBCache:try to destroy used cache"
+msgstr "TBLOBCache: попытка уничтожения занятого кэша"
+
+#: fbmisc.ereferenceddatsetrecordbufferloosemsg
+msgid "try to free referenced DatSet record buffer"
+msgstr "Попытка уничтожения используемого буфера набора данных"
+
+#: fbmisc.ereferencedrecordbufferloosemsg
+msgid "try to free referenced record buffer"
+msgstr "Попытка уничтожения используемого буфера"
+
+#: fbmisc.esomeblobcacheloosedmsg
+msgid "Some BLOBCache cells loosed"
+msgstr "Некоторые элементы BLOBCache утеряны"
+
+#: fbmisc.eunsupportedcomparemsg
+msgid "sort/lookup on %s field type notsupported"
+msgstr "Сортировка/поиск по полю %s не поддерживается"
+
+#: fbmisc.sautoupdateoptions
+msgid "Auto update options"
+msgstr ""
+
+#: fbmisc.sbeforepost
+msgid "Before post"
+msgstr ""
+
+#: fbmisc.sfbeblobcannotbewritten
+msgid "Blob stream cannot be written."
+msgstr "Поток Blob не может быть записан"
+
+#: fbmisc.sfbecannotinsert
+msgid "Cannot Insert %s."
+msgstr "Не могу вставить %s."
+
+#: fbmisc.sfbecircularreference
+msgid "The cyclic reference a component is forbidden (%s)."
+msgstr "Циклические ссылки между компонентами запрещены (%s)"
+
+#: fbmisc.sfbedatabasenotassigned
+msgid "Database not assigned (%s)"
+msgstr "Не указана база данных (%s)"
+
+#: fbmisc.sfbeemptysqledit
+msgid "Empty edit SQL statament (%s)."
+msgstr "Пустой текст SQL запроса на изменение (%s)."
+
+#: fbmisc.sfbeerrorexecuteq
+msgid "Error execute query %s (%s)."
+msgstr ""
+
+#: fbmisc.sfbegetrecordinvalidrec
+msgid "GetRecord: Invalid record"
+msgstr ""
+
+#: fbmisc.sfbenotcachedupdates
+msgid "Not Cached Updates (%s)"
+msgstr ""
+
+#: fbmisc.sfbeothererror
+msgid "Other error"
+msgstr "Другая ошибка"
+
+#: fbmisc.sfbeparameternotfound
+msgid "Parameter not found (%s)"
+msgstr "Параемтр (%s) не найден"
+
+#: fbmisc.sfbetransactionnotassigned
+msgid "Transaction not assigned (%s)"
+msgstr "Не указана транзакция (%s)"
+
+#: fbmisc.sfbeuserabort
+msgid "User abort"
+msgstr "Прервано оператором"
+
+#: fbmisc.slccancel
+msgid "Cancel"
+msgstr ""
+
+#: fbmisc.slcgeneratorname
+msgid "Generator name"
+msgstr "Имя генератора"
+
+#: fbmisc.slchelp
+msgid "Help"
+msgstr "Помощь"
+
+#: fbmisc.slcincrementby
+msgid "Increment by"
+msgstr "Увеличить на"
+
+#: fbmisc.slcok
+msgid "OK"
+msgstr ""
+
+#: fbmisc.slcupdatedfield
+msgid "Updated field"
+msgstr "Изменяемое поле"
+
+#: fbmisc.snever
+msgid "Never"
+msgstr ""
+
+#: fbmisc.sonnewrecord
+msgid "On new record"
+msgstr ""
+
+#: fbmisc.supdateaction
+msgid "Update action"
+msgstr ""
+

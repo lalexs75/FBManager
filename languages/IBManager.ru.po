@@ -1,0 +1,5260 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"X-Generator: Poedit 2.2\n"
+
+#: fbmstrconstunit.aidentityfield
+msgid "IDENTITY field"
+msgstr "Поле IDENTITY"
+
+#: fbmstrconstunit.anoaction
+msgid "No action"
+msgstr "Ничего не делать"
+
+#: fbmstrconstunit.saborted
+msgid " - aborted"
+msgstr " - прервано"
+
+#: fbmstrconstunit.sabout
+msgctxt "fbmstrconstunit.sabout"
+msgid "About"
+msgstr "О программе"
+
+#: fbmstrconstunit.saccessmetod
+msgid "Access metod"
+msgstr "Метод оступа"
+
+#: fbmstrconstunit.sacledit
+msgid "ACL edit"
+msgstr "Редактор привилегий"
+
+#: fbmstrconstunit.sactivatealltriggers
+msgctxt "fbmstrconstunit.sactivatealltriggers"
+msgid "Activate all triggers"
+msgstr "Активировать все триггеры"
+
+#: fbmstrconstunit.sactivatetrigger
+msgctxt "fbmstrconstunit.sactivatetrigger"
+msgid "Activate trigger"
+msgstr "Активировать триггер"
+
+#: fbmstrconstunit.sactive
+msgctxt "fbmstrconstunit.sactive"
+msgid "Active"
+msgstr "Активен"
+
+#: fbmstrconstunit.sactiveusers
+msgid "Active users"
+msgstr "Активные пользователи"
+
+#: fbmstrconstunit.sactivitimonitor
+msgid "Activiti monitor"
+msgstr "Монитор активности"
+
+#: fbmstrconstunit.sadd
+msgid "Add"
+msgstr "Добавить"
+
+#: fbmstrconstunit.saddallfields
+msgid "Add all fields"
+msgstr "Добавить все поля"
+
+#: fbmstrconstunit.saddfield
+msgid "Add field"
+msgstr "Добавить поле"
+
+#: fbmstrconstunit.saddlocalvar
+msgctxt "fbmstrconstunit.saddlocalvar"
+msgid "Add local variable"
+msgstr "Добавить локальную переменную"
+
+#: fbmstrconstunit.saddparam
+msgctxt "fbmstrconstunit.saddparam"
+msgid "Add param"
+msgstr "Добавить параметр"
+
+#: fbmstrconstunit.saddtemplate
+msgid "Add template"
+msgstr "Добавить шаблон"
+
+#: fbmstrconstunit.sadduserhint
+msgid "Add user to server user list"
+msgstr "Добавить пользователя в список пользователей сервера"
+
+#: fbmstrconstunit.safter
+msgid "After"
+msgstr "После"
+
+#: fbmstrconstunit.safterdelete
+msgid "After delete"
+msgstr "После удаления"
+
+#: fbmstrconstunit.safterinsert
+msgid "After insert"
+msgstr "После вставки"
+
+#: fbmstrconstunit.safterupdate
+msgid "After update"
+msgstr "После обновления"
+
+#: fbmstrconstunit.salias
+msgid "Alias"
+msgstr "Псевдоним"
+
+#: fbmstrconstunit.saliasofdb
+msgctxt "fbmstrconstunit.saliasofdb"
+msgid "Alias of %s"
+msgstr "БД : %s"
+
+#: fbmstrconstunit.saliasofobj
+msgctxt "fbmstrconstunit.saliasofobj"
+msgid "Alias of %s"
+msgstr "Алис к %s"
+
+#: fbmstrconstunit.salloobjects
+msgid "All objects"
+msgstr "Все объекты"
+
+#: fbmstrconstunit.sallowmultiselect
+msgid "Allow multiselect"
+msgstr "Множественное выделение"
+
+#: fbmstrconstunit.salter
+msgid "Alter"
+msgstr "Изменить"
+
+#: fbmstrconstunit.salternatecolor
+msgid "Alternate color"
+msgstr "Нечетные строки"
+
+#: fbmstrconstunit.salterrroutine
+msgid "Alter routine"
+msgstr "Изменить процедуру"
+
+#: fbmstrconstunit.salwayscapitalizedbobjectsnames
+msgid "Always capitalize database objects names"
+msgstr "Всегда приводить имена объектов в верхнему регистру"
+
+#: fbmstrconstunit.salwaysshowglyph
+msgid "Always show glyph"
+msgstr "Всегда отображать картинку"
+
+#: fbmstrconstunit.sappendfunctionhint
+msgid "Create new nested function"
+msgstr "Создать вложенную функцию"
+
+#: fbmstrconstunit.sappendfunctionq
+msgid "Create new nested function?"
+msgstr "Создать вложенную функцию?"
+
+#: fbmstrconstunit.sapplicationname
+msgid "Application name"
+msgstr "Имя программы"
+
+#: fbmstrconstunit.sapply
+msgid "Apply"
+msgstr "Применить"
+
+#: fbmstrconstunit.sapplyscript
+msgid "Apply script"
+msgstr "Применить скрипт"
+
+#: fbmstrconstunit.sappversion
+msgctxt "fbmstrconstunit.sappversion"
+msgid "Version : "
+msgstr "Версия : "
+
+#: fbmstrconstunit.sarray
+msgid "Array"
+msgstr "Массив"
+
+#: fbmstrconstunit.sarraybound
+msgid "Array bound"
+msgstr "Границы массива"
+
+#: fbmstrconstunit.sascending
+msgid "Ascending"
+msgstr "По возрастанию"
+
+#: fbmstrconstunit.sasimage
+msgid "As image"
+msgstr "Как изображение"
+
+#: fbmstrconstunit.sastext
+msgid "As text"
+msgstr "Как текст"
+
+#: fbmstrconstunit.sattachmentdb
+msgid "Attachment DB"
+msgstr "Подключённая БД"
+
+#: fbmstrconstunit.sattachmentid
+msgid "Attachment ID"
+msgstr "ID подключения"
+
+#: fbmstrconstunit.sautograntoncompileobject
+msgid "Auto grant on compile object"
+msgstr "Автоматическая выдача привелегий при компиляции объектов"
+
+#: fbmstrconstunit.sautoincfield
+msgid "Auto increment field"
+msgstr "Поле autoincremet"
+
+#: fbmstrconstunit.sautoincremet
+msgid "Autoincremet"
+msgstr "Автоинкремент"
+
+#: fbmstrconstunit.sautovacuum
+msgid "Auto vacuum"
+msgstr "Авто очистка"
+
+#: fbmstrconstunit.savallabletags
+msgid "Avallable tags:"
+msgstr "Доступные тэги:"
+
+#: fbmstrconstunit.savglines
+msgctxt "fbmstrconstunit.savglines"
+msgid "AVG lines"
+msgstr "Среднее: записей"
+
+#: fbmstrconstunit.savgtime
+msgctxt "fbmstrconstunit.savgtime"
+msgid "AVG Time"
+msgstr "Среднее: время"
+
+#: fbmstrconstunit.sbackendstart
+msgid "Backend start"
+msgstr "Время запуска клиента"
+
+#: fbmstrconstunit.sbackground
+msgid "Background"
+msgstr "Фон"
+
+#: fbmstrconstunit.sbackup
+msgctxt "fbmstrconstunit.sbackup"
+msgid "Backup"
+msgstr "Архивация"
+
+#: fbmstrconstunit.sbackupoptions
+msgid "Backup options"
+msgstr "Параметры архивациии"
+
+#: fbmstrconstunit.sbackupsuccessfullyfinished
+msgid "Backup successfully finished"
+msgstr "Резервная копия успешно создана"
+
+#: fbmstrconstunit.sbackward
+msgid "&Backward"
+msgstr "&Назад"
+
+#: fbmstrconstunit.sbefore
+msgctxt "fbmstrconstunit.sbefore"
+msgid "Before"
+msgstr "До"
+
+#: fbmstrconstunit.sbeforedelete
+msgid "Before delete"
+msgstr "Перед удалением"
+
+#: fbmstrconstunit.sbeforeinsert
+msgid "Before insert"
+msgstr "Перед вставкой"
+
+#: fbmstrconstunit.sbeforeupdate
+msgid "Before update"
+msgstr "Перед обновлением"
+
+#: fbmstrconstunit.sblkreadtime
+msgid "Time spent reading data file blocks by backends in this database, in milliseconds"
+msgstr "Время, затраченное серверными процессами в этой базе данных, на чтение блоков из файлов данных, в миллисекундах"
+
+#: fbmstrconstunit.sblkshit
+msgid "Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system's file system cache)"
+msgstr "Сколько раз дисковые блоки обнаруживались в буферном кеше, так что чтение с диска не потребовалось (в значение входят только случаи обнаружения в буферном кеше Postgres Pro, а не в кеше файловой системы ОС)"
+
+#: fbmstrconstunit.sblkwritetime
+msgid "Time spent writing data file blocks by backends in this database, in milliseconds"
+msgstr "Время, затраченное серверными процессами в этой базе данных, на запись блоков в файлы данных, в миллисекундах"
+
+#: fbmstrconstunit.sbody
+msgid "Body"
+msgstr "Текст"
+
+#: fbmstrconstunit.sboth
+msgid "Both"
+msgstr "И то и другое"
+
+#: fbmstrconstunit.sbuffers
+msgid "Buffers"
+msgstr "Буфферов"
+
+#: fbmstrconstunit.sbugtrackerservname
+msgid "Shamangrad bugtracker service..."
+msgstr "Сервис сопровождения ошибок http://shamangrad.net..."
+
+#: fbmstrconstunit.sbuildconnectionstring
+msgctxt "fbmstrconstunit.sbuildconnectionstring"
+msgid "Build connection string"
+msgstr "Конструктор строки подключения"
+
+#: fbmstrconstunit.sbuilddate
+msgid "Build date : "
+msgstr "Дата сборки : "
+
+#: fbmstrconstunit.sbuilder
+msgid "Builder"
+msgstr "Построитель"
+
+#: fbmstrconstunit.sbuttonglyph
+msgid "Button glyph"
+msgstr "Картинки на кнопках"
+
+#: fbmstrconstunit.scache
+msgid "Cache"
+msgstr "Кэш"
+
+#: fbmstrconstunit.scachesize
+msgid "Cache size"
+msgstr "Размер кэша"
+
+#: fbmstrconstunit.scalculated
+msgid "Calculated"
+msgstr "Вычисляемое"
+
+#: fbmstrconstunit.scancelquery
+msgctxt "fbmstrconstunit.scancelquery"
+msgid "Cancel query"
+msgstr "Отменить запрос"
+
+#: fbmstrconstunit.scancelqueryquestion
+msgctxt "fbmstrconstunit.scancelqueryquestion"
+msgid "Cancel a running query?"
+msgstr "Отменить выбранный запрос?"
+
+#: fbmstrconstunit.scaption
+msgctxt "fbmstrconstunit.scaption"
+msgid "Caption"
+msgstr "Заголовок"
+
+#: fbmstrconstunit.scaretalwaysvisible
+msgid "Caret always visible"
+msgstr "Курсор всегда видимый"
+
+#: fbmstrconstunit.scasesensetive
+msgid "Case sensetive"
+msgstr "Регистронезависимый"
+
+#: fbmstrconstunit.scharset
+msgid "Char set"
+msgstr "Набор символов"
+
+#: fbmstrconstunit.scheck
+msgid "Check"
+msgstr "Проверка"
+
+#: fbmstrconstunit.scheckbody
+msgid "Check body"
+msgstr "Текст ограничения"
+
+#: fbmstrconstunit.scheckconstraint
+msgid "Check constraint"
+msgstr "Ограничение"
+
+#: fbmstrconstunit.scheckname
+msgid "Check name"
+msgstr "Название ограничения"
+
+#: fbmstrconstunit.sclear
+msgid "Clear"
+msgstr "Очистить"
+
+#: fbmstrconstunit.sclearcurrentquery
+msgid "Clear current query..."
+msgstr "Очистить текущий запрос..."
+
+#: fbmstrconstunit.sclientaddress
+msgid "Client address"
+msgstr "Адрес клиента"
+
+#: fbmstrconstunit.sclienthostname
+msgid "Client hostname"
+msgstr "Имя хоста клиента"
+
+#: fbmstrconstunit.sclientlib
+msgid "Client lib     = "
+msgstr "Клиентская библиотека = "
+
+#: fbmstrconstunit.sclientlibraryname
+msgid "Client library name"
+msgstr "Путь к клиентской библиотеке"
+
+#: fbmstrconstunit.sclientport
+msgid "Client port"
+msgstr "Порт клиента"
+
+#: fbmstrconstunit.scloseallexceptthis
+msgctxt "fbmstrconstunit.scloseallexceptthis"
+msgid "Close all except this"
+msgstr "Закыть все окна, исключая это"
+
+#: fbmstrconstunit.scloseallwindows
+msgctxt "fbmstrconstunit.scloseallwindows"
+msgid "Close all"
+msgstr "Закрыть всё"
+
+#: fbmstrconstunit.sclosewindows
+msgctxt "fbmstrconstunit.sclosewindows"
+msgid "Close"
+msgstr "Закрыть"
+
+#: fbmstrconstunit.scodeexploer
+msgctxt "fbmstrconstunit.scodeexploer"
+msgid "Code exploer"
+msgstr "Переработка кода"
+
+#: fbmstrconstunit.scodepage
+msgid "Codepage"
+msgstr "Кодовая страница"
+
+#: fbmstrconstunit.scollapseall
+msgid "Collapse all"
+msgstr "Свернуть всё"
+
+#: fbmstrconstunit.scollate
+msgid "Collate"
+msgstr "Сортировка"
+
+#: fbmstrconstunit.scollationlist
+msgid "Collation list"
+msgstr "Список сортировок"
+
+#: fbmstrconstunit.scollumnname
+msgid "Collumn name"
+msgstr "Наименование столбца"
+
+#: fbmstrconstunit.scollumns
+msgid "Collumns"
+msgstr "Столбцы"
+
+#: fbmstrconstunit.scolor
+msgid "Color"
+msgstr "Цвет"
+
+#: fbmstrconstunit.scomfbmstyle
+msgid "Use FBManager style /*$$FBMC$$*/"
+msgstr "Использовать стиль FBManager /*$$FBMC$$*/"
+
+#: fbmstrconstunit.scomibestyle
+msgid "Use IBExpert style /*$$IBEC$$*/"
+msgstr "Использовать стиль  IBExpert /*$$IBEC$$*/"
+
+#: fbmstrconstunit.scomment
+msgid "Comment"
+msgstr "Коментарий"
+
+#: fbmstrconstunit.scommentcmd
+msgid "Comment selection"
+msgstr "Комментировать выделенное"
+
+#: fbmstrconstunit.scommit
+msgid "Commit"
+msgstr "Подтвердить"
+
+#: fbmstrconstunit.scommitandclose
+msgid "Commit and close"
+msgstr "Подтвердить и закрыть"
+
+#: fbmstrconstunit.scommitandclosehint
+msgid "Commit and close transaction"
+msgstr "Подтвердить транзакцию и закрыть данные"
+
+#: fbmstrconstunit.scommithint
+msgid "Commit transaction"
+msgstr "Подтвердить транзакцию"
+
+#: fbmstrconstunit.scommittransactiononrefresh
+msgid "Commit transaction on refresh"
+msgstr "Перед обновлением подтверждать транзакцию"
+
+#: fbmstrconstunit.scommonquery
+msgid "Common query"
+msgstr "Общие запросы"
+
+#: fbmstrconstunit.scompatibility
+msgid "Compatibility"
+msgstr "Совместимость"
+
+#: fbmstrconstunit.scompile
+msgid "Compile"
+msgstr "Компилировать"
+
+#: fbmstrconstunit.scompileoptions
+msgid "Compile options"
+msgstr "Параметры компилятора"
+
+#: fbmstrconstunit.sconditionforpartialindex
+msgid "Condition for partial index"
+msgstr "Условия для составного индекса"
+
+#: fbmstrconstunit.sconditions
+msgid "Conditions"
+msgstr "Условия"
+
+#: fbmstrconstunit.sconfirm
+msgid "Confirm"
+msgstr "Подтверждение"
+
+#: fbmstrconstunit.sconfirmcompileobjectgrants
+msgid "Confirm compile object grants"
+msgstr "Подтверждение компиляции прав на объекты"
+
+#: fbmstrconstunit.sconfirmcompileobjectsdescription
+msgid "Confirm compile objects description"
+msgstr "Подтверждение компиляции описания объектов"
+
+#: fbmstrconstunit.sconfirmexit
+msgid "Confirm exit"
+msgstr "Подтверждение выхода из программы"
+
+#: fbmstrconstunit.sconfirmexitquestion
+msgid "You sure you exit the program?"
+msgstr "Вы действительно хотите выйти из программы?"
+
+#: fbmstrconstunit.sconfirmoptions
+msgid "Confirmation"
+msgstr "Подтверждение"
+
+#: fbmstrconstunit.sconfirmpassword
+msgctxt "fbmstrconstunit.sconfirmpassword"
+msgid "Confirm password"
+msgstr "Подтверждение пароля"
+
+#: fbmstrconstunit.sconflicts
+msgid "Number of queries canceled due to conflicts with recovery in this database. (Conflicts occur only on standby servers; see pg_stat_database_conflicts for details.)"
+msgstr "Количество запросов, отменённых из-за конфликта с восстановлением в этой базе данных. (Конфликты происходят только на резервных серверах; более подробно смотрите pg_stat_database_conflicts.)"
+
+#: fbmstrconstunit.sconnect
+msgctxt "fbmstrconstunit.sconnect"
+msgid "Connect"
+msgstr "Подключиться"
+
+#: fbmstrconstunit.sconnectionlimit
+msgid "Connection limit"
+msgstr "Лимит подключений"
+
+#: fbmstrconstunit.sconnectionparams
+msgid "Connection params"
+msgstr "Параметры подключения"
+
+#: fbmstrconstunit.sconnections
+msgid "Connections"
+msgstr "Подключение"
+
+#: fbmstrconstunit.sconnectionstring
+msgctxt "fbmstrconstunit.sconnectionstring"
+msgid "Connection string"
+msgstr "Строка подключения"
+
+#: fbmstrconstunit.sconnectionstringcopied
+msgid "Connection string has been successfully copied to clipboard."
+msgstr "Строка подключения скопирована в буфер обмена."
+
+#: fbmstrconstunit.sconstraintdelete
+msgctxt "fbmstrconstunit.sconstraintdelete"
+msgid "Delete constraint"
+msgstr "Удалить ограничение"
+
+#: fbmstrconstunit.sconstraintedit
+msgctxt "fbmstrconstunit.sconstraintedit"
+msgid "Edit constraint"
+msgstr "Изменить ограничение"
+
+#: fbmstrconstunit.sconstraintname
+msgid "Constraint name"
+msgstr "Наименование ограничения"
+
+#: fbmstrconstunit.sconstraintnew
+msgctxt "fbmstrconstunit.sconstraintnew"
+msgid "New constraint"
+msgstr "Новое ограничение"
+
+#: fbmstrconstunit.sconvertexttables
+msgctxt "fbmstrconstunit.sconvertexttables"
+msgid "Convert Ext Tables"
+msgstr "Конвертировать внешние таблицы"
+
+#: fbmstrconstunit.scopy
+msgctxt "fbmstrconstunit.scopy"
+msgid "Copy"
+msgstr "Копировать"
+
+#: fbmstrconstunit.scopyallstatementtoclip
+msgctxt "fbmstrconstunit.scopyallstatementtoclip"
+msgid "Copy all statement to clipboard"
+msgstr "Копировать все запросы в буфер обмена"
+
+#: fbmstrconstunit.scopyallstatementtocliphint
+msgctxt "fbmstrconstunit.scopyallstatementtocliphint"
+msgid "Copy all statement to clipboard"
+msgstr "Копировать все запросы в буфер обмена"
+
+#: fbmstrconstunit.scopycellvalue
+msgid "Copy cell value"
+msgstr "Копировать значения ячейки"
+
+#: fbmstrconstunit.scopycollumnfieldtitle
+msgid "Copy collumn field title"
+msgstr "Копировать имя поля колонки"
+
+#: fbmstrconstunit.scopyconnectionstring
+msgid "Copy connection string"
+msgstr "Копировать строку подключения"
+
+#: fbmstrconstunit.scopyfield
+msgid "Copy field..."
+msgstr "Копировать поле..."
+
+#: fbmstrconstunit.scopyfieldname
+msgid "Copy field name"
+msgstr "Копировать имя поля"
+
+#: fbmstrconstunit.scopylisttoclipboard
+msgid "Copy list to clipboard"
+msgstr "Копировать список в буффер обмена"
+
+#: fbmstrconstunit.scopylisttoclipboardhint
+msgid "Copy of objects list to clipboard"
+msgstr "Копировать список найденных объектов в буффер обмена"
+
+#: fbmstrconstunit.scopyof
+msgid "Copy of : "
+msgstr "Копия из : "
+
+#: fbmstrconstunit.scopyrolenametoclipboard
+msgid "Copy role name to clipboard"
+msgstr "Копировать имя роли в буффер обмена"
+
+#: fbmstrconstunit.scopyselectedrecordasinsert
+msgid "Copy selected record(s) as INSERT"
+msgstr "Копировать записи как INSERT скрипт"
+
+#: fbmstrconstunit.scopyselectedrecordasupdate
+msgid "Copy selected record(s) as UPDATE"
+msgstr "Копировать записи как UPDATE скрипт"
+
+#: fbmstrconstunit.scopytoclipboard
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+#: fbmstrconstunit.scopytoclipboardhint
+msgid "Copy current statement to clipboard"
+msgstr "Копировать текущий запрос в буфер обмена"
+
+#: fbmstrconstunit.scountrowtofetch
+msgid "Count row to fetch"
+msgstr "Кол-во записей выбрать"
+
+#: fbmstrconstunit.scountsqleditorhistoryrecords
+msgid "Count SQL Editor history records"
+msgstr "Кол-во элементов в истории SQL запросов"
+
+#: fbmstrconstunit.screate
+msgid "Create"
+msgstr "Создать"
+
+#: fbmstrconstunit.screatedb
+msgid "Create "
+msgstr "Создать "
+
+#: fbmstrconstunit.screatedeleteprocedure
+msgid "Create DELETE procedure"
+msgstr "Создать DELETE процедуру"
+
+#: fbmstrconstunit.screateindex
+msgid "Create index"
+msgstr "Создать индекс"
+
+#: fbmstrconstunit.screateindexaftercreatefk
+msgid "Create index after create FK"
+msgstr "Создать индекс после создания внешнего ключа (Foreign key)"
+
+#: fbmstrconstunit.screateinsertorupdateprocedure
+msgid "Create INSERT/UPDATE procedure"
+msgstr "Создать INSERT/UPDATE процедуру"
+
+#: fbmstrconstunit.screateinsertprocedure
+msgid "Create INSERT procedure"
+msgstr "Создать INSERT процедуру"
+
+#: fbmstrconstunit.screatemysqldatabase
+msgid "Create MySQL database..."
+msgstr "Создать базу данных MySQL сервера"
+
+#: fbmstrconstunit.screatenewdb
+msgctxt "fbmstrconstunit.screatenewdb"
+msgid "Create New DB"
+msgstr "Создать новую БД"
+
+#: fbmstrconstunit.screatenewfoldertext
+msgid "Enter DB folder name"
+msgstr "Укажите имя папки"
+
+#: fbmstrconstunit.screatenewfoldertitle
+msgid "Create DB folder"
+msgstr "Создать папку для БД"
+
+#: fbmstrconstunit.screatenewfunction
+msgid "Create new function"
+msgstr "Создать новую функцию"
+
+#: fbmstrconstunit.screatenewgenerator
+msgid "Create new generator"
+msgstr "Создать новый генератор"
+
+#: fbmstrconstunit.screatenewprocedure
+msgid "Create new procedure"
+msgstr "Создать новую процедуру"
+
+#: fbmstrconstunit.screateparams
+msgid "Create params"
+msgstr "Параметры создания"
+
+#: fbmstrconstunit.screatepostgredatabase
+msgid "Create postgre database..."
+msgstr "Создать базу данных PostgreSQL сервера"
+
+#: fbmstrconstunit.screateroutine
+msgid "Create routine"
+msgstr "Создать процедуру"
+
+#: fbmstrconstunit.screateselectprocedure
+msgid "Create SELECT procedure"
+msgstr "Создать SELECT процедуру"
+
+#: fbmstrconstunit.screateshadow
+msgid "Create shadow?"
+msgstr "Создать теневой файл?"
+
+#: fbmstrconstunit.screatesp
+msgid "Create SP"
+msgstr "Создать хранимую процедуру"
+
+#: fbmstrconstunit.screatesphint
+msgid "Create stored procedure from current query"
+msgstr "Создать хранимую процедуру из текущего запроса"
+
+#: fbmstrconstunit.screatetablespace
+msgid "Create tablespace"
+msgstr "Создать табличное пространство"
+
+#: fbmstrconstunit.screatetmptable
+msgid "Create temp. tables"
+msgstr "Создать временную таблицу"
+
+#: fbmstrconstunit.screatetriggerforautoinc
+msgid "Create trigger for AUTOINC"
+msgstr "Создать триггер для AUTOINC"
+
+#: fbmstrconstunit.screateupdateprocedure
+msgid "Create UPDATE procedure"
+msgstr "Создать UPDATE процедуру"
+
+#: fbmstrconstunit.screateuser
+msgid "Create user"
+msgstr "Создать пользователя"
+
+#: fbmstrconstunit.screateview
+msgid "Create view"
+msgstr "Создать представление"
+
+#: fbmstrconstunit.screateviewhint
+msgid "Create new view from current select"
+msgstr "Создать представление из текущего запроса"
+
+#: fbmstrconstunit.scriteria
+msgid "Criteria"
+msgstr "Критерий"
+
+#: fbmstrconstunit.sctype
+msgid "CType"
+msgstr ""
+
+#: fbmstrconstunit.scustomtype
+msgid "Custom type"
+msgstr "Настроить тип"
+
+#: fbmstrconstunit.scut
+msgid "Cut"
+msgstr "Вырезать"
+
+#: fbmstrconstunit.sdashboard
+msgid "Dashboard"
+msgstr "Сводная информация"
+
+#: fbmstrconstunit.sdata
+msgctxt "fbmstrconstunit.sdata"
+msgid "Data"
+msgstr "Данные"
+
+#: fbmstrconstunit.sdatabase
+msgid "Database"
+msgstr "База данных"
+
+#: fbmstrconstunit.sdatabasealias
+msgid "Database alias"
+msgstr "Псевдоним базы данных"
+
+#: fbmstrconstunit.sdatabasedialect
+msgid "Database dialect"
+msgstr "Диалект базы данных"
+
+#: fbmstrconstunit.sdatabasefile
+msgid "Database file"
+msgstr "Файл базы данных"
+
+#: fbmstrconstunit.sdatabaseid
+msgid "Database ID"
+msgstr "ID базы данных"
+
+#: fbmstrconstunit.sdatabaselist
+msgid "Database list"
+msgstr "Список баз данных"
+
+#: fbmstrconstunit.sdatabasename
+msgctxt "fbmstrconstunit.sdatabasename"
+msgid "Database name"
+msgstr "Имя базы данных : "
+
+#: fbmstrconstunit.sdatabasenumbackends
+msgid "Database backends"
+msgstr "Количество серверных процессов, в настоящее время подключённых к этой базе данных"
+
+#: fbmstrconstunit.sdatabaseobjecttemplates
+msgid "Database object templates"
+msgstr "Шаблоны объектов базы данных"
+
+#: fbmstrconstunit.sdatabaseoncurrentserver
+msgctxt "fbmstrconstunit.sdatabaseoncurrentserver"
+msgid "Database on current server"
+msgstr "БД на текущем сервере"
+
+#: fbmstrconstunit.sdatabasepagesize
+msgid "Database page size"
+msgstr "Размер страницы базы данных"
+
+#: fbmstrconstunit.sdatabaseproperty
+msgid "Database property"
+msgstr "Свойства базы данных"
+
+#: fbmstrconstunit.sdatabasesessions
+msgid "Database sessions"
+msgstr "Подключения к БД"
+
+#: fbmstrconstunit.sdatablocksread
+msgid "Data blocks read from disk"
+msgstr "Количество прочитанных дисковых блоков"
+
+#: fbmstrconstunit.sdatatype
+msgid "Data type"
+msgstr "Тип данных"
+
+#: fbmstrconstunit.sdataversion
+msgid "Data version"
+msgstr "Версия данных"
+
+#: fbmstrconstunit.sdate
+msgid "Date"
+msgstr "Дата"
+
+#: fbmstrconstunit.sdatecreated
+msgctxt "fbmstrconstunit.sdatecreated"
+msgid "Date created"
+msgstr "Дата создания"
+
+#: fbmstrconstunit.sdatefinish
+msgctxt "fbmstrconstunit.sdatefinish"
+msgid "Date finish"
+msgstr "Дата завершения"
+
+#: fbmstrconstunit.sdatemodified
+msgctxt "fbmstrconstunit.sdatemodified"
+msgid "Date modified"
+msgstr "Дата изменения"
+
+#: fbmstrconstunit.sdateseparator
+msgid "Date separator"
+msgstr "Разделитель даты"
+
+#: fbmstrconstunit.sdatestart
+msgctxt "fbmstrconstunit.sdatestart"
+msgid "Date start"
+msgstr "Дата начала"
+
+#: fbmstrconstunit.sdayofmonth
+msgctxt "fbmstrconstunit.sdayofmonth"
+msgid "Day of month"
+msgstr "День месяца"
+
+#: fbmstrconstunit.sdayofweek
+msgctxt "fbmstrconstunit.sdayofweek"
+msgid "Day of week"
+msgstr "День недели"
+
+#: fbmstrconstunit.sdays
+msgctxt "fbmstrconstunit.sdays"
+msgid "Days"
+msgstr "Дни"
+
+#: fbmstrconstunit.sdbcharset
+msgid "DB Char Set    = "
+msgstr "Набор символов БД = "
+
+#: fbmstrconstunit.sdbffilesfolder
+msgid "Dbf files folder"
+msgstr "Папка с DBF файлами"
+
+#: fbmstrconstunit.sdbfilesize
+msgid "DB file size   = "
+msgstr "Размер файла BD = "
+
+#: fbmstrconstunit.sdbname
+msgid "Data base name = "
+msgstr "Имя базы данных = "
+
+#: fbmstrconstunit.sdbnavhintcancel
+msgctxt "fbmstrconstunit.sdbnavhintcancel"
+msgid "Cancel"
+msgstr "Отмена"
+
+#: fbmstrconstunit.sdbnavhintdelete
+msgctxt "fbmstrconstunit.sdbnavhintdelete"
+msgid "Delete"
+msgstr "Удалить"
+
+#: fbmstrconstunit.sdbnavhintedit
+msgctxt "fbmstrconstunit.sdbnavhintedit"
+msgid "Edit"
+msgstr "Изменить данные"
+
+#: fbmstrconstunit.sdbnavhintfirst
+msgid "First"
+msgstr "Первая запись"
+
+#: fbmstrconstunit.sdbnavhintinsert
+msgctxt "fbmstrconstunit.sdbnavhintinsert"
+msgid "Insert"
+msgstr "Добавить запись"
+
+#: fbmstrconstunit.sdbnavhintlast
+msgid "Last"
+msgstr "Последняя запись"
+
+#: fbmstrconstunit.sdbnavhintnext
+msgctxt "fbmstrconstunit.sdbnavhintnext"
+msgid "Next"
+msgstr "Следующая записб"
+
+#: fbmstrconstunit.sdbnavhintpost
+msgid "Post"
+msgstr "Сохранить изменения"
+
+#: fbmstrconstunit.sdbnavhintprior
+msgid "Prior"
+msgstr "Превыдущая запись"
+
+#: fbmstrconstunit.sdbnavhintrefresh
+msgctxt "fbmstrconstunit.sdbnavhintrefresh"
+msgid "Refresh"
+msgstr "Обновить данные"
+
+#: fbmstrconstunit.sdeactivatealltrigger
+msgctxt "fbmstrconstunit.sdeactivatealltrigger"
+msgid "Deactivate all trigger"
+msgstr "Деактивировать все триггеры"
+
+#: fbmstrconstunit.sdeactivateindexes
+msgid "Deactivate Indexes"
+msgstr "Деактивировать индексы"
+
+#: fbmstrconstunit.sdeactivatetrigger
+msgctxt "fbmstrconstunit.sdeactivatetrigger"
+msgid "Deactivate trigger"
+msgstr "Деактивировать триггер"
+
+#: fbmstrconstunit.sdeadlocks
+msgid "Number of deadlocks detected in this database"
+msgstr "Количество взаимных блокировок, зафиксированное в этой базе данных"
+
+#: fbmstrconstunit.sdeclaration
+msgctxt "fbmstrconstunit.sdeclaration"
+msgid "Declaration"
+msgstr "Объявление"
+
+#: fbmstrconstunit.sdefault
+msgid "Default"
+msgstr "По умолчанию"
+
+#: fbmstrconstunit.sdefaultcachesize
+msgid "Default cache size"
+msgstr "Размер кэша по умолчанию"
+
+#: fbmstrconstunit.sdefaultcharacterset
+msgid "Default character set"
+msgstr "Кодировка по умолчанию"
+
+#: fbmstrconstunit.sdefaultpassword
+msgid "Default password"
+msgstr "Пароль по умолчанию"
+
+#: fbmstrconstunit.sdefaultqueryset
+msgid "< Default query set >"
+msgstr "< Запросы по умолчанию >"
+
+#: fbmstrconstunit.sdefaultserverversion
+msgid "Default server version"
+msgstr "Версия сервера по умолчанию"
+
+#: fbmstrconstunit.sdefaultusername
+msgid "Default user name"
+msgstr "Имя пользователя по умолчанию"
+
+#: fbmstrconstunit.sdefaultvalue
+msgid "Default value"
+msgstr "Значение по умолчанию"
+
+#: fbmstrconstunit.sdefineinoutparam
+msgid "Define In/Out param"
+msgstr "Определить In/Out параметр"
+
+#: fbmstrconstunit.sdefineinparam
+msgid "Define input param"
+msgstr "Определить In параметр"
+
+#: fbmstrconstunit.sdefineoutparam
+msgid "Define output param"
+msgstr "Определить Out параметр"
+
+#: fbmstrconstunit.sdefiner
+msgid "Definer"
+msgstr "Определитель"
+
+#: fbmstrconstunit.sdefinevariable
+msgid "Define variable"
+msgstr "Определить переменную"
+
+#: fbmstrconstunit.sdelbfolder
+msgid "Delete DB folder"
+msgstr "Удалить папку"
+
+#: fbmstrconstunit.sdelete
+msgctxt "fbmstrconstunit.sdelete"
+msgid "Delete"
+msgstr "Удалить"
+
+#: fbmstrconstunit.sdeleteall
+msgid "Delete all"
+msgstr "Удалить всё"
+
+#: fbmstrconstunit.sdeletecheckqst
+msgid "Delete this check constraint?"
+msgstr "Удалить это ограничение?"
+
+#: fbmstrconstunit.sdeletecmd
+msgid "Remove selection"
+msgstr "Удалить выделенное"
+
+#: fbmstrconstunit.sdeletecolor
+msgid "DELETE color"
+msgstr "Цвет DELETE"
+
+#: fbmstrconstunit.sdeletedbfolder
+msgid "Delete this folder?"
+msgstr "Удалить эту папку?"
+
+#: fbmstrconstunit.sdeletedrowsinfo
+msgid "Deleted rows : %d"
+msgstr "Удалено строк : %d"
+
+#: fbmstrconstunit.sdeletefield
+msgid "Delete field \"%s\"?"
+msgstr "Удалить поле \"%s\"?"
+
+#: fbmstrconstunit.sdeletefunctionhint
+msgid "Delete nested function"
+msgstr "Удалить вложенную функцию"
+
+#: fbmstrconstunit.sdeletefunctionq
+msgctxt "fbmstrconstunit.sdeletefunctionq"
+msgid "Delete function \"%s\"?"
+msgstr "Удалить функцию \"%s\"?"
+
+#: fbmstrconstunit.sdeleteindex
+msgid "Delete index"
+msgstr "Удалить индекс"
+
+#: fbmstrconstunit.sdeletelocalvar
+msgctxt "fbmstrconstunit.sdeletelocalvar"
+msgid "Delete local variable"
+msgstr "Удалить локальную переменную"
+
+#: fbmstrconstunit.sdeletelocalvarquest
+msgid "Delete local variable %s?"
+msgstr "Удалить локальную переменную %s?"
+
+#: fbmstrconstunit.sdeleteparam
+msgctxt "fbmstrconstunit.sdeleteparam"
+msgid "Delete param"
+msgstr "Удалить параметр"
+
+#: fbmstrconstunit.sdeleteparamqst
+msgid "Delete this parametr?"
+msgstr "Удалить этот параметр?"
+
+#: fbmstrconstunit.sdeletequery
+msgid "Delete wthis query?"
+msgstr "Удалить этот запрос?"
+
+#: fbmstrconstunit.sdeletequeryset
+msgid "Delete wthis query set an it's query's?"
+msgstr "Удалить этот набор и все подчинённые запросы?"
+
+#: fbmstrconstunit.sdeleterole
+msgid "Delete role"
+msgstr "Удалить роль"
+
+#: fbmstrconstunit.sdeleterows
+msgid "Delete rows"
+msgstr "Удалить строки"
+
+#: fbmstrconstunit.sdeleterule
+msgctxt "fbmstrconstunit.sdeleterule"
+msgid "Delete rule"
+msgstr "Правило удаления"
+
+#: fbmstrconstunit.sdeletestatement
+msgid "Delete statement"
+msgstr "Удалить запрос"
+
+#: fbmstrconstunit.sdeletestatementhint
+msgid "Delete current statement"
+msgstr "Удалить текущий запрос"
+
+#: fbmstrconstunit.sdeletetable
+msgid "Delete table"
+msgstr "Удалить таблицу"
+
+#: fbmstrconstunit.sdeletetemplate
+msgid "Delete template"
+msgstr "Удалить шаблон"
+
+#: fbmstrconstunit.sdeletetemplateq
+msgid "Delete template?"
+msgstr "Удалить шаблон?"
+
+#: fbmstrconstunit.sdeletetrigger
+msgctxt "fbmstrconstunit.sdeletetrigger"
+msgid "Delete trigger"
+msgstr "Удалить триггер"
+
+#: fbmstrconstunit.sdeleteuserfromserveruserlist
+msgid "Delete user from server user list"
+msgstr "Удалить пользователя из списка"
+
+#: fbmstrconstunit.sdeluserconfirm
+msgid "Are you sure thet want to delete user %s?"
+msgstr "Вы уверены в удалении оператора %s?"
+
+#: fbmstrconstunit.sdependcaption1
+msgid "Objects, that depend on %s"
+msgstr "Объекты, от которых зависит %s"
+
+#: fbmstrconstunit.sdependcaption2
+msgid "Objects, that %s depends on"
+msgstr "Объекты, зависящие от %s"
+
+#: fbmstrconstunit.sdependencies
+msgid "Dependencies"
+msgstr "Зависимости"
+
+#: fbmstrconstunit.sdescending
+msgctxt "fbmstrconstunit.sdescending"
+msgid "Descending"
+msgstr "Обратный порядок"
+
+#: fbmstrconstunit.sdescription
+msgctxt "fbmstrconstunit.sdescription"
+msgid "Description"
+msgstr "Описание"
+
+#: fbmstrconstunit.sdescriptionchange
+msgid "Description change"
+msgstr "Описание изменено"
+
+#: fbmstrconstunit.sdescriptionchangeq
+msgid "Description change. Save it?"
+msgstr "Описание изменено. Сохранить его?"
+
+#: fbmstrconstunit.sdesc_new
+msgctxt "fbmstrconstunit.sdesc_new"
+msgid "Variable holding the new database row for INSERT/UPDATE operations in row-level triggers. This variable is NULL in statement-level triggers and for DELETE operations."
+msgstr "Переменная содержит новую строку в таблице базы данных для операций INSERT/UPDATE в тригерах уровня строк. В этой переменной будет NULL для операций DELETE и тригеров уровня statement-level."
+
+#: fbmstrconstunit.sdesc_old
+msgctxt "fbmstrconstunit.sdesc_old"
+msgid "Variable holding the old database row for UPDATE/DELETE operations in row-level triggers. This variable is NULL in statement-level triggers and for INSERT operations."
+msgstr "Переменная содержит старую строку в таблице базы данных для операций INSERT/UPDATE в тригерах уровня строк. В этой переменной будет NULL для операций INSERT и тригеров уровня statement-level."
+
+#: fbmstrconstunit.sdesc_tg_argv
+msgctxt "fbmstrconstunit.sdesc_tg_argv"
+msgid "The arguments from the CREATE TRIGGER statement. The index counts from 0. Invalid indexes (less than 0 or greater than or equal to tg_nargs) result in a null value."
+msgstr "Аргументы от оператора CREATE TRIGGER. Индекс массива начинается с 0. Для недопустимых значений индекса ( < 0 или >= tg_nargs) возвращается NULL."
+
+#: fbmstrconstunit.sdesc_tg_event
+msgid "A string representing the event the trigger is fired for."
+msgstr "Строка, содержащая событие, по которому сработал триггер."
+
+#: fbmstrconstunit.sdesc_tg_level
+msgctxt "fbmstrconstunit.sdesc_tg_level"
+msgid "A string of either ROW or STATEMENT depending on the trigger's definition."
+msgstr "Тип данных text. Строка, содержащая ROW или STATEMENT, в зависимости от определения триггера."
+
+#: fbmstrconstunit.sdesc_tg_name
+msgctxt "fbmstrconstunit.sdesc_tg_name"
+msgid "Variable that contains the name of the trigger actually fired."
+msgstr "Переменная содержит имя триггера, сработавшего в данный момент."
+
+#: fbmstrconstunit.sdesc_tg_nargs
+msgctxt "fbmstrconstunit.sdesc_tg_nargs"
+msgid "The number of arguments given to the trigger procedure in the CREATE TRIGGER statement."
+msgstr "Число аргументов в команде CREATE TRIGGER, которые передаются в триггерную процедуру."
+
+#: fbmstrconstunit.sdesc_tg_op
+msgctxt "fbmstrconstunit.sdesc_tg_op"
+msgid "A string of INSERT, UPDATE, DELETE, or TRUNCATE telling for which operation the trigger was fired."
+msgstr "Переменная содержит строку INSERT, UPDATE, DELETE, or TRUNCATE, которая объясняет текущий тип тригера."
+
+#: fbmstrconstunit.sdesc_tg_relid
+msgctxt "fbmstrconstunit.sdesc_tg_relid"
+msgid "The object ID of the table that caused the trigger invocation."
+msgstr "OID таблицы, для которой сработал триггер."
+
+#: fbmstrconstunit.sdesc_tg_relname
+msgctxt "fbmstrconstunit.sdesc_tg_relname"
+msgid "The name of the table that caused the trigger invocation. This is now deprecated, and could disappear in a future release. Use TG_TABLE_NAME instead."
+msgstr "Имя таблицы, для которой сработал триггер. Эта переменная устарела и может стать недоступной в будущих релизах. Вместо неё нужно использовать TG_TABLE_NAME."
+
+#: fbmstrconstunit.sdesc_tg_table_name
+msgctxt "fbmstrconstunit.sdesc_tg_table_name"
+msgid "The name of the table that caused the trigger invocation."
+msgstr "Имя таблицы, для которой сработал триггер."
+
+#: fbmstrconstunit.sdesc_tg_table_schema
+msgctxt "fbmstrconstunit.sdesc_tg_table_schema"
+msgid "The name of the schema of the table that caused the trigger invocation."
+msgstr "Имя схемы, содержащей таблицу, для которой сработал триггер."
+
+#: fbmstrconstunit.sdesc_tg_tag
+msgid "Variable that contains the command tag for which the trigger is fired."
+msgstr "Переменная, содержащая тег команды, для которой сработал триггер."
+
+#: fbmstrconstunit.sdesc_tg_when
+msgctxt "fbmstrconstunit.sdesc_tg_when"
+msgid "A string of BEFORE, AFTER, or INSTEAD OF, depending on the trigger's definition."
+msgstr "Строка, содержащая BEFORE, AFTER или INSTEAD OF, в зависимости от определения триггера."
+
+#: fbmstrconstunit.sdesignreport
+msgid "Design report"
+msgstr "Редактировать отчёт"
+
+#: fbmstrconstunit.sdeterministic
+msgid "Deterministic"
+msgstr "Детерминированная"
+
+#: fbmstrconstunit.sdialect
+msgid "Dialect        = "
+msgstr "Диалект = "
+
+#: fbmstrconstunit.sdialog
+msgid "Dialog"
+msgstr "Диалог"
+
+#: fbmstrconstunit.sdisableantialiased
+msgid "Disable antialiased"
+msgstr "Запретить антиалиасинг"
+
+#: fbmstrconstunit.sdisableresize
+msgid "Disable resize"
+msgstr "Запретить изменение размера"
+
+#: fbmstrconstunit.sdisconectconnection
+msgid "Disconect connection"
+msgstr "Отключить клиента"
+
+#: fbmstrconstunit.sdisplay
+msgid "Display"
+msgstr "Отображение"
+
+#: fbmstrconstunit.sdisplayfont
+msgid "Display font"
+msgstr "Шрифт для отображения"
+
+#: fbmstrconstunit.sdisplaymemovaluesastext
+msgid "Display memo values as text"
+msgstr "Отображать значения полей MEMO"
+
+#: fbmstrconstunit.sdisplaytabledataproperties
+msgid "Display data properties"
+msgstr "Параметры отображения данных"
+
+#: fbmstrconstunit.sdomain
+msgctxt "fbmstrconstunit.sdomain"
+msgid "Domain"
+msgstr "Домен"
+
+#: fbmstrconstunit.sdomainname
+msgctxt "fbmstrconstunit.sdomainname"
+msgid "Domain name"
+msgstr "Имя домена"
+
+#: fbmstrconstunit.sdomains
+msgctxt "fbmstrconstunit.sdomains"
+msgid "Domains"
+msgstr "Домены"
+
+#: fbmstrconstunit.sdontlockoncreation
+msgid "Dont lock on creation"
+msgstr "Не блокировать при создании"
+
+#: fbmstrconstunit.sdrop
+msgid "Drop "
+msgstr "Удалить "
+
+#: fbmstrconstunit.sdropfield
+msgid "Drop field"
+msgstr "Удалить поле"
+
+#: fbmstrconstunit.sdropforeignkey
+msgctxt "fbmstrconstunit.sdropforeignkey"
+msgid "Drop foreign key"
+msgstr "Удалить внешний ключ"
+
+#: fbmstrconstunit.sdropobject
+msgid "Drop object"
+msgstr "Удалить объект"
+
+#: fbmstrconstunit.sdropprimarykey
+msgid "Drop primary key"
+msgstr "Удалить первичный ключ"
+
+#: fbmstrconstunit.sdropprimarykeyhint
+msgid "Drop primary key for table"
+msgstr "Удалить первичный ключ для таблицы"
+
+#: fbmstrconstunit.sdropshadow
+msgid "Drop shadow?"
+msgstr "Удалить теневой файл?"
+
+#: fbmstrconstunit.sdroptable
+msgid "Drop table"
+msgstr "Удалить таблицу"
+
+#: fbmstrconstunit.sdropuniqueconstraint
+msgid "Drop unique constraint"
+msgstr "Удалить условие уникальности"
+
+#: fbmstrconstunit.sduplicateindexname
+msgid "Duplicate index name"
+msgstr "Индекс с таким именем уже существует"
+
+#: fbmstrconstunit.sduration
+msgctxt "fbmstrconstunit.sduration"
+msgid "Duration"
+msgstr "Длительность"
+
+#: fbmstrconstunit.sedit
+msgctxt "fbmstrconstunit.sedit"
+msgid "Edit"
+msgstr "Изменить"
+
+#: fbmstrconstunit.seditdbfolder
+msgid "Edit DB folder"
+msgstr "Изменит данные папки"
+
+#: fbmstrconstunit.seditfield
+msgid "Edit field"
+msgstr "Изменить поле"
+
+#: fbmstrconstunit.seditfolderdesc
+msgid "DB folder description"
+msgstr "Описание папки"
+
+#: fbmstrconstunit.seditindex
+msgid "Edit index"
+msgstr "Изменить индекс"
+
+#: fbmstrconstunit.seditlocalvar
+msgid "Edit local variable"
+msgstr "Изменить локальную переменную"
+
+#: fbmstrconstunit.seditor
+msgid "Editor"
+msgstr "Редактор"
+
+#: fbmstrconstunit.seditoroptions
+msgid "Editor options"
+msgstr "Параметры редактора"
+
+#: fbmstrconstunit.seditparam
+msgctxt "fbmstrconstunit.seditparam"
+msgid "Edit param"
+msgstr "Изменить параметр"
+
+#: fbmstrconstunit.sedittemplate
+msgid "Edit template"
+msgstr "Изменить шаблон"
+
+#: fbmstrconstunit.sedituser
+msgid "Edit user"
+msgstr "Изменить пользователя"
+
+#: fbmstrconstunit.sedituserinlist
+msgid "Edit user in list"
+msgstr "Изменить данные пользователя на сервере"
+
+#: fbmstrconstunit.senableautocompletion
+msgctxt "fbmstrconstunit.senableautocompletion"
+msgid "Enable autocompletion"
+msgstr "Разрешить автодополнение"
+
+#: fbmstrconstunit.senabled
+msgctxt "fbmstrconstunit.senabled"
+msgid "Enabled"
+msgstr "Разрешено"
+
+#: fbmstrconstunit.senablelogginmetadatachanges
+msgid "Enable loggin metadata changes"
+msgstr "Разрешить протоколирование изменения метаданных"
+
+#: fbmstrconstunit.senablelogginsqleditor
+msgid "Enable loggin SQL editor"
+msgstr "Разрешить протоколирование редактора SQL"
+
+#: fbmstrconstunit.senablesetwgofrompopup
+msgid "Enable set \"With Grant Options\" from popup menu"
+msgstr "Разрешить установку права \"С ПРАВАМИ АДМИНИСТРАТОРА\" из всплывающего меню"
+
+#: fbmstrconstunit.senabletooltips
+msgid "Enable tooltips"
+msgstr "Подсказка с данными"
+
+#: fbmstrconstunit.sencoding
+msgid "Encoding"
+msgstr "Кодировка"
+
+#: fbmstrconstunit.senterdefvalue
+msgid "Enter default value"
+msgstr "Введите значение по умолчанию"
+
+#: fbmstrconstunit.senterdefvaluefornotnull
+msgid "Enter default value for NOT NULL field. String field needs \"'\"."
+msgstr "Укажите значение по умолчанию. Строковые данные заключите в \"'\"."
+
+#: fbmstrconstunit.senterfolderdata
+msgid "Enter DB folder data"
+msgstr "Данные на папку БД"
+
+#: fbmstrconstunit.sentername
+msgid "Enter name"
+msgstr "Введите имя"
+
+#: fbmstrconstunit.senterquerysetname
+msgid "Enter query set name"
+msgstr "Введите наименование набора данных"
+
+#: fbmstrconstunit.sentertablename
+msgid "Enter table name"
+msgstr "Укажите имя таблицы"
+
+#: fbmstrconstunit.sentertemplatename
+msgid "Enter template name"
+msgstr "Укажите имя шаблона"
+
+#: fbmstrconstunit.sentervalues
+msgctxt "fbmstrconstunit.sentervalues"
+msgid "Enter values"
+msgstr "Введите данные"
+
+#: fbmstrconstunit.senvironmentoptions
+msgid "Environment Options"
+msgstr "Параметры программы"
+
+#: fbmstrconstunit.serror
+msgctxt "fbmstrconstunit.serror"
+msgid "Error"
+msgstr "Ошибка"
+
+#: fbmstrconstunit.sevent
+msgid "Event"
+msgstr "Событие"
+
+#: fbmstrconstunit.seventtrigger
+msgid "Event trigger"
+msgstr "Триггер по событию"
+
+#: fbmstrconstunit.seventtriggers
+msgid "Event triggers"
+msgstr "Триггера по событию"
+
+#: fbmstrconstunit.sexcep
+msgid "Excep"
+msgstr "Исключая"
+
+#: fbmstrconstunit.sexception
+msgid "Exception"
+msgstr "Исключение"
+
+#: fbmstrconstunit.sexceptionmessage
+msgid "Exception message"
+msgstr "Сообщение исключения"
+
+#: fbmstrconstunit.sexceptionname
+msgid "Exception name"
+msgstr "Имя исключения"
+
+#: fbmstrconstunit.sexceptions
+msgid "Exceptions"
+msgstr "Исключения"
+
+#: fbmstrconstunit.sexeccomplete
+msgid "Exec complete."
+msgstr "Выполнение завершено."
+
+#: fbmstrconstunit.sexectime
+msgid "Exec time :"
+msgstr "Время выполнения :"
+
+#: fbmstrconstunit.sexecute
+msgid "Execute"
+msgstr "Выполнить"
+
+#: fbmstrconstunit.sexecutequery
+msgid "Execute query"
+msgstr "Выполнить запрос"
+
+#: fbmstrconstunit.sexecutequeryfetchall
+msgctxt "fbmstrconstunit.sexecutequeryfetchall"
+msgid "Run query and fetch all"
+msgstr "Выполнить запрос и выбрать всё"
+
+#: fbmstrconstunit.sexecutequeryfetchallhint
+msgctxt "fbmstrconstunit.sexecutequeryfetchallhint"
+msgid "Run query and fetch all"
+msgstr "Выполнить запрос и выбрать всё"
+
+#: fbmstrconstunit.sexecutequeryhint
+msgid "Execute query from current editor"
+msgstr "Выполнить запрос из текущего редактора"
+
+#: fbmstrconstunit.sexecutioncomplete
+msgid "Execution complete. Execute time : %s."
+msgstr "Выполнено. Время выполнения : %s."
+
+#: fbmstrconstunit.sexit
+msgctxt "fbmstrconstunit.sexit"
+msgid "Close"
+msgstr "Закрыть"
+
+#: fbmstrconstunit.sexithint
+msgid "Exit application..."
+msgstr "Завершить работу с программой..."
+
+#: fbmstrconstunit.sexpand
+msgctxt "fbmstrconstunit.sexpand"
+msgid "Expand"
+msgstr "Расширить"
+
+#: fbmstrconstunit.sexpandall
+msgid "Expand all"
+msgstr "Развернуть всё"
+
+#: fbmstrconstunit.sexportdata
+msgctxt "fbmstrconstunit.sexportdata"
+msgid "Export data..."
+msgstr "Экспорт данных..."
+
+#: fbmstrconstunit.sexportdatatopdf
+msgid "Export data to PDF"
+msgstr "Экспорт данных в PDF файл"
+
+#: fbmstrconstunit.sexportdatatospreadsheet
+msgid "Export data to Spreadsheet"
+msgstr "Экспорт данных в электронную таблицу"
+
+#: fbmstrconstunit.sexporttospreadsheet
+msgid "Export to spreadsheet"
+msgstr "Экспорт в электронную таблицу"
+
+#: fbmstrconstunit.sextension
+msgid "Extension"
+msgstr "Расширение"
+
+#: fbmstrconstunit.sextensions
+msgid "Extensions"
+msgstr "Расширения"
+
+#: fbmstrconstunit.sextractall
+msgid "Extract all"
+msgstr "Извлечь всё"
+
+#: fbmstrconstunit.sextractmetaform
+msgid "Extract metadata from DB"
+msgstr "Извелечение метаданных из БД"
+
+#: fbmstrconstunit.sextrenalfield
+msgid "External field"
+msgstr "Внешнее поле"
+
+#: fbmstrconstunit.sextrenalfile
+msgid "Extrenal file"
+msgstr "Внешний файл"
+
+#: fbmstrconstunit.sextrenaltable
+msgid "External table"
+msgstr "Внешняя таблица"
+
+#: fbmstrconstunit.sfailed
+msgid " - failed"
+msgstr " - сбой"
+
+#: fbmstrconstunit.sfbgloballtransactionproperties
+msgctxt "fbmstrconstunit.sfbgloballtransactionproperties"
+msgid "Transaction properties"
+msgstr "Параметры транзакций"
+
+#: fbmstrconstunit.sfbmanageroptions
+msgid "FBManager options"
+msgstr "Параметры FBManager"
+
+#: fbmstrconstunit.sfbmanagerwebsite
+msgid "FBManager web site..."
+msgstr "Веб-страница FBManager..."
+
+#: fbmstrconstunit.sfbsqlfunction
+msgid "FB : function"
+msgstr "FB : Функция"
+
+#: fbmstrconstunit.sfbsqlfunctionlazy
+#, fuzzy
+#| msgid "FB : Firebird function lazy mode"
+msgid "FB : function lazy mode"
+msgstr "FB : Функция - ленивый режим"
+
+#: fbmstrconstunit.sfbsqlpackage
+#, fuzzy
+#| msgid "FB : Firebird package"
+msgid "FB : package"
+msgstr "FB : Пакет"
+
+#: fbmstrconstunit.sfbsqlpackagelazy
+#, fuzzy
+#| msgid "FB : Firebird package lazy mode"
+msgid "FB : package lazy mode"
+msgstr "FB : Пакет - ленивый режим"
+
+#: fbmstrconstunit.sfbsqltrigger
+#, fuzzy
+#| msgid "FB : Firebird trigger"
+msgid "FB : trigger"
+msgstr "FB : Триггеры"
+
+#: fbmstrconstunit.sfbsqltriggerlazy
+#, fuzzy
+#| msgid "FB : Firebird trigger lazy mode"
+msgid "FB : trigger lazy mode"
+msgstr "FB : Триггеры - ленивый режим"
+
+#: fbmstrconstunit.sfbtrannexttrans
+msgid "Next transaction"
+msgstr "Следующая транзакция"
+
+#: fbmstrconstunit.sfbtranoldestactive
+msgid "Oldest active"
+msgstr "Старейшая активная"
+
+#: fbmstrconstunit.sfbtranoldestsnaps
+msgid "Oldest snapshot"
+msgstr "Старейшая фиксированная"
+
+#: fbmstrconstunit.sfbtranoldesttran
+msgid "Oldest transaction"
+msgstr "Старейшая"
+
+#: fbmstrconstunit.sfbtranparamsreadcommited
+msgid "Read commited"
+msgstr "Читать подтверждённые"
+
+#: fbmstrconstunit.sfbtranparamsreadonlytablestab
+msgid "Read-only table stability"
+msgstr "Только чтение стабильные"
+
+#: fbmstrconstunit.sfbtranparamsreadwritetablestab
+msgid "Read-write table stability"
+msgstr "Чтение/запись стабильные"
+
+#: fbmstrconstunit.sfbtranparamssnapshot
+msgid "Snapshot"
+msgstr "Снимок"
+
+#: fbmstrconstunit.sfbtransactionproperties
+msgctxt "fbmstrconstunit.sfbtransactionproperties"
+msgid "Transaction properties"
+msgstr "Параметры транзакций"
+
+#: fbmstrconstunit.sfetchall
+msgid "Fetch all"
+msgstr "Выбрать всё"
+
+#: fbmstrconstunit.sfetchalldatafromtable
+msgid "Fetch all data from table"
+msgstr "Выбрать все данные из таблицы"
+
+#: fbmstrconstunit.sfield
+msgid "Field"
+msgstr "Поле"
+
+#: fbmstrconstunit.sfieldcount
+msgid "Field count: %d"
+msgstr "Всего столбцов: %d"
+
+#: fbmstrconstunit.sfielddependencies
+msgid "Field Dependencies"
+msgstr "Объекты, использующие поле"
+
+#: fbmstrconstunit.sfieldinitialvaluereq
+msgid "For NOT NULL fields you must specify an initial value"
+msgstr "Для полей NOT NULL необходимо указать начальное значение"
+
+#: fbmstrconstunit.sfieldname
+msgctxt "fbmstrconstunit.sfieldname"
+msgid "Field name"
+msgstr "Имя поля"
+
+#: fbmstrconstunit.sfieldnamereq
+msgid "Requared field name."
+msgstr "Не указано имя поля."
+
+#: fbmstrconstunit.sfields
+msgctxt "fbmstrconstunit.sfields"
+msgid "Fields"
+msgstr "Поля"
+
+#: fbmstrconstunit.sfieldsformat
+msgid "Fields format"
+msgstr "Формат полей"
+
+#: fbmstrconstunit.sfieldsorder
+msgid "Fields order..."
+msgstr "Порядок полей..."
+
+#: fbmstrconstunit.sfieldsparameterslist
+msgid "Fields/Parameters list"
+msgstr "Список полей/параметров"
+
+#: fbmstrconstunit.sfieldtype
+msgid "Field type"
+msgstr "Тип поля"
+
+#: fbmstrconstunit.sfieldtypereq
+msgid "Requared field type or domain."
+msgstr "Не определён тип поля или домен."
+
+#: fbmstrconstunit.sfile
+msgid "File"
+msgstr "Файл"
+
+#: fbmstrconstunit.sfilefolder
+msgid "File folder"
+msgstr "Папка с файлом"
+
+#: fbmstrconstunit.sfilename
+msgid "File name"
+msgstr "Имя файла"
+
+#: fbmstrconstunit.sfilenotfound
+msgid "File %s not found."
+msgstr "Файл %s не найден."
+
+#: fbmstrconstunit.sfilesfiltercfg
+msgid "Config files (*.cfg)|*.cfg|All files (*)|*"
+msgstr "Конфигурационные файлы (*.cfg)|*.cfg|All files (*)|*"
+
+#: fbmstrconstunit.sfilesfiltersql
+msgid "Sql files (*.sql)|*.sql|All files (*)|*"
+msgstr "Файлы SQL (*.sql)|*.sql|Все файлы (*)|*"
+
+#: fbmstrconstunit.sfillfactor
+msgid "Fillfactor"
+msgstr "Фактор заполнения"
+
+#: fbmstrconstunit.sfilterintable
+msgid "Filter in table"
+msgstr "Фильтр в таблице"
+
+#: fbmstrconstunit.sfilterintablehint
+msgid "Show filter in table"
+msgstr "Отобразить фильтр в таблице (как в электронных таблицах)"
+
+#: fbmstrconstunit.sfilterstyle
+msgid "Filter style"
+msgstr "Стиль фильтра"
+
+#: fbmstrconstunit.sfind
+msgctxt "fbmstrconstunit.sfind"
+msgid "Find"
+msgstr "Поиск"
+
+#: fbmstrconstunit.sfindindatabase
+msgid "Find in database"
+msgstr "Поиск в базе данных"
+
+#: fbmstrconstunit.sfindinmetatada
+msgid "Find in metadata"
+msgstr "Поиск в метаданных"
+
+#: fbmstrconstunit.sfindinmetatadaresult
+msgid "Find in metadata result"
+msgstr "Результат поиска в метаданных"
+
+#: fbmstrconstunit.sfindinobjects
+msgid "Find in objects"
+msgstr "Поиск в объектах"
+
+#: fbmstrconstunit.sfindnext
+msgctxt "fbmstrconstunit.sfindnext"
+msgid "Find next"
+msgstr "Искать далее"
+
+#: fbmstrconstunit.sfindoptions
+msgid "Find options"
+msgstr "Параметры поиска"
+
+#: fbmstrconstunit.sfindquery
+msgid "Find query"
+msgstr "Поиск запроса"
+
+#: fbmstrconstunit.sfindtext
+msgid "Text to find"
+msgstr "Искать текст"
+
+#: fbmstrconstunit.sfirebireddbbackup
+msgid "Firebird Database Backup"
+msgstr "Firebird - Архивация данных"
+
+#: fbmstrconstunit.sfirebireddbrestore
+msgid "Firebird Database Restore"
+msgstr "Firebird - Востановление данных"
+
+#: fbmstrconstunit.sfirebireddbshadman
+msgid "Firebird DB Shadow manager"
+msgstr "Firebird - Управление тенями"
+
+#: fbmstrconstunit.sfirebireddbstat
+msgid "Firebird DB Statistic"
+msgstr "Firebird - Статистика БД"
+
+#: fbmstrconstunit.sfirebireddbtransmon
+msgid "Firebird Tranaction monitor"
+msgstr "Firebird - Монитор транзакций"
+
+#: fbmstrconstunit.sfirebiredusermanag
+msgid "Firebird user manager"
+msgstr "Firebird - Управление пользователями"
+
+#: fbmstrconstunit.sfirstletter
+msgid "First letter"
+msgstr "Первая буква"
+
+#: fbmstrconstunit.sfirstname
+msgid "First name"
+msgstr "Имя"
+
+#: fbmstrconstunit.sfkdlgerr1
+msgid "Not define FK field on main table"
+msgstr "Не определено поле внешнего ключа на главной таблице"
+
+#: fbmstrconstunit.sfkdlgerr2
+msgid "Not define FK field on external table"
+msgstr "Не определено поле внешнего ключа на справочной таблице"
+
+#: fbmstrconstunit.sfkname
+msgid "Forign key name"
+msgstr "Имя внешнего ключа"
+
+#: fbmstrconstunit.sflatbuttonsintaskbar
+msgid "Flat buttons in task bar"
+msgstr "Плавающие кнопки в панели задач"
+
+#: fbmstrconstunit.sfontsize
+msgid "Font size"
+msgstr "Размер шрифта"
+
+#: fbmstrconstunit.sforcedwrite
+msgid "Forced write"
+msgstr "Принудительная запись"
+
+#: fbmstrconstunit.sforeground
+msgid "Foreground"
+msgstr "Цвет"
+
+#: fbmstrconstunit.sforeigndatawrapper
+msgid "Foreign data wrapper"
+msgstr "Обёртка сторонних данных"
+
+#: fbmstrconstunit.sforeignkey
+msgid "Foreign key"
+msgstr "Внешний ключ"
+
+#: fbmstrconstunit.sforeignkeyrule
+msgid "Foreign key rule"
+msgstr "Правило внешнего ключа"
+
+#: fbmstrconstunit.sforeignkeys
+msgid "Foreign keys"
+msgstr "Внешние ключи"
+
+#: fbmstrconstunit.sfortable
+msgctxt "fbmstrconstunit.sfortable"
+msgid "For table"
+msgstr "Для таблицы"
+
+#: fbmstrconstunit.sforward
+msgid "&Forward"
+msgstr "&Вперёд"
+
+#: fbmstrconstunit.sfpcversion
+msgid "FPC version : "
+msgstr "Версия FPC : "
+
+#: fbmstrconstunit.sfreetdsconfigeditor
+msgid "Free tds config editor..."
+msgstr "Редактор конфигурации для FreeTDS..."
+
+#: fbmstrconstunit.sfreetdsdeletealias
+msgid "Delete this alias?"
+msgstr "Удалить этот алиас?"
+
+#: fbmstrconstunit.sfromdate
+msgctxt "fbmstrconstunit.sfromdate"
+msgid "From date"
+msgstr "С даты"
+
+#: fbmstrconstunit.sfucntnotcomplete
+msgid "Function not complete..."
+msgstr "Функция ещё не реализована..."
+
+#: fbmstrconstunit.sfullfsync
+msgid "Full file sync"
+msgstr ""
+
+#: fbmstrconstunit.sfunction
+msgid "Function"
+msgstr "Функция"
+
+#: fbmstrconstunit.sfunctionname
+msgid "Function name"
+msgstr "Имя функции"
+
+#: fbmstrconstunit.sfunctions
+msgid "Functions"
+msgstr "Функции"
+
+#: fbmstrconstunit.sfunctiontype
+msgid "Function type"
+msgstr "Тип функции"
+
+#: fbmstrconstunit.sfuntionnotcomplete
+msgid "Funtion not complete..."
+msgstr "Функция ещё не реализована..."
+
+#: fbmstrconstunit.sgeneral
+msgctxt "fbmstrconstunit.sgeneral"
+msgid "General"
+msgstr "Общее"
+
+#: fbmstrconstunit.sgenerateinsertscript
+msgid "Generate INSERT script"
+msgstr "Создать скрипт на INSERT"
+
+#: fbmstrconstunit.sgenerator
+msgid "Generator"
+msgstr "Генератор"
+
+#: fbmstrconstunit.sgeneratorname
+msgid "Generator name"
+msgstr "Имя генератора"
+
+#: fbmstrconstunit.sgeneratornametemplate
+msgid "Generator name template"
+msgstr "Шаблон имени генератора"
+
+#: fbmstrconstunit.sgenerators
+msgid "Generators"
+msgstr "Генераторы"
+
+#: fbmstrconstunit.sgeneratorvalue
+msgid "Generator value"
+msgstr "Значение генератора"
+
+#: fbmstrconstunit.sglobal
+msgid "Global"
+msgstr "Общее"
+
+#: fbmstrconstunit.sglobaltemporarytable
+msgid "Global Temporary Table"
+msgstr "Глобальная временная таблица"
+
+#: fbmstrconstunit.sgotobookmark
+msgid "Goto bookmark "
+msgstr "Перейти к закладке "
+
+#: fbmstrconstunit.sgotoresulttabafterexecute
+msgid "Go to Result tab after execute"
+msgstr "Открыть страницу результата запроса после выполнения"
+
+#: fbmstrconstunit.sgrant
+msgid "Grant"
+msgstr "Выдать права"
+
+#: fbmstrconstunit.sgrantall
+msgid "Grant all"
+msgstr "Выдать все права"
+
+#: fbmstrconstunit.sgrantallgo
+msgid "Grant All with GO"
+msgstr "Выдать все права с административными функциями"
+
+#: fbmstrconstunit.sgrantalltoall
+msgid "Grant All to All"
+msgstr "Выдать все права для всех"
+
+#: fbmstrconstunit.sgrantexecuteto
+msgid "Grant execute to"
+msgstr "Привилегии на выполнение для"
+
+#: fbmstrconstunit.sgrantforall
+msgid "Grant for all"
+msgstr "Выдать права для всех"
+
+#: fbmstrconstunit.sgrantforallgo
+msgid "Grant to All with GO"
+msgstr "Выдать все права с административными функциями"
+
+#: fbmstrconstunit.sgrantor
+msgid "Grantor"
+msgstr "Выдающий права"
+
+#: fbmstrconstunit.sgrantownuser
+msgid "Grant own. user"
+msgstr "Владелец"
+
+#: fbmstrconstunit.sgridoptions
+msgid "Grid options"
+msgstr "Параметры таблиц"
+
+#: fbmstrconstunit.sgridstile
+msgid "Grid stile"
+msgstr "Стиль таблиц"
+
+#: fbmstrconstunit.sgroup
+msgid "Group"
+msgstr "Группа"
+
+#: fbmstrconstunit.sgroupid
+msgid "Group ID"
+msgstr "ID группы"
+
+#: fbmstrconstunit.sgroupname
+msgctxt "fbmstrconstunit.sgroupname"
+msgid "Group name"
+msgstr "Название группы"
+
+#: fbmstrconstunit.sgroups
+msgid "Groups"
+msgstr "Группы"
+
+#: fbmstrconstunit.sgslazarus
+msgid "Lazarus"
+msgstr "Lazarus"
+
+#: fbmstrconstunit.sgsnative
+msgctxt "fbmstrconstunit.sgsnative"
+msgid "Native"
+msgstr "Стиль ОС"
+
+#: fbmstrconstunit.sgsstandart
+msgctxt "fbmstrconstunit.sgsstandart"
+msgid "Standart"
+msgstr "Стандартные"
+
+#: fbmstrconstunit.shandlerfunction
+msgid "Handler function"
+msgstr "Функция обработки"
+
+#: fbmstrconstunit.shighlightcurrentword
+msgctxt "fbmstrconstunit.shighlightcurrentword"
+msgid "Highlight current word"
+msgstr "Подсвечивать текущее слово"
+
+#: fbmstrconstunit.shighlightdelay
+msgid "delay %d ms"
+msgstr "задержка %d"
+
+#: fbmstrconstunit.shintcolor
+msgid "Hint color"
+msgstr "Цвет оперативных подсказок"
+
+#: fbmstrconstunit.shistory
+msgid "History"
+msgstr "История"
+
+#: fbmstrconstunit.shostname
+msgctxt "fbmstrconstunit.shostname"
+msgid "Host name"
+msgstr "Имя сервера"
+
+#: fbmstrconstunit.shottrack
+msgid "Hot track mouse cursor"
+msgstr "Подсветка перемещения указателя мыши"
+
+#: fbmstrconstunit.shours
+msgid "Hours"
+msgstr "Часы"
+
+#: fbmstrconstunit.sid
+msgctxt "fbmstrconstunit.sid"
+msgid "ID"
+msgstr "Код"
+
+#: fbmstrconstunit.sidentifierscharcase
+msgctxt "fbmstrconstunit.sidentifierscharcase"
+msgid "Identifiers char case"
+msgstr "Регистр идентификаторов"
+
+#: fbmstrconstunit.sidle
+msgid "Idle"
+msgstr "Простой"
+
+#: fbmstrconstunit.signorechecksums
+msgid "Ignore checksums"
+msgstr "Игнорировать контрольные суммы"
+
+#: fbmstrconstunit.signorelimbo
+msgid "Ignore Limbo"
+msgstr "Игнорировать Limbo"
+
+#: fbmstrconstunit.simport
+msgid "Import"
+msgstr "Импорт"
+
+#: fbmstrconstunit.simportdata
+msgid "Import data"
+msgstr "Импорт данных"
+
+#: fbmstrconstunit.simportdatafile
+msgid "Import data file"
+msgstr "Файл с данными для импорта"
+
+#: fbmstrconstunit.simportdatatotable
+msgid "Import data to table"
+msgstr "Импорт данных в таблицу"
+
+#: fbmstrconstunit.simportedcollumns
+msgid "Imported collumns"
+msgstr "Столбцы для импорта"
+
+#: fbmstrconstunit.simportfromfile
+msgid "Import from file \"%s\""
+msgstr "Импорт из файла \"%s\""
+
+#: fbmstrconstunit.sincludeallfrom
+msgctxt "fbmstrconstunit.sincludeallfrom"
+msgid "Include all from %s"
+msgstr "Включать всё из %s"
+
+#: fbmstrconstunit.sincrement
+msgctxt "fbmstrconstunit.sincrement"
+msgid "Increment"
+msgstr "Приращение"
+
+#: fbmstrconstunit.sindex
+msgctxt "fbmstrconstunit.sindex"
+msgid "Index"
+msgstr "Индекс"
+
+#: fbmstrconstunit.sindexcaption
+msgid "Index caption"
+msgstr "Имя индекса"
+
+#: fbmstrconstunit.sindexexpression
+msgid "Index expression"
+msgstr "Индексное выражение"
+
+#: fbmstrconstunit.sindexname
+msgctxt "fbmstrconstunit.sindexname"
+msgid "Index name"
+msgstr "Имя индекса"
+
+#: fbmstrconstunit.sindexnameisempty
+msgid "Index name is empty"
+msgstr "Имя индекса не может быть пустым"
+
+#: fbmstrconstunit.sindexontable
+msgid "Indexs on table : "
+msgstr "Индексы на таблице : "
+
+#: fbmstrconstunit.sindexs
+msgctxt "fbmstrconstunit.sindexs"
+msgid "Indexs"
+msgstr "Индексы"
+
+#: fbmstrconstunit.sindexsort
+msgid "Index sort"
+msgstr "Сортировка индекса"
+
+#: fbmstrconstunit.sinformation
+msgid "Information"
+msgstr "Информация"
+
+#: fbmstrconstunit.sinheritstablefrom
+msgctxt "fbmstrconstunit.sinheritstablefrom"
+msgid "Inherits table from"
+msgstr "Наследовать от таблиц"
+
+#: fbmstrconstunit.sinitialvaluefornewsequence
+msgid "Initial value for new sequence"
+msgstr "Начальное значение новой последовательности"
+
+#: fbmstrconstunit.sinput
+msgctxt "fbmstrconstunit.sinput"
+msgid "Input"
+msgstr "Вход"
+
+#: fbmstrconstunit.sinputoutput
+msgid "Input/Output"
+msgstr "Ввод/Вывод"
+
+#: fbmstrconstunit.sinputparams
+msgid "Input params"
+msgstr "Входные параметры"
+
+#: fbmstrconstunit.sins
+msgid "INS"
+msgstr "ВСТ"
+
+#: fbmstrconstunit.sinsert
+msgctxt "fbmstrconstunit.sinsert"
+msgid "Insert"
+msgstr "Вставка"
+
+#: fbmstrconstunit.sinsertcolor
+msgid "INSERT color"
+msgstr "Цвет INSERT"
+
+#: fbmstrconstunit.sinsertedrowsinfo
+msgid "Inserted rows : %d"
+msgstr "Вставлено строк : %d"
+
+#: fbmstrconstunit.sinsertorupdate
+msgid "Insert/Update"
+msgstr "Вставить/Изменить"
+
+#: fbmstrconstunit.sinteger
+msgid "Integer"
+msgstr "Целые числа"
+
+#: fbmstrconstunit.sinterfacelanguage
+msgid "Interface language"
+msgstr "Язык интерфейса"
+
+#: fbmstrconstunit.sinvalidpath
+msgid "Path %s is not valid"
+msgstr "Путь '%s' не существует"
+
+#: fbmstrconstunit.sinvertcase
+msgctxt "fbmstrconstunit.sinvertcase"
+msgid "Invert case"
+msgstr "Инвертировать регистр"
+
+#: fbmstrconstunit.sinvertselections
+msgid "Invert selections"
+msgstr "Обратить выделение"
+
+#: fbmstrconstunit.sinvoker
+msgid "Invoker"
+msgstr "Вызывающий"
+
+#: fbmstrconstunit.siscycled
+msgid "Is cycled"
+msgstr "Цикличный"
+
+#: fbmstrconstunit.sislocal
+msgid "Is local"
+msgstr "Локально"
+
+#: fbmstrconstunit.siswindowfunction
+msgctxt "fbmstrconstunit.siswindowfunction"
+msgid "Is window function"
+msgstr "Это оконная функция"
+
+#: fbmstrconstunit.sitsexample
+msgid "Its example"
+msgstr "Это пример шрифта"
+
+#: fbmstrconstunit.sjobid
+msgctxt "fbmstrconstunit.sjobid"
+msgid "Job ID"
+msgstr "Код задачи"
+
+#: fbmstrconstunit.sjointablesand
+msgctxt "fbmstrconstunit.sjointablesand"
+msgid "Join tables: %s and %s"
+msgstr "Соединение таблиц: %s и %s"
+
+#: fbmstrconstunit.sjournalmode
+msgid "Journal mode"
+msgstr "Режим журнала"
+
+#: fbmstrconstunit.sjournalsizelimit
+msgid "Journal size limit"
+msgstr "Предельный размер журанала"
+
+#: fbmstrconstunit.skb
+msgid "KB"
+msgstr "KB"
+
+#: fbmstrconstunit.skeyboardtemplates
+msgid "Keyboard templates"
+msgstr "Клавиатурные шаблоны"
+
+#: fbmstrconstunit.skeyfunction
+msgid "function"
+msgstr "стд. функция"
+
+#: fbmstrconstunit.skeytypes
+msgid "types"
+msgstr "стд. тип"
+
+#: fbmstrconstunit.skeyword
+msgid "keyword"
+msgstr "ключевое слово"
+
+#: fbmstrconstunit.skeywordcharcase
+msgctxt "fbmstrconstunit.skeywordcharcase"
+msgid "Keyword  char case"
+msgstr "Регистр ключевых слов"
+
+#: fbmstrconstunit.slanguage
+msgctxt "fbmstrconstunit.slanguage"
+msgid "Language"
+msgstr "Язык"
+
+#: fbmstrconstunit.slanguagename
+msgid "Language name"
+msgstr "Имя языка"
+
+#: fbmstrconstunit.slastname
+msgid "Last name"
+msgstr "Фамилия"
+
+#: fbmstrconstunit.slastrun
+msgctxt "fbmstrconstunit.slastrun"
+msgid "Last run"
+msgstr "Последний запуск"
+
+#: fbmstrconstunit.slastvalue
+msgctxt "fbmstrconstunit.slastvalue"
+msgid "Last value"
+msgstr "Значение"
+
+#: fbmstrconstunit.slazarus
+msgid "Lazarus style"
+msgstr "Новый стиль"
+
+#: fbmstrconstunit.slazzymodelocalvariablessp
+msgid "Lazzy mode local variables in SP"
+msgstr "Простой редактор переменных в хранимой процедуре"
+
+#: fbmstrconstunit.slazzymodelocalvariablestrigger
+msgid "Lazzy mode local variables in triggers"
+msgstr "Простой редактор переменных в триггере"
+
+#: fbmstrconstunit.slclversion
+msgid "LCL Version: "
+msgstr "Версия LCL : "
+
+#: fbmstrconstunit.slegacyfileformat
+msgid "Legacy file format"
+msgstr "Формата файла"
+
+#: fbmstrconstunit.slicense
+msgctxt "fbmstrconstunit.slicense"
+msgid "License"
+msgstr "Лицензия"
+
+#: fbmstrconstunit.slinkpropertys
+msgid "Link propertys"
+msgstr "Свойства связи"
+
+#: fbmstrconstunit.slinkpropincludeallfrom
+msgctxt "fbmstrconstunit.slinkpropincludeallfrom"
+msgid "Include all from %s"
+msgstr "Включать всё из %s"
+
+#: fbmstrconstunit.slinkproplabel1
+msgctxt "fbmstrconstunit.slinkproplabel1"
+msgid "Join tables: %s and %s"
+msgstr "Соединение таблиц: %s и %s"
+
+#: fbmstrconstunit.sload
+msgid "Load"
+msgstr "Загрузить"
+
+#: fbmstrconstunit.sloaddefault
+msgid "Load default"
+msgstr "Загрузить по умолчанию"
+
+#: fbmstrconstunit.sloaddefaulttemplatesq
+msgid "Load default templates?"
+msgstr "Загрузить шаблон по умолчанию?"
+
+#: fbmstrconstunit.slocalvariables
+msgid "Local variables"
+msgstr "Локальные переменные"
+
+#: fbmstrconstunit.slockingmode
+msgid "Locking mode"
+msgstr "Режим блокировок"
+
+#: fbmstrconstunit.slocktables
+msgid "Lock tables"
+msgstr "Блокировка талбиц"
+
+#: fbmstrconstunit.slogfiles
+msgctxt "fbmstrconstunit.slogfiles"
+msgid "Log files"
+msgstr "Файлы протокола"
+
+#: fbmstrconstunit.sloginform
+msgid "Login form"
+msgstr "Введите регистрационные данные"
+
+#: fbmstrconstunit.slogs
+msgid "Logs"
+msgstr "Протокол"
+
+#: fbmstrconstunit.slogtofile
+msgid "Log to file"
+msgstr "Протокол в файл"
+
+#: fbmstrconstunit.slogtoscreen
+msgid "Log to screen"
+msgstr "Протокол на экран"
+
+#: fbmstrconstunit.slower
+msgid "Lower"
+msgstr "Нижняя"
+
+#: fbmstrconstunit.slowercase
+msgctxt "fbmstrconstunit.slowercase"
+msgid "Lower case"
+msgstr "Нижний регистр"
+
+#: fbmstrconstunit.smaincaption
+msgctxt "fbmstrconstunit.smaincaption"
+msgid "Free Database Manager"
+msgstr "Свободное управление БД"
+
+#: fbmstrconstunit.smainslogan
+msgctxt "fbmstrconstunit.smainslogan"
+msgid "Easy and free control you database"
+msgstr "Легко и просто управляйте своими БД"
+
+#: fbmstrconstunit.smakedefsqltext
+msgid "Make SQL text"
+msgstr "Создать текст SQL"
+
+#: fbmstrconstunit.smanualedit
+msgid "Manual edit"
+msgstr "Ручной ввод"
+
+#: fbmstrconstunit.smaterializedviews
+msgid "Materialized View"
+msgstr "Материализованное представление"
+
+#: fbmstrconstunit.smaxconnectionsperhour
+msgid "Max connections per hour"
+msgstr "Максим. число подключений в час"
+
+#: fbmstrconstunit.smaxpagecount
+msgid "Max page count"
+msgstr "Максимальное число страниц БД"
+
+#: fbmstrconstunit.smaxqueriesperhour
+msgid "Max queries per hour"
+msgstr "Максим. число запросов в час"
+
+#: fbmstrconstunit.smaxupdateperhour
+msgid "Max update per hour"
+msgstr "Максим. число имзенений в час"
+
+#: fbmstrconstunit.smaxuserconnections
+msgid "Max user connections"
+msgstr "Максим. число подключений оператора"
+
+#: fbmstrconstunit.smaxvalue
+msgctxt "fbmstrconstunit.smaxvalue"
+msgid "Max value"
+msgstr "Макс. значение"
+
+#: fbmstrconstunit.smdiclosebyf4
+msgid "Close child window by Ctrl+F4"
+msgstr "Закрывать дочерние окна по Ctrl+F4"
+
+#: fbmstrconstunit.smdimidleclickcloseform
+msgid "Midle click close form"
+msgstr "Средняя кнопка закрывает окно"
+
+#: fbmstrconstunit.smdioptions
+msgid "MDI options"
+msgstr "Параметы MDI"
+
+#: fbmstrconstunit.smdishowclosebutton
+msgid "Show close button"
+msgstr "Отображать кнопку закрытия"
+
+#: fbmstrconstunit.smdishowformcaptions
+msgid "Show form captions"
+msgstr "Отображать заголовок окна"
+
+#: fbmstrconstunit.smdiswitchbytab
+msgid "Switch child windows by Ctrl+Tab"
+msgstr "Переключать дочерние окна по Ctrl+Tab"
+
+#: fbmstrconstunit.smembers
+msgid "Members"
+msgstr "Члены группы"
+
+#: fbmstrconstunit.smembership
+msgid "Membership"
+msgstr "Членство"
+
+#: fbmstrconstunit.smemovalue
+msgid "Memo value"
+msgstr "Значение MEMO"
+
+#: fbmstrconstunit.smenuabout
+msgid "About..."
+msgstr "О программе...."
+
+#: fbmstrconstunit.smenuabouthint
+msgid "About of application"
+msgstr "Информация о программе"
+
+#: fbmstrconstunit.smenucloseall
+msgctxt "fbmstrconstunit.smenucloseall"
+msgid "Close all"
+msgstr "Закрыть всё"
+
+#: fbmstrconstunit.smenucloseallhint
+msgid "Close all window"
+msgstr "Закрыть все окна"
+
+#: fbmstrconstunit.smenuconnectdb
+msgctxt "fbmstrconstunit.smenuconnectdb"
+msgid "Connect"
+msgstr "Подключиться"
+
+#: fbmstrconstunit.smenuconnectdbhint
+msgid "Connect to database"
+msgstr "Подключиться к выбранной базе данных"
+
+#: fbmstrconstunit.smenucreatedb
+msgid "Create Database"
+msgstr "Создать БД"
+
+#: fbmstrconstunit.smenucreatedbhint
+msgid "Create new database"
+msgstr "Создать новую базу данных"
+
+#: fbmstrconstunit.smenucustomizetoolbar
+msgctxt "fbmstrconstunit.smenucustomizetoolbar"
+msgid "Customize toolbar"
+msgstr "Настроить панель инструментов"
+
+#: fbmstrconstunit.smenucustomizetoolbarhint
+msgctxt "fbmstrconstunit.smenucustomizetoolbarhint"
+msgid "Customize toolbar"
+msgstr "Настроить панель инструментов главного окна системы"
+
+#: fbmstrconstunit.smenudbinspector
+msgid "DB Inspector"
+msgstr "Инспектор БД"
+
+#: fbmstrconstunit.smenudbinspectorhint
+msgid "Show database inspector"
+msgstr "Отобразить окно инспектора баз данных"
+
+#: fbmstrconstunit.smenudisconnectdb
+msgid "Disconnect"
+msgstr "Отключиться"
+
+#: fbmstrconstunit.smenudisconnectdbhint
+msgid "Disconect from database"
+msgstr "Отключиться от указанной базы данных"
+
+#: fbmstrconstunit.smenuextractmetadata
+msgctxt "fbmstrconstunit.smenuextractmetadata"
+msgid "Extract metadata..."
+msgstr "Выгрузка медатанных..."
+
+#: fbmstrconstunit.smenuextractmetadatahint
+msgctxt "fbmstrconstunit.smenuextractmetadatahint"
+msgid "Extract metadata..."
+msgstr "Выгрузка медатанных..."
+
+#: fbmstrconstunit.smenuhelp
+msgid "Help"
+msgstr "Помощь"
+
+#: fbmstrconstunit.smenukeyboardtemplates
+msgctxt "fbmstrconstunit.smenukeyboardtemplates"
+msgid "Keyboard templates..."
+msgstr "Клавиатурные шаблоны..."
+
+#: fbmstrconstunit.smenukeyboardtemplateshint
+msgctxt "fbmstrconstunit.smenukeyboardtemplateshint"
+msgid "Keyboard templates..."
+msgstr "Клавиатурные шаблоны..."
+
+#: fbmstrconstunit.smenunews
+msgid "Latest news..."
+msgstr "Последние новости..."
+
+#: fbmstrconstunit.smenunewshint
+msgid "Show latest news..."
+msgstr "Отобразить последние новости..."
+
+#: fbmstrconstunit.smenuobjecttemplates
+msgctxt "fbmstrconstunit.smenuobjecttemplates"
+msgid "Object templates"
+msgstr "Шаблоны объектов"
+
+#: fbmstrconstunit.smenuobjecttemplateshint
+msgctxt "fbmstrconstunit.smenuobjecttemplateshint"
+msgid "Object templates"
+msgstr "Шаблоны объектов"
+
+#: fbmstrconstunit.smenuopteditors
+msgid "Editor options..."
+msgstr "Параметры редактора..."
+
+#: fbmstrconstunit.smenuopteditorshint
+msgid "Show editor options..."
+msgstr "Отобразаить окно параметров редактора..."
+
+#: fbmstrconstunit.smenuoptenironment
+msgid "Environment Options..."
+msgstr "Параметры системы..."
+
+#: fbmstrconstunit.smenuoptenironmenthint
+msgid "Show environment options..."
+msgstr "Отобразить окно параметров системы..."
+
+#: fbmstrconstunit.smenuoptions
+msgctxt "fbmstrconstunit.smenuoptions"
+msgid "Options"
+msgstr "Параметры"
+
+#: fbmstrconstunit.smenurefresh
+msgctxt "fbmstrconstunit.smenurefresh"
+msgid "Refresh"
+msgstr "Обновить данные"
+
+#: fbmstrconstunit.smenurefreshhint
+msgid "Refresh current opbject"
+msgstr "Обновить текущий объект"
+
+#: fbmstrconstunit.smenuregisterdb
+msgid "Register database"
+msgstr "Зарегистрировать БД"
+
+#: fbmstrconstunit.smenuregisterdbhint
+msgid "Register existing database"
+msgstr "Зарегистрировать сущестсвующую базу данных"
+
+#: fbmstrconstunit.smenureorder
+msgid "Reorder"
+msgstr "Упорядочить"
+
+#: fbmstrconstunit.smenureorderhint
+msgid "Reorder open window"
+msgstr "Упорядочить окна"
+
+#: fbmstrconstunit.smenureportmanager
+msgctxt "fbmstrconstunit.smenureportmanager"
+msgid "Report manager"
+msgstr "Управление отчётами"
+
+#: fbmstrconstunit.smenureportmanagerhint
+msgctxt "fbmstrconstunit.smenureportmanagerhint"
+msgid "Report manager"
+msgstr "Окно со списком отчётов"
+
+#: fbmstrconstunit.smenusearchinmetadata
+msgid "Search in metadata..."
+msgstr "Поиск в медатанных..."
+
+#: fbmstrconstunit.smenusearchinmetadatahint
+msgid "Search in metadata"
+msgstr "Поиск в медатанных"
+
+#: fbmstrconstunit.smenusendbugreport
+msgctxt "fbmstrconstunit.smenusendbugreport"
+msgid "Send bug report"
+msgstr "Отправить сообщение об ошибке"
+
+#: fbmstrconstunit.smenusendbugreporthint
+msgctxt "fbmstrconstunit.smenusendbugreporthint"
+msgid "Send bug report"
+msgstr "Отправить сообщение об ошибке"
+
+#: fbmstrconstunit.smenusqlbuilder
+msgid "SQL builder..."
+msgstr "Конструктор SQL..."
+
+#: fbmstrconstunit.smenusqlbuilderhint
+msgid "Show SQL builder window"
+msgstr "Отобразить окно конструктора SQL"
+
+#: fbmstrconstunit.smenusqleditor
+msgid "SQL Editor"
+msgstr "Редактор SQL"
+
+#: fbmstrconstunit.smenusqleditorhint
+msgid "Show sql editor"
+msgstr "Отобразить окно редактоа SQL"
+
+#: fbmstrconstunit.smenusqlscript
+msgid "SQL script..."
+msgstr "Редактор SQL скриптов..."
+
+#: fbmstrconstunit.smenusqlscripthint
+msgid "Show SQL script window"
+msgstr "Отобразить окно редактора SQL скриптов"
+
+#: fbmstrconstunit.smenusystem
+msgid "System"
+msgstr "Система"
+
+#: fbmstrconstunit.smenutools
+msgid "Tools"
+msgstr "Инструменты"
+
+#: fbmstrconstunit.smenuunregisterdb
+msgid "Unregister  database"
+msgstr "Отменить регистрацию БД"
+
+#: fbmstrconstunit.smenuunregisterdbhint
+msgid "Unregister current database"
+msgstr "Отменить регистрацию текущий базы данных"
+
+#: fbmstrconstunit.smenuvisittowebsite
+msgctxt "fbmstrconstunit.smenuvisittowebsite"
+msgid "Visit to web site..."
+msgstr "Посетить веб-сайт программы..."
+
+#: fbmstrconstunit.smenuvisittowebsitehint
+msgctxt "fbmstrconstunit.smenuvisittowebsitehint"
+msgid "Visit to web site..."
+msgstr "Посетить веб-сайт программы..."
+
+#: fbmstrconstunit.smenuwindows
+msgctxt "fbmstrconstunit.smenuwindows"
+msgid "Windows"
+msgstr "Окна"
+
+#: fbmstrconstunit.smessages
+msgid "Messages"
+msgstr "Сообщения"
+
+#: fbmstrconstunit.smetadatalogingenable
+msgid "Meta data loging enable"
+msgstr "Разрешить протоколирование изменений метаданных"
+
+#: fbmstrconstunit.smetadataonly
+msgctxt "fbmstrconstunit.smetadataonly"
+msgid "Metadata Only"
+msgstr "Только метаданные"
+
+#: fbmstrconstunit.smiddlename
+msgid "Middle name"
+msgstr "Отчество"
+
+#: fbmstrconstunit.sminutes
+msgctxt "fbmstrconstunit.sminutes"
+msgid "Minutes"
+msgstr "Минуты"
+
+#: fbmstrconstunit.sminvalue
+msgctxt "fbmstrconstunit.sminvalue"
+msgid "Min value"
+msgstr "Мин. значение"
+
+#: fbmstrconstunit.smisk
+msgid "Misk"
+msgstr "Разное"
+
+#: fbmstrconstunit.smodified
+msgid "Modified"
+msgstr "Изменён"
+
+#: fbmstrconstunit.smodifirule
+msgid "Modifi rule"
+msgstr "Изменить правило"
+
+#: fbmstrconstunit.smodifitrigger
+msgctxt "fbmstrconstunit.smodifitrigger"
+msgid "Modifi trigger"
+msgstr "Изменить триггер"
+
+#: fbmstrconstunit.smonth
+msgctxt "fbmstrconstunit.smonth"
+msgid "Month"
+msgstr "Месяцы"
+
+#: fbmstrconstunit.smovedown
+msgctxt "fbmstrconstunit.smovedown"
+msgid "Move down"
+msgstr "Переместить ниже"
+
+#: fbmstrconstunit.smovedownhint
+msgid "Move fields down..."
+msgstr "Переместить поле ниже..."
+
+#: fbmstrconstunit.smovedownlocalvar
+msgid "Move down local variable"
+msgstr "Переместить ниже локальную переменную"
+
+#: fbmstrconstunit.smoveup
+msgctxt "fbmstrconstunit.smoveup"
+msgid "Move up"
+msgstr "Переместить выше"
+
+#: fbmstrconstunit.smoveuphint
+msgid "Move fields up..."
+msgstr "Переместить поле выше..."
+
+#: fbmstrconstunit.smoveuplocalvar
+msgid "Move up local variable"
+msgstr "Переместить выше локальную переменную"
+
+#: fbmstrconstunit.smysqlsqltrigger
+msgid "MySQL : trigger"
+msgstr "MySQL : триггер"
+
+#: fbmstrconstunit.smysqlsqltriggerlazy
+msgid "MySQL : trigger lazy mode"
+msgstr "MySQL : триггер - простой режим"
+
+#: fbmstrconstunit.sname
+msgid "Name"
+msgstr "Название"
+
+#: fbmstrconstunit.snamecase
+msgctxt "fbmstrconstunit.snamecase"
+msgid "Name case"
+msgstr "Конвертировать в Name-case"
+
+#: fbmstrconstunit.snameuserrole
+msgid "Name of user/role"
+msgstr "Имя пользователя/роли"
+
+#: fbmstrconstunit.snative
+msgctxt "fbmstrconstunit.snative"
+msgid "Native"
+msgstr "Стиль ОС"
+
+#: fbmstrconstunit.sneedrestartconfigch
+msgid "You are need restart for apply you changes..."
+msgstr "Вам необходимо перезапустить программу, для того, чтобы изменения вступили в силу."
+
+#: fbmstrconstunit.snevershowglyph
+msgid "Never show glyph"
+msgstr "Не отображать картинки"
+
+#: fbmstrconstunit.snew
+msgid "New "
+msgstr "Новый "
+
+#: fbmstrconstunit.snewdbfolder
+msgid "New DB folder"
+msgstr "Новая папка БД"
+
+#: fbmstrconstunit.snewdomain
+msgid "New Domain"
+msgstr "Новый домен"
+
+#: fbmstrconstunit.snewfield
+msgid "New field"
+msgstr "Новое поле"
+
+#: fbmstrconstunit.snewforeignkey
+msgctxt "fbmstrconstunit.snewforeignkey"
+msgid "New foreign key"
+msgstr "Новый внешний ключ"
+
+#: fbmstrconstunit.snewindex
+msgid "New index"
+msgstr "Новый индекс"
+
+#: fbmstrconstunit.snewobject
+msgid "New object"
+msgstr "Новый объект"
+
+#: fbmstrconstunit.snewpk
+msgid "New primary key"
+msgstr "Новый первичный ключ"
+
+#: fbmstrconstunit.snewpkhint
+msgid "New primary key for table"
+msgstr "Новый первичный ключ для таблицы"
+
+#: fbmstrconstunit.snewquery
+msgid "New query"
+msgstr "Новый запрос"
+
+#: fbmstrconstunit.snewqueryset
+msgctxt "fbmstrconstunit.snewqueryset"
+msgid "New query set"
+msgstr "Новый набор запросов"
+
+#: fbmstrconstunit.snewquerysethint
+msgctxt "fbmstrconstunit.snewquerysethint"
+msgid "New query set"
+msgstr "Новый набор запросов"
+
+#: fbmstrconstunit.snewrole
+msgid "New role"
+msgstr "Новая роль"
+
+#: fbmstrconstunit.snewrule
+msgctxt "fbmstrconstunit.snewrule"
+msgid "New rule"
+msgstr "Новое правило"
+
+#: fbmstrconstunit.snewtrigger
+msgctxt "fbmstrconstunit.snewtrigger"
+msgid "New trigger"
+msgstr "Новый триггер"
+
+#: fbmstrconstunit.snewuniqueconstraint
+msgid "New unique constraint"
+msgstr "Новое условие уникальности"
+
+#: fbmstrconstunit.snext
+msgctxt "fbmstrconstunit.snext"
+msgid "Next"
+msgstr "Следующая запись"
+
+#: fbmstrconstunit.snextrun
+msgctxt "fbmstrconstunit.snextrun"
+msgid "Next run"
+msgstr "Следующий запуск"
+
+#: fbmstrconstunit.snogarbagecollection
+msgctxt "fbmstrconstunit.snogarbagecollection"
+msgid "No Garbage Collection"
+msgstr "Не собирать мусор"
+
+#: fbmstrconstunit.snontransportable
+msgctxt "fbmstrconstunit.snontransportable"
+msgid "Non Transportable"
+msgstr "Не транспортабельный"
+
+#: fbmstrconstunit.snormalmode
+msgid "Normal mode"
+msgstr "Нормальный режим"
+
+#: fbmstrconstunit.snoshadow
+msgctxt "fbmstrconstunit.snoshadow"
+msgid "No Shadow"
+msgstr "Не создавать тень"
+
+#: fbmstrconstunit.snostepstoexecute
+msgid " - no steps to execute"
+msgstr " - нет шагов для выполнения"
+
+#: fbmstrconstunit.snotconnected
+msgid "Not connected..."
+msgstr "Не подключено..."
+
+#: fbmstrconstunit.snotnull
+msgctxt "fbmstrconstunit.snotnull"
+msgid "Not null"
+msgstr "Не пусто"
+
+#: fbmstrconstunit.snovaliditycheck
+msgctxt "fbmstrconstunit.snovaliditycheck"
+msgid "No Validity Check"
+msgstr "Не контролировать ограничения"
+
+#: fbmstrconstunit.snullspos
+msgid "Nulls pos"
+msgstr "Позиция NULL"
+
+#: fbmstrconstunit.snumbers
+msgid "Numbers"
+msgstr "Числа"
+
+#: fbmstrconstunit.snumeric
+msgid "Numeric"
+msgstr "Числа"
+
+#: fbmstrconstunit.sobjectid
+msgctxt "fbmstrconstunit.sobjectid"
+msgid "Object ID"
+msgstr "ID объекта"
+
+#: fbmstrconstunit.sobjectinspector
+msgctxt "fbmstrconstunit.sobjectinspector"
+msgid "Object inspector"
+msgstr "Инспектор объектов"
+
+#: fbmstrconstunit.sobjectkindnotdefined
+msgid "ObjectKind not defined for class %s. Object : %"
+msgstr "ObjectKind не определён для класса %s. Объект : %"
+
+#: fbmstrconstunit.sobjectname
+msgctxt "fbmstrconstunit.sobjectname"
+msgid "Object name"
+msgstr "Имя объекта"
+
+#: fbmstrconstunit.sobjects
+msgid "Objects"
+msgstr "Объекты"
+
+#: fbmstrconstunit.sobjecttype
+msgid "Object type"
+msgstr "Тип объекта"
+
+#: fbmstrconstunit.sobjecttypes
+msgid "Object type's"
+msgstr "Типы объектов"
+
+#: fbmstrconstunit.sodsversion
+msgid "ODS version    = "
+msgstr "Версия ODS = "
+
+#: fbmstrconstunit.soicopyalllines
+msgctxt "fbmstrconstunit.soicopyalllines"
+msgid "Copy all lines to clipboard"
+msgstr "Копия всего содержимого в буфер обмена"
+
+#: fbmstrconstunit.soicopyalllineshint
+msgctxt "fbmstrconstunit.soicopyalllineshint"
+msgid "Copy all lines to clipboard"
+msgstr "Копия всего содержимого в буфер обмена"
+
+#: fbmstrconstunit.soicopyline
+msgctxt "fbmstrconstunit.soicopyline"
+msgid "Copy line to clipboard"
+msgstr "Копия строки в буфер обмена"
+
+#: fbmstrconstunit.soicopylinehint
+msgctxt "fbmstrconstunit.soicopylinehint"
+msgid "Copy line to clipboard"
+msgstr "Копия строки в буфер обмена"
+
+#: fbmstrconstunit.soicopyregistration
+msgctxt "fbmstrconstunit.soicopyregistration"
+msgid "Copy registration record..."
+msgstr "Зарегистрировать дубликат БД..."
+
+#: fbmstrconstunit.soicopyregistrationhint
+msgctxt "fbmstrconstunit.soicopyregistrationhint"
+msgid "Copy registration record..."
+msgstr "Зарегистрировать дубликат БД..."
+
+#: fbmstrconstunit.soidatabases
+msgid "Databases"
+msgstr "Базы данных"
+
+#: fbmstrconstunit.soieditdbregistration
+msgctxt "fbmstrconstunit.soieditdbregistration"
+msgid "Edit DB registration record"
+msgstr "Изменить регистрационные даные БД"
+
+#: fbmstrconstunit.soieditdbregistrationhint
+msgctxt "fbmstrconstunit.soieditdbregistrationhint"
+msgid "Edit DB registration record"
+msgstr "Изменить регистрационные даные БД"
+
+#: fbmstrconstunit.soifindobject
+msgctxt "fbmstrconstunit.soifindobject"
+msgid "Find object"
+msgstr "Найти объект"
+
+#: fbmstrconstunit.soifindobjecthint
+msgctxt "fbmstrconstunit.soifindobjecthint"
+msgid "Find object"
+msgstr "Найти объект по списку"
+
+#: fbmstrconstunit.soigotodomains
+msgctxt "fbmstrconstunit.soigotodomains"
+msgid "Go to domains..."
+msgstr "Перейти к доменам..."
+
+#: fbmstrconstunit.soigotodomainshint
+msgctxt "fbmstrconstunit.soigotodomainshint"
+msgid "Go to domains..."
+msgstr "Перейти к доменам..."
+
+#: fbmstrconstunit.soigotosp
+msgctxt "fbmstrconstunit.soigotosp"
+msgid "Go to stored proc..."
+msgstr "Перейти к хранимым процедурам..."
+
+#: fbmstrconstunit.soigotosphint
+msgctxt "fbmstrconstunit.soigotosphint"
+msgid "Go to stored proc..."
+msgstr "Перейти к хранимым процедурам..."
+
+#: fbmstrconstunit.soigototables
+msgctxt "fbmstrconstunit.soigototables"
+msgid "Go to tables..."
+msgstr "Перейти к таблицам..."
+
+#: fbmstrconstunit.soigototableshint
+msgctxt "fbmstrconstunit.soigototableshint"
+msgid "Go to tables..."
+msgstr "Перейти к таблицам..."
+
+#: fbmstrconstunit.soigototoobject
+msgid "Goto to object"
+msgstr "Перейти к объекту"
+
+#: fbmstrconstunit.soigototriggers
+msgctxt "fbmstrconstunit.soigototriggers"
+msgid "Go to triggers..."
+msgstr "Перейти к триггерам..."
+
+#: fbmstrconstunit.soigototriggershint
+msgctxt "fbmstrconstunit.soigototriggershint"
+msgid "Go to triggers..."
+msgstr "Перейти к триггерам..."
+
+#: fbmstrconstunit.soigotoviews
+msgctxt "fbmstrconstunit.soigotoviews"
+msgid "Go to views..."
+msgstr "Перейти к представлениям..."
+
+#: fbmstrconstunit.soigotoviewshint
+msgctxt "fbmstrconstunit.soigotoviewshint"
+msgid "Go to views..."
+msgstr "Перейти к представлениям..."
+
+#: fbmstrconstunit.soihidesqlassistent
+msgctxt "fbmstrconstunit.soihidesqlassistent"
+msgid "Hide SQL assistent"
+msgstr "Убрать SQL помощника"
+
+#: fbmstrconstunit.soihidesqlassistenthint
+msgctxt "fbmstrconstunit.soihidesqlassistenthint"
+msgid "Hide SQL assistent"
+msgstr "Убрать SQL помощника"
+
+#: fbmstrconstunit.soirecent
+msgid "Recent"
+msgstr "Последние"
+
+#: fbmstrconstunit.soiregisterdb
+msgid "Register DB"
+msgstr "Зарегистрировать БД"
+
+#: fbmstrconstunit.soishowobject
+msgctxt "fbmstrconstunit.soishowobject"
+msgid "Show object"
+msgstr "Отобразить объект"
+
+#: fbmstrconstunit.soishowobjecthint
+msgctxt "fbmstrconstunit.soishowobjecthint"
+msgid "Show object"
+msgstr "Отобразить редактор объекта"
+
+#: fbmstrconstunit.soishowsqlassistent
+msgctxt "fbmstrconstunit.soishowsqlassistent"
+msgid "Show SQL assistent"
+msgstr "Показать SQL помощника"
+
+#: fbmstrconstunit.soishowsqlassistenthint
+msgctxt "fbmstrconstunit.soishowsqlassistenthint"
+msgid "Show SQL assistent"
+msgstr "Показать SQL помощника"
+
+#: fbmstrconstunit.soiwindows
+msgctxt "fbmstrconstunit.soiwindows"
+msgid "Windows"
+msgstr "Окна"
+
+#: fbmstrconstunit.soldactive
+msgid "Old active"
+msgstr "Старейшая активная"
+
+#: fbmstrconstunit.soldest
+msgid "Oldest"
+msgstr "Старейшая"
+
+#: fbmstrconstunit.soldmetadatadesc
+msgid "Old Metadata Desc"
+msgstr "Старые описание метаданных"
+
+#: fbmstrconstunit.soldsnapshot
+msgid "Old snapshot"
+msgstr "Старейший снимок"
+
+#: fbmstrconstunit.soncommitdeleterows
+msgid "ON COMMIT DELETE ROWS"
+msgstr ""
+
+#: fbmstrconstunit.soncommitpreserverows
+msgid "ON COMMIT PRESERVE ROWS"
+msgstr ""
+
+#: fbmstrconstunit.sondelete
+msgid "On Delete"
+msgstr "При удалении"
+
+#: fbmstrconstunit.sonerelationatatime
+msgid "One Relation At A Time"
+msgstr "Одна таблица за раз"
+
+#: fbmstrconstunit.sonevent
+msgid "On event"
+msgstr "Для события"
+
+#: fbmstrconstunit.sonfield
+msgid "On field"
+msgstr "На поле"
+
+#: fbmstrconstunit.sonfields
+msgid "On fields"
+msgstr "По полям"
+
+#: fbmstrconstunit.sonlygroups
+msgid "Only groups"
+msgstr "Только группы/роли"
+
+#: fbmstrconstunit.sonlyshowgroups
+msgid "Only show groups"
+msgstr "Отображать только группы"
+
+#: fbmstrconstunit.sonlyshowusers
+msgid "Only show users"
+msgstr "Отбражать только пользователей"
+
+#: fbmstrconstunit.sonlyusers
+msgid "Only users"
+msgstr "Только пользователи"
+
+#: fbmstrconstunit.sontable
+msgid "On table"
+msgstr "На таблицу"
+
+#: fbmstrconstunit.sonupdate
+msgid "On Update"
+msgstr "При изменении"
+
+#: fbmstrconstunit.sopen
+msgctxt "fbmstrconstunit.sopen"
+msgid "Open"
+msgstr "Открыть"
+
+#: fbmstrconstunit.sopenfile
+msgctxt "fbmstrconstunit.sopenfile"
+msgid "Open file"
+msgstr "Открыть файл"
+
+#: fbmstrconstunit.sopenineditor
+msgid "Open in editor"
+msgstr "Отркыть в редакторе"
+
+#: fbmstrconstunit.sopenineditorhint
+msgid "Open text from history in SQL editor"
+msgstr "Открыть текст запроса из истории в SQL редакторе"
+
+#: fbmstrconstunit.soptions
+msgctxt "fbmstrconstunit.soptions"
+msgid "Options"
+msgstr "Параметры"
+
+#: fbmstrconstunit.sother
+msgid "Other"
+msgstr "Другое"
+
+#: fbmstrconstunit.sotheroptions
+msgid "Other options"
+msgstr "Прочие параметры"
+
+#: fbmstrconstunit.soutput
+msgid "Output"
+msgstr "Выход"
+
+#: fbmstrconstunit.sowner
+msgid "Owner"
+msgstr "Владелец"
+
+#: fbmstrconstunit.spackage
+msgid "Package"
+msgstr "Пакет"
+
+#: fbmstrconstunit.spackagebody
+msgid "Package body"
+msgstr "Тело пакета"
+
+#: fbmstrconstunit.spackageheader
+msgid "Package header"
+msgstr "Заголовок пакета"
+
+#: fbmstrconstunit.spackages
+msgid "Packages"
+msgstr "Пакеты"
+
+#: fbmstrconstunit.spage
+msgid "Page "
+msgstr "Лист "
+
+#: fbmstrconstunit.spagecount
+msgid "Page count     = "
+msgstr "Кол-во страниц = "
+
+#: fbmstrconstunit.spages
+msgid "Pages"
+msgstr "Страниц"
+
+#: fbmstrconstunit.spagesize
+msgid "Page size      = "
+msgstr "Размер страницы = "
+
+#: fbmstrconstunit.spagesize1
+msgid "Page size"
+msgstr "Размер страницы"
+
+#: fbmstrconstunit.sparamname
+msgid "Param name"
+msgstr "Имя параметра"
+
+#: fbmstrconstunit.sparamprop
+msgid "Param property"
+msgstr "Свойства параметра"
+
+#: fbmstrconstunit.sparams
+msgctxt "fbmstrconstunit.sparams"
+msgid "Params"
+msgstr "Параметры"
+
+#: fbmstrconstunit.sparamshistory
+msgid "Params history"
+msgstr "История параметров"
+
+#: fbmstrconstunit.sparamtype
+msgid "Param type"
+msgstr "Тип параметра"
+
+#: fbmstrconstunit.sparamvalue
+msgid "Param value"
+msgstr "Значение параметра"
+
+#: fbmstrconstunit.spassword
+msgctxt "fbmstrconstunit.spassword"
+msgid "Password"
+msgstr "Пароль"
+
+#: fbmstrconstunit.spasswordmismath
+msgid "Password mismath."
+msgstr "Пароли не совпадают."
+
+#: fbmstrconstunit.spaste
+msgid "Paste"
+msgstr "Вставить"
+
+#: fbmstrconstunit.spgallowchangesystemcatalog
+msgid "Allow change system catalog directly"
+msgstr "Может изменять системный каталог напрямую"
+
+#: fbmstrconstunit.spgallowcreatedbobjects
+msgid "Allow create database objects"
+msgstr "Может создавать объекты базы данных"
+
+#: fbmstrconstunit.spgallowcreatereplications
+msgid "Allow create replications and backup"
+msgstr "Может создавать потоковую репликацию и резервные копии"
+
+#: fbmstrconstunit.spgallowcreateroles
+msgid "Allow create roles"
+msgstr "Может создавать роли"
+
+#: fbmstrconstunit.spgconfirmpassword
+msgctxt "fbmstrconstunit.spgconfirmpassword"
+msgid "Confirm password"
+msgstr "Подтверждение пароля"
+
+#: fbmstrconstunit.spginheritedright
+msgid "Inherited right from owner roles"
+msgstr "Наследует права из родительских ролей"
+
+#: fbmstrconstunit.spgloginenabled
+msgid "Login enabled"
+msgstr "Вход разрешён"
+
+#: fbmstrconstunit.spgmaxconnection
+msgctxt "fbmstrconstunit.spgmaxconnection"
+msgid "Max. connections"
+msgstr "Макс. число подключений"
+
+#: fbmstrconstunit.spgneverexpired
+msgid "Never expired"
+msgstr "Доступ всегда разрешён"
+
+#: fbmstrconstunit.spgpassword
+msgctxt "fbmstrconstunit.spgpassword"
+msgid "Password"
+msgstr "Пароль"
+
+#: fbmstrconstunit.spgpgsqlfunction
+#, fuzzy
+#| msgid "PG : PgSql function"
+msgid "PG : function"
+msgstr "PG : PgSql функция"
+
+#: fbmstrconstunit.spgpgsqlfunctionlazy
+#, fuzzy
+#| msgid "PG : PgSql function lazy mode"
+msgid "PG : function lazy mode"
+msgstr "PG : PgSql ленивый режим в функциях"
+
+#: fbmstrconstunit.spgpgsqltrigger
+#, fuzzy
+#| msgid "PG : PgSql trigger"
+msgid "PG : trigger"
+msgstr "PG : PgSql триггер"
+
+#: fbmstrconstunit.spgroleprivilege
+msgctxt "fbmstrconstunit.spgroleprivilege"
+msgid "Role privilege"
+msgstr "Привилегии роли"
+
+#: fbmstrconstunit.spgsuperuser
+msgid "Superuser"
+msgstr "Суперпользователь"
+
+#: fbmstrconstunit.spgusername
+msgctxt "fbmstrconstunit.spgusername"
+msgid "User name"
+msgstr "Имя оператора"
+
+#: fbmstrconstunit.spgvaliduntil
+msgctxt "fbmstrconstunit.spgvaliduntil"
+msgid "Valid until"
+msgstr "Действительна до"
+
+#: fbmstrconstunit.spk
+msgid "PK"
+msgstr "ПК"
+
+#: fbmstrconstunit.spkdlgerr1
+msgid "Not define PK field on main table"
+msgstr "Не определено поле первичного ключа для таблицы"
+
+#: fbmstrconstunit.spkname
+msgid "Primary key name"
+msgstr "Имя первичного ключа"
+
+#: fbmstrconstunit.sport
+msgctxt "fbmstrconstunit.sport"
+msgid "Port"
+msgstr "Порт"
+
+#: fbmstrconstunit.spostgresdbanaliz
+msgid "PG DB Analiz"
+msgstr "PostgreSQL - Анализатор базы данных"
+
+#: fbmstrconstunit.spostgresqldbstat
+msgid "Postgres server status"
+msgstr "Статус Postgre SQL сервера"
+
+#: fbmstrconstunit.spostgresqltablecreateproc
+msgctxt "fbmstrconstunit.spostgresqltablecreateproc"
+msgid "Create procedure"
+msgstr "Создать процедуру"
+
+#: fbmstrconstunit.sprec
+msgid "Prec"
+msgstr "Точность"
+
+#: fbmstrconstunit.sprecompileerror
+msgid "Precompiler error."
+msgstr "Ошибка предварительной компиляции."
+
+#: fbmstrconstunit.spreparequery
+msgctxt "fbmstrconstunit.spreparequery"
+msgid "Prepare query"
+msgstr "Подготовить запрос"
+
+#: fbmstrconstunit.spreparequeryhint
+msgctxt "fbmstrconstunit.spreparequeryhint"
+msgid "Prepare query"
+msgstr "Подготовить запрос"
+
+#: fbmstrconstunit.spreserverows
+msgid "Preserve rows"
+msgstr "Сохранять строки"
+
+#: fbmstrconstunit.spressshiftspacetoactivate
+msgid "Press Shift+Space to activate"
+msgstr "Нажмите Shift+Space для активации"
+
+#: fbmstrconstunit.sprimarykey
+msgid "Primary key"
+msgstr "Первичный ключ"
+
+#: fbmstrconstunit.sprimarykeys
+msgid "Primary keys"
+msgstr "Первичный ключ"
+
+#: fbmstrconstunit.sprint
+msgid "Print"
+msgstr "Печать"
+
+#: fbmstrconstunit.sprintfieldfist
+msgid "Print field list"
+msgstr "Печать списка полей"
+
+#: fbmstrconstunit.sprintfklist
+msgctxt "fbmstrconstunit.sprintfklist"
+msgid "Print FK list"
+msgstr "Печать списка ключей"
+
+#: fbmstrconstunit.sprintindexlist
+msgid "Print index list"
+msgstr "Печать списка индексов"
+
+#: fbmstrconstunit.sprintlist
+msgid "Print list"
+msgstr "Печать списка"
+
+#: fbmstrconstunit.sprintlistofalluserandroles
+msgid "Print list of all user and roles"
+msgstr "Печать всего списка пользователей и ролей на сервере"
+
+#: fbmstrconstunit.sprintlistofprimarykeyshint
+msgid "Print list of primary keys..."
+msgstr "Печать списка первичных ключей..."
+
+#: fbmstrconstunit.sprintlocalvar
+msgid "Print local variable"
+msgstr "Печать списка локальных переменных"
+
+#: fbmstrconstunit.sprintparams
+msgctxt "fbmstrconstunit.sprintparams"
+msgid "Print params"
+msgstr "Печать списка параметров"
+
+#: fbmstrconstunit.sprintqueryresult
+msgid "Print query result"
+msgstr "Печать результат выполнения запроса"
+
+#: fbmstrconstunit.sprintunqlist
+msgid "Print unique constraint list"
+msgstr "Печать списка условий уникальности"
+
+#: fbmstrconstunit.sprintuserlist
+msgid "Print user list"
+msgstr "Печать списка пользователей"
+
+#: fbmstrconstunit.sprocedure
+msgid "Procedure"
+msgstr "Процедура"
+
+#: fbmstrconstunit.sprocedurename
+msgctxt "fbmstrconstunit.sprocedurename"
+msgid "Procedure name"
+msgstr "Имя процедуры"
+
+#: fbmstrconstunit.sprocedures
+msgid "Procedures"
+msgstr "Процедуры"
+
+#: fbmstrconstunit.sproceduretype
+msgid "Procedure type"
+msgstr "Тип процедуры"
+
+#: fbmstrconstunit.sprocess
+msgid "Process"
+msgstr "Процесс"
+
+#: fbmstrconstunit.sprogres
+msgid "Progres"
+msgstr "Ход выполнения"
+
+#: fbmstrconstunit.sproperty
+msgctxt "fbmstrconstunit.sproperty"
+msgid "Property"
+msgstr "Свойства"
+
+#: fbmstrconstunit.sprotocol
+msgid "Protocol"
+msgstr "Протокол"
+
+#: fbmstrconstunit.sproxy
+msgid "Proxy"
+msgstr "Прокси"
+
+#: fbmstrconstunit.squery
+msgid "Query"
+msgstr "Запрос"
+
+#: fbmstrconstunit.squeryfields
+msgid "Query fields"
+msgstr "Выбранные поля"
+
+#: fbmstrconstunit.squerysetname
+msgid "Query set name"
+msgstr "Имя запроса к данным"
+
+#: fbmstrconstunit.squerystart
+msgid "Query start"
+msgstr "Старт запроса"
+
+#: fbmstrconstunit.squestion
+msgid "Question"
+msgstr "Вопрос"
+
+#: fbmstrconstunit.sreadonly
+msgid "Read only"
+msgstr "Только для чтения"
+
+#: fbmstrconstunit.srecfromtable
+msgid "Records from table : "
+msgstr "Записи из таблицы : "
+
+#: fbmstrconstunit.srecompilealltriggers
+msgctxt "fbmstrconstunit.srecompilealltriggers"
+msgid "Recompile all triggers"
+msgstr "Перекомпилировать все триггеры"
+
+#: fbmstrconstunit.srecordcount
+msgid "%d records in table"
+msgstr "%d запись(ей) в таблице"
+
+#: fbmstrconstunit.srecordcountget
+msgctxt "fbmstrconstunit.srecordcountget"
+msgid "Get record count"
+msgstr "Кол-во записей"
+
+#: fbmstrconstunit.srecordfetched
+msgid "%d record fetched"
+msgstr "%d отобрано записей"
+
+#: fbmstrconstunit.srecordfetchedwithselected
+msgid "%d record fetched (%d selected)"
+msgstr "%d записей (%d выделено)"
+
+#: fbmstrconstunit.srecordforfetch
+msgid "Record for fetch"
+msgstr "Выбирать записей"
+
+#: fbmstrconstunit.srecords
+msgid "records"
+msgstr "записей"
+
+#: fbmstrconstunit.sredo
+msgctxt "fbmstrconstunit.sredo"
+msgid "Redo"
+msgstr "Востановить"
+
+#: fbmstrconstunit.sredohint
+msgid "Redo last editor changes"
+msgstr "Востановить последние изменения в редакторе"
+
+#: fbmstrconstunit.sreferences
+msgid "References"
+msgstr "Ссылка"
+
+#: fbmstrconstunit.sreferencesto
+msgid "References to"
+msgstr "Внешний ключ"
+
+#: fbmstrconstunit.srefresh
+msgctxt "fbmstrconstunit.srefresh"
+msgid "Refresh"
+msgstr "Обновить"
+
+#: fbmstrconstunit.srefreshdatahint
+msgctxt "fbmstrconstunit.srefreshdatahint"
+msgid "Refresh data"
+msgstr "Обновить данные"
+
+#: fbmstrconstunit.srefreshfieldfist
+msgid "Refresh field list"
+msgstr "Обновить список полей"
+
+#: fbmstrconstunit.srefreshindexlist
+msgid "Refresh index list"
+msgstr "Обновить список индексов"
+
+#: fbmstrconstunit.srefreshinterval
+msgid "Refresh interval"
+msgstr "Интервал обновления"
+
+#: fbmstrconstunit.srefreshintervalinseconds
+msgid "Refresh interval (in seconds)"
+msgstr "Время обновления (в секундах)"
+
+#: fbmstrconstunit.srefreslistpk
+msgid "Refres primary key list"
+msgstr "Обновить список первичных ключей"
+
+#: fbmstrconstunit.srefreslistpkhint
+msgid "Refres primary keys list"
+msgstr "Обновить список первичных ключей для таблицы"
+
+#: fbmstrconstunit.sregister
+msgid "Register "
+msgstr "Зарегистрировать "
+
+#: fbmstrconstunit.sregisteraftercreate
+msgid "Register after create"
+msgstr "Зарегистрировать после создания"
+
+#: fbmstrconstunit.sregistrationparams
+msgid "Registration params"
+msgstr "Параметры регистрации"
+
+#: fbmstrconstunit.sregistreddatabase
+msgctxt "fbmstrconstunit.sregistreddatabase"
+msgid "Registred database"
+msgstr "Зарегистрированная БД"
+
+#: fbmstrconstunit.srelationname
+msgid "Relation name"
+msgstr "Имя таблицы"
+
+#: fbmstrconstunit.sreload
+msgid "Reload"
+msgstr "Перегрузить"
+
+#: fbmstrconstunit.sremoteaddress
+msgid "Remote address"
+msgstr "Удалённый адрес"
+
+#: fbmstrconstunit.sremoteprocess
+msgid "Remote process"
+msgstr "Удалённый процесс"
+
+#: fbmstrconstunit.sremoteprotocol
+msgid "Remote protocol"
+msgstr "Удалённый протокол"
+
+#: fbmstrconstunit.sremove
+msgid "Remove"
+msgstr "Убрать"
+
+#: fbmstrconstunit.sremoveallfields
+msgid "Remove all fields"
+msgstr "Удалить все поля"
+
+#: fbmstrconstunit.sremovefield
+msgid "Remove field"
+msgstr "Удалить поле"
+
+#: fbmstrconstunit.srename
+msgid "Rename %s \"%s\""
+msgstr "Переименовать %s \"%s\""
+
+#: fbmstrconstunit.srenameobject
+msgid "Rename object"
+msgstr "Переименовать объект"
+
+#: fbmstrconstunit.srenametab
+msgid "Rename tab"
+msgstr "Переименовать закладку"
+
+#: fbmstrconstunit.srenametabhint
+msgid "Rename edit tab"
+msgstr "Переименовать закладку"
+
+#: fbmstrconstunit.srenametable
+msgid "Rename table"
+msgstr "Алиас таблицы"
+
+#: fbmstrconstunit.srepl
+msgid "REPL"
+msgstr "ЗАМ"
+
+#: fbmstrconstunit.sreplace
+msgctxt "fbmstrconstunit.sreplace"
+msgid "Replace"
+msgstr "Заменить"
+
+#: fbmstrconstunit.sreplclient
+msgid "Repl. client"
+msgstr ""
+
+#: fbmstrconstunit.sreplslave
+msgid "Repl. slave"
+msgstr ""
+
+#: fbmstrconstunit.sreportfolder
+msgid "Report folder"
+msgstr "Папка с шаблонами отчётов"
+
+#: fbmstrconstunit.sreportmanager
+msgctxt "fbmstrconstunit.sreportmanager"
+msgid "Report manager"
+msgstr "Окно со списком отчётов"
+
+#: fbmstrconstunit.sreportsoptions
+msgid "Reports options"
+msgstr "Параметры отчётов"
+
+#: fbmstrconstunit.srestore
+msgctxt "fbmstrconstunit.srestore"
+msgid "Restore"
+msgstr "Востановление"
+
+#: fbmstrconstunit.srestoreoptons
+msgid "Restore optons"
+msgstr "Параметры восстановления"
+
+#: fbmstrconstunit.srestoresuccessfullyfinished
+msgid "Restore successfully finished"
+msgstr "Восстановление БД успешно"
+
+#: fbmstrconstunit.sresult
+msgid "Result"
+msgstr "Результат"
+
+#: fbmstrconstunit.sresultform
+msgid "Form"
+msgstr "Форма"
+
+#: fbmstrconstunit.sresultgrid
+msgid "Grid"
+msgstr "Таблица"
+
+#: fbmstrconstunit.sreturnnullforemptyresult
+msgctxt "fbmstrconstunit.sreturnnullforemptyresult"
+msgid "Return null for empty result"
+msgstr "Вернуть null для пустого результата"
+
+#: fbmstrconstunit.sreturnparams
+msgid "Return params"
+msgstr "Результат"
+
+#: fbmstrconstunit.sreturntype
+msgctxt "fbmstrconstunit.sreturntype"
+msgid "Return type"
+msgstr "Тип возврата"
+
+#: fbmstrconstunit.srevokeall
+msgid "Revoke all"
+msgstr "Убрать все права"
+
+#: fbmstrconstunit.srevokeallfromall
+msgid "Revoke all from all"
+msgstr "Убрать все права у всех"
+
+#: fbmstrconstunit.srevokefromall
+msgid "Revoke from all"
+msgstr "Убрать все права"
+
+#: fbmstrconstunit.srolback
+msgid "Rolback"
+msgstr "Откатить"
+
+#: fbmstrconstunit.srolbackandclose
+msgid "Rolback and close"
+msgstr "Откать и закрыть"
+
+#: fbmstrconstunit.srolbackandclosehint
+msgid "Rolback and close transaction"
+msgstr "Откатить транзакцию и закрыть данные"
+
+#: fbmstrconstunit.srolbackhint
+msgid "Rolback transaction"
+msgstr "Откатить транзакцию"
+
+#: fbmstrconstunit.srole
+msgctxt "fbmstrconstunit.srole"
+msgid "Role"
+msgstr "Роль"
+
+#: fbmstrconstunit.srolegrantforobjects
+msgid "Grant for objects"
+msgstr "Права на объекты"
+
+#: fbmstrconstunit.srolegrantforuser
+msgctxt "fbmstrconstunit.srolegrantforuser"
+msgid "Grant for user"
+msgstr "Права для оператора"
+
+#: fbmstrconstunit.srolename
+msgid "Role           = "
+msgstr "Роль            = "
+
+#: fbmstrconstunit.srolename1
+msgid "Role name"
+msgstr "Имя роли"
+
+#: fbmstrconstunit.srolepropertys
+msgid "Role propertys"
+msgstr "Свойства роли"
+
+#: fbmstrconstunit.sroles
+msgctxt "fbmstrconstunit.sroles"
+msgid "Roles"
+msgstr "Роли"
+
+#: fbmstrconstunit.srow
+msgid "Row"
+msgstr "Строка"
+
+#: fbmstrconstunit.srowcountdeleted
+msgid "Rows count deleted"
+msgstr "Количество строк, удалённое запросами в базе данных"
+
+#: fbmstrconstunit.srowcountupdated
+msgid "Rows count updated"
+msgstr "Количество строк, изменённое запросами в этой данных"
+
+#: fbmstrconstunit.srowscope
+msgid "For each"
+msgstr "Для всех"
+
+#: fbmstrconstunit.srule
+msgctxt "fbmstrconstunit.srule"
+msgid "Rule"
+msgstr "Правило"
+
+#: fbmstrconstunit.srulename
+msgctxt "fbmstrconstunit.srulename"
+msgid "Rule name"
+msgstr "Имя правила"
+
+#: fbmstrconstunit.srules
+msgctxt "fbmstrconstunit.srules"
+msgid "Rules"
+msgstr "Правила"
+
+#: fbmstrconstunit.srun
+msgid "Run"
+msgstr "Выполнить"
+
+#: fbmstrconstunit.srunasowner
+msgctxt "fbmstrconstunit.srunasowner"
+msgid "Run as owner"
+msgstr "Выполнить от владельца"
+
+#: fbmstrconstunit.sruning
+msgid " - running"
+msgstr " - выполняется"
+
+#: fbmstrconstunit.ssave
+msgctxt "fbmstrconstunit.ssave"
+msgid "Save"
+msgstr "Сохранить"
+
+#: fbmstrconstunit.ssaveas
+msgid "Save as ..."
+msgstr "Сохранить как..."
+
+#: fbmstrconstunit.ssavedesktopondisconectfromdb
+msgid "Save desktop on disconect from DB"
+msgstr "Сохранть окружение при отключении от базы данных"
+
+#: fbmstrconstunit.ssavefile
+msgctxt "fbmstrconstunit.ssavefile"
+msgid "Save file"
+msgstr "Сохранить файл"
+
+#: fbmstrconstunit.ssavetofile
+msgid "Save to file..."
+msgstr "Сохранить в файл..."
+
+#: fbmstrconstunit.sscale
+msgctxt "fbmstrconstunit.sscale"
+msgid "Scale"
+msgstr "Точность"
+
+#: fbmstrconstunit.sscheme
+msgid "Scheme"
+msgstr "Схема"
+
+#: fbmstrconstunit.sschemename
+msgctxt "fbmstrconstunit.sschemename"
+msgid "Scheme name"
+msgstr "Название схемы"
+
+#: fbmstrconstunit.sschemeowner
+msgid "Scheme owner"
+msgstr "Владелец схемы"
+
+#: fbmstrconstunit.sschemes
+msgid "Schemes"
+msgstr "Схемы"
+
+#: fbmstrconstunit.sscripttextmodified
+msgid "Script modified. Save?"
+msgstr "Текст SQL скрипта изменён. Сохранить его?"
+
+#: fbmstrconstunit.ssearchcaption
+msgctxt "fbmstrconstunit.ssearchcaption"
+msgid "Search"
+msgstr "Поиск"
+
+#: fbmstrconstunit.ssearchreplace
+msgctxt "fbmstrconstunit.ssearchreplace"
+msgid "Replace"
+msgstr "Заменить"
+
+#: fbmstrconstunit.ssecurity
+msgctxt "fbmstrconstunit.ssecurity"
+msgid "Security"
+msgstr "Безопасность"
+
+#: fbmstrconstunit.sselect
+msgid "Select"
+msgstr "Выбрать"
+
+#: fbmstrconstunit.sselectall
+msgid "Select all"
+msgstr "Выбрать всё"
+
+#: fbmstrconstunit.sselectcolor
+msgid "SELECT color"
+msgstr "Цвет SELECT"
+
+#: fbmstrconstunit.sselectconnectiontype
+msgid "Select connection type"
+msgstr "Укажите тип подключения"
+
+#: fbmstrconstunit.sselectdatabase
+msgid "Select database"
+msgstr "Выбор базы данных"
+
+#: fbmstrconstunit.sselectedrowsinfo
+msgid "Selected rows : %d"
+msgstr "Выбрано строк : %d"
+
+#: fbmstrconstunit.sselectfont
+msgid "Select font"
+msgstr "Выберите шрифт"
+
+#: fbmstrconstunit.sselectfontforprint
+msgid "Select font for print"
+msgstr "Выберите шрифт для печати"
+
+#: fbmstrconstunit.sselections
+msgid "Selections"
+msgstr "Выбор"
+
+#: fbmstrconstunit.sselectrootfolder
+msgid "Select root folder"
+msgstr "Выбрать папку с отчётами"
+
+#: fbmstrconstunit.sseparatedppages
+msgid "Separated pages"
+msgstr "Раздельные страницы"
+
+#: fbmstrconstunit.sseparator
+msgid "Separator"
+msgstr "Разделитель"
+
+#: fbmstrconstunit.sseparetedfiles
+msgid "Separeted files"
+msgstr "Раздельные файлы"
+
+#: fbmstrconstunit.ssequence
+msgctxt "fbmstrconstunit.ssequence"
+msgid "Sequence"
+msgstr "Последовательность"
+
+#: fbmstrconstunit.ssequences
+msgid "Sequences"
+msgstr "Последовательности"
+
+#: fbmstrconstunit.sservername
+msgid "Server name    = "
+msgstr "Имя сервера            = "
+
+#: fbmstrconstunit.sservername1
+msgid "Server name"
+msgstr "Имя сервера"
+
+#: fbmstrconstunit.sserverversion
+msgid "Server version = "
+msgstr "Версия сервера = "
+
+#: fbmstrconstunit.sserverversion1
+msgid "Server version"
+msgstr "Версия сервера"
+
+#: fbmstrconstunit.ssetbookmarknum
+msgid "Set/Remove bookmark "
+msgstr "Установить/Снять закладку"
+
+#: fbmstrconstunit.sshedule
+msgid "Shedule"
+msgstr "Расписание"
+
+#: fbmstrconstunit.sshowallobjects
+msgid "Show all objects"
+msgstr "Отображать все объекты"
+
+#: fbmstrconstunit.sshowdb
+msgid "Show databses"
+msgstr "Отобразить базы данных"
+
+#: fbmstrconstunit.sshowdesigner
+msgid "Show designer"
+msgstr "Отображать редактор отчётов"
+
+#: fbmstrconstunit.sshowdml
+msgid "Show DML statemenst"
+msgstr "Показывать DML-статементы"
+
+#: fbmstrconstunit.sshowlinenumbers
+msgid "Show line numbers"
+msgstr "Отображать номера строк"
+
+#: fbmstrconstunit.sshowobjectdescriptionsashint
+msgid "Show object descriptions as hint"
+msgstr "Отображать примечание объектов в оперативной подсказке"
+
+#: fbmstrconstunit.sshowobjectnameinobjecteditorform
+msgid "Show object name in object editor form"
+msgstr "Отображать имя объекта в редакторе"
+
+#: fbmstrconstunit.sshowobjectongrantpagedefault
+msgid "Show object on grant page default"
+msgstr "Отображать по умолчанию объекты на странице выдачи прав"
+
+#: fbmstrconstunit.sshowobjects
+msgid "Show objects"
+msgstr "Отображать объекты"
+
+#: fbmstrconstunit.sshowobjtree
+msgid "Show objects tree"
+msgstr "Отобразить дерево объектов"
+
+#: fbmstrconstunit.sshowonlylinenumber
+msgid "Show only line number"
+msgstr "Отображать только номер строки"
+
+#: fbmstrconstunit.sshowqueryplan
+msgid "Show query plan"
+msgstr "Отображать план выполнения запроса"
+
+#: fbmstrconstunit.sshowresultgridonfirstpage
+msgid "Show result grid on first page"
+msgstr "Отображать результат на первой странице"
+
+#: fbmstrconstunit.sshowrightborder
+msgid "Show right border"
+msgstr "Отображать правую границу"
+
+#: fbmstrconstunit.sshowsystemobjects
+msgid "Show system objects"
+msgstr "Отображать системные объекты"
+
+#: fbmstrconstunit.sshowview
+msgid "Show view"
+msgstr "Отобразить представления"
+
+#: fbmstrconstunit.sshutdown
+msgid "Shutdown"
+msgstr "Выключить"
+
+#: fbmstrconstunit.ssimple
+msgid "Simple"
+msgstr "Простой"
+
+#: fbmstrconstunit.ssinglefilebackup
+msgid "Single file backup"
+msgstr "Архивация в один файл"
+
+#: fbmstrconstunit.ssinglefilerestore
+msgid "Single file restore"
+msgstr "Восстановить в один файл"
+
+#: fbmstrconstunit.ssize
+msgctxt "fbmstrconstunit.ssize"
+msgid "Size"
+msgstr "Размер"
+
+#: fbmstrconstunit.sskipafterrows
+msgid "Skip after rows"
+msgstr "Пропустить строк после"
+
+#: fbmstrconstunit.sskipbeforerows
+msgid "Skip before rows"
+msgstr "Пропустить строк сначала"
+
+#: fbmstrconstunit.sskipempty
+msgid "Skip empty"
+msgstr "Пропускать пустое"
+
+#: fbmstrconstunit.ssorting
+msgid "Sorting"
+msgstr "Сортировка"
+
+#: fbmstrconstunit.ssortorder
+msgctxt "fbmstrconstunit.ssortorder"
+msgid "Sort order"
+msgstr "Порядок сортировки"
+
+#: fbmstrconstunit.ssqlbody
+msgid "Sql body"
+msgstr "Текст SQL запроса"
+
+#: fbmstrconstunit.ssqlbuilder
+msgid "SQL builder"
+msgstr "Построитель SQL"
+
+#: fbmstrconstunit.ssqldataacess
+msgid "SQL data acess"
+msgstr "SQL доступ к данным"
+
+#: fbmstrconstunit.ssqldialect
+msgid "SQL Dialect"
+msgstr "Диалект SQL"
+
+#: fbmstrconstunit.ssqleditor
+msgctxt "fbmstrconstunit.ssqleditor"
+msgid "SQL editor"
+msgstr "Редактор SQL"
+
+#: fbmstrconstunit.ssqleditorhistorycount
+msgid "SQL editor history count"
+msgstr "Количество элементов истории SQL"
+
+#: fbmstrconstunit.ssqleditorlogfile
+msgid "SQL editor log file"
+msgstr "Файл протокола SQL"
+
+#: fbmstrconstunit.ssqleditoroptions
+msgid "SQL editor options"
+msgstr "Параметры редактора SQL"
+
+#: fbmstrconstunit.ssqlhistorycolors
+msgid "SQL history colors"
+msgstr "Цвета истории SQL запросов"
+
+#: fbmstrconstunit.ssqlitedbstat
+msgid "SQLite database status"
+msgstr "Статус SQLite базы данных"
+
+#: fbmstrconstunit.ssqlmetadatalogfile
+msgid "SQL metadata log file"
+msgstr "Файл лога метаданных SQL"
+
+#: fbmstrconstunit.ssqlpagename
+msgid "SQL page name"
+msgstr "Имя страницы SQL"
+
+#: fbmstrconstunit.ssqlparseerror
+msgid "Error in SQL text"
+msgstr "Ошибка в тексте запроса SQL"
+
+#: fbmstrconstunit.ssqlsecurity
+msgid "Sql security"
+msgstr "Защита SQL"
+
+#: fbmstrconstunit.ssrcpagename
+msgid "Source page name"
+msgstr "Имя исходной страницы"
+
+#: fbmstrconstunit.sstandart
+msgctxt "fbmstrconstunit.sstandart"
+msgid "Standart"
+msgstr "Стандартные"
+
+#: fbmstrconstunit.sstart
+msgctxt "fbmstrconstunit.sstart"
+msgid "Start date"
+msgstr "Дата запуска"
+
+#: fbmstrconstunit.sstart1
+msgid "Start"
+msgstr "Начало"
+
+#: fbmstrconstunit.sstartvalue
+msgid "Start value"
+msgstr "Начальное значение"
+
+#: fbmstrconstunit.sstartwith
+msgid "START WITH"
+msgstr "Начать с"
+
+#: fbmstrconstunit.sstatament
+msgctxt "fbmstrconstunit.sstatament"
+msgid "Statament"
+msgstr "Набор строк"
+
+#: fbmstrconstunit.sstate
+msgid "State"
+msgstr "Статус"
+
+#: fbmstrconstunit.sstatistic
+msgid "Statistic"
+msgstr "Статистика"
+
+#: fbmstrconstunit.sstatsdatetime
+msgid "Stats date"
+msgstr "Последнее время сброса этих статистических данных"
+
+#: fbmstrconstunit.sstatus
+msgctxt "fbmstrconstunit.sstatus"
+msgid "Status"
+msgstr "Статус"
+
+#: fbmstrconstunit.sstep
+msgid "Step"
+msgstr "Шаг"
+
+#: fbmstrconstunit.sstepname
+msgctxt "fbmstrconstunit.sstepname"
+msgid "Step name"
+msgstr "Название шага"
+
+#: fbmstrconstunit.ssteps
+msgid "Steps"
+msgstr "Шаги"
+
+#: fbmstrconstunit.sstop
+msgid "Stop"
+msgstr "Остановить"
+
+#: fbmstrconstunit.sstoredprocedure
+msgctxt "fbmstrconstunit.sstoredprocedure"
+msgid "Stored procedure"
+msgstr "Хранимая процедура"
+
+#: fbmstrconstunit.sstoredprocedurename
+msgctxt "fbmstrconstunit.sstoredprocedurename"
+msgid "Procedure name"
+msgstr "Имя процедуры"
+
+#: fbmstrconstunit.sstoredprocedures
+msgctxt "fbmstrconstunit.sstoredprocedures"
+msgid "Stored procedures"
+msgstr "Хранимые процедуры"
+
+#: fbmstrconstunit.sstrings
+msgid "Strings"
+msgstr "Строки"
+
+#: fbmstrconstunit.sstripygrids
+msgid "Stripy grids"
+msgstr "Полосатые сетки"
+
+#: fbmstrconstunit.ssubroutines
+msgid "Nested function/procedures"
+msgstr "Вложенная функция/процедура"
+
+#: fbmstrconstunit.ssubtype
+msgid "Sub type"
+msgstr "Подтип"
+
+#: fbmstrconstunit.ssuccesconnection
+msgid "Successful connection"
+msgstr "Успешное подключение..."
+
+#: fbmstrconstunit.ssuccessfullyfinished
+msgid " - successfully finished"
+msgstr " - успешное завершение"
+
+#: fbmstrconstunit.ssummaryline
+msgid "Summary line"
+msgstr "Итоговая строка"
+
+#: fbmstrconstunit.ssummarylinehint
+msgid "Show summary line"
+msgstr "Отобразить итоговую строку"
+
+#: fbmstrconstunit.ssuper
+msgid "Super"
+msgstr "Администратор"
+
+#: fbmstrconstunit.ssvnrevision
+msgid "SVN revision : "
+msgstr "Ревизия SVN : "
+
+#: fbmstrconstunit.ssweepinterval
+msgid "Sweep interval"
+msgstr "Интревал сборки мусора"
+
+#: fbmstrconstunit.ssynchronous
+msgid "Synchronous"
+msgstr ""
+
+#: fbmstrconstunit.ssyncomdescreatedomain
+msgid "Create domain"
+msgstr "Создать домен"
+
+#: fbmstrconstunit.ssyncomdesdecldatevar
+msgid "Declare date variable"
+msgstr "Объявить переменную типа ДАТА"
+
+#: fbmstrconstunit.ssyncomdesdeclintvar
+msgid "Declare integer variable"
+msgstr "Объявить целочисленную переменную"
+
+#: fbmstrconstunit.ssyncomdesdeclvar
+msgid "Declare variable"
+msgstr "Объявить переменную"
+
+#: fbmstrconstunit.ssyncomdesexecblock
+msgid "Execute block"
+msgstr "Шаблон блока"
+
+#: fbmstrconstunit.ssyncomdesexecproc
+msgid "Execute procedure"
+msgstr "Выполнить процедуру"
+
+#: fbmstrconstunit.ssyncomdesforignkey
+msgid "Forign key"
+msgstr "Внешний ключ"
+
+#: fbmstrconstunit.ssyncomdesgrantall
+msgid "Grant all for object"
+msgstr "Права для всех"
+
+#: fbmstrconstunit.ssyncomdesgroupby
+msgid "group by "
+msgstr "Группировка "
+
+#: fbmstrconstunit.ssyncomdesinstable
+msgid "Insert into table"
+msgstr "Вставка в таблицу"
+
+#: fbmstrconstunit.ssyncomdesiteratetable
+msgid "Iterate table"
+msgstr "Цикл по таблице"
+
+#: fbmstrconstunit.ssyntaxhighlight
+msgid "Syntax highlight"
+msgstr "Подсветка синтаксиса"
+
+#: fbmstrconstunit.ssystemcatalog
+msgid "System catalog"
+msgstr "Системный каталог"
+
+#: fbmstrconstunit.ssystemcommentstyle
+msgid "System comment style"
+msgstr "Стиль системных коментариев"
+
+#: fbmstrconstunit.ssystemdomains
+msgid "System domains"
+msgstr "Системные домены"
+
+#: fbmstrconstunit.ssystemindex
+msgid "System index"
+msgstr "Системный индекс"
+
+#: fbmstrconstunit.ssystemtables
+msgid "System tables"
+msgstr "Системные таблицы"
+
+#: fbmstrconstunit.stabcodecompletionparams
+msgctxt "fbmstrconstunit.stabcodecompletionparams"
+msgid "Codetools and auto code completion"
+msgstr "Инструменты и автодополнение"
+
+#: fbmstrconstunit.stable
+msgctxt "fbmstrconstunit.stable"
+msgid "Table"
+msgstr "Таблица"
+
+#: fbmstrconstunit.stable1
+msgid "Table : "
+msgstr "Таблица : "
+
+#: fbmstrconstunit.stablecheckconstraint
+msgid "Table check constraint"
+msgstr "Ограничение целостности на таблицу"
+
+#: fbmstrconstunit.stableeditor
+msgctxt "fbmstrconstunit.stableeditor"
+msgid "Table editor"
+msgstr "Редактор таблицы"
+
+#: fbmstrconstunit.stablename
+msgctxt "fbmstrconstunit.stablename"
+msgid "Table name"
+msgstr "Имя таблицы"
+
+#: fbmstrconstunit.stableowner
+msgctxt "fbmstrconstunit.stableowner"
+msgid "Table owner"
+msgstr "Владелец таблицы"
+
+#: fbmstrconstunit.stables
+msgctxt "fbmstrconstunit.stables"
+msgid "Tables"
+msgstr "Таблицы"
+
+#: fbmstrconstunit.stablespace
+msgctxt "fbmstrconstunit.stablespace"
+msgid "Table space"
+msgstr "Табличные пространства"
+
+#: fbmstrconstunit.stablespacename
+msgid "Table space name"
+msgstr "Имя табличного пространства"
+
+#: fbmstrconstunit.stargetcpu
+msgid "Target CPU : "
+msgstr "Целевой процессор : "
+
+#: fbmstrconstunit.stargetos
+msgid "Target OS : "
+msgstr "Целевая ОС : "
+
+#: fbmstrconstunit.stask
+msgid "Task"
+msgstr "Задача"
+
+#: fbmstrconstunit.staskclass
+msgctxt "fbmstrconstunit.staskclass"
+msgid "Task class"
+msgstr "Класс задачи"
+
+#: fbmstrconstunit.staskid
+msgctxt "fbmstrconstunit.staskid"
+msgid "Task ID"
+msgstr "ID задачи"
+
+#: fbmstrconstunit.staskname
+msgctxt "fbmstrconstunit.staskname"
+msgid "Task name"
+msgstr "Наименование задачи"
+
+#: fbmstrconstunit.stasks
+msgid "Tasks"
+msgstr "Задачи"
+
+#: fbmstrconstunit.stempbytes
+msgid "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting."
+msgstr "Общий объём данных, записанных во временные файлы запросами в этой базе данных. Учитываются все временные файлы, вне зависимости от того, по какой причине они созданы и вне зависимости от значения log_temp_files."
+
+#: fbmstrconstunit.stempfiles
+msgid "Number of temporary files created by queries in this database. All temporary files are counted, regardless of why the temporary file was created (e.g., sorting or hashing), and regardless of the log_temp_files setting."
+msgstr "Количество временных файлов, созданных запросами в этой базе данных. Подсчитываются все временные файлы независимо от причины их создания (например, для сортировки или для хеширования) и независимо от установленного значения log_temp_files"
+
+#: fbmstrconstunit.stemplate
+msgid "Template"
+msgstr "Шаблон"
+
+#: fbmstrconstunit.stemplatename
+msgid "Template name"
+msgstr "Имя шаблона"
+
+#: fbmstrconstunit.stemplates
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: fbmstrconstunit.stemporary
+msgctxt "fbmstrconstunit.stemporary"
+msgid "Temporary"
+msgstr "Временная"
+
+#: fbmstrconstunit.stempstoredirectory
+msgid "Temp store directory"
+msgstr "Каталог временных файлов"
+
+#: fbmstrconstunit.sterminatequeryquestion
+msgctxt "fbmstrconstunit.sterminatequeryquestion"
+msgid "Terminate a running query?"
+msgstr "Отключить данное подключени?"
+
+#: fbmstrconstunit.stest
+msgid "Test"
+msgstr "Проверка"
+
+#: fbmstrconstunit.stexttosqleditor
+msgid "Text to SQL editor"
+msgstr "Текст в редактор SQL"
+
+#: fbmstrconstunit.sthousandseparator
+msgid "Thousand separator"
+msgstr "Разделитель тысяч"
+
+#: fbmstrconstunit.stime
+msgctxt "fbmstrconstunit.stime"
+msgid "Time"
+msgstr "Время"
+
+#: fbmstrconstunit.stimelife
+msgctxt "fbmstrconstunit.stimelife"
+msgid "Time life"
+msgstr "Время жизни"
+
+#: fbmstrconstunit.stimes
+msgctxt "fbmstrconstunit.stimes"
+msgid "Times"
+msgstr "Время"
+
+#: fbmstrconstunit.stimestamp
+msgid "TimeStamp"
+msgstr "ДатаВремя"
+
+#: fbmstrconstunit.stodate
+msgctxt "fbmstrconstunit.stodate"
+msgid "To date"
+msgstr "По дату"
+
+#: fbmstrconstunit.stoinsertfieldname
+msgid "%FIELD_NAME% - to insert field name"
+msgstr "%FIELD_NAME% - для вставки имени поля"
+
+#: fbmstrconstunit.stoinsertgeneratorname
+msgid "%GENERATOR_NAME% - to insert generator name"
+msgstr "%GENERATOR_NAME% - для вставки имени генератора"
+
+#: fbmstrconstunit.stoinserttablename
+msgid "%TABLE_NAME% - to insert table name"
+msgstr "%TABLE_NAME% - для вставки имени таблицы"
+
+#: fbmstrconstunit.stoinserttableshemaname
+msgid "%TABLE_SCHEMA_NAME% - to insert table shema name"
+msgstr "%TABLE_SCHEMA_NAME% - для вставки имени схемы"
+
+#: fbmstrconstunit.stoinserttriggername
+msgid "%TRIGGER_NAME% - to insert trigger name"
+msgstr "%TRIGGER_NAME% - для вставки имени триггера"
+
+#: fbmstrconstunit.stotal
+msgid "Total"
+msgstr "Всего"
+
+#: fbmstrconstunit.stransactionpersecond
+msgid "Transaction per second"
+msgstr "Транзакции за секунду"
+
+#: fbmstrconstunit.stransactionpropertyfordata
+msgid "Transaction property for data"
+msgstr "Параметры транзакции для данных"
+
+#: fbmstrconstunit.stransactionpropertyformetadata
+msgid "Transaction property for metadata"
+msgstr "Параметры транзакции для метаданных"
+
+#: fbmstrconstunit.stransactionpropertyforscripteditor
+msgid "Transaction property for script editor"
+msgstr "Параметры транзакции для редактора скриптов"
+
+#: fbmstrconstunit.stransactionscommit
+msgid "Transactions commit"
+msgstr "Количество зафиксированных транзакций в базе данных"
+
+#: fbmstrconstunit.stransactionsrollback
+msgid "Transactions rollback"
+msgstr "Количество транзакций для которых был выполнен откат"
+
+#: fbmstrconstunit.strigger
+msgctxt "fbmstrconstunit.strigger"
+msgid "Trigger"
+msgstr "Триггер"
+
+#: fbmstrconstunit.striggeractive
+msgctxt "fbmstrconstunit.striggeractive"
+msgid "Active"
+msgstr "Активен"
+
+#: fbmstrconstunit.striggerbody
+msgid "Trigger body"
+msgstr "Тело триггера"
+
+#: fbmstrconstunit.striggerdescription
+msgid "Trigger description"
+msgstr "Описание триггера"
+
+#: fbmstrconstunit.striggerforevent
+msgid "For event"
+msgstr "Для события"
+
+#: fbmstrconstunit.striggername
+msgctxt "fbmstrconstunit.striggername"
+msgid "Trigger name"
+msgstr "Название тригера"
+
+#: fbmstrconstunit.striggernametags
+msgid ""
+"Avaliable tags:\n"
+"%TABLE_NAME% - Table name\n"
+"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
+msgstr ""
+"Доступные тэги:\n"
+"%TABLE_NAME% - имя таблицы\n"
+"%TRIGGER_TYPE% - тип триггера (BI0, AUD1)\n"
+
+#: fbmstrconstunit.striggernametemplate
+msgid "Trigger name template"
+msgstr "Шаблон имени триггера"
+
+#: fbmstrconstunit.striggerondelete
+msgctxt "fbmstrconstunit.striggerondelete"
+msgid "On delete"
+msgstr "При удалении"
+
+#: fbmstrconstunit.striggeroninsert
+msgid "On insert"
+msgstr "При вставке"
+
+#: fbmstrconstunit.striggeronupdate
+msgid "On update"
+msgstr "При изменении"
+
+#: fbmstrconstunit.striggerorder
+msgctxt "fbmstrconstunit.striggerorder"
+msgid "Order"
+msgstr "Порядок"
+
+#: fbmstrconstunit.striggerproc
+msgid "Trigger procedures"
+msgstr "Триггерные процедуры"
+
+#: fbmstrconstunit.striggers
+msgctxt "fbmstrconstunit.striggers"
+msgid "Triggers"
+msgstr "Триггеры"
+
+#: fbmstrconstunit.striggerslist
+msgid "Triggers list"
+msgstr "Список триггеров"
+
+#: fbmstrconstunit.striggertable
+msgctxt "fbmstrconstunit.striggertable"
+msgid "For table"
+msgstr "Для таблицы"
+
+#: fbmstrconstunit.striggertext
+msgid "Trigger text"
+msgstr "Текст триггера"
+
+#: fbmstrconstunit.striggertype
+msgid "Trigger type"
+msgstr "Тип тригера"
+
+#: fbmstrconstunit.struncate
+msgid "Truncate"
+msgstr "Обрезать"
+
+#: fbmstrconstunit.strusted
+msgid "Trusted"
+msgstr "Доверенные"
+
+#: fbmstrconstunit.stupfetched
+msgid "Number of rows fetched by queries in this database"
+msgstr "Количество строк, извлечённое запросами в этой базе данных"
+
+#: fbmstrconstunit.stupinserted
+msgid "Number of rows inserted by queries in this database"
+msgstr "Количество строк, вставленное запросами в этой базе данных"
+
+#: fbmstrconstunit.stupreturned
+msgid "Number of rows returned by queries in this database"
+msgstr "Количество строк, возвращённое запросами в этой базе данных"
+
+#: fbmstrconstunit.stype
+msgctxt "fbmstrconstunit.stype"
+msgid "Type"
+msgstr "Тип"
+
+#: fbmstrconstunit.stypeof
+msgid "TypeOf"
+msgstr ""
+
+#: fbmstrconstunit.stypereturns
+msgctxt "fbmstrconstunit.stypereturns"
+msgid "Type returns"
+msgstr "Тип возврата"
+
+#: fbmstrconstunit.stypereturns1
+msgid "Single value"
+msgstr "Единичное значение"
+
+#: fbmstrconstunit.stypereturns2
+msgid "Set of values"
+msgstr "Набор данных"
+
+#: fbmstrconstunit.stypereturns3
+msgctxt "fbmstrconstunit.stypereturns3"
+msgid "Table"
+msgstr "Таблица"
+
+#: fbmstrconstunit.sudf
+msgid "UDF"
+msgstr "Функция"
+
+#: fbmstrconstunit.sudfs
+msgid "UDFs"
+msgstr "Внешние функции"
+
+#: fbmstrconstunit.suncommentcmd
+msgid "Uncomment selection"
+msgstr "Раскоментировать выбранное"
+
+#: fbmstrconstunit.sunderline
+msgid "Underline"
+msgstr "Подчёркнуто"
+
+#: fbmstrconstunit.sundo
+msgid "Undo"
+msgstr "Отмена"
+
+#: fbmstrconstunit.sundohint
+msgid "Undo last editor changes"
+msgstr "Отменить последние изменения в редакторе"
+
+#: fbmstrconstunit.sunique
+msgctxt "fbmstrconstunit.sunique"
+msgid "Unique"
+msgstr "Уникальный"
+
+#: fbmstrconstunit.suniqueconstraint
+msgid "Unique constraint"
+msgstr "Ограничение уникальности"
+
+#: fbmstrconstunit.suniqueconstraintname
+msgid "Unique constraint name"
+msgstr "Название условий уникальности"
+
+#: fbmstrconstunit.sunkonwpgfunccategor
+msgid "Unknow function category - %d"
+msgstr "Неизвестная категория функции - %d"
+
+#: fbmstrconstunit.sunlinktable
+msgid "Unlink table"
+msgstr "Убрать связь"
+
+#: fbmstrconstunit.sunq
+msgid "UNQ"
+msgstr "UNQ"
+
+#: fbmstrconstunit.sunregisterdatabase
+msgid "Unregister database?"
+msgstr "Удалить регистрационную информацию?"
+
+#: fbmstrconstunit.sunselectall
+msgid "Unselect all"
+msgstr "Отменить выбор"
+
+#: fbmstrconstunit.supdate
+msgctxt "fbmstrconstunit.supdate"
+msgid "Update"
+msgstr "Обновление"
+
+#: fbmstrconstunit.supdatecolor
+msgid "UPDATE color"
+msgstr "Цвет UPDATE"
+
+#: fbmstrconstunit.supdatedrowsinfo
+msgid "Updated rows : %d"
+msgstr "Изменено строк : %d"
+
+#: fbmstrconstunit.supdaterule
+msgid "Update rule"
+msgstr "Правило изменения"
+
+#: fbmstrconstunit.supper
+msgid "Upper"
+msgstr "Верхнее"
+
+#: fbmstrconstunit.suppercase
+msgctxt "fbmstrconstunit.suppercase"
+msgid "Upper case"
+msgstr "Верхний регистр"
+
+#: fbmstrconstunit.susage
+msgid "Usage"
+msgstr "Использовать"
+
+#: fbmstrconstunit.suseallspace
+msgid "Use All Space"
+msgstr "Использовать все пространство"
+
+#: fbmstrconstunit.susecustomcodepageforloggin
+msgid "Use custom codepage for loggin"
+msgstr "Использовать не стандартную кодировку для протокола"
+
+#: fbmstrconstunit.susedeffillfactor
+msgctxt "fbmstrconstunit.susedeffillfactor"
+msgid "Use default fill factor"
+msgstr "Использовать Fill factor по умолчанию"
+
+#: fbmstrconstunit.suseexistingfunction
+msgid "Use existing function"
+msgstr "Существующая функция"
+
+#: fbmstrconstunit.suseexistinggenerator
+msgid "Use existing generator"
+msgstr "Использовать существующий генератор"
+
+#: fbmstrconstunit.susepgshedule
+msgid "Use pgShedule (if avaliable)"
+msgstr "Использовать pgShedule (если доступен)"
+
+#: fbmstrconstunit.suser
+msgid "User"
+msgstr "Оператор"
+
+#: fbmstrconstunit.suserid
+msgid "User ID"
+msgstr "ID пользователя"
+
+#: fbmstrconstunit.suserlist
+msgid "User list"
+msgstr "Список пользователей"
+
+#: fbmstrconstunit.susername
+msgid "UserName       = "
+msgstr "Имя пользователя = "
+
+#: fbmstrconstunit.susername1
+msgctxt "fbmstrconstunit.susername1"
+msgid "User name"
+msgstr "Имя оператора"
+
+#: fbmstrconstunit.suserpassword
+msgid "User password"
+msgstr "Пароль пользователя"
+
+#: fbmstrconstunit.suserrole
+msgid "User role"
+msgstr "Роль пользователя"
+
+#: fbmstrconstunit.susers
+msgid "Users"
+msgstr "Операторы"
+
+#: fbmstrconstunit.susersandgroups
+msgid "Users and Groups"
+msgstr "Пользователи и роли"
+
+#: fbmstrconstunit.susersgroups
+msgid "Users/Groups"
+msgstr "Пользователи/Группы"
+
+#: fbmstrconstunit.susetablealisincreatesqlform
+msgid "Use table name as alis in create SQL form"
+msgstr "Использовать имя таблицы как песевдоним в форме создания SQL запроса"
+
+#: fbmstrconstunit.svalidate
+msgid "Validate"
+msgstr "Проверка"
+
+#: fbmstrconstunit.svalidatorfuncation
+msgid "Validator funcation"
+msgstr "Функция проверки"
+
+#: fbmstrconstunit.svardefvalue
+msgid "Variable default value"
+msgstr "Значение по умолчанию"
+
+#: fbmstrconstunit.svarname
+msgid "Variable name"
+msgstr "Имя переменной"
+
+#: fbmstrconstunit.svarprefix
+msgid "Variable prefix"
+msgstr "Префикс переменной"
+
+#: fbmstrconstunit.svartype
+msgid "Variable type"
+msgstr "Тип переменной"
+
+#: fbmstrconstunit.sview
+msgctxt "fbmstrconstunit.sview"
+msgid "View"
+msgstr "Представление"
+
+#: fbmstrconstunit.sviews
+msgctxt "fbmstrconstunit.sviews"
+msgid "Views"
+msgstr "Представления"
+
+#: fbmstrconstunit.swidget
+msgid "Widget : "
+msgstr "Widget : "
+
+#: fbmstrconstunit.swithdatatype
+msgid "With data type"
+msgstr "Отображать тип данных"
+
+#: fbmstrconstunit.swithgrantoptions
+msgid "With Grant Options"
+msgstr "С административными привилегиями"
+
+#: fbmstrconstunit.swithoids
+msgctxt "fbmstrconstunit.swithoids"
+msgid "With OIDs"
+msgstr "Использовать OIDs"
+
+#: fbmstrconstunit.swritetimestampintolog
+msgid "Write timestamp into log"
+msgstr "Запись временной метки в лог"
+
+#: fb_utils.sdescbigint
+msgid "8-byte integer type"
+msgstr "8-ми битное целое число"
+
+#: fb_utils.sdescchar
+msgid "Size in bytes depends on the encoding, the number of bytes in a character. from 1 to 32,767 bytes. A fixed-length character data type. When its data is displayed, trailing spaces are added to the string up to the specified length. Trailing spaces are not stored in the database but are restored to match the defined length when the column is displayed on the client side. Network traffic is reduced by not sending spaces over the LAN. If the number of characters is not specified, 1 is used by default."
+msgstr "Строка фиксированной длинны. Размер в байтах, зависит от кодировки. Допустимый размер в диапазона от 1 до 32,767 байта. Завершающие пробелы в БД не хранятся. Добавляются только в момент отображения данных на стороне клиента. Если длинна не указана - используется 1 по умолчанию."
+
+#: fb_utils.sdescdate
+msgid "The DATE data type stores the date. From 01.01.0001 AD to 31.12.9999. Date only, no time element"
+msgstr "Тип DATE хранит дату в диапазоне 01.01.0001 нашей эры по 31.12.9999. Только дата, без времени."
+
+#: fb_utils.sdescinteger
+msgid "Integer (whole number) data from -231 (-2,147,483,648) through 231 - 1 (2,147,483,647)."
+msgstr "Целое число в диапазоне с -2,147,483,648 по 2,147,483,647."
+
+#: fb_utils.sdescsmallint
+msgid "Integer data from -215 (-32,768) through 215 - 1 (32,767)."
+msgstr "Целые числа с -215 (-32,768) по 215 - 1 (32,767)."
+
+#: fb_utils.sdesctime
+msgid "The TIME data type stores the time of day within the range from 00:00:00.0000 to 23:59:59.9999."
+msgstr "Тип TIME хранит время дня в диапазоне с 00:00:00.0000 до 23:59:59.9999."
+
+#: fb_utils.sdesctimestamp
+msgid "Date and time data from January 1, 1900, through June 6, 2079, with an accuracy of one minute. Firebird's has greater range and accuracy."
+msgstr "Дата и время в диапазона от 01 января 1900 года до 06 июня 2079, с точностью до минуты"
+
+#: fb_utils.sdescvarchar
+msgid "Variable-length data with a maximum of 32,765 characters."
+msgstr "Срока переменной длинны максимального размера 32,765 символов"
+
+#: pg_utils.s_pg_any
+msgid "Indicates that a function accepts any input data type."
+msgstr "Показывает, что функция принимает любое входное значение."
+
+#: pg_utils.s_pg_anyarray
+msgid "Indicates that a function accepts any array data type (see Section 35.2.5)."
+msgstr "Показывает, что функция принимает массив любого типа (см. Section 34.2.5)."
+
+#: pg_utils.s_pg_anyelement
+msgid "Indicates that a function accepts any data type (see Section 35.2.5)."
+msgstr "Показывает, что функция принимает любой тип данных (см. Section 34.2.5)."
+
+#: pg_utils.s_pg_anyenum
+msgid "Indicates that a function accepts any enum data type (see Section 35.2.5 and Section 8.7)."
+msgstr "Показывает, что функция принимает любой тип данных перечисления (см. Section 34.2.5 и Section 8.7)."
+
+#: pg_utils.s_pg_anynonarray
+msgid "Indicates that a function accepts any non-array data type (see Section 35.2.5)."
+msgstr "Показывает, что функция принимает любой тип данных, не являющийся массивом (см. Section 34.2.5)."
+
+#: pg_utils.s_pg_bigint
+msgid "signed eight-byte integer"
+msgstr "Длинное целое - разрядность 8 байт (-2^63-1 .. 2^63)"
+
+#: pg_utils.s_pg_bigserial
+msgid "autoincrementing eight-byte integer"
+msgstr "Автоинкремент - разрядность 8 байт (-2^63-1 .. 2^63)"
+
+#: pg_utils.s_pg_bit
+msgid "fixed-length bit string"
+msgstr "Битовая строка фиксированной длинны"
+
+#: pg_utils.s_pg_bit_varying
+msgid "variable-length bit string"
+msgstr "Битовая строка переменной длинны"
+
+#: pg_utils.s_pg_boolean
+msgid "logical Boolean (true/false)"
+msgstr "логическое (истина/ложь) (true/false)"
+
+#: pg_utils.s_pg_box
+msgid "rectangular box on a plane"
+msgstr "Прямойгольник на плоскости"
+
+#: pg_utils.s_pg_bytea
+msgid "binary data (\"byte array\")"
+msgstr "бинарные данные (\"массив байт\")"
+
+#: pg_utils.s_pg_char
+msgid "fixed-length character string"
+msgstr "строка фиксированной длинны"
+
+#: pg_utils.s_pg_cidr
+msgid "IPv4 or IPv6 network address"
+msgstr "IPv4 или IPv6 сетевой адрес"
+
+#: pg_utils.s_pg_circle
+msgid "circle on a plane"
+msgstr "круг на плоскости"
+
+#: pg_utils.s_pg_cstring
+msgid "Indicates that a function accepts or returns a null-terminated C string."
+msgstr "Показывает, что функция принимает или возвращает строку с завершающие нулём, как в языке C."
+
+#: pg_utils.s_pg_date
+msgid "calendar date (year, month, day)"
+msgstr "календарная дата (год, месяц, день)"
+
+#: pg_utils.s_pg_double_precision
+msgid "double precision floating-point number (8 bytes)"
+msgstr "Число с плавающей точкой двойной точности (разрядность - 8 байт)"
+
+#: pg_utils.s_pg_inet
+msgid "IPv4 or IPv6 host address"
+msgstr "IPv4 или IPv6 адрес хоста"
+
+#: pg_utils.s_pg_integer
+msgid "signed four-byte integer"
+msgstr "знаковое 4-х байтовое целое число"
+
+#: pg_utils.s_pg_internal
+msgid "Indicates that a function accepts or returns a server-internal data type."
+msgstr "Показывает, что функция принимает или возвращает внутренний тип данных сервера."
+
+#: pg_utils.s_pg_interval
+msgid "interval [ fields ] [ (p) ] - time span"
+msgstr ""
+
+#: pg_utils.s_pg_language_handler
+msgid "A procedural language call handler is declared to return language_handler."
+msgstr "Описывается обработчик вызова процедурного языка для возврата типа language_handler."
+
+#: pg_utils.s_pg_line
+msgid "infinite line on a plane"
+msgstr "бесконечная линия на плоскости"
+
+#: pg_utils.s_pg_lseg
+msgid "line segment on a plane"
+msgstr "отрезок на плоскости"
+
+#: pg_utils.s_pg_macaddr
+msgid "MAC (Media Access Control) address"
+msgstr "MAC (Media Access Control) адрес"
+
+#: pg_utils.s_pg_money
+msgid "currency amount"
+msgstr "денежная величина"
+
+#: pg_utils.s_pg_numeric
+msgid "exact numeric of selectable precision"
+msgstr "Вещественное число с указанной точностью хранения данных"
+
+#: pg_utils.s_pg_opaque
+msgid "An obsolete type name that formerly served all the above purposes."
+msgstr "Все устаревшие имена типов, которые обычно обслуживаются для всех вышеуказанных целей."
+
+#: pg_utils.s_pg_path
+msgid "geometric path on a plane"
+msgstr "Геометрический путь на плоскости"
+
+#: pg_utils.s_pg_point
+msgid "geometric point on a plane"
+msgstr "Геометрическая точка на плоскости"
+
+#: pg_utils.s_pg_polygon
+msgid "closed geometric path on a plane"
+msgstr "Закрытый геометрический путь на плоскости"
+
+#: pg_utils.s_pg_real
+msgid "single precision floating-point number (4 bytes)"
+msgstr "Вещественное число одинарной точности с плавающей точкой (4 байта)"
+
+#: pg_utils.s_pg_record
+msgid "Identifies a function returning an unspecified row type."
+msgstr "Показывает, что функция повзращает незаданный тип строки таблицы."
+
+#: pg_utils.s_pg_serial
+msgid "autoincrementing four-byte integer"
+msgstr "Автоинкремент - 4-х байтовое целое число (integer)"
+
+#: pg_utils.s_pg_smallint
+msgid "signed two-byte integer"
+msgstr "Знаковое 2-х байтовое число (smallint)"
+
+#: pg_utils.s_pg_text
+msgctxt "pg_utils.s_pg_text"
+msgid "variable-length character string"
+msgstr "Текст проивольной длинны"
+
+#: pg_utils.s_pg_time
+msgid "time of day (no time zone)"
+msgstr "Время (без чесового пояса)"
+
+#: pg_utils.s_pg_timestamp
+msgid "date and time (no time zone)"
+msgstr "Дата и время (без часового пояса)"
+
+#: pg_utils.s_pg_timestamp_wtz
+msgid "date and time, including time zone"
+msgstr "Дата и время (включая часовой пояс)"
+
+#: pg_utils.s_pg_time_wtz
+msgid "time of day, including time zone"
+msgstr "Время (включая часовой пояс)"
+
+#: pg_utils.s_pg_trigger
+msgid "A trigger function is declared to return trigger."
+msgstr "Описывается триггерная фунция для возврата типа trigger."
+
+#: pg_utils.s_pg_tsquery
+msgid "text search query"
+msgstr "Запрос поиска текста"
+
+#: pg_utils.s_pg_tsvector
+msgid "text search document"
+msgstr "Текстовый поиск"
+
+#: pg_utils.s_pg_txid_snapshot
+msgid "user-level transaction ID snapshot"
+msgstr "ID снапшота транзакции пользователя"
+
+#: pg_utils.s_pg_unknowdata
+msgid "Unknow data"
+msgstr "Неизвестные данные"
+
+#: pg_utils.s_pg_uuid
+msgid "universally unique identifier"
+msgstr "Уникальный универсальный идентификатор (GUID)"
+
+#: pg_utils.s_pg_varchar
+msgctxt "pg_utils.s_pg_varchar"
+msgid "variable-length character string"
+msgstr "Строка переменной длинны"
+
+#: pg_utils.s_pg_void
+msgid "Indicates that a function returns no value."
+msgstr "Показывает, что функция не возвращает значения."
+
+#: pg_utils.s_pg_xmldata
+msgid "XML data"
+msgstr "данные XML"
+
