@@ -29,7 +29,7 @@ uses
   SynEdit, fbmToolsUnit, LMessages, Controls, SynCompletion, SynHighlighterSQL,
   ibmanagertypesunit, SQLEngineAbstractUnit, ComCtrls, LCLType, Graphics,
   SQLEngineCommonTypesUnit, StdCtrls, ExtCtrls, StdActns, SynEditKeyCmds, types,
-  SynEditMarkupHighAll, fbmSqlParserUnit, sqlObjects;
+  SynEditMarkupHighAll, SynEditMiscClasses, fbmSqlParserUnit, sqlObjects;
 
 type
   TSynCompletionObjItemType = (scotDBObject, scotKeyword, scotParam, scotField);
@@ -252,6 +252,7 @@ type
       Y: Integer);
     procedure TextEditorProcessUserCommand(Sender: TObject;
       var Command: TSynEditorCommand; var AChar: TUTF8Char; Data: pointer);
+    procedure TextEditorShowHint(Sender: TObject; HintInfo: PHintInfo);
   protected
     procedure SetEnabled(Value: Boolean); override;
   private
@@ -343,11 +344,14 @@ var
 
 implementation
 uses IBManMainUnit, SynEditTypes, fEditSearch, IBManDataInspectorUnit, LCLIntf,
-  fbmInsertDefSqlUnit, LCLProc, LazFileUtils, strutils,
+  fbmInsertDefSqlUnit, LCLProc, LazFileUtils, strutils, rxAppUtils,
   fbmStrConstUnit, fdbm_SynEditorCompletionHintUnit,
   fdbmSynAutoCompletionsLists, LazUTF8;
 
 {$R *.lfm}
+
+type
+  THackSynEdit = class(TCustomSynEdit);
 
 { TSynCompletionObjItem }
 
@@ -1035,6 +1039,64 @@ begin
     exit;
   end;  //case
   Command:=ecNone;
+end;
+
+procedure Tfdbm_SynEditorFrame.TextEditorShowHint(Sender: TObject;
+  HintInfo: PHintInfo);
+var
+  S, SHint, S1,  SF: String;
+  P: TDBObject;
+  CP: TPoint;
+  i: LongInt;
+  F: TDBField;
+begin
+  if not Assigned(DBRecord) then exit;
+  CP:=TextEditor.PixelsToRowColumn(HintInfo^.CursorPos);
+
+  SHint:='';
+  S:=TextEditor.GetWordAtRowCol(CP);
+  S1:='';
+  SF:='';
+  if (CP.Y >=0) and (CP.Y < TextEditor.Lines.Count) then
+  begin
+    S1:=TextEditor.Lines[CP.Y-1];
+    if (Length(S1)>2) then
+    begin
+      i:=CP.X;
+      while (i>0) and (S1[i]>' ') and (pos(S1[i], SynCompletion1.EndOfTokenChr) = 0) do Dec(I);
+      if (I>1) and (S1[i]='.') then
+      begin
+        SF:=S;
+        S:=TextEditor.GetWordAtRowCol(Point(I-1, CP.Y));
+      end;
+    end;
+  end;
+
+  if S<>'' then
+  begin
+    P:=DBRecord.GetDBObject(S);
+    if Assigned(P) then
+    begin
+      if (SF<>'') and (P.DBObjectKind in [okTable, okView]) then
+      begin
+        F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
+        if Assigned(F) then
+        begin
+          SHint:=F.FieldName + ' ' + F.FieldTypeName;
+          if F.FieldDescription<>'' then;
+            SHint:=SHint + LineEnding + F.FieldDescription;
+          SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
+        end;
+      end;
+
+      SHint:=SHint + P.DBClassTitle + ' ' + P.CaptionFullPatch;
+      if P.Description <> '' then
+          SHint:=SHint + LineEnding + P.Description;
+
+    end;
+    HintInfo^.HintStr:=SHint;
+
+  end;
 end;
 
 procedure Tfdbm_SynEditorFrame.SetEnabled(Value: Boolean);

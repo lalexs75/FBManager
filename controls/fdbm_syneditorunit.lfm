@@ -569,6 +569,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     OnCommandProcessed = TextEditorCommandProcessed
     OnProcessCommand = TextEditorProcessUserCommand
     OnProcessUserCommand = TextEditorProcessUserCommand
+    OnShowHint = TextEditorShowHint
     inline TSynGutterPartList
       object TSynGutterMarks
         Width = 24
