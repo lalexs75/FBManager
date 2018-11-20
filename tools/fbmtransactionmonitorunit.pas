@@ -261,10 +261,10 @@ begin
   end;
   rxTransInfo.Append;
   rxTransInfoID.AsInteger:=TimeID;
-  rxTransInfoNEXT_TRANS.AsInteger:=UIBDataBase1.InfoNextTransaction;
+(*  rxTransInfoNEXT_TRANS.AsInteger:=UIBDataBase1.InfoNextTransaction;
   rxTransInfoOLD_ACTIVE.AsInteger:=UIBDataBase1.InfoOldestActive;
   rxTransInfoOLD_SNAPSHOT.AsInteger:=UIBDataBase1.InfoOldestSnapshot;
-  rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;
+  rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;*)
   rxTransInfo.Post;
 end;
 

@@ -96,14 +96,4 @@ object fbmShowNewForm: TfbmShowNewForm
     left = 400
     top = 136
   end
-  object Gate1: TWSCurlGate
-    GateURL = 'https://shamangrad.net/rpc.php'
-    AuthType = atBasic
-    left = 232
-    top = 72
-  end
-  object WSCurlGate1: TWSCurlGate
-    left = 272
-    top = 72
-  end
-end
+end

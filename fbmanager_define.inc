@@ -36,9 +36,6 @@
 //Как нить реализовать
 {.$DEFINE MS_SQL}
 
-{.$DEFINE USE_SHAMANGRAD}
-
-
 
 {$if FPC_FULLVERSION<20701}
   ERROR - use FPC version >= 20701

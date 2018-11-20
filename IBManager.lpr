@@ -75,12 +75,10 @@ uses
   fdbm_ConnectionAbstractUnit,
   fdbm_PagedDialogUnit,
   fdbm_PagedDialogPageUnit,
-{$IFDEF USE_SHAMANGRAD}
+(*
   fbmErrorBoxUnit,
-  fbmErrorSubmitUnit,
   fbmShowNewUnit,
-  fbmFileProviderUnit,
-{$ENDIF}
+*)
   fbmRoleGrantUsersUnit,
   fbmSQLEditorClassesUnit,
   dsObjectsUnit,

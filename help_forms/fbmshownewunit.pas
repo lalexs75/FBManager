@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, ComCtrls, ActnList,
-  Menus, rxtoolbar, IpHtml, WSCurlGate{, WSCurlGate};
+  Menus, rxtoolbar, IpHtml;
 
 type
 
@@ -45,8 +45,6 @@ type
     MainMenu1: TMainMenu;
     PopupMenu1: TPopupMenu;
     ToolPanel1: TToolPanel;
-    Gate1: TWSCurlGate;
-    WSCurlGate1: TWSCurlGate;
     procedure FormCreate(Sender: TObject);
     procedure newsRefreshExecute(Sender: TObject);
     procedure wndCloseExecute(Sender: TObject);
