@@ -6145,7 +6145,6 @@ initialization
 
 {
 ALTER GROUP — изменить имя роли или членство
-ALTER MATERIALIZED VIEW — изменить определение материализованного представления
 ALTER POLICY — изменить определение политики защиты на уровне строк
 
 COMMIT — зафиксировать текущую транзакцию
@@ -6153,7 +6152,6 @@ COMMIT PREPARED — зафиксировать транзакцию, котор�
 
 CREATE ACCESS METHOD — создать новый метод доступа
 CREATE GROUP — создать роль в базе данных
-CREATE MATERIALIZED VIEW — создать материализованное представление
 CREATE POLICY — создать новую политику защиты на уровне строк для таблицы
 CREATE ROLE — создать роль в базе данных
 CREATE TRANSFORM — создать трансформацию
@@ -6162,7 +6160,6 @@ CREATE USER MAPPING — создать сопоставление пользов
 
 DROP ACCESS METHOD — удалить метод доступа
 DROP GROUP — удалить роль в базе данных
-DROP MATERIALIZED VIEW — удалить материализованное представление
 DROP POLICY — удалить политику защиты на уровне строк для таблицы
 DROP ROLE — удалить роль в базе данных
 DROP TRANSFORM — удалить трансформацию
@@ -6172,7 +6169,6 @@ DROP USER MAPPING — удалить сопоставление пользова
 
 IMPORT FOREIGN SCHEMA — импортировать определения таблиц со стороннего сервера
 INSERT — добавить строки в таблицу
-REFRESH MATERIALIZED VIEW — заменить содержимое материализованного представления
 
 }
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLVacum, 'VACUM');  //VACUUM — провести сборку мусора и, возможно, проанализировать базу данных
@@ -6319,7 +6315,9 @@ REFRESH MATERIALIZED VIEW — заменить содержимое матери
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropView, 'DROP VIEW');                 //DROP VIEW — удалить представление
 
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateMaterializedView, 'CREATE MATERIALIZED VIEW');  //CREATE MATERIALIZED VIEW — создать материализованное представление
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterMaterializedView, 'ALTER MATERIALIZED VIEW');    //ALTER MATERIALIZED VIEW — изменить определение материализованного представления
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropMaterializedView, 'DROP MATERIALIZED VIEW');      //DROP MATERIALIZED VIEW — удалить материализованное представление
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLRefreshMaterializedView, 'REFRESH MATERIALIZED VIEW'); //REFRESH MATERIALIZED VIEW — заменить содержимое материализованного представления
 
   //FUNCTION
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateFunction, 'CREATE FUNCTION');     //CREATE FUNCTION — создать функцию

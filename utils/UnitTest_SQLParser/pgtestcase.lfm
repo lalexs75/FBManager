@@ -855,7 +855,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'Notify2'
         Lines.Strings = (
-          'NOTIFY virtual, ''This is the payload'''
+          'NOTIFY virtual, ''This is the payload'';'
         )
       end    
       item
@@ -2062,7 +2062,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateView1'
         Lines.Strings = (
-          'CREATE VIEW comedies AS'
+          'CREATE VIEW comedies'
+          'AS'
           'SELECT *'
           'FROM films'
           'WHERE kind = ''Comedy'';'
@@ -2071,7 +2072,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateView2'
         Lines.Strings = (
-          'CREATE VIEW universal_comedies AS'
+          'CREATE VIEW universal_comedies'
+          'AS'
           'SELECT *'
           'FROM comedies'
           'WHERE classification = ''U'''
@@ -2081,7 +2083,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateView3'
         Lines.Strings = (
-          'CREATE VIEW pg_comedies AS'
+          'CREATE VIEW pg_comedies'
+          'AS'
           'SELECT *'
           ' FROM comedies'
           ' WHERE classification = ''PG'''
@@ -2091,7 +2094,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateView4'
         Lines.Strings = (
-          'CREATE VIEW comedies AS'
+          'CREATE VIEW comedies'
+          'AS'
           'SELECT f.*,'
           'country_code_to_name(f.country_code) AS country,'
           '(SELECT avg(r.rating)'
@@ -2104,7 +2108,9 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateView5'
         Lines.Strings = (
-          'CREATE RECURSIVE VIEW public.nums_1_100 (n) AS'
+          'CREATE VIEW public.nums_1_100('
+          '  n)'
+          'AS'
           'VALUES (1)'
           'UNION ALL'
           'SELECT n+1 FROM nums_1_100 WHERE n < 100;'

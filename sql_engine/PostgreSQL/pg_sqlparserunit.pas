@@ -102,7 +102,7 @@ const
 type
   TDiscardType = (dtAll, dtPlans, dtTemporary, dtSequences);
 
-  TReindexType = (riIndex, riTable, riDatabase, riSystem);
+  //TReindexType = (riIndex, riTable, riDatabase, riSystem);
 
   TAlterType = (aoNone, aoModify, aoRename, aoSet, aoReset, aoSetTablespace);
 
@@ -169,18 +169,20 @@ type
 
   TPGSQLCreateView = class(TSQLCreateView)
   private
+    FRecursive: boolean;
     FSQLCommandSelect: TSQLCommandAbstractSelect;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
   public
     destructor Destroy;override;
-    procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SQLCommandSelect:TSQLCommandAbstractSelect read FSQLCommandSelect;
     property SchemaName;
+    property Recursive:boolean read FRecursive write FRecursive;
     property SQLSelect;
   end;
 
@@ -267,6 +269,23 @@ type
     property NewOwner:string read FNewOwner write FNewOwner;
     property NewName:string read FNewName write FNewName;
     property NewSchema:string read FNewSchema write FNewSchema;
+  end;
+
+  { TPGSQLRefreshMaterializedView }
+
+  TRefreshMaterializedViewType = (rmvNone, rmvWithNoData, rmvWithData);
+  TPGSQLRefreshMaterializedView = class(TSQLCommandDDL)
+  private
+    FConcurrently: boolean;
+    FRefreshType: TRefreshMaterializedViewType;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Concurrently:boolean read FConcurrently write FConcurrently;
+    property RefreshType:TRefreshMaterializedViewType read FRefreshType write FRefreshType;
   end;
 
   { TPGSQLDropMaterializedView }
@@ -1256,11 +1275,11 @@ type
 
   { TPGSQLReindex }
 
-  TPGSQLReindex = class(TSQLCommandAbstract)
+  TPGSQLReindex = class(TSQLCommandDDL)
   private
     FForce: boolean;
-    FObjName: string;
-    FReindexType: TReindexType;
+    //FObjName: string;
+    //FReindexType: TReindexType;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1268,8 +1287,8 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property ObjName:string read FObjName write FObjName;
-    property ReindexType:TReindexType read FReindexType write FReindexType;
+    //property ObjName:string read FObjName write FObjName;
+    //property ReindexType:TReindexType read FReindexType write FReindexType;
     property Force:boolean read FForce write FForce;
   end;
 
@@ -1372,13 +1391,16 @@ type
 
   { TPGSQLReassignOwned }
 
-  TPGSQLReassignOwned = class(TSQLCommandAbstract)
+  TPGSQLReassignOwned = class(TSQLCommandDDL)
   private
+    FNewRole: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property NewRole:string read FNewRole write FNewRole;
   end;
 
   { TPGSQLSecurityLabel }
@@ -2985,6 +3007,68 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLRefreshMaterializedView }
+
+procedure TPGSQLRefreshMaterializedView.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  (*
+  REFRESH MATERIALIZED VIEW [ CONCURRENTLY ] имя
+      [ WITH [ NO ] DATA ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REFRESH', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'MATERIALIZED', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'VIEW', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'CONCURRENTLY', [], 1);
+  T:=AddSQLTokens(stIdentificator, [T, FSQLTokens], '', [], 2);
+  T:=AddSQLTokens(stKeyword, T, 'WITH', [toOptional], 3);
+  T1:=AddSQLTokens(stKeyword, T, 'NO', [], 4);
+  T:=AddSQLTokens(stKeyword, [T, T1], 'DATA', []);
+end;
+
+procedure TPGSQLRefreshMaterializedView.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Concurrently:=true;
+    2:Name:=AWord;
+    3:RefreshType:=rmvWithData;
+    4:RefreshType:=rmvWithNoData;
+
+  end;
+end;
+
+procedure TPGSQLRefreshMaterializedView.MakeSQL;
+var
+  S: String;
+begin
+  (*
+  REFRESH MATERIALIZED VIEW [ CONCURRENTLY ] имя
+      [ WITH [ NO ] DATA ]
+  *)
+  S:='REFRESH MATERIALIZED VIEW ';
+  if Concurrently then
+    S:=S + 'CONCURRENTLY ';
+  S:=S + Name;
+  case RefreshType of
+    rmvWithData:S:=S + ' WITH DATA';
+    rmvWithNoData:S:=S + ' WITH NO DATA';
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLRefreshMaterializedView.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLRefreshMaterializedView then
+  begin
+    Concurrently:=TPGSQLRefreshMaterializedView(ASource).Concurrently;
+    RefreshType:=TPGSQLRefreshMaterializedView(ASource).RefreshType;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterSystem }
@@ -4732,11 +4816,13 @@ end;
 
 procedure TPGSQLCreateView.InitParserTree;
 var
-  T, T1, T2, FSQLTokens , TSymb: TSQLTokenRecord;
+  T, T1, T2, FSQLTokens , TSymb, T3: TSQLTokenRecord;
 begin
 (*
-  CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] VIEW name [ ( column_name [, ...] ) ]
-    AS query
+CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] [ RECURSIVE ] VIEW имя [ ( имя_столбца [, ...] ) ]
+    [ WITH ( имя_параметра_представления [= значение_параметра_представления] [, ... ] ) ]
+    AS запрос
+    [ WITH [ CASCADED | LOCAL ] CHECK OPTION ]
 *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okView);    //CREATE
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);                  //OR
@@ -4745,7 +4831,10 @@ begin
     T1:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'TEMP', [], 2);                        //TEMP
     T2:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'TEMPORARY', [], 2);                   //TEMPORARY
 
-  T:=AddSQLTokens(stKeyword, [FSQLTokens, T, T1, T2], 'VIEW', [toFindWordLast]);                           //VIEW
+    T3:=AddSQLTokens(stKeyword, [FSQLTokens, T, T1, T2], 'RECURSIVE', [], 7);
+    T3.AddChildToken([T1, T2]);
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T, T1, T2, T3], 'VIEW', [toFindWordLast]);                           //VIEW
 
 
   T1:=AddSQLTokens(stIdentificator, T, '', [], 3);                //view schema
@@ -4806,6 +4895,9 @@ begin
   if ooTemporary in Options then
     S:=S + ' TEMPORARY';
 
+  if Recursive then
+    S:=S + ' RECURSIVE';
+
   S:=S + ' VIEW ' + FullName;
 
   if Fields.Count > 0 then
@@ -4824,7 +4916,10 @@ begin
   if S1<>'' then
     S:=S + '(' + LineEnding + S1 + ')';
 *)
-  S:=S + LineEnding +  'AS'+LineEnding + SQLSelect;
+  S:=S + LineEnding +  'AS';
+  if (SQLSelect<>'') and (Copy(SQLSelect, 1, Length(LineEnding)) <> LineEnding) then
+    S:=S + LineEnding;
+  S:=S + SQLSelect;
   AddSQLCommand(S);
 
   if Description <> '' then
@@ -4845,7 +4940,13 @@ procedure TPGSQLCreateView.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLCreateView then
   begin
-    SQLCommandSelect.Assign(TPGSQLCreateView(ASource).SQLCommandSelect);
+    Recursive:=TPGSQLCreateView(ASource).Recursive;
+    if Assigned(TPGSQLCreateView(ASource).SQLCommandSelect) then
+    begin
+      FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
+      SQLCommandSelect.Assign(TPGSQLCreateView(ASource).SQLCommandSelect);
+
+    end;
   end;
   inherited Assign(ASource);
 end;
@@ -5616,7 +5717,7 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
 
   T1:=AddSQLTokens(stKeyword, T, 'ALTER', []);
-  T2:=AddSQLTokens(stKeyword, T, 'COLUMN', []);
+  T2:=AddSQLTokens(stKeyword, T1, 'COLUMN', []);
   T2:=AddSQLTokens(stIdentificator, T2, '', [], 2);
     T1.AddChildToken(T2);
   T1:=AddSQLTokens(stKeyword, T2, 'SET', []);
@@ -5644,7 +5745,10 @@ begin
   case AChild.Tag of
     1:Name:=AWord;
     2:FColumnName:=AWord;
-    3:FDefaultExpression:=''; //parse default
+    3:begin
+        Action:=ataAlterColumnSetDefaultExp;
+        FDefaultExpression:=ASQLParser.GetToCommandDelemiter; //parse default
+      end;
     4:FDropDefault:=true;
     5:begin
         Action:=ataOwnerTo;
@@ -5673,6 +5777,7 @@ begin
     ataOwnerTo:S:=S + ' OWNER TO '+FNewOwner;
     ataRenameTable:S:=S + ' RENAME TO '+FNewName;
     ataSetSchema:S:=S + ' SET SCHEMA  '+FNewSchema;
+    ataAlterColumnSetDefaultExp:S:=S + ' ALTER COLUMN '+FColumnName+' SET DEFAULT' +FDefaultExpression;
   else
     raise Exception.CreateFmt('Unknow action %s', [AlterTableActionStr[Action]]);
   end;
@@ -9791,7 +9896,7 @@ end;
 
 procedure TPGSQLReassignOwned.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REASSIGN OWNED BY  }
   (*
@@ -9800,20 +9905,38 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REASSIGN', [toFirstToken]);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OWNED', []);
     T:=AddSQLTokens(stKeyword, T, 'BY', [toFindWordLast]);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+      T1:=AddSQLTokens(stSymbol, T, ',', []);
+      T1.AddChildToken(T);
+    T:=AddSQLTokens(stKeyword, T, 'TO', []);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 2);
 end;
 
 procedure TPGSQLReassignOwned.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Params.AddParam(AWord);
+    2:NewRole:=AWord;
+  end;
 end;
 
 procedure TPGSQLReassignOwned.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='REASSIGN OWNED BY';
-  AddSQLCommand(Result);
+  S:='REASSIGN OWNED BY ' + Params.AsString + ' TO ' + NewRole;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLReassignOwned.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLReassignOwned then
+  begin
+    FNewRole:=TPGSQLReassignOwned(ASource).NewRole;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLPrepare }
@@ -9856,7 +9979,7 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'NOTIFY', [toFindWordLast, toFirstToken]);
     T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
-    T:=AddSQLTokens(stSymbol, T, ',', []);
+    T:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
     T:=AddSQLTokens(stString, T, '', [], 2);
 end;
 
@@ -10533,13 +10656,13 @@ var
   T1, T2, T3, T4, T, FSQLTokens: TSQLTokenRecord;
 begin
   (* REINDEX { INDEX | TABLE | DATABASE | SYSTEM } name [ FORCE ] *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REINDEX', [toFindWordLast, toFirstToken]);
-    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'INDEX', [], 1);
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [], 2);
-    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [], 3);
-    T4:=AddSQLTokens(stKeyword, FSQLTokens, 'SYSTEM', [], 4);
-  T:=AddSQLTokens(stIdentificator, T1, '', [], 5);
-  T:=AddSQLTokens(stKeyword, T, 'FORCE', [], 6);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REINDEX', [toFirstToken]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'INDEX', [toFindWordLast], 1);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast], 2);
+    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 3);
+    T4:=AddSQLTokens(stKeyword, FSQLTokens, 'SYSTEM', [toFindWordLast], 4);
+  T:=AddSQLTokens(stIdentificator, [T1,T2, T3, T4], '', [], 5);
+  T:=AddSQLTokens(stKeyword, T, 'FORCE', [toOptional], 6);
 end;
 
 procedure TPGSQLReindex.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -10547,12 +10670,12 @@ procedure TPGSQLReindex.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FReindexType:=riIndex;
-    2:FReindexType:=riTable;
-    3:FReindexType:=riDatabase;
-    4:FReindexType:=riSystem;
-    5:FObjName:=AWord;
-    6:FForce:=true;
+    1:ObjectKind:=okIndex;
+    2:ObjectKind:=okTable;
+    3:ObjectKind:=okDatabase;
+    4:ObjectKind:=okServer;
+    5:Name:=AWord;
+    6:Force:=true;
   end;
 end;
 
@@ -10561,13 +10684,13 @@ var
   Result: String;
 begin
   Result:='REINDEX ';
-  case FReindexType of
-    riIndex:Result:=Result + 'INDEX ';
-    riTable:Result:=Result + 'TABLE ';
-    riDatabase:Result:=Result + 'DATABASE ';
-    riSystem:Result:=Result + 'SYSTEM ';
+  case ObjectKind of
+    okIndex:Result:=Result + 'INDEX ';
+    okTable:Result:=Result + 'TABLE ';
+    okDatabase:Result:=Result + 'DATABASE ';
+    okServer:Result:=Result + 'SYSTEM ';
   end;
-  Result:=Result + FObjName;
+  Result:=Result + Name;
 
   if FForce then
     Result:=Result + ' FORCE';
@@ -10578,8 +10701,6 @@ procedure TPGSQLReindex.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLReindex then
   begin
-    ObjName:=TPGSQLReindex(ASource).ObjName;
-    ReindexType:=TPGSQLReindex(ASource).ReindexType;
     Force:=TPGSQLReindex(ASource).Force;
   end;
   inherited Assign(ASource);
