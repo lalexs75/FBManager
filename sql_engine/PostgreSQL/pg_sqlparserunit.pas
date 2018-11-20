@@ -1431,18 +1431,24 @@ type
 
   { TPGSQLAlterDefaultPrivileges }
 
-  TPGSQLAlterDefaultPrivileges = class(TSQLCommandAbstract)
+  TPGSQLAlterDefaultPrivileges = class(TSQLCommandDDL)
   private
+    FCurParam: TSQLParserField;
+    FSchemas: TSQLFields;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Schemas:TSQLFields read FSchemas;
   end;
 
   { TPGSQLAlterLargeObject }
 
-  TPGSQLAlterLargeObject = class(TSQLCommandAbstract)
+  TPGSQLAlterLargeObject = class(TSQLCommandDDL)
   private
     FLargeObjectOID: string;
     FNewOwner: string;
@@ -6068,7 +6074,7 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'LARGE', []);
   T:=AddSQLTokens(stKeyword, T, 'OBJECT', [toFindWordLast]);
-  T:=AddSQLTokens(stIdentificator, T, '', [toFindWordLast], 1);
+  T:=AddSQLTokens(stInteger, T, '', [], 1);
   T:=AddSQLTokens(stKeyword, T, 'OWNER', []);
   T:=AddSQLTokens(stKeyword, T, 'TO', []);
   T:=AddSQLTokens(stIdentificator, T, '', [toFindWordLast], 2);
@@ -7098,7 +7104,8 @@ end;
 
 procedure TPGSQLAlterDefaultPrivileges.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TUsr, TUsr1, TUsr2, TSchema, TSchema1, TGrant,
+    TRevoke: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER DEFAULT PRIVILEGES}
   (*
@@ -7144,22 +7151,81 @@ begin
       [ CASCADE | RESTRICT ]
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', []);
-  T:=AddSQLTokens(stKeyword, T, 'PRIVILEGES', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'PRIVILEGES', [toFindWordLast]);
+    TUsr:=AddSQLTokens(stKeyword, FSQLTokens, 'FOR', []);
+    TUsr1:=AddSQLTokens(stKeyword, TUsr, 'ROLE', [], 1);
+    TUsr2:=AddSQLTokens(stKeyword, TUsr, 'USER', [], 2);
+    TUsr1:=AddSQLTokens(stIdentificator, [TUsr1, TUsr2], 'USER', [], 3);
+      T:=AddSQLTokens(stSymbol, TUsr1, ',', []);
+      T.AddChildToken(TUsr1);
+
+    TSchema:=AddSQLTokens(stKeyword, [FSQLTokens, TUsr1], 'IN', []);
+    TSchema1:=AddSQLTokens(stKeyword, TSchema, 'SCHEMA', []);
+    TSchema1:=AddSQLTokens(stIdentificator, TSchema1, '', [], 4);
+      T:=AddSQLTokens(stSymbol, TSchema1, ',', []);
+      T.AddChildToken(TSchema1);
+    TSchema1.AddChildToken(TUsr);
+
+  TGrant:=AddSQLTokens(stKeyword, [FSQLTokens, TUsr1, TSchema1], 'GRANT', [], 10);
+  TRevoke:=AddSQLTokens(stKeyword, [FSQLTokens, TUsr1, TSchema1], 'REVOKE', [], 11);
 end;
 
 procedure TPGSQLAlterDefaultPrivileges.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:begin
+        FCurParam:=Params.AddParam('');
+        FCurParam.ObjectKind:=okRole;
+      end;
+    2:begin
+        FCurParam:=Params.AddParam('');
+        FCurParam.ObjectKind:=okUser;
+      end;
+    3:if Assigned(FCurParam) then FCurParam.Caption:=AWord;
+    4:Schemas.AddParam(AWord);
+  end;
 end;
 
 procedure TPGSQLAlterDefaultPrivileges.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ALTER DEFAULT PRIVILEGES';
-  AddSQLCommand(Result);
+  S:='ALTER DEFAULT PRIVILEGES';
+  if Params.Count>0 then
+  begin
+    if Params[0].ObjectKind = okUser then S:=S + ' USER'
+    else S:=S + ' ROLE';
+    S:=S + Params.AsString;
+  end;
+
+  if Schemas.Count > 0 then
+    S:=S + ' IN SCHEMA '+Schemas.AsString;
+
+  AddSQLCommand(S);
+end;
+
+constructor TPGSQLAlterDefaultPrivileges.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FSchemas:=TSQLFields.Create;
+end;
+
+destructor TPGSQLAlterDefaultPrivileges.Destroy;
+begin
+  FreeAndNil(FSchemas);
+  inherited Destroy;
+end;
+
+procedure TPGSQLAlterDefaultPrivileges.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterDefaultPrivileges then
+  begin
+    FSchemas.Assign(TPGSQLAlterDefaultPrivileges(ASource).FSchemas);
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropTextSearch }

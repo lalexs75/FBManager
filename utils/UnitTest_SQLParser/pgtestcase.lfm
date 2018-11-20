@@ -5,6 +5,7 @@ object PGSQLParserData: TPGSQLParserData
   VerticalOffset = 21
   Width = 1016
   object sComment: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Comment1'
@@ -256,6 +257,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 10
   end
   object sSimpleCmd: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Load1'
@@ -423,6 +425,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 80
   end
   object sUserAcess: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Grant1'
@@ -721,6 +724,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 8
   end
   object sDML: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Insert1'
@@ -1278,6 +1282,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 80
   end
   object sDomain: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateDomain1'
@@ -1421,6 +1426,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 168
   end
   object sTable: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateTable1'
@@ -2000,6 +2006,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 248
   end
   object sView: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'RefreshMaterializedView1'
@@ -2107,6 +2114,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 328
   end
   object sSchema: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'ImportForeignSchema1'
@@ -2169,6 +2177,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 408
   end
   object sSystem: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Reset1'
@@ -2630,6 +2639,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 496
   end
   object sAggregate: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'AlterAggregate1'
@@ -2874,6 +2884,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 576
   end
   object sFunctions: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'DropEventTrigger1'
@@ -3115,6 +3126,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 648
   end
   object sDataBase: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'DropTablespace1'
