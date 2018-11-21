@@ -35,6 +35,7 @@ msgid "Button align"
 msgstr "Вирівнювання кнопок"
 
 #: rxconst.sbuttonalign1
+msgctxt "rxconst.sbuttonalign1"
 msgid "None"
 msgstr "Ні"
 
@@ -200,12 +201,42 @@ msgstr ""
 msgid "Item "
 msgstr ""
 
+#: rxconst.srxtextfoldersynhighlighter
+msgid "Highlighter"
+msgstr ""
+
+#: rxconst.srxtextfoldersynhtml
+msgid "HTML"
+msgstr ""
+
+#: rxconst.srxtextfoldersynnone
+#, fuzzy
+msgctxt "rxconst.srxtextfoldersynnone"
+msgid "None"
+msgstr "Ні"
+
+#: rxconst.srxtextfoldersynsql
+msgid "SQL"
+msgstr ""
+
+#: rxconst.srxtextfoldersynxml
+msgid "XML"
+msgstr ""
+
 #: rxconst.srxtextholderadd
 msgid "Add"
 msgstr ""
 
 #: rxconst.srxtextholdereditor
 msgid "RxTextHolder editor"
+msgstr ""
+
+#: rxconst.srxtextholdermovedown
+msgid "Down"
+msgstr ""
+
+#: rxconst.srxtextholdermoveup
+msgid "Up"
 msgstr ""
 
 #: rxconst.srxtextholderremove

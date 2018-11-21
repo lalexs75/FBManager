@@ -19,8 +19,8 @@
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="949"/>
-        <CursorPos X="32" Y="963"/>
+        <TopLine Value="1049"/>
+        <CursorPos X="3" Y="1053"/>
         <UsageCount Value="119"/>
         <Bookmarks Count="1">
           <Item0 Y="711" ID="3"/>
@@ -96,7 +96,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1113"/>
         <CursorPos Y="1128"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit8>
       <Unit9>
         <Filename Value="../../tools/fbmtoolsunit.pas"/>
@@ -104,14 +104,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos X="37" Y="29"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit9>
       <Unit10>
         <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
         <UnitName Value="SQLEngineCommonTypesUnit"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="630"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit10>
       <Unit11>
         <Filename Value="../../tools/fbmstrconstunit.pas"/>
@@ -119,13 +119,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1330"/>
         <CursorPos Y="1361"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit11>
       <Unit12>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit12>
       <Unit13>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -133,13 +133,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="105"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit13>
       <Unit14>
         <Filename Value="/usr/local/share/lazarus/components/lazutils/lazutf8.pas"/>
         <UnitName Value="LazUTF8"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit14>
       <Unit15>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
@@ -147,7 +147,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="32" Y="28"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit15>
       <Unit16>
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
@@ -155,14 +155,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="66" Y="29"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit16>
       <Unit17>
         <Filename Value="../../sql_engine/firebird/fb_charsetutils.pas"/>
         <UnitName Value="fb_CharSetUtils"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="118"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit17>
       <Unit18>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
@@ -170,7 +170,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3965"/>
         <CursorPos X="31" Y="3995"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <Bookmarks Count="2">
           <Item0 Y="931" ID="1"/>
           <Item1 X="3" Y="1246" ID="2"/>
@@ -182,7 +182,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2841"/>
         <CursorPos Y="2857"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit19>
       <Unit20>
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
@@ -190,19 +190,19 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="123"/>
         <CursorPos X="33" Y="139"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit20>
       <Unit21>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/testutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="7"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit21>
       <Unit22>
         <Filename Value="../../sql_engine/PostgreSQL/pgtypes.pas"/>
         <UnitName Value="pgTypes"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit22>
       <Unit23>
         <Filename Value="unit1.pas"/>
@@ -210,13 +210,13 @@
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="Unit1"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="15"/>
       </Unit23>
       <Unit24>
         <Filename Value="unit1.lfm"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="4" Y="7"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit24>
       <Unit25>
@@ -225,7 +225,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1833"/>
         <CursorPos X="3" Y="1849"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="5"/>
       </Unit25>
       <Unit26>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
@@ -233,7 +233,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="71"/>
         <CursorPos X="79" Y="83"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit26>
       <Unit27>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/rxtextholder_editor.pas"/>
@@ -244,7 +244,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="136"/>
         <CursorPos X="14" Y="151"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit27>
       <Unit28>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/registerrxtools.pas"/>
@@ -252,21 +252,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="44"/>
         <CursorPos Y="88"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit28>
       <Unit29>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/register_rxtools.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="31"/>
         <CursorPos X="86" Y="60"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit29>
       <Unit30>
         <Filename Value="pgtestcase.lfm"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2460"/>
         <CursorPos X="36" Y="2484"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit30>
     </Units>
@@ -276,111 +276,112 @@
       </Position1>
       <Position2>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="171" Column="12" TopLine="146"/>
+        <Caret Line="164" Column="13" TopLine="138"/>
       </Position2>
       <Position3>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="978" Column="129" TopLine="964"/>
+        <Caret Line="963" Column="128" TopLine="944"/>
       </Position3>
       <Position4>
         <Filename Value="pgtestcase.pas"/>
       </Position4>
       <Position5>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="164" Column="13" TopLine="138"/>
+        <Caret Line="173" Column="32" TopLine="148"/>
       </Position5>
       <Position6>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="963" Column="128" TopLine="944"/>
+        <Caret Line="995" Column="129" TopLine="969"/>
       </Position6>
       <Position7>
         <Filename Value="pgtestcase.pas"/>
       </Position7>
       <Position8>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="173" Column="32" TopLine="148"/>
+        <Caret Line="176" Column="14" TopLine="151"/>
       </Position8>
       <Position9>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="995" Column="129" TopLine="969"/>
+        <Caret Line="993" Column="31" TopLine="979"/>
       </Position9>
       <Position10>
         <Filename Value="pgtestcase.pas"/>
       </Position10>
       <Position11>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="176" Column="14" TopLine="151"/>
+        <Caret Line="295" Column="25" TopLine="271"/>
       </Position11>
       <Position12>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="993" Column="31" TopLine="979"/>
+        <Caret Line="1875" Column="34" TopLine="1856"/>
       </Position12>
       <Position13>
         <Filename Value="pgtestcase.pas"/>
       </Position13>
       <Position14>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="295" Column="25" TopLine="271"/>
+        <Caret Line="182" Column="24" TopLine="158"/>
       </Position14>
       <Position15>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="1875" Column="34" TopLine="1856"/>
+        <Caret Line="1003" Column="3" TopLine="999"/>
       </Position15>
       <Position16>
         <Filename Value="pgtestcase.pas"/>
+        <Caret Line="182" Column="24" TopLine="168"/>
       </Position16>
       <Position17>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="182" Column="24" TopLine="158"/>
+        <Caret Line="217" Column="22" TopLine="193"/>
       </Position17>
       <Position18>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="1003" Column="3" TopLine="999"/>
+        <Caret Line="1156" Column="128" TopLine="1134"/>
       </Position18>
       <Position19>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="182" Column="24" TopLine="168"/>
       </Position19>
       <Position20>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="217" Column="22" TopLine="193"/>
+        <Caret Line="224" Column="25" TopLine="200"/>
       </Position20>
       <Position21>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="1156" Column="128" TopLine="1134"/>
+        <Caret Line="1175" Column="28" TopLine="1159"/>
       </Position21>
       <Position22>
         <Filename Value="pgtestcase.pas"/>
       </Position22>
       <Position23>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="224" Column="25" TopLine="200"/>
+        <Caret Line="191" Column="13" TopLine="166"/>
       </Position23>
       <Position24>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="1175" Column="28" TopLine="1159"/>
+        <Caret Line="1055" Column="28" TopLine="1034"/>
       </Position24>
       <Position25>
         <Filename Value="pgtestcase.pas"/>
       </Position25>
       <Position26>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="191" Column="13" TopLine="166"/>
+        <Caret Line="103" Column="21" TopLine="76"/>
       </Position26>
       <Position27>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="1055" Column="28" TopLine="1034"/>
+        <Caret Line="166" Column="14" TopLine="141"/>
       </Position27>
       <Position28>
         <Filename Value="pgtestcase.pas"/>
+        <Caret Line="970" Column="130" TopLine="949"/>
       </Position28>
       <Position29>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="103" Column="21" TopLine="76"/>
+        <Caret Column="17"/>
       </Position29>
       <Position30>
         <Filename Value="pgtestcase.pas"/>
-        <Caret Line="166" Column="14" TopLine="141"/>
+        <Caret Line="195" Column="13" TopLine="166"/>
       </Position30>
     </JumpHistory>
     <RunParams>
