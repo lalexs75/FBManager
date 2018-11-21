@@ -1179,6 +1179,9 @@ resourcestring
   sRedoHint                       = 'Redo last editor changes';
   sPaste                          = 'Paste';
   sCut                            = 'Cut';
+  sCutHint                        = 'Cut text to clipboard';
+  sCopyHint                       = 'Copy text to clipboard';
+  sPasteHint                      = 'Paste text from clipboard';
   sCopy                           = 'Copy';
   sOpenFile                       = 'Open file';
   sSaveFile                       = 'Save file';

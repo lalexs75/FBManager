@@ -626,6 +626,10 @@ msgstr "Копировать поле..."
 msgid "Copy field name"
 msgstr "Копировать имя поля"
 
+#: fbmstrconstunit.scopyhint
+msgid "Copy text to clipboard"
+msgstr ""
+
 #: fbmstrconstunit.scopylisttoclipboard
 msgid "Copy list to clipboard"
 msgstr "Копировать список в буффер обмена"
@@ -794,6 +798,10 @@ msgstr "Настроить тип"
 #: fbmstrconstunit.scut
 msgid "Cut"
 msgstr "Вырезать"
+
+#: fbmstrconstunit.scuthint
+msgid "Cut text to clipboard"
+msgstr ""
 
 #: fbmstrconstunit.sdashboard
 msgid "Dashboard"
@@ -3394,6 +3402,10 @@ msgstr "Пароли не совпадают."
 #: fbmstrconstunit.spaste
 msgid "Paste"
 msgstr "Вставить"
+
+#: fbmstrconstunit.spastehint
+msgid "Paste text from clipboard"
+msgstr ""
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
 msgid "Allow change system catalog directly"

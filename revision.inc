@@ -1,2 +1,2 @@
 // Created by Svn2RevisionInc
-const RevisionStr = '1541M';
+const RevisionStr = 'Unversioned directory';

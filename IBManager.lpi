@@ -1737,11 +1737,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions Count="1">
-      <Item1>
-        <Name Value="EInvalidOperation"/>
-      </Item1>
-    </Exceptions>
-  </Debugging>
 </CONFIG>

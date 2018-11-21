@@ -1330,28 +1330,29 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       ShortCut = 16504
     end
     object edtOpen: TAction
-      Category = 'Editor'
+      Category = 'File'
       Caption = 'Open'
       Hint = 'Open file...'
       ImageIndex = 43
       OnExecute = edtOpenExecute
     end
     object edtSave: TAction
-      Category = 'Editor'
+      Category = 'File'
       Caption = 'Save'
       Hint = 'Save current text'
       ImageIndex = 11
       OnExecute = edtSaveExecute
     end
     object edtFind: TAction
-      Category = 'Editor'
+      Category = 'Edit'
       Caption = 'Find'
       Hint = 'Find text in editor'
       ImageIndex = 22
       OnExecute = edtFindExecute
+      ShortCut = 16454
     end
     object edtFindNext: TAction
-      Category = 'Editor'
+      Category = 'Edit'
       Caption = 'Find next...'
       Hint = 'Find next mathes of text'
       ImageIndex = 23
@@ -1359,7 +1360,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       ShortCut = 114
     end
     object edtReplace: TAction
-      Category = 'Editor'
+      Category = 'Edit'
       Caption = 'Replace'
       Hint = 'Replace text'
       ImageIndex = 47
@@ -1473,26 +1474,34 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     object edtUndo: TAction
       Category = 'Edit'
       Caption = 'edtUndo'
+      Hint = 'Undo last operation'
       ImageIndex = 20
       OnExecute = edtUndoExecute
+      ShortCut = 16474
     end
     object edtCut: TAction
       Category = 'Edit'
       Caption = 'edtCut'
+      Hint = 'Cut text to clipboard'
       ImageIndex = 21
       OnExecute = edtCutExecute
+      ShortCut = 16472
     end
     object edtCopy: TAction
       Category = 'Edit'
       Caption = 'edtCopy'
+      Hint = 'Copy text to clipboard'
       ImageIndex = 25
       OnExecute = edtCopyExecute
+      ShortCut = 16451
     end
     object edtPaste: TAction
       Category = 'Edit'
       Caption = 'edtPaste'
+      Hint = 'Paste text from clipboard'
       ImageIndex = 24
       OnExecute = edtPasteExecute
+      ShortCut = 16470
     end
   end
   object FPDataExporter1: TFPDataExporter

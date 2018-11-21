@@ -1419,13 +1419,19 @@ begin
   edtSave.Caption:=sSave;
   edtSave.Hint:=sSaveFile;
   edtCut.Caption:=sCut;
+  edtCut.Hint:=sCutHint;
   edtCopy.Caption:=sCopy;
+  edtCopy.Hint:=sCopyHint;
   edtPaste.Caption:=sPaste;
+  edtPaste.Hint:=sPasteHint;
   edtFind.Caption:=sFind;
   edtFindNext.Caption:=sFindNext;
   edtReplace.Caption:=sReplace;
   edtRedo.Caption:=sRedo;
   edtRedo.Hint:=sRedoHint;
+  edtUndo.Caption:=sUndo;
+  edtUndo.Hint:=sUndoHint;
+
 
   edtClearCurrent.Caption:=sClearCurrentQuery;
   edtNewPage.Caption:=sNewQuery;
