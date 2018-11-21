@@ -2760,7 +2760,13 @@ begin
       IncPos;
     end
     else
-    if (ACh = '$') and (FPosition.Position < Length(FSql)) and ((FSql[FPosition.Position] = ACh) or (FSql[FPosition.Position] <= ' ')) then
+    if (ACh = '$') and (FPosition.Position < Length(FSql)) and (FSql[FPosition.Position] = CommandDelemiter) then
+    begin
+      DoTestLineEnd;
+      exit;
+    end
+    else
+    if (ACh = '$') and (FPosition.Position < Length(FSql)) and ((FSql[FPosition.Position] = ACh) or (FSql[FPosition.Position] <= ' ') or (FSql[FPosition.Position] = CommandDelemiter)) then
       break
     else
     if (FPosition.Position < Length(FSql)) and (FSql[FPosition.Position] = ACh) then

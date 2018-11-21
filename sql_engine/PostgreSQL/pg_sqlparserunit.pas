@@ -135,6 +135,7 @@ type
 
   TPGOption = (pgoWithOids, pgoWithoutOids);
   TPGOptions = set of TPGOption;
+  TPGSQLSetVariableType = (svtNone, svtReset, svtSet, svtSetTO);
 type
 //Postgre DML command
 
@@ -967,6 +968,7 @@ type
 
   TPGSQLRollback = class(TSQLCommandAbstract)
   private
+    FRollbackType: TAbortType;
     FSavepointName: string;
     FTransactionId: string;
   protected
@@ -976,6 +978,7 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
+    property RollbackType:TAbortType read FRollbackType write FRollbackType;
     property TransactionId:string read FTransactionId write FTransactionId;
     property SavepointName:string read FSavepointName write FSavepointName;
   end;
@@ -1038,6 +1041,7 @@ type
     FSessionAuthorizationUserName: string;
     FSessionTransaction: boolean;
     FSetScope: TSetScope;
+    FSetVarType: TPGSQLSetVariableType;
     FTimeScope: TTimeScope;
     FTimeZone: string;
     FTransaction: boolean;
@@ -1051,6 +1055,7 @@ type
     property SetScope:TSetScope read FSetScope write FSetScope;
     property ConfigurationParameter:string read FConfigurationParameter write FConfigurationParameter;
     property ConfigurationParameterValue:string read FConfigurationParameterValue write FConfigurationParameterValue;
+    property SetVarType:TPGSQLSetVariableType read FSetVarType write FSetVarType;
     property TimeZone:string read FTimeZone write FTimeZone;
     property TimeScope:TTimeScope read FTimeScope write FTimeScope;
     property IsConstraints:boolean read FIsConstraints write FIsConstraints;
@@ -1382,11 +1387,18 @@ type
 
   TPGSQLPrepare = class(TSQLCommandAbstract)
   private
+    FTransactionExp: string;
+    FTransactionId: string;
+    FTransactionName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property TransactionId:string read FTransactionId write FTransactionId;
+    property TransactionName:string read FTransactionName write FTransactionName;
+    property TransactionExp:string read FTransactionExp write FTransactionExp;
   end;
 
   { TPGSQLReassignOwned }
@@ -2438,11 +2450,10 @@ type
 
 
   { TPGSQLAlterSystem }
-  TPGSQLAlterSystemType = (astNone, astReset, astSet, astSetTO);
 
   TPGSQLAlterSystem = class(TSQLCommandDDL)
   private
-    FAlterSystemType: TPGSQLAlterSystemType;
+    FAlterSystemType: TPGSQLSetVariableType;
     FParamValue: string;
   protected
     procedure InitParserTree;override;
@@ -2450,7 +2461,7 @@ type
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property AlterSystemType:TPGSQLAlterSystemType read FAlterSystemType write FAlterSystemType;
+    property AlterSystemType:TPGSQLSetVariableType read FAlterSystemType write FAlterSystemType;
     property ParamValue:string read FParamValue write FParamValue;
   end;
 
@@ -3105,12 +3116,12 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:begin
-        AlterSystemType:=astReset;
+        AlterSystemType:=svtReset;
         Name:=AWord;
       end;
     3:Name:=AWord;
-    4:AlterSystemType:=astSetTO;
-    5:AlterSystemType:=astSet;
+    4:AlterSystemType:=svtSetTO;
+    5:AlterSystemType:=svtSet;
     6:ParamValue:=AWord;
   end;
 end;
@@ -3126,13 +3137,13 @@ begin
   ALTER SYSTEM RESET ALL
   *)
   S:='ALTER SYSTEM';
-  if AlterSystemType = astReset then
+  if AlterSystemType = svtReset then
     S:=S + ' RESET '+Name
   else
-  if AlterSystemType in [astSet, astSetTO] then
+  if AlterSystemType in [svtSet, svtSetTO] then
   begin
     S:=S + ' SET ' + Name;
-    if AlterSystemType = astSet then
+    if AlterSystemType = svtSet then
       S:=S + ' = '
     else
       S:=S + ' TO ';
@@ -9943,7 +9954,7 @@ end;
 
 procedure TPGSQLPrepare.InitParserTree;
 var
-  FSQLTokens: TSQLTokenRecord;
+  FSQLTokens, T: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для PREPARE  }
   (*
@@ -9952,20 +9963,52 @@ begin
   PREPARE name [ ( data_type [, ...] ) ] AS statement
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'PREPARE', [toFindWordLast, toFirstToken]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', []);
+    T:=AddSQLTokens(stInteger, T, '', [], 1);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 2);
 end;
 
 procedure TPGSQLPrepare.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:TransactionId:=AWord;
+    2:begin
+        TransactionName:=AWord;
+        TransactionExp:=ASQLParser.GetToCommandDelemiter;
+      end;
+  end;
 end;
 
 procedure TPGSQLPrepare.MakeSQL;
 var
-  Result: String;
+  S, S1: String;
 begin
-  Result:='PREPARE';
-  AddSQLCommand(Result);
+  S:='PREPARE';
+
+  if TransactionId <> '' then
+  begin
+    S:=S + ' TRANSACTION '+TransactionId;
+  end
+  else
+  begin
+    S1:=TransactionExp;
+    if (S1<>'') and (S1[1]<>' ') then S1:=' ' + S1;
+    S:=S + ' ' + TransactionName + S1;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLPrepare.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLPrepare then
+  begin
+    TransactionId:=TPGSQLPrepare(ASource).TransactionId;
+    TransactionName:=TPGSQLPrepare(ASource).TransactionName;
+    TransactionExp:=TPGSQLPrepare(ASource).TransactionExp;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLNotify }
@@ -11695,8 +11738,8 @@ where transaction_mode is one of:
     T2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
     T:=AddSQLTokens(stIdentificator, [FSQLTokens, T1, T2], '', [], 3);
 
-    T1:=AddSQLTokens(stSymbol, T, '=', []);
-    T2:=AddSQLTokens(stKeyword, T, 'TO', []);
+    T1:=AddSQLTokens(stSymbol, T, '=', [], 17);
+    T2:=AddSQLTokens(stKeyword, T, 'TO', [], 18);
 
     TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional], 99);
       AddSQLTokens(stIdentificator, [T, T1, T2, TSymb], '', [], 4).AddChildToken(TSymb);
@@ -11730,6 +11773,7 @@ where transaction_mode is one of:
 
     T11:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [],  11);
     AddSQLTokens(stIdentificator, T11, '', [], 12);
+    AddSQLTokens(stString, T11, '', [], 12);
     AddSQLTokens(stKeyword, T11, 'NONE', [], 12);
 
     T1.AddChildToken(T11);
@@ -11793,6 +11837,8 @@ begin
     14:FSessionAuthorizationUserName:=AWord;
     15:FTransaction:=true;
     16:FSessionTransaction:=true;
+    17:SetVarType:=svtSet;
+    18:SetVarType:=svtSetTO;
     21:FIsolationLevel:=ilSerializable;
     22:FIsolationLevel:=ilRepeatableRead;
     24:FIsolationLevel:=ilReadCommitted;
@@ -11805,7 +11851,7 @@ end;
 
 procedure TPGSQLSet.MakeSQL;
 var
-  Result: String;
+  Result, S1: String;
 begin
   Result:='SET';
   if FSetScope = ssSession then
@@ -11816,10 +11862,15 @@ begin
 
   if FConfigurationParameter <> '' then
   begin
-    if Params.Count > 1 then
-      Result:=Result + ' ' + FConfigurationParameter + ' = ' + Params.AsString
+    if SetVarType = svtSetTO then
+      S1:=' TO '
     else
-      Result:=Result + ' ' + FConfigurationParameter + ' = ' + FConfigurationParameterValue
+      S1:=' = ';
+
+    if Params.Count > 1 then
+      Result:=Result + ' ' + FConfigurationParameter + S1 + Params.AsString
+    else
+      Result:=Result + ' ' + FConfigurationParameter + S1 + FConfigurationParameterValue
   end
   else
   if FTimeZone <> '' then
@@ -11888,6 +11939,7 @@ begin
     ReadOnly:=TPGSQLSet(ASource).ReadOnly;
     IsolationLevel:=TPGSQLSet(ASource).IsolationLevel;
     NotDeferrable:=TPGSQLSet(ASource).NotDeferrable;
+    SetVarType:=TPGSQLSet(ASource).SetVarType;
   end;
   inherited Assign(ASource);
 end;
@@ -12039,18 +12091,16 @@ begin
   ROLLBACK [ WORK | TRANSACTION ] TO [ SAVEPOINT ] savepoint_name
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ROLLBACK', [toFindWordLast, toFirstToken]);
-  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'WORK', []);
-  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', []);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'WORK', [toOptional], 3);
+  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional], 4);
 
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TO', []);
-  T1.AddChildToken(T);
-  T2.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1, T2], 'TO', [toOptional]);
 
   TT:=AddSQLTokens(stKeyword, T, 'SAVEPOINT', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
   TT.AddChildToken(T);
 
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'PREPARED', []);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'PREPARED', [toOptional]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
 end;
 
@@ -12061,22 +12111,28 @@ begin
   case AChild.Tag of
     1:FSavepointName:=AWord;
     2:TransactionId:=AWord;
+    3:RollbackType:=atWork;
+    4:RollbackType:=atTransaction;
   end;
 end;
 
 procedure TPGSQLRollback.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ROLLBACK';
-  if FSavepointName <> '' then
-   Result:=Result + ' TRANSACTION TO SAVEPOINT ' + FSavepointName
-  else
+  S:='ROLLBACK';
   if FTransactionId <> '' then
-    Result:=Result + ' PREPARED ' + FTransactionId
+    S:=S + ' PREPARED ' + FTransactionId
   else
-    Result:=Result + ' TRANSACTION';
-  AddSQLCommand(Result);
+  begin
+    case RollbackType of
+      atWork:S:=S + ' WORK';
+      atTransaction:S:=S + ' TRANSACTION';
+    end;
+    if FSavepointName <> '' then
+      S:=S + ' TO SAVEPOINT ' + FSavepointName
+  end;
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLRollback.Assign(ASource: TSQLObjectAbstract);
@@ -12085,6 +12141,7 @@ begin
   begin
     TransactionId:=TPGSQLRollback(ASource).TransactionId;
     SavepointName:=TPGSQLRollback(ASource).SavepointName;
+    FRollbackType:=TPGSQLRollback(ASource).FRollbackType;
   end;
   inherited Assign(ASource);
 end;

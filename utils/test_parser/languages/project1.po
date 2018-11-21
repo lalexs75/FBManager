@@ -595,6 +595,10 @@ msgstr ""
 msgid "Copy field name"
 msgstr ""
 
+#: fbmstrconstunit.scopyhint
+msgid "Copy text to clipboard"
+msgstr ""
+
 #: fbmstrconstunit.scopylisttoclipboard
 msgid "Copy list to clipboard"
 msgstr ""
@@ -762,6 +766,10 @@ msgstr ""
 
 #: fbmstrconstunit.scut
 msgid "Cut"
+msgstr ""
+
+#: fbmstrconstunit.scuthint
+msgid "Cut text to clipboard"
 msgstr ""
 
 #: fbmstrconstunit.sdashboard
@@ -3266,6 +3274,10 @@ msgstr ""
 
 #: fbmstrconstunit.spaste
 msgid "Paste"
+msgstr ""
+
+#: fbmstrconstunit.spastehint
+msgid "Paste text from clipboard"
 msgstr ""
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
