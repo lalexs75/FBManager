@@ -79,10 +79,9 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="2746"/>
-        <CursorPos X="8" Y="2767"/>
+        <TopLine Value="2859"/>
+        <CursorPos Y="2874"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit7>
@@ -115,13 +114,14 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="9971"/>
-        <CursorPos Y="9979"/>
+        <TopLine Value="12085"/>
+        <CursorPos X="26" Y="12106"/>
         <UsageCount Value="201"/>
         <Bookmarks Count="3">
           <Item0 X="19" Y="2527" ID="2"/>
-          <Item1 Y="12725" ID="3"/>
+          <Item1 Y="12727" ID="3"/>
           <Item2 X="15" Y="975" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
@@ -501,123 +501,122 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2957" TopLine="2938"/>
+        <Caret Line="2752" TopLine="2735"/>
       </Position1>
       <Position2>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2959" TopLine="2938"/>
+        <Caret Line="2754" TopLine="2735"/>
       </Position2>
       <Position3>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2960" TopLine="2938"/>
+        <Caret Line="2755" TopLine="2741"/>
       </Position3>
       <Position4>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2889" TopLine="2873"/>
+        <Caret Line="2757" TopLine="2741"/>
       </Position4>
       <Position5>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2890" TopLine="2873"/>
+        <Caret Line="2763" TopLine="2741"/>
       </Position5>
       <Position6>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2891" TopLine="2873"/>
+        <Caret Line="2765" TopLine="2741"/>
       </Position6>
       <Position7>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2893" TopLine="2873"/>
+        <Caret Line="3065" TopLine="3049"/>
       </Position7>
       <Position8>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2894" TopLine="2873"/>
+        <Caret Line="3068" TopLine="3049"/>
       </Position8>
       <Position9>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2780" TopLine="2771"/>
+        <Caret Line="2766" TopLine="2752"/>
       </Position9>
       <Position10>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2781" TopLine="2771"/>
+        <Caret Line="2779" TopLine="2755"/>
       </Position10>
       <Position11>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2783" TopLine="2771"/>
+        <Caret Line="2874" TopLine="2858"/>
       </Position11>
       <Position12>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2788" TopLine="2771"/>
+        <Caret Line="2875" TopLine="2858"/>
       </Position12>
       <Position13>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2790" TopLine="2771"/>
+        <Caret Line="2877" TopLine="2858"/>
       </Position13>
       <Position14>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2792" TopLine="2771"/>
+        <Caret Line="2901" TopLine="2885"/>
       </Position14>
       <Position15>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2804" TopLine="2789"/>
+        <Caret Line="2904" TopLine="2885"/>
       </Position15>
       <Position16>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2818" TopLine="2793"/>
+        <Caret Line="2907" TopLine="2885"/>
       </Position16>
       <Position17>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2825" TopLine="2810"/>
+        <Caret Line="2927" TopLine="2912"/>
       </Position17>
       <Position18>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2832" TopLine="2810"/>
+        <Caret Line="2929" TopLine="2912"/>
       </Position18>
       <Position19>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2834" TopLine="2810"/>
+        <Caret Line="2930" TopLine="2912"/>
       </Position19>
       <Position20>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2836" TopLine="2811"/>
+        <Caret Line="2967" TopLine="2951"/>
       </Position20>
       <Position21>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2838" TopLine="2813"/>
+        <Caret Line="2963" TopLine="2951"/>
       </Position21>
       <Position22>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2840" TopLine="2815"/>
+        <Caret Line="2965" TopLine="2951"/>
       </Position22>
       <Position23>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2751" TopLine="2735"/>
+        <Caret Line="2966" TopLine="2951"/>
       </Position23>
       <Position24>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2752" TopLine="2735"/>
+        <Caret Line="2846" TopLine="2831"/>
       </Position24>
       <Position25>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2754" TopLine="2735"/>
+        <Caret Line="2848" TopLine="2831"/>
       </Position25>
       <Position26>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2755" TopLine="2735"/>
+        <Caret Line="2874" TopLine="2859"/>
       </Position26>
       <Position27>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2757" TopLine="2747"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="9957" Column="48" TopLine="9941"/>
       </Position27>
       <Position28>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2763" TopLine="2747"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="1394" Column="15" TopLine="1378"/>
       </Position28>
       <Position29>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2766" TopLine="2747"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
       </Position29>
       <Position30>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2752" TopLine="2746"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="975" Column="31" TopLine="956"/>
       </Position30>
     </JumpHistory>
     <RunParams>
@@ -626,7 +625,7 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="7">
+    <BreakPoints Count="6">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -660,7 +659,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Line Value="13233"/>
+        <Line Value="13235"/>
       </Item5>
       <Item6>
         <Kind Value="bpkSource"/>
@@ -669,13 +668,6 @@
         <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <Line Value="7595"/>
       </Item6>
-      <Item7>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Line Value="9979"/>
-      </Item7>
     </BreakPoints>
     <Watches Count="3">
       <Item1>

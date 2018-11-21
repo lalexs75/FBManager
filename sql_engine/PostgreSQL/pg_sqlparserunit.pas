@@ -9964,7 +9964,8 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'PREPARE', [toFindWordLast, toFirstToken]);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', []);
-    T:=AddSQLTokens(stInteger, T, '', [], 1);
+    AddSQLTokens(stInteger, T, '', [], 1);
+    AddSQLTokens(stString, T, '', [], 1);
   T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 2);
 end;
 
@@ -12101,7 +12102,8 @@ begin
   TT.AddChildToken(T);
 
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'PREPARED', [toOptional]);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+    AddSQLTokens(stIdentificator, T, '', [], 2);
+    AddSQLTokens(stString, T, '', [], 2);
 end;
 
 procedure TPGSQLRollback.InternalProcessChildToken(ASQLParser: TSQLParser;
