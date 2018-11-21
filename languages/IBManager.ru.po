@@ -628,7 +628,7 @@ msgstr "Копировать имя поля"
 
 #: fbmstrconstunit.scopyhint
 msgid "Copy text to clipboard"
-msgstr ""
+msgstr "Копировать в буфер обмена"
 
 #: fbmstrconstunit.scopylisttoclipboard
 msgid "Copy list to clipboard"
@@ -801,7 +801,7 @@ msgstr "Вырезать"
 
 #: fbmstrconstunit.scuthint
 msgid "Cut text to clipboard"
-msgstr ""
+msgstr "Вырезать в буфер обмена"
 
 #: fbmstrconstunit.sdashboard
 msgid "Dashboard"
@@ -1660,32 +1660,22 @@ msgid "FB : function"
 msgstr "FB : Функция"
 
 #: fbmstrconstunit.sfbsqlfunctionlazy
-#, fuzzy
-#| msgid "FB : Firebird function lazy mode"
 msgid "FB : function lazy mode"
 msgstr "FB : Функция - ленивый режим"
 
 #: fbmstrconstunit.sfbsqlpackage
-#, fuzzy
-#| msgid "FB : Firebird package"
 msgid "FB : package"
 msgstr "FB : Пакет"
 
 #: fbmstrconstunit.sfbsqlpackagelazy
-#, fuzzy
-#| msgid "FB : Firebird package lazy mode"
 msgid "FB : package lazy mode"
 msgstr "FB : Пакет - ленивый режим"
 
 #: fbmstrconstunit.sfbsqltrigger
-#, fuzzy
-#| msgid "FB : Firebird trigger"
 msgid "FB : trigger"
 msgstr "FB : Триггеры"
 
 #: fbmstrconstunit.sfbsqltriggerlazy
-#, fuzzy
-#| msgid "FB : Firebird trigger lazy mode"
 msgid "FB : trigger lazy mode"
 msgstr "FB : Триггеры - ленивый режим"
 
@@ -3405,7 +3395,7 @@ msgstr "Вставить"
 
 #: fbmstrconstunit.spastehint
 msgid "Paste text from clipboard"
-msgstr ""
+msgstr "Вставить из буфера обмена"
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
 msgid "Allow change system catalog directly"
@@ -3451,20 +3441,14 @@ msgid "Password"
 msgstr "Пароль"
 
 #: fbmstrconstunit.spgpgsqlfunction
-#, fuzzy
-#| msgid "PG : PgSql function"
 msgid "PG : function"
 msgstr "PG : PgSql функция"
 
 #: fbmstrconstunit.spgpgsqlfunctionlazy
-#, fuzzy
-#| msgid "PG : PgSql function lazy mode"
 msgid "PG : function lazy mode"
 msgstr "PG : PgSql ленивый режим в функциях"
 
 #: fbmstrconstunit.spgpgsqltrigger
-#, fuzzy
-#| msgid "PG : PgSql trigger"
 msgid "PG : trigger"
 msgstr "PG : PgSql триггер"
 
@@ -5269,4 +5253,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
