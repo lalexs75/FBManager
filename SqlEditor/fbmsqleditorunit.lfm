@@ -1479,7 +1479,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     object edtCut: TAction
       Category = 'Edit'
       Caption = 'edtCut'
-      ImageIndex = 32
+      ImageIndex = 21
       OnExecute = edtCutExecute
     end
     object edtCopy: TAction

@@ -1052,18 +1052,18 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       ImageIndex = 29
       OnExecute = ceUncommentCodeExecute
     end
-    object edtPaste: TAction
-      Category = 'Edit'
-      Caption = 'edtPaste'
-      ImageIndex = 25
-      OnExecute = edtPasteExecute
-      ShortCut = 16474
-    end
     object edtUndo: TAction
       Category = 'Edit'
       Caption = 'edtUndo'
       ImageIndex = 20
       OnExecute = edtUndoExecute
+      ShortCut = 16474
+    end
+    object edtPaste: TAction
+      Category = 'Edit'
+      Caption = 'edtPaste'
+      ImageIndex = 25
+      OnExecute = edtPasteExecute
       ShortCut = 16474
     end
     object edtCut: TAction

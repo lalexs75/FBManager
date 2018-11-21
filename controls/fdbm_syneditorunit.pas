@@ -1057,7 +1057,7 @@ begin
   S:=TextEditor.GetWordAtRowCol(CP);
   S1:='';
   SF:='';
-  if (CP.Y >=0) and (CP.Y < TextEditor.Lines.Count) then
+  if (CP.Y >0) and (CP.Y <= TextEditor.Lines.Count) then
   begin
     S1:=TextEditor.Lines[CP.Y-1];
     if (Length(S1)>2) then
@@ -1082,14 +1082,27 @@ begin
         F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
         if Assigned(F) then
         begin
+          SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
+          if F.FieldDescription<>'' then;
+            SHint:=SHint + LineEnding + F.FieldDescription;
+          SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
+        end;
+      end
+(*      else
+      if (SF<>'') and (P.DBObjectKind in [okTable, okView]) then
+      begin
+        F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
+        if Assigned(F) then
+        begin
           SHint:=F.FieldName + ' ' + F.FieldTypeName;
           if F.FieldDescription<>'' then;
             SHint:=SHint + LineEnding + F.FieldDescription;
           SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
         end;
-      end;
+      end
+*)      ;
 
-      SHint:=SHint + P.DBClassTitle + ' ' + P.CaptionFullPatch;
+      SHint:=SHint + ObjectKindToStr(P.DBObjectKind) + ' ' + P.CaptionFullPatch;
       if P.Description <> '' then
           SHint:=SHint + LineEnding + P.Description;
 
