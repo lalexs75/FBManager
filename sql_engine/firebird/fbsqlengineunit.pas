@@ -971,7 +971,7 @@ begin
   Result.Name:=Caption;
 
   if State <> sdboCreate then
-   Result.CreateMode:=cmCreateOrAlter;
+     TFBSQLCreatePackage(Result).CreateMode:=cmCreateOrAlter;
 end;
 
 procedure TFireBirdPackage.RefreshObject;
@@ -2957,7 +2957,7 @@ function TFireBirdTriger.CreateSQLObject: TSQLCommandDDL;
 begin
   Result:=TFBSQLCreateTrigger.Create(nil);
   if State = sdboEdit then
-    Result.CreateMode := cmCreateOrAlter;
+    TFBSQLCreateTrigger(Result).CreateMode := cmCreateOrAlter;
 end;
 
 function TFireBirdTriger.CompileSQLObject(ASqlObject: TSQLCommandDDL;

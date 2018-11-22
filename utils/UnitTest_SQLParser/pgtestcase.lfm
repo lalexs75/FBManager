@@ -2273,13 +2273,13 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateCollation1'
         Lines.Strings = (
-          'CREATE COLLATION french (locale = ''''fr_FR.utf8'''');'
+          'CREATE COLLATION french (locale = ''fr_FR.utf8'');'
         )
       end    
       item
         Caption = 'CreateCollation2'
         Lines.Strings = (
-          'CREATE COLLATION german_phonebook (provider = icu, locale = ''''de-u-co-phonebk'''');'
+          'CREATE COLLATION german_phonebook (provider = icu, locale = ''de-u-co-phonebk'');'
         )
       end    
       item

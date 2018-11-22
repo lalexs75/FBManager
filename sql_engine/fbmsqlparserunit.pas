@@ -209,7 +209,6 @@ type
 
   TSQLCommandDDL = class(TSQLCommandAbstract)
   private
-    FCreateMode: TCreateMode;
     FFields: TSQLFields;
     FTables:TSQLTables;
     FDescription: string;
@@ -233,7 +232,6 @@ type
     property Fields:TSQLFields read FFields;
     property Description:string read FDescription write SetDescription;
     property ObjectKind:TDBObjectKind read FObjectKind write FObjectKind;
-    property CreateMode:TCreateMode read FCreateMode write FCreateMode;
     property Options:TSQLObjectOptions read FOptions write FOptions;
     property Tables:TSQLTables read FTables;
   end;
@@ -254,9 +252,17 @@ type
   end;
   TSQLDropCommandAbstractClass = class of TSQLDropCommandAbstract;
 
+  { TSQLCreateCommandAbstract }
+
   TSQLCreateCommandAbstract = class(TSQLCommandDDL)
+  private
+    FCreateMode: TCreateMode;
   protected
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    constructor Create(AParent:TSQLCommandAbstract); override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property CreateMode:TCreateMode read FCreateMode write FCreateMode;
   end;
 
   TSQLCreateTrigger = class(TSQLCreateCommandAbstract)
@@ -405,6 +411,7 @@ type
 
   TSQLAlterTable = class(TSQLCommandDDL)
   private
+    FCreateMode: TCreateMode;
     function GetCountOperators: integer;
   protected
     FOperators:TAlterTableOperators;
@@ -414,6 +421,7 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     function AddOperator(AlterAction: TAlterTableAction): TAlterTableOperator;
     procedure ClearOperators;
+    property CreateMode:TCreateMode read FCreateMode write FCreateMode;
     property CountOperators:integer read GetCountOperators;
     property Operators:TAlterTableOperators read FOperators;
   end;
@@ -458,7 +466,7 @@ type
 
   { TSQLCommandCreateProcedure }
 
-  TSQLCommandCreateProcedure = class(TSQLCommandDDL)
+  TSQLCommandCreateProcedure = class(TSQLCreateCommandAbstract)
   private
     FBody: string;
   protected
@@ -892,6 +900,33 @@ end;
 procedure LoadParserTree(AFileName: string);
 begin
 
+end;
+
+{ TSQLCreateCommandAbstract }
+
+procedure TSQLCreateCommandAbstract.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  //-1 - ifnot exists
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    -1:Options:=Options + [ooIfNotExists];
+  end;
+end;
+
+constructor TSQLCreateCommandAbstract.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FCreateMode:=cmCreate;
+end;
+
+procedure TSQLCreateCommandAbstract.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCreateCommandAbstract then
+  begin
+    CreateMode:=TSQLCreateCommandAbstract(ASource).CreateMode;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLCreateDatabase }
@@ -1347,7 +1382,10 @@ end;
 procedure TSQLAlterTable.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TSQLAlterTable then
+  begin
     Operators.Assign(TSQLAlterTable(ASource).Operators);
+    CreateMode:=TSQLAlterTable(ASource).CreateMode;
+  end;
   inherited Assign(ASource);
 end;
 
@@ -1428,7 +1466,6 @@ constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FFields:=TSQLFields.Create;
-  FCreateMode:=cmCreate;
   FTables:=TSQLTables.Create;
 end;
 
@@ -1457,7 +1494,6 @@ begin
     Fields.CopyFrom(TSQLCreateTable(ASource).Fields);
     Description:=TSQLCreateTable(ASource).Description;
     ObjectKind:=TSQLCreateTable(ASource).ObjectKind;
-    CreateMode:=TSQLCreateTable(ASource).CreateMode;
     Options:=TSQLCreateTable(ASource).Options;
     Tables.Assign(TSQLCreateTable(ASource).Tables);
     FSchemaName:=TSQLCreateTable(ASource).FSchemaName;

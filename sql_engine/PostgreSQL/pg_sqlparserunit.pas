@@ -1589,11 +1589,15 @@ type
 
   TPGSQLCreateCollation = class(TSQLCreateCommandAbstract)
   private
+    FCurParam: TSQLParserField;
+    FExistingCollation: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ExistingCollation:string read FExistingCollation write FExistingCollation;
   end;
 
   { TPGSQLAlterCollation }
@@ -3792,7 +3796,7 @@ begin
     T:=AddSQLTokens(stKeyword, T, 'VIEW', [toFindWordLast]);
       T1:=AddSQLTokens(stKeyword, T, 'IF', []);
       T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
-      T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], 1);
+      T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
 
   T2:=AddSQLTokens(stIdentificator, [T, T1], '', [], 3);                //view schema
     T1:=AddSQLTokens(stSymbol, T2, '.', []);
@@ -6735,7 +6739,7 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okExtension);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'EXTENSION', [toFindWordLast]);
 
-  T1:=AddSQLTokens(stKeyword, T, 'IF', [toOptional], 5);
+  T1:=AddSQLTokens(stKeyword, T, 'IF', [toOptional], -1);
   T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
   T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
 
@@ -6763,7 +6767,7 @@ procedure TPGSQLCreateExtension.InternalProcessChildToken(
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    5:Options:=Options + [ooIfNotExists];
+//    5:Options:=Options + [ooIfNotExists];
     6:Name:=AWord;
     7:ExistsWith:=true;
     8:SchemaName:=AWord;
@@ -8554,33 +8558,92 @@ end;
 
 procedure TPGSQLCreateCollation.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1, T1_1, T1_2, T1_3, T1_4, T1_4_1, T1_4_2,
+    T1_5, T2, T1_6, T1_7: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для CREATE COLLATION }
   (*
-  CREATE COLLATION name (
-      [ LOCALE = locale, ]
-      [ LC_COLLATE = lc_collate, ]
-      [ LC_CTYPE = lc_ctype ]
+  CREATE COLLATION [ IF NOT EXISTS ] имя (
+      [ LOCALE = локаль, ]
+      [ LC_COLLATE = категория_сортировки, ]
+      [ LC_CTYPE = категория_типов_символов, ]
+      [ PROVIDER = провайдер, ]
+      [ VERSION = версия ]
   )
-  CREATE COLLATION name FROM existing_collation
+  CREATE COLLATION [ IF NOT EXISTS ] имя FROM существующее_правило
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'COLLATION', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, T, 'IF', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
+
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+  T1:=AddSQLTokens(stSymbol, T, '(', []);
+    T1_1:=AddSQLTokens(stKeyword, T1, 'LOCALE', [], 2);
+    T1_2:=AddSQLTokens(stKeyword, T1, 'LC_COLLATE', [], 2);
+    T1_3:=AddSQLTokens(stKeyword, T1, 'LC_CTYPE', [], 2);
+
+    T1_6:=AddSQLTokens(stKeyword, T1, 'PROVIDER', [], 2);
+    T1_7:=AddSQLTokens(stKeyword, T1, 'VERSION', [], 2);
+
+    T1_4:=AddSQLTokens(stSymbol, [T1_1, T1_2, T1_3, T1_6, T1_7], '=', []);
+    T1_4_1:=AddSQLTokens(stIdentificator, T1_4, '', [], 3);
+    T1_4_2:=AddSQLTokens(stString, T1_4, '', [], 3);
+    T1_5:=AddSQLTokens(stSymbol, [T1_4_1, T1_4_2], ',', []);
+      T1_5.AddChildToken([T1_1, T1_2, T1_3]);
+    AddSQLTokens(stSymbol, [T1_4_1, T1_4_2], ')', []);
+
+  T2:=AddSQLTokens(stKeyword, T, 'FROM', []);
+    AddSQLTokens(stIdentificator, T2, '', [], 4);
+    AddSQLTokens(stString, T2, '', [], 4);
 end;
 
 procedure TPGSQLCreateCollation.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FCurParam:=Params.AddParam(AWord);
+    3:if Assigned(FCurParam) then
+        FCurParam.ParamValue:=AWord;
+    4:ExistingCollation:=AWord;
+  end;
 end;
 
 procedure TPGSQLCreateCollation.MakeSQL;
 var
-  Result: String;
+  S, S1: String;
+  P: TSQLParserField;
 begin
-  Result:='CREATE COLLATION';
-  AddSQLCommand(Result);
+  S:='CREATE COLLATION ';
+  if ooIfNotExists in Options then
+    S:=S + 'IF NOT EXISTS ';
+
+  S:=S + Name;
+
+  if ExistingCollation<>'' then
+    S:=S + ' FROM '+ExistingCollation
+  else
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1+ ', ';
+      S1:=S1 + P.Caption + ' = '+P.ParamValue;
+    end;
+    S:=S + ' ('+S1+')';
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCreateCollation.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateCollation then
+  begin
+    ExistingCollation:=TPGSQLCreateCollation(ASource).ExistingCollation;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLCreateCast }
