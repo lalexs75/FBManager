@@ -1601,14 +1601,24 @@ type
   end;
 
   { TPGSQLAlterCollation }
+  TPGAlterCollationAction = (acaNone, acaRefreshVersion, acaRename, acaSetOwner, acaSetSchema);
 
   TPGSQLAlterCollation = class(TSQLCommandDDL)
   private
+    FAlterAction: TPGAlterCollationAction;
+    FNewName: string;
+    FNewOwner: string;
+    FNewSchema: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property AlterAction:TPGAlterCollationAction read FAlterAction write FAlterAction;
+    property NewName:string read FNewName write FNewName;
+    property NewOwner:string read FNewOwner write FNewOwner;
+    property NewSchema:string read FNewSchema write FNewSchema;
   end;
 
   { TPGSQLDropCollation }
@@ -8484,8 +8494,8 @@ begin
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropCollation.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -8500,9 +8510,9 @@ procedure TPGSQLDropCollation.MakeSQL;
 var
   Result: String;
 begin
-  Result:='DROP COLLATION';
+  Result:='DROP COLLATION ';
   if ooIfExists in Options then
-    Result:=Result + ' IF EXISTS';
+    Result:=Result + 'IF EXISTS ';
 
   Result:=Result + FCollationName;
 
@@ -8528,30 +8538,81 @@ end;
 
 procedure TPGSQLAlterCollation.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  FSQLTokens, T1: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER COLLATION }
   (*
-  ALTER COLLATION name RENAME TO new_name
-  ALTER COLLATION name OWNER TO new_owner
-  ALTER COLLATION name SET SCHEMA new_schema
+  ALTER COLLATION имя REFRESH VERSION
+
+  ALTER COLLATION имя RENAME TO новое_имя
+  ALTER COLLATION имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  ALTER COLLATION имя SET SCHEMA новая_схема
+
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'COLLATION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'COLLATION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'REFRESH', []);
+    AddSQLTokens(stKeyword, T1, 'VERSION', [], 2);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'RENAME', []);
+  T1:=AddSQLTokens(stKeyword, T1, 'TO', [], 3);
+    AddSQLTokens(stIdentificator, T1, 'TO', [], 4);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OWNER', []);
+  T1:=AddSQLTokens(stKeyword, T1, 'TO', [], 5);
+    AddSQLTokens(stKeyword, T1, 'CURRENT_USER', [], 6);
+    AddSQLTokens(stKeyword, T1, 'SESSION_USER', [], 6);
+    AddSQLTokens(stIdentificator, T1, '', [], 6);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'SET', []);
+  T1:=AddSQLTokens(stKeyword, T1, 'SCHEMA', [], 7);
+    AddSQLTokens(stIdentificator, T1, '', [], 8);
 end;
 
 procedure TPGSQLAlterCollation.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:AlterAction:=acaRefreshVersion;
+    3:AlterAction:=acaRename;
+    4:NewName:=AWord;
+    5:AlterAction:=acaSetOwner;
+    6:NewOwner:=AWord;
+    7:AlterAction:=acaSetSchema;
+    8:NewSchema:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterCollation.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ALTER COLLATION';
-  AddSQLCommand(Result);
+  S:='ALTER COLLATION ' + Name;
+  case AlterAction of
+    acaRefreshVersion:S:=S + ' REFRESH VERSION';
+    acaRename:S:=S + ' RENAME TO '+NewName;
+    acaSetOwner:S:=S + ' OWNER TO ' + NewOwner;
+    acaSetSchema:S:=S + ' SET SCHEMA ' + NewSchema;
+  else
+    //acaNone,
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterCollation.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterCollation then
+  begin
+    AlterAction:=TPGSQLAlterCollation(ASource).AlterAction;
+    NewName:=TPGSQLAlterCollation(ASource).NewName;
+    NewOwner:=TPGSQLAlterCollation(ASource).NewOwner;
+    NewSchema:=TPGSQLAlterCollation(ASource).NewSchema;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLCreateCollation }
@@ -8650,7 +8711,7 @@ end;
 
 procedure TPGSQLCreateCast.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1, T2: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для CREATE CAST }
   (*
@@ -8667,8 +8728,15 @@ begin
       [ AS ASSIGNMENT | AS IMPLICIT ]
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'CAST', [toFindWordLast]);
-  { TODO : Реализовать парсер CREATE CAST }
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'CAST', [toFindWordLast]);
+
+  T:=AddSQLTokens(stSymbol, FSQLTokens, '(', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  T:=AddSQLTokens(stKeyword, T, 'AS', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+  T:=AddSQLTokens(stSymbol, T, ')', []);
+  T1:=AddSQLTokens(stSymbol, T, 'WITH', [], 3);
+  T2:=AddSQLTokens(stSymbol, T, 'WITHOUT', [], 4);
 end;
 
 procedure TPGSQLCreateCast.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -8713,8 +8781,8 @@ begin
   T:=AddSQLTokens(stKeyword, T, 'AS', []);
   T:=AddSQLTokens(stIdentificator, T, '', [],  2);
   T:=AddSQLTokens(stSymbol, T, ')', []);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropCast.InternalProcessChildToken(ASQLParser: TSQLParser;
