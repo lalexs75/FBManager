@@ -8886,8 +8886,8 @@ begin
     T1:=AddSQLTokens(stSymbol, T, ',', []);
     T1.AddChildToken(T);
   T:=AddSQLTokens(stSymbol, T, ')', []);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropAggregate.InternalProcessChildToken(ASQLParser: TSQLParser;
