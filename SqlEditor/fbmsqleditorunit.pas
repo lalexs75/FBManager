@@ -34,6 +34,10 @@ uses
   rxdbverticalgrid, LCLIntf, EditBtn, StdActns, fpdataexporter, ZMacroQuery,
   ZDataset, SQLEngineAbstractUnit, fbmToolsUnit, IniFiles;
 
+const
+  itFolderNode = 43;
+  itEditorNode = 31; //8;
+
 type
 
   { TfbmSQLEditorForm }
@@ -432,9 +436,9 @@ begin
 
     N:=TreeView1.Items.AddChild(R, Page.Name);
     N.Data:=Page;
-    N.ImageIndex:=8;
-    N.SelectedIndex:=8;
-    N.StateIndex:=8;
+    N.ImageIndex:=itEditorNode;
+    N.SelectedIndex:=itEditorNode;
+    N.StateIndex:=itEditorNode;
 
     TreeView1.Selected:=N;
     TreeView1Click(TreeView1);
@@ -961,9 +965,9 @@ begin
   Page.SaveNew;
 
   Node:=TreeView1.Items.AddChild(RootNode, Page.Name);
-  Node.ImageIndex:=8;
-  Node.SelectedIndex:=8;
-  Node.StateIndex:=8;
+  Node.ImageIndex:=itEditorNode;
+  Node.SelectedIndex:=itEditorNode;
+  Node.StateIndex:=itEditorNode;
   Node.Data:=Page;
 
   TreeView1.Selected:=Node;
@@ -1618,9 +1622,9 @@ begin
       begin
         RootNode:=AddTreeRoot(ATreeView.Items, P.FolderName);
         SqlItem:=ATreeView.Items.AddChildObject(RootNode, P.Name, P);
-        SqlItem.ImageIndex:=8;
-        SqlItem.SelectedIndex:=8;
-        SqlItem.StateIndex:=8;
+        SqlItem.ImageIndex:=itEditorNode;
+        SqlItem.SelectedIndex:=itEditorNode;
+        SqlItem.StateIndex:=itEditorNode;
         if (P.FolderName = '') and (F = nil) then F:=SqlItem;
       end;
 
@@ -1696,9 +1700,9 @@ begin
   if not Assigned(Result) then
   begin
     Result:=AItems.Add(nil, RootName);
-    Result.ImageIndex:=26;
-    Result.SelectedIndex:=26;
-    Result.StateIndex:=26;
+    Result.ImageIndex:=itFolderNode;
+    Result.SelectedIndex:=itFolderNode;
+    Result.StateIndex:=itFolderNode
   end;
 end;
 

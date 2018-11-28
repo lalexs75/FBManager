@@ -1103,6 +1103,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
         Align = alClient
         DragMode = dmAutomatic
         ExpandSignSize = 16
+        Images = fbManagerMainForm.ImageList2
         PopupMenu = PopupMenu1
         ReadOnly = True
         TabOrder = 1
@@ -1129,6 +1130,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Align = alClient
       DragMode = dmAutomatic
       ExpandSignSize = 16
+      Images = fbManagerMainForm.ImageListMain
       PopupMenu = PopupMenu1
       ReadOnly = True
       TabOrder = 2
