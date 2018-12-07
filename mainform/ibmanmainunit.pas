@@ -40,6 +40,7 @@ type
 
   TfbManagerMainForm = class(TForm)
     BookmarkImages: TImageList;
+    ilDBObjects: TImageList;
     ImageListMain: TImageList;
     lrCrossObject1: TlrCrossObject;
     LRDialogControls1: TLRDialogControls;
