@@ -733,6 +733,8 @@ begin
 
   if not objRename.Enabled then
     objRename.Caption:=sRenameObject;
+
+  fbManagerMainForm.UpdateActionsToolbar;
 end;
 
 procedure TfbManDataInpectorForm.dbConnectExecute(Sender: TObject);
@@ -1246,6 +1248,8 @@ begin
   UserDBModule.quDatabases.Close;
 
   for F in Folders do F.AfterLoad;
+
+  TreeView1Click(nil);
 end;
 
 function TfbManDataInpectorForm.CurrentDB: TDataBaseRecord;

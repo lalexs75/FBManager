@@ -147,7 +147,10 @@ type
     procedure ApplicationProperties1Exception(Sender: TObject; E: Exception);
     procedure ApplicationProperties1Hint(Sender: TObject);
     procedure ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
+    procedure dbConnectExecute(Sender: TObject);
     procedure dbCreateExecute(Sender: TObject);
+    procedure dbDisconnectExecute(Sender: TObject);
+    procedure dbRefreshExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure hlpNewsExecute(Sender: TObject);
     procedure hlpSendBugreportExecute(Sender: TObject);
@@ -181,6 +184,7 @@ type
     procedure ShowDataInspector;
     procedure LazReportPrint(ReportName:string);
     procedure UpdateEditorInfo(AEditorObj:Tfdbm_SynEditorFrame);
+    procedure UpdateActionsToolbar;
   end;
 
 var
@@ -513,6 +517,16 @@ begin
   fbmCreateConnectionForm.Free;
 end;
 
+procedure TfbManagerMainForm.dbDisconnectExecute(Sender: TObject);
+begin
+  fbManDataInpectorForm.dbDisconect.Execute;
+end;
+
+procedure TfbManagerMainForm.dbRefreshExecute(Sender: TObject);
+begin
+  fbManDataInpectorForm.objRefresh.Execute;
+end;
+
 procedure TfbManagerMainForm.ApplicationProperties1Exception(Sender: TObject;
   E: Exception);
 begin
@@ -535,6 +549,11 @@ begin
     if Assigned(fbManDataInpectorForm) then
       fbManDataInpectorForm.listWindows.OnClick:=@(fbManDataInpectorForm.listWindowsClick);
   end;}
+end;
+
+procedure TfbManagerMainForm.dbConnectExecute(Sender: TObject);
+begin
+  fbManDataInpectorForm.dbConnect.Execute;
 end;
 
 procedure TfbManagerMainForm.InspectorCloseButtonClick(Sender: TObject);
@@ -571,10 +590,6 @@ procedure TfbManagerMainForm.ShowDataInspector;
 begin
   InspectorPanel.Visible:=true;
   ShowfbManDataInpectorForm(Self);
-  
-  ToolPanel1.Items[0].Action:=fbManDataInpectorForm.dbConnect;
-  ToolPanel1.Items[1].Action:=fbManDataInpectorForm.dbDisconect;
-  ToolPanel1.Items[2].Action:=fbManDataInpectorForm.objRefresh;
 
   fbManDataInpectorForm.UpdateDBManagerState;
 end;
@@ -619,6 +634,13 @@ begin
     StatusBar1.Panels[1].Text:='';
     StatusBar1.Panels[2].Text:='';
   end;
+end;
+
+procedure TfbManagerMainForm.UpdateActionsToolbar;
+begin
+  dbConnect.Enabled:=fbManDataInpectorForm.dbConnect.Enabled;
+  dbDisconnect.Enabled:=fbManDataInpectorForm.dbDisconect.Enabled;
+  dbRefresh.Enabled:=fbManDataInpectorForm.objRefresh.Enabled;
 end;
 
 

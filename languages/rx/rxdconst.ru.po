@@ -593,10 +593,6 @@ msgctxt "rxdconst.srxfilterformapply"
 msgid "Apply"
 msgstr "Применить"
 
-#: rxdconst.srxfilterformcancel
-msgid "Cancel"
-msgstr "Отмена"
-
 #: rxdconst.srxfilterformcaption
 msgid "Filter conditions"
 msgstr "Выражение фильтра"

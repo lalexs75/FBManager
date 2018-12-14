@@ -140,6 +140,10 @@ msgstr "Версия FPC : "
 msgid "General"
 msgstr "Общее"
 
+#: rxconst.sgrabkey
+msgid "Grab key"
+msgstr "Захватить клавишу"
+
 #: rxconst.shistorydesc
 msgid "History - \"%s\""
 msgstr "История - \"%s\""
@@ -176,6 +180,10 @@ msgstr "Параметры"
 msgid "Out of range %d %d %d %d"
 msgstr "За границами диапазона %d %d %d %d"
 
+#: rxconst.spressthekey
+msgid "Press the key"
+msgstr "Нажмите клавишу"
+
 #: rxconst.sprevmonth
 msgid "Previous Month|"
 msgstr "Превыдущий месяц|"
@@ -187,6 +195,14 @@ msgstr "Превыдущий год|"
 #: rxconst.sreqvalue
 msgid "Error. Expected value for field %s."
 msgstr "Поле %s. Требуется значение"
+
+#: rxconst.srxlogindlgbtnmore
+msgid "More >>"
+msgstr "Больше >>"
+
+#: rxconst.srxlogindlgdatabase
+msgid "Database"
+msgstr "База данных"
 
 #: rxconst.srxstrholdertexteditor
 msgid "Rx string holder editor"
@@ -245,6 +261,10 @@ msgstr "Название"
 msgid "Rx text holder editor"
 msgstr "Редактор RxTextHolder"
 
+#: rxconst.srxtoolpaneleditor
+msgid "Rx toolpanel editor"
+msgstr "Редактор RxToolPanel"
+
 #: rxconst.ssecondhalfofyear
 msgid "Second half of year"
 msgstr "Вторая половина года"
@@ -252,6 +272,14 @@ msgstr "Вторая половина года"
 #: rxconst.ssecondquarter
 msgid "Second quarter"
 msgstr "Второй квартал"
+
+#: rxconst.sseparator
+msgid "Separator"
+msgstr "Разделитель"
+
+#: rxconst.sshortcut
+msgid "ShortCut"
+msgstr "Быстрый вызов"
 
 #: rxconst.sshowcaption
 msgid "Show caption"

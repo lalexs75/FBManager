@@ -130,6 +130,10 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+#: rxconst.sgrabkey
+msgid "Grab key"
+msgstr ""
+
 #: rxconst.shistorydesc
 msgid "History - \"%s\""
 msgstr ""
@@ -166,6 +170,10 @@ msgstr ""
 msgid "Out of range %d %d %d %d"
 msgstr ""
 
+#: rxconst.spressthekey
+msgid "Press the key"
+msgstr ""
+
 #: rxconst.sprevmonth
 msgid "Previous Month|"
 msgstr ""
@@ -176,6 +184,14 @@ msgstr ""
 
 #: rxconst.sreqvalue
 msgid "Error. Expected value for field %s."
+msgstr ""
+
+#: rxconst.srxlogindlgbtnmore
+msgid "More >>"
+msgstr ""
+
+#: rxconst.srxlogindlgdatabase
+msgid "Database"
 msgstr ""
 
 #: rxconst.srxstrholdertexteditor
@@ -235,12 +251,24 @@ msgstr ""
 msgid "Rx text holder editor"
 msgstr ""
 
+#: rxconst.srxtoolpaneleditor
+msgid "Rx toolpanel editor"
+msgstr ""
+
 #: rxconst.ssecondhalfofyear
 msgid "Second half of year"
 msgstr ""
 
 #: rxconst.ssecondquarter
 msgid "Second quarter"
+msgstr ""
+
+#: rxconst.sseparator
+msgid "Separator"
+msgstr ""
+
+#: rxconst.sshortcut
+msgid "ShortCut"
 msgstr ""
 
 #: rxconst.sshowcaption

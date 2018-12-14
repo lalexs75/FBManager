@@ -24,12 +24,12 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     TabOrder = 0
     object Tabsheet1: TTabSheet
       Caption = 'Databases'
-      ClientHeight = 811
+      ClientHeight = 809
       ClientWidth = 277
       object TreeView1: TTreeView
         Left = 0
-        Height = 646
-        Top = 48
+        Height = 647
+        Top = 45
         Width = 277
         Align = alClient
         DragMode = dmAutomatic
@@ -66,7 +66,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
       object LB_SQLAssistent: TListBox
         Left = 0
         Height = 112
-        Top = 699
+        Top = 697
         Width = 277
         Align = alBottom
         ClickOnSelChange = False
@@ -82,7 +82,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 694
+        Top = 692
         Width = 277
         Align = alBottom
         Anchors = [akLeft, akBottom]
@@ -90,12 +90,12 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
       end
       object Panel1: TPanel
         Left = 0
-        Height = 48
+        Height = 45
         Top = 0
         Width = 277
         Align = alTop
         AutoSize = True
-        ClientHeight = 48
+        ClientHeight = 45
         ClientWidth = 277
         TabOrder = 3
         object TreeFilterEdit1: TTreeFilterEdit
@@ -104,10 +104,10 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideTop.Control = Panel1
           AnchorSideRight.Control = Panel1
           AnchorSideRight.Side = asrBottom
-          Left = 37
-          Height = 34
+          Left = 42
+          Height = 31
           Top = 7
-          Width = 233
+          Width = 228
           ButtonWidth = 23
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 6
@@ -122,9 +122,9 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideBottom.Control = TreeFilterEdit1
           AnchorSideBottom.Side = asrBottom
           Left = 7
-          Height = 17
-          Top = 24
-          Width = 24
+          Height = 19
+          Top = 19
+          Width = 29
           Anchors = [akLeft, akBottom]
           BorderSpacing.Left = 6
           Caption = 'Find'
@@ -134,7 +134,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     end
     object Tabsheet2: TTabSheet
       Caption = 'Windows'
-      ClientHeight = 811
+      ClientHeight = 809
       ClientWidth = 277
       object listWindows: TListBox
         Left = 0
@@ -151,7 +151,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Recent'
-      ClientHeight = 811
+      ClientHeight = 809
       ClientWidth = 277
       object ListBox1: TListBox
         Left = 0
