@@ -638,9 +638,12 @@ end;
 
 procedure TfbManagerMainForm.UpdateActionsToolbar;
 begin
+  if not Assigned(fbManDataInpectorForm) then Exit;
   dbConnect.Enabled:=fbManDataInpectorForm.dbConnect.Enabled;
   dbDisconnect.Enabled:=fbManDataInpectorForm.dbDisconect.Enabled;
   dbRefresh.Enabled:=fbManDataInpectorForm.objRefresh.Enabled;
+  tlsSQLEditor.Enabled:=fbManDataInpectorForm.editSQL.Enabled;
+
 end;
 
 

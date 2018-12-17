@@ -297,6 +297,7 @@ end;
 
 procedure TfbManDataInpectorForm.IBManDataInpectorFormDestroy(Sender: TObject);
 begin
+  fbManDataInpectorForm:=nil;
   FreeAndNil(FFolders);
   FreeAndNil(FDBList);
 end;
@@ -1044,6 +1045,7 @@ begin
     dbConnect.Enabled:=not Rec.OwnerDB.Connected;
     dbDisconect.Enabled:=Rec.OwnerDB.Connected;
     objRefresh.Enabled:=Rec.OwnerDB.Connected;
+    editSQL.Enabled:=Rec.OwnerDB.Connected;
     UpdateSQLAssitant(Rec);
   end
   else
@@ -1051,6 +1053,7 @@ begin
     dbConnect.Enabled:=false;
     dbDisconect.Enabled:=false;
     objRefresh.Enabled:=false;
+    editSQL.Enabled:=false;
     if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) and
        (TObject(TreeView1.Selected.Data) is TOIFolder) then
     begin
@@ -1065,6 +1068,8 @@ begin
   fldEdit.Enabled:=Assigned(F);
   fldRemove.Enabled:=Assigned(F);
   MakeContextMenu;
+  if Assigned(fbManagerMainForm) then
+    fbManagerMainForm.UpdateActionsToolbar;
 end;
 
 procedure TfbManDataInpectorForm.CloseAllDB;
