@@ -383,7 +383,7 @@ type
 
 implementation
 
-uses fbmStrConstUnit, fbmToolsUnit, MySQLKeywords, mysqlDataModuleUnit,
+uses fbmStrConstUnit, fbmToolsUnit, MySQLKeywords, mysqlDataModuleUnit, rxlogging,
   rxdbutils, StrUtils, rxstrutils, rxAppUtils;
 
 (*

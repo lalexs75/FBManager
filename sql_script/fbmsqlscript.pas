@@ -123,7 +123,7 @@ var
   FBMSqlScripForm: TFBMSqlScripForm = nil;
 
 implementation
-uses IBManDataInspectorUnit, LCLProc, rxAppUtils, fbmStrConstUnit,
+uses IBManDataInspectorUnit, LCLProc, rxAppUtils, fbmStrConstUnit, rxlogging,
   fbmUserDataBaseUnit, fbmRefreshObjTreeUnit, fbmSqlParserUnit, FBSQLEngineUnit;
 
 {$R *.lfm}

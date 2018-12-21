@@ -119,7 +119,7 @@ const
 {$ENDIF}
 
 implementation
-uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils,
+uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging,
   Translations, LResources, strutils, rxstrutils, SynEditTypes,
   {$IFDEF USE_SHAMANGRAD}
   fbmErrorBoxUnit,

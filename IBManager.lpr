@@ -36,6 +36,7 @@ uses
   fpstdexports,
 
   rxAppUtils,
+  rxlogging,
 
   IBManMainUnit,
   fbmSQLEditorUnit,

@@ -886,7 +886,7 @@ var
 function ExecSQLScript(Line:string; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 function ExecSQLScriptEx(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils;
+uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging;
 
 
 function ExecSQLScript(Line: string; const ExecParams: TSqlExecParams;

@@ -191,7 +191,7 @@ var
   fbManagerMainForm: TfbManagerMainForm;
 
 implementation
-uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit,
+uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
   fbmEditorOptionsUnit, fbmStrConstUnit, fbmUserDataBaseUnit, fbmsqlscript,
   SQLEngineAbstractUnit, fbmCreateConnectionUnit, fbmObjectTemplatesunit,
   LCLIntf, LCLType, rxAppUtils, fdbm_SynEditorCompletionHintUnit,
