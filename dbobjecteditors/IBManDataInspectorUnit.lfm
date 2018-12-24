@@ -309,6 +309,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     object objRename: TAction
       Category = 'Objects'
       Caption = 'Rename object...'
+      ImageIndex = 8
       OnExecute = objRenameExecute
     end
   end

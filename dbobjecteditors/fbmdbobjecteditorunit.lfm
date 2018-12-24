@@ -21,62 +21,38 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
     TabOrder = 0
     object ToolPanel1: TToolPanel
       Left = 1
-      Height = 31
+      Height = 36
       Top = 1
       Width = 678
       Items = <      
         item
           Action = edtCompile
           Visible = True
-          Left = 5
-          Height = 21
-          Top = 5
-          Width = 83
           ShowCaption = True
         end      
         item
           Visible = True
-          Left = 88
-          Height = 21
-          Top = 5
-          Width = 7
           ShowCaption = False
           ButtonStyle = tbrSeparator
         end      
         item
           Action = dtRefresh
           Visible = True
-          Left = 95
-          Height = 21
-          Top = 5
-          Width = 79
           ShowCaption = True
         end      
         item
           Visible = True
-          Left = 174
-          Height = 21
-          Top = 5
-          Width = 7
           ShowCaption = False
           ButtonStyle = tbrSeparator
         end      
         item
           Action = edtRun
           Visible = True
-          Left = 181
-          Height = 21
-          Top = 5
-          Width = 24
           ShowCaption = False
         end      
         item
           Action = actCommit
           Visible = True
-          Left = 205
-          Height = 21
-          Top = 5
-          Width = 39
           DropDownMenu = PopupMenu2
           ShowCaption = False
           ButtonStyle = tbrDropDownExtra
@@ -84,102 +60,58 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
         item
           Action = actRollback
           Visible = True
-          Left = 244
-          Height = 21
-          Top = 5
-          Width = 39
           DropDownMenu = PopupMenu3
           ShowCaption = False
           ButtonStyle = tbrDropDownExtra
         end      
         item
           Visible = True
-          Left = 283
-          Height = 21
-          Top = 5
-          Width = 7
           ShowCaption = False
           ButtonStyle = tbrSeparator
         end      
         item
           Action = edtPrint
           Visible = True
-          Left = 290
-          Height = 21
-          Top = 5
-          Width = 60
           ShowCaption = True
         end      
         item
           Action = dtExport
           Visible = True
-          Left = 350
-          Height = 21
-          Top = 5
-          Width = 24
           ShowCaption = False
         end      
         item
           Visible = True
-          Left = 374
-          Height = 21
-          Top = 5
-          Width = 7
           ShowCaption = False
           ButtonStyle = tbrSeparator
         end      
         item
           Action = edtAdd
           Visible = True
-          Left = 381
-          Height = 21
-          Top = 5
-          Width = 66
           ShowCaption = True
         end      
         item
           Action = edtEdit
           Visible = True
-          Left = 447
-          Height = 21
-          Top = 5
-          Width = 54
           ShowCaption = True
         end      
         item
           Action = edtDel
           Visible = True
-          Left = 501
-          Height = 21
-          Top = 5
-          Width = 72
           ShowCaption = True
         end      
         item
           Visible = True
-          Left = 573
-          Height = 21
-          Top = 5
-          Width = 7
           ShowCaption = False
           ButtonStyle = tbrSeparator
         end      
         item
           Action = edtComment
           Visible = True
-          Left = 580
-          Height = 21
-          Top = 5
-          Width = 24
           ShowCaption = False
         end      
         item
           Action = edtUncomment
           Visible = True
-          Left = 604
-          Height = 21
-          Top = 5
-          Width = 24
           ShowCaption = False
         end>
       ImageList = fbManagerMainForm.ImageListMain
@@ -189,7 +121,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       CustomizeShortCut = False
       Align = alTop
       BorderWidth = 4
-      ClientHeight = 31
+      ClientHeight = 36
       ClientWidth = 678
       TabOrder = 0
     end

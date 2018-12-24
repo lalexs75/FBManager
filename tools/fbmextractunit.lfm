@@ -8,29 +8,29 @@ object fbmExtractForm: TfbmExtractForm
   ClientWidth = 638
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 359
+    Height = 363
     Top = 0
     Width = 638
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     Images = fbManagerMainForm.ImageList2
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Database'
-      ClientHeight = 322
+      ClientHeight = 330
       ClientWidth = 628
       object Label1: TLabel
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         Left = 6
-        Height = 20
+        Height = 19
         Top = 6
-        Width = 102
+        Width = 104
         BorderSpacing.Around = 6
         Caption = 'Select database'
         ParentColor = False
@@ -42,8 +42,8 @@ object fbmExtractForm: TfbmExtractForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 36
-        Top = 32
+        Height = 31
+        Top = 31
         Width = 610
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -55,7 +55,7 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Objects'
-      ClientHeight = 325
+      ClientHeight = 330
       ClientWidth = 628
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet2
@@ -167,7 +167,7 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Progress'
-      ClientHeight = 325
+      ClientHeight = 330
       ClientWidth = 628
       object Button3: TButton
         Left = 264
@@ -182,8 +182,8 @@ object fbmExtractForm: TfbmExtractForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 365
+    Height = 42
+    Top = 369
     Width = 626
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
