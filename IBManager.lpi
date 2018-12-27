@@ -164,7 +164,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item32>
     </RequiredPackages>
-    <Units Count="213">
+    <Units Count="214">
       <Unit0>
         <Filename Value="IBManager.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1717,6 +1717,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmRefreshObjTreeUnit"/>
       </Unit212>
+      <Unit213>
+        <Filename Value="dbobjecteditors/dboTableEditor/fbmtablestatisticunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmTableStatisticFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTableStatisticUnit"/>
+      </Unit213>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -1737,4 +1745,11 @@
       </Options>
     </Linking>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="1">
+      <Item1>
+        <Name Value="EZSQLException"/>
+      </Item1>
+    </Exceptions>
+  </Debugging>
 </CONFIG>

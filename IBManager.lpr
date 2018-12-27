@@ -119,7 +119,7 @@ uses
 
   cfAutoIncFieldUnit, fbmMakeSQLFromDataSetUnit, fdbm_DescriptionUnit,
   fdmUserEditor_MySQLUnit, otMySQLTriggerTemplateUnit,
-  SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit
+  SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit
 
   ;
 

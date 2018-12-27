@@ -242,6 +242,24 @@ type
     property Current: TACLItem read GetCurrent;
   end;
 
+  { TDBTableStatistic }
+
+  TDBTableStatistic = class
+  private
+    FOwner:TDBTableObject;
+    function GetCount: Integer;
+    function GetNames(AIndex: Integer): string;
+    function GetValues(AIndex: Integer): string;
+  public
+    constructor Create(AOwner:TDBTableObject);
+    destructor Destroy; override;
+    procedure Clear;
+    procedure Refresh;
+    procedure AddValue(AName, AValue:string);
+    property Count:Integer read GetCount;
+    property Names[AIndex:Integer]:string read GetNames;
+    property Values[AIndex:Integer]:string read GetValues;
+  end;
 
   { TDBObject }
 
@@ -542,6 +560,7 @@ type
 
   TDBTableObject = class(TDBDataSetObject)
   private
+    FStatistic: TDBTableStatistic;
     function GetIndexItem(AItem: integer): TIndexItem;
     function GetConstraint(AItem: integer): TPrimaryKeyRecord;
     function GetConstraintCount: integer;
@@ -583,6 +602,8 @@ type
 
     property IndexCount:integer read GetIndexCount;
     property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
+
+    property Statistic:TDBTableStatistic read FStatistic;
 
 
     property ConstraintCount:integer read GetConstraintCount;
@@ -914,6 +935,49 @@ begin
     Result:=false;
     raise Exception.Create('ExecSQLScriptEx');
   end;
+end;
+
+{ TDBTableStatistic }
+
+function TDBTableStatistic.GetCount: Integer;
+begin
+
+end;
+
+function TDBTableStatistic.GetNames(AIndex: Integer): string;
+begin
+
+end;
+
+function TDBTableStatistic.GetValues(AIndex: Integer): string;
+begin
+
+end;
+
+constructor TDBTableStatistic.Create(AOwner: TDBTableObject);
+begin
+
+end;
+
+destructor TDBTableStatistic.Destroy;
+begin
+  Clear;
+  inherited Destroy;
+end;
+
+procedure TDBTableStatistic.Clear;
+begin
+
+end;
+
+procedure TDBTableStatistic.Refresh;
+begin
+
+end;
+
+procedure TDBTableStatistic.AddValue(AName, AValue: string);
+begin
+
 end;
 
 { TACLListEnumerator }
@@ -2405,6 +2469,7 @@ constructor TDBTableObject.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FStatistic:=TDBTableStatistic.Create(Self);
   FIndexItems:=TList.Create;
   FConstraintList:=TList.Create;
   FFKListLoaded:=false;
@@ -2417,6 +2482,7 @@ begin
 
   FreeAndNil(FConstraintList);
   FreeAndNil(FIndexItems);
+  FreeAndNil(FStatistic);
   inherited Destroy;
 end;
 
