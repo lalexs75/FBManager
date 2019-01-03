@@ -1,10 +1,12 @@
 object SQLite3ParserData: TSQLite3ParserData
   OldCreateOrder = False
-  Height = 796
-  HorizontalOffset = 375
-  VerticalOffset = 148
-  Width = 576
+  Height = 771
+  HorizontalOffset = 363
+  VerticalOffset = 79
+  Width = 558
+  PPI = 93
   object sViews: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'DropView1'
@@ -60,10 +62,11 @@ object SQLite3ParserData: TSQLite3ParserData
           '  "Country", "Language";'
         )
       end>
-    Left = 24
+    Left = 23
     Top = 16
   end
   object sTrigger: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateTrigger1'
@@ -96,10 +99,11 @@ object SQLite3ParserData: TSQLite3ParserData
           'DROP TRIGGER trigger_name;'
         )
       end>
-    Left = 24
-    Top = 88
+    Left = 23
+    Top = 85
   end
   object sIndex: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateIndex1'
@@ -119,10 +123,11 @@ object SQLite3ParserData: TSQLite3ParserData
           'DROP INDEX IF EXISTS db_name.index_name;'
         )
       end>
-    Left = 24
-    Top = 160
+    Left = 23
+    Top = 155
   end
   object sTable: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateTable1'
@@ -265,8 +270,14 @@ object SQLite3ParserData: TSQLite3ParserData
         Lines.Strings = (
           'DROP TABLE tbl_nm;'
         )
+      end    
+      item
+        Caption = 'CreateTable12'
+        Lines.Strings = (
+          'CREATE TABLE filterActions(id integer primary key, idFilter int, action varchar, params varchar );'
+        )
       end>
-    Left = 24
-    Top = 248
+    Left = 23
+    Top = 240
   end
 end

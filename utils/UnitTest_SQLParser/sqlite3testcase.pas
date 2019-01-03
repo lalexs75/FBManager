@@ -31,6 +31,7 @@ type
     procedure CreateTable9;
     procedure CreateTable10;
     procedure CreateTable11;
+    procedure CreateTable12;
     //ALTER TABLE
     procedure AlterTable1;
     procedure AlterTable2;
@@ -156,6 +157,11 @@ end;
 procedure TSQLite3ParserTest.CreateTable11;
 begin
   DoTestSQL(SQLite3ParserData.sTable['CreateTable11']);
+end;
+
+procedure TSQLite3ParserTest.CreateTable12;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateTable12']);
 end;
 
 procedure TSQLite3ParserTest.AlterTable1;

@@ -18,8 +18,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="684"/>
+        <TopLine Value="689"/>
         <CursorPos Y="710"/>
         <UsageCount Value="122"/>
         <Bookmarks Count="1">
@@ -77,10 +76,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="SQLite3TestCase"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="184"/>
-        <CursorPos X="72" Y="196"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="153"/>
+        <CursorPos X="52" Y="164"/>
         <UsageCount Value="122"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="pgcopycmdcase.pas"/>
@@ -294,7 +296,7 @@
         <UsageCount Value="10"/>
       </Unit33>
     </Units>
-    <JumpHistory Count="28" HistoryIndex="27">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="1156" Column="128" TopLine="1134"/>
@@ -402,6 +404,14 @@
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="2553" TopLine="2545"/>
       </Position28>
+      <Position29>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="188" Column="41" TopLine="184"/>
+      </Position29>
+      <Position30>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="34" Column="28" TopLine="24"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

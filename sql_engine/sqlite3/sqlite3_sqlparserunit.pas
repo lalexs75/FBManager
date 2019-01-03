@@ -433,7 +433,7 @@ begin
          T4:=AddSQLTokens(stKeyword, T_FU, 'CASCADE', [], 35);
          T5:=AddSQLTokens(stKeyword, T_FU, 'RESTRICT', [], 36);
          T6:=AddSQLTokens(stKeyword, T_FU, 'NO', []);
-         T6:=AddSQLTokens(stKeyword, T6, 'ACTION', [], 36);
+         T6:=AddSQLTokens(stIdentificator, T6, 'ACTION', [], 36);
     DoFillEndTags([T3_1, T3_2, T4, T5, T6]);
       T3_1.AddChildToken([T1, TC_NN]);
       T3_2.AddChildToken([T1, TC_NN]);
@@ -449,7 +449,7 @@ begin
         T4:=AddSQLTokens(stKeyword, T_FD, 'CASCADE', [], 82);
         T5:=AddSQLTokens(stKeyword, T_FD, 'RESTRICT', [], 83);
         T6:=AddSQLTokens(stKeyword, T_FD, 'NO', []);
-        T6:=AddSQLTokens(stKeyword, T6, 'ACTION', [], 83);
+        T6:=AddSQLTokens(stIdentificator, T6, 'ACTION', [], 83);
     DoFillEndTags([T3_1, T3_2, T4, T5, T6]);
       T3_1.AddChildToken([T1, TC_NN]);
       T3_2.AddChildToken([T1, TC_NN]);
@@ -1406,7 +1406,7 @@ begin
        TRef1_3:=AddSQLTokens(stKeyword, TRef1, 'CASCADE', [], 35);
        TRef1_4:=AddSQLTokens(stKeyword, TRef1, 'RESTRICT', [], 36);
        TRef1_5:=AddSQLTokens(stKeyword, TRef1, 'NO', []);
-       TRef1_5:=AddSQLTokens(stKeyword, TRef1_5, 'ACTION', [], 36);
+       TRef1_5:=AddSQLTokens(stIdentificator, TRef1_5, 'ACTION', [], 36);
     TRef2:=AddSQLTokens(stKeyword, TRef, 'DELETE', []);
       TRef2_2:=AddSQLTokens(stKeyword, TRef2, 'SET', []);
         TRef2_1:=AddSQLTokens(stKeyword, TRef2_2, 'NULL', [], 80);
@@ -1414,7 +1414,7 @@ begin
       TRef2_3:=AddSQLTokens(stKeyword, TRef2, 'CASCADE', [], 82);
       TRef2_4:=AddSQLTokens(stKeyword, TRef2, 'RESTRICT', [], 83);
       TRef2_5:=AddSQLTokens(stKeyword, TRef2, 'NO', []);
-      TRef2_5:=AddSQLTokens(stKeyword, TRef2_5, 'ACTION', [], 83);
+      TRef2_5:=AddSQLTokens(stIdentificator, TRef2_5, 'ACTION', [], 83);
 
   TRef1_1.AddChildToken([TRef, TSymb2]);
   TRef1_2.AddChildToken([TRef, TSymb2]);
