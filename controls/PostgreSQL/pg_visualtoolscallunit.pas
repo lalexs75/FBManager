@@ -104,6 +104,7 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmpgTableCheckConstaintUnit,
      fbmpgTableCheckConstaint_EditUnit,                  //Права доступа
      fbmPGLanguageUnit,                 //Языки
+    fbmTableStatisticUnit,
 
      pg_con_EditorPrefUnit,
 
@@ -195,7 +196,7 @@ begin
     [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame, TfdbmTableEditorPKListFrame,
      TfdbmTableEditorForeignKeyFrame, TfdbmTableEditorUniqueFrame, TfbmpgTableCheckConstaintPage,
      TfbmTableEditorIndexFrame, TfbmTableEditorTriggersFrame, TPGRuleListPage, TfbmpgTablePropertysFrame,
-     TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+     TDependenciesFrame, TfbmTableStatisticFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
      TfbmDDLPage]);
 
   RegisterObjEditor(TPGView,

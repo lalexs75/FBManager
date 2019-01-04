@@ -247,9 +247,9 @@ type
   TDBTableStatistic = class
   private
     FOwner:TDBTableObject;
+    FStatData: TDataSet;
     function GetCount: Integer;
-    function GetNames(AIndex: Integer): string;
-    function GetValues(AIndex: Integer): string;
+    procedure CreateStatData;
   public
     constructor Create(AOwner:TDBTableObject);
     destructor Destroy; override;
@@ -257,8 +257,7 @@ type
     procedure Refresh;
     procedure AddValue(AName, AValue:string);
     property Count:Integer read GetCount;
-    property Names[AIndex:Integer]:string read GetNames;
-    property Values[AIndex:Integer]:string read GetValues;
+    property StatData:TDataSet read FStatData;
   end;
 
   { TDBObject }
@@ -575,10 +574,11 @@ type
     function GetIndexCount: integer;
 
     procedure IndexArrayClear;
-    function GetIndexFields(const AIndexName:string; const AForce:boolean):string;virtual;
+    function GetIndexFields(const AIndexName:string; const AForce:boolean):string; virtual;
 
     procedure ClearConstraintList(AConstraintType:TConstraintType);
     procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
+    procedure InternalRefreshStatistic; virtual;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -907,7 +907,7 @@ var
 function ExecSQLScript(Line:string; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 function ExecSQLScriptEx(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging;
+uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging, rxmemds;
 
 
 function ExecSQLScript(Line: string; const ExecParams: TSqlExecParams;
@@ -944,40 +944,48 @@ begin
 
 end;
 
-function TDBTableStatistic.GetNames(AIndex: Integer): string;
+procedure TDBTableStatistic.CreateStatData;
 begin
-
-end;
-
-function TDBTableStatistic.GetValues(AIndex: Integer): string;
-begin
-
+  FStatData.FieldDefs.BeginUpdate;
+  FStatData.FieldDefs.Add('Caption', ftString, 200);
+  FStatData.FieldDefs.Add('Value', ftString, 500);
+  FStatData.FieldDefs.EndUpdate;
 end;
 
 constructor TDBTableStatistic.Create(AOwner: TDBTableObject);
 begin
-
+  inherited Create;
+  FStatData:=TRxMemoryData.Create(nil);
+  CreateStatData;
+  FStatData.Open;
+  FOwner:=AOwner;
 end;
 
 destructor TDBTableStatistic.Destroy;
 begin
   Clear;
+  FreeAndNil(FStatData);
   inherited Destroy;
 end;
 
 procedure TDBTableStatistic.Clear;
 begin
-
+  FStatData.Close;
+  FStatData.Open;
 end;
 
 procedure TDBTableStatistic.Refresh;
 begin
-
+  Clear;
+  FOwner.InternalRefreshStatistic;
 end;
 
 procedure TDBTableStatistic.AddValue(AName, AValue: string);
 begin
-
+  FStatData.Append;
+  FStatData.FieldByName('Caption').AsString:=AName;
+  FStatData.FieldByName('Value').AsString:=AValue;
+  FStatData.Post;
 end;
 
 { TACLListEnumerator }
@@ -2458,6 +2466,11 @@ begin
   inherited NotyfiOnDestroy(ADBObject);
   if ADBObject is TDBIndex then
   //;
+end;
+
+procedure TDBTableObject.InternalRefreshStatistic;
+begin
+
 end;
 
 function TDBTableObject.GetIndexCount: integer;
