@@ -888,6 +888,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
     property Full:boolean read FFull write FFull;
@@ -13255,6 +13256,12 @@ begin
   if TableName <> '' then
     S:=S + ' ' + TableName;
   AddSQLCommand(S);
+end;
+
+constructor TPGSQLVacum.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  PlanEnabled:=false;
 end;
 
 procedure TPGSQLVacum.Assign(ASource: TSQLObjectAbstract);
