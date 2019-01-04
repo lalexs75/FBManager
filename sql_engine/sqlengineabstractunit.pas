@@ -2470,7 +2470,7 @@ end;
 
 procedure TDBTableObject.InternalRefreshStatistic;
 begin
-
+  Statistic.AddValue(sCaption, CaptionFullPatch);
 end;
 
 function TDBTableObject.GetIndexCount: integer;

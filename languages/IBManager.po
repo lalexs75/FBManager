@@ -2220,6 +2220,10 @@ msgctxt "fbmstrconstunit.sindexs"
 msgid "Indexs"
 msgstr ""
 
+#: fbmstrconstunit.sindexsize
+msgid "Index size"
+msgstr ""
+
 #: fbmstrconstunit.sindexsort
 msgid "Index sort"
 msgstr ""
@@ -3085,6 +3089,10 @@ msgstr ""
 #: fbmstrconstunit.soicopyregistrationhint
 msgctxt "fbmstrconstunit.soicopyregistrationhint"
 msgid "Copy registration record..."
+msgstr ""
+
+#: fbmstrconstunit.soid
+msgid "OID"
 msgstr ""
 
 #: fbmstrconstunit.soidatabases
@@ -4512,6 +4520,10 @@ msgctxt "fbmstrconstunit.stables"
 msgid "Tables"
 msgstr ""
 
+#: fbmstrconstunit.stablesize
+msgid "Table size"
+msgstr ""
+
 #: fbmstrconstunit.stablespace
 msgctxt "fbmstrconstunit.stablespace"
 msgid "Table space"
@@ -4618,6 +4630,10 @@ msgstr ""
 msgid "TimeStamp"
 msgstr ""
 
+#: fbmstrconstunit.stoastsize
+msgid "Toast size"
+msgstr ""
+
 #: fbmstrconstunit.stodate
 msgctxt "fbmstrconstunit.stodate"
 msgid "To date"
@@ -4645,6 +4661,10 @@ msgstr ""
 
 #: fbmstrconstunit.stotal
 msgid "Total"
+msgstr ""
+
+#: fbmstrconstunit.stotalsize
+msgid "Total size"
 msgstr ""
 
 #: fbmstrconstunit.stransactionpersecond
@@ -4964,6 +4984,10 @@ msgstr ""
 
 #: fbmstrconstunit.svalidatorfuncation
 msgid "Validator funcation"
+msgstr ""
+
+#: fbmstrconstunit.svalue
+msgid "Value"
 msgstr ""
 
 #: fbmstrconstunit.svardefvalue

@@ -1463,4 +1463,24 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f636f6e73747261696e742e636f6e6e616d65'
     )
   end
+  object sPGStatistics: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'Stat1_Sizes'
+        Lines.Strings = (
+          'SELECT'
+          '  pg_total_relation_size(pg_class.oid) AS total,'
+          '  pg_indexes_size(pg_class.oid) AS INDEX,'
+          '  pg_total_relation_size(reltoastrelid) AS toast'
+          'FROM'
+          '  pg_class'
+          'WHERE'
+          '  pg_class.oid = :oid'
+          ''
+        )
+      end>
+    Left = 968
+    Top = 32
+  end
 end

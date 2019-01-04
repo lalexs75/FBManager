@@ -2223,6 +2223,10 @@ msgctxt "fbmstrconstunit.sindexs"
 msgid "Indexs"
 msgstr "Индексы"
 
+#: fbmstrconstunit.sindexsize
+msgid "Index size"
+msgstr ""
+
 #: fbmstrconstunit.sindexsort
 msgid "Index sort"
 msgstr "Сортировка индекса"
@@ -3090,6 +3094,10 @@ msgstr "Зарегистрировать дубликат БД..."
 msgctxt "fbmstrconstunit.soicopyregistrationhint"
 msgid "Copy registration record..."
 msgstr "Зарегистрировать дубликат БД..."
+
+#: fbmstrconstunit.soid
+msgid "OID"
+msgstr ""
 
 #: fbmstrconstunit.soidatabases
 msgid "Databases"
@@ -4518,6 +4526,10 @@ msgctxt "fbmstrconstunit.stables"
 msgid "Tables"
 msgstr "Таблицы"
 
+#: fbmstrconstunit.stablesize
+msgid "Table size"
+msgstr ""
+
 #: fbmstrconstunit.stablespace
 msgctxt "fbmstrconstunit.stablespace"
 msgid "Table space"
@@ -4623,6 +4635,10 @@ msgstr "Время"
 msgid "TimeStamp"
 msgstr "ДатаВремя"
 
+#: fbmstrconstunit.stoastsize
+msgid "Toast size"
+msgstr ""
+
 #: fbmstrconstunit.stodate
 msgctxt "fbmstrconstunit.stodate"
 msgid "To date"
@@ -4651,6 +4667,10 @@ msgstr "%TRIGGER_NAME% - для вставки имени триггера"
 #: fbmstrconstunit.stotal
 msgid "Total"
 msgstr "Всего"
+
+#: fbmstrconstunit.stotalsize
+msgid "Total size"
+msgstr ""
 
 #: fbmstrconstunit.stransactionpersecond
 msgid "Transaction per second"
@@ -4972,6 +4992,10 @@ msgstr "Проверка"
 #: fbmstrconstunit.svalidatorfuncation
 msgid "Validator funcation"
 msgstr "Функция проверки"
+
+#: fbmstrconstunit.svalue
+msgid "Value"
+msgstr ""
 
 #: fbmstrconstunit.svardefvalue
 msgid "Variable default value"

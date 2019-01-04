@@ -891,11 +891,17 @@ resourcestring
   sGlobalTemporaryTable             = 'Global Temporary Table';
   sOnCommitDeleteRows               = 'ON COMMIT DELETE ROWS';
   sOnCommitPreserveRows             = 'ON COMMIT PRESERVE ROWS';
+  sOID                              = 'OID';
+  sTableSize                        = 'Table size';
+  sTotalSize                        = 'Total size';
+  sToastSize                        = 'Toast size';
+  sIndexSize                        = 'Index size';
 
 
   sNewForeignKey                    = 'New foreign key';
   sDropForeignKey                   = 'Drop foreign key';
   sPrintFKList                      = 'Print FK list';
+  sValue                            = 'Value';
 
   //Tasks
   sShedule                          = 'Shedule';

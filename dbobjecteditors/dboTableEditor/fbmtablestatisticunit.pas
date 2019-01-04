@@ -26,24 +26,37 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList, DB,
-  rxdbgrid, fdmAbstractEditorUnit, SQLEngineAbstractUnit, IniFiles;
+  rxdbgrid, RxDBGridExportPdf, RxDBGridExportSpreadSheet, RxDBGridPrintGrid,
+  fdmAbstractEditorUnit, SQLEngineAbstractUnit, IniFiles;
 
 type
 
   { TfbmTableStatisticFrame }
 
   TfbmTableStatisticFrame = class(TEditorPage)
+    actPrint: TAction;
+    actRefresh: TAction;
     ActionList1: TActionList;
     dsStat: TDataSource;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
     PopupMenu1: TPopupMenu;
     RxDBGrid1: TRxDBGrid;
+    RxDBGridExportPDF1: TRxDBGridExportPDF;
+    RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet;
+    RxDBGridPrint1: TRxDBGridPrint;
+    procedure actPrintExecute(Sender: TObject);
+    procedure actRefreshExecute(Sender: TObject);
   private
-
+    procedure Print;
+    procedure RefreshData;
   public
     function PageName:string;override;
     procedure Activate;override;
     function DoMetod(PageAction: TEditorPageAction): boolean;override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
+    procedure UpdateEnvOptions; override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
     procedure SaveState(const SectionName:string; const Ini:TIniFile);override;
     procedure RestoreState(const SectionName:string; const Ini:TIniFile);override;
@@ -51,11 +64,31 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit;
+uses fbmToolsUnit, fbmStrConstUnit;
 
 {$R *.lfm}
 
 { TfbmTableStatisticFrame }
+
+procedure TfbmTableStatisticFrame.actRefreshExecute(Sender: TObject);
+begin
+  RefreshData;
+end;
+
+procedure TfbmTableStatisticFrame.actPrintExecute(Sender: TObject);
+begin
+  Print;
+end;
+
+procedure TfbmTableStatisticFrame.Print;
+begin
+  RxDBGridPrint1.Execute;
+end;
+
+procedure TfbmTableStatisticFrame.RefreshData;
+begin
+  TDBTableObject(DBObject).Statistic.Refresh;
+end;
 
 function TfbmTableStatisticFrame.PageName: string;
 begin
@@ -66,18 +99,31 @@ procedure TfbmTableStatisticFrame.Activate;
 begin
   inherited Activate;
   dsStat.DataSet:=TDBTableObject(DBObject).Statistic.StatData;
+  if dsStat.DataSet.RecordCount = 0 then
+    TDBTableObject(DBObject).Statistic.Refresh;
 end;
 
 function TfbmTableStatisticFrame.DoMetod(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited DoMetod(PageAction);
+  case PageAction of
+    epaPrint:Print;
+    epaRefresh:RefreshData;
+  else
+    Result:=false;
+  end;
 end;
 
 function TfbmTableStatisticFrame.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaPrint, epaRefresh];
+end;
+
+procedure TfbmTableStatisticFrame.UpdateEnvOptions;
+begin
+  inherited UpdateEnvOptions;
+  SetRxDBGridOptions(RxDBGrid1);
 end;
 
 constructor TfbmTableStatisticFrame.CreatePage(TheOwner: TComponent;
@@ -101,6 +147,11 @@ end;
 procedure TfbmTableStatisticFrame.Localize;
 begin
   inherited Localize;
+  actRefresh.Caption:=sRefresh;
+  actPrint.Caption:=sPrint;
+
+  RxDBGrid1.ColumnByFieldName('Caption').Title.Caption:=sCaption;
+  RxDBGrid1.ColumnByFieldName('Value').Title.Caption:=sValue;
 end;
 
 end.

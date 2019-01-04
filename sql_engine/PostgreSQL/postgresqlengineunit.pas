@@ -484,7 +484,8 @@ type
     function InternalGetDDLCreate: string;override;
     function GetRecordCount: integer; override;
     function GetDBFieldClass: TDBFieldClass; override;
-    procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
+    procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -3587,6 +3588,27 @@ begin
       RefreshEditor;
     end;
   end;
+end;
+
+procedure TPGTable.InternalRefreshStatistic;
+var
+  FQuery: TZQuery;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
+  FQuery.ParamByName('oid').AsInteger:=FOID;
+  FQuery.Open;
+
+  Statistic.AddValue(sTotalSize, IntToStr(FQuery.FieldByName('total').AsInteger));
+  Statistic.AddValue(sIndexSize, IntToStr(FQuery.FieldByName('INDEX').AsInteger));
+  Statistic.AddValue(sToastSize, IntToStr(FQuery.FieldByName('toast').AsInteger));
+  Statistic.AddValue(sTableSize, IntToStr(FQuery.FieldByName('total').AsInteger - FQuery.FieldByName('INDEX').AsInteger - FQuery.FieldByName('toast').AsInteger));
+
+  FQuery.Close;
+  FQuery.Free;
+
 end;
 
 function TPGTable.GetCaptionFullPatch: string;

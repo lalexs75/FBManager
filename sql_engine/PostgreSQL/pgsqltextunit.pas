@@ -25,13 +25,14 @@ unit pgSqlTextUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, StrHolder;
+  Classes, SysUtils, FileUtil, StrHolder, RxTextHolder;
 
 type
 
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
+    sPGStatistics: TRxTextHolder;
     sPGGroups1: TStrHolder;
     sPGUsers: TStrHolder;
     sqlEventTrigger: TStrHolder;

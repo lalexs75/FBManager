@@ -1,9 +1,13 @@
 inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
+  Height = 327
+  Width = 435
+  ClientHeight = 327
+  ClientWidth = 435
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
-    Height = 240
+    Height = 327
     Top = 0
-    Width = 320
+    Width = 435
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
     AutoSort = True
@@ -12,7 +16,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Caption'
-        Width = 146
+        Width = 204
         FieldName = 'Caption'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -27,7 +31,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Value'
-        Width = 147
+        Width = 204
         FieldName = 'Value'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -97,7 +101,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     FooterOptions.DrawFullLine = False
     SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
     SearchOptions.FromStart = False
-    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter, rdgAllowToolMenu]
     Align = alClient
     AutoFillColumns = True
     Color = clWindow
@@ -119,10 +123,51 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     Images = fbManagerMainForm.ImageListMain
     Left = 112
     Top = 112
+    object MenuItem1: TMenuItem
+      Action = actRefresh
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = actPrint
+    end
   end
   object ActionList1: TActionList[3]
     Images = fbManagerMainForm.ImageListMain
     Left = 163
     Top = 112
+    object actRefresh: TAction
+      Caption = 'actRefresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+    object actPrint: TAction
+      Caption = 'actPrint'
+      ImageIndex = 14
+      OnExecute = actPrintExecute
+    end
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[4]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Экспорт в электронную таблицу'
+    Options = [ressExportTitle, ressExportColors, ressExportFooter, ressExportFormula, ressOverwriteExisting, ressExportSelectedRows, ressHideZeroValues, ressColSpanning, ressExportGroupData]
+    Left = 112
+    Top = 184
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[5]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Печать списка'
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle, rxpoHideZeroValues, rxpoColSpanning]
+    Left = 152
+    Top = 184
+  end
+  object RxDBGridExportPDF1: TRxDBGridExportPDF[6]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Экспорт в PDF файл'
+    Options = []
+    PdfOptions.Options = []
+    Left = 192
+    Top = 184
   end
 end
