@@ -690,4 +690,23 @@ object fbSqlTextData: TfbSqlTextData
       '202020205244422454524947474552532e52444224545249474745525f54595045203d2031'
     )
   end
+  object sFBStatistic: TRxTextHolder
+    Highlighter = rxSynNone
+    Items = <    
+      item
+        Caption = 'Stat1Format'
+        Lines.Strings = (
+          'select'
+          '  RDB$FORMATS.RDB$FORMAT'
+          'from'
+          '  RDB$RELATIONS'
+          '  inner join RDB$FORMATS on (RDB$RELATIONS.RDB$RELATION_ID = RDB$FORMATS.RDB$RELATION_ID)'
+          'where'
+          '  RDB$RELATIONS.RDB$RELATION_NAME = :RELATION_NAME'
+          ''
+        )
+      end>
+    Left = 768
+    Top = 8
+  end
 end

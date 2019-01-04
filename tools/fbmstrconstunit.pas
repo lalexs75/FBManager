@@ -896,12 +896,14 @@ resourcestring
   sTotalSize                        = 'Total size';
   sToastSize                        = 'Toast size';
   sIndexSize                        = 'Index size';
+  sStatRecordCount                  = 'Record count for statistic';
 
 
   sNewForeignKey                    = 'New foreign key';
   sDropForeignKey                   = 'Drop foreign key';
   sPrintFKList                      = 'Print FK list';
   sValue                            = 'Value';
+  sChangeCount                      = 'Change count';
 
   //Tasks
   sShedule                          = 'Shedule';

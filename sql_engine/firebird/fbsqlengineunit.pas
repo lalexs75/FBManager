@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, db, uib, FBCustomDataSet, SQLEngineInternalToolsUnit,
-  contnrs, fb_utils, SQLEngineCommonTypesUnit, {fb_CharSetUtils,}
+  contnrs, fb_utils, SQLEngineCommonTypesUnit,
   fb_SqlParserUnit, uibsqlparser, fbKeywordsUnit, fbmSqlParserUnit,
   sqlObjects;
 
@@ -315,6 +315,7 @@ type
     function GetTriggersCategoriesType(AItem: integer): TTriggerTypes;override;
     function GetRecordCount: integer; override;
     function GetDBFieldClass: TDBFieldClass; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -2084,6 +2085,20 @@ end;
 function TFireBirdTable.GetDBFieldClass: TDBFieldClass;
 begin
   Result:=TFirebirdField;
+end;
+
+procedure TFireBirdTable.InternalRefreshStatistic;
+var
+  Q: TUIBQuery;
+begin
+  inherited InternalRefreshStatistic;
+
+  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sFBStatistic['Stat1Format']);
+  Q.Params.ByNameAsString['RELATION_NAME']:=Caption;
+  Q.Open;
+  Statistic.AddValue(sChangeCount, IntToStr(256 - Q.Fields.ByNameAsInteger['RDB$FORMAT']));
+  Q.Close;
+  Q.Free;
 end;
 
 procedure TFireBirdTable.IndexListRefresh;

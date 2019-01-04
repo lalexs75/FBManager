@@ -111,6 +111,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     GridLineStyle = psSolid
     DataSource = dsStat
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 0
     TitleStyle = tsNative
@@ -151,22 +152,29 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
   object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[4]
     RxDBGrid = RxDBGrid1
     Caption = 'Экспорт в электронную таблицу'
+    ShowSetupForm = True
     Options = [ressExportTitle, ressExportColors, ressExportFooter, ressExportFormula, ressOverwriteExisting, ressExportSelectedRows, ressHideZeroValues, ressColSpanning, ressExportGroupData]
+    OpenAfterExport = True
     Left = 112
     Top = 184
   end
   object RxDBGridPrint1: TRxDBGridPrint[5]
     RxDBGrid = RxDBGrid1
     Caption = 'Печать списка'
+    ShowSetupForm = True
     Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle, rxpoHideZeroValues, rxpoColSpanning]
+    ShowProgress = True
+    ShowColumnHeaderOnAllPage = True
     Left = 152
     Top = 184
   end
   object RxDBGridExportPDF1: TRxDBGridExportPDF[6]
     RxDBGrid = RxDBGrid1
     Caption = 'Экспорт в PDF файл'
-    Options = []
+    ShowSetupForm = True
+    Options = [repExportTitle, repExportColors, repExportFooter, repOverwriteExisting, repExportImages]
     PdfOptions.Options = []
+    OpenAfterExport = True
     Left = 192
     Top = 184
   end

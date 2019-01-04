@@ -25,7 +25,7 @@ unit fbSqlTextUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, StrHolder;
+  Classes, SysUtils, FileUtil, uib, StrHolder, RxTextHolder;
 
 type
 
@@ -37,6 +37,7 @@ type
     fbtPackageBody: TStrHolder;
     fbtPackageLazy: TStrHolder;
     fbtPackageBodyLazy: TStrHolder;
+    sFBStatistic: TRxTextHolder;
     sFBIndexSegs: TStrHolder;
     sFBIndexs: TStrHolder;
     sFBIndex: TStrHolder;

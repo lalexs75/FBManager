@@ -342,6 +342,10 @@ msgstr ""
 msgid "Case sensetive"
 msgstr ""
 
+#: fbmstrconstunit.schangecount
+msgid "Change count"
+msgstr ""
+
 #: fbmstrconstunit.scharset
 msgid "Char set"
 msgstr ""
@@ -4325,6 +4329,10 @@ msgstr ""
 
 #: fbmstrconstunit.sstatistic
 msgid "Statistic"
+msgstr ""
+
+#: fbmstrconstunit.sstatrecordcount
+msgid "Record count for statistic"
 msgstr ""
 
 #: fbmstrconstunit.sstatsdatetime

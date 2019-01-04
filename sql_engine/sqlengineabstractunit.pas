@@ -978,6 +978,7 @@ procedure TDBTableStatistic.Refresh;
 begin
   Clear;
   FOwner.InternalRefreshStatistic;
+  FStatData.First;
 end;
 
 procedure TDBTableStatistic.AddValue(AName, AValue: string);

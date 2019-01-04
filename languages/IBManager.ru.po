@@ -352,6 +352,10 @@ msgstr "Курсор всегда видимый"
 msgid "Case sensetive"
 msgstr "Регистронезависимый"
 
+#: fbmstrconstunit.schangecount
+msgid "Change count"
+msgstr ""
+
 #: fbmstrconstunit.scharset
 msgid "Char set"
 msgstr "Набор символов"
@@ -4330,6 +4334,10 @@ msgstr "Статус"
 #: fbmstrconstunit.sstatistic
 msgid "Statistic"
 msgstr "Статистика"
+
+#: fbmstrconstunit.sstatrecordcount
+msgid "Record count for statistic"
+msgstr ""
 
 #: fbmstrconstunit.sstatsdatetime
 msgid "Stats date"

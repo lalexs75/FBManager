@@ -106,6 +106,7 @@ uses fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
   fdbmTableEditorForeignKeyUnit,//Страница редактора внешнего ключа
   fbmUDFMainEditorUnit,        //Главная страница редактора UDF
   fbmDDLPageUnit, fbmFirebirdPackageUnit,              //Страница DDL
+  fbmTableStatisticUnit,
   fbmpgACLEditUnit,
   fdbmTableEditorUniqueUnit,
   fbmFirebirdTablePropsUnit
@@ -237,7 +238,7 @@ begin
      TfdbmTableEditorPKListFrame,
      TfdbmTableEditorForeignKeyFrame, TfdbmTableEditorUniqueFrame, TfbmpgTableCheckConstaintPage,
      TfbmTableEditorTriggersFrame, TfbmTableEditorIndexFrame,
-     TDependenciesFrame,
+     TDependenciesFrame, TfbmTableStatisticFrame,
      TfbmpgACLEditEditor, TfbmFirebirdTablePropsPage, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   //Views
