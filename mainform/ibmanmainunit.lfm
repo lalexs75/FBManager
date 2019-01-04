@@ -1,14 +1,13 @@
 object fbManagerMainForm: TfbManagerMainForm
   Left = 200
-  Height = 774
+  Height = 799
   Top = 89
-  Width = 1200
+  Width = 1239
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'
-  ClientHeight = 748
-  ClientWidth = 1200
-  Constraints.MinHeight = 116
-  DesignTimePPI = 93
+  ClientHeight = 774
+  ClientWidth = 1239
+  Constraints.MinHeight = 120
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
   OnCreate = IBManagerMainFormCreate
@@ -17,30 +16,30 @@ object fbManagerMainForm: TfbManagerMainForm
   LCLVersion = '2.1.0.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 20
-    Top = 728
-    Width = 1200
+    Height = 21
+    Top = 753
+    Width = 1239
     Panels = <    
       item
-        Width = 87
+        Width = 90
       end    
       item
-        Width = 145
+        Width = 150
       end    
       item
-        Width = 68
+        Width = 70
       end    
       item
-        Width = 48
+        Width = 50
       end>
     ParentFont = False
     SimplePanel = False
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 35
+    Height = 36
     Top = 0
-    Width = 1200
+    Width = 1239
     Items = <    
       item
         Action = dbConnect
@@ -117,8 +116,8 @@ object fbManagerMainForm: TfbManagerMainForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 35
-    ClientWidth = 1200
+    ClientHeight = 36
+    ClientWidth = 1239
     ParentFont = False
     TabOrder = 0
     object RxMDICloseButton1: TRxMDICloseButton
@@ -126,10 +125,10 @@ object fbManagerMainForm: TfbManagerMainForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 1173
-      Height = 21
+      Left = 1211
+      Height = 22
       Top = 7
-      Width = 22
+      Width = 23
       Anchors = [akTop, akRight]
       Glyph.Data = {
         1A020000424D1A0200000000000036000000280000000B0000000B0000000100
@@ -155,23 +154,23 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object InspectorPanel: TPanel
     Left = 0
-    Height = 669
-    Top = 35
-    Width = 212
+    Height = 692
+    Top = 36
+    Width = 219
     Align = alLeft
-    ClientHeight = 669
-    ClientWidth = 212
+    ClientHeight = 692
+    ClientWidth = 219
     ParentFont = False
     TabOrder = 2
     object Panel1: TPanel
       Left = 1
-      Height = 20
+      Height = 21
       Top = 1
-      Width = 210
+      Width = 217
       Align = alTop
       AutoSize = True
-      ClientHeight = 20
-      ClientWidth = 210
+      ClientHeight = 21
+      ClientWidth = 217
       Color = clActiveCaption
       ParentColor = False
       ParentFont = False
@@ -182,7 +181,7 @@ object fbManagerMainForm: TfbManagerMainForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Panel1
         AnchorSideBottom.Side = asrBottom
-        Left = 191
+        Left = 198
         Height = 18
         Hint = 'Закрыть текущий список'
         Top = 1
@@ -228,9 +227,9 @@ object fbManagerMainForm: TfbManagerMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = InspectorCloseButton
         Left = 1
-        Height = 18
+        Height = 19
         Top = 1
-        Width = 190
+        Width = 197
         Alignment = taCenter
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Object inspector'
@@ -240,25 +239,25 @@ object fbManagerMainForm: TfbManagerMainForm
     end
   end
   object Splitter1: TSplitter
-    Left = 212
-    Height = 669
-    Top = 35
+    Left = 219
+    Height = 692
+    Top = 36
     Width = 5
   end
   object RxMDITasks1: TRxMDITasks
     Left = 0
-    Height = 24
-    Top = 704
-    Width = 1200
+    Height = 25
+    Top = 728
+    Width = 1239
     Align = alBottom
     FlatButton = False
     Options = []
   end
   object RxMDIPanel1: TRxMDIPanel
-    Left = 217
-    Height = 669
-    Top = 35
-    Width = 983
+    Left = 224
+    Height = 692
+    Top = 36
+    Width = 1015
     CloseButton = RxMDICloseButton1
     TaskPanel = RxMDITasks1
     Align = alClient
@@ -268,8 +267,8 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object ActionList1: TActionList
     Images = ImageListMain
-    Left = 566
-    Top = 58
+    Left = 584
+    Top = 60
     object sysExit: TAction
       Category = 'System'
       Caption = 'Close'
@@ -433,8 +432,8 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object MainMenu1: TMainMenu
     Images = ImageListMain
-    Left = 535
-    Top = 58
+    Left = 552
+    Top = 60
     object MenuItem1: TMenuItem
       Caption = 'System'
       object miCreateDB: TMenuItem
@@ -572,15 +571,15 @@ object fbManagerMainForm: TfbManagerMainForm
     OnException = ApplicationProperties1Exception
     OnIdle = ApplicationProperties1Idle
     OnHint = ApplicationProperties1Hint
-    Left = 682
-    Top = 54
+    Left = 704
+    Top = 56
   end
   object ImageList2: TImageList
     Height = 18
     Scaled = True
     Width = 18
-    Left = 643
-    Top = 58
+    Left = 664
+    Top = 60
     Bitmap = {
       4C69540000001200000012000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12058,97 +12057,97 @@ object fbManagerMainForm: TfbManagerMainForm
     Options = []
     PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
     DataType = dtDataSet
-    Left = 326
-    Top = 62
+    Left = 337
+    Top = 64
   end
   object frTextExport1: TfrTextExport
     ShowExportParamsDlg = False
-    Left = 295
-    Top = 62
+    Left = 305
+    Top = 64
   end
   object frHTMExport1: TfrHTMExport
-    Left = 264
-    Top = 62
+    Left = 273
+    Top = 64
   end
   object frBarCodeObject1: TfrBarCodeObject
-    Left = 233
-    Top = 62
+    Left = 241
+    Top = 64
   end
   object frRoundRectObject1: TfrRoundRectObject
-    Left = 202
-    Top = 62
+    Left = 209
+    Top = 64
   end
   object frShapeObject1: TfrShapeObject
-    Left = 171
-    Top = 62
+    Left = 177
+    Top = 64
   end
   object frCheckBoxObject1: TfrCheckBoxObject
-    Left = 140
-    Top = 62
+    Left = 145
+    Top = 64
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
     KeywordPrefix = 'en/'
-    Left = 775
-    Top = 70
+    Left = 800
+    Top = 72
   end
   object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
     BrowserParams = '%s'
     AutoRegister = True
-    Left = 744
-    Top = 70
+    Left = 768
+    Top = 72
   end
   object frCSVExport1: TfrCSVExport
-    Left = 355
-    Top = 62
+    Left = 366
+    Top = 64
   end
   object lrAddFunctionLibrary1: TlrAddFunctionLibrary
-    Left = 107
-    Top = 62
+    Left = 110
+    Top = 64
   end
   object RxSortFBDataSet1: TRxSortFBDataSet
-    Left = 922
-    Top = 63
+    Left = 952
+    Top = 65
   end
   object RxSortZeos1: TRxSortZeos
-    Left = 961
-    Top = 62
+    Left = 992
+    Top = 64
   end
   object RxIniPropStorage1: TRxIniPropStorage
     StoredValues = <>
     SeparateFiles = True
-    Left = 163
-    Top = 240
+    Left = 168
+    Top = 248
   end
   object frHtmlDivExport1: TfrHtmlDivExport
-    Left = 264
-    Top = 124
+    Left = 273
+    Top = 128
   end
   object frImageExport1: TfrImageExport
-    Left = 295
-    Top = 124
+    Left = 305
+    Top = 128
   end
   object lrCairoExport1: TlrCairoExport
-    Left = 326
-    Top = 124
+    Left = 337
+    Top = 128
   end
   object lrCrossObject1: TlrCrossObject
-    Left = 357
-    Top = 123
+    Left = 369
+    Top = 127
   end
   object lrEmailExportFilter1: TlrEmailExportFilter
     Active = True
     Caption = 'Send by email'
-    Left = 404
-    Top = 124
+    Left = 417
+    Top = 128
   end
   object LRDialogControls1: TLRDialogControls
-    Left = 264
-    Top = 174
+    Left = 273
+    Top = 180
   end
   object lrZeosData1: TlrZeosData
-    Left = 342
-    Top = 171
+    Left = 353
+    Top = 177
   end
   object lrSpreadSheetExport1: TlrSpreadSheetExport
     DataGrouping = ldgLikeReport
@@ -12159,25 +12158,25 @@ object fbManagerMainForm: TfbManagerMainForm
     ShowSetupForm = True
     BandTypes = [btReportTitle, btReportSummary, btPageHeader, btPageFooter, btMasterHeader, btMasterData, btMasterFooter, btDetailHeader, btDetailData, btDetailFooter, btSubDetailHeader, btSubDetailData, btSubDetailFooter, btOverlay, btColumnHeader, btColumnFooter, btGroupHeader, btGroupFooter, btCrossHeader, btCrossData, btCrossFooter, btChild, btNone]
     ExportImages = False
-    Left = 442
-    Top = 124
+    Left = 456
+    Top = 128
   end
   object lrOfficeImport1: TlrOfficeImport
-    Left = 561
-    Top = 203
+    Left = 579
+    Top = 210
   end
   object tmRegister: TPopupMenu
-    Left = 62
-    Top = 62
+    Left = 64
+    Top = 64
   end
   object lrPDFExport1: TlrPDFExport
-    Left = 535
-    Top = 116
+    Left = 552
+    Top = 120
   end
   object ImageListMain: TImageList
     Scaled = True
-    Left = 426
-    Top = 62
+    Left = 440
+    Top = 64
     Bitmap = {
       4C69650000001000000010000000000000000000000000000000000000000000
       0000000000000000B7E40000CEE00000B7E40000000000000000000000000000
@@ -18533,8 +18532,8 @@ object fbManagerMainForm: TfbManagerMainForm
     Height = 11
     Scaled = True
     Width = 11
-    Left = 1015
-    Top = 62
+    Left = 1048
+    Top = 64
     Bitmap = {
       4C690A0000000B0000000B0000000000000000000000C6834F23C4824EA3C07F
       4DEABB7C4BFFB6794AEAB07548A3AC724623000000000000000000000000C783
@@ -18941,8 +18940,8 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object ilDBObjects: TImageList
     Scaled = True
-    Left = 643
-    Top = 112
+    Left = 664
+    Top = 116
     Bitmap = {
       4C690E0000001000000010000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

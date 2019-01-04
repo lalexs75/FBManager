@@ -1,6 +1,6 @@
 { Free DB Manager
 
-  Copyright (C) 2005-2018 Lagunov Aleksey  alexs75 at yandex.ru
+  Copyright (C) 2005-2019 Lagunov Aleksey  alexs75 at yandex.ru
 
   This source is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free

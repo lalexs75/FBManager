@@ -1,0 +1,765 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"X-Generator: Poedit 2.2\n"
+
+#: rxdconst.sallvalues
+msgid "All values"
+msgstr "Wszystkie wartości"
+
+#: rxdconst.sapptitlelabel
+msgid "Application \"%s\""
+msgstr "Aplikacja \"%s\""
+
+#: rxdconst.sascending
+msgid "Ascending"
+msgstr "Narastająco"
+
+#: rxdconst.sblobtext
+msgid "(blob)"
+msgstr ""
+
+#: rxdconst.sbottomcaption
+msgid "Bottom"
+msgstr "Dół"
+
+#: rxdconst.sbrowsedata
+msgid "browse"
+msgstr "przeglądaj"
+
+#: rxdconst.scalcfieldsdata
+msgid "calc"
+msgstr "licz"
+
+#: rxdconst.scapturefilter
+msgid "Control locked by filter"
+msgstr "Kontrolka zablokowana przez filtr"
+
+#: rxdconst.schangepassword
+msgid "Change password"
+msgstr "Zmień hasło"
+
+#: rxdconst.scirculardatalink
+msgid "Circular data link"
+msgstr ""
+
+#: rxdconst.sclearfilter
+msgctxt "rxdconst.sclearfilter"
+msgid "Clear filter"
+msgstr "Wyczyść pola"
+
+#: rxdconst.scollumnname
+msgid "Column name"
+msgstr "Nazwa kolumny"
+
+#: rxdconst.scompressfonts
+msgid "Compress fonts"
+msgstr "Kompresuj czcionki"
+
+#: rxdconst.scompressimages
+msgid "Compress images"
+msgstr "Kompresuj obrazy"
+
+#: rxdconst.scompresstext
+msgid "Compress text"
+msgstr "Kompresuj tekst"
+
+#: rxdconst.sconfirmpasswordlabel
+msgid "&Confirm:"
+msgstr "P%otwierdź:"
+
+#: rxdconst.sconfirmsave
+msgid "Data changed. Save?"
+msgstr "Dane zostały zmienione? Zachować?"
+
+#: rxdconst.sdatabasename
+msgid "Database locked: %s"
+msgstr "Baza danych zablokowana: %s"
+
+#: rxdconst.sdatabasename1
+msgid "Database"
+msgstr "Baza danych"
+
+#: rxdconst.sdbcomboboxfieldnotassigned
+msgid "%s:TDBComboBox - DataField not assigned"
+msgstr ""
+
+#: rxdconst.sdbexceptcaption
+msgid "Error in DB engine"
+msgstr "Błąd silnika bazy danych"
+
+#: rxdconst.sdeletemultiplerecords
+msgid "Delete all selected records?"
+msgstr "Usunąć zaznaczone rekordy?"
+
+#: rxdconst.sdeleterecordquestion
+msgid "Delete record?"
+msgstr "Usunąć rekord?"
+
+#: rxdconst.sdescending
+msgctxt "rxdconst.sdescending"
+msgid "Descending"
+msgstr "Malejąco"
+
+#: rxdconst.seditdata
+msgid "editing"
+msgstr "edycja"
+
+#: rxdconst.semptyvalues
+msgid "Empty values"
+msgstr "Puste wartości"
+
+#: rxdconst.serrormsglabel
+msgid "Error message"
+msgstr "Komunikat błędu"
+
+#: rxdconst.sexportcellcolors
+msgid "Export cell colors"
+msgstr "Eksportuj kolor komórek"
+
+#: rxdconst.sexportcolumnfooter
+msgid "Export column footer"
+msgstr "Eksportuj stopki kolumn"
+
+#: rxdconst.sexportcolumnheader
+msgid "Export column header"
+msgstr "Eksportuj nagłówki kolumn"
+
+#: rxdconst.sexportfilename
+msgid "Export file name"
+msgstr "Eksportuj nazwę pliku"
+
+#: rxdconst.sexportformula
+msgid "Export footer formula"
+msgstr "Eksportuj formuły stopek kolumn"
+
+#: rxdconst.sexportgroupdata
+msgid "Export group data"
+msgstr "Eksportuj dane grup"
+
+#: rxdconst.sexporthidezerovalues
+msgctxt "rxdconst.sexporthidezerovalues"
+msgid "Hide zero values"
+msgstr "Ukryj zerowe wartości"
+
+#: rxdconst.sexportimages
+msgid "Export images"
+msgstr "Eksportuj obrazy"
+
+#: rxdconst.sexportparams
+msgid "Export params"
+msgstr "Parametry eksportu"
+
+#: rxdconst.sexportselectedrows
+msgid "Export only selected rows"
+msgstr "Eksportuj tylko zaznaczone wiersze"
+
+#: rxdconst.sexprbadcompare
+msgid "Compare opertion needs field and const"
+msgstr "Operacja porównania wymaga podania pola i wartości"
+
+#: rxdconst.sexprbadfield
+msgid "Field '%s' not used in filter expression"
+msgstr "Pole '%s' nie jest używane w wyrażeniu filtra"
+
+#: rxdconst.sexprbadnulltest
+msgid "NULL-values enabled in '=' and '<>'"
+msgstr "Wartości NULL są włączone w '=' oraz '<>'"
+
+#: rxdconst.sexprexpected
+msgid "Error %s"
+msgstr "Błąd %s"
+
+#: rxdconst.sexprincorrect
+msgid "Error in filter expression"
+msgstr "Błąd w wyrażeniu filtra"
+
+#: rxdconst.sexprinvalidchar
+msgid "Error symbol in expression: '%s'"
+msgstr "Błędny symbol w wyrażeniu: '%s'"
+
+#: rxdconst.sexprnameerror
+msgid "Error in filed name"
+msgstr "Błąd w nazwie pola"
+
+#: rxdconst.sexprnorparen
+msgid "Error ')', error: %s"
+msgstr "Błąd ')', błąd: %s"
+
+#: rxdconst.sexprnotboolean
+msgid "Field '%s' is not boolean"
+msgstr "Pole '%s' nie jest typu logicznego"
+
+#: rxdconst.sexprstringerror
+msgid "Error in string const"
+msgstr "Błąd w stałej znakowej"
+
+#: rxdconst.sexprtermination
+msgid "Error in filter end"
+msgstr "Błąd na końcu filtra"
+
+#: rxdconst.sfieldreadonly
+msgid "SFieldReadOnly %s"
+msgstr ""
+
+#: rxdconst.sfieldrequired
+msgid "Field '%s' must have a value"
+msgstr "Pole '%s' musi mieć wartość"
+
+#: rxdconst.sfieldtypemismatch
+msgid "Type mismatch for field '%s', expecting: %s actual: %s"
+msgstr ""
+
+#: rxdconst.sfooterrowcolor
+msgid "Footer row color"
+msgstr "Kolor wiersza stopki"
+
+#: rxdconst.sfunction
+msgid "Function"
+msgstr "Funkcja"
+
+#: rxdconst.sfvtavg
+msgid "AVG"
+msgstr "Średnia"
+
+#: rxdconst.sfvtcount
+msgid "Count"
+msgstr "Liczba"
+
+#: rxdconst.sfvtfieldvalue
+msgid "Field value"
+msgstr "Wartość pola"
+
+#: rxdconst.sfvtmax
+msgid "Max value"
+msgstr "Wartość maksymalna"
+
+#: rxdconst.sfvtmin
+msgid "Min value"
+msgstr "Wartość minimalna"
+
+#: rxdconst.sfvtnon
+msgid "None"
+msgstr "Brak"
+
+#: rxdconst.sfvtrecno
+msgid "Record no"
+msgstr "Nr rekordu"
+
+#: rxdconst.sfvtstatictext
+msgid "Static text"
+msgstr ""
+
+#: rxdconst.sfvtsum
+msgid "Sum"
+msgstr "Suma"
+
+#: rxdconst.sglobal
+msgid "Global"
+msgstr "Globalnie"
+
+#: rxdconst.shidezerovalues
+msgctxt "rxdconst.shidezerovalues"
+msgid "Hide zero values"
+msgstr "Ukryj wartości zerowe"
+
+#: rxdconst.shinthideonlycurrentitem
+msgid "Hide only current item"
+msgstr "Ukryj jedynie aktualny element"
+
+#: rxdconst.shintlabel
+msgid "Enter your user name and password"
+msgstr "Wprowadź nazwę użytkownika i hasło"
+
+#: rxdconst.shintshowonlycurrentitem
+msgid "Show only current item"
+msgstr "Pokaż tylko aktualny element"
+
+#: rxdconst.sinactivedata
+msgid "inactive"
+msgstr "nieaktywny"
+
+#: rxdconst.sinsertdata
+msgid "append"
+msgstr "dołącz"
+
+#: rxdconst.sinvaliddate
+msgid "Invalid Date"
+msgstr "Niepoprawna data"
+
+#: rxdconst.sinvalidfields
+msgid "No fields defined"
+msgstr "Pola nie zostały zdefiniowane"
+
+#: rxdconst.sinvalidusername
+msgid "User name or password is not valid"
+msgstr "Nazwa użytkownika lub hasło jest niepoprawne"
+
+#: rxdconst.slandscape
+msgid "Landscape"
+msgstr "Poziomo"
+
+#: rxdconst.sleftcaption
+msgid "Left"
+msgstr "Lewo"
+
+#: rxdconst.slocaldatabase
+msgid "Unable complete this operation on local dataset"
+msgstr ""
+
+#: rxdconst.smemnorecords
+msgid "No data found"
+msgstr "Nie znaleziono danych"
+
+#: rxdconst.smergecells
+msgid "Merge cell's"
+msgstr "Połącz komórki"
+
+#: rxdconst.smore1
+msgid "&More >>"
+msgstr "&Więcej >>"
+
+#: rxdconst.smore2
+msgid "&Less <<"
+msgstr "&Mniej <<"
+
+#: rxdconst.snewpasswordlabel
+msgid "&New password:"
+msgstr "&Nowe hasło:"
+
+#: rxdconst.snextbutton
+msgid "&Next"
+msgstr "&Następny"
+
+#: rxdconst.snotcapturefilter
+msgid "Control needs to be locked by filter"
+msgstr "Kontrolka musi być zablokowana przez filtr"
+
+#: rxdconst.snotediting
+msgid "Dataset not in edit or insert mode"
+msgstr "Dane nie są w trybie edycji lub wstawiania"
+
+#: rxdconst.snotempty
+msgid "Not empty"
+msgstr "Nie pusty"
+
+#: rxdconst.soldpasswordlabel
+msgid "&Old password:"
+msgstr "&Stare hasło:"
+
+#: rxdconst.sopenafterexport
+msgid "Open after export"
+msgstr "Otwórz po wyeksportowaniu"
+
+#: rxdconst.sorientation
+msgid "Orientation"
+msgstr "Operacja"
+
+#: rxdconst.sotheroptions
+msgid "Other options"
+msgstr "Inne opcje"
+
+#: rxdconst.soutline
+msgid "Out line"
+msgstr ""
+
+#: rxdconst.soverwriteexisting
+msgid "Overwrite existing"
+msgstr "Nadpisz istniejący"
+
+#: rxdconst.spagemargins
+msgid "Page margins"
+msgstr "Marginesy strony"
+
+#: rxdconst.spagename
+msgid "Page name"
+msgstr "Nazwa strony"
+
+#: rxdconst.spapertype
+msgid "Paper type"
+msgstr "Typ strony"
+
+#: rxdconst.spasswordchanged
+msgid "Password changed"
+msgstr "Hasło zostało zmienione"
+
+#: rxdconst.spasswordlabel
+msgid "&Password:"
+msgstr "&Hasło:"
+
+#: rxdconst.spasswordnotchanged
+msgid "Password not changed"
+msgstr "Hasło nie zostało zmienione"
+
+#: rxdconst.spasswordsmismatch
+msgid "New password and confirmation not equal"
+msgstr "Nowe hasło i powtórzenie nie są jednakowe"
+
+#: rxdconst.spdfoptions
+msgid "PDF options"
+msgstr "Opcje PDF"
+
+#: rxdconst.sportrait
+msgid "Portrait"
+msgstr "Pionowo"
+
+#: rxdconst.sprevbutton
+msgid "&Prior"
+msgstr "&Poprzedni"
+
+#: rxdconst.sprintgrid
+msgid "Print grid"
+msgstr "Drukuj listę"
+
+#: rxdconst.sprintoptions
+msgid "Print options"
+msgstr "Opcje wydruku"
+
+#: rxdconst.squickfilter
+msgid "Quick filter"
+msgstr "Szybki filtr"
+
+#: rxdconst.sregistration
+msgid "Register"
+msgstr "Rejestruj"
+
+#: rxdconst.sreporttitle
+msgid "Report title"
+msgstr "Tytuł raportu"
+
+#: rxdconst.sretrylogin
+msgid "Retry to connect with database?"
+msgstr "Ponowić próbę połączenia z bazą danych?"
+
+#: rxdconst.srightcaption
+msgid "Right"
+msgstr "Prawo"
+
+#: rxdconst.srxallfields
+msgid "All fields"
+msgstr "Wszystkie pola"
+
+#: rxdconst.srxascendign
+msgid "Ascendign"
+msgstr "Narastająco"
+
+#: rxdconst.srxborrowstructure
+msgid "Borrow structure..."
+msgstr "Kopiuj strukturę..."
+
+#: rxdconst.srxcopyonlymetadata
+msgid "Copy only metadata"
+msgstr "Kopiuj jedynie metadane"
+
+#: rxdconst.srxdbgridallfilter
+msgid "(All values)"
+msgstr "(Wszystkie wartości)"
+
+#: rxdconst.srxdbgridcopycellvalue
+msgid "Copy cell value"
+msgstr "Kopiuj zawartość komórki"
+
+#: rxdconst.srxdbgridemptyfilter
+msgctxt "rxdconst.srxdbgridemptyfilter"
+msgid "(Empty)"
+msgstr "(Pusty)"
+
+#: rxdconst.srxdbgridfilter
+msgid "Filter data"
+msgstr "Dane filtra"
+
+#: rxdconst.srxdbgridfilterclear
+msgctxt "rxdconst.srxdbgridfilterclear"
+msgid "Clear filter"
+msgstr "Czyść filtr"
+
+#: rxdconst.srxdbgridfiltersimple
+msgid "Filter in table"
+msgstr "Filtr w tabeli"
+
+#: rxdconst.srxdbgridfind
+msgctxt "rxdconst.srxdbgridfind"
+msgid "Find data"
+msgstr "Znajdź dane"
+
+#: rxdconst.srxdbgridfindcaption
+msgctxt "rxdconst.srxdbgridfindcaption"
+msgid "Find data"
+msgstr "Znajdź dane"
+
+#: rxdconst.srxdbgridfindcasesens
+msgid "Case sensetive"
+msgstr "Rozróżniaj wielkość liter"
+
+#: rxdconst.srxdbgridfinddirecion
+msgid "Direction"
+msgstr "Kierunek"
+
+#: rxdconst.srxdbgridfindonfield
+msgid "Find on field"
+msgstr "Szukaj w polu"
+
+#: rxdconst.srxdbgridfindpartial
+msgid "Partial key"
+msgstr "Klucz częściowy"
+
+#: rxdconst.srxdbgridfindrangeall
+msgid "All"
+msgstr "Wszystko"
+
+#: rxdconst.srxdbgridfindrangeback
+msgid "Backward"
+msgstr "Wstecz"
+
+#: rxdconst.srxdbgridfindrangeforw
+msgid "Forward"
+msgstr "Dprzód"
+
+#: rxdconst.srxdbgridfindtext
+msgid "Text to find"
+msgstr "Szukaj tekstu"
+
+#: rxdconst.srxdbgridnotemptyfilter
+msgid "(Not empty)"
+msgstr "(Nie pusty)"
+
+#: rxdconst.srxdbgridoptimizecolwidth
+msgid "Optimize column width"
+msgstr "Optymalizuj szerokość kolumn"
+
+#: rxdconst.srxdbgridselapplycaption
+msgctxt "rxdconst.srxdbgridselapplycaption"
+msgid "Apply"
+msgstr "Zatwierdź"
+
+#: rxdconst.srxdbgridselapplyhint
+msgid "Apply current column settings"
+msgstr "Zatwierdź aktualne ustawienia kolumn"
+
+#: rxdconst.srxdbgridselcolcaption
+msgid "Grid columns"
+msgstr "Kolumny tabeli"
+
+#: rxdconst.srxdbgridselcolhint1
+msgid "Move selected column up"
+msgstr "Przesuń wybraną kolumnę w górę"
+
+#: rxdconst.srxdbgridselcolhint2
+msgid "Move selected column down"
+msgstr "Przesuń wybraną kolumnę w dół"
+
+#: rxdconst.srxdbgridselectallrows
+msgid "Select all rows"
+msgstr "Zaznacz wszystkie wiersze"
+
+#: rxdconst.srxdbgridselectcolumns
+msgid "Select visible columns"
+msgstr "Wybierz widoczne kolumny"
+
+#: rxdconst.srxdbgridsortbycolumns
+msgid "Sort data for columns"
+msgstr "Sortuj dane dla kolumn"
+
+#: rxdconst.srxdbgridtoolscaption
+msgid "Totals row"
+msgstr "Wszystkie wiersze"
+
+#: rxdconst.srxdescending
+msgctxt "rxdconst.srxdescending"
+msgid "Descending"
+msgstr "Malejąco"
+
+#: rxdconst.srxfieldslookupdisplay
+msgid "Fields as LookupDisplay"
+msgstr ""
+
+#: rxdconst.srxfillfieldslookupdisp
+msgid "Fill fields in LookupDisplay property"
+msgstr ""
+
+#: rxdconst.srxfillsortfieldsdisp
+msgid "Fill fields in SortField property"
+msgstr ""
+
+#: rxdconst.srxfilterformapply
+msgctxt "rxdconst.srxfilterformapply"
+msgid "Apply"
+msgstr "Zatwierdź"
+
+#: rxdconst.srxfilterformcaption
+msgid "Filter conditions"
+msgstr "Warunki filtra"
+
+#: rxdconst.srxfilterformclear
+msgctxt "rxdconst.srxfilterformclear"
+msgid "Clear filter"
+msgstr "Wyczyść filtr"
+
+#: rxdconst.srxfilterformcondition
+msgid "Condition :"
+msgstr "Warunki:"
+
+#: rxdconst.srxfilterformend
+msgid "end."
+msgstr "koniec."
+
+#: rxdconst.srxfilterformonfield
+msgid "On field :"
+msgstr "Po polu:"
+
+#: rxdconst.srxfilterformoperaion
+msgid "Operation :"
+msgstr "Operacja:"
+
+#: rxdconst.srxfilterformoperand
+msgid "Operand :"
+msgstr "Operand:"
+
+#: rxdconst.srxfilterformselectexp
+msgid "Enter filter expression for data in table:"
+msgstr "Wprowadź wyrażenie filtra dla danych w tabeli:"
+
+#: rxdconst.srxfindmore
+msgid "Find more"
+msgstr "Znajdź więcej"
+
+#: rxdconst.srxselectdatasetstruct
+msgid "Select dataset to copy to"
+msgstr ""
+
+#: rxdconst.srxsortbyformaddfield
+msgid "&Add field"
+msgstr "&Dodaj pole"
+
+#: rxdconst.srxsortbyformallfields
+msgid "&Fields in dataset:"
+msgstr "&Pola tablicy:"
+
+#: rxdconst.srxsortbyformcaption
+msgid "Sort on field"
+msgstr "Sortuj po polu"
+
+#: rxdconst.srxsortbyformcaseinsens
+msgid "&Case insensitive sort"
+msgstr "&Sortowanie bez rozróżniania wielkości liter"
+
+#: rxdconst.srxsortbyformmovednfield
+msgid "&Down"
+msgstr "W &dół"
+
+#: rxdconst.srxsortbyformmoveupfield
+msgid "&Up"
+msgstr "W &górę"
+
+#: rxdconst.srxsortbyformremovefield
+msgid "&Remove"
+msgstr "&Usuń"
+
+#: rxdconst.srxsortbyformsortfields
+msgid "&Selected fields:"
+msgstr "&Wybrane pola:"
+
+#: rxdconst.srxsortbyformsortorder
+msgid "Select f&ield for sort data:"
+msgstr "Wy&brane pola sortowania:"
+
+#: rxdconst.srxsortfieldsdisplay
+msgid "Fields as SortField"
+msgstr ""
+
+#: rxdconst.srxsourcedataset
+msgid "Source dataset"
+msgstr ""
+
+#: rxdconst.sservererrorlabel
+msgid "Server error"
+msgstr "Błąd serwera"
+
+#: rxdconst.ssetkeydata
+msgid "find"
+msgstr "znajdź"
+
+#: rxdconst.ssetuptotalrow
+msgid "Setup total row"
+msgstr "Ustaw wiersz podsumowania"
+
+#: rxdconst.sshowcolumnheaderonallpage
+msgid "Show column header on all pages"
+msgstr "Pokaż nagłówki kolumn na każdej stronie"
+
+#: rxdconst.sshowfooter
+msgid "Show footer"
+msgstr "Pokaż stopkę"
+
+#: rxdconst.sshowfootercolor
+msgid "Show footer color"
+msgstr "Pokaż kolor stopki"
+
+#: rxdconst.sshowgridcolor
+msgid "Show grid color"
+msgstr "Pokaż kolor tabeli"
+
+#: rxdconst.sshowreporttitle
+msgid "Show report title"
+msgstr "Pokaż tytuł taportu"
+
+#: rxdconst.sshowtitle
+msgid "Show column title"
+msgstr "Pokaż nagłówki kolumn"
+
+#: rxdconst.ssorting
+msgid "Sorting"
+msgstr "Sortowanie"
+
+#: rxdconst.sstandartfilter
+msgid "Standart filter"
+msgstr "Filtr standardowy"
+
+#: rxdconst.stitlecolor
+msgid "Title color"
+msgstr "Kolor tytułu"
+
+#: rxdconst.stoolsexportpdf
+msgid "Export to PDF file"
+msgstr "Eksportuj do pliku PDF"
+
+#: rxdconst.stoolsexportspeadsheet
+msgid "Export to speadsheet"
+msgstr "Eksportuj do arkusza"
+
+#: rxdconst.stopcaption
+msgid "Top"
+msgstr "Góra"
+
+#: rxdconst.sunknownfieldtype
+msgid "SUnknownFieldType %s"
+msgstr ""
+
+#: rxdconst.sunknownxmldatasetformat
+msgid "Unknown XML Dataset format"
+msgstr "Nieznany format danych XML"
+
+#: rxdconst.sunlockcaption
+msgid "Unlock"
+msgstr "Odblokuj"
+
+#: rxdconst.sunlockhint
+msgid "Enter your password"
+msgstr "Wprowadź swoje hasło"
+
+#: rxdconst.suserawjpeg
+msgid "Use raw JPEG"
+msgstr "Użyj surowego JPEG"
+
+#: rxdconst.susernamelabel
+msgid "&User name:"
+msgstr "Nazwa &użytkownika:"
+

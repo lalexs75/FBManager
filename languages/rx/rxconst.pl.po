@@ -1,0 +1,363 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"X-Generator: Poedit 2.2\n"
+
+#: rxconst.sabout
+msgid "About"
+msgstr "O..."
+
+#: rxconst.sappversion
+msgid "Version : "
+msgstr "Wersja:"
+
+#: rxconst.savaliablebuttons
+msgid "Avaliable buttons"
+msgstr "Dostępne przyciski:"
+
+#: rxconst.sbrowse
+msgid "Browse"
+msgstr "Przeglądaj"
+
+#: rxconst.sbuilddate
+msgid "Build date : "
+msgstr "Data kompilacji"
+
+#: rxconst.sbuttonalign
+msgid "Button align"
+msgstr "Wyrównaj przycisk"
+
+#: rxconst.sbuttonalign1
+msgctxt "rxconst.sbuttonalign1"
+msgid "None"
+msgstr "Brak"
+
+#: rxconst.sbuttonalign2
+msgid "Left"
+msgstr "Lewy"
+
+#: rxconst.sbuttonalign3
+msgid "Right"
+msgstr "Prawy"
+
+#: rxconst.sclose
+msgid "Close"
+msgstr "Zamknij"
+
+#: rxconst.scloseaftersec
+msgid "Close after %d sec"
+msgstr "Zamknij po %d sek."
+
+#: rxconst.scloseallexceptthis
+msgid "Close all except this"
+msgstr "Zamknij wszystkie poza tym"
+
+#: rxconst.scloseallwindows
+msgid "Close all windows"
+msgstr "Zamknij wszystkie okna"
+
+#: rxconst.sclosemessagehint
+msgid "Close message"
+msgstr "Zamknij komunikat"
+
+#: rxconst.sclosevaliderror
+msgid "Error. Expected values..."
+msgstr "Błąd. Spodziewane wartości..."
+
+#: rxconst.sclosewindows
+msgid "Close window"
+msgstr "Zamknij okno"
+
+#: rxconst.sdatedlgtitle
+msgid "Select a Date"
+msgstr "Wybierz datę"
+
+#: rxconst.sdefaultfilter
+msgid "All files (*.*)|*.*"
+msgstr "Wszystkie pliki (*.*)|*.*"
+
+#: rxconst.sdetails
+msgid "Details"
+msgstr "Szczegóły"
+
+#: rxconst.sduallistcaption
+msgid "Dual list dialog"
+msgstr "Okno podwójnej listy"
+
+#: rxconst.sduallistdestcaption
+msgid "Destination"
+msgstr "Cel"
+
+#: rxconst.sduallistsrccaption
+msgid "Source"
+msgstr "Źródło"
+
+#: rxconst.serrorlinkedtaskpanel
+msgid "Not assigned task panel"
+msgstr "Niepołączony panel zadań"
+
+#: rxconst.sexptcontrolnotfound
+msgid "Control not found in validate %s."
+msgstr "Nie znaleziono kontrolki w weryfikacji %s."
+
+#: rxconst.sfilenotexec
+msgid "File specified is not an executable file, dynamic-link library, or icon file"
+msgstr "Wskazany plik nie jest plikiem wykonywalnym, biblioteką dynamiczną lub ikoną"
+
+#: rxconst.sfirsthalfofyear
+msgid "First half of year"
+msgstr "Pierwsza połowa roku"
+
+#: rxconst.sfirstquarter
+msgid "First quarter"
+msgstr "Pierwszy kwartał"
+
+#: rxconst.sflatbuttons
+msgid "Flat buttons"
+msgstr "Płaskie przyciski"
+
+#: rxconst.sfolderlistererr
+msgid "%s. Not assigned property MenuItem"
+msgstr "%s. Nie połączona właściwość MenuItem"
+
+#: rxconst.sfourthquarter
+msgid "Fourth quarter"
+msgstr "Czwarty kwartał"
+
+#: rxconst.sfpcversion
+msgid "FPC version : "
+msgstr "Wersja FPC:"
+
+#: rxconst.sgeneral
+msgid "General"
+msgstr "Ogólne"
+
+#: rxconst.sgrabkey
+msgid "Grab key"
+msgstr "Przechwyć klawisz"
+
+#: rxconst.shistorydesc
+msgid "History - \"%s\""
+msgstr "Historia - \"%s\""
+
+#: rxconst.slclversion
+msgid "LCL Version: "
+msgstr "Wersja LCL:"
+
+#: rxconst.slicense
+msgid "License"
+msgstr "Licencja"
+
+#: rxconst.sloadliberror
+msgid "Could not load '%s' library"
+msgstr "Nie można załadować biblioteki '%s'"
+
+#: rxconst.snextmonth
+msgid "Next Month|"
+msgstr "Następny miesiąc|"
+
+#: rxconst.snextyear
+msgid "Next Year|"
+msgstr "Następny rok|"
+
+#: rxconst.snotimplemented
+msgid "Function not yet implemented"
+msgstr "Funkcja nie została jeszcze zaimplementowana"
+
+#: rxconst.soptions
+msgid "Options"
+msgstr "Opcje"
+
+#: rxconst.soutofrange
+msgid "Out of range %d %d %d %d"
+msgstr "Poza zakresem %d %d %d %d"
+
+#: rxconst.spressthekey
+msgid "Press the key"
+msgstr "Wciśnij klawisz"
+
+#: rxconst.sprevmonth
+msgid "Previous Month|"
+msgstr "Poprzedni miesiąc|"
+
+#: rxconst.sprevyear
+msgid "Previous Year|"
+msgstr "Poprzedni rok|"
+
+#: rxconst.sreqvalue
+msgid "Error. Expected value for field %s."
+msgstr "Błąd. Spodziewano wartości dla pola %s."
+
+#: rxconst.srxlogindlgbtnmore
+msgid "More >>"
+msgstr "Więcej >>"
+
+#: rxconst.srxlogindlgdatabase
+msgid "Database"
+msgstr "Baza danych"
+
+#: rxconst.srxstrholdertexteditor
+msgid "Rx string holder editor"
+msgstr ""
+
+#: rxconst.srxtextfolderitem
+msgid "Item "
+msgstr ""
+
+#: rxconst.srxtextfoldersynhighlighter
+msgid "Highlighter"
+msgstr ""
+
+#: rxconst.srxtextfoldersynhtml
+msgid "HTML"
+msgstr ""
+
+#: rxconst.srxtextfoldersynnone
+msgctxt "rxconst.srxtextfoldersynnone"
+msgid "None"
+msgstr "Brak"
+
+#: rxconst.srxtextfoldersynsql
+msgid "SQL"
+msgstr ""
+
+#: rxconst.srxtextfoldersynxml
+msgid "XML"
+msgstr ""
+
+#: rxconst.srxtextholderadd
+msgid "Add"
+msgstr ""
+
+#: rxconst.srxtextholdereditor
+msgid "RxTextHolder editor"
+msgstr ""
+
+#: rxconst.srxtextholdermovedown
+msgid "Down"
+msgstr ""
+
+#: rxconst.srxtextholdermoveup
+msgid "Up"
+msgstr ""
+
+#: rxconst.srxtextholderremove
+msgid "Remove"
+msgstr ""
+
+#: rxconst.srxtextholdertextcaption
+msgid "Caption"
+msgstr ""
+
+#: rxconst.srxtextholdertexteditor
+msgid "Rx text holder editor"
+msgstr ""
+
+#: rxconst.srxtoolpaneleditor
+msgid "Rx toolpanel editor"
+msgstr ""
+
+#: rxconst.ssecondhalfofyear
+msgid "Second half of year"
+msgstr "Druga połowa roku"
+
+#: rxconst.ssecondquarter
+msgid "Second quarter"
+msgstr "Drugi kwartał"
+
+#: rxconst.sseparator
+msgid "Separator"
+msgstr ""
+
+#: rxconst.sshortcut
+msgid "ShortCut"
+msgstr ""
+
+#: rxconst.sshowcaption
+msgid "Show caption"
+msgstr "Pokaż opis"
+
+#: rxconst.sshowhint
+msgid "Show hint"
+msgstr "Pokaż podpowiedź"
+
+#: rxconst.stargetcpu
+msgid "Target CPU : "
+msgstr "Docelowy CPU:"
+
+#: rxconst.stargetos
+msgid "Target OS : "
+msgstr "Docelowy OS:"
+
+#: rxconst.sthirdquarter
+msgid "Third quarter"
+msgstr "Trzeci kwartał"
+
+#: rxconst.stocurdate
+msgid "Set current date"
+msgstr "Ustaw bieżącą datę"
+
+#: rxconst.stoolbarstyle
+msgid "Tool bar style"
+msgstr "Styl toolbar"
+
+#: rxconst.stoolbarstyle1
+msgid "Standard"
+msgstr "Standardowy"
+
+#: rxconst.stoolbarstyle2
+msgid "Windows XP"
+msgstr ""
+
+#: rxconst.stoolbarstyle3
+msgid "Native"
+msgstr "Natywny"
+
+#: rxconst.stoolpanelsetup
+msgid "Tool panel setup"
+msgstr "Ustawienia panelu narzędziowego"
+
+#: rxconst.stransparent
+msgid "Transparent"
+msgstr "Przeźroczysty"
+
+#: rxconst.svariableisnotboolean
+msgid "Variable %s is not boolean"
+msgstr ""
+
+#: rxconst.svariableisnotdt
+msgid "Variable %s is not date/time"
+msgstr ""
+
+#: rxconst.svariableisnotfloat
+msgid "Variable %s is not float"
+msgstr ""
+
+#: rxconst.svariableisnotinteger
+msgid "Variable %s is not integer"
+msgstr ""
+
+#: rxconst.svariableisnotstring
+msgid "Variable %s is not string"
+msgstr ""
+
+#: rxconst.svisiblebuttons
+msgid "Visible buttons"
+msgstr "Widoczne przyciski"
+
+#: rxconst.swidget
+msgid "Widget : "
+msgstr ""
+
+#: rxconst.swindowsicofiles
+msgid "Windows Ico files (*.ico)|*.ico|All files (*.*)|*.*"
+msgstr ""
+
