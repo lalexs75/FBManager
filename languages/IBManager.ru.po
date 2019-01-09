@@ -354,7 +354,7 @@ msgstr "Регистронезависимый"
 
 #: fbmstrconstunit.schangecount
 msgid "Change count"
-msgstr ""
+msgstr "Всего изменений"
 
 #: fbmstrconstunit.scharset
 msgid "Char set"
@@ -1806,6 +1806,10 @@ msgstr "Файлы SQL (*.sql)|*.sql|Все файлы (*)|*"
 msgid "Fillfactor"
 msgstr "Фактор заполнения"
 
+#: fbmstrconstunit.sfillqueryparam
+msgid "Fill query param"
+msgstr "Заполнить параметры запроса"
+
 #: fbmstrconstunit.sfilterintable
 msgid "Filter in table"
 msgstr "Фильтр в таблице"
@@ -1964,7 +1968,7 @@ msgstr "Функция ещё не реализована..."
 
 #: fbmstrconstunit.sfullfsync
 msgid "Full file sync"
-msgstr ""
+msgstr "Полная файловая синхронизация"
 
 #: fbmstrconstunit.sfunction
 msgid "Function"
@@ -2229,7 +2233,7 @@ msgstr "Индексы"
 
 #: fbmstrconstunit.sindexsize
 msgid "Index size"
-msgstr ""
+msgstr "Размер индекса"
 
 #: fbmstrconstunit.sindexsort
 msgid "Index sort"
@@ -4337,7 +4341,7 @@ msgstr "Статистика"
 
 #: fbmstrconstunit.sstatrecordcount
 msgid "Record count for statistic"
-msgstr ""
+msgstr "Кол-во записей для статистики"
 
 #: fbmstrconstunit.sstatsdatetime
 msgid "Stats date"
@@ -4536,7 +4540,7 @@ msgstr "Таблицы"
 
 #: fbmstrconstunit.stablesize
 msgid "Table size"
-msgstr ""
+msgstr "Размер таблицы"
 
 #: fbmstrconstunit.stablespace
 msgctxt "fbmstrconstunit.stablespace"
@@ -4645,7 +4649,7 @@ msgstr "ДатаВремя"
 
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
-msgstr ""
+msgstr "Размер TOAST"
 
 #: fbmstrconstunit.stodate
 msgctxt "fbmstrconstunit.stodate"
@@ -4678,7 +4682,7 @@ msgstr "Всего"
 
 #: fbmstrconstunit.stotalsize
 msgid "Total size"
-msgstr ""
+msgstr "Размер - всего"
 
 #: fbmstrconstunit.stransactionpersecond
 msgid "Transaction per second"
@@ -5003,7 +5007,7 @@ msgstr "Функция проверки"
 
 #: fbmstrconstunit.svalue
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 #: fbmstrconstunit.svardefvalue
 msgid "Variable default value"
@@ -5285,4 +5289,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
