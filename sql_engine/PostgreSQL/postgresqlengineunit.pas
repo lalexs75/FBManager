@@ -5920,7 +5920,9 @@ begin
       if Q.RecordCount>0 then
       begin
         FDescription:= Q.FieldByName('description').AsString;
-        //FOID:=Q.FieldByName('oid').AsInteger;
+
+        if FOID = 0 then
+          FOID:=Q.FieldByName('oid').AsInteger;
         FProcedureBody:=Trim(Q.FieldByName('prosrc').AsString);
         FVolatilityCategories:=StrToPGSPVolatCat(Q.FieldByName('provolatile').AsString);
         //FisWindow:=Q.FieldByName('proIsWindow').AsBoolean;
