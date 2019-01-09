@@ -757,6 +757,7 @@ resourcestring
   sMoveDownLocalVar                 = 'Move down local variable';
   sPrintLocalVar                    = 'Print local variable';
   sParamsHistory                    = 'Params history';
+  sFillQueryParam                   = 'Fill query param';
   sInputParams                      = 'Input params';
   sReturnParams                     = 'Return params';
   sShowObjTree                      = 'Show objects tree';

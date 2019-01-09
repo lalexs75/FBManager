@@ -204,6 +204,7 @@ end;
 
 procedure TfbmFillQueryParamsForm.Localize;
 begin
+  Caption:=sFillQueryParam;
   prmSave.Caption:=sSave;
   prmLoad.Caption:=sLoad;
   prmApply.Caption:=sApply;
