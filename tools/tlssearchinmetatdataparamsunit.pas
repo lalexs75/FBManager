@@ -176,12 +176,13 @@ begin
   {  okSequence, okException, okUDF, okRole, okUser, okScheme, okGroup, okIndex, okTableSpace, okLanguage, okCheckConstraint, okForeignKey, okPrimaryKey, okUniqueConstraint, okOther}
     begin
       try
-        Obj.RefreshObject;
+        if not Obj.Loaded then
+          Obj.RefreshObject;
       except
         on E:Exception do
           ErrorBoxExcpt(E);
       end;
-      S:=Obj.DDLCreate;
+      S:=Obj.InternalGetDDLCreate;
       if (S<>'') and (Pos(edtFind.Text, S)>0) then
         tlsSearchInMetatDataResultForm.AddDBObject(Obj);
     end;

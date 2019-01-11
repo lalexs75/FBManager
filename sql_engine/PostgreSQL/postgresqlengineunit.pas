@@ -3606,6 +3606,7 @@ begin
   Statistic.AddValue(sToastSize, IntToStr(FQuery.FieldByName('toast').AsInteger));
   Statistic.AddValue(sTableSize, IntToStr(FQuery.FieldByName('total').AsInteger - FQuery.FieldByName('INDEX').AsInteger - FQuery.FieldByName('toast').AsInteger));
   Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
+  Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
 
 
   FQuery.Close;

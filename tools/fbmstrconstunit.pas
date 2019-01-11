@@ -898,6 +898,7 @@ resourcestring
   sToastSize                        = 'Toast size';
   sIndexSize                        = 'Index size';
   sStatRecordCount                  = 'Record count for statistic';
+  sStatPageCount                    = 'Page count for statistic';
 
 
   sNewForeignKey                    = 'New foreign key';

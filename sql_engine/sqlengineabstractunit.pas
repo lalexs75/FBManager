@@ -284,7 +284,6 @@ type
     FSqlStrings:TStringList;
     FObjectEditable:boolean;
     function GetDDLAlter: string; virtual; abstract;
-    function InternalGetDDLCreate: string;virtual;
     procedure SetState(const AValue: TDBObjectState);virtual;
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); virtual;
     procedure SetDescription(const AValue: string); virtual;
@@ -307,6 +306,7 @@ type
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean;virtual;
 
     class function DBClassTitle:string; virtual;
+    function InternalGetDDLCreate: string; virtual;
     procedure SQLScriptsBegin;
     procedure SQLScriptsEnd;
     function SQLScriptsApply:boolean;

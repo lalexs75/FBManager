@@ -4335,6 +4335,10 @@ msgstr ""
 msgid "Statistic"
 msgstr ""
 
+#: fbmstrconstunit.sstatpagecount
+msgid "Page count for statistic"
+msgstr ""
+
 #: fbmstrconstunit.sstatrecordcount
 msgid "Record count for statistic"
 msgstr ""

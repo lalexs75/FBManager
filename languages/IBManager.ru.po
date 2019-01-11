@@ -4339,6 +4339,10 @@ msgstr "Статус"
 msgid "Statistic"
 msgstr "Статистика"
 
+#: fbmstrconstunit.sstatpagecount
+msgid "Page count for statistic"
+msgstr ""
+
 #: fbmstrconstunit.sstatrecordcount
 msgid "Record count for statistic"
 msgstr "Кол-во записей для статистики"
@@ -5289,3 +5293,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+
