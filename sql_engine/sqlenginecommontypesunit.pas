@@ -117,7 +117,10 @@ const
       'okTasks', 'okConversion', 'okDatabase', 'okType', 'okServer', 'okColumn',
       'okCharSet', 'okCollation', 'okFilter', 'okParameter', 'okAccessMethod',
       'okAggregate', 'okMaterializedView', 'okCast', 'okConstraint', 'okExtension',
-      'okForeignTable', 'okForeignDataWrapper', 'okLargeObject', 'okPolicy',
+      'okForeignTable',
+      'okForeignDataWrapper',
+      'okForeignServer',
+      'okLargeObject', 'okPolicy',
       'okFunction', 'okEventTrigger', 'okAutoIncFields',
       'okFTSConfig', 'okFTSDictionary', 'okFTSParser', 'okFTSTemplate',
       'okPackage', 'okPackageBody', 'okTransform', 'okOperator', 'okOperatorClass',  'okOperatorFamily'
@@ -166,6 +169,7 @@ const
        78, //okExtension
        -1, //okForeignTable
        81, //okForeignDataWrapper
+       84, //okForeignServer
        -1, //okLargeObject
        -1, //okPolicy
        13, //okFunction
@@ -225,6 +229,7 @@ const
        77, //okExtension
        -1, //okForeignTable
        81, //okForeignDataWrapper
+       -1, //okForeignServer
        -1, //okLargeObject
        -1, //okPolicy
        29, //okFunction

@@ -32,6 +32,7 @@ type
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
+    pgFDWobj: TStrHolder;
     sPGStatistics: TRxTextHolder;
     sPGGroups1: TStrHolder;
     sPGUsers: TStrHolder;
@@ -77,6 +78,7 @@ type
     pgCollations: TStrHolder;
     pgFDW: TStrHolder;
     pgExtension: TStrHolder;
+    pgFServ: TStrHolder;
     ttt1: TStrHolder;
     pgFtsConfig: TStrHolder;
     pgFTsParsersList: TStrHolder;

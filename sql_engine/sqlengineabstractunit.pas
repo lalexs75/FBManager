@@ -348,7 +348,6 @@ type
   { TDBRootObject }
   TDBRootObject = class(TDBObject)
   private
-    FDBObjectClass:TDBObjectClass;
     function GetCountGroups: integer;
     function GetGroups(AIndex: integer): TDBRootObject;
     function GetItems(AIndex: integer): TDBObject;
@@ -357,6 +356,7 @@ type
     FObjects:TDBObjectsList;
     FGroupObjects:TDBObjectsList;
     FDropCommandClass:TSQLDropCommandAbstractClass;
+    FDBObjectClass:TDBObjectClass;
     function GetObjName(AIndex: integer): string;
     function GetDDLAlter: string; override;
     //
@@ -2169,10 +2169,15 @@ begin
 end;
 
 function TDBObject.GetDDLCreate: string;
+var
+  S: String;
 begin
   if not FLoaded then
     RefreshObject;
-  Result:=MakeRemarkBlock(DateTimeToStr(Now) + '|' + OwnerDB.UserName + ' ' + OwnerDB.DataBaseName)
+  S:=DateTimeToStr(Now);
+  if Assigned(OwnerDB) then
+    S:=S + '|' + OwnerDB.UserName + ' ' + OwnerDB.DataBaseName;
+  Result:=MakeRemarkBlock(S)
     + InternalGetDDLCreate;
 end;
 
@@ -2243,12 +2248,14 @@ end;
 
 procedure TDBObject.Edit;
 begin
-  OwnerDB.EditObject(Self);
+  if Assigned(OwnerDB) then
+    OwnerDB.EditObject(Self);
 end;
 
 procedure TDBObject.RefreshEditor;
 begin
-  OwnerDB.RefreshEditor(Self);
+  if Assigned(OwnerDB) then
+    OwnerDB.RefreshEditor(Self);
 end;
 
 procedure TDBObject.OnCloseEditorWindow;

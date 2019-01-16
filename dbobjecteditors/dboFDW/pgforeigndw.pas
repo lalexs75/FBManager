@@ -34,13 +34,17 @@ type
   { TpgForeignDataWrap }
 
   TpgForeignDataWrap = class(TEditorPage)
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
+    ComboBox3: TComboBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
   private
-
+    procedure RefreshObject;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -56,6 +60,14 @@ implementation
 
 { TpgForeignDataWrap }
 
+procedure TpgForeignDataWrap.RefreshObject;
+begin
+  if DBObject.State = sdboEdit then
+  begin
+
+  end;
+end;
+
 function TpgForeignDataWrap.PageName: string;
 begin
   Result:='Foreign data wrapper';
@@ -65,7 +77,7 @@ constructor TpgForeignDataWrap.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
-
+  RefreshObject;
 end;
 
 function TpgForeignDataWrap.ActionEnabled(PageAction: TEditorPageAction

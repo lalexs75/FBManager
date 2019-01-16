@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, sqlObjects, PostgreSQLEngineUnit,
-  fbmSqlParserUnit, SQLEngineInternalToolsUnit;
+  fbmSqlParserUnit, SQLEngineInternalToolsUnit, ZDataset;
 
 type
 
@@ -43,15 +43,44 @@ type
     function GetObjectType: string;override;
   end;
 
-  TPGForeignDataWrapper = class(TPGDBRootObject)
+  TPGForeignDataWrapper = class(TDBRootObject)
   private
+    FHandler: string;
+    FNoHandler: boolean;
+    FNoValidator: boolean;
+    FOID: Integer;
+    FOwnerID: Integer;
+    FValidator: string;
   protected
+    function InternalGetDDLCreate: string; override;
     function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
   public
-    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     procedure Clear;override;
     function GetObjectType: string;override;
+    procedure RefreshObject; override;
+    class function DBClassTitle:string; override;
+
+    property OwnerID:Integer read FOwnerID;
+    property OID:Integer read FOID;
+    property Handler:string read FHandler write FHandler;
+    property Validator:string read FValidator write FValidator;
+    property NoHandler:boolean read FNoHandler write FNoHandler;
+    property NoValidator:boolean read FNoValidator write FNoValidator;
+  end;
+
+
+  { TPGForeignServer }
+
+  TPGForeignServer = class(TDBObject)
+  private
+  protected
+    function InternalGetDDLCreate: string; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
     procedure RefreshObject; override;
     class function DBClassTitle:string; override;
   end;
@@ -59,18 +88,91 @@ type
 implementation
 uses pg_SqlParserUnit, pgSqlTextUnit;
 
+{ TPGForeignServer }
+
+function TPGForeignServer.InternalGetDDLCreate: string;
+var
+  R: TPGSQLCreateServer;
+begin
+  R:=TPGSQLCreateServer.Create(nil);
+  R.Name:=CaptionFullPatch;
+
+{  R.Handler:=FHandler;
+  R.Validator:=FValidator;
+  R.NoHandler:=FNoHandler;
+  R.NoValidator:=FNoValidator;}
+
+  Result:=R.AsSQL;
+  R.Free;
+end;
+
+constructor TPGForeignServer.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+  FDBObjectKind:=okServer;
+end;
+
+destructor TPGForeignServer.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TPGForeignServer.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
+class function TPGForeignServer.DBClassTitle: string;
+begin
+  Result:='Foreign server';
+end;
+
 { TPGForeignDataWrapper }
+
+function TPGForeignDataWrapper.InternalGetDDLCreate: string;
+var
+  R: TPGSQLCreateForeignDataWrapper;
+begin
+  R:=TPGSQLCreateForeignDataWrapper.Create(nil);
+  R.Name:=CaptionFullPatch;
+
+  R.Handler:=FHandler;
+  R.Validator:=FValidator;
+  R.NoHandler:=FNoHandler;
+  R.NoValidator:=FNoValidator;
+
+  Result:=R.AsSQL;
+  R.Free;
+(*
+  ACL:=TStringList.Create;
+  try
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, ACL, true);
+    Result:=Result + LineEnding + LineEnding + ACL.Text;
+  finally
+    ACL.Free;
+  end; *)
+end;
 
 function TPGForeignDataWrapper.DBMSObjectsList: string;
 begin
-  Result:=inherited DBMSObjectsList;
+  Result:=pgSqlTextModule.pgFServ.Strings.Text;
 end;
 
-constructor TPGForeignDataWrapper.Create(AOwnerDB: TSQLEngineAbstract;
-  ADBObjectClass: TDBObjectClass; const ACaption: string;
-  AOwnerRoot: TDBRootObject);
+function TPGForeignDataWrapper.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  Result:=inherited DBMSValidObject(AItem);
+end;
+
+constructor TPGForeignDataWrapper.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+var
+  F1: TSQLEngineAbstract;
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+  FObjectEditable:=true;
+  FDBObjectClass:=TPGForeignServer;
 end;
 
 destructor TPGForeignDataWrapper.Destroy;
@@ -89,7 +191,25 @@ begin
 end;
 
 procedure TPGForeignDataWrapper.RefreshObject;
+var
+  Q: TZQuery;
 begin
+  inherited RefreshObject;
+  if State <> sdboEdit then exit;
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFDWobj.Strings.Text);
+  try
+    Q.ParamByName('oid').AsInteger:=FOID;
+    Q.Open;
+    if Q.RecordCount > 0 then
+    begin
+//      SchemaId:=Q.FieldByName('oid').AsInteger;
+//      FOwnerName:=Q.FieldByName('usename').AsString;
+      FDescription:=Q.FieldByName('description').AsString;
+    end;
+    Q.Close;
+  finally
+    Q.Free;
+  end;
 end;
 
 class function TPGForeignDataWrapper.DBClassTitle: string;

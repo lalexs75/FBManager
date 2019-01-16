@@ -74,6 +74,7 @@ const
      '',            //okExtension
      '',            //okForeignTable
      '',            //okForeignDataWrapper
+     '',            //okForeignServer
      '',            //okLargeObject
      '',            //okPolicy
      'FUNCTION',    //okFunction

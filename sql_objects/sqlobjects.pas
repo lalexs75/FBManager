@@ -41,8 +41,16 @@ type
                    okConversion, okDatabase, okType, okServer, okColumn,
                    okCharSet, okCollation, okFilter, okParameter,
                    okAccessMethod, okAggregate, okMaterializedView,
-                   okCast, okConstraint, okExtension, okForeignTable,
-                   okForeignDataWrapper, okLargeObject, okPolicy,
+                   okCast,
+                   okConstraint,
+                   okExtension,
+
+                   okForeignTable,
+                   okForeignDataWrapper,
+                   okForeignServer,
+
+                   okLargeObject,
+                   okPolicy,
                    okFunction, okEventTrigger,
 
                    okAutoIncFields, //-????
@@ -162,6 +170,20 @@ type
   TAlterDomainOperatorsEnumerator = class;
   TSQLParserFieldArraysEnumerator = class;
 
+  { TIndexOptions }
+
+  TIndexOptions = class
+  private
+    FIndexNullPos: TIndexNullPos;
+    FSortOrder: TIndexSortOrder;
+  public
+    procedure Assign(ASource:TIndexOptions);
+    procedure Clear;
+
+    property SortOrder:TIndexSortOrder read FSortOrder write FSortOrder;
+    property IndexNullPos:TIndexNullPos read FIndexNullPos write FIndexNullPos;
+  end;
+
   { TSQLParserFieldArray }
 
   TSQLParserFieldArray = class
@@ -227,6 +249,7 @@ type
     FFieldFormat: TFieldFormat;
     FFieldPosition: string;
     FFieldStorage: TFieldStorage;
+    FIndexOptions: TIndexOptions;
     FInReturn: TSPVarType;
     FNotNullConflictRule: TOnConflictEvent;
     FObjectKind: TDBObjectKind;
@@ -282,6 +305,7 @@ type
     property NotNullConflictRule:TOnConflictEvent read FNotNullConflictRule write FNotNullConflictRule;
     property ArrayDimension:TSQLParserFieldArrays read FArrayDimension;
     property ConstraintName:string read FConstraintName write FConstraintName;
+    property IndexOptions:TIndexOptions read FIndexOptions;
   end;
 
 
@@ -673,6 +697,21 @@ const
     );
 implementation
 uses sqlParserConsts, strutils;
+
+{ TIndexOptions }
+
+procedure TIndexOptions.Assign(ASource: TIndexOptions);
+begin
+  if not Assigned(ASource) then Exit;
+  FIndexNullPos:=ASource.FIndexNullPos;
+  FSortOrder:=ASource.FSortOrder;
+end;
+
+procedure TIndexOptions.Clear;
+begin
+  FIndexNullPos:=inpDefault;
+  FSortOrder:=indDefault;
+end;
 
 { TSQLParserFieldArraysEnumerator }
 
@@ -1381,12 +1420,14 @@ constructor TSQLParserField.Create;
 begin
   inherited Create;
   FArrayDimension:=TSQLParserFieldArrays.Create;
+  FIndexOptions:=TIndexOptions.Create;
   FParams:=[fpLocal];
 end;
 
 destructor TSQLParserField.Destroy;
 begin
   FArrayDimension.Clear;
+  FreeAndNil(FIndexOptions);
   FreeAndNil(FArrayDimension);
   inherited Destroy;
 end;
@@ -1428,11 +1469,13 @@ begin
   FAutoIncType:=AItem.FAutoIncType;
   FConstraintName:=AItem.FConstraintName;
   FArrayDimension.Assign(AItem.FArrayDimension);
+  FIndexOptions.Assign(AItem.IndexOptions);
 end;
 
 procedure TSQLParserField.Clear;
 begin
   FArrayDimension.Clear;
+  FIndexOptions.Clear;
   Caption:='';
   RealName:='';
   TableName:='';

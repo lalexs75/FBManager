@@ -1,15 +1,17 @@
 inherited pgForeignDataWrap: TpgForeignDataWrap
   Height = 319
+  Width = 457
   ClientHeight = 319
+  ClientWidth = 457
   DesignLeft = 640
   DesignTop = 358
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 19
     Top = 6
-    Width = 58
+    Width = 60
     BorderSpacing.Around = 6
     Caption = 'Handlers'
     ParentColor = False
@@ -19,9 +21,9 @@ inherited pgForeignDataWrap: TpgForeignDataWrap
     AnchorSideTop.Control = ComboBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 56
+    Height = 19
+    Top = 68
+    Width = 60
     BorderSpacing.Around = 6
     Caption = 'Validator'
     ParentColor = False
@@ -33,9 +35,9 @@ inherited pgForeignDataWrap: TpgForeignDataWrap
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 32
-    Width = 302
+    Height = 31
+    Top = 31
+    Width = 439
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -49,9 +51,9 @@ inherited pgForeignDataWrap: TpgForeignDataWrap
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 101
-    Width = 302
+    Height = 31
+    Top = 93
+    Width = 439
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -59,11 +61,55 @@ inherited pgForeignDataWrap: TpgForeignDataWrap
     Text = 'ComboBox2'
   end
   object Label3: TLabel[4]
-    Left = 6
-    Height = 20
-    Top = 152
-    Width = 50
+    Left = 8
+    Height = 19
+    Top = 224
+    Width = 51
     Caption = 'Options'
     ParentColor = False
+  end
+  object CheckBox1: TCheckBox[5]
+    Left = 352
+    Height = 23
+    Top = 2
+    Width = 98
+    Caption = 'No handler'
+    TabOrder = 2
+  end
+  object CheckBox2: TCheckBox[6]
+    Left = 352
+    Height = 23
+    Top = 72
+    Width = 106
+    Caption = 'No validator'
+    TabOrder = 3
+  end
+  object Label4: TLabel[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 19
+    Top = 130
+    Width = 45
+    BorderSpacing.Around = 6
+    Caption = 'Owner'
+    ParentColor = False
+  end
+  object ComboBox3: TComboBox[8]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 31
+    Top = 155
+    Width = 439
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 4
+    Text = 'ComboBox3'
   end
 end

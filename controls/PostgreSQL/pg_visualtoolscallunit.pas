@@ -294,6 +294,11 @@ begin
       [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage],
       [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
     );
+
+  RegisterObjEditor(TPGForeignServer,
+      [TfbmObjectEditorDescriptionFrame, TfbmDDLPage],
+      [TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+  );
 end;
 
 procedure TPostgreVisualTools.InitSQLSyn(const ASynSQLSyn: TSynSQLSyn);
