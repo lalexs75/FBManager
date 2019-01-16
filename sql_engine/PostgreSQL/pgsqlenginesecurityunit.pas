@@ -380,7 +380,7 @@ constructor TPGUsersRoot.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
   FDBObjectKind:=okUser;
-  FDropCommandClass:=TPGSQLDropUser;
+  FDropCommandClass:=TPGSQLDropGroup;
 end;
 
 

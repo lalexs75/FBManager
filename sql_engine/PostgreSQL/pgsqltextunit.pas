@@ -79,6 +79,7 @@ type
     pgFDW: TStrHolder;
     pgExtension: TStrHolder;
     pgFServ: TStrHolder;
+    pgFSUserMapping: TStrHolder;
     ttt1: TStrHolder;
     pgFtsConfig: TStrHolder;
     pgFTsParsersList: TStrHolder;

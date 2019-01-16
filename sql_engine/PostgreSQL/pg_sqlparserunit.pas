@@ -810,6 +810,8 @@ type
 
   TPGSQLDropGroup = class(TSQLDropCommandAbstract)
   private
+    FServerName: string;
+    FUserMapping: boolean;
     //FGroupName: string;
     //FRoleType: TRoleType;
   protected
@@ -821,6 +823,8 @@ type
 
     //property GroupName:string read FGroupName write FGroupName;
     //property RoleType:TRoleType read FRoleType write FRoleType;
+    property UserMapping:boolean read FUserMapping write FUserMapping;
+    property ServerName:string read FServerName write FServerName;
   end;
 
   { TPGSQLAlterRole }
@@ -1799,7 +1803,7 @@ type
     property ServerName:string read FServerName write FServerName;
     property UserMapingOperation:TUserMapingOperation read FUserMapingOperation write FUserMapingOperation;
   end;
-
+(*
   { TPGSQLDropUser }
 
   TPGSQLDropUser = class(TSQLDropCommandAbstract)
@@ -1819,6 +1823,34 @@ type
     property UserName:string read FUserName write FUserName;
     property ServerName:string read FServerName write FServerName;
     property UserMapingOperation:TUserMapingOperation read FUserMapingOperation write FUserMapingOperation;
+  end;
+*)
+  { TPGSQLCreateUserMapping }
+
+  TPGSQLCreateUserMapping = class(TSQLCreateCommandAbstract)
+  private
+    FServerName: string;
+    FCurParam: TSQLParserField;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property ServerName:string read FServerName write FServerName;
+  end;
+
+  { TPGSQLAlterUserMapping }
+
+  TPGSQLAlterUserMapping = class(TSQLCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
   end;
 
   { TPGSQLAlterTextSearch }
@@ -3069,6 +3101,106 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLAlterUserMapping }
+
+procedure TPGSQLAlterUserMapping.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TPGSQLAlterUserMapping.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLAlterUserMapping.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLCreateUserMapping }
+
+procedure TPGSQLCreateUserMapping.InitParserTree;
+var
+  FSQLTokens, T1_1, T1_2, T1_3, T1_4, T2, T3, T3_1, T3_2, T3_3,
+    T3_4, T3_5: TSQLTokenRecord;
+begin
+  //CREATE USER MAPPING FOR { имя_пользователя | USER | CURRENT_USER | PUBLIC }
+  //  SERVER имя_сервера
+  //  [ OPTIONS ( параметр 'значение' [ , ... ] ) ]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, 'USER', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'MAPPING', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'FOR', [toFindWordLast]);
+    T1_1:=AddSQLTokens(stIdentificator, FSQLTokens, 'USER', [], 1);
+    T1_2:=AddSQLTokens(stIdentificator, FSQLTokens, 'CURRENT_USER', [], 1);
+    T1_3:=AddSQLTokens(stKeyword, FSQLTokens, 'PUBLIC', [], 1);
+    T1_4:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  T2:=AddSQLTokens(stKeyword, [T1_1,T1_2, T1_3, T1_4], 'SERVER', []);
+  T2:=AddSQLTokens(stIdentificator, T2, '', [], 2);
+
+  T3:=AddSQLTokens(stKeyword, T2, 'OPTIONS', [toOptional]);
+    T3_1:=AddSQLTokens(stSymbol, T3, '(', []);
+    T3_2:=AddSQLTokens(stIdentificator, T3_1, '', [], 3);
+    T3_3:=AddSQLTokens(stString, T3_2, '', [], 4);
+    T3_4:=AddSQLTokens(stSymbol, T3_3, ',', [], 5);
+      T3_4.AddChildToken(T3_2);
+    T3_5:=AddSQLTokens(stSymbol, T3_3, ')', [], 5);
+end;
+
+procedure TPGSQLCreateUserMapping.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FServerName:=AWord;
+    3:FCurParam:=Params.AddParamEx(AWord, '');
+    4:if Assigned(FCurParam) then
+       FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+    5:FCurParam:=nil;
+  end;
+end;
+
+procedure TPGSQLCreateUserMapping.MakeSQL;
+var
+  S, S1: String;
+  P: TSQLParserField;
+begin
+  //CREATE USER MAPPING FOR { имя_пользователя | USER | CURRENT_USER | PUBLIC }
+  //  SERVER имя_сервера
+  //  [ OPTIONS ( параметр 'значение' [ , ... ] ) ]
+  S:='CREATE USER MAPPING FOR '+ Name + ' SERVER '+FServerName;
+
+  if Params.Count > 0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + P.Caption + ' ' + QuotedString(P.ParamValue, '''');
+    end;
+    S:=S + ' OPTIONS (' + S1 + ')';
+  end;
+  AddSQLCommand(S);
+end;
+
+constructor TPGSQLCreateUserMapping.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TPGSQLCreateUserMapping.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateUserMapping then
+  begin
+    FServerName:=TPGSQLCreateUserMapping(ASource).FServerName;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLRefreshMaterializedView }
@@ -7996,7 +8128,7 @@ begin
   Result:='ALTER TEXT SEARCH';
   AddSQLCommand(Result);
 end;
-
+(*
 { TPGSQLDropUser }
 
 procedure TPGSQLDropUser.InitParserTree;
@@ -8010,16 +8142,16 @@ begin
 
   T1:=AddSQLTokens(stKeyword, T10, 'IF', [], -1);
   T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T1:=AddSQLTokens(stIdentificator, T1, '', [],  1);
-  T10.AddChildToken(T1);
+  T1:=AddSQLTokens(stIdentificator, [T1, T10], '', [],  1);
+
   T:=AddSQLTokens(stSymbol, T1, ',', []);
   T.AddChildToken(T1);
 
   T20:=AddSQLTokens(stKeyword, T10, 'MAPPING', [], 2);
   T1:=AddSQLTokens(stKeyword, T20, 'IF', [],  -1);
-  T1:=AddSQLTokens(stKeyword, T1, 'FOR', []);
-  T20:=AddSQLTokens(stKeyword, T20, 'FOR', []);
-  T1.AddChildToken(T20);
+  T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
+  T20:=AddSQLTokens(stKeyword, [T20, T1], 'FOR', []);
+
   T3:=AddSQLTokens(stIdentificator, T20, '', [],  3);
   T4:=AddSQLTokens(stKeyword, T20, 'USER', [],  4);
   T5:=AddSQLTokens(stKeyword, T20, 'CURRENT_USER', [],  5);
@@ -8099,6 +8231,8 @@ begin
   end;
   inherited Assign(ASource);
 end;
+*)
+
 (*
 { TPGSQLCreateUser }
 
@@ -13734,7 +13868,8 @@ end;
 
 procedure TPGSQLDropGroup.InitParserTree;
 var
-  FSQLTokens, T1, T2, T3, T: TSQLTokenRecord;
+  FSQLTokens, T1, T2, T3, T, T10, T10_1, T10_2, T10_3, T10_4,
+    T10_5, T10_6, T10_7: TSQLTokenRecord;
 begin
   (* DROP GROUP [ IF EXISTS ] name [, ...] *)
   (* DROP ROLE [ IF EXISTS ] name [, ...] *)
@@ -13752,6 +13887,17 @@ begin
   T:=AddSQLTokens(stIdentificator, [T, T1, T2, T3], '', [],  1);
   T1:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
     T1.AddChildToken(T);
+
+  T10:=AddSQLTokens(stKeyword, T3, 'MAPPING', []);
+    T:=AddSQLTokens(stKeyword, T10, 'IF', [], -1);
+    T:=AddSQLTokens(stKeyword, T, 'EXISTS', []);
+  T10_1:=AddSQLTokens(stKeyword, [T10, T], 'FOR', [], 103);
+  T10_2:=AddSQLTokens(stIdentificator, T10_1, 'USER', [],  105);
+  T10_3:=AddSQLTokens(stKeyword, T10_1, 'CURRENT_USER', [],  105);
+  T10_4:=AddSQLTokens(stKeyword, T10_1, 'PUBLIC', [],  105);
+  T10_5:=AddSQLTokens(stIdentificator, T10_1, '', [],  105);
+  T10_6:=AddSQLTokens(stKeyword, [T10_2, T10_3, T10_4, T10_5], 'SERVER', []);
+  T10_7:=AddSQLTokens(stIdentificator, T10_6, '', [], 104);
 end;
 
 procedure TPGSQLDropGroup.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -13763,19 +13909,35 @@ begin
     100:ObjectKind:=okGroup;
     101:ObjectKind:=okRole;
     102:ObjectKind:=okUser;
+    103:begin
+          ObjectKind:=okUser;
+          FUserMapping:=true;
+        end;
+    104:FServerName:=AWord;
+    105:Name:=AWord;
   end;
 end;
 
 procedure TPGSQLDropGroup.MakeSQL;
 var
-  S1, S2: String;
+  S1, S2, S: String;
 begin
   S1:='';
   if ooIfExists in Options then S1:=' IF EXISTS';
   if Params.Count > 0 then S2:=Params.AsString
   else S2:=Name;
 
-  AddSQLCommandEx('DROP %s%s %s', [PGObjectNames[ObjectKind], S1, S2]);
+  if (ObjectKind = okUser) and (FUserMapping) then
+  begin
+    S:='DROP USER MAPPING ';
+    if ooIfExists in Options then
+      S:=S + 'IF EXISTS ';
+    S:=S + 'FOR ' + Name + ' SERVER ' + ServerName;
+    //if [ IF EXISTS ] FOR { user_name | USER | CURRENT_USER | PUBLIC } SERVER server_name *)
+    AddSQLCommand(S);
+  end
+  else
+    AddSQLCommandEx('DROP %s%s %s', [PGObjectNames[ObjectKind], S1, S2]);
 end;
 
 procedure TPGSQLDropGroup.Assign(ASource: TSQLObjectAbstract);
@@ -13784,6 +13946,8 @@ begin
   begin
     //GroupName:=TPGSQLDropGroup(ASource).GroupName;
     //RoleType:=TPGSQLDropGroup(ASource).RoleType;
+    UserMapping:=TPGSQLDropGroup(ASource).UserMapping;
+    ServerName:=TPGSQLDropGroup(ASource).ServerName;
   end;
   inherited Assign(ASource);
 end;

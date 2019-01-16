@@ -176,6 +176,7 @@ begin
       end;
       V1.Free;
     end;
+    Memo1.Lines.Add('Type: ' + V.ClassName);
     V.Free;
   end
   else
