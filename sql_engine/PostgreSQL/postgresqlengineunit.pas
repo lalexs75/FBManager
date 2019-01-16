@@ -150,6 +150,7 @@ type
     FSchema:TPGSchema;
   public
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     property SchemaId:integer read GetSchemaId;
     property Schema:TPGSchema read FSchema;
   end;
@@ -1307,6 +1308,12 @@ begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
   if Assigned(AOwnerRoot) and (AOwnerRoot is TPGSchema) then
     FSchema:=TPGSchema(AOwnerRoot);
+end;
+
+constructor TPGDBRootObject.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
 end;
 
 { TPGEventTrigger }

@@ -1911,7 +1911,10 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateForeignDataWrapper3'
         Lines.Strings = (
-          'CREATE FOREIGN DATA WRAPPER mywrapper OPTIONS (debug ''true'');'
+          'CREATE FOREIGN DATA WRAPPER mywrapper'
+          'OPTIONS ('
+          '  debug ''true'''
+          ');'
         )
       end    
       item
@@ -3191,18 +3194,13 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateDatabase3'
         Lines.Strings = (
-          'CREATE DATABASE music'
-          '  LC_COLLATE ''sv_SE.utf8'' LC_CTYPE ''sv_SE.utf8'''
-          '  TEMPLATE template0;'
+          'CREATE DATABASE music LC_COLLATE ''sv_SE.utf8'' LC_CTYPE ''sv_SE.utf8'' TEMPLATE template0;'
         )
       end    
       item
         Caption = 'CreateDatabase4'
         Lines.Strings = (
-          'CREATE DATABASE music2'
-          '  LC_COLLATE ''sv_SE.iso885915'' LC_CTYPE ''sv_SE.iso885915'''
-          '  ENCODING LATIN9'
-          '  TEMPLATE template0;'
+          'CREATE DATABASE music2 LC_COLLATE ''sv_SE.iso885915'' LC_CTYPE ''sv_SE.iso885915'' ENCODING LATIN9 TEMPLATE template0;'
         )
       end    
       item

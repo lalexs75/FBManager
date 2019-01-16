@@ -71,6 +71,7 @@ const
      'EXTENSION',                    //okExtension
      'FOREIGN TABLE',                //okForeignTable
      'FOREIGN DATA WRAPPER',         //okForeignDataWrapper
+     'FOREIGN SERVER',               //okForeignServer
      'LARGE OBJECT',                 //okLargeObject
      'POLICY',                       //okPolicy
      'FUNCTION',                     //okFunction
@@ -2003,6 +2004,7 @@ type
 
   TPGSQLDropForeignTable = class(TSQLDropCommandAbstract)
   private
+    FCurTable: TTableItem;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2036,11 +2038,27 @@ type
 
   TPGSQLAlterForeignDataWrapper = class(TSQLCommandDDL)
   private
+    FHandler: string;
+    FNewName: string;
+    FNewOwner: string;
+    FNoHandler: boolean;
+    FNoValidator: boolean;
+    FValidator: string;
+  private
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
     procedure MakeSQL;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property NewName:string read FNewName write FNewName;
+    property NewOwner:string read FNewOwner write FNewOwner;
+    property Handler:string read FHandler write FHandler;
+    property Validator:string read FValidator write FValidator;
+    property NoHandler:boolean read FNoHandler write FNoHandler;
+    property NoValidator:boolean read FNoValidator write FNoValidator;
   end;
 
   { TPGSQLDropForeignDataWrapper }
@@ -2118,22 +2136,38 @@ type
 
   TPGSQLAlterServer = class(TSQLCommandAbstract)
   private
+    FNewOwner: string;
+    FNewVersion: string;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property NewOwner:string read FNewOwner write FNewOwner;
+    property NewVersion:string read FNewVersion write FNewVersion;
   end;
 
   { TPGSQLCreateServer }
 
   TPGSQLCreateServer = class(TSQLCreateCommandAbstract)
   private
+    FForeignDataWrapper: string;
+    FServerType: string;
+    FServerVersion: string;
+  private
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ServerType:string read FServerType write FServerType;
+    property ServerVersion:string read FServerVersion write FServerVersion;
+    property ForeignDataWrapper:string read FForeignDataWrapper write FForeignDataWrapper;
   end;
 
   { TPGSQLDropServer }
@@ -2311,6 +2345,8 @@ type
     FConcurrently: boolean;
     FIndexMethod: string;
     FTableSpace: string;
+    FCurField: TSQLParserField;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -3454,26 +3490,160 @@ end;
 
 { TODO : Реализовать ALTER FOREIGN DATA WRAPPER }
 procedure TPGSQLAlterForeignDataWrapper.InitParserTree;
+var
+  FSQLTokens, T, T1, T1_1, T2, T2_1, T3, T3_1, T4, T4_1,
+    T4_2_1, T4_2_2, T4_2_3, T4_2, T4_3, T4_4, T4_5, T3_2, T5,
+    T6, T6_1, T6_2, T5_1, T5_2, T5_3, T4_2_4, T2_2: TSQLTokenRecord;
 begin
-  (*
-  ALTER FOREIGN DATA WRAPPER имя
-      [ HANDLER функция_обработчик | NO HANDLER ]
-      [ VALIDATOR функция_проверки | NO VALIDATOR ]
-      [ OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ]) ]
-  ALTER FOREIGN DATA WRAPPER имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
-  ALTER FOREIGN DATA WRAPPER имя RENAME TO новое_имя
-  *)
+  //ALTER FOREIGN DATA WRAPPER имя
+  //    [ HANDLER функция_обработчик | NO HANDLER ]
+  //    [ VALIDATOR функция_проверки | NO VALIDATOR ]
+  //    [ OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ]) ]
+  //ALTER FOREIGN DATA WRAPPER имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER FOREIGN DATA WRAPPER имя RENAME TO новое_имя
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okForeignDataWrapper);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'FOREIGN', []);
+  T:=AddSQLTokens(stKeyword, T, 'DATA', []);
+  T:=AddSQLTokens(stKeyword, T, 'WRAPPER', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+    T1:=AddSQLTokens(stKeyword, T, 'HANDLER', [toOptional]);
+    T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+    T2:=AddSQLTokens(stKeyword, T, 'VALIDATOR', [toOptional]);
+    T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 3);
+    T2_2:=AddSQLTokens(stSymbol, T2_1, '.', [toOptional], 3);
+    T2_2:=AddSQLTokens(stIdentificator, T2_2, '', [], 3);
+
+    T3:=AddSQLTokens(stKeyword, T, 'NO', [toOptional]);
+      T3_1:=AddSQLTokens(stKeyword, T3, 'HANDLER', [], 4);
+      T3_2:=AddSQLTokens(stKeyword, T3, 'VALIDATOR', [], 5);
+
+    T4:=AddSQLTokens(stKeyword, T, 'OPTIONS', [toOptional]);
+      T4_1:=AddSQLTokens(stSymbol, T4, '(', []);
+      T4_2_1:=AddSQLTokens(stSymbol, T4_1, 'ADD', [], 6);
+      T4_2_2:=AddSQLTokens(stSymbol, T4_1, 'SET', [], 7);
+      T4_2_3:=AddSQLTokens(stSymbol, T4_1, 'DROP', [], 8);
+      T4_2:=AddSQLTokens(stIdentificator, [T4_1, T4_2_1, T4_2_2, T4_2_3], '', [], 9);
+      T4_2_4:=AddSQLTokens(stString, [T4_1, T4_2_1, T4_2_2, T4_2_3], '', [], 9);
+      T4_3:=AddSQLTokens(stString, [T4_2, T4_2_4], '', [], 10);
+      T4_4:=AddSQLTokens(stSymbol, [T4_2, T4_3, T4_2_4], ',', [], 11);
+        T4_4.AddChildToken([T4_2_1, T4_2_2, T4_2_3, T4_2, T4_2_4]);
+      T4_5:=AddSQLTokens(stSymbol, [T4_2, T4_3, T4_2_4], ')', [], 11);
+
+    T1_1.AddChildToken([T2, T3, T4]);
+    T2_1.AddChildToken([T1, T3, T4]);
+    T2_2.AddChildToken([T1, T3, T4]);
+    T3_1.AddChildToken([T1, T2, T4]);
+    T3_2.AddChildToken([T1, T2, T4]);
+    T4_5.AddChildToken([T1, T2, T3]);
+
+
+  //ALTER FOREIGN DATA WRAPPER имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER FOREIGN DATA WRAPPER имя RENAME TO новое_имя
+  T5:=AddSQLTokens(stKeyword, T, 'OWNER', []);
+    T5_1:=AddSQLTokens(stKeyword, T5, 'TO', []);
+    T5_2:=AddSQLTokens(stKeyword, T5_1, 'CURRENT_USER', [], 12);
+    T5_2:=AddSQLTokens(stKeyword, T5_1, 'SESSION_USER', [], 12);
+    T5_3:=AddSQLTokens(stIdentificator, T5_1, '', [], 12);
+
+  T6:=AddSQLTokens(stKeyword, T, 'RENAME', []);
+    T6_1:=AddSQLTokens(stKeyword, T6, 'TO', []);
+    T6_2:=AddSQLTokens(stIdentificator, T6_1, '', [], 13);
 end;
 
 procedure TPGSQLAlterForeignDataWrapper.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FHandler:=AWord;
+    3:FValidator:=FValidator + AWord;
+    4:FNoHandler:=true;
+    5:FNoValidator:=true;
+    6,
+    7,
+    8:begin
+        FCurParam:=Params.AddParam('');
+        FCurParam.CheckExpr:=AWord;
+      end;
+    9:begin
+        if not Assigned(FCurParam) then
+          FCurParam:=Params.AddParamEx(AWord, '')
+        else
+          FCurParam.Caption:=AWord;
+      end;
+    10:if Assigned(FCurParam) then
+        FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+    11:FCurParam:=nil;
+    12:NewOwner:=AWord;
+    13:NewName:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterForeignDataWrapper.MakeSQL;
+var
+  P: TSQLParserField;
+  S1, S: String;
 begin
-  inherited MakeSQL;
+  S:='ALTER FOREIGN DATA WRAPPER ' + Name;
+
+  if NewName <> '' then
+  begin
+    S:=S + ' RENAME TO '+NewName;
+  end
+  else
+  if NewOwner <> '' then
+  begin
+    S:=S + ' OWNER TO '+NewOwner;
+  end
+  else
+  begin
+    if FHandler <> '' then
+      S:=S + ' HANDLER ' + FHandler
+    else
+    if FNoHandler then
+      S:=S + ' NO HANDLER';
+
+    if FValidator <> '' then
+      S:=S + ' VALIDATOR ' + FValidator
+    else
+    if FNoValidator then
+      S:=S + ' NO VALIDATOR';
+
+    //ALTER FOREIGN DATA WRAPPER имя
+    //    [ HANDLER функция_обработчик | NO HANDLER ]
+    //    [ VALIDATOR функция_проверки | NO VALIDATOR ]
+    //    [ OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ]) ]
+
+    if Params.Count>0 then
+    begin
+      S1:='';
+      for P in Params do
+      begin
+        if S1<>'' then S1:=S1 + ', ';
+        if P.CheckExpr<>'' then S1:=S1 + P.CheckExpr + ' ';
+        S1:=S1 + P.Caption;
+        if P.ParamValue <> '' then S1:=S1 + ' ' + QuotedString(P.ParamValue, '''');
+      end;
+      S:=S + ' OPTIONS ('+S1+')';
+    end;
+  end;
+
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterForeignDataWrapper.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterForeignDataWrapper then
+  begin
+    FHandler:=TPGSQLAlterForeignDataWrapper(ASource).FHandler;
+    FNewName:=TPGSQLAlterForeignDataWrapper(ASource).FNewName;
+    FNewOwner:=TPGSQLAlterForeignDataWrapper(ASource).FNewOwner;
+    FNoHandler:=TPGSQLAlterForeignDataWrapper(ASource).FNoHandler;
+    FNoValidator:=TPGSQLAlterForeignDataWrapper(ASource).FNoValidator;
+    FValidator:=TPGSQLAlterForeignDataWrapper(ASource).FValidator;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropForeignDataWrapper }
@@ -3482,9 +3652,7 @@ procedure TPGSQLDropForeignDataWrapper.InitParserTree;
 var
   FSQLTokens, T, T1: TSQLTokenRecord;
 begin
-  (*
-  DROP FOREIGN DATA WRAPPER [ IF EXISTS ] имя [ CASCADE | RESTRICT ]
-  *)
+  //DROP FOREIGN DATA WRAPPER [ IF EXISTS ] имя [ CASCADE | RESTRICT ]
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okForeignDataWrapper);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'FOREIGN', []);
   T:=AddSQLTokens(stKeyword, T, 'DATA', []);
@@ -4706,16 +4874,18 @@ end;
 
 procedure TPGSQLCreateIndex.InitParserTree;
 var
-  T, T1, FSQLTokens, T2, T3, TSchema, TName, TCol, TExp, TSymb: TSQLTokenRecord;
+  T, T1, FSQLTokens, T2, T3, TSchema, TName, TCol, TExp, TSymb,
+    TC1, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3, TC2_3_1, TC2_3_2,
+    T1_1, T2_1, T2_2, T2_3, T2_4_1, T2_4_2, T2_4_3, T2_5, T2_6: TSQLTokenRecord;
 begin
   inherited InitParserTree;
-(*
-  CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ name ] ON table [ USING method ]
-      ( { column | ( expression ) } [ COLLATE collation ] [ opclass ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] )
-      [ WITH ( storage_parameter = value [, ... ] ) ]
-      [ TABLESPACE tablespace ]
-      [ WHERE predicate ]
-*)
+
+  //CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ name ] ON table [ USING method ]
+  //    ( { column | ( expression ) } [ COLLATE collation ] [ opclass ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] )
+  //    [ WITH ( storage_parameter = value [, ... ] ) ]
+  //    [ TABLESPACE tablespace ]
+  //    [ WHERE predicate ]
+
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okIndex); // CREATE [ UNIQUE ] INDEX
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'UNIQUE', [], 1);      //[ UNIQUE ]
@@ -4736,16 +4906,52 @@ begin
 
   TCol:=AddSQLTokens(stIdentificator, T, '', [], 7);
   TExp:=AddSQLTokens(stSymbol, T, '(', [], 8);
+    TC1:=AddSQLTokens(stKeyword, [TCol, TExp], 'COLLATE', []);
+    TC1_1:=AddSQLTokens(stString, TC1, '', [], 11);
+    TC1_2:=AddSQLTokens(stIdentificator, TC1, '', [], 11);
 
-  //[ COLLATE collation ] [ opclass ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
-  T3:=AddSQLTokens(stSymbol, [TCol, TExp], ',', []);
+    TC2_1:=AddSQLTokens(stKeyword, [TCol, TExp], 'ASC', [], 12);
+    TC2_2:=AddSQLTokens(stKeyword, [TCol, TExp], 'DESC', [], 13);
+
+    TC2_3:=AddSQLTokens(stKeyword, [TCol, TExp], 'NULLS', []);
+    TC2_3_1:=AddSQLTokens(stKeyword, TC2_3, 'FIRST', [], 14);
+    TC2_3_2:=AddSQLTokens(stKeyword, TC2_3, 'LAST', [], 15);
+
+
+    TC1_1.AddChildToken([TC2_1, TC2_2, TC2_3]);
+    TC1_2.AddChildToken([TC2_1, TC2_2, TC2_3]);
+
+    TC2_1.AddChildToken([TC1, TC2_3]);
+    TC2_2.AddChildToken([TC1, TC2_3]);
+
+    TC2_3_1.AddChildToken([TC1, TC2_1, TC2_2]);
+    TC2_3_2.AddChildToken([TC1, TC2_1, TC2_2]);
+
+    //[ opclass ]
+  T3:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3_1, TC2_3_2], ',', []);
     T3.AddChildToken([TCol, TExp]);
 
-  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp], ')', []);
-    T1:=AddSQLTokens(stKeyword, TSymb, 'TABLESPACE', [toOptional]);
-    T1:=AddSQLTokens(stIdentificator, T1, '', [], 10);
+  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_2, TC2_3_1, TC2_3_2], ')', []);
 
+  T1:=AddSQLTokens(stKeyword, TSymb, 'TABLESPACE', [toOptional]);
+    T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 10);
+
+  T2:=AddSQLTokens(stKeyword, TSymb, 'WITH', [toOptional]);
+    T2_1:=AddSQLTokens(stSymbol, T2, '(', []);
+    T2_2:=AddSQLTokens(stIdentificator, T2_1, '', [], 20);
+    T2_3:=AddSQLTokens(stSymbol, T2_2, '=', []);
+    T2_4_1:=AddSQLTokens(stIdentificator, T2_3, '', [], 21);
+    T2_4_2:=AddSQLTokens(stString, T2_3, '', [], 21);
+    T2_4_3:=AddSQLTokens(stInteger, T2_3, '', [], 21);
+    T2_5:=AddSQLTokens(stSymbol, [T2_4_1, T2_4_2, T2_4_3], ',', [], 22);
+      T2_5.AddChildToken(T2_2);
+    T2_6:=AddSQLTokens(stSymbol, [T2_4_1, T2_4_2, T2_4_3], ')', [], 22);
+    //    [ WITH ( storage_parameter = value [, ... ] ) ]
+    //    [ WHERE predicate ]
 //  [ WHERE predicate ]
+
+  T1_1.AddChildToken(T2);
+  T2_6.AddChildToken(T1);
 
 end;
 
@@ -4765,19 +4971,34 @@ begin
         TableName:=AWord;
       end;
     6:FIndexMethod:=AWord;
-    7:Fields.AddParam(AWord);
+    7:FCurField:=Fields.AddParam(AWord);
     8:begin
         S:='(' + ASQLParser.GetToBracket(')') + ')';
-        Fields.AddParam(S);
+        FCurField:=Fields.AddParam(S);
       end;
     10:TableSpace:=AWord;
+    11:if Assigned(FCurField) then
+      FCurField.Collate:=AWord;
+    12:if Assigned(FCurField) then
+      FCurField.IndexOptions.SortOrder:=indAscending;
+    13:if Assigned(FCurField) then
+      FCurField.IndexOptions.SortOrder:=indDescending;
+    14:if Assigned(FCurField) then
+      FCurField.IndexOptions.IndexNullPos:=inpFirst;
+    15:if Assigned(FCurField) then
+      FCurField.IndexOptions.IndexNullPos:=inpLast;
+    20:FCurParam:=Params.AddParamEx(AWord, '');
+    21:if Assigned(FCurParam) then
+      FCurParam.ParamValue:=AWord;
+    22:FCurParam:=nil;
   end;
 end;
 
 procedure TPGSQLCreateIndex.MakeSQL;
 var
-  S: String;
+  S, S1: String;
   FDropCmd: TPGSQLDropIndex;
+  F, P: TSQLParserField;
 begin
   if CreateMode = cmDropAndCreate then
   begin
@@ -4812,7 +5033,34 @@ begin
   if FIndexMethod<>'' then
     S:=S + ' USING ' +IndexMethod;
 
-  S:=S + ' (' + Fields.AsString + ')';
+  S1:='';
+  for F in Fields do
+  begin
+    if S1<>'' then S1:=S1+', ';
+    S1:=S1 + F.Caption;
+    if F.Collate<>'' then S1:=S1 + ' COLLATE ' + F.Collate;
+
+    if F.IndexOptions.SortOrder = indAscending then S1:=S1 + ' ASC'
+    else
+    if F.IndexOptions.SortOrder = indDescending then S1:=S1 + ' DESC';
+
+    if F.IndexOptions.IndexNullPos = inpFirst then S1:=S1 + ' NULLS FIRST'
+    else
+    if F.IndexOptions.IndexNullPos = inpLast then S1:=S1 + ' NULLS LAST';
+  end;
+  S:=S + ' (' + S1 + ')';
+
+
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + P.Caption + ' = ' + P.ParamValue;
+    end;
+    S:=S + ' WITH ('+S1+')';
+  end;
 
   if TableSpace <> '' then
     S:=S + ' TABLESPACE '+TableSpace;
@@ -5992,8 +6240,8 @@ begin
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
   T1.AddChildToken(T);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropServer.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6008,14 +6256,17 @@ procedure TPGSQLDropServer.MakeSQL;
 var
   Result: String;
 begin
-  Result:='DROP SERVER';
+  Result:='DROP SERVER ';
   if ooIfExists in Options then
-    Result:=Result + ' IF EXISTS';
+    Result:=Result + 'IF EXISTS ';
 
   Result:=Result + FServerName;
 
   if DropRule = drCascade then
-    Result:=Result + ' CASCADE';
+    Result:=Result + ' CASCADE'
+  else
+  if DropRule = drRestrict then
+    Result:=Result + ' RESTRICT';
   AddSQLCommand(Result);
 end;
 
@@ -6033,7 +6284,8 @@ end;
 
 procedure TPGSQLCreateServer.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1, T1_1, T2_1, T2, TF, TF1, TOpt, TOpt1,
+    TOpt2, TOpt2_1, TOpt3, TOpt4: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для CREATE SERVER }
   (*
@@ -6042,28 +6294,90 @@ begin
       [ OPTIONS ( option 'value' [, ... ] ) ]
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'SERVER', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'SERVER', [toFindWordLast]);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+    T1:=AddSQLTokens(stKeyword, T, 'TYPE', []);
+    T1_1:=AddSQLTokens(stString, T1, '', [], 2);
+
+    T2:=AddSQLTokens(stKeyword, [T, T1_1], 'VERSION', []);
+    T2_1:=AddSQLTokens(stKeyword, [T, T1_1], '', [], 3);
+      T2_1.AddChildToken(T1);
+
+  TF:=AddSQLTokens(stKeyword, [T, T1_1, T2_1], 'FOREIGN', []);
+  TF1:=AddSQLTokens(stKeyword, TF, 'DATA', []);
+  TF1:=AddSQLTokens(stKeyword, TF1, 'WRAPPER', []);
+  TF1:=AddSQLTokens(stIdentificator, TF1, '', [], 4);
+
+  TOpt:=AddSQLTokens(stKeyword, TF1, 'OPTIONS', [toOptional]);
+  TOpt1:=AddSQLTokens(stSymbol, TOpt, '(', []);
+  TOpt2:=AddSQLTokens(stIdentificator, TOpt1, '', [], 5);
+  TOpt2_1:=AddSQLTokens(stString, TOpt2, '', [], 6);
+  TOpt3:=AddSQLTokens(stSymbol, TOpt2_1, ',', [], 7);
+    TOpt3.AddChildToken(TOpt2);
+  TOpt4:=AddSQLTokens(stSymbol, TOpt2_1, ')', [], 7);
 end;
 
 procedure TPGSQLCreateServer.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:ServerType:=ExtractQuotedString(AWord, '''');
+    3:ServerVersion:=ExtractQuotedString(AWord, '''');
+    4:ForeignDataWrapper:=AWord;
+    5:FCurParam:=Params.AddParam(AWord);
+    6:if Assigned(FCurParam) then
+      FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+    7:FCurParam:=nil;
+  end;
 end;
 
 procedure TPGSQLCreateServer.MakeSQL;
 var
-  Result: String;
+  Result, S1: String;
+  P: TSQLParserField;
 begin
-  Result:='CREATE SERVER';
+  Result:='CREATE SERVER ' + Name;
+  if FServerType <> '' then
+    Result:=Result + ' TYPE ' + QuotedString(FServerType, '''');
+
+  if FServerVersion <> '' then
+    Result:=Result + ' VERSION ' + QuotedString(FServerVersion, '''');
+
+  Result:=Result + ' FOREIGN DATA WRAPPER ' + ForeignDataWrapper;
+
+  if Params.Count > 0 then
+  begin
+    Result:=Result + ' OPTIONS (';
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + P.Caption + ' ' + QuotedString(p.ParamValue, '''');
+    end;
+    Result:=Result + S1 + ')';
+  end;
   AddSQLCommand(Result);
+end;
+
+procedure TPGSQLCreateServer.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateServer then
+  begin
+    FServerType:=TPGSQLCreateServer(ASource).FServerType;
+    FServerVersion:=TPGSQLCreateServer(ASource).FServerVersion;
+    FForeignDataWrapper:=TPGSQLCreateServer(ASource).FForeignDataWrapper;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterServer }
 
 procedure TPGSQLAlterServer.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T2, T2_1, T2_2_1, T2_2_2, T2_2_3, T2_2, T2_3,
+    T2_4, T2_5, T3, T3_1, T1, T1_1: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER SERVER }
   (*
@@ -6073,20 +6387,91 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'SERVER', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, T, 'VERSION', [toOptional]);
+    T1_1:=AddSQLTokens(stString, T1, '', [], 2);
+
+  T2:=AddSQLTokens(stKeyword, [T, T1_1], 'OPTIONS', [toOptional]);
+    T2_1:=AddSQLTokens(stSymbol, T2, '(', []);
+    T2_2_1:=AddSQLTokens(stSymbol, T2_1, 'ADD', [], 3);
+    T2_2_2:=AddSQLTokens(stSymbol, T2_1, 'SET', [], 4);
+    T2_2_3:=AddSQLTokens(stSymbol, T2_1, 'DROP', [], 5);
+    T2_2:=AddSQLTokens(stIdentificator, [T2_1, T2_2_1, T2_2_2, T2_2_3], '', [], 6);
+    T2_3:=AddSQLTokens(stString, T2_2, '', [], 7);
+    T2_4:=AddSQLTokens(stSymbol, [T2_3, T2_2], ',', [], 8);
+      T2_4.AddChildToken([T2_2_1, T2_2_2, T2_2_3, T2_2]);
+  T2_5:=AddSQLTokens(stSymbol, [T2_2, T2_3], ')', [], 8);
+    T2_5.AddChildToken(T1);
+
+  T3:=AddSQLTokens(stKeyword, T, 'OWNER', []);
+    T3_1:=AddSQLTokens(stKeyword, T3, 'TO', []);
+    T3_1:=AddSQLTokens(stIdentificator, T3_1, 'TO', [], 10);
 end;
 
 procedure TPGSQLAlterServer.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:NewVersion:=ExtractQuotedString(AWord, '''');
+    3,
+    4,
+    5:begin
+        FCurParam:=Params.AddParam('');
+        FCurParam.CheckExpr:=AWord;
+      end;
+    6:begin
+        if not Assigned(FCurParam) then
+          FCurParam:=Params.AddParamEx(AWord, '')
+        else
+          FCurParam.Caption:=AWord;
+      end;
+    7:if Assigned(FCurParam) then
+        FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+    8:FCurParam:=nil;
+    10:NewOwner:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterServer.MakeSQL;
 var
-  Result: String;
+  Result, S1: String;
+  P: TSQLParserField;
 begin
-  Result:='ALTER SERVER server_name';
+  Result:='ALTER SERVER '+Name;
+  if FNewOwner <> '' then
+    Result:=Result + ' OWNER TO ' + NewOwner
+  else
+  begin
+    if NewVersion<>'' then Result:=Result + ' VERSION ' + QuotedString(NewVersion, '''');
+
+    if Params.Count>0 then
+    begin
+      Result:=Result + ' OPTIONS (';
+      S1:='';
+      for P in Params do
+      begin
+        if S1<>'' then S1:=S1 + ', ';
+        if P.CheckExpr <> '' then S1:=S1 + P.CheckExpr + ' ';
+        S1:=S1 + P.Caption;
+        if P.ParamValue <> '' then S1:=S1 + ' ' + QuotedString(P.ParamValue, '''');
+      end;
+      Result:=Result + S1 + ')';
+    end;
+  end;
   AddSQLCommand(Result);
+end;
+
+procedure TPGSQLAlterServer.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterServer then
+  begin
+    FNewOwner:=TPGSQLAlterServer(ASource).FNewOwner;
+    FNewVersion:=TPGSQLAlterServer(ASource).FNewVersion;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropSchema }
@@ -6457,11 +6842,11 @@ begin
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
 
   TSchema:=AddSQLTokens(stIdentificator, [T, T1], '', [],  1);
-    T:=AddSQLTokens(stSymbol, TSchema, '.', []);
+    T:=AddSQLTokens(stSymbol, TSchema, '.', [toOptional]);
   TName:=AddSQLTokens(stIdentificator, T, '', [],  2);
 
-  T1:=AddSQLTokens(stKeyword, [TSchema, TName], 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, [TSchema, TName], 'RESTRICT', [],-3);
+  T1:=AddSQLTokens(stKeyword, [TSchema, TName], 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, [TSchema, TName], 'RESTRICT', [toOptional],-3);
 end;
 
 procedure TPGSQLDropIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6500,7 +6885,7 @@ end;
 
 procedure TPGSQLAlterIndex.InitParserTree;
 var
-  T, T1, T2, T3, T4, FSQLTokens: TSQLTokenRecord;
+  T, T1, T2, T3, T4, FSQLTokens, T3_1, T3_2, T3_3, T3_4: TSQLTokenRecord;
 begin
   (* ALTER INDEX name RENAME TO new_name *)
   (* ALTER INDEX name SET TABLESPACE tablespace_name *)
@@ -6521,9 +6906,12 @@ begin
     T2:=AddSQLTokens(stSymbol, T1, '(', [],  6);
     T2:=AddSQLTokens(stIdentificator, T2, '', [], 7);
     T3:=AddSQLTokens(stSymbol, T2, '=', []);
-    T3:=AddSQLTokens(stIdentificator, T3, '', [], 8);
-    T4:=AddSQLTokens(stSymbol, T3, ')', []);
-    T4:=AddSQLTokens(stSymbol, T3, ',', []);
+    T3_1:=AddSQLTokens(stIdentificator, T3, '', [], 8);
+    T3_2:=AddSQLTokens(stString, T3, '', [], 8);
+    T3_3:=AddSQLTokens(stInteger, T3, '', [], 8);
+    T3_4:=AddSQLTokens(stFloat, T3, '', [], 8);
+    T4:=AddSQLTokens(stSymbol, [T3_1, T3_2, T3_3, T3_4], ')', []);
+    T4:=AddSQLTokens(stSymbol, [T3_1, T3_2, T3_3, T3_4], ',', []);
     T4.AddChildToken(T2);
 
   T1:=AddSQLTokens(stKeyword, T, 'RESET', [], 9);
@@ -6602,22 +6990,54 @@ end;
 
 procedure TPGSQLDropForeignTable.InitParserTree;
 var
-  T, T10, T1, FSQLTokens: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2, T3: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для DROP FOREIGN TABLE}
-  (* DROP FOREIGN DATA WRAPPER [ IF EXISTS ] name [ CASCADE | RESTRICT ] *)
   (* DROP FOREIGN TABLE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ] *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okForeignTable);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'FOREIGN', []);
+  T:=AddSQLTokens(stKeyword, T, 'TABLE', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, T, 'IF', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+    T1:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+  T2:=AddSQLTokens(stSymbol, [T,T1], ',', [toOptional], 3);
+    T2.AddChildToken(T);
+
+  T3:=AddSQLTokens(stKeyword, [T,T1], 'CASCADE', [toOptional], -2);
+  T3:=AddSQLTokens(stKeyword, [T,T1], 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropForeignTable.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FCurTable:=Tables.Add(AWord);
+    2:if Assigned(FCurTable) then
+      begin
+        FCurTable.SchemaName:=FCurTable.Name;
+        FCurTable.Name:=AWord;
+      end;
+    3:FCurTable:=nil;
+  end;
 end;
 
 procedure TPGSQLDropForeignTable.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='DROP FOREIGN TABLE';
+  if ooIfExists in Options then
+    S:=S + ' IF EXISTS';
+  S:=S + Tables.AsString;
+
+  case DropRule of
+    drCascade: S:=S + ' CASCADE';
+    drRestrict: S:=S + ' RESTRICT';
+  end;
+
+  AddSQLCommand(S);
 end;
 
 
@@ -6693,17 +7113,19 @@ end;
 
 procedure TPGSQLDropExtension.InitParserTree;
 var
-  T, T1, FSQLTokens: TSQLTokenRecord;
+  T, T1, FSQLTokens, T2: TSQLTokenRecord;
 begin
   (* DROP EXTENSION [ IF EXISTS ] extension_name [, ...] [ CASCADE | RESTRICT ] *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'EXTENSION', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
-  T1.AddChildToken(T);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+    T2:=AddSQLTokens(stSymbol, T, ',', [toOptional], 2);
+    T2.AddChildToken(T);
+
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropExtension.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6711,7 +7133,10 @@ procedure TPGSQLDropExtension.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:Name:=AWord;
+    1:begin
+        Name:=AWord;
+        Tables.Add(AWord);
+      end;
   end;
 end;
 
@@ -6723,7 +7148,10 @@ begin
   if ooIfExists in Options then
     S:=S + 'IF EXISTS ';
 
-  S:=S + Name;
+  if Tables.Count > 0 then
+    S:=S + Tables.AsString
+  else
+    S:=S + Name;
 
   if DropRule = drCascade then
     S:=S + ' CASCADE'
@@ -8171,7 +8599,8 @@ end;
 
 procedure TPGSQLCreateDatabase.InitParserTree;
 var
-  T, FSQLTokens, TN, TW, T2_1, T2, T3, T3_1, T4, T4_1: TSQLTokenRecord;
+  T, FSQLTokens, TN, TW, T2_1, T2, T3, T3_1, T4, T4_1, T5,
+    T5_1, T6, T6_1, T7, T7_1, T4_2: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для CREATE DATABASE }
   (*
@@ -8187,27 +8616,44 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast]);
   TN:=AddSQLTokens(stIdentificator, T, '', [],  1);
-  TW:=AddSQLTokens(stKeyword, TN, 'WITH', []);
+  TW:=AddSQLTokens(stKeyword, TN, 'WITH', [toOptional]);
 
-  T2:=AddSQLTokens(stKeyword, TN, 'OWNER', [],  2);
-  T:=AddSQLTokens(stSymbol, T2, '=', []);
-  T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 3);
-  T.AddChildToken(T2_1);
+  T2:=AddSQLTokens(stKeyword, TN, 'OWNER', [toOptional],  2);
+  T:=AddSQLTokens(stSymbol, T2, '=', [], 4);
+  T2_1:=AddSQLTokens(stIdentificator, [T2, T], '', [], 3);
 
-  T3:=AddSQLTokens(stKeyword, TN, 'TEMPLATE', [],2);
-  T:=AddSQLTokens(stSymbol, T3, '=', []);
-  T3_1:=AddSQLTokens(stIdentificator, T3, '', [], 3);
-  T.AddChildToken(T3_1);
+  T3:=AddSQLTokens(stKeyword, TN, 'TEMPLATE', [toOptional],2);
+  T:=AddSQLTokens(stSymbol, T3, '=', [], 4);
+  T3_1:=AddSQLTokens(stIdentificator, [T3, T], '', [], 3);
 
-  T4:=AddSQLTokens(stKeyword, TN, 'ENCODING', [], 2);
-  T:=AddSQLTokens(stSymbol, T4, '=', []);
-  T4_1:=AddSQLTokens(stString, T3, '', [], 3);
-  T.AddChildToken(T4_1);
+  T4:=AddSQLTokens(stKeyword, TN, 'ENCODING', [toOptional], 2);
+  T:=AddSQLTokens(stSymbol, T4, '=', [], 4);
+  T4_1:=AddSQLTokens(stString, [T4, T], '', [], 3);
+  T4_2:=AddSQLTokens(stIdentificator, [T4, T], '', [], 3);
+
+
+  T5:=AddSQLTokens(stKeyword, TN, 'LC_COLLATE', [toOptional], 2);
+  T:=AddSQLTokens(stSymbol, T5, '=', [], 4);
+  T5_1:=AddSQLTokens(stString, [T5, T], '', [], 3);
+
+  T6:=AddSQLTokens(stKeyword, TN, 'LC_CTYPE', [toOptional], 2);
+  T:=AddSQLTokens(stSymbol, T6, '=', [], 4);
+  T6_1:=AddSQLTokens(stString, [T6, T], '', [], 3);
+
+  T7:=AddSQLTokens(stKeyword, TN, 'TABLESPACE', [toOptional], 2);
+  T:=AddSQLTokens(stSymbol, T7, '=', [], 4);
+  T7_1:=AddSQLTokens(stIdentificator, [T7, T], '', [], 3);
+
+//  [ CONNECTION LIMIT [=] connlimit ] ]
 
   TW.CopyChildTokens(TN);
-  T2_1.AddChildToken([{T2, } T3, T4]);
-  T3_1.AddChildToken([T2, { T3,} T4]);
-  T4_1.AddChildToken([T2,  T3{, T4}]);
+  T2_1.AddChildToken([{T2, } T3, T4, T5, T6, T7]);
+  T3_1.AddChildToken([T2, { T3,} T4, T5, T6, T7]);
+  T4_1.AddChildToken([T2,  T3{, T4}, T5, T6, T7]);
+  T4_2.AddChildToken([T2,  T3{, T4}, T5, T6, T7]);
+  T5_1.AddChildToken([T2,  T3, T4,{ T5,} T6, T7]);
+  T6_1.AddChildToken([T2,  T3, T4, T5, {T6,} T7]);
+  T7_1.AddChildToken([T2,  T3, T4, T5, T6{, T7}]);
 end;
 
 procedure TPGSQLCreateDatabase.InternalProcessChildToken(
@@ -8216,12 +8662,14 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:DatabaseName:=AWord;
-    2:FCurParam:=Params.AddParam(AWord);
+    2:FCurParam:=Params.AddParamEx(AWord, '');
     3:if Assigned(FCurParam) then
       begin
         FCurParam.RealName:=AWord;
         FCurParam:=nil;
       end;
+    4:if Assigned(FCurParam) then
+        FCurParam.CheckExpr:='=';
   end;
 end;
 
@@ -8232,7 +8680,12 @@ var
 begin
   S:='CREATE DATABASE ' + DatabaseName;
   for P in Params do
-    S:=S + LineEnding + ' ' + P.Caption + ' = '+P.RealName;
+  begin
+    //S:=S + LineEnding + ' ' + P.Caption + ' = '+P.RealName;
+    S:=S + ' ' + P.Caption;
+    if P.CheckExpr <> '' then S:=S +' ' + P.CheckExpr;
+    S:=S + ' ' + P.RealName;
+  end;
   AddSQLCommand(S);
 end;
 

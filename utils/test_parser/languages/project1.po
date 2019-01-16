@@ -328,6 +328,10 @@ msgstr ""
 msgid "Case sensetive"
 msgstr ""
 
+#: fbmstrconstunit.schangecount
+msgid "Change count"
+msgstr ""
+
 #: fbmstrconstunit.scharset
 msgid "Char set"
 msgstr ""
@@ -1726,6 +1730,10 @@ msgstr ""
 msgid "Fillfactor"
 msgstr ""
 
+#: fbmstrconstunit.sfillqueryparam
+msgid "Fill query param"
+msgstr ""
+
 #: fbmstrconstunit.sfilterintable
 msgid "Filter in table"
 msgstr ""
@@ -2135,6 +2143,10 @@ msgstr ""
 #: fbmstrconstunit.sindexs
 msgctxt "fbmstrconstunit.sindexs"
 msgid "Indexs"
+msgstr ""
+
+#: fbmstrconstunit.sindexsize
+msgid "Index size"
 msgstr ""
 
 #: fbmstrconstunit.sindexsort
@@ -2973,6 +2985,10 @@ msgstr ""
 #: fbmstrconstunit.soicopyregistrationhint
 msgctxt "fbmstrconstunit.soicopyregistrationhint"
 msgid "Copy registration record..."
+msgstr ""
+
+#: fbmstrconstunit.soid
+msgid "OID"
 msgstr ""
 
 #: fbmstrconstunit.soidatabases
@@ -4171,6 +4187,14 @@ msgstr ""
 msgid "Statistic"
 msgstr ""
 
+#: fbmstrconstunit.sstatpagecount
+msgid "Page count for statistic"
+msgstr ""
+
+#: fbmstrconstunit.sstatrecordcount
+msgid "Record count for statistic"
+msgstr ""
+
 #: fbmstrconstunit.sstatsdatetime
 msgid "Stats date"
 msgstr ""
@@ -4357,6 +4381,10 @@ msgstr ""
 msgid "Tables"
 msgstr ""
 
+#: fbmstrconstunit.stablesize
+msgid "Table size"
+msgstr ""
+
 #: fbmstrconstunit.stablespace
 msgid "Table space"
 msgstr ""
@@ -4453,6 +4481,10 @@ msgstr ""
 msgid "TimeStamp"
 msgstr ""
 
+#: fbmstrconstunit.stoastsize
+msgid "Toast size"
+msgstr ""
+
 #: fbmstrconstunit.stodate
 msgid "To date"
 msgstr ""
@@ -4479,6 +4511,10 @@ msgstr ""
 
 #: fbmstrconstunit.stotal
 msgid "Total"
+msgstr ""
+
+#: fbmstrconstunit.stotalsize
+msgid "Total size"
 msgstr ""
 
 #: fbmstrconstunit.stransactionpersecond
@@ -4788,6 +4824,10 @@ msgstr ""
 
 #: fbmstrconstunit.svalidatorfuncation
 msgid "Validator funcation"
+msgstr ""
+
+#: fbmstrconstunit.svalue
+msgid "Value"
 msgstr ""
 
 #: fbmstrconstunit.svardefvalue

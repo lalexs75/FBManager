@@ -2083,6 +2083,7 @@ end;
 procedure TPGSQLParserTest.CreateIndex3;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateIndex3']);
+
 end;
 
 procedure TPGSQLParserTest.CreateIndex4;
