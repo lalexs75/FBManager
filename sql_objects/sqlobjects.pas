@@ -64,7 +64,8 @@ type
                    okTransform,
                    okOperator,
                    okOperatorClass,
-                   okOperatorFamily
+                   okOperatorFamily,
+                   okUserMapping
                    );
   TDBObjectKinds = set of TDBObjectKind;
 

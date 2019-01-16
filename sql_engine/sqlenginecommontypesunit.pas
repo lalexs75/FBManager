@@ -123,7 +123,9 @@ const
       'okLargeObject', 'okPolicy',
       'okFunction', 'okEventTrigger', 'okAutoIncFields',
       'okFTSConfig', 'okFTSDictionary', 'okFTSParser', 'okFTSTemplate',
-      'okPackage', 'okPackageBody', 'okTransform', 'okOperator', 'okOperatorClass',  'okOperatorFamily'
+      'okPackage', 'okPackageBody', 'okTransform', 'okOperator', 'okOperatorClass',
+      'okOperatorFamily',
+      'okUserMapping'
 
       );
 
@@ -184,7 +186,8 @@ const
        -1, //okTransform
        -1, //okOperator
        -1, //okOperatorClass,
-       -1  //okOperatorFamily
+       -1, //okOperatorFamily,
+       49  //okUserMapping
      );
 
   DBObjectKindFolderImages: array [TDBObjectKind] of integer =
@@ -244,7 +247,8 @@ const
        -1, //okTransform
        -1, //okOperator
        -1, //okOperatorClass,
-       -1  //okOperatorFamily
+       -1, //okOperatorFamily
+       49  //okUserMapping
        );
 
 

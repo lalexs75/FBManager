@@ -145,7 +145,7 @@ constructor TPGForeignUserMapping.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
-  FDBObjectKind:=okForeignDataWrapper;
+  FDBObjectKind:=okUserMapping;
   //FDropCommandClass:=TPGSQLDropUser;
   FDropCommandClass:=TPGSQLDropGroup;
 end;

@@ -86,7 +86,8 @@ const
      'TRANSFORM',                    //okTransform
      'OPERATOR',                     //okOperator,
      'OPERATOR CLASS',               //okOperatorClass,
-     'OPERATOR FAMILY'               //okOperatorFamily
+     'OPERATOR FAMILY',              //okOperatorFamily
+     'USER MAPPING'                  //okUserMapping
     );
 
   PGVarTypeNames : array [TSPVarType] of string =

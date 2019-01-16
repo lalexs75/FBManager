@@ -88,7 +88,8 @@ const
      '',              //okTransform
      '',              //okOperator
      '',              //okOperatorClass,
-     ''               //okOperatorFamily
+     '',              //okOperatorFamily
+     ''               //okUserMapping
      );
 
 type
