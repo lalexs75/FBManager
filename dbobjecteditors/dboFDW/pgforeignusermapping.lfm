@@ -1,0 +1,94 @@
+inherited pgForeignUserMap: TpgForeignUserMap
+  Height = 302
+  ClientHeight = 302
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    Left = 6
+    Height = 19
+    Top = 6
+    Width = 95
+    BorderSpacing.Around = 6
+    Caption = 'Database user'
+    ParentColor = False
+  end
+  object cbDBUsers: TComboBox[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 31
+    Top = 31
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbDBUsers
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 19
+    Top = 68
+    Width = 44
+    BorderSpacing.Around = 6
+    Caption = 'Server'
+    ParentColor = False
+  end
+  object cbServerName: TComboBox[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 31
+    Top = 93
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 1
+  end
+  object Label3: TLabel[4]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbServerName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 19
+    Top = 130
+    Width = 51
+    BorderSpacing.Around = 6
+    Caption = 'Options'
+    ParentColor = False
+  end
+  object ValueListEditor1: TValueListEditor[5]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 141
+    Top = 155
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    DefaultColWidth = 150
+    FixedCols = 0
+    RowCount = 3
+    TabOrder = 2
+    TitleStyle = tsNative
+    KeyOptions = [keyEdit, keyAdd, keyDelete, keyUnique]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking]
+    Strings.Strings = (
+      'user='
+      'password='
+    )
+  end
+end

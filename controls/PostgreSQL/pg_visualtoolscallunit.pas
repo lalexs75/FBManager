@@ -104,7 +104,8 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmpgTableCheckConstaintUnit,
      fbmpgTableCheckConstaint_EditUnit,                  //Права доступа
      fbmPGLanguageUnit,                 //Языки
-    fbmTableStatisticUnit,
+     fbmTableStatisticUnit,
+     pgForeignUserMapping,
 
      pg_con_EditorPrefUnit,
 
@@ -291,13 +292,18 @@ begin
   //FOREIGN DATA
 
   RegisterObjEditor(TPGForeignDataWrapper,
-      [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage],
+      [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame],
       [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
     );
 
   RegisterObjEditor(TPGForeignServer,
-      [TfbmObjectEditorDescriptionFrame, TfbmDDLPage],
+      [TfbmObjectEditorDescriptionFrame],
       [TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+  );
+
+  RegisterObjEditor(TPGForeignUser,
+    [TpgForeignUserMap, TfbmObjectEditorDescriptionFrame],
+    [TpgForeignUserMap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
   );
 end;
 

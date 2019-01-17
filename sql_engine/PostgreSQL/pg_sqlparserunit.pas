@@ -1845,7 +1845,7 @@ type
 
   { TPGSQLAlterUserMapping }
 
-  TPGSQLAlterUserMapping = class(TSQLCommandAbstract)
+  TPGSQLAlterUserMapping = class(TSQLCommandDDL)
   private
   protected
     procedure InitParserTree;override;

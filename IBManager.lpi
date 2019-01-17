@@ -167,7 +167,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item33>
     </RequiredPackages>
-    <Units Count="214">
+    <Units Count="215">
       <Unit0>
         <Filename Value="IBManager.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -1728,6 +1728,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fbmTableStatisticUnit"/>
       </Unit213>
+      <Unit214>
+        <Filename Value="dbobjecteditors/dboFDW/pgforeignusermapping.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgForeignUserMap"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgForeignUserMapping"/>
+      </Unit214>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

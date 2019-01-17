@@ -167,6 +167,7 @@ resourcestring
   sVarDefValue                      = 'Variable default value';
   sConnections                      = 'Connections';
   sTypeOf                           = 'TypeOf';
+  sDatabaseUser                     = 'Database user';
 
   sExtractMetaForm                  = 'Extract metadata from DB';
   sDatabase                         = 'Database';

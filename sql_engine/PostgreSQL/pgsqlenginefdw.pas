@@ -20,7 +20,7 @@
 
 unit pgSQLEngineFDW;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 
@@ -153,8 +153,19 @@ end;
 { TPGForeignUser }
 
 function TPGForeignUser.InternalGetDDLCreate: string;
+var
+  R: TPGSQLCreateUserMapping;
 begin
-  Result:=inherited InternalGetDDLCreate;
+  R:=TPGSQLCreateUserMapping.Create(nil);
+  R.Name:=CaptionFullPatch;
+  R.ServerName:=SchemaName;
+{  R.Handler:=FHandler;
+  R.Validator:=FValidator;
+  R.NoHandler:=FNoHandler;
+  R.NoValidator:=FNoValidator;}
+
+  Result:=R.AsSQL;
+  R.Free;
 end;
 
 constructor TPGForeignUser.Create(const ADBItem: TDBItem;
@@ -185,7 +196,10 @@ end;
 
 function TPGForeignUser.CreateSQLObject: TSQLCommandDDL;
 begin
-  Result:=inherited CreateSQLObject;
+  if State = sdboCreate then
+    Result:=TPGSQLCreateUserMapping.Create(nil)
+  else
+    Result:=TPGSQLAlterUserMapping.Create(nil);
 end;
 
 { TPGForeignServer }

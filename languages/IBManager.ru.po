@@ -870,6 +870,10 @@ msgstr "Свойства базы данных"
 msgid "Database sessions"
 msgstr "Подключения к БД"
 
+#: fbmstrconstunit.sdatabaseuser
+msgid "Database user"
+msgstr ""
+
 #: fbmstrconstunit.sdatablocksread
 msgid "Data blocks read from disk"
 msgstr "Количество прочитанных дисковых блоков"
