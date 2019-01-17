@@ -12,10 +12,10 @@ object fbmBackupForm: TfbmBackupForm
   OnCreate = FormCreate
   Position = poScreenCenter
   ShowHint = True
-  LCLVersion = '1.7'
+  LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 427
+    Height = 431
     Top = 0
     Width = 512
     ActivePage = TabSheet1
@@ -24,13 +24,13 @@ object fbmBackupForm: TfbmBackupForm
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Options'
-      ClientHeight = 393
+      ClientHeight = 398
       ClientWidth = 502
       object Label1: TLabel
         Left = 6
-        Height = 20
+        Height = 19
         Top = 6
-        Width = 59
+        Width = 63
         Caption = 'Database'
         ParentColor = False
       end
@@ -39,9 +39,9 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideTop.Control = ComboBox1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 20
-        Top = 74
-        Width = 127
+        Height = 19
+        Top = 68
+        Width = 132
         Caption = 'Backup arhive name'
         FocusControl = FileNameEdit1
         ParentColor = False
@@ -53,8 +53,8 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 36
-        Top = 32
+        Height = 31
+        Top = 31
         Width = 484
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -70,8 +70,8 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 37
-        Top = 100
+        Height = 31
+        Top = 93
         Width = 461
         DialogOptions = []
         FilterIndex = 0
@@ -92,7 +92,7 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideRight.Side = asrBottom
         Left = 6
         Height = 136
-        Top = 143
+        Top = 130
         Width = 490
         Anchors = [akTop, akLeft, akRight]
         AutoFill = True
@@ -107,7 +107,7 @@ object fbmBackupForm: TfbmBackupForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 115
+        ClientHeight = 116
         ClientWidth = 488
         Columns = 2
         Items.Strings = (
@@ -128,8 +128,8 @@ object fbmBackupForm: TfbmBackupForm
       object CheckBox1: TCheckBox
         AnchorSideTop.Control = CheckBox2
         Left = 198
-        Height = 24
-        Top = 285
+        Height = 23
+        Top = 272
         Width = 113
         Caption = 'Log to screen'
         OnClick = CheckBox1Click
@@ -140,8 +140,8 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideTop.Control = CheckGroup1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 24
-        Top = 285
+        Height = 23
+        Top = 272
         Width = 90
         BorderSpacing.Top = 6
         Caption = 'Log to file'
@@ -154,8 +154,8 @@ object fbmBackupForm: TfbmBackupForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 37
-        Top = 315
+        Height = 31
+        Top = 301
         Width = 461
         DialogOptions = []
         FilterIndex = 0
@@ -171,7 +171,7 @@ object fbmBackupForm: TfbmBackupForm
     end
     object tabResult: TTabSheet
       Caption = 'Result log'
-      ClientHeight = 393
+      ClientHeight = 398
       ClientWidth = 502
       inline SynEdit1: TSynEdit
         Left = 0
@@ -696,8 +696,8 @@ object fbmBackupForm: TfbmBackupForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 433
+    Height = 42
+    Top = 437
     Width = 500
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True

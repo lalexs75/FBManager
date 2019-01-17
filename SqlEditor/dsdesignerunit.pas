@@ -168,7 +168,7 @@ var
   SQLBuilderForm: TSQLBuilderForm = nil;
 
 implementation
-uses IBManDataInspectorUnit, DOM, XMLWrite, XMLRead, fbmStrConstUnit,
+uses IBManDataInspectorUnit, {DOM, XMLWrite, XMLRead,} fbmStrConstUnit,
   fbmSqlParserUnit, fbmSQLEditor_ShowMemoUnit, LCLType;
 
 {$R *.lfm}
@@ -501,7 +501,7 @@ begin
 end;
 
 procedure TSQLBuilderForm.OpenFile(const AFileName: string);
-var
+(*var
   Doc:TXMLDocument;
   Root:TDOMElement;
 
@@ -556,9 +556,9 @@ begin
     end;
   end;
 end;
-
+*)
 begin
-  if FileExists(AFileName) then
+(*  if FileExists(AFileName) then
   begin
     ReadXMLFile(Doc, AFileName);
     try
@@ -570,11 +570,11 @@ begin
       Doc.Free;
     end;
   end;
-  GenTextClick(nil);
+  GenTextClick(nil); *)
 end;
 
 procedure TSQLBuilderForm.SaveFile(const AFileName: string);
-var
+(*var
   Doc:TXMLDocument;
   Root:TDOMElement;
 
@@ -615,9 +615,9 @@ begin
     rxWhere.Next;
   end;
 end;
-
+*)
 begin
-  Doc := TXMLDocument.Create;
+(*  Doc := TXMLDocument.Create;
   try
     Root:=Doc.CreateElement(sDesigner);
     Doc.AppendChild(Root);
@@ -627,7 +627,7 @@ begin
     WriteXML(Doc, AFileName);
   finally
     Doc.Free;
-  end;
+  end; *)
 end;
 
 procedure TSQLBuilderForm.ChangeVisualParams;

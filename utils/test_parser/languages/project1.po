@@ -836,6 +836,10 @@ msgstr ""
 msgid "Database sessions"
 msgstr ""
 
+#: fbmstrconstunit.sdatabaseuser
+msgid "Database user"
+msgstr ""
+
 #: fbmstrconstunit.sdatablocksread
 msgid "Data blocks read from disk"
 msgstr ""
@@ -2882,6 +2886,10 @@ msgctxt "fbmstrconstunit.snogarbagecollection"
 msgid "No Garbage Collection"
 msgstr ""
 
+#: fbmstrconstunit.snohandler
+msgid "No handler"
+msgstr ""
+
 #: fbmstrconstunit.snontransportable
 msgctxt "fbmstrconstunit.snontransportable"
 msgid "Non Transportable"
@@ -2906,6 +2914,10 @@ msgstr ""
 
 #: fbmstrconstunit.snotnull
 msgid "Not null"
+msgstr ""
+
+#: fbmstrconstunit.snovalidator
+msgid "No validator"
 msgstr ""
 
 #: fbmstrconstunit.snovaliditycheck
@@ -4822,8 +4834,8 @@ msgctxt "fbmstrconstunit.svalidate"
 msgid "Validate"
 msgstr ""
 
-#: fbmstrconstunit.svalidatorfuncation
-msgid "Validator funcation"
+#: fbmstrconstunit.svalidatorfunction
+msgid "Validator function"
 msgstr ""
 
 #: fbmstrconstunit.svalue

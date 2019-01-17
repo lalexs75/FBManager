@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, Buttons,
   ComCtrls, uib, EditBtn, ExtCtrls, SynEdit, RxIniPropStorage, StdCtrls,
-  ButtonPanel, XMLPropStorage, FBSQLEngineUnit;
+  ButtonPanel, FBSQLEngineUnit;
 
 type
 

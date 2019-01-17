@@ -26,8 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Spin, Buttons, EditBtn, rxdbgrid, RxIniPropStorage, ButtonPanel,
-  XMLPropStorage;
+  Spin, Buttons, EditBtn, rxdbgrid, RxIniPropStorage, ButtonPanel;
 
 type
 

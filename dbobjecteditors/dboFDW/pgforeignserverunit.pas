@@ -18,36 +18,36 @@
   MA 02111-1307, USA.
 }
 
-unit pgForeignDW;
+unit pgForeignServerUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit,
-  fdmAbstractEditorUnit, SQLEngineAbstractUnit, fbmSqlParserUnit, fbmToolsUnit,
-  sqlObjects;
+  fdmAbstractEditorUnit, fbmSqlParserUnit, pg_SqlParserUnit,
+  SQLEngineAbstractUnit, pgSQLEngineFDW, PostgreSQLEngineUnit;
 
 type
 
-  { TpgForeignDataWrap }
+  { TpgForeignServer }
 
-  TpgForeignDataWrap = class(TEditorPage)
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
+  TpgForeignServer = class(TEditorPage)
     ComboBox1: TComboBox;
-    ComboBox2: TComboBox;
-    cbOwner: TComboBox;
+    edtServerName: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    CLabel: TLabel;
+    Label5: TLabel;
     ValueListEditor1: TValueListEditor;
   private
     procedure RefreshObject;
     procedure FillDictionary;
+    procedure PrintUserMap;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -58,69 +58,64 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, PostgreSQLEngineUnit, pgSqlEngineSecurityUnit, pgSQLEngineFDW;
+uses fbmStrConstUnit, pgSqlEngineSecurityUnit;
 
 {$R *.lfm}
 
-{ TpgForeignDataWrap }
+{ TpgForeignServer }
 
-procedure TpgForeignDataWrap.RefreshObject;
+procedure TpgForeignServer.RefreshObject;
 begin
   FillDictionary;
   if DBObject.State = sdboEdit then
   begin
-    cbOwner.Text:=TPGForeignDataWrapper(DBObject).Owner;
+    edtServerName.Text:=DBObject.Caption;
+
   end;
 end;
 
-procedure TpgForeignDataWrap.FillDictionary;
-var
-  FSQLE: TSQLEnginePostgre;
+procedure TpgForeignServer.FillDictionary;
 begin
-  FSQLE:=TSQLEnginePostgre(DBObject.OwnerDB);
-  cbOwner.Items.Clear;
-  TPGSecurityRoot(FSQLE.SecurityRoot).PGUsersRoot.FillListForNames(cbOwner.Items, true);
 
 end;
 
-function TpgForeignDataWrap.PageName: string;
+procedure TpgForeignServer.PrintUserMap;
 begin
-  Result:=sForeignDataWrapper;
+
 end;
 
-constructor TpgForeignDataWrap.CreatePage(TheOwner: TComponent;
+function TpgForeignServer.PageName: string;
+begin
+  Result:='Foreign server';
+end;
+
+constructor TpgForeignServer.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
   RefreshObject;
 end;
 
-function TpgForeignDataWrap.ActionEnabled(PageAction: TEditorPageAction
-  ): boolean;
+function TpgForeignServer.ActionEnabled(PageAction: TEditorPageAction): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaPrint, epaRefresh, epaCompile];
 end;
 
-function TpgForeignDataWrap.DoMetod(PageAction: TEditorPageAction): boolean;
+function TpgForeignServer.DoMetod(PageAction: TEditorPageAction): boolean;
 begin
-  Result:=inherited DoMetod(PageAction);
+  Result:=true;
+  case PageAction of
+    epaPrint:PrintUserMap;
+    epaRefresh:RefreshObject;
+  end;
 end;
 
-procedure TpgForeignDataWrap.Localize;
+procedure TpgForeignServer.Localize;
 begin
-  Label1.Caption:=sHandlerFunction;
-  Label2.Caption:=sValidatorFunction;
-  Label3.Caption:=sOptions;
-  Label4.Caption:=sOwner;
-  CheckBox1.Caption:=sNoHandler;
-  CheckBox2.Caption:=sNoValidator;
-
-  ValueListEditor1.TitleCaptions.Clear;
-  ValueListEditor1.TitleCaptions.Add(sParamName);
-  ValueListEditor1.TitleCaptions.Add(sValue);
+  inherited Localize;
 end;
 
-function TpgForeignDataWrap.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
+function TpgForeignServer.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 begin
   Result:=inherited SetupSQLObject(ASQLObject);
 end;

@@ -53,7 +53,7 @@ procedure SaveCompletionToFile(AFileName:string);
 procedure SaveCompletionDefFile;
 procedure InitStdAutoCompletions;
 implementation
-uses DOM, XMLWrite, XMLRead, fbmToolsUnit, LCLProc, fbmStrConstUnit;
+uses {DOM, XMLWrite, XMLRead, }fbmToolsUnit, LCLProc, fbmStrConstUnit;
 
 procedure FillAutoCompleteItems(Complete: TSynAutoComplete);
 var
@@ -82,13 +82,13 @@ begin
 end;
 
 procedure LoadCompletionFromFile(AFileName: string);
-var
+(*var
   Doc:TXMLDocument;
   ItemR, Item:TDOMElement;
   Cnt, i:integer;
-  R:TAutoCompletionItem;
+  R:TAutoCompletionItem; *)
 begin
-  AutoCompletionList.Clear;
+(*  AutoCompletionList.Clear;
   ReadXMLFile(Doc, AFileName);
   ItemR:=Doc.FindNode(FRootName) as TDOMElement;
   Cnt:=StrToIntDef(ItemR.GetAttribute('Count'), 0);
@@ -105,17 +105,17 @@ begin
       R.Enabled:=StrToBoolDef(Item.GetAttribute('Enabled'), true);
     end;
   end;
-  Doc.Free;
+  Doc.Free; *)
 end;
 
 procedure SaveCompletionToFile(AFileName: string);
-var
+(*var
   Doc:TXMLDocument;
   ItemR, Item:TDOMElement;
   i:integer;
-  R:TAutoCompletionItem;
+  R:TAutoCompletionItem; *)
 begin
-  Doc := TXMLDocument.Create;
+(*  Doc := TXMLDocument.Create;
   try
     ItemR:=Doc.CreateElement(FRootName);
     Doc.AppendChild(ItemR);
@@ -133,7 +133,7 @@ begin
     WriteXML(Doc, AFileName);
   finally
     Doc.Free;
-  end
+  end *)
 end;
 
 procedure SaveCompletionDefFile;

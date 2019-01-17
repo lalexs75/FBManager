@@ -24,7 +24,7 @@ unit fbmsqlscript;
 interface
 
 uses
-  Classes, SysUtils, XMLConf, LResources, Forms, Controls, Graphics, Dialogs,
+  Classes, SysUtils, {XMLConf, }LResources, Forms, Controls, Graphics, Dialogs,
   ActnList, rxtoolbar, Menus, SynEdit, LMessages, StdCtrls, ExtCtrls, LCLType,
   ComCtrls, fbmToolsUnit, fdbm_SynEditorUnit, ibmanagertypesunit, sqlObjects,
   SQLEngineAbstractUnit, SQLEngineCommonTypesUnit;

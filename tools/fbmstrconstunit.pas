@@ -886,7 +886,7 @@ resourcestring
   sNullsPos                         = 'Nulls pos';
   sLanguageName                     = 'Language name';
   sHandlerFunction                  = 'Handler function';
-  sValidatorFuncation               = 'Validator funcation';
+  sValidatorFunction                = 'Validator function';
   sTrusted                          = 'Trusted';
   sExtrenalFile                     = 'Extrenal file';
   sNormalMode                       = 'Normal mode';
@@ -900,6 +900,8 @@ resourcestring
   sIndexSize                        = 'Index size';
   sStatRecordCount                  = 'Record count for statistic';
   sStatPageCount                    = 'Page count for statistic';
+  sNoHandler                        = 'No handler';
+  sNoValidator                      = 'No validator';
 
 
   sNewForeignKey                    = 'New foreign key';
@@ -959,6 +961,31 @@ resourcestring
   sBackupSuccessfullyFinished       = 'Backup successfully finished';
   sRestoreSuccessfullyFinished      = 'Restore successfully finished';
   sRefreshInterval                  = 'Refresh interval';
+  sConversion                       = 'Conversion';
+  sServer                           = 'Server';
+  sColumn                           = 'Column';
+  sCollation                        = 'Collation';
+  sFilter                           = 'Filter';
+  sParameter                        = 'Parameter';
+  sAccessMethod                     = 'AccessMethod';
+  sAggregate                        = 'Aggregate';
+  sMaterializedView                 = 'MaterializedView';
+  sCast                             = 'Cast';
+  sConstraint                       = 'Constraint';
+  sForeignTable                     = 'ForeignTable';
+  sForeignServer                    = 'ForeignServer';
+  sLargeObject                      = 'LargeObject';
+  sPolicy                           = 'Policy';
+  sAutoIncFields                    = 'AutoIncFields';
+  sFTSConfig                        = 'FTSConfig';
+  sFTSDictionary                    = 'FTSDictionary';
+  sFTSParser                        = 'FTSParser';
+  sFTSTemplate                      = 'FTSTemplate';
+  sTransform                        = 'Transform';
+  sOperator                         = 'Operator';
+  sOperatorClass                    = 'OperatorClass';
+  sOperatorFamily                   = 'OperatorFamily';
+  sUserMapping                      = 'UserMapping';
 
   sBuildConnectionString            = 'Build connection string';
   sRegistredDatabase                = 'Registred database';

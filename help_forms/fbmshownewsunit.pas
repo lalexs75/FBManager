@@ -18,7 +18,7 @@
   MA 02111-1307, USA.
 }
 
-unit fbmShowNewUnit;
+unit fbmShowNewsUnit;
 
 {$I fbmanager_define.inc}
 
@@ -30,9 +30,9 @@ uses
 
 type
 
-  { TfbmShowNewForm }
+  { TfbmShowNewsForm }
 
-  TfbmShowNewForm = class(TForm)
+  TfbmShowNewsForm = class(TForm)
     MenuItem5: TMenuItem;
     newsRefresh: TAction;
     MenuItem1: TMenuItem;
@@ -56,25 +56,25 @@ type
 
 procedure ShowNews;
 implementation
-uses fbmFileProviderUnit, fbmToolsUnit, DOM, XMLRead, SQLEngineCommonTypesUnit,
+uses fbmFileProviderUnit, fbmToolsUnit, {DOM, XMLRead,} SQLEngineCommonTypesUnit,
   IBManMainUnit;
 
 {$R *.lfm}
 
 var
-  fbmShowNewForm: TfbmShowNewForm;
+  fbmShowNewsForm: TfbmShowNewsForm;
 
 procedure ShowNews;
 begin
-  if not Assigned(fbmShowNewForm) then
-    fbManagerMainForm.ChildWindowsCreate(fbmShowNewForm, TfbmShowNewForm)
+  if not Assigned(fbmShowNewsForm) then
+    fbManagerMainForm.ChildWindowsCreate(fbmShowNewsForm, TfbmShowNewsForm)
   else
-    fbManagerMainForm.ChildWindowsShow(fbmShowNewForm);
+    fbManagerMainForm.ChildWindowsShow(fbmShowNewsForm);
 end;
 
-{ TfbmShowNewForm }
+{ TfbmShowNewsForm }
 
-procedure TfbmShowNewForm.FormCreate(Sender: TObject);
+procedure TfbmShowNewsForm.FormCreate(Sender: TObject);
 begin
   IpHtmlPanel1.Align:=alClient;
   IpHtmlPanel1.DataProvider:=TFileDataProvider.Create(Self);
@@ -83,7 +83,7 @@ begin
   newsRefreshExecute(nil);
 end;
 
-procedure TfbmShowNewForm.newsRefreshExecute(Sender: TObject);
+procedure TfbmShowNewsForm.newsRefreshExecute(Sender: TObject);
 var
   S:string;
   MemF:TMemoryStream;
@@ -157,7 +157,7 @@ begin
   IpHtmlPanel1.OpenURL(S);
 end;
 
-procedure TfbmShowNewForm.wndCloseExecute(Sender: TObject);
+procedure TfbmShowNewsForm.wndCloseExecute(Sender: TObject);
 begin
   Close;
 end;

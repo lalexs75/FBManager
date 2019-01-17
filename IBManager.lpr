@@ -119,7 +119,8 @@ uses
 
   cfAutoIncFieldUnit, fbmMakeSQLFromDataSetUnit, fdbm_DescriptionUnit,
   fdmUserEditor_MySQLUnit, otMySQLTriggerTemplateUnit,
-  SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit, pgForeignUserMapping
+  SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit,
+  pgForeignUserMapping, pgForeignServerUnit
 
   ;
 

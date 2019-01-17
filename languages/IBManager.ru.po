@@ -28,6 +28,10 @@ msgctxt "fbmstrconstunit.sabout"
 msgid "About"
 msgstr "О программе"
 
+#: fbmstrconstunit.saccessmethod
+msgid "AccessMethod"
+msgstr ""
+
 #: fbmstrconstunit.saccessmetod
 msgid "Access metod"
 msgstr "Метод оступа"
@@ -104,6 +108,10 @@ msgstr "После вставки"
 #: fbmstrconstunit.safterupdate
 msgid "After update"
 msgstr "После обновления"
+
+#: fbmstrconstunit.saggregate
+msgid "Aggregate"
+msgstr ""
 
 #: fbmstrconstunit.salias
 msgid "Alias"
@@ -207,6 +215,10 @@ msgstr "Автоматическая выдача привелегий при к
 #: fbmstrconstunit.sautoincfield
 msgid "Auto increment field"
 msgstr "Поле autoincremet"
+
+#: fbmstrconstunit.sautoincfields
+msgid "AutoIncFields"
+msgstr ""
 
 #: fbmstrconstunit.sautoincremet
 msgid "Autoincremet"
@@ -352,6 +364,10 @@ msgstr "Курсор всегда видимый"
 msgid "Case sensetive"
 msgstr "Регистронезависимый"
 
+#: fbmstrconstunit.scast
+msgid "Cast"
+msgstr ""
+
 #: fbmstrconstunit.schangecount
 msgid "Change count"
 msgstr "Всего изменений"
@@ -436,6 +452,10 @@ msgstr "Свернуть всё"
 msgid "Collate"
 msgstr "Сортировка"
 
+#: fbmstrconstunit.scollation
+msgid "Collation"
+msgstr ""
+
 #: fbmstrconstunit.scollationlist
 msgid "Collation list"
 msgstr "Список сортировок"
@@ -451,6 +471,10 @@ msgstr "Столбцы"
 #: fbmstrconstunit.scolor
 msgid "Color"
 msgstr "Цвет"
+
+#: fbmstrconstunit.scolumn
+msgid "Column"
+msgstr ""
 
 #: fbmstrconstunit.scomfbmstyle
 msgid "Use FBManager style /*$$FBMC$$*/"
@@ -571,6 +595,10 @@ msgstr "Строка подключения"
 msgid "Connection string has been successfully copied to clipboard."
 msgstr "Строка подключения скопирована в буфер обмена."
 
+#: fbmstrconstunit.sconstraint
+msgid "Constraint"
+msgstr ""
+
 #: fbmstrconstunit.sconstraintdelete
 msgctxt "fbmstrconstunit.sconstraintdelete"
 msgid "Delete constraint"
@@ -589,6 +617,10 @@ msgstr "Наименование ограничения"
 msgctxt "fbmstrconstunit.sconstraintnew"
 msgid "New constraint"
 msgstr "Новое ограничение"
+
+#: fbmstrconstunit.sconversion
+msgid "Conversion"
+msgstr ""
 
 #: fbmstrconstunit.sconvertexttables
 msgctxt "fbmstrconstunit.sconvertexttables"
@@ -872,7 +904,7 @@ msgstr "Подключения к БД"
 
 #: fbmstrconstunit.sdatabaseuser
 msgid "Database user"
-msgstr ""
+msgstr "Пользователь БД"
 
 #: fbmstrconstunit.sdatablocksread
 msgid "Data blocks read from disk"
@@ -1814,6 +1846,10 @@ msgstr "Фактор заполнения"
 msgid "Fill query param"
 msgstr "Заполнить параметры запроса"
 
+#: fbmstrconstunit.sfilter
+msgid "Filter"
+msgstr ""
+
 #: fbmstrconstunit.sfilterintable
 msgid "Filter in table"
 msgstr "Фильтр в таблице"
@@ -1940,6 +1976,14 @@ msgstr "Правило внешнего ключа"
 msgid "Foreign keys"
 msgstr "Внешние ключи"
 
+#: fbmstrconstunit.sforeignserver
+msgid "ForeignServer"
+msgstr ""
+
+#: fbmstrconstunit.sforeigntable
+msgid "ForeignTable"
+msgstr ""
+
 #: fbmstrconstunit.sfortable
 msgctxt "fbmstrconstunit.sfortable"
 msgid "For table"
@@ -1965,6 +2009,22 @@ msgstr "Удалить этот алиас?"
 msgctxt "fbmstrconstunit.sfromdate"
 msgid "From date"
 msgstr "С даты"
+
+#: fbmstrconstunit.sftsconfig
+msgid "FTSConfig"
+msgstr ""
+
+#: fbmstrconstunit.sftsdictionary
+msgid "FTSDictionary"
+msgstr ""
+
+#: fbmstrconstunit.sftsparser
+msgid "FTSParser"
+msgstr ""
+
+#: fbmstrconstunit.sftstemplate
+msgid "FTSTemplate"
+msgstr ""
 
 #: fbmstrconstunit.sfucntnotcomplete
 msgid "Function not complete..."
@@ -2384,6 +2444,10 @@ msgstr "Язык"
 msgid "Language name"
 msgstr "Имя языка"
 
+#: fbmstrconstunit.slargeobject
+msgid "LargeObject"
+msgstr ""
+
 #: fbmstrconstunit.slastname
 msgid "Last name"
 msgstr "Фамилия"
@@ -2508,6 +2572,10 @@ msgstr "Создать текст SQL"
 #: fbmstrconstunit.smanualedit
 msgid "Manual edit"
 msgstr "Ручной ввод"
+
+#: fbmstrconstunit.smaterializedview
+msgid "MaterializedView"
+msgstr ""
 
 #: fbmstrconstunit.smaterializedviews
 msgid "Materialized View"
@@ -2998,6 +3066,10 @@ msgctxt "fbmstrconstunit.snogarbagecollection"
 msgid "No Garbage Collection"
 msgstr "Не собирать мусор"
 
+#: fbmstrconstunit.snohandler
+msgid "No handler"
+msgstr "Без обработчика"
+
 #: fbmstrconstunit.snontransportable
 msgctxt "fbmstrconstunit.snontransportable"
 msgid "Non Transportable"
@@ -3024,6 +3096,10 @@ msgstr "Не подключено..."
 msgctxt "fbmstrconstunit.snotnull"
 msgid "Not null"
 msgstr "Не пусто"
+
+#: fbmstrconstunit.snovalidator
+msgid "No validator"
+msgstr "Без проверки"
 
 #: fbmstrconstunit.snovaliditycheck
 msgctxt "fbmstrconstunit.snovaliditycheck"
@@ -3318,6 +3394,18 @@ msgstr "Отркыть в редакторе"
 msgid "Open text from history in SQL editor"
 msgstr "Открыть текст запроса из истории в SQL редакторе"
 
+#: fbmstrconstunit.soperator
+msgid "Operator"
+msgstr ""
+
+#: fbmstrconstunit.soperatorclass
+msgid "OperatorClass"
+msgstr ""
+
+#: fbmstrconstunit.soperatorfamily
+msgid "OperatorFamily"
+msgstr ""
+
 #: fbmstrconstunit.soptions
 msgctxt "fbmstrconstunit.soptions"
 msgid "Options"
@@ -3374,6 +3462,10 @@ msgstr "Размер страницы = "
 #: fbmstrconstunit.spagesize1
 msgid "Page size"
 msgstr "Размер страницы"
+
+#: fbmstrconstunit.sparameter
+msgid "Parameter"
+msgstr ""
 
 #: fbmstrconstunit.sparamname
 msgid "Param name"
@@ -3502,6 +3594,10 @@ msgstr "Не определено поле первичного ключа дл�
 #: fbmstrconstunit.spkname
 msgid "Primary key name"
 msgstr "Имя первичного ключа"
+
+#: fbmstrconstunit.spolicy
+msgid "Policy"
+msgstr ""
 
 #: fbmstrconstunit.sport
 msgctxt "fbmstrconstunit.sport"
@@ -4117,6 +4213,10 @@ msgstr "Последовательность"
 msgid "Sequences"
 msgstr "Последовательности"
 
+#: fbmstrconstunit.sserver
+msgid "Server"
+msgstr ""
+
 #: fbmstrconstunit.sservername
 msgid "Server name    = "
 msgstr "Имя сервера            = "
@@ -4345,7 +4445,7 @@ msgstr "Статистика"
 
 #: fbmstrconstunit.sstatpagecount
 msgid "Page count for statistic"
-msgstr ""
+msgstr "Кол-во страниц для статистики"
 
 #: fbmstrconstunit.sstatrecordcount
 msgid "Record count for statistic"
@@ -4716,6 +4816,10 @@ msgstr "Количество зафиксированных транзакций
 msgid "Transactions rollback"
 msgstr "Количество транзакций для которых был выполнен откат"
 
+#: fbmstrconstunit.stransform
+msgid "Transform"
+msgstr ""
+
 #: fbmstrconstunit.strigger
 msgctxt "fbmstrconstunit.strigger"
 msgid "Trigger"
@@ -4972,6 +5076,10 @@ msgstr "ID пользователя"
 msgid "User list"
 msgstr "Список пользователей"
 
+#: fbmstrconstunit.susermapping
+msgid "UserMapping"
+msgstr ""
+
 #: fbmstrconstunit.susername
 msgid "UserName       = "
 msgstr "Имя пользователя = "
@@ -5009,8 +5117,8 @@ msgstr "Использовать имя таблицы как песевдони
 msgid "Validate"
 msgstr "Проверка"
 
-#: fbmstrconstunit.svalidatorfuncation
-msgid "Validator funcation"
+#: fbmstrconstunit.svalidatorfunction
+msgid "Validator function"
 msgstr "Функция проверки"
 
 #: fbmstrconstunit.svalue

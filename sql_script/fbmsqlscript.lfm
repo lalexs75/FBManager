@@ -60,17 +60,13 @@ object FBMSqlScripForm: TFBMSqlScripForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
+    Height = 36
     Top = 0
     Width = 759
     Items = <    
       item
         Action = fileOpen
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 96
         DropDownMenu = PopupMenu2
         ShowCaption = True
         ButtonStyle = tbrDropDownExtra
@@ -78,37 +74,21 @@ object FBMSqlScripForm: TFBMSqlScripForm
       item
         Action = fileSave
         Visible = True
-        Left = 101
-        Height = 21
-        Top = 5
-        Width = 77
         ShowCaption = True
       end    
       item
         Action = scriptRun
         Visible = True
-        Left = 178
-        Height = 21
-        Top = 5
-        Width = 50
         ShowCaption = True
       end    
       item
         Action = scriptStop
         Visible = True
-        Left = 228
-        Height = 21
-        Top = 5
-        Width = 56
         ShowCaption = True
       end    
       item
         Action = dbConnection
         Visible = True
-        Left = 284
-        Height = 21
-        Top = 5
-        Width = 42
         DropDownMenu = PopupMenu1
         ShowCaption = True
         ButtonStyle = tbrDropDown
@@ -119,7 +99,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 36
     ClientWidth = 759
     TabOrder = 0
     object CheckBox1: TCheckBox
@@ -127,10 +107,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 615
+      Left = 605
       Height = 23
-      Top = 4
-      Width = 133
+      Top = 7
+      Width = 143
       Action = vShowObjTree
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -145,7 +125,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideRight.Side = asrBottom
       Left = 380
       Height = 20
-      Top = 5
+      Top = 8
       Width = 374
       Anchors = [akTop, akLeft, akRight]
       Min = 1
@@ -169,7 +149,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Memo1: TMemo
     Left = 0
     Height = 90
-    Top = 602
+    Top = 600
     Width = 759
     Align = alBottom
     Lines.Strings = (
@@ -181,19 +161,18 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 597
+    Top = 595
     Width = 759
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 566
-    Top = 31
+    Height = 559
+    Top = 36
     Width = 121
     Align = alLeft
     ExpandSignSize = 16
-    Images = fbManagerMainForm.ImageListNormal
     PopupMenu = PopupMenu3
     ReadOnly = True
     TabOrder = 3
@@ -204,14 +183,14 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 566
-    Top = 31
+    Height = 559
+    Top = 36
     Width = 5
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 19
-    Top = 692
+    Height = 21
+    Top = 690
     Width = 759
     Panels = <>
   end

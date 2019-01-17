@@ -1,37 +1,33 @@
-object fbmShowNewForm: TfbmShowNewForm
+object fbmShowNewsForm: TfbmShowNewsForm
   Left = 298
   Height = 544
   Top = 178
   Width = 624
   ActiveControl = ToolPanel1
   Caption = 'FBManager news...'
-  ClientHeight = 521
+  ClientHeight = 519
   ClientWidth = 624
   Menu = MainMenu1
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.1'
+  LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
+    Height = 36
     Top = 0
     Width = 624
     Items = <    
       item
         Action = newsRefresh
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 75
         ShowCaption = True
       end>
-    ImageList = fbManagerMainForm.ImageListNormal
     ToolBarStyle = tbsWindowsXP
     Options = [tpFlatBtns]
+    CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 36
     ClientWidth = 624
     TabOrder = 0
   end
@@ -48,12 +44,15 @@ object fbmShowNewForm: TfbmShowNewForm
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
+    PrintSettings.Preview.Left = 480
+    PrintSettings.Preview.Top = 270
+    PrintSettings.Preview.Width = 1440
+    PrintSettings.Preview.Height = 810
     TabOrder = 1
   end
   object ActionList1: TActionList
-    Images = fbManagerMainForm.ImageListNormal
-    left = 312
-    top = 136
+    Left = 312
+    Top = 136
     object wndClose: TAction
       Category = 'Window'
       Caption = 'Close'
@@ -73,9 +72,8 @@ object fbmShowNewForm: TfbmShowNewForm
     end
   end
   object MainMenu1: TMainMenu
-    Images = fbManagerMainForm.ImageListNormal
-    left = 231
-    top = 136
+    Left = 231
+    Top = 136
     object MenuItem1: TMenuItem
       Caption = 'Window'
       object MenuItem2: TMenuItem
@@ -92,8 +90,7 @@ object fbmShowNewForm: TfbmShowNewForm
     end
   end
   object PopupMenu1: TPopupMenu
-    Images = fbManagerMainForm.ImageListNormal
-    left = 400
-    top = 136
+    Left = 400
+    Top = 136
   end
 end

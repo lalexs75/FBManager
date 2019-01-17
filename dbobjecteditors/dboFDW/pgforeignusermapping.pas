@@ -135,6 +135,10 @@ begin
   Label1.Caption:=sDatabaseUser;
   Label2.Caption:=sServerName1;
   Label3.Caption:=sOptions;
+
+  ValueListEditor1.TitleCaptions.Clear;
+  ValueListEditor1.TitleCaptions.Add(sParamName);
+  ValueListEditor1.TitleCaptions.Add(sValue);
 end;
 
 function TpgForeignUserMap.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;

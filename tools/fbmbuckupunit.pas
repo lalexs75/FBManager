@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, Buttons,
   ComCtrls, StdCtrls, uib, EditBtn, ExtCtrls, SynEdit, RxIniPropStorage,
-  ButtonPanel, XMLPropStorage;
+  ButtonPanel;
 
 type
 

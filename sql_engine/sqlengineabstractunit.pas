@@ -382,6 +382,7 @@ type
 
     property Groups[AIndex:integer]:TDBRootObject read GetGroups;
     property CountGroups:integer read GetCountGroups;
+    property Objects:TDBObjectsList read FObjects;
   end;
 
   { TDBField }

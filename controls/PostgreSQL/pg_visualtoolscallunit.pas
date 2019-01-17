@@ -105,7 +105,7 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmpgTableCheckConstaint_EditUnit,                  //Права доступа
      fbmPGLanguageUnit,                 //Языки
      fbmTableStatisticUnit,
-     pgForeignUserMapping,
+     pgForeignUserMapping, pgForeignServerUnit,
 
      pg_con_EditorPrefUnit,
 
@@ -297,8 +297,8 @@ begin
     );
 
   RegisterObjEditor(TPGForeignServer,
-      [TfbmObjectEditorDescriptionFrame],
-      [TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+      [TpgForeignServer],
+      [TPGForeignServer, TfbmDDLPage]
   );
 
   RegisterObjEditor(TPGForeignUser,

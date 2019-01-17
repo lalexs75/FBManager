@@ -18,6 +18,10 @@ msgctxt "fbmstrconstunit.sabout"
 msgid "About"
 msgstr ""
 
+#: fbmstrconstunit.saccessmethod
+msgid "AccessMethod"
+msgstr ""
+
 #: fbmstrconstunit.saccessmetod
 msgid "Access metod"
 msgstr ""
@@ -93,6 +97,10 @@ msgstr ""
 
 #: fbmstrconstunit.safterupdate
 msgid "After update"
+msgstr ""
+
+#: fbmstrconstunit.saggregate
+msgid "Aggregate"
 msgstr ""
 
 #: fbmstrconstunit.salias
@@ -196,6 +204,10 @@ msgstr ""
 
 #: fbmstrconstunit.sautoincfield
 msgid "Auto increment field"
+msgstr ""
+
+#: fbmstrconstunit.sautoincfields
+msgid "AutoIncFields"
 msgstr ""
 
 #: fbmstrconstunit.sautoincremet
@@ -342,6 +354,10 @@ msgstr ""
 msgid "Case sensetive"
 msgstr ""
 
+#: fbmstrconstunit.scast
+msgid "Cast"
+msgstr ""
+
 #: fbmstrconstunit.schangecount
 msgid "Change count"
 msgstr ""
@@ -426,6 +442,10 @@ msgstr ""
 msgid "Collate"
 msgstr ""
 
+#: fbmstrconstunit.scollation
+msgid "Collation"
+msgstr ""
+
 #: fbmstrconstunit.scollationlist
 msgid "Collation list"
 msgstr ""
@@ -440,6 +460,10 @@ msgstr ""
 
 #: fbmstrconstunit.scolor
 msgid "Color"
+msgstr ""
+
+#: fbmstrconstunit.scolumn
+msgid "Column"
 msgstr ""
 
 #: fbmstrconstunit.scomfbmstyle
@@ -561,6 +585,10 @@ msgstr ""
 msgid "Connection string has been successfully copied to clipboard."
 msgstr ""
 
+#: fbmstrconstunit.sconstraint
+msgid "Constraint"
+msgstr ""
+
 #: fbmstrconstunit.sconstraintdelete
 msgctxt "fbmstrconstunit.sconstraintdelete"
 msgid "Delete constraint"
@@ -579,6 +607,10 @@ msgstr ""
 #: fbmstrconstunit.sconstraintnew
 msgctxt "fbmstrconstunit.sconstraintnew"
 msgid "New constraint"
+msgstr ""
+
+#: fbmstrconstunit.sconversion
+msgid "Conversion"
 msgstr ""
 
 #: fbmstrconstunit.sconvertexttables
@@ -1808,6 +1840,10 @@ msgstr ""
 msgid "Fill query param"
 msgstr ""
 
+#: fbmstrconstunit.sfilter
+msgid "Filter"
+msgstr ""
+
 #: fbmstrconstunit.sfilterintable
 msgid "Filter in table"
 msgstr ""
@@ -1936,6 +1972,14 @@ msgctxt "fbmstrconstunit.sforeignkeys"
 msgid "Foreign keys"
 msgstr ""
 
+#: fbmstrconstunit.sforeignserver
+msgid "ForeignServer"
+msgstr ""
+
+#: fbmstrconstunit.sforeigntable
+msgid "ForeignTable"
+msgstr ""
+
 #: fbmstrconstunit.sfortable
 msgctxt "fbmstrconstunit.sfortable"
 msgid "For table"
@@ -1960,6 +2004,22 @@ msgstr ""
 #: fbmstrconstunit.sfromdate
 msgctxt "fbmstrconstunit.sfromdate"
 msgid "From date"
+msgstr ""
+
+#: fbmstrconstunit.sftsconfig
+msgid "FTSConfig"
+msgstr ""
+
+#: fbmstrconstunit.sftsdictionary
+msgid "FTSDictionary"
+msgstr ""
+
+#: fbmstrconstunit.sftsparser
+msgid "FTSParser"
+msgstr ""
+
+#: fbmstrconstunit.sftstemplate
+msgid "FTSTemplate"
 msgstr ""
 
 #: fbmstrconstunit.sfucntnotcomplete
@@ -2380,6 +2440,10 @@ msgstr ""
 msgid "Language name"
 msgstr ""
 
+#: fbmstrconstunit.slargeobject
+msgid "LargeObject"
+msgstr ""
+
 #: fbmstrconstunit.slastname
 msgid "Last name"
 msgstr ""
@@ -2502,6 +2566,10 @@ msgstr ""
 
 #: fbmstrconstunit.smanualedit
 msgid "Manual edit"
+msgstr ""
+
+#: fbmstrconstunit.smaterializedview
+msgid "MaterializedView"
 msgstr ""
 
 #: fbmstrconstunit.smaterializedviews
@@ -2994,6 +3062,10 @@ msgctxt "fbmstrconstunit.snogarbagecollection"
 msgid "No Garbage Collection"
 msgstr ""
 
+#: fbmstrconstunit.snohandler
+msgid "No handler"
+msgstr ""
+
 #: fbmstrconstunit.snontransportable
 msgctxt "fbmstrconstunit.snontransportable"
 msgid "Non Transportable"
@@ -3019,6 +3091,10 @@ msgstr ""
 #: fbmstrconstunit.snotnull
 msgctxt "fbmstrconstunit.snotnull"
 msgid "Not null"
+msgstr ""
+
+#: fbmstrconstunit.snovalidator
+msgid "No validator"
 msgstr ""
 
 #: fbmstrconstunit.snovaliditycheck
@@ -3316,6 +3392,18 @@ msgstr ""
 msgid "Open text from history in SQL editor"
 msgstr ""
 
+#: fbmstrconstunit.soperator
+msgid "Operator"
+msgstr ""
+
+#: fbmstrconstunit.soperatorclass
+msgid "OperatorClass"
+msgstr ""
+
+#: fbmstrconstunit.soperatorfamily
+msgid "OperatorFamily"
+msgstr ""
+
 #: fbmstrconstunit.soptions
 msgctxt "fbmstrconstunit.soptions"
 msgid "Options"
@@ -3371,6 +3459,10 @@ msgstr ""
 
 #: fbmstrconstunit.spagesize1
 msgid "Page size"
+msgstr ""
+
+#: fbmstrconstunit.sparameter
+msgid "Parameter"
 msgstr ""
 
 #: fbmstrconstunit.sparamname
@@ -3499,6 +3591,10 @@ msgstr ""
 
 #: fbmstrconstunit.spkname
 msgid "Primary key name"
+msgstr ""
+
+#: fbmstrconstunit.spolicy
+msgid "Policy"
 msgstr ""
 
 #: fbmstrconstunit.sport
@@ -4113,6 +4209,10 @@ msgstr ""
 msgid "Sequences"
 msgstr ""
 
+#: fbmstrconstunit.sserver
+msgid "Server"
+msgstr ""
+
 #: fbmstrconstunit.sservername
 msgid "Server name    = "
 msgstr ""
@@ -4711,6 +4811,10 @@ msgstr ""
 msgid "Transactions rollback"
 msgstr ""
 
+#: fbmstrconstunit.stransform
+msgid "Transform"
+msgstr ""
+
 #: fbmstrconstunit.strigger
 msgctxt "fbmstrconstunit.strigger"
 msgid "Trigger"
@@ -4964,6 +5068,10 @@ msgstr ""
 msgid "User list"
 msgstr ""
 
+#: fbmstrconstunit.susermapping
+msgid "UserMapping"
+msgstr ""
+
 #: fbmstrconstunit.susername
 msgid "UserName       = "
 msgstr ""
@@ -5002,8 +5110,8 @@ msgctxt "fbmstrconstunit.svalidate"
 msgid "Validate"
 msgstr ""
 
-#: fbmstrconstunit.svalidatorfuncation
-msgid "Validator funcation"
+#: fbmstrconstunit.svalidatorfunction
+msgid "Validator function"
 msgstr ""
 
 #: fbmstrconstunit.svalue

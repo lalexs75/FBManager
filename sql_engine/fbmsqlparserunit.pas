@@ -25,7 +25,7 @@ unit fbmSqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineCommonTypesUnit, sqlObjects, DOM;
+  Classes, SysUtils, SQLEngineCommonTypesUnit, sqlObjects{, DOM};
 
 const
   CharDelimiters = [',',':','}','{',';', '(', ')', '.', '[', ']', '=', '@'];
@@ -79,8 +79,8 @@ type
     procedure AddChildToken(AToken:TSQLTokenRecord);
     procedure AddChildToken(ATokens:array of TSQLTokenRecord);overload;
     procedure CopyChildTokens(ASQLToken:TSQLTokenRecord);
-    procedure Save(APath:string; Doc:TDOMDocument);
-    procedure Load(APath:string; Doc:TDOMDocument);
+//    procedure Save(APath:string; Doc:TDOMDocument);
+//    procedure Load(APath:string; Doc:TDOMDocument);
 
     property Child:TSQLTokenList read FChild;
     property SQLCommand:string read FSQLCommand write FSQLCommand;
@@ -189,8 +189,8 @@ type
     function AddSQLTokens(AToken:TSQLToken; const Parent:TSQLTokenRecord; const SQLCommand:string; AOptions:TSQLTokenOptions; ATag:integer = 0; ADBObjectKind:TDBObjectKind = okOther; ACaption:string = ''):TSQLTokenRecord;
     function AddSQLTokens(AToken:TSQLToken; const Parents:array of TSQLTokenRecord; const ASQLCommand:string; AOptions:TSQLTokenOptions; ATag:integer = 0; ADBObjectKind:TDBObjectKind = okOther; ACaption:string = ''):TSQLTokenRecord;overload;
     function SQLToken:TSQLToken;
-    procedure Save(ASqlNode: TDOMElement; ADoc:TDOMDocument);
-    procedure Load(APath:string; Doc:TDOMDocument);
+    //procedure Save(ASqlNode: TDOMElement; ADoc:TDOMDocument);
+    //procedure Load(APath:string; Doc:TDOMDocument);
     procedure Clear;override;
 
 
@@ -732,8 +732,8 @@ function SQLParseCommand(const Sql:string; SQLParserClass:TSQLCommandAbstractCla
 function SQLStatamentAtXY(const ALines:TStrings; X, Y:Integer):string;
 
 procedure RegisterSQLStatment(ASQLEngineClass:TClass; ACmd:TSQLCommandAbstractClass; ASignature:string);
-procedure SaveParserTree(AFileName:string);
-procedure LoadParserTree(AFileName:string);
+//procedure SaveParserTree(AFileName:string);
+//procedure LoadParserTree(AFileName:string);
 
 type
 
@@ -747,8 +747,8 @@ type
     Cmd:TSQLCommandAbstractClass;
     Signature:string;
     destructor Destroy; override;
-    procedure Save(R:TDOMElement; Doc: TXMLDocument);
-    procedure Load;
+    //procedure Save(R:TDOMElement; Doc: TXMLDocument);
+    //procedure Load;
     property Item:TSQLCommandAbstract read FItem;
   end;
 
@@ -766,7 +766,7 @@ var
   SQLStatmentRecordArray : TSQLStatmentRecords = nil;
 
 implementation
-uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, XMLWrite, XMLRead, typinfo,
+uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, {XMLWrite, XMLRead, }typinfo,
   SQLEngineInternalToolsUnit;
 
 
@@ -877,7 +877,7 @@ begin
   Item.SQLEngineClass:=ASQLEngineClass;
   Item.FItem:=ACmd.Create(nil);
 end;
-
+(*
 procedure SaveParserTree(AFileName: string);
 var
   Doc: TXMLDocument;
@@ -901,7 +901,7 @@ procedure LoadParserTree(AFileName: string);
 begin
 
 end;
-
+*)
 { TSQLCreateCommandAbstract }
 
 procedure TSQLCreateCommandAbstract.InternalProcessChildToken(
@@ -1617,7 +1617,7 @@ begin
     FItem.Free;
   inherited Destroy;
 end;
-
+(*
 procedure TSQLStatmentRecord.Save(R: TDOMElement; Doc: TXMLDocument);
 var
   S: String;
@@ -1639,7 +1639,7 @@ procedure TSQLStatmentRecord.Load;
 begin
 
 end;
-
+*)
 function TSQLStatmentRecords.GetItems(AIndex: integer): TSQLStatmentRecord;
 begin
   Result:=TSQLStatmentRecord(Get(AIndex));
@@ -2724,7 +2724,7 @@ begin
   else
     Result:=stNone;
 end;
-
+(*
 procedure TSQLCommandAbstract.Save(ASqlNode: TDOMElement; ADoc: TDOMDocument);
 var
   A: TSQLTokenOptions;
@@ -2769,7 +2769,7 @@ procedure TSQLCommandAbstract.Load(APath: string; Doc: TDOMDocument);
 begin
   //
 end;
-
+*)
 procedure TSQLCommandAbstract.Clear;
 begin
   inherited Clear;
@@ -3717,7 +3717,7 @@ begin
   for P in ASQLToken.Child do
     Child.Add(P);
 end;
-
+(*
 procedure TSQLTokenRecord.Save(APath: string; Doc: TDOMDocument);
 begin
 
@@ -3727,7 +3727,7 @@ procedure TSQLTokenRecord.Load(APath: string; Doc: TDOMDocument);
 begin
 
 end;
-
+*)
 procedure TSQLTokenRecord.AddChildToken(AToken: TSQLTokenRecord);
 var
   S: String;

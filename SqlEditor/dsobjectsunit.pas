@@ -25,7 +25,7 @@ unit dsObjectsUnit;
 interface
 
 uses
-  Classes, SysUtils, Controls, CheckLst, Graphics, DOM, contnrs, Forms,
+  Classes, SysUtils, Controls, CheckLst, Graphics, {DOM,} contnrs, Forms,
   StdCtrls, Buttons, Menus, SQLEngineAbstractUnit;
 
 const
@@ -63,8 +63,8 @@ type
   public
     SrcField:string;
     DstField:string;
-    procedure Save(const Node:TDOMElement);
-    procedure Load(const Node:TDOMElement);
+    //procedure Save(const Node:TDOMElement);
+    //procedure Load(const Node:TDOMElement);
     procedure Edit;
     constructor Create(ASrc, ADst:TQBObject);
 
@@ -151,8 +151,8 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure Save(ACfg:TXMLDocument; const Node:TDOMElement);
-    procedure Load(ACfg:TXMLDocument; const Node:TDOMElement);
+    //procedure Save(ACfg:TXMLDocument; const Node:TDOMElement);
+    //procedure Load(ACfg:TXMLDocument; const Node:TDOMElement);
     property ObjCaption:string read GetObjCaption write SetObjCaption;
     property ObjName:string read GetObjName;
     property List:TCheckListBox read FList;
@@ -221,8 +221,8 @@ type
     procedure UnlinkDrawObj(const AObj:TQBObject);
     function FindObj(AName:string):TQBObject;
     procedure UpdateText;
-    procedure OpenFile(const ADoc:TXMLDocument);
-    procedure SaveFile(const ADoc:TXMLDocument);
+    //procedure OpenFile(const ADoc:TXMLDocument);
+    //procedure SaveFile(const ADoc:TXMLDocument);
     procedure Clear;
 
     property GenText:TNotifyEvent read FGenText write FGenText;
@@ -804,7 +804,7 @@ begin
   FreeAndNil(FLinks);
   inherited Destroy;
 end;
-
+(*
 procedure TQBObject.Save(ACfg: TXMLDocument; const Node:TDOMElement);
 var
   i:integer;
@@ -882,7 +882,7 @@ begin
   if Assigned(TDrawPanel(Owner).SQLEngine) then
     DBObject:=TDrawPanel(Owner).SQLEngine.DBObjectByName(S);
 end;
-
+*)
 { TDrawPanel }
 
 {procedure TDrawPanel.FillTableFields(AObj:TQBObject);
@@ -1189,7 +1189,7 @@ begin
   if Assigned(FGenText) then
     FGenText(Self);
 end;
-
+(*
 procedure TDrawPanel.OpenFile(const ADoc:TXMLDocument);
 procedure LoadDoc(const Doc:TXMLDocument);
 var
@@ -1242,7 +1242,7 @@ begin
   end;
   *)
 end;
-
+*)
 procedure TDrawPanel.Clear;
 begin
   ObjectList.Clear;
@@ -1254,7 +1254,7 @@ begin
 end;
 
 { TQBObjectLink }
-
+(*
 procedure TQBObjectLink.Save(const Node: TDOMElement);
 begin
   Node.SetAttribute('DstName', Dst.ObjName);
@@ -1274,7 +1274,7 @@ begin
   SrcIndex:=StrToIntDef(Node.GetAttribute('SrcIndex'), 0);
   DstIndex:=StrToIntDef(Node.GetAttribute('DstIndex'), 0);
 end;
-
+*)
 procedure TQBObjectLink.Edit;
 begin
   dsLinkPropertysForm:=TdsLinkPropertysForm.Create(Application);

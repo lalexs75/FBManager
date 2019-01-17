@@ -25,7 +25,7 @@ unit SQLEngineCommonTypesUnit;
 interface
 
 uses
-  Classes, SysUtils, db, contnrs, sqlObjects;
+  Classes, SysUtils, db, contnrs, fbmStrConstUnit, sqlObjects;
 
 type
   TTransactionIsolationLevel = (tilReadUncommitted, tilReadCommitted, tilSerializable, tilRepeatableRead);
@@ -109,24 +109,69 @@ type
   TTableCashedStateFlags = set of TTableCashedStateFlag;
 
 const
-  DBObjectKindNames : array [TDBObjectKind] of string =
-     ('okNone', 'okDomain', 'okTable', 'okView', 'okTrigger', 'okStoredProc',
-      'okSequence', 'okException', 'okUDF', 'okRole', 'okUser', 'okScheme', 'okGroup',
-      'okIndex', 'okTableSpace', 'okLanguage', 'okCheckConstraint', 'okForeignKey',
-      'okPrimaryKey', 'okUniqueConstraint', 'okAutoIncFields', 'okRule', 'okOther',
-      'okTasks', 'okConversion', 'okDatabase', 'okType', 'okServer', 'okColumn',
-      'okCharSet', 'okCollation', 'okFilter', 'okParameter', 'okAccessMethod',
-      'okAggregate', 'okMaterializedView', 'okCast', 'okConstraint', 'okExtension',
-      'okForeignTable',
-      'okForeignDataWrapper',
-      'okForeignServer',
-      'okLargeObject', 'okPolicy',
-      'okFunction', 'okEventTrigger', 'okAutoIncFields',
-      'okFTSConfig', 'okFTSDictionary', 'okFTSParser', 'okFTSTemplate',
-      'okPackage', 'okPackageBody', 'okTransform', 'okOperator', 'okOperatorClass',
-      'okOperatorFamily',
-      'okUserMapping'
+(*
+    okTasks : Result:=;
+  *)
 
+  DBObjectKindNames : array [TDBObjectKind] of string =
+     (sOther,                 //okNone
+      sDomain,                //okDomain
+      sTable,                 //okTable
+      sView,                  //okView
+      sTrigger,               //okTrigger
+      sStoredProcedure,       //okStoredProc
+      sSequence,              //okSequence
+      sException,             //okException
+      sUDF,                   //okUDF
+      sRole,                  //okRole
+      sUser,                  //okUser
+      sScheme,                //okScheme
+      sGroup,                 //okGroup
+      sIndex,                 //okIndex
+      sTableSpace,            //okTableSpace
+      sLanguage,              //okLanguage
+      sCheckConstraint,       //okCheckConstraint
+      sForeignKey,            //okForeignKey
+      sPrimaryKey,            //okPrimaryKey
+      sUniqueConstraint,      //okUniqueConstraint
+      sField,                 //okAutoIncFields
+      sRule,                  //okRule
+      sOther,                 //okOther
+      sTask,                  //okTasks
+      sConversion,            //okConversion
+      sDatabase,              //okDatabase
+      sType,                  //okType
+      sServer,                //okServer
+      sColumn,                //okColumn
+      sCharSet,               //okCharSet
+      sCollation,             //okCollation
+      sFilter,                //okFilter
+      sParameter,             //okParameter
+      sAccessMethod,          //okAccessMethod
+      sAggregate,             //okAggregate
+      sMaterializedView,      //okMaterializedView
+      sCast,                  //okCast
+      sConstraint,            //okConstraint
+      sExtension,             //okExtension
+      sForeignTable,          //okForeignTable
+      sForeignDataWrapper,    //okForeignDataWrapper
+      sForeignServer,         //okForeignServer
+      sLargeObject,           //okLargeObject
+      sPolicy,                //okPolicy
+      sFunction,              //okFunction
+      sEventTrigger,          //okEventTrigger
+      sAutoIncFields,         //okAutoIncFields
+      sFTSConfig,             //okFTSConfig
+      sFTSDictionary,         //okFTSDictionary
+      sFTSParser,             //okFTSParser
+      sFTSTemplate,           //okFTSTemplate
+      sPackage,               //okPackage
+      sPackageBody,           //okPackageBody
+      sTransform,             //okTransform
+      sOperator,              //okOperator
+      sOperatorClass,         //okOperatorClass
+      sOperatorFamily,        //okOperatorFamily
+      sUserMapping            //okUserMapping
       );
 
   DBObjectKindImages: array [TDBObjectKind] of integer =
@@ -658,7 +703,7 @@ function ParamTypeFuncToStr(AType:TSPVarType):string;
 function ObjectGrantNameToValue(AValue:string):TObjectGrant;
 implementation
 uses
-  fbmStrConstUnit, math, strutils;
+  math, strutils;
 
 function StrToForeignKeyRule(RuleName: string): TForeignKeyRule;
 begin
@@ -722,6 +767,8 @@ end;
 
 function ObjectKindToStr(ADBObjectKind: TDBObjectKind): string;
 begin
+  Result:=DBObjectKindNames[ADBObjectKind]
+(*
   case ADBObjectKind of
     okDomain : Result:=sDomain;
     okTable : Result:=sTable;
@@ -749,6 +796,7 @@ begin
     //    okOther,
     Result:=sOther;
   end;
+  *)
 end;
 
 function ParamTypeFuncToStr(AType: TSPVarType): string;

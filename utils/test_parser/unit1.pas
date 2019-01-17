@@ -260,16 +260,16 @@ procedure TForm1.actLoadExecute(Sender: TObject);
 var
   S: String;
 begin
-  if OpenDialog1.Execute then
-    LoadParserTree(OpenDialog1.FileName);
+(*  if OpenDialog1.Execute then
+    LoadParserTree(OpenDialog1.FileName); *)
 end;
 
 procedure TForm1.actSaveExecute(Sender: TObject);
 var
   S: String;
 begin
-  S:=ChangeFileExt(ParamStr(0), '.tree');
-  SaveParserTree(S);
+(*  S:=ChangeFileExt(ParamStr(0), '.tree');
+  SaveParserTree(S); *)
 end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);

@@ -167,7 +167,7 @@
         <MinVersion Major="1" Valid="True"/>
       </Item33>
     </RequiredPackages>
-    <Units Count="215">
+    <Units Count="216">
       <Unit0>
         <Filename Value="IBManager.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -821,12 +821,12 @@
         <UnitName Value="fbmSQLEditorClassesUnit"/>
       </Unit85>
       <Unit86>
-        <Filename Value="help_forms/fbmshownewunit.pas"/>
+        <Filename Value="help_forms/fbmshownewsunit.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="fbmShowNewForm"/>
+        <ComponentName Value="fbmShowNewsForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="fbmShowNewUnit"/>
+        <UnitName Value="fbmShowNewsUnit"/>
       </Unit86>
       <Unit87>
         <Filename Value="dbobjecteditors/dboRole/fbmrolesdbobjectsgrantunit.pas"/>
@@ -1736,6 +1736,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgForeignUserMapping"/>
       </Unit214>
+      <Unit215>
+        <Filename Value="dbobjecteditors/dboFDW/pgforeignserverunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgForeignServer"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgForeignServerUnit"/>
+      </Unit215>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

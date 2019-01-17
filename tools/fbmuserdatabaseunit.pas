@@ -203,7 +203,7 @@ type
     procedure InternalConvertDB;
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
-    procedure ImportLoadSQLHistory(DataBaseID:integer; ADataFolder:string);
+//    procedure ImportLoadSQLHistory(DataBaseID:integer; ADataFolder:string);
     procedure ImportLoadSQLPages(Ini:TIniFile; AItemName:string; DataBaseID:integer; ADataFolder:string);
   public
     procedure InitData;
@@ -220,7 +220,7 @@ var
 
 procedure InitDataModule;
 implementation
-uses DOM, XMLRead, fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues,
+uses {DOM, }fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues,
   fb_ConstUnit, variants;
 
 {$R *.lfm}
@@ -605,7 +605,7 @@ begin
     if SDataFolder <> '' then
     begin
       ImportLoadRecentObjects(quDatabasesdb_database_id.AsInteger, SDataFolder);
-      ImportLoadSQLHistory(quDatabasesdb_database_id.AsInteger, SDataFolder);
+//      ImportLoadSQLHistory(quDatabasesdb_database_id.AsInteger, SDataFolder);
       ImportLoadSQLPages(DBListStream, AItemName, quDatabasesdb_database_id.AsInteger, SDataFolder);
 
       DeleteDirectory(GlobalCfgFolder + SDataFolder, false);
@@ -700,7 +700,7 @@ begin
   Ini.Free;
   DeleteFileUTF8(AFileName);
 end;
-
+(*
 const
   RootNodeSqlHistory = 'sql_history';
 
@@ -750,7 +750,7 @@ begin
     DeleteFileUTF8(AFileName);
   end;
 end;
-
+*)
 procedure TUserDBModule.ImportLoadSQLPages(Ini: TIniFile;
   AItemName: string; DataBaseID: integer; ADataFolder: string);
 var

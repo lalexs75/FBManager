@@ -46,11 +46,15 @@ type
   TPGForeignDataWrapper = class(TDBRootObject)
   private
     FHandler: string;
-    FNoHandler: boolean;
-    FNoValidator: boolean;
+    FHandlerID: Integer;
     FOID: Integer;
+    FOptions: TStringList;
     FOwnerID: Integer;
     FValidator: string;
+    FValidatorID: Integer;
+    function GetNoHandler: boolean;
+    function GetNoValidator: boolean;
+    function GetOwner: string;
   protected
     function DBMSObjectsList:string; override;
     function DBMSValidObject(AItem:TDBItem):boolean; override;
@@ -63,12 +67,16 @@ type
     procedure RefreshObject; override;
     class function DBClassTitle:string; override;
 
-    property OwnerID:Integer read FOwnerID;
     property OID:Integer read FOID;
+    property OwnerID:Integer read FOwnerID;
+    property HandlerID:Integer read FHandlerID;
+    property ValidatorID:Integer read FValidatorID;
+    property Owner:string read GetOwner;
     property Handler:string read FHandler write FHandler;
     property Validator:string read FValidator write FValidator;
-    property NoHandler:boolean read FNoHandler write FNoHandler;
-    property NoValidator:boolean read FNoValidator write FNoValidator;
+    property NoHandler:boolean read GetNoHandler;
+    property NoValidator:boolean read GetNoValidator;
+    property Options:TStringList read FOptions;
   end;
 
 
@@ -126,7 +134,7 @@ type
   end;
 
 implementation
-uses pg_SqlParserUnit, pgSqlTextUnit, pg_utils;
+uses pg_SqlParserUnit, pgSqlTextUnit, pg_utils, pgSqlEngineSecurityUnit;
 
 { TPGForeignUserMapping }
 
@@ -314,8 +322,8 @@ begin
 
   R.Handler:=FHandler;
   R.Validator:=FValidator;
-  R.NoHandler:=FNoHandler;
-  R.NoValidator:=FNoValidator;
+  R.NoHandler:=NoHandler;
+  R.NoValidator:=NoValidator;
 
   Result:=R.AsSQL;
   R.Free;
@@ -328,6 +336,28 @@ begin
   finally
     ACL.Free;
   end; *)
+end;
+
+function TPGForeignDataWrapper.GetNoHandler: boolean;
+begin
+  Result:=FHandlerID = 0;
+end;
+
+function TPGForeignDataWrapper.GetNoValidator: boolean;
+begin
+  Result:=FValidatorID = 0;
+end;
+
+function TPGForeignDataWrapper.GetOwner: string;
+var
+  P: TDBObject;
+begin
+  Result:='';
+  if not Assigned(OwnerDB) then Exit;
+
+  for P in TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot.Objects do
+    if TPGUser(P).UserID = OwnerID then
+      Exit(P.Caption);
 end;
 
 function TPGForeignDataWrapper.DBMSObjectsList: string;
@@ -348,6 +378,7 @@ begin
   inherited Create(ADBItem, AOwnerRoot);
   FObjectEditable:=true;
   FDBObjectClass:=TPGForeignServer;
+  FOptions:=TStringList.Create;
 
   if Assigned(ADBItem) then
   begin
@@ -357,6 +388,7 @@ end;
 
 destructor TPGForeignDataWrapper.Destroy;
 begin
+  FreeAndNil(FOptions);
   inherited Destroy;
 end;
 
@@ -373,17 +405,28 @@ end;
 procedure TPGForeignDataWrapper.RefreshObject;
 var
   Q: TZQuery;
+  S: String;
 begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
+  FOptions.Clear;
+
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFDWobj.Strings.Text);
   try
     Q.ParamByName('oid').AsInteger:=FOID;
     Q.Open;
     if Q.RecordCount > 0 then
     begin
-//      SchemaId:=Q.FieldByName('oid').AsInteger;
-//      FOwnerName:=Q.FieldByName('usename').AsString;
+      //oid,
+      //fdwname,
+      FOwnerID:=Q.FieldByName('fdwowner').AsInteger;
+      FValidatorID:=Q.FieldByName('fdwvalidator').AsInteger;
+      FHandlerID:=Q.FieldByName('fdwhandler').AsInteger;
+
+//      fdwacl,
+      S:=Q.FieldByName('fdwoptions').AsString;
+      ParsePGArrayString(S, FOptions);
+//
       FDescription:=Q.FieldByName('description').AsString;
     end;
     Q.Close;

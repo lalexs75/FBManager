@@ -89,7 +89,7 @@ begin
   inherited Localize;
   Label1.Caption:=sLanguageName;
   Label2.Caption:=sHandlerFunction;
-  Label3.Caption:=sValidatorFuncation;
+  Label3.Caption:=sValidatorFunction;
   CheckBox1.Caption:=sTrusted;
 end;
 
