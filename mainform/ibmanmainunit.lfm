@@ -264,6 +264,7 @@ object fbManagerMainForm: TfbManagerMainForm
     BevelOuter = bvLowered
     Options = [rxpoCloseF4, rxpoSwithByTab]
     HideCloseButton = False
+    WindowMenu = WindowItems
   end
   object ActionList1: TActionList
     Images = ImageListMain
@@ -531,7 +532,7 @@ object fbManagerMainForm: TfbManagerMainForm
         OnClick = optCustomizeToolbarExecute
       end
     end
-    object MenuItem17: TMenuItem
+    object WindowItems: TMenuItem
       Caption = 'Windows'
       object MenuItem18: TMenuItem
         Action = wndReOrder

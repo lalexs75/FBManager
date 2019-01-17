@@ -106,7 +106,7 @@ type
     MenuItem27: TMenuItem;
     optCustomizeToolbar: TAction;
     ImageList2: TImageList;
-    MenuItem17: TMenuItem;
+    WindowItems: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
     MenuItem20: TMenuItem;
@@ -394,7 +394,7 @@ begin
   optObjectTemplates.Caption:=sMenuObjectTemplates;
   optObjectTemplates.Hint:=sMenuObjectTemplatesHint;
 
-  MenuItem17.Caption:=sMenuWindows;
+  WindowItems.Caption:=sMenuWindows;
   wndReOrder.Caption:=sMenuReOrder;
   wndReOrder.Hint:=sMenuReOrderHint;
   wndCloseAll.Caption:=sMenuCloseAll;
