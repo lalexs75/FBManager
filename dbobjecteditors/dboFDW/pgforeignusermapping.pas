@@ -61,14 +61,24 @@ uses fbmStrConstUnit, pgSqlEngineSecurityUnit;
 { TpgForeignUserMap }
 
 procedure TpgForeignUserMap.RefreshObject;
+var
+  S, S1: String;
+  i: Integer;
 begin
   FillDictionary;
   cbServerName.Caption:=DBObject.OwnerRoot.OwnerRoot.Caption;
   if DBObject.State = sdboEdit then
   begin
     cbServerName.Enabled:=false;
-
     cbDBUsers.Text:=DBObject.Caption;
+
+    ValueListEditor1.Clear;
+    for i:=0 to TPGForeignUser(DBObject).Options.Count - 1 do
+    begin;
+      S:=TPGForeignUser(DBObject).Options.Names[i];
+      S1:=TPGForeignUser(DBObject).Options.ValueFromIndex[i];
+      ValueListEditor1.InsertRow(S, S1, true);
+    end;
   end;
 end;
 

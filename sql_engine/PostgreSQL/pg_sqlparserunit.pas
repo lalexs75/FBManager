@@ -87,7 +87,7 @@ const
      'OPERATOR',                     //okOperator,
      'OPERATOR CLASS',               //okOperatorClass,
      'OPERATOR FAMILY',              //okOperatorFamily
-     'USER MAPPING'                  //okUserMapping
+     'USER MAPPING FOR'              //okUserMapping
     );
 
   PGVarTypeNames : array [TSPVarType] of string =
@@ -13928,7 +13928,7 @@ begin
   if Params.Count > 0 then S2:=Params.AsString
   else S2:=Name;
 
-  if (ObjectKind = okUser) and (FUserMapping) then
+  if ((ObjectKind = okUser) and (FUserMapping)) or (ObjectKind = okUserMapping) then
   begin
     S:='DROP USER MAPPING ';
     if ooIfExists in Options then

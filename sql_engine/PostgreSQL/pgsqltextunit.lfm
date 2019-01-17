@@ -1561,4 +1561,20 @@ object pgSqlTextModule: TpgSqlTextModule
       '20202020202020202020202020202020202020202020202020202020202020'
     )
   end
+  object pgFSUserMapRefresh: TStrHolder
+    Capacity = 16
+    Macros = <>
+    Left = 688
+    Top = 472
+    StrData = (
+      ''
+      '73656c656374'
+      '202070675f757365725f6d617070696e672e6f69642c'
+      '202070675f757365725f6d617070696e672e2a'
+      '66726f6d'
+      '202070675f757365725f6d617070696e67'
+      '7768657265'
+      '202070675f757365725f6d617070696e672e6f6964203d203a756d6964'
+    )
+  end
 end

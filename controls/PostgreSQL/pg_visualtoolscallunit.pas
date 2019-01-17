@@ -302,8 +302,8 @@ begin
   );
 
   RegisterObjEditor(TPGForeignUser,
-    [TpgForeignUserMap, TfbmObjectEditorDescriptionFrame],
-    [TpgForeignUserMap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+    [TpgForeignUserMap{, TfbmObjectEditorDescriptionFrame}],
+    [TpgForeignUserMap, {TfbmObjectEditorDescriptionFrame, }TfbmDDLPage]
   );
 end;
 

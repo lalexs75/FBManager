@@ -33,6 +33,7 @@ type
 
   TpgSqlTextModule = class(TDataModule)
     pgFDWobj: TStrHolder;
+    pgFSUserMapRefresh: TStrHolder;
     sPGStatistics: TRxTextHolder;
     sPGGroups1: TStrHolder;
     sPGUsers: TStrHolder;

@@ -294,6 +294,7 @@ type
     function MakeRemarkBlock(S:string):string;
     function GetEnableRename: boolean; virtual;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);virtual;
+    procedure InternalPrepareDropCmd(R: TSQLDropCommandAbstract); virtual;
   public
     DependList:TDependRecordList;
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);virtual;
@@ -2000,6 +2001,7 @@ begin
   if Assigned(FDropCommandClass) then
   begin
     R:=FDropCommandClass.Create(nil);
+    AItem.InternalPrepareDropCmd(R);
     R.Name:=AItem.Caption;
     R.SchemaName:=AItem.SchemaName;
     R.ObjectKind:=DBObjectKind;
@@ -2108,6 +2110,11 @@ begin
 end;
 
 procedure TDBObject.NotyfiOnDestroy(ADBObject: TDBObject);
+begin
+  //
+end;
+
+procedure TDBObject.InternalPrepareDropCmd(R: TSQLDropCommandAbstract);
 begin
   //
 end;
