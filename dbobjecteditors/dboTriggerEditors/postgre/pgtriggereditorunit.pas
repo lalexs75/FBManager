@@ -353,7 +353,7 @@ begin
       for j:=0 to Sg.TriggerProc.CountObject -1 do
       begin
         P:=TPGFunction(Sg.TriggerProc.Items[j]);
-        if P.ReturnTypeOID = TSQLEnginePostgre(DBObject.OwnerDB).IDTriggerType then
+        if P.ReturnTypeOID = TSQLEnginePostgre(DBObject.OwnerDB).IDTypeTrigger then
         begin
           cbProcList.Items.Add(P.CaptionFullPatch);
           cbProcList.Items.Objects[cbProcList.Items.Count-1]:=P;

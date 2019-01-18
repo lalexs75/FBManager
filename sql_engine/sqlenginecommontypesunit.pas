@@ -697,7 +697,7 @@ function StrToForeignKeyRule(RuleName:string):TForeignKeyRule;
 function ObjectGrantToStr(AGrant:TObjectGrants; AllPrivilegesShortForm:boolean):string;
 
 procedure FillObjKindToImagesIndex(List:TStrings);
-function ObjectKindToStr(ADBObjectKind:TDBObjectKind):string;
+function ObjectKindToStr(ADBObjectKind:TDBObjectKind):string; inline;
 function ParamTypeFuncToStr(AType:TSPVarType):string;
 
 function ObjectGrantNameToValue(AValue:string):TObjectGrant;
@@ -768,35 +768,6 @@ end;
 function ObjectKindToStr(ADBObjectKind: TDBObjectKind): string;
 begin
   Result:=DBObjectKindNames[ADBObjectKind]
-(*
-  case ADBObjectKind of
-    okDomain : Result:=sDomain;
-    okTable : Result:=sTable;
-    okView : Result:=sView;
-    okTrigger : Result:=sTrigger;
-    okStoredProc : Result:=sStoredProcedure;
-    okSequence : Result:=sSequence;
-    okException : Result:=sException;
-    okUDF : Result:=sUDF;
-    okRole : Result:=sRole;
-    okUser : Result:=sUser;
-    okScheme : Result:=sScheme;
-    okGroup : Result:=sGroup;
-    okIndex : Result:=sIndex;
-    okTableSpace : Result:=sTableSpace;
-    okLanguage : Result:=sLanguage;
-    okCheckConstraint : Result:=sCheckConstraint;
-    okForeignKey : Result:=sForeignKey;
-    okPrimaryKey : Result:=sPrimaryKey;
-    okUniqueConstraint : Result:=sUniqueConstraint;
-    okField : Result:=sField;
-    okRule : Result:=sRule;
-    okTasks : Result:=sTask;
-  else
-    //    okOther,
-    Result:=sOther;
-  end;
-  *)
 end;
 
 function ParamTypeFuncToStr(AType: TSPVarType): string;

@@ -3,7 +3,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   Height = 569
   Top = 225
   Width = 912
-  Caption = 'Edit view'
+  Caption = 'Edit ...'
   ClientHeight = 569
   ClientWidth = 912
   OnClose = FormClose
@@ -162,10 +162,10 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       Left = 6
       Height = 19
       Top = 18
-      Width = 73
+      Width = 83
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
-      Caption = 'View name'
+      Caption = 'Object name'
       ParentColor = False
     end
     object Edit1: TEdit
@@ -174,10 +174,10 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 85
+      Left = 95
       Height = 31
       Top = 6
-      Width = 821
+      Width = 811
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       Color = clMoneyGreen

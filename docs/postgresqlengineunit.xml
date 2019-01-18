@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="PostgreSQLEngineUnit"><element name="TSQLEnginePostgre.IDTypeTrigger"><short>Переменная для привязки типа функции-тригера к данным в БД</short>
+      </element><element name="TSQLEnginePostgre.IDTypeEventTrigger"><short>Переменная для привязки типа функции-тригера к данным в БД</short>
+      </element><element name="TSQLEnginePostgre.IDTypeFDWHandler"><short>Переменная для привязки типа функции-обаботчика FDW (обёртки внешних данных) к данным в БД</short>
+      </element><element name="TSQLEnginePostgre.IDTypeLangHandler"><short>Переменная для привязки типа функции-обаботчика языка к данным в БД</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

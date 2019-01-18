@@ -864,8 +864,10 @@ type
     FServerVersion: TPGServerVersion;
   private
     //Для ускорения работы
-    FIDTriggerType:integer; //Переменная для привязки типа функции-тригера к данным в БД
-    FIDEventTriggerType:integer; //Переменная для привязки типа функции-тригера к данным в БД
+    FIDTypeTrigger:integer; //Переменная для привязки типа функции-тригера к данным в БД
+    FIDTypeEventTrigger:integer; //Переменная для привязки типа функции-тригера к данным в БД
+    FIDTypeFDWHandler:integer;
+    FIDTypeLangHandler:integer;
   private
     FSchemasRoot:TPGSchemasRoot;
     FSecurityRoot:TDBRootObject;//TPGSecurityRoot;
@@ -955,8 +957,10 @@ type
     property UsePGShedule:Boolean read FUsePGShedule write FUsePGShedule;
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
     //property ServerVersion
-    property IDTriggerType:integer read FIDTriggerType; //Переменная для привязки типа функции-тригера к данным в БД
-    property IDEventTriggerType:integer read FIDEventTriggerType; //Переменная для привязки типа функции-тригера к данным в БД
+    property IDTypeTrigger:integer read FIDTypeTrigger;           //Переменная для привязки типа функции-тригера к данным в БД
+    property IDTypeEventTrigger:integer read FIDTypeEventTrigger; //Переменная для привязки типа функции-тригера к данным в БД
+    property IDTypeFDWHandler:integer read FIDTypeFDWHandler;     //Переменная для привязки типа функции-обаботчика FDW (обёртки внешних данных) к данным в БД
+    property IDTypeLangHandler:integer read FIDTypeLangHandler;   //Переменная для привязки типа функции-обаботчика языка к данным в БД
   end;
 
   { TPGQueryControl }
@@ -1967,7 +1971,7 @@ constructor TPGTriggerProcRoot.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
-  FProcType:=TSQLEnginePostgre(OwnerDB).FIDTriggerType;
+  FProcType:=TSQLEnginePostgre(OwnerDB).FIDTypeTrigger;
 end;
 
 { TPGIndexItem }
@@ -2246,10 +2250,12 @@ procedure TSQLEnginePostgre.FillFieldTypeCodes;
 var
   Q:TZQuery;
   P:TDBMSFieldTypeRecord;
-  S:string;
+  S, S1:string;
 begin
-  FIDTriggerType:=-1;
-  FIDEventTriggerType:=-1;
+  FIDTypeTrigger:=-1;
+  FIDTypeEventTrigger:=-1;
+  FIDTypeFDWHandler:=-1;
+  FIDTypeLangHandler:=-1;
   Q:=GetSQLQuery(pgSqlTextModule.sqlTypesList.Strings.Text);
   try
     Q.Open;
@@ -2270,15 +2276,22 @@ begin
       end
       else
       begin
-        P:=FTypeList.FindType(Q.FieldByName('typname').AsString);
+        S1:=LowerCase(Q.FieldByName('typname').AsString);
+        P:=FTypeList.FindType(S1);
         if Assigned(P) then
         begin
           P.TypeId:=Q.FieldByName('oid').AsInteger;
-          if (Q.FieldByName('typname').AsString = 'trigger') then
-            FIDTriggerType:=Q.FieldByName('oid').AsInteger
+          if (S1 = 'trigger') then
+            FIDTypeTrigger:=P.TypeId
           else
-          if (Q.FieldByName('typname').AsString = 'event_trigger') then
-            FIDEventTriggerType:=Q.FieldByName('oid').AsInteger
+          if (S1 = 'event_trigger') then
+            FIDTypeEventTrigger:=P.TypeId
+          else
+          if S1 = 'fdw_handler' then
+            FIDTypeFDWHandler:=P.TypeId
+          else
+          if S1 = 'language_handler' then
+            FIDTypeLangHandler:=P.TypeId
           ;
         end
         else
@@ -5275,18 +5288,18 @@ begin
       (
          (FProcType = -1)
        and
-         (StrToIntDef(AItem.ObjType, -1)<>TSQLEnginePostgre(OwnerDB).FIDTriggerType)
+         (StrToIntDef(AItem.ObjType, -1)<>TSQLEnginePostgre(OwnerDB).FIDTypeTrigger)
        and
-         (StrToIntDef(AItem.ObjType, -1)<>TSQLEnginePostgre(OwnerDB).FIDEventTriggerType)
+         (StrToIntDef(AItem.ObjType, -1)<>TSQLEnginePostgre(OwnerDB).FIDTypeEventTrigger)
       )
     or
       (
         (FProcType > -1)
        and
         (
-          (TSQLEnginePostgre(OwnerDB).FIDTriggerType = StrToIntDef(AItem.ObjType, -2))
+          (TSQLEnginePostgre(OwnerDB).FIDTypeTrigger = StrToIntDef(AItem.ObjType, -2))
          or
-          (TSQLEnginePostgre(OwnerDB).FIDEventTriggerType = StrToIntDef(AItem.ObjType, -2))
+          (TSQLEnginePostgre(OwnerDB).FIDTypeEventTrigger = StrToIntDef(AItem.ObjType, -2))
         )
       )
     );
@@ -5602,7 +5615,7 @@ end;
 procedure TPGFunction.MakeSQLStatementsList(AList: TStrings);
 begin
   AList.AddObject('DDL', TObject(Pointer(0)));
-  if TSQLEnginePostgre(OwnerDB).FIDTriggerType <> ReturnTypeOID then
+  if TSQLEnginePostgre(OwnerDB).FIDTypeTrigger <> ReturnTypeOID then
   begin;
     AList.AddObject('Fields/Parameters list', TObject(Pointer(1)));
     AList.AddObject('SELECT', TObject(Pointer(2)));

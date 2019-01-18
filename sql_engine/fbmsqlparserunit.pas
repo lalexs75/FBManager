@@ -732,8 +732,6 @@ function SQLParseCommand(const Sql:string; SQLParserClass:TSQLCommandAbstractCla
 function SQLStatamentAtXY(const ALines:TStrings; X, Y:Integer):string;
 
 procedure RegisterSQLStatment(ASQLEngineClass:TClass; ACmd:TSQLCommandAbstractClass; ASignature:string);
-//procedure SaveParserTree(AFileName:string);
-//procedure LoadParserTree(AFileName:string);
 
 type
 
@@ -747,8 +745,6 @@ type
     Cmd:TSQLCommandAbstractClass;
     Signature:string;
     destructor Destroy; override;
-    //procedure Save(R:TDOMElement; Doc: TXMLDocument);
-    //procedure Load;
     property Item:TSQLCommandAbstract read FItem;
   end;
 
@@ -766,8 +762,7 @@ var
   SQLStatmentRecordArray : TSQLStatmentRecords = nil;
 
 implementation
-uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, {XMLWrite, XMLRead, }typinfo,
-  SQLEngineInternalToolsUnit;
+uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit;
 
 
 
@@ -877,31 +872,7 @@ begin
   Item.SQLEngineClass:=ASQLEngineClass;
   Item.FItem:=ACmd.Create(nil);
 end;
-(*
-procedure SaveParserTree(AFileName: string);
-var
-  Doc: TXMLDocument;
-  R: TDOMElement;
-  Item: TSQLStatmentRecord;
-  i: Integer;
-begin
-  Doc:=TXMLDocument.Create;
-  R:=Doc.CreateElement('ParserTree');
-  Doc.AppendChild(R);
-  for i:=0 to SQLStatmentRecordArray.Count-1 do
-  begin
-    Item:=TSQLStatmentRecord(SQLStatmentRecordArray[i]);
-    Item.Save(R, Doc);
-  end;
-  WriteXML(Doc, AFileName);
-  FreeAndNil(Doc);
-end;
 
-procedure LoadParserTree(AFileName: string);
-begin
-
-end;
-*)
 { TSQLCreateCommandAbstract }
 
 procedure TSQLCreateCommandAbstract.InternalProcessChildToken(
@@ -1439,8 +1410,6 @@ begin
     PC.ObjectKind:=AObjectKind;
     PC.Description:=ADescription;
     PC.Params.CopyFrom(Params);
-{    AddSQLCommand(PC.AsSQL);
-    PC.Free;}
     AddChild(PC);
   end
   else
@@ -1617,29 +1586,7 @@ begin
     FItem.Free;
   inherited Destroy;
 end;
-(*
-procedure TSQLStatmentRecord.Save(R: TDOMElement; Doc: TXMLDocument);
-var
-  S: String;
-  FSqlNode, N: TDOMElement;
-begin
-  S:=SQLEngineClass.ClassName;
-  N:=R.FindNode(S) as TDOMElement;
-  if not Assigned(N) then
-  begin
-    N:=Doc.CreateElement(S);
-    R.AppendChild(N);
-  end;
-  FSqlNode:=Doc.CreateElement(Signature);
-  N.AppendChild(FSqlNode);
-  FItem.Save(FSqlNode, Doc);
-end;
 
-procedure TSQLStatmentRecord.Load;
-begin
-
-end;
-*)
 function TSQLStatmentRecords.GetItems(AIndex: integer): TSQLStatmentRecord;
 begin
   Result:=TSQLStatmentRecord(Get(AIndex));
@@ -2724,52 +2671,7 @@ begin
   else
     Result:=stNone;
 end;
-(*
-procedure TSQLCommandAbstract.Save(ASqlNode: TDOMElement; ADoc: TDOMDocument);
-var
-  A: TSQLTokenOptions;
-  AI:integer absolute A;
-  T, TC: TSQLTokenRecord;
-  N: TDOMElement;
-  i, J, K: Integer;
-  AName, S: String;
 
-  PP:PTypeInfo;
-begin
-  ASqlNode.AttribStrings['Count']:=IntToStr(FSQLTokensList.Count);
-  for i:=0 to FSQLTokensList.Count-1 do
-  begin
-    T:=FSQLTokensList[i];
-    AName:=Format('Token_%d', [i]);
-    N:=ADoc.CreateElement(AName);
-    ASqlNode.AppendChild(N);
-    N.AttribStrings['Tag']:=IntToStr(T.Tag);
-    N.AttribStrings['Token']:=SQLTokenStr[T.Token];
-    N.AttribStrings['SQLCommand']:=T.SQLCommand;
-    N.AttribStrings['DBObjectKind']:=DBObjectKindNames[T.DBObjectKind];
-    A:=T.Options;
-    PP:=TypeInfo(TSQLTokenOptions);
-    S:=SetToString(PP, AI, true);
-    N.AttribStrings['Options']:=S;
-
-    S:='';
-    for j:=0 to T.FChild.Count-1 do
-    begin
-      TC:=T.Child[j];
-      K:=FSQLTokensList.IndexOf(TC);
-      if S<>'' then S:=S+',';
-      S:=S + IntToStr(K);
-    end;
-
-    N.AttribStrings['Childs']:=S;
-  end;
-end;
-
-procedure TSQLCommandAbstract.Load(APath: string; Doc: TDOMDocument);
-begin
-  //
-end;
-*)
 procedure TSQLCommandAbstract.Clear;
 begin
   inherited Clear;
