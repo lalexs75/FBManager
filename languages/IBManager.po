@@ -65,6 +65,10 @@ msgstr ""
 msgid "Add field"
 msgstr ""
 
+#: fbmstrconstunit.saddhint
+msgid "Add data"
+msgstr ""
+
 #: fbmstrconstunit.saddlocalvar
 msgctxt "fbmstrconstunit.saddlocalvar"
 msgid "Add local variable"
@@ -512,6 +516,10 @@ msgstr ""
 
 #: fbmstrconstunit.scompile
 msgid "Compile"
+msgstr ""
+
+#: fbmstrconstunit.scompilehint
+msgid "Compile object"
 msgstr ""
 
 #: fbmstrconstunit.scompileoptions
@@ -1137,6 +1145,10 @@ msgctxt "fbmstrconstunit.sdeletefunctionq"
 msgid "Delete function \"%s\"?"
 msgstr ""
 
+#: fbmstrconstunit.sdeletehint
+msgid "Delete data"
+msgstr ""
+
 #: fbmstrconstunit.sdeleteindex
 msgid "Delete index"
 msgstr ""
@@ -1438,6 +1450,10 @@ msgstr ""
 msgid "DB folder description"
 msgstr ""
 
+#: fbmstrconstunit.sedithint
+msgid "Edit data"
+msgstr ""
+
 #: fbmstrconstunit.seditindex
 msgid "Edit index"
 msgstr ""
@@ -1630,6 +1646,10 @@ msgstr ""
 #: fbmstrconstunit.sexportdata
 msgctxt "fbmstrconstunit.sexportdata"
 msgid "Export data..."
+msgstr ""
+
+#: fbmstrconstunit.sexportdatahint
+msgid "Export data from object..."
 msgstr ""
 
 #: fbmstrconstunit.sexportdatatopdf
@@ -3662,6 +3682,10 @@ msgctxt "fbmstrconstunit.sprintfklist"
 msgid "Print FK list"
 msgstr ""
 
+#: fbmstrconstunit.sprinthint
+msgid "Print object"
+msgstr ""
+
 #: fbmstrconstunit.sprintindexlist
 msgid "Print index list"
 msgstr ""
@@ -4079,6 +4103,10 @@ msgstr ""
 #: fbmstrconstunit.srunasowner
 msgctxt "fbmstrconstunit.srunasowner"
 msgid "Run as owner"
+msgstr ""
+
+#: fbmstrconstunit.srunhint
+msgid "Run object"
 msgstr ""
 
 #: fbmstrconstunit.sruning

@@ -75,6 +75,10 @@ msgstr "Добавить все поля"
 msgid "Add field"
 msgstr "Добавить поле"
 
+#: fbmstrconstunit.saddhint
+msgid "Add data"
+msgstr ""
+
 #: fbmstrconstunit.saddlocalvar
 msgctxt "fbmstrconstunit.saddlocalvar"
 msgid "Add local variable"
@@ -523,6 +527,10 @@ msgstr "Совместимость"
 #: fbmstrconstunit.scompile
 msgid "Compile"
 msgstr "Компилировать"
+
+#: fbmstrconstunit.scompilehint
+msgid "Compile object"
+msgstr ""
 
 #: fbmstrconstunit.scompileoptions
 msgid "Compile options"
@@ -1144,6 +1152,10 @@ msgctxt "fbmstrconstunit.sdeletefunctionq"
 msgid "Delete function \"%s\"?"
 msgstr "Удалить функцию \"%s\"?"
 
+#: fbmstrconstunit.sdeletehint
+msgid "Delete data"
+msgstr ""
+
 #: fbmstrconstunit.sdeleteindex
 msgid "Delete index"
 msgstr "Удалить индекс"
@@ -1444,6 +1456,10 @@ msgstr "Изменить поле"
 msgid "DB folder description"
 msgstr "Описание папки"
 
+#: fbmstrconstunit.sedithint
+msgid "Edit data"
+msgstr ""
+
 #: fbmstrconstunit.seditindex
 msgid "Edit index"
 msgstr "Изменить индекс"
@@ -1637,6 +1653,10 @@ msgstr "Развернуть всё"
 msgctxt "fbmstrconstunit.sexportdata"
 msgid "Export data..."
 msgstr "Экспорт данных..."
+
+#: fbmstrconstunit.sexportdatahint
+msgid "Export data from object..."
+msgstr ""
 
 #: fbmstrconstunit.sexportdatatopdf
 msgid "Export data to PDF"
@@ -3664,6 +3684,10 @@ msgctxt "fbmstrconstunit.sprintfklist"
 msgid "Print FK list"
 msgstr "Печать списка ключей"
 
+#: fbmstrconstunit.sprinthint
+msgid "Print object"
+msgstr ""
+
 #: fbmstrconstunit.sprintindexlist
 msgid "Print index list"
 msgstr "Печать списка индексов"
@@ -4084,6 +4108,10 @@ msgstr "Выполнить"
 msgctxt "fbmstrconstunit.srunasowner"
 msgid "Run as owner"
 msgstr "Выполнить от владельца"
+
+#: fbmstrconstunit.srunhint
+msgid "Run object"
+msgstr ""
 
 #: fbmstrconstunit.sruning
 msgid " - running"
