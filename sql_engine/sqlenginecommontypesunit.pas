@@ -277,7 +277,7 @@ const
        77, //okExtension
        -1, //okForeignTable
        81, //okForeignDataWrapper
-       -1, //okForeignServer
+       84, //okForeignServer
        -1, //okLargeObject
        -1, //okPolicy
        29, //okFunction

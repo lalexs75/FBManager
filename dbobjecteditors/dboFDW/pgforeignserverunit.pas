@@ -31,9 +31,9 @@ uses
 
 type
 
-  { TpgForeignServer }
+  { TpgForeignServerPage }
 
-  TpgForeignServer = class(TEditorPage)
+  TpgForeignServerPage = class(TEditorPage)
     ComboBox1: TComboBox;
     edtServerName: TEdit;
     Edit2: TEdit;
@@ -62,9 +62,9 @@ uses fbmStrConstUnit, pgSqlEngineSecurityUnit;
 
 {$R *.lfm}
 
-{ TpgForeignServer }
+{ TpgForeignServerPage }
 
-procedure TpgForeignServer.RefreshObject;
+procedure TpgForeignServerPage.RefreshObject;
 begin
   FillDictionary;
   if DBObject.State = sdboEdit then
@@ -74,34 +74,34 @@ begin
   end;
 end;
 
-procedure TpgForeignServer.FillDictionary;
+procedure TpgForeignServerPage.FillDictionary;
 begin
 
 end;
 
-procedure TpgForeignServer.PrintUserMap;
+procedure TpgForeignServerPage.PrintUserMap;
 begin
 
 end;
 
-function TpgForeignServer.PageName: string;
+function TpgForeignServerPage.PageName: string;
 begin
   Result:='Foreign server';
 end;
 
-constructor TpgForeignServer.CreatePage(TheOwner: TComponent;
+constructor TpgForeignServerPage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
   RefreshObject;
 end;
 
-function TpgForeignServer.ActionEnabled(PageAction: TEditorPageAction): boolean;
+function TpgForeignServerPage.ActionEnabled(PageAction: TEditorPageAction): boolean;
 begin
   Result:=PageAction in [epaPrint, epaRefresh, epaCompile];
 end;
 
-function TpgForeignServer.DoMetod(PageAction: TEditorPageAction): boolean;
+function TpgForeignServerPage.DoMetod(PageAction: TEditorPageAction): boolean;
 begin
   Result:=true;
   case PageAction of
@@ -110,12 +110,12 @@ begin
   end;
 end;
 
-procedure TpgForeignServer.Localize;
+procedure TpgForeignServerPage.Localize;
 begin
   inherited Localize;
 end;
 
-function TpgForeignServer.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
+function TpgForeignServerPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 begin
   Result:=inherited SetupSQLObject(ASQLObject);
 end;

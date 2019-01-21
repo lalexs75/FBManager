@@ -1739,7 +1739,7 @@
       <Unit215>
         <Filename Value="dbobjecteditors/dboFDW/pgforeignserverunit.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="pgForeignServer"/>
+        <ComponentName Value="pgForeignServerPage"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgForeignServerUnit"/>

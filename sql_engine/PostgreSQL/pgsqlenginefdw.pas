@@ -30,74 +30,6 @@ uses
 
 type
   TPGForeignUserMapping = class;
-  { TPGForeignDataWrapperRoot }
-
-  TPGForeignDataWrapperRoot = class(TPGDBRootObject)
-  private
-  protected
-    function DBMSObjectsList:string; override;
-  public
-    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
-    destructor Destroy; override;
-    procedure Clear;override;
-    function GetObjectType: string;override;
-  end;
-
-  TPGForeignDataWrapper = class(TDBRootObject)
-  private
-    FHandler: string;
-    FHandlerID: Integer;
-    FOID: Integer;
-    FOptions: TStringList;
-    FOwnerID: Integer;
-    FValidator: string;
-    FValidatorID: Integer;
-    function GetNoHandler: boolean;
-    function GetNoValidator: boolean;
-    function GetOwner: string;
-  protected
-    function DBMSObjectsList:string; override;
-    function DBMSValidObject(AItem:TDBItem):boolean; override;
-  public
-    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
-    destructor Destroy; override;
-    function InternalGetDDLCreate: string; override;
-    procedure Clear;override;
-    function GetObjectType: string;override;
-    procedure RefreshObject; override;
-    class function DBClassTitle:string; override;
-
-    property OID:Integer read FOID;
-    property OwnerID:Integer read FOwnerID;
-    property HandlerID:Integer read FHandlerID;
-    property ValidatorID:Integer read FValidatorID;
-    property Owner:string read GetOwner;
-    property Handler:string read FHandler write FHandler;
-    property Validator:string read FValidator write FValidator;
-    property NoHandler:boolean read GetNoHandler;
-    property NoValidator:boolean read GetNoValidator;
-    property Options:TStringList read FOptions;
-  end;
-
-
-  { TPGForeignServer }
-
-  TPGForeignServer = class(TDBRootObject)
-  private
-    FServerID: integer;
-    FUserMapping:TPGForeignUserMapping;
-  protected
-  public
-    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
-    function InternalGetDDLCreate: string; override;
-    destructor Destroy; override;
-    procedure RefreshObject; override;
-    procedure Clear;override;
-    function GetObjectType: string;override;
-    class function DBClassTitle:string; override;
-    property ServerID:integer read FServerID;
-    property UserMapping:TPGForeignUserMapping read FUserMapping;
-  end;
 
   { TPGForeignUserMapping }
 
@@ -133,8 +65,132 @@ type
     property OID:integer read FOID;
   end;
 
+  { TPGForeignServerRoot }
+
+  TPGForeignServerRoot = class(TPGDBRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+    destructor Destroy; override;
+    procedure Clear;override;
+    function GetObjectType: string;override;
+  end;
+
+  { TPGForeignServer }
+
+  TPGForeignServer = class(TDBRootObject)
+  private
+    FServerID: integer;
+    FUserMapping:TPGForeignUserMapping;
+  protected
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    function InternalGetDDLCreate: string; override;
+    destructor Destroy; override;
+    procedure RefreshObject; override;
+    procedure Clear;override;
+    function GetObjectType: string;override;
+    class function DBClassTitle:string; override;
+    property ServerID:integer read FServerID;
+    property UserMapping:TPGForeignUserMapping read FUserMapping;
+  end;
+
+  { TPGForeignDataWrapperRoot }
+
+  TPGForeignDataWrapperRoot = class(TPGDBRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+  public
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+    destructor Destroy; override;
+    procedure Clear;override;
+    function GetObjectType: string;override;
+  end;
+
+  { TPGForeignDataWrapper }
+
+  TPGForeignDataWrapper = class(TDBRootObject)
+  private
+    FForeignServers: TPGForeignServerRoot;
+    FHandler: string;
+    FHandlerID: Integer;
+    FOID: Integer;
+    FOptions: TStringList;
+    FOwnerID: Integer;
+    FValidator: string;
+    FValidatorID: Integer;
+    function GetNoHandler: boolean;
+    function GetNoValidator: boolean;
+    function GetOwner: string;
+  protected
+    //function DBMSObjectsList:string; override;
+    //function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
+    procedure Clear;override;
+    function GetObjectType: string;override;
+    procedure RefreshObject; override;
+    class function DBClassTitle:string; override;
+
+    property OID:Integer read FOID;
+    property OwnerID:Integer read FOwnerID;
+    property HandlerID:Integer read FHandlerID;
+    property ValidatorID:Integer read FValidatorID;
+    property Owner:string read GetOwner;
+    property Handler:string read FHandler write FHandler;
+    property Validator:string read FValidator write FValidator;
+    property NoHandler:boolean read GetNoHandler;
+    property NoValidator:boolean read GetNoValidator;
+    property Options:TStringList read FOptions;
+
+    property ForeignServers:TPGForeignServerRoot read FForeignServers;
+  end;
+
 implementation
-uses pg_SqlParserUnit, pgSqlTextUnit, pg_utils, pgSqlEngineSecurityUnit;
+uses fbmStrConstUnit, pg_SqlParserUnit, pgSqlTextUnit, pg_utils, pgSqlEngineSecurityUnit;
+
+{ TPGForeignServerRoot }
+
+function TPGForeignServerRoot.DBMSObjectsList: string;
+begin
+  Result:=pgSqlTextModule.pgFServ.Strings.Text;
+end;
+
+function TPGForeignServerRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=Assigned(AItem) and (AItem.SchemeID = (OwnerRoot as TPGForeignDataWrapper).FOID);
+end;
+
+constructor TPGForeignServerRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okForeignServer;
+
+  FDropCommandClass:=TPGSQLDropServer;
+end;
+
+destructor TPGForeignServerRoot.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TPGForeignServerRoot.Clear;
+begin
+  inherited Clear;
+end;
+
+function TPGForeignServerRoot.GetObjectType: string;
+begin
+  Result:='ForeignServer';
+end;
 
 { TPGForeignUserMapping }
 
@@ -359,7 +415,7 @@ begin
     if TPGUser(P).UserID = OwnerID then
       Exit(P.Caption);
 end;
-
+(*
 function TPGForeignDataWrapper.DBMSObjectsList: string;
 begin
   Result:=pgSqlTextModule.pgFServ.Strings.Text;
@@ -369,21 +425,23 @@ function TPGForeignDataWrapper.DBMSValidObject(AItem: TDBItem): boolean;
 begin
   Result:=Assigned(AItem) and (AItem.SchemeID = FOID);
 end;
-
+*)
 constructor TPGForeignDataWrapper.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 var
   F1: TSQLEngineAbstract;
 begin
   inherited Create(ADBItem, AOwnerRoot);
-  FObjectEditable:=true;
-  FDBObjectClass:=TPGForeignServer;
-  FOptions:=TStringList.Create;
-
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
   end;
+
+  FObjectEditable:=true;
+  FDBObjectClass:=TPGForeignServer;
+  FOptions:=TStringList.Create;
+  FForeignServers:=TPGForeignServerRoot.Create(OwnerDB, TPGForeignServer, sForeignServer, Self);
+
 end;
 
 destructor TPGForeignDataWrapper.Destroy;

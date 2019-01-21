@@ -1,4 +1,4 @@
-inherited pgForeignServer: TpgForeignServer
+inherited pgForeignServerPage: TpgForeignServerPage
   Height = 440
   Width = 606
   ClientHeight = 440
