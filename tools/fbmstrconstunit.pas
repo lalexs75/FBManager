@@ -176,8 +176,10 @@ resourcestring
   sSelectDatabase                   = 'Select database';
   sExtractAll                       = 'Extract all';
   sAdd                              = 'Add';
+  sAddHint                          = 'Add data';
   sRemove                           = 'Remove';
   sEdit                             = 'Edit';
+  sEditHint                         = 'Edit data';
   sApplyScript                      = 'Apply script';
   sServerName1                      = 'Server name';
   sConnect                          = 'Connect';
@@ -459,6 +461,7 @@ resourcestring
   sInsertOrUpdate                   = 'Insert/Update';
   sUpdate                           = 'Update';
   sDelete                           = 'Delete';
+  sDeleteHint                       = 'Delete data';
   sRow                              = 'Row';
   sStatament                        = 'Statament';
   sTriggerOrder                     = 'Order';
@@ -534,6 +537,7 @@ resourcestring
   sRolback                          = 'Rolback';
   sRolbackHint                      = 'Rolback transaction';
   sPrint                            = 'Print';
+  sPrintHint                        = 'Print object';
   sPrintQueryResult                 = 'Print query result';
   sCopyCellValue                    = 'Copy cell value';
   sCopyCollumnFieldTitle            = 'Copy collumn field title';
@@ -548,6 +552,7 @@ resourcestring
   sRolbackAndClose                  = 'Rolback and close';
   sRolbackAndCloseHint              = 'Rolback and close transaction';
   sCompile                          = 'Compile';
+  sCompileHint                      = 'Compile object';
   sSQLParseError                    = 'Error in SQL text';
   sCommonQuery                      = 'Common query';
   sSelectedRowsInfo                 = 'Selected rows : %d';
@@ -1224,6 +1229,7 @@ resourcestring
   sOpenFile                       = 'Open file';
   sSaveFile                       = 'Save file';
   sExportData                     = 'Export data...';
+  sExportDataHint                 = 'Export data from object...';
   sExportDataToPDF                = 'Export data to PDF';
   sExportDataToSpreadsheet        = 'Export data to Spreadsheet';
 
@@ -1233,6 +1239,7 @@ resourcestring
   sReportFolder                   = 'Report folder';
   sReportManager                  = 'Report manager';
   sRun                            = 'Run';
+  sRunHint                        = 'Run object';
   sStop                           = 'Stop';
   sDesignReport                   = 'Design report';
   sSelectRootFolder               = 'Select root folder';

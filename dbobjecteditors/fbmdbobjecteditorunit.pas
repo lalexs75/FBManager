@@ -429,6 +429,7 @@ end;
 procedure TfbmDBObjectEditorForm.Localize;
 begin
   dtExport.Caption:=sExportData;
+  dtExport.Hint:=sExportDataHint;
   actCommit.Caption:=sCommit;
   actCommit.Hint:=sCommitHint;
   actRollback.Caption:=sRolback;
@@ -440,11 +441,17 @@ begin
   dtRefresh.Caption:=sRefresh;
   dtRefresh.Hint:=sRefreshDataHint;
   edtCompile.Caption:=sCompile;
+  edtCompile.Hint:=sCompile;
   edtPrint.Caption:=sPrint;
+  edtPrint.Hint:=sPrintHint;
   edtAdd.Caption:=sAdd;
+  edtAdd.Hint:=sAddHint;
   edtEdit.Caption:=sEdit;
+  edtEdit.Hint:=sEditHint;
   edtDel.Caption:=sDelete;
+  edtDel.Hint:=sDeleteHint;
   edtRun.Caption:=sRun;
+  edtRun.Hint:=sRunHint;
 end;
 
 procedure TfbmDBObjectEditorForm.SetInspectorRecord(AValue: TDBInspectorRecord);

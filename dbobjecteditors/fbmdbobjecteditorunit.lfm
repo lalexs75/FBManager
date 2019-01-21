@@ -200,7 +200,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
     object dtExport: TAction
       Category = 'Data'
       Caption = 'Export data...'
-      ImageIndex = 64
+      ImageIndex = 101
       OnExecute = dtExportExecute
     end
     object actCommit: TAction
