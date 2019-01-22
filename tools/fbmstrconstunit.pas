@@ -977,8 +977,8 @@ resourcestring
   sMaterializedView                 = 'MaterializedView';
   sCast                             = 'Cast';
   sConstraint                       = 'Constraint';
-  sForeignTable                     = 'ForeignTable';
-  sForeignServer                    = 'ForeignServer';
+  sForeignTable                     = 'Foreign table';
+  sForeignServer                    = 'Foreign server';
   sLargeObject                      = 'LargeObject';
   sPolicy                           = 'Policy';
   sAutoIncFields                    = 'AutoIncFields';

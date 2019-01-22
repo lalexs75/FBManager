@@ -245,7 +245,7 @@ var
 begin
   if DBObject.State = sdboEdit then
   begin;
-    if not (ASQLObject is TPGSQLAlterUser) then Exit;
+    if not (ASQLObject is TPGSQLAlterRole) then Exit;
 
   end
   else

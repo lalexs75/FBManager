@@ -34,15 +34,17 @@ type
   { TpgForeignServerPage }
 
   TpgForeignServerPage = class(TEditorPage)
-    ComboBox1: TComboBox;
+    cbForeignDataWrapper: TComboBox;
+    ComboBox2: TComboBox;
     edtServerName: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
+    edtServerType: TEdit;
+    edtServerVersion: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
     ValueListEditor1: TValueListEditor;
   private
     procedure RefreshObject;
@@ -65,12 +67,26 @@ uses fbmStrConstUnit, pgSqlEngineSecurityUnit;
 { TpgForeignServerPage }
 
 procedure TpgForeignServerPage.RefreshObject;
+var
+  i: Integer;
+  S1, S2: String;
 begin
   FillDictionary;
   if DBObject.State = sdboEdit then
   begin
+    ValueListEditor1.Clear;
     edtServerName.Text:=DBObject.Caption;
+    edtServerType.Text:=TPGForeignServer(DBObject).ServerType;
+    edtServerVersion.Text:=TPGForeignServer(DBObject).ServerVersion;
+    edtServerVersion.Text:=TPGForeignServer(DBObject).ServerVersion;
+    cbForeignDataWrapper.Text:=DBObject.OwnerRoot.OwnerRoot.Caption;
 
+    for i:=0 to TPGForeignServer(DBObject).Options.Count-1 do
+    begin
+      S1:=TPGForeignServer(DBObject).Options.Names[i];
+      S2:=TPGForeignServer(DBObject).Options.ValueFromIndex[i];
+      ValueListEditor1.InsertRow(S1, S2, true);
+    end;
   end;
 end;
 

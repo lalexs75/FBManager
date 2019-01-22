@@ -297,8 +297,8 @@ begin
     );
 
   RegisterObjEditor(TPGForeignServer,
-      [TpgForeignServerPage],
-      [TpgForeignServerPage, TfbmDDLPage]
+      [TpgForeignServerPage, TfbmObjectEditorDescriptionFrame],
+      [TpgForeignServerPage, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
   );
 
   RegisterObjEditor(TPGForeignUser,

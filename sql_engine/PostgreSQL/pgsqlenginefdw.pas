@@ -83,19 +83,31 @@ type
 
   TPGForeignServer = class(TDBRootObject)
   private
+    FOptions: TStringList;
+    FOwnerID: integer;
     FServerID: integer;
+    FServerType: string;
+    FServerVersion: string;
     FUserMapping:TPGForeignUserMapping;
   protected
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
-    function InternalGetDDLCreate: string; override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
     procedure RefreshObject; override;
     procedure Clear;override;
     function GetObjectType: string;override;
     class function DBClassTitle:string; override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+
     property ServerID:integer read FServerID;
+    property OwnerID:integer read FOwnerID;
     property UserMapping:TPGForeignUserMapping read FUserMapping;
+
+    property Options:TStringList read FOptions;
+    property ServerType:string read FServerType write FServerType;
+    property ServerVersion:string read FServerVersion write FServerVersion;
   end;
 
   { TPGForeignDataWrapperRoot }
@@ -317,15 +329,22 @@ end;
 function TPGForeignServer.InternalGetDDLCreate: string;
 var
   R: TPGSQLCreateServer;
+  i: Integer;
+  S1, S2: String;
 begin
   R:=TPGSQLCreateServer.Create(nil);
+  R.Description:=Description;
   R.Name:=CaptionFullPatch;
+  R.ServerType:=ServerType;
+  R.ServerVersion:=ServerVersion;
+  R.ForeignDataWrapper:=(OwnerRoot.OwnerRoot as TPGForeignDataWrapper).Caption;
 
-{  R.Handler:=FHandler;
-  R.Validator:=FValidator;
-  R.NoHandler:=FNoHandler;
-  R.NoValidator:=FNoValidator;}
-
+  for i:=0 to Options.Count-1 do
+  begin
+    S1:=Options.Names[i];
+    S2:=Options.ValueFromIndex[i];
+    R.Params.AddParamEx(S1, S2);
+  end;
   Result:=R.AsSQL;
   R.Free;
 end;
@@ -334,8 +353,9 @@ constructor TPGForeignServer.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FOptions:=TStringList.Create;
   FDBObjectKind:=okServer;
-  FUserMapping:=TPGForeignUserMapping.Create(AOwnerRoot.OwnerDB, TPGForeignUser, 'User mapping', Self);
+  FUserMapping:=TPGForeignUserMapping.Create(AOwnerRoot.OwnerDB, TPGForeignUser, sUserMapping, Self);
   if Assigned(ADBItem) then
   begin
     FServerID:=ADBItem.ObjId;
@@ -344,12 +364,46 @@ end;
 
 destructor TPGForeignServer.Destroy;
 begin
+  FreeAndNil(FOptions);
   inherited Destroy;
 end;
 
 procedure TPGForeignServer.RefreshObject;
+var
+  Q: TZQuery;
+  S: String;
 begin
   inherited RefreshObject;
+  if State <> sdboEdit then exit;
+
+  FOptions.Clear;
+
+  if FServerID = 0 then
+    S:=Format('pg_foreign_server.srvname = ''%s'' and pg_foreign_server.srvfdw = %d', [Caption, (OwnerRoot.OwnerRoot as TPGForeignDataWrapper).OID])
+  else
+    S:='pg_foreign_server.oid = '+IntToStr(FServerID); // :oid --33893';
+  pgSqlTextModule.pgFServRefresh.MacroByName('Macro1').Value:=S;
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFServRefresh.ExpandMacros);
+  try
+    Q.Open;
+    if Q.RecordCount > 0 then
+    begin
+      //pg_foreign_server.srvname,
+      //pg_foreign_server.srvowner,
+      //pg_foreign_server.srvfdw,
+      //pg_foreign_server.srvacl,
+      FServerID:=Q.FieldByName('oid').AsInteger;
+      FOwnerID:=Q.FieldByName('srvowner').AsInteger;
+      FServerType:=Q.FieldByName('srvtype').AsString;
+      FServerVersion:=Q.FieldByName('srvversion').AsString;
+      S:=Q.FieldByName('srvoptions').AsString;
+      ParsePGArrayString(S, FOptions);
+      FDescription:=Q.FieldByName('description').AsString;
+    end;
+    Q.Close;
+  finally
+    Q.Free;
+  end;
 end;
 
 procedure TPGForeignServer.Clear;
@@ -359,12 +413,25 @@ end;
 
 function TPGForeignServer.GetObjectType: string;
 begin
-  Result:='Foreign server';
+  Result:=sForeignServer;
 end;
 
 class function TPGForeignServer.DBClassTitle: string;
 begin
   Result:='Foreign server';
+end;
+
+procedure TPGForeignServer.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+end;
+
+function TPGForeignServer.CreateSQLObject: TSQLCommandDDL;
+begin
+  if State = sdboCreate then
+    Result:=TPGSQLCreateServer.Create(nil)
+  else
+    Result:=TPGSQLAlterServer.Create(nil);
 end;
 
 { TPGForeignDataWrapper }

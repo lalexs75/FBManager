@@ -369,7 +369,7 @@ type
     destructor Destroy; override;
     procedure Clear;virtual;
     procedure RefreshGroup;virtual;
-    function GetObjectType: string;virtual; abstract;
+    function GetObjectType: string;virtual; abstract; //метод возвращает наименование объекта для построения меню в инспекторе объектов
     procedure FillListForNames(Items:TStrings; AFullNames: Boolean);
     function NewDBObject:TDBObject;virtual;
     function DropObject(AItem:TDBObject):boolean;virtual;

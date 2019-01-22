@@ -353,11 +353,12 @@ begin
   if State = sdboCreate then
   begin
     Result:=TPGSQLCreateRole.Create(nil);
-    TPGSQLCreateRole(Result).ObjectKind:=okUser;
+    Result.ObjectKind:=okUser;
   end
   else
   begin
-    Result:=TPGSQLAlterUser.Create(nil);
+    Result:=TPGSQLAlterRole.Create(nil);
+    Result.ObjectKind:=okUser;
     Result.Name:=Caption;
   end;
 end;

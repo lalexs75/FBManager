@@ -101,6 +101,14 @@ const
      ''            //spvtSubProc
     );
 
+  PGTransactionIsolationLevelStr : array [TTransactionIsolationLevel] of string =
+     ('', //tilNone,
+      'ISOLATION LEVEL READ UNCOMMITTED', //tilReadUncommitted,
+      'ISOLATION LEVEL READ COMMITTED',   //tilReadCommitted,
+      'ISOLATION LEVEL SERIALIZABLE',     //tilSerializable,
+      'ISOLATION LEVEL REPEATABLE READ'   //tilRepeatableRead
+     );
+
 type
   TDiscardType = (dtAll, dtPlans, dtTemporary, dtSequences);
 
@@ -117,8 +125,6 @@ type
   //TRoleType = (rtRole, rtGroup, rtUser);
 
   TAlterGroupOperator = (agoADD, agoDROP, agoRENAME);
-
-  TransactionIsolationLevel = (ilNone, ilSerializable, ilRepeatableRead, ilReadCommitted, ilReadUncommitted ); //ISOLATION LEVEL
 
   TSetScope = (ssNone, ssSession, ssLocal);
 
@@ -138,6 +144,10 @@ type
   TPGOption = (pgoWithOids, pgoWithoutOids);
   TPGOptions = set of TPGOption;
   TPGSQLSetVariableType = (svtNone, svtReset, svtSet, svtSetTO);
+
+  TPGSQLCastType = (casttypeNone, casttypeAsAssignment, casttypeAsImplicit);
+  TPGSQLCastType1 = (casttype1WithFunction, casttype1WithoutFunction, casttype1WithInout);
+
 type
 //Postgre DML command
 
@@ -840,6 +850,7 @@ type
     FRoleNewName: string;
     FRoleOperator: TPGAlterRoleType;
     FRoleOptions: TPGUserOptions;
+    FServerName: string;
     FValidUntil: string;
     FCurParam: TSQLParserField;
   protected
@@ -858,6 +869,7 @@ type
     property IsWith:boolean read FIsWith write FIsWith;
     property ValidUntil:string read FValidUntil write FValidUntil;
     property DataBaseName:string read FDataBaseName write FDataBaseName;
+    property ServerName:string read FServerName write FServerName;
   end;
 
 
@@ -906,14 +918,15 @@ type
 
   { TPGSQLTruncate }
 
-  TPGSQLTruncate = class(TSQLCommandAbstract)
+  TPGSQLTruncate = class(TSQLCommandDML)
   private
     FContinueIdentity: boolean;
     FDropRule: TDropRule;
     FIsOnly: boolean;
+    FIsTable: boolean;
     FRestartIdentity: boolean;
     FTableName: string;
-    FTTableName: TSQLTokenRecord;
+    FCurTable: TTableItem;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -926,6 +939,7 @@ type
     property RestartIdentity:boolean read FRestartIdentity write FRestartIdentity;
     property ContinueIdentity:boolean read FContinueIdentity write FContinueIdentity;
     property IsOnly:boolean read FIsOnly write FIsOnly;
+    property IsTable:boolean read FIsTable write FIsTable;
   end;
 
   { TPGSQLStartTransaction }
@@ -938,6 +952,7 @@ type
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
   { TPGSQLCommit }
@@ -1008,7 +1023,7 @@ type
   TPGSQLBegin = class(TSQLCommandAbstract)
   private
     FBeginType: TAbortType;
-    FIsolationLevel: TransactionIsolationLevel;
+    FIsolationLevel: TTransactionIsolationLevel;
     FNotDeferrable: boolean;
     FReadWriteMode: TReadWriteMode;
   protected
@@ -1020,7 +1035,7 @@ type
 
     property BeginType:TAbortType read FBeginType write FBeginType;
     property ReadWriteMode:TReadWriteMode read FReadWriteMode write FReadWriteMode;
-    property IsolationLevel:TransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
+    property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
     property NotDeferrable:boolean read FNotDeferrable write FNotDeferrable;
   end;
 
@@ -1041,9 +1056,10 @@ type
     FConfigurationParameter: string;
     FConfigurationParameterValue: string;
     FIsConstraints: boolean;
-    FIsolationLevel: TransactionIsolationLevel;
+    FIsolationLevel: TTransactionIsolationLevel;
     FNotDeferrable: boolean;
-    FReadOnly: boolean;
+    FReadWriteMode: TReadWriteMode;
+    //FReadOnly: boolean;
     FRoleName: string;
     FSessionAuthorizationUserName: string;
     FSessionTransaction: boolean;
@@ -1071,8 +1087,9 @@ type
 
     property Transaction:boolean read FTransaction write FTransaction;
     property SessionTransaction:boolean read FSessionTransaction write FSessionTransaction;
-    property ReadOnly:boolean read FReadOnly write FReadOnly;
-    property IsolationLevel:TransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
+    //property ReadOnly:boolean read FReadOnly write FReadOnly;
+    property ReadWriteMode:TReadWriteMode read FReadWriteMode write FReadWriteMode;
+    property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
     property NotDeferrable:boolean read FNotDeferrable write FNotDeferrable;
 
   end;
@@ -1546,6 +1563,8 @@ type
 
   TPGSQLCreateCast = class(TSQLCreateCommandAbstract)
   private
+    FCastType: TPGSQLCastType;
+    FCastType1: TPGSQLCastType1;
     FSourceType: string;
     FTargetType: string;
   protected
@@ -1557,6 +1576,8 @@ type
 
     property SourceType:string read FSourceType write FSourceType;
     property TargetType:string read FTargetType write FTargetType;
+    property CastType:TPGSQLCastType read FCastType write FCastType;
+    property CastType1:TPGSQLCastType1 read FCastType1 write FCastType1;
   end;
 
   { TPGSQLDropCast }
@@ -1783,7 +1804,7 @@ type
     property LeftType:string read FLeftType write FLeftType;
     property RightType:string read FRightType write FRightType;
   end;
-
+(*
   { TPGSQLAlterUser }
 
   TPGSQLAlterUser = class(TSQLCommandDDL)
@@ -1804,7 +1825,7 @@ type
     property ServerName:string read FServerName write FServerName;
     property UserMapingOperation:TUserMapingOperation read FUserMapingOperation write FUserMapingOperation;
   end;
-(*
+
   { TPGSQLDropUser }
 
   TPGSQLDropUser = class(TSQLDropCommandAbstract)
@@ -2167,7 +2188,7 @@ type
 
   { TPGSQLAlterServer }
 
-  TPGSQLAlterServer = class(TSQLCommandAbstract)
+  TPGSQLAlterServer = class(TSQLCommandDDL)
   private
     FNewOwner: string;
     FNewVersion: string;
@@ -2197,6 +2218,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property ServerType:string read FServerType write FServerType;
     property ServerVersion:string read FServerVersion write FServerVersion;
@@ -5038,7 +5060,7 @@ begin
   T:=AddSQLTokens(stSymbol, [TSchema, TName, T1], '(', []);
 
   TCol:=AddSQLTokens(stIdentificator, T, '', [], 7);
-  TExp:=AddSQLTokens(stSymbol, T, '(', [], 8);
+  TExp:=AddSQLTokens(stSymbol, [T, TCol], '(', [], 8);
     TC1:=AddSQLTokens(stKeyword, [TCol, TExp], 'COLLATE', []);
     TC1_1:=AddSQLTokens(stString, TC1, '', [], 11);
     TC1_2:=AddSQLTokens(stIdentificator, TC1, '', [], 11);
@@ -5061,10 +5083,10 @@ begin
     TC2_3_2.AddChildToken([TC1, TC2_1, TC2_2]);
 
     //[ opclass ]
-  T3:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3_1, TC2_3_2], ',', []);
+  T3:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3_1, TC2_3_2], ',', [], 9);
     T3.AddChildToken([TCol, TExp]);
 
-  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_2, TC2_3_1, TC2_3_2], ')', []);
+  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_2, TC2_3_1, TC2_3_2], ')', [], 9);
 
   T1:=AddSQLTokens(stKeyword, TSymb, 'TABLESPACE', [toOptional]);
     T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 10);
@@ -5107,8 +5129,12 @@ begin
     7:FCurField:=Fields.AddParam(AWord);
     8:begin
         S:='(' + ASQLParser.GetToBracket(')') + ')';
-        FCurField:=Fields.AddParam(S);
+        if Assigned(FCurField) then
+          FCurField.Caption:=FCurField.Caption + S
+        else
+          FCurField:=Fields.AddParam(S);
       end;
+    9:FCurField:=nil;
     10:TableSpace:=AWord;
     11:if Assigned(FCurField) then
       FCurField.Collate:=AWord;
@@ -5680,59 +5706,60 @@ var
   TRT, FSQLTokens, TUT, TRN, T, T1, T20, T21, T22, T23, T24,
     T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T34_1,
     T35, T36, T37, T37_1, T38, T38_1, T37_2, TSet, T_IN, TSet1,
-    TFrom, TReset, TRN1, TSet2, TSet3: TSQLTokenRecord;
+    TFrom, TReset, TRN1, TSet2, TSet3, TUMap, TUMap1, TUMap2,
+    TUMap3, TUMap4, TUMap5, T2, T3, T4, TSymb: TSQLTokenRecord;
 begin
-  (*
-  ALTER ROLE name [ [ WITH ] option [ ... ] ]
+  //ALTER ROLE name [ [ WITH ] option [ ... ] ]
+  //where option can be:
+  //      SUPERUSER | NOSUPERUSER
+  //    | CREATEDB | NOCREATEDB
+  //    | CREATEROLE | NOCREATEROLE
+  //    | CREATEUSER | NOCREATEUSER
+  //    | INHERIT | NOINHERIT
+  //    | LOGIN | NOLOGIN
+  //    | REPLICATION | NOREPLICATION
+  //    | CONNECTION LIMIT connlimit
+  //    | [ ENCRYPTED | UNENCRYPTED ] PASSWORD 'password'
+  //    | VALID UNTIL 'timestamp'
+  //
+  //ALTER ROLE name RENAME TO new_name
+  //ALTER ROLE name [ IN DATABASE database_name ] SET configuration_parameter { TO | = } { value | DEFAULT }
+  //ALTER ROLE name [ IN DATABASE database_name ] SET configuration_parameter FROM CURRENT
+  //ALTER ROLE name [ IN DATABASE database_name ] RESET configuration_parameter
+  //ALTER ROLE name [ IN DATABASE database_name ] RESET ALL
+  //ALTER USER MAPPING FOR { имя_пользователя | USER | CURRENT_USER | SESSION_USER | PUBLIC }
+  //    SERVER имя_сервера
+  //    OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ] )
 
-  where option can be:
-
-        SUPERUSER | NOSUPERUSER
-      | CREATEDB | NOCREATEDB
-      | CREATEROLE | NOCREATEROLE
-      | CREATEUSER | NOCREATEUSER
-      | INHERIT | NOINHERIT
-      | LOGIN | NOLOGIN
-      | REPLICATION | NOREPLICATION
-      | CONNECTION LIMIT connlimit
-      | [ ENCRYPTED | UNENCRYPTED ] PASSWORD 'password'
-      | VALID UNTIL 'timestamp'
-
-  ALTER ROLE name RENAME TO new_name
-
-  ALTER ROLE name [ IN DATABASE database_name ] SET configuration_parameter { TO | = } { value | DEFAULT }
-  ALTER ROLE name [ IN DATABASE database_name ] SET configuration_parameter FROM CURRENT
-  ALTER ROLE name [ IN DATABASE database_name ] RESET configuration_parameter
-  ALTER ROLE name [ IN DATABASE database_name ] RESET ALL
-  *)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
     TRT:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast], 100);
     TUT:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast], 101);
+      TUMap:=AddSQLTokens(stKeyword, TUT, 'MAPPING', [], 102);
 
   TRN:=AddSQLTokens(stIdentificator, TRT, '', [], 1);
   TRN1:=AddSQLTokens(stKeyword, TRT, 'ALL', [], 1);
     T1:=AddSQLTokens(stKeyword, TRN, 'WITH', [], 10);
-    T20:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'SUPERUSER', [toOptional], 20);
-    T21:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOSUPERUSER', [toOptional], 21);
-    T22:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'CREATEDB', [toOptional], 22);
-    T23:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOCREATEDB', [toOptional], 23);
-    T24:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'CREATEROLE', [toOptional], 24);
-    T25:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOCREATEROLE', [toOptional], 25);
-    T26:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'CREATEUSER', [toOptional], 26);
-    T27:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOCREATEUSER', [toOptional], 27);
-    T28:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'INHERIT', [toOptional], 28);
-    T29:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOINHERIT', [toOptional], 29);
-    T30:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'LOGIN', [toOptional], 30);
-    T31:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOLOGIN', [toOptional], 31);
-    T32:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'REPLICATION', [toOptional], 32);
-    T33:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'NOREPLICATION', [toOptional], 33);
-    T34:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'CONNECTION', [toOptional]);
+    T20:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'SUPERUSER', [toOptional], 20);
+    T21:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOSUPERUSER', [toOptional], 21);
+    T22:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'CREATEDB', [toOptional], 22);
+    T23:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOCREATEDB', [toOptional], 23);
+    T24:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'CREATEROLE', [toOptional], 24);
+    T25:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOCREATEROLE', [toOptional], 25);
+    T26:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'CREATEUSER', [toOptional], 26);
+    T27:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOCREATEUSER', [toOptional], 27);
+    T28:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'INHERIT', [toOptional], 28);
+    T29:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOINHERIT', [toOptional], 29);
+    T30:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'LOGIN', [toOptional], 30);
+    T31:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOLOGIN', [toOptional], 31);
+    T32:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'REPLICATION', [toOptional], 32);
+    T33:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'NOREPLICATION', [toOptional], 33);
+    T34:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1], 'CONNECTION', [toOptional]);
       T34_1:=AddSQLTokens(stKeyword, T34, 'LIMIT', []);
       T34_1:=AddSQLTokens(stInteger, T34_1, '', [], 34);
     T35:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'ENCRYPTED', [toOptional], 35);
     T36:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'UNENCRYPTED', [toOptional], 36);
-      T37:=AddSQLTokens(stKeyword, [TRN, TRN1, T1, T35, T36], 'PASSWORD', [toOptional]);
+      T37:=AddSQLTokens(stIdentificator, [TRN, TRN1, T1, T35, T36], 'PASSWORD', [toOptional]);
       T37_1:=AddSQLTokens(stString, T37, '', [], 37);
       T37_2:=AddSQLTokens(stKeyword, T37, 'NULL', [], 39);
     T38:=AddSQLTokens(stKeyword, [TRN, TRN1, T1], 'VALID', [toOptional]);
@@ -5788,6 +5815,33 @@ begin
     AddSQLTokens(stIdentificator, TReset, '', [], 5);
 
   TUT.CopyChildTokens(TRT);
+
+
+
+  //ALTER USER MAPPING FOR { имя_пользователя | USER | CURRENT_USER | SESSION_USER | PUBLIC }
+  //    SERVER имя_сервера
+  //    OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ] )
+  TUMap:=AddSQLTokens(stIdentificator, TUMap, 'FOR', []);
+  TUMap1:=AddSQLTokens(stIdentificator, TUMap, 'USER', [], 1);
+  TUMap2:=AddSQLTokens(stIdentificator, TUMap, 'CURRENT_USER', [], 1);
+  TUMap3:=AddSQLTokens(stIdentificator, TUMap, 'SESSION_USER', [], 1);
+  TUMap4:=AddSQLTokens(stIdentificator, TUMap, 'PUBLIC', [], 1);
+  TUMap5:=AddSQLTokens(stIdentificator, TUMap, '', [], 1);
+
+  TUMap:=AddSQLTokens(stKeyword, [TUMap1, TUMap2, TUMap3, TUMap4, TUMap5], 'SERVER', []);
+  TUMap:=AddSQLTokens(stIdentificator, TUMap, '', [], 110);
+  TUMap:=AddSQLTokens(stIdentificator, TUMap, 'OPTIONS', []);
+  T:=AddSQLTokens(stSymbol, TUMap, '(', []);
+    T1:=AddSQLTokens(stKeyword, T, 'ADD', [], 111);
+    T2:=AddSQLTokens(stKeyword, T, 'SET', [], 111);
+    T3:=AddSQLTokens(stKeyword, T, 'DROP', [], 111);
+    TUMap:=AddSQLTokens(stIdentificator, [T, T1, T2, T3], '', [], 112);
+    T4:=AddSQLTokens(stString, TUMap, '', [], 113);
+    TSymb:=AddSQLTokens(stSymbol, [T4, TUMap], ',', [], 114);
+      TSymb.AddChildToken([T1, T2, T3, TUMap]);
+  T:=AddSQLTokens(stSymbol, [TUMap, T4], ')', [], 114);
+
+
 end;
 
 procedure TPGSQLAlterRole.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -5832,6 +5886,21 @@ begin
     39:FRoleOptions:=FRoleOptions + [puoNullPassword];
     100:ObjectKind:=okRole;
     101:ObjectKind:=okUser;
+    102:ObjectKind:=okUserMapping;
+    110:ServerName:=AWord;
+    111:begin
+          FCurParam:=Params.AddParam('');
+          FCurParam.CheckExpr:=AWord;
+        end;
+    112:begin
+          if Assigned(FCurParam) then
+            FCurParam.Caption:=AWord
+          else
+            FCurParam:=Params.AddParamEx(AWord, '');
+        end;
+    113:if Assigned(FCurParam) then
+            FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+    114:FCurParam:=nil;
   end;
 end;
 
@@ -5855,6 +5924,7 @@ begin
     IsWith:=TPGSQLAlterRole(ASource).IsWith;
     ValidUntil:=TPGSQLAlterRole(ASource).ValidUntil;
     DataBaseName:=TPGSQLAlterRole(ASource).DataBaseName;
+    ServerName:=TPGSQLAlterRole(ASource).ServerName;
   end;
   inherited Assign(ASource);
 end;
@@ -5863,6 +5933,7 @@ procedure TPGSQLAlterRole.MakeSQL;
 var
   S, S1: String;
   RO: TPGUserOption;
+  P: TSQLParserField;
 begin
   //ALTER ROLE name [ IN DATABASE database_name ] SET configuration_parameter { TO | = } { value | DEFAULT }
   //ALTER ROLE name [ IN DATABASE database_name ] RESET configuration_parameter
@@ -5871,6 +5942,24 @@ begin
   S:=Format('ALTER %s %s', [PGObjectNames[ObjectKind], Name]);
 
   //artSet,
+  if ObjectKind = okUserMapping then
+  begin
+    //ALTER USER MAPPING FOR { имя_пользователя | USER | CURRENT_USER | SESSION_USER | PUBLIC }
+    //    SERVER имя_сервера
+    //    OPTIONS ( [ ADD | SET | DROP ] параметр ['значение'] [, ... ] )
+    S:=S + ' SERVER ' + ServerName + ' OPTIONS (';
+
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      if P.CheckExpr<>'' then S1:=S1 + P.CheckExpr + ' ';
+      S1:=S1 + P.Caption;
+      if P.ParamValue <> '' then S1:=S1 + ' ' + QuotedString(P.ParamValue, '''');
+    end;
+    S:=S + S1 + ')';
+  end
+  else
   if FRoleOperator = artRename then
     S:=S + ' RENAME TO ' +FRoleNewName
   else
@@ -6426,7 +6515,7 @@ begin
       FOREIGN DATA WRAPPER fdw_name
       [ OPTIONS ( option 'value' [, ... ] ) ]
   *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okServer);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'SERVER', [toFindWordLast]);
     T:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T1:=AddSQLTokens(stKeyword, T, 'TYPE', []);
@@ -6492,6 +6581,16 @@ begin
     Result:=Result + S1 + ')';
   end;
   AddSQLCommand(Result);
+
+  if Description <> '' then
+    DescribeObject;
+end;
+
+constructor TPGSQLCreateServer.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  ObjectKind:=okServer;
+  FSQLCommentOnClass:=TPGSQLCommentOn;
 end;
 
 procedure TPGSQLCreateServer.Assign(ASource: TSQLObjectAbstract);
@@ -8425,7 +8524,7 @@ begin
   end;
   inherited Assign(ASource);
 end;
-*)
+
 { TPGSQLAlterUser }
 
 procedure TPGSQLAlterUser.InitParserTree;
@@ -8491,7 +8590,7 @@ begin
   end;
   inherited Assign(ASource);
 end;
-
+*)
 { TPGSQLDropOperator }
 
 procedure TPGSQLDropOperator.InitParserTree;
@@ -9300,22 +9399,20 @@ end;
 
 procedure TPGSQLCreateCast.InitParserTree;
 var
-  T, FSQLTokens, T1, T2: TSQLTokenRecord;
+  T, FSQLTokens, T1, T2, TInOut1, TAs, TAs1, TAs2, TFunc, Par1,
+    TSymb, TSymb2, TFuncO: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для CREATE CAST }
-  (*
-  CREATE CAST (source_type AS target_type)
-      WITH FUNCTION function_name (argument_type [, ...])
-      [ AS ASSIGNMENT | AS IMPLICIT ]
-
-  CREATE CAST (source_type AS target_type)
-      WITHOUT FUNCTION
-      [ AS ASSIGNMENT | AS IMPLICIT ]
-
-  CREATE CAST (source_type AS target_type)
-      WITH INOUT
-      [ AS ASSIGNMENT | AS IMPLICIT ]
-  *)
+  //CREATE CAST (source_type AS target_type)
+  //    WITH FUNCTION function_name (argument_type [, ...])
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
+  //
+  //CREATE CAST (source_type AS target_type)
+  //    WITHOUT FUNCTION
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
+  //
+  //CREATE CAST (source_type AS target_type)
+  //    WITH INOUT
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'CAST', [toFindWordLast]);
 
@@ -9325,21 +9422,75 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
   T:=AddSQLTokens(stSymbol, T, ')', []);
   T1:=AddSQLTokens(stSymbol, T, 'WITH', [], 3);
+    TFunc:=AddSQLTokens(stSymbol, T1, 'FUNCTION', []);
+      Par1:=AddSQLTokens(stIdentificator, TFunc, '', [], 7);
+
+      TSymb:=AddSQLTokens(stSymbol, Par1, '(', []);
+      TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 110);
+      CreateInParamsTree(Self, TSymb, TSymb2);
+
+
   T2:=AddSQLTokens(stSymbol, T, 'WITHOUT', [], 4);
+  TFuncO:=AddSQLTokens(stSymbol, T2, 'FUNCTION', []);
+
+  TInOut1:=AddSQLTokens(stSymbol, T1, 'INOUT', [], 50);
+
+  TAs:=AddSQLTokens(stSymbol, [TInOut1, TFuncO, TSymb2], 'AS', [toOptional]);
+    TAs1:=AddSQLTokens(stSymbol, [TAs], 'ASSIGNMENT', [], 51);
+    TAs2:=AddSQLTokens(stSymbol, [TAs], 'IMPLICIT', [], 52);
 end;
 
 procedure TPGSQLCreateCast.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:SourceType:=AWord;
+    2:TargetType:=AWord;
+    3:FCastType1:=casttype1WithFunction;
+    4:FCastType1:=casttype1WithoutFunction;
+    7:Name:=AWord;
+    105:Params.AddParam(AWord);
+    50:FCastType1:=casttype1WithInout;
+    51:CastType:=casttypeAsAssignment;
+    52:CastType:=casttypeAsImplicit;
+  end;
 end;
 
 procedure TPGSQLCreateCast.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='CREATE CAST';
-  AddSQLCommand(Result);
+  //CREATE CAST (source_type AS target_type)
+  //    WITH FUNCTION function_name (argument_type [, ...])
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
+  //
+  //CREATE CAST (source_type AS target_type)
+  //    WITHOUT FUNCTION
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
+  //
+  //CREATE CAST (source_type AS target_type)
+  //    WITH INOUT
+  //    [ AS ASSIGNMENT | AS IMPLICIT ]
+
+  S:='CREATE CAST ('+SourceType + ' AS ' + TargetType + ')';
+
+  case FCastType1 of
+    casttype1WithFunction:S:=S + ' WITH FUNCTION ' + Name+'('+Params.AsString+')';
+    casttype1WithoutFunction:S:=S + ' WITHOUT FUNCTION';
+    casttype1WithInout:S:=S + ' WITH INOUT';
+  end;
+
+  case FCastType of
+    casttypeAsAssignment : S := S + ' AS ASSIGNMENT';
+    casttypeAsImplicit : S := S + ' AS IMPLICIT';
+  // casttypeNone,
+  end;
+
+  AddSQLCommand(S);
+
+  if Description <> '' then
+    DescribeObject;
 end;
 
 procedure TPGSQLCreateCast.Assign(ASource: TSQLObjectAbstract);
@@ -9348,7 +9499,8 @@ begin
   begin
     SourceType:=TPGSQLCreateCast(ASource).SourceType;
     TargetType:=TPGSQLCreateCast(ASource).TargetType;
-
+    CastType:=TPGSQLCreateCast(ASource).CastType;
+    CastType1:=TPGSQLCreateCast(ASource).CastType1;
   end;
   inherited Assign(ASource);
 end;
@@ -12431,7 +12583,7 @@ procedure TPGSQLSet.InitParserTree;
 var
   FSQLTokens, T1, T2, T, TV, T8, T8_1, T11, T12, T16, T15,
     T21, T22, T23, T24, T25, T7, T27, T16_1, T29, T13, T26,
-    TSymb: TSQLTokenRecord;
+    TSymb, TSet1, TSet2: TSQLTokenRecord;
 begin
   (*
   SET [ SESSION | LOCAL ] configuration_parameter { TO | = } { value | 'value' | DEFAULT }
@@ -12455,9 +12607,9 @@ where transaction_mode is one of:
     [ NOT ] DEFERRABLE
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFindWordLast, toFirstToken]);
-    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'SESSION', [], 1);
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
-    T:=AddSQLTokens(stIdentificator, [FSQLTokens, T1, T2], '', [], 3);
+    TSet1:=AddSQLTokens(stKeyword, FSQLTokens, 'SESSION', [], 1);
+    TSet2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
+    T:=AddSQLTokens(stIdentificator, [FSQLTokens, TSet1, TSet2], '', [], 3);
 
     T1:=AddSQLTokens(stSymbol, T, '=', [], 17);
     T2:=AddSQLTokens(stKeyword, T, 'TO', [], 18);
@@ -12473,9 +12625,7 @@ where transaction_mode is one of:
     AddSQLTokens(stKeyword, [T, T1, T2], 'TRUE', [], 4);
     AddSQLTokens(stKeyword, [T, T1, T2], 'FALSE', [], 4);
 
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TIME', [], 5);
-    T1.AddChildToken(T);
-    T2.AddChildToken(T);
+    T:=AddSQLTokens(stKeyword, [FSQLTokens, TSet1, TSet2], 'TIME', [], 5);
     T:=AddSQLTokens(stKeyword, T, 'ZONE', []);
     AddSQLTokens(stIdentificator, T, '', [], 6);
     AddSQLTokens(stString, T, '', [],  6);
@@ -12492,18 +12642,17 @@ where transaction_mode is one of:
     T8_1.AddChildToken(AddSQLTokens(stKeyword, T8, 'DEFERRED', [], 9));
     T8_1.AddChildToken(AddSQLTokens(stKeyword, T8, 'IMMEDIATE', [], 10));
 
-    T11:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [],  11);
+    T11:=AddSQLTokens(stKeyword, [FSQLTokens, TSet1, TSet2], 'ROLE', [],  11);
     AddSQLTokens(stIdentificator, T11, '', [], 12);
     AddSQLTokens(stString, T11, '', [], 12);
     AddSQLTokens(stKeyword, T11, 'NONE', [], 12);
 
-    T1.AddChildToken(T11);
 
-    T13:=AddSQLTokens(stKeyword, FSQLTokens, 'SESSION', [], 13);
-    T1.AddChildToken(T13);
-    T13:=AddSQLTokens(stKeyword, T13, 'AUTHORIZATION', []);
-    AddSQLTokens(stKeyword, T13, 'DEFAULT', [], 14);
-    AddSQLTokens(stIdentificator, T13, '', [], 14);
+    T13:=AddSQLTokens(stKeyword, [TSet1, TSet2], 'SESSION', [], 13);
+    T13:=AddSQLTokens(stKeyword, [TSet1, TSet2, T13], 'AUTHORIZATION', []);
+      AddSQLTokens(stKeyword, T13, 'DEFAULT', [], 14);
+      AddSQLTokens(stIdentificator, T13, '', [], 14);
+      AddSQLTokens(stString, T13, '', [], 14);
 
     T15:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [], 15);
     T1.AddChildToken(T15);
@@ -12560,12 +12709,12 @@ begin
     16:FSessionTransaction:=true;
     17:SetVarType:=svtSet;
     18:SetVarType:=svtSetTO;
-    21:FIsolationLevel:=ilSerializable;
-    22:FIsolationLevel:=ilRepeatableRead;
-    24:FIsolationLevel:=ilReadCommitted;
-    25:FIsolationLevel:=ilReadUncommitted;
-    26:FReadOnly:=false;
-    27:FReadOnly:=true;
+    21:FIsolationLevel:=tilSerializable;
+    22:FIsolationLevel:=tilRepeatableRead;
+    24:FIsolationLevel:=tilReadCommitted;
+    25:FIsolationLevel:=tilReadUncommitted;
+    26:FReadWriteMode:=rwmReadWrite;
+    27:FReadWriteMode:=rwmReadOnly;
     28:FNotDeferrable:=true;
   end;
 end;
@@ -12612,7 +12761,9 @@ begin
     Result:=Result + ' ROLE '+FRoleName
   else
   if FSessionAuthorizationUserName <> '' then
+  begin
     Result:=Result + ' SESSION AUTHORIZATION '+FSessionAuthorizationUserName
+  end
   else
   if FTransaction or FSessionTransaction then
   begin
@@ -12621,21 +12772,13 @@ begin
     else
       Result:=Result + ' SET SESSION CHARACTERISTICS AS TRANSACTION ';
 
-    if FIsolationLevel <> ilNone then
-    begin
-      case FIsolationLevel of
-        ilSerializable:Result:=Result + ' ISOLATION LEVEL SERIALIZABLE';
-        ilRepeatableRead:Result:=Result + ' ISOLATION LEVEL REPEATABLE READ';
-        ilReadCommitted:Result:=Result + ' ISOLATION LEVEL READ COMMITTED';
-        ilReadUncommitted:Result:=Result + ' ISOLATION LEVEL READ UNCOMMITTED';
-      end;
-    end
-    else
-    if FReadOnly then
-      Result:=Result + ' READ ONLY'
-    else
-      Result:=Result + ' READ WRITE'
-    ;
+    if FIsolationLevel <> tilNone then
+      Result:=Result + ' ' + PGTransactionIsolationLevelStr[FIsolationLevel];
+
+    case FReadWriteMode of
+      rwmReadOnly:Result:=Result + ' READ ONLY';
+      rwmReadWrite:Result:=Result + ' READ WRITE';
+    end;
 
     if FNotDeferrable then
       Result:=Result + ' NOT DEFERRABLE'
@@ -12657,7 +12800,7 @@ begin
     SessionAuthorizationUserName:=TPGSQLSet(ASource).SessionAuthorizationUserName;
     Transaction:=TPGSQLSet(ASource).Transaction;
     SessionTransaction:=TPGSQLSet(ASource).SessionTransaction;
-    ReadOnly:=TPGSQLSet(ASource).ReadOnly;
+    ReadWriteMode:=TPGSQLSet(ASource).ReadWriteMode;
     IsolationLevel:=TPGSQLSet(ASource).IsolationLevel;
     NotDeferrable:=TPGSQLSet(ASource).NotDeferrable;
     SetVarType:=TPGSQLSet(ASource).SetVarType;
@@ -12711,10 +12854,10 @@ procedure TPGSQLBegin.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    3:FIsolationLevel:=ilSerializable;
-    4:FIsolationLevel:=ilRepeatableRead;
-    5:FIsolationLevel:=ilReadCommitted;
-    6:FIsolationLevel:=ilReadUncommitted;
+    3:FIsolationLevel:=tilSerializable;
+    4:FIsolationLevel:=tilRepeatableRead;
+    5:FIsolationLevel:=tilReadCommitted;
+    6:FIsolationLevel:=tilReadUncommitted;
     7:FReadWriteMode:=rwmReadWrite;
     8:FReadWriteMode:=rwmReadOnly;
     10:FNotDeferrable:=true;
@@ -12734,15 +12877,8 @@ begin
     atTransaction:S:=S+' TRANSACTION';
   end;
 
-  if FIsolationLevel <> ilNone then
-  begin
-    case FIsolationLevel of
-      ilSerializable:S:=S + ' ISOLATION LEVEL SERIALIZABLE';
-      ilRepeatableRead:S:=S + ' ISOLATION LEVEL REPEATABLE READ';
-      ilReadCommitted:S:=S + ' ISOLATION LEVEL READ COMMITTED';
-      ilReadUncommitted:S:=S + ' ISOLATION LEVEL READ UNCOMMITTED';
-    end;
-  end;
+  if FIsolationLevel <> tilNone then
+    S:=S + ' ' + PGTransactionIsolationLevelStr[FIsolationLevel];
 
   case FReadWriteMode of
     rwmReadOnly:S:=S + ' READ ONLY';
@@ -12927,7 +13063,7 @@ end;
 
 procedure TPGSQLStartTransaction.InitParserTree;
 var
-  T, T1, T2, T3, FSQLTokens: TSQLTokenRecord;
+  T, T1, T2, T3, FSQLTokens, TIL: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для START TRANSACTION }
   (*
@@ -12941,8 +13077,9 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'START', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toFindWordLast]);     //TRANSACTION
-    T1:=AddSQLTokens(stKeyword, T, 'ISOLATION', []);
-    T1:=AddSQLTokens(stKeyword, T1, 'LEVEL', []);
+
+  TIL:=AddSQLTokens(stKeyword, T, 'ISOLATION', []);
+    T1:=AddSQLTokens(stKeyword, TIL, 'LEVEL', []);
       T2:=AddSQLTokens(stKeyword, T1, 'SERIALIZABLE', [], 1);
       T2:=AddSQLTokens(stKeyword, T1, 'REPEATABLE', [], 2);
         T2:=AddSQLTokens(stKeyword, T2, 'READ', []);
@@ -12955,6 +13092,12 @@ procedure TPGSQLStartTransaction.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:IsolationLevel:=tilSerializable;
+    2:IsolationLevel:=tilRepeatableRead;
+    3:IsolationLevel:=tilReadCommitted;
+    4:IsolationLevel:=tilReadUncommitted;
+  end;
 end;
 
 procedure TPGSQLStartTransaction.MakeSQL;
@@ -12962,20 +13105,31 @@ var
   S: String;
 begin
   S:='START TRANSACTION';
+  if IsolationLevel <> tilNone then
+    S:=S + ' ' + PGTransactionIsolationLevelStr[IsolationLevel];
   AddSQLCommand(S);
 end;
 
 constructor TPGSQLStartTransaction.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  IsolationLevel:=tilReadCommitted;
+  //IsolationLevel:=tilReadCommitted;
+end;
+
+procedure TPGSQLStartTransaction.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLStartTransaction then
+  begin
+    //FIsolationLevel:=TPGSQLStartTransaction(ASource).IsolationLevel;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLTruncate }
 
 procedure TPGSQLTruncate.InitParserTree;
 var
-  T, T1, T2, FSQLTokens: TSQLTokenRecord;
+  T, T1, T2, FSQLTokens, FTTableName: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для TRUNCATE }
   (*
@@ -12983,24 +13137,27 @@ begin
     [ RESTART IDENTITY | CONTINUE IDENTITY ] [ CASCADE | RESTRICT ]
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'TRUNCATE', [toFindWordLast, toFirstToken]);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', []);
-    T1:=AddSQLTokens(stKeyword, T, 'ONLY', [], 1);
-    FSQLTokens.AddChildToken(T1);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [], 10);
+    T1:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'ONLY', [], 1);
+      T1.AddChildToken(T);
 
-  FTTableName:=AddSQLTokens(stIdentificator, FSQLTokens, '', []);
+  FTTableName:=AddSQLTokens(stIdentificator, [FSQLTokens, T, T1], '', [], 11);
+    T:=AddSQLTokens(stSymbol, FTTableName, '.', [toOptional]);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 13);
+  T:=AddSQLTokens(stSymbol, [FTTableName, T1], ',', [toOptional], 12);
     T.AddChildToken(FTTableName);
-    T1.AddChildToken(FTTableName);
-  T:=AddSQLTokens(stKeyword, FTTableName, 'RESTART', [], 2);
+
+  T:=AddSQLTokens(stKeyword, FTTableName, 'RESTART', [toOptional], 2);
   T:=AddSQLTokens(stKeyword, T, 'IDENTITY', []);
 
-  T1:=AddSQLTokens(stKeyword, FTTableName, 'CONTINUE', [], 3);
+  T1:=AddSQLTokens(stKeyword, FTTableName, 'CONTINUE', [toOptional], 3);
   T1:=AddSQLTokens(stKeyword, T1, 'IDENTITY', []);
 
-  T2:=AddSQLTokens(stKeyword, T, 'CASCADE', [], 3);
+  T2:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], 5);
     FTTableName.AddChildToken(T2);
     T1.AddChildToken(T2);
 
-  T2:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], 4);
+  T2:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], 4);
     FTTableName.AddChildToken(T2);
     T1.AddChildToken(T2);
 end;
@@ -13008,44 +13165,45 @@ end;
 procedure TPGSQLTruncate.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
-  if AChild = FTTableName then
-    FTableName:=AWord
-  else
-  if AChild.Tag = 3 then
-    FDropRule:=drCascade
-  else
-  if AChild.Tag = 4 then
-    FDropRule:=drRestrict
-  else
-  if AChild.Tag = 1 then
-    FIsOnly:=true
-  else
-  if AChild.Tag = 2 then
-    FRestartIdentity:=true
-  else
-  if AChild.Tag = 3 then
-    FContinueIdentity:=true
-  ;
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    10:IsTable:=true;
+    11:FCurTable:=Tables.Add(AWord);
+    12:FCurTable:=nil;
+    13:if Assigned(FCurTable) then
+       begin
+         FCurTable.SchemaName:=FCurTable.Name;
+         FCurTable.Name:=AWord;
+       end;
+    5:FDropRule:=drCascade;
+    4:FDropRule:=drRestrict;
+    1:FIsOnly:=true;
+    2:FRestartIdentity:=true;
+    3:FContinueIdentity:=true;
+  end;
 end;
 
 procedure TPGSQLTruncate.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:= 'TRUNCATE TABLE ONLY ' + FTableName;
+  S:= 'TRUNCATE ';
+  if IsTable then S:=S + 'TABLE ';
+  if IsOnly then S:=S + 'ONLY ';
+  S:=S+ Tables.AsString;
 
   if FRestartIdentity then
-    Result:= Result + ' RESTART IDENTITY'
+    S:= S + ' RESTART IDENTITY'
   else
   if FContinueIdentity then
-    Result:= Result + ' CONTINUE IDENTITY';
+    S:= S + ' CONTINUE IDENTITY';
 
   if FDropRule = drCascade then
-    Result:= Result + ' CASCADE'
+    S:= S + ' CASCADE'
   else
   if FDropRule = drCascade then
-    Result:= Result + ' RESTRICT';
-  AddSQLCommand(Result);
+    S:= S + ' RESTRICT';
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLTruncate.Assign(ASource: TSQLObjectAbstract);
@@ -13057,6 +13215,7 @@ begin
     RestartIdentity:=TPGSQLTruncate(ASource).RestartIdentity;
     ContinueIdentity:=TPGSQLTruncate(ASource).ContinueIdentity;
     IsOnly:=TPGSQLTruncate(ASource).IsOnly;
+    IsTable:=TPGSQLTruncate(ASource).IsTable;
   end;
   inherited Assign(ASource);
 end;

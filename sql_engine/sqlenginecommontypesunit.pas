@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, db, contnrs, fbmStrConstUnit, sqlObjects;
 
 type
-  TTransactionIsolationLevel = (tilReadUncommitted, tilReadCommitted, tilSerializable, tilRepeatableRead);
+  TTransactionIsolationLevel = (tilNone, tilReadUncommitted, tilReadCommitted, tilSerializable, tilRepeatableRead);
 
   TDBMSTypesGroup = (tgUnknow, tgNumericTypes, tgMonetaryTypes, tgCharacterTypes,
         tgBinaryDataTypes, tgDateTimeTypes, tgBooleanTypes,

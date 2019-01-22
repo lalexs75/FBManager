@@ -1997,11 +1997,11 @@ msgid "Foreign keys"
 msgstr "Внешние ключи"
 
 #: fbmstrconstunit.sforeignserver
-msgid "ForeignServer"
+msgid "Foreign server"
 msgstr ""
 
 #: fbmstrconstunit.sforeigntable
-msgid "ForeignTable"
+msgid "Foreign table"
 msgstr ""
 
 #: fbmstrconstunit.sfortable
