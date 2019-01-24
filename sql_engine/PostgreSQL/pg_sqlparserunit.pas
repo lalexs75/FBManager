@@ -112,7 +112,7 @@ const
 type
   TDiscardType = (dtAll, dtPlans, dtTemporary, dtSequences);
 
-  //TReindexType = (riIndex, riTable, riDatabase, riSystem);
+  TAlterDefaultPrivilegesKind = (adpkGrant, adpkRevoke);
 
   TAlterType = (aoNone, aoModify, aoRename, aoSet, aoReset, aoSetTablespace);
 
@@ -447,6 +447,7 @@ type
 
   TPGSQLCreateSchema = class(TSQLCreateCommandAbstract)
   private
+    FChildCmd: string;
     FOwnerUserName: string;
   protected
     procedure InitParserTree;override;
@@ -456,6 +457,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property OwnerUserName:string read FOwnerUserName write FOwnerUserName;
+    property ChildCmd:string read FChildCmd write FChildCmd;
   end;
 
   { TPGSQLAlterSchema }
@@ -1068,6 +1070,8 @@ type
     FTimeScope: TTimeScope;
     FTimeZone: string;
     FTransaction: boolean;
+    FTransactionID: string;
+    FSessionCnt:integer;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1087,7 +1091,7 @@ type
 
     property Transaction:boolean read FTransaction write FTransaction;
     property SessionTransaction:boolean read FSessionTransaction write FSessionTransaction;
-    //property ReadOnly:boolean read FReadOnly write FReadOnly;
+    property TransactionID:string read FTransactionID write FTransactionID;
     property ReadWriteMode:TReadWriteMode read FReadWriteMode write FReadWriteMode;
     property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
     property NotDeferrable:boolean read FNotDeferrable write FNotDeferrable;
@@ -1208,11 +1212,13 @@ type
     FFormatName: string;
     FHeader: boolean;
     FIsProgramm: boolean;
+    FIsWith: boolean;
     FNotNullColumn: TSQLFields;
     FNullString: string;
     FOIDS: boolean;
     FQuoteCharacter: string;
     FQuoteColumns: TSQLFields;
+    FSourceQuery: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1233,9 +1239,11 @@ type
     property EscapeCharacter:string read FEscapeCharacter write FEscapeCharacter;
     property EncodingName:string read FEncodingName write FEncodingName;
     property IsProgramm:boolean read FIsProgramm write FIsProgramm;
+    property IsWith:boolean read FIsWith write FIsWith;
 
     property QuoteColumns:TSQLFields read FQuoteColumns;
     property NotNullColumn:TSQLFields read FNotNullColumn;
+    property SourceQuery:string read FSourceQuery write FSourceQuery;
   end;
 
 
@@ -1443,11 +1451,18 @@ type
 
   TPGSQLSecurityLabel = class(TSQLCommandAbstract)
   private
+    FObjectType: TDBObjectKind;
+    FProvider: string;
+    FSecurityLabel: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Provider:string read FProvider write FProvider;
+    property SecurityLabel:string read FSecurityLabel write FSecurityLabel;
+    property ObjectType:TDBObjectKind read FObjectType write FObjectType;
   end;
 
   { TPGSQLGrant }
@@ -1489,9 +1504,11 @@ type
 
   { TPGSQLAlterDefaultPrivileges }
 
-  TPGSQLAlterDefaultPrivileges = class(TSQLCommandDDL)
+  TPGSQLAlterDefaultPrivileges = class(TSQLCommandGrant)
   private
     FCurParam: TSQLParserField;
+    FDropRule: TDropRule;
+    FKind: TAlterDefaultPrivilegesKind;
     FSchemas: TSQLFields;
   protected
     procedure InitParserTree;override;
@@ -1502,6 +1519,8 @@ type
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property Schemas:TSQLFields read FSchemas;
+    property Kind:TAlterDefaultPrivilegesKind read FKind write FKind;
+    property DropRule:TDropRule read FDropRule write FDropRule;
   end;
 
   { TPGSQLAlterLargeObject }
@@ -7896,51 +7915,43 @@ end;
 procedure TPGSQLAlterDefaultPrivileges.InitParserTree;
 var
   T, FSQLTokens, TUsr, TUsr1, TUsr2, TSchema, TSchema1, TGrant,
-    TRevoke: TSQLTokenRecord;
+    TRevoke, TG1, TG2, TG3, TG4, TG5, TG6, TG7, TSymb, TGAL,
+    TGAL1, TG10, TG11, TG12, TG13: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER DEFAULT PRIVILEGES}
-  (*
-  ALTER DEFAULT PRIVILEGES
-      [ FOR { ROLE | USER } target_role [, ...] ]
-      [ IN SCHEMA schema_name [, ...] ]
-      abbreviated_grant_or_revoke
-
-  where abbreviated_grant_or_revoke is one of:
-
-  GRANT { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
-      [, ...] | ALL [ PRIVILEGES ] }
-      ON TABLES
-      TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
-
-  GRANT { { USAGE | SELECT | UPDATE }
-      [, ...] | ALL [ PRIVILEGES ] }
-      ON SEQUENCES
-      TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
-
-  GRANT { EXECUTE | ALL [ PRIVILEGES ] }
-      ON FUNCTIONS
-      TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
-
-  REVOKE [ GRANT OPTION FOR ]
-      { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
-      [, ...] | ALL [ PRIVILEGES ] }
-      ON TABLES
-      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
-      [ CASCADE | RESTRICT ]
-
-  REVOKE [ GRANT OPTION FOR ]
-      { { USAGE | SELECT | UPDATE }
-      [, ...] | ALL [ PRIVILEGES ] }
-      ON SEQUENCES
-      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
-      [ CASCADE | RESTRICT ]
-
-  REVOKE [ GRANT OPTION FOR ]
-      { EXECUTE | ALL [ PRIVILEGES ] }
-      ON FUNCTIONS
-      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
-      [ CASCADE | RESTRICT ]
-  *)
+  //ALTER DEFAULT PRIVILEGES
+  //    [ FOR { ROLE | USER } target_role [, ...] ]
+  //    [ IN SCHEMA schema_name [, ...] ]
+  //    abbreviated_grant_or_revoke
+  //where abbreviated_grant_or_revoke is one of:
+  //GRANT { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+  //    [, ...] | ALL [ PRIVILEGES ] }
+  //    ON TABLES
+  //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+  //GRANT { { USAGE | SELECT | UPDATE }
+  //    [, ...] | ALL [ PRIVILEGES ] }
+  //    ON SEQUENCES
+  //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+  //GRANT { EXECUTE | ALL [ PRIVILEGES ] }
+  //    ON FUNCTIONS
+  //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+  //REVOKE [ GRANT OPTION FOR ]
+  //    { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+  //    [, ...] | ALL [ PRIVILEGES ] }
+  //    ON TABLES
+  //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+  //    [ CASCADE | RESTRICT ]
+  //REVOKE [ GRANT OPTION FOR ]
+  //    { { USAGE | SELECT | UPDATE }
+  //    [, ...] | ALL [ PRIVILEGES ] }
+  //    ON SEQUENCES
+  //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+  //    [ CASCADE | RESTRICT ]
+  //REVOKE [ GRANT OPTION FOR ]
+  //    { EXECUTE | ALL [ PRIVILEGES ] }
+  //    ON FUNCTIONS
+  //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+  //    [ CASCADE | RESTRICT ]
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', []);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'PRIVILEGES', [toFindWordLast]);
@@ -7958,8 +7969,92 @@ begin
       T.AddChildToken(TSchema1);
     TSchema1.AddChildToken(TUsr);
 
+    //GRANT { { USAGE | SELECT | UPDATE }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON SEQUENCES
+    //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+    //GRANT { EXECUTE | ALL [ PRIVILEGES ] }
+    //    ON FUNCTIONS
+    //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
   TGrant:=AddSQLTokens(stKeyword, [FSQLTokens, TUsr1, TSchema1], 'GRANT', [], 10);
+    TG1:=AddSQLTokens(stKeyword, TGrant, 'SELECT', [], 20);
+    TG2:=AddSQLTokens(stKeyword, TGrant, 'INSERT', [], 21);
+    TG3:=AddSQLTokens(stKeyword, TGrant, 'UPDATE', [], 22);
+    TG4:=AddSQLTokens(stKeyword, TGrant, 'DELETE', [], 23);
+    TG5:=AddSQLTokens(stKeyword, TGrant, 'TRUNCATE', [], 24);
+    TG6:=AddSQLTokens(stKeyword, TGrant, 'REFERENCES', [], 25);
+    TG7:=AddSQLTokens(stKeyword, TGrant, 'TRIGGER', [], 26);
+      TSymb:=AddSQLTokens(stSymbol, [TG1, TG2, TG3, TG4, TG5, TG6, TG7] , ',', []);
+      TSymb.AddChildToken([TG1, TG2, TG3, TG4, TG5, TG6, TG7]);
+
+    TGAL:=AddSQLTokens(stKeyword, TGrant, 'ALL', [], 27);
+      TGAL1:=AddSQLTokens(stKeyword, TGAL, 'PRIVILEGES', []);
+
+    TG10:=AddSQLTokens(stKeyword, [TG1, TG2, TG3, TG4, TG5, TG6, TG7, TGAL, TGAL1], 'ON', []);
+    TG10:=AddSQLTokens(stKeyword, TG10, 'TABLES', [], 12);
+    TG10:=AddSQLTokens(stKeyword, TG10, 'TO', []);
+      TG11:=AddSQLTokens(stKeyword, TG10, 'GROUP', [], 28);
+
+    TG12:=AddSQLTokens(stIdentificator, [TG10, TG11], '', [], 5);
+    TG13:=AddSQLTokens(stKeyword, TG10, 'PUBLIC', [], 5);
+
+      TSymb:=AddSQLTokens(stSymbol, [TG11, TG12, TG13] , ',', [toOptional]);
+      TSymb.AddChildToken([TG12, TG11]);
+    TG1:=AddSQLTokens(stKeyword, [TG12, TG13], 'WITH', [toOptional], 27);
+    TG1:=AddSQLTokens(stKeyword, TG1, 'GRANT', []);
+    TG1:=AddSQLTokens(stKeyword, TG1, 'OPTION', []);
+
+
+
+
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON TABLES
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { { USAGE | SELECT | UPDATE }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON SEQUENCES
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { EXECUTE | ALL [ PRIVILEGES ] }
+    //    ON FUNCTIONS
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
   TRevoke:=AddSQLTokens(stKeyword, [FSQLTokens, TUsr1, TSchema1], 'REVOKE', [], 11);
+    T:=AddSQLTokens(stKeyword, TRevoke, 'GRANT', [], 27);
+    T:=AddSQLTokens(stKeyword, T, 'OPTION', []);
+    T:=AddSQLTokens(stKeyword, T, 'FOR', []);
+  TG1:=AddSQLTokens(stKeyword, [TRevoke, T], 'SELECT', [], 20);
+  TG2:=AddSQLTokens(stKeyword, [TRevoke, T], 'INSERT', [], 21);
+  TG3:=AddSQLTokens(stKeyword, [TRevoke, T], 'UPDATE', [], 22);
+  TG4:=AddSQLTokens(stKeyword, [TRevoke, T], 'DELETE', [], 23);
+  TG5:=AddSQLTokens(stKeyword, [TRevoke, T], 'TRUNCATE', [], 24);
+  TG6:=AddSQLTokens(stKeyword, [TRevoke, T], 'REFERENCES', [], 25);
+  TG7:=AddSQLTokens(stKeyword, [TRevoke, T], 'TRIGGER', [], 26);
+    TSymb:=AddSQLTokens(stSymbol, [TG1, TG2, TG3, TG4, TG5, TG6, TG7] , ',', []);
+    TSymb.AddChildToken([TG1, TG2, TG3, TG4, TG5, TG6, TG7]);
+
+  TGAL:=AddSQLTokens(stKeyword, [TRevoke, T], 'ALL', [], 27);
+    TGAL1:=AddSQLTokens(stKeyword, TGAL, 'PRIVILEGES', []);
+
+  TG10:=AddSQLTokens(stKeyword, [TG1, TG2, TG3, TG4, TG5, TG6, TG7, TGAL, TGAL1], 'ON', []);
+  TG10:=AddSQLTokens(stKeyword, TG10, 'TABLES', [], 12);
+  TG10:=AddSQLTokens(stKeyword, TG10, 'FROM', []);
+    TG11:=AddSQLTokens(stKeyword, TG10, 'GROUP', [], 28);
+
+  TG12:=AddSQLTokens(stIdentificator, [TG10, TG11], '', [], 5);
+  TG13:=AddSQLTokens(stKeyword, TG10, 'PUBLIC', [], 5);
+
+    TSymb:=AddSQLTokens(stSymbol, [TG11, TG12, TG13] , ',', [toOptional]);
+    TSymb.AddChildToken([TG12, TG11]);
+  AddSQLTokens(stKeyword, [TG12, TG13], 'CASCADE', [toOptional], 28);
+  AddSQLTokens(stKeyword, [TG12, TG13], 'RESTRICT', [toOptional], 29);
+
+
 end;
 
 procedure TPGSQLAlterDefaultPrivileges.InternalProcessChildToken(
@@ -7977,6 +8072,20 @@ begin
       end;
     3:if Assigned(FCurParam) then FCurParam.Caption:=AWord;
     4:Schemas.AddParam(AWord);
+    5:Tables.Add(AWord);
+    10:FKind:=adpkGrant;
+    11:FKind:=adpkRevoke;
+    12:ObjectKind:=okTable;
+    20:GrantTypes:=GrantTypes + [ogSelect];
+    21:GrantTypes:=GrantTypes + [ogInsert];
+    22:GrantTypes:=GrantTypes + [ogUpdate];
+    23:GrantTypes:=GrantTypes + [ogDelete];
+    24:GrantTypes:=GrantTypes + [ogTruncate];
+    25:GrantTypes:=GrantTypes + [ogReference];
+    26:GrantTypes:=GrantTypes + [ogTrigger];
+    27:GrantTypes:=GrantTypes + [ogWGO];
+    28:FDropRule:=drCascade;
+    29:FDropRule:=drRestrict;
   end;
 end;
 
@@ -7994,6 +8103,61 @@ begin
 
   if Schemas.Count > 0 then
     S:=S + ' IN SCHEMA '+Schemas.AsString;
+
+  if Kind = adpkGrant then
+  begin
+    //GRANT { { USAGE | SELECT | UPDATE }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON SEQUENCES
+    //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+    //GRANT { EXECUTE | ALL [ PRIVILEGES ] }
+    //    ON FUNCTIONS
+    //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+    S:=S + ' GRANT ';
+    case ObjectKind of
+      okTable:begin
+                S:=S + ObjectGrantToStr(GrantTypes, false); //AllPrivilegesShortForm);
+                S:=S + ' ON TABLES TO ' + Tables.AsString;
+              end;
+    end;
+
+    if ogWGO in GrantTypes then
+      S:=S + ' WITH GRANT OPTION';
+  end
+  else
+  begin
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { { SELECT | INSERT | UPDATE | DELETE | TRUNCATE | REFERENCES | TRIGGER }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON TABLES
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { { USAGE | SELECT | UPDATE }
+    //    [, ...] | ALL [ PRIVILEGES ] }
+    //    ON SEQUENCES
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
+    //REVOKE [ GRANT OPTION FOR ]
+    //    { EXECUTE | ALL [ PRIVILEGES ] }
+    //    ON FUNCTIONS
+    //    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    //    [ CASCADE | RESTRICT ]
+    S:=S + ' REVOKE';
+    if ogWGO in GrantTypes then
+      S:=S + ' GRANT OPTION FOR';
+    case ObjectKind of
+      okTable:begin
+                S:=S + ObjectGrantToStr(GrantTypes, false); //AllPrivilegesShortForm);
+                S:=S + ' ON TABLES FROM ' + Tables.AsString;
+              end;
+    end;
+
+    case DropRule of
+      drCascade:S:=S + ' CASCADE';
+      drRestrict:S:=S + ' RESTRICT';
+    end;
+  end;
 
   AddSQLCommand(S);
 end;
@@ -8014,6 +8178,8 @@ procedure TPGSQLAlterDefaultPrivileges.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLAlterDefaultPrivileges then
   begin
+    FKind:=TPGSQLAlterDefaultPrivileges(ASource).FKind;
+    FDropRule:=TPGSQLAlterDefaultPrivileges(ASource).FDropRule;
     FSchemas.Assign(TPGSQLAlterDefaultPrivileges(ASource).FSchemas);
   end;
   inherited Assign(ASource);
@@ -9708,7 +9874,7 @@ var
     TTblAll, TFromGrp, TUsrGrp, TCasc, TRestr, TTblSchema,
     TSymb2, TTblCol, TTblAll1, TOp10, TSeqSchema, TSeqName,
     TSeqAll, TObjSchema, TOp11, TFuncName, TOpExec, TOnF,
-    TFuncSchema, TSymb1, TOpt1: TSQLTokenRecord;
+    TFuncSchema, TSymb1, TOpt1, TRole: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REVOKE }
   (*
@@ -9897,9 +10063,12 @@ REVOKE [ ADMIN OPTION FOR ]
     TOpt:=AddSQLTokens(stKeyword, TOpt, 'OPTION', []);
     TOpt:=AddSQLTokens(stKeyword, TOpt, 'FOR', []);
     *)
+  TRole:=AddSQLTokens(stIdentificator, [FSQLTokens, TOpt], '', [], 111); //!!!
+    TSymb:=AddSQLTokens(stSymbol, TRole, ',', [], 34);
+      TSymb.AddChildToken(TRole);
 
 //---
-  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1], 'FROM', []);
+  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole], 'FROM', []);
     TFromGrp:=AddSQLTokens(stKeyword, TFrom, 'GROUP', [], 13);
   TUsrGrp:=AddSQLTokens(stIdentificator, [TFrom, TFromGrp], '', [], 14);
     TSymb:=AddSQLTokens(stSymbol, TUsrGrp, ',', [toOptional]);
@@ -10081,7 +10250,10 @@ begin
         end;
     109,
     110:FCurField:=nil;
-
+    111:begin
+           ObjectKind:=okRole;
+           Tables.Add(AWord);
+        end;
 (*
 
 FT10_1:=Owner.AddSQLTokens(stKeyword, InToken, 'IN', [], 101);
@@ -10123,12 +10295,12 @@ begin
       [ CASCADE | RESTRICT ]
 
   *)
-  S:='REVOKE ';
+  S:='REVOKE';
   if ogWGO in GrantTypes then
     if ObjectKind = okRole then
-      S:=S + 'ADMIN OPTION FOR '
+      S:=S + ' ADMIN OPTION FOR'
     else
-      S:=S + 'GRANT OPTION FOR ';
+      S:=S + ' GRANT OPTION FOR';
 
   C:=0;
   if ObjectKind <> okRole then
@@ -10155,7 +10327,7 @@ begin
     end
     else
     begin
-      S:=S + ObjectGrantToStr(GrantTypes, true);
+      S:=S + ' ' + ObjectGrantToStr(GrantTypes, true);
     end;
     S:=S + ' ON';
   end;
@@ -10600,41 +10772,91 @@ end;
 
 procedure TPGSQLSecurityLabel.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TOn, T2, TIs, TName, TName1, TName2, T3, T4,
+    T5, T6: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для SECURITY LABEL [ FOR provider ] ON }
-  (*
-SECURITY LABEL [ FOR provider ] ON
-{
-  TABLE object_name |
-  COLUMN table_name.column_name |
-  AGGREGATE agg_name (agg_type [, ...] ) |
-  DOMAIN object_name |
-  FOREIGN TABLE object_name
-  FUNCTION function_name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) |
-  LARGE OBJECT large_object_oid |
-  [ PROCEDURAL ] LANGUAGE object_name |
-  SCHEMA object_name |
-  SEQUENCE object_name |
-  TYPE object_name |
-  VIEW object_name
-} IS 'label'
-  *)
+  //SECURITY LABEL [ FOR provider ] ON
+  //{
+  //  TABLE object_name |
+  //  COLUMN table_name.column_name |
+  //  AGGREGATE agg_name (agg_type [, ...] ) |
+  //  DOMAIN object_name |
+  //  FOREIGN TABLE object_name
+  //  FUNCTION function_name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) |
+  //  LARGE OBJECT large_object_oid |
+  //  [ PROCEDURAL ] LANGUAGE object_name |
+  //  SCHEMA object_name |
+  //  SEQUENCE object_name |
+  //  TYPE object_name |
+  //  VIEW object_name
+  //} IS 'label'
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SECURITY', [toFirstToken]);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'LABEL', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'LABEL', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'FOR', []);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  TOn:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'ON', []);
+    T2:=AddSQLTokens(stKeyword, TOn, 'TABLE', [], 2);
+    T3:=AddSQLTokens(stKeyword, TOn, 'COLUMN', [], 3);
+    T4:=AddSQLTokens(stKeyword, TOn, 'DOMAIN', [], 4);
+    T5:=AddSQLTokens(stKeyword, TOn, 'FOREIGN', [], 5);
+      T5:=AddSQLTokens(stKeyword, T5, 'TABLE', []);
+    T6:=AddSQLTokens(stKeyword, TOn, 'LARGE', [], 6); //  LARGE OBJECT large_object_oid |
+      T6:=AddSQLTokens(stKeyword, T6, 'OBJECT', []);
+
+  //  [ PROCEDURAL ] LANGUAGE object_name |
+  //  SCHEMA object_name |
+  //  SEQUENCE object_name |
+  //  TYPE object_name |
+  //  VIEW object_name
+  //  FUNCTION function_name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) |
+  //  AGGREGATE agg_name (agg_type [, ...] ) |
+    TName:=AddSQLTokens(stIdentificator, [T2, T3, T4, T5, T6], '', [], 90);
+    T:=AddSQLTokens(stSymbol, T2, '.', []);
+    TName1:=AddSQLTokens(stIdentificator, T, '', [], 91);
+    T:=AddSQLTokens(stSymbol, TName1, '.', []);
+    TName2:=AddSQLTokens(stIdentificator, T, '', [], 91);
+
+  TIs:=AddSQLTokens(stKeyword, [TName, TName1, TName2], 'IS', []);
+    AddSQLTokens(stString, TIs, '', [], 100);
 end;
 
 procedure TPGSQLSecurityLabel.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Provider:=AWord;
+    2:ObjectType:=okTable;
+    3:ObjectType:=okColumn;
+    4:ObjectType:=okDomain;
+    5:ObjectType:=okForeignTable;
+    6:ObjectType:=okLargeObject;
+    100:SecurityLabel:=AWord;
+  end;
 end;
 
 procedure TPGSQLSecurityLabel.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='SECURITY LABEL';
-  AddSQLCommand(Result);
+  S:='SECURITY LABEL';
+  if Provider <> '' then
+    S:=S + ' FOR '+Provider;
+
+  S:=S + ' ON ' + PGObjectNames[ObjectType] + Name;
+  S:=S + ' IS ' + SecurityLabel;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLSecurityLabel.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLSecurityLabel then
+  begin
+    Provider:=TPGSQLSecurityLabel(ASource).Provider;
+    SecurityLabel:=TPGSQLSecurityLabel(ASource).SecurityLabel;
+    ObjectType:=TPGSQLSecurityLabel(ASource).ObjectType;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLSavepoint }
@@ -10643,9 +10865,7 @@ procedure TPGSQLSavepoint.InitParserTree;
 var
   FSQLTokens: TSQLTokenRecord;
 begin
-  (*
-  SAVEPOINT savepoint_name
-  *)
+  //SAVEPOINT savepoint_name
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SAVEPOINT', [toFindWordLast, toFirstToken]);
     AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 end;
@@ -11872,49 +12092,45 @@ procedure TPGSQLCopy.InitParserTree;
 var
   FSQLTokens, T1, T2, T, T4, T5, T6, T7_1, T3, T7, T8, T9, T10,
     T10_1, T11, T11_1, T12_1, T12, T14, T13, T13_1, T14_1, T15,
-    T15_1, T16, T16_1, TT, T20, T21, T21_1, T17, T17_1, T21_2: TSQLTokenRecord;
+    T15_1, T16, T16_1, TT, T20, T21, T21_1, T17, T17_1, T21_2,
+    TSqrQ: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать команду COPY - разбор SELECT и VALUES}
-
-  (*
-  COPY имя_таблицы [ ( имя_столбца [, ...] ) ]
-      FROM { 'имя_файла' | PROGRAM 'команда' | STDIN }
-      [ [ WITH ] ( параметр [, ...] ) ]
-
-  COPY { имя_таблицы [ ( имя_столбца [, ...] ) ] | ( запрос ) }
-      TO { 'имя_файла' | PROGRAM 'команда' | STDOUT }
-      [ [ WITH ] ( параметр [, ...] ) ]
-
-  Здесь допускается параметр:
-
-      FORMAT имя_формата
-      OIDS [ boolean ]
-      FREEZE [ boolean ]
-      DELIMITER 'символ_разделитель'
-      NULL 'маркер_NULL'
-      HEADER [ boolean ]
-      QUOTE 'символ_кавычек'
-      ESCAPE 'символ_экранирования'
-      FORCE_QUOTE { ( имя_столбца [, ...] ) | * }
-      FORCE_NOT_NULL ( имя_столбца [, ...] )
-      FORCE_NULL ( имя_столбца [, ...] )
-      ENCODING 'имя_кодировки'
-*)
+  //COPY имя_таблицы [ ( имя_столбца [, ...] ) ]
+  //    FROM { 'имя_файла' | PROGRAM 'команда' | STDIN }
+  //    [ [ WITH ] ( параметр [, ...] ) ]
+  //COPY { имя_таблицы [ ( имя_столбца [, ...] ) ] | ( запрос ) }
+  //    TO { 'имя_файла' | PROGRAM 'команда' | STDOUT }
+  //    [ [ WITH ] ( параметр [, ...] ) ]
+  //Здесь допускается параметр:
+  //    FORMAT имя_формата
+  //    OIDS [ boolean ]
+  //    FREEZE [ boolean ]
+  //    DELIMITER 'символ_разделитель'
+  //    NULL 'маркер_NULL'
+  //    HEADER [ boolean ]
+  //    QUOTE 'символ_кавычек'
+  //    ESCAPE 'символ_экранирования'
+  //    FORCE_QUOTE { ( имя_столбца [, ...] ) | * }
+  //    FORCE_NOT_NULL ( имя_столбца [, ...] )
+  //    FORCE_NULL ( имя_столбца [, ...] )
+  //    ENCODING 'имя_кодировки'
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'COPY', [toFindWordLast, toFirstToken]);
+
   T1:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
   T:=AddSQLTokens(stSymbol, T1, '.', []);
   T2:=AddSQLTokens(stIdentificator, T, '', [], 2);
-  T:=AddSQLTokens(stSymbol, T1, '(', []);
-  T2.AddChildToken(T);
-  T3:=AddSQLTokens(stIdentificator, T, '', [], 3);
-  T:=AddSQLTokens(stSymbol, T3, ',', []);
-  T.AddChildToken(T3);
-  T:=AddSQLTokens(stSymbol, T3, ')', []);
 
-  T20:=AddSQLTokens(stKeyword, T, 'TO', []);
-  T1.AddChildToken(T20);
-  T2.AddChildToken(T20);
+    T:=AddSQLTokens(stSymbol, [T1, T2], '(', []);
+    T3:=AddSQLTokens(stIdentificator, T, '', [], 3);
+    T:=AddSQLTokens(stSymbol, T3, ',', []);
+    T.AddChildToken(T3);
+    T:=AddSQLTokens(stSymbol, T3, ')', []);
+
+  TSqrQ:=AddSQLTokens(stIdentificator, FSQLTokens, '(', [], 24);
+
+  T20:=AddSQLTokens(stKeyword, [T, T1, T2, TSqrQ], 'TO', []);
+
   T21:=AddSQLTokens(stString, T20, '', [], 21);
   T21_1:=AddSQLTokens(stKeyword, T20, 'STDOUT', [],  21);
   T21_2:=AddSQLTokens(stKeyword, T20, 'PROGRAM', [],  22);
@@ -11927,16 +12143,9 @@ begin
 
   T4:=AddSQLTokens(stString, T, '', [], 4);
   T5:=AddSQLTokens(stKeyword, T, 'STDIN', [], 4);
-  T:=AddSQLTokens(stKeyword, T4, 'WITH', []);
-  T5.AddChildToken(T);
-  T21.AddChildToken(T);
-  T21_1.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [T4, T5, T21, T21_1], 'WITH', [toOptional], 23);
 
-  T6:=AddSQLTokens(stSymbol, T, '(', []);
-  T4.AddChildToken(T6);
-  T5.AddChildToken(T6);
-  T21.AddChildToken(T6);
-  T21_1.AddChildToken(T6);
+  T6:=AddSQLTokens(stSymbol, [T, T4, T5, T21, T21_1], '(', [toOptional]);
 
   T7:=AddSQLTokens(stKeyword, T6, 'FORMAT', []);
   T7_1:=AddSQLTokens(stIdentificator, T7, '', [], 7);
@@ -12036,6 +12245,8 @@ begin
         FCopyType:=cptTo;
       end;
     22:FIsProgramm:=true;
+    23:FIsWith:=true;
+    24:FSourceQuery:=ASQLParser.GetToBracket(')');
   end;
 end;
 
@@ -12070,9 +12281,15 @@ begin
   else
   if FCopyType = cptTo then
   begin
-    Result:=Result  + TableName;
-    if Params.Count>0 then
-      Result:=Result  + ' ('+Params.AsString + ')';
+    if SourceQuery <> '' then
+      Result:=Result  + '(' + SourceQuery + ')'
+    else
+    begin
+      Result:=Result  + TableName;
+      if Params.Count>0 then
+        Result:=Result  + ' ('+Params.AsString + ')';
+    end;
+
     Result:=Result + ' TO ';
 
     if FIsProgramm then
@@ -12118,7 +12335,11 @@ begin
       S:=S + ', FORCE_NOT_NULL (' + FQuoteColumns.AsString + ')';
 
   if S<>'' then
-    Result:=Result + ' WITH (' + Copy(S, 3, Length(S)) + ')';
+  begin
+    if FIsWith then
+      Result:=Result + ' WITH';
+    Result:=Result + ' (' + Copy(S, 3, Length(S)) + ')';
+  end;
 
   AddSQLCommand(Result);
 end;
@@ -12137,6 +12358,8 @@ begin
     QuoteCharacter:=TPGSQLCopy(ASource).QuoteCharacter;
     EscapeCharacter:=TPGSQLCopy(ASource).EscapeCharacter;
     EncodingName:=TPGSQLCopy(ASource).EncodingName;
+    IsWith:=TPGSQLCopy(ASource).IsWith;
+    SourceQuery:=TPGSQLCopy(ASource).SourceQuery;
 
     QuoteColumns.Assign(TPGSQLCopy(ASource).QuoteColumns);
     NotNullColumn.Assign(TPGSQLCopy(ASource).NotNullColumn);
@@ -12583,7 +12806,7 @@ procedure TPGSQLSet.InitParserTree;
 var
   FSQLTokens, T1, T2, T, TV, T8, T8_1, T11, T12, T16, T15,
     T21, T22, T23, T24, T25, T7, T27, T16_1, T29, T13, T26,
-    TSymb, TSet1, TSet2: TSQLTokenRecord;
+    TSymb, TSet1, TSet2, T15_1: TSQLTokenRecord;
 begin
   (*
   SET [ SESSION | LOCAL ] configuration_parameter { TO | = } { value | 'value' | DEFAULT }
@@ -12598,6 +12821,7 @@ begin
   SET [ SESSION | LOCAL ] SESSION AUTHORIZATION DEFAULT
 
   SET TRANSACTION transaction_mode [, ...]
+  SET TRANSACTION SNAPSHOT id_снимка
   SET SESSION CHARACTERISTICS AS TRANSACTION transaction_mode [, ...]
 
 where transaction_mode is one of:
@@ -12606,7 +12830,7 @@ where transaction_mode is one of:
     READ WRITE | READ ONLY
     [ NOT ] DEFERRABLE
   *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFindWordLast, toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFindWordLast, toFirstToken], 0);
     TSet1:=AddSQLTokens(stKeyword, FSQLTokens, 'SESSION', [], 1);
     TSet2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
     T:=AddSQLTokens(stIdentificator, [FSQLTokens, TSet1, TSet2], '', [], 3);
@@ -12649,21 +12873,23 @@ where transaction_mode is one of:
 
 
     T13:=AddSQLTokens(stKeyword, [TSet1, TSet2], 'SESSION', [], 13);
-    T13:=AddSQLTokens(stKeyword, [TSet1, TSet2, T13], 'AUTHORIZATION', []);
+    T13:=AddSQLTokens(stKeyword, [TSet1, TSet2, T13], 'AUTHORIZATION', [], 31);
       AddSQLTokens(stKeyword, T13, 'DEFAULT', [], 14);
       AddSQLTokens(stIdentificator, T13, '', [], 14);
       AddSQLTokens(stString, T13, '', [], 14);
 
+      //SET TRANSACTION SNAPSHOT id_снимка
     T15:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [], 15);
-    T1.AddChildToken(T15);
+      T15_1:=AddSQLTokens(stKeyword, T15, 'SNAPSHOT', []);
+        AddSQLTokens(stString, T15_1, '', [], 30);
 
     T16:=AddSQLTokens(stKeyword, T13, 'CHARACTERISTICS', [], 16);
     T16_1:=AddSQLTokens(stKeyword, T16, 'AS', []);
     T16_1:=AddSQLTokens(stKeyword, T16_1, 'TRANSACTION', []);
 
 
-    T:=AddSQLTokens(stKeyword, T16_1, 'ISOLATION', []);
-      T15.AddChildToken(T);
+    T:=AddSQLTokens(stKeyword, [T15, T16_1], 'ISOLATION', []);
+
     T:=AddSQLTokens(stKeyword, T, 'LEVEL', []);
     T21:=AddSQLTokens(stKeyword, T, 'SERIALIZABLE', [], 21);
     T22:=AddSQLTokens(stKeyword, T, 'REPEATABLE', []);
@@ -12691,7 +12917,11 @@ procedure TPGSQLSet.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FSetScope:=ssSession;
+    0:FSessionCnt:=0;
+    1:begin
+        FSetScope:=ssSession;
+        Inc(FSessionCnt);
+      end;
     2:FSetScope:=ssLocal;
     3:FConfigurationParameter:=AWord;
     4:begin
@@ -12705,6 +12935,7 @@ begin
     10:FTimeScope:=tsImmediate;
     12:FRoleName:=AWord;
     14:FSessionAuthorizationUserName:=AWord;
+    13:Inc(FSessionCnt);
     15:FTransaction:=true;
     16:FSessionTransaction:=true;
     17:SetVarType:=svtSet;
@@ -12716,6 +12947,9 @@ begin
     26:FReadWriteMode:=rwmReadWrite;
     27:FReadWriteMode:=rwmReadOnly;
     28:FNotDeferrable:=true;
+    30:FTransactionID:=AWord;
+    31:if FSessionCnt = 1 then
+         FSetScope:=ssNone;
   end;
 end;
 
@@ -12767,21 +13001,26 @@ begin
   else
   if FTransaction or FSessionTransaction then
   begin
-    if FTransaction then
-      Result:=Result + ' SET TRANSACTION '
+    if TransactionID <> '' then
+      Result:=Result + ' TRANSACTION SNAPSHOT ' + TransactionID
     else
-      Result:=Result + ' SET SESSION CHARACTERISTICS AS TRANSACTION ';
+    begin
+      if FTransaction then
+        Result:=Result + ' SET TRANSACTION '
+      else
+        Result:=Result + ' SET SESSION CHARACTERISTICS AS TRANSACTION ';
 
-    if FIsolationLevel <> tilNone then
-      Result:=Result + ' ' + PGTransactionIsolationLevelStr[FIsolationLevel];
+      if FIsolationLevel <> tilNone then
+        Result:=Result + ' ' + PGTransactionIsolationLevelStr[FIsolationLevel];
 
-    case FReadWriteMode of
-      rwmReadOnly:Result:=Result + ' READ ONLY';
-      rwmReadWrite:Result:=Result + ' READ WRITE';
+      case FReadWriteMode of
+        rwmReadOnly:Result:=Result + ' READ ONLY';
+        rwmReadWrite:Result:=Result + ' READ WRITE';
+      end;
+
+      if FNotDeferrable then
+        Result:=Result + ' NOT DEFERRABLE'
     end;
-
-    if FNotDeferrable then
-      Result:=Result + ' NOT DEFERRABLE'
   end;
   AddSQLCommand(Result);
 end;
@@ -12804,6 +13043,7 @@ begin
     IsolationLevel:=TPGSQLSet(ASource).IsolationLevel;
     NotDeferrable:=TPGSQLSet(ASource).NotDeferrable;
     SetVarType:=TPGSQLSet(ASource).SetVarType;
+    TransactionID:=TPGSQLSet(ASource).TransactionID;
   end;
   inherited Assign(ASource);
 end;
@@ -15210,19 +15450,27 @@ end;
 
 procedure TPGSQLCreateSchema.InitParserTree;
 var
-  T, T1, FSQLTokens: TSQLTokenRecord;
+  T, T1, FSQLTokens, TName, TAuto, TAuto1, T3: TSQLTokenRecord;
 begin
-  { TODO : Реализовать парсер schema_element }
-(* CREATE SCHEMA schema_name [ AUTHORIZATION user_name ] [ schema_element [ ... ] ] *)
-(*  CREATE SCHEMA AUTHORIZATION user_name [ schema_element [ ... ] ] *)
+  //CREATE SCHEMA имя_схемы [ AUTHORIZATION указание_роли ] [ элемент_схемы [ ... ] ]
+  //CREATE SCHEMA AUTHORIZATION указание_роли [ элемент_схемы [ ... ] ]
+  //CREATE SCHEMA IF NOT EXISTS имя_схемы [ AUTHORIZATION указание_роли ]
+  //CREATE SCHEMA IF NOT EXISTS AUTHORIZATION указание_роли
+  //Здесь указание_роли:
+  //    имя_пользователя
+  //  | CURRENT_USER
+  //  | SESSION_USER
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okScheme);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'SCHEMA', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SCHEMA', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [], -1);
+    T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
 
-  T1:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  TName:=AddSQLTokens(stIdentificator, [FSQLTokens, T1], '', [], 1);
+  TAuto:=AddSQLTokens(stKeyword, [TName, FSQLTokens, T1], 'AUTHORIZATION', [toOptional]);
+    TAuto1:=AddSQLTokens(stIdentificator, TAuto, '', [], 2);
 
-  T:=AddSQLTokens(stKeyword, T, 'AUTHORIZATION', []);
-    T1.AddChildToken(T);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+  T3:=AddSQLTokens(stIdentificator, [TName, TAuto1], 'CREATE', [toOptional], 3);
 end;
 
 procedure TPGSQLCreateSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15232,6 +15480,10 @@ begin
   case AChild.Tag of
     1:Name:=AWord;
     2:FOwnerUserName:=AWord;
+    3:begin
+        ASQLParser.Position:=ASQLParser.WordPosition;
+        FChildCmd:=ASQLParser.GetToCommandDelemiter;
+      end;
   end;
 end;
 
@@ -15239,18 +15491,23 @@ procedure TPGSQLCreateSchema.MakeSQL;
 var
   S: String;
 begin
-  if Name = '' then
-    S:='CREATE SCHEMA'
-  else
-    S:='CREATE SCHEMA ' + Name;
+  S:='CREATE SCHEMA';
+  if ooIfNotExists in Options then S:=S + ' IF NOT EXISTS';
+  if Name <> '' then S:=S + ' ' + Name;
 
   if FOwnerUserName <> '' then
     S:=S + ' AUTHORIZATION ' +FOwnerUserName;
 
+  if FChildCmd<>'' then
+  begin
+    if FChildCmd[1]>' ' then S:=S + LineEnding;
+    S:=S + FChildCmd;
+  end;
+
   AddSQLCommand(S);
 
   if Description <> '' then
-    AddSQLCommandEx('COMMENT ON SCHEMA %s IS %s', [Name, QuotedStr(Description)]);
+    DescribeObject;
 end;
 
 constructor TPGSQLCreateSchema.Create(AParent: TSQLCommandAbstract);
@@ -15265,6 +15522,7 @@ begin
   if ASource is TPGSQLCreateSchema then
   begin
     OwnerUserName:=TPGSQLCreateSchema(ASource).OwnerUserName;
+    ChildCmd:=TPGSQLCreateSchema(ASource).ChildCmd;
   end;
   inherited Assign(ASource);
 end;
