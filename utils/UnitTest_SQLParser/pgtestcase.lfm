@@ -724,7 +724,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 8
   end
   object sDML: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'Insert1'
@@ -771,7 +771,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'Insert8'
         Lines.Strings = (
-          'INSERT INTO tictactoe (game, board[1:3][1:3]) VALUES (1, ''{{'','' , },{" "," "," "},{" "," "," "}}'''');'
+          'INSERT INTO tictactoe (game, board[1:3][1:3]) VALUES (1, ''{{'','' , },{" "," "," "},{" "," "," "}}'');'
         )
       end    
       item
@@ -783,37 +783,37 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'Insert10'
         Lines.Strings = (
-          'INSERT INTO distributors (did, dname) VALUES (DEFAULT, ''''XYZ Widgets'''') RETURNING did;'
+          'INSERT INTO distributors (did, dname) VALUES (DEFAULT, ''XYZ Widgets'') RETURNING did;'
         )
       end    
       item
         Caption = 'Insert11'
         Lines.Strings = (
-          'WITH upd AS ( UPDATE employees SET sales_count = sales_count + 1 WHERE id = (SELECT sales_person FROM accounts WHERE name = ''''Acme Corporation'''') RETURNING *) INSERT INTO employees_log SELECT *, current_timestamp FROM upd;'
+          'WITH upd AS ( UPDATE employees SET sales_count = sales_count + 1 WHERE id = (SELECT sales_person FROM accounts WHERE name = ''Acme Corporation'') RETURNING *) INSERT INTO employees_log SELECT *, current_timestamp FROM upd;'
         )
       end    
       item
         Caption = 'Insert12'
         Lines.Strings = (
-          'INSERT INTO distributors (did, dname) VALUES (7, ''''Redline GmbH'''') ON CONFLICT (did) DO NOTHING;'
+          'INSERT INTO distributors (did, dname) VALUES (7, ''Redline GmbH'') ON CONFLICT (did) DO NOTHING;'
         )
       end    
       item
         Caption = 'Insert13'
         Lines.Strings = (
-          'INSERT INTO distributors (did, dname) VALUES (5, ''''Gizmo Transglobal''''), (6, ''''Associated Computing, Inc'''') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;'
+          'INSERT INTO distributors (did, dname) VALUES (5, ''Gizmo Transglobal''), (6, ''Associated Computing, Inc'') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;'
         )
       end    
       item
         Caption = 'Insert14'
         Lines.Strings = (
-          'INSERT INTO distributors AS d (did, dname) VALUES (8, ''''Anvil Distribution'''') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname || '''' (formerly '''' || d.dname || '''')''''    WHERE d.zipcode <> ''''21201'';'
+          'INSERT INTO distributors AS d (did, dname) VALUES (8, ''Anvil Distribution'') ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname || '' (formerly '' || d.dname || '')''    WHERE d.zipcode <> ''21201'';'
         )
       end    
       item
         Caption = 'Insert15'
         Lines.Strings = (
-          'INSERT INTO distributors (did, dname) VALUES (9, ''''Antwerp Design'''') ON CONFLICT ON CONSTRAINT distributors_pkey DO NOTHING;'
+          'INSERT INTO distributors (did, dname) VALUES (9, ''Antwerp Design'') ON CONFLICT ON CONSTRAINT distributors_pkey DO NOTHING;'
         )
       end    
       item
