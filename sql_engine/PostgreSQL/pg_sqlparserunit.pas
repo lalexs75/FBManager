@@ -16429,7 +16429,8 @@ procedure TPGSQLCreateTrigger.InitParserTree;
 var
   T, T1, T2, T4, T5, T6, T7, T4_1, T5_1, T6_1, TT, TS, TN, T15,
     T11, T12, T13, T14, FSQLTokens, T_OF, T7_1, T3, TDif2,
-    TDif1, TDif1_1, TDif3, TDif3_1, TDif3_2: TSQLTokenRecord;
+    TDif1, TDif1_1, TDif3, TDif3_1, TDif3_2, TRef1, TFor,
+    TFor1: TSQLTokenRecord;
 begin
   //CREATE [ CONSTRAINT ] TRIGGER имя { BEFORE | AFTER | INSTEAD OF } { событие [ OR ... ] }
   //    ON имя_таблицы
