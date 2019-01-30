@@ -1,15 +1,15 @@
 inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
   Height = 464
-  Width = 844
+  Width = 868
   ClientHeight = 464
-  ClientWidth = 844
+  ClientWidth = 868
   DesignLeft = 352
   DesignTop = 314
   object DataGrid: TRxDBGrid[0]
     Left = 0
     Height = 431
     Top = 33
-    Width = 844
+    Width = 868
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
     AutoSort = True
@@ -81,8 +81,8 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     FocusColor = clRed
     SelectedColor = clHighlight
     GridLineStyle = psSolid
-    DataSource = Datasource1
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    DataSource = DataSource1
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook]
     PopupMenu = PopupMenu1
     TabOrder = 0
     TitleStyle = tsNative
@@ -95,10 +95,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     Left = 0
     Height = 33
     Top = 0
-    Width = 844
+    Width = 868
     Align = alTop
     ClientHeight = 33
-    ClientWidth = 844
+    ClientWidth = 868
     TabOrder = 1
     object SpeedButton1: TSpeedButton
       AnchorSideLeft.Control = DBNavigator1
@@ -128,7 +128,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       ChildSizing.ControlsPerLine = 100
       ClientHeight = 31
       ClientWidth = 241
-      DataSource = Datasource1
+      DataSource = DataSource1
       Options = []
       TabOrder = 0
     end
@@ -190,9 +190,24 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Anchors = [akTop, akLeft, akBottom]
       ShowCaption = False
     end
+    object Label2: TLabel
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 817
+      Height = 19
+      Top = 7
+      Width = 44
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 6
+      Caption = 'Label2'
+      ParentColor = False
+    end
   end
-  object Datasource1: TDataSource[2]
-    OnStateChange = Datasource1StateChange
+  object DataSource1: TDataSource[2]
+    OnStateChange = DataSource1StateChange
     Left = 116
     Top = 102
   end

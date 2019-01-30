@@ -1247,8 +1247,6 @@ end;
 
 procedure TfbmSQLEditorForm.DataSetAfterScrollRecord(Sender: TDataSet);
 begin
-  Label1.Caption:=IntToStr(QueryControl.DataSet.RecordCount)+sRecordFetched;
-
   if dbGrid1.SelectedRows.Count > 1 then
     Label1.Caption:=Format(sRecordFetchedWithSelected, [QueryControl.DataSet.RecordCount, dbGrid1.SelectedRows.Count])
   else

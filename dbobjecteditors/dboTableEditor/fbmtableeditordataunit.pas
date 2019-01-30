@@ -39,6 +39,7 @@ type
     dataCopyAsUpdate: TAction;
     dataCopyAsInsert: TAction;
     dataCopyRows: TAction;
+    Label2: TLabel;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
@@ -70,7 +71,7 @@ type
     dataExport: TAction;
     dataPrint: TAction;
     ActionList1: TActionList;
-    Datasource1: TDatasource;
+    DataSource1: TDatasource;
     DBNavigator1: TDBNavigator;
     FPDataExporter1: TFPDataExporter;
     MenuItem1: TMenuItem;
@@ -95,7 +96,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure dataImportExecute(Sender: TObject);
     procedure dataPrintExecute(Sender: TObject);
-    procedure Datasource1StateChange(Sender: TObject);
+    procedure DataSource1StateChange(Sender: TObject);
     procedure RxDBGridExportSpreadSheet1BeforeExecute(Sender: TObject);
     procedure statFilterExecute(Sender: TObject);
     procedure statFunctExecute(Sender: TObject);
@@ -111,6 +112,7 @@ type
     procedure SetRecordCountCaption(const S:string);
     procedure RefreshData;
     function PrimaryKeyField:string;
+    procedure DataSetAfterScrollRecord(Sender: TDataSet);
   public
     procedure Localize; override;
     function PageName:string; override;
@@ -150,7 +152,7 @@ end;
 procedure TfbmTableEditorDataFrame.dataCopyCellFieldNameExecute(Sender: TObject
   );
 begin
-  if Assigned(Datasource1.DataSet) and Datasource1.DataSet.Active and (Datasource1.DataSet.RecordCount>0) then
+  if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active and (DataSource1.DataSet.RecordCount>0) then
   begin
     Clipboard.Open;
     Clipboard.AsText:=DataGrid.SelectedColumn.Field.FieldName;
@@ -160,20 +162,20 @@ end;
 
 procedure TfbmTableEditorDataFrame.dataCopyAsInsertExecute(Sender: TObject);
 begin
-  if Assigned(Datasource1.DataSet) and Datasource1.DataSet.Active and (Datasource1.DataSet.RecordCount>0) then
+  if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active and (DataSource1.DataSet.RecordCount>0) then
   begin
     Clipboard.Open;
-    Clipboard.AsText:=MakeSQLInsert(Datasource1.DataSet, DBObject.CaptionFullPatch);
+    Clipboard.AsText:=MakeSQLInsert(DataSource1.DataSet, DBObject.CaptionFullPatch);
     Clipboard.Close;
   end;
 end;
 
 procedure TfbmTableEditorDataFrame.dataCopyAsUpdateExecute(Sender: TObject);
 begin
-  if Assigned(Datasource1.DataSet) and Datasource1.DataSet.Active and (Datasource1.DataSet.RecordCount>0) then
+  if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active and (DataSource1.DataSet.RecordCount>0) then
   begin
     Clipboard.Open;
-    Clipboard.AsText:=MakeSQLUpdate(Datasource1.DataSet, DBObject.CaptionFullPatch, PrimaryKeyField);
+    Clipboard.AsText:=MakeSQLUpdate(DataSource1.DataSet, DBObject.CaptionFullPatch, PrimaryKeyField);
     Clipboard.Close;
   end;
 end;
@@ -251,16 +253,16 @@ begin
   RxDBGridPrint1.PreviewReport;
 end;
 
-procedure TfbmTableEditorDataFrame.Datasource1StateChange(Sender: TObject);
+procedure TfbmTableEditorDataFrame.DataSource1StateChange(Sender: TObject);
 var
   i:integer;
   C:TRxColumn;
 begin
-  if Assigned(Datasource1.DataSet) then
+  if Assigned(DataSource1.DataSet) then
   begin
-    if (FPriorState = dsInactive) and (Datasource1.DataSet.State = dsBrowse) then
+    if (FPriorState = dsInactive) and (DataSource1.DataSet.State = dsBrowse) then
     begin
-      if Datasource1.DataSet.Active and (FColSizes.Count>0) then
+      if DataSource1.DataSet.Active and (FColSizes.Count>0) then
       begin
         for i:=0 to FColSizes.Count-1 do
         begin
@@ -270,7 +272,7 @@ begin
         end
       end;
     end;
-    FPriorState:=Datasource1.DataSet.State;
+    FPriorState:=DataSource1.DataSet.State;
   end
   else
     FPriorState:=dsInactive;
@@ -340,10 +342,10 @@ end;
 
 procedure TfbmTableEditorDataFrame.RefreshData;
 begin
-  if Assigned(Datasource1.DataSet) and Datasource1.DataSet.Active then
+  if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active then
   begin
-    RefreshQuery(Datasource1.DataSet);
-    //Datasource1.DataSet.Refresh;
+    RefreshQuery(DataSource1.DataSet);
+    //DataSource1.DataSet.Refresh;
   end;
 end;
 
@@ -362,6 +364,14 @@ begin
       Exit;
     end;
   end;
+end;
+
+procedure TfbmTableEditorDataFrame.DataSetAfterScrollRecord(Sender: TDataSet);
+begin
+  if DataGrid.SelectedRows.Count > 1 then
+    Label2.Caption:=Format(sRecordFetchedWithSelected, [DataSource1.DataSet.RecordCount, DataGrid.SelectedRows.Count])
+  else
+    Label2.Caption:=Format(sRecordFetched, [DataSource1.DataSet.RecordCount]);
 end;
 
 procedure TfbmTableEditorDataFrame.Localize;
@@ -395,8 +405,10 @@ end;
 
 procedure TfbmTableEditorDataFrame.Activate;
 begin
-  Datasource1.DataSet:=TDBDataSetObject(DBObject).DataSet(SpinEdit1.Value);
-  Datasource1.DataSet.Active:=true;
+  DataSource1.DataSet:=TDBDataSetObject(DBObject).DataSet(SpinEdit1.Value);
+  DataSource1.DataSet.Active:=true;
+  DataSource1.DataSet.AfterScroll:=@DataSetAfterScrollRecord;
+  DataSource1.DataSet.AfterOpen:=@DataSetAfterScrollRecord;
   SetRxDBGridOptions(DataGrid);
 end;
 

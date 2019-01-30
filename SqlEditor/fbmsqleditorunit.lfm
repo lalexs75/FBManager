@@ -182,9 +182,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Height = 419
       Top = 1
       Width = 743
-      ActivePage = TabSqlEdit
+      ActivePage = tabResult
       Align = alClient
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       OnChange = PageControl1Change
       object TabSqlEdit: TTabSheet
@@ -208,12 +208,12 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
         ClientWidth = 733
         object Panel5: TPanel
           Left = 0
-          Height = 393
+          Height = 386
           Top = 0
           Width = 733
           Align = alClient
           Caption = 'Panel5'
-          ClientHeight = 393
+          ClientHeight = 386
           ClientWidth = 733
           TabOrder = 0
           object Panel2: TPanel
@@ -263,10 +263,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
               AnchorSideTop.Side = asrCenter
               AnchorSideRight.Control = Panel2
               AnchorSideRight.Side = asrBottom
-              Left = 686
-              Height = 17
-              Top = 8
-              Width = 38
+              Left = 681
+              Height = 19
+              Top = 7
+              Width = 43
               Alignment = taRightJustify
               Anchors = [akTop, akRight]
               BorderSpacing.Right = 6
@@ -317,7 +317,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           end
           object PageControl2: TPageControl
             Left = 1
-            Height = 358
+            Height = 351
             Top = 34
             Width = 731
             ActivePage = TabSheet1
@@ -327,11 +327,11 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
             TabPosition = tpBottom
             object TabSheet1: TTabSheet
               Caption = 'Grid'
-              ClientHeight = 354
-              ClientWidth = 727
+              ClientHeight = 318
+              ClientWidth = 721
               object dbGrid1: TRxDBGrid
                 Left = 0
-                Height = 327
+                Height = 318
                 Top = 0
                 Width = 721
                 ColumnDefValues.BlobText = '(примечание)'
@@ -415,8 +415,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
             end
             object TabSheet2: TTabSheet
               Caption = 'Form'
-              ClientHeight = 354
-              ClientWidth = 727
+              ClientHeight = 318
+              ClientWidth = 721
               object RxDBVerticalGrid1: TRxDBVerticalGrid
                 Left = 0
                 Height = 321
