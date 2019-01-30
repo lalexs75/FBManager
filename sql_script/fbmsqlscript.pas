@@ -454,17 +454,28 @@ procedure TFBMSqlScripForm.Localize;
 begin
   Caption:=sMenuSqlScript;
   fileOpen.Caption:=sOpenFile;
+  fileOpen.Hint:=sOpenFileHint;
   scriptRun.Caption:=sRun;
+  scriptRun.Hint:=sRunScriptHint;
   scriptStop.Caption:=sStop;
+  scriptStop.Hint:=sStopHint;
 
   fileSave.Caption:=sSaveFile;
+  fileSave.Hint:=sSaveFileHint;
   fileSaveAs.Caption:=sSaveAs;
+  fileSaveAs.Hint:=sSaveAsHint;
   dbConnection.Caption:=sDatabase;
+  dbConnection.Hint:=sDatabaseHint;
   vShowObjTree.Caption:=sShowObjTree;
+  vShowObjTree.Hint:=sShowObjTreeHint;
   objTreeCommentCmd.Caption:=sCommentCmd;
+  objTreeCommentCmd.Hint:=sCommentCmdHint;
   objTreeDeleteCmd.Caption:=sDeleteCmd;
+  objTreeDeleteCmd.Hint:=sDeleteCmdHint;
   objTreeShowDML.Caption:=sShowDML;
+  objTreeShowDML.Hint:=sShowDMLHint;
   objTreeRefresh.Caption:=sRefresh;
+  objTreeRefresh.Hint:=sRefreshHint;
 end;
 
 procedure TFBMSqlScripForm.UpdateTreeVisible;

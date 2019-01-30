@@ -60,7 +60,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 32
+    Height = 36
     Top = 0
     Width = 759
     Items = <    
@@ -99,7 +99,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     CustomizeShortCut = True
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 32
+    ClientHeight = 36
     ClientWidth = 759
     TabOrder = 0
     object CheckBox1: TCheckBox
@@ -107,10 +107,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 643
-      Height = 17
-      Top = 8
-      Width = 105
+      Left = 605
+      Height = 23
+      Top = 7
+      Width = 143
       Action = vShowObjTree
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -125,7 +125,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideRight.Side = asrBottom
       Left = 380
       Height = 20
-      Top = 6
+      Top = 8
       Width = 374
       Anchors = [akTop, akLeft, akRight]
       Min = 1
@@ -149,7 +149,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Memo1: TMemo
     Left = 0
     Height = 90
-    Top = 598
+    Top = 600
     Width = 759
     Align = alBottom
     Lines.Strings = (
@@ -161,15 +161,15 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 593
+    Top = 595
     Width = 759
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 561
-    Top = 32
+    Height = 559
+    Top = 36
     Width = 121
     Align = alLeft
     ExpandSignSize = 16
@@ -183,14 +183,14 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 561
-    Top = 32
+    Height = 559
+    Top = 36
     Width = 5
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 23
-    Top = 688
+    Height = 21
+    Top = 690
     Width = 759
     Panels = <>
   end

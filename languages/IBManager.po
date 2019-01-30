@@ -483,6 +483,12 @@ msgid "Comment"
 msgstr ""
 
 #: fbmstrconstunit.scommentcmd
+msgctxt "fbmstrconstunit.scommentcmd"
+msgid "Comment selection"
+msgstr ""
+
+#: fbmstrconstunit.scommentcmdhint
+msgctxt "fbmstrconstunit.scommentcmdhint"
 msgid "Comment selection"
 msgstr ""
 
@@ -863,6 +869,11 @@ msgstr ""
 msgid "Database file"
 msgstr ""
 
+#: fbmstrconstunit.sdatabasehint
+msgctxt "fbmstrconstunit.sdatabasehint"
+msgid "Select database"
+msgstr ""
+
 #: fbmstrconstunit.sdatabaseid
 msgid "Database ID"
 msgstr ""
@@ -1117,6 +1128,12 @@ msgid "Delete this check constraint?"
 msgstr ""
 
 #: fbmstrconstunit.sdeletecmd
+msgctxt "fbmstrconstunit.sdeletecmd"
+msgid "Remove selection"
+msgstr ""
+
+#: fbmstrconstunit.sdeletecmdhint
+msgctxt "fbmstrconstunit.sdeletecmdhint"
 msgid "Remove selection"
 msgstr ""
 
@@ -3404,6 +3421,11 @@ msgctxt "fbmstrconstunit.sopenfile"
 msgid "Open file"
 msgstr ""
 
+#: fbmstrconstunit.sopenfilehint
+msgctxt "fbmstrconstunit.sopenfilehint"
+msgid "Open file"
+msgstr ""
+
 #: fbmstrconstunit.sopenineditor
 msgid "Open in editor"
 msgstr ""
@@ -3849,6 +3871,11 @@ msgstr ""
 msgid "Refresh field list"
 msgstr ""
 
+#: fbmstrconstunit.srefreshhint
+msgctxt "fbmstrconstunit.srefreshhint"
+msgid "Refresh"
+msgstr ""
+
 #: fbmstrconstunit.srefreshindexlist
 msgid "Refresh index list"
 msgstr ""
@@ -4113,6 +4140,10 @@ msgstr ""
 msgid " - running"
 msgstr ""
 
+#: fbmstrconstunit.srunscripthint
+msgid "Run SQL script"
+msgstr ""
+
 #: fbmstrconstunit.ssave
 msgctxt "fbmstrconstunit.ssave"
 msgid "Save"
@@ -4122,12 +4153,21 @@ msgstr ""
 msgid "Save as ..."
 msgstr ""
 
+#: fbmstrconstunit.ssaveashint
+msgid "Save file with new name"
+msgstr ""
+
 #: fbmstrconstunit.ssavedesktopondisconectfromdb
 msgid "Save desktop on disconect from DB"
 msgstr ""
 
 #: fbmstrconstunit.ssavefile
 msgctxt "fbmstrconstunit.ssavefile"
+msgid "Save file"
+msgstr ""
+
+#: fbmstrconstunit.ssavefilehint
+msgctxt "fbmstrconstunit.ssavefilehint"
 msgid "Save file"
 msgstr ""
 
@@ -4193,6 +4233,7 @@ msgid "Select connection type"
 msgstr ""
 
 #: fbmstrconstunit.sselectdatabase
+msgctxt "fbmstrconstunit.sselectdatabase"
 msgid "Select database"
 msgstr ""
 
@@ -4278,6 +4319,12 @@ msgid "Show designer"
 msgstr ""
 
 #: fbmstrconstunit.sshowdml
+msgctxt "fbmstrconstunit.sshowdml"
+msgid "Show DML statemenst"
+msgstr ""
+
+#: fbmstrconstunit.sshowdmlhint
+msgctxt "fbmstrconstunit.sshowdmlhint"
 msgid "Show DML statemenst"
 msgstr ""
 
@@ -4302,6 +4349,12 @@ msgid "Show objects"
 msgstr ""
 
 #: fbmstrconstunit.sshowobjtree
+msgctxt "fbmstrconstunit.sshowobjtree"
+msgid "Show objects tree"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjtreehint
+msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr ""
 
@@ -4499,6 +4552,10 @@ msgstr ""
 
 #: fbmstrconstunit.sstop
 msgid "Stop"
+msgstr ""
+
+#: fbmstrconstunit.sstophint
+msgid "Stop execute script"
 msgstr ""
 
 #: fbmstrconstunit.sstoredprocedure

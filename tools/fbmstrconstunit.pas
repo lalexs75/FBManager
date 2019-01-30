@@ -171,6 +171,7 @@ resourcestring
 
   sExtractMetaForm                  = 'Extract metadata from DB';
   sDatabase                         = 'Database';
+  sDatabaseHint                     = 'Select database';
   sObjects                          = 'Objects';
   sProgres                          = 'Progres';
   sSelectDatabase                   = 'Select database';
@@ -767,10 +768,14 @@ resourcestring
   sInputParams                      = 'Input params';
   sReturnParams                     = 'Return params';
   sShowObjTree                      = 'Show objects tree';
+  sShowObjTreeHint                  = 'Show objects tree';
   sCommentCmd                       = 'Comment selection';
+  sCommentCmdHint                   = 'Comment selection';
   sUnCommentCmd                     = 'Uncomment selection';
   sDeleteCmd                        = 'Remove selection';
+  sDeleteCmdHint                    = 'Remove selection';
   sShowDML                          = 'Show DML statemenst';
+  sShowDMLHint                      = 'Show DML statemenst';
   sDeleteField                      = 'Delete field "%s"?';
   sDefineVariable                   = 'Define variable';
   sDefineInParam                    = 'Define input param';
@@ -952,6 +957,7 @@ resourcestring
   sFromDate                         = 'From date';
   sToDate                           = 'To date';
   sRefresh                          = 'Refresh';
+  sRefreshHint                      = 'Refresh';
   sRefreshDataHint                  = 'Refresh data';
   sID                               = 'ID';
   sJobID                            = 'Job ID';
@@ -1206,6 +1212,7 @@ resourcestring
 
   //SQL editor
   sSaveAs                         = 'Save as ...';
+  sSaveAsHint                     = 'Save file with new name';
   sSetBookmarkNum                 = 'Set/Remove bookmark ';
   sGotoBookmark                   = 'Goto bookmark ';
   sInvertCase                     = 'Invert case';
@@ -1227,7 +1234,9 @@ resourcestring
   sPasteHint                      = 'Paste text from clipboard';
   sCopy                           = 'Copy';
   sOpenFile                       = 'Open file';
+  sOpenFileHint                   = 'Open file';
   sSaveFile                       = 'Save file';
+  sSaveFileHint                   = 'Save file';
   sExportData                     = 'Export data...';
   sExportDataHint                 = 'Export data from object...';
   sExportDataToPDF                = 'Export data to PDF';
@@ -1240,7 +1249,9 @@ resourcestring
   sReportManager                  = 'Report manager';
   sRun                            = 'Run';
   sRunHint                        = 'Run object';
+  sRunScriptHint                  = 'Run SQL script';
   sStop                           = 'Stop';
+  sStopHint                       = 'Stop execute script';
   sDesignReport                   = 'Design report';
   sSelectRootFolder               = 'Select root folder';
   sTextToSQLEditor                = 'Text to SQL editor';

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -30,7 +30,7 @@ msgstr "О программе"
 
 #: fbmstrconstunit.saccessmethod
 msgid "AccessMethod"
-msgstr ""
+msgstr "Метод доступа"
 
 #: fbmstrconstunit.saccessmetod
 msgid "Access metod"
@@ -77,7 +77,7 @@ msgstr "Добавить поле"
 
 #: fbmstrconstunit.saddhint
 msgid "Add data"
-msgstr ""
+msgstr "Добавить данные"
 
 #: fbmstrconstunit.saddlocalvar
 msgctxt "fbmstrconstunit.saddlocalvar"
@@ -115,7 +115,7 @@ msgstr "После обновления"
 
 #: fbmstrconstunit.saggregate
 msgid "Aggregate"
-msgstr ""
+msgstr "Агрегат"
 
 #: fbmstrconstunit.salias
 msgid "Alias"
@@ -222,7 +222,7 @@ msgstr "Поле autoincremet"
 
 #: fbmstrconstunit.sautoincfields
 msgid "AutoIncFields"
-msgstr ""
+msgstr "Поле автоинкремент"
 
 #: fbmstrconstunit.sautoincremet
 msgid "Autoincremet"
@@ -458,7 +458,7 @@ msgstr "Сортировка"
 
 #: fbmstrconstunit.scollation
 msgid "Collation"
-msgstr ""
+msgstr "Сортировка"
 
 #: fbmstrconstunit.scollationlist
 msgid "Collation list"
@@ -478,7 +478,7 @@ msgstr "Цвет"
 
 #: fbmstrconstunit.scolumn
 msgid "Column"
-msgstr ""
+msgstr "Колонка"
 
 #: fbmstrconstunit.scomfbmstyle
 msgid "Use FBManager style /*$$FBMC$$*/"
@@ -493,6 +493,13 @@ msgid "Comment"
 msgstr "Коментарий"
 
 #: fbmstrconstunit.scommentcmd
+msgctxt "fbmstrconstunit.scommentcmd"
+msgid "Comment selection"
+msgstr "Комментировать выделенное"
+
+#: fbmstrconstunit.scommentcmdhint
+#, fuzzy
+msgctxt "fbmstrconstunit.scommentcmdhint"
 msgid "Comment selection"
 msgstr "Комментировать выделенное"
 
@@ -530,7 +537,7 @@ msgstr "Компилировать"
 
 #: fbmstrconstunit.scompilehint
 msgid "Compile object"
-msgstr ""
+msgstr "Компилировать объект"
 
 #: fbmstrconstunit.scompileoptions
 msgid "Compile options"
@@ -605,7 +612,7 @@ msgstr "Строка подключения скопирована в буфер
 
 #: fbmstrconstunit.sconstraint
 msgid "Constraint"
-msgstr ""
+msgstr "Ограничение"
 
 #: fbmstrconstunit.sconstraintdelete
 msgctxt "fbmstrconstunit.sconstraintdelete"
@@ -744,7 +751,7 @@ msgstr "Создать INSERT процедуру"
 
 #: fbmstrconstunit.screatemysqldatabase
 msgid "Create MySQL database..."
-msgstr "Создать базу данных MySQL сервера"
+msgstr "Создать базу данных MySQL сервера..."
 
 #: fbmstrconstunit.screatenewdb
 msgctxt "fbmstrconstunit.screatenewdb"
@@ -777,7 +784,7 @@ msgstr "Параметры создания"
 
 #: fbmstrconstunit.screatepostgredatabase
 msgid "Create postgre database..."
-msgstr "Создать базу данных PostgreSQL сервера"
+msgstr "Создать базу данных PostgreSQL сервера..."
 
 #: fbmstrconstunit.screateroutine
 msgid "Create routine"
@@ -871,6 +878,12 @@ msgstr "Диалект базы данных"
 #: fbmstrconstunit.sdatabasefile
 msgid "Database file"
 msgstr "Файл базы данных"
+
+#: fbmstrconstunit.sdatabasehint
+#, fuzzy
+msgctxt "fbmstrconstunit.sdatabasehint"
+msgid "Select database"
+msgstr "Выбор базы данных"
 
 #: fbmstrconstunit.sdatabaseid
 msgid "Database ID"
@@ -1124,6 +1137,13 @@ msgid "Delete this check constraint?"
 msgstr "Удалить это ограничение?"
 
 #: fbmstrconstunit.sdeletecmd
+msgctxt "fbmstrconstunit.sdeletecmd"
+msgid "Remove selection"
+msgstr "Удалить выделенное"
+
+#: fbmstrconstunit.sdeletecmdhint
+#, fuzzy
+msgctxt "fbmstrconstunit.sdeletecmdhint"
 msgid "Remove selection"
 msgstr "Удалить выделенное"
 
@@ -1154,7 +1174,7 @@ msgstr "Удалить функцию \"%s\"?"
 
 #: fbmstrconstunit.sdeletehint
 msgid "Delete data"
-msgstr ""
+msgstr "Удалить данные"
 
 #: fbmstrconstunit.sdeleteindex
 msgid "Delete index"
@@ -1458,7 +1478,7 @@ msgstr "Описание папки"
 
 #: fbmstrconstunit.sedithint
 msgid "Edit data"
-msgstr ""
+msgstr "Изменить данные"
 
 #: fbmstrconstunit.seditindex
 msgid "Edit index"
@@ -1656,7 +1676,7 @@ msgstr "Экспорт данных..."
 
 #: fbmstrconstunit.sexportdatahint
 msgid "Export data from object..."
-msgstr ""
+msgstr "Экспортировать данные из объекта..."
 
 #: fbmstrconstunit.sexportdatatopdf
 msgid "Export data to PDF"
@@ -1868,7 +1888,7 @@ msgstr "Заполнить параметры запроса"
 
 #: fbmstrconstunit.sfilter
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
 #: fbmstrconstunit.sfilterintable
 msgid "Filter in table"
@@ -1998,11 +2018,11 @@ msgstr "Внешние ключи"
 
 #: fbmstrconstunit.sforeignserver
 msgid "Foreign server"
-msgstr ""
+msgstr "Внешний сервер"
 
 #: fbmstrconstunit.sforeigntable
 msgid "Foreign table"
-msgstr ""
+msgstr "Внешняя таблица"
 
 #: fbmstrconstunit.sfortable
 msgctxt "fbmstrconstunit.sfortable"
@@ -3406,6 +3426,12 @@ msgctxt "fbmstrconstunit.sopenfile"
 msgid "Open file"
 msgstr "Открыть файл"
 
+#: fbmstrconstunit.sopenfilehint
+#, fuzzy
+msgctxt "fbmstrconstunit.sopenfilehint"
+msgid "Open file"
+msgstr "Открыть файл"
+
 #: fbmstrconstunit.sopenineditor
 msgid "Open in editor"
 msgstr "Отркыть в редакторе"
@@ -3852,6 +3878,12 @@ msgstr "Обновить данные"
 msgid "Refresh field list"
 msgstr "Обновить список полей"
 
+#: fbmstrconstunit.srefreshhint
+#, fuzzy
+msgctxt "fbmstrconstunit.srefreshhint"
+msgid "Refresh"
+msgstr "Обновить данные"
+
 #: fbmstrconstunit.srefreshindexlist
 msgid "Refresh index list"
 msgstr "Обновить список индексов"
@@ -4111,11 +4143,15 @@ msgstr "Выполнить от владельца"
 
 #: fbmstrconstunit.srunhint
 msgid "Run object"
-msgstr ""
+msgstr "Выполнить"
 
 #: fbmstrconstunit.sruning
 msgid " - running"
 msgstr " - выполняется"
+
+#: fbmstrconstunit.srunscripthint
+msgid "Run SQL script"
+msgstr "Выполнить SQL команды"
 
 #: fbmstrconstunit.ssave
 msgctxt "fbmstrconstunit.ssave"
@@ -4126,12 +4162,22 @@ msgstr "Сохранить"
 msgid "Save as ..."
 msgstr "Сохранить как..."
 
+#: fbmstrconstunit.ssaveashint
+msgid "Save file with new name"
+msgstr "Сохранить в файл..."
+
 #: fbmstrconstunit.ssavedesktopondisconectfromdb
 msgid "Save desktop on disconect from DB"
 msgstr "Сохранть окружение при отключении от базы данных"
 
 #: fbmstrconstunit.ssavefile
 msgctxt "fbmstrconstunit.ssavefile"
+msgid "Save file"
+msgstr "Сохранить файл"
+
+#: fbmstrconstunit.ssavefilehint
+#, fuzzy
+msgctxt "fbmstrconstunit.ssavefilehint"
 msgid "Save file"
 msgstr "Сохранить файл"
 
@@ -4197,6 +4243,7 @@ msgid "Select connection type"
 msgstr "Укажите тип подключения"
 
 #: fbmstrconstunit.sselectdatabase
+msgctxt "fbmstrconstunit.sselectdatabase"
 msgid "Select database"
 msgstr "Выбор базы данных"
 
@@ -4243,7 +4290,7 @@ msgstr "Последовательности"
 
 #: fbmstrconstunit.sserver
 msgid "Server"
-msgstr ""
+msgstr "Сервер"
 
 #: fbmstrconstunit.sservername
 msgid "Server name    = "
@@ -4282,6 +4329,13 @@ msgid "Show designer"
 msgstr "Отображать редактор отчётов"
 
 #: fbmstrconstunit.sshowdml
+msgctxt "fbmstrconstunit.sshowdml"
+msgid "Show DML statemenst"
+msgstr "Показывать DML-статементы"
+
+#: fbmstrconstunit.sshowdmlhint
+#, fuzzy
+msgctxt "fbmstrconstunit.sshowdmlhint"
 msgid "Show DML statemenst"
 msgstr "Показывать DML-статементы"
 
@@ -4306,6 +4360,13 @@ msgid "Show objects"
 msgstr "Отображать объекты"
 
 #: fbmstrconstunit.sshowobjtree
+msgctxt "fbmstrconstunit.sshowobjtree"
+msgid "Show objects tree"
+msgstr "Отобразить дерево объектов"
+
+#: fbmstrconstunit.sshowobjtreehint
+#, fuzzy
+msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
@@ -4504,6 +4565,10 @@ msgstr "Шаги"
 #: fbmstrconstunit.sstop
 msgid "Stop"
 msgstr "Остановить"
+
+#: fbmstrconstunit.sstophint
+msgid "Stop execute script"
+msgstr "Остановить выполнение SQL команд"
 
 #: fbmstrconstunit.sstoredprocedure
 msgctxt "fbmstrconstunit.sstoredprocedure"
@@ -4724,7 +4789,7 @@ msgstr "Общий объём данных, записанных во време
 
 #: fbmstrconstunit.stempfiles
 msgid "Number of temporary files created by queries in this database. All temporary files are counted, regardless of why the temporary file was created (e.g., sorting or hashing), and regardless of the log_temp_files setting."
-msgstr "Количество временных файлов, созданных запросами в этой базе данных. Подсчитываются все временные файлы независимо от причины их создания (например, для сортировки или для хеширования) и независимо от установленного значения log_temp_files"
+msgstr "Количество временных файлов, созданных запросами в этой базе данных. Подсчитываются все временные файлы независимо от причины их создания (например, для сортировки или для хеширования) и независимо от установленного значения log_temp_files."
 
 #: fbmstrconstunit.stemplate
 msgid "Template"
@@ -5230,7 +5295,7 @@ msgstr "Дата и время в диапазона от 01 января 1900 �
 
 #: fb_utils.sdescvarchar
 msgid "Variable-length data with a maximum of 32,765 characters."
-msgstr "Срока переменной длинны максимального размера 32,765 символов"
+msgstr "Срока переменной длинны максимального размера 32,765 символов."
 
 #: pg_utils.s_pg_any
 msgid "Indicates that a function accepts any input data type."
@@ -5433,4 +5498,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
