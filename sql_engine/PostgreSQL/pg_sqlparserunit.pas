@@ -148,7 +148,8 @@ type
   TPGSQLCastType = (casttypeNone, casttypeAsAssignment, casttypeAsImplicit);
   TPGSQLCastType1 = (casttype1WithFunction, casttype1WithoutFunction, casttype1WithInout);
 
-type
+  TPGSQLCreateTriggerReferencingsEnumerator = class;
+
 //Postgre DML command
 
   { TPGSQLCommandUpdate }
@@ -550,6 +551,54 @@ type
     property SchemaName;
   end;
 
+  TPGSQLCreateTriggerReferencingType = (pgcrrtNew, pgcrrtOld);
+
+  { TPGSQLCreateTriggerReferencing }
+
+  TPGSQLCreateTriggerReferencing = class
+  private
+    FIsAs: boolean;
+    FRefName: string;
+    FRefType: TPGSQLCreateTriggerReferencingType;
+  public
+    procedure Assign(ASource:TPGSQLCreateTriggerReferencing);
+    property RefType:TPGSQLCreateTriggerReferencingType read FRefType write FRefType;
+    property RefName:string read FRefName write FRefName;
+    property IsAs:boolean read FIsAs write FIsAs;
+  end;
+
+  { TPGSQLCreateTriggerReferencings }
+
+  TPGSQLCreateTriggerReferencings = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItem(AIndex: integer): TPGSQLCreateTriggerReferencing;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    procedure Assign(ASource:TPGSQLCreateTriggerReferencings);
+    procedure Clear;
+    function GetEnumerator: TPGSQLCreateTriggerReferencingsEnumerator;
+    function Add:TPGSQLCreateTriggerReferencing; overload;
+    function Add(ARefType:TPGSQLCreateTriggerReferencingType; ARefName:string; AIsAs:boolean):TPGSQLCreateTriggerReferencing; overload;
+    property Item[AIndex:integer]:TPGSQLCreateTriggerReferencing read GetItem; default;
+    property Count:integer read GetCount;
+  end;
+
+  { TPGSQLCreateTriggerReferencingsEnumerator }
+
+  TPGSQLCreateTriggerReferencingsEnumerator = class
+  private
+    FList: TPGSQLCreateTriggerReferencings;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGSQLCreateTriggerReferencings);
+    function GetCurrent: TPGSQLCreateTriggerReferencing;
+    function MoveNext: Boolean;
+    property Current: TPGSQLCreateTriggerReferencing read GetCurrent;
+  end;
+
   { TPGSQLCreateTrigger }
 
   TPGSQLCreateTrigger = class(TSQLCreateTrigger)
@@ -557,6 +606,7 @@ type
     FMultiline: boolean;
     FProcName: string;
     FProcSchema: string;
+    FReferencings: TPGSQLCreateTriggerReferencings;
     FTriggerFunction: TPGSQLCreateFunction;
     FTriggerState: TTriggerState;
     FTriggerType: TTriggerTypes;
@@ -580,6 +630,7 @@ type
     property ProcSchema:string read FProcSchema write FProcSchema;
     property TriggerState:TTriggerState read FTriggerState write FTriggerState;
     property TriggerFunction:TPGSQLCreateFunction read FTriggerFunction write FTriggerFunction;
+    property Referencings:TPGSQLCreateTriggerReferencings read FReferencings;
   end;
 
   { TPGSQLAlterTrigger }
@@ -3149,6 +3200,106 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLCreateTriggerReferencingsEnumerator }
+
+constructor TPGSQLCreateTriggerReferencingsEnumerator.Create(
+  AList: TPGSQLCreateTriggerReferencings);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGSQLCreateTriggerReferencingsEnumerator.GetCurrent: TPGSQLCreateTriggerReferencing;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGSQLCreateTriggerReferencingsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGSQLCreateTriggerReferencings }
+
+function TPGSQLCreateTriggerReferencings.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGSQLCreateTriggerReferencings.GetItem(AIndex: integer
+  ): TPGSQLCreateTriggerReferencing;
+begin
+  Result:=TPGSQLCreateTriggerReferencing(FList[AIndex]);
+end;
+
+constructor TPGSQLCreateTriggerReferencings.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGSQLCreateTriggerReferencings.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TPGSQLCreateTriggerReferencings.Assign(
+  ASource: TPGSQLCreateTriggerReferencings);
+var
+  R, R1: TPGSQLCreateTriggerReferencing;
+begin
+  if not Assigned(ASource) then Exit;
+  for R in ASource do
+  begin
+    R1:=Add;
+    R1.Assign(R);
+  end;
+end;
+
+procedure TPGSQLCreateTriggerReferencings.Clear;
+var
+  R: TPGSQLCreateTriggerReferencing;
+begin
+  for R in Self do
+    R.Free;
+  FList.Clear;
+end;
+
+function TPGSQLCreateTriggerReferencings.GetEnumerator: TPGSQLCreateTriggerReferencingsEnumerator;
+begin
+  Result:=TPGSQLCreateTriggerReferencingsEnumerator.Create(Self);
+end;
+
+function TPGSQLCreateTriggerReferencings.Add: TPGSQLCreateTriggerReferencing;
+begin
+  Result:=TPGSQLCreateTriggerReferencing.Create;
+  FList.Add(Result);
+end;
+
+function TPGSQLCreateTriggerReferencings.Add(
+  ARefType: TPGSQLCreateTriggerReferencingType; ARefName: string; AIsAs: boolean
+  ): TPGSQLCreateTriggerReferencing;
+begin
+  Result:=Add;
+  Result.RefName:=ARefName;
+  Result.RefType:=ARefType;
+  Result.IsAs:=AIsAs;
+end;
+
+{ TPGSQLCreateTriggerReferencing }
+
+procedure TPGSQLCreateTriggerReferencing.Assign(
+  ASource: TPGSQLCreateTriggerReferencing);
+begin
+  if not Assigned(ASource) then Exit;
+  RefType:=ASource.RefType;
+  RefName:=ASource.RefName;
+  IsAs:=ASource.IsAs;
 end;
 
 { TPGSQLAlterUserMapping }
@@ -16430,7 +16581,7 @@ var
   T, T1, T2, T4, T5, T6, T7, T4_1, T5_1, T6_1, TT, TS, TN, T15,
     T11, T12, T13, T14, FSQLTokens, T_OF, T7_1, T3, TDif2,
     TDif1, TDif1_1, TDif3, TDif3_1, TDif3_2, TRef1, TFor,
-    TFor1: TSQLTokenRecord;
+    TFor1, TRef1_1, TRef1_2, TRef2, TRef2_1, TRef3: TSQLTokenRecord;
 begin
   //CREATE [ CONSTRAINT ] TRIGGER имя { BEFORE | AFTER | INSTEAD OF } { событие [ OR ... ] }
   //    ON имя_таблицы
@@ -16496,18 +16647,25 @@ begin
 
         //    [ REFERENCING { { OLD | NEW } TABLE [ AS ] имя_переходного_отношения } [ ... ] ]
     TRef1:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2], 'REFERENCING', [], 20);
+      TRef1_1:=AddSQLTokens(stKeyword, TRef1, 'OLD', [], 21);
+      TRef1_2:=AddSQLTokens(stKeyword, TRef1, 'NEW', [], 22);
+    TRef2:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'TABLE', []);
+      TRef2_1:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'AS', [], 23);
+    TRef3:=AddSQLTokens(stIdentificator, [TRef2, TRef2_1], '', [], 24);
 
-    TFor:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2], 'FOR', []);
+
+
+    TFor:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2, TRef3], 'FOR', []);
       TFor1:=AddSQLTokens(stKeyword, TFor, 'EACH', []);
     T11:=AddSQLTokens(stKeyword, [TFor, TFor1], 'ROW', [], 11);
     T12:=AddSQLTokens(stKeyword, [TFor, TFor1], 'STATEMENT', [], 12);
     T11.AddChildToken([TDif1, TDif2, TDif3]);
     T12.AddChildToken([TDif1, TDif2, TDif3]);
 
-    T13:=AddSQLTokens(stKeyword, [T11, T12, TS, TN] , 'WHEN', []);
+    T13:=AddSQLTokens(stKeyword, [T11, T12, TS, TN, TRef3] , 'WHEN', []);
     T13:=AddSQLTokens(stSymbol, T13 , '(', [], 13);
 
-    T:=AddSQLTokens(stKeyword, [TN, TS, T11, T12, T13], 'EXECUTE', []);          //EXECUTE
+    T:=AddSQLTokens(stKeyword, [TN, TS, T11, T12, T13, TRef3], 'EXECUTE', []);          //EXECUTE
 
     T:=AddSQLTokens(stKeyword, T, 'PROCEDURE', []);
 
@@ -16656,12 +16814,14 @@ begin
   inherited Create(AParent);
   ObjectKind:=okTrigger;
   FSQLCommentOnClass:=TPGSQLCommentOn;
+  FReferencings:=TPGSQLCreateTriggerReferencings.Create;
 end;
 
 destructor TPGSQLCreateTrigger.Destroy;
 begin
   if Assigned(FTriggerFunction) then
     FreeAndNil(FTriggerFunction);
+  FreeAndNil(FReferencings);
   inherited Destroy;
 end;
 
@@ -16677,6 +16837,7 @@ begin
     Multiline:=TPGSQLCreateTrigger(ASource).Multiline;
     if Assigned(TriggerFunction) and Assigned(TPGSQLCreateTrigger(ASource).FTriggerFunction) then
       TriggerFunction.Assign(TPGSQLCreateTrigger(ASource).FTriggerFunction);
+    FReferencings.Assign(TPGSQLCreateTrigger(ASource).FReferencings);
   end;
   inherited Assign(ASource);
 end;
