@@ -3355,7 +3355,7 @@ end;
 procedure TSQLCommandInsert.InitParserTree;
 var
   TSymb, TExp, TA, T, TN, FSQLTokens, FShemName, FSubSelect,
-    FTblName, FTblInsField, TDEF, T1, T2, T2_1: TSQLTokenRecord;
+    FTblName, FTblInsField, TDEF, T1, T2, T2_1, T2_2: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   FPlanEnabled:=false;
@@ -3394,15 +3394,15 @@ begin
     T1:=AddSQLTokens( stString, TSymb, '', [], 10);
     T2:=AddSQLTokens( stInteger, TSymb, '', [], 10);
     T2_1:=AddSQLTokens( stFloat, TSymb, '', [], 10);
+    T2_2:=AddSQLTokens(stKeyword, TSymb, 'DEFAULT', [], 10);
 
-    TExp:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1], ',', [], 11);
+
+    TExp:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1, T2_2], ',', [], 11);
       TExp.AddChildToken([TA, T, T1, T2, T2_1]);
 
     TSymb:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1], ')', [], 12);
 
-  T:=AddSQLTokens(stKeyword, TSymb, 'RETURNING', [toOptional], 13);
-    TDEF.AddChildToken(T);
-    FSubSelect.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [TDEF, TSymb, FSubSelect], 'RETURNING', [toOptional], 13);
   T:=AddSQLTokens(stKeyword, T, 'INTO', [toOptional], 14);
 (*
 [ WITH [ RECURSIVE ] with_query [, ...] ]
@@ -3474,13 +3474,13 @@ var
   i: Integer;
   Result: String;
 begin
-  Result:='insert into ';
+  Result:='INSERT INTO ';
   if SchemaName <> '' then
     Result:=Result + SchemaName + '.';
-  Result:=Result + TableName + LineEnding;;
+  Result:=Result + TableName;
 
   if Fields.Count > 0 then
-    Result:=Result + '(' + Fields.AsString + ')' + LineEnding;;
+    Result:=Result + ' (' + Fields.AsString + ')';
 
   if InsertType = sitSelect then
   begin
@@ -3493,7 +3493,7 @@ begin
   else
   if InsertType = sitValues then
   begin
-    Result:=Result + 'VALUES' + LineEnding + '(' + Params.AsString + ')';
+    Result:=Result + ' VALUES (' + Params.AsString + ')';
 
 (*    {  | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
     [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]
@@ -3506,8 +3506,18 @@ procedure TSQLCommandInsert.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TSQLCommandInsert then
   begin
-    SelectCmd.Assign(TSQLCommandInsert(ASource).SelectCmd);
-    Fields.Assign(TSQLCommandInsert(ASource).Fields);
+    if Assigned(TSQLCommandInsert(ASource).FSelectCmd) then
+    begin
+      if not Assigned(FSelectCmd) then
+      begin
+        FSelectCmd:=TSQLCommandSelect(TSQLCommandInsert(ASource).SelectCmd.ClassType.Create);
+        FSelectCmd.Create(Self);
+      end;
+      SelectCmd.Assign(TSQLCommandInsert(ASource).SelectCmd);
+    end
+    else
+    if Assigned(FSelectCmd) then
+      FreeAndNil(FSelectCmd);
     InsertType:=TSQLCommandInsert(ASource).InsertType;
   end;
   inherited Assign(ASource);

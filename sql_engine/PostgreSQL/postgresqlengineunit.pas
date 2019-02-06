@@ -6184,7 +6184,7 @@ initialization
   ///DML
   RegisterSQLStatment(TSQLEnginePostgre, TSqlCommandSelect, 'SELECT'); //SELECT — получить строки из таблицы или представления
                                                                        //SELECT INTO — создать таблицу из результатов запроса
-  RegisterSQLStatment(TSQLEnginePostgre, TSQLCommandInsert, 'INSERT INTO');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommandInsert, 'INSERT INTO');
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommandUpdate, 'UPDATE');   //UPDATE — изменить строки таблицы
   RegisterSQLStatment(TSQLEnginePostgre, TSQLCommandDelete, 'DELETE FROM'); //DELETE — удалить записи таблицы
 

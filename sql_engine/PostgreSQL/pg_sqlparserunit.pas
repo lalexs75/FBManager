@@ -611,6 +611,7 @@ type
     FTriggerState: TTriggerState;
     FTriggerType: TTriggerTypes;
     FTriggerWhen: string;
+    FCurRef: TPGSQLCreateTriggerReferencing;
     procedure ParseWhen(SQLParser:TSQLParser);
   protected
     procedure InitParserTree;override;
@@ -620,6 +621,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    procedure Clear;override;
 
     property SchemaName;
     property TableName;
@@ -2645,6 +2647,10 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property AlterSystemType:TPGSQLSetVariableType read FAlterSystemType write FAlterSystemType;
     property ParamValue:string read FParamValue write FParamValue;
+  end;
+
+  TPGSQLCommandInsert = class(TSQLCommandInsert)
+
   end;
 
 implementation
@@ -16581,7 +16587,8 @@ var
   T, T1, T2, T4, T5, T6, T7, T4_1, T5_1, T6_1, TT, TS, TN, T15,
     T11, T12, T13, T14, FSQLTokens, T_OF, T7_1, T3, TDif2,
     TDif1, TDif1_1, TDif3, TDif3_1, TDif3_2, TRef1, TFor,
-    TFor1, TRef1_1, TRef1_2, TRef2, TRef2_1, TRef3: TSQLTokenRecord;
+    TFor1, TRef1_1, TRef1_2, TRef2, TRef2_1, TRef3, TRef4_2,
+    TRef4_1, TRef5, TRef5_1, TRef6: TSQLTokenRecord;
 begin
   //CREATE [ CONSTRAINT ] TRIGGER имя { BEFORE | AFTER | INSTEAD OF } { событие [ OR ... ] }
   //    ON имя_таблицы
@@ -16646,26 +16653,32 @@ begin
         TDif3_2.AddChildToken(TDif2);
 
         //    [ REFERENCING { { OLD | NEW } TABLE [ AS ] имя_переходного_отношения } [ ... ] ]
-    TRef1:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2], 'REFERENCING', [], 20);
+    TRef1:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2], 'REFERENCING', []);
       TRef1_1:=AddSQLTokens(stKeyword, TRef1, 'OLD', [], 21);
       TRef1_2:=AddSQLTokens(stKeyword, TRef1, 'NEW', [], 22);
-    TRef2:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'TABLE', []);
-      TRef2_1:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'AS', [], 23);
+    TRef2:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'TABLE', [], 20);
+      TRef2_1:=AddSQLTokens(stKeyword, TRef2, 'AS', [], 23);
     TRef3:=AddSQLTokens(stIdentificator, [TRef2, TRef2_1], '', [], 24);
 
+      TRef4_1:=AddSQLTokens(stKeyword, TRef3, 'OLD', [], 21);
+      TRef4_2:=AddSQLTokens(stKeyword, TRef3, 'NEW', [], 22);
+      TRef5:=AddSQLTokens(stKeyword, [TRef4_1, TRef4_2], 'TABLE', [], 20);
+        TRef5_1:=AddSQLTokens(stKeyword, TRef5, 'AS', [], 23);
+    TRef6:=AddSQLTokens(stIdentificator, [TRef5, TRef5_1], '', [], 24);
 
 
-    TFor:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2, TRef3], 'FOR', []);
+
+    TFor:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2, TRef3, TRef6], 'FOR', []);
       TFor1:=AddSQLTokens(stKeyword, TFor, 'EACH', []);
     T11:=AddSQLTokens(stKeyword, [TFor, TFor1], 'ROW', [], 11);
     T12:=AddSQLTokens(stKeyword, [TFor, TFor1], 'STATEMENT', [], 12);
     T11.AddChildToken([TDif1, TDif2, TDif3]);
     T12.AddChildToken([TDif1, TDif2, TDif3]);
 
-    T13:=AddSQLTokens(stKeyword, [T11, T12, TS, TN, TRef3] , 'WHEN', []);
+    T13:=AddSQLTokens(stKeyword, [T11, T12, TS, TN, TRef3, TRef6] , 'WHEN', []);
     T13:=AddSQLTokens(stSymbol, T13 , '(', [], 13);
 
-    T:=AddSQLTokens(stKeyword, [TN, TS, T11, T12, T13, TRef3], 'EXECUTE', []);          //EXECUTE
+    T:=AddSQLTokens(stKeyword, [TN, TS, T11, T12, T13, TRef3, TRef6], 'EXECUTE', []);          //EXECUTE
 
     T:=AddSQLTokens(stKeyword, T, 'PROCEDURE', []);
 
@@ -16704,13 +16717,40 @@ begin
          FProcSchema:=FProcName;
          FProcName:=AWord;
        end;
-  end;
+    20:if not Assigned(FCurRef) then
+         FCurRef:=Referencings.Add;
+    21:begin
+         if not Assigned(FCurRef) then
+           FCurRef:=Referencings.Add;
+         FCurRef.FRefType:=pgcrrtOld;
+       end;
+    22:begin
+         if not Assigned(FCurRef) then
+           FCurRef:=Referencings.Add;
+          FCurRef.FRefType:=pgcrrtNew;
+       end;
+    23:if Assigned(FCurRef) then FCurRef.IsAs:=true;
+    24:if Assigned(FCurRef) then
+       begin
+         FCurRef.RefName:=AWord;
+         FCurRef:=nil;
+       end;
+(*
+//    [ REFERENCING { { OLD | NEW } TABLE [ AS ] имя_переходного_отношения } [ ... ] ]
+TRef1:=AddSQLTokens(stKeyword, [TS, TN, TDif1, TDif2, TDif3_1, TDif3_2], 'REFERENCING', [], 20);
+TRef1_1:=AddSQLTokens(stKeyword, TRef1, 'OLD', [], 21);
+TRef1_2:=AddSQLTokens(stKeyword, TRef1, 'NEW', [], 22);
+TRef2:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'TABLE', []);
+TRef2_1:=AddSQLTokens(stKeyword, [TRef1_1, TRef1_2], 'AS', [], 23);
+TRef3:=AddSQLTokens(stIdentificator, [TRef2, TRef2_1], '', [], 24);
+*)  end;
 end;
 
 procedure TPGSQLCreateTrigger.MakeSQL;
 var
   S, S1, FT: String;
   FCmdDrop: TPGSQLDropTrigger;
+  R: TPGSQLCreateTriggerReferencing;
 begin
   if SchemaName<>'' then
     FT:=SchemaName +'.' + TableName
@@ -16771,6 +16811,21 @@ begin
       S:=S + S1;
 
     S:=S + ' ON '+FT;
+
+    if Referencings.Count>0 then
+    begin
+      S:=S + ' REFERENCING';
+      for R in Referencings do
+      begin
+        if R.RefType = pgcrrtNew then S:=S + ' NEW'
+        else
+        if R.RefType = pgcrrtOld then S:=S + ' OLD';
+        S:=S + ' TABLE';
+        if R.IsAs then S:=S + ' AS';
+        S:=S + ' ' + R.RefName;
+      end;
+    //    [ REFERENCING { { OLD | NEW } TABLE [ AS ] имя_переходного_отношения } [ ... ] ]
+    end;
 
     S:=S + ' FOR EACH';
     if ttRow in FTriggerType then
@@ -16840,6 +16895,12 @@ begin
     FReferencings.Assign(TPGSQLCreateTrigger(ASource).FReferencings);
   end;
   inherited Assign(ASource);
+end;
+
+procedure TPGSQLCreateTrigger.Clear;
+begin
+  Referencings.Clear;
+  inherited Clear;
 end;
 
 
