@@ -2649,8 +2649,11 @@ type
     property ParamValue:string read FParamValue write FParamValue;
   end;
 
-  TPGSQLCommandInsert = class(TSQLCommandInsert)
+  { TPGSQLCommandInsert }
 
+  TPGSQLCommandInsert = class(TSQLCommandInsert)
+  protected
+    procedure InitParserTree;override;
   end;
 
 implementation
@@ -3206,6 +3209,32 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLCommandInsert }
+
+procedure TPGSQLCommandInsert.InitParserTree;
+begin
+  inherited InitParserTree;
+  //[ WITH [ RECURSIVE ] запрос_WITH [, ...] ]
+  //INSERT INTO имя_таблицы [ AS псевдоним ] [ ( имя_столбца [, ...] ) ]
+  //    { DEFAULT VALUES | VALUES ( { выражение | DEFAULT } [, ...] ) [, ...] | запрос }
+  //    [ ON CONFLICT [ объект_конфликта ] действие_при_конфликте ]
+  //    [ RETURNING * | выражение_результата [ [ AS ] имя_результата ] [, ...] ]
+  //
+  //Здесь допускается объект_конфликта:
+  //
+  //    ( { имя_столбца_индекса | ( выражение_индекса ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ...] ) [ WHERE предикат_индекса ]
+  //    ON CONSTRAINT имя_ограничения
+  //
+  //и действие_при_конфликте может быть следующим:
+  //
+  //    DO NOTHING
+  //    DO UPDATE SET { имя_столбца = { выражение | DEFAULT } |
+  //                    ( имя_столбца [, ...] ) = ( { выражение | DEFAULT } [, ...] ) |
+  //                    ( имя_столбца [, ...] ) = ( вложенный_SELECT )
+  //                  } [, ...]
+  //              [ WHERE условие ]
 end;
 
 { TPGSQLCreateTriggerReferencingsEnumerator }
@@ -15035,25 +15064,29 @@ var
   FSQLTokens, TSymb, TSymb2, T, T2: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER FUNCTION }
-  (*
-  ALTER FUNCTION name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) action [ ... ] [ RESTRICT ]
-  ALTER FUNCTION name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) RENAME TO new_name
-  ALTER FUNCTION name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) OWNER TO new_owner
-  ALTER FUNCTION name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) SET SCHEMA new_schema
-
-  where action is one of:
-
-      CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT
-      IMMUTABLE | STABLE | VOLATILE
-      [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
-      COST execution_cost
-      ROWS result_rows
-      SET configuration_parameter { TO | = } { value | DEFAULT }
-      SET configuration_parameter FROM CURRENT
-      RESET configuration_parameter
-      RESET ALL
-  *)
-  { TODO : Необходимо реализовать парсер ALTER FUNCTION }
+  //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    действие [ ... ] [ RESTRICT ]
+  //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    RENAME TO новое_имя
+  //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    SET SCHEMA новая_схема
+  //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    DEPENDS ON EXTENSION имя_расширения
+  //
+  //Где действие может быть следующим:
+  //
+  //    CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT
+  //    IMMUTABLE | STABLE | VOLATILE | [ NOT ] LEAKPROOF
+  //    [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
+  //    PARALLEL { UNSAFE | RESTRICTED | SAFE }
+  //    COST стоимость_выполнения
+  //    ROWS строк_в_результате
+  //    SET параметр_конфигурации { TO | = } { значение | DEFAULT }
+  //    SET параметр_конфигурации FROM CURRENT
+  //    RESET параметр_конфигурации
+  //    RESET ALL
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okStoredProc);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast]);
   T:=AddSQLTokens(stIdentificator, T, '', [],  1);
@@ -15077,6 +15110,11 @@ begin
   T:=AddSQLTokens(stKeyword, T, 'SCHEMA', []);
   AddSQLTokens(stIdentificator, T, '', [], 15);
 
+  //RESET configuration_parameter
+  //RESET ALL
+  T:=AddSQLTokens(stKeyword, TSymb2, 'RESET', [], 14);
+    AddSQLTokens(stKeyword, T, 'SCHEMA', []);
+    AddSQLTokens(stIdentificator, T, '', [], 15);
 end;
 
 procedure TPGSQLAlterFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15142,7 +15180,9 @@ begin
   for R in Params do
   begin
     if S1<>'' then S1:=S1 + ',';
-    S1:=S1 + ' ' +PGVarTypeNames[R.InReturn];
+
+    if PGVarTypeNames[R.InReturn]<>'' then
+      S1:=S1 + ' ' +PGVarTypeNames[R.InReturn];
     if R.Caption<>'' then S1:=S1+' '+R.Caption;
     S1:=S1+' '+R.TypeName;
   end;

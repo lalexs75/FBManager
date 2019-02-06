@@ -1282,12 +1282,12 @@ object PGSQLParserData: TPGSQLParserData
     Top = 80
   end
   object sDomain: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateDomain1'
         Lines.Strings = (
-          'CREATE DOMAIN us_postal_code AS TEXT CHECK(VALUE ~ ''^\d{5}$'' OR VALUE ~ ''^\d{5}-\d{4}$);'
+          'CREATE DOMAIN us_postal_code AS TEXT CHECK (VALUE ~ ''^\d{5}$'' OR VALUE ~ ''^\d{5}-\d{4}$'');'
         )
       end    
       item
@@ -3038,7 +3038,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'AlterFunction1'
         Lines.Strings = (
-          'ALTER FUNCTION sqrt(integer) RENAME TO square_root;'
+          'ALTER FUNCTION sqrt( integer) RENAME TO square_root;'
         )
       end    
       item
