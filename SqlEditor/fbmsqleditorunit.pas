@@ -1489,6 +1489,9 @@ begin
 
   CheckBox3.Caption:=sWithDataType;
   Label3.Caption:=sSeparator;
+
+  SetRecordCountCaption('');
+  SetDBNavigatorHint(DBNavigator1);
 end;
 
 procedure TfbmSQLEditorForm.UpdateExecTimeInfo;
@@ -1724,7 +1727,6 @@ begin
   Localize;
   HideInfoMessages;
   HideQueryFields;
-  SetDBNavigatorHint(DBNavigator1);
   RxDBGridFooterTools1.Caption:=sRxDBGridToolsCaption;
   RxDBGridExportSpreadSheet1.Caption:=sToolsExportSpeadSheet;
 

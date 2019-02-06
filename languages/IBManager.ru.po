@@ -4941,10 +4941,15 @@ msgid "Trigger name"
 msgstr "Название тригера"
 
 #: fbmstrconstunit.striggernametags
+#, fuzzy
+#| msgid ""
+#| "Avaliable tags:\n"
+#| "%TABLE_NAME% - Table name\n"
+#| "%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
 msgid ""
 "Avaliable tags:\n"
 "%TABLE_NAME% - Table name\n"
-"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
+"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)"
 msgstr ""
 "Доступные тэги:\n"
 "%TABLE_NAME% - имя таблицы\n"
