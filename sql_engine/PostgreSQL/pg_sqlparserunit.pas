@@ -378,12 +378,16 @@ type
 
   { TPGSQLAlterFunction }
 
+  TpgAlterFunctionOperator = (pgafoNone, pgafoSet, pgafoReset, pgafoDepends);
+
   TPGSQLAlterFunction = class(TSQLCommandDDL)
   private
+    FAlterOperator: TpgAlterFunctionOperator;
     FCurParam: TSQLParserField;
     FNewName: string;
     FNewOwner: string;
     FNewSchema: string;
+    FOperatorArgumnet: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -395,6 +399,8 @@ type
     property NewName: string read FNewName write FNewName;
     property NewOwner: string read FNewOwner write FNewOwner;
     property NewSchema: string read FNewSchema write FNewSchema;
+    property AlterOperator:TpgAlterFunctionOperator read FAlterOperator write FAlterOperator;
+    property OperatorArgumnet:string read FOperatorArgumnet write FOperatorArgumnet;
   end;
 
   { TPGSQLCreateRule }
@@ -15112,9 +15118,14 @@ begin
 
   //RESET configuration_parameter
   //RESET ALL
-  T:=AddSQLTokens(stKeyword, TSymb2, 'RESET', [], 14);
+  T:=AddSQLTokens(stKeyword, TSymb2, 'RESET', [], 16);
     AddSQLTokens(stKeyword, T, 'SCHEMA', []);
-    AddSQLTokens(stIdentificator, T, '', [], 15);
+    AddSQLTokens(stIdentificator, T, '', [], 17);
+
+  T:=AddSQLTokens(stKeyword, TSymb2, 'DEPENDS', []);
+    T:=AddSQLTokens(stKeyword, T, 'ON', []);
+    T:=AddSQLTokens(stKeyword, T, 'EXTENSION', []);
+    AddSQLTokens(stIdentificator, T, '', [], 18);
 end;
 
 procedure TPGSQLAlterFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15160,6 +15171,12 @@ begin
     11:FNewName:=AWord;
     13:FNewOwner:=AWord;
     15:FNewSchema:=AWord;
+    16:FAlterOperator:=pgafoReset;
+    17:FOperatorArgumnet:=AWord;
+    18:begin
+         FAlterOperator:=pgafoDepends;
+         FOperatorArgumnet:=AWord;
+       end;
   end;
 end;
 
@@ -15189,6 +15206,14 @@ begin
 
   S:=S + S1 + ')';
 
+  if AlterOperator = pgafoDepends then
+  begin
+    S:=S + ' DEPENDS ON EXTENSION ' + FOperatorArgumnet;
+  end
+  else
+  if AlterOperator = pgafoReset then
+    S:=S + ' RESET '+OperatorArgumnet
+  else
   if FNewName <> '' then
     S:=S + ' RENAME TO '+FNewName
   else
@@ -15215,6 +15240,8 @@ begin
     NewName:=TPGSQLAlterFunction(ASource).NewName;
     NewOwner:=TPGSQLAlterFunction(ASource).NewOwner;
     NewSchema:=TPGSQLAlterFunction(ASource).NewSchema;
+    FAlterOperator:=TPGSQLAlterFunction(ASource).FAlterOperator;
+    FOperatorArgumnet:=TPGSQLAlterFunction(ASource).FOperatorArgumnet;
   end;
   inherited Assign(ASource);
 end;

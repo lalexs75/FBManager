@@ -397,7 +397,8 @@ begin
 
   if TPGFunction(DBObject).State <> sdboCreate then
   begin
-    cbLang.Text:=TPGFunction(DBObject).Language.Caption;
+    if Assigned(TPGFunction(DBObject).Language) then
+      cbLang.Text:=TPGFunction(DBObject).Language.Caption;
 
     for P in TPGFunction(DBObject).FieldsIN do
     begin

@@ -3044,31 +3044,31 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'AlterFunction2'
         Lines.Strings = (
-          'ALTER FUNCTION sqrt(integer) OWNER TO joe;'
+          'ALTER FUNCTION sqrt( integer) OWNER TO joe;'
         )
       end    
       item
         Caption = 'AlterFunction3'
         Lines.Strings = (
-          'ALTER FUNCTION sqrt(integer) SET SCHEMA maths;'
+          'ALTER FUNCTION sqrt( integer) SET SCHEMA maths;'
         )
       end    
       item
         Caption = 'AlterFunction4'
         Lines.Strings = (
-          'ALTER FUNCTION sqrt(integer) DEPENDS ON EXTENSION mathlib;'
+          'ALTER FUNCTION sqrt( integer) DEPENDS ON EXTENSION mathlib;'
         )
       end    
       item
         Caption = 'AlterFunction5'
         Lines.Strings = (
-          'ALTER FUNCTION check_password(text) SET search_path = admin, pg_temp;'
+          'ALTER FUNCTION check_password( text) SET search_path = admin, pg_temp;'
         )
       end    
       item
         Caption = 'AlterFunction6'
         Lines.Strings = (
-          'ALTER FUNCTION check_password(text) RESET search_path;'
+          'ALTER FUNCTION check_password( text) RESET search_path;'
         )
       end    
       item

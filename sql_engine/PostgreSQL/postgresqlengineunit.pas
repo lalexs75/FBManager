@@ -5637,6 +5637,7 @@ begin
     FACLList.FTempObjName:=(ASqlObject as TPGSQLCreateFunction).FunctionName;
     FACLList.MakeACLListSQL(nil, St, true);
     FACLList.FTempObjName:='';
+    FOID:=0;
   end;
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
 end;
