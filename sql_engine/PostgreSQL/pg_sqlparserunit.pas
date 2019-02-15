@@ -378,7 +378,7 @@ type
 
   { TPGSQLAlterFunction }
 
-  TpgAlterFunctionOperator = (pgafoNone, pgafoSet, pgafoReset, pgafoDepends);
+  TpgAlterFunctionOperator = (pgafoNone, pgafoSet1, pgafoSet2, pgafoReset, pgafoDepends);
 
   TPGSQLAlterFunction = class(TSQLCommandDDL)
   private
@@ -388,12 +388,15 @@ type
     FNewOwner: string;
     FNewSchema: string;
     FOperatorArgumnet: string;
+    FConfigParams: TSQLFields;
+    FCurConfigParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL; override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SchemaName;
     property NewName: string read FNewName write FNewName;
@@ -401,6 +404,7 @@ type
     property NewSchema: string read FNewSchema write FNewSchema;
     property AlterOperator:TpgAlterFunctionOperator read FAlterOperator write FAlterOperator;
     property OperatorArgumnet:string read FOperatorArgumnet write FOperatorArgumnet;
+    property ConfigParams: TSQLFields read FConfigParams;
   end;
 
   { TPGSQLCreateRule }
@@ -15067,7 +15071,8 @@ end;
 
 procedure TPGSQLAlterFunction.InitParserTree;
 var
-  FSQLTokens, TSymb, TSymb2, T, T2: TSQLTokenRecord;
+  FSQLTokens, TSymb, TSymb2, T, T2, TVar, TVar1, TVar2,
+    TVarVal, TVarVal1: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER FUNCTION }
   //ALTER FUNCTION имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
@@ -15113,6 +15118,13 @@ begin
   AddSQLTokens(stIdentificator, T, '', [], 13);
 
   T:=AddSQLTokens(stKeyword, TSymb2, 'SET', [], 14);
+    TVar:=AddSQLTokens(stIdentificator, T, '', [], 19);
+      TVar1:=AddSQLTokens(stSymbol, TVar, '=', [], 20);
+      TVar2:=AddSQLTokens(stKeyword, TVar, 'TO', [], 21);
+      TVarVal:=AddSQLTokens(stIdentificator, [TVar1, TVar2], '', [], 22);
+      TVarVal1:=AddSQLTokens(stSymbol, TVarVal, ',', [toOptional]);
+        TVarVal1.AddChildToken(TVarVal);
+
   T:=AddSQLTokens(stKeyword, T, 'SCHEMA', []);
   AddSQLTokens(stIdentificator, T, '', [], 15);
 
@@ -15177,6 +15189,14 @@ begin
          FAlterOperator:=pgafoDepends;
          FOperatorArgumnet:=AWord;
        end;
+    20:FAlterOperator:=pgafoSet1;
+    21:FAlterOperator:=pgafoSet2;
+    19:FCurConfigParam:=FConfigParams.AddParam(AWord);
+    22:if Assigned(FCurParam) then
+       begin
+         if FCurConfigParam.TypeName<>'' then FCurConfigParam.TypeName:=FCurConfigParam.TypeName + ', ';
+         FCurConfigParam.TypeName:=FCurConfigParam.TypeName + AWord;
+       end;
   end;
 end;
 
@@ -15214,6 +15234,18 @@ begin
   if AlterOperator = pgafoReset then
     S:=S + ' RESET '+OperatorArgumnet
   else
+  if AlterOperator in [pgafoSet1,pgafoSet2] then
+  begin
+    if ConfigParams.Count>0 then
+    begin
+      FCurConfigParam:=ConfigParams[0];
+      S:=S + ' SET '+FCurConfigParam.Caption;
+      if AlterOperator = pgafoSet1 then S:=S + ' = '
+      else S:=S + ' TO ';///,pgafoSet2]
+      S:=S + FCurConfigParam.TypeName;
+    end;
+  end
+  else
   if FNewName <> '' then
     S:=S + ' RENAME TO '+FNewName
   else
@@ -15231,6 +15263,13 @@ begin
   inherited Create(AParent);
   ObjectKind:=okStoredProc;
   FSQLCommentOnClass:=TPGSQLCommentOn;
+  FConfigParams:=TSQLFields.Create;
+end;
+
+destructor TPGSQLAlterFunction.Destroy;
+begin
+  FreeAndNil(FConfigParams);
+  inherited Destroy;
 end;
 
 procedure TPGSQLAlterFunction.Assign(ASource: TSQLObjectAbstract);
@@ -15242,6 +15281,7 @@ begin
     NewSchema:=TPGSQLAlterFunction(ASource).NewSchema;
     FAlterOperator:=TPGSQLAlterFunction(ASource).FAlterOperator;
     FOperatorArgumnet:=TPGSQLAlterFunction(ASource).FOperatorArgumnet;
+    FConfigParams.Assign(TPGSQLAlterFunction(ASource).ConfigParams);
   end;
   inherited Assign(ASource);
 end;
