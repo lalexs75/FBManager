@@ -404,11 +404,22 @@ begin
 end;
 
 procedure TfbmTableEditorDataFrame.Activate;
+var
+  DS: TDataSet;
+  P1: TDataSetNotifyEvent;
+  C: Boolean;
 begin
-  DataSource1.DataSet:=TDBDataSetObject(DBObject).DataSet(SpinEdit1.Value);
-  DataSource1.DataSet.Active:=true;
-  DataSource1.DataSet.AfterScroll:=@DataSetAfterScrollRecord;
-  DataSource1.DataSet.AfterOpen:=@DataSetAfterScrollRecord;
+  if not Assigned(DataSource1.DataSet) then
+  begin
+    DS:=TDBDataSetObject(DBObject).DataSet(SpinEdit1.Value);
+    P1:=DS.AfterScroll;
+    C:=Assigned(P1);
+    DS.AfterScroll:=@DataSetAfterScrollRecord;
+
+    DataSource1.DataSet:=DS;
+    DataSource1.DataSet.Active:=true;
+    DataSetAfterScrollRecord(DS);
+  end;
   SetRxDBGridOptions(DataGrid);
 end;
 
