@@ -668,6 +668,7 @@ type
   TSQLParser = class
   private
     FCommandDelemiter: string;
+    FCurrentStringDelemiter: string;
     FIgnoreError: boolean;
     FOnProcessComment: TSQLProcessComment;
     FParserSintax: TSQLParserSintax;
@@ -707,6 +708,7 @@ type
     procedure IncPos( ACountChar:Integer = 1);
 
 
+    property CurrentStringDelemiter:string read FCurrentStringDelemiter;
     property Position:TParserPosition read FPosition write FPosition;
     property WordPosition:TParserPosition read FWordPosition write FWordPosition;
     property Owner:TObject read FOwner write FOwner;
@@ -2831,6 +2833,7 @@ var
   FC: TParserPosition;
   ACS: TSysCharSet;
 begin
+  FCurrentStringDelemiter:='';
   Stop:=false;
   SkipSpace;
   repeat
@@ -2847,7 +2850,10 @@ begin
       FC:=Position;
       S:=Result;
       if (Length(S)>1) and (S[1]='$') and (S[Length(S)]='$') then
+      begin
+        FCurrentStringDelemiter:=S;
         ACS:=['$']
+      end
       else
         ACS:=[];
 
@@ -3026,6 +3032,7 @@ begin
   FOwner:=AOwner;
   FStatementList:=TFPList.Create;
   FCommandDelemiter:=';';
+  FCurrentStringDelemiter:='';
   SetSQL(ASql);
 end;
 

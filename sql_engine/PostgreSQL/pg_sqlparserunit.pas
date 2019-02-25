@@ -330,10 +330,12 @@ type
   end;
 
   { TPGSQLCreateFunction }
+  TPGStrictRule = (srNone, srCalledOnNullInput, srReturnsNullOnNullInput, srStrict);
 
   TPGSQLCreateFunction = class(TSQLCommandCreateProcedure)
   private
     FAVGRows: integer;
+    FBodyStringTag: string;
     FCost: integer;
     FisWindow: boolean;
     FLanguage: string;
@@ -342,7 +344,7 @@ type
     FCurParam: TSQLParserField;
     FOutput:TSQLFields;
     FSetOF: boolean;
-    FStrict: boolean;
+    FStrict: TPGStrictRule;
     FVolatilityCategories: TPGSPVolatCat;
     //
     FTLanguage: TSQLTokenRecord;
@@ -361,6 +363,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property BodyStringTag:string read FBodyStringTag write FBodyStringTag;
     property SchemaName;
     property Output:TSQLFields read GetOutput;
     property Language:string read FLanguage write FLanguage;
@@ -369,7 +372,7 @@ type
     property AVGRows:integer read FAVGRows write FAVGRows;
     property VolatilityCategories:TPGSPVolatCat read FVolatilityCategories write FVolatilityCategories;
     property isWindow:boolean read FisWindow write FisWindow;
-    property Strict:boolean read FStrict write FStrict;
+    property Strict:TPGStrictRule read FStrict write FStrict;
     property SetOF:boolean read FSetOF write FSetOF;
     property PGSQLDropFunction:TPGSQLDropFunction read GetPGSQLDropFunction;
     property FunctionName:string read GetFunctionName;
@@ -17164,8 +17167,7 @@ begin
       | AS 'определение'
       | AS 'объектный_файл', 'объектный_символ'
     } ...
-      [ WITH ( атрибут [, ...] ) ]
-*)
+  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
       Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
       Par1:=AddSQLTokens(stKeyword, Par1, 'REPLACE', [], 6);
@@ -17231,7 +17233,7 @@ begin
     T210_1:=AddSQLTokens(stKeyword, T210, 'NULL', []);
     T210_1:=AddSQLTokens(stKeyword, T210_1, 'ON', []);
     T210_1:=AddSQLTokens(stKeyword, T210_1, 'NULL', []);
-    T210_1:=AddSQLTokens(stKeyword, T210_1, 'INPUT', [], 209);
+    T210_1:=AddSQLTokens(stKeyword, T210_1, 'INPUT', [], 210);
     T210_1.AddChildToken([T202, T203, T204, T205, T206, T207]);
 
 //    | TRANSFORM { FOR TYPE имя_типа } [, ... ]
@@ -17297,7 +17299,11 @@ begin
           FTLanguage.Options:=FTLanguage.Options + [toOptional];
         end;
     201:begin
-          Body := AnsiDequotedStr(AWord, '''');
+          if ASQLParser.CurrentStringDelemiter = '' then
+            FBodyStringTag:=''''
+          else
+            FBodyStringTag:=ASQLParser.CurrentStringDelemiter;
+          Body := ExtractQuotedString(AWord, '''');
           FTAS.Options:=FTAS.Options + [toOptional];
         end;
     202:Cost := StrToInt(AWord);
@@ -17306,8 +17312,9 @@ begin
     207:VolatilityCategories:=pgvcVOLATILE;
     206:VolatilityCategories:=pgvcSTABLE;
     205:VolatilityCategories:=pgvcIMMUTABLE;
-    208:Strict:=false;
-    209:Strict:=true;
+    208:Strict:=srCalledOnNullInput;
+    209:Strict:=srStrict;
+    210:Strict:=srReturnsNullOnNullInput;
   end;
 end;
 
@@ -17328,6 +17335,14 @@ begin
   if S1<>'' then
     S:=S1 + S;
   {$ENDIF}
+  if FBodyStringTag <> '' then
+  begin
+     if FBodyStringTag = '''' then
+       Result:=QuotedString(S, '''')
+     else
+       Result:=FBodyStringTag + LineEnding + S +LineEnding+ FBodyStringTag;
+  end
+  else
   if (Pos('''', S) > 0) or (Pos(#13, S) > 0) or (Pos(#10, S) > 0) then
   begin
     S1:='$BODY$';
@@ -17415,12 +17430,17 @@ begin
   if AVGRows <> 0 then
     S:=S + 'ROWS ' + IntToStr(AVGRows) + LineEnding;
   if isWindow then
-    S:=S + ' WINDOW';
-  S:=S + ' ' + PGSPVolatCatNames[VolatilityCategories];
+    S:=S + 'WINDOW' + LineEnding;
+  S:=S + PGSPVolatCatNames[VolatilityCategories] + LineEnding;
 
-  if Strict then
-    S:=S + ' STRICT';
-(*
+  case Strict of
+    //srNone,
+    srCalledOnNullInput:S:=S + 'CALLED ON NULL INPUT' + LineEnding;
+    srReturnsNullOnNullInput:S:=S + 'RETURNS NULL ON NULL INPUT' + LineEnding;
+    srStrict:S:=S + 'STRICT' + LineEnding;
+  end;
+
+  (*
   | TRANSFORM { FOR TYPE имя_типа } [, ... ]
   | [ NOT ] LEAKPROOF
   | CALLED ON NULL INPUT | RETURNS NULL ON NULL INPUT | STRICT
@@ -17469,7 +17489,7 @@ begin
     else
       Break;
   end;
-  inherited SetBody(ProcBody.Text);
+  inherited SetBody(TrimRight(ProcBody.Text));
   ProcBody.Free;
   {$ELSE}
   inherited SetBody(AValue);

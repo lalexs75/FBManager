@@ -903,7 +903,9 @@ begin
   FCmd.Language:=cbLang.Text;
   FCmd.VolatilityCategories:=TPGSPVolatCat(cbVolatCat.ItemIndex);
   FCmd.Cost:=edtAVGTime.Value;
-  FCmd.Strict:=cbIsStrict.Checked;
+
+  if cbIsStrict.Checked then
+  FCmd.Strict:=srStrict;
   FCmd.isWindow:=cbIsWindow.Checked;
 
   if (RadioGroup1.ItemIndex>0)  then
