@@ -165,7 +165,7 @@ begin
   if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active and (DataSource1.DataSet.RecordCount>0) then
   begin
     Clipboard.Open;
-    Clipboard.AsText:=MakeSQLInsert(DataSource1.DataSet, DBObject.CaptionFullPatch);
+    Clipboard.AsText:=MakeSQLInsert(DataSource1.DataSet, DBObject.CaptionFullPatch, DataGrid.SelectedRows);
     Clipboard.Close;
   end;
 end;
@@ -175,7 +175,7 @@ begin
   if Assigned(DataSource1.DataSet) and DataSource1.DataSet.Active and (DataSource1.DataSet.RecordCount>0) then
   begin
     Clipboard.Open;
-    Clipboard.AsText:=MakeSQLUpdate(DataSource1.DataSet, DBObject.CaptionFullPatch, PrimaryKeyField);
+    Clipboard.AsText:=MakeSQLUpdate(DataSource1.DataSet, DBObject.CaptionFullPatch, PrimaryKeyField, DataGrid.SelectedRows);
     Clipboard.Close;
   end;
 end;

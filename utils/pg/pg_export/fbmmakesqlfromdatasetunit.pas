@@ -26,10 +26,10 @@ unit fbmMakeSQLFromDataSetUnit;
 interface
 
 uses
-  Classes, SysUtils, DB;
+  Classes, SysUtils, DB, DBGrids;
 
-function MakeSQLInsert(ADataSet:TDataSet;const ATableName:string):string;
-function MakeSQLUpdate(ADataSet:TDataSet;const ATableName, APKFields:string):string;
+function MakeSQLInsert(ADataSet:TDataSet;const ATableName:string; ASelectedRows: TBookmarkList):string;
+function MakeSQLUpdate(ADataSet:TDataSet;const ATableName, APKFields:string; ASelectedRows: TBookmarkList):string;
 
 function MakeRowInsert(ADataSet:TDataSet; const ATableName:string):string;
 implementation
@@ -62,7 +62,8 @@ begin
 end;
 
 
-function MakeSQLInsert(ADataSet: TDataSet; const ATableName: string): string;
+function MakeSQLInsert(ADataSet: TDataSet; const ATableName: string;
+  ASelectedRows: TBookmarkList): string;
 
 function DoExportRow(const AFields:string):string;
 var
@@ -80,7 +81,7 @@ end;
 
 var
   FFields: String;
-  B: TBookMark;
+  B, B1: TBookMark;
 begin
   Result:='';
   if not Assigned(ADataSet) then Exit;
@@ -88,18 +89,30 @@ begin
   FFields:=DoMakeHeader(ADataSet, ATableName);
   ADataSet.DisableControls;
   B:=ADataSet.Bookmark;
-  ADataSet.First;
-  while not ADataSet.EOF do
+
+  if Assigned(ASelectedRows) and (ASelectedRows.Count>1) then
   begin
-    Result:=Result + DoExportRow(FFields);
-    ADataSet.Next;
+   for B1 in ASelectedRows do
+   begin
+     ADataSet.Bookmark:=B1;
+     Result:=Result + DoExportRow(FFields);
+   end;
+  end
+  else
+  begin
+    ADataSet.First;
+    while not ADataSet.EOF do
+    begin
+      Result:=Result + DoExportRow(FFields);
+      ADataSet.Next;
+    end;
   end;
   ADataSet.Bookmark:=B;
   ADataSet.EnableControls;
 end;
 
-function MakeSQLUpdate(ADataSet: TDataSet; const ATableName, APKFields: string
-  ): string;
+function MakeSQLUpdate(ADataSet: TDataSet; const ATableName, APKFields: string;
+  ASelectedRows: TBookmarkList): string;
 
 function DoMakeHeader(ATableName:string):string;
 begin
@@ -127,7 +140,7 @@ end;
 
 var
   AHeader: String;
-  B: TBookMark;
+  B, B1: TBookMark;
 begin
   Result:='';
   if not Assigned(ADataSet) then Exit;
@@ -135,11 +148,23 @@ begin
   AHeader:=DoMakeHeader(ATableName);
   ADataSet.DisableControls;
   B:=ADataSet.Bookmark;
-  ADataSet.First;
-  while not ADataSet.EOF do
+
+  if Assigned(ASelectedRows) and (ASelectedRows.Count>1) then
   begin
-    Result:=Result + DoExportRow(AHeader);
-    ADataSet.Next;
+   for B1 in ASelectedRows do
+   begin
+     ADataSet.Bookmark:=B1;
+     Result:=Result + DoExportRow(AHeader);
+   end;
+  end
+  else
+  begin
+    ADataSet.First;
+    while not ADataSet.EOF do
+    begin
+      Result:=Result + DoExportRow(AHeader);
+      ADataSet.Next;
+    end;
   end;
   ADataSet.Bookmark:=B;
   ADataSet.EnableControls;

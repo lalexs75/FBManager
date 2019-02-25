@@ -386,7 +386,7 @@ begin
     if InputQuery(sCopySelectedRecordAsInsert,  sEnterTableName, S) then
     begin
       Clipboard.Open;
-      Clipboard.AsText:=MakeSQLInsert(QueryControl.DataSet, S);
+      Clipboard.AsText:=MakeSQLInsert(QueryControl.DataSet, S, dbGrid1.SelectedRows);
       Clipboard.Close;
     end;
   end;

@@ -279,7 +279,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     object dataExport: TAction
       Category = 'Result'
       Caption = 'Export data...'
-      ImageIndex = 64
+      ImageIndex = 101
       OnExecute = dataExportExecute
     end
     object statRecordCount: TAction
