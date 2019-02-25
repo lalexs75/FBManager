@@ -118,13 +118,7 @@ procedure TFBMExportApplication.ExportdData;
 begin
   ExportDM.quS.SQL.Text:='select * from '+FTableName;
   ExportDM.quS.Open;
-{  DoMakeHeader;
-  while not ExportDM.quS.EOF do
-  begin
-    DoExportRow;
-    ExportDM.quS.Next;
-  end;}
-  WriteSQL(MakeSQLInsert(ExportDM.quS, FTableName));
+  WriteSQL(MakeSQLInsert(ExportDM.quS, FTableName, nil));
   ExportDM.quS.Close;
 end;
 
