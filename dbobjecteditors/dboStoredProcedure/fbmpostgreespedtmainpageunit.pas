@@ -905,7 +905,7 @@ begin
   FCmd.Cost:=edtAVGTime.Value;
 
   if cbIsStrict.Checked then
-  FCmd.Strict:=srStrict;
+    FCmd.Strict:=srStrict;
   FCmd.isWindow:=cbIsWindow.Checked;
 
   if (RadioGroup1.ItemIndex>0)  then

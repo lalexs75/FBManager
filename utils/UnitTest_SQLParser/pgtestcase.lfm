@@ -2988,21 +2988,29 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateFunction1'
         Lines.Strings = (
-          'CREATE FUNCTION add(integer, integer) RETURNS integer'
-          '  AS ''select $1 + $2;'''
-          '  LANGUAGE SQL'
-          '  IMMUTABLE'
-          '  RETURNS NULL ON NULL INPUT;'
+          'CREATE FUNCTION add(  integer,'
+          '  integer)'
+          'RETURNS integer'
+          'AS'
+          '$BODY$'
+          'select $1 + $2;'
+          '$BODY$'
+          'LANGUAGE SQL'
+          'IMMUTABLE'
+          'STRICT;'
         )
       end    
       item
         Caption = 'CreateFunction2'
         Lines.Strings = (
-          'CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$'
-          'BEGIN'
-          '  RETURN i + 1;'
-          'END;'
-          '$$ LANGUAGE plpgsql;'
+          'CREATE FUNCTION add(  integer,'
+          '  integer)'
+          'RETURNS integer'
+          'AS'
+          '''select $1 + $2;'''
+          'LANGUAGE SQL'
+          'IMMUTABLE'
+          'RETURNS NULL ON NULL INPUT;'
         )
       end    
       item
