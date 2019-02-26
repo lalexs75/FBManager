@@ -29,8 +29,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <RevisionNr Value="12"/>
-      <BuildNr Value="5500"/>
+      <RevisionNr Value="13"/>
+      <BuildNr Value="5501"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.9.10"/>
@@ -1768,10 +1768,16 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="1">
+    <Exceptions Count="3">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
+      <Item2>
+        <Name Value="EOutOfMemory"/>
+      </Item2>
+      <Item3>
+        <Name Value="EReadError"/>
+      </Item3>
     </Exceptions>
   </Debugging>
 </CONFIG>

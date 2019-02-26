@@ -309,7 +309,7 @@ begin
                                      TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                      TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
         TD_MS, TD_MU], 'PRIMARY', [], 16);
-      TC_PK1:=AddSQLTokens(stKeyword, TC_PK, 'KEY', []);
+      TC_PK1:=AddSQLTokens(stIdentificator, TC_PK, 'KEY', []);
         T1:=AddSQLTokens(stKeyword, TC_PK1, 'ASC', [], 18);
         T2:=AddSQLTokens(stKeyword, TC_PK1, 'DESC', [], 19);
           T:=AddSQLTokens(stKeyword, [T1, T2], 'ON', []);
@@ -1357,8 +1357,8 @@ begin
 
   TCN:=AddSQLTokens(stIdentificator, TC, '', [], 40);
 
-  TCPK:=AddSQLTokens(stKeyword, [TSymb, TCN], 'PRIMARY', []);
-  TCPK1:=AddSQLTokens(stKeyword, [TCPK], 'KEY', [], 41);
+  TCPK:=AddSQLTokens(stIdentificator, [TSymb, TCN], 'PRIMARY', []);
+  TCPK1:=AddSQLTokens(stIdentificator, [TCPK], 'KEY', [], 41);
 
 
   TCU:=AddSQLTokens(stKeyword, [TSymb, TCN], 'UNIQUE', [], 42);
@@ -1382,7 +1382,7 @@ begin
 
 
   TCFK:=AddSQLTokens(stKeyword, [TSymb, TCN], 'FOREIGN', []);
-  T:=AddSQLTokens(stKeyword, TCFK, 'KEY', [], 45);
+  T:=AddSQLTokens(stIdentificator, TCFK, 'KEY', [], 45);
   TSymb5:=AddSQLTokens(stSymbol, T, '(', []);
   T:=AddSQLTokens(stIdentificator, TSymb5, '', [], 44);
   T1:=AddSQLTokens(stSymbol, T, ',', []);
