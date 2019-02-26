@@ -417,6 +417,12 @@ begin
     DS.AfterScroll:=@DataSetAfterScrollRecord;
 
     DataSource1.DataSet:=DS;
+  end
+  else
+    TDBDataSetObject(DBObject).DataSet(SpinEdit1.Value);
+
+  if not DataSource1.DataSet.Active then
+  begin
     DataSource1.DataSet.Active:=true;
     DataSetAfterScrollRecord(DS);
   end;
