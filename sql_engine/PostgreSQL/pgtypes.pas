@@ -27,7 +27,7 @@ uses
   Classes, SysUtils, sqlObjects, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit;
 
 type
-  TPGSPVolatCat = (pgvcVOLATILE, pgvcSTABLE, pgvcIMMUTABLE);
+  TPGSPVolatCat = (pgvcNone, pgvcVOLATILE, pgvcSTABLE, pgvcIMMUTABLE);
 
   TPGServerVersion = (pgUnknow,
                       pgVersion7_0,
@@ -78,7 +78,7 @@ const
   RuleActionStr : array [TPGRuleAction] of string = ('SELECT', 'UPDATE', 'INSERT', 'DELETE');
   RuleWorkStr : array [TPGRuleWork] of string = ('ALSO', 'INSTEAD');
 
-  PGSPVolatCatNames : array [TPGSPVolatCat] of string = ('VOLATILE', 'STABLE', 'IMMUTABLE');
+  PGSPVolatCatNames : array [TPGSPVolatCat] of string = ('', 'VOLATILE', 'STABLE', 'IMMUTABLE');
   PGUserOptionStr : array [TPGUserOption] of string = (
     'LOGIN',         //puoLoginEnabled,
     'NOLOGIN',       //puoNoLoginEnabled,

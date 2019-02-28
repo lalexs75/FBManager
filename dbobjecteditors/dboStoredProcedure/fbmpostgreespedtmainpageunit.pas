@@ -376,7 +376,7 @@ var
   D: TDBDomain;
 begin
   edtName.Caption:=TPGFunction(DBObject).Caption;
-  cbVolatCat.ItemIndex:=Ord(TPGFunction(DBObject).VolatilityCategories);
+  cbVolatCat.ItemIndex:=Ord(TPGFunction(DBObject).VolatilityCategories)-1;
   cbIsWindow.Checked:=TPGFunction(DBObject).isWindow;
   cbIsStrict.Checked:=TPGFunction(DBObject).isStrict;
   RadioGroup1.ItemIndex:=Ord(TPGFunction(DBObject).ReturnSetType);
@@ -901,7 +901,7 @@ begin
     aSql:=aSql + FLocalVars.VriablesList(true);
   FCmd.Body:=aSql + Trim(EditorFrame.EditorText)+LineEnding;
   FCmd.Language:=cbLang.Text;
-  FCmd.VolatilityCategories:=TPGSPVolatCat(cbVolatCat.ItemIndex);
+  FCmd.VolatilityCategories:=TPGSPVolatCat(cbVolatCat.ItemIndex+1);
   FCmd.Cost:=edtAVGTime.Value;
 
   if cbIsStrict.Checked then

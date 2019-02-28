@@ -1,8 +1,8 @@
 inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
   Height = 606
-  Width = 878
+  Width = 917
   ClientHeight = 606
-  ClientWidth = 878
+  ClientWidth = 917
   DesignLeft = 451
   DesignTop = 257
   object Splitter1: TSplitter[0]
@@ -10,7 +10,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     Left = 0
     Height = 5
     Top = 219
-    Width = 878
+    Width = 917
     Align = alTop
     ResizeAnchor = akTop
   end
@@ -18,7 +18,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     Left = 0
     Height = 219
     Top = 0
-    Width = 878
+    Width = 917
     ActivePage = TabSheet1
     Align = alTop
     TabIndex = 0
@@ -26,17 +26,17 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     object TabSheet1: TTabSheet
       Caption = 'Declaration'
       ClientHeight = 186
-      ClientWidth = 868
+      ClientWidth = 907
       object cbVolatCat: TComboBox
         AnchorSideLeft.Control = Label6
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = cbLang
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Panel1
-        Left = 441
+        Left = 377
         Height = 27
         Top = 117
-        Width = 80
+        Width = 171
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         Constraints.MinWidth = 80
@@ -56,7 +56,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AnchorSideLeft.Side = asrBottom
         AnchorSideBottom.Control = cbVolatCat
         AnchorSideBottom.Side = asrBottom
-        Left = 377
+        Left = 313
         Height = 19
         Top = 125
         Width = 58
@@ -69,10 +69,10 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = cbLang
         AnchorSideTop.Side = asrBottom
-        Left = 270
+        Left = 230
         Height = 31
         Top = 117
-        Width = 101
+        Width = 77
         BorderSpacing.Around = 6
         MaxValue = 65536
         TabOrder = 1
@@ -85,7 +85,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         Left = 80
         Height = 31
         Top = 117
-        Width = 114
+        Width = 74
         BorderSpacing.Around = 6
         MaxValue = 65536
         TabOrder = 2
@@ -107,7 +107,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AnchorSideLeft.Side = asrBottom
         AnchorSideBottom.Control = edtAVGRows
         AnchorSideBottom.Side = asrBottom
-        Left = 200
+        Left = 160
         Height = 19
         Top = 129
         Width = 64
@@ -125,7 +125,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         Left = 77
         Height = 31
         Top = 80
-        Width = 432
+        Width = 471
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -164,7 +164,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         Left = 53
         Height = 31
         Top = 6
-        Width = 456
+        Width = 495
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 4
@@ -176,7 +176,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Panel1
         AnchorSideBottom.Side = asrBottom
-        Left = 739
+        Left = 778
         Height = 113
         Top = 6
         Width = 123
@@ -225,7 +225,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         Left = 88
         Height = 31
         Top = 43
-        Width = 421
+        Width = 460
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -235,7 +235,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       object Panel1: TGroupBox
         AnchorSideTop.Control = TabSheet1
         AnchorSideRight.Control = RadioGroup1
-        Left = 515
+        Left = 554
         Height = 113
         Top = 6
         Width = 218
@@ -286,7 +286,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     object TabSheet2: TTabSheet
       Caption = 'Params'
       ClientHeight = 186
-      ClientWidth = 868
+      ClientWidth = 907
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 186
@@ -397,7 +397,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Desc'
-            Width = 224
+            Width = 235
             FieldName = 'Desc'
             EditButtons = <>
             Filter.Font.Style = [fsItalic]
@@ -512,7 +512,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         object ToolButton4: TToolButton
           Left = 1
           Top = 68
-          Width = 23
+          Width = 8
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end

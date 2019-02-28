@@ -17431,7 +17431,9 @@ begin
     S:=S + 'ROWS ' + IntToStr(AVGRows) + LineEnding;
   if isWindow then
     S:=S + 'WINDOW' + LineEnding;
-  S:=S + PGSPVolatCatNames[VolatilityCategories] + LineEnding;
+
+  if VolatilityCategories <> pgvcNone then
+    S:=S + PGSPVolatCatNames[VolatilityCategories] + LineEnding;
 
   case Strict of
     //srNone,
