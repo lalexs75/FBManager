@@ -3016,8 +3016,13 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateFunction3'
         Lines.Strings = (
-          'CREATE FUNCTION dup(in int, out f1 int, out f2 text)'
-          'AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
+          'CREATE FUNCTION dup( IN  int,'
+          ' OUT f1 int,'
+          ' OUT f2 text)'
+          'AS'
+          '$$'
+          'SELECT $1, CAST($1 AS text) || '' is text'''
+          '$$'
           'LANGUAGE SQL;'
         )
       end    
@@ -3030,16 +3035,26 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateFunction5'
         Lines.Strings = (
-          'CREATE FUNCTION dup(int) RETURNS dup_result'
-          '  AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
-          '  LANGUAGE SQL;'
+          'CREATE FUNCTION dup(  int)'
+          'RETURNS dup_result'
+          'AS'
+          '$$'
+          'SELECT $1, CAST($1 AS text) || '' is text'''
+          '$$'
+          'LANGUAGE SQL;'
         )
       end    
       item
         Caption = 'CreateFunction6'
         Lines.Strings = (
-          'CREATE FUNCTION dup(int) RETURNS TABLE(f1 int, f2 text)'
-          '  AS $$ SELECT $1, CAST($1 AS text) || '' is text'' $$'
+          'CREATE FUNCTION dup(  int)'
+          'RETURNS TABLE ('
+          '  f1 int,'
+          '  f2 text)'
+          'AS'
+          '$$'
+          'SELECT $1, CAST($1 AS text) || '' is text'''
+          '$$'
           'LANGUAGE SQL;'
         )
       end    

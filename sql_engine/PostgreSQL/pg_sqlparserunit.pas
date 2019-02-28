@@ -321,6 +321,7 @@ type
   TPGSQLDropFunction = class(TSQLDropCommandAbstract)
   private
     FCurParam: TSQLParserField;
+    FCurName: TTableItem;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -6575,12 +6576,12 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
   T:=AddSQLTokens(stKeyword, T, 'ON', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
-  T2:=AddSQLTokens(stSymbol, T, '.', []);
+  T2:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
   T2:=AddSQLTokens(stIdentificator, T2, '', [], 3);
 
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
   T2.AddChildToken(T1);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
   T2.AddChildToken(T1);
 end;
 
@@ -14976,9 +14977,11 @@ end;
 
 procedure TPGSQLDropFunction.InitParserTree;
 var
-  T1, T, T2, T3, T4, T5, FSQLTokens, TSymb, TSymb2: TSQLTokenRecord;
+  T1, T, T2, T3, T4, T5, FSQLTokens, TSymb, TSymb2, TSymb3: TSQLTokenRecord;
 begin
-  (* DROP FUNCTION [ IF EXISTS ] name ( [ [ argmode ] [ argname ] argtype [, ...] ] ) [ CASCADE | RESTRICT ] *)
+  //DROP FUNCTION [ IF EXISTS ] имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ] [, ...]
+  //    [ CASCADE | RESTRICT ]
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okStoredProc);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
@@ -14993,9 +14996,17 @@ begin
 
   CreateInParamsTree(Self, TSymb, TSymb2);
 
-
   AddSQLTokens(stKeyword, TSymb2, 'CASCADE', [toOptional], -2);
   AddSQLTokens(stKeyword, TSymb2, 'RESTRICT', [toOptional], -3);
+
+  TSymb3:=AddSQLTokens(stSymbol, [TSymb2, T, T1], ',', [], 10);
+
+  T:=AddSQLTokens(stIdentificator, T, '', [], 11);
+    T2:=AddSQLTokens(stSymbol, T, '.', []);
+    T2:=AddSQLTokens(stIdentificator, T2, '', [], 12);
+  T1.AddChildToken(T);
+    T.AddChildToken(TSymb);
+    T2.AddChildToken(TSymb);
 end;
 
 procedure TPGSQLDropFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15004,6 +15015,8 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
+    11:FCurName:=Tables.Add(AWord);
+//    12:
     101..104:begin
         FCurParam:=Params.AddParam('');
         case AChild.Tag of
@@ -15038,15 +15051,15 @@ begin
         SchemaName:=Name;
         Name:=AWord;
       end;
+    10:FCurName:=nil;
   end;
-
-
 end;
 
 procedure TPGSQLDropFunction.MakeSQL;
 var
   S, S1: String;
   R: TSQLParserField;
+  T: TTableItem;
 begin
   S:='DROP FUNCTION';
   if ooIfExists in Options then S:=S + ' IF EXISTS';
@@ -15056,11 +15069,19 @@ begin
   for R in Params do
   begin
     if S1<>'' then S1:=S1 + ',';
-    S1:=S1 + ' ' +PGVarTypeNames[R.InReturn];
+
+    if PGVarTypeNames[R.InReturn]<>'' then
+      S1:=S1 + ' ' +PGVarTypeNames[R.InReturn];
+
     if R.Caption<>'' then S1:=S1+' '+R.Caption;
     S1:=S1+' '+R.TypeName;
   end;
   S:=S + S1 + ')';
+
+  for T in Tables do
+  begin
+    S:=S + ', ' + T.Name;
+  end;
 
   if DropRule = drCascade then S:=S + ' CASCADE'
   else
@@ -17187,9 +17208,11 @@ begin
     T17_1:=AddSQLTokens(stIdentificator, [Par1, Par1_RetSet], '', [], 17);
     T18:=AddSQLTokens(stKeyword, [Par1, Par1_RetSet], 'TABLE', [], 18);
       T:=AddSQLTokens(stSymbol, T18, '(', []);
+
       T19:=AddSQLTokens(stIdentificator, T, '', [], 19);
-      T:=AddSQLTokens(stSymbol, T19, ',', []);
-      T20:=AddSQLTokens(stIdentificator, T, '', [], 20);
+      T20:=AddSQLTokens(stIdentificator, T19, '', [], 20);
+      T:=AddSQLTokens(stSymbol, [T19, T20], ',', []);
+        T.AddChildToken(T19);
   TSymbOut:=AddSQLTokens(stSymbol, [T19, T20], ')', []);
 
   FTLanguage:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut], 'LANGUAGE', []);
@@ -17371,37 +17394,11 @@ begin
 
   S:='CREATE';
   if CreateMode = cmCreateOrAlter then S:=S + ' OR REPLACE';
-(*  S:=S + ' FUNCTION ' + FullName + '(';
 
-  S1:='';
-  for P in Params do
-  begin
-    if S1<> '' then S1:=S1 + ',' + LineEnding;
-    if P.InReturn = spvtInput then
-        S1:=S1 + ' IN'
-    else
-    if P.InReturn = spvtOutput then
-        S1:=S1 + ' OUT'
-    else
-    if P.InReturn = spvtInOut then
-        S1:=S1 + ' INOUT';
-
-    if P.Caption <> P.TypeName then
-      S1:=S1 + ' ' + P.Caption;
-
-    S1:=S1 + ' ' + P.TypeName;
-  end;
-
-  if S1<>'' then
-    S:=S + S1;
-
-  S:=S + ')' + LineEnding;
-*)
   S:=S + ' FUNCTION ' + FunctionName + LineEnding;
 
   if Output.Count = 1 then
   begin
-
     S:=S + 'RETURNS ';
     if FSetOF then S:=S + 'SETOF ';
     S:=S + Output[0].TypeName + LineEnding
@@ -17409,13 +17406,11 @@ begin
   else
   if Output.Count > 1 then
   begin
-    S:=S + 'RETURNS TABLE (';
+    S:=S + 'RETURNS TABLE ('+LineEnding;
     S1:='';
-    for P in Params do
+    for P in Output do
     begin
       if S1<> '' then S1:=S1 + ',' + LineEnding;
-{      if P.Caption <> P.TypeName then
-        S1:=S1 + ' ' + P.Caption;}
       S1:=S1 + '  ' + P.Caption + ' ' + P.TypeName;
     end;
     S:=S + S1 + ')' + LineEnding;
