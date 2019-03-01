@@ -1765,6 +1765,7 @@ begin
   DoTestSQL(PGSQLParserData.sFunctions['AlterFunction1']);
 end;
 
+
 procedure TPGSQLParserTest.c230AlterFunction2;
 begin
   DoTestSQL(PGSQLParserData.sFunctions['AlterFunction2']);

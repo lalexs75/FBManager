@@ -2964,13 +2964,13 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'DropFunction1'
         Lines.Strings = (
-          'DROP FUNCTION sqrt(integer);'
+          'DROP FUNCTION sqrt( integer);'
         )
       end    
       item
         Caption = 'DropFunction2'
         Lines.Strings = (
-          'DROP FUNCTION sqrt(integer), sqrt(bigint);'
+          'DROP FUNCTION sqrt( integer), sqrt( bigint);'
         )
       end    
       item
@@ -3029,7 +3029,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateFunction4'
         Lines.Strings = (
-          'CREATE TYPE dup_result AS (f1 int, f2 text);'
+          'CREATE TYPE dup_result AS ( f1 int, f2 text);'
         )
       end    
       item

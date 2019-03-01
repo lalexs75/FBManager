@@ -320,6 +320,7 @@ type
 
   TPGSQLDropFunction = class(TSQLDropCommandAbstract)
   private
+    FBracketExists: boolean;
     FCurParam: TSQLParserField;
     FCurName: TTableItem;
   protected
@@ -327,7 +328,9 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
     property SchemaName;
+    property BracketExists:boolean read FBracketExists write FBracketExists;
   end;
 
   { TPGSQLCreateFunction }
@@ -510,6 +513,7 @@ type
   private
     FCache: Int64;
     FIncrementBy: Int64;
+    FIsWith: Boolean;
     FNoCycle: boolean;
     FNoMaxValue: boolean;
     FNoMinValue: boolean;
@@ -523,6 +527,7 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property IsWith:Boolean read FIsWith write FIsWith;
     property OwnedBy:string read FOwnedBy write FOwnedBy;
     property NoMinValue:boolean read FNoMinValue write FNoMinValue;
     property NoMaxValue:boolean read FNoMaxValue write FNoMaxValue;
@@ -2344,14 +2349,18 @@ type
   end;
 
   { TPGSQLCreateType }
-
+  TPGSQLCreateTypeKind = (pgctSimple, pgctRecord, pgctEnum, pgctComplex);
   TPGSQLCreateType = class(TSQLCreateCommandAbstract)
   private
+    FCurParam: TSQLParserField;
+    FKind: TPGSQLCreateTypeKind;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Kind:TPGSQLCreateTypeKind read FKind write FKind;
   end;
 
   { TPGSQLDropType }
@@ -6326,55 +6335,132 @@ end;
 
 procedure TPGSQLCreateType.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TName, TAs, TSymb1, TSymb2: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для CREATE TYPE }
-  (*
-  CREATE TYPE name AS
-      ( [ attribute_name data_type [ COLLATE collation ] [, ... ] ] )
 
-  CREATE TYPE name AS ENUM
-      ( [ 'label' [, ... ] ] )
+  //CREATE TYPE имя AS
+  //    ( [ имя_атрибута тип_данных [ COLLATE правило_сортировки ] [, ... ] ] )
+  //
+  //CREATE TYPE имя AS ENUM
+  //    ( [ 'метка' [, ... ] ] )
+  //
+  //CREATE TYPE имя AS RANGE (
+  //    SUBTYPE = подтип
+  //    [ , SUBTYPE_OPCLASS = класс_оператора_подтипа ]
+  //    [ , COLLATION = правило_сортировки ]
+  //    [ , CANONICAL = каноническая_функция ]
+  //    [ , SUBTYPE_DIFF = функция_разницы_подтипа ]
+  //)
+  //
+  //CREATE TYPE имя (
+  //    INPUT = функция_ввода,
+  //    OUTPUT = функция_вывода
+  //    [ , RECEIVE = функция_получения ]
+  //    [ , SEND = функция_отправки ]
+  //    [ , TYPMOD_IN = функция_ввода_модификатора_типа ]
+  //    [ , TYPMOD_OUT = функция_вывода_модификатора_типа ]
+  //    [ , ANALYZE = функция_анализа ]
+  //    [ , INTERNALLENGTH = { внутр_длина | VARIABLE } ]
+  //    [ , PASSEDBYVALUE ]
+  //    [ , ALIGNMENT = выравнивание ]
+  //    [ , STORAGE = хранение ]
+  //    [ , LIKE = тип_образец ]
+  //    [ , CATEGORY = категория ]
+  //    [ , PREFERRED = предпочитаемый ]
+  //    [ , DEFAULT = по_умолчанию ]
+  //    [ , ELEMENT = элемент ]
+  //    [ , DELIMITER = разделитель ]
+  //    [ , COLLATABLE = сортируемый ]
+  //)
+  //
+  //CREATE TYPE имя
 
-  CREATE TYPE name (
-      INPUT = input_function,
-      OUTPUT = output_function
-      [ , RECEIVE = receive_function ]
-      [ , SEND = send_function ]
-      [ , TYPMOD_IN = type_modifier_input_function ]
-      [ , TYPMOD_OUT = type_modifier_output_function ]
-      [ , ANALYZE = analyze_function ]
-      [ , INTERNALLENGTH = { internallength | VARIABLE } ]
-      [ , PASSEDBYVALUE ]
-      [ , ALIGNMENT = alignment ]
-      [ , STORAGE = storage ]
-      [ , LIKE = like_type ]
-      [ , CATEGORY = category ]
-      [ , PREFERRED = preferred ]
-      [ , DEFAULT = default ]
-      [ , ELEMENT = element ]
-      [ , DELIMITER = delimiter ]
-      [ , COLLATABLE = collatable ]
-  )
-
-  CREATE TYPE name
-  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  TAs:=AddSQLTokens(stKeyword, TName, 'AS', [], 3);
+    TSymb1:=AddSQLTokens(stSymbol, TAs, '(', []);
+    TSymb2:=AddSQLTokens(stSymbol, TSymb1, ')', []);
+    CreateInParamsTree(Self, TSymb1, TSymb2);
 end;
 
 procedure TPGSQLCreateType.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    3:Kind:=pgctRecord;
+    101..104:begin
+        FCurParam:=Params.AddParam('');
+        case AChild.Tag of
+          101:FCurParam.InReturn:=spvtInput;
+          102:FCurParam.InReturn:=spvtOutput;
+          103:FCurParam.InReturn:=spvtInOut;
+          104:FCurParam.InReturn:=spvtVariadic;
+        end;
+      end;
+    105:begin
+          if not Assigned(FCurParam) then
+            FCurParam:=Params.AddParamWithType('', AWord)
+          else
+            FCurParam.TypeName:=AWord;
+        end;
+    106:if Assigned(FCurParam) then
+        begin
+           if FCurParam.Caption = '' then
+           begin
+             FCurParam.Caption:=FCurParam.TypeName;
+             FCurParam.TypeName:=AWord;
+           end
+           else
+             FCurParam.TypeName:=FCurParam.TypeName + AWord;
+        end;
+    107:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + AWord;
+    108:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + ' ' + AWord;
+    109,
+    110:FCurParam:=nil;
+  end;
 end;
 
 procedure TPGSQLCreateType.MakeSQL;
+function CreateParamsStr(FPars:TSQLFields):string;
 var
-  Result: String;
+  R: TSQLParserField;
 begin
-  Result:='CREATE TYPE';
-  AddSQLCommand(Result);
+  Result:='';
+  for R in FPars do
+  begin
+    if Result<>'' then Result:=Result + ',';
+
+    if PGVarTypeNames[R.InReturn]<>'' then
+      Result:=Result + ' ' +PGVarTypeNames[R.InReturn];
+
+    if R.Caption<>'' then Result:=Result+' '+R.Caption;
+    Result:=Result+' '+R.TypeName;
+  end;
+  if (Result <> '') then
+    Result:='('+Result+')';
+end;
+
+var
+  S: String;
+begin
+  S:='CREATE TYPE ' + Name;
+  //pgctSimple, pgctRecord, pgctEnum, pgctComplex
+  if Kind = pgctRecord then
+    S:=S + CreateParamsStr(Params);
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCreateType.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateType then
+  begin
+    Kind:=TPGSQLCreateType(ASource).Kind;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterType }
@@ -14987,24 +15073,24 @@ begin
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
-    T2:=AddSQLTokens(stSymbol, T, '.', []);
+    T2:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
     T2:=AddSQLTokens(stIdentificator, T2, '', [], 7);
   T1.AddChildToken(T);
 
-  TSymb:=AddSQLTokens(stSymbol, [T, T2], '(', []);
-  TSymb2:=AddSQLTokens(stSymbol, nil, ')', [], 5);
+  TSymb:=AddSQLTokens(stSymbol, [T, T2], '(', [toOptional]);
+  TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 5);
 
   CreateInParamsTree(Self, TSymb, TSymb2);
 
   AddSQLTokens(stKeyword, TSymb2, 'CASCADE', [toOptional], -2);
   AddSQLTokens(stKeyword, TSymb2, 'RESTRICT', [toOptional], -3);
 
-  TSymb3:=AddSQLTokens(stSymbol, [TSymb2, T, T1], ',', [], 10);
+  TSymb3:=AddSQLTokens(stSymbol, [TSymb2, T, T1], ',', [ toOptional], 10);
 
-  T:=AddSQLTokens(stIdentificator, T, '', [], 11);
+  T:=AddSQLTokens(stIdentificator, TSymb3, '', [], 11);
     T2:=AddSQLTokens(stSymbol, T, '.', []);
     T2:=AddSQLTokens(stIdentificator, T2, '', [], 12);
-  T1.AddChildToken(T);
+//  T1.AddChildToken(T);
     T.AddChildToken(TSymb);
     T2.AddChildToken(TSymb);
 end;
@@ -15015,10 +15101,17 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
+    5:begin
+        FBracketExists:=true;
+        FCurParam:=nil;
+      end;
     11:FCurName:=Tables.Add(AWord);
 //    12:
     101..104:begin
-        FCurParam:=Params.AddParam('');
+        if Assigned(FCurName) then
+          FCurParam:=FCurName.Fields.AddParam('')
+        else
+          FCurParam:=Params.AddParam('');
         case AChild.Tag of
           101:FCurParam.InReturn:=spvtInput;
           102:FCurParam.InReturn:=spvtOutput;
@@ -15028,7 +15121,12 @@ begin
       end;
     105:begin
           if not Assigned(FCurParam) then
-            FCurParam:=Params.AddParamWithType('', AWord)
+          begin
+            if Assigned(FCurName) then
+              FCurParam:=FCurName.Fields.AddParamWithType('', AWord)
+            else
+              FCurParam:=Params.AddParamWithType('', AWord)
+          end
           else
             FCurParam.TypeName:=AWord;
         end;
@@ -15056,38 +15154,52 @@ begin
 end;
 
 procedure TPGSQLDropFunction.MakeSQL;
+
+function CreateParamsStr(FPars:TSQLFields):string;
+var
+  R: TSQLParserField;
+begin
+  Result:='';
+  for R in FPars do
+  begin
+    if Result<>'' then Result:=Result + ',';
+
+    if PGVarTypeNames[R.InReturn]<>'' then
+      Result:=Result + ' ' +PGVarTypeNames[R.InReturn];
+
+    if R.Caption<>'' then Result:=Result+' '+R.Caption;
+    Result:=Result+' '+R.TypeName;
+  end;
+  if (Result <> '') or BracketExists then
+    Result:='('+Result+')';
+end;
+
 var
   S, S1: String;
-  R: TSQLParserField;
+  //R: TSQLParserField;
   T: TTableItem;
 begin
   S:='DROP FUNCTION';
   if ooIfExists in Options then S:=S + ' IF EXISTS';
-  S:=S + ' ' + FullName + '(';
-
-  S1:='';
-  for R in Params do
-  begin
-    if S1<>'' then S1:=S1 + ',';
-
-    if PGVarTypeNames[R.InReturn]<>'' then
-      S1:=S1 + ' ' +PGVarTypeNames[R.InReturn];
-
-    if R.Caption<>'' then S1:=S1+' '+R.Caption;
-    S1:=S1+' '+R.TypeName;
-  end;
-  S:=S + S1 + ')';
+  S:=S + ' ' + FullName + CreateParamsStr(Params);
 
   for T in Tables do
-  begin
-    S:=S + ', ' + T.Name;
-  end;
+    S:=S + ', ' + T.Name + CreateParamsStr(T.Fields);
 
   if DropRule = drCascade then S:=S + ' CASCADE'
   else
   if DropRule = drRestrict then S:=S + ' RESTRICT';
 
   AddSQLCommand(S);
+end;
+
+procedure TPGSQLDropFunction.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLDropFunction then
+  begin
+    BracketExists:=TPGSQLDropFunction(ASource).BracketExists;
+  end;
+  inherited Assign(ASource);
 end;
 
 
@@ -15335,36 +15447,36 @@ begin
   T10:=AddSQLTokens(stSymbol, T2, '.', []);
   T:=AddSQLTokens(stIdentificator, T10, '', [], 2);
 
-  T3:=AddSQLTokens(stKeyword, T, 'INCREMENT', []);
+  T3:=AddSQLTokens(stKeyword, T, 'INCREMENT', [toOptional]);
   T1:=AddSQLTokens(stKeyword, T3, 'BY', []);
   T3_1:=AddSQLTokens(stInteger, T1, '', [], 3);
     T3.AddChildToken(T3_1);
 
-  T4:=AddSQLTokens(stKeyword, T, 'MINVALUE', []);
+  T4:=AddSQLTokens(stKeyword, T, 'MINVALUE', [toOptional]);
   T4_1:=AddSQLTokens(stInteger, T4, '', [], 4);
 
-  T5:=AddSQLTokens(stKeyword, T, 'MAXVALUE', []);
+  T5:=AddSQLTokens(stKeyword, T, 'MAXVALUE', [toOptional]);
   T5_1:=AddSQLTokens(stInteger, T5, '', [], 5);
 
-  T6:=AddSQLTokens(stKeyword, T, 'NO', []);
+  T6:=AddSQLTokens(stKeyword, T, 'NO', [toOptional]);
   T7:=AddSQLTokens(stKeyword, T6, 'MINVALUE', [], 7);
   T8:=AddSQLTokens(stKeyword, T6, 'MAXVALUE', [], 8);
   T10:=AddSQLTokens(stKeyword, T6, 'CYCLE', [], 10);
 
-  T9:=AddSQLTokens(stKeyword, T, 'START', []);
+  T9:=AddSQLTokens(stKeyword, T, 'START', [toOptional]);
     T1:=AddSQLTokens(stKeyword, T9, 'WITH', []);
     T9_1:=AddSQLTokens(stInteger, T1, '', [], 9);
     T9.AddChildToken(T9_1);
 
-  T14:=AddSQLTokens(stKeyword, T, 'RESTART', []);
-    T1:=AddSQLTokens(stKeyword, T9, 'WITH', []);
+  T14:=AddSQLTokens(stKeyword, T, 'RESTART', [toOptional]);
+    T1:=AddSQLTokens(stKeyword, T14, 'WITH', []);
     T14_1:=AddSQLTokens(stInteger, T1, '', [], 14);
     T14.AddChildToken(T14_1);
 
-  T15:=AddSQLTokens(stKeyword, T, 'CACHE', []);
+  T15:=AddSQLTokens(stKeyword, T, 'CACHE', [toOptional]);
     T15_1:=AddSQLTokens(stInteger, T15, '', [], 15);
 
-  T16:=AddSQLTokens(stKeyword, T, 'OWNED', []);
+  T16:=AddSQLTokens(stKeyword, T, 'OWNED', [toOptional]);
     T17:=AddSQLTokens(stKeyword, T16, 'BY', []);
     T17:=AddSQLTokens(stIdentificator, T17, '', [], 17);
     T1:=AddSQLTokens(stSymbol, T17, '.', []);
@@ -15373,7 +15485,7 @@ begin
     T19:=AddSQLTokens(stIdentificator, T1, '', [], 19);
     T20:=AddSQLTokens(stKeyword, T16, 'NONE', [], 20);
 
-  T11:=AddSQLTokens(stKeyword, T, 'OWNER', []);
+  T11:=AddSQLTokens(stKeyword, T, 'OWNER', [toOptional]);
   T1:=AddSQLTokens(stKeyword, T11, 'TO', []);
   T1:=AddSQLTokens(stIdentificator, T1, '', [], 11);
 
@@ -15464,11 +15576,10 @@ begin
 
     if FStart <> 0 then
       Result:=Result + ' START WITH ' + IntToStr(FStart);
-
+*)
     if FRestart <> 0 then
-      { TODO : Доработать парсер RESTART [ [ WITH }
-      Result:=Result + ' RESTART WITH ' + IntToStr(FRestart);
-
+      AddSQLCommand(S + ' RESTART WITH ' + IntToStr(FRestart));
+(*
     if FCache <> 0 then
       Result:=Result + ' CACHE ' + IntToStr(FCache);
 
@@ -15511,12 +15622,12 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T1.AddChildToken(T);
 
-  T2:=AddSQLTokens(stSymbol, T, '.', []);
+  T2:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
   T2:=AddSQLTokens(stIdentificator, T2, '', [], 7);
 
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
     T2.AddChildToken(T1);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropSequence.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15576,31 +15687,30 @@ CREATE [ TEMPORARY | TEMP ] SEQUENCE name [ INCREMENT [ BY ] increment ]
   T:=AddSQLTokens(stSymbol, FTSequenceShema, '.', []);
   FTSequenceName:=AddSQLTokens(stIdentificator, T, '', [], 101);
 
-  T2:=AddSQLTokens(stKeyword, FTSequenceName, 'INCREMENT', []);
+  T2:=AddSQLTokens(stKeyword, FTSequenceName, 'INCREMENT', [toOptional]);
     T2_1:=AddSQLTokens(stKeyword, T2, 'BY', [toOptional]);
     T2_1:=AddSQLTokens(stInteger, T2_1, '', [], 2);
     T2.AddChildToken(T2_1);
 
-  T3:=AddSQLTokens(stKeyword, FTSequenceName, 'MINVALUE', []);
+  T3:=AddSQLTokens(stKeyword, FTSequenceName, 'MINVALUE', [toOptional]);
     T3_1:=AddSQLTokens(stInteger, T3, '', [], 3);
 
-  T4:=AddSQLTokens(stKeyword, FTSequenceName, 'MAXVALUE', []);
+  T4:=AddSQLTokens(stKeyword, FTSequenceName, 'MAXVALUE', [toOptional]);
     T4_1:=AddSQLTokens(stInteger, T4, '', [], 4);
 
-  T_NO:=AddSQLTokens(stKeyword, FTSequenceName, 'NO', []);
+  T_NO:=AddSQLTokens(stKeyword, FTSequenceName, 'NO', [toOptional]);
     T5_1:=AddSQLTokens(stKeyword, T_NO, 'MINVALUE', [], 5);
     T6_1:=AddSQLTokens(stKeyword, T_NO, 'MAXVALUE', [], 6);
     T7_1:=AddSQLTokens(stKeyword, T_NO, 'CYCLE', [], 7);
 
-  T8:=AddSQLTokens(stKeyword, FTSequenceName, 'START', []);
-    T:=AddSQLTokens(stKeyword, T8, 'WITH', [toOptional]);
-    T8_1:=AddSQLTokens(stInteger, T1, '', [], 8);
-    T8.AddChildToken(T8_1);
+  T8:=AddSQLTokens(stKeyword, FTSequenceName, 'START', [toOptional]);
+    T:=AddSQLTokens(stKeyword, T8, 'WITH', [toOptional], 11);
+    T8_1:=AddSQLTokens(stInteger, [T8, T], '', [], 8);
 
-  T9:=AddSQLTokens(stKeyword, FTSequenceName, 'CACHE', []);
+  T9:=AddSQLTokens(stKeyword, FTSequenceName, 'CACHE', [toOptional]);
     T9_1:=AddSQLTokens(stInteger, T9, '', [], 9);
 
-  T16:=AddSQLTokens(stKeyword, FTSequenceName, 'OWNED', []);
+  T16:=AddSQLTokens(stKeyword, FTSequenceName, 'OWNED', [toOptional]);
     T17:=AddSQLTokens(stKeyword, T16, 'BY', []);
     T17:=AddSQLTokens(stIdentificator, T17, '', [], 17);
     T1:=AddSQLTokens(stSymbol, T17, '.', []);
@@ -15637,6 +15747,7 @@ begin
     7:NoCycle:=true;
     8:Start:=StrToInt64(AWord);
     9:Cache:=StrToInt64(AWord);
+    11:FIsWith:=true;
     17, 20:FOwnedBy:=AWord;
     18, 19:FOwnedBy:=FOwnedBy + '.'+AWord;
     100:Name:=AWord;
@@ -15672,7 +15783,12 @@ begin
     S:=S + ' MAXVALUE ' +IntToStr(MaxValue);
 
   if Start <> 0 then
-    S:=S + ' START WITH ' +IntToStr(Start);
+  begin
+    S:=S + ' START';
+    if FIsWith then
+      S:=S + ' WITH';
+    S:=S + ' ' + IntToStr(Start);
+  end;
 
   if Cache <> 0 then
     S:=S + ' CACHE ' +IntToStr(Cache);
@@ -15709,6 +15825,7 @@ begin
     Restart:=TPGSQLCreateSequence(ASource).Restart;
     Cache:=TPGSQLCreateSequence(ASource).Cache;
     NoCycle:=TPGSQLCreateSequence(ASource).NoCycle;
+    IsWith:=TPGSQLCreateSequence(ASource).IsWith;
   end;
   inherited Assign(ASource);
 end;
