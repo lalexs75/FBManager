@@ -1630,7 +1630,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateTable18'
         Lines.Strings = (
-          'CREATE TYPE employee_type AS (name text, salary numeric);'
+          'CREATE TYPE employee_type AS ( name text, salary numeric);'
         )
       end    
       item
@@ -1645,11 +1645,12 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateTable20'
         Lines.Strings = (
-          'CREATE TABLE measurement ('
-          '    logdate         date not null,'
-          '    peaktemp        int,'
-          '    unitsales       int'
-          ') PARTITION BY RANGE (logdate);'
+          'CREATE TABLE measurement('
+          '  logdate date NOT NULL,'
+          '  peaktemp int,'
+          '  unitsales int'
+          ')'
+          'PARTITION BY RANGE (logdate);'
         )
       end    
       item
@@ -2171,7 +2172,7 @@ object PGSQLParserData: TPGSQLParserData
         Caption = 'CreateSchema4'
         Lines.Strings = (
           'CREATE SCHEMA hollywood'
-          '  CREATE TABLE films (title text, release date, awards text[])'
+          'CREATE TABLE films (title text, release date, awards text[])'
           '  CREATE VIEW winners AS'
           '    SELECT title, release FROM films WHERE awards IS NOT NULL;'
         )

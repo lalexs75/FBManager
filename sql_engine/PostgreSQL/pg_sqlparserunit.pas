@@ -149,6 +149,7 @@ type
   TPGSQLCastType1 = (casttype1WithFunction, casttype1WithoutFunction, casttype1WithInout);
 
   TPGSQLCreateTriggerReferencingsEnumerator = class;
+  TPGSQLAlterMaterializedCmdListEnumerator = class;
 
 //Postgre DML command
 
@@ -259,6 +260,52 @@ type
   end;
 
   { TPGSQLAlterMaterializedView }
+  TPGAlterMVCmdType = (amvAlterCollumnSetStat, amvAlterCollumnSetAttrib,
+    amvAlterCollumnReSetAttrib, amvAlterCollumnSetStorage, amvAlterCluster,
+    amvAlterWOCluster, amvAlterSetParamStor, amvAlterReSetParamStor,
+    amvAlterOwnerTo, amvAlterDependsOnExt, amvAlterRename, amvAlterRenameCollumn,
+    amvAlterRenameTo, amvAlterSetSchema, amvAlterSetTableSpace);
+
+  { TPGSQLAlterMaterializedCmd }
+
+  TPGSQLAlterMaterializedCmd = class
+  private
+    FCmdType: TPGAlterMVCmdType;
+  public
+    procedure Assign(ASource:TPGSQLAlterMaterializedCmd);
+    property CmdType:TPGAlterMVCmdType read FCmdType write FCmdType;
+  end;
+
+  { TPGSQLAlterMaterializedCmdList }
+
+  TPGSQLAlterMaterializedCmdList = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItem(AIndex: Integer): TPGSQLAlterMaterializedCmd;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    procedure Clear;
+    procedure Assign(ASource:TPGSQLAlterMaterializedCmdList);
+    function GetEnumerator: TPGSQLAlterMaterializedCmdListEnumerator;
+    function Add:TPGSQLAlterMaterializedCmd;
+    property Count:integer read GetCount;
+    property Item[AIndex:Integer]:TPGSQLAlterMaterializedCmd read GetItem; default;
+  end;
+
+  { TPGSQLAlterMaterializedCmdListEnumerator }
+
+  TPGSQLAlterMaterializedCmdListEnumerator = class
+  private
+    FList: TPGSQLAlterMaterializedCmdList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGSQLAlterMaterializedCmdList);
+    function GetCurrent: TPGSQLAlterMaterializedCmd;
+    function MoveNext: Boolean;
+    property Current: TPGSQLAlterMaterializedCmd read GetCurrent;
+  end;
 
   TPGSQLAlterMaterializedView = class(TSQLCommandDDL)
   private
@@ -784,6 +831,7 @@ type
     FCurConst: TSQLConstraintItem;
     FCurTable: TTableItem;
     FCurParam: TSQLParserField;
+    FPartParam: TSQLParserField;
     FUpDel: Integer;
     function GetDefaultValue(ASQLParser:TSQLParser):string;
   protected
@@ -3234,6 +3282,95 @@ begin
   end;
 end;
 
+{ TPGSQLAlterMaterializedCmdListEnumerator }
+
+constructor TPGSQLAlterMaterializedCmdListEnumerator.Create(
+  AList: TPGSQLAlterMaterializedCmdList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGSQLAlterMaterializedCmdListEnumerator.GetCurrent: TPGSQLAlterMaterializedCmd;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGSQLAlterMaterializedCmdListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGSQLAlterMaterializedCmdList }
+
+function TPGSQLAlterMaterializedCmdList.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGSQLAlterMaterializedCmdList.GetItem(AIndex: Integer
+  ): TPGSQLAlterMaterializedCmd;
+begin
+  Result:=TPGSQLAlterMaterializedCmd(FList[AIndex]);
+end;
+
+constructor TPGSQLAlterMaterializedCmdList.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGSQLAlterMaterializedCmdList.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TPGSQLAlterMaterializedCmdList.Clear;
+var
+  I: Integer;
+begin
+  for I:=0 to FList.Count-1 do
+    TPGSQLAlterMaterializedCmd(FList[i]).Free;
+  FList.Clear;
+end;
+
+procedure TPGSQLAlterMaterializedCmdList.Assign(
+  ASource: TPGSQLAlterMaterializedCmdList);
+var
+  P: TPGSQLAlterMaterializedCmd;
+  i: Integer;
+begin
+  if not Assigned(ASource) then Exit;
+  for i:=0 to ASource.Count-1 do
+  begin
+    P:=Add;
+    P.Assign(ASource[i]);
+  end;
+end;
+
+function TPGSQLAlterMaterializedCmdList.GetEnumerator: TPGSQLAlterMaterializedCmdListEnumerator;
+begin
+  Result:=TPGSQLAlterMaterializedCmdListEnumerator.Create(Self);
+end;
+
+function TPGSQLAlterMaterializedCmdList.Add: TPGSQLAlterMaterializedCmd;
+begin
+  Result:=TPGSQLAlterMaterializedCmd.Create;
+  FList.Add(Result);
+end;
+
+{ TPGSQLAlterMaterializedCmd }
+
+procedure TPGSQLAlterMaterializedCmd.Assign(ASource: TPGSQLAlterMaterializedCmd
+  );
+begin
+  if not Assigned(ASource) then Exit;
+  FCmdType:=ASource.FCmdType;
+end;
+
 { TPGSQLCommandInsert }
 
 procedure TPGSQLCommandInsert.InitParserTree;
@@ -4285,6 +4422,8 @@ end;
 { TPGSQLAlterMaterializedView }
 
 procedure TPGSQLAlterMaterializedView.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
 begin
   (*
   ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
@@ -4312,6 +4451,9 @@ begin
       RESET ( параметр_хранения [, ... ] )
       OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okMaterializedView);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'MATERIALIZED', []);
+  T:=AddSQLTokens(stKeyword, T, 'VIEW', [toFindWordLast]);
 end;
 
 procedure TPGSQLAlterMaterializedView.InternalProcessChildToken(
@@ -6441,7 +6583,7 @@ begin
     Result:=Result+' '+R.TypeName;
   end;
   if (Result <> '') then
-    Result:='('+Result+')';
+    Result:=' AS ('+Result+')';
 end;
 
 var
@@ -13762,74 +13904,87 @@ var
     TTableStart, TPartition, TPartition1: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер CREATE TABLE }
-  (*
-  CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] table_name ( [
-    { column_name data_type [ COLLATE collation ] [ column_constraint [ ... ] ]
-      | table_constraint
-      | LIKE parent_table [ like_option ... ] }
-      [, ... ]
-  ] )
-  [ INHERITS ( parent_table [, ... ] ) ]
-  [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
-  [ WITH ( storage_parameter [= value] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
-  [ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
-  [ TABLESPACE tablespace ]
 
-  CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] table_name
-      OF type_name [ (
-    { column_name WITH OPTIONS [ column_constraint [ ... ] ]
-      | table_constraint }
-      [, ... ]
-  ) ]
-  [ WITH ( storage_parameter [= value] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
-  [ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
-  [ TABLESPACE tablespace ]
+  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы ( [
+  //  { имя_столбца тип_данных [ COLLATE правило_сортировки ] [ ограничение_столбца [ ... ] ]
+  //    | ограничение_таблицы
+  //    | LIKE исходная_таблица [ вариант_копирования ... ] }
+  //    [, ... ]
+  //] )
+  //[ INHERITS ( таблица_родитель [, ... ] ) ]
+  //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+  //[ TABLESPACE табл_пространство ]
+  //
+  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
+  //    OF имя_типа [ (
+  //  { имя_столбца [ WITH OPTIONS ] [ ограничение_столбца [ ... ] ]
+  //    | ограничение_таблицы }
+  //    [, ... ]
+  //) ]
+  //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+  //[ TABLESPACE табл_пространство ]
+  //
+  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
+  //    PARTITION OF таблица_родитель [ (
+  //  { имя_столбца [ WITH OPTIONS ] [ ограничение_столбца [ ... ] ]
+  //    | ограничение_таблицы }
+  //    [, ... ]
+  //) ] { FOR VALUES указание_границ_секции | DEFAULT }
+  //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+  //[ TABLESPACE табл_пространство ]
+  //
+  //Здесь ограничение_столбца:
+  //
+  //[ CONSTRAINT имя_ограничения ]
+  //{ NOT NULL |
+  //  NULL |
+  //  CHECK ( выражение ) [ NO INHERIT ] |
+  //  DEFAULT выражение_по_умолчанию |
+  //  GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( параметры_последовательности ) ] |
+  //  UNIQUE параметры_индекса |
+  //  PRIMARY KEY параметры_индекса |
+  //  REFERENCES целевая_таблица [ ( целевой_столбец ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
+  //    [ ON DELETE действие ] [ ON UPDATE действие ] }
+  //[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+  //
+  //и ограничение_таблицы:
+  //
+  //[ CONSTRAINT имя_ограничения ]
+  //{ CHECK ( выражение ) [ NO INHERIT ] |
+  //  UNIQUE ( имя_столбца [, ... ] ) параметры_индекса |
+  //  PRIMARY KEY ( имя_столбца [, ... ] ) параметры_индекса |
+  //  EXCLUDE [ USING метод_индекса ] ( элемент_исключения WITH оператор [, ... ] ) параметры_индекса [ WHERE ( предикат ) ] |
+  //  FOREIGN KEY ( имя_столбца [, ... ] ) REFERENCES целевая_таблица [ ( целевой_столбец [, ... ] ) ]
+  //    [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE действие ] [ ON UPDATE действие ] }
+  //[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+  //
+  //и вариант_копирования:
+  //
+  //{ INCLUDING | EXCLUDING } { COMMENTS | CONSTRAINTS | DEFAULTS | IDENTITY | INDEXES | STATISTICS | STORAGE | ALL }
+  //
+  //и указание_границ_секции:
+  //
+  //IN ( { числовая_константа | строковая_константа | TRUE | FALSE | NULL } [, ...] ) |
+  //FROM ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] )
+  //  TO ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] ) |
+  //WITH ( MODULUS числовая_константа, REMAINDER числовая_константа )
+  //
+  //параметры_индекса в ограничениях UNIQUE, PRIMARY KEY и EXCLUDE:
+  //
+  //[ INCLUDE ( имя_столбца [, ... ] ) ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) ]
+  //[ USING INDEX TABLESPACE табл_пространство ]
+  //
+  //элемент_исключения в ограничении EXCLUDE:
+  //
+  //{ имя_столбца | ( выражение ) } [ класс_операторов ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
 
-  where column_constraint is:
-
-  [ CONSTRAINT constraint_name ]
-  { NOT NULL |
-    NULL |
-    CHECK ( expression ) |
-    DEFAULT default_expr |
-    UNIQUE index_parameters |
-    PRIMARY KEY index_parameters |
-    REFERENCES reftable [ ( refcolumn ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
-      [ ON DELETE action ] [ ON UPDATE action ] }
-  [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
-
-  and table_constraint is:
-
-  [ CONSTRAINT constraint_name ]
-  { CHECK ( expression ) |
-    UNIQUE ( column_name [, ... ] ) index_parameters |
-    PRIMARY KEY ( column_name [, ... ] ) index_parameters |
-    EXCLUDE [ USING index_method ] ( exclude_element WITH operator [, ... ] ) index_parameters [ WHERE ( predicate ) ] |
-    FOREIGN KEY ( column_name [, ... ] ) REFERENCES reftable [ ( refcolumn [, ... ] ) ]
-      [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE action ] [ ON UPDATE action ] }
-  [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
-
-  and like_option is:
-
-  { INCLUDING | EXCLUDING } { DEFAULTS | CONSTRAINTS | INDEXES | STORAGE | COMMENTS | ALL }
-
-  index_parameters in UNIQUE, PRIMARY KEY, and EXCLUDE constraints are:
-
-  [ WITH ( storage_parameter [= value] [, ... ] ) ]
-  [ USING INDEX TABLESPACE tablespace ]
-
-  exclude_element in an EXCLUDE constraint is:
-
-  { column | ( expression ) } [ opclass ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
----
-  CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE table_name
-      [ (column_name [, ...] ) ]
-      [ WITH ( storage_parameter [= value] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
-      [ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
-      [ TABLESPACE tablespace ]
-      AS query
-      [ WITH [ NO ] DATA ]
-  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okTable);    //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'GLOBAL', [], 1);
     T2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
@@ -13999,9 +14154,10 @@ begin
     T2:=AddSQLTokens(stKeyword, TPartition1, 'LIST', [], 62);
     T:=AddSQLTokens(stSymbol, [T1, T2], '(', []);
       T1:=AddSQLTokens(stIdentificator, T, '', [], 63);
-      T:=AddSQLTokens(stSymbol, T1, ',', []);
+      T2:=AddSQLTokens(stSymbol, T1, '(', [], 64);
+      T:=AddSQLTokens(stSymbol, [T1, T2], ',', [], 65);
       T.AddChildToken(T1);
-    T:=AddSQLTokens(stSymbol, T1, ')', []);
+    T:=AddSQLTokens(stSymbol, [T1, T2], ')', [], 65);
 
   T.AddChildToken([TInher, TTblS, TOnCom, TWitO, TWit])
 //    [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
@@ -14081,7 +14237,10 @@ begin
     60:TableTypeName:=AWord;
     61:FTablePartition.PartitionType:=ptRange;
     62:FTablePartition.PartitionType:=ptList;
-    63:FTablePartition.Params.AddParam(AWord);
+    63:FPartParam:=FTablePartition.Params.AddParam(AWord);
+    64:if Assigned(FPartParam) then
+        FPartParam.CheckExpr:=ASQLParser.GetToBracket(')');
+    65:FPartParam:=nil;
    102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
    103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
    126:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + AWord;
@@ -14343,7 +14502,16 @@ begin
     else
     if FTablePartition.PartitionType=ptList then
       S:=S +'LIST ';
-    S:=S + '(' + FTablePartition.Params.AsString + ')';
+
+    S1:='';
+    for P in FTablePartition.Params do
+    begin
+      if S1<>'' then S1:=S1+ ', ';
+      S1:=S1 + P.Caption;
+      if P.CheckExpr<>'' then
+        S1:=S1 + '(' + P.CheckExpr + ')';
+    end;
+    S:=S + '(' + S1 + ')';
   end;
   //    [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
 
