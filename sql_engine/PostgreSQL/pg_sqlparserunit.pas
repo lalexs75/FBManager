@@ -260,7 +260,7 @@ type
   end;
 
   { TPGSQLAlterMaterializedView }
-  TPGAlterMVCmdType = (amvAlterCollumnSetStat, amvAlterCollumnSetAttrib,
+  TPGAlterMVCmdAction = (amvNone, amvAlterCollumnSetStat, amvAlterCollumnSetAttrib,
     amvAlterCollumnReSetAttrib, amvAlterCollumnSetStorage, amvAlterCluster,
     amvAlterWOCluster, amvAlterSetParamStor, amvAlterReSetParamStor,
     amvAlterOwnerTo, amvAlterDependsOnExt, amvAlterRename, amvAlterRenameCollumn,
@@ -270,10 +270,14 @@ type
 
   TPGSQLAlterMaterializedCmd = class
   private
-    FCmdType: TPGAlterMVCmdType;
+    FAction: TPGAlterMVCmdAction;
+    FParams: TStrings;
   public
+    constructor Create;
+    destructor Destroy;override;
     procedure Assign(ASource:TPGSQLAlterMaterializedCmd);
-    property CmdType:TPGAlterMVCmdType read FCmdType write FCmdType;
+    property Action:TPGAlterMVCmdAction read FAction write FAction;
+    property Params:TStrings read FParams;
   end;
 
   { TPGSQLAlterMaterializedCmdList }
@@ -289,7 +293,7 @@ type
     procedure Clear;
     procedure Assign(ASource:TPGSQLAlterMaterializedCmdList);
     function GetEnumerator: TPGSQLAlterMaterializedCmdListEnumerator;
-    function Add:TPGSQLAlterMaterializedCmd;
+    function Add(AAction:TPGAlterMVCmdAction):TPGSQLAlterMaterializedCmd;
     property Count:integer read GetCount;
     property Item[AIndex:Integer]:TPGSQLAlterMaterializedCmd read GetItem; default;
   end;
@@ -309,27 +313,18 @@ type
 
   TPGSQLAlterMaterializedView = class(TSQLCommandDDL)
   private
-    FAction: TAlterTableAction;
-    FColumnName: string;
-    FDefaultExpression: string;
-    FDropDefault: boolean;
-    FNewName: string;
-    FNewOwner: string;
-    FNewSchema: string;
+    FActions: TPGSQLAlterMaterializedCmdList;
+    FCurCmd: TPGSQLAlterMaterializedCmd;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Clear;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property Action:TAlterTableAction read FAction write FAction;
-    property ColumnName:string read FColumnName write FColumnName;
-    property DefaultExpression:string read FDefaultExpression write FDefaultExpression;
-    property DropDefault:boolean read FDropDefault write FDropDefault;
-    property NewOwner:string read FNewOwner write FNewOwner;
-    property NewName:string read FNewName write FNewName;
-    property NewSchema:string read FNewSchema write FNewSchema;
+    property Actions:TPGSQLAlterMaterializedCmdList read FActions;
   end;
 
   { TPGSQLRefreshMaterializedView }
@@ -3346,7 +3341,7 @@ begin
   if not Assigned(ASource) then Exit;
   for i:=0 to ASource.Count-1 do
   begin
-    P:=Add;
+    P:=Add(ASource[i].Action);
     P.Assign(ASource[i]);
   end;
 end;
@@ -3356,19 +3351,34 @@ begin
   Result:=TPGSQLAlterMaterializedCmdListEnumerator.Create(Self);
 end;
 
-function TPGSQLAlterMaterializedCmdList.Add: TPGSQLAlterMaterializedCmd;
+function TPGSQLAlterMaterializedCmdList.Add(AAction: TPGAlterMVCmdAction
+  ): TPGSQLAlterMaterializedCmd;
 begin
   Result:=TPGSQLAlterMaterializedCmd.Create;
+  Result.FAction:=AAction;
   FList.Add(Result);
 end;
 
 { TPGSQLAlterMaterializedCmd }
 
+constructor TPGSQLAlterMaterializedCmd.Create;
+begin
+  inherited Create;
+  FParams:=TStringList.Create;
+end;
+
+destructor TPGSQLAlterMaterializedCmd.Destroy;
+begin
+  FreeAndNil(FParams);
+  inherited Destroy;
+end;
+
 procedure TPGSQLAlterMaterializedCmd.Assign(ASource: TPGSQLAlterMaterializedCmd
   );
 begin
   if not Assigned(ASource) then Exit;
-  FCmdType:=ASource.FCmdType;
+  Action:=ASource.FAction;
+  FParams.Assign(ASource.FParams);
 end;
 
 { TPGSQLCommandInsert }
@@ -4423,19 +4433,119 @@ end;
 
 procedure TPGSQLAlterMaterializedView.InitParserTree;
 var
-  FSQLTokens, T: TSQLTokenRecord;
+  FSQLTokens, T, TIf1, TName, TName1, TDep1, TDep2, TRen1,
+    TRen2: TSQLTokenRecord;
 begin
+  //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+  //    действие [, ... ]
+  //
+  //ALTER MATERIALIZED VIEW имя
+  //    DEPENDS ON EXTENSION имя_расширения
+  //
+  //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+  //    RENAME [ COLUMN ] имя_столбца TO новое_имя_столбца
+  //
+  //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+  //    RENAME TO новое_имя
+  //
+  //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+  //    SET SCHEMA новая_схема
+  //
+  //ALTER MATERIALIZED VIEW ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
+  //    SET TABLESPACE новое_табл_пространство [ NOWAIT ]
+  //
+  //Где действие может быть следующим:
+  //
+  //    ALTER [ COLUMN ] имя_столбца SET STATISTICS integer
+  //    ALTER [ COLUMN ] имя_столбца SET ( атрибут = значение [, ... ] )
+  //    ALTER [ COLUMN ] имя_столбца RESET ( атрибут [, ... ] )
+  //    ALTER [ COLUMN ] имя_столбца SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN }
+  //    CLUSTER ON имя_индекса
+  //    SET WITHOUT CLUSTER
+  //    SET ( параметр_хранения = значение [, ... ] )
+  //    RESET ( параметр_хранения [, ... ] )
+  //    OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okMaterializedView);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'MATERIALIZED', []);
+  T:=AddSQLTokens(stKeyword, T, 'VIEW', [toFindWordLast]);
+    TIf1:=AddSQLTokens(stKeyword, T, 'IF', []);
+    TIf1:=AddSQLTokens(stKeyword, TIf1, 'EXISTS', [], 1);
+  TName:=AddSQLTokens(stIdentificator, [T, TIf1], '', [], 2);
+    T:=AddSQLTokens(stSymbol, TName, '.', []);
+    TName1:=AddSQLTokens(stIdentificator, T, '', [], 3);
+
+   TDep1:=AddSQLTokens(stKeyword, [TName, TName1], 'DEPENDS', [], 4);
+     TDep2:=AddSQLTokens(stKeyword, TDep1, 'ON', []);
+     TDep2:=AddSQLTokens(stKeyword, TDep2, 'EXTENSION', []);
+     TDep2:=AddSQLTokens(stIdentificator, TDep2, '', [], 5);
+
+   TRen1:=AddSQLTokens(stKeyword, [TName, TName1], 'RENAME', [], 6);
+     TRen2:=AddSQLTokens(stKeyword, TRen1, 'COLUMN', [], 7);
+     TRen2:=AddSQLTokens(stIdentificator, [TRen1, TRen2], '', [], 8);
+     TRen2:=AddSQLTokens(stKeyword, TRen2, 'TO', []);
+     TRen2:=AddSQLTokens(stIdentificator, TRen2, '', [], 9);
+
+     TRen2:=AddSQLTokens(stKeyword, TRen1, 'TO', [], 10);
+     TRen2:=AddSQLTokens(stIdentificator, TRen2, '', [], 11);
+
+
+     //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+     //    RENAME TO новое_имя
+     //
+     //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
+     //    SET SCHEMA новая_схема
+     //
+     //ALTER MATERIALIZED VIEW ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
+     //    SET TABLESPACE новое_табл_пространство [ NOWAIT ]
+     //
+     //Где действие может быть следующим:
+     //
+     //    ALTER [ COLUMN ] имя_столбца SET STATISTICS integer
+     //    ALTER [ COLUMN ] имя_столбца SET ( атрибут = значение [, ... ] )
+     //    ALTER [ COLUMN ] имя_столбца RESET ( атрибут [, ... ] )
+     //    ALTER [ COLUMN ] имя_столбца SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN }
+     //    CLUSTER ON имя_индекса
+     //    SET WITHOUT CLUSTER
+     //    SET ( параметр_хранения = значение [, ... ] )
+     //    RESET ( параметр_хранения [, ... ] )
+     //    OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+end;
+
+procedure TPGSQLAlterMaterializedView.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Options:=Options + [ooIfExists];
+    2:Name:=AWord;
+    3:begin
+        SchemaName:=Name;
+        Name:=AWord;
+     end;
+    4:FCurCmd:=FActions.Add(amvAlterDependsOnExt);
+    5:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
+    6:FCurCmd:=FActions.Add(amvAlterRename);
+    7:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameCollumn;
+    8, 9,
+    11:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
+    10:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameTo;
+  end;
+end;
+
+procedure TPGSQLAlterMaterializedView.MakeSQL;
+var
+  S, S1: String;
+  A: TPGSQLAlterMaterializedCmd;
+begin
+  S:='ALTER MATERIALIZED VIEW ';
+  if ooIfExists in Options then S:=S + 'IF EXISTS ';
+
+
   (*
   ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-      действие [, ... ]
-  ALTER MATERIALIZED VIEW имя
-      DEPENDS ON EXTENSION имя_расширения
-  ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-      RENAME [ COLUMN ] имя_столбца TO новое_имя_столбца
-  ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-      RENAME TO новое_имя
-  ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
       SET SCHEMA новая_схема
+
   ALTER MATERIALIZED VIEW ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
       SET TABLESPACE новое_табл_пространство [ NOWAIT ]
 
@@ -4451,38 +4561,62 @@ begin
       RESET ( параметр_хранения [, ... ] )
       OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
   *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okMaterializedView);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'MATERIALIZED', []);
-  T:=AddSQLTokens(stKeyword, T, 'VIEW', [toFindWordLast]);
-end;
 
-procedure TPGSQLAlterMaterializedView.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
-begin
-  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
-end;
+  S1:='';
+  for A in Actions do
+  begin
+    if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
+    case A.Action of
+      amvAlterDependsOnExt:
+        begin
+          if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
+          S1:=S1 + 'DEPENDS ON EXTENSION '+A.Params.Text;
+        end;
+      amvAlterRename,
+      amvAlterRenameCollumn:
+        begin
+          if A.Params.Count>1 then
+          begin;
+            S1:=S1 + 'RENAME ';
+            if A.Action = amvAlterRenameCollumn then S1:=S1 + 'COLUMN ';
+            S1:=S1 + A.Params[0] + ' TO ' + A.Params[1];
+          end;
+        end;
+      amvAlterRenameTo:
+        begin
+          if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
+          S1:=S1 + 'RENAME TO '+A.Params.Text;
+        end;
+    end;
+  end;
 
-procedure TPGSQLAlterMaterializedView.MakeSQL;
-begin
-  inherited MakeSQL;
+  S:=S + GetFullName + ' ' + S1;
+  AddSQLCommand(S);
 end;
 
 constructor TPGSQLAlterMaterializedView.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
+  FActions:=TPGSQLAlterMaterializedCmdList.Create;
+end;
+
+destructor TPGSQLAlterMaterializedView.Destroy;
+begin
+  FreeAndNil(FActions);
+  inherited Destroy;
+end;
+
+procedure TPGSQLAlterMaterializedView.Clear;
+begin
+  inherited Clear;
+  FActions.Clear;
 end;
 
 procedure TPGSQLAlterMaterializedView.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLAlterMaterializedView then
   begin
-    Action:=TPGSQLAlterMaterializedView(ASource).Action;
-    ColumnName:=TPGSQLAlterMaterializedView(ASource).ColumnName;
-    DefaultExpression:=TPGSQLAlterMaterializedView(ASource).DefaultExpression;
-    DropDefault:=TPGSQLAlterMaterializedView(ASource).DropDefault;
-    NewOwner:=TPGSQLAlterMaterializedView(ASource).NewOwner;
-    NewName:=TPGSQLAlterMaterializedView(ASource).NewName;
-    NewSchema:=TPGSQLAlterMaterializedView(ASource).NewSchema;
+    FActions.Assign(TPGSQLAlterMaterializedView(ASource).Actions);
   end;
   inherited Assign(ASource);
 end;
