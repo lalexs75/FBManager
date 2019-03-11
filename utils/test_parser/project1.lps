@@ -117,8 +117,8 @@
         <UnitName Value="pg_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="14283"/>
-        <CursorPos X="100" Y="14307"/>
+        <TopLine Value="14174"/>
+        <CursorPos Y="14375"/>
         <UsageCount Value="201"/>
         <Bookmarks Count="3">
           <Item0 Y="14204" ID="3"/>
@@ -629,7 +629,7 @@
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="3">
+    <BreakPoints Count="5">
       <Item1>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
@@ -651,6 +651,20 @@
         <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <Line Value="9848"/>
       </Item3>
+      <Item4>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Line Value="14374"/>
+      </Item4>
+      <Item5>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Line Value="14375"/>
+      </Item5>
     </BreakPoints>
     <Watches Count="3">
       <Item1>

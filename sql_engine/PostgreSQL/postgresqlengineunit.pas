@@ -576,6 +576,7 @@ type
 
   TPGMatView = class(TPGView)
   protected
+    function GetDDLAlter : string; override;
     function InternalGetDDLCreate: string; override;
   private
   public
@@ -1202,6 +1203,23 @@ begin
 end;
 
 { TPGMatView }
+
+function TPGMatView.GetDDLAlter: string;
+var
+  FCmd: TPGSQLCreateMaterializedView;
+  F: TDBField;
+begin
+  if Fields.Count = 0 then RefreshFieldList;
+  FCmd:=TPGSQLCreateMaterializedView.Create(nil);
+  FCmd.Name:=Caption;
+  FCmd.SchemaName:=FSchema.Caption;
+  for F in Fields do
+    FCmd.Fields.AddParam(F.FieldName);
+
+  FCmd.SQLSelect:=SQLBody;
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
+end;
 
 function TPGMatView.InternalGetDDLCreate: string;
 var
