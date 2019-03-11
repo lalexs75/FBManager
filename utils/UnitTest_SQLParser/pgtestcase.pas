@@ -2675,6 +2675,7 @@ end;
 procedure TPGSQLParserTest.c411CreateTableAs3;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateTableAs3']);
+
 end;
 
 procedure TPGSQLParserTest.c412CreateTable1;

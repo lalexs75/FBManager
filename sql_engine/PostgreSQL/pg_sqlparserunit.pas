@@ -817,6 +817,7 @@ type
     FOwner: string;
     FPGOptions: TPGOptions;
     FStorageParameters: TStrings;
+    FTableAsExpression: string;
     FTablePartition: TPGSQLCreateTablePartition;
     FTableSpace: string;
     FTableTypeName: string;
@@ -850,6 +851,7 @@ type
     property Owner:string read FOwner write FOwner;
     property TableTypeName:string read FTableTypeName write FTableTypeName;
     property TablePartition:TPGSQLCreateTablePartition read FTablePartition;
+    property TableAsExpression:string read FTableAsExpression write FTableAsExpression;
   end;
 
   { TPGSQLAlterTable }
@@ -4434,7 +4436,7 @@ end;
 procedure TPGSQLAlterMaterializedView.InitParserTree;
 var
   FSQLTokens, T, TIf1, TName, TName1, TDep1, TDep2, TRen1,
-    TRen2: TSQLTokenRecord;
+    TRen2, TSet1, TSet2, TAlterCol1, TAlterCol2: TSQLTokenRecord;
 begin
   //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
   //    действие [, ... ]
@@ -4489,13 +4491,13 @@ begin
      TRen2:=AddSQLTokens(stKeyword, TRen1, 'TO', [], 10);
      TRen2:=AddSQLTokens(stIdentificator, TRen2, '', [], 11);
 
+   TSet1:=AddSQLTokens(stKeyword, [TName, TName1], 'SET', [], 12);
+     TSet2:=AddSQLTokens(stKeyword, TSet1, 'SCHEMA', []);
+     TSet2:=AddSQLTokens(stIdentificator, TSet2, '', [], 13);
 
-     //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-     //    RENAME TO новое_имя
-     //
-     //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-     //    SET SCHEMA новая_схема
-     //
+   TAlterCol1:=AddSQLTokens(stKeyword, [TName, TName1], 'ALTER', [], 14);
+     TAlterCol2:=AddSQLTokens(stKeyword, TAlterCol1, 'COLUMN', [], 15);
+
      //ALTER MATERIALIZED VIEW ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
      //    SET TABLESPACE новое_табл_пространство [ NOWAIT ]
      //
@@ -4527,9 +4529,10 @@ begin
     5:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
     6:FCurCmd:=FActions.Add(amvAlterRename);
     7:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameCollumn;
-    8, 9,
+    8, 9, 13,
     11:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
     10:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameTo;
+    12:FCurCmd:=FActions.Add(amvAlterSetSchema);
   end;
 end;
 
@@ -4543,9 +4546,6 @@ begin
 
 
   (*
-  ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
-      SET SCHEMA новая_схема
-
   ALTER MATERIALIZED VIEW ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
       SET TABLESPACE новое_табл_пространство [ NOWAIT ]
 
@@ -4568,10 +4568,7 @@ begin
     if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
     case A.Action of
       amvAlterDependsOnExt:
-        begin
-          if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
           S1:=S1 + 'DEPENDS ON EXTENSION '+A.Params.Text;
-        end;
       amvAlterRename,
       amvAlterRenameCollumn:
         begin
@@ -4583,10 +4580,9 @@ begin
           end;
         end;
       amvAlterRenameTo:
-        begin
-          if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
           S1:=S1 + 'RENAME TO '+A.Params.Text;
-        end;
+      amvAlterSetSchema:
+          S1:=S1 + 'SET SCHEMA '+A.Params.Text;
     end;
   end;
 
@@ -14035,7 +14031,7 @@ var
     TFK, TFK1, TFK2, TFK3, TFK3_1, TFK3_2, TFK3_3, TFK4,
     TFK4_1, TFK4_2, TFK4_3, TFK4_4, TFK4_5, TFK4_6, TFK4_7,
     TIndParams1, TIndParams1_1, TTableTypeOf, TTableField,
-    TTableStart, TPartition, TPartition1: TSQLTokenRecord;
+    TTableStart, TPartition, TPartition1, TAs: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер CREATE TABLE }
 
@@ -14119,6 +14115,15 @@ begin
   //
   //{ имя_столбца | ( выражение ) } [ класс_операторов ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
 
+
+  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
+  //    [ (имя_столбца [, ...] ) ]
+  //    [ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //    [ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+  //    [ TABLESPACE табл_пространство ]
+  //    AS запрос
+  //    [ WITH [ NO ] DATA ]
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okTable);    //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'GLOBAL', [], 1);
     T2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [], 2);
@@ -14168,7 +14173,7 @@ begin
     TPK1:=AddSQLTokens(stSymbol, TPK1, ')', []);
     TPK1.AddChildToken([TSymb2, TSymbEnd]);
 
-    TIndParams1 := AddSQLTokens(stKeyword, [TUnq1, TPK1], 'WITH', []);
+    TIndParams1 := AddSQLTokens(stKeyword, [TUnq1, TPK1, FTSchemaName, FTTableName], 'WITH', []);
       TIndParams1_1:=AddSQLTokens(stKeyword, TIndParams1, '(', []);
       TIndParams1_1:=AddSQLTokens(stIdentificator, TIndParams1_1, '', [], 58);
         T1:=AddSQLTokens(stSymbol, TIndParams1_1, '=', []);
@@ -14211,6 +14216,7 @@ begin
       TFK3_1.AddChildToken([TSymb2, TSymbEnd]);
       TFK3_2.AddChildToken([TSymb2, TSymbEnd]);
       TFK3_3.AddChildToken([TSymb2, TSymbEnd]);
+
     TFK4:=AddSQLTokens(stSymbol, [TFK1, TFK2, TFK3_1, TFK3_2, TFK3_3], 'ON', []);
       TFK4_1:=AddSQLTokens(stSymbol, TFK4, 'DELETE', [], 49);
       TFK4_2:=AddSQLTokens(stSymbol, TFK4, 'UPDATE', [], 50);
@@ -14254,7 +14260,7 @@ begin
     TTblS1:=AddSQLTokens(stIdentificator, TTblS, '', [], 23);
     TTblS1.AddChildToken(TInher);
 
-  TOnCom:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1], 'ON', [toOptional]);
+  TOnCom:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1, FTSchemaName, FTTableName, TIndParams1_1], 'ON', [toOptional]);
     TOnCom1:=AddSQLTokens(stKeyword, TOnCom, 'COMMIT', []);
     TOnCom2:=AddSQLTokens(stKeyword, TOnCom1, 'PRESERVE', []);
     TOnCom2:=AddSQLTokens(stKeyword, TOnCom2, 'ROWS', [], 24);
@@ -14293,10 +14299,12 @@ begin
       T.AddChildToken(T1);
     T:=AddSQLTokens(stSymbol, [T1, T2], ')', [], 65);
 
-  T.AddChildToken([TInher, TTblS, TOnCom, TWitO, TWit])
+  T.AddChildToken([TInher, TTblS, TOnCom, TWitO, TWit]);
 //    [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
 
   { TODO : Необходимо реализовать дерево парсера для CREATE TABLE }
+
+  TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3], 'AS', [], 80);
 end;
 
 procedure TPGSQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -14375,6 +14383,7 @@ begin
     64:if Assigned(FPartParam) then
         FPartParam.CheckExpr:=ASQLParser.GetToBracket(')');
     65:FPartParam:=nil;
+    80:FTableAsExpression:=ASQLParser.GetToCommandDelemiter;
    102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
    103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
    126:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + AWord;
@@ -14480,7 +14489,7 @@ begin
     end;
   end;
 
-  if (SF = '') and (TableTypeName='') then exit;
+  if (SF = '') and (TableTypeName='') and (FTableAsExpression = '') then exit;
 
   S_CON:='';
   for C in SQLConstraints do
@@ -14589,15 +14598,18 @@ begin
   if TableTypeName<>'' then
     S:=S+' OF '+TableTypeName+' ';
 
-  S:=S+ '('+LineEnding + SF;
+  if SF <> '' then
+  begin
+    S:=S+ '('+LineEnding + SF;
 
-  if SPK<>'' then
-    S:=S + ',' + LineEnding + '  PRIMARY KEY (' + SPK + ')';
+    if SPK<>'' then
+      S:=S + ',' + LineEnding + '  PRIMARY KEY (' + SPK + ')';
 
-  if S_CON <> '' then
-    S:=S + ',' + LineEnding + S_CON;
+    if S_CON <> '' then
+      S:=S + ',' + LineEnding + S_CON;
 
-  S:=S+LineEnding+')';
+    S:=S+LineEnding+')';
+  end;
 
   if InheritsTables.Count > 0 then
     S:= S + LineEnding + 'INHERITS (' + InheritsTables.AsString + ')';
@@ -14647,6 +14659,14 @@ begin
     end;
     S:=S + '(' + S1 + ')';
   end;
+
+  if FTableAsExpression<>'' then
+  begin
+    S:=S + ' AS';
+    if not((TableAsExpression<>'') and (TableAsExpression[1]=' ' )) then S:=S + ' ';
+    S:=S + TableAsExpression;
+  end;
+
   //    [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
 
   AddSQLCommand(S);
@@ -14709,6 +14729,7 @@ begin
     PGOptions:=TPGSQLCreateTable(ASource).PGOptions;
     Owner:=TPGSQLCreateTable(ASource).Owner;
     TablePartition.Assign(TPGSQLCreateTable(ASource).TablePartition);
+    TableAsExpression:=TPGSQLCreateTable(ASource).TableAsExpression;
   end;
   inherited Assign(ASource);
 end;
