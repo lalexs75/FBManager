@@ -1754,7 +1754,9 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateTableAs3'
         Lines.Strings = (
-          'CREATE TEMP TABLE films_recent WITH (OIDS) ON COMMIT DROP AS EXECUTE recentfilms(''2002-01-01'');'
+          'CREATE TEMPORARY TABLE films_recent'
+          'ON COMMIT DROP'
+          'WITH (OIDS) AS EXECUTE recentfilms(''2002-01-01'');'
         )
       end    
       item
@@ -2039,7 +2041,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateMaterializedView1'
         Lines.Strings = (
-          'CREATE MATERIALIZED VIEW comedies AS'
+          'CREATE MATERIALIZED VIEW comedies'
+          'AS'
           'SELECT *'
           'FROM films'
           'WHERE kind = ''Comedy'';'

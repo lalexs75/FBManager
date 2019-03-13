@@ -762,6 +762,7 @@ type
 
 var
   SQLStatmentRecordArray : TSQLStatmentRecords = nil;
+  SQLValidChars : set of char = ['a'..'z','A'..'Z','0'..'9', '_', '$'];
 
 implementation
 uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit;
@@ -2791,7 +2792,7 @@ begin
       repeat
         DoTestLineEnd;
         IncPos;
-      until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in (['a'..'z','A'..'Z','0'..'9', '_', '$'] - AExcludeChar)));
+      until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in ({['a'..'z','A'..'Z','0'..'9', '_', '$']} SQLValidChars - AExcludeChar)));
 
       if (FPosition.Position < Length(FSql)) and (FSql[FPosition.Position] = '.') then
       begin
@@ -3103,7 +3104,7 @@ begin
     repeat
       DoTestLineEnd;
       IncPos;
-    until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in (['a'..'z','A'..'Z','0'..'9', '_', '$'])));
+    until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in {(['a'..'z','A'..'Z','0'..'9', '_', '$']) }SQLValidChars));
   end;
   SetLength(Result, FPosition.Position - StartPos.Position);
   Move(FSql[StartPos.Position], Result[1], Position.Position - StartPos.Position);

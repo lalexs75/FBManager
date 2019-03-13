@@ -6213,10 +6213,12 @@ initialization
 ALTER GROUP — изменить имя роли или членство
 ALTER POLICY — изменить определение политики защиты на уровне строк
 
-COMMIT — зафиксировать текущую транзакцию
-COMMIT PREPARED — зафиксировать транзакцию, которая ранее была подготовлена для двухфазной фиксации
 
-CREATE ACCESS METHOD — создать новый метод доступа
+}
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropAccessMethod, 'DROP ACCESS METHOD'); //DROP ACCESS METHOD — удалить метод доступа
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateAccessMethod, 'CREATE ACCESS METHOD'); //CREATE ACCESS METHOD — создать новый метод доступа
+
+{
 CREATE GROUP — создать роль в базе данных
 CREATE POLICY — создать новую политику защиты на уровне строк для таблицы
 CREATE ROLE — создать роль в базе данных
@@ -6225,7 +6227,6 @@ CREATE USER — создать роль в базе данных
 }
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateUserMapping, 'CREATE USER MAPPING'); //CREATE USER MAPPING - создать сопоставление пользователя для стороннего сервера
 {
-DROP ACCESS METHOD — удалить метод доступа
 DROP GROUP — удалить роль в базе данных
 DROP POLICY — удалить политику защиты на уровне строк для таблицы
 DROP ROLE — удалить роль в базе данных
@@ -6238,11 +6239,11 @@ IMPORT FOREIGN SCHEMA — импортировать определения та
 INSERT — добавить строки в таблицу
 
 }
-  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLVacum, 'VACUM');  //VACUUM — провести сборку мусора и, возможно, проанализировать базу данных
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLVacum, 'VACUM');       //VACUUM — провести сборку мусора и, возможно, проанализировать базу данных
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLTruncate, 'TRUNCATE'); //TRUNCATE — опустошить таблицу или набор таблиц
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLStartTransaction, 'START TRANSACTION'); //START TRANSACTION — начать блок транзакции
-  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommit, 'COMMIT');
-  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLEnd, 'END');  //END — зафиксировать текущую транзакцию
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommit, 'COMMIT');     //COMMIT — зафиксировать текущую транзакцию
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLEnd, 'END');           //END — зафиксировать текущую транзакцию
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLRollback, 'ROLLBACK'); //ROLLBACK — прервать текущую транзакцию
                                                                       //ROLLBACK PREPARED — отменить транзакцию, которая ранее была подготовлена для двухфазной фиксации
                                                                       //ROLLBACK TO SAVEPOINT — откатиться к точке сохранения

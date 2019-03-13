@@ -2681,6 +2681,7 @@ end;
 procedure TPGSQLParserTest.c412CreateTable1;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateTable1']);
+
 end;
 
 procedure TPGSQLParserTest.c413CreateTable2;
@@ -2695,6 +2696,7 @@ end;
 
 procedure TPGSQLParserTest.c415CreateTable4;
 begin
+
   DoTestSQL(PGSQLParserData.sTable['CreateTable4']);
 end;
 

@@ -1701,6 +1701,35 @@ type
     property AggregateName:string read FAggregateName write FAggregateName;
   end;
 
+
+  { TPGSQLDropAccessMethod }
+
+  TPGSQLDropAccessMethod = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree; override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string); override;
+    procedure MakeSQL; override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TPGSQLCreateAccessMethod }
+
+  TPGSQLCreateAccessMethod = class(TSQLCreateCommandAbstract)
+  private
+    FAccessMethodType: string;
+    FHandler: string;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property AccessMethodType:string read FAccessMethodType write FAccessMethodType;
+    property Handler:string read FHandler write FHandler;
+  end;
+
   { TPGSQLCreateCast }
 
   TPGSQLCreateCast = class(TSQLCreateCommandAbstract)
@@ -3279,6 +3308,108 @@ begin
   end;
 end;
 
+{ TPGSQLAccessMethod }
+
+procedure TPGSQLCreateAccessMethod.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  //CREATE ACCESS METHOD имя
+  //    TYPE тип_метода_доступа
+  //    HANDLER функция_обработчик
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'ACCESS', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'METHOD', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, T, 'TYPE', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+  T1:=AddSQLTokens(stKeyword, T1, 'HANDLER', []);
+    AddSQLTokens(stIdentificator, T1, '', [], 3);
+
+  T1:=AddSQLTokens(stKeyword, T, 'HANDLER', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 3);
+  T1:=AddSQLTokens(stKeyword, T1, 'TYPE', []);
+    AddSQLTokens(stIdentificator, T1, '', [], 2);
+end;
+
+procedure TPGSQLCreateAccessMethod.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:AccessMethodType:=AWord;
+    3:Handler:=AWord;
+  end;
+end;
+
+procedure TPGSQLCreateAccessMethod.MakeSQL;
+var
+  S: String;
+begin
+  S:=Format('CREATE ACCESS METHOD %s TYPE %s HANDLER %s', [Name, AccessMethodType, Handler]);
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCreateAccessMethod.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateAccessMethod then
+  begin
+    FAccessMethodType:=TPGSQLCreateAccessMethod(ASource).FAccessMethodType;
+    FHandler:=TPGSQLCreateAccessMethod(ASource).FHandler;
+  end;
+  inherited Assign(ASource);
+end;
+
+{ TPGSQLDropAccessMethod }
+
+procedure TPGSQLDropAccessMethod.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  //DROP ACCESS METHOD [ IF EXISTS ] имя [ CASCADE | RESTRICT ]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'ACCESS', []);
+  T:=AddSQLTokens(stKeyword, T, 'METHOD', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, T, 'IF', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+    AddSQLTokens(stIdentificator, T, 'CASCADE', [toOptional], -2);
+    AddSQLTokens(stIdentificator, T, 'RESTRICT', [toOptional], -3);
+end;
+
+procedure TPGSQLDropAccessMethod.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+procedure TPGSQLDropAccessMethod.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP ACCESS METHOD ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+  S:=S + Name;
+
+  case DropRule of
+    drCascade:S:=S + ' CASCADE';
+    drRestrict:S:=S + ' RESTRICT';
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLDropAccessMethod.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
 { TPGSQLAlterMaterializedCmdListEnumerator }
 
 constructor TPGSQLAlterMaterializedCmdListEnumerator.Create(
@@ -4686,7 +4817,12 @@ procedure TPGSQLCreateMaterializedView.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLCreateMaterializedView then
   begin
-    SQLCommandSelect.Assign(TPGSQLCreateMaterializedView(ASource).SQLCommandSelect);
+    if Assigned(TPGSQLCreateMaterializedView(ASource).SQLCommandSelect) then
+    begin
+      if not Assigned(FSQLCommandSelect) then
+        FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
+      FSQLCommandSelect.Assign(TPGSQLCreateMaterializedView(ASource).SQLCommandSelect);
+    end;
   end;
   inherited Assign(ASource);
 end;
@@ -4702,12 +4838,16 @@ begin
     S:=S + 'IF NOT EXISTS ';
 
 
-  S:=S + LineEnding + '  ' + FullName;
+  S:=S + FullName;
 
   if Fields.Count > 0 then
     S:=S + '('+LineEnding + Fields.AsList + ')';
 
-  S:=S + LineEnding +  'AS'+LineEnding + SQLSelect;
+  S:=S + LineEnding +  'AS';
+
+  if (SQLSelect<>'') and (SQLSelect[1] in SQLValidChars) then S:=S + ' ';
+  S:=S + SQLSelect;
+
   AddSQLCommand(S);
 
   if Description <> '' then
@@ -8670,13 +8810,13 @@ begin
 
   if Kind = adpkGrant then
   begin
-    S:=S + ' GRANT ' + ObjectGrantToStr(GrantTypes, not FPrivilegesFullForm) + ' ON '+PGObjectNames[ObjectKind]+' TO ' + Tables.AsString;
+    S:=S + ' GRANT ' + ObjectGrantToStr(GrantTypes, not FPrivilegesFullForm) + ' ON '+PGObjectNames[ObjectKind]+'S TO ' + Tables.AsString;
     if ogWGO in GrantTypes then
       S:=S + ' WITH GRANT OPTION';
   end
   else
   begin
-    S:=S + ' REVOKE ' + ObjectGrantToStr(GrantTypes, not FPrivilegesFullForm) + ' ON '+PGObjectNames[ObjectKind]+' FROM ' + Tables.AsString;
+    S:=S + ' REVOKE ' + ObjectGrantToStr(GrantTypes, not FPrivilegesFullForm) + ' ON '+PGObjectNames[ObjectKind]+'S FROM ' + Tables.AsString;
     case DropRule of
       drCascade:S:=S + ' CASCADE';
       drRestrict:S:=S + ' RESTRICT';
@@ -14173,7 +14313,7 @@ begin
     TPK1:=AddSQLTokens(stSymbol, TPK1, ')', []);
     TPK1.AddChildToken([TSymb2, TSymbEnd]);
 
-    TIndParams1 := AddSQLTokens(stKeyword, [TUnq1, TPK1, FTSchemaName, FTTableName], 'WITH', []);
+    TIndParams1 := AddSQLTokens(stKeyword, [TUnq1, TPK1], 'WITH', []);
       TIndParams1_1:=AddSQLTokens(stKeyword, TIndParams1, '(', []);
       TIndParams1_1:=AddSQLTokens(stIdentificator, TIndParams1_1, '', [], 58);
         T1:=AddSQLTokens(stSymbol, TIndParams1_1, '=', []);
@@ -14271,10 +14411,10 @@ begin
     TOnCom2.AddChildToken([TInher, TTblS]);
     TOnCom3.AddChildToken([TInher, TTblS]);
 
-  TWitO:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1, TOnCom1, TOnCom2, TOnCom3], 'WITHOUT', [toOptional]);
+  TWitO:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1, TOnCom1, TOnCom2, TOnCom3, FTSchemaName, FTTableName], 'WITHOUT', [toOptional]);
     TWitO1:=AddSQLTokens(stIdentificator, TWitO, 'OIDS', [], 27);
     TWitO1.AddChildToken([TInher, TTblS, TOnCom]);
-  TWit:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1, TOnCom1, TOnCom2, TOnCom3], 'WITH', [toOptional]);
+  TWit:=AddSQLTokens(stKeyword, [TSymbEnd, TInher1, TTblS1, TOnCom1, TOnCom2, TOnCom3, FTSchemaName, FTTableName], 'WITH', [toOptional]);
     TWit1:=AddSQLTokens(stIdentificator, TWit, 'OIDS', [], 28);
     TWit2:=AddSQLTokens(stSymbol, TWit, '(', []);
     TWit2:=AddSQLTokens(stIdentificator, TWit2, '', [], 29);
@@ -14304,7 +14444,7 @@ begin
 
   { TODO : Необходимо реализовать дерево парсера для CREATE TABLE }
 
-  TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3], 'AS', [], 80);
+  TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3, TWit2], 'AS', [], 80);
 end;
 
 procedure TPGSQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
