@@ -2323,7 +2323,8 @@ type
   private
     FCallHandler: string;
     FInlineHandler: string;
-    FLanguageName: string;
+    FIsProcedural: boolean;
+    //FLanguageName: string;
     FOrReplace: boolean;
     FTrusted: boolean;
     FValFunction: string;
@@ -2334,7 +2335,8 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property LanguageName:string read FLanguageName write FLanguageName;
+    property IsProcedural:boolean read FIsProcedural write FIsProcedural;
+    //property LanguageName:string read FLanguageName write FLanguageName;
     property Trusted:boolean read FTrusted write FTrusted;
     property OrReplace:boolean read FOrReplace write FOrReplace;
     property CallHandler:string read FCallHandler write FCallHandler;
@@ -7660,7 +7662,7 @@ begin
     T3:=AddSQLTokens(stKeyword, FSQLTokens, 'TRUSTED', [], 1);
       T1.AddChildToken(T3);
 
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', []);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', [], 7);
       T3.AddChildToken(T2);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'LANGUAGE', [toFindWordLast]);
     T1.AddChildToken(T);
@@ -7668,11 +7670,11 @@ begin
     T3.AddChildToken(T);
 
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
-  T:=AddSQLTokens(stKeyword, T, 'HANDLER', []);
+  T:=AddSQLTokens(stKeyword, T, 'HANDLER', [toOptional]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 3);
-  T:=AddSQLTokens(stKeyword, T, 'INLINE', []);
+  T:=AddSQLTokens(stKeyword, T, 'INLINE', [toOptional]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 4);
-  T:=AddSQLTokens(stKeyword, T, 'VALIDATOR', []);
+  T:=AddSQLTokens(stKeyword, T, 'VALIDATOR', [toOptional]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 5);
 end;
 
@@ -7682,49 +7684,51 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:FTrusted:=true;
-    2:FLanguageName:=AWord;
+    2:Name:=AWord;
     3:FCallHandler:=AWord;
     4:FInlineHandler:=AWord;
     5:FValFunction:=AWord;
-    6:FOrReplace:=true
+    6:FOrReplace:=true;
+    7:IsProcedural:=true;
   end;
 end;
 
 procedure TPGSQLCreateLanguage.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='CREATE';
+  S:='CREATE';
   if FOrReplace then
-    Result:=Result + ' OR REPLACE';
+    S:=S + ' OR REPLACE';
 
   if FTrusted then
-    Result:=Result + ' TRUSTED';
+    S:=S + ' TRUSTED';
 
-  Result:=Result + ' PROCEDURAL LANGUAGE '+FLanguageName;
+  if IsProcedural then S:=S + ' PROCEDURAL';
+  S:=S + ' LANGUAGE '+Name;
 
   if FCallHandler<>'' then
-    Result:=Result + ' HANDLER '+FCallHandler;
+    S:=S + ' HANDLER '+FCallHandler;
 
   if FInlineHandler<>'' then
-    Result:=Result + ' INLINE '+FInlineHandler;
+    S:=S + ' INLINE '+FInlineHandler;
 
   if FValFunction<>'' then
-    Result:=Result + ' VALIDATOR '+FValFunction;
-  AddSQLCommand(Result);
+    S:=S + ' VALIDATOR '+FValFunction;
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLCreateLanguage.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLCreateLanguage then
   begin
-    LanguageName:=TPGSQLCreateLanguage(ASource).LanguageName;
+    //LanguageName:=TPGSQLCreateLanguage(ASource).LanguageName;
+    IsProcedural:=TPGSQLCreateLanguage(ASource).IsProcedural;
     Trusted:=TPGSQLCreateLanguage(ASource).Trusted;
     OrReplace:=TPGSQLCreateLanguage(ASource).OrReplace;
     CallHandler:=TPGSQLCreateLanguage(ASource).CallHandler;
     InlineHandler:=TPGSQLCreateLanguage(ASource).InlineHandler;
     ValFunction:=TPGSQLCreateLanguage(ASource).ValFunction;
-
   end;
   inherited Assign(ASource);
 end;
