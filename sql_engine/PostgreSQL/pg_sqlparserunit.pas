@@ -2302,7 +2302,7 @@ type
 
   TPGSQLAlterLanguage = class(TSQLCommandAbstract)
   private
-    FLanguageName: string;
+    FIsProcedural: boolean;
     FLanguageNewName: string;
     FLanguageNewOwner: string;
   protected
@@ -2312,7 +2312,7 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property LanguageName:string read FLanguageName write FLanguageName;
+    property IsProcedural:boolean read FIsProcedural write FIsProcedural;
     property LanguageNewName:string read FLanguageNewName write FLanguageNewName;
     property LanguageNewOwner:string read FLanguageNewOwner write FLanguageNewOwner;
   end;
@@ -7742,9 +7742,9 @@ begin
   (* ALTER [ PROCEDURAL ] LANGUAGE name RENAME TO new_name *)
   (* ALTER [ PROCEDURAL ] LANGUAGE name OWNER TO new_owner *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', []);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'LANGUAGE', [toFindWordLast]);
-  T1.AddChildToken(T);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', [], 6);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'LANGUAGE', [toFindWordLast]);
+
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
 
   T1:=AddSQLTokens(stKeyword, T, 'RENAME', [], 2);
@@ -7761,32 +7761,35 @@ procedure TPGSQLAlterLanguage.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FLanguageName:=AWord;
+    1:Name:=AWord;
     3:FLanguageNewName:=AWord;
     5:FLanguageNewOwner:=AWord;
+    6:IsProcedural:=true;
   end;
 end;
 
 procedure TPGSQLAlterLanguage.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ALTER PROCEDURAL LANGUAGE '+FLanguageName;
+  S:='ALTER ';
+  if IsProcedural then S:=S + 'PROCEDURAL ';
+  S:=S + 'LANGUAGE '+Name;
 
   if FLanguageNewName <> '' then
-    Result:=' RENAME TO '+FLanguageNewName
+    S:=S + ' RENAME TO '+FLanguageNewName
   else
   if FLanguageNewOwner <> '' then
-    Result:=' OWNER TO '+FLanguageNewOwner
+    S:=S + ' OWNER TO '+FLanguageNewOwner
   ;
-  AddSQLCommand(Result);
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLAlterLanguage.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLAlterLanguage then
   begin
-    LanguageName:=TPGSQLAlterLanguage(ASource).LanguageName;
+    IsProcedural:=TPGSQLAlterLanguage(ASource).IsProcedural;
     LanguageNewName:=TPGSQLAlterLanguage(ASource).LanguageNewName;
     LanguageNewOwner:=TPGSQLAlterLanguage(ASource).LanguageNewOwner;
 
