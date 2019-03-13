@@ -2310,7 +2310,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateConversion1'
         Lines.Strings = (
-          'CREATE CONVERSION myconv FOR ''''UTF8'''' TO ''''LATIN1'''' FROM myfunc;'
+          'CREATE CONVERSION myconv FOR ''UTF8'' TO ''LATIN1'' FROM myfunc;'
         )
       end    
       item

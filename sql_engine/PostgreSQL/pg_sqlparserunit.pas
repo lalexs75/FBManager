@@ -1844,17 +1844,27 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
   { TPGSQLCreateConversion }
 
   TPGSQLCreateConversion = class(TSQLCreateCommandAbstract)
   private
+    FDestEncoding: string;
+    FFunctionName: string;
+    FIsDefault: boolean;
+    FSourceEncoding: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property IsDefault:boolean read FIsDefault write FIsDefault;
+    property SourceEncoding:string read FSourceEncoding write FSourceEncoding;
+    property DestEncoding:string read FDestEncoding write FDestEncoding;
+    property FunctionName:string read FFunctionName write FFunctionName;
   end;
 
   { TPGSQLDropConversion }
@@ -9939,33 +9949,70 @@ begin
   AddSQLCommand(Result);
 end;
 
+procedure TPGSQLAlterConversion.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
 { TPGSQLCreateConversion }
 
 procedure TPGSQLCreateConversion.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1, T2: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для CREATE CONVERSION }
-  (*
-  CREATE [ DEFAULT ] CONVERSION name
-    FOR source_encoding TO dest_encoding FROM function_name
-  *)
+  //CREATE [ DEFAULT ] CONVERSION name
+  //  FOR source_encoding TO dest_encoding FROM function_name
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'CONVERSION', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', [], 1);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'CONVERSION', [toFindWordLast]);
+
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+  T:=AddSQLTokens(stKeyword, T, 'FOR', []);
+    T1:=AddSQLTokens(stString, T, '', [], 3);
+    T2:=AddSQLTokens(stIdentificator, T, '', [], 4);
+  T:=AddSQLTokens(stKeyword, [T1, T2], 'TO', []);
+    T1:=AddSQLTokens(stString, T, '', [], 5);
+    T2:=AddSQLTokens(stIdentificator, T, '', [], 6);
+  T:=AddSQLTokens(stKeyword, [T1, T2], 'FROM', []);
+    T2:=AddSQLTokens(stIdentificator, T, '', [], 7);
 end;
 
 procedure TPGSQLCreateConversion.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:IsDefault:=true;
+    2:Name:=AWord;
+    3, 4:FSourceEncoding:=AWord;
+    5, 6:FDestEncoding:=AWord;
+    7:FFunctionName:=AWord;
+  end;
 end;
 
 procedure TPGSQLCreateConversion.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='CREATE [ DEFAULT ] CONVERSION name';
-  AddSQLCommand(Result);
+  //CREATE [ DEFAULT ] CONVERSION name
+  //  FOR source_encoding TO dest_encoding FROM function_name
+  S:='CREATE ';
+  if IsDefault then S:=S + ' DEFAULT';
+  S:=Format(S + 'CONVERSION %s FOR %s TO %s FROM %s', [name, SourceEncoding, DestEncoding, FunctionName]);
+
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCreateConversion.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateConversion then
+  begin
+    IsDefault:=TPGSQLCreateConversion(ASource).IsDefault;
+    SourceEncoding:=TPGSQLCreateConversion(ASource).SourceEncoding;
+    DestEncoding:=TPGSQLCreateConversion(ASource).DestEncoding;
+    FunctionName:=TPGSQLCreateConversion(ASource).FunctionName;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropConversion }
@@ -9981,9 +10028,10 @@ begin
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'CONVERSION', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropConversion.InternalProcessChildToken(
@@ -9997,20 +10045,20 @@ end;
 
 procedure TPGSQLDropConversion.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='DROP CONVERSION ';
+  S:='DROP CONVERSION ';
   if ooIfExists in Options then
-    Result:=Result + ' IF EXISTS ';
+    S:=S + 'IF EXISTS ';
 
-  Result:=Result + Name;
+  S:=S + Name;
 
   if DropRule = drCascade then
-    Result:=Result + ' CASCADE'
+    S:=S + ' CASCADE'
   else
   if DropRule = drRestrict then
-    Result:=Result + ' RESTRICT';
-  AddSQLCommand(Result);
+    S:=S + ' RESTRICT';
+  AddSQLCommand(S);
 end;
 
 { TPGSQLDropCollation }
