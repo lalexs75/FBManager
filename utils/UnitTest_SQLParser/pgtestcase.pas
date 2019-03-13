@@ -481,6 +481,8 @@ type
     procedure c457CreateUser; //CREATE USER — создать роль в базе данных
     procedure c458DropUser; //DROP USER — удалить роль в базе данных
     procedure c459GroupCreate;
+    procedure c460SQLGrant4; //GRANT — определить права доступа
+    procedure c461SQLRevoke6; //REVOKE — отозвать права доступа
   end;
 
   { TPGSQLParserData }
@@ -576,6 +578,16 @@ end;
 procedure TPGSQLParserTest.c459GroupCreate;
 begin
   DoTestSQL(PGSQLParserData.sUserAcess['CreateGroup1']);
+end;
+
+procedure TPGSQLParserTest.c460SQLGrant4;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant4']);
+end;
+
+procedure TPGSQLParserTest.c461SQLRevoke6;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Revoke6']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

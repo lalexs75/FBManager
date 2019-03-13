@@ -10639,7 +10639,7 @@ var
     TTblAll, TFromGrp, TUsrGrp, TCasc, TRestr, TTblSchema,
     TSymb2, TTblCol, TTblAll1, TOp10, TSeqSchema, TSeqName,
     TSeqAll, TObjSchema, TOp11, TFuncName, TOpExec, TOnF,
-    TFuncSchema, TSymb1, TOpt1, TRole: TSQLTokenRecord;
+    TFuncSchema, TSymb1, TOpt1, TRole, TTableSpace: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REVOKE }
   (*
@@ -10748,7 +10748,7 @@ begin
   TSymb2:=AddSQLTokens(stSymbol, TTblCol, ')', []);
     TSymb2.AddChildToken(TSymb);
 
-  TOn:=AddSQLTokens(stKeyword, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp9, TOp91, TSymb2], 'ON', []);
+  TOn:=AddSQLTokens(stKeyword, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp9, TOp91, TSymb2, TOp11], 'ON', []);
     TObjKind:=AddSQLTokens(stKeyword, TOn, 'TABLE', [], 10);
       TTblSchema:=AddSQLTokens(stIdentificator, [TOn, TObjKind, TOpt], '', [], 11);
       TSymb:=AddSQLTokens(stSymbol, TTblSchema, '.', []);
@@ -10832,8 +10832,12 @@ REVOKE [ ADMIN OPTION FOR ]
     TSymb:=AddSQLTokens(stSymbol, TRole, ',', [], 34);
       TSymb.AddChildToken(TRole);
 
+  TTableSpace:=AddSQLTokens(stKeyword, TOn, 'TABLESPACE', []);
+  TTableSpace:=AddSQLTokens(stIdentificator, TTableSpace, '', [], 36);
+    TSymb:=AddSQLTokens(stSymbol, TTableSpace, ',', [], 34);
+      TSymb.AddChildToken(TTableSpace);
 //---
-  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole], 'FROM', []);
+  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole, TTableSpace], 'FROM', []);
     TFromGrp:=AddSQLTokens(stKeyword, TFrom, 'GROUP', [], 13);
   TUsrGrp:=AddSQLTokens(stIdentificator, [TFrom, TFromGrp], '', [], 14);
     TSymb:=AddSQLTokens(stSymbol, TUsrGrp, ',', [toOptional]);
@@ -10976,6 +10980,10 @@ begin
          FCurField:=nil;
        end;
     35:PrivilegesFullForm:=true;
+    36:begin
+         FCurTable:=Tables.Add(AWord);
+         ObjectKind:=okTableSpace;
+       end;
     50:begin
         ObjectKind:=okRole;
         GrantTypes:=GrantTypes + [ogWGO];
@@ -11282,7 +11290,7 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
 //GRANT role_name [, ...] TO role_name [, ...] [ WITH ADMIN OPTION ]
 
   TTo:=AddSQLTokens(stKeyword, [T11, T14, T13], 'TO', []);
-    TToGrp:=AddSQLTokens(stKeyword, T12, 'GROUP', [], 15);
+    TToGrp:=AddSQLTokens(stKeyword, [T12, TTo], 'GROUP', [], 15);
     TToInd:=AddSQLTokens(stIdentificator, [TTo, TToGrp] , '', [], 16);
       T:=AddSQLTokens(stSymbol, TToInd, ',', [toOptional]);
       T.AddChildToken([TToInd, TToGrp]);
@@ -11305,6 +11313,15 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
   T9_1:=AddSQLTokens(stKeyword, [T20, T21], 'ON', []);
   T:=AddSQLTokens(stKeyword, [T9, T9_1], 'SCHEMA', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 29);
+  TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
+    TSymb.AddChildToken(T);
+  T.AddChildToken(TTo);
+
+  //GRANT { CREATE | ALL [ PRIVILEGES ] }
+  //    ON TABLESPACE tablespace_name [, ...]
+  //    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+  T:=AddSQLTokens(stKeyword, [T9_1], 'TABLESPACE', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 31);
   TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
     TSymb.AddChildToken(T);
   T.AddChildToken(TTo);
@@ -11399,7 +11416,10 @@ begin
          ObjectKind:=okSequence;
          //FCurTable:=Tables.Add(AWord);
        end;
-
+    31:begin
+         ObjectKind:=okTableSpace;
+         FCurTable:=Tables.Add(AWord);
+       end;
     101,
     102,
     103,

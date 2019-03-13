@@ -719,6 +719,18 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'SECURITY LABEL FOR selinux ON TABLE mytable IS ''system_u:object_r:sepgsql_table_t:s0'';'
         )
+      end    
+      item
+        Caption = 'Grant4'
+        Lines.Strings = (
+          'GRANT CREATE ON TABLESPACE test_data21 TO GROUP users WITH GRANT OPTION;'
+        )
+      end    
+      item
+        Caption = 'Revoke6'
+        Lines.Strings = (
+          'REVOKE CREATE ON TABLESPACE test_data21 FROM group_test1;'
+        )
       end>
     Left = 104
     Top = 8
