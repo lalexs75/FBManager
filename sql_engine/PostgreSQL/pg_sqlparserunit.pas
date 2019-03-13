@@ -1269,7 +1269,7 @@ type
   private
     FDirectory: string;
     FOwnerName: string;
-    FTablespaceName: string;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1278,7 +1278,6 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property TablespaceName:string read FTablespaceName write FTablespaceName;
     property OwnerName:string read FOwnerName write FOwnerName;
     property Directory:string read FDirectory write FDirectory;
   end;
@@ -1288,9 +1287,9 @@ type
   TPGSQLAlterTablespace = class(TSQLCommandDDL)
   private
     FOwnerNameNew: string;
-    FTablespaceName: string;
+    //FTablespaceName: string;
     FTablespaceNameNew: string;
-    FTTableSpaceName: TSQLTokenRecord;
+    //FTTableSpaceName: TSQLTokenRecord;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1299,7 +1298,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property TablespaceName:string read FTablespaceName write FTablespaceName;
+    //property TablespaceName:string read FTablespaceName write FTablespaceName;
     property TablespaceNameNew:string read FTablespaceNameNew write FTablespaceNameNew;
     property OwnerNameNew:string read FOwnerNameNew write FOwnerNameNew;
   end;
@@ -13395,7 +13394,7 @@ end;
 
 procedure TPGSQLAlterTablespace.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, FTTableSpaceName: TSQLTokenRecord;
 begin
   (*
   ALTER TABLESPACE name RENAME TO new_name
@@ -13405,7 +13404,7 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okTableSpace);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLESPACE', [toFindWordLast]);
-  FTTableSpaceName:=AddSQLTokens(stIdentificator, T, '', []);
+  FTTableSpaceName:=AddSQLTokens(stIdentificator, T, '', [], 3);
 
   T:=AddSQLTokens(stKeyword, FTTableSpaceName, 'RENAME', []);
   T:=AddSQLTokens(stKeyword, T, 'TO', []);
@@ -13421,15 +13420,12 @@ end;
 procedure TPGSQLAlterTablespace.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
-  if AChild = FTTableSpaceName then
-    FTableSpaceName:=AWord
-  else
-  if AChild.Tag = 1 then
-    FTablespaceNameNew:=AWord
-  else
-  if AChild.Tag = 2 then
-    FOwnerNameNew:=AWord
-  ;
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    3:Name:=AWord;
+    1:FTablespaceNameNew:=AWord;
+    2:FOwnerNameNew:=AWord;
+  end;
 end;
 
 constructor TPGSQLAlterTablespace.Create(AParent: TSQLCommandAbstract);
@@ -13441,23 +13437,22 @@ end;
 
 procedure TPGSQLAlterTablespace.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ALTER TABLESPACE '+FTablespaceName;
+  S:='ALTER TABLESPACE '+Name;
 
   if FTablespaceNameNew <> '' then
-    Result:=Result + ' RENAME TO '+FTablespaceNameNew
+    S:=S + ' RENAME TO '+FTablespaceNameNew
   else
   if FOwnerNameNew <> '' then;
-    Result:=Result + ' OWNER TO '+FTablespaceNameNew;
-  AddSQLCommand(Result);
+    S:=S + ' OWNER TO '+FTablespaceNameNew;
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLAlterTablespace.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLAlterTablespace then
   begin
-    TablespaceName:=TPGSQLAlterTablespace(ASource).TablespaceName;
     TablespaceNameNew:=TPGSQLAlterTablespace(ASource).TablespaceNameNew;
     OwnerNameNew:=TPGSQLAlterTablespace(ASource).OwnerNameNew;
   end;
@@ -13468,17 +13463,28 @@ end;
 
 procedure TPGSQLCreateTablespace.InitParserTree;
 var
-  T, T1, FSQLTokens: TSQLTokenRecord;
+  T, T1, FSQLTokens, TWith, T2: TSQLTokenRecord;
 begin
-  (* CREATE TABLESPACE tablespace_name [ OWNER user_name ] LOCATION 'directory' *)
+  //CREATE TABLESPACE табл_пространство
+  //    [ OWNER { новый_владелец | CURRENT_USER | SESSION_USER } ]
+  //    LOCATION 'каталог'
+  //    [ WITH ( параметр_табличного_пространства = значение [, ... ] ) ]
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okTableSpace);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLESPACE', [toFindWordLast]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T1:=AddSQLTokens(stKeyword, T, 'OWNER', []);
     T1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
-  T:=AddSQLTokens(stKeyword, T, 'LOCATION', []);
-    T1.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [T, T1], 'LOCATION', []);
   T:=AddSQLTokens(stString, T, '', [], 3);
+
+  TWith:=AddSQLTokens(stKeyword, T, 'WITH', [toOptional]);
+  T:=AddSQLTokens(stSymbol, TWith, '(', []);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 5);
+    T:=AddSQLTokens(stSymbol, T1, '=', []);
+    T2:=AddSQLTokens(stInteger, T, '', [], 6);
+    T:=AddSQLTokens(stSymbol, T2, ',', [], 7);
+    T.AddChildToken(T1);
+    T:=AddSQLTokens(stSymbol, T2, ')', [], 7);
 end;
 
 procedure TPGSQLCreateTablespace.InternalProcessChildToken(
@@ -13486,9 +13492,13 @@ procedure TPGSQLCreateTablespace.InternalProcessChildToken(
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FTablespaceName:=AWord;
+    1:Name:=AWord;
     2:FOwnerName:=AWord;
-    3:FDirectory:=AWord;
+    3:FDirectory:=ExtractQuotedString(AWord, '''');
+    5:FCurParam:=Params.AddParam(AWord);
+    6:if Assigned(FCurParam) then
+        FCurParam.ParamValue:=AWord;
+    7:FCurParam:=nil;
   end;
 end;
 
@@ -13501,21 +13511,32 @@ end;
 
 procedure TPGSQLCreateTablespace.MakeSQL;
 var
-  Result: String;
+  S, S1: String;
+  P: TSQLParserField;
 begin
-  Result:='CREATE TABLESPACE ' + FTablespaceName;
+  S:='CREATE TABLESPACE ' + Name;
 
   if FOwnerName <> '' then
-    Result:=Result + ' OWNER '+FOwnerName;
-  Result:=Result + ' LOCATION ' + FDirectory;
-  AddSQLCommand(Result);
+    S:=S + ' OWNER '+FOwnerName;
+  S:=S + ' LOCATION ' + QuotedString(FDirectory, '''');
+
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + P.Caption + ' = '+P.ParamValue;
+    end;
+    S:=S + ' WITH (' + S1 + ')';
+  end;
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLCreateTablespace.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLCreateTablespace then
   begin
-    TablespaceName:=TPGSQLCreateTablespace(ASource).TablespaceName;
     OwnerName:=TPGSQLCreateTablespace(ASource).OwnerName;
     Directory:=TPGSQLCreateTablespace(ASource).Directory;
   end;

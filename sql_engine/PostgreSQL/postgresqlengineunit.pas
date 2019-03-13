@@ -58,13 +58,6 @@ type
     TriggerDesc:string;
   end;
 
-  { Формальное tablespcae }
-  TPGTableSpaceDef = record
-    TSName:string;
-    TSFolder:string;
-    TSOwner:string;
-  end;
-
   { TPGACLItem }
 
   TPGACLItem = class(TACLItem)
@@ -800,18 +793,17 @@ type
     FOID:integer;
     FOwnerID: integer;
     function GetOwnerUserName: string;
-    function GenTSSQL(const TSRec:TPGTableSpaceDef; DDLMode:TDDLMode):string;
   protected
     function InternalGetDDLCreate: string; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
-    function CompileTS(const TSRec:TPGTableSpaceDef):boolean;
     procedure SetSqlAssistentData(const List: TStrings);override;
     procedure RefreshObject; override;
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
+    function CreateSQLObject:TSQLCommandDDL; override;
 
     property OID:integer read FOID;
     property OwnerID:integer read FOwnerID;
@@ -2068,23 +2060,17 @@ begin
   Result:='';
 end;
 
-function TPGTableSpace.GenTSSQL(const TSRec: TPGTableSpaceDef;
-  DDLMode: TDDLMode): string;
-begin
-  Result:='CREATE TABLESPACE '+TSRec.TSName;
-  if TSRec.TSOwner<>'' then
-    Result:=Result+' OWNER '+ TSRec.TSOwner;
-  Result:=Result+' LOCATION '''+TSRec.TSFolder+'''';
-end;
-
 function TPGTableSpace.InternalGetDDLCreate: string;
 var
-  TS:TPGTableSpaceDef;
+  R: TPGSQLCreateTablespace;
 begin
-  TS.TSFolder:=FFolderName;
-  TS.TSName:=Caption;
-  TS.TSOwner:=OwnerUserName;
-  Result:=GenTSSQL(TS, dmCreate);
+  R:=TPGSQLCreateTablespace.Create(nil);
+  R.Name:=Caption;
+  R.OwnerName:=OwnerUserName;
+  R.Directory:=FolderName;
+  R.Description:=Description;
+  Result:=R.AsSQL;
+  R.Free;
 end;
 
 constructor TPGTableSpace.Create(const ADBItem: TDBItem;
@@ -2106,28 +2092,6 @@ end;
 class function TPGTableSpace.DBClassTitle: string;
 begin
   Result:='TableSpace';
-end;
-
-function TPGTableSpace.CompileTS(const TSRec: TPGTableSpaceDef): boolean;
-var
-  SL:TStringList;
-begin
-  Result:=false;
-  SL:=TStringList.Create;
-  if (State = sdboCreate) then
-    SL.Add(GenTSSQL(TsRec, dmCreate))
-  else
-    SL.Add(GenTSSQL(TsRec, dmAlter));
-
-  Result:=ExecSQLScriptEx(SL, [sepShowCompForm], OwnerDB);
-
-  if Result and (State = sdboCreate) then
-  begin
-    Caption:=TsRec.TSName;
-    State := sdboEdit;
-  end;
-  SL.Free;
-  RefreshObject;
 end;
 
 procedure TPGTableSpace.SetSqlAssistentData(const List: TStrings);
@@ -2165,6 +2129,11 @@ end;
 procedure TPGTableSpace.RefreshDependenciesField(Rec: TDependRecord);
 begin
   //inherited RefreshDependenciesField(Rec);
+end;
+
+function TPGTableSpace.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=TPGSQLCreateTablespace.Create(nil);
 end;
 
 { TPGLanguage }
@@ -6137,6 +6106,7 @@ constructor TPGTableSpaceRoot.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDropCommandClass:=TPGSQLDropTablespace;
   FDBObjectKind:=okTableSpace;
   State:=sdboVirtualObject;
 end;

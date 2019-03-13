@@ -26,7 +26,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  EditBtn, fdmAbstractEditorUnit, SQLEngineAbstractUnit, PostgreSQLEngineUnit;
+  EditBtn, fdmAbstractEditorUnit, SQLEngineAbstractUnit, PostgreSQLEngineUnit,
+  fbmSqlParserUnit;
 
 type
 
@@ -42,7 +43,7 @@ type
   private
     //FDBTableSpace:TPGTableSpace;
     procedure PrintPage;
-    function Compile:boolean;
+    //function Compile:boolean;
     procedure UpdateEnvOptions;override;
     procedure RefreshObject;
   public
@@ -51,10 +52,11 @@ type
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
     procedure Localize;override;
+    function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
 implementation
-uses fbmStrConstUnit, pgSqlEngineSecurityUnit;
+uses fbmStrConstUnit, pgSqlEngineSecurityUnit, pg_SqlParserUnit;
 
 {$R *.lfm}
 
@@ -65,6 +67,7 @@ begin
 
 end;
 
+(*
 function TpgTableSpaceEditorPage.Compile: boolean;
 var
   Rec:TPGTableSpaceDef;
@@ -74,7 +77,7 @@ begin
   Rec.TSOwner:=cbOwnerUser.Text;
   Result:=TPGTableSpace(DBObject).CompileTS(Rec);
 end;
-
+*)
 procedure TpgTableSpaceEditorPage.UpdateEnvOptions;
 begin
   //inherited UpdateEnvOptions;
@@ -117,7 +120,7 @@ begin
   case PageAction of
     epaPrint:PrintPage;
     epaRefresh:RefreshObject;
-    epaCompile:Result:=Compile;
+//    epaCompile:Result:=Compile;
   else
     Result:=false;
   end;
@@ -129,6 +132,20 @@ begin
   Label1.Caption:=sTableSpaceName;
   Label2.Caption:=sFileFolder;
   Label3.Caption:=sOwner;
+end;
+
+function TpgTableSpaceEditorPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
+  ): boolean;
+begin
+  if ASQLObject is TPGSQLCreateTablespace then
+  begin
+    TPGSQLCreateTablespace(ASQLObject).Name:=edtTSName.Text;
+    TPGSQLCreateTablespace(ASQLObject).Directory:=edtFolderName.Text;
+    TPGSQLCreateTablespace(ASQLObject).OwnerName:=cbOwnerUser.Text;
+    Result:=true;
+  end
+  else
+    Result:=false;
 end;
 
 end.

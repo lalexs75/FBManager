@@ -76,7 +76,7 @@ end;
 function TfbmPGLanguagePage.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaRefresh, epaPrint, epaCompile];
 end;
 
 function TfbmPGLanguagePage.DoMetod(PageAction: TEditorPageAction): boolean;
