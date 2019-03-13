@@ -1837,14 +1837,20 @@ type
 
   { TPGSQLAlterConversion }
 
-  TPGSQLAlterConversion = class(TSQLCommandAbstract)
+  TPGSQLAlterConversion = class(TSQLCommandDDL)
   private
+    FNewName: string;
+    FNewOwner: string;
+    FNewSchema: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property NewName:string read FNewName write FNewName;
+    property NewOwner:string read FNewOwner write FNewOwner;
+    property NewSchema:string read FNewSchema write FNewSchema;
   end;
 
   { TPGSQLCreateConversion }
@@ -9923,34 +9929,77 @@ end;
 
 procedure TPGSQLAlterConversion.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, T1: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для ALTER CONVERSION }
-  (*
-ALTER CONVERSION name RENAME TO new_name
-ALTER CONVERSION name OWNER TO new_owner
-ALTER CONVERSION name SET SCHEMA new_schema
-  *)
+  //ALTER CONVERSION name RENAME TO new_name
+  //ALTER CONVERSION name OWNER TO new_owner
+  //ALTER CONVERSION name SET SCHEMA new_schema
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'CONVERSION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'CONVERSION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+    T1:=AddSQLTokens(stSymbol, FSQLTokens, '.', []);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'RENAME', []);
+    T:=AddSQLTokens(stKeyword, T, 'TO', []);
+    AddSQLTokens(stIdentificator, T, '', [], 3);
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'OWNER', []);
+    T:=AddSQLTokens(stKeyword, T, 'TO', []);
+    AddSQLTokens(stIdentificator, T, '', [], 4);
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'SET', []);
+    T:=AddSQLTokens(stKeyword, T, 'SCHEMA', []);
+    AddSQLTokens(stIdentificator, T, '', [], 5);
 end;
 
 procedure TPGSQLAlterConversion.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    3:NewName:=AWord;
+    4:NewOwner:=AWord;
+    5:NewSchema:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterConversion.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='ALTER CONVERSION name ';
-  AddSQLCommand(Result);
+  //ALTER CONVERSION name RENAME TO new_name
+  //ALTER CONVERSION name OWNER TO new_owner
+  //ALTER CONVERSION name SET SCHEMA new_schema
+
+  S:='ALTER CONVERSION '+FullName;
+
+  if NewName <> '' then
+    S:=S + ' RENAME TO '+NewName
+  else
+  if NewOwner <> '' then
+    S:=S + ' OWNER TO '+NewOwner
+  else
+  if NewSchema <> '' then
+    S:=S + ' SET SCHEMA '+NewSchema
+  ;
+
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLAlterConversion.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TPGSQLAlterConversion then
+  begin
+    NewName:=TPGSQLAlterConversion(ASource).NewName;
+    NewOwner:=TPGSQLAlterConversion(ASource).NewOwner;
+    NewSchema:=TPGSQLAlterConversion(ASource).NewSchema;
+  end;
   inherited Assign(ASource);
 end;
 
@@ -9994,8 +10043,6 @@ procedure TPGSQLCreateConversion.MakeSQL;
 var
   S: String;
 begin
-  //CREATE [ DEFAULT ] CONVERSION name
-  //  FOR source_encoding TO dest_encoding FROM function_name
   S:='CREATE ';
   if IsDefault then S:=S + ' DEFAULT';
   S:=Format(S + 'CONVERSION %s FOR %s TO %s FROM %s', [name, SourceEncoding, DestEncoding, FunctionName]);
