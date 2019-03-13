@@ -2346,7 +2346,7 @@ type
 
   TPGSQLDropLanguage = class(TSQLDropCommandAbstract)
   private
-    FLanguageName: string;
+    FIsProcedural: boolean;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2354,7 +2354,7 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property LanguageName:string read FLanguageName write FLanguageName;
+    property IsProcedural:boolean read FIsProcedural write FIsProcedural;
   end;
 
   { TPGSQLAlterServer }
@@ -7587,7 +7587,7 @@ var
 begin
   (* DROP [ PROCEDURAL ] LANGUAGE [ IF EXISTS ] name [ CASCADE | RESTRICT ] *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
-    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', []);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURAL', [], 2);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'LANGUAGE', [toFindWordLast]);
     T1.AddChildToken(T);
 
@@ -7597,8 +7597,8 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
   T1.AddChildToken(T);
 
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3);
+  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 
 end;
 
@@ -7606,33 +7606,39 @@ procedure TPGSQLDropLanguage.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
-  if AChild.Tag = 1 then
-    FLanguageName:=AWord;
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:IsProcedural:=true;
+  end;
 end;
 
 procedure TPGSQLDropLanguage.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='DROP PROCEDURAL LANGUAGE';
+  S:='DROP ';
+  if IsProcedural then
+    S:=S + 'PROCEDURAL ';
+  S:=S + 'LANGUAGE ';
   if ooIfExists in Options then
-    Result:=Result + ' IF EXISTS';
+    S:=S + 'IF EXISTS ';
 
-  Result:=Result + FLanguageName;
+  S:=S + Name;
 
   if DropRule = drCascade then
-    Result:=Result + ' CASCADE'
+    S:=S + ' CASCADE'
   else
   if DropRule = drRestrict then
-    Result:=Result + ' RESTRICT';
-  AddSQLCommand(Result);
+    S:=S + ' RESTRICT';
+
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLDropLanguage.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLDropLanguage then
   begin
-    LanguageName:=TPGSQLDropLanguage(ASource).LanguageName;
+    IsProcedural:=TPGSQLDropLanguage(ASource).IsProcedural;
 
   end;
   inherited Assign(ASource);
