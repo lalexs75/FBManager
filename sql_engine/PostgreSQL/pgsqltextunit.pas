@@ -35,6 +35,7 @@ type
     pgFDWobj: TStrHolder;
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sqlTableSpaces: TRxTextHolder;
     sForeignObj: TRxTextHolder;
     sPGStatistics: TRxTextHolder;
     sPGGroups1: TStrHolder;
@@ -44,10 +45,8 @@ type
     sqlPgConstUNQ: TStrHolder;
     sqlSchemasAll: TStrHolder;
     sqlSequence_v10: TStrHolder;
-    sqlTableSpace1: TStrHolder;
     sqlTypesList: TStrHolder;
     sqlTrigger: TStrHolder;
-    sqlTableSpace: TStrHolder;
     sqlIndex: TStrHolder;
     sqlPGRelationFields: TStrHolder;
     sqlIndexTable: TStrHolder;

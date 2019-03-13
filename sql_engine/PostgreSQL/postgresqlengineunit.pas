@@ -792,6 +792,7 @@ type
     FFolderName: string;
     FOID:integer;
     FOwnerID: integer;
+    function GetOwnerUser: TDBObject;
     function GetOwnerUserName: string;
   protected
     function InternalGetDDLCreate: string; override;
@@ -809,6 +810,7 @@ type
     property OwnerID:integer read FOwnerID;
     property OwnerUserName:string read GetOwnerUserName;
     property FolderName:string read FFolderName;
+    property OwnerUser:TDBObject read GetOwnerUser;
   end;
 
   TPGCollation = class(TDBObject)
@@ -2056,8 +2058,32 @@ end;
 { TPGTableSpace }
 
 function TPGTableSpace.GetOwnerUserName: string;
+var
+  FOwn: TDBObject;
 begin
-  Result:='';
+  FOwn:=GetOwnerUser;
+  if Assigned(FOwn) then
+    Result:=FOwn.Caption
+  else
+    Result:='';
+end;
+
+function TPGTableSpace.GetOwnerUser: TDBObject;
+var
+  i: Integer;
+  U: TDBObject;
+begin
+  Result:=nil;
+
+  if TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot.CountObject = 0 then
+    TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot.RefreshGroup;
+
+  for i:=0 to TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot.CountObject-1 do
+  begin
+    U:=TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot[i];
+    if TPGUser(U).UserID = FOwnerID then
+      Exit(U);
+  end;
 end;
 
 function TPGTableSpace.InternalGetDDLCreate: string;
@@ -2077,6 +2103,7 @@ constructor TPGTableSpace.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FOID:=-1;
   if Assigned(ADBItem) then
     FOID:=ADBItem.ObjId;
 
@@ -2102,18 +2129,29 @@ end;
 procedure TPGTableSpace.RefreshObject;
 var
   Q:TZQuery;
+  S: String;
 begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlTableSpace1.Strings.Text);
+  if TSQLEnginePostgre(OwnerDB).FRealServerVersion < 9*1000 + 2 then
+    S:=pgSqlTextModule.sqlTableSpaces.Text['sqlTableSpace_8']
+  else
+    S:=pgSqlTextModule.sqlTableSpaces.Text['sqlTableSpace_9'];
+
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
   try
-    Q.ParamByName('spcname').AsString:=Caption;
+    if FOID <0 then
+      Q.ParamByName('spcname').AsString:=Caption
+    else
+      Q.ParamByName('oid').AsInteger:=FOID;
     Q.Open;
     if Q.RecordCount>0 then
     begin
+      if FOID<0 then FOID:=Q.FieldByName('OID').AsInteger
+      else
+        Caption:=Q.FieldByName('spcname').AsString;
       FOwnerID:=Q.FieldByName('spcowner').AsInteger;
       FFolderName:=Q.FieldByName('spclocation').AsString;
-      { TODO : Необходимо разобраться - откуда читать описание табличного пространства }
       FDescription:=Q.FieldByName('description').AsString;
     end;
   finally
@@ -2133,7 +2171,13 @@ end;
 
 function TPGTableSpace.CreateSQLObject: TSQLCommandDDL;
 begin
-  Result:=TPGSQLCreateTablespace.Create(nil);
+  if State = sdboEdit then
+  begin
+    Result:=TPGSQLAlterTablespace.Create(nil);
+    TPGSQLAlterTablespace(Result).Name:=Caption;
+  end
+  else
+    Result:=TPGSQLCreateTablespace.Create(nil)
 end;
 
 { TPGLanguage }
@@ -6093,7 +6137,7 @@ end;
 { TPGTableSpaceRoot }
 function TPGTableSpaceRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sqlTableSpace.Strings.Text;
+  Result:=pgSqlTextModule.sqlTableSpaces.Text['sqlTableSpace'];
 end;
 
 function TPGTableSpaceRoot.GetObjectType: string;

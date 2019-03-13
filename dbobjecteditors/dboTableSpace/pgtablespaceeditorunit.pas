@@ -41,9 +41,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
   private
-    //FDBTableSpace:TPGTableSpace;
     procedure PrintPage;
-    //function Compile:boolean;
     procedure UpdateEnvOptions;override;
     procedure RefreshObject;
   public
@@ -67,17 +65,6 @@ begin
 
 end;
 
-(*
-function TpgTableSpaceEditorPage.Compile: boolean;
-var
-  Rec:TPGTableSpaceDef;
-begin
-  Rec.TSName:=edtTSName.Text;
-  Rec.TSFolder:=edtFolderName.Directory;
-  Rec.TSOwner:=cbOwnerUser.Text;
-  Result:=TPGTableSpace(DBObject).CompileTS(Rec);
-end;
-*)
 procedure TpgTableSpaceEditorPage.UpdateEnvOptions;
 begin
   //inherited UpdateEnvOptions;
@@ -88,11 +75,13 @@ begin
   cbOwnerUser.Items.Clear;
   TPGSecurityRoot(TSQLEnginePostgre(TPGTableSpace(DBObject).OwnerDB).SecurityRoot).PGUsersRoot.FillListForNames(cbOwnerUser.Items, false);
 
-  edtTSName.Enabled:=TPGTableSpace(DBObject).State = sdboCreate;
   edtTSName.Text:=TPGTableSpace(DBObject).Caption;
 
   edtFolderName.Text:=TPGTableSpace(DBObject).FolderName;
   cbOwnerUser.Text:=TPGTableSpace(DBObject).OwnerUserName;
+
+  //edtTSName.Enabled:=TPGTableSpace(DBObject).State = sdboCreate;
+  edtFolderName.Enabled:=DBObject.State = sdboCreate;
 end;
 
 function TpgTableSpaceEditorPage.PageName: string;
@@ -137,6 +126,7 @@ end;
 function TpgTableSpaceEditorPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
+  Result:=false;
   if ASQLObject is TPGSQLCreateTablespace then
   begin
     TPGSQLCreateTablespace(ASQLObject).Name:=edtTSName.Text;
@@ -145,7 +135,20 @@ begin
     Result:=true;
   end
   else
-    Result:=false;
+  if ASQLObject is TPGSQLAlterTablespace then
+  begin
+    if edtTSName.Text <> DBObject.Caption then;
+    begin
+      TPGSQLAlterTablespace(ASQLObject).TablespaceNameNew:=edtTSName.Text;
+      Result:=true;
+    end;
+
+    if cbOwnerUser.Text <> TPGTableSpace(DBObject).OwnerUserName then
+    begin
+      TPGSQLAlterTablespace(ASQLObject).OwnerNameNew:=cbOwnerUser.Text;
+      Result:=true;
+    end;
+  end;
 end;
 
 end.

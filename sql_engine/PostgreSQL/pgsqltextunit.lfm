@@ -83,51 +83,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202020202870675f636c6173732e72656c6e616d657370616365203d203a72656c6e616d65737061636529'
     )
   end
-  object sqlTableSpace: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 40
-    Top = 104
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f7461626c6573706163652e6f696420617320696e7465676572292c'
-      '2020636173742870675f7461626c6573706163652e6f696420617320696e7465676572292c'
-      '202070675f7461626c6573706163652e7370636e616d652c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f7461626c6573706163652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f7461626c657370616365'
-    )
-  end
-  object sqlTableSpace1: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 96
-    Top = 104
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f7461626c6573706163652e6f696420617320696e7465676572292c'
-      '202070675f7461626c6573706163652e7370636e616d652c'
-      '202070675f7461626c6573706163652e7370636f776e65722c'
-      '202070675f7461626c6573706163652e7370636c6f636174696f6e2c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f7461626c6573706163652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f7461626c657370616365'
-      '7768657265'
-      '202070675f7461626c6573706163652e7370636e616d65203d203a7370636e616d65'
-    )
-  end
   object sqlIndex: TStrHolder
     Capacity = 64
     Macros = <>
@@ -1637,5 +1592,69 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 856
     Top = 336
+  end
+  object sqlTableSpaces: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlTableSpace'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_tablespace.oid as integer),'
+          '  cast(pg_tablespace.oid as integer),'
+          '  pg_tablespace.spcname,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_tablespace.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_tablespace'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlTableSpace_8'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_tablespace.oid as integer),'
+          '  pg_tablespace.spcname,'
+          '  pg_tablespace.spcowner,'
+          '  pg_tablespace.spclocation,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_tablespace.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_tablespace'
+          'where'
+          '    pg_tablespace.spcname = :spcname'
+          '  or'
+          '    pg_tablespace.oid = :oid'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlTableSpace_9'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_tablespace.oid as integer) as oid,'
+          '  pg_tablespace.*,'
+          '  pg_catalog.pg_tablespace_location(pg_tablespace.oid) AS spclocation,'
+          '  pg_catalog.shobj_description(pg_tablespace.oid, ''pg_tablespace'') as description'
+          'from'
+          '  pg_tablespace'
+          'where'
+          '    pg_tablespace.spcname = :spcname'
+          '  or'
+          '    pg_tablespace.oid = :oid'
+          ''
+        )
+      end>
+    Left = 37
+    Top = 104
   end
 end

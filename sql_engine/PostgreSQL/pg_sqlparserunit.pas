@@ -1287,9 +1287,7 @@ type
   TPGSQLAlterTablespace = class(TSQLCommandDDL)
   private
     FOwnerNameNew: string;
-    //FTablespaceName: string;
     FTablespaceNameNew: string;
-    //FTTableSpaceName: TSQLTokenRecord;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1298,7 +1296,6 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    //property TablespaceName:string read FTablespaceName write FTablespaceName;
     property TablespaceNameNew:string read FTablespaceNameNew write FTablespaceNameNew;
     property OwnerNameNew:string read FOwnerNameNew write FOwnerNameNew;
   end;
@@ -1307,15 +1304,11 @@ type
 
   TPGSQLDropTablespace = class(TSQLDropCommandAbstract)
   private
-    FTablespaceName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
-    procedure Assign(ASource:TSQLObjectAbstract); override;
-
-    property TablespaceName:string read FTablespaceName write FTablespaceName;
   end;
 
   { TPGSQLCopy }
@@ -11130,6 +11123,7 @@ begin
           S:=S + ' SEQUENCE ' + Tables.AsString;
       end;
     okScheme:S:=S + ' SCHEMA ' + Tables.AsString;
+    okTableSpace:S:=S + ' TABLESPACE ' + Tables.AsString;
     okFunction:
       begin
         S1:='';
@@ -11509,6 +11503,7 @@ begin
       begin
       S:=S + Tables.AsString
       end;
+    okTableSpace:S:=S + ' ON TABLESPACE ' + Tables.AsString;
   else
     S:=S + ' ON  ' + Tables.AsString;
   end;
@@ -13352,7 +13347,7 @@ procedure TPGSQLDropTablespace.InitParserTree;
 var
   T, T1, FSQLTokens: TSQLTokenRecord;
 begin
-  (* DROP TABLESPACE [ IF EXISTS ] tablespace_name *)
+  // DROP TABLESPACE [ IF EXISTS ] tablespace_name
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okTableSpace);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLESPACE', [toFindWordLast]);   //
   T1:=AddSQLTokens(stKeyword, T, 'IF', [],  -1);
@@ -13365,8 +13360,9 @@ procedure TPGSQLDropTablespace.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
-  if AChild.Tag = 2 then
-    FTablespaceName:=AWord;
+  case AChild.Tag of
+    2:Name:=AWord;
+  end;
 end;
 
 procedure TPGSQLDropTablespace.MakeSQL;
@@ -13376,18 +13372,8 @@ begin
   Result:='DROP TABLESPACE ';
   if ooIfExists in Options  then
     Result:=Result + 'IF EXISTS ';
-  Result:=Result + FTablespaceName;
+  Result:=Result + Name;
   AddSQLCommand(Result);
-end;
-
-procedure TPGSQLDropTablespace.Assign(ASource: TSQLObjectAbstract);
-begin
-  if ASource is TPGSQLDropTablespace then
-  begin
-    TablespaceName:=TPGSQLDropTablespace(ASource).TablespaceName;
-
-  end;
-  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterTablespace }
@@ -13441,12 +13427,11 @@ var
 begin
   S:='ALTER TABLESPACE '+Name;
 
-  if FTablespaceNameNew <> '' then
-    S:=S + ' RENAME TO '+FTablespaceNameNew
-  else
-  if FOwnerNameNew <> '' then;
-    S:=S + ' OWNER TO '+FTablespaceNameNew;
-  AddSQLCommand(S);
+  if (FTablespaceNameNew <> '') and (FTablespaceNameNew<>Name) then
+    AddSQLCommand(S + ' RENAME TO '+FTablespaceNameNew);
+
+  if (FOwnerNameNew <> '') then
+    AddSQLCommand(S + ' OWNER TO '+FOwnerNameNew);
 end;
 
 procedure TPGSQLAlterTablespace.Assign(ASource: TSQLObjectAbstract);
@@ -13531,6 +13516,9 @@ begin
     S:=S + ' WITH (' + S1 + ')';
   end;
   AddSQLCommand(S);
+
+  if Description <> '' then
+    DescribeObject;
 end;
 
 procedure TPGSQLCreateTablespace.Assign(ASource: TSQLObjectAbstract);
