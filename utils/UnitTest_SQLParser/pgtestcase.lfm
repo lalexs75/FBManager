@@ -959,31 +959,45 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'Delete2'
         Lines.Strings = (
-          'DELETE FROM films WHERE producer_id IN (SELECT id FROM producers WHERE name = ''foo'');'
+          'DELETE'
+          'FROM'
+          '  films'
+          'WHERE producer_id IN (SELECT id FROM producers WHERE name = ''foo'');'
         )
       end    
       item
         Caption = 'Delete3'
         Lines.Strings = (
-          'DELETE FROM films WHERE kind <> ''Musical'';'
+          'DELETE'
+          'FROM'
+          '  films'
+          'WHERE kind <> ''Musical'';'
         )
       end    
       item
         Caption = 'Delete4'
         Lines.Strings = (
-          'DELETE FROM films;'
+          'DELETE'
+          'FROM'
+          '  films;'
         )
       end    
       item
         Caption = 'Delete5'
         Lines.Strings = (
-          'DELETE FROM tasks WHERE status = ''DONE'' RETURNING *;'
+          'DELETE'
+          'FROM'
+          '  tasks'
+          'WHERE status = ''DONE'' RETURNING *;'
         )
       end    
       item
         Caption = 'Delete6'
         Lines.Strings = (
-          'DELETE FROM tasks WHERE CURRENT OF c_tasks;'
+          'DELETE'
+          'FROM'
+          '  tasks'
+          'WHERE CURRENT OF c_tasks;'
         )
       end    
       item

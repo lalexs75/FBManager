@@ -1682,15 +1682,13 @@ type
 
   TPGSQLDropAggregate = class(TSQLDropCommandAbstract)
   private
-    FAggregateName: string;
+    FCurName: TTableItem;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
-
-    property AggregateName:string read FAggregateName write FAggregateName;
   end;
 
 
@@ -10545,19 +10543,30 @@ end;
 
 procedure TPGSQLDropAggregate.InitParserTree;
 var
-  T, T1, FSQLTokens: TSQLTokenRecord;
+  T, T1, FSQLTokens, TSymb, TName: TSQLTokenRecord;
 begin
-  (* DROP AGGREGATE [ IF EXISTS ] name ( type [ , ... ] ) [ CASCADE | RESTRICT ] *)
+  //DROP AGGREGATE [ IF EXISTS ] имя ( сигнатура_агр_функции ) [, ...] [ CASCADE | RESTRICT ]
+  //
+  //Здесь сигнатура_агр_функции:
+  //
+  //* |
+  //[ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ] |
+  //[ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ] ] ORDER BY [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ]
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T:=AddSQLTokens(stIdentificator, T, '', [],  1);
-  T:=AddSQLTokens(stSymbol, T, '(', []);
+  TName:=AddSQLTokens(stIdentificator, [T, T1], '', [],  1);
+  T:=AddSQLTokens(stSymbol, TName, '(', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
     T1:=AddSQLTokens(stSymbol, T, ',', []);
     T1.AddChildToken(T);
   T:=AddSQLTokens(stSymbol, T, ')', []);
+
+  TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional], 3);
+    TSymb.AddChildToken(TName);
+
   T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
   T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
 end;
@@ -10567,35 +10576,55 @@ procedure TPGSQLDropAggregate.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FAggregateName:=AWord;
-    2:Params.AddParam(AWord);
+    1:begin
+        Name:=AWord;
+        FCurName:=Tables.Add(AWord);
+      end;
+    2:begin
+        Params.AddParam(AWord);
+        if Assigned(FCurName) then
+          FCurName.Fields.AddParam(AWord);
+      end;
+    3:FCurName:=nil;
   end;
 end;
 
 procedure TPGSQLDropAggregate.MakeSQL;
 var
   i: Integer;
-  Result: String;
+  S, S1: String;
+  T: TTableItem;
 begin
-  Result:='DROP AGGREGATE';
+  S:='DROP AGGREGATE';
   if ooIfExists in Options then
-    Result := Result +' IF EXISTS';
+    S := S +' IF EXISTS';
 
-  Result := Result + ' ' + FAggregateName + ' (' + Params.AsString + ')';
+  if Tables.Count>0 then
+  begin
+    S1:='';
+    for T in Tables do
+    begin
+      if S1<>'' then S1:=S1 + ',';
+      S1:=S1 + ' ' + T.FullName + '(' + T.Fields.AsString + ')';
+    end;
+    S:=S + S1;
+  end
+  else
+    S := S + ' ' + Name + '(' + Params.AsString + ')';
 
   if DropRule = drCascade then
-    Result:=Result + ' CASCADE'
+    S:=S + ' CASCADE'
   else
   if DropRule = drRestrict then
-    Result:=Result + ' RESTRICT';
-  AddSQLCommand(Result);
+    S:=S + ' RESTRICT';
+  AddSQLCommand(S);
 end;
 
 procedure TPGSQLDropAggregate.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLDropAggregate then
   begin
-    AggregateName:=TPGSQLDropAggregate(ASource).AggregateName;
+    //AggregateName:=TPGSQLDropAggregate(ASource).AggregateName;
   end;
   inherited Assign(ASource);
 end;

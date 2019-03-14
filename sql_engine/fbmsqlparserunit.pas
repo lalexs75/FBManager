@@ -586,13 +586,14 @@ type
 
   TSQLCommandDelete = class(TSQLCommandDML)
   private
-    FShemaName:TSQLTokenRecord;
-    FTableName:TSQLTokenRecord;
+    FWhereStr: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property WhereStr:string read FWhereStr write FWhereStr;
   end;
 
   { TSQLCommandInsert }
@@ -3535,44 +3536,58 @@ end;
 
 procedure TSQLCommandDelete.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, FShemaName, FTableName: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'delete', [toFirstToken, toFindWordLast]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'from', []);
 
-  FShemaName:=AddSQLTokens(stIdentificator, T, '', []);  //Имя таблицы
-  T:=AddSQLTokens(stSymbol, FShemaName, '.', []);    //если есть - то было имя схемы
-  FTableName:=AddSQLTokens(stIdentificator, T, '', []);  //Если была схема - то имя таблицы
+  FShemaName:=AddSQLTokens(stIdentificator, T, '', [], 1);  //Имя таблицы
+    T:=AddSQLTokens(stSymbol, FShemaName, '.', []);    //если есть - то было имя схемы
+    FTableName:=AddSQLTokens(stIdentificator, T, '', [], 2);  //Если была схема - то имя таблицы
 
-  T:=AddSQLTokens(stKeyword, FShemaName, 'where', []);
-    FTableName.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [FShemaName, FTableName], 'where', [toOptional], 3);
 end;
 
 procedure TSQLCommandDelete.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
-
-  if AChild = FShemaName then
-    TableName:=AWord
-  else
-  if AChild = FTableName then
-  begin
-    SchemaName:=TableName;
-    TableName:=AWord
+  case AChild.Tag of
+    1:TableName:=AWord;
+    2:begin
+        SchemaName:=TableName;
+        TableName:=AWord
+      end;
+    3:WhereStr:=ASQLParser.GetToCommandDelemiter;
   end;
 end;
 
 procedure TSQLCommandDelete.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='delete' + LineEnding + 'from' + LineEnding;
+  S:='DELETE' + LineEnding + 'FROM' + LineEnding + '  ';
   if SchemaName<>'' then
-    Result:=Result + SchemaName + '.';
-  Result:=Result + TableName;
-  AddSQLCommand(Result);
+    S:=S + SchemaName + '.';
+  S:=S + TableName;
+
+  if WhereStr<>'' then
+  begin
+    S:=S + LineEnding + 'WHERE';
+    if WhereStr[1] in SQLValidChars then S:=S + LineEnding + '  ';
+    S:=S + WhereStr;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TSQLCommandDelete.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCommandDelete then
+  begin
+    FWhereStr:=TSQLCommandDelete(ASource).FWhereStr;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLTokenRecord }
