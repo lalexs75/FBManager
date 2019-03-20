@@ -2707,86 +2707,86 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateAggregate1'
         Lines.Strings = (
-          'CREATE AGGREGATE sum (complex)'
+          'CREATE AGGREGATE sum(complex)'
           '('
-          '    sfunc = complex_add,'
-          '    stype = complex,'
-          '    initcond = ''(0,0)'''
+          '  sfunc = complex_add,'
+          '  stype = complex,'
+          '  initcond = ''(0,0)'''
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate2'
         Lines.Strings = (
-          'CREATE AGGREGATE avg (float8)'
+          'CREATE AGGREGATE avg(float8)'
           '('
-          '    sfunc = float8_accum,'
-          '    stype = float8[],'
-          '    finalfunc = float8_avg,'
-          '    initcond = ''{0,0,0}'''
+          '  sfunc = float8_accum,'
+          '  stype = float8[],'
+          '  finalfunc = float8_avg,'
+          '  initcond = ''{0,0,0}'''
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate3'
         Lines.Strings = (
-          'CREATE AGGREGATE sum (complex)'
+          'CREATE AGGREGATE sum(complex)'
           '('
-          '    sfunc = complex_add,'
-          '    stype = complex,'
-          '    initcond = ''(0,0)'','
-          '    msfunc = complex_add,'
-          '    minvfunc = complex_sub,'
-          '    mstype = complex,'
-          '    minitcond = ''(0,0)'''
+          '  sfunc = complex_add,'
+          '  stype = complex,'
+          '  initcond = ''(0,0)'','
+          '  msfunc = complex_add,'
+          '  minvfunc = complex_sub,'
+          '  mstype = complex,'
+          '  minitcond = ''(0,0)'''
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate4'
         Lines.Strings = (
-          'CREATE AGGREGATE unsafe_sum (float8)'
+          'CREATE AGGREGATE unsafe_sum(float8)'
           '('
-          '    stype = float8,'
-          '    sfunc = float8pl,'
-          '    mstype = float8,'
-          '    msfunc = float8pl,'
-          '    minvfunc = float8mi'
+          '  stype = float8,'
+          '  sfunc = float8pl,'
+          '  mstype = float8,'
+          '  msfunc = float8pl,'
+          '  minvfunc = float8mi'
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate5'
         Lines.Strings = (
-          'CREATE AGGREGATE array_accum (anyelement)'
+          'CREATE AGGREGATE array_accum(anyelement)'
           '('
-          '   sfunc = array_append,'
-          '    stype = anyarray,'
-          '    initcond = ''{}'''
+          '  sfunc = array_append,'
+          '  stype = anyarray,'
+          '  initcond = ''{}'''
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate6'
         Lines.Strings = (
-          'CREATE AGGREGATE array_agg (anynonarray)'
+          'CREATE AGGREGATE array_agg(anynonarray)'
           '('
-          '    sfunc = array_agg_transfn,'
-          '    stype = internal,'
-          '    finalfunc = array_agg_finalfn,'
-          '    finalfunc_extra'
+          '  sfunc = array_agg_transfn,'
+          '  stype = internal,'
+          '  finalfunc = array_agg_finalfn,'
+          '  finalfunc_extra'
           ');'
         )
       end    
       item
         Caption = 'CreateAggregate7'
         Lines.Strings = (
-          'CREATE AGGREGATE percentile_disc (float8 ORDER BY anyelement)'
+          'CREATE AGGREGATE percentile_disc(float8 ORDER BY anyelement)'
           '('
-          '    sfunc = ordered_set_transition,'
-          '    stype = internal,'
-          '    finalfunc = percentile_disc_final,'
-          '    finalfunc_extra'
+          '  sfunc = ordered_set_transition,'
+          '  stype = internal,'
+          '  finalfunc = percentile_disc_final,'
+          '  finalfunc_extra'
           ');'
         )
       end    

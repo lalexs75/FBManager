@@ -1671,11 +1671,18 @@ type
 
   TPGSQLCreateAggregate = class(TSQLCreateCommandAbstract)
   private
+    FParamsOrder:TSQLFields;
+    FCurParam: TSQLParserField;
+    function GetParamsOrder: TSQLFields;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract); override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ParamsOrder:TSQLFields read GetParamsOrder;
   end;
 
   { TPGSQLDropAggregate }
@@ -1683,6 +1690,7 @@ type
   TPGSQLDropAggregate = class(TSQLDropCommandAbstract)
   private
     FCurName: TTableItem;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2764,24 +2772,27 @@ type
 implementation
 uses strutils, rxstrutils;
 
-procedure CreateInParamsTree(Owner:TSQLCommandDDL; InToken:TSQLTokenRecord; OutToken:TSQLTokenRecord);
+procedure CreateInParamsTree(Owner:TSQLCommandDDL; InToken:TSQLTokenRecord; OutToken:array of TSQLTokenRecord; ACmdBase:Integer);
 var
   FT10_1, FT10_2, FT10_3, FT10_4, FT10_5, FT10_6, TSymb,
-    FT10_7, FT10_8, FT10_9: TSQLTokenRecord;
+    FT10_7, FT10_8, FT10_9, FT10_5_1: TSQLTokenRecord;
 begin
-  FT10_1:=Owner.AddSQLTokens(stKeyword, InToken, 'IN', [], 101);
-  FT10_2:=Owner.AddSQLTokens(stKeyword, InToken, 'OUT', [], 102);
-  FT10_3:=Owner.AddSQLTokens(stKeyword, InToken, 'INOUT', [], 103);
-  FT10_4:=Owner.AddSQLTokens(stKeyword, InToken, 'VARIADIC', [], 104);
-  FT10_5:=Owner.AddSQLTokens(stIdentificator, [InToken, FT10_1, FT10_2, FT10_3, FT10_4], '', [], 105);
-  FT10_6:=Owner.AddSQLTokens(stIdentificator, FT10_5, '', [], 106);
-  FT10_7:=Owner.AddSQLTokens(stSymbol, FT10_6, '.', [], 107);
-  FT10_7:=Owner.AddSQLTokens(stIdentificator, [FT10_7, FT10_6], '', [], 108);
-  FT10_8:=Owner.AddSQLTokens(stIdentificator, FT10_7, '', [], 108);
-  FT10_9:=Owner.AddSQLTokens(stIdentificator, FT10_8, '', [], 108);
+  FT10_1:=Owner.AddSQLTokens(stKeyword, InToken, 'IN', [], ACmdBase + 1);
+  FT10_2:=Owner.AddSQLTokens(stKeyword, InToken, 'OUT', [], ACmdBase + 2);
+  FT10_3:=Owner.AddSQLTokens(stKeyword, InToken, 'INOUT', [], ACmdBase + 3);
+  FT10_4:=Owner.AddSQLTokens(stKeyword, InToken, 'VARIADIC', [], ACmdBase + 4);
+  FT10_5:=Owner.AddSQLTokens(stIdentificator, [InToken, FT10_1, FT10_2, FT10_3, FT10_4], '', [], ACmdBase + 5);
+    FT10_5_1:=Owner.AddSQLTokens(stSymbol, FT10_5, '[', [], ACmdBase + 8);
+    FT10_5_1:=Owner.AddSQLTokens(stSymbol, FT10_5_1, ']', [], ACmdBase + 8);
+  FT10_6:=Owner.AddSQLTokens(stIdentificator, FT10_5, '', [], ACmdBase + 6);
+  FT10_7:=Owner.AddSQLTokens(stSymbol, FT10_6, '.', [], ACmdBase + 7);
+  FT10_7:=Owner.AddSQLTokens(stIdentificator, [FT10_7, FT10_6], '', [], ACmdBase + 8);
+  FT10_8:=Owner.AddSQLTokens(stIdentificator, FT10_7, '', [], ACmdBase + 8);
+  FT10_9:=Owner.AddSQLTokens(stIdentificator, FT10_8, '', [], ACmdBase + 8);
 
-  TSymb:=Owner.AddSQLTokens(stSymbol, [FT10_1, FT10_2, FT10_3, FT10_4, FT10_5, FT10_6, FT10_7, FT10_8, FT10_9], ',', [], 109);
+  TSymb:=Owner.AddSQLTokens(stSymbol, [FT10_1, FT10_2, FT10_3, FT10_4, FT10_5, FT10_6, FT10_7, FT10_8, FT10_9, FT10_5_1], ',', [], ACmdBase + 9);
     TSymb.AddChildToken([FT10_1, FT10_2, FT10_3, FT10_4, FT10_5, FT10_7, FT10_8, FT10_9]);
+  FT10_5_1.AddChildToken(OutToken);
   FT10_5.AddChildToken(OutToken);
   FT10_6.AddChildToken(OutToken);
   FT10_7.AddChildToken(OutToken);
@@ -5224,7 +5235,7 @@ begin
     FT10:=AddSQLTokens(stIdentificator, TSymb, '', [], 40);
   TSymb:=AddSQLTokens(stSymbol, [FT10, F10_1], '(', []);
   FT10:=AddSQLTokens(stSymbol, TSymb , ')', [], 110);
-  CreateInParamsTree(Self, TSymb, FT10);
+  CreateInParamsTree(Self, TSymb, FT10, 100);
 
   FT13:=AddSQLTokens(stKeyword, FSQLTokens, 'INDEX', [], 13);                  //INDEX имя_объекта |
   FT14:=AddSQLTokens(stKeyword, FSQLTokens, 'LARGE', [], 14);                  //LARGE OBJECT oid_большого_объекта |
@@ -6802,7 +6813,7 @@ begin
   TAs:=AddSQLTokens(stKeyword, TName, 'AS', [], 3);
     TSymb1:=AddSQLTokens(stSymbol, TAs, '(', []);
     TSymb2:=AddSQLTokens(stSymbol, TSymb1, ')', []);
-    CreateInParamsTree(Self, TSymb1, TSymb2);
+    CreateInParamsTree(Self, TSymb1, TSymb2, 100);
 end;
 
 procedure TPGSQLCreateType.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -10356,7 +10367,7 @@ begin
 
       TSymb:=AddSQLTokens(stSymbol, Par1, '(', []);
       TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 110);
-      CreateInParamsTree(Self, TSymb, TSymb2);
+      CreateInParamsTree(Self, TSymb, TSymb2, 100);
 
 
   T2:=AddSQLTokens(stSymbol, T, 'WITHOUT', [], 4);
@@ -10496,54 +10507,244 @@ end;
 
 { TPGSQLCreateAggregate }
 
+function TPGSQLCreateAggregate.GetParamsOrder: TSQLFields;
+begin
+  Result:=FParamsOrder;
+end;
+
 procedure TPGSQLCreateAggregate.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TName, TPar1, TPar, TPar2, T1, T2, T3, T4,
+    T31: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для CREATE AGGREGATE }
-  (*
-  CREATE AGGREGATE name ( input_data_type [ , ... ] ) (
-    SFUNC = sfunc,
-    STYPE = state_data_type
-    [ , FINALFUNC = ffunc ]
-    [ , INITCOND = initial_condition ]
-    [ , SORTOP = sort_operator ]
-)
+  //CREATE AGGREGATE имя ( [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ) (
+  //    SFUNC = функция_состояния,
+  //    STYPE = тип_данных_состояния
+  //    [ , SSPACE = размер_данных_состояния ]
+  //    [ , FINALFUNC = функция_завершения ]
+  //    [ , FINALFUNC_EXTRA ]
+  //    [ , FINALFUNC_MODIFY = { READ_ONLY | SHAREABLE | READ_WRITE } ]
+  //    [ , COMBINEFUNC = комбинирующая_функция ]
+  //    [ , SERIALFUNC = функция_сериализации ]
+  //    [ , DESERIALFUNC = функция_десериализации ]
+  //    [ , INITCOND = начальное_условие ]
+  //    [ , MSFUNC = функция_состояния_движ ]
+  //    [ , MINVFUNC = обратная_функция_движ ]
+  //    [ , MSTYPE = тип_данных_состояния_движ ]
+  //    [ , MSSPACE = размер_данных_состояния_движ ]
+  //    [ , MFINALFUNC = функция_завершения_движ ]
+  //    [ , MFINALFUNC_EXTRA ]
+  //    [ , MFINALFUNC_MODIFY = { READ_ONLY | SHAREABLE | READ_WRITE } ]
+  //    [ , MINITCOND = начальное_условие_движ ]
+  //    [ , SORTOP = оператор_сортировки ]
+  //    [ , PARALLEL = { SAFE | RESTRICTED | UNSAFE } ]
+  //)
+  //
+  //CREATE AGGREGATE имя ( [ [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ]
+  //                        ORDER BY [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ) (
+  //    SFUNC = функция_состояния,
+  //    STYPE = тип_данных_состояния
+  //    [ , SSPACE = размер_данных_состояния ]
+  //    [ , FINALFUNC = функция_завершения ]
+  //    [ , FINALFUNC_EXTRA ]
+  //    [ , FINALFUNC_MODIFY = { READ_ONLY | SHAREABLE | READ_WRITE } ]
+  //    [ , INITCOND = начальное_условие ]
+  //    [ , PARALLEL = { SAFE | RESTRICTED | UNSAFE } ]
+  //    [ , HYPOTHETICAL ]
+  //)
+  //
+  //или старый синтаксис
+  //
+  //CREATE AGGREGATE имя (
+  //    BASETYPE = базовый_тип,
+  //    SFUNC = функция_состояния,
+  //    STYPE = тип_данных_состояния
+  //    [ , SSPACE = размер_данных_состояния ]
+  //    [ , FINALFUNC = функция_завершения ]
+  //    [ , FINALFUNC_EXTRA ]
+  //    [ , FINALFUNC_MODIFY = { READ_ONLY | SHAREABLE | READ_WRITE } ]
+  //    [ , COMBINEFUNC = комбинирующая_функция ]
+  //    [ , SERIALFUNC = функция_сериализации ]
+  //    [ , DESERIALFUNC = функция_десериализации ]
+  //    [ , INITCOND = начальное_условие ]
+  //    [ , MSFUNC = функция_состояния_движ ]
+  //    [ , MINVFUNC = обратная_функция_движ ]
+  //    [ , MSTYPE = тип_данных_состояния_движ ]
+  //    [ , MSSPACE = размер_данных_состояния_движ ]
+  //    [ , MFINALFUNC = функция_завершения_движ ]
+  //    [ , MFINALFUNC_EXTRA ]
+  //    [ , MFINALFUNC_MODIFY = { READ_ONLY | SHAREABLE | READ_WRITE } ]
+  //    [ , MINITCOND = начальное_условие_движ ]
+  //    [ , SORTOP = оператор_сортировки ]
+  //)
 
-or the old syntax
-
-CREATE AGGREGATE name (
-    BASETYPE = base_type,
-    SFUNC = sfunc,
-    STYPE = state_data_type
-    [ , FINALFUNC = ffunc ]
-    [ , INITCOND = initial_condition ]
-    [ , SORTOP = sort_operator ]
-)
-  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  TPar:=AddSQLTokens(stSymbol, TName, '(', []);
+  TPar1:=AddSQLTokens(stSymbol, nil, ')', []);
+  TPar2:=AddSQLTokens(stKeyword, nil, 'ORDER', [], 2);
+  CreateInParamsTree(Self, TPar, [TPar1, TPar2], 100);
+
+    //TPar2.CopyChildTokens(TPar1);
+  TPar2:=AddSQLTokens(stKeyword, TPar2, 'BY', []);
+
+  CreateInParamsTree(Self, TPar2, TPar1, 150);
+
+  T:=AddSQLTokens(stSymbol, TPar1, '(', [toOptional], 3);
+  T1:=AddSQLTokens(stIdentificator, T, '', [], 4);
+  T2:=AddSQLTokens(stSymbol, T1, '=', []);
+  T3:=AddSQLTokens(stIdentificator, T2, '', [], 5);
+    T31:=AddSQLTokens(stSymbol, T3, '[', [], 5);
+    T31:=AddSQLTokens(stSymbol, T31, ']', [], 5);
+
+  T4:=AddSQLTokens(stString, T2, '', [], 5);
+  T:=AddSQLTokens(stSymbol, [T3, T4, T1, T31], ',', [], 6);
+    T.AddChildToken(T1);
+  T:=AddSQLTokens(stSymbol, [T3, T4, T1, T31], ')', [], 6);
 end;
 
 procedure TPGSQLCreateAggregate.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2,
+    3,
+    6:FCurParam:=nil;
+    4:FCurParam:=Fields.AddParamEx(AWord, '');
+    5:if Assigned(FCurParam) then FCurParam.ParamValue:=FCurParam.ParamValue + AWord;
+
+    101,
+    102,
+    103,
+    104:begin
+           FCurParam:=Params.AddParam('');
+           case AChild.Tag of
+             101:FCurParam.InReturn:=spvtInput;
+             102:FCurParam.InReturn:=spvtOutput;
+             103:FCurParam.InReturn:=spvtInOut;
+             104:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end;
+    151,
+    152,
+    153,
+    154:begin
+           FCurParam:=ParamsOrder.AddParam('');
+           case AChild.Tag of
+             151:FCurParam.InReturn:=spvtInput;
+             152:FCurParam.InReturn:=spvtOutput;
+             153:FCurParam.InReturn:=spvtInOut;
+             154:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end;
+    105,
+    155:begin
+          if not Assigned(FCurParam) then
+          begin
+            if AChild.Tag = 105 then
+              FCurParam:=Params.AddParam('')
+            else
+              FCurParam:=ParamsOrder.AddParam('')
+          end;
+          FCurParam.TypeName:=AWord;
+        end;
+    106,
+    156: if Assigned(FCurParam) then
+         begin
+           if FCurParam.Caption = '' then
+           begin
+             FCurParam.Caption:=FCurParam.TypeName;
+             FCurParam.TypeName:=AWord;
+           end
+           else
+             FCurParam.TypeName:=FCurParam.TypeName + AWord;
+         end;
+    107,
+    157:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + AWord;
+    108,
+    158:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + ' ' + AWord;
+    109,
+    110,
+    160,
+    159:FCurParam:=nil;
+  end;
 end;
 
 procedure TPGSQLCreateAggregate.MakeSQL;
 var
-  Result: String;
+  S, S1, S2: String;
+  P: TSQLParserField;
 begin
-  Result:='CREATE AGGREGATE';
-  AddSQLCommand(Result);
+  S:='CREATE AGGREGATE ' + Name;
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      //101:FCurParam.InReturn:=spvtInput;
+      S1:=S1 + P.TypeName;
+    end;
+
+    S2:='';
+    if ParamsOrder.Count > 0 then
+    begin
+      for P in ParamsOrder do
+      begin
+        if S2<>'' then S2:=S2 + ', ';
+        S2:=S2 + P.TypeName;
+      end;
+    end;
+    if S1<>'' then S:=S + '('+ S1;
+
+    if S2<>'' then S:=S + ' ORDER BY '+S2;
+    S:=S + ')';
+  end;
+
+  if Fields.Count>0 then
+  begin
+    S1:='';
+    for P in Fields do
+    begin
+      if S1<>'' then S1:=S1 + ',' + LineEnding;
+      S1:=S1 + '  ' + P.Caption;
+      if P.ParamValue <> '' then S1:=S1 + ' = ' + P.ParamValue;
+    end;
+    if S1<>'' then S:=S + LineEnding + '(' + LineEnding + S1 + LineEnding + ')';
+  end;
+  AddSQLCommand(S);
+end;
+
+constructor TPGSQLCreateAggregate.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FParamsOrder:=TSQLFields.Create;
+end;
+
+destructor TPGSQLCreateAggregate.Destroy;
+begin
+  FreeAndNil(FParamsOrder);
+  inherited Destroy;
+end;
+
+procedure TPGSQLCreateAggregate.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateAggregate then
+  begin
+    FParamsOrder.Assign(TPGSQLCreateAggregate(ASource).FParamsOrder)
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropAggregate }
 
 procedure TPGSQLDropAggregate.InitParserTree;
 var
-  T, T1, FSQLTokens, TSymb, TName: TSQLTokenRecord;
+  T, T1, FSQLTokens, TSymb, TName, TPar, TPar1, TPar2: TSQLTokenRecord;
 begin
   //DROP AGGREGATE [ IF EXISTS ] имя ( сигнатура_агр_функции ) [, ...] [ CASCADE | RESTRICT ]
   //
@@ -10558,17 +10759,19 @@ begin
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
   TName:=AddSQLTokens(stIdentificator, [T, T1], '', [],  1);
-  T:=AddSQLTokens(stSymbol, TName, '(', []);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
-    T1:=AddSQLTokens(stSymbol, T, ',', []);
-    T1.AddChildToken(T);
-  T:=AddSQLTokens(stSymbol, T, ')', []);
+  TPar:=AddSQLTokens(stSymbol, TName, '(', []);
+  TPar1:=AddSQLTokens(stSymbol, nil, ')', []);
+  TPar2:=AddSQLTokens(stKeyword, nil, 'ORDER', [], 2);
+  CreateInParamsTree(Self, TPar, [TPar1, TPar2], 100);
+  TPar2:=AddSQLTokens(stKeyword, TPar2, 'BY', []);
+  CreateInParamsTree(Self, TPar2, TPar1, 150);
 
-  TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional], 3);
+
+  TSymb:=AddSQLTokens(stSymbol, TPar1, ',', [toOptional], 3);
     TSymb.AddChildToken(TName);
 
-  T1:=AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional], -2);
-  T1:=AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3);
+  T1:=AddSQLTokens(stKeyword, TPar1, 'CASCADE', [toOptional], -2);
+  T1:=AddSQLTokens(stKeyword, TPar1, 'RESTRICT', [toOptional], -3);
 end;
 
 procedure TPGSQLDropAggregate.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -10580,12 +10783,68 @@ begin
         Name:=AWord;
         FCurName:=Tables.Add(AWord);
       end;
-    2:begin
+(*    2:begin
         Params.AddParam(AWord);
         if Assigned(FCurName) then
           FCurName.Fields.AddParam(AWord);
-      end;
+      end;*)
     3:FCurName:=nil;
+
+    101,
+    102,
+    103,
+    104:begin
+           FCurParam:=FCurName.Fields.AddParam('');
+           case AChild.Tag of
+             101:FCurParam.InReturn:=spvtInput;
+             102:FCurParam.InReturn:=spvtOutput;
+             103:FCurParam.InReturn:=spvtInOut;
+             104:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end;
+(*    151,
+    152,
+    153,
+    154:begin
+           FCurParam:=ParamsOrder.AddParam('');
+           case AChild.Tag of
+             151:FCurParam.InReturn:=spvtInput;
+             152:FCurParam.InReturn:=spvtOutput;
+             153:FCurParam.InReturn:=spvtInOut;
+             154:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end; *)
+    105,
+    155:begin
+          if not Assigned(FCurParam) then
+          begin
+            if AChild.Tag = 105 then
+              FCurParam:=FCurName.Fields.AddParam('')
+(*            else
+              FCurParam:=ParamsOrder.AddParam('') *)
+          end;
+          FCurParam.TypeName:=AWord;
+        end;
+    106,
+    156: if Assigned(FCurParam) then
+         begin
+           if FCurParam.Caption = '' then
+           begin
+             FCurParam.Caption:=FCurParam.TypeName;
+             FCurParam.TypeName:=AWord;
+           end
+           else
+             FCurParam.TypeName:=FCurParam.TypeName + AWord;
+         end;
+    107,
+    157:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + AWord;
+    108,
+    158:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + ' ' + AWord;
+    109,
+    110,
+    160,
+    159:FCurParam:=nil;
+
   end;
 end;
 
@@ -10833,7 +11092,7 @@ REVOKE [ GRANT OPTION FOR ]
     TSymb:=AddSQLTokens(stSymbol, [TFuncSchema, TFuncName], '(', []);
 
     TSymb1:=AddSQLTokens(stSymbol, TSymb, ')', [], 33);
-    CreateInParamsTree(Self, TSymb, TSymb1);
+    CreateInParamsTree(Self, TSymb, TSymb1, 100);
 
     TSymb:=AddSQLTokens(stSymbol, TSymb1, ',', [], 34);
       TSymb.AddChildToken(TFuncSchema);
@@ -11377,7 +11636,7 @@ GRANT { EXECUTE | ALL [ PRIVILEGES ] }
     TSymb:=AddSQLTokens(stSymbol, [T42, T43], '(', []);
     TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 44);
 
-    CreateInParamsTree(Self, TSymb, TSymb2);
+    CreateInParamsTree(Self, TSymb, TSymb2, 100);
 
     TSymb:=AddSQLTokens(stSymbol, TSymb2, ',', []);
       TSymb.AddChildToken(T42);
@@ -15709,7 +15968,7 @@ begin
   TSymb:=AddSQLTokens(stSymbol, [T, T2], '(', [toOptional]);
   TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 5);
 
-  CreateInParamsTree(Self, TSymb, TSymb2);
+  CreateInParamsTree(Self, TSymb, TSymb2, 100);
 
   AddSQLTokens(stKeyword, TSymb2, 'CASCADE', [toOptional], -2);
   AddSQLTokens(stKeyword, TSymb2, 'RESTRICT', [toOptional], -3);
@@ -15872,7 +16131,7 @@ begin
   TSymb:=AddSQLTokens(stSymbol, [T,T2], '(', []);
   TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 5);
 
-  CreateInParamsTree(Self, TSymb, TSymb2);
+  CreateInParamsTree(Self, TSymb, TSymb2, 100);
 
   T:=AddSQLTokens(stKeyword, TSymb2, 'RENAME', [], 10);
   T:=AddSQLTokens(stKeyword, T, 'TO', []);
@@ -17945,7 +18204,7 @@ begin
 
   TSymb:=AddSQLTokens(stSymbol, [Par1, Par2], '(', []);
   TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 110);
-  CreateInParamsTree(Self, TSymb, TSymb2);
+  CreateInParamsTree(Self, TSymb, TSymb2, 100);
 
 
   Par1:=AddSQLTokens(stKeyword, TSymb2, 'RETURNS', []);               //   RETURNS

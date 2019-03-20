@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <ProjectOptions>
-    <Version Value="11"/>
+  <ProjectOptions BuildModesCount="1">
+    <Version Value="12"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
-      <MainUnit Value="0"/>
       <Title Value="SQL parser test"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
@@ -15,7 +14,7 @@
       <EnableI18N Value="True" LFM="False"/>
       <OutDir Value="languages"/>
     </i18n>
-    <BuildModes Count="1">
+    <BuildModes>
       <Item1 Name="Default" Default="True"/>
     </BuildModes>
     <PublishOptions>
