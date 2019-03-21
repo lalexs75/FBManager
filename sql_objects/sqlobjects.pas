@@ -278,7 +278,6 @@ type
 
     property Caption:string read FCaption write FCaption;
     property ComputedSource:string read FComputedSource write FComputedSource;
-    //property TypeArrayDim:string read FTypeArrayDim write FTypeArrayDim;
     property PrimaryKey:boolean read GetPrimaryKey write SetPrimaryKey;
     property Params:TFieldParams read FParams write FParams;
     property FieldFormat:TFieldFormat read FFieldFormat write FFieldFormat;

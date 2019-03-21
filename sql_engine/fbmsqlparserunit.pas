@@ -227,6 +227,7 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     destructor Destroy;override;
+    procedure Clear;override;
     function CompareWith(SQLCommandDDL:TSQLCommandDDL):TSQLCommandDDL; virtual;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property Fields:TSQLFields read FFields;
@@ -247,6 +248,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    procedure Clear;override;
     property DropRule:TDropRule read FDropRule write FDropRule;
     property SchemaName;
   end;
@@ -1252,6 +1254,12 @@ begin
   inherited Assign(ASource);
 end;
 
+procedure TSQLDropCommandAbstract.Clear;
+begin
+  inherited Clear;
+  FDropRule:=drNone;
+end;
+
 { TSQLCreateView }
 
 constructor TSQLCreateView.Create(AParent: TSQLCommandAbstract);
@@ -1447,6 +1455,13 @@ begin
   FreeAndNil(FFields);
   FreeAndNil(FTables);
   inherited Destroy;
+end;
+
+procedure TSQLCommandDDL.Clear;
+begin
+  inherited Clear;
+  FFields.Clear;
+  FTables.Clear;
 end;
 
 function TSQLCommandDDL.CompareWith(SQLCommandDDL: TSQLCommandDDL

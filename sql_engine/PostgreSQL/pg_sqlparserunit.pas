@@ -488,6 +488,23 @@ type
     property RuleWork:TPGRuleWork read FRuleWork write FRuleWork;
   end;
 
+  { TPGSQLAlterRule }
+
+  TPGSQLAlterRule = class(TSQLCommandDDL)
+  private
+    FNewName: string;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    procedure Clear;override;
+    property TableName;
+    property SchemaName;
+    property NewName:string read FNewName write FNewName;
+  end;
+
   { TPGSQLDropRule }
 
   TPGSQLDropRule = class(TSQLDropCommandAbstract)
@@ -1657,14 +1674,21 @@ type
 
 
   { TPGSQLAlterAggregate }
-
-  TPGSQLAlterAggregate = class(TSQLCommandAbstract)
+  TPGSQLAlterAggregateCommand = (pgaacNone, pgaacRename, pgaacNewOwner, pgaacSetSchema);
+  TPGSQLAlterAggregate = class(TSQLCommandDDL)
   private
+    FCommand: TPGSQLAlterAggregateCommand;
+    FParamValue: string;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    procedure Clear;override;
+    property Command:TPGSQLAlterAggregateCommand read FCommand write FCommand;
+    property ParamValue:string read FParamValue write FParamValue;
   end;
 
   { TPGSQLCreateAggregate }
@@ -1682,6 +1706,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract); override;
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    procedure Clear;override;
     property ParamsOrder:TSQLFields read GetParamsOrder;
   end;
 
@@ -1691,11 +1716,13 @@ type
   private
     FCurName: TTableItem;
     FCurParam: TSQLParserField;
+    //FStateOrderBy:boolean;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Clear;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
@@ -2800,6 +2827,27 @@ begin
   FT10_9.AddChildToken(OutToken);
 end;
 
+function InternalMakeAggregateParam(AParams:TSQLFields; AOrderBy:boolean):string;
+var
+  P: TSQLParserField;
+begin
+  Result:='';
+  for P in AParams do
+  begin
+    if (AOrderBy = P.PrimaryKey) then
+    begin
+      if Result <> '' then Result:=Result + ', ';
+      case P.InReturn of
+        spvtInput:Result:=Result + 'IN ';
+        spvtOutput:Result:=Result + 'OUT ';
+        spvtInOut:Result:=Result + 'INOUT ';
+        spvtVariadic:Result:=Result + 'VARIADIC ';
+      end;
+      if P.Caption <> '' then Result:=Result + P.Caption;
+      Result:=Result + P.TypeName;
+    end;
+  end;
+end;
 
 type
   TTypeDefMode = (tdfDomain, tdfParams, tdfTypeOnly, tdfTableColDef);
@@ -3325,6 +3373,62 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLAlterRule }
+
+procedure TPGSQLAlterRule.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  //ALTER RULE имя ON имя_таблицы RENAME TO новое_имя
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'RULE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T:=AddSQLTokens(stKeyword, T, 'ON', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+    T1:=AddSQLTokens(stSymbol, T, '.', []);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 3);
+  T:=AddSQLTokens(stKeyword, [T, T1], 'RENAME', []);
+  T:=AddSQLTokens(stKeyword, T, 'TO', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 4);
+end;
+
+procedure TPGSQLAlterRule.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:TableName:=AWord;
+    3:SchemaName:=AWord;
+    4:NewName:=AWord;
+  end;
+end;
+
+procedure TPGSQLAlterRule.MakeSQL;
+var
+  S, S1: String;
+begin
+  S1:=TableName;
+  if SchemaName <> '' then S1:=SchemaName + '.' + TableName;
+  S:='ALTER RULE '+Name + ' ON ' + S1 + ' RENAME TO ' + NewName;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterRule.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterRule then
+  begin
+    FNewName:=TPGSQLAlterRule(ASource).FNewName;
+  end;
+  inherited Assign(ASource);
+end;
+
+procedure TPGSQLAlterRule.Clear;
+begin
+  inherited Clear;
+  FNewName:='';
 end;
 
 { TPGSQLAccessMethod }
@@ -10740,6 +10844,13 @@ begin
   inherited Assign(ASource);
 end;
 
+procedure TPGSQLCreateAggregate.Clear;
+begin
+  inherited Clear;
+  FParamsOrder.Clear;
+  FCurParam:=nil
+end;
+
 { TPGSQLDropAggregate }
 
 procedure TPGSQLDropAggregate.InitParserTree;
@@ -10759,7 +10870,7 @@ begin
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
   TName:=AddSQLTokens(stIdentificator, [T, T1], '', [],  1);
-  TPar:=AddSQLTokens(stSymbol, TName, '(', []);
+  TPar:=AddSQLTokens(stSymbol, TName, '(', [], 4);
   TPar1:=AddSQLTokens(stSymbol, nil, ')', []);
   TPar2:=AddSQLTokens(stKeyword, nil, 'ORDER', [], 2);
   CreateInParamsTree(Self, TPar, [TPar1, TPar2], 100);
@@ -10783,12 +10894,11 @@ begin
         Name:=AWord;
         FCurName:=Tables.Add(AWord);
       end;
-(*    2:begin
-        Params.AddParam(AWord);
-        if Assigned(FCurName) then
-          FCurName.Fields.AddParam(AWord);
-      end;*)
-    3:FCurName:=nil;
+    2:FCurParam:=nil;
+    3:begin
+        FCurName:=nil;
+        FCurParam:=nil;
+      end;
 
     101,
     102,
@@ -10802,26 +10912,30 @@ begin
              104:FCurParam.InReturn:=spvtVariadic;
            end;
          end;
-(*    151,
+    151,
     152,
     153,
     154:begin
-           FCurParam:=ParamsOrder.AddParam('');
+           FCurParam:=FCurName.Fields.AddParam('');
+           FCurParam.PrimaryKey:=true;
            case AChild.Tag of
              151:FCurParam.InReturn:=spvtInput;
              152:FCurParam.InReturn:=spvtOutput;
              153:FCurParam.InReturn:=spvtInOut;
              154:FCurParam.InReturn:=spvtVariadic;
            end;
-         end; *)
+         end;
     105,
     155:begin
           if not Assigned(FCurParam) then
           begin
             if AChild.Tag = 105 then
               FCurParam:=FCurName.Fields.AddParam('')
-(*            else
-              FCurParam:=ParamsOrder.AddParam('') *)
+            else
+            begin
+              FCurParam:=FCurName.Fields.AddParam('');
+              FCurParam.PrimaryKey:=true;
+            end;
           end;
           FCurParam.TypeName:=AWord;
         end;
@@ -10851,7 +10965,7 @@ end;
 procedure TPGSQLDropAggregate.MakeSQL;
 var
   i: Integer;
-  S, S1: String;
+  S, S1, S2: String;
   T: TTableItem;
 begin
   S:='DROP AGGREGATE';
@@ -10864,7 +10978,10 @@ begin
     for T in Tables do
     begin
       if S1<>'' then S1:=S1 + ',';
-      S1:=S1 + ' ' + T.FullName + '(' + T.Fields.AsString + ')';
+      S1:=S1 + ' ' + T.FullName + '(' + InternalMakeAggregateParam(T.Fields, false);
+      S2:=InternalMakeAggregateParam(T.Fields, true);
+      if S2<>'' then S1:=S1 + ' ORDER BY '+S2;
+      S1:=S1 + ')';
     end;
     S:=S + S1;
   end
@@ -10877,6 +10994,14 @@ begin
   if DropRule = drRestrict then
     S:=S + ' RESTRICT';
   AddSQLCommand(S);
+end;
+
+procedure TPGSQLDropAggregate.Clear;
+begin
+  inherited Clear;
+  FCurName:=nil;
+  FCurParam:=nil;
+  //FStateOrderBy:=False;
 end;
 
 procedure TPGSQLDropAggregate.Assign(ASource: TSQLObjectAbstract);
@@ -10892,30 +11017,148 @@ end;
 
 procedure TPGSQLAlterAggregate.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TName, TPar, TPar2, TPar1, TRen, TOwn, TSet: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для ALTER AGGREGATE}
-  (*
-  ALTER AGGREGATE name ( type [ , ... ] ) RENAME TO new_name
-  ALTER AGGREGATE name ( type [ , ... ] ) OWNER TO new_owner
-  ALTER AGGREGATE name ( type [ , ... ] ) SET SCHEMA new_schema
-  *)
+  //ALTER AGGREGATE имя ( сигнатура_агр_функции ) RENAME TO новое_имя
+  //ALTER AGGREGATE имя ( сигнатура_агр_функции )
+  //                OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER AGGREGATE имя ( сигнатура_агр_функции ) SET SCHEMA новая_схема
+  //
+  //Здесь сигнатура_агр_функции:
+  //
+  //* |
+  //[ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ] |
+  //[ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ] ] ORDER BY [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ , ... ]
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [],  1);
+  TPar:=AddSQLTokens(stSymbol, TName, '(', [], 4);
+  TPar1:=AddSQLTokens(stSymbol, nil, ')', []);
+  TPar2:=AddSQLTokens(stKeyword, nil, 'ORDER', [], 2);
+  CreateInParamsTree(Self, TPar, [TPar1, TPar2], 100);
+  TPar2:=AddSQLTokens(stKeyword, TPar2, 'BY', []);
+  CreateInParamsTree(Self, TPar2, TPar1, 150);
+
+  TRen:=AddSQLTokens(stKeyword, TPar1, 'RENAME', [], 10);
+  TRen:=AddSQLTokens(stKeyword, TRen, 'TO', []);
+    AddSQLTokens(stIdentificator, TRen, '', [], 11);
+
+  TOwn:=AddSQLTokens(stKeyword, TPar1, 'OWNER', [], 20);
+  TOwn:=AddSQLTokens(stKeyword, TOwn, 'TO', []);
+    AddSQLTokens(stIdentificator, TOwn, '', [], 11);
+
+  TSet:=AddSQLTokens(stKeyword, TPar1, 'SET', [],  30);
+  TSet:=AddSQLTokens(stKeyword, TSet, 'SCHEMA', []);
+    AddSQLTokens(stIdentificator, TSet, '', [], 11);
 end;
 
 procedure TPGSQLAlterAggregate.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FCurParam:=nil;
+    10:FCommand:=pgaacRename;
+    11:FParamValue:=AWord;
+    20:FCommand:=pgaacNewOwner;
+    30:FCommand:=pgaacSetSchema;
+
+    101,
+    102,
+    103,
+    104:begin
+           FCurParam:=Params.AddParam('');
+           case AChild.Tag of
+             101:FCurParam.InReturn:=spvtInput;
+             102:FCurParam.InReturn:=spvtOutput;
+             103:FCurParam.InReturn:=spvtInOut;
+             104:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end;
+    151,
+    152,
+    153,
+    154:begin
+           FCurParam:=Params.AddParam('');
+           FCurParam.PrimaryKey:=true;
+           case AChild.Tag of
+             151:FCurParam.InReturn:=spvtInput;
+             152:FCurParam.InReturn:=spvtOutput;
+             153:FCurParam.InReturn:=spvtInOut;
+             154:FCurParam.InReturn:=spvtVariadic;
+           end;
+         end;
+    105,
+    155:begin
+          if not Assigned(FCurParam) then
+          begin
+            if AChild.Tag = 105 then
+              FCurParam:=Params.AddParam('')
+            else
+            begin
+              FCurParam:=Params.AddParam('');
+              FCurParam.PrimaryKey:=true;
+            end;
+          end;
+          FCurParam.TypeName:=AWord;
+        end;
+    106,
+    156: if Assigned(FCurParam) then
+         begin
+           if FCurParam.Caption = '' then
+           begin
+             FCurParam.Caption:=FCurParam.TypeName;
+             FCurParam.TypeName:=AWord;
+           end
+           else
+             FCurParam.TypeName:=FCurParam.TypeName + AWord;
+         end;
+    107,
+    157:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + AWord;
+    108,
+    158:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + ' ' + AWord;
+    109,
+    110,
+    160,
+    159:FCurParam:=nil;
+  end;
 end;
 
 procedure TPGSQLAlterAggregate.MakeSQL;
 var
-  Result: String;
+  S, S1: String;
 begin
-  Result:='ALTER AGGREGATE';
-  AddSQLCommand(Result);
+  S:='ALTER AGGREGATE '+Name + '(' + InternalMakeAggregateParam(Params, false);
+  S1:=InternalMakeAggregateParam(Params, true);
+  if S1<>'' then S:=S + ' ORDER BY '+S1;
+  S:=S + ')';
+
+  case FCommand of
+    pgaacRename:S:=S + ' RENAME TO ' + FParamValue;
+    pgaacNewOwner:S:=S + ' OWNER TO ' + FParamValue;
+    pgaacSetSchema:S:=S + ' SET SCHEMA ' + FParamValue;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterAggregate.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterAggregate then
+  begin
+    FCommand:=TPGSQLAlterAggregate(ASource).FCommand;
+    FParamValue:=TPGSQLAlterAggregate(ASource).FParamValue;
+  end;
+  inherited Assign(ASource);
+end;
+
+procedure TPGSQLAlterAggregate.Clear;
+begin
+  inherited Clear;
+  FCommand:=pgaacNone;
+  FParamValue:='';
+  FCurParam:=nil;
 end;
 
 { TPGSQLRevoke }
@@ -13657,11 +13900,10 @@ var
 begin
   // DROP TABLESPACE [ IF EXISTS ] tablespace_name
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okTableSpace);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLESPACE', [toFindWordLast]);   //
-  T1:=AddSQLTokens(stKeyword, T, 'IF', [],  -1);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLESPACE', [toFindWordLast]);   //
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [],  -1);
   T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 2);   //
-    T1.AddChildToken(T);
+  T:=AddSQLTokens(stIdentificator, [FSQLTokens, T1], '', [], 2);   //
 end;
 
 procedure TPGSQLDropTablespace.InternalProcessChildToken(
@@ -13675,13 +13917,13 @@ end;
 
 procedure TPGSQLDropTablespace.MakeSQL;
 var
-  Result: String;
+  S: String;
 begin
-  Result:='DROP TABLESPACE ';
+  S:='DROP TABLESPACE ';
   if ooIfExists in Options  then
-    Result:=Result + 'IF EXISTS ';
-  Result:=Result + Name;
-  AddSQLCommand(Result);
+    S:=S + 'IF EXISTS ';
+  S:=S + Name;
+  AddSQLCommand(S);
 end;
 
 { TPGSQLAlterTablespace }
@@ -15882,7 +16124,7 @@ procedure TPGSQLDropRule.InitParserTree;
 var
   T, T1, FSQLTokens: TSQLTokenRecord;
 begin
-  (* DROP RULE [ IF EXISTS ] name ON table [ CASCADE | RESTRICT ] *)
+  // DROP RULE [ IF EXISTS ] name ON table [ CASCADE | RESTRICT ]
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okRule);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'RULE', [toFindWordLast]);
 
@@ -15895,11 +16137,11 @@ begin
   T:=AddSQLTokens(stKeyword, T, 'ON', []);
 
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
-    T1:=AddSQLTokens(stSymbol, T, '.', []);
+    T1:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
     T1:=AddSQLTokens(stIdentificator, T1, '', [], 3);
 
-  T1.AddChildToken(AddSQLTokens(stKeyword, T, 'CASCADE', [],  -2));
-  T1.AddChildToken(AddSQLTokens(stKeyword, T, 'RESTRICT', [], -3));
+  T1.AddChildToken(AddSQLTokens(stKeyword, T, 'CASCADE', [toOptional],  -2));
+  T1.AddChildToken(AddSQLTokens(stKeyword, T, 'RESTRICT', [toOptional], -3));
 end;
 
 procedure TPGSQLDropRule.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -17603,14 +17845,13 @@ procedure TPGSQLCreateRule.InitParserTree;
 var
   T, T1, FSQLTokens, T2, T3, T20, T21, T22, T23, T24, T25, T26: TSQLTokenRecord;
 begin
-(*
-  CREATE [ OR REPLACE ] RULE имя AS ON событие
-      TO имя_таблицы [ WHERE условие ]
-      DO [ ALSO | INSTEAD ] { NOTHING | команда | ( команда ; команда ... ) }
+  //CREATE [ OR REPLACE ] RULE имя AS ON событие
+  //    TO имя_таблицы [ WHERE условие ]
+  //    DO [ ALSO | INSTEAD ] { NOTHING | команда | ( команда ; команда ... ) }
+  //
+  //Здесь допускается событие:
+  //    SELECT | INSERT | UPDATE | DELETE
 
-  Здесь допускается событие:
-      SELECT | INSERT | UPDATE | DELETE
-*)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);            //OR
     T1:=AddSQLTokens(stKeyword, T1, 'REPLACE', [], 1);             //REPLACE
@@ -17657,6 +17898,8 @@ end;
 
 procedure TPGSQLCreateRule.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
+var
+  S: String;
 begin
   case AChild.Tag of
     1:FOrReplase:=true;

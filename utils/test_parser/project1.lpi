@@ -15,7 +15,7 @@
       <OutDir Value="languages"/>
     </i18n>
     <BuildModes>
-      <Item1 Name="Default" Default="True"/>
+      <Item1 Name="default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>

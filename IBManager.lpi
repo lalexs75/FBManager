@@ -1768,7 +1768,7 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="4">
+    <Exceptions Count="5">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
@@ -1781,6 +1781,9 @@
       <Item4>
         <Name Value="RunError(216)"/>
       </Item4>
+      <Item5>
+        <Name Value="EZDatabaseError"/>
+      </Item5>
     </Exceptions>
   </Debugging>
 </CONFIG>

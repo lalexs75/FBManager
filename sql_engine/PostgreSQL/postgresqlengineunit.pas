@@ -6424,8 +6424,10 @@ INSERT — добавить строки в таблицу
 
   //RULE
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateRule, 'CREATE RULE');             //CREATE RULE — создать правило перезаписи
-  //ALTER RULE — изменить определение правила
-  //DROP RULE — удалить правило перезаписи
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterRule, 'ALTER RULE');               //ALTER RULE — изменить определение правила
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropRule, 'DROP RULE');                 //DROP RULE — удалить правило перезаписи
+
+
 
   //INDEX
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
