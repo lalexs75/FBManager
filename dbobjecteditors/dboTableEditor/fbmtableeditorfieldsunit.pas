@@ -48,7 +48,7 @@ type
     fldDelete: TAction;
     fldNew: TAction;
     ActionList1: TActionList;
-    Datasource1: TDatasource;
+    dsFieldList: TDatasource;
     DBMemo1: TDBMemo;
     Label1: TLabel;
     MenuItem1: TMenuItem;
@@ -152,6 +152,7 @@ type
     procedure DoFillEditForm;
     procedure DoEditInsFieldNewTable(AIns:boolean);
     procedure ReNumberFields;
+    procedure DoReorderFields(AFieldNames:TStrings);
   protected
     procedure FieldListRefresh;
     procedure UpdateControls;
@@ -486,6 +487,24 @@ begin
     rxFieldList.Bookmark:=P;
     rxFieldList.EnableControls;
   end;
+end;
+
+procedure TfbmTableEditorFieldsFrame.DoReorderFields(AFieldNames: TStrings);
+var
+  i: Integer;
+  S: String;
+begin
+  for i:=0 to AFieldNames.Count-1 do
+  begin
+    S:=AFieldNames[i];
+    if rxFieldList.Locate('FIELD_NAME', S, []) then
+    begin
+      rxFieldList.Edit;
+      rxFieldListFIELD_NO.AsInteger:=i+1;
+      rxFieldList.Post;
+    end;
+  end;
+  rxFieldList.SortOnFields('FIELD_NO');
 end;
 
 procedure TfbmTableEditorFieldsFrame.FieldListRefresh;
@@ -1042,8 +1061,13 @@ begin
   DoFill;
   if fbmTableEditorFieldOrderForm.ShowModal = mrOk then
   begin
-    (DBObject as TDBTableObject).SetFieldsOrder(fbmTableEditorFieldOrderForm.ListBox1.Items);
-    FieldListRefresh;
+    if DBObject.State = sdboCreate then
+      DoReorderFields(fbmTableEditorFieldOrderForm.ListBox1.Items)
+    else
+    begin
+      (DBObject as TDBTableObject).SetFieldsOrder(fbmTableEditorFieldOrderForm.ListBox1.Items);
+      FieldListRefresh;
+    end;
   end;
   fbmTableEditorFieldOrderForm.Free;
 end;

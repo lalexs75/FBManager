@@ -26,7 +26,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
         Width = 1060
         Align = alClient
         DataField = 'FIELD_DESCRIPTION'
-        DataSource = Datasource1
+        DataSource = dsFieldList
         TabOrder = 0
       end
     end
@@ -495,7 +495,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     FocusColor = clRed
     SelectedColor = clHighlight
     GridLineStyle = psSolid
-    DataSource = Datasource1
+    DataSource = dsFieldList
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook, dgAnyButtonCanSelect]
     PopupMenu = PopupMenu1
     ReadOnly = True
@@ -812,8 +812,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     AfterDelete = rxFieldListAfterDelete
     AfterScroll = rxFieldListAfterScroll
     PacketRecords = 0
-    Left = 80
-    Top = 48
+    Left = 186
+    Top = 257
     object rxFieldListFIELD_NO: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
@@ -1299,10 +1299,10 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       Required = False
     end
   end
-  object Datasource1: TDataSource[5]
+  object dsFieldList: TDataSource[5]
     DataSet = rxFieldList
-    Left = 46
-    Top = 47
+    Left = 152
+    Top = 256
   end
   object PopupMenu1: TPopupMenu[6]
     Images = fbManagerMainForm.ImageListMain
