@@ -116,6 +116,9 @@ type
   { Tfdbm_SynEditorFrame }
 
   Tfdbm_SynEditorFrame = class(TFrame)
+    MenuItem47: TMenuItem;
+    MenuItem49: TMenuItem;
+    optEditors: TAction;
     edtSelectAll: TAction;
     edtDelete: TAction;
     edtCopy: TAction;
@@ -228,6 +231,7 @@ type
     procedure edtSaveExecute(Sender: TObject);
     procedure edtSelectAllExecute(Sender: TObject);
     procedure edtUndoExecute(Sender: TObject);
+    procedure optEditorsExecute(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
     procedure SynCompletion1Execute(Sender: TObject);
     procedure SynCompletion1KeyNextChar(Sender: TObject);
@@ -650,6 +654,11 @@ end;
 procedure Tfdbm_SynEditorFrame.edtUndoExecute(Sender: TObject);
 begin
   TextEditor.Undo;
+end;
+
+procedure Tfdbm_SynEditorFrame.optEditorsExecute(Sender: TObject);
+begin
+  fbManagerMainForm.optEditorsExecute(Sender);
 end;
 
 procedure Tfdbm_SynEditorFrame.PopupMenu1Popup(Sender: TObject);
@@ -1196,6 +1205,7 @@ begin
   ednSetBookmark0.Caption:=sSetBookmarkNum + '0';
   OpenDialog1.Title:=sOpenFile;
   SaveDialog1.Title:=sSaveFile;
+  optEditors.Caption:=sMenuOptEditors;
 end;
 
 procedure Tfdbm_SynEditorFrame.DoSearchReplaceText(AReplace: boolean;

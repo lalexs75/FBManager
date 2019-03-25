@@ -6,7 +6,6 @@
       <Flags>
         <SaveOnlyProjectUnits Value="True"/>
         <LRSInOutputDirectory Value="False"/>
-        <CompatibilityMode Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <AutoCreateForms Value="False"/>

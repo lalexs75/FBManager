@@ -824,6 +824,12 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Action = edtReplace
       OnClick = edtReplaceExecute
     end
+    object MenuItem49: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem47: TMenuItem
+      Action = optEditors
+    end
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
@@ -1090,6 +1096,12 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Caption = 'edtDelete'
       ImageIndex = 26
       OnExecute = edtDeleteExecute
+    end
+    object optEditors: TAction
+      Category = 'Edit'
+      Caption = 'Editor options...'
+      Hint = 'Show editor options...'
+      OnExecute = optEditorsExecute
     end
   end
   object OpenDialog1: TOpenDialog
