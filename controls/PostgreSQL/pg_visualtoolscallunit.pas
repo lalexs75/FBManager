@@ -75,7 +75,7 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
   //Connection pages
      pg_con_MainPageUnit,
      fdbm_cf_LogUnit,
-     fdbm_ShowObjectsUnit, fdbm_DescriptionUnit,
+     fdbm_ShowObjectsUnit, fdbm_DescriptionUnit, fdbm_ssh_ParamsUnit,
   //Object Editors
      fbmTableEditorDataUnit,
      fbmTableEditorFieldsUnit,
@@ -314,7 +314,7 @@ end;
 
 class function TPostgreVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=5;
+  Result:=6;
 end;
 
 class function TPostgreVisualTools.ConnectionDlgPage(
@@ -326,7 +326,8 @@ begin
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
     2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
     3:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
-    4:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine as TSQLEnginePostgre, AOwner);
+    4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
+    5:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine as TSQLEnginePostgre, AOwner);
   else
     Result:=nil;
   end;

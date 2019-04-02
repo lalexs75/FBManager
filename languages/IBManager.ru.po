@@ -1816,6 +1816,10 @@ msgstr "Всего столбцов: %d"
 msgid "Field Dependencies"
 msgstr "Объекты, использующие поле"
 
+#: fbmstrconstunit.sfieldfromnamedselect
+msgid "field from named select %s"
+msgstr "поле из именнованого запроса %s"
+
 #: fbmstrconstunit.sfieldinitialvaluereq
 msgid "For NOT NULL fields you must specify an initial value"
 msgstr "Для полей NOT NULL необходимо указать начальное значение"

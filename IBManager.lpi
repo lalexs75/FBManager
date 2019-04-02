@@ -1743,6 +1743,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgForeignServerUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="connection_frames/fdbm_ssh_paramsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fdbm_ssh_ParamsPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fdbm_ssh_ParamsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -1294,7 +1294,7 @@ begin
         if T.TableType = stitVirtualTable then
         begin
           if T.Fields.Count > 0 then
-            for F in T.Fields do Items.Add(scotField, F.Caption, '', 'field from named select ' + T.TableAlias)
+            for F in T.Fields do Items.Add(scotField, F.Caption, '', Format(sFieldFromNamedSelect, [T.TableAlias]))
           else
           begin
             SQLCommand2:=GetNextSQLCommand(T.TableExpression, FSQLEngine);
@@ -1304,11 +1304,10 @@ begin
               begin
                 for F in TSQLCommandAbstractSelect(SQLCommand2).Fields do
                   if F.RealName <> '' then
-                    Items.Add(scotField, F.RealName, '', 'field from named select ' + T.TableAlias)
+                    Items.Add(scotField, F.RealName, '', Format(sFieldFromNamedSelect, [T.TableAlias]))
                   else
                   if F.Caption <> '' then
-                    Items.Add(scotField, F.Caption, '', 'field from named select ' + T.TableAlias);
-                    //Items.Add(F);
+                    Items.Add(scotField, F.Caption, '', Format(sFieldFromNamedSelect, [T.TableAlias]));
               end;
               SQLCommand2.Free;
             end;

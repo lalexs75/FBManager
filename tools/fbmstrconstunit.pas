@@ -997,6 +997,7 @@ resourcestring
   sOperatorClass                    = 'OperatorClass';
   sOperatorFamily                   = 'OperatorFamily';
   sUserMapping                      = 'UserMapping';
+  sFieldFromNamedSelect             = 'field from named select %s';
 
   sBuildConnectionString            = 'Build connection string';
   sRegistredDatabase                = 'Registred database';
