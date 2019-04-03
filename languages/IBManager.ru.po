@@ -370,7 +370,7 @@ msgstr "Регистронезависимый"
 
 #: fbmstrconstunit.scast
 msgid "Cast"
-msgstr ""
+msgstr "Приведение типа"
 
 #: fbmstrconstunit.schangecount
 msgid "Change count"
@@ -609,6 +609,10 @@ msgstr "Строка подключения"
 #: fbmstrconstunit.sconnectionstringcopied
 msgid "Connection string has been successfully copied to clipboard."
 msgstr "Строка подключения скопирована в буфер обмена."
+
+#: fbmstrconstunit.sconnectviassh
+msgid "Connect via SSH"
+msgstr "Подключаться через SSH"
 
 #: fbmstrconstunit.sconstraint
 msgid "Constraint"
@@ -3446,7 +3450,7 @@ msgstr "Открыть текст запроса из истории в SQL ре
 
 #: fbmstrconstunit.soperator
 msgid "Operator"
-msgstr ""
+msgstr "Оператор"
 
 #: fbmstrconstunit.soperatorclass
 msgid "OperatorClass"
@@ -3515,7 +3519,7 @@ msgstr "Размер страницы"
 
 #: fbmstrconstunit.sparameter
 msgid "Parameter"
-msgstr ""
+msgstr "Параметр"
 
 #: fbmstrconstunit.sparamname
 msgid "Param name"
@@ -4501,6 +4505,26 @@ msgstr "Защита SQL"
 msgid "Source page name"
 msgstr "Имя исходной страницы"
 
+#: fbmstrconstunit.ssshhost
+msgid "SSH Host"
+msgstr "Сервер SSH"
+
+#: fbmstrconstunit.ssshidentifyfile
+msgid "SSH identify file"
+msgstr "Файл лицензии SSH"
+
+#: fbmstrconstunit.ssshpassword
+msgid "SSH password"
+msgstr "Пароль SSH"
+
+#: fbmstrconstunit.ssshport
+msgid "SSH port"
+msgstr "Порт SSH"
+
+#: fbmstrconstunit.ssshuser
+msgid "SSH User"
+msgstr "Пользователь SSH"
+
 #: fbmstrconstunit.sstandart
 msgctxt "fbmstrconstunit.sstandart"
 msgid "Standart"
@@ -5180,7 +5204,7 @@ msgstr "Список пользователей"
 
 #: fbmstrconstunit.susermapping
 msgid "UserMapping"
-msgstr ""
+msgstr "Сопоставление пользователей"
 
 #: fbmstrconstunit.susername
 msgid "UserName       = "
@@ -5210,6 +5234,10 @@ msgstr "Пользователи и роли"
 #: fbmstrconstunit.susersgroups
 msgid "Users/Groups"
 msgstr "Пользователи/Группы"
+
+#: fbmstrconstunit.susesshtunnel
+msgid "Use SSH tunnel"
+msgstr "Использовать SSH тунель"
 
 #: fbmstrconstunit.susetablealisincreatesqlform
 msgid "Use table name as alis in create SQL form"
@@ -5507,4 +5535,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

@@ -707,6 +707,10 @@ msgstr "Pokaż kolor stopki"
 msgid "Show grid color"
 msgstr "Pokaż kolor tabeli"
 
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr ""
+
 #: rxdconst.sshowreporttitle
 msgid "Show report title"
 msgstr "Pokaż tytuł taportu"

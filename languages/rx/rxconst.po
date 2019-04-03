@@ -186,6 +186,10 @@ msgstr ""
 msgid "Error. Expected value for field %s."
 msgstr ""
 
+#: rxconst.srxcloseformvalidatoreditor
+msgid "Rx close form validator editor"
+msgstr ""
+
 #: rxconst.srxlogindlgbtnmore
 msgid "More >>"
 msgstr ""

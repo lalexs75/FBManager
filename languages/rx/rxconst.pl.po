@@ -196,6 +196,10 @@ msgstr "Poprzedni rok|"
 msgid "Error. Expected value for field %s."
 msgstr "Błąd. Spodziewano wartości dla pola %s."
 
+#: rxconst.srxcloseformvalidatoreditor
+msgid "Rx close form validator editor"
+msgstr ""
+
 #: rxconst.srxlogindlgbtnmore
 msgid "More >>"
 msgstr "Więcej >>"

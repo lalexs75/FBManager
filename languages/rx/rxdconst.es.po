@@ -724,6 +724,10 @@ msgstr "Mostrar color del pie"
 msgid "Show grid color"
 msgstr "Mostrar color de la grilla"
 
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr ""
+
 #: rxdconst.sshowreporttitle
 msgid "Show report title"
 msgstr "Mostrar título del reporte"

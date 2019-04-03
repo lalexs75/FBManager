@@ -706,6 +706,10 @@ msgstr "Отображать цвет итогов"
 msgid "Show grid color"
 msgstr "Отображать цвета таблицы"
 
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr "Предварительный просмотр"
+
 #: rxdconst.sshowreporttitle
 msgid "Show report title"
 msgstr "Отображать заголовок отчёта"

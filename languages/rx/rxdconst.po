@@ -698,6 +698,10 @@ msgstr ""
 msgid "Show grid color"
 msgstr ""
 
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr ""
+
 #: rxdconst.sshowreporttitle
 msgid "Show report title"
 msgstr ""

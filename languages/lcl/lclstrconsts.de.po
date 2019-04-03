@@ -4,13 +4,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-12-10 16:47+0100\n"
+"PO-Revision-Date: 2018-07-30 13:15+0200\n"
 "Last-Translator: Swen Heinig <swen@heinig.email>\n"
 "Language-Team: Deutsch <lazarus@miraclec.com>\n"
 "MIME-Version: 1.0\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Language: de_DE\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 msgid "Browser \"%s\" not executable."
@@ -234,11 +234,11 @@ msgstr "&Verzeichnis"
 
 #: lclstrconsts.rsdocopy
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 #: lclstrconsts.rsdopaste
 msgid "Paste"
-msgstr ""
+msgstr "Einfügen"
 
 #: lclstrconsts.rsduplicateiconformat
 msgid "Duplicate icon format."
@@ -364,7 +364,7 @@ msgstr "Form"
 
 #: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
 msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
-msgstr ""
+msgstr "Die Formular-Ressource %s wurde nicht gefunden. Für Formulare ohne Ressourcen muss der Constructor CreateNew verwendet werden. Siehe die globale Variable \"RequireDerivedFormResource\"."
 
 #: lclstrconsts.rsformstreamingerror
 msgid "Form streaming \"%s\" error: %s"
@@ -424,11 +424,11 @@ msgstr ""
 
 #: lclstrconsts.rsgridhasnocols
 msgid "Cannot insert rows into a grid when it has no columns"
-msgstr ""
+msgstr "Kann keine Zeilen in ein Grid einfügen, wenn es keine Spalten hat."
 
 #: lclstrconsts.rsgridhasnorows
 msgid "Cannot insert columns into a grid when it has no rows"
-msgstr ""
+msgstr "Kann keine Spalten in ein Grid einfügen, wenn es keine Zeilen hat"
 
 #: lclstrconsts.rsgridindexoutofrange
 msgid "Grid index out of range."
@@ -1150,7 +1150,7 @@ msgstr "Kann abgeschaltetes oder unsichtbares Fenster nicht fokussieren"
 
 #: lclstrconsts.scannotsetdesigntimeppi
 msgid "Cannot set design time PPI."
-msgstr ""
+msgstr "Kann die Entwurfszeit-PPI nicht festlegen."
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
@@ -1186,7 +1186,7 @@ msgstr "Ungültiger Bildlistenindex"
 
 #: lclstrconsts.smaskeditnomatch
 msgid "The current text does not match the specified mask."
-msgstr ""
+msgstr "Der aktuelle Text stimmt nicht mit der angegebenen Maske überein."
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1206,7 +1206,7 @@ msgstr "Alt+"
 
 #: lclstrconsts.smkcbksp
 msgid "BkSp"
-msgstr ""
+msgstr "Rück"
 
 #: lclstrconsts.smkcctrl
 msgid "Ctrl+"
@@ -1254,11 +1254,11 @@ msgstr ""
 
 #: lclstrconsts.smkcpgdn
 msgid "PgDn"
-msgstr ""
+msgstr "Bild ↓"
 
 #: lclstrconsts.smkcpgup
 msgid "PgUp"
-msgstr ""
+msgstr "Bild ↑"
 
 #: lclstrconsts.smkcright
 msgctxt "lclstrconsts.smkcright"
@@ -1267,11 +1267,11 @@ msgstr "Rechts"
 
 #: lclstrconsts.smkcshift
 msgid "Shift+"
-msgstr ""
+msgstr "Umsch+"
 
 #: lclstrconsts.smkcspace
 msgid "Space"
-msgstr ""
+msgstr "Leer"
 
 #: lclstrconsts.smkctab
 msgctxt "lclstrconsts.smkctab"
@@ -1328,10 +1328,14 @@ msgid "%s bytes"
 msgstr "%s Bytes"
 
 #: lclstrconsts.sshellctrlsinvalidpath
+#, fuzzy
+#| msgid ""
+#| "Invalid pathname:\n"
+#| "\"%s\"\n"
 msgctxt "lclstrconsts.sshellctrlsinvalidpath"
 msgid ""
 "Invalid pathname:\n"
-"\"%s\"\n"
+"\"%s\""
 msgstr ""
 "Ungültiger Pfadname:\n"
 "\"%s\"\n"
@@ -1341,14 +1345,18 @@ msgid ""
 "Invalid relative pathname:\n"
 "\"%s\"\n"
 "in relation to rootpath:\n"
-"\"%s\"\n"
+"\"%s\""
 msgstr ""
 
 #: lclstrconsts.sshellctrlsinvalidroot
+#, fuzzy
+#| msgid ""
+#| "Invalid pathname:\n"
+#| "\"%s\"\n"
 msgctxt "lclstrconsts.sshellctrlsinvalidroot"
 msgid ""
 "Invalid pathname:\n"
-"\"%s\"\n"
+"\"%s\""
 msgstr ""
 "Ungültiger Pfadname:\n"
 "\"%s\"\n"
@@ -1368,7 +1376,7 @@ msgstr "Name"
 #: lclstrconsts.sshellctrlsselecteditemdoesnotexists
 msgid ""
 "The selected item does not exist on disk:\n"
-"\"%s\"\n"
+"\"%s\""
 msgstr ""
 
 #: lclstrconsts.sshellctrlssize

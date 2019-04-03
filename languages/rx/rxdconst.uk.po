@@ -712,6 +712,10 @@ msgstr "Показати  колір пісумку"
 msgid "Show grid color"
 msgstr "Показати колір таблиці"
 
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr ""
+
 #: rxdconst.sshowreporttitle
 msgid "Show report title"
 msgstr "Показати заголовок звіту"

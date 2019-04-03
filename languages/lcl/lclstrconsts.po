@@ -1,8 +1,5 @@
 msgid ""
-msgstr ""
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 msgid "Browser \"%s\" not executable."
@@ -212,7 +209,6 @@ msgid "Delete record?"
 msgstr ""
 
 #: lclstrconsts.rsdeleterecordhint
-msgctxt "lclstrconsts.rsdeleterecordhint"
 msgid "Delete"
 msgstr ""
 
@@ -326,7 +322,6 @@ msgid "File information"
 msgstr ""
 
 #: lclstrconsts.rsfilter
-msgctxt "lclstrconsts.rsfilter"
 msgid "(filter)"
 msgstr ""
 
@@ -638,7 +633,6 @@ msgid "Info Text"
 msgstr ""
 
 #: lclstrconsts.rsinsertrecordhint
-msgctxt "lclstrconsts.rsinsertrecordhint"
 msgid "Insert"
 msgstr ""
 
@@ -756,7 +750,6 @@ msgid "Menu Bar"
 msgstr ""
 
 #: lclstrconsts.rsmenucolorcaption
-msgctxt "lclstrconsts.rsmenucolorcaption"
 msgid "Menu"
 msgstr ""
 
@@ -806,7 +799,6 @@ msgid "Navy"
 msgstr ""
 
 #: lclstrconsts.rsnextrecordhint
-msgctxt "lclstrconsts.rsnextrecordhint"
 msgid "Next"
 msgstr ""
 
@@ -859,7 +851,6 @@ msgid "%s%sPress OK to ignore and risk data corruption.%sPress Abort to kill the
 msgstr ""
 
 #: lclstrconsts.rspriorrecordhint
-msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr ""
 
@@ -1045,17 +1036,14 @@ msgid "Tagged Image File Format"
 msgstr ""
 
 #: lclstrconsts.rstpanelaccessibilitydescription
-msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
 msgid "Panel"
 msgstr ""
 
 #: lclstrconsts.rstsplitteraccessibilitydescription
-msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
 msgid "A grip to control how much size to give two parts of an area"
 msgstr ""
 
 #: lclstrconsts.rsttreeviewaccessibilitydescription
-msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
 msgid "A tree of items"
 msgstr ""
 
@@ -1208,12 +1196,10 @@ msgid "Del"
 msgstr ""
 
 #: lclstrconsts.smkcdown
-msgctxt "lclstrconsts.smkcdown"
 msgid "Down"
 msgstr ""
 
 #: lclstrconsts.smkcend
-msgctxt "lclstrconsts.smkcend"
 msgid "End"
 msgstr ""
 
@@ -1226,7 +1212,6 @@ msgid "Esc"
 msgstr ""
 
 #: lclstrconsts.smkchome
-msgctxt "lclstrconsts.smkchome"
 msgid "Home"
 msgstr ""
 
@@ -1235,7 +1220,6 @@ msgid "Ins"
 msgstr ""
 
 #: lclstrconsts.smkcleft
-msgctxt "lclstrconsts.smkcleft"
 msgid "Left"
 msgstr ""
 
@@ -1252,7 +1236,6 @@ msgid "PgUp"
 msgstr ""
 
 #: lclstrconsts.smkcright
-msgctxt "lclstrconsts.smkcright"
 msgid "Right"
 msgstr ""
 
@@ -1265,12 +1248,10 @@ msgid "Space"
 msgstr ""
 
 #: lclstrconsts.smkctab
-msgctxt "lclstrconsts.smkctab"
 msgid "Tab"
 msgstr ""
 
 #: lclstrconsts.smkcup
-msgctxt "lclstrconsts.smkcup"
 msgid "Up"
 msgstr ""
 
