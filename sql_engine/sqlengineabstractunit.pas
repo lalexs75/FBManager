@@ -760,8 +760,20 @@ type
     procedure SetConnected(AValue: boolean);
   public
     constructor Create(AOwner:TSQLEngineAbstract); virtual;
+    destructor Destroy; override;
     property Connected:boolean read GetConnected write SetConnected;
     property Owner:TSQLEngineAbstract read FOwner;
+  end;
+
+  { TSQLEngineConnectionPlugins }
+
+  TSQLEngineConnectionPlugins = class
+  private
+    FList:TFPList;
+    procedure Clear;
+  public
+    constructor Create;
+    destructor Destroy; override;
   end;
 
   { TSQLEngineAbstract }
@@ -770,6 +782,7 @@ type
   private
     FConnected: Boolean;
     FAliasName: string;
+    FConnectionPlugins: TSQLEngineConnectionPlugins;
     FDatabaseID: integer;
     FDataBaseName: string;
     FDescription: string;
@@ -905,6 +918,7 @@ type
     property KeyTypes:TKeywordList read FKeyTypes;
     property ImageIndex:integer read GetImageIndex;
     property SQLEngileFeatures:TSQLEngileFeatures read FSQLEngileFeatures;
+    property ConnectionPlugins:TSQLEngineConnectionPlugins read FConnectionPlugins;
     //
     property OnNewObjectByKind:TObjectByKind read FOnNewObjectByKind write FOnNewObjectByKind;
     property OnEditObject:TDBObjectEvent read FOnEditObject write FOnEditObject;
@@ -953,6 +967,32 @@ begin
   end;
 end;
 
+{ TSQLEngineConnectionPlugins }
+
+procedure TSQLEngineConnectionPlugins.Clear;
+var
+  P: TSQLEngineConnectionPlugin;
+begin
+  while FList.Count>0 do
+  begin
+    P:=TSQLEngineConnectionPlugin(FList[0]);
+    P.Free;
+  end;
+end;
+
+constructor TSQLEngineConnectionPlugins.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TSQLEngineConnectionPlugins.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
 { TSQLEngineConnectionPlugin }
 
 function TSQLEngineConnectionPlugin.GetConnected: boolean;
@@ -969,6 +1009,15 @@ constructor TSQLEngineConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
 begin
   inherited Create;
   FOwner:=AOwner;
+  if Assigned(FOwner) then
+    FOwner.FConnectionPlugins.FList.Add(Self);
+end;
+
+destructor TSQLEngineConnectionPlugin.Destroy;
+begin
+  if Assigned(FOwner) then
+    FOwner.FConnectionPlugins.FList.Remove(Self);
+  inherited Destroy;
 end;
 
 { TDBTableStatistic }
@@ -1617,13 +1666,14 @@ constructor TSQLEngineAbstract.Create;
 begin
   inherited Create;
   FGroups:=TDBObjectsList.Create(true);
-
+  FConnectionPlugins:=TSQLEngineConnectionPlugins.Create;
   InternalInitEngine;
 end;
 
 destructor TSQLEngineAbstract.Destroy;
 begin
   ClearQueryControlList;
+  FreeAndNil(FConnectionPlugins);
   FreeAndNil(FSQLEngineLogOptions);
   FreeAndNil(FQueryControlList);
   FreeAndNil(FKeywordsList);
