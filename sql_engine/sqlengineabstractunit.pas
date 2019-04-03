@@ -750,6 +750,20 @@ type
     property Param[AIndex:integer]:TParam read GetParam;
   end;
 
+  { TSQLEngineConnectionPlugin }
+
+  TSQLEngineConnectionPlugin = class
+  private
+    FOwner:TSQLEngineAbstract;
+  protected
+    function GetConnected: boolean;
+    procedure SetConnected(AValue: boolean);
+  public
+    constructor Create(AOwner:TSQLEngineAbstract); virtual;
+    property Connected:boolean read GetConnected write SetConnected;
+    property Owner:TSQLEngineAbstract read FOwner;
+  end;
+
   { TSQLEngineAbstract }
 
   TSQLEngineAbstract = class
@@ -937,6 +951,24 @@ begin
     Result:=false;
     raise Exception.Create('ExecSQLScriptEx');
   end;
+end;
+
+{ TSQLEngineConnectionPlugin }
+
+function TSQLEngineConnectionPlugin.GetConnected: boolean;
+begin
+  Result:=false;
+end;
+
+procedure TSQLEngineConnectionPlugin.SetConnected(AValue: boolean);
+begin
+
+end;
+
+constructor TSQLEngineConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
+begin
+  inherited Create;
+  FOwner:=AOwner;
 end;
 
 { TDBTableStatistic }

@@ -59,6 +59,7 @@ type
   end;
 
 implementation
+uses fbmStrConstUnit;
 
 {$R *.lfm}
 
@@ -68,7 +69,14 @@ procedure Tfdbm_ssh_ParamsPage.CheckBox1Change(Sender: TObject);
 begin
   Label1.Enabled:=CheckBox1.Checked;
   Edit1.Enabled:=CheckBox1.Checked;
-  Label1.Enabled:=CheckBox1.Checked;
+  Label2.Enabled:=CheckBox1.Checked;
+  Edit2.Enabled:=CheckBox1.Checked;
+  Label3.Enabled:=CheckBox1.Checked;
+  Edit3.Enabled:=CheckBox1.Checked;
+  RadioButton1.Enabled:=CheckBox1.Checked;
+  Edit4.Enabled:=CheckBox1.Checked and RadioButton1.Checked;
+  RadioButton2.Enabled:=CheckBox1.Checked;
+  FileNameEdit1.Enabled:=CheckBox1.Checked and RadioButton2.Checked;
 end;
 
 procedure Tfdbm_ssh_ParamsPage.InitFrame;
@@ -83,12 +91,16 @@ begin
   FSQLEngine:=ASQLEngine;
 
   CheckBox1Change(nil);
-  //CheckBox3.Visible:=ASQLEngine is TSQLEnginePostgre;
 end;
 
 procedure Tfdbm_ssh_ParamsPage.Localize;
 begin
-  inherited Localize;
+  CheckBox1.Caption:=sUseSSHTunnel;
+  Label1.Caption:=sSSHHost;
+  Label2.Caption:=sSSHPort;
+  Label3.Caption:=sSSHUser;
+  RadioButton1.Caption:=sSSHPassword;
+  RadioButton2.Caption:=sSSHIdentifyFile;
 end;
 
 procedure Tfdbm_ssh_ParamsPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
@@ -103,17 +115,18 @@ end;
 
 function Tfdbm_ssh_ParamsPage.PageName: string;
 begin
-  Result:='Connect via SSH';
+  Result:=sConnectViaSSH;
 end;
 
 function Tfdbm_ssh_ParamsPage.Validate: boolean;
 begin
-  Result:=inherited Validate;
+  Result:=true;
 end;
 
 function Tfdbm_ssh_ParamsPage.TestConnection: boolean;
 begin
-  Result:=inherited TestConnection;
+  { TODO : Необходимо реализовать метод проверки подключения через SSH }
+  Result:=true;
 end;
 
 end.

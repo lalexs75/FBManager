@@ -184,6 +184,14 @@ resourcestring
   sApplyScript                      = 'Apply script';
   sServerName1                      = 'Server name';
   sConnect                          = 'Connect';
+  sConnectViaSSH                    = 'Connect via SSH';
+  sUseSSHTunnel                     = 'Use SSH tunnel';
+  sSSHHost                          = 'SSH Host';
+  sSSHPort                          = 'SSH port';
+  sSSHUser                          = 'SSH User';
+  sSSHPassword                      = 'SSH password';
+  sSSHIdentifyFile                  = 'SSH identify file';
+
   sUserList                         = 'User list';
   sAddUserHint                      = 'Add user to server user list';
   sEditUserInList                   = 'Edit user in list';
