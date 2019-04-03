@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
   ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, pgTypes,
-  SQLEngineInternalToolsUnit;
+  SQLEngineInternalToolsUnit, SSHConnectionUnit;
 
 
 const
@@ -857,6 +857,7 @@ type
     FPGConnection: TZConnection;
     FPGSysDB: TZConnection; //Connection to system 'postgres' database
     FServerVersion: TPGServerVersion;
+    FSSHConnectionPlugin: TSSHConnectionPlugin;
   private
     //Для ускорения работы
     FIDTypeTrigger:integer; //Переменная для привязки типа функции-тригера к данным в БД
@@ -2745,6 +2746,7 @@ begin
   inherited Create;
   FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint];
   FSQLCommentOnClass:=TPGSQLCommentOn;
+  FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
   DoInitPGEngine;
 end;
 

@@ -34,11 +34,11 @@ type
 
   Tfdbm_ssh_ParamsPage = class(TConnectionDlgPage)
     CheckBox1: TCheckBox;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    FileNameEdit1: TFileNameEdit;
+    edtHostName: TEdit;
+    edtPort: TEdit;
+    edtUser: TEdit;
+    edtPassword: TEdit;
+    edtIdentifyFile: TFileNameEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -68,15 +68,15 @@ uses fbmStrConstUnit;
 procedure Tfdbm_ssh_ParamsPage.CheckBox1Change(Sender: TObject);
 begin
   Label1.Enabled:=CheckBox1.Checked;
-  Edit1.Enabled:=CheckBox1.Checked;
+  edtHostName.Enabled:=CheckBox1.Checked;
   Label2.Enabled:=CheckBox1.Checked;
-  Edit2.Enabled:=CheckBox1.Checked;
+  edtPort.Enabled:=CheckBox1.Checked;
   Label3.Enabled:=CheckBox1.Checked;
-  Edit3.Enabled:=CheckBox1.Checked;
+  edtUser.Enabled:=CheckBox1.Checked;
   RadioButton1.Enabled:=CheckBox1.Checked;
-  Edit4.Enabled:=CheckBox1.Checked and RadioButton1.Checked;
+  edtPassword.Enabled:=CheckBox1.Checked and RadioButton1.Checked;
   RadioButton2.Enabled:=CheckBox1.Checked;
-  FileNameEdit1.Enabled:=CheckBox1.Checked and RadioButton2.Checked;
+  edtIdentifyFile.Enabled:=CheckBox1.Checked and RadioButton2.Checked;
 end;
 
 procedure Tfdbm_ssh_ParamsPage.InitFrame;

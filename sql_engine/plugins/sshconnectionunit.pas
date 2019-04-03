@@ -31,13 +31,26 @@ type
   { TSSHConnectionPlugin }
 
   TSSHConnectionPlugin = class(TSQLEngineConnectionPlugin)
+  private
+    FHost: string;
+    FIdentifyFile: string;
+    FPassword: string;
+    FPort: integer;
+    FUserName: string;
   protected
     FSSHModule:TProcessUTF8;
-    function GetConnected: boolean;
-    procedure SetConnected(AValue: boolean);
+    function GetConnected: boolean; override;
+    procedure SetConnected(AValue: boolean); override;
+    procedure InternalLoad(); override;
+    procedure InternalSave(); override;
   public
     constructor Create(AOwner:TSQLEngineAbstract); override;
     destructor Destroy; override;
+    property Host:string read FHost write FHost;
+    property Port:integer read FPort write FPort;
+    property UserName:string read FUserName write FUserName;
+    property Password:string read FPassword write FPassword;
+    property IdentifyFile:string read FIdentifyFile write FIdentifyFile;
   end;
 
 implementation
@@ -53,6 +66,16 @@ end;
 procedure TSSHConnectionPlugin.SetConnected(AValue: boolean);
 begin
 
+end;
+
+procedure TSSHConnectionPlugin.InternalLoad();
+begin
+  inherited InternalLoad();
+end;
+
+procedure TSSHConnectionPlugin.InternalSave();
+begin
+  inherited InternalSave();
 end;
 
 constructor TSSHConnectionPlugin.Create(AOwner: TSQLEngineAbstract);

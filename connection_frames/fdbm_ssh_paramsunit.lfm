@@ -27,7 +27,7 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Caption = 'SSH Host'
     ParentColor = False
   end
-  object Edit1: TEdit[2]
+  object edtHostName: TEdit[2]
     AnchorSideLeft.Control = Label1
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
@@ -40,11 +40,10 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 1
-    Text = 'Edit1'
   end
   object Label2: TLabel[3]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Control = edtHostName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 19
@@ -54,7 +53,7 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Caption = 'SSH port'
     ParentColor = False
   end
-  object Edit2: TEdit[4]
+  object edtPort: TEdit[4]
     AnchorSideLeft.Control = Label2
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
@@ -67,11 +66,10 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 2
-    Text = 'Edit2'
   end
   object Label3: TLabel[5]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Control = edtPort
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 19
@@ -81,7 +79,7 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Caption = 'SSH User'
     ParentColor = False
   end
-  object Edit3: TEdit[6]
+  object edtUser: TEdit[6]
     AnchorSideLeft.Control = Label3
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
@@ -94,11 +92,10 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 3
-    Text = 'Edit3'
   end
   object RadioButton1: TRadioButton[7]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Control = edtUser
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
@@ -113,7 +110,7 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
   end
   object RadioButton2: TRadioButton[8]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit4
+    AnchorSideTop.Control = edtPassword
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
@@ -124,7 +121,7 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     OnChange = CheckBox1Change
     TabOrder = 5
   end
-  object FileNameEdit1: TFileNameEdit[9]
+  object edtIdentifyFile: TFileNameEdit[9]
     AnchorSideLeft.Control = RadioButton2
     AnchorSideTop.Control = RadioButton2
     AnchorSideTop.Side = asrBottom
@@ -134,7 +131,6 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Height = 31
     Top = 316
     Width = 392
-    FileName = 'FileNameEdit1'
     FilterIndex = 0
     HideDirectories = False
     ButtonWidth = 23
@@ -144,9 +140,8 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     MaxLength = 0
     Spacing = 0
     TabOrder = 6
-    Text = 'FileNameEdit1'
   end
-  object Edit4: TEdit[10]
+  object edtPassword: TEdit[10]
     AnchorSideLeft.Control = RadioButton1
     AnchorSideTop.Control = RadioButton1
     AnchorSideTop.Side = asrBottom
@@ -159,6 +154,5 @@ inherited fdbm_ssh_ParamsPage: Tfdbm_ssh_ParamsPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 7
-    Text = 'Edit4'
   end
 end

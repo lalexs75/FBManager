@@ -754,15 +754,19 @@ type
 
   TSQLEngineConnectionPlugin = class
   private
+    FEnabled: boolean;
     FOwner:TSQLEngineAbstract;
   protected
-    function GetConnected: boolean;
-    procedure SetConnected(AValue: boolean);
+    function GetConnected: boolean; virtual;
+    procedure SetConnected(AValue: boolean); virtual;
+    procedure InternalLoad(); virtual;
+    procedure InternalSave(); virtual;
   public
     constructor Create(AOwner:TSQLEngineAbstract); virtual;
     destructor Destroy; override;
     property Connected:boolean read GetConnected write SetConnected;
     property Owner:TSQLEngineAbstract read FOwner;
+    property Enabled:boolean read FEnabled write FEnabled;
   end;
 
   { TSQLEngineConnectionPlugins }
@@ -1001,6 +1005,16 @@ begin
 end;
 
 procedure TSQLEngineConnectionPlugin.SetConnected(AValue: boolean);
+begin
+
+end;
+
+procedure TSQLEngineConnectionPlugin.InternalLoad();
+begin
+
+end;
+
+procedure TSQLEngineConnectionPlugin.InternalSave();
 begin
 
 end;
