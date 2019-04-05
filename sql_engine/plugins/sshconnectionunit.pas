@@ -69,7 +69,7 @@ procedure TSSHConnectionPlugin.InternalBuildCommand;
 var
   S: String;
 begin
-  S:=Format('%s -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
+  S:=Format('%s -t -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
   FSSHModule.CommandLine:=S; //cmdSSH + ' -T -L '+IntToStr(Owner.RemotePort)+':'+FHost+':'+IntToStr() FPort+' alexs@localhost';
 end;
 
@@ -117,11 +117,11 @@ procedure TSSHConnectionPlugin.InternalSave;
 begin
   inherited InternalSave;
 
-  LoadVariable('Host', FHost);
-  LoadVariable('Port', IntToStr(FPort));
-  LoadVariable('UserName', FUserName);
-  LoadVariable('Password', FPassword);
-  LoadVariable('IdentifyFile', FIdentifyFile);
+  SaveVariable('Host', FHost);
+  SaveVariable('Port', IntToStr(FPort));
+  SaveVariable('UserName', FUserName);
+  SaveVariable('Password', FPassword);
+  SaveVariable('IdentifyFile', FIdentifyFile);
 end;
 
 constructor TSSHConnectionPlugin.Create(AOwner: TSQLEngineAbstract);

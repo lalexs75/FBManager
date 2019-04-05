@@ -34,7 +34,7 @@ const
   LM_PREF_CHANGE_PARMAS      = LM_EDITOR_CHANGE_PARMAS + 1; //Изменение параметров среды
   LM_OBJECT_TEMPLATE_CHANGE  = LM_PREF_CHANGE_PARMAS + 1;   //Изменение шаблонов объектов
   LM_NOTIFY_OBJECT_DELETE    = LM_OBJECT_TEMPLATE_CHANGE + 1;   //Сообщение об удалении объекта БД
-  ConfDBVers                 = 1;
+  ConfDBVers                 = 2;
 
 
   sFBMConfDirName         = '.fbm';

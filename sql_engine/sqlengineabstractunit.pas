@@ -756,6 +756,7 @@ type
   private
     FEnabled: boolean;
     FOwner:TSQLEngineAbstract;
+    FDS:TDataSet;
   protected
     function GetConnected: boolean; virtual;
     procedure SetConnected(AValue: boolean); virtual;
@@ -783,6 +784,8 @@ type
   public
     constructor Create;
     destructor Destroy; override;
+    procedure Load(AData:TDataSet);
+    procedure Save(AData:TDataSet);
     function FindPlugin(AClass:TSQLEngineConnectionPluginClass):TSQLEngineConnectionPlugin;
     property Count:Integer read GetCount;
     property Item[AIndex:Integer]:TSQLEngineConnectionPlugin read GetItem; default;
@@ -954,7 +957,7 @@ var
 function ExecSQLScript(Line:string; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 function ExecSQLScriptEx(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging, rxmemds;
+uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging, rxmemds, Variants;
 
 
 function ExecSQLScript(Line: string; const ExecParams: TSqlExecParams;
@@ -1021,6 +1024,34 @@ begin
   inherited Destroy;
 end;
 
+procedure TSQLEngineConnectionPlugins.Load(AData: TDataSet);
+var
+  P: TSQLEngineConnectionPlugin;
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+  begin
+    P:=TSQLEngineConnectionPlugin(FList[0]);
+    P.FDS:=AData;
+    P.InternalLoad;
+    P.FDS:=nil;
+  end;
+end;
+
+procedure TSQLEngineConnectionPlugins.Save(AData: TDataSet);
+var
+  P: TSQLEngineConnectionPlugin;
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+  begin
+    P:=TSQLEngineConnectionPlugin(FList[0]);
+    P.FDS:=AData;
+    P.InternalSave;
+    P.FDS:=nil;
+  end;
+end;
+
 function TSQLEngineConnectionPlugins.FindPlugin(
   AClass: TSQLEngineConnectionPluginClass): TSQLEngineConnectionPlugin;
 var
@@ -1055,19 +1086,33 @@ end;
 
 procedure TSQLEngineConnectionPlugin.InternalSave;
 begin
-  LoadVariable('Enabled', IntToStr(Ord(FEnabled)));
+  SaveVariable('Enabled', IntToStr(Ord(FEnabled)));
 end;
 
 function TSQLEngineConnectionPlugin.LoadVariable(AVariableName,
   ADefValue: string): string;
 begin
-  Result:='';
+  Result:=ADefValue;
+  if not Assigned(FDS) then Exit;
+  if FDS.Locate('db_database_id;db_connection_plugin_data_class_type;db_connection_plugin_data_variable_name', VarArrayOf([Owner.DatabaseID, ClassName, AVariableName]), []) then
+    Result:=FDS.FieldByName('db_connection_plugin_data_variable_value').AsString;
 end;
 
 procedure TSQLEngineConnectionPlugin.SaveVariable(AVariableName, AValue: string
   );
 begin
-  //
+  if not Assigned(FDS) then Exit;
+  if not FDS.Locate('db_database_id;db_connection_plugin_data_class_type;db_connection_plugin_data_variable_name', VarArrayOf([Owner.DatabaseID, ClassName, AVariableName]), []) then
+  begin
+    FDS.Append;
+    FDS.FieldByName('db_database_id').AsInteger:=Owner.DatabaseID;
+    FDS.FieldByName('db_connection_plugin_data_class_type').AsString:=ClassName;
+    FDS.FieldByName('db_connection_plugin_data_variable_name').AsString:=AVariableName;
+  end
+  else
+    FDS.Edit;
+  FDS.FieldByName('db_connection_plugin_data_variable_value').AsString:=AValue;
+  FDS.Post;
 end;
 
 constructor TSQLEngineConnectionPlugin.Create(AOwner: TSQLEngineAbstract);

@@ -177,7 +177,7 @@ type
     RecentSQLScrip:TRecentFiles;
 
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
-    constructor Load(aOwner:TTreeNode; ADB:TDataSet);
+    constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);
     destructor Destroy; override;
     procedure WriteLog(FileName, LogString:string);
     procedure Save;
@@ -688,9 +688,10 @@ begin
   MakeSQLHistoryTable;
 end;
 
-constructor TDataBaseRecord.Load(aOwner: TTreeNode; ADB: TDataSet);
+constructor TDataBaseRecord.Load(aOwner: TTreeNode; ADB, ADBPlugins: TDataSet);
 var
   SQLEngineName: String;
+  i: Integer;
 begin
   inherited CreateObject(aOwner, Self, nil);
   InitInternalObjects;
@@ -700,6 +701,9 @@ begin
   if Assigned(FSQLEngine) then
   begin
     FSQLEngine.Load(ADB);
+    for i:=0 to FSQLEngine.ConnectionPlugins.Count-1 do
+      FSQLEngine.ConnectionPlugins.Load(ADBPlugins);
+
     Caption:=FSQLEngine.AliasName;
     FSortOrder:=ADB.FieldByName('db_database_sort_order').AsInteger;
   end
@@ -753,6 +757,11 @@ begin
     SQLEngine.DatabaseID:=UserDBModule.GetLastID;
 
   UserDBModule.quDatabasesItem.Close;
+
+  UserDBModule.quConnectionPlugins.ParamByName('db_database_id').AsInteger:=SQLEngine.DatabaseID;
+  UserDBModule.quConnectionPlugins.Open;
+  FSQLEngine.ConnectionPlugins.Save(UserDBModule.quConnectionPlugins);
+  UserDBModule.quConnectionPlugins.Close;
 
   //UserDBModule.quDatabasesItemdb_database_id,
 end;

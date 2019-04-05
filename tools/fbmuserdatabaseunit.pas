@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, SynEdit,
-  ZMacroQuery, ZConnection, ZSqlProcessor, ZDataset, ZSqlUpdate,
+  ZMacroQuery, RxTextHolder, ZConnection, ZSqlProcessor, ZDataset, ZSqlUpdate,
   ibmanagertypesunit, IniFiles, LCLType, db;
 
 const
@@ -38,6 +38,11 @@ type
   { TUserDBModule }
 
   TUserDBModule = class(TDataModule)
+    quConnectionPluginsdb_connection_plugin_data_class_type: TStringField;
+    quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField;
+    quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField;
+    quConnectionPluginsdb_database_id: TLargeintField;
+    UpdDB2: TZSQLProcessor;
     quOldDatabases: TZQuery;
     quDatabasesItem: TZQuery;
     quDatabasesdb_database_authentication_type: TStringField;
@@ -179,6 +184,7 @@ type
     quSQLFolders: TZQuery;
     quSQLPages: TZQuery;
     quSQLPagesUpdSO: TZQuery;
+    quConnectionPlugins: TZQuery;
     ZReadOnlyQuery1: TZReadOnlyQuery;
     usFolders: TZUpdateSQL;
     usDatabases: TZUpdateSQL;
@@ -193,6 +199,7 @@ type
     usSQLHistory: TZUpdateSQL;
     usSQLFolders: TZUpdateSQL;
     usSQLPages: TZUpdateSQL;
+    usConnectionPlugins: TZUpdateSQL;
     procedure DataModuleDestroy(Sender: TObject);
   private
     procedure SystemVariablesLoad;
@@ -448,7 +455,9 @@ end;
 
 procedure TUserDBModule.InternalUpdate2;
 begin
-
+  UserDB.Connect;
+  UpdDB2.Execute;
+  UserDB.Disconnect;
 end;
 
 procedure TUserDBModule.ImportDataBaseList;

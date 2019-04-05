@@ -13,6 +13,7 @@ object UserDBModule: TUserDBModule
       'AutoEncodeStrings='
       'codepage=UTF-8'
     )
+    Connected = True
     DesignConnection = True
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
@@ -148,6 +149,17 @@ object UserDBModule: TUserDBModule
       '  sql_editors_history_sql_plan BLOB /* План запроса */,'
       ' CONSTRAINT fk_sql_editors_history_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
       ');'
+      ''
+      'CREATE TABLE db_connection_plugin_data('
+      '/* Информация подключаемых модулей */'
+      '  db_database_id INTEGER /* ID базы данных */,'
+      '  db_connection_plugin_data_class_type VARCHAR(255) /* Тип плагина */,'
+      '  db_connection_plugin_data_variable_name VARCHAR(150) /* Имя переменной */,'
+      '  db_connection_plugin_data_variable_value VARCHAR(255) /* Значение переменной */,'
+      ' PRIMARY KEY (db_database_id, db_connection_plugin_data_class_type, db_connection_plugin_data_variable_name)'
+      ' CONSTRAINT fk_db_connection_plugin_data_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
+      ');'
+      ''
       'COMMIT;'
     )
     Connection = UserDB
@@ -1199,15 +1211,15 @@ object UserDBModule: TUserDBModule
   end
   object ZUpdateSQL4: TZUpdateSQL
     UseSequenceFieldForRefreshSQL = False
-    Left = 240
-    Top = 504
+    Left = 232
+    Top = 536
   end
   object ZQuery4: TZQuery
     Connection = UserDB
     UpdateObject = ZUpdateSQL4
     Params = <>
-    Left = 200
-    Top = 504
+    Left = 192
+    Top = 536
   end
   object usRecentItems: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -3009,5 +3021,161 @@ object UserDBModule: TUserDBModule
         Name = 'sql_editors_id'
         ParamType = ptUnknown
       end>
+  end
+  object UpdDB2: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'PRAGMA foreign_keys=OFF;'
+      'BEGIN TRANSACTION;'
+      'CREATE TABLE IF NOT EXISTS db_connection_plugin_data('
+      '/* Информация подключаемых модулей */'
+      '  db_database_id INTEGER /* ID базы данных */,'
+      '  db_connection_plugin_data_class_type VARCHAR(255) /* Тип плагина */,'
+      '  db_connection_plugin_data_variable_name VARCHAR(150) /* Имя переменной */,'
+      '  db_connection_plugin_data_variable_value VARCHAR(255) /* Значение переменной */,'
+      ' PRIMARY KEY (db_database_id, db_connection_plugin_data_class_type, db_connection_plugin_data_variable_name)'
+      ' CONSTRAINT fk_db_connection_plugin_data_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
+      ');'
+      ' COMMIT; '
+    )
+    Connection = UserDB
+    Delimiter = ';'
+    Left = 600
+    Top = 14
+  end
+  object usConnectionPlugins: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM db_connection_plugin_data'
+      'WHERE'
+      '  ((db_connection_plugin_data.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_connection_plugin_data.db_database_id = :OLD_db_database_id)) AND'
+      '  ((db_connection_plugin_data.db_connection_plugin_data_class_type IS NULL AND :OLD_db_connection_plugin_data_class_type IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_class_type = :OLD_db_connection_plugin_data_class_type)) AND'
+      '  ((db_connection_plugin_data.db_connection_plugin_data_variable_name IS NULL AND :OLD_db_connection_plugin_data_variable_name IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_variable_name = :OLD_db_connection_plugin_data_variable_name))'
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO db_connection_plugin_data'
+      '  (db_database_id, db_connection_plugin_data_class_type, db_connection_plugin_data_variable_name, '
+      '   db_connection_plugin_data_variable_value)'
+      'VALUES'
+      '  (:db_database_id, :db_connection_plugin_data_class_type, :db_connection_plugin_data_variable_name, '
+      '   :db_connection_plugin_data_variable_value)'
+    )
+    ModifySQL.Strings = (
+      'UPDATE db_connection_plugin_data SET'
+      '  db_database_id = :db_database_id,'
+      '  db_connection_plugin_data_class_type = :db_connection_plugin_data_class_type,'
+      '  db_connection_plugin_data_variable_name = :db_connection_plugin_data_variable_name,'
+      '  db_connection_plugin_data_variable_value = :db_connection_plugin_data_variable_value'
+      'WHERE'
+      '  ((db_connection_plugin_data.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_connection_plugin_data.db_database_id = :OLD_db_database_id)) AND'
+      '  ((db_connection_plugin_data.db_connection_plugin_data_class_type IS NULL AND :OLD_db_connection_plugin_data_class_type IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_class_type = :OLD_db_connection_plugin_data_class_type)) AND'
+      '  ((db_connection_plugin_data.db_connection_plugin_data_variable_name IS NULL AND :OLD_db_connection_plugin_data_variable_name IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_variable_name = :OLD_db_connection_plugin_data_variable_name))'
+    )
+    UseSequenceFieldForRefreshSQL = False
+    Left = 232
+    Top = 464
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_connection_plugin_data_class_type'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_connection_plugin_data_variable_name'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_connection_plugin_data_variable_value'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_db_database_id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_db_connection_plugin_data_class_type'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_db_connection_plugin_data_variable_name'
+        ParamType = ptUnknown
+      end>
+  end
+  object quConnectionPlugins: TZQuery
+    Connection = UserDB
+    UpdateObject = usConnectionPlugins
+    SQL.Strings = (
+      'select'
+      '  db_connection_plugin_data.db_database_id,'
+      '  db_connection_plugin_data.db_connection_plugin_data_class_type,'
+      '  db_connection_plugin_data.db_connection_plugin_data_variable_name,'
+      '  db_connection_plugin_data.db_connection_plugin_data_variable_value'
+      'from'
+      '  db_connection_plugin_data'
+      'where'
+      '  db_connection_plugin_data.db_database_id = :db_database_id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end>
+    Left = 192
+    Top = 464
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end>
+    object quConnectionPluginsdb_database_id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'db_database_id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quConnectionPluginsdb_connection_plugin_data_class_type: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_plugin_data_class_type'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_plugin_data_variable_name'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 600
+    end
+    object quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_plugin_data_variable_value'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
   end
 end

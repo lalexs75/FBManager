@@ -1246,7 +1246,10 @@ begin
   while not UserDBModule.quDatabases.EOF do
   begin
     aNode:=TreeView1.Items.AddChild(nil, '');
-    PP:=TDataBaseRecord.Load(aNode, UserDBModule.quDatabases);
+    UserDBModule.quConnectionPlugins.ParamByName('db_database_id').AsInteger:=UserDBModule.quDatabasesdb_database_id.AsInteger;
+    UserDBModule.quConnectionPlugins.Open;
+    PP:=TDataBaseRecord.Load(aNode, UserDBModule.quDatabases, UserDBModule.quConnectionPlugins);
+    UserDBModule.quConnectionPlugins.Close;
     DBList.Add(PP);
     UserDBModule.quDatabases.Next;
   end;
