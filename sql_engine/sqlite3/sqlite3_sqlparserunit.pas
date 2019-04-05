@@ -1370,7 +1370,7 @@ begin
   T1:=AddSQLTokens(stSymbol, [T, TCPK_ASC, TCPK_DESC], ',', []);
     T1.AddChildToken(T);
   TSymb4:=AddSQLTokens(stSymbol, [T, TCPK_ASC, TCPK_DESC], ')', []);
-    TSymb4.AddChildToken(TSymb2);
+    TSymb4.AddChildToken([TSymb2, TC]);
 
   T:=AddSQLTokens(stKeyword, TSymb4, 'ON', []);
     T:=AddSQLTokens(stKeyword, T, 'CONFLICT', []);
@@ -1644,13 +1644,16 @@ begin
 
   S2:='';
   if SPK <> '' then
-    S2:=S2 + ' PRIMARY KEY ('+copy(SPK, 1, Length(SPK)-2) + ')';
+    S2:=S2 + ' PRIMARY KEY ('+copy(SPK, 1, Length(SPK)-2) + ')' + LineEnding;
 
   for C in SQLConstraints do
   begin
     if (S2 <> '') then
+    begin
       if (C.ConstraintType = ctPrimaryKey) and (FCountPK = 0) then
-        S2:= S2 +','+LineEnding;
+        S2:= S2 +',';
+      S2:= S2 + LineEnding;
+    end;
 
     if C.ConstraintName <> '' then
       S2:=S2 + ' CONSTRAINT ' + C.ConstraintName;
