@@ -669,7 +669,8 @@ type
   protected
     function GetImageIndex: integer;override;
 
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -1437,7 +1438,8 @@ begin
     Result:=16;
 end;
 
-procedure TSQLEngineFireBird.SetConnected(const AValue: boolean);
+function TSQLEngineFireBird.InternalSetConnected(const AValue: boolean
+  ): boolean;
 var
   S: String;
 begin
@@ -1465,7 +1467,7 @@ begin
     //InitKeywords;
   end;
 
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
 
   if not AValue then
   begin
@@ -1473,6 +1475,7 @@ begin
     FBDatabase.Connected:=false;
 //    FreeAndNil(FCharSetList);
   end;
+  Result:=FBDatabase.Connected;
 end;
 
 procedure TSQLEngineFireBird.InitGroupsObjects;

@@ -67,7 +67,8 @@ type
   protected
     //function GetCountRootObject: integer; override;
     //function GetRootObject(AIndex:integer): TDBRootObject; override;
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure SetDataBaseName(const AValue: string);override;
     function GetCharSet: string;override;
     procedure SetCharSet(const AValue: string);override;
@@ -101,11 +102,12 @@ begin
   end;
 end;
 *)
-procedure TDBFEngine.SetConnected(const AValue: boolean);
+function TDBFEngine.InternalSetConnected(const AValue: boolean): boolean;
 begin
   if not DirectoryExists(DataBaseName) then
     raise Exception.CreateFmt(sInvalidPath, [DataBaseName]);
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
+  Result:=AValue;
 end;
 
 procedure TDBFEngine.SetDataBaseName(const AValue: string);

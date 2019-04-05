@@ -59,7 +59,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit;
+uses fbmStrConstUnit, SSHConnectionUnit;
 
 {$R *.lfm}
 
@@ -104,13 +104,33 @@ begin
 end;
 
 procedure Tfdbm_ssh_ParamsPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
+var
+  P: TSSHConnectionPlugin;
 begin
-
+  P:=ASQLEngine.ConnectionPlugins.FindPlugin(TSSHConnectionPlugin) as TSSHConnectionPlugin;
+  if Assigned(P) then
+  begin
+    CheckBox1.Checked:=P.Enabled;
+    edtHostName.Text:=P.Host;
+    edtPort.Text:=IntToStr(P.Port);
+    edtUser.Text:=P.UserName;
+    edtPassword.Text:=P.Password;
+  end;
 end;
 
 procedure Tfdbm_ssh_ParamsPage.SaveParams;
+var
+  P: TSSHConnectionPlugin;
 begin
-
+  P:=FSQLEngine.ConnectionPlugins.FindPlugin(TSSHConnectionPlugin) as TSSHConnectionPlugin;
+  if Assigned(P) then
+  begin
+    P.Enabled        := CheckBox1.Checked;
+    P.Host           := edtHostName.Text;
+    P.Port :=StrToInt(edtPort.Text);
+    P.UserName       := edtUser.Text;
+    P.Password       := edtPassword.Text;
+  end;
 end;
 
 function Tfdbm_ssh_ParamsPage.PageName: string;

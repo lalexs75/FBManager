@@ -207,7 +207,8 @@ type
   protected
     function GetImageIndex: integer;override;
 
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -299,9 +300,9 @@ begin
 end;
 *)
 
-procedure TSQLEngineOracle.SetConnected(const AValue: boolean);
+function TSQLEngineOracle.InternalSetConnected(const AValue: boolean): boolean;
 begin
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
   if AValue then
   begin
     FOracleConnection.DatabaseName:=DataBaseName;
@@ -316,6 +317,7 @@ begin
     FSQLTransaction.Commit;
     FOracleConnection.Connected:=false;
   end;
+  Result:=FOracleConnection.Connected;
 end;
 
 procedure TSQLEngineOracle.InitGroupsObjects;

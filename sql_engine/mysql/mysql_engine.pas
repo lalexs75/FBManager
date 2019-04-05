@@ -324,7 +324,8 @@ type
     //
   protected
     function GetImageIndex: integer;override;
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -2291,11 +2292,11 @@ begin
     Result:=57;
 end;
 
-procedure TSQLEngineMySQL.SetConnected(const AValue: boolean);
+function TSQLEngineMySQL.InternalSetConnected(const AValue: boolean): boolean;
 var
   HostName: String;
 begin
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
   if AValue then
   begin
     FConnection.HostName:=ServerName;
@@ -2319,6 +2320,7 @@ begin
       FConnection.Connected:=false;
     end;
   end;
+  Result:=FConnection.Connected;
 end;
 
 procedure TSQLEngineMySQL.InitGroupsObjects;

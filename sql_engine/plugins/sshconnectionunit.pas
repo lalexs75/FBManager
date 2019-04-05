@@ -26,6 +26,12 @@ interface
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, UTF8Process;
 
+const
+  {$IFDEF LINUX}
+  cmdSSH  = '/usr/bin/ssh';
+  {$ELSE}
+  cmdSSH  = '';
+  {$ENDIF}
 type
 
   { TSSHConnectionPlugin }
@@ -37,6 +43,7 @@ type
     FPassword: string;
     FPort: integer;
     FUserName: string;
+    procedure InternalBuildCommand;
   protected
     FSSHModule:TProcessUTF8;
     function GetConnected: boolean; override;
@@ -58,6 +65,12 @@ uses process;
 
 { TSSHConnectionPlugin }
 
+procedure TSSHConnectionPlugin.InternalBuildCommand;
+begin
+  FSSHModule.CommandLine:=cmdSSH;
+  FSSHModule.Parameters.Add('-L 63333:localhost:5432 alexs@localhost');
+end;
+
 function TSSHConnectionPlugin.GetConnected: boolean;
 begin
   Result:=FSSHModule.Running;
@@ -65,7 +78,16 @@ end;
 
 procedure TSSHConnectionPlugin.SetConnected(AValue: boolean);
 begin
-
+  if AValue = FSSHModule.Running then exit;
+  if AValue then
+  begin
+    InternalBuildCommand;
+    FSSHModule.Execute;
+  end
+  else
+  begin
+    FSSHModule.Terminate(0);
+  end;
 end;
 
 procedure TSSHConnectionPlugin.InternalLoad();

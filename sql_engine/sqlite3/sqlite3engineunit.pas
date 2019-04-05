@@ -277,7 +277,8 @@ type
   protected
     function GetImageIndex: integer;override;
 
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -1601,9 +1602,9 @@ begin
   end;
 end;
 *)
-procedure TSQLEngineSQLite3.SetConnected(const AValue: boolean);
+function TSQLEngineSQLite3.InternalSetConnected(const AValue: boolean): boolean;
 begin
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
   if AValue then
   begin
     Connection.Database:=DataBaseName;
@@ -1620,6 +1621,7 @@ begin
       Connection.Connected:=false;
     end;
   end;
+  Result:=Connection.Connected;
 end;
 
 procedure TSQLEngineSQLite3.InitGroupsObjects;

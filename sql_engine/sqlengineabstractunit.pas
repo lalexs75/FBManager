@@ -768,6 +768,7 @@ type
     property Owner:TSQLEngineAbstract read FOwner;
     property Enabled:boolean read FEnabled write FEnabled;
   end;
+  TSQLEngineConnectionPluginClass = class of TSQLEngineConnectionPlugin;
 
   { TSQLEngineConnectionPlugins }
 
@@ -775,9 +776,14 @@ type
   private
     FList:TFPList;
     procedure Clear;
+    function GetCount: Integer;
+    function GetItem(AIndex: Integer): TSQLEngineConnectionPlugin;
   public
     constructor Create;
     destructor Destroy; override;
+    function FindPlugin(AClass:TSQLEngineConnectionPluginClass):TSQLEngineConnectionPlugin;
+    property Count:Integer read GetCount;
+    property Item[AIndex:Integer]:TSQLEngineConnectionPlugin read GetItem; default;
   end;
 
   { TSQLEngineAbstract }
@@ -814,6 +820,7 @@ type
     FGroups:TDBObjectsList;
 
     procedure ClearQueryControlList;
+    procedure SetConnected(const AValue: boolean);
   protected
     FSQLCommentOnClass:TSQLCommentOnClass;
     FSQLEngileFeatures: TSQLEngileFeatures;
@@ -832,7 +839,7 @@ type
     procedure SetServerName(const AValue: string);virtual;
     procedure SetUserName(const AValue: string);virtual;
     function GetConnected: boolean;virtual;
-    procedure SetConnected(const AValue: boolean);virtual;
+    function InternalSetConnected(const AValue: boolean):boolean; virtual;
     procedure InitGroupsObjects;virtual; abstract;
     procedure DoneGroupsObjects;virtual; abstract;
 
@@ -841,6 +848,10 @@ type
     procedure SetUIShowSysObjects(const AValue: TUIShowSysObjects);virtual;
     function GetServerInfoVersion : string; virtual;
     procedure AddObjectsGroup(var AItem; AGroupClass:TDBRootObjectClass; ADBObjectClass:TDBObjectClass; const ACaption:string);
+    procedure DoBeforeDisconnect; virtual;
+    procedure DoBeforeConnect; virtual;
+    procedure DoAfterDisconnect; virtual;
+    procedure DoAfterConnect; virtual;
   public
     MiscOptions:TSQLEngineMiscOptions;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);
@@ -984,6 +995,17 @@ begin
   end;
 end;
 
+function TSQLEngineConnectionPlugins.GetCount: Integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TSQLEngineConnectionPlugins.GetItem(AIndex: Integer
+  ): TSQLEngineConnectionPlugin;
+begin
+  Result:=TSQLEngineConnectionPlugin(FList[AIndex]);
+end;
+
 constructor TSQLEngineConnectionPlugins.Create;
 begin
   inherited Create;
@@ -995,6 +1017,21 @@ begin
   Clear;
   FreeAndNil(FList);
   inherited Destroy;
+end;
+
+function TSQLEngineConnectionPlugins.FindPlugin(
+  AClass: TSQLEngineConnectionPluginClass): TSQLEngineConnectionPlugin;
+var
+  P: TSQLEngineConnectionPlugin;
+  i: Integer;
+begin
+  Result:=nil;
+  for i:=0 to FList.Count-1 do
+  begin
+    P:=TSQLEngineConnectionPlugin(FList[0]);
+    if AClass = P.ClassType then
+      Exit(P);
+  end;
 end;
 
 { TSQLEngineConnectionPlugin }
@@ -1575,6 +1612,34 @@ begin
     FGroups.Add(G);
 end;
 
+procedure TSQLEngineAbstract.DoBeforeDisconnect;
+begin
+
+end;
+
+procedure TSQLEngineAbstract.DoBeforeConnect;
+var
+  i: Integer;
+begin
+  for i:=0 to FConnectionPlugins.Count-1 do
+    if FConnectionPlugins[i].Enabled then
+      FConnectionPlugins[i].Connected:=true;
+end;
+
+procedure TSQLEngineAbstract.DoAfterDisconnect;
+var
+  i: Integer;
+begin
+  for i:=0 to FConnectionPlugins.Count-1 do
+    if FConnectionPlugins[i].Connected then
+      FConnectionPlugins[i].Connected:=false;
+end;
+
+procedure TSQLEngineAbstract.DoAfterConnect;
+begin
+
+end;
+
 procedure TSQLEngineAbstract.NotyfiOnDestroy(ADBObject: TDBObject);
 
 procedure DoNotify(R: TDBRootObject);
@@ -1657,22 +1722,38 @@ begin
   Result:=FConnected;
 end;
 
+function TSQLEngineAbstract.InternalSetConnected(const AValue: boolean
+  ): boolean;
+begin
+  Result:=false;
+end;
+
 procedure TSQLEngineAbstract.SetConnected(const AValue: boolean);
 var
   i: Integer;
   G: TDBObject;
 begin
   if FConnected = AValue then exit;
-  FConnected:=AValue;
 
-  if AValue then
+  if not FConnected then
+    DoBeforeDisconnect
+  else
+    DoBeforeConnect;
+
+  FConnected:=InternalSetConnected(AValue);
+
+  if FConnected then
+  begin
+    DoAfterConnect;
     InitGroupsObjects
+  end
   else
   begin
     for G in Groups do
       TDBRootObject(G).Clear;
     Groups.Clear;
     DoneGroupsObjects;
+    DoAfterDisconnect;
   end;
 end;
 

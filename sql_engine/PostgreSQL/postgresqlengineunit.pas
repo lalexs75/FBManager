@@ -883,7 +883,8 @@ type
   protected
     function GetImageIndex: integer;override;
 
-    procedure SetConnected(const AValue: boolean);override;
+    //procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -2407,11 +2408,11 @@ begin
     Result:=24;
 end;
 
-procedure TSQLEnginePostgre.SetConnected(const AValue: boolean);
+function TSQLEnginePostgre.InternalSetConnected(const AValue: boolean): boolean;
 var
   FSubVersion: Integer;
 begin
-  inherited SetConnected(AValue);
+  //inherited SetConnected(AValue);
 
   if AValue then
   begin
@@ -2471,6 +2472,8 @@ begin
     FRealServerVersionMajor:=0;
     FRealServerVersion:=0;
   end;
+
+  Result:=FPGConnection.Connected;
 end;
 
 procedure TSQLEnginePostgre.InitGroupsObjects;
