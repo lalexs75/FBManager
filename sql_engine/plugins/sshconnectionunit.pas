@@ -28,6 +28,7 @@ uses
 
 const
   {$IFDEF LINUX}
+  cmdSSHPasswd  = '/usr/bin/sshpass';
   cmdSSH  = '/usr/bin/ssh';
   {$ELSE}
   cmdSSH  = '';
@@ -69,7 +70,7 @@ procedure TSSHConnectionPlugin.InternalBuildCommand;
 var
   S: String;
 begin
-  S:=Format('%s -T -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
+  S:=Format('%s -p %s %s -N -L %d:%s:%d %s', [cmdSSHPasswd, Password, cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
   FSSHModule.CommandLine:=S; //cmdSSH + ' -T -L '+IntToStr(Owner.RemotePort)+':'+FHost+':'+IntToStr() FPort+' alexs@localhost';
 end;
 
@@ -89,13 +90,15 @@ begin
     InternalBuildCommand;
     FSSHModule.Execute;
 
+    Sleep(5000); //wait for conect- ugly
+
     C:=FSSHModule.Output.NumBytesAvailable;
     if C>0 then
     begin
       SetLength(S, C);
       FSSHModule.Output.Read(S[1], C);
     end;
-    FSSHModule.Input.Write(FPassword[1], Length(FPassword));
+//    FSSHModule.Input.Write(FPassword[1], Length(FPassword));
 
   end
   else
