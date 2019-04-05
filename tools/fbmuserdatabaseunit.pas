@@ -201,6 +201,8 @@ type
     procedure InternalCreateUserDB;
     procedure InternalCheckDBVersion;
     procedure InternalConvertDB;
+    procedure InternalUpdate2;
+
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
 //    procedure ImportLoadSQLHistory(DataBaseID:integer; ADataFolder:string);
@@ -359,13 +361,20 @@ begin
 end;
 
 procedure TUserDBModule.InternalCheckDBVersion;
+var
+  CVer: Integer;
 begin
   UserDB.Connect;
   SystemVariablesLoad;
-  if ConfigValues.ByNameAsInteger('GLOBAL/ConfigDBVersion', -1) < ConfDBVers then
+  CVer:=ConfigValues.ByNameAsInteger('GLOBAL/ConfigDBVersion', -1);
+  if  CVer< ConfDBVers then
   begin
     UserDB.Disconnect;
-    InternalConvertDB;
+    if CVer < 1 then
+      InternalConvertDB
+    else
+    if CVer < 2 then
+      InternalUpdate2;
     UserDB.Connect;
     SystemVariablesLoad;
   end;
@@ -435,6 +444,11 @@ begin
   DoConvertDataBases;
 
   OldUserDB.Disconnect;
+end;
+
+procedure TUserDBModule.InternalUpdate2;
+begin
+
 end;
 
 procedure TUserDBModule.ImportDataBaseList;

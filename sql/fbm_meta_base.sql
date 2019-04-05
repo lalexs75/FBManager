@@ -241,3 +241,14 @@ CREATE TABLE sql_editors_history(
   sql_editors_history_sql_plan BLOB /* План запроса */,
  CONSTRAINT fk_sql_editors_history_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+/*------  05.04.2019 15:34:43 ------*/
+
+CREATE TABLE db_connection_plugin_data(
+/* Информация подключаемых модулей */
+  db_database_id INTEGER /* ID базы данных */,
+  db_connection_plugin_data_class_type VARCHAR(255) /* Тип плагина */,
+  db_connection_plugin_data_variable_name VARCHAR(150) /* Имя переменной */,
+  db_connection_plugin_data_variable_value VARCHAR(255) /* Значение переменной */,
+ PRIMARY KEY (db_database_id, db_connection_plugin_data_class_type, db_connection_plugin_data_variable_name) CONSTRAINT fk_db_connection_plugin_data_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE
+);

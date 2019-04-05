@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <ProjectOptions BuildModesCount="1">
+  <ProjectOptions>
     <Version Value="12"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
@@ -15,7 +15,7 @@
       <OutDir Value="languages"/>
     </i18n>
     <BuildModes>
-      <Item1 Name="default" Default="True"/>
+      <Item Name="default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -58,120 +58,164 @@
         <PackageName Value="LCL"/>
       </Item10>
     </RequiredPackages>
-    <Units Count="22">
-      <Unit0>
+    <Units>
+      <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit0>
-      <Unit1>
+      </Unit>
+      <Unit>
         <Filename Value="unit1.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-      </Unit1>
-      <Unit2>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
-      </Unit2>
-      <Unit3>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
-      </Unit3>
-      <Unit4>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineCommonTypesUnit"/>
-      </Unit4>
-      <Unit5>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-      </Unit5>
-      <Unit6>
+      </Unit>
+      <Unit>
         <Filename Value="../../tools/fbmstrconstunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmStrConstUnit"/>
-      </Unit6>
-      <Unit7>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-      </Unit7>
-      <Unit8>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
         <UnitName Value="pgSqlTextUnit"/>
-      </Unit8>
-      <Unit9>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FBSQLEngineUnit"/>
-      </Unit9>
-      <Unit10>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_objects/sqlparserconsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlParserConsts"/>
-      </Unit10>
-      <Unit11>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
-      </Unit11>
-      <Unit12>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/firebird/fbkeywordsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbKeywordsUnit"/>
-      </Unit12>
-      <Unit13>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fb_SqlParserUnit"/>
-      </Unit13>
-      <Unit14>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLite3EngineUnit"/>
-      </Unit14>
-      <Unit15>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_keywords.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit15>
-      <Unit16>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlite3_SqlParserUnit"/>
-      </Unit16>
-      <Unit17>
+      </Unit>
+      <Unit>
         <Filename Value="treeaddchildtokenunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="TreeAddChildTokenForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TreeAddChildTokenUnit"/>
-      </Unit17>
-      <Unit18>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_engine.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit18>
-      <Unit19>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/mysql/mysqlkeywords.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MySQLKeywords"/>
-      </Unit19>
-      <Unit20>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="mysql_SqlParserUnit"/>
-      </Unit20>
-      <Unit21>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_types.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit21>
+      </Unit>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit>
+        <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -181,7 +225,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql"/>
+      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql;../../sql_engine/plugins"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

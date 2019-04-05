@@ -48,8 +48,8 @@ type
     FSSHModule:TProcessUTF8;
     function GetConnected: boolean; override;
     procedure SetConnected(AValue: boolean); override;
-    procedure InternalLoad(); override;
-    procedure InternalSave(); override;
+    procedure InternalLoad; override;
+    procedure InternalSave; override;
   public
     constructor Create(AOwner:TSQLEngineAbstract); override;
     destructor Destroy; override;
@@ -66,9 +66,11 @@ uses process;
 { TSSHConnectionPlugin }
 
 procedure TSSHConnectionPlugin.InternalBuildCommand;
+var
+  S: String;
 begin
-  FSSHModule.CommandLine:=cmdSSH;
-  FSSHModule.Parameters.Add('-L 63333:localhost:5432 alexs@localhost');
+  S:=Format('%s -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
+  FSSHModule.CommandLine:=S; //cmdSSH + ' -T -L '+IntToStr(Owner.RemotePort)+':'+FHost+':'+IntToStr() FPort+' alexs@localhost';
 end;
 
 function TSSHConnectionPlugin.GetConnected: boolean;
@@ -77,12 +79,23 @@ begin
 end;
 
 procedure TSSHConnectionPlugin.SetConnected(AValue: boolean);
+var
+  S: String;
+  C: DWord;
 begin
   if AValue = FSSHModule.Running then exit;
   if AValue then
   begin
     InternalBuildCommand;
     FSSHModule.Execute;
+
+    C:=FSSHModule.Output.NumBytesAvailable;
+    if C>0 then
+    begin
+      SetLength(S, C);
+      FSSHModule.Output.Read(S[1], C);
+    end;
+    FSSHModule.Input.Write(FPassword[1], Length(FPassword));
   end
   else
   begin
@@ -90,31 +103,32 @@ begin
   end;
 end;
 
-procedure TSSHConnectionPlugin.InternalLoad();
+procedure TSSHConnectionPlugin.InternalLoad;
 begin
-  inherited InternalLoad();
+  inherited InternalLoad;
+  FHost:=LoadVariable('Host', '');
+  FPort:=StrToInt(LoadVariable('Port', '-1'));
+  FUserName:=LoadVariable('UserName', '');
+  FPassword:=LoadVariable('Password', '');
+  FIdentifyFile:=LoadVariable('IdentifyFile', '');
 end;
 
-procedure TSSHConnectionPlugin.InternalSave();
+procedure TSSHConnectionPlugin.InternalSave;
 begin
-  inherited InternalSave();
+  inherited InternalSave;
+
+  LoadVariable('Host', FHost);
+  LoadVariable('Port', IntToStr(FPort));
+  LoadVariable('UserName', FUserName);
+  LoadVariable('Password', FPassword);
+  LoadVariable('IdentifyFile', FIdentifyFile);
 end;
 
 constructor TSSHConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
 begin
   inherited Create(AOwner);
   FSSHModule:=TProcessUTF8.Create(nil);
-  FSSHModule.Options:=[//poRunSuspended,
-                       //poWaitOnExit,
-                       //poUsePipes,
-                       poStderrToOutPut,
-                       poNoConsole,
-                       //poNewConsole,
-                       poDefaultErrorMode,
-                       //poNewProcessGroup,
-                       //poDebugProcess,
-                       //poDebugOnlyThisProcess,
-                       poPassInput];
+  FSSHModule.Options:=[poUsePipes, poStderrToOutPut, poNoConsole];
 end;
 
 destructor TSSHConnectionPlugin.Destroy;

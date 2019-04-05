@@ -759,8 +759,10 @@ type
   protected
     function GetConnected: boolean; virtual;
     procedure SetConnected(AValue: boolean); virtual;
-    procedure InternalLoad(); virtual;
-    procedure InternalSave(); virtual;
+    procedure InternalLoad; virtual;
+    procedure InternalSave; virtual;
+    function LoadVariable(AVariableName, ADefValue:string):string;
+    procedure SaveVariable(AVariableName, AValue:string);
   public
     constructor Create(AOwner:TSQLEngineAbstract); virtual;
     destructor Destroy; override;
@@ -1046,14 +1048,26 @@ begin
 
 end;
 
-procedure TSQLEngineConnectionPlugin.InternalLoad();
+procedure TSQLEngineConnectionPlugin.InternalLoad;
 begin
-
+  FEnabled:=LoadVariable('Enabled', '0') = '1';
 end;
 
-procedure TSQLEngineConnectionPlugin.InternalSave();
+procedure TSQLEngineConnectionPlugin.InternalSave;
 begin
+  LoadVariable('Enabled', IntToStr(Ord(FEnabled)));
+end;
 
+function TSQLEngineConnectionPlugin.LoadVariable(AVariableName,
+  ADefValue: string): string;
+begin
+  Result:='';
+end;
+
+procedure TSQLEngineConnectionPlugin.SaveVariable(AVariableName, AValue: string
+  );
+begin
+  //
 end;
 
 constructor TSQLEngineConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
@@ -1735,10 +1749,10 @@ var
 begin
   if FConnected = AValue then exit;
 
-  if not FConnected then
-    DoBeforeDisconnect
+  if AValue then
+    DoBeforeConnect
   else
-    DoBeforeConnect;
+    DoBeforeDisconnect;
 
   FConnected:=InternalSetConnected(AValue);
 
