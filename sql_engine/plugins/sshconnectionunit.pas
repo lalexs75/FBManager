@@ -69,7 +69,7 @@ procedure TSSHConnectionPlugin.InternalBuildCommand;
 var
   S: String;
 begin
-  S:=Format('%s -t -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
+  S:=Format('%s -T -L %d:%s:%d %s', [cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
   FSSHModule.CommandLine:=S; //cmdSSH + ' -T -L '+IntToStr(Owner.RemotePort)+':'+FHost+':'+IntToStr() FPort+' alexs@localhost';
 end;
 
@@ -96,6 +96,7 @@ begin
       FSSHModule.Output.Read(S[1], C);
     end;
     FSSHModule.Input.Write(FPassword[1], Length(FPassword));
+
   end
   else
   begin
@@ -128,7 +129,7 @@ constructor TSSHConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
 begin
   inherited Create(AOwner);
   FSSHModule:=TProcessUTF8.Create(nil);
-  FSSHModule.Options:=[poUsePipes, poStderrToOutPut, poNoConsole];
+  FSSHModule.Options:=[poUsePipes, poStderrToOutPut {, poNoConsole}];
 end;
 
 destructor TSSHConnectionPlugin.Destroy;
