@@ -1687,6 +1687,7 @@ end;
 destructor TSQLEngineAbstract.Destroy;
 begin
   ClearQueryControlList;
+  FConnectionPlugins.Clear;
   FreeAndNil(FConnectionPlugins);
   FreeAndNil(FSQLEngineLogOptions);
   FreeAndNil(FQueryControlList);
