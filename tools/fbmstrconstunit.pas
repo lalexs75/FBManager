@@ -1148,6 +1148,9 @@ resourcestring
   sCopySelectedRecordAsInsert       = 'Copy selected record(s) as INSERT';
   sCopySelectedRecordAsUpdate       = 'Copy selected record(s) as UPDATE';
   sEnterTableName                   = 'Enter table name';
+  sSSHFilePath                      = 'SSH file path';
+  sSSHPassFilePath                  = 'SSHPass file path';
+  sSSHConnectionPlugin              = 'SSH сonnection plugin';
 
 
 

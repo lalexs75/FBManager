@@ -1756,6 +1756,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="SSHConnectionUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="config/sshconnectionpluginconfigunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SSHConnectionPluginConfig"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="SSHConnectionPluginConfigUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -53,7 +53,8 @@ implementation
 uses SQLEngineAbstractUnit, fbm_VisualEditorsAbstractUnit, fbmToolsUnit,
   fbmStrConstUnit, fbmUserDataBaseUnit, cfOIUnit, cfGridOptionsUnit,
   cfReportsOptionsUnit, cfGeneralOptionsUnit, cfSQLEditorOptionsUnit,
-  cfSystemConfirmationUnit, fbmCompatibilitySystemUnit;
+  cfSystemConfirmationUnit, fbmCompatibilitySystemUnit,
+  SSHConnectionPluginConfigUnit;
 
 {$R *.lfm}
 
@@ -90,6 +91,8 @@ begin
   AddPage(TfbmCompatibilitySystemFrame.Create(Self));
   //Add pages for SQLEngine's objects
   DoMakePages;
+  //
+  AddPage(TSSHConnectionPluginConfig.Create(Self));
 
   //Load param in pages
   LoadConfig;

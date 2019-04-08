@@ -12,18 +12,17 @@ inherited fbmEnvironmentOptionsForm: TfbmEnvironmentOptionsForm
   SessionProperties = 'Height;Left;Top;Width;ListBox1.Width'
   ShowHint = True
   inherited ButtonPanel1: TButtonPanel
-    Height = 46
-    Top = 435
+    Top = 439
     Width = 836
   end
   inherited ListBox1: TListBox
-    Height = 429
+    Height = 433
   end
   inherited Splitter1: TSplitter
-    Height = 429
+    Height = 433
   end
   inherited Panel1: TPanel
-    Height = 429
+    Height = 433
     Width = 711
   end
   object RxIniPropStorage1: TRxIniPropStorage[4]

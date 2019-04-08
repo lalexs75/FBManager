@@ -4505,6 +4505,14 @@ msgstr "Защита SQL"
 msgid "Source page name"
 msgstr "Имя исходной страницы"
 
+#: fbmstrconstunit.ssshconnectionplugin
+msgid "SSH сonnection plugin"
+msgstr "SSH сonnection plugin"
+
+#: fbmstrconstunit.ssshfilepath
+msgid "SSH file path"
+msgstr "Путь к SSH"
+
 #: fbmstrconstunit.ssshhost
 msgid "SSH Host"
 msgstr "Сервер SSH"
@@ -4512,6 +4520,10 @@ msgstr "Сервер SSH"
 #: fbmstrconstunit.ssshidentifyfile
 msgid "SSH identify file"
 msgstr "Файл лицензии SSH"
+
+#: fbmstrconstunit.ssshpassfilepath
+msgid "SSHPass file path"
+msgstr "Путь к SSHPass"
 
 #: fbmstrconstunit.ssshpassword
 msgid "SSH password"
@@ -5535,4 +5547,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

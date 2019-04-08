@@ -120,7 +120,8 @@ uses
   cfAutoIncFieldUnit, fbmMakeSQLFromDataSetUnit, fdbm_DescriptionUnit,
   fdmUserEditor_MySQLUnit, otMySQLTriggerTemplateUnit,
   SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit,
-  pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit, SSHConnectionUnit
+  pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit,
+  SSHConnectionUnit, SSHConnectionPluginConfigUnit
 
   ;
 

@@ -9,9 +9,9 @@ inherited fbmCompatibilitySystemFrame: TfbmCompatibilitySystemFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 69
+    Height = 66
     Top = 6
-    Width = 282
+    Width = 289
     AutoFill = True
     AutoSize = True
     BorderSpacing.Around = 6
@@ -23,8 +23,8 @@ inherited fbmCompatibilitySystemFrame: TfbmCompatibilitySystemFrame
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 48
-    ClientWidth = 280
+    ClientHeight = 46
+    ClientWidth = 287
     Items.Strings = (
       'Use FBManager style /*$$FBMC$$*/'
       'Use IBExpert style /*$$IBEC$$*/'

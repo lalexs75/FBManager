@@ -62,7 +62,7 @@ type
   end;
 
 implementation
-uses process;
+uses process, fbmToolsUnit;
 
 { TSSHConnectionPlugin }
 
@@ -70,8 +70,15 @@ procedure TSSHConnectionPlugin.InternalBuildCommand;
 var
   S: String;
 begin
-  S:=Format('%s -p %s %s -N -L %d:%s:%d %s', [cmdSSHPasswd, Password, cmdSSH, Owner.RemotePort, FHost, FPort, FUserName]);
-  FSSHModule.CommandLine:=S; //cmdSSH + ' -T -L '+IntToStr(Owner.RemotePort)+':'+FHost+':'+IntToStr() FPort+' alexs@localhost';
+  S:=Format('%s -p %s %s -N -L %d:%s:%d %s -v', [
+     ConfigValues.ByNameAsString('SSHConnectionPlugin/SSHPassFilePath', cmdSSHPasswd),
+     Password,
+     ConfigValues.ByNameAsString('SSHConnectionPlugin/SSHFilePath', cmdSSH),
+     Owner.RemotePort,
+     FHost,
+     FPort,
+     FUserName]);
+  FSSHModule.CommandLine:=S;
 end;
 
 function TSSHConnectionPlugin.GetConnected: boolean;
