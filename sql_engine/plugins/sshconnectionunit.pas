@@ -32,6 +32,7 @@ const
   cmdSSH  = '/usr/bin/ssh';
   {$ELSE}
   cmdSSH  = '';
+  cmdSSHPasswd  = '';
   {$ENDIF}
 type
 
