@@ -126,16 +126,7 @@ begin
       InternalBuildCommandKey;
 
     FSSHModule.Execute;
-(*
-    Sleep(5000); //wait for conect- ugly
 
-    C:=FSSHModule.Output.NumBytesAvailable;
-    if C>0 then
-    begin
-      SetLength(S, C);
-      FSSHModule.Output.Read(S[1], C);
-    end;
-*)
     FStop:=false;
     Tick:=0;
     S:='';
