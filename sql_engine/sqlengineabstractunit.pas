@@ -764,6 +764,10 @@ type
     procedure InternalSave; virtual;
     function LoadVariable(AVariableName, ADefValue:string):string;
     procedure SaveVariable(AVariableName, AValue:string);
+    function LoadVariableInt(AVariableName:string; AValue:Integer):Integer;
+    procedure SaveVariableInt(AVariableName:string; AValue:Integer);
+    function LoadVariableBool(AVariableName:string; AValue:Boolean):Boolean;
+    procedure SaveVariableBool(AVariableName:string; AValue:Boolean);
   public
     constructor Create(AOwner:TSQLEngineAbstract); virtual;
     destructor Destroy; override;
@@ -1113,6 +1117,30 @@ begin
     FDS.Edit;
   FDS.FieldByName('db_connection_plugin_data_variable_value').AsString:=AValue;
   FDS.Post;
+end;
+
+function TSQLEngineConnectionPlugin.LoadVariableInt(AVariableName: string;
+  AValue: Integer): Integer;
+begin
+  Result:=StrToInt64Def(LoadVariable(AVariableName, ''), AValue);
+end;
+
+procedure TSQLEngineConnectionPlugin.SaveVariableInt(AVariableName: string;
+  AValue: Integer);
+begin
+  SaveVariable(AVariableName, IntToStr(AValue));
+end;
+
+function TSQLEngineConnectionPlugin.LoadVariableBool(AVariableName: string;
+  AValue: Boolean): Boolean;
+begin
+  Result:=LoadVariable(AVariableName, BoolToStr(AValue, true)) = BoolToStr(AValue, true);
+end;
+
+procedure TSQLEngineConnectionPlugin.SaveVariableBool(AVariableName: string;
+  AValue: Boolean);
+begin
+  SaveVariable(AVariableName, BoolToStr(AValue, true));
 end;
 
 constructor TSQLEngineConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
