@@ -14,7 +14,6 @@ msgid " - aborted"
 msgstr ""
 
 #: fbmstrconstunit.sabout
-msgctxt "fbmstrconstunit.sabout"
 msgid "About"
 msgstr ""
 
@@ -31,12 +30,10 @@ msgid "ACL edit"
 msgstr ""
 
 #: fbmstrconstunit.sactivatealltriggers
-msgctxt "fbmstrconstunit.sactivatealltriggers"
 msgid "Activate all triggers"
 msgstr ""
 
 #: fbmstrconstunit.sactivatetrigger
-msgctxt "fbmstrconstunit.sactivatetrigger"
 msgid "Activate trigger"
 msgstr ""
 
@@ -70,12 +67,10 @@ msgid "Add data"
 msgstr ""
 
 #: fbmstrconstunit.saddlocalvar
-msgctxt "fbmstrconstunit.saddlocalvar"
 msgid "Add local variable"
 msgstr ""
 
 #: fbmstrconstunit.saddparam
-msgctxt "fbmstrconstunit.saddparam"
 msgid "Add param"
 msgstr ""
 
@@ -170,7 +165,6 @@ msgid "Apply script"
 msgstr ""
 
 #: fbmstrconstunit.sappversion
-msgctxt "fbmstrconstunit.sappversion"
 msgid "Version : "
 msgstr ""
 
@@ -227,12 +221,10 @@ msgid "Avallable tags:"
 msgstr ""
 
 #: fbmstrconstunit.savglines
-msgctxt "fbmstrconstunit.savglines"
 msgid "AVG lines"
 msgstr ""
 
 #: fbmstrconstunit.savgtime
-msgctxt "fbmstrconstunit.savgtime"
 msgid "AVG Time"
 msgstr ""
 
@@ -245,7 +237,6 @@ msgid "Background"
 msgstr ""
 
 #: fbmstrconstunit.sbackup
-msgctxt "fbmstrconstunit.sbackup"
 msgid "Backup"
 msgstr ""
 
@@ -262,7 +253,6 @@ msgid "&Backward"
 msgstr ""
 
 #: fbmstrconstunit.sbefore
-msgctxt "fbmstrconstunit.sbefore"
 msgid "Before"
 msgstr ""
 
@@ -307,7 +297,6 @@ msgid "Shamangrad bugtracker service..."
 msgstr ""
 
 #: fbmstrconstunit.sbuildconnectionstring
-msgctxt "fbmstrconstunit.sbuildconnectionstring"
 msgid "Build connection string"
 msgstr ""
 
@@ -336,17 +325,14 @@ msgid "Calculated"
 msgstr ""
 
 #: fbmstrconstunit.scancelquery
-msgctxt "fbmstrconstunit.scancelquery"
 msgid "Cancel query"
 msgstr ""
 
 #: fbmstrconstunit.scancelqueryquestion
-msgctxt "fbmstrconstunit.scancelqueryquestion"
 msgid "Cancel a running query?"
 msgstr ""
 
 #: fbmstrconstunit.scaption
-msgctxt "fbmstrconstunit.scaption"
 msgid "Caption"
 msgstr ""
 
@@ -415,7 +401,6 @@ msgid "Client port"
 msgstr ""
 
 #: fbmstrconstunit.scloseallexceptthis
-msgctxt "fbmstrconstunit.scloseallexceptthis"
 msgid "Close all except this"
 msgstr ""
 
@@ -430,7 +415,6 @@ msgid "Close"
 msgstr ""
 
 #: fbmstrconstunit.scodeexploer
-msgctxt "fbmstrconstunit.scodeexploer"
 msgid "Code exploer"
 msgstr ""
 
@@ -591,7 +575,6 @@ msgid "Connections"
 msgstr ""
 
 #: fbmstrconstunit.sconnectionstring
-msgctxt "fbmstrconstunit.sconnectionstring"
 msgid "Connection string"
 msgstr ""
 
@@ -599,27 +582,27 @@ msgstr ""
 msgid "Connection string has been successfully copied to clipboard."
 msgstr ""
 
+#: fbmstrconstunit.sconnectviassh
+msgid "Connect via SSH"
+msgstr ""
+
 #: fbmstrconstunit.sconstraint
 msgid "Constraint"
 msgstr ""
 
 #: fbmstrconstunit.sconstraintdelete
-msgctxt "fbmstrconstunit.sconstraintdelete"
 msgid "Delete constraint"
 msgstr ""
 
 #: fbmstrconstunit.sconstraintedit
-msgctxt "fbmstrconstunit.sconstraintedit"
 msgid "Edit constraint"
 msgstr ""
 
 #: fbmstrconstunit.sconstraintname
-msgctxt "fbmstrconstunit.sconstraintname"
 msgid "Constraint name"
 msgstr ""
 
 #: fbmstrconstunit.sconstraintnew
-msgctxt "fbmstrconstunit.sconstraintnew"
 msgid "New constraint"
 msgstr ""
 
@@ -628,12 +611,10 @@ msgid "Conversion"
 msgstr ""
 
 #: fbmstrconstunit.sconvertexttables
-msgctxt "fbmstrconstunit.sconvertexttables"
 msgid "Convert Ext Tables"
 msgstr ""
 
 #: fbmstrconstunit.scopy
-msgctxt "fbmstrconstunit.scopy"
 msgid "Copy"
 msgstr ""
 
@@ -744,7 +725,6 @@ msgid "Create MySQL database..."
 msgstr ""
 
 #: fbmstrconstunit.screatenewdb
-msgctxt "fbmstrconstunit.screatenewdb"
 msgid "Create New DB"
 msgstr ""
 
@@ -849,7 +829,6 @@ msgid "Dashboard"
 msgstr ""
 
 #: fbmstrconstunit.sdata
-msgctxt "fbmstrconstunit.sdata"
 msgid "Data"
 msgstr ""
 
@@ -883,7 +862,6 @@ msgid "Database list"
 msgstr ""
 
 #: fbmstrconstunit.sdatabasename
-msgctxt "fbmstrconstunit.sdatabasename"
 msgid "Database name"
 msgstr ""
 
@@ -896,7 +874,6 @@ msgid "Database object templates"
 msgstr ""
 
 #: fbmstrconstunit.sdatabaseoncurrentserver
-msgctxt "fbmstrconstunit.sdatabaseoncurrentserver"
 msgid "Database on current server"
 msgstr ""
 
@@ -933,17 +910,14 @@ msgid "Date"
 msgstr ""
 
 #: fbmstrconstunit.sdatecreated
-msgctxt "fbmstrconstunit.sdatecreated"
 msgid "Date created"
 msgstr ""
 
 #: fbmstrconstunit.sdatefinish
-msgctxt "fbmstrconstunit.sdatefinish"
 msgid "Date finish"
 msgstr ""
 
 #: fbmstrconstunit.sdatemodified
-msgctxt "fbmstrconstunit.sdatemodified"
 msgid "Date modified"
 msgstr ""
 
@@ -952,22 +926,18 @@ msgid "Date separator"
 msgstr ""
 
 #: fbmstrconstunit.sdatestart
-msgctxt "fbmstrconstunit.sdatestart"
 msgid "Date start"
 msgstr ""
 
 #: fbmstrconstunit.sdayofmonth
-msgctxt "fbmstrconstunit.sdayofmonth"
 msgid "Day of month"
 msgstr ""
 
 #: fbmstrconstunit.sdayofweek
-msgctxt "fbmstrconstunit.sdayofweek"
 msgid "Day of week"
 msgstr ""
 
 #: fbmstrconstunit.sdays
-msgctxt "fbmstrconstunit.sdays"
 msgid "Days"
 msgstr ""
 
@@ -988,7 +958,6 @@ msgid "Data base name = "
 msgstr ""
 
 #: fbmstrconstunit.sdbnavhintcancel
-msgctxt "fbmstrconstunit.sdbnavhintcancel"
 msgid "Cancel"
 msgstr ""
 
@@ -1034,17 +1003,14 @@ msgid "Refresh"
 msgstr ""
 
 #: fbmstrconstunit.sdeactivatealltrigger
-msgctxt "fbmstrconstunit.sdeactivatealltrigger"
 msgid "Deactivate all trigger"
 msgstr ""
 
 #: fbmstrconstunit.sdeactivateindexes
-msgctxt "fbmstrconstunit.sdeactivateindexes"
 msgid "Deactivate Indexes"
 msgstr ""
 
 #: fbmstrconstunit.sdeactivatetrigger
-msgctxt "fbmstrconstunit.sdeactivatetrigger"
 msgid "Deactivate trigger"
 msgstr ""
 
@@ -1053,7 +1019,6 @@ msgid "Number of deadlocks detected in this database"
 msgstr ""
 
 #: fbmstrconstunit.sdeclaration
-msgctxt "fbmstrconstunit.sdeclaration"
 msgid "Declaration"
 msgstr ""
 
@@ -1110,7 +1075,6 @@ msgid "Define variable"
 msgstr ""
 
 #: fbmstrconstunit.sdelbfolder
-msgctxt "fbmstrconstunit.sdelbfolder"
 msgid "Delete DB folder"
 msgstr ""
 
@@ -1158,7 +1122,6 @@ msgid "Delete nested function"
 msgstr ""
 
 #: fbmstrconstunit.sdeletefunctionq
-msgctxt "fbmstrconstunit.sdeletefunctionq"
 msgid "Delete function \"%s\"?"
 msgstr ""
 
@@ -1171,7 +1134,6 @@ msgid "Delete index"
 msgstr ""
 
 #: fbmstrconstunit.sdeletelocalvar
-msgctxt "fbmstrconstunit.sdeletelocalvar"
 msgid "Delete local variable"
 msgstr ""
 
@@ -1180,7 +1142,6 @@ msgid "Delete local variable %s?"
 msgstr ""
 
 #: fbmstrconstunit.sdeleteparam
-msgctxt "fbmstrconstunit.sdeleteparam"
 msgid "Delete param"
 msgstr ""
 
@@ -1205,7 +1166,6 @@ msgid "Delete rows"
 msgstr ""
 
 #: fbmstrconstunit.sdeleterule
-msgctxt "fbmstrconstunit.sdeleterule"
 msgid "Delete rule"
 msgstr ""
 
@@ -1230,7 +1190,6 @@ msgid "Delete template?"
 msgstr ""
 
 #: fbmstrconstunit.sdeletetrigger
-msgctxt "fbmstrconstunit.sdeletetrigger"
 msgid "Delete trigger"
 msgstr ""
 
@@ -1255,12 +1214,10 @@ msgid "Dependencies"
 msgstr ""
 
 #: fbmstrconstunit.sdescending
-msgctxt "fbmstrconstunit.sdescending"
 msgid "Descending"
 msgstr ""
 
 #: fbmstrconstunit.sdescription
-msgctxt "fbmstrconstunit.sdescription"
 msgid "Description"
 msgstr ""
 
@@ -1273,17 +1230,14 @@ msgid "Description change. Save it?"
 msgstr ""
 
 #: fbmstrconstunit.sdesc_new
-msgctxt "fbmstrconstunit.sdesc_new"
 msgid "Variable holding the new database row for INSERT/UPDATE operations in row-level triggers. This variable is NULL in statement-level triggers and for DELETE operations."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_old
-msgctxt "fbmstrconstunit.sdesc_old"
 msgid "Variable holding the old database row for UPDATE/DELETE operations in row-level triggers. This variable is NULL in statement-level triggers and for INSERT operations."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_argv
-msgctxt "fbmstrconstunit.sdesc_tg_argv"
 msgid "The arguments from the CREATE TRIGGER statement. The index counts from 0. Invalid indexes (less than 0 or greater than or equal to tg_nargs) result in a null value."
 msgstr ""
 
@@ -1292,42 +1246,34 @@ msgid "A string representing the event the trigger is fired for."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_level
-msgctxt "fbmstrconstunit.sdesc_tg_level"
 msgid "A string of either ROW or STATEMENT depending on the trigger's definition."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_name
-msgctxt "fbmstrconstunit.sdesc_tg_name"
 msgid "Variable that contains the name of the trigger actually fired."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_nargs
-msgctxt "fbmstrconstunit.sdesc_tg_nargs"
 msgid "The number of arguments given to the trigger procedure in the CREATE TRIGGER statement."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_op
-msgctxt "fbmstrconstunit.sdesc_tg_op"
 msgid "A string of INSERT, UPDATE, DELETE, or TRUNCATE telling for which operation the trigger was fired."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_relid
-msgctxt "fbmstrconstunit.sdesc_tg_relid"
 msgid "The object ID of the table that caused the trigger invocation."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_relname
-msgctxt "fbmstrconstunit.sdesc_tg_relname"
 msgid "The name of the table that caused the trigger invocation. This is now deprecated, and could disappear in a future release. Use TG_TABLE_NAME instead."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_table_name
-msgctxt "fbmstrconstunit.sdesc_tg_table_name"
 msgid "The name of the table that caused the trigger invocation."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_table_schema
-msgctxt "fbmstrconstunit.sdesc_tg_table_schema"
 msgid "The name of the schema of the table that caused the trigger invocation."
 msgstr ""
 
@@ -1336,7 +1282,6 @@ msgid "Variable that contains the command tag for which the trigger is fired."
 msgstr ""
 
 #: fbmstrconstunit.sdesc_tg_when
-msgctxt "fbmstrconstunit.sdesc_tg_when"
 msgid "A string of BEFORE, AFTER, or INSTEAD OF, depending on the trigger's definition."
 msgstr ""
 
@@ -1385,17 +1330,14 @@ msgid "Display data properties"
 msgstr ""
 
 #: fbmstrconstunit.sdomain
-msgctxt "fbmstrconstunit.sdomain"
 msgid "Domain"
 msgstr ""
 
 #: fbmstrconstunit.sdomainname
-msgctxt "fbmstrconstunit.sdomainname"
 msgid "Domain name"
 msgstr ""
 
 #: fbmstrconstunit.sdomains
-msgctxt "fbmstrconstunit.sdomains"
 msgid "Domains"
 msgstr ""
 
@@ -1412,7 +1354,6 @@ msgid "Drop field"
 msgstr ""
 
 #: fbmstrconstunit.sdropforeignkey
-msgctxt "fbmstrconstunit.sdropforeignkey"
 msgid "Drop foreign key"
 msgstr ""
 
@@ -1445,7 +1386,6 @@ msgid "Duplicate index name"
 msgstr ""
 
 #: fbmstrconstunit.sduration
-msgctxt "fbmstrconstunit.sduration"
 msgid "Duration"
 msgstr ""
 
@@ -1455,7 +1395,6 @@ msgid "Edit"
 msgstr ""
 
 #: fbmstrconstunit.seditdbfolder
-msgctxt "fbmstrconstunit.seditdbfolder"
 msgid "Edit DB folder"
 msgstr ""
 
@@ -1488,7 +1427,6 @@ msgid "Editor options"
 msgstr ""
 
 #: fbmstrconstunit.seditparam
-msgctxt "fbmstrconstunit.seditparam"
 msgid "Edit param"
 msgstr ""
 
@@ -1505,12 +1443,10 @@ msgid "Edit user in list"
 msgstr ""
 
 #: fbmstrconstunit.senableautocompletion
-msgctxt "fbmstrconstunit.senableautocompletion"
 msgid "Enable autocompletion"
 msgstr ""
 
 #: fbmstrconstunit.senabled
-msgctxt "fbmstrconstunit.senabled"
 msgid "Enabled"
 msgstr ""
 
@@ -1563,7 +1499,6 @@ msgid "Enter template name"
 msgstr ""
 
 #: fbmstrconstunit.sentervalues
-msgctxt "fbmstrconstunit.sentervalues"
 msgid "Enter values"
 msgstr ""
 
@@ -1572,7 +1507,6 @@ msgid "Environment Options"
 msgstr ""
 
 #: fbmstrconstunit.serror
-msgctxt "fbmstrconstunit.serror"
 msgid "Error"
 msgstr ""
 
@@ -1652,7 +1586,6 @@ msgid "Exit application..."
 msgstr ""
 
 #: fbmstrconstunit.sexpand
-msgctxt "fbmstrconstunit.sexpand"
 msgid "Expand"
 msgstr ""
 
@@ -1661,7 +1594,6 @@ msgid "Expand all"
 msgstr ""
 
 #: fbmstrconstunit.sexportdata
-msgctxt "fbmstrconstunit.sexportdata"
 msgid "Export data..."
 msgstr ""
 
@@ -1807,12 +1739,15 @@ msgstr ""
 msgid "Field Dependencies"
 msgstr ""
 
+#: fbmstrconstunit.sfieldfromnamedselect
+msgid "field from named select %s"
+msgstr ""
+
 #: fbmstrconstunit.sfieldinitialvaluereq
 msgid "For NOT NULL fields you must specify an initial value"
 msgstr ""
 
 #: fbmstrconstunit.sfieldname
-msgctxt "fbmstrconstunit.sfieldname"
 msgid "Field name"
 msgstr ""
 
@@ -1821,7 +1756,6 @@ msgid "Requared field name."
 msgstr ""
 
 #: fbmstrconstunit.sfields
-msgctxt "fbmstrconstunit.sfields"
 msgid "Fields"
 msgstr ""
 
@@ -1894,7 +1828,6 @@ msgid "Filter style"
 msgstr ""
 
 #: fbmstrconstunit.sfind
-msgctxt "fbmstrconstunit.sfind"
 msgid "Find"
 msgstr ""
 
@@ -1915,7 +1848,6 @@ msgid "Find in objects"
 msgstr ""
 
 #: fbmstrconstunit.sfindnext
-msgctxt "fbmstrconstunit.sfindnext"
 msgid "Find next"
 msgstr ""
 
@@ -1996,7 +1928,6 @@ msgid "Foreign data wrapper"
 msgstr ""
 
 #: fbmstrconstunit.sforeignkey
-msgctxt "fbmstrconstunit.sforeignkey"
 msgid "Foreign key"
 msgstr ""
 
@@ -2005,7 +1936,6 @@ msgid "Foreign key rule"
 msgstr ""
 
 #: fbmstrconstunit.sforeignkeys
-msgctxt "fbmstrconstunit.sforeignkeys"
 msgid "Foreign keys"
 msgstr ""
 
@@ -2039,7 +1969,6 @@ msgid "Delete this alias?"
 msgstr ""
 
 #: fbmstrconstunit.sfromdate
-msgctxt "fbmstrconstunit.sfromdate"
 msgid "From date"
 msgstr ""
 
@@ -2088,7 +2017,6 @@ msgid "Funtion not complete..."
 msgstr ""
 
 #: fbmstrconstunit.sgeneral
-msgctxt "fbmstrconstunit.sgeneral"
 msgid "General"
 msgstr ""
 
@@ -2185,7 +2113,6 @@ msgid "Group ID"
 msgstr ""
 
 #: fbmstrconstunit.sgroupname
-msgctxt "fbmstrconstunit.sgroupname"
 msgid "Group name"
 msgstr ""
 
@@ -2212,7 +2139,6 @@ msgid "Handler function"
 msgstr ""
 
 #: fbmstrconstunit.shighlightcurrentword
-msgctxt "fbmstrconstunit.shighlightcurrentword"
 msgid "Highlight current word"
 msgstr ""
 
@@ -2229,7 +2155,6 @@ msgid "History"
 msgstr ""
 
 #: fbmstrconstunit.shostname
-msgctxt "fbmstrconstunit.shostname"
 msgid "Host name"
 msgstr ""
 
@@ -2242,12 +2167,10 @@ msgid "Hours"
 msgstr ""
 
 #: fbmstrconstunit.sid
-msgctxt "fbmstrconstunit.sid"
 msgid "ID"
 msgstr ""
 
 #: fbmstrconstunit.sidentifierscharcase
-msgctxt "fbmstrconstunit.sidentifierscharcase"
 msgid "Identifiers char case"
 msgstr ""
 
@@ -2260,7 +2183,6 @@ msgid "Ignore checksums"
 msgstr ""
 
 #: fbmstrconstunit.signorelimbo
-msgctxt "fbmstrconstunit.signorelimbo"
 msgid "Ignore Limbo"
 msgstr ""
 
@@ -2294,12 +2216,10 @@ msgid "Include all from %s"
 msgstr ""
 
 #: fbmstrconstunit.sincrement
-msgctxt "fbmstrconstunit.sincrement"
 msgid "Increment"
 msgstr ""
 
 #: fbmstrconstunit.sindex
-msgctxt "fbmstrconstunit.sindex"
 msgid "Index"
 msgstr ""
 
@@ -2312,7 +2232,6 @@ msgid "Index expression"
 msgstr ""
 
 #: fbmstrconstunit.sindexname
-msgctxt "fbmstrconstunit.sindexname"
 msgid "Index name"
 msgstr ""
 
@@ -2325,7 +2244,6 @@ msgid "Indexs on table : "
 msgstr ""
 
 #: fbmstrconstunit.sindexs
-msgctxt "fbmstrconstunit.sindexs"
 msgid "Indexs"
 msgstr ""
 
@@ -2342,7 +2260,6 @@ msgid "Information"
 msgstr ""
 
 #: fbmstrconstunit.sinheritstablefrom
-msgctxt "fbmstrconstunit.sinheritstablefrom"
 msgid "Inherits table from"
 msgstr ""
 
@@ -2396,7 +2313,6 @@ msgid "Path %s is not valid"
 msgstr ""
 
 #: fbmstrconstunit.sinvertcase
-msgctxt "fbmstrconstunit.sinvertcase"
 msgid "Invert case"
 msgstr ""
 
@@ -2417,7 +2333,6 @@ msgid "Is local"
 msgstr ""
 
 #: fbmstrconstunit.siswindowfunction
-msgctxt "fbmstrconstunit.siswindowfunction"
 msgid "Is window function"
 msgstr ""
 
@@ -2426,7 +2341,6 @@ msgid "Its example"
 msgstr ""
 
 #: fbmstrconstunit.sjobid
-msgctxt "fbmstrconstunit.sjobid"
 msgid "Job ID"
 msgstr ""
 
@@ -2464,12 +2378,10 @@ msgid "keyword"
 msgstr ""
 
 #: fbmstrconstunit.skeywordcharcase
-msgctxt "fbmstrconstunit.skeywordcharcase"
 msgid "Keyword  char case"
 msgstr ""
 
 #: fbmstrconstunit.slanguage
-msgctxt "fbmstrconstunit.slanguage"
 msgid "Language"
 msgstr ""
 
@@ -2486,12 +2398,10 @@ msgid "Last name"
 msgstr ""
 
 #: fbmstrconstunit.slastrun
-msgctxt "fbmstrconstunit.slastrun"
 msgid "Last run"
 msgstr ""
 
 #: fbmstrconstunit.slastvalue
-msgctxt "fbmstrconstunit.slastvalue"
 msgid "Last value"
 msgstr ""
 
@@ -2516,7 +2426,6 @@ msgid "Legacy file format"
 msgstr ""
 
 #: fbmstrconstunit.slicense
-msgctxt "fbmstrconstunit.slicense"
 msgid "License"
 msgstr ""
 
@@ -2583,17 +2492,14 @@ msgid "Lower"
 msgstr ""
 
 #: fbmstrconstunit.slowercase
-msgctxt "fbmstrconstunit.slowercase"
 msgid "Lower case"
 msgstr ""
 
 #: fbmstrconstunit.smaincaption
-msgctxt "fbmstrconstunit.smaincaption"
 msgid "Free Database Manager"
 msgstr ""
 
 #: fbmstrconstunit.smainslogan
-msgctxt "fbmstrconstunit.smainslogan"
 msgid "Easy and free control you database"
 msgstr ""
 
@@ -2634,7 +2540,6 @@ msgid "Max user connections"
 msgstr ""
 
 #: fbmstrconstunit.smaxvalue
-msgctxt "fbmstrconstunit.smaxvalue"
 msgid "Max value"
 msgstr ""
 
@@ -2914,7 +2819,6 @@ msgid "Meta data loging enable"
 msgstr ""
 
 #: fbmstrconstunit.smetadataonly
-msgctxt "fbmstrconstunit.smetadataonly"
 msgid "Metadata Only"
 msgstr ""
 
@@ -2923,12 +2827,10 @@ msgid "Middle name"
 msgstr ""
 
 #: fbmstrconstunit.sminutes
-msgctxt "fbmstrconstunit.sminutes"
 msgid "Minutes"
 msgstr ""
 
 #: fbmstrconstunit.sminvalue
-msgctxt "fbmstrconstunit.sminvalue"
 msgid "Min value"
 msgstr ""
 
@@ -2945,17 +2847,14 @@ msgid "Modifi rule"
 msgstr ""
 
 #: fbmstrconstunit.smodifitrigger
-msgctxt "fbmstrconstunit.smodifitrigger"
 msgid "Modifi trigger"
 msgstr ""
 
 #: fbmstrconstunit.smonth
-msgctxt "fbmstrconstunit.smonth"
 msgid "Month"
 msgstr ""
 
 #: fbmstrconstunit.smovedown
-msgctxt "fbmstrconstunit.smovedown"
 msgid "Move down"
 msgstr ""
 
@@ -2968,7 +2867,6 @@ msgid "Move down local variable"
 msgstr ""
 
 #: fbmstrconstunit.smoveup
-msgctxt "fbmstrconstunit.smoveup"
 msgid "Move up"
 msgstr ""
 
@@ -2993,7 +2891,6 @@ msgid "Name"
 msgstr ""
 
 #: fbmstrconstunit.snamecase
-msgctxt "fbmstrconstunit.snamecase"
 msgid "Name case"
 msgstr ""
 
@@ -3019,7 +2916,6 @@ msgid "New "
 msgstr ""
 
 #: fbmstrconstunit.snewdbfolder
-msgctxt "fbmstrconstunit.snewdbfolder"
 msgid "New DB folder"
 msgstr ""
 
@@ -3032,7 +2928,6 @@ msgid "New field"
 msgstr ""
 
 #: fbmstrconstunit.snewforeignkey
-msgctxt "fbmstrconstunit.snewforeignkey"
 msgid "New foreign key"
 msgstr ""
 
@@ -3071,12 +2966,10 @@ msgid "New role"
 msgstr ""
 
 #: fbmstrconstunit.snewrule
-msgctxt "fbmstrconstunit.snewrule"
 msgid "New rule"
 msgstr ""
 
 #: fbmstrconstunit.snewtrigger
-msgctxt "fbmstrconstunit.snewtrigger"
 msgid "New trigger"
 msgstr ""
 
@@ -3090,12 +2983,10 @@ msgid "Next"
 msgstr ""
 
 #: fbmstrconstunit.snextrun
-msgctxt "fbmstrconstunit.snextrun"
 msgid "Next run"
 msgstr ""
 
 #: fbmstrconstunit.snogarbagecollection
-msgctxt "fbmstrconstunit.snogarbagecollection"
 msgid "No Garbage Collection"
 msgstr ""
 
@@ -3104,7 +2995,6 @@ msgid "No handler"
 msgstr ""
 
 #: fbmstrconstunit.snontransportable
-msgctxt "fbmstrconstunit.snontransportable"
 msgid "Non Transportable"
 msgstr ""
 
@@ -3113,7 +3003,6 @@ msgid "Normal mode"
 msgstr ""
 
 #: fbmstrconstunit.snoshadow
-msgctxt "fbmstrconstunit.snoshadow"
 msgid "No Shadow"
 msgstr ""
 
@@ -3126,7 +3015,6 @@ msgid "Not connected..."
 msgstr ""
 
 #: fbmstrconstunit.snotnull
-msgctxt "fbmstrconstunit.snotnull"
 msgid "Not null"
 msgstr ""
 
@@ -3135,7 +3023,6 @@ msgid "No validator"
 msgstr ""
 
 #: fbmstrconstunit.snovaliditycheck
-msgctxt "fbmstrconstunit.snovaliditycheck"
 msgid "No Validity Check"
 msgstr ""
 
@@ -3152,12 +3039,10 @@ msgid "Numeric"
 msgstr ""
 
 #: fbmstrconstunit.sobjectid
-msgctxt "fbmstrconstunit.sobjectid"
 msgid "Object ID"
 msgstr ""
 
 #: fbmstrconstunit.sobjectinspector
-msgctxt "fbmstrconstunit.sobjectinspector"
 msgid "Object inspector"
 msgstr ""
 
@@ -3166,7 +3051,6 @@ msgid "ObjectKind not defined for class %s. Object : %"
 msgstr ""
 
 #: fbmstrconstunit.sobjectname
-msgctxt "fbmstrconstunit.sobjectname"
 msgid "Object name"
 msgstr ""
 
@@ -3350,7 +3234,6 @@ msgid "Oldest"
 msgstr ""
 
 #: fbmstrconstunit.soldmetadatadesc
-msgctxt "fbmstrconstunit.soldmetadatadesc"
 msgid "Old Metadata Desc"
 msgstr ""
 
@@ -3371,7 +3254,6 @@ msgid "On Delete"
 msgstr ""
 
 #: fbmstrconstunit.sonerelationatatime
-msgctxt "fbmstrconstunit.sonerelationatatime"
 msgid "One Relation At A Time"
 msgstr ""
 
@@ -3412,7 +3294,6 @@ msgid "On Update"
 msgstr ""
 
 #: fbmstrconstunit.sopen
-msgctxt "fbmstrconstunit.sopen"
 msgid "Open"
 msgstr ""
 
@@ -3516,7 +3397,6 @@ msgid "Param property"
 msgstr ""
 
 #: fbmstrconstunit.sparams
-msgctxt "fbmstrconstunit.sparams"
 msgid "Params"
 msgstr ""
 
@@ -3579,7 +3459,6 @@ msgid "Login enabled"
 msgstr ""
 
 #: fbmstrconstunit.spgmaxconnection
-msgctxt "fbmstrconstunit.spgmaxconnection"
 msgid "Max. connections"
 msgstr ""
 
@@ -3605,7 +3484,6 @@ msgid "PG : trigger"
 msgstr ""
 
 #: fbmstrconstunit.spgroleprivilege
-msgctxt "fbmstrconstunit.spgroleprivilege"
 msgid "Role privilege"
 msgstr ""
 
@@ -3619,7 +3497,6 @@ msgid "User name"
 msgstr ""
 
 #: fbmstrconstunit.spgvaliduntil
-msgctxt "fbmstrconstunit.spgvaliduntil"
 msgid "Valid until"
 msgstr ""
 
@@ -3640,7 +3517,6 @@ msgid "Policy"
 msgstr ""
 
 #: fbmstrconstunit.sport
-msgctxt "fbmstrconstunit.sport"
 msgid "Port"
 msgstr ""
 
@@ -3653,7 +3529,6 @@ msgid "Postgres server status"
 msgstr ""
 
 #: fbmstrconstunit.spostgresqltablecreateproc
-msgctxt "fbmstrconstunit.spostgresqltablecreateproc"
 msgid "Create procedure"
 msgstr ""
 
@@ -3700,7 +3575,6 @@ msgid "Print field list"
 msgstr ""
 
 #: fbmstrconstunit.sprintfklist
-msgctxt "fbmstrconstunit.sprintfklist"
 msgid "Print FK list"
 msgstr ""
 
@@ -3729,7 +3603,6 @@ msgid "Print local variable"
 msgstr ""
 
 #: fbmstrconstunit.sprintparams
-msgctxt "fbmstrconstunit.sprintparams"
 msgid "Print params"
 msgstr ""
 
@@ -3771,7 +3644,6 @@ msgid "Progres"
 msgstr ""
 
 #: fbmstrconstunit.sproperty
-msgctxt "fbmstrconstunit.sproperty"
 msgid "Property"
 msgstr ""
 
@@ -3812,7 +3684,6 @@ msgid "Records from table : "
 msgstr ""
 
 #: fbmstrconstunit.srecompilealltriggers
-msgctxt "fbmstrconstunit.srecompilealltriggers"
 msgid "Recompile all triggers"
 msgstr ""
 
@@ -3841,7 +3712,6 @@ msgid "records"
 msgstr ""
 
 #: fbmstrconstunit.sredo
-msgctxt "fbmstrconstunit.sredo"
 msgid "Redo"
 msgstr ""
 
@@ -3863,7 +3733,6 @@ msgid "Refresh"
 msgstr ""
 
 #: fbmstrconstunit.srefreshdatahint
-msgctxt "fbmstrconstunit.srefreshdatahint"
 msgid "Refresh data"
 msgstr ""
 
@@ -3909,7 +3778,6 @@ msgid "Registration params"
 msgstr ""
 
 #: fbmstrconstunit.sregistreddatabase
-msgctxt "fbmstrconstunit.sregistreddatabase"
 msgid "Registred database"
 msgstr ""
 
@@ -3996,7 +3864,6 @@ msgid "Reports options"
 msgstr ""
 
 #: fbmstrconstunit.srestore
-msgctxt "fbmstrconstunit.srestore"
 msgid "Restore"
 msgstr ""
 
@@ -4021,7 +3888,6 @@ msgid "Grid"
 msgstr ""
 
 #: fbmstrconstunit.sreturnnullforemptyresult
-msgctxt "fbmstrconstunit.sreturnnullforemptyresult"
 msgid "Return null for empty result"
 msgstr ""
 
@@ -4030,7 +3896,6 @@ msgid "Return params"
 msgstr ""
 
 #: fbmstrconstunit.sreturntype
-msgctxt "fbmstrconstunit.sreturntype"
 msgid "Return type"
 msgstr ""
 
@@ -4063,7 +3928,6 @@ msgid "Rolback transaction"
 msgstr ""
 
 #: fbmstrconstunit.srole
-msgctxt "fbmstrconstunit.srole"
 msgid "Role"
 msgstr ""
 
@@ -4088,7 +3952,6 @@ msgid "Role propertys"
 msgstr ""
 
 #: fbmstrconstunit.sroles
-msgctxt "fbmstrconstunit.sroles"
 msgid "Roles"
 msgstr ""
 
@@ -4109,17 +3972,14 @@ msgid "For each"
 msgstr ""
 
 #: fbmstrconstunit.srule
-msgctxt "fbmstrconstunit.srule"
 msgid "Rule"
 msgstr ""
 
 #: fbmstrconstunit.srulename
-msgctxt "fbmstrconstunit.srulename"
 msgid "Rule name"
 msgstr ""
 
 #: fbmstrconstunit.srules
-msgctxt "fbmstrconstunit.srules"
 msgid "Rules"
 msgstr ""
 
@@ -4128,7 +3988,6 @@ msgid "Run"
 msgstr ""
 
 #: fbmstrconstunit.srunasowner
-msgctxt "fbmstrconstunit.srunasowner"
 msgid "Run as owner"
 msgstr ""
 
@@ -4145,7 +4004,6 @@ msgid "Run SQL script"
 msgstr ""
 
 #: fbmstrconstunit.ssave
-msgctxt "fbmstrconstunit.ssave"
 msgid "Save"
 msgstr ""
 
@@ -4176,7 +4034,6 @@ msgid "Save to file..."
 msgstr ""
 
 #: fbmstrconstunit.sscale
-msgctxt "fbmstrconstunit.sscale"
 msgid "Scale"
 msgstr ""
 
@@ -4185,7 +4042,6 @@ msgid "Scheme"
 msgstr ""
 
 #: fbmstrconstunit.sschemename
-msgctxt "fbmstrconstunit.sschemename"
 msgid "Scheme name"
 msgstr ""
 
@@ -4202,7 +4058,6 @@ msgid "Script modified. Save?"
 msgstr ""
 
 #: fbmstrconstunit.ssearchcaption
-msgctxt "fbmstrconstunit.ssearchcaption"
 msgid "Search"
 msgstr ""
 
@@ -4212,7 +4067,6 @@ msgid "Replace"
 msgstr ""
 
 #: fbmstrconstunit.ssecurity
-msgctxt "fbmstrconstunit.ssecurity"
 msgid "Security"
 msgstr ""
 
@@ -4270,7 +4124,6 @@ msgid "Separeted files"
 msgstr ""
 
 #: fbmstrconstunit.ssequence
-msgctxt "fbmstrconstunit.ssequence"
 msgid "Sequence"
 msgstr ""
 
@@ -4399,7 +4252,6 @@ msgid "Single file restore"
 msgstr ""
 
 #: fbmstrconstunit.ssize
-msgctxt "fbmstrconstunit.ssize"
 msgid "Size"
 msgstr ""
 
@@ -4420,7 +4272,6 @@ msgid "Sorting"
 msgstr ""
 
 #: fbmstrconstunit.ssortorder
-msgctxt "fbmstrconstunit.ssortorder"
 msgid "Sort order"
 msgstr ""
 
@@ -4441,7 +4292,6 @@ msgid "SQL Dialect"
 msgstr ""
 
 #: fbmstrconstunit.ssqleditor
-msgctxt "fbmstrconstunit.ssqleditor"
 msgid "SQL editor"
 msgstr ""
 
@@ -4485,13 +4335,44 @@ msgstr ""
 msgid "Source page name"
 msgstr ""
 
+#: fbmstrconstunit.ssshconnectionplugin
+msgid "SSH сonnection plugin"
+msgstr ""
+
+#: fbmstrconstunit.ssshfilepath
+msgid "SSH file path"
+msgstr ""
+
+#: fbmstrconstunit.ssshhost
+msgid "SSH Host"
+msgstr ""
+
+#: fbmstrconstunit.ssshidentifyfile
+msgid "SSH identify file"
+msgstr ""
+
+#: fbmstrconstunit.ssshpassfilepath
+msgid "SSHPass file path"
+msgstr ""
+
+#: fbmstrconstunit.ssshpassword
+msgid "SSH password"
+msgstr ""
+
+#: fbmstrconstunit.ssshport
+msgid "SSH port"
+msgstr ""
+
+#: fbmstrconstunit.ssshuser
+msgid "SSH User"
+msgstr ""
+
 #: fbmstrconstunit.sstandart
 msgctxt "fbmstrconstunit.sstandart"
 msgid "Standart"
 msgstr ""
 
 #: fbmstrconstunit.sstart
-msgctxt "fbmstrconstunit.sstart"
 msgid "Start date"
 msgstr ""
 
@@ -4508,7 +4389,6 @@ msgid "START WITH"
 msgstr ""
 
 #: fbmstrconstunit.sstatament
-msgctxt "fbmstrconstunit.sstatament"
 msgid "Statament"
 msgstr ""
 
@@ -4533,7 +4413,6 @@ msgid "Stats date"
 msgstr ""
 
 #: fbmstrconstunit.sstatus
-msgctxt "fbmstrconstunit.sstatus"
 msgid "Status"
 msgstr ""
 
@@ -4542,7 +4421,6 @@ msgid "Step"
 msgstr ""
 
 #: fbmstrconstunit.sstepname
-msgctxt "fbmstrconstunit.sstepname"
 msgid "Step name"
 msgstr ""
 
@@ -4559,7 +4437,6 @@ msgid "Stop execute script"
 msgstr ""
 
 #: fbmstrconstunit.sstoredprocedure
-msgctxt "fbmstrconstunit.sstoredprocedure"
 msgid "Stored procedure"
 msgstr ""
 
@@ -4689,7 +4566,6 @@ msgid "System tables"
 msgstr ""
 
 #: fbmstrconstunit.stabcodecompletionparams
-msgctxt "fbmstrconstunit.stabcodecompletionparams"
 msgid "Codetools and auto code completion"
 msgstr ""
 
@@ -4711,17 +4587,14 @@ msgid "Table editor"
 msgstr ""
 
 #: fbmstrconstunit.stablename
-msgctxt "fbmstrconstunit.stablename"
 msgid "Table name"
 msgstr ""
 
 #: fbmstrconstunit.stableowner
-msgctxt "fbmstrconstunit.stableowner"
 msgid "Table owner"
 msgstr ""
 
 #: fbmstrconstunit.stables
-msgctxt "fbmstrconstunit.stables"
 msgid "Tables"
 msgstr ""
 
@@ -4730,7 +4603,6 @@ msgid "Table size"
 msgstr ""
 
 #: fbmstrconstunit.stablespace
-msgctxt "fbmstrconstunit.stablespace"
 msgid "Table space"
 msgstr ""
 
@@ -4751,22 +4623,18 @@ msgid "Task"
 msgstr ""
 
 #: fbmstrconstunit.staskclass
-msgctxt "fbmstrconstunit.staskclass"
 msgid "Task class"
 msgstr ""
 
 #: fbmstrconstunit.staskid
-msgctxt "fbmstrconstunit.staskid"
 msgid "Task ID"
 msgstr ""
 
 #: fbmstrconstunit.staskname
-msgctxt "fbmstrconstunit.staskname"
 msgid "Task name"
 msgstr ""
 
 #: fbmstrconstunit.stasks
-msgctxt "fbmstrconstunit.stasks"
 msgid "Tasks"
 msgstr ""
 
@@ -4791,7 +4659,6 @@ msgid "Templates"
 msgstr ""
 
 #: fbmstrconstunit.stemporary
-msgctxt "fbmstrconstunit.stemporary"
 msgid "Temporary"
 msgstr ""
 
@@ -4800,7 +4667,6 @@ msgid "Temp store directory"
 msgstr ""
 
 #: fbmstrconstunit.sterminatequeryquestion
-msgctxt "fbmstrconstunit.sterminatequeryquestion"
 msgid "Terminate a running query?"
 msgstr ""
 
@@ -4817,17 +4683,14 @@ msgid "Thousand separator"
 msgstr ""
 
 #: fbmstrconstunit.stime
-msgctxt "fbmstrconstunit.stime"
 msgid "Time"
 msgstr ""
 
 #: fbmstrconstunit.stimelife
-msgctxt "fbmstrconstunit.stimelife"
 msgid "Time life"
 msgstr ""
 
 #: fbmstrconstunit.stimes
-msgctxt "fbmstrconstunit.stimes"
 msgid "Times"
 msgstr ""
 
@@ -4840,7 +4703,6 @@ msgid "Toast size"
 msgstr ""
 
 #: fbmstrconstunit.stodate
-msgctxt "fbmstrconstunit.stodate"
 msgid "To date"
 msgstr ""
 
@@ -4901,7 +4763,6 @@ msgid "Transform"
 msgstr ""
 
 #: fbmstrconstunit.strigger
-msgctxt "fbmstrconstunit.strigger"
 msgid "Trigger"
 msgstr ""
 
@@ -4930,7 +4791,7 @@ msgstr ""
 msgid ""
 "Avaliable tags:\n"
 "%TABLE_NAME% - Table name\n"
-"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
+"%TRIGGER_TYPE% - Trigger type (BI0, AUD1)"
 msgstr ""
 
 #: fbmstrconstunit.striggernametemplate
@@ -4938,7 +4799,6 @@ msgid "Trigger name template"
 msgstr ""
 
 #: fbmstrconstunit.striggerondelete
-msgctxt "fbmstrconstunit.striggerondelete"
 msgid "On delete"
 msgstr ""
 
@@ -4951,7 +4811,6 @@ msgid "On update"
 msgstr ""
 
 #: fbmstrconstunit.striggerorder
-msgctxt "fbmstrconstunit.striggerorder"
 msgid "Order"
 msgstr ""
 
@@ -4960,7 +4819,6 @@ msgid "Trigger procedures"
 msgstr ""
 
 #: fbmstrconstunit.striggers
-msgctxt "fbmstrconstunit.striggers"
 msgid "Triggers"
 msgstr ""
 
@@ -5002,7 +4860,6 @@ msgid "Number of rows returned by queries in this database"
 msgstr ""
 
 #: fbmstrconstunit.stype
-msgctxt "fbmstrconstunit.stype"
 msgid "Type"
 msgstr ""
 
@@ -5011,7 +4868,6 @@ msgid "TypeOf"
 msgstr ""
 
 #: fbmstrconstunit.stypereturns
-msgctxt "fbmstrconstunit.stypereturns"
 msgid "Type returns"
 msgstr ""
 
@@ -5053,7 +4909,6 @@ msgid "Undo last editor changes"
 msgstr ""
 
 #: fbmstrconstunit.sunique
-msgctxt "fbmstrconstunit.sunique"
 msgid "Unique"
 msgstr ""
 
@@ -5086,7 +4941,6 @@ msgid "Unselect all"
 msgstr ""
 
 #: fbmstrconstunit.supdate
-msgctxt "fbmstrconstunit.supdate"
 msgid "Update"
 msgstr ""
 
@@ -5107,7 +4961,6 @@ msgid "Upper"
 msgstr ""
 
 #: fbmstrconstunit.suppercase
-msgctxt "fbmstrconstunit.suppercase"
 msgid "Upper case"
 msgstr ""
 
@@ -5116,7 +4969,6 @@ msgid "Usage"
 msgstr ""
 
 #: fbmstrconstunit.suseallspace
-msgctxt "fbmstrconstunit.suseallspace"
 msgid "Use All Space"
 msgstr ""
 
@@ -5125,7 +4977,6 @@ msgid "Use custom codepage for loggin"
 msgstr ""
 
 #: fbmstrconstunit.susedeffillfactor
-msgctxt "fbmstrconstunit.susedeffillfactor"
 msgid "Use default fill factor"
 msgstr ""
 
@@ -5186,12 +5037,15 @@ msgstr ""
 msgid "Users/Groups"
 msgstr ""
 
+#: fbmstrconstunit.susesshtunnel
+msgid "Use SSH tunnel"
+msgstr ""
+
 #: fbmstrconstunit.susetablealisincreatesqlform
 msgid "Use table name as alis in create SQL form"
 msgstr ""
 
 #: fbmstrconstunit.svalidate
-msgctxt "fbmstrconstunit.svalidate"
 msgid "Validate"
 msgstr ""
 
@@ -5220,12 +5074,10 @@ msgid "Variable type"
 msgstr ""
 
 #: fbmstrconstunit.sview
-msgctxt "fbmstrconstunit.sview"
 msgid "View"
 msgstr ""
 
 #: fbmstrconstunit.sviews
-msgctxt "fbmstrconstunit.sviews"
 msgid "Views"
 msgstr ""
 
@@ -5242,7 +5094,6 @@ msgid "With Grant Options"
 msgstr ""
 
 #: fbmstrconstunit.swithoids
-msgctxt "fbmstrconstunit.swithoids"
 msgid "With OIDs"
 msgstr ""
 
