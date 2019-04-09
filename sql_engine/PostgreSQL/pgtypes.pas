@@ -41,7 +41,8 @@ type
                       pgVersion9_4,
                       pgVersion9_5,
                       pgVersion9_6,
-                      pgVersion10_0
+                      pgVersion10_0,
+                      pgVersion11_0
                       );
 
 
@@ -116,6 +117,7 @@ const
      'Postgre SQL version 9.4',
      'Postgre SQL version 9.5',
      'Postgre SQL version 9.6',
+     'Postgre SQL version 10.0',
      'Postgre SQL version 10.0'
      );
 
@@ -132,7 +134,8 @@ const
      'postgresql-9', //9.4
      'postgresql-9', //9.5
      'postgresql-9', //9.6
-     'postgresql-9'  //10.0
+     'postgresql-9', //10.0
+     'postgresql-9'  //11.0
      );
 
 implementation
