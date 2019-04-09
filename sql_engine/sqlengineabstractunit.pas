@@ -1819,6 +1819,7 @@ procedure TSQLEngineAbstract.SetConnected(const AValue: boolean);
 var
   i: Integer;
   G: TDBObject;
+  SErrorMsg:string;
 begin
   if FConnected = AValue then exit;
 
@@ -1827,7 +1828,16 @@ begin
   else
     DoBeforeDisconnect;
 
-  FConnected:=InternalSetConnected(AValue);
+  SErrorMsg:='';
+  try
+    FConnected:=InternalSetConnected(AValue);
+  except
+    on E:Exception do
+    begin
+      FConnected:=false;
+      SErrorMsg:=E.Message;
+    end;
+  end;
 
   if FConnected then
   begin
@@ -1842,6 +1852,9 @@ begin
     DoneGroupsObjects;
     DoAfterDisconnect;
   end;
+
+  if SErrorMsg <> '' then
+    raise Exception.Create(SErrorMsg);
 end;
 
 constructor TSQLEngineAbstract.Create;
