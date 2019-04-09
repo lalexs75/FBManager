@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <ProjectOptions BuildModesCount="1">
+  <ProjectOptions>
     <Version Value="12"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
@@ -10,7 +10,7 @@
       <Icon Value="0"/>
     </General>
     <BuildModes>
-      <Item1 Name="default" Default="True"/>
+      <Item Name="default" Default="True"/>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -52,57 +52,89 @@
         <PackageName Value="FCL"/>
       </Item10>
     </RequiredPackages>
-    <Units Count="8">
-      <Unit0>
+    <Units>
+      <Unit>
         <Filename Value="UT_SqlParser.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit0>
-      <Unit1>
+      </Unit>
+      <Unit>
         <Filename Value="pgtestcase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="PGSQLParserData"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
-      </Unit1>
-      <Unit2>
+      </Unit>
+      <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
-      </Unit2>
-      <Unit3>
+      </Unit>
+      <Unit>
         <Filename Value="fbmanager_define.inc"/>
         <IsPartOfProject Value="True"/>
-      </Unit3>
-      <Unit4>
+      </Unit>
+      <Unit>
         <Filename Value="fbtestcase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FBTestSQLData"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-      </Unit4>
-      <Unit5>
+      </Unit>
+      <Unit>
         <Filename Value="mysqltestcase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MySQLParserData"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="MySQLTestCase"/>
-      </Unit5>
-      <Unit6>
+      </Unit>
+      <Unit>
         <Filename Value="sqlite3testcase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SQLite3ParserData"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="SQLite3TestCase"/>
-      </Unit6>
-      <Unit7>
+      </Unit>
+      <Unit>
         <Filename Value="pgcopycmdcase.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PGCopyCmdCase"/>
-      </Unit7>
+      </Unit>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit/>
+      <Unit>
+        <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SSHConnectionUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -112,7 +144,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql"/>
+      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql;../../sql_engine/plugins"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

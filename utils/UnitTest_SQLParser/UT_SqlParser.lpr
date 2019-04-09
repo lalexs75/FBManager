@@ -4,7 +4,7 @@ program UT_SqlParser;
 
 uses
   Interfaces, Forms, GuiTestRunner, rxnew, rx, zeos_ex, uiblaz, PGTestCase,
-  FBTestCase, MySQLTestCase, SQLite3TestCase, PGCopyCmdCase;
+  FBTestCase, MySQLTestCase, SQLite3TestCase, PGCopyCmdCase, SSHConnectionUnit;
 
 {$R *.res}
 
