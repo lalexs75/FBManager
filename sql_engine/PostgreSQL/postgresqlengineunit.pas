@@ -6226,7 +6226,7 @@ initialization
                                                                        //SELECT INTO — создать таблицу из результатов запроса
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommandInsert, 'INSERT INTO');
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommandUpdate, 'UPDATE');   //UPDATE — изменить строки таблицы
-  RegisterSQLStatment(TSQLEnginePostgre, TSQLCommandDelete, 'DELETE FROM'); //DELETE — удалить записи таблицы
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCommandDelete, 'DELETE FROM'); //DELETE — удалить записи таблицы
 
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQL_DO, 'DO');  //DO — выполнить анонимный блок кода
 

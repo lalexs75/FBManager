@@ -2796,6 +2796,24 @@ type
     procedure InitParserTree;override;
   end;
 
+  { TPGSQLCommandDelete }
+
+  TPGSQLCommandDelete = class(TSQLCommandDelete)
+  private
+    FDeleteOnly: boolean;
+    FTableAlias: string;
+    FTableAliasAs: boolean;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property DeleteOnly:boolean read FDeleteOnly write FDeleteOnly;
+    property TableAliasAs:boolean read FTableAliasAs write FTableAliasAs;
+    property TableAlias:string read FTableAlias write FTableAlias;
+  end;
+
 implementation
 uses strutils, rxstrutils;
 
@@ -3373,6 +3391,77 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLCommandDelete }
+
+procedure TPGSQLCommandDelete.InitParserTree;
+var
+  FSQLTokens, T, TName1, TName2, T1, T2, T3, T3_1: TSQLTokenRecord;
+begin
+  (*
+  [ WITH [ RECURSIVE ] запрос_WITH [, ...] ]
+  DELETE FROM [ ONLY ] имя_таблицы [ * ] [ [ AS ] псевдоним ]
+      [ USING список_USING ]
+      [ WHERE условие | WHERE CURRENT OF имя_курсора ]
+      [ RETURNING * | выражение_результата [ [ AS ] имя_результата ] [, ...] ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'FROM', []);
+   T1:=AddSQLTokens(stKeyword, T, 'ONLY', [], 1);
+  TName1:=AddSQLTokens(stIdentificator, [T, T1], '', [], 2);
+    TName2:=AddSQLTokens(stSymbol, TName1, '.', [toOptional]);
+    TName2:=AddSQLTokens(stIdentificator, TName2, '', [], 3);
+
+  T2:=AddSQLTokens(stSymbol, [TName1, TName2], '*', [toOptional], 4);
+  T3:=AddSQLTokens(stKeyword, [TName1, TName2, T2], 'AS', [toOptional], 5);
+    T3_1:=AddSQLTokens(stKeyword, T3, 'AS', [toOptional], 6);
+end;
+
+procedure TPGSQLCommandDelete.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FDeleteOnly:=true;
+    2:TableName:=AWord;
+    3:begin
+        SchemaName:=TableName;
+        TableName:=AWord;
+      end;
+    4:; //
+    5:FTableAliasAs:=true;
+    6:FTableAlias:=AWord;
+  end;
+end;
+
+procedure TPGSQLCommandDelete.MakeSQL;
+var
+  S: String;
+begin
+  S:='DELETE FROM ';
+  if FDeleteOnly then S:=S + 'ONLY ';
+  if SchemaName<>'' then
+    S:=S + SchemaName + '.';
+  S:=S + TableName;
+
+  if TableAlias <>'' then
+  begin
+    if FTableAliasAs then S:=S + ' AS';
+    S:=S + ' ' + TableAlias;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCommandDelete.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCommandDelete then
+  begin
+    FDeleteOnly:=TPGSQLCommandDelete(ASource).FDeleteOnly;
+    FTableAlias:=TPGSQLCommandDelete(ASource).FTableAlias;
+    FTableAliasAs:=TPGSQLCommandDelete(ASource).FTableAliasAs;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterRule }

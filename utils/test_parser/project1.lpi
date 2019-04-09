@@ -173,45 +173,6 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>
