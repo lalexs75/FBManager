@@ -118,7 +118,7 @@ const
      'Postgre SQL version 9.5',
      'Postgre SQL version 9.6',
      'Postgre SQL version 10.0',
-     'Postgre SQL version 10.0'
+     'Postgre SQL version 11.0'
      );
 
   pgServerVersionProtoStr :array [TPGServerVersion] of string =
