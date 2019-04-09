@@ -853,23 +853,6 @@ resourcestring
   sMySQLSqlTriggerLazy                 = 'MySQL : trigger lazy mode';
 
 
-{  sBackupOptons1                    = 'Ignore Checksums';
-  sBackupOptons2                    = 'Ignore Limbo';
-  sBackupOptons3                    = 'Metadata Only';
-  sBackupOptons4                    = 'No Garbage Collection';
-  sBackupOptons5                    = 'Old Metadata Desc';
-  sBackupOptons6                    = 'Non Transportable';
-  sBackupOptons7                    = 'Convert Ext Tables';
-  sBackupOptons8                    = 'Expand';
-
-  sRestoreOptons1                   = 'Deactivate Indexes';
-  sRestoreOptons2                   = 'No Shadow';
-  sRestoreOptons3                   = 'No Validity Check';
-  sRestoreOptons4                   = 'One Relation At A Time';
-  sRestoreOptons5                   = 'Replace';
-  sRestoreOptons6                   = 'Create New DB';
-  sRestoreOptons7                   = 'Use All Space';
-  sRestoreOptons8                   = 'Validate';}
   sRegister                         = 'Register ';
   sCreateDB                         = 'Create ';
   sRegistrationParams               = 'Registration params';
@@ -1429,6 +1412,9 @@ resourcestring
   sTransactionPropertyForData                  = 'Transaction property for data';
   sTransactionPropertyForMetadata              = 'Transaction property for metadata';
   sTransactionPropertyForScriptEditor          = 'Transaction property for script editor';
+  sSSHConnectionTimeout                        = 'SSH connection timeout';
+  sSSHConnectionLoginFiled                     = 'SSH connection login filed';
+
 implementation
 
 end.

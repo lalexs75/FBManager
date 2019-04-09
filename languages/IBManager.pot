@@ -4335,8 +4335,16 @@ msgstr ""
 msgid "Source page name"
 msgstr ""
 
+#: fbmstrconstunit.ssshconnectionloginfiled
+msgid "SSH connection login filed"
+msgstr ""
+
 #: fbmstrconstunit.ssshconnectionplugin
 msgid "SSH сonnection plugin"
+msgstr ""
+
+#: fbmstrconstunit.ssshconnectiontimeout
+msgid "SSH connection timeout"
 msgstr ""
 
 #: fbmstrconstunit.ssshfilepath

@@ -34,6 +34,8 @@ const
   cmdSSH  = '';
   cmdSSHPasswd  = '';
   {$ENDIF}
+  sshTimeout = 200;
+
 type
   TSSHAuthType = (autPassword, autKey);
 
@@ -67,7 +69,7 @@ type
   end;
 
 implementation
-uses process, fbmToolsUnit;
+uses process, fbmToolsUnit, fbmStrConstUnit, rxlogging;
 
 const //Dont translate - standart messages from SSH
   sMsgOk1    = 'debug1: Authentication succeeded';
@@ -110,8 +112,10 @@ end;
 
 procedure TSSHConnectionPlugin.SetConnected(AValue: boolean);
 var
-  S, SLine: String;
+  S, SLine, S1: String;
   C: DWord;
+  FStop: Boolean;
+  Tick, k, KStart, j: Integer;
 begin
   if AValue = FSSHModule.Running then exit;
   if AValue then
@@ -122,7 +126,7 @@ begin
       InternalBuildCommandKey;
 
     FSSHModule.Execute;
-
+(*
     Sleep(5000); //wait for conect- ugly
 
     C:=FSSHModule.Output.NumBytesAvailable;
@@ -131,7 +135,61 @@ begin
       SetLength(S, C);
       FSSHModule.Output.Read(S[1], C);
     end;
-//    FSSHModule.Input.Write(FPassword[1], Length(FPassword));
+*)
+    FStop:=false;
+    Tick:=0;
+    S:='';
+    SLine:='';
+    while not FStop do
+    begin
+      Sleep(10);
+      C:=FSSHModule.Output.NumBytesAvailable;
+      if C>0 then
+      begin
+        k:=Length(SLine);
+        SetLength(S, C);
+        FSSHModule.Output.Read(S[1], C);
+        SLine:=SLine + S;
+        KStart:=1;
+        for j:=1 to Length(SLine) do
+        begin
+          if (SLine[j] in [#13, #10]) then
+          begin
+            S1:=Trim(Copy(SLine, KStart, j - KStart));
+            rxWriteLog(etError, S1);
+            if S1<>'' then
+            begin
+              if Copy(S1, 1, Length(sMsgOk1)) = sMsgOk1 then
+              begin
+                //SAuthMethod:=Trim(Copy(S1, Length(sMsgOk1)+1, Length(S1)));
+                FStop:=true;
+                Tick:=1000;
+              end
+              else
+              if Copy(S1, 1, Length(sMsgError1)) = sMsgError1 then
+              begin
+                FStop:=true;
+                Tick:=2000;
+              end;
+            end;
+            KStart:=j+1;
+          end;
+        end;
+        SLine:=Copy(SLine, KStart, Length(SLine));
+      end;
+      inc(Tick);
+      FStop:=(Tick > sshTimeout) or (not FSSHModule.Running);
+    end;
+
+    if ((Tick<1000) or (Tick>2000)) then
+    begin
+      if FSSHModule.Running then
+        FSSHModule.Terminate(0);
+      if (Tick<1000) then
+        raise Exception.Create(sSSHConnectionTimeout)
+      else
+        raise Exception.Create(sSSHConnectionLoginFiled)
+    end;
 
   end
   else
