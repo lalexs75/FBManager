@@ -115,6 +115,7 @@ begin
     edtPort.Text:=IntToStr(P.Port);
     edtUser.Text:=P.UserName;
     edtPassword.Text:=P.Password;
+    RadioButton1.Checked:=P.AuthType = autPassword;
   end;
 end;
 
@@ -130,6 +131,10 @@ begin
     P.Port :=StrToInt(edtPort.Text);
     P.UserName       := edtUser.Text;
     P.Password       := edtPassword.Text;
+    if RadioButton1.Checked then
+      P.AuthType := autPassword
+    else
+      P.AuthType := autKey;
   end;
 end;
 

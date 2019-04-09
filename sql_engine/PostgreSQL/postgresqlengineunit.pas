@@ -857,7 +857,7 @@ type
     FPGConnection: TZConnection;
     FPGSysDB: TZConnection; //Connection to system 'postgres' database
     FServerVersion: TPGServerVersion;
-    FSSHConnectionPlugin: TSSHConnectionPlugin;
+    //FSSHConnectionPlugin: TSSHConnectionPlugin;
   private
     //Для ускорения работы
     FIDTypeTrigger:integer; //Переменная для привязки типа функции-тригера к данным в БД
@@ -2745,6 +2745,8 @@ begin
 end;
 
 constructor TSQLEnginePostgre.Create;
+var
+  FSSHConnectionPlugin: TSSHConnectionPlugin;
 begin
   inherited Create;
   FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint];

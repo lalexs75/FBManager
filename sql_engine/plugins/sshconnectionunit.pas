@@ -35,17 +35,20 @@ const
   cmdSSHPasswd  = '';
   {$ENDIF}
 type
+  TSSHAuthType = (autPassword, autKey);
 
   { TSSHConnectionPlugin }
 
   TSSHConnectionPlugin = class(TSQLEngineConnectionPlugin)
   private
+    FAuthType: TSSHAuthType;
     FHost: string;
     FIdentifyFile: string;
     FPassword: string;
     FPort: integer;
     FUserName: string;
-    procedure InternalBuildCommand;
+    procedure InternalBuildCommandPwd;
+    procedure InternalBuildCommandKey;
   protected
     FSSHModule:TProcessUTF8;
     function GetConnected: boolean; override;
@@ -60,20 +63,38 @@ type
     property UserName:string read FUserName write FUserName;
     property Password:string read FPassword write FPassword;
     property IdentifyFile:string read FIdentifyFile write FIdentifyFile;
+    property AuthType:TSSHAuthType read FAuthType write FAuthType;
   end;
 
 implementation
 uses process, fbmToolsUnit;
 
+const //Dont translate - standart messages from SSH
+  sMsgOk1    = 'debug1: Authentication succeeded';
+  sMsgError1 = 'Permission denied, please try again.';
+
 { TSSHConnectionPlugin }
 
-procedure TSSHConnectionPlugin.InternalBuildCommand;
+procedure TSSHConnectionPlugin.InternalBuildCommandPwd;
 var
   S: String;
 begin
   S:=Format('%s -p %s %s -N -L %d:%s:%d %s -v', [
      ConfigValues.ByNameAsString('SSHConnectionPlugin/SSHPassFilePath', cmdSSHPasswd),
      Password,
+     ConfigValues.ByNameAsString('SSHConnectionPlugin/SSHFilePath', cmdSSH),
+     Owner.RemotePort,
+     FHost,
+     FPort,
+     FUserName]);
+  FSSHModule.CommandLine:=S;
+end;
+
+procedure TSSHConnectionPlugin.InternalBuildCommandKey;
+var
+  S: String;
+begin
+  S:=Format('%s -N -L %d:%s:%d %s -v', [
      ConfigValues.ByNameAsString('SSHConnectionPlugin/SSHFilePath', cmdSSH),
      Owner.RemotePort,
      FHost,
@@ -89,13 +110,17 @@ end;
 
 procedure TSSHConnectionPlugin.SetConnected(AValue: boolean);
 var
-  S: String;
+  S, SLine: String;
   C: DWord;
 begin
   if AValue = FSSHModule.Running then exit;
   if AValue then
   begin
-    InternalBuildCommand;
+    if FAuthType = autPassword then
+      InternalBuildCommandPwd
+    else
+      InternalBuildCommandKey;
+
     FSSHModule.Execute;
 
     Sleep(5000); //wait for conect- ugly
@@ -119,10 +144,11 @@ procedure TSSHConnectionPlugin.InternalLoad;
 begin
   inherited InternalLoad;
   FHost:=LoadVariable('Host', '');
-  FPort:=StrToInt(LoadVariable('Port', '-1'));
+  FPort:=LoadVariableInt('Port', -1);
   FUserName:=LoadVariable('UserName', '');
   FPassword:=LoadVariable('Password', '');
   FIdentifyFile:=LoadVariable('IdentifyFile', '');
+  FAuthType:=TSSHAuthType( LoadVariableInt('IdentifyFile', Ord(autPassword)));
 end;
 
 procedure TSSHConnectionPlugin.InternalSave;
@@ -130,10 +156,11 @@ begin
   inherited InternalSave;
 
   SaveVariable('Host', FHost);
-  SaveVariable('Port', IntToStr(FPort));
+  SaveVariableInt('Port', FPort);
   SaveVariable('UserName', FUserName);
   SaveVariable('Password', FPassword);
   SaveVariable('IdentifyFile', FIdentifyFile);
+  SaveVariableInt('IdentifyFile', Ord(autPassword));
 end;
 
 constructor TSSHConnectionPlugin.Create(AOwner: TSQLEngineAbstract);
