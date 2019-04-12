@@ -9,9 +9,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     Left = 6
-    Height = 13
+    Height = 19
     Top = 6
-    Width = 92
+    Width = 122
     BorderSpacing.Around = 6
     Caption = 'Interface language'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = ComboBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 13
-    Top = 52
-    Width = 45
+    Height = 19
+    Top = 68
+    Width = 64
     BorderSpacing.Around = 6
     Caption = 'Hint color'
     ParentColor = False
@@ -35,12 +35,12 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 21
-    Top = 25
+    Height = 31
+    Top = 31
     Width = 510
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 13
+    ItemHeight = 0
     Style = csDropDownList
     TabOrder = 0
   end
@@ -51,8 +51,8 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 24
-    Top = 71
+    Height = 31
+    Top = 93
     Width = 510
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akTop, akLeft, akRight]
@@ -65,9 +65,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = ColorBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 101
-    Width = 189
+    Height = 23
+    Top = 130
+    Width = 255
     BorderSpacing.Around = 6
     Caption = 'Save desktop on disconect from DB'
     TabOrder = 2
@@ -79,8 +79,8 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 6
-    Height = 47
-    Top = 124
+    Height = 55
+    Top = 159
     Width = 516
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
@@ -95,8 +95,8 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 29
-    ClientWidth = 512
+    ClientHeight = 35
+    ClientWidth = 514
     Columns = 3
     Items.Strings = (
       'Always show glyph'
@@ -110,9 +110,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = rgShowBitBtnGlyph
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 177
-    Width = 208
+    Height = 23
+    Top = 220
+    Width = 281
     BorderSpacing.Around = 6
     Caption = 'Show object name in object editor form'
     TabOrder = 4
@@ -122,9 +122,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 200
-    Width = 131
+    Height = 23
+    Top = 249
+    Width = 174
     BorderSpacing.Around = 6
     Caption = 'Flat buttons in task bar'
     TabOrder = 5
@@ -134,9 +134,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox3
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 223
-    Width = 115
+    Height = 23
+    Top = 278
+    Width = 157
     BorderSpacing.Around = 6
     Caption = 'Close window by F4'
     TabOrder = 6
@@ -146,11 +146,23 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox4
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 246
-    Width = 151
+    Height = 23
+    Top = 307
+    Width = 206
     BorderSpacing.Around = 6
     Caption = 'Switch window by Ctrl+Tab'
     TabOrder = 7
+  end
+  object CheckBox6: TCheckBox[10]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox5
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 336
+    Width = 214
+    BorderSpacing.Around = 6
+    Caption = 'Ask before close all windows'
+    TabOrder = 8
   end
 end

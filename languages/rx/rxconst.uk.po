@@ -61,6 +61,10 @@ msgstr ""
 msgid "Close all except this"
 msgstr "Закрити всі вікна, за виключенням цього"
 
+#: rxconst.scloseallquestion
+msgid "Close all window?"
+msgstr ""
+
 #: rxconst.scloseallwindows
 msgid "Close all windows"
 msgstr "Закрити всі вікна"
@@ -194,6 +198,10 @@ msgstr "Попередній місяць|"
 #: rxconst.sprevyear
 msgid "Previous Year|"
 msgstr "Попередній місяць|"
+
+#: rxconst.squestion
+msgid "Question"
+msgstr ""
 
 #: rxconst.sreqvalue
 #, fuzzy

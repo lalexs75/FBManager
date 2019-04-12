@@ -184,6 +184,10 @@ msgstr ""
 msgid "As image"
 msgstr ""
 
+#: fbmstrconstunit.saskbeforecloseallwindows
+msgid "Ask before close all windows"
+msgstr ""
+
 #: fbmstrconstunit.sastext
 msgid "As text"
 msgstr ""

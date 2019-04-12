@@ -60,6 +60,10 @@ msgstr "Zamknij po %d sek."
 msgid "Close all except this"
 msgstr "Zamknij wszystkie poza tym"
 
+#: rxconst.scloseallquestion
+msgid "Close all window?"
+msgstr ""
+
 #: rxconst.scloseallwindows
 msgid "Close all windows"
 msgstr "Zamknij wszystkie okna"
@@ -191,6 +195,10 @@ msgstr "Poprzedni miesiąc|"
 #: rxconst.sprevyear
 msgid "Previous Year|"
 msgstr "Poprzedni rok|"
+
+#: rxconst.squestion
+msgid "Question"
+msgstr ""
 
 #: rxconst.sreqvalue
 msgid "Error. Expected value for field %s."

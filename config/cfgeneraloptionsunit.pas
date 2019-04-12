@@ -38,6 +38,7 @@ type
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
     ColorBox1: TColorBox;
     ComboBox1: TComboBox;
     Label1: TLabel;
@@ -104,6 +105,7 @@ begin
 
   CheckBox4.Checked:=ConfigValues.ByNameAsBoolean('TaskBar/Close by F4', true);
   CheckBox5.Checked:=ConfigValues.ByNameAsBoolean('TaskBar/Switch by Tab', true);
+  CheckBox6.Checked:=ConfigValues.ByNameAsBoolean('TaskBar/Ask before close all windows', true);
 end;
 
 procedure TcfGeneralOptionsFrame.SaveData;
@@ -115,8 +117,9 @@ begin
   ConfigValues.SetByNameAsBoolean('defShowObjCaption', CheckBox2.Checked);
   ConfigValues.SetByNameAsBoolean('TaskBar/Flat buttons', CheckBox3.Checked);
 
-  ConfigValues.ByNameAsBoolean('TaskBar/Close by F4', CheckBox4.Checked);
-  ConfigValues.ByNameAsBoolean('TaskBar/Switch by Tab', CheckBox5.Checked);
+  ConfigValues.SetByNameAsBoolean('TaskBar/Close by F4', CheckBox4.Checked);
+  ConfigValues.SetByNameAsBoolean('TaskBar/Switch by Tab', CheckBox5.Checked);
+  ConfigValues.SetByNameAsBoolean('TaskBar/Ask before close all windows', CheckBox6.Checked);
 end;
 
 procedure TcfGeneralOptionsFrame.Localize;
@@ -134,6 +137,7 @@ begin
   CheckBox3.Caption:=sFlatButtonsInTaskBar;
   CheckBox4.Caption:=sMDICloseByF4;
   CheckBox5.Caption:=sMDISwitchByTab;
+  CheckBox6.Caption:=sAskBeforeCloseAllWindows;
 end;
 
 end.

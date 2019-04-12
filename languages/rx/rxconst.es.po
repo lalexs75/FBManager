@@ -52,6 +52,10 @@ msgstr ""
 msgid "Close all except this"
 msgstr ""
 
+#: rxconst.scloseallquestion
+msgid "Close all window?"
+msgstr ""
+
 #: rxconst.scloseallwindows
 msgid "Close all windows"
 msgstr ""
@@ -183,6 +187,10 @@ msgstr "Anterior Mes|"
 #: rxconst.sprevyear
 msgid "Previous Year|"
 msgstr "Anterior A?o|"
+
+#: rxconst.squestion
+msgid "Question"
+msgstr ""
 
 #: rxconst.sreqvalue
 msgid "Error. Expected value for field %s."

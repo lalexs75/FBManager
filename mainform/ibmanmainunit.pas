@@ -416,15 +416,13 @@ end;
 procedure TfbManagerMainForm.DoLoadPrefs;
 var
   FT: TRxMDIPanelOptions;
+  FT1: TRxMDITaskOptions;
 begin
   ApplicationProperties1.HintColor:=defHintColor;
   ApplicationProperties1.ShowButtonGlyphs:=TApplicationShowGlyphs(ConfigValues.ByNameAsInteger('defShowBitBtnGlyph', 0));
   RxMDITasks1.FlatButton:=ConfigValues.ByNameAsBoolean('TaskBar/Flat buttons', true);
 
-  if ConfigValues.ByNameAsBoolean('MDI/MidleClickCloseForm', true) then
-    RxMDITasks1.Options:=RxMDITasks1.Options + [rxtoMidleClickClose]
-  else
-    RxMDITasks1.Options:=RxMDITasks1.Options - [rxtoMidleClickClose];
+
   RxMDICloseButton1.ShowInfoLabel:=ConfigValues.ByNameAsBoolean('MDI/ShowFormCaptions', true);
   RxMDIPanel1.HideCloseButton:=not ConfigValues.ByNameAsBoolean('MDI/ShowCloseButton', true);
   RxMDITasks1.FlatButton:=ConfigValues.ByNameAsBoolean('TaskBar/Flat buttons', true);
@@ -440,6 +438,18 @@ begin
   else
     FT:=FT - [rxpoSwithByTab];
   RxMDIPanel1.Options:=FT;
+
+
+  FT1:=RxMDITasks1.Options;
+  if ConfigValues.ByNameAsBoolean('TaskBar/MidleClickCloseForm', true) then
+    FT1:=RxMDITasks1.Options + [rxtoMidleClickClose]
+  else
+    FT1:=RxMDITasks1.Options - [rxtoMidleClickClose];
+  if ConfigValues.ByNameAsBoolean('TaskBar/Ask before close all windows', true) then
+    FT1:=RxMDITasks1.Options + [rxtoAskCloseAll]
+  else
+    FT1:=RxMDITasks1.Options - [rxtoAskCloseAll];
+  RxMDITasks1.Options:=FT1;
 end;
 
 procedure TfbManagerMainForm.IBManagerMainFormCreate(Sender: TObject);

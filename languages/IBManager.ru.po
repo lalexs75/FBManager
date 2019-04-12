@@ -200,6 +200,10 @@ msgstr "По возрастанию"
 msgid "As image"
 msgstr "Как изображение"
 
+#: fbmstrconstunit.saskbeforecloseallwindows
+msgid "Ask before close all windows"
+msgstr "Запрос на закрытие всех окон"
+
 #: fbmstrconstunit.sastext
 msgid "As text"
 msgstr "Как текст"

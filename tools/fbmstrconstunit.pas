@@ -1045,6 +1045,7 @@ resourcestring
   sFlatButtonsInTaskBar             = 'Flat buttons in task bar';
   sMDICloseByF4                     = 'Close child window by Ctrl+F4';
   sMDISwitchByTab                   = 'Switch child windows by Ctrl+Tab';
+  sAskBeforeCloseAllWindows         = 'Ask before close all windows';
 
   sConfirmExit                      = 'Confirm exit';
   sConfirmCompileObjectsDescription = 'Confirm compile objects description';

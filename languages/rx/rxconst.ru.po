@@ -60,6 +60,10 @@ msgstr "Будет закрыто через %d секунд"
 msgid "Close all except this"
 msgstr "Закрыть все окна, за исключением этого"
 
+#: rxconst.scloseallquestion
+msgid "Close all window?"
+msgstr "Закрыть все окна?"
+
 #: rxconst.scloseallwindows
 msgid "Close all windows"
 msgstr "Закрыть все окна"
@@ -191,6 +195,10 @@ msgstr "Превыдущий месяц|"
 #: rxconst.sprevyear
 msgid "Previous Year|"
 msgstr "Превыдущий год|"
+
+#: rxconst.squestion
+msgid "Question"
+msgstr "Вопрос"
 
 #: rxconst.sreqvalue
 msgid "Error. Expected value for field %s."
