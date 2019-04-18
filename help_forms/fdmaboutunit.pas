@@ -111,14 +111,11 @@ begin
     Memo1.Lines.LoadFromFile(S);
 end;
 
-{const
-  sCopyright                        = '(c) alexs, 2004-2016';}
 procedure TfdmAboutForm.Localize;
 begin
   Caption:=sAbout;
   Label1.Caption:=sMainCaption;
   Label16.Caption:=sMainSlogan;
-//  Label2.Caption:=sCopyright;
   TabSheet1.Caption:=sGeneral;
   TabSheet2.Caption:=sLicense;
 end;
