@@ -1366,7 +1366,7 @@ begin
     ccoLowerCase: TextEditor.SelText:=UTF8LowerCase(TextEditor.SelText);
 //    ccoNameCase: TextEditor.SelText:=SwapCase(TextEditor.SelText);
 //    ccoFirstLetterCase: TextEditor.SelText:=SwapCase(TextEditor.SelText);
-    ccoChangeCase: TextEditor.SelText:=SwapCase(TextEditor.SelText);
+    ccoChangeCase: TextEditor.SelText:=UTF8SwapCase(TextEditor.SelText);
   end;
 
   TextEditor.BlockBegin:=OldBlockBegin;

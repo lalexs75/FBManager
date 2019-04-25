@@ -326,7 +326,7 @@ begin
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
     2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
     3:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
-    4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
+    4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
     5:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine as TSQLEnginePostgre, AOwner);
   else
     Result:=nil;

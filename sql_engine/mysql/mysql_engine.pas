@@ -384,8 +384,8 @@ type
 
 implementation
 
-uses fbmStrConstUnit, fbmToolsUnit, MySQLKeywords, mysqlDataModuleUnit, rxlogging,
-  rxdbutils, StrUtils, rxstrutils, rxAppUtils;
+uses fbmStrConstUnit, fbmToolsUnit, MySQLKeywords, mysqlDataModuleUnit,
+  SSHConnectionUnit, rxlogging, rxdbutils, StrUtils, rxstrutils, rxAppUtils;
 
 (*
 { TMySQLACLItem }
@@ -2391,11 +2391,14 @@ end;
 
 
 constructor TSQLEngineMySQL.Create;
+var
+  FSSHConnectionPlugin: TSSHConnectionPlugin;
 begin
   inherited Create;
   RemotePort:=defMySQLPort;
   FSQLEngileFeatures:=[feDescribeObject];
   FSQLCommentOnClass:=TMySQLCommentOn;
+  FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
   InternalIniTSQLEngineMySQL;
 end;
 
