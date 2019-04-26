@@ -131,7 +131,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, ZDataset, pgSqlTextUnit, sqlObjects,
+uses fbmStrConstUnit, ZDataset, pgSqlTextUnit, sqlObjects, Math,
   fbmSQLTextCommonUnit, pg_SqlParserUnit, pg_utils;
 (*
 
@@ -275,7 +275,8 @@ begin
       FDescription:=Q.FieldByName('description').AsString;
       FUserOptions:=[puoLoginEnabled];
 
-      if (Q.FieldByName('rolvaliduntil').IsNull) or (Q.FieldByName('rolvaliduntil').AsDateTime > EncodeDate(9999,12,31)) then
+      if (Q.FieldByName('rolvaliduntil').IsNull) or (Q.FieldByName('rolvaliduntil').AsDateTime > EncodeDate(9999,12,31)) or
+        (Q.FieldByName('validuntilinfinity').AsBoolean) then
       begin
         FPwdValidDate:=0;
         FUserOptions:=FUserOptions + [puoNeverExpired]

@@ -912,7 +912,7 @@ object pgSqlTextModule: TpgSqlTextModule
     )
   end
   object sPGRoleParams: TStrHolder
-    Capacity = 16
+    Capacity = 13
     Macros = <>
     Left = 728
     Top = 176
@@ -920,6 +920,7 @@ object pgSqlTextModule: TpgSqlTextModule
       ''
       '73656c65637420'
       '202070675f6175746869642e2a2c20'
+      '202070675f6175746869642e726f6c76616c6964756e74696c203d2027696e66696e697479272061732076616c6964756e74696c696e66696e6974792c'
       '20202873656c65637420'
       '202020202070675f73686465736372697074696f6e2e6465736372697074696f6e20'
       '202066726f6d20'
