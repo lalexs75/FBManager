@@ -172,7 +172,6 @@
         <Filename Value="../../sql_engine/mysql/mysql_types.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
-      <Unit/>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>

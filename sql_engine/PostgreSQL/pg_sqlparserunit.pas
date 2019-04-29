@@ -460,7 +460,7 @@ type
 
   TPGSQLCreateRule = class(TSQLCreateCommandAbstract)
   private
-    FRelationName: string;
+    //FRelationName: string;
     //FSQLCommandRulle: TSQLCommandAbstract;
     FRuleSQL: string;
     FSQLRuleWhere: string;
@@ -478,8 +478,9 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property OrReplase:boolean read FOrReplase write FOrReplase;
-    property RelationName:string read FRelationName write FRelationName;
+    //property RelationName:string read FRelationName write FRelationName;
     property SchemaName;
+    property TableName;
     property RuleSQL:string read FRuleSQL write FRuleSQL;
     property SQLRuleWhere:string read FSQLRuleWhere write FSQLRuleWhere;
     //property SQLCommandRulle:TSQLCommandAbstract read FSQLCommandRulle;
@@ -17919,7 +17920,7 @@ begin
   if ASource is TPGSQLCreateRule then
   begin
     OrReplase:=TPGSQLCreateRule(ASource).OrReplase;
-    RelationName:=TPGSQLCreateRule(ASource).RelationName;
+    //RelationName:=TPGSQLCreateRule(ASource).RelationName;
     RuleSQL:=TPGSQLCreateRule(ASource).RuleSQL;
     SQLRuleWhere:=TPGSQLCreateRule(ASource).SQLRuleWhere;
     //SQLCommandRulle:TSQLCommandAbstract read FSQLCommandRulle;
@@ -17932,7 +17933,8 @@ end;
 
 procedure TPGSQLCreateRule.InitParserTree;
 var
-  T, T1, FSQLTokens, T2, T3, T20, T21, T22, T23, T24, T25, T26: TSQLTokenRecord;
+  T, T1, FSQLTokens, T2, T3, T20, T21, T22, T23, T24, T25, T26,
+    T4: TSQLTokenRecord;
 begin
   //CREATE [ OR REPLACE ] RULE имя AS ON событие
   //    TO имя_таблицы [ WHERE условие ]
@@ -17944,28 +17946,24 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);            //OR
     T1:=AddSQLTokens(stKeyword, T1, 'REPLACE', [], 1);             //REPLACE
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'RULE', [toFindWordLast]);          //RULE
-    T1.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'RULE', [toFindWordLast]);          //RULE
+
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);         //rule name
   T:=AddSQLTokens(stKeyword, T, 'AS', []);          //AS
   T:=AddSQLTokens(stKeyword, T, 'ON', []);                  //ON
 
-  T:=AddSQLTokens(stKeyword, T, 'SELECT', [], 3);           //event name
-  T1:=AddSQLTokens(stKeyword, T, 'INSERT', [], 4);           //event name
-  T2:=AddSQLTokens(stKeyword, T, 'UPDATE', [], 5);           //event name
-  T3:=AddSQLTokens(stKeyword, T, 'DELETE', [], 6);           //event name
+  T1:=AddSQLTokens(stKeyword, T, 'SELECT', [], 3);           //event name
+  T2:=AddSQLTokens(stKeyword, T, 'INSERT', [], 4);           //event name
+  T3:=AddSQLTokens(stKeyword, T, 'UPDATE', [], 5);           //event name
+  T4:=AddSQLTokens(stKeyword, T, 'DELETE', [], 6);           //event name
 
-  T:=AddSQLTokens(stKeyword, T, 'TO', []);            //TO
-    T1.AddChildToken(T);
-    T2.AddChildToken(T);
-    T3.AddChildToken(T);
+  T:=AddSQLTokens(stKeyword, [T1, T2, T3, T4], 'TO', []);            //TO
 
   T:=AddSQLTokens(stIdentificator, T, '', [], 7);          //table or schema name
     T1:=AddSQLTokens(stSymbol, T, '.', []);              //  .
     T1:=AddSQLTokens(stIdentificator, T1, '', [], 8);        //table_name
 
-  T2:=AddSQLTokens(stKeyword, T, 'WHERE', [], 9);        //WHERE
-    T1.AddChildToken(T2);
+  T2:=AddSQLTokens(stKeyword, [T, T1], 'WHERE', [], 9);        //WHERE
 
   T:=AddSQLTokens(stKeyword, T, 'DO', []);             //DO
     T1.AddChildToken(T);
@@ -17997,17 +17995,21 @@ begin
     4:FRuleAction:=raInsert;
     5:FRuleAction:=raUpdate;
     6:FRuleAction:=raDelete;
-    7:FRelationName:=AWord;
+    7:TableName:=AWord;
     8:begin
-        SchemaName:=FRelationName;
-        FRelationName:=AWord;
+        SchemaName:=TableName;
+        TableName:=AWord;
       end;
     9:FSQLRuleWhere:=ASQLParser.GetToWord('DO'); //ParseWhere(ASQLParser);
     10:FRuleWork:=rwALSO;
     11:FRuleWork:=rwINSTEAD;
     20:FRuleNothing:=true;
-    21..24:FRuleSQL:=ASQLParser.GetToCommandDelemiter;
-    25:FRuleSQL:=AWord;
+    21..25:
+      begin
+        ASQLParser.Position:=ASQLParser.WordPosition;
+        FRuleSQL:=ASQLParser.GetToCommandDelemiter;
+      end;
+//    25:FRuleSQL:=AWord;
     26:FRuleSQL:='(' + ASQLParser.GetToBracket(')') + ')';
   end;
 end;
@@ -18027,7 +18029,21 @@ begin
   S:='CREATE';
   if FOrReplase then
     S:=S + ' OR REPLACE';
-  S:=S +' RULE ' + Name + ' AS ON ' + RuleActionStr[FRuleAction] + LineEnding;
+  S:=S +' RULE ' + Name + ' AS ON ' + RuleActionStr[FRuleAction] + ' TO ';
+
+  if SchemaName <>'' then
+    S:=S + SchemaName + '.';
+  S:=S + TableName + ' DO ';
+
+  case RuleWork of
+    rwALSO:S:=S + 'ALSO';
+    rwINSTEAD:S:=S + 'INSTEAD';
+  end;
+
+  if FRuleNothing then
+    S:=S + ' NOTHING'
+  else
+    S:=S + ' ' + FRuleSQL;
 
   AddSQLCommand(S);
 end;

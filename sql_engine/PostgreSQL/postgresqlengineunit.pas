@@ -1653,7 +1653,7 @@ begin
   FCmd.Description:=Description;
   FR:=RelObject;
   if Assigned(FR) then
-    FCmd.RelationName:=FR.Caption;
+    FCmd.TableName:=FR.Caption;
   FCmd.RuleAction:=RuleAction;
   FCmd.RuleWork:=RuleWork;
   FCmd.SQLRuleWhere:=RuleWhere;
