@@ -148,6 +148,11 @@ type
   TPGSQLCastType = (casttypeNone, casttypeAsAssignment, casttypeAsImplicit);
   TPGSQLCastType1 = (casttype1WithFunction, casttype1WithoutFunction, casttype1WithInout);
 
+  TPGSQLAlterTypeAction = (pgataNone, pgataOwnerTo, pgataRenameAttribute, pgataRenameTo,
+    pgataSetSchema, pgataAddValue, pgataAddAttribute, pgataDropAttribute, pgataAlterAttribute,
+    pgataRenameValue);
+
+
   TPGSQLCreateTriggerReferencingsEnumerator = class;
   TPGSQLAlterMaterializedCmdListEnumerator = class;
 
@@ -2457,13 +2462,18 @@ type
 
   { TPGSQLAlterType }
 
-  TPGSQLAlterType = class(TSQLCommandAbstract)
+  TPGSQLAlterType = class(TSQLCommandDDL)
   private
+    FAction: TPGSQLAlterTypeAction;
+    FDropRule: TDropRule;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Action:TPGSQLAlterTypeAction read FAction write FAction;
+    property DropRule:TDropRule read FDropRule write FDropRule;
   end;
 
   { TPGSQLCreateType }
@@ -7092,39 +7102,142 @@ end;
 
 procedure TPGSQLAlterType.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TName, TAdd, TDrop, TAlter, TOwner, TRename,
+    TSet, TOwner1, TRenameTo, TRenameTo1, TSet1, TDrop1,
+    TRenameTo2, TRenameTo3, TAdd1, TAdd1_1: TSQLTokenRecord;
 begin
-  { TODO : Необходимо реализовать дерево парсера для ALTER TYPE }
-  (*
-  ALTER TYPE name action [, ... ]
-  ALTER TYPE name OWNER TO new_owner
-  ALTER TYPE name RENAME ATTRIBUTE attribute_name TO new_attribute_name
-  ALTER TYPE name RENAME TO new_name [ CASCADE | RESTRICT ]
-  ALTER TYPE name SET SCHEMA new_schema
-  ALTER TYPE name ADD VALUE new_enum_value [ { BEFORE | AFTER } existing_enum_value ]
+  //ALTER TYPE имя действие [, ... ]
+  //ALTER TYPE имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER TYPE имя RENAME ATTRIBUTE имя_атрибута TO новое_имя_атрибута [ CASCADE | RESTRICT ]
+  //ALTER TYPE имя RENAME TO новое_имя
+  //ALTER TYPE имя SET SCHEMA новая_схема
+  //ALTER TYPE имя ADD VALUE [ IF NOT EXISTS ] новое_значение_перечисления [ { BEFORE | AFTER } соседнее_значение_перечисления ]
+  //ALTER TYPE имя RENAME VALUE существующее_значение_перечисления TO новое_значение_перечисления
+  //
+  //Где действие может быть следующим:
+  //
+  //    ADD ATTRIBUTE имя_атрибута тип_данных [ COLLATE правило_сортировки ] [ CASCADE | RESTRICT ]
+  //    DROP ATTRIBUTE [ IF EXISTS ] имя_атрибута [ CASCADE | RESTRICT ]
+  //    ALTER ATTRIBUTE имя_атрибута [ SET DATA ] TYPE тип_данных [ COLLATE правило_сортировки ] [ CASCADE | RESTRICT ]
 
-  where action is one of:
-
-      ADD ATTRIBUTE attribute_name data_type [ COLLATE collation ] [ CASCADE | RESTRICT ]
-      DROP ATTRIBUTE [ IF EXISTS ] attribute_name [ CASCADE | RESTRICT ]
-      ALTER ATTRIBUTE attribute_name [ SET DATA ] TYPE data_type [ COLLATE collation ] [ CASCADE | RESTRICT ]
-  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  TAdd:=AddSQLTokens(stKeyword, TName, 'ADD', []);
+    TAdd1:=AddSQLTokens(stKeyword, TAdd, 'ATTRIBUTE', [], 2);
+    TAdd1:=AddSQLTokens(stIdentificator, TAdd1, '', [], 10);
+      TAdd1_1:=AddSQLTokens(stKeyword, TAdd1, 'COLLATE', []);
+      TAdd1_1:=AddSQLTokens(stIdentificator, TAdd1_1, '', [], 17);
+
+  TDrop:=AddSQLTokens(stKeyword, TName, 'DROP', [], 3);
+    TDrop1:=AddSQLTokens(stKeyword, TDrop, 'ATTRIBUTE', []);
+      T:=AddSQLTokens(stKeyword, TDrop1, 'IF', [], 13);
+      T:=AddSQLTokens(stKeyword, T, 'EXISTS', []);
+    TDrop1:=AddSQLTokens(stIdentificator, [TDrop1, T], '', [], 10);
+
+  TAlter:=AddSQLTokens(stKeyword, TName, 'ALTER', [], 4);
+
+  TOwner:=AddSQLTokens(stKeyword, TName, 'OWNER', [], 5);
+    TOwner1:=AddSQLTokens(stKeyword, TOwner, 'TO', []);
+    TOwner1:=AddSQLTokens(stIdentificator, TOwner1, '', [], 10);
+
+  TRename:=AddSQLTokens(stKeyword, TName, 'RENAME', []);
+    TRenameTo1:=AddSQLTokens(stKeyword, TRename, 'TO', [], 6);
+    TRenameTo1:=AddSQLTokens(stIdentificator, TRenameTo1, '', [], 10);
+      AddSQLTokens(stKeyword, [TRenameTo1, TDrop1, TAdd1, TAdd1_1], 'CASCADE', [toOptional], 11);
+      AddSQLTokens(stKeyword, [TRenameTo1, TDrop1, TAdd1, TAdd1_1], 'RESTRICT', [toOptional], 12);
+
+    TRenameTo2:=AddSQLTokens(stKeyword, TRename, 'ATTRIBUTE', [], 8);
+
+    TRenameTo2:=AddSQLTokens(stIdentificator, TRenameTo2, '', [], 10);
+    TRenameTo2:=AddSQLTokens(stKeyword, TRenameTo2, 'TO', []);
+    TRenameTo2:=AddSQLTokens(stIdentificator, TRenameTo2, '', [], 14);
+
+    TRenameTo3:=AddSQLTokens(stKeyword, TRename, 'VALUE', [], 15);
+    TRenameTo3:=AddSQLTokens(stString, TRenameTo3, '', [], 16);
+    TRenameTo3:=AddSQLTokens(stKeyword, TRenameTo3, 'TO', []);
+    TRenameTo3:=AddSQLTokens(stString, TRenameTo3, '', [], 16);
+
+  TSet:=AddSQLTokens(stKeyword, TName, 'SET', [], 7);
+    TSet1:=AddSQLTokens(stKeyword, TSet, 'SCHEMA', []);
+    TSet1:=AddSQLTokens(stIdentificator, TSet1, '', [], 10);
+
+
+
 end;
 
 procedure TPGSQLAlterType.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:Action:=pgataAddAttribute;
+    3:Action:=pgataDropAttribute;
+    5:Action:=pgataOwnerTo;
+    6:Action:=pgataRenameTo;
+    7:Action:=pgataSetSchema;
+    8:Action:=pgataRenameAttribute;
+    10:Params.AddParam(AWord);
+    11:DropRule:=drCascade;
+    12:DropRule:=drRestrict;
+    13:Options:=Options + [ooIfExists];
+    14:Params.AddParam(AWord);
+    15:Action:=pgataRenameValue;
+    16:Params.AddParam(ExtractQuotedString(AWord, ''''));
+    17:if Params.Count>0 then
+         Params[0].Collate:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterType.MakeSQL;
 var
-  Result: String;
+  S: String;
+  P: TSQLParserField;
 begin
-  Result:='ALTER TYPE';
-  AddSQLCommand(Result);
+  S:='ALTER TYPE ' + Name;
+  case Action of
+    pgataOwnerTo:if Params.Count>0 then S:=S + ' OWNER TO '+Params[0].Caption;
+    pgataRenameTo:if Params.Count>0 then S:=S + ' RENAME TO '+Params[0].Caption;
+    pgataSetSchema:if Params.Count>0 then S:=S + ' SET SCHEMA '+Params[0].Caption;
+    pgataRenameAttribute:if Params.Count>1 then S:=S + ' RENAME ATTRIBUTE '+Params[0].Caption + ' TO ' + Params[1].Caption;
+    pgataRenameValue:if Params.Count>1 then S:=S + ' RENAME VALUE '+ QuotedString(Params[0].Caption, '''') + ' TO ' + QuotedString(Params[1].Caption, '''');
+    pgataDropAttribute:if Params.Count>0 then
+      begin
+        S:=S + ' DROP ATTRIBUTE ';
+        if ooIfExists in Options then
+          S:=S + 'IF EXISTS ';
+        S:=S + Params[0].Caption;
+      end;
+    pgataAddAttribute:
+      if Params.Count>0 then
+      begin
+        P:=Params[0];
+        S:=S + ' ADD ATTRIBUTE '+P.Caption + ' ' + P.TypeName;
+        if P.Collate <> '' then
+          S:=S + ' COLLATE ' + P.Collate;
+        //    ADD ATTRIBUTE имя_атрибута тип_данных [ COLLATE правило_сортировки ] [ CASCADE | RESTRICT ]
+      end;
+  end;
+
+  if Action in [pgataRenameTo, pgataDropAttribute, pgataAddAttribute] then
+  begin
+    if DropRule = drCascade then S:=S + ' CASCADE'
+    else
+    if DropRule = drRestrict then S:=S + ' RESTRICT';
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterType.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterType then
+  begin
+    FAction:=TPGSQLAlterType(ASource).Action;
+    FDropRule:=TPGSQLAlterType(ASource).DropRule;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLAlterView }
@@ -10032,12 +10145,12 @@ begin
   T:=AddSQLTokens(stIdentificator, T, '', [], 5);
 
   T:=AddSQLTokens(stIdentificator, TS, '', [], 6);
-  T1:=AddSQLTokens(stKeyword, T, 'TO', []);
-  T2:=AddSQLTokens(stSymbol, T, '=', []);
-  T3:=AddSQLTokens(stString, T1, '', [], 7);
-  T2.AddChildToken(T3);
-  T3:=AddSQLTokens(stKeyword, T1, 'DEFAULT', [], 8);
-  T2.AddChildToken(T3);
+  T1:=AddSQLTokens(stKeyword, T, 'TO', [], 14);
+  T2:=AddSQLTokens(stSymbol, T, '=', [], 15);
+  T3:=AddSQLTokens(stString, [T1, T2], '', [], 7);
+  T3:=AddSQLTokens(stKeyword, [T1, T2], 'DEFAULT', [], 8);
+  T3:=AddSQLTokens(stKeyword, [T1, T2], 'on', [], 8);
+  T3:=AddSQLTokens(stKeyword, [T1, T2], 'off', [], 8);
 
   T1:=AddSQLTokens(stKeyword, T, 'FROM', []);
   T1:=AddSQLTokens(stKeyword, T1, 'CURRENT', [], 9);
@@ -10060,6 +10173,8 @@ begin
     6, 13:FCurPar:=Params.AddParam(AWord);
     7, 8, 9:if Assigned(FCurPar) then
         FCurPar.RealName:=AWord;
+    14:if Assigned(FCurPar) then
+        FCurPar.TypeOf:=true;
     10:FAlterType:=aoSet;
     11:FAlterType:=aoReset;
     12:FResetAll:=true;
@@ -10088,9 +10203,14 @@ begin
   begin
     if Params.Count>0 then
       if UpperCase(Params[0].RealName)<> 'CURRENT' then
-      Result:=Result + ' SET '+Params[0].Caption + ' = '+Params[0].RealName
-    else
-      Result:=Result + ' SET '+Params[0].Caption + ' FROM CURRENT';
+      begin
+        if Params[0].TypeOf then
+          Result:=Result + ' SET '+Params[0].Caption + ' TO '+Params[0].RealName
+        else
+          Result:=Result + ' SET '+Params[0].Caption + ' = '+Params[0].RealName
+      end
+      else
+        Result:=Result + ' SET '+Params[0].Caption + ' FROM CURRENT';
   end
   else
   if FAlterType = aoReset then
@@ -15855,13 +15975,13 @@ begin
   T:=AddSQLTokens(stKeyword, FTGroupName, 'ADD', []);
   T:=AddSQLTokens(stKeyword, T, 'USER', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
-  T1:=AddSQLTokens(stSymbol, T, ',', []);
+  T1:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
   T1.AddChildToken(T);
 
   T:=AddSQLTokens(stKeyword, FTGroupName, 'DROP', []);
   T:=AddSQLTokens(stKeyword, T, 'USER', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 3);
-  T1:=AddSQLTokens(stSymbol, T, ',', []);
+  T1:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
   T1.AddChildToken(T);
 
   T:=AddSQLTokens(stKeyword, FTGroupName, 'RENAME', []);

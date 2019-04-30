@@ -2605,7 +2605,7 @@ msgstr "Нижняя"
 #: fbmstrconstunit.slowercase
 msgctxt "fbmstrconstunit.slowercase"
 msgid "Lower case"
-msgstr "Нижний регистр"
+msgstr "нижний регистр"
 
 #: fbmstrconstunit.smaincaption
 msgctxt "fbmstrconstunit.smaincaption"
@@ -5183,7 +5183,7 @@ msgstr "Верхнее"
 #: fbmstrconstunit.suppercase
 msgctxt "fbmstrconstunit.suppercase"
 msgid "Upper case"
-msgstr "Верхний регистр"
+msgstr "ВЕРХНИЙ РЕГИСТР"
 
 #: fbmstrconstunit.susage
 msgid "Usage"

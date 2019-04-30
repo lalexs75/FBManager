@@ -273,7 +273,7 @@ begin
   if not (ASQLObject is TPGSQLCreateRule) then exit;
 
   TPGSQLCreateRule(ASQLObject).Name:=Edit1.Text;
-  TPGSQLCreateRule(ASQLObject).RelationName:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]).CaptionFullPatch;
+  TPGSQLCreateRule(ASQLObject).TableName:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]).CaptionFullPatch;
   TPGSQLCreateRule(ASQLObject).RuleAction:=TPGRuleAction(RadioGroup1.ItemIndex);
   if CheckBox1.Checked then
     TPGSQLCreateRule(ASQLObject).RuleWork:=rwINSTEAD

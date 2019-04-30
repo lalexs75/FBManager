@@ -103,33 +103,6 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PGCopyCmdCase"/>
       </Unit>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
-      <Unit/>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>
