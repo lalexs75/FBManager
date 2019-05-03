@@ -3533,7 +3533,7 @@ msgid "Postgres server status"
 msgstr ""
 
 #: fbmstrconstunit.spostgresqltablecreateproc
-msgid "Create procedure"
+msgid "Create procedures"
 msgstr ""
 
 #: fbmstrconstunit.sprec

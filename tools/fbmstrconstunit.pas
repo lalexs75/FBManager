@@ -1020,7 +1020,7 @@ resourcestring
 
   //const from pg_VisualToolsCallUnit
   sPostgreSQLDBStat                 = 'Postgres server status';
-  sPostgreSQLTableCreateProc        = 'Create procedure';
+  sPostgreSQLTableCreateProc        = 'Create procedures';
   sPostgresDBAnaliz                 = 'PG DB Analiz';
   sSQLiteDBStat                     = 'SQLite database status';
 

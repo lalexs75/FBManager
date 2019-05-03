@@ -3655,7 +3655,7 @@ msgstr "Имя первичного ключа"
 
 #: fbmstrconstunit.spolicy
 msgid "Policy"
-msgstr ""
+msgstr "Правила"
 
 #: fbmstrconstunit.sport
 msgctxt "fbmstrconstunit.sport"
@@ -3671,9 +3671,8 @@ msgid "Postgres server status"
 msgstr "Статус Postgre SQL сервера"
 
 #: fbmstrconstunit.spostgresqltablecreateproc
-msgctxt "fbmstrconstunit.spostgresqltablecreateproc"
-msgid "Create procedure"
-msgstr "Создать процедуру"
+msgid "Create procedures"
+msgstr "Создать процедуры"
 
 #: fbmstrconstunit.sprec
 msgid "Prec"
@@ -3724,7 +3723,7 @@ msgstr "Печать списка ключей"
 
 #: fbmstrconstunit.sprinthint
 msgid "Print object"
-msgstr ""
+msgstr "Печать объекта"
 
 #: fbmstrconstunit.sprintindexlist
 msgid "Print index list"
@@ -3891,8 +3890,6 @@ msgid "Refresh field list"
 msgstr "Обновить список полей"
 
 #: fbmstrconstunit.srefreshhint
-#, fuzzy
-msgctxt "fbmstrconstunit.srefreshhint"
 msgid "Refresh"
 msgstr "Обновить данные"
 
@@ -3929,7 +3926,6 @@ msgid "Registration params"
 msgstr "Параметры регистрации"
 
 #: fbmstrconstunit.sregistreddatabase
-msgctxt "fbmstrconstunit.sregistreddatabase"
 msgid "Registred database"
 msgstr "Зарегистрированная БД"
 
@@ -4188,8 +4184,6 @@ msgid "Save file"
 msgstr "Сохранить файл"
 
 #: fbmstrconstunit.ssavefilehint
-#, fuzzy
-msgctxt "fbmstrconstunit.ssavefilehint"
 msgid "Save file"
 msgstr "Сохранить файл"
 
@@ -4346,8 +4340,6 @@ msgid "Show DML statemenst"
 msgstr "Показывать DML-статементы"
 
 #: fbmstrconstunit.sshowdmlhint
-#, fuzzy
-msgctxt "fbmstrconstunit.sshowdmlhint"
 msgid "Show DML statemenst"
 msgstr "Показывать DML-статементы"
 
@@ -4377,8 +4369,6 @@ msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
 #: fbmstrconstunit.sshowobjtreehint
-#, fuzzy
-msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
@@ -4511,7 +4501,7 @@ msgstr "Имя исходной страницы"
 
 #: fbmstrconstunit.ssshconnectionloginfiled
 msgid "SSH connection login filed"
-msgstr ""
+msgstr "Ошибка подключения через SSH"
 
 #: fbmstrconstunit.ssshconnectionplugin
 msgid "SSH сonnection plugin"
@@ -4519,7 +4509,7 @@ msgstr "SSH сonnection plugin"
 
 #: fbmstrconstunit.ssshconnectiontimeout
 msgid "SSH connection timeout"
-msgstr ""
+msgstr "Таймаут подключения через SSH"
 
 #: fbmstrconstunit.ssshfilepath
 msgid "SSH file path"
