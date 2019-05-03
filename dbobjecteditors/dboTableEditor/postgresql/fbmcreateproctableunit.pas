@@ -577,6 +577,8 @@ begin
   Ed.SQLEngine:=FPGTable.OwnerDB;
 end;
 
+var
+  S: String;
 begin
   inherited Create(Application);
   Localize;
@@ -589,13 +591,15 @@ begin
   CreatePageEdt(FUSql, tabU, 'FUSql');
   CreatePageEdt(FDSql, tabD, 'FDSql');
   CreatePageEdt(FSSql, tabS, 'FSSql');
-(*
-  edtSPIUName.Text:=FPGTable.Schema.Caption+'.sp_'+FPGTable.Caption+'_ins_or_upd';
-  edtSPSName.Text:=FPGTable.Schema.Caption+'.sp_'+FPGTable.Caption+'_sel';
-  edtSPIName.Text:=FPGTable.Schema.Caption+'.sp_'+FPGTable.Caption+'_ins';
-  edtSPUName.Text:=FPGTable.Schema.Caption+'.sp_'+FPGTable.Caption+'_upd';
-  edtSPDName.Text:=FPGTable.Schema.Caption+'.sp_'+FPGTable.Caption+'_del';
 
+  if FPGTable.SchemaName<>'' then
+    S:=FPGTable.SchemaName + '.';
+  edtSPIUName.Text:=S+'sp_'+FPGTable.Caption+'_ins_or_upd';
+  edtSPSName.Text:=S+'sp_'+FPGTable.Caption+'_sel';
+  edtSPIName.Text:=S+'sp_'+FPGTable.Caption+'_ins';
+  edtSPUName.Text:=S+'sp_'+FPGTable.Caption+'_upd';
+  edtSPDName.Text:=S+'sp_'+FPGTable.Caption+'_del';
+(*
   FAclPAge:=TfbmpgACLEditEditor.CreatePage(Self, nil);
   FAclPAge.Parent:=TabSheet6;
   FAclPAge.Align:=alClient;
