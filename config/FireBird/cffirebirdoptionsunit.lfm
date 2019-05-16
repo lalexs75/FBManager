@@ -9,9 +9,9 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 134
+    Width = 125
     BorderSpacing.Around = 6
     Caption = 'Default character set'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideTop.Control = CB_DefServer
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 142
-    Width = 118
+    Height = 17
+    Top = 130
+    Width = 110
     BorderSpacing.Around = 6
     Caption = 'Default user name'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideTop.Control = CB_DefServer
     AnchorSideTop.Side = asrBottom
     Left = 290
-    Height = 20
-    Top = 142
-    Width = 112
+    Height = 17
+    Top = 130
+    Width = 106
     BorderSpacing.Around = 6
     Caption = 'Default password'
     ParentColor = False
@@ -45,9 +45,9 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideTop.Control = CB_CharSet
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 74
-    Width = 141
+    Height = 17
+    Top = 68
+    Width = 130
     BorderSpacing.Around = 6
     Caption = 'Default server version'
     ParentColor = False
@@ -59,8 +59,8 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 36
-    Top = 32
+    Height = 33
+    Top = 29
     Width = 550
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -74,8 +74,8 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 37
-    Top = 168
+    Height = 34
+    Top = 153
     Width = 266
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -88,8 +88,8 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 296
-    Height = 37
-    Top = 168
+    Height = 34
+    Top = 153
     Width = 266
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -104,8 +104,8 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 36
-    Top = 100
+    Height = 33
+    Top = 91
     Width = 550
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -122,5 +122,39 @@ inherited cfFireBirdOptionsFrame: TcfFireBirdOptionsFrame
     Top = 0
     Width = 1
     ParentColor = False
+  end
+  object Label2: TLabel[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtDefUserName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 193
+    Width = 208
+    BorderSpacing.Around = 6
+    Caption = 'Show object on grant page default'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox[10]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 29
+    Top = 216
+    Width = 550
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    Items.Strings = (
+      'Show all objects'
+      'Only show users'
+      'Only show groups'
+    )
+    Style = csDropDownList
+    TabOrder = 4
   end
 end

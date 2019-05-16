@@ -107,11 +107,13 @@ msgid "Alias"
 msgstr ""
 
 #: fbmstrconstunit.saliasofdb
+#, object-pascal-format
 msgctxt "fbmstrconstunit.saliasofdb"
 msgid "Alias of %s"
 msgstr ""
 
 #: fbmstrconstunit.saliasofobj
+#, object-pascal-format
 msgctxt "fbmstrconstunit.saliasofobj"
 msgid "Alias of %s"
 msgstr ""
@@ -1114,10 +1116,12 @@ msgid "Delete this folder?"
 msgstr ""
 
 #: fbmstrconstunit.sdeletedrowsinfo
+#, object-pascal-format
 msgid "Deleted rows : %d"
 msgstr ""
 
 #: fbmstrconstunit.sdeletefield
+#, object-pascal-format
 msgid "Delete field \"%s\"?"
 msgstr ""
 
@@ -1126,6 +1130,7 @@ msgid "Delete nested function"
 msgstr ""
 
 #: fbmstrconstunit.sdeletefunctionq
+#, object-pascal-format
 msgid "Delete function \"%s\"?"
 msgstr ""
 
@@ -1142,6 +1147,7 @@ msgid "Delete local variable"
 msgstr ""
 
 #: fbmstrconstunit.sdeletelocalvarquest
+#, object-pascal-format
 msgid "Delete local variable %s?"
 msgstr ""
 
@@ -1202,14 +1208,17 @@ msgid "Delete user from server user list"
 msgstr ""
 
 #: fbmstrconstunit.sdeluserconfirm
+#, object-pascal-format
 msgid "Are you sure thet want to delete user %s?"
 msgstr ""
 
 #: fbmstrconstunit.sdependcaption1
+#, object-pascal-format
 msgid "Objects, that depend on %s"
 msgstr ""
 
 #: fbmstrconstunit.sdependcaption2
+#, object-pascal-format
 msgid "Objects, that %s depends on"
 msgstr ""
 
@@ -1577,6 +1586,7 @@ msgid "Execute query from current editor"
 msgstr ""
 
 #: fbmstrconstunit.sexecutioncomplete
+#, object-pascal-format
 msgid "Execution complete. Execute time : %s."
 msgstr ""
 
@@ -1736,6 +1746,7 @@ msgid "Field"
 msgstr ""
 
 #: fbmstrconstunit.sfieldcount
+#, object-pascal-format
 msgid "Field count: %d"
 msgstr ""
 
@@ -1744,6 +1755,7 @@ msgid "Field Dependencies"
 msgstr ""
 
 #: fbmstrconstunit.sfieldfromnamedselect
+#, object-pascal-format
 msgid "field from named select %s"
 msgstr ""
 
@@ -1796,6 +1808,7 @@ msgid "File name"
 msgstr ""
 
 #: fbmstrconstunit.sfilenotfound
+#, object-pascal-format
 msgid "File %s not found."
 msgstr ""
 
@@ -2147,6 +2160,7 @@ msgid "Highlight current word"
 msgstr ""
 
 #: fbmstrconstunit.shighlightdelay
+#, object-pascal-format
 msgid "delay %d ms"
 msgstr ""
 
@@ -2211,10 +2225,12 @@ msgid "Imported collumns"
 msgstr ""
 
 #: fbmstrconstunit.simportfromfile
+#, object-pascal-format
 msgid "Import from file \"%s\""
 msgstr ""
 
 #: fbmstrconstunit.sincludeallfrom
+#, object-pascal-format
 msgctxt "fbmstrconstunit.sincludeallfrom"
 msgid "Include all from %s"
 msgstr ""
@@ -2297,6 +2313,7 @@ msgid "INSERT color"
 msgstr ""
 
 #: fbmstrconstunit.sinsertedrowsinfo
+#, object-pascal-format
 msgid "Inserted rows : %d"
 msgstr ""
 
@@ -2313,6 +2330,7 @@ msgid "Interface language"
 msgstr ""
 
 #: fbmstrconstunit.sinvalidpath
+#, object-pascal-format
 msgid "Path %s is not valid"
 msgstr ""
 
@@ -2349,6 +2367,7 @@ msgid "Job ID"
 msgstr ""
 
 #: fbmstrconstunit.sjointablesand
+#, object-pascal-format
 msgctxt "fbmstrconstunit.sjointablesand"
 msgid "Join tables: %s and %s"
 msgstr ""
@@ -2438,11 +2457,13 @@ msgid "Link propertys"
 msgstr ""
 
 #: fbmstrconstunit.slinkpropincludeallfrom
+#, object-pascal-format
 msgctxt "fbmstrconstunit.slinkpropincludeallfrom"
 msgid "Include all from %s"
 msgstr ""
 
 #: fbmstrconstunit.slinkproplabel1
+#, object-pascal-format
 msgctxt "fbmstrconstunit.slinkproplabel1"
 msgid "Join tables: %s and %s"
 msgstr ""
@@ -3692,6 +3713,7 @@ msgid "Recompile all triggers"
 msgstr ""
 
 #: fbmstrconstunit.srecordcount
+#, object-pascal-format
 msgid "%d records in table"
 msgstr ""
 
@@ -3700,10 +3722,12 @@ msgid "Get record count"
 msgstr ""
 
 #: fbmstrconstunit.srecordfetched
+#, object-pascal-format
 msgid "%d record fetched"
 msgstr ""
 
 #: fbmstrconstunit.srecordfetchedwithselected
+#, object-pascal-format
 msgid "%d record fetched (%d selected)"
 msgstr ""
 
@@ -3818,6 +3842,7 @@ msgid "Remove field"
 msgstr ""
 
 #: fbmstrconstunit.srename
+#, object-pascal-format
 msgid "Rename %s \"%s\""
 msgstr ""
 
@@ -4096,6 +4121,7 @@ msgid "Select database"
 msgstr ""
 
 #: fbmstrconstunit.sselectedrowsinfo
+#, object-pascal-format
 msgid "Selected rows : %d"
 msgstr ""
 
@@ -4933,6 +4959,7 @@ msgid "Unique constraint name"
 msgstr ""
 
 #: fbmstrconstunit.sunkonwpgfunccategor
+#, object-pascal-format
 msgid "Unknow function category - %d"
 msgstr ""
 
@@ -4961,6 +4988,7 @@ msgid "UPDATE color"
 msgstr ""
 
 #: fbmstrconstunit.supdatedrowsinfo
+#, object-pascal-format
 msgid "Updated rows : %d"
 msgstr ""
 

@@ -384,7 +384,8 @@ begin
 
   if Assigned(ADBObject) then
     ACLList:=ADBObject.ACLList;
-  ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('ACL_List_User_Roles_Style', 0);
+  //ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('ACL_List_User_Roles_Style', 0);
+  ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger(DBObject.OwnerDB.ClassName + '\Initial ACL page', 0);
 end;
 
 procedure TfbmpgACLEditEditor.Activate;

@@ -122,11 +122,13 @@ msgid "Alias"
 msgstr "Псевдоним"
 
 #: fbmstrconstunit.saliasofdb
+#, object-pascal-format
 msgctxt "fbmstrconstunit.saliasofdb"
 msgid "Alias of %s"
 msgstr "БД : %s"
 
 #: fbmstrconstunit.saliasofobj
+#, object-pascal-format
 msgctxt "fbmstrconstunit.saliasofobj"
 msgid "Alias of %s"
 msgstr "Алис к %s"
@@ -1164,10 +1166,12 @@ msgid "Delete this folder?"
 msgstr "Удалить эту папку?"
 
 #: fbmstrconstunit.sdeletedrowsinfo
+#, object-pascal-format
 msgid "Deleted rows : %d"
 msgstr "Удалено строк : %d"
 
 #: fbmstrconstunit.sdeletefield
+#, object-pascal-format
 msgid "Delete field \"%s\"?"
 msgstr "Удалить поле \"%s\"?"
 
@@ -1176,6 +1180,7 @@ msgid "Delete nested function"
 msgstr "Удалить вложенную функцию"
 
 #: fbmstrconstunit.sdeletefunctionq
+#, object-pascal-format
 msgctxt "fbmstrconstunit.sdeletefunctionq"
 msgid "Delete function \"%s\"?"
 msgstr "Удалить функцию \"%s\"?"
@@ -1194,6 +1199,7 @@ msgid "Delete local variable"
 msgstr "Удалить локальную переменную"
 
 #: fbmstrconstunit.sdeletelocalvarquest
+#, object-pascal-format
 msgid "Delete local variable %s?"
 msgstr "Удалить локальную переменную %s?"
 
@@ -1257,14 +1263,17 @@ msgid "Delete user from server user list"
 msgstr "Удалить пользователя из списка"
 
 #: fbmstrconstunit.sdeluserconfirm
+#, object-pascal-format
 msgid "Are you sure thet want to delete user %s?"
 msgstr "Вы уверены в удалении оператора %s?"
 
 #: fbmstrconstunit.sdependcaption1
+#, object-pascal-format
 msgid "Objects, that depend on %s"
 msgstr "Объекты, от которых зависит %s"
 
 #: fbmstrconstunit.sdependcaption2
+#, object-pascal-format
 msgid "Objects, that %s depends on"
 msgstr "Объекты, зависящие от %s"
 
@@ -1656,6 +1665,7 @@ msgid "Execute query from current editor"
 msgstr "Выполнить запрос из текущего редактора"
 
 #: fbmstrconstunit.sexecutioncomplete
+#, object-pascal-format
 msgid "Execution complete. Execute time : %s."
 msgstr "Выполнено. Время выполнения : %s."
 
@@ -1817,6 +1827,7 @@ msgid "Field"
 msgstr "Поле"
 
 #: fbmstrconstunit.sfieldcount
+#, object-pascal-format
 msgid "Field count: %d"
 msgstr "Всего столбцов: %d"
 
@@ -1825,6 +1836,7 @@ msgid "Field Dependencies"
 msgstr "Объекты, использующие поле"
 
 #: fbmstrconstunit.sfieldfromnamedselect
+#, object-pascal-format
 msgid "field from named select %s"
 msgstr "поле из именнованого запроса %s"
 
@@ -1879,6 +1891,7 @@ msgid "File name"
 msgstr "Имя файла"
 
 #: fbmstrconstunit.sfilenotfound
+#, object-pascal-format
 msgid "File %s not found."
 msgstr "Файл %s не найден."
 
@@ -2236,6 +2249,7 @@ msgid "Highlight current word"
 msgstr "Подсвечивать текущее слово"
 
 #: fbmstrconstunit.shighlightdelay
+#, object-pascal-format
 msgid "delay %d ms"
 msgstr "задержка %d"
 
@@ -2303,10 +2317,12 @@ msgid "Imported collumns"
 msgstr "Столбцы для импорта"
 
 #: fbmstrconstunit.simportfromfile
+#, object-pascal-format
 msgid "Import from file \"%s\""
 msgstr "Импорт из файла \"%s\""
 
 #: fbmstrconstunit.sincludeallfrom
+#, object-pascal-format
 msgctxt "fbmstrconstunit.sincludeallfrom"
 msgid "Include all from %s"
 msgstr "Включать всё из %s"
@@ -2395,6 +2411,7 @@ msgid "INSERT color"
 msgstr "Цвет INSERT"
 
 #: fbmstrconstunit.sinsertedrowsinfo
+#, object-pascal-format
 msgid "Inserted rows : %d"
 msgstr "Вставлено строк : %d"
 
@@ -2411,6 +2428,7 @@ msgid "Interface language"
 msgstr "Язык интерфейса"
 
 #: fbmstrconstunit.sinvalidpath
+#, object-pascal-format
 msgid "Path %s is not valid"
 msgstr "Путь '%s' не существует"
 
@@ -2450,6 +2468,7 @@ msgid "Job ID"
 msgstr "Код задачи"
 
 #: fbmstrconstunit.sjointablesand
+#, object-pascal-format
 msgctxt "fbmstrconstunit.sjointablesand"
 msgid "Join tables: %s and %s"
 msgstr "Соединение таблиц: %s и %s"
@@ -2544,11 +2563,13 @@ msgid "Link propertys"
 msgstr "Свойства связи"
 
 #: fbmstrconstunit.slinkpropincludeallfrom
+#, object-pascal-format
 msgctxt "fbmstrconstunit.slinkpropincludeallfrom"
 msgid "Include all from %s"
 msgstr "Включать всё из %s"
 
 #: fbmstrconstunit.slinkproplabel1
+#, object-pascal-format
 msgctxt "fbmstrconstunit.slinkproplabel1"
 msgid "Join tables: %s and %s"
 msgstr "Соединение таблиц: %s и %s"
@@ -3834,6 +3855,7 @@ msgid "Recompile all triggers"
 msgstr "Перекомпилировать все триггеры"
 
 #: fbmstrconstunit.srecordcount
+#, object-pascal-format
 msgid "%d records in table"
 msgstr "%d запись(ей) в таблице"
 
@@ -3843,10 +3865,12 @@ msgid "Get record count"
 msgstr "Кол-во записей"
 
 #: fbmstrconstunit.srecordfetched
+#, object-pascal-format
 msgid "%d record fetched"
 msgstr "%d отобрано записей"
 
 #: fbmstrconstunit.srecordfetchedwithselected
+#, object-pascal-format
 msgid "%d record fetched (%d selected)"
 msgstr "%d записей (%d выделено)"
 
@@ -3890,6 +3914,7 @@ msgid "Refresh field list"
 msgstr "Обновить список полей"
 
 #: fbmstrconstunit.srefreshhint
+msgctxt "fbmstrconstunit.srefreshhint"
 msgid "Refresh"
 msgstr "Обновить данные"
 
@@ -3962,6 +3987,7 @@ msgid "Remove field"
 msgstr "Удалить поле"
 
 #: fbmstrconstunit.srename
+#, object-pascal-format
 msgid "Rename %s \"%s\""
 msgstr "Переименовать %s \"%s\""
 
@@ -4184,6 +4210,7 @@ msgid "Save file"
 msgstr "Сохранить файл"
 
 #: fbmstrconstunit.ssavefilehint
+msgctxt "fbmstrconstunit.ssavefilehint"
 msgid "Save file"
 msgstr "Сохранить файл"
 
@@ -4254,6 +4281,7 @@ msgid "Select database"
 msgstr "Выбор базы данных"
 
 #: fbmstrconstunit.sselectedrowsinfo
+#, object-pascal-format
 msgid "Selected rows : %d"
 msgstr "Выбрано строк : %d"
 
@@ -4340,6 +4368,7 @@ msgid "Show DML statemenst"
 msgstr "Показывать DML-статементы"
 
 #: fbmstrconstunit.sshowdmlhint
+msgctxt "fbmstrconstunit.sshowdmlhint"
 msgid "Show DML statemenst"
 msgstr "Показывать DML-статементы"
 
@@ -4369,6 +4398,7 @@ msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
 #: fbmstrconstunit.sshowobjtreehint
+msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
@@ -5130,6 +5160,7 @@ msgid "Unique constraint name"
 msgstr "Название условий уникальности"
 
 #: fbmstrconstunit.sunkonwpgfunccategor
+#, object-pascal-format
 msgid "Unknow function category - %d"
 msgstr "Неизвестная категория функции - %d"
 
@@ -5159,6 +5190,7 @@ msgid "UPDATE color"
 msgstr "Цвет UPDATE"
 
 #: fbmstrconstunit.supdatedrowsinfo
+#, object-pascal-format
 msgid "Updated rows : %d"
 msgstr "Изменено строк : %d"
 

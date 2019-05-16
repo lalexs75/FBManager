@@ -7,71 +7,43 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
   DesignTop = 129
   object ToolPanel1: TToolPanel[0]
     Left = 0
-    Height = 34
+    Height = 25
     Top = 0
     Width = 1261
     Items = <    
       item
         Action = grVL
         Visible = True
-        Left = 5
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = grHL
         Visible = True
-        Left = 29
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = grALL
         Visible = True
-        Left = 53
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Visible = True
-        Left = 77
-        Height = 24
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = revVL
         Visible = True
-        Left = 84
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = revHL
         Visible = True
-        Left = 108
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = revALL
         Visible = True
-        Left = 132
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end>
     ImageList = fbManagerMainForm.ImageListMain
@@ -80,14 +52,14 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 34
+    ClientHeight = 25
     ClientWidth = 1261
     TabOrder = 0
   end
   object RxDBGrid1: TRxDBGrid[1]
     Left = 0
-    Height = 510
-    Top = 100
+    Height = 519
+    Top = 91
     Width = 1261
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -767,7 +739,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
   object Panel1: TPanel[2]
     Left = 0
     Height = 66
-    Top = 34
+    Top = 25
     Width = 1261
     Align = alTop
     AutoSize = True
@@ -778,9 +750,9 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
       Left = 7
-      Height = 19
+      Height = 17
       Top = 7
-      Width = 91
+      Width = 82
       BorderSpacing.Around = 6
       Caption = 'Users/Groups'
       ParentColor = False
@@ -792,8 +764,8 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 27
-      Top = 32
+      Height = 29
+      Top = 30
       Width = 1241
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6

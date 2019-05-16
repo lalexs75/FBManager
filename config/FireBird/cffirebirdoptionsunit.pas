@@ -35,6 +35,7 @@ type
   TcfFireBirdOptionsFrame = class(TFBMConfigPageAbstract)
     CB_CharSet: TComboBox;
     CB_DefServer: TComboBox;
+    ComboBox1: TComboBox;
     edtDefUserName: TEdit;
     edtDefUserPassword: TEdit;
     Label1: TLabel;
@@ -42,6 +43,7 @@ type
     Label12: TLabel;
     Label13: TLabel;
     Label16: TLabel;
+    Label2: TLabel;
   private
     { private declarations }
   public
@@ -65,6 +67,12 @@ begin
   Label12.Caption:=sDefaultUserName;
   Label13.Caption:=sDefaultPassword;
   Label16.Caption:=sDefaultServerVersion;
+
+  Label2.Caption:=sShowObjectOnGrantPageDefault;
+  ComboBox1.Items.Clear;
+  ComboBox1.Items.Add(sShowAllObjects);
+  ComboBox1.Items.Add(sOnlyShowUsers);
+  ComboBox1.Items.Add(sOnlyShowGroups);
 end;
 
 function TcfFireBirdOptionsFrame.PageName: string;
@@ -91,6 +99,7 @@ begin
   CB_CharSet.ItemIndex:=I;}
 
   CB_CharSet.Text:=ConfigValues.ByNameAsString('defCharSet', '');
+  ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('TSQLEngineFireBird\Initial ACL page', 0);
 end;
 
 procedure TcfFireBirdOptionsFrame.SaveData;
@@ -100,6 +109,7 @@ begin
   ConfigValues.SetByNameAsString('fb_defUserPassword', edtDefUserPassword.Text);
   ConfigValues.SetByNameAsInteger('defServerVersion', CB_DefServer.ItemIndex);
   //fbShowExecDescription:=CheckBox1.Checked;
+  ConfigValues.SetByNameAsInteger('TSQLEngineFireBird\Initial ACL page', ComboBox1.ItemIndex);
 end;
 
 end.

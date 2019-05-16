@@ -68,14 +68,14 @@ end;
 
 procedure TcfPostgreeConfigMiskFrame.LoadData;
 begin
-  ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('ACL_List_User_Roles_Style', 0);
+  ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('TSQLEnginePostgre\Initial ACL page', 0);
   CheckBox1.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre_CreateIndexAfterCreateFK', false);
   Edit1.Text:=IntToStr(ConfigValues.ByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', 0));
 end;
 
 procedure TcfPostgreeConfigMiskFrame.SaveData;
 begin
-  ConfigValues.SetByNameAsInteger('ACL_List_User_Roles_Style', ComboBox1.ItemIndex);
+  ConfigValues.SetByNameAsInteger('TSQLEnginePostgre\Initial ACL page', ComboBox1.ItemIndex);
   ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre_CreateIndexAfterCreateFK', CheckBox1.Checked);
   ConfigValues.SetByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', StrToInt64Def(Edit1.Text, 0));
 end;
