@@ -2411,7 +2411,13 @@ var
 begin
   Result:='';
   for F in Fields do
-  if F.FieldPK then
+    if F.FieldPK then
+    begin
+      if Result <> '' then Result := Result + ' and ';
+      Result:=Result + '(' + F.FieldName + ' = :' + F.FieldName + ')';
+    end;
+
+  if Result = '' then
   begin
     if Result <> '' then Result := Result + ' and ';
     Result:=Result + '(' + F.FieldName + ' = :' + F.FieldName + ')';

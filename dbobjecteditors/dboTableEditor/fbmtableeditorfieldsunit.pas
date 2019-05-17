@@ -856,6 +856,16 @@ begin
       FIsDomain:=fbmTableFieldEditorForm.cbDomainCheck.Checked;
       if fbmTableFieldEditorForm.ShowModal = mrOk then
       begin
+        //Изменили признак NOT NULL
+        if fbmTableFieldEditorForm.cbNotNull.Checked <> rxFieldListFIELD_NOT_NULL.AsBoolean then
+        begin
+          if fbmTableFieldEditorForm.cbNotNull.Checked then
+            OP:=FSqlObj.AddOperator(ataAlterColumnSetNotNull)
+          else
+            OP:=FSqlObj.AddOperator(ataAlterColumnDropNotNull);
+          fbmTableFieldEditorForm.FillSQLField(OP.Field);
+        end;
+
         //Изменили первичный ключ
         if fbmTableFieldEditorForm.cbPrimaryKey.Checked <> rxFieldListFIELD_PK.AsBoolean then
         begin
@@ -920,15 +930,6 @@ begin
         if TrimRight(fbmTableFieldEditorForm.edtDescription.Text) <> rxFieldListFIELD_DESCRIPTION.AsString then
         begin;
           OP:=FSqlObj.AddOperator(ataAlterColumnDescription);
-          fbmTableFieldEditorForm.FillSQLField(OP.Field);
-        end;
-
-        if fbmTableFieldEditorForm.cbNotNull.Checked <> rxFieldListFIELD_NOT_NULL.AsBoolean then
-        begin
-          if fbmTableFieldEditorForm.cbNotNull.Checked then
-            OP:=FSqlObj.AddOperator(ataAlterColumnSetNotNull)
-          else
-            OP:=FSqlObj.AddOperator(ataAlterColumnDropNotNull);
           fbmTableFieldEditorForm.FillSQLField(OP.Field);
         end;
 

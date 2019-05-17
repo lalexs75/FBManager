@@ -1788,7 +1788,7 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="6">
+    <Exceptions Count="7">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
@@ -1807,6 +1807,9 @@
       <Item6>
         <Name Value="EConvertError"/>
       </Item6>
+      <Item7>
+        <Name Value="EUIBError"/>
+      </Item7>
     </Exceptions>
   </Debugging>
 </CONFIG>

@@ -5605,6 +5605,7 @@ end;
 var
   OP: TAlterTableOperator;
   C: TSQLConstraintItem;
+  S: String;
 begin
   for OP in FOperators do
   begin
@@ -5618,8 +5619,24 @@ begin
       ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [Name, OP.Field.Caption, OP.Field.DefaultValue]);
       ataDropColumn:AddSQLCommandEx('ALTER TABLE %s DROP %s', [Name, OP.Field.Caption]);
       ataAlterColumnSetNotNull,
-      ataAlterColumnDropNotNull:AddSQLCommandEx('update RDB$RELATION_FIELDS set RDB$NULL_FLAG = %d ' + ' where (RDB$FIELD_NAME = ''%s'') and (RDB$RELATION_NAME = ''%s'')',
+      ataAlterColumnDropNotNull:
+        begin
+          if ServerVersion in [gds_verFirebird3_0] then
+          begin
+            if fpNotNull in OP.Field.Params then
+              S:='SET'
+            else
+              S:='DROP';
+            AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [Name, OP.Field.Caption, S]);
+            (*
+            SET NOT NULL  |  DROP NOT NULL
+            *)
+          end
+          else
+            AddSQLCommandEx('update RDB$RELATION_FIELDS set RDB$NULL_FLAG = %d ' + ' where (RDB$FIELD_NAME = ''%s'') and (RDB$RELATION_NAME = ''%s'')',
             [Ord(fpNotNull in OP.Field.Params), OP.Field.Caption, Name]);
+
+        end;
 
       ataAlterColumnDescription : DescribeObjectEx(okColumn, OP.Field.Caption, Name, OP.Field.Description);
       ataAddTableConstraint:DoAddConstrint(OP);
