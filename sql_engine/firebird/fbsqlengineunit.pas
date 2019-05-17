@@ -272,7 +272,9 @@ type
     FSqlFieldSubType: integer;
   protected
     function InternalGetDDLCreate: string; override;
-    procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
+    procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
+    function GetEnableRename: boolean; override;
+    function RenameObject(ANewName:string):Boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     procedure RefreshDependencies;override;
@@ -4197,6 +4199,37 @@ end;
 procedure TFireBirdDomain.InternalSetDescription(ACommentOn: TSQLCommentOn);
 begin
   ACommentOn.Description:=TSQLEngineFireBird(OwnerDB).ConvertString20(FDescription, false);
+end;
+
+function TFireBirdDomain.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
+function TFireBirdDomain.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TFBSQLAlterDomain;
+  Op: TAlterDomainOperator;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TFBSQLAlterDomain.Create(nil);
+    FCmd.Name:=Caption;
+    Op:=FCmd.AddOperator(adaRenameDomain);
+    Op.ParamValue:=ANewName;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 constructor TFireBirdDomain.Create(const ADBItem: TDBItem;
