@@ -274,9 +274,9 @@ type
     function InternalGetDDLCreate: string; override;
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
     function GetEnableRename: boolean; override;
-    function RenameObject(ANewName:string):Boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    function RenameObject(ANewName:string):Boolean; override;
     procedure RefreshDependencies;override;
     procedure RefreshObject; override;
     class function DBClassTitle:string;override;

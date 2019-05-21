@@ -708,9 +708,11 @@ type
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
     function GetCaptionFullPatch:string; override;
     function InternalGetDDLCreate: string; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function RenameObject(ANewName:string):Boolean; override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     function CompileProc(PrcName, PrcParams, aSql:string; ADropBeforCompile:boolean):boolean;
@@ -5670,12 +5672,15 @@ var
   St: TStringList;
 begin
   St:=ASqlObject.SQLText;
-  if (ASqlObject as TPGSQLCreateFunction).IsDropFunction then
+  if ((ASqlObject is TPGSQLCreateFunction)) then
   begin
-    FACLList.FTempObjName:=(ASqlObject as TPGSQLCreateFunction).FunctionName;
-    FACLList.MakeACLListSQL(nil, St, true);
-    FACLList.FTempObjName:='';
-    FOID:=0;
+    if(ASqlObject as TPGSQLCreateFunction).IsDropFunction then
+    begin
+      FACLList.FTempObjName:=(ASqlObject as TPGSQLCreateFunction).FunctionName;
+      FACLList.MakeACLListSQL(nil, St, true);
+      FACLList.FTempObjName:='';
+      FOID:=0;
+    end;
   end;
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
 end;
@@ -5744,6 +5749,11 @@ begin
   end;
 end;
 
+function TPGFunction.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 constructor TPGFunction.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
@@ -5767,6 +5777,32 @@ destructor TPGFunction.Destroy;
 begin
   FreeAndNil(FResultType);
   inherited Destroy;
+end;
+
+function TPGFunction.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterFunction;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterFunction.Create(nil);
+    FCmd.Name:=Caption;
+    FCmd.SchemaName:=SchemaName;
+    FCmd.NewName:=ANewName;
+    FieldsIN.SaveToSQLFields(FCmd.Params);
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 class function TPGFunction.DBClassTitle: string;

@@ -1588,7 +1588,6 @@ begin
   begin
     if AddSeparator and (ASQL[Length(ASQL)] <> ';') then
       ASQL:=ASQL + ';';
-    //FSQLText.Add(TrimRight(ASQL));
     FSQLText.Add(ASQL);
   end;
 end;
