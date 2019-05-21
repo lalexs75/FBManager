@@ -5800,7 +5800,7 @@ begin
     if Result then
     begin
       Caption:=ANewName;
-      RefreshObject;
+      //RefreshObject;
     end;
   end;
 end;
