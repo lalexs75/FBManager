@@ -2179,7 +2179,12 @@ begin
       S:=Trim(QFields.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
       if LowerCase(copy(S,1, 4))<>'rdb$' then
         Rec.FieldTypeDomain:=S;
-      Rec.FieldDefaultValue:=QFields.Fields.ByNameAsString['RDB$DEFAULT_SOURCE'];
+
+      S:=QFields.Fields.ByNameAsString['RDB$DEFAULT_SOURCE'];
+      if UpperCase(Copy(S, 1, 7)) = 'DEFAULT' then
+        S:=Trim(Copy(S, 8, Length(S)));
+      Rec.FieldDefaultValue:=S;
+
       Rec.FieldSQLTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_type'];
       Rec.FieldSQLSubTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_sub_type'];
       Rec.FieldTypeName:=FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
