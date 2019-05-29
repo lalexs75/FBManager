@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, db, uib, FBCustomDataSet, SQLEngineInternalToolsUnit,
-  contnrs, fb_utils, SQLEngineCommonTypesUnit,
+  contnrs, fb_utils, SQLEngineCommonTypesUnit, fbmisc,
   fb_SqlParserUnit, uibsqlparser, fbKeywordsUnit, fbmSqlParserUnit,
   sqlObjects;
 
@@ -305,6 +305,7 @@ type
     FTempTableAction: TTempTableAction;
     FTransaction:TUIBTransaction;
     FTriggerList:TTriggersLists;
+    procedure DSUpdateRecord(ADataSet: TDataSet; AUpdateKind: DB.TUpdateKind; var AUpdateAction: fbmisc.TUpdateAction);
   protected
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
     function InternalGetDDLCreate: string; override;
@@ -732,7 +733,7 @@ type
   end;
   
 implementation
-uses ibmsqltextsunit, ibmSqlUtilsUnit, uiblib, rxdbutils, Controls, fbmStrConstUnit, fbmisc, LazUTF8, strutils,
+uses ibmsqltextsunit, ibmSqlUtilsUnit, uiblib, rxdbutils, Controls, fbmStrConstUnit, LazUTF8, strutils,
   fbSqlTextUnit,
   fbmSQLTextCommonUnit         //Общие запросы для всех SQL серверов
   ;
@@ -1919,6 +1920,93 @@ end;
 
   { TFireBirdTable }
 
+procedure TFireBirdTable.DSUpdateRecord(ADataSet: TDataSet;
+  AUpdateKind: DB.TUpdateKind; var AUpdateAction: fbmisc.TUpdateAction);
+var
+  F: TDBField;
+  F1: TField;
+  S1, S2, S3, S: String;
+  i: Integer;
+begin
+  if AUpdateKind = ukInsert then
+  begin
+    S1:='';
+    S2:='';
+    S3:='';
+    for F in Fields do
+    begin
+      if not FDataSet.FieldByName(F.FieldName).IsNull then
+      begin
+        if S1<>'' then
+        begin
+          S1:=S1 + ', ';
+          S2:=S2 + ', ';
+        end;
+        S1:=S1 + F.FieldName;
+        S2:=S2 + ':' + F.FieldName;
+      end;
+
+      if F.FieldPK then
+      begin
+        if S3 <> '' then S3 := S3 + ', ';
+        S3 := S3 + F.FieldName;
+      end;
+    end;
+
+    TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + Caption + '('+S1+') values (' + S2+ ') RETURNING ('+S3+')';
+
+    for F in Fields do
+    begin
+      F1:=FDataSet.FieldByName(F.FieldName);
+      if not F1.IsNull then
+      begin
+        if F1.DataType in IntegerDataTypes then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsInteger[F.FieldName]:=F1.AsInteger
+        else
+        if F1.DataType in StringTypes then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsString[F.FieldName]:=F1.AsString
+        else
+        if F1.DataType = ftTime then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsDateTime[F.FieldName]:=F1.AsDateTime
+        else
+        if F1.DataType in [ftDateTime, ftTimeStamp] then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsDateTime[F.FieldName]:=F1.AsDateTime
+        else
+        if F1.DataType = ftDate then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsDateTime[F.FieldName]:=F1.AsDateTime
+        else
+          raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F1.DataType]]);
+      end;
+    end;
+
+    TFBDataSet(FDataSet).QueryInsert.Execute;
+    for i:=0 to TFBDataSet(FDataSet).QueryInsert.Fields.FieldCount-1 do
+    begin
+      S:=TFBDataSet(FDataSet).QueryInsert.Fields.SqlName[i];
+      F1:=FDataSet.FieldByName(S);
+
+      if F1.DataType in IntegerDataTypes then
+        F1.AsInteger:=TFBDataSet(FDataSet).QueryInsert.Fields.ByNameAsInteger[S]
+      else
+      if F1.DataType in StringTypes then
+        F1.AsString:=TFBDataSet(FDataSet).QueryInsert.Fields.ByNameAsString[S]
+      else
+      if F1.DataType = ftTime then
+        F1.AsDateTime:=TFBDataSet(FDataSet).QueryInsert.Fields.ByNameAsDateTime[S]
+      else
+      if F1.DataType in [ftDateTime, ftTimeStamp] then
+        F1.AsDateTime:=TFBDataSet(FDataSet).QueryInsert.Fields.ByNameAsDateTime[S]
+      else
+      if F1.DataType = ftDate then
+        F1.AsDateTime:=TFBDataSet(FDataSet).QueryInsert.Fields.ByNameAsDateTime[S]
+      else
+        raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F1.DataType]]);
+    end;
+    TFBDataSet(FDataSet).QueryInsert.Close;
+    AUpdateAction:=uaApplied;
+  end;
+end;
+
 procedure TFireBirdTable.InternalSetDescription(ACommentOn: TSQLCommentOn);
 begin
   ACommentOn.Description:=TSQLEngineFireBird(OwnerDB).ConvertString20(FDescription, false);
@@ -2446,22 +2534,30 @@ end;
 
 function MakeSQLInsert:string;
 var
-  S: String;
+  S, S1: String;
   F: TDBField;
 begin
-  Result:='insert into ' + Caption + '(';
-  S:='';
-  for F in Fields do
+  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird2_5, gds_verFirebird3_0] then
   begin
-    if S<> '' then
+    TFBDataSet(FDataSet).OnUpdateRecord:=@DSUpdateRecord;
+    Result:='1'
+  end
+  else
+  begin
+    Result:='insert into ' + Caption + '(';
+    S:='';
+    for F in Fields do
     begin
-      S:=S + ',';
-      Result:=Result + ',';
+      if S<> '' then
+      begin
+        S:=S + ',';
+        Result:=Result + ',';
+      end;
+      Result := Result + F.FieldName;
+      S:=S + ' :' + F.FieldName;
     end;
-    Result := Result + F.FieldName;
-    S:=S + ' :' + F.FieldName;
+    Result:=Result + ') values (' + S+ ')';
   end;
-  Result:=Result + ') values (' + S+ ')'
 end;
 
 begin
