@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="SQLEngineAbstractUnit"><element name="TUITableOption"><short>Параметры редактора таблицы</short>
+      </element><element name="TUITableOption.utRenameTable"><short>Можно переименовывать таблицу</short>
+      </element><element name="TUITableOption.utReorderFields"><short>Можно переупорядочивать поля</short>
+      </element><element name="TUITableOption.utAddFields"><short>Можно добавлять поля</short>
+      </element><element name="TUITableOption.utEditField"><short>Можно редактировать поля</short>
+      </element><element name="TUITableOption.utDropFields"><short>Можно удалять поля</short>
+      </element><element name="TUITableOption.utAddFK"><short>Можно добавлять FK</short>
+      </element><element name="TUITableOption.utEditFK"><short>Можно редактировать FK</short>
+      </element><element name="TUITableOption.utDropFK"><short>Можно удалять FK</short>
+      </element><element name="TUITableOption.utAddUNQ"><short>Можно добавлять уникальность</short>
+      </element><element name="TUITableOption.utEditUNQ"><short>Можно изменять уникальность</short>
+      </element><element name="TUITableOption.utDropUNQ"><short>Можно удалять уникальность</short>
+      </element><element name="TUITableOption.utAlterAddFieldInitialValue"><short>Изменять поле - устанавливать начальное значение</short>
+      </element><element name="TUITableOption.utAlterAddFieldFK"><short>Изменять поле - добавлять FK</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>
