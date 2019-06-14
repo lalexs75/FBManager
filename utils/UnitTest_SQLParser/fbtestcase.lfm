@@ -5,6 +5,7 @@ object FBTestSQLData: TFBTestSQLData
   VerticalOffset = 103
   Width = 1113
   object sView: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'RecreateView1'
@@ -137,6 +138,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 16
   end
   object sDomain: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateDomain1'
@@ -274,6 +276,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 88
   end
   object sTable: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateTable1'
@@ -502,6 +505,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 159
   end
   object sProcedure: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateTrigger1'
@@ -1175,6 +1179,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 232
   end
   object sUsers: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'Revoke1'
@@ -1228,6 +1233,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 319
   end
   object sGenerator: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateSequence1'
@@ -1315,6 +1321,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 16
   end
   object sDataBase: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateCollation1'
@@ -1485,15 +1492,13 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterDatabase1'
         Lines.Strings = (
-          'ALTER DATABASE'
-          '  ADD FILE ''D:\test.fdb4'' STARTING AT PAGE 30001;'
+          'ALTER DATABASE ADD FILE ''D:\test.fdb4'' STARTING AT PAGE 30001;'
         )
       end    
       item
         Caption = 'AlterDatabase2'
         Lines.Strings = (
-          'ALTER DATABASE'
-          ' ADD DIFFERENCE FILE ''D:\test.diff''; '
+          'ALTER DATABASE ADD DIFFERENCE FILE ''D:\test.diff'';'
         )
       end    
       item
@@ -1578,6 +1583,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 400
   end
   object sException: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateException1'
@@ -1643,6 +1649,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 472
   end
   object sComment: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CommentOn1'

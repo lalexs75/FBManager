@@ -1348,6 +1348,11 @@ begin
   T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'DROP', []);
     T:=AddSQLTokens(stKeyword, T, 'DIFFERENCE', []);
     T:=AddSQLTokens(stKeyword, T, 'FILE', [], 22);
+
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'BEGIN', []);
+    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 22);
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'BEGIN', []);
+    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 22);
 end;
 
 procedure TFBSQLAlterDatabase.MakeSQL;

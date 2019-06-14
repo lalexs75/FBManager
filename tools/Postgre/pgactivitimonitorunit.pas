@@ -226,8 +226,9 @@ begin
   pgStatDB.Properties.Add('codepage=');
   pgStatDB.Properties.Add('controls_cp=CP_UTF8');
   {$IFNDEF WINDOWS}
-  pgStatDB.Properties.Add('application_name=FBManager');
+  //pgStatDB.Properties.Add('application_name=FBManager');
   //pgStatDB.Properties.Values['application_name']:=Application.Title;
+  pgStatDB.Properties.Values['application_name']:=ExtractFileName(ParamStr(0));
   {$ENDIF}
 end;
 
