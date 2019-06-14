@@ -4136,7 +4136,8 @@ begin
      utAddFK, utEditFK, utDropFK,
      utAddUNQ, utDropUNQ,
      utAlterAddFieldInitialValue,
-     utAlterAddFieldFK];
+     utAlterAddFieldFK,
+     utSetFKName];
 
   FSchema:=TPGTablesRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;

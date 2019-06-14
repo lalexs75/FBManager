@@ -561,15 +561,16 @@ begin
   i:=0;
   repeat
     inc(i);
-
     S:=FormatStringCase(Format(sFKNameMask, [FTableName,i]), FTable.OwnerDB.MiscOptions.ObjectNamesCharCase);
-
     if Assigned(FConstList) then
       Fnd:=FConstList.IndexOf(S) >= 0
     else
       Fnd:=Assigned(FTable.ConstraintFind(S));
   until not Fnd;
   edtFKName.Text:=S;
+
+  if utSetFKName in FTable.UITableOptions then
+    cbCreateFKIndex.Checked:=ConfigValues.ByNameAsBoolean(FTable.OwnerDB.ClassName+'\CreateIndexAfterCreateFK', false);
 end;
 
 procedure TfbmTableFieldEditorForm.CreateIndexName;

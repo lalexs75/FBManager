@@ -46,12 +46,20 @@ type
   TUIParams = set of TUIParam;
 
   TUITableOption = (
-             utRenameTable, utReorderFields,
-             utAddFields, utEditField, utDropFields,
-             utAddFK, utEditFK, utDropFK,
-             utAddUNQ, utEditUNQ, utDropUNQ,
-             utAlterAddFieldInitialValue,
-             utAlterAddFieldFK
+             utRenameTable,     //Можно переименовывать таблицу
+             utReorderFields,   //Можно переупорядочивать поля
+             utAddFields,       //Можно добавлять поля
+             utEditField,       //Можно редактировать поля
+             utDropFields,      //Можно удалять поля
+             utAddFK,           //Можно добавлять FK
+             utEditFK,          //Можно редактировать FK
+             utDropFK,          //Можно удалять FK
+             utAddUNQ,          //Можно добавлять уникальность
+             utEditUNQ,         //Можно изменять уникальность
+             utDropUNQ,         //Можно удалять уникальность
+             utAlterAddFieldInitialValue, //Изменять поле - устанавливать начальное значение
+             utAlterAddFieldFK,           //Изменять поле - добавлять FK
+             utSetFKName                  //Можно устанавливать имя индекса для FK
              );
   
   TUITableOptions = set of TUITableOption;

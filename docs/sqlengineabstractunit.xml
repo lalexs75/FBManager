@@ -13,6 +13,7 @@
       </element><element name="TUITableOption.utDropUNQ"><short>Можно удалять уникальность</short>
       </element><element name="TUITableOption.utAlterAddFieldInitialValue"><short>Изменять поле - устанавливать начальное значение</short>
       </element><element name="TUITableOption.utAlterAddFieldFK"><short>Изменять поле - добавлять FK</short>
+      </element><element name="TUITableOption.utSetFKName"><short>Можно устанавливать имя индекса для FK</short>
       </element>
     </module>
   </package>
