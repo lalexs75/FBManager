@@ -10,18 +10,18 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
     Height = 232
     Top = 0
     Width = 1013
-    ActivePage = TabSheet5
+    ActivePage = TabSheet4
     Align = alTop
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheet4: TTabSheet
       Caption = 'Declaration'
-      ClientHeight = 198
+      ClientHeight = 201
       ClientWidth = 1003
       object PageControl1: TPageControl
         AnchorSideLeft.Side = asrBottom
         Left = 548
-        Height = 198
+        Height = 201
         Top = 0
         Width = 455
         ActivePage = TabSheet1
@@ -30,18 +30,18 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = 'События'
-          ClientHeight = 194
-          ClientWidth = 451
+          ClientHeight = 170
+          ClientWidth = 445
           object rgRowScope: TRadioGroup
             AnchorSideTop.Control = TabSheet1
             AnchorSideRight.Control = TabSheet1
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = cbOnEvent
             AnchorSideBottom.Side = asrBottom
-            Left = 332
-            Height = 111
+            Left = 335
+            Height = 105
             Top = 6
-            Width = 107
+            Width = 104
             Anchors = [akTop, akRight, akBottom]
             AutoFill = True
             AutoSize = True
@@ -56,8 +56,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 90
-            ClientWidth = 105
+            ClientHeight = 87
+            ClientWidth = 102
             Items.Strings = (
               'Row'
               'Statement'
@@ -71,10 +71,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             AnchorSideRight.Control = rgRowScope
             AnchorSideBottom.Control = cbOnEvent
             AnchorSideBottom.Side = asrBottom
-            Left = 243
-            Height = 111
+            Left = 248
+            Height = 105
             Top = 6
-            Width = 83
+            Width = 81
             Anchors = [akTop, akRight, akBottom]
             AutoFill = True
             AutoSize = True
@@ -89,8 +89,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 90
-            ClientWidth = 81
+            ClientHeight = 87
+            ClientWidth = 79
             Items.Strings = (
               'Before'
               'After'
@@ -106,9 +106,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             AnchorSideBottom.Control = rgRowScope
             AnchorSideBottom.Side = asrBottom
             Left = 6
-            Height = 81
-            Top = 36
-            Width = 231
+            Height = 76
+            Top = 35
+            Width = 236
             Anchors = [akTop, akLeft, akRight]
             AutoFill = True
             AutoSize = True
@@ -124,8 +124,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 60
-            ClientWidth = 229
+            ClientHeight = 58
+            ClientWidth = 234
             Columns = 2
             Items.Strings = (
               'Insert'
@@ -143,9 +143,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             AnchorSideLeft.Control = TabSheet1
             AnchorSideTop.Control = TabSheet1
             Left = 6
-            Height = 24
+            Height = 23
             Top = 6
-            Width = 65
+            Width = 62
             BorderSpacing.Around = 6
             Caption = 'Active'
             TabOrder = 3
@@ -153,8 +153,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         end
         object TabSheet2: TTabSheet
           Caption = 'Колонки'
-          ClientHeight = 194
-          ClientWidth = 451
+          ClientHeight = 170
+          ClientWidth = 445
           object SpeedButton1: TSpeedButton
             AnchorSideLeft.Control = TabSheet2
             AnchorSideLeft.Side = asrCenter
@@ -361,7 +361,7 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             Anchors = [akTop, akLeft, akRight, akBottom]
             ItemHeight = 0
             OnDblClick = SpeedButton1Click
-            ScrollWidth = 201
+            ScrollWidth = 203
             TabOrder = 0
             TopIndex = -1
           end
@@ -381,7 +381,7 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             ItemHeight = 0
             OnClick = ListBox2Click
             OnDblClick = SpeedButton2Click
-            ScrollWidth = 201
+            ScrollWidth = 203
             TabOrder = 1
             TopIndex = -1
           end
@@ -397,8 +397,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Splitter2
         Left = 403
-        Height = 36
-        Top = 160
+        Height = 33
+        Top = 148
         Width = 134
         Anchors = [akTop, akRight]
         BorderSpacing.Around = 6
@@ -412,10 +412,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideRight.Control = cbLang
         AnchorSideBottom.Control = cbLang
         AnchorSideBottom.Side = asrBottom
-        Left = 336
-        Height = 20
-        Top = 176
-        Width = 61
+        Left = 338
+        Height = 17
+        Top = 164
+        Width = 59
         Anchors = [akRight, akBottom]
         BorderSpacing.Top = 6
         Caption = 'Language'
@@ -427,10 +427,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = cbTables
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Splitter2
-        Left = 173
-        Height = 36
-        Top = 118
-        Width = 364
+        Left = 163
+        Height = 33
+        Top = 109
+        Width = 374
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -444,10 +444,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = cbProcList
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = lblLanguage
-        Left = 168
-        Height = 37
-        Top = 160
-        Width = 162
+        Left = 160
+        Height = 34
+        Top = 148
+        Width = 172
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 3
@@ -458,9 +458,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideBottom.Control = cbTables
         AnchorSideBottom.Side = asrBottom
         Left = 7
-        Height = 20
-        Top = 92
-        Width = 57
+        Height = 17
+        Top = 86
+        Width = 55
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'For table'
@@ -468,9 +468,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
       end
       object lblTriggerName: TLabel
         Left = 7
-        Height = 20
+        Height = 17
         Top = 7
-        Width = 84
+        Width = 81
         BorderSpacing.Around = 6
         Caption = 'Trigger name'
         ParentColor = False
@@ -481,8 +481,8 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Splitter2
         Left = 13
-        Height = 37
-        Top = 33
+        Height = 34
+        Top = 30
         Width = 524
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -495,10 +495,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = edtCaption
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Splitter2
-        Left = 70
-        Height = 36
-        Top = 76
-        Width = 467
+        Left = 68
+        Height = 33
+        Top = 70
+        Width = 469
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -509,9 +509,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = cbProcList
         AnchorSideTop.Side = asrCenter
         Left = 7
-        Height = 24
-        Top = 124
-        Width = 160
+        Height = 23
+        Top = 114
+        Width = 150
         BorderSpacing.Left = 6
         Caption = 'Use existing function'
         Checked = True
@@ -523,9 +523,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = edtNewProcName
         AnchorSideTop.Side = asrCenter
         Left = 7
-        Height = 24
-        Top = 166
-        Width = 155
+        Height = 23
+        Top = 154
+        Width = 147
         BorderSpacing.Left = 6
         Caption = 'Create new function'
         OnChange = rbCreateNewFuncChange
@@ -533,7 +533,7 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
       end
       object Splitter2: TSplitter
         Left = 543
-        Height = 198
+        Height = 201
         Top = 0
         Width = 5
         Align = alRight

@@ -170,8 +170,8 @@ type
   end;
 
 implementation
-uses LR_Class, LCLType, IBManMainUnit, strutils, fbmStrConstUnit, pgTypes, ibmSqlUtilsUnit,
-  pg_sql_lines_unit, pg_SqlParserUnit,
+uses LR_Class, LCLType, rxstrutils, IBManMainUnit, strutils, fbmStrConstUnit,
+  pgTypes, ibmSqlUtilsUnit, pg_sql_lines_unit, pg_SqlParserUnit,
   fbmPostGreeSPedtMainPage_EditParamUnit;
 
 {$R *.lfm}
@@ -710,38 +710,72 @@ end;
 procedure TfbmPostGreeFunctionEdtMainPage.DoTextEditorDefineVariable(Sender: TObject);
 var
   S: String;
+  St: TStringList;
 begin
   S:=Trim(EditorFrame.TextEditor.SelText);
-  if TabSheet3.TabVisible and (S<>'') and IsValidIdent(S) then
+  if TabSheet3.TabVisible and (S<>'') then
   begin
-    if (Sender as TComponent).Tag = 1 then
-    begin
-      FLocalVars.AddVariable(S);
-      PageControl1.ActivePage:=TabSheet3;
-    end
+    St:=TStringList.Create;
+    if Pos(',', S)>0 then
+      StrToStrings(S, St, ',')
     else
+      St.Add(S);
+
+    for S in St do
     begin
-      if not rxParamList.Locate('ParName', S, [loCaseInsensitive]) then
+      if IsValidIdent(Trim(S)) then
       begin
-        rxParamList.Append;
-        rxParamListParName.AsString:=S;
-        rxParamListInOut.AsInteger:=(Sender as TComponent).Tag - 1;
-        rxParamList.Post;
+        if (Sender as TComponent).Tag = 1 then
+        begin
+          FLocalVars.AddVariable(Trim(S));
+          PageControl1.ActivePage:=TabSheet3;
+        end
+        else
+        begin
+          if not rxParamList.Locate('ParName', Trim(S), [loCaseInsensitive]) then
+          begin
+            rxParamList.Append;
+            rxParamListParName.AsString:=Trim(S);
+            rxParamListInOut.AsInteger:=(Sender as TComponent).Tag - 1;
+            rxParamList.Post;
+          end;
+          PageControl1.ActivePage:=TabSheet2;
+        end
       end;
-      PageControl1.ActivePage:=TabSheet2;
-    end
+    end;
+    St.Free;
   end;
 end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.TextEditorPopUpMenu(Sender: TObject);
 var
   S: String;
+  F: Boolean;
+  St: TStringList;
 begin
-  S:=Trim(EditorFrame.TextEditor.SelText);
-  FMenuDefineVariable.Enabled:=TabSheet3.TabVisible and (S<>'') and IsValidIdent(S);
-  FMenuDefineInParam.Enabled:=FMenuDefineVariable.Enabled;
-  FMenuDefineOutParam.Enabled:=FMenuDefineVariable.Enabled;
-  FMenuDefineInOutParam.Enabled:=FMenuDefineVariable.Enabled;
+  F:=TabSheet3.TabVisible;
+  if F then
+  begin
+    St:=TStringList.Create;
+    S:=Trim(EditorFrame.TextEditor.SelText);
+    if Pos(',', S)>0 then
+      StrToStrings(S, St, ',')
+    else
+      St.Add(S);
+    for S in St do
+    begin
+      if (S='') or (not IsValidIdent(Trim(S))) then
+      begin
+        F:=false;
+        Break;
+      end;
+    end;
+    St.Free;
+  end;
+  FMenuDefineVariable.Enabled:=F;
+  FMenuDefineInParam.Enabled:=F;
+  FMenuDefineOutParam.Enabled:=F;
+  FMenuDefineInOutParam.Enabled:=F;
 end;
 
 function TfbmPostGreeFunctionEdtMainPage.PageName: string;

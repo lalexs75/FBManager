@@ -85,8 +85,8 @@ type
   end;
 
 implementation
-uses pg_sql_lines_unit, fbmStrConstUnit, fbmToolsUnit, pg_SqlParserUnit, ibmSqlUtilsUnit, LazUTF8,
-  strutils, PGKeywordsUnit;
+uses pg_sql_lines_unit, fbmStrConstUnit, fbmToolsUnit, pg_SqlParserUnit,
+  ibmSqlUtilsUnit, LazUTF8, rxstrutils, strutils, PGKeywordsUnit;
 
 {$R *.lfm}
 
@@ -308,21 +308,50 @@ end;
 procedure TpgEventTriggerEditorPage.DoTextEditorDefineVariable(Sender: TObject);
 var
   S: String;
+  St: TStringList;
 begin
   S:=Trim(EditorFrame.TextEditor.SelText);
-  if TabSheet5.TabVisible and (S<>'') and IsValidIdent(S) then
+  if TabSheet5.TabVisible and (S<>'') then
   begin
-    FLocalVars.AddVariable(S);
+    St:=TStringList.Create;
+    if Pos(',', S)>0 then
+      StrToStrings(S, St, ',')
+    else
+      St.Add(S);
+
+    for S in St do
+    begin
+      if IsValidIdent(Trim(S)) then
+        FLocalVars.AddVariable(Trim(S));
+    end;
     PageControl2.ActivePage:=TabSheet5;
+    St.Free;
   end;
 end;
 
 procedure TpgEventTriggerEditorPage.TextEditorPopUpMenu(Sender: TObject);
 var
   S: String;
+  F: Boolean;
+  St: TStringList;
 begin
+  F:=true;
+  St:=TStringList.Create;
   S:=Trim(EditorFrame.TextEditor.SelText);
-  FMenuDefineVariable.Enabled:=TabSheet5.TabVisible and (S<>'') and IsValidIdent(S);
+  if Pos(',', S)>0 then
+    StrToStrings(S, St, ',')
+  else
+    St.Add(S);
+  for S in St do
+  begin
+    if (S='') or (not IsValidIdent(Trim(S))) then
+    begin
+      F:=false;
+      Break;
+    end;
+  end;
+  St.Free;
+  FMenuDefineVariable.Enabled:=TabSheet5.TabVisible and F;
 end;
 
 procedure TpgEventTriggerEditorPage.SetReadOnly(AValue: boolean);
