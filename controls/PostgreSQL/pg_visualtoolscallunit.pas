@@ -209,7 +209,8 @@ begin
   RegisterObjEditor(TPGMatView,
     [TfbmViewEditorMainFrame, TfbmObjectEditorDescriptionFrame],
     [TfbmViewEditorMainFrame, TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame,
-     TPGRuleListPage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+     TfbmTableEditorIndexFrame, TPGRuleListPage, TDependenciesFrame, TfbmpgACLEditEditor,
+     TfbmObjectEditorDescriptionFrame,
      TfbmDDLPage]);
 
   RegisterObjEditor(TPGSequence,

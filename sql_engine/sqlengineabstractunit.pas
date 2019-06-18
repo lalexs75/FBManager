@@ -511,7 +511,11 @@ type
   private
     FFields: TDBFields;
     FUITableOptions: TUITableOptions;
+    function GetIndexCount: integer;
+    function GetIndexItem(AItem: integer): TIndexItem;
   protected
+    FIndexItems:TList;
+    FIndexListLoaded:boolean;
     FDataSet:TDataSet;
     function GetFields: TDBFields;
     function GetTrigger(ACat:integer; AItem: integer): TDBTriggerObject; virtual; abstract;
@@ -524,6 +528,7 @@ type
     function GetDBFieldClass: TDBFieldClass; virtual;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
     function GetEnableRename: boolean; override;
+    procedure IndexArrayClear; virtual;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -539,6 +544,14 @@ type
     procedure FillFieldList(List:TStrings; ACharCase:TCharCaseOptions; AFullNames:Boolean);override;
     function TriggerNew(TriggerTypes:TTriggerTypes):TDBTriggerObject;virtual;
     function TriggerDelete(const ATrigger:TDBTriggerObject):boolean;virtual;
+
+    function IndexNew:string;virtual; abstract;
+    function IndexEdit(const IndexName:string):boolean;virtual; abstract;
+    function IndexDelete(const IndexName:string):boolean;virtual; abstract;
+    function IndexFind(IndexName:string):TIndexItem;
+    procedure IndexListRefresh; virtual; abstract;
+    property IndexCount:integer read GetIndexCount;
+    property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
 
     property RecordCount:integer read GetRecordCount;
     property TriggersCategoriesCount:integer read GetTriggersCategoriesCount;
@@ -557,12 +570,12 @@ type
   TDBIndex = class(TDBObject)
   private
     FIndexFields: TIndexFields;
-    FTable: TDBTableObject;
+    FTable: TDBDataSetObject;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     property IndexFields:TIndexFields read FIndexFields;
-    property Table:TDBTableObject read FTable write FTable;
+    property Table:TDBDataSetObject read FTable write FTable;
   end;
 
   { TDBTableObject }
@@ -570,37 +583,28 @@ type
   TDBTableObject = class(TDBDataSetObject)
   private
     FStatistic: TDBTableStatistic;
-    function GetIndexItem(AItem: integer): TIndexItem;
     function GetConstraint(AItem: integer): TPrimaryKeyRecord;
     function GetConstraintCount: integer;
   protected
-    FIndexItems:TList;
-    FIndexListLoaded:boolean;
     FFKListLoaded:boolean;
     FPKListLoaded:boolean;
     FPKCount:integer;
     FConstraintList:TList;
     FCashedState:TTableCashedStateFlags;
-    function GetIndexCount: integer;
 
-    procedure IndexArrayClear;
     function GetIndexFields(const AIndexName:string; const AForce:boolean):string; virtual;
 
     procedure ClearConstraintList(AConstraintType:TConstraintType);
     procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
     procedure InternalRefreshStatistic; virtual;
+    procedure IndexArrayClear; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
-    procedure IndexListRefresh; virtual; abstract;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
 
     procedure SetFieldsOrder(AFieldsList:TStrings);virtual; abstract;
 
-    function IndexNew:string;virtual; abstract;
-    function IndexEdit(const IndexName:string):boolean;virtual; abstract;
-    function IndexDelete(const IndexName:string):boolean;virtual; abstract;
-    function IndexFind(IndexName:string):TIndexItem;
 
     function ConstraintFind(ConstraintName:string):TPrimaryKeyRecord;
     procedure MakeSQLStatementsList(AList:TStrings); override;
@@ -609,9 +613,6 @@ type
     procedure RefreshConstraintForeignKey; virtual;
     procedure RefreshConstraintUnique; virtual;
     procedure RefreshConstraintCheck; virtual;
-
-    property IndexCount:integer read GetIndexCount;
-    property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
 
     property Statistic:TDBTableStatistic read FStatistic;
 
@@ -2686,24 +2687,6 @@ begin
 end;
 
 { TDBTableObject }
-procedure TDBTableObject.IndexArrayClear;
-var
-  I:integer;
-  P:TIndexItem;
-begin
-  for i:=FIndexItems.Count - 1 downto 0 do
-  begin
-    P:=TIndexItem(FIndexItems[i]);
-    FIndexItems.Delete(i);
-    P.Free;
-  end;
-
-  for i:=FConstraintList.Count - 1 downto 0 do
-    TPrimaryKeyRecord(FConstraintList[i]).Index:=nil;
-
-  FIndexListLoaded:=false;
-end;
-
 function TDBTableObject.GetIndexFields(const AIndexName: string;
   const AForce: boolean): string;
 var
@@ -2722,11 +2705,6 @@ begin
       end;
     end;
   end;
-end;
-
-function TDBTableObject.GetIndexItem(AItem: integer): TIndexItem;
-begin
-  Result:=TIndexItem(FIndexItems[AItem]);
 end;
 
 function TDBTableObject.GetConstraint(AItem: integer): TPrimaryKeyRecord;
@@ -2775,9 +2753,13 @@ begin
   Statistic.AddValue(sCaption, CaptionFullPatch);
 end;
 
-function TDBTableObject.GetIndexCount: integer;
+procedure TDBTableObject.IndexArrayClear;
+var
+  i: Integer;
 begin
-  Result:=FIndexItems.Count;
+  inherited IndexArrayClear;
+  for i:=FConstraintList.Count - 1 downto 0 do
+    TPrimaryKeyRecord(FConstraintList[i]).Index:=nil;
 end;
 
 constructor TDBTableObject.Create(const ADBItem: TDBItem;
@@ -2785,7 +2767,6 @@ constructor TDBTableObject.Create(const ADBItem: TDBItem;
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FStatistic:=TDBTableStatistic.Create(Self);
-  FIndexItems:=TList.Create;
   FConstraintList:=TList.Create;
   FFKListLoaded:=false;
   FPKListLoaded:=false;
@@ -2796,7 +2777,6 @@ begin
   ClearConstraintList(ctNone);
 
   FreeAndNil(FConstraintList);
-  FreeAndNil(FIndexItems);
   FreeAndNil(FStatistic);
   inherited Destroy;
 end;
@@ -2831,26 +2811,6 @@ begin
 
   if csfLoadedFK in FFlags then
     RefreshConstraintForeignKey;
-end;
-
-function TDBTableObject.IndexFind(IndexName: string): TIndexItem;
-var
-  i:integer;
-begin
-  if not FIndexListLoaded then
-    IndexListRefresh;
-
-  IndexName:=UpperCase(IndexName);
-
-  Result:=nil;
-  for i:=0 to IndexCount-1 do
-  begin
-    if UpperCase(TIndexItem(FIndexItems[i]).IndexName) = IndexName then
-    begin
-      Result:=IndexItem[i];
-      exit;
-    end;
-  end;
 end;
 
 function TDBTableObject.ConstraintFind(ConstraintName: string): TPrimaryKeyRecord;
@@ -3026,6 +2986,30 @@ begin
   Result:=utRenameTable in UITableOptions;
 end;
 
+procedure TDBDataSetObject.IndexArrayClear;
+var
+  I:integer;
+  P:TIndexItem;
+begin
+  for i:=FIndexItems.Count - 1 downto 0 do
+  begin
+    P:=TIndexItem(FIndexItems[i]);
+    FIndexItems.Delete(i);
+    P.Free;
+  end;
+  FIndexListLoaded:=false;
+end;
+
+function TDBDataSetObject.GetIndexCount: integer;
+begin
+  Result:=FIndexItems.Count;
+end;
+
+function TDBDataSetObject.GetIndexItem(AItem: integer): TIndexItem;
+begin
+  Result:=TIndexItem(FIndexItems[AItem]);
+end;
+
 function TDBDataSetObject.GetFields: TDBFields;
 begin
 {  if (State <> sdboCreate) and (FFields.Count = 0) then
@@ -3048,6 +3032,7 @@ constructor TDBDataSetObject.Create(const ADBItem: TDBItem;
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FFields:=TDBFields.Create(Self, GetDBFieldClass);
+  FIndexItems:=TList.Create;
 end;
 
 destructor TDBDataSetObject.Destroy;
@@ -3055,6 +3040,7 @@ begin
   if Assigned(FDataSet) then
     FreeAndNil(FDataSet);
   FreeAndNil(FFields);
+  FreeAndNil(FIndexItems);
   inherited Destroy;
 end;
 
@@ -3123,6 +3109,26 @@ function TDBDataSetObject.TriggerDelete(const ATrigger:TDBTriggerObject): boolea
 begin
   OwnerDB.InternalError('Not complete function');
   Result:=false;
+end;
+
+function TDBDataSetObject.IndexFind(IndexName: string): TIndexItem;
+var
+  i:integer;
+begin
+  if not FIndexListLoaded then
+    IndexListRefresh;
+
+  IndexName:=UpperCase(IndexName);
+
+  Result:=nil;
+  for i:=0 to IndexCount-1 do
+  begin
+    if UpperCase(TIndexItem(FIndexItems[i]).IndexName) = IndexName then
+    begin
+      Result:=IndexItem[i];
+      exit;
+    end;
+  end;
 end;
 
 { TDBViewObject }

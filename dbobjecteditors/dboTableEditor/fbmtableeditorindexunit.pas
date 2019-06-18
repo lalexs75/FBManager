@@ -123,7 +123,7 @@ procedure TfbmTableEditorIndexFrame.NewIndex;
 var
   S:string;
 begin
-  S:=TDBTableObject(DBObject).IndexNew;
+  S:=TDBDataSetObject(DBObject).IndexNew;
   if S<>'' then
   begin
     RefreshIndexList;
@@ -133,13 +133,13 @@ end;
 
 procedure TfbmTableEditorIndexFrame.EditIndex;
 begin
-  if TDBTableObject(DBObject).IndexEdit(rxIndexListCAPTION.AsString) then
+  if TDBDataSetObject(DBObject).IndexEdit(rxIndexListCAPTION.AsString) then
     RefreshIndexRow;
 end;
 
 procedure TfbmTableEditorIndexFrame.DropIndex;
 begin
-  if TDBTableObject(DBObject).IndexDelete(rxIndexListCAPTION.AsString) then
+  if TDBDataSetObject(DBObject).IndexDelete(rxIndexListCAPTION.AsString) then
     RefreshIndexList;
 end;
 
@@ -148,11 +148,11 @@ var
   i: integer;
   TII:TIndexItem;
 begin
-  TDBTableObject(DBObject).IndexListRefresh;
+  TDBDataSetObject(DBObject).IndexListRefresh;
   rxIndexList.EmptyTable;
-  for i:=0 to TDBTableObject(DBObject).IndexCount - 1 do
+  for i:=0 to TDBDataSetObject(DBObject).IndexCount - 1 do
   begin
-    TII:=TDBTableObject(DBObject).IndexItem[i];
+    TII:=TDBDataSetObject(DBObject).IndexItem[i];
     rxIndexList.Append;
     rxIndexListIndex_Num.AsInteger:=i;
     rxIndexListCAPTION.AsString:=TII.IndexName;

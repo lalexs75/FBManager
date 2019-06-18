@@ -43,6 +43,7 @@ type
   TPGLanguage = class;
   TPGFunction = class;
   TPGTable = class;
+  TPGMatView = class;
   TPGIndex = class;
   TPGTableSpace = class;
 
@@ -223,6 +224,7 @@ type
   public
     function GetObjectType: string;override;
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+    function PGMatViewByOID(ATableOID:integer):TPGMatView;
   end;
 
   { TPGRulesRoot }
@@ -348,6 +350,7 @@ type
     property TablesRoot:TPGTablesRoot read FTablesRoot;
     property SequencesRoot:TPGSequencesRoot read FSequencesRoot;
     property Views:TPGViewsRoot read FViews;
+    property MatViews:TPGMatViewsRoot read FMatViews;
     property Triggers:TPGTriggersRoot read FTriggers;
     property Indexs:TPGIndexRoot read FIndexs;
     property Procedures:TPGFunctionsRoot read FProcedures;
@@ -397,7 +400,7 @@ type
   public
     OID:integer;
     TableSpaceID:integer;
-    constructor CreateFromDB(AOwner:TPGTable; DS:TDataSet);
+    constructor CreateFromDB(AOwner:TDBDataSetObject; DS:TDataSet);
   end;
 
   TPGRule = class(TDBObject)
@@ -578,6 +581,11 @@ type
     class function DBClassTitle:string;override;
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean;override;
+
+    function IndexNew:string; override;
+    function IndexEdit(const IndexName:string):boolean; override;
+    function IndexDelete(const IndexName:string):boolean; override;
+    procedure IndexListRefresh; override;
   end;
 
   { TPGSequence }
@@ -751,7 +759,7 @@ type
     FPGTableSpaceID: integer;
     FSchema:TPGSchema;
     FOID:integer;
-    procedure SetPGTable(const AValue: TPGTable);
+    procedure SetPGTable(const AValue: TDBDataSetObject);
   protected
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
@@ -1285,6 +1293,62 @@ begin
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
 end;
 
+function TPGMatView.IndexNew: string;
+var
+  R: TDBObject;
+begin
+  Result:='';
+  R:=OwnerDB.CreateObject(okIndex, FSchema.Indexs);
+  if Assigned(R) and (R is TPGIndex) then
+  begin
+    TPGIndex(R).SetPGTable(Self);
+    R.RefreshEditor;
+  end;
+end;
+
+function TPGMatView.IndexEdit(const IndexName: string): boolean;
+var
+  P:TPGIndex;
+begin
+  Result:=false;
+  P:=TPGIndex(Schema.Indexs.ObjByName(IndexName));
+  if Assigned(P) then
+    P.Edit;
+end;
+
+function TPGMatView.IndexDelete(const IndexName: string): boolean;
+var
+  Ind:TPGIndex;
+begin
+  Ind:=TPGIndex(FSchema.Indexs.ObjByName(IndexName));
+  if Assigned(Ind) then
+    Result:=FSchema.Indexs.DropObject(Ind)
+  else
+    Result:=false;
+end;
+
+procedure TPGMatView.IndexListRefresh;
+var
+  FQuery:TZQuery;
+  Rec:TPGIndexItem;
+begin
+  IndexArrayClear;
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlIndexTable.Strings.Text);
+  try
+    FQuery.ParamByName('indrelid').AsInteger:=FOID;
+    FQuery.Open;
+    while not FQuery.Eof do
+    begin
+      Rec:=TPGIndexItem.CreateFromDB(Self, FQuery);
+      FIndexItems.Add(Rec);
+      FQuery.Next;
+    end;
+  finally
+    FQuery.Free;
+  end;
+  FIndexListLoaded:=true;
+end;
+
 { TPGMatViewsRoot }
 
 function TPGMatViewsRoot.DBMSObjectsList: string;
@@ -1309,6 +1373,21 @@ begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
   FDBObjectKind:=okMaterializedView;
   FDropCommandClass:=TPGSQLDropMaterializedView;
+end;
+
+function TPGMatViewsRoot.PGMatViewByOID(ATableOID: integer): TPGMatView;
+var
+  i: Integer;
+begin
+  Result:=nil;
+  for i:=0 to FObjects.Count-1 do
+  begin
+    if TPGMatView(FObjects[i]).FOID = ATableOID then
+    begin
+      Result:=TPGMatView(FObjects[i]);
+      exit;
+    end;
+  end;
 end;
 
 { TPGDBRootObject }
@@ -1992,12 +2071,13 @@ end;
 
 { TPGIndexItem }
 
-constructor TPGIndexItem.CreateFromDB(AOwner: TPGTable; DS: TDataSet);
+constructor TPGIndexItem.CreateFromDB(AOwner: TDBDataSetObject; DS: TDataSet);
 var
   P:TPGIndex;
   i:integer;
   Ind: TIndexField;
   F: TField;
+  FSchema: TPGSchema;
 begin
   inherited Create;
   OID:=DS.FieldByName('oid').AsInteger; //Код индекса
@@ -2050,7 +2130,15 @@ order by
   pg_class.relname
 }
   IndexField:='';
-  P:=AOwner.Schema.Indexs.IndexByOID(OID);
+  if AOwner is TPGTable then
+    FSchema:=TPGTable(AOwner).Schema
+  else
+  if AOwner is TPGMatView then
+    FSchema:=TPGMatView(AOwner).Schema
+  else
+    raise Exception.Create('not implementeted');
+
+  P:=FSchema.Indexs.IndexByOID(OID);
   if Assigned(P) then
   begin
     if not P.Loaded then
@@ -3834,7 +3922,6 @@ begin
   if Assigned(R) and (R is TPGIndex) then
   begin
     TPGIndex(R).SetPGTable(Self);
-//    TPGIndex(R).FSchema:=FSchema;
     R.RefreshEditor;
   end;
 end;
@@ -5438,11 +5525,18 @@ end;
 
 { TPGIndex }
 
-procedure TPGIndex.SetPGTable(const AValue: TPGTable);
+procedure TPGIndex.SetPGTable(const AValue: TDBDataSetObject);
 begin
   if (Table=AValue) or (Table<>nil) then exit;
   Table:=AValue;
-  FPGTableID:=(Table as TPGTable).FOID;
+  if Table is TPGTable then
+    FPGTableID:=(Table as TPGTable).FOID
+  else
+  if Table is TPGMatView then
+    FPGTableID:=(Table as TPGMatView).FOID
+  else
+    raise Exception.Create('NOt implementeted')
+  ;
 end;
 
 function TPGIndex.InternalGetDDLCreate: string;
@@ -5570,6 +5664,8 @@ begin
       FIndexUnique:=Q.FieldByName('indisunique').AsBoolean;
       FIndexCluster:=Q.FieldByName('indisclustered').AsBoolean;
       Table:=FSchema.TablesRoot.PGTableByOID(FPGTableID);
+      if not Assigned(Table) then
+        Table:=FSchema.MatViews.PGMatViewByOID(FPGTableID);
       FDescription:=Q.FieldByName('description').AsString;
       FAccessMetod:=Q.FieldByName('amname').AsString;
 

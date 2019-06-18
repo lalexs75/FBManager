@@ -201,6 +201,7 @@ begin
 
   cbTables.Items.Clear;
   TPGIndex(DBObject).Schema.TablesRoot.FillListForNames(cbTables.Items, true);
+  TPGIndex(DBObject).Schema.MatViews.FillListForNames(cbTables.Items, true);
   if Assigned(TPGIndex(DBObject).Table) then
     cbTables.Text:=TPGIndex(DBObject).Table.CaptionFullPatch;
   cbTablesChange(nil);
@@ -235,12 +236,12 @@ end;
 
 function TpgIndexEditorPage.TableName: string;
 var
-  P: TPGTable;
+  P: TDBDataSetObject;
 begin
   Result:='';
   if (cbTables.ItemIndex > -1) and (cbTables.ItemIndex < cbTables.Items.Count) then
   begin
-    P:=TDBObject(cbTables.Items.Objects[cbTables.ItemIndex]) as TPGTable;
+    P:=TDBObject(cbTables.Items.Objects[cbTables.ItemIndex]) as TDBDataSetObject;
     if Assigned(P) then
       Result:=P.Caption;
   end;
