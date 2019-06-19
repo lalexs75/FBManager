@@ -201,7 +201,8 @@ begin
 
   cbTables.Items.Clear;
   TPGIndex(DBObject).Schema.TablesRoot.FillListForNames(cbTables.Items, true);
-  TPGIndex(DBObject).Schema.MatViews.FillListForNames(cbTables.Items, true);
+  if Assigned(TPGIndex(DBObject).Schema.MatViews) then
+    TPGIndex(DBObject).Schema.MatViews.FillListForNames(cbTables.Items, true);
   if Assigned(TPGIndex(DBObject).Table) then
     cbTables.Text:=TPGIndex(DBObject).Table.CaptionFullPatch;
   cbTablesChange(nil);
