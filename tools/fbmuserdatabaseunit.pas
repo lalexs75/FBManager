@@ -439,7 +439,7 @@ end;
 var
   FOldFileName: String;
 begin
-  FOldFileName:= GlobalCfgFolder + OldUserDBFileName;
+  FOldFileName:= LocalCfgFolder + OldUserDBFileName;
   if FileExistsUTF8(FOldFileName) then DeleteFileUTF8(FOldFileName);
   RenameFileUTF8(UserDB.Database, FOldFileName);
   OldUserDB.Database:=FOldFileName;
@@ -473,7 +473,7 @@ var
   i: Integer;
 begin
   ItmNm:='Item_'+IntToStr(item);
-  FN:=AppendPathDelim(GlobalCfgFolder) + ItmNm + '.parhst';
+  FN:=AppendPathDelim(LocalCfgFolder) + ItmNm + '.parhst';
   if FileExistsUTF8(FN) then
   begin
     Par:=TStringList.Create;
@@ -631,7 +631,7 @@ begin
 //      ImportLoadSQLHistory(quDatabasesdb_database_id.AsInteger, SDataFolder);
       ImportLoadSQLPages(DBListStream, AItemName, quDatabasesdb_database_id.AsInteger, SDataFolder);
 
-      DeleteDirectory(GlobalCfgFolder + SDataFolder, false);
+      DeleteDirectory(LocalCfgFolder + SDataFolder, false);
     end;
     quDatabases.Next;
   end;
@@ -662,7 +662,7 @@ var
   i: Integer;
   C: LongInt;
 begin
-  AFileName:=AppendPathDelim(GlobalCfgFolder + ADataFolder) + 'fbm_db_desktop.ini';
+  AFileName:=AppendPathDelim(LocalCfgFolder + ADataFolder) + 'fbm_db_desktop.ini';
   if not FileExistsUTF8(AFileName) then exit;
   Ini:=TIniFile.Create(UTF8ToSys(AFileName));
   C:=Ini.ReadInteger('Windows', 'Count', 0);
@@ -794,7 +794,7 @@ begin
     quSQLPagessql_editors_sel_end.AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_SelEnd', 0);
     quSQLPagessql_editors_sort_order.AsInteger:=i;
     S:=Ini.ReadString(aItemName, 'SQLEdit_'+SPage+'_FileName', '');
-    S:=AppendPathDelim(GlobalCfgFolder + ADataFolder) + S;
+    S:=AppendPathDelim(LocalCfgFolder + ADataFolder) + S;
     S1:=LoadFormTextFile(S);
     quSQLPagessql_editors_body.AsString:=S1;
 
@@ -806,7 +806,7 @@ begin
     end;
 
     quSQLPages.Post;
-    S1:=AppendPathDelim(GlobalCfgFolder + ADataFolder) + Ini.ReadString(aItemName, 'SQLEdit_'+SPage+'_FileName', '');
+    S1:=AppendPathDelim(LocalCfgFolder + ADataFolder) + Ini.ReadString(aItemName, 'SQLEdit_'+SPage+'_FileName', '');
     if FileExistsUTF8(S1) then
       DeleteFileUTF8(S1);
   end;
@@ -816,7 +816,7 @@ procedure TUserDBModule.InitData;
 var
   DBFileName: String;
 begin
-  DBFileName:=GlobalCfgFolder + UserDBFileName;
+  DBFileName:=LocalCfgFolder + UserDBFileName;
   UserDB.Database:=DBFileName;
   if FileExistsUTF8(DBFileName) then
   begin

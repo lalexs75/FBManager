@@ -63,7 +63,7 @@ function QuestionBoxExt(QuestionMessage:string): integer;
 procedure NotCompleteFunction;
 
 var
-  GlobalCfgFolder    : string = '';
+//  GlobalCfgFolder    : string = '';
   LocalCfgFolder     : string = '';
   AliasFileName      : string = '';
   ConfigFileName     : string = '';
@@ -576,17 +576,19 @@ end;
 
 
 procedure InitFolders;
+var
+  GlobalCfgFolder: String;
 begin
-  GlobalCfgFolder:=SysToUTF8(RxGetAppConfigDir(false));
-  ForceDirectoriesUTF8(GlobalCfgFolder);
+  GlobalCfgFolder:=SysToUTF8(RxGetAppConfigDir(true));
 
-  LocalCfgFolder:=GlobalCfgFolder;
+  LocalCfgFolder:=SysToUTF8(RxGetAppConfigDir(false));
+  ForceDirectoriesUTF8(LocalCfgFolder);
 
-  AliasFileName:=GlobalCfgFolder+sAliasFileName;
-  ConfigFileName:=GlobalCfgFolder+sConfigFileNameOld;
+  AliasFileName:=LocalCfgFolder+sAliasFileName;
+  ConfigFileName:=LocalCfgFolder+sConfigFileNameOld;
   lngFolder:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + 'languages';
 
-  ConfigFileNameNew:=GlobalCfgFolder+sConfigFileNameNew;
+  ConfigFileNameNew:=LocalCfgFolder+sConfigFileNameNew;
 end;
 
 initialization
