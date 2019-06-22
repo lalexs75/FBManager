@@ -3051,6 +3051,14 @@ msgstr ""
 msgid "No Validity Check"
 msgstr ""
 
+#: fbmstrconstunit.snullsfirst
+msgid "Nulls first"
+msgstr ""
+
+#: fbmstrconstunit.snullslast
+msgid "Nulls last"
+msgstr ""
+
 #: fbmstrconstunit.snullspos
 msgid "Nulls pos"
 msgstr ""

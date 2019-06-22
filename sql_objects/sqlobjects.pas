@@ -695,8 +695,59 @@ const
     'ataSetTablespace',
     'ataAddIndex'
     );
+
+function IndexSortOrderStr(AValue:TIndexSortOrder):string;
+function StrToIndexSortOrder(AValue:string):TIndexSortOrder;
+function IndexNullPosStr(AValue:TIndexNullPos):string;
+function StrToIndexNullPos(AValue:string):TIndexNullPos;
 implementation
-uses sqlParserConsts, strutils;
+uses sqlParserConsts, fbmStrConstUnit, strutils, LazUTF8;
+
+function IndexSortOrderStr(AValue: TIndexSortOrder): string;
+begin
+  case AValue of
+    indAscending:Result:=sAscending;
+    indDescending:Result:=sDescending;
+  else
+    Result:='';
+  end;
+  //TIndexSortOrder = (indDefault, indAscending, indDescending);
+end;
+
+function StrToIndexSortOrder(AValue: string): TIndexSortOrder;
+begin
+  AValue:=UTF8UpperCase(AValue);
+  if AValue = UTF8UpperCase(sAscending) then
+    Result:=indAscending
+  else
+  if AValue = UTF8UpperCase(sDescending) then
+    Result:=indDescending
+  else
+    Result:=indDefault;
+end;
+
+function IndexNullPosStr(AValue: TIndexNullPos): string;
+begin
+  case AValue of
+    inpFirst:Result:=sNullsFirst;
+    inpLast:Result:=sNullsLast;
+  else
+    Result:='';
+  end;
+  // TIndexNullPos   = (inpDefault, inpFirst, inpLast);   //Положение null-значений (первые/последние)
+end;
+
+function StrToIndexNullPos(AValue: string): TIndexNullPos;
+begin
+  AValue:=UTF8UpperCase(AValue);
+  if AValue = UTF8UpperCase(sNullsFirst) then
+    Result:=inpFirst
+  else
+  if AValue = UTF8UpperCase(sNullsLast) then
+    Result:=inpLast
+  else
+    Result:=inpDefault;
+end;
 
 { TIndexOptions }
 

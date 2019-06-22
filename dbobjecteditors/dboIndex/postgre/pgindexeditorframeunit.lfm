@@ -9,9 +9,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 17
+    Height = 18
     Top = 6
-    Width = 70
+    Width = 77
     BorderSpacing.Around = 6
     Caption = 'Index name'
     ParentColor = False
@@ -22,9 +22,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = CheckGroup1
     Left = 12
-    Height = 34
-    Top = 29
-    Width = 677
+    Height = 28
+    Top = 30
+    Width = 669
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 0
@@ -34,9 +34,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Control = edtIndexName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 69
-    Width = 71
+    Height = 18
+    Top = 64
+    Width = 78
     BorderSpacing.Around = 6
     Caption = 'Table space'
     ParentColor = False
@@ -47,9 +47,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = CheckGroup1
     Left = 12
-    Height = 34
-    Top = 92
-    Width = 677
+    Height = 30
+    Top = 88
+    Width = 669
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -60,10 +60,10 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = cbTables
     AnchorSideTop.Side = asrBottom
-    Left = 394
-    Height = 17
-    Top = 194
-    Width = 83
+    Left = 388
+    Height = 18
+    Top = 186
+    Width = 95
     BorderSpacing.Around = 6
     Caption = 'Access metod'
     ParentColor = False
@@ -74,10 +74,10 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 400
-    Height = 34
-    Top = 217
-    Width = 465
+    Left = 394
+    Height = 30
+    Top = 210
+    Width = 471
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -93,10 +93,10 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 695
-    Height = 83
+    Left = 687
+    Height = 82
     Top = 6
-    Width = 170
+    Width = 178
     Anchors = [akTop, akRight]
     AutoFill = True
     AutoSize = True
@@ -109,8 +109,8 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 81
-    ClientWidth = 168
+    ClientHeight = 78
+    ClientWidth = 174
     Items.Strings = (
       'Unique'
       'Separated pages'
@@ -126,9 +126,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Control = cbTableSpaces
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 132
-    Width = 55
+    Height = 18
+    Top = 124
+    Width = 57
     BorderSpacing.Around = 6
     Caption = 'For table'
     ParentColor = False
@@ -140,8 +140,8 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 33
-    Top = 155
+    Height = 32
+    Top = 148
     Width = 853
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -155,8 +155,8 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Control = cbTables
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 194
+    Height = 18
+    Top = 186
     Width = 55
     BorderSpacing.Around = 6
     Caption = 'Fillfactor'
@@ -168,9 +168,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label3
     Left = 12
-    Height = 34
-    Top = 217
-    Width = 376
+    Height = 28
+    Top = 210
+    Width = 370
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 5
@@ -180,9 +180,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideTop.Control = Edit2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 257
-    Width = 158
+    Height = 18
+    Top = 244
+    Width = 164
     BorderSpacing.Around = 6
     Caption = 'Condition for partial index'
     ParentColor = False
@@ -195,7 +195,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 90
-    Top = 280
+    Top = 268
     Width = 853
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -210,17 +210,17 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 269
-    Top = 376
+    Height = 281
+    Top = 364
     Width = 859
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 6
-    ClientHeight = 269
+    ClientHeight = 281
     ClientWidth = 859
     TabOrder = 7
     object lbFieldList: TListBox
       Left = 1
-      Height = 267
+      Height = 279
       Top = 1
       Width = 236
       Align = alLeft
@@ -233,17 +233,17 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     end
     object Splitter1: TSplitter
       Left = 237
-      Height = 267
+      Height = 279
       Top = 1
       Width = 5
     end
     object Panel2: TPanel
       Left = 242
-      Height = 267
+      Height = 279
       Top = 1
       Width = 616
       Align = alClient
-      ClientHeight = 267
+      ClientHeight = 279
       ClientWidth = 616
       TabOrder = 2
       object SpeedButton1: TSpeedButton
@@ -302,7 +302,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
         AnchorSideBottom.Control = Panel2
         AnchorSideBottom.Side = asrBottom
         Left = 52
-        Height = 265
+        Height = 277
         Top = 1
         Width = 563
         ColumnDefValues.BlobText = '(данные)'
@@ -315,7 +315,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Field name'
-            Width = 296
+            Width = 291
             FieldName = 'FieldName'
             EditButtons = <>
             Filter.Font.Style = [fsItalic]
@@ -454,24 +454,62 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     Left = 440
     Top = 304
     object fldAdd: TAction
+      Category = 'Fields'
       Caption = 'Add field'
       ImageIndex = 53
       OnExecute = fldAddExecute
     end
     object fldAddAll: TAction
+      Category = 'Fields'
       Caption = 'Add all fields'
       ImageIndex = 60
       OnExecute = fldAddAllExecute
     end
     object fldRemove: TAction
+      Category = 'Fields'
       Caption = 'Remove field'
       ImageIndex = 51
       OnExecute = fldRemoveExecute
     end
     object fldRemoveAll: TAction
+      Category = 'Fields'
       Caption = 'Remove all fields'
       ImageIndex = 59
       OnExecute = fldRemoveAllExecute
+    end
+    object soNone: TAction
+      Category = 'Index options'
+      Caption = 'soNone'
+      OnExecute = soNoneExecute
+    end
+    object soAsc: TAction
+      Tag = 1
+      Category = 'Index options'
+      Caption = 'soAsc'
+      OnExecute = soNoneExecute
+    end
+    object soDesc: TAction
+      Tag = 2
+      Category = 'Index options'
+      Caption = 'soDesc'
+      OnExecute = soNoneExecute
+    end
+    object npNone: TAction
+      Category = 'Index options'
+      Caption = 'npNone'
+      OnExecute = npNoneExecute
+    end
+    object npFirst: TAction
+      Tag = 1
+      Category = 'Index options'
+      Caption = 'npFirst'
+      OnExecute = npNoneExecute
+    end
+    object npLast: TAction
+      Tag = 2
+      Category = 'Index options'
+      Caption = 'npLast'
+      OnExecute = npNoneExecute
     end
   end
   object PopupMenu1: TPopupMenu[15]
@@ -495,6 +533,30 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     object MenuItem1: TMenuItem
       Action = fldRemoveAll
     end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = soNone
+    end
+    object MenuItem7: TMenuItem
+      Action = soAsc
+    end
+    object MenuItem8: TMenuItem
+      Action = soDesc
+    end
+    object MenuItem9: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem10: TMenuItem
+      Action = npNone
+    end
+    object MenuItem11: TMenuItem
+      Action = npFirst
+    end
+    object MenuItem12: TMenuItem
+      Action = npLast
+    end
   end
   object dsIndexFields: TDataSource[17]
     DataSet = rxIndexFields
@@ -511,13 +573,15 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       item
         Name = 'SortOrder'
         DataType = ftString
-        Size = 5
+        Size = 250
       end    
       item
         Name = 'NullsPos'
         DataType = ftString
-        Size = 10
+        Size = 250
       end>
+    AfterOpen = rxIndexFieldsAfterScroll
+    AfterScroll = rxIndexFieldsAfterScroll
     PacketRecords = 0
     Left = 376
     Top = 512
@@ -533,7 +597,6 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       Size = 60
     end
     object rxIndexFieldsSortOrder: TStringField
-      DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'SortOrder'
       Index = 1
@@ -541,10 +604,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 5
+      Size = 250
     end
     object rxIndexFieldsNullsPos: TStringField
-      DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'NullsPos'
       Index = 2
@@ -552,7 +614,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 10
+      Size = 250
     end
   end
 end

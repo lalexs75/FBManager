@@ -3179,6 +3179,14 @@ msgctxt "fbmstrconstunit.snovaliditycheck"
 msgid "No Validity Check"
 msgstr "Не контролировать ограничения"
 
+#: fbmstrconstunit.snullsfirst
+msgid "Nulls first"
+msgstr ""
+
+#: fbmstrconstunit.snullslast
+msgid "Nulls last"
+msgstr ""
+
 #: fbmstrconstunit.snullspos
 msgid "Nulls pos"
 msgstr "Позиция NULL"

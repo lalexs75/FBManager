@@ -35,6 +35,22 @@ type
   { TpgIndexEditorPage }
 
   TpgIndexEditorPage = class(TEditorPage)
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
+    npFirst: TAction;
+    npLast: TAction;
+    npNone: TAction;
+    rxIndexFieldsNullsPos: TStringField;
+    rxIndexFieldsSortOrder: TStringField;
+    soAsc: TAction;
+    soDesc: TAction;
+    soNone: TAction;
     dsIndexFields: TDatasource;
     fldAdd: TAction;
     fldAddAll: TAction;
@@ -66,8 +82,6 @@ type
     RxDBGrid1: TRxDBGrid;
     rxIndexFields: TRxMemoryData;
     rxIndexFieldsFieldName: TStringField;
-    rxIndexFieldsNullsPos: TStringField;
-    rxIndexFieldsSortOrder: TStringField;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
@@ -79,7 +93,10 @@ type
     procedure fldRemoveAllExecute(Sender: TObject);
     procedure fldRemoveExecute(Sender: TObject);
     procedure lbFieldListDblClick(Sender: TObject);
+    procedure npNoneExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
+    procedure rxIndexFieldsAfterScroll(DataSet: TDataSet);
+    procedure soNoneExecute(Sender: TObject);
   private
     procedure PrintPage;
     procedure RefreshObject;
@@ -137,7 +154,7 @@ begin
     S:=lbFieldList.Items[lbFieldList.ItemIndex];
     rxIndexFields.Append;
     rxIndexFieldsFieldName.AsString:=S;
-    rxIndexFieldsSortOrder.AsString:='ASC';
+    ///rxIndexFieldsSortOrder.AsString:=;
     rxIndexFields.Post;
     lbFieldList.Items.Delete(lbFieldList.ItemIndex);
     if lbFieldList.Items.Count>0 then
@@ -165,9 +182,34 @@ begin
   fldAdd.Execute;
 end;
 
+procedure TpgIndexEditorPage.npNoneExecute(Sender: TObject);
+begin
+  if rxIndexFields.Active and (rxIndexFields.RecordCount>0) then
+  begin
+    rxIndexFields.Edit;
+    rxIndexFieldsNullsPos.AsString:=IndexNullPosStr(TIndexNullPos((Sender as TComponent).Tag));
+    rxIndexFields.Post;
+  end;
+end;
+
 procedure TpgIndexEditorPage.RxDBGrid1DblClick(Sender: TObject);
 begin
   fldRemove.Execute;
+end;
+
+procedure TpgIndexEditorPage.rxIndexFieldsAfterScroll(DataSet: TDataSet);
+begin
+//  soNone.Checked:=;
+end;
+
+procedure TpgIndexEditorPage.soNoneExecute(Sender: TObject);
+begin
+  if rxIndexFields.Active and (rxIndexFields.RecordCount>0) then
+  begin
+    rxIndexFields.Edit;
+    rxIndexFieldsSortOrder.AsString:=IndexSortOrderStr(TIndexSortOrder((Sender as TComponent).Tag));
+    rxIndexFields.Post;
+  end;
 end;
 
 procedure TpgIndexEditorPage.PrintPage;
@@ -223,12 +265,8 @@ begin
     begin
       rxIndexFields.Append;
       rxIndexFieldsFieldName.AsString:=PGIF.FieldName;
-      case PGIF.NullPos of
-        inpFirst:rxIndexFieldsNullsPos.AsString:='First';
-        inpLast:rxIndexFieldsNullsPos.AsString:='Last';
-      else
-        //inpDefault,
-      end;
+      rxIndexFieldsSortOrder.AsString:=IndexSortOrderStr(PGIF.SortOrder);
+      rxIndexFieldsNullsPos.AsString:=IndexNullPosStr(PGIF.NullPos);
       rxIndexFields.Post;
     end;
     rxIndexFields.First;
@@ -278,9 +316,22 @@ end;
 
 constructor TpgIndexEditorPage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
+var
+  C: TRxColumn;
 begin
   inherited CreatePage(TheOwner, ADBObject);
-  //rxIndexFields.Open;
+  C:=RxDBGrid1.ColumnByFieldName('SortOrder');
+  C.PickList.Clear;
+  C.PickList.Add('');
+  C.PickList.Add(IndexSortOrderStr(indAscending));
+  C.PickList.Add(IndexSortOrderStr(indDescending));
+
+  C:=RxDBGrid1.ColumnByFieldName('NullsPos');
+  C.PickList.Clear;
+  C.PickList.Add('');
+  C.PickList.Add(IndexNullPosStr(inpFirst));
+  C.PickList.Add(IndexNullPosStr(inpLast));
+
   RefreshObject;
 end;
 
@@ -344,7 +395,8 @@ begin
     while not rxIndexFields.EOF do
     begin
       F:=TPGSQLCreateIndex(ASQLObject).Fields.AddParam(rxIndexFieldsFieldName.AsString);
-      { TODO : Обработать sortorder и null pos }
+      F.IndexOptions.SortOrder:=StrToIndexSortOrder(rxIndexFieldsSortOrder.AsString);
+      F.IndexOptions.IndexNullPos:=StrToIndexNullPos(rxIndexFieldsNullsPos.AsString);
       rxIndexFields.Next;
     end;
     rxIndexFields.First;

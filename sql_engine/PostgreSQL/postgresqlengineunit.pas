@@ -5543,6 +5543,7 @@ function TPGIndex.InternalGetDDLCreate: string;
 var
   FCmd: TPGSQLCreateIndex;
   I: TIndexField;
+  PI1: TSQLParserField;
 begin
   if not Assigned(Table) then
     RefreshObject;
@@ -5552,7 +5553,12 @@ begin
   FCmd.TableName:=Table.Caption;
   FCmd.Unique:=IndexUnique;
   for I in IndexFields do
-    FCmd.Fields.AddParam(I.FieldName);
+  begin
+    PI1:=FCmd.Fields.AddParam(I.FieldName);
+    if I.SortOrder = indDescending then
+      PI1.IndexOptions.SortOrder:=I.SortOrder;
+    PI1.IndexOptions.IndexNullPos:=I.NullPos;
+  end;
   FCmd.Description:=Description;
   Result:=FCmd.AsSQL;
   FCmd.Free;
@@ -5597,11 +5603,14 @@ var
   S:string;
   i:integer;
   PGIF: TIndexField;
+  IOPT: LongWord;
 begin
   //Сформируем запрос на выборку параметров индекса
   S:='';
   for i:=0 to AFieldCount-1 do
-    S:=S+Format('pg_index.indkey[%d] as indkey_%d, pg_index.indclass[%d] as indclass_%d, pg_index.indoption[%d] as indoption_%d, ',[i, i, i, i, i, i]);
+    S:=S+Format('pg_index.indkey[%d] as indkey_%d, ' +
+                ' pg_index.indclass[%d] as indclass_%d, '+
+                ' pg_index.indoption[%d] as indoption_%d, ',[i, i, i, i, i, i]);
   S:='select '+Copy(S, 1, Length(S)-2) + ' from pg_index where pg_index.indexrelid = '+IntToStr(FOID);
 
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndexFields.Strings.Text);
@@ -5631,6 +5640,19 @@ begin
       for i:=0 to AFieldCount-1 do
       begin
         PGIF:=IndexFields[i];
+        S:='indoption_'+IntToStr(i);
+        IOPT:=Q.FieldByName(S).AsInteger;
+        if (IOPT and $01) <> 0 then
+          PGIF.SortOrder:=indDescending
+        else
+          PGIF.SortOrder:= indDefault//indAscending
+          ;
+
+        if (IOPT and $02) <> 0 then
+          PGIF.NullPos:=inpFirst
+        else
+          PGIF.NullPos:= inpDefault
+          ;
 
 {        S:=S+Q.FieldByName('indkey_'+IntToStr(i)).AsString + ' ' +
              Q.FieldByName('indclass_'+IntToStr(i)).AsString + ' ' +

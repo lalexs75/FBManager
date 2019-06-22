@@ -1788,28 +1788,10 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="7">
+    <Exceptions Count="1">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
-      <Item2>
-        <Name Value="EOutOfMemory"/>
-      </Item2>
-      <Item3>
-        <Name Value="EReadError"/>
-      </Item3>
-      <Item4>
-        <Name Value="RunError(216)"/>
-      </Item4>
-      <Item5>
-        <Name Value="EZDatabaseError"/>
-      </Item5>
-      <Item6>
-        <Name Value="EConvertError"/>
-      </Item6>
-      <Item7>
-        <Name Value="EUIBError"/>
-      </Item7>
     </Exceptions>
   </Debugging>
 </CONFIG>

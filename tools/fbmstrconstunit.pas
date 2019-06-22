@@ -868,6 +868,8 @@ resourcestring
   sSortOrder                        = 'Sort order';
   sAscending                        = 'Ascending';
   sDescending                       = 'Descending';
+  sNullsFirst                       = 'Nulls first';
+  sNullsLast                        = 'Nulls last';
   sInput                            = 'Input';
   sOutput                           = 'Output';
   sKeyWord                          = 'keyword';
