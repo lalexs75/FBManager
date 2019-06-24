@@ -374,6 +374,7 @@ type
     FieldName:string;
     SortOrder:TIndexSortOrder;
     NullPos:TIndexNullPos;
+    CollateName:string;
     procedure Assign(Source: TIndexField);
   end;
 

@@ -5567,6 +5567,7 @@ begin
     if I.SortOrder = indDescending then
       PI1.IndexOptions.SortOrder:=I.SortOrder;
     PI1.IndexOptions.IndexNullPos:=I.NullPos;
+    PI1.Collate:=I.CollateName;
   end;
   FCmd.Description:=Description;
   Result:=FCmd.AsSQL;
@@ -5666,15 +5667,13 @@ begin
         PGIF.NullPos:= inpDefault
         ;
 
-      (*      if Q.FieldByName('attstorage').AsString = 'x' then
-        PGIF.NullPos:=inpFirst
-      else
-      if Q.FieldByName('attstorage').AsString = 'p' then
-        PGIF.NullPos:=inpLast
-      else
-        PGIF.NullPos:=inpDefault;
-//        PGIF.IndSortOrder:=
-*)
+      if Q.FieldByName('coll_name').AsString<>'' then
+      begin;
+        if Q.FieldByName('coll_nspname').AsString<>'' then
+          PGIF.CollateName:=Q.FieldByName('coll_nspname').AsString + '.';
+        PGIF.CollateName:=PGIF.CollateName + Q.FieldByName('coll_name').AsString;
+      end;
+
       Q.Next;
     end;
     Q.Close;
