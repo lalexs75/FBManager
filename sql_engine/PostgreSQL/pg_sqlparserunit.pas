@@ -5900,7 +5900,8 @@ procedure TPGSQLCreateIndex.InitParserTree;
 var
   T, T1, FSQLTokens, T2, T3, TSchema, TName, TCol, TExp, TSymb,
     TC1, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3, TC2_3_1, TC2_3_2,
-    T1_1, T2_1, T2_2, T2_3, T2_4_1, T2_4_2, T2_4_3, T2_5, T2_6: TSQLTokenRecord;
+    T1_1, T2_1, T2_2, T2_3, T2_4_1, T2_4_2, T2_4_3, T2_5, T2_6,
+    TC1_3, TC1_4_1, TC1_4_2: TSQLTokenRecord;
 begin
   inherited InitParserTree;
 
@@ -5933,17 +5934,17 @@ begin
     TC1:=AddSQLTokens(stKeyword, [TCol, TExp], 'COLLATE', []);
     TC1_1:=AddSQLTokens(stString, TC1, '', [], 11);
     TC1_2:=AddSQLTokens(stIdentificator, TC1, '', [], 11);
+    TC1_3:=AddSQLTokens(stSymbol, [TC1_1, TC1_2], '.', [], 11);
+    TC1_4_1:=AddSQLTokens(stIdentificator, TC1_3, '', [], 11);
+    TC1_4_2:=AddSQLTokens(stString, TC1_3, '', [], 11);
 
-    TC2_1:=AddSQLTokens(stKeyword, [TCol, TExp], 'ASC', [], 12);
-    TC2_2:=AddSQLTokens(stKeyword, [TCol, TExp], 'DESC', [], 13);
+    TC2_1:=AddSQLTokens(stKeyword, [TCol, TExp, TC1_1, TC1_2, TC1_4_1, TC1_4_2], 'ASC', [], 12);
+    TC2_2:=AddSQLTokens(stKeyword, [TCol, TExp, TC1_1, TC1_2, TC1_4_1, TC1_4_2], 'DESC', [], 13);
 
-    TC2_3:=AddSQLTokens(stKeyword, [TCol, TExp], 'NULLS', []);
+    TC2_3:=AddSQLTokens(stKeyword, [TCol, TExp, TC1_1, TC1_2, TC1_4_1, TC1_4_2], 'NULLS', []);
     TC2_3_1:=AddSQLTokens(stKeyword, TC2_3, 'FIRST', [], 14);
     TC2_3_2:=AddSQLTokens(stKeyword, TC2_3, 'LAST', [], 15);
 
-
-    TC1_1.AddChildToken([TC2_1, TC2_2, TC2_3]);
-    TC1_2.AddChildToken([TC2_1, TC2_2, TC2_3]);
 
     TC2_1.AddChildToken([TC1, TC2_3]);
     TC2_2.AddChildToken([TC1, TC2_3]);
@@ -5952,10 +5953,10 @@ begin
     TC2_3_2.AddChildToken([TC1, TC2_1, TC2_2]);
 
     //[ opclass ]
-  T3:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3_1, TC2_3_2], ',', [], 9);
+  T3:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC1_4_1, TC1_4_2, TC2_1, TC2_2, TC2_3_1, TC2_3_2], ',', [], 9);
     T3.AddChildToken([TCol, TExp]);
 
-  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC2_2, TC2_3_1, TC2_3_2], ')', [], 9);
+  TSymb:=AddSQLTokens(stSymbol, [TCol, TExp, TC1_1, TC1_2, TC1_4_1, TC1_4_2, TC2_2, TC2_1, TC2_3_1, TC2_3_2], ')', [], 9);
 
   T1:=AddSQLTokens(stKeyword, TSymb, 'TABLESPACE', [toOptional]);
     T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 10);
@@ -6006,7 +6007,7 @@ begin
     9:FCurField:=nil;
     10:TableSpace:=AWord;
     11:if Assigned(FCurField) then
-      FCurField.Collate:=AWord;
+      FCurField.Collate:=FCurField.Collate + AWord;
     12:if Assigned(FCurField) then
       FCurField.IndexOptions.SortOrder:=indAscending;
     13:if Assigned(FCurField) then

@@ -36,8 +36,8 @@
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="1620"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1624"/>
         <CursorPos X="24" Y="1656"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -55,7 +55,7 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="134"/>
         <CursorPos X="61" Y="151"/>
         <UsageCount Value="200"/>
@@ -74,9 +74,9 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="219"/>
-        <CursorPos X="14" Y="236"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="2580"/>
+        <CursorPos Y="2610"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -94,11 +94,10 @@
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FBSQLEngineUnit"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="4484"/>
         <CursorPos X="64" Y="4513"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_objects/sqlparserconsts.pas"/>
@@ -112,14 +111,15 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="7103"/>
-        <CursorPos X="10" Y="7121"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="5927"/>
+        <CursorPos X="9" Y="5944"/>
         <UsageCount Value="201"/>
         <Bookmarks Count="4">
-          <Item0 Y="11175" ID="2"/>
+          <Item0 Y="11181" ID="2"/>
           <Item1 X="11" Y="2831" ID="3"/>
-          <Item2 X="17" Y="11277" ID="1"/>
+          <Item2 X="17" Y="11283" ID="1"/>
           <Item3 X="17" Y="514" ID="4"/>
         </Bookmarks>
         <Loaded Value="True"/>
@@ -137,22 +137,19 @@
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fb_SqlParserUnit"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="1368"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1358"/>
         <CursorPos X="3" Y="1358"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLite3EngineUnit"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1865"/>
         <CursorPos X="57" Y="1886"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_keywords.pas"/>
@@ -166,11 +163,10 @@
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlite3_SqlParserUnit"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1634"/>
         <CursorPos X="33" Y="1655"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="treeaddchildtokenunit.pas"/>
@@ -413,10 +409,11 @@
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="124"/>
         <CursorPos Y="150"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/include/radiogroup.inc"/>
@@ -519,122 +516,122 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="6952" Column="27" TopLine="6931"/>
+        <Caret Line="2470" Column="15" TopLine="2454"/>
       </Position1>
       <Position2>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="6953" Column="32" TopLine="6931"/>
       </Position2>
       <Position3>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7108" Column="60" TopLine="7103"/>
+        <Caret Line="2635" Column="22" TopLine="2614"/>
       </Position3>
       <Position4>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7114" Column="90" TopLine="7103"/>
+        <Caret Line="5963" Column="77" TopLine="5948"/>
       </Position4>
       <Position5>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7115" Column="73" TopLine="7103"/>
+        <Caret Line="6015" TopLine="5993"/>
       </Position5>
       <Position6>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7116" Column="110" TopLine="7103"/>
+        <Caret Line="6029" TopLine="6013"/>
       </Position6>
       <Position7>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7134" Column="52" TopLine="7106"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="139" TopLine="124"/>
       </Position7>
       <Position8>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="2473" Column="17" TopLine="2449"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="141" TopLine="124"/>
       </Position8>
       <Position9>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7177" Column="49" TopLine="7172"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="144" TopLine="124"/>
       </Position9>
       <Position10>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="2470" Column="15" TopLine="2455"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="145" TopLine="124"/>
       </Position10>
       <Position11>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="253" TopLine="234"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="146" TopLine="124"/>
       </Position11>
       <Position12>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7169" Column="62" TopLine="7138"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="148" TopLine="124"/>
       </Position12>
       <Position13>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7164" Column="13" TopLine="7144"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="150" TopLine="124"/>
       </Position13>
       <Position14>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7157" Column="33" TopLine="7128"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="139" TopLine="124"/>
       </Position14>
       <Position15>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="2470" Column="41" TopLine="2452"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="141" TopLine="124"/>
       </Position15>
       <Position16>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7154" Column="3" TopLine="7151"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="144" TopLine="124"/>
       </Position16>
       <Position17>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="2470" Column="19" TopLine="2452"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="145" TopLine="124"/>
       </Position17>
       <Position18>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7164" Column="38" TopLine="7151"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="146" TopLine="124"/>
       </Position18>
       <Position19>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="2469" Column="15" TopLine="2452"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="148" TopLine="124"/>
       </Position19>
       <Position20>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7179" Column="32" TopLine="7153"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="150" TopLine="124"/>
       </Position20>
       <Position21>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7153" Column="18" TopLine="7121"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="139" TopLine="124"/>
       </Position21>
       <Position22>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7182" Column="37" TopLine="7158"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="141" TopLine="124"/>
       </Position22>
       <Position23>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="7197" Column="156" TopLine="7185"/>
+        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
+        <Caret Line="150" TopLine="124"/>
       </Position23>
       <Position24>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="175" TopLine="150"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2651" TopLine="2603"/>
       </Position24>
       <Position25>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="117" Column="15" TopLine="99"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2652" TopLine="2637"/>
       </Position25>
       <Position26>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <Caret Line="635" Column="3" TopLine="618"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2593" TopLine="2577"/>
       </Position26>
       <Position27>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <Caret Line="4615" Column="3" TopLine="4580"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2594" TopLine="2577"/>
       </Position27>
       <Position28>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2596" TopLine="2577"/>
       </Position28>
       <Position29>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <Caret Line="4513" Column="64" TopLine="4484"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2604" TopLine="2579"/>
       </Position29>
       <Position30>
-        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="427" Column="3" TopLine="402"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="5937" Column="48" TopLine="5917"/>
       </Position30>
     </JumpHistory>
     <RunParams>
