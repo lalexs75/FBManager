@@ -235,7 +235,7 @@ begin
 
   RegisterObjEditor(TPGIndex,
     [TpgIndexEditorPage, TfbmObjectEditorDescriptionFrame],
-    [TpgIndexEditorPage, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
+    [TpgIndexEditorPage, TDependenciesFrame, TfbmTableStatisticFrame, TfbmObjectEditorDescriptionFrame,
      TfbmDDLPage]);
 
   RegisterObjEditor(TPGLanguage,
@@ -245,7 +245,7 @@ begin
 
   RegisterObjEditor(TPGTableSpace,
     [TpgTableSpaceEditorPage, TfbmObjectEditorDescriptionFrame],
-    [TpgTableSpaceEditorPage, TDependenciesFrame, TfbmpgACLEditEditor,
+    [TpgTableSpaceEditorPage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmTableStatisticFrame,
      TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGUser,

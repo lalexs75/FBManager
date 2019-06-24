@@ -763,6 +763,7 @@ type
   protected
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -806,6 +807,7 @@ type
     function GetOwnerUserName: string;
   protected
     function InternalGetDDLCreate: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -2189,6 +2191,13 @@ begin
   R.Description:=Description;
   Result:=R.AsSQL;
   R.Free;
+end;
+
+procedure TPGTableSpace.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sFileFolder, FFolderName);
 end;
 
 constructor TPGTableSpace.Create(const ADBItem: TDBItem;
@@ -5569,6 +5578,20 @@ begin
   Result:=FmtObjName(FSchema, Self);
 end;
 
+procedure TPGIndex.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  if Assigned(FPGTableSpace) then
+    Statistic.AddValue(sTableSpace, FPGTableSpace.Caption);
+  //Проходов по индексу
+  //Кортежей прочитано
+  //Кортежей извлечено
+  //Блоков прочитано
+  //Блоков извлечено
+  //Размер индекса
+end;
+
 constructor TPGIndex.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
@@ -5606,13 +5629,15 @@ var
   IOPT: LongWord;
 begin
   //Сформируем запрос на выборку параметров индекса
-  S:='';
+(*  S:='';
   for i:=0 to AFieldCount-1 do
     S:=S+Format('pg_index.indkey[%d] as indkey_%d, ' +
                 ' pg_index.indclass[%d] as indclass_%d, '+
-                ' pg_index.indoption[%d] as indoption_%d, ',[i, i, i, i, i, i]);
+                ' pg_index.indoption[%d] as indoption_%d, ' +
+                ' pg_get_indexdef(pg_index.indexrelid, 1, true) as attr_def_%d, '
+                ,[i, i, i, i, i, i, i]);
   S:='select '+Copy(S, 1, Length(S)-2) + ' from pg_index where pg_index.indexrelid = '+IntToStr(FOID);
-
+*)
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndexFields.Strings.Text);
   Q.ParamByName('indexrelid').AsInteger:=FOID;
   try
@@ -5620,8 +5645,28 @@ begin
     Q.Open;
     while not Q.EOF do
     begin
-      PGIF:=IndexFields.Add(Q.FieldByName('attname').AsString);
-      if Q.FieldByName('attstorage').AsString = 'x' then
+
+      if Q.FieldByName('coldef').AsString<>'' then
+        PGIF:=IndexFields.Add(Q.FieldByName('coldef').AsString)
+      else
+        PGIF:=IndexFields.Add(Q.FieldByName('attname').AsString);
+
+
+      S:='indoption';
+      IOPT:=Q.FieldByName(S).AsInteger;
+      if (IOPT and $01) <> 0 then
+        PGIF.SortOrder:=indDescending
+      else
+        PGIF.SortOrder:= indDefault//indAscending
+        ;
+
+      if (IOPT and $02) <> 0 then
+        PGIF.NullPos:=inpFirst
+      else
+        PGIF.NullPos:= inpDefault
+        ;
+
+      (*      if Q.FieldByName('attstorage').AsString = 'x' then
         PGIF.NullPos:=inpFirst
       else
       if Q.FieldByName('attstorage').AsString = 'p' then
@@ -5629,10 +5674,11 @@ begin
       else
         PGIF.NullPos:=inpDefault;
 //        PGIF.IndSortOrder:=
+*)
       Q.Next;
     end;
     Q.Close;
-
+(*
     //Выберем индексные опции
     Q.SQL.Text:=S;
     Q.Open;
@@ -5660,6 +5706,7 @@ begin
         //S:=S+Format('pg_index.indkey[%d] as indkey_%d, pg_index.indclass[%d] as indclass_%d, pg_index.indoption[%d] as indoption_%d',[i, i, i, i, i, i]);
 }      end;
     Q.Close;
+*)
   finally
     Q.Free;
   end;
@@ -5667,6 +5714,7 @@ end;
 
 var
   Q:TZQuery;
+  SSS: String;
 begin
   FPGTableID:=0;
   Table:=nil;
@@ -5694,7 +5742,8 @@ begin
       FPGTableSpaceID:=Q.FieldByName('reltablespace').AsInteger;
       FPGTableSpace:= TSQLEnginePostgre(OwnerDB).TableSpaceRoot.TableSpaceByOID(FPGTableSpaceID);
       { TODO : Необходимо доработать запрос на получение индексного выражения }
-//        FIndexExpression:=Q.FieldByName('indexprs').AsString;
+      //FIndexExpression:=Q.FieldByName('indexprs').AsString;
+      SSS:=Q.FieldByName('indexprs').AsString;
       if Table.Fields.Count = 0 then
         Table.RefreshFieldList;
       RefreshIndexFields(Q.FieldByName('indnatts').AsInteger);

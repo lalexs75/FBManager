@@ -254,12 +254,12 @@ type
 
   TDBTableStatistic = class
   private
-    FOwner:TDBTableObject;
+    FOwner:TDBObject;
     FStatData: TDataSet;
     function GetCount: Integer;
     procedure CreateStatData;
   public
-    constructor Create(AOwner:TDBTableObject);
+    constructor Create(AOwner:TDBObject);
     destructor Destroy; override;
     procedure Clear;
     procedure Refresh;
@@ -279,6 +279,7 @@ type
     FSchemaName: string;
     FState:TDBObjectState;
     FSQLScriptsLock:integer;
+    FStatistic: TDBTableStatistic;
     function GetDDLCreateSimple: string;
     procedure SetCaption(AValue: string);
     function GetDDLCreate: string;
@@ -303,6 +304,7 @@ type
     function GetEnableRename: boolean; virtual;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);virtual;
     procedure InternalPrepareDropCmd(R: TSQLDropCommandAbstract); virtual;
+    procedure InternalRefreshStatistic; virtual;
   public
     DependList:TDependRecordList;
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);virtual;
@@ -351,6 +353,7 @@ type
     property ObjectEditable:boolean read FObjectEditable;
     property ACLList:TACLListAbstract read FACLList;
     property Loaded:boolean read FLoaded write FLoaded;
+    property Statistic:TDBTableStatistic read FStatistic;
   end;
 
 
@@ -582,7 +585,6 @@ type
 
   TDBTableObject = class(TDBDataSetObject)
   private
-    FStatistic: TDBTableStatistic;
     function GetConstraint(AItem: integer): TPrimaryKeyRecord;
     function GetConstraintCount: integer;
   protected
@@ -596,7 +598,6 @@ type
 
     procedure ClearConstraintList(AConstraintType:TConstraintType);
     procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
-    procedure InternalRefreshStatistic; virtual;
     procedure IndexArrayClear; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
@@ -614,7 +615,6 @@ type
     procedure RefreshConstraintUnique; virtual;
     procedure RefreshConstraintCheck; virtual;
 
-    property Statistic:TDBTableStatistic read FStatistic;
 
 
     property ConstraintCount:integer read GetConstraintCount;
@@ -1182,7 +1182,7 @@ begin
   FStatData.FieldDefs.EndUpdate;
 end;
 
-constructor TDBTableStatistic.Create(AOwner: TDBTableObject);
+constructor TDBTableStatistic.Create(AOwner: TDBObject);
 begin
   inherited Create;
   FStatData:=TRxMemoryData.Create(nil);
@@ -2407,6 +2407,11 @@ begin
   //
 end;
 
+procedure TDBObject.InternalRefreshStatistic;
+begin
+  Statistic.AddValue(sCaption, CaptionFullPatch);
+end;
+
 function TDBObject.GetCaptionFullPatch: string;
 begin
   Result:=DoFormatName(FCaption);
@@ -2512,6 +2517,7 @@ end;
 constructor TDBObject.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create;
+  FStatistic:=TDBTableStatistic.Create(Self);
   FLoaded:=false;
   OwnerRoot:=AOwnerRoot;
 
@@ -2537,6 +2543,7 @@ begin
   FreeAndNil(DependList);
   if Assigned(FACLList) then
     FreeAndNil(FACLList);
+  FreeAndNil(FStatistic);
   OwnerRoot:=nil;
   inherited Destroy;
 end;
@@ -2748,11 +2755,6 @@ begin
   //;
 end;
 
-procedure TDBTableObject.InternalRefreshStatistic;
-begin
-  Statistic.AddValue(sCaption, CaptionFullPatch);
-end;
-
 procedure TDBTableObject.IndexArrayClear;
 var
   i: Integer;
@@ -2766,7 +2768,6 @@ constructor TDBTableObject.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
-  FStatistic:=TDBTableStatistic.Create(Self);
   FConstraintList:=TList.Create;
   FFKListLoaded:=false;
   FPKListLoaded:=false;
@@ -2777,7 +2778,6 @@ begin
   ClearConstraintList(ctNone);
 
   FreeAndNil(FConstraintList);
-  FreeAndNil(FStatistic);
   inherited Destroy;
 end;
 

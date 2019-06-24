@@ -94,7 +94,6 @@ type
     procedure fldRemoveExecute(Sender: TObject);
     procedure lbFieldListDblClick(Sender: TObject);
     procedure npNoneExecute(Sender: TObject);
-    procedure RxDBGrid1DblClick(Sender: TObject);
     procedure rxIndexFieldsAfterScroll(DataSet: TDataSet);
     procedure soNoneExecute(Sender: TObject);
   private
@@ -190,11 +189,6 @@ begin
     rxIndexFieldsNullsPos.AsString:=IndexNullPosStr(TIndexNullPos((Sender as TComponent).Tag));
     rxIndexFields.Post;
   end;
-end;
-
-procedure TpgIndexEditorPage.RxDBGrid1DblClick(Sender: TObject);
-begin
-  fldRemove.Execute;
 end;
 
 procedure TpgIndexEditorPage.rxIndexFieldsAfterScroll(DataSet: TDataSet);
