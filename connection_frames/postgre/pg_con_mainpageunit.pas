@@ -166,7 +166,7 @@ end;
 function Tpg_con_MainPage.MakeConnectionStr: string;
 begin
   Result:=cbServerName.Text;
-  if edtPort.Value <> PostgreSQLDefTCPPort then
+  if (edtPort.Value <> PostgreSQLDefTCPPort) and (edtPort.Value>0) then
     Result:=Result + '/' + IntToStr(edtPort.Value);
   Result:=Result + ':' + edtDBName.Text;
 end;
@@ -196,6 +196,7 @@ begin
   cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
   edtPort.Value:=TSQLEnginePostgre(ASQLEngine).RemotePort;
   CB_ServerVersion.ItemIndex:=Ord(TSQLEnginePostgre(ASQLEngine).ServerVersion);
+  cbServerNameChange(nil);
   DoTryFillDBList;
 end;
 
