@@ -118,6 +118,8 @@ end;
 procedure TotFirebirdPackageTemplatePage.Localize;
 begin
   inherited Localize;
+  GroupBox1.Caption:=sPackageHeader;
+  GroupBox2.Caption:=sPackageBody;
 end;
 
 end.

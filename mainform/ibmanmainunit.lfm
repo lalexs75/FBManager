@@ -1,11 +1,11 @@
 object fbManagerMainForm: TfbManagerMainForm
-  Left = 258
+  Left = 440
   Height = 799
-  Top = 96
+  Top = 85
   Width = 1239
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'
-  ClientHeight = 774
+  ClientHeight = 775
   ClientWidth = 1239
   Constraints.MinHeight = 120
   Menu = MainMenu1
@@ -16,8 +16,8 @@ object fbManagerMainForm: TfbManagerMainForm
   LCLVersion = '2.1.0.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 21
-    Top = 753
+    Height = 20
+    Top = 755
     Width = 1239
     Panels = <    
       item
@@ -37,7 +37,7 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 36
+    Height = 33
     Top = 0
     Width = 1239
     Items = <    
@@ -116,7 +116,7 @@ object fbManagerMainForm: TfbManagerMainForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 36
+    ClientHeight = 33
     ClientWidth = 1239
     ParentFont = False
     TabOrder = 0
@@ -127,7 +127,7 @@ object fbManagerMainForm: TfbManagerMainForm
       AnchorSideRight.Side = asrBottom
       Left = 1211
       Height = 22
-      Top = 7
+      Top = 5
       Width = 23
       Anchors = [akTop, akRight]
       Glyph.Data = {
@@ -154,22 +154,22 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object InspectorPanel: TPanel
     Left = 0
-    Height = 692
-    Top = 36
+    Height = 697
+    Top = 33
     Width = 219
     Align = alLeft
-    ClientHeight = 692
+    ClientHeight = 697
     ClientWidth = 219
     ParentFont = False
     TabOrder = 2
     object Panel1: TPanel
       Left = 1
-      Height = 21
+      Height = 20
       Top = 1
       Width = 217
       Align = alTop
       AutoSize = True
-      ClientHeight = 21
+      ClientHeight = 20
       ClientWidth = 217
       Color = clActiveCaption
       ParentColor = False
@@ -227,8 +227,8 @@ object fbManagerMainForm: TfbManagerMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = InspectorCloseButton
         Left = 1
-        Height = 19
-        Top = 1
+        Height = 16
+        Top = 2
         Width = 197
         Alignment = taCenter
         Anchors = [akTop, akLeft, akRight]
@@ -240,14 +240,14 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object Splitter1: TSplitter
     Left = 219
-    Height = 692
-    Top = 36
+    Height = 697
+    Top = 33
     Width = 5
   end
   object RxMDITasks1: TRxMDITasks
     Left = 0
     Height = 25
-    Top = 728
+    Top = 730
     Width = 1239
     Align = alBottom
     FlatButton = False
@@ -255,8 +255,8 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object RxMDIPanel1: TRxMDIPanel
     Left = 224
-    Height = 692
-    Top = 36
+    Height = 697
+    Top = 33
     Width = 1015
     CloseButton = RxMDICloseButton1
     TaskPanel = RxMDITasks1

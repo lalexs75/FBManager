@@ -1089,6 +1089,10 @@ msgstr "Размер кэша по умолчанию"
 msgid "Default character set"
 msgstr "Кодировка по умолчанию"
 
+#: fbmstrconstunit.sdefaultdescription
+msgid "Default description"
+msgstr "Описание по умолчанию"
+
 #: fbmstrconstunit.sdefaultpassword
 msgid "Default password"
 msgstr "Пароль по умолчанию"
@@ -4543,7 +4547,7 @@ msgstr "Ошибка подключения через SSH"
 
 #: fbmstrconstunit.ssshconnectionplugin
 msgid "SSH сonnection plugin"
-msgstr "SSH сonnection plugin"
+msgstr "Модуль подключения по SSH"
 
 #: fbmstrconstunit.ssshconnectiontimeout
 msgid "SSH connection timeout"
@@ -5021,11 +5025,6 @@ msgid "Trigger name"
 msgstr "Название тригера"
 
 #: fbmstrconstunit.striggernametags
-#, fuzzy
-#| msgid ""
-#| "Avaliable tags:\n"
-#| "%TABLE_NAME% - Table name\n"
-#| "%TRIGGER_TYPE% - Trigger type (BI0, AUD1)\n"
 msgid ""
 "Avaliable tags:\n"
 "%TABLE_NAME% - Table name\n"

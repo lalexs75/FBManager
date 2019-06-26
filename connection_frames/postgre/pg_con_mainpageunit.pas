@@ -183,6 +183,7 @@ begin
   Label14.Caption:=sServerVersion1;
   cbShowSystemObjects.Caption:=sShowSystemObjects;
   DividerBevel1.Caption:=sOtherOptions;
+  Label12.Caption:=sConnectionString;
 end;
 
 procedure Tpg_con_MainPage.LoadParams(ASQLEngine: TSQLEngineAbstract);

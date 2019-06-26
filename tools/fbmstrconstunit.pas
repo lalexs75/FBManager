@@ -1271,6 +1271,7 @@ resourcestring
   sToInsertTableShemaName         = '%TABLE_SCHEMA_NAME% - to insert table shema name';
   sGeneratorNameTemplate          = 'Generator name template';
   sTriggerText                    = 'Trigger text';
+  sDefaultDescription             = 'Default description';
 
   //Editor options dialog
   sTabCodeCompletionParams        = 'Codetools and auto code completion';

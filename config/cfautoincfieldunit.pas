@@ -149,7 +149,7 @@ begin
   Label1.Caption:=sGeneratorNameTemplate;
   Label2.Caption:=sTriggerNameTemplate;
   TabSheet1.Caption:=sTriggerText;
-
+  TabSheet2.Caption:=sDefaultDescription;
 end;
 
 end.

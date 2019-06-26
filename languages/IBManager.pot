@@ -1040,6 +1040,10 @@ msgstr ""
 msgid "Default character set"
 msgstr ""
 
+#: fbmstrconstunit.sdefaultdescription
+msgid "Default description"
+msgstr ""
+
 #: fbmstrconstunit.sdefaultpassword
 msgid "Default password"
 msgstr ""
