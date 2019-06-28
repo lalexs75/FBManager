@@ -3258,7 +3258,9 @@ var
   F: TDBField;
 begin
   for F in Self do
+  begin
     F.SaveToSQLFieldItem(ASQLFields.AddParam(F.FieldName));
+  end;
 end;
 
 { TFieldItem }

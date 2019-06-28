@@ -15459,9 +15459,9 @@ begin
 
   for F in Fields do
   begin
+        if SF<>'' then SF:=SF + ','+ LineEnding;
     if F.IsLocal then
     begin
-      if SF<>'' then SF:=SF + ','+ LineEnding;
       SF:=SF + '  ' +F.Caption + ' ' + F.FullTypeName;
       if F.ArrayDimension.Count>0 then
       begin
@@ -15504,7 +15504,9 @@ begin
 
       if F.CheckExpr <> '' then
         SF:=SF + ' CHECK ('+F.CheckExpr+')';
-    end;
+    end
+    else
+      SF:=SF + '  -- inherited field -- ' +F.Caption + ' ' + F.FullTypeName;
   end;
 
   if (SF = '') and (TableTypeName='') and (FTableAsExpression = '') then exit;
