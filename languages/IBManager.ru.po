@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -4034,7 +4034,7 @@ msgstr "Заменить"
 
 #: fbmstrconstunit.sreplacewith
 msgid "&Replace with:"
-msgstr ""
+msgstr "&Заменить на:"
 
 #: fbmstrconstunit.sreplclient
 msgid "Repl. client"
@@ -4271,15 +4271,15 @@ msgstr "Поиск"
 
 #: fbmstrconstunit.ssearchfor
 msgid "&Search for:"
-msgstr ""
+msgstr "&Искать:"
 
 #: fbmstrconstunit.ssearchfromcursor
 msgid "Search from &caret"
-msgstr ""
+msgstr "Искать от &курсора"
 
 #: fbmstrconstunit.ssearchregexp
 msgid "&Regular expressions"
-msgstr ""
+msgstr "&Регулярные выражения"
 
 #: fbmstrconstunit.ssearchreplace
 msgctxt "fbmstrconstunit.ssearchreplace"
@@ -4288,11 +4288,11 @@ msgstr "Заменить"
 
 #: fbmstrconstunit.ssearchselectedonly
 msgid "Selected &text only"
-msgstr ""
+msgstr "Искать только в &выделенном"
 
 #: fbmstrconstunit.ssearchwholewords
 msgid "&Whole words only"
-msgstr ""
+msgstr "&Только целые слова"
 
 #: fbmstrconstunit.ssecurity
 msgctxt "fbmstrconstunit.ssecurity"
@@ -5616,4 +5616,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
