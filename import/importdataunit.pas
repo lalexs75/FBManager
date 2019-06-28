@@ -40,6 +40,7 @@ type
     ActionList1: TActionList;
     BitBtn1: TBitBtn;
     ButtonPanel1: TButtonPanel;
+    CheckBox1: TCheckBox;
     dsFieldList: TDataSource;
     FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
@@ -386,7 +387,11 @@ begin
               FSize:=F.FieldDomain.FieldLength
             else
               FSize:=F.FieldSize;
-            S:=S + AnsiQuotedStr(TrimRight(UTF8Copy(S1, 1, FSize)), '''')
+
+            if F.FieldTypeDB in StringTypes then
+              S:=S + AnsiQuotedStr(TrimRight(UTF8Copy(S1, 1, FSize)), '''')
+            else
+              S:=S + AnsiQuotedStr(S1, '''');
           end
           else
             S:=S + 'null';
