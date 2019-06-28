@@ -5585,23 +5585,11 @@ var
   IOPT: LongWord;
   F: TField;
 begin
-  //Сформируем запрос на выборку параметров индекса
-(*  S:='';
-  for i:=0 to AFieldCount-1 do
-    S:=S+Format('pg_index.indkey[%d] as indkey_%d, ' +
-                ' pg_index.indclass[%d] as indclass_%d, '+
-                ' pg_index.indoption[%d] as indoption_%d, ' +
-                ' pg_get_indexdef(pg_index.indexrelid, 1, true) as attr_def_%d, '
-                ,[i, i, i, i, i, i, i]);
-  S:='select '+Copy(S, 1, Length(S)-2) + ' from pg_index where pg_index.indexrelid = '+IntToStr(FOID);
-*)
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndexFields.Strings.Text);
   Q.ParamByName('indexrelid').AsInteger:=FOID;
   try
     //Выберем индексные поля
     Q.Open;
-    for F in Q.Fields do
-      RxWriteLog(etDebug, 'Field %s', [F.FieldName]);
     while not Q.EOF do
     begin
 

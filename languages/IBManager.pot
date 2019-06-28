@@ -1318,6 +1318,10 @@ msgstr ""
 msgid "Dialog"
 msgstr ""
 
+#: fbmstrconstunit.sdirection
+msgid "Direction"
+msgstr ""
+
 #: fbmstrconstunit.sdisableantialiased
 msgid "Disable antialiased"
 msgstr ""
@@ -3883,6 +3887,10 @@ msgctxt "fbmstrconstunit.sreplace"
 msgid "Replace"
 msgstr ""
 
+#: fbmstrconstunit.sreplacewith
+msgid "&Replace with:"
+msgstr ""
+
 #: fbmstrconstunit.sreplclient
 msgid "Repl. client"
 msgstr ""
@@ -4102,9 +4110,29 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: fbmstrconstunit.ssearchfor
+msgid "&Search for:"
+msgstr ""
+
+#: fbmstrconstunit.ssearchfromcursor
+msgid "Search from &caret"
+msgstr ""
+
+#: fbmstrconstunit.ssearchregexp
+msgid "&Regular expressions"
+msgstr ""
+
 #: fbmstrconstunit.ssearchreplace
 msgctxt "fbmstrconstunit.ssearchreplace"
 msgid "Replace"
+msgstr ""
+
+#: fbmstrconstunit.ssearchselectedonly
+msgid "Selected &text only"
+msgstr ""
+
+#: fbmstrconstunit.ssearchwholewords
+msgid "&Whole words only"
 msgstr ""
 
 #: fbmstrconstunit.ssecurity
