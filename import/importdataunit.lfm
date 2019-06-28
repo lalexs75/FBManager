@@ -1,5 +1,5 @@
 object ImportDataForm: TImportDataForm
-  Left = 529
+  Left = 411
   Height = 666
   Top = 94
   Width = 948
@@ -14,9 +14,9 @@ object ImportDataForm: TImportDataForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 17
+    Height = 18
     Top = 6
-    Width = 94
+    Width = 96
     BorderSpacing.Around = 6
     Caption = 'Import data file'
     ParentColor = False
@@ -24,8 +24,8 @@ object ImportDataForm: TImportDataForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 614
+    Height = 42
+    Top = 618
     Width = 936
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -43,10 +43,10 @@ object ImportDataForm: TImportDataForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = PageControl1
-    Left = 893
-    Height = 33
-    Top = 30
-    Width = 49
+    Left = 894
+    Height = 30
+    Top = 28
+    Width = 48
     Action = actOpen
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -63,8 +63,8 @@ object ImportDataForm: TImportDataForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Splitter2
     Left = 0
-    Height = 534
-    Top = 69
+    Height = 543
+    Top = 64
     Width = 948
     ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -73,8 +73,8 @@ object ImportDataForm: TImportDataForm
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Params'
-      ClientHeight = 503
-      ClientWidth = 938
+      ClientHeight = 507
+      ClientWidth = 942
       ParentFont = False
       object RadioGroup1: TRadioGroup
         AnchorSideLeft.Control = SpinEdit1
@@ -82,10 +82,10 @@ object ImportDataForm: TImportDataForm
         AnchorSideTop.Control = TabSheet1
         AnchorSideBottom.Control = SpinEdit2
         AnchorSideBottom.Side = asrBottom
-        Left = 193
-        Height = 82
+        Left = 202
+        Height = 70
         Top = 0
-        Width = 182
+        Width = 200
         Anchors = [akTop, akLeft, akBottom]
         AutoFill = True
         AutoSize = True
@@ -97,8 +97,8 @@ object ImportDataForm: TImportDataForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 64
-        ClientWidth = 180
+        ClientHeight = 50
+        ClientWidth = 196
         ItemIndex = 1
         Items.Strings = (
           'Import data'
@@ -112,9 +112,9 @@ object ImportDataForm: TImportDataForm
         AnchorSideBottom.Control = SpinEdit1
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 17
-        Top = 25
-        Width = 101
+        Height = 18
+        Top = 18
+        Width = 110
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Skip before rows'
@@ -126,8 +126,8 @@ object ImportDataForm: TImportDataForm
         AnchorSideLeft.Control = Label2
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Side = asrBottom
-        Left = 113
-        Height = 34
+        Left = 122
+        Height = 28
         Top = 8
         Width = 74
         BorderSpacing.Around = 6
@@ -141,9 +141,9 @@ object ImportDataForm: TImportDataForm
         AnchorSideBottom.Control = SpinEdit2
         AnchorSideBottom.Side = asrBottom
         Left = 5
-        Height = 17
-        Top = 65
-        Width = 90
+        Height = 18
+        Top = 52
+        Width = 98
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 5
         Caption = 'Skip after rows'
@@ -156,9 +156,9 @@ object ImportDataForm: TImportDataForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = SpinEdit1
         AnchorSideTop.Side = asrBottom
-        Left = 113
-        Height = 34
-        Top = 48
+        Left = 122
+        Height = 28
+        Top = 42
         Width = 74
         BorderSpacing.Around = 6
         OnChange = SpinEdit1Change
@@ -167,17 +167,17 @@ object ImportDataForm: TImportDataForm
       end
       object CheckBox1: TCheckBox
         Left = 5
-        Height = 23
+        Height = 22
         Top = 113
-        Width = 92
+        Width = 101
         Caption = 'CheckBox1'
         TabOrder = 3
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Collumns'
-      ClientHeight = 503
-      ClientWidth = 938
+      ClientHeight = 507
+      ClientWidth = 942
       ParentFont = False
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet2
@@ -397,8 +397,8 @@ object ImportDataForm: TImportDataForm
           Width = 934
           Align = alTop
           AutoSize = True
-          ClientHeight = 37
-          ClientWidth = 934
+          ClientHeight = 33
+          ClientWidth = 930
           ParentFont = False
           TabOrder = 1
           object sCellIndicator1: TsCellIndicator
@@ -469,7 +469,7 @@ object ImportDataForm: TImportDataForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 603
+    Top = 607
     Width = 948
     Align = alBottom
     ResizeAnchor = akBottom
@@ -479,9 +479,9 @@ object ImportDataForm: TImportDataForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = BitBtn1
     Left = 15
-    Height = 34
-    Top = 29
-    Width = 871
+    Height = 28
+    Top = 30
+    Width = 872
     FilterIndex = 0
     HideDirectories = False
     ButtonWidth = 23

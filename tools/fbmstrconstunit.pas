@@ -647,6 +647,13 @@ resourcestring
   sSearchCaption                    = 'Search';
   sForward                          = '&Forward';
   sBackward                         = '&Backward';
+  sDirection                        = 'Direction';
+  sSearchFor                        = '&Search for:';
+  sReplaceWith                      = '&Replace with:';
+  sSearchWholeWords                 = '&Whole words only';
+  sSearchSelectedOnly               = 'Selected &text only';
+  sSearchFromCursor                 = 'Search from &caret';
+  sSearchRegExp                     = '&Regular expressions';
 
   sLastValue                        = 'Last value';
   sIncrement                        = 'Increment';

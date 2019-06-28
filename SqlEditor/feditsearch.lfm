@@ -17,11 +17,12 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 19
+    Height = 18
     Top = 6
     Width = 72
     BorderSpacing.Around = 6
     Caption = '&Search for:'
+    FocusControl = cbSearchText
     ParentColor = False
   end
   object lblReplaceWith: TLabel
@@ -29,11 +30,12 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideTop.Control = cbSearchText
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 19
-    Top = 68
+    Height = 18
+    Top = 66
     Width = 88
     BorderSpacing.Around = 6
     Caption = '&Replace with:'
+    FocusControl = cbReplaceText
     ParentColor = False
   end
   object cbSearchText: TComboBox
@@ -43,8 +45,8 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 31
+    Height = 30
+    Top = 30
     Width = 501
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -57,21 +59,21 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 6
-    Height = 172
-    Top = 130
+    Height = 176
+    Top = 126
     Width = 313
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'Option'
-    ClientHeight = 152
-    ClientWidth = 311
+    ClientHeight = 156
+    ClientWidth = 309
     TabOrder = 1
     object cbSearchCaseSensitive: TCheckBox
       AnchorSideLeft.Control = gbSearchOptions
       AnchorSideTop.Control = gbSearchOptions
       Left = 6
-      Height = 23
+      Height = 22
       Top = 6
       Width = 128
       BorderSpacing.Around = 6
@@ -83,9 +85,9 @@ object frmEditSearchReplace: TfrmEditSearchReplace
       AnchorSideTop.Control = cbSearchCaseSensitive
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 23
-      Top = 35
-      Width = 143
+      Height = 22
+      Top = 34
+      Width = 140
       BorderSpacing.Around = 6
       Caption = '&Whole words only'
       TabOrder = 1
@@ -95,9 +97,9 @@ object frmEditSearchReplace: TfrmEditSearchReplace
       AnchorSideTop.Control = cbSearchWholeWords
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 23
-      Top = 64
-      Width = 141
+      Height = 22
+      Top = 62
+      Width = 140
       BorderSpacing.Around = 6
       Caption = 'Selected &text only'
       TabOrder = 2
@@ -107,9 +109,9 @@ object frmEditSearchReplace: TfrmEditSearchReplace
       AnchorSideTop.Control = cbSearchSelectedOnly
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 23
-      Top = 93
-      Width = 144
+      Height = 22
+      Top = 90
+      Width = 142
       BorderSpacing.Around = 6
       Caption = 'Search from &caret'
       TabOrder = 3
@@ -119,9 +121,9 @@ object frmEditSearchReplace: TfrmEditSearchReplace
       AnchorSideTop.Control = cbSearchFromCursor
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 23
-      Top = 122
-      Width = 158
+      Height = 22
+      Top = 118
+      Width = 159
       BorderSpacing.Around = 6
       Caption = '&Regular expressions'
       TabOrder = 4
@@ -135,8 +137,8 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 325
-    Height = 78
-    Top = 136
+    Height = 76
+    Top = 132
     Width = 186
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
@@ -153,8 +155,8 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 58
-    ClientWidth = 184
+    ClientHeight = 56
+    ClientWidth = 182
     Items.Strings = (
       '&Forward'
       '&Backward'
@@ -168,8 +170,8 @@ object frmEditSearchReplace: TfrmEditSearchReplace
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 93
+    Height = 30
+    Top = 90
     Width = 501
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6

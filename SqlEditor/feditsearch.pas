@@ -83,6 +83,7 @@ type
     procedure btnOKClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
   private
+    FReplace: Boolean;
     function GetSearchBackwards: boolean;
     function GetSearchCaseSensitive: boolean;
     function GetSearchFromCursor: boolean;
@@ -103,6 +104,7 @@ type
     procedure SetSearchRegExp(Value: boolean);
     procedure SetReplaceText(Value: string);
     procedure SetReplaceTextHistory(Value: string);
+    procedure Localize;
   public
     constructor Create(AOwner: TComponent; AReplace: Boolean);
     property SearchBackwards: boolean read GetSearchBackwards
@@ -279,25 +281,42 @@ begin
   cbReplaceText.Items.Text := Value;
 end;
 
+procedure TfrmEditSearchReplace.Localize;
+begin
+  if FReplace then
+    Caption:= sSearchReplace
+  else
+    Caption:= sSearchCaption;
+  rgSearchDirection.Caption:=sDirection;
+  rgSearchDirection.Items.Clear;
+  rgSearchDirection.Items.Add(sForward);
+  rgSearchDirection.Items.Add(sBackward);
+  lblSearchFor.Caption:=sSearchFor;
+  lblReplaceWith.Caption:=sReplaceWith;
+  gbSearchOptions.Caption:=sOptions;
+  cbSearchCaseSensitive.Caption:=sCaseSensetive;
+  cbSearchWholeWords.Caption:=sSearchWholeWords;
+  cbSearchSelectedOnly.Caption:=sSearchSelectedOnly;
+  cbSearchFromCursor.Caption:=sSearchFromCursor;
+  cbSearchRegExp.Caption:=sSearchRegExp;
+end;
+
 constructor TfrmEditSearchReplace.Create(AOwner: TComponent; AReplace: Boolean);
 begin
   inherited Create(AOwner);
+  FReplace:=AReplace;
+  Localize;
   if AReplace then
   begin
-    Caption:= sSearchReplace;
     lblReplaceWith.Visible:= True;
     cbReplaceText.Visible:= True;
   end
   else
   begin
-    Caption:= sSearchCaption;
     lblReplaceWith.Visible:= False;
     cbReplaceText.Visible:= False;
     Height:= Height - cbReplaceText.Height;
   end;
-  rgSearchDirection.Items.Clear;
-  rgSearchDirection.Items.Add(sForward);
-  rgSearchDirection.Items.Add(sBackward);
 end;
 
 end.

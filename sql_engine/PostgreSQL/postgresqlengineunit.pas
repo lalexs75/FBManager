@@ -1002,7 +1002,8 @@ function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
-  rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
+  rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS{,
+  rxlogging};
 
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 begin
@@ -3518,52 +3519,6 @@ var
 begin
   if (State <> sdboCreate) and not Assigned(Fields) then
     RefreshObject;
-(*  S:='CREATE TABLE '+ ATableName+' ('+LineEnding;
-
-  if FInhTables.Count>0 then
-  begin
-    S1:='';
-    for i:=0 to FInhTables.Count-1 do
-    begin
-      if S1<>'' then
-        S1:=S1+', ';
-      S1:=S1+TPGTable(FInhTables.Items[i]).CaptionFullPatch;
-    end;
-    S:=S+LineEnding+'INHERITS'+LineEnding+'  ('+S1+')';
-  end;
-
-  SQLLines.Add(S);
-
-
-  if State <> sdboCreate then
-  begin
-    if FConstraintList.Count =0 then
-    begin
-      RefreshConstraintPrimaryKey;
-      RefreshConstraintForeignKey;
-    end;
-
-    //В случае существующей талицы создадим скрипт на PK по данным из таблицы
-    PkRec:=nil;
-    for i:=0 to FConstraintList.Count - 1 do
-    begin
-      if TPrimaryKeyRecord(FConstraintList[i]).ConstraintType = ctPrimaryKey then
-      begin
-        PkRec:=TPrimaryKeyRecord(FConstraintList[i]);
-        break;
-      end;
-    end;
-
-    if Assigned(PkRec) then
-    begin
-      S:='alter table '+ ATableName+' add constraint '+PkRec.Name+
-         ' primary key ('+PkRec.FieldList+')';
-      SQLLines.Add(S);
-    end;
-
-
-
-*)
   FCmd:=TPGSQLCreateTable.Create(nil);
   FCmd.Name:=Caption;
   FCmd.Description:=Description;
@@ -5628,6 +5583,7 @@ var
   i:integer;
   PGIF: TIndexField;
   IOPT: LongWord;
+  F: TField;
 begin
   //Сформируем запрос на выборку параметров индекса
 (*  S:='';
@@ -5644,9 +5600,12 @@ begin
   try
     //Выберем индексные поля
     Q.Open;
+    for F in Q.Fields do
+      RxWriteLog(etDebug, 'Field %s', [F.FieldName]);
     while not Q.EOF do
     begin
 
+      F:=Q.FindField('coldef');
       if Q.FieldByName('coldef').AsString<>'' then
         PGIF:=IndexFields.Add(Q.FieldByName('coldef').AsString)
       else
@@ -5677,35 +5636,6 @@ begin
       Q.Next;
     end;
     Q.Close;
-(*
-    //Выберем индексные опции
-    Q.SQL.Text:=S;
-    Q.Open;
-    if Q.RecordCount>0 then
-      for i:=0 to AFieldCount-1 do
-      begin
-        PGIF:=IndexFields[i];
-        S:='indoption_'+IntToStr(i);
-        IOPT:=Q.FieldByName(S).AsInteger;
-        if (IOPT and $01) <> 0 then
-          PGIF.SortOrder:=indDescending
-        else
-          PGIF.SortOrder:= indDefault//indAscending
-          ;
-
-        if (IOPT and $02) <> 0 then
-          PGIF.NullPos:=inpFirst
-        else
-          PGIF.NullPos:= inpDefault
-          ;
-
-{        S:=S+Q.FieldByName('indkey_'+IntToStr(i)).AsString + ' ' +
-             Q.FieldByName('indclass_'+IntToStr(i)).AsString + ' ' +
-             Q.FieldByName('indoption_'+IntToStr(i)).AsString + ' ';
-        //S:=S+Format('pg_index.indkey[%d] as indkey_%d, pg_index.indclass[%d] as indclass_%d, pg_index.indoption[%d] as indoption_%d',[i, i, i, i, i, i]);
-}      end;
-    Q.Close;
-*)
   finally
     Q.Free;
   end;
