@@ -168,8 +168,8 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 474
-    Top = 120
+    Height = 442
+    Top = 152
     Width = 121
     Align = alLeft
     ExpandSignSize = 16
@@ -183,8 +183,8 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 474
-    Top = 120
+    Height = 442
+    Top = 152
     Width = 5
   end
   object StatusBar1: TStatusBar
@@ -194,26 +194,106 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Width = 759
     Panels = <>
   end
-  object ListBox1: TListBox
-    Left = 0
-    Height = 80
-    Top = 35
-    Width = 759
-    Align = alTop
-    ItemHeight = 0
-    OnClick = ListBox1Click
-    ScrollWidth = 757
-    TabOrder = 6
-    TopIndex = -1
-  end
   object Splitter3: TSplitter
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 115
+    Top = 147
     Width = 759
     Align = alTop
     ResizeAnchor = akTop
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 112
+    Top = 35
+    Width = 759
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 112
+    ClientWidth = 759
+    TabOrder = 7
+    object SpeedButton1: TSpeedButton
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 732
+      Height = 20
+      Top = 7
+      Width = 20
+      Action = flAdd
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Flat = True
+      ShowCaption = False
+    end
+    object SpeedButton2: TSpeedButton
+      AnchorSideTop.Control = SpeedButton1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 732
+      Height = 20
+      Top = 33
+      Width = 20
+      Action = flRemove
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Flat = True
+      ShowCaption = False
+    end
+    object ListBox1: TListBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = SpeedButton1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 1
+      Height = 110
+      Top = 1
+      Width = 725
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      ItemHeight = 0
+      OnClick = ListBox1Click
+      PopupMenu = PopupMenu4
+      ScrollWidth = 723
+      TabOrder = 0
+      TopIndex = -1
+    end
+    object SpeedButton3: TSpeedButton
+      AnchorSideTop.Control = SpeedButton2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 732
+      Height = 20
+      Top = 59
+      Width = 20
+      Action = flUp
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Flat = True
+      ShowCaption = False
+    end
+    object SpeedButton4: TSpeedButton
+      AnchorSideTop.Control = SpeedButton3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 732
+      Height = 20
+      Top = 85
+      Width = 20
+      Action = flDown
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 6
+      Flat = True
+      ShowCaption = False
+    end
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
@@ -284,6 +364,32 @@ object FBMSqlScripForm: TFBMSqlScripForm
       ImageIndex = 10
       OnExecute = objTreeRefreshExecute
     end
+    object flAdd: TAction
+      Category = 'Files list'
+      Caption = 'flAdd'
+      ImageIndex = 12
+      OnExecute = flAddExecute
+    end
+    object flRemove: TAction
+      Category = 'Files list'
+      Caption = 'flRemove'
+      ImageIndex = 13
+      OnExecute = flRemoveExecute
+    end
+    object flUp: TAction
+      Tag = -1
+      Category = 'Files list'
+      Caption = 'flUp'
+      ImageIndex = 54
+      OnExecute = flUpExecute
+    end
+    object flDown: TAction
+      Tag = 1
+      Category = 'Files list'
+      Caption = 'flDown'
+      ImageIndex = 52
+      OnExecute = flUpExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
@@ -334,5 +440,25 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Images = fbManagerMainForm.ImageListMain
     Left = 55
     Top = 55
+  end
+  object PopupMenu4: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 316
+    Top = 56
+    object MenuItem6: TMenuItem
+      Action = flAdd
+    end
+    object MenuItem7: TMenuItem
+      Action = flRemove
+    end
+    object MenuItem12: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem13: TMenuItem
+      Action = flUp
+    end
+    object MenuItem14: TMenuItem
+      Action = flDown
+    end
   end
 end

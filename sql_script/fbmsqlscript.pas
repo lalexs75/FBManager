@@ -24,9 +24,9 @@ unit fbmsqlscript;
 interface
 
 uses
-  Classes, SysUtils, {XMLConf, }LResources, Forms, Controls, Graphics, Dialogs,
-  ActnList, rxtoolbar, Menus, SynEdit, LMessages, StdCtrls, ExtCtrls, LCLType,
-  ComCtrls, fbmToolsUnit, fdbm_SynEditorUnit, ibmanagertypesunit, sqlObjects,
+  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ActnList,
+  rxtoolbar, Menus, SynEdit, LMessages, StdCtrls, ExtCtrls, LCLType, ComCtrls,
+  Buttons, fbmToolsUnit, fdbm_SynEditorUnit, ibmanagertypesunit, sqlObjects,
   SQLEngineAbstractUnit, SQLEngineCommonTypesUnit;
 
 type
@@ -38,7 +38,18 @@ type
   { TFBMSqlScripForm }
 
   TFBMSqlScripForm = class(TForm)
+    flUp: TAction;
+    flDown: TAction;
+    flRemove: TAction;
+    flAdd: TAction;
     ListBox1: TListBox;
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    Panel1: TPanel;
+    PopupMenu4: TPopupMenu;
     scriptStop: TAction;
     Label1: TLabel;
     MenuItem4: TMenuItem;
@@ -55,6 +66,10 @@ type
     PopupMenu2: TPopupMenu;
     PopupMenu3: TPopupMenu;
     ProgressBar1: TProgressBar;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     StatusBar1: TStatusBar;
@@ -77,6 +92,9 @@ type
     procedure fileOpenExecute(Sender: TObject);
     procedure fileSaveAsExecute(Sender: TObject);
     procedure fileSaveExecute(Sender: TObject);
+    procedure flAddExecute(Sender: TObject);
+    procedure flRemoveExecute(Sender: TObject);
+    procedure flUpExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -117,6 +135,7 @@ type
 
     function OTSelected:TStamentRecord;
     procedure ShowFilesList(AShow:boolean);
+    procedure UpdateFileListActions;
   public
     procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
     procedure ChangeVisualParams;
@@ -161,6 +180,38 @@ procedure TFBMSqlScripForm.fileSaveExecute(Sender: TObject);
 begin
   EditorFrame.edtSave.Execute;
   UpdateFileName;
+end;
+
+procedure TFBMSqlScripForm.flAddExecute(Sender: TObject);
+var
+  S: String;
+begin
+  if EditorFrame.OpenDialog1.Execute then
+  begin
+    for S in EditorFrame.OpenDialog1.Files do
+      ListBox1.Items.Add(S);
+  end;
+  UpdateFileListActions;
+end;
+
+procedure TFBMSqlScripForm.flRemoveExecute(Sender: TObject);
+begin
+  if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
+    ListBox1.Items.Delete(ListBox1.ItemIndex);
+  UpdateFileListActions;
+end;
+
+procedure TFBMSqlScripForm.flUpExecute(Sender: TObject);
+var
+  T: Integer;
+  S: String;
+begin
+  T:=(Sender as TComponent).Tag;
+  S:=ListBox1.Items[ListBox1.ItemIndex];
+  ListBox1.Items[ListBox1.ItemIndex]:=ListBox1.Items[ListBox1.ItemIndex+T];
+  ListBox1.Items[ListBox1.ItemIndex+T]:=S;
+  ListBox1.ItemIndex:=ListBox1.ItemIndex+T;
+  UpdateFileListActions;
 end;
 
 procedure TFBMSqlScripForm.fileOpenExecute(Sender: TObject);
@@ -219,6 +270,8 @@ procedure TFBMSqlScripForm.ListBox1Click(Sender: TObject);
 var
   S: String;
 begin
+  UpdateFileListActions;
+
   if (ListBox1.Items.Count = 0) or (ListBox1.ItemIndex<0) or (ListBox1.ItemIndex>ListBox1.Items.Count-1) then Exit;
   S:=ListBox1.Items[ListBox1.ItemIndex];
   if FileExists(S) then
@@ -304,7 +357,8 @@ begin
 
     DoParseScript(S);
 
-    EditorFrame.SQLEngine.ExecuteSQLScript(S, @OnExecuteSqlScriptProcessEvent);
+    if not EditorFrame.SQLEngine.ExecuteSQLScript(S, @OnExecuteSqlScriptProcessEvent) then
+      FAbortExecute:=true;
   except
     on E:Exception do
     begin
@@ -322,11 +376,11 @@ begin
   R:=-1;
   ObjRefresh:=nil;
 
-  if (ListBox1.Visible and (ListBox1.Items.Count>0)) or (EditorFrame.TextEditor.SelText<>'') then
+  if (Panel1.Visible and (ListBox1.Items.Count>0)) or (EditorFrame.TextEditor.SelText<>'') then
   begin
     fbmSQLScriptRunQuestionForm:=TfbmSQLScriptRunQuestionForm.Create(Application);
     fbmSQLScriptRunQuestionForm.RadioButton1.Enabled:=EditorFrame.TextEditor.SelText<>'';
-    if (ListBox1.Visible and (ListBox1.Items.Count>0)) then
+    if (Panel1.Visible and (ListBox1.Items.Count>0)) then
     begin
       fbmSQLScriptRunQuestionForm.RadioButton3.Checked:=true;
     end
@@ -588,6 +642,11 @@ begin
   objTreeShowDML.Hint:=sShowDMLHint;
   objTreeRefresh.Caption:=sRefresh;
   objTreeRefresh.Hint:=sRefreshHint;
+
+  flAdd.Caption:=sAddFile;
+  flRemove.Caption:=sRemoveFile;
+  flUp.Caption:=sMoveUp;
+  flDown.Caption:=sMoveDown;
 end;
 
 procedure TFBMSqlScripForm.UpdateTreeVisible;
@@ -779,7 +838,14 @@ begin
   objTreeDeleteCmd.Enabled:=not ARun;
   objTreeShowDML.Enabled:=not ARun;
   objTreeRefresh.Enabled:=not ARun;
-  ListBox1.Enabled:=ListBox1.Visible and not ARun;
+
+  flUp.Enabled:=not ARun;
+  flDown.Enabled:=not ARun;
+  flRemove.Enabled:=not ARun;
+  flAdd.Enabled:=not ARun;
+  ListBox1.Enabled:=Panel1.Visible and not ARun;
+  if Panel1.Visible and (not ARun) then
+    UpdateFileListActions;
 end;
 
 function TFBMSqlScripForm.OTSelected: TStamentRecord;
@@ -792,13 +858,21 @@ end;
 
 procedure TFBMSqlScripForm.ShowFilesList(AShow: boolean);
 begin
-  ListBox1.Visible:=AShow;
+  Panel1.Visible:=AShow;
+
   Splitter3.Visible:=AShow;
   if AShow then
   begin
-    Splitter3.Top:=ListBox1.Height;
+    Splitter3.Top:=Panel1.Height;
     ListBox1.Enabled:=true;
   end;
+end;
+
+procedure TFBMSqlScripForm.UpdateFileListActions;
+begin
+  flRemove.Enabled:=ListBox1.Items.Count>0;
+  flDown.Enabled:=(ListBox1.Items.Count>1) and (ListBox1.ItemIndex<ListBox1.Items.Count-1);
+  flUp.Enabled:=(ListBox1.Items.Count>1) and (ListBox1.ItemIndex>0);
 end;
 
 procedure TFBMSqlScripForm.LMEditorChangeParams(var message: TLMNoParams);

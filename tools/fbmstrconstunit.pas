@@ -1063,6 +1063,8 @@ resourcestring
   sExecuteSelectedPartOnly          = 'Execute selected part only';
   sExecuteEntireScript              = 'Execute entire script';
   sExecuteAllFilesFromList          = 'Execute all files from list';
+  sAddFile                          = 'Add file';
+  sRemoveFile                       = 'Remove file';
 
   sUseTableAlisInCreateSQLForm      = 'Use table name as alis in create SQL form';
   sShowResultGridOnFirstPage        = 'Show result grid on first page';

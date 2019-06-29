@@ -692,7 +692,7 @@ type
     procedure RefreshObjectsEndFull;override;
     procedure RefreshObjectsBegin(const ASQLText:string);override;
 
-    procedure ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent); override;
+    function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
     procedure FillCharSetList(const List: TStrings); override;
     procedure FillCollationList(const ACharSet:string; const List: TStrings); override;
@@ -1699,12 +1699,13 @@ begin
   end;
 end;
 
-procedure TSQLEngineFireBird.ExecuteSQLScript(const ASQL: string;
-  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent);
+function TSQLEngineFireBird.ExecuteSQLScript(const ASQL: string;
+  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent): Boolean;
 var
   USql:TUIBScript;
   SqlTran:TUIBTransaction;
 begin
+  Result:=true;
   FOnExecuteSqlScriptProcessEvent:=OnExecuteSqlScriptProcessEvent;
   SqlTran:=TUIBTransaction.Create(nil);
   SqlTran.DataBase:=FFBDatabase;
@@ -1725,6 +1726,7 @@ begin
       InternalError(E.Message);
       if SqlTran.InTransaction then
         SqlTran.RollBack;
+      Result:=false;
     end;
   end;
   USql.Free;

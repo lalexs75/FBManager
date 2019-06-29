@@ -75,6 +75,10 @@ msgstr "Добавить все поля"
 msgid "Add field"
 msgstr "Добавить поле"
 
+#: fbmstrconstunit.saddfile
+msgid "Add file"
+msgstr ""
+
 #: fbmstrconstunit.saddhint
 msgid "Add data"
 msgstr "Добавить данные"
@@ -4018,6 +4022,10 @@ msgstr "Удалить все поля"
 msgid "Remove field"
 msgstr "Удалить поле"
 
+#: fbmstrconstunit.sremovefile
+msgid "Remove file"
+msgstr ""
+
 #: fbmstrconstunit.srename
 #, object-pascal-format
 msgid "Rename %s \"%s\""
@@ -5632,3 +5640,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

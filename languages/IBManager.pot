@@ -62,6 +62,10 @@ msgstr ""
 msgid "Add field"
 msgstr ""
 
+#: fbmstrconstunit.saddfile
+msgid "Add file"
+msgstr ""
+
 #: fbmstrconstunit.saddhint
 msgid "Add data"
 msgstr ""
@@ -3871,6 +3875,10 @@ msgstr ""
 
 #: fbmstrconstunit.sremovefield
 msgid "Remove field"
+msgstr ""
+
+#: fbmstrconstunit.sremovefile
+msgid "Remove file"
 msgstr ""
 
 #: fbmstrconstunit.srename

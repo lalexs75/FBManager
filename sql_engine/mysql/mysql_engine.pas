@@ -347,7 +347,7 @@ type
     function ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;override;
     function SQLPlan(aDataSet:TDataSet):string;override;
     function GetQueryControl:TSQLQueryControl;override;
-    procedure ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent); override;
+    function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
 
 
     //Create connection dialog functions
@@ -2486,11 +2486,12 @@ begin
   Result:=TMySQLQueryControl.Create(Self);
 end;
 
-procedure TSQLEngineMySQL.ExecuteSQLScript(const ASQL: string;
-  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent);
+function TSQLEngineMySQL.ExecuteSQLScript(const ASQL: string;
+  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent): Boolean;
 var
   SQLScript: TZSQLProcessor;
 begin
+  Result:=true;
   SQLScript:=TZSQLProcessor.Create(nil);
   FOnExecuteSqlScriptProcessEvent:=OnExecuteSqlScriptProcessEvent;
   try
@@ -2500,7 +2501,10 @@ begin
     SQLScript.Execute;
   except
     on E:Exception do
+    begin
       InternalError(E.Message);
+      Result:=false;
+    end;
   end;
   FOnExecuteSqlScriptProcessEvent:=nil;
   SQLScript.Free;

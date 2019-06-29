@@ -930,7 +930,7 @@ type
 
     function GetSQLQuery(ASql:string):TZQuery;
     function GetSQLSysQuery(ASql:string):TZQuery;
-    procedure ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent); override;
+    function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
     procedure FillCharSetList(const List: TStrings); override;
     function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
@@ -2876,11 +2876,12 @@ begin
   AData.FieldByName('db_database_shedule').AsBoolean:=FUsePGShedule;
 end;
 
-procedure TSQLEnginePostgre.ExecuteSQLScript(const ASQL: string;
-  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent);
+function TSQLEnginePostgre.ExecuteSQLScript(const ASQL: string;
+  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent): Boolean;
 var
   SQLScript: TZSQLProcessor;
 begin
+  Result:=true;
   SQLScript:=TZSQLProcessor.Create(nil);
   FOnExecuteSqlScriptProcessEvent:=OnExecuteSqlScriptProcessEvent;
   try
@@ -2891,7 +2892,10 @@ begin
     SQLScript.Execute;
   except
     on E:Exception do
+    begin
       InternalError(E.Message);
+      Result:=false;
+    end;
   end;
   FOnExecuteSqlScriptProcessEvent:=nil;
   SQLScript.Free;

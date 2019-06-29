@@ -882,7 +882,7 @@ type
     procedure SetSqlAssistentData(const List: TStrings); virtual;
     procedure FillCharSetList(const List: TStrings); virtual;
     procedure FillCollationList(const ACharSet:string; const List: TStrings); virtual;
-    procedure ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent); virtual;
+    function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):boolean; virtual;
     procedure RefreshObjectsBegin(const ASQLText:string);virtual;
     procedure RefreshObjectsEnd(const ASQLText:string);virtual;
 
@@ -1963,10 +1963,10 @@ begin
 
 end;
 
-procedure TSQLEngineAbstract.ExecuteSQLScript(const ASQL: string;
-  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent);
+function TSQLEngineAbstract.ExecuteSQLScript(const ASQL: string;
+  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent): boolean;
 begin
-
+  Result:=false;
 end;
 
 procedure TSQLEngineAbstract.RefreshObjectsBegin(const ASQLText:string);

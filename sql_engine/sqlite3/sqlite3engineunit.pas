@@ -294,7 +294,7 @@ type
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
 
-    procedure ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent); override;
+    function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
     procedure FillCharSetList(const List: TStrings); override;
     function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
@@ -1714,11 +1714,12 @@ begin
   RefreshObjectsEnd(sqlite3Text.sqlTables.Strings.Text);
 end;
 
-procedure TSQLEngineSQLite3.ExecuteSQLScript(const ASQL: string;
-  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent);
+function TSQLEngineSQLite3.ExecuteSQLScript(const ASQL: string;
+  OnExecuteSqlScriptProcessEvent: TExecuteSqlScriptProcessEvent): Boolean;
 var
   SQLScript: TZSQLProcessor;
 begin
+  Result:=true;
   SQLScript:=TZSQLProcessor.Create(nil);
   FOnExecuteSqlScriptProcessEvent:=OnExecuteSqlScriptProcessEvent;
   try
@@ -1728,7 +1729,10 @@ begin
     SQLScript.Execute;
   except
     on E:Exception do
+    begin
       InternalError(E.Message);
+      Result:=false;
+    end;
   end;
   FOnExecuteSqlScriptProcessEvent:=nil;
   SQLScript.Free;
