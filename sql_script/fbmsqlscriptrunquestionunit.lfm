@@ -1,0 +1,51 @@
+object fbmSQLScriptRunQuestionForm: TfbmSQLScriptRunQuestionForm
+  Left = 651
+  Height = 161
+  Top = 333
+  Width = 384
+  Caption = 'fbmSQLScriptRunQuestionForm'
+  ClientHeight = 161
+  ClientWidth = 384
+  LCLVersion = '2.1.0.0'
+  object RadioButton1: TRadioButton
+    Left = 5
+    Height = 22
+    Top = 12
+    Width = 109
+    Caption = 'Selected text'
+    Checked = True
+    TabOrder = 0
+  end
+  object RadioButton2: TRadioButton
+    Left = 5
+    Height = 22
+    Top = 40
+    Width = 60
+    Caption = 'all file'
+    TabOrder = 1
+  end
+  object RadioButton3: TRadioButton
+    Left = 5
+    Height = 22
+    Top = 71
+    Width = 88
+    Caption = 'list of files'
+    TabOrder = 2
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 42
+    Top = 113
+    Width = 372
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 3
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+end
