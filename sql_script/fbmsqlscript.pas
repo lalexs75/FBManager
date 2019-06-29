@@ -357,8 +357,15 @@ begin
     R:=0;
   if R<0 then Exit;
 
-//  exit;
-
+  if R = 3 then
+  begin
+    for FFileName in ListBox1.Items do
+      if not FileExists(FFileName) then
+      begin
+        ErrorBox(sFileNotFound, [FFileName]);
+        Exit;
+      end;
+  end;
 
   FStartTime:=Now;
   if Assigned(FCurDB) then
