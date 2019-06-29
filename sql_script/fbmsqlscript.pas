@@ -131,7 +131,7 @@ type
     procedure ReloadTree;
     procedure UpdateFileName;
     procedure UpdateTimer;
-    procedure bbUpdateScriptControls(ARun:boolean);
+    procedure UpdateScriptControls(ARun:boolean);
 
     function OTSelected:TStamentRecord;
     procedure ShowFilesList(AShow:boolean);
