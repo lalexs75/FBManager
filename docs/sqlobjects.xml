@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="sqlObjects"><element name="TIndexNullPos"><short>Положение null-значений (первые/последние)</short>
+      </element><element name="TIndexNullPos.inpDefault"><short>Null значения по умолчанию</short>
+      </element><element name="TIndexNullPos.inpFirst"><short>Null значения сначала</short>
+      </element><element name="TIndexNullPos.inpLast"><short>Null значения в конце</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

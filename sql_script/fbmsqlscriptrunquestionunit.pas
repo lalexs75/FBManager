@@ -16,8 +16,9 @@ type
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;
+    procedure FormCreate(Sender: TObject);
   private
-
+    procedure Localize;
   public
 
   end;
@@ -27,7 +28,24 @@ var
 
 implementation
 
+uses fbmStrConstUnit;
+
 {$R *.lfm}
+
+{ TfbmSQLScriptRunQuestionForm }
+
+procedure TfbmSQLScriptRunQuestionForm.FormCreate(Sender: TObject);
+begin
+  Localize;
+end;
+
+procedure TfbmSQLScriptRunQuestionForm.Localize;
+begin
+  Caption:=sConfirmExecute;
+  RadioButton1.Caption:=sExecuteSelectedPartOnly;
+  RadioButton2.Caption:=sExecuteEntireScript;
+  RadioButton3.Caption:=sExecuteAllFilesFromList;
+end;
 
 end.
 

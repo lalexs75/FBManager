@@ -1059,6 +1059,11 @@ resourcestring
   sConfirmExit                      = 'Confirm exit';
   sConfirmCompileObjectsDescription = 'Confirm compile objects description';
   sConfirmCompileObjectGrants       = 'Confirm compile object grants';
+  sConfirmExecute                   = 'Confirm execute';
+  sExecuteSelectedPartOnly          = 'Execute selected part only';
+  sExecuteEntireScript              = 'Execute entire script';
+  sExecuteAllFilesFromList          = 'Execute all files from list';
+
   sUseTableAlisInCreateSQLForm      = 'Use table name as alis in create SQL form';
   sShowResultGridOnFirstPage        = 'Show result grid on first page';
   sFetchAll                         = 'Fetch all';

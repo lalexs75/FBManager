@@ -542,6 +542,10 @@ msgstr ""
 msgid "Confirm compile objects description"
 msgstr ""
 
+#: fbmstrconstunit.sconfirmexecute
+msgid "Confirm execute"
+msgstr ""
+
 #: fbmstrconstunit.sconfirmexit
 msgid "Confirm exit"
 msgstr ""
@@ -1575,6 +1579,14 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
+#: fbmstrconstunit.sexecuteallfilesfromlist
+msgid "Execute all files from list"
+msgstr ""
+
+#: fbmstrconstunit.sexecuteentirescript
+msgid "Execute entire script"
+msgstr ""
+
 #: fbmstrconstunit.sexecutequery
 msgid "Execute query"
 msgstr ""
@@ -1591,6 +1603,10 @@ msgstr ""
 
 #: fbmstrconstunit.sexecutequeryhint
 msgid "Execute query from current editor"
+msgstr ""
+
+#: fbmstrconstunit.sexecuteselectedpartonly
+msgid "Execute selected part only"
 msgstr ""
 
 #: fbmstrconstunit.sexecutioncomplete

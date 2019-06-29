@@ -569,6 +569,10 @@ msgstr "Подтверждение компиляции прав на объек
 msgid "Confirm compile objects description"
 msgstr "Подтверждение компиляции описания объектов"
 
+#: fbmstrconstunit.sconfirmexecute
+msgid "Confirm execute"
+msgstr "Подтверждение исполнения"
+
 #: fbmstrconstunit.sconfirmexit
 msgid "Confirm exit"
 msgstr "Подтверждение выхода из программы"
@@ -1389,7 +1393,7 @@ msgstr "Диалог"
 
 #: fbmstrconstunit.sdirection
 msgid "Direction"
-msgstr ""
+msgstr "Направление"
 
 #: fbmstrconstunit.sdisableantialiased
 msgid "Disable antialiased"
@@ -1654,6 +1658,14 @@ msgstr "Время выполнения :"
 msgid "Execute"
 msgstr "Выполнить"
 
+#: fbmstrconstunit.sexecuteallfilesfromlist
+msgid "Execute all files from list"
+msgstr "Выполнить все файлы из списка"
+
+#: fbmstrconstunit.sexecuteentirescript
+msgid "Execute entire script"
+msgstr "Выполнить текущий файл скрипта"
+
 #: fbmstrconstunit.sexecutequery
 msgid "Execute query"
 msgstr "Выполнить запрос"
@@ -1671,6 +1683,10 @@ msgstr "Выполнить запрос и выбрать всё"
 #: fbmstrconstunit.sexecutequeryhint
 msgid "Execute query from current editor"
 msgstr "Выполнить запрос из текущего редактора"
+
+#: fbmstrconstunit.sexecuteselectedpartonly
+msgid "Execute selected part only"
+msgstr "Выполнить только выделенный участок"
 
 #: fbmstrconstunit.sexecutioncomplete
 #, object-pascal-format
@@ -2525,7 +2541,7 @@ msgstr "Имя языка"
 
 #: fbmstrconstunit.slargeobject
 msgid "LargeObject"
-msgstr ""
+msgstr "Большие объекты"
 
 #: fbmstrconstunit.slastname
 msgid "Last name"
@@ -2656,7 +2672,7 @@ msgstr "Ручной ввод"
 
 #: fbmstrconstunit.smaterializedview
 msgid "MaterializedView"
-msgstr ""
+msgstr "Материализованное представление"
 
 #: fbmstrconstunit.smaterializedviews
 msgid "Materialized View"
@@ -3189,11 +3205,11 @@ msgstr "Не контролировать ограничения"
 
 #: fbmstrconstunit.snullsfirst
 msgid "Nulls first"
-msgstr ""
+msgstr "Nulls вначале"
 
 #: fbmstrconstunit.snullslast
 msgid "Nulls last"
-msgstr ""
+msgstr "Nulls в конце"
 
 #: fbmstrconstunit.snullspos
 msgid "Nulls pos"

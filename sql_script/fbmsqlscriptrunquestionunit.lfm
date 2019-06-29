@@ -3,33 +3,46 @@ object fbmSQLScriptRunQuestionForm: TfbmSQLScriptRunQuestionForm
   Height = 161
   Top = 333
   Width = 384
-  Caption = 'fbmSQLScriptRunQuestionForm'
+  Caption = 'Confirm execute'
   ClientHeight = 161
   ClientWidth = 384
+  OnCreate = FormCreate
   LCLVersion = '2.1.0.0'
   object RadioButton1: TRadioButton
-    Left = 5
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
     Height = 22
-    Top = 12
-    Width = 109
-    Caption = 'Selected text'
+    Top = 6
+    Width = 197
+    BorderSpacing.Around = 6
+    Caption = 'Execute selected part only'
     Checked = True
     TabOrder = 0
+    TabStop = True
   end
   object RadioButton2: TRadioButton
-    Left = 5
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 22
-    Top = 40
-    Width = 60
-    Caption = 'all file'
+    Top = 34
+    Width = 158
+    BorderSpacing.Around = 6
+    Caption = 'Execute entire script'
     TabOrder = 1
   end
   object RadioButton3: TRadioButton
-    Left = 5
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 22
-    Top = 71
-    Width = 88
-    Caption = 'list of files'
+    Top = 62
+    Width = 182
+    BorderSpacing.Around = 6
+    Caption = 'Execute all files from list'
     TabOrder = 2
   end
   object ButtonPanel1: TButtonPanel
