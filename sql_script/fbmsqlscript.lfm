@@ -60,7 +60,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 36
+    Height = 35
     Top = 0
     Width = 759
     Items = <    
@@ -99,7 +99,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     CustomizeShortCut = True
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 36
+    ClientHeight = 35
     ClientWidth = 759
     TabOrder = 0
     object CheckBox1: TCheckBox
@@ -107,10 +107,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 605
-      Height = 23
-      Top = 7
-      Width = 143
+      Left = 607
+      Height = 22
+      Top = 6
+      Width = 141
       Action = vShowObjTree
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -125,7 +125,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideRight.Side = asrBottom
       Left = 380
       Height = 20
-      Top = 8
+      Top = 7
       Width = 374
       Anchors = [akTop, akLeft, akRight]
       Min = 1
@@ -149,7 +149,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Memo1: TMemo
     Left = 0
     Height = 90
-    Top = 600
+    Top = 599
     Width = 759
     Align = alBottom
     Lines.Strings = (
@@ -161,15 +161,15 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 595
+    Top = 594
     Width = 759
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 559
-    Top = 36
+    Height = 474
+    Top = 120
     Width = 121
     Align = alLeft
     ExpandSignSize = 16
@@ -183,16 +183,37 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 559
-    Top = 36
+    Height = 474
+    Top = 120
     Width = 5
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 21
-    Top = 690
+    Height = 22
+    Top = 689
     Width = 759
     Panels = <>
+  end
+  object ListBox1: TListBox
+    Left = 0
+    Height = 80
+    Top = 35
+    Width = 759
+    Align = alTop
+    ItemHeight = 0
+    OnClick = ListBox1Click
+    ScrollWidth = 757
+    TabOrder = 6
+    TopIndex = -1
+  end
+  object Splitter3: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 115
+    Width = 759
+    Align = alTop
+    ResizeAnchor = akTop
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain

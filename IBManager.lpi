@@ -1764,6 +1764,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="SSHConnectionPluginConfigUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="sql_script/fbmsqlscriptrunquestionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmSQLScriptRunQuestionForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmSQLScriptRunQuestionUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

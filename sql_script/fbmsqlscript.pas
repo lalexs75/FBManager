@@ -38,6 +38,7 @@ type
   { TFBMSqlScripForm }
 
   TFBMSqlScripForm = class(TForm)
+    ListBox1: TListBox;
     scriptStop: TAction;
     Label1: TLabel;
     MenuItem4: TMenuItem;
@@ -55,6 +56,7 @@ type
     PopupMenu3: TPopupMenu;
     ProgressBar1: TProgressBar;
     Splitter2: TSplitter;
+    Splitter3: TSplitter;
     StatusBar1: TStatusBar;
     Timer1: TTimer;
     TreeView1: TTreeView;
@@ -78,6 +80,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
     procedure objTreeCommentCmdExecute(Sender: TObject);
     procedure objTreeDeleteCmdExecute(Sender: TObject);
     procedure objTreeRefreshExecute(Sender: TObject);
@@ -113,6 +116,7 @@ type
     procedure UpdateScriptControls(ARun:boolean);
 
     function OTSelected:TStamentRecord;
+    procedure ShowFilesList(AShow:boolean);
   public
     procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
     procedure ChangeVisualParams;
@@ -124,7 +128,8 @@ var
 
 implementation
 uses IBManDataInspectorUnit, LCLProc, rxAppUtils, fbmStrConstUnit, rxlogging,
-  fbmUserDataBaseUnit, fbmRefreshObjTreeUnit, fbmSqlParserUnit, FBSQLEngineUnit;
+  fbmUserDataBaseUnit, fbmRefreshObjTreeUnit, fbmSqlParserUnit,
+  fbmSQLScriptRunQuestionUnit, FBSQLEngineUnit;
 
 {$R *.lfm}
 
@@ -160,11 +165,24 @@ end;
 
 procedure TFBMSqlScripForm.fileOpenExecute(Sender: TObject);
 begin
-  EditorFrame.edtOpen.Execute;
-  AddToRecent(EditorFrame.FileName);
-  UpdateFileName;
-  if vShowObjTree.Checked then
-    Timer1.Enabled:=true;
+  if EditorFrame.OpenDialog1.Execute then
+  begin
+    if EditorFrame.OpenDialog1.Files.Count > 1 then
+    begin
+      ShowFilesList(true);
+      ListBox1.Items.Assign(EditorFrame.OpenDialog1.Files);
+      EditorFrame.OpenFile(ListBox1.Items[0]);
+    end
+    else
+    begin
+      ShowFilesList(false);
+      EditorFrame.OpenFile(EditorFrame.OpenDialog1.FileName);
+      AddToRecent(EditorFrame.FileName);
+    end;
+    UpdateFileName;
+    if vShowObjTree.Checked then
+      Timer1.Enabled:=true;
+  end;
 end;
 
 procedure TFBMSqlScripForm.fileSaveAsExecute(Sender: TObject);
@@ -187,12 +205,29 @@ begin
   EditorFrame.OnGetKeyWordList:=@EditorFrameGetKeyWordList;
   EditorFrame.OnGetDBObjectByAlias:=@EditorFrameOnGetDBObjectByAlias;
   EditorFrame.TextEditor.OnKeyPress:=@TextEditorKeyPress;
+  EditorFrame.OpenDialog1.Options:=EditorFrame.OpenDialog1.Options + [ofAllowMultiSelect];
 
   Memo1.Lines.Clear;
   DoFillDatabaseList;
   DoConnectCurrentDB;
   ChangeVisualParams;
   UpdateTreeVisible;
+  ShowFilesList(false);
+end;
+
+procedure TFBMSqlScripForm.ListBox1Click(Sender: TObject);
+var
+  S: String;
+begin
+  if (ListBox1.Items.Count = 0) or (ListBox1.ItemIndex<0) or (ListBox1.ItemIndex>ListBox1.Items.Count-1) then Exit;
+  S:=ListBox1.Items[ListBox1.ItemIndex];
+  if FileExists(S) then
+  begin
+    EditorFrame.OpenFile(S);
+    UpdateFileName;
+  end
+  else
+    ErrorBox(sFileNotFound, [S]);
 end;
 
 procedure TFBMSqlScripForm.objTreeCommentCmdExecute(Sender: TObject);
@@ -256,40 +291,110 @@ begin
   end;
 end;
 
+procedure DoRunScript;
 var
   S: String;
-  FStartTime: TDateTime;
 begin
-  ObjRefresh:=TObjTreeRefresh.Create(FCurDB);
+  ProgressBar1.Position:=1;
+  try
+    CurCmd:=1;
+    S:=EditorFrame.TextEditor.SelText;
+    if S = '' then
+      S:=EditorFrame.TextEditor.Text;
+
+    DoParseScript(S);
+
+    EditorFrame.SQLEngine.ExecuteSQLScript(S, @OnExecuteSqlScriptProcessEvent);
+  except
+    on E:Exception do
+    begin
+      Memo1.Text:=E.Message;
+      FAbortExecute:=true;
+    end;
+  end;
+end;
+
+var
+  S, FFileName: String;
+  FStartTime: TDateTime;
+  R, i: Integer;
+begin
+  R:=-1;
+  ObjRefresh:=nil;
+
+  if (ListBox1.Visible and (ListBox1.Items.Count>0)) or (EditorFrame.TextEditor.SelText<>'') then
+  begin
+    fbmSQLScriptRunQuestionForm:=TfbmSQLScriptRunQuestionForm.Create(Application);
+    fbmSQLScriptRunQuestionForm.RadioButton1.Enabled:=EditorFrame.TextEditor.SelText<>'';
+    if (ListBox1.Visible and (ListBox1.Items.Count>0)) then
+    begin
+      fbmSQLScriptRunQuestionForm.RadioButton3.Checked:=true;
+    end
+    else
+    begin
+      fbmSQLScriptRunQuestionForm.RadioButton3.Enabled:=false;
+      if fbmSQLScriptRunQuestionForm.RadioButton1.Enabled then
+        fbmSQLScriptRunQuestionForm.RadioButton1.Checked:=true
+      else
+        fbmSQLScriptRunQuestionForm.RadioButton2.Checked:=true;
+    end;
+
+    if fbmSQLScriptRunQuestionForm.ShowModal = mrOK then
+    begin
+      if fbmSQLScriptRunQuestionForm.RadioButton3.Checked then
+        R:=3
+      else
+      if fbmSQLScriptRunQuestionForm.RadioButton2.Checked then
+        R:=2
+      else
+      if fbmSQLScriptRunQuestionForm.RadioButton1.Checked then
+        R:=1
+      ;
+    end;
+    fbmSQLScriptRunQuestionForm.Free;
+  end
+  else
+    R:=0;
+  if R<0 then Exit;
+
+//  exit;
+
+
   FStartTime:=Now;
   if Assigned(FCurDB) then
   begin
     FAbortExecute:=false;
     UpdateScriptControls(true);
+    ObjRefresh:=TObjTreeRefresh.Create(FCurDB);
     Memo1.Lines.Clear;
-    ProgressBar1.Position:=1;
-    try
-      CurCmd:=1;
 
-      S:=EditorFrame.TextEditor.SelText;
-      if S = '' then
-        S:=EditorFrame.TextEditor.Text;
 
-      DoParseScript(S);
-
-      EditorFrame.SQLEngine.ExecuteSQLScript(S, @OnExecuteSqlScriptProcessEvent);
-      ShowMessageFmt(sExecutionComplete, [TimeToStr(Now - FStartTime)]);
-    except
-      on E:Exception do
+    if R = 3 then
+    begin
+      for i:=0 to ListBox1.Items.Count-1 do
       begin
-        Memo1.Text:=E.Message;
+        ListBox1.ItemIndex:=I;
+        FFileName:=ListBox1.Items[i];
+        EditorFrame.OpenFile(FFileName);
+        UpdateFileName;
+        DoRunScript;
+        if FAbortExecute then Break;
       end;
-    end;
+    end
+    else
+      DoRunScript;
+    ;
+
     UpdateScriptControls(false);
   end;
   UpdateFileName;
-  ObjRefresh.Execute;
-  ObjRefresh.Free;
+
+  if Assigned(ObjRefresh) then
+  begin
+    ObjRefresh.Execute;
+    ObjRefresh.Free;
+  end;
+  ShowMessageFmt(sExecutionComplete, [TimeToStr(Now - FStartTime)]);
 end;
 
 procedure TFBMSqlScripForm.scriptStopExecute(Sender: TObject);
@@ -667,6 +772,7 @@ begin
   objTreeDeleteCmd.Enabled:=not ARun;
   objTreeShowDML.Enabled:=not ARun;
   objTreeRefresh.Enabled:=not ARun;
+  ListBox1.Enabled:=ListBox1.Visible and not ARun;
 end;
 
 function TFBMSqlScripForm.OTSelected: TStamentRecord;
@@ -675,6 +781,17 @@ begin
     Result:=TStamentRecord(TreeView1.Selected.Data)
   else
     Result:=nil;
+end;
+
+procedure TFBMSqlScripForm.ShowFilesList(AShow: boolean);
+begin
+  ListBox1.Visible:=AShow;
+  Splitter3.Visible:=AShow;
+  if AShow then
+  begin
+    Splitter3.Top:=ListBox1.Height;
+    ListBox1.Enabled:=true;
+  end;
 end;
 
 procedure TFBMSqlScripForm.LMEditorChangeParams(var message: TLMNoParams);
