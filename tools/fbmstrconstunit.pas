@@ -1432,7 +1432,7 @@ resourcestring
   sTransactionPropertyForScriptEditor          = 'Transaction property for script editor';
   sSSHConnectionTimeout                        = 'SSH connection timeout';
   sSSHConnectionLoginFiled                     = 'SSH connection login filed';
-
+  sErrorVariableDefenition                     = 'Error in variable defenition';
 implementation
 
 end.

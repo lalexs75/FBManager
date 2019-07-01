@@ -16,6 +16,7 @@ object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
     ColumnDefValues.BlobText = '(примечание)'
     TitleButtons = False
     AutoSort = True
+    OnGetCellProps = RxDBGrid2GetCellProps
     Columns = <    
       item
         Title.Alignment = taCenter
@@ -252,9 +253,14 @@ object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
         Name = 'VAR_DEV_VALUE'
         DataType = ftString
         Size = 250
+      end    
+      item
+        Name = 'IsError'
+        DataType = ftBoolean
       end>
     AfterOpen = rxLocalVarsAfterScroll
     AfterClose = rxLocalVarsAfterScroll
+    AfterEdit = rxLocalVarsAfterEdit
     AfterPost = rxLocalVarsAfterScroll
     AfterDelete = rxLocalVarsAfterScroll
     AfterScroll = rxLocalVarsAfterScroll
@@ -304,6 +310,16 @@ object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
       ReadOnly = False
       Required = False
       Size = 250
+    end
+    object rxLocalVarsIsError: TBooleanField
+      FieldKind = fkData
+      FieldName = 'IsError'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
     end
   end
   object PopupMenu3: TPopupMenu

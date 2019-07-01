@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -77,7 +77,7 @@ msgstr "Добавить поле"
 
 #: fbmstrconstunit.saddfile
 msgid "Add file"
-msgstr ""
+msgstr "Добавить файл"
 
 #: fbmstrconstunit.saddhint
 msgid "Add data"
@@ -1617,6 +1617,10 @@ msgstr "Параметры программы"
 msgctxt "fbmstrconstunit.serror"
 msgid "Error"
 msgstr "Ошибка"
+
+#: fbmstrconstunit.serrorvariabledefenition
+msgid "Error in variable defenition"
+msgstr "Ошибка объявления переменной"
 
 #: fbmstrconstunit.sevent
 msgid "Event"
@@ -4024,7 +4028,7 @@ msgstr "Удалить поле"
 
 #: fbmstrconstunit.sremovefile
 msgid "Remove file"
-msgstr ""
+msgstr "Удалить файл"
 
 #: fbmstrconstunit.srename
 #, object-pascal-format
@@ -5640,4 +5644,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

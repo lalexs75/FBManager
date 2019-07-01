@@ -25,7 +25,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, rxmemds, rxdbgrid, Forms, Controls, ActnList,
-  Menus, ComCtrls, db, sqlObjects, SQLEngineAbstractUnit, fdbm_SynEditorUnit;
+  Menus, ComCtrls, db, sqlObjects, SQLEngineAbstractUnit, fdbm_SynEditorUnit, Graphics;
 
 type
   TVarParRec = record
@@ -55,6 +55,7 @@ type
     PopupMenu3: TPopupMenu;
     RxDBGrid2: TRxDBGrid;
     rxLocalVars: TRxMemoryData;
+    rxLocalVarsIsError: TBooleanField;
     rxLocalVarsVAR_DESC: TStringField;
     rxLocalVarsVAR_DEV_VALUE: TStringField;
     rxLocalVarsVAR_NAME: TStringField;
@@ -70,6 +71,9 @@ type
     procedure lvDownExecute(Sender: TObject);
     procedure lvUpExecute(Sender: TObject);
     procedure RxDBGrid2ColEnter(Sender: TObject);
+    procedure RxDBGrid2GetCellProps(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor);
+    procedure rxLocalVarsAfterEdit(DataSet: TDataSet);
     procedure rxLocalVarsAfterScroll(DataSet: TDataSet);
   private
     FOwnerDB: TSQLEngineAbstract;
@@ -83,6 +87,7 @@ type
     function ParseSQL(SqlLine:string):string;
     procedure AddVariable(AVarName:string);
     property OwnerDB:TSQLEngineAbstract read FOwnerDB write FOwnerDB;
+    function Validate:boolean;
   end;
 
 implementation
@@ -151,6 +156,19 @@ begin
     FOwnerDB.TypeList.FillForTypes(P, true);
     FOwnerDB.FillDomainsList(P, false);
   end;
+end;
+
+procedure TfbmPGLocalVarsEditorFrame.RxDBGrid2GetCellProps(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor);
+begin
+  if rxLocalVarsIsError.AsBoolean then
+    Background:=clRed;
+end;
+
+procedure TfbmPGLocalVarsEditorFrame.rxLocalVarsAfterEdit(DataSet: TDataSet);
+begin
+  if rxLocalVarsIsError.AsBoolean then
+    rxLocalVarsIsError.AsBoolean:=false;
 end;
 
 procedure TfbmPGLocalVarsEditorFrame.rxLocalVarsAfterScroll(DataSet: TDataSet);
@@ -318,6 +336,30 @@ begin
     //rxLocalVarsVAR_DEV_VALUE.AsString:=LVP.Params[i].DefaultValue;
     rxLocalVars.Post;
   end;
+end;
+
+function TfbmPGLocalVarsEditorFrame.Validate: boolean;
+var
+  P: TBookMark;
+begin
+  Result:=true;
+  rxLocalVars.First;
+  while not rxLocalVars.EOF do
+  begin
+    if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) or (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then
+    begin
+      if Result then
+        P:=rxLocalVars.Bookmark;
+      rxLocalVars.Edit;
+      rxLocalVarsIsError.AsBoolean:=true;
+      rxLocalVars.Post;
+      Result:=false;
+    end;
+    rxLocalVars.Next;
+  end;
+
+  if not Result then
+    rxLocalVars.Bookmark:=P;
 end;
 
 end.

@@ -888,6 +888,14 @@ begin
   FParamModified:=false;
   if not (ASQLObject is TPGSQLCreateFunction) then exit;
 
+  if TabSheet3.TabVisible then
+    if not FLocalVars.Validate then
+    begin
+      PageControl1.ActivePage:=TabSheet3;
+      ErrorBox(sErrorVariableDefenition);
+      Exit;
+    end;
+
   if (DBObject.State = sdboEdit)  then
   begin
 

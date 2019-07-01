@@ -1539,6 +1539,10 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: fbmstrconstunit.serrorvariabledefenition
+msgid "Error in variable defenition"
+msgstr ""
+
 #: fbmstrconstunit.sevent
 msgid "Event"
 msgstr ""
