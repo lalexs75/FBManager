@@ -162,7 +162,7 @@ object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
     Align = alRight
     AutoSize = True
     Caption = 'ToolBar1'
-    Images = fbManagerMainForm.ImageListNormal
+    Images = fbManagerMainForm.ImageListMain
     TabOrder = 1
     object ToolButton7: TToolButton
       Left = 1

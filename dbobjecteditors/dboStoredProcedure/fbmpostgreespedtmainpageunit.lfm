@@ -19,9 +19,9 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     Height = 219
     Top = 0
     Width = 917
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alTop
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Declaration'
@@ -289,9 +289,9 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       ClientWidth = 907
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 186
+        Height = 188
         Top = 0
-        Width = 844
+        Width = 883
         ColumnDefValues.BlobText = '(примечание)'
         TitleButtons = False
         AutoSort = True
@@ -397,7 +397,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Desc'
-            Width = 235
+            Width = 263
             FieldName = 'Desc'
             EditButtons = <>
             Filter.Font.Style = [fsItalic]
@@ -486,13 +486,14 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         OnKeyDown = RxDBGrid1KeyDown
       end
       object ToolBar1: TToolBar
-        Left = 844
-        Height = 186
+        Left = 883
+        Height = 188
         Top = 0
         Width = 24
         Align = alRight
         AutoSize = True
         Caption = 'ToolBar1'
+        Images = fbManagerMainForm.ImageListMain
         TabOrder = 1
         object ToolButton1: TToolButton
           Left = 1
@@ -512,7 +513,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         object ToolButton4: TToolButton
           Left = 1
           Top = 68
-          Width = 8
+          Width = 23
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end
