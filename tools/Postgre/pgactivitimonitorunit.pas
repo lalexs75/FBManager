@@ -446,7 +446,7 @@ begin
     rxStatInfo.AppendRecord([sBlkReadTime, quDBStat.FieldByName('blk_read_time').AsString]);          //Время, затраченное серверными процессами в этой базе данных, на чтение блоков из файлов данных, в миллисекундах
     rxStatInfo.AppendRecord([sBlkWriteTime, quDBStat.FieldByName('blk_write_time').AsString]);        //Время, затраченное серверными процессами в этой базе данных, на запись блоков в файлы данных, в миллисекундах
     rxStatInfo.AppendRecord([sStatsDateTime, quDBStat.FieldByName('stats_reset').AsString]);                     //Последнее время сброса этих статистических данных
-    rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(quDBStat.FieldByName('database_size').AsInteger)]);  //Объём, который занимает на диске база данных с заданным OID
+    rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(quDBStat.FieldByName('database_size').AsLargeInt)]);  //Объём, который занимает на диске база данных с заданным OID
   end;
   quDBStat.Close;
 end;
