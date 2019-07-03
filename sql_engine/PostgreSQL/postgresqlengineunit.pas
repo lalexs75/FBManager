@@ -327,6 +327,7 @@ type
     procedure SetSchemaId(const AValue: integer);
   protected
     function InternalGetDDLCreate: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
@@ -3290,6 +3291,14 @@ begin
   end;
 end;
 
+procedure TPGSchema.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FSchemaId));
+{  if Assigned(FPGTableSpace) then
+    Statistic.AddValue(sTableSpace, FPGTableSpace.Caption);}
+end;
+
 function TPGSchema.GetObjectType: string;
 begin
   Result:='Schema';
@@ -3717,10 +3726,10 @@ begin
   FQuery.ParamByName('oid').AsInteger:=FOID;
   FQuery.Open;
 
-  Statistic.AddValue(sTotalSize, IntToStr(FQuery.FieldByName('total').AsInteger));
-  Statistic.AddValue(sIndexSize, IntToStr(FQuery.FieldByName('INDEX').AsInteger));
-  Statistic.AddValue(sToastSize, IntToStr(FQuery.FieldByName('toast').AsInteger));
-  Statistic.AddValue(sTableSize, IntToStr(FQuery.FieldByName('total').AsInteger - FQuery.FieldByName('INDEX').AsInteger - FQuery.FieldByName('toast').AsInteger));
+  Statistic.AddValue(sTotalSize, RxPrettySizeName(FQuery.FieldByName('total').AsInteger));
+  Statistic.AddValue(sIndexSize, RxPrettySizeName(FQuery.FieldByName('INDEX').AsInteger));
+  Statistic.AddValue(sToastSize, RxPrettySizeName(FQuery.FieldByName('toast').AsInteger));
+  Statistic.AddValue(sTableSize, RxPrettySizeName(FQuery.FieldByName('total').AsInteger - FQuery.FieldByName('INDEX').AsInteger - FQuery.FieldByName('toast').AsInteger));
   Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
   Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
 
