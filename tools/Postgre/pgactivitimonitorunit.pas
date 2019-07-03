@@ -161,7 +161,8 @@ type
 procedure ShowpgActivitiMonitorForm;
 implementation
 
-uses IBManMainUnit, fbmStrConstUnit, fbmToolsUnit, IBManDataInspectorUnit;
+uses IBManMainUnit, fbmStrConstUnit, fbmToolsUnit, IBManDataInspectorUnit,
+  rxstrutils;
 
 {$R *.lfm}
 
@@ -439,11 +440,13 @@ begin
     rxStatInfo.AppendRecord([sRowCountDeleted, quDBStat.FieldByName('tup_deleted').AsString]);        //Количество строк, удалённое запросами в этой базе данных
     rxStatInfo.AppendRecord([sConflicts, quDBStat.FieldByName('conflicts').AsString]);                //Количество запросов, отменённых из-за конфликта с восстановлением в этой базе данных. (Конфликты происходят только на резервных серверах; более подробно смотрите pg_stat_database_conflicts.)
     rxStatInfo.AppendRecord([sTempFiles, quDBStat.FieldByName('temp_files').AsString]);               //Количество временных файлов, созданных запросами в этой базе данных. Подсчитываются все временные файлы независимо от причины их создания (например, для сортировки или для хеширования) и независимо от установленного значения log_temp_files
-    rxStatInfo.AppendRecord([sTempBytes, quDBStat.FieldByName('temp_bytes').AsString]);               //Общий объём данных, записанных во временные файлы запросами в этой базе данных. Учитываются все временные файлы, вне зависимости от того, по какой причине они созданы и вне зависимости от значения log_temp_files.
+    //rxStatInfo.AppendRecord([sTempBytes, quDBStat.FieldByName('temp_bytes').AsString]);               //Общий объём данных, записанных во временные файлы запросами в этой базе данных. Учитываются все временные файлы, вне зависимости от того, по какой причине они созданы и вне зависимости от значения log_temp_files.
+    rxStatInfo.AppendRecord([sTempBytes, RxPrettySizeName(quDBStat.FieldByName('temp_bytes').AsInteger)]);               //Общий объём данных, записанных во временные файлы запросами в этой базе данных. Учитываются все временные файлы, вне зависимости от того, по какой причине они созданы и вне зависимости от значения log_temp_files.
     rxStatInfo.AppendRecord([sDeadlocks, quDBStat.FieldByName('deadlocks').AsString]);                //Количество взаимных блокировок, зафиксированное в этой базе данных
     rxStatInfo.AppendRecord([sBlkReadTime, quDBStat.FieldByName('blk_read_time').AsString]);          //Время, затраченное серверными процессами в этой базе данных, на чтение блоков из файлов данных, в миллисекундах
     rxStatInfo.AppendRecord([sBlkWriteTime, quDBStat.FieldByName('blk_write_time').AsString]);        //Время, затраченное серверными процессами в этой базе данных, на запись блоков в файлы данных, в миллисекундах
-    rxStatInfo.AppendRecord([sStatsDateTime, quDBStat.FieldByName('stats_reset').AsString]);          //Последнее время сброса этих статистических данных
+    rxStatInfo.AppendRecord([sStatsDateTime, quDBStat.FieldByName('stats_reset').AsString]);                     //Последнее время сброса этих статистических данных
+    rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(quDBStat.FieldByName('database_size').AsInteger)]);  //Объём, который занимает на диске база данных с заданным OID
   end;
   quDBStat.Close;
 end;

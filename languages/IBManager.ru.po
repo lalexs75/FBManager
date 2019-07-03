@@ -4684,6 +4684,10 @@ msgstr "Кол-во записей для статистики"
 msgid "Stats date"
 msgstr "Последнее время сброса этих статистических данных"
 
+#: fbmstrconstunit.sstatsdbsize
+msgid "Database zise"
+msgstr "Объём базы данных на диске"
+
 #: fbmstrconstunit.sstatus
 msgctxt "fbmstrconstunit.sstatus"
 msgid "Status"
