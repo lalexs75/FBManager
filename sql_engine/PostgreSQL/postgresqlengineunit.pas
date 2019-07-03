@@ -3727,10 +3727,10 @@ begin
   FQuery.ParamByName('oid').AsInteger:=FOID;
   FQuery.Open;
 
-  Statistic.AddValue(sTotalSize, RxPrettySizeName(FQuery.FieldByName('total').AsInteger));
-  Statistic.AddValue(sIndexSize, RxPrettySizeName(FQuery.FieldByName('INDEX').AsInteger));
-  Statistic.AddValue(sToastSize, RxPrettySizeName(FQuery.FieldByName('toast').AsInteger));
-  Statistic.AddValue(sTableSize, RxPrettySizeName(FQuery.FieldByName('total').AsInteger - FQuery.FieldByName('INDEX').AsInteger - FQuery.FieldByName('toast').AsInteger));
+  Statistic.AddValue(sTotalSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt));
+  Statistic.AddValue(sIndexSize, RxPrettySizeName(FQuery.FieldByName('INDEX').AsLargeInt));
+  Statistic.AddValue(sToastSize, RxPrettySizeName(FQuery.FieldByName('toast').AsLargeInt));
+  Statistic.AddValue(sTableSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt - FQuery.FieldByName('INDEX').AsLargeInt - FQuery.FieldByName('toast').AsLargeInt));
   Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
   Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
 
@@ -5866,7 +5866,7 @@ begin
     FQuery.Open;
     if FQuery.RecordCount>0 then
     begin;
-      Statistic.AddValue(sStatsCallCount, RxPrettySizeName(FQuery.FieldByName('calls').AsInteger));
+      Statistic.AddValue(sStatsCallCount, RxPrettySizeName(FQuery.FieldByName('calls').AsLargeInt));
       Statistic.AddValue(sStatsFullTime, FQuery.FieldByName('total_time').AsString);
       Statistic.AddValue(sStatsFunctionTime, FQuery.FieldByName('self_time').AsString);
     end;
