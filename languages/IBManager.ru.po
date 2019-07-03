@@ -4680,6 +4680,10 @@ msgstr "Кол-во страниц для статистики"
 msgid "Record count for statistic"
 msgstr "Кол-во записей для статистики"
 
+#: fbmstrconstunit.sstatscallcount
+msgid "Call count"
+msgstr ""
+
 #: fbmstrconstunit.sstatsdatetime
 msgid "Stats date"
 msgstr "Последнее время сброса этих статистических данных"
@@ -4687,6 +4691,14 @@ msgstr "Последнее время сброса этих статистиче
 #: fbmstrconstunit.sstatsdbsize
 msgid "Database zise"
 msgstr "Объём базы данных на диске"
+
+#: fbmstrconstunit.sstatsfulltime
+msgid "Full time"
+msgstr ""
+
+#: fbmstrconstunit.sstatsfunctiontime
+msgid "Function time"
+msgstr ""
 
 #: fbmstrconstunit.sstatus
 msgctxt "fbmstrconstunit.sstatus"
@@ -5648,3 +5660,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

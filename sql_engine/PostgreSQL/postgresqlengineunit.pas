@@ -718,6 +718,7 @@ type
     function GetCaptionFullPatch:string; override;
     function InternalGetDDLCreate: string; override;
     function GetEnableRename: boolean; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -5850,6 +5851,30 @@ end;
 function TPGFunction.GetEnableRename: boolean;
 begin
   Result:=true;
+end;
+
+procedure TPGFunction.InternalRefreshStatistic;
+var
+  FQuery: TZQuery;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat2_Functions']);
+  FQuery.ParamByName('funcid').AsInteger:=FOID;
+  try
+    FQuery.Open;
+    if FQuery.RecordCount>0 then
+    begin;
+      Statistic.AddValue(sStatsCallCount, RxPrettySizeName(FQuery.FieldByName('calls').AsInteger));
+      Statistic.AddValue(sStatsFullTime, FQuery.FieldByName('total_time').AsString);
+      Statistic.AddValue(sStatsFunctionTime, FQuery.FieldByName('self_time').AsString);
+    end;
+
+  finally
+    FQuery.Close;
+    FQuery.Free;
+  end;
 end;
 
 constructor TPGFunction.Create(const ADBItem: TDBItem;

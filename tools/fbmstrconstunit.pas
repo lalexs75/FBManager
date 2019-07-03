@@ -1396,6 +1396,10 @@ resourcestring
   sRowCountUpdated                  = 'Rows count updated';
   sRowCountDeleted                  = 'Rows count deleted';
   sStatsDBSize                      = 'Database zise';
+  sStatsCallCount                   = 'Call count';
+  sStatsFullTime                    = 'Full time';
+  sStatsFunctionTime                = 'Function time';
+
 
   sBlksHit                          = 'Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system''s file system cache)';
   sTupReturned                      = 'Number of rows returned by queries in this database';

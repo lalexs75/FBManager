@@ -185,7 +185,7 @@ begin
   RegisterObjEditor(TPGDomain,
     [TfbmDomainMainEditorFrame, TfbmObjectEditorDescriptionFrame],
     [TfbmDomainMainEditorFrame, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
-     TfbmDDLPage]);
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGRule,
     [TPGRuleEditorPage, TfbmObjectEditorDescriptionFrame],
@@ -204,7 +204,7 @@ begin
     [TfbmViewEditorMainFrame, TfbmObjectEditorDescriptionFrame],
     [TfbmViewEditorMainFrame, TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame,
      TPGRuleListPage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
-     TfbmDDLPage]);
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGMatView,
     [TfbmViewEditorMainFrame, TfbmObjectEditorDescriptionFrame],
@@ -215,23 +215,25 @@ begin
 
   RegisterObjEditor(TPGSequence,
     [Tfbm_pgEditSequencePage, TfbmObjectEditorDescriptionFrame],
-    [Tfbm_pgEditSequencePage, TDependenciesFrame, TfbmpgACLEditEditor,
-     TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+    [Tfbm_pgEditSequencePage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+    TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGTrigger,
     [TpgTriggerEditorPage, TfbmObjectEditorDescriptionFrame],
     [TpgTriggerEditorPage, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
-     TfbmDDLPage]);
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGEventTrigger,
     [TpgEventTriggerEditorPage, TfbmObjectEditorDescriptionFrame],
-    [TpgEventTriggerEditorPage, TDependenciesFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+    [TpgEventTriggerEditorPage, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame, TfbmDDLPage]
     );
 
   RegisterObjEditor(TPGFunction,
     [TfbmPostGreeFunctionEdtMainPage, TfbmObjectEditorDescriptionFrame],
     [TfbmPostGreeFunctionEdtMainPage, TDependenciesFrame, TfbmpgACLEditEditor,
-     TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+     TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGIndex,
     [TpgIndexEditorPage, TfbmObjectEditorDescriptionFrame],
@@ -245,8 +247,8 @@ begin
 
   RegisterObjEditor(TPGTableSpace,
     [TpgTableSpaceEditorPage, TfbmObjectEditorDescriptionFrame],
-    [TpgTableSpaceEditorPage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmTableStatisticFrame,
-     TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+    [TpgTableSpaceEditorPage, TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGUser,
     [TfbmUserEditorForm, TfbmObjectEditorDescriptionFrame],

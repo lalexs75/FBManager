@@ -1448,6 +1448,17 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_class.oid = :oid'
           ''
         )
+      end    
+      item
+        Caption = 'Stat2_Functions'
+        Lines.Strings = (
+          'SELECT'
+          '  pg_stat_user_functions.*'
+          'FROM'
+          '  pg_stat_user_functions'
+          'WHERE'
+          '  pg_stat_user_functions.funcid = :funcid'
+        )
       end>
     Left = 968
     Top = 32
