@@ -21,7 +21,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
     TabOrder = 0
     object ToolPanel1: TToolPanel
       Left = 1
-      Height = 36
+      Height = 34
       Top = 1
       Width = 678
       Items = <      
@@ -121,15 +121,15 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       CustomizeShortCut = False
       Align = alTop
       BorderWidth = 4
-      ClientHeight = 36
+      ClientHeight = 34
       ClientWidth = 678
       TabOrder = 0
     end
   end
   object ListBox1: TListBox
     Left = 0
-    Height = 526
-    Top = 43
+    Height = 523
+    Top = 46
     Width = 100
     Align = alLeft
     ItemHeight = 0
@@ -140,19 +140,19 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   end
   object Splitter1: TSplitter
     Left = 100
-    Height = 526
-    Top = 43
+    Height = 523
+    Top = 46
     Width = 5
   end
   object Panel1: TPanel
     Left = 0
-    Height = 43
+    Height = 46
     Top = 0
     Width = 912
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 43
+    ClientHeight = 46
     ClientWidth = 912
     TabOrder = 3
     object Label1: TLabel
@@ -160,9 +160,9 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideBottom.Control = Edit1
       AnchorSideBottom.Side = asrBottom
       Left = 6
-      Height = 19
-      Top = 18
-      Width = 83
+      Height = 17
+      Top = 23
+      Width = 76
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Object name'
@@ -174,10 +174,10 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 95
-      Height = 31
+      Left = 88
+      Height = 34
       Top = 6
-      Width = 811
+      Width = 818
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       Color = clMoneyGreen

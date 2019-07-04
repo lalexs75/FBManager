@@ -1138,6 +1138,8 @@ begin
     if not DBObject.RenameObject(ANewName) then Exit;
     DBObject.RefreshObject;
     Caption:=DBObject.Caption;
+    if Assigned(ObjectEditor) then
+      TfbmDBObjectEditorForm(ObjectEditor).RefreshPages;
   end
   else
     Caption:=ANewName;

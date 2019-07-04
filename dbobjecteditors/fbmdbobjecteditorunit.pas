@@ -93,7 +93,6 @@ type
     procedure LMNotyfyDelObject(var Message: TLMessage); message LM_NOTIFY_OBJECT_DELETE;
 
     procedure RecreatePages;
-    procedure RefreshPages;
     procedure MakeWindowIcon;
     procedure Localize;
     procedure SetInspectorRecord(AValue: TDBInspectorRecord);
@@ -105,6 +104,7 @@ type
     procedure SetPageNum(APageNum:integer);
     procedure SendCmd(PageAction:TEditorPageAction);
     procedure UpdateActions;
+    procedure RefreshPages;
 
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
     procedure RestoreState(const ObjName:string; const Ini:TIniFile);
