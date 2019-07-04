@@ -647,6 +647,7 @@ type
     function InternalGetDDLCreate: string;override;
     function GetTableName: string;override;
     procedure SetActive(const AValue: boolean); override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -682,6 +683,7 @@ type
   protected
     function InternalGetDDLCreate: string;override;
     procedure SetActive(const AValue: boolean); override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -1513,6 +1515,12 @@ begin
       FActive:=AValue;
     FCmd.Free;
   end;}
+end;
+
+procedure TPGEventTrigger.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
 end;
 
 constructor TPGEventTrigger.Create(const ADBItem: TDBItem;
@@ -5241,6 +5249,18 @@ begin
       FActive:=AValue;
     FCmd.Free;
   end;
+end;
+
+procedure TPGTrigger.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sOIDFunction, IntToStr(FTrigSPId));
+  if Assigned(FTriggerSP) then
+    Statistic.AddValue(sFunctionName, FTriggerSP.CaptionFullPatch);
+  Statistic.AddValue(sOIDTable, IntToStr(FTrigTableId));
+  if Assigned(FTriggerTable) then
+    Statistic.AddValue(sTableName, FTriggerTable.CaptionFullPatch);
 end;
 
 constructor TPGTrigger.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject

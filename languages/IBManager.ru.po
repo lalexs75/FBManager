@@ -3304,6 +3304,14 @@ msgstr ""
 msgid "Databases"
 msgstr "Базы данных"
 
+#: fbmstrconstunit.soidfunction
+msgid "Function OID"
+msgstr ""
+
+#: fbmstrconstunit.soidtable
+msgid "Table OID"
+msgstr ""
+
 #: fbmstrconstunit.soieditdbregistration
 msgctxt "fbmstrconstunit.soieditdbregistration"
 msgid "Edit DB registration record"
