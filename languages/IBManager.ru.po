@@ -4916,6 +4916,10 @@ msgstr "Табличные пространства"
 msgid "Table space name"
 msgstr "Имя табличного пространства"
 
+#: fbmstrconstunit.stablespacesize
+msgid "Table space size"
+msgstr ""
+
 #: fbmstrconstunit.stargetcpu
 msgid "Target CPU : "
 msgstr "Целевой процессор : "

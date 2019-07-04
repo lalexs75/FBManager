@@ -2205,10 +2205,19 @@ begin
 end;
 
 procedure TPGTableSpace.InternalRefreshStatistic;
+var
+  Q: TZQuery;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sFileFolder, FFolderName);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery('select pg_tablespace_size('+IntToStr(FOID)+') as TableSpaceSize');
+  Q.Open;
+  if Q.RecordCount>0 then
+  begin
+    Statistic.AddValue(sTableSpaceSize, RxPrettySizeName(Q.FieldByName('TableSpaceSize').AsLargeInt));
+  end;
+  Q.Free;
 end;
 
 constructor TPGTableSpace.Create(const ADBItem: TDBItem;

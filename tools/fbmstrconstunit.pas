@@ -1351,6 +1351,7 @@ resourcestring
 
 
   sTableSpaceName                   = 'Table space name';
+  sTableSpaceSize                   = 'Table space size';
   sFileFolder                       = 'File folder';
   sMoveUpHint                       = 'Move fields up...';
   sMoveDownHint                     = 'Move fields down...';
