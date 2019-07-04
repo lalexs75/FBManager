@@ -562,7 +562,8 @@ begin
     if Assigned(G) then
     begin
       G.FObjectList.Extract(R);
-      G.DBObject:=nil;
+      R.DBObject:=nil;
+      //G.DBObject:=nil;
     end;
     R.Free;
   end;
