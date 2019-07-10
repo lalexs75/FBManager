@@ -246,7 +246,6 @@ end;
 procedure TFBMSqlScripForm.FormCreate(Sender: TObject);
 begin
   Localize;
-  UpdateScriptControls(false);
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=Self;
 //  EditorFrame.OnLoadFileEdit:=@OnLoadFile;
@@ -263,6 +262,7 @@ begin
   DoConnectCurrentDB;
   ChangeVisualParams;
   UpdateTreeVisible;
+  UpdateScriptControls(false);
   ShowFilesList(false);
 end;
 
@@ -824,6 +824,8 @@ begin
 end;
 
 procedure TFBMSqlScripForm.UpdateScriptControls(ARun: boolean);
+var
+  M: TMenuItem;
 begin
   scriptRun.Enabled:=not ARun;
   scriptStop.Enabled:=ARun;
@@ -843,6 +845,11 @@ begin
   flDown.Enabled:=not ARun;
   flRemove.Enabled:=not ARun;
   flAdd.Enabled:=not ARun;
+
+  for M in PopupMenu1.Items do
+    M.Enabled:=not ARun;
+//  dbConnection.Visible:=not ARun;
+  EditorFrame.ReadOnly:=ARun;
   ListBox1.Enabled:=Panel1.Visible and not ARun;
   if Panel1.Visible and (not ARun) then
     UpdateFileListActions;
