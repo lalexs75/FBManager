@@ -538,7 +538,7 @@ begin
     M.Caption:=TDBInspectorRecord(fbManDataInpectorForm.DBList[i]).Caption;
     M.OnClick:=@DBMenuClick;
     M.Tag:=i;
-    M.ImageIndex:=1 +ord(TDataBaseRecord(fbManDataInpectorForm.DBList[i]).Connected);
+    M.ImageIndex:=1 + ord(not TDataBaseRecord(fbManDataInpectorForm.DBList[i]).Connected);
     PopupMenu1.Items.Add(M);
   end;
 end;
@@ -848,7 +848,6 @@ begin
 
   for M in PopupMenu1.Items do
     M.Enabled:=not ARun;
-//  dbConnection.Visible:=not ARun;
   EditorFrame.ReadOnly:=ARun;
   ListBox1.Enabled:=Panel1.Visible and not ARun;
   if Panel1.Visible and (not ARun) then
