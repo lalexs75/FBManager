@@ -58,6 +58,7 @@ type
     rxFieldListDefValue: TStringField;
     rxFieldListFieldName: TStringField;
     rxFieldListFieldSize: TLongintField;
+    rxFieldListNotNull: TBooleanField;
     rxFieldListSkipEmpty: TBooleanField;
     RxIniPropStorage1: TRxIniPropStorage;
     sCellEdit1: TsCellEdit;
@@ -96,6 +97,7 @@ type
     function SaveToTable:boolean;
     procedure Localize;
     procedure PMFieldClick(Sender: TObject);
+    function ValidateDate:boolean;
   public
     constructor CreateImportForm(ATable:TDBTableObject);
     function SaveData:boolean;
@@ -121,7 +123,11 @@ procedure TImportDataForm.FormCloseQuery(Sender: TObject; var CanClose: boolean
   );
 begin
   if ModalResult = mrOK then
-    CanClose:=SaveData;
+  begin
+    CanClose:=ValidateDate;
+    if CanClose then
+      CanClose:=SaveData;
+  end;
 end;
 
 procedure TImportDataForm.rxFieldListAfterOpen(DataSet: TDataSet);
@@ -288,11 +294,17 @@ begin
     rxFieldListDataType.AsInteger:=0;
     rxFieldListFieldSize.AsInteger:=F.FieldSize;
     rxFieldListSkipEmpty.AsBoolean:=false;
+
+    if Assigned(F.FieldDomain) then
+      rxFieldListNotNull.AsBoolean:=F.FieldDomain.NotNull
+    else
+      rxFieldListNotNull.AsBoolean:=F.FieldNotNull;
+
     rxFieldList.Post;
 
     M:=TMenuItem.Create(PopupMenu1);
     PopupMenu1.Items.Add(M);
-    M.Caption:='Field : ' + F.FieldName;
+    M.Caption:=sField + ' : ' + F.FieldName;
     M.Tag:=I;
     M.OnClick:=@PMFieldClick;
   end;
@@ -475,6 +487,7 @@ begin
   RxDBGrid1.ColumnByFieldName('DataType').Title.Caption:=sDataType;
   RxDBGrid1.ColumnByFieldName('DefValue').Title.Caption:=sDefaultValue;
   RxDBGrid1.ColumnByFieldName('SkipEmpty').Title.Caption:=sSkipEmpty;
+  RxDBGrid1.ColumnByFieldName('NotNull').Title.Caption:=sNotNull;
 end;
 
 procedure TImportDataForm.PMFieldClick(Sender: TObject);
@@ -489,6 +502,25 @@ begin
       rxFieldList.Post;
     end;
   end;
+end;
+
+function TImportDataForm.ValidateDate: boolean;
+begin
+  rxFieldList.First;
+  while not rxFieldList.EOF do
+  begin
+    if rxFieldListNotNull.AsBoolean then
+    begin
+      if (rxFieldListColName.AsString = '') and (rxFieldListDefValue.AsString = '') then
+      begin
+        ErrorBox('Fill values for not null collumn');
+        Exit(false);
+      end;
+    end;
+    rxFieldList.Next;
+  end;
+  rxFieldList.First;
+  Result:=true;
 end;
 
 constructor TImportDataForm.CreateImportForm(ATable: TDBTableObject);

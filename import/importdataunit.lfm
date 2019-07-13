@@ -1,11 +1,12 @@
 object ImportDataForm: TImportDataForm
   Left = 411
-  Height = 666
-  Top = 94
-  Width = 948
+  Height = 676
+  Top = 70
+  Width = 928
   Caption = 'Import data...'
-  ClientHeight = 666
-  ClientWidth = 948
+  ClientHeight = 676
+  ClientWidth = 928
+  DesignTimePPI = 94
   OnCloseQuery = FormCloseQuery
   Position = poScreenCenter
   SessionProperties = 'FileNameEdit1.Text;SpinEdit1.Value;SpinEdit2.Value;RadioGroup1.ItemIndex'
@@ -14,9 +15,9 @@ object ImportDataForm: TImportDataForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 18
+    Height = 17
     Top = 6
-    Width = 96
+    Width = 95
     BorderSpacing.Around = 6
     Caption = 'Import data file'
     ParentColor = False
@@ -25,8 +26,8 @@ object ImportDataForm: TImportDataForm
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 42
-    Top = 618
-    Width = 936
+    Top = 628
+    Width = 916
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
     HelpButton.Name = 'HelpButton'
@@ -43,10 +44,10 @@ object ImportDataForm: TImportDataForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = PageControl1
-    Left = 894
-    Height = 30
-    Top = 28
-    Width = 48
+    Left = 875
+    Height = 29
+    Top = 27
+    Width = 47
     Action = actOpen
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -63,18 +64,18 @@ object ImportDataForm: TImportDataForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Splitter2
     Left = 0
-    Height = 543
-    Top = 64
-    Width = 948
-    ActivePage = TabSheet1
+    Height = 555
+    Top = 62
+    Width = 928
+    ActivePage = TabSheet2
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Params'
-      ClientHeight = 507
-      ClientWidth = 942
+      ClientHeight = 520
+      ClientWidth = 922
       ParentFont = False
       object RadioGroup1: TRadioGroup
         AnchorSideLeft.Control = SpinEdit1
@@ -82,10 +83,10 @@ object ImportDataForm: TImportDataForm
         AnchorSideTop.Control = TabSheet1
         AnchorSideBottom.Control = SpinEdit2
         AnchorSideBottom.Side = asrBottom
-        Left = 202
-        Height = 70
+        Left = 196
+        Height = 68
         Top = 0
-        Width = 200
+        Width = 193
         Anchors = [akTop, akLeft, akBottom]
         AutoFill = True
         AutoSize = True
@@ -97,8 +98,8 @@ object ImportDataForm: TImportDataForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 50
-        ClientWidth = 196
+        ClientHeight = 49
+        ClientWidth = 189
         ItemIndex = 1
         Items.Strings = (
           'Import data'
@@ -112,9 +113,9 @@ object ImportDataForm: TImportDataForm
         AnchorSideBottom.Control = SpinEdit1
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 18
+        Height = 17
         Top = 18
-        Width = 110
+        Width = 106
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Skip before rows'
@@ -126,10 +127,10 @@ object ImportDataForm: TImportDataForm
         AnchorSideLeft.Control = Label2
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Side = asrBottom
-        Left = 122
-        Height = 28
+        Left = 118
+        Height = 27
         Top = 8
-        Width = 74
+        Width = 72
         BorderSpacing.Around = 6
         OnChange = SpinEdit1Change
         ParentFont = False
@@ -141,9 +142,9 @@ object ImportDataForm: TImportDataForm
         AnchorSideBottom.Control = SpinEdit2
         AnchorSideBottom.Side = asrBottom
         Left = 5
-        Height = 18
-        Top = 52
-        Width = 98
+        Height = 17
+        Top = 51
+        Width = 94
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 5
         Caption = 'Skip after rows'
@@ -156,10 +157,10 @@ object ImportDataForm: TImportDataForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = SpinEdit1
         AnchorSideTop.Side = asrBottom
-        Left = 122
-        Height = 28
-        Top = 42
-        Width = 74
+        Left = 118
+        Height = 27
+        Top = 41
+        Width = 72
         BorderSpacing.Around = 6
         OnChange = SpinEdit1Change
         ParentFont = False
@@ -168,16 +169,17 @@ object ImportDataForm: TImportDataForm
       object CheckBox1: TCheckBox
         Left = 5
         Height = 22
-        Top = 113
-        Width = 101
+        Top = 111
+        Width = 96
         Caption = 'CheckBox1'
+        ParentFont = False
         TabOrder = 3
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Collumns'
-      ClientHeight = 507
-      ClientWidth = 942
+      ClientHeight = 520
+      ClientWidth = 922
       ParentFont = False
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet2
@@ -185,7 +187,7 @@ object ImportDataForm: TImportDataForm
         Left = 6
         Height = 17
         Top = 6
-        Width = 115
+        Width = 117
         BorderSpacing.Around = 6
         Caption = 'Imported collumns'
         ParentColor = False
@@ -197,20 +199,21 @@ object ImportDataForm: TImportDataForm
         AnchorSideTop.Control = TabSheet2
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = sWorkbookTabControl1
-        Left = 127
-        Height = 249
+        AnchorSideBottom.Control = Splitter3
+        Left = 129
+        Height = 266
         Top = 0
-        Width = 811
+        Width = 793
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
         Columns = <        
           item
+            MaxSize = 196
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Field name'
-            Width = 200
+            Width = 196
             FieldName = 'FieldName'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -223,10 +226,11 @@ object ImportDataForm: TImportDataForm
           end        
           item
             ButtonStyle = cbsPickList
+            MaxSize = 196
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Collumn name'
-            Width = 110
+            Width = 108
             FieldName = 'ColName'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -238,6 +242,7 @@ object ImportDataForm: TImportDataForm
             Footers = <>
           end        
           item
+            MaxSize = 196
             PickList.Strings = (
               'Default'
               'Integer'
@@ -251,7 +256,7 @@ object ImportDataForm: TImportDataForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Data type'
-            Width = 150
+            Width = 147
             FieldName = 'DataType'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -276,10 +281,11 @@ object ImportDataForm: TImportDataForm
             )
           end        
           item
+            MaxSize = 196
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Default value'
-            Width = 250
+            Width = 245
             FieldName = 'DefValue'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -291,16 +297,32 @@ object ImportDataForm: TImportDataForm
             Footers = <>
           end        
           item
+            MaxSize = 196
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Skip empty'
-            Width = 90
+            Width = 88
             FieldName = 'SkipEmpty'
             EditButtons = <>
             Filter.DropDownRows = 0
             Filter.EmptyValue = '(Empty)'
             Filter.NotEmptyValue = '(Не пусто)'
             Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Not null'
+            Width = 60
+            FieldName = 'NotNull'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
             Footers = <>
@@ -379,9 +401,9 @@ object ImportDataForm: TImportDataForm
       end
       object sWorkbookTabControl1: TsWorkbookTabControl
         Left = 0
-        Height = 254
-        Top = 249
-        Width = 938
+        Height = 249
+        Top = 271
+        Width = 922
         TabIndex = 0
         Tabs.Strings = (
           'Sheet1'
@@ -393,21 +415,21 @@ object ImportDataForm: TImportDataForm
         object Panel2: TPanel
           Left = 2
           Height = 37
-          Top = 29
-          Width = 934
+          Top = 32
+          Width = 918
           Align = alTop
           AutoSize = True
-          ClientHeight = 33
-          ClientWidth = 930
+          ClientHeight = 37
+          ClientWidth = 918
           ParentFont = False
           TabOrder = 1
           object sCellIndicator1: TsCellIndicator
             AnchorSideLeft.Control = Panel2
             AnchorSideTop.Control = Panel2
             Left = 1
-            Height = 35
+            Height = 34
             Top = 1
-            Width = 80
+            Width = 78
             WorkbookSource = sWorkbookSource1
             AutoSize = False
             ParentFont = False
@@ -420,10 +442,10 @@ object ImportDataForm: TImportDataForm
             AnchorSideTop.Control = Panel2
             AnchorSideRight.Control = Panel2
             AnchorSideRight.Side = asrBottom
-            Left = 81
-            Height = 33
+            Left = 79
+            Height = 35
             Top = 1
-            Width = 852
+            Width = 838
             Anchors = [akTop, akLeft, akRight]
             ParentFont = False
             TabOrder = 1
@@ -432,9 +454,9 @@ object ImportDataForm: TImportDataForm
         end
         object sWorksheetGrid1: TsWorksheetGrid
           Left = 2
-          Height = 186
-          Top = 66
-          Width = 934
+          Height = 178
+          Top = 69
+          Width = 918
           AutoCalc = True
           FixedColWidth = 57
           FrozenCols = 0
@@ -458,8 +480,8 @@ object ImportDataForm: TImportDataForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 244
-        Width = 938
+        Top = 266
+        Width = 922
         Align = alBottom
         ResizeAnchor = akBottom
       end
@@ -469,8 +491,8 @@ object ImportDataForm: TImportDataForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 607
-    Width = 948
+    Top = 617
+    Width = 928
     Align = alBottom
     ResizeAnchor = akBottom
   end
@@ -479,9 +501,9 @@ object ImportDataForm: TImportDataForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = BitBtn1
     Left = 15
-    Height = 28
-    Top = 30
-    Width = 872
+    Height = 27
+    Top = 29
+    Width = 853
     FilterIndex = 0
     HideDirectories = False
     ButtonWidth = 23
@@ -495,8 +517,8 @@ object ImportDataForm: TImportDataForm
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
-    Left = 232
-    Top = 248
+    Left = 227
+    Top = 243
     object actOpen: TAction
       Category = 'File'
       Caption = 'Open'
@@ -532,12 +554,16 @@ object ImportDataForm: TImportDataForm
       item
         Name = 'FieldSize'
         DataType = ftInteger
+      end    
+      item
+        Name = 'NotNull'
+        DataType = ftBoolean
       end>
     AfterOpen = rxFieldListAfterOpen
     AfterScroll = rxFieldListAfterScroll
     PacketRecords = 0
-    Left = 342
-    Top = 159
+    Left = 336
+    Top = 156
     object rxFieldListFieldName: TStringField
       FieldKind = fkData
       FieldName = 'FieldName'
@@ -599,28 +625,38 @@ object ImportDataForm: TImportDataForm
       ReadOnly = False
       Required = False
     end
+    object rxFieldListNotNull: TBooleanField
+      FieldKind = fkData
+      FieldName = 'NotNull'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
   end
   object dsFieldList: TDataSource
     DataSet = rxFieldList
-    Left = 304
-    Top = 159
+    Left = 298
+    Top = 156
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 342
-    Top = 448
+    Left = 335
+    Top = 439
   end
   object RxIniPropStorage1: TRxIniPropStorage
     StoredValues = <>
     SeparateFiles = True
-    Left = 96
-    Top = 224
+    Left = 94
+    Top = 219
   end
   object sWorkbookSource1: TsWorkbookSource
     AutoDetectFormat = False
     FileFormat = sfUser
     Options = [boAutoCalc]
-    Left = 299
-    Top = 448
+    Left = 293
+    Top = 439
   end
 end

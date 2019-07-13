@@ -138,9 +138,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideBottom.Control = SpinEdit1
       AnchorSideBottom.Side = asrBottom
       Left = 444
-      Height = 19
+      Height = 17
       Top = 7
-      Width = 120
+      Width = 116
       Anchors = [akLeft, akBottom]
       BorderSpacing.Around = 6
       Caption = 'Count row to fetch'
@@ -152,9 +152,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
-      Left = 570
-      Height = 31
-      Top = 1
+      Left = 566
+      Height = 27
+      Top = 3
       Width = 90
       BorderSpacing.Left = 6
       MaxValue = 2000000
@@ -167,7 +167,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 666
+      Left = 662
       Height = 31
       Top = 1
       Width = 32
@@ -182,7 +182,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 698
+      Left = 694
       Height = 31
       Top = 1
       Width = 32
@@ -195,10 +195,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 817
-      Height = 19
-      Top = 7
-      Width = 44
+      Left = 818
+      Height = 17
+      Top = 8
+      Width = 43
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -307,6 +307,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     object dataImport: TAction
       Category = 'data'
       Caption = 'Import'
+      ImageIndex = 102
       OnExecute = dataImportExecute
     end
     object statFunct: TAction

@@ -351,6 +351,9 @@ begin
   if ModalResult = mrOk then
   begin
     CanClose:=DBIsValidIdent(edtFieldName.Text);
+   // if CanClose then
+   //   CanClose:=DBIsValidIdent(edtFieldName.Text);
+   //  else
     if CanClose then
     begin
       if cbDomainCheck.Checked then
