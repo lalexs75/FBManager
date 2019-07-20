@@ -1772,6 +1772,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="fbmSQLScriptRunQuestionUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtableautovaccumunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmpgTableAutoVaccum"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmpgTableAutoVaccumUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

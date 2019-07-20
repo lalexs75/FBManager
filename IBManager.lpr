@@ -121,7 +121,8 @@ uses
   fdmUserEditor_MySQLUnit, otMySQLTriggerTemplateUnit,
   SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit,
   pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit,
-  SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit
+  SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
+  fbmpgTableAutoVaccumUnit
 
   ;
 
