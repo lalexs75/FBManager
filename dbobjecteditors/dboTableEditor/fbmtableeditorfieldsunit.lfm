@@ -3,8 +3,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   Width = 1070
   ClientHeight = 469
   ClientWidth = 1070
-  DesignLeft = 397
-  DesignTop = 251
+  DesignLeft = 205
+  DesignTop = 188
   object PageControl1: TPageControl[0]
     Left = 0
     Height = 119
@@ -17,13 +17,13 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Description'
-      ClientHeight = 88
-      ClientWidth = 1060
+      ClientHeight = 84
+      ClientWidth = 1064
       object DBMemo1: TDBMemo
         Left = 0
-        Height = 88
+        Height = 84
         Top = 0
-        Width = 1060
+        Width = 1064
         Align = alClient
         DataField = 'FIELD_DESCRIPTION'
         DataSource = dsFieldList
@@ -32,8 +32,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     end
     object tabFieldDependencies: TTabSheet
       Caption = 'Field Dependencies'
-      ClientHeight = 88
-      ClientWidth = 1060
+      ClientHeight = 84
+      ClientWidth = 1064
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 85
@@ -184,8 +184,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object FieldListGrid: TRxDBGrid[1]
     Left = 0
-    Height = 274
-    Top = 71
+    Height = 281
+    Top = 64
     Width = 1070
     ColumnDefValues.BlobText = '(примечание)'
     TitleButtons = True
@@ -514,12 +514,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object Panel1: TPanel[3]
     Left = 0
-    Height = 71
+    Height = 64
     Top = 0
     Width = 1070
     Align = alTop
     AutoSize = True
-    ClientHeight = 71
+    ClientHeight = 64
     ClientWidth = 1070
     TabOrder = 3
     object Label1: TLabel
@@ -528,7 +528,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       Left = 7
       Height = 17
       Top = 7
-      Width = 71
+      Width = 74
       BorderSpacing.Around = 6
       Caption = 'Table name'
       ParentColor = False
@@ -540,7 +540,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 34
+      Height = 27
       Top = 30
       Width = 1050
       Anchors = [akTop, akLeft, akRight]

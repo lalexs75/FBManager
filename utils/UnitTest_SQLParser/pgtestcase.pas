@@ -483,6 +483,10 @@ type
     procedure c459GroupCreate;
     procedure c460SQLGrant4; //GRANT — определить права доступа
     procedure c461SQLRevoke6; //REVOKE — отозвать права доступа
+    procedure c462CreateTable31;
+    procedure c463CreateTable32;
+    procedure c464AlterTable3;
+    procedure c465AlterTable4;
   end;
 
   { TPGSQLParserData }
@@ -588,6 +592,26 @@ end;
 procedure TPGSQLParserTest.c461SQLRevoke6;
 begin
   DoTestSQL(PGSQLParserData.sUserAcess['Revoke6']);
+end;
+
+procedure TPGSQLParserTest.c462CreateTable31;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable31']);
+end;
+
+procedure TPGSQLParserTest.c463CreateTable32;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable32']);
+end;
+
+procedure TPGSQLParserTest.c464AlterTable3;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable3']);
+end;
+
+procedure TPGSQLParserTest.c465AlterTable4;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable4']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

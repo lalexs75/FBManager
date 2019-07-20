@@ -1,9 +1,10 @@
 object PGSQLParserData: TPGSQLParserData
   OldCreateOrder = False
-  Height = 954
-  HorizontalOffset = 441
-  VerticalOffset = 21
-  Width = 1016
+  Height = 850
+  HorizontalOffset = 395
+  VerticalOffset = 1
+  Width = 995
+  PPI = 94
   object sComment: TRxTextHolder
     Highlighter = rxSynNone
     Items = <    
@@ -422,7 +423,7 @@ object PGSQLParserData: TPGSQLParserData
         )
       end>
     Left = 24
-    Top = 80
+    Top = 78
   end
   object sUserAcess: TRxTextHolder
     Highlighter = rxSynNone
@@ -732,7 +733,7 @@ object PGSQLParserData: TPGSQLParserData
           'REVOKE CREATE ON TABLESPACE test_data21 FROM group_test1;'
         )
       end>
-    Left = 104
+    Left = 102
     Top = 8
   end
   object sDML: TRxTextHolder
@@ -1304,8 +1305,8 @@ object PGSQLParserData: TPGSQLParserData
           'PREPARE TRANSACTION ''foobar'';'
         )
       end>
-    Left = 104
-    Top = 80
+    Left = 102
+    Top = 78
   end
   object sDomain: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1449,7 +1450,7 @@ object PGSQLParserData: TPGSQLParserData
         )
       end>
     Left = 24
-    Top = 168
+    Top = 165
   end
   object sTable: TRxTextHolder
     Highlighter = rxSynNone
@@ -2033,9 +2034,175 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'ALTER RULE notify_all ON emp RENAME TO notify_me;'
         )
+      end    
+      item
+        Caption = 'AlterTable3'
+        Lines.Strings = (
+          'ALTER TABLE trade.del_tb_aticles_cost SET ('
+          '  toast.autovacuum_enabled = true,'
+          '  toast.autovacuum_vacuum_threshold = 55,'
+          '  toast.autovacuum_vacuum_scale_factor = 0.1,'
+          '  toast.autovacuum_vacuum_cost_delay = 25,'
+          '  toast.autovacuum_vacuum_cost_limit = 200,'
+          '  toast.autovacuum_freeze_min_age = 50000000,'
+          '  toast.autovacuum_freeze_max_age = 200000000,'
+          '  toast.autovacuum_freeze_table_age = 150000000'
+          ');'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable4'
+        Lines.Strings = (
+          'ALTER TABLE trade.del_tb_doc SET ('
+          '  autovacuum_enabled = true,'
+          '  autovacuum_vacuum_threshold = 50,'
+          '  autovacuum_analyze_threshold = 50,'
+          '  autovacuum_vacuum_scale_factor = 0.2,'
+          '  autovacuum_analyze_scale_factor = 0.1,'
+          '  autovacuum_vacuum_cost_delay = 20,'
+          '  autovacuum_vacuum_cost_limit = 200,'
+          '  autovacuum_freeze_min_age = 50000000,'
+          '  autovacuum_freeze_max_age = 200000000,'
+          '  autovacuum_freeze_table_age = 150000000'
+          ');'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable31'
+        Lines.Strings = (
+          'CREATE TABLE trade.del_tb_aticles_cost'
+          '('
+          '  tb_aticles_cost_id system.type_primary_key NOT NULL, -- Тип поля, отвечающего за первичный ключ'
+          '  tb_doc_id system.type_forign_key_not_null, -- Тип внешнего ключа. Пустые значения запрещены'
+          '  spr_aticles_cost_id system.type_forign_key_not_null, -- Тип внешнего ключа. Пустые значения запрещены'
+          '  tb_aticles_cost_summa system.type_currency2, -- Сумма статьи затрат'
+          '  tb_aticles_cost_summa_tax system.type_currency, -- Денежная величина'
+          '  create_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  create_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  edit_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  edit_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  delete_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  delete_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  CONSTRAINT del_tb_aticles_cost1_pkey PRIMARY KEY (tb_aticles_cost_id)'
+          ')'
+          'WITH ('
+          '  OIDS=FALSE,'
+          '  toast.autovacuum_enabled=true,'
+          '  toast.autovacuum_vacuum_threshold=55,'
+          '  toast.autovacuum_vacuum_scale_factor=0.1,'
+          '  toast.autovacuum_vacuum_cost_delay=25,'
+          '  toast.autovacuum_vacuum_cost_limit=200,'
+          '  toast.autovacuum_freeze_min_age=50000000,'
+          '  toast.autovacuum_freeze_max_age=200000000,'
+          '  toast.autovacuum_freeze_table_age=150000000'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable32'
+        Lines.Strings = (
+          'CREATE TABLE trade.del_tb_doc'
+          '('
+          '  tb_doc_id system.type_primary_key NOT NULL, -- Тип поля, отвечающего за первичный ключ'
+          '  spr_trade_doc_type_id system.type_forign_key_not_null, -- Код операции'
+          '  tb_doc_date system.type_doc_date, -- Дата документа'
+          '  tb_client_id system.type_forign_key_not_null, -- Код клиента - контрагента'
+          '  spr_department_id system.type_forign_key_nullable, -- Код склада...'
+          '  create_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  create_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  edit_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  edit_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  tb_account_id system.type_forign_key_nullable, -- Код расчётного счёта клиента'
+          '  tb_dogovor_id system.type_forign_key_nullable, -- Код договора, заключенного с клиентом, в амках которого выписан (или получен) данный документа'
+          '  tb_doc_state system.type_record_state, -- Статус документа...'
+          '  tb_doc_otgr system.type_boolean_not_null, -- Признак отгрузки (для расхода) или оприходвания (для прихода) документа'
+          '  tb_doc_otgr_date system.type_doc_date, -- Дата документа'
+          '  tb_doc_opl system.type_record_state, -- Признак оплаты документа...'
+          '  tb_doc_opl_date system.type_doc_date, -- Дата оплаты на документ....'
+          '  tb_doc_num_nakl system.type_doc_number_str, -- Номер накладной'
+          '  tb_doc_date_nakl system.type_doc_date, -- Дата накладной'
+          '  tb_doc_num_sf system.type_doc_number_str, -- Номер счёт-фактуры'
+          '  tb_doc_date_sf system.type_doc_date, -- Дата счёт-фактуры'
+          '  tb_doc_num_account system.type_doc_number, -- Расход - номер счета на оплату...'
+          '  tb_doc_date_account system.type_doc_date, -- Расход - дата счета на оплату...'
+          '  tb_doc_edit_state system.type_integer_not_null, -- Признак редактирования документа....'
+          '  tb_doc_info system.type_varchar_500_nullabe, -- Примечание к документу'
+          '  spr_filial_account_id system.type_forign_key_nullable, -- Код расчётного счёта нашей организации, на который...'
+          '  spr_people_id_writer_on_sklad system.type_forign_key_nullable, -- Подписывающий со склада...'
+          '  tb_doc_post_summa system.type_currency2, -- Приход - Сумма в документе поставщика...'
+          '  tb_doc_post_summa_sf system.type_currency2, -- Сумма в счёт-фактуре поставщика'
+          '  tb_doc_shipping_agent system.type_varchar_150_nullabe, -- Сопровождающий груз, экспедитор'
+          '  tb_doc_shipping_agent_job system.type_varchar_150_nullabe, -- Должность сопровождающего груз'
+          '  tb_doc_travelling_sheet_auto system.type_varchar_50_nullabe, -- Реквизиты путевого листа'
+          '  tb_doc_dover_date system.type_doc_date, -- Дата доверенности'
+          '  tb_doc_dover_info system.type_varchar_150_nullabe, -- Примечание по доверенности'
+          '  tb_doc_summa system.type_currency2, -- Сумма по товарным строкам'
+          '  tb_doc_summa_nds system.type_currency2, -- Сумма НДС по документу'
+          '  tb_doc_summa_itog system.type_currency2, -- Итог по документу'
+          '  tb_client_id_goods system.type_forign_key_nullable, -- Приход:...'
+          '  tb_doc_exist_sf system.type_boolean, -- Признак наличия С/Ф на расходной ТТН'
+          '  tb_doc_car_info system.type_varchar_150_nullabe, -- Информация об автомобиле получателя груза'
+          '  tb_doc_prc_discount system.type_percent, -- Процент скидки по всему документу - опционально.'
+          '  spr_delivery_id system.type_forign_key_nullable, -- Код способа доставки товара'
+          '  tb_doc_post_summa_nds system.type_currency2, -- Сумма НДС в документе поставщика'
+          '  tb_doc_pay_doc_num system.type_doc_number_str, -- Номер платёжного документа'
+          '  tb_doc_pay_doc_date system.type_doc_date, -- Дата платёжного документа'
+          '  tb_doc_car_info_region system.type_integer_nullable, -- Код региона номера автомобиля получателя груза'
+          '  tb_doc_car_info_number system.type_varchar_50_nullabe, -- Гос. номер автомобиля получателя груза'
+          '  tb_doc_car_info_model system.type_varchar_50_nullabe, -- Наименование модели автомобиля получателя груза'
+          '  tb_doc_car_info_fio system.type_varchar_100_nullabe, -- ФИО водителя автомобиля получателя груза'
+          '  tb_doc_summa_pay system.type_currency2, -- Сумма оплаты по документу'
+          '  tb_doc_opl_user_name system.type_varchar_50_nullabe, -- Протокол - оператор модификации данных'
+          '  spr_trade_dep_id system.type_forign_key_nullable, -- Код торгового отдела'
+          '  tb_client_dover_id system.type_forign_key_nullable, -- Код доверенности клиента'
+          '  tb_doc_grgn_out system.type_boolean, -- Признак того, что накладная вывезена с территории'
+          '  tb_client_adress_id system.type_forign_key_nullable, -- Код адреса грузополучателя'
+          '  tb_doc_summa_revert system.type_currency, -- Общая сумма возврата по данному документу'
+          '  tb_doc_revert_status system.type_record_state, -- Признак возврата документа...'
+          '  tb_doc_revert_date system.type_doc_date, -- Дата возврата'
+          '  tb_doc_num_nakl_int system.type_doc_number, -- Номер документа - данное поле для представления номера ТН в виде числа. Введено в целях оптимизации производительности работы системы. Напрямую не заполняется - информация подставляется из tb_doc_num_nakl'
+          '  tb_doc_pay_count system.type_integer_nullable, -- Кол-во строк оплаты на документе'
+          '  tb_doc_deliver_state system.type_record_state, -- Статус доставки...'
+          '  spr_client_adress_direciton_id system.type_forign_key_nullable, -- Маршрут для центродоставки'
+          '  tb_client_kpp_id system.type_forign_key_nullable, -- ID дополнительного КПП'
+          '  tb_doc_cheked_by_card system.type_boolean, -- Признак того, что документ проверен картотекой и допушен на склад к отгрузке'
+          '  tb_doc_cheked_by_card_date system.type_timestamp_nullable, -- Дата допуска на картотеке'
+          '  tb_doc_cheked_by_card_user_name system.type_user_name_nullable, -- Имя пользователя, проведшего документ'
+          '  tb_doc_expected_date system.type_doc_date, -- Предпологаемая дата документа:...'
+          '  tb_doc_send_client_msg system.type_boolean, -- Признак отправки клиенту документов'
+          '  spr_ts_type_id system.type_forign_key_nullable, -- Тип транспортного средства'
+          '  spr_source_doc_type_id system.type_forign_key_nullable, -- Тип исходного документа'
+          '  tb_doc_num_transit_doc system.type_doc_number_str, -- Номер транзитной накладной'
+          '  tb_doc_date_transit_doc system.type_doc_date, -- Дата транзитной накладной'
+          '  tb_client_cargo_carrier_id system.type_forign_key_nullable, -- Код грузоперевозчика'
+          '  tb_doc_send_client_msg_date system.type_timestamp_nullable, -- Время отправки сообщения клиенту'
+          '  tb_doc_dover_num system.type_doc_number, -- Номер доверенности'
+          '  delete_user_name system.type_user_name, -- Протокол - оператор модификации данных'
+          '  delete_user_date system.type_user_date, -- Протокол - время изменения данных'
+          '  tb_doc_check_contact_info system.type_varchar_150_nullabe, -- Адрес для отправки сообщения по чеку согласно 54ФЗ...'
+          '  tb_doc_info_int1 system.type_integer_nullable, -- Прочая информация...'
+          '  CONSTRAINT del_tb_doc1_pkey PRIMARY KEY (tb_doc_id)'
+          ')'
+          'WITH ('
+          '  OIDS=FALSE,'
+          '  autovacuum_enabled=true,'
+          '  autovacuum_vacuum_threshold=50,'
+          '  autovacuum_vacuum_scale_factor=0.2,'
+          '  autovacuum_analyze_threshold=50,'
+          '  autovacuum_analyze_scale_factor=0.1,'
+          '  autovacuum_vacuum_cost_delay=20,'
+          '  autovacuum_vacuum_cost_limit=200,'
+          '  autovacuum_freeze_min_age=50000000,'
+          '  autovacuum_freeze_max_age=200000000,'
+          '  autovacuum_freeze_table_age=150000000'
+          ');'
+          ''
+        )
       end>
     Left = 24
-    Top = 248
+    Top = 243
   end
   object sView: TRxTextHolder
     Highlighter = rxSynNone
@@ -2150,7 +2317,7 @@ object PGSQLParserData: TPGSQLParserData
         )
       end>
     Left = 24
-    Top = 328
+    Top = 321
   end
   object sSchema: TRxTextHolder
     Highlighter = rxSynNone
@@ -2212,8 +2379,8 @@ object PGSQLParserData: TPGSQLParserData
           'DROP SCHEMA mystuff CASCADE;'
         )
       end>
-    Left = 32
-    Top = 408
+    Left = 31
+    Top = 400
   end
   object sSystem: TRxTextHolder
     Highlighter = rxSynNone
@@ -2674,8 +2841,8 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER SYSTEM SET wal_level TO replica;'
         )
       end>
-    Left = 32
-    Top = 496
+    Left = 31
+    Top = 486
   end
   object sAggregate: TRxTextHolder
     Highlighter = rxSynNone
@@ -2919,8 +3086,8 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
         )
       end>
-    Left = 32
-    Top = 576
+    Left = 31
+    Top = 564
   end
   object sFunctions: TRxTextHolder
     Highlighter = rxSynNone
@@ -3184,8 +3351,8 @@ object PGSQLParserData: TPGSQLParserData
           'CREATE TRIGGER paired_items_update AFTER UPDATE ON paired_items REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab FOR EACH ROW EXECUTE PROCEDURE check_matching_pairs();'
         )
       end>
-    Left = 32
-    Top = 648
+    Left = 31
+    Top = 635
   end
   object sDataBase: TRxTextHolder
     Highlighter = rxSynNone
@@ -3280,7 +3447,7 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER SERVER foo VERSION ''8.4'' OPTIONS (SET host ''baz'');'
         )
       end>
-    Left = 104
-    Top = 168
+    Left = 102
+    Top = 165
   end
 end
