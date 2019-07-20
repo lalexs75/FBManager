@@ -121,7 +121,8 @@ type
      ataNotOf,
      ataOwnerTo,
      ataSetTablespace,
-     ataAddIndex
+     ataAddIndex,
+     ataSetParams
     );
 
 
@@ -693,7 +694,8 @@ const
     'ataNotOf',
     'ataOwnerTo',
     'ataSetTablespace',
-    'ataAddIndex'
+    'ataAddIndex',
+    'ataSetParams'
     );
 
 function IndexSortOrderStr(AValue:TIndexSortOrder):string;

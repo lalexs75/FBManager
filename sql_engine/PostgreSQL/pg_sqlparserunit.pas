@@ -883,6 +883,7 @@ type
   private
     FCurConstr: TSQLConstraintItem;
     FCurOperator: TAlterTableOperator;
+    FCurParam: TSQLParserField;
     FOnly: boolean;
     FEnableState:TTriggerState;
     FUpDel: Integer;
@@ -17336,57 +17337,122 @@ var
     TConstFKTbl, TConstFKTbl1, TConstFKFld, TConstFKMatch,
     TConstFKMatch1, TConstFKMatch2, TConstFKMatch3, TConstFKOn,
     TConstFKOn1, TConstFKOn2, TConstFKOn10, TConstFKOn11,
-    TConstFKOn12, TConstFKOn13, TConstFKOn14: TSQLTokenRecord;
+    TConstFKOn12, TConstFKOn13, TConstFKOn14, TSet, T2_1, T4_1,
+    T4_2, T4_3, T4_4, T5: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER TABLE }
-  (* ALTER TABLE name SET SCHEMA new_schema *)
-  (* ALTER TABLE name SET TABLESPACE new_tablespace *)
-  (* ALTER TABLE name RENAME TO new_name *)
 (*
-ALTER TABLE [ ONLY ] name [ * ]
-    action [, ... ]
-ALTER TABLE [ ONLY ] name [ * ]
-    RENAME [ COLUMN ] column TO new_column
+  ALTER TABLE [ IF EXISTS ] [ ONLY ] имя [ * ]
+      действие [, ... ]
+  ALTER TABLE [ IF EXISTS ] [ ONLY ] имя [ * ]
+      RENAME [ COLUMN ] имя_столбца TO новое_имя_столбца
+  ALTER TABLE [ IF EXISTS ] [ ONLY ] имя [ * ]
+      RENAME CONSTRAINT имя_ограничения TO имя_нового_ограничения
+  ALTER TABLE [ IF EXISTS ] имя
+      RENAME TO новое_имя
+  ALTER TABLE [ IF EXISTS ] имя
+      SET SCHEMA новая_схема
+  ALTER TABLE ALL IN TABLESPACE имя [ OWNED BY имя_роли [, ... ] ]
+      SET TABLESPACE новое_табл_пространство [ NOWAIT ]
+  ALTER TABLE [ IF EXISTS ] имя
+      ATTACH PARTITION имя_секции { FOR VALUES указание_границ_секции | DEFAULT }
+  ALTER TABLE [ IF EXISTS ] имя
+      DETACH PARTITION имя_секции
 
-where action is one of:
+  Где действие может быть следующим:
 
-    ADD [ COLUMN ] [ IF NOT EXISTS ] column data_type [ COLLATE collation ] [ column_constraint [ ... ] ]
-    DROP [ COLUMN ] [ IF EXISTS ] column [ RESTRICT | CASCADE ]
-    ALTER [ COLUMN ] column SET DEFAULT expression
-    ALTER [ COLUMN ] column DROP DEFAULT
-    ALTER [ COLUMN ] column { SET | DROP } NOT NULL
-    ALTER [ COLUMN ] column SET STATISTICS integer
-    ALTER [ COLUMN ] column SET ( attribute_option = value [, ... ] )
-    ALTER [ COLUMN ] column RESET ( attribute_option [, ... ] )
-    ALTER [ COLUMN ] column SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN }
-    ADD table_constraint [ NOT VALID ]
-    ADD table_constraint_using_index
-    VALIDATE CONSTRAINT constraint_name
-    DROP CONSTRAINT [ IF EXISTS ]  constraint_name [ RESTRICT | CASCADE ]
-+    DISABLE TRIGGER [ trigger_name | ALL | USER ]
-+    ENABLE TRIGGER [ trigger_name | ALL | USER ]
-    ENABLE REPLICA TRIGGER trigger_name
-    ENABLE ALWAYS TRIGGER trigger_name
-    DISABLE RULE rewrite_rule_name
-    ENABLE RULE rewrite_rule_name
-    ENABLE REPLICA RULE rewrite_rule_name
-    ENABLE ALWAYS RULE rewrite_rule_name
-    CLUSTER ON index_name
+      ADD [ COLUMN ] [ IF NOT EXISTS ] имя_столбца тип_данных [ COLLATE правило_сортировки ] [ ограничение_столбца [ ... ] ]
+      DROP [ COLUMN ] [ IF EXISTS ] имя_столбца [ RESTRICT | CASCADE ]
+      ALTER [ COLUMN ] имя_столбца [ SET DATA ] TYPE тип_данных [ COLLATE правило_сортировки ] [ USING выражение ]
+      ALTER [ COLUMN ] имя_столбца SET DEFAULT выражение
+      ALTER [ COLUMN ] имя_столбца DROP DEFAULT
+      ALTER [ COLUMN ] имя_столбца { SET | DROP } NOT NULL
+      ALTER [ COLUMN ] имя_столбца ADD GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( параметры_последовательности ) ]
+      ALTER [ COLUMN ] имя_столбца { SET GENERATED { ALWAYS | BY DEFAULT } | SET параметр_последовательности | RESTART [ [ WITH ] перезапуск ] } [...]
+      ALTER [ COLUMN ] имя_столбца DROP IDENTITY [ IF EXISTS ]
+      ALTER [ COLUMN ] имя_столбца SET STATISTICS integer
+      ALTER [ COLUMN ] имя_столбца SET ( атрибут = значение [, ... ] )
+      ALTER [ COLUMN ] имя_столбца RESET ( атрибут [, ... ] )
+      ALTER [ COLUMN ] имя_столбца SET STORAGE { PLAIN | EXTERNAL | EXTENDED | MAIN }
+      ADD ограничение_таблицы [ NOT VALID ]
+      ADD ограничение_таблицы_по_индексу
+      ALTER CONSTRAINT имя_ограничения [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+      VALIDATE CONSTRAINT имя_ограничения
+      DROP CONSTRAINT [ IF EXISTS ]  имя_ограничения [ RESTRICT | CASCADE ]
+      DISABLE TRIGGER [ имя_триггера | ALL | USER ]
+      ENABLE TRIGGER [ имя_триггера | ALL | USER ]
+      ENABLE REPLICA TRIGGER имя_триггера
+      ENABLE ALWAYS TRIGGER имя_триггера
+      DISABLE RULE имя_правила_перезаписи
+      ENABLE RULE имя_правила_перезаписи
+      ENABLE REPLICA RULE имя_правила_перезаписи
+      ENABLE ALWAYS RULE имя_правила_перезаписи
+      DISABLE ROW LEVEL SECURITY
+      ENABLE ROW LEVEL SECURITY
+      FORCE ROW LEVEL SECURITY
+      NO FORCE ROW LEVEL SECURITY
+      CLUSTER ON имя_индекса
+      SET WITHOUT CLUSTER
+      SET WITH OIDS
+      SET WITHOUT OIDS
+      SET TABLESPACE новое_табл_пространство
+      SET { LOGGED | UNLOGGED }
+      SET ( параметр_хранения = значение [, ... ] )
+      RESET ( параметр_хранения [, ... ] )
+      INHERIT таблица_родитель
+      NO INHERIT таблица_родитель
+      OF имя_типа
+      NOT OF
+      OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+      REPLICA IDENTITY { DEFAULT | USING INDEX имя_индекса | FULL | NOTHING }
 
-    RESET ( storage_parameter [, ... ] )
-    INHERIT parent_table
-    NO INHERIT parent_table
-    OF type_name
-    NOT OF
-    OWNER TO new_owner
+  и указание_границ_секции:
 
+  IN ( { числовая_константа | строковая_константа | TRUE | FALSE | NULL } [, ...] ) |
+  FROM ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] )
+    TO ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] ) |
+  WITH ( MODULUS числовая_константа, REMAINDER числовая_константа )
 
-and table_constraint_using_index is:
+  и ограничение_столбца:
 
-    [ CONSTRAINT constraint_name ]
-    { UNIQUE | PRIMARY KEY } USING INDEX index_name
-    [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
-*)
+  [ CONSTRAINT имя_ограничения ]
+  { NOT NULL |
+    NULL |
+    CHECK ( выражение ) [ NO INHERIT ] |
+    DEFAULT выражение_по_умолчанию |
+    GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( параметры_последовательности ) ] |
+    UNIQUE параметры_индекса |
+    PRIMARY KEY параметры_индекса |
+    REFERENCES целевая_таблица [ ( целевой_столбец ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
+      [ ON DELETE действие ] [ ON UPDATE действие ] }
+  [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+  и ограничение_таблицы:
+
+  [ CONSTRAINT имя_ограничения ]
+  { CHECK ( выражение ) [ NO INHERIT ] |
+    UNIQUE ( имя_столбца [, ... ] ) параметры_индекса |
+    PRIMARY KEY ( имя_столбца [, ... ] ) параметры_индекса |
+    EXCLUDE [ USING метод_индекса ] ( элемент_исключения WITH оператор [, ... ] ) параметры_индекса [ WHERE ( предикат ) ] |
+    FOREIGN KEY ( имя_столбца [, ... ] ) REFERENCES целевая_таблица [ ( целевой_столбец [, ... ] ) ]
+      [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE действие ] [ ON UPDATE действие ] }
+  [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+  и ограничение_таблицы_по_индексу:
+
+      [ CONSTRAINT имя_ограничения ]
+      { UNIQUE | PRIMARY KEY } USING INDEX имя_индекса
+      [ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
+
+  параметры_индекса в ограничениях UNIQUE, PRIMARY KEY и EXCLUDE:
+
+  [ INCLUDE ( имя_столбца [, ... ] ) ]
+  [ WITH ( параметр_хранения [= значение] [, ... ] ) ]
+  [ USING INDEX TABLESPACE табл_пространство ]
+
+  элемент_исключения в ограничении EXCLUDE:
+
+  { имя_столбца | ( выражение ) } [ класс_операторов ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]*)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okTable);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]);
@@ -17395,12 +17461,26 @@ and table_constraint_using_index is:
   T:=AddSQLTokens(stSymbol, FTShemaName, '.', []);
   FTTableName:=AddSQLTokens(stIdentificator, T, '', [], 3);
 
-  T:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'SET', []);
-    T1:=AddSQLTokens(stKeyword, T, 'SCHEMA', []);
+  TSet:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'SET', []);
+    T1:=AddSQLTokens(stKeyword, TSet, 'SCHEMA', []);
       T2:=AddSQLTokens(stIdentificator, T1, '', [], 4);
 
-    T1:=AddSQLTokens(stKeyword, T, 'TABLESPACE', []);
+    T1:=AddSQLTokens(stKeyword, TSet, 'TABLESPACE', []);
       T2:=AddSQLTokens(stKeyword, T1, '', [], 5);
+
+    T1:=AddSQLTokens(stSymbol, TSet, '(', []);
+    T2:=AddSQLTokens(stIdentificator, T1, '', [], 60);
+      T2_1:=AddSQLTokens(stSymbol, T2, '.', [], 61);
+      T2_1:=AddSQLTokens(stIdentificator, T2_1, '', [], 61);
+    T3:=AddSQLTokens(stSymbol, [T2, T2_1], '=', []);
+    T4_1:=AddSQLTokens(stIdentificator, T3, '', [], 63);
+    T4_2:=AddSQLTokens(stInteger, T3, '', [], 63);
+    T4_3:=AddSQLTokens(stFloat, T3, '', [], 63);
+    T4_4:=AddSQLTokens(stString, T3, '', [], 63);
+    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ',', [], 64);
+      T5.AddChildToken(T2);
+    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ')', [], 64);
+
 
   TR:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'RENAME', []);                  //ALTER TABLE name RENAME TO new_name
     T:=AddSQLTokens(stKeyword, TR, 'TO', []);
@@ -17789,6 +17869,16 @@ begin
     51:if Assigned(FCurConstr) then
          if FUpDel = 1 then FCurConstr.ForeignKeyRuleOnUpdate:=fkrSetDefault
          else FCurConstr.ForeignKeyRuleOnDelete:=fkrSetDefault;
+    60:
+      begin
+        if not Assigned(FCurOperator) then
+          FCurOperator:=FOperators.AddItem(ataSetParams, '');
+        FCurParam:=FCurOperator.Params.AddParam(AWord);
+      end;
+    61:if Assigned(FCurParam) then
+       FCurParam.Caption:=FCurParam.Caption + AWord;
+    63:FCurParam.ParamValue:=AWord;
+    64:FCurParam:=nil;
   end;
 end;
 
@@ -17881,6 +17971,23 @@ begin
   AddSQLCommand(S);
 end;
 
+procedure DoSetParams(OP: TAlterTableOperator);
+var
+  S, S1: String;
+  P: TSQLParserField;
+begin
+  S:='ALTER TABLE '+FullName + ' SET (';
+  S1:='';
+  for P in OP.Params do
+  begin
+    if S1<>'' then S1:=S1 + ',' + LineEnding;
+    S1:=S1 + '  ' + P.Caption + ' = '+P.ParamValue;
+  end;
+
+  S:=S + LineEnding + S1 +  LineEnding + ')';
+  AddSQLCommand(S);
+end;
+
 var
   OP: TAlterTableOperator;
 begin
@@ -17902,6 +18009,7 @@ begin
       ataDisableTrigger:AddSQLCommandEx('ALTER TABLE %s DISABLE TRIGGER %s', [FullName, OP.ParamValue]);
       ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, OP.ParamValue]);
       ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, OP.ParamValue]);
+      ataSetParams:DoSetParams(OP);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
