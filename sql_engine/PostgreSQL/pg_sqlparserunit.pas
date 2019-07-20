@@ -15050,7 +15050,7 @@ var
     TFK, TFK1, TFK2, TFK3, TFK3_1, TFK3_2, TFK3_3, TFK4,
     TFK4_1, TFK4_2, TFK4_3, TFK4_4, TFK4_5, TFK4_6, TFK4_7,
     TIndParams1, TIndParams1_1, TTableTypeOf, TTableField,
-    TTableStart, TPartition, TPartition1, TAs: TSQLTokenRecord;
+    TTableStart, TPartition, TPartition1, TAs, TWit2_1, TWit7: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер CREATE TABLE }
 
@@ -15297,11 +15297,14 @@ begin
     TWit1:=AddSQLTokens(stIdentificator, TWit, 'OIDS', [], 28);
     TWit2:=AddSQLTokens(stSymbol, TWit, '(', []);
     TWit2:=AddSQLTokens(stIdentificator, TWit2, '', [], 29);
-    TWit3:=AddSQLTokens(stSymbol, TWit2, '=', []);
+      TWit2_1:=AddSQLTokens(stSymbol, TWit2, '.', [], 66);
+      TWit2_1:=AddSQLTokens(stIdentificator, TWit2_1, '', [], 66);
+    TWit3:=AddSQLTokens(stSymbol, [TWit2, TWit2_1], '=', []);
     TWit4:=AddSQLTokens(stIdentificator, TWit3, '', [], 30);
     TWit5:=AddSQLTokens(stString, TWit3, '', [], 30);
     TWit6:=AddSQLTokens(stInteger, TWit3, '', [], 30);
-    T:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6], ',', [], 31);
+    TWit7:=AddSQLTokens(stFloat, TWit3, '', [], 30);
+    T:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6, TWit7], ',', [], 31);
     T.AddChildToken(TWit2);
     TWit2:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6], ')', []);
     TWit1.AddChildToken([TInher, TTblS, TOnCom]);
@@ -15323,7 +15326,7 @@ begin
 
   { TODO : Необходимо реализовать дерево парсера для CREATE TABLE }
 
-  TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3, TWit2], 'AS', [], 80);
+  TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3, TWit2], 'AS', [toOptional], 80);
 end;
 
 procedure TPGSQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15362,6 +15365,11 @@ begin
     27:PGOptions:=PGOptions + [pgoWithoutOids];
     28:PGOptions:=PGOptions + [pgoWithOids];
     29:StorageParameters.Add(AWord);
+    66:if StorageParameters.Count > 0 then
+       begin
+         FN:=StorageParameters[StorageParameters.Count - 1];
+         StorageParameters[StorageParameters.Count - 1]:=FN+AWord;
+       end;
     30:if StorageParameters.Count > 0 then
        begin
          FN:=StorageParameters[StorageParameters.Count - 1];
@@ -15648,11 +15656,11 @@ begin
   for S2 in StorageParameters do
   begin
     if S1<>'' then S1:=S1 + ',' + LineEnding;
-    S1:=S1+S2;
+    S1:=S1 + '  ' + S2;
   end;
 
   if S1<>'' then
-    S:=S + LineEnding + 'WITH ('+S1+')';
+    S:=S + LineEnding + 'WITH ('+LineEnding + S1 + LineEnding +')';
 
   if pgoWithOids in PGOptions then
     S:=S + LineEnding + 'WITH OIDS'
