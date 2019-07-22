@@ -17346,7 +17346,7 @@ var
     TConstFKMatch1, TConstFKMatch2, TConstFKMatch3, TConstFKOn,
     TConstFKOn1, TConstFKOn2, TConstFKOn10, TConstFKOn11,
     TConstFKOn12, TConstFKOn13, TConstFKOn14, TSet, T2_1, T4_1,
-    T4_2, T4_3, T4_4, T5: TSQLTokenRecord;
+    T4_2, T4_3, T4_4, T5, TReset: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER TABLE }
 (*
@@ -17488,6 +17488,15 @@ begin
     T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ',', [], 64);
       T5.AddChildToken(T2);
     T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ')', [], 64);
+
+  TReset:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'RESET', []);
+    T1:=AddSQLTokens(stSymbol, TReset, '(', []);
+    T2:=AddSQLTokens(stIdentificator, T1, '', [], 65);
+      T2_1:=AddSQLTokens(stSymbol, T2, '.', [], 61);
+      T2_1:=AddSQLTokens(stIdentificator, T2_1, '', [], 61);
+    T5:=AddSQLTokens(stSymbol, [T2, T2_1], ',', [], 64);
+      T5.AddChildToken(T2);
+    T5:=AddSQLTokens(stSymbol, T2, ')', [], 64);
 
 
   TR:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'RENAME', []);                  //ALTER TABLE name RENAME TO new_name
@@ -17887,6 +17896,12 @@ begin
        FCurParam.Caption:=FCurParam.Caption + AWord;
     63:FCurParam.ParamValue:=AWord;
     64:FCurParam:=nil;
+    65:
+      begin
+        if not Assigned(FCurOperator) then
+          FCurOperator:=FOperators.AddItem(ataReSetParams, '');
+        FCurParam:=FCurOperator.Params.AddParam(AWord);
+      end;
   end;
 end;
 
@@ -17996,6 +18011,23 @@ begin
   AddSQLCommand(S);
 end;
 
+procedure DoReSetParams(OP: TAlterTableOperator);
+var
+  S, S1: String;
+  P: TSQLParserField;
+begin
+  S:='ALTER TABLE '+FullName + ' RESET (';
+  S1:='';
+  for P in OP.Params do
+  begin
+    if S1<>'' then S1:=S1 + ',' + LineEnding;
+    S1:=S1 + '  ' + P.Caption;
+  end;
+
+  S:=S + LineEnding + S1 +  LineEnding + ')';
+  AddSQLCommand(S);
+end;
+
 var
   OP: TAlterTableOperator;
 begin
@@ -18018,6 +18050,7 @@ begin
       ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, OP.ParamValue]);
       ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, OP.ParamValue]);
       ataSetParams:DoSetParams(OP);
+      ataReSetParams:DoReSetParams(OP);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
