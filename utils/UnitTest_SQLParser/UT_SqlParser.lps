@@ -17,8 +17,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="487"/>
-        <CursorPos X="5" Y="502"/>
+        <CursorPos X="8" Y="499"/>
         <UsageCount Value="127"/>
         <Bookmarks Count="1">
           <Item0 Y="526" ID="3"/>
@@ -51,10 +52,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="427"/>
-        <CursorPos X="3" Y="430"/>
+        <CursorPos X="43" Y="451"/>
         <UsageCount Value="127"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
