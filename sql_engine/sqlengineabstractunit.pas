@@ -2787,6 +2787,9 @@ var
   C: TAlterTableOperator;
   FFlags: TTableCashedStateFlags;
 begin
+  if ASqlObject is TSQLAlterTable then
+    if TSQLAlterTable(ASqlObject).Operators.Count = 0 then
+      Exit(false);
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
   FFlags:=[];
   if ASqlObject is TSQLAlterTable then

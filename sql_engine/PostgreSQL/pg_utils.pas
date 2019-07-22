@@ -44,6 +44,7 @@ procedure FillPGVersion(const Items:TStrings);
 function PGClassTypeToDBObjectKind(const S:string):TDBObjectKind;
 function PGConstraintTypeToDBObjectKind(const S: string): TDBObjectKind;
 
+function StrToFloatExDef(ANum:string; ADefValue:Double):Double;
 implementation
 uses strutils, fbmStrConstUnit, dbconst;
 
@@ -336,5 +337,13 @@ begin
     Result:=okOther
 end;
 
+function StrToFloatExDef(ANum: string; ADefValue: Double): Double;
+var
+  Code:Integer;
+begin
+  Val(ANum, Result, Code);
+  if Code<>0 then
+    Result:=ADefValue;
+end;
 end.
 

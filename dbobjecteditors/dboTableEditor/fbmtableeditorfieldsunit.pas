@@ -1170,96 +1170,96 @@ begin
     exit;
   end;
 
-  Result:=false;
-  if (DBObject.State <> sdboCreate) then exit;
-  C_PK:=nil;
-
-  R:=ASQLObject as TSQLCreateTable;
-  R.Name:=edtTableName.Text;
-  rxFieldList.First;
-  while not rxFieldList.EOF do
+  if (DBObject.State = sdboCreate) then
   begin
-    F:=R.Fields.AddParam(rxFieldListFIELD_NAME.AsString);
-    FillSQLField(F);
+    C_PK:=nil;
 
-    if F.PrimaryKey and(fePKAutoName in DBObject.OwnerDB.SQLEngileFeatures)  then
+    R:=ASQLObject as TSQLCreateTable;
+    R.Name:=edtTableName.Text;
+    rxFieldList.First;
+    while not rxFieldList.EOF do
     begin
-      //Костыль для птицы и имени PK
-      F.PrimaryKey:=false;
-      if not Assigned(C_PK) then
+      F:=R.Fields.AddParam(rxFieldListFIELD_NAME.AsString);
+      FillSQLField(F);
+
+      if F.PrimaryKey and(fePKAutoName in DBObject.OwnerDB.SQLEngileFeatures)  then
       begin
-        C_PK:=R.SQLConstraints.Add(ctPrimaryKey);
-        C_PK.ConstraintName:=FormatStringCase('pk_' + UpperCase(edtTableName.Text),DBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
-        C_PK.IndexName:=FormatStringCase('idx_pk_' + UpperCase(edtTableName.Text),DBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
+        //Костыль для птицы и имени PK
+        F.PrimaryKey:=false;
+        if not Assigned(C_PK) then
+        begin
+          C_PK:=R.SQLConstraints.Add(ctPrimaryKey);
+          C_PK.ConstraintName:=FormatStringCase('pk_' + UpperCase(edtTableName.Text),DBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
+          C_PK.IndexName:=FormatStringCase('idx_pk_' + UpperCase(edtTableName.Text),DBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
+        end;
+        C_PK.ConstraintFields.AddParam(F.Caption);
       end;
-      C_PK.ConstraintFields.AddParam(F.Caption);
+      rxFieldList.Next;
     end;
-    rxFieldList.Next;
-  end;
 
-  rxFieldList.First;
-  while not rxFieldList.EOF do
-  begin
-    if rxFieldListFK_TABEL_NAME.AsString <> '' then
+    rxFieldList.First;
+    while not rxFieldList.EOF do
     begin
-      C:=R.SQLConstraints.Add(ctForeignKey, rxFieldListFK_NAME.AsString);
-      C.ForeignTable:=rxFieldListFK_TABEL_NAME.AsString;
-      C.ConstraintFields.AddParam(rxFieldListFIELD_NAME.AsString);
-      C.IndexName:=rxFieldListFK_INDEX_NAME.AsString;
-      C.ForeignFields.AddParam(Trim(rxFieldListFK_FIELDS.AsString));
-      C.ForeignKeyRuleOnUpdate:=TForeignKeyRule(rxFieldListFK_RULE.AsInteger and %00000011);
-      C.ForeignKeyRuleOnDelete:=TForeignKeyRule((rxFieldListFK_RULE.AsInteger and %00001100) shr 2);
-      C.Description:=TrimRight(rxFieldListFK_DESC.AsString);
+      if rxFieldListFK_TABEL_NAME.AsString <> '' then
+      begin
+        C:=R.SQLConstraints.Add(ctForeignKey, rxFieldListFK_NAME.AsString);
+        C.ForeignTable:=rxFieldListFK_TABEL_NAME.AsString;
+        C.ConstraintFields.AddParam(rxFieldListFIELD_NAME.AsString);
+        C.IndexName:=rxFieldListFK_INDEX_NAME.AsString;
+        C.ForeignFields.AddParam(Trim(rxFieldListFK_FIELDS.AsString));
+        C.ForeignKeyRuleOnUpdate:=TForeignKeyRule(rxFieldListFK_RULE.AsInteger and %00000011);
+        C.ForeignKeyRuleOnDelete:=TForeignKeyRule((rxFieldListFK_RULE.AsInteger and %00001100) shr 2);
+        C.Description:=TrimRight(rxFieldListFK_DESC.AsString);
+      end;
+      rxFieldList.Next;
     end;
-    rxFieldList.Next;
-  end;
 
-  AIO:=nil;
-  rxFieldList.First;
-  while not rxFieldList.EOF do
-  begin
-    if Assigned(AIO) then
-      AIO.Clear;
-
-    if (rxFieldListAUTO_INC_GEN_TYPE.AsInteger in [2]) and (rxFieldListAUTO_INC_GEN_NAME.AsString <> '') then
+    AIO:=nil;
+    rxFieldList.First;
+    while not rxFieldList.EOF do
     begin
-      if not Assigned(AIO) then
-        AIO:=R.GetAutoIncObject;
-      AIO:=R.GetAutoIncObject;
       if Assigned(AIO) then
-        AIO.SequenceName:=rxFieldListAUTO_INC_GEN_NAME.AsString;
-    end
-    else
-    if (rxFieldListAUTO_INC_GEN_TYPE.AsInteger = 1) then
-    begin
-      F:=R.Fields.FindParam(rxFieldListFIELD_NAME.AsString);
-      if rxFieldListAUTO_INC_GEN_TYPE_SEQ_PARAMS.AsInteger = 0 then
-        F.AutoIncType:=faioGeneratedAlways
+        AIO.Clear;
+
+      if (rxFieldListAUTO_INC_GEN_TYPE.AsInteger in [2]) and (rxFieldListAUTO_INC_GEN_NAME.AsString <> '') then
+      begin
+        if not Assigned(AIO) then
+          AIO:=R.GetAutoIncObject;
+        AIO:=R.GetAutoIncObject;
+        if Assigned(AIO) then
+          AIO.SequenceName:=rxFieldListAUTO_INC_GEN_NAME.AsString;
+      end
       else
-        F.AutoIncType:=faioGeneratedByDefault;
-    end;
-
-    if (rxFieldListAUTO_INC_CREATE_TRIGGER.AsBoolean) and (rxFieldListAUTO_INC_TRIGGER_BODY.AsString<>'') then
-    begin
-      if not Assigned(AIO) then
-        AIO:=R.GetAutoIncObject;
-      if Assigned(AIO) then
+      if (rxFieldListAUTO_INC_GEN_TYPE.AsInteger = 1) then
       begin
-        AIO.TriggerName:=rxFieldListAUTO_INC_TRIGGER_NAME.AsString;
-        AIO.TriggerBody:=rxFieldListAUTO_INC_TRIGGER_BODY.AsString;
-        AIO.TriggerDesc:=rxFieldListAUTO_INC_TRIGGER_DESC.AsString;
+        F:=R.Fields.FindParam(rxFieldListFIELD_NAME.AsString);
+        if rxFieldListAUTO_INC_GEN_TYPE_SEQ_PARAMS.AsInteger = 0 then
+          F.AutoIncType:=faioGeneratedAlways
+        else
+          F.AutoIncType:=faioGeneratedByDefault;
       end;
+
+      if (rxFieldListAUTO_INC_CREATE_TRIGGER.AsBoolean) and (rxFieldListAUTO_INC_TRIGGER_BODY.AsString<>'') then
+      begin
+        if not Assigned(AIO) then
+          AIO:=R.GetAutoIncObject;
+        if Assigned(AIO) then
+        begin
+          AIO.TriggerName:=rxFieldListAUTO_INC_TRIGGER_NAME.AsString;
+          AIO.TriggerBody:=rxFieldListAUTO_INC_TRIGGER_BODY.AsString;
+          AIO.TriggerDesc:=rxFieldListAUTO_INC_TRIGGER_DESC.AsString;
+        end;
+      end;
+
+      if Assigned(AIO) then
+        AIO.MakeObjects;
+      rxFieldList.Next;
     end;
 
     if Assigned(AIO) then
-      AIO.MakeObjects;
-    rxFieldList.Next;
+      FreeAndNil(AIO);
   end;
-
-  if Assigned(AIO) then
-    FreeAndNil(AIO);
   Result:=true;
-
 end;
 
 end.

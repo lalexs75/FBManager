@@ -1053,8 +1053,7 @@ function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
-  rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS{,
-  rxlogging};
+  rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
 
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 begin
@@ -2603,7 +2602,7 @@ var
   Q: TZQuery;
   S, SV: String;
 begin
-  Q:=GetSQLSysQuery(pgSqlTextModule.sPGStatistics['AutovacuumOption']);
+  Q:=GetSQLSysQuery(pgSqlTextModule.sPGStatistics['ServerSettings']);
   Q.Open;
   while not Q.EOF do
   begin
@@ -2614,7 +2613,7 @@ begin
     S:=Q.FieldByName('name').AsString;
     SV:=Q.FieldByName('setting').AsString;
     if S = 'autovacuum_analyze_scale_factor' then //0.1 - Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples.
-      FAutovacuumOptions.AnalyzeScaleFactor:=StrToFloatDef(SV, -1)
+      FAutovacuumOptions.AnalyzeScaleFactor:=StrToFloatExDef(SV, -1)
     else
     if S = 'autovacuum_analyze_threshold' then //50 - Minimum number of tuple inserts, updates, or deletes prior to analyze.
       FAutovacuumOptions.AnalyzeThreshold:=StrToIntDef(SV, -1)
@@ -2629,10 +2628,19 @@ begin
       FAutovacuumOptions.VacuumCostLimit:=StrToInt64Def(SV, -1)
     else
     if S = 'autovacuum_vacuum_scale_factor' then //0.2 - Number of tuple updates or deletes prior to vacuum as a fraction of reltuples.
-      FAutovacuumOptions.VacuumScaleFactor:=StrToInt64Def(SV, -1)
+      FAutovacuumOptions.VacuumScaleFactor:=StrToFloatExDef(SV, -1)
     else
     if S = 'autovacuum_vacuum_threshold' then //50 - Minimum number of tuple updates or deletes prior to vacuum.
-      FAutovacuumOptions.VacuumThreshold:=StrToInt64Def(SV, -1)
+      FAutovacuumOptions.VacuumThreshold:=StrToFloatExDef(SV, -1)
+    else
+    if S = 'vacuum_freeze_table_age' then //150000000 - Age at which VACUUM should scan whole table to freeze tuples.
+      FAutovacuumOptions.FreezeTableAge:=StrToInt64Def(SV, -1)
+    else
+    if S = 'vacuum_freeze_min_age' then //50000000 - Minimum age at which VACUUM should freeze a table row.
+      FAutovacuumOptions.FreezeMinAge:=StrToInt64Def(SV, -1)
+    else
+    if S = 'vacuum_cost_limit' then //200 - Vacuum cost amount available before napping.	Resource Usage / Cost-Based Vacuum Delay
+      FAutovacuumOptions.FreezeMinAge:=StrToInt64Def(SV, -1)
     ;
     Q.Next;
   end;
@@ -3895,6 +3903,19 @@ begin
   Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
   Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
 
+  if FAutovacuumOptions.Enabled then
+  begin
+    Statistic.AddValue(sAutovacuumEnabled, sYes);
+    Statistic.AddValue(sVacuumThreshold, FloatToStr(FAutovacuumOptions.VacuumThreshold));
+    Statistic.AddValue(sAnalyzeThreshold, IntToStr(FAutovacuumOptions.AnalyzeThreshold));
+    Statistic.AddValue(sVacuumScaleFactor, FloatToStr(FAutovacuumOptions.VacuumScaleFactor));
+    Statistic.AddValue(sAnalyzeScaleFactor, FloatToStr(FAutovacuumOptions.AnalyzeScaleFactor));
+    Statistic.AddValue(sVacuumCostDelay, IntToStr(FAutovacuumOptions.VacuumCostDelay));
+    Statistic.AddValue(sVacuumCostLimit, IntToStr(FAutovacuumOptions.VacuumCostLimit));
+    Statistic.AddValue(sFreezeMinAge, IntToStr(FAutovacuumOptions.FreezeMinAge));
+    Statistic.AddValue(sFreezeMaxAge, IntToStr(FAutovacuumOptions.FreezeMaxAge));
+    Statistic.AddValue(sFreezeTableAge, IntToStr(FAutovacuumOptions.FreezeTableAge));
+  end;
 
   FQuery.Close;
   FQuery.Free;
@@ -4420,7 +4441,6 @@ begin
     Result:=TPGSQLAlterTable.Create(nil);
     Result.Name:=Caption;
     TPGSQLAlterTable(Result).SchemaName:=Schema.Caption;
-    //TPGSQLAlterTable(Result).StorageParameters.Assign(FStorageParameters);
   end
   else
   begin

@@ -150,6 +150,23 @@ msgstr ""
 msgid "Always show glyph"
 msgstr ""
 
+#: fbmstrconstunit.sanalyzescalefactor
+msgid "Analyze scale factor"
+msgstr ""
+
+#: fbmstrconstunit.sanalyzescalefactorhint
+msgctxt "fbmstrconstunit.sanalyzescalefactorhint"
+msgid "Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples"
+msgstr ""
+
+#: fbmstrconstunit.sanalyzethreshold
+msgid "Analyze threshold"
+msgstr ""
+
+#: fbmstrconstunit.sanalyzethresholdhint
+msgid "Minimum number of tuple inserts, updates, or deletes prior to analyze"
+msgstr ""
+
 #: fbmstrconstunit.sappendfunctionhint
 msgid "Create new nested function"
 msgstr ""
@@ -226,8 +243,8 @@ msgstr ""
 msgid "Auto vacuum"
 msgstr ""
 
-#: fbmstrconstunit.sautovacuumanalyzescalefactorhint
-msgid "Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples"
+#: fbmstrconstunit.sautovacuumenabled
+msgid "Autovacuum enabled"
 msgstr ""
 
 #: fbmstrconstunit.savallabletags
@@ -2027,6 +2044,30 @@ msgstr ""
 
 #: fbmstrconstunit.sfreetdsdeletealias
 msgid "Delete this alias?"
+msgstr ""
+
+#: fbmstrconstunit.sfreezemaxage
+msgid "Freeze max age"
+msgstr ""
+
+#: fbmstrconstunit.sfreezemaxagehint
+msgid "Age at which to autovacuum a table to prevent transaction ID wraparound"
+msgstr ""
+
+#: fbmstrconstunit.sfreezeminage
+msgid "Freeze min age"
+msgstr ""
+
+#: fbmstrconstunit.sfreezeminagehint
+msgid "Minimum age at which VACUUM should freeze a table row"
+msgstr ""
+
+#: fbmstrconstunit.sfreezetableage
+msgid "Freeze table age"
+msgstr ""
+
+#: fbmstrconstunit.sfreezetableagehint
+msgid "Age at which VACUUM should scan whole table to freeze tuples"
 msgstr ""
 
 #: fbmstrconstunit.sfromdate
@@ -5193,6 +5234,38 @@ msgstr ""
 msgid "Use table name as alis in create SQL form"
 msgstr ""
 
+#: fbmstrconstunit.svacuumcostdelay
+msgid "Vacuum cost delay"
+msgstr ""
+
+#: fbmstrconstunit.svacuumcostdelayhint
+msgid "Vacuum cost delay in milliseconds, for autovacuum (ms)"
+msgstr ""
+
+#: fbmstrconstunit.svacuumcostlimit
+msgid "Vacuum cost limit"
+msgstr ""
+
+#: fbmstrconstunit.svacuumcostlimithint
+msgid "Vacuum cost amount available before napping, for autovacuum"
+msgstr ""
+
+#: fbmstrconstunit.svacuumscalefactor
+msgid "Vacuum scale factor"
+msgstr ""
+
+#: fbmstrconstunit.svacuumscalefactorhint
+msgid "Number of tuple updates or deletes prior to vacuum as a fraction of reltuples"
+msgstr ""
+
+#: fbmstrconstunit.svacuumthreshold
+msgid "Vacuum threshold"
+msgstr ""
+
+#: fbmstrconstunit.svacuumthresholdhint
+msgid "Minimum number of tuple updates or deletes prior to vacuum"
+msgstr ""
+
 #: fbmstrconstunit.svalidate
 msgid "Validate"
 msgstr ""
@@ -5247,6 +5320,10 @@ msgstr ""
 
 #: fbmstrconstunit.swritetimestampintolog
 msgid "Write timestamp into log"
+msgstr ""
+
+#: fbmstrconstunit.syes
+msgid "Yes"
 msgstr ""
 
 #: fb_utils.sdescbigint

@@ -321,7 +321,6 @@ function TfdbmTableEditorForeignKeyFrame.SetupSQLObject(
 var
   C: TSQLConstraintItem;
 begin
-  Result:=false;
   if (DBObject.State = sdboCreate) and (ASQLObject is TSQLCreateTable) then
   begin
     rxFKList.First;
@@ -340,8 +339,8 @@ begin
       rxFKList.Next;
     end;
     rxFKList.First;
-    Result:=true;
   end;
+  Result:=true;
 end;
 
 end.

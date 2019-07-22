@@ -277,7 +277,6 @@ function TfdbmTableEditorUniqueFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
 var
   C: TSQLConstraintItem;
 begin
-  Result:=false;
   if (DBObject.State = sdboCreate) and (ASQLObject is TSQLCreateTable) then
   begin
     rxUnqList.First;
@@ -292,8 +291,8 @@ begin
       rxUnqList.Next;
     end;
     rxUnqList.First;
-    Result:=true;
   end;
+  Result:=true;
 end;
 
 end.

@@ -1,7 +1,7 @@
 object fbManagerMainForm: TfbManagerMainForm
   Left = 440
   Height = 799
-  Top = 85
+  Top = 88
   Width = 1239
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'

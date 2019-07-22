@@ -305,7 +305,6 @@ var
   OP: TAlterTableOperator;
   C: TSQLConstraintItem;
 begin
-  Result:=false;
   if (ASQLObject is TSQLCreateTable) and (DBObject.State = sdboCreate) then
   begin
     rxData.First;
@@ -316,8 +315,8 @@ begin
       C.Description:=rxDataCHECK_DESK.AsString;
       rxData.Next;
     end;
-    Result:=true;
   end;
+  Result:=true;
 end;
 
 end.

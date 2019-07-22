@@ -1463,7 +1463,7 @@ object pgSqlTextModule: TpgSqlTextModule
         )
       end    
       item
-        Caption = 'AutovacuumOption'
+        Caption = 'ServerSettings'
         Lines.Strings = (
           'select'
           '  pg_settings.name,'
@@ -1472,10 +1472,10 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_settings.short_desc'
           'from'
           '  pg_settings'
-          'where'
+          '/*where'
           '  pg_settings.category = ''Autovacuum'''
           ''
-          ''
+          '*/'
         )
       end>
     Left = 968

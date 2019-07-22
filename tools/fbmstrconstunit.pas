@@ -218,6 +218,7 @@ resourcestring
   sResultForm                       = 'Form';
 
   sFindInMetatadaResult             = 'Find in metadata result';
+  sYes                              = 'Yes';
 
   sNewField                         = 'New field';
   sEditField                        = 'Edit field';
@@ -703,7 +704,25 @@ resourcestring
   sLockingMode                      = 'Locking mode';
   sSynchronous                      = 'Synchronous';
   sFullfSync                        = 'Full file sync';
-  sAutovacuumAnalyzeScaleFactorHint = 'Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples';
+  sAnalyzeScaleFactorHint           = 'Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples';
+  sVacuumThresholdHint              = 'Minimum number of tuple updates or deletes prior to vacuum';
+  sAnalyzeThresholdHint             = 'Minimum number of tuple inserts, updates, or deletes prior to analyze';
+  sVacuumScaleFactorHint            = 'Number of tuple updates or deletes prior to vacuum as a fraction of reltuples';
+  sVacuumCostDelayHint              = 'Vacuum cost delay in milliseconds, for autovacuum (ms)';
+  sVacuumCostLimitHint              = 'Vacuum cost amount available before napping, for autovacuum';
+  sFreezeMinAgeHint                 = 'Minimum age at which VACUUM should freeze a table row';
+  sFreezeMaxAgeHint                 = 'Age at which to autovacuum a table to prevent transaction ID wraparound';
+  sFreezeTableAgeHint               = 'Age at which VACUUM should scan whole table to freeze tuples';
+  sVacuumThreshold                  = 'Vacuum threshold';
+  sAnalyzeThreshold                 = 'Analyze threshold';
+  sVacuumScaleFactor                = 'Vacuum scale factor';
+  sAnalyzeScaleFactor               = 'Analyze scale factor';
+  sVacuumCostDelay                  = 'Vacuum cost delay';
+  sVacuumCostLimit                  = 'Vacuum cost limit';
+  sFreezeMinAge                     = 'Freeze min age';
+  sFreezeMaxAge                     = 'Freeze max age';
+  sFreezeTableAge                   = 'Freeze table age';
+  sAutovacuumEnabled                = 'Autovacuum enabled';
 
   sServerName                       = 'Server name    = ';
   sDBName                           = 'Data base name = ';

@@ -25,8 +25,9 @@ unit fbmpgTableAutoVaccumUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, fbmSqlParserUnit,
-  fdmAbstractEditorUnit, PostgreSQLEngineUnit, SQLEngineAbstractUnit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  fbmSqlParserUnit, fdmAbstractEditorUnit, PostgreSQLEngineUnit,
+  SQLEngineAbstractUnit, sqlObjects;
 
 type
 
@@ -76,7 +77,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, pg_utils, pg_SqlParserUnit;
+uses rxAppUtils, fbmStrConstUnit, fbmToolsUnit, pg_utils, pg_SqlParserUnit;
 
 {$R *.lfm}
 
@@ -130,51 +131,31 @@ begin
   else
     Exit;
 
+  CheckBox1.Checked:=AO.Enabled;
+
   AODef:=TSQLEnginePostgre(DBObject.OwnerDB).AutovacuumOptions;
+  Edit1.Text:=FloatToStr(AO.VacuumThreshold);
+  Edit2.Text:=IntToStr(AO.AnalyzeThreshold);
+  Edit3.Text:=FloatToStr(AO.VacuumScaleFactor);
+  Edit4.Text:=FloatToStr(AO.AnalyzeScaleFactor);
+  Edit5.Text:=IntToStr(AO.VacuumCostDelay);
+  Edit6.Text:=IntToStr(AO.VacuumCostLimit);
+  Edit7.Text:=IntToStr(AO.FreezeMinAge);
+  Edit8.Text:=IntToStr(AO.FreezeMaxAge);
+  Edit9.Text:=IntToStr(AO.FreezeTableAge);
+
+
   Edit10.Text:=FloatToStr(AODef.VacuumThreshold);
-  Edit11.Text:=FloatToStr(AODef.AnalyzeThreshold);
+  Edit11.Text:=IntToStr(AODef.AnalyzeThreshold);
   Edit12.Text:=FloatToStr(AODef.VacuumScaleFactor);
   Edit13.Text:=FloatToStr(AODef.AnalyzeScaleFactor);
-  Edit14.Text:=FloatToStr(AODef.VacuumCostDelay);
-  Edit15.Text:=FloatToStr(AODef.VacuumCostLimit);
-  Edit16.Text:=FloatToStr(AODef.FreezeMinAge);
-  Edit17.Text:=FloatToStr(AODef.FreezeMaxAge);
-  Edit18.Text:=FloatToStr(AODef.FreezeTableAge);
+  Edit14.Text:=IntToStr(AODef.VacuumCostDelay);
+  Edit15.Text:=IntToStr(AODef.VacuumCostLimit);
+  Edit16.Text:=IntToStr(AODef.FreezeMinAge);
+  Edit17.Text:=IntToStr(AODef.FreezeMaxAge);
+  Edit18.Text:=IntToStr(AODef.FreezeTableAge);
 
-(*
-  CheckBox1.Checked:=AO.Enabled;
-  Edit1:=;
-  if CheckBox1.Checked then
-  begin
-    if FStp.Values['autovacuum_vacuum_threshold']<>'' then
-      Edit1.Text:=FStp.Values['autovacuum_vacuum_threshold']
-    else
-      Edit1.Text:='-1';
-
-    if FStp.Values['autovacuum_analyze_threshold']<>'' then
-      Edit2.Text:=FStp.Values['autovacuum_analyze_threshold']
-    else
-      Edit2.Text:='-1';
-  end
-  else
-  begin
-    Edit1.Text:='-1';
-    Edit2.Text:='-1';
-  end
-*)
-(*
-autovacuum_enabled=true,
-autovacuum_vacuum_threshold = 51,
-autovacuum_analyze_threshold = 51,
-autovacuum_vacuum_scale_factor = 0.2,
-autovacuum_analyze_scale_factor = 0.1,
-autovacuum_vacuum_cost_delay = 20,
-autovacuum_vacuum_cost_limit = 200,
-autovacuum_freeze_min_age = 50000000,
-autovacuum_freeze_max_age = 200000000,
-  autovacuum_freeze_table_age = 150000000
-
-*)
+  CheckBox1Change(nil);
 end;
 
 function TfbmpgTableAutoVaccum.PageName: string;
@@ -206,33 +187,159 @@ end;
 
 procedure TfbmpgTableAutoVaccum.Localize;
 begin
-  Edit10.Hint:=sAutovacuumAnalyzeScaleFactorHint;
-  Edit11.Hint:=sAutovacuumAnalyzeScaleFactorHint;
+  CheckBox1.Caption:=sAutovacuumEnabled;
+  Label1.Caption:=sVacuumThreshold;
+  Label2.Caption:=sAnalyzeThreshold;
+  Label3.Caption:=sVacuumScaleFactor;
+  Label4.Caption:=sAnalyzeScaleFactor;
+  Label5.Caption:=sVacuumCostDelay;
+  Label6.Caption:=sVacuumCostLimit;
+  Label7.Caption:=sFreezeMinAge;
+  Label8.Caption:=sFreezeMaxAge;
+  Label9.Caption:=sFreezeTableAge;
+
+  Edit10.Hint:=sVacuumThresholdHint;
+  Edit11.Hint:=sAnalyzeThresholdHint;
+  Edit12.Hint:=sVacuumScaleFactorHint;
+  Edit13.Hint:=sAnalyzeScaleFactorHint;
+  Edit14.Hint:=sVacuumCostDelayHint;
+  Edit15.Hint:=sVacuumCostLimitHint;
+  Edit16.Hint:=sFreezeMinAgeHint;
+  Edit17.Hint:=sFreezeMaxAgeHint;
+  Edit18.Hint:=sFreezeTableAgeHint;
 end;
 
 function TfbmpgTableAutoVaccum.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 var
   FStp: TStrings;
-begin
-  Exit(true);
-(*
-  FStp:=nil;
-  if ASQLObject is TPGSQLCreateTable then
-  begin
-    FStp:=TPGSQLCreateTable(ASQLObject).StorageParameters;
-  end
-  else
-  if ASQLObject is TPGSQLCreateView then
-  begin
+  AO: TPGAutovacuumOptions;
+  OP, OA: TAlterTableOperator;
 
-  end
-  else
+procedure CheckModifyParamInt(AParamName, AParamValue:string; ACurValue:Int64);
+var
+  V: Int64;
+begin
+  V:=StrToInt64Def(AParamValue, -1);
+  if V <> ACurValue then
+  begin
+    if V>-1 then
+    begin
+      if not Assigned(OP) then OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetParams);
+      OP.Params.AddParam(AParamName).ParamValue:=IntToStr(V)
+    end
+    else
+    begin
+      if not Assigned(OA) then OA:=TPGSQLAlterTable(ASQLObject).AddOperator(ataReSetParams);
+      OA.Params.AddParam(AParamName);
+    end;
+  end;
+end;
+
+procedure CheckModifyParamFloat(AParamName, AParamValue:string; ACurValue:Extended);
+var
+  V: Extended;
+begin
+  V:=StrToFloatDef(AParamValue, -1);
+  if V <> ACurValue then
+  begin
+    if V>-1 then
+    begin
+      if not Assigned(OP) then OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetParams);
+      OP.Params.AddParam(AParamName).ParamValue:=FloatToStrEx(V)
+    end
+    else
+    begin
+      if not Assigned(OA) then OA:=TPGSQLAlterTable(ASQLObject).AddOperator(ataReSetParams);
+      OA.Params.AddParam(AParamName);
+    end;
+  end;
+end;
+
+var
+  V: Extended;
+  VI: Int64;
+begin
+  OP:=nil;
+  OA:=nil;
+  Result:=true;
+  FStp:=nil;
   if ASQLObject is TPGSQLAlterTable then
   begin
+    AO:=TPGTable(DBObject).AutovacuumOptions;
+    if CheckBox1.Checked <> AO.Enabled then
+    begin
+      if not CheckBox1.Checked then
+      begin
+        OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataReSetParams);
+        OP.Params.AddParam('autovacuum_enabled');
+        OP.Params.AddParam('autovacuum_vacuum_threshold');
+        OP.Params.AddParam('autovacuum_analyze_threshold');
+        OP.Params.AddParam('autovacuum_vacuum_scale_factor');
+        OP.Params.AddParam('autovacuum_analyze_scale_factor');
+        OP.Params.AddParam('autovacuum_vacuum_cost_delay');
+        OP.Params.AddParam('autovacuum_vacuum_cost_limit');
+        OP.Params.AddParam('autovacuum_freeze_min_age');
+        OP.Params.AddParam('autovacuum_freeze_max_age');
+        OP.Params.AddParam('autovacuum_freeze_table_age');
+        Exit;
+      end
+      else
+      begin
+        OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetParams);
+        OP.Params.AddParam('autovacuum_enabled').ParamValue:='true';
+        V:=StrToFloatDef(Edit1.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_vacuum_threshold').ParamValue:=FloatToStrEx(V);
 
+        V:=StrToFloatDef(Edit2.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_analyze_threshold').ParamValue:=FloatToStrEx(V);
+
+        V:=StrToFloatDef(Edit3.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_vacuum_scale_factor').ParamValue:=FloatToStrEx(V);
+
+        V:=StrToFloatDef(Edit4.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_analyze_scale_factor').ParamValue:=FloatToStrEx(V);
+
+        VI:=StrToInt64Def(Edit5.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_vacuum_cost_delay').ParamValue:=IntToStr(VI);
+
+        VI:=StrToInt64Def(Edit6.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_vacuum_cost_limit').ParamValue:=IntToStr(VI);
+
+        VI:=StrToInt64Def(Edit7.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_freeze_min_age').ParamValue:=IntToStr(VI);
+
+        VI:=StrToInt64Def(Edit8.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_freeze_max_age').ParamValue:=IntToStr(VI);
+
+        VI:=StrToInt64Def(Edit9.Text, -1);
+        if V>-1 then
+          OP.Params.AddParam('autovacuum_freeze_table_age').ParamValue:=IntToStr(VI);
+      end
+    end
+    else
+    if CheckBox1.Checked then
+    begin
+      CheckModifyParamFloat('autovacuum_vacuum_threshold', Edit1.Text, AO.VacuumThreshold);
+      CheckModifyParamFloat('autovacuum_analyze_threshold', Edit2.Text, AO.AnalyzeThreshold);
+      CheckModifyParamFloat('autovacuum_vacuum_scale_factor', Edit3.Text, AO.VacuumScaleFactor);
+      CheckModifyParamFloat('autovacuum_analyze_scale_factor', Edit4.Text, AO.AnalyzeScaleFactor);
+      CheckModifyParamInt('autovacuum_vacuum_cost_delay', Edit5.Text, AO.VacuumCostDelay);
+      CheckModifyParamInt('autovacuum_vacuum_cost_limit', Edit6.Text, AO.VacuumCostLimit);
+      CheckModifyParamInt('autovacuum_freeze_min_age', Edit7.Text, AO.FreezeMinAge);
+      CheckModifyParamInt('autovacuum_freeze_max_age', Edit8.Text, AO.FreezeMaxAge);
+      CheckModifyParamInt('autovacuum_freeze_table_age', Edit9.Text, AO.FreezeTableAge);
+    end;
   end
-  else
+(*  else
   if ASQLObject is TPGSQLAlterView then
   begin
 
