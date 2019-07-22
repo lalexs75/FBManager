@@ -1780,6 +1780,11 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fbmpgTableAutoVaccumUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/fbmtoolsnv.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmToolsNV"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -1804,10 +1809,16 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="1">
+    <Exceptions Count="3">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
+      <Item2>
+        <Name Value="EZDatabaseError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EDatabaseError"/>
+      </Item3>
     </Exceptions>
   </Debugging>
 </CONFIG>

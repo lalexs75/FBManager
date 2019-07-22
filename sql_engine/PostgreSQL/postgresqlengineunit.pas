@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
   ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, pgTypes,
-  SQLEngineInternalToolsUnit, SSHConnectionUnit;
+  SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
 
 
 const
@@ -465,7 +465,8 @@ type
     FVacuumThreshold: Double;
   public
     constructor Create;
-    procedure ParseOptions(const AStorageParameters:TStrings);
+    procedure LoadStorageParameters(const AStorageParameters:TStrings);
+    procedure SaveStorageParameters(const AStorageParameters:TStrings);
     procedure Clear;
     property Enabled:boolean read FEnabled write FEnabled; //autovacuum_enabled=true,
     property VacuumThreshold:Double read FVacuumThreshold write FVacuumThreshold; //autovacuum_vacuum_threshold=51,
@@ -1082,7 +1083,8 @@ begin
   Clear;
 end;
 
-procedure TPGAutovacuumOptions.ParseOptions(const AStorageParameters: TStrings);
+procedure TPGAutovacuumOptions.LoadStorageParameters(
+  const AStorageParameters: TStrings);
 begin
   FEnabled:=StrToBoolDef(AStorageParameters.Values['autovacuum_enabled'], false);
   FVacuumThreshold:=StrToFloatDef(AStorageParameters.Values['autovacuum_vacuum_threshold'], -1);
@@ -1094,6 +1096,31 @@ begin
   FFreezeMinAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_min_age'], -1);
   FFreezeMaxAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_max_age'], -1);
   FFreezeTableAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_table_age'], -1);
+end;
+
+procedure TPGAutovacuumOptions.SaveStorageParameters(
+  const AStorageParameters: TStrings);
+begin
+  AStorageParameters.Values['autovacuum_enabled']:=BoolToStr(FEnabled, true);
+  if FVacuumThreshold > -1 then
+    AStorageParameters.Values['autovacuum_vacuum_threshold']:=FloatToStrEx(FVacuumThreshold);
+  if FVacuumScaleFactor > -1 then
+    AStorageParameters.Values['autovacuum_vacuum_scale_factor']:=FloatToStrEx(FVacuumScaleFactor);
+  if FAnalyzeThreshold>-1 then
+    AStorageParameters.Values['autovacuum_analyze_threshold']:=FloatToStrEx(FAnalyzeThreshold);
+  if FAnalyzeScaleFactor>-1 then
+    AStorageParameters.Values['autovacuum_analyze_scale_factor']:=FloatToStrEx(FAnalyzeScaleFactor);
+
+  if FVacuumCostDelay > -1 then
+    AStorageParameters.Values['autovacuum_vacuum_cost_delay']:=IntToStr(FVacuumCostDelay);
+  if FVacuumCostLimit > -1 then
+    AStorageParameters.Values['autovacuum_vacuum_cost_limit']:=IntToStr(FVacuumCostLimit);
+  if FFreezeMinAge > -1 then
+    AStorageParameters.Values['autovacuum_freeze_min_age']:=IntToStr(FFreezeMinAge);
+  if FFreezeMaxAge > -1 then
+    AStorageParameters.Values['autovacuum_freeze_max_age']:=IntToStr(FFreezeMaxAge);
+  if FFreezeTableAge > -1 then
+    AStorageParameters.Values['autovacuum_freeze_table_age']:=IntToStr(FFreezeTableAge);
 end;
 
 procedure TPGAutovacuumOptions.Clear;
@@ -1336,6 +1363,9 @@ begin
   FCmd.SQLSelect:=SQLBody;
   FCmd.Description:=Description;
 
+  if AutovacuumOptions.Enabled then
+    AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+
   Result:=FCmd.AsSQL;
 
   FCmd.Free;
@@ -1389,7 +1419,7 @@ begin
   FAutovacuumOptions.Clear;
   inherited RefreshObject;
   if FStorageParameters.Count > 0 then
-    FAutovacuumOptions.ParseOptions(FStorageParameters);
+    FAutovacuumOptions.LoadStorageParameters(FStorageParameters);
 end;
 
 function TPGMatView.IndexNew: string;
@@ -3755,7 +3785,8 @@ begin
     end;
   end;
 
-
+  if AutovacuumOptions.Enabled then
+    AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
 
 //  if ChkRec.Description<>'' then
 //      SQLLines.Add(Format('COMMENT ON CONSTRAINT %s ON %s IS ''%s''', [ChkRec.Name, ATableName, ChkRec.Description]));
@@ -4515,7 +4546,7 @@ begin
     if FRelOptions<>'' then
     begin
       ParsePGArrayString(FRelOptions, FStorageParameters);
-      AutovacuumOptions.ParseOptions(FStorageParameters);
+      AutovacuumOptions.LoadStorageParameters(FStorageParameters);
     end;
 
     RefreshFieldList;

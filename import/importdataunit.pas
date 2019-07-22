@@ -107,7 +107,7 @@ var
   ImportDataForm: TImportDataForm;
 
 implementation
-uses LazUTF8, rxAppUtils, fbmStrConstUnit, fbmToolsUnit, rxdbutils, IBManMainUnit, fbmsqlscript;
+uses LazUTF8, rxAppUtils, fbmStrConstUnit, fbmToolsNV, fbmToolsUnit, rxdbutils, IBManMainUnit, fbmsqlscript;
 
 {$R *.lfm}
 

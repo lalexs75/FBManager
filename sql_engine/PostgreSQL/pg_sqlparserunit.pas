@@ -15658,6 +15658,23 @@ begin
   end;
 
   S1:='';
+  if StorageParameters.Count = 0 then
+  begin
+    if pgoWithOids in PGOptions then
+      S:=S + LineEnding + 'WITH OIDS'
+    else
+    if pgoWithoutOids in PGOptions then
+      S:=S + LineEnding + 'WITHOUT OIDS'
+  end
+  else
+  begin
+    if pgoWithOids in PGOptions then
+      S1:=S1 +'  OIDS=TRUE'
+    else
+    if pgoWithoutOids in PGOptions then
+      S1:=S1 +'  OIDS=FALSE'
+  end;
+
   for S2 in StorageParameters do
   begin
     if S1<>'' then S1:=S1 + ',' + LineEnding;
@@ -15667,12 +15684,6 @@ begin
   if S1<>'' then
     S:=S + LineEnding + 'WITH ('+LineEnding + S1 + LineEnding +')';
 
-  if pgoWithOids in PGOptions then
-    S:=S + LineEnding + 'WITH OIDS'
-  else
-  if pgoWithoutOids in PGOptions then
-    S:=S + LineEnding + 'WITHOUT OIDS'
-  ;
 
   if FTablePartition.PartitionType <> ptNone then
   begin

@@ -77,7 +77,7 @@ type
   end;
 
 implementation
-uses rxAppUtils, fbmStrConstUnit, fbmToolsUnit, pg_utils, pg_SqlParserUnit;
+uses rxAppUtils, fbmStrConstUnit, fbmToolsNV, pg_SqlParserUnit;
 
 {$R *.lfm}
 
