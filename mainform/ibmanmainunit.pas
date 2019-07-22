@@ -608,7 +608,7 @@ procedure TfbManagerMainForm.LazReportPrint(ReportName: string);
 var
   RepFileName:string;
 begin
-  RepFileName:=ExtractFileDir(ParamStr(0)) + DirectorySeparator + 'reports' + DirectorySeparator + ReportName + '.lrf';
+  RepFileName:=ReportsFolder + ReportName + '.lrf';
   frReport1.Pages.Clear;
   if FileExists(RepFileName) then
     frReport1.LoadFromFile(RepFileName)

@@ -72,7 +72,7 @@ const
 
 function LCLVersionStr:string;
 implementation
-uses LCLVersion, fbmStrConstUnit, InterfaceBase, fbm_VisualEditorsAbstractUnit, LCLPlatformDef;
+uses LCLVersion, fbmStrConstUnit, InterfaceBase, fbm_VisualEditorsAbstractUnit, LCLPlatformDef, fbmToolsUnit;
 
 {$R *.lfm}
 
@@ -106,7 +106,7 @@ procedure TfdmAboutForm.LoadGPLFile;
 var
   S:string;
 begin
-  S:=ExtractFileDir(ParamStr(0))+DirectorySeparator+'docs'+DirectorySeparator+gplFile;
+  S:=DocsFolder + gplFile;
   if FileExists(S) then
     Memo1.Lines.LoadFromFile(S);
 end;

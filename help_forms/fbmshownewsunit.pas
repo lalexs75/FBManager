@@ -76,11 +76,11 @@ end;
 
 procedure TfbmShowNewsForm.FormCreate(Sender: TObject);
 begin
-  IpHtmlPanel1.Align:=alClient;
+(*  IpHtmlPanel1.Align:=alClient;
   IpHtmlPanel1.DataProvider:=TFileDataProvider.Create(Self);
   Gate1.CA := AppendPathDelim(ExtractFileDir(ParamStr(0))) + 'ca-bundle';
   Gate1.authorize('test', 'test');
-  newsRefreshExecute(nil);
+  newsRefreshExecute(nil); *)
 end;
 
 procedure TfbmShowNewsForm.newsRefreshExecute(Sender: TObject);

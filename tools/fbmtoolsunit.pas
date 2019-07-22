@@ -68,7 +68,9 @@ var
   AliasFileName      : string = '';
   ConfigFileName     : string = '';
   ConfigFileNameNew  : string = '';
-  lngFolder          : string = '';
+  LngFolder          : string = '';
+  DocsFolder         : string = '';
+  ReportsFolder      : string = '';
   DebugLevel         : integer = 0;
 
 var
@@ -577,16 +579,19 @@ end;
 
 procedure InitFolders;
 var
-  GlobalCfgFolder: String;
+  GlobalCfgFolder, FAppDir: String;
 begin
+  FAppDir:=AppendPathDelim(ExtractFileDir(ParamStr(0)));
   GlobalCfgFolder:=SysToUTF8(RxGetAppConfigDir(true));
-
   LocalCfgFolder:=SysToUTF8(RxGetAppConfigDir(false));
   ForceDirectoriesUTF8(LocalCfgFolder);
 
   AliasFileName:=LocalCfgFolder+sAliasFileName;
   ConfigFileName:=LocalCfgFolder+sConfigFileNameOld;
-  lngFolder:=AppendPathDelim(ExtractFileDir(ParamStr(0))) + 'languages';
+
+  LngFolder:=AppendPathDelim(FAppDir + 'languages');
+  DocsFolder:=AppendPathDelim(FAppDir+'docs');
+  ReportsFolder:=AppendPathDelim(FAppDir+'reports');
 
   ConfigFileNameNew:=LocalCfgFolder+sConfigFileNameNew;
 end;

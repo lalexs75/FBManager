@@ -13,7 +13,7 @@ object fbmShowNewsForm: TfbmShowNewsForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 36
+    Height = 34
     Top = 0
     Width = 624
     Items = <    
@@ -27,7 +27,7 @@ object fbmShowNewsForm: TfbmShowNewsForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 36
+    ClientHeight = 34
     ClientWidth = 624
     TabOrder = 0
   end

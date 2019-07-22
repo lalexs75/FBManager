@@ -5450,6 +5450,7 @@ begin
   R:=TPGSQLDropFunction.Create(nil);
   R.Name:=AItem.Caption;
   R.SchemaName:=AItem.SchemaName;
+  R.BracketExists:=true;
 
   for P in (AItem as TPGFunction).FieldsIN do
   begin
