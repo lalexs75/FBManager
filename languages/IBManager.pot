@@ -4175,6 +4175,10 @@ msgstr ""
 msgid "Scale"
 msgstr ""
 
+#: fbmstrconstunit.sschemaoid
+msgid "Schema OID"
+msgstr ""
+
 #: fbmstrconstunit.sscheme
 msgid "Scheme"
 msgstr ""

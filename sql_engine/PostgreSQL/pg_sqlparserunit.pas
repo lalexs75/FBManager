@@ -15458,7 +15458,7 @@ procedure TPGSQLCreateTable.MakeSQL;
 var
   F, P: TSQLParserField;
   SF, SPK, S, S_CON, S1, S2: String;
-  C: TSQLConstraintItem;
+  C, FFindPKC: TSQLConstraintItem;
   FCmdAlter: TPGSQLAlterTable;
   OP: TAlterTableOperator;
   FCntPK: Integer;
@@ -15467,6 +15467,7 @@ begin
   SPK:='';
 
   FCntPK:=0;
+  FFindPKC:=SQLConstraints.Find(ctPrimaryKey);
   for F in Fields do
     if F.PrimaryKey then
       Inc(FCntPK);
@@ -15496,7 +15497,7 @@ begin
       if fpUnique in F.Params then
         SF:=SF + ' UNIQUE';
 
-      if F.PrimaryKey then
+      if F.PrimaryKey and (not Assigned(FFindPKC)) then
       begin
         if FCntPK > 1 then
         begin

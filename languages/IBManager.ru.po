@@ -4332,6 +4332,10 @@ msgctxt "fbmstrconstunit.sscale"
 msgid "Scale"
 msgstr "Точность"
 
+#: fbmstrconstunit.sschemaoid
+msgid "Schema OID"
+msgstr ""
+
 #: fbmstrconstunit.sscheme
 msgid "Scheme"
 msgstr "Схема"

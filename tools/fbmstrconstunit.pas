@@ -923,6 +923,7 @@ resourcestring
   sOnCommitDeleteRows               = 'ON COMMIT DELETE ROWS';
   sOnCommitPreserveRows             = 'ON COMMIT PRESERVE ROWS';
   sOID                              = 'OID';
+  sSchemaOID                        = 'Schema OID';
   sOIDFunction                      = 'Function OID';
   sOIDTable                         = 'Table OID';
   sTableSize                        = 'Table size';

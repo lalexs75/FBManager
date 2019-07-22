@@ -462,14 +462,14 @@ type
     FVacuumCostDelay: Integer;
     FVacuumCostLimit: Integer;
     FVacuumScaleFactor: Double;
-    FVacuumThreshold: Double;
+    FVacuumThreshold: Integer;
   public
     constructor Create;
     procedure LoadStorageParameters(const AStorageParameters:TStrings);
     procedure SaveStorageParameters(const AStorageParameters:TStrings);
     procedure Clear;
     property Enabled:boolean read FEnabled write FEnabled; //autovacuum_enabled=true,
-    property VacuumThreshold:Double read FVacuumThreshold write FVacuumThreshold; //autovacuum_vacuum_threshold=51,
+    property VacuumThreshold:Integer read FVacuumThreshold write FVacuumThreshold; //autovacuum_vacuum_threshold=51,
     property VacuumScaleFactor:Double read FVacuumScaleFactor write FVacuumScaleFactor;//autovacuum_vacuum_scale_factor=0.2,
     property AnalyzeThreshold:Integer read FAnalyzeThreshold write FAnalyzeThreshold; //autovacuum_analyze_threshold=51,
     property AnalyzeScaleFactor:Double read FAnalyzeScaleFactor write FAnalyzeScaleFactor; //autovacuum_analyze_scale_factor=0.1,
@@ -492,6 +492,7 @@ type
     FTableHasOIDS: boolean;
     FTableTemp: boolean;
     FTableUnloged: boolean;
+    FToastRelOptions: String;
     FTriggerList:TTriggersLists;
     FInhTables:TList;
     ZUpdateSQL:TZUpdateSQL;
@@ -570,6 +571,7 @@ type
     property InhTables:TList read FInhTables;
     property RuleList:TPGRuleList read FRuleList;
     property RelOptions: String read FRelOptions;
+    property ToastRelOptions: String read FToastRelOptions;
     property StorageParameters:TStrings read FStorageParameters;
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
   end;
@@ -1087,10 +1089,11 @@ procedure TPGAutovacuumOptions.LoadStorageParameters(
   const AStorageParameters: TStrings);
 begin
   FEnabled:=StrToBoolDef(AStorageParameters.Values['autovacuum_enabled'], false);
-  FVacuumThreshold:=StrToFloatDef(AStorageParameters.Values['autovacuum_vacuum_threshold'], -1);
-  FVacuumScaleFactor:=StrToFloatDef(AStorageParameters.Values['autovacuum_vacuum_scale_factor'], -1);
+  FVacuumThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_threshold'], -1);
+  FVacuumScaleFactor:=StrToFloatExDef(AStorageParameters.Values['autovacuum_vacuum_scale_factor'], -1);
+  FAnalyzeScaleFactor:=StrToFloatExDef(AStorageParameters.Values['autovacuum_analyze_scale_factor'], -1);
   FAnalyzeThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_analyze_threshold'], -1);
-  FAnalyzeScaleFactor:=StrToFloatDef(AStorageParameters.Values['autovacuum_analyze_scale_factor'], -1);
+
   FVacuumCostDelay:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_delay'], -1);
   FVacuumCostLimit:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_limit'], -1);
   FFreezeMinAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_min_age'], -1);
@@ -1103,11 +1106,11 @@ procedure TPGAutovacuumOptions.SaveStorageParameters(
 begin
   AStorageParameters.Values['autovacuum_enabled']:=BoolToStr(FEnabled, true);
   if FVacuumThreshold > -1 then
-    AStorageParameters.Values['autovacuum_vacuum_threshold']:=FloatToStrEx(FVacuumThreshold);
+    AStorageParameters.Values['autovacuum_vacuum_threshold']:=IntToStr(FVacuumThreshold);
   if FVacuumScaleFactor > -1 then
     AStorageParameters.Values['autovacuum_vacuum_scale_factor']:=FloatToStrEx(FVacuumScaleFactor);
   if FAnalyzeThreshold>-1 then
-    AStorageParameters.Values['autovacuum_analyze_threshold']:=FloatToStrEx(FAnalyzeThreshold);
+    AStorageParameters.Values['autovacuum_analyze_threshold']:=IntToStr(FAnalyzeThreshold);
   if FAnalyzeScaleFactor>-1 then
     AStorageParameters.Values['autovacuum_analyze_scale_factor']:=FloatToStrEx(FAnalyzeScaleFactor);
 
@@ -2661,7 +2664,7 @@ begin
       FAutovacuumOptions.VacuumScaleFactor:=StrToFloatExDef(SV, -1)
     else
     if S = 'autovacuum_vacuum_threshold' then //50 - Minimum number of tuple updates or deletes prior to vacuum.
-      FAutovacuumOptions.VacuumThreshold:=StrToFloatExDef(SV, -1)
+      FAutovacuumOptions.VacuumThreshold:=StrToIntDef(SV, -1)
     else
     if S = 'vacuum_freeze_table_age' then //150000000 - Age at which VACUUM should scan whole table to freeze tuples.
       FAutovacuumOptions.FreezeTableAge:=StrToInt64Def(SV, -1)
@@ -3922,6 +3925,7 @@ var
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
   FQuery.ParamByName('oid').AsInteger:=FOID;
@@ -4539,6 +4543,7 @@ begin
         FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
         FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
         FRelOptions:=Q.FieldByName('reloptions').AsString;
+        FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
       end;
     finally
       Q.Free;
