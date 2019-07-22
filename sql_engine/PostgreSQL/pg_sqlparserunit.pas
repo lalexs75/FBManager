@@ -251,6 +251,7 @@ type
   TPGSQLCreateMaterializedView = class(TSQLCreateView)
   private
     FSQLCommandSelect: TSQLCommandAbstractSelect;
+    FStorageParameters: TStrings;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -260,6 +261,7 @@ type
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SQLCommandSelect:TSQLCommandAbstractSelect read FSQLCommandSelect;
+    property StorageParameters:TStrings read FStorageParameters;
     property SchemaName;
     property SQLSelect;
   end;
@@ -5034,6 +5036,7 @@ destructor TPGSQLCreateMaterializedView.Destroy;
 begin
   if Assigned(FSQLCommandSelect) then
     FreeAndNil(FSQLCommandSelect);
+  FreeAndNil(FStorageParameters);
   inherited Destroy;
 end;
 
@@ -5047,6 +5050,7 @@ begin
         FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
       FSQLCommandSelect.Assign(TPGSQLCreateMaterializedView(ASource).SQLCommandSelect);
     end;
+    FStorageParameters.Assign(TPGSQLCreateMaterializedView(ASource).FStorageParameters);
   end;
   inherited Assign(ASource);
 end;
@@ -5087,6 +5091,7 @@ begin
   inherited Create(AParent);
   FObjectKind:=okMaterializedView;
   FSQLCommentOnClass:=TPGSQLCommentOn;
+  FStorageParameters:=TStringList.Create;
 end;
 
 { TPGSQLDropEventTrigger }
