@@ -449,10 +449,41 @@ type
     function RuleDrop(ARule:TPGRule):boolean;
   end;
 
+  { TPGAutovacuumOptions }
+
+  TPGAutovacuumOptions = class
+  private
+    FAnalyzeScaleFactor: Double;
+    FAnalyzeThreshold: Integer;
+    FEnabled: boolean;
+    FFreezeMaxAge: Int64;
+    FFreezeMinAge: Int64;
+    FFreezeTableAge: Int64;
+    FVacuumCostDelay: Integer;
+    FVacuumCostLimit: Integer;
+    FVacuumScaleFactor: Double;
+    FVacuumThreshold: Double;
+  public
+    constructor Create;
+    procedure ParseOptions(const AStorageParameters:TStrings);
+    procedure Clear;
+    property Enabled:boolean read FEnabled write FEnabled; //autovacuum_enabled=true,
+    property VacuumThreshold:Double read FVacuumThreshold write FVacuumThreshold; //autovacuum_vacuum_threshold=51,
+    property VacuumScaleFactor:Double read FVacuumScaleFactor write FVacuumScaleFactor;//autovacuum_vacuum_scale_factor=0.2,
+    property AnalyzeThreshold:Integer read FAnalyzeThreshold write FAnalyzeThreshold; //autovacuum_analyze_threshold=51,
+    property AnalyzeScaleFactor:Double read FAnalyzeScaleFactor write FAnalyzeScaleFactor; //autovacuum_analyze_scale_factor=0.1,
+    property VacuumCostDelay:Integer read FVacuumCostDelay write FVacuumCostDelay; //autovacuum_vacuum_cost_delay=20,
+    property VacuumCostLimit:Integer read FVacuumCostLimit write FVacuumCostLimit; //autovacuum_vacuum_cost_limit=200,
+    property FreezeMinAge:Int64 read FFreezeMinAge write FFreezeMinAge; //autovacuum_freeze_min_age=50000000,
+    property FreezeMaxAge:Int64 read FFreezeMaxAge write FFreezeMaxAge; //autovacuum_freeze_max_age=200000000,
+    property FreezeTableAge:Int64 read FFreezeTableAge write FFreezeTableAge; //autovacuum_freeze_table_age=150000000
+  end;
+
   { TPGTable }
 
   TPGTable = class(TDBTableObject)
   private
+    FAutovacuumOptions: TPGAutovacuumOptions;
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
     FOID:integer;
@@ -539,6 +570,7 @@ type
     property RuleList:TPGRuleList read FRuleList;
     property RelOptions: String read FRelOptions;
     property StorageParameters:TStrings read FStorageParameters;
+    property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
   end;
 
 
@@ -584,6 +616,7 @@ type
     function GetDDLAlter : string; override;
     function InternalGetDDLCreate: string; override;
   private
+    FAutovacuumOptions: TPGAutovacuumOptions;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -591,10 +624,12 @@ type
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean;override;
 
+    procedure RefreshObject; override;
     function IndexNew:string; override;
     function IndexEdit(const IndexName:string):boolean; override;
     function IndexDelete(const IndexName:string):boolean; override;
     procedure IndexListRefresh; override;
+    property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
   end;
 
   { TPGSequence }
@@ -904,6 +939,7 @@ type
     function IsTasksExists:boolean;
     procedure DoInitPGTasks;
     procedure UpdatePGProtocol;
+    procedure RefreshAutovacuumOptions;
   protected
     function GetImageIndex: integer;override;
 
@@ -919,12 +955,14 @@ type
     procedure RefreshDependencies(const ADBObject:TDBObject; AOID:integer);
     function GetServerInfoVersion : string; override;
   private
+    FAutovacuumOptions: TPGAutovacuumOptions;
     FRealServerVersion: Integer;
     FRealServerVersionMajor: Integer;
     FRealServerVersionMinor: Integer;
     FUsePGShedule: Boolean;
     //
     FOnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent;
+    function GetAutovacuumOptions: TPGAutovacuumOptions;
     procedure OnSQLScriptDirective(Sender: TObject; Directive, Argument: AnsiString; var StopExecution: Boolean);
     procedure ZSQLProcessorAfterExecute(Processor: TZSQLProcessor; StatementIndex: Integer);
   public
@@ -977,6 +1015,7 @@ type
     property SecurityRoot:TDBRootObject read FSecurityRoot;
     property UsePGShedule:Boolean read FUsePGShedule write FUsePGShedule;
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
+    property AutovacuumOptions:TPGAutovacuumOptions read GetAutovacuumOptions;
     //property ServerVersion
     property IDTypeTrigger:integer read FIDTypeTrigger;           //Переменная для привязки типа функции-тригера к данным в БД
     property IDTypeEventTrigger:integer read FIDTypeEventTrigger; //Переменная для привязки типа функции-тригера к данным в БД
@@ -1034,6 +1073,42 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGAutovacuumOptions }
+
+constructor TPGAutovacuumOptions.Create;
+begin
+  inherited Create;
+  Clear;
+end;
+
+procedure TPGAutovacuumOptions.ParseOptions(const AStorageParameters: TStrings);
+begin
+  FEnabled:=StrToBoolDef(AStorageParameters.Values['autovacuum_enabled'], false);
+  FVacuumThreshold:=StrToFloatDef(AStorageParameters.Values['autovacuum_vacuum_threshold'], -1);
+  FVacuumScaleFactor:=StrToFloatDef(AStorageParameters.Values['autovacuum_vacuum_scale_factor'], -1);
+  FAnalyzeThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_analyze_threshold'], -1);
+  FAnalyzeScaleFactor:=StrToFloatDef(AStorageParameters.Values['autovacuum_analyze_scale_factor'], -1);
+  FVacuumCostDelay:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_delay'], -1);
+  FVacuumCostLimit:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_limit'], -1);
+  FFreezeMinAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_min_age'], -1);
+  FFreezeMaxAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_max_age'], -1);
+  FFreezeTableAge:=StrToInt64Def(AStorageParameters.Values['autovacuum_freeze_table_age'], -1);
+end;
+
+procedure TPGAutovacuumOptions.Clear;
+begin
+  FEnabled:=false;
+  FVacuumThreshold:=-1;
+  FVacuumScaleFactor:=-1;
+  FAnalyzeThreshold:=-1;
+  FAnalyzeScaleFactor:=-1;
+  FVacuumCostDelay:=-1;
+  FVacuumCostLimit:=-1;
+  FFreezeMinAge:=-1;
+  FFreezeMaxAge:=-1;
+  FFreezeTableAge:=-1;
 end;
 
 { TPGCollation }
@@ -1280,12 +1355,14 @@ constructor TPGMatView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
   UITableOptions:=[];
   //TPGSQLCreateMaterializedView
 end;
 
 destructor TPGMatView.Destroy;
 begin
+  FreeAndNil(FAutovacuumOptions);
   inherited Destroy;
 end;
 
@@ -1306,6 +1383,14 @@ function TPGMatView.CompileSQLObject(ASqlObject: TSQLCommandDDL;
 begin
   TPGSQLCreateMaterializedView(ASqlObject).SchemaName:=FSchema.Caption;
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
+end;
+
+procedure TPGMatView.RefreshObject;
+begin
+  FAutovacuumOptions.Clear;
+  inherited RefreshObject;
+  if FStorageParameters.Count > 0 then
+    FAutovacuumOptions.ParseOptions(FStorageParameters);
 end;
 
 function TPGMatView.IndexNew: string;
@@ -2513,6 +2598,48 @@ begin
   FPGSysDB.Protocol:=FPGConnection.Protocol;
 end;
 
+procedure TSQLEnginePostgre.RefreshAutovacuumOptions;
+var
+  Q: TZQuery;
+  S, SV: String;
+begin
+  Q:=GetSQLSysQuery(pgSqlTextModule.sPGStatistics['AutovacuumOption']);
+  Q.Open;
+  while not Q.EOF do
+  begin
+    //autovacuum	on		Starts the autovacuum subprocess.
+    //autovacuum_max_workers	3		Sets the maximum number of simultaneously running autovacuum worker processes.
+    //autovacuum_multixact_freeze_max_age	400000000		Multixact age at which to autovacuum a table to prevent multixact wraparound.
+    //autovacuum_naptime	60	s	Time to sleep between autovacuum runs.
+    S:=Q.FieldByName('name').AsString;
+    SV:=Q.FieldByName('setting').AsString;
+    if S = 'autovacuum_analyze_scale_factor' then //0.1 - Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples.
+      FAutovacuumOptions.AnalyzeScaleFactor:=StrToFloatDef(SV, -1)
+    else
+    if S = 'autovacuum_analyze_threshold' then //50 - Minimum number of tuple inserts, updates, or deletes prior to analyze.
+      FAutovacuumOptions.AnalyzeThreshold:=StrToIntDef(SV, -1)
+    else
+    if S = 'autovacuum_freeze_max_age' then //200000000 - Age at which to autovacuum a table to prevent transaction ID wraparound.
+      FAutovacuumOptions.FreezeMaxAge:=StrToInt64Def(SV, -1)
+    else
+    if S = 'autovacuum_vacuum_cost_delay' then //20 - ms - Vacuum cost delay in milliseconds, for autovacuum.
+      FAutovacuumOptions.VacuumCostDelay:=StrToInt64Def(SV, -1)
+    else
+    if S = 'autovacuum_vacuum_cost_limit' then //-1 - Vacuum cost amount available before napping, for autovacuum.
+      FAutovacuumOptions.VacuumCostLimit:=StrToInt64Def(SV, -1)
+    else
+    if S = 'autovacuum_vacuum_scale_factor' then //0.2 - Number of tuple updates or deletes prior to vacuum as a fraction of reltuples.
+      FAutovacuumOptions.VacuumScaleFactor:=StrToInt64Def(SV, -1)
+    else
+    if S = 'autovacuum_vacuum_threshold' then //50 - Minimum number of tuple updates or deletes prior to vacuum.
+      FAutovacuumOptions.VacuumThreshold:=StrToInt64Def(SV, -1)
+    ;
+    Q.Next;
+  end;
+  Q.Free;
+  FAutovacuumOptions.Enabled:=true;
+end;
+
 function TSQLEnginePostgre.GetSQLQuery(ASql: string): TZQuery;
 begin
   Result:=TZQuery.Create(nil);
@@ -2539,7 +2666,7 @@ function TSQLEnginePostgre.InternalSetConnected(const AValue: boolean): boolean;
 var
   FSubVersion: Integer;
 begin
-  //inherited SetConnected(AValue);
+  FAutovacuumOptions.Clear;
 
   if AValue then
   begin
@@ -2863,6 +2990,13 @@ begin
     FOnExecuteSqlScriptProcessEvent(Argument, -1, SQLEngineCommonTypesUnit.stNone);
 end;
 
+function TSQLEnginePostgre.GetAutovacuumOptions: TPGAutovacuumOptions;
+begin
+  if not FAutovacuumOptions.Enabled then
+    RefreshAutovacuumOptions;
+  Result:=FAutovacuumOptions;
+end;
+
 procedure TSQLEnginePostgre.ZSQLProcessorAfterExecute(
   Processor: TZSQLProcessor; StatementIndex: Integer);
 begin
@@ -2879,11 +3013,13 @@ begin
   FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint];
   FSQLCommentOnClass:=TPGSQLCommentOn;
   FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
   DoInitPGEngine;
 end;
 
 destructor TSQLEnginePostgre.Destroy;
 begin
+  FreeAndNil(FAutovacuumOptions);
   FreeAndNil(FPGConnection);
   FreeAndNil(FPGSysDB);
   inherited Destroy;
@@ -4220,6 +4356,7 @@ begin
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
   FStorageParameters:=TStringList.Create;
 
   UITableOptions:=[utReorderFields, utRenameTable,
@@ -4266,6 +4403,7 @@ begin
   FreeAndNil(FRuleList);
   FreeAndNil(FCheckConstraints);
   FreeAndNil(FStorageParameters);
+  FreeAndNil(FAutovacuumOptions);
 
   inherited Destroy;
 end;
@@ -4332,6 +4470,7 @@ var
 begin
   inherited RefreshObject;
   FStorageParameters.Clear;
+  AutovacuumOptions.Clear;
   if State = sdboEdit then
   begin
     Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGRelation.Strings.Text);
@@ -4354,7 +4493,10 @@ begin
       Q.Free;
     end;
     if FRelOptions<>'' then
+    begin
       ParsePGArrayString(FRelOptions, FStorageParameters);
+      AutovacuumOptions.ParseOptions(FStorageParameters);
+    end;
 
     RefreshFieldList;
     RefreshInheritedTables;

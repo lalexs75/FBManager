@@ -1461,6 +1461,22 @@ object pgSqlTextModule: TpgSqlTextModule
           'WHERE'
           '  pg_stat_user_functions.funcid = :funcid'
         )
+      end    
+      item
+        Caption = 'AutovacuumOption'
+        Lines.Strings = (
+          'select'
+          '  pg_settings.name,'
+          '  pg_settings.setting,'
+          '  pg_settings.unit,'
+          '  pg_settings.short_desc'
+          'from'
+          '  pg_settings'
+          'where'
+          '  pg_settings.category = ''Autovacuum'''
+          ''
+          ''
+        )
       end>
     Left = 968
     Top = 32

@@ -53,7 +53,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, LR_Class, IBManMainUnit, fbmToolsUnit;
+uses rxAppUtils, fbmStrConstUnit, LR_Class, IBManMainUnit, fbmToolsUnit;
 
 {$R *.lfm}
 

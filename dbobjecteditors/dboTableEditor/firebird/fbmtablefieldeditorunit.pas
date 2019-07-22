@@ -175,7 +175,7 @@ var
   fbmTableFieldEditorForm: TfbmTableFieldEditorForm;
 
 implementation
-uses ibmanagertablefieldeditorArrayBoundunit, strutils,
+uses ibmanagertablefieldeditorArrayBoundunit, strutils, rxAppUtils,
   fb_utils, SQLEngineCommonTypesUnit, fbmToolsUnit, SQLEngineInternalToolsUnit,
   fbmStrConstUnit;
 

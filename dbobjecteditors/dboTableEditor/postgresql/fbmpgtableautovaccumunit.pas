@@ -36,9 +36,34 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     Edit1: TEdit;
+    Edit10: TEdit;
+    Edit11: TEdit;
+    Edit12: TEdit;
+    Edit13: TEdit;
+    Edit14: TEdit;
+    Edit15: TEdit;
+    Edit16: TEdit;
+    Edit17: TEdit;
+    Edit18: TEdit;
     Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Edit8: TEdit;
+    Edit9: TEdit;
     Label1: TLabel;
+    Label10: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    procedure CheckBox1Change(Sender: TObject);
   private
     function RefreshPage:boolean;
   public
@@ -57,20 +82,68 @@ uses fbmStrConstUnit, fbmToolsUnit, pg_utils, pg_SqlParserUnit;
 
 { TfbmpgTableAutoVaccum }
 
+procedure TfbmpgTableAutoVaccum.CheckBox1Change(Sender: TObject);
+var
+  FE: Boolean;
+begin
+  FE:=CheckBox1.Checked;
+  Label1.Enabled:=FE;
+  Edit1.Enabled:=FE;
+  Label2.Enabled:=FE;
+  Edit2.Enabled:=FE;
+  Label3.Enabled:=FE;
+  Edit3.Enabled:=FE;
+  Label4.Enabled:=FE;
+  Edit4.Enabled:=FE;
+  Label5.Enabled:=FE;
+  Edit5.Enabled:=FE;
+  Label6.Enabled:=FE;
+  Edit6.Enabled:=FE;
+  Label7.Enabled:=FE;
+  Edit7.Enabled:=FE;
+  Label8.Enabled:=FE;
+  Edit8.Enabled:=FE;
+  Label9.Enabled:=FE;
+  Edit9.Enabled:=FE;
+  Label10.Enabled:=FE;
+  Edit10.Enabled:=FE;
+  Edit11.Enabled:=FE;
+  Edit12.Enabled:=FE;
+  Edit13.Enabled:=FE;
+  Edit14.Enabled:=FE;
+  Edit15.Enabled:=FE;
+  Edit16.Enabled:=FE;
+  Edit17.Enabled:=FE;
+  Edit18.Enabled:=FE;
+end;
+
 function TfbmpgTableAutoVaccum.RefreshPage: boolean;
 var
-  FStp: TStrings;
+  AO, AODef: TPGAutovacuumOptions;
 begin
   Result:=true;
   if DBObject is TPGMatView then
-    FStp:=TPGMatView(DBObject).StorageParameters
+    AO:=TPGMatView(DBObject).AutovacuumOptions
   else
   if DBObject is TPGTable then
-    FStp:=TPGTable(DBObject).StorageParameters
+    AO:=TPGTable(DBObject).AutovacuumOptions
   else
     Exit;
 
-  CheckBox1.Checked:=StrToBoolDef(FStp.Values['autovacuum_enabled'], false);
+  AODef:=TSQLEnginePostgre(DBObject.OwnerDB).AutovacuumOptions;
+  Edit10.Text:=FloatToStr(AODef.VacuumThreshold);
+  Edit11.Text:=FloatToStr(AODef.AnalyzeThreshold);
+  Edit12.Text:=FloatToStr(AODef.VacuumScaleFactor);
+  Edit13.Text:=FloatToStr(AODef.AnalyzeScaleFactor);
+  Edit14.Text:=FloatToStr(AODef.VacuumCostDelay);
+  Edit15.Text:=FloatToStr(AODef.VacuumCostLimit);
+  Edit16.Text:=FloatToStr(AODef.FreezeMinAge);
+  Edit17.Text:=FloatToStr(AODef.FreezeMaxAge);
+  Edit18.Text:=FloatToStr(AODef.FreezeTableAge);
+
+(*
+  CheckBox1.Checked:=AO.Enabled;
+  Edit1:=;
   if CheckBox1.Checked then
   begin
     if FStp.Values['autovacuum_vacuum_threshold']<>'' then
@@ -88,10 +161,19 @@ begin
     Edit1.Text:='-1';
     Edit2.Text:='-1';
   end
+*)
 (*
-  autovacuum_enabled=true,
-  autovacuum_vacuum_threshold=50,
-  autovacuum_analyze_threshold=50
+autovacuum_enabled=true,
+autovacuum_vacuum_threshold = 51,
+autovacuum_analyze_threshold = 51,
+autovacuum_vacuum_scale_factor = 0.2,
+autovacuum_analyze_scale_factor = 0.1,
+autovacuum_vacuum_cost_delay = 20,
+autovacuum_vacuum_cost_limit = 200,
+autovacuum_freeze_min_age = 50000000,
+autovacuum_freeze_max_age = 200000000,
+  autovacuum_freeze_table_age = 150000000
+
 *)
 end;
 
@@ -124,7 +206,8 @@ end;
 
 procedure TfbmpgTableAutoVaccum.Localize;
 begin
-  inherited Localize;
+  Edit10.Hint:=sAutovacuumAnalyzeScaleFactorHint;
+  Edit11.Hint:=sAutovacuumAnalyzeScaleFactorHint;
 end;
 
 function TfbmpgTableAutoVaccum.SetupSQLObject(ASQLObject: TSQLCommandDDL
@@ -132,6 +215,8 @@ function TfbmpgTableAutoVaccum.SetupSQLObject(ASQLObject: TSQLCommandDDL
 var
   FStp: TStrings;
 begin
+  Exit(true);
+(*
   FStp:=nil;
   if ASQLObject is TPGSQLCreateTable then
   begin
@@ -154,7 +239,7 @@ begin
   end;
   if not Assigned(FStp) then Exit(false);
   FStp.Values['autovacuum_enabled']:=BoolToStr(CheckBox1.Checked, true); //autovacuum_enabled=true
-
+*)
 end;
 
 end.

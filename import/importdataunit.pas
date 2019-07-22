@@ -107,7 +107,7 @@ var
   ImportDataForm: TImportDataForm;
 
 implementation
-uses LazUTF8, fbmStrConstUnit, fbmToolsUnit, rxdbutils, IBManMainUnit, fbmsqlscript;
+uses LazUTF8, rxAppUtils, fbmStrConstUnit, fbmToolsUnit, rxdbutils, IBManMainUnit, fbmsqlscript;
 
 {$R *.lfm}
 
@@ -513,7 +513,7 @@ begin
     begin
       if (rxFieldListColName.AsString = '') and (rxFieldListDefValue.AsString = '') then
       begin
-        ErrorBox('Fill values for not null collumn');
+        ErrorBox(sFillValuesForNotNullCollumn);
         Exit(false);
       end;
     end;

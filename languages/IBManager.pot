@@ -226,6 +226,10 @@ msgstr ""
 msgid "Auto vacuum"
 msgstr ""
 
+#: fbmstrconstunit.sautovacuumanalyzescalefactorhint
+msgid "Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples"
+msgstr ""
+
 #: fbmstrconstunit.savallabletags
 msgid "Avallable tags:"
 msgstr ""
@@ -1539,6 +1543,10 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
+#: fbmstrconstunit.serrorinparamname
+msgid "Error in param name"
+msgstr ""
+
 #: fbmstrconstunit.serrorvariabledefenition
 msgid "Error in variable defenition"
 msgstr ""
@@ -1858,6 +1866,10 @@ msgstr ""
 
 #: fbmstrconstunit.sfillqueryparam
 msgid "Fill query param"
+msgstr ""
+
+#: fbmstrconstunit.sfillvaluesfornotnullcollumn
+msgid "Fill values for not null collumn"
 msgstr ""
 
 #: fbmstrconstunit.sfilter

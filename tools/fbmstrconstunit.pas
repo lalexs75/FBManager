@@ -703,7 +703,7 @@ resourcestring
   sLockingMode                      = 'Locking mode';
   sSynchronous                      = 'Synchronous';
   sFullfSync                        = 'Full file sync';
-
+  sAutovacuumAnalyzeScaleFactorHint = 'Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples';
 
   sServerName                       = 'Server name    = ';
   sDBName                           = 'Data base name = ';
@@ -1441,6 +1441,8 @@ resourcestring
   sSSHConnectionTimeout                        = 'SSH connection timeout';
   sSSHConnectionLoginFiled                     = 'SSH connection login filed';
   sErrorVariableDefenition                     = 'Error in variable defenition';
+  sFillValuesForNotNullCollumn                 = 'Fill values for not null collumn';
+  sErrorInParamName                            = 'Error in param name';
 implementation
 
 end.

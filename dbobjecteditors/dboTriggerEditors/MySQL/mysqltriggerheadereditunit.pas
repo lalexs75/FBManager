@@ -75,7 +75,7 @@ type
   end;
 
 implementation
-uses LR_Class, IBManMainUnit, fbmStrConstUnit, mysql_SqlParserUnit, mysql_types,
+uses rxAppUtils, LR_Class, IBManMainUnit, fbmStrConstUnit, mysql_SqlParserUnit, mysql_types,
   ibmSqlUtilsUnit, fbmToolsUnit, fb_ConstUnit;
 
 {$R *.lfm}

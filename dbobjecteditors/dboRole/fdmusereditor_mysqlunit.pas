@@ -70,7 +70,7 @@ type
 
 implementation
 
-uses fbmStrConstUnit, fbmToolsUnit, mysql_SqlParserUnit;
+uses rxAppUtils, fbmStrConstUnit, fbmToolsUnit, mysql_SqlParserUnit;
 
 {$R *.lfm}
 

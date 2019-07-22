@@ -217,7 +217,7 @@ type
 function ExecSQLScript(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 procedure WriteSQLGlobal(FileName, LogString, UserName:string; LogTimestamp:boolean);
 implementation
-uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil,
+uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
   IBManDataInspectorUnit, SQLEngineInternalToolsUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
   IBManMainUnit, LazUTF8, LazFileUtils

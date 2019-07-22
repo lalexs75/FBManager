@@ -230,7 +230,7 @@ begin
       UIBSecurity1.DeleteUser;
     except
       on E:Exception do
-        ErrorBox(E.Message)
+        ErrorBoxExcpt(E)
     end;
     ShowList;
   end;
@@ -251,7 +251,7 @@ begin
         UIBSecurity1.AddUser;
       except
         on E:Exception do
-          ErrorBox(E.Message)
+          ErrorBoxExcpt(E)
       end;
     end
   finally
@@ -295,7 +295,7 @@ begin
           rxUsersList.Post;
         except
           on E:Exception do
-            ErrorBox(E.Message)
+            ErrorBoxExcpt(E)
         end;
       end
     finally
@@ -420,7 +420,7 @@ begin
     end;
   except
     on E:Exception do
-      ErrorBox(E.Message);
+      ErrorBoxExcpt(E);
   end;
 end;
 

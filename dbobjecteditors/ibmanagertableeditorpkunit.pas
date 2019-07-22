@@ -68,7 +68,7 @@ var
   fbmTableEditorPkForm: TfbmTableEditorPkForm;
 
 implementation
-uses fbmToolsUnit, fbmStrConstUnit, SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, LazUTF8;
+uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit, SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, LazUTF8;
 
 {$R *.lfm}
 

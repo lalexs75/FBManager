@@ -88,7 +88,7 @@ type
 function ShowInsertSQLDefForm( DBObject:TDBObject;
    const ASQLEngine:TSQLEngineAbstract; const ADefMargin:integer; const TableAlis: string; out SqlStr:string):boolean;
 implementation
-uses fbmToolsUnit, rxstrutils, fbmStrConstUnit, IBManDataInspectorUnit, SQLEngineInternalToolsUnit;
+uses rxAppUtils, fbmToolsUnit, rxstrutils, fbmStrConstUnit, IBManDataInspectorUnit, SQLEngineInternalToolsUnit;
 
 {$R *.lfm}
 

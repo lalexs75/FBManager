@@ -71,7 +71,7 @@ var
   fbmIndexEditorForm: TfbmIndexEditorForm;
 
 implementation
-uses fbmToolsUnit, db, fbmStrConstUnit, strutils;
+uses rxAppUtils, fbmToolsUnit, db, fbmStrConstUnit, strutils;
 
 {$R *.lfm}
 

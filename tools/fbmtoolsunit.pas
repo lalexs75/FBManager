@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LCLType, LMessages, DB, SynEdit, Graphics, DbCtrls, rxdbgrid,
-  ExtCtrls, DBGrids, Grids, Forms, {LR_PGrid, }contnrs, rxConfigValues,
+  ExtCtrls, DBGrids, Grids, Forms, contnrs, rxConfigValues,
   SQLEngineCommonTypesUnit,  IniFiles;
 
 const
@@ -53,8 +53,8 @@ const
   defEditorFontName = 'Courier New';
   defEditorFontSize = 10;
 
-procedure InfoBox(Message:string);
-procedure ErrorBox(ErrorStr:string);
+//procedure InfoBox(Message:string);
+//procedure ErrorBox(ErrorStr:string);
 procedure ErrorBoxExt(ErrorStr:string; Args:array of const);
 procedure ErrorBoxExcpt(E:Exception);
 function QuestionBox(QuestionMessage:string):boolean;
@@ -135,7 +135,7 @@ uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging,
 {$ENDIF}
   , LazUTF8
   ;
-
+(*
 procedure ErrorBox(ErrorStr:string);
 begin
   {$IFDEF USE_SHAMANGRAD}
@@ -153,7 +153,7 @@ procedure InfoBox(Message: string);
 begin
   Application.MessageBox(PChar(Message), PChar(sInformation), MB_OK+MB_ICONQUESTION);
 end;
-
+*)
 procedure LM_SendToAll(Msg:Cardinal);
 begin
   LM_SendToAll(Msg, nil);

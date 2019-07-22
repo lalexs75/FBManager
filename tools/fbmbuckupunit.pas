@@ -194,7 +194,7 @@ begin
   except
     on E:Exception do
     begin
-      ErrorBox(E.Message);
+      ErrorBoxExcpt(E);
       ModalResult:=mrNone;
     end;
   end;

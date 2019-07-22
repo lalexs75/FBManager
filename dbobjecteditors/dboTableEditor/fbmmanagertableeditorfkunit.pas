@@ -90,7 +90,7 @@ var
   fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm;
 
 implementation
-uses IBManagerTypesUnit, fbmStrConstUnit, fbmToolsUnit,
+uses rxAppUtils, IBManagerTypesUnit, fbmStrConstUnit, fbmToolsUnit,
   SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
 
 {$R *.lfm}

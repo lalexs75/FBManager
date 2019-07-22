@@ -166,7 +166,7 @@ begin
     ShowMessage(sRestoreSuccessfullyFinished);
   except
     on E:Exception do
-      ErrorBox(E.Message);
+      ErrorBoxExcpt(E);
   end;
 
   if CheckBox2.Checked then

@@ -95,7 +95,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, ibmanagertypesunit, LR_Class, IBManMainUnit, fb_SqlParserUnit,
+uses rxAppUtils, fbmStrConstUnit, ibmanagertypesunit, LR_Class, IBManMainUnit, fb_SqlParserUnit,
   ibmSqlUtilsUnit, fb_ConstUnit;
 
 {$R *.lfm}
@@ -437,7 +437,7 @@ begin
 
   if tabLocalVar.TabVisible and not VariableFrame.Validate then
   begin
-    ErrorBox('Error in param name');
+    ErrorBox(sErrorInParamName);
     exit;
   end;
 

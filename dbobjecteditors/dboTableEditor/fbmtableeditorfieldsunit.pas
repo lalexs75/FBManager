@@ -173,7 +173,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, ib_manager_table_editor_field_order_unit, fbmToolsUnit,
+uses rxAppUtils, fbmStrConstUnit, ib_manager_table_editor_field_order_unit, fbmToolsUnit,
   fbmDBObjectEditorUnit, IBManDataInspectorUnit, SQLEngineInternalToolsUnit,
   fbmTableFieldEditorUnit, Clipbrd;
 

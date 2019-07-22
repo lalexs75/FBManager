@@ -55,7 +55,7 @@ var
   fbmConnectionEditForm: TfbmConnectionEditForm;
 
 implementation
-uses fbmToolsUnit, fbmStrConstUnit, fbm_VisualEditorsAbstractUnit;
+uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit, fbm_VisualEditorsAbstractUnit;
 
 {$R *.lfm}
 

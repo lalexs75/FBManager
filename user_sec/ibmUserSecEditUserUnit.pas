@@ -66,7 +66,7 @@ var
   ibmUserSecEditUserForm: TibmUserSecEditUserForm;
 
 implementation
-uses fbmToolsUnit, fbmStrConstUnit;
+uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit;
 
 {$R *.lfm}
 

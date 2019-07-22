@@ -77,7 +77,7 @@ type
   end;
 
 implementation
-uses pgTypes, pg_utils, fbmToolsUnit, IBManDataInspectorUnit, rxdbutils,
+uses rxAppUtils, pgTypes, pg_utils, fbmToolsUnit, IBManDataInspectorUnit, rxdbutils,
   ibmanagertypesunit, fbmStrConstUnit, Clipbrd;
 
 {$R *.lfm}

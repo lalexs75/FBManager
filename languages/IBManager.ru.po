@@ -242,6 +242,10 @@ msgstr "Автоинкремент"
 msgid "Auto vacuum"
 msgstr "Авто очистка"
 
+#: fbmstrconstunit.sautovacuumanalyzescalefactorhint
+msgid "Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples"
+msgstr ""
+
 #: fbmstrconstunit.savallabletags
 msgid "Avallable tags:"
 msgstr "Доступные тэги:"
@@ -1618,6 +1622,10 @@ msgctxt "fbmstrconstunit.serror"
 msgid "Error"
 msgstr "Ошибка"
 
+#: fbmstrconstunit.serrorinparamname
+msgid "Error in param name"
+msgstr ""
+
 #: fbmstrconstunit.serrorvariabledefenition
 msgid "Error in variable defenition"
 msgstr "Ошибка объявления переменной"
@@ -1942,6 +1950,10 @@ msgstr "Фактор заполнения"
 #: fbmstrconstunit.sfillqueryparam
 msgid "Fill query param"
 msgstr "Заполнить параметры запроса"
+
+#: fbmstrconstunit.sfillvaluesfornotnullcollumn
+msgid "Fill values for not null collumn"
+msgstr ""
 
 #: fbmstrconstunit.sfilter
 msgid "Filter"

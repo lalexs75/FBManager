@@ -47,7 +47,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, ibmanagertypesunit, LR_Class, IBManMainUnit;
+uses rxAppUtils, fbmStrConstUnit, ibmanagertypesunit, LR_Class, IBManMainUnit;
 
 {$R *.lfm}
 

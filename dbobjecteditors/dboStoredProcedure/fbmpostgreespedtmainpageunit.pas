@@ -170,7 +170,7 @@ type
   end;
 
 implementation
-uses LR_Class, LCLType, rxstrutils, IBManMainUnit, strutils, fbmStrConstUnit,
+uses rxAppUtils, LR_Class, LCLType, rxstrutils, IBManMainUnit, strutils, fbmStrConstUnit,
   pgTypes, ibmSqlUtilsUnit, pg_sql_lines_unit, pg_SqlParserUnit,
   fbmPostGreeSPedtMainPage_EditParamUnit;
 

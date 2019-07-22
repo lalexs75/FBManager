@@ -100,7 +100,7 @@ type
   end;
 
 implementation
-uses fbmToolsUnit, fbmStrConstUnit, SQLEngineInternalToolsUnit, rxdbutils;
+uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit, SQLEngineInternalToolsUnit, rxdbutils;
 
 {$R *.lfm}
 type

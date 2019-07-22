@@ -81,7 +81,7 @@ type
   end;
 
 implementation
-uses LR_Class, IBManMainUnit, SQLite3EngineUnit, sqlite3_SqlParserUnit,
+uses rxAppUtils, LR_Class, IBManMainUnit, SQLite3EngineUnit, sqlite3_SqlParserUnit,
   ibmSqlUtilsUnit, fb_ConstUnit, fbmStrConstUnit, fbmToolsUnit;
 
 {$R *.lfm}

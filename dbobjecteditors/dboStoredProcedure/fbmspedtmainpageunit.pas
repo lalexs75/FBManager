@@ -148,7 +148,7 @@ type
   end;
 
 implementation
-uses ibmanagertypesunit, fbmStrConstUnit, LR_Class, IBManMainUnit, fb_SqlParserUnit,
+uses rxAppUtils, ibmanagertypesunit, fbmStrConstUnit, LR_Class, IBManMainUnit, fb_SqlParserUnit,
   ibmSqlUtilsUnit, fb_ConstUnit;
 
 {$R *.lfm}

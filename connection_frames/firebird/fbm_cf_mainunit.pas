@@ -84,7 +84,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, IBManDataInspectorUnit, ibmanagertypesunit, SQLEngineCommonTypesUnit,
+uses rxAppUtils, fbmStrConstUnit, IBManDataInspectorUnit, ibmanagertypesunit, SQLEngineCommonTypesUnit,
   fbmToolsUnit, Clipbrd, fb_utils;
 
 {$R *.lfm}
