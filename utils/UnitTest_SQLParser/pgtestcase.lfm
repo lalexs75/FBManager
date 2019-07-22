@@ -1,10 +1,9 @@
 object PGSQLParserData: TPGSQLParserData
   OldCreateOrder = False
-  Height = 850
-  HorizontalOffset = 395
+  Height = 868
+  HorizontalOffset = 403
   VerticalOffset = 1
-  Width = 995
-  PPI = 94
+  Width = 1016
   object sComment: TRxTextHolder
     Highlighter = rxSynNone
     Items = <    
@@ -254,7 +253,7 @@ object PGSQLParserData: TPGSQLParserData
           'COMMENT ON ROLE test1 IS ''1231'';'
         )
       end>
-    Left = 24
+    Left = 25
     Top = 10
   end
   object sSimpleCmd: TRxTextHolder
@@ -422,8 +421,8 @@ object PGSQLParserData: TPGSQLParserData
           'CHECKPOINT;'
         )
       end>
-    Left = 24
-    Top = 78
+    Left = 25
+    Top = 80
   end
   object sUserAcess: TRxTextHolder
     Highlighter = rxSynNone
@@ -733,7 +732,7 @@ object PGSQLParserData: TPGSQLParserData
           'REVOKE CREATE ON TABLESPACE test_data21 FROM group_test1;'
         )
       end>
-    Left = 102
+    Left = 104
     Top = 8
   end
   object sDML: TRxTextHolder
@@ -1305,8 +1304,8 @@ object PGSQLParserData: TPGSQLParserData
           'PREPARE TRANSACTION ''foobar'';'
         )
       end>
-    Left = 102
-    Top = 78
+    Left = 104
+    Top = 80
   end
   object sDomain: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1449,11 +1448,11 @@ object PGSQLParserData: TPGSQLParserData
           'DROP DOMAIN box;'
         )
       end>
-    Left = 24
-    Top = 165
+    Left = 25
+    Top = 169
   end
   object sTable: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateTable1'
@@ -2200,9 +2199,27 @@ object PGSQLParserData: TPGSQLParserData
           ');'
           ''
         )
+      end    
+      item
+        Caption = 'AlterTable5'
+        Lines.Strings = (
+          'ALTER TABLE public.test1 RESET('
+          '  autovacuum_enabled,'
+          '  autovacuum_vacuum_threshold,'
+          '  autovacuum_analyze_threshold,'
+          '  autovacuum_vacuum_scale_factor,'
+          '  autovacuum_analyze_scale_factor,'
+          '  autovacuum_vacuum_cost_delay,'
+          '  autovacuum_vacuum_cost_limit,'
+          '  autovacuum_freeze_min_age,'
+          '  autovacuum_freeze_max_age,'
+          '  autovacuum_freeze_table_age'
+          ');'
+          ''
+        )
       end>
-    Left = 24
-    Top = 243
+    Left = 25
+    Top = 248
   end
   object sView: TRxTextHolder
     Highlighter = rxSynNone
@@ -2316,8 +2333,8 @@ object PGSQLParserData: TPGSQLParserData
           'SELECT n+1 FROM nums_1_100 WHERE n < 100;'
         )
       end>
-    Left = 24
-    Top = 321
+    Left = 25
+    Top = 328
   end
   object sSchema: TRxTextHolder
     Highlighter = rxSynNone
@@ -2379,8 +2396,8 @@ object PGSQLParserData: TPGSQLParserData
           'DROP SCHEMA mystuff CASCADE;'
         )
       end>
-    Left = 31
-    Top = 400
+    Left = 32
+    Top = 409
   end
   object sSystem: TRxTextHolder
     Highlighter = rxSynNone
@@ -2841,8 +2858,8 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER SYSTEM SET wal_level TO replica;'
         )
       end>
-    Left = 31
-    Top = 486
+    Left = 32
+    Top = 496
   end
   object sAggregate: TRxTextHolder
     Highlighter = rxSynNone
@@ -3086,8 +3103,8 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
         )
       end>
-    Left = 31
-    Top = 564
+    Left = 32
+    Top = 576
   end
   object sFunctions: TRxTextHolder
     Highlighter = rxSynNone
@@ -3351,8 +3368,8 @@ object PGSQLParserData: TPGSQLParserData
           'CREATE TRIGGER paired_items_update AFTER UPDATE ON paired_items REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab FOR EACH ROW EXECUTE PROCEDURE check_matching_pairs();'
         )
       end>
-    Left = 31
-    Top = 635
+    Left = 32
+    Top = 649
   end
   object sDataBase: TRxTextHolder
     Highlighter = rxSynNone
@@ -3447,7 +3464,7 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER SERVER foo VERSION ''8.4'' OPTIONS (SET host ''baz'');'
         )
       end>
-    Left = 102
-    Top = 165
+    Left = 104
+    Top = 169
   end
 end
