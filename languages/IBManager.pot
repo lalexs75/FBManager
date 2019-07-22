@@ -4889,6 +4889,10 @@ msgstr ""
 msgid "TimeStamp"
 msgstr ""
 
+#: fbmstrconstunit.stoastoid
+msgid "Toast OID"
+msgstr ""
+
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
 msgstr ""

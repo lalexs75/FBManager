@@ -492,6 +492,8 @@ type
     FTableHasOIDS: boolean;
     FTableTemp: boolean;
     FTableUnloged: boolean;
+    FToastAutovacuumOptions: TPGAutovacuumOptions;
+    FToastRelOID: Integer;
     FToastRelOptions: String;
     FTriggerList:TTriggersLists;
     FInhTables:TList;
@@ -574,6 +576,8 @@ type
     property ToastRelOptions: String read FToastRelOptions;
     property StorageParameters:TStrings read FStorageParameters;
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
+    property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
+    property ToastRelOID:Integer read FToastRelOID;
   end;
 
 
@@ -3926,6 +3930,8 @@ begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+  Statistic.AddValue(sToastOID, IntToStr(FToastRelOID));
+
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
   FQuery.ParamByName('oid').AsInteger:=FOID;
@@ -4413,6 +4419,7 @@ begin
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
   FAutovacuumOptions:=TPGAutovacuumOptions.Create;
+  FToastAutovacuumOptions:=TPGAutovacuumOptions.Create;
   FStorageParameters:=TStringList.Create;
 
   UITableOptions:=[utReorderFields, utRenameTable,
@@ -4460,6 +4467,7 @@ begin
   FreeAndNil(FCheckConstraints);
   FreeAndNil(FStorageParameters);
   FreeAndNil(FAutovacuumOptions);
+  FreeAndNil(FToastAutovacuumOptions);
 
   inherited Destroy;
 end;
@@ -4526,6 +4534,7 @@ begin
   inherited RefreshObject;
   FStorageParameters.Clear;
   AutovacuumOptions.Clear;
+  FToastRelOID:=0;
   if State = sdboEdit then
   begin
     Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGRelation.Strings.Text);
@@ -4542,6 +4551,7 @@ begin
         FTableTemp:=Q.FieldByName('relpersistence').AsString = 't';
         FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
         FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
+        FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FRelOptions:=Q.FieldByName('reloptions').AsString;
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
       end;
@@ -4552,6 +4562,12 @@ begin
     begin
       ParsePGArrayString(FRelOptions, FStorageParameters);
       AutovacuumOptions.LoadStorageParameters(FStorageParameters);
+    end;
+    if FToastRelOptions<>'' then
+    begin
+      FStorageParameters.Clear;
+      ParsePGArrayString(FToastRelOptions, FStorageParameters);
+      ToastAutovacuumOptions.LoadStorageParameters(FStorageParameters);
     end;
 
     RefreshFieldList;

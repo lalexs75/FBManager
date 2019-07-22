@@ -5073,6 +5073,10 @@ msgstr "Время"
 msgid "TimeStamp"
 msgstr "ДатаВремя"
 
+#: fbmstrconstunit.stoastoid
+msgid "Toast OID"
+msgstr ""
+
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
 msgstr "Размер TOAST"

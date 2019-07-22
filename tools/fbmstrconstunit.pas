@@ -924,6 +924,7 @@ resourcestring
   sOnCommitPreserveRows             = 'ON COMMIT PRESERVE ROWS';
   sOID                              = 'OID';
   sSchemaOID                        = 'Schema OID';
+  sToastOID                         = 'Toast OID';
   sOIDFunction                      = 'Function OID';
   sOIDTable                         = 'Table OID';
   sTableSize                        = 'Table size';

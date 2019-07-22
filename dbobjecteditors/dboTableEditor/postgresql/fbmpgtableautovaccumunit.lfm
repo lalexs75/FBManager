@@ -1,411 +1,732 @@
 inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
-  Height = 483
-  Width = 513
-  ClientHeight = 483
-  ClientWidth = 513
-  object CheckBox1: TCheckBox[0]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Owner
-    Left = 6
-    Height = 23
-    Top = 6
-    Width = 153
-    BorderSpacing.Around = 6
-    Caption = 'Autovacuum Enabled'
-    OnChange = CheckBox1Change
+  Height = 739
+  Width = 722
+  ClientHeight = 739
+  ClientWidth = 722
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 739
+    Top = 0
+    Width = 722
+    ActivePage = TabSheet2
+    Align = alClient
+    TabIndex = 1
     TabOrder = 0
-  end
-  object CheckBox2: TCheckBox[1]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit9
-    AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 23
-    Top = 392
-    Width = 93
-    BorderSpacing.Around = 6
-    Caption = 'CheckBox2'
-    TabOrder = 1
-  end
-  object Label1: TLabel[2]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit1
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 49
-    Width = 112
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'vacuum_threshold'
-    FocusControl = Edit1
-    ParentColor = False
-  end
-  object Edit1: TEdit[3]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 32
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 2
-    Text = 'Edit1'
-  end
-  object Edit2: TEdit[4]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit1
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 72
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 3
-    Text = 'Edit2'
-  end
-  object Label2: TLabel[5]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit2
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 89
-    Width = 112
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'analyze_threshold'
-    FocusControl = Edit2
-    ParentColor = False
-  end
-  object Edit3: TEdit[6]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit2
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 112
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 4
-    Text = 'Edit3'
-  end
-  object Label3: TLabel[7]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit3
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 129
-    Width = 127
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'vacuum_scale_factor'
-    FocusControl = Edit3
-    ParentColor = False
-  end
-  object Label4: TLabel[8]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit4
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 169
-    Width = 127
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'analyze_scale_factor'
-    FocusControl = Edit4
-    ParentColor = False
-  end
-  object Edit4: TEdit[9]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit3
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 152
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 5
-    Text = 'Edit4'
-  end
-  object Edit5: TEdit[10]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit4
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 192
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 6
-    Text = 'Edit5'
-  end
-  object Label5: TLabel[11]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit5
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 209
-    Width = 118
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'vacuum_cost_delay'
-    FocusControl = Edit5
-    ParentColor = False
-  end
-  object Label6: TLabel[12]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit6
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 249
-    Width = 113
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'vacuum_cost_limit'
-    FocusControl = Edit6
-    ParentColor = False
-  end
-  object Edit6: TEdit[13]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit5
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 232
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 7
-    Text = 'Edit6'
-  end
-  object Edit7: TEdit[14]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit6
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 272
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 8
-    Text = 'Edit7'
-  end
-  object Label7: TLabel[15]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit7
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 289
-    Width = 98
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'freeze_min_age'
-    FocusControl = Edit7
-    ParentColor = False
-  end
-  object Label8: TLabel[16]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit8
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 329
-    Width = 100
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'freeze_max_age'
-    FocusControl = Edit8
-    ParentColor = False
-  end
-  object Edit8: TEdit[17]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit7
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 312
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 9
-    Text = 'Edit8'
-  end
-  object Label9: TLabel[18]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit9
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 369
-    Width = 106
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
-    Caption = 'freeze_table_age'
-    FocusControl = Edit9
-    ParentColor = False
-  end
-  object Edit9: TEdit[19]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = Edit8
-    AnchorSideTop.Side = asrBottom
-    Left = 165
-    Height = 34
-    Top = 352
-    Width = 147
-    BorderSpacing.Around = 6
-    TabOrder = 10
-    Text = 'Edit9'
-  end
-  object Edit10: TEdit[20]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 32
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 11
-  end
-  object Edit11: TEdit[21]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit10
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 72
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 12
-  end
-  object Edit12: TEdit[22]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit11
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 112
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 13
-  end
-  object Edit13: TEdit[23]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit12
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 152
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 14
-  end
-  object Edit14: TEdit[24]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit13
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 192
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 15
-  end
-  object Edit15: TEdit[25]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit14
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 232
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 16
-  end
-  object Edit16: TEdit[26]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit15
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 272
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 17
-  end
-  object Edit17: TEdit[27]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit16
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 312
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 18
-  end
-  object Edit18: TEdit[28]
-    AnchorSideLeft.Control = Label10
-    AnchorSideTop.Control = Edit17
-    AnchorSideTop.Side = asrBottom
-    Left = 324
-    Height = 34
-    Top = 352
-    Width = 143
-    BorderSpacing.Around = 6
-    Color = clMoneyGreen
-    ReadOnly = True
-    TabOrder = 19
-  end
-  object Label10: TLabel[29]
-    AnchorSideLeft.Control = Edit1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = Edit10
-    Left = 318
-    Height = 17
-    Top = 9
-    Width = 80
-    Anchors = [akLeft, akBottom]
-    BorderSpacing.Around = 6
-    Caption = 'Current value'
-    ParentColor = False
+    object TabSheet1: TTabSheet
+      Caption = 'Table'
+      ClientHeight = 708
+      ClientWidth = 712
+      object CheckBox1: TCheckBox
+        AnchorSideLeft.Control = TabSheet1
+        AnchorSideTop.Control = TabSheet1
+        Left = 6
+        Height = 23
+        Top = 6
+        Width = 153
+        BorderSpacing.Around = 6
+        Caption = 'Autovacuum Enabled'
+        OnChange = CheckBox1Change
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit1
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 49
+        Width = 112
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_threshold'
+        FocusControl = Edit1
+        ParentColor = False
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 32
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 1
+        Text = 'Edit1'
+      end
+      object Edit2: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit1
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 72
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 2
+        Text = 'Edit2'
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit2
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 89
+        Width = 112
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'analyze_threshold'
+        FocusControl = Edit2
+        ParentColor = False
+      end
+      object Edit3: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit2
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 112
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'Edit3'
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit3
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 129
+        Width = 127
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_scale_factor'
+        FocusControl = Edit3
+        ParentColor = False
+      end
+      object Label4: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit4
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 169
+        Width = 127
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'analyze_scale_factor'
+        FocusControl = Edit4
+        ParentColor = False
+      end
+      object Edit4: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit3
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 152
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 4
+        Text = 'Edit4'
+      end
+      object Edit5: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit4
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 192
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 5
+        Text = 'Edit5'
+      end
+      object Label5: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit5
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 209
+        Width = 118
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_cost_delay'
+        FocusControl = Edit5
+        ParentColor = False
+      end
+      object Label6: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit6
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 249
+        Width = 113
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_cost_limit'
+        FocusControl = Edit6
+        ParentColor = False
+      end
+      object Edit6: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit5
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 232
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 6
+        Text = 'Edit6'
+      end
+      object Edit7: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit6
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 272
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 7
+        Text = 'Edit7'
+      end
+      object Label7: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit7
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 289
+        Width = 98
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_min_age'
+        FocusControl = Edit7
+        ParentColor = False
+      end
+      object Label8: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit8
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 329
+        Width = 100
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_max_age'
+        FocusControl = Edit8
+        ParentColor = False
+      end
+      object Edit8: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit7
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 312
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 8
+        Text = 'Edit8'
+      end
+      object Label9: TLabel
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit9
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 369
+        Width = 106
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_table_age'
+        FocusControl = Edit9
+        ParentColor = False
+      end
+      object Edit9: TEdit
+        AnchorSideLeft.Control = CheckBox1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit8
+        AnchorSideTop.Side = asrBottom
+        Left = 165
+        Height = 34
+        Top = 352
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 9
+        Text = 'Edit9'
+      end
+      object Edit10: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 32
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 10
+      end
+      object Edit11: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit10
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 72
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 11
+      end
+      object Edit12: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit11
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 112
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 12
+      end
+      object Edit13: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit12
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 152
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 13
+      end
+      object Edit14: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit13
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 192
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 14
+      end
+      object Edit15: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit14
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 232
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 15
+      end
+      object Edit16: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit15
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 272
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 16
+      end
+      object Edit17: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit16
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 312
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 17
+      end
+      object Edit18: TEdit
+        AnchorSideLeft.Control = Label10
+        AnchorSideTop.Control = Edit17
+        AnchorSideTop.Side = asrBottom
+        Left = 324
+        Height = 34
+        Top = 352
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 18
+      end
+      object Label10: TLabel
+        AnchorSideLeft.Control = Edit1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit10
+        Left = 318
+        Height = 17
+        Top = 9
+        Width = 80
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Around = 6
+        Caption = 'Current value'
+        ParentColor = False
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Toast table'
+      ClientHeight = 708
+      ClientWidth = 712
+      object CheckBox2: TCheckBox
+        AnchorSideLeft.Control = TabSheet2
+        AnchorSideTop.Control = TabSheet2
+        Left = 6
+        Height = 23
+        Top = 6
+        Width = 180
+        BorderSpacing.Around = 6
+        Caption = 'Toast autovacum enabled'
+        OnChange = CheckBox2Change
+        TabOrder = 0
+      end
+      object Label11: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit19
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 52
+        Width = 112
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_threshold'
+        FocusControl = Edit19
+        ParentColor = False
+      end
+      object Edit19: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 35
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 1
+        Text = 'Edit19'
+      end
+      object Edit20: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 35
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object Label12: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit21
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 92
+        Width = 127
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_scale_factor'
+        FocusControl = Edit21
+        ParentColor = False
+      end
+      object Edit21: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit19
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 75
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 3
+        Text = 'Edit21'
+      end
+      object Edit22: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit20
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 75
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 4
+      end
+      object Label13: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit23
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 132
+        Width = 118
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_cost_delay'
+        FocusControl = Edit23
+        ParentColor = False
+      end
+      object Edit23: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit22
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 115
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 5
+        Text = 'Edit23'
+      end
+      object Edit24: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit22
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 115
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 6
+      end
+      object Label14: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit25
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 172
+        Width = 113
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'vacuum_cost_limit'
+        FocusControl = Edit25
+        ParentColor = False
+      end
+      object Edit25: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit23
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 155
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 7
+        Text = 'Edit25'
+      end
+      object Edit26: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit24
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 155
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 8
+      end
+      object Label15: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit27
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 212
+        Width = 98
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_min_age'
+        FocusControl = Edit27
+        ParentColor = False
+      end
+      object Edit27: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit25
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 195
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 9
+        Text = 'Edit27'
+      end
+      object Edit28: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit26
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 195
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 10
+      end
+      object Edit29: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit28
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 235
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 11
+      end
+      object Edit30: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit27
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 235
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 12
+        Text = 'Edit30'
+      end
+      object Label16: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit30
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 252
+        Width = 100
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_max_age'
+        FocusControl = Edit30
+        ParentColor = False
+      end
+      object Label17: TLabel
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit31
+        AnchorSideBottom.Side = asrBottom
+        Left = 12
+        Height = 17
+        Top = 292
+        Width = 106
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'freeze_table_age'
+        FocusControl = Edit31
+        ParentColor = False
+      end
+      object Edit31: TEdit
+        AnchorSideLeft.Control = CheckBox2
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit30
+        AnchorSideTop.Side = asrBottom
+        Left = 192
+        Height = 34
+        Top = 275
+        Width = 147
+        BorderSpacing.Around = 6
+        TabOrder = 13
+        Text = 'Edit31'
+      end
+      object Edit32: TEdit
+        AnchorSideLeft.Control = Label18
+        AnchorSideTop.Control = Edit29
+        AnchorSideTop.Side = asrBottom
+        Left = 351
+        Height = 34
+        Top = 275
+        Width = 143
+        BorderSpacing.Around = 6
+        Color = clMoneyGreen
+        ReadOnly = True
+        TabOrder = 14
+      end
+      object Label18: TLabel
+        AnchorSideLeft.Control = Edit19
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = Edit20
+        Left = 345
+        Height = 17
+        Top = 12
+        Width = 80
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Around = 6
+        Caption = 'Current value'
+        ParentColor = False
+      end
+    end
   end
 end

@@ -25,7 +25,7 @@ unit fbmpgTableAutoVaccumUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
   fbmSqlParserUnit, fdmAbstractEditorUnit, PostgreSQLEngineUnit,
   SQLEngineAbstractUnit, sqlObjects;
 
@@ -46,8 +46,22 @@ type
     Edit16: TEdit;
     Edit17: TEdit;
     Edit18: TEdit;
+    Edit19: TEdit;
     Edit2: TEdit;
+    Edit20: TEdit;
+    Edit21: TEdit;
+    Edit22: TEdit;
+    Edit23: TEdit;
+    Edit24: TEdit;
+    Edit25: TEdit;
+    Edit26: TEdit;
+    Edit27: TEdit;
+    Edit28: TEdit;
+    Edit29: TEdit;
     Edit3: TEdit;
+    Edit30: TEdit;
+    Edit31: TEdit;
+    Edit32: TEdit;
     Edit4: TEdit;
     Edit5: TEdit;
     Edit6: TEdit;
@@ -56,6 +70,14 @@ type
     Edit9: TEdit;
     Label1: TLabel;
     Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -64,7 +86,11 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     procedure CheckBox1Change(Sender: TObject);
+    procedure CheckBox2Change(Sender: TObject);
   private
     function RefreshPage:boolean;
   public
@@ -118,16 +144,50 @@ begin
   Edit18.Enabled:=FE;
 end;
 
+procedure TfbmpgTableAutoVaccum.CheckBox2Change(Sender: TObject);
+var
+  E: Boolean;
+begin
+  E:=CheckBox2.Checked and CheckBox2.Enabled;
+  Label11.Enabled:=E;
+  Label12.Enabled:=E;
+  Label13.Enabled:=E;
+  Label14.Enabled:=E;
+  Label15.Enabled:=E;
+  Label16.Enabled:=E;
+  Label17.Enabled:=E;
+  Edit19.Enabled:=E;
+  Edit20.Enabled:=E;
+  Edit21.Enabled:=E;
+  Edit22.Enabled:=E;
+  Edit23.Enabled:=E;
+  Edit24.Enabled:=E;
+  Edit25.Enabled:=E;
+  Edit26.Enabled:=E;
+  Edit27.Enabled:=E;
+  Edit28.Enabled:=E;
+  Edit29.Enabled:=E;
+  Edit30.Enabled:=E;
+  Edit31.Enabled:=E;
+  Edit32.Enabled:=E;
+end;
+
 function TfbmpgTableAutoVaccum.RefreshPage: boolean;
 var
-  AO, AODef: TPGAutovacuumOptions;
+  AO, AODef, TO1: TPGAutovacuumOptions;
 begin
+  TO1:=nil;
+  AO:=nil;
   Result:=true;
   if DBObject is TPGMatView then
     AO:=TPGMatView(DBObject).AutovacuumOptions
   else
   if DBObject is TPGTable then
-    AO:=TPGTable(DBObject).AutovacuumOptions
+  begin
+    AO:=TPGTable(DBObject).AutovacuumOptions;
+    if TPGTable(DBObject).ToastRelOID>0 then
+      TO1:=TPGTable(DBObject).ToastAutovacuumOptions;
+  end
   else
     Exit;
 
@@ -144,8 +204,8 @@ begin
   Edit8.Text:=IntToStr(AO.FreezeMaxAge);
   Edit9.Text:=IntToStr(AO.FreezeTableAge);
 
-
-  Edit10.Text:=FloatToStr(AODef.VacuumThreshold);
+  //default valess
+  Edit10.Text:=IntToStr(AODef.VacuumThreshold);
   Edit11.Text:=IntToStr(AODef.AnalyzeThreshold);
   Edit12.Text:=FloatToStr(AODef.VacuumScaleFactor);
   Edit13.Text:=FloatToStr(AODef.AnalyzeScaleFactor);
@@ -155,7 +215,17 @@ begin
   Edit17.Text:=IntToStr(AODef.FreezeMaxAge);
   Edit18.Text:=IntToStr(AODef.FreezeTableAge);
 
+  Edit20.Text:=IntToStr(AODef.VacuumThreshold);
+  Edit22.Text:=FloatToStr(AODef.VacuumScaleFactor);
+  Edit24.Text:=IntToStr(AODef.VacuumCostDelay);
+  Edit26.Text:=IntToStr(AODef.VacuumCostLimit);
+  Edit28.Text:=IntToStr(AODef.FreezeMinAge);
+  Edit29.Text:=IntToStr(AODef.FreezeMaxAge);
+  Edit32.Text:=IntToStr(AODef.FreezeTableAge);
+
+  CheckBox2.Enabled:=Assigned(TO1);
   CheckBox1Change(nil);
+  CheckBox2Change(nil);
 end;
 
 function TfbmpgTableAutoVaccum.PageName: string;
