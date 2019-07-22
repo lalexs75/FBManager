@@ -1,2 +1,56 @@
 inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
+  Height = 408
+  Width = 513
+  ClientHeight = 408
+  ClientWidth = 513
+  object CheckBox1: TCheckBox[0]
+    Left = 12
+    Height = 23
+    Top = 8
+    Width = 153
+    Caption = 'Autovacuum Enabled'
+    TabOrder = 0
+  end
+  object CheckBox2: TCheckBox[1]
+    Left = 12
+    Height = 23
+    Top = 168
+    Width = 93
+    Caption = 'CheckBox2'
+    TabOrder = 1
+  end
+  object Label1: TLabel[2]
+    Left = 19
+    Height = 17
+    Top = 48
+    Width = 112
+    Caption = 'vacuum_threshold'
+    FocusControl = Edit1
+    ParentColor = False
+  end
+  object Edit1: TEdit[3]
+    Left = 144
+    Height = 34
+    Top = 32
+    Width = 80
+    TabOrder = 2
+    Text = 'Edit1'
+  end
+  object Edit2: TEdit[4]
+    Left = 144
+    Height = 34
+    Top = 76
+    Width = 80
+    TabOrder = 3
+    Text = 'Edit2'
+  end
+  object Label2: TLabel[5]
+    Left = 19
+    Height = 17
+    Top = 93
+    Width = 112
+    Caption = 'analyze_threshold'
+    FocusControl = Edit2
+    ParentColor = False
+  end
 end

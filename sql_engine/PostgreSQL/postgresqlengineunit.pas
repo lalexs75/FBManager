@@ -456,6 +456,7 @@ type
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
     FOID:integer;
+    FStorageParameters: TStrings;
     FTableHasOIDS: boolean;
     FTableTemp: boolean;
     FTableUnloged: boolean;
@@ -466,6 +467,7 @@ type
     FTableSpaceID:integer;
     FCheckConstraints:TList;
     FTableNameCreate:string;
+    FRelOptions: String;
     procedure InternalCreateDLL(var SQLLines: TStringList;
       const ATableName: string);
     procedure ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
@@ -535,6 +537,8 @@ type
     property TableUnloged:boolean read FTableUnloged;
     property InhTables:TList read FInhTables;
     property RuleList:TPGRuleList read FRuleList;
+    property RelOptions: String read FRelOptions;
+    property StorageParameters:TStrings read FStorageParameters;
   end;
 
 
@@ -542,9 +546,11 @@ type
 
   TPGView = class(TDBViewObject)
   private
+    FRelOptions: String;
     FSchema:TPGSchema;
     FOID:integer;
     FRuleList:TPGRuleList;
+    FStorageParameters: TStrings;
   protected
     function GetDDLAlter : string; override;
     function InternalGetDDLCreate: string; override;
@@ -569,6 +575,8 @@ type
     property Schema:TPGSchema read FSchema;
     property RuleList:TPGRuleList read FRuleList;
     property OID:integer read FOID;
+    property RelOptions: String read FRelOptions;
+    property StorageParameters:TStrings read FStorageParameters;
   end;
 
   TPGMatView = class(TPGView)
@@ -4212,6 +4220,7 @@ begin
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  FStorageParameters:=TStringList.Create;
 
   UITableOptions:=[utReorderFields, utRenameTable,
      utAddFields, utEditField, utDropFields,
@@ -4256,6 +4265,7 @@ begin
   FreeAndNil(FInhTables);
   FreeAndNil(FRuleList);
   FreeAndNil(FCheckConstraints);
+  FreeAndNil(FStorageParameters);
 
   inherited Destroy;
 end;
@@ -4272,11 +4282,13 @@ begin
     Result:=TPGSQLAlterTable.Create(nil);
     Result.Name:=Caption;
     TPGSQLAlterTable(Result).SchemaName:=Schema.Caption;
+    //TPGSQLAlterTable(Result).StorageParameters.Assign(FStorageParameters);
   end
   else
   begin
     Result:=TPGSQLCreateTable.Create(nil);
     TPGSQLCreateTable(Result).SchemaName:=Schema.Caption;
+    TPGSQLCreateTable(Result).StorageParameters.Assign(FStorageParameters);
   end;
 end;
 
@@ -4319,6 +4331,7 @@ var
   Q:TZQuery;
 begin
   inherited RefreshObject;
+  FStorageParameters.Clear;
   if State = sdboEdit then
   begin
     Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGRelation.Strings.Text);
@@ -4335,10 +4348,14 @@ begin
         FTableTemp:=Q.FieldByName('relpersistence').AsString = 't';
         FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
         FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
+        FRelOptions:=Q.FieldByName('reloptions').AsString;
       end;
     finally
       Q.Free;
     end;
+    if FRelOptions<>'' then
+      ParsePGArrayString(FRelOptions, FStorageParameters);
+
     RefreshFieldList;
     RefreshInheritedTables;
     FRuleList.RuleListRefresh;
@@ -4988,6 +5005,7 @@ begin
     FOID:=ADBItem.ObjId;
 
   UITableOptions:=[];
+  FStorageParameters:=TStringList.Create;
 
   FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
@@ -5004,6 +5022,7 @@ end;
 destructor TPGView.Destroy;
 begin
   FreeAndNil(FRuleList);
+  FreeAndNil(FStorageParameters);
   inherited Destroy;
 end;
 
@@ -5017,6 +5036,7 @@ var
   Q:TZQuery;
 begin
   inherited RefreshObject;
+  FStorageParameters.Clear;
   if State <> sdboEdit then exit;
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_ViewRefresh.Strings.Text);
   try
@@ -5032,10 +5052,13 @@ begin
       FDescription:=Q.FieldByName('description').AsString;
       FOID:=Q.FieldByName('oid').AsInteger;
       FSQLBody:=Q.FieldByName('definition').AsString;
+      FRelOptions:=Q.FieldByName('reloptions').AsString;
     end;
   finally
     Q.Free;
   end;
+  if FRelOptions<>'' then
+    ParsePGArrayString(FRelOptions, FStorageParameters);
   RefreshFieldList;
 end;
 
