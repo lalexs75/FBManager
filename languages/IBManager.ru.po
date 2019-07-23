@@ -167,7 +167,7 @@ msgstr "Всегда отображать картинку"
 
 #: fbmstrconstunit.sanalyzescalefactor
 msgid "Analyze scale factor"
-msgstr ""
+msgstr "Множитель ANALYZE"
 
 #: fbmstrconstunit.sanalyzescalefactorhint
 msgctxt "fbmstrconstunit.sanalyzescalefactorhint"
@@ -176,7 +176,7 @@ msgstr ""
 
 #: fbmstrconstunit.sanalyzethreshold
 msgid "Analyze threshold"
-msgstr ""
+msgstr "Базовое значение ANALYZE"
 
 #: fbmstrconstunit.sanalyzethresholdhint
 msgid "Minimum number of tuple inserts, updates, or deletes prior to analyze"
@@ -1646,7 +1646,7 @@ msgstr "Ошибка"
 
 #: fbmstrconstunit.serrorinparamname
 msgid "Error in param name"
-msgstr ""
+msgstr "Ошибка в имени параметра"
 
 #: fbmstrconstunit.serrorvariabledefenition
 msgid "Error in variable defenition"
@@ -1975,7 +1975,7 @@ msgstr "Заполнить параметры запроса"
 
 #: fbmstrconstunit.sfillvaluesfornotnullcollumn
 msgid "Fill values for not null collumn"
-msgstr ""
+msgstr "Заполнить значение для NOT NULL колонки"
 
 #: fbmstrconstunit.sfilter
 msgid "Filter"
@@ -3367,11 +3367,11 @@ msgstr "Базы данных"
 
 #: fbmstrconstunit.soidfunction
 msgid "Function OID"
-msgstr ""
+msgstr "OID функции"
 
 #: fbmstrconstunit.soidtable
 msgid "Table OID"
-msgstr ""
+msgstr "OID таблица"
 
 #: fbmstrconstunit.soieditdbregistration
 msgctxt "fbmstrconstunit.soieditdbregistration"
@@ -5111,7 +5111,7 @@ msgstr "Размер TOAST"
 
 #: fbmstrconstunit.stoasttable
 msgid "Toast table"
-msgstr ""
+msgstr "Таблица TOAST"
 
 #: fbmstrconstunit.stoastvacuumcostdelay
 msgctxt "fbmstrconstunit.stoastvacuumcostdelay"
@@ -5229,7 +5229,7 @@ msgid ""
 msgstr ""
 "Доступные тэги:\n"
 "%TABLE_NAME% - имя таблицы\n"
-"%TRIGGER_TYPE% - тип триггера (BI0, AUD1)\n"
+"%TRIGGER_TYPE% - тип триггера (BI0, AUD1)"
 
 #: fbmstrconstunit.striggernametemplate
 msgid "Trigger name template"
@@ -5590,7 +5590,7 @@ msgstr "Запись временной метки в лог"
 
 #: fbmstrconstunit.syes
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: fb_utils.sdescbigint
 msgid "8-byte integer type"
@@ -5825,4 +5825,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
