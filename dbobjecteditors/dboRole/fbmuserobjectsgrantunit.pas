@@ -76,7 +76,7 @@ type
     rxUGListUG_TYPE: TLongintField;
     ToolPanel1: TToolPanel;
   private
-
+    procedure RefreshPage;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -93,6 +93,27 @@ uses fbmStrConstUnit, SQLEngineCommonTypesUnit;
 
 { TfbmUserObjectsGrantFrame }
 
+procedure TfbmUserObjectsGrantFrame.RefreshPage;
+procedure DoAdd(G: TDBObject);
+begin
+  rxUGList.Append;
+  rxUGListUG_NAME.AsString:=G.CaptionFullPatch;
+  rxUGList.Post;
+end;
+
+var
+  E: TSQLEngineAbstract;
+  G: TDBObject;
+begin
+  E:=DBObject.OwnerDB;
+  rxUGList.CloseOpen;
+  rxUGList.DisableControls;
+  for G in E.Groups do
+    DoAdd(G);
+  rxUGList.First;
+  rxUGList.EnableControls;
+end;
+
 function TfbmUserObjectsGrantFrame.PageName: string;
 begin
   Result:=sGrant;
@@ -102,6 +123,7 @@ constructor TfbmUserObjectsGrantFrame.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  RefreshPage;
 end;
 
 procedure TfbmUserObjectsGrantFrame.Activate;
@@ -112,13 +134,17 @@ end;
 function TfbmUserObjectsGrantFrame.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaPrint, epaRefresh];
 end;
 
 function TfbmUserObjectsGrantFrame.DoMetod(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited DoMetod(PageAction);
+  Result:=true;
+  case PageAction of
+    epaPrint:edtPrint.Execute;
+    epaRefresh:RefreshPage;
+  end;
 end;
 
 procedure TfbmUserObjectsGrantFrame.Localize;
