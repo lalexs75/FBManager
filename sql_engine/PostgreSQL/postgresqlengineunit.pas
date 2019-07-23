@@ -592,12 +592,16 @@ type
     FOID:integer;
     FRuleList:TPGRuleList;
     FStorageParameters: TStrings;
+    FToastRelOID: Integer;
+    FToastRelOptions: String;
   protected
     function GetDDLAlter : string; override;
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
     function GeTDBFieldClass: TDBFieldClass; override;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
+    property ToastRelOID:Integer read FToastRelOID;
+    property ToastRelOptions: String read FToastRelOptions;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -627,7 +631,6 @@ type
   private
     FAutovacuumOptions: TPGAutovacuumOptions;
     FToastAutovacuumOptions: TPGAutovacuumOptions;
-    FToastRelOID: Integer;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -642,7 +645,8 @@ type
     procedure IndexListRefresh; override;
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
     property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
-    property ToastRelOID:Integer read FToastRelOID;
+    property ToastRelOID;
+    property ToastRelOptions;
   end;
 
   { TPGSequence }
@@ -1434,8 +1438,16 @@ end;
 
 function TPGMatView.CreateSQLObject: TSQLCommandDDL;
 begin
-  Result:=TPGSQLCreateMaterializedView.Create(nil);
-  TPGSQLCreateMaterializedView(Result).SchemaName:=FSchema.Caption;
+  if State <> sdboCreate then
+  begin
+    Result:=TPGSQLAlterMaterializedView.Create(nil);
+    TPGSQLCreateMaterializedView(Result).SchemaName:=FSchema.Caption;
+  end
+  else
+  begin
+    Result:=TPGSQLCreateMaterializedView.Create(nil);
+    TPGSQLCreateMaterializedView(Result).SchemaName:=FSchema.Caption;
+  end;
   Result.Name:=Caption;
 end;
 
@@ -1447,11 +1459,27 @@ begin
 end;
 
 procedure TPGMatView.RefreshObject;
+var
+  St: TStringList;
+  S: String;
 begin
   FAutovacuumOptions.Clear;
   inherited RefreshObject;
   if FStorageParameters.Count > 0 then
     FAutovacuumOptions.LoadStorageParameters(FStorageParameters);
+
+  if ToastRelOptions <> '' then
+  begin
+    St:=TStringList.Create;
+    try
+      ParsePGArrayString(ToastRelOptions, St);
+      FToastAutovacuumOptions.LoadStorageParameters(St);
+      for S in St do
+        FStorageParameters.Add('toast.' + S);
+    finally
+      St.Free;
+    end;
+  end;
 end;
 
 function TPGMatView.IndexNew: string;
@@ -4592,8 +4620,8 @@ begin
         FTableTemp:=Q.FieldByName('relpersistence').AsString = 't';
         FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
         FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
-        FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FRelOptions:=Q.FieldByName('reloptions').AsString;
+        FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
       end;
     finally
@@ -5295,6 +5323,10 @@ var
 begin
   inherited RefreshObject;
   FStorageParameters.Clear;
+  FRelOptions:='';
+  FToastRelOID:=0;
+  FToastRelOptions:='';
+
   if State <> sdboEdit then exit;
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_ViewRefresh.Strings.Text);
   try
@@ -5311,6 +5343,9 @@ begin
       FOID:=Q.FieldByName('oid').AsInteger;
       FSQLBody:=Q.FieldByName('definition').AsString;
       FRelOptions:=Q.FieldByName('reloptions').AsString;
+
+      FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
+      FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
     end;
   finally
     Q.Free;

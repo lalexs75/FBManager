@@ -120,7 +120,10 @@ begin
     else
     if (DBObject.State <> sdboCreate) and (TSQLCreateView(ASQLObject).CreateMode = cmCreate) then
       TSQLCreateView(ASQLObject).CreateMode := cmCreateOrAlter;
-  end;
+  end
+  else
+    Result:=true;
+
 end;
 
 end.

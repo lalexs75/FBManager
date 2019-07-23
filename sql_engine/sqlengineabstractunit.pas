@@ -3161,14 +3161,17 @@ var
 begin
   if (OwnerDB.MiscOptions.ObjectNamesCharCase in  [ccoUpperCase, ccoLowerCase]) then
   begin
-    VSql:=ASqlObject as TSQLCreateView;
-    for F in VSql.Fields do
-    begin;
-      if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoUpperCase then
-        F.Caption:=UTF8UpperString(F.Caption)
-      else
-      if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoLowerCase then
-        F.Caption:=UTF8LowerCase(F.Caption);
+    if ASqlObject is TSQLCreateView then
+    begin
+      VSql:=ASqlObject as TSQLCreateView;
+      for F in VSql.Fields do
+      begin;
+        if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoUpperCase then
+          F.Caption:=UTF8UpperString(F.Caption)
+        else
+        if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoLowerCase then
+          F.Caption:=UTF8LowerCase(F.Caption);
+      end;
     end;
   end;
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
