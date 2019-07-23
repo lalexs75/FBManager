@@ -491,6 +491,7 @@ type
     procedure c467CreateMaterializedView2;
     procedure c468AlterMaterializedView2;
     procedure c468AlterMaterializedView3;
+    procedure c469AlterMaterializedView4;
   end;
 
   { TPGSQLParserData }
@@ -636,6 +637,11 @@ end;
 procedure TPGSQLParserTest.c468AlterMaterializedView3;
 begin
   DoTestSQL(PGSQLParserData.sView['AlterMaterializedView3']);
+end;
+
+procedure TPGSQLParserTest.c469AlterMaterializedView4;
+begin
+  DoTestSQL(PGSQLParserData.sView['AlterMaterializedView4']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

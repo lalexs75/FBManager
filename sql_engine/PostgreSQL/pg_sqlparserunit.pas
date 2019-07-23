@@ -278,13 +278,13 @@ type
   TPGSQLAlterMaterializedCmd = class
   private
     FAction: TPGAlterMVCmdAction;
-    FParams: TStrings;
+    FParams: TSQLFields;
   public
     constructor Create;
     destructor Destroy;override;
     procedure Assign(ASource:TPGSQLAlterMaterializedCmd);
     property Action:TPGAlterMVCmdAction read FAction write FAction;
-    property Params:TStrings read FParams;
+    property Params:TSQLFields read FParams;
   end;
 
   { TPGSQLAlterMaterializedCmdList }
@@ -322,6 +322,7 @@ type
   private
     FActions: TPGSQLAlterMaterializedCmdList;
     FCurCmd: TPGSQLAlterMaterializedCmd;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -3723,7 +3724,7 @@ end;
 constructor TPGSQLAlterMaterializedCmd.Create;
 begin
   inherited Create;
-  FParams:=TStringList.Create;
+  FParams:=TSQLFields.Create;
 end;
 
 destructor TPGSQLAlterMaterializedCmd.Destroy;
@@ -4793,7 +4794,9 @@ end;
 procedure TPGSQLAlterMaterializedView.InitParserTree;
 var
   FSQLTokens, T, TIf1, TName, TName1, TDep1, TDep2, TRen1,
-    TRen2, TSet1, TSet2, TAlterCol1, TAlterCol2, TSet3: TSQLTokenRecord;
+    TRen2, TSet1, TSet2, TAlterCol1, TAlterCol2, TSet3, TSet4,
+    TSet4_1, TSet4_2, TSet4_3, TSet4_4, TSet4_5, TSet4_6,
+    TSet4_7, TReSet, TReSet1, TReSet2, TReSet2_1, TReSet3: TSQLTokenRecord;
 begin
   //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
   //    действие [, ... ]
@@ -4855,9 +4858,32 @@ begin
      TSet3:=AddSQLTokens(stKeyword, TSet1, 'WITHOUT', []); //    SET WITHOUT CLUSTER
      TSet3:=AddSQLTokens(stKeyword, TSet3, 'CLUSTER', [], 14);
 
+     TSet4:=AddSQLTokens(stSymbol, TSet1, '(', [], 15);
+      TSet4_1:=AddSQLTokens(stIdentificator, TSet4, '', [], 16);
+      TSet4_2:=AddSQLTokens(stSymbol, TSet4_1, '.', [], 17);
+      TSet4_2:=AddSQLTokens(stIdentificator, TSet4_2, '', [], 17);
+      TSet4_3:=AddSQLTokens(stSymbol, [TSet4_1, TSet4_2], '=', []);
+
+      TSet4_4:=AddSQLTokens(stInteger, TSet4_3, '', [], 18);
+      TSet4_5:=AddSQLTokens(stString, TSet4_3, '', [], 18);
+      TSet4_6:=AddSQLTokens(stFloat, TSet4_3, '', [], 18);
+      TSet4_7:=AddSQLTokens(stIdentificator, TSet4_3, '', [], 18);
+
+      TSet4_3:=AddSQLTokens(stSymbol, [TSet4_4, TSet4_5, TSet4_6, TSet4_7], ',', [], 19);
+        TSet4_3.AddChildToken(TSet4_1);
+      TSet4_3:=AddSQLTokens(stSymbol, [TSet4_4, TSet4_5, TSet4_6, TSet4_7], ')', [], 19);
+
 
      //    SET ( параметр_хранения = значение [, ... ] )
 
+   TReSet:=AddSQLTokens(stKeyword, [TName, TName1], 'RESET', []); //RESET ( параметр_хранения [, ... ] )
+     TReSet1:=AddSQLTokens(stSymbol, TReSet, '(', [], 20);
+     TReSet2:=AddSQLTokens(stIdentificator, TReSet1, '', [], 16);
+     TReSet2_1:=AddSQLTokens(stSymbol, TReSet2, '.', [], 17);
+     TReSet2_1:=AddSQLTokens(stIdentificator, TReSet2_1, '', [], 17);
+     TReSet3:=AddSQLTokens(stSymbol, [TReSet2, TReSet2_1], ',', [], 19);
+       TReSet3.AddChildToken(TReSet2);
+     TReSet3:=AddSQLTokens(stSymbol, [TReSet2, TReSet2_1], ')', [], 19);
 
    TAlterCol1:=AddSQLTokens(stKeyword, [TName, TName1], 'ALTER', [], 14);
      TAlterCol2:=AddSQLTokens(stKeyword, TAlterCol1, 'COLUMN', [], 15);
@@ -4890,20 +4916,59 @@ begin
         Name:=AWord;
      end;
     4:FCurCmd:=FActions.Add(amvAlterDependsOnExt);
-    5:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
+    5:if Assigned(FCurCmd) then FCurCmd.Params.AddParam(AWord);
     6:FCurCmd:=FActions.Add(amvAlterRename);
     7:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameCollumn;
     8, 9, 13,
-    11:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
+    11:if Assigned(FCurCmd) then FCurCmd.Params.AddParam(AWord);
     10:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameTo;
     12:FCurCmd:=FActions.Add(amvAlterSetSchema);
     14:FCurCmd:=FActions.Add(amvAlterWOCluster);
+    15:FCurCmd:=FActions.Add(amvAlterSetParamStor);
+    16:if Assigned(FCurCmd) then
+      FCurParam:=FCurCmd.Params.AddParam(AWord);
+    17:if Assigned(FCurParam) then
+      FCurParam.Caption:=FCurParam.Caption + AWord;
+    18:if Assigned(FCurParam) then
+      FCurParam.ParamValue:=AWord;
+    19:FCurParam:=nil;
+    20:FCurCmd:=FActions.Add(amvAlterReSetParamStor);
   end;
 end;
 
 procedure TPGSQLAlterMaterializedView.MakeSQL;
 var
   S, S1: String;
+
+procedure DoSetParam(A:TPGSQLAlterMaterializedCmd);
+var
+  P: TSQLParserField;
+begin
+  for P in A.Params do
+  begin
+    if S1<>'' then
+      S1:=S1 + ','+LineEnding;
+    S1:=S1 + '  ' + P.Caption + ' = '+P.ParamValue;
+  end;
+  if S1<>'' then
+    S1:='SET (' + LineEnding + S1 + LineEnding + ')';
+end;
+
+procedure DoReSetParam(A:TPGSQLAlterMaterializedCmd);
+var
+  P: TSQLParserField;
+begin
+  for P in A.Params do
+  begin
+    if S1<>'' then
+      S1:=S1 + ','+LineEnding;
+    S1:=S1 + '  ' + P.Caption;
+  end;
+  if S1<>'' then
+    S1:='RESET (' + LineEnding + S1 + LineEnding + ')';
+end;
+
+var
   A: TPGSQLAlterMaterializedCmd;
 begin
   S:='ALTER MATERIALIZED VIEW ';
@@ -4933,7 +4998,7 @@ begin
     if S1 <> '' then S1:=S1 + ','+LineEnding + '  ';
     case A.Action of
       amvAlterDependsOnExt:
-          S1:=S1 + 'DEPENDS ON EXTENSION '+A.Params.Text;
+          S1:=S1 + 'DEPENDS ON EXTENSION '+A.Params.AsText;
       amvAlterRename,
       amvAlterRenameCollumn:
         begin
@@ -4941,13 +5006,15 @@ begin
           begin;
             S1:=S1 + 'RENAME ';
             if A.Action = amvAlterRenameCollumn then S1:=S1 + 'COLUMN ';
-            S1:=S1 + A.Params[0] + ' TO ' + A.Params[1];
+            S1:=S1 + A.Params[0].Caption + ' TO ' + A.Params[1].Caption;
           end;
         end;
       amvAlterRenameTo:
-          S1:=S1 + 'RENAME TO '+A.Params.Text;
-      amvAlterSetSchema:S1:=S1 + 'SET SCHEMA '+A.Params.Text;
+          S1:=S1 + 'RENAME TO '+A.Params.AsText;
+      amvAlterSetSchema:S1:=S1 + 'SET SCHEMA '+A.Params.AsText;
       amvAlterWOCluster:S1:=S1 + 'SET WITHOUT CLUSTER';
+      amvAlterSetParamStor:DoSetParam(A);
+      amvAlterReSetParamStor:DoReSetParam(A);
     end;
   end;
 

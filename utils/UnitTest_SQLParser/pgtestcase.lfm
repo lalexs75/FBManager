@@ -2390,6 +2390,12 @@ object PGSQLParserData: TPGSQLParserData
           'WITH DATA;'
           ''
         )
+      end    
+      item
+        Caption = 'AlterMaterializedView4'
+        Lines.Strings = (
+          'ALTER MATERIALIZED VIEW public.v_test2 SET WITHOUT CLUSTER;'
+        )
       end>
     Left = 25
     Top = 328
