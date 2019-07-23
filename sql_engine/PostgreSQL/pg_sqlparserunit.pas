@@ -5109,6 +5109,7 @@ procedure TPGSQLCreateMaterializedView.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 var
   C: TParserPosition;
+  FN: String;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -5127,9 +5128,21 @@ begin
         FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
         FSQLCommandSelect.ParseSQL(ASQLParser);
       end;
-    7:FCurParam:=Params.AddParam(AWord);
+(*    7:FCurParam:=Params.AddParam(AWord);
     8:if Assigned(FCurParam) then FCurParam.Caption:=FCurParam.Caption + AWord;
     9:if Assigned(FCurParam) then FCurParam.ParamValue:=AWord;
+*)
+    7:StorageParameters.Add(AWord);
+    8:if StorageParameters.Count > 0 then
+      begin
+        FN:=StorageParameters[StorageParameters.Count - 1];
+        StorageParameters[StorageParameters.Count - 1]:=FN+AWord;
+      end;
+    9:if StorageParameters.Count > 0 then
+      begin
+        FN:=StorageParameters[StorageParameters.Count - 1];
+        StorageParameters[StorageParameters.Count - 1]:=FN+' = '+AWord;
+      end;
     10:FCurParam:=nil;
     11:FTableSpace:=AWord;
   end;
@@ -5160,7 +5173,7 @@ end;
 
 procedure TPGSQLCreateMaterializedView.MakeSQL;
 var
-  S, S1: String;
+  S, S1, S2: String;
   F, P: TSQLParserField;
 begin
   S:='CREATE MATERIALIZED VIEW ';
@@ -5174,13 +5187,13 @@ begin
   if Fields.Count > 0 then
     S:=S + '('+LineEnding + Fields.AsList + ')';
 
-  if Params.Count>0 then
+  if StorageParameters.Count>0 then
   begin
     S1:='';
-    for P in Params do
+    for S2 in StorageParameters do
     begin
       if S1<>'' then S1:=S1 + ',' + LineEnding;
-      S1:=S1 + '  '+ P.Caption + ' = '+P.ParamValue;
+      S1:=S1 + '  ' + S2;
     end;
     if S1<>'' then
       S:=S + LineEnding + 'WITH (' +LineEnding + S1 + LineEnding + ')';

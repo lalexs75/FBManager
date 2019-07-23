@@ -432,6 +432,7 @@ begin
     else
     begin
       CheckOPParams;
+      OPParams.AddParam('autovacuum_enabled').ParamValue:='true';
       SetModifyParamInt('autovacuum_vacuum_threshold', Edit1.Text);
       SetModifyParamInt('autovacuum_analyze_threshold', Edit2.Text);
       SetModifyParamFloat('autovacuum_vacuum_scale_factor', Edit3.Text);
