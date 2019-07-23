@@ -2220,7 +2220,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 248
   end
   object sView: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'RefreshMaterializedView1'
@@ -2352,7 +2352,7 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'AlterMaterializedView3'
         Lines.Strings = (
-          'ALTER MATERIALIZED VIEW public.v_test2 RESET('
+          'ALTER MATERIALIZED VIEW public.v_test2 RESET ('
           '  autovacuum_enabled,'
           '  autovacuum_vacuum_threshold,'
           '  autovacuum_analyze_threshold,'
@@ -2372,17 +2372,18 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'CREATE MATERIALIZED VIEW public.v_test2'
           'WITH ('
-          '  autovacuum_enabled=true,'
-          '  autovacuum_vacuum_threshold=50,'
-          '  autovacuum_vacuum_scale_factor=0.2,'
-          '  autovacuum_analyze_threshold=50,'
-          '  autovacuum_analyze_scale_factor=0.1,'
-          '  autovacuum_vacuum_cost_delay=20,'
-          '  autovacuum_vacuum_cost_limit=200,'
-          '  autovacuum_freeze_min_age=50000000,'
-          '  autovacuum_freeze_max_age=200000000,'
-          '  autovacuum_freeze_table_age=150000000'
-          ') AS'
+          '  autovacuum_enabled = true,'
+          '  autovacuum_vacuum_threshold = 50,'
+          '  autovacuum_vacuum_scale_factor = 0.2,'
+          '  autovacuum_analyze_threshold = 50,'
+          '  autovacuum_analyze_scale_factor = 0.1,'
+          '  autovacuum_vacuum_cost_delay = 20,'
+          '  autovacuum_vacuum_cost_limit = 200,'
+          '  autovacuum_freeze_min_age = 50000000,'
+          '  autovacuum_freeze_max_age = 200000000,'
+          '  autovacuum_freeze_table_age = 150000000'
+          ')'
+          'AS'
           ' SELECT test1.test1_id,'
           '    test1.test1_name'
           '   FROM test1'
