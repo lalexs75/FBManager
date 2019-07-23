@@ -28,11 +28,11 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <RevisionNr Value="14"/>
-      <BuildNr Value="5505"/>
+      <RevisionNr Value="15"/>
+      <BuildNr Value="5508"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
-      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.9.10"/>
+      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.9"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="default" Default="True"/>
@@ -1784,6 +1784,14 @@
         <Filename Value="tools/fbmtoolsnv.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmToolsNV"/>
+      </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboRole/fbmuserobjectsgrantunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmUserObjectsGrantFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmUserObjectsGrantUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>

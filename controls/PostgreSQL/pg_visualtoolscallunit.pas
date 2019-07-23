@@ -68,7 +68,7 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
   fbmUserEditorUnit,
   fbmObjectEditorDescriptionUnit,
   fbmGroupEditFrameUnit,
-  fbmRoleGrantUsersUnit,
+  fbmRoleGrantUsersUnit, fbmUserObjectsGrantUnit,
   fbmDDLPageUnit,
   //Конфигурация
      cfPostgreeConfigMiskUnit, cfAutoIncFieldUnit,
@@ -257,7 +257,7 @@ begin
 
   RegisterObjEditor(TPGGroup,
     [TfbmGroupEditFrameEditor, TfbmObjectEditorDescriptionFrame],
-    [TfbmGroupEditFrameEditor, TfbmRoleGrantUsersFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+    [TfbmGroupEditFrameEditor, TfbmRoleGrantUsersFrame, TfbmUserObjectsGrantFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGTask,
     [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame],

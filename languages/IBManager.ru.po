@@ -262,7 +262,7 @@ msgstr "Авто очистка"
 #: fbmstrconstunit.sautovacuumenabled
 msgctxt "fbmstrconstunit.sautovacuumenabled"
 msgid "Autovacuum enabled"
-msgstr ""
+msgstr "Индивидуальные настройки AUTOVACUUM"
 
 #: fbmstrconstunit.savallabletags
 msgid "Avallable tags:"
@@ -884,7 +884,7 @@ msgstr ""
 
 #: fbmstrconstunit.scurrentvalue
 msgid "Current value"
-msgstr ""
+msgstr "Текущее значение"
 
 #: fbmstrconstunit.scustomtype
 msgid "Custom type"
