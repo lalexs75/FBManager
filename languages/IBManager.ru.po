@@ -881,6 +881,10 @@ msgstr "Критерий"
 msgid "CType"
 msgstr ""
 
+#: fbmstrconstunit.scurrentvalue
+msgid "Current value"
+msgstr ""
+
 #: fbmstrconstunit.scustomtype
 msgid "Custom type"
 msgstr "Настроить тип"
@@ -5080,6 +5084,10 @@ msgstr ""
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
 msgstr "Размер TOAST"
+
+#: fbmstrconstunit.stoasttable
+msgid "Toast table"
+msgstr ""
 
 #: fbmstrconstunit.stodate
 msgctxt "fbmstrconstunit.stodate"

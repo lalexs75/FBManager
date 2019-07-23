@@ -1,21 +1,22 @@
 inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
   Height = 739
-  Width = 722
+  Width = 720
   ClientHeight = 739
-  ClientWidth = 722
+  ClientWidth = 720
+  DesignLeft = 489
   object PageControl1: TPageControl[0]
     Left = 0
     Height = 739
     Top = 0
-    Width = 722
-    ActivePage = TabSheet2
+    Width = 720
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Table'
       ClientHeight = 708
-      ClientWidth = 712
+      ClientWidth = 710
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
@@ -53,7 +54,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 1
-        Text = 'Edit1'
       end
       object Edit2: TEdit
         AnchorSideLeft.Control = CheckBox1
@@ -66,7 +66,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 2
-        Text = 'Edit2'
       end
       object Label2: TLabel
         AnchorSideLeft.Control = CheckBox1
@@ -94,7 +93,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 3
-        Text = 'Edit3'
       end
       object Label3: TLabel
         AnchorSideLeft.Control = CheckBox1
@@ -137,7 +135,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 4
-        Text = 'Edit4'
       end
       object Edit5: TEdit
         AnchorSideLeft.Control = CheckBox1
@@ -150,7 +147,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 5
-        Text = 'Edit5'
       end
       object Label5: TLabel
         AnchorSideLeft.Control = CheckBox1
@@ -193,7 +189,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 6
-        Text = 'Edit6'
       end
       object Edit7: TEdit
         AnchorSideLeft.Control = CheckBox1
@@ -206,7 +201,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 7
-        Text = 'Edit7'
       end
       object Label7: TLabel
         AnchorSideLeft.Control = CheckBox1
@@ -249,7 +243,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 8
-        Text = 'Edit8'
       end
       object Label9: TLabel
         AnchorSideLeft.Control = CheckBox1
@@ -277,7 +270,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 9
-        Text = 'Edit9'
       end
       object Edit10: TEdit
         AnchorSideLeft.Control = Label10
@@ -413,7 +405,7 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
     object TabSheet2: TTabSheet
       Caption = 'Toast table'
       ClientHeight = 708
-      ClientWidth = 712
+      ClientWidth = 710
       object CheckBox2: TCheckBox
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
@@ -452,7 +444,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 1
-        Text = 'Edit19'
       end
       object Edit20: TEdit
         AnchorSideLeft.Control = Label18
@@ -493,7 +484,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 3
-        Text = 'Edit21'
       end
       object Edit22: TEdit
         AnchorSideLeft.Control = Label18
@@ -534,7 +524,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 5
-        Text = 'Edit23'
       end
       object Edit24: TEdit
         AnchorSideLeft.Control = Label18
@@ -575,7 +564,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 7
-        Text = 'Edit25'
       end
       object Edit26: TEdit
         AnchorSideLeft.Control = Label18
@@ -616,7 +604,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 9
-        Text = 'Edit27'
       end
       object Edit28: TEdit
         AnchorSideLeft.Control = Label18
@@ -655,7 +642,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 12
-        Text = 'Edit30'
       end
       object Label16: TLabel
         AnchorSideLeft.Control = CheckBox2
@@ -698,7 +684,6 @@ inherited fbmpgTableAutoVaccum: TfbmpgTableAutoVaccum
         Width = 147
         BorderSpacing.Around = 6
         TabOrder = 13
-        Text = 'Edit31'
       end
       object Edit32: TEdit
         AnchorSideLeft.Control = Label18

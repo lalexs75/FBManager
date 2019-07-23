@@ -847,6 +847,10 @@ msgstr ""
 msgid "CType"
 msgstr ""
 
+#: fbmstrconstunit.scurrentvalue
+msgid "Current value"
+msgstr ""
+
 #: fbmstrconstunit.scustomtype
 msgid "Custom type"
 msgstr ""
@@ -4895,6 +4899,10 @@ msgstr ""
 
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
+msgstr ""
+
+#: fbmstrconstunit.stoasttable
+msgid "Toast table"
 msgstr ""
 
 #: fbmstrconstunit.stodate

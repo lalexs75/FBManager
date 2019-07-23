@@ -328,6 +328,7 @@ resourcestring
   //Object names
   sDomain                           = 'Domain';
   sTable                            = 'Table';
+  sToastTable                       = 'Toast table';
   sView                             = 'View';
   sTrigger                          = 'Trigger';
   sStoredProcedure                  = 'Stored procedure';
@@ -723,6 +724,7 @@ resourcestring
   sFreezeMaxAge                     = 'Freeze max age';
   sFreezeTableAge                   = 'Freeze table age';
   sAutovacuumEnabled                = 'Autovacuum enabled';
+  sCurrentValue                     = 'Current value';
 
   sServerName                       = 'Server name    = ';
   sDBName                           = 'Data base name = ';

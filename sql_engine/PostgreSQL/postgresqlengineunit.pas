@@ -453,6 +453,8 @@ type
 
   TPGAutovacuumOptions = class
   private
+    FIsToast: Boolean;
+    //
     FAnalyzeScaleFactor: Double;
     FAnalyzeThreshold: Integer;
     FEnabled: boolean;
@@ -464,7 +466,7 @@ type
     FVacuumScaleFactor: Double;
     FVacuumThreshold: Integer;
   public
-    constructor Create;
+    constructor Create(AIsToast:Boolean);
     procedure LoadStorageParameters(const AStorageParameters:TStrings);
     procedure SaveStorageParameters(const AStorageParameters:TStrings);
     procedure Clear;
@@ -624,6 +626,8 @@ type
     function InternalGetDDLCreate: string; override;
   private
     FAutovacuumOptions: TPGAutovacuumOptions;
+    FToastAutovacuumOptions: TPGAutovacuumOptions;
+    FToastRelOID: Integer;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -637,6 +641,8 @@ type
     function IndexDelete(const IndexName:string):boolean; override;
     procedure IndexListRefresh; override;
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
+    property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
+    property ToastRelOID:Integer read FToastRelOID;
   end;
 
   { TPGSequence }
@@ -1083,9 +1089,10 @@ end;
 
 { TPGAutovacuumOptions }
 
-constructor TPGAutovacuumOptions.Create;
+constructor TPGAutovacuumOptions.Create(AIsToast: Boolean);
 begin
   inherited Create;
+  FIsToast:=AIsToast;
   Clear;
 end;
 
@@ -1095,8 +1102,11 @@ begin
   FEnabled:=StrToBoolDef(AStorageParameters.Values['autovacuum_enabled'], false);
   FVacuumThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_threshold'], -1);
   FVacuumScaleFactor:=StrToFloatExDef(AStorageParameters.Values['autovacuum_vacuum_scale_factor'], -1);
-  FAnalyzeScaleFactor:=StrToFloatExDef(AStorageParameters.Values['autovacuum_analyze_scale_factor'], -1);
-  FAnalyzeThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_analyze_threshold'], -1);
+  if not FIsToast then
+  begin
+    FAnalyzeScaleFactor:=StrToFloatExDef(AStorageParameters.Values['autovacuum_analyze_scale_factor'], -1);
+    FAnalyzeThreshold:=StrToIntDef(AStorageParameters.Values['autovacuum_analyze_threshold'], -1);
+  end;
 
   FVacuumCostDelay:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_delay'], -1);
   FVacuumCostLimit:=StrToIntDef(AStorageParameters.Values['autovacuum_vacuum_cost_limit'], -1);
@@ -1107,27 +1117,38 @@ end;
 
 procedure TPGAutovacuumOptions.SaveStorageParameters(
   const AStorageParameters: TStrings);
+var
+  SToast: String;
 begin
-  AStorageParameters.Values['autovacuum_enabled']:=BoolToStr(FEnabled, true);
+  if FIsToast then
+    SToast:='toast.'
+  else
+    SToast:='';
+
+  AStorageParameters.Values[SToast + 'autovacuum_enabled']:=BoolToStr(FEnabled, true);
   if FVacuumThreshold > -1 then
-    AStorageParameters.Values['autovacuum_vacuum_threshold']:=IntToStr(FVacuumThreshold);
+    AStorageParameters.Values[SToast + 'autovacuum_vacuum_threshold']:=IntToStr(FVacuumThreshold);
   if FVacuumScaleFactor > -1 then
-    AStorageParameters.Values['autovacuum_vacuum_scale_factor']:=FloatToStrEx(FVacuumScaleFactor);
-  if FAnalyzeThreshold>-1 then
-    AStorageParameters.Values['autovacuum_analyze_threshold']:=IntToStr(FAnalyzeThreshold);
-  if FAnalyzeScaleFactor>-1 then
-    AStorageParameters.Values['autovacuum_analyze_scale_factor']:=FloatToStrEx(FAnalyzeScaleFactor);
+    AStorageParameters.Values[SToast + 'autovacuum_vacuum_scale_factor']:=FloatToStrEx(FVacuumScaleFactor);
+
+  if not FIsToast then
+  begin
+    if FAnalyzeThreshold>-1 then
+      AStorageParameters.Values['autovacuum_analyze_threshold']:=IntToStr(FAnalyzeThreshold);
+    if FAnalyzeScaleFactor>-1 then
+      AStorageParameters.Values['autovacuum_analyze_scale_factor']:=FloatToStrEx(FAnalyzeScaleFactor);
+  end;
 
   if FVacuumCostDelay > -1 then
-    AStorageParameters.Values['autovacuum_vacuum_cost_delay']:=IntToStr(FVacuumCostDelay);
+    AStorageParameters.Values[SToast + 'autovacuum_vacuum_cost_delay']:=IntToStr(FVacuumCostDelay);
   if FVacuumCostLimit > -1 then
-    AStorageParameters.Values['autovacuum_vacuum_cost_limit']:=IntToStr(FVacuumCostLimit);
+    AStorageParameters.Values[SToast + 'autovacuum_vacuum_cost_limit']:=IntToStr(FVacuumCostLimit);
   if FFreezeMinAge > -1 then
-    AStorageParameters.Values['autovacuum_freeze_min_age']:=IntToStr(FFreezeMinAge);
+    AStorageParameters.Values[SToast + 'autovacuum_freeze_min_age']:=IntToStr(FFreezeMinAge);
   if FFreezeMaxAge > -1 then
-    AStorageParameters.Values['autovacuum_freeze_max_age']:=IntToStr(FFreezeMaxAge);
+    AStorageParameters.Values[SToast + 'autovacuum_freeze_max_age']:=IntToStr(FFreezeMaxAge);
   if FFreezeTableAge > -1 then
-    AStorageParameters.Values['autovacuum_freeze_table_age']:=IntToStr(FFreezeTableAge);
+    AStorageParameters.Values[SToast + 'autovacuum_freeze_table_age']:=IntToStr(FFreezeTableAge);
 end;
 
 procedure TPGAutovacuumOptions.Clear;
@@ -1370,8 +1391,10 @@ begin
   FCmd.SQLSelect:=SQLBody;
   FCmd.Description:=Description;
 
-  if AutovacuumOptions.Enabled then
+  if FAutovacuumOptions.Enabled then
     AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+  if FToastAutovacuumOptions.Enabled then
+    FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
 
   Result:=FCmd.AsSQL;
 
@@ -1391,7 +1414,8 @@ constructor TPGMatView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited Create(ADBItem, AOwnerRoot);
-  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
+  FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   UITableOptions:=[];
   //TPGSQLCreateMaterializedView
 end;
@@ -1399,6 +1423,7 @@ end;
 destructor TPGMatView.Destroy;
 begin
   FreeAndNil(FAutovacuumOptions);
+  FreeAndNil(FToastAutovacuumOptions);
   inherited Destroy;
 end;
 
@@ -2661,7 +2686,7 @@ begin
     if S = 'autovacuum_vacuum_cost_delay' then //20 - ms - Vacuum cost delay in milliseconds, for autovacuum.
       FAutovacuumOptions.VacuumCostDelay:=StrToInt64Def(SV, -1)
     else
-    if S = 'autovacuum_vacuum_cost_limit' then //-1 - Vacuum cost amount available before napping, for autovacuum.
+    if S = 'vacuum_cost_limit' then //-1 - Vacuum cost amount available before napping, for autovacuum.
       FAutovacuumOptions.VacuumCostLimit:=StrToInt64Def(SV, -1)
     else
     if S = 'autovacuum_vacuum_scale_factor' then //0.2 - Number of tuple updates or deletes prior to vacuum as a fraction of reltuples.
@@ -3058,7 +3083,7 @@ begin
   FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint];
   FSQLCommentOnClass:=TPGSQLCommentOn;
   FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
-  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   DoInitPGEngine;
 end;
 
@@ -3792,8 +3817,10 @@ begin
     end;
   end;
 
-  if AutovacuumOptions.Enabled then
+  if FAutovacuumOptions.Enabled then
     AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+  if FToastAutovacuumOptions.Enabled then
+    FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
 
 //  if ChkRec.Description<>'' then
 //      SQLLines.Add(Format('COMMENT ON CONSTRAINT %s ON %s IS ''%s''', [ChkRec.Name, ATableName, ChkRec.Description]));
@@ -4418,8 +4445,8 @@ begin
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
-  FAutovacuumOptions:=TPGAutovacuumOptions.Create;
-  FToastAutovacuumOptions:=TPGAutovacuumOptions.Create;
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
+  FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
   FStorageParameters:=TStringList.Create;
 
   UITableOptions:=[utReorderFields, utRenameTable,
@@ -4530,10 +4557,12 @@ end;
 procedure TPGTable.RefreshObject;
 var
   Q:TZQuery;
+  i: Integer;
 begin
   inherited RefreshObject;
   FStorageParameters.Clear;
-  AutovacuumOptions.Clear;
+  FAutovacuumOptions.Clear;
+  FToastAutovacuumOptions.Clear;
   FToastRelOID:=0;
   if State = sdboEdit then
   begin
@@ -4558,16 +4587,19 @@ begin
     finally
       Q.Free;
     end;
+
+    if FToastRelOptions<>'' then
+    begin
+      ParsePGArrayString(FToastRelOptions, FStorageParameters);
+      ToastAutovacuumOptions.LoadStorageParameters(FStorageParameters);
+      for i:=0 to FStorageParameters.Count-1 do
+        FStorageParameters[i]:='toast.' + FStorageParameters[i];
+    end;
+
     if FRelOptions<>'' then
     begin
       ParsePGArrayString(FRelOptions, FStorageParameters);
       AutovacuumOptions.LoadStorageParameters(FStorageParameters);
-    end;
-    if FToastRelOptions<>'' then
-    begin
-      FStorageParameters.Clear;
-      ParsePGArrayString(FToastRelOptions, FStorageParameters);
-      ToastAutovacuumOptions.LoadStorageParameters(FStorageParameters);
     end;
 
     RefreshFieldList;
