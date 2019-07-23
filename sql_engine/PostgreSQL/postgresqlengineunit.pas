@@ -3985,6 +3985,18 @@ begin
     Statistic.AddValue(sFreezeTableAge, IntToStr(FAutovacuumOptions.FreezeTableAge));
   end;
 
+  if FToastAutovacuumOptions.Enabled then
+  begin
+    Statistic.AddValue(sToastAutovacuumEnabled, sYes);
+    Statistic.AddValue(sToastVacuumThreshold, FloatToStr(FToastAutovacuumOptions.VacuumThreshold));
+    Statistic.AddValue(sToastVacuumScaleFactor, FloatToStr(FToastAutovacuumOptions.VacuumScaleFactor));
+    Statistic.AddValue(sToastVacuumCostDelay, IntToStr(FToastAutovacuumOptions.VacuumCostDelay));
+    Statistic.AddValue(sToastVacuumCostLimit, IntToStr(FToastAutovacuumOptions.VacuumCostLimit));
+    Statistic.AddValue(sToastFreezeMinAge, IntToStr(FToastAutovacuumOptions.FreezeMinAge));
+    Statistic.AddValue(sToastFreezeMaxAge, IntToStr(FToastAutovacuumOptions.FreezeMaxAge));
+    Statistic.AddValue(sToastFreezeTableAge, IntToStr(FToastAutovacuumOptions.FreezeTableAge));
+  end;
+
   FQuery.Close;
   FQuery.Free;
 

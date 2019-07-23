@@ -244,6 +244,7 @@ msgid "Auto vacuum"
 msgstr ""
 
 #: fbmstrconstunit.sautovacuumenabled
+msgctxt "fbmstrconstunit.sautovacuumenabled"
 msgid "Autovacuum enabled"
 msgstr ""
 
@@ -2051,6 +2052,7 @@ msgid "Delete this alias?"
 msgstr ""
 
 #: fbmstrconstunit.sfreezemaxage
+msgctxt "fbmstrconstunit.sfreezemaxage"
 msgid "Freeze max age"
 msgstr ""
 
@@ -2059,6 +2061,7 @@ msgid "Age at which to autovacuum a table to prevent transaction ID wraparound"
 msgstr ""
 
 #: fbmstrconstunit.sfreezeminage
+msgctxt "fbmstrconstunit.sfreezeminage"
 msgid "Freeze min age"
 msgstr ""
 
@@ -2067,6 +2070,7 @@ msgid "Minimum age at which VACUUM should freeze a table row"
 msgstr ""
 
 #: fbmstrconstunit.sfreezetableage
+msgctxt "fbmstrconstunit.sfreezetableage"
 msgid "Freeze table age"
 msgstr ""
 
@@ -4893,6 +4897,26 @@ msgstr ""
 msgid "TimeStamp"
 msgstr ""
 
+#: fbmstrconstunit.stoastautovacuumenabled
+msgctxt "fbmstrconstunit.stoastautovacuumenabled"
+msgid "Toast - autovacuum enabled"
+msgstr ""
+
+#: fbmstrconstunit.stoastfreezemaxage
+msgctxt "fbmstrconstunit.stoastfreezemaxage"
+msgid "Toast - freeze max age"
+msgstr ""
+
+#: fbmstrconstunit.stoastfreezeminage
+msgctxt "fbmstrconstunit.stoastfreezeminage"
+msgid "Toast - freeze min age"
+msgstr ""
+
+#: fbmstrconstunit.stoastfreezetableage
+msgctxt "fbmstrconstunit.stoastfreezetableage"
+msgid "Toast - freeze table age"
+msgstr ""
+
 #: fbmstrconstunit.stoastoid
 msgid "Toast OID"
 msgstr ""
@@ -4903,6 +4927,26 @@ msgstr ""
 
 #: fbmstrconstunit.stoasttable
 msgid "Toast table"
+msgstr ""
+
+#: fbmstrconstunit.stoastvacuumcostdelay
+msgctxt "fbmstrconstunit.stoastvacuumcostdelay"
+msgid "Toast - vacuum cost delay"
+msgstr ""
+
+#: fbmstrconstunit.stoastvacuumcostlimit
+msgctxt "fbmstrconstunit.stoastvacuumcostlimit"
+msgid "Toast - vacuum cost limit"
+msgstr ""
+
+#: fbmstrconstunit.stoastvacuumscalefactor
+msgctxt "fbmstrconstunit.stoastvacuumscalefactor"
+msgid "Toast - vacuum scale factor"
+msgstr ""
+
+#: fbmstrconstunit.stoastvacuumthreshold
+msgctxt "fbmstrconstunit.stoastvacuumthreshold"
+msgid "Toast - vacuum threshold"
 msgstr ""
 
 #: fbmstrconstunit.stodate
@@ -5251,6 +5295,7 @@ msgid "Use table name as alis in create SQL form"
 msgstr ""
 
 #: fbmstrconstunit.svacuumcostdelay
+msgctxt "fbmstrconstunit.svacuumcostdelay"
 msgid "Vacuum cost delay"
 msgstr ""
 
@@ -5259,6 +5304,7 @@ msgid "Vacuum cost delay in milliseconds, for autovacuum (ms)"
 msgstr ""
 
 #: fbmstrconstunit.svacuumcostlimit
+msgctxt "fbmstrconstunit.svacuumcostlimit"
 msgid "Vacuum cost limit"
 msgstr ""
 
@@ -5267,6 +5313,7 @@ msgid "Vacuum cost amount available before napping, for autovacuum"
 msgstr ""
 
 #: fbmstrconstunit.svacuumscalefactor
+msgctxt "fbmstrconstunit.svacuumscalefactor"
 msgid "Vacuum scale factor"
 msgstr ""
 
@@ -5275,6 +5322,7 @@ msgid "Number of tuple updates or deletes prior to vacuum as a fraction of reltu
 msgstr ""
 
 #: fbmstrconstunit.svacuumthreshold
+msgctxt "fbmstrconstunit.svacuumthreshold"
 msgid "Vacuum threshold"
 msgstr ""
 

@@ -356,8 +356,11 @@ begin
 end;
 
 procedure SetModifyParamFloat(AName, AValue:string); inline;
+var
+  V: Extended;
 begin
-  if StrToFloatDef(AValue, -1)>-1 then OP.Params.AddParam(AName).ParamValue:=AValue;
+  V:=StrToFloatDef(AValue, -1);
+  if V>-1 then OP.Params.AddParam(AName).ParamValue:=FloatToStrEx(V);
 end;
 
 procedure SetModifyParamInt(AName, AValue:string); inline;

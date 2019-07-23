@@ -714,6 +714,9 @@ resourcestring
   sFreezeMinAgeHint                 = 'Minimum age at which VACUUM should freeze a table row';
   sFreezeMaxAgeHint                 = 'Age at which to autovacuum a table to prevent transaction ID wraparound';
   sFreezeTableAgeHint               = 'Age at which VACUUM should scan whole table to freeze tuples';
+
+  sCurrentValue                     = 'Current value';
+  sAutovacuumEnabled                = 'Autovacuum enabled';
   sVacuumThreshold                  = 'Vacuum threshold';
   sAnalyzeThreshold                 = 'Analyze threshold';
   sVacuumScaleFactor                = 'Vacuum scale factor';
@@ -723,8 +726,16 @@ resourcestring
   sFreezeMinAge                     = 'Freeze min age';
   sFreezeMaxAge                     = 'Freeze max age';
   sFreezeTableAge                   = 'Freeze table age';
-  sAutovacuumEnabled                = 'Autovacuum enabled';
-  sCurrentValue                     = 'Current value';
+
+  sToastAutovacuumEnabled           = 'Toast - autovacuum enabled';
+  sToastVacuumThreshold             = 'Toast - vacuum threshold';
+  sToastVacuumScaleFactor           = 'Toast - vacuum scale factor';
+  sToastVacuumCostDelay             = 'Toast - vacuum cost delay';
+  sToastVacuumCostLimit             = 'Toast - vacuum cost limit';
+  sToastFreezeMinAge                = 'Toast - freeze min age';
+  sToastFreezeMaxAge                = 'Toast - freeze max age';
+  sToastFreezeTableAge              = 'Toast - freeze table age';
+
 
   sServerName                       = 'Server name    = ';
   sDBName                           = 'Data base name = ';
