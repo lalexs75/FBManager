@@ -252,6 +252,8 @@ type
   private
     FSQLCommandSelect: TSQLCommandAbstractSelect;
     FStorageParameters: TStrings;
+    FCurParam: TSQLParserField;
+    FTableSpace: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -262,6 +264,7 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SQLCommandSelect:TSQLCommandAbstractSelect read FSQLCommandSelect;
     property StorageParameters:TStrings read FStorageParameters;
+    property TableSpace:string read FTableSpace write FTableSpace;
     property SchemaName;
     property SQLSelect;
   end;
@@ -5053,7 +5056,8 @@ end;
 
 procedure TPGSQLCreateMaterializedView.InitParserTree;
 var
-  FSQLTokens, T, T1, TSymb, T2: TSQLTokenRecord;
+  FSQLTokens, T, T1, TSymb, T2, TWith, TWith1, TWith1_1,
+    TWith2, TWith3, TWith4, TWith5, TWith6, TWith7, TTS, TTS1: TSQLTokenRecord;
 begin
 (*
   CREATE MATERIALIZED VIEW [ IF NOT EXISTS ] имя_таблицы
@@ -5079,7 +5083,26 @@ begin
     TSymb:=AddSQLTokens(stSymbol, T, ',', []);
     TSymb.AddChildToken(T);
   T:=AddSQLTokens(stSymbol, T, ')', []);
-  T:=AddSQLTokens(stKeyword, [T, T1, T2], 'AS', [], 6);
+
+  TWith:=AddSQLTokens(stKeyword, [T, T1, T2], 'WITH', []);   //WITH ( параметр_хранения [= значение] [, ... ] )
+    TWith1:=AddSQLTokens(stSymbol, TWith, '(', []);
+    TWith1:=AddSQLTokens(stIdentificator, TWith1, '', [], 7);
+    TWith1_1:=AddSQLTokens(stSymbol, TWith1, '.', [], 8);
+    TWith1_1:=AddSQLTokens(stIdentificator, TWith1_1, '', [], 8);
+    TWith2:=AddSQLTokens(stSymbol, [TWith1, TWith1_1], '=', []);
+    TWith3:=AddSQLTokens(stIdentificator, TWith2, '', [], 9);
+    TWith4:=AddSQLTokens(stString, TWith2, '', [], 9);
+    TWith5:=AddSQLTokens(stInteger, TWith2, '', [], 9);
+    TWith6:=AddSQLTokens(stFloat, TWith2, '', [], 9);
+    TWith7:=AddSQLTokens(stSymbol, [TWith3, TWith4, TWith5, TWith6], ',', [], 10);
+      TWith7.AddChildToken(TWith1);
+    TWith1:=AddSQLTokens(stSymbol, [TWith3, TWith4, TWith5, TWith6], ')', [], 10);
+
+  TTS:=AddSQLTokens(stKeyword, [T, T1, T2, TWith1], 'TABLESPACE', []);   //TABLESPACE табл_пространство
+    TTS1:=AddSQLTokens(stIdentificator, TTS, '', [], 11);
+
+
+  T:=AddSQLTokens(stKeyword, [T, T1, T2, TWith1, TTS1], 'AS', [], 6);
 end;
 
 procedure TPGSQLCreateMaterializedView.InternalProcessChildToken(
@@ -5104,6 +5127,11 @@ begin
         FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
         FSQLCommandSelect.ParseSQL(ASQLParser);
       end;
+    7:FCurParam:=Params.AddParam(AWord);
+    8:if Assigned(FCurParam) then FCurParam.Caption:=FCurParam.Caption + AWord;
+    9:if Assigned(FCurParam) then FCurParam.ParamValue:=AWord;
+    10:FCurParam:=nil;
+    11:FTableSpace:=AWord;
   end;
 end;
 
@@ -5132,8 +5160,8 @@ end;
 
 procedure TPGSQLCreateMaterializedView.MakeSQL;
 var
-  S: String;
-  F: TSQLParserField;
+  S, S1: String;
+  F, P: TSQLParserField;
 begin
   S:='CREATE MATERIALIZED VIEW ';
 
@@ -5145,6 +5173,21 @@ begin
 
   if Fields.Count > 0 then
     S:=S + '('+LineEnding + Fields.AsList + ')';
+
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ',' + LineEnding;
+      S1:=S1 + '  '+ P.Caption + ' = '+P.ParamValue;
+    end;
+    if S1<>'' then
+      S:=S + LineEnding + 'WITH (' +LineEnding + S1 + LineEnding + ')';
+  end;
+
+  if TableSpace<>'' then
+    S:=S + LineEnding + 'TABLESPACE '+TableSpace;
 
   S:=S + LineEnding +  'AS';
 
