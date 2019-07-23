@@ -4793,7 +4793,7 @@ end;
 procedure TPGSQLAlterMaterializedView.InitParserTree;
 var
   FSQLTokens, T, TIf1, TName, TName1, TDep1, TDep2, TRen1,
-    TRen2, TSet1, TSet2, TAlterCol1, TAlterCol2: TSQLTokenRecord;
+    TRen2, TSet1, TSet2, TAlterCol1, TAlterCol2, TSet3: TSQLTokenRecord;
 begin
   //ALTER MATERIALIZED VIEW [ IF EXISTS ] имя
   //    действие [, ... ]
@@ -4848,9 +4848,16 @@ begin
      TRen2:=AddSQLTokens(stKeyword, TRen1, 'TO', [], 10);
      TRen2:=AddSQLTokens(stIdentificator, TRen2, '', [], 11);
 
-   TSet1:=AddSQLTokens(stKeyword, [TName, TName1], 'SET', [], 12);
-     TSet2:=AddSQLTokens(stKeyword, TSet1, 'SCHEMA', []);
+   TSet1:=AddSQLTokens(stKeyword, [TName, TName1], 'SET', []);
+     TSet2:=AddSQLTokens(stKeyword, TSet1, 'SCHEMA', [], 12);
      TSet2:=AddSQLTokens(stIdentificator, TSet2, '', [], 13);
+
+     TSet3:=AddSQLTokens(stKeyword, TSet1, 'WITHOUT', []); //    SET WITHOUT CLUSTER
+     TSet3:=AddSQLTokens(stKeyword, TSet3, 'CLUSTER', [], 14);
+
+
+     //    SET ( параметр_хранения = значение [, ... ] )
+
 
    TAlterCol1:=AddSQLTokens(stKeyword, [TName, TName1], 'ALTER', [], 14);
      TAlterCol2:=AddSQLTokens(stKeyword, TAlterCol1, 'COLUMN', [], 15);
@@ -4890,6 +4897,7 @@ begin
     11:if Assigned(FCurCmd) then FCurCmd.Params.Add(AWord);
     10:if Assigned(FCurCmd) then FCurCmd.Action:=amvAlterRenameTo;
     12:FCurCmd:=FActions.Add(amvAlterSetSchema);
+    14:FCurCmd:=FActions.Add(amvAlterWOCluster);
   end;
 end;
 
@@ -4938,8 +4946,8 @@ begin
         end;
       amvAlterRenameTo:
           S1:=S1 + 'RENAME TO '+A.Params.Text;
-      amvAlterSetSchema:
-          S1:=S1 + 'SET SCHEMA '+A.Params.Text;
+      amvAlterSetSchema:S1:=S1 + 'SET SCHEMA '+A.Params.Text;
+      amvAlterWOCluster:S1:=S1 + 'SET WITHOUT CLUSTER';
     end;
   end;
 
