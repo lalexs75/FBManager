@@ -6205,13 +6205,16 @@ begin
   Result:=FCmd.AsSQL;
   FCmd.Free;
 
-  ACL:=TStringList.Create;
-  try
-    FACLList.RefreshList;
-    FACLList.MakeACLListSQL(nil, ACL, true);
-    Result:=Result + LineEnding + LineEnding + ACL.Text;
-  finally
-    ACL.Free;
+  if Assigned(FACLList) then
+  begin
+    ACL:=TStringList.Create;
+    try
+      FACLList.RefreshList;
+      FACLList.MakeACLListSQL(nil, ACL, true);
+      Result:=Result + LineEnding + LineEnding + ACL.Text;
+    finally
+      ACL.Free;
+    end;
   end;
 end;
 
