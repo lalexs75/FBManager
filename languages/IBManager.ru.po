@@ -4491,6 +4491,10 @@ msgstr "Установить/Снять закладку"
 msgid "Shedule"
 msgstr "Расписание"
 
+#: fbmstrconstunit.sshowallgrants
+msgid "Show all"
+msgstr "Отображать всё"
+
 #: fbmstrconstunit.sshowallobjects
 msgid "Show all objects"
 msgstr "Отображать все объекты"
@@ -4543,9 +4547,17 @@ msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr "Отобразить дерево объектов"
 
+#: fbmstrconstunit.sshowonlygrants
+msgid "Show only with grants"
+msgstr "Отображать только с правами"
+
 #: fbmstrconstunit.sshowonlylinenumber
 msgid "Show only line number"
 msgstr "Отображать только номер строки"
+
+#: fbmstrconstunit.sshowonlynotgrants
+msgid "Show only without grants"
+msgstr "Отображать только без прав"
 
 #: fbmstrconstunit.sshowqueryplan
 msgid "Show query plan"

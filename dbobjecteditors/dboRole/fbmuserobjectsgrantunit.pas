@@ -6,8 +6,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
-  rxmemds, rxdbgrid, RxDBGridPrintGrid, rxtoolbar, DB, fdmAbstractEditorUnit,
-  SQLEngineAbstractUnit, fbmToolsUnit;
+  DBGrids, ExtCtrls, StdCtrls, rxmemds, rxdbgrid, RxDBGridPrintGrid, rxtoolbar,
+  DB, fdmAbstractEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
+  fbmToolsUnit;
 
 type
 
@@ -15,11 +16,15 @@ type
 
   TfbmUserObjectsGrantFrame = class(TEditorPage)
     ActionList1: TActionList;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     dsUGList: TDataSource;
+    Edit1: TEdit;
     edtPrint: TAction;
     grALL: TAction;
     grHL: TAction;
     grVL: TAction;
+    Label2: TLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -29,6 +34,7 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
+    Panel1: TPanel;
     PopupMenu1: TPopupMenu;
     revALL: TAction;
     revHL: TAction;
@@ -37,46 +43,130 @@ type
     RxDBGridPrint1: TRxDBGridPrint;
     rxUGList: TRxMemoryData;
     rxUGListogAlter: TBooleanField;
+    rxUGListogAlterRO: TBooleanField;
     rxUGListogAlterRoutine: TBooleanField;
+    rxUGListogAlterRoutineRO: TBooleanField;
     rxUGListogConnect: TBooleanField;
+    rxUGListogConnectRO: TBooleanField;
     rxUGListogCreate: TBooleanField;
+    rxUGListogCreateRO: TBooleanField;
     rxUGListogCreateRoutine: TBooleanField;
+    rxUGListogCreateRoutineRO: TBooleanField;
     rxUGListogCreateTablespace: TBooleanField;
+    rxUGListogCreateTablespaceRO: TBooleanField;
     rxUGListogCreateUser: TBooleanField;
+    rxUGListogCreateUserRO: TBooleanField;
     rxUGListogCreateView: TBooleanField;
+    rxUGListogCreateViewRO: TBooleanField;
     rxUGListogDelete: TBooleanField;
+    rxUGListogDeleteRO: TBooleanField;
     rxUGListogDrop: TBooleanField;
+    rxUGListogDropRO: TBooleanField;
     rxUGListogEvent: TBooleanField;
+    rxUGListogEventRO: TBooleanField;
     rxUGListogExecute: TBooleanField;
+    rxUGListogExecuteRO: TBooleanField;
     rxUGListogFile: TBooleanField;
+    rxUGListogFileRO: TBooleanField;
     rxUGListogIndex: TBooleanField;
+    rxUGListogIndexRO: TBooleanField;
     rxUGListogInsert: TBooleanField;
+    rxUGListogInsertRO: TBooleanField;
     rxUGListogLockTables: TBooleanField;
+    rxUGListogLockTablesRO: TBooleanField;
     rxUGListogMembership: TBooleanField;
+    rxUGListogMembershipRO: TBooleanField;
     rxUGListogProcess: TBooleanField;
+    rxUGListogProcessRO: TBooleanField;
     rxUGListogProxy: TBooleanField;
+    rxUGListogProxyRO: TBooleanField;
     rxUGListogReference: TBooleanField;
+    rxUGListogReferenceRO: TBooleanField;
     rxUGListogReload: TBooleanField;
+    rxUGListogReloadRO: TBooleanField;
     rxUGListogReplicationClient: TBooleanField;
+    rxUGListogReplicationClientRO: TBooleanField;
     rxUGListogReplicationSlave: TBooleanField;
+    rxUGListogReplicationSlaveRO: TBooleanField;
     rxUGListogRule: TBooleanField;
+    rxUGListogRuleRO: TBooleanField;
     rxUGListogSelect: TBooleanField;
+    rxUGListogSelectRO: TBooleanField;
     rxUGListogShowDatabases: TBooleanField;
+    rxUGListogShowDatabasesRO: TBooleanField;
     rxUGListogShowView: TBooleanField;
+    rxUGListogShowViewRO: TBooleanField;
     rxUGListogShutdown: TBooleanField;
+    rxUGListogShutdownRO: TBooleanField;
     rxUGListogSuper: TBooleanField;
+    rxUGListogSuperRO: TBooleanField;
     rxUGListogTemporary: TBooleanField;
+    rxUGListogTemporaryRO: TBooleanField;
     rxUGListogTrigger: TBooleanField;
+    rxUGListogTriggerRO: TBooleanField;
     rxUGListogTruncate: TBooleanField;
+    rxUGListogTruncateRO: TBooleanField;
     rxUGListogUpdate: TBooleanField;
+    rxUGListogUpdateRO: TBooleanField;
     rxUGListogUsage: TBooleanField;
+    rxUGListogUsageRO: TBooleanField;
     rxUGListogWGO: TBooleanField;
+    rxUGListogWGORO: TBooleanField;
     rxUGListOWNER_USER: TStringField;
+    rxUGListUG_EMPTY: TBooleanField;
     rxUGListUG_NAME: TStringField;
     rxUGListUG_TYPE: TLongintField;
     ToolPanel1: TToolPanel;
+    procedure Edit1Change(Sender: TObject);
+    procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor);
+    procedure rxUGListAfterInsert(DataSet: TDataSet);
+    procedure rxUGListAfterScroll(DataSet: TDataSet);
+    procedure rxUGListFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
+    FAllGrants: TObjectGrants;
+
+    FrxCol_UG_TYPE:TRxColumn;
+    FrxCol_UG_NAME:TRxColumn;
+    FrxCol_OWNER_USER:TRxColumn;
+    FrxCol_Select:TRxColumn;
+    FrxCol_Insert:TRxColumn;
+    FrxCol_Update:TRxColumn;
+    FrxCol_Delete:TRxColumn;
+    FrxCol_Execute:TRxColumn;
+    FrxCol_Reference:TRxColumn;
+    FrxCol_Create:TRxColumn;
+    FrxCol_Rule:TRxColumn;
+    FrxCol_Temporary:TRxColumn;
+    FrxCol_Truncate:TRxColumn;
+    FrxCol_Trigger:TRxColumn;
+    FrxCol_Usage:TRxColumn;
+    FrxCol_WGO:TRxColumn;
+    FrxCol_Connect:TRxColumn;
+    FrxCol_Alter:TRxColumn;
+    FrxCol_AlterRoutine:TRxColumn;
+    FrxCol_CreateRoutine:TRxColumn;
+    FrxCol_CreateTablespace:TRxColumn;
+    FrxCol_CreateUser:TRxColumn;
+    FrxCol_CreateView:TRxColumn;
+    FrxCol_Drop:TRxColumn;
+    FrxCol_Event:TRxColumn;
+    FrxCol_File:TRxColumn;
+    FrxCol_Index:TRxColumn;
+    FrxCol_LockTables:TRxColumn;
+    FrxCol_Process:TRxColumn;
+    FrxCol_Proxy:TRxColumn;
+    FrxCol_Reload:TRxColumn;
+    FrxCol_ReplicationClient:TRxColumn;
+    FrxCol_ReplicationSlave:TRxColumn;
+    FrxCol_ShowDatabases:TRxColumn;
+    FrxCol_ShowView:TRxColumn;
+    FrxCol_Shutdown:TRxColumn;
+    FrxCol_Super:TRxColumn;
+    FrxCol_Membership:TRxColumn;
     procedure RefreshPage;
+    procedure BindRxDBGridCollumn;
+    procedure UpdateFilter;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -87,31 +177,223 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, SQLEngineCommonTypesUnit;
+uses fbmStrConstUnit, sqlObjects, LazUTF8;
 
 {$R *.lfm}
 
 { TfbmUserObjectsGrantFrame }
 
-procedure TfbmUserObjectsGrantFrame.RefreshPage;
-procedure DoAdd(G: TDBObject);
+procedure TfbmUserObjectsGrantFrame.rxUGListAfterScroll(DataSet: TDataSet);
+var
+  R: TColumn;
+  FG: TObjectGrant;
 begin
+  for FG in FAllGrants do
+  begin
+    R:=RxDBGrid1.ColumnByFieldName(ObjectGrantNamesReal[FG]);
+    if Assigned(R) then
+      R.ReadOnly:=rxUGList.FieldByName(ObjectGrantNamesReal[FG] + 'RO').AsBoolean;
+  end;
+end;
+
+procedure TfbmUserObjectsGrantFrame.rxUGListFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+var
+  S: string;
+begin
+  S:=UTF8UpperCase(Trim(Edit1.Text));
+  if (S<>'') then
+    Accept:=UTF8Pos(S, UTF8UpperCase(rxUGListUG_NAME.AsString)) > 0;
+
+  if Accept and (ComboBox1.ItemIndex>0) then
+    Accept:=rxUGListUG_TYPE.AsInteger = PtrInt(ComboBox1.Items.Objects[ComboBox1.ItemIndex]);
+
+  if Accept and (ComboBox2.ItemIndex>0) then
+    Accept:=rxUGListUG_EMPTY.AsBoolean = (ComboBox2.ItemIndex = 2);
+end;
+
+procedure TfbmUserObjectsGrantFrame.RxDBGrid1GetCellProps(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor);
+var
+  F: TField;
+begin
+  F:=rxUGList.FindField(Field.FieldName+'RO');
+  if Assigned(F) and F.AsBoolean then
+    Background:=clTeal;
+end;
+
+procedure TfbmUserObjectsGrantFrame.Edit1Change(Sender: TObject);
+begin
+  UpdateFilter;
+end;
+
+procedure TfbmUserObjectsGrantFrame.rxUGListAfterInsert(DataSet: TDataSet);
+var
+  F: TField;
+begin
+  for F in rxUGList.Fields do
+    if F.DataType = ftBoolean then
+      F.AsBoolean:=false;
+end;
+
+procedure TfbmUserObjectsGrantFrame.RefreshPage;
+function DoAddRow(D:TDBObject):boolean;
+var
+  FG: TObjectGrant;
+  F: TField;
+  P: TACLItem;
+  GL: TObjectGrants;
+  S: String;
+begin
+  if not Assigned(D.ACLList) then Exit(false);
+  FAllGrants:=FAllGrants + D.ACLList.ObjectGrants;
   rxUGList.Append;
-  rxUGListUG_NAME.AsString:=G.CaptionFullPatch;
+  rxUGListUG_TYPE.AsInteger:=Ord(D.DBObjectKind);
+  rxUGListUG_NAME.AsString:=D.CaptionFullPatch;
+
+  rxUGListogSelectRO.AsBoolean:=not (ogSelect in D.ACLList.ObjectGrants);
+
+  for FG in TObjectGrant do
+  begin
+    F:=rxUGList.FindField(ObjectGrantNamesReal[FG] + 'RO');
+    if Assigned(F) then
+      F.AsBoolean:=not (FG in D.ACLList.ObjectGrants);
+  end;
+
+  D.ACLList.RefreshList;
+  P:=D.ACLList.FindACLItem(DBObject.Caption);
+(*  S:=D.CaptionFullPatch;
+  if S = 'buh.bank_payment_doc' then
+  begin
+    rxUGListUG_EMPTY.AsBoolean:=false;
+  end; *)
+  if Assigned(P) then
+  begin
+    GL:=P.Grants;
+    rxUGListUG_EMPTY.AsBoolean:=GL = [];
+    for FG in GL do
+    begin
+      F:=rxUGList.FindField(ObjectGrantNamesReal[FG]);
+      if Assigned(F) then
+        F.AsBoolean:=true;
+    end;
+    rxUGListOWNER_USER.AsString:=P.GrantOwnUser;
+  end
+  else
+  begin
+    rxUGListUG_EMPTY.AsBoolean:=true;
+  end;
   rxUGList.Post;
+  Result:=true;
+end;
+
+procedure DoAdd(Grp: TDBRootObject);
+var
+  i: Integer;
+begin
+  DoAddRow(Grp);
+  for i:=0 to Grp.CountGroups -1 do
+    DoAdd(Grp.Groups[i]);
+
+  for i:=0 to Grp.CountObject-1 do
+    if not DoAddRow(Grp.Items[i]) then break;
 end;
 
 var
   E: TSQLEngineAbstract;
   G: TDBObject;
+  FG: TObjectGrant;
+  R: TRxColumn;
+  S: String;
 begin
+  ComboBox1.OnChange:=nil;
+  FAllGrants:=[];
+
   E:=DBObject.OwnerDB;
   rxUGList.CloseOpen;
   rxUGList.DisableControls;
   for G in E.Groups do
-    DoAdd(G);
+    if G is TDBRootObject then
+      DoAdd(TDBRootObject(G));
+
+
+  for FG in TObjectGrant do
+  begin
+    R:=RxDBGrid1.ColumnByFieldName(ObjectGrantNamesReal[FG]);
+    if Assigned(R) then
+      R.Visible:=FG in FAllGrants;
+  end;
+
+  rxUGList.SortOnFields('UG_TYPE;UG_NAME');
+
+  //fill filter combo box
+  FrxCol_UG_TYPE.KeyList.Clear;
+  ComboBox1.Items.Clear;
+  ComboBox1.Items.Add(sAllOobjects);
+  rxUGList.First;
+  while not rxUGList.EOF do
+  begin
+    S:=DBObjectKindNames[TDBObjectKind(rxUGListUG_TYPE.AsInteger)];
+    if ComboBox1.Items.IndexOf(S)<0 then
+    begin
+      ComboBox1.Items.AddObject(S, TObject(IntPtr(rxUGListUG_TYPE.AsInteger)));
+      FrxCol_UG_TYPE.KeyList.Add(rxUGListUG_TYPE.AsString + '=' + IntToStr(DBObjectKindImages[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]));
+    end;
+    rxUGList.Next;
+  end;
+
   rxUGList.First;
   rxUGList.EnableControls;
+  ComboBox1.ItemIndex:=0;
+  ComboBox1.OnChange:=@Edit1Change;
+end;
+
+procedure TfbmUserObjectsGrantFrame.BindRxDBGridCollumn;
+begin
+  FrxCol_UG_TYPE:=RxDBGrid1.ColumnByFieldName('UG_TYPE');
+  FrxCol_UG_NAME:=RxDBGrid1.ColumnByFieldName('UG_NAME');
+  FrxCol_OWNER_USER:=RxDBGrid1.ColumnByFieldName('OWNER_USER');
+  FrxCol_Select:=RxDBGrid1.ColumnByFieldName('ogSelect');
+  FrxCol_Insert:=RxDBGrid1.ColumnByFieldName('ogInsert');
+  FrxCol_Update:=RxDBGrid1.ColumnByFieldName('ogUpdate');
+  FrxCol_Delete:=RxDBGrid1.ColumnByFieldName('ogDelete');
+  FrxCol_Execute:=RxDBGrid1.ColumnByFieldName('ogExecute');
+  FrxCol_Reference:=RxDBGrid1.ColumnByFieldName('ogReference');
+  FrxCol_Create:=RxDBGrid1.ColumnByFieldName('ogCreate');
+  FrxCol_Rule:=RxDBGrid1.ColumnByFieldName('ogRule');
+  FrxCol_Temporary:=RxDBGrid1.ColumnByFieldName('ogTemporary');
+  FrxCol_Truncate:=RxDBGrid1.ColumnByFieldName('ogTruncate');
+  FrxCol_Trigger:=RxDBGrid1.ColumnByFieldName('ogTrigger');
+  FrxCol_Usage:=RxDBGrid1.ColumnByFieldName('ogUsage');
+  FrxCol_WGO:=RxDBGrid1.ColumnByFieldName('ogWGO');
+  FrxCol_Connect:=RxDBGrid1.ColumnByFieldName('ogConnect');
+  FrxCol_Alter:=RxDBGrid1.ColumnByFieldName('ogAlter');
+  FrxCol_AlterRoutine:=RxDBGrid1.ColumnByFieldName('ogAlterRoutine');
+  FrxCol_CreateRoutine:=RxDBGrid1.ColumnByFieldName('ogCreateRoutine');
+  FrxCol_CreateTablespace:=RxDBGrid1.ColumnByFieldName('ogCreateTablespace');
+  FrxCol_CreateUser:=RxDBGrid1.ColumnByFieldName('ogCreateUser');
+  FrxCol_CreateView:=RxDBGrid1.ColumnByFieldName('ogCreateView');
+  FrxCol_Drop:=RxDBGrid1.ColumnByFieldName('ogDrop');
+  FrxCol_Event:=RxDBGrid1.ColumnByFieldName('ogEvent');
+  FrxCol_File:=RxDBGrid1.ColumnByFieldName('ogFile');
+  FrxCol_Index:=RxDBGrid1.ColumnByFieldName('ogIndex');
+  FrxCol_LockTables:=RxDBGrid1.ColumnByFieldName('ogLockTables');
+  FrxCol_Process:=RxDBGrid1.ColumnByFieldName('ogProcess');
+  FrxCol_Proxy:=RxDBGrid1.ColumnByFieldName('ogProxy');
+  FrxCol_Reload:=RxDBGrid1.ColumnByFieldName('ogReload');
+  FrxCol_ReplicationClient:=RxDBGrid1.ColumnByFieldName('ogReplicationClient');
+  FrxCol_ReplicationSlave:=RxDBGrid1.ColumnByFieldName('ogReplicationSlave');
+  FrxCol_ShowDatabases:=RxDBGrid1.ColumnByFieldName('ogShowDatabases');
+  FrxCol_ShowView:=RxDBGrid1.ColumnByFieldName('ogShowView');
+  FrxCol_Shutdown:=RxDBGrid1.ColumnByFieldName('ogShutdown');
+  FrxCol_Super:=RxDBGrid1.ColumnByFieldName('ogSuper');
+  FrxCol_Membership:=RxDBGrid1.ColumnByFieldName('ogMembership');
+end;
+
+procedure TfbmUserObjectsGrantFrame.UpdateFilter;
+begin
+  rxUGList.Filtered:=false;
+  rxUGList.Filtered:=(Trim(Edit1.Text)<>'') or (ComboBox1.ItemIndex>0) or (ComboBox2.ItemIndex>0);
 end;
 
 function TfbmUserObjectsGrantFrame.PageName: string;
@@ -124,6 +406,7 @@ constructor TfbmUserObjectsGrantFrame.CreatePage(TheOwner: TComponent;
 begin
   inherited CreatePage(TheOwner, ADBObject);
   RefreshPage;
+  ComboBox2.OnChange:=@Edit1Change;
 end;
 
 procedure TfbmUserObjectsGrantFrame.Activate;
@@ -149,7 +432,58 @@ end;
 
 procedure TfbmUserObjectsGrantFrame.Localize;
 begin
+  BindRxDBGridCollumn;
   inherited Localize;
+  ComboBox2.OnChange:=nil;
+  Label2.Caption:=sFilter;
+  //Caption:=sACLEdit;
+
+  edtPrint.Caption:=sPrint;
+
+  RxDBGrid1.ColumnByFieldName('UG_NAME').Title.Caption:=sNameUserRole;
+  RxDBGrid1.ColumnByFieldName('OWNER_USER').Title.Caption:=sGrantOwnUser;
+
+  FrxCol_Select.Title.Caption:=sSelect;
+  FrxCol_Insert.Title.Caption:=sInsert;
+  FrxCol_Update.Title.Caption:=sUpdate;
+  FrxCol_Delete.Title.Caption:=sDelete;
+  FrxCol_Execute.Title.Caption:=sExecute;
+  FrxCol_Reference.Title.Caption:=sReferences;
+  FrxCol_Create.Title.Caption:=sCreate;
+  FrxCol_Rule.Title.Caption:=sRule;
+  FrxCol_Temporary.Title.Caption:=sTemporary;
+  FrxCol_Truncate.Title.Caption:=sTruncate;
+  FrxCol_Trigger.Title.Caption:=sTrigger;
+  FrxCol_Usage.Title.Caption:=sUsage;
+  FrxCol_WGO.Title.Caption:=sWithGrantOptions;
+  FrxCol_Connect.Title.Caption:=sConnect;
+  FrxCol_Alter.Title.Caption:=sAlter;
+  FrxCol_AlterRoutine.Title.Caption:=sAlterRroutine;
+  FrxCol_CreateRoutine.Title.Caption:=sCreateRoutine;
+  FrxCol_CreateTablespace.Title.Caption:=sCreateTablespace;
+  FrxCol_CreateUser.Title.Caption:=sCreateUser;
+  FrxCol_CreateView.Title.Caption:=sCreateView;
+  FrxCol_Drop.Title.Caption:=sDrop;
+  FrxCol_Event.Title.Caption:=sEvent;
+  FrxCol_File.Title.Caption:=sFile;
+  FrxCol_Index.Title.Caption:=sIndex;
+  FrxCol_LockTables.Title.Caption:=sLockTables;
+  FrxCol_Process.Title.Caption:=sProcess;
+  FrxCol_Proxy.Title.Caption:=sProxy;
+  FrxCol_Reload.Title.Caption:=sReload;
+  FrxCol_ReplicationClient.Title.Caption:=sReplClient;
+  FrxCol_ReplicationSlave.Title.Caption:=sReplSlave;
+  FrxCol_ShowDatabases.Title.Caption:=sShowDB;
+  FrxCol_ShowView.Title.Caption:=sShowView;
+  FrxCol_Shutdown.Title.Caption:=sShutdown;
+  FrxCol_Super.Title.Caption:=sSuper;
+  FrxCol_Membership.Title.Caption:=sMembership;
+
+  ComboBox2.Items.Clear;
+  ComboBox2.Items.Add(sShowAllGrants);
+  ComboBox2.Items.Add(sShowOnlyGrants);
+  ComboBox2.Items.Add(sShowOnlyNotGrants);
+  ComboBox2.ItemIndex:=0;
 end;
 
 end.

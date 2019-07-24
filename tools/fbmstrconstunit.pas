@@ -572,6 +572,10 @@ resourcestring
   sDeletedRowsInfo                  = 'Deleted rows : %d';
   sWithDataType                     = 'With data type';
   sSeparator                        = 'Separator';
+  sShowAllGrants                    = 'Show all';
+  sShowOnlyGrants                   = 'Show only with grants';
+  sShowOnlyNotGrants                = 'Show only without grants';
+
 
   sSuccesConnection                 = 'Successful connection';
   sNotConnected                     = 'Not connected...';

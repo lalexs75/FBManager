@@ -88,7 +88,6 @@ Source: "W:\FBManager\dlls\iconv.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\intl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libcairo-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libcurl.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "W:\FBManager\dlls\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libfontconfig-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -96,7 +95,6 @@ Source: "W:\FBManager\dlls\libgmodule-2.0-0.dll"; DestDir: "{app}"; Flags: ignor
 Source: "W:\FBManager\dlls\libgobject-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libgthread-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libiconv.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "W:\FBManager\dlls\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libidn-11.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libintl.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -106,14 +104,20 @@ Source: "W:\FBManager\dlls\libpangocairo-1.0-0.dll"; DestDir: "{app}"; Flags: ig
 Source: "W:\FBManager\dlls\libpangoft2-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libpangowin32-1.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libpng14-14.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "W:\FBManager\dlls\libpq.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libssh2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libssl32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libxml2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\libxml2-2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "W:\FBManager\dlls\sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "W:\FBManager\dlls\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\FBManager\dlls\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "W:\FBManager\dlls\sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "W:\sto\dll\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\sto\dll\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\sto\dll\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\sto\dll\libpq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\sto\dll\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\sto\dll\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ;------------------------------------------------------------------------------
 ;   ”казываем установщику, где он должен вз€ть иконки

@@ -776,6 +776,7 @@ type
     FVolatilityCategories: TPGSPVolatCat;
     function GetNameWithParams:string;
   protected
+    procedure InternalInitACLList; virtual;
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
     function GetCaptionFullPatch:string; override;
     function InternalGetDDLCreate: string; override;
@@ -809,6 +810,13 @@ type
     property Schema:TPGSchema read FSchema;
     property ReturnSetType:boolean read FReturnSetType; { TODO : В дальнейшем необходимо доработать вид возврата - таблица }
     property FieldsIN;
+  end;
+
+  { TPGTriggerFunction }
+
+  TPGTriggerFunction = class(TPGFunction)
+  protected
+    procedure InternalInitACLList; override;
   end;
 
   { TPGIndex }
@@ -1089,6 +1097,13 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGTriggerFunction }
+
+procedure TPGTriggerFunction.InternalInitACLList;
+begin
+  //
 end;
 
 { TPGAutovacuumOptions }
@@ -3641,7 +3656,7 @@ begin
 
   FProcedures:=TPGFunctionsRoot.Create(OwnerDB, TPGFunction, sFunctions, Self);
   FProcedures.FProcType:=-1;
-  FTriggerProc:=TPGTriggerProcRoot.Create(OwnerDB, TPGFunction, sTriggerProc, Self);
+  FTriggerProc:=TPGTriggerProcRoot.Create(OwnerDB, TPGTriggerFunction, sTriggerProc, Self);
   FRulesRoot:=TPGRulesRoot.Create(OwnerDB, TPGRule, sRules, Self);
 
   FCollationRoot:=TPGCollationRoot.Create(OwnerDB, TPGCollation, sCollate, Self);
@@ -6075,6 +6090,12 @@ begin
   Result:=GetCaptionFullPatch+'('+Result+')';
 end;
 
+procedure TPGFunction.InternalInitACLList;
+begin
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogExecute, ogWGO];
+end;
+
 procedure TPGFunction.FillFieldList(List: TStrings;
   ACharCase: TCharCaseOptions; AFullNames: Boolean);
 var
@@ -6233,9 +6254,7 @@ begin
     FReturnTypeOID:=StrToInt(ADBItem.ObjType);
   end;
 
-  FACLList:=TPGACLList.Create(Self);
-  FACLList.ObjectGrants:=[ogExecute, ogWGO];
-
+  InternalInitACLList;
   FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
 

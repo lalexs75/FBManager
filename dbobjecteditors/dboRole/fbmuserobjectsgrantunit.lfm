@@ -5,12 +5,13 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
   ClientWidth = 966
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
-    Height = 492
-    Top = 25
+    Height = 444
+    Top = 73
     Width = 966
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
     AutoSort = True
+    OnGetCellProps = RxDBGrid1GetCellProps
     Columns = <    
       item
         ButtonStyle = cbsNone
@@ -734,12 +735,79 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
     ClientWidth = 966
     TabOrder = 1
   end
-  object dsUGList: TDataSource[2]
+  object Panel1: TPanel[2]
+    Left = 0
+    Height = 48
+    Top = 25
+    Width = 966
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 48
+    ClientWidth = 966
+    TabOrder = 2
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 33
+      Top = 7
+      Width = 229
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = Edit1Change
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = ComboBox2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideBottom.Control = Edit1
+      AnchorSideBottom.Side = asrBottom
+      Left = 438
+      Height = 17
+      Top = 24
+      Width = 32
+      Anchors = [akLeft, akBottom]
+      Caption = 'Filter'
+      FocusControl = Edit1
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 476
+      Height = 34
+      Top = 7
+      Width = 483
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = Edit1Change
+      TabOrder = 1
+    end
+    object ComboBox2: TComboBox
+      AnchorSideLeft.Control = ComboBox1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      Left = 242
+      Height = 33
+      Top = 7
+      Width = 190
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = Edit1Change
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object dsUGList: TDataSource[3]
     DataSet = rxUGList
     Left = 236
     Top = 212
   end
-  object rxUGList: TRxMemoryData[3]
+  object rxUGList: TRxMemoryData[4]
     FieldDefs = <    
       item
         Name = 'UG_TYPE'
@@ -894,7 +962,154 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       item
         Name = 'ogCreateTablespace'
         DataType = ftBoolean
+      end    
+      item
+        Name = 'ogSelectRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogInsertRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogUpdateRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogDeleteRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogExecuteRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReferenceRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogRuleRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTemporaryRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTruncateRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogTriggerRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogAlterRoutineRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogUsageRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogConnectRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogAlterRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateRoutineRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateUserRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateViewRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogDropRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogEventRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogFileRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogIndexRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogLockTablesRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogProcessRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogProxyRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReloadRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReplicationClientRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogReplicationSlaveRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShowDatabasesRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShowViewRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogShutdownRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogSuperRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogMembershipRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogWGORO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogCreateTablespaceRO'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'UG_EMPTY'
+        DataType = ftBoolean
       end>
+    AfterInsert = rxUGListAfterInsert
+    AfterScroll = rxUGListAfterScroll
+    OnFilterRecord = rxUGListFilterRecord
     PacketRecords = 0
     Left = 276
     Top = 212
@@ -1279,10 +1494,370 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       Required = False
       DisplayValues = 'True;False'
     end
+    object rxUGListogSelectRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogSelectRO'
+      Index = 38
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogInsertRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogInsertRO'
+      Index = 39
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogUpdateRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogUpdateRO'
+      Index = 40
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogDeleteRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogDeleteRO'
+      Index = 41
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogExecuteRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogExecuteRO'
+      Index = 42
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReferenceRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReferenceRO'
+      Index = 43
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateRO'
+      Index = 44
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogRuleRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogRuleRO'
+      Index = 45
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTemporaryRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTemporaryRO'
+      Index = 46
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTruncateRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTruncateRO'
+      Index = 47
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogTriggerRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogTriggerRO'
+      Index = 48
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogAlterRoutineRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogAlterRoutineRO'
+      Index = 49
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogUsageRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogUsageRO'
+      Index = 50
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogConnectRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogConnectRO'
+      Index = 51
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogAlterRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogAlterRO'
+      Index = 52
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateRoutineRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateRoutineRO'
+      Index = 53
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateUserRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateUserRO'
+      Index = 54
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateViewRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateViewRO'
+      Index = 55
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogDropRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogDropRO'
+      Index = 56
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogEventRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogEventRO'
+      Index = 57
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogFileRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogFileRO'
+      Index = 58
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogIndexRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogIndexRO'
+      Index = 59
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogLockTablesRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogLockTablesRO'
+      Index = 60
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogProcessRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogProcessRO'
+      Index = 61
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogProxyRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogProxyRO'
+      Index = 62
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReloadRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReloadRO'
+      Index = 63
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReplicationClientRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReplicationClientRO'
+      Index = 64
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogReplicationSlaveRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogReplicationSlaveRO'
+      Index = 65
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShowDatabasesRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShowDatabasesRO'
+      Index = 66
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShowViewRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShowViewRO'
+      Index = 67
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogShutdownRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogShutdownRO'
+      Index = 68
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogSuperRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogSuperRO'
+      Index = 69
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogMembershipRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogMembershipRO'
+      Index = 70
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogWGORO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogWGORO'
+      Index = 71
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogCreateTablespaceRO: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogCreateTablespaceRO'
+      Index = 72
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListUG_EMPTY: TBooleanField
+      FieldKind = fkData
+      FieldName = 'UG_EMPTY'
+      Index = 73
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
   end
-  object PopupMenu1: TPopupMenu[4]
+  object PopupMenu1: TPopupMenu[5]
     Images = fbManagerMainForm.ImageListMain
-    Left = 292
+    Left = 312
     Top = 212
     object MenuItem1: TMenuItem
       Action = grVL
@@ -1312,17 +1887,17 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       Action = edtPrint
     end
   end
-  object RxDBGridPrint1: TRxDBGridPrint[5]
+  object RxDBGridPrint1: TRxDBGridPrint[6]
     RxDBGrid = RxDBGrid1
     Caption = 'Print grid'
     Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
-    Left = 292
+    Left = 192
     Top = 212
   end
-  object ActionList1: TActionList[6]
+  object ActionList1: TActionList[7]
     Images = fbManagerMainForm.ImageListMain
-    Left = 292
-    Top = 212
+    Left = 256
+    Top = 128
     object edtPrint: TAction
       Category = 'List'
       Caption = 'Print'

@@ -4330,6 +4330,10 @@ msgstr ""
 msgid "Shedule"
 msgstr ""
 
+#: fbmstrconstunit.sshowallgrants
+msgid "Show all"
+msgstr ""
+
 #: fbmstrconstunit.sshowallobjects
 msgid "Show all objects"
 msgstr ""
@@ -4382,8 +4386,16 @@ msgctxt "fbmstrconstunit.sshowobjtreehint"
 msgid "Show objects tree"
 msgstr ""
 
+#: fbmstrconstunit.sshowonlygrants
+msgid "Show only with grants"
+msgstr ""
+
 #: fbmstrconstunit.sshowonlylinenumber
 msgid "Show only line number"
+msgstr ""
+
+#: fbmstrconstunit.sshowonlynotgrants
+msgid "Show only without grants"
 msgstr ""
 
 #: fbmstrconstunit.sshowqueryplan

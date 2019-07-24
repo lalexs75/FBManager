@@ -235,6 +235,12 @@ begin
      TfbmObjectEditorDescriptionFrame,
      TfbmTableStatisticFrame, TfbmDDLPage]);
 
+  RegisterObjEditor(TPGTriggerFunction,
+    [TfbmPostGreeFunctionEdtMainPage, TfbmObjectEditorDescriptionFrame],
+    [TfbmPostGreeFunctionEdtMainPage, TDependenciesFrame,
+     TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame, TfbmDDLPage]);
+
   RegisterObjEditor(TPGIndex,
     [TpgIndexEditorPage, TfbmObjectEditorDescriptionFrame],
     [TpgIndexEditorPage, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
