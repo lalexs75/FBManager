@@ -1465,6 +1465,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       Category = 'Grants'
       Caption = 'grHL'
       ImageIndex = 36
+      OnExecute = grHLExecute
     end
     object grALL: TAction
       Tag = 1
@@ -1475,12 +1476,13 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
     object revVL: TAction
       Category = 'Grants'
       Caption = 'revVL'
-      ImageIndex = 37
+      ImageIndex = 39
     end
     object revHL: TAction
       Category = 'Grants'
       Caption = 'revHL'
-      ImageIndex = 38
+      ImageIndex = 40
+      OnExecute = grHLExecute
     end
     object revALL: TAction
       Category = 'Grants'

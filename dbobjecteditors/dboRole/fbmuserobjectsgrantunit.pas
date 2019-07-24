@@ -84,6 +84,7 @@ type
     rxUGListUG_TYPE: TLongintField;
     ToolPanel1: TToolPanel;
     procedure Edit1Change(Sender: TObject);
+    procedure grHLExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
@@ -142,6 +143,8 @@ type
     procedure UpdateFilter;
     procedure LockPost;
     procedure UnLockPost;
+    procedure DoSetGrLine(E:boolean);
+    procedure DoSetGrAll(E:boolean; AllColumns:boolean);
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -194,6 +197,13 @@ end;
 procedure TfbmUserObjectsGrantFrame.Edit1Change(Sender: TObject);
 begin
   UpdateFilter;
+end;
+
+procedure TfbmUserObjectsGrantFrame.grHLExecute(Sender: TObject);
+begin
+  LockPost;
+  DoSetGrLine((Sender as TComponent).Tag = 1);
+  UnLockPost;
 end;
 
 procedure TfbmUserObjectsGrantFrame.RxDBGrid1DblClick(Sender: TObject);
@@ -254,6 +264,17 @@ begin
 end;
 
 procedure TfbmUserObjectsGrantFrame.RefreshPage;
+
+procedure DoEmptyLine;
+var
+  F: TField;
+begin
+  for F in rxUGList.Fields do
+    if (F.Tag <> 0) and (F.DataType = ftBoolean) then
+      F.AsBoolean:=false;
+  rxUGListUG_EMPTY.AsBoolean:=true;
+end;
+
 function DoAddRow(D:TDBObject):boolean;
 var
   FG: TObjectGrant;
@@ -275,6 +296,7 @@ begin
   P:=D.ACLList.FindACLItem(DBObject.Caption);
   if Assigned(P) then
   begin
+    rxUGListOWNER_USER.AsString:=P.GrantOwnUser;
     GL:=P.Grants;
     if GL <> [] then
     begin
@@ -283,11 +305,10 @@ begin
           F.AsBoolean:=TObjectGrant(F.Tag-1) in GL;
     end
     else
-      rxUGListUG_EMPTY.AsBoolean:=true;
-    rxUGListOWNER_USER.AsString:=P.GrantOwnUser;
+      DoEmptyLine;
   end
   else
-    rxUGListUG_EMPTY.AsBoolean:=true;
+    DoEmptyLine;
 
   rxUGList.Post;
   Result:=true;
@@ -436,9 +457,28 @@ begin
   FACLItems.Clear;
 end;
 
+procedure TfbmUserObjectsGrantFrame.DoSetGrLine(E: boolean);
+var
+  G: TObjectGrant;
+  F: TField;
+begin
+  LockPost;
+  rxUGList.Edit;
+  for F in rxUGList.Fields do
+    if (F.Tag > 0) and (TObjectGrant(F.Tag-1) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]) then
+      F.AsBoolean:=E;
+  rxUGList.Post;
+  UnLockPost;
+end;
+
+procedure TfbmUserObjectsGrantFrame.DoSetGrAll(E: boolean; AllColumns: boolean);
+begin
+
+end;
+
 function TfbmUserObjectsGrantFrame.PageName: string;
 begin
-  Result:=sGrant;
+  Result:=sGrantsManager;
 end;
 
 constructor TfbmUserObjectsGrantFrame.CreatePage(TheOwner: TComponent;
