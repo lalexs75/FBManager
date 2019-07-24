@@ -87,7 +87,6 @@ type
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
-    procedure rxUGListAfterInsert(DataSet: TDataSet);
     procedure rxUGListAfterPost(DataSet: TDataSet);
     procedure rxUGListAfterScroll(DataSet: TDataSet);
     procedure rxUGListFilterRecord(DataSet: TDataSet; var Accept: Boolean);
@@ -210,15 +209,6 @@ begin
   end;
 end;
 
-procedure TfbmUserObjectsGrantFrame.rxUGListAfterInsert(DataSet: TDataSet);
-var
-  F: TField;
-begin
-  for F in rxUGList.Fields do
-    if F.DataType = ftBoolean then
-      F.AsBoolean:=false;
-end;
-
 procedure TfbmUserObjectsGrantFrame.rxUGListAfterPost(DataSet: TDataSet);
 var
   D: TDBObject;
@@ -287,23 +277,21 @@ begin
 
   D.ACLList.RefreshList;
   P:=D.ACLList.FindACLItem(DBObject.Caption);
-//  P:=nil;
   if Assigned(P) then
   begin
     GL:=P.Grants;
-    rxUGListUG_EMPTY.AsBoolean:=GL = [];
-    for FG in GL do
+    if GL <> [] then
     begin
-      F:=rxUGList.FindField(ObjectGrantNamesReal[FG]);
-      if Assigned(F) then
-        F.AsBoolean:=true;
-    end;
+      for F in rxUGList.Fields do
+        if F.Tag <> 0 then
+          F.AsBoolean:=TObjectGrant(F.Tag) in GL;
+    end
+    else
+      rxUGListUG_EMPTY.AsBoolean:=true;
     rxUGListOWNER_USER.AsString:=P.GrantOwnUser;
   end
   else
-  begin
     rxUGListUG_EMPTY.AsBoolean:=true;
-  end;
 
   rxUGList.Post;
   Result:=true;
@@ -500,7 +488,7 @@ begin
   inherited Localize;
   ComboBox2.OnChange:=nil;
   Label2.Caption:=sFilter;
-  //Caption:=sACLEdit;
+  Caption:=sGrantsManager;
 
   edtPrint.Caption:=sPrint;
 

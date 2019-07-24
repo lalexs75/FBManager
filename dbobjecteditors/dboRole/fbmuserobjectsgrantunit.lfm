@@ -1007,7 +1007,6 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
         DataType = ftBoolean
         Precision = -1
       end>
-    AfterInsert = rxUGListAfterInsert
     AfterPost = rxUGListAfterPost
     AfterScroll = rxUGListAfterScroll
     OnFilterRecord = rxUGListFilterRecord

@@ -1377,6 +1377,7 @@ resourcestring
   sGrantExecuteTo                   = 'Grant execute to';
 
   sACLEdit                          = 'ACL edit';
+  sGrantsManager                    = 'Grants manager';
   sUsersGroups                      = 'Users/Groups';
   sUsersAndGroups                   = 'Users and Groups';
   sOnlyUsers                        = 'Only users';

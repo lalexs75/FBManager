@@ -2293,6 +2293,10 @@ msgstr "Выдающий права"
 msgid "Grant own. user"
 msgstr "Владелец"
 
+#: fbmstrconstunit.sgrantsmanager
+msgid "Grants manager"
+msgstr ""
+
 #: fbmstrconstunit.sgridoptions
 msgid "Grid options"
 msgstr "Параметры таблиц"
