@@ -2096,6 +2096,7 @@ var
   T: TTableItem;
   F: TDBField;
   GF: TSQLParserField;
+  D: TDBDomain;
 begin
   Result:=TPGSQLGrant.Create(nil);
 
@@ -2107,7 +2108,12 @@ begin
     begin
       GF:=T.Fields.AddParam(F.FieldName);
       GF.InReturn:=F.IOType;
-      GF.TypeName:=F.FieldTypeName;
+
+      D:=F.FieldDomain;
+      if Assigned(D) then
+        GF.TypeName:=D.CaptionFullPatch
+      else
+        GF.TypeName:=F.FieldTypeName;
     end;
   end;
 end;
