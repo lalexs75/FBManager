@@ -109,7 +109,6 @@ function DoGetMetaSQL(D:TDBObject):string;
 begin
   Result:='';
   if not Assigned(D) then exit;
-  RxWriteLog(etDebug, D.CaptionFullPatch);
   Result:=D.DDLCreateSimple;
 end;
 

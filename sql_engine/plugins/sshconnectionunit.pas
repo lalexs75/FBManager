@@ -147,7 +147,6 @@ begin
           if (SLine[j] in [#13, #10]) then
           begin
             S1:=Trim(Copy(SLine, KStart, j - KStart));
-            rxWriteLog(etError, S1);
             if S1<>'' then
             begin
               if Copy(S1, 1, Length(sMsgOk1)) = sMsgOk1 then

@@ -683,6 +683,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
     PopupMenu = PopupMenu1
     TabOrder = 0
     TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
   end
   object ToolPanel1: TToolPanel[1]
     Left = 0
@@ -1108,6 +1109,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
         DataType = ftBoolean
       end>
     AfterInsert = rxUGListAfterInsert
+    AfterPost = rxUGListAfterPost
     AfterScroll = rxUGListAfterScroll
     OnFilterRecord = rxUGListFilterRecord
     PacketRecords = 0

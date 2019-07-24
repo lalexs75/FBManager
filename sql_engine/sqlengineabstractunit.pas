@@ -1540,7 +1540,6 @@ function TACLListAbstract.FindACLItem(UserName: string): TACLItem;
 var
   i:integer;
 begin
-  RxWriteLog(etDebug, 'FindACLItem.UserName = "'+UserName+'"');
   Result:=nil;
   for i:=0 to FList.Count - 1 do
   begin
@@ -1598,6 +1597,7 @@ begin
         ASQL.Add(S);
     end;
   end;
+  P.FGrantsOld:=P.FGrants;
 end;
 var
   i:integer;

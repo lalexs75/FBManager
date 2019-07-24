@@ -708,8 +708,6 @@ begin
   begin
     S:=FSt.SQLCommand.AsSQL;
 
-    rxWriteLog(etDebug, S);
-
     if (FSt.SQLCommand is TSQLCommandAbstractSelect) then
     begin
       for i:=0 to TSQLCommandAbstractSelect(FSt.SQLCommand).Tables.Count - 1 do

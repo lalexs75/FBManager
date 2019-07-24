@@ -118,9 +118,11 @@ type
     rxUGListUG_TYPE: TLongintField;
     ToolPanel1: TToolPanel;
     procedure Edit1Change(Sender: TObject);
+    procedure RxDBGrid1DblClick(Sender: TObject);
     procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
     procedure rxUGListAfterInsert(DataSet: TDataSet);
+    procedure rxUGListAfterPost(DataSet: TDataSet);
     procedure rxUGListAfterScroll(DataSet: TDataSet);
     procedure rxUGListFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
@@ -164,12 +166,20 @@ type
     FrxCol_Shutdown:TRxColumn;
     FrxCol_Super:TRxColumn;
     FrxCol_Membership:TRxColumn;
+
+    FLockCount:integer;
+    FOneLine:boolean;
+    FACLItems:TList;
+
     procedure RefreshPage;
     procedure BindRxDBGridCollumn;
     procedure UpdateFilter;
+    procedure LockPost;
+    procedure UnLockPost;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    destructor Destroy; override;
     procedure Activate;override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
@@ -177,7 +187,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, sqlObjects, LazUTF8;
+uses fbmStrConstUnit, sqlObjects, IBManDataInspectorUnit, LazUTF8;
 
 {$R *.lfm}
 
@@ -227,6 +237,15 @@ begin
   UpdateFilter;
 end;
 
+procedure TfbmUserObjectsGrantFrame.RxDBGrid1DblClick(Sender: TObject);
+begin
+  if rxUGList.Active and (rxUGList.RecordCount > 0) then
+  begin
+    if RxDBGrid1.SelectedColumn = FrxCol_UG_NAME then
+      fbManDataInpectorForm.EditObject(DBObject.OwnerDB.DBObjectByName(rxUGListUG_NAME.AsString));
+  end;
+end;
+
 procedure TfbmUserObjectsGrantFrame.rxUGListAfterInsert(DataSet: TDataSet);
 var
   F: TField;
@@ -234,6 +253,54 @@ begin
   for F in rxUGList.Fields do
     if F.DataType = ftBoolean then
       F.AsBoolean:=false;
+end;
+
+procedure TfbmUserObjectsGrantFrame.rxUGListAfterPost(DataSet: TDataSet);
+var
+  D: TDBObject;
+  P: TACLItem;
+  OG: TObjectGrants;
+  G: TObjectGrant;
+  F: TField;
+begin
+  LockPost;
+  D:=DBObject.OwnerDB.DBObjectByName(rxUGListUG_NAME.AsString);
+  if not Assigned(D.ACLList) then Exit;
+  P:=D.ACLList.FindACLItem(DBObject.Caption);
+  if Assigned(P) then
+  begin
+    P.UserName      := DBObject.Caption;
+    if DBObject.DBObjectKind = okUser then
+      P.UserType:=1
+    else
+      P.UserType:=2;
+    P.GrantOwnUser  := DBObject.OwnerDB.UserName;
+
+    OG:=P.Grants;
+    for G in TObjectGrant do
+    begin
+      if G<>ogAll then
+      begin
+        F:=rxUGList.FieldByName(ObjectGrantNamesReal[G]);
+        if Assigned(F) and F.AsBoolean then
+          OG:=OG + [G]
+        else
+          OG:=OG - [G];
+      end;
+    end;
+
+    if (ogWGO in OG) and not (ogWGO in P.GrantsOld) then
+    begin
+      for G in OG do
+        P.GrantsOld:=P.GrantsOld - [G];
+    end;
+
+    P.Grants:=OG;
+
+    if FACLItems.IndexOf(P)<0 then
+      FACLItems.Add(P);
+  end;
+  UnLockPost;
 end;
 
 procedure TfbmUserObjectsGrantFrame.RefreshPage;
@@ -246,12 +313,11 @@ var
   S: String;
 begin
   if not Assigned(D.ACLList) then Exit(false);
+
   FAllGrants:=FAllGrants + D.ACLList.ObjectGrants;
   rxUGList.Append;
   rxUGListUG_TYPE.AsInteger:=Ord(D.DBObjectKind);
   rxUGListUG_NAME.AsString:=D.CaptionFullPatch;
-
-  rxUGListogSelectRO.AsBoolean:=not (ogSelect in D.ACLList.ObjectGrants);
 
   for FG in TObjectGrant do
   begin
@@ -262,11 +328,7 @@ begin
 
   D.ACLList.RefreshList;
   P:=D.ACLList.FindACLItem(DBObject.Caption);
-(*  S:=D.CaptionFullPatch;
-  if S = 'buh.bank_payment_doc' then
-  begin
-    rxUGListUG_EMPTY.AsBoolean:=false;
-  end; *)
+//  P:=nil;
   if Assigned(P) then
   begin
     GL:=P.Grants;
@@ -283,6 +345,7 @@ begin
   begin
     rxUGListUG_EMPTY.AsBoolean:=true;
   end;
+
   rxUGList.Post;
   Result:=true;
 end;
@@ -312,6 +375,7 @@ begin
   E:=DBObject.OwnerDB;
   rxUGList.CloseOpen;
   rxUGList.DisableControls;
+  rxUGList.AfterPost:=nil;
   for G in E.Groups do
     if G is TDBRootObject then
       DoAdd(TDBRootObject(G));
@@ -346,6 +410,7 @@ begin
   rxUGList.EnableControls;
   ComboBox1.ItemIndex:=0;
   ComboBox1.OnChange:=@Edit1Change;
+  rxUGList.AfterPost:=@rxUGListAfterPost;
 end;
 
 procedure TfbmUserObjectsGrantFrame.BindRxDBGridCollumn;
@@ -396,6 +461,28 @@ begin
   rxUGList.Filtered:=(Trim(Edit1.Text)<>'') or (ComboBox1.ItemIndex>0) or (ComboBox2.ItemIndex>0);
 end;
 
+procedure TfbmUserObjectsGrantFrame.LockPost;
+begin
+  inc(FLockCount)
+end;
+
+procedure TfbmUserObjectsGrantFrame.UnLockPost;
+var
+  P:TACLItem;
+  i: Integer;
+begin
+  if FLockCount = 0 then exit;
+  Dec(FLockCount);
+  if (FLockCount > 0) then Exit;
+
+  for i:=0 to FACLItems.Count-1 do
+  begin
+    P:=TACLItem(FACLItems[i]);
+    P.Owner.ApplyACLList(P);
+  end;
+  FACLItems.Clear;
+end;
+
 function TfbmUserObjectsGrantFrame.PageName: string;
 begin
   Result:=sGrant;
@@ -407,6 +494,13 @@ begin
   inherited CreatePage(TheOwner, ADBObject);
   RefreshPage;
   ComboBox2.OnChange:=@Edit1Change;
+  FACLItems:=TList.Create;
+end;
+
+destructor TfbmUserObjectsGrantFrame.Destroy;
+begin
+  FreeAndNil(FACLItems);
+  inherited Destroy;
 end;
 
 procedure TfbmUserObjectsGrantFrame.Activate;

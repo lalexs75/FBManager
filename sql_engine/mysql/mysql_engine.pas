@@ -662,7 +662,6 @@ begin
   if Assigned(ADBItem) then
     ADBItem.ObjName:=Trim(ADBItem.ObjName);
   inherited Create(ADBItem, AOwnerRoot);
-  RxWriteLog(etDebug, 'TMySQLUser.Caption'+ Caption);
   FHostName:=Caption;
   FUserName:=Copy2SymbDel(FHostName, '@');
 end;
