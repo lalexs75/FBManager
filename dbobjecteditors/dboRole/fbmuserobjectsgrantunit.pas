@@ -7,10 +7,11 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
   DBGrids, ExtCtrls, StdCtrls, rxmemds, rxdbgrid, RxDBGridPrintGrid, rxtoolbar,
-  DB, fdmAbstractEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
+  DB, sqlObjects, fdmAbstractEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
   fbmToolsUnit;
 
 type
+  TRoDBObjTypes = array [TDBObjectKind] of TObjectGrants;
 
   { TfbmUserObjectsGrantFrame }
 
@@ -43,75 +44,40 @@ type
     RxDBGridPrint1: TRxDBGridPrint;
     rxUGList: TRxMemoryData;
     rxUGListogAlter: TBooleanField;
-    rxUGListogAlterRO: TBooleanField;
     rxUGListogAlterRoutine: TBooleanField;
-    rxUGListogAlterRoutineRO: TBooleanField;
     rxUGListogConnect: TBooleanField;
-    rxUGListogConnectRO: TBooleanField;
     rxUGListogCreate: TBooleanField;
-    rxUGListogCreateRO: TBooleanField;
     rxUGListogCreateRoutine: TBooleanField;
-    rxUGListogCreateRoutineRO: TBooleanField;
     rxUGListogCreateTablespace: TBooleanField;
-    rxUGListogCreateTablespaceRO: TBooleanField;
     rxUGListogCreateUser: TBooleanField;
-    rxUGListogCreateUserRO: TBooleanField;
     rxUGListogCreateView: TBooleanField;
-    rxUGListogCreateViewRO: TBooleanField;
     rxUGListogDelete: TBooleanField;
-    rxUGListogDeleteRO: TBooleanField;
     rxUGListogDrop: TBooleanField;
-    rxUGListogDropRO: TBooleanField;
     rxUGListogEvent: TBooleanField;
-    rxUGListogEventRO: TBooleanField;
     rxUGListogExecute: TBooleanField;
-    rxUGListogExecuteRO: TBooleanField;
     rxUGListogFile: TBooleanField;
-    rxUGListogFileRO: TBooleanField;
     rxUGListogIndex: TBooleanField;
-    rxUGListogIndexRO: TBooleanField;
     rxUGListogInsert: TBooleanField;
-    rxUGListogInsertRO: TBooleanField;
     rxUGListogLockTables: TBooleanField;
-    rxUGListogLockTablesRO: TBooleanField;
     rxUGListogMembership: TBooleanField;
-    rxUGListogMembershipRO: TBooleanField;
     rxUGListogProcess: TBooleanField;
-    rxUGListogProcessRO: TBooleanField;
     rxUGListogProxy: TBooleanField;
-    rxUGListogProxyRO: TBooleanField;
     rxUGListogReference: TBooleanField;
-    rxUGListogReferenceRO: TBooleanField;
     rxUGListogReload: TBooleanField;
-    rxUGListogReloadRO: TBooleanField;
     rxUGListogReplicationClient: TBooleanField;
-    rxUGListogReplicationClientRO: TBooleanField;
     rxUGListogReplicationSlave: TBooleanField;
-    rxUGListogReplicationSlaveRO: TBooleanField;
     rxUGListogRule: TBooleanField;
-    rxUGListogRuleRO: TBooleanField;
     rxUGListogSelect: TBooleanField;
-    rxUGListogSelectRO: TBooleanField;
     rxUGListogShowDatabases: TBooleanField;
-    rxUGListogShowDatabasesRO: TBooleanField;
     rxUGListogShowView: TBooleanField;
-    rxUGListogShowViewRO: TBooleanField;
     rxUGListogShutdown: TBooleanField;
-    rxUGListogShutdownRO: TBooleanField;
     rxUGListogSuper: TBooleanField;
-    rxUGListogSuperRO: TBooleanField;
     rxUGListogTemporary: TBooleanField;
-    rxUGListogTemporaryRO: TBooleanField;
     rxUGListogTrigger: TBooleanField;
-    rxUGListogTriggerRO: TBooleanField;
     rxUGListogTruncate: TBooleanField;
-    rxUGListogTruncateRO: TBooleanField;
     rxUGListogUpdate: TBooleanField;
-    rxUGListogUpdateRO: TBooleanField;
     rxUGListogUsage: TBooleanField;
-    rxUGListogUsageRO: TBooleanField;
     rxUGListogWGO: TBooleanField;
-    rxUGListogWGORO: TBooleanField;
     rxUGListOWNER_USER: TStringField;
     rxUGListUG_EMPTY: TBooleanField;
     rxUGListUG_NAME: TStringField;
@@ -171,6 +137,7 @@ type
     FOneLine:boolean;
     FACLItems:TList;
 
+    FRoDBObjTypes:TRoDBObjTypes;
     procedure RefreshPage;
     procedure BindRxDBGridCollumn;
     procedure UpdateFilter;
@@ -187,7 +154,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, sqlObjects, IBManDataInspectorUnit, LazUTF8;
+uses fbmStrConstUnit, IBManDataInspectorUnit, LazUTF8;
 
 {$R *.lfm}
 
@@ -202,7 +169,7 @@ begin
   begin
     R:=RxDBGrid1.ColumnByFieldName(ObjectGrantNamesReal[FG]);
     if Assigned(R) then
-      R.ReadOnly:=rxUGList.FieldByName(ObjectGrantNamesReal[FG] + 'RO').AsBoolean;
+      R.ReadOnly:=not (FG in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]);
   end;
 end;
 
@@ -224,11 +191,8 @@ end;
 
 procedure TfbmUserObjectsGrantFrame.RxDBGrid1GetCellProps(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor);
-var
-  F: TField;
 begin
-  F:=rxUGList.FindField(Field.FieldName+'RO');
-  if Assigned(F) and F.AsBoolean then
+  if (Field.Tag <> 0) and (not (TObjectGrant(Field.Tag) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)])) then
     Background:=clTeal;
 end;
 
@@ -319,12 +283,7 @@ begin
   rxUGListUG_TYPE.AsInteger:=Ord(D.DBObjectKind);
   rxUGListUG_NAME.AsString:=D.CaptionFullPatch;
 
-  for FG in TObjectGrant do
-  begin
-    F:=rxUGList.FindField(ObjectGrantNamesReal[FG] + 'RO');
-    if Assigned(F) then
-      F.AsBoolean:=not (FG in D.ACLList.ObjectGrants);
-  end;
+  FRoDBObjTypes[D.DBObjectKind]:=D.ACLList.ObjectGrants;
 
   D.ACLList.RefreshList;
   P:=D.ACLList.FindACLItem(DBObject.Caption);
@@ -414,6 +373,9 @@ begin
 end;
 
 procedure TfbmUserObjectsGrantFrame.BindRxDBGridCollumn;
+var
+  FG: TObjectGrant;
+  F: TField;
 begin
   FrxCol_UG_TYPE:=RxDBGrid1.ColumnByFieldName('UG_TYPE');
   FrxCol_UG_NAME:=RxDBGrid1.ColumnByFieldName('UG_NAME');
@@ -453,6 +415,13 @@ begin
   FrxCol_Shutdown:=RxDBGrid1.ColumnByFieldName('ogShutdown');
   FrxCol_Super:=RxDBGrid1.ColumnByFieldName('ogSuper');
   FrxCol_Membership:=RxDBGrid1.ColumnByFieldName('ogMembership');
+
+  for FG in TObjectGrant do
+  begin
+    F:=rxUGList.FindField(ObjectGrantNamesReal[FG]);
+    if Assigned(F) then
+      F.Tag:=Ord(FG);
+  end;
 end;
 
 procedure TfbmUserObjectsGrantFrame.UpdateFilter;
@@ -492,6 +461,7 @@ constructor TfbmUserObjectsGrantFrame.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  FillChar(FRoDBObjTypes, SizeOf(FRoDBObjTypes), 0);
   RefreshPage;
   ComboBox2.OnChange:=@Edit1Change;
   FACLItems:=TList.Create;
