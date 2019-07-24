@@ -1597,7 +1597,7 @@ begin
         ASQL.Add(S);
     end;
   end;
-  P.FGrantsOld:=P.FGrants;
+  FP.FGrantsOld:=FP.FGrants;
 end;
 var
   i:integer;
