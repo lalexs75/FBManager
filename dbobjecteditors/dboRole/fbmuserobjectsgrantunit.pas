@@ -162,14 +162,10 @@ uses fbmStrConstUnit, IBManDataInspectorUnit, LazUTF8;
 procedure TfbmUserObjectsGrantFrame.rxUGListAfterScroll(DataSet: TDataSet);
 var
   R: TColumn;
-  FG: TObjectGrant;
 begin
-  for FG in FAllGrants do
-  begin
-    R:=RxDBGrid1.ColumnByFieldName(ObjectGrantNamesReal[FG]);
-    if Assigned(R) then
-      R.ReadOnly:=not (FG in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]);
-  end;
+  for R in RxDBGrid1.Columns do
+    if Assigned(R.Field) and (R.Field.Tag > 0) then
+      R.ReadOnly:=not (TObjectGrant(R.Field.Tag-1) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]);
 end;
 
 procedure TfbmUserObjectsGrantFrame.rxUGListFilterRecord(DataSet: TDataSet;
@@ -191,7 +187,7 @@ end;
 procedure TfbmUserObjectsGrantFrame.RxDBGrid1GetCellProps(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor);
 begin
-  if (Field.Tag <> 0) and (not (TObjectGrant(Field.Tag) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)])) then
+  if (Field.Tag <> 0) and (not (TObjectGrant(Field.Tag-1) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)])) then
     Background:=clTeal;
 end;
 
@@ -284,7 +280,7 @@ begin
     begin
       for F in rxUGList.Fields do
         if F.Tag <> 0 then
-          F.AsBoolean:=TObjectGrant(F.Tag) in GL;
+          F.AsBoolean:=TObjectGrant(F.Tag-1) in GL;
     end
     else
       rxUGListUG_EMPTY.AsBoolean:=true;
@@ -408,7 +404,7 @@ begin
   begin
     F:=rxUGList.FindField(ObjectGrantNamesReal[FG]);
     if Assigned(F) then
-      F.Tag:=Ord(FG);
+      F.Tag:=Ord(FG)+1;
   end;
 end;
 

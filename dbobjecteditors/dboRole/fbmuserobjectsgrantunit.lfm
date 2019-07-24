@@ -3,10 +3,11 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
   Width = 966
   ClientHeight = 517
   ClientWidth = 966
+  DesignLeft = 470
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
-    Height = 444
-    Top = 73
+    Height = 447
+    Top = 70
     Width = 966
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -738,19 +739,19 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
   end
   object Panel1: TPanel[2]
     Left = 0
-    Height = 48
+    Height = 45
     Top = 25
     Width = 966
     Align = alTop
     AutoSize = True
-    ClientHeight = 48
+    ClientHeight = 45
     ClientWidth = 966
     TabOrder = 2
     object ComboBox1: TComboBox
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
       Left = 7
-      Height = 33
+      Height = 31
       Top = 7
       Width = 229
       BorderSpacing.Around = 6
@@ -766,7 +767,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       AnchorSideBottom.Side = asrBottom
       Left = 438
       Height = 17
-      Top = 24
+      Top = 17
       Width = 32
       Anchors = [akLeft, akBottom]
       Caption = 'Filter'
@@ -780,7 +781,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 476
-      Height = 34
+      Height = 27
       Top = 7
       Width = 483
       Anchors = [akTop, akLeft, akRight]
@@ -793,7 +794,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel1
       Left = 242
-      Height = 33
+      Height = 31
       Top = 7
       Width = 190
       BorderSpacing.Around = 6
