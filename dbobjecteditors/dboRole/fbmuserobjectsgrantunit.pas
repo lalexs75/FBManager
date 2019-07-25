@@ -358,11 +358,13 @@ var
   S: String;
 begin
   ComboBox1.OnChange:=nil;
+  ComboBox2.OnChange:=nil;
   FAllGrants:=[];
 
   E:=DBObject.OwnerDB;
   rxUGList.CloseOpen;
   rxUGList.DisableControls;
+  rxUGList.Filtered:=false;
   rxUGList.AfterPost:=nil;
   for G in E.Groups do
     if G is TDBRootObject then
@@ -397,7 +399,9 @@ begin
   rxUGList.First;
   rxUGList.EnableControls;
   ComboBox1.ItemIndex:=0;
+  ComboBox2.ItemIndex:=0;
   ComboBox1.OnChange:=@Edit1Change;
+  ComboBox2.OnChange:=@Edit1Change;
   rxUGList.AfterPost:=@rxUGListAfterPost;
   RxDBGrid1CellClick(nil);
 end;
@@ -491,7 +495,8 @@ begin
   rxUGList.Edit;
   for F in rxUGList.Fields do
     if (F.Tag > 0) and (TObjectGrant(F.Tag-1) in FRoDBObjTypes[TDBObjectKind(rxUGListUG_TYPE.AsInteger)]) then
-      F.AsBoolean:=E;
+      if (TObjectGrant(F.Tag-1)<>ogWGO) or (ConfigValues.ByNameAsBoolean('Grant editor/EnableSetWGOFromPopup', false)) then
+        F.AsBoolean:=E;
   rxUGList.Post;
   UnLockPost;
 end;
