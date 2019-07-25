@@ -121,7 +121,7 @@ const
                   '  pg_namespace '+
                   'where '+
                   '  (pg_namespace.oid  = :oid)';
-*)
+
   sql_PG_ACLTableSpace =
                   'select '+
                   '  cast(array_dims(pg_tablespace.spcacl) as varchar(20)) as name_dims '+
@@ -129,7 +129,7 @@ const
                   '  pg_tablespace '+
                   'where '+
                   '  (pg_tablespace.oid  = :oid)';
-
+*)
 const
   DummyPGTriggerText =
       'declare'+LineEnding+

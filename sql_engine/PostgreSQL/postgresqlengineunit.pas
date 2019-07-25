@@ -889,6 +889,7 @@ type
 
   TPGTableSpace = class(TDBObject)
   private
+    FACLListStr: string;
     FFolderName: string;
     FOID:integer;
     FOwnerID: integer;
@@ -912,6 +913,7 @@ type
     property OwnerUserName:string read GetOwnerUserName;
     property FolderName:string read FFolderName;
     property OwnerUser:TDBObject read GetOwnerUser;
+    property ACLListStr:string read FACLListStr;
   end;
 
   TPGCollation = class(TDBObject)
@@ -2211,136 +2213,32 @@ begin
 end;
 
 procedure TPGACLList.RefreshList;
-
-procedure ParseParamList(CntArg:integer);
-var
-  i, j:integer;
-  P:TACLItem;
-  aSQLPars:string;
-  Q:TZQuery;
-  GR, OG:string;
-begin
-
-  aSQLPars:='select ';
-
-  if DBObject is TPGFunction then
-  begin
-    exit;
-(*    for i:=1 to CntArg do
-      aSQLPars:=aSQLPars + Format(' cast(pg_proc.proacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_proc where pg_proc.oid = '+IntToStr(OID);*)
-  end
-  else
-  if DBObject is TPGLanguage then
-  begin
-    exit;
-    (*for i:=1 to CntArg do
-      aSQLPars:=aSQLPars + Format(' cast(pg_language.lanacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_language where pg_language.oid = '+IntToStr(OID);*)
-  end
-  else
-  if DBObject is TPGSchema then
-  begin
-    exit;
-(*    for i:=1 to CntArg do
-      aSQLPars:=aSQLPars + Format(' cast(pg_namespace.nspacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_namespace where pg_namespace.oid = '+IntToStr(OID);*)
-  end
-  else
-  if DBObject is TPGTableSpace then
-  begin
-    for i:=1 to CntArg do
-      aSQLPars:=aSQLPars + Format(' cast(pg_tablespace.spcacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_tablespace where pg_tablespace.oid = '+IntToStr(OID);
-  end
-  else
-  begin
-    for i:=1 to CntArg do
-      aSQLPars:=aSQLPars + Format(' cast(pg_class.relacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_class where pg_class.oid = '+IntToStr(OID);
-  end;
-
-  Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(aSQLPars);
-  Q.Open;
-  if Q.RecordCount>0 then
-  begin
-    for i:=1 to CntArg do
-    begin
-      OG:=Q.FieldByName('acl_'+IntToStr(i)).AsString;
-      DoParseLine(OG);
-    end;
-  end;
-  Q.Free;
-end;
-
-var
-  Q:TZQuery;
-  S:string;
-  CntColums:integer;
-
 begin
   Clear;
   if not Assigned(DBObject) then exit;
 
   if DBObject is TPGFunction then
-  begin
-    ParseACLListStr(TPGFunction(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGFunction(DBObject).ACLListStr)
   else
   if DBObject is TPGLanguage then
-  begin
-    ParseACLListStr(TPGLanguage(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGLanguage(DBObject).ACLListStr)
   else
   if DBObject is TPGSchema then
-  begin
-    ParseACLListStr(TPGSchema(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGSchema(DBObject).ACLListStr)
   else
   if DBObject is TPGTableSpace then
-    Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTableSpace)
+    ParseACLListStr(TPGTableSpace(DBObject).ACLListStr)
   else
   if DBObject is TPGTable then
-  begin
-    ParseACLListStr(TPGTable(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGTable(DBObject).ACLListStr)
   else
   if DBObject is TPGSequence then
-  begin
-    ParseACLListStr(TPGSequence(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGSequence(DBObject).ACLListStr)
   else
   if (DBObject is TPGView) or (DBObject is TPGMatView) then
-  begin
-    ParseACLListStr(TPGView(DBObject).ACLListStr);
-    Exit;
-  end
+    ParseACLListStr(TPGView(DBObject).ACLListStr)
   else
-    Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTables);
-  LoadUserAndGroups;
-  CntColums:=0;
-  try
-    Q.ParamByName('oid').AsInteger:=OID;
-    Q.Open;
-    if Q.RecordCount>0 then
-    begin
-      S:=Q.FieldByName('name_dims').AsString;
-      System.Delete(S, 1, Pos(':', S));
-      S:=Copy(S, 1, Length(S)-1);
-      if S<>'' then
-         CntColums:=StrToIntDef(S, 0);
-
-      if CntColums > 0 then
-        ParseParamList(CntColums);
-    end;
-  finally
-    Q.Free;
-  end;
+    raise Exception.CreateFmt('not defined grant manager %s', [DBObject.ClassName]);
 end;
 
 procedure TPGACLList.ParseACLListStr(ACLStr: string);
@@ -2512,10 +2410,15 @@ begin
   inherited Create(ADBItem, AOwnerRoot);
   FOID:=-1;
   if Assigned(ADBItem) then
+  begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogCreate, ogWGO];
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 end;
 
 destructor TPGTableSpace.Destroy;
@@ -2560,6 +2463,8 @@ begin
       FOwnerID:=Q.FieldByName('spcowner').AsInteger;
       FFolderName:=Q.FieldByName('spclocation').AsString;
       FDescription:=Q.FieldByName('description').AsString;
+      FACLListStr:=Q.FieldByName('spcacl').AsString;
+
     end;
   finally
     Q.Free;
