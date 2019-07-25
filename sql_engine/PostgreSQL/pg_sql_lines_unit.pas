@@ -65,7 +65,7 @@ const
                   'order by '+
                   '  pg_trigger.tgname';
 
-
+(*
   //Запросы на изменение метаданных
   sql_PG_LangList =
                   'select '+
@@ -89,7 +89,7 @@ const
                   '  pg_language '+
                   'order by '+
                   '  pg_language.oid';
-
+*)
   sql_PG_ACLTables =
                   'select '+
                   '  cast(array_dims(pg_class.relacl) as varchar(20)) as name_dims '+
@@ -105,7 +105,7 @@ const
                   '  pg_proc '+
                   'where '+
                   '  (pg_proc.oid  = :oid)';
-*)
+
   sql_PG_ACLLang =
                   'select '+
                   '  cast(array_dims(pg_language.lanacl) as varchar(20)) as name_dims '+
@@ -114,7 +114,7 @@ const
                   'where '+
                   '  (pg_language.oid  = :oid)';
 
-(*  sql_PG_ACLShemas =
+  sql_PG_ACLShemas =
                   'select '+
                   '  cast(array_dims(pg_namespace.nspacl) as varchar(20)) as name_dims '+
                   'from '+

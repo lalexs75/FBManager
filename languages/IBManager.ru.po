@@ -2295,7 +2295,7 @@ msgstr "Владелец"
 
 #: fbmstrconstunit.sgrantsmanager
 msgid "Grants manager"
-msgstr ""
+msgstr "Менеджер прав"
 
 #: fbmstrconstunit.sgridoptions
 msgid "Grid options"
@@ -4783,7 +4783,7 @@ msgstr "Объём базы данных на диске"
 
 #: fbmstrconstunit.sstatsfulltime
 msgid "Full time"
-msgstr ""
+msgstr "Полное время"
 
 #: fbmstrconstunit.sstatsfunctiontime
 msgid "Function time"
@@ -4999,7 +4999,7 @@ msgstr "Имя табличного пространства"
 
 #: fbmstrconstunit.stablespacesize
 msgid "Table space size"
-msgstr ""
+msgstr "Размер табличного хранилища"
 
 #: fbmstrconstunit.stargetcpu
 msgid "Target CPU : "
@@ -5841,4 +5841,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

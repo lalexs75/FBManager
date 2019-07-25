@@ -1714,4 +1714,59 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 37
     Top = 104
   end
+  object sql_PG_LangList: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sql_PG_LangList_v8'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_language.oid as integer),'
+          '  cast(pg_language.oid as integer),'
+          '  pg_language.lanname,'
+          ''
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_language.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_language'
+          'order by'
+          '  pg_language.oid'
+          ''
+        )
+      end    
+      item
+        Caption = 'sql_PG_LangList'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_language.oid as integer),'
+          '  cast(pg_language.oid as integer),'
+          '  pg_language.lanname,'
+          ''
+          '  pg_language.lanowner,'
+          '  pg_language.lanispl,'
+          '  pg_language.lanpltrusted,'
+          '  pg_language.lanplcallfoid,'
+          '  pg_language.lanvalidator,'
+          '  pg_language.lanacl as acl_list,'
+          ''
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_language.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_language'
+          'order by'
+          '  pg_language.oid'
+          ''
+        )
+      end>
+    Left = 432
+    Top = 480
+  end
 end

@@ -84,7 +84,10 @@ type
     rxUGListUG_TYPE: TLongintField;
     ToolPanel1: TToolPanel;
     procedure Edit1Change(Sender: TObject);
+    procedure grALLExecute(Sender: TObject);
     procedure grHLExecute(Sender: TObject);
+    procedure grVLExecute(Sender: TObject);
+    procedure RxDBGrid1CellClick(Column: TColumn);
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
@@ -199,11 +202,32 @@ begin
   UpdateFilter;
 end;
 
+procedure TfbmUserObjectsGrantFrame.grALLExecute(Sender: TObject);
+begin
+  LockPost;
+  DoSetGrAll((Sender as TComponent).Tag = 1, true);
+  UnLockPost;
+end;
+
 procedure TfbmUserObjectsGrantFrame.grHLExecute(Sender: TObject);
 begin
   LockPost;
   DoSetGrLine((Sender as TComponent).Tag = 1);
   UnLockPost;
+end;
+
+procedure TfbmUserObjectsGrantFrame.grVLExecute(Sender: TObject);
+begin
+  LockPost;
+  if (RxDBGrid1.SelectedField.DataType <> ftBoolean) or (RxDBGrid1.SelectedField.Tag < 1) then exit;
+  DoSetGrAll((Sender as TComponent).Tag = 1, false);
+  UnLockPost;
+end;
+
+procedure TfbmUserObjectsGrantFrame.RxDBGrid1CellClick(Column: TColumn);
+begin
+  grVL.Enabled:=rxUGList.Active and (rxUGList.RecordCount>0) and (RxDBGrid1.SelectedField.DataType = ftBoolean) or (RxDBGrid1.SelectedField.Tag > 0);
+  revVL.Enabled:=grVL.Enabled;
 end;
 
 procedure TfbmUserObjectsGrantFrame.RxDBGrid1DblClick(Sender: TObject);
@@ -375,6 +399,7 @@ begin
   ComboBox1.ItemIndex:=0;
   ComboBox1.OnChange:=@Edit1Change;
   rxUGList.AfterPost:=@rxUGListAfterPost;
+  RxDBGrid1CellClick(nil);
 end;
 
 procedure TfbmUserObjectsGrantFrame.BindRxDBGridCollumn;
@@ -472,8 +497,32 @@ begin
 end;
 
 procedure TfbmUserObjectsGrantFrame.DoSetGrAll(E: boolean; AllColumns: boolean);
+var
+  P:TBookmark;
 begin
-
+  LockPost;
+  P:=rxUGList.Bookmark;
+  rxUGList.DisableControls;
+  try
+    rxUGList.First;
+    while not rxUGList.EOF do
+    begin
+      if AllColumns then
+        DoSetGrLine(E)
+      else
+      begin
+        rxUGList.Edit;
+        RxDBGrid1.SelectedField.AsBoolean:=E;
+        rxUGList.Post;
+      end;
+      rxUGList.Next;
+    end;
+  finally
+    rxUGList.Bookmark:=P;
+    rxUGList.EnableControls;
+  end;
+  FOneLine:=false;
+  UnLockPost;
 end;
 
 function TfbmUserObjectsGrantFrame.PageName: string;

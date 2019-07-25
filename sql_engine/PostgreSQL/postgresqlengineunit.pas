@@ -873,6 +873,7 @@ type
 
   TPGLanguage = class(TDBObject)
   private
+    FACLListStr: string;
     FOID:integer;
   protected
   public
@@ -883,6 +884,7 @@ type
     procedure SetSqlAssistentData(const List: TStrings);override;
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
+    property ACLListStr:string read FACLListStr;
   end;
 
   TPGTableSpace = class(TDBObject)
@@ -2231,9 +2233,10 @@ begin
   else
   if DBObject is TPGLanguage then
   begin
-    for i:=1 to CntArg do
+    exit;
+    (*for i:=1 to CntArg do
       aSQLPars:=aSQLPars + Format(' cast(pg_language.lanacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_language where pg_language.oid = '+IntToStr(OID);
+    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_language where pg_language.oid = '+IntToStr(OID);*)
   end
   else
   if DBObject is TPGSchema then
@@ -2286,7 +2289,10 @@ begin
   end
   else
   if DBObject is TPGLanguage then
-    Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLLang)
+  begin
+    ParseACLListStr(TPGLanguage(DBObject).ACLListStr);
+    Exit;
+  end
   else
   if DBObject is TPGSchema then
   begin
@@ -2587,9 +2593,15 @@ constructor TPGLanguage.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
 begin
   inherited Create(ADBItem, AOwnerRoot);
   if Assigned(ADBItem) then
+  begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
 
   FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogUsage, ogWGO];
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 end;
 
 destructor TPGLanguage.Destroy;
@@ -6837,7 +6849,10 @@ end;
 
 function TPGLanguageRoot.DBMSObjectsList: string;
 begin
-  Result:=sql_PG_LangList;
+  if TSQLEnginePostgre(OwnerDB).FRealServerVersionMajor < 9 then
+    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList_v8']
+  else
+    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList'];
 end;
 
 function TPGLanguageRoot.GetObjectType: string;
