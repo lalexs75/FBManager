@@ -290,6 +290,7 @@ begin
 
   rxUGList.AfterPost:=nil;
   rxUGList.DisableControls;
+  FACLList.DBObject.RefreshObject;
   FACLList.RefreshList;
 
   rxUGList.CloseOpen;
