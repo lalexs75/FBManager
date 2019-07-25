@@ -71,14 +71,19 @@ type
 
   TPGACLList = class(TACLListAbstract)
   private
+    FACLStrings: TStringList;
     function OID:integer;
+    procedure DoParseLine(AAclLine:string);
   protected
     function InternalCreateACLItem: TACLItem; override;
     function InternalCreateGrantObject: TSQLCommandGrant; override;
     function InternalCreateRevokeObject: TSQLCommandGrant; override;
   public
+    constructor Create(ADBObject:TDBObject); override;
+    destructor Destroy; override;
     procedure LoadUserAndGroups; override;
     procedure RefreshList; override;
+    procedure ParseACLListStr(ACLStr:string);
   end;
 
   { TPGSchemasRoot }
@@ -486,6 +491,7 @@ type
 
   TPGTable = class(TDBTableObject)
   private
+    FACLListStr: string;
     FAutovacuumOptions: TPGAutovacuumOptions;
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
@@ -580,6 +586,7 @@ type
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
     property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
     property ToastRelOID:Integer read FToastRelOID;
+    property ACLListStr:string read FACLListStr;
   end;
 
 
@@ -2085,6 +2092,46 @@ begin
     Result:=TPGTableSpace(DBObject).FOID;
 end;
 
+procedure TPGACLList.DoParseLine(AAclLine: string);
+var
+  P: TACLItem;
+  GR: String;
+  j: Integer;
+begin
+  //'adm_users=arwxt/postgres'
+  P:=FindACLItem(strutils.Copy2SymbDel(AAclLine, '='));
+  if Assigned(P) then
+  begin
+    GR:=strutils.Copy2SymbDel(AAclLine, '/');
+    if P.UserName = '' then
+      P.UserName:='public';
+    P.GrantOwnUser:=AAclLine;
+
+    for j:=1 to Length(GR) do
+    begin
+      case GR[j] of
+        'r':P.Grants:=P.Grants + [ogSelect];      //r -- SELECT ("read")
+        'w':P.Grants:=P.Grants + [ogUpdate];      //w -- UPDATE ("write")
+        'a':P.Grants:=P.Grants + [ogInsert];      //a -- INSERT ("append")
+        'd':P.Grants:=P.Grants + [ogDelete];      //d -- DELETE
+        'D':P.Grants:=P.Grants + [ogTruncate];    //D -- TRUNCATE
+        'R':P.Grants:=P.Grants + [ogRule];        //R -- RULE
+        'x':P.Grants:=P.Grants + [ogReference];   //x -- REFERENCES
+        't':P.Grants:=P.Grants + [ogTrigger];     //t -- TRIGGER
+        'X':P.Grants:=P.Grants + [ogExecute];     //X -- EXECUTE
+        'U':P.Grants:=P.Grants + [ogUsage];       //U -- USAGE
+        'C':P.Grants:=P.Grants + [ogCreate];      //C -- CREATE
+        'c':P.Grants:=P.Grants + [ogConnect];     //c -- CONNECT
+        'T':P.Grants:=P.Grants + [ogTemporary];   //T -- TEMPORARY
+        '*':P.Grants:=P.Grants + [ogWGO];         //* -- право передачи заданного права
+      else
+        raise Exception.Create('PG:uknow grant type: "' + GR[j] + '"');
+      end;
+    end;
+    P.FillOldValues;
+  end;
+end;
+
 function TPGACLList.InternalCreateACLItem: TACLItem;
 begin
   Result:=TPGACLItem.Create(DBObject, Self);
@@ -2137,6 +2184,18 @@ begin
       GF.TypeName:=F.FieldTypeName;
     end;
   end;
+end;
+
+constructor TPGACLList.Create(ADBObject: TDBObject);
+begin
+  inherited Create(ADBObject);
+  FACLStrings:=TStringList.Create;
+end;
+
+destructor TPGACLList.Destroy;
+begin
+  FreeAndNil(FACLStrings);
+  inherited Destroy;
 end;
 
 procedure TPGACLList.RefreshList;
@@ -2193,6 +2252,8 @@ begin
     for i:=1 to CntArg do
     begin
       OG:=Q.FieldByName('acl_'+IntToStr(i)).AsString;
+      DoParseLine(OG);
+(*
       //'adm_users=arwxt/postgres'
       P:=FindACLItem(strutils.Copy2SymbDel(OG, '='));
       if Assigned(P) then
@@ -2224,10 +2285,11 @@ begin
           end;
         end;
         P.FillOldValues;
+
       end;
+      *)
     end;
   end;
-
   Q.Free;
 end;
 
@@ -2238,8 +2300,6 @@ var
 
 begin
   Clear;
-
-  LoadUserAndGroups;
   if not Assigned(DBObject) then exit;
 
   if DBObject is TPGFunction then
@@ -2254,7 +2314,15 @@ begin
   if DBObject is TPGTableSpace then
     Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTableSpace)
   else
+  if DBObject is TPGTable then
+  begin
+    ParseACLListStr(TPGTable(DBObject).ACLListStr);
+    Exit;
+    //Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTableSpace)
+  end
+  else
     Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTables);
+  LoadUserAndGroups;
   CntColums:=0;
   try
     Q.ParamByName('oid').AsInteger:=OID;
@@ -2273,6 +2341,18 @@ begin
   finally
     Q.Free;
   end;
+end;
+
+procedure TPGACLList.ParseACLListStr(ACLStr: string);
+var
+  S: String;
+begin
+  Clear;
+  LoadUserAndGroups;
+  FACLStrings.Clear;
+  ParsePGArrayString(ACLStr, FACLStrings);
+  for S in FACLStrings do
+    DoParseLine(S);
 end;
 
 { TPGTriggerProcRoot }
@@ -2895,29 +2975,41 @@ var
   DBObj: TDBItems;
   FQuery: TZQuery;
   P: TDBItem;
+
+  FDesc, FOwnData, FObjData, FData, FAclList: TField;
 begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
   if DBObj.CountUse = 1 then
   begin
     FQuery:=GetSQLQuery(ASQLText);
     FQuery.Open;
+
+    FDesc:=FQuery.FindField('description');
+    if not Assigned(FDesc) then
+      if FQuery.Fields.Count > 4 then
+        FDesc:=FQuery.Fields[4];
+    FOwnData:=FQuery.FindField('own_data');
+    FObjData:=FQuery.FindField('data');
+    FData:=FQuery.FindField('data');
+    FAclList:=FQuery.FindField('acl_list');
+
     while not FQuery.Eof do
     begin
       P:=DBObj.Add(FQuery.Fields[2].AsString);
       P.ObjId:=FQuery.Fields[0].AsInteger;    //sys.all_objects.object_id
       P.SchemeID:=FQuery.Fields[1].AsInteger; // sys.all_objects.schema_id
       P.ObjType:=Trim(FQuery.Fields[3].AsString);   //sys.all_objects.[type]
-      if Assigned(FQuery.FindField('description')) then
-        P.ObjDesc:=Trim(FQuery.FieldByName('description').AsString)
-      else
-      if FQuery.Fields.Count > 4 then
-        P.ObjDesc:=Trim(FQuery.Fields[4].AsString);
 
-      if Assigned(FQuery.FindField('own_data')) then
-        P.ObjOwnData:=FQuery.FieldByName('own_data').AsInteger;
-
-      if Assigned(FQuery.FindField('data')) then
-        P.ObjData:=FQuery.FieldByName('data').AsString;
+      if Assigned(FDesc) then
+        P.ObjDesc:=Trim(FDesc.AsString);
+      if Assigned(FOwnData) then
+        P.ObjOwnData:=FOwnData.AsInteger;
+      if Assigned(FObjData) then
+        P.ObjData:=FObjData.AsString;
+      if Assigned(FData) then
+        P.ObjData:=FData.AsString;
+      if Assigned(FAclList) then
+        P.ObjACLList:=FAclList.AsString;
 
       FQuery.Next;
     end;
@@ -4502,10 +4594,15 @@ constructor TPGTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
   if Assigned(ADBItem) then
+  begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
   FStorageParameters:=TStringList.Create;
@@ -4644,6 +4741,7 @@ begin
         FRelOptions:=Q.FieldByName('reloptions').AsString;
         FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
+        FACLListStr:=Q.FieldByName('relacl').AsString;
       end;
     finally
       Q.Free;

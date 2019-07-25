@@ -41,6 +41,7 @@ type
       ObjRelName:string;
       ObjData:string;
       ObjType2:Integer;
+      ObjACLList:string;
     end;
 
   { TDBItems }

@@ -215,7 +215,7 @@ type
   public
     FTempObjName:string;
   public
-    constructor Create(ADBObject:TDBObject);
+    constructor Create(ADBObject:TDBObject); virtual;
     destructor Destroy; override;
     procedure Clear;
 
