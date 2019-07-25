@@ -308,6 +308,7 @@ type
 
   TPGSchema = class(TDBRootObject)
   private
+    FACLListStr: string;
     FOwnerName: String;
     FSchemaId: integer;
     FTablesRoot:TPGTablesRoot;
@@ -362,6 +363,7 @@ type
     property Procedures:TPGFunctionsRoot read FProcedures;
     property TriggerProc:TPGTriggerProcRoot read FTriggerProc;
     property RulesRoot:TPGRulesRoot read FRulesRoot;
+    property ACLListStr:string read FACLListStr;
   end;
 
 
@@ -594,6 +596,7 @@ type
 
   TPGView = class(TDBViewObject)
   private
+    FACLListStr: string;
     FRelOptions: String;
     FSchema:TPGSchema;
     FOID:integer;
@@ -629,6 +632,7 @@ type
     property OID:integer read FOID;
     property RelOptions: String read FRelOptions;
     property StorageParameters:TStrings read FStorageParameters;
+    property ACLListStr:string read FACLListStr;
   end;
 
   TPGMatView = class(TPGView)
@@ -769,6 +773,7 @@ type
 
   TPGFunction = class(TDBStoredProcObject)
   private
+    FACLListStr: string;
     FAVGRows: integer;
     FAVGTime: integer;
     FisStrict: boolean;
@@ -817,6 +822,7 @@ type
     property Schema:TPGSchema read FSchema;
     property ReturnSetType:boolean read FReturnSetType; { TODO : В дальнейшем необходимо доработать вид возврата - таблица }
     property FieldsIN;
+    property ACLListStr:string read FACLListStr;
   end;
 
   { TPGTriggerFunction }
@@ -1083,7 +1089,9 @@ type
 
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
-uses fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
+uses
+  rxlogging,
+  fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
 
@@ -2213,9 +2221,10 @@ begin
 
   if DBObject is TPGFunction then
   begin
-    for i:=1 to CntArg do
+    exit;
+(*    for i:=1 to CntArg do
       aSQLPars:=aSQLPars + Format(' cast(pg_proc.proacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_proc where pg_proc.oid = '+IntToStr(OID);
+    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_proc where pg_proc.oid = '+IntToStr(OID);*)
   end
   else
   if DBObject is TPGLanguage then
@@ -2227,9 +2236,10 @@ begin
   else
   if DBObject is TPGSchema then
   begin
-    for i:=1 to CntArg do
+    exit;
+(*    for i:=1 to CntArg do
       aSQLPars:=aSQLPars + Format(' cast(pg_namespace.nspacl[%d] as varchar(100)) as acl_%d,', [i,i]);
-    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_namespace where pg_namespace.oid = '+IntToStr(OID);
+    aSQLPars:=Copy(aSQLPars, 1, Length(aSQLPars) - 1) + ' from pg_namespace where pg_namespace.oid = '+IntToStr(OID);*)
   end
   else
   if DBObject is TPGTableSpace then
@@ -2303,13 +2313,20 @@ begin
   if not Assigned(DBObject) then exit;
 
   if DBObject is TPGFunction then
-    Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLProc)
+  begin
+    //Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLProc)
+    ParseACLListStr(TPGFunction(DBObject).ACLListStr);
+    Exit;
+  end
   else
   if DBObject is TPGLanguage then
     Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLLang)
   else
   if DBObject is TPGSchema then
-    Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLShemas)
+  begin
+    ParseACLListStr(TPGSchema(DBObject).ACLListStr);
+    Exit;
+  end
   else
   if DBObject is TPGTableSpace then
     Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTableSpace)
@@ -2318,7 +2335,12 @@ begin
   begin
     ParseACLListStr(TPGTable(DBObject).ACLListStr);
     Exit;
-    //Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTableSpace)
+  end
+  else
+  if (DBObject is TPGView) or (DBObject is TPGMatView) then
+  begin
+    ParseACLListStr(TPGView(DBObject).ACLListStr);
+    Exit;
   end
   else
     Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLTables);
@@ -2350,9 +2372,12 @@ begin
   Clear;
   LoadUserAndGroups;
   FACLStrings.Clear;
-  ParsePGArrayString(ACLStr, FACLStrings);
-  for S in FACLStrings do
-    DoParseLine(S);
+  if ACLStr<>'' then
+  begin
+    ParsePGArrayString(ACLStr, FACLStrings);
+    for S in FACLStrings do
+      DoParseLine(S);
+  end;
 end;
 
 { TPGTriggerProcRoot }
@@ -3682,6 +3707,7 @@ var
   Q:TZQuery;
 begin
   inherited RefreshObject;
+  FACLListStr:='';
   if State <> sdboEdit then exit;
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlSchema.Strings.Text);
   try
@@ -3692,6 +3718,7 @@ begin
       SchemaId:=Q.FieldByName('oid').AsInteger;
       FOwnerName:=Q.FieldByName('usename').AsString;
       FDescription:=Q.FieldByName('description').AsString;
+      FACLListStr:=Q.FieldByName('acl_list').AsString;
     end;
     Q.Close;
   finally
@@ -3739,10 +3766,13 @@ begin
   begin
     FSchemaId:=ADBItem.ObjId;
     FOwnerName:=ADBItem.ObjType;
+    FACLListStr:=ADBItem.ObjACLList;
   end;
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogCreate, ogUsage, ogWGO];
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 
   FDBObjectKind:=okScheme;
   FDomainsRoot:=TPGDomainsRoot.Create(OwnerDB, TPGDomain, sDomains, Self);
@@ -4718,6 +4748,7 @@ var
   i: Integer;
 begin
   inherited RefreshObject;
+  FACLListStr:='';
   FStorageParameters.Clear;
   FAutovacuumOptions.Clear;
   FToastAutovacuumOptions.Clear;
@@ -5407,15 +5438,21 @@ constructor TPGView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
   if Assigned(ADBItem) then
+  begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
 
   UITableOptions:=[];
   FStorageParameters:=TStringList.Create;
 
   FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
+
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogInsert, ogSelect, ogUpdate, ogDelete, ogReference, ogTrigger];
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 
   FRuleList:=TPGRuleList.Create(Self);
 
@@ -5445,6 +5482,7 @@ begin
   FRelOptions:='';
   FToastRelOID:=0;
   FToastRelOptions:='';
+  FACLListStr:='';
 
   if State <> sdboEdit then exit;
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_ViewRefresh.Strings.Text);
@@ -5465,6 +5503,7 @@ begin
 
       FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
       FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
+      FACLListStr:=Q.FieldByName('relacl').AsString;
     end;
   finally
     Q.Free;
@@ -6198,6 +6237,9 @@ procedure TPGFunction.InternalInitACLList;
 begin
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogExecute, ogWGO];
+
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 end;
 
 procedure TPGFunction.FillFieldList(List: TStrings;
@@ -6359,6 +6401,7 @@ begin
   begin
     FOID:=ADBItem.ObjId;
     FReturnTypeOID:=StrToInt(ADBItem.ObjType);
+    FACLListStr:=ADBItem.ObjACLList;
   end;
 
   InternalInitACLList;
@@ -6620,6 +6663,7 @@ begin
 
         FAVGTime:=trunc(Q.FieldByName('procost').AsFloat);
         FAVGRows:=trunc(Q.FieldByName('prorows').AsFloat);
+        FACLListStr:=Q.FieldByName('proacl').AsString;
 
         FLanguageOID:=Q.FieldByName('prolang').AsInteger;
         FisStrict:=Q.FieldByName('proisstrict').AsBoolean;

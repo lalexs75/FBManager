@@ -97,7 +97,7 @@ const
                   '  pg_class '+
                   'where '+
                   '  (pg_class.oid  = :oid)';
-
+(*
   sql_PG_ACLProc =
                   'select '+
                   '  cast(array_dims(pg_proc.proacl) as varchar(20)) as name_dims '+
@@ -105,7 +105,7 @@ const
                   '  pg_proc '+
                   'where '+
                   '  (pg_proc.oid  = :oid)';
-
+*)
   sql_PG_ACLLang =
                   'select '+
                   '  cast(array_dims(pg_language.lanacl) as varchar(20)) as name_dims '+
@@ -114,14 +114,14 @@ const
                   'where '+
                   '  (pg_language.oid  = :oid)';
 
-  sql_PG_ACLShemas =
+(*  sql_PG_ACLShemas =
                   'select '+
                   '  cast(array_dims(pg_namespace.nspacl) as varchar(20)) as name_dims '+
                   'from '+
                   '  pg_namespace '+
                   'where '+
                   '  (pg_namespace.oid  = :oid)';
-
+*)
   sql_PG_ACLTableSpace =
                   'select '+
                   '  cast(array_dims(pg_tablespace.spcacl) as varchar(20)) as name_dims '+
