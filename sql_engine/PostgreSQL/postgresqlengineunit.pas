@@ -664,6 +664,7 @@ type
 
   TPGSequence = class(TDBObject)
   private
+    FACLListStr: string;
     FCasheValue: Integer;
     FIncByValue: Int64;
     FIsCycled: boolean;
@@ -695,6 +696,7 @@ type
     property CasheValue:Integer read FCasheValue;
     property IsCycled:boolean read FIsCycled;
     property Schema:TPGSchema read FSchema;
+    property ACLListStr:string read FACLListStr;
   end;
 
 
@@ -2263,41 +2265,6 @@ begin
     begin
       OG:=Q.FieldByName('acl_'+IntToStr(i)).AsString;
       DoParseLine(OG);
-(*
-      //'adm_users=arwxt/postgres'
-      P:=FindACLItem(strutils.Copy2SymbDel(OG, '='));
-      if Assigned(P) then
-      begin
-        GR:=strutils.Copy2SymbDel(OG, '/');
-        if P.UserName = '' then
-          P.UserName:='public';
-        P.GrantOwnUser:=OG;
-
-        for j:=1 to Length(GR) do
-        begin
-          case GR[j] of
-            'r':P.Grants:=P.Grants + [ogSelect];      //r -- SELECT ("read")
-            'w':P.Grants:=P.Grants + [ogUpdate];      //w -- UPDATE ("write")
-            'a':P.Grants:=P.Grants + [ogInsert];      //a -- INSERT ("append")
-            'd':P.Grants:=P.Grants + [ogDelete];      //d -- DELETE
-            'D':P.Grants:=P.Grants + [ogTruncate];    //D -- TRUNCATE
-            'R':P.Grants:=P.Grants + [ogRule];        //R -- RULE
-            'x':P.Grants:=P.Grants + [ogReference];   //x -- REFERENCES
-            't':P.Grants:=P.Grants + [ogTrigger];     //t -- TRIGGER
-            'X':P.Grants:=P.Grants + [ogExecute];     //X -- EXECUTE
-            'U':P.Grants:=P.Grants + [ogUsage];       //U -- USAGE
-            'C':P.Grants:=P.Grants + [ogCreate];      //C -- CREATE
-            'c':P.Grants:=P.Grants + [ogConnect];     //c -- CONNECT
-            'T':P.Grants:=P.Grants + [ogTemporary];   //T -- TEMPORARY
-            '*':P.Grants:=P.Grants + [ogWGO];         //* -- право передачи заданного права
-          else
-            raise Exception.Create('PG:uknow grant type: "' + GR[j] + '"');
-          end;
-        end;
-        P.FillOldValues;
-
-      end;
-      *)
     end;
   end;
   Q.Free;
@@ -2314,7 +2281,6 @@ begin
 
   if DBObject is TPGFunction then
   begin
-    //Q:=TSQLEnginePostgre(SQLEngine).GetSQLQuery(sql_PG_ACLProc)
     ParseACLListStr(TPGFunction(DBObject).ACLListStr);
     Exit;
   end
@@ -2334,6 +2300,12 @@ begin
   if DBObject is TPGTable then
   begin
     ParseACLListStr(TPGTable(DBObject).ACLListStr);
+    Exit;
+  end
+  else
+  if DBObject is TPGSequence then
+  begin
+    ParseACLListStr(TPGSequence(DBObject).ACLListStr);
     Exit;
   end
   else
@@ -5200,7 +5172,10 @@ constructor TPGSequence.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
 begin
   inherited Create(ADBItem, AOwnerRoot);
   if Assigned(ADBItem) then
+  begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
 
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogUpdate, ogUsage];
@@ -5285,6 +5260,7 @@ begin
       else
         FStartValue:=0;
       FDescription:=FQuery.FieldByName('description').AsString;
+      FACLListStr:=FQuery.FieldByName('relacl').AsString;
     end;
     FQuery.Close;
   finally

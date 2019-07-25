@@ -15598,7 +15598,7 @@ begin
   SPK:='';
 
   FCntPK:=0;
-  FFindPKC:=SQLConstraints.Find(ctPrimaryKey);
+  FFindPKC:=SQLConstraints.Find(ctPrimaryKey, false);
   for F in Fields do
     if F.PrimaryKey then
       Inc(FCntPK);

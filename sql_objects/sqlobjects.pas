@@ -506,7 +506,7 @@ type
     function GetEnumerator: TSQLConstraintsEnumerator;
     function Add(AConstraintType:TConstraintType):TSQLConstraintItem;overload;
     function Add(AConstraintType:TConstraintType;AConstraintName:string):TSQLConstraintItem;overload;
-    function Find(AConstraintType:TConstraintType):TSQLConstraintItem;
+    function Find(AConstraintType:TConstraintType; AutoCreate:Boolean = true):TSQLConstraintItem;
     function FindConstraint(AConstraintName:string):TSQLConstraintItem;
     procedure Clear;
     procedure CopyFrom(ASource:TSQLConstraints);
@@ -1243,8 +1243,7 @@ begin
   Result.ConstraintName:=AConstraintName;
 end;
 
-function TSQLConstraints.Find(AConstraintType: TConstraintType
-  ): TSQLConstraintItem;
+function TSQLConstraints.Find(AConstraintType: TConstraintType; AutoCreate:Boolean = true): TSQLConstraintItem;
 var
   C: TSQLConstraintItem;
 begin
@@ -1255,7 +1254,8 @@ begin
       Result:=C;
       exit;
     end;
-  Result:=Add(AConstraintType);
+  if AutoCreate then
+    Result:=Add(AConstraintType);
 end;
 
 function TSQLConstraints.FindConstraint(AConstraintName: string
