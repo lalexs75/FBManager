@@ -383,6 +383,9 @@ begin
     TPGSQLCreateIndex(ASQLObject).SchemaName:=TPGIndex(DBObject).SchemaName;
     TPGSQLCreateIndex(ASQLObject).TableName:=TableName;
     TPGSQLCreateIndex(ASQLObject).Unique:=CheckGroup1.Checked[0];
+//    TPGSQLCreateIndex(ASQLObject).Cloncurrently:=CheckGroup1.Checked[2];
+    TPGSQLCreateIndex(ASQLObject).Concurrently:=CheckGroup1.Checked[2];
+//    CheckGroup1.Checked[1]:=TPGIndex(DBObject).IndexCluster;
     TPGSQLCreateIndex(ASQLObject).IndexMethod:=cbAcessMetod.Text;
 
     rxIndexFields.First;
