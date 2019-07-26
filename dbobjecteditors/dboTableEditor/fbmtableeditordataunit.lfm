@@ -139,8 +139,8 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideBottom.Side = asrBottom
       Left = 444
       Height = 17
-      Top = 7
-      Width = 116
+      Top = 10
+      Width = 113
       Anchors = [akLeft, akBottom]
       BorderSpacing.Around = 6
       Caption = 'Count row to fetch'
@@ -152,9 +152,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
-      Left = 566
-      Height = 27
-      Top = 3
+      Left = 563
+      Height = 34
+      Top = -1
       Width = 90
       BorderSpacing.Left = 6
       MaxValue = 2000000
@@ -167,7 +167,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 662
+      Left = 659
       Height = 31
       Top = 1
       Width = 32
@@ -182,7 +182,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 694
+      Left = 691
       Height = 31
       Top = 1
       Width = 32
@@ -195,10 +195,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 818
+      Left = 821
       Height = 17
       Top = 8
-      Width = 43
+      Width = 40
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6

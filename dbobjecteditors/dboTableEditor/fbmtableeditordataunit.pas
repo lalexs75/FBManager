@@ -288,7 +288,11 @@ end;
 procedure TfbmTableEditorDataFrame.statFilterExecute(Sender: TObject);
 begin
   if rdgFilter in DataGrid.OptionsRx then
-    DataGrid.OptionsRx:=DataGrid.OptionsRx - [rdgFilter]
+  begin
+    DataGrid.OptionsRx:=DataGrid.OptionsRx - [rdgFilter];
+    DataSource1.DataSet.Filtered := False;
+    DataGrid.CalcStatTotals;
+  end
   else
     DataGrid.OptionsRx:=DataGrid.OptionsRx + [rdgFilter];
 end;
