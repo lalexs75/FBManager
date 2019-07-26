@@ -6174,16 +6174,55 @@ end;
 function TPGFunction.CompileSQLObject(ASqlObject: TSQLCommandDDL;
   ASqlExecParam: TSqlExecParams): boolean;
 var
-  St: TStringList;
+//  St: TStringList;
+  PGrantNew: TPGSQLGrant;
+  P: TSQLParserField;
+  T: TTableItem;
+  A: TACLItem;
 begin
-  St:=ASqlObject.SQLText;
+  //St:=ASqlObject.SQLText;
   if ((ASqlObject is TPGSQLCreateFunction)) then
   begin
     if(ASqlObject as TPGSQLCreateFunction).IsDropFunction then
     begin
+      for A in FACLList do
+      begin
+        if A.Grants <> [] then
+        begin
+          PGrantNew:=TPGSQLGrant.Create(nil);
+          PGrantNew.ObjectKind:=DBObjectKind;
+          PGrantNew.GrantTypes:=A.Grants;
+          PGrantNew.Params.AddParam(A.UserName);
+          ASqlObject.AddChild(PGrantNew);
+          T:=PGrantNew.Tables.Add(CaptionFullPatch);
+          for P in ASqlObject.Params do
+            if P.InReturn = spvtInput then
+              T.Fields.AddParam(P);
+        end;
+      end;
+(*
+
+      if DBObject is TPGFunction then
+      begin
+        SP:=TPGFunction(DBObject);
+        T:=Result.Tables.Add(SP.CaptionFullPatch);
+        for F in SP.FieldsIN do
+        begin
+          GF:=T.Fields.AddParam(F.FieldName);
+          GF.InReturn:=F.IOType;
+
+          D:=F.FieldDomain;
+          if Assigned(D) then
+            GF.TypeName:=D.CaptionFullPatch
+          else
+            GF.TypeName:=F.FieldTypeName;
+        end;
+      end;
+
       FACLList.FTempObjName:=(ASqlObject as TPGSQLCreateFunction).FunctionName;
       FACLList.MakeACLListSQL(nil, St, true);
       FACLList.FTempObjName:='';
+*)
       FOID:=0;
     end;
   end;
@@ -6605,6 +6644,9 @@ begin
 
   if FLanguageOID<>0 then
     FLanguage:=TSQLEnginePostgre(OwnerDB).LanguageRoot.LangByOID(FLanguageOID);
+
+  if Assigned(FACLList) and (FACLListStr<>'') then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 end;
 
 procedure TPGFunction.RefreshDependencies;
