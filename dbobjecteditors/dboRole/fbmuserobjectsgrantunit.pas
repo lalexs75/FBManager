@@ -210,9 +210,20 @@ begin
 end;
 
 procedure TfbmUserObjectsGrantFrame.grHLExecute(Sender: TObject);
+var
+  P: TBookMark;
 begin
   LockPost;
-  DoSetGrLine((Sender as TComponent).Tag = 1);
+  if RxDBGrid1.SelectedRows.Count>1 then
+  begin
+    for P in RxDBGrid1.SelectedRows do
+    begin
+      rxUGList.Bookmark:=P;
+      DoSetGrLine((Sender as TComponent).Tag = 1);
+    end;
+  end
+  else
+    DoSetGrLine((Sender as TComponent).Tag = 1);
   UnLockPost;
 end;
 
