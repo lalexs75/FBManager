@@ -54,6 +54,7 @@ msgid "Close"
 msgstr ""
 
 #: rxconst.scloseaftersec
+#, object-pascal-format
 msgid "Close after %d sec"
 msgstr ""
 
@@ -112,6 +113,7 @@ msgid "Not assigned task panel"
 msgstr ""
 
 #: rxconst.sexptcontrolnotfound
+#, object-pascal-format
 msgid "Control not found in validate %s."
 msgstr "Елемент управління не знайдений в валідаторі %s"
 
@@ -132,6 +134,7 @@ msgid "Flat buttons"
 msgstr "Плаваючі кнопки"
 
 #: rxconst.sfolderlistererr
+#, object-pascal-format
 msgid "%s. Not assigned property MenuItem"
 msgstr ""
 
@@ -152,6 +155,7 @@ msgid "Grab key"
 msgstr ""
 
 #: rxconst.shistorydesc
+#, object-pascal-format
 msgid "History - \"%s\""
 msgstr "Історія - \"%s\""
 
@@ -164,6 +168,7 @@ msgid "License"
 msgstr "Ліцензія"
 
 #: rxconst.sloadliberror
+#, object-pascal-format
 msgid "Could not load '%s' library"
 msgstr "Неможливо завантажити бібліотеку '%s'"
 
@@ -184,6 +189,7 @@ msgid "Options"
 msgstr "Параметри"
 
 #: rxconst.soutofrange
+#, object-pascal-format
 msgid "Out of range %d %d %d %d"
 msgstr ""
 
@@ -204,13 +210,25 @@ msgid "Question"
 msgstr ""
 
 #: rxconst.sreqvalue
-#, fuzzy
+#, object-pascal-format, fuzzy
 #| msgid "Error. Expected value for filed %s."
 msgid "Error. Expected value for field %s."
 msgstr "Поле %s. Вимагається значення"
 
+#: rxconst.srxbyte
+msgid "B"
+msgstr ""
+
 #: rxconst.srxcloseformvalidatoreditor
 msgid "Rx close form validator editor"
+msgstr ""
+
+#: rxconst.srxgigabyte
+msgid "GB"
+msgstr ""
+
+#: rxconst.srxkilobyte
+msgid "KB"
 msgstr ""
 
 #: rxconst.srxlogindlgbtnmore
@@ -221,8 +239,16 @@ msgstr ""
 msgid "Database"
 msgstr ""
 
+#: rxconst.srxmegabyte
+msgid "MB"
+msgstr ""
+
 #: rxconst.srxstrholdertexteditor
 msgid "Rx string holder editor"
+msgstr ""
+
+#: rxconst.srxterrabyte
+msgid "TB"
 msgstr ""
 
 #: rxconst.srxtextfolderitem
@@ -281,6 +307,10 @@ msgstr ""
 
 #: rxconst.srxtoolpaneleditor
 msgid "Rx toolpanel editor"
+msgstr ""
+
+#: rxconst.srxviewspaneleditor
+msgid "Rx views panel editor"
 msgstr ""
 
 #: rxconst.ssecondhalfofyear
@@ -350,22 +380,27 @@ msgid "Transparent"
 msgstr "Прозоро"
 
 #: rxconst.svariableisnotboolean
+#, object-pascal-format
 msgid "Variable %s is not boolean"
 msgstr ""
 
 #: rxconst.svariableisnotdt
+#, object-pascal-format
 msgid "Variable %s is not date/time"
 msgstr ""
 
 #: rxconst.svariableisnotfloat
+#, object-pascal-format
 msgid "Variable %s is not float"
 msgstr ""
 
 #: rxconst.svariableisnotinteger
+#, object-pascal-format
 msgid "Variable %s is not integer"
 msgstr ""
 
 #: rxconst.svariableisnotstring
+#, object-pascal-format
 msgid "Variable %s is not string"
 msgstr ""
 

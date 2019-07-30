@@ -20,6 +20,7 @@ msgid "All spreadsheet files"
 msgstr "Minden táblázat fájl"
 
 #: fpsstrings.rsambiguousdecthouseparator
+#, object-pascal-format
 msgid "Assuming usage of decimal separator in \"%s\"."
 msgstr "Tizedeselválasztó használata feltételezve ebben: \"%s\"."
 
@@ -36,6 +37,7 @@ msgid "blue"
 msgstr "kék"
 
 #: fpsstrings.rscannotreadfile
+#, object-pascal-format
 msgid "Cannot read file \"%s\". Wrong, unknown or defective file format?"
 msgstr "A(z) \"%s\" fájl nem olvasható. Rossz, ismeretlen formátumú vagy sérült a fájl?"
 
@@ -44,10 +46,12 @@ msgid "The cell range cannot be sorted because it contains merged cells."
 msgstr "A cellatartomány nem rendezhető sorba, mert összevont cellákat tartalaz."
 
 #: fpsstrings.rscircularreference
+#, object-pascal-format
 msgid "Circular reference found when calculating worksheet formula in cell %s"
 msgstr "Körkörös hivatkozás érzékelve a(z) %s cellában található munkalap-formula kiszámításakor."
 
 #: fpsstrings.rscodepagenotsupported
+#, object-pascal-format
 msgid "Code page \"%s\" is not supported. Using \"cp1252\" (Latin 1) instead."
 msgstr "A(z) \"%s\" kódlap nincs támogatva, helyette a \"cp1252\" (Latin1) lesz használva."
 
@@ -56,6 +60,7 @@ msgid "Column style not found."
 msgstr "Oszlop stílus nem található."
 
 #: fpsstrings.rscommaexpected
+#, object-pascal-format
 msgid "Expected comma (,) at position %d, but got %s"
 msgstr "Vessző (,) szükséges a(z) %d. pozícióban, de %s található"
 
@@ -76,22 +81,27 @@ msgid "dark red"
 msgstr "sötétvörös"
 
 #: fpsstrings.rsdefaultsheetname
+#, object-pascal-format
 msgid "Sheet%d"
 msgstr "Lap%d"
 
 #: fpsstrings.rsdefectiveinternalfilestructure
+#, object-pascal-format
 msgid "Defective internal structure of %s file."
 msgstr "A(z) %s fájl belső szerkezete sérült."
 
 #: fpsstrings.rsdifferentsheetprintrange
+#, object-pascal-format
 msgid "Print range \"%s\" requires a different worksheet."
 msgstr "A(z) \"%s\" nyomtatási tartományhoz szükség van egy másik munkalapra."
 
 #: fpsstrings.rsduplicateidentifier
+#, object-pascal-format
 msgid "An identifier with name \"%s\" already exists."
 msgstr "Már létezik egy azonosító \"%s\" névvel."
 
 #: fpsstrings.rsduplicateworksheetname
+#, object-pascal-format
 msgid "Duplicate worksheet \"%s\"."
 msgstr ""
 
@@ -112,14 +122,17 @@ msgid "Cannot evaluate: empty expression"
 msgstr "Kiértékelhetetlen: üres kifejezés"
 
 #: fpsstrings.rsfilealreadyexists
+#, object-pascal-format
 msgid "File \"%s\" already exists."
 msgstr "A(z) \"%s\" fájl már létezik."
 
 #: fpsstrings.rsfileformatnotsupported
+#, object-pascal-format
 msgid "File format of \"%s\" not supported."
 msgstr "A(z) \"%s\" fájl formátuma nincs támogatva."
 
 #: fpsstrings.rsfilenotfound
+#, object-pascal-format
 msgid "File \"%s\" not found."
 msgstr "A(z) \"%s\" fájl nem található."
 
@@ -128,6 +141,7 @@ msgid "files"
 msgstr "fájl"
 
 #: fpsstrings.rsfilestructureerror
+#, object-pascal-format
 msgid "File structure error in %s record, position %d."
 msgstr "Fájl szerkezeti hiba a(z) %s rekord %d. pozíciójában."
 
@@ -136,6 +150,7 @@ msgid "Footer"
 msgstr "Lábléc"
 
 #: fpsstrings.rsformulanotsupported
+#, object-pascal-format
 msgid "The formula in cell %s is not supported by this file format: %s"
 msgstr "A(z) %s cellában megadott formula nincs támogatva ezen fájltípusban: %s"
 
@@ -164,34 +179,43 @@ msgid "Image format not supported."
 msgstr "A kép formátuma nincs támogatva."
 
 #: fpsstrings.rsincorrectpositionofimageinheaderfooter
+#, object-pascal-format
 msgid "Incorrect position of %%G code in %s"
 msgstr "A %%G kód pozíciója érvénytelen ebben: %s"
 
 #: fpsstrings.rsindexinsstoutofrange
+#, object-pascal-format
 msgid "Index %d in SST out of range (0-%d)."
 msgstr "A(z) %d index az SST-ben kívül esik az érvényes tartományon (0-%d)."
 
 #: fpsstrings.rsinvalidargumentcount
+#, object-pascal-format
 msgid "Invalid argument count for function %s"
 msgstr "Az argumentumok száma nem megfelelő a(z) %s függvény számára"
 
 #: fpsstrings.rsinvalidcharacterincell
+#, object-pascal-format
 msgid "Invalid character(s) in cell %s."
 msgstr "Érvénytelen karakter(ek) a(z) %s cellában."
 
 #: fpsstrings.rsinvalidcharacterincellcomment
+#, object-pascal-format
 msgid "Invalid character(s) in cell comment \"%s\"."
 msgstr "Érvénytelen karakter(ek) a(z) %s cella megjegyzésében."
 
 #: fpsstrings.rsinvaliddatetimeformat
-msgid "Trying to use an incompatible date/time format."
+#, object-pascal-format, fuzzy, badformat
+#| msgid "Trying to use an incompatible date/time format."
+msgid "Trying to use an incompatible date/time format (%s)."
 msgstr "Kísérlet össze nem egyeztethető dátum/idő formátum használatára."
 
 #: fpsstrings.rsinvalidextension
+#, object-pascal-format
 msgid "Attempting to save a spreadsheet by extension, but the extension %s is not valid."
 msgstr "Kísérlet a táblázat kiterjesztés alapján történő mentésére, de a(z) %s nem érvényes kiterjesztés."
 
 #: fpsstrings.rsinvalidfloat
+#, object-pascal-format
 msgid "%s is not a valid floating-point value"
 msgstr "A(z) %s nem érvényes lebegőpontos érték"
 
@@ -200,10 +224,12 @@ msgid "Invalid font index"
 msgstr "Érvénytelen betűkészlet index"
 
 #: fpsstrings.rsinvalidnumber
+#, object-pascal-format
 msgid "Invalid numerical value : %s"
 msgstr "Érvénytelen számérték: %s"
 
 #: fpsstrings.rsinvalidnumberchar
+#, object-pascal-format
 msgid "Unexpected character in number : %s"
 msgstr "Váratlan, számként nem értelmezhető karakter: %s"
 
@@ -212,26 +238,32 @@ msgid "Trying to use an incompatible number format."
 msgstr "Kísérlet össze nem egyeztethető szám formátum használatára."
 
 #: fpsstrings.rsinvalidresultcharacter
+#, object-pascal-format
 msgid "\"%s\" is not a valid return type indicator"
 msgstr "A(z) \"%s\" nem érvényes visszatérési típus jelző."
 
 #: fpsstrings.rsinvalidresulttype
+#, object-pascal-format
 msgid "Invalid result type: %s"
 msgstr "Érvénytelen visszaadott típus: %s"
 
 #: fpsstrings.rsinvalidspreadsheetfile
+#, object-pascal-format
 msgid "\"%s\" is not a valid spreadsheet file"
 msgstr "A(z) \"%s\" nem érvényes táblázatfájl."
 
 #: fpsstrings.rsinvalidworksheetname
+#, object-pascal-format
 msgid "\"%s\" is not a valid worksheet name."
 msgstr "A(z) \"%s\" nem érvényes munkalapnév."
 
 #: fpsstrings.rsleftbracketexpected
+#, object-pascal-format
 msgid "Expected left bracket at position %d, but got %s"
 msgstr "Bal oldali zárójel szükséges a(z) %d. pozícióban, de %s található"
 
 #: fpsstrings.rslocalfilehyperlinkabs
+#, object-pascal-format
 msgid "The hyperlink \"%s\" points to a local file. In case of an absolute path the protocol \"file:\" must be specified."
 msgstr "A(z) \"%s\" hiperhivatkozás egy helyi fájlra mutat. Abszolút útvonal esetén a \"file:\" protokollazonosítót meg kell adni."
 
@@ -240,10 +272,12 @@ msgid "magenta"
 msgstr "lila"
 
 #: fpsstrings.rsmaxcolsexceeded
+#, object-pascal-format
 msgid "This workbook contains %d columns, but the selected file format does not support more than %d columns."
 msgstr "Ez a munkafüzet %d oszlopot tartalmaz, de a kiválasztott fájlformátum nem támogat %d oszlopnál többet."
 
 #: fpsstrings.rsmaxrowsexceeded
+#, object-pascal-format
 msgid "This workbook contains %d rows, but the selected file format does not support more than %d rows."
 msgstr "Ez a munkafüzet %d sort tartalmaz, de a kiválasztott fájlformátum nem támogat %d sornál többet."
 
@@ -252,10 +286,12 @@ msgid "Export to multiple sheets is possible only if position is restored."
 msgstr "A több lapra történő exportálás csak a pozíció visszaállítása esetén lehetséges."
 
 #: fpsstrings.rsnooperand
+#, object-pascal-format
 msgid "No operand for unary operation %s"
 msgstr "Nincs adat az egytényezős %s művelet számára"
 
 #: fpsstrings.rsnopercentoperation
+#, object-pascal-format
 msgid "Cannot perform percent operation on expression of type %s: %s"
 msgstr "Nem lehet elvégezni %s típusú kifejezésen a százalékszámítást: %s"
 
@@ -264,34 +300,43 @@ msgid "not defined"
 msgstr "nincs megadva"
 
 #: fpsstrings.rsnovalidcelladdress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell address."
 msgstr "A(z) \"%s\" nem érvényes cella cím."
 
 #: fpsstrings.rsnovalidcellrangeaddress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell range address."
 msgstr "A(z) \"%s\" nem érvényes cellatartomány cím."
 
 #: fpsstrings.rsnovalidcellrangeorcelladdress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell or cell range address."
 msgstr "A(z) \"%s\" nem érvényes cella vagy cellatartomány cím."
 
 #: fpsstrings.rsnovalidhyperlinkinternal
+#, object-pascal-format
 msgid "The hyperlink \"%s\" is not a valid cell address."
 msgstr "A(z) \"%s\" hiperhivatkozás nem érvényes cellacím."
 
 #: fpsstrings.rsnovalidhyperlinkuri
+#, object-pascal-format
 msgid "The hyperlink \"%s\" is not a valid URI."
 msgstr "A(z) \"%s\" hiperhivatkozás nem érvényes URI."
 
 #: fpsstrings.rsnovalidnumberformatstring
-msgid "No valid number format string."
+#, object-pascal-format, fuzzy, badformat
+#| msgid "No valid number format string."
+msgid "No valid number format string (%s)."
 msgstr "Nincs érvényes számformázó karakterlánc."
 
 #: fpsstrings.rsnovariable
+#, object-pascal-format
 msgid "Identifier %s is not a variable"
 msgstr "Az azonosító nem egy változó: %s"
 
 #: fpsstrings.rsodshyperlinksoftextcellsonly
+#, object-pascal-format
 msgid "Cell %s: OpenDocument supports hyperlinks for text cells only."
 msgstr "%s cella: az OpenDocument formátum csak szövegcellákban támogatja a hiperhivatkozásokat."
 
@@ -300,22 +345,24 @@ msgid "olive"
 msgstr "olíva"
 
 #: fpsstrings.rsonlyoneheaderfooterimageallowed
+#, object-pascal-format
 msgid "Only one image per %s section allowed."
 msgstr "Csak egy kép lehet %s szakaszonként."
 
 #: fpsstrings.rsoperationexceedscolcount
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 #| msgid "This operation exceeds the range of defined grid columns."
 msgid "This operation at index %d exceeds the range of defined grid columns (%d)."
 msgstr "A művelet túllépi a rács oszlopainak tartományát."
 
 #: fpsstrings.rsoperationexceedsrowcount
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 #| msgid "This operation exceeds the range of defined grid rows."
 msgid "This operation at index %d exceeds the range of defined grid rows (%d)."
 msgstr "A művelet túllépi a rács sorainak tartományát."
 
 #: fpsstrings.rspaletteindex
+#, object-pascal-format
 msgid "Palette index %d"
 msgstr "Paletta index: %d"
 
@@ -336,6 +383,7 @@ msgid "purple"
 msgstr "bíbor"
 
 #: fpsstrings.rsreadernotfound
+#, object-pascal-format
 msgid "Reader not found for file \"%s\""
 msgstr "Nem található olvasó a(z) \"%s\" fájlhoz."
 
@@ -344,10 +392,12 @@ msgid "red"
 msgstr "piros"
 
 #: fpsstrings.rsrightbracketexpected
+#, object-pascal-format
 msgid "Expected right bracket at position %d, but got %s"
 msgstr "Jobb oldali zárójel szükséges a(z) %d. pozícióban, de %s található"
 
 #: fpsstrings.rsrightsquarebracketexpected
+#, object-pascal-format
 msgid "Expected right square bracket at positon %d, but got %s"
 msgstr ""
 
@@ -368,6 +418,7 @@ msgid "teal"
 msgstr "kékeszöld"
 
 #: fpsstrings.rstoomanypalettecolors
+#, object-pascal-format
 msgid "This workbook contains more colors (%d) than supported by the file format (%d). The additional colors are replaced by the best-matching palette colors."
 msgstr "Ez a munkafüzet több színt (%d) tartalmaz, mint amennyit a fájl formátuma támogat (%d). A hozzáadott színek le lettek cserélve a paletta legjobban hasonlító színére."
 
@@ -376,11 +427,12 @@ msgid "transparent"
 msgstr "átlátszó"
 
 #: fpsstrings.rstruncatetoolongcelltext
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "Text value exceeds the %d character limit in cell %s and has been truncated."
 msgstr "A szöveg hosszabb mint a(z) 15 karakteres korlát a(z) %s cellában, ezért csonkolva lett."
 
 #: fpsstrings.rstruncatetoolongtext
+#, object-pascal-format
 msgid "Text value exceeds the %d character limit and has been truncated."
 msgstr ""
 
@@ -389,6 +441,7 @@ msgid "Unexpected end of expression"
 msgstr "A kifejezés váratlanul ért véget"
 
 #: fpsstrings.rsunknowncharacter
+#, object-pascal-format
 msgid "Unknown character at pos %d: \"%s\""
 msgstr "A(z) %d karakter ismeretlen: \"%s\""
 
@@ -401,6 +454,7 @@ msgid "Unknown data type."
 msgstr "Ismeretlen adattípus."
 
 #: fpsstrings.rsunknowndelimiter
+#, object-pascal-format
 msgid "Unknown delimiter character: \"%s\""
 msgstr "Ismeretlen határoló karakter: \"%s\""
 
@@ -409,10 +463,12 @@ msgid "Unknown error type."
 msgstr "Ismeretlen hibatípus."
 
 #: fpsstrings.rsunknownidentifier
+#, object-pascal-format
 msgid "Unknown identifier: %s"
 msgstr "Ismeretlen azonosító: %s"
 
 #: fpsstrings.rsunknowntokenatpos
+#, object-pascal-format
 msgid "Unknown token at pos %d : %s"
 msgstr "A(z) %d. token ismeretlen: %s"
 
@@ -425,10 +481,12 @@ msgid "Tried to write a spreadsheet using an unsupported format"
 msgstr "Kísérlet történt egy ismeretlen formátumú táblázat írására"
 
 #: fpsstrings.rsunterminatedexpression
+#, object-pascal-format
 msgid "Badly terminated expression. Found token at position %d : %s"
 msgstr "Rosszul lezárt kifejezés. A(z) %d. token: %s "
 
 #: fpsstrings.rsutf8textexpectedbutansifoundincell
+#, object-pascal-format
 msgid "Expected UTF8 text, but probably ANSI text found in cell %s."
 msgstr "UTF8 szöveg az elvárt, de valószínűleg ANSI szöveg található a(z) %s cellában."
 
@@ -437,6 +495,7 @@ msgid "white"
 msgstr "fehér"
 
 #: fpsstrings.rsworksheetnotfound
+#, object-pascal-format
 msgid "Worksheet \"%s\" not found."
 msgstr "A(z) \"%s\" munkalap nem található."
 
@@ -445,6 +504,7 @@ msgid "Worksheet not found."
 msgstr "A munkalap nem található."
 
 #: fpsstrings.rswriteerror_worksheetnametoolong
+#, object-pascal-format
 msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
 msgstr ""
 

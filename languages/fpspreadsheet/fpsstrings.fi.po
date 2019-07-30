@@ -10,6 +10,7 @@ msgid "All spreadsheet files"
 msgstr "Kaikki taulukkolaskenta tiedostot"
 
 #: fpsstrings.rsambiguousdecthouseparator
+#, object-pascal-format
 msgid "Assuming usage of decimal separator in \"%s\"."
 msgstr ""
 
@@ -26,6 +27,7 @@ msgid "blue"
 msgstr "sininen"
 
 #: fpsstrings.rscannotreadfile
+#, object-pascal-format
 msgid "Cannot read file \"%s\". Wrong, unknown or defective file format?"
 msgstr ""
 
@@ -34,10 +36,12 @@ msgid "The cell range cannot be sorted because it contains merged cells."
 msgstr ""
 
 #: fpsstrings.rscircularreference
+#, object-pascal-format
 msgid "Circular reference found when calculating worksheet formula in cell %s"
 msgstr ""
 
 #: fpsstrings.rscodepagenotsupported
+#, object-pascal-format
 msgid "Code page \"%s\" is not supported. Using \"cp1252\" (Latin 1) instead."
 msgstr "Merkistökoodisivua \"%s\" ei tueta. Käytetään \"cp1252\" (Latin 1) sen sijaan."
 
@@ -46,6 +50,7 @@ msgid "Column style not found."
 msgstr ""
 
 #: fpsstrings.rscommaexpected
+#, object-pascal-format
 msgid "Expected comma (,) at position %d, but got %s"
 msgstr "Odotettiin pilkkua (,) kohdassa %d mutta saatiin %s"
 
@@ -66,22 +71,27 @@ msgid "dark red"
 msgstr "tumman punainen"
 
 #: fpsstrings.rsdefaultsheetname
+#, object-pascal-format
 msgid "Sheet%d"
 msgstr "Sivu %d"
 
 #: fpsstrings.rsdefectiveinternalfilestructure
+#, object-pascal-format
 msgid "Defective internal structure of %s file."
 msgstr ""
 
 #: fpsstrings.rsdifferentsheetprintrange
+#, object-pascal-format
 msgid "Print range \"%s\" requires a different worksheet."
 msgstr ""
 
 #: fpsstrings.rsduplicateidentifier
+#, object-pascal-format
 msgid "An identifier with name \"%s\" already exists."
 msgstr ""
 
 #: fpsstrings.rsduplicateworksheetname
+#, object-pascal-format
 msgid "Duplicate worksheet \"%s\"."
 msgstr ""
 
@@ -102,14 +112,17 @@ msgid "Cannot evaluate: empty expression"
 msgstr ""
 
 #: fpsstrings.rsfilealreadyexists
+#, object-pascal-format
 msgid "File \"%s\" already exists."
 msgstr ""
 
 #: fpsstrings.rsfileformatnotsupported
+#, object-pascal-format
 msgid "File format of \"%s\" not supported."
 msgstr "Tiedostoformaattia \"%s\" ei ole tuettu"
 
 #: fpsstrings.rsfilenotfound
+#, object-pascal-format
 msgid "File \"%s\" not found."
 msgstr "Tiedostoa \"%s\" ei löydetty."
 
@@ -118,6 +131,7 @@ msgid "files"
 msgstr "tiedostot"
 
 #: fpsstrings.rsfilestructureerror
+#, object-pascal-format
 msgid "File structure error in %s record, position %d."
 msgstr ""
 
@@ -126,6 +140,7 @@ msgid "Footer"
 msgstr "Alatunniste"
 
 #: fpsstrings.rsformulanotsupported
+#, object-pascal-format
 msgid "The formula in cell %s is not supported by this file format: %s"
 msgstr "Laskentakaava solussa %s ei ole tuettu tässä tiedostoformaatissa: %s"
 
@@ -154,34 +169,42 @@ msgid "Image format not supported."
 msgstr "Kuvatiedostoformaattia ei ole tuettu"
 
 #: fpsstrings.rsincorrectpositionofimageinheaderfooter
+#, object-pascal-format
 msgid "Incorrect position of %%G code in %s"
 msgstr ""
 
 #: fpsstrings.rsindexinsstoutofrange
+#, object-pascal-format
 msgid "Index %d in SST out of range (0-%d)."
 msgstr ""
 
 #: fpsstrings.rsinvalidargumentcount
+#, object-pascal-format
 msgid "Invalid argument count for function %s"
 msgstr ""
 
 #: fpsstrings.rsinvalidcharacterincell
+#, object-pascal-format
 msgid "Invalid character(s) in cell %s."
 msgstr ""
 
 #: fpsstrings.rsinvalidcharacterincellcomment
+#, object-pascal-format
 msgid "Invalid character(s) in cell comment \"%s\"."
 msgstr ""
 
 #: fpsstrings.rsinvaliddatetimeformat
-msgid "Trying to use an incompatible date/time format."
+#, object-pascal-format
+msgid "Trying to use an incompatible date/time format (%s)."
 msgstr ""
 
 #: fpsstrings.rsinvalidextension
+#, object-pascal-format
 msgid "Attempting to save a spreadsheet by extension, but the extension %s is not valid."
 msgstr ""
 
 #: fpsstrings.rsinvalidfloat
+#, object-pascal-format
 msgid "%s is not a valid floating-point value"
 msgstr ""
 
@@ -190,10 +213,12 @@ msgid "Invalid font index"
 msgstr ""
 
 #: fpsstrings.rsinvalidnumber
+#, object-pascal-format
 msgid "Invalid numerical value : %s"
 msgstr ""
 
 #: fpsstrings.rsinvalidnumberchar
+#, object-pascal-format
 msgid "Unexpected character in number : %s"
 msgstr ""
 
@@ -202,26 +227,32 @@ msgid "Trying to use an incompatible number format."
 msgstr ""
 
 #: fpsstrings.rsinvalidresultcharacter
+#, object-pascal-format
 msgid "\"%s\" is not a valid return type indicator"
 msgstr ""
 
 #: fpsstrings.rsinvalidresulttype
+#, object-pascal-format
 msgid "Invalid result type: %s"
 msgstr ""
 
 #: fpsstrings.rsinvalidspreadsheetfile
+#, object-pascal-format
 msgid "\"%s\" is not a valid spreadsheet file"
 msgstr "\"%s\" ei ole sallittu taulukkolaskentatiedosto"
 
 #: fpsstrings.rsinvalidworksheetname
+#, object-pascal-format
 msgid "\"%s\" is not a valid worksheet name."
 msgstr ""
 
 #: fpsstrings.rsleftbracketexpected
+#, object-pascal-format
 msgid "Expected left bracket at position %d, but got %s"
 msgstr "Odotettiin vasenta suljetta kohdassa %d mutta saatiin %s"
 
 #: fpsstrings.rslocalfilehyperlinkabs
+#, object-pascal-format
 msgid "The hyperlink \"%s\" points to a local file. In case of an absolute path the protocol \"file:\" must be specified."
 msgstr ""
 
@@ -230,10 +261,12 @@ msgid "magenta"
 msgstr ""
 
 #: fpsstrings.rsmaxcolsexceeded
+#, object-pascal-format
 msgid "This workbook contains %d columns, but the selected file format does not support more than %d columns."
 msgstr "Tämä asiakirja sisältää %d saraketta, mutta valittu tiedostoformaatti ei tue enempää kuin %d saraketta."
 
 #: fpsstrings.rsmaxrowsexceeded
+#, object-pascal-format
 msgid "This workbook contains %d rows, but the selected file format does not support more than %d rows."
 msgstr "Tämä asiakirja sisältää %d riviä, mutta valittu tiedostoformaatti ei tue enempää kuin %d riviä."
 
@@ -242,10 +275,12 @@ msgid "Export to multiple sheets is possible only if position is restored."
 msgstr ""
 
 #: fpsstrings.rsnooperand
+#, object-pascal-format
 msgid "No operand for unary operation %s"
 msgstr ""
 
 #: fpsstrings.rsnopercentoperation
+#, object-pascal-format
 msgid "Cannot perform percent operation on expression of type %s: %s"
 msgstr ""
 
@@ -254,34 +289,42 @@ msgid "not defined"
 msgstr "ei määritelty"
 
 #: fpsstrings.rsnovalidcelladdress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell address."
 msgstr "\"%s\" ei ole sallittu soluosoite."
 
 #: fpsstrings.rsnovalidcellrangeaddress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell range address."
 msgstr ""
 
 #: fpsstrings.rsnovalidcellrangeorcelladdress
+#, object-pascal-format
 msgid "\"%s\" is not a valid cell or cell range address."
 msgstr ""
 
 #: fpsstrings.rsnovalidhyperlinkinternal
+#, object-pascal-format
 msgid "The hyperlink \"%s\" is not a valid cell address."
 msgstr ""
 
 #: fpsstrings.rsnovalidhyperlinkuri
+#, object-pascal-format
 msgid "The hyperlink \"%s\" is not a valid URI."
 msgstr ""
 
 #: fpsstrings.rsnovalidnumberformatstring
-msgid "No valid number format string."
+#, object-pascal-format
+msgid "No valid number format string (%s)."
 msgstr ""
 
 #: fpsstrings.rsnovariable
+#, object-pascal-format
 msgid "Identifier %s is not a variable"
 msgstr "Tunniste %s ei ole muuttuja"
 
 #: fpsstrings.rsodshyperlinksoftextcellsonly
+#, object-pascal-format
 msgid "Cell %s: OpenDocument supports hyperlinks for text cells only."
 msgstr "Solu %s: OpenDocument tukee hyperlinkkejä ainoastaan tekstisoluissa"
 
@@ -290,18 +333,22 @@ msgid "olive"
 msgstr "oliivi"
 
 #: fpsstrings.rsonlyoneheaderfooterimageallowed
+#, object-pascal-format
 msgid "Only one image per %s section allowed."
 msgstr ""
 
 #: fpsstrings.rsoperationexceedscolcount
+#, object-pascal-format
 msgid "This operation at index %d exceeds the range of defined grid columns (%d)."
 msgstr ""
 
 #: fpsstrings.rsoperationexceedsrowcount
+#, object-pascal-format
 msgid "This operation at index %d exceeds the range of defined grid rows (%d)."
 msgstr ""
 
 #: fpsstrings.rspaletteindex
+#, object-pascal-format
 msgid "Palette index %d"
 msgstr ""
 
@@ -322,6 +369,7 @@ msgid "purple"
 msgstr ""
 
 #: fpsstrings.rsreadernotfound
+#, object-pascal-format
 msgid "Reader not found for file \"%s\""
 msgstr ""
 
@@ -330,10 +378,12 @@ msgid "red"
 msgstr "punainen"
 
 #: fpsstrings.rsrightbracketexpected
+#, object-pascal-format
 msgid "Expected right bracket at position %d, but got %s"
 msgstr "Odotettiin oikeata suljetta kohdassa %d mutta saatiin %s"
 
 #: fpsstrings.rsrightsquarebracketexpected
+#, object-pascal-format
 msgid "Expected right square bracket at positon %d, but got %s"
 msgstr ""
 
@@ -354,6 +404,7 @@ msgid "teal"
 msgstr ""
 
 #: fpsstrings.rstoomanypalettecolors
+#, object-pascal-format
 msgid "This workbook contains more colors (%d) than supported by the file format (%d). The additional colors are replaced by the best-matching palette colors."
 msgstr "Tämä asiakirja sisältää enemmän värejä (%d) kuin  on tuettuna fiedostohormaatissa (%d). Ylimääräiset värit on korvattu parhaalla mahdollisella väripaletin värillä."
 
@@ -362,10 +413,12 @@ msgid "transparent"
 msgstr "läpinäkyvä"
 
 #: fpsstrings.rstruncatetoolongcelltext
+#, object-pascal-format
 msgid "Text value exceeds the %d character limit in cell %s and has been truncated."
 msgstr ""
 
 #: fpsstrings.rstruncatetoolongtext
+#, object-pascal-format
 msgid "Text value exceeds the %d character limit and has been truncated."
 msgstr ""
 
@@ -374,6 +427,7 @@ msgid "Unexpected end of expression"
 msgstr ""
 
 #: fpsstrings.rsunknowncharacter
+#, object-pascal-format
 msgid "Unknown character at pos %d: \"%s\""
 msgstr ""
 
@@ -386,6 +440,7 @@ msgid "Unknown data type."
 msgstr "Tuntematon datatyyppi"
 
 #: fpsstrings.rsunknowndelimiter
+#, object-pascal-format
 msgid "Unknown delimiter character: \"%s\""
 msgstr ""
 
@@ -394,10 +449,12 @@ msgid "Unknown error type."
 msgstr ""
 
 #: fpsstrings.rsunknownidentifier
+#, object-pascal-format
 msgid "Unknown identifier: %s"
 msgstr ""
 
 #: fpsstrings.rsunknowntokenatpos
+#, object-pascal-format
 msgid "Unknown token at pos %d : %s"
 msgstr ""
 
@@ -410,10 +467,12 @@ msgid "Tried to write a spreadsheet using an unsupported format"
 msgstr ""
 
 #: fpsstrings.rsunterminatedexpression
+#, object-pascal-format
 msgid "Badly terminated expression. Found token at position %d : %s"
 msgstr ""
 
 #: fpsstrings.rsutf8textexpectedbutansifoundincell
+#, object-pascal-format
 msgid "Expected UTF8 text, but probably ANSI text found in cell %s."
 msgstr "Oletettiin UTF8 tekstikoodausta mutta luultavasti löydettiin ANSI koodattua tekstiä solussa %s."
 
@@ -422,6 +481,7 @@ msgid "white"
 msgstr "valkoinen"
 
 #: fpsstrings.rsworksheetnotfound
+#, object-pascal-format
 msgid "Worksheet \"%s\" not found."
 msgstr ""
 
@@ -430,6 +490,7 @@ msgid "Worksheet not found."
 msgstr ""
 
 #: fpsstrings.rswriteerror_worksheetnametoolong
+#, object-pascal-format
 msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
 msgstr ""
 

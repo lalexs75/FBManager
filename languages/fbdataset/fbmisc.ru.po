@@ -6,15 +6,17 @@ msgid "TBLOBList: access to unregistred BLOBCache cell"
 msgstr "TBLOBList: доступ к незарегистрированному элементу BLOBCache"
 
 #: fbmisc.efieldnotfoundinds
+#, object-pascal-format
 msgid "Field %s not found in dataset %s"
 msgstr ""
 
 #: fbmisc.eindexnotfoundmsg
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "index %s cant be found"
 msgstr "индек % не найден"
 
 #: fbmisc.eprepareerrormsg
+#, object-pascal-format
 msgid "Prepare %s.%s : %s %s"
 msgstr "Подготовка %s.%s : %s %s"
 
@@ -35,6 +37,7 @@ msgid "Some BLOBCache cells loosed"
 msgstr "Некоторые элементы BLOBCache утеряны"
 
 #: fbmisc.eunsupportedcomparemsg
+#, object-pascal-format
 msgid "sort/lookup on %s field type notsupported"
 msgstr "Сортировка/поиск по полю %s не поддерживается"
 
@@ -51,22 +54,27 @@ msgid "Blob stream cannot be written."
 msgstr "Поток Blob не может быть записан"
 
 #: fbmisc.sfbecannotinsert
+#, object-pascal-format
 msgid "Cannot Insert %s."
 msgstr "Не могу вставить %s."
 
 #: fbmisc.sfbecircularreference
+#, object-pascal-format
 msgid "The cyclic reference a component is forbidden (%s)."
 msgstr "Циклические ссылки между компонентами запрещены (%s)"
 
 #: fbmisc.sfbedatabasenotassigned
+#, object-pascal-format
 msgid "Database not assigned (%s)"
 msgstr "Не указана база данных (%s)"
 
 #: fbmisc.sfbeemptysqledit
+#, object-pascal-format
 msgid "Empty edit SQL statament (%s)."
 msgstr "Пустой текст SQL запроса на изменение (%s)."
 
 #: fbmisc.sfbeerrorexecuteq
+#, object-pascal-format
 msgid "Error execute query %s (%s)."
 msgstr ""
 
@@ -75,6 +83,7 @@ msgid "GetRecord: Invalid record"
 msgstr ""
 
 #: fbmisc.sfbenotcachedupdates
+#, object-pascal-format
 msgid "Not Cached Updates (%s)"
 msgstr ""
 
@@ -83,10 +92,12 @@ msgid "Other error"
 msgstr "Другая ошибка"
 
 #: fbmisc.sfbeparameternotfound
+#, object-pascal-format
 msgid "Parameter not found (%s)"
 msgstr "Параемтр (%s) не найден"
 
 #: fbmisc.sfbetransactionnotassigned
+#, object-pascal-format
 msgid "Transaction not assigned (%s)"
 msgstr "Не указана транзакция (%s)"
 

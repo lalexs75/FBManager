@@ -53,6 +53,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 #: rxconst.scloseaftersec
+#, object-pascal-format
 msgid "Close after %d sec"
 msgstr "Zamknij po %d sek."
 
@@ -109,6 +110,7 @@ msgid "Not assigned task panel"
 msgstr "Niepołączony panel zadań"
 
 #: rxconst.sexptcontrolnotfound
+#, object-pascal-format
 msgid "Control not found in validate %s."
 msgstr "Nie znaleziono kontrolki w weryfikacji %s."
 
@@ -129,6 +131,7 @@ msgid "Flat buttons"
 msgstr "Płaskie przyciski"
 
 #: rxconst.sfolderlistererr
+#, object-pascal-format
 msgid "%s. Not assigned property MenuItem"
 msgstr "%s. Nie połączona właściwość MenuItem"
 
@@ -149,6 +152,7 @@ msgid "Grab key"
 msgstr "Przechwyć klawisz"
 
 #: rxconst.shistorydesc
+#, object-pascal-format
 msgid "History - \"%s\""
 msgstr "Historia - \"%s\""
 
@@ -161,6 +165,7 @@ msgid "License"
 msgstr "Licencja"
 
 #: rxconst.sloadliberror
+#, object-pascal-format
 msgid "Could not load '%s' library"
 msgstr "Nie można załadować biblioteki '%s'"
 
@@ -181,6 +186,7 @@ msgid "Options"
 msgstr "Opcje"
 
 #: rxconst.soutofrange
+#, object-pascal-format
 msgid "Out of range %d %d %d %d"
 msgstr "Poza zakresem %d %d %d %d"
 
@@ -201,11 +207,24 @@ msgid "Question"
 msgstr ""
 
 #: rxconst.sreqvalue
+#, object-pascal-format
 msgid "Error. Expected value for field %s."
 msgstr "Błąd. Spodziewano wartości dla pola %s."
 
+#: rxconst.srxbyte
+msgid "B"
+msgstr ""
+
 #: rxconst.srxcloseformvalidatoreditor
 msgid "Rx close form validator editor"
+msgstr ""
+
+#: rxconst.srxgigabyte
+msgid "GB"
+msgstr ""
+
+#: rxconst.srxkilobyte
+msgid "KB"
 msgstr ""
 
 #: rxconst.srxlogindlgbtnmore
@@ -216,8 +235,16 @@ msgstr "Więcej >>"
 msgid "Database"
 msgstr "Baza danych"
 
+#: rxconst.srxmegabyte
+msgid "MB"
+msgstr ""
+
 #: rxconst.srxstrholdertexteditor
 msgid "Rx string holder editor"
+msgstr ""
+
+#: rxconst.srxterrabyte
+msgid "TB"
 msgstr ""
 
 #: rxconst.srxtextfolderitem
@@ -275,6 +302,10 @@ msgstr ""
 
 #: rxconst.srxtoolpaneleditor
 msgid "Rx toolpanel editor"
+msgstr ""
+
+#: rxconst.srxviewspaneleditor
+msgid "Rx views panel editor"
 msgstr ""
 
 #: rxconst.ssecondhalfofyear
@@ -342,22 +373,27 @@ msgid "Transparent"
 msgstr "Przeźroczysty"
 
 #: rxconst.svariableisnotboolean
+#, object-pascal-format
 msgid "Variable %s is not boolean"
 msgstr ""
 
 #: rxconst.svariableisnotdt
+#, object-pascal-format
 msgid "Variable %s is not date/time"
 msgstr ""
 
 #: rxconst.svariableisnotfloat
+#, object-pascal-format
 msgid "Variable %s is not float"
 msgstr ""
 
 #: rxconst.svariableisnotinteger
+#, object-pascal-format
 msgid "Variable %s is not integer"
 msgstr ""
 
 #: rxconst.svariableisnotstring
+#, object-pascal-format
 msgid "Variable %s is not string"
 msgstr ""
 

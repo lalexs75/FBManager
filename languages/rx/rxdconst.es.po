@@ -6,6 +6,7 @@ msgid "All values"
 msgstr "Todos los valores"
 
 #: rxdconst.sapptitlelabel
+#, object-pascal-format
 msgid "Application \"%s\""
 msgstr "Aplicación \"%s\""
 
@@ -74,7 +75,7 @@ msgid "Data changed. Save?"
 msgstr "Dato cambiado. Salvar?"
 
 #: rxdconst.sdatabasename
-#, fuzzy
+#, object-pascal-format, fuzzy
 #| msgid "Database loocked: %s"
 msgid "Database locked: %s"
 msgstr "Base de Dato bloqueada: %s"
@@ -84,6 +85,7 @@ msgid "Database"
 msgstr ""
 
 #: rxdconst.sdbcomboboxfieldnotassigned
+#, object-pascal-format
 msgid "%s:TDBComboBox - DataField not assigned"
 msgstr ""
 
@@ -165,6 +167,7 @@ msgid "Compare opertion needs field and const"
 msgstr "Operacion de comparación necesita campo y constante"
 
 #: rxdconst.sexprbadfield
+#, object-pascal-format
 msgid "Field '%s' not used in filter expression"
 msgstr "Campo '%s' no usado en expresión de filtro"
 
@@ -175,6 +178,7 @@ msgid "NULL-values enabled in '=' and '<>'"
 msgstr "Valor nulo habilitado en '=' y '<>'"
 
 #: rxdconst.sexprexpected
+#, object-pascal-format
 msgid "Error %s"
 msgstr "Error %s"
 
@@ -183,6 +187,7 @@ msgid "Error in filter expression"
 msgstr "Error en expresión de filtro"
 
 #: rxdconst.sexprinvalidchar
+#, object-pascal-format
 msgid "Error symbol in expression: '%s'"
 msgstr "Error simbolo en expresión: '%s'"
 
@@ -193,10 +198,12 @@ msgid "Error in filed name"
 msgstr "Error en nombre del fichero"
 
 #: rxdconst.sexprnorparen
+#, object-pascal-format
 msgid "Error ')', error: %s"
 msgstr "Error ')', error: %s"
 
 #: rxdconst.sexprnotboolean
+#, object-pascal-format
 msgid "Field '%s' is not boolean"
 msgstr "Campo '%s' no es boolean"
 
@@ -209,14 +216,17 @@ msgid "Error in filter end"
 msgstr "Error en terminación del filtro"
 
 #: rxdconst.sfieldreadonly
+#, object-pascal-format
 msgid "SFieldReadOnly %s"
 msgstr "SCampoSoloLectura %s"
 
 #: rxdconst.sfieldrequired
+#, object-pascal-format
 msgid "Field '%s' must have a value"
 msgstr "Campo '%s' debe tener un valor"
 
 #: rxdconst.sfieldtypemismatch
+#, object-pascal-format
 msgid "Type mismatch for field '%s', expecting: %s actual: %s"
 msgstr "Tipo no corresponde para el campo '%s', se esperaba: %s actual: %s"
 
@@ -512,6 +522,10 @@ msgstr "Sensitivo MAY/min"
 msgid "Direction"
 msgstr "Dirección"
 
+#: rxdconst.srxdbgridfindinallfileds
+msgid "Find in all fields"
+msgstr ""
+
 #: rxdconst.srxdbgridfindonfield
 msgid "Find on field"
 msgstr "Buscar en campo"
@@ -761,6 +775,7 @@ msgid "Top"
 msgstr "Inicio"
 
 #: rxdconst.sunknownfieldtype
+#, object-pascal-format
 msgid "SUnknownFieldType %s"
 msgstr "Tipo Campo Desconocido %s"
 

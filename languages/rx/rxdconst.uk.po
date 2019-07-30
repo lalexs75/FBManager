@@ -15,6 +15,7 @@ msgid "All values"
 msgstr ""
 
 #: rxdconst.sapptitlelabel
+#, object-pascal-format
 msgid "Application \"%s\""
 msgstr "Програма \"%s\""
 
@@ -81,6 +82,7 @@ msgid "Data changed. Save?"
 msgstr "Дані були змінені. Зберегти?"
 
 #: rxdconst.sdatabasename
+#, object-pascal-format
 msgid "Database locked: %s"
 msgstr "База даних блокована: %s"
 
@@ -89,6 +91,7 @@ msgid "Database"
 msgstr ""
 
 #: rxdconst.sdbcomboboxfieldnotassigned
+#, object-pascal-format
 msgid "%s:TDBComboBox - DataField not assigned"
 msgstr "%s:TDBComboBox - Не присвоєно властивість DataField"
 
@@ -170,6 +173,7 @@ msgid "Compare opertion needs field and const"
 msgstr "Операції порівняння вимагають наявності поля і константи"
 
 #: rxdconst.sexprbadfield
+#, object-pascal-format
 msgid "Field '%s' not used in filter expression"
 msgstr "Поле '%s' не може бути використане в виразі фільтрації"
 
@@ -178,6 +182,7 @@ msgid "NULL-values enabled in '=' and '<>'"
 msgstr "NULL-значення дозволені тільки у виразах '=' і '<>'"
 
 #: rxdconst.sexprexpected
+#, object-pascal-format
 msgid "Error %s"
 msgstr "Очікували вираз, а зустріли %s"
 
@@ -186,6 +191,7 @@ msgid "Error in filter expression"
 msgstr "Помилка у виразі фільтра"
 
 #: rxdconst.sexprinvalidchar
+#, object-pascal-format
 msgid "Error symbol in expression: '%s'"
 msgstr "Помилковий символ у виразі: '%s'"
 
@@ -194,10 +200,12 @@ msgid "Error in filed name"
 msgstr "Помилка в імені поля"
 
 #: rxdconst.sexprnorparen
+#, object-pascal-format
 msgid "Error ')', error: %s"
 msgstr "Очікували ')', а зустріли: %s"
 
 #: rxdconst.sexprnotboolean
+#, object-pascal-format
 msgid "Field '%s' is not boolean"
 msgstr "Поле '%s' не логічного типу"
 
@@ -210,14 +218,17 @@ msgid "Error in filter end"
 msgstr "Помилка в закінченні виразу фільтра"
 
 #: rxdconst.sfieldreadonly
+#, object-pascal-format
 msgid "SFieldReadOnly %s"
 msgstr "Поле %s лише для читання"
 
 #: rxdconst.sfieldrequired
+#, object-pascal-format
 msgid "Field '%s' must have a value"
 msgstr "Поле '%s' очікує значення"
 
 #: rxdconst.sfieldtypemismatch
+#, object-pascal-format
 msgid "Type mismatch for field '%s', expecting: %s actual: %s"
 msgstr "Неспівпадіння типів для стовпця '%s', необхідно: %s введено: %s"
 
@@ -507,6 +518,10 @@ msgstr "Регістрозалежно"
 msgid "Direction"
 msgstr "Напрямок"
 
+#: rxdconst.srxdbgridfindinallfileds
+msgid "Find in all fields"
+msgstr ""
+
 #: rxdconst.srxdbgridfindonfield
 msgid "Find on field"
 msgstr "Шукати по полю"
@@ -749,6 +764,7 @@ msgid "Top"
 msgstr "Вверх"
 
 #: rxdconst.sunknownfieldtype
+#, object-pascal-format
 msgid "SUnknownFieldType %s"
 msgstr "Не визначений тип даних для поля %s"
 

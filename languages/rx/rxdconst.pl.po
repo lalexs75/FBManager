@@ -16,6 +16,7 @@ msgid "All values"
 msgstr "Wszystkie wartości"
 
 #: rxdconst.sapptitlelabel
+#, object-pascal-format
 msgid "Application \"%s\""
 msgstr "Aplikacja \"%s\""
 
@@ -81,6 +82,7 @@ msgid "Data changed. Save?"
 msgstr "Dane zostały zmienione? Zachować?"
 
 #: rxdconst.sdatabasename
+#, object-pascal-format
 msgid "Database locked: %s"
 msgstr "Baza danych zablokowana: %s"
 
@@ -89,6 +91,7 @@ msgid "Database"
 msgstr "Baza danych"
 
 #: rxdconst.sdbcomboboxfieldnotassigned
+#, object-pascal-format
 msgid "%s:TDBComboBox - DataField not assigned"
 msgstr ""
 
@@ -167,6 +170,7 @@ msgid "Compare opertion needs field and const"
 msgstr "Operacja porównania wymaga podania pola i wartości"
 
 #: rxdconst.sexprbadfield
+#, object-pascal-format
 msgid "Field '%s' not used in filter expression"
 msgstr "Pole '%s' nie jest używane w wyrażeniu filtra"
 
@@ -175,6 +179,7 @@ msgid "NULL-values enabled in '=' and '<>'"
 msgstr "Wartości NULL są włączone w '=' oraz '<>'"
 
 #: rxdconst.sexprexpected
+#, object-pascal-format
 msgid "Error %s"
 msgstr "Błąd %s"
 
@@ -183,6 +188,7 @@ msgid "Error in filter expression"
 msgstr "Błąd w wyrażeniu filtra"
 
 #: rxdconst.sexprinvalidchar
+#, object-pascal-format
 msgid "Error symbol in expression: '%s'"
 msgstr "Błędny symbol w wyrażeniu: '%s'"
 
@@ -191,10 +197,12 @@ msgid "Error in filed name"
 msgstr "Błąd w nazwie pola"
 
 #: rxdconst.sexprnorparen
+#, object-pascal-format
 msgid "Error ')', error: %s"
 msgstr "Błąd ')', błąd: %s"
 
 #: rxdconst.sexprnotboolean
+#, object-pascal-format
 msgid "Field '%s' is not boolean"
 msgstr "Pole '%s' nie jest typu logicznego"
 
@@ -207,14 +215,17 @@ msgid "Error in filter end"
 msgstr "Błąd na końcu filtra"
 
 #: rxdconst.sfieldreadonly
+#, object-pascal-format
 msgid "SFieldReadOnly %s"
 msgstr ""
 
 #: rxdconst.sfieldrequired
+#, object-pascal-format
 msgid "Field '%s' must have a value"
 msgstr "Pole '%s' musi mieć wartość"
 
 #: rxdconst.sfieldtypemismatch
+#, object-pascal-format
 msgid "Type mismatch for field '%s', expecting: %s actual: %s"
 msgstr ""
 
@@ -503,6 +514,10 @@ msgstr "Rozróżniaj wielkość liter"
 msgid "Direction"
 msgstr "Kierunek"
 
+#: rxdconst.srxdbgridfindinallfileds
+msgid "Find in all fields"
+msgstr ""
+
 #: rxdconst.srxdbgridfindonfield
 msgid "Find on field"
 msgstr "Szukaj w polu"
@@ -744,6 +759,7 @@ msgid "Top"
 msgstr "Góra"
 
 #: rxdconst.sunknownfieldtype
+#, object-pascal-format
 msgid "SUnknownFieldType %s"
 msgstr ""
 
