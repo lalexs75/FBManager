@@ -2707,7 +2707,7 @@ var
   Q: TZQuery;
   S, SV: String;
 begin
-  Q:=GetSQLSysQuery(pgSqlTextModule.sPGStatistics['ServerSettings']);
+  Q:=GetSQLQuery(pgSqlTextModule.sPGStatistics['ServerSettings']);
   Q.Open;
   while not Q.EOF do
   begin
