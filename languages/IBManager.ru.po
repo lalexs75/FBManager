@@ -5454,7 +5454,7 @@ msgstr "Использовать существующий генератор"
 
 #: fbmstrconstunit.susepgbouncer
 msgid "Connecting via pgBouncer"
-msgstr ""
+msgstr "Подключаться через pgBouncer"
 
 #: fbmstrconstunit.susepgshedule
 msgid "Use pgShedule (if avaliable)"
@@ -5845,4 +5845,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
