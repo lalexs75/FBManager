@@ -355,23 +355,7 @@ begin
       end;
     end;
 end;
-(*
-procedure TUserDBModule.ImportOldConfig;
-var
-  P: TConfigValue;
-begin
-  LoadParams1;
-  for P in ConfigValues do P.Modified:=true;
-  SystemVariablesStore;
 
-  if FileExistsUTF8(ConfigFileName) then
-    DeleteFileUTF8(ConfigFileName);
-  if FileExistsUTF8(ConfigFileNameNew) then
-    DeleteFileUTF8(ConfigFileNameNew);
-
-  ImportDataBaseList;
-end;
-*)
 procedure TUserDBModule.InternalCreateUserDB;
 begin
   UserDB.Connect;

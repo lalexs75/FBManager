@@ -217,6 +217,7 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
+    OnExit = cbServerNameExit
     TabOrder = 3
   end
   object DividerBevel1: TDividerBevel[15]

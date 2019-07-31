@@ -1,0 +1,412 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Onur ERÇELEN <onur2x@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#: rxconst.sabout
+msgid "About"
+msgstr "Hakkında"
+
+#: rxconst.sappversion
+msgid "Version : "
+msgstr "Versiyon : "
+
+#: rxconst.savaliablebuttons
+msgid "Avaliable buttons"
+msgstr "Mevcut düğmeler"
+
+#: rxconst.sbrowse
+msgid "Browse"
+msgstr "Gözat"
+
+#: rxconst.sbuilddate
+msgid "Build date : "
+msgstr "Yapı tarihi: "
+
+#: rxconst.sbuttonalign
+msgid "Button align"
+msgstr "Buton hizala"
+
+#: rxconst.sbuttonalign1
+msgctxt "rxconst.sbuttonalign1"
+msgid "None"
+msgstr "Yok"
+
+#: rxconst.sbuttonalign2
+msgid "Left"
+msgstr "Sol"
+
+#: rxconst.sbuttonalign3
+msgid "Right"
+msgstr "Sağ"
+
+#: rxconst.sclose
+msgid "Close"
+msgstr "Kapat"
+
+#: rxconst.scloseaftersec
+#, object-pascal-format
+msgid "Close after %d sec"
+msgstr "%d sn sonra kapat"
+
+#: rxconst.scloseallexceptthis
+msgid "Close all except this"
+msgstr "Bu hariç hepsini kapat"
+
+#: rxconst.scloseallquestion
+msgid "Close all window?"
+msgstr ""
+
+#: rxconst.scloseallwindows
+msgid "Close all windows"
+msgstr "Tüm pencereleri kapat"
+
+#: rxconst.sclosemessagehint
+msgid "Close message"
+msgstr "Mesajı kapat"
+
+#: rxconst.sclosevaliderror
+msgid "Error. Expected values..."
+msgstr "Hata. Beklenen değerler...."
+
+#: rxconst.sclosewindows
+msgid "Close window"
+msgstr "Pencereyi kapat"
+
+#: rxconst.sdatedlgtitle
+msgid "Select a Date"
+msgstr "Bir tarih seç"
+
+#: rxconst.sdefaultfilter
+msgid "All files (*.*)|*.*"
+msgstr "Tüm dosyalar (*.*)|*.*"
+
+#: rxconst.sdetails
+msgid "Details"
+msgstr "Detaylar"
+
+#: rxconst.sduallistcaption
+msgid "Dual list dialog"
+msgstr "İkili liste iletişim kutusu"
+
+#: rxconst.sduallistdestcaption
+msgid "Destination"
+msgstr "Hedef"
+
+#: rxconst.sduallistsrccaption
+msgid "Source"
+msgstr "Kaynak"
+
+#: rxconst.serrorlinkedtaskpanel
+msgid "Not assigned task panel"
+msgstr "Görev paneli atanmadı"
+
+#: rxconst.sexptcontrolnotfound
+#, object-pascal-format
+msgid "Control not found in validate %s."
+msgstr "Kontrol bulunamadı doğrulanamadı %s."
+
+#: rxconst.sfilenotexec
+msgid "File specified is not an executable file, dynamic-link library, or icon file"
+msgstr "Belirtilen dosya yürütülebilir bir dosya, dinamik bağlantı kitaplığı veya simge dosyası değil"
+
+#: rxconst.sfirsthalfofyear
+msgid "First half of year"
+msgstr "Yılın ilk yarısı"
+
+#: rxconst.sfirstquarter
+msgid "First quarter"
+msgstr "İlk çeyrek"
+
+#: rxconst.sflatbuttons
+msgid "Flat buttons"
+msgstr "Düz düğmeler"
+
+#: rxconst.sfolderlistererr
+#, object-pascal-format
+msgid "%s. Not assigned property MenuItem"
+msgstr "%s. Atanmamış özellik Menuöğesi"
+
+#: rxconst.sfourthquarter
+msgid "Fourth quarter"
+msgstr "Dördüncü çeyrek"
+
+#: rxconst.sfpcversion
+msgid "FPC version : "
+msgstr "FPC Sürümü: "
+
+#: rxconst.sgeneral
+msgid "General"
+msgstr "Genel"
+
+#: rxconst.sgrabkey
+msgid "Grab key"
+msgstr ""
+
+#: rxconst.shistorydesc
+#, object-pascal-format
+msgid "History - \"%s\""
+msgstr "Geçmiş - \"%s\""
+
+#: rxconst.slclversion
+msgid "LCL Version: "
+msgstr "LCL Versiyon : "
+
+#: rxconst.slicense
+msgid "License"
+msgstr "Lisans"
+
+#: rxconst.sloadliberror
+#, object-pascal-format
+msgid "Could not load '%s' library"
+msgstr "'%s' kütüphanesi yüklenemedi"
+
+#: rxconst.snextmonth
+msgid "Next Month|"
+msgstr "Sonraki Ay|"
+
+#: rxconst.snextyear
+msgid "Next Year|"
+msgstr "Sonraki Yıl|"
+
+#: rxconst.snotimplemented
+msgid "Function not yet implemented"
+msgstr "İşlev henüz uygulanmadı"
+
+#: rxconst.soptions
+msgid "Options"
+msgstr "Seçenekler"
+
+#: rxconst.soutofrange
+#, object-pascal-format
+msgid "Out of range %d %d %d %d"
+msgstr "Aralık dışı %d %d %d %d"
+
+#: rxconst.spressthekey
+msgid "Press the key"
+msgstr ""
+
+#: rxconst.sprevmonth
+msgid "Previous Month|"
+msgstr "Önceki Ay|"
+
+#: rxconst.sprevyear
+msgid "Previous Year|"
+msgstr "Önceki Yıl|"
+
+#: rxconst.squestion
+msgid "Question"
+msgstr ""
+
+#: rxconst.sreqvalue
+#, object-pascal-format
+msgid "Error. Expected value for field %s."
+msgstr "Hata. %s alanı için beklenen değer."
+
+#: rxconst.srxbyte
+msgid "B"
+msgstr ""
+
+#: rxconst.srxcloseformvalidatoreditor
+msgid "Rx close form validator editor"
+msgstr ""
+
+#: rxconst.srxgigabyte
+msgid "GB"
+msgstr ""
+
+#: rxconst.srxkilobyte
+msgid "KB"
+msgstr ""
+
+#: rxconst.srxlogindlgbtnmore
+msgid "More >>"
+msgstr ""
+
+#: rxconst.srxlogindlgdatabase
+msgid "Database"
+msgstr ""
+
+#: rxconst.srxmegabyte
+msgid "MB"
+msgstr ""
+
+#: rxconst.srxstrholdertexteditor
+msgid "Rx string holder editor"
+msgstr "Rx string tutucu editörü"
+
+#: rxconst.srxterrabyte
+msgid "TB"
+msgstr ""
+
+#: rxconst.srxtextfolderitem
+msgid "Item "
+msgstr "Öğe "
+
+#: rxconst.srxtextfoldersynhighlighter
+msgid "Highlighter"
+msgstr ""
+
+#: rxconst.srxtextfoldersynhtml
+msgid "HTML"
+msgstr ""
+
+#: rxconst.srxtextfoldersynnone
+#, fuzzy
+msgctxt "rxconst.srxtextfoldersynnone"
+msgid "None"
+msgstr "Yok"
+
+#: rxconst.srxtextfoldersynsql
+msgid "SQL"
+msgstr ""
+
+#: rxconst.srxtextfoldersynxml
+msgid "XML"
+msgstr ""
+
+#: rxconst.srxtextholderadd
+msgid "Add"
+msgstr "Ekle"
+
+#: rxconst.srxtextholdereditor
+msgid "RxTextHolder editor"
+msgstr "RxTextHolder editorü"
+
+#: rxconst.srxtextholdermovedown
+msgid "Down"
+msgstr ""
+
+#: rxconst.srxtextholdermoveup
+msgid "Up"
+msgstr ""
+
+#: rxconst.srxtextholderremove
+msgid "Remove"
+msgstr "Kaldır"
+
+#: rxconst.srxtextholdertextcaption
+msgid "Caption"
+msgstr "Başlık"
+
+#: rxconst.srxtextholdertexteditor
+msgid "Rx text holder editor"
+msgstr "Rx metin tutucu editörü"
+
+#: rxconst.srxtoolpaneleditor
+msgid "Rx toolpanel editor"
+msgstr ""
+
+#: rxconst.srxviewspaneleditor
+msgid "Rx views panel editor"
+msgstr ""
+
+#: rxconst.ssecondhalfofyear
+msgid "Second half of year"
+msgstr "Yılın ikinci yarısı"
+
+#: rxconst.ssecondquarter
+msgid "Second quarter"
+msgstr "İkinci çeyrek"
+
+#: rxconst.sseparator
+msgid "Separator"
+msgstr ""
+
+#: rxconst.sshortcut
+msgid "ShortCut"
+msgstr ""
+
+#: rxconst.sshowcaption
+msgid "Show caption"
+msgstr "Başlığı göster"
+
+#: rxconst.sshowhint
+msgid "Show hint"
+msgstr "İpucunu göster"
+
+#: rxconst.stargetcpu
+msgid "Target CPU : "
+msgstr "Hedef CPU: "
+
+#: rxconst.stargetos
+msgid "Target OS : "
+msgstr "Hedeflenen İşletim Sistemi: "
+
+#: rxconst.sthirdquarter
+msgid "Third quarter"
+msgstr "Üçüncü çeyrek"
+
+#: rxconst.stocurdate
+msgid "Set current date"
+msgstr "Geçerli Tarihi ayarla"
+
+#: rxconst.stoolbarstyle
+msgid "Tool bar style"
+msgstr "Araç çubuğu tarzı"
+
+#: rxconst.stoolbarstyle1
+msgid "Standard"
+msgstr "Standart"
+
+#: rxconst.stoolbarstyle2
+msgid "Windows XP"
+msgstr "Windows XP"
+
+#: rxconst.stoolbarstyle3
+msgid "Native"
+msgstr "Doğal"
+
+#: rxconst.stoolpanelsetup
+msgid "Tool panel setup"
+msgstr "Araç paneli kurulumu"
+
+#: rxconst.stransparent
+msgid "Transparent"
+msgstr "Transparent"
+
+#: rxconst.svariableisnotboolean
+#, object-pascal-format
+msgid "Variable %s is not boolean"
+msgstr "%s değişkeni boolean değil"
+
+#: rxconst.svariableisnotdt
+#, object-pascal-format
+msgid "Variable %s is not date/time"
+msgstr "%s değişkeni tarih/saat değil"
+
+#: rxconst.svariableisnotfloat
+#, object-pascal-format
+msgid "Variable %s is not float"
+msgstr "%s değişkeni float değil"
+
+#: rxconst.svariableisnotinteger
+#, object-pascal-format
+msgid "Variable %s is not integer"
+msgstr "%s değişkeni sayı değil"
+
+#: rxconst.svariableisnotstring
+#, object-pascal-format
+msgid "Variable %s is not string"
+msgstr "%s değişkeni metin değil"
+
+#: rxconst.svisiblebuttons
+msgid "Visible buttons"
+msgstr "Görünür düğmeler"
+
+#: rxconst.swidget
+msgid "Widget : "
+msgstr "Widget : "
+
+#: rxconst.swindowsicofiles
+msgid "Windows Ico files (*.ico)|*.ico|All files (*.*)|*.*"
+msgstr "Windows Ikon dosyasları (*.ico)|*.ico|Tüm dosyalar (*.*)"
+

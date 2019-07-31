@@ -1,0 +1,785 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Onur ERÇELEN <onur2x@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#: rxdconst.sallvalues
+msgid "All values"
+msgstr "Tüm değerler"
+
+#: rxdconst.sapptitlelabel
+#, object-pascal-format
+msgid "Application \"%s\""
+msgstr "Uygulama \"%s\""
+
+#: rxdconst.sascending
+msgid "Ascending"
+msgstr "Artan"
+
+#: rxdconst.sblobtext
+msgid "(blob)"
+msgstr "(metin)"
+
+#: rxdconst.sbottomcaption
+msgid "Bottom"
+msgstr "Alt"
+
+#: rxdconst.sbrowsedata
+msgid "browse"
+msgstr "gözat"
+
+#: rxdconst.scalcfieldsdata
+msgid "calc"
+msgstr "hesapla"
+
+#: rxdconst.scapturefilter
+msgid "Control locked by filter"
+msgstr "Kontrol filtre ile kilitlendi"
+
+#: rxdconst.schangepassword
+msgid "Change password"
+msgstr "Şifre değiştir"
+
+#: rxdconst.scirculardatalink
+msgid "Circular data link"
+msgstr "Dairesel veri bağlantısı"
+
+#: rxdconst.sclearfilter
+msgctxt "rxdconst.sclearfilter"
+msgid "Clear filter"
+msgstr "Filtreyi temizle"
+
+#: rxdconst.scollumnname
+msgid "Column name"
+msgstr "Sütun Adı"
+
+#: rxdconst.scompressfonts
+msgid "Compress fonts"
+msgstr "Yazı tipini sıkıştır"
+
+#: rxdconst.scompressimages
+msgid "Compress images"
+msgstr "Resmi sıkıştır"
+
+#: rxdconst.scompresstext
+msgid "Compress text"
+msgstr "Metni sıkıştır"
+
+#: rxdconst.sconfirmpasswordlabel
+msgid "&Confirm:"
+msgstr "&Onayla:"
+
+#: rxdconst.sconfirmsave
+msgid "Data changed. Save?"
+msgstr "Veri değişti kaydedilsin mi?"
+
+#: rxdconst.sdatabasename
+#, object-pascal-format
+msgid "Database locked: %s"
+msgstr "Veritabanı kilitli : %s"
+
+#: rxdconst.sdatabasename1
+msgid "Database"
+msgstr "Veritabanı"
+
+#: rxdconst.sdbcomboboxfieldnotassigned
+#, object-pascal-format
+msgid "%s:TDBComboBox - DataField not assigned"
+msgstr "%s:TDBComboBox - DataField atanmadı"
+
+#: rxdconst.sdbexceptcaption
+msgid "Error in DB engine"
+msgstr "Db motoru arızası"
+
+#: rxdconst.sdeletemultiplerecords
+msgid "Delete all selected records?"
+msgstr "Tüm kayıtlar silinsin mi?"
+
+#: rxdconst.sdeleterecordquestion
+msgid "Delete record?"
+msgstr "Kaydı sil?"
+
+#: rxdconst.sdescending
+msgctxt "rxdconst.sdescending"
+msgid "Descending"
+msgstr "Azalan"
+
+#: rxdconst.seditdata
+msgid "editing"
+msgstr "düzenleme"
+
+#: rxdconst.semptyvalues
+msgid "Empty values"
+msgstr "Boş değerler"
+
+#: rxdconst.serrormsglabel
+msgid "Error message"
+msgstr "Hata mesajı"
+
+#: rxdconst.sexportcellcolors
+msgid "Export cell colors"
+msgstr "Hücre renklerini dışa aktar"
+
+#: rxdconst.sexportcolumnfooter
+msgid "Export column footer"
+msgstr "Sütun altbilgisini dışa aktar"
+
+#: rxdconst.sexportcolumnheader
+msgid "Export column header"
+msgstr "Sütun başlığını dışa aktar"
+
+#: rxdconst.sexportfilename
+msgid "Export file name"
+msgstr "Dosya adını dışa aktar"
+
+#: rxdconst.sexportformula
+msgid "Export footer formula"
+msgstr "Altbilgi formülünü dışa aktar"
+
+#: rxdconst.sexportgroupdata
+msgid "Export group data"
+msgstr "Grup verisini dışa aktar"
+
+#: rxdconst.sexporthidezerovalues
+msgctxt "rxdconst.sexporthidezerovalues"
+msgid "Hide zero values"
+msgstr "Sıfır değerleri gizle"
+
+#: rxdconst.sexportimages
+msgid "Export images"
+msgstr "Resimleri dışa aktar"
+
+#: rxdconst.sexportparams
+msgid "Export params"
+msgstr "Parametreleri dışa aktar"
+
+#: rxdconst.sexportselectedrows
+msgid "Export only selected rows"
+msgstr "Yalnızca seçilen satırları dışa aktar"
+
+#: rxdconst.sexprbadcompare
+msgid "Compare opertion needs field and const"
+msgstr "Operasyon ihtiyaçları alanını ve sabitlerini karşılaştır"
+
+#: rxdconst.sexprbadfield
+#, object-pascal-format
+msgid "Field '%s' not used in filter expression"
+msgstr "'%s' alanı filtre ifadesinde kullanılmıyor"
+
+#: rxdconst.sexprbadnulltest
+msgid "NULL-values enabled in '=' and '<>'"
+msgstr "'=' Ve '<>' içinde boş değerler etkin"
+
+#: rxdconst.sexprexpected
+#, object-pascal-format
+msgid "Error %s"
+msgstr "Hata %s"
+
+#: rxdconst.sexprincorrect
+msgid "Error in filter expression"
+msgstr "Filtre ifadesinde hata"
+
+#: rxdconst.sexprinvalidchar
+#, object-pascal-format
+msgid "Error symbol in expression: '%s'"
+msgstr "Sembol ifadesinde hata : '%s'"
+
+#: rxdconst.sexprnameerror
+msgid "Error in filed name"
+msgstr "Alan adında hata"
+
+#: rxdconst.sexprnorparen
+#, object-pascal-format
+msgid "Error ')', error: %s"
+msgstr "Hata ')', hata : %s"
+
+#: rxdconst.sexprnotboolean
+#, object-pascal-format
+msgid "Field '%s' is not boolean"
+msgstr "'%s' alanı boolean değil"
+
+#: rxdconst.sexprstringerror
+msgid "Error in string const"
+msgstr "String const hatası"
+
+#: rxdconst.sexprtermination
+msgid "Error in filter end"
+msgstr "Filtre sonunda hata"
+
+#: rxdconst.sfieldreadonly
+#, object-pascal-format
+msgid "SFieldReadOnly %s"
+msgstr "SFieldReadOnly %s"
+
+#: rxdconst.sfieldrequired
+#, object-pascal-format
+msgid "Field '%s' must have a value"
+msgstr "'%s' alanı bir değere sahip olmalı"
+
+#: rxdconst.sfieldtypemismatch
+#, object-pascal-format
+msgid "Type mismatch for field '%s', expecting: %s actual: %s"
+msgstr "'%s' alanı için uyuşmazlık yazın, beklenen :%s gerçek: %s"
+
+#: rxdconst.sfooterrowcolor
+msgid "Footer row color"
+msgstr "Altbilgi satır rengi"
+
+#: rxdconst.sfunction
+msgid "Function"
+msgstr "İşlev(fonksiyon)"
+
+#: rxdconst.sfvtavg
+msgid "AVG"
+msgstr "AVG"
+
+#: rxdconst.sfvtcount
+msgid "Count"
+msgstr "Sayma(Count)"
+
+#: rxdconst.sfvtfieldvalue
+msgid "Field value"
+msgstr "Alan değeri (Field value)"
+
+#: rxdconst.sfvtmax
+msgid "Max value"
+msgstr "Max değer (Max Value)"
+
+#: rxdconst.sfvtmin
+msgid "Min value"
+msgstr "Min Değer(Min Value)"
+
+#: rxdconst.sfvtnon
+msgid "None"
+msgstr "Yok (None)"
+
+#: rxdconst.sfvtrecno
+msgid "Record no"
+msgstr "Kayıt no(Record no)"
+
+#: rxdconst.sfvtstatictext
+msgid "Static text"
+msgstr "Sabit yazı (Statik text)"
+
+#: rxdconst.sfvtsum
+msgid "Sum"
+msgstr "Topla (Sum)"
+
+#: rxdconst.sglobal
+msgid "Global"
+msgstr "Küresel(Global)"
+
+#: rxdconst.shidezerovalues
+msgctxt "rxdconst.shidezerovalues"
+msgid "Hide zero values"
+msgstr "Sıfır değerleri gizle"
+
+#: rxdconst.shinthideonlycurrentitem
+msgid "Hide only current item"
+msgstr "Yalnızca geçerli öğeyi gizle"
+
+#: rxdconst.shintlabel
+msgid "Enter your user name and password"
+msgstr "Kullanıcı adınızı ve şifrenizi girin"
+
+#: rxdconst.shintshowonlycurrentitem
+msgid "Show only current item"
+msgstr "Yalnızca geçerli öğeyi göster"
+
+#: rxdconst.sinactivedata
+msgid "inactive"
+msgstr "pasif"
+
+#: rxdconst.sinsertdata
+msgid "append"
+msgstr "ekle"
+
+#: rxdconst.sinvaliddate
+msgid "Invalid Date"
+msgstr "Geçersiz tarih"
+
+#: rxdconst.sinvalidfields
+msgid "No fields defined"
+msgstr "Tanımlanmış alan yok"
+
+#: rxdconst.sinvalidusername
+msgid "User name or password is not valid"
+msgstr "Kullanıcı adı veya şifre geçerli değil"
+
+#: rxdconst.slandscape
+msgid "Landscape"
+msgstr "Yatay"
+
+#: rxdconst.sleftcaption
+msgid "Left"
+msgstr "Sol"
+
+#: rxdconst.slocaldatabase
+msgid "Unable complete this operation on local dataset"
+msgstr "Yerel veri kümesinde bu işlem tamamlanamadı"
+
+#: rxdconst.smemnorecords
+msgid "No data found"
+msgstr "Veri bulunamadı"
+
+#: rxdconst.smergecells
+msgid "Merge cell's"
+msgstr "Hücreleri birleştir"
+
+#: rxdconst.smore1
+msgid "&More >>"
+msgstr "&Daha fazlası >>"
+
+#: rxdconst.smore2
+msgid "&Less <<"
+msgstr "&Daha azı <<"
+
+#: rxdconst.snewpasswordlabel
+msgid "&New password:"
+msgstr "&Yeni şifre :"
+
+#: rxdconst.snextbutton
+msgid "&Next"
+msgstr "&Sonraki"
+
+#: rxdconst.snotcapturefilter
+msgid "Control needs to be locked by filter"
+msgstr "Kontrol filtre ile kilitlenmeli"
+
+#: rxdconst.snotediting
+msgid "Dataset not in edit or insert mode"
+msgstr "Veri kümesi düzenleme veya ekleme modunda değil"
+
+#: rxdconst.snotempty
+msgid "Not empty"
+msgstr "Boş değil"
+
+#: rxdconst.soldpasswordlabel
+msgid "&Old password:"
+msgstr "&Eski şifre:"
+
+#: rxdconst.sopenafterexport
+msgid "Open after export"
+msgstr "Dışa aktardıktan sonra aç"
+
+#: rxdconst.sorientation
+msgid "Orientation"
+msgstr "Oryantasyon"
+
+#: rxdconst.sotheroptions
+msgid "Other options"
+msgstr "Diğer seçenekler"
+
+#: rxdconst.soutline
+msgid "Out line"
+msgstr "Dış çizgi"
+
+#: rxdconst.soverwriteexisting
+msgid "Overwrite existing"
+msgstr "Varolanın üzerine yaz"
+
+#: rxdconst.spagemargins
+msgid "Page margins"
+msgstr "Sayfa boşlukları"
+
+#: rxdconst.spagename
+msgid "Page name"
+msgstr "Sayfa ismi"
+
+#: rxdconst.spapertype
+msgid "Paper type"
+msgstr "Kağıt tipi"
+
+#: rxdconst.spasswordchanged
+msgid "Password changed"
+msgstr "Şifre değiştir"
+
+#: rxdconst.spasswordlabel
+msgid "&Password:"
+msgstr "&Şifre:"
+
+#: rxdconst.spasswordnotchanged
+msgid "Password not changed"
+msgstr "Şifre değiştirilemedi"
+
+#: rxdconst.spasswordsmismatch
+msgid "New password and confirmation not equal"
+msgstr "Yeni şifre ve onay şifresi eşit değil"
+
+#: rxdconst.spdfoptions
+msgid "PDF options"
+msgstr "PDF seçenekleri"
+
+#: rxdconst.sportrait
+msgid "Portrait"
+msgstr "Portre"
+
+#: rxdconst.sprevbutton
+msgid "&Prior"
+msgstr "&Önceki"
+
+#: rxdconst.sprintgrid
+msgid "Print grid"
+msgstr "Gridi Yazdır"
+
+#: rxdconst.sprintoptions
+msgid "Print options"
+msgstr "Yazdırma seçenekleri"
+
+#: rxdconst.squickfilter
+msgid "Quick filter"
+msgstr "Hızlı filtre"
+
+#: rxdconst.sregistration
+msgid "Register"
+msgstr "Kayıt"
+
+#: rxdconst.sreporttitle
+msgid "Report title"
+msgstr "Rapor başlığı"
+
+#: rxdconst.sretrylogin
+msgid "Retry to connect with database?"
+msgstr "Veritabanına yeniden bağlanılsın mı?"
+
+#: rxdconst.srightcaption
+msgid "Right"
+msgstr "Sağ"
+
+#: rxdconst.srxallfields
+msgid "All fields"
+msgstr "Tüm alanlar"
+
+#: rxdconst.srxascendign
+msgid "Ascendign"
+msgstr "Artan"
+
+#: rxdconst.srxborrowstructure
+msgid "Borrow structure..."
+msgstr "Borç yapısı ..."
+
+#: rxdconst.srxcopyonlymetadata
+msgid "Copy only metadata"
+msgstr "Sadece metadatayı kopyala"
+
+#: rxdconst.srxdbgridallfilter
+msgid "(All values)"
+msgstr "(Tüm değerler)"
+
+#: rxdconst.srxdbgridcopycellvalue
+msgid "Copy cell value"
+msgstr "Hücre değerini kopyala"
+
+#: rxdconst.srxdbgridemptyfilter
+msgctxt "rxdconst.srxdbgridemptyfilter"
+msgid "(Empty)"
+msgstr "(Boş)"
+
+#: rxdconst.srxdbgridfilter
+msgid "Filter data"
+msgstr "Veriyi filtrele"
+
+#: rxdconst.srxdbgridfilterclear
+msgctxt "rxdconst.srxdbgridfilterclear"
+msgid "Clear filter"
+msgstr "Filtreyi temizle"
+
+#: rxdconst.srxdbgridfiltersimple
+msgid "Filter in table"
+msgstr "Tablodaki filtre"
+
+#: rxdconst.srxdbgridfind
+msgctxt "rxdconst.srxdbgridfind"
+msgid "Find data"
+msgstr "Veri ara"
+
+#: rxdconst.srxdbgridfindcaption
+msgctxt "rxdconst.srxdbgridfindcaption"
+msgid "Find data"
+msgstr "Veri ara"
+
+#: rxdconst.srxdbgridfindcasesens
+msgid "Case sensetive"
+msgstr "Harfe duyarlı"
+
+#: rxdconst.srxdbgridfinddirecion
+msgid "Direction"
+msgstr "Yön"
+
+#: rxdconst.srxdbgridfindinallfileds
+msgid "Find in all fields"
+msgstr ""
+
+#: rxdconst.srxdbgridfindonfield
+msgid "Find on field"
+msgstr "Alanda bul"
+
+#: rxdconst.srxdbgridfindpartial
+msgid "Partial key"
+msgstr "Birincil anahtar"
+
+#: rxdconst.srxdbgridfindrangeall
+msgid "All"
+msgstr "Tümü"
+
+#: rxdconst.srxdbgridfindrangeback
+msgid "Backward"
+msgstr "Geri"
+
+#: rxdconst.srxdbgridfindrangeforw
+msgid "Forward"
+msgstr "İleri"
+
+#: rxdconst.srxdbgridfindtext
+msgid "Text to find"
+msgstr "Bulunacak metin"
+
+#: rxdconst.srxdbgridnotemptyfilter
+msgid "(Not empty)"
+msgstr "(Boş değil)"
+
+#: rxdconst.srxdbgridoptimizecolwidth
+msgid "Optimize column width"
+msgstr "Sütun genişliğini optimize et"
+
+#: rxdconst.srxdbgridselapplycaption
+msgctxt "rxdconst.srxdbgridselapplycaption"
+msgid "Apply"
+msgstr "Uygula"
+
+#: rxdconst.srxdbgridselapplyhint
+msgid "Apply current column settings"
+msgstr "Geçerli sütun ayarlarını uygula"
+
+#: rxdconst.srxdbgridselcolcaption
+msgid "Grid columns"
+msgstr "Grid sütunları"
+
+#: rxdconst.srxdbgridselcolhint1
+msgid "Move selected column up"
+msgstr "Seçili sütunu yukarı taşı"
+
+#: rxdconst.srxdbgridselcolhint2
+msgid "Move selected column down"
+msgstr "Seçili sütunu aşağı taşı"
+
+#: rxdconst.srxdbgridselectallrows
+msgid "Select all rows"
+msgstr "Tüm satırları seç"
+
+#: rxdconst.srxdbgridselectcolumns
+msgid "Select visible columns"
+msgstr "Görünen sütunları seç"
+
+#: rxdconst.srxdbgridsortbycolumns
+msgid "Sort data for columns"
+msgstr "Sütunlar için verileri sırala"
+
+#: rxdconst.srxdbgridtoolscaption
+msgid "Totals row"
+msgstr "Toplam satır"
+
+#: rxdconst.srxdescending
+msgctxt "rxdconst.srxdescending"
+msgid "Descending"
+msgstr "Azalan"
+
+#: rxdconst.srxfieldslookupdisplay
+msgid "Fields as LookupDisplay"
+msgstr "Arama Ekranı Olarak Alanlar"
+
+#: rxdconst.srxfillfieldslookupdisp
+msgid "Fill fields in LookupDisplay property"
+msgstr "Arama Görüntüleme özelliğinde alanları doldurun"
+
+#: rxdconst.srxfillsortfieldsdisp
+msgid "Fill fields in SortField property"
+msgstr "Sıralama Alanı özelliğindeki alanları doldurun"
+
+#: rxdconst.srxfilterformapply
+msgctxt "rxdconst.srxfilterformapply"
+msgid "Apply"
+msgstr "Uygula"
+
+#: rxdconst.srxfilterformcaption
+msgid "Filter conditions"
+msgstr "Filtre koşulları"
+
+#: rxdconst.srxfilterformclear
+msgctxt "rxdconst.srxfilterformclear"
+msgid "Clear filter"
+msgstr "Filtreyi temizle"
+
+#: rxdconst.srxfilterformcondition
+msgid "Condition :"
+msgstr "Koşullar :"
+
+#: rxdconst.srxfilterformend
+msgid "end."
+msgstr "end."
+
+#: rxdconst.srxfilterformonfield
+msgid "On field :"
+msgstr "Alanda :"
+
+#: rxdconst.srxfilterformoperaion
+msgid "Operation :"
+msgstr "Operasyon :"
+
+#: rxdconst.srxfilterformoperand
+msgid "Operand :"
+msgstr "Operand :"
+
+#: rxdconst.srxfilterformselectexp
+msgid "Enter filter expression for data in table:"
+msgstr "Tablodaki veriler için filtre ifadesini girin:"
+
+#: rxdconst.srxfindmore
+msgid "Find more"
+msgstr "Daha fazla"
+
+#: rxdconst.srxselectdatasetstruct
+msgid "Select dataset to copy to"
+msgstr "Kopyalanacak veri kümesini seçin"
+
+#: rxdconst.srxsortbyformaddfield
+msgid "&Add field"
+msgstr "Ala&n ekle"
+
+#: rxdconst.srxsortbyformallfields
+msgid "&Fields in dataset:"
+msgstr "&Alanın veri kümesi:"
+
+#: rxdconst.srxsortbyformcaption
+msgid "Sort on field"
+msgstr "Alanı sırala"
+
+#: rxdconst.srxsortbyformcaseinsens
+msgid "&Case insensitive sort"
+msgstr "&Büyük/Küçük Harfe Duyarlı sırala"
+
+#: rxdconst.srxsortbyformmovednfield
+msgid "&Down"
+msgstr "&Aşağı"
+
+#: rxdconst.srxsortbyformmoveupfield
+msgid "&Up"
+msgstr "&Yukarı"
+
+#: rxdconst.srxsortbyformremovefield
+msgid "&Remove"
+msgstr "&Kaldır"
+
+#: rxdconst.srxsortbyformsortfields
+msgid "&Selected fields:"
+msgstr "&Seçilen alanlar:"
+
+#: rxdconst.srxsortbyformsortorder
+msgid "Select f&ield for sort data:"
+msgstr "Verileri &sıralamak için alan seçin:"
+
+#: rxdconst.srxsortfieldsdisplay
+msgid "Fields as SortField"
+msgstr "Sıralama Alanı Olarak Alanlar"
+
+#: rxdconst.srxsourcedataset
+msgid "Source dataset"
+msgstr "Kaynak veri kümesi"
+
+#: rxdconst.sservererrorlabel
+msgid "Server error"
+msgstr "Server hatası"
+
+#: rxdconst.ssetkeydata
+msgid "find"
+msgstr "bul"
+
+#: rxdconst.ssetuptotalrow
+msgid "Setup total row"
+msgstr "Toplam satırı ayarla"
+
+#: rxdconst.sshowcolumnheaderonallpage
+msgid "Show column header on all pages"
+msgstr "Tüm sayfalarda sütun başlığını göster"
+
+#: rxdconst.sshowfooter
+msgid "Show footer"
+msgstr "Altbilgiyi göster"
+
+#: rxdconst.sshowfootercolor
+msgid "Show footer color"
+msgstr "Altbilgi rengini göster"
+
+#: rxdconst.sshowgridcolor
+msgid "Show grid color"
+msgstr "Grid rengini göster"
+
+#: rxdconst.sshowpreview
+msgid "Show preview"
+msgstr ""
+
+#: rxdconst.sshowreporttitle
+msgid "Show report title"
+msgstr "Rapor başlığını göster"
+
+#: rxdconst.sshowtitle
+msgid "Show column title"
+msgstr "Sütun Başlığını Göster"
+
+#: rxdconst.ssorting
+msgid "Sorting"
+msgstr "Sıralama"
+
+#: rxdconst.sstandartfilter
+msgid "Standart filter"
+msgstr "Standart filtre"
+
+#: rxdconst.stitlecolor
+msgid "Title color"
+msgstr "Başlık rengi"
+
+#: rxdconst.stoolsexportpdf
+msgid "Export to PDF file"
+msgstr "PDF aktar"
+
+#: rxdconst.stoolsexportspeadsheet
+msgid "Export to speadsheet"
+msgstr "Excele aktar"
+
+#: rxdconst.stopcaption
+msgid "Top"
+msgstr "Üst"
+
+#: rxdconst.sunknownfieldtype
+#, object-pascal-format
+msgid "SUnknownFieldType %s"
+msgstr "SUnknownFieldType %s"
+
+#: rxdconst.sunknownxmldatasetformat
+msgid "Unknown XML Dataset format"
+msgstr "Bilinmeyen XML Veri Kümesi formatı"
+
+#: rxdconst.sunlockcaption
+msgid "Unlock"
+msgstr "Kilidini aç"
+
+#: rxdconst.sunlockhint
+msgid "Enter your password"
+msgstr "Şifreyi girin"
+
+#: rxdconst.suserawjpeg
+msgid "Use raw JPEG"
+msgstr "Raw JPEG kullan"
+
+#: rxdconst.susernamelabel
+msgid "&User name:"
+msgstr "&Kullanıcı adı:"
+
