@@ -1316,6 +1316,7 @@ resourcestring
   sIncludeAllFrom                 = 'Include all from %s';
   sApply                          = 'Apply';
   sUsePGShedule                   = 'Use pgShedule (if avaliable)';
+  sUsePGBouncer                   = 'Connecting via pgBouncer';
   sSrcPageName                    = 'Source page name';
   sAvallableTags                  = 'Avallable tags:';
   sToInsertTableName              = '%TABLE_NAME% - to insert table name';

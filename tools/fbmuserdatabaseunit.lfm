@@ -1,7 +1,7 @@
 object UserDBModule: TUserDBModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
-  Height = 581
+  Height = 608
   HorizontalOffset = 318
   VerticalOffset = 129
   Width = 906
@@ -158,6 +158,14 @@ object UserDBModule: TUserDBModule
       '  db_connection_plugin_data_variable_value VARCHAR(255) /* Значение переменной */,'
       ' PRIMARY KEY (db_database_id, db_connection_plugin_data_class_type, db_connection_plugin_data_variable_name)'
       ' CONSTRAINT fk_db_connection_plugin_data_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
+      ');'
+      ''
+      'CREATE TABLE db_connection_options('
+      '  db_database_id INTEGER,'
+      '  db_connection_options_name VARCHAR(100),'
+      '  db_connection_options_value VARCHAR(500),'
+      '  PRIMARY KEY (db_database_id, db_connection_options_name)'
+      '  CONSTRAINT fk_db_connection_options_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
       ');'
       ''
       'COMMIT;'
@@ -334,8 +342,8 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 448
-    Top = 14
+    Left = 592
+    Top = 8
   end
   object quOldSysConst: TZQuery
     Connection = OldUserDB
@@ -347,8 +355,8 @@ object UserDBModule: TUserDBModule
       '  sys_const'
     )
     Params = <>
-    Left = 496
-    Top = 14
+    Left = 640
+    Top = 8
   end
   object usFolders: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1070,8 +1078,8 @@ object UserDBModule: TUserDBModule
       '  db_folders'
     )
     Params = <>
-    Left = 496
-    Top = 72
+    Left = 640
+    Top = 66
   end
   object usParamsHistory: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -2948,8 +2956,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 496
-    Top = 136
+    Left = 640
+    Top = 130
   end
   object quSQLPagesUpdSO: TZQuery
     Connection = UserDB
@@ -3040,8 +3048,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 600
-    Top = 14
+    Left = 744
+    Top = 8
   end
   object usConnectionPlugins: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -3176,6 +3184,180 @@ object UserDBModule: TUserDBModule
       ReadOnly = False
       Required = False
       Size = 1020
+    end
+  end
+  object UpdDB3: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'PRAGMA foreign_keys=OFF;'
+      'BEGIN TRANSACTION;'
+      ''
+      'CREATE TABLE IF NOT EXISTS db_connection_options('
+      '  db_database_id INTEGER,'
+      '  db_connection_options_name VARCHAR(100),'
+      '  db_connection_options_value VARCHAR(500),'
+      '  PRIMARY KEY (db_database_id, db_connection_options_name)'
+      '  CONSTRAINT fk_db_connection_options_1 FOREIGN KEY (db_database_id) REFERENCES db_database (db_database_id) ON UPDATE CASCADE ON DELETE CASCADE'
+      ');'
+      ''
+      ' COMMIT; '
+    )
+    Connection = UserDB
+    Delimiter = ';'
+    Left = 744
+    Top = 66
+  end
+  object quDBOptions: TZQuery
+    Connection = UserDB
+    UpdateObject = usDBOptions
+    SQL.Strings = (
+      'select'
+      '  db_connection_options.db_database_id,'
+      '  db_connection_options.db_connection_options_name,'
+      '  db_connection_options.db_connection_options_value'
+      'from'
+      '  db_connection_options'
+    )
+    Params = <>
+    Left = 392
+    Top = 136
+    object quDBOptionsdb_database_id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'db_database_id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quDBOptionsdb_connection_options_name: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_options_name'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object quDBOptionsdb_connection_options_value: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_options_value'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 2000
+    end
+  end
+  object usDBOptions: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM db_connection_options'
+      'WHERE'
+      '  ((db_connection_options.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_connection_options.db_database_id = :OLD_db_database_id)) AND'
+      '  ((db_connection_options.db_connection_options_name IS NULL AND :OLD_db_connection_options_name IS NULL) OR (db_connection_options.db_connection_options_name = :OLD_db_connection_options_name))'
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO db_connection_options'
+      '  (db_database_id, db_connection_options_name, db_connection_options_value)'
+      'VALUES'
+      '  (:db_database_id, :db_connection_options_name, :db_connection_options_value)'
+    )
+    ModifySQL.Strings = (
+      'UPDATE db_connection_options SET'
+      '  db_database_id = :db_database_id,'
+      '  db_connection_options_name = :db_connection_options_name,'
+      '  db_connection_options_value = :db_connection_options_value'
+      'WHERE'
+      '  ((db_connection_options.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_connection_options.db_database_id = :OLD_db_database_id)) AND'
+      '  ((db_connection_options.db_connection_options_name IS NULL AND :OLD_db_connection_options_name IS NULL) OR (db_connection_options.db_connection_options_name = :OLD_db_connection_options_name))'
+    )
+    UseSequenceFieldForRefreshSQL = False
+    Left = 432
+    Top = 136
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_connection_options_name'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_connection_options_value'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_db_database_id'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_db_connection_options_name'
+        ParamType = ptUnknown
+      end>
+  end
+  object quDBOptionsItems: TZQuery
+    Connection = UserDB
+    UpdateObject = usDBOptions
+    SQL.Strings = (
+      'select'
+      '  db_connection_options.db_database_id,'
+      '  db_connection_options.db_connection_options_name,'
+      '  db_connection_options.db_connection_options_value'
+      'from'
+      '  db_connection_options'
+      'where'
+      '  db_connection_options.db_database_id = :db_database_id'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end>
+    Left = 472
+    Top = 136
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_id'
+        ParamType = ptUnknown
+      end>
+    object quDBOptionsItemsdb_database_id: TLargeintField
+      FieldKind = fkData
+      FieldName = 'db_database_id'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quDBOptionsItemsdb_connection_options_name: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_options_name'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 400
+    end
+    object quDBOptionsItemsdb_connection_options_value: TStringField
+      FieldKind = fkData
+      FieldName = 'db_connection_options_value'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 2000
     end
   end
 end

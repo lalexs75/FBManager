@@ -816,6 +816,7 @@ type
     FDescription: string;
     FOnInternalError: TInternalError;
     FPassword: string;
+    FProperties: TStrings;
     FReportManagerFolder: string;
     FServerName: string;
     FSPEditLazzyMode: boolean;
@@ -952,6 +953,7 @@ type
     property ImageIndex:integer read GetImageIndex;
     property SQLEngileFeatures:TSQLEngileFeatures read FSQLEngileFeatures;
     property ConnectionPlugins:TSQLEngineConnectionPlugins read FConnectionPlugins;
+    property Properties:TStrings read FProperties;
     //
     property OnNewObjectByKind:TObjectByKind read FOnNewObjectByKind write FOnNewObjectByKind;
     property OnEditObject:TDBObjectEvent read FOnEditObject write FOnEditObject;
@@ -1869,6 +1871,7 @@ end;
 constructor TSQLEngineAbstract.Create;
 begin
   inherited Create;
+  FProperties:=TStringList.Create;
   FGroups:=TDBObjectsList.Create(true);
   FConnectionPlugins:=TSQLEngineConnectionPlugins.Create;
   InternalInitEngine;
@@ -1885,6 +1888,7 @@ begin
   FreeAndNil(FCashedItems);
   FreeAndNil(FTypeList);
   FreeAndNil(FGroups);
+  FreeAndNil(FProperties);
   inherited Destroy;
 end;
 

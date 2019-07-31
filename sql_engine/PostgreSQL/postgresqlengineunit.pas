@@ -1007,7 +1007,9 @@ type
     //
     FOnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent;
     function GetAutovacuumOptions: TPGAutovacuumOptions;
+    function GetUsePGBouncer: Boolean;
     procedure OnSQLScriptDirective(Sender: TObject; Directive, Argument: AnsiString; var StopExecution: Boolean);
+    procedure SetUsePGBouncer(AValue: Boolean);
     procedure ZSQLProcessorAfterExecute(Processor: TZSQLProcessor; StatementIndex: Integer);
   public
     constructor Create; override;
@@ -1059,6 +1061,7 @@ type
     property SecurityRoot:TDBRootObject read FSecurityRoot;
     property UsePGShedule:Boolean read FUsePGShedule write FUsePGShedule;
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
+    property UsePGBouncer:Boolean read GetUsePGBouncer write SetUsePGBouncer;
     property AutovacuumOptions:TPGAutovacuumOptions read GetAutovacuumOptions;
     //property ServerVersion
     property IDTypeTrigger:integer read FIDTypeTrigger;           //Переменная для привязки типа функции-тригера к данным в БД
@@ -2783,6 +2786,7 @@ begin
 
   if AValue then
   begin
+    FPGConnection.Properties.Clear;
     FPGConnection.HostName:=ServerName;
     FPGConnection.Database:=DataBaseName;
     FPGConnection.User:=UserName;
@@ -2790,6 +2794,8 @@ begin
 {$IFNDEF WINDOWS}
     FPGConnection.Properties.Values['application_name']:=ExtractFileName(ParamStr(0));
 {$ENDIF}
+    if UsePGBouncer then
+      FPGConnection.Properties.Values['EMULATE_PREPARES']:='True';
 
     FPGSysDB.HostName:=ServerName;
     FPGSysDB.Database:='postgres';
@@ -2798,6 +2804,8 @@ begin
     {$IFNDEF WINDOWS}
     FPGSysDB.Properties.Values['application_name']:=ExtractFileName(ParamStr(0));
     {$ENDIF}
+    if UsePGBouncer then
+      FPGSysDB.Properties.Values['EMULATE_PREPARES']:='True';
 
     if RemotePort <> 0 then
     begin
@@ -3115,11 +3123,21 @@ begin
     FOnExecuteSqlScriptProcessEvent(Argument, -1, SQLEngineCommonTypesUnit.stNone);
 end;
 
+procedure TSQLEnginePostgre.SetUsePGBouncer(AValue: Boolean);
+begin
+  Properties.Values['UsePGBouncer']:=BoolToStr(AValue, true);
+end;
+
 function TSQLEnginePostgre.GetAutovacuumOptions: TPGAutovacuumOptions;
 begin
   if not FAutovacuumOptions.Enabled then
     RefreshAutovacuumOptions;
   Result:=FAutovacuumOptions;
+end;
+
+function TSQLEnginePostgre.GetUsePGBouncer: Boolean;
+begin
+  Result:=StrToBoolDef(Properties.Values['UsePGBouncer'], false);
 end;
 
 procedure TSQLEnginePostgre.ZSQLProcessorAfterExecute(

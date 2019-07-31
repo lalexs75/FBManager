@@ -220,7 +220,7 @@ implementation
 uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
   IBManDataInspectorUnit, SQLEngineInternalToolsUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
-  IBManMainUnit, LazUTF8, LazFileUtils
+  IBManMainUnit, LazUTF8, LazFileUtils, Variants
   {$IFNDEF WINDOWS}
   , iconvenc
   {$ENDIF}
@@ -701,6 +701,15 @@ begin
 
   if Assigned(FSQLEngine) then
   begin
+    FSQLEngine.Properties.Clear;
+    UserDBModule.quDBOptions.First;
+    while not UserDBModule.quDBOptions.EOF do
+    begin
+      if UserDBModule.quDBOptionsdb_database_id.AsInteger = ADB.FieldByName('db_database_id').AsInteger then
+        FSQLEngine.Properties.Values[UserDBModule.quDBOptionsdb_connection_options_name.AsString]:=UserDBModule.quDBOptionsdb_connection_options_value.AsString;
+      UserDBModule.quDBOptions.Next;
+    end;
+
     FSQLEngine.Load(ADB);
     for i:=0 to FSQLEngine.ConnectionPlugins.Count-1 do
       FSQLEngine.ConnectionPlugins.Load(ADBPlugins);
@@ -732,7 +741,8 @@ end;
 
 procedure TDataBaseRecord.Save;
 var
-  S: String;
+  S, SName, SValue: String;
+  i: Integer;
 begin
   if not Assigned(FSQLEngine) then exit;
   if SQLEngine.DatabaseID > 0 then
@@ -764,7 +774,25 @@ begin
   FSQLEngine.ConnectionPlugins.Save(UserDBModule.quConnectionPlugins);
   UserDBModule.quConnectionPlugins.Close;
 
-  //UserDBModule.quDatabasesItemdb_database_id,
+
+  UserDBModule.quDBOptionsItems.ParamByName('db_database_id').AsInteger:=SQLEngine.DatabaseID;
+  UserDBModule.quDBOptionsItems.Open;
+  for i:=0 to FSQLEngine.Properties.Count-1 do
+  begin
+    SName:=FSQLEngine.Properties.Names[i];
+    SValue:=FSQLEngine.Properties.ValueFromIndex[i];
+    if UserDBModule.quDBOptionsItems.Locate('db_database_id;db_connection_options_name', VarArrayOf([SQLEngine.DatabaseID, SName]), []) then
+      UserDBModule.quDBOptionsItems.Edit
+    else
+    begin
+      UserDBModule.quDBOptionsItems.Append;
+      UserDBModule.quDBOptionsItemsdb_database_id.AsInteger:=SQLEngine.DatabaseID;
+      UserDBModule.quDBOptionsItemsdb_connection_options_name.AsString:=SName;
+    end;
+    UserDBModule.quDBOptionsItemsdb_connection_options_value.AsString:=SValue;
+    UserDBModule.quDBOptionsItems.Post;
+  end;
+  UserDBModule.quDBOptionsItems.Close;
 end;
 
 function TDataBaseRecord.Edit:boolean;

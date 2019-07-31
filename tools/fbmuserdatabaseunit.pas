@@ -42,6 +42,13 @@ type
     quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField;
     quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField;
     quConnectionPluginsdb_database_id: TLargeintField;
+    quDBOptionsItems: TZQuery;
+    quDBOptionsdb_connection_options_name: TStringField;
+    quDBOptionsdb_connection_options_value: TStringField;
+    quDBOptionsdb_database_id: TLargeintField;
+    quDBOptionsItemsdb_connection_options_name: TStringField;
+    quDBOptionsItemsdb_connection_options_value: TStringField;
+    quDBOptionsItemsdb_database_id: TLargeintField;
     UpdDB2: TZSQLProcessor;
     quOldDatabases: TZQuery;
     quDatabasesItem: TZQuery;
@@ -171,6 +178,7 @@ type
     quSysConstsys_consts_value_type: TLargeintField;
     quSysConstsys_const_name: TStringField;
     quSysConstsys_const_value: TStringField;
+    UpdDB3: TZSQLProcessor;
     UserDB: TZConnection;
     InitDB: TZSQLProcessor;
     OldUserDB: TZConnection;
@@ -185,6 +193,7 @@ type
     quSQLPages: TZQuery;
     quSQLPagesUpdSO: TZQuery;
     quConnectionPlugins: TZQuery;
+    quDBOptions: TZQuery;
     ZReadOnlyQuery1: TZReadOnlyQuery;
     usFolders: TZUpdateSQL;
     usDatabases: TZUpdateSQL;
@@ -200,6 +209,7 @@ type
     usSQLFolders: TZUpdateSQL;
     usSQLPages: TZUpdateSQL;
     usConnectionPlugins: TZUpdateSQL;
+    usDBOptions: TZUpdateSQL;
     procedure DataModuleDestroy(Sender: TObject);
   private
     procedure SystemVariablesLoad;
@@ -209,6 +219,7 @@ type
     procedure InternalCheckDBVersion;
     procedure InternalConvertDB;
     procedure InternalUpdate2;
+    procedure InternalUpdate3;
 
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
@@ -382,6 +393,9 @@ begin
     else
     if CVer < 2 then
       InternalUpdate2;
+
+    if CVer < 3 then
+      InternalUpdate3;
     UserDB.Connect;
     SystemVariablesLoad;
   end;
@@ -457,6 +471,13 @@ procedure TUserDBModule.InternalUpdate2;
 begin
   UserDB.Connect;
   UpdDB2.Execute;
+  UserDB.Disconnect;
+end;
+
+procedure TUserDBModule.InternalUpdate3;
+begin
+  UserDB.Connect;
+  UpdDB3.Execute;
   UserDB.Disconnect;
 end;
 

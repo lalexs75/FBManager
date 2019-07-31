@@ -1243,6 +1243,7 @@ begin
   UserDBModule.quFolders.Close;
 
   UserDBModule.quDatabases.Open;
+  UserDBModule.quDBOptions.Open;
   while not UserDBModule.quDatabases.EOF do
   begin
     aNode:=TreeView1.Items.AddChild(nil, '');
@@ -1253,6 +1254,7 @@ begin
     DBList.Add(PP);
     UserDBModule.quDatabases.Next;
   end;
+  UserDBModule.quDBOptions.Close;
   UserDBModule.quDatabases.Close;
 
   for F in Folders do F.AfterLoad;

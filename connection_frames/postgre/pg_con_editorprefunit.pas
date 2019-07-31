@@ -37,6 +37,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     DirectoryEdit1: TDirectoryEdit;
     Label1: TLabel;
   private
@@ -71,6 +72,7 @@ begin
   CheckBox2.Caption:=sLazzyModeLocalVariablesTrigger;
   Label1.Caption:=sReportFolder;
   CheckBox3.Caption:=sUsePGShedule;
+  CheckBox4.Caption:=sUsePGBouncer;
 end;
 
 procedure Tpg_con_EditorPrefPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
@@ -81,7 +83,10 @@ begin
   DirectoryEdit1.Text:=ASQLEngine.ReportManagerFolder;
 
   if ASQLEngine is TSQLEnginePostgre then
+  begin
     CheckBox3.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGShedule;
+    CheckBox4.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGBouncer;
+  end;
 end;
 
 procedure Tpg_con_EditorPrefPage.SaveParams;
@@ -91,7 +96,10 @@ begin
   FSQLEngine.ReportManagerFolder:=DirectoryEdit1.Text;
 
   if FSQLEngine is TSQLEnginePostgre then
+  begin
     TSQLEnginePostgre(FSQLEngine).UsePGShedule:=CheckBox3.Checked;
+    TSQLEnginePostgre(FSQLEngine).UsePGBouncer:=CheckBox4.Checked;
+  end;
 end;
 
 function Tpg_con_EditorPrefPage.PageName: string;
@@ -116,6 +124,7 @@ begin
   FSQLEngine:=ASQLEngine;
 
   CheckBox3.Visible:=ASQLEngine is TSQLEnginePostgre;
+  CheckBox4.Visible:=ASQLEngine is TSQLEnginePostgre;
 end;
 
 end.

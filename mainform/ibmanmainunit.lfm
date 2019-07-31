@@ -570,7 +570,6 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object ApplicationProperties1: TApplicationProperties
     OnException = ApplicationProperties1Exception
-    OnIdle = ApplicationProperties1Idle
     OnHint = ApplicationProperties1Hint
     Left = 704
     Top = 56

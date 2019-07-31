@@ -9,9 +9,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 24
+    Height = 23
     Top = 6
-    Width = 233
+    Width = 217
     BorderSpacing.Around = 6
     Caption = 'Lazzy mode local variables in SP'
     TabOrder = 0
@@ -21,9 +21,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 36
-    Width = 264
+    Height = 23
+    Top = 35
+    Width = 248
     BorderSpacing.Around = 6
     Caption = 'Lazzy mode local variables in triggers'
     TabOrder = 1
@@ -33,9 +33,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 66
-    Width = 85
+    Height = 17
+    Top = 64
+    Width = 82
     BorderSpacing.Around = 6
     Caption = 'Report folder'
     ParentColor = False
@@ -47,8 +47,8 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 92
+    Height = 34
+    Top = 87
     Width = 392
     ShowHidden = False
     ButtonWidth = 23
@@ -64,11 +64,23 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = DirectoryEdit1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 135
-    Width = 205
+    Height = 23
+    Top = 127
+    Width = 191
     BorderSpacing.Around = 6
     Caption = 'Use pgShedule (if avaliable)'
     TabOrder = 3
+  end
+  object CheckBox4: TCheckBox[5]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 156
+    Width = 184
+    BorderSpacing.Around = 6
+    Caption = 'Connecting via pgBouncer'
+    TabOrder = 4
   end
 end

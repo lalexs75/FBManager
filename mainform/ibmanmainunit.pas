@@ -146,7 +146,6 @@ type
     MainMenu1: TMainMenu;
     procedure ApplicationProperties1Exception(Sender: TObject; E: Exception);
     procedure ApplicationProperties1Hint(Sender: TObject);
-    procedure ApplicationProperties1Idle(Sender: TObject; var Done: Boolean);
     procedure dbConnectExecute(Sender: TObject);
     procedure dbCreateExecute(Sender: TObject);
     procedure dbDisconnectExecute(Sender: TObject);
@@ -546,19 +545,7 @@ end;
 
 procedure TfbManagerMainForm.ApplicationProperties1Hint(Sender: TObject);
 begin
-  { TODO : Необходимо выделить в отдульную процедуру убирание служебных символов }
   StatusBar1.Panels[3].Text:=StringReplace(StringReplace(Application.Hint, #13, ' ', [rfReplaceAll]), #10, ' ', [rfReplaceAll]);
-end;
-
-procedure TfbManagerMainForm.ApplicationProperties1Idle(Sender: TObject;
-  var Done: Boolean);
-begin
-{  if (WindowTabs.LockCount = 0) and not Assigned(Screen.OnActiveFormChange) then
-  begin
-    Screen.OnActiveFormChange:=@(fbManagerMainForm.TabsActiveFormChange);
-    if Assigned(fbManDataInpectorForm) then
-      fbManDataInpectorForm.listWindows.OnClick:=@(fbManDataInpectorForm.listWindowsClick);
-  end;}
 end;
 
 procedure TfbManagerMainForm.dbConnectExecute(Sender: TObject);

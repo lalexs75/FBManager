@@ -5452,6 +5452,10 @@ msgstr "Существующая функция"
 msgid "Use existing generator"
 msgstr "Использовать существующий генератор"
 
+#: fbmstrconstunit.susepgbouncer
+msgid "Connecting via pgBouncer"
+msgstr ""
+
 #: fbmstrconstunit.susepgshedule
 msgid "Use pgShedule (if avaliable)"
 msgstr "Использовать pgShedule (если доступен)"
