@@ -1771,4 +1771,20 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 432
     Top = 480
   end
+  object sPGSystem: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sPGAm'
+        Lines.Strings = (
+          'select'
+          '  pg_am.amname'
+          'from'
+          '  pg_am'
+          ''
+        )
+      end>
+    Left = 968
+    Top = 96
+  end
 end

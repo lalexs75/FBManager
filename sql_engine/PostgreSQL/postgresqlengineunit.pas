@@ -967,6 +967,7 @@ type
     FIDTypeEventTrigger:integer; //Переменная для привязки типа функции-тригера к данным в БД
     FIDTypeFDWHandler:integer;
     FIDTypeLangHandler:integer;
+    FAccessMethod: TStringList;
   private
     FSchemasRoot:TPGSchemasRoot;
     FSecurityRoot:TDBRootObject;//TPGSecurityRoot;
@@ -1051,6 +1052,8 @@ type
     procedure ShowObjectGetItem(Item:integer; out ItemName:string; out ItemValue:boolean);override;
     procedure ShowObjectSetItem(Item:integer; ItemValue:boolean);override;
 
+    procedure AccessMethodList(const AList:TStrings; ARefresh:Boolean = false);
+
     //
     class function GetEngineName: string; override;
     property PGConnection: TZConnection read FPGConnection;
@@ -1099,7 +1102,7 @@ type
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses
-  rxlogging,
+  rxlogging, rxdbutils,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
@@ -3165,6 +3168,8 @@ begin
   FreeAndNil(FAutovacuumOptions);
   FreeAndNil(FPGConnection);
   FreeAndNil(FPGSysDB);
+  if Assigned(FAccessMethod) then
+    FreeAndNil(FAccessMethod);
   inherited Destroy;
 end;
 
@@ -3402,6 +3407,25 @@ procedure TSQLEnginePostgre.ShowObjectSetItem(Item: integer; ItemValue: boolean
   );
 begin
 
+end;
+
+procedure TSQLEnginePostgre.AccessMethodList(const AList: TStrings; ARefresh: Boolean = false);
+var
+  Q: TZQuery;
+begin
+  if not Assigned(FAccessMethod) then
+    FAccessMethod:=TStringList.Create;
+
+  if (FAccessMethod.Count = 0) or ARefresh then
+  begin
+    FAccessMethod.Clear;
+    Q:=GetSQLQuery(pgSqlTextModule.sPGSystem['sPGAm']);
+    Q.Open;
+    FieldValueToStrings(Q, 'amname', FAccessMethod);
+    Q.Free;
+  end;
+
+  AList.Assign(FAccessMethod);
 end;
 
 { TPGQueryControl }

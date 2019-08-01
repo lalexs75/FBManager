@@ -35,6 +35,7 @@ type
     pgFDWobj: TStrHolder;
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGSystem: TRxTextHolder;
     sql_PG_LangList: TRxTextHolder;
     sqlTableSpaces: TRxTextHolder;
     sForeignObj: TRxTextHolder;

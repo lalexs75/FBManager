@@ -224,6 +224,8 @@ var
 begin
   rxIndexFields.CloseOpen;
 
+  TSQLEnginePostgre(DBObject.OwnerDB).AccessMethodList(cbAcessMetod.Items);
+
   edtIndexName.Enabled:=DBObject.State = sdboCreate;
 
   if DBObject.State = sdboEdit then
