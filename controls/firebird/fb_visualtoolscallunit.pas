@@ -67,7 +67,7 @@ uses fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
   fdbm_cf_LogUnit,           //Модуль содержит 2-ю страницу окна подключения к БД (протоколирование операций с БД)
   fbm_cf_BuckupUnit,         //Модуль содержит 3-ю страницу окна подключения к БД (параметры архивации БД)
   fbm_cf_RestoreUnit,        //Модуль содержит 4-ю страницу окна подключения к БД (параметры востановления БД)
-  fdbm_cf_DisplayDataParamsUnit, fdbm_DescriptionUnit,//Модуль содержит страницу окна подключения к БД (параметры отображения данных в таблице)
+  fdbm_cf_DisplayDataParamsUnit, fdbm_DescriptionUnit, fdbm_ShowObjectsUnit,//Модуль содержит страницу окна подключения к БД (параметры отображения данных в таблице)
   fbmpgTableCheckConstaintUnit,
 
   cfFireBirdOptionsUnit,     //Модуль содержит окно параметров работы с FireBird - общие настройки программы
@@ -312,7 +312,7 @@ end;
 
 class function TFireBirdVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=8;
+  Result:=9;
 end;
 
 class function TFireBirdVisualTools.ConnectionDlgPage(
@@ -327,7 +327,8 @@ begin
     4:Result:=TfbmCFTransactionFrame.Create(ASQLEngine as TSQLEngineFireBird, AOwner);
     5:Result:=TfdbmCFDisplayDataParamsPage.Create(ASQLEngine as TSQLEngineFireBird, AOwner);
     6:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEngineFireBird, AOwner);
-    7:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+    7:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
+    8:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

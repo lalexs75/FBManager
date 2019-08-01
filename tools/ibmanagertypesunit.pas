@@ -1387,7 +1387,6 @@ begin
           begin
             Rec:=TDBInspectorRecord.CreateGroup((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, G);
             Rec.Caption:=G.Caption;
-            //Rec.FImageIndex:=DBObjectKindFolderImages[G.DBObjectKind];
             FObjectList.Add(Rec);
             Rec.Refresh;
           end;
@@ -1401,7 +1400,6 @@ begin
         begin
           Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, FDBGroup[i]);
           Rec.Caption:=FDBGroup.ObjName[i];
-          //Rec.FImageIndex:=GetImageIndex;
           FObjectList.Add(Rec);
         end;
       end;
@@ -1421,6 +1419,15 @@ begin
     end;
     FList.Free;
     FNewList.Free;
+  end
+  else
+  if Assigned(DBObject) and (ussExpandObjectDetails in DBObject.OwnerDB.UIShowSysObjects) then
+  begin
+    if DBObject.DBObjectKind = okTable then
+    begin
+      Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, 'AAAA'), OwnerDB, nil);
+      Rec.FImageIndex:=0;
+    end;
   end;
 end;
 

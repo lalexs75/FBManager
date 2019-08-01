@@ -38,7 +38,7 @@ type
                     );
 
 type
-  TUIShowSysObject = (ussSystemTable, ussSystemDomain, ussSystemView);
+  TUIShowSysObject = (ussSystemTable, ussSystemDomain, ussSystemView, ussExpandObjectDetails);
   TUIShowSysObjects = set of TUIShowSysObject;
 
   TUIParam = (upSqlEditor, upUserName, upPassword, upLocal, upRemote);

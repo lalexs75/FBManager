@@ -54,9 +54,8 @@ type
   end;
 
 implementation
-uses   fbmStrConstUnit,
-  fdbm_cf_LogUnit, fdbm_DescriptionUnit, fdbm_ssh_ParamsUnit,
-  pg_con_EditorPrefUnit,
+uses   fbmStrConstUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
+  fdbm_ssh_ParamsUnit, fdbm_ShowObjectsUnit, pg_con_EditorPrefUnit,
 
   fbmpgACLEditUnit,
   fbmTableEditorDataUnit, fbmObjectEditorDescriptionUnit,
@@ -150,7 +149,7 @@ end;
 
 class function TMySQLVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=5;
+  Result:=6;
 end;
 
 class function TMySQLVisualTools.ConnectionDlgPage(
@@ -162,7 +161,8 @@ begin
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine , AOwner);
     2:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine , AOwner);
     3:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
-    4:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+    4:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
+    5:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

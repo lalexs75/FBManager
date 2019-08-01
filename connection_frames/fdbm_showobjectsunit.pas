@@ -75,6 +75,7 @@ end;
 procedure Tfdbm_ShowObjectsPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
 begin
   cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
+  CheckBox1.Checked:=ussExpandObjectDetails in ASQLEngine.UIShowSysObjects;
 end;
 
 procedure Tfdbm_ShowObjectsPage.SaveParams;
@@ -82,7 +83,12 @@ begin
   if cbShowSystemObjects.Checked then
     FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussSystemTable]
   else
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable]
+    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable];
+
+  if CheckBox1.Checked then
+    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussExpandObjectDetails]
+  else
+    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussExpandObjectDetails];
 end;
 
 function Tfdbm_ShowObjectsPage.PageName: string;
