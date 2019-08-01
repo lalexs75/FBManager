@@ -35,7 +35,6 @@ type
 
   Tpg_con_MainPage = class(TConnectionDlgPage)
     cbServerName: TComboBox;
-    cbShowSystemObjects: TCheckBox;
     CB_ServerVersion: TComboBox;
     DividerBevel1: TDividerBevel;
     Edit1: TEdit;
@@ -181,7 +180,6 @@ begin
   Label6.Caption:=sUserName1;
   Label7.Caption:=sPassword;
   Label14.Caption:=sServerVersion1;
-  cbShowSystemObjects.Caption:=sShowSystemObjects;
   DividerBevel1.Caption:=sOtherOptions;
   Label12.Caption:=sConnectionString;
 end;
@@ -194,7 +192,6 @@ begin
   edtPassword.Text:=ASQLEngine.Password;
   edtAliasName.Text      := ASQLEngine.AliasName;
   cbServerName.Text:=ASQLEngine.ServerName;
-  cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
   edtPort.Value:=TSQLEnginePostgre(ASQLEngine).RemotePort;
   CB_ServerVersion.ItemIndex:=Ord(TSQLEnginePostgre(ASQLEngine).ServerVersion);
   cbServerNameChange(nil);
@@ -210,10 +207,6 @@ begin
   FSQLEngine.ServerName:=cbServerName.Text;
   FSQLEngine.RemotePort:=edtPort.Value;
   FSQLEngine.ServerVersion:=TPGServerVersion(CB_ServerVersion.ItemIndex);
-  if cbShowSystemObjects.Checked then
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussSystemTable]
-  else
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable]
 end;
 
 function Tpg_con_MainPage.PageName: string;

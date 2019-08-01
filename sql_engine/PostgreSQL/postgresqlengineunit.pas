@@ -1047,11 +1047,11 @@ type
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
 
-    //Create connection dialog functions
+(*    //Create connection dialog functions
     function ShowObjectItem:integer;override;
     procedure ShowObjectGetItem(Item:integer; out ItemName:string; out ItemValue:boolean);override;
     procedure ShowObjectSetItem(Item:integer; ItemValue:boolean);override;
-
+*)
     procedure AccessMethodList(const AList:TStrings; ARefresh:Boolean = false);
 
     //
@@ -3391,7 +3391,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
 end;
 
-
+(*
 function TSQLEnginePostgre.ShowObjectItem: integer;
 begin
   Result:=0; //7;
@@ -3408,7 +3408,7 @@ procedure TSQLEnginePostgre.ShowObjectSetItem(Item: integer; ItemValue: boolean
 begin
 
 end;
-
+*)
 procedure TSQLEnginePostgre.AccessMethodList(const AList: TStrings; ARefresh: Boolean = false);
 var
   Q: TZQuery;

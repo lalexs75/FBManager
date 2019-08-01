@@ -5,9 +5,9 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 62
+    Width = 59
     BorderSpacing.Around = 6
     Caption = 'File name'
     ParentColor = False
@@ -19,8 +19,8 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 32
+    Height = 34
+    Top = 29
     Width = 302
     FileName = 'EditDBName'
     FilterIndex = 0
@@ -39,9 +39,9 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     AnchorSideTop.Control = EditDBName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 91
+    Height = 17
+    Top = 69
+    Width = 87
     BorderSpacing.Around = 6
     Caption = 'Database alias'
     ParentColor = False
@@ -53,23 +53,11 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 101
+    Height = 34
+    Top = 92
     Width = 302
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 1
-  end
-  object cbShowSystemObjects: TCheckBox[4]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = EditAliasName
-    AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 24
-    Top = 144
-    Width = 162
-    BorderSpacing.Around = 6
-    Caption = 'Show system objects'
-    TabOrder = 2
   end
 end

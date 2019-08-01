@@ -37,7 +37,6 @@ type
     cbServerName: TComboBox;
     CB_ServerVersion: TComboBox;
     CB_CharSet: TComboBox;
-    cbShowSystemObjects: TCheckBox;
     edtDBName: TComboBox;
     edtAliasName: TEdit;
     edtPassword: TEdit;
@@ -143,7 +142,6 @@ begin
   Label6.Caption:=sUserName1;
   Label7.Caption:=sPassword;
   Label14.Caption:=sServerVersion1;
-  cbShowSystemObjects.Caption:=sShowSystemObjects;
 end;
 
 procedure TMySQL_con_MainPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
@@ -161,7 +159,6 @@ begin
   edtPort.Value:=Ord(TSQLEngineMySQL(ASQLEngine).RemotePort);
   CB_ServerVersion.ItemIndex:=Ord(TSQLEngineMySQL(ASQLEngine).ServerVersion);
 
-  cbShowSystemObjects.Checked :=ussSystemTable in FSQLEngine.UIShowSysObjects;
 end;
 
 procedure TMySQL_con_MainPage.SaveParams;
@@ -174,11 +171,6 @@ begin
   FSQLEngine.CharSet:=CB_CharSet.Text;
   FSQLEngine.RemotePort:=edtPort.Value;
   FSQLEngine.ServerVersion:=TMySQLServerVersion(CB_ServerVersion.ItemIndex);
-
-  if cbShowSystemObjects.Checked then
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussSystemTable]
-  else
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable];
 
 //  FSQLEngine.AutoGrantObject:=cbShowSystemObjects.Checked;
 end;

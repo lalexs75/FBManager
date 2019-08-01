@@ -10,9 +10,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
     Left = 145
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 81
+    Width = 75
     BorderSpacing.Around = 6
     Caption = 'Server name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 53
+    Width = 52
     BorderSpacing.Around = 6
     Caption = 'Protocol'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Control = cbProtocol
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 70
-    Width = 83
+    Height = 17
+    Top = 64
+    Width = 79
     BorderSpacing.Around = 6
     Caption = 'Database file'
     ParentColor = False
@@ -45,9 +45,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Control = Edit1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 200
-    Width = 91
+    Height = 17
+    Top = 182
+    Width = 87
     BorderSpacing.Around = 6
     Caption = 'Database alias'
     ParentColor = False
@@ -57,9 +57,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Control = EditAliasName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 269
-    Width = 69
+    Height = 17
+    Top = 245
+    Width = 64
     BorderSpacing.Around = 6
     Caption = 'User name'
     ParentColor = False
@@ -70,9 +70,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Control = EditAliasName
     AnchorSideTop.Side = asrBottom
     Left = 341
-    Height = 20
-    Top = 269
-    Width = 61
+    Height = 17
+    Top = 245
+    Width = 58
     BorderSpacing.Around = 6
     Caption = 'Password'
     ParentColor = False
@@ -82,9 +82,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Control = EditPassword
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 338
-    Width = 29
+    Height = 17
+    Top = 308
+    Width = 28
     BorderSpacing.Around = 6
     Caption = 'Role'
     ParentColor = False
@@ -94,9 +94,9 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label8
     Left = 341
-    Height = 20
-    Top = 344
-    Width = 49
+    Height = 17
+    Top = 314
+    Width = 47
     BorderSpacing.Around = 6
     Caption = 'Charset'
     ParentColor = False
@@ -105,10 +105,10 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
   object Label14: TLabel[8]
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 475
-    Height = 20
+    Left = 479
+    Height = 17
     Top = 6
-    Width = 92
+    Width = 84
     Anchors = [akTop]
     BorderSpacing.Around = 6
     Caption = 'Server version'
@@ -120,8 +120,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
     Left = 12
-    Height = 32
-    Top = 32
+    Height = 29
+    Top = 29
     Width = 127
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -143,8 +143,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 226
+    Height = 34
+    Top = 205
     Width = 650
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -156,8 +156,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 37
-    Top = 295
+    Height = 34
+    Top = 268
     Width = 316
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -170,8 +170,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 347
-    Height = 37
-    Top = 295
+    Height = 34
+    Top = 268
     Width = 315
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -185,8 +185,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 6
-    Height = 37
-    Top = 364
+    Height = 34
+    Top = 331
     Width = 322
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -201,8 +201,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideBottom.Control = EditRole
     AnchorSideBottom.Side = asrBottom
     Left = 347
-    Height = 37
-    Top = 370
+    Height = 34
+    Top = 337
     Width = 315
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 6
@@ -232,10 +232,10 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 481
-    Height = 32
-    Top = 32
-    Width = 181
+    Left = 485
+    Height = 29
+    Top = 29
+    Width = 177
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -259,29 +259,15 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     TabOrder = 6
     Text = 'Firebird 1.5'
   end
-  object cbShowSystemObjects: TCheckBox[16]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = EditRole
-    AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 24
-    Top = 407
-    Width = 162
-    BorderSpacing.Left = 6
-    BorderSpacing.Top = 6
-    BorderSpacing.Bottom = 6
-    Caption = 'Show system objects'
-    TabOrder = 7
-  end
-  object cbServerName: TComboBox[17]
+  object cbServerName: TComboBox[16]
     AnchorSideLeft.Control = Label2
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = edtPort
     Left = 151
-    Height = 37
-    Top = 32
-    Width = 230
+    Height = 34
+    Top = 29
+    Width = 234
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 6
     BorderSpacing.Top = 6
@@ -289,17 +275,17 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     MaxLength = 65535
     OnChange = edtDBNameChange
     Sorted = True
-    TabOrder = 8
+    TabOrder = 7
   end
-  object edtDBName: TFileNameEdit[18]
+  object edtDBName: TFileNameEdit[17]
     AnchorSideLeft.Control = Label4
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 96
+    Height = 34
+    Top = 87
     Width = 650
     DialogTitle = 'Select database'
     DialogOptions = []
@@ -312,23 +298,23 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     BorderSpacing.Around = 6
     MaxLength = 0
     Spacing = 0
-    TabOrder = 9
+    TabOrder = 8
     OnChange = edtDBNameChange
     OnExit = edtDBNameExit
   end
-  object CheckBox1: TCheckBox[19]
+  object CheckBox1: TCheckBox[18]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = cbShowSystemObjects
+    AnchorSideTop.Control = EditRole
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 437
-    Width = 210
+    Height = 23
+    Top = 371
+    Width = 201
     BorderSpacing.Around = 6
     Caption = 'Auto grant on compile object'
-    TabOrder = 10
+    TabOrder = 9
   end
-  object Label1: TLabel[20]
+  object Label1: TLabel[19]
     AnchorSideLeft.Control = Owner
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
@@ -338,27 +324,27 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     Width = 1
     ParentColor = False
   end
-  object Label10: TLabel[21]
+  object Label10: TLabel[20]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 497
-    Width = 119
+    Height = 17
+    Top = 429
+    Width = 114
     BorderSpacing.Around = 6
     Caption = 'Client library name'
     ParentColor = False
   end
-  object FileNameEdit1: TFileNameEdit[22]
+  object FileNameEdit1: TFileNameEdit[21]
     AnchorSideLeft.Control = Label10
     AnchorSideTop.Control = Label10
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 523
+    Height = 34
+    Top = 452
     Width = 650
     FileName = 'FileNameEdit1'
     FilterIndex = 0
@@ -369,42 +355,42 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     BorderSpacing.Around = 6
     MaxLength = 0
     Spacing = 0
-    TabOrder = 11
+    TabOrder = 10
     Text = 'FileNameEdit1'
   end
-  object CheckBox2: TCheckBox[23]
+  object CheckBox2: TCheckBox[22]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 467
-    Width = 291
+    Height = 23
+    Top = 400
+    Width = 274
     BorderSpacing.Around = 6
     Caption = 'Always capitalize database objects names'
-    TabOrder = 12
+    TabOrder = 11
   end
-  object Label11: TLabel[24]
+  object Label11: TLabel[23]
     AnchorSideLeft.Control = cbServerName
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 387
-    Height = 20
+    Left = 391
+    Height = 17
     Top = 6
-    Width = 72
+    Width = 67
     BorderSpacing.Left = 6
     BorderSpacing.Top = 6
     Caption = 'Server port'
     ParentColor = False
   end
-  object edtPort: TSpinEdit[25]
+  object edtPort: TSpinEdit[24]
     AnchorSideLeft.Control = Label11
     AnchorSideTop.Control = Label11
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label14
-    Left = 393
-    Height = 37
-    Top = 32
+    Left = 397
+    Height = 34
+    Top = 29
     Width = 76
     Anchors = [akTop, akRight]
     BorderSpacing.Left = 12
@@ -412,16 +398,16 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     BorderSpacing.Right = 6
     MaxValue = 65536
     OnChange = edtDBNameChange
-    TabOrder = 13
+    TabOrder = 12
   end
-  object Edit1: TEdit[26]
+  object Edit1: TEdit[25]
     AnchorSideLeft.Control = Label12
     AnchorSideTop.Control = Label12
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = SpeedButton1
     Left = 12
-    Height = 29
-    Top = 165
+    Height = 26
+    Top = 150
     Width = 627
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 6
@@ -430,22 +416,22 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     BorderStyle = bsNone
     Color = clBtnFace
     ReadOnly = True
-    TabOrder = 14
+    TabOrder = 13
   end
-  object Label12: TLabel[27]
+  object Label12: TLabel[26]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = edtDBName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 139
-    Width = 112
+    Height = 17
+    Top = 127
+    Width = 108
     BorderSpacing.Around = 6
     Caption = 'Connection string'
     FocusControl = Edit1
     ParentColor = False
   end
-  object SpeedButton1: TSpeedButton[28]
+  object SpeedButton1: TSpeedButton[27]
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Edit1
     AnchorSideRight.Control = Owner
@@ -453,8 +439,8 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     AnchorSideBottom.Control = Edit1
     AnchorSideBottom.Side = asrBottom
     Left = 639
-    Height = 29
-    Top = 165
+    Height = 26
+    Top = 150
     Width = 23
     Anchors = [akTop, akRight, akBottom]
     BorderSpacing.Right = 6
@@ -489,7 +475,7 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     }
     OnClick = SpeedButton1Click
   end
-  object UIBDataBaseTest: TUIBDataBase[29]
+  object UIBDataBaseTest: TUIBDataBase[28]
     Params.Strings = (
       'sql_dialect=3'
       'lc_ctype=UTF8'

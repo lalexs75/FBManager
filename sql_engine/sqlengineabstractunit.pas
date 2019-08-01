@@ -903,9 +903,9 @@ type
     procedure FillDomainsList(const Items:TStrings; const ClearItems:boolean);virtual;
     procedure FillStdTypesList(const Items:TStrings);
 
-    function ShowObjectItem:integer;virtual;
-    procedure ShowObjectGetItem(Item:integer; out ItemName:string; out ItemValue:boolean);virtual;abstract;
-    procedure ShowObjectSetItem(Item:integer; ItemValue:boolean);virtual;abstract;
+    //function ShowObjectItem:integer;virtual;
+    //procedure ShowObjectGetItem(Item:integer; out ItemName:string; out ItemValue:boolean);virtual;abstract;
+    //procedure ShowObjectSetItem(Item:integer; ItemValue:boolean);virtual;abstract;
 
     function NewObjectByKind(AOwnerRoot:TDBRootObject; ADBObjectKind: TDBObjectKind):TDBObject;
     function EditObject(ADBObject:TDBObject):boolean;
@@ -2075,12 +2075,12 @@ begin
   for i:=0 to FTypeList.Count - 1 do
     Items.Add(FTypeList[i].TypeName);
 end;
-
+(*
 function TSQLEngineAbstract.ShowObjectItem: integer;
 begin
   Result:=0;
 end;
-
+*)
 function TSQLEngineAbstract.NewObjectByKind(AOwnerRoot: TDBRootObject;
   ADBObjectKind: TDBObjectKind): TDBObject;
 begin

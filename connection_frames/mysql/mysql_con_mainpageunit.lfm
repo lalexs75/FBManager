@@ -9,9 +9,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 81
+    Width = 75
     BorderSpacing.Around = 6
     Caption = 'Server name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
     Left = 303
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 72
+    Width = 67
     BorderSpacing.Around = 6
     Caption = 'Server port'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = edtUserName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 208
-    Width = 98
+    Height = 17
+    Top = 190
+    Width = 94
     BorderSpacing.Around = 6
     Caption = 'Database name'
     ParentColor = False
@@ -45,9 +45,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = edtDBName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 277
-    Width = 91
+    Height = 17
+    Top = 253
+    Width = 87
     BorderSpacing.Around = 6
     Caption = 'Database alias'
     ParentColor = False
@@ -57,9 +57,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = CB_ServerVersion
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 139
-    Width = 69
+    Height = 17
+    Top = 127
+    Width = 64
     BorderSpacing.Around = 6
     Caption = 'User name'
     ParentColor = False
@@ -70,9 +70,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = CB_ServerVersion
     AnchorSideTop.Side = asrBottom
     Left = 303
-    Height = 20
-    Top = 139
-    Width = 61
+    Height = 17
+    Top = 127
+    Width = 58
     BorderSpacing.Around = 6
     Caption = 'Password'
     ParentColor = False
@@ -82,9 +82,9 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = cbServerName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 92
+    Height = 17
+    Top = 69
+    Width = 84
     BorderSpacing.Around = 6
     Caption = 'Server version'
     ParentColor = False
@@ -96,8 +96,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 303
+    Height = 34
+    Top = 276
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -109,8 +109,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 37
-    Top = 165
+    Height = 34
+    Top = 150
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -124,8 +124,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 309
-    Height = 37
-    Top = 165
+    Height = 34
+    Top = 150
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -142,8 +142,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
     Left = 12
-    Height = 32
-    Top = 101
+    Height = 29
+    Top = 92
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -163,8 +163,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 37
-    Top = 32
+    Height = 34
+    Top = 29
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -181,8 +181,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 309
-    Height = 37
-    Top = 32
+    Height = 34
+    Top = 29
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -207,8 +207,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 372
+    Height = 34
+    Top = 339
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -220,42 +220,30 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Control = edtAliasName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 346
-    Width = 53
+    Height = 17
+    Top = 316
+    Width = 50
     BorderSpacing.Around = 6
     Caption = 'Char set'
     ParentColor = False
   end
-  object cbShowSystemObjects: TCheckBox[16]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = CB_CharSet
-    AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 24
-    Top = 415
-    Width = 162
-    BorderSpacing.Around = 6
-    Caption = 'Show system objects'
-    TabOrder = 7
-  end
-  object edtDBName: TComboBox[17]
+  object edtDBName: TComboBox[16]
     AnchorSideLeft.Control = Label4
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 234
+    Height = 34
+    Top = 213
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
     OnExit = edtDBNameExit
-    TabOrder = 8
+    TabOrder = 7
   end
-  object dbTest: TZConnection[18]
+  object dbTest: TZConnection[17]
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = False
     Properties.Strings = (
@@ -269,7 +257,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     Left = 144
     Top = 99
   end
-  object quCharsets: TZReadOnlyQuery[19]
+  object quCharsets: TZReadOnlyQuery[18]
     Connection = dbTest
     SQL.Strings = (
       'select'
@@ -304,7 +292,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
       Size = 128
     end
   end
-  object quDatabases: TZReadOnlyQuery[20]
+  object quDatabases: TZReadOnlyQuery[19]
     Connection = dbTest
     SQL.Strings = (
       'select'
@@ -328,7 +316,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
       Size = 256
     end
   end
-  object quCharsets2: TZReadOnlyQuery[21]
+  object quCharsets2: TZReadOnlyQuery[20]
     SQL.Strings = (
       'select'
       '  CHARACTER_SETS.CHARACTER_SET_NAME,'

@@ -3,29 +3,27 @@ inherited fdbm_ShowObjectsPage: Tfdbm_ShowObjectsPage
   Width = 676
   ClientHeight = 436
   ClientWidth = 676
-  object Memo1: TMemo[0]
-    Left = 506
-    Height = 436
-    Top = 0
-    Width = 170
-    Align = alClient
-    BorderStyle = bsNone
+  object cbShowSystemObjects: TCheckBox[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 23
+    Top = 6
+    Width = 151
+    BorderSpacing.Around = 6
+    Caption = 'Show system objects'
     TabOrder = 0
   end
-  object CheckListBox1: TCheckListBox[1]
-    Left = 0
-    Height = 436
-    Top = 0
-    Width = 501
-    Align = alLeft
-    ItemHeight = 0
+  object CheckBox1: TCheckBox[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbShowSystemObjects
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 35
+    Width = 138
+    BorderSpacing.Around = 6
+    Caption = 'Expand subobjects'
     TabOrder = 1
-    TopIndex = -1
-  end
-  object Splitter1: TSplitter[2]
-    Left = 501
-    Height = 436
-    Top = 0
-    Width = 5
   end
 end

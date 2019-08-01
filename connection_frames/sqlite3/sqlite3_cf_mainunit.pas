@@ -13,7 +13,6 @@ type
   { TConnectionSQLite3MainPage }
 
   TConnectionSQLite3MainPage = class(TConnectionDlgPage)
-    cbShowSystemObjects: TCheckBox;
     EditAliasName: TEdit;
     EditDBName: TFileNameEdit;
     Label1: TLabel;
@@ -40,7 +39,6 @@ uses LazUTF8, LazFileUtils, fbmStrConstUnit;
 procedure TConnectionSQLite3MainPage.Localize;
 begin
   inherited Localize;
-  cbShowSystemObjects.Caption:=sShowSystemObjects;
   Label1.Caption:=sFileName;
   Label5.Caption:=sDatabaseAlias;
 end;
@@ -49,17 +47,12 @@ procedure TConnectionSQLite3MainPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
 begin
   EditDBName.Text:=ASQLEngine.DataBaseName;
   EditAliasName.Text      := ASQLEngine.AliasName;
-  cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
 end;
 
 procedure TConnectionSQLite3MainPage.SaveParams;
 begin
   FSQLEngine.DataBaseName:=EditDBName.Text;
   FSQLEngine.AliasName:=EditAliasName.Text;
-  if cbShowSystemObjects.Checked then
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussSystemTable]
-  else
-    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable];
 end;
 
 function TConnectionSQLite3MainPage.PageName: string;

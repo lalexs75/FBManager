@@ -34,7 +34,6 @@ type
   { TfbmCFMainFrame }
 
   TfbmCFMainFrame = class(TConnectionDlgPage)
-    cbShowSystemObjects: TCheckBox;
     CB_CharSet: TComboBox;
     cbProtocol: TComboBox;
     CB_ServerVersion: TComboBox;
@@ -162,7 +161,6 @@ begin
   Label14.Caption:=sServerVersion1;
   Label10.Caption:=sClientLibraryName;
   Label11.Caption:=sPort;
-  cbShowSystemObjects.Caption:=sShowSystemObjects;
   CheckBox1.Caption:=sAutoGrantOnCompileObject;
   CheckBox2.Caption:=sAlwaysCapitalizeDBObjectsNames;
   Label12.Caption:=sConnectionString;
@@ -185,7 +183,6 @@ begin
   cbProtocol.ItemIndex:=Ord(TSQLEngineFireBird(ASQLEngine).Protocol);
   CB_ServerVersion.ItemIndex:=Ord(TSQLEngineFireBird(ASQLEngine).ServerVersion);
 
-  cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
   CheckBox1.Checked:=TSQLEngineFireBird(ASQLEngine).AutoGrantObject;
   FileNameEdit1.FileName:=TSQLEngineFireBird(ASQLEngine).LibraryName;
   CheckBox2.Checked:=ASQLEngine.MiscOptions.ObjectNamesCharCase = ccoUpperCase;
@@ -205,11 +202,6 @@ begin
   FSQLEngineFireBird.RemotePort:=edtPort.Value;
   FSQLEngineFireBird.Protocol:=TUIBProtocol(cbProtocol.ItemIndex);
   FSQLEngineFireBird.ServerVersion:=TFBServerVersion(CB_ServerVersion.ItemIndex);
-
-  if cbShowSystemObjects.Checked then
-    FSQLEngineFireBird.UIShowSysObjects:=FSQLEngineFireBird.UIShowSysObjects + [ussSystemTable]
-  else
-    FSQLEngineFireBird.UIShowSysObjects:=FSQLEngineFireBird.UIShowSysObjects - [ussSystemTable];
 
   FSQLEngineFireBird.AutoGrantObject:=CheckBox1.Checked;
   FSQLEngineFireBird.LibraryName:=FileNameEdit1.FileName;

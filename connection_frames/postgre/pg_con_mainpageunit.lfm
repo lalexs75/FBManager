@@ -236,19 +236,7 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object cbShowSystemObjects: TCheckBox[16]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = DividerBevel1
-    AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 23
-    Top = 394
-    Width = 151
-    BorderSpacing.Around = 6
-    Caption = 'Show system objects'
-    TabOrder = 7
-  end
-  object Label12: TLabel[17]
+  object Label12: TLabel[16]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = edtDBName
     AnchorSideTop.Side = asrBottom
@@ -261,7 +249,7 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     FocusControl = Edit1
     ParentColor = False
   end
-  object Edit1: TEdit[18]
+  object Edit1: TEdit[17]
     AnchorSideLeft.Control = Label12
     AnchorSideTop.Control = Label12
     AnchorSideTop.Side = asrBottom
@@ -277,9 +265,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     BorderStyle = bsNone
     Color = clBtnFace
     ReadOnly = True
-    TabOrder = 8
+    TabOrder = 7
   end
-  object SpeedButton1: TSpeedButton[19]
+  object SpeedButton1: TSpeedButton[18]
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Edit1
     AnchorSideRight.Control = Owner
@@ -323,7 +311,7 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     }
     OnClick = SpeedButton1Click
   end
-  object pgTest: TZConnection[20]
+  object pgTest: TZConnection[19]
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = False
     Properties.Strings = (
@@ -334,7 +322,7 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     Left = 116
     Top = 71
   end
-  object quDBList: TZReadOnlyQuery[21]
+  object quDBList: TZReadOnlyQuery[20]
     Connection = pgTest
     SQL.Strings = (
       'select'

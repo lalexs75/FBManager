@@ -34,13 +34,13 @@ type
   { Tfdbm_ShowObjectsPage }
 
   Tfdbm_ShowObjectsPage = class(TConnectionDlgPage)
-    CheckListBox1: TCheckListBox;
-    Memo1: TMemo;
-    Splitter1: TSplitter;
+    cbShowSystemObjects: TCheckBox;
+    CheckBox1: TCheckBox;
   private
     FSQLEngine:TSQLEngineAbstract;
     procedure LoadConf;
   public
+    procedure Localize;override;
     procedure Activate;override;
     procedure LoadParams(ASQLEngine:TSQLEngineAbstract);override;
     procedure SaveParams;override;
@@ -61,32 +61,28 @@ begin
 
 end;
 
+procedure Tfdbm_ShowObjectsPage.Localize;
+begin
+  inherited Localize;
+  cbShowSystemObjects.Caption:=sShowSystemObjects;
+end;
+
 procedure Tfdbm_ShowObjectsPage.Activate;
 begin
   //inherited Activate;
 end;
 
 procedure Tfdbm_ShowObjectsPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
-var
-  i:integer;
-  S:string;
-  B:Boolean;
 begin
-  CheckListBox1.Items.Clear;
-  for i:=0 to FSQLEngine.ShowObjectItem - 1 do
-  begin
-    FSQLEngine.ShowObjectGetItem(i, S, B);
-    CheckListBox1.Items.Add(S);
-    CheckListBox1.Checked[i]:=B;
-  end;
+  cbShowSystemObjects.Checked:=ussSystemTable in ASQLEngine.UIShowSysObjects;
 end;
 
 procedure Tfdbm_ShowObjectsPage.SaveParams;
-var
-  i:integer;
 begin
-  for i:=0 to CheckListBox1.Items.Count - 1 do
-    FSQLEngine.ShowObjectSetItem(i, CheckListBox1.Checked[i]);
+  if cbShowSystemObjects.Checked then
+    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects + [ussSystemTable]
+  else
+    FSQLEngine.UIShowSysObjects:=FSQLEngine.UIShowSysObjects - [ussSystemTable]
 end;
 
 function Tfdbm_ShowObjectsPage.PageName: string;
