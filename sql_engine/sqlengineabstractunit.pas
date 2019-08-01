@@ -323,6 +323,7 @@ type
     function SQLScriptsApply:boolean;
 
     procedure MakeSQLStatementsList(AList:TStrings); virtual;
+    function MakeChildList:TStrings; virtual;
 
     procedure BeforeCreateObject;virtual;
     function AfterCreateObject:boolean;virtual;
@@ -538,7 +539,8 @@ type
     procedure Commit;virtual;
     procedure RollBack;virtual;
     function DataSet(ARecCountLimit:Integer):TDataSet;virtual;abstract;
-    procedure SetSqlAssistentData(const List: TStrings);override;
+    procedure SetSqlAssistentData(const List: TStrings); override;
+    function MakeChildList:TStrings; override;
     procedure RefreshFieldList; virtual; abstract;
 
     procedure TriggersListRefresh; virtual; abstract;
@@ -665,6 +667,7 @@ type
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
+    function MakeChildList:TStrings; override;
     property ProcedureBody:string read GetProcedureBody;
     procedure FillFieldList(List:TStrings; ACharCase:TCharCaseOptions; AFullNames:Boolean);override;
   end;
@@ -2648,6 +2651,11 @@ begin
   AList.AddObject('DDL', TObject(Pointer(0)));
 end;
 
+function TDBObject.MakeChildList: TStrings;
+begin
+  Result:=nil;
+end;
+
 procedure TDBObject.BeforeCreateObject;
 begin
 
@@ -3072,6 +3080,21 @@ begin
     List.Add(Fields[i].FieldName+' : '+Fields[i].FieldTypeName);
 end;
 
+function TDBDataSetObject.MakeChildList: TStrings;
+var
+  F: TDBField;
+begin
+  Result:=nil;
+  if (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
+  begin
+    if not Loaded then
+      RefreshObject;
+    Result:=TStringList.Create;
+    for F in Fields do
+      Result.AddObject(F.FieldName, TObject(Pointer(IntPtr(66))));
+  end;
+end;
+
 procedure TDBDataSetObject.RecompileTriggers;
 begin
 
@@ -3478,6 +3501,48 @@ begin
 
   for i:=0 to FFieldsOut.Count-1 do
     List.Add(sOutput + ' ' + FFieldsOut[i].FieldName);
+end;
+
+function TDBStoredProcObject.MakeChildList: TStrings;
+var
+  F: TDBField;
+  D: Integer;
+begin
+  Result:=nil;
+  if (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
+  begin
+    if not Loaded then
+      RefreshObject;
+    Result:=TStringList.Create;
+    for F in FieldsIN do
+    begin
+      case F.IOType of
+        spvtInput,
+        spvtInOut,
+        spvtVariadic:D:=85;
+        spvtOutput,
+        spvtTable:D:=86;
+      else
+        D:=-1;
+      end;
+      Result.AddObject(F.FieldName, TObject(Pointer(IntPtr(D))));
+    end;
+
+    for F in FFieldsOut do
+    begin
+      case F.IOType of
+        spvtInput,
+        spvtInOut,
+        spvtVariadic:D:=85;
+        spvtOutput,
+        spvtTable:D:=86;
+      else
+        D:=-1;
+      end;
+      Result.AddObject(F.FieldName, TObject(Pointer(IntPtr(D))));
+    end;
+
+  end;
 end;
 
 procedure TDBStoredProcObject.FillFieldList(List: TStrings;

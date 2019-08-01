@@ -1327,6 +1327,7 @@ end;
 
 function TDBInspectorRecord.Edit: boolean;
 begin
+  if not Assigned(DBObject) then exit(false);
   Result:=true;
   if not Assigned(ObjectEditor) then
   begin
@@ -1358,6 +1359,8 @@ var
   FList, FNewList: TStringList;
   G: TDBRootObject;
   D: TDBObject;
+  CL: TStrings;
+  RN: TTreeNode;
 begin
   if RecordType = rtDBGroup then
   begin
@@ -1401,7 +1404,8 @@ begin
           Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, FDBGroup[i]);
           Rec.Caption:=FDBGroup.ObjName[i];
           FObjectList.Add(Rec);
-        end;
+          Rec.Refresh;
+        end
       end;
 
       for i:=FObjectList.Count - 1 downto 0 do
@@ -1423,10 +1427,26 @@ begin
   else
   if Assigned(DBObject) and (ussExpandObjectDetails in DBObject.OwnerDB.UIShowSysObjects) then
   begin
-    if DBObject.DBObjectKind = okTable then
+    if DBObject.DBObjectKind in [okTable, okStoredProc, okFunction] then
     begin
-      Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, 'AAAA'), OwnerDB, nil);
-      Rec.FImageIndex:=0;
+      FOwner.DeleteChildren;
+      CL:=DBObject.MakeChildList;
+      if Assigned(CL) then
+      begin
+        for i:=0 to CL.Count-1 do
+        begin
+          RN:=(FOwner.TreeView as TTreeView).Items.AddChild(FOwner, CL[i]);
+          RN.ImageIndex:=IntPtr(CL.Objects[i]);
+          RN.SelectedIndex:=IntPtr(CL.Objects[i]);
+          RN.StateIndex:=IntPtr(CL.Objects[i]);
+
+(*          Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, CL[i]), OwnerDB, nil);
+          Rec.Caption:=CL[i];
+          Rec.FImageIndex:=IntPtr(CL.Objects[i]);
+          Rec.UpdateCaption; *)
+        end;
+        CL.Free;
+      end;
     end;
   end;
 end;
@@ -1459,6 +1479,7 @@ begin
       List.Add(ObjectName[i]);
   end
   else
+  if Assigned(DBObject) then
     DBObject.SetSqlAssistentData(List);
 end;
 
