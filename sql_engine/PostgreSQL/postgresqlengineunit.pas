@@ -5945,6 +5945,7 @@ begin
   FCmd.SchemaName:=SchemaName;
   FCmd.TableName:=Table.Caption;
   FCmd.Unique:=IndexUnique;
+  FCmd.IndexMethod:=FAccessMetod;
   for I in IndexFields do
   begin
     PI1:=FCmd.Fields.AddParam(I.FieldName);

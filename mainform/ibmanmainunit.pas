@@ -39,6 +39,8 @@ type
   { TfbManagerMainForm }
 
   TfbManagerMainForm = class(TForm)
+    MenuItem17: TMenuItem;
+    tlsDataBaseComparer: TAction;
     BookmarkImages: TImageList;
     ilDBObjects: TImageList;
     ImageListMain: TImageList;
@@ -166,6 +168,7 @@ type
     procedure optEditorsExecute(Sender: TObject);
     procedure optEnironmentExecute(Sender: TObject);
     procedure sysExitExecute(Sender: TObject);
+    procedure tlsDataBaseComparerExecute(Sender: TObject);
     procedure tlsDBInspectorExecute(Sender: TObject);
     procedure tlsExtractMetadataExecute(Sender: TObject);
     procedure tlsReportManagerExecute(Sender: TObject);
@@ -269,6 +272,11 @@ end;
 procedure TfbManagerMainForm.sysExitExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfbManagerMainForm.tlsDataBaseComparerExecute(Sender: TObject);
+begin
+  NotCompleteFunction;
 end;
 
 procedure TfbManagerMainForm.tlsDBInspectorExecute(Sender: TObject);
@@ -470,6 +478,10 @@ begin
 
   MakeToolsMenu;
   Screen.OnActiveFormChange:=@TabsActiveFormChange;
+
+  {$IFDEF WINDOWS}
+  tlsDataBaseComparer.Enabled:=false;
+  {$ENDIF}
 end;
 
 procedure TfbManagerMainForm.hlpNewsExecute(Sender: TObject);

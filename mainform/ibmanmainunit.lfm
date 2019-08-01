@@ -430,6 +430,11 @@ object fbManagerMainForm: TfbManagerMainForm
       ImageIndex = 32
       OnExecute = tlsReportManagerExecute
     end
+    object tlsDataBaseComparer: TAction
+      Category = 'Tools'
+      Caption = 'Dataиase сomparer'
+      OnExecute = tlsDataBaseComparerExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = ImageListMain
@@ -490,6 +495,9 @@ object fbManagerMainForm: TfbManagerMainForm
       object MenuItem29: TMenuItem
         Action = tlsSqlBuilder
         OnClick = tlsSqlBuilderExecute
+      end
+      object MenuItem17: TMenuItem
+        Action = tlsDataBaseComparer
       end
       object MenuItem30: TMenuItem
         Caption = '-'
