@@ -51,7 +51,7 @@ type
 
 implementation
 uses fbmStrConstUnit, fbmTableEditorFieldsUnit, fbmTableEditorDataUnit, fbmTableEditorIndexUnit,
-  fdbm_cf_DbfMainUnit, fdbm_cf_LogUnit;
+  fdbm_cf_DbfMainUnit, fdbm_cf_LogUnit, fdbm_ShowObjectsUnit;
 
 { TDBFVisualTools }
 
@@ -72,7 +72,7 @@ end;
 
 class function TDBFVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=2;
+  Result:=3;
 end;
 
 class function TDBFVisualTools.ConnectionDlgPage(
@@ -82,6 +82,7 @@ begin
   case APageNum of
     0:Result:=TfdbmCFDbfMainFrame.Create(ASQLEngine as TDBFEngine, AOwner);
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine, AOwner);
+    2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

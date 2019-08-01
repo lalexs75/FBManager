@@ -4495,6 +4495,10 @@ msgstr "Установить/Снять закладку"
 msgid "Shedule"
 msgstr "Расписание"
 
+#: fbmstrconstunit.sshowadditionalinformation
+msgid "Show additional information for object (fields/params/etc...)"
+msgstr "Отображать дополнительную информацию для объектов (поля/параметры и т.д.)"
+
 #: fbmstrconstunit.sshowallgrants
 msgid "Show all"
 msgstr "Отображать всё"

@@ -67,6 +67,7 @@ object UserDBModule: TUserDBModule
       '  db_database_use_log_meta_custom_charset BOOLEAN /* Признак использования не стандарной кодировки протоколирования метаданных */, '
       '  db_database_log_meta_custom_charset VARCHAR(150) /* Наименование кодировки для протоколирования метаданных */, '
       '  db_database_use_log_write_timestamp BOOLEAN /* Запись временной метки в файл протокола */,'
+      '  show_child_objects BOOLEAN,'
       ' CONSTRAINT fk_db_database_1 FOREIGN KEY (db_folders_id) REFERENCES db_folders (db_folders_id) ON UPDATE CASCADE ON DELETE SET NULL'
       ');'
       'CREATE TABLE sql_editor_folders('
@@ -501,7 +502,7 @@ object UserDBModule: TUserDBModule
       '   db_database_shedule, db_database_library_name, db_database_authentication_type, '
       '   db_database_auto_grant, db_database_use_log_meta, db_database_use_log_editor, '
       '   db_database_log_meta_filename, db_database_log_editor_filename, db_database_use_log_meta_custom_charset, '
-      '   db_database_use_log_write_timestamp, db_database_log_meta_custom_charset)'
+      '   db_database_use_log_write_timestamp, db_database_log_meta_custom_charset, show_child_objects)'
       'VALUES'
       '  (:db_database_id, :db_folders_id, :db_database_caption, :db_database_sql_engine, '
       '   :db_database_server_name, :db_database_database_name, :db_database_username, '
@@ -512,7 +513,7 @@ object UserDBModule: TUserDBModule
       '   :db_database_shedule, :db_database_library_name, :db_database_authentication_type, '
       '   :db_database_auto_grant, :db_database_use_log_meta, :db_database_use_log_editor, '
       '   :db_database_log_meta_filename, :db_database_log_editor_filename, :db_database_use_log_meta_custom_charset, '
-      '   :db_database_use_log_write_timestamp, :db_database_log_meta_custom_charset)'
+      '   :db_database_use_log_write_timestamp, :db_database_log_meta_custom_charset, :show_child_objects)'
     )
     ModifySQL.Strings = (
       'UPDATE db_database SET'
@@ -546,7 +547,8 @@ object UserDBModule: TUserDBModule
       '  db_database_log_editor_filename = :db_database_log_editor_filename,'
       '  db_database_use_log_meta_custom_charset = :db_database_use_log_meta_custom_charset,'
       '  db_database_use_log_write_timestamp = :db_database_use_log_write_timestamp,'
-      '  db_database_log_meta_custom_charset = :db_database_log_meta_custom_charset'
+      '  db_database_log_meta_custom_charset = :db_database_log_meta_custom_charset,'
+      '  show_child_objects = :show_child_objects'
       'WHERE'
       '  ((db_database.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_database.db_database_id = :OLD_db_database_id))'
     )
@@ -711,6 +713,11 @@ object UserDBModule: TUserDBModule
       end    
       item
         DataType = ftUnknown
+        Name = 'show_child_objects'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
         Name = 'OLD_db_database_id'
         ParamType = ptUnknown
       end>
@@ -750,7 +757,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_log_editor_filename,'
       '  db_database.db_database_use_log_meta_custom_charset,'
       '  db_database.db_database_use_log_write_timestamp,'
-      '  db_database.db_database_log_meta_custom_charset'
+      '  db_database.db_database_log_meta_custom_charset,'
+      '  db_database.show_child_objects'
       'from'
       '  db_database'
       'order by'
@@ -1066,6 +1074,16 @@ object UserDBModule: TUserDBModule
       ReadOnly = False
       Required = False
       Size = 600
+    end
+    object quDatabasesshow_child_objects: TBooleanField
+      FieldKind = fkData
+      FieldName = 'show_child_objects'
+      Index = 31
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
     end
   end
   object quOldFolders: TZQuery
@@ -2480,7 +2498,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_log_editor_filename,'
       '  db_database.db_database_use_log_meta_custom_charset,'
       '  db_database.db_database_use_log_write_timestamp,'
-      '  db_database.db_database_log_meta_custom_charset'
+      '  db_database.db_database_log_meta_custom_charset,'
+      '  db_database.show_child_objects'
       'from'
       '  db_database'
       'where'
@@ -2809,6 +2828,16 @@ object UserDBModule: TUserDBModule
       ReadOnly = False
       Required = False
       Size = 600
+    end
+    object quDatabasesItemshow_child_objects: TBooleanField
+      FieldKind = fkData
+      FieldName = 'show_child_objects'
+      Index = 31
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
     end
   end
   object quFoldersItem: TZQuery
@@ -3359,5 +3388,20 @@ object UserDBModule: TUserDBModule
       Required = False
       Size = 2000
     end
+  end
+  object UpdDB4: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'PRAGMA foreign_keys=OFF;'
+      'BEGIN TRANSACTION;'
+      ''
+      'ALTER TABLE db_database ADD COLUMN show_child_objects BOOLEAN;'
+      ''
+      ' COMMIT; '
+    )
+    Connection = UserDB
+    Delimiter = ';'
+    Left = 744
+    Top = 136
   end
 end

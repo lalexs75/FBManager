@@ -1905,6 +1905,9 @@ begin
   if AData.FieldByName('show_system_views').AsBoolean then
     UIShowSysObjects:=UIShowSysObjects + [ussSystemView];
 
+  if AData.FieldByName('show_child_objects').AsBoolean then
+    UIShowSysObjects:=UIShowSysObjects + [ussExpandObjectDetails];
+
   FDatabaseID:=AData.FieldByName('db_database_id').AsInteger;
   FDataBaseName:=AData.FieldByName('db_database_database_name').AsString;
   FUserName:=AData.FieldByName('db_database_username').AsString;
@@ -1927,6 +1930,7 @@ begin
   AData.FieldByName('show_system_domains').AsBoolean:=ussSystemDomain in FUIShowSysObjects;
   AData.FieldByName('show_system_tables').AsBoolean:=ussSystemTable in FUIShowSysObjects;
   AData.FieldByName('show_system_views').AsBoolean:=ussSystemView in FUIShowSysObjects;
+  AData.FieldByName('show_child_objects').AsBoolean:=ussExpandObjectDetails in FUIShowSysObjects;
   AData.FieldByName('db_database_database_name').AsString:=FDataBaseName;
   AData.FieldByName('db_database_username').AsString:=FUserName;
   AData.FieldByName('db_database_password').AsString:=FPassword;

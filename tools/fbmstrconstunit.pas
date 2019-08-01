@@ -688,6 +688,7 @@ resourcestring
   sConstraintDelete                 = 'Delete constraint';
   sServerVersion1                   = 'Server version';
   sShowSystemObjects                = 'Show system objects';
+  sShowAdditionalInformation        = 'Show additional information for object (fields/params/etc...)';
   sAutoGrantOnCompileObject         = 'Auto grant on compile object';
   sFetchAllDataFromTable            = 'Fetch all data from table';
   sAlwaysCapitalizeDBObjectsNames   = 'Always capitalize database objects names';

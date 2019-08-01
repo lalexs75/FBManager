@@ -4334,6 +4334,10 @@ msgstr ""
 msgid "Shedule"
 msgstr ""
 
+#: fbmstrconstunit.sshowadditionalinformation
+msgid "Show additional information for object (fields/params/etc...)"
+msgstr ""
+
 #: fbmstrconstunit.sshowallgrants
 msgid "Show all"
 msgstr ""

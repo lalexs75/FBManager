@@ -42,6 +42,8 @@ type
     quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField;
     quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField;
     quConnectionPluginsdb_database_id: TLargeintField;
+    quDatabasesItemshow_child_objects: TBooleanField;
+    quDatabasesshow_child_objects: TBooleanField;
     quDBOptionsItems: TZQuery;
     quDBOptionsdb_connection_options_name: TStringField;
     quDBOptionsdb_connection_options_value: TStringField;
@@ -179,6 +181,7 @@ type
     quSysConstsys_const_name: TStringField;
     quSysConstsys_const_value: TStringField;
     UpdDB3: TZSQLProcessor;
+    UpdDB4: TZSQLProcessor;
     UserDB: TZConnection;
     InitDB: TZSQLProcessor;
     OldUserDB: TZConnection;
@@ -220,6 +223,7 @@ type
     procedure InternalConvertDB;
     procedure InternalUpdate2;
     procedure InternalUpdate3;
+    procedure InternalUpdate4;
 
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
@@ -380,6 +384,9 @@ begin
 
     if CVer < 3 then
       InternalUpdate3;
+
+    if CVer < 4 then
+      InternalUpdate4;
     UserDB.Connect;
     SystemVariablesLoad;
   end;
@@ -462,6 +469,13 @@ procedure TUserDBModule.InternalUpdate3;
 begin
   UserDB.Connect;
   UpdDB3.Execute;
+  UserDB.Disconnect;
+end;
+
+procedure TUserDBModule.InternalUpdate4;
+begin
+  UserDB.Connect;
+  UpdDB4.Execute;
   UserDB.Disconnect;
 end;
 

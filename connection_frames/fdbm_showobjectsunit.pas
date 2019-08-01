@@ -65,6 +65,7 @@ procedure Tfdbm_ShowObjectsPage.Localize;
 begin
   inherited Localize;
   cbShowSystemObjects.Caption:=sShowSystemObjects;
+  CheckBox1.Caption:=sShowAdditionalInformation;
 end;
 
 procedure Tfdbm_ShowObjectsPage.Activate;
