@@ -1054,7 +1054,7 @@ procedure Tfdbm_SynEditorFrame.TextEditorShowHint(Sender: TObject;
   HintInfo: PHintInfo);
 var
   S, SHint, S1,  SF: String;
-  P: TDBObject;
+  P, P1: TDBObject;
   CP: TPoint;
   i: LongInt;
   F: TDBField;
@@ -1086,34 +1086,28 @@ begin
     P:=DBRecord.GetDBObject(S);
     if Assigned(P) then
     begin
-      if (SF<>'') and (P.DBObjectKind in [okTable, okView]) then
+      if (SF<>'') then
       begin
-        F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
-        if Assigned(F) then
+        if (P.DBObjectKind in [okTable, okView]) then
         begin
-          SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
-          if F.FieldDescription<>'' then;
-            SHint:=SHint + LineEnding + F.FieldDescription;
-          SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
-        end;
-      end
-(*      else
-      if (SF<>'') and (P.DBObjectKind in [okTable, okView]) then
-      begin
-        F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
-        if Assigned(F) then
+          F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
+          if Assigned(F) then
+          begin
+            SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
+            if F.FieldDescription<>'' then;
+              SHint:=SHint + LineEnding + F.FieldDescription;
+            SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
+          end;
+        end
+        else
+        if (P.DBObjectKind = okScheme) and (P is TDBRootObject) then
         begin
-          SHint:=F.FieldName + ' ' + F.FieldTypeName;
-          if F.FieldDescription<>'' then;
-            SHint:=SHint + LineEnding + F.FieldDescription;
-          SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
+          P1:=TDBRootObject(P).ObjByName(SF);
+          if Assigned(P1) then P:=P1;
         end;
-      end
-*)      ;
-
+      end;
       SHint:=SHint + ObjectKindToStr(P.DBObjectKind) + ' ' + P.CaptionFullPatch;
-      if P.Description <> '' then
-          SHint:=SHint + LineEnding + P.Description;
+      if P.Description <> '' then SHint:=SHint + LineEnding + P.Description;
 
     end;
     HintInfo^.HintStr:=SHint;
