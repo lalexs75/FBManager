@@ -351,19 +351,21 @@ var
   Node:TTreeNode;
   S:TStringList;
   F: TOIFolder;
+  SH: String;
 begin
   if ConfigValues.ByNameAsBoolean('oiShowObjDescAsHint', true) then
   begin
     Node:=TreeView1.GetNodeAt(X, Y);
     if Assigned(Node) and Assigned(Node.Data) then
     begin
+      //Application.CancelHint;
+
       if TObject(Node.Data) is TOIFolder then
       begin
         F:=TOIFolder(Node.Data);
-        TreeView1.Hint:=F.Description;
+        SH:=F.Description;
       end
       else
-      if TObject(Node.Data) is TDataBaseRecord then
       begin
         Rec:=TDataBaseRecord(Node.Data);
         if Rec is TDataBaseRecord then
@@ -371,13 +373,19 @@ begin
           S:=TStringList.Create;
           try
             Rec.SetSqlAssistentData(S);
-            TreeView1.Hint:=S.Text;
+            SH:=S.Text;
           finally
             S.Free;
           end;
         end
         else
-          TreeView1.Hint:=Rec.Description;
+          SH:=Rec.Description;
+        if TreeView1.Hint <> SH then
+        begin
+          Application.CancelHint;
+          TreeView1.Hint:=SH;
+          Application.ActivateHint(Mouse.CursorPos, true);
+        end;
       end;
     end
     else

@@ -88,7 +88,7 @@ type
     FDBGroup:TDBRootObject;
 
     FCaption: string;
-    procedure SetDescription(const AValue: string);virtual;
+    //procedure SetDescription(const AValue: string);virtual;
     function GetImageIndex:integer;virtual;
     function GetObjectType: string;virtual;
     function GetCaption: string;virtual;
@@ -127,7 +127,7 @@ type
     procedure FillFieldList(List:TStrings);virtual;
     property Caption:string read GetCaption write SetCaption;
     property CaptionFullPatch:string read GetCaptionFullPatch;
-    property Description:string read GetDescription write SetDescription;
+    property Description:string read GetDescription {write SetDescription};
     property ObjectType:string read GetObjectType;
 
     property Item[AName:string]:TDBInspectorRecord read GetItem;
@@ -1176,9 +1176,26 @@ begin
 end;
 
 function TDBInspectorRecord.GetDescription: string;
+var
+  St: TStrings;
 begin
   if Assigned(DBObject) then
-    Result:=DBObject.Description
+  begin
+    Result:=
+      ObjectKindToStr(DBObject.DBObjectKind) + ' ' + DBObject.CaptionFullPatch + LineEnding;
+(*
+    if DBObject.DBObjectKind in [okStoredProc, okFunction] then
+    begin
+      St:=DBObject.MakeChildList;
+      if Assigned(St) then
+      begin
+        Result:=Result + St.Text + LineEnding;
+        St.Free;
+      end;
+    end;
+*)
+    Result:=Result + DBObject.Description
+  end
   else
     Result:='';
 end;
@@ -1247,13 +1264,13 @@ begin
       Result:='';
   end;
 end;
-
+(*
 procedure TDBInspectorRecord.SetDescription(const AValue: string);
 begin
   DBObject.Description:=AValue;
   UpdateCaption;
 end;
-
+*)
 function TDBInspectorRecord.GetImageIndex: integer;
 begin
   if RecordType = rtDBObject then
