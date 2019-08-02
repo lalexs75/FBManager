@@ -131,7 +131,7 @@ inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
         Title.Orientation = toHorizontal
         Title.Caption = 'Sort order'
         Width = 150
-        FieldName = 'IndexSort'
+        FieldName = 'IndexSortOrder'
         EditButtons = <>
         Filter.Font.Style = [fsItalic]
         Filter.DropDownRows = 0
@@ -332,9 +332,9 @@ inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
         Size = 60
       end    
       item
-        Name = 'IndexSort'
-        DataType = ftBoolean
-        Precision = -1
+        Name = 'IndexSortOrder'
+        DataType = ftString
+        Size = 200
       end    
       item
         Name = 'Desc'
@@ -421,27 +421,26 @@ inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
       Required = False
       Size = 60
     end
-    object rxFKListIndexSort: TBooleanField
-      DisplayWidth = 5
-      FieldKind = fkData
-      FieldName = 'IndexSort'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
     object rxFKListDesc: TMemoField
       FieldKind = fkData
       FieldName = 'Desc'
-      Index = 8
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       BlobType = ftMemo
       Transliterate = False
+    end
+    object rxFKListIndexSortOrder: TStringField
+      FieldKind = fkData
+      FieldName = 'IndexSortOrder'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 200
     end
   end
   object RxDBGridPrint1: TRxDBGridPrint[7]

@@ -67,7 +67,7 @@ inherited fdbmTableEditorPKListFrame: TfdbmTableEditorPKListFrame
         Title.Orientation = toHorizontal
         Title.Caption = 'Sort order'
         Width = 80
-        FieldName = 'Sort'
+        FieldName = 'SortOrder'
         EditButtons = <>
         Filter.Font.Style = [fsItalic]
         Filter.DropDownRows = 0
@@ -172,8 +172,9 @@ inherited fdbmTableEditorPKListFrame: TfdbmTableEditorPKListFrame
         Size = 250
       end    
       item
-        Name = 'Sort'
-        DataType = ftInteger
+        Name = 'SortOrder'
+        DataType = ftString
+        Size = 200
       end>
     AfterOpen = rxPKListAfterClose
     AfterClose = rxPKListAfterClose
@@ -203,25 +204,25 @@ inherited fdbmTableEditorPKListFrame: TfdbmTableEditorPKListFrame
       Required = False
       Size = 30
     end
-    object rxPKListSort: TLongintField
-      DisplayWidth = 10
+    object rxPKListName: TStringField
       FieldKind = fkData
-      FieldName = 'Sort'
+      FieldName = 'Name'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+      Size = 500
     end
-    object rxPKListName: TStringField
+    object rxPKListSortOrder: TStringField
       FieldKind = fkData
-      FieldName = 'Name'
+      FieldName = 'SortOrder'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 500
+      Size = 200
     end
   end
   object dsPKList: TDataSource[2]

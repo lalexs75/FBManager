@@ -54,10 +54,10 @@ type
     rxIndexList: TRxMemoryData;
     rxIndexListActive: TBooleanField;
     rxIndexListCAPTION: TStringField;
-    rxIndexListDescending: TBooleanField;
     rxIndexListEXPRESSION: TStringField;
     rxIndexListIndex_Fields: TStringField;
     rxIndexListIndex_Num: TLongintField;
+    rxIndexListSortOrder: TStringField;
     rxIndexListUnique: TBooleanField;
     procedure indDeleteExecute(Sender: TObject);
     procedure indEditExecute(Sender: TObject);
@@ -83,7 +83,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, SQLEngineCommonTypesUnit;
+uses fbmStrConstUnit, fbmToolsUnit, SQLEngineCommonTypesUnit, sqlObjects;
 
 {$R *.lfm}
 
@@ -160,7 +160,10 @@ begin
     rxIndexListIndex_Fields.AsString:=TII.IndexField;
     rxIndexListUnique.AsBoolean:=TII.Unique;
     rxIndexListActive.AsBoolean:=TII.Active;
-    rxIndexListDescending.AsBoolean:=TII.Descending;
+
+    //rxIndexListDescending.AsBoolean:=TII.Descending;
+    rxIndexListSortOrder.AsString:=IndexSortOrderStr(TII.SortOrder);
+
     rxIndexList.Post;
   end;
 end;
@@ -183,7 +186,7 @@ begin
   RxDBGrid1.ColumnByFieldName('EXPRESSION').Title.Caption:=sIndexExpression;
   RxDBGrid1.ColumnByFieldName('Index_Fields').Title.Caption:=sOnFields;
   RxDBGrid1.ColumnByFieldName('Active').Title.Caption:=sActive;
-  RxDBGrid1.ColumnByFieldName('Descending').Title.Caption:=sDescending;
+  RxDBGrid1.ColumnByFieldName('SortOrder').Title.Caption:=sSortOrder;
   RxDBGrid1.ColumnByFieldName('Unique').Title.Caption:=sUnique;
 end;
 

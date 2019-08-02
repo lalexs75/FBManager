@@ -2379,6 +2379,8 @@ order by
     if not P.Loaded then
       P.RefreshObject;
     IndexField:=P.IndexFields.AsString;
+    if P.IndexFields.Count>0 then
+      SortOrder:=P.IndexFields[0].SortOrder;
   end;
 end;
 
@@ -4519,6 +4521,7 @@ begin
 
       Rec.OnUpdateRule:=StrToForeignKeyRule(Q.FieldByName('UPD_RULE').AsString);
       Rec.OnDeleteRule:=StrToForeignKeyRule(Q.FieldByName('DEL_RULE').AsString);
+//      Rec.IndexName:=Q.FieldByName('index_name').AsString;
 
       T:=TSQLEnginePostgre(OwnerDB).FindTableByID(Q.FieldByName('confrelid').AsInteger);
       if Assigned(T) then
@@ -4526,17 +4529,21 @@ begin
         Rec.FKTableName:=T.CaptionFullPatch;
         S:=Q.FieldByName('confkey').AsString;
         Rec.FKFieldName:=ConvertFieldList(S, T);
-      end;
 
-      if Rec.IndexOID > 0 then
-      begin
-        Ind:=TPGIndexItems(IndexItems).IndexItemByOID(Rec.IndexOID);
-        if Assigned(Ind) then
+
+        if Rec.IndexOID > 0 then
         begin
-          Rec.IndexName:=Ind.IndexName;
-          Rec.Index:=Ind;
+          if not T.FIndexListLoaded then
+            T.IndexListRefresh;
+          Ind:=TPGIndexItems(T.IndexItems).IndexItemByOID(Rec.IndexOID);
+          if Assigned(Ind) then
+          begin
+            Rec.IndexName:=Ind.IndexName;
+            Rec.Index:=Ind;
+          end;
         end;
       end;
+
       Q.Next;
     end;
   finally

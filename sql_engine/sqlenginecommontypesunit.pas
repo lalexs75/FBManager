@@ -365,7 +365,7 @@ type
     IndexField:string;
     Unique:boolean;
     Active:boolean;
-    Descending:boolean;
+    SortOrder:TIndexSortOrder;
     IsPrimary:boolean;
   end;
   TIndexItemClass = class of TIndexItem;

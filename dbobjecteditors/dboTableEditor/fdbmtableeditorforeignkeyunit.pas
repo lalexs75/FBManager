@@ -58,7 +58,7 @@ type
     rxFKListFK_Field: TStringField;
     rxFKListFK_Table: TStringField;
     rxFKListIndexName: TStringField;
-    rxFKListIndexSort: TBooleanField;
+    rxFKListIndexSortOrder: TStringField;
     rxFKListName: TStringField;
     rxFKListOnDelete: TStringField;
     rxFKListOnUpdate: TStringField;
@@ -222,7 +222,7 @@ begin
       rxFKListFK_Field.AsString:=P.FKFieldName;
 
       if Assigned(P.Index) then
-        rxFKListIndexSort.AsBoolean:=P.Index.Descending;
+        rxFKListIndexSortOrder.AsString:=IndexSortOrderStr(P.Index.SortOrder);
 
       rxFKList.Post;
     end;
@@ -247,7 +247,7 @@ begin
   RxDBGrid1.Columns[4].Title.Caption:=sUpdateRule;
   RxDBGrid1.Columns[5].Title.Caption:=sDeleteRule;
   RxDBGrid1.Columns[6].Title.Caption:=sIndexName;
-  RxDBGrid1.Columns[7].Title.Caption:=sSortOrder;
+  RxDBGrid1.ColumnByFieldName('IndexSortOrder').Title.Caption:=sSortOrder;
 
   actRefresh.Caption:=sDBNavHintRefresh;
   actNewFK.Caption:=sNewForeignKey;

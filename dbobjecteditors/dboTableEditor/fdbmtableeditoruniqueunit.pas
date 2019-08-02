@@ -52,7 +52,7 @@ type
     rxUnqListDescription: TStringField;
     rxUnqListField: TStringField;
     rxUnqListIndexName: TStringField;
-    rxUnqListIndexSort: TBooleanField;
+    rxUnqListIndexSortOrder: TStringField;
     rxUnqListName: TStringField;
     procedure actDropUNQExecute(Sender: TObject);
     procedure actNewUNQExecute(Sender: TObject);
@@ -182,7 +182,7 @@ begin
       if Assigned(P.Index) then
       begin
         rxUnqListField.AsString:=P.Index.IndexField;
-        rxUnqListIndexSort.AsBoolean:=P.Index.Descending;
+        rxUnqListIndexSortOrder.AsString:=IndexSortOrderStr(P.Index.SortOrder);
       end
       else
         rxUnqListField.AsString:=P.FieldList;
@@ -211,7 +211,7 @@ begin
   RxDBGrid1.ColumnByFieldName('Name').Title.Caption:=sName;
   RxDBGrid1.ColumnByFieldName('Field').Title.Caption:=sFieldName;
   RxDBGrid1.ColumnByFieldName('IndexName').Title.Caption:=sIndexName;
-  RxDBGrid1.ColumnByFieldName('IndexSort').Title.Caption:=sIndexSort;
+  RxDBGrid1.ColumnByFieldName('IndexSortOrder').Title.Caption:=sIndexSort;
   RxDBGrid1.ColumnByFieldName('Description').Title.Caption:=sDescription;
 end;
 

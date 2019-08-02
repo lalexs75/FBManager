@@ -855,7 +855,12 @@ var
 begin
   inherited Create;
   IndexName:=DS.FieldByName('KEY_NAME').AsString;
-  Descending:=DS.FieldByName('COLLATION').AsString<>'A';
+
+  if DS.FieldByName('COLLATION').AsString<>'A' then
+    SortOrder:=indDescending
+  else
+    SortOrder:=indAscending;
+
 
   S:='';
   while (not DS.EOF) and (IndexName = DS.FieldByName('KEY_NAME').AsString) do

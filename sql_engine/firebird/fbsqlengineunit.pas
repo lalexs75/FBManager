@@ -2212,7 +2212,12 @@ begin
       Rec:=IndexItems.Add(Trim(QIndex.Fields.ByNameAsString['rdb$index_name']));
       Rec.Unique:=QIndex.Fields.ByNameAsInteger['rdb$unique_flag']<>0;
       Rec.Active:=QIndex.Fields.ByNameAsInteger['rdb$index_inactive']<>0;
-      Rec.Descending:=QIndex.Fields.ByNameAsInteger['RDB$INDEX_TYPE'] = 1;
+
+      if QIndex.Fields.ByNameAsInteger['RDB$INDEX_TYPE'] = 1 then
+        Rec.SortOrder:=indDescending
+      else
+        Rec.SortOrder:=indAscending;
+      //Rec.Descending:=QIndex.Fields.ByNameAsInteger['RDB$INDEX_TYPE'] = 1;
       Rec.IndexField:=GetIndexFields(Rec.IndexName, false);
       QIndex.Next;
     end;

@@ -96,12 +96,11 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
         Footers = <>
       end    
       item
-        ButtonStyle = cbsCheckboxColumn
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
-        Title.Caption = 'Descending'
+        Title.Caption = 'Sort order'
         Width = 90
-        FieldName = 'Descending'
+        FieldName = 'SortOrder'
         EditButtons = <>
         Filter.Font.Style = [fsItalic]
         Filter.DropDownRows = 0
@@ -219,9 +218,10 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
         Precision = -1
       end    
       item
-        Name = 'Descending'
-        DataType = ftBoolean
+        Name = 'SortOrder'
+        DataType = ftString
         Precision = -1
+        Size = 250
       end    
       item
         Name = 'Index_Num'
@@ -271,22 +271,11 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       Required = False
       DisplayValues = 'True;False'
     end
-    object rxIndexListDescending: TBooleanField
-      DisplayWidth = 5
-      FieldKind = fkData
-      FieldName = 'Descending'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
     object rxIndexListIndex_Num: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Index_Num'
-      Index = 3
+      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -296,7 +285,7 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       DisplayWidth = 150
       FieldKind = fkData
       FieldName = 'Index_Fields'
-      Index = 4
+      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -307,7 +296,7 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       DisplayWidth = 150
       FieldKind = fkData
       FieldName = 'CAPTION'
-      Index = 5
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -318,6 +307,16 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       DisplayWidth = 250
       FieldKind = fkData
       FieldName = 'EXPRESSION'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxIndexListSortOrder: TStringField
+      FieldKind = fkData
+      FieldName = 'SortOrder'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

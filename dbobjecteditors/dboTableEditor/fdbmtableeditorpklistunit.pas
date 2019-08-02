@@ -54,7 +54,7 @@ type
     rxPKListIndex_Name: TStringField;
     rxPKListName: TStringField;
     rxPKListOnField: TStringField;
-    rxPKListSort: TLongintField;
+    rxPKListSortOrder: TStringField;
     procedure pkDropExecute(Sender: TObject);
     procedure pkNewExecute(Sender: TObject);
     procedure pkPrintExecute(Sender: TObject);
@@ -166,7 +166,7 @@ begin
       if Assigned(P.Index) then
       begin
         rxPKListOnField.AsString:=P.Index.IndexField;
-        rxPKListSort.AsInteger:=ord(P.Index.Descending);
+        rxPKListSortOrder.AsString:=IndexSortOrderStr(P.Index.SortOrder);
       end
       else
       begin
@@ -194,7 +194,7 @@ begin
   RxDBGrid1.ColumnByFieldName('Name').Title.Caption:=sPKName;
   RxDBGrid1.ColumnByFieldName('OnField').Title.Caption:=sOnField;
   RxDBGrid1.ColumnByFieldName('Index_Name').Title.Caption:=sIndexName;
-  RxDBGrid1.ColumnByFieldName('Sort').Title.Caption:=sSorting;
+  RxDBGrid1.ColumnByFieldName('SortOrder').Title.Caption:=sSorting;
 end;
 
 function TfdbmTableEditorPKListFrame.PageName: string;
