@@ -518,7 +518,7 @@ type
     function GetIndexCount: integer;
     function GetIndexItem(AItem: integer): TIndexItem;
   protected
-    FIndexItems:TList;
+    FIndexItems:TIndexItems;
     FIndexListLoaded:boolean;
     FDataSet:TDataSet;
     function GetFields: TDBFields;
@@ -533,6 +533,7 @@ type
     procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
     function GetEnableRename: boolean; override;
     procedure IndexArrayClear; virtual;
+    procedure IndexArrayCreate; virtual;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -568,6 +569,7 @@ type
 
     property UITableOptions:TUITableOptions read FUITableOptions write FUITableOptions;
     property Fields:TDBFields read GetFields;
+    property IndexItems:TIndexItems read FIndexItems; //index metatdata info
   end;
 
   { TDBIndex }
@@ -3006,17 +3008,14 @@ begin
 end;
 
 procedure TDBDataSetObject.IndexArrayClear;
-var
-  I:integer;
-  P:TIndexItem;
 begin
-  for i:=FIndexItems.Count - 1 downto 0 do
-  begin
-    P:=TIndexItem(FIndexItems[i]);
-    FIndexItems.Delete(i);
-    P.Free;
-  end;
+  FIndexItems.Clear;
   FIndexListLoaded:=false;
+end;
+
+procedure TDBDataSetObject.IndexArrayCreate;
+begin
+  FIndexItems:=TIndexItems.Create(TIndexItem);
 end;
 
 function TDBDataSetObject.GetIndexCount: integer;
@@ -3051,7 +3050,7 @@ constructor TDBDataSetObject.Create(const ADBItem: TDBItem;
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FFields:=TDBFields.Create(Self, GetDBFieldClass);
-  FIndexItems:=TList.Create;
+  IndexArrayCreate;
 end;
 
 destructor TDBDataSetObject.Destroy;

@@ -411,6 +411,18 @@ type
     constructor CreateFromDB(AOwner:TDBDataSetObject; DS:TDataSet);
   end;
 
+  { TPGIndexItems }
+
+  TPGIndexItems = class(TIndexItems)
+  public
+    function IndexItemByOID(AOID:Integer):TPGIndexItem;
+  end;
+
+  TPGForeignKeyRecord = class(TForeignKeyRecord)
+  public
+    IndexOID:integer;
+  end;
+
   TPGRule = class(TDBObject)
   private
     FRuleAction: TPGRuleAction;
@@ -531,6 +543,7 @@ type
     function GetDBFieldClass: TDBFieldClass; override;
     procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
     procedure InternalRefreshStatistic; override;
+    procedure IndexArrayCreate; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -636,12 +649,13 @@ type
   end;
 
   TPGMatView = class(TPGView)
-  protected
-    function GetDDLAlter : string; override;
-    function InternalGetDDLCreate: string; override;
   private
     FAutovacuumOptions: TPGAutovacuumOptions;
     FToastAutovacuumOptions: TPGAutovacuumOptions;
+  protected
+    function GetDDLAlter : string; override;
+    function InternalGetDDLCreate: string; override;
+    procedure IndexArrayCreate; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -1042,6 +1056,7 @@ type
     function FindTableByID(OID:integer):TPGTable;
     function FindUserByID(OID:integer):TDBObject;
     function FindUsrGroupByID(OID:integer):TDBObject;
+    function FindIndexByID(OID:integer):TPGIndex;
     function DBObjectByName(AName:string; ARefreshObject:boolean = true):TDBObject;override;
 
     procedure RefreshObjectsBeginFull;override;
@@ -1124,6 +1139,18 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGIndexItems }
+
+function TPGIndexItems.IndexItemByOID(AOID: Integer): TPGIndexItem;
+var
+  I: TIndexItem;
+begin
+  Result:=nil;
+  for I in Self do
+    if TPGIndexItem(I).OID = AOID then
+      Exit(TPGIndexItem(I));
 end;
 
 { TPGTriggerFunction }
@@ -1456,6 +1483,11 @@ begin
   end;
 end;
 
+procedure TPGMatView.IndexArrayCreate;
+begin
+  FIndexItems:=TPGIndexItems.Create(TPGIndexItem);
+end;
+
 constructor TPGMatView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -1570,8 +1602,8 @@ begin
     FQuery.Open;
     while not FQuery.Eof do
     begin
-      Rec:=TPGIndexItem.CreateFromDB(Self, FQuery);
-      FIndexItems.Add(Rec);
+      Rec:=FIndexItems.Add('') as TPGIndexItem;
+      Rec.CreateFromDB(Self, FQuery);
       FQuery.Next;
     end;
   finally
@@ -3361,6 +3393,28 @@ begin
   end;
 end;
 
+function TSQLEnginePostgre.FindIndexByID(OID: integer): TPGIndex;
+var
+  i, j: Integer;
+  P: TPGSchema;
+  Ind: TPGIndex;
+begin
+  Result:=nil;
+  for i:=0 to FSchemasRoot.CountGroups - 1 do
+  begin
+    P:=TPGSchema(FSchemasRoot.Groups[i]);
+    for j:=0 to P.FTablesRoot.CountObject -1 do
+    begin
+      Ind:=TPGIndex(P.FIndexs.Items[j]);
+      if Ind.FOID = OID then
+      begin
+        Result:=Ind;
+        exit;
+      end;
+    end;
+  end;
+end;
+
 function TSQLEnginePostgre.DBObjectByName(AName: string; ARefreshObject:boolean = true): TDBObject;
 var
   S:string;
@@ -3888,7 +3942,8 @@ begin
   Fields.SaveToSQLFields(FCmd.Fields);
 
 
-  if FConstraintList.Count =0 then
+  IndexListRefresh;
+//  if FConstraintList.Count =0 then
   begin
     RefreshConstraintPrimaryKey;
     RefreshConstraintForeignKey;
@@ -3931,7 +3986,6 @@ begin
 
   FCmd.Free;
 
-  IndexListRefresh;
   DoMakeIndexList;
 end;
 
@@ -4102,6 +4156,11 @@ begin
   FQuery.Close;
   FQuery.Free;
 
+end;
+
+procedure TPGTable.IndexArrayCreate;
+begin
+  FIndexItems:=TPGIndexItems.Create(TPGIndexItem);
 end;
 
 function TPGTable.GetCaptionFullPatch: string;
@@ -4301,8 +4360,8 @@ begin
     FQuery.Open;
     while not FQuery.Eof do
     begin
-      Rec:=TPGIndexItem.CreateFromDB(Self, FQuery);
-      FIndexItems.Add(Rec);
+      Rec:=FIndexItems.Add('') as TPGIndexItem;
+      Rec.CreateFromDB(Self, FQuery);
       FQuery.Next;
     end;
   finally
@@ -4436,9 +4495,13 @@ var
   Q:TZQuery;
   T:TPGTable;
   S:string;
-  Rec:TForeignKeyRecord;
+  Rec:TPGForeignKeyRecord;
+  Ind: TPGIndexItem;
 begin
   inherited RefreshConstraintForeignKey;
+  if not FIndexListLoaded then
+    IndexListRefresh;
+
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPgConstFK.ExpandMacros);
   try
     Q.ParamByName('conrelid').AsInteger:=FOID;
@@ -4446,9 +4509,10 @@ begin
     while not Q.Eof do
     begin
       { TODO : Необходимо читать описание ограничения }
-      Rec:=TForeignKeyRecord.Create;
+      Rec:=TPGForeignKeyRecord.Create;
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
+      Rec.IndexOID:=Q.FieldByName('conindid').AsInteger;
       S:=Q.FieldByName('conkey').AsString;
       Rec.FieldList:=ConvertFieldList(S, Self);
       Rec.Description:=Q.FieldByName('description').AsString;
@@ -4462,6 +4526,16 @@ begin
         Rec.FKTableName:=T.CaptionFullPatch;
         S:=Q.FieldByName('confkey').AsString;
         Rec.FKFieldName:=ConvertFieldList(S, T);
+      end;
+
+      if Rec.IndexOID > 0 then
+      begin
+        Ind:=TPGIndexItems(IndexItems).IndexItemByOID(Rec.IndexOID);
+        if Assigned(Ind) then
+        begin
+          Rec.IndexName:=Ind.IndexName;
+          Rec.Index:=Ind;
+        end;
       end;
       Q.Next;
     end;

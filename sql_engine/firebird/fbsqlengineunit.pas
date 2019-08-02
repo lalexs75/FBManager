@@ -2200,7 +2200,7 @@ procedure TFireBirdTable.IndexListRefresh;
 var
   I:integer;
   QIndex:TUIBQuery;
-  Rec:TIndexItem;
+  Rec: TIndexItem;
 begin
   IndexArrayClear;
   QIndex:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlIndexList);
@@ -2209,9 +2209,7 @@ begin
     QIndex.Open;
     while not QIndex.Eof do
     begin
-      Rec:=TIndexItem.Create;
-      FIndexItems.Add(Rec);
-      Rec.IndexName:=Trim(QIndex.Fields.ByNameAsString['rdb$index_name']);
+      Rec:=IndexItems.Add(Trim(QIndex.Fields.ByNameAsString['rdb$index_name']));
       Rec.Unique:=QIndex.Fields.ByNameAsInteger['rdb$unique_flag']<>0;
       Rec.Active:=QIndex.Fields.ByNameAsInteger['rdb$index_inactive']<>0;
       Rec.Descending:=QIndex.Fields.ByNameAsInteger['RDB$INDEX_TYPE'] = 1;

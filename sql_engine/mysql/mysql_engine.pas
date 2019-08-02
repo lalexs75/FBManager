@@ -149,6 +149,7 @@ type
     function GetTriggersCategoriesType(AItem: integer): TTriggerTypes;override;
     function GetRecordCount: integer; override;
     function GetDBFieldClass: TDBFieldClass; override;
+    procedure IndexArrayCreate; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -1596,6 +1597,11 @@ begin
   Result:=TMySQLField;
 end;
 
+procedure TMySQLTable.IndexArrayCreate;
+begin
+  FIndexItems:=TIndexItems.Create(TMySQLIndexItem);
+end;
+
 constructor TMySQLTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -1923,8 +1929,8 @@ begin
     FQuery.Open;
     while not FQuery.Eof do
     begin
-      Rec:=TMySQLIndexItem.CreateFromDB(Self, FQuery);
-      FIndexItems.Add(Rec);
+      Rec:=IndexItems.Add('') as TMySQLIndexItem;
+      Rec.CreateFromDB(Self, FQuery);
       FQuery.Next;
     end;
   finally

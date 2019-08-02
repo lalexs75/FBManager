@@ -138,6 +138,7 @@ procedure TfbmManagerTableEditorFKForm.CheckBox1Change(Sender: TObject);
 begin
   Label1.Enabled:=CheckBox1.Checked;
   edtIndexName.Enabled:=CheckBox1.Checked;
+  RadioGroup1.Enabled:=CheckBox1.Checked;
 
   if CheckBox1.Checked then
     CreateIndexName;

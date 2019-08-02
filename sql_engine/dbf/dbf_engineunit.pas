@@ -278,16 +278,10 @@ begin
   begin
     for i:=0 to TDbf(FDataSet).IndexDefs.Count-1 do
     begin
-      Rec:=TIndexItem.Create;
-      FIndexItems.Add(Rec);
-      Rec.IndexName:=Trim(TDbf(FDataSet).IndexDefs[i].Name);
+      Rec:=IndexItems.Add(Trim(TDbf(FDataSet).IndexDefs[i].Name));
       Rec.Unique:=ixUnique in TDbf(FDataSet).IndexDefs[i].Options;
       Rec.Active:=true;
       Rec.IndexField:=TDbf(FDataSet).IndexDefs[i].IndexFile;
-{
-ixPrimary, , ixDescending, ixCaseInsensitive,
-    ixExpression, ixNonMaintained
-}
     end;
   end;
 end;

@@ -15,9 +15,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideBottom.Control = edtIndexName
     AnchorSideBottom.Side = asrBottom
     Left = 12
-    Height = 20
-    Top = 191
-    Width = 74
+    Height = 17
+    Top = 178
+    Width = 70
     Anchors = [akLeft, akBottom]
     BorderSpacing.Left = 6
     Caption = 'Index name'
@@ -29,9 +29,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 56
+    Height = 17
+    Top = 69
+    Width = 53
     BorderSpacing.Around = 6
     Caption = 'FK name'
     ParentColor = False
@@ -41,9 +41,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 77
+    Width = 73
     BorderSpacing.Around = 6
     Caption = 'Table Name'
     ParentColor = False
@@ -54,10 +54,10 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = RadioGroup1
-    Left = 92
-    Height = 37
-    Top = 174
-    Width = 686
+    Left = 88
+    Height = 34
+    Top = 161
+    Width = 694
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 0
@@ -68,9 +68,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = RadioGroup1
     Left = 12
-    Height = 37
-    Top = 101
-    Width = 766
+    Height = 34
+    Top = 92
+    Width = 770
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 1
@@ -82,8 +82,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 32
+    Height = 34
+    Top = 29
     Width = 887
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -115,14 +115,16 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 784
-    Height = 81
-    Top = 75
-    Width = 115
-    Anchors = [akTop, akRight]
+    AnchorSideBottom.Control = edtIndexName
+    AnchorSideBottom.Side = asrBottom
+    Left = 788
+    Height = 76
+    Top = 119
+    Width = 111
+    Anchors = [akRight, akBottom]
     AutoFill = True
     AutoSize = True
-    BorderSpacing.Around = 6
+    BorderSpacing.Right = 6
     Caption = 'Sort order'
     ChildSizing.LeftRightSpacing = 6
     ChildSizing.TopBottomSpacing = 6
@@ -132,8 +134,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 60
-    ClientWidth = 113
+    ClientHeight = 58
+    ClientWidth = 109
     ItemIndex = 0
     Items.Strings = (
       'Ascending'
@@ -146,9 +148,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = edtFKName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 144
-    Width = 106
+    Height = 23
+    Top = 132
+    Width = 101
     BorderSpacing.Around = 6
     Caption = 'Create index'
     OnChange = CheckBox1Change
@@ -162,8 +164,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 0
-    Height = 383
-    Top = 217
+    Height = 399
+    Top = 201
     Width = 905
     ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -171,7 +173,7 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     TabOrder = 6
     object TabSheet1: TTabSheet
       Caption = 'FKRule'
-      ClientHeight = 349
+      ClientHeight = 368
       ClientWidth = 895
       object ListBox1: TListBox
         AnchorSideLeft.Control = TabSheet1
@@ -328,9 +330,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Control = ListBox1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 20
+        Height = 17
         Top = 153
-        Width = 58
+        Width = 55
         BorderSpacing.Around = 6
         Caption = 'On Table'
         FocusControl = ComboBox1
@@ -343,8 +345,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 36
-        Top = 179
+        Height = 33
+        Top = 176
         Width = 877
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -360,8 +362,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Control = SpeedButton4
         AnchorSideBottom.Control = ComboBox2
         Left = 6
-        Height = 84
-        Top = 221
+        Height = 112
+        Top = 215
         Width = 423
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Left = 6
@@ -376,9 +378,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideBottom.Control = ComboBox2
         AnchorSideBottom.Side = asrBottom
         Left = 3
-        Height = 20
-        Top = 323
-        Width = 69
+        Height = 17
+        Top = 345
+        Width = 65
         Anchors = [akLeft, akBottom]
         Caption = 'On Update'
         FocusControl = ComboBox2
@@ -391,10 +393,10 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
-        Left = 78
-        Height = 32
-        Top = 311
-        Width = 351
+        Left = 74
+        Height = 29
+        Top = 333
+        Width = 355
         Anchors = [akLeft, akRight, akBottom]
         BorderSpacing.Left = 6
         BorderSpacing.Top = 6
@@ -418,7 +420,7 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Control = ListBox3
         Left = 435
         Height = 26
-        Top = 227
+        Top = 221
         Width = 24
         BorderSpacing.Around = 6
         Glyph.Data = {
@@ -476,7 +478,7 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Side = asrBottom
         Left = 435
         Height = 26
-        Top = 259
+        Top = 253
         Width = 24
         BorderSpacing.Around = 6
         Glyph.Data = {
@@ -535,8 +537,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = ComboBox3
         Left = 465
-        Height = 84
-        Top = 221
+        Height = 112
+        Top = 215
         Width = 424
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Around = 6
@@ -551,9 +553,9 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideBottom.Control = ComboBox3
         AnchorSideBottom.Side = asrBottom
         Left = 465
-        Height = 20
-        Top = 323
-        Width = 64
+        Height = 17
+        Top = 345
+        Width = 59
         Anchors = [akLeft, akBottom]
         Caption = 'On delete'
         FocusControl = ComboBox3
@@ -566,10 +568,10 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
-        Left = 535
-        Height = 32
-        Top = 311
-        Width = 354
+        Left = 530
+        Height = 29
+        Top = 333
+        Width = 359
         Anchors = [akLeft, akRight, akBottom]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -587,7 +589,7 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Description'
-      ClientHeight = 349
+      ClientHeight = 368
       ClientWidth = 895
       object Memo1: TMemo
         Left = 0

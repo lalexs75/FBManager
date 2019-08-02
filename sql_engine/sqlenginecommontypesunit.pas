@@ -357,6 +357,7 @@ type
 
 type
   TIndexFieldsEnumerator = class;
+  TIndexItemsEnumerator = class;
 
   TIndexItem = class
     IndexName:string;
@@ -366,6 +367,38 @@ type
     Active:boolean;
     Descending:boolean;
     IsPrimary:boolean;
+  end;
+  TIndexItemClass = class of TIndexItem;
+
+  { TIndexItems }
+
+  TIndexItems = class
+  private
+    FIndexItemClass:TIndexItemClass;
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: integer): TIndexItem;
+  public
+    constructor Create(AIndexItemClass:TIndexItemClass);
+    destructor Destroy; override;
+    procedure Clear;
+    function Add(AIndexName:string):TIndexItem;
+    function GetEnumerator: TIndexItemsEnumerator;
+    property Items[AIndex:integer]:TIndexItem read GetItems; default;
+    property Count:integer read GetCount;
+  end;
+
+  { TIndexItemsEnumerator }
+
+  TIndexItemsEnumerator = class
+  private
+    FList: TIndexItems;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TIndexItems);
+    function GetCurrent: TIndexItem;
+    function MoveNext: Boolean;
+    property Current: TIndexItem read GetCurrent;
   end;
 
   { TIndexField }
@@ -793,6 +826,72 @@ begin
     if UpperCase(ObjectGrantNamesReal[G]) = AValue then
       Exit(G);
   raise Exception.CreateFmt('Not found grant type "%s".', [AValue]);
+end;
+
+{ TIndexItemsEnumerator }
+
+constructor TIndexItemsEnumerator.Create(AList: TIndexItems);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TIndexItemsEnumerator.GetCurrent: TIndexItem;
+begin
+  Result := FList[FPosition];
+end;
+
+function TIndexItemsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TIndexItems }
+
+function TIndexItems.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TIndexItems.GetItems(AIndex: integer): TIndexItem;
+begin
+  Result:=TIndexItem(FList[AIndex]);
+end;
+
+constructor TIndexItems.Create(AIndexItemClass: TIndexItemClass);
+begin
+  inherited Create;
+  FIndexItemClass:=AIndexItemClass;
+  FList:=TFPList.Create;
+end;
+
+destructor TIndexItems.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TIndexItems.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TIndexItem(FList[i]).Free;
+  FList.Clear;
+end;
+
+function TIndexItems.Add(AIndexName: string): TIndexItem;
+begin
+  Result:=FIndexItemClass.Create;
+  Result.IndexName:=AIndexName;
+  FList.Add(Result);
+end;
+
+function TIndexItems.GetEnumerator: TIndexItemsEnumerator;
+begin
+  Result:=TIndexItemsEnumerator.Create(Self);
 end;
 
 { TDBMSFieldTypeListEnumerator }

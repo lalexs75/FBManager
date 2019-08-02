@@ -1255,9 +1255,7 @@ begin
   try
     while not QIndex.Eof do
     begin
-      Rec:=TIndexItem.Create;
-      FIndexItems.Add(Rec);
-      Rec.IndexName:=Trim(QIndex.FieldByName('name').AsString);
+      Rec:=FIndexItems.Add(Trim(QIndex.FieldByName('name').AsString));
       Rec.Unique:=QIndex.FieldByName('unique').AsInteger <> 0;
       Rec.Active:=true;
 
