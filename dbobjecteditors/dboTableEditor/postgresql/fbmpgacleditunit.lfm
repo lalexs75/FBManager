@@ -58,8 +58,8 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
   end
   object RxDBGrid1: TRxDBGrid[1]
     Left = 0
-    Height = 519
-    Top = 91
+    Height = 521
+    Top = 89
     Width = 1261
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -731,19 +731,19 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsUGList
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook]
     PopupMenu = PopupMenu1
     TabOrder = 1
     TitleStyle = tsNative
   end
   object Panel1: TPanel[2]
     Left = 0
-    Height = 66
+    Height = 64
     Top = 25
     Width = 1261
     Align = alTop
     AutoSize = True
-    ClientHeight = 66
+    ClientHeight = 64
     ClientWidth = 1261
     TabOrder = 2
     object Label1: TLabel
@@ -752,7 +752,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       Left = 7
       Height = 17
       Top = 7
-      Width = 82
+      Width = 88
       BorderSpacing.Around = 6
       Caption = 'Users/Groups'
       ParentColor = False
@@ -764,7 +764,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 29
+      Height = 27
       Top = 30
       Width = 1241
       Anchors = [akTop, akLeft, akRight]
