@@ -1,18 +1,20 @@
 object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   Left = 0
-  Height = 388
+  Height = 380
   Top = 0
-  Width = 433
-  ClientHeight = 388
-  ClientWidth = 433
+  Width = 424
+  ClientHeight = 380
+  ClientWidth = 424
+  DesignTimePPI = 94
+  ParentFont = False
   TabOrder = 0
   DesignLeft = 425
   DesignTop = 418
   inline TextEditor: TSynEdit
     Left = 0
-    Height = 388
+    Height = 380
     Top = 0
-    Width = 433
+    Width = 424
     Align = alClient
     Font.Height = 12
     Font.Name = 'courier'
@@ -653,8 +655,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
     OnPopup = PopupMenu1Popup
-    Left = 192
-    Top = 48
+    Left = 188
+    Top = 47
     object MenuItem23: TMenuItem
       Action = edtCopy
     end
@@ -833,8 +835,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
-    Left = 256
-    Top = 47
+    Left = 251
+    Top = 46
     object ednSetBookmark0: TAction
       Category = 'Editor navigation'
       Caption = 'Set/Remove bookmark 0'
@@ -1107,22 +1109,22 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object OpenDialog1: TOpenDialog
     DefaultExt = '.sql'
     Options = [ofShowHelp, ofEnableSizing, ofViewDetail]
-    Left = 194
-    Top = 112
+    Left = 190
+    Top = 110
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.sql'
     Options = [ofShowHelp, ofEnableSizing, ofViewDetail]
-    Left = 256
-    Top = 112
+    Left = 251
+    Top = 110
   end
   object SynAutoComplete1: TSynAutoComplete
     EndOfTokenChr = '()[].'
     ShortCut = 8224
     ExecCommandID = ecSynAutoCompletionExecute
     Editor = TextEditor
-    Left = 256
-    Top = 176
+    Left = 251
+    Top = 172
   end
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
@@ -1143,20 +1145,20 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     ExecCommandID = ecSynCompletionExecute
     Editor = TextEditor
     ToggleReplaceWhole = False
-    Left = 128
-    Top = 176
+    Left = 125
+    Top = 172
   end
   object SynCompletionTimer: TTimer
     Enabled = False
     OnTimer = SynCompletionTimerTimer
-    Left = 131
-    Top = 248
+    Left = 128
+    Top = 243
   end
   object SynSQLSyn1: TSynSQLSyn
     DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
     Enabled = False
     SQLDialect = sqlSybase
-    Left = 50
-    Top = 34
+    Left = 49
+    Top = 33
   end
 end

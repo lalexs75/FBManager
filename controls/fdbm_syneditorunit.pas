@@ -111,7 +111,7 @@ type
   TOnGetKeyWordList = procedure(Sender:Tfdbm_SynEditorFrame; const KeyStartWord:string; const Items:TSynCompletionObjList;
     ACharCase:TCharCaseOptions) of object;
   TOnLoadFileEdit = procedure(Sender:Tfdbm_SynEditorFrame; const TextEditor: TSynEdit; const AFileName:string) of object;
-
+  TOnGetHintData = function(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean of object;
 
   { Tfdbm_SynEditorFrame }
 
@@ -273,6 +273,7 @@ type
     function GetPreviousToken: string;
   private
     FOnEditorChangeStatus: TNotifyEvent;
+    FOnGetHintData: TOnGetHintData;
     FSynCompletionTimerEnabled: Boolean;
     FSynMarkup:TSynEditMarkupHighlightAllCaret;
     FFileName: string;
@@ -334,6 +335,7 @@ type
     property ReadOnly:boolean read GetReadOnly write SetReadOnly;
     property OnPopUpMenu:TNotifyEvent read FOnPopUpMenu write FOnPopUpMenu;
     property OnEditorChangeStatus:TNotifyEvent read FOnEditorChangeStatus write FOnEditorChangeStatus;
+    property OnGetHintData:TOnGetHintData read FOnGetHintData write FOnGetHintData;
   end;
 
 var
@@ -1095,8 +1097,7 @@ begin
           begin
             SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
             if F.FieldDescription<>'' then;
-              SHint:=SHint + LineEnding + F.FieldDescription;
-            SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding;
+              SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding + F.FieldDescription;
           end;
         end
         else
@@ -1109,7 +1110,12 @@ begin
       SHint:=SHint + ObjectKindToStr(P.DBObjectKind) + ' ' + P.CaptionFullPatch;
       if P.Description <> '' then SHint:=SHint + LineEnding + P.Description;
 
-    end;
+    end
+    else
+    if Assigned(FOnGetHintData) then
+      if FOnGetHintData(Self, UTF8UpperCase(S), UTF8UpperCase(SF), S1) then
+        SHint:=S1;
+
     HintInfo^.HintStr:=SHint;
 
   end;

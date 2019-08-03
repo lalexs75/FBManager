@@ -86,6 +86,7 @@ type
     procedure OnGetKeyWordList(Sender:Tfdbm_SynEditorFrame; const KeyStartWord:string; const Items:TSynCompletionObjList; ACharCase:TCharCaseOptions);
     function GetProcText:string;
     procedure UpdateFieldButtons;
+    function OnGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
   protected
     FMenuDefineVariable: TMenuItem;
     procedure SetReadOnly(AValue: boolean);override;
@@ -460,6 +461,33 @@ begin
   SpeedButton4.Enabled:=(ListBox2.Items.Count>1) and (ListBox2.ItemIndex<ListBox2.Items.Count-1);
 end;
 
+function TpgTriggerEditorPage.OnGetHintData(Sender: Tfdbm_SynEditorFrame;
+  const S1, S2: string; out HintText: string): Boolean;
+var
+  DBTable: TPGTable;
+  F: TDBField;
+begin
+  HintText:='';
+  Result:=false;
+  if (S1<>'') and (S2<>'') then
+    if (S1 = 'NEW') or (S1 = 'OLD') then
+    begin
+      DBTable:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]);
+      if Assigned(DBTable) then
+      begin
+        F:=DBTable.Fields.FieldByName(S2);
+        if Assigned(F) then
+        begin
+          HintText:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
+          if F.FieldDescription<>'' then;
+            HintText:=HintText + LineEnding + '---------------------------------------' + LineEnding + F.FieldDescription;
+          Result:=true;
+        end;
+      end;
+    end;
+
+end;
+
 procedure TpgTriggerEditorPage.SetReadOnly(AValue: boolean);
 begin
   inherited SetReadOnly(AValue);
@@ -573,6 +601,7 @@ begin
   EditorFrame.Name:='EditorFrame';
   EditorFrame.TextEditor.OnChange:=@TextEditorChange;
   EditorFrame.OnPopUpMenu:=@TextEditorPopUpMenu;
+  EditorFrame.OnGetHintData:=@OnGetHintData;
   DefinePopupMenu;
 
   edtWhenFrame:=Tfdbm_SynEditorFrame.Create(Self);
