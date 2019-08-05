@@ -217,7 +217,7 @@ type
 function ExecSQLScript(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 procedure WriteSQLGlobal(FileName, LogString, UserName:string; LogTimestamp:boolean);
 implementation
-uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
+uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils, rxlogging,
   IBManDataInspectorUnit, SQLEngineInternalToolsUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
   IBManMainUnit, LazUTF8, LazFileUtils, Variants
@@ -421,19 +421,28 @@ begin
   FSQLEngine.Connected:=AValue;
   if FSQLEngine.Connected then
   begin
+    RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsBeginFull');
     FSQLEngine.RefreshObjectsBeginFull;
-//    WriteLog();
+    RxWriteLog(etDebug, 'MakeObjectTree');
     MakeObjectTree;
+    RxWriteLog(etDebug, 'FOwner.Expanded:=true');
     FOwner.Expand(false);
     FOwner.Expanded:=true;
+    RxWriteLog(etDebug, 'Refresh;');
     Refresh;
+    RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsEndFull;');
     FSQLEngine.RefreshObjectsEndFull;
     if ConfigValues.ByNameAsBoolean('RestoreDBDesktop', true) then
+    begin
+      RxWriteLog(etDebug, 'LoadDesktop;');
       LoadDesktop; //Загружать надо - когда уже всё живо
+    end;
 
+    RxWriteLog(etDebug, 'FSQLEditorHistory1.Open;');
     FSQLEditorHistory1.ParamByName('db_database_id').AsInteger:=FSQLEngine.DatabaseID;
     FSQLEditorHistory1.Open;
     FSQLEditorHistory1.FieldByName('sql_editors_history_sql_text').OnGetText:=@SQLBodyGetTextEvent;
+    RxWriteLog(etDebug, 'Connected=true');
   end
   else
   begin
@@ -1383,7 +1392,6 @@ begin
   if RecordType = rtDBGroup then
   begin
     A:=FOwner.Expanded;
-    //FObjectList.Clear;
     FList:=TStringList.Create;
     FNewList:=TStringList.Create;
     FOwner.TreeView.BeginUpdate;
@@ -1396,7 +1404,9 @@ begin
     end;
 
     try
+      RxWriteLog(etDebug, 'FDBGroup.RefreshGroup;');
       FDBGroup.RefreshGroup;
+      RxWriteLog(etDebug, 'FDBGroup.RefreshGroup; - end');
 
       for i:=0 to FDBGroup.CountGroups - 1 do
       begin
@@ -1406,10 +1416,12 @@ begin
           FNewList.Add(G.Caption);
           if FList.IndexOf(G.Caption) < 0 then
           begin
+            RxWriteLog(etDebug, 'G[%d].%s (%s).Refresh; - start', [i, G.Caption, G.ClassName]);
             Rec:=TDBInspectorRecord.CreateGroup(TTreeView(FOwner.TreeView).Items.AddChild(FOwner, ''), OwnerDB, G);
             Rec.Caption:=G.Caption;
             FObjectList.Add(Rec);
             Rec.Refresh;
+            RxWriteLog(etDebug, 'G[%d].%s.Refresh; - end', [i, G.Caption]);
           end;
         end;
       end;
@@ -1421,8 +1433,10 @@ begin
         begin
           Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, FDBGroup[i]);
           Rec.Caption:=FDBGroup.ObjName[i];
+          RxWriteLog(etDebug, 'Rec[%d].%s (%s).Refresh; - start', [i, Rec.Caption, FDBGroup[i].ClassName]);
           FObjectList.Add(Rec);
           Rec.Refresh;
+          RxWriteLog(etDebug, 'Rec[%d].%s.Refresh; - end', [i, Rec.Caption]);
         end
       end;
 
@@ -1447,6 +1461,7 @@ begin
   begin
     if DBObject.DBObjectKind in [okTable, okStoredProc, okFunction] then
     begin
+      RxWriteLog(etDebug, 'DBObject.MakeChildList; - start');
       FOwner.DeleteChildren;
       CL:=DBObject.MakeChildList;
       if Assigned(CL) then
@@ -1465,6 +1480,7 @@ begin
         end;
         CL.Free;
       end;
+      RxWriteLog(etDebug, 'DBObject.MakeChildList; - end');
     end;
   end;
 end;
