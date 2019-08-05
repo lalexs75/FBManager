@@ -2639,7 +2639,8 @@ procedure TSQLEnginePostgre.FillFieldTypeCodes;
 var
   Q:TZQuery;
   P:TDBMSFieldTypeRecord;
-  S, S1, S2:string;
+  FTypeCat, FTypeOID, FTypeTypName, FTypeTyp: TField;
+  S1: String;
 begin
   FIDTypeTrigger:=-1;
   FIDTypeEventTrigger:=-1;
@@ -2648,12 +2649,15 @@ begin
   Q:=GetSQLQuery(pgSqlTextModule.sqlTypesList.Strings.Text);
   try
     Q.Open;
-    S:='';
-    S2:='';
+    FTypeOID:=Q.FieldByName('oid');
+    FTypeCat:=Q.FieldByName('typcategory');
+    FTypeTypName:=Q.FieldByName('typname');
+    FTypeTyp:=Q.FieldByName('typtype');
+
     while not Q.EOF do
     begin
-      S1:=LowerCase(Q.FieldByName('typname').AsString);
-      if S1 = '_aclitem' then
+      S1:=LowerCase(FTypeTypName.AsString);
+(*      if S1 = '_aclitem' then
       begin
         S2:='1';
       end;
@@ -2670,34 +2674,59 @@ begin
                                        tgUserDefinedTypes);
       end
       else
+      begin *)
+      P:=FTypeList.FindType(S1);
+      if Assigned(P) then
       begin
-        P:=FTypeList.FindType(S1);
-        if Assigned(P) then
-        begin
-          P.TypeId:=Q.FieldByName('oid').AsInteger;
-          if (S1 = 'trigger') then
-            FIDTypeTrigger:=P.TypeId
-          else
-          if (S1 = 'event_trigger') then
-            FIDTypeEventTrigger:=P.TypeId
-          else
-          if S1 = 'fdw_handler' then
-            FIDTypeFDWHandler:=P.TypeId
-          else
-          if S1 = 'language_handler' then
-            FIDTypeLangHandler:=P.TypeId
-          ;
-        end
+        P.TypeId:=FTypeOID.AsInteger;
+        if (S1 = 'trigger') then
+          FIDTypeTrigger:=P.TypeId
         else
-          S:=S+Q.FieldByName('typname').AsString + LineEnding;
+        if (S1 = 'event_trigger') then
+          FIDTypeEventTrigger:=P.TypeId
+        else
+        if S1 = 'fdw_handler' then
+          FIDTypeFDWHandler:=P.TypeId
+        else
+        if S1 = 'language_handler' then
+          FIDTypeLangHandler:=P.TypeId
+        ;
+      end
+      else
+      begin
+        if FTypeTyp.AsString <> 'd' then
+        begin
+          if FTypeCat.AsString = 'A' then
+          begin
+            S1:=Copy(S1, 2, Length(S1)) + '[]';
+            P:=FTypeList.Add(
+              S1,
+              FTypeOID.AsInteger,
+              false,
+              false,
+              ftArray,
+              '',
+              '',
+              tgUserDefinedTypes);
+          end
+          else
+          P:=FTypeList.Add(
+            FTypeTypName.AsString,
+            FTypeOID.AsInteger,
+            false,
+            false,
+            ftUnknown,
+            '',
+            '',
+            tgUserDefinedTypes);
+
+        end;
       end;
       Q.Next;
     end;
   finally
     Q.Free;
   end;
-  if S<>'' then
-    InternalError(S);
 end;
 
 procedure TSQLEnginePostgre.ClearUserTypes;

@@ -422,6 +422,7 @@ begin
   if FSQLEngine.Connected then
   begin
     FSQLEngine.RefreshObjectsBeginFull;
+//    WriteLog();
     MakeObjectTree;
     FOwner.Expand(false);
     FOwner.Expanded:=true;
