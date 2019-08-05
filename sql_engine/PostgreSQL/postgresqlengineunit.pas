@@ -2639,7 +2639,7 @@ procedure TSQLEnginePostgre.FillFieldTypeCodes;
 var
   Q:TZQuery;
   P:TDBMSFieldTypeRecord;
-  S, S1:string;
+  S, S1, S2:string;
 begin
   FIDTypeTrigger:=-1;
   FIDTypeEventTrigger:=-1;
@@ -2649,8 +2649,14 @@ begin
   try
     Q.Open;
     S:='';
+    S2:='';
     while not Q.EOF do
     begin
+      S1:=LowerCase(Q.FieldByName('typname').AsString);
+      if S1 = '_aclitem' then
+      begin
+        S2:='1';
+      end;
       if Q.FieldByName('typcategory').AsString = 'U' then
       begin
         //Дополним список пользовательскими типами
@@ -2665,7 +2671,6 @@ begin
       end
       else
       begin
-        S1:=LowerCase(Q.FieldByName('typname').AsString);
         P:=FTypeList.FindType(S1);
         if Assigned(P) then
         begin
@@ -3436,6 +3441,15 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_ObjListAll.Strings.Text);
   RefreshObjectsBegin(GetMetaSQLText(0));
   RefreshObjectsBegin(pgSqlTextModule.sPGProcList.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFSUserMapping.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFServ.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFDW.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFtsConfigs.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFtsDicts.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFTsParsers.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFtsTempl.Strings.Text);
 end;
 
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
@@ -3445,6 +3459,15 @@ begin
   RefreshObjectsEnd(GetMetaSQLText(0));
   RefreshObjectsEnd(pgSqlTextModule.sPGProcList.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sqlSchemasAll.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFSUserMapping.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFServ.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFDW.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFtsConfigs.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFtsDicts.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFTsParsers.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFtsTempl.Strings.Text);
 end;
 
 (*
@@ -6742,7 +6765,7 @@ begin
           if Assigned(RP) then
             ResultType.FieldTypeName:=RP.TypeName
           else
-            raise Exception.Create('RP:=OwnerDB.TypeList.FindTypeByID(Q.FieldByName(''prorettype'').AsInteger);');
+            raise Exception.CreateFmt('not found type with OID = %d', [Q.FieldByName('prorettype').AsInteger]);
         end;
         FReturnSetType:=Q.FieldByName('proretset').AsBoolean;
 

@@ -1405,7 +1405,7 @@ begin
           FNewList.Add(G.Caption);
           if FList.IndexOf(G.Caption) < 0 then
           begin
-            Rec:=TDBInspectorRecord.CreateGroup((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, G);
+            Rec:=TDBInspectorRecord.CreateGroup(TTreeView(FOwner.TreeView).Items.AddChild(FOwner, ''), OwnerDB, G);
             Rec.Caption:=G.Caption;
             FObjectList.Add(Rec);
             Rec.Refresh;
