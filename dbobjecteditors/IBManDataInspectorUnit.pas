@@ -1122,7 +1122,7 @@ begin
           begin
             DB:=fbManDataInpectorForm.RegisterNewDB(SQLEngine);
             if Assigned(DB) and P.LogMetadata and (P.CreateSQL<>'') then
-              DB.WriteLog(P.LogFileMetadata, P.CreateSQL);
+              DB.WriteSQLFile(P.LogFileMetadata, P.CreateSQL);
           end;
         end;
         P.Free;

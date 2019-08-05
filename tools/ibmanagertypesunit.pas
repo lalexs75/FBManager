@@ -179,7 +179,7 @@ type
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
     constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);
     destructor Destroy; override;
-    procedure WriteLog(FileName, LogString:string);
+    procedure WriteSQLFile(FileName, LogString:string);
     procedure Save;
     function Edit:boolean;override;
     procedure ShowObject;override;
@@ -288,7 +288,7 @@ begin
 
           if R.SQLEngine.SQLEngineLogOptions.LogMetadata then
           begin
-            R.WriteLog(R.SQLEngine.SQLEngineLogOptions.LogFileMetadata, S);
+            R.WriteSQLFile(R.SQLEngine.SQLEngineLogOptions.LogFileMetadata, S);
           end;
         end
         else
@@ -482,7 +482,7 @@ begin
   FRootObjects.Clear;
 end;
 
-procedure TDataBaseRecord.WriteLog(FileName, LogString: string);
+procedure TDataBaseRecord.WriteSQLFile(FileName, LogString: string);
   {$IFNDEF WINDOWS}
 var
   S:String;
@@ -1026,7 +1026,7 @@ function TDataBaseRecord.ExecSQLEditor(const Line, Plan: string;
 begin
   Result:=true;
   if FSQLEngine.SQLEngineLogOptions.LogSQLEditor then
-    WriteLog(FSQLEngine.SQLEngineLogOptions.LogFileSQLEditor, Line + ';');
+    WriteSQLFile(FSQLEngine.SQLEngineLogOptions.LogFileSQLEditor, Line + ';');
 
   FSQLEditorHistory1.DisableControls;
   try
