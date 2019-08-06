@@ -22,7 +22,7 @@ unit pg_utils;
 
 {$I fbmanager_define.inc}
 
-{$Define LinkDynamically}
+{.$Define LinkDynamically}
 
 interface
 
@@ -34,8 +34,8 @@ procedure FillFieldTypes(Items:TDBMSFieldTypeList);
 function ConvertFieldList(pgFieldList:string;const Obj:TDBDataSetObject):string;
 function ParsePGArrayString(ArrayStr:string;const Items:TStrings):integer;
 function ParsePGArrayChar(ArrayStr:string;out Items:TCharArray; ADelimiter:Char = ','):integer;
-function ParsePGArrayChar(ArrayStr:string;out Items:TIntegerArray; ADelimiter:Char = ','):integer;
-function ParsePGArrayChar(ArrayStr:string;out Items:TByteArray; ADelimiter:Char = ','):integer;
+function ParsePGArrayInt(ArrayStr:string;out Items:TIntegerArray; ADelimiter:Char = ','):integer;
+function ParsePGArrayByte(ArrayStr:string;out Items:TByteArray; ADelimiter:Char = ','):integer;
 
 function StrToPGSPVolatCat(const S:string):TPGSPVolatCat;
 //function PGFieldLoadMetaInfo(const Own:TDBDataSetObject; const FQuery:TDataSet):TPGField;
@@ -92,10 +92,10 @@ resourcestring
   s_pg_UnknowData = 'Unknow data';
 
   s_pg_any = 'Indicates that a function accepts any input data type.';
-  s_pg_anyarray = 'Indicates that a function accepts any array data type (see Section 35.2.5).';
-  s_pg_anyelement = 'Indicates that a function accepts any data type (see Section 35.2.5).';
-  s_pg_anyenum = 'Indicates that a function accepts any enum data type (see Section 35.2.5 and Section 8.7).';
-  s_pg_anynonarray = 'Indicates that a function accepts any non-array data type (see Section 35.2.5).';
+  s_pg_anyarray = 'Indicates that a function accepts any array data type.';
+  s_pg_anyelement = 'Indicates that a function accepts any data type.';
+  s_pg_anyenum = 'Indicates that a function accepts any enum data type.';
+  s_pg_anynonarray = 'Indicates that a function accepts any non-array data type.';
   s_pg_cstring = 'Indicates that a function accepts or returns a null-terminated C string.';
   s_pg_internal = 'Indicates that a function accepts or returns a server-internal data type.';
   s_pg_language_handler = 'A procedural language call handler is declared to return language_handler.';
@@ -259,29 +259,78 @@ begin
   end;
 end;
 
-function ParsePGArrayChar(ArrayStr: string; out Items: TCharArray; ADelimiter:Char = ','): integer;
+function DoCountItems(ArrayStr: string; ADelimiter:Char):Integer;
 var
+  FInStr: Boolean;
   i: Integer;
 begin
+  Result:=0;
+  if ArrayStr = '' then Exit;
+  FInStr:=false;
+  for i:=1 to Length(ArrayStr) do
+  begin
+    if ArrayStr[i] = '"' then
+      FInStr:=not FInStr
+    else
+    if not FInStr then
+    begin
+      if ArrayStr[i] = ADelimiter then
+        Inc(Result);
+    end
+  end;
+  Inc(Result);
+end;
+
+function ParsePGArrayChar(ArrayStr: string; out Items: TCharArray; ADelimiter:Char = ','): integer;
+
+function GetString(var I:Integer):string;
+begin
+  Result:='';
+end;
+
+var
+  i, FCnt: Integer;
+  S: String;
+begin
+  FCnt:=DoCountItems(ArrayStr, ADelimiter);
+  SetLength(Items, FCnt);
+  if ArrayStr = '' then Exit(0);
+
   i:=1;
   Result:=0;
-(*  while I<Length(ArrayStr) do
+  while I<Length(ArrayStr) do
   begin
     Inc(I);
     if ArrayStr[i] = '{' then
     else
     if ArrayStr[i] = '}' then I:=Length(ArrayStr) + 1
     else
-
-  end; *)
+    if ArrayStr[i] = '"' then
+    begin
+      S:=GetString(i);
+      if S<>'' then
+        Items[Result]:=S[1];
+      AbstractError;
+    end
+    else
+    if ArrayStr[i] = ADelimiter then
+    begin
+      Inc(Result);
+      if Result>FCnt then
+        AbstractError;
+    end
+    else
+      Items[Result]:=ArrayStr[i];
+  end;
+  Inc(Result);
 end;
 
-function ParsePGArrayChar(ArrayStr: string; out Items: TIntegerArray; ADelimiter:Char = ','): integer;
+function ParsePGArrayInt(ArrayStr: string; out Items: TIntegerArray; ADelimiter:Char = ','): integer;
 begin
   AbstractError;
 end;
 
-function ParsePGArrayChar(ArrayStr: string; out Items: TByteArray; ADelimiter:Char = ','): integer;
+function ParsePGArrayByte(ArrayStr: string; out Items: TByteArray; ADelimiter:Char = ','): integer;
 begin
   AbstractError;
 end;

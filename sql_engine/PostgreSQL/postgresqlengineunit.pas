@@ -811,6 +811,7 @@ type
     function InternalGetDDLCreate: string; override;
     function GetEnableRename: boolean; override;
     procedure InternalRefreshStatistic; override;
+    function MakeChildList:TStrings; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -6308,13 +6309,35 @@ end;
 procedure TPGFunction.DoInitInParams(AParamsArray: string);
 var
   S1, S2, S3: String;
-  FModes: TByteArray;
+  FItm: TStringList;
+  i, FCnt1: Integer;
+  F: TDBField;
+  FModes: TCharArray;
 begin
   //'{i,i,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o}|23 1043|{a_tb_client_id,a_macroquery,r_tb_client_sum_id,r_tb_client_sum_type,r_tb_client_sum_summa,r_tb_client_sum_date,r_tb_client_sum_owner_doc,r_tb_client_sum_status,r_tb_dogovor_id,r_tb_dogovor_date_start,r_tb_dogovor_number,r_tb_client_name,r_tb_client_adress,r_tb_client_kod,r_tb_client_summa_prc,r_tb_client_sum_number,r_bank_info_packet_doc_info,r_buh_prov_id,r_buh_account_number_deb,r_buh_account_number_cred,r_sum_sourse_name,r_nto_spr_peo
-  S1:=Copy2Symb( AParamsArray, '|');
-  S2:=Copy2Symb( AParamsArray, '|');
+  S1:=Copy2SymbDel( AParamsArray, '|');
+  S2:=Copy2SymbDel( AParamsArray, '|');
   S3:=AParamsArray;
-//  ParsePGArrayChar(S1, FModes);
+  FCnt1:=ParsePGArrayChar(S1, FModes);
+
+  FieldsIN.Clear;
+  FItm:=TStringList.Create;
+  ParsePGArrayString(S3, FItm);
+  for i:=0 to FItm.Count-1 do
+  begin
+    F:=FieldsIN.Add(FItm[i]);
+    if I<FCnt1 then
+      case FModes[i] of
+        'i':F.IOType:=spvtInput;
+        'o':F.IOType:=spvtOutput;
+        'b':F.IOType:=spvtInOut;
+        'v':F.IOType:=spvtVariadic;
+        't':F.IOType:=spvtTable;
+      end
+    else
+      F.IOType:=spvtInput;
+  end;
+  FItm.Free;
 end;
 
 procedure TPGFunction.InternalInitACLList;
@@ -6516,6 +6539,31 @@ begin
   end;
 end;
 
+function TPGFunction.MakeChildList: TStrings;
+var
+  F: TDBField;
+  D: Integer;
+begin
+  Result:=nil;
+  if (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
+  begin
+    Result:=TStringList.Create;
+    for F in FieldsIN do
+    begin
+      case F.IOType of
+        spvtInput,
+        spvtInOut,
+        spvtVariadic:D:=85;
+        spvtOutput,
+        spvtTable:D:=86;
+      else
+        D:=-1;
+      end;
+      Result.AddObject(F.FieldName, TObject(Pointer(IntPtr(D))));
+    end;
+  end;
+end;
+
 constructor TPGFunction.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
@@ -6525,7 +6573,7 @@ begin
     FOID:=ADBItem.ObjId;
     FReturnTypeOID:=StrToInt(ADBItem.ObjType);
     FACLListStr:=ADBItem.ObjACLList;
-    if ADBItem.ObjData<>'' then
+    if (ADBItem.ObjData<>'') and (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
       DoInitInParams(ADBItem.ObjData);
   end;
 
@@ -6874,7 +6922,7 @@ begin
   else
   begin
     FDomainID:=-1;
-
+    { TODO : Пока не рализаеся тип char и "char" - надо исправить }
     //FieldTypeName:=DS.FieldByName('typname').AsString;
     S:=DS.FieldByName('typname').AsString;
     FIsArray:=false;

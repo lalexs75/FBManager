@@ -217,7 +217,8 @@ type
 function ExecSQLScript(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 procedure WriteSQLGlobal(FileName, LogString, UserName:string; LogTimestamp:boolean);
 implementation
-uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils, rxlogging,
+uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
+  {$IFDEF DEBUG_LOG}rxlogging,{$ENDIF}
   IBManDataInspectorUnit, SQLEngineInternalToolsUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
   IBManMainUnit, LazUTF8, LazFileUtils, Variants
@@ -244,6 +245,7 @@ begin
   if not Assigned(R) then exit;
 
   ObjRefresh:=TObjTreeRefresh.Create(R);
+  S:='';
   P:=TSQLParser.Create(S, R.SQLEngine);
 
   fbmCompileQestForm:=TfbmCompileQestForm.Create(Application);
@@ -421,28 +423,28 @@ begin
   FSQLEngine.Connected:=AValue;
   if FSQLEngine.Connected then
   begin
-    RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsBeginFull');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsBeginFull');{$ENDIF}
     FSQLEngine.RefreshObjectsBeginFull;
-    RxWriteLog(etDebug, 'MakeObjectTree');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'MakeObjectTree');{$ENDIF}
     MakeObjectTree;
-    RxWriteLog(etDebug, 'FOwner.Expanded:=true');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FOwner.Expanded:=true');{$ENDIF}
     FOwner.Expand(false);
     FOwner.Expanded:=true;
-    RxWriteLog(etDebug, 'Refresh;');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'Refresh;');{$ENDIF}
     Refresh;
-    RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsEndFull;');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FSQLEngine.RefreshObjectsEndFull;');{$ENDIF}
     FSQLEngine.RefreshObjectsEndFull;
     if ConfigValues.ByNameAsBoolean('RestoreDBDesktop', true) then
     begin
-      RxWriteLog(etDebug, 'LoadDesktop;');
+      {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'LoadDesktop;');{$ENDIF}
       LoadDesktop; //Загружать надо - когда уже всё живо
     end;
 
-    RxWriteLog(etDebug, 'FSQLEditorHistory1.Open;');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FSQLEditorHistory1.Open;');{$ENDIF}
     FSQLEditorHistory1.ParamByName('db_database_id').AsInteger:=FSQLEngine.DatabaseID;
     FSQLEditorHistory1.Open;
     FSQLEditorHistory1.FieldByName('sql_editors_history_sql_text').OnGetText:=@SQLBodyGetTextEvent;
-    RxWriteLog(etDebug, 'Connected=true');
+    {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'Connected=true');{$ENDIF}
   end
   else
   begin
@@ -1404,9 +1406,9 @@ begin
     end;
 
     try
-      RxWriteLog(etDebug, 'FDBGroup.RefreshGroup;');
+      {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FDBGroup.RefreshGroup;');{$ENDIF}
       FDBGroup.RefreshGroup;
-      RxWriteLog(etDebug, 'FDBGroup.RefreshGroup; - end');
+      {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'FDBGroup.RefreshGroup; - end');{$ENDIF}
 
       for i:=0 to FDBGroup.CountGroups - 1 do
       begin
@@ -1416,12 +1418,12 @@ begin
           FNewList.Add(G.Caption);
           if FList.IndexOf(G.Caption) < 0 then
           begin
-            RxWriteLog(etDebug, 'G[%d].%s (%s).Refresh; - start', [i, G.Caption, G.ClassName]);
+            {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'G[%d].%s (%s).Refresh; - start', [i, G.Caption, G.ClassName]);{$ENDIF}
             Rec:=TDBInspectorRecord.CreateGroup(TTreeView(FOwner.TreeView).Items.AddChild(FOwner, ''), OwnerDB, G);
             Rec.Caption:=G.Caption;
             FObjectList.Add(Rec);
             Rec.Refresh;
-            RxWriteLog(etDebug, 'G[%d].%s.Refresh; - end', [i, G.Caption]);
+            {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'G[%d].%s.Refresh; - end', [i, G.Caption]);{$ENDIF}
           end;
         end;
       end;
@@ -1433,10 +1435,10 @@ begin
         begin
           Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, ''), OwnerDB, FDBGroup[i]);
           Rec.Caption:=FDBGroup.ObjName[i];
-          RxWriteLog(etDebug, 'Rec[%d].%s (%s).Refresh; - start', [i, Rec.Caption, FDBGroup[i].ClassName]);
+          {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'Rec[%d].%s (%s).Refresh; - start', [i, Rec.Caption, FDBGroup[i].ClassName]);{$ENDIF}
           FObjectList.Add(Rec);
           Rec.Refresh;
-          RxWriteLog(etDebug, 'Rec[%d].%s.Refresh; - end', [i, Rec.Caption]);
+          {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'Rec[%d].%s.Refresh; - end', [i, Rec.Caption]);{$ENDIF}
         end
       end;
 
@@ -1461,7 +1463,7 @@ begin
   begin
     if DBObject.DBObjectKind in [okTable, okStoredProc, okFunction] then
     begin
-      RxWriteLog(etDebug, 'DBObject.MakeChildList; - start');
+      {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'DBObject.MakeChildList; - start');{$ENDIF}
       FOwner.DeleteChildren;
       CL:=DBObject.MakeChildList;
       if Assigned(CL) then
@@ -1475,7 +1477,7 @@ begin
         end;
         CL.Free;
       end;
-      RxWriteLog(etDebug, 'DBObject.MakeChildList; - end');
+      {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'DBObject.MakeChildList; - end');{$ENDIF}
     end;
   end;
 end;

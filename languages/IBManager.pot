@@ -5451,19 +5451,19 @@ msgid "Indicates that a function accepts any input data type."
 msgstr ""
 
 #: pg_utils.s_pg_anyarray
-msgid "Indicates that a function accepts any array data type (see Section 35.2.5)."
+msgid "Indicates that a function accepts any array data type."
 msgstr ""
 
 #: pg_utils.s_pg_anyelement
-msgid "Indicates that a function accepts any data type (see Section 35.2.5)."
+msgid "Indicates that a function accepts any data type."
 msgstr ""
 
 #: pg_utils.s_pg_anyenum
-msgid "Indicates that a function accepts any enum data type (see Section 35.2.5 and Section 8.7)."
+msgid "Indicates that a function accepts any enum data type."
 msgstr ""
 
 #: pg_utils.s_pg_anynonarray
-msgid "Indicates that a function accepts any non-array data type (see Section 35.2.5)."
+msgid "Indicates that a function accepts any non-array data type."
 msgstr ""
 
 #: pg_utils.s_pg_bigint
