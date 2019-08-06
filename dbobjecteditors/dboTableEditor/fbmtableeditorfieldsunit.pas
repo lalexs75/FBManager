@@ -248,7 +248,7 @@ begin
     UpdateFieldDependencies;
 
   if Owner is TfbmDBObjectEditorForm then
-    TfbmDBObjectEditorForm(Owner).UpdateActions
+    TfbmDBObjectEditorForm(Owner).CtrlUpdateActions
   else
     abort;
 end;
@@ -566,7 +566,7 @@ begin
   rxFieldList.EnableControls;
 
   UpdateControls;
-  TfbmDBObjectEditorForm(Owner).UpdateActions;
+  TfbmDBObjectEditorForm(Owner).CtrlUpdateActions;
 
   if Assigned(Parent) then
     FieldListGrid.OptimizeColumnsWidth('FIELD_NAME;FIELD_TYPE;FIELD_DOMAIN');

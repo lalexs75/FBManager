@@ -103,7 +103,7 @@ type
     constructor CreateObjectEditor(ADataBaseRecord: TDBInspectorRecord);
     procedure SetPageNum(APageNum:integer);
     procedure SendCmd(PageAction:TEditorPageAction);
-    procedure UpdateActions;
+    procedure CtrlUpdateActions;
     procedure RefreshPages;
 
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
@@ -163,7 +163,7 @@ begin
       FCurEditor.Activate;
     end;
     //update action state after change page in editor
-    UpdateActions;
+    CtrlUpdateActions;
   end;
 end;
 
@@ -535,7 +535,7 @@ begin
   ProcessEditorPageAction(ListBox1.Items, PageAction, ErrorPage);
 end;
 
-procedure TfbmDBObjectEditorForm.UpdateActions;
+procedure TfbmDBObjectEditorForm.CtrlUpdateActions;
 begin
   actCommit.Enabled:=Assigned(FCurEditor) and FCurEditor.ActionEnabled(epaCommit);
   actRollback.Enabled:=Assigned(FCurEditor) and FCurEditor.ActionEnabled(epaCommit);

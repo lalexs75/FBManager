@@ -88,14 +88,13 @@ begin
   FRule:=CurrentRule;
   edtRuleEdit.Enabled:=Assigned(FRule);
   edtRuleDelete.Enabled:=edtRuleEdit.Enabled;
-  TfbmDBObjectEditorForm(Owner).UpdateActions;
+  TfbmDBObjectEditorForm(Owner).CtrlUpdateActions;
   ShowDetailObject(FRule, Panel1);
 end;
 
 procedure TPGRuleListPage.edtRuleNewExecute(Sender: TObject);
 var
   RuleAction:TPGRuleAction;
-  R:TPGRule;
 begin
   RuleAction:=raUpdate;
   if Assigned(CurrentRule) then
@@ -114,7 +113,7 @@ begin
     if TreeView1.Selected = F[4] then
       RuleAction:=raDelete;
   end;
-  R:=FRuleList.RuleNew(RuleAction);
+  FRuleList.RuleNew(RuleAction);
 
   if Owner is TfbmDBObjectEditorForm then
     TfbmDBObjectEditorForm(Owner).SendCmd(epaRefresh)
@@ -146,9 +145,7 @@ procedure TPGRuleListPage.TreeView1AdvancedCustomDrawItem(
 var
   FRule: TPGRule;
   S:string;
-  R, PaintRect:TRect;
-  Details: TThemedElementDetails;
-  CSize: TSize;
+  R:TRect;
 begin
   if Stage = cdPostPaint then
   begin
@@ -228,8 +225,8 @@ begin
 end;
 
 var
-  i, j:Integer;
-  Node, Node1:TTreeNode;
+  i:Integer;
+  Node1:TTreeNode;
   Rule:TPGRule;
 begin
   //Event type that the rule is for: 1 = SELECT, 2 = UPDATE, 3 = INSERT, 4 = DELETE

@@ -118,7 +118,7 @@ begin
 
   edtTriggerEdit.Enabled:=Assigned(Trigger);
   edtTriggerDelete.Enabled:=edtTriggerEdit.Enabled;
-  TfbmDBObjectEditorForm(Owner).UpdateActions;
+  TfbmDBObjectEditorForm(Owner).CtrlUpdateActions;
   ShowDetailObject(Trigger, Panel1);
 end;
 

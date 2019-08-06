@@ -63,8 +63,6 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
   otPostgreProcTemplateUnit, otPostgreTriggerTemplateUnit, IBManMainUnit,
   IBManDataInspectorUnit, PostgreSQLEngineUnit,
   pg_tasks, pg_sql_lines_unit,
-  //Редактор обхектов
-  fdmAbstractEditorUnit,
   fbmUserEditorUnit,
   fbmObjectEditorDescriptionUnit,
   fbmGroupEditFrameUnit,
@@ -81,7 +79,6 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmTableEditorFieldsUnit,
      fbmpgTablePropertysUnit,           //Редактор свойств таблицы
      fbmViewEditorMainUnit,
-     fbmTableFieldEditorUnit,
      fdbm_SchemeEditorUnit,
      fbmDomainMainEditorUnit,
      fbmTableEditorTriggersUnit,
@@ -95,13 +92,12 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      pgIndexEditorFrameUnit,            //Редактор индекса
      fbmTableEditorIndexUnit,
      pgTableSpaceEditorUnit,            //Редактор табличного пространства
-     fbmSQLTextCommonUnit, fbmToolsUnit,              //Общие запросы для всех SQL серверов
-     fbmDBObjectEditorUnit,
+     fbmToolsUnit,              //Общие запросы для всех SQL серверов
      fbmdboDependenUnit, pgForeignDW, pgExtensionUnit, fbmFTSConfigUnit,
      fbmPGRuleEditorUnit,
      fbmPGRuleListUnit,                //Зависимости
      fbmpgACLEditUnit, fbmpgTableCheckConstaintUnit,
-     fbmpgTableCheckConstaint_EditUnit, fbmpgTableAutoVaccumUnit,                  //Права доступа
+     fbmpgTableAutoVaccumUnit,                  //Права доступа
      fbmPGLanguageUnit,                 //Языки
      fbmTableStatisticUnit,
      pgForeignUserMapping, pgForeignServerUnit,

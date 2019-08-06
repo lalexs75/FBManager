@@ -195,7 +195,7 @@ var
 implementation
 uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
   fbmEditorOptionsUnit, fbmStrConstUnit, fbmUserDataBaseUnit, fbmsqlscript,
-  SQLEngineAbstractUnit, fbmCreateConnectionUnit, fbmObjectTemplatesunit,
+  fbmCreateConnectionUnit, fbmObjectTemplatesunit,
   LCLIntf, LCLType, rxAppUtils, fdbm_SynEditorCompletionHintUnit,
   fbm_VisualEditorsAbstractUnit, fdbm_PagedDialogUnit, LCLVersion,
 
@@ -203,8 +203,7 @@ uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
   fbmShowNewUnit,
   fbmErrorSubmitUnit,
   {$ENDIF}
-  cfKeyboardTemplatesUnit, dsDesignerUnit, tlsSearchInMetatDataParamsUnit,
-  fbmConnectionEditUnit;
+  cfKeyboardTemplatesUnit, dsDesignerUnit, tlsSearchInMetatDataParamsUnit;
 
 {$R *.lfm}
 

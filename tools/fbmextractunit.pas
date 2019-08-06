@@ -72,7 +72,7 @@ var
 
 procedure ShowExtractForm;
 implementation
-uses SQLEngineAbstractUnit, IBManMainUnit, fbmStrConstUnit, fbmToolsUnit, rxlogging,
+uses SQLEngineAbstractUnit, IBManMainUnit, fbmStrConstUnit, fbmToolsUnit,
   rxAppUtils;
 
 procedure ShowExtractForm;

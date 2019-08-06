@@ -97,7 +97,6 @@ var
 
 procedure ShowReportManager;
 var
-  CurDB:TSQLEngineAbstract;
   Edt:TfbmReportManagerForm;
   i: Integer;
 begin

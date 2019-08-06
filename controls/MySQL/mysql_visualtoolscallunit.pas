@@ -61,10 +61,10 @@ uses   fbmStrConstUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
   fbmTableEditorDataUnit, fbmObjectEditorDescriptionUnit,
   fbmTableEditorFieldsUnit, fbmTableEditorTriggersUnit,
   fdbmTableEditorPKListUnit, fdbmTableEditorForeignKeyUnit,
-  fbmTableEditorIndexUnit, fbmMySQLTablePropsUnit, fbmTableFieldEditorUnit,
-  fbmDDLPageUnit, fbmdboDependenUnit, fbmTableEditorIndexEditUnit,
-  fbmDBObjectEditorUnit, mysql_CreateDatabaseUnit, fbmMySQLSPEdtMainPageUnit,
-  MySQLTriggerHeaderEditUnit, fbmViewEditorMainUnit, fbTriggerHeaderEditUnit,
+  fbmTableEditorIndexUnit, fbmMySQLTablePropsUnit,
+  fbmDDLPageUnit, fbmdboDependenUnit,
+  mysql_CreateDatabaseUnit, fbmMySQLSPEdtMainPageUnit,
+  MySQLTriggerHeaderEditUnit, fbmViewEditorMainUnit,
   MySQL_con_MainPageUnit, fdmUserEditor_MySQLUnit
   ;
 
@@ -109,6 +109,7 @@ end;
 class function TMySQLVisualTools.ConfigDlgPage(APageNum: integer;
   AOwner: TForm): TFBMConfigPageAbstract;
 begin
+  Result:=nil;
 end;
 
 constructor TMySQLVisualTools.Create(ASQLEngine: TSQLEngineAbstract);
