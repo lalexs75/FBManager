@@ -33,6 +33,9 @@ uses
 procedure FillFieldTypes(Items:TDBMSFieldTypeList);
 function ConvertFieldList(pgFieldList:string;const Obj:TDBDataSetObject):string;
 function ParsePGArrayString(ArrayStr:string;const Items:TStrings):integer;
+function ParsePGArrayChar(ArrayStr:string;out Items:TCharArray; ADelimiter:Char = ','):integer;
+function ParsePGArrayChar(ArrayStr:string;out Items:TIntegerArray; ADelimiter:Char = ','):integer;
+function ParsePGArrayChar(ArrayStr:string;out Items:TByteArray; ADelimiter:Char = ','):integer;
 
 function StrToPGSPVolatCat(const S:string):TPGSPVolatCat;
 //function PGFieldLoadMetaInfo(const Own:TDBDataSetObject; const FQuery:TDataSet):TPGField;
@@ -111,7 +114,8 @@ begin
   Items.Add('box', 0, false, false, ftUnknown, '', s_pg_box, tgGeometricTypes);
   Items.Add('bytea', 0, false, false, ftUnknown, '', s_pg_bytea, tgBinaryDataTypes);
   Items.Add('varchar', 0, true, false, ftString, 'character varying', s_pg_varchar, tgCharacterTypes);
-  Items.Add('char', 0, true, false, ftString, 'character', s_pg_char, tgCharacterTypes);
+  Items.Add('char', 0, true, false, ftString, 'character;bpchar', s_pg_char, tgCharacterTypes);
+  Items.Add('"char"', 0, true, false, ftString, '', s_pg_char, tgCharacterTypes);
   Items.Add('cidr', 0, false, false, ftUnknown, '', s_pg_cidr, tgNetworkAddressTypes);
   Items.Add('circle', 0, false, false, ftUnknown, '', s_pg_circle, tgGeometricTypes);
   Items.Add('date', 0, false, false, ftDate, '', s_pg_date, tgDateTimeTypes);
@@ -152,7 +156,7 @@ begin
   Items.Add('tinterval', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
   Items.Add('unknown', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
   Items.Add('aclitem', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
-  Items.Add('bpchar', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
+//  Items.Add('bpchar', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
   Items.Add('refcursor', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgUnknow); { TODO : Необходимо разобраться с группой типа }
   Items.Add('regprocedure', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgObjectTypes);
   Items.Add('regoper', 0, false, false, ftUnknown, '', s_pg_UnknowData, tgObjectTypes);
@@ -253,6 +257,33 @@ begin
     end;
     inc(Result);
   end;
+end;
+
+function ParsePGArrayChar(ArrayStr: string; out Items: TCharArray; ADelimiter:Char = ','): integer;
+var
+  i: Integer;
+begin
+  i:=1;
+  Result:=0;
+(*  while I<Length(ArrayStr) do
+  begin
+    Inc(I);
+    if ArrayStr[i] = '{' then
+    else
+    if ArrayStr[i] = '}' then I:=Length(ArrayStr) + 1
+    else
+
+  end; *)
+end;
+
+function ParsePGArrayChar(ArrayStr: string; out Items: TIntegerArray; ADelimiter:Char = ','): integer;
+begin
+  AbstractError;
+end;
+
+function ParsePGArrayChar(ArrayStr: string; out Items: TByteArray; ADelimiter:Char = ','): integer;
+begin
+  AbstractError;
 end;
 
 function StrToPGSPVolatCat(const S:string):TPGSPVolatCat;

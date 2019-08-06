@@ -803,6 +803,7 @@ type
     FOID:integer;
     FVolatilityCategories: TPGSPVolatCat;
     function GetNameWithParams:string;
+    procedure DoInitInParams(AParamsArray:string);
   protected
     procedure InternalInitACLList; virtual;
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
@@ -2969,7 +2970,7 @@ var
   FQuery: TZQuery;
   P: TDBItem;
 
-  FDesc, FOwnData, FObjData, FData, FAclList: TField;
+  FDesc, FOwnData, FObjData, {FData,} FAclList: TField;
 begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
   if DBObj.CountUse = 1 then
@@ -2983,7 +2984,7 @@ begin
         FDesc:=FQuery.Fields[4];
     FOwnData:=FQuery.FindField('own_data');
     FObjData:=FQuery.FindField('data');
-    FData:=FQuery.FindField('data');
+//    FData:=FQuery.FindField('data');
     FAclList:=FQuery.FindField('acl_list');
 
     while not FQuery.Eof do
@@ -2997,10 +2998,12 @@ begin
         P.ObjDesc:=Trim(FDesc.AsString);
       if Assigned(FOwnData) then
         P.ObjOwnData:=FOwnData.AsInteger;
+
       if Assigned(FObjData) then
         P.ObjData:=FObjData.AsString;
-      if Assigned(FData) then
-        P.ObjData:=FData.AsString;
+(*      if Assigned(FData) then
+        P.ObjData:=FData.AsString; *)
+
       if Assigned(FAclList) then
         P.ObjACLList:=FAclList.AsString;
 
@@ -3469,7 +3472,7 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_ObjListAll.Strings.Text);
   RefreshObjectsBegin(GetMetaSQLText(0));
-  RefreshObjectsBegin(pgSqlTextModule.sPGProcList.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFSUserMapping.Strings.Text);
@@ -3486,7 +3489,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sql_PG_ObjListAll.Strings.Text);
   RefreshObjectsEnd(GetMetaSQLText(0));
-  RefreshObjectsEnd(pgSqlTextModule.sPGProcList.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sqlSchemasAll.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
@@ -5955,7 +5958,7 @@ end;
 
 function TPGFunctionsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sPGProcList.Strings.Text;
+  Result:=pgSqlTextModule.sqlPGFuntions['PGFuntionList'];
 end;
 
 function TPGFunctionsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -6302,6 +6305,18 @@ begin
   Result:=GetCaptionFullPatch+'('+Result+')';
 end;
 
+procedure TPGFunction.DoInitInParams(AParamsArray: string);
+var
+  S1, S2, S3: String;
+  FModes: TByteArray;
+begin
+  //'{i,i,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o}|23 1043|{a_tb_client_id,a_macroquery,r_tb_client_sum_id,r_tb_client_sum_type,r_tb_client_sum_summa,r_tb_client_sum_date,r_tb_client_sum_owner_doc,r_tb_client_sum_status,r_tb_dogovor_id,r_tb_dogovor_date_start,r_tb_dogovor_number,r_tb_client_name,r_tb_client_adress,r_tb_client_kod,r_tb_client_summa_prc,r_tb_client_sum_number,r_bank_info_packet_doc_info,r_buh_prov_id,r_buh_account_number_deb,r_buh_account_number_cred,r_sum_sourse_name,r_nto_spr_peo
+  S1:=Copy2Symb( AParamsArray, '|');
+  S2:=Copy2Symb( AParamsArray, '|');
+  S3:=AParamsArray;
+//  ParsePGArrayChar(S1, FModes);
+end;
+
 procedure TPGFunction.InternalInitACLList;
 begin
   FACLList:=TPGACLList.Create(Self);
@@ -6510,6 +6525,8 @@ begin
     FOID:=ADBItem.ObjId;
     FReturnTypeOID:=StrToInt(ADBItem.ObjType);
     FACLListStr:=ADBItem.ObjACLList;
+    if ADBItem.ObjData<>'' then
+      DoInitInParams(ADBItem.ObjData);
   end;
 
   InternalInitACLList;
@@ -6750,7 +6767,7 @@ begin
   inherited RefreshObject;
   if State = sdboEdit then
   begin
-    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_ProcedureRefresh.Strings.Text);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGFuntions['PGFuntion']);
     try
       if FOID = 0 then
         Q.ParamByName('proname').AsString:=Caption
@@ -6840,6 +6857,8 @@ end;
 procedure TPGField.LoadfromDB(DS: TDataSet);
 var
   D: LongInt;
+  FIsArray: Boolean;
+  S: String;
 begin
   FieldName:=DS.FieldByName('attname').AsString;
   FieldNum:=DS.FieldByName('attnum').AsInteger;
@@ -6854,8 +6873,24 @@ begin
   end
   else
   begin
-    FieldTypeName:=DS.FieldByName('typname').AsString;
     FDomainID:=-1;
+
+    //FieldTypeName:=DS.FieldByName('typname').AsString;
+    S:=DS.FieldByName('typname').AsString;
+    FIsArray:=false;
+    if (S<>'') and (S[1]='_') then
+    begin
+      FIsArray:=true;
+      S:=Copy(S, 2, Length(S));
+    end;
+
+    if S = 'bpchar' then
+      S:='char';
+
+    if FIsArray then
+      S:=S + '[]';
+
+    FieldTypeName:=S;
     FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
   end;
   FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;

@@ -1472,11 +1472,6 @@ begin
           RN.ImageIndex:=IntPtr(CL.Objects[i]);
           RN.SelectedIndex:=IntPtr(CL.Objects[i]);
           RN.StateIndex:=IntPtr(CL.Objects[i]);
-
-(*          Rec:=TDBInspectorRecord.CreateObject((FOwner.TreeView as TTreeView).Items.AddChild(FOwner, CL[i]), OwnerDB, nil);
-          Rec.Caption:=CL[i];
-          Rec.FImageIndex:=IntPtr(CL.Objects[i]);
-          Rec.UpdateCaption; *)
         end;
         CL.Free;
       end;

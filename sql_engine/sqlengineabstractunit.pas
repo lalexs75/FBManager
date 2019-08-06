@@ -3088,6 +3088,7 @@ var
   F: TDBField;
 begin
   Result:=nil;
+  exit;
   if (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
   begin
     if not Loaded then
@@ -3512,6 +3513,7 @@ var
   D: Integer;
 begin
   Result:=nil;
+  exit;
   if (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
   begin
     if not Loaded then

@@ -35,6 +35,7 @@ type
     pgFDWobj: TStrHolder;
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sqlPGFuntions: TRxTextHolder;
     sPGSystem: TRxTextHolder;
     sql_PG_LangList: TRxTextHolder;
     sqlTableSpaces: TRxTextHolder;
@@ -56,7 +57,6 @@ type
     sqlPgGetACLParams: TStrHolder;
     sqlIndexFields: TStrHolder;
     sqlPGUserGroupGrants: TStrHolder;
-    sql_PG_ProcedureRefresh: TStrHolder;
     sql_PG_DomainRefresh: TStrHolder;
     sqlPGTableInerited: TStrHolder;
     sqlPGRelation: TStrHolder;
@@ -70,7 +70,6 @@ type
     sqlSchema: TStrHolder;
     sqlSequence: TStrHolder;
     sqlEventTriggers: TStrHolder;
-    sPGProcList: TStrHolder;
     sPGGroups: TStrHolder;
     sPGRoleParams: TStrHolder;
     sPGTasks: TStrHolder;
