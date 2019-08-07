@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions><package name="IBManager"><module name="pg_utils"><element name="ParsePGArrayChar"><short>Convert string PGArray to char array</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>
