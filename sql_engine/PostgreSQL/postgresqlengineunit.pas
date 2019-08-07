@@ -2774,7 +2774,7 @@ end;
 
 procedure TSQLEnginePostgre.UpdatePGProtocol;
 begin
-  FPGConnection.Protocol:=pgServerVersionProtoStr[FServerVersion];
+  FPGConnection.Protocol:=pgZeosServerVersionProtoStr[FServerVersion];
   FPGSysDB.Protocol:=FPGConnection.Protocol;
 end;
 

@@ -75,6 +75,28 @@ type
 
 
   TPGUserOptions = set of TPGUserOption;
+
+  TPGSettingParamType = (pgstBool, pgstEnum, pgstInteger, pgstReal, pgstString);
+
+  { TPGSettingParam }
+
+  TPGSettingParam = class
+  private
+    FEnumValues: TStrings;
+    FMaxValue: Double;
+    FMinValue: Double;
+    FParamName: string;
+    FParamType: TPGSettingParamType;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    property ParamName:string read FParamName write FParamName;
+    property ParamType:TPGSettingParamType read FParamType write FParamType;
+    property MinValue:Double read FMinValue write FMinValue;
+    property MaxValue:Double read FMaxValue write FMaxValue;
+    property EnumValues:TStrings read FEnumValues;
+  end;
+
 const
   RuleActionStr : array [TPGRuleAction] of string = ('SELECT', 'UPDATE', 'INSERT', 'DELETE');
   RuleWorkStr : array [TPGRuleWork] of string = ('ALSO', 'INSTEAD');
@@ -121,7 +143,7 @@ const
      'Postgre SQL version 11.0'
      );
 
-  pgServerVersionProtoStr :array [TPGServerVersion] of string =
+  pgZeosServerVersionProtoStr :array [TPGServerVersion] of string =
     ('postgresql',
      'postgresql-7',
      'postgresql-8',
@@ -139,6 +161,20 @@ const
      );
 
 implementation
+
+{ TPGSettingParam }
+
+constructor TPGSettingParam.Create;
+begin
+  inherited Create;
+  FEnumValues:=TStringList.Create;
+end;
+
+destructor TPGSettingParam.Destroy;
+begin
+  FreeAndNil(FEnumValues);
+  inherited Destroy;
+end;
 
 end.
 
