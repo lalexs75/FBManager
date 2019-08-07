@@ -122,7 +122,7 @@ uses
   SQLiteActivitiMonitorUnit, fbmRefreshObjTreeUnit, fbmTableStatisticUnit,
   pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit,
   SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
-  fbmpgTableAutoVaccumUnit, fbmToolsNV, fbmUserObjectsGrantUnit
+  fbmpgTableAutoVaccumUnit, fbmToolsNV, fbmUserObjectsGrantUnit, pgFunctionConfigUnit
 
   ;
 

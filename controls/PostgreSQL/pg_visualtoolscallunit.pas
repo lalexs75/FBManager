@@ -78,15 +78,10 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmTableEditorDataUnit,
      fbmTableEditorFieldsUnit,
      fbmpgTablePropertysUnit,           //Редактор свойств таблицы
-     fbmViewEditorMainUnit,
-     fdbm_SchemeEditorUnit,
-     fbmDomainMainEditorUnit,
-     fbmTableEditorTriggersUnit,
-     fdbmTableEditorPKListUnit,
-     fdbmTableEditorForeignKeyUnit,
-     fdbmTableEditorUniqueUnit,
-     fbm_pgEditSequenceUnit,
-     fbmPostGreeSPedtMainPageUnit,      //Редактор процедуры
+     fbmViewEditorMainUnit, fdbm_SchemeEditorUnit, fbmDomainMainEditorUnit,
+     fbmTableEditorTriggersUnit, fdbmTableEditorPKListUnit,
+     fdbmTableEditorForeignKeyUnit, fdbmTableEditorUniqueUnit,
+     fbm_pgEditSequenceUnit, fbmPostGreeSPedtMainPageUnit, pgFunctionConfigUnit,      //Редактор процедуры
      pgTriggerEditorUnit,               //Редактор тригера
      pgEventTriggerEditorUnit,          //Редактор триггера по событию
      pgIndexEditorFrameUnit,            //Редактор индекса
@@ -228,7 +223,7 @@ begin
   RegisterObjEditor(TPGFunction,
     [TfbmPostGreeFunctionEdtMainPage, TfbmObjectEditorDescriptionFrame],
     [TfbmPostGreeFunctionEdtMainPage, TDependenciesFrame, TfbmpgACLEditEditor,
-     TfbmObjectEditorDescriptionFrame,
+     TpgFunctionConfigFrame, TfbmObjectEditorDescriptionFrame,
      TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGTriggerFunction,

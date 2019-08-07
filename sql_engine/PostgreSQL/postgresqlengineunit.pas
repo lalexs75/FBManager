@@ -792,6 +792,7 @@ type
     FACLListStr: string;
     FAVGRows: integer;
     FAVGTime: integer;
+    FFunctionConfig: TStrings;
     FisStrict: boolean;
     FisWindow: boolean;
     FLanguage: TPGLanguage;
@@ -841,6 +842,7 @@ type
     property ReturnSetType:boolean read FReturnSetType; { TODO : В дальнейшем необходимо доработать вид возврата - таблица }
     property FieldsIN;
     property ACLListStr:string read FACLListStr;
+    property FunctionConfig:TStrings read FFunctionConfig;
   end;
 
   { TPGTriggerFunction }
@@ -984,6 +986,7 @@ type
     FIDTypeFDWHandler:integer;
     FIDTypeLangHandler:integer;
     FAccessMethod: TStringList;
+    FPGSettingParams: TPGSettingParams;
   private
     FSchemasRoot:TPGSchemasRoot;
     FSecurityRoot:TDBRootObject;//TPGSecurityRoot;
@@ -1024,6 +1027,7 @@ type
     //
     FOnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent;
     function GetAutovacuumOptions: TPGAutovacuumOptions;
+    function GetPGSettingParams: TPGSettingParams;
     function GetUsePGBouncer: Boolean;
     procedure OnSQLScriptDirective(Sender: TObject; Directive, Argument: AnsiString; var StopExecution: Boolean);
     procedure SetUsePGBouncer(AValue: Boolean);
@@ -1083,6 +1087,7 @@ type
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
     property UsePGBouncer:Boolean read GetUsePGBouncer write SetUsePGBouncer;
     property AutovacuumOptions:TPGAutovacuumOptions read GetAutovacuumOptions;
+    property PGSettingParams:TPGSettingParams read GetPGSettingParams;
     //property ServerVersion
     property IDTypeTrigger:integer read FIDTypeTrigger;           //Переменная для привязки типа функции-тригера к данным в БД
     property IDTypeEventTrigger:integer read FIDTypeEventTrigger; //Переменная для привязки типа функции-тригера к данным в БД
@@ -3210,6 +3215,59 @@ begin
   Result:=FAutovacuumOptions;
 end;
 
+function TSQLEnginePostgre.GetPGSettingParams: TPGSettingParams;
+var
+  Q: TZQuery;
+  FName, FType, FEnumVals, FMinValue, FMaxValue: TField;
+  P: TPGSettingParam;
+begin
+  if not Assigned(FPGSettingParams) then
+  begin
+    FPGSettingParams:=TPGSettingParams.Create;
+    Q:=GetSQLQuery(pgSqlTextModule.sPGSystem['sPGSettings']);
+    Q.Open;
+    FName:=Q.FieldByName('name');
+    FType:=Q.FieldByName('vartype');
+    FEnumVals:=Q.FieldByName('enumvals');
+    FMinValue:=Q.FieldByName('min_val');
+    FMaxValue:=Q.FieldByName('max_val');
+    try
+      while not Q.EOF do
+      begin
+        P:=FPGSettingParams.Add(FName.AsString);
+        if FType.AsString = 'bool' then
+          P.ParamType:=pgstBool
+        else
+        if FType.AsString = 'enum' then
+        begin
+          P.ParamType:=pgstEnum;
+          ParsePGArrayString(FEnumVals.AsString, P.EnumValues);
+        end
+        else
+        if FType.AsString = 'integer' then
+        begin
+          P.ParamType:=pgstInteger;
+          P.MinValue:=FMinValue.AsFloat;
+          P.MaxValue:=FMaxValue.AsFloat;
+        end
+        else
+        if FType.AsString = 'real' then
+        begin
+          P.ParamType:=pgstReal;
+          P.MinValue:=FMinValue.AsFloat;
+          P.MaxValue:=FMaxValue.AsFloat;
+        end
+        else
+          P.ParamType:=pgstString; //string
+        Q.Next;
+      end;
+    finally
+      Q.Free;
+    end;
+  end;
+  Result:=FPGSettingParams;
+end;
+
 function TSQLEnginePostgre.GetUsePGBouncer: Boolean;
 begin
   Result:=StrToBoolDef(Properties.Values['UsePGBouncer'], false);
@@ -3242,6 +3300,8 @@ begin
   FreeAndNil(FPGSysDB);
   if Assigned(FAccessMethod) then
     FreeAndNil(FAccessMethod);
+  if Assigned(FPGSettingParams) then
+    FreeAndNil(FPGSettingParams);
   inherited Destroy;
 end;
 
@@ -6458,8 +6518,10 @@ var
   ACL:TStringList;
   FCmd: TPGSQLCreateFunction;
   F: TDBField;
-  FCntOutput: Integer;
-  F1: TSQLParserField;
+  FCntOutput, i: Integer;
+  F1, P: TSQLParserField;
+  S: String;
+  FCmdA: TPGSQLAlterFunction;
 begin
   if not Assigned(Language) then
     RefreshObject;
@@ -6492,6 +6554,20 @@ begin
       F1.TypeName:=ResultType.FieldTypeDomain
     else
       F1.TypeName:=ResultType.FieldTypeName;
+  end;
+
+  for i:=0 to FFunctionConfig.Count-1 do
+  begin
+    S:=FFunctionConfig[i];
+    FCmdA:=TPGSQLAlterFunction.Create(FCmd);
+    FCmd.AddChild(FCmdA);
+    FCmdA.SchemaName:=SchemaName;
+    FCmdA.Name:=Caption;
+    FCmdA.Params.Assign(FCmd.Params);
+
+    FCmdA.AlterOperator:=pgafoSet1;
+    P:=FCmdA.ConfigParams.AddParam(Copy2SymbDel(S, '='));
+    P.ParamValue:=S;
   end;
 
   Result:=FCmd.AsSQL;
@@ -6568,6 +6644,11 @@ constructor TPGFunction.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FFunctionConfig:=TStringList.Create;
+  FResultType:=TDBField.Create(Self);
+  FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
@@ -6578,14 +6659,11 @@ begin
   end;
 
   InternalInitACLList;
-  FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
-  SchemaName:=FSchema.Caption;
-
-  FResultType:=TDBField.Create(Self);
 end;
 
 destructor TPGFunction.Destroy;
 begin
+  FreeAndNil(FFunctionConfig);
   FreeAndNil(FResultType);
   inherited Destroy;
 end;
@@ -6812,6 +6890,7 @@ begin
   FLanguageOID:=0;
   CntColums:=0;
   FieldsIN.Clear;
+  FFunctionConfig.Clear;
   inherited RefreshObject;
   if State = sdboEdit then
   begin
@@ -6862,6 +6941,9 @@ begin
             raise Exception.CreateFmt('not found type with OID = %d', [Q.FieldByName('prorettype').AsInteger]);
         end;
         FReturnSetType:=Q.FieldByName('proretset').AsBoolean;
+
+        if Q.FieldByName('proconfig').AsString<>'' then
+          ParsePGArrayString(Q.FieldByName('proconfig').AsString, FFunctionConfig);
 
         if Q.FieldByName('name_dims').AsString<>'' then
         begin

@@ -16830,8 +16830,8 @@ begin
     19:FCurConfigParam:=FConfigParams.AddParam(AWord);
     22:if Assigned(FCurParam) then
        begin
-         if FCurConfigParam.TypeName<>'' then FCurConfigParam.TypeName:=FCurConfigParam.TypeName + ', ';
-         FCurConfigParam.TypeName:=FCurConfigParam.TypeName + AWord;
+         if FCurConfigParam.TypeName<>'' then FCurConfigParam.TypeName:=FCurConfigParam.ParamValue + ', ';
+         FCurConfigParam.ParamValue:=FCurConfigParam.ParamValue + AWord;
        end;
   end;
 end;
@@ -16878,7 +16878,7 @@ begin
       S:=S + ' SET '+FCurConfigParam.Caption;
       if AlterOperator = pgafoSet1 then S:=S + ' = '
       else S:=S + ' TO ';///,pgafoSet2]
-      S:=S + FCurConfigParam.TypeName;
+      S:=S + FCurConfigParam.ParamValue;
     end;
   end
   else

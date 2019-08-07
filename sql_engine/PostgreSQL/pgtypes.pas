@@ -97,6 +97,38 @@ type
     property EnumValues:TStrings read FEnumValues;
   end;
 
+  TPGSettingParamsEnumerator = class;
+
+  { TPGSettingParams }
+
+  TPGSettingParams = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: integer): TPGSettingParam;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    function Add(AParamName:string):TPGSettingParam;
+    function GetEnumerator: TPGSettingParamsEnumerator;
+    property Items[AIndex:integer]:TPGSettingParam read GetItems; default;
+    property Count:integer read GetCount;
+  end;
+
+  { TPGSettingParamsEnumerator }
+
+  TPGSettingParamsEnumerator = class
+  private
+    FList: TPGSettingParams;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGSettingParams);
+    function GetCurrent: TPGSettingParam;
+    function MoveNext: Boolean;
+    property Current: TPGSettingParam read GetCurrent;
+  end;
+
 const
   RuleActionStr : array [TPGRuleAction] of string = ('SELECT', 'UPDATE', 'INSERT', 'DELETE');
   RuleWorkStr : array [TPGRuleWork] of string = ('ALSO', 'INSTEAD');
@@ -161,6 +193,71 @@ const
      );
 
 implementation
+
+{ TPGSettingParamsEnumerator }
+
+constructor TPGSettingParamsEnumerator.Create(AList: TPGSettingParams);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGSettingParamsEnumerator.GetCurrent: TPGSettingParam;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGSettingParamsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGSettingParams }
+
+function TPGSettingParams.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGSettingParams.GetItems(AIndex: integer): TPGSettingParam;
+begin
+  Result:=TPGSettingParam(FList[AIndex]);
+end;
+
+constructor TPGSettingParams.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGSettingParams.Destroy;
+begin
+  Clear;
+  FList.Free;
+  inherited Destroy;
+end;
+
+procedure TPGSettingParams.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TPGSettingParam(FList[i]).Free;
+  FList.Clear;
+end;
+
+function TPGSettingParams.Add(AParamName: string): TPGSettingParam;
+begin
+  Result:=TPGSettingParam.Create;
+  Result.ParamName:=AParamName;
+  FList.Add(Result);
+end;
+
+function TPGSettingParams.GetEnumerator: TPGSettingParamsEnumerator;
+begin
+  Result:=TPGSettingParamsEnumerator.Create(Self);
+end;
 
 { TPGSettingParam }
 
