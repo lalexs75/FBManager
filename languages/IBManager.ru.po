@@ -583,6 +583,10 @@ msgstr "Условия для составного индекса"
 msgid "Conditions"
 msgstr "Условия"
 
+#: fbmstrconstunit.sconfiguration
+msgid "Configuration"
+msgstr ""
+
 #: fbmstrconstunit.sconfirm
 msgid "Confirm"
 msgstr "Подтверждение"
@@ -1522,6 +1526,10 @@ msgstr "Длительность"
 msgctxt "fbmstrconstunit.sedit"
 msgid "Edit"
 msgstr "Изменить"
+
+#: fbmstrconstunit.seditconfigvalue
+msgid "Edit config value"
+msgstr ""
 
 #: fbmstrconstunit.seditdbfolder
 msgid "Edit DB folder"

@@ -2924,6 +2924,9 @@ begin
     FRealServerVersionMinor:=0;
     FRealServerVersionMajor:=0;
     FRealServerVersion:=0;
+
+    if Assigned(FPGSettingParams) then
+      FreeAndNil(FPGSettingParams);
   end;
 
   Result:=FPGConnection.Connected;
@@ -3220,6 +3223,8 @@ var
   Q: TZQuery;
   FName, FType, FEnumVals, FMinValue, FMaxValue: TField;
   P: TPGSettingParam;
+  S1, S2: String;
+  D1, D2: Extended;
 begin
   if not Assigned(FPGSettingParams) then
   begin
@@ -3246,16 +3251,22 @@ begin
         else
         if FType.AsString = 'integer' then
         begin
+          RxWriteLog(etDebug, '%s:%s (%s) %s -- %s', [FName.AsString, FType.AsString, FEnumVals.AsString, FMinValue.AsString, FMaxValue.AsString]);
           P.ParamType:=pgstInteger;
-          P.MinValue:=FMinValue.AsFloat;
-          P.MaxValue:=FMaxValue.AsFloat;
+          P.MinValue:=StrToIntDef(FMinValue.AsString, 0);
+          P.MaxValue:=StrToIntDef(FMaxValue.AsString, 0);
         end
         else
         if FType.AsString = 'real' then
         begin
+          RxWriteLog(etDebug, '%s:%s (%s) %s -- %s', [FName.AsString, FType.AsString, FEnumVals.AsString, FMinValue.AsString, FMaxValue.AsString]);
           P.ParamType:=pgstReal;
-          P.MinValue:=FMinValue.AsFloat;
-          P.MaxValue:=FMaxValue.AsFloat;
+          S1:=FMinValue.AsString;
+          S2:=FMaxValue.AsString;
+          D1:=StrToFloatExDef(FMinValue.AsString, 0);
+          D2:=StrToFloatExDef(FMaxValue.AsString, 0);
+          P.MinValue:=StrToFloatExDef(FMinValue.AsString, 0);
+          P.MaxValue:=StrToFloatExDef(FMaxValue.AsString, 0);
         end
         else
           P.ParamType:=pgstString; //string
@@ -6567,7 +6578,7 @@ begin
 
     FCmdA.AlterOperator:=pgafoSet1;
     P:=FCmdA.ConfigParams.AddParam(Copy2SymbDel(S, '='));
-    P.ParamValue:=S;
+    P.ParamValue:=QuotedString(S, '''');
   end;
 
   Result:=FCmd.AsSQL;
@@ -6594,6 +6605,8 @@ end;
 procedure TPGFunction.InternalRefreshStatistic;
 var
   FQuery: TZQuery;
+  i: Integer;
+  S, S1: String;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
@@ -6612,6 +6625,13 @@ begin
   finally
     FQuery.Close;
     FQuery.Free;
+  end;
+
+  for i:=0 to FFunctionConfig.Count-1 do
+  begin
+    S:=FFunctionConfig[i];
+    S1:=Copy2SymbDel(S, '=');
+    Statistic.AddValue(S1, S);
   end;
 end;
 

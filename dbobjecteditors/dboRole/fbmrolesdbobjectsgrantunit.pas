@@ -87,6 +87,7 @@ type
     procedure RxDBGrid1GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
     procedure rxGrantsTableAfterInsert(DataSet: TDataSet);
+    procedure rxGrantsTableAfterPost(DataSet: TDataSet);
     procedure rxGrantsTableFilterRecordEx(DataSet: TDataSet; var Accept: Boolean
       );
   private
@@ -130,6 +131,11 @@ begin
   rxGrantsTableO_Ref.AsBoolean:=false;
   rxGrantsTableO_Upd.AsBoolean:=false;
   rxGrantsTableO_Sel.AsBoolean:=false;
+end;
+
+procedure TfbmRolesDBObjectsGrantForm.rxGrantsTableAfterPost(DataSet: TDataSet);
+begin
+  CompileGrants;
 end;
 
 procedure TfbmRolesDBObjectsGrantForm.rxGrantsTableFilterRecordEx(
@@ -207,6 +213,7 @@ var
   P: TDBObject;
   i: Integer;
 begin
+  rxGrantsTable.AfterPost:=nil;
   rxGrantsTable.CloseOpen;
 
   //SQLEngine.FillListForNames();
@@ -294,6 +301,8 @@ begin
     Qu.Next;
   end;
   Qu.Close;
+
+  rxGrantsTable.AfterPost:=@rxGrantsTableAfterPost;
 end;
 
 procedure TfbmRolesDBObjectsGrantForm.GrantAll(E: boolean);

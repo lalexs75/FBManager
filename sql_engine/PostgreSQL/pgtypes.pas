@@ -112,6 +112,7 @@ type
     procedure Clear;
     function Add(AParamName:string):TPGSettingParam;
     function GetEnumerator: TPGSettingParamsEnumerator;
+    function FindParam(AParamName:string):TPGSettingParam;
     property Items[AIndex:integer]:TPGSettingParam read GetItems; default;
     property Count:integer read GetCount;
   end;
@@ -257,6 +258,17 @@ end;
 function TPGSettingParams.GetEnumerator: TPGSettingParamsEnumerator;
 begin
   Result:=TPGSettingParamsEnumerator.Create(Self);
+end;
+
+function TPGSettingParams.FindParam(AParamName: string): TPGSettingParam;
+var
+  i: Integer;
+begin
+  AParamName:=UpperCase(AParamName);
+  Result:=nil;
+  for i:=0 to FList.Count-1 do
+    if UpperCase(TPGSettingParam(FList[i]).ParamName) = AParamName then
+      Exit(TPGSettingParam(FList[i]));
 end;
 
 { TPGSettingParam }

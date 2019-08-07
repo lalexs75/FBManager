@@ -1801,6 +1801,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgFunctionConfigUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboStoredProcedure/pg/pgfunctionconfig_editunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgFunctionConfig_EditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pgFunctionConfig_EditUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -1825,7 +1833,7 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="4">
+    <Exceptions Count="5">
       <Item1>
         <Name Value="EZSQLException"/>
       </Item1>
@@ -1838,6 +1846,9 @@
       <Item4>
         <Name Value="Exception"/>
       </Item4>
+      <Item5>
+        <Name Value="EAbort"/>
+      </Item5>
     </Exceptions>
   </Debugging>
 </CONFIG>

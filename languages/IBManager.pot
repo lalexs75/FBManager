@@ -556,6 +556,10 @@ msgstr ""
 msgid "Conditions"
 msgstr ""
 
+#: fbmstrconstunit.sconfiguration
+msgid "Configuration"
+msgstr ""
+
 #: fbmstrconstunit.sconfirm
 msgid "Confirm"
 msgstr ""
@@ -1447,6 +1451,10 @@ msgstr ""
 #: fbmstrconstunit.sedit
 msgctxt "fbmstrconstunit.sedit"
 msgid "Edit"
+msgstr ""
+
+#: fbmstrconstunit.seditconfigvalue
+msgid "Edit config value"
 msgstr ""
 
 #: fbmstrconstunit.seditdbfolder

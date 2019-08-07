@@ -1422,6 +1422,7 @@ resourcestring
   sDeleteDBFolder                   = 'Delete this folder?';
   sEnterFolderData                  = 'Enter DB folder data';
   sEditFolderDesc                   = 'DB folder description';
+  sEditConfigValue                  = 'Edit config value';
 
   sNewDBFolder                      = 'New DB folder';
   sEditDBFolder                     = 'Edit DB folder';
@@ -1443,6 +1444,7 @@ resourcestring
   sStatsCallCount                   = 'Call count';
   sStatsFullTime                    = 'Full time';
   sStatsFunctionTime                = 'Function time';
+  sConfiguration                    = 'Configuration';
 
 
   sBlksHit                          = 'Number of times disk blocks were found already in the buffer cache, so that a read was not necessary (this only includes hits in the PostgreSQL buffer cache, not the operating system''s file system cache)';

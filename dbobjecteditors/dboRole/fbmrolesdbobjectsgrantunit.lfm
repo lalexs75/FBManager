@@ -11,7 +11,7 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     Left = 6
     Height = 17
     Top = 44
-    Width = 44
+    Width = 45
     BorderSpacing.Around = 6
     Caption = 'Objects'
     FocusControl = ComboBox1
@@ -266,107 +266,63 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
   end
   object ToolPanel1: TToolPanel[3]
     Left = 0
-    Height = 34
+    Height = 25
     Top = 0
     Width = 913
     Items = <    
       item
         Action = grnH
         Visible = True
-        Left = 5
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = grnL
         Visible = True
-        Left = 29
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Visible = True
-        Left = 53
-        Height = 24
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = grnHA
         Visible = True
-        Left = 60
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = grnHL
         Visible = True
-        Left = 84
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Visible = True
-        Left = 108
-        Height = 24
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = grnAll
         Visible = True
-        Left = 115
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Visible = True
-        Left = 139
-        Height = 24
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = revH
         Visible = True
-        Left = 146
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = revL
         Visible = True
-        Left = 170
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end    
       item
         Action = revAll
         Visible = True
-        Left = 194
-        Height = 24
-        Top = 5
-        Width = 24
         ShowCaption = False
       end>
     ImageList = fbManagerMainForm.ImageListMain
@@ -375,7 +331,7 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 34
+    ClientHeight = 25
     ClientWidth = 913
     TabOrder = 2
   end
@@ -465,6 +421,7 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
         Precision = -1
       end>
     AfterInsert = rxGrantsTableAfterInsert
+    AfterPost = rxGrantsTableAfterPost
     OnFilterRecord = rxGrantsTableFilterRecordEx
     PacketRecords = 0
     Left = 156

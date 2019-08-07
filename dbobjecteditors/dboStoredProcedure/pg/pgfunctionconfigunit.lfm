@@ -101,7 +101,7 @@ inherited pgFunctionConfigFrame: TpgFunctionConfigFrame
     FooterOptions.DrawFullLine = False
     SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
     SearchOptions.FromStart = False
-    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowToolMenu]
     Align = alClient
     AutoFillColumns = True
     Color = clWindow
@@ -110,9 +110,12 @@ inherited pgFunctionConfigFrame: TpgFunctionConfigFrame
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsData
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
     TabOrder = 0
     TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
   end
   object rxData: TRxMemoryData[1]
     FieldDefs = <    
@@ -154,5 +157,73 @@ inherited pgFunctionConfigFrame: TpgFunctionConfigFrame
     DataSet = rxData
     Left = 184
     Top = 176
+  end
+  object RxDBGridPrint1: TRxDBGridPrint[3]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Печать списка'
+    ShowSetupForm = True
+    Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle, rxpoShowPreview]
+    ShowProgress = True
+    ReportTitle = 'FunctionConfig'
+    ShowColumnHeaderOnAllPage = True
+    Left = 184
+    Top = 120
+  end
+  object ActionList1: TActionList[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 135
+    Top = 50
+    object actNew: TAction
+      Tag = 1
+      Caption = 'actNew'
+      ImageIndex = 12
+      OnExecute = actNewExecute
+    end
+    object actEdit: TAction
+      Caption = 'actEdit'
+      ImageIndex = 62
+      OnExecute = actNewExecute
+    end
+    object actDel: TAction
+      Caption = 'actDel'
+      ImageIndex = 13
+      OnExecute = actDelExecute
+    end
+    object actPrint: TAction
+      Caption = 'actPrint'
+      ImageIndex = 14
+      OnExecute = actPrintExecute
+    end
+    object actRefresh: TAction
+      Caption = 'actRefresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 144
+    Top = 176
+    object MenuItem1: TMenuItem
+      Action = actNew
+    end
+    object MenuItem2: TMenuItem
+      Action = actEdit
+    end
+    object MenuItem3: TMenuItem
+      Action = actDel
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem5: TMenuItem
+      Action = actRefresh
+    end
+    object MenuItem7: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = actPrint
+    end
   end
 end
