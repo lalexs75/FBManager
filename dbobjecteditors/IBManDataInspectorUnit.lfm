@@ -116,6 +116,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           Spacing = 0
           TabOrder = 0
           FilteredTreeview = TreeView1
+          OnFilterNode = TreeFilterEdit1FilterNode
         end
         object Label1: TLabel
           AnchorSideLeft.Control = Panel1

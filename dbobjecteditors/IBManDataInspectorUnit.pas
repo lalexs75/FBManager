@@ -170,6 +170,8 @@ type
     procedure saCopyAllLinesExecute(Sender: TObject);
     procedure saCopyLineExecute(Sender: TObject);
     procedure saHideSQLAssistentExecute(Sender: TObject);
+    function TreeFilterEdit1FilterNode(ItemNode: TTreeNode; out Done: Boolean
+      ): Boolean;
     procedure TreeView1CustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
       State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
@@ -543,6 +545,27 @@ end;
 procedure TfbManDataInpectorForm.saHideSQLAssistentExecute(Sender: TObject);
 begin
   ShowSqlAssitent(false);
+end;
+
+function TfbManDataInpectorForm.TreeFilterEdit1FilterNode(ItemNode: TTreeNode;
+  out Done: Boolean): Boolean;
+var
+  S1, S2: String;
+begin
+  if Assigned(ItemNode.Data) then
+  begin
+    Done:=false;
+    S1:=UTF8UpperCase(TreeFilterEdit1.Text);
+    S2:=UTF8UpperCase(ItemNode.Text);
+    Result:=Pos(S1, S2)>0;
+  end
+  else
+  begin
+    S1:=UTF8UpperCase(TreeFilterEdit1.Text);
+    S2:=UTF8UpperCase(ItemNode.Parent.Text);
+    Result:=Pos(S1, S2)>0;
+    Done:=true;
+  end;
 end;
 
 procedure TfbManDataInpectorForm.ListBox1DblClick(Sender: TObject);
