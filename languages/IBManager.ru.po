@@ -4783,7 +4783,7 @@ msgstr "Кол-во записей для статистики"
 
 #: fbmstrconstunit.sstatscallcount
 msgid "Call count"
-msgstr ""
+msgstr "Кол-во вызовов"
 
 #: fbmstrconstunit.sstatsdatetime
 msgid "Stats date"
@@ -5112,7 +5112,7 @@ msgstr "ДатаВремя"
 #: fbmstrconstunit.stoastautovacuumenabled
 msgctxt "fbmstrconstunit.stoastautovacuumenabled"
 msgid "Toast - autovacuum enabled"
-msgstr ""
+msgstr "Toast - Автовакум разрешён"
 
 #: fbmstrconstunit.stoastfreezemaxage
 msgctxt "fbmstrconstunit.stoastfreezemaxage"
@@ -5131,7 +5131,7 @@ msgstr ""
 
 #: fbmstrconstunit.stoastoid
 msgid "Toast OID"
-msgstr ""
+msgstr "Toast - OID"
 
 #: fbmstrconstunit.stoastsize
 msgid "Toast size"
@@ -5220,7 +5220,7 @@ msgstr "Количество транзакций для которых был �
 
 #: fbmstrconstunit.stransform
 msgid "Transform"
-msgstr ""
+msgstr "Трансформация"
 
 #: fbmstrconstunit.strigger
 msgctxt "fbmstrconstunit.strigger"
@@ -5661,28 +5661,20 @@ msgid "Indicates that a function accepts any input data type."
 msgstr "Показывает, что функция принимает любое входное значение."
 
 #: pg_utils.s_pg_anyarray
-#, fuzzy
-#| msgid "Indicates that a function accepts any array data type (see Section 35.2.5)."
 msgid "Indicates that a function accepts any array data type."
-msgstr "Показывает, что функция принимает массив любого типа (см. Section 34.2.5)."
+msgstr "Показывает, что функция принимает массив любого типа."
 
 #: pg_utils.s_pg_anyelement
-#, fuzzy
-#| msgid "Indicates that a function accepts any data type (see Section 35.2.5)."
 msgid "Indicates that a function accepts any data type."
-msgstr "Показывает, что функция принимает любой тип данных (см. Section 34.2.5)."
+msgstr "Показывает, что функция принимает любой тип данных."
 
 #: pg_utils.s_pg_anyenum
-#, fuzzy
-#| msgid "Indicates that a function accepts any enum data type (see Section 35.2.5 and Section 8.7)."
 msgid "Indicates that a function accepts any enum data type."
-msgstr "Показывает, что функция принимает любой тип данных перечисления (см. Section 34.2.5 и Section 8.7)."
+msgstr "Показывает, что функция принимает любой тип данных перечисления."
 
 #: pg_utils.s_pg_anynonarray
-#, fuzzy
-#| msgid "Indicates that a function accepts any non-array data type (see Section 35.2.5)."
 msgid "Indicates that a function accepts any non-array data type."
-msgstr "Показывает, что функция принимает любой тип данных, не являющийся массивом (см. Section 34.2.5)."
+msgstr "Показывает, что функция принимает любой тип данных, не являющийся массивом."
 
 #: pg_utils.s_pg_bigint
 msgid "signed eight-byte integer"

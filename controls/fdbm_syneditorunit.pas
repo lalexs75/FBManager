@@ -1095,9 +1095,9 @@ begin
           F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
           if Assigned(F) then
           begin
-            SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName;
-            if F.FieldDescription<>'' then;
-              SHint:=SHint + LineEnding + '---------------------------------------' + LineEnding + F.FieldDescription;
+            SHint:=ObjectKindToStr(okField) + ' ' +F.FieldName + ' ' + F.FieldTypeName + LineEnding;
+            if F.FieldDescription<>'' then
+              SHint:=SHint + '---------------------------------------' + LineEnding + F.FieldDescription + LineEnding;
           end;
         end
         else
