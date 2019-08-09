@@ -229,6 +229,7 @@ resourcestring
   sFieldCount                       = 'Field count: %d';
   sCopyFieldName                    = 'Copy field name';
   sCopyField                        = 'Copy field...';
+  sCopyFields                       = 'Copy fields?';
   sPK                               = 'PK';
   sUNQ                              = 'UNQ';
   sImportData                       = 'Import data';

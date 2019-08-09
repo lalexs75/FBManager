@@ -585,7 +585,7 @@ msgstr "Условия"
 
 #: fbmstrconstunit.sconfiguration
 msgid "Configuration"
-msgstr ""
+msgstr "Конфигурация"
 
 #: fbmstrconstunit.sconfirm
 msgid "Confirm"
@@ -720,6 +720,10 @@ msgstr "Копировать поле..."
 #: fbmstrconstunit.scopyfieldname
 msgid "Copy field name"
 msgstr "Копировать имя поля"
+
+#: fbmstrconstunit.scopyfields
+msgid "Copy fields?"
+msgstr "Копировать структуру таблицы?"
 
 #: fbmstrconstunit.scopyhint
 msgid "Copy text to clipboard"
@@ -928,8 +932,6 @@ msgid "Database file"
 msgstr "Файл базы данных"
 
 #: fbmstrconstunit.sdatabasehint
-#, fuzzy
-msgctxt "fbmstrconstunit.sdatabasehint"
 msgid "Select database"
 msgstr "Выбор базы данных"
 

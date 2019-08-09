@@ -127,6 +127,9 @@ type
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
     tabFieldDependencies: TTabSheet;
+    procedure FieldListGridDragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure FieldListGridDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
     procedure fldCopyExecute(Sender: TObject);
     procedure fldCopyFieldNameExecute(Sender: TObject);
     procedure fldDeleteExecute(Sender: TObject);
@@ -148,6 +151,7 @@ type
     procedure rxFieldListFIELD_DESC_EX1GetText(Sender: TField;
       var aText: string; DisplayText: Boolean);
   private
+    procedure DoFillRecordFromField(const R: TDBField);
     procedure FillSQLField(AItem:TSQLParserField);
     procedure DoFillEditForm;
     procedure DoEditInsFieldNewTable(AIns:boolean);
@@ -159,6 +163,7 @@ type
     procedure UpdateFieldDependencies;
     procedure SaveEditFormData;
     procedure CompileEditFormData(ASqlObj: TSQLAlterTable);
+    function DoAcceptDrag(const Source: TObject): TControl;
   public
     procedure Localize;override;
     function PageName:string;override;
@@ -266,6 +271,44 @@ begin
   aText:=rxFieldListFIELD_DESCRIPTION.AsString;
   if DisplayText then
     aText:=StrConvertDesc(aText);
+end;
+
+procedure TfbmTableEditorFieldsFrame.DoFillRecordFromField(const R: TDBField);
+begin
+  rxFieldListFIELD_NO.AsInteger:=rxFieldList.RecordCount + 1;
+  rxFieldListFIELD_NAME.AsString:=R.FieldName;
+  rxFieldListFIELD_TYPE.AsString:=R.FieldTypeName;
+  rxFieldListFIELD_DOMAIN.AsString:=R.FieldTypeDomain;
+  rxFieldListFIELD_SIZE.AsInteger:=R.FieldSize;
+  rxFieldListFIELD_PREC.AsInteger:=R.FieldPrec;
+  rxFieldListFIELD_DESCRIPTION.AsString:=R.FieldDescription;
+  rxFieldListFIELD_PK.AsBoolean:=R.FieldPK;
+  rxFieldListFIELD_UNQ.AsBoolean:=R.FieldUNIC;
+  rxFieldListFIELD_NOT_NULL.AsBoolean:=R.FieldNotNull;
+  rxFieldListFIELD_DEF_VALUE.AsString:=R.FieldDefaultValue;
+  rxFieldListFIELD_AUTOINC.AsBoolean:=R.FieldAutoInc;
+  rxFieldListFIELD_IS_LOCAL.AsBoolean:=R.FieldIsLocal;
+  rxFieldListFIELD_COLLATE.AsString:=R.FieldCollateName;
+  rxFieldListFIELD_CHARSET.AsString:=R.FieldCharSetName;
+
+  if foComputed in R.FieldOptions then
+    rxFieldListFIELD_COMPUTED_SOURCE.AsString:=R.FieldComputedSource;
+
+  rxFieldListOLD_FIELD_AUTOINC.Assign(rxFieldListFIELD_AUTOINC);
+  rxFieldListOLD_FIELD_DEF_VALUE.Assign(rxFieldListFIELD_DEF_VALUE);
+  rxFieldListOLD_FIELD_DESCRIPTION.Assign(rxFieldListFIELD_DESCRIPTION);
+  rxFieldListOLD_FIELD_DOMAIN.Assign(rxFieldListFIELD_DOMAIN);
+  rxFieldListOLD_FIELD_NAME.Assign(rxFieldListFIELD_NAME);
+  rxFieldListOLD_FIELD_NOT_NULL.Assign(rxFieldListFIELD_NOT_NULL);
+  rxFieldListOLD_FIELD_PK.Assign(rxFieldListFIELD_PK);
+  rxFieldListOLD_FIELD_PREC.Assign(rxFieldListFIELD_PREC);
+  rxFieldListOLD_FIELD_SIZE.Assign(rxFieldListFIELD_SIZE);
+  rxFieldListOLD_FIELD_TYPE.Assign(rxFieldListFIELD_TYPE);
+  rxFieldListOLD_FIELD_UNQ.Assign(rxFieldListFIELD_UNQ);
+  rxFieldListOLD_FIELD_COLLATE.Assign(rxFieldListFIELD_COLLATE);
+  rxFieldListOLD_FIELD_COMPUTED_SOURCE.Assign(rxFieldListFIELD_COMPUTED_SOURCE);
+  rxFieldListOLD_FIELD_CHARSET.Assign(rxFieldListFIELD_CHARSET);
+  rxFieldListOLD_FIELD_COLLATE.Assign(rxFieldListFIELD_COLLATE);
 end;
 
 procedure TfbmTableEditorFieldsFrame.FillSQLField(AItem: TSQLParserField);
@@ -522,41 +565,7 @@ begin
     if not R.SystemField then
     begin
       rxFieldList.Append;
-      rxFieldListFIELD_NO.AsInteger:=rxFieldList.RecordCount + 1;
-      rxFieldListFIELD_NAME.AsString:=R.FieldName;
-      rxFieldListFIELD_TYPE.AsString:=R.FieldTypeName;
-      rxFieldListFIELD_DOMAIN.AsString:=R.FieldTypeDomain;
-      rxFieldListFIELD_SIZE.AsInteger:=R.FieldSize;
-      rxFieldListFIELD_PREC.AsInteger:=R.FieldPrec;
-      rxFieldListFIELD_DESCRIPTION.AsString:=R.FieldDescription;
-      rxFieldListFIELD_PK.AsBoolean:=R.FieldPK;
-      rxFieldListFIELD_UNQ.AsBoolean:=R.FieldUNIC;
-      rxFieldListFIELD_NOT_NULL.AsBoolean:=R.FieldNotNull;
-      rxFieldListFIELD_DEF_VALUE.AsString:=R.FieldDefaultValue;
-      rxFieldListFIELD_AUTOINC.AsBoolean:=R.FieldAutoInc;
-      rxFieldListFIELD_IS_LOCAL.AsBoolean:=R.FieldIsLocal;
-      rxFieldListFIELD_COLLATE.AsString:=R.FieldCollateName;
-      rxFieldListFIELD_CHARSET.AsString:=R.FieldCharSetName;
-
-      if foComputed in R.FieldOptions then
-        rxFieldListFIELD_COMPUTED_SOURCE.AsString:=R.FieldComputedSource;
-
-      rxFieldListOLD_FIELD_AUTOINC.Assign(rxFieldListFIELD_AUTOINC);
-      rxFieldListOLD_FIELD_DEF_VALUE.Assign(rxFieldListFIELD_DEF_VALUE);
-      rxFieldListOLD_FIELD_DESCRIPTION.Assign(rxFieldListFIELD_DESCRIPTION);
-      rxFieldListOLD_FIELD_DOMAIN.Assign(rxFieldListFIELD_DOMAIN);
-      rxFieldListOLD_FIELD_NAME.Assign(rxFieldListFIELD_NAME);
-      rxFieldListOLD_FIELD_NOT_NULL.Assign(rxFieldListFIELD_NOT_NULL);
-      rxFieldListOLD_FIELD_PK.Assign(rxFieldListFIELD_PK);
-      rxFieldListOLD_FIELD_PREC.Assign(rxFieldListFIELD_PREC);
-      rxFieldListOLD_FIELD_SIZE.Assign(rxFieldListFIELD_SIZE);
-      rxFieldListOLD_FIELD_TYPE.Assign(rxFieldListFIELD_TYPE);
-      rxFieldListOLD_FIELD_UNQ.Assign(rxFieldListFIELD_UNQ);
-      rxFieldListOLD_FIELD_COLLATE.Assign(rxFieldListFIELD_COLLATE);
-      rxFieldListOLD_FIELD_COMPUTED_SOURCE.Assign(rxFieldListFIELD_COMPUTED_SOURCE);
-      rxFieldListOLD_FIELD_CHARSET.Assign(rxFieldListFIELD_CHARSET);
-      rxFieldListOLD_FIELD_COLLATE.Assign(rxFieldListFIELD_COLLATE);
-
+      DoFillRecordFromField(R);
       rxFieldList.Post;
     end;
   end;
@@ -776,6 +785,18 @@ begin
     FieldListRefresh;
     rxFieldList.Locate('FIELD_NAME', OP.Field.Caption, []);
   end;
+end;
+
+function TfbmTableEditorFieldsFrame.DoAcceptDrag(const Source: TObject
+  ): TControl;
+begin
+  if Source is TControl then
+    Result:=Source as TControl
+  else
+  if Source is TDragControlObject then
+    Result:=(Source as TDragControlObject).Control
+  else
+    Result:=nil;
 end;
 
 procedure TfbmTableEditorFieldsFrame.Localize;
@@ -1033,6 +1054,47 @@ begin
     end;
   end;
   fbmTableFieldEditorForm.Free;
+end;
+
+procedure TfbmTableEditorFieldsFrame.FieldListGridDragOver(Sender,
+  Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
+var
+  Control: TControl;
+begin
+  Control:=DoAcceptDrag(Source);
+  Accept:=(DBObject.State = sdboCreate)
+    and (Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentObject)
+    and Assigned(fbManDataInpectorForm.CurrentDB)
+    and (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
+    and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
+    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView]);
+end;
+
+procedure TfbmTableEditorFieldsFrame.FieldListGridDragDrop(Sender,
+  Source: TObject; X, Y: Integer);
+var
+  Control: TControl;
+  FDBTable: TDBDataSetObject;
+  F: TDBField;
+begin
+  Control:=DoAcceptDrag(Source);
+  if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
+    or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
+    or (not (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
+    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView])) then Exit;
+
+  if not QuestionBox(sCopyFields) then Exit;
+
+  FDBTable:=fbManDataInpectorForm.CurrentObject.DBObject as TDBDataSetObject;
+  for F in FDBTable.Fields do
+  begin
+    if not (rxFieldList.Locate('FIELD_NAME', F.FieldName, []) or F.SystemField) then
+    begin
+      rxFieldList.Append;
+      DoFillRecordFromField(F);
+      rxFieldList.Post;
+    end;
+  end;
 end;
 
 procedure TfbmTableEditorFieldsFrame.fldOrderExecute(Sender: TObject);
