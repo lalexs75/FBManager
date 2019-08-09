@@ -376,6 +376,7 @@ type
   protected
     function GetCaptionFullPatch:string; override;
     function InternalGetDDLCreate: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -437,6 +438,7 @@ type
   protected
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -625,6 +627,7 @@ type
     procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
     property ToastRelOID:Integer read FToastRelOID;
     property ToastRelOptions: String read FToastRelOptions;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -2022,6 +2025,13 @@ end;
 function TPGRule.GetCaptionFullPatch: string;
 begin
   Result:=Caption;
+end;
+
+procedure TPGRule.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sRelationOID, IntToStr(FRelID));
 end;
 
 constructor TPGRule.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
@@ -5163,6 +5173,13 @@ begin
   R.Free;
 end;
 
+procedure TPGDomain.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+end;
+
 constructor TPGDomain.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
@@ -5574,6 +5591,21 @@ begin
       FRuleList.Delete(i);
       RefreshEditor;
     end;
+  end;
+end;
+
+procedure TPGView.InternalRefreshStatistic;
+var
+  S: String;
+  i: Integer;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+  for i:=0 to FStorageParameters.Count-1 do
+  begin
+    S:=FStorageParameters[i];
+    Statistic.AddValue(Copy2SymbDel(S, '='), S);
   end;
 end;
 

@@ -7,11 +7,12 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
   DesignTop = 220
   object Panel1: TPanel[0]
     Left = 0
-    Height = 210
+    Height = 228
     Top = 0
     Width = 705
     Align = alTop
-    ClientHeight = 210
+    AutoSize = True
+    ClientHeight = 228
     ClientWidth = 705
     TabOrder = 0
     object CheckBox1: TCheckBox
@@ -21,7 +22,7 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       Left = 7
       Height = 23
       Top = 70
-      Width = 80
+      Width = 83
       BorderSpacing.Around = 6
       Caption = 'INSTEAD'
       OnChange = RadioGroup1Click
@@ -34,7 +35,7 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       Left = 7
       Height = 122
       Top = 99
-      Width = 89
+      Width = 92
       AutoFill = True
       AutoSize = True
       BorderSpacing.Around = 6
@@ -48,7 +49,7 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
       ClientHeight = 104
-      ClientWidth = 87
+      ClientWidth = 90
       Items.Strings = (
         'SELECT'
         'UPDATE'
@@ -76,7 +77,7 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       Left = 7
       Height = 17
       Top = 7
-      Width = 62
+      Width = 64
       BorderSpacing.Around = 6
       Caption = 'Rule name'
       ParentColor = False
@@ -87,10 +88,10 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       AnchorSideTop.Control = Edit1
       AnchorSideTop.Side = asrBottom
       AnchorSideBottom.Control = Panel2
-      Left = 195
+      Left = 199
       Height = 17
       Top = 76
-      Width = 57
+      Width = 60
       Anchors = [akLeft, akBottom]
       BorderSpacing.Around = 6
       Caption = 'Condition'
@@ -104,10 +105,10 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 108
-      Height = 104
+      Left = 111
+      Height = 122
       Top = 99
-      Width = 590
+      Width = 587
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Around = 6
       TabOrder = 3
@@ -119,7 +120,7 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       Left = 321
       Height = 17
       Top = 7
-      Width = 65
+      Width = 66
       BorderSpacing.Around = 6
       Caption = 'View name'
       ParentColor = False
@@ -146,10 +147,10 @@ inherited PGRuleEditorPage: TPGRuleEditorPage
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Edit1
       AnchorSideTop.Side = asrBottom
-      Left = 102
+      Left = 105
       Height = 23
       Top = 70
-      Width = 87
+      Width = 88
       BorderSpacing.Around = 6
       Caption = 'NOTHING'
       OnChange = CheckBox2Change

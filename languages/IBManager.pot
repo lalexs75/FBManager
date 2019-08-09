@@ -3938,6 +3938,10 @@ msgstr ""
 msgid "Relation name"
 msgstr ""
 
+#: fbmstrconstunit.srelationoid
+msgid "Relation OID"
+msgstr ""
+
 #: fbmstrconstunit.sreload
 msgid "Reload"
 msgstr ""

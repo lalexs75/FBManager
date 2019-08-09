@@ -508,6 +508,7 @@ resourcestring
   sDeleteRule                       = 'Delete rule';
   sRuleName                         = 'Rule name';
   sRelationName                     = 'Relation name';
+  sRelationOID                      = 'Relation OID';
 
 
   sSQLEditor                        = 'SQL editor';

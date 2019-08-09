@@ -932,6 +932,7 @@ msgid "Database file"
 msgstr "Файл базы данных"
 
 #: fbmstrconstunit.sdatabasehint
+msgctxt "fbmstrconstunit.sdatabasehint"
 msgid "Select database"
 msgstr "Выбор базы данных"
 
@@ -4080,6 +4081,10 @@ msgstr "Зарегистрированная БД"
 #: fbmstrconstunit.srelationname
 msgid "Relation name"
 msgstr "Имя таблицы"
+
+#: fbmstrconstunit.srelationoid
+msgid "Relation OID"
+msgstr ""
 
 #: fbmstrconstunit.sreload
 msgid "Reload"
