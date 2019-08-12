@@ -145,8 +145,6 @@ type
     function GetNoValidator: boolean;
     function GetOwner: string;
   protected
-    //function DBMSObjectsList:string; override;
-    //function DBMSValidObject(AItem:TDBItem):boolean; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
@@ -340,6 +338,7 @@ var
   R: TPGSQLCreateServer;
   i: Integer;
   S1, S2: String;
+  ACL: TStringList;
 begin
   R:=TPGSQLCreateServer.Create(nil);
   R.Description:=Description;
@@ -356,6 +355,16 @@ begin
   end;
   Result:=R.AsSQL;
   R.Free;
+
+
+  ACL:=TStringList.Create;
+  try
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, ACL, true);
+    Result:=Result + LineEnding + LineEnding + ACL.Text;
+  finally
+    ACL.Free;
+  end;
 end;
 
 function TPGForeignServer.GetOwnerName: string;
@@ -478,6 +487,7 @@ end;
 function TPGForeignDataWrapper.InternalGetDDLCreate: string;
 var
   R: TPGSQLCreateForeignDataWrapper;
+  ACL: TStringList;
 begin
   R:=TPGSQLCreateForeignDataWrapper.Create(nil);
   R.Name:=CaptionFullPatch;
@@ -489,7 +499,7 @@ begin
 
   Result:=R.AsSQL;
   R.Free;
-(*
+
   ACL:=TStringList.Create;
   try
     FACLList.RefreshList;
@@ -497,7 +507,7 @@ begin
     Result:=Result + LineEnding + LineEnding + ACL.Text;
   finally
     ACL.Free;
-  end; *)
+  end;
 end;
 
 function TPGForeignDataWrapper.GetNoHandler: boolean;

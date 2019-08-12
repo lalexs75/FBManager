@@ -192,6 +192,17 @@ type
     function PGTableByOID(ATableOID:integer):TPGTable;
   end;
 
+  { TPGForeignTablesRoot }
+
+  TPGForeignTablesRoot = class(TPGDBRootObject)
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+  end;
+
   { TPGSequencesRoot }
 
   TPGSequencesRoot = class(TPGDBRootObject)
@@ -309,6 +320,7 @@ type
   TPGSchema = class(TDBRootObject)
   private
     FACLListStr: string;
+    FForeignTablesRoot: TPGForeignTablesRoot;
     FOwnerName: String;
     FSchemaId: integer;
     FTablesRoot:TPGTablesRoot;
@@ -355,6 +367,7 @@ type
     //Объекты
     property DomainsRoot:TPGDomainsRoot read FDomainsRoot;
     property TablesRoot:TPGTablesRoot read FTablesRoot;
+    property ForeignTablesRoot:TPGForeignTablesRoot read FForeignTablesRoot;
     property SequencesRoot:TPGSequencesRoot read FSequencesRoot;
     property Views:TPGViewsRoot read FViews;
     property MatViews:TPGMatViewsRoot read FMatViews;
@@ -606,6 +619,17 @@ type
     property ACLListStr:string read FACLListStr;
   end;
 
+  TPGForeignTable = class(TDBTableObject)
+  private
+    FACLListStr: string;
+  protected
+    function GetCaptionFullPatch:string; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
+    class function DBClassTitle:string;override;
+    property ACLListStr:string read FACLListStr;
+  end;
 
   { TPGView }
 
@@ -1150,6 +1174,55 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGForeignTable }
+
+function TPGForeignTable.GetCaptionFullPatch: string;
+begin
+  Result:=inherited GetCaptionFullPatch;
+end;
+
+constructor TPGForeignTable.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+end;
+
+destructor TPGForeignTable.Destroy;
+begin
+  inherited Destroy;
+end;
+
+class function TPGForeignTable.DBClassTitle: string;
+begin
+  Result:=inherited DBClassTitle;
+end;
+
+{ TPGForeignTablesRoot }
+
+function TPGForeignTablesRoot.DBMSObjectsList: string;
+begin
+  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+end;
+
+function TPGForeignTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=Assigned(AItem) and (AItem.ObjType = 'f') and (AItem.SchemeID = SchemaId);
+end;
+
+function TPGForeignTablesRoot.GetObjectType: string;
+begin
+  Result:='Foreign table';
+end;
+
+constructor TPGForeignTablesRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okForeignTable;
+  FDropCommandClass:=TPGSQLDropForeignTable;
 end;
 
 { TPGIndexItems }
@@ -3918,6 +3991,8 @@ begin
   FDBObjectKind:=okScheme;
   FDomainsRoot:=TPGDomainsRoot.Create(OwnerDB, TPGDomain, sDomains, Self);
   FTablesRoot:=TPGTablesRoot.Create(OwnerDB, TPGTable, sTables, Self);
+  FForeignTablesRoot:=TPGForeignTablesRoot.Create(OwnerDB, TPGForeignTable, sForeignTable, Self);
+
   FSequencesRoot:=TPGSequencesRoot.Create(OwnerDB, TPGSequence, sSequences, Self);
   FViews:=TPGViewsRoot.Create(OwnerDB, TPGView, sViews, Self);
   FTriggers:=TPGTriggersRoot.Create(OwnerDB, TPGTrigger, sTriggers, Self);
@@ -3985,6 +4060,7 @@ begin
   if Assigned(FMatViews) then
     FreeAndNil(FMatViews);
   FreeAndNil(FTablesRoot);
+  FreeAndNil(FForeignTablesRoot);
   FreeAndNil(FDomainsRoot);
   FreeAndNil(FSequencesRoot);
   FreeAndNil(FProcedures);
