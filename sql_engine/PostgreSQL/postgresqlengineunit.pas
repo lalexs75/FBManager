@@ -2304,6 +2304,9 @@ begin
   if (DBObject is TPGView) or (DBObject is TPGMatView) then
     ParseACLListStr(TPGView(DBObject).ACLListStr)
   else
+  if (DBObject is TPGForeignServer) then
+    ParseACLListStr(TPGForeignServer(DBObject).ACLListStr)
+  else
     raise Exception.CreateFmt('not defined grant manager %s', [DBObject.ClassName]);
 end;
 

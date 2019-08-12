@@ -83,6 +83,7 @@ type
 
   TPGForeignServer = class(TDBRootObject)
   private
+    FACLListStr: string;
     FOptions: TStringList;
     FOwnerID: integer;
     FServerID: integer;
@@ -111,6 +112,7 @@ type
     property Options:TStringList read FOptions;
     property ServerType:string read FServerType write FServerType;
     property ServerVersion:string read FServerVersion write FServerVersion;
+    property ACLListStr:string read FACLListStr;
   end;
 
   { TPGForeignDataWrapperRoot }
@@ -168,7 +170,8 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, pg_SqlParserUnit, pgSqlTextUnit, pg_utils, pgSqlEngineSecurityUnit;
+uses fbmStrConstUnit, pg_SqlParserUnit, pgSqlTextUnit, pg_utils,
+  pgSqlEngineSecurityUnit, SQLEngineCommonTypesUnit;
 
 { TPGForeignServerRoot }
 
@@ -383,6 +386,9 @@ constructor TPGForeignServer.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogUsage, ogWGO];
+
   FOptions:=TStringList.Create;
   FDBObjectKind:=okServer;
   FUserMapping:=TPGForeignUserMapping.Create(AOwnerRoot.OwnerDB, TPGForeignUser, sUserMapping, Self);
@@ -419,13 +425,13 @@ begin
     if Q.RecordCount > 0 then
     begin
       //pg_foreign_server.srvname,
-      //pg_foreign_server.srvowner,
       //pg_foreign_server.srvfdw,
       //pg_foreign_server.srvacl,
       FServerID:=Q.FieldByName('oid').AsInteger;
       FOwnerID:=Q.FieldByName('srvowner').AsInteger;
       FServerType:=Q.FieldByName('srvtype').AsString;
       FServerVersion:=Q.FieldByName('srvversion').AsString;
+      FACLListStr:=Q.FieldByName('srvacl').AsString;
       S:=Q.FieldByName('srvoptions').AsString;
       ParsePGArrayString(S, FOptions);
       FDescription:=Q.FieldByName('description').AsString;
