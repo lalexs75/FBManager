@@ -1,7 +1,7 @@
 inherited pgForeignServerPage: TpgForeignServerPage
-  Height = 495
+  Height = 569
   Width = 606
-  ClientHeight = 495
+  ClientHeight = 569
   ClientWidth = 606
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
@@ -109,7 +109,7 @@ inherited pgForeignServerPage: TpgForeignServerPage
   end
   object Label5: TLabel[8]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Control = edtOwnerName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
@@ -119,36 +119,7 @@ inherited pgForeignServerPage: TpgForeignServerPage
     Caption = 'Options'
     ParentColor = False
   end
-  object ValueListEditor1: TValueListEditor[9]
-    AnchorSideLeft.Control = Label5
-    AnchorSideTop.Control = Label5
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    Left = 12
-    Height = 141
-    Top = 344
-    Width = 588
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 6
-    DefaultColWidth = 150
-    FixedCols = 0
-    RowCount = 4
-    TabOrder = 4
-    TitleStyle = tsNative
-    KeyOptions = [keyEdit, keyAdd, keyDelete, keyUnique]
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking]
-    Strings.Strings = (
-      'host='
-      'port='
-      'dbname='
-    )
-    ColWidths = (
-      150
-      436
-    )
-  end
-  object Label6: TLabel[10]
+  object Label6: TLabel[9]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = cbForeignDataWrapper
     AnchorSideTop.Side = asrBottom
@@ -160,7 +131,7 @@ inherited pgForeignServerPage: TpgForeignServerPage
     Caption = 'Owner'
     ParentColor = False
   end
-  object ComboBox2: TComboBox[11]
+  object edtOwnerName: TComboBox[10]
     AnchorSideLeft.Control = Label6
     AnchorSideTop.Control = Label6
     AnchorSideTop.Side = asrBottom
@@ -173,7 +144,166 @@ inherited pgForeignServerPage: TpgForeignServerPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
+    TabOrder = 4
+  end
+  object RxDBGrid1: TRxDBGrid[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 6
+    Height = 152
+    Top = 344
+    Width = 594
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'KEY'
+        Width = 283
+        FieldName = 'KEY'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Value'
+        Width = 284
+        FieldName = 'Value'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Anchors = [akTop, akLeft, akRight]
+    AutoFillColumns = True
+    BorderSpacing.Around = 6
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    GridLineStyle = psSolid
+    DataSource = dsData
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 5
-    Text = 'ComboBox2'
+    TitleStyle = tsNative
+    OnDragDrop = RxDBGrid1DragDrop
+    OnDragOver = RxDBGrid1DragOver
+  end
+  object rxData: TRxMemoryData[12]
+    FieldDefs = <    
+      item
+        Name = 'KEY'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'Value'
+        DataType = ftString
+        Size = 500
+      end>
+    PacketRecords = 0
+    Left = 150
+    Top = 386
+    object rxDataKEY: TStringField
+      FieldKind = fkData
+      FieldName = 'KEY'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 250
+    end
+    object rxDataValue: TStringField
+      FieldKind = fkData
+      FieldName = 'Value'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
+  end
+  object dsData: TDataSource[13]
+    DataSet = rxData
+    Left = 112
+    Top = 386
   end
 end

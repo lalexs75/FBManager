@@ -89,6 +89,7 @@ type
     FServerType: string;
     FServerVersion: string;
     FUserMapping:TPGForeignUserMapping;
+    function GetOwnerName: string;
   protected
     procedure InternalRefreshStatistic; override;
   public
@@ -104,6 +105,7 @@ type
 
     property ServerID:integer read FServerID;
     property OwnerID:integer read FOwnerID;
+    property OwnerName:string read GetOwnerName;
     property UserMapping:TPGForeignUserMapping read FUserMapping;
 
     property Options:TStringList read FOptions;
@@ -348,6 +350,18 @@ begin
   end;
   Result:=R.AsSQL;
   R.Free;
+end;
+
+function TPGForeignServer.GetOwnerName: string;
+var
+  P: TDBObject;
+begin
+  Result:='';
+  if not Assigned(OwnerDB) then Exit;
+
+  for P in TPGSecurityRoot(TSQLEnginePostgre(OwnerDB).SecurityRoot).PGUsersRoot.Objects do
+    if TPGUser(P).UserID = OwnerID then
+      Exit(P.Caption);
 end;
 
 procedure TPGForeignServer.InternalRefreshStatistic;
