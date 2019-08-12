@@ -2307,6 +2307,9 @@ begin
   if (DBObject is TPGForeignServer) then
     ParseACLListStr(TPGForeignServer(DBObject).ACLListStr)
   else
+  if (DBObject is TPGForeignDataWrapper) then
+    ParseACLListStr(TPGForeignDataWrapper(DBObject).ACLListStr)
+  else
     raise Exception.CreateFmt('not defined grant manager %s', [DBObject.ClassName]);
 end;
 

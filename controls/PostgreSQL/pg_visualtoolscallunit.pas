@@ -293,7 +293,7 @@ begin
 
   RegisterObjEditor(TPGForeignDataWrapper,
       [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame],
-      [TpgForeignDataWrap, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+      [TpgForeignDataWrap, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame, TfbmTableStatisticFrame, TfbmDDLPage]
     );
 
   RegisterObjEditor(TPGForeignServer,

@@ -147,6 +147,7 @@ type
   protected
     //function DBMSObjectsList:string; override;
     //function DBMSValidObject(AItem:TDBItem):boolean; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -520,23 +521,21 @@ begin
     if TPGUser(P).UserID = OwnerID then
       Exit(P.Caption);
 end;
-(*
-function TPGForeignDataWrapper.DBMSObjectsList: string;
+
+procedure TPGForeignDataWrapper.InternalRefreshStatistic;
 begin
-  Result:=pgSqlTextModule.pgFServ.Strings.Text;
+  inherited InternalRefreshStatistic;
 end;
 
-function TPGForeignDataWrapper.DBMSValidObject(AItem: TDBItem): boolean;
-begin
-  Result:=Assigned(AItem) and (AItem.SchemeID = FOID);
-end;
-*)
 constructor TPGForeignDataWrapper.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 var
   F1: TSQLEngineAbstract;
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogUsage, ogWGO];
+
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
