@@ -547,10 +547,15 @@ begin
   end;
 end;
 
+{$IFDEF LINUX}
+const
+  sEtcFolder = '/etc/';
+  sEtcCfgFolder = '/usr/share/fbmanager/';
+{$ENDIF}
 
 procedure InitFolders;
 var
-  GlobalCfgFolder, FAppDir: String;
+  GlobalCfgFolder, FAppDir, FAppResDir: String;
 begin
   FAppDir:=AppendPathDelim(ExtractFileDir(ParamStr(0)));
   GlobalCfgFolder:=SysToUTF8(RxGetAppConfigDir(true));
@@ -560,9 +565,16 @@ begin
   AliasFileName:=LocalCfgFolder+sAliasFileName;
   ConfigFileName:=LocalCfgFolder+sConfigFileNameOld;
 
-  LngFolder:=AppendPathDelim(FAppDir + 'languages');
-  DocsFolder:=AppendPathDelim(FAppDir+'docs');
-  ReportsFolder:=AppendPathDelim(FAppDir+'reports');
+  {$IFDEF LINUX}
+  if Copy(FAppDir, 1, Length(sEtcFolder)) = sEtcFolder then
+    FAppResDir := sEtcCfgFolder
+  else
+  {$ENDIF}
+    FAppResDir := FAppDir;
+
+  LngFolder:=AppendPathDelim(FAppResDir + 'languages');
+  DocsFolder:=AppendPathDelim(FAppResDir+'docs');
+  ReportsFolder:=AppendPathDelim(FAppResDir+'reports');
 
   ConfigFileNameNew:=LocalCfgFolder+sConfigFileNameNew;
 end;

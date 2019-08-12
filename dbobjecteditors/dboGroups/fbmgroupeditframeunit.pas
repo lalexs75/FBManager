@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ActnList, Buttons, ExtCtrls, Spin, rxdbgrid, rxmemds, rxtooledit, pgTypes,
   SQLEngineAbstractUnit, fdmAbstractEditorUnit, PostgreSQLEngineUnit, IniFiles,
-  db, fbmSqlParserUnit, pgSqlEngineSecurityUnit, pg_SqlParserUnit;
+  fbmSqlParserUnit, pgSqlEngineSecurityUnit, pg_SqlParserUnit;
 
 type
 
@@ -133,7 +133,6 @@ end;
 function TfbmGroupEditFrameEditor.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 var
-  AUserOptions:TPGUserOptions;
   CG: TPGSQLCreateRole;
 begin
   Result:=false;
@@ -165,6 +164,8 @@ begin
     epaPrint:PrintGroupCard;
     epaRefresh:LoadGroupData;
 //    epaCompile:Result:=CompileGroup;
+  else
+    Result:=false;
   end;
 end;
 

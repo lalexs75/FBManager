@@ -42,10 +42,10 @@ type
     Label3: TLabel;
   private
     procedure PrintPage;
-    procedure UpdateEnvOptions;override;
     procedure RefreshObject;
   public
     function PageName:string;override;
+    procedure UpdateEnvOptions;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;

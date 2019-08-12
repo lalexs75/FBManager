@@ -332,12 +332,12 @@ type
 }
     procedure SetSchemaId(const AValue: integer);
   protected
-    function InternalGetDDLCreate: string; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
 
+    function InternalGetDDLCreate: string; override;
     procedure FillFieldList(List:TStrings; ACharCase:TCharCaseOptions; AFullNames:Boolean);override;
 
     function CreateSQLObject:TSQLCommandDDL;override;
@@ -375,11 +375,11 @@ type
     FOID:integer;
   protected
     function GetCaptionFullPatch:string; override;
-    function InternalGetDDLCreate: string; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
     class function DBClassTitle:string;override;
     procedure RefreshDependencies; override;
     function CreateSQLObject:TSQLCommandDDL; override;
@@ -436,13 +436,13 @@ type
     FRelID:integer;
     function GetRelObject: TDBDataSetObject;
   protected
-    function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     procedure RefreshObject; override;
     function CreateSQLObject:TSQLCommandDDL; override;
     property RuleAction:TPGRuleAction read FRuleAction;
@@ -540,7 +540,6 @@ type
     function GetTriggersCategoriesType(AItem: integer): TTriggerTypes;override;
     function GetTriggersCategoriesCount: integer; override;
     function GetTriggersCount(AItem: integer): integer; override;
-    function InternalGetDDLCreate: string;override;
     function GetRecordCount: integer; override;
     function GetDBFieldClass: TDBFieldClass; override;
     procedure NotyfiOnDestroy(ADBObject:TDBObject); override;
@@ -550,6 +549,7 @@ type
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string;override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
 
@@ -621,7 +621,6 @@ type
     FToastRelOptions: String;
   protected
     function GetDDLAlter : string; override;
-    function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
     function GeTDBFieldClass: TDBFieldClass; override;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);override;
@@ -632,6 +631,7 @@ type
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     procedure RefreshObject; override;
     procedure RefreshFieldList; override;
     procedure RefreshDependencies; override;
@@ -657,12 +657,12 @@ type
     FToastAutovacuumOptions: TPGAutovacuumOptions;
   protected
     function GetDDLAlter : string; override;
-    function InternalGetDDLCreate: string; override;
     procedure IndexArrayCreate; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean;override;
 
@@ -692,12 +692,12 @@ type
     FOID:integer;
     FStartValue: Int64;
   protected
-    function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
+    function InternalGetDDLCreate: string; override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
 
@@ -734,13 +734,13 @@ type
     procedure SetTriggerSPId(ASpId:integer);
     procedure SetTriggerTableId(ATableId:integer);
   protected
-    function InternalGetDDLCreate: string;override;
     function GetTableName: string;override;
     procedure SetActive(const AValue: boolean); override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string;override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     procedure RefreshObject; override;
@@ -771,13 +771,13 @@ type
     procedure SetTriggerSPName(const AValue: string);
     procedure SetTriggerSPId(ASpId:integer);
   protected
-    function InternalGetDDLCreate: string;override;
     procedure SetActive(const AValue: boolean); override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string;override;
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
@@ -812,14 +812,14 @@ type
     procedure InternalInitACLList; virtual;
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
     function GetCaptionFullPatch:string; override;
-    function InternalGetDDLCreate: string; override;
     function GetEnableRename: boolean; override;
     procedure InternalRefreshStatistic; override;
-    function MakeChildList:TStrings; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
     function RenameObject(ANewName:string):Boolean; override;
+    function MakeChildList:TStrings; override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     function CompileProc(PrcName, PrcParams, aSql:string; ADropBeforCompile:boolean):boolean;
@@ -869,13 +869,13 @@ type
     FOID:integer;
     procedure SetPGTable(const AValue: TDBDataSetObject);
   protected
-    function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch:string; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     procedure RefreshObject;override;
     procedure RefreshDependencies; override;
@@ -917,12 +917,12 @@ type
     function GetOwnerUser: TDBObject;
     function GetOwnerUserName: string;
   protected
-    function InternalGetDDLCreate: string; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     procedure RefreshObject; override;
     procedure RefreshDependencies; override;
@@ -941,10 +941,10 @@ type
   private
     FOID:integer;
   protected
-    function InternalGetDDLCreate: string; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
     class function DBClassTitle:string;override;
     function CreateSQLObject:TSQLCommandDDL; override;
     procedure RefreshObject; override;
@@ -960,11 +960,12 @@ type
     FVersion: string;
     function GetSchemaName: string;
   protected
-    function InternalGetDDLCreate: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
     procedure RefreshObject; override;
@@ -1389,6 +1390,16 @@ begin
     Result:=Sc.Caption
   else
     Result:='';
+end;
+
+procedure TPGExtension.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchemaID));
+  Statistic.AddValue(sSchemeName, SchemaName);
+  if FVersion<>'' then
+    Statistic.AddValue(sVersion, FVersion);
 end;
 
 function TPGExtension.InternalGetDDLCreate: string;

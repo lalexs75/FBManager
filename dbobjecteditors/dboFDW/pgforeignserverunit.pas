@@ -123,6 +123,8 @@ begin
   case PageAction of
     epaPrint:PrintUserMap;
     epaRefresh:RefreshObject;
+  else
+    Result:=false;
   end;
 end;
 

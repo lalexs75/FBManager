@@ -90,6 +90,7 @@ type
     FServerVersion: string;
     FUserMapping:TPGForeignUserMapping;
   protected
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -347,6 +348,12 @@ begin
   end;
   Result:=R.AsSQL;
   R.Free;
+end;
+
+procedure TPGForeignServer.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+
 end;
 
 constructor TPGForeignServer.Create(const ADBItem: TDBItem;

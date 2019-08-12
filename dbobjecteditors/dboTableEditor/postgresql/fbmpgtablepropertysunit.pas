@@ -90,8 +90,6 @@ begin
 end;
 
 procedure TfbmpgTablePropertysFrame.SpeedButton1Click(Sender: TObject);
-var
-  i:integer;
 begin
   BoxMoveSelectedItems(ListBox1, ListBox2);
   UpdateInhLists;

@@ -265,8 +265,6 @@ procedure TfbmPGLocalVarsEditorFrame.FillSynCompletionList(
   const KeyStartWord: string; const AItems: TSynCompletionObjList);
 var
   B: TBookMark;
-  i: Integer;
-  P: TLocalVariable;
   R: TSynCompletionObjItem;
 begin
   B:=rxLocalVars.Bookmark;

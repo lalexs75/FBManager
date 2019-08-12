@@ -4494,6 +4494,10 @@ msgstr "Имя сервера            = "
 msgid "Server name"
 msgstr "Имя сервера"
 
+#: fbmstrconstunit.sservertype
+msgid "Server type"
+msgstr ""
+
 #: fbmstrconstunit.sserverversion
 msgid "Server version = "
 msgstr "Версия сервера = "

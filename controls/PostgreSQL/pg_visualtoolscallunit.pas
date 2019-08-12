@@ -263,7 +263,7 @@ begin
 
   RegisterObjEditor(TPGExtension,
       [TpgExtensionEditor, TfbmObjectEditorDescriptionFrame],
-      [TpgExtensionEditor, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+      [TpgExtensionEditor, TfbmObjectEditorDescriptionFrame, TfbmTableStatisticFrame, TfbmDDLPage]
     );
 
   RegisterObjEditor(TPGCollation,

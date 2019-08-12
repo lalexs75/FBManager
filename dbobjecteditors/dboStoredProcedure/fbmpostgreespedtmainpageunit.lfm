@@ -25,8 +25,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Declaration'
-      ClientHeight = 184
-      ClientWidth = 911
+      ClientHeight = 188
+      ClientWidth = 907
       object cbVolatCat: TComboBox
         AnchorSideLeft.Control = Label6
         AnchorSideLeft.Side = asrBottom
@@ -193,8 +193,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 90
-        ClientWidth = 118
+        ClientHeight = 91
+        ClientWidth = 120
         Items.Strings = (
           'Single value'
           'Set of values'
@@ -243,8 +243,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Options'
-        ClientHeight = 90
-        ClientWidth = 208
+        ClientHeight = 91
+        ClientWidth = 210
         TabOrder = 7
         object cbIsWindow: TCheckBox
           AnchorSideLeft.Control = Panel1
@@ -285,8 +285,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     end
     object TabSheet2: TTabSheet
       Caption = 'Params'
-      ClientHeight = 184
-      ClientWidth = 911
+      ClientHeight = 188
+      ClientWidth = 907
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 184
@@ -397,7 +397,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Desc'
-            Width = 262
+            Width = 278
             FieldName = 'Desc'
             EditButtons = <>
             Filter.Font.Style = [fsItalic]
@@ -513,7 +513,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         object ToolButton4: TToolButton
           Left = 1
           Top = 68
-          Width = 23
+          Width = 8
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end

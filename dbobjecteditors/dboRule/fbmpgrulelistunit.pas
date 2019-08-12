@@ -302,6 +302,8 @@ begin
     epaRefresh:RefreshRulesTree;
 {    epaPrint:fldPrint.Execute;
     epaCompile:Result:=Compile;}
+  else
+    Result:=false;
   end;
 end;
 

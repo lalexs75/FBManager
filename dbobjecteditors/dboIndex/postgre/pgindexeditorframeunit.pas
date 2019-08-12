@@ -218,8 +218,6 @@ end;
 
 procedure TpgIndexEditorPage.RefreshObject;
 var
-  S:string;
-  I: Integer;
   PGIF: TIndexField;
 begin
   rxIndexFields.CloseOpen;
@@ -343,6 +341,8 @@ begin
   case PageAction of
     epaRefresh:RefreshObject;
     epaPrint:PrintPage;
+  else
+    Result:=false;
   end;
 end;
 

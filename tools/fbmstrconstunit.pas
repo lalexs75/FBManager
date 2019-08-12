@@ -345,6 +345,7 @@ resourcestring
   sSchemeName                       = 'Scheme name';
   sOther                            = 'Other';
   sEventTrigger                     = 'Event trigger';
+  sVersion                          = 'Version';
 
   //for object grops
   sDomains                          = 'Domains';

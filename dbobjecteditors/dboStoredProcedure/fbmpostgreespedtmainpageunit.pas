@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Spin, ActnList, Menus, ComCtrls, db, rxmemds, rxdbgrid, rxtoolbar,
   sqlObjects, fdmAbstractEditorUnit, PostgreSQLEngineUnit, fdbm_SynEditorUnit,
-  fbmToolsUnit, LMessages, SQLEngineAbstractUnit, types, fbmSqlParserUnit,
+  fbmToolsUnit, LMessages, SQLEngineAbstractUnit, fbmSqlParserUnit,
   fbmPGLocalVarsEditorFrameUnit, SQLEngineCommonTypesUnit;
 
 type
@@ -139,10 +139,9 @@ type
     procedure LoadProcedureBody;
     procedure PrintPage;
     procedure TextEditorChange(Sender: TObject);
-    procedure UpdateEnvOptions;override;
     procedure RefreshObject;
-    procedure GetCurParRecord(var R:TpgTypeParRec);
-    procedure SetCurParRecord(var R:TpgTypeParRec);
+    procedure GetCurParRecord(out R:TpgTypeParRec);
+    procedure SetCurParRecord(R:TpgTypeParRec);
 
     procedure SynGetKeyWordList(Sender:Tfdbm_SynEditorFrame; const KeyStartWord:string; const Items:TSynCompletionObjList; ACharCase:TCharCaseOptions);
     procedure SynGetFieldsList(Sender:Tfdbm_SynEditorFrame; const DBObjName:string; const Items:TSynCompletionObjList; ACharCase:TCharCaseOptions);
@@ -162,6 +161,7 @@ type
     procedure TextEditorPopUpMenu(Sender: TObject);
   public
     function PageName:string;override;
+    procedure UpdateEnvOptions;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
@@ -307,7 +307,6 @@ end;
 procedure TfbmPostGreeFunctionEdtMainPage.LoadProcedureBody;
 var
   aSql:TStringList;
-  i:integer;
   S, S1:string;
   P: Classes.TPoint;
 
@@ -432,7 +431,7 @@ begin
   Modified:=false;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.GetCurParRecord(var R: TpgTypeParRec);
+procedure TfbmPostGreeFunctionEdtMainPage.GetCurParRecord(out R: TpgTypeParRec);
 begin
   R.IO:=rxParamListInOut.AsInteger;
   R.ParName:=rxParamListParName.AsString;
@@ -441,7 +440,7 @@ begin
   R.Desc:=rxParamListDesc.AsString;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.SetCurParRecord(var R: TpgTypeParRec);
+procedure TfbmPostGreeFunctionEdtMainPage.SetCurParRecord(R: TpgTypeParRec);
 begin
   rxParamList.Edit;
   rxParamListInOut.AsInteger   := R.IO;
@@ -461,9 +460,6 @@ var
   Prs: TSQLParser;
   S: String;
   FSt: TSQLTextStatement;
-  DBObj: TDBObject;
-  K: Integer;
-  j: Integer;
   LVP: TPGSQLDeclareLocalVarInt;
   P: TSQLParserField;
   R: TSynCompletionObjItem;
@@ -537,7 +533,6 @@ procedure TfbmPostGreeFunctionEdtMainPage.SynGetFieldsList(
   const Items: TSynCompletionObjList; ACharCase: TCharCaseOptions);
 var
   P: TSQLParser;
-  DBObj:TDBObject;
   FSt: TSQLTextStatement;
   S: String;
   T: TTableItem;
@@ -599,11 +594,9 @@ procedure TfbmPostGreeFunctionEdtMainPage.SynGetAliasList(
   Sender: Tfdbm_SynEditorFrame; const KeyStartWord: string;
   const Items: TSynCompletionObjList; ACharCase: TCharCaseOptions);
 var
-  P: TSQLParser;
   FSt: TSQLTextStatement;
   i: Integer;
   DBObj:TDBObject;
-  S: String;
 begin
 (*  P:=TSQLParser.Create(EditorFrame.EditorText, TPGFunction(DBObject).OwnerDB);
   S:=UpperCase(P.GetNextWord);

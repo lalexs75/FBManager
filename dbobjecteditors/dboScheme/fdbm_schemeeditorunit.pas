@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   sqlObjects, SQLEngineCommonTypesUnit, fdmAbstractEditorUnit,
-  SQLEngineAbstractUnit, fbmSqlParserUnit, IniFiles, PostgreSQLEngineUnit;
+  SQLEngineAbstractUnit, fbmSqlParserUnit, PostgreSQLEngineUnit;
 
 type
 

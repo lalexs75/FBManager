@@ -50,8 +50,6 @@ type
     Label7: TLabel;
     edtLastValue: TSpinEdit;
   private
-    function DoMetod(PageAction:TEditorPageAction):boolean;override;
-    function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     procedure LoadGenerator;
     procedure LoadGeneratorEx;
     procedure PrintPage;
@@ -59,6 +57,8 @@ type
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
     procedure Localize;override;
+    function DoMetod(PageAction:TEditorPageAction):boolean;override;
+    function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 

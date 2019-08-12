@@ -4334,6 +4334,10 @@ msgstr ""
 msgid "Server name"
 msgstr ""
 
+#: fbmstrconstunit.sservertype
+msgid "Server type"
+msgstr ""
+
 #: fbmstrconstunit.sserverversion
 msgid "Server version = "
 msgstr ""
