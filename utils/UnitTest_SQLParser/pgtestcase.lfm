@@ -425,7 +425,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 80
   end
   object sUserAcess: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'Grant1'
@@ -750,6 +750,26 @@ object PGSQLParserData: TPGSQLParserData
         Caption = 'Grant7'
         Lines.Strings = (
           'GRANT USAGE ON FOREIGN SERVER work_medic TO alexs;'
+        )
+      end    
+      item
+        Caption = 'Revoke7'
+        Lines.Strings = (
+          'REVOKE ALL ON FOREIGN SERVER work_medic FROM tux;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke8'
+        Lines.Strings = (
+          'REVOKE ALL ON FOREIGN SERVER work_medic FROM alexs;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke9'
+        Lines.Strings = (
+          'REVOKE ALL ON FOREIGN SERVER work_medic FROM admins;'
         )
       end>
     Left = 104

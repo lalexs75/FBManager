@@ -11518,7 +11518,8 @@ var
     TTblAll, TFromGrp, TUsrGrp, TCasc, TRestr, TTblSchema,
     TSymb2, TTblCol, TTblAll1, TOp10, TSeqSchema, TSeqName,
     TSeqAll, TObjSchema, TOp11, TFuncName, TOpExec, TOnF,
-    TFuncSchema, TSymb1, TOpt1, TRole, TTableSpace: TSQLTokenRecord;
+    TFuncSchema, TSymb1, TOpt1, TRole, TTableSpace,
+    TForeignServer, TForeignServer1: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REVOKE }
   (*
@@ -11557,11 +11558,11 @@ begin
       FROM { [ GROUP ] role_name | PUBLIC } [, ...]
       [ CASCADE | RESTRICT ]
 
-  REVOKE [ GRANT OPTION FOR ]
-      { USAGE | ALL [ PRIVILEGES ] }
-      ON FOREIGN SERVER server_name [, ...]
-      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
-      [ CASCADE | RESTRICT ]
++  REVOKE [ GRANT OPTION FOR ]
++      { USAGE | ALL [ PRIVILEGES ] }
++      ON FOREIGN SERVER server_name [, ...]
++      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
++      [ CASCADE | RESTRICT ]
 
   REVOKE [ GRANT OPTION FOR ]
       { EXECUTE | ALL [ PRIVILEGES ] }
@@ -11715,8 +11716,21 @@ REVOKE [ ADMIN OPTION FOR ]
   TTableSpace:=AddSQLTokens(stIdentificator, TTableSpace, '', [], 36);
     TSymb:=AddSQLTokens(stSymbol, TTableSpace, ',', [], 34);
       TSymb.AddChildToken(TTableSpace);
+(*
+      REVOKE [ GRANT OPTION FOR ]
+          { USAGE | ALL [ PRIVILEGES ] }
+          ON FOREIGN SERVER server_name [, ...]
+          FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+          [ CASCADE | RESTRICT ]
+*)
+  TForeignServer:=AddSQLTokens(stKeyword, TOn, 'FOREIGN', []);
+  TForeignServer1:=AddSQLTokens(stKeyword, TForeignServer, 'SERVER', []);
+  TForeignServer1:=AddSQLTokens(stIdentificator, TForeignServer1, '', [], 37);
+  TSymb:=AddSQLTokens(stSymbol, TForeignServer1, ',', [], 34);
+    TSymb.AddChildToken(TForeignServer1);
+
 //---
-  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole, TTableSpace], 'FROM', []);
+  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole, TTableSpace, TForeignServer1], 'FROM', []);
     TFromGrp:=AddSQLTokens(stKeyword, TFrom, 'GROUP', [], 13);
   TUsrGrp:=AddSQLTokens(stIdentificator, [TFrom, TFromGrp], '', [], 14);
     TSymb:=AddSQLTokens(stSymbol, TUsrGrp, ',', [toOptional]);
@@ -11862,6 +11876,10 @@ begin
     36:begin
          FCurTable:=Tables.Add(AWord);
          ObjectKind:=okTableSpace;
+       end;
+    37:begin
+         FCurTable:=Tables.Add(AWord);
+         ObjectKind:=okForeignServer;
        end;
     50:begin
         ObjectKind:=okRole;
@@ -12038,6 +12056,14 @@ begin
         if S1<>'' then
           S:=S + S1;
       end;
+    okForeignServer:S:=S + ' FOREIGN SERVER ' + Tables.AsString;
+(*
+REVOKE [ GRANT OPTION FOR ]
+    { USAGE | ALL [ PRIVILEGES ] }
+    ON FOREIGN SERVER server_name [, ...]
+    FROM { [ GROUP ] role_name | PUBLIC } [, ...]
+    [ CASCADE | RESTRICT ]
+*)
   else
     S:=S + ' ' + Tables.AsString;
   end;
