@@ -3572,8 +3572,8 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFSUserMapping.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFServ.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFDW.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFServ']);
+  RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsBegin(pgSqlTextModule.pgFtsConfigs.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFtsDicts.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFTsParsers.Strings.Text);
@@ -3590,8 +3590,8 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sqlSchemasAll.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgFSUserMapping.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFServ.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFDW.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFServ']);
+  RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsEnd(pgSqlTextModule.pgFtsConfigs.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgFtsDicts.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgFTsParsers.Strings.Text);

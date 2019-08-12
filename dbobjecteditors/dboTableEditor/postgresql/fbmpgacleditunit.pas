@@ -318,14 +318,16 @@ begin
     rxUGList.Post;
   end;
 
+  rxUGList.AfterPost:=@rxUGListAfterPost;
+  rxUGList.EnableControls;
+
+  ComboBox1Change(nil);
+
   if FUserName<>'' then
     rxUGList.Locate('UG_NAME', FUserName, [])
   else
     rxUGList.First;
 
-  rxUGList.AfterPost:=@rxUGListAfterPost;
-  rxUGList.EnableControls;
-  ComboBox1Change(nil);
 end;
 
 procedure TfbmpgACLEditEditor.DoSetGrLine(E: boolean);

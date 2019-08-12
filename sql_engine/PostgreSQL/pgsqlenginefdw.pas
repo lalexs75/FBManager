@@ -132,6 +132,7 @@ type
 
   TPGForeignDataWrapper = class(TDBRootObject)
   private
+    FACLListStr: string;
     FForeignServers: TPGForeignServerRoot;
     FHandler: string;
     FHandlerID: Integer;
@@ -167,6 +168,7 @@ type
     property Options:TStringList read FOptions;
 
     property ForeignServers:TPGForeignServerRoot read FForeignServers;
+    property ACLListStr:string read FACLListStr;
   end;
 
 implementation
@@ -177,7 +179,7 @@ uses fbmStrConstUnit, pg_SqlParserUnit, pgSqlTextUnit, pg_utils,
 
 function TPGForeignServerRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFServ.Strings.Text;
+  Result:=pgSqlTextModule.sPGForeignData['sFServ'];
 end;
 
 function TPGForeignServerRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -390,11 +392,12 @@ begin
   FACLList.ObjectGrants:=[ogUsage, ogWGO];
 
   FOptions:=TStringList.Create;
-  FDBObjectKind:=okServer;
+  FDBObjectKind:=okForeignServer;
   FUserMapping:=TPGForeignUserMapping.Create(AOwnerRoot.OwnerDB, TPGForeignUser, sUserMapping, Self);
   if Assigned(ADBItem) then
   begin
     FServerID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
   end;
 end;
 
@@ -426,7 +429,6 @@ begin
     begin
       //pg_foreign_server.srvname,
       //pg_foreign_server.srvfdw,
-      //pg_foreign_server.srvacl,
       FServerID:=Q.FieldByName('oid').AsInteger;
       FOwnerID:=Q.FieldByName('srvowner').AsInteger;
       FServerType:=Q.FieldByName('srvtype').AsString;
@@ -538,13 +540,13 @@ begin
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
   end;
 
   FObjectEditable:=true;
   FDBObjectClass:=TPGForeignServer;
   FOptions:=TStringList.Create;
   FForeignServers:=TPGForeignServerRoot.Create(OwnerDB, TPGForeignServer, sForeignServer, Self);
-
 end;
 
 destructor TPGForeignDataWrapper.Destroy;
@@ -572,7 +574,7 @@ begin
   if State <> sdboEdit then exit;
   FOptions.Clear;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFDWobj.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGForeignData['sFDWobj']);
   try
     Q.ParamByName('oid').AsInteger:=FOID;
     Q.Open;
@@ -583,11 +585,11 @@ begin
       FOwnerID:=Q.FieldByName('fdwowner').AsInteger;
       FValidatorID:=Q.FieldByName('fdwvalidator').AsInteger;
       FHandlerID:=Q.FieldByName('fdwhandler').AsInteger;
+      FACLListStr:=Q.FieldByName('fdwacl').AsString;
 
-//      fdwacl,
       S:=Q.FieldByName('fdwoptions').AsString;
       ParsePGArrayString(S, FOptions);
-//
+
       FDescription:=Q.FieldByName('description').AsString;
     end;
     Q.Close;
@@ -605,7 +607,7 @@ end;
 
 function TPGForeignDataWrapperRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFDW.Strings.Text;
+  Result:=pgSqlTextModule.sPGForeignData['sFDW'];
 end;
 
 constructor TPGForeignDataWrapperRoot.Create(AOwnerDB: TSQLEngineAbstract;

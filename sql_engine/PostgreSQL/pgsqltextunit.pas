@@ -32,9 +32,9 @@ type
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
-    pgFDWobj: TStrHolder;
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGForeignData: TRxTextHolder;
     sqlPGFuntions: TRxTextHolder;
     sPGSystem: TRxTextHolder;
     sql_PG_LangList: TRxTextHolder;
@@ -79,9 +79,7 @@ type
     pgFtsTempl: TStrHolder;
     pgExtensions: TStrHolder;
     pgCollations: TStrHolder;
-    pgFDW: TStrHolder;
     pgExtension: TStrHolder;
-    pgFServ: TStrHolder;
     pgFSUserMapping: TStrHolder;
     ttt1: TStrHolder;
     pgFtsConfig: TStrHolder;

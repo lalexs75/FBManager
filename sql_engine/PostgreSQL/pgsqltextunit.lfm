@@ -1144,31 +1144,6 @@ object pgSqlTextModule: TpgSqlTextModule
       ''
     )
   end
-  object pgFDW: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 600
-    Top = 336
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f666f726569676e5f646174615f777261707065722e6f696420617320696e7465676572292c'
-      '2020636173742870675f666f726569676e5f646174615f777261707065722e6f696420617320696e7465676572292c'
-      '202070675f666f726569676e5f646174615f777261707065722e6664776e616d652c'
-      '202070675f666f726569676e5f646174615f777261707065722e6664776f776e65722c'
-      '202070675f666f726569676e5f646174615f777261707065722e6664776f7074696f6e7320617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f666f726569676e5f646174615f777261707065722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f666f726569676e5f646174615f777261707065722729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f666f726569676e5f646174615f77726170706572'
-      '6f72646572206279'
-      '202070675f666f726569676e5f646174615f777261707065722e6664776e616d65'
-    )
-  end
   object pgExtension: TStrHolder
     Capacity = 16
     Macros = <>
@@ -1428,53 +1403,6 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 968
     Top = 32
-  end
-  object pgFDWobj: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 600
-    Top = 408
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f666f726569676e5f646174615f777261707065722e6f69642c'
-      '202070675f666f726569676e5f646174615f777261707065722e2a2c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f666f726569676e5f646174615f777261707065722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f666f726569676e5f646174615f777261707065722729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f666f726569676e5f646174615f77726170706572'
-      '7768657265'
-      '202070675f666f726569676e5f646174615f777261707065722e6f6964203d203a6f6964'
-    )
-  end
-  object pgFServ: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 688
-    Top = 336
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f666f726569676e5f7365727665722e6f696420617320696e7465676572292c'
-      '2020636173742870675f666f726569676e5f7365727665722e73727666647720617320696e7465676572292c'
-      '202070675f666f726569676e5f7365727665722e7372766e616d652c'
-      '202070675f666f726569676e5f7365727665722e7372766f776e65722c'
-      '202070675f666f726569676e5f7365727665722e7372766f7074696f6e7320617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f666f726569676e5f7365727665722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f666f726569676e5f7365727665722729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f666f726569676e5f736572766572'
-      '6f72646572206279'
-      '202070675f666f726569676e5f7365727665722e7372766e616d65'
-    )
   end
   object pgFSUserMapping: TStrHolder
     Capacity = 64
@@ -1792,5 +1720,76 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 432
     Top = 32
+  end
+  object sPGForeignData: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sFDW'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_foreign_data_wrapper.oid as integer),'
+          '  cast(pg_foreign_data_wrapper.oid as integer),'
+          '  pg_foreign_data_wrapper.fdwname,'
+          '  pg_foreign_data_wrapper.fdwowner,'
+          '  pg_foreign_data_wrapper.fdwoptions as data,'
+          '  pg_foreign_data_wrapper.fdwacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description'
+          'from'
+          '  pg_foreign_data_wrapper'
+          'order by'
+          '  pg_foreign_data_wrapper.fdwname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sFDWobj'
+        Lines.Strings = (
+          'select'
+          '  pg_foreign_data_wrapper.oid,'
+          '  pg_foreign_data_wrapper.*,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description'
+          'from'
+          '  pg_foreign_data_wrapper'
+          'where'
+          '  pg_foreign_data_wrapper.oid = :oid'
+          ''
+        )
+      end    
+      item
+        Caption = 'sFServ'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_foreign_server.oid as integer),'
+          '  cast(pg_foreign_server.srvfdw as integer),'
+          '  pg_foreign_server.srvname,'
+          '  pg_foreign_server.srvowner,'
+          '  pg_foreign_server.srvoptions as data,'
+          '  pg_foreign_server.srvacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_server.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_server'') as description'
+          'from'
+          '  pg_foreign_server'
+          'order by'
+          '  pg_foreign_server.srvname'
+          ''
+        )
+      end>
+    Left = 968
+    Top = 169
   end
 end
