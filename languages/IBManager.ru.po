@@ -4494,6 +4494,10 @@ msgstr "Имя сервера            = "
 msgid "Server name"
 msgstr "Имя сервера"
 
+#: fbmstrconstunit.sserveroid
+msgid "Server OID"
+msgstr ""
+
 #: fbmstrconstunit.sservertype
 msgid "Server type"
 msgstr ""
@@ -5599,6 +5603,10 @@ msgstr "Префикс переменной"
 #: fbmstrconstunit.svartype
 msgid "Variable type"
 msgstr "Тип переменной"
+
+#: fbmstrconstunit.sversion
+msgid "Version"
+msgstr ""
 
 #: fbmstrconstunit.sview
 msgctxt "fbmstrconstunit.sview"

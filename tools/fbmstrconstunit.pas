@@ -945,6 +945,7 @@ resourcestring
   sOnCommitDeleteRows               = 'ON COMMIT DELETE ROWS';
   sOnCommitPreserveRows             = 'ON COMMIT PRESERVE ROWS';
   sOID                              = 'OID';
+  sServerOID                        = 'Server OID';
   sSchemaOID                        = 'Schema OID';
   sToastOID                         = 'Toast OID';
   sOIDFunction                      = 'Function OID';

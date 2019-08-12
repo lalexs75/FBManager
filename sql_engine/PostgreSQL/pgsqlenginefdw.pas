@@ -351,9 +351,19 @@ begin
 end;
 
 procedure TPGForeignServer.InternalRefreshStatistic;
+var
+  S: String;
 begin
   inherited InternalRefreshStatistic;
+  Statistic.AddValue(sServerOID, IntToStr(FServerID));
+  Statistic.AddValue(sServerType, FServerType);
+  if FServerVersion<>'' then
+    Statistic.AddValue(sServerVersion1, FServerVersion);
 
+  for S in FOptions do
+    Statistic.AddValue(S, S);
+  //FOwnerID: integer;
+  //FUserMapping:TPGForeignUserMapping;
 end;
 
 constructor TPGForeignServer.Create(const ADBItem: TDBItem;

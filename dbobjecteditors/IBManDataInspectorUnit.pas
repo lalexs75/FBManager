@@ -376,6 +376,8 @@ begin
           try
             Rec.SetSqlAssistentData(S);
             SH:=S.Text;
+            if Rec.Description<>'' then
+              SH:=SH + LineEnding + '----------------------------------------' + LineEnding + Rec.Description;
           finally
             S.Free;
           end;

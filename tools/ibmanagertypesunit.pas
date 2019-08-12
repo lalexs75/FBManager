@@ -163,12 +163,13 @@ type
     procedure InternalError(const S:string);
     function OnDeleteDBObject(ADBObject:TDBObject):boolean;
   protected
-    function GetImageIndex:integer;override;
+    function GetImageIndex:integer; override;
     procedure SaveDesktop;
     procedure LoadDesktop;
     procedure AddToRecent(AItem:TDBInspectorRecord);
 
     procedure InitSQLEngine(ASQLEngine:TSQLEngineAbstract);
+    function GetDescription: string; override;
   public
     ProgectID:integer;
 
@@ -690,6 +691,11 @@ begin
       FDBVisualTools.InitSQLSyn(FSynSQLSyn);
     end;
   end;
+end;
+
+function TDataBaseRecord.GetDescription: string;
+begin
+  Result:=FSQLEngine.Description;
 end;
 
 constructor TDataBaseRecord.Create(aOwner: TTreeNode; ASQLEngine:TSQLEngineAbstract);

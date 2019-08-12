@@ -4334,6 +4334,10 @@ msgstr ""
 msgid "Server name"
 msgstr ""
 
+#: fbmstrconstunit.sserveroid
+msgid "Server OID"
+msgstr ""
+
 #: fbmstrconstunit.sservertype
 msgid "Server type"
 msgstr ""
@@ -5400,6 +5404,10 @@ msgstr ""
 
 #: fbmstrconstunit.svartype
 msgid "Variable type"
+msgstr ""
+
+#: fbmstrconstunit.sversion
+msgid "Version"
 msgstr ""
 
 #: fbmstrconstunit.sview
