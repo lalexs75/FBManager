@@ -58,6 +58,7 @@ type
     procedure RefreshObject;
     procedure FillDictionary;
     procedure PrintUserMap;
+    function DoAcceptDrag(const Source: TObject): TControl;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -68,7 +69,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, pgSqlEngineSecurityUnit, sqlObjects;
+uses fbmStrConstUnit, pgSqlEngineSecurityUnit, sqlObjects, IBManDataInspectorUnit;
 
 {$R *.lfm}
 
@@ -76,14 +77,27 @@ uses fbmStrConstUnit, pgSqlEngineSecurityUnit, sqlObjects;
 
 procedure TpgForeignServerPage.RxDBGrid1DragOver(Sender, Source: TObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
+var
+  Control: TControl;
 begin
-  ///
+  Control:=DoAcceptDrag(Source);
+  Accept:=(Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentDB)
+    and (fbManDataInpectorForm.CurrentDB.SQLEngine.ClassName = DBObject.OwnerDB.ClassName);
 end;
 
 procedure TpgForeignServerPage.RxDBGrid1DragDrop(Sender, Source: TObject; X,
   Y: Integer);
+var
+  E: TSQLEngineAbstract;
 begin
-  //
+  if not Assigned(fbManDataInpectorForm.CurrentDB) then Exit;
+
+  E:=fbManDataInpectorForm.CurrentDB.SQLEngine;
+  rxData.CloseOpen;
+  rxData.AppendRecord(['host', E.ServerName]);
+  if E.RemotePort>0 then
+    rxData.AppendRecord(['port', E.RemotePort]);
+  rxData.AppendRecord(['dbname', E.DataBaseName]);
 end;
 
 procedure TpgForeignServerPage.RefreshOwnerList;
@@ -113,8 +127,6 @@ begin
     edtServerName.Text:=DBObject.Caption;
     edtServerType.Text:=TPGForeignServer(DBObject).ServerType;
     edtServerVersion.Text:=TPGForeignServer(DBObject).ServerVersion;
-    edtServerVersion.Text:=TPGForeignServer(DBObject).ServerVersion;
-    //cbForeignDataWrapper.Text:=DBObject.OwnerRoot.OwnerRoot.Caption;
     edtOwnerName.Text:=TPGForeignServer(DBObject).OwnerName;
 
     for i:=0 to TPGForeignServer(DBObject).Options.Count-1 do
@@ -131,6 +143,17 @@ end;
 procedure TpgForeignServerPage.PrintUserMap;
 begin
 
+end;
+
+function TpgForeignServerPage.DoAcceptDrag(const Source: TObject): TControl;
+begin
+  if Source is TControl then
+    Result:=Source as TControl
+  else
+  if Source is TDragControlObject then
+    Result:=(Source as TDragControlObject).Control
+  else
+    Result:=nil;
 end;
 
 function TpgForeignServerPage.PageName: string;
@@ -188,7 +211,7 @@ begin
     FCmd1.Name:=edtServerName.Text;
     FCmd1.ServerType:=edtServerType.Text;
     FCmd1.ServerVersion:=edtServerVersion.Text;
-    FCmd1.ForeignDataWrapper:=DBObject.OwnerRoot.Caption;
+    FCmd1.ForeignDataWrapper:=DBObject.OwnerRoot.OwnerRoot.Caption;
     rxData.First;
     while not rxData.EOF do
     begin
