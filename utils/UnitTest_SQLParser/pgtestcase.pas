@@ -498,6 +498,9 @@ type
     procedure c473SQLRevoke7;
     procedure c474SQLRevoke8;
     procedure c475SQLRevoke9;
+    procedure c476SQLGrant8;
+    procedure c477SQLGrant9;
+    procedure c478SQLRevoke10;
   end;
 
   { TPGSQLParserData }
@@ -678,6 +681,21 @@ end;
 procedure TPGSQLParserTest.c475SQLRevoke9;
 begin
   DoTestSQL(PGSQLParserData.sUserAcess['Revoke9']);
+end;
+
+procedure TPGSQLParserTest.c476SQLGrant8;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant8']);
+end;
+
+procedure TPGSQLParserTest.c477SQLGrant9;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant9']);
+end;
+
+procedure TPGSQLParserTest.c478SQLRevoke10;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Revoke10']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

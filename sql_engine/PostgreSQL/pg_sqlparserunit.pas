@@ -11519,7 +11519,7 @@ var
     TSymb2, TTblCol, TTblAll1, TOp10, TSeqSchema, TSeqName,
     TSeqAll, TObjSchema, TOp11, TFuncName, TOpExec, TOnF,
     TFuncSchema, TSymb1, TOpt1, TRole, TTableSpace,
-    TForeignServer, TForeignServer1: TSQLTokenRecord;
+    TForeignServer, TForeignServer1, TForeignDW: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REVOKE }
   (*
@@ -11552,11 +11552,11 @@ begin
       FROM { [ GROUP ] role_name | PUBLIC } [, ...]
       [ CASCADE | RESTRICT ]
 
-  REVOKE [ GRANT OPTION FOR ]
-      { USAGE | ALL [ PRIVILEGES ] }
-      ON FOREIGN DATA WRAPPER fdw_name [, ...]
-      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
-      [ CASCADE | RESTRICT ]
++  REVOKE [ GRANT OPTION FOR ]
++      { USAGE | ALL [ PRIVILEGES ] }
++      ON FOREIGN DATA WRAPPER fdw_name [, ...]
++      FROM { [ GROUP ] role_name | PUBLIC } [, ...]
++      [ CASCADE | RESTRICT ]
 
 +  REVOKE [ GRANT OPTION FOR ]
 +      { USAGE | ALL [ PRIVILEGES ] }
@@ -11729,8 +11729,14 @@ REVOKE [ ADMIN OPTION FOR ]
   TSymb:=AddSQLTokens(stSymbol, TForeignServer1, ',', [], 34);
     TSymb.AddChildToken(TForeignServer1);
 
+  TForeignDW:=AddSQLTokens(stKeyword, TForeignServer, 'DATA', []);
+  TForeignDW:=AddSQLTokens(stKeyword, TForeignDW, 'WRAPPER', []);
+  TForeignDW:=AddSQLTokens(stIdentificator, TForeignDW, '', [], 38);
+  TSymb:=AddSQLTokens(stSymbol, TForeignDW, ',', [], 34);
+    TSymb.AddChildToken(TForeignDW);
+
 //---
-  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole, TTableSpace, TForeignServer1], 'FROM', []);
+  TFrom:=AddSQLTokens(stKeyword, [TTblSchema, TTblName, TTblAll, TSeqSchema, TSeqName, TSeqAll, TObjSchema, TSymb1, TRole, TTableSpace, TForeignServer1, TForeignDW], 'FROM', []);
     TFromGrp:=AddSQLTokens(stKeyword, TFrom, 'GROUP', [], 13);
   TUsrGrp:=AddSQLTokens(stIdentificator, [TFrom, TFromGrp], '', [], 14);
     TSymb:=AddSQLTokens(stSymbol, TUsrGrp, ',', [toOptional]);
@@ -11880,6 +11886,10 @@ begin
     37:begin
          FCurTable:=Tables.Add(AWord);
          ObjectKind:=okForeignServer;
+       end;
+    38:begin
+         FCurTable:=Tables.Add(AWord);
+         ObjectKind:=okForeignDataWrapper;
        end;
     50:begin
         ObjectKind:=okRole;
@@ -12057,6 +12067,7 @@ begin
           S:=S + S1;
       end;
     okForeignServer:S:=S + ' FOREIGN SERVER ' + Tables.AsString;
+    okForeignDataWrapper:S:=S + ' FOREIGN DATA WRAPPER ' + Tables.AsString;
 (*
 REVOKE [ GRANT OPTION FOR ]
     { USAGE | ALL [ PRIVILEGES ] }
@@ -12122,10 +12133,6 @@ GRANT { { SELECT | INSERT | UPDATE | REFERENCES } ( column [, ...] )
 
 GRANT { { CREATE | CONNECT | TEMPORARY | TEMP } [, ...] | ALL [ PRIVILEGES ] }
     ON DATABASE database_name [, ...]
-    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
-
-GRANT { USAGE | ALL [ PRIVILEGES ] }
-    ON FOREIGN DATA WRAPPER fdw_name [, ...]
     TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
 
 
@@ -12232,10 +12239,20 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
     GRANT { USAGE | ALL [ PRIVILEGES ] }
         ON FOREIGN SERVER server_name [, ...]
         TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+    GRANT { USAGE | ALL [ PRIVILEGES ] }
+        ON FOREIGN DATA WRAPPER fdw_name [, ...]
+        TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
   *)
   T:=AddSQLTokens(stKeyword, [T9_1], 'FOREIGN', []);
+  T1:=AddSQLTokens(stIdentificator, T, 'DATA', []);
   T:=AddSQLTokens(stIdentificator, T, 'SERVER', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 32);
+  TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
+    TSymb.AddChildToken(T);
+  T.AddChildToken(TTo);
+
+  T1:=AddSQLTokens(stIdentificator, T1, 'WRAPPER', []);
+  T:=AddSQLTokens(stIdentificator, T1, '', [], 33);
   TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
     TSymb.AddChildToken(T);
   T.AddChildToken(TTo);
@@ -12335,6 +12352,10 @@ begin
        end;
     32:begin
          ObjectKind:=okForeignServer;
+         FCurTable:=Tables.Add(AWord);
+       end;
+    33:begin
+         ObjectKind:=okForeignDataWrapper;
          FCurTable:=Tables.Add(AWord);
        end;
     101,
@@ -12442,12 +12463,7 @@ begin
       end;
     okTableSpace:S:=S + ' ON TABLESPACE ' + Tables.AsString;
     okForeignServer:S:=S + ' ON FOREIGN SERVER ' + Tables.AsString;
-(*
-      GRANT { USAGE | ALL [ PRIVILEGES ] }
-          ON FOREIGN SERVER server_name [, ...]
-          TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
-*)
-
+    okForeignDataWrapper:S:=S + ' ON FOREIGN DATA WRAPPER ' + Tables.AsString;
   else
     S:=S + ' ON  ' + Tables.AsString;
   end;

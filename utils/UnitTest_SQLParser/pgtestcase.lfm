@@ -771,6 +771,25 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'REVOKE ALL ON FOREIGN SERVER work_medic FROM admins;'
         )
+      end    
+      item
+        Caption = 'Grant8'
+        Lines.Strings = (
+          'GRANT USAGE ON FOREIGN DATA WRAPPER postgres_fdw TO admins WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant9'
+        Lines.Strings = (
+          'GRANT USAGE ON FOREIGN DATA WRAPPER postgres_fdw TO alexs;'
+        )
+      end    
+      item
+        Caption = 'Revoke10'
+        Lines.Strings = (
+          'REVOKE ALL ON FOREIGN DATA WRAPPER postgres_fdw FROM admins;'
+        )
       end>
     Left = 104
     Top = 8
