@@ -492,6 +492,9 @@ type
     procedure c468AlterMaterializedView2;
     procedure c468AlterMaterializedView3;
     procedure c469AlterMaterializedView4;
+    procedure c470SQLGrant5;
+    procedure c471SQLGrant6;
+    procedure c472SQLGrant7;
   end;
 
   { TPGSQLParserData }
@@ -642,6 +645,21 @@ end;
 procedure TPGSQLParserTest.c469AlterMaterializedView4;
 begin
   DoTestSQL(PGSQLParserData.sView['AlterMaterializedView4']);
+end;
+
+procedure TPGSQLParserTest.c470SQLGrant5;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant5']);
+end;
+
+procedure TPGSQLParserTest.c471SQLGrant6;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant6']);
+end;
+
+procedure TPGSQLParserTest.c472SQLGrant7;
+begin
+  DoTestSQL(PGSQLParserData.sUserAcess['Grant7']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

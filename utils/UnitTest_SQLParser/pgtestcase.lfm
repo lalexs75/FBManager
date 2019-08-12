@@ -731,6 +731,26 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'REVOKE CREATE ON TABLESPACE test_data21 FROM group_test1;'
         )
+      end    
+      item
+        Caption = 'Grant5'
+        Lines.Strings = (
+          'GRANT USAGE ON FOREIGN SERVER work_medic TO tux;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant6'
+        Lines.Strings = (
+          'GRANT USAGE ON FOREIGN SERVER work_medic TO admins WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant7'
+        Lines.Strings = (
+          'GRANT USAGE ON FOREIGN SERVER work_medic TO alexs;'
+        )
       end>
     Left = 104
     Top = 8

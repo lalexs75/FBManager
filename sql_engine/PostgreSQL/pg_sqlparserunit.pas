@@ -12102,9 +12102,6 @@ GRANT { USAGE | ALL [ PRIVILEGES ] }
     ON FOREIGN DATA WRAPPER fdw_name [, ...]
     TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
 
-GRANT { USAGE | ALL [ PRIVILEGES ] }
-    ON FOREIGN SERVER server_name [, ...]
-    TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
 
 GRANT { EXECUTE | ALL [ PRIVILEGES ] }
     ON { FUNCTION function_name ( [ [ argmode ] [ arg_name ] arg_type [, ...] ] ) [, ...]
@@ -12205,6 +12202,17 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
     TSymb.AddChildToken(T);
   T.AddChildToken(TTo);
 
+  (*
+    GRANT { USAGE | ALL [ PRIVILEGES ] }
+        ON FOREIGN SERVER server_name [, ...]
+        TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+  *)
+  T:=AddSQLTokens(stKeyword, [T9_1], 'FOREIGN', []);
+  T:=AddSQLTokens(stIdentificator, T, 'SERVER', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 32);
+  TSymb:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
+    TSymb.AddChildToken(T);
+  T.AddChildToken(TTo);
 
   {
   ON { [ TABLE ] table_name [, ...]
@@ -12297,6 +12305,10 @@ begin
        end;
     31:begin
          ObjectKind:=okTableSpace;
+         FCurTable:=Tables.Add(AWord);
+       end;
+    32:begin
+         ObjectKind:=okForeignServer;
          FCurTable:=Tables.Add(AWord);
        end;
     101,
@@ -12403,6 +12415,13 @@ begin
       S:=S + Tables.AsString
       end;
     okTableSpace:S:=S + ' ON TABLESPACE ' + Tables.AsString;
+    okForeignServer:S:=S + ' ON FOREIGN SERVER ' + Tables.AsString;
+(*
+      GRANT { USAGE | ALL [ PRIVILEGES ] }
+          ON FOREIGN SERVER server_name [, ...]
+          TO { [ GROUP ] role_name | PUBLIC } [, ...] [ WITH GRANT OPTION ]
+*)
+
   else
     S:=S + ' ON  ' + Tables.AsString;
   end;
