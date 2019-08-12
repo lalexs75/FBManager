@@ -183,6 +183,7 @@ resourcestring
   sEditHint                         = 'Edit data';
   sApplyScript                      = 'Apply script';
   sServerName1                      = 'Server name';
+  sServerType                       = 'Server type';
   sConnect                          = 'Connect';
   sConnectViaSSH                    = 'Connect via SSH';
   sUseSSHTunnel                     = 'Use SSH tunnel';

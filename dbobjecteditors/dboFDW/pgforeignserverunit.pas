@@ -102,7 +102,7 @@ end;
 
 function TpgForeignServerPage.PageName: string;
 begin
-  Result:='Foreign server';
+  Result:=sForeignServer;
 end;
 
 constructor TpgForeignServerPage.CreatePage(TheOwner: TComponent;
@@ -129,6 +129,12 @@ end;
 procedure TpgForeignServerPage.Localize;
 begin
   inherited Localize;
+  Label1.Caption:=sServerName1;
+  Label2.Caption:=sServerType;
+  Label3.Caption:=sServerVersion1;
+  Label4.Caption:=sForeignDataWrapper;
+  Label6.Caption:=sOwner;
+  Label5.Caption:=sOptions;
 end;
 
 function TpgForeignServerPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
