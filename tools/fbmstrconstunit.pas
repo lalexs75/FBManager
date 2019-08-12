@@ -259,6 +259,7 @@ resourcestring
   sDatabaseProperty                 = 'Database property';
   sFBManagerOptions                 = 'FBManager options';
   sOwner                            = 'Owner';
+  sOwnerID                          = 'Owner ID';
   sCodepage                         = 'Codepage';
   sConnectionLimit                  = 'Connection limit';
   sCType                            = 'CType';

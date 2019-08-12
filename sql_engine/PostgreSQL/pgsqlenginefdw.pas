@@ -359,11 +359,10 @@ begin
   Statistic.AddValue(sServerType, FServerType);
   if FServerVersion<>'' then
     Statistic.AddValue(sServerVersion1, FServerVersion);
+  Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
 
   for S in FOptions do
-    Statistic.AddValue(S, S);
-  //FOwnerID: integer;
-  //FUserMapping:TPGForeignUserMapping;
+    Statistic.AddParamValue(S);
 end;
 
 constructor TPGForeignServer.Create(const ADBItem: TDBItem;

@@ -3630,6 +3630,10 @@ msgstr "Выход"
 msgid "Owner"
 msgstr "Владелец"
 
+#: fbmstrconstunit.sownerid
+msgid "Owner ID"
+msgstr ""
+
 #: fbmstrconstunit.spackage
 msgid "Package"
 msgstr "Пакет"

@@ -264,6 +264,7 @@ type
     procedure Clear;
     procedure Refresh;
     procedure AddValue(AName, AValue:string);
+    procedure AddParamValue(AParam:string);
     property Count:Integer read GetCount;
     property StatData:TDataSet read FStatData;
   end;
@@ -1224,6 +1225,14 @@ begin
   FStatData.FieldByName('Caption').AsString:=AName;
   FStatData.FieldByName('Value').AsString:=AValue;
   FStatData.Post;
+end;
+
+procedure TDBTableStatistic.AddParamValue(AParam: string);
+var
+  S: String;
+begin
+  S:=Copy2SymbDel(AParam, '=');
+  AddValue(S, AParam);
 end;
 
 { TACLListEnumerator }
