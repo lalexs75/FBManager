@@ -2453,15 +2453,11 @@ type
 
   TPGSQLDropServer = class(TSQLDropCommandAbstract)
   private
-    FServerName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
-    procedure Assign(ASource:TSQLObjectAbstract); override;
-
-    property ServerName:string read FServerName write FServerName;
   end;
 
   { TPGSQLAlterType }
@@ -7779,7 +7775,7 @@ procedure TPGSQLDropServer.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   if AChild.Tag = 1 then
-    FServerName:=AWord;
+    Name:=AWord;
 end;
 
 procedure TPGSQLDropServer.MakeSQL;
@@ -7790,7 +7786,7 @@ begin
   if ooIfExists in Options then
     Result:=Result + 'IF EXISTS ';
 
-  Result:=Result + FServerName;
+  Result:=Result + Name;
 
   if DropRule = drCascade then
     Result:=Result + ' CASCADE'
@@ -7798,16 +7794,6 @@ begin
   if DropRule = drRestrict then
     Result:=Result + ' RESTRICT';
   AddSQLCommand(Result);
-end;
-
-procedure TPGSQLDropServer.Assign(ASource: TSQLObjectAbstract);
-begin
-  if ASource is TPGSQLDropServer then
-  begin
-    ServerName:=TPGSQLDropServer(ASource).ServerName;
-
-  end;
-  inherited Assign(ASource);
 end;
 
 { TPGSQLCreateServer }
