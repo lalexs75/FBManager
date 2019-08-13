@@ -622,12 +622,38 @@ type
   TPGForeignTable = class(TDBTableObject)
   private
     FACLListStr: string;
+    FForeignServerOID: Integer;
+    FFTOptions: String;
+    FOID: integer;
+    FOwnerID: integer;
+    FSchema: TPGSchema;
+    ZUpdateSQL:TZUpdateSQL;
+    procedure InternalCreateDLL(var SQLLines: TStringList; const ATableName: string);
+    function MakeSQLInsertFields(AParams:boolean):string;
+    procedure ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
+      StatementIndex: Integer; out Execute: Boolean);
   protected
     function GetCaptionFullPatch:string; override;
+    function GetRecordCount: integer; override;
+    procedure InternalRefreshStatistic; override;
+    function GetDBFieldClass: TDBFieldClass; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string;override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+
+    procedure RefreshObject; override;
+    procedure RefreshFieldList; override;
+
+    function DataSet(ARecCountLimit:Integer):TDataSet;override;
+
+    property FTOptions: String read FFTOptions;
+    property ForeignServerOID: Integer read FForeignServerOID;
+    property Schema:TPGSchema read FSchema;
+    property OwnerID:integer read FOwnerID write FOwnerID;
+    property OID:integer read FOID;
     property ACLListStr:string read FACLListStr;
   end;
 
@@ -1157,6 +1183,11 @@ uses
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
 
+type
+  TSQLParamState = (spsNormal, spsNew, spsOld);
+  THackZQuery = class(TZQuery);
+  THackZAbstractCachedResultSet = class(TZAbstractCachedResultSet);
+
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 begin
   if Assigned(ASch) then
@@ -1178,25 +1209,456 @@ end;
 
 { TPGForeignTable }
 
+procedure TPGForeignTable.InternalCreateDLL(var SQLLines: TStringList;
+  const ATableName: string);
+begin
+
+end;
+
+function TPGForeignTable.MakeSQLInsertFields(AParams: boolean): string;
+var
+  F: TDBField;
+begin
+  Result:='';
+  for F in Fields do
+    if AParams then
+      Result:=Result + ' :' + F.FieldName + ','
+    else
+      Result:=Result + ' ' + DoFormatName(F.FieldName) + ',';
+  if Result <> '' then
+    Result:= Copy(Result, 1, Length(Result) - 1);
+end;
+
+procedure TPGForeignTable.ZUpdateSQLBeforeInsertSQLStatement(
+  const Sender: TObject; StatementIndex: Integer; out Execute: Boolean);
+var
+  ICRS: IZCachedResultSet;
+  DCRS: TZAbstractCachedResultSet;
+  RA: TZRowAccessor;
+  quIns: TZQuery;
+  S, S1, S2: String;
+  F: TField;
+  FD: TDBField;
+  P: TParam;
+begin
+  RA:=nil;
+
+  ICRS:=THackZQuery(FDataSet).CachedResultSet;
+  if ICRS is TZAbstractCachedResultSet then
+  begin
+    DCRS:=ICRS as TZAbstractCachedResultSet;
+    RA:=THackZAbstractCachedResultSet(DCRS).NewRowAccessor;
+    if Assigned(RA) then
+    begin
+      S1:='';
+      S2:='';
+      for FD in Fields do
+      begin
+        F:=FDataSet.FieldByName(FD.FieldName);
+        if not F.IsNull then
+        begin
+          if S1<>'' then
+          begin
+            S1:=S1+ ', ';
+            S2:=S2+ ', ';
+          end;
+          S1:=S1 + FD.FieldName;
+          S2:=S2 +':' + FD.FieldName;
+        end;
+      end;
+
+      //S:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+ ' values('+MakeSQLInsertFields(true)+') returning '+MakeSQLInsertFields(false);
+      S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
+      quIns:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
+      for F in FDataSet.Fields do
+      begin
+        P:=quIns.Params.FindParam(F.FieldName);
+        if Assigned(P) then
+          P.Assign(F);
+      end;
+      quIns.Open;
+
+      for FD in Fields do
+      begin
+        if FD.FieldPK then
+        begin
+          F:=quIns.FieldByName(FD.FieldName);
+          if F.DataType in IntegerDataTypes then
+            RA.SetInt(F.Index+1, F.AsInteger)
+          else
+          if F.DataType in StringTypes then
+            RA.SetString(F.Index+1, F.AsString)
+          else
+          if F.DataType = ftTime then
+            RA.SetTime(F.Index+1, F.AsDateTime)
+          else
+          if F.DataType in [ftDateTime, ftTimeStamp] then
+            RA.SetTimestamp(F.Index+1, F.AsDateTime)
+          else
+          if F.DataType = ftDate then
+            RA.SetDate(F.Index+1, F.AsDateTime)
+          else
+            raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
+        end;
+      end;
+      quIns.Close;
+      Execute:=false;
+    end;
+  end;
+end;
+
 function TPGForeignTable.GetCaptionFullPatch: string;
 begin
   Result:=inherited GetCaptionFullPatch;
+end;
+
+function TPGForeignTable.GetRecordCount: integer;
+var
+  Q: TZQuery;
+begin
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery('select count(*) from '+CaptionFullPatch);
+  try
+    Q.Open;
+    if Q.RecordCount>0 then
+      Result:=Q.Fields[0].AsInteger
+    else
+      Result:=0;
+    Q.Close;
+  finally
+    Q.Free;
+  end;
+end;
+
+procedure TPGForeignTable.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+
+(*
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
+  FQuery.ParamByName('oid').AsInteger:=FOID;
+  FQuery.Open;
+
+  Statistic.AddValue(sTotalSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt));
+  Statistic.AddValue(sIndexSize, RxPrettySizeName(FQuery.FieldByName('INDEX').AsLargeInt));
+  Statistic.AddValue(sToastSize, RxPrettySizeName(FQuery.FieldByName('toast').AsLargeInt));
+  Statistic.AddValue(sTableSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt - FQuery.FieldByName('INDEX').AsLargeInt - FQuery.FieldByName('toast').AsLargeInt));
+  Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
+  Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
+
+  if FAutovacuumOptions.Enabled then
+  begin
+    Statistic.AddValue(sAutovacuumEnabled, sYes);
+    Statistic.AddValue(sVacuumThreshold, FloatToStr(FAutovacuumOptions.VacuumThreshold));
+    Statistic.AddValue(sAnalyzeThreshold, IntToStr(FAutovacuumOptions.AnalyzeThreshold));
+    Statistic.AddValue(sVacuumScaleFactor, FloatToStr(FAutovacuumOptions.VacuumScaleFactor));
+    Statistic.AddValue(sAnalyzeScaleFactor, FloatToStr(FAutovacuumOptions.AnalyzeScaleFactor));
+    Statistic.AddValue(sVacuumCostDelay, IntToStr(FAutovacuumOptions.VacuumCostDelay));
+    Statistic.AddValue(sVacuumCostLimit, IntToStr(FAutovacuumOptions.VacuumCostLimit));
+    Statistic.AddValue(sFreezeMinAge, IntToStr(FAutovacuumOptions.FreezeMinAge));
+    Statistic.AddValue(sFreezeMaxAge, IntToStr(FAutovacuumOptions.FreezeMaxAge));
+    Statistic.AddValue(sFreezeTableAge, IntToStr(FAutovacuumOptions.FreezeTableAge));
+  end;
+
+  if FToastAutovacuumOptions.Enabled then
+  begin
+    Statistic.AddValue(sToastAutovacuumEnabled, sYes);
+    Statistic.AddValue(sToastVacuumThreshold, FloatToStr(FToastAutovacuumOptions.VacuumThreshold));
+    Statistic.AddValue(sToastVacuumScaleFactor, FloatToStr(FToastAutovacuumOptions.VacuumScaleFactor));
+    Statistic.AddValue(sToastVacuumCostDelay, IntToStr(FToastAutovacuumOptions.VacuumCostDelay));
+    Statistic.AddValue(sToastVacuumCostLimit, IntToStr(FToastAutovacuumOptions.VacuumCostLimit));
+    Statistic.AddValue(sToastFreezeMinAge, IntToStr(FToastAutovacuumOptions.FreezeMinAge));
+    Statistic.AddValue(sToastFreezeMaxAge, IntToStr(FToastAutovacuumOptions.FreezeMaxAge));
+    Statistic.AddValue(sToastFreezeTableAge, IntToStr(FToastAutovacuumOptions.FreezeTableAge));
+  end;
+
+  FQuery.Close;
+  FQuery.Free;
+*)
+end;
+
+function TPGForeignTable.GetDBFieldClass: TDBFieldClass;
+begin
+  Result:=TPGField;
 end;
 
 constructor TPGForeignTable.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
+
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
+
+  //FStorageParameters:=TStringList.Create;
+
+  UITableOptions:=[utReorderFields, utRenameTable,
+     utAddFields, utEditField, utDropFields
+     //utAddFK, utEditFK, utDropFK,
+     //utAddUNQ, utDropUNQ,
+     //utAlterAddFieldInitialValue,
+     //utAlterAddFieldFK,
+     //utSetFKName
+     ];
+
+  FSchema:=TPGTablesRoot(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+  //FSystemObject:=FSchema.SystemObject;
+  //FInhTables:=TList.Create;
+  //FRuleList:=TPGRuleList.Create(Self);
+  //FCheckConstraints:=TList.Create;
+
+
+  FDataSet:=TZQuery.Create(nil);
+  TZQuery(FDataSet).Connection:=TSQLEnginePostgre(OwnerDB).FPGConnection;
+  FDataSet.AfterOpen:=@DataSetAfterOpen;
+  ZUpdateSQL:=TZUpdateSQL.Create(nil);
+  TZQuery(FDataSet).UpdateObject:=ZUpdateSQL;
+(*
+  FTriggerList[0]:=TList.Create;  //before insert
+  FTriggerList[1]:=TList.Create;  //after insert
+  FTriggerList[2]:=TList.Create;  //before update
+  FTriggerList[3]:=TList.Create;  //after update
+  FTriggerList[4]:=TList.Create;  //before delete
+  FTriggerList[5]:=TList.Create;  //after delete
+*)
 end;
 
 destructor TPGForeignTable.Destroy;
 begin
+(*
+  FreeAndNil(FTriggerList[0]);  //before insert
+  FreeAndNil(FTriggerList[1]);  //after insert
+  FreeAndNil(FTriggerList[2]);  //before update
+  FreeAndNil(FTriggerList[3]);  //after update
+  FreeAndNil(FTriggerList[4]);  //before delete
+  FreeAndNil(FTriggerList[5]);  //after delete
+*)
+  FreeAndNil(ZUpdateSQL);
+  //FreeAndNil(FInhTables);
+  //FreeAndNil(FRuleList);
+  //FreeAndNil(FCheckConstraints);
+  //FreeAndNil(FStorageParameters);
+  //FreeAndNil(FAutovacuumOptions);
+  //FreeAndNil(FToastAutovacuumOptions);
   inherited Destroy;
 end;
 
 class function TPGForeignTable.DBClassTitle: string;
 begin
   Result:=inherited DBClassTitle;
+end;
+
+function TPGForeignTable.InternalGetDDLCreate: string;
+var
+  SQLLines:TStringList;
+  i:integer;
+  //Trig:TPGTrigger;
+  S: String;
+begin
+  SQLLines:=TStringList.Create;
+  try
+    InternalCreateDLL(SQLLines, CaptionFullPatch);
+
+    for i:=0 to SQLLines.Count - 1 do
+    begin
+      S:=TrimRight(SQLLines[i]);
+      if (S<>'') and (S[Length(S)] <> ';') then
+      begin
+        SQLLines[i]:=S + ';' + LineEnding;
+      end
+      else
+        SQLLines[i]:=SQLLines[i]+LineEnding;
+    end;
+(*
+    SQLLines.Add(MakeRemarkBlock(sTriggersList));
+
+    for i:=0 to FSchema.FTriggers.CountObject - 1 do
+    begin
+      Trig:=TPGTrigger(FSchema.FTriggers.Items[i]);
+      if (Trig.TriggerTable = Self) and (Trig.State = sdboEdit) then
+        SQLLines.Add(Trig.DDLCreate);
+    end;
+*)
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, SQLLines, true);
+    Result:=SQLLines.Text;
+  finally
+    SQLLines.Free;
+  end
+end;
+
+function TPGForeignTable.CreateSQLObject: TSQLCommandDDL;
+begin
+  if State <> sdboCreate then
+  begin
+    Result:=TPGSQLAlterForeignTable.Create(nil);
+    Result.Name:=Caption;
+    TPGSQLAlterForeignTable(Result).SchemaName:=Schema.Caption;
+  end
+  else
+  begin
+    Result:=TPGSQLCreateForeignTable.Create(nil);
+    TPGSQLCreateForeignTable(Result).SchemaName:=Schema.Caption;
+    //TPGSQLCreateTable(Result).StorageParameters.Assign(FStorageParameters);
+  end;
+end;
+
+procedure TPGForeignTable.RefreshObject;
+var
+  Q: TZQuery;
+begin
+  inherited RefreshObject;
+  FACLListStr:='';
+  //FStorageParameters.Clear;
+  //FAutovacuumOptions.Clear;
+  //FToastAutovacuumOptions.Clear;
+  //FToastRelOID:=0;
+  if State = sdboEdit then
+  begin
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGForeignTable['sForeignTable']);
+    try
+      Q.ParamByName('relname').AsString:=Caption;
+      Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;
+      Q.Open;
+      if Q.RecordCount>0 then
+      begin
+        FDescription:=Q.FieldByName('description').AsString;
+        FOID:=Q.FieldByName('oid').AsInteger;
+        FOwnerID:=Q.FieldByName('relowner').AsInteger;
+        FFTOptions:=Q.FieldByName('ftoptions').AsString;
+        FForeignServerOID:=Q.FieldByName('ftserver').AsInteger;
+        FACLListStr:=Q.FieldByName('relacl').AsString;
+      end;
+    finally
+      Q.Free;
+    end;
+(*
+
+    if FRelOptions<>'' then
+    begin
+      ParsePGArrayString(FRelOptions, FStorageParameters);
+      AutovacuumOptions.LoadStorageParameters(FStorageParameters);
+    end;
+*)
+    RefreshFieldList;
+//    RefreshInheritedTables;
+//    FRuleList.RuleListRefresh;
+  end;
+end;
+
+procedure TPGForeignTable.RefreshFieldList;
+var
+  FQuery: TZQuery;
+  R: TPGField;
+begin
+  if State <> sdboEdit then exit;
+  Fields.Clear;
+
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlPGRelationFields.Strings.Text);
+  try
+    FQuery.ParamByName('attrelid').AsInteger:=FOID;
+    FQuery.Open;
+    while not FQuery.Eof do
+    begin
+      R:=Fields.Add('') as TPGField;
+      R.LoadfromDB(FQuery);
+      FQuery.Next;
+    end;
+  finally
+    FQuery.Free;
+  end;
+//  RefreshConstraintPrimaryKey;
+//  RefreshConstraintUnique;
+end;
+
+function TPGForeignTable.DataSet(ARecCountLimit: Integer): TDataSet;
+function MakeSQLWhere(ASQLParamState:TSQLParamState):string;
+var
+  F: TDBField;
+begin
+  Result:='';
+  for F in Fields do
+    if F.FieldPK then
+    begin
+      if Result<>'' then
+        Result:=Result + ' and ';
+      case ASQLParamState of
+        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :new_' + F.FieldName+')';
+        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :old_' + F.FieldName+')';
+      else
+        //spsNormal
+        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + F.FieldName+')';
+      end;
+    end;
+  if Result <> '' then
+    Result:= ' where '+Result;
+end;
+
+function MakeSQLEditFields:string;
+var
+  F: TDBField;
+begin
+  Result:='';
+  for F in Fields do
+    Result:=Result + DoFormatName(F.FieldName) +' = :'+F.FieldName + ',';
+  if Result <> '' then
+    Result:= Copy(Result, 1, Length(Result) - 1);
+end;
+
+function MakeOrderBy:string;
+var
+  F: TDBField;
+begin
+  Result:='';
+  for F in Fields do
+    if F.FieldPK then
+    begin
+      if Result<>'' then
+        Result:=Result + ', ';
+      Result:=Result + DoFormatName(F.FieldName);
+    end;
+  //Условие добавляется если есть первичный ключ
+  if Result<>'' then
+    Result:=' order by '+Result;
+end;
+
+begin
+  if not FDataSet.Active then
+  begin
+    RefreshConstraintPrimaryKey;
+    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch+MakeOrderBy;
+
+    if ARecCountLimit > -1 then
+      TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
+
+
+    ZUpdateSQL.InsertSQL.Text:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+
+                                  ' values('+MakeSQLInsertFields(true)+')';
+    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere(spsOld);
+
+    if FPKCount > 0 then
+    begin
+      ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsNew);
+      ZUpdateSQL.BeforeInsertSQLStatement:=@ZUpdateSQLBeforeInsertSQLStatement;
+    end
+    else
+    begin
+      ZUpdateSQL.RefreshSQL.Clear;
+      ZUpdateSQL.BeforeInsertSQLStatement:=nil;
+    end;
+  end;
+  Result:=FDataSet;
 end;
 
 { TPGForeignTablesRoot }
@@ -2382,6 +2844,9 @@ begin
   else
   if (DBObject is TPGForeignDataWrapper) then
     ParseACLListStr(TPGForeignDataWrapper(DBObject).ACLListStr)
+  else
+  if (DBObject is TPGForeignTable) then
+    ParseACLListStr(TPGForeignTable(DBObject).ACLListStr)
   else
     raise Exception.CreateFmt('not defined grant manager %s', [DBObject.ClassName]);
 end;
@@ -3991,7 +4456,6 @@ begin
   FDBObjectKind:=okScheme;
   FDomainsRoot:=TPGDomainsRoot.Create(OwnerDB, TPGDomain, sDomains, Self);
   FTablesRoot:=TPGTablesRoot.Create(OwnerDB, TPGTable, sTables, Self);
-  FForeignTablesRoot:=TPGForeignTablesRoot.Create(OwnerDB, TPGForeignTable, sForeignTable, Self);
 
   FSequencesRoot:=TPGSequencesRoot.Create(OwnerDB, TPGSequence, sSequences, Self);
   FViews:=TPGViewsRoot.Create(OwnerDB, TPGView, sViews, Self);
@@ -4011,6 +4475,9 @@ begin
   if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion8_3 then
     FFTSRoot:=TPGFTSRoot.Create(OwnerDB, nil, 'FTS', Self);
 
+  if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion9_1 then
+    FForeignTablesRoot:=TPGForeignTablesRoot.Create(OwnerDB, TPGForeignTable, sForeignTable, Self);
+
   FDomainsRoot.FSchema:=Self;
   FTablesRoot.FSchema:=Self;
   FSequencesRoot.FSchema:=Self;
@@ -4020,8 +4487,11 @@ begin
   FProcedures.FSchema:=Self;
   FTriggerProc.FSchema:=Self;
   FRulesRoot.FSchema:=Self;
+  FCollationRoot.FSchema:=Self;
   if Assigned(FMatViews) then
     FMatViews.FSchema:=Self;
+  if Assigned(FForeignTablesRoot) then
+    FForeignTablesRoot.FSchema:=Self;
 
   FSystemObject:=(Caption = 'information_schema') or (Copy(Caption, 1, 3) = 'pg_');
   FObjectEditable:=not FSystemObject;
@@ -4056,11 +4526,14 @@ end;
 
 destructor TPGSchema.Destroy;
 begin
-  FreeAndNil(FFTSRoot);
+  if Assigned(FFTSRoot) then
+    FreeAndNil(FFTSRoot);
   if Assigned(FMatViews) then
     FreeAndNil(FMatViews);
+  if Assigned(FForeignTablesRoot) then
+    FreeAndNil(FForeignTablesRoot);
+
   FreeAndNil(FTablesRoot);
-  FreeAndNil(FForeignTablesRoot);
   FreeAndNil(FDomainsRoot);
   FreeAndNil(FSequencesRoot);
   FreeAndNil(FProcedures);
@@ -4220,10 +4693,6 @@ begin
 
   DoMakeIndexList;
 end;
-
-type
-  THackZQuery = class(TZQuery);
-  THackZAbstractCachedResultSet = class(TZAbstractCachedResultSet);
 
 procedure TPGTable.ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
   StatementIndex: Integer; out Execute: Boolean);
@@ -4500,7 +4969,7 @@ function TPGTable.GetRecordCount: integer;
 var
   Q:TZQuery;
 begin
-  Result:=inherited GetRecordCount;
+  //Result:=inherited GetRecordCount;
   Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery('select count(*) from '+CaptionFullPatch);
   try
     Q.Open;
@@ -4865,14 +5334,14 @@ end;
 constructor TPGTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
     FACLListStr:=ADBItem.ObjACLList;
   end;
 
-  FACLList:=TPGACLList.Create(Self);
-  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
   if FACLListStr<>'' then
     TPGACLList(FACLList).ParseACLListStr(FACLListStr);
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
@@ -5127,9 +5596,6 @@ begin
     RefreshObject;
   end
 end;
-
-type
-  TSQLParamState = (spsNormal, spsNew, spsOld);
 
 function TPGTable.DataSet(ARecCountLimit: Integer): TDataSet;
 

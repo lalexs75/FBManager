@@ -305,6 +305,15 @@ begin
     [TpgForeignUserMap{, TfbmObjectEditorDescriptionFrame}],
     [TpgForeignUserMap, {TfbmObjectEditorDescriptionFrame, }TfbmDDLPage]
   );
+
+  RegisterObjEditor(TPGForeignTable,
+    [TfbmTableEditorFieldsFrame, {TfbmpgTablePropertysFrame, TfbmpgTableCheckConstaintPage,}
+     TfbmObjectEditorDescriptionFrame],
+    [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame, {TfdbmTableEditorPKListFrame,
+     TfdbmTableEditorForeignKeyFrame, TfdbmTableEditorUniqueFrame, TfbmpgTableCheckConstaintPage,
+     TfbmTableEditorIndexFrame, TfbmTableEditorTriggersFrame, TPGRuleListPage, TfbmpgTablePropertysFrame,
+     TfbmpgTableAutoVaccum, }TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame, TfbmDDLPage]);
 end;
 
 procedure TPostgreVisualTools.InitSQLSyn(const ASynSQLSyn: TSynSQLSyn);

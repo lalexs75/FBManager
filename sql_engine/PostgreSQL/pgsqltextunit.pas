@@ -34,6 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGForeignTable: TRxTextHolder;
     sPGForeignData: TRxTextHolder;
     sqlPGFuntions: TRxTextHolder;
     sPGSystem: TRxTextHolder;

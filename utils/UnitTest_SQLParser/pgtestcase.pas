@@ -501,6 +501,7 @@ type
     procedure c476SQLGrant8;
     procedure c477SQLGrant9;
     procedure c478SQLRevoke10;
+    procedure c479CreateForeignTable3;
   end;
 
   { TPGSQLParserData }
@@ -696,6 +697,11 @@ end;
 procedure TPGSQLParserTest.c478SQLRevoke10;
 begin
   DoTestSQL(PGSQLParserData.sUserAcess['Revoke10']);
+end;
+
+procedure TPGSQLParserTest.c479CreateForeignTable3;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateForeignTable3']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

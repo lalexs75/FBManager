@@ -2008,22 +2008,23 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateForeignTable1'
         Lines.Strings = (
-          'CREATE FOREIGN TABLE films ('
-          '    code        char(5) NOT NULL,'
-          '    title       varchar(40) NOT NULL,'
-          '    did         integer NOT NULL,'
-          '    date_prod   date,'
-          '    kind        varchar(10),'
-          '    len         interval hour to minute'
+          'CREATE FOREIGN TABLE films('
+          '  code char(5) NOT NULL,'
+          '  title varchar(40) NOT NULL,'
+          '  did integer NOT NULL,'
+          '  date_prod date,'
+          '  kind varchar(10),'
+          '  len interval hour to minute'
           ')'
           'SERVER film_server;'
+          ''
         )
       end    
       item
         Caption = 'CreateForeignTable2'
         Lines.Strings = (
           'CREATE FOREIGN TABLE measurement_y2016m07'
-          '  PARTITION OF measurement FOR VALUES FROM (''''2016-07-01'''') TO (''''2016-08-01'''')'
+          '  PARTITION OF measurement FOR VALUES FROM (''2016-07-01'') TO (''2016-08-01'')'
           'SERVER server_07;'
         )
       end    
@@ -2273,6 +2274,24 @@ object PGSQLParserData: TPGSQLParserData
           '  autovacuum_freeze_table_age'
           ');'
           ''
+        )
+      end    
+      item
+        Caption = 'CreateForeignTable3'
+        Lines.Strings = (
+          'CREATE FOREIGN TABLE public.medic_spr_doctor('
+          '  spr_doctor_id INTEGER NOT NULL,'
+          '  spr_doctor_code INTEGER,'
+          '  spr_doctor_name VARCHAR(250),'
+          '  create_user_name VARCHAR(60),'
+          '  create_user_date TIMESTAMP WITHOUT TIME ZONE,'
+          '  edit_user_name VARCHAR(60),'
+          '  edit_user_date TIMESTAMP WITHOUT TIME ZONE'
+          ')'
+          'SERVER work_medic'
+          'OPTIONS ('
+          '  schema_name ''spr'','
+          '  table_name ''spr_doctor'');'
         )
       end>
     Left = 25

@@ -1792,4 +1792,49 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 968
     Top = 169
   end
+  object sPGForeignTable: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sForeignTable'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.reltablespace,'
+          '  pg_class.relname,'
+          '  pg_class.relowner,'
+          '  pg_class.relhassubclass,'
+          '  pg_class.relpersistence,'
+          '  pg_class.reloptions,'
+          '  tst.reloptions as tst_reloptions,'
+          '  pg_foreign_table.ftserver,'
+          '  pg_foreign_table.ftoptions,'
+          '  pg_class.relacl,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          '  inner join pg_foreign_table on (pg_foreign_table.ftrelid = pg_class.oid)'
+          'WHERE'
+          '    (pg_class.relkind = ''f'')'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
+      end>
+    Left = 968
+    Top = 240
+  end
 end
