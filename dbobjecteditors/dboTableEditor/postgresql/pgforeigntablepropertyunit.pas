@@ -51,6 +51,7 @@ type
     RxDBGrid1: TRxDBGrid;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
+    procedure Button1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
   private
@@ -66,7 +67,7 @@ type
   end;
 
 implementation
-uses rxboxprocs, fbmStrConstUnit;
+uses sqlObjects, rxboxprocs, rxAppUtils, fbmStrConstUnit, PostgreSQLEngineUnit, fbmToolsUnit, pgSQLEngineFDW;
 
 {$R *.lfm}
 
@@ -76,6 +77,78 @@ procedure TpgForeignTablePropertyFrame.SpeedButton1Click(Sender: TObject);
 begin
   BoxMoveSelectedItems(ListBox1, ListBox2);
   UpdateInhLists;
+end;
+
+procedure TpgForeignTablePropertyFrame.Button1Click(Sender: TObject);
+
+function DoFindFS(AFSName:string):TPGForeignServer;
+var
+  DWR: TPGForeignDataWrapperRoot;
+  j, i: Integer;
+  DW: TPGForeignDataWrapper;
+  Srw: TPGForeignServer;
+begin
+  Result:=nil;
+  DWR:=TSQLEnginePostgre(DBObject.OwnerDB).ForeignDataWrappers as TPGForeignDataWrapperRoot;
+  if not Assigned(DWR) then Exit;
+  for j:=0 to DWR.CountGroups-1 do
+  begin
+    DW:=DWR.Groups[j] as TPGForeignDataWrapper;
+    for i:=0 to DW.ForeignServers.CountGroups - 1 do
+    begin
+      Srw:=DW.ForeignServers.Groups[i] as TPGForeignServer;
+      if Srw.Caption = AFSName then
+        Exit(Srw);
+    end;
+  end;
+
+end;
+
+var
+  FS: TPGForeignServer;
+  S: String;
+  E:TSQLEngineAbstract;
+begin
+  if ComboBox1.Text <> '' then
+    FS:=DoFindFS(ComboBox1.Text)
+  else
+    FS:=nil;
+  if not Assigned(FS) then
+  begin
+    ErrorBox('Not selected server');
+    Exit;
+  end;
+
+  FS.RefreshObject;
+
+  S:=TPGForeignDataWrapper(FS.OwnerRoot.OwnerRoot).Caption;
+  //TODO - Плохой метод - может потом переделаем получше...
+  if S = 'postgres_fdw' then
+    E:=TSQLEnginePostgre.Create;
+
+  if not Assigned(E) then
+  begin
+    ErrorBox('Uknow data wrape - not retrive tables list');
+    Exit;
+  end;
+
+  //E.UserName:=false;
+  try
+    E.ServerName:=FS.Options.Values['host'];
+    if StrToIntDef(FS.Options.Values['port'], -1) > 0 then
+      E.RemotePort:=StrToIntDef(FS.Options.Values['port'], -1);
+    E.DataBaseName:=FS.Options.Values['dbname'];
+    /// - temp. for debug only
+    E.UserName:=DBObject.OwnerDB.UserName;
+    E.Password:=DBObject.OwnerDB.Password;
+    ///
+    E.Connected:=true;
+    InfoBox('Ok!');
+  finally
+    E.Connected:=false;
+  end;
+
+  E.Free;
 end;
 
 procedure TpgForeignTablePropertyFrame.SpeedButton2Click(Sender: TObject);
@@ -91,8 +164,27 @@ begin
 end;
 
 procedure TpgForeignTablePropertyFrame.RefreshObject;
+var
+  I: Integer;
 begin
-  //
+  ComboBox2.Items.Clear;
+  DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okGroup, okUser]);
+  if DBObject.State = sdboEdit then
+  begin
+    rxData.CloseOpen;
+    for I:=0 to TPGForeignTable(DBObject).ForeignTableOptions.Count-1 do
+      rxData.AppendRecord([TPGForeignTable(DBObject).ForeignTableOptions.Names[i], TPGForeignTable(DBObject).ForeignTableOptions.ValueFromIndex[i]]);
+    rxData.First;
+
+    ComboBox1.Text:=TPGForeignTable(DBObject).ForeignServer;
+    ComboBox2.Text:=TPGForeignTable(DBObject).OwnerName;
+
+  end
+  else
+  begin
+    ComboBox1.Items.Clear;
+    DBObject.OwnerDB.FillListForNames(ComboBox1.Items, [okForeignServer]);
+  end;
 end;
 
 function TpgForeignTablePropertyFrame.PageName: string;
@@ -104,7 +196,14 @@ constructor TpgForeignTablePropertyFrame.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  rxData.Open;
   RefreshObject;
+
+  Label2.Enabled:=DBObject.State = sdboCreate;
+  Button1.Enabled:=DBObject.State = sdboCreate;
+  ComboBox1.Enabled:=DBObject.State = sdboCreate;
+  RxDBGrid1.ReadOnly:=DBObject.State <> sdboCreate;
+  Label5.Enabled:=DBObject.State = sdboCreate;
 end;
 
 function TpgForeignTablePropertyFrame.ActionEnabled(
@@ -134,7 +233,7 @@ end;
 function TpgForeignTablePropertyFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
-  Result:=inherited SetupSQLObject(ASQLObject);
+  Result:=false;
 end;
 
 end.

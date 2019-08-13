@@ -57,7 +57,6 @@ type
   private
     procedure FillTables;
     procedure FillTableSpaces;
-    procedure FillTableOwners;
     procedure RefreshObject;
     procedure UpdateInhLists;
     function Compile:boolean;
@@ -128,35 +127,16 @@ begin
   end;
 end;
 
-procedure TfbmpgTablePropertysFrame.FillTableOwners;
-var
-  i:integer;
-  U:TPGUser;
-  G:TPGGroup;
-begin
-  ComboBox2.Items.Clear;
-  for i:=0 to TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGUsersRoot.CountObject - 1 do
-  begin
-    U:=TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGUsersRoot.Items[i] as TPGUser;
-    ComboBox2.Items.Add(U.CaptionFullPatch);
-    if U.UserID = TPGTable(DBObject).OwnerID then
-      ComboBox2.Text:=U.CaptionFullPatch;
-  end;
-
-  for i:=0 to TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGGroupsRoot.CountObject - 1 do
-  begin
-    G:=TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGGroupsRoot.Items[i] as TPGGroup;
-    ComboBox2.Items.Add(G.CaptionFullPatch);
-    if G.ObjID = TPGTable(DBObject).OwnerID then
-      ComboBox2.Text:=G.CaptionFullPatch;
-  end;
-end;
-
 procedure TfbmpgTablePropertysFrame.RefreshObject;
 begin
   FillTables;
-  FillTableSpaces;
-  FillTableOwners;
+
+  cbTableSpace.Items.Clear;
+  DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okTableSpace]);
+  //FillTableSpaces;
+
+  ComboBox2.Items.Clear;
+  DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okGroup, okUser]);
 
   if TPGTable(DBObject).TableUnloged then
     RadioGroup3.ItemIndex:=1

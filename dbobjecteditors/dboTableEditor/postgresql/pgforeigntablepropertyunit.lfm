@@ -37,12 +37,12 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 239
-    Top = 313
+    Height = 240
+    Top = 312
     Width = 619
     Anchors = [akTop, akLeft, akRight, akBottom]
     Caption = 'Inherits table from'
-    ClientHeight = 221
+    ClientHeight = 222
     ClientWidth = 617
     TabOrder = 1
     object ListBox1: TListBox
@@ -52,7 +52,7 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
       AnchorSideBottom.Control = GroupBox1
       AnchorSideBottom.Side = asrCenter
       Left = 6
-      Height = 207
+      Height = 209
       Top = 6
       Width = 285
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -71,7 +71,7 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
       AnchorSideBottom.Control = GroupBox1
       AnchorSideBottom.Side = asrBottom
       Left = 326
-      Height = 209
+      Height = 210
       Top = 6
       Width = 285
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -196,7 +196,7 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     AnchorSideRight.Side = asrBottom
     Left = 6
     Height = 152
-    Top = 155
+    Top = 154
     Width = 607
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -311,7 +311,7 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 132
+    Top = 131
     Width = 48
     BorderSpacing.Around = 6
     Caption = 'Options'
@@ -323,14 +323,14 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Button1
     Left = 14
-    Height = 34
+    Height = 33
     Top = 92
     Width = 506
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
+    Style = csDropDownList
     TabOrder = 3
-    Text = 'ComboBox1'
   end
   object Button1: TButton[7]
     AnchorSideTop.Control = Label2
@@ -345,6 +345,7 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'Select table'
+    OnClick = Button1Click
     TabOrder = 4
   end
   object Label4: TLabel[8]

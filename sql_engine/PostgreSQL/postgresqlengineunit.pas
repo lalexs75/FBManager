@@ -650,6 +650,7 @@ type
 
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
     function ForeignServer: string;
+    function OwnerName: string;
 
     property FTOptions: String read FFTOptions;
     property ForeignTableOptions: TStrings read FForeignTableOptions;
@@ -1052,7 +1053,7 @@ type
     FTasks:TDBRootObject;//TPGTaskRoot;
     FEventTriggers:TPGEventTriggersRoot;
     FExtensions:TPGExtensionsRoot;
-    FForeignDataWR:TPGDBRootObject;
+    FForeignDataWrappers:TPGDBRootObject;
   private
     procedure DoInitPGEngine;
     procedure FillFieldTypeCodes;
@@ -1118,7 +1119,8 @@ type
     function FindDomainByID(OID:integer):TPGDomain;
     function FindTableByID(OID:integer):TPGTable;
     function FindUserByID(OID:integer):TDBObject;
-    function FindUsrGroupByID(OID:integer):TDBObject;
+    function FindGroupByID(OID:integer):TDBObject;
+    function FindOwnerByID(OID:integer):TDBObject;
     function FindIndexByID(OID:integer):TPGIndex;
     function DBObjectByName(AName:string; ARefreshObject:boolean = true):TDBObject;override;
 
@@ -1150,6 +1152,7 @@ type
     property IDTypeEventTrigger:integer read FIDTypeEventTrigger; //Переменная для привязки типа функции-тригера к данным в БД
     property IDTypeFDWHandler:integer read FIDTypeFDWHandler;     //Переменная для привязки типа функции-обаботчика FDW (обёртки внешних данных) к данным в БД
     property IDTypeLangHandler:integer read FIDTypeLangHandler;   //Переменная для привязки типа функции-обаботчика языка к данным в БД
+    property ForeignDataWrappers:TPGDBRootObject read FForeignDataWrappers;
   end;
 
   { TPGQueryControl }
@@ -1352,6 +1355,12 @@ begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+
+  Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
+  S:=OwnerName;
+  if S<>'' then
+    Statistic.AddValue(sOwner, S);
+
   for S in FForeignTableOptions do
     Statistic.AddParamValue(S);
 
@@ -1444,7 +1453,7 @@ end;
 
 class function TPGForeignTable.DBClassTitle: string;
 begin
-  Result:=inherited DBClassTitle;
+  Result:='Foreign table';
 end;
 
 function TPGForeignTable.InternalGetDDLCreate: string;
@@ -1629,7 +1638,7 @@ var
   Srw: TPGForeignServer;
 begin
   Result:='';
-  DWR:=TSQLEnginePostgre(OwnerDB).FForeignDataWR as TPGForeignDataWrapperRoot;
+  DWR:=TSQLEnginePostgre(OwnerDB).FForeignDataWrappers as TPGForeignDataWrapperRoot;
   if not Assigned(DWR) then Exit;
   for j:=0 to DWR.CountGroups-1 do
   begin
@@ -1641,6 +1650,17 @@ begin
         Exit(Srw.Caption);
     end;
   end;
+end;
+
+function TPGForeignTable.OwnerName: string;
+var
+  P: TDBObject;
+begin
+  P:=TSQLEnginePostgre(OwnerDB).FindOwnerByID(FOwnerID);
+  if Assigned(P) then
+    Result:=P.Caption
+  else
+    Result:=''
 end;
 
 { TPGForeignTablesRoot }
@@ -3490,7 +3510,7 @@ begin
   if ServerVersion >= pgVersion9_3 then
   begin
     AddObjectsGroup(FEventTriggers, TPGEventTriggersRoot, TPGEventTrigger, sEventTriggers);
-    AddObjectsGroup(FForeignDataWR, TPGForeignDataWrapperRoot, TPGForeignDataWrapper, sForeignDataWrapper);
+    AddObjectsGroup(FForeignDataWrappers, TPGForeignDataWrapperRoot, TPGForeignDataWrapper, sForeignDataWrapper);
   end;
 
   AddObjectsGroup(FExtensions, TPGExtensionsRoot, TPGExtension, sExtensions);
@@ -3503,7 +3523,7 @@ begin
   FSecurityRoot:=nil;
   FSchemasRoot:=nil;
   FEventTriggers:=nil;
-  FForeignDataWR:=nil;
+  FForeignDataWrappers:=nil;
 end;
 
 function TSQLEnginePostgre.GetCharSet: string;
@@ -4037,7 +4057,7 @@ begin
   end;
 end;
 
-function TSQLEnginePostgre.FindUsrGroupByID(OID: integer): TDBObject;
+function TSQLEnginePostgre.FindGroupByID(OID: integer): TDBObject;
 var
   i:integer;
 begin
@@ -4050,6 +4070,13 @@ begin
       exit;
     end;
   end;
+end;
+
+function TSQLEnginePostgre.FindOwnerByID(OID: integer): TDBObject;
+begin
+  Result:=FindUserByID(OID);
+  if not Assigned(Result) then
+    Result:=FindGroupByID(OID);
 end;
 
 function TSQLEnginePostgre.FindIndexByID(OID: integer): TPGIndex;
@@ -4622,7 +4649,7 @@ begin
   begin
     UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID));
     if not Assigned(UG) then
-      UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindUsrGroupByID(FOwnerID));
+      UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindGroupByID(FOwnerID));
     if Assigned(UG) then
       FCmd.Owner:=UG.Caption;
   end;
