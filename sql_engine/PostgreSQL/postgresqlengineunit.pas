@@ -2569,6 +2569,7 @@ begin
   SchemaName:=FSchema.Caption;
   if Assigned(ADBItem) then
     FOID:=ADBItem.ObjId;
+  FSystemObject:=FSchema.SystemObject;
 end;
 
 destructor TPGRule.Destroy;
@@ -6172,6 +6173,7 @@ begin
 
   FRuleList:=TPGRuleList.Create(Self);
 
+  FSystemObject:=FSchema.SystemObject;
   FDataSet:=TZQuery.Create(nil);
   TZQuery(FDataSet).Connection:=TSQLEnginePostgre(OwnerDB).FPGConnection;
   FDataSet.AfterOpen:=@DataSetAfterOpen;
@@ -6791,6 +6793,7 @@ begin
 
   FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
+  FSystemObject:=FSchema.SystemObject;
 end;
 
 destructor TPGIndex.Destroy;
@@ -7251,6 +7254,7 @@ begin
       DoInitInParams(ADBItem.ObjData);
   end;
 
+  FSystemObject:=FSchema.SystemObject;
   InternalInitACLList;
 end;
 
