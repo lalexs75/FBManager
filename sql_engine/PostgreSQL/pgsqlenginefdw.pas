@@ -535,6 +535,10 @@ end;
 procedure TPGForeignDataWrapper.InternalRefreshStatistic;
 begin
   inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
+  Statistic.AddValue(sHandlerID, IntToStr(FHandlerID));
+  Statistic.AddValue(sValidatorID, IntToStr(FValidatorID));
 end;
 
 constructor TPGForeignDataWrapper.Create(const ADBItem: TDBItem;
