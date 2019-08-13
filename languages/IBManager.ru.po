@@ -2106,6 +2106,10 @@ msgstr "Цвет"
 msgid "Foreign data wrapper"
 msgstr "Обёртка сторонних данных"
 
+#: fbmstrconstunit.sforeigndatawrappername
+msgid "Foreign data wrapper name"
+msgstr ""
+
 #: fbmstrconstunit.sforeignkey
 msgid "Foreign key"
 msgstr "Внешний ключ"
@@ -2350,6 +2354,10 @@ msgstr "Стандартные"
 #: fbmstrconstunit.shandlerfunction
 msgid "Handler function"
 msgstr "Функция обработки"
+
+#: fbmstrconstunit.shandlerid
+msgid "Handler ID"
+msgstr ""
 
 #: fbmstrconstunit.shighlightcurrentword
 msgctxt "fbmstrconstunit.shighlightcurrentword"
@@ -5587,6 +5595,10 @@ msgstr "Проверка"
 #: fbmstrconstunit.svalidatorfunction
 msgid "Validator function"
 msgstr "Функция проверки"
+
+#: fbmstrconstunit.svalidatorid
+msgid "Validator ID"
+msgstr ""
 
 #: fbmstrconstunit.svalue
 msgid "Value"

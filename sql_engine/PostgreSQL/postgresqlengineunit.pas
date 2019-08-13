@@ -1325,7 +1325,7 @@ end;
 
 function TPGForeignTable.GetCaptionFullPatch: string;
 begin
-  Result:=inherited GetCaptionFullPatch;
+  Result:=FmtObjName(FSchema, Self);
 end;
 
 function TPGForeignTable.GetRecordCount: integer;

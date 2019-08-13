@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit,
   fdmAbstractEditorUnit, SQLEngineAbstractUnit, fbmSqlParserUnit, fbmToolsUnit,
-  sqlObjects;
+  sqlObjects, ZDataset;
 
 type
 
@@ -39,12 +39,16 @@ type
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     cbOwner: TComboBox;
+    Edit1: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     CLabel: TLabel;
+    Label5: TLabel;
     ValueListEditor1: TValueListEditor;
+    quHandlers: TZReadOnlyQuery;
+    quValidators: TZReadOnlyQuery;
   private
     procedure RefreshObject;
     procedure FillDictionary;
@@ -58,7 +62,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, PostgreSQLEngineUnit, pgSqlEngineSecurityUnit, pgSQLEngineFDW;
+uses fbmStrConstUnit, PostgreSQLEngineUnit, pgSqlEngineSecurityUnit, pgSQLEngineFDW, pg_SqlParserUnit, rxdbutils;
 
 {$R *.lfm}
 
@@ -69,6 +73,9 @@ begin
   FillDictionary;
   if DBObject.State = sdboEdit then
   begin
+    Edit1.Text:=DBObject.Caption;
+    ComboBox1.Text:=TPGForeignDataWrapper(DBObject).Handler;
+    ComboBox2.Text:=TPGForeignDataWrapper(DBObject).Validator;
     cbOwner.Text:=TPGForeignDataWrapper(DBObject).Owner;
   end;
 end;
@@ -77,6 +84,17 @@ procedure TpgForeignDataWrap.FillDictionary;
 var
   FSQLE: TSQLEnginePostgre;
 begin
+  ComboBox1.Items.Clear;
+  quHandlers.Open;
+  FieldValueToStrings(quHandlers, 'handler_name', ComboBox1.Items);
+  quHandlers.Close;
+
+  ComboBox2.Items.Clear;
+  quValidators.Open;
+  FieldValueToStrings(quValidators, 'validate_name', ComboBox2.Items);
+  quValidators.Close;
+
+
   FSQLE:=TSQLEnginePostgre(DBObject.OwnerDB);
   cbOwner.Items.Clear;
   TPGSecurityRoot(FSQLE.SecurityRoot).PGUsersRoot.FillListForNames(cbOwner.Items, true);
@@ -92,6 +110,9 @@ constructor TpgForeignDataWrap.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  Edit1.Enabled:=DBObject.State = sdboCreate;
+  quValidators.Connection:=TSQLEnginePostgre(ADBObject.OwnerDB).PGConnection;
+  quHandlers.Connection:=TSQLEnginePostgre(ADBObject.OwnerDB).PGConnection;
   RefreshObject;
 end;
 
@@ -114,6 +135,7 @@ begin
   Label4.Caption:=sOwner;
   CheckBox1.Caption:=sNoHandler;
   CheckBox2.Caption:=sNoValidator;
+  Label5.Caption:=sForeignDataWrapperName;
 
   ValueListEditor1.TitleCaptions.Clear;
   ValueListEditor1.TitleCaptions.Add(sParamName);
@@ -122,7 +144,16 @@ end;
 
 function TpgForeignDataWrap.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 begin
-  Result:=inherited SetupSQLObject(ASQLObject);
+  if ASQLObject is TPGSQLCreateForeignDataWrapper then
+  begin
+    ASQLObject.Name:=Edit1.Text;
+    TPGSQLCreateForeignDataWrapper(ASQLObject).Handler:=ComboBox1.Text;
+    TPGSQLCreateForeignDataWrapper(ASQLObject).Validator:=ComboBox2.Text;
+    TPGSQLCreateForeignDataWrapper(ASQLObject).NoHandler:=CheckBox1.Checked;
+    TPGSQLCreateForeignDataWrapper(ASQLObject).NoValidator:=CheckBox2.Checked;
+  end
+  else
+    Result:=false;
 end;
 
 end.

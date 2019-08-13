@@ -1809,6 +1809,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pgFunctionConfig_EditUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/pgforeigntablepropertyunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgForeignTablePropertyFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgForeignTablePropertyUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

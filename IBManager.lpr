@@ -123,7 +123,7 @@ uses
   pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit,
   SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
   fbmpgTableAutoVaccumUnit, fbmToolsNV, fbmUserObjectsGrantUnit,
-  pgFunctionConfigUnit, pgFunctionConfig_EditUnit
+  pgFunctionConfigUnit, pgFunctionConfig_EditUnit, pgForeignTablePropertyUnit
 
   ;
 

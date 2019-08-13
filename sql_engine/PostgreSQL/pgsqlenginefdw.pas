@@ -154,6 +154,7 @@ type
     function GetObjectType: string;override;
     procedure RefreshObject; override;
     class function DBClassTitle:string; override;
+    function CreateSQLObject:TSQLCommandDDL; override;
 
     property OID:Integer read FOID;
     property OwnerID:Integer read FOwnerID;
@@ -600,6 +601,9 @@ begin
       FHandlerID:=Q.FieldByName('fdwhandler').AsInteger;
       FACLListStr:=Q.FieldByName('fdwacl').AsString;
 
+      FValidator:=Q.FieldByName('validator_name').AsString;
+      FHandler:=Q.FieldByName('handler_name').AsString;
+
       S:=Q.FieldByName('fdwoptions').AsString;
       ParsePGArrayString(S, FOptions);
 
@@ -614,6 +618,14 @@ end;
 class function TPGForeignDataWrapper.DBClassTitle: string;
 begin
   Result:='Foreign data wrapper';
+end;
+
+function TPGForeignDataWrapper.CreateSQLObject: TSQLCommandDDL;
+begin
+  if State = sdboCreate then
+    Result:=TPGSQLCreateForeignDataWrapper.Create(nil)
+  else
+    Result:=TPGSQLAlterForeignDataWrapper.Create(nil)
 end;
 
 { TPGForeignDataWrapperRoot }

@@ -2022,6 +2022,10 @@ msgstr ""
 msgid "Foreign data wrapper"
 msgstr ""
 
+#: fbmstrconstunit.sforeigndatawrappername
+msgid "Foreign data wrapper name"
+msgstr ""
+
 #: fbmstrconstunit.sforeignkey
 msgid "Foreign key"
 msgstr ""
@@ -2262,6 +2266,10 @@ msgstr ""
 
 #: fbmstrconstunit.shandlerfunction
 msgid "Handler function"
+msgstr ""
+
+#: fbmstrconstunit.shandlerid
+msgid "Handler ID"
 msgstr ""
 
 #: fbmstrconstunit.shighlightcurrentword
@@ -5388,6 +5396,10 @@ msgstr ""
 
 #: fbmstrconstunit.svalidatorfunction
 msgid "Validator function"
+msgstr ""
+
+#: fbmstrconstunit.svalidatorid
+msgid "Validator ID"
 msgstr ""
 
 #: fbmstrconstunit.svalue

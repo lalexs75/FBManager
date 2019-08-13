@@ -243,7 +243,8 @@ begin
   Result:=true;
   case PageAction of
     epaRefresh:RefreshObject;
-{    epaPrint:fldPrint.Execute;}
+  else
+    Result:=false;
   end;
 end;
 

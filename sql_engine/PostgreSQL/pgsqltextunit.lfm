@@ -1758,12 +1758,18 @@ object pgSqlTextModule: TpgSqlTextModule
           '   from'
           '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
           '   where'
-          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description'
+          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description,'
+          ''
+          '  COALESCE(ns_validator.nspname, '''') || ''.'' || proc_validator.proname as validator_name,'
+          '  COALESCE(ns_handler.nspname, '''') || ''.'' || proc_handler.proname as handler_name'
           'from'
           '  pg_foreign_data_wrapper'
+          '  LEFT OUTER JOIN pg_proc proc_validator ON proc_validator.oid = pg_foreign_data_wrapper.fdwvalidator'
+          '  LEFT OUTER JOIN pg_proc proc_handler ON proc_handler.oid = pg_foreign_data_wrapper.fdwhandler'
+          '  LEFT OUTER JOIN pg_namespace ns_validator ON ns_validator.oid = proc_validator.pronamespace'
+          '  LEFT OUTER JOIN pg_namespace ns_handler ON ns_handler.oid = proc_handler.pronamespace'
           'where'
           '  pg_foreign_data_wrapper.oid = :oid'
-          ''
         )
       end    
       item

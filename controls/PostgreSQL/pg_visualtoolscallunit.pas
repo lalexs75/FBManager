@@ -91,8 +91,8 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
      fbmdboDependenUnit, pgForeignDW, pgExtensionUnit, fbmFTSConfigUnit,
      fbmPGRuleEditorUnit,
      fbmPGRuleListUnit,                //Зависимости
-     fbmpgACLEditUnit, fbmpgTableCheckConstaintUnit,
-     fbmpgTableAutoVaccumUnit,                  //Права доступа
+     fbmpgACLEditUnit, fbmpgTableCheckConstaintUnit, fbmpgTableAutoVaccumUnit,
+     pgForeignTablePropertyUnit,                  //Права доступа
      fbmPGLanguageUnit,                 //Языки
      fbmTableStatisticUnit,
      pgForeignUserMapping, pgForeignServerUnit,
@@ -307,11 +307,10 @@ begin
   );
 
   RegisterObjEditor(TPGForeignTable,
-    [TfbmTableEditorFieldsFrame, {TfbmpgTablePropertysFrame, TfbmpgTableCheckConstaintPage,}
-     TfbmObjectEditorDescriptionFrame],
-    [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame, {TfdbmTableEditorPKListFrame,
+    [TpgForeignTablePropertyFrame, TfbmTableEditorFieldsFrame, TfbmObjectEditorDescriptionFrame],
+    [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame, TpgForeignTablePropertyFrame, {TfdbmTableEditorPKListFrame,
      TfdbmTableEditorForeignKeyFrame, TfdbmTableEditorUniqueFrame, TfbmpgTableCheckConstaintPage,
-     TfbmTableEditorIndexFrame, TfbmTableEditorTriggersFrame, TPGRuleListPage, TfbmpgTablePropertysFrame,
+     TfbmTableEditorIndexFrame, TPGRuleListPage,
      TfbmpgTableAutoVaccum, }TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
      TfbmTableStatisticFrame, TfbmDDLPage]);
 end;

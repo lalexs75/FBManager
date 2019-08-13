@@ -274,6 +274,8 @@ resourcestring
   sUseCustomCodepageForLoggin       = 'Use custom codepage for loggin';
   sCreatePostgreDatabase            = 'Create postgre database...';
   sCreateMySQLDatabase              = 'Create MySQL database...';
+  sHandlerID                        = 'Handler ID';
+  sValidatorID                      = 'Validator ID';
 
   sSelectConnectionType             = 'Select connection type';
   sFKName                           = 'Forign key name';
@@ -959,6 +961,7 @@ resourcestring
   sStatPageCount                    = 'Page count for statistic';
   sNoHandler                        = 'No handler';
   sNoValidator                      = 'No validator';
+  sForeignDataWrapperName           = 'Foreign data wrapper name';
 
 
   sNewForeignKey                    = 'New foreign key';
