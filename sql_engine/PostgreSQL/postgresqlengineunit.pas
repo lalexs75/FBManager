@@ -623,12 +623,13 @@ type
   private
     FACLListStr: string;
     FForeignServerOID: Integer;
+    FForeignTableOptions: TStrings;
     FFTOptions: String;
     FOID: integer;
     FOwnerID: integer;
     FSchema: TPGSchema;
     ZUpdateSQL:TZUpdateSQL;
-    procedure InternalCreateDLL(var SQLLines: TStringList; const ATableName: string);
+    function InternalCreateDLL:string;
     function MakeSQLInsertFields(AParams:boolean):string;
     procedure ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
       StatementIndex: Integer; out Execute: Boolean);
@@ -648,8 +649,10 @@ type
     procedure RefreshFieldList; override;
 
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
+    function ForeignServer: string;
 
     property FTOptions: String read FFTOptions;
+    property ForeignTableOptions: TStrings read FForeignTableOptions;
     property ForeignServerOID: Integer read FForeignServerOID;
     property Schema:TPGSchema read FSchema;
     property OwnerID:integer read FOwnerID write FOwnerID;
@@ -1209,10 +1212,23 @@ end;
 
 { TPGForeignTable }
 
-procedure TPGForeignTable.InternalCreateDLL(var SQLLines: TStringList;
-  const ATableName: string);
+function TPGForeignTable.InternalCreateDLL: string;
+var
+  FCmd: TPGSQLCreateForeignTable;
+  i: Integer;
 begin
+  FCmd:=TPGSQLCreateForeignTable.Create(nil);
+  FCmd.Name:=Caption;
+  FCmd.Description:=Description;
+  FCmd.SchemaName:=SchemaName;
+  FCmd.ServerName:=ForeignServer;
+  Fields.SaveToSQLFields(FCmd.Fields);
 
+  for i:=0 to FForeignTableOptions.Count-1 do
+    FCmd.Params.AddParamEx(FForeignTableOptions.Names[i], QuotedString(FForeignTableOptions.ValueFromIndex[i], ''''));
+
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
 end;
 
 function TPGForeignTable.MakeSQLInsertFields(AParams: boolean): string;
@@ -1330,10 +1346,14 @@ begin
 end;
 
 procedure TPGForeignTable.InternalRefreshStatistic;
+var
+  S: String;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+  for S in FForeignTableOptions do
+    Statistic.AddParamValue(S);
 
 (*
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
@@ -1347,31 +1367,6 @@ begin
   Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
   Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
 
-  if FAutovacuumOptions.Enabled then
-  begin
-    Statistic.AddValue(sAutovacuumEnabled, sYes);
-    Statistic.AddValue(sVacuumThreshold, FloatToStr(FAutovacuumOptions.VacuumThreshold));
-    Statistic.AddValue(sAnalyzeThreshold, IntToStr(FAutovacuumOptions.AnalyzeThreshold));
-    Statistic.AddValue(sVacuumScaleFactor, FloatToStr(FAutovacuumOptions.VacuumScaleFactor));
-    Statistic.AddValue(sAnalyzeScaleFactor, FloatToStr(FAutovacuumOptions.AnalyzeScaleFactor));
-    Statistic.AddValue(sVacuumCostDelay, IntToStr(FAutovacuumOptions.VacuumCostDelay));
-    Statistic.AddValue(sVacuumCostLimit, IntToStr(FAutovacuumOptions.VacuumCostLimit));
-    Statistic.AddValue(sFreezeMinAge, IntToStr(FAutovacuumOptions.FreezeMinAge));
-    Statistic.AddValue(sFreezeMaxAge, IntToStr(FAutovacuumOptions.FreezeMaxAge));
-    Statistic.AddValue(sFreezeTableAge, IntToStr(FAutovacuumOptions.FreezeTableAge));
-  end;
-
-  if FToastAutovacuumOptions.Enabled then
-  begin
-    Statistic.AddValue(sToastAutovacuumEnabled, sYes);
-    Statistic.AddValue(sToastVacuumThreshold, FloatToStr(FToastAutovacuumOptions.VacuumThreshold));
-    Statistic.AddValue(sToastVacuumScaleFactor, FloatToStr(FToastAutovacuumOptions.VacuumScaleFactor));
-    Statistic.AddValue(sToastVacuumCostDelay, IntToStr(FToastAutovacuumOptions.VacuumCostDelay));
-    Statistic.AddValue(sToastVacuumCostLimit, IntToStr(FToastAutovacuumOptions.VacuumCostLimit));
-    Statistic.AddValue(sToastFreezeMinAge, IntToStr(FToastAutovacuumOptions.FreezeMinAge));
-    Statistic.AddValue(sToastFreezeMaxAge, IntToStr(FToastAutovacuumOptions.FreezeMaxAge));
-    Statistic.AddValue(sToastFreezeTableAge, IntToStr(FToastAutovacuumOptions.FreezeTableAge));
-  end;
 
   FQuery.Close;
   FQuery.Free;
@@ -1388,6 +1383,7 @@ constructor TPGForeignTable.Create(const ADBItem: TDBItem;
 begin
   inherited Create(ADBItem, AOwnerRoot);
 
+  FForeignTableOptions:=TStringList.Create;
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
   if Assigned(ADBItem) then
@@ -1435,15 +1431,8 @@ end;
 
 destructor TPGForeignTable.Destroy;
 begin
-(*
-  FreeAndNil(FTriggerList[0]);  //before insert
-  FreeAndNil(FTriggerList[1]);  //after insert
-  FreeAndNil(FTriggerList[2]);  //before update
-  FreeAndNil(FTriggerList[3]);  //after update
-  FreeAndNil(FTriggerList[4]);  //before delete
-  FreeAndNil(FTriggerList[5]);  //after delete
-*)
   FreeAndNil(ZUpdateSQL);
+  FreeAndNil(FForeignTableOptions);
   //FreeAndNil(FInhTables);
   //FreeAndNil(FRuleList);
   //FreeAndNil(FCheckConstraints);
@@ -1460,41 +1449,17 @@ end;
 
 function TPGForeignTable.InternalGetDDLCreate: string;
 var
-  SQLLines:TStringList;
-  i:integer;
-  //Trig:TPGTrigger;
-  S: String;
+  ACL: TStringList;
 begin
-  SQLLines:=TStringList.Create;
+  Result:=InternalCreateDLL;
+  ACL:=TStringList.Create;
   try
-    InternalCreateDLL(SQLLines, CaptionFullPatch);
-
-    for i:=0 to SQLLines.Count - 1 do
-    begin
-      S:=TrimRight(SQLLines[i]);
-      if (S<>'') and (S[Length(S)] <> ';') then
-      begin
-        SQLLines[i]:=S + ';' + LineEnding;
-      end
-      else
-        SQLLines[i]:=SQLLines[i]+LineEnding;
-    end;
-(*
-    SQLLines.Add(MakeRemarkBlock(sTriggersList));
-
-    for i:=0 to FSchema.FTriggers.CountObject - 1 do
-    begin
-      Trig:=TPGTrigger(FSchema.FTriggers.Items[i]);
-      if (Trig.TriggerTable = Self) and (Trig.State = sdboEdit) then
-        SQLLines.Add(Trig.DDLCreate);
-    end;
-*)
     FACLList.RefreshList;
-    FACLList.MakeACLListSQL(nil, SQLLines, true);
-    Result:=SQLLines.Text;
+    FACLList.MakeACLListSQL(nil, ACL, true);
+    Result:=Result + LineEnding + LineEnding + ACL.Text;
   finally
-    SQLLines.Free;
-  end
+    ACL.Free;
+  end;
 end;
 
 function TPGForeignTable.CreateSQLObject: TSQLCommandDDL;
@@ -1522,7 +1487,7 @@ begin
   //FStorageParameters.Clear;
   //FAutovacuumOptions.Clear;
   //FToastAutovacuumOptions.Clear;
-  //FToastRelOID:=0;
+  FForeignTableOptions.Clear;
   if State = sdboEdit then
   begin
     Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGForeignTable['sForeignTable']);
@@ -1542,17 +1507,12 @@ begin
     finally
       Q.Free;
     end;
-(*
 
-    if FRelOptions<>'' then
-    begin
-      ParsePGArrayString(FRelOptions, FStorageParameters);
-      AutovacuumOptions.LoadStorageParameters(FStorageParameters);
-    end;
-*)
+    if FFTOptions<>'' then
+      ParsePGArrayString(FFTOptions, FForeignTableOptions);
+
     RefreshFieldList;
 //    RefreshInheritedTables;
-//    FRuleList.RuleListRefresh;
   end;
 end;
 
@@ -1659,6 +1619,28 @@ begin
     end;
   end;
   Result:=FDataSet;
+end;
+
+function TPGForeignTable.ForeignServer: string;
+var
+  DWR: TPGForeignDataWrapperRoot;
+  DW: TPGForeignDataWrapper;
+  j, i: Integer;
+  Srw: TPGForeignServer;
+begin
+  Result:='';
+  DWR:=TSQLEnginePostgre(OwnerDB).FForeignDataWR as TPGForeignDataWrapperRoot;
+  if not Assigned(DWR) then Exit;
+  for j:=0 to DWR.CountGroups-1 do
+  begin
+    DW:=DWR.Groups[j] as TPGForeignDataWrapper;
+    for i:=0 to DW.ForeignServers.CountGroups - 1 do
+    begin
+      Srw:=DW.ForeignServers.Groups[i] as TPGForeignServer;
+      if Srw.ServerID = FForeignServerOID then
+        Exit(Srw.Caption);
+    end;
+  end;
 end;
 
 { TPGForeignTablesRoot }
