@@ -214,7 +214,7 @@ const
        -1, //okCast
        -1, //okConstraint,
        78, //okExtension
-       -1, //okForeignTable
+       87, //okForeignTable
        81, //okForeignDataWrapper
        84, //okForeignServer
        -1, //okLargeObject
@@ -275,7 +275,7 @@ const
        -1, //okCast
        -1, //okConstraint
        77, //okExtension
-       -1, //okForeignTable
+       87, //okForeignTable
        81, //okForeignDataWrapper
        84, //okForeignServer
        -1, //okLargeObject
