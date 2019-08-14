@@ -163,7 +163,6 @@ type
     procedure UpdateFieldDependencies;
     procedure SaveEditFormData;
     procedure CompileEditFormData(ASqlObj: TSQLAlterTable);
-    function DoAcceptDrag(const Source: TObject): TControl;
   public
     procedure Localize;override;
     function PageName:string;override;
@@ -787,18 +786,6 @@ begin
   end;
 end;
 
-function TfbmTableEditorFieldsFrame.DoAcceptDrag(const Source: TObject
-  ): TControl;
-begin
-  if Source is TControl then
-    Result:=Source as TControl
-  else
-  if Source is TDragControlObject then
-    Result:=(Source as TDragControlObject).Control
-  else
-    Result:=nil;
-end;
-
 procedure TfbmTableEditorFieldsFrame.Localize;
 begin
   Label1.Caption:=sTableName;
@@ -1065,7 +1052,7 @@ begin
   Accept:=(DBObject.State = sdboCreate)
     and (Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentObject)
     and Assigned(fbManDataInpectorForm.CurrentDB)
-    and (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
+    //and (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
     and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
     and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView]);
 end;
@@ -1080,7 +1067,7 @@ begin
   Control:=DoAcceptDrag(Source);
   if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
     or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
-    or (not (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
+    //or (not (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
     or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView])) then Exit;
 
   if not QuestionBox(sCopyFields) then Exit;
@@ -1234,6 +1221,11 @@ begin
 
   if (DBObject.State = sdboCreate) then
   begin
+    if edtTableName.Text = '' then
+    begin
+      ErrorBox(sEnterTableName);
+      Exit(false);
+    end;
     C_PK:=nil;
 
     R:=ASQLObject as TSQLCreateTable;

@@ -52,6 +52,9 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     procedure Button1Click(Sender: TObject);
+    procedure RxDBGrid1DragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure RxDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
   private
@@ -67,7 +70,9 @@ type
   end;
 
 implementation
-uses sqlObjects, rxboxprocs, rxAppUtils, fbmStrConstUnit, PostgreSQLEngineUnit, fbmToolsUnit, pgSQLEngineFDW;
+uses sqlObjects, rxboxprocs, rxAppUtils, fbmStrConstUnit, PostgreSQLEngineUnit,
+  rxstrutils, fbmToolsUnit, IBManDataInspectorUnit, fbmTableEditorFieldsUnit,
+  pgSQLEngineFDW, pg_SqlParserUnit;
 
 {$R *.lfm}
 
@@ -151,6 +156,55 @@ begin
   E.Free;
 end;
 
+procedure TpgForeignTablePropertyFrame.RxDBGrid1DragDrop(Sender,
+  Source: TObject; X, Y: Integer);
+var
+  Control: TControl;
+  FDBTable: TDBDataSetObject;
+  F: TDBField;
+  F1: TfbmTableEditorFieldsFrame;
+  i: Integer;
+begin
+  Control:=DoAcceptDrag(Source);
+  if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
+    or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
+    or (not (fbManDataInpectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB))
+    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable])) then Exit;
+
+  if not QuestionBox(sCopyFields) then Exit;
+
+  FDBTable:=fbManDataInpectorForm.CurrentObject.DBObject as TDBDataSetObject;
+
+  rxData.AppendRecord(['schema_name', FDBTable.SchemaName]);
+  rxData.AppendRecord(['table_name', FDBTable.Caption]);
+
+  for i:=0 to Owner.ComponentCount-1 do
+  begin
+    if Owner.Components[i] is TfbmTableEditorFieldsFrame then
+    begin
+      F1:=Owner.Components[i] as TfbmTableEditorFieldsFrame;
+      F1.FieldListGridDragDrop(Sender, Source, X, Y);
+      F1.edtTableName.Text:=FDBTable.Caption;
+      Exit;
+    end;
+  end;
+
+end;
+
+procedure TpgForeignTablePropertyFrame.RxDBGrid1DragOver(Sender,
+  Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
+var
+  Control: TControl;
+begin
+  Control:=DoAcceptDrag(Source);
+  Accept:=(DBObject.State = sdboCreate)
+    and (Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentObject)
+    and Assigned(fbManDataInpectorForm.CurrentDB)
+    and (fbManDataInpectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB)
+    and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
+    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable]);
+end;
+
 procedure TpgForeignTablePropertyFrame.SpeedButton2Click(Sender: TObject);
 begin
   BoxMoveSelectedItems(ListBox2, ListBox1);
@@ -209,7 +263,12 @@ end;
 function TpgForeignTablePropertyFrame.ActionEnabled(
   PageAction: TEditorPageAction): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaCompile];
+{  case PageAction of
+    epaRefresh:RefreshObject;
+  else
+    Result:=false;
+  end;}
 end;
 
 function TpgForeignTablePropertyFrame.DoMetod(PageAction: TEditorPageAction
@@ -233,7 +292,24 @@ end;
 function TpgForeignTablePropertyFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
-  Result:=false;
+  if ASQLObject is TPGSQLCreateForeignTable then
+  begin
+    TPGSQLCreateForeignTable(ASQLObject).ServerName:=ComboBox1.Text;
+    rxData.First;
+    while not rxData.EOF do
+    begin
+      TPGSQLCreateForeignTable(ASQLObject).Params.AddParamEx(rxDataKEY.AsString, QuotedString(rxDataValue.AsString, ''''));
+      rxData.Next;
+    end;
+    rxData.First;
+
+    //todo - inherited table and partition
+    //todo - with OIDs
+    //todo - Set table owner
+    Result:=true;
+  end
+  else
+    Result:=false;
 end;
 
 end.

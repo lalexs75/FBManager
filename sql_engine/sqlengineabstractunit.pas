@@ -59,7 +59,9 @@ type
              utDropUNQ,         //Можно удалять уникальность
              utAlterAddFieldInitialValue, //Изменять поле - устанавливать начальное значение
              utAlterAddFieldFK,           //Изменять поле - добавлять FK
-             utSetFKName                  //Можно устанавливать имя индекса для FK
+             utSetFKName,                 //Можно устанавливать имя индекса для FK
+             utAddPrimaryKey,   //Можно добавлять PK
+             utDropPrimaryKey   //Можно удалять PK
              );
   
   TUITableOptions = set of TUITableOption;

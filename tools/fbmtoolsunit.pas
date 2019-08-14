@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LCLType, LMessages, DB, SynEdit, Graphics, DbCtrls, rxdbgrid,
-  ExtCtrls, DBGrids, Grids, Forms, contnrs, rxConfigValues,
+  ExtCtrls, DBGrids, Grids, Forms, contnrs, rxConfigValues, Controls,
   SQLEngineCommonTypesUnit,  IniFiles;
 
 const
@@ -109,6 +109,8 @@ procedure AddMacro(var MacroStr:string; const MacroWhere:string);
 procedure AddMacroEx(var MacroStr:string; const MacroWhere:string; Params:array of const);
 function ValueInteger(const S: string): string;
 function ValueString(const S: string): string;
+
+function DoAcceptDrag(const Source: TObject): TControl;
 const
 {$IFDEF WINDOWS}
   AllFilesMask1 = '*.*';
@@ -436,6 +438,17 @@ function ValueString(const S: string): string;
 begin
   Result:=StringReplace(S, '''', '''''', [rfReplaceAll]);
   Result:=StringReplace(Result, '\', '\\', [rfReplaceAll]);
+end;
+
+function DoAcceptDrag(const Source: TObject): TControl;
+begin
+  if Source is TControl then
+    Result:=Source as TControl
+  else
+  if Source is TDragControlObject then
+    Result:=(Source as TDragControlObject).Control
+  else
+    Result:=nil;
 end;
 
 

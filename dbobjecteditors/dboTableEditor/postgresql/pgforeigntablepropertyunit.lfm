@@ -304,6 +304,8 @@ inherited pgForeignTablePropertyFrame: TpgForeignTablePropertyFrame
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 2
     TitleStyle = tsNative
+    OnDragDrop = RxDBGrid1DragDrop
+    OnDragOver = RxDBGrid1DragOver
   end
   object Label5: TLabel[5]
     AnchorSideLeft.Control = Owner

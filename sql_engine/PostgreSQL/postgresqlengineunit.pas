@@ -1286,7 +1286,6 @@ begin
         end;
       end;
 
-      //S:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+ ' values('+MakeSQLInsertFields(true)+') returning '+MakeSQLInsertFields(false);
       S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
       quIns:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
       for F in FDataSet.Fields do
@@ -1363,23 +1362,6 @@ begin
 
   for S in FForeignTableOptions do
     Statistic.AddParamValue(S);
-
-(*
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
-  FQuery.ParamByName('oid').AsInteger:=FOID;
-  FQuery.Open;
-
-  Statistic.AddValue(sTotalSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt));
-  Statistic.AddValue(sIndexSize, RxPrettySizeName(FQuery.FieldByName('INDEX').AsLargeInt));
-  Statistic.AddValue(sToastSize, RxPrettySizeName(FQuery.FieldByName('toast').AsLargeInt));
-  Statistic.AddValue(sTableSize, RxPrettySizeName(FQuery.FieldByName('total').AsLargeInt - FQuery.FieldByName('INDEX').AsLargeInt - FQuery.FieldByName('toast').AsLargeInt));
-  Statistic.AddValue(sStatRecordCount, FQuery.FieldByName('avg_rec_count').AsString);
-  Statistic.AddValue(sStatPageCount, FQuery.FieldByName('relpages').AsString);
-
-
-  FQuery.Close;
-  FQuery.Free;
-*)
 end;
 
 function TPGForeignTable.GetDBFieldClass: TDBFieldClass;
@@ -1406,18 +1388,10 @@ begin
 
   //FStorageParameters:=TStringList.Create;
 
-  UITableOptions:=[utReorderFields, utRenameTable,
-     utAddFields, utEditField, utDropFields
-     //utAddFK, utEditFK, utDropFK,
-     //utAddUNQ, utDropUNQ,
-     //utAlterAddFieldInitialValue,
-     //utAlterAddFieldFK,
-     //utSetFKName
-     ];
+  UITableOptions:=[utReorderFields, utRenameTable, utAddFields, utEditField, utDropFields];
 
   FSchema:=TPGTablesRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
-  //FSystemObject:=FSchema.SystemObject;
   //FInhTables:=TList.Create;
   //FRuleList:=TPGRuleList.Create(Self);
   //FCheckConstraints:=TList.Create;
@@ -1428,14 +1402,6 @@ begin
   FDataSet.AfterOpen:=@DataSetAfterOpen;
   ZUpdateSQL:=TZUpdateSQL.Create(nil);
   TZQuery(FDataSet).UpdateObject:=ZUpdateSQL;
-(*
-  FTriggerList[0]:=TList.Create;  //before insert
-  FTriggerList[1]:=TList.Create;  //after insert
-  FTriggerList[2]:=TList.Create;  //before update
-  FTriggerList[3]:=TList.Create;  //after update
-  FTriggerList[4]:=TList.Create;  //before delete
-  FTriggerList[5]:=TList.Create;  //after delete
-*)
 end;
 
 destructor TPGForeignTable.Destroy;
@@ -1446,8 +1412,6 @@ begin
   //FreeAndNil(FRuleList);
   //FreeAndNil(FCheckConstraints);
   //FreeAndNil(FStorageParameters);
-  //FreeAndNil(FAutovacuumOptions);
-  //FreeAndNil(FToastAutovacuumOptions);
   inherited Destroy;
 end;
 
