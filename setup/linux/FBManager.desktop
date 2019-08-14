@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=FBManager
+Exec=IBManager
+Icon=FBManager.png
+Terminal=false
+Categories=Settings;DesktopSettings;
