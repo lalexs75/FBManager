@@ -34,12 +34,17 @@ FBM_DIR=%{_libdir}/%{name}
 #mkdir -p %{buildroot}/usr/share/FBManager/reports
 mkdir -p %{buildroot}$FBM_DIR
 mkdir -p %{buildroot}$FBM_DIR/languages/
+mkdir -p %{buildroot}$FBM_DIR/docs/
+mkdir -p %{buildroot}$FBM_DIR/reports/
+
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/pixmaps
 mkdir -p %{buildroot}%{_datadir}/applications
 
 install IBManager %{buildroot}$FBM_DIR
 cp -a languages/* %{buildroot}$FBM_DIR/languages/
+cp -a reports/* %{buildroot}$FBM_DIR/reports/
+cp -a docs/* %{buildroot}$FBM_DIR/docs/
 
 ln -sf $FBM_DIR/IBManager %{buildroot}%{_bindir}/IBManager
 
@@ -50,8 +55,8 @@ install -m 644 setup/linux/FBManager.desktop %{buildroot}%{_datadir}/application
 %defattr(-,root,root)
 %{_libdir}/%{name}
 %{_bindir}/*
-%{_datadir}/pixmaps/lazarus.png
-%{_datadir}/applications/lazarus.desktop
+%{_datadir}/pixmaps/FBManager.png
+%{_datadir}/applications/FBManager.desktop
 
 %clean
 [ %{buildroot} != "/" ] && ( rm -rf %{buildroot} )

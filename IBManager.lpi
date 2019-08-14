@@ -1840,23 +1840,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions Count="5">
-      <Item1>
-        <Name Value="EZSQLException"/>
-      </Item1>
-      <Item2>
-        <Name Value="EZDatabaseError"/>
-      </Item2>
-      <Item3>
-        <Name Value="EDatabaseError"/>
-      </Item3>
-      <Item4>
-        <Name Value="Exception"/>
-      </Item4>
-      <Item5>
-        <Name Value="EAbort"/>
-      </Item5>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
