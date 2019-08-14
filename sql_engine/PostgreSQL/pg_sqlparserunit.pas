@@ -2247,6 +2247,7 @@ type
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
     procedure MakeSQL;override;
     property SchemaName;
   end;
@@ -8750,6 +8751,7 @@ constructor TPGSQLCreateForeignTable.Create(AParent: TSQLCommandAbstract);
 begin
   FPartitionOfData:=TPGSQLPartitionOfData.Create(Self);
   inherited Create(AParent);
+  FSQLCommentOnClass:=TPGSQLCommentOn;
 end;
 
 destructor TPGSQLCreateForeignTable.Destroy;
@@ -8858,6 +8860,13 @@ begin
     S:= S + LineEnding + 'OPTIONS (' + LineEnding + S1 + ')';
   end;
   AddSQLCommand(S);
+
+  if Description <> '' then
+    DescribeObject;
+
+  for F in Fields do
+    if F.Description <> '' then
+      DescribeObjectEx(okColumn, F.Caption, FullName, F.Description);
 end;
 
 procedure TPGSQLCreateForeignTable.Assign(ASource: TSQLObjectAbstract);
@@ -8903,6 +8912,12 @@ procedure TPGSQLAlterForeignTable.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+constructor TPGSQLAlterForeignTable.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FSQLCommentOnClass:=TPGSQLCommentOn;
 end;
 
 procedure TPGSQLAlterForeignTable.MakeSQL;
