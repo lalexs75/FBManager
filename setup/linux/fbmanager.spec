@@ -2,7 +2,7 @@ Name: FBManager
 Version: 1.0
 Release: 1
 Summary: Free DataBase Manager
-#Group: Applications/Database
+Group: Development/Databases
 License: GPL
 Source0: FBManager.tar.gz
 URL: https://github.com/lalexs75/FBManager

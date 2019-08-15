@@ -60,19 +60,19 @@ make_win32(){
 }
 
 make_win64(){
-  /usr/local/share/lazarus/tools/svn2revisioninc .
+#  /usr/local/share/lazarus/tools/svn2revisioninc .
   $lazbuild IBManager.lpi --operating-system=win64 --widgetset=win32 --cpu=x86_64
   strip IBManager.exe
 }
 
 make_gtk2(){
-  /usr/local/share/lazarus/tools/svn2revisioninc .
-  $lazbuild IBManager.lpi
+#  /usr/local/share/lazarus/tools/svn2revisioninc .
+  $lazbuild ./IBManager.lpi
   strip IBManager
 }
 
 make_qt(){
-  /usr/local/share/lazarus/tools/svn2revisioninc .
+#  /usr/local/share/lazarus/tools/svn2revisioninc .
   $lazbuild IBManager.lpi --widgetset=qt
   strip IBManager
 }
