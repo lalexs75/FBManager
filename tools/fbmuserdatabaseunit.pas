@@ -847,7 +847,7 @@ begin
   end;
   ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
   SystemVariablesStore;
-  LoadLocalize(ConfigValues.ByNameAsString('lngFileName', ''));
+  LoadLocalize(ConfigValues.ByNameAsString('lngFileName', DefLanguageFile));
 end;
 
 procedure TUserDBModule.SaveConfig;

@@ -53,8 +53,6 @@ const
   defEditorFontName = 'Courier New';
   defEditorFontSize = 10;
 
-//procedure InfoBox(Message:string);
-//procedure ErrorBox(ErrorStr:string);
 procedure ErrorBoxExt(ErrorStr:string; Args:array of const);
 procedure ErrorBoxExcpt(E:Exception);
 function QuestionBox(QuestionMessage:string):boolean;
@@ -63,7 +61,6 @@ function QuestionBoxExt(QuestionMessage:string): integer;
 procedure NotCompleteFunction;
 
 var
-//  GlobalCfgFolder    : string = '';
   LocalCfgFolder     : string = '';
   AliasFileName      : string = '';
   ConfigFileName     : string = '';
@@ -77,8 +74,8 @@ var
   ShowDesigner       : boolean = false;
   ConfigValues:TConfigValues = nil;
 
-//procedure LoadParams1;
 procedure LoadLocalize(AFileName:string);
+function DefLanguageFile:string;
 procedure InitSysOptions;
 
 procedure SetEditorOptions(SynEdit: TSynEdit);
@@ -90,7 +87,6 @@ procedure LM_SendToAll(Msg:Cardinal; AInfo:Pointer); overload;
 
 
 function StrToDateDef(const S: string; const Default: TDateTime): TDateTime;
-//procedure WriteLog(const S:string);
 
 function NumCountChars(const Char: Char; const S: String): Integer;
 
@@ -119,7 +115,7 @@ const
 {$ENDIF}
 
 implementation
-uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging,
+uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging, gettext,
   Translations, LResources, strutils, rxstrutils, SynEditTypes,
   {$IFDEF USE_SHAMANGRAD}
   fbmErrorBoxUnit,
@@ -128,30 +124,9 @@ uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging,
 
   { TODO : В дальнейшем код записи констатн специфичный для каждой БД надо вынести через регистрацию }
   , fb_ConstUnit
-{$IFNDEF WINDOWS}
-//  , iconvenc
-{$ENDIF}
   , LazUTF8
   ;
-(*
-procedure ErrorBox(ErrorStr:string);
-begin
-  {$IFDEF USE_SHAMANGRAD}
-  fbmErrorBoxForm:=TfbmErrorBoxForm.Create(Application);
-  fbmErrorBoxForm.Memo1.Text:=ErrorStr;
-  fbmErrorBoxForm.ShowModal;
-  fbmErrorBoxForm.Free;
-  {$ELSE}
-  Application.MessageBox(PChar(ErrorStr), PChar(sError), MB_OK + MB_ICONHAND);
-  {$ENDIF}
-  RxWriteLog(etError, ErrorStr);
-end;
 
-procedure InfoBox(Message: string);
-begin
-  Application.MessageBox(PChar(Message), PChar(sInformation), MB_OK+MB_ICONQUESTION);
-end;
-*)
 procedure LM_SendToAll(Msg:Cardinal);
 begin
   LM_SendToAll(Msg, nil);
@@ -323,6 +298,14 @@ begin
   end;
 end;
 
+function DefLanguageFile: string;
+var
+  Lang, FallbackLang: String;
+begin
+  GetLanguageIDs(Lang{%H-}, FallbackLang{%H-}); // in unit gettext
+  Result:=ExtractFileNameOnly(ParamStr(0))+'.'+FallbackLang+'.po';
+end;
+
 procedure InitSysOptions;
 var
   S: String;
@@ -492,8 +475,6 @@ begin
   end;
   F.Free;
 end;
-
-
 
 function GetFistString(const S: string): string;
 var

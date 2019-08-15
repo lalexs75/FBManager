@@ -93,7 +93,11 @@ var
   i:integer;
 begin
   I:=ComboBox1.Items.IndexOf(ConfigValues.ByNameAsString('lngFileName', ''));
-  if i<0 then i:=0;
+  if i<0 then
+  begin
+    I:=ComboBox1.Items.IndexOf(DefLanguageFile);
+    if I<0 then i:=0;
+  end;
   ComboBox1.ItemIndex:=i;
 
   CheckBox1.Checked:=ConfigValues.ByNameAsBoolean('RestoreDBDesktop', true);
