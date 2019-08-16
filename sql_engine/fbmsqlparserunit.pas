@@ -511,6 +511,7 @@ type
 
   TSQLCommandAbstractSelect = class(TSQLCommandAbstract)
   private
+    FOrderByFields: TSQLFields;
     FTables:TSQLTables;
     FFields:TSQLFields;
   protected
@@ -522,6 +523,7 @@ type
     property Tables:TSQLTables read FTables;
     property Fields:TSQLFields read FFields;
     property Selectable:boolean read FSelectable;
+    property OrderByFields:TSQLFields read FOrderByFields;
   end;
 
   { TSQLCommandSelect }
@@ -2093,6 +2095,23 @@ begin
 
   if WhereExpression <> '' then
     S:=S + LineEnding + 'WHERE' + ' ' + WhereExpression;
+
+  if FOrderByFields.Count>0 then
+  begin
+    S:=S + LineEnding + 'ORDER BY'+LineEnding;
+    S1:='';
+    for F in OrderByFields do
+    begin
+      if S1<>'' then S1:=S1 + ',' + LineEnding;
+      S1:=S1 + '  ' + F.Caption;
+      if F.IndexOptions.SortOrder = indDescending then
+        S1:=S1 + ' DESC'
+      else
+      if F.IndexOptions.SortOrder = indAscending then
+        S1:=S1 + ' ASC';
+    end;
+    S:=S + S1;
+  end;
   AddSQLCommand(S);
 end;
 
@@ -2136,6 +2155,7 @@ begin
   inherited Create(AParent);
   FTables:=TSQLTables.Create;
   FFields:=TSQLFields.Create;
+  FOrderByFields:=TSQLFields.Create;
   FPlanEnabled:=true;
 end;
 
@@ -2143,6 +2163,7 @@ destructor TSQLCommandAbstractSelect.Destroy;
 begin
   FreeAndNil(FTables);
   FreeAndNil(FFields);
+  FreeAndNil(FOrderByFields);
   inherited Destroy;
 end;
 
@@ -2153,6 +2174,7 @@ begin
     Tables.Assign(TSQLCommandAbstractSelect(ASource).Tables);
     Fields.Assign(TSQLCommandAbstractSelect(ASource).Fields);
     FSelectable:=TSQLCommandAbstractSelect(ASource).Selectable;
+    FOrderByFields.Assign(TSQLCommandAbstractSelect(ASource).FOrderByFields);
   end;
   inherited Assign(ASource);
 end;

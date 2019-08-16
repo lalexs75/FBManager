@@ -180,6 +180,8 @@ var
   i:integer;
 begin
   Localize;
+  PageControl2.ActivePageIndex:=0;
+
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=tabSQL;
 //  EditorFrame.OnGetFieldsList:=@EditorFrameGetFieldsList;
@@ -707,14 +709,8 @@ begin
 end;
 
 procedure TSQLBuilderForm.GenerateSql;
-const
-  LinkTypeStr : array [TLinkType] of string =
-    ('=', '<>', '<=', '>=', '<', '>');
-//    (ltEq, ltNEQ, ltLtl, ltGrt, ltLtEQ, ltGtEQ);
 var
-  S, S1, S2, SWhere, S3:string;
   L:TQBObjectLink;
-  SW: String;
   FSQLCmd: TSQLCommandSelect;
 
 procedure DoFillFields;
@@ -784,6 +780,8 @@ begin
 end;
 
 procedure DoFillWhere;
+var
+  SWhere, SW: String;
 begin
   SWhere:='';
   if rxWhere.RecordCount > 0 then
@@ -804,63 +802,28 @@ begin
   FSQLCmd.WhereExpression:=LineEnding + SWhere;
 end;
 
+procedure DoFillSortOrder;
+var
+  F: TSQLParserField;
 begin
-  S:='';
-  S1:='';
-  SWhere:='';
-
-
-  if SWhere<>'' then
-    SWhere:=LineEnding+'where'+LineEnding + SWhere;
-
-  if CheckBox1.Checked then s2:=' distinct' else s2:='';
-
-  { TODO : Необходимо переделать соедиенение таблицы через JOIN }
-  if rxWhere.RecordCount > 0 then
-  begin
-    if SWhere <> '' then
-      SWhere:=SWhere + LineEnding + ' and '+LineEnding
-    else
-      SWhere:=LineEnding+'where'+LineEnding;
-
-    SW:='';
-    rxWhere.First;
-    while not rxWhere.EOF do
-    begin
-      SW:=SW + '    ' + rxWhereFIELD1_NAME.AsString + ' ' + rxWhereWHERE_COND.AsString + ' ' + rxWhereFIELD2_NAME.AsString;
-      if rxWhere.RecNo < rxWhere.RecordCount then
-        Sw := Sw + LineEnding + '  ' + rxWhereCONNECTOR.AsString + ' '+LineEnding;
-      rxWhere.Next;
-    end;
-    rxWhere.First;
-    SWhere:=SWhere + SW;
-  end;
-
-  S:='select'+s2+LineEnding + S + LineEnding + 'from'+LineEnding+S1+SWhere;
-
-
-
-  S1:='';
   rxSortOrder.First;
   while not rxSortOrder.EOF do
   begin
-    if S1<>'' then
-      S1:=S1+',' + LineEnding;
-    S1:=S1 + '  ' + rxSortOrderSortField.AsString;
-    if rxSortOrderSortOrder.AsInteger <> 0 then
-      S1:=S1+' desc';
+    F:=FSQLCmd.OrderByFields.AddParam(rxSortOrderSortField.AsString);
+    if rxSortOrderSortOrder.AsInteger = 1 then
+      F.IndexOptions.SortOrder:=indDescending;
     rxSortOrder.Next;
   end;
   rxSortOrder.First;
+end;
 
-  if S1<>'' then
-    S:=S+LineEnding + 'order by'+LineEnding+S1;
-
+begin
   FSQLCmd:=TSQLCommandSelect.Create(nil);
   try
     DoFillTables;
     DoFillFields;
     DoFillWhere;
+    DoFillSortOrder;
 
     EditorFrame.EditorText:=FSQLCmd.AsSQL;
   finally

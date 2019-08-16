@@ -62,34 +62,34 @@ object SQLBuilderForm: TSQLBuilderForm
   LCLVersion = '2.1.0.0'
   object PageControl2: TPageControl
     Left = 0
-    Height = 431
-    Top = 82
+    Height = 426
+    Top = 87
     Width = 814
-    ActivePage = TabSheet7
+    ActivePage = tabResult
     Align = alClient
-    TabIndex = 3
+    TabIndex = 2
     TabOrder = 0
     OnChange = PageControl2PageChanged
     object TabSheet4: TTabSheet
       Caption = 'Builder'
-      ClientHeight = 398
+      ClientHeight = 395
       ClientWidth = 804
       object PageControl1: TPageControl
         Left = 0
         Height = 241
-        Top = 151
+        Top = 154
         Width = 804
-        ActivePage = TabSheet1
+        ActivePage = TabSheet3
         Align = alBottom
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = 'Criteria'
-          ClientHeight = 237
-          ClientWidth = 800
+          ClientHeight = 210
+          ClientWidth = 794
           object RxDBGrid5: TRxDBGrid
             Left = 0
-            Height = 207
+            Height = 210
             Top = 0
             Width = 739
             ColumnDefValues.BlobText = '(примечание)'
@@ -100,7 +100,7 @@ object SQLBuilderForm: TSQLBuilderForm
                 Title.Alignment = taCenter
                 Title.Orientation = toHorizontal
                 Title.Caption = 'FIELD1_NAME'
-                Width = 226
+                Width = 221
                 FieldName = 'FIELD1_NAME'
                 EditButtons = <>
                 Filter.DropDownRows = 0
@@ -147,7 +147,7 @@ object SQLBuilderForm: TSQLBuilderForm
                 Title.Alignment = taCenter
                 Title.Orientation = toHorizontal
                 Title.Caption = 'FIELD2_NAME'
-                Width = 226
+                Width = 221
                 FieldName = 'FIELD2_NAME'
                 EditButtons = <>
                 Filter.DropDownRows = 0
@@ -251,20 +251,20 @@ object SQLBuilderForm: TSQLBuilderForm
           end
           object Panel3: TPanel
             Left = 739
-            Height = 207
+            Height = 210
             Top = 0
             Width = 55
             Align = alRight
             AutoSize = True
-            ClientHeight = 203
-            ClientWidth = 51
+            ClientHeight = 210
+            ClientWidth = 55
             TabOrder = 1
             object BitBtn1: TBitBtn
               AnchorSideTop.Control = Panel3
               AnchorSideRight.Control = Panel3
               AnchorSideRight.Side = asrBottom
               Left = 7
-              Height = 36
+              Height = 33
               Top = 7
               Width = 41
               Action = wAdd
@@ -278,10 +278,10 @@ object SQLBuilderForm: TSQLBuilderForm
               AnchorSideTop.Side = asrBottom
               AnchorSideRight.Control = Panel3
               AnchorSideRight.Side = asrBottom
-              Left = 10
-              Height = 36
-              Top = 49
-              Width = 38
+              Left = 11
+              Height = 33
+              Top = 46
+              Width = 37
               Action = wDel
               Anchors = [akTop, akRight]
               AutoSize = True
@@ -292,15 +292,15 @@ object SQLBuilderForm: TSQLBuilderForm
         end
         object TabSheet2: TTabSheet
           Caption = 'Selections'
-          ClientHeight = 237
-          ClientWidth = 800
+          ClientHeight = 210
+          ClientWidth = 794
           object CheckBox1: TCheckBox
             AnchorSideLeft.Control = TabSheet2
             AnchorSideTop.Control = TabSheet2
             Left = 6
-            Height = 25
+            Height = 23
             Top = 6
-            Width = 204
+            Width = 190
             BorderSpacing.Around = 6
             Caption = 'Include only unique records'
             TabOrder = 0
@@ -314,8 +314,8 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideBottom.Control = TabSheet2
             AnchorSideBottom.Side = asrBottom
             Left = 6
-            Height = 163
-            Top = 37
+            Height = 169
+            Top = 35
             Width = 782
             ColumnDefValues.BlobText = '(примечание)'
             TitleButtons = False
@@ -470,8 +470,8 @@ object SQLBuilderForm: TSQLBuilderForm
         end
         object TabSheet3: TTabSheet
           Caption = 'Sorting'
-          ClientHeight = 237
-          ClientWidth = 800
+          ClientHeight = 210
+          ClientWidth = 794
           object Button1: TButton
             AnchorSideLeft.Control = Button2
             AnchorSideTop.Control = TabSheet3
@@ -480,7 +480,7 @@ object SQLBuilderForm: TSQLBuilderForm
             Left = 365
             Height = 33
             Top = 6
-            Width = 64
+            Width = 65
             Anchors = [akTop, akLeft, akRight]
             AutoSize = True
             BorderSpacing.Top = 6
@@ -496,7 +496,7 @@ object SQLBuilderForm: TSQLBuilderForm
             Left = 365
             Height = 33
             Top = 45
-            Width = 64
+            Width = 65
             AutoSize = True
             BorderSpacing.Top = 6
             Caption = 'Remove'
@@ -510,13 +510,13 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideBottom.Control = TabSheet3
             AnchorSideBottom.Side = asrBottom
             Left = 6
-            Height = 194
+            Height = 198
             Top = 6
             Width = 353
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Around = 6
             ItemHeight = 0
-            ScrollWidth = 349
+            ScrollWidth = 351
             TabOrder = 2
             TopIndex = -1
           end
@@ -525,10 +525,10 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideLeft.Control = Button2
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = TabSheet3
-            Left = 435
+            Left = 436
             Height = 33
             Top = 6
-            Width = 30
+            Width = 33
             AutoSize = True
             BorderSpacing.Around = 6
             Caption = 'Up'
@@ -539,10 +539,10 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideLeft.Control = Button3
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = TabSheet3
-            Left = 471
+            Left = 475
             Height = 33
             Top = 6
-            Width = 50
+            Width = 52
             AutoSize = True
             BorderSpacing.Around = 6
             Caption = 'Down'
@@ -552,10 +552,10 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideTop.Control = TabSheet3
             AnchorSideRight.Control = TabSheet3
             AnchorSideRight.Side = asrBottom
-            Left = 751
+            Left = 746
             Height = 33
             Top = 6
-            Width = 37
+            Width = 42
             Anchors = [akTop, akRight]
             AutoSize = True
             BorderSpacing.Around = 6
@@ -571,10 +571,10 @@ object SQLBuilderForm: TSQLBuilderForm
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = TabSheet3
             AnchorSideBottom.Side = asrBottom
-            Left = 435
-            Height = 149
+            Left = 436
+            Height = 153
             Top = 51
-            Width = 353
+            Width = 352
             ColumnDefValues.BlobText = '(примечание)'
             TitleButtons = False
             AutoSort = True
@@ -700,7 +700,7 @@ object SQLBuilderForm: TSQLBuilderForm
       end
       object ListBox3: TListBox
         Left = 0
-        Height = 146
+        Height = 149
         Top = 0
         Width = 225
         Align = alLeft
@@ -712,7 +712,7 @@ object SQLBuilderForm: TSQLBuilderForm
       end
       object Splitter1: TSplitter
         Left = 225
-        Height = 146
+        Height = 149
         Top = 0
         Width = 5
       end
@@ -720,7 +720,7 @@ object SQLBuilderForm: TSQLBuilderForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 146
+        Top = 149
         Width = 804
         Align = alBottom
         ResizeAnchor = akBottom
@@ -731,11 +731,11 @@ object SQLBuilderForm: TSQLBuilderForm
     end
     object tabResult: TTabSheet
       Caption = 'Result'
-      ClientHeight = 398
+      ClientHeight = 395
       ClientWidth = 804
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 342
+        Height = 345
         Top = 50
         Width = 804
         ColumnDefValues.BlobText = '(примечание)'
@@ -899,7 +899,7 @@ object SQLBuilderForm: TSQLBuilderForm
     end
     object TabSheet7: TTabSheet
       Caption = 'History'
-      ClientHeight = 398
+      ClientHeight = 395
       ClientWidth = 804
       object RxDBGrid2: TRxDBGrid
         Left = 0
@@ -986,12 +986,12 @@ object SQLBuilderForm: TSQLBuilderForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 51
+    Height = 53
     Top = 0
     Width = 814
     Align = alTop
     AutoSize = True
-    ClientHeight = 51
+    ClientHeight = 53
     ClientWidth = 814
     TabOrder = 1
     object Label1: TLabel
@@ -999,9 +999,9 @@ object SQLBuilderForm: TSQLBuilderForm
       AnchorSideBottom.Control = ComboBox1
       AnchorSideBottom.Side = asrBottom
       Left = 7
-      Height = 19
-      Top = 19
-      Width = 63
+      Height = 17
+      Top = 23
+      Width = 57
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Database'
@@ -1013,10 +1013,10 @@ object SQLBuilderForm: TSQLBuilderForm
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 76
-      Height = 31
+      Left = 70
+      Height = 33
       Top = 7
-      Width = 731
+      Width = 737
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Bottom = 6
       BorderSpacing.Around = 6
@@ -1028,62 +1028,38 @@ object SQLBuilderForm: TSQLBuilderForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
-    Top = 51
+    Height = 34
+    Top = 53
     Width = 814
     Items = <    
       item
         Action = actRun
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 53
         ShowCaption = True
       end    
       item
         Visible = True
-        Left = 58
-        Height = 21
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = actSchemeLoad
         Visible = True
-        Left = 65
-        Height = 21
-        Top = 5
-        Width = 60
         ShowCaption = True
       end    
       item
         Action = actSchemeSave
         Visible = True
-        Left = 125
-        Height = 21
-        Top = 5
-        Width = 60
         ShowCaption = True
       end    
       item
         Visible = True
-        Left = 185
-        Height = 21
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = actClear
         Visible = True
-        Left = 192
-        Height = 21
-        Top = 5
-        Width = 24
         ShowCaption = False
       end>
     ImageList = fbManagerMainForm.ImageListMain
@@ -1092,7 +1068,7 @@ object SQLBuilderForm: TSQLBuilderForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 34
     ClientWidth = 814
     TabOrder = 2
   end
@@ -1165,13 +1141,13 @@ object SQLBuilderForm: TSQLBuilderForm
     object statFunct: TAction
       Category = 'Result'
       Caption = 'Summary line'
-      ImageIndex = 78
+      ImageIndex = 50
       OnExecute = statFunctExecute
     end
     object statFilter: TAction
       Category = 'Result'
       Caption = 'Filter in table'
-      ImageIndex = 79
+      ImageIndex = 33
       OnExecute = statFilterExecute
     end
   end
@@ -1368,104 +1344,13 @@ object SQLBuilderForm: TSQLBuilderForm
     Top = 456
   end
   object PopupMenu2: TPopupMenu
-    Images = fbManagerMainForm.ImageListNormal
     Left = 296
     Top = 324
     object MenuItem1: TMenuItem
       Action = statFilter
-      Bitmap.Data = {
-        46050000424D4605000000000000360000002800000012000000120000000100
-        2000000000001005000064000000640000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        00000000000000000000FFFFFF0000000000000000050000001E000000320000
-        003300000082000000830101014E000000330000003300000022000000080000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF0000000000000000030000
-        000F000000190000001A00000078D1C2C2FF0303037A0000001A0000001A0000
-        00110000000400000000FFFFFF00FFFFFF000000000000000000FFFFFF000000
-        00000000000000000000000000000202020002020272C4B5B5FF050505780505
-        050000000000000000000000000000000000FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00000000000000000000000000010101000101010001010174C4B5
-        B5FF0909097E0A0A0A0008080800000000000000000000000000FFFFFF00FFFF
-        FF000000000000000000FFFFFF00000000000000000000000000000000000000
-        00000000007AC4B5B5FF0B0B0B870D0D0D000D0D0D000A0A0A00000000000000
-        0000FFFFFF00FFFFFF000000000000000000FFFFFF0000000000000000000000
-        000000000000000000000000007BC4B5B5FF0B0B0B890D0D0D000D0D0D000D0D
-        0D000A0A0A0007070700FFFFFF00FFFFFF000000000000000000FFFFFF001B1B
-        1B00161616000404040000000000000000000000007BC4B5B5FF0B0B0B891212
-        12001919190021212100282828002A2A2A00FFFFFF00FFFFFF00000000000000
-        0000FFFFFF00363636002C2C2C000808080000000000000000260000007BC4B5
-        B5FF0B0B0B891717172F25252500353535004343430046464600FFFFFF00FFFF
-        FF000000000000000000FFFFFF00363636002C2C2C0008080800000000240000
-        006AC7C6C6FFAFA4A4FFC4B2B2FF171717852525252D35353500434343004646
-        4600FFFFFF00FFFFFF000000000000000000FFFFFF00363636002C2C2C000808
-        082400000066CBCBCBFFC1C0C0FFAEA1A1FFBEACACFFD8C7C7FF2525257E3535
-        352A4343430046464600FFFFFF00FFFFFF000000000000000000FFFFFF003636
-        36002C2C2C2408080866D1D1D1FFC3C3C3FFBBBABAFFAC9E9EFFB8A6A6FFCEBC
-        BCFFDFCDCDFF353535774343432846464600FFFFFF00FFFFFF00000000000000
-        0000FFFFFF004B4B4B002C2C2C66E2E2E2FFCFCFCFFFBDBDBDFFB7B5B5FFAB9C
-        9CFFB4A2A2FFC7B5B5FFDCCACAFFEBDADAFF4343436F4E4E4E00FFFFFF00FFFF
-        FF000000000000000000FFFFFF004F4F4F662C2C2C66C1C1C1FFB4B4B4FFA9A9
-        A9FF9D9C9CFF918A8AFF978E8EFFA59C9CFFB6ADADFFC5BCBCFF4343436F4F4F
-        4F69FFFFFF00FFFFFF000000000000000000FFFFFF004F4F4F66EAEAEAFFE6E6
-        E6FFDEDEDEFFD5D5D5FFCECACAFFC4B5B5FFC9B8B8FFD6C4C4FFE4D2D2FFF0DF
-        DFFFF9E8E8FF4F4F4F69FFFFFF00FFFFFF000000000000000000FFFFFF004F4F
-        4F4D2C2C2C6608080866000000660000006A0000007B020202890B0B0B891717
-        17852525257E353535774343436F4F4F4F4FFFFFFF00FFFFFF00000000000000
-        0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000
-      }
     end
     object MenuItem2: TMenuItem
       Action = statFunct
-      Bitmap.Data = {
-        46050000424D4605000000000000360000002800000012000000120000000100
-        2000000000001005000064000000640000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        0000000000000000000000000000000000000000000000000000000000000000
-        00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF0000000000000000000000001A00000019000000170000
-        00160000001400000012000000100000000E0000000B00000009000000070000
-        0005000000040000000200000001FFFFFF000000000000000000000000E90000
-        00E9000000CF000000330000001400000012000000100000000E0000000B0000
-        00090000000700000005000000040000000200000001FFFFFF00000000000000
-        00000000000000000039000000C5000000B40000000000000000000000000000
-        00000000000000000000000000000000000C0000000C0000000000000000FFFF
-        FF00000000000000000000000000000000000000007D000000D1000000170000
-        00000000006C000000D800000000000000000000006C000000D8000000D80000
-        004B00000000FFFFFF00000000000000000001010100010101000101013E0101
-        01CE0101013E010101000000000001010177010101CE01010100010101CE0101
-        015D01010100010101CE01010100FFFFFF000000000000000000010101000101
-        010001010115010101C201010173010101000101010001010100010101560101
-        01C8010101C801010147010101000101010001010100FFFFFF00000000000000
-        00000101010001010100010101000101019D0101019D01010100010101000101
-        0100010101000101014B010101C401010134010101000101010001010100FFFF
-        FF0000000000000000000101010001010100010101000101016E010101BA0101
-        01150101010001010100010101000101013A010101BF010101BF010101000101
-        010001010100FFFFFF0000000000000000000101010001010100010101000101
-        0139010101BB01010139010101000101015E0101010001010158010101BB0101
-        0142010101A40101014601010100FFFFFF000000000000000000010101000101
-        01000101018A010101B7010101B7010101B7010101B70101012E010101B70101
-        01B70101015C0101010001010117010101B70101015CFFFFFF00000000000000
-        0000010101000101010001010100010101000101019001010191010101000101
-        010001010100010101000101010001010100010101000101010001010100FFFF
-        FF00000000000000000001010100010101000101010001010100010101660101
-        01AB010101130101010001010100010101000101010001010100010101000101
-        010001010100FFFFFF0000000000000000000101010001010100010101000101
-        010001010134010101AE010101420101012C010101AE01010100010101000101
-        0100010101000101010001010100FFFFFF000000000000000000010101000101
-        010001010100010101000101010001010156010101AC010101AC010101560101
-        01000101010001010100010101000101010001010100FFFFFF00000000000000
-        0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF000000000000000000
-      }
     end
   end
   object RxDBGridFooterTools1: TRxDBGridFooterTools

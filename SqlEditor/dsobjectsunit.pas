@@ -736,7 +736,7 @@ begin
   begin
     L:=TStringList.Create;
     try
-      FDBObject.FillFieldList(L, ccoUpperCase, false);
+      FDBObject.FillFieldList(L, ccoNoneCase, false);
       for i:=List.Items.Count - 1 downto 0 do
       begin
         if L.IndexOf(List.Items[i])<0 then
