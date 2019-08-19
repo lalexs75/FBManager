@@ -4528,7 +4528,7 @@ end;
 
 function TPGTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=Assigned(AItem) and (AItem.ObjType = 'r') and (AItem.SchemeID = SchemaId);
+  Result:=Assigned(AItem) and ((AItem.ObjType = 'r') or (AItem.ObjType = 'p')) and (AItem.SchemeID = SchemaId);
 end;
 
 function TPGTablesRoot.GetObjectType: string;
