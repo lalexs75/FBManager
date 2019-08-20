@@ -2293,6 +2293,28 @@ object PGSQLParserData: TPGSQLParserData
           '  schema_name ''spr'','
           '  table_name ''spr_doctor'');'
         )
+      end    
+      item
+        Caption = 'CreateTable33'
+        Lines.Strings = (
+          'CREATE TABLE olga.tb_data_p1'
+          '  PARTITION OF olga.tb_data FOR VALUES FROM (1) TO (2);'
+        )
+      end    
+      item
+        Caption = 'CreateTable34'
+        Lines.Strings = (
+          'CREATE TABLE olga.tb_data'
+          '('
+          '    id integer NOT NULL,'
+          '    rec_type integer NOT NULL,'
+          '    rec_name character varying(150),'
+          '    PRIMARY KEY (id)'
+          ') PARTITION BY RANGE (rec_type)'
+          'WITH ('
+          '    OIDS = FALSE'
+          ');'
+        )
       end>
     Left = 25
     Top = 248

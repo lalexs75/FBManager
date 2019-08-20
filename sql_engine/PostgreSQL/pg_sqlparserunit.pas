@@ -846,7 +846,7 @@ type
 
   { TPGSQLCreateTablePartition }
 
-  TPGSQLPartitionType = (ptNone, ptRange, ptList);
+  TPGSQLPartitionType = (ptNone, ptRange, ptList, ptHash);
 
   TPGSQLCreateTablePartition = class
   private
@@ -8647,7 +8647,7 @@ begin
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okForeignTable);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'FOREIGN', []);
-  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'TABLE', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, T1, 'TABLE', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', []);
     T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
