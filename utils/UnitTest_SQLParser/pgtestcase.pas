@@ -506,6 +506,9 @@ type
     procedure c481CreateTable34;
     procedure c482CreateTable35;
     procedure c483CreateTable36;
+    procedure c484AlterTable6;
+    procedure c485AlterTable7;
+    procedure c486AlterTable8;
   end;
 
   { TPGSQLParserData }
@@ -726,6 +729,21 @@ end;
 procedure TPGSQLParserTest.c483CreateTable36;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateTable36']);
+end;
+
+procedure TPGSQLParserTest.c484AlterTable6;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable6']);
+end;
+
+procedure TPGSQLParserTest.c485AlterTable7;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable7']);
+end;
+
+procedure TPGSQLParserTest.c486AlterTable8;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable8']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

@@ -56,7 +56,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
   private
     procedure FillTables;
-    procedure FillTableSpaces;
+    //procedure FillTableSpaces;
     procedure RefreshObject;
     procedure UpdateInhLists;
     function Compile:boolean;
@@ -112,31 +112,16 @@ begin
     ListBox2.Items.Add(TPGTable(DBObject).InheritedTable(i).CaptionFullPatch);
 end;
 
-procedure TfbmpgTablePropertysFrame.FillTableSpaces;
-var
-  T:TPGTableSpace;
-  i:integer;
-begin
-  cbTableSpace.Items.Clear;
-  for i:=0 to TSQLEnginePostgre(DBObject.OwnerDB).TableSpaceRoot.CountObject - 1 do
-  begin
-    T:=TSQLEnginePostgre(DBObject.OwnerDB).TableSpaceRoot.Items[i] as TPGTableSpace;
-    cbTableSpace.Items.Add(T.CaptionFullPatch);
-    if T.OID = TPGTable(DBObject).TableSpaceID then
-      cbTableSpace.Text:=T.CaptionFullPatch;
-  end;
-end;
-
 procedure TfbmpgTablePropertysFrame.RefreshObject;
 begin
   FillTables;
 
   cbTableSpace.Items.Clear;
-  DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okTableSpace]);
-  //FillTableSpaces;
-
   ComboBox2.Items.Clear;
+
+  DBObject.OwnerDB.FillListForNames(cbTableSpace.Items, [okTableSpace]);
   DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okGroup, okUser]);
+  cbTableSpace.Text:=TPGTable(DBObject).TablespaceName;
 
   if TPGTable(DBObject).TableUnloged then
     RadioGroup3.ItemIndex:=1
@@ -246,6 +231,7 @@ function TfbmpgTablePropertysFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 var
   S: String;
+  OP: TAlterTableOperator;
 begin
   Result:=false;
   if ASQLObject is TPGSQLCreateTable then
@@ -278,7 +264,11 @@ begin
   else
   if ASQLObject is TPGSQLAlterTable then
   begin
-
+    if cbTableSpace.Caption<>TPGTable(DBObject).TablespaceName then
+    begin
+      OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetTablespace);
+      OP.;
+    end;
   end
   else
     exit;

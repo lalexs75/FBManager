@@ -540,6 +540,7 @@ type
     FCheckConstraints:TList;
     FTableNameCreate:string;
     FRelOptions: String;
+    function GetTablespaceName: string;
     procedure InternalCreateDLL(var SQLLines: TStringList;
       const ATableName: string);
     procedure ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
@@ -601,10 +602,11 @@ type
 
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
 
+    property OID:integer read FOID;
     property Schema:TPGSchema read FSchema;
     property OwnerID:integer read FOwnerID write FOwnerID;
     property TableSpaceID:integer read FTableSpaceID;
-    property OID:integer read FOID;
+    property TablespaceName:string read GetTablespaceName;
     property TableHasOIDS:boolean read FTableHasOIDS;
     property TableTemp:boolean read FTableTemp;
     property TableUnloged:boolean read FTableUnloged;
@@ -4666,6 +4668,17 @@ begin
   FCmd.Free;
 
   DoMakeIndexList;
+end;
+
+function TPGTable.GetTablespaceName: string;
+var
+  T: TPGTableSpace;
+begin
+  T:=TSQLEnginePostgre(OwnerDB).TableSpaceRoot.TableSpaceByOID(FTableSpaceID);
+  if Assigned(T) then
+    Result:=T.Caption
+  else
+    Result:='';
 end;
 
 procedure TPGTable.ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;

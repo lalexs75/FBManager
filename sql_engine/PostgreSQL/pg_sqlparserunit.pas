@@ -18661,13 +18661,13 @@ begin
       ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, OP.ParamValue]);
       ataSetParams:DoSetParams(OP);
       ataReSetParams:DoReSetParams(OP);
+      ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, OP.ParamValue]);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
   end;
 {  case FAlterAction of
     ataSetTablespace:Result := Result + ' SET TABLESPACE ' + FSchemaNameNew;
-    ataSetSchema:Result := Result + ' SET SCHEMA ' + FSchemaNameNew;
     ataRenameColumn:Result := Result + ' RENAME COLUMN '+FColumnNameOld+' TO ' + FColumnNameNew;
   end;}
 end;

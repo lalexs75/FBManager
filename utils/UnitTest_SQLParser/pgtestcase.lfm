@@ -2330,6 +2330,26 @@ object PGSQLParserData: TPGSQLParserData
           'CREATE TABLE olga.f2'
           '  PARTITION OF olga.tb_data FOR VALUES IN (16, 34, 56);'
         )
+      end    
+      item
+        Caption = 'AlterTable6'
+        Lines.Strings = (
+          'ALTER TABLE myschema.distributors SET SCHEMA yourschema;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable7'
+        Lines.Strings = (
+          'ALTER TABLE srpr.distributors SET TABLESPACE fasttablespace;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable8'
+        Lines.Strings = (
+          'ALTER TABLE distributors SET TABLESPACE fasttablespace;'
+        )
       end>
     Left = 25
     Top = 248
