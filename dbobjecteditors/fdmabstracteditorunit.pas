@@ -35,6 +35,8 @@ type
 
   { TEditorPage }
 
+  TEditorPage = class;
+  TEditorPageClass = class of TEditorPage;
   TEditorPage = class(TFrame)
   private
     FDetailPage:TEditorPage;
@@ -46,6 +48,7 @@ type
     FReadOnly: boolean;
     procedure SetReadOnly(AValue: boolean);virtual;
     procedure ShowDetailObject(ADetailDBObject:TDBObject; AParent:TWinControl);
+    function FindPageByClass(APageClass:TEditorPageClass):TEditorPage;
   public
     FModifiedEvent:TNotifyEvent;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); virtual;
@@ -67,7 +70,6 @@ type
     property DBObject:TDBObject read FDBObject write SetDBObject;
     property Modified:boolean read FModified write SetModified;
   end;
-  TEditorPageClass = class of TEditorPage;
 
 function ProcessEditorPageAction(Pages:TStrings; Action:TEditorPageAction; out ErrorPage:integer):boolean;
 implementation
@@ -154,6 +156,20 @@ begin
       FDetailPage.ReadOnly:=true;
       FDetailPage.Align:=alClient;
     end;
+  end;
+end;
+
+function TEditorPage.FindPageByClass(APageClass: TEditorPageClass): TEditorPage;
+var
+  I: Integer;
+  C: TComponent;
+begin
+  Result:=nil;
+  for I:=0 to Owner.ComponentCount-1 do
+  begin
+    C:=Owner.Components[I];
+    if C is APageClass then
+      Exit(C as TEditorPage);
   end;
 end;
 

@@ -411,7 +411,12 @@ resourcestring
   sSystemCatalog                    = 'System catalog';
   sFieldDependencies                = 'Field Dependencies';
   sForeignKeyRule                   = 'Foreign key rule';
+  sList                             = 'List';
+  sRange                            = 'Range';
   sPartition                        = 'Partition';
+  sPartitionType                    = 'Partition type';
+  sPartitionKeys                    = 'Partition keys';
+  sPartitionSections                = 'Partition sections';
 
 
   sSchemeOwner                      = 'Scheme owner';

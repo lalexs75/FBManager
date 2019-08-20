@@ -178,17 +178,13 @@ begin
   rxData.AppendRecord(['schema_name', FDBTable.SchemaName]);
   rxData.AppendRecord(['table_name', FDBTable.Caption]);
 
-  for i:=0 to Owner.ComponentCount-1 do
+  F1:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+  if Assigned(F1)  then
   begin
-    if Owner.Components[i] is TfbmTableEditorFieldsFrame then
-    begin
-      F1:=Owner.Components[i] as TfbmTableEditorFieldsFrame;
-      F1.FieldListGridDragDrop(Sender, Source, X, Y);
-      F1.edtTableName.Text:=FDBTable.Caption;
-      Exit;
-    end;
+    F1:=Owner.Components[i] as TfbmTableEditorFieldsFrame;
+    F1.FieldListGridDragDrop(Sender, Source, X, Y);
+    F1.edtTableName.Text:=FDBTable.Caption;
   end;
-
 end;
 
 procedure TpgForeignTablePropertyFrame.RxDBGrid1DragOver(Sender,

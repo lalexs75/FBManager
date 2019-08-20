@@ -118,6 +118,11 @@
   {%H-}pgSQLEngineFDW,
   {%H-}pgForeignDW,
   {%H-}pgExtensionUnit,
+  {%H-}fbmpgTableAutoVaccumUnit,
+  {%H-}pgFunctionConfigUnit,
+  {%H-}pgFunctionConfig_EditUnit,
+  {%H-}pgForeignTablePropertyUnit,
+  {%H-}fbmPGTablePartitionUnit,
 {$ENDIF}
 
 {$IFDEF MySQL}

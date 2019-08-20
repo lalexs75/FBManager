@@ -2690,6 +2690,10 @@ msgctxt "fbmstrconstunit.slinkproplabel1"
 msgid "Join tables: %s and %s"
 msgstr "Соединение таблиц: %s и %s"
 
+#: fbmstrconstunit.slist
+msgid "List"
+msgstr ""
+
 #: fbmstrconstunit.sload
 msgid "Load"
 msgstr "Загрузить"
@@ -3707,6 +3711,22 @@ msgstr "Тип параметра"
 msgid "Param value"
 msgstr "Значение параметра"
 
+#: fbmstrconstunit.spartition
+msgid "Partition"
+msgstr ""
+
+#: fbmstrconstunit.spartitionkeys
+msgid "Partition keys"
+msgstr ""
+
+#: fbmstrconstunit.spartitionsections
+msgid "Partition sections"
+msgstr ""
+
+#: fbmstrconstunit.spartitiontype
+msgid "Partition type"
+msgstr ""
+
 #: fbmstrconstunit.spassword
 msgctxt "fbmstrconstunit.spassword"
 msgid "Password"
@@ -3976,6 +3996,10 @@ msgstr "Старт запроса"
 #: fbmstrconstunit.squestion
 msgid "Question"
 msgstr "Вопрос"
+
+#: fbmstrconstunit.srange
+msgid "Range"
+msgstr ""
 
 #: fbmstrconstunit.sreadonly
 msgid "Read only"
