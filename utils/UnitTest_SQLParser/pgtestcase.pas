@@ -504,6 +504,8 @@ type
     procedure c479CreateForeignTable3;
     procedure c480CreateTable33;
     procedure c481CreateTable34;
+    procedure c482CreateTable35;
+    procedure c483CreateTable36;
   end;
 
   { TPGSQLParserData }
@@ -714,6 +716,16 @@ end;
 procedure TPGSQLParserTest.c481CreateTable34;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateTable34']);
+end;
+
+procedure TPGSQLParserTest.c482CreateTable35;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable35']);
+end;
+
+procedure TPGSQLParserTest.c483CreateTable36;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable36']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

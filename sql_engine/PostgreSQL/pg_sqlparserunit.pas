@@ -3437,6 +3437,7 @@ begin
     TV_5:=FOwner.AddSQLTokens(stKeyword, T1, 'FALSE', [], ABaseCmd+1);
     TV_6:=FOwner.AddSQLTokens(stKeyword, T1, 'NULL', [], ABaseCmd+1);
     TSymb:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ',', [], ABaseCmd+2);
+      TSymb.AddChildToken([TV_1, TV_2, TV_3, TV_4, TV_5, TV_6]);
     T1:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ')', [], ABaseCmd+2);
     T1.AddChildToken(AEndNodes);
 
@@ -3502,7 +3503,7 @@ begin
   Result:='';
   case FPartType of
     podtDefault:Result:='DEFAULT';
-    podtIn:Result:=' IN (' + Params.AsString + ')';
+    podtIn:Result:='IN (' + Params.AsString + ')';
     podtFromTo:if Params.Count>1 then
                  Result:='FROM ('+Params[0].Caption + ') TO ('+Params[1].Caption+')';
     podtWith:if Params.Count>1 then

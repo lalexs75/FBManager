@@ -25,7 +25,7 @@ unit fbmSqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineCommonTypesUnit, sqlObjects{, DOM};
+  Classes, SysUtils, SQLEngineCommonTypesUnit, sqlObjects;
 
 const
   CharDelimiters = [',',':','}','{',';', '(', ')', '.', '[', ']', '=', '@'];
@@ -33,8 +33,6 @@ const
 type
   TSQLParserSintax = (siGlobal, siPostgreSQL, siFirebird);
   TCreateMode = (cmCreate, cmAlter, cmCreateOrAlter, cmRecreate, cmDropAndCreate);
-
-//  TParserState = (psError, psStop, psNone, psCreate, psWaitObjName, psSelect);
 
   TVisibleType = (vtNone, vtGlobal, vtLocal);
 
@@ -79,8 +77,6 @@ type
     procedure AddChildToken(AToken:TSQLTokenRecord);
     procedure AddChildToken(ATokens:array of TSQLTokenRecord);overload;
     procedure CopyChildTokens(ASQLToken:TSQLTokenRecord);
-//    procedure Save(APath:string; Doc:TDOMDocument);
-//    procedure Load(APath:string; Doc:TDOMDocument);
 
     property Child:TSQLTokenList read FChild;
     property SQLCommand:string read FSQLCommand write FSQLCommand;
@@ -189,8 +185,6 @@ type
     function AddSQLTokens(AToken:TSQLToken; const Parent:TSQLTokenRecord; const SQLCommand:string; AOptions:TSQLTokenOptions; ATag:integer = 0; ADBObjectKind:TDBObjectKind = okOther; ACaption:string = ''):TSQLTokenRecord;
     function AddSQLTokens(AToken:TSQLToken; const Parents:array of TSQLTokenRecord; const ASQLCommand:string; AOptions:TSQLTokenOptions; ATag:integer = 0; ADBObjectKind:TDBObjectKind = okOther; ACaption:string = ''):TSQLTokenRecord;overload;
     function SQLToken:TSQLToken;
-    //procedure Save(ASqlNode: TDOMElement; ADoc:TDOMDocument);
-    //procedure Load(APath:string; Doc:TDOMDocument);
     procedure Clear;override;
 
 
@@ -530,7 +524,6 @@ type
 
   TSQLCommandSelect = class(TSQLCommandAbstractSelect)
   private
-//    FCTE: string;
     FTokenFrom:TSQLTokenRecord;
     //
     FAllRec: boolean;
@@ -1091,12 +1084,10 @@ constructor TSQLCommandGrant.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FTableShortForm:=true;
-//  FGrantObjects:=TGrantObjects.Create;
 end;
 
 destructor TSQLCommandGrant.Destroy;
 begin
-//  FGrantObjects.Free;
   inherited Destroy;
 end;
 
@@ -2716,10 +2707,6 @@ end;
 procedure TSQLCommandAbstract.Clear;
 begin
   inherited Clear;
-//  FErrorMessage: string;
-//  FErrorPos: TPoint;
-//  FPlanEnabled: boolean;
-//  FState: TCMDState;
   FParams.Clear;
 end;
 
@@ -3689,17 +3676,7 @@ begin
   for P in ASQLToken.Child do
     Child.Add(P);
 end;
-(*
-procedure TSQLTokenRecord.Save(APath: string; Doc: TDOMDocument);
-begin
 
-end;
-
-procedure TSQLTokenRecord.Load(APath: string; Doc: TDOMDocument);
-begin
-
-end;
-*)
 procedure TSQLTokenRecord.AddChildToken(AToken: TSQLTokenRecord);
 var
   S: String;

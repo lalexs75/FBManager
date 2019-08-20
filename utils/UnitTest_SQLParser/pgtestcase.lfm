@@ -2316,6 +2316,20 @@ object PGSQLParserData: TPGSQLParserData
           ');'
           ''
         )
+      end    
+      item
+        Caption = 'CreateTable35'
+        Lines.Strings = (
+          'CREATE TABLE olga.tt'
+          '  PARTITION OF olga.tb_data FOR VALUES IN (''12'', ''13'', ''14'');'
+        )
+      end    
+      item
+        Caption = 'CreateTable36'
+        Lines.Strings = (
+          'CREATE TABLE olga.f2'
+          '  PARTITION OF olga.tb_data FOR VALUES IN (16, 34, 56);'
+        )
       end>
     Left = 25
     Top = 248

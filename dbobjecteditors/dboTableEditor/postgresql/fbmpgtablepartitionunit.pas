@@ -37,7 +37,6 @@ type
 
   public
     class function PageExists(ADBObject:TDBObject):Boolean; override;
-
     function PageName:string; override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
     procedure Activate;override;
@@ -49,7 +48,7 @@ type
 
 implementation
 
-uses pgTypes;
+uses fbmStrConstUnit, pgTypes;
 
 {$R *.lfm}
 
@@ -63,7 +62,7 @@ end;
 
 function TfbmPGTablePartitionPage.PageName: string;
 begin
-  Result:='aaa';
+  Result:=sPartition;
 end;
 
 function TfbmPGTablePartitionPage.DoMetod(PageAction: TEditorPageAction
@@ -97,7 +96,7 @@ end;
 function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
-  Result:=inherited SetupSQLObject(ASQLObject);
+  Result:=nil;
 end;
 
 end.
