@@ -18084,7 +18084,7 @@ begin
       T2:=AddSQLTokens(stIdentificator, T1, '', [], 4);
 
     T1:=AddSQLTokens(stKeyword, TSet, 'TABLESPACE', []);
-      T2:=AddSQLTokens(stKeyword, T1, '', [], 5);
+      T2:=AddSQLTokens(stIdentificator, T1, '', [], 5);
 
     T1:=AddSQLTokens(stSymbol, TSet, '(', []);
     T2:=AddSQLTokens(stIdentificator, T1, '', [], 60);
@@ -18662,14 +18662,11 @@ begin
       ataSetParams:DoSetParams(OP);
       ataReSetParams:DoReSetParams(OP);
       ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, OP.ParamValue]);
+      ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, OP.ParamValue]);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
   end;
-{  case FAlterAction of
-    ataSetTablespace:Result := Result + ' SET TABLESPACE ' + FSchemaNameNew;
-    ataRenameColumn:Result := Result + ' RENAME COLUMN '+FColumnNameOld+' TO ' + FColumnNameNew;
-  end;}
 end;
 
 constructor TPGSQLAlterTable.Create(AParent: TSQLCommandAbstract);
