@@ -25,19 +25,80 @@ unit fbmPGTablePartitionUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, fdmAbstractEditorUnit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, fdmAbstractEditorUnit, fbmSqlParserUnit,
+  SQLEngineAbstractUnit, PostgreSQLEngineUnit;
 
 type
+
+  { TfbmPGTablePartitionPage }
+
   TfbmPGTablePartitionPage = class(TEditorPage)
   private
 
   public
+    class function PageExists(ADBObject:TDBObject):Boolean; override;
 
+    function PageName:string; override;
+    function DoMetod(PageAction:TEditorPageAction):boolean;override;
+    procedure Activate;override;
+    function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
+    constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    procedure Localize;override;
+    function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
 implementation
 
+uses pgTypes;
+
 {$R *.lfm}
+
+{ TfbmPGTablePartitionPage }
+
+class function TfbmPGTablePartitionPage.PageExists(ADBObject: TDBObject
+  ): Boolean;
+begin
+  Result:=Assigned(ADBObject) and (ADBObject.OwnerDB is TSQLEnginePostgre) and (TSQLEnginePostgre(ADBObject.OwnerDB).ServerVersion >= pgVersion10_0);
+end;
+
+function TfbmPGTablePartitionPage.PageName: string;
+begin
+  Result:='aaa';
+end;
+
+function TfbmPGTablePartitionPage.DoMetod(PageAction: TEditorPageAction
+  ): boolean;
+begin
+  Result:=inherited DoMetod(PageAction);
+end;
+
+procedure TfbmPGTablePartitionPage.Activate;
+begin
+  inherited Activate;
+end;
+
+function TfbmPGTablePartitionPage.ActionEnabled(PageAction: TEditorPageAction
+  ): boolean;
+begin
+  Result:=inherited ActionEnabled(PageAction);
+end;
+
+constructor TfbmPGTablePartitionPage.CreatePage(TheOwner: TComponent;
+  ADBObject: TDBObject);
+begin
+  inherited CreatePage(TheOwner, ADBObject);
+end;
+
+procedure TfbmPGTablePartitionPage.Localize;
+begin
+  inherited Localize;
+end;
+
+function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
+  ): boolean;
+begin
+  Result:=inherited SetupSQLObject(ASQLObject);
+end;
 
 end.
 

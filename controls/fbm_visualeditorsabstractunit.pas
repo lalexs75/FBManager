@@ -245,7 +245,7 @@ end;
 
 class function TDBVisualTools.ConnectionDlgPageCount: integer;
 begin
-
+  Result:=0;
 end;
 
 function TDBVisualTools.EditPageCount(ADBObject: TDBObject): integer;
@@ -264,16 +264,23 @@ function TDBVisualTools.EditPage(ADBObject: TDBObject; AOwner: TComponent;
 var
   R: TDBObjEditorsRec;
 begin
+  Result:=nil;
   R:=FindDBObjEditorsRec(ADBObject);
   if ADBObject.State = sdboCreate then
-    Result:=R.FPgCreate[AItem].CreatePage(AOwner, ADBObject)
+  begin
+    if R.FPgCreate[AItem].PageExists(ADBObject) then
+      Result:=R.FPgCreate[AItem].CreatePage(AOwner, ADBObject)
+  end
   else
-    Result:=R.FPgEdit[AItem].CreatePage(AOwner, ADBObject);
+  begin
+    if R.FPgEdit[AItem].PageExists(ADBObject) then
+      Result:=R.FPgEdit[AItem].CreatePage(AOwner, ADBObject);
+  end;
 end;
 
 class function TDBVisualTools.ConfigDlgPageCount: integer;
 begin
-
+  Result:=0;
 end;
 
 procedure TDBVisualTools.StoreConfig(const Ini: TIniFile);

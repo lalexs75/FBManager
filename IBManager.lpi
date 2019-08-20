@@ -1817,6 +1817,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgForeignTablePropertyUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtablepartitionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmPGTablePartitionPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmPGTablePartitionUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

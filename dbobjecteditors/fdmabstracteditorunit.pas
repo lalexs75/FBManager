@@ -61,6 +61,7 @@ type
     procedure Localize;virtual;
     function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; virtual;
     procedure NotyfiDeleted(ADBObject:TDBObject); virtual;
+    class function PageExists(ADBObject:TDBObject):Boolean; virtual;
   public
     property ReadOnly:boolean read FReadOnly write SetReadOnly;
     property DBObject:TDBObject read FDBObject write SetDBObject;
@@ -211,6 +212,11 @@ end;
 procedure TEditorPage.NotyfiDeleted(ADBObject: TDBObject);
 begin
 
+end;
+
+class function TEditorPage.PageExists(ADBObject: TDBObject): Boolean;
+begin
+  Result:=true;
 end;
 
 end.
