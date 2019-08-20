@@ -42,7 +42,7 @@ inherited fbmpgTablePropertysFrame: TfbmpgTablePropertysFrame
     Caption = 'Table owner'
     ParentColor = False
   end
-  object ComboBox2: TComboBox[3]
+  object cbTableOwner: TComboBox[3]
     AnchorSideLeft.Control = Label2
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
@@ -320,7 +320,7 @@ inherited fbmpgTablePropertysFrame: TfbmpgTablePropertysFrame
   end
   object RadioGroup3: TRadioGroup[11]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Control = cbTableOwner
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label3
     Left = 6

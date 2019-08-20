@@ -178,7 +178,7 @@ end;
 function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
-  Result:=false;
+  Result:=true;
 end;
 
 end.

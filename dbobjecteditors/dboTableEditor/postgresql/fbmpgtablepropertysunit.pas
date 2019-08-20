@@ -37,7 +37,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox3: TCheckBox;
     cbTableSpace: TComboBox;
-    ComboBox2: TComboBox;
+    cbTableOwner: TComboBox;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -56,10 +56,8 @@ type
     procedure SpeedButton2Click(Sender: TObject);
   private
     procedure FillTables;
-    //procedure FillTableSpaces;
     procedure RefreshObject;
     procedure UpdateInhLists;
-    function Compile:boolean;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -79,7 +77,7 @@ uses fbmStrConstUnit, pgSqlEngineSecurityUnit, SQLEngineCommonTypesUnit, pg_SqlP
 
 procedure TfbmpgTablePropertysFrame.CheckBox3Change(Sender: TObject);
 begin
-  SpinEdit1.Enabled:=CheckBox3.Checked;
+  SpinEdit1.Enabled:=not CheckBox3.Checked;
 end;
 
 procedure TfbmpgTablePropertysFrame.RadioGroup3Click(Sender: TObject);
@@ -117,11 +115,12 @@ begin
   FillTables;
 
   cbTableSpace.Items.Clear;
-  ComboBox2.Items.Clear;
+  cbTableOwner.Items.Clear;
 
   DBObject.OwnerDB.FillListForNames(cbTableSpace.Items, [okTableSpace]);
-  DBObject.OwnerDB.FillListForNames(ComboBox2.Items, [okGroup, okUser]);
+  DBObject.OwnerDB.FillListForNames(cbTableOwner.Items, [okGroup, okUser]);
   cbTableSpace.Text:=TPGTable(DBObject).TablespaceName;
+  cbTableOwner.Caption:=TPGTable(DBObject).OwnerName;
 
   if TPGTable(DBObject).TableUnloged then
     RadioGroup3.ItemIndex:=1
@@ -131,6 +130,9 @@ begin
   else
     RadioGroup3.ItemIndex:=0
   ;
+
+  CheckBox3.Checked:=TPGTable(DBObject).StorageParameters.Values['fillfactor']='';
+  SpinEdit1.Value:=StrToIntDef(TPGTable(DBObject).StorageParameters.Values['fillfactor'], 0);
   CheckBox1.Checked:=TPGTable(DBObject).TableHasOIDS;
   CheckBox1.Enabled:=TPGTable(DBObject).State = sdboCreate;
   RadioGroup3Click(nil);
@@ -140,44 +142,6 @@ procedure TfbmpgTablePropertysFrame.UpdateInhLists;
 begin
   SpeedButton1.Enabled:=ListBox1.Items.Count>0;
   SpeedButton2.Enabled:=ListBox2.Items.Count>0;
-end;
-
-function TfbmpgTablePropertysFrame.Compile: boolean;
-var
-  i:integer;
-  T:TPGTable;
-  U:TPGUser;
-  G:TPGGroup;
-  S:string;
-begin
-  if TPGTable(DBObject).State = sdboCreate then
-  begin
-    TPGTable(DBObject).InhTables.Clear;
-    for i:=0 to ListBox2.Items.Count - 1 do
-    begin
-      T:=TPGTable(DBObject).OwnerDB.DBObjectByName(ListBox2.Items[i]) as TPGTable;
-      TPGTable(DBObject).InhTables.Add(T);
-    end;
-    //TPGTable(DBObject).;
-
-    S:=Trim(ComboBox2.Text);
-    if S<>'' then
-    begin
-      U:=TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGUsersRoot.ObjByName(S) as TPGUser;
-      if Assigned(U) then
-        TPGTable(DBObject).OwnerID:=U.UserID
-      else
-      begin
-        G:=TPGSecurityRoot(TSQLEnginePostgre(TPGTable(DBObject).OwnerDB).SecurityRoot).PGGroupsRoot.ObjByName(S) as TPGGroup;
-        if Assigned(G) then
-          TPGTable(DBObject).OwnerID:=G.ObjID;
-      end;
-    end;
-
-    Result:=true;
-  end
-  else
-    Result:=false;
 end;
 
 function TfbmpgTablePropertysFrame.PageName: string;
@@ -195,11 +159,7 @@ end;
 function TfbmpgTablePropertysFrame.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  case PageAction of
-    epaCompile:Result:=TPGTable(DBObject).State = sdboCreate;
-  else
-    Result:=PageAction in [epaPrint, epaRefresh];
-  end;
+  Result:=PageAction in [epaPrint, epaRefresh, epaCompile];
 end;
 
 function TfbmpgTablePropertysFrame.DoMetod(PageAction: TEditorPageAction
@@ -258,21 +218,36 @@ begin
     if CheckBox1.Checked then
       TPGSQLCreateTable(ASQLObject).PGOptions:=TPGSQLCreateTable(ASQLObject).PGOptions + [pgoWithOids];
 
-    TPGSQLCreateTable(ASQLObject).Owner:=ComboBox2.Text;
+    TPGSQLCreateTable(ASQLObject).Owner:=cbTableOwner.Text;
     TPGSQLCreateTable(ASQLObject).Unlogged:=RadioGroup3.ItemIndex = 2;
+    Result:=true;
   end
   else
   if ASQLObject is TPGSQLAlterTable then
   begin
     if cbTableSpace.Caption<>TPGTable(DBObject).TablespaceName then
+      OP:=TPGSQLAlterTable(ASQLObject).Operators.AddItem(ataSetTablespace, cbTableSpace.Caption);
+
+    if cbTableOwner.Caption<>TPGTable(DBObject).OwnerName then
+      OP:=TPGSQLAlterTable(ASQLObject).Operators.AddItem(ataOwnerTo, cbTableOwner.Caption);
+
+    if (CheckBox3.Checked <> (TPGTable(DBObject).StorageParameters.Values['fillfactor']='')) or
+       (SpinEdit1.Value<>StrToIntDef(TPGTable(DBObject).StorageParameters.Values['fillfactor'], 0)) then
     begin
-      OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetTablespace);
-      OP.;
+      if CheckBox3.Checked then
+      begin
+        OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataReSetParams);
+        OP.Params.AddParam('fillfactor');
+      end
+      else
+      begin;
+        OP:=TPGSQLAlterTable(ASQLObject).AddOperator(ataSetParams);
+        OP.Params.AddParamEx('fillfactor', IntToStr(SpinEdit1.Value))
+      end;
     end;
-  end
-  else
-    exit;
-  Result:=true;
+
+    Result:=true;
+  end;
 end;
 
 end.

@@ -540,6 +540,7 @@ type
     FCheckConstraints:TList;
     FTableNameCreate:string;
     FRelOptions: String;
+    function GetOwnerName: string;
     function GetTablespaceName: string;
     procedure InternalCreateDLL(var SQLLines: TStringList;
       const ATableName: string);
@@ -604,7 +605,8 @@ type
 
     property OID:integer read FOID;
     property Schema:TPGSchema read FSchema;
-    property OwnerID:integer read FOwnerID write FOwnerID;
+    property OwnerID:integer read FOwnerID {write FOwnerID};
+    property OwnerName:string read GetOwnerName;
     property TableSpaceID:integer read FTableSpaceID;
     property TablespaceName:string read GetTablespaceName;
     property TableHasOIDS:boolean read FTableHasOIDS;
@@ -4675,6 +4677,17 @@ var
   T: TPGTableSpace;
 begin
   T:=TSQLEnginePostgre(OwnerDB).TableSpaceRoot.TableSpaceByOID(FTableSpaceID);
+  if Assigned(T) then
+    Result:=T.Caption
+  else
+    Result:='';
+end;
+
+function TPGTable.GetOwnerName: string;
+var
+  T: TDBObject;
+begin
+  T:=TSQLEnginePostgre(OwnerDB).FindOwnerByID(FOwnerID);
   if Assigned(T) then
     Result:=T.Caption
   else
