@@ -2304,16 +2304,17 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateTable34'
         Lines.Strings = (
-          'CREATE TABLE olga.tb_data'
-          '('
-          '    id integer NOT NULL,'
-          '    rec_type integer NOT NULL,'
-          '    rec_name character varying(150),'
-          '    PRIMARY KEY (id)'
-          ') PARTITION BY RANGE (rec_type)'
+          'CREATE TABLE olga.tb_data('
+          '  id integer NOT NULL,'
+          '  rec_type integer NOT NULL,'
+          '  rec_name character varying(150),'
+          '  PRIMARY KEY (id)'
+          ')'
+          'PARTITION BY RANGE (rec_type)'
           'WITH ('
-          '    OIDS = FALSE'
+          '  OIDS=FALSE'
           ');'
+          ''
         )
       end>
     Left = 25

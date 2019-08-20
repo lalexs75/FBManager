@@ -193,6 +193,7 @@ type
   private
     FOwner:TSQLCommandAbstract;
     FParams: TSQLFields;
+    FPartitionTableName: string;
     FPartType: TPartitionOfDataType;
     FBaseCmd: Integer;
     FCurParam: TSQLParserField;
@@ -201,10 +202,11 @@ type
     destructor Destroy;override;
     procedure Assign(ASource: TPGSQLPartitionOfData);
     procedure Clear;
-    procedure InitParserTree(AStartNode, AEndNode: TSQLTokenRecord; ABaseCmd:Integer);
+    procedure InitParserTree(AStartNode: TSQLTokenRecord; AEndNodes: array of TSQLTokenRecord; ABaseCmd:Integer);
     procedure ParseToken(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
     function AsString:string;
 
+    property PartitionTableName:string read FPartitionTableName write FPartitionTableName;
     property PartType:TPartitionOfDataType read FPartType write FPartType;
     property Params:TSQLFields read FParams;
   end;
@@ -868,6 +870,7 @@ type
     FInheritsTables: TSQLTables;
     FOnCommitAction: TOnCommitAction;
     FOwner: string;
+    FPartitionOfData: TPGSQLPartitionOfData;
     FPGOptions: TPGOptions;
     FStorageParameters: TStrings;
     FTableAsExpression: string;
@@ -904,6 +907,7 @@ type
     property Owner:string read FOwner write FOwner;
     property TableTypeName:string read FTableTypeName write FTableTypeName;
     property TablePartition:TPGSQLCreateTablePartition read FTablePartition;
+    property PartitionOfData:TPGSQLPartitionOfData read FPartitionOfData;
     property TableAsExpression:string read FTableAsExpression write FTableAsExpression;
   end;
 
@@ -2260,7 +2264,7 @@ type
     FCurConst: TSQLConstraintItem;
     FCurParam: TSQLParserField;
     FPartitionOfData: TPGSQLPartitionOfData;
-    FPartitionTableName: string;
+    //FPartitionTableName: string;
     FServerName: string;
     function GetDefaultValue(ASQLParser:TSQLParser):string;
   protected
@@ -2273,7 +2277,6 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SchemaName;
     property ServerName:string read FServerName write FServerName;
-    property PartitionTableName:string read FPartitionTableName write FPartitionTableName;
     property PartitionOfData:TPGSQLPartitionOfData read FPartitionOfData;
   end;
 
@@ -3413,15 +3416,15 @@ begin
   FPartType:=podtNone;
 end;
 
-procedure TPGSQLPartitionOfData.InitParserTree(AStartNode,
-  AEndNode: TSQLTokenRecord; ABaseCmd: Integer);
+procedure TPGSQLPartitionOfData.InitParserTree(AStartNode: TSQLTokenRecord;
+  AEndNodes: array of TSQLTokenRecord; ABaseCmd: Integer);
 var
   T1, TSymb, TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, T, T2_1, T2,
     TV_7, T4, T3: TSQLTokenRecord;
 begin
   if not Assigned(FOwner) then
     raise Exception.Create('Not assigned owner');
-  if (not Assigned(AStartNode)) or (not Assigned(AEndNode)) then
+  if (not Assigned(AStartNode)) or (Length(AEndNodes) = 0) then
     raise Exception.Create('Not assigned start or end node');
 
   FBaseCmd:=ABaseCmd;
@@ -3435,7 +3438,7 @@ begin
     TV_6:=FOwner.AddSQLTokens(stKeyword, T1, 'NULL', [], ABaseCmd+1);
     TSymb:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ',', [], ABaseCmd+2);
     T1:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ')', [], ABaseCmd+2);
-    T1.AddChildToken(AEndNode);
+    T1.AddChildToken(AEndNodes);
 
 
   T2:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'FROM', [], ABaseCmd+3);
@@ -3458,7 +3461,7 @@ begin
     TV_6:=FOwner.AddSQLTokens(stKeyword, T, 'MINVALUE', [], ABaseCmd+1);
     TV_7:=FOwner.AddSQLTokens(stKeyword, T, 'MAXVALUE', [], ABaseCmd+1);
     T:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, TV_7], ')', [], ABaseCmd+2);
-    T.AddChildToken(AEndNode);
+    T.AddChildToken(AEndNodes);
 
   T3:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'WITH', [], 4);
     T:=FOwner.AddSQLTokens(stSymbol, T3, '(', []);
@@ -3470,10 +3473,10 @@ begin
     TV_2:=FOwner.AddSQLTokens(stInteger, TV_1, '', [], ABaseCmd+1);
     TV_3:=FOwner.AddSQLTokens(stFloat, TV_1, '', [], ABaseCmd+1);
     T:=FOwner.AddSQLTokens(stSymbol, [TV_2, TV_3], ')', [], ABaseCmd+2);
-    T.AddChildToken(AEndNode);
+    T.AddChildToken(AEndNodes);
 
   T4:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'DEFAULT', [], 5);
-    T4.AddChildToken(AEndNode);
+    T4.AddChildToken(AEndNodes);
 end;
 
 procedure TPGSQLPartitionOfData.ParseToken(ASQLParser: TSQLParser;
@@ -3507,6 +3510,8 @@ begin
   else
     //podtNone
   end;
+  if Result<>'' then
+    Result:='  PARTITION OF ' + PartitionTableName + ' FOR VALUES ' + Result;
 end;
 
 constructor TPGSQLPartitionOfData.Create(AOwner: TSQLCommandAbstract);
@@ -3527,6 +3532,7 @@ begin
   FParams.Assign(ASource.Params);
   FPartType:=ASource.PartType;
   FBaseCmd:=ASource.FBaseCmd;
+  FPartitionTableName:=ASource.FPartitionTableName;
 end;
 
 { TPGSQLCommandDelete }
@@ -8680,10 +8686,10 @@ begin
     TPart1:=AddSQLTokens(stIdentificator, TPart1, '', [], 70);
       T:=AddSQLTokens(stSymbol, TPart1, '.', [], 70);
       T:=AddSQLTokens(stIdentificator, T, '', [], 70);
-  TPart1:=AddSQLTokens(stSymbol, TPart1, 'FOR', []);
-  TPart1:=AddSQLTokens(stSymbol, TPart1, 'VALUES', []);
+  TPart1:=AddSQLTokens(stKeyword, [T, TPart1], 'FOR', []);
+  TPart1:=AddSQLTokens(stKeyword, [T, TPart1], 'VALUES', []);
 
-  FPartitionOfData.InitParserTree(TPart1, TServer, 71);
+  FPartitionOfData.InitParserTree(TPart1, [TServer], 71);
 end;
 
 procedure TPGSQLCreateForeignTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -8701,13 +8707,13 @@ begin
          FCurField:=nil;
          FCurConst:=nil;
        end;
-    70:PartitionTableName:=PartitionTableName + AWord;
+    70:PartitionOfData.PartitionTableName:=PartitionOfData.PartitionTableName + AWord;
+    71..76:FPartitionOfData.ParseToken(ASQLParser, AChild, AWord);
     90:ServerName:=AWord;
     91:FCurParam:=Params.AddParam(AWord);
     92:if Assigned(FCurParam) then
         FCurParam.ParamValue:=AWord;
     93:FCurParam:=nil;
-    71..76:FPartitionOfData.ParseToken(ASQLParser, AChild, AWord);
     102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
     103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
     126:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + AWord;
@@ -8776,15 +8782,8 @@ begin
 
   S:=S + ' ' + FullName;
 
-  if PartitionTableName <> '' then
-  begin
-    S:=S + LineEnding + '  PARTITION OF ' + PartitionTableName + ' FOR VALUES ' + FPartitionOfData.AsString;
-(*    PARTITION OF таблица_родитель [ (
-    { имя_столбца [ WITH OPTIONS ] [ ограничение_столбца [ ... ] ]
-      | ограничение_таблицы }
-      [, ... ]
-  ) ] указание_границ_секции *)
-  end
+  if PartitionOfData.PartitionTableName <> '' then
+    S:=S + LineEnding + FPartitionOfData.AsString
   else
   begin
     SF:='';
@@ -8858,7 +8857,6 @@ begin
   if ASource is TPGSQLCreateForeignTable then
   begin
     FServerName:=TPGSQLCreateForeignTable(ASource).FServerName;
-    FPartitionTableName:=TPGSQLCreateForeignTable(ASource).FPartitionTableName;
     FPartitionOfData.Assign(TPGSQLCreateForeignTable(ASource).FPartitionOfData);
   end;
 end;
@@ -15616,7 +15614,8 @@ var
     TFK, TFK1, TFK2, TFK3, TFK3_1, TFK3_2, TFK3_3, TFK4,
     TFK4_1, TFK4_2, TFK4_3, TFK4_4, TFK4_5, TFK4_6, TFK4_7,
     TIndParams1, TIndParams1_1, TTableTypeOf, TTableField,
-    TTableStart, TPartition, TPartition1, TAs, TWit2_1, TWit7: TSQLTokenRecord;
+    TTableStart, TPartition, TPartition1, TAs, TWit2_1, TWit7,
+    TPart, TPart1, TWit8, TWit9: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер CREATE TABLE }
 
@@ -15870,9 +15869,12 @@ begin
     TWit5:=AddSQLTokens(stString, TWit3, '', [], 30);
     TWit6:=AddSQLTokens(stInteger, TWit3, '', [], 30);
     TWit7:=AddSQLTokens(stFloat, TWit3, '', [], 30);
-    T:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6, TWit7], ',', [], 31);
+    TWit8:=AddSQLTokens(stKeyword, TWit3, 'FALSE', [], 30);
+    TWit9:=AddSQLTokens(stKeyword, TWit3, 'TRUE', [], 30);
+
+    T:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6, TWit7, TWit8, TWit9], ',', [], 31);
     T.AddChildToken(TWit2);
-    TWit2:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6], ')', []);
+    TWit2:=AddSQLTokens(stInteger, [TWit2, TWit4, TWit5, TWit6, TWit7, TWit8, TWit9], ')', []);
     TWit1.AddChildToken([TInher, TTblS, TOnCom]);
     TWit2.AddChildToken([TInher, TTblS, TOnCom, TWitO, TWit]);
 
@@ -15893,6 +15895,29 @@ begin
   { TODO : Необходимо реализовать дерево парсера для CREATE TABLE }
 
   TAs:=AddSQLTokens(stKeyword, [FTSchemaName, FTTableName, TIndParams1_1, TOnCom1, TOnCom2, TOnCom3, TWit2], 'AS', [toOptional], 80);
+
+
+  //PARTITION OF
+  TPart:=AddSQLTokens(stSymbol, [FTSchemaName, FTTableName], 'PARTITION', []);
+  TPart1:=AddSQLTokens(stSymbol, TPart, 'OF', []);
+    TPart1:=AddSQLTokens(stIdentificator, TPart1, '', [], 81);
+      T:=AddSQLTokens(stSymbol, TPart1, '.', [], 81);
+      T:=AddSQLTokens(stIdentificator, T, '', [], 81);
+  TPart1:=AddSQLTokens(stKeyword, [TPart1, T], 'FOR', []);
+  TPart1:=AddSQLTokens(stKeyword, [TPart1, T], 'VALUES', []);
+
+  FPartitionOfData.InitParserTree(TPart1, [TPartition, TOnCom, TWitO, TWit, TTblS], 82);
+
+  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
+  //    PARTITION OF таблица_родитель [ (
+  //  { имя_столбца [ WITH OPTIONS ] [ ограничение_столбца [ ... ] ]
+  //    | ограничение_таблицы }
+  //    [, ... ]
+  //) ] { FOR VALUES указание_границ_секции | DEFAULT }
+  //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
+  //[ TABLESPACE табл_пространство ]
 end;
 
 procedure TPGSQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15976,6 +16001,8 @@ begin
         FPartParam.CheckExpr:=ASQLParser.GetToBracket(')');
     65:FPartParam:=nil;
     80:FTableAsExpression:=ASQLParser.GetToCommandDelemiter;
+    81:PartitionOfData.PartitionTableName:=PartitionOfData.PartitionTableName + AWord;
+    82..87:FPartitionOfData.ParseToken(ASQLParser, AChild, AWord);
    102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
    103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
    126:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + AWord;
@@ -16084,7 +16111,7 @@ begin
       SF:=SF + '  -- inherited field -- ' +F.Caption + ' ' + F.FullTypeName;
   end;
 
-  if (SF = '') and (TableTypeName='') and (FTableAsExpression = '') then exit;
+  if (SF = '') and (TableTypeName='') and (FTableAsExpression = '') and (PartitionOfData.PartitionTableName='') then exit;
 
   S_CON:='';
   for C in SQLConstraints do
@@ -16191,7 +16218,11 @@ begin
 
   S:=S + ' ' + FullName;
   if TableTypeName<>'' then
-    S:=S+' OF '+TableTypeName+' ';
+    S:=S+' OF '+TableTypeName+' '
+  else
+  if PartitionOfData.PartitionTableName<>'' then
+    S:=S + LineEnding + PartitionOfData.AsString;
+
 
   if SF <> '' then
   begin
@@ -16216,6 +16247,26 @@ begin
     caPreserveRows:S:=S + LineEnding + 'ON COMMIT PRESERVE ROWS';
     caDeleteRows:S:=S + LineEnding + 'ON COMMIT DELETE ROWS';
     caDrop:S:=S + LineEnding + 'ON COMMIT DROP';
+  end;
+
+  if FTablePartition.PartitionType <> ptNone then
+  begin
+    S:=S + LineEnding + 'PARTITION BY ';
+    if FTablePartition.PartitionType=ptRange then
+      S:=S +'RANGE '
+    else
+    if FTablePartition.PartitionType=ptList then
+      S:=S +'LIST ';
+
+    S1:='';
+    for P in FTablePartition.Params do
+    begin
+      if S1<>'' then S1:=S1+ ', ';
+      S1:=S1 + P.Caption;
+      if P.CheckExpr<>'' then
+        S1:=S1 + '(' + P.CheckExpr + ')';
+    end;
+    S:=S + '(' + S1 + ')';
   end;
 
   S1:='';
@@ -16246,34 +16297,12 @@ begin
     S:=S + LineEnding + 'WITH ('+LineEnding + S1 + LineEnding +')';
 
 
-  if FTablePartition.PartitionType <> ptNone then
-  begin
-    S:=S + LineEnding + 'PARTITION BY ';
-    if FTablePartition.PartitionType=ptRange then
-      S:=S +'RANGE '
-    else
-    if FTablePartition.PartitionType=ptList then
-      S:=S +'LIST ';
-
-    S1:='';
-    for P in FTablePartition.Params do
-    begin
-      if S1<>'' then S1:=S1+ ', ';
-      S1:=S1 + P.Caption;
-      if P.CheckExpr<>'' then
-        S1:=S1 + '(' + P.CheckExpr + ')';
-    end;
-    S:=S + '(' + S1 + ')';
-  end;
-
   if FTableAsExpression<>'' then
   begin
     S:=S + ' AS';
     if not((TableAsExpression<>'') and (TableAsExpression[1]=' ' )) then S:=S + ' ';
     S:=S + TableAsExpression;
   end;
-
-  //    [ PARTITION BY { RANGE | LIST } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
 
   AddSQLCommand(S);
 
@@ -16302,6 +16331,7 @@ end;
 
 constructor TPGSQLCreateTable.Create(AParent: TSQLCommandAbstract);
 begin
+  FPartitionOfData:=TPGSQLPartitionOfData.Create(Self);
   inherited Create(AParent);
   FSQLCommentOnClass:=TPGSQLCommentOn;
   FInheritsTables:=TSQLTables.Create;
@@ -16314,6 +16344,7 @@ begin
   FreeAndNil(FInheritsTables);
   FreeAndNil(FStorageParameters);
   FreeAndNil(FTablePartition);
+  FreeAndNil(FPartitionOfData);
   inherited Destroy;
 end;
 
@@ -16336,6 +16367,7 @@ begin
     Owner:=TPGSQLCreateTable(ASource).Owner;
     TablePartition.Assign(TPGSQLCreateTable(ASource).TablePartition);
     TableAsExpression:=TPGSQLCreateTable(ASource).TableAsExpression;
+    PartitionOfData.Assign(TPGSQLCreateTable(ASource).PartitionOfData);
   end;
   inherited Assign(ASource);
 end;
