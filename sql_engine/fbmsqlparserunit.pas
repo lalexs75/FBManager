@@ -3444,9 +3444,9 @@ begin
 
 
     TExp:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1, T2_2], ',', [], 11);
-      TExp.AddChildToken([TA, T, T1, T2, T2_1]);
+      TExp.AddChildToken([TA, T, T1, T2, T2_1, T2_2]);
 
-    TSymb:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1], ')', [], 12);
+    TSymb:=AddSQLTokens( stSymbol, [T, T1, T2, T2_1, T2_2], ')', [], 12);
 
   T:=AddSQLTokens(stKeyword, [TDEF, TSymb, FSubSelect], 'RETURNING', [toOptional], 13);
   T:=AddSQLTokens(stKeyword, T, 'INTO', [toOptional], 14);
