@@ -1,0 +1,4 @@
+in linux
+for use with PostgreSQL app need libpq.so
+in fedora run command
+dnf install postgresql-libs
