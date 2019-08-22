@@ -1532,7 +1532,7 @@ msgstr "Изменить"
 
 #: fbmstrconstunit.seditconfigvalue
 msgid "Edit config value"
-msgstr ""
+msgstr "Изменить конфигурационный параметр"
 
 #: fbmstrconstunit.seditdbfolder
 msgid "Edit DB folder"
@@ -2108,7 +2108,7 @@ msgstr "Обёртка сторонних данных"
 
 #: fbmstrconstunit.sforeigndatawrappername
 msgid "Foreign data wrapper name"
-msgstr ""
+msgstr "Наименование внешнего источника данных"
 
 #: fbmstrconstunit.sforeignkey
 msgid "Foreign key"
@@ -2357,7 +2357,7 @@ msgstr "Функция обработки"
 
 #: fbmstrconstunit.shandlerid
 msgid "Handler ID"
-msgstr ""
+msgstr "ID обработчика"
 
 #: fbmstrconstunit.shighlightcurrentword
 msgctxt "fbmstrconstunit.shighlightcurrentword"
@@ -2692,7 +2692,7 @@ msgstr "Соединение таблиц: %s и %s"
 
 #: fbmstrconstunit.slist
 msgid "List"
-msgstr ""
+msgstr "Список"
 
 #: fbmstrconstunit.sload
 msgid "Load"
@@ -3644,7 +3644,7 @@ msgstr "Владелец"
 
 #: fbmstrconstunit.sownerid
 msgid "Owner ID"
-msgstr ""
+msgstr "ID владельца"
 
 #: fbmstrconstunit.spackage
 msgid "Package"
@@ -3713,19 +3713,19 @@ msgstr "Значение параметра"
 
 #: fbmstrconstunit.spartition
 msgid "Partition"
-msgstr ""
+msgstr "Раздел"
 
 #: fbmstrconstunit.spartitionkeys
 msgid "Partition keys"
-msgstr ""
+msgstr "Ключ раздела"
 
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
-msgstr ""
+msgstr "Секция раздела"
 
 #: fbmstrconstunit.spartitiontype
 msgid "Partition type"
-msgstr ""
+msgstr "Тип раздела"
 
 #: fbmstrconstunit.spassword
 msgctxt "fbmstrconstunit.spassword"
@@ -3999,7 +3999,7 @@ msgstr "Вопрос"
 
 #: fbmstrconstunit.srange
 msgid "Range"
-msgstr ""
+msgstr "Диапазон"
 
 #: fbmstrconstunit.sreadonly
 msgid "Read only"
@@ -4120,7 +4120,7 @@ msgstr "Имя таблицы"
 
 #: fbmstrconstunit.srelationoid
 msgid "Relation OID"
-msgstr ""
+msgstr "OID отношения"
 
 #: fbmstrconstunit.sreload
 msgid "Reload"
@@ -4397,7 +4397,7 @@ msgstr "Точность"
 
 #: fbmstrconstunit.sschemaoid
 msgid "Schema OID"
-msgstr ""
+msgstr "OID схемы"
 
 #: fbmstrconstunit.sscheme
 msgid "Scheme"
@@ -4532,11 +4532,11 @@ msgstr "Имя сервера"
 
 #: fbmstrconstunit.sserveroid
 msgid "Server OID"
-msgstr ""
+msgstr "OID сервера"
 
 #: fbmstrconstunit.sservertype
 msgid "Server type"
-msgstr ""
+msgstr "Тип сервера"
 
 #: fbmstrconstunit.sserverversion
 msgid "Server version = "
@@ -5622,7 +5622,7 @@ msgstr "Функция проверки"
 
 #: fbmstrconstunit.svalidatorid
 msgid "Validator ID"
-msgstr ""
+msgstr "ID валидатора"
 
 #: fbmstrconstunit.svalue
 msgid "Value"
@@ -5646,7 +5646,7 @@ msgstr "Тип переменной"
 
 #: fbmstrconstunit.sversion
 msgid "Version"
-msgstr ""
+msgstr "Версия"
 
 #: fbmstrconstunit.sview
 msgctxt "fbmstrconstunit.sview"
