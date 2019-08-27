@@ -594,6 +594,7 @@ type
   private
     function GetConstraint(AItem: integer): TPrimaryKeyRecord;
     function GetConstraintCount: integer;
+    function GetIsLoadedFK: Boolean; inline;
   protected
     FFKListLoaded:boolean;
     FPKListLoaded:boolean;
@@ -626,6 +627,7 @@ type
 
     property ConstraintCount:integer read GetConstraintCount;
     property Constraint[AItem:integer]:TPrimaryKeyRecord read GetConstraint;
+    property IsLoadedFK:Boolean read GetIsLoadedFK;
   end;
 
   { TDBTriggerObject }
@@ -2751,6 +2753,11 @@ end;
 function TDBTableObject.GetConstraintCount: integer;
 begin
   Result:=FConstraintList.Count;
+end;
+
+function TDBTableObject.GetIsLoadedFK: Boolean; inline;
+begin
+  Result:=csfLoadedFK in FCashedState;
 end;
 
 procedure TDBTableObject.ClearConstraintList(AConstraintType: TConstraintType);

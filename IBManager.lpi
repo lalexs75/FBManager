@@ -1848,4 +1848,14 @@
       </Options>
     </Linking>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="EConvertError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EZSQLException"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
 </CONFIG>

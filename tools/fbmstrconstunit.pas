@@ -243,6 +243,7 @@ resourcestring
   sImportDataToTable                = 'Import data to table';
   sGenerateInsertScript             = 'Generate INSERT script';
   sImportedCollumns                 = 'Imported collumns';
+  sGoToForeignTable                 = 'Go to foreign table';
 
   sNewIndex                         = 'New index';
   sEditIndex                        = 'Edit index';

@@ -37,6 +37,7 @@ type
   { TfbmTableEditorFieldsFrame }
 
   TfbmTableEditorFieldsFrame = class(TEditorPage)
+    fldGotoForeignTable: TAction;
     dsFieldDeps: TDataSource;
     fldCopy: TAction;
     fldCopyFieldName: TAction;
@@ -54,6 +55,7 @@ type
     MenuItem1: TMenuItem;
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -134,12 +136,14 @@ type
     procedure fldCopyFieldNameExecute(Sender: TObject);
     procedure fldDeleteExecute(Sender: TObject);
     procedure fldEditExecute(Sender: TObject);
+    procedure fldGotoForeignTableExecute(Sender: TObject);
     procedure fldNewExecute(Sender: TObject);
     procedure fldOrderExecute(Sender: TObject);
     procedure fldPrintExecute(Sender: TObject);
     procedure FieldListGridDblClick(Sender: TObject);
     procedure fldRefreshExecute(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure RxDBGridExportSpreadSheet1BeforeExecute(Sender: TObject);
     procedure rxFieldListAfterCancel(DataSet: TDataSet);
@@ -199,6 +203,30 @@ procedure TfbmTableEditorFieldsFrame.PageControl1Change(Sender: TObject);
 begin
   if PageControl1.ActivePage = tabFieldDependencies then
     rxFieldListAfterScroll(nil);
+end;
+
+procedure TfbmTableEditorFieldsFrame.PopupMenu1Popup(Sender: TObject);
+var
+  C: TPrimaryKeyRecord;
+  i: Integer;
+begin
+  if (DBObject.DBObjectKind = okTable)  and fldCopyFieldName.Enabled and (DBObject.State = sdboEdit) then
+  begin
+    if not TDBTableObject(DBObject).IsLoadedFK then
+      TDBTableObject(DBObject).RefreshConstraintForeignKey;
+
+    for i:=0 to TDBTableObject(DBObject).ConstraintCount-1 do
+    begin
+      C:=TDBTableObject(DBObject).Constraint[I];
+      if C is TForeignKeyRecord then
+        if Assigned(C.FieldListArr.FindParam(rxFieldListFIELD_NAME.AsString)) then
+        begin
+          fldGotoForeignTable.Enabled:=true;
+          Exit;
+        end;
+    end;
+  end;
+  fldGotoForeignTable.Enabled:=false;
 end;
 
 procedure TfbmTableEditorFieldsFrame.RxDBGrid1DblClick(Sender: TObject);
@@ -799,6 +827,7 @@ begin
   fldOrder.Caption:=sFieldsOrder;
   fldCopyFieldName.Caption:=sCopyFieldName;
   fldCopy.Caption:=sCopyField;
+  fldGotoForeignTable.Caption:=sGoToForeignTable;
 
 
 //  FieldListGrid.ColumnByFieldName('FIELD_NO').Title.Caption:=;
@@ -968,6 +997,27 @@ begin
     else
       ErrorBox('Error TfbmTableEditorFieldsFrame.fldEditExecute ' + DBObject.OwnerDB.ClassName);
   end
+end;
+
+procedure TfbmTableEditorFieldsFrame.fldGotoForeignTableExecute(Sender: TObject
+  );
+var
+  i: Integer;
+  C: TPrimaryKeyRecord;
+begin
+  if not TDBTableObject(DBObject).IsLoadedFK then
+    TDBTableObject(DBObject).RefreshConstraintForeignKey;
+
+  for i:=0 to TDBTableObject(DBObject).ConstraintCount-1 do
+  begin
+    C:=TDBTableObject(DBObject).Constraint[I];
+    if C is TForeignKeyRecord then
+      if Assigned(C.FieldListArr.FindParam(rxFieldListFIELD_NAME.AsString)) then
+      begin
+        DBObject.OwnerDB.EditObject(DBObject.OwnerDB.DBObjectByName(TForeignKeyRecord(C).FKTableName, false));
+        Exit;
+      end;
+  end;
 end;
 
 procedure TfbmTableEditorFieldsFrame.fldDeleteExecute(Sender: TObject);

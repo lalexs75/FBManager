@@ -1308,6 +1308,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object PopupMenu1: TPopupMenu[6]
     Images = fbManagerMainForm.ImageListMain
+    OnPopup = PopupMenu1Popup
     Left = 120
     Top = 96
     object MenuItem1: TMenuItem
@@ -1347,6 +1348,9 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     object MenuItem9: TMenuItem
       Action = fldOrder
       OnClick = fldOrderExecute
+    end
+    object MenuItem12: TMenuItem
+      Action = fldGotoForeignTable
     end
   end
   object ActionList1: TActionList[7]
@@ -1405,6 +1409,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       Caption = 'fldCopy'
       OnExecute = fldCopyExecute
       ShortCut = 24643
+    end
+    object fldGotoForeignTable: TAction
+      Category = 'Service'
+      Caption = 'Go to foreign table'
+      ImageIndex = 102
+      OnExecute = fldGotoForeignTableExecute
     end
   end
   object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[8]

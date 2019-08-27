@@ -2182,6 +2182,10 @@ msgstr ""
 msgid "Goto bookmark "
 msgstr ""
 
+#: fbmstrconstunit.sgotoforeigntable
+msgid "Go to foreign table"
+msgstr ""
+
 #: fbmstrconstunit.sgotoresulttabafterexecute
 msgid "Go to Result tab after execute"
 msgstr ""

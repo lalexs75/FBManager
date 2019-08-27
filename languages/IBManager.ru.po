@@ -2268,6 +2268,10 @@ msgstr "Глобальная временная таблица"
 msgid "Goto bookmark "
 msgstr "Перейти к закладке "
 
+#: fbmstrconstunit.sgotoforeigntable
+msgid "Go to foreign table"
+msgstr "Перейти к таблице вненего ключа"
+
 #: fbmstrconstunit.sgotoresulttabafterexecute
 msgid "Go to Result tab after execute"
 msgstr "Открыть страницу результата запроса после выполнения"
