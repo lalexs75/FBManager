@@ -174,7 +174,7 @@ msgid "Invalid character(s) in cell comment \"%s\"."
 msgstr ""
 
 #: fpsstrings.rsinvaliddatetimeformat
-msgid "Trying to use an incompatible date/time format."
+msgid "Trying to use an incompatible date/time format (%s)."
 msgstr ""
 
 #: fpsstrings.rsinvalidextension
@@ -274,7 +274,7 @@ msgid "The hyperlink \"%s\" is not a valid URI."
 msgstr ""
 
 #: fpsstrings.rsnovalidnumberformatstring
-msgid "No valid number format string."
+msgid "No valid number format string (%s)."
 msgstr ""
 
 #: fpsstrings.rsnovariable
