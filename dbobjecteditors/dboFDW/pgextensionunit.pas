@@ -137,7 +137,8 @@ begin
   begin
     ASQLObject.Name:=ComboBox1.Text;
     TPGSQLCreateExtension(ASQLObject).SchemaName:=ComboBox2.Text;
-    TPGSQLCreateExtension(ASQLObject).Version:='"' + ComboBox3.Text + '"';
+    if ComboBox3.Text<>'' then
+      TPGSQLCreateExtension(ASQLObject).Version:='"' + ComboBox3.Text + '"';
     Result:=true;
   end;
 end;

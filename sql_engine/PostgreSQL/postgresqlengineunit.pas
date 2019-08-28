@@ -1917,7 +1917,8 @@ begin
 
   FCmd.ExistsWith:=true;
   FCmd.SchemaName:=SchemaName;
-  FCmd.Version:='"'+FVersion+'"';
+  if FVersion<>'' then
+    FCmd.Version:='"'+FVersion+'"';
   FCmd.OldVersion:='';
   FCmd.Description:=Description;
 
