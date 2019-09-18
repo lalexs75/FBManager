@@ -17,6 +17,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="177"/>
         <CursorPos X="26" Y="184"/>
         <UsageCount Value="200"/>
@@ -115,7 +116,6 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="18645"/>
         <CursorPos Y="18670"/>
@@ -516,7 +516,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Caret Line="2665" TopLine="2650"/>
@@ -631,12 +631,8 @@
       </Position28>
       <Position29>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="18350" Column="38" TopLine="18490"/>
-      </Position29>
-      <Position30>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <Caret Line="928" Column="15" TopLine="912"/>
-      </Position30>
+      </Position29>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

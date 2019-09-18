@@ -408,23 +408,14 @@ begin
 end;
 
 { TPGGroup }
-(*
-function TPGGroup.GenGroupSQL(const AGroupName: string; const AObjId: integer;
-  const AUserOptions: TPGUserOptions; const ExpDate: TDateTime;
-  const AConnectionsLimit: integer; const ADesc: string; DDLMode: TDDLMode
-  ): string;
-begin
-  case DDLMode of
-    dmCreate:Result:='CREATE ROLE '+AGroupName + LineEnding + PGUserOptionsToStr(AUserOptions, ExpDate, AConnectionsLimit, AGroupName, '');
-    dmAlter:Result:='ALTER ROLE '+AGroupName + LineEnding + PGUserOptionsToStr(AUserOptions, ExpDate, AConnectionsLimit, AGroupName, '');
-  else
-    Result:='!!!Error!!!'
-  end;
-end;
-*)
+
 function TPGGroup.InternalGetDDLCreate: string;
 var
   FCmd: TPGSQLCreateRole;
+  G1: TPGSQLGrant;
+  GrantedList: TObjectList;
+  i: Integer;
+  M: TUserRoleGrant;
 begin
   //Result:=GenGroupSQL(CaptionFullPatch, ObjID, UserOptions, PwdValidDate, FConnectionsLimit, FDescription, dmCreate);
   FCmd:=TPGSQLCreateRole.Create(nil);
@@ -435,6 +426,20 @@ begin
   FCmd.ConnectionLimit:=ConnectionsLimit;
   //FCmd.Password:=F;
   //FCmd.ValidUntil:=passwo
+  G1:=TPGSQLGrant.Create(nil);
+  G1.ObjectKind:=okRole; //DBObjectKind;
+  G1.Tables.Add(Caption);
+
+  GrantedList:=TObjectList.Create;
+  GetUserRight(GrantedList);
+  for i:=0 to GrantedList.Count -1 do
+  begin
+    M:=TUserRoleGrant(GrantedList[i]);
+    G1.Params.AddParam(M.UserName);
+  end;
+  GrantedList.Free;
+
+  FCmd.AddChild(G1);
   Result:=FCmd.AsSQL;
   FCmd.Free;
 end;
