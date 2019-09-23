@@ -16,9 +16,9 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideBottom.Control = dbComboBox
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 19
+    Height = 17
     Top = 6
-    Width = 107
+    Width = 99
     BorderSpacing.Around = 6
     Caption = 'Find in database'
     ParentColor = False
@@ -30,9 +30,9 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideBottom.Control = edtFind
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 19
+    Height = 17
     Top = 68
-    Width = 73
+    Width = 69
     BorderSpacing.Around = 6
     Caption = 'Text to find'
     ParentColor = False
@@ -44,13 +44,13 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideRight.Control = Label4
     AnchorSideBottom.Control = ButtonPanel1
     Left = 6
-    Height = 187
-    Top = 130
+    Height = 182
+    Top = 131
     Width = 264
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 6
     Caption = 'Find options'
-    ClientHeight = 167
+    ClientHeight = 164
     ClientWidth = 262
     TabOrder = 0
     object CheckBox6: TCheckBox
@@ -59,7 +59,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 6
-      Width = 124
+      Width = 113
       BorderSpacing.Around = 6
       Caption = 'Case sensetive'
       TabOrder = 0
@@ -74,13 +74,13 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 285
-    Height = 187
-    Top = 130
+    Height = 182
+    Top = 131
     Width = 264
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 6
     Caption = 'Find in objects'
-    ClientHeight = 167
+    ClientHeight = 164
     ClientWidth = 262
     TabOrder = 1
     object CheckBox1: TCheckBox
@@ -89,7 +89,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 6
-      Width = 85
+      Width = 80
       BorderSpacing.Around = 6
       Caption = 'Domains'
       TabOrder = 0
@@ -101,7 +101,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 35
-      Width = 70
+      Width = 66
       BorderSpacing.Around = 6
       Caption = 'Tables'
       TabOrder = 1
@@ -113,7 +113,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 64
-      Width = 66
+      Width = 61
       BorderSpacing.Around = 6
       Caption = 'Views'
       Checked = True
@@ -127,7 +127,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 93
-      Width = 109
+      Width = 103
       BorderSpacing.Around = 6
       Caption = 'Stored procs'
       Checked = True
@@ -141,7 +141,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
       Left = 6
       Height = 23
       Top = 122
-      Width = 74
+      Width = 68
       BorderSpacing.Around = 6
       Caption = 'Trigers'
       Checked = True
@@ -156,8 +156,8 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 31
+    Height = 33
+    Top = 29
     Width = 537
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -172,8 +172,8 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 93
+    Height = 34
+    Top = 91
     Width = 537
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -181,8 +181,8 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 323
+    Height = 46
+    Top = 319
     Width = 543
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -200,7 +200,7 @@ object tlsSearchInMetatDataParamsForm: TtlsSearchInMetatDataParamsForm
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
     Left = 276
-    Height = 19
+    Height = 17
     Top = 0
     Width = 3
     Caption = ' '

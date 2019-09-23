@@ -68,7 +68,7 @@ implementation
 
 uses IBManDataInspectorUnit, ibmanagertypesunit, tlsSearchInMetatDataResultUnit,
   tlsProgressOperationUnit, SQLEngineCommonTypesUnit, fbmStrConstUnit,
-  fbmToolsUnit;
+  fbmToolsUnit, fdbm_SynEditorUnit;
 
 {$R *.lfm}
 
@@ -112,6 +112,8 @@ var
   P:TDataBaseRecord;
   i:integer;
 begin
+  sSearchText:=edtFind.Text;
+
   tlsShowSearchInMetatDataResultForm;
   tlsSearchInMetatDataResultForm.ClearDBObjectsList;
   P:=TDataBaseRecord(dbComboBox.Items.Objects[dbComboBox.ItemIndex]);
