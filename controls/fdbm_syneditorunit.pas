@@ -599,7 +599,9 @@ begin
   begin
     DoSearchReplaceText(False, bSearchBackwards);
     bSearchFromCaret:= True;
-  end;
+  end
+  else
+    edtFind.Execute;
 end;
 
 procedure Tfdbm_SynEditorFrame.edtOpenExecute(Sender: TObject);
