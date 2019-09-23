@@ -108,7 +108,7 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
     end
     object otClearResult: TAction
       Category = 'Object tree'
-      Caption = 'otClearResult'
+      Caption = 'Clear search result'
       ImageIndex = 45
       OnExecute = otClearResultExecute
     end
@@ -119,6 +119,18 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
     Top = 209
     object MenuItem1: TMenuItem
       Action = otCopyListToClibrd
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem2: TMenuItem
+      Action = actFind
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = otClearResult
     end
   end
 end

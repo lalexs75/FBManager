@@ -218,6 +218,7 @@ resourcestring
   sResultGrid                       = 'Grid';
   sResultForm                       = 'Form';
   sTextToSearch                     = 'Text to search';
+  sClearSearchResult                = 'Clear search result';
 
   sFindInMetatadaResult             = 'Find in metadata result';
   sYes                              = 'Yes';

@@ -412,6 +412,10 @@ msgstr ""
 msgid "Clear current query..."
 msgstr ""
 
+#: fbmstrconstunit.sclearsearchresult
+msgid "Clear search result"
+msgstr ""
+
 #: fbmstrconstunit.sclientaddress
 msgid "Client address"
 msgstr ""

@@ -436,6 +436,10 @@ msgstr "Очистить"
 msgid "Clear current query..."
 msgstr "Очистить текущий запрос..."
 
+#: fbmstrconstunit.sclearsearchresult
+msgid "Clear search result"
+msgstr "Очистить результат поиска"
+
 #: fbmstrconstunit.sclientaddress
 msgid "Client address"
 msgstr "Адрес клиента"

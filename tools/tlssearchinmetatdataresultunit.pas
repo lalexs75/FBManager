@@ -37,6 +37,10 @@ type
 
   TtlsSearchInMetatDataResultForm = class(TForm)
     actFind: TAction;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
     otClearResult: TAction;
     MenuItem1: TMenuItem;
     otCopyListToClibrd: TAction;
@@ -93,7 +97,7 @@ end;
 
 procedure TtlsSearchInMetatDataResultForm.otClearResultExecute(Sender: TObject);
 begin
-  //
+  ClearDBObjectsList;
 end;
 
 procedure TtlsSearchInMetatDataResultForm.otCopyListToClibrdExecute(
@@ -139,6 +143,7 @@ procedure TtlsSearchInMetatDataResultForm.Localize;
 begin
   Caption:=sFindInMetatadaResult;
   actFind.Caption:=sFindInMetatada;
+  otClearResult.Caption:=sClearSearchResult;
   otCopyListToClibrd.Caption:=sCopylistToClipboard;
   otCopyListToClibrd.Hint:=sCopylistToClipboardHint;
 end;
