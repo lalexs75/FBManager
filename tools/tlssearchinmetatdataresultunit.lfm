@@ -50,17 +50,13 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
+    Height = 34
     Top = 0
     Width = 647
     Items = <    
       item
         Action = actFind
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 167
         ShowCaption = True
       end>
     ImageList = fbManagerMainForm.ImageListMain
@@ -69,16 +65,17 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 34
     ClientWidth = 647
     TabOrder = 0
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 472
-    Top = 31
+    Height = 469
+    Top = 34
     Width = 216
     Align = alLeft
+    Images = fbManagerMainForm.ImageList2
     PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 1
@@ -88,8 +85,8 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
   end
   object Splitter1: TSplitter
     Left = 216
-    Height = 472
-    Top = 31
+    Height = 469
+    Top = 34
     Width = 5
   end
   object ActionList1: TActionList
@@ -99,15 +96,21 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
     object actFind: TAction
       Category = 'Find'
       Caption = 'Search in metadata...'
-      ImageIndex = 62
+      ImageIndex = 22
       OnExecute = actFindExecute
     end
     object otCopyListToClibrd: TAction
       Category = 'Object tree'
       Caption = 'Copy ilst to cliboard'
       Hint = 'Copy ilst of objects to cliboard'
-      ImageIndex = 31
+      ImageIndex = 24
       OnExecute = otCopyListToClibrdExecute
+    end
+    object otClearResult: TAction
+      Category = 'Object tree'
+      Caption = 'otClearResult'
+      ImageIndex = 45
+      OnExecute = otClearResultExecute
     end
   end
   object PopupMenu1: TPopupMenu

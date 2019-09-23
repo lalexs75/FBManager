@@ -37,6 +37,7 @@ type
 
   TtlsSearchInMetatDataResultForm = class(TForm)
     actFind: TAction;
+    otClearResult: TAction;
     MenuItem1: TMenuItem;
     otCopyListToClibrd: TAction;
     ActionList1: TActionList;
@@ -47,15 +48,18 @@ type
     procedure actFindExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure otClearResultExecute(Sender: TObject);
     procedure otCopyListToClibrdExecute(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
     procedure TreeView1DblClick(Sender: TObject);
   private
+    FRootNode:TTreeNode;
     procedure Localize;
   public
     EditorFrame:Tfdbm_SynEditorFrame;
     procedure AddDBObject(AObj:TDBObject);
     procedure ClearDBObjectsList;
+    procedure AddRootNode(ATextToSearch:string);
   end;
 
 var
@@ -67,7 +71,7 @@ implementation
 
 uses
   tlsSearchInMetatDataParamsUnit, IBManDataInspectorUnit, fbmStrConstUnit,
-  IBManMainUnit, Clipbrd;
+  IBManMainUnit, SQLEngineCommonTypesUnit, Clipbrd;
 
 procedure tlsShowSearchInMetatDataResultForm;
 begin
@@ -85,6 +89,11 @@ begin
   EditorFrame.Parent:=Self;
   EditorFrame.Align:=alClient;
   EditorFrame.ReadOnly:=true;
+end;
+
+procedure TtlsSearchInMetatDataResultForm.otClearResultExecute(Sender: TObject);
+begin
+  //
 end;
 
 procedure TtlsSearchInMetatDataResultForm.otCopyListToClibrdExecute(
@@ -138,14 +147,29 @@ procedure TtlsSearchInMetatDataResultForm.AddDBObject(AObj: TDBObject);
 var
   P:TTreeNode;
 begin
-  P:=TreeView1.Items.Add(nil, AObj.Caption);
+  if not Assigned(AObj) then Exit;
+  if Assigned(FRootNode) then
+    FRootNode.Expanded:=true;
+  P:=TreeView1.Items.AddChild(FRootNode, AObj.Caption);
   P.Data:=AObj;
+
+  P.ImageIndex:=DBObjectKindImages[AObj.DBObjectKind];
+  P.SelectedIndex:=DBObjectKindImages[AObj.DBObjectKind];
 end;
 
 procedure TtlsSearchInMetatDataResultForm.ClearDBObjectsList;
 begin
   TreeView1.Items.Clear;
   EditorFrame.EditorText:='';
+  FRootNode:=nil;
+end;
+
+procedure TtlsSearchInMetatDataResultForm.AddRootNode(ATextToSearch: string);
+begin
+  FRootNode:=TreeView1.Items.AddFirst(FRootNode, sTextToSearch + ' : ' + ATextToSearch);
+//  FRootNode.ImageIndex:=22;
+//  FRootNode.SelectedIndex:=22;
+  FRootNode.Expanded:=true;
 end;
 
 procedure TtlsSearchInMetatDataResultForm.FormClose(Sender: TObject;

@@ -5137,6 +5137,10 @@ msgstr "Отключить данное подключени?"
 msgid "Test"
 msgstr "Проверка"
 
+#: fbmstrconstunit.stexttosearch
+msgid "Text to search"
+msgstr "Поиск текста"
+
 #: fbmstrconstunit.stexttosqleditor
 msgid "Text to SQL editor"
 msgstr "Текст в редактор SQL"

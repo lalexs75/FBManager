@@ -115,7 +115,8 @@ begin
   sSearchText:=edtFind.Text;
 
   tlsShowSearchInMetatDataResultForm;
-  tlsSearchInMetatDataResultForm.ClearDBObjectsList;
+  //tlsSearchInMetatDataResultForm.ClearDBObjectsList;
+  tlsSearchInMetatDataResultForm.AddRootNode(edtFind.Text);
   P:=TDataBaseRecord(dbComboBox.Items.Objects[dbComboBox.ItemIndex]);
   tlsSearchInMetatDataResultForm.EditorFrame.SQLEngine:=P.SQLEngine;
 

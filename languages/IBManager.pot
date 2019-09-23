@@ -4957,6 +4957,10 @@ msgstr ""
 msgid "Test"
 msgstr ""
 
+#: fbmstrconstunit.stexttosearch
+msgid "Text to search"
+msgstr ""
+
 #: fbmstrconstunit.stexttosqleditor
 msgid "Text to SQL editor"
 msgstr ""
