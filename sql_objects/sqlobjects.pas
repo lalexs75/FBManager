@@ -1579,6 +1579,7 @@ begin
           C.DoMakeSQL;
         for S in C.FSQLText do
           FSQLText.Add(S);
+        FSQLText.Add('');
       end;
     end;
 
@@ -1592,6 +1593,7 @@ begin
       begin
         if C.FSQLText.Count = 0 then
           C.DoMakeSQL;
+        FSQLText.Add('');
         for S in C.FSQLText do
           FSQLText.Add(S);
       end;
