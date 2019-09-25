@@ -253,8 +253,12 @@ begin
   fbmCompileQestForm.CheckListBox1.Items.Clear;
   for i:=0 to List.Count-1 do
   begin
-    fbmCompileQestForm.CheckListBox1.Items.Add(List[i]);
-    fbmCompileQestForm.CheckListBox1.Checked[i]:=true;
+    S:=List[i];
+    if S<>'' then
+    begin
+      J:=fbmCompileQestForm.CheckListBox1.Items.Add(S);
+      fbmCompileQestForm.CheckListBox1.Checked[j]:=true;
+    end;
   end;
   fbmCompileQestForm.SynEdit1.Highlighter:=R.SynSQLSyn;
   if fbmCompileQestForm.CheckListBox1.Items.Count>0 then

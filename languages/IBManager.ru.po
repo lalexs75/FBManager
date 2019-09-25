@@ -2504,6 +2504,10 @@ msgctxt "fbmstrconstunit.sinheritstablefrom"
 msgid "Inherits table from"
 msgstr "Наследовать от таблиц"
 
+#: fbmstrconstunit.sinitialvalue
+msgid "Initial value"
+msgstr "Начальное значение для поля"
+
 #: fbmstrconstunit.sinitialvaluefornewsequence
 msgid "Initial value for new sequence"
 msgstr "Начальное значение новой последовательности"

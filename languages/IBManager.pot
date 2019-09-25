@@ -2408,6 +2408,10 @@ msgstr ""
 msgid "Inherits table from"
 msgstr ""
 
+#: fbmstrconstunit.sinitialvalue
+msgid "Initial value"
+msgstr ""
+
 #: fbmstrconstunit.sinitialvaluefornewsequence
 msgid "Initial value for new sequence"
 msgstr ""

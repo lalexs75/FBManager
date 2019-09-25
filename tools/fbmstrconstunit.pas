@@ -420,6 +420,7 @@ resourcestring
   sPartitionType                    = 'Partition type';
   sPartitionKeys                    = 'Partition keys';
   sPartitionSections                = 'Partition sections';
+  sInitialValue                     = 'Initial value';
 
 
   sSchemeOwner                      = 'Scheme owner';

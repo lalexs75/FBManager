@@ -685,6 +685,7 @@ begin
   Label8.Caption:=sCharSet;
   Label9.Caption:=sCollate;
   Label10.Caption:=sDescription;
+  Label15.Caption:=sInitialValue;
   cbNotNull.Caption:=sNotNull;
   cbPrimaryKey.Caption:=sPrimaryKey;
   cbAutoIncField.Caption:=sAutoIncField;

@@ -2919,8 +2919,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         TabOrder = 5
         object TabSheet8: TTabSheet
           Caption = 'FKRule'
-          ClientHeight = 234
-          ClientWidth = 784
+          ClientHeight = 261
+          ClientWidth = 790
           ParentFont = False
           object cbFKDeleteRule: TComboBox
             AnchorSideLeft.Control = Label13
@@ -3019,7 +3019,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             ItemHeight = 0
             OnDblClick = ListBox3DblClick
             ParentFont = False
-            ScrollWidth = 367
+            ScrollWidth = 365
             TabOrder = 2
             TopIndex = -1
           end
@@ -3039,7 +3039,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             ItemHeight = 0
             OnDblClick = ListBox4DblClick
             ParentFont = False
-            ScrollWidth = 366
+            ScrollWidth = 364
             TabOrder = 3
             TopIndex = -1
           end
@@ -3163,8 +3163,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         end
         object TabSheet9: TTabSheet
           Caption = 'Description'
-          ClientHeight = 234
-          ClientWidth = 784
+          ClientHeight = 261
+          ClientWidth = 790
           ParentFont = False
           object Memo1: TMemo
             Left = 0
