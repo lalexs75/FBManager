@@ -253,7 +253,10 @@ begin
     begin
       P:=TDBObject(cbDomains.Items.Objects[cbDomains.ItemIndex]);
       if Assigned(P) and (P is TDBDomain) then
+      begin
+        if not P.Loaded then P.RefreshObject;
         NN:=NN or TDBDomain(P).NotNull;
+      end;
     end;
     Label15.Enabled:=NN;
     Edit1.Enabled:=NN;
