@@ -1601,7 +1601,7 @@ constructor TSQLEngineFireBird.Create;
 begin
   inherited Create;
   FSQLCommentOnClass:=TFBSQLCommentOn;
-  FSQLEngileFeatures:=[feDescribeObject, fePKAutoName, feComputedTableFields, feFieldDepsList];
+  FSQLEngileFeatures:=[feDescribeObject, fePKAutoName, feComputedTableFields, feFieldDepsList, feArrayFields];
 
   DoInitFBSqlEngine;
 end;

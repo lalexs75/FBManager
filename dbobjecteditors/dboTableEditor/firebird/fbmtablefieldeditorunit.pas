@@ -110,7 +110,7 @@ type
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
-    TabSheet5: TTabSheet;
+    tabArray: TTabSheet;
     TabSheet6: TTabSheet;
     TabComputedSource: TTabSheet;
     TabSheet7: TTabSheet;
@@ -673,7 +673,7 @@ begin
   TabSheet1.Caption:=sFieldType;
   TabSheet3.Caption:=sCheck;
   TabSheet4.Caption:=sDefaultValue;
-  TabSheet5.Caption:=sArray;
+  tabArray.Caption:=sArray;
   TabSheet6.Caption:=sAutoincremet;
   TabComputedSource.Caption:=sCalculated;
   Label1.Caption:=sTableName;
@@ -767,6 +767,7 @@ begin
     cbCustomTypeCheck.Checked:=true;
   end;
 
+  tabArray.TabVisible:=feArrayFields in ATable.OwnerDB.SQLEngileFeatures;
   TabComputedSource.TabVisible:=feComputedTableFields in ATable.OwnerDB.SQLEngileFeatures;
 
   cbAutoIncField.Visible:=okAutoIncFields in ATable.OwnerDB.SQLEngineCapability;
