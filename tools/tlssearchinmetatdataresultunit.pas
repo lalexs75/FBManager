@@ -132,20 +132,26 @@ end;
 
 procedure TtlsSearchInMetatDataResultForm.otRemoveRowExecute(Sender: TObject);
 var
-  D: TTreeNode;
+  D, D1: TTreeNode;
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
   begin
     D:=TreeView1.Selected;
-    TreeView1.Selected:=nil;
+    D1:=D.GetNext;
+    if not Assigned(D1) then
+      D1:=D.GetPrev;
     TreeView1.Items.Delete(D);
+    TreeView1.Selected:=D1;
+    TreeView1Click(nil);
   end;
 end;
 
 procedure TtlsSearchInMetatDataResultForm.TreeView1Click(Sender: TObject);
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    EditorFrame.EditorText:=TDBObject(TreeView1.Selected.Data).DDLCreate;
+    EditorFrame.EditorText:=TDBObject(TreeView1.Selected.Data).DDLCreate
+  else
+    EditorFrame.EditorText:='';
 end;
 
 procedure TtlsSearchInMetatDataResultForm.TreeView1DblClick(Sender: TObject);
