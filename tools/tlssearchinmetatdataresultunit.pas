@@ -37,6 +37,8 @@ type
 
   TtlsSearchInMetatDataResultForm = class(TForm)
     actFind: TAction;
+    MenuItem6: TMenuItem;
+    otRemoveRow: TAction;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -54,6 +56,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure otClearResultExecute(Sender: TObject);
     procedure otCopyListToClibrdExecute(Sender: TObject);
+    procedure otRemoveRowExecute(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
     procedure TreeView1DblClick(Sender: TObject);
   private
@@ -127,6 +130,18 @@ begin
   end;
 end;
 
+procedure TtlsSearchInMetatDataResultForm.otRemoveRowExecute(Sender: TObject);
+var
+  D: TTreeNode;
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+  begin
+    D:=TreeView1.Selected;
+    TreeView1.Selected:=nil;
+    TreeView1.Items.Delete(D);
+  end;
+end;
+
 procedure TtlsSearchInMetatDataResultForm.TreeView1Click(Sender: TObject);
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
@@ -144,6 +159,7 @@ begin
   Caption:=sFindInMetatadaResult;
   actFind.Caption:=sFindInMetatada;
   otClearResult.Caption:=sClearSearchResult;
+  otRemoveRow.Caption:=sRemoveLine;
   otCopyListToClibrd.Caption:=sCopylistToClipboard;
   otCopyListToClibrd.Hint:=sCopylistToClipboardHint;
 end;

@@ -219,6 +219,7 @@ resourcestring
   sResultForm                       = 'Form';
   sTextToSearch                     = 'Text to search';
   sClearSearchResult                = 'Clear search result';
+  sRemoveLine                       = 'Remove line';
 
   sFindInMetatadaResult             = 'Find in metadata result';
   sYes                              = 'Yes';

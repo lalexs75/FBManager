@@ -112,6 +112,11 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
       ImageIndex = 45
       OnExecute = otClearResultExecute
     end
+    object otRemoveRow: TAction
+      Category = 'Object tree'
+      Caption = 'Remove line'
+      OnExecute = otRemoveRowExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
@@ -128,6 +133,9 @@ object tlsSearchInMetatDataResultForm: TtlsSearchInMetatDataResultForm
     end
     object MenuItem5: TMenuItem
       Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = otRemoveRow
     end
     object MenuItem4: TMenuItem
       Action = otClearResult
