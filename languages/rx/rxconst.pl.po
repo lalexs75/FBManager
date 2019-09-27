@@ -239,6 +239,10 @@ msgstr "Baza danych"
 msgid "MB"
 msgstr ""
 
+#: rxconst.srxnotdefinedfilename
+msgid "Not defined file name"
+msgstr ""
+
 #: rxconst.srxstrholdertexteditor
 msgid "Rx string holder editor"
 msgstr ""

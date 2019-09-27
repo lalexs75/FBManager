@@ -4166,6 +4166,10 @@ msgstr "Удалить поле"
 msgid "Remove file"
 msgstr "Удалить файл"
 
+#: fbmstrconstunit.sremoveline
+msgid "Remove line"
+msgstr "Убрать строку"
+
 #: fbmstrconstunit.srename
 #, object-pascal-format
 msgid "Rename %s \"%s\""
