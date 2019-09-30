@@ -1,33 +1,40 @@
 object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
-  Left = 554
-  Height = 328
-  Top = 226
-  Width = 440
+  Left = 460
+  Height = 343
+  Top = 213
+  Width = 529
   Caption = 'Memo value'
-  ClientHeight = 328
-  ClientWidth = 440
+  ClientHeight = 343
+  ClientWidth = 529
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DBNavigator1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
     Left = 0
-    Height = 245
+    Height = 260
     Top = 25
-    Width = 440
-    ActivePage = TabSheet1
-    Align = alClient
-    TabIndex = 0
+    Width = 529
+    ActivePage = TabSheet3
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 2
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'As text'
-      ClientHeight = 211
-      ClientWidth = 430
+      ClientHeight = 229
+      ClientWidth = 519
       object DBMemo1: TDBMemo
         Left = 0
-        Height = 211
+        Height = 229
         Top = 0
-        Width = 430
+        Width = 519
         Align = alClient
         DataSource = Datasource1
         TabOrder = 0
@@ -35,13 +42,13 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     end
     object TabSheet2: TTabSheet
       Caption = 'As image'
-      ClientHeight = 211
-      ClientWidth = 430
+      ClientHeight = 229
+      ClientWidth = 519
       object DBImage1: TDBImage
         Left = 0
-        Height = 211
+        Height = 229
         Top = 0
-        Width = 430
+        Width = 519
         Align = alClient
         AutoDisplay = False
         DataSource = Datasource1
@@ -49,18 +56,19 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     end
     object TabSheet3: TTabSheet
       Caption = 'As HTML'
-      ClientHeight = 211
-      ClientWidth = 430
+      ClientHeight = 229
+      ClientWidth = 519
       object IpHtmlPanel1: TIpHtmlPanel
         Left = 0
-        Height = 211
+        Height = 229
         Top = 0
-        Width = 430
+        Width = 519
         Align = alClient
         FixedTypeface = 'Courier New'
         DefaultTypeFace = 'default'
         DefaultFontSize = 12
         FlagErrors = False
+        PopupMenu = PopupMenu1
         PrintSettings.MarginLeft = 0.5
         PrintSettings.MarginTop = 0.5
         PrintSettings.MarginRight = 0.5
@@ -76,8 +84,8 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 46
-    Top = 276
-    Width = 428
+    Top = 291
+    Width = 517
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
     HelpButton.Name = 'HelpButton'
@@ -90,11 +98,14 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     ShowButtons = [pbClose, pbHelp]
   end
   object DBNavigator1: TDBNavigator
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = SpeedButton1
     Left = 0
     Height = 25
     Top = 0
-    Width = 440
-    Align = alTop
+    Width = 471
+    Anchors = [akTop, akLeft, akRight]
     BeforeAction = DBNavigator1BeforeAction
     BevelOuter = bvNone
     ChildSizing.EnlargeHorizontal = crsScaleChilds
@@ -104,13 +115,111 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 100
     ClientHeight = 25
-    ClientWidth = 440
+    ClientWidth = 471
     DataSource = Datasource1
     Options = []
     TabOrder = 2
   end
+  object SpeedButton1: TSpeedButton
+    AnchorSideTop.Control = DBNavigator1
+    AnchorSideRight.Control = SpeedButton2
+    AnchorSideBottom.Control = DBNavigator1
+    AnchorSideBottom.Side = asrBottom
+    Left = 477
+    Height = 25
+    Top = 0
+    Width = 20
+    Action = actOpen
+    Anchors = [akTop, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 6
+    BorderSpacing.Right = 6
+    Flat = True
+    ShowCaption = False
+  end
+  object SpeedButton2: TSpeedButton
+    AnchorSideTop.Control = DBNavigator1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = DBNavigator1
+    AnchorSideBottom.Side = asrBottom
+    Left = 503
+    Height = 25
+    Top = 0
+    Width = 20
+    Action = actSave
+    Anchors = [akTop, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 6
+    BorderSpacing.Right = 6
+    Flat = True
+    ShowCaption = False
+  end
   object Datasource1: TDataSource
     Left = 143
     Top = 50
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.txt'
+    Filter = 'Text files (*.txt)|*.txt|All files (*.*)|*.*'
+    Left = 89
+    Top = 144
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.txt'
+    Left = 128
+    Top = 144
+  end
+  object SaveDialog2: TSaveDialog
+    DefaultExt = '.png'
+    Filter = 'All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*'
+    Left = 128
+    Top = 200
+  end
+  object OpenDialog2: TOpenDialog
+    DefaultExt = '.png'
+    Filter = 'All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*'
+    Left = 89
+    Top = 200
+  end
+  object SaveDialog3: TSaveDialog
+    DefaultExt = '.html'
+    Left = 128
+    Top = 256
+  end
+  object OpenDialog3: TOpenDialog
+    DefaultExt = '.html'
+    Filter = 'Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*'
+    Left = 89
+    Top = 256
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 232
+    Top = 88
+    object actOpen: TAction
+      Caption = 'actOpen'
+      ImageIndex = 43
+      OnExecute = actOpenExecute
+    end
+    object actSave: TAction
+      Caption = 'actSave'
+      ImageIndex = 11
+      OnExecute = actSaveExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 232
+    Top = 176
+    object MenuItem1: TMenuItem
+      Action = actOpen
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = actSave
+    end
   end
 end

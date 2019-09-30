@@ -2398,6 +2398,10 @@ msgstr "Подсветка перемещения указателя мыши"
 msgid "Hours"
 msgstr "Часы"
 
+#: fbmstrconstunit.shtmlfilesfilter
+msgid "Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*"
+msgstr ""
+
 #: fbmstrconstunit.sid
 msgctxt "fbmstrconstunit.sid"
 msgid "ID"
@@ -2419,6 +2423,10 @@ msgstr "Игнорировать контрольные суммы"
 #: fbmstrconstunit.signorelimbo
 msgid "Ignore Limbo"
 msgstr "Игнорировать Limbo"
+
+#: fbmstrconstunit.simagesfilesfilter
+msgid "All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*"
+msgstr ""
 
 #: fbmstrconstunit.simport
 msgid "Import"
@@ -5148,6 +5156,10 @@ msgstr "Отключить данное подключени?"
 #: fbmstrconstunit.stest
 msgid "Test"
 msgstr "Проверка"
+
+#: fbmstrconstunit.stextfilesfilter
+msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+msgstr ""
 
 #: fbmstrconstunit.stexttosearch
 msgid "Text to search"

@@ -2309,6 +2309,10 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
+#: fbmstrconstunit.shtmlfilesfilter
+msgid "Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*"
+msgstr ""
+
 #: fbmstrconstunit.sid
 msgid "ID"
 msgstr ""
@@ -2327,6 +2331,10 @@ msgstr ""
 
 #: fbmstrconstunit.signorelimbo
 msgid "Ignore Limbo"
+msgstr ""
+
+#: fbmstrconstunit.simagesfilesfilter
+msgid "All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*"
 msgstr ""
 
 #: fbmstrconstunit.simport
@@ -4967,6 +4975,10 @@ msgstr ""
 
 #: fbmstrconstunit.stest
 msgid "Test"
+msgstr ""
+
+#: fbmstrconstunit.stextfilesfilter
+msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
 msgstr ""
 
 #: fbmstrconstunit.stexttosearch

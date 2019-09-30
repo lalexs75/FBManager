@@ -337,6 +337,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Caption = 'dataCopyAsUpdate'
       OnExecute = dataCopyAsUpdateExecute
     end
+    object dataImportBlob: TAction
+      Category = 'data'
+      Caption = 'dataImportBlob'
+    end
   end
   object FPDataExporter1: TFPDataExporter[5]
     Left = 136

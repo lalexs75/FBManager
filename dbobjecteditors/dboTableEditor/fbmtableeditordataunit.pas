@@ -36,6 +36,7 @@ type
   { TfbmTableEditorDataFrame }
 
   TfbmTableEditorDataFrame = class(TEditorPage)
+    dataImportBlob: TAction;
     dataCopyAsUpdate: TAction;
     dataCopyAsInsert: TAction;
     dataCopyRows: TAction;

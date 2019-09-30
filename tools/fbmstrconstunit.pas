@@ -1314,6 +1314,9 @@ resourcestring
   sExportDataHint                 = 'Export data from object...';
   sExportDataToPDF                = 'Export data to PDF';
   sExportDataToSpreadsheet        = 'Export data to Spreadsheet';
+  sTextFilesFilter                = 'Text files (*.txt)|*.txt|All files (*.*)|*.*';
+  sHtmlFilesFilter                = 'Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*';
+  sImagesFilesFilter              = 'All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*';
 
   sMisk                           = 'Misk';
   sLazzyModeLocalVariablesSP      = 'Lazzy mode local variables in SP';
