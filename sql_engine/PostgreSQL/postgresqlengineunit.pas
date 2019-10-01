@@ -1097,7 +1097,6 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-    function GetMetaSQLText(sqlId:integer):string;override;
     procedure Load(const AData: TDataSet);override;
     procedure Store(const AData: TDataSet);override;
     procedure RefreshObjectsBegin(const ASQLText:string);override;
@@ -3063,20 +3062,6 @@ end;
 
 { TSQLEnginePostgre }
 
-function TSQLEnginePostgre.GetMetaSQLText(sqlId: integer): string;
-begin
-  Result:='';
-  case sqlId of
-    0:if FServerVersion >= pgVersion9_4 then
-        Result:=pgSqlTextModule.sql_PG_TriggerList_9_4.Strings.Text
-      else
-      if FServerVersion >= pgVersion9_0 then
-        Result:=pgSqlTextModule.sql_PG_TriggerList_9_4.Strings.Text
-      else
-        Result:=sql_PG_TriggerList__8;
-  end;
-end;
-
 procedure TSQLEnginePostgre.DoInitPGEngine;
 begin
   FPGConnection:=TZConnection.Create(nil);
@@ -4004,7 +3989,7 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
   //RefreshObjectsBegin(pgSqlTextModule.sPGClass['pgClass']);
   RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self));
-  RefreshObjectsBegin(GetMetaSQLText(0));
+  RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
@@ -4022,7 +4007,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
   //RefreshObjectsEnd(pgSqlTextModule.sPGClass['pgClass']);
   RefreshObjectsEnd(pgSqlTextModule.PGClassStr(Self));
-  RefreshObjectsEnd(GetMetaSQLText(0));
+  RefreshObjectsEnd(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sqlSchemasAll.Strings.Text);
@@ -6169,7 +6154,7 @@ end;
 
 function TPGTriggersRoot.DBMSObjectsList: string;
 begin
-  Result:=OwnerDB.GetMetaSQLText(0);
+  Result:=pgSqlTextModule.PGTriggersList(OwnerDB);
 end;
 
 function TPGTriggersRoot.DBMSValidObject(AItem: TDBItem): boolean;

@@ -885,7 +885,6 @@ type
   public
     MiscOptions:TSQLEngineMiscOptions;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);
-    function GetMetaSQLText(sqlId:integer):string;virtual; abstract;
     constructor Create; virtual;
     destructor Destroy; override;
     procedure Load(const AData: TDataSet); virtual;

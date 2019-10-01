@@ -1874,4 +1874,64 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 432
     Top = 256
   end
+  object sPGTriggersList: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sPGTriggerList9_4'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_trigger.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  pg_trigger.tgname,'
+          '  pg_class.relname,'
+          '  cast(pg_trigger.tgfoid as integer),'
+          '  pg_trigger.tgtype,'
+          '  pg_trigger.tgenabled,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_trigger.oid and pg_class.relname = ''pg_trigger'' and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_trigger'
+          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
+          'where'
+          '  pg_trigger.tgconstrrelid = 0'
+          'order by'
+          '  pg_trigger.tgname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGTriggerList8_0'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_trigger.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  pg_trigger.tgname,'
+          '  pg_class.relname,'
+          '  cast(pg_trigger.tgfoid as integer),'
+          '  pg_trigger.tgtype,'
+          '  pg_trigger.tgenabled,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_trigger.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_trigger'
+          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
+          'where'
+          '  not pg_trigger.tgisconstraint'
+          'order by'
+          '  pg_trigger.tgname'
+          ''
+        )
+      end>
+    Left = 281
+    Top = 36
+  end
 end

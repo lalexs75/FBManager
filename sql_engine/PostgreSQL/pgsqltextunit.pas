@@ -34,6 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGTriggersList: TRxTextHolder;
     sPGClass: TRxTextHolder;
     sPGForeignTable: TRxTextHolder;
     sPGForeignData: TRxTextHolder;
@@ -91,7 +92,8 @@ type
   public
     function PGClassStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGLanguageList(ASQLEngine:TSQLEngineAbstract):string;
-  end; 
+    function PGTriggersList(ASQLEngine:TSQLEngineAbstract):string;
+  end;
 
 
 function pgSqlTextModule: TpgSqlTextModule;
@@ -127,6 +129,18 @@ begin
     Result:=sql_PG_LangList['sql_PG_LangList_v8']
   else
     Result:=sql_PG_LangList['sql_PG_LangList'];
+end;
+
+function TpgSqlTextModule.PGTriggersList(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if (TSQLEnginePostgre(ASQLEngine).RealServerVersion >= 00090004) then
+    Result:=sql_PG_LangList['sPGTriggerList9_4']
+  else
+  if (TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 0009) then
+    Result:=sql_PG_LangList['sPGTriggerList9_4']
+  else
+    Result:=sql_PG_LangList['sPGTriggerList8_0']
 end;
 
 end.

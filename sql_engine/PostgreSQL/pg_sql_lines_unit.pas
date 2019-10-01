@@ -42,54 +42,6 @@ const
                   'where '+
                   '  pg_user.usename = :usename';
 
-  sql_PG_TriggerList__8 =
-                  'select '+
-                  '  cast(pg_trigger.oid as integer), '+         //trigger ID
-                  '  pg_class.relnamespace, '+
-                  '  pg_trigger.tgname, '+          //name      Trigger name (must be unique among triggers of same table)
-                  '  pg_class.relname, '+
-                  '  cast(pg_trigger.tgfoid as integer), '+          //oid       pg_proc.oid	The function to be called
-                  '  pg_trigger.tgtype, '+          //int2      Bit mask identifying trigger conditions
-                  '  pg_trigger.tgenabled, '+       //bool      True if trigger is enabled (not presently checked everywhere it should be, so disabling a trigger by setting this false does not work reliably)
-                  '  (select '+
-                  '     pg_description.description '+
-                  '  from '+
-                  '     pg_description '+
-                  '  where '+
-                  '     pg_description.objoid = pg_trigger.oid and pg_description.objsubid = 0) as description '+
-                  'from '+
-                  '  pg_trigger '+
-                  '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid) '+
-                  'where '+
-                  '  pg_trigger.tgisconstraint = false '+
-                  'order by '+
-                  '  pg_trigger.tgname';
-
-(*
-  //Запросы на изменение метаданных
-  sql_PG_LangList =
-                  'select '+
-                  '  cast(pg_language.oid as integer), '+
-                  '  cast(pg_language.oid as integer), '+
-                  '  pg_language.lanname, '+
-{ TODO : Временно коментируем - 8.2 этого нет }
-{                  '  pg_language.lanowner, '+  //
-                  '  pg_language.lanispl, '+
-                  '  pg_language.lanpltrusted, '+
-                  '  pg_language.lanplcallfoid, '+
-                  '  pg_language.lanvalidator, '+
-                  '  pg_language.lanacl, '+}
-                  '  (select '+
-                  '     pg_description.description '+
-                  '   from '+
-                  '     pg_description '+
-                  '   where '+
-                  '     pg_description.objoid = pg_language.oid and pg_description.objsubid = 0) as description '+
-                  'from '+
-                  '  pg_language '+
-                  'order by '+
-                  '  pg_language.oid';
-*)
   sql_PG_ACLTables =
                   'select '+
                   '  cast(array_dims(pg_class.relacl) as varchar(20)) as name_dims '+
@@ -97,39 +49,6 @@ const
                   '  pg_class '+
                   'where '+
                   '  (pg_class.oid  = :oid)';
-(*
-  sql_PG_ACLProc =
-                  'select '+
-                  '  cast(array_dims(pg_proc.proacl) as varchar(20)) as name_dims '+
-                  'from '+
-                  '  pg_proc '+
-                  'where '+
-                  '  (pg_proc.oid  = :oid)';
-
-  sql_PG_ACLLang =
-                  'select '+
-                  '  cast(array_dims(pg_language.lanacl) as varchar(20)) as name_dims '+
-                  'from '+
-                  '  pg_language '+
-                  'where '+
-                  '  (pg_language.oid  = :oid)';
-
-  sql_PG_ACLShemas =
-                  'select '+
-                  '  cast(array_dims(pg_namespace.nspacl) as varchar(20)) as name_dims '+
-                  'from '+
-                  '  pg_namespace '+
-                  'where '+
-                  '  (pg_namespace.oid  = :oid)';
-
-  sql_PG_ACLTableSpace =
-                  'select '+
-                  '  cast(array_dims(pg_tablespace.spcacl) as varchar(20)) as name_dims '+
-                  'from '+
-                  '  pg_tablespace '+
-                  'where '+
-                  '  (pg_tablespace.oid  = :oid)';
-*)
 const
   DummyPGTriggerText =
       'declare'+LineEnding+
