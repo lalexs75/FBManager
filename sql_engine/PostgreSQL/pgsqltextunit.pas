@@ -67,7 +67,6 @@ type
     sql_Pg_Rule: TStrHolder;
     sqlTableConstraint: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
-    sql_PG_TriggerList_9_4: TStrHolder;
     sql_PG_ViewRefresh: TStrHolder;
     sqlSchema: TStrHolder;
     sqlSequence: TStrHolder;
@@ -135,12 +134,12 @@ function TpgSqlTextModule.PGTriggersList(ASQLEngine: TSQLEngineAbstract
   ): string;
 begin
   if (TSQLEnginePostgre(ASQLEngine).RealServerVersion >= 00090004) then
-    Result:=sql_PG_LangList['sPGTriggerList9_4']
+    Result:=sPGTriggersList['sPGTriggerList9_4']
   else
   if (TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 0009) then
-    Result:=sql_PG_LangList['sPGTriggerList9_4']
+    Result:=sPGTriggersList['sPGTriggerList9_4']
   else
-    Result:=sql_PG_LangList['sPGTriggerList8_0']
+    Result:=sPGTriggersList['sPGTriggerList8_0']
 end;
 
 end.
