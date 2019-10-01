@@ -34,6 +34,9 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGTableInerited: TRxTextHolder;
+    sPGRelation: TRxTextHolder;
+    sPGRelationFields: TRxTextHolder;
     sPGTriggersList: TRxTextHolder;
     sPGClass: TRxTextHolder;
     sPGForeignTable: TRxTextHolder;
@@ -54,15 +57,12 @@ type
     sqlTypesList: TStrHolder;
     sqlTrigger: TStrHolder;
     sqlIndex: TStrHolder;
-    sqlPGRelationFields: TStrHolder;
     sqlIndexTable: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;
     sqlIndexFields: TStrHolder;
     sqlPGUserGroupGrants: TStrHolder;
     sql_PG_DomainRefresh: TStrHolder;
-    sqlPGTableInerited: TStrHolder;
-    sqlPGRelation: TStrHolder;
     sql_Pg_Rules: TStrHolder;
     sql_Pg_Rule: TStrHolder;
     sqlTableConstraint: TStrHolder;
@@ -92,6 +92,8 @@ type
     function PGClassStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGLanguageList(ASQLEngine:TSQLEngineAbstract):string;
     function PGTriggersList(ASQLEngine:TSQLEngineAbstract):string;
+    function PGRelationStr(ASQLEngine:TSQLEngineAbstract):string;
+    function PGRelationInheritedStr(ASQLEngine:TSQLEngineAbstract):string;
   end;
 
 
@@ -140,6 +142,23 @@ begin
     Result:=sPGTriggersList['sPGTriggerList9_4']
   else
     Result:=sPGTriggersList['sPGTriggerList8_0']
+end;
+
+function TpgSqlTextModule.PGRelationStr(ASQLEngine: TSQLEngineAbstract): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 10 then
+    Result:=sPGRelation['sqlPGRelation10']
+  else
+    Result:=sPGRelation['sqlPGRelation'];
+end;
+
+function TpgSqlTextModule.PGRelationInheritedStr(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 10 then
+    Result:=sPGTableInerited['sTableInerited10']
+  else
+    Result:=sPGTableInerited['sTableInerited'];
 end;
 
 end.

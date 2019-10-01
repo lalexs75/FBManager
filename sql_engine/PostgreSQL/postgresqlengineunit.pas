@@ -522,6 +522,8 @@ type
   private
     FACLListStr: string;
     FAutovacuumOptions: TPGAutovacuumOptions;
+    FPartitionedTable: boolean;
+    FPartitionedTableType: string;
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
     FOID:integer;
@@ -621,6 +623,8 @@ type
     property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
     property ToastRelOID:Integer read FToastRelOID;
     property ACLListStr:string read FACLListStr;
+    property PartitionedTable:boolean read FPartitionedTable;
+    property PartitionedTableType:string read FPartitionedTableType;
   end;
 
   TPGForeignTable = class(TDBTableObject)
@@ -1487,7 +1491,7 @@ begin
   if State <> sdboEdit then exit;
   Fields.Clear;
 
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlPGRelationFields.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelationFields['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -4874,7 +4878,7 @@ begin
   if State <> sdboEdit then exit;
   Fields.Clear;
 
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlPGRelationFields.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelationFields['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -5320,13 +5324,15 @@ var
 begin
   inherited RefreshObject;
   FACLListStr:='';
+  FPartitionedTableType:='';
+  FPartitionedTable:=false;
   FStorageParameters.Clear;
   FAutovacuumOptions.Clear;
   FToastAutovacuumOptions.Clear;
   FToastRelOID:=0;
   if State = sdboEdit then
   begin
-    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGRelation.Strings.Text);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.PGRelationStr(OwnerDB));
     try
       Q.ParamByName('relname').AsString:=Caption;
       Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;
@@ -5344,6 +5350,13 @@ begin
         FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
         FACLListStr:=Q.FieldByName('relacl').AsString;
+
+        if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion10_0 then
+        begin
+          FPartitionedTable:=Q.FieldByName('relkind').AsString = 'p';
+          if FPartitionedTable then
+            FPartitionedTableType:=Q.FieldByName('partition_type').AsString;
+        end;
       end;
     finally
       Q.Free;
@@ -5391,13 +5404,13 @@ begin
 
   FInhTables.Clear;
 
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlPGTableInerited.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.PGRelationInheritedStr(OwnerDB));
   try
-    FQuery.ParamByName('inhrelid').AsInteger:=FOID;
+    FQuery.ParamByName('inhparent').AsInteger:=FOID;
     FQuery.Open;
     while not FQuery.Eof do
     begin
-      O:=FQuery.FieldByName('inhparent').AsInteger;
+      O:=FQuery.FieldByName('inhrelid').AsInteger;
 
       for i:=0 to TSQLEnginePostgre(OwnerDB).SchemasRoot.CountGroups - 1 do
       begin
@@ -5958,7 +5971,7 @@ var
 begin
   if State <> sdboEdit then exit;
   Fields.Clear;
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGRelationFields.Strings.Text); //sql_PG_RelationFields);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGRelationFields['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;

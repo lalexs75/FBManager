@@ -127,70 +127,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202020202870675f636c6173732e72656c6e616d657370616365203d203a736368656d615f696429'
     )
   end
-  object sqlPGRelationFields: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 40
-    Top = 256
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f6174747269627574652e6174746e756d2c'
-      '2020636173742870675f6174747269627574652e6174746e616d6520617320766172636861722831303029292c'
-      '202070675f6174747269627574652e61747474797069642c'
-      '202070675f6174747269627574652e6174746c656e2c'
-      '202070675f6174747269627574652e6174746e64696d732c'
-      '202070675f6174747269627574652e6174747479706d6f642c'
-      '202070675f6174747269627574652e617474627976616c2c'
-      '202070675f6174747269627574652e61747473746f726167652c'
-      '202070675f6174747269627574652e617474616c69676e2c'
-      '202070675f6174747269627574652e6174746e6f746e756c6c2c'
-      '202070675f6174747269627574652e6174746861736465662c'
-      '202070675f6174747269627574652e61747469736c6f63616c2c'
-      '20202873656c656374'
-      '202020202070675f617474726465662e6164737263'
-      '20202066726f6d'
-      '202020202070675f61747472646566'
-      '2020207768657265'
-      '2020202020202070675f617474726465662e616472656c6964203d2070675f6174747269627574652e61747472656c6964'
-      '2020202020616e64'
-      '2020202020202070675f617474726465662e61646e756d203d2070675f6174747269627574652e6174746e756d292061732061647372632c'
-      '202070675f747970655f6d2e7479706e616d652c'
-      '202070675f747970655f6d2e7479706e616d6573706163652c'
-      '2020636173742870675f6e616d6573706163655f6d2e6e73706e616d652061732076617263686172283130302929206173207479706e616d6573706163655f6e616d652c'
-      '202070675f747970655f6d2e74797064656661756c742c'
-      '2020636173742870675f747970655f6d2e747970747970652061732076617263686172283329292061732020747970747970652c'
-      '202020202873656c656374'
-      '2020202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '202020202066726f6d'
-      '2020202020202070675f6465736372697074696f6e'
-      '20202020207768657265'
-      '20202020202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f6174747269627574652e61747472656c6964'
-      '20202020202020616e64'
-      '20202020202020202070675f6465736372697074696f6e2e6f626a7375626964203d2070675f6174747269627574652e6174746e756d29206173206465736372697074696f6e2c'
-      '20202863617365'
-      '20202020207768656e2070675f747970655f6d2e74797074797065203d20276427207468656e'
-      '20202020202020202873656c656374'
-      '2020202020202020202070675f74797065312e7479706e616d65'
-      '202020202020202066726f6d'
-      '2020202020202020202070675f747970652070675f7479706531'
-      '20202020202020207768657265'
-      '2020202020202020202070675f74797065312e6f6964203d2070675f747970655f6d2e747970626173657479706529'
-      '2020202020656c7365'
-      '202020202020202727'
-      '202020656e642920617320626173655f74797065'
-      '66726f6d'
-      '202070675f617474726962757465'
-      '2020696e6e6572206a6f696e2070675f747970652070675f747970655f6d206f6e202870675f6174747269627574652e6174747479706964203d2070675f747970655f6d2e6f696429'
-      '2020696e6e6572206a6f696e2070675f6e616d6573706163652070675f6e616d6573706163655f6d206f6e202870675f747970655f6d2e7479706e616d657370616365203d2070675f6e616d6573706163655f6d2e6f696429'
-      '7768657265'
-      '2020202070675f6174747269627574652e6174746e756d203e3d2030'
-      '2020616e64'
-      '2020202070675f6174747269627574652e61747472656c6964203d203a61747472656c6964'
-      '6f72646572206279'
-      '202070675f6174747269627574652e6174746e756d'
-    )
-  end
   object sqlIndexTable: TStrHolder
     Capacity = 64
     Macros = <>
@@ -427,66 +363,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020202070675f747970652e7479706e616d65203d203a7479706e616d65'
       '2020616e64'
       '2020202070675f6e616d6573706163652e6e73706e616d65203d203a6e73706e616d65'
-    )
-  end
-  object sqlPGTableInerited: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 160
-    Top = 256
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f696e6865726974732e696e6872656c69642c'
-      '202070675f696e6865726974732e696e68706172656e742c'
-      '202070675f696e6865726974732e696e687365716e6f'
-      '66726f6d'
-      '202070675f696e686572697473'
-      '7768657265'
-      '202070675f696e6865726974732e696e6872656c6964203d203a696e6872656c6964'
-      '6f72646572206279'
-      '202070675f696e6865726974732e696e687365716e6f'
-    )
-  end
-  object sqlPGRelation: TStrHolder
-    Capacity = 32
-    Macros = <>
-    Left = 96
-    Top = 256
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f636c6173732e6f696420617320696e7465676572292c'
-      '202070675f636c6173732e72656c7461626c6573706163652c'
-      '202070675f636c6173732e72656c6e616d652c'
-      '202070675f636c6173732e72656c6f776e65722c'
-      '202070675f636c6173732e72656c686173737562636c6173732c'
-      '202070675f636c6173732e72656c70657273697374656e63652c'
-      '202070675f636c6173732e72656c6f7074696f6e732c'
-      '20207473742e72656c6f7074696f6e73206173207473745f72656c6f7074696f6e732c'
-      '202070675f636c6173732e72656c6861736f6964732c'
-      '202070675f636c6173732e72656c746f61737472656c69642c'
-      '202070675f636c6173732e72656c61636c2c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020202020696e6e6572206a6f696e2070675f636c6173732070675f636c61737331206f6e202870675f636c617373312e6f6964203d2070675f6465736372697074696f6e2e636c6173736f696429'
-      '2020207768657265'
-      '2020202020202070675f6465736372697074696f6e2e6f626a7375626964203d2030'
-      '2020202020616e64'
-      '2020202020202070675f636c617373312e72656c6e616d65203d202770675f636c61737327'
-      '2020202020616e64'
-      '2020202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636c6173732e6f696429206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636c617373'
-      '20204c454654204f55544552204a4f494e2070675f636c61737320747374204f4e207473742e6f6964203d2070675f636c6173732e72656c746f61737472656c6964'
-      '5748455245'
-      '202020202870675f636c6173732e72656c6b696e64203d2027722729'
-      '2020616e64'
-      '202020202870675f636c6173732e72656c6e616d657370616365203d203a72656c6e616d65737061636529'
-      '2020616e64'
-      '202020202870675f636c6173732e72656c6e616d6520203d20203a72656c6e616d6529'
     )
   end
   object sql_Pg_Rules: TStrHolder
@@ -1903,5 +1779,180 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 224
     Top = 36
+  end
+  object sPGRelationFields: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'RelationFields'
+        Lines.Strings = (
+          'select'
+          '  pg_attribute.attnum,'
+          '  cast(pg_attribute.attname as varchar(100)),'
+          '  pg_attribute.atttypid,'
+          '  pg_attribute.attlen,'
+          '  pg_attribute.attndims,'
+          '  pg_attribute.atttypmod,'
+          '  pg_attribute.attbyval,'
+          '  pg_attribute.attstorage,'
+          '  pg_attribute.attalign,'
+          '  pg_attribute.attnotnull,'
+          '  pg_attribute.atthasdef,'
+          '  pg_attribute.attislocal,'
+          '  (select'
+          '     pg_attrdef.adsrc'
+          '   from'
+          '     pg_attrdef'
+          '   where'
+          '       pg_attrdef.adrelid = pg_attribute.attrelid'
+          '     and'
+          '       pg_attrdef.adnum = pg_attribute.attnum) as adsrc,'
+          '  pg_type_m.typname,'
+          '  pg_type_m.typnamespace,'
+          '  cast(pg_namespace_m.nspname as varchar(100)) as typnamespace_name,'
+          '  pg_type_m.typdefault,'
+          '  cast(pg_type_m.typtype as varchar(3)) as  typtype,'
+          '    (select'
+          '       pg_description.description'
+          '     from'
+          '       pg_description'
+          '     where'
+          '         pg_description.objoid = pg_attribute.attrelid'
+          '       and'
+          '         pg_description.objsubid = pg_attribute.attnum) as description,'
+          '  (case'
+          '     when pg_type_m.typtype = ''d'' then'
+          '        (select'
+          '          pg_type1.typname'
+          '        from'
+          '          pg_type pg_type1'
+          '        where'
+          '          pg_type1.oid = pg_type_m.typbasetype)'
+          '     else'
+          '       '''''
+          '   end) as base_type'
+          'from'
+          '  pg_attribute'
+          '  inner join pg_type pg_type_m on (pg_attribute.atttypid = pg_type_m.oid)'
+          '  inner join pg_namespace pg_namespace_m on (pg_type_m.typnamespace = pg_namespace_m.oid)'
+          'where'
+          '    pg_attribute.attnum >= 0'
+          '  and'
+          '    pg_attribute.attrelid = :attrelid'
+          'order by'
+          '  pg_attribute.attnum'
+          ''
+        )
+      end>
+    Left = 96
+    Top = 256
+  end
+  object sPGRelation: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlPGRelation'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.*,'
+          '  tst.reloptions as tst_reloptions,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          'WHERE'
+          '    (pg_class.relkind in (''r'', ''p''))'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlPGRelation10'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.*,'
+          '  (CASE WHEN pg_class.relkind = ''p'' THEN pg_get_partkeydef(pg_class.oid) ELSE '''' END) AS partition_type,'
+          '  tst.reloptions as tst_reloptions,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          'WHERE'
+          '    (pg_class.relkind in (''r'', ''p''))'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
+      end>
+    Left = 40
+    Top = 256
+  end
+  object sPGTableInerited: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sTableInerited'
+        Lines.Strings = (
+          'select'
+          '  pg_inherits.inhrelid,'
+          '  pg_inherits.inhparent,'
+          '  pg_inherits.inhseqno'
+          'from'
+          '  pg_inherits'
+          'where'
+          '  pg_inherits.inhparent = :inhparent'
+          'order by'
+          '  pg_inherits.inhseqno'
+          ''
+        )
+      end    
+      item
+        Caption = 'sTableInerited10'
+        Lines.Strings = (
+          'select'
+          '  pg_inherits.inhrelid,'
+          '  pg_inherits.inhparent,'
+          '  pg_inherits.inhseqno'
+          'from'
+          '  pg_inherits'
+          '  inner join pg_class on (pg_inherits.oid = pg_inherits.inhrelid)'
+          'where'
+          '    pg_inherits.inhparent = :inhparent'
+          '  and'
+          '    not pg_class.relispartition'
+          'order by'
+          '  pg_inherits.inhseqno'
+          ''
+        )
+      end>
+    Left = 162
+    Top = 256
   end
 end

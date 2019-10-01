@@ -1,7 +1,7 @@
 inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
-  Height = 545
+  Height = 649
   Width = 991
-  ClientHeight = 545
+  ClientHeight = 649
   ClientWidth = 991
   DesignLeft = 405
   object Label1: TLabel[0]
@@ -256,7 +256,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     AnchorSideRight.Control = SpeedButton3
     AnchorSideBottom.Control = StaticText2
     Left = 6
-    Height = 302
+    Height = 406
     Top = 214
     Width = 943
     ColumnDefValues.BlobText = '(данные)'
@@ -435,7 +435,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     AnchorSideBottom.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 522
+    Top = 626
     Width = 943
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Around = 6
@@ -474,7 +474,22 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Constraints.MinWidth = 30
     ShowCaption = False
   end
-  object ActionList1: TActionList[12]
+  object Edit1: TEdit[12]
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 93
+    Height = 34
+    Top = 6
+    Width = 892
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object ActionList1: TActionList[13]
     Images = fbManagerMainForm.ImageListMain
     Left = 288
     Top = 80
@@ -499,7 +514,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ImageIndex = 13
     end
   end
-  object rxKeys: TRxMemoryData[13]
+  object rxKeys: TRxMemoryData[14]
     FieldDefs = <    
       item
         Name = 'KeyType'
@@ -548,7 +563,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Size = 1000
     end
   end
-  object rxSection: TRxMemoryData[14]
+  object rxSection: TRxMemoryData[15]
     FieldDefs = <    
       item
         Name = 'NAME'
@@ -644,7 +659,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Size = 250
     end
   end
-  object PopupMenu1: TPopupMenu[15]
+  object PopupMenu1: TPopupMenu[16]
     Images = fbManagerMainForm.ImageListMain
     Left = 136
     Top = 98
@@ -658,17 +673,17 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Action = keyRemove
     end
   end
-  object dsKeys: TDataSource[16]
+  object dsKeys: TDataSource[17]
     DataSet = rxKeys
     Left = 181
     Top = 98
   end
-  object dsSection: TDataSource[17]
+  object dsSection: TDataSource[18]
     DataSet = rxSection
     Left = 181
     Top = 232
   end
-  object PopupMenu2: TPopupMenu[18]
+  object PopupMenu2: TPopupMenu[19]
     Images = fbManagerMainForm.ImageListMain
     Left = 136
     Top = 232

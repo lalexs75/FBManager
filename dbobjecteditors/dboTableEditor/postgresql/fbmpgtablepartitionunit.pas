@@ -34,6 +34,7 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    Edit1: TEdit;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
@@ -98,11 +99,27 @@ procedure TfbmPGTablePartitionPage.RefreshPage;
 begin
   LoadSpr;
 
-  RxDBGrid1.Enabled:=DBObject.State = sdboCreate;
-  keyAdd.Enabled:=DBObject.State = sdboCreate;
-  keyRemove.Enabled:=DBObject.State = sdboCreate;
-  Label1.Enabled:=DBObject.State = sdboCreate;
-  ComboBox1.Enabled:=DBObject.State = sdboCreate;
+
+  Edit1.Visible:=DBObject.State <> sdboCreate;
+  ComboBox1.Visible:=DBObject.State = sdboCreate;
+  DividerBevel1.Visible:=DBObject.State = sdboCreate;
+  RxDBGrid1.Visible:=DBObject.State = sdboCreate;
+  keyAdd.Visible:=DBObject.State = sdboCreate;
+  keyRemove.Visible:=DBObject.State = sdboCreate;
+  StaticText1.Visible:=DBObject.State = sdboCreate;
+
+  //Label1.Enabled:=DBObject.State = sdboCreate;
+
+  if DBObject.State = sdboCreate then
+  begin
+
+  end
+  else
+  begin
+    DividerBevel2.AnchorSideTop.Control:=Edit1;
+    Edit1.Text:=TPGTable(DBObject).PartitionedTableType;
+    Label1.AnchorSideBottom.Control:=Edit1;
+  end;
 end;
 
 procedure TfbmPGTablePartitionPage.LoadSpr;
@@ -124,6 +141,8 @@ class function TfbmPGTablePartitionPage.PageExists(ADBObject: TDBObject
   ): Boolean;
 begin
   Result:=Assigned(ADBObject) and (ADBObject.OwnerDB is TSQLEnginePostgre) and (TSQLEnginePostgre(ADBObject.OwnerDB).ServerVersion >= pgVersion10_0);
+  if Result then
+    Result:=TPGTable(ADBObject).PartitionedTable;
 end;
 
 function TfbmPGTablePartitionPage.PageName: string;
