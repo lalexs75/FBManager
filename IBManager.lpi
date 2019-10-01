@@ -1141,14 +1141,6 @@
         <UnitName Value="fbmSQLTextCommonUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="docs/whats.new.rus"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="docs/errors.txt"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgacleditunit.pas"/>
         <IsPartOfProject Value="True"/>
         <DisableI18NForLFM Value="True"/>
