@@ -1390,15 +1390,10 @@ begin
   if FACLListStr<>'' then
     TPGACLList(FACLList).ParseACLListStr(FACLListStr);
 
-  //FStorageParameters:=TStringList.Create;
-
   UITableOptions:=[utReorderFields, utRenameTable, utAddFields, utEditField, utDropFields];
 
   FSchema:=TPGTablesRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
-  //FInhTables:=TList.Create;
-  //FRuleList:=TPGRuleList.Create(Self);
-  //FCheckConstraints:=TList.Create;
 
 
   FDataSet:=TZQuery.Create(nil);
@@ -1412,10 +1407,6 @@ destructor TPGForeignTable.Destroy;
 begin
   FreeAndNil(ZUpdateSQL);
   FreeAndNil(FForeignTableOptions);
-  //FreeAndNil(FInhTables);
-  //FreeAndNil(FRuleList);
-  //FreeAndNil(FCheckConstraints);
-  //FreeAndNil(FStorageParameters);
   inherited Destroy;
 end;
 
@@ -1451,7 +1442,6 @@ begin
   begin
     Result:=TPGSQLCreateForeignTable.Create(nil);
     TPGSQLCreateForeignTable(Result).SchemaName:=Schema.Caption;
-    //TPGSQLCreateTable(Result).StorageParameters.Assign(FStorageParameters);
   end;
 end;
 
@@ -1461,9 +1451,6 @@ var
 begin
   inherited RefreshObject;
   FACLListStr:='';
-  //FStorageParameters.Clear;
-  //FAutovacuumOptions.Clear;
-  //FToastAutovacuumOptions.Clear;
   FForeignTableOptions.Clear;
   if State = sdboEdit then
   begin
@@ -1514,8 +1501,6 @@ begin
   finally
     FQuery.Free;
   end;
-//  RefreshConstraintPrimaryKey;
-//  RefreshConstraintUnique;
 end;
 
 function TPGForeignTable.DataSet(ARecCountLimit: Integer): TDataSet;
@@ -1635,7 +1620,6 @@ end;
 
 function TPGForeignTablesRoot.DBMSObjectsList: string;
 begin
-  //Result:=pgSqlTextModule.sPGClass['pgClass'];
   Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
@@ -2023,7 +2007,6 @@ begin
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   UITableOptions:=[];
-  //TPGSQLCreateMaterializedView
 end;
 
 destructor TPGMatView.Destroy;
@@ -2144,7 +2127,6 @@ end;
 
 function TPGMatViewsRoot.DBMSObjectsList: string;
 begin
-  //Result:=pgSqlTextModule.sPGClass['pgClass'];
   Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
@@ -2264,14 +2246,6 @@ begin
 
   if Assigned(FTriggerSP) then
   begin
-  {  FCmd.TriggerFunction:=TPGSQLCreateFunction.Create;
-    FCmd.TriggerFunction.Name:=FTriggerSP.Caption;
-    FCmd.TriggerFunction.SchemaName:=FTriggerSP.SchemaName;
-    FCmd.TriggerFunction.CreateMode:=cmCreateOrAlter;
-    FCmd.TriggerFunction.Language:=FTriggerSP.Language.Caption;
-    FCmd.TriggerFunction.Output.AddParam('').TypeName:='trigger';
-    FCmd.TriggerFunction.Body:=FTriggerSP.ProcedureBody;
-    FCmd.ProcName:=FCmd.TriggerFunction.FullName;}
     FCmd.ProcName:=FTriggerSP.Caption;
     FCmd.ProcSchema:=FTriggerSP.SchemaName;
   end;
@@ -2869,47 +2843,6 @@ begin
   if Assigned(F) then
     IsPrimary:=F.AsBoolean;
 
-//  IndexField:=DS.FieldByName('').As
-//  pg_class.relam,            --
-{
-  pg_index.indexrelid,       -- Код индекса (pg_class.oid)
-  pg_index.indrelid,         -- Код таблицы, к которой относится индекс
-  pg_index.indnatts,         -- Кол-во полей, используемых для построения индекса
-  pg_index.indisprimary,     -- Признак того, что индекс является превичным ключем таблицы
-  pg_index.indisclustered,   -- Признак кластерного индекса
-  pg_index.indisvalid,
-  pg_index.indcheckxmin,
-  pg_index.indisready,
-  pg_index.indexprs,         -- Строка выражения индекса
-  pg_index.indpred
-}
-{
-select
-  pg_class.oid,              -- Код индекса
-  pg_class.relname,          -- Наименование индекса
---  pg_class.relam,            --
-  pg_class.reltablespace,    -- Табличное пространство, содержащее индекс
---  pg_index.indexrelid,       -- Код индекса (pg_class.oid)
---  pg_index.indrelid,         -- Код таблицы, к которой относится индекс
---  pg_index.indnatts,         -- Кол-во полей, используемых для построения индекса
---  pg_index.indisunique,      -- Признак уникальности индекса
---  pg_index.indisprimary,     -- Признак того, что индекс является превичным ключем таблицы
---  pg_index.indisclustered,   -- Признак кластерного индекса
---  pg_index.indisvalid,
---  pg_index.indcheckxmin,
---  pg_index.indisready,
---  pg_index.indexprs,         -- Строка выражения индекса
---  pg_index.indpred
-from
-  pg_class
-  inner join pg_index on (pg_index.indexrelid = pg_class.oid)
-where
-    pg_class.relkind = 'i'
-  and
-    pg_index.indrelid =  :indrelid
-order by
-  pg_class.relname
-}
   IndexField:='';
   if AOwner is TPGTable then
     FSchema:=TPGTable(AOwner).Schema
@@ -3203,24 +3136,6 @@ begin
     while not Q.EOF do
     begin
       S1:=LowerCase(FTypeTypName.AsString);
-(*      if S1 = '_aclitem' then
-      begin
-        S2:='1';
-      end;
-      if Q.FieldByName('typcategory').AsString = 'U' then
-      begin
-        //Дополним список пользовательскими типами
-        P:=FTypeList.Add(Q.FieldByName('typname').AsString,
-                                       Q.FieldByName('oid').AsInteger,
-                                       false,
-                                       false,
-                                       ftUnknown,
-                                       '',
-                                       '',
-                                       tgUserDefinedTypes);
-      end
-      else
-      begin *)
       P:=FTypeList.FindType(S1);
       if Assigned(P) then
       begin
@@ -4121,24 +4036,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.pgFtsTempl.Strings.Text);
 end;
 
-(*
-function TSQLEnginePostgre.ShowObjectItem: integer;
-begin
-  Result:=0; //7;
-end;
 
-procedure TSQLEnginePostgre.ShowObjectGetItem(Item: integer;
-  out ItemName: string; out ItemValue: boolean);
-begin
-
-end;
-
-procedure TSQLEnginePostgre.ShowObjectSetItem(Item: integer; ItemValue: boolean
-  );
-begin
-
-end;
-*)
 procedure TSQLEnginePostgre.AccessMethodList(const AList: TStrings; ARefresh: Boolean = false);
 var
   Q: TZQuery;
@@ -4354,8 +4252,6 @@ procedure TPGSchema.InternalRefreshStatistic;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FSchemaId));
-{  if Assigned(FPGTableSpace) then
-    Statistic.AddValue(sTableSpace, FPGTableSpace.Caption);}
 end;
 
 function TPGSchema.GetObjectType: string;
@@ -4666,9 +4562,6 @@ begin
   if FToastAutovacuumOptions.Enabled then
     FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
 
-//  if ChkRec.Description<>'' then
-//      SQLLines.Add(Format('COMMENT ON CONSTRAINT %s ON %s IS ''%s''', [ChkRec.Name, ATableName, ChkRec.Description]));
-
   SQLLines.Add(FCmd.AsSQL);
 
   FCmd.Free;
@@ -4736,7 +4629,6 @@ begin
         end;
       end;
 
-      //S:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+ ' values('+MakeSQLInsertFields(true)+') returning '+MakeSQLInsertFields(false);
       S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
       quIns:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
       for F in FDataSet.Fields do
@@ -4955,11 +4847,8 @@ begin
         SQLLines.Add(Trig.DDLCreate);
     end;
 
-    //Result:=SQLLines.Text;
-    //SQLLines.Clear;
     FACLList.RefreshList;
     FACLList.MakeACLListSQL(nil, SQLLines, true);
-    //Result:=Result + LineEnding + LineEnding + SQLLines.Text;
 
     Result:=SQLLines.Text;
   finally
@@ -5312,28 +5201,6 @@ begin
     Q.Free;
   end;
 end;
-(*
-function TPGTable.TableCheckConstraintDrop(const AName: string): boolean;
-var
-  R:TPrimaryKeyRecord;
-begin
-  if State = sdboEdit then
-  begin
-    Result:=ExecSQLScript(Format(sql_PG_FKDrop, [CaptionFullPatch, AName]), [sepInTransaction, sepShowCompForm], OwnerDB);
-    if Result then
-      TableCheckConstraintRefresh;
-  end
-  else
-  begin
-    R:=ConstraintFind(AName);
-    if Assigned(R) then
-    begin
-      FConstraintList.Remove(R);
-      R.Free;
-    end;
-  end;
-end;
-*)
 
 constructor TPGTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
@@ -5778,8 +5645,6 @@ begin
   begin
     Result:=TPGSQLAlterDomain.Create(nil);
     Result.Name:=Caption;
-{    TPGSQLAlterDomain(Result).OldNotNull:=NotNull;
-    TPGSQLAlterDomain(Result).Old_DefaultValue:=DefaultValue;}
   end;
   TPGSQLCreateDomain(Result).SchemaName:=Schema.Caption;
 end;
@@ -5802,13 +5667,6 @@ begin
       FNotNull:=FQuery.FieldByName('typnotnull').AsBoolean;
       FDescription:=FQuery.FieldByName('description').AsString;
 
-      //pg_type.typname -- Это не нужно - уберём
-      //pg_type.typisdefined, '+
-      //pg_type.typlen, '+
-      //pg_type.typowner, '+
-      //pg_type.typelem, '+
-      //pg_type.typdelim, '+
-      //pg_type.typbasetype, '+
       FFieldType:=OwnerDB.TypeList.FindType(FQuery.FieldByName('base_type_name').AsString);
       if Assigned(FFieldType) then
       begin
@@ -5851,7 +5709,6 @@ end;
 
 function TPGSequencesRoot.DBMSObjectsList: string;
 begin
-  //Result:=pgSqlTextModule.sPGClass['pgClass'];
   Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
@@ -5889,11 +5746,7 @@ begin
   FCmd.CurrentValue:=LastValue;
   FCmd.MinValue:=MinValue;
   FCmd.MaxValue:=MaxValue;
-  //FCmd.SequenceTemp:
-  //FCmd.NoMinValue:
-  //FCmd.NoMaxValue:
   FCmd.Start:=StartValue;
-  //FCmd.Restart:=res
   FCmd.Cache:=CasheValue;
   FCmd.NoCycle:=not IsCycled;
   FCmd.Description:=Description;
@@ -6030,7 +5883,6 @@ end;
 
 function TPGViewsRoot.DBMSObjectsList: string;
 begin
-  //Result:=pgSqlTextModule.sPGClass['pgClass'];
   Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
@@ -6130,7 +5982,6 @@ begin
   finally
     FQuery.Free;
   end;
-//  TSQLEnginePostgre(OwnerDB).FPGTransaction.Commit;
 end;
 
 function TPGView.GetCaptionFullPatch: string;
@@ -6306,7 +6157,7 @@ function TPGView.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
   if not FDataSet.Active then
   begin
-    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch;//MakeSQLSelect(Caption, FBDataSet.DataBase);
+    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch;
     if ARecCountLimit > -1 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
@@ -6692,7 +6543,6 @@ end;
 
 function TPGFunctionsRoot.GetObjectType: string;
 begin
-  //Result:='Procedure';
   Result:='Function';
 end;
 
@@ -6709,7 +6559,6 @@ end;
 
 function TPGIndexRoot.DBMSObjectsList: string;
 begin
-  //Result:=pgSqlTextModule.sPGClass['pgClass'];
   Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
@@ -6985,7 +6834,6 @@ var
   F: TDBField;
   FModes: TCharArray;
 begin
-  //'{i,i,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o}|23 1043|{a_tb_client_id,a_macroquery,r_tb_client_sum_id,r_tb_client_sum_type,r_tb_client_sum_summa,r_tb_client_sum_date,r_tb_client_sum_owner_doc,r_tb_client_sum_status,r_tb_dogovor_id,r_tb_dogovor_date_start,r_tb_dogovor_number,r_tb_client_name,r_tb_client_adress,r_tb_client_kod,r_tb_client_summa_prc,r_tb_client_sum_number,r_bank_info_packet_doc_info,r_buh_prov_id,r_buh_account_number_deb,r_buh_account_number_cred,r_sum_sourse_name,r_nto_spr_peo
   S1:=Copy2SymbDel( AParamsArray, '|');
   S2:=Copy2SymbDel( AParamsArray, '|');
   S3:=AParamsArray;
@@ -7065,7 +6913,6 @@ var
   T: TTableItem;
   A: TACLItem;
 begin
-  //St:=ASqlObject.SQLText;
   if ((ASqlObject is TPGSQLCreateFunction)) then
   begin
     if(ASqlObject as TPGSQLCreateFunction).IsDropFunction then
@@ -7085,29 +6932,6 @@ begin
               T.Fields.AddParam(P);
         end;
       end;
-(*
-
-      if DBObject is TPGFunction then
-      begin
-        SP:=TPGFunction(DBObject);
-        T:=Result.Tables.Add(SP.CaptionFullPatch);
-        for F in SP.FieldsIN do
-        begin
-          GF:=T.Fields.AddParam(F.FieldName);
-          GF.InReturn:=F.IOType;
-
-          D:=F.FieldDomain;
-          if Assigned(D) then
-            GF.TypeName:=D.CaptionFullPatch
-          else
-            GF.TypeName:=F.FieldTypeName;
-        end;
-      end;
-
-      FACLList.FTempObjName:=(ASqlObject as TPGSQLCreateFunction).FunctionName;
-      FACLList.MakeACLListSQL(nil, St, true);
-      FACLList.FTempObjName:='';
-*)
       FOID:=0;
     end;
   end;
@@ -7310,7 +7134,6 @@ begin
     if Result then
     begin
       Caption:=ANewName;
-      //RefreshObject;
     end;
   end;
 end;
@@ -7355,7 +7178,6 @@ begin
 
   if State = sdboCreate then
   begin
-    //S:=FSchema.Caption + '.' + PrcName
     Caption:=PrcName;
     S:=CaptionFullPatch;
   end
@@ -7364,7 +7186,6 @@ begin
     if ADropBeforCompile then
     begin
       FACLList.RefreshList;
-      //SL.Add( 'DROP FUNCTION '+GetNameWithParams);
       if TSQLEnginePostgre(OwnerDB).ServerVersion>=pgVersion9_1 then
         Result:=ExecSQLScript('DROP FUNCTION '+GetNameWithParams, [sepShowCompForm], OwnerDB)
       else
@@ -7758,10 +7579,6 @@ end;
 
 function TPGLanguageRoot.DBMSObjectsList: string;
 begin
-(*  if TSQLEnginePostgre(OwnerDB).FRealServerVersionMajor < 9 then
-    Result:=pgSqlTextModule.PGLanguageList()pgSqlTextModule.sql_PG_LangList['sql_PG_LangList_v8']
-  else
-    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList'];*)
   Result:=pgSqlTextModule.PGLanguageList(OwnerDB);
 end;
 
