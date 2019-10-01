@@ -1,6 +1,6 @@
 unit tlsProgressOperationUnit;
 
-{$mode objfpc}
+{$I fbmanager_define.inc}
 
 interface
 

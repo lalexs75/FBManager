@@ -1,6 +1,6 @@
 unit sqlite3_cf_mainunit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

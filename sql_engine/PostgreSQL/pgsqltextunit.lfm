@@ -613,36 +613,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f747970652e7479706e616d65'
     )
   end
-  object sql_PG_ObjListAll: TStrHolder
-    Capacity = 21
-    Macros = <>
-    Left = 432
-    Top = 256
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f636c6173732e6f696420617320696e7465676572292c'
-      '202070675f636c6173732e72656c6e616d6573706163652c'
-      '2020636173742870675f636c6173732e72656c6e616d6520617320766172636861722832353029292061732072656c6e616d652c'
-      '2020636173742870675f636c6173732e72656c6b696e64206173207661726368617228352929206173206b696e645f312c'
-      '202070675f636c6173732e72656c61636c2061732061636c5f6c6973742c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020202020696e6e6572206a6f696e2070675f636c6173732070675f636c61737331206f6e202870675f636c617373312e6f6964203d2070675f6465736372697074696f6e2e636c6173736f696429'
-      '2020207768657265'
-      '2020202020202070675f6465736372697074696f6e2e6f626a7375626964203d2030'
-      '2020202020616e64'
-      '2020202020202070675f636c617373312e72656c6e616d65203d202770675f636c61737327'
-      '2020202020616e64'
-      '2020202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636c6173732e6f696429206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636c617373'
-      '6f72646572206279'
-      '202070675f636c6173732e72656c6e616d65'
-    )
-  end
   object sql_PG_TriggerList_9_4: TStrHolder
     Capacity = 64
     Macros = <>
@@ -1842,5 +1812,66 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 968
     Top = 240
+  end
+  object sPGClass: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'pgClass'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  cast(pg_class.relname as varchar(250)) as relname,'
+          '  cast(pg_class.relkind as varchar(5)) as kind_1,'
+          '  pg_class.relacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          'order by'
+          '  pg_class.relname'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgClass10'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  cast(pg_class.relname as varchar(250)) as relname,'
+          '  cast(pg_class.relkind as varchar(5)) as kind_1,'
+          '  cast(pg_class.relispartition as varchar) as data,'
+          '  pg_class.relacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          'order by'
+          '  pg_class.relname'
+          ''
+        )
+      end>
+    Left = 432
+    Top = 256
   end
 end

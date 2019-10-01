@@ -19,7 +19,7 @@
 }
 unit mysqlDataModuleUnit;
 
-{$mode objfpc}
+{$I fbmanager_define.inc}
 
 interface
 

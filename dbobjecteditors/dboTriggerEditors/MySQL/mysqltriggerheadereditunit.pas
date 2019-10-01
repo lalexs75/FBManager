@@ -20,7 +20,7 @@
 
 unit MySQLTriggerHeaderEditUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

@@ -9,16 +9,16 @@ object tlsProgressOperationForm: TtlsProgressOperationForm
   ClientWidth = 481
   FormStyle = fsStayOnTop
   Position = poScreenCenter
-  LCLVersion = '1.1'
+  LCLVersion = '2.1.0.0'
   object BitBtn1: TBitBtn
     AnchorSideLeft.Control = Owner
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = ProgressBar1
     AnchorSideTop.Side = asrBottom
-    Left = 198
-    Height = 34
-    Top = 53
-    Width = 85
+    Left = 196
+    Height = 38
+    Top = 55
+    Width = 89
     AutoSize = True
     Cancel = True
     DefaultCaption = True
@@ -35,7 +35,7 @@ object tlsProgressOperationForm: TtlsProgressOperationForm
     AnchorSideRight.Side = asrBottom
     Left = 6
     Height = 20
-    Top = 27
+    Top = 29
     Width = 469
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -47,7 +47,7 @@ object tlsProgressOperationForm: TtlsProgressOperationForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 15
+    Height = 17
     Top = 6
     Width = 129
     BorderSpacing.Around = 6

@@ -20,7 +20,7 @@
 
 unit fbm_VisualEditorsAbstractUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

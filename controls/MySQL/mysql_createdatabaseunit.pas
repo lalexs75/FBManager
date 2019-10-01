@@ -1,6 +1,6 @@
 unit mysql_CreateDatabaseUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

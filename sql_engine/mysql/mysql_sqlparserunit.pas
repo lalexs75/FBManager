@@ -24,7 +24,7 @@
 
 unit mysql_SqlParserUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

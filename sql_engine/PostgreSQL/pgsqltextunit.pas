@@ -20,12 +20,12 @@
 
 unit pgSqlTextUnit;
 
-{$mode objfpc}
+{$I fbmanager_define.inc}
 
 interface
 
 uses
-  Classes, SysUtils, FileUtil, StrHolder, RxTextHolder;
+  Classes, SysUtils, FileUtil, StrHolder, RxTextHolder, SQLEngineAbstractUnit;
 
 type
 
@@ -34,6 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sPGClass: TRxTextHolder;
     sPGForeignTable: TRxTextHolder;
     sPGForeignData: TRxTextHolder;
     sqlPGFuntions: TRxTextHolder;
@@ -65,7 +66,6 @@ type
     sql_Pg_Rule: TStrHolder;
     sqlTableConstraint: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
-    sql_PG_ObjListAll: TStrHolder;
     sql_PG_TriggerList_9_4: TStrHolder;
     sql_PG_ViewRefresh: TStrHolder;
     sqlSchema: TStrHolder;
@@ -89,13 +89,14 @@ type
   private
     { private declarations }
   public
-    { public declarations }
+    function PGClassStr(ASQLEngine:TSQLEngineAbstract):string;
+    function PGLanguageList(ASQLEngine:TSQLEngineAbstract):string;
   end; 
 
 
 function pgSqlTextModule: TpgSqlTextModule;
 implementation
-uses CustApp;
+uses CustApp, PostgreSQLEngineUnit;
 
 var
   FpgSqlTextModule: TpgSqlTextModule = nil;
@@ -108,6 +109,25 @@ begin
 end;
 
 {$R *.lfm}
+
+  { TpgSqlTextModule }
+
+function TpgSqlTextModule.PGClassStr(ASQLEngine: TSQLEngineAbstract): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 10 then
+    Result:=sPGClass['pgClass10']
+  else
+    Result:=sPGClass['pgClass'];
+end;
+
+function TpgSqlTextModule.PGLanguageList(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor < 9 then
+    Result:=sql_PG_LangList['sql_PG_LangList_v8']
+  else
+    Result:=sql_PG_LangList['sql_PG_LangList'];
+end;
 
 end.
 

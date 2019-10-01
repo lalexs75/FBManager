@@ -19,7 +19,7 @@
 }
 unit mysql_types;
 
-{$mode objfpc}
+{$I fbmanager_define.inc}
 
 interface
 

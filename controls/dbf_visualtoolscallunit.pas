@@ -20,7 +20,7 @@
 
 unit dbf_visualtoolscallunit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

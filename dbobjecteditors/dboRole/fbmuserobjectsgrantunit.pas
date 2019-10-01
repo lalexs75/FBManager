@@ -1,6 +1,6 @@
 unit fbmUserObjectsGrantUnit;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 

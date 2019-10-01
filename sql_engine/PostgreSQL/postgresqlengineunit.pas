@@ -1635,7 +1635,8 @@ end;
 
 function TPGForeignTablesRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  //Result:=pgSqlTextModule.sPGClass['pgClass'];
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGForeignTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -2143,7 +2144,8 @@ end;
 
 function TPGMatViewsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  //Result:=pgSqlTextModule.sPGClass['pgClass'];
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGMatViewsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -3516,7 +3518,7 @@ var
   FQuery: TZQuery;
   P: TDBItem;
 
-  FDesc, FOwnData, FObjData, {FData,} FAclList: TField;
+  FDesc, FOwnData, FObjData, FAclList: TField;
 begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
   if DBObj.CountUse = 1 then
@@ -3530,7 +3532,6 @@ begin
         FDesc:=FQuery.Fields[4];
     FOwnData:=FQuery.FindField('own_data');
     FObjData:=FQuery.FindField('data');
-//    FData:=FQuery.FindField('data');
     FAclList:=FQuery.FindField('acl_list');
 
     while not FQuery.Eof do
@@ -4086,7 +4087,8 @@ procedure TSQLEnginePostgre.RefreshObjectsBeginFull;
 begin
   RefreshObjectsBegin(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.sql_PG_ObjListAll.Strings.Text);
+  //RefreshObjectsBegin(pgSqlTextModule.sPGClass['pgClass']);
+  RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsBegin(GetMetaSQLText(0));
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
@@ -4103,7 +4105,8 @@ end;
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
 begin
   RefreshObjectsEnd(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.sql_PG_ObjListAll.Strings.Text);
+  //RefreshObjectsEnd(pgSqlTextModule.sPGClass['pgClass']);
+  RefreshObjectsEnd(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsEnd(GetMetaSQLText(0));
   RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
@@ -4528,7 +4531,7 @@ end;
 
 function TPGTablesRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -5848,7 +5851,8 @@ end;
 
 function TPGSequencesRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  //Result:=pgSqlTextModule.sPGClass['pgClass'];
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGSequencesRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -6026,7 +6030,8 @@ end;
 
 function TPGViewsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  //Result:=pgSqlTextModule.sPGClass['pgClass'];
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGViewsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -6704,7 +6709,8 @@ end;
 
 function TPGIndexRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_ObjListAll.Strings.Text;
+  //Result:=pgSqlTextModule.sPGClass['pgClass'];
+  Result:=pgSqlTextModule.PGClassStr(OwnerDB);
 end;
 
 function TPGIndexRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -7752,10 +7758,11 @@ end;
 
 function TPGLanguageRoot.DBMSObjectsList: string;
 begin
-  if TSQLEnginePostgre(OwnerDB).FRealServerVersionMajor < 9 then
-    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList_v8']
+(*  if TSQLEnginePostgre(OwnerDB).FRealServerVersionMajor < 9 then
+    Result:=pgSqlTextModule.PGLanguageList()pgSqlTextModule.sql_PG_LangList['sql_PG_LangList_v8']
   else
-    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList'];
+    Result:=pgSqlTextModule.sql_PG_LangList['sql_PG_LangList'];*)
+  Result:=pgSqlTextModule.PGLanguageList(OwnerDB);
 end;
 
 function TPGLanguageRoot.GetObjectType: string;

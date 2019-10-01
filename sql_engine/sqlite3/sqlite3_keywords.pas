@@ -20,7 +20,7 @@
 
 unit sqlite3_keywords;
 
-{$mode objfpc}{$H+}
+{$I fbmanager_define.inc}
 
 interface
 
