@@ -4506,6 +4506,10 @@ msgstr ""
 msgid "Show system objects"
 msgstr ""
 
+#: fbmstrconstunit.sshowttablepartiotions
+msgid "Show table's partiotions"
+msgstr ""
+
 #: fbmstrconstunit.sshowview
 msgid "Show view"
 msgstr ""

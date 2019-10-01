@@ -3987,7 +3987,6 @@ procedure TSQLEnginePostgre.RefreshObjectsBeginFull;
 begin
   RefreshObjectsBegin(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
-  //RefreshObjectsBegin(pgSqlTextModule.sPGClass['pgClass']);
   RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
@@ -4005,7 +4004,6 @@ end;
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
 begin
   RefreshObjectsEnd(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
-  //RefreshObjectsEnd(pgSqlTextModule.sPGClass['pgClass']);
   RefreshObjectsEnd(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsEnd(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
@@ -4417,7 +4415,13 @@ end;
 
 function TPGTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=Assigned(AItem) and ((AItem.ObjType = 'r') or (AItem.ObjType = 'p')) and (AItem.SchemeID = SchemaId);
+  Result:=Assigned(AItem);
+  if Result then
+  begin
+    Result:=((AItem.ObjType = 'r') or (AItem.ObjType = 'p')) and (AItem.SchemeID = SchemaId);
+    if Result and (TSQLEnginePostgre(OwnerDB).RealServerVersionMajor > 10) then
+      Result:=(AItem.ObjData = 'false') or pgShowTtablePartiotions;
+  end;
 end;
 
 function TPGTablesRoot.GetObjectType: string;

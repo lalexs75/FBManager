@@ -34,6 +34,7 @@ type
 
   TcfPostgreeConfigMiskFrame = class(TFBMConfigPageAbstract)
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     Label1: TLabel;
@@ -50,7 +51,7 @@ type
   end;
 
 implementation
-uses fbmToolsUnit, fbmStrConstUnit;
+uses fbmToolsUnit, fbmStrConstUnit, pg_utils;
 
 {$R *.lfm}
 
@@ -70,6 +71,7 @@ procedure TcfPostgreeConfigMiskFrame.LoadData;
 begin
   ComboBox1.ItemIndex:=ConfigValues.ByNameAsInteger('TSQLEnginePostgre\Initial ACL page', 0);
   CheckBox1.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\CreateIndexAfterCreateFK', false);
+  CheckBox2.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', PGShowTtablePartiotions);
   Edit1.Text:=IntToStr(ConfigValues.ByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', 0));
 end;
 
@@ -77,7 +79,10 @@ procedure TcfPostgreeConfigMiskFrame.SaveData;
 begin
   ConfigValues.SetByNameAsInteger('TSQLEnginePostgre\Initial ACL page', ComboBox1.ItemIndex);
   ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre\CreateIndexAfterCreateFK', CheckBox1.Checked);
+  ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', CheckBox2.Checked);
   ConfigValues.SetByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', StrToInt64Def(Edit1.Text, 0));
+
+  PGShowTtablePartiotions:=CheckBox2.Checked;
 end;
 
 procedure TcfPostgreeConfigMiskFrame.Localize;
@@ -86,6 +91,8 @@ begin
   Label1.Caption:=sShowObjectOnGrantPageDefault;
   Label2.Caption:=sInitialValueForNewSequence;
   CheckBox1.Caption:=sCreateIndexAfterCreateFK;
+  CheckBox2.Caption:=sShowTtablePartiotions;
+
   ComboBox1.Items.Clear;
   ComboBox1.Items.Add(sShowAllObjects);
   ComboBox1.Items.Add(sOnlyShowUsers);

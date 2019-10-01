@@ -4666,6 +4666,10 @@ msgstr "Отображать правую границу"
 msgid "Show system objects"
 msgstr "Отображать системные объекты"
 
+#: fbmstrconstunit.sshowttablepartiotions
+msgid "Show table's partiotions"
+msgstr "Отображать разделы для партицировонных таблиц"
+
 #: fbmstrconstunit.sshowview
 msgid "Show view"
 msgstr "Отобразить представления"

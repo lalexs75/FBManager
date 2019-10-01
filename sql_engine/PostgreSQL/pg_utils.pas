@@ -47,6 +47,9 @@ procedure FillPGVersion(const Items:TStrings);
 function PGClassTypeToDBObjectKind(const S:string):TDBObjectKind;
 function PGConstraintTypeToDBObjectKind(const S: string): TDBObjectKind;
 
+var
+  pgShowTtablePartiotions : boolean = false;
+
 implementation
 uses strutils, fbmStrConstUnit, dbconst;
 

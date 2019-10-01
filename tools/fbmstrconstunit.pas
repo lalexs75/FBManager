@@ -1180,6 +1180,8 @@ resourcestring
   sCommitTransactionOnRefresh       = 'Commit transaction on refresh';
   sShowObjectOnGrantPageDefault     = 'Show object on grant page default';
   sCreateIndexAfterCreateFK         = 'Create index after create FK';
+  sShowTtablePartiotions            = 'Show table''s partiotions';
+
   sShowAllObjects                   = 'Show all objects';
   sOnlyShowUsers                    = 'Only show users';
   sOnlyShowGroups                   = 'Only show groups';

@@ -85,4 +85,16 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     Width = 1
     ParentColor = False
   end
+  object CheckBox2: TCheckBox[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 156
+    Width = 173
+    BorderSpacing.Around = 6
+    Caption = 'Show table''s partiotions'
+    TabOrder = 3
+  end
 end

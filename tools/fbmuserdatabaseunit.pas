@@ -244,8 +244,7 @@ var
 
 procedure InitDataModule;
 implementation
-uses {DOM, }fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues,
-  fb_ConstUnit, variants;
+uses fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues, fb_ConstUnit, variants, pg_utils;
 
 {$R *.lfm}
 
@@ -848,6 +847,9 @@ begin
   ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
   SystemVariablesStore;
   LoadLocalize(ConfigValues.ByNameAsString('lngFileName', DefLanguageFile));
+
+  //
+  pgShowTtablePartiotions:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', PGShowTtablePartiotions);
 end;
 
 procedure TUserDBModule.SaveConfig;
