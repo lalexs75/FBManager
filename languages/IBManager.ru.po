@@ -587,6 +587,10 @@ msgstr "Условия для составного индекса"
 msgid "Conditions"
 msgstr "Условия"
 
+#: fbmstrconstunit.sconfighelppage
+msgid "Documentation and help"
+msgstr "Документация и справка"
+
 #: fbmstrconstunit.sconfiguration
 msgid "Configuration"
 msgstr "Конфигурация"
@@ -3616,8 +3620,6 @@ msgid "Open file"
 msgstr "Открыть файл"
 
 #: fbmstrconstunit.sopenfilehint
-#, fuzzy
-msgctxt "fbmstrconstunit.sopenfilehint"
 msgid "Open file"
 msgstr "Открыть файл"
 
@@ -3738,6 +3740,10 @@ msgstr "Раздел"
 #: fbmstrconstunit.spartitionkeys
 msgid "Partition keys"
 msgstr "Ключ раздела"
+
+#: fbmstrconstunit.spartitions
+msgid "Partitions"
+msgstr "Разделы"
 
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
@@ -3866,6 +3872,19 @@ msgstr "PostgreSQL - Анализатор базы данных"
 #: fbmstrconstunit.spostgresqldbstat
 msgid "Postgres server status"
 msgstr "Статус Postgre SQL сервера"
+
+#: fbmstrconstunit.spostgresqlhelpurl
+msgctxt "fbmstrconstunit.spostgresqlhelpurl"
+msgid "https://www.postgresql.org/docs/$VERSION/"
+msgstr "https://postgrespro.ru/docs/postgresql/$VERSION$/"
+
+#: fbmstrconstunit.spostgresqlhelpurlhint
+msgid "Path to the PostgreSQL documentation. $VERSION$ will be replaced with the major.minor version number."
+msgstr "Путь к документации по PostgreSQL. Переменная $VERSION$ будет заменена версией сервера в формате СТАРШАЯ.МЛАДШАЯ."
+
+#: fbmstrconstunit.spostgresqlhelpurllabel
+msgid "PostgreSQL help site URL"
+msgstr "Адрес сайта с документацией PostgreSQL"
 
 #: fbmstrconstunit.spostgresqltablecreateproc
 msgid "Create procedures"

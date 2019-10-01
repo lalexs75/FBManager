@@ -1817,6 +1817,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fbmPGTablePartitionUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="config/fbmdocssystemconfigunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmDocsSystemConfigFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmDocsSystemConfigUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

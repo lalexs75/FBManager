@@ -560,6 +560,10 @@ msgstr ""
 msgid "Conditions"
 msgstr ""
 
+#: fbmstrconstunit.sconfighelppage
+msgid "Documentation and help"
+msgstr ""
+
 #: fbmstrconstunit.sconfiguration
 msgid "Configuration"
 msgstr ""
@@ -3606,6 +3610,10 @@ msgstr ""
 msgid "Partition keys"
 msgstr ""
 
+#: fbmstrconstunit.spartitions
+msgid "Partitions"
+msgstr ""
+
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
 msgstr ""
@@ -3728,6 +3736,20 @@ msgstr ""
 
 #: fbmstrconstunit.spostgresqldbstat
 msgid "Postgres server status"
+msgstr ""
+
+#: fbmstrconstunit.spostgresqlhelpurl
+msgctxt "fbmstrconstunit.spostgresqlhelpurl"
+msgid "https://www.postgresql.org/docs/$VERSION/"
+msgstr ""
+
+#: fbmstrconstunit.spostgresqlhelpurlhint
+msgid "Path to the PostgreSQL documentation. $VERSION$ will be replaced with the major.minor version number."
+msgstr ""
+
+#: fbmstrconstunit.spostgresqlhelpurllabel
+msgctxt "fbmstrconstunit.spostgresqlhelpurllabel"
+msgid "PostgreSQL help site URL"
 msgstr ""
 
 #: fbmstrconstunit.spostgresqltablecreateproc

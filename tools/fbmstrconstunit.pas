@@ -418,6 +418,7 @@ resourcestring
   sList                             = 'List';
   sRange                            = 'Range';
   sPartition                        = 'Partition';
+  sPartitions                       = 'Partitions';
   sPartitionType                    = 'Partition type';
   sPartitionKeys                    = 'Partition keys';
   sPartitionSections                = 'Partition sections';
@@ -1511,6 +1512,12 @@ resourcestring
   sErrorVariableDefenition                     = 'Error in variable defenition';
   sFillValuesForNotNullCollumn                 = 'Fill values for not null collumn';
   sErrorInParamName                            = 'Error in param name';
+
+  sPostgreSQLHelpURLLabel                      = 'PostgreSQL help site URL';
+  sPostgreSQLHelpURL                           = 'https://www.postgresql.org/docs/$VERSION/';
+  sPostgreSQLHelpURLHint                       = 'Path to the PostgreSQL documentation. $VERSION$ will be replaced with the major.minor version number.';
+  sConfigHelpPage                              = 'Documentation and help';
+
 implementation
 
 end.

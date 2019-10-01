@@ -128,7 +128,7 @@ end;
 
 function TfbmPGTablePartitionPage.PageName: string;
 begin
-  Result:=sPartition;
+  Result:=sPartitions;
 end;
 
 function TfbmPGTablePartitionPage.DoMetod(PageAction: TEditorPageAction

@@ -53,7 +53,7 @@ implementation
 uses SQLEngineAbstractUnit, fbm_VisualEditorsAbstractUnit, fbmToolsUnit,
   fbmStrConstUnit, fbmUserDataBaseUnit, cfOIUnit, cfGridOptionsUnit,
   cfReportsOptionsUnit, cfGeneralOptionsUnit, cfSQLEditorOptionsUnit,
-  cfSystemConfirmationUnit, fbmCompatibilitySystemUnit,
+  cfSystemConfirmationUnit, fbmCompatibilitySystemUnit, fbmDocsSystemConfigUnit,
   SSHConnectionPluginConfigUnit;
 
 {$R *.lfm}
@@ -93,6 +93,7 @@ begin
   DoMakePages;
   //
   AddPage(TSSHConnectionPluginConfig.Create(Self));
+  AddPage(TfbmDocsSystemConfigFrame.Create(Self));
 
   //Load param in pages
   LoadConfig;

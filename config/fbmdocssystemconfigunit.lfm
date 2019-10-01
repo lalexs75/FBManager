@@ -1,0 +1,48 @@
+inherited fbmDocsSystemConfigFrame: TfbmDocsSystemConfigFrame
+  Height = 242
+  Width = 379
+  ClientHeight = 242
+  ClientWidth = 379
+  DesignLeft = 638
+  DesignTop = 480
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 155
+    BorderSpacing.Around = 6
+    Caption = 'PostgreSQL help site URL'
+    ParentColor = False
+  end
+  object Edit1: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 29
+    Width = 361
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = Edit1
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Edit1
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 69
+    Width = 361
+    Anchors = [akTop, akLeft, akRight]
+    Caption = 'Path to the PostgreSQL documentation. $VERSION$ will be replaced with the major.minor version number. '
+    ParentColor = False
+    WordWrap = True
+  end
+end
