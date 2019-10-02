@@ -96,9 +96,12 @@ uses rxdbutils, fbmStrConstUnit, pgTypes, fbmTableEditorFieldsUnit;
 { TfbmPGTablePartitionPage }
 
 procedure TfbmPGTablePartitionPage.RefreshPage;
+var
+  P: TPGTablePartition;
 begin
   LoadSpr;
 
+  rxSection.CloseOpen;
 
   Edit1.Visible:=DBObject.State <> sdboCreate;
   ComboBox1.Visible:=DBObject.State = sdboCreate;
@@ -117,8 +120,15 @@ begin
   else
   begin
     DividerBevel2.AnchorSideTop.Control:=Edit1;
-    Edit1.Text:=TPGTable(DBObject).PartitionedTableType;
+    Edit1.Text:=TPGTable(DBObject).PartitionedTypeName;
     Label1.AnchorSideBottom.Control:=Edit1;
+
+    for P in TPGTable(DBObject).PartitionList do
+    begin
+      rxSection.Append;
+      rxSectionNAME.AsString:=P.Name;
+      rxSection.Post;
+    end;
   end;
 end;
 

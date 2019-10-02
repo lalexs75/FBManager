@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
-  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, pgTypes,
+  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, pgTypes, pg_SqlParserUnit,
   SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
 
 
@@ -567,7 +567,8 @@ type
     FACLListStr: string;
     FAutovacuumOptions: TPGAutovacuumOptions;
     FPartitionedTable: boolean;
-    FPartitionedTableType: string;
+    FPartitionedType: TPGSQLPartitionType;
+    FPartitionedTypeName: string;
     FPartitionList: TPGTablePartitionList;
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
@@ -670,7 +671,8 @@ type
     property ToastRelOID:Integer read FToastRelOID;
     property ACLListStr:string read FACLListStr;
     property PartitionedTable:boolean read FPartitionedTable;
-    property PartitionedTableType:string read FPartitionedTableType;
+    property PartitionedTypeName:string read FPartitionedTypeName;
+    property PartitionedType:TPGSQLPartitionType read FPartitionedType;
     property PartitionList:TPGTablePartitionList read FPartitionList;
   end;
 
@@ -1241,7 +1243,7 @@ uses
   rxlogging, rxdbutils,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
-  rxstrutils, pg_SqlParserUnit, pg_tasks, pgSQLEngineFTS;
+  rxstrutils, pg_tasks, pgSQLEngineFTS;
 
 type
   TSQLParamState = (spsNormal, spsNew, spsOld);
@@ -4603,8 +4605,9 @@ var
   UG:TDBObject;
   i, CntPK: Integer;
   F: TDBField;
-  FCmd: TPGSQLCreateTable;
+  FCmd, FCmdPart: TPGSQLCreateTable;
   C: TSQLConstraintItem;
+  PT: TPGTablePartition;
   //ACL: TStringList;
 begin
   if (State <> sdboCreate) and not Assigned(Fields) then
@@ -4667,6 +4670,31 @@ begin
     AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
   if FToastAutovacuumOptions.Enabled then
     FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+
+  if PartitionedTable then
+  begin
+    FCmd.TablePartition.PartitionType:=FPartitionedType;
+    S:=FPartitionedTypeName;
+    Copy2SymbDel(S, '(');
+    if (S<>'') and (S[Length(S)] = ')') then
+      Delete(S, Length(S), 1);
+    FCmd.TablePartition.Params.AddParam(S);
+
+    for PT in PartitionList do
+    begin
+      FCmdPart:=TPGSQLCreateTable.Create(nil);
+      FCmd.AddChild(FCmdPart);
+      FCmdPart.Name:=PT.Name;
+      //FCmdPart.SchemaName:='';
+      FCmdPart.PartitionOfData.PartitionTableName:=CaptionFullPatch;
+      case FPartitionedType of
+        ptRange:FCmdPart.PartitionOfData.PartType:=podtFromTo;
+        ptList:FCmdPart.PartitionOfData.PartType:=podtIn;
+        ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+      end;
+    end;
+  end;
+
 
   SQLLines.Add(FCmd.AsSQL);
 
@@ -5439,11 +5467,13 @@ var
 begin
   inherited RefreshObject;
   FACLListStr:='';
-  FPartitionedTableType:='';
+  FPartitionedTypeName:='';
   FPartitionedTable:=false;
   FStorageParameters.Clear;
   FAutovacuumOptions.Clear;
   FToastAutovacuumOptions.Clear;
+  FPartitionedType:=ptNone;
+
   FToastRelOID:=0;
   if State = sdboEdit then
   begin
@@ -5470,7 +5500,22 @@ begin
         begin
           FPartitionedTable:=Q.FieldByName('relkind').AsString = 'p';
           if FPartitionedTable then
-            FPartitionedTableType:=Q.FieldByName('partition_type').AsString;
+          begin
+            FPartitionedTypeName:=Trim(Q.FieldByName('partition_type').AsString);
+            if Copy(FPartitionedTypeName, 1, 5) = 'RANGE' then
+              FPartitionedType:=ptRange
+            else
+            if Copy(FPartitionedTypeName, 1, 4) = 'LIST' then
+              FPartitionedType:=ptList
+            else
+            if Copy(FPartitionedTypeName, 1, 4) = 'HASH' then
+              FPartitionedType:=ptHash
+            else
+              raise Exception.CreateFmt('Unknow partioton type - %s', [FPartitionedTypeName]);
+            //RANGE
+            //LIST (
+            //HASH
+          end;
         end;
       end;
     finally
