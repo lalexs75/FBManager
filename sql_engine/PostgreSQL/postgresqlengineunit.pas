@@ -7516,6 +7516,11 @@ begin
     else
       FieldSize:=(DS.FieldByName('atttypmod').AsInteger and $FFFF) - 4;
   end;
+
+  if (DS.FieldByName('attcollation').AsInteger > 0) then
+    FieldCollateName:=DS.FieldByName('collation_nspn').AsString +  '.' + DS.FieldByName('collation_name').AsString;
+
+
   FieldDefaultValue:=DS.FieldByName('adsrc').AsString;
 
   FFieldDescription:=DS.FieldByName('description').AsString;
