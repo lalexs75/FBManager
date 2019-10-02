@@ -2350,6 +2350,22 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'ALTER TABLE distributors SET TABLESPACE fasttablespace;'
         )
+      end    
+      item
+        Caption = 'CreateTable37'
+        Lines.Strings = (
+          'CREATE TABLE public.test_partitional3_list'
+          '('
+          '    test_partitional3_id integer NOT NULL,'
+          '    test_partitional3_code integer NOT NULL,'
+          '    test_partitional3_name type_varchar_250_nullabe COLLATE pg_catalog."default",'
+          '    CONSTRAINT test_partitional3_list_pkey PRIMARY KEY (test_partitional3_id, test_partitional3_code)'
+          ') PARTITION BY LIST (test_partitional3_code)'
+          'WITH ('
+          '    OIDS = FALSE'
+          ')'
+          'TABLESPACE pg_default;'
+        )
       end>
     Left = 25
     Top = 248
