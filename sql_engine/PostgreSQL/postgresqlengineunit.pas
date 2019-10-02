@@ -4598,13 +4598,11 @@ begin
 end;
 
 var
-  S, S1: string;
-  PkRec, P:TPrimaryKeyRecord;
+  S: string;
+  P:TPrimaryKeyRecord;
   FkRec:TForeignKeyRecord;
-  ChkRec:TTableCheckConstraintRecord;
   UG:TDBObject;
   i, CntPK: Integer;
-  F: TDBField;
   FCmd, FCmdPart: TPGSQLCreateTable;
   C: TSQLConstraintItem;
   PT: TPGTablePartition;

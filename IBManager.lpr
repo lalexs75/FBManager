@@ -132,7 +132,7 @@ uses
   SSHConnectionPluginConfigUnit,
   fbmSQLScriptRunQuestionUnit,
   fbmToolsNV,
-  fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit
+  fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit, fbmPGTablePartition_EditKeyUnit
 
   ;
 

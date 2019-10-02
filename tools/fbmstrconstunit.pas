@@ -423,7 +423,10 @@ resourcestring
   sPartitionKeys                    = 'Partition keys';
   sPartitionSections                = 'Partition sections';
   sInitialValue                     = 'Initial value';
-
+  sNone                             = 'None';
+  sPartitionKeyValue                = 'Partition key value';
+  sPartitionExpression              = 'Partition expression';
+  sTableField                       = 'Table field';
 
   sSchemeOwner                      = 'Scheme owner';
 

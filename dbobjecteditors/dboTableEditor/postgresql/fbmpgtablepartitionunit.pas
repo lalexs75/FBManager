@@ -73,6 +73,7 @@ type
     SpeedButton4: TSpeedButton;
     StaticText1: TStaticText;
     StaticText2: TStaticText;
+    procedure keyAddExecute(Sender: TObject);
   private
     procedure RefreshPage;
     procedure LoadSpr;
@@ -89,11 +90,30 @@ type
 
 implementation
 
-uses rxdbutils, fbmStrConstUnit, pgTypes, fbmTableEditorFieldsUnit;
+uses rxdbutils, fbmStrConstUnit, pgTypes, pg_SqlParserUnit,
+  fbmTableEditorFieldsUnit, fbmPGTablePartition_EditKeyUnit;
 
 {$R *.lfm}
 
 { TfbmPGTablePartitionPage }
+
+procedure TfbmPGTablePartitionPage.keyAddExecute(Sender: TObject);
+var
+  F: TfbmTableEditorFieldsFrame;
+begin
+  fbmPGTablePartition_EditKeyForm:=TfbmPGTablePartition_EditKeyForm.Create(Application);
+  fbmPGTablePartition_EditKeyForm.FEditorFrame.SQLEngine:=DBObject.OwnerDB;
+
+  F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+  if Assigned(F) then
+    FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
+
+  if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
+  begin
+
+  end;
+  fbmPGTablePartition_EditKeyForm.Free;
+end;
 
 procedure TfbmPGTablePartitionPage.RefreshPage;
 var
@@ -151,7 +171,7 @@ class function TfbmPGTablePartitionPage.PageExists(ADBObject: TDBObject
   ): Boolean;
 begin
   Result:=Assigned(ADBObject) and (ADBObject.OwnerDB is TSQLEnginePostgre) and (TSQLEnginePostgre(ADBObject.OwnerDB).ServerVersion >= pgVersion10_0);
-  if Result then
+  if Result and (ADBObject.State = sdboEdit) then
     Result:=TPGTable(ADBObject).PartitionedTable;
 end;
 
@@ -175,7 +195,7 @@ end;
 function TfbmPGTablePartitionPage.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited ActionEnabled(PageAction);
+  Result:=PageAction in [epaAdd, epaEdit, epaDelete, epaRefresh, epaPrint, epaCompile];
 end;
 
 constructor TfbmPGTablePartitionPage.CreatePage(TheOwner: TComponent;
@@ -195,8 +215,9 @@ begin
 
 //  StaticText1.Caption:=;
 
-  ComboBox1.Items[0]:=sList;
-  ComboBox1.Items[1]:=sRange;
+  ComboBox1.Items[0]:=sNone;
+  ComboBox1.Items[1]:=sList;
+  ComboBox1.Items[2]:=sRange;
   keyAdd.Caption:=sAdd;
   keyRemove.Caption:=sRemove;
 
@@ -206,8 +227,22 @@ end;
 
 function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
+var
+  FCmd: TPGSQLCreateTable;
 begin
   Result:=true;
+  if DBObject.State = sdboCreate then
+  begin
+    if ComboBox1.ItemIndex > 0 then
+    begin
+      FCmd:=TPGSQLCreateTable(ASQLObject);
+      case ComboBox1.ItemIndex of
+        1:FCmd.TablePartition.PartitionType:=ptList;
+        2:FCmd.TablePartition.PartitionType:=ptRange;
+        3:FCmd.TablePartition.PartitionType:=ptHash;
+      end;
+    end;
+  end;
 end;
 
 end.

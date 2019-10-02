@@ -1,0 +1,83 @@
+object fbmPGTablePartition_EditKeyForm: TfbmPGTablePartition_EditKeyForm
+  Left = 578
+  Height = 288
+  Top = 327
+  Width = 427
+  Caption = 'Partition key value'
+  ClientHeight = 288
+  ClientWidth = 427
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+  object RadioButton1: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 23
+    Top = 6
+    Width = 90
+    BorderSpacing.Around = 6
+    Caption = 'Table field'
+    Checked = True
+    TabOrder = 0
+  end
+  object RadioButton2: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 75
+    Width = 145
+    BorderSpacing.Around = 6
+    Caption = 'Partition expression'
+    TabOrder = 1
+  end
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 126
+    Top = 104
+    Width = 415
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    TabOrder = 2
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = RadioButton1
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 35
+    Width = 409
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 3
+    Text = 'ComboBox1'
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 236
+    Width = 415
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 4
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+end

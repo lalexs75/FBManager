@@ -3164,6 +3164,10 @@ msgstr ""
 msgid "No handler"
 msgstr ""
 
+#: fbmstrconstunit.snone
+msgid "None"
+msgstr ""
+
 #: fbmstrconstunit.snontransportable
 msgid "Non Transportable"
 msgstr ""
@@ -3606,8 +3610,16 @@ msgstr ""
 msgid "Partition"
 msgstr ""
 
+#: fbmstrconstunit.spartitionexpression
+msgid "Partition expression"
+msgstr ""
+
 #: fbmstrconstunit.spartitionkeys
 msgid "Partition keys"
+msgstr ""
+
+#: fbmstrconstunit.spartitionkeyvalue
+msgid "Partition key value"
 msgstr ""
 
 #: fbmstrconstunit.spartitions
@@ -4909,6 +4921,10 @@ msgstr ""
 
 #: fbmstrconstunit.stableeditor
 msgid "Table editor"
+msgstr ""
+
+#: fbmstrconstunit.stablefield
+msgid "Table field"
 msgstr ""
 
 #: fbmstrconstunit.stablename

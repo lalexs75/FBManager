@@ -534,7 +534,6 @@ msgid "Comment selection"
 msgstr "Комментировать выделенное"
 
 #: fbmstrconstunit.scommentcmdhint
-#, fuzzy
 msgctxt "fbmstrconstunit.scommentcmdhint"
 msgid "Comment selection"
 msgstr "Комментировать выделенное"
@@ -1205,7 +1204,6 @@ msgid "Remove selection"
 msgstr "Удалить выделенное"
 
 #: fbmstrconstunit.sdeletecmdhint
-#, fuzzy
 msgctxt "fbmstrconstunit.sdeletecmdhint"
 msgid "Remove selection"
 msgstr "Удалить выделенное"
@@ -2404,7 +2402,7 @@ msgstr "Часы"
 
 #: fbmstrconstunit.shtmlfilesfilter
 msgid "Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*"
-msgstr ""
+msgstr "Файлы HTML (*.html)|*.html|Файлы HTML (*.htm)|*.htm|Все файлы (*.*)|*.*"
 
 #: fbmstrconstunit.sid
 msgctxt "fbmstrconstunit.sid"
@@ -3287,6 +3285,10 @@ msgstr "Не собирать мусор"
 msgid "No handler"
 msgstr "Без обработчика"
 
+#: fbmstrconstunit.snone
+msgid "None"
+msgstr "Нет"
+
 #: fbmstrconstunit.snontransportable
 msgctxt "fbmstrconstunit.snontransportable"
 msgid "Non Transportable"
@@ -3620,6 +3622,7 @@ msgid "Open file"
 msgstr "Открыть файл"
 
 #: fbmstrconstunit.sopenfilehint
+msgctxt "fbmstrconstunit.sopenfilehint"
 msgid "Open file"
 msgstr "Открыть файл"
 
@@ -3737,9 +3740,17 @@ msgstr "Значение параметра"
 msgid "Partition"
 msgstr "Раздел"
 
+#: fbmstrconstunit.spartitionexpression
+msgid "Partition expression"
+msgstr "Выражение партицирования"
+
 #: fbmstrconstunit.spartitionkeys
 msgid "Partition keys"
 msgstr "Ключ раздела"
+
+#: fbmstrconstunit.spartitionkeyvalue
+msgid "Partition key value"
+msgstr "Ключ партицирования"
 
 #: fbmstrconstunit.spartitions
 msgid "Partitions"
@@ -5079,6 +5090,10 @@ msgctxt "fbmstrconstunit.stableeditor"
 msgid "Table editor"
 msgstr "Редактор таблицы"
 
+#: fbmstrconstunit.stablefield
+msgid "Table field"
+msgstr "Поле таблицы"
+
 #: fbmstrconstunit.stablename
 msgctxt "fbmstrconstunit.stablename"
 msgid "Table name"
@@ -5971,4 +5986,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

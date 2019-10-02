@@ -30,14 +30,13 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
-    ItemIndex = 0
     Items.Strings = (
+      'None'
       'List'
       'Range'
     )
     Style = csDropDownList
     TabOrder = 0
-    Text = 'List'
   end
   object RxDBGrid1: TRxDBGrid[2]
     AnchorSideLeft.Control = Owner
@@ -497,6 +496,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Category = 'Partition keys'
       Caption = 'Add'
       ImageIndex = 12
+      OnExecute = keyAddExecute
     end
     object keyRemove: TAction
       Category = 'Partition keys'
