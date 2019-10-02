@@ -46,6 +46,7 @@ type
   TPGMatView = class;
   TPGIndex = class;
   TPGTableSpace = class;
+  TPGTablePartitionListEnumerator = class;
 
   { Формальное определение тригера }
   TPGTrigerDef = record
@@ -516,6 +517,49 @@ type
     property FreezeTableAge:Int64 read FFreezeTableAge write FFreezeTableAge; //autovacuum_freeze_table_age=150000000
   end;
 
+  { TPGTablePartition }
+
+  TPGTablePartition = class
+  private
+    FExpression: string;
+    FName: string;
+    FOID: integer;
+  public
+    property OID:integer read FOID;
+    property Name:string read FName;
+    property Expression:string read FExpression;
+  end;
+
+  { TPGTablePartitionList }
+
+  TPGTablePartitionList = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: integer): TPGTablePartition;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Clear;
+    function Add(AOID:Integer):TPGTablePartition;
+    function GetEnumerator: TPGTablePartitionListEnumerator;
+    property Count:integer read GetCount;
+    property Items[AIndex:integer]:TPGTablePartition read GetItems; default;
+  end;
+
+  { TPGTablePartitionListEnumerator }
+
+  TPGTablePartitionListEnumerator = class
+  private
+    FList: TPGTablePartitionList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGTablePartitionList);
+    function GetCurrent: TPGTablePartition;
+    function MoveNext: Boolean;
+    property Current: TPGTablePartition read GetCurrent;
+  end;
+
   { TPGTable }
 
   TPGTable = class(TDBTableObject)
@@ -524,6 +568,7 @@ type
     FAutovacuumOptions: TPGAutovacuumOptions;
     FPartitionedTable: boolean;
     FPartitionedTableType: string;
+    FPartitionList: TPGTablePartitionList;
     FRuleList: TPGRuleList;
     FSchema:TPGSchema;
     FOID:integer;
@@ -626,6 +671,7 @@ type
     property ACLListStr:string read FACLListStr;
     property PartitionedTable:boolean read FPartitionedTable;
     property PartitionedTableType:string read FPartitionedTableType;
+    property PartitionList:TPGTablePartitionList read FPartitionList;
   end;
 
   TPGForeignTable = class(TDBTableObject)
@@ -1219,6 +1265,72 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGTablePartitionListEnumerator }
+
+constructor TPGTablePartitionListEnumerator.Create(AList: TPGTablePartitionList
+  );
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGTablePartitionListEnumerator.GetCurrent: TPGTablePartition;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGTablePartitionListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGTablePartitionList }
+
+function TPGTablePartitionList.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGTablePartitionList.GetItems(AIndex: integer): TPGTablePartition;
+begin
+  Result:=TPGTablePartition(FList[AIndex]);
+end;
+
+constructor TPGTablePartitionList.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGTablePartitionList.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TPGTablePartitionList.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TPGTablePartition(FList[i]).Free;
+  FList.Clear;
+end;
+
+function TPGTablePartitionList.Add(AOID: Integer): TPGTablePartition;
+begin
+  Result:=TPGTablePartition.Create;
+  FList.Add(Result);
+  Result.FOID:=AOID;
+end;
+
+function TPGTablePartitionList.GetEnumerator: TPGTablePartitionListEnumerator;
+begin
+  Result:=TPGTablePartitionListEnumerator.Create(Self);
 end;
 
 { TPGForeignTable }
@@ -5212,6 +5324,7 @@ begin
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
   FStorageParameters:=TStringList.Create;
+  FPartitionList:=TPGTablePartitionList.Create;
 
   UITableOptions:=[utReorderFields, utRenameTable,
      utAddFields, utEditField, utDropFields,
@@ -5255,6 +5368,7 @@ begin
   FreeAndNil(ZUpdateSQL);
   FreeAndNil(FInhTables);
   FreeAndNil(FRuleList);
+  FreeAndNil(FPartitionList);
   FreeAndNil(FCheckConstraints);
   FreeAndNil(FStorageParameters);
   FreeAndNil(FAutovacuumOptions);
@@ -5436,31 +5550,23 @@ end;
 procedure TPGTable.RefreshPartitionals;
 var
   FQuery: TZQuery;
+  P: TPGTablePartition;
 begin
   if State = sdboCreate then exit;
 
-  //FInhTables.Clear;
+  FPartitionList.Clear;
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGTableInerited['RelationPartitions']);
   try
     FQuery.ParamByName('inhparent').AsInteger:=FOID;
     FQuery.Open;
-(*    while not FQuery.Eof do
+    while not FQuery.Eof do
     begin
-      O:=FQuery.FieldByName('inhrelid').AsInteger;
-
-      for i:=0 to TSQLEnginePostgre(OwnerDB).SchemasRoot.CountGroups - 1 do
-      begin
-        Sh:=TSQLEnginePostgre(OwnerDB).SchemasRoot.Groups[i] as TPGSchema;
-        Pgt:=Sh.TablesRoot.PGTableByOID(O);
-        if Assigned(Pgt) then
-        begin
-          //FInhTables.Add(Pgt);
-          break;
-        end;
-      end;
+      P:=PartitionList.Add(FQuery.FieldByName('oid').AsInteger);
+      P.FName:=FQuery.FieldByName('relname').AsString;
+      P.FExpression:=FQuery.FieldByName('partition_value').AsString;
       FQuery.Next;
-    end; *)
+    end;
   finally
     FQuery.Free;
   end;
