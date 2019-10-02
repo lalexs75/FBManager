@@ -578,6 +578,7 @@ type
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
 
     procedure RefreshInheritedTables;
+    procedure RefreshPartitionals;
     function InheritedTablesCount:integer;
     function InheritedTable(AIndex:integer):TPGTable;
 
@@ -5379,6 +5380,9 @@ begin
     RefreshFieldList;
     RefreshInheritedTables;
     FRuleList.RuleListRefresh;
+
+    if PartitionedTable then
+      RefreshPartitionals;
   end;
 end;
 
@@ -5424,6 +5428,39 @@ begin
       end;
       FQuery.Next;
     end;
+  finally
+    FQuery.Free;
+  end;
+end;
+
+procedure TPGTable.RefreshPartitionals;
+var
+  FQuery: TZQuery;
+begin
+  if State = sdboCreate then exit;
+
+  //FInhTables.Clear;
+
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGTableInerited['RelationPartitions']);
+  try
+    FQuery.ParamByName('inhparent').AsInteger:=FOID;
+    FQuery.Open;
+(*    while not FQuery.Eof do
+    begin
+      O:=FQuery.FieldByName('inhrelid').AsInteger;
+
+      for i:=0 to TSQLEnginePostgre(OwnerDB).SchemasRoot.CountGroups - 1 do
+      begin
+        Sh:=TSQLEnginePostgre(OwnerDB).SchemasRoot.Groups[i] as TPGSchema;
+        Pgt:=Sh.TablesRoot.PGTableByOID(O);
+        if Assigned(Pgt) then
+        begin
+          //FInhTables.Add(Pgt);
+          break;
+        end;
+      end;
+      FQuery.Next;
+    end; *)
   finally
     FQuery.Free;
   end;

@@ -2937,7 +2937,7 @@ var
     TD51_3, TD51_3_1, TD51_3_11, TD51_3_12, TD51_3_13, TD51_4,
     TD51_4_1, TD51_4_11, TD51_4_12, TD51_5, TD51_5_1, TD51_6,
     TGenerated, TGenerated1, TGenerated2, TGenerated3,
-    TD_Array1, TD_Array2{, TDefault1}: TSQLTokenRecord;
+    TD_Array1, TD_Array2{, TDefault1}, TColat1_1: TSQLTokenRecord;
   i: Integer;
 begin
   if Length(AFirstTokens) = 0 then
@@ -3084,6 +3084,8 @@ begin
 
       TD_Array2, TSymb, TSymb1], 'COLLATE', [toOptional]);
     TColat1:=ACmd.AddSQLTokens(stIdentificator, TColat, '', [], 14 + TagBase);
+    TColat1_1:=ACmd.AddSQLTokens(stSymbol, TColat1, '.', [], 14 + TagBase);
+    TColat1_1:=ACmd.AddSQLTokens(stIdentificator, TColat1_1, '', [], 14 + TagBase);
 
 ////    [ COLLATE collation ]
 
@@ -3093,7 +3095,7 @@ begin
       TD32, TD33, TD34, TD35, TD36, TD37, TD38, TD39, TD40, TD41, TD42, TD43,
       TD44, TD45, TD45_1, TD46, TD46_1, TD47, TD48, TD49, TD50, TD50_1,
       TD_Array2, TSymb, TSymb1,
-      TColat1], 'CONSTRAINT', [toOptional]);
+      TColat1, TColat1_1], 'CONSTRAINT', [toOptional]);
     TConst1:=ACmd.AddSQLTokens(stIdentificator, TConst, '', [], 6 + TagBase);
 
     TNN:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
@@ -3111,7 +3113,7 @@ begin
       TD51_6,
 
       TD_Array2, TSymb, TSymb1,
-      TConst1, TColat1], 'NOT', [toOptional]);
+      TConst1, TColat1, TColat1_1], 'NOT', [toOptional]);
       TNN1:=ACmd.AddSQLTokens(stKeyword, TNN, 'NULL', [], 7 + TagBase);
     TNULL:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
       TD8, TD9, TD10, TD11, TD12, TD13_1, TD14, TD15, TD16, TD17, TD18, TD19,
@@ -3128,7 +3130,7 @@ begin
       TD51_6,
 
       TD_Array2, TSymb, TSymb1,
-      TConst1, TColat1], 'NULL', [toOptional], 8 + TagBase);
+      TConst1, TColat1, TColat1_1], 'NULL', [toOptional], 8 + TagBase);
 
     TCheck:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
       TD8, TD9, TD10, TD11, TD12, TD13_1, TD14, TD15, TD16, TD17, TD18, TD19,
@@ -3145,7 +3147,7 @@ begin
       TD51_6,
 
       TD_Array2, TSymb, TSymb1,
-      TConst1, TColat1, TNN1], 'CHECK', [toOptional]);
+      TConst1, TColat1, TColat1_1, TNN1], 'CHECK', [toOptional]);
       TCheck1:=ACmd.AddSQLTokens(stSymbol, TCheck, '(', [], 9 + TagBase);
 
     TDefault:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
@@ -3163,10 +3165,9 @@ begin
       TD51_6,
 
       TD_Array2, TSymb, TSymb1,
-      TConst1, TColat1, TCheck1, TNN1], 'DEFAULT', [toOptional], 27 + TagBase);
+      TConst1, TColat1, TColat1_1, TCheck1, TNN1], 'DEFAULT', [toOptional], 27 + TagBase);
       //TDefault1:=ACmd.AddSQLTokens(stString, TDefault, '', [], 33 + TagBase);
 
-//    TColat1.AddChildToken([TNN, TNULL,
     TNN1.AddChildToken([TColat]);
     TNULL.AddChildToken([TColat]);
     TCheck1.AddChildToken([TColat]);
@@ -3190,7 +3191,7 @@ begin
 
         TD_Array2, TSymb, TSymb1,
         TNN1, TNULL, TCheck1, TDefault,
-        TConst1, TColat1, TDD1, TDD2], 'PRIMARY', [toOptional]);
+        TConst1, TColat1, TColat1_1, TDD1, TDD2], 'PRIMARY', [toOptional]);
         TPK1:=ACmd.AddSQLTokens(stSymbol, TPK, 'KEY', [], 10 + TagBase);
 
       TUNQ:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
@@ -3209,7 +3210,7 @@ begin
 
         TD_Array2, TSymb, TSymb1,
         TNN1, TNULL, TCheck1, TDefault,
-        TConst1, TColat1, TDD1, TDD2], 'UNIQUE', [toOptional], 11 + TagBase);
+        TConst1, TColat1, TColat1_1, TDD1, TDD2], 'UNIQUE', [toOptional], 11 + TagBase);
 
       TRef:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
         TD8, TD9, TD10, TD11, TD12, TD13_1, TD14, TD15, TD16, TD17, TD18, TD19,
@@ -3226,7 +3227,7 @@ begin
         TD51_6,
 
         TD_Array2, TSymb, TSymb1,
-        TConst1, TColat1, TPK1, TUNQ, TDefault,
+        TConst1, TColat1, TColat1_1, TPK1, TUNQ, TDefault,
         TNN1, TNULL, TCheck1, TDD1, TDD2], 'REFERENCES', [toOptional]);
         TRef1:=ACmd.AddSQLTokens(stIdentificator, TRef, '', [], 12 + TagBase);
         TRef1_2:=ACmd.AddSQLTokens(stSymbol, TRef1, '.', []);
@@ -3288,7 +3289,7 @@ begin
 
       TSymb, TSymb1,
       TNN1, TNULL, TCheck1, TDefault, TPK1, TUNQ,
-      TConst1, TColat1, TDD1, TDD2], 'GENERATED', [toOptional], 28 + TagBase);
+      TConst1, TColat1, TColat1_1, TDD1, TDD2], 'GENERATED', [toOptional], 28 + TagBase);
         TGenerated1:=ACmd.AddSQLTokens(stKeyword, TGenerated, 'ALWAYS', [], 29 + TagBase);
         TGenerated2:=ACmd.AddSQLTokens(stKeyword, TGenerated, 'BY', []);
         TGenerated2:=ACmd.AddSQLTokens(stKeyword, TGenerated2, 'DEFAULT', [], 30 + TagBase);
@@ -3375,6 +3376,7 @@ begin
     TNULL.AddChildToken(AEndTokens);
     TCheck1.AddChildToken(AEndTokens);
     TColat1.AddChildToken(AEndTokens);
+    TColat1_1.AddChildToken(AEndTokens);
     TDefault.AddChildToken(AEndTokens);
   end;
 
@@ -9225,7 +9227,7 @@ begin
     107:NotNull:=true;
     108:IsNull:=true;
     109:CheckExpression:=ASQLParser.GetToBracket(')');
-    114:CollationName:=AWord;
+    114:CollationName:=CollationName + AWord;
     127:DefaultValue:=GetToNextToken(ASQLParser, AChild);
   end;
 end;
@@ -16026,6 +16028,8 @@ begin
        end;
    113:if Assigned(FCurField) and Assigned(FCurConst) then
          FCurConst.ForeignFields.AddParam(AWord);
+   114:if Assigned(FCurField) then
+         FCurField.Collate:=FCurField.Collate + AWord;
    115:if Assigned(FCurConst) then
        FCurConst.ForeignTable:=FCurConst.ForeignTable + '.' + AWord;
    127:if Assigned(FCurField) then
@@ -16066,6 +16070,9 @@ begin
     if F.IsLocal then
     begin
       SF:=SF + '  ' +F.Caption + ' ' + F.FullTypeName;
+
+      if F.Collate <> '' then SF:=SF + ' COLLATE '+F.Collate;
+
       if F.ArrayDimension.Count>0 then
       begin
         F.ArrayDimension.ArrayFormat:=fafPostgreSQL;
@@ -16241,9 +16248,6 @@ begin
   if InheritsTables.Count > 0 then
     S:= S + LineEnding + 'INHERITS (' + InheritsTables.AsString + ')';
 
-  if TableSpace <> '' then
-    S:=S + LineEnding + 'TABLESPACE ' + TableSpace;
-
   case OnCommitAction of
     caPreserveRows:S:=S + LineEnding + 'ON COMMIT PRESERVE ROWS';
     caDeleteRows:S:=S + LineEnding + 'ON COMMIT DELETE ROWS';
@@ -16269,6 +16273,9 @@ begin
     end;
     S:=S + '(' + S1 + ')';
   end;
+
+  if TableSpace <> '' then
+    S:=S + LineEnding + 'TABLESPACE ' + TableSpace;
 
   S1:='';
   if StorageParameters.Count = 0 then
@@ -18419,6 +18426,8 @@ begin
           FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + ' ' + AWord;
     104:if Assigned(FCurOperator) then
           FCurOperator.Field.TypeLen:=StrToInt(AWord);
+    114:if Assigned(FCurOperator) then
+          FCurOperator.Field.Collate:=FCurOperator.Field.Collate + AWord;
     126:if Assigned(FCurOperator) then
           FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + AWord;
     127:if Assigned(FCurOperator) then

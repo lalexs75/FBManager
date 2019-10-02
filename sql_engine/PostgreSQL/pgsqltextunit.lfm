@@ -1942,7 +1942,7 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_inherits.inhseqno'
           'from'
           '  pg_inherits'
-          '  inner join pg_class on (pg_inherits.oid = pg_inherits.inhrelid)'
+          '  inner join pg_class on (pg_class.oid = pg_inherits.inhrelid)'
           'where'
           '    pg_inherits.inhparent = :inhparent'
           '  and'
@@ -1950,6 +1950,24 @@ object pgSqlTextModule: TpgSqlTextModule
           'order by'
           '  pg_inherits.inhseqno'
           ''
+        )
+      end    
+      item
+        Caption = 'RelationPartitions'
+        Lines.Strings = (
+          'select'
+          '  pg_class.oid,'
+          '  pg_class.relname,'
+          '  pg_get_expr(pg_class.relpartbound, pg_class.oid) AS partition_value'
+          'from'
+          '  pg_inherits'
+          '  inner join pg_class on (pg_inherits.inhrelid = pg_class.oid)'
+          'where'
+          '    pg_inherits.inhparent = :inhparent'
+          '  and'
+          '    pg_class.relispartition'
+          'order by'
+          '  pg_class.relname'
         )
       end>
     Left = 162
