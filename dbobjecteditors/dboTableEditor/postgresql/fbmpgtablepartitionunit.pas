@@ -34,6 +34,7 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    sSectionEdit: TAction;
     keyEdit: TAction;
     Edit1: TEdit;
     MenuItem1: TMenuItem;
@@ -45,6 +46,7 @@ type
     MenuItem7: TMenuItem;
     rxKeysExpression: TStringField;
     rxKeysKeyType: TLongintField;
+    rxSectionDEFAULT: TBooleanField;
     rxSectionH_MODULUS: TStringField;
     rxSectionH_REMINDER: TStringField;
     rxSectionNAME: TStringField;
@@ -74,9 +76,11 @@ type
     SpeedButton4: TSpeedButton;
     StaticText1: TStaticText;
     StaticText2: TStaticText;
+    procedure ComboBox1Change(Sender: TObject);
     procedure keyAddExecute(Sender: TObject);
     procedure rxKeysKeyTypeGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
+    procedure rxSectionAfterInsert(DataSet: TDataSet);
   private
     procedure RefreshPage;
     procedure LoadSpr;
@@ -138,6 +142,16 @@ begin
   fbmPGTablePartition_EditKeyForm.Free;
 end;
 
+procedure TfbmPGTablePartitionPage.ComboBox1Change(Sender: TObject);
+begin
+  RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=ComboBox1.ItemIndex = 1;
+  RxDBGrid2.ColumnByFieldName('R_TO').Visible:=ComboBox1.ItemIndex = 1;
+
+  RxDBGrid2.ColumnByFieldName('R_IN').Visible:=ComboBox1.ItemIndex = 2;
+
+  RxDBGrid2.ColumnByFieldName('H_MODULUS').Visible:=ComboBox1.ItemIndex = 3;
+end;
+
 procedure TfbmPGTablePartitionPage.rxKeysKeyTypeGetText(Sender: TField;
   var aText: string; DisplayText: Boolean);
 begin
@@ -145,6 +159,11 @@ begin
     aText:=sField
   else
     aText:=sExpression;
+end;
+
+procedure TfbmPGTablePartitionPage.rxSectionAfterInsert(DataSet: TDataSet);
+begin
+  rxSectionDEFAULT.AsBoolean:=false;
 end;
 
 procedure TfbmPGTablePartitionPage.RefreshPage;
@@ -245,7 +264,16 @@ begin
   DividerBevel1.Caption:=sPartitionKeys;
   DividerBevel2.Caption:=sPartitionSections;
 
-//  StaticText1.Caption:=;
+  RxDBGrid2.ColumnByFieldName('NAME').Title.Caption:=sSectionName;
+  RxDBGrid2.ColumnByFieldName('R_FROM').Title.Caption:=sFrom;
+  RxDBGrid2.ColumnByFieldName('R_TO').Title.Caption:=sTo;
+  RxDBGrid2.ColumnByFieldName('R_IN').Title.Caption:=sIn;
+  RxDBGrid2.ColumnByFieldName('DEFAULT').Title.Caption:=sDefault;
+
+//  RxDBGrid2.ColumnByFieldName('H_MODULUS').Title.Caption:=ComboBox1.ItemIndex = 3;
+//  RxDBGrid2.ColumnByFieldName('H_REMINDER').Title.Caption:=ComboBox1.ItemIndex = 3;
+
+  //  StaticText1.Caption:=;
 
   ComboBox1.Items[0]:=sNone;
   ComboBox1.Items[1]:=sRange;

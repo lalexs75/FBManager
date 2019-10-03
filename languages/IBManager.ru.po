@@ -2188,6 +2188,10 @@ msgstr ""
 msgid "Age at which VACUUM should scan whole table to freeze tuples"
 msgstr ""
 
+#: fbmstrconstunit.sfrom
+msgid "From"
+msgstr ""
+
 #: fbmstrconstunit.sfromdate
 msgctxt "fbmstrconstunit.sfromdate"
 msgid "From date"
@@ -2458,6 +2462,10 @@ msgstr "Столбцы для импорта"
 #, object-pascal-format
 msgid "Import from file \"%s\""
 msgstr "Импорт из файла \"%s\""
+
+#: fbmstrconstunit.sin
+msgid "In"
+msgstr ""
 
 #: fbmstrconstunit.sincludeallfrom
 #, object-pascal-format
@@ -4512,6 +4520,10 @@ msgstr "Искать только в &выделенном"
 msgid "&Whole words only"
 msgstr "&Только целые слова"
 
+#: fbmstrconstunit.ssectionname
+msgid "Section name"
+msgstr ""
+
 #: fbmstrconstunit.ssecurity
 msgctxt "fbmstrconstunit.ssecurity"
 msgid "Security"
@@ -5237,6 +5249,10 @@ msgstr "Время"
 #: fbmstrconstunit.stimestamp
 msgid "TimeStamp"
 msgstr "ДатаВремя"
+
+#: fbmstrconstunit.sto
+msgid "To"
+msgstr ""
 
 #: fbmstrconstunit.stoastautovacuumenabled
 msgctxt "fbmstrconstunit.stoastautovacuumenabled"

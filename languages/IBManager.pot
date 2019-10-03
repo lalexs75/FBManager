@@ -2106,6 +2106,10 @@ msgstr ""
 msgid "Age at which VACUUM should scan whole table to freeze tuples"
 msgstr ""
 
+#: fbmstrconstunit.sfrom
+msgid "From"
+msgstr ""
+
 #: fbmstrconstunit.sfromdate
 msgid "From date"
 msgstr ""
@@ -2368,6 +2372,10 @@ msgstr ""
 #: fbmstrconstunit.simportfromfile
 #, object-pascal-format
 msgid "Import from file \"%s\""
+msgstr ""
+
+#: fbmstrconstunit.sin
+msgid "In"
 msgstr ""
 
 #: fbmstrconstunit.sincludeallfrom
@@ -4358,6 +4366,10 @@ msgstr ""
 msgid "&Whole words only"
 msgstr ""
 
+#: fbmstrconstunit.ssectionname
+msgid "Section name"
+msgstr ""
+
 #: fbmstrconstunit.ssecurity
 msgid "Security"
 msgstr ""
@@ -5057,6 +5069,10 @@ msgstr ""
 
 #: fbmstrconstunit.stimestamp
 msgid "TimeStamp"
+msgstr ""
+
+#: fbmstrconstunit.sto
+msgid "To"
 msgstr ""
 
 #: fbmstrconstunit.stoastautovacuumenabled

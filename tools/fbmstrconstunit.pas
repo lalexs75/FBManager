@@ -423,12 +423,16 @@ resourcestring
   sPartitionType                    = 'Partition type';
   sPartitionKeys                    = 'Partition keys';
   sPartitionSections                = 'Partition sections';
+  sSectionName                      = 'Section name';
   sInitialValue                     = 'Initial value';
   sNone                             = 'None';
   sPartitionKeyValue                = 'Partition key value';
   sPartitionExpression              = 'Partition expression';
   sTableField                       = 'Table field';
   sInvalidPartitionExpressison      = 'Invalid partition expressison';
+  sFrom                             = 'From';
+  sTo                               = 'To';
+  sIn                               = 'In';
 
   sSchemeOwner                      = 'Scheme owner';
 

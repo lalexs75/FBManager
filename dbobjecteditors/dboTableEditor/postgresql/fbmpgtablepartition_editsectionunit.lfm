@@ -1,0 +1,9 @@
+object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
+  Left = 335
+  Height = 240
+  Top = 137
+  Width = 320
+  Caption = 'fbmPGTablePartition_EditSectionForm'
+  Position = poScreenCenter
+  LCLVersion = '2.1.0.0'
+end

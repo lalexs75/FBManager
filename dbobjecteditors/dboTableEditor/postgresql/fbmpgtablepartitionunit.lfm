@@ -35,6 +35,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       'Range'
       'List'
     )
+    OnChange = ComboBox1Change
     Style = csDropDownList
     TabOrder = 0
   end
@@ -252,8 +253,24 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'NAME'
-        Width = 152
+        Width = 139
         FieldName = 'NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        SizePriority = 0
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Defaul'
+        Width = 80
+        FieldName = 'DEFAULT'
         EditButtons = <>
         Filter.DropDownRows = 0
         Filter.EmptyValue = '(Пусто)'
@@ -267,7 +284,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_FROM'
-        Width = 152
+        Width = 139
         FieldName = 'R_FROM'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -282,7 +299,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_TO'
-        Width = 152
+        Width = 139
         FieldName = 'R_TO'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -297,7 +314,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_IN'
-        Width = 152
+        Width = 139
         FieldName = 'R_IN'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -312,7 +329,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'H_MODULUS'
-        Width = 152
+        Width = 139
         FieldName = 'H_MODULUS'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -327,7 +344,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'H_REMINDER'
-        Width = 156
+        Width = 141
         FieldName = 'H_REMINDER'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -476,8 +493,8 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
   end
   object ActionList1: TActionList[13]
     Images = fbManagerMainForm.ImageListMain
-    Left = 288
-    Top = 80
+    Left = 360
+    Top = 98
     object keyAdd: TAction
       Category = 'Partition keys'
       Caption = 'Add'
@@ -489,11 +506,6 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Caption = 'Add'
       ImageIndex = 12
     end
-    object sSectionRemove: TAction
-      Category = 'Sections'
-      Caption = 'Remove'
-      ImageIndex = 13
-    end
     object keyEdit: TAction
       Tag = 1
       Category = 'Partition keys'
@@ -502,6 +514,17 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     end
     object keyRemove: TAction
       Category = 'Partition keys'
+      Caption = 'Remove'
+      ImageIndex = 13
+    end
+    object sSectionEdit: TAction
+      Tag = 1
+      Category = 'Sections'
+      Caption = 'Edit'
+      ImageIndex = 62
+    end
+    object sSectionRemove: TAction
+      Category = 'Sections'
       Caption = 'Remove'
       ImageIndex = 13
     end
@@ -519,7 +542,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       end>
     PacketRecords = 0
     Left = 221
-    Top = 96
+    Top = 98
     object rxKeysKeyType: TLongintField
       FieldKind = fkData
       FieldName = 'KeyType'
@@ -572,7 +595,12 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Name = 'H_REMINDER'
         DataType = ftString
         Size = 250
+      end    
+      item
+        Name = 'DEFAULT'
+        DataType = ftBoolean
       end>
+    AfterInsert = rxSectionAfterInsert
     PacketRecords = 0
     Left = 221
     Top = 232
@@ -635,6 +663,16 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ReadOnly = False
       Required = False
       Size = 250
+    end
+    object rxSectionDEFAULT: TBooleanField
+      FieldKind = fkData
+      FieldName = 'DEFAULT'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
     end
   end
   object PopupMenu1: TPopupMenu[16]
