@@ -1102,6 +1102,10 @@ msgstr ""
 msgid "< Default query set >"
 msgstr ""
 
+#: fbmstrconstunit.sdefaultsection
+msgid "Default section"
+msgstr ""
+
 #: fbmstrconstunit.sdefaultserverversion
 msgid "Default server version"
 msgstr ""

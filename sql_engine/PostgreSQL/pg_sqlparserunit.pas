@@ -189,20 +189,23 @@ type
 
   { TPGSQLPartitionOfData }
 
-  TPGSQLPartitionOfData = class
+  TPGSQLPartitionOfData = class(TSQLCommandAbstract)
   private
-    FOwner:TSQLCommandAbstract;
     FParams: TSQLFields;
     FPartitionTableName: string;
     FPartType: TPartitionOfDataType;
     FBaseCmd: Integer;
     FCurParam: TSQLParserField;
+    procedure InternalInitParserTree(AStartNode: TSQLTokenRecord; AEndNodes: array of TSQLTokenRecord; ABaseCmd: Integer;
+      AOwner: TSQLCommandAbstract);
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
-    constructor Create(AOwner:TSQLCommandAbstract);
+    constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
-    procedure Assign(ASource: TPGSQLPartitionOfData);
-    procedure Clear;
-    procedure InitParserTree(AStartNode: TSQLTokenRecord; AEndNodes: array of TSQLTokenRecord; ABaseCmd:Integer);
+    procedure Assign(ASource: TSQLObjectAbstract); override;
+    procedure Clear; override;
     procedure ParseToken(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
     function AsString:string;
 
@@ -3418,69 +3421,88 @@ begin
   FPartType:=podtNone;
 end;
 
-procedure TPGSQLPartitionOfData.InitParserTree(AStartNode: TSQLTokenRecord;
-  AEndNodes: array of TSQLTokenRecord; ABaseCmd: Integer);
+procedure TPGSQLPartitionOfData.InternalInitParserTree(
+  AStartNode: TSQLTokenRecord; AEndNodes: array of TSQLTokenRecord;
+  ABaseCmd: Integer; AOwner:TSQLCommandAbstract);
 //+1 -- +5
 var
   T1, TSymb, TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, T, T2_1, T2,
     TV_7, T4, T3: TSQLTokenRecord;
 begin
-  if not Assigned(FOwner) then
+  if not Assigned(AOwner) then
     raise Exception.Create('Not assigned owner');
   if (not Assigned(AStartNode)) or (Length(AEndNodes) = 0) then
     raise Exception.Create('Not assigned start or end node');
 
   FBaseCmd:=ABaseCmd;
-  T1:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'IN', [], ABaseCmd);
-    T1:=FOwner.AddSQLTokens(stSymbol, T1, '(', []);
-    TV_1:=FOwner.AddSQLTokens(stInteger, T1, '', [], ABaseCmd+1);
-    TV_2:=FOwner.AddSQLTokens(stFloat, T1, '', [], ABaseCmd+1);
-    TV_3:=FOwner.AddSQLTokens(stString, T1, '', [], ABaseCmd+1);
-    TV_4:=FOwner.AddSQLTokens(stKeyword, T1, 'TRUE', [], ABaseCmd+1);
-    TV_5:=FOwner.AddSQLTokens(stKeyword, T1, 'FALSE', [], ABaseCmd+1);
-    TV_6:=FOwner.AddSQLTokens(stKeyword, T1, 'NULL', [], ABaseCmd+1);
-    TSymb:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ',', [], ABaseCmd+2);
+  T1:=AOwner.AddSQLTokens(stKeyword, AStartNode, 'IN', [], ABaseCmd);
+    T1:=AOwner.AddSQLTokens(stSymbol, T1, '(', []);
+    TV_1:=AOwner.AddSQLTokens(stInteger, T1, '', [], ABaseCmd+1);
+    TV_2:=AOwner.AddSQLTokens(stFloat, T1, '', [], ABaseCmd+1);
+    TV_3:=AOwner.AddSQLTokens(stString, T1, '', [], ABaseCmd+1);
+    TV_4:=AOwner.AddSQLTokens(stKeyword, T1, 'TRUE', [], ABaseCmd+1);
+    TV_5:=AOwner.AddSQLTokens(stKeyword, T1, 'FALSE', [], ABaseCmd+1);
+    TV_6:=AOwner.AddSQLTokens(stKeyword, T1, 'NULL', [], ABaseCmd+1);
+    TSymb:=AOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ',', [], ABaseCmd+2);
       TSymb.AddChildToken([TV_1, TV_2, TV_3, TV_4, TV_5, TV_6]);
-    T1:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ')', [], ABaseCmd+2);
+    T1:=AOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6], ')', [], ABaseCmd+2);
     T1.AddChildToken(AEndNodes);
 
 
-  T2:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'FROM', [], ABaseCmd+3);
-    T:=FOwner.AddSQLTokens(stSymbol, T2, '(', []);
-    TV_1:=FOwner.AddSQLTokens(stInteger, T, '', [], ABaseCmd+1);
-    TV_2:=FOwner.AddSQLTokens(stFloat, T, '', [], ABaseCmd+1);
-    TV_3:=FOwner.AddSQLTokens(stString, T, '', [], ABaseCmd+1);
-    TV_4:=FOwner.AddSQLTokens(stKeyword, T, 'TRUE', [], ABaseCmd+1);
-    TV_5:=FOwner.AddSQLTokens(stKeyword, T, 'FALSE', [], ABaseCmd+1);
-    TV_6:=FOwner.AddSQLTokens(stKeyword, T, 'MINVALUE', [], ABaseCmd+1);
-    TV_7:=FOwner.AddSQLTokens(stKeyword, T, 'MAXVALUE', [], ABaseCmd+1);
-    T:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, TV_7], ')', [], ABaseCmd+2);
-  T2_1:=FOwner.AddSQLTokens(stKeyword, T, 'TO', []);
-    T:=FOwner.AddSQLTokens(stSymbol, T2_1, '(', []);
-    TV_1:=FOwner.AddSQLTokens(stInteger, T, '', [], ABaseCmd+1);
-    TV_2:=FOwner.AddSQLTokens(stFloat, T, '', [], ABaseCmd+1);
-    TV_3:=FOwner.AddSQLTokens(stString, T, '', [], ABaseCmd+1);
-    TV_4:=FOwner.AddSQLTokens(stKeyword, T, 'TRUE', [], ABaseCmd+1);
-    TV_5:=FOwner.AddSQLTokens(stKeyword, T, 'FALSE', [], ABaseCmd+1);
-    TV_6:=FOwner.AddSQLTokens(stKeyword, T, 'MINVALUE', [], ABaseCmd+1);
-    TV_7:=FOwner.AddSQLTokens(stKeyword, T, 'MAXVALUE', [], ABaseCmd+1);
-    T:=FOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, TV_7], ')', [], ABaseCmd+2);
+  T2:=AOwner.AddSQLTokens(stKeyword, AStartNode, 'FROM', [], ABaseCmd+3);
+    T:=AOwner.AddSQLTokens(stSymbol, T2, '(', []);
+    TV_1:=AOwner.AddSQLTokens(stInteger, T, '', [], ABaseCmd+1);
+    TV_2:=AOwner.AddSQLTokens(stFloat, T, '', [], ABaseCmd+1);
+    TV_3:=AOwner.AddSQLTokens(stString, T, '', [], ABaseCmd+1);
+    TV_4:=AOwner.AddSQLTokens(stKeyword, T, 'TRUE', [], ABaseCmd+1);
+    TV_5:=AOwner.AddSQLTokens(stKeyword, T, 'FALSE', [], ABaseCmd+1);
+    TV_6:=AOwner.AddSQLTokens(stKeyword, T, 'MINVALUE', [], ABaseCmd+1);
+    TV_7:=AOwner.AddSQLTokens(stKeyword, T, 'MAXVALUE', [], ABaseCmd+1);
+    T:=AOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, TV_7], ')', [], ABaseCmd+2);
+  T2_1:=AOwner.AddSQLTokens(stKeyword, T, 'TO', []);
+    T:=AOwner.AddSQLTokens(stSymbol, T2_1, '(', []);
+    TV_1:=AOwner.AddSQLTokens(stInteger, T, '', [], ABaseCmd+1);
+    TV_2:=AOwner.AddSQLTokens(stFloat, T, '', [], ABaseCmd+1);
+    TV_3:=AOwner.AddSQLTokens(stString, T, '', [], ABaseCmd+1);
+    TV_4:=AOwner.AddSQLTokens(stKeyword, T, 'TRUE', [], ABaseCmd+1);
+    TV_5:=AOwner.AddSQLTokens(stKeyword, T, 'FALSE', [], ABaseCmd+1);
+    TV_6:=AOwner.AddSQLTokens(stKeyword, T, 'MINVALUE', [], ABaseCmd+1);
+    TV_7:=AOwner.AddSQLTokens(stKeyword, T, 'MAXVALUE', [], ABaseCmd+1);
+    T:=AOwner.AddSQLTokens(stSymbol, [TV_1, TV_2, TV_3, TV_4, TV_5, TV_6, TV_7], ')', [], ABaseCmd+2);
     T.AddChildToken(AEndNodes);
 
-  T3:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'WITH', [], 4);
-    T:=FOwner.AddSQLTokens(stSymbol, T3, '(', []);
-    TV_1:=FOwner.AddSQLTokens(stKeyword, T, 'MODULUS', []);
-    TV_2:=FOwner.AddSQLTokens(stInteger, TV_1, '', [], ABaseCmd+1);
-    TV_3:=FOwner.AddSQLTokens(stFloat, TV_1, '', [], ABaseCmd+1);
-    TSymb:=FOwner.AddSQLTokens(stSymbol, [TV_2, TV_3], ',', [], ABaseCmd+2);
-    TV_1:=FOwner.AddSQLTokens(stKeyword, TSymb, 'REMAINDER', []);
-    TV_2:=FOwner.AddSQLTokens(stInteger, TV_1, '', [], ABaseCmd+1);
-    TV_3:=FOwner.AddSQLTokens(stFloat, TV_1, '', [], ABaseCmd+1);
-    T:=FOwner.AddSQLTokens(stSymbol, [TV_2, TV_3], ')', [], ABaseCmd+2);
+  T3:=AOwner.AddSQLTokens(stKeyword, AStartNode, 'WITH', [], 4);
+    T:=AOwner.AddSQLTokens(stSymbol, T3, '(', []);
+    TV_1:=AOwner.AddSQLTokens(stKeyword, T, 'MODULUS', []);
+    TV_2:=AOwner.AddSQLTokens(stInteger, TV_1, '', [], ABaseCmd+1);
+    TV_3:=AOwner.AddSQLTokens(stFloat, TV_1, '', [], ABaseCmd+1);
+    TSymb:=AOwner.AddSQLTokens(stSymbol, [TV_2, TV_3], ',', [], ABaseCmd+2);
+    TV_1:=AOwner.AddSQLTokens(stKeyword, TSymb, 'REMAINDER', []);
+    TV_2:=AOwner.AddSQLTokens(stInteger, TV_1, '', [], ABaseCmd+1);
+    TV_3:=AOwner.AddSQLTokens(stFloat, TV_1, '', [], ABaseCmd+1);
+    T:=AOwner.AddSQLTokens(stSymbol, [TV_2, TV_3], ')', [], ABaseCmd+2);
     T.AddChildToken(AEndNodes);
 
-(*  T4:=FOwner.AddSQLTokens(stKeyword, AStartNode, 'DEFAULT', [], 5);
+(*  T4:=AOwner.AddSQLTokens(stKeyword, AStartNode, 'DEFAULT', [], 5);
     T4.AddChildToken(AEndNodes); *)
+end;
+
+procedure TPGSQLPartitionOfData.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  //FOR VALUES
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'FOR', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'VALUES', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, nil, '', []);
+  InternalInitParserTree(FSQLTokens, [T], 1, Self);
+end;
+
+procedure TPGSQLPartitionOfData.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  ParseToken(ASQLParser, AChild, AWord);
 end;
 
 procedure TPGSQLPartitionOfData.ParseToken(ASQLParser: TSQLParser;
@@ -3527,10 +3549,9 @@ begin
   end;
 end;
 
-constructor TPGSQLPartitionOfData.Create(AOwner: TSQLCommandAbstract);
+constructor TPGSQLPartitionOfData.Create(AParent: TSQLCommandAbstract);
 begin
-  inherited Create;
-  FOwner:=AOwner;
+  inherited Create(AParent);
   FParams:=TSQLFields.Create;
 end;
 
@@ -3540,12 +3561,16 @@ begin
   inherited Destroy;
 end;
 
-procedure TPGSQLPartitionOfData.Assign(ASource: TPGSQLPartitionOfData);
+procedure TPGSQLPartitionOfData.Assign(ASource: TSQLObjectAbstract);
 begin
-  FParams.Assign(ASource.Params);
-  FPartType:=ASource.PartType;
-  FBaseCmd:=ASource.FBaseCmd;
-  FPartitionTableName:=ASource.FPartitionTableName;
+  if ASource is TPGSQLPartitionOfData then
+  begin
+    FParams.Assign(TPGSQLPartitionOfData(ASource).Params);
+    FPartType:=TPGSQLPartitionOfData(ASource).PartType;
+    FBaseCmd:=TPGSQLPartitionOfData(ASource).FBaseCmd;
+    FPartitionTableName:=TPGSQLPartitionOfData(ASource).FPartitionTableName;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLCommandDelete }
@@ -8702,7 +8727,7 @@ begin
   TPart1:=AddSQLTokens(stKeyword, [T, TPart1], 'FOR', []);
   TPart1:=AddSQLTokens(stKeyword, [T, TPart1], 'VALUES', []);
 
-  FPartitionOfData.InitParserTree(TPart1, [TServer], 71);
+  FPartitionOfData.InternalInitParserTree(TPart1, [TServer], 71, Self);
 end;
 
 procedure TPGSQLCreateForeignTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -15920,7 +15945,7 @@ begin
   TPart1:=AddSQLTokens(stKeyword, [TPart1, T], 'FOR', []);
   TPart1:=AddSQLTokens(stKeyword, [TPart1], 'VALUES', []);
 
-  FPartitionOfData.InitParserTree(TPart1, [TPartition, TOnCom, TWitO, TWit, TTblS], 82);
+  FPartitionOfData.InternalInitParserTree(TPart1, [TPartition, TOnCom, TWitO, TWit, TTblS], 82, Self);
 
   //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
   //    PARTITION OF таблица_родитель [ (

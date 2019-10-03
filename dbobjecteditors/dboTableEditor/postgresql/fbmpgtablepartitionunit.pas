@@ -34,6 +34,7 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    MenuItem8: TMenuItem;
     sSectionEdit: TAction;
     keyEdit: TAction;
     Edit1: TEdit;
@@ -78,9 +79,12 @@ type
     StaticText2: TStaticText;
     procedure ComboBox1Change(Sender: TObject);
     procedure keyAddExecute(Sender: TObject);
+    procedure keyRemoveExecute(Sender: TObject);
     procedure rxKeysKeyTypeGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
     procedure rxSectionAfterInsert(DataSet: TDataSet);
+    procedure sSectionAddExecute(Sender: TObject);
+    procedure sSectionRemoveExecute(Sender: TObject);
   private
     procedure RefreshPage;
     procedure LoadSpr;
@@ -98,7 +102,8 @@ type
 implementation
 
 uses rxdbutils, fbmStrConstUnit, pgTypes, pg_SqlParserUnit,
-  fbmTableEditorFieldsUnit, fbmPGTablePartition_EditKeyUnit;
+  fbmTableEditorFieldsUnit, fbmPGTablePartition_EditKeyUnit,
+  fbmPGTablePartition_EditSectionUnit;
 
 {$R *.lfm}
 
@@ -142,6 +147,11 @@ begin
   fbmPGTablePartition_EditKeyForm.Free;
 end;
 
+procedure TfbmPGTablePartitionPage.keyRemoveExecute(Sender: TObject);
+begin
+  //
+end;
+
 procedure TfbmPGTablePartitionPage.ComboBox1Change(Sender: TObject);
 begin
   RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=ComboBox1.ItemIndex = 1;
@@ -164,6 +174,21 @@ end;
 procedure TfbmPGTablePartitionPage.rxSectionAfterInsert(DataSet: TDataSet);
 begin
   rxSectionDEFAULT.AsBoolean:=false;
+end;
+
+procedure TfbmPGTablePartitionPage.sSectionAddExecute(Sender: TObject);
+begin
+  fbmPGTablePartition_EditSectionForm:=TfbmPGTablePartition_EditSectionForm.Create(Application);
+  if fbmPGTablePartition_EditSectionForm.ShowModal = mrOk then
+  begin
+    ;
+  end;
+  fbmPGTablePartition_EditSectionForm.Free;
+end;
+
+procedure TfbmPGTablePartitionPage.sSectionRemoveExecute(Sender: TObject);
+begin
+  //
 end;
 
 procedure TfbmPGTablePartitionPage.RefreshPage;
@@ -194,10 +219,25 @@ begin
     Edit1.Text:=TPGTable(DBObject).PartitionedTypeName;
     Label1.AnchorSideBottom.Control:=Edit1;
 
+    RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=TPGTable(DBObject).PartitionedType = ptRange;
+    RxDBGrid2.ColumnByFieldName('R_TO').Visible:=TPGTable(DBObject).PartitionedType = ptRange;
+    RxDBGrid2.ColumnByFieldName('R_IN').Visible:=TPGTable(DBObject).PartitionedType = ptList;
+    RxDBGrid2.ColumnByFieldName('H_MODULUS').Visible:=TPGTable(DBObject).PartitionedType = ptHash;
+    RxDBGrid2.ColumnByFieldName('H_REMINDER').Visible:=TPGTable(DBObject).PartitionedType = ptHash;
+
     for P in TPGTable(DBObject).PartitionList do
     begin
       rxSection.Append;
       rxSectionNAME.AsString:=P.Name;
+      case P.DataType of
+        podtDefault:rxSectionDEFAULT.AsBoolean:=true;
+        podtIn:rxSectionR_IN.AsString:=P.InExp;
+        podtFromTo:begin
+            rxSectionR_FROM.AsString:=P.FromExp;
+            rxSectionR_TO.AsString:=P.ToExp;
+          end;
+        //podtWith:rxSectionH_MODULUS.AsString:=P.InExp;
+      end;
       rxSection.Post;
     end;
   end;

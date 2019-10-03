@@ -433,6 +433,7 @@ resourcestring
   sFrom                             = 'From';
   sTo                               = 'To';
   sIn                               = 'In';
+  sDefaultSection                   = 'Default section';
 
   sSchemeOwner                      = 'Scheme owner';
 

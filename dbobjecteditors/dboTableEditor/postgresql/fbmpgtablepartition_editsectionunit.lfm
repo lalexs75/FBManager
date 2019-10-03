@@ -1,9 +1,132 @@
 object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
-  Left = 335
-  Height = 240
-  Top = 137
-  Width = 320
+  Left = 882
+  Height = 359
+  Top = 414
+  Width = 480
   Caption = 'fbmPGTablePartition_EditSectionForm'
+  ClientHeight = 359
+  ClientWidth = 480
+  OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.1.0.0'
+  object RadioButton1: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 23
+    Top = 6
+    Width = 117
+    BorderSpacing.Around = 6
+    Caption = 'Default section'
+    Checked = True
+    TabOrder = 0
+    TabStop = True
+  end
+  object RadioButton2: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 35
+    Width = 71
+    BorderSpacing.Around = 6
+    Caption = 'Params'
+    TabOrder = 1
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 219
+    Width = 462
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 2
+  end
+  object ButtonPanel1: TButtonPanel
+    Left = 6
+    Height = 46
+    Top = 307
+    Width = 468
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 3
+    ShowButtons = [pbOK, pbCancel, pbHelp]
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 64
+    Width = 73
+    BorderSpacing.Around = 6
+    Caption = 'From values'
+    ParentColor = False
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 87
+    Width = 462
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 127
+    Width = 56
+    BorderSpacing.Around = 6
+    Caption = 'To values'
+    ParentColor = False
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 150
+    Width = 462
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 5
+  end
+  object CheckBox1: TCheckBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 190
+    Width = 134
+    BorderSpacing.Around = 6
+    Caption = 'Define tablespace'
+    TabOrder = 6
+  end
 end

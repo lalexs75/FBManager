@@ -1149,6 +1149,10 @@ msgstr "Пароль по умолчанию"
 msgid "< Default query set >"
 msgstr "< Запросы по умолчанию >"
 
+#: fbmstrconstunit.sdefaultsection
+msgid "Default section"
+msgstr ""
+
 #: fbmstrconstunit.sdefaultserverversion
 msgid "Default server version"
 msgstr "Версия сервера по умолчанию"

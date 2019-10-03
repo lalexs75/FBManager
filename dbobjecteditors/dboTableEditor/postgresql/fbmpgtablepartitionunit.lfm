@@ -505,6 +505,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Category = 'Sections'
       Caption = 'Add'
       ImageIndex = 12
+      OnExecute = sSectionAddExecute
     end
     object keyEdit: TAction
       Tag = 1
@@ -516,17 +517,20 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Category = 'Partition keys'
       Caption = 'Remove'
       ImageIndex = 13
+      OnExecute = keyRemoveExecute
     end
     object sSectionEdit: TAction
       Tag = 1
       Category = 'Sections'
       Caption = 'Edit'
       ImageIndex = 62
+      OnExecute = sSectionAddExecute
     end
     object sSectionRemove: TAction
       Category = 'Sections'
       Caption = 'Remove'
       ImageIndex = 13
+      OnExecute = sSectionRemoveExecute
     end
   end
   object rxKeys: TRxMemoryData[14]
@@ -708,6 +712,9 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Top = 232
     object MenuItem4: TMenuItem
       Action = sSectionAdd
+    end
+    object MenuItem8: TMenuItem
+      Action = sSectionEdit
     end
     object MenuItem5: TMenuItem
       Caption = '-'

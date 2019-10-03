@@ -521,13 +521,21 @@ type
 
   TPGTablePartition = class
   private
+    FDataType: TPartitionOfDataType;
     FExpression: string;
+    FFromExp: string;
+    FInExp: string;
     FName: string;
     FOID: integer;
+    FToExp: string;
   public
     property OID:integer read FOID;
     property Name:string read FName;
     property Expression:string read FExpression;
+    property FromExp:string read FFromExp;
+    property ToExp:string read FToExp;
+    property InExp:string read FInExp;
+    property DataType:TPartitionOfDataType read FDataType;
   end;
 
   { TPGTablePartitionList }
@@ -5594,11 +5602,15 @@ procedure TPGTable.RefreshPartitionals;
 var
   FQuery: TZQuery;
   P: TPGTablePartition;
+  P1: TPGSQLPartitionOfData;
+  FSQLParser: TSQLParser;
 begin
   if State = sdboCreate then exit;
 
   FPartitionList.Clear;
 
+  P1:=TPGSQLPartitionOfData.Create(nil);
+  FSQLParser:=TSQLParser.Create('', nil);
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGTableInerited['RelationPartitions']);
   try
     FQuery.ParamByName('inhparent').AsInteger:=FOID;
@@ -5608,9 +5620,32 @@ begin
       P:=PartitionList.Add(FQuery.FieldByName('oid').AsInteger);
       P.FName:=FQuery.FieldByName('relname').AsString;
       P.FExpression:=FQuery.FieldByName('partition_value').AsString;
+      if P.FExpression = 'DEFAULT' then
+        P.FDataType:=podtDefault
+      else
+      begin
+        P1.Clear;
+        FSQLParser.SetSQL(P.FExpression);
+        P1.ParseSQL(FSQLParser);
+        P.FDataType:=P1.PartType;
+        if (P.FDataType = podtIn) and (P1.Params.Count>0) then
+          P.FInExp:=P1.Params[0].Caption
+        else
+        if (P.FDataType = podtFromTo) and (P1.Params.Count>1) then
+        begin
+          P.FFromExp:=P1.Params[0].Caption;
+          P.FToExp:=P1.Params[1].Caption;
+        end
+        else
+        if (P.FDataType = podtWith) and (P1.Params.Count>0) then
+          P.FInExp:=P1.Params[0].Caption;
+
+      end;
       FQuery.Next;
     end;
   finally
+    FSQLParser.Free;
+    P1.Free;
     FQuery.Free;
   end;
 end;
