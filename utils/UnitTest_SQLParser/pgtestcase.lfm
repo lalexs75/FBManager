@@ -2370,7 +2370,8 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateTable38'
         Lines.Strings = (
-          'CREATE TABLE olga.test_part_2_p1 PARTITION OF olga.test_part_2 DEFAULT;'
+          'CREATE TABLE olga.test_part_2_p1'
+          '  PARTITION OF olga.test_part_2 DEFAULT;'
         )
       end>
     Left = 25

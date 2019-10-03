@@ -17,6 +17,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
+        <IsVisibleTab Value="True"/>
         <TopLine Value="749"/>
         <CursorPos X="50" Y="758"/>
         <UsageCount Value="130"/>
@@ -178,7 +179,6 @@
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <UnitName Value="pg_SqlParserUnit"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="15891"/>
         <CursorPos X="3" Y="15909"/>
