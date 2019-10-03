@@ -2366,6 +2366,12 @@ object PGSQLParserData: TPGSQLParserData
           '  OIDS=FALSE'
           ');'
         )
+      end    
+      item
+        Caption = 'CreateTable38'
+        Lines.Strings = (
+          'CREATE TABLE olga.test_part_2_p1 PARTITION OF olga.test_part_2 DEFAULT;'
+        )
       end>
     Left = 25
     Top = 248
