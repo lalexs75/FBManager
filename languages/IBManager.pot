@@ -1709,6 +1709,10 @@ msgstr ""
 msgid "Export to spreadsheet"
 msgstr ""
 
+#: fbmstrconstunit.sexpression
+msgid "Expression"
+msgstr ""
+
 #: fbmstrconstunit.sextension
 msgid "Extension"
 msgstr ""
@@ -2468,6 +2472,10 @@ msgstr ""
 
 #: fbmstrconstunit.sinterfacelanguage
 msgid "Interface language"
+msgstr ""
+
+#: fbmstrconstunit.sinvalidpartitionexpressison
+msgid "Invalid partition expressison"
 msgstr ""
 
 #: fbmstrconstunit.sinvalidpath

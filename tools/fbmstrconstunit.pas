@@ -381,6 +381,7 @@ resourcestring
   sForeignKey                       = 'Foreign key';
   sForeignKeys                      = 'Foreign keys';
   sField                            = 'Field';
+  sExpression                       = 'Expression';
   sAutoIncField                     = 'Auto increment field';
   sAutoincremet                     = 'Autoincremet';
   sCalculated                       = 'Calculated';
@@ -427,6 +428,7 @@ resourcestring
   sPartitionKeyValue                = 'Partition key value';
   sPartitionExpression              = 'Partition expression';
   sTableField                       = 'Table field';
+  sInvalidPartitionExpressison      = 'Invalid partition expressison';
 
   sSchemeOwner                      = 'Scheme owner';
 

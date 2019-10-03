@@ -1829,6 +1829,7 @@
         <Filename Value="dbobjecteditors/dboTableEditor/postgresql/fbmpgtablepartition_editkeyunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="fbmPGTablePartition_EditKeyForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="fbmPGTablePartition_EditKeyUnit"/>
       </Unit>

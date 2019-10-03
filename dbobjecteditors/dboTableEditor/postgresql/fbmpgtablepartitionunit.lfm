@@ -32,8 +32,8 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     ItemHeight = 0
     Items.Strings = (
       'None'
-      'List'
       'Range'
+      'List'
     )
     Style = csDropDownList
     TabOrder = 0
@@ -52,10 +52,11 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     AutoSort = True
     Columns = <    
       item
+        SizePriority = 0
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'KeyType'
-        Width = 305
+        Width = 100
         FieldName = 'KeyType'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -69,23 +70,8 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       item
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
-        Title.Caption = 'FieldName'
-        Width = 305
-        FieldName = 'FieldName'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'Expression'
-        Width = 306
+        Title.Caption = 'FieldName/Expression'
+        Width = 816
         FieldName = 'Expression'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -498,11 +484,6 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ImageIndex = 12
       OnExecute = keyAddExecute
     end
-    object keyRemove: TAction
-      Category = 'Partition keys'
-      Caption = 'Remove'
-      ImageIndex = 13
-    end
     object sSectionAdd: TAction
       Category = 'Sections'
       Caption = 'Add'
@@ -510,6 +491,17 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     end
     object sSectionRemove: TAction
       Category = 'Sections'
+      Caption = 'Remove'
+      ImageIndex = 13
+    end
+    object keyEdit: TAction
+      Tag = 1
+      Category = 'Partition keys'
+      Caption = 'Edit'
+      ImageIndex = 62
+    end
+    object keyRemove: TAction
+      Category = 'Partition keys'
       Caption = 'Remove'
       ImageIndex = 13
     end
@@ -521,18 +513,13 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         DataType = ftInteger
       end    
       item
-        Name = 'FieldName'
-        DataType = ftString
-        Size = 250
-      end    
-      item
         Name = 'Expression'
         DataType = ftString
         Size = 1000
       end>
     PacketRecords = 0
     Left = 221
-    Top = 98
+    Top = 96
     object rxKeysKeyType: TLongintField
       FieldKind = fkData
       FieldName = 'KeyType'
@@ -541,21 +528,12 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-    end
-    object rxKeysFieldName: TStringField
-      FieldKind = fkData
-      FieldName = 'FieldName'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 250
+      OnGetText = rxKeysKeyTypeGetText
     end
     object rxKeysExpression: TStringField
       FieldKind = fkData
       FieldName = 'Expression'
-      Index = 2
+      Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -665,6 +643,9 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Top = 98
     object MenuItem1: TMenuItem
       Action = keyAdd
+    end
+    object MenuItem7: TMenuItem
+      Action = keyEdit
     end
     object MenuItem3: TMenuItem
       Caption = '-'

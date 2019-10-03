@@ -6,6 +6,7 @@ object fbmPGTablePartition_EditKeyForm: TfbmPGTablePartition_EditKeyForm
   Caption = 'Partition key value'
   ClientHeight = 288
   ClientWidth = 427
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.1.0.0'
@@ -19,7 +20,9 @@ object fbmPGTablePartition_EditKeyForm: TfbmPGTablePartition_EditKeyForm
     BorderSpacing.Around = 6
     Caption = 'Table field'
     Checked = True
+    OnChange = RadioButton1Change
     TabOrder = 0
+    TabStop = True
   end
   object RadioButton2: TRadioButton
     AnchorSideLeft.Control = Owner
@@ -31,6 +34,7 @@ object fbmPGTablePartition_EditKeyForm: TfbmPGTablePartition_EditKeyForm
     Width = 145
     BorderSpacing.Around = 6
     Caption = 'Partition expression'
+    OnChange = RadioButton1Change
     TabOrder = 1
   end
   object Panel1: TPanel
@@ -62,7 +66,6 @@ object fbmPGTablePartition_EditKeyForm: TfbmPGTablePartition_EditKeyForm
     BorderSpacing.Around = 6
     ItemHeight = 0
     TabOrder = 3
-    Text = 'ComboBox1'
   end
   object ButtonPanel1: TButtonPanel
     Left = 6

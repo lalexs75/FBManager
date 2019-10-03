@@ -1787,6 +1787,10 @@ msgstr "Экспорт данных в электронную таблицу"
 msgid "Export to spreadsheet"
 msgstr "Экспорт в электронную таблицу"
 
+#: fbmstrconstunit.sexpression
+msgid "Expression"
+msgstr ""
+
 #: fbmstrconstunit.sextension
 msgid "Extension"
 msgstr "Расширение"
@@ -2564,6 +2568,10 @@ msgstr "Целые числа"
 #: fbmstrconstunit.sinterfacelanguage
 msgid "Interface language"
 msgstr "Язык интерфейса"
+
+#: fbmstrconstunit.sinvalidpartitionexpressison
+msgid "Invalid partition expressison"
+msgstr ""
 
 #: fbmstrconstunit.sinvalidpath
 #, object-pascal-format
@@ -5986,3 +5994,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

@@ -34,6 +34,7 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    keyEdit: TAction;
     Edit1: TEdit;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -41,8 +42,8 @@ type
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
     rxKeysExpression: TStringField;
-    rxKeysFieldName: TStringField;
     rxKeysKeyType: TLongintField;
     rxSectionH_MODULUS: TStringField;
     rxSectionH_REMINDER: TStringField;
@@ -74,6 +75,8 @@ type
     StaticText1: TStaticText;
     StaticText2: TStaticText;
     procedure keyAddExecute(Sender: TObject);
+    procedure rxKeysKeyTypeGetText(Sender: TField; var aText: string;
+      DisplayText: Boolean);
   private
     procedure RefreshPage;
     procedure LoadSpr;
@@ -108,11 +111,40 @@ begin
   if Assigned(F) then
     FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
 
+  if (Sender as TComponent).Tag = 1 then
+  begin
+    fbmPGTablePartition_EditKeyForm.RadioButton1.Checked:=rxKeysKeyType.AsInteger = 0;
+    fbmPGTablePartition_EditKeyForm.RadioButton2.Checked:=rxKeysKeyType.AsInteger <> 0;
+
+    if rxKeysKeyType.AsInteger = 0 then
+      fbmPGTablePartition_EditKeyForm.ComboBox1.Text:=rxKeysExpression.AsString
+    else
+      fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText:=rxKeysExpression.AsString;
+  end;
+
   if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
   begin
-
+    if (Sender as TComponent).Tag = 1 then
+      rxKeys.Edit
+    else
+      rxKeys.Append;
+    rxKeysKeyType.AsInteger:=Ord(fbmPGTablePartition_EditKeyForm.RadioButton2.Checked);
+    if rxKeysKeyType.AsInteger = 0 then
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.ComboBox1.Text
+    else
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText;
+    rxKeys.Post;
   end;
   fbmPGTablePartition_EditKeyForm.Free;
+end;
+
+procedure TfbmPGTablePartitionPage.rxKeysKeyTypeGetText(Sender: TField;
+  var aText: string; DisplayText: Boolean);
+begin
+  if rxKeysKeyType.AsInteger = 0 then
+    aText:=sField
+  else
+    aText:=sExpression;
 end;
 
 procedure TfbmPGTablePartitionPage.RefreshPage;
@@ -135,7 +167,7 @@ begin
 
   if DBObject.State = sdboCreate then
   begin
-
+    ComboBox1.ItemIndex:=0;
   end
   else
   begin
@@ -216,8 +248,8 @@ begin
 //  StaticText1.Caption:=;
 
   ComboBox1.Items[0]:=sNone;
-  ComboBox1.Items[1]:=sList;
-  ComboBox1.Items[2]:=sRange;
+  ComboBox1.Items[1]:=sRange;
+  ComboBox1.Items[2]:=sList;
   keyAdd.Caption:=sAdd;
   keyRemove.Caption:=sRemove;
 
@@ -233,12 +265,22 @@ begin
   Result:=true;
   if DBObject.State = sdboCreate then
   begin
+    FCmd:=TPGSQLCreateTable(ASQLObject);
     if ComboBox1.ItemIndex > 0 then
     begin
-      FCmd:=TPGSQLCreateTable(ASQLObject);
+      rxKeys.DisableControls;
+      rxKeys.First;
+      while not rxKeys.EOF do
+      begin
+        FCmd.TablePartition.Params.AddParam(rxKeysExpression.AsString);
+        rxKeys.Next;
+      end;
+      rxKeys.First;
+      rxKeys.EnableControls;
+
       case ComboBox1.ItemIndex of
-        1:FCmd.TablePartition.PartitionType:=ptList;
-        2:FCmd.TablePartition.PartitionType:=ptRange;
+        1:FCmd.TablePartition.PartitionType:=ptRange;
+        2:FCmd.TablePartition.PartitionType:=ptList;
         3:FCmd.TablePartition.PartitionType:=ptHash;
       end;
     end;

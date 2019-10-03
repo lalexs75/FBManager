@@ -38,7 +38,9 @@ type
     Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure RadioButton1Change(Sender: TObject);
   private
     procedure Localize;
   public
@@ -50,7 +52,7 @@ var
 
 implementation
 
-uses fbmStrConstUnit;
+uses rxAppUtils, fbmStrConstUnit;
 
 {$R *.lfm}
 
@@ -62,6 +64,33 @@ begin
   FEditorFrame.Parent:=Panel1;
   FEditorFrame.Align:=alClient;
   Localize;
+end;
+
+procedure TfbmPGTablePartition_EditKeyForm.RadioButton1Change(Sender: TObject);
+begin
+  ComboBox1.Enabled:=RadioButton1.Checked;
+  FEditorFrame.Enabled:=RadioButton1.Checked;
+end;
+
+procedure TfbmPGTablePartition_EditKeyForm.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  if ModalResult = mrOK then
+  begin
+    if RadioButton1.Checked then
+    begin
+      CanClose:=(ComboBox1.Text<>'') and (ComboBox1.Items.IndexOf(ComboBox1.Text)>=0);
+      if not CanClose then
+        ErrorBox(sFieldNameReq);
+    end
+    else
+    if RadioButton2.Checked then
+    begin
+      CanClose:=(Trim(FEditorFrame.EditorText)<>'');
+      if not CanClose then
+        ErrorBox(sInvalidPartitionExpressison);
+    end
+  end;
 end;
 
 procedure TfbmPGTablePartition_EditKeyForm.Localize;
