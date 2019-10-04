@@ -26,8 +26,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  ActnList, Menus, DB, rxdbgrid, rxmemds, DividerBevel, fdmAbstractEditorUnit,
-  fbmSqlParserUnit, SQLEngineAbstractUnit, PostgreSQLEngineUnit;
+  ActnList, Menus, DB, rxdbgrid, rxmemds, rxctrls, DividerBevel,
+  fdmAbstractEditorUnit, pg_SqlParserUnit, fbmSqlParserUnit,
+  SQLEngineAbstractUnit, PostgreSQLEngineUnit;
 
 type
 
@@ -35,6 +36,8 @@ type
 
   TfbmPGTablePartitionPage = class(TEditorPage)
     MenuItem8: TMenuItem;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     sSectionEdit: TAction;
     keyEdit: TAction;
     Edit1: TEdit;
@@ -75,8 +78,6 @@ type
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
-    StaticText1: TStaticText;
-    StaticText2: TStaticText;
     procedure ComboBox1Change(Sender: TObject);
     procedure keyAddExecute(Sender: TObject);
     procedure keyRemoveExecute(Sender: TObject);
@@ -88,6 +89,7 @@ type
   private
     procedure RefreshPage;
     procedure LoadSpr;
+    procedure UpdateSectionsGrid(APartitionType:TPGSQLPartitionType);
   public
     class function PageExists(ADBObject:TDBObject):Boolean; override;
     function PageName:string; override;
@@ -101,7 +103,7 @@ type
 
 implementation
 
-uses rxdbutils, fbmStrConstUnit, pgTypes, pg_SqlParserUnit,
+uses rxdbutils, fbmStrConstUnit, pgTypes,
   fbmTableEditorFieldsUnit, fbmPGTablePartition_EditKeyUnit,
   fbmPGTablePartition_EditSectionUnit;
 
@@ -154,12 +156,7 @@ end;
 
 procedure TfbmPGTablePartitionPage.ComboBox1Change(Sender: TObject);
 begin
-  RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=ComboBox1.ItemIndex = 1;
-  RxDBGrid2.ColumnByFieldName('R_TO').Visible:=ComboBox1.ItemIndex = 1;
-
-  RxDBGrid2.ColumnByFieldName('R_IN').Visible:=ComboBox1.ItemIndex = 2;
-
-  RxDBGrid2.ColumnByFieldName('H_MODULUS').Visible:=ComboBox1.ItemIndex = 3;
+  UpdateSectionsGrid(TPGSQLPartitionType(ComboBox1.ItemIndex));
 end;
 
 procedure TfbmPGTablePartitionPage.rxKeysKeyTypeGetText(Sender: TField;
@@ -205,13 +202,11 @@ begin
   RxDBGrid1.Visible:=DBObject.State = sdboCreate;
   keyAdd.Visible:=DBObject.State = sdboCreate;
   keyRemove.Visible:=DBObject.State = sdboCreate;
-  StaticText1.Visible:=DBObject.State = sdboCreate;
-
-  //Label1.Enabled:=DBObject.State = sdboCreate;
 
   if DBObject.State = sdboCreate then
   begin
     ComboBox1.ItemIndex:=0;
+    ComboBox1Change(nil);
   end
   else
   begin
@@ -219,11 +214,7 @@ begin
     Edit1.Text:=TPGTable(DBObject).PartitionedTypeName;
     Label1.AnchorSideBottom.Control:=Edit1;
 
-    RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=TPGTable(DBObject).PartitionedType = ptRange;
-    RxDBGrid2.ColumnByFieldName('R_TO').Visible:=TPGTable(DBObject).PartitionedType = ptRange;
-    RxDBGrid2.ColumnByFieldName('R_IN').Visible:=TPGTable(DBObject).PartitionedType = ptList;
-    RxDBGrid2.ColumnByFieldName('H_MODULUS').Visible:=TPGTable(DBObject).PartitionedType = ptHash;
-    RxDBGrid2.ColumnByFieldName('H_REMINDER').Visible:=TPGTable(DBObject).PartitionedType = ptHash;
+    UpdateSectionsGrid(TPGTable(DBObject).PartitionedType);
 
     for P in TPGTable(DBObject).PartitionList do
     begin
@@ -255,6 +246,27 @@ begin
     F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
     if Assigned(F) then
       FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', C.PickList);
+  end;
+end;
+
+procedure TfbmPGTablePartitionPage.UpdateSectionsGrid(
+  APartitionType: TPGSQLPartitionType);
+begin
+  DividerBevel2.Visible:=APartitionType <> ptNone;
+  RxDBGrid2.Visible:=APartitionType <> ptNone;
+  sSectionAdd.Visible:=APartitionType <> ptNone;
+  sSectionEdit.Visible:=APartitionType <> ptNone;
+  sSectionRemove.Visible:=APartitionType <> ptNone;
+
+  if APartitionType <> ptNone then
+  begin
+    RxDBGrid2.ColumnByFieldName('R_FROM').Visible:=APartitionType = ptRange;
+    RxDBGrid2.ColumnByFieldName('R_TO').Visible:=APartitionType = ptRange;
+
+    RxDBGrid2.ColumnByFieldName('R_IN').Visible:=APartitionType = ptList;
+
+    RxDBGrid2.ColumnByFieldName('H_MODULUS').Visible:=APartitionType = ptHash;
+    RxDBGrid2.ColumnByFieldName('H_REMINDER').Visible:=APartitionType = ptHash;
   end;
 end;
 
@@ -313,7 +325,8 @@ begin
 //  RxDBGrid2.ColumnByFieldName('H_MODULUS').Title.Caption:=ComboBox1.ItemIndex = 3;
 //  RxDBGrid2.ColumnByFieldName('H_REMINDER').Title.Caption:=ComboBox1.ItemIndex = 3;
 
-  //  StaticText1.Caption:=;
+  //StaticText1.Caption:=;
+  //StaticText2.Caption:=;
 
   ComboBox1.Items[0]:=sNone;
   ComboBox1.Items[1]:=sRange;
