@@ -36,7 +36,7 @@ type
 
 const
   CountKeyWords      = 342;
-  CountKeyFunctions  = 84;
+  CountKeyFunctions  = 85;
   CountKeyTypes      = 13;
   CountKeyTriggers   = 12;
   CountKeyEventTriggers  = 2;
@@ -527,6 +527,7 @@ const
      (Key:'space'; SQLToken:stNone),
      (Key:'sqrt'; SQLToken:stNone),
      (Key:'statement_timestamp'; SQLToken:stNone),
+     (Key:'substring'; SQLToken:stNone),
      (Key:'sum'; SQLToken:stNone),
      (Key:'tan'; SQLToken:stNone),
      (Key:'tanh'; SQLToken:stNone),
