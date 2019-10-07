@@ -180,7 +180,7 @@ msgstr "Базовое значение ANALYZE"
 
 #: fbmstrconstunit.sanalyzethresholdhint
 msgid "Minimum number of tuple inserts, updates, or deletes prior to analyze"
-msgstr ""
+msgstr "Минимальное число блоков при вставке, изменеии или удалении перед запуском анализа"
 
 #: fbmstrconstunit.sappendfunctionhint
 msgid "Create new nested function"
@@ -686,7 +686,7 @@ msgstr "Новое ограничение"
 
 #: fbmstrconstunit.sconversion
 msgid "Conversion"
-msgstr ""
+msgstr "Преобразование"
 
 #: fbmstrconstunit.sconvertexttables
 msgctxt "fbmstrconstunit.sconvertexttables"
@@ -1151,7 +1151,7 @@ msgstr "< Запросы по умолчанию >"
 
 #: fbmstrconstunit.sdefaultsection
 msgid "Default section"
-msgstr ""
+msgstr "Секция по умолчанию"
 
 #: fbmstrconstunit.sdefaultserverversion
 msgid "Default server version"
@@ -1180,6 +1180,10 @@ msgstr "Определить Out параметр"
 #: fbmstrconstunit.sdefiner
 msgid "Definer"
 msgstr "Определитель"
+
+#: fbmstrconstunit.sdefinetablespace
+msgid "Define tablespace"
+msgstr "Указать табличное пространство"
 
 #: fbmstrconstunit.sdefinevariable
 msgid "Define variable"
@@ -1267,6 +1271,10 @@ msgstr "Удалить параметр"
 msgid "Delete this parametr?"
 msgstr "Удалить этот параметр?"
 
+#: fbmstrconstunit.sdeletepartitionkey
+msgid "Delete partition key?"
+msgstr "Удалить ключь партицирования"
+
 #: fbmstrconstunit.sdeletequery
 msgid "Delete wthis query?"
 msgstr "Удалить этот запрос?"
@@ -1287,6 +1295,10 @@ msgstr "Удалить строки"
 msgctxt "fbmstrconstunit.sdeleterule"
 msgid "Delete rule"
 msgstr "Правило удаления"
+
+#: fbmstrconstunit.sdeletesctions
+msgid "Delete partition section?"
+msgstr "Удалить секцию?"
 
 #: fbmstrconstunit.sdeletestatement
 msgid "Delete statement"
@@ -1793,7 +1805,7 @@ msgstr "Экспорт в электронную таблицу"
 
 #: fbmstrconstunit.sexpression
 msgid "Expression"
-msgstr ""
+msgstr "Выражение"
 
 #: fbmstrconstunit.sextension
 msgid "Extension"
@@ -2194,12 +2206,16 @@ msgstr ""
 
 #: fbmstrconstunit.sfrom
 msgid "From"
-msgstr ""
+msgstr "С"
 
 #: fbmstrconstunit.sfromdate
 msgctxt "fbmstrconstunit.sfromdate"
 msgid "From date"
 msgstr "С даты"
+
+#: fbmstrconstunit.sfromvalue
+msgid "From value"
+msgstr "С значения"
 
 #: fbmstrconstunit.sftsconfig
 msgid "FTSConfig"
@@ -2583,7 +2599,7 @@ msgstr "Язык интерфейса"
 
 #: fbmstrconstunit.sinvalidpartitionexpressison
 msgid "Invalid partition expressison"
-msgstr ""
+msgstr "Ошибка выражения партицирования"
 
 #: fbmstrconstunit.sinvalidpath
 #, object-pascal-format
@@ -4526,7 +4542,11 @@ msgstr "&Только целые слова"
 
 #: fbmstrconstunit.ssectionname
 msgid "Section name"
-msgstr ""
+msgstr "Наименование секции"
+
+#: fbmstrconstunit.ssectionparams
+msgid "Section params"
+msgstr "Параметры секции"
 
 #: fbmstrconstunit.ssecurity
 msgctxt "fbmstrconstunit.ssecurity"
@@ -4932,7 +4952,7 @@ msgstr "Полное время"
 
 #: fbmstrconstunit.sstatsfunctiontime
 msgid "Function time"
-msgstr ""
+msgstr "Время функции"
 
 #: fbmstrconstunit.sstatus
 msgctxt "fbmstrconstunit.sstatus"
@@ -5256,7 +5276,7 @@ msgstr "ДатаВремя"
 
 #: fbmstrconstunit.sto
 msgid "To"
-msgstr ""
+msgstr "По"
 
 #: fbmstrconstunit.stoastautovacuumenabled
 msgctxt "fbmstrconstunit.stoastautovacuumenabled"
@@ -5342,6 +5362,10 @@ msgstr "Всего"
 #: fbmstrconstunit.stotalsize
 msgid "Total size"
 msgstr "Размер - всего"
+
+#: fbmstrconstunit.stovalue
+msgid "To value"
+msgstr "По значение"
 
 #: fbmstrconstunit.stransactionpersecond
 msgid "Transaction per second"

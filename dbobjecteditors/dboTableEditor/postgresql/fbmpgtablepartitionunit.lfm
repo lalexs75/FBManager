@@ -54,6 +54,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     AutoSort = True
     Columns = <    
       item
+        ButtonStyle = cbsNone
         SizePriority = 0
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
@@ -70,6 +71,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Footers = <>
       end    
       item
+        ButtonStyle = cbsNone
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'FieldName/Expression'
@@ -153,10 +155,11 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsKeys
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableInsert]
     PopupMenu = PopupMenu1
     TabOrder = 1
     TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
   end
   object SpeedButton1: TSpeedButton[3]
     AnchorSideTop.Control = DividerBevel1
@@ -189,6 +192,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     BorderSpacing.Around = 6
     Constraints.MinHeight = 30
     Constraints.MinWidth = 30
+    OnDblClick = SpeedButton2DblClick
     ShowCaption = False
   end
   object DividerBevel1: TDividerBevel[5]
@@ -426,10 +430,11 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsSection
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableInsert]
     PopupMenu = PopupMenu2
     TabOrder = 2
     TitleStyle = tsNative
+    OnDblClick = RxDBGrid2DblClick
   end
   object SpeedButton3: TSpeedButton[8]
     AnchorSideTop.Control = DividerBevel2
@@ -532,6 +537,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Category = 'Partition keys'
       Caption = 'Edit'
       ImageIndex = 62
+      OnExecute = keyAddExecute
     end
     object keyRemove: TAction
       Category = 'Partition keys'
@@ -544,7 +550,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       Category = 'Sections'
       Caption = 'Edit'
       ImageIndex = 62
-      OnExecute = sSectionAddExecute
+      OnExecute = sSectionEditExecute
     end
     object sSectionRemove: TAction
       Category = 'Sections'
@@ -632,6 +638,10 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Name = 'TABLE_SPACE_NAME'
         DataType = ftString
         Size = 500
+      end    
+      item
+        Name = 'SchemaID'
+        DataType = ftInteger
       end>
     AfterInsert = rxSectionAfterInsert
     PacketRecords = 0
@@ -725,6 +735,15 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ReadOnly = False
       Required = False
       Size = 500
+    end
+    object rxSectionSchemaID: TLongintField
+      FieldKind = fkData
+      FieldName = 'SchemaID'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object PopupMenu1: TPopupMenu[16]

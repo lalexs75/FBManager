@@ -527,6 +527,8 @@ type
     FInExp: string;
     FName: string;
     FOID: integer;
+    FSchemaID: Integer;
+    FSchemaName: string;
     FTableSpaceID: Integer;
     FToExp: string;
   public
@@ -538,6 +540,8 @@ type
     property InExp:string read FInExp;
     property DataType:TPartitionOfDataType read FDataType;
     property TableSpaceID:Integer read FTableSpaceID;
+    property SchemaID:Integer read FSchemaID;
+    property SchemaName:string read FSchemaName;
   end;
 
   { TPGTablePartitionList }
@@ -4693,7 +4697,7 @@ begin
       FCmdPart:=TPGSQLCreateTable.Create(nil);
       FCmd.AddChild(FCmdPart);
       FCmdPart.Name:=PT.Name;
-      //FCmdPart.SchemaName:='';
+      FCmdPart.SchemaName:=PT.SchemaName;
       FCmdPart.PartitionOfData.PartitionTableName:=CaptionFullPatch;
       case FPartitionedType of
         ptRange:FCmdPart.PartitionOfData.PartType:=podtFromTo;
@@ -5606,6 +5610,7 @@ var
   P: TPGTablePartition;
   P1: TPGSQLPartitionOfData;
   FSQLParser: TSQLParser;
+  FScm: TPGSchema;
 begin
   if State = sdboCreate then exit;
 
@@ -5623,6 +5628,12 @@ begin
       P.FName:=FQuery.FieldByName('relname').AsString;
       P.FExpression:=FQuery.FieldByName('partition_value').AsString;
       P.FTableSpaceID:=FQuery.FieldByName('reltablespace').AsInteger;
+      P.FSchemaID:=FQuery.FieldByName('relnamespace').AsInteger;
+      FScm:=TSQLEnginePostgre(OwnerDB).SchemasRoot.SchemaByOID(P.FSchemaID);
+      if Assigned(FScm) then
+        P.FSchemaName:=FScm.Caption;
+
+
 
       if P.FExpression = 'DEFAULT' then
         P.FDataType:=podtDefault
@@ -5631,7 +5642,7 @@ begin
         P1.Clear;
         FSQLParser.SetSQL(P.FExpression);
         P1.ParseSQL(FSQLParser);
-        P.FDataType:=P.DataType;
+        P.FDataType:=P1.PartType;
         if (P.FDataType = podtIn) and (P1.Params.Count>0) then
           P.FInExp:=P1.Params[0].Caption
         else

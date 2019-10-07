@@ -29,9 +29,9 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     Left = 6
     Height = 23
     Top = 35
-    Width = 71
+    Width = 119
     BorderSpacing.Around = 6
-    Caption = 'Params'
+    Caption = 'Section params'
     TabOrder = 1
   end
   object ComboBox1: TComboBox
@@ -127,6 +127,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     Width = 134
     BorderSpacing.Around = 6
     Caption = 'Define tablespace'
+    OnChange = CheckBox1Change
     TabOrder = 6
   end
 end

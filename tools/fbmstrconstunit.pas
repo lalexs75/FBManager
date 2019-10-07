@@ -434,6 +434,12 @@ resourcestring
   sTo                               = 'To';
   sIn                               = 'In';
   sDefaultSection                   = 'Default section';
+  sDefineTablespace                 = 'Define tablespace';
+  sDeletePartitionKey               = 'Delete partition key?';
+  sDeleteSctions                    = 'Delete partition section?';
+  sSectionParams                    = 'Section params';
+  sFromValue                        = 'From value';
+  sToValue                          = 'To value';
 
   sSchemeOwner                      = 'Scheme owner';
 

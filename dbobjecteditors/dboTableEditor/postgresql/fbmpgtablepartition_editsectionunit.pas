@@ -25,7 +25,8 @@ unit fbmPGTablePartition_EditSectionUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel, PostgreSQLEngineUnit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel, PostgreSQLEngineUnit,
+  pg_SqlParserUnit;
 
 type
 
@@ -41,12 +42,14 @@ type
     Label2: TLabel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
+    procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     FEngine:TSQLEnginePostgre;
+    FPartitionType: TPGSQLPartitionType;
   public
     procedure Localize;
-    procedure SetEngine(AEngine:TSQLEnginePostgre);
+    procedure SetEngine(AEngine:TSQLEnginePostgre; APartitionType: TPGSQLPartitionType);
   end;
 
 var
@@ -62,17 +65,58 @@ uses rxAppUtils, fbmStrConstUnit;
 procedure TfbmPGTablePartition_EditSectionForm.FormCreate(Sender: TObject);
 begin
   Localize;
+  CheckBox1Change(nil);
+end;
+
+procedure TfbmPGTablePartition_EditSectionForm.CheckBox1Change(Sender: TObject);
+begin
+  ComboBox1.Enabled:=CheckBox1.Checked;
 end;
 
 procedure TfbmPGTablePartition_EditSectionForm.Localize;
 begin
   RadioButton1.Caption:=sDefaultSection;
+  CheckBox1.Caption:=sDefineTablespace;
+  RadioButton2.Caption:=sSectionParams;
+
+  case FPartitionType of
+    ptRange:begin
+              Label1.Caption:=sFromValue;
+              Label2.Caption:=sToValue;
+            end;
+    ptList: begin
+              Label1.Caption:=sRange;
+            end;
+    ptHash: begin
+
+            end;
+  end;
 end;
 
 procedure TfbmPGTablePartition_EditSectionForm.SetEngine(
-  AEngine: TSQLEnginePostgre);
+  AEngine: TSQLEnginePostgre; APartitionType: TPGSQLPartitionType);
 begin
+  FPartitionType:=APartitionType;
+  FEngine:=AEngine;
+  ComboBox1.Items.Clear;
+  if Assigned(FEngine) then
+  begin
+    FEngine.TableSpaceRoot.FillListForNames(ComboBox1.Items, true);
+  end;
 
+  if FPartitionType = ptList then
+  begin
+    Label2.Visible:=false;
+    Edit2.Visible:=false;
+    CheckBox1.AnchorSideTop.Control:=Edit1;
+  end
+  else
+  if FPartitionType = ptHash then
+  begin
+
+  end;
+
+  Localize;
 end;
 
 end.

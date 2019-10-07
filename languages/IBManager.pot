@@ -1134,6 +1134,10 @@ msgstr ""
 msgid "Definer"
 msgstr ""
 
+#: fbmstrconstunit.sdefinetablespace
+msgid "Define tablespace"
+msgstr ""
+
 #: fbmstrconstunit.sdefinevariable
 msgid "Define variable"
 msgstr ""
@@ -1217,6 +1221,10 @@ msgstr ""
 msgid "Delete this parametr?"
 msgstr ""
 
+#: fbmstrconstunit.sdeletepartitionkey
+msgid "Delete partition key?"
+msgstr ""
+
 #: fbmstrconstunit.sdeletequery
 msgid "Delete wthis query?"
 msgstr ""
@@ -1235,6 +1243,10 @@ msgstr ""
 
 #: fbmstrconstunit.sdeleterule
 msgid "Delete rule"
+msgstr ""
+
+#: fbmstrconstunit.sdeletesctions
+msgid "Delete partition section?"
 msgstr ""
 
 #: fbmstrconstunit.sdeletestatement
@@ -2116,6 +2128,10 @@ msgstr ""
 
 #: fbmstrconstunit.sfromdate
 msgid "From date"
+msgstr ""
+
+#: fbmstrconstunit.sfromvalue
+msgid "From value"
 msgstr ""
 
 #: fbmstrconstunit.sftsconfig
@@ -4374,6 +4390,10 @@ msgstr ""
 msgid "Section name"
 msgstr ""
 
+#: fbmstrconstunit.ssectionparams
+msgid "Section params"
+msgstr ""
+
 #: fbmstrconstunit.ssecurity
 msgid "Security"
 msgstr ""
@@ -5161,6 +5181,10 @@ msgstr ""
 
 #: fbmstrconstunit.stotalsize
 msgid "Total size"
+msgstr ""
+
+#: fbmstrconstunit.stovalue
+msgid "To value"
 msgstr ""
 
 #: fbmstrconstunit.stransactionpersecond
