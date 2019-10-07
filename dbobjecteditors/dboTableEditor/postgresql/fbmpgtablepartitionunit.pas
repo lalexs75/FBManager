@@ -368,6 +368,7 @@ begin
 
       ExecSQLScript(FCmd.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
       FCmd.Free;
+      DBObject.RefreshObject;
       RefreshPage;
     end;
   end;

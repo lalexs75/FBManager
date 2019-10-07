@@ -4699,9 +4699,21 @@ begin
       FCmdPart.Name:=PT.Name;
       FCmdPart.SchemaName:=PT.SchemaName;
       FCmdPart.PartitionOfData.PartitionTableName:=CaptionFullPatch;
+      if PT.DataType = podtDefault then
+        FCmdPart.PartitionOfData.PartType:=podtDefault
+      else
       case FPartitionedType of
-        ptRange:FCmdPart.PartitionOfData.PartType:=podtFromTo;
-        ptList:FCmdPart.PartitionOfData.PartType:=podtIn;
+        ptRange:
+          begin
+            FCmdPart.PartitionOfData.PartType:=podtFromTo;
+            FCmdPart.PartitionOfData.Params.AddParam(PT.FromExp);
+            FCmdPart.PartitionOfData.Params.AddParam(PT.ToExp);
+          end;
+        ptList:
+          begin
+            FCmdPart.PartitionOfData.PartType:=podtIn;
+            FCmdPart.PartitionOfData.Params.AddParam(PT.InExp);
+          end;
         ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
       end;
     end;
