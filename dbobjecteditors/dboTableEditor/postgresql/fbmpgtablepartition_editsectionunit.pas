@@ -25,7 +25,7 @@ unit fbmPGTablePartition_EditSectionUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel, PostgreSQLEngineUnit;
 
 type
 
@@ -43,9 +43,10 @@ type
     RadioButton2: TRadioButton;
     procedure FormCreate(Sender: TObject);
   private
-
+    FEngine:TSQLEnginePostgre;
   public
     procedure Localize;
+    procedure SetEngine(AEngine:TSQLEnginePostgre);
   end;
 
 var
@@ -66,6 +67,12 @@ end;
 procedure TfbmPGTablePartition_EditSectionForm.Localize;
 begin
   RadioButton1.Caption:=sDefaultSection;
+end;
+
+procedure TfbmPGTablePartition_EditSectionForm.SetEngine(
+  AEngine: TSQLEnginePostgre);
+begin
+
 end;
 
 end.
