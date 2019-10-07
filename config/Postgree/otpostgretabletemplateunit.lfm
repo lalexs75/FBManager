@@ -1,0 +1,4 @@
+inherited otPostgreTableTemplateFrame: TotPostgreTableTemplateFrame
+  DesignLeft = 688
+  DesignTop = 343
+end

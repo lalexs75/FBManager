@@ -78,6 +78,7 @@ resourcestring
   sMenuExtractMetadataHint          = 'Extract metadata...';
   sMenuReportManager                = 'Report manager';
   sMenuReportManagerHint            = 'Report manager';
+  sDatabaseComparer                 = 'Database comparer';
 
   sMenuOptions                      = 'Options';
   sMenuOptEditors                   = 'Editor options...';
@@ -440,6 +441,7 @@ resourcestring
   sSectionParams                    = 'Section params';
   sFromValue                        = 'From value';
   sToValue                          = 'To value';
+  sSectionProperty                  = 'Section property';
 
   sSchemeOwner                      = 'Scheme owner';
 
@@ -920,6 +922,7 @@ resourcestring
   sPGPgSqlFunction                  = 'PG : function';
   sPGPgSqlFunctionLazy              = 'PG : function lazy mode';
   sPGPgSqlTrigger                   = 'PG : trigger';
+  sPGPgSqlTable                     = 'PG : table';
 
   sFBSqlTrigger                     = 'FB : trigger';
   sFBSqlTriggerLazy                 = 'FB : trigger lazy mode';
@@ -1197,7 +1200,7 @@ resourcestring
   sCommitTransactionOnRefresh       = 'Commit transaction on refresh';
   sShowObjectOnGrantPageDefault     = 'Show object on grant page default';
   sCreateIndexAfterCreateFK         = 'Create index after create FK';
-  sShowTtablePartiotions            = 'Show table''s partiotions';
+  sShowTtablePartitions             = 'Show table''s partitions';
 
   sShowAllObjects                   = 'Show all objects';
   sOnlyShowUsers                    = 'Only show users';

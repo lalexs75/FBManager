@@ -69,7 +69,7 @@ uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
   fbmRoleGrantUsersUnit, fbmUserObjectsGrantUnit,
   fbmDDLPageUnit,
   //Конфигурация
-     cfPostgreeConfigMiskUnit, cfAutoIncFieldUnit,
+     cfPostgreeConfigMiskUnit, otPostgreTableTemplateUnit, cfAutoIncFieldUnit,
   //Connection pages
      pg_con_MainPageUnit,
      fdbm_cf_LogUnit,
@@ -142,7 +142,7 @@ end;
 
 class function TPostgreVisualTools.GetObjTemplatePagesCount: integer;
 begin
-  Result:=4;
+  Result:=5;
 end;
 
 class function TPostgreVisualTools.GetObjTemplate(Index: integer;
@@ -158,7 +158,8 @@ begin
         TcfAutoIncFieldFrame(Result).PageNameStr:='PG : AutoIncParams';
         TcfAutoIncFieldFrame(Result).DummyTriggerText:=DummyAIPGTriggerText;
         TcfAutoIncFieldFrame(Result).UseSchemas:=true;
-      end
+      end;
+    4:Result:=TotPostgreTableTemplateFrame.Create(Owner);
   else
     Result:=nil;
   end;
