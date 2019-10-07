@@ -240,7 +240,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'NAME'
-        Width = 139
+        Width = 119
         FieldName = 'NAME'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -271,7 +271,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_FROM'
-        Width = 139
+        Width = 119
         FieldName = 'R_FROM'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -286,7 +286,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_TO'
-        Width = 139
+        Width = 119
         FieldName = 'R_TO'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -301,7 +301,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'R_IN'
-        Width = 139
+        Width = 119
         FieldName = 'R_IN'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -316,7 +316,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'H_MODULUS'
-        Width = 139
+        Width = 119
         FieldName = 'H_MODULUS'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -331,8 +331,23 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'H_REMINDER'
-        Width = 141
+        Width = 119
         FieldName = 'H_REMINDER'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Tablespace'
+        Width = 122
+        FieldName = 'TABLE_SPACE_NAME'
         EditButtons = <>
         Filter.DropDownRows = 0
         Filter.EmptyValue = '(Пусто)'
@@ -608,6 +623,15 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       item
         Name = 'DEFAULT'
         DataType = ftBoolean
+      end    
+      item
+        Name = 'TABLE_SPACE_ID'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'TABLE_SPACE_NAME'
+        DataType = ftString
+        Size = 500
       end>
     AfterInsert = rxSectionAfterInsert
     PacketRecords = 0
@@ -682,6 +706,25 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ReadOnly = False
       Required = False
       DisplayValues = 'True;False'
+    end
+    object rxSectionTABLE_SPACE_ID: TLongintField
+      FieldKind = fkData
+      FieldName = 'TABLE_SPACE_ID'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxSectionTABLE_SPACE_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'TABLE_SPACE_NAME'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
     end
   end
   object PopupMenu1: TPopupMenu[16]

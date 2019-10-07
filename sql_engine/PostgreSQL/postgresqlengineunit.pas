@@ -527,6 +527,7 @@ type
     FInExp: string;
     FName: string;
     FOID: integer;
+    FTableSpaceID: Integer;
     FToExp: string;
   public
     property OID:integer read FOID;
@@ -536,6 +537,7 @@ type
     property ToExp:string read FToExp;
     property InExp:string read FInExp;
     property DataType:TPartitionOfDataType read FDataType;
+    property TableSpaceID:Integer read FTableSpaceID;
   end;
 
   { TPGTablePartitionList }
@@ -5620,6 +5622,8 @@ begin
       P:=PartitionList.Add(FQuery.FieldByName('oid').AsInteger);
       P.FName:=FQuery.FieldByName('relname').AsString;
       P.FExpression:=FQuery.FieldByName('partition_value').AsString;
+      P.FTableSpaceID:=FQuery.FieldByName('reltablespace').AsInteger;
+
       if P.FExpression = 'DEFAULT' then
         P.FDataType:=podtDefault
       else
@@ -5627,7 +5631,7 @@ begin
         P1.Clear;
         FSQLParser.SetSQL(P.FExpression);
         P1.ParseSQL(FSQLParser);
-        P.FDataType:=P1.PartType;
+        P.FDataType:=P.DataType;
         if (P.FDataType = podtIn) and (P1.Params.Count>0) then
           P.FInExp:=P1.Params[0].Caption
         else

@@ -36,6 +36,8 @@ type
 
   TfbmPGTablePartitionPage = class(TEditorPage)
     MenuItem8: TMenuItem;
+    rxSectionTABLE_SPACE_ID: TLongintField;
+    rxSectionTABLE_SPACE_NAME: TStringField;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
     sSectionEdit: TAction;
@@ -90,6 +92,11 @@ type
     procedure RefreshPage;
     procedure LoadSpr;
     procedure UpdateSectionsGrid(APartitionType:TPGSQLPartitionType);
+    procedure InternalAddPartCreate;
+    procedure InternalAddPartEdit;
+    procedure AddPartition;
+    procedure EditPartition;
+    procedure DelPartition;
   public
     class function PageExists(ADBObject:TDBObject):Boolean; override;
     function PageName:string; override;
@@ -112,41 +119,8 @@ uses rxdbutils, fbmStrConstUnit, pgTypes,
 { TfbmPGTablePartitionPage }
 
 procedure TfbmPGTablePartitionPage.keyAddExecute(Sender: TObject);
-var
-  F: TfbmTableEditorFieldsFrame;
 begin
-  fbmPGTablePartition_EditKeyForm:=TfbmPGTablePartition_EditKeyForm.Create(Application);
-  fbmPGTablePartition_EditKeyForm.FEditorFrame.SQLEngine:=DBObject.OwnerDB;
-
-  F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
-  if Assigned(F) then
-    FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
-
-  if (Sender as TComponent).Tag = 1 then
-  begin
-    fbmPGTablePartition_EditKeyForm.RadioButton1.Checked:=rxKeysKeyType.AsInteger = 0;
-    fbmPGTablePartition_EditKeyForm.RadioButton2.Checked:=rxKeysKeyType.AsInteger <> 0;
-
-    if rxKeysKeyType.AsInteger = 0 then
-      fbmPGTablePartition_EditKeyForm.ComboBox1.Text:=rxKeysExpression.AsString
-    else
-      fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText:=rxKeysExpression.AsString;
-  end;
-
-  if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
-  begin
-    if (Sender as TComponent).Tag = 1 then
-      rxKeys.Edit
-    else
-      rxKeys.Append;
-    rxKeysKeyType.AsInteger:=Ord(fbmPGTablePartition_EditKeyForm.RadioButton2.Checked);
-    if rxKeysKeyType.AsInteger = 0 then
-      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.ComboBox1.Text
-    else
-      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText;
-    rxKeys.Post;
-  end;
-  fbmPGTablePartition_EditKeyForm.Free;
+  AddPartition;
 end;
 
 procedure TfbmPGTablePartitionPage.keyRemoveExecute(Sender: TObject);
@@ -191,6 +165,7 @@ end;
 procedure TfbmPGTablePartitionPage.RefreshPage;
 var
   P: TPGTablePartition;
+  T: TPGTableSpace;
 begin
   LoadSpr;
 
@@ -228,6 +203,13 @@ begin
             rxSectionR_TO.AsString:=P.ToExp;
           end;
         //podtWith:rxSectionH_MODULUS.AsString:=P.InExp;
+      end;
+      rxSectionTABLE_SPACE_ID.AsInteger:=P.TableSpaceID;
+      if P.TableSpaceID <> 0 then
+      begin
+        T:=TSQLEnginePostgre(DBObject.OwnerDB).TableSpaceRoot.TableSpaceByOID(P.TableSpaceID);
+        if Assigned(T) then
+          rxSectionTABLE_SPACE_NAME.AsString:=T.Caption;
       end;
       rxSection.Post;
     end;
@@ -270,6 +252,120 @@ begin
   end;
 end;
 
+procedure TfbmPGTablePartitionPage.InternalAddPartCreate;
+var
+  F: TfbmTableEditorFieldsFrame;
+begin
+  fbmPGTablePartition_EditKeyForm:=TfbmPGTablePartition_EditKeyForm.Create(Application);
+  fbmPGTablePartition_EditKeyForm.FEditorFrame.SQLEngine:=DBObject.OwnerDB;
+
+  F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+  if Assigned(F) then
+    FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
+
+  if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
+  begin
+    rxKeys.Append;
+    rxKeysKeyType.AsInteger:=Ord(fbmPGTablePartition_EditKeyForm.RadioButton2.Checked);
+    if rxKeysKeyType.AsInteger = 0 then
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.ComboBox1.Text
+    else
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText;
+    rxKeys.Post;
+  end;
+  fbmPGTablePartition_EditKeyForm.Free;
+end;
+
+procedure TfbmPGTablePartitionPage.InternalAddPartEdit;
+var
+  F: TfbmTableEditorFieldsFrame;
+begin
+  fbmPGTablePartition_EditKeyForm:=TfbmPGTablePartition_EditKeyForm.Create(Application);
+  fbmPGTablePartition_EditKeyForm.FEditorFrame.SQLEngine:=DBObject.OwnerDB;
+
+  F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+  if Assigned(F) then
+    FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
+(*
+  if (Sender as TComponent).Tag = 1 then
+  begin
+    fbmPGTablePartition_EditKeyForm.RadioButton1.Checked:=rxKeysKeyType.AsInteger = 0;
+    fbmPGTablePartition_EditKeyForm.RadioButton2.Checked:=rxKeysKeyType.AsInteger <> 0;
+
+    if rxKeysKeyType.AsInteger = 0 then
+      fbmPGTablePartition_EditKeyForm.ComboBox1.Text:=rxKeysExpression.AsString
+    else
+      fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText:=rxKeysExpression.AsString;
+  end;
+*)
+  if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
+  begin
+(*
+    if (Sender as TComponent).Tag = 1 then
+      rxKeys.Edit
+    else
+      rxKeys.Append;
+    rxKeysKeyType.AsInteger:=Ord(fbmPGTablePartition_EditKeyForm.RadioButton2.Checked);
+    if rxKeysKeyType.AsInteger = 0 then
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.ComboBox1.Text
+    else
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText;
+    rxKeys.Post; *)
+  end;
+  fbmPGTablePartition_EditKeyForm.Free;
+end;
+
+procedure TfbmPGTablePartitionPage.AddPartition;
+begin
+  if DBObject.State = sdboCreate then
+    InternalAddPartCreate
+  else
+    InternalAddPartEdit;
+end;
+
+procedure TfbmPGTablePartitionPage.EditPartition;
+begin
+(*
+  fbmPGTablePartition_EditKeyForm:=TfbmPGTablePartition_EditKeyForm.Create(Application);
+  fbmPGTablePartition_EditKeyForm.FEditorFrame.SQLEngine:=DBObject.OwnerDB;
+
+  F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+  if Assigned(F) then
+    FieldValueToStrings(F.rxFieldList, 'FIELD_NAME', fbmPGTablePartition_EditKeyForm.ComboBox1.Items);
+
+  if (Sender as TComponent).Tag = 1 then
+  begin
+    fbmPGTablePartition_EditKeyForm.RadioButton1.Checked:=rxKeysKeyType.AsInteger = 0;
+    fbmPGTablePartition_EditKeyForm.RadioButton2.Checked:=rxKeysKeyType.AsInteger <> 0;
+
+    if rxKeysKeyType.AsInteger = 0 then
+      fbmPGTablePartition_EditKeyForm.ComboBox1.Text:=rxKeysExpression.AsString
+    else
+      fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText:=rxKeysExpression.AsString;
+  end;
+
+  if fbmPGTablePartition_EditKeyForm.ShowModal = mrOk then
+  begin
+    if (Sender as TComponent).Tag = 1 then
+      rxKeys.Edit
+    else
+      rxKeys.Append;
+    rxKeysKeyType.AsInteger:=Ord(fbmPGTablePartition_EditKeyForm.RadioButton2.Checked);
+    if rxKeysKeyType.AsInteger = 0 then
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.ComboBox1.Text
+    else
+      rxKeysExpression.AsString:=fbmPGTablePartition_EditKeyForm.FEditorFrame.EditorText;
+    rxKeys.Post;
+  end;
+  fbmPGTablePartition_EditKeyForm.Free;
+*)
+end;
+
+procedure TfbmPGTablePartitionPage.DelPartition;
+begin
+
+end;
+
 class function TfbmPGTablePartitionPage.PageExists(ADBObject: TDBObject
   ): Boolean;
 begin
@@ -286,7 +382,17 @@ end;
 function TfbmPGTablePartitionPage.DoMetod(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=inherited DoMetod(PageAction);
+  Result:=false;
+  case PageAction of
+    epaAdd:AddPartition;
+    epaEdit:EditPartition;
+    epaDelete:DelPartition;
+    epaRefresh:RefreshPage;
+//    epaPrint
+//    epaCompile
+  else
+    Result:=inherited DoMetod(PageAction);
+  end;
 end;
 
 procedure TfbmPGTablePartitionPage.Activate;
@@ -298,7 +404,10 @@ end;
 function TfbmPGTablePartitionPage.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=PageAction in [epaAdd, epaEdit, epaDelete, epaRefresh, epaPrint, epaCompile];
+  if PageAction = epaEdit then
+    Result:=DBObject.State <> sdboEdit
+  else
+    Result:=PageAction in [epaAdd, epaDelete, epaRefresh, epaPrint, epaCompile];
 end;
 
 constructor TfbmPGTablePartitionPage.CreatePage(TheOwner: TComponent;
@@ -321,6 +430,7 @@ begin
   RxDBGrid2.ColumnByFieldName('R_TO').Title.Caption:=sTo;
   RxDBGrid2.ColumnByFieldName('R_IN').Title.Caption:=sIn;
   RxDBGrid2.ColumnByFieldName('DEFAULT').Title.Caption:=sDefault;
+  RxDBGrid2.ColumnByFieldName('TABLE_SPACE_NAME').Title.Caption:=sTableSpace;
 
 //  RxDBGrid2.ColumnByFieldName('H_MODULUS').Title.Caption:=ComboBox1.ItemIndex = 3;
 //  RxDBGrid2.ColumnByFieldName('H_REMINDER').Title.Caption:=ComboBox1.ItemIndex = 3;

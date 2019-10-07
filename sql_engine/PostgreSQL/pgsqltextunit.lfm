@@ -1965,6 +1965,7 @@ object pgSqlTextModule: TpgSqlTextModule
           'select'
           '  pg_class.oid,'
           '  pg_class.relname,'
+          '  pg_class.reltablespace,'
           '  pg_get_expr(pg_class.relpartbound, pg_class.oid) AS partition_value'
           'from'
           '  pg_inherits'
