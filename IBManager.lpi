@@ -1841,6 +1841,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="fbmPGTablePartition_EditSectionUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="config/Postgree/otpostgretabletemplateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="otPostgreTableTemplateFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="otPostgreTableTemplateUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

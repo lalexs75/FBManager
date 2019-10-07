@@ -387,6 +387,7 @@ begin
   tlsExtractMetadata.Hint:=sMenuExtractMetadataHint;
   tlsReportManager.Caption:=sMenuReportManager;
   tlsReportManager.Hint:=sMenuReportManagerHint;
+  tlsDataBaseComparer.Caption:=sDatabaseComparer;
 
   MenuItem2.Caption:=sMenuOptions;
   optEditors.Caption:=sMenuOptEditors;

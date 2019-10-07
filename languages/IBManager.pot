@@ -896,6 +896,10 @@ msgstr ""
 msgid "Database alias"
 msgstr ""
 
+#: fbmstrconstunit.sdatabasecomparer
+msgid "Database comparer"
+msgstr ""
+
 #: fbmstrconstunit.sdatabasedialect
 msgid "Database dialect"
 msgstr ""
@@ -3662,6 +3666,14 @@ msgstr ""
 msgid "Partitions"
 msgstr ""
 
+#: fbmstrconstunit.spartitionsectiondesctempate
+msgid "Partition section description"
+msgstr ""
+
+#: fbmstrconstunit.spartitionsectionnametempate
+msgid "Partition section name tempate"
+msgstr ""
+
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
 msgstr ""
@@ -3735,6 +3747,10 @@ msgstr ""
 
 #: fbmstrconstunit.spgpgsqlfunctionlazy
 msgid "PG : function lazy mode"
+msgstr ""
+
+#: fbmstrconstunit.spgpgsqltable
+msgid "PG : table"
 msgstr ""
 
 #: fbmstrconstunit.spgpgsqltrigger
@@ -4394,6 +4410,10 @@ msgstr ""
 msgid "Section params"
 msgstr ""
 
+#: fbmstrconstunit.ssectionproperty
+msgid "Section property"
+msgstr ""
+
 #: fbmstrconstunit.ssecurity
 msgid "Security"
 msgstr ""
@@ -4584,8 +4604,8 @@ msgstr ""
 msgid "Show system objects"
 msgstr ""
 
-#: fbmstrconstunit.sshowttablepartiotions
-msgid "Show table's partiotions"
+#: fbmstrconstunit.sshowttablepartitions
+msgid "Show table's partitions"
 msgstr ""
 
 #: fbmstrconstunit.sshowview

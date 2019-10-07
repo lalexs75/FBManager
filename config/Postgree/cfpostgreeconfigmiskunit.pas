@@ -91,7 +91,7 @@ begin
   Label1.Caption:=sShowObjectOnGrantPageDefault;
   Label2.Caption:=sInitialValueForNewSequence;
   CheckBox1.Caption:=sCreateIndexAfterCreateFK;
-  CheckBox2.Caption:=sShowTtablePartiotions;
+  CheckBox2.Caption:=sShowTtablePartitions;
 
   ComboBox1.Items.Clear;
   ComboBox1.Items.Add(sShowAllObjects);

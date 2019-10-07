@@ -642,6 +642,11 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       item
         Name = 'SchemaID'
         DataType = ftInteger
+      end    
+      item
+        Name = 'Description'
+        DataType = ftString
+        Size = 2000
       end>
     AfterInsert = rxSectionAfterInsert
     PacketRecords = 0
@@ -744,6 +749,16 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+    end
+    object rxSectionDescription: TStringField
+      FieldKind = fkData
+      FieldName = 'Description'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 2000
     end
   end
   object PopupMenu1: TPopupMenu[16]

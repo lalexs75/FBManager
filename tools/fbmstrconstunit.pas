@@ -916,6 +916,8 @@ resourcestring
   sPGAllowCreateRoles               = 'Allow create roles';
   sPGAllowChangeSystemCatalog       = 'Allow change system catalog directly';
   sPGAllowCreateReplications        = 'Allow create replications and backup';
+  sPartitionSectionNameTempate      = 'Partition section name tempate';
+  sPartitionSectionDescTempate      = 'Partition section description';
 
 
 

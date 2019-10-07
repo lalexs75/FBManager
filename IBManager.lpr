@@ -123,7 +123,7 @@ uses
   pgForeignUserMapping, pgForeignServerUnit, fdbm_ssh_ParamsUnit,
   SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
   fbmToolsNV, fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit,
-  fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit
+  fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit, otPostgreTableTemplateUnit
 
   ;
 

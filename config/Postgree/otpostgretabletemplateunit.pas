@@ -25,26 +25,32 @@ unit otPostgreTableTemplateUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, 
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, 
     cfAbstractConfigFrameUnit;
+
 
 type
 
   { TotPostgreTableTemplateFrame }
 
   TotPostgreTableTemplateFrame = class(TFBMConfigPageAbstract)
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
   private
 
   public
     constructor Create(TheOwner: TComponent); override;
     function PageName:string;override;
+    procedure Localize;override;
     procedure LoadData;override;
     procedure SaveData;override;
   end;
 
 implementation
 
-uses fbmStrConstUnit;
+uses fbmToolsUnit, fbmStrConstUnit, pg_sql_lines_unit;
 
 {$R *.lfm}
 
@@ -60,14 +66,23 @@ begin
   Result:=sPGPgSqlTable;
 end;
 
+procedure TotPostgreTableTemplateFrame.Localize;
+begin
+  inherited Localize;
+  Label1.Caption:=sPartitionSectionNameTempate;
+  Label2.Caption:=sPartitionSectionDescTempate;
+end;
+
 procedure TotPostgreTableTemplateFrame.LoadData;
 begin
-  inherited LoadData;
+  Edit1.Text:=ConfigValues.ByNameAsString('Template/PostgreSQL/PartitionSectionName', DummyPGPartitionSectionName);
+  Edit2.Text:=ConfigValues.ByNameAsString('Template/PostgreSQL/PartitionSectionDesc', DummyPGPartitionSectionDesc);
 end;
 
 procedure TotPostgreTableTemplateFrame.SaveData;
 begin
-  inherited SaveData;
+  ConfigValues.SetByNameAsString('Template/PostgreSQL/PartitionSectionName', Edit1.Text);
+  ConfigValues.SetByNameAsString('Template/PostgreSQL/PartitionSectionDesc', Edit2.Text);
 end;
 
 end.

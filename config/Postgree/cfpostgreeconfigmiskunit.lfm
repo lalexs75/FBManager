@@ -92,9 +92,9 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     Left = 6
     Height = 23
     Top = 156
-    Width = 173
+    Width = 165
     BorderSpacing.Around = 6
-    Caption = 'Show table''s partiotions'
+    Caption = 'Show table''s partitions'
     TabOrder = 3
   end
 end

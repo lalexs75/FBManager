@@ -930,6 +930,10 @@ msgstr "База данных"
 msgid "Database alias"
 msgstr "Псевдоним базы данных"
 
+#: fbmstrconstunit.sdatabasecomparer
+msgid "Database comparer"
+msgstr ""
+
 #: fbmstrconstunit.sdatabasedialect
 msgid "Database dialect"
 msgstr "Диалект базы данных"
@@ -3792,6 +3796,14 @@ msgstr "Ключ партицирования"
 msgid "Partitions"
 msgstr "Разделы"
 
+#: fbmstrconstunit.spartitionsectiondesctempate
+msgid "Partition section description"
+msgstr ""
+
+#: fbmstrconstunit.spartitionsectionnametempate
+msgid "Partition section name tempate"
+msgstr ""
+
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
 msgstr "Секция раздела"
@@ -3867,6 +3879,10 @@ msgstr "PG : PgSql функция"
 #: fbmstrconstunit.spgpgsqlfunctionlazy
 msgid "PG : function lazy mode"
 msgstr "PG : PgSql ленивый режим в функциях"
+
+#: fbmstrconstunit.spgpgsqltable
+msgid "PG : table"
+msgstr "PG : Таблицы"
 
 #: fbmstrconstunit.spgpgsqltrigger
 msgid "PG : trigger"
@@ -4548,6 +4564,10 @@ msgstr "Наименование секции"
 msgid "Section params"
 msgstr "Параметры секции"
 
+#: fbmstrconstunit.ssectionproperty
+msgid "Section property"
+msgstr ""
+
 #: fbmstrconstunit.ssecurity
 msgctxt "fbmstrconstunit.ssecurity"
 msgid "Security"
@@ -4740,9 +4760,9 @@ msgstr "Отображать правую границу"
 msgid "Show system objects"
 msgstr "Отображать системные объекты"
 
-#: fbmstrconstunit.sshowttablepartiotions
-msgid "Show table's partiotions"
-msgstr "Отображать разделы для партицировонных таблиц"
+#: fbmstrconstunit.sshowttablepartitions
+msgid "Show table's partitions"
+msgstr ""
 
 #: fbmstrconstunit.sshowview
 msgid "Show view"

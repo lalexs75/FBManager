@@ -27,6 +27,9 @@ interface
 uses
   Classes, SysUtils; 
 
+const
+  DummyPGPartitionSectionName = '%TABLE_NAME%_section_%COUNT%';
+  DummyPGPartitionSectionDesc = 'Section of %TABLE_NAME%';
 //Запросы на выборку метаданных
 const
   sql_PG_UserParams =

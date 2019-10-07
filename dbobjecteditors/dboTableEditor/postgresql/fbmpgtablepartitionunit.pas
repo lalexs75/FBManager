@@ -36,6 +36,7 @@ type
 
   TfbmPGTablePartitionPage = class(TEditorPage)
     MenuItem8: TMenuItem;
+    rxSectionDescription: TStringField;
     rxSectionSchemaID: TLongintField;
     rxSectionTABLE_SPACE_ID: TLongintField;
     rxSectionTABLE_SPACE_NAME: TStringField;
@@ -103,6 +104,8 @@ type
     procedure AddSection;
     procedure EditSection;
     procedure DelSection;
+    function GenerateSctionName:string;
+    function TableName:string;
   public
     class function PageExists(ADBObject:TDBObject):Boolean; override;
     function PageName:string; override;
@@ -116,7 +119,7 @@ type
 
 implementation
 
-uses rxdbutils, fbmStrConstUnit, fbmToolsUnit, pgTypes,
+uses rxdbutils, fbmStrConstUnit, fbmToolsUnit, pgTypes, StrUtils, pg_sql_lines_unit,
   SQLEngineCommonTypesUnit, rxAppUtils, fbmTableEditorFieldsUnit,
   fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit;
 
@@ -315,20 +318,63 @@ procedure TfbmPGTablePartitionPage.InternalAddSectionCreate;
 begin
   fbmPGTablePartition_EditSectionForm:=TfbmPGTablePartition_EditSectionForm.Create(Application);
   fbmPGTablePartition_EditSectionForm.SetEngine(DBObject.OwnerDB as TSQLEnginePostgre, FPartitionType);
+
+  fbmPGTablePartition_EditSectionForm.Edit3.Text:=GenerateSctionName;
+  fbmPGTablePartition_EditSectionForm.Edit4.Text:=
+    StringReplace(ConfigValues.ByNameAsString('Template/PostgreSQL/PartitionSectionDesc', DummyPGPartitionSectionDesc), '%TABLE_NAME%', TableName, [rfReplaceAll, rfIgnoreCase]);
   if fbmPGTablePartition_EditSectionForm.ShowModal = mrOk then
   begin
-    ;
+    rxSection.Append;
+    rxSectionNAME.AsString:=fbmPGTablePartition_EditSectionForm.Edit3.Text;
+    rxSectionDescription.AsString:=fbmPGTablePartition_EditSectionForm.Edit4.Text;
+    if fbmPGTablePartition_EditSectionForm.CheckBox1.Checked then
+      rxSectionTABLE_SPACE_NAME.AsString:=fbmPGTablePartition_EditSectionForm.ComboBox1.Text;
+    rxSection.Post;
   end;
   fbmPGTablePartition_EditSectionForm.Free;
 end;
 
 procedure TfbmPGTablePartitionPage.InternalAddSectionEdit;
+var
+  FCmd: TPGSQLCreateTable;
 begin
   fbmPGTablePartition_EditSectionForm:=TfbmPGTablePartition_EditSectionForm.Create(Application);
   fbmPGTablePartition_EditSectionForm.SetEngine(DBObject.OwnerDB as TSQLEnginePostgre, FPartitionType);
+
+  fbmPGTablePartition_EditSectionForm.Edit3.Text:=GenerateSctionName;
+  fbmPGTablePartition_EditSectionForm.Edit4.Text:=
+    StringReplace(ConfigValues.ByNameAsString('Template/PostgreSQL/PartitionSectionDesc', DummyPGPartitionSectionDesc), '%TABLE_NAME%', TableName, [rfReplaceAll, rfIgnoreCase]);
+
   if fbmPGTablePartition_EditSectionForm.ShowModal = mrOk then
   begin
-    ;
+    FCmd:=TPGSQLCreateTable.Create(nil);
+    FCmd.Name:=fbmPGTablePartition_EditSectionForm.Edit3.Text;
+    FCmd.SchemaName:=DBObject.SchemaName;
+    FCmd.PartitionOfData.PartitionTableName:=DBObject.CaptionFullPatch;
+    if fbmPGTablePartition_EditSectionForm.CheckBox1.Checked then
+      FCmd.TableSpace:=fbmPGTablePartition_EditSectionForm.ComboBox1.Text;
+
+    if fbmPGTablePartition_EditSectionForm.RadioButton1.Checked then
+      FCmd.PartitionOfData.PartType:=podtDefault
+    else
+    case FPartitionType of
+      ptRange:
+        begin
+          FCmd.PartitionOfData.PartType:=podtFromTo;
+          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit2.Text);
+        end;
+      ptList:
+        begin
+          FCmd.PartitionOfData.PartType:=podtIn;
+          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+        end;
+      //ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+    end;
+    ExecSQLScript(FCmd.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
+    FCmd.Free;
+    DBObject.RefreshObject;
+    RefreshPage;
   end;
   fbmPGTablePartition_EditSectionForm.Free;
 end;
@@ -371,6 +417,64 @@ begin
       DBObject.RefreshObject;
       RefreshPage;
     end;
+  end;
+end;
+
+function TfbmPGTablePartitionPage.GenerateSctionName: string;
+function DoFind(AName:string):boolean;
+var
+  i: Integer;
+  P: TPGTablePartition;
+  T: TDBObject;
+begin
+  AName:=UpperCase(AName);
+  Result:=rxSection.Locate('NAME', AName, [loCaseInsensitive]);
+  if not Result then
+  begin
+    for i:=0 to DBObject.OwnerRoot.CountObject-1 do
+    begin
+      T:=DBObject.OwnerRoot[i];
+      Result:=AName = UpperCase(T.Caption);
+      if Result then Exit;
+
+      for P in TPGTable(T).PartitionList do
+      begin
+        if AName = UpperCase(P.Name) then
+          Exit(true);
+      end;
+    end;
+  end;
+end;
+
+var
+  I: Integer;
+  S1, S: String;
+begin
+  I:=0;
+  S1:=StringReplace(ConfigValues.ByNameAsString('Template/PostgreSQL/PartitionSectionName', DummyPGPartitionSectionName), '%TABLE_NAME%', TableName, [rfReplaceAll, rfIgnoreCase]);
+  repeat
+    Inc(i);
+    S:=StringReplace(S1, '%COUNT%', IntToStr(i), [rfReplaceAll, rfIgnoreCase]);
+  until not DoFind(S);
+  Result:=S;
+end;
+
+function TfbmPGTablePartitionPage.TableName: string;
+var
+  F: TfbmTableEditorFieldsFrame;
+begin
+  if DBObject.State = sdboEdit then
+    Result:=DBObject.Caption
+  else
+  begin
+    F:=FindPageByClass(TfbmTableEditorFieldsFrame) as TfbmTableEditorFieldsFrame;
+    if Assigned(F) then
+    begin
+      if DBObject.SchemaName<>'' then Result:=DBObject.SchemaName+'.';
+      Result:=Result + F.edtTableName.Text;
+    end
+    else
+    Result:='';
   end;
 end;
 
@@ -442,9 +546,6 @@ begin
 
 //  RxDBGrid2.ColumnByFieldName('H_MODULUS').Title.Caption:=ComboBox1.ItemIndex = 3;
 //  RxDBGrid2.ColumnByFieldName('H_REMINDER').Title.Caption:=ComboBox1.ItemIndex = 3;
-
-  //StaticText1.Caption:=;
-  //StaticText2.Caption:=;
 
   ComboBox1.Items[0]:=sNone;
   ComboBox1.Items[1]:=sRange;

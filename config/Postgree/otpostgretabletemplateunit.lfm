@@ -1,4 +1,59 @@
 inherited otPostgreTableTemplateFrame: TotPostgreTableTemplateFrame
+  Height = 234
+  Width = 394
+  ClientHeight = 234
+  ClientWidth = 394
   DesignLeft = 688
   DesignTop = 343
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 189
+    BorderSpacing.Around = 6
+    Caption = 'Partition section name tempate'
+    ParentColor = False
+  end
+  object Edit1: TEdit[1]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 29
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 69
+    Width = 168
+    BorderSpacing.Around = 6
+    Caption = 'Partition section description'
+    ParentColor = False
+  end
+  object Edit2: TEdit[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 92
+    Width = 376
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+  end
 end
