@@ -925,6 +925,7 @@ type
     FOnly: boolean;
     FEnableState:TTriggerState;
     FUpDel: Integer;
+    FPGSQLPartitionOfData:TPGSQLPartitionOfData;
     procedure AddCollumn(OP:TAlterTableOperator);
   protected
     procedure InitParserTree;override;
@@ -932,6 +933,7 @@ type
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SchemaName;
     property Only:boolean read FOnly write FOnly;
@@ -3432,7 +3434,7 @@ var
 begin
   if not Assigned(AOwner) then
     raise Exception.Create('Not assigned owner');
-  if (not Assigned(AStartNode)) or (Length(AEndNodes) = 0) then
+  if (not Assigned(AStartNode)) {or (Length(AEndNodes) = 0)} then
     raise Exception.Create('Not assigned start or end node');
 
   FBaseCmd:=ABaseCmd;
@@ -3530,7 +3532,7 @@ var
 begin
   Result:='';
   case FPartType of
-    podtDefault:S:=' DEFAULT';
+    podtDefault:S:='DEFAULT';
     podtIn:S:='IN (' + Params.AsString + ')';
     podtFromTo:if Params.Count>1 then
                  S:='FROM ('+Params[0].Caption + ') TO ('+Params[1].Caption+')';
@@ -3542,9 +3544,10 @@ begin
   end;
   if (S<>'') then
   begin
-    Result:='  PARTITION OF ' + PartitionTableName;
+    if PartitionTableName<>'' then
+      Result:='  PARTITION OF ' + PartitionTableName + ' ';
     if FPartType<>podtDefault then
-      Result:=Result + ' FOR VALUES ' + S
+      Result:=Result + 'FOR VALUES ' + S
     else
       Result:=Result + S;
   end;
@@ -18001,7 +18004,7 @@ var
     TConstFKMatch1, TConstFKMatch2, TConstFKMatch3, TConstFKOn,
     TConstFKOn1, TConstFKOn2, TConstFKOn10, TConstFKOn11,
     TConstFKOn12, TConstFKOn13, TConstFKOn14, TSet, T2_1, T4_1,
-    T4_2, T4_3, T4_4, T5, TReset, TDetach: TSQLTokenRecord;
+    T4_2, T4_3, T4_4, T5, TReset, TDetach, TAtach, TAtach1: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER TABLE }
   { TODO : Реализовать парсер ALTER TABLE IF EXISTS }
@@ -18388,6 +18391,21 @@ ADD ограничение_таблицы [ NOT VALID ]
     T:=AddSQLTokens(stSymbol, T, '.', [toOptional], 24);
     T:=AddSQLTokens(stIdentificator, T, '', [], 24);
 
+  //ALTER TABLE [ IF EXISTS ] имя ATTACH PARTITION имя_секции { FOR VALUES указание_границ_секции | DEFAULT }
+  //указание_границ_секции
+  //IN ( { числовая_константа | строковая_константа | TRUE | FALSE | NULL } [, ...] ) |
+  //FROM ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] )
+  //  TO ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] ) |
+  //WITH ( MODULUS числовая_константа, REMAINDER числовая_константа )
+  TAtach:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'ATTACH', [], 25);
+  TAtach:=AddSQLTokens(stKeyword, TAtach, 'PARTITION', []);
+    T:=AddSQLTokens(stIdentificator, TAtach, '', [], 24);
+    T1:=AddSQLTokens(stSymbol, T1, '.', [toOptional], 24);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 24);
+    TAtach1:=AddSQLTokens(stKeyword, [T, T1], 'DEFAULT', [], 26);
+    TAtach1:=AddSQLTokens(stKeyword, [T, T1], 'FOR', []);
+    TAtach1:=AddSQLTokens(stKeyword, TAtach1, 'VALUES', []);
+    FPGSQLPartitionOfData.InternalInitParserTree(TAtach1, [], 66, Self); //66-71
 end;
 
 procedure TPGSQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -18571,6 +18589,14 @@ begin
           FCurOperator:=FOperators.AddItem(ataReSetParams, '');
         FCurParam:=FCurOperator.Params.AddParam(AWord);
       end;
+
+    25:FCurOperator:=FOperators.AddItem(ataAttachPartition);
+    66:FCurOperator.Position:=Ord(podtIn);
+    67:FCurOperator.Params.AddParam(AWord);
+    //68:FCurParam:=nil;
+    69:FCurOperator.Position:=Ord(podtFromTo);
+    70:FCurOperator.Position:=Ord(podtWith);
+    26:FCurOperator.Position:=Ord(podtDefault);
   end;
 end;
 
@@ -18702,6 +18728,17 @@ begin
   Result:='';
 end;
 
+procedure AttachPartition(OP: TAlterTableOperator);
+var
+  S: String;
+begin
+  //ALTER TABLE [ IF EXISTS ] имя ATTACH PARTITION имя_секции { FOR VALUES указание_границ_секции | DEFAULT }
+  FPGSQLPartitionOfData.FParams.Assign(OP.Params);
+  FPGSQLPartitionOfData.FPartType:=TPartitionOfDataType(OP.Position);
+  S:='ALTER TABLE '+FullName + ' ATTACH PARTITION ' + OP.Name + ' ' +  FPGSQLPartitionOfData.AsString;
+  AddSQLCommand(S);
+end;
+
 var
   OP: TAlterTableOperator;
 begin
@@ -18728,6 +18765,7 @@ begin
       ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, OP.ParamValue]);
       ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, OP.ParamValue]);
       ataDetachPartition:AddSQLCommandEx('ALTER TABLE %s DETACH PARTITION %s', [FullName, OP.Name]); //ALTER TABLE [ IF EXISTS ] имя DETACH PARTITION имя_секции
+      ataAttachPartition:AttachPartition(OP);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
@@ -18736,8 +18774,15 @@ end;
 
 constructor TPGSQLAlterTable.Create(AParent: TSQLCommandAbstract);
 begin
+  FPGSQLPartitionOfData:=TPGSQLPartitionOfData.Create(nil);
   inherited Create(AParent);
   FSQLCommentOnClass:=TPGSQLCommentOn;
+end;
+
+destructor TPGSQLAlterTable.Destroy;
+begin
+  FreeAndNil(FPGSQLPartitionOfData);
+  inherited Destroy;
 end;
 
 procedure TPGSQLAlterTable.Assign(ASource: TSQLObjectAbstract);

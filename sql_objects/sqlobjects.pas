@@ -125,7 +125,8 @@ type
      ataAddIndex,
      ataSetParams,
      ataReSetParams,
-     ataDetachPartition
+     ataDetachPartition,
+     ataAttachPartition
     );
 
 
@@ -700,7 +701,8 @@ const
     'ataAddIndex',
     'ataSetParams',
     'ataReSetParams',
-    'ataDetachPartition'
+    'ataDetachPartition',
+    'ataAttachPartition'
     );
 
 function IndexSortOrderStr(AValue:TIndexSortOrder):string;
