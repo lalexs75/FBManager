@@ -234,7 +234,7 @@ const
        -1, //okOperatorClass,
        -1, //okOperatorFamily,
        49, //okUserMapping
-       3   //okPartitionTable
+       88  //okPartitionTable
      );
 
   DBObjectKindFolderImages: array [TDBObjectKind] of integer =
@@ -778,11 +778,13 @@ begin
   List.Add(IntToStr(Ord(AObjKind)) + '=' + IntToStr(Index));
 end;
 
+var
+  P: TDBObjectKind;
 begin
   List.Clear;
-//  for P in TDBObjectKind do
-//    DoAdd(P, );
-
+  for P in TDBObjectKind do
+    DoAdd(P, DBObjectKindImages[P]);
+(*
   DoAdd(okDomain, 2);
   DoAdd(okTable, 3);
   DoAdd(okPartitionTable, 3);
@@ -803,7 +805,7 @@ begin
   DoAdd(okForeignKey, 53);
   DoAdd(okPrimaryKey, 55);
   DoAdd(okUniqueConstraint, 56);
-  DoAdd(okOther, -1);
+  DoAdd(okOther, -1); *)
 end;
 
 function ObjectKindToStr(ADBObjectKind: TDBObjectKind): string;
