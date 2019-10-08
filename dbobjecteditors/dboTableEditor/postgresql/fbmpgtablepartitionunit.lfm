@@ -30,6 +30,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
+    ItemIndex = 0
     Items.Strings = (
       'None'
       'Range'
@@ -39,6 +40,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     OnChange = ComboBox1Change
     Style = csDropDownList
     TabOrder = 0
+    Text = 'None'
   end
   object RxDBGrid1: TRxDBGrid[2]
     AnchorSideLeft.Control = Owner
