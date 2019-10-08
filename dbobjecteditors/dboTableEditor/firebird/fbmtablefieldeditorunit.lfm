@@ -50,10 +50,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     Height = 496
     Top = 115
     Width = 804
-    ActivePage = tabArray
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 4
     object TabSheet1: TTabSheet
       Caption = 'Field type'
@@ -244,7 +244,6 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         ItemHeight = 0
         OnChange = CB_CharSetChange
         ParentFont = False
-        Style = csDropDownList
         TabOrder = 7
       end
       object cbCollations: TComboBox
@@ -262,7 +261,6 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         BorderSpacing.Around = 6
         ItemHeight = 0
         ParentFont = False
-        Style = csDropDownList
         TabOrder = 8
       end
       object edtTypeDesc: TMemo

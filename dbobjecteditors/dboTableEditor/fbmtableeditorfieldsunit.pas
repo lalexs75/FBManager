@@ -419,6 +419,7 @@ begin
       if TDBDomain(D).FieldType.VarDec then
         fbmTableFieldEditorForm.edtScale.Value := TDBDomain(D).FieldDecimal;
     end;
+    fbmTableFieldEditorForm.cbCollations.Text := rxFieldListFIELD_COLLATE.AsString;
   end
   else
   begin
