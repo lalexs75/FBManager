@@ -78,6 +78,14 @@ msgstr ""
 msgid "Add param"
 msgstr ""
 
+#: fbmstrconstunit.saddpatitionkey
+msgid "Add patition key"
+msgstr ""
+
+#: fbmstrconstunit.saddpatitionkeyhint
+msgid "Add patition key (collumn or expression)"
+msgstr ""
+
 #: fbmstrconstunit.saddtemplate
 msgid "Add template"
 msgstr ""
@@ -1523,6 +1531,14 @@ msgstr ""
 
 #: fbmstrconstunit.seditparam
 msgid "Edit param"
+msgstr ""
+
+#: fbmstrconstunit.seditpatitionkey
+msgid "Edit patition key"
+msgstr ""
+
+#: fbmstrconstunit.seditpatitionkeyhint
+msgid "Edit patition key (collumn or expression)"
 msgstr ""
 
 #: fbmstrconstunit.sedittemplate
@@ -3682,6 +3698,14 @@ msgstr ""
 msgid "Partition type"
 msgstr ""
 
+#: fbmstrconstunit.spartitiontypehint
+msgid ""
+"Partition table supports two types of keys:\n"
+"Column: User can select any column from the list of available columns.\n"
+"Expression: User can specify expression to create partition key.\n"
+"Example: Let's say, we want to create a partition table based per year for the column 'saledate', having datatype 'date/timestamp', then we need to specify the expression as 'extract(YEAR from saledate)' as partition key."
+msgstr ""
+
 #: fbmstrconstunit.spassword
 msgctxt "fbmstrconstunit.spassword"
 msgid "Password"
@@ -4118,6 +4142,14 @@ msgstr ""
 
 #: fbmstrconstunit.sremoveline
 msgid "Remove line"
+msgstr ""
+
+#: fbmstrconstunit.sremovepatitionkey
+msgid "Remove patition key"
+msgstr ""
+
+#: fbmstrconstunit.sremovepatitionkeyhint
+msgid "Remove patition key (collumn or expression)"
 msgstr ""
 
 #: fbmstrconstunit.srename

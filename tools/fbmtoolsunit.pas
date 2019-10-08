@@ -58,7 +58,7 @@ procedure ErrorBoxExcpt(E:Exception);
 function QuestionBox(QuestionMessage:string):boolean;
 function QuestionBoxFmt(QuestionMessage:string; Args:array of const):boolean;
 function QuestionBoxExt(QuestionMessage:string): integer;
-procedure NotCompleteFunction;
+procedure NotImplemented;
 
 var
   LocalCfgFolder     : string = '';
@@ -235,7 +235,7 @@ begin
   Result:=Application.MessageBox(PChar(QuestionMessage), PChar(sQuestion), MB_YESNOCANCEL + MB_ICONQUESTION);
 end;
 
-procedure NotCompleteFunction;
+procedure NotImplemented;
 begin
   ErrorBox(sFuntionNotComplete);
 end;

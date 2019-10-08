@@ -93,6 +93,14 @@ msgctxt "fbmstrconstunit.saddparam"
 msgid "Add param"
 msgstr "Добавить параметр"
 
+#: fbmstrconstunit.saddpatitionkey
+msgid "Add patition key"
+msgstr ""
+
+#: fbmstrconstunit.saddpatitionkeyhint
+msgid "Add patition key (collumn or expression)"
+msgstr ""
+
 #: fbmstrconstunit.saddtemplate
 msgid "Add template"
 msgstr "Добавить шаблон"
@@ -1596,6 +1604,14 @@ msgstr "Параметры редактора"
 msgctxt "fbmstrconstunit.seditparam"
 msgid "Edit param"
 msgstr "Изменить параметр"
+
+#: fbmstrconstunit.seditpatitionkey
+msgid "Edit patition key"
+msgstr ""
+
+#: fbmstrconstunit.seditpatitionkeyhint
+msgid "Edit patition key (collumn or expression)"
+msgstr ""
 
 #: fbmstrconstunit.sedittemplate
 msgid "Edit template"
@@ -3812,6 +3828,14 @@ msgstr "Секция раздела"
 msgid "Partition type"
 msgstr "Тип раздела"
 
+#: fbmstrconstunit.spartitiontypehint
+msgid ""
+"Partition table supports two types of keys:\n"
+"Column: User can select any column from the list of available columns.\n"
+"Expression: User can specify expression to create partition key.\n"
+"Example: Let's say, we want to create a partition table based per year for the column 'saledate', having datatype 'date/timestamp', then we need to specify the expression as 'extract(YEAR from saledate)' as partition key."
+msgstr ""
+
 #: fbmstrconstunit.spassword
 msgctxt "fbmstrconstunit.spassword"
 msgid "Password"
@@ -4259,6 +4283,14 @@ msgstr "Удалить файл"
 #: fbmstrconstunit.sremoveline
 msgid "Remove line"
 msgstr "Убрать строку"
+
+#: fbmstrconstunit.sremovepatitionkey
+msgid "Remove patition key"
+msgstr ""
+
+#: fbmstrconstunit.sremovepatitionkeyhint
+msgid "Remove patition key (collumn or expression)"
+msgstr ""
 
 #: fbmstrconstunit.srename
 #, object-pascal-format

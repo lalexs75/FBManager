@@ -463,7 +463,7 @@ end;
 
 function TImportDataForm.SaveToTable: boolean;
 begin
-  NotCompleteFunction;
+  NotImplemented;
   Result:=false;
 end;
 

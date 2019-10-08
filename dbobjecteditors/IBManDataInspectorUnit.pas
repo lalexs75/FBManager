@@ -1153,7 +1153,7 @@ begin
         P.Free;
       end
       else
-        NotCompleteFunction;
+        NotImplemented;
       exit;
     end;
   end;

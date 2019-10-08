@@ -275,7 +275,7 @@ end;
 
 procedure TfbManagerMainForm.tlsDataBaseComparerExecute(Sender: TObject);
 begin
-  NotCompleteFunction;
+  NotImplemented;
 end;
 
 procedure TfbManagerMainForm.tlsDBInspectorExecute(Sender: TObject);

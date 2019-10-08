@@ -232,7 +232,7 @@ end;
 
 procedure TfbmPGTablePartitionPage.sSectionDeatachExecute(Sender: TObject);
 begin
-  NotCompleteFunction;
+  NotImplemented;
 end;
 
 procedure TfbmPGTablePartitionPage.sSectionEditExecute(Sender: TObject);

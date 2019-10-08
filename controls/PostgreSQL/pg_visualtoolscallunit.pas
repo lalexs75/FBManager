@@ -132,7 +132,7 @@ end;
 
 procedure TPostgreVisualTools.tlsPGDBAnalizExecute(Sender: TObject);
 begin
-  NotCompleteFunction;
+  NotImplemented;
   { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
   (*
   1. Список таблиц без PK

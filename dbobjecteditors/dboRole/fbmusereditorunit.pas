@@ -150,7 +150,7 @@ end;
 procedure TfbmUserEditorForm.PrintUserCard;
 begin
   { TODO : Необходимо реализовать печать карточки оператора Postgre }
-  NotCompleteFunction;
+  NotImplemented;
 end;
 
 function TfbmUserEditorForm.UserOptions: TPGUserOptions;

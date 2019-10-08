@@ -160,7 +160,7 @@ procedure TcfKeyboardTemplatesForm.tpLoadDefaultExecute(Sender: TObject);
 begin
   if QuestionBox(sLoadDefaultTemplatesQ) then
   begin
-    NotCompleteFunction;
+    NotImplemented;
   end;
 end;
 
