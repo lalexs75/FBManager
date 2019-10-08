@@ -2373,6 +2373,12 @@ object PGSQLParserData: TPGSQLParserData
           'CREATE TABLE olga.test_part_2_p1'
           '  PARTITION OF olga.test_part_2 DEFAULT;'
         )
+      end    
+      item
+        Caption = 'AlterTable9'
+        Lines.Strings = (
+          'ALTER TABLE measurement DETACH PARTITION measurement_y2006m02;'
+        )
       end>
     Left = 25
     Top = 248
