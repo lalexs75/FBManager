@@ -452,6 +452,8 @@ resourcestring
   sRemovePatitionKeyHint            = 'Remove patition key (collumn or expression)';
   sEditPatitionKey                  = 'Edit patition key';
   sEditPatitionKeyHint              = 'Edit patition key (collumn or expression)';
+  sDetachSectionQuestion            = 'Detach section?';
+  sSectionDetachCaption             = 'Section detach';
 
 
   sSchemeOwner                      = 'Scheme owner';

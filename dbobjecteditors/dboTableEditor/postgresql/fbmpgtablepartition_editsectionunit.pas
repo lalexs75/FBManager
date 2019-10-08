@@ -98,8 +98,15 @@ begin
   Label3.Visible:=RadioButton3.Checked;
   Edit3.Visible:=RadioButton3.Checked;
 
+  Label4.Enabled:=RadioButton3.Checked;
+  Edit4.Enabled:=RadioButton3.Checked;
+
   Label5.Visible:=RadioButton4.Checked;
   ComboBox2.Visible:=RadioButton4.Checked;
+
+  CheckBox1.Enabled:=RadioButton3.Checked;
+  if not CheckBox1.Enabled then
+    CheckBox1.Checked:=false;
 
   if RadioButton4.Checked and (ComboBox2.Items.Count = 0) and Assigned(FEngine) then
     FEngine.FillListForNames(ComboBox2.Items, [okTable]);

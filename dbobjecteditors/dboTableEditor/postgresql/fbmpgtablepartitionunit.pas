@@ -28,14 +28,15 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
   ActnList, Menus, ExtCtrls, DBCtrls, DB, rxdbgrid, rxmemds, rxctrls,
   DividerBevel, fdmAbstractEditorUnit, pg_SqlParserUnit, fbmSqlParserUnit,
-  SQLEngineAbstractUnit, PostgreSQLEngineUnit;
+  SQLEngineAbstractUnit, sqlObjects, PostgreSQLEngineUnit;
 
 type
 
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
-    sSectionDeatach: TAction;
+    MenuItem9: TMenuItem;
+    sSectionDetach: TAction;
     DBMemo1: TDBMemo;
     MenuItem8: TMenuItem;
     Panel1: TPanel;
@@ -98,13 +99,12 @@ type
     procedure rxSectionAfterPost(DataSet: TDataSet);
     procedure SpeedButton2DblClick(Sender: TObject);
     procedure sSectionAddExecute(Sender: TObject);
-    procedure sSectionDeatachExecute(Sender: TObject);
+    procedure sSectionDetachExecute(Sender: TObject);
     procedure sSectionEditExecute(Sender: TObject);
     procedure sSectionRemoveExecute(Sender: TObject);
   private
     FPartitionType: TPGSQLPartitionType;
     procedure RefreshPage;
-    //procedure LoadSpr;
     procedure UpdateSectionsGrid(APartitionType:TPGSQLPartitionType);
     procedure InternalAddSectionCreateOrEdit(AIsEdit:Boolean);
     procedure InternalAddSectionEdit;
@@ -230,9 +230,37 @@ begin
   AddSection;
 end;
 
-procedure TfbmPGTablePartitionPage.sSectionDeatachExecute(Sender: TObject);
+procedure TfbmPGTablePartitionPage.sSectionDetachExecute(Sender: TObject);
+var
+  FCmd: TPGSQLAlterTable;
+  C: TAlterTableOperator;
+  FShm: TPGSchema;
+  S: String;
 begin
-  NotImplemented;
+  if QuestionBox(sDetachSectionQuestion) then
+  begin
+    FCmd:=TPGSQLAlterTable.Create(nil);
+    FCmd.SchemaName:=DBObject.SchemaName;
+    FCmd.Name:=DBObject.Caption;
+    C:=FCmd.AddOperator(ataDetachPartition);
+
+    S:=rxSectionNAME.AsString;
+    FShm:=TSQLEnginePostgre(DBObject.OwnerDB).SchemasRoot.SchemaByOID(rxSectionSchemaID.AsInteger);
+    if Assigned(FShm) then
+      S:=FShm.Caption + '.' + S;
+
+    C.Name:=S;
+
+    try
+      ExecSQLScript(FCmd.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
+    except
+      on E:Exception do
+        DBObject.OwnerDB.InternalError(E.Message);
+    end;
+    FCmd.Free;
+    DBObject.RefreshObject;
+    RefreshPage;
+  end;
 end;
 
 procedure TfbmPGTablePartitionPage.sSectionEditExecute(Sender: TObject);
@@ -251,6 +279,7 @@ var
   T: TPGTableSpace;
 begin
   sSectionEdit.Enabled:=DBObject.State = sdboCreate;
+  sSectionDetach.Enabled:=DBObject.State <> sdboCreate;
 
   //LoadSpr;
 
@@ -403,6 +432,8 @@ end;
 procedure TfbmPGTablePartitionPage.InternalAddSectionEdit;
 var
   FCmd: TPGSQLCreateTable;
+  FCmdA: TPGSQLAlterTable;
+  OP: TAlterTableOperator;
 begin
   fbmPGTablePartition_EditSectionForm:=TfbmPGTablePartition_EditSectionForm.Create(Application);
   fbmPGTablePartition_EditSectionForm.SetEngine(DBObject.OwnerDB as TSQLEnginePostgre, FPartitionType);
@@ -413,37 +444,75 @@ begin
 
   if fbmPGTablePartition_EditSectionForm.ShowModal = mrOk then
   begin
-    FCmd:=TPGSQLCreateTable.Create(nil);
-    FCmd.Name:=fbmPGTablePartition_EditSectionForm.Edit3.Text;
-    FCmd.SchemaName:=DBObject.SchemaName;
-    FCmd.PartitionOfData.PartitionTableName:=DBObject.CaptionFullPatch;
-    if fbmPGTablePartition_EditSectionForm.CheckBox1.Checked then
-      FCmd.TableSpace:=fbmPGTablePartition_EditSectionForm.ComboBox1.Text;
+    if fbmPGTablePartition_EditSectionForm.RadioButton3.Checked then
+    begin
+      FCmd:=TPGSQLCreateTable.Create(nil);
+      FCmd.Name:=fbmPGTablePartition_EditSectionForm.Edit3.Text;
+      FCmd.SchemaName:=DBObject.SchemaName;
+      FCmd.PartitionOfData.PartitionTableName:=DBObject.CaptionFullPatch;
+      if fbmPGTablePartition_EditSectionForm.CheckBox1.Checked then
+        FCmd.TableSpace:=fbmPGTablePartition_EditSectionForm.ComboBox1.Text;
 
-    if fbmPGTablePartition_EditSectionForm.RadioButton1.Checked then
-      FCmd.PartitionOfData.PartType:=podtDefault
+      if fbmPGTablePartition_EditSectionForm.RadioButton1.Checked then
+        FCmd.PartitionOfData.PartType:=podtDefault
+      else
+      case FPartitionType of
+        ptRange:
+          begin
+            FCmd.PartitionOfData.PartType:=podtFromTo;
+            FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+            FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit2.Text);
+          end;
+        ptList:
+          begin
+            FCmd.PartitionOfData.PartType:=podtIn;
+            FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+          end;
+        //ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+      end;
+      try
+        ExecSQLScript(FCmd.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
+      except
+        on E:Exception do
+          DBObject.OwnerDB.InternalError(E.Message);
+      end;
+      FCmd.Free;
+    end
     else
-    case FPartitionType of
-      ptRange:
-        begin
-          FCmd.PartitionOfData.PartType:=podtFromTo;
-          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
-          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit2.Text);
-        end;
-      ptList:
-        begin
-          FCmd.PartitionOfData.PartType:=podtIn;
-          FCmd.PartitionOfData.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
-        end;
-      //ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+    begin
+      FCmdA:=TPGSQLAlterTable.Create(nil);
+      OP:=FCmdA.AddOperator(ataAttachPartition);
+      FCmdA.SchemaName:=DBObject.SchemaName;
+      FCmdA.Name:=DBObject.Caption;
+      OP.Name:=fbmPGTablePartition_EditSectionForm.ComboBox2.Text;
+
+
+      if fbmPGTablePartition_EditSectionForm.RadioButton1.Checked then
+        OP.Position:=Ord(podtDefault)
+      else
+      case FPartitionType of
+        ptRange:
+          begin
+            OP.Position:=Ord(podtFromTo);
+            OP.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+            OP.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit2.Text);
+          end;
+        ptList:
+          begin
+            OP.Position:=Ord(podtIn);
+            OP.Params.AddParam(fbmPGTablePartition_EditSectionForm.Edit1.Text);
+          end;
+        //ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+      end;
+
+      try
+        ExecSQLScript(FCmdA.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
+      except
+        on E:Exception do
+          DBObject.OwnerDB.InternalError(E.Message);
+      end;
+      FCmdA.Free;
     end;
-    try
-      ExecSQLScript(FCmd.AsSQL, [sepInTransaction, sepShowCompForm], DBObject.OwnerDB);
-    except
-      on E:Exception do
-        DBObject.OwnerDB.InternalError(E.Message);
-    end;
-    FCmd.Free;
     DBObject.RefreshObject;
     RefreshPage;
   end;
@@ -635,7 +704,7 @@ begin
   sSectionAdd.Caption:=sAdd;
   sSectionRemove.Caption:=sRemove;
   sSectionEdit.Caption:=sEdit;
-
+  sSectionDetach.Caption:=sSectionDetachCaption;
 end;
 
 function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL

@@ -1384,6 +1384,10 @@ msgstr ""
 msgid "Design report"
 msgstr ""
 
+#: fbmstrconstunit.sdetachsectionquestion
+msgid "Detach section?"
+msgstr ""
+
 #: fbmstrconstunit.sdeterministic
 msgid "Deterministic"
 msgstr ""
@@ -4440,6 +4444,10 @@ msgstr ""
 
 #: fbmstrconstunit.ssearchwholewords
 msgid "&Whole words only"
+msgstr ""
+
+#: fbmstrconstunit.ssectiondetachcaption
+msgid "Section detach"
 msgstr ""
 
 #: fbmstrconstunit.ssectionname

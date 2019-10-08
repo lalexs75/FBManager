@@ -1450,6 +1450,10 @@ msgstr "Строка, содержащая BEFORE, AFTER или INSTEAD OF, в �
 msgid "Design report"
 msgstr "Редактировать отчёт"
 
+#: fbmstrconstunit.sdetachsectionquestion
+msgid "Detach section?"
+msgstr ""
+
 #: fbmstrconstunit.sdeterministic
 msgid "Deterministic"
 msgstr "Детерминированная"
@@ -4595,6 +4599,10 @@ msgstr "Искать только в &выделенном"
 #: fbmstrconstunit.ssearchwholewords
 msgid "&Whole words only"
 msgstr "&Только целые слова"
+
+#: fbmstrconstunit.ssectiondetachcaption
+msgid "Section detach"
+msgstr ""
 
 #: fbmstrconstunit.ssectionname
 msgid "Section name"

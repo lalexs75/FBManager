@@ -589,10 +589,10 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ImageIndex = 13
       OnExecute = sSectionRemoveExecute
     end
-    object sSectionDeatach: TAction
+    object sSectionDetach: TAction
       Category = 'Sections'
-      Caption = 'Section deatach'
-      OnExecute = sSectionDeatachExecute
+      Caption = 'Section detach'
+      OnExecute = sSectionDetachExecute
     end
   end
   object rxKeys: TRxMemoryData[14]
@@ -848,11 +848,14 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     object MenuItem8: TMenuItem
       Action = sSectionEdit
     end
+    object MenuItem6: TMenuItem
+      Action = sSectionRemove
+    end
     object MenuItem5: TMenuItem
       Caption = '-'
     end
-    object MenuItem6: TMenuItem
-      Action = sSectionRemove
+    object MenuItem9: TMenuItem
+      Action = sSectionDetach
     end
   end
 end
