@@ -68,7 +68,7 @@ var
   fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm;
 
 implementation
-uses rxAppUtils, fbmStrConstUnit;
+uses rxAppUtils, fbmStrConstUnit, sqlObjects;
 
 {$R *.lfm}
 
@@ -100,6 +100,9 @@ begin
 
   Label5.Visible:=RadioButton4.Checked;
   ComboBox2.Visible:=RadioButton4.Checked;
+
+  if RadioButton4.Checked and (ComboBox2.Items.Count = 0) and Assigned(FEngine) then
+    FEngine.FillListForNames(ComboBox2.Items, [okTable]);
 end;
 
 procedure TfbmPGTablePartition_EditSectionForm.CheckBox1Change(Sender: TObject);

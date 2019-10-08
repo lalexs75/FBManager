@@ -98,7 +98,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideBottom.Side = asrBottom
         Left = 253
         Height = 17
-        Top = 158
+        Top = 159
         Width = 50
         Anchors = [akLeft, akBottom]
         Caption = 'Char set'
@@ -113,7 +113,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideBottom.Side = asrBottom
         Left = 500
         Height = 17
-        Top = 158
+        Top = 159
         Width = 44
         Anchors = [akLeft, akBottom]
         Caption = 'Collate'
@@ -237,7 +237,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 309
-        Height = 33
+        Height = 34
         Top = 142
         Width = 185
         BorderSpacing.Around = 6
@@ -254,7 +254,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 550
-        Height = 33
+        Height = 34
         Top = 142
         Width = 238
         Anchors = [akTop, akLeft, akRight]

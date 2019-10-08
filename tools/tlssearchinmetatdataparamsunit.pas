@@ -169,7 +169,7 @@ begin
     AddProgres(FCurObj, FCntObj);
     if ((Obj.DBObjectKind = okDomain) and (CheckBox1.Checked))
       or
-       ((Obj.DBObjectKind = okTable) and (CheckBox2.Checked))
+       ((Obj.DBObjectKind in [okPartitionTable, okTable]) and (CheckBox2.Checked))
       or
        ((Obj.DBObjectKind in [okView, okMaterializedView]) and (CheckBox3.Checked))
       or

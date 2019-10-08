@@ -193,7 +193,7 @@ procedure TfbmRolesDBObjectsGrantForm.LoadRoleData;
     begin
       for j:=0 to P.CountGroups - 1 do
           DoFill(P.Groups[j]);
-      if (P.DBObjectKind in {ObjectKinds} [okTable, okView, okStoredProc]) and (not P.SystemObject) then
+      if (P.DBObjectKind in {ObjectKinds} [okPartitionTable, okTable, okView, okStoredProc]) and (not P.SystemObject) then
       begin
         for j:=0 to P.CountObject-1 do
         begin

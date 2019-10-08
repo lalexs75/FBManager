@@ -1092,6 +1092,7 @@ resourcestring
   sOperatorClass                    = 'OperatorClass';
   sOperatorFamily                   = 'OperatorFamily';
   sUserMapping                      = 'UserMapping';
+  sPartitionTable                   = 'PartitionTable';
   sFieldFromNamedSelect             = 'field from named select %s';
 
   sBuildConnectionString            = 'Build connection string';

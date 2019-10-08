@@ -85,8 +85,8 @@ object SQLBuilderForm: TSQLBuilderForm
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = 'Criteria'
-          ClientHeight = 210
-          ClientWidth = 794
+          ClientHeight = 237
+          ClientWidth = 800
           object RxDBGrid5: TRxDBGrid
             Left = 0
             Height = 210
@@ -100,7 +100,7 @@ object SQLBuilderForm: TSQLBuilderForm
                 Title.Alignment = taCenter
                 Title.Orientation = toHorizontal
                 Title.Caption = 'FIELD1_NAME'
-                Width = 221
+                Width = 226
                 FieldName = 'FIELD1_NAME'
                 EditButtons = <>
                 Filter.DropDownRows = 0
@@ -147,7 +147,7 @@ object SQLBuilderForm: TSQLBuilderForm
                 Title.Alignment = taCenter
                 Title.Orientation = toHorizontal
                 Title.Caption = 'FIELD2_NAME'
-                Width = 221
+                Width = 226
                 FieldName = 'FIELD2_NAME'
                 EditButtons = <>
                 Filter.DropDownRows = 0
@@ -256,8 +256,8 @@ object SQLBuilderForm: TSQLBuilderForm
             Width = 55
             Align = alRight
             AutoSize = True
-            ClientHeight = 210
-            ClientWidth = 55
+            ClientHeight = 206
+            ClientWidth = 51
             TabOrder = 1
             object BitBtn1: TBitBtn
               AnchorSideTop.Control = Panel3
@@ -292,8 +292,8 @@ object SQLBuilderForm: TSQLBuilderForm
         end
         object TabSheet2: TTabSheet
           Caption = 'Selections'
-          ClientHeight = 210
-          ClientWidth = 794
+          ClientHeight = 237
+          ClientWidth = 800
           object CheckBox1: TCheckBox
             AnchorSideLeft.Control = TabSheet2
             AnchorSideTop.Control = TabSheet2
@@ -470,8 +470,8 @@ object SQLBuilderForm: TSQLBuilderForm
         end
         object TabSheet3: TTabSheet
           Caption = 'Sorting'
-          ClientHeight = 210
-          ClientWidth = 794
+          ClientHeight = 237
+          ClientWidth = 800
           object Button1: TButton
             AnchorSideLeft.Control = Button2
             AnchorSideTop.Control = TabSheet3
@@ -516,7 +516,7 @@ object SQLBuilderForm: TSQLBuilderForm
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Around = 6
             ItemHeight = 0
-            ScrollWidth = 351
+            ScrollWidth = 349
             TabOrder = 2
             TopIndex = -1
           end

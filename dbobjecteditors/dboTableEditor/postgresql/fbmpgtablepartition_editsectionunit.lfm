@@ -1,10 +1,10 @@
 object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
   Left = 708
-  Height = 482
+  Height = 481
   Top = 303
   Width = 628
   Caption = 'Section property'
-  ClientHeight = 482
+  ClientHeight = 481
   ClientWidth = 628
   OnCreate = FormCreate
   Position = poScreenCenter
@@ -55,7 +55,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 46
-    Top = 430
+    Top = 429
     Width = 616
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -185,6 +185,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
       Checked = True
       OnChange = RadioButton3Change
       TabOrder = 0
+      TabStop = True
     end
     object RadioButton4: TRadioButton
       AnchorSideLeft.Control = CLabel
@@ -212,7 +213,6 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
       BorderSpacing.Around = 6
       ItemHeight = 0
       TabOrder = 2
-      Text = 'ComboBox2'
     end
     object Label3: TLabel
       AnchorSideLeft.Control = Panel1

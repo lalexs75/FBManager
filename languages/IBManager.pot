@@ -3698,6 +3698,10 @@ msgstr ""
 msgid "Partition sections"
 msgstr ""
 
+#: fbmstrconstunit.spartitiontable
+msgid "PartitionTable"
+msgstr ""
+
 #: fbmstrconstunit.spartitiontype
 msgid "Partition type"
 msgstr ""

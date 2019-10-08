@@ -210,7 +210,7 @@ var
   C: TPrimaryKeyRecord;
   i: Integer;
 begin
-  if (DBObject.DBObjectKind = okTable)  and fldCopyFieldName.Enabled and (DBObject.State = sdboEdit) then
+  if (DBObject.DBObjectKind in [okPartitionTable, okTable])  and fldCopyFieldName.Enabled and (DBObject.State = sdboEdit) then
   begin
     if not TDBTableObject(DBObject).IsLoadedFK then
       TDBTableObject(DBObject).RefreshConstraintForeignKey;
@@ -1105,7 +1105,7 @@ begin
     and Assigned(fbManDataInpectorForm.CurrentDB)
     //and (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
     and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
-    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView]);
+    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView]);
 end;
 
 procedure TfbmTableEditorFieldsFrame.FieldListGridDragDrop(Sender,
@@ -1119,7 +1119,7 @@ begin
   if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
     or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
     //or (not (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
-    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable, okView, okMaterializedView])) then Exit;
+    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView])) then Exit;
 
   if not QuestionBox(sCopyFields) then Exit;
 

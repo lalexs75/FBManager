@@ -570,7 +570,7 @@ begin
       G:=TDBRootObject(ADBObject).Groups[i];
       if G.State <> sdboVirtualObject then
         Add(G);
-      if (G is TDBRootObject) and (G.DBObjectKind in [okDomain, okTable, okView, okFunction, okStoredProc, okSequence, okMaterializedView]) then
+      if (G is TDBRootObject) and (G.DBObjectKind in [okDomain, okPartitionTable, okTable, okView, okFunction, okStoredProc, okSequence, okMaterializedView]) then
         FillFieldList(G);
     end;
 
@@ -579,7 +579,7 @@ begin
       P:=TDBRootObject(ADBObject).Items[i];
       if P.State <> sdboVirtualObject then
         Add(P);
-      if (P is TDBRootObject) and (P.DBObjectKind in [okTable, okView, okStoredProc, okFunction]) then
+      if (P is TDBRootObject) and (P.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc, okFunction]) then
         FillFieldList(P);
     end;
   end;
@@ -1092,7 +1092,7 @@ begin
     begin
       if (SF<>'') then
       begin
-        if (P.DBObjectKind in [okTable, okView]) then
+        if (P.DBObjectKind in [okPartitionTable, okTable, okMaterializedView, okView]) then
         begin
           F:=(P as TDBDataSetObject).Fields.FieldByName(SF);
           if Assigned(F) then
@@ -1738,7 +1738,7 @@ begin
   if not Assigned(DBObj) and (ATableName<>'') and (ATableName[1] = '"') and (ATableName[Length(ATableName)] = '"') then
     DBObj:=DBRecord.GetDBObject(AnsiDequotedStr(ATableName, '"'));
 
-  if Assigned(DBObj) and (DBObj.DBObjectKind in [okTable, okView, okStoredProc, okFunction, okScheme, okSequence, okMaterializedView]) then
+  if Assigned(DBObj) and (DBObj.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc, okFunction, okScheme, okSequence, okMaterializedView]) then
     FSynCompletionObjList.FillFieldList(DBObj)
   else
   begin

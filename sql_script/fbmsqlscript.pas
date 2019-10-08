@@ -679,7 +679,7 @@ begin
       if UpperCase(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].TableAlias) = UpperCase(DBObjName) then
       begin
         DBObj:=FCurDB.GetDBObject(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].Name);
-        if Assigned(DBObj) and (DBObj.DBObjectKind in [okTable, okView, okStoredProc]) then
+        if Assigned(DBObj) and (DBObj.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc]) then
           Items.FillFieldList(DBObj);
       end;
     end;
@@ -713,7 +713,7 @@ begin
       for i:=0 to TSQLCommandAbstractSelect(FSt.SQLCommand).Tables.Count - 1 do
       begin
         DBObj:=FCurDB.GetDBObject(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].Name);
-{        if Assigned(DBObj) and (DBObj.DBObjectKind in [okTable, okView, okStoredProc]) then
+{        if Assigned(DBObj) and (DBObj.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc]) then
              DBObj.FillFieldList(Items, ACharCase, false)}
         if Assigned(DBObj) then
           Items.FillFieldList(DBObj);

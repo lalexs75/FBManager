@@ -171,7 +171,8 @@ const
       sOperator,              //okOperator
       sOperatorClass,         //okOperatorClass
       sOperatorFamily,        //okOperatorFamily
-      sUserMapping            //okUserMapping
+      sUserMapping,           //okUserMapping
+      sPartitionTable         //okPartitionTable
       );
 
   DBObjectKindImages: array [TDBObjectKind] of integer =
@@ -232,7 +233,8 @@ const
        -1, //okOperator
        -1, //okOperatorClass,
        -1, //okOperatorFamily,
-       49  //okUserMapping
+       49, //okUserMapping
+       3   //okPartitionTable
      );
 
   DBObjectKindFolderImages: array [TDBObjectKind] of integer =
@@ -293,7 +295,8 @@ const
        -1, //okOperator
        -1, //okOperatorClass,
        -1, //okOperatorFamily
-       49  //okUserMapping
+       49, //okUserMapping
+       3   //okPartitionTable
        );
 
 
@@ -777,8 +780,12 @@ end;
 
 begin
   List.Clear;
+//  for P in TDBObjectKind do
+//    DoAdd(P, );
+
   DoAdd(okDomain, 2);
   DoAdd(okTable, 3);
+  DoAdd(okPartitionTable, 3);
   DoAdd(okView, 4);
   DoAdd(okTrigger, 5);
   DoAdd(okStoredProc, 6);

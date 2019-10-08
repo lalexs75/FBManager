@@ -401,7 +401,7 @@ begin
     ComboBox1.Items.Clear;
     FObjRec.MakeSQLStatementsList(ComboBox1.Items);
 
-    if FObjRec.DBObjectKind in [okTable, okView, okStoredProc, okFunction] then
+    if FObjRec.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc, okFunction] then
       FObjRec.FillFieldList(CheckListBox1.Items, ccoNoneCase, false);
 
     SynCompletion:=TSynCompletion.Create(Self);

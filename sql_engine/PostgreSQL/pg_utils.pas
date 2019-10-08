@@ -378,6 +378,9 @@ ResourceString
 
 function PGClassTypeToDBObjectKind(const S: string): TDBObjectKind;
 begin
+  if S = 'p' then
+    Result:=okPartitionTable
+  else
   if S = 'r' then
     Result:=okTable
   else

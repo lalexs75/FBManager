@@ -223,7 +223,7 @@ begin
     for i:=0 to p.CountGroups-1 do
       DoFill(P.Groups[i]);
 
-    if (P.DBObjectKind = okTable) {and (p.CountGrp > 0)} then
+    if (P.DBObjectKind in [okPartitionTable, okTable]) {and (p.CountGrp > 0)} then
     begin
       for i:=0 to P.CountObject - 1 do
       begin

@@ -3267,6 +3267,7 @@ begin
   FSQLEngineCapability:=[
                    okDomain,
                    okTable,
+                   okPartitionTable,
                    okView,
                    okTrigger,
                    okStoredProc,
@@ -5425,6 +5426,9 @@ begin
     FOID:=ADBItem.ObjId;
     FACLListStr:=ADBItem.ObjACLList;
   end;
+
+  if ADBItem.ObjType = 'p' then
+    FDBObjectKind:=okPartitionTable;
 
   if FACLListStr<>'' then
     TPGACLList(FACLList).ParseACLListStr(FACLListStr);

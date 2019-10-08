@@ -255,7 +255,7 @@ begin
   if Assigned(SQLE) then
   begin
     ListBox3.Items.Clear;
-    SQLE.FillListForNames(ListBox3.Items, [okTable, okView, okStoredProc]);
+    SQLE.FillListForNames(ListBox3.Items, [okPartitionTable, okTable, okView, okMaterializedView, okStoredProc]);
     for i:=0 to ListBox3.Items.Count - 1 do
       ListBox3.Items[i]:= TDBObject(ListBox3.Items.Objects[i]).CaptionFullPatch;
 

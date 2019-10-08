@@ -90,7 +90,8 @@ const
      '',            //okOperator
      '',            //okOperatorClass,
      '',            //okOperatorFamily
-     ''             //okUserMapping
+     '',            //okUserMapping
+     ''             //okPartitionTable
      );
 
 type

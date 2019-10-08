@@ -104,7 +104,7 @@ var
 begin
   ListBox1.Items.Clear;
   ListBox2.Items.Clear;
-  DBObject.OwnerDB.FillListForNames(ListBox1.Items, [okTable]);
+  DBObject.OwnerDB.FillListForNames(ListBox1.Items, [okPartitionTable, okTable]);
 
   for i:=0 to TPGTable(DBObject).InheritedTablesCount-1 do
     ListBox2.Items.Add(TPGTable(DBObject).InheritedTable(i).CaptionFullPatch);

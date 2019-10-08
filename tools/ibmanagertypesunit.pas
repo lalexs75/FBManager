@@ -870,7 +870,7 @@ begin
     SynSQLSyn.TableNames.Add(D.Caption);
 
   if D.DBObjectKind in [
-        {okDomain,} okTable, okView, {okTrigger,} okStoredProc, okMaterializedView,
+        {okDomain,} okTable, okPartitionTable, okView, {okTrigger,} okStoredProc, okMaterializedView,
         okSequence, okException, okUDF, okScheme{, okRole, okOther}, okFunction,
         okPackage] then
   begin
@@ -1174,7 +1174,7 @@ begin
     Rec.Refresh;
   end;
 
-  if ADBObject.DBObjectKind in [ okTable, okView, okStoredProc, okSequence, okException, okUDF] then
+  if ADBObject.DBObjectKind in [ okTable, okPartitionTable, okView, okStoredProc, okSequence, okException, okUDF] then
     OwnerDB.SynSQLSyn.TableNames.Add(ADBObject.Caption);
   UpdateCaption;
   (Edt as TfbmDBObjectEditorForm).OnCreateNewDBObject:=nil;
@@ -1471,7 +1471,7 @@ begin
   else
   if Assigned(DBObject) and (ussExpandObjectDetails in DBObject.OwnerDB.UIShowSysObjects) then
   begin
-    if DBObject.DBObjectKind in [okTable, okStoredProc, okFunction] then
+    if DBObject.DBObjectKind in [okTable, okPartitionTable, okStoredProc, okFunction] then
     begin
       {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'DBObject.MakeChildList; - start');{$ENDIF}
       FOwner.DeleteChildren;
