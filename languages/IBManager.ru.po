@@ -95,11 +95,11 @@ msgstr "Добавить параметр"
 
 #: fbmstrconstunit.saddpatitionkey
 msgid "Add patition key"
-msgstr ""
+msgstr "Добавить ключ партицирования"
 
 #: fbmstrconstunit.saddpatitionkeyhint
 msgid "Add patition key (collumn or expression)"
-msgstr ""
+msgstr "Добавить ключ партицирования (столбец или выражение)"
 
 #: fbmstrconstunit.saddtemplate
 msgid "Add template"
@@ -940,7 +940,7 @@ msgstr "Псевдоним базы данных"
 
 #: fbmstrconstunit.sdatabasecomparer
 msgid "Database comparer"
-msgstr ""
+msgstr "Сравнение БД"
 
 #: fbmstrconstunit.sdatabasedialect
 msgid "Database dialect"
@@ -1452,7 +1452,7 @@ msgstr "Редактировать отчёт"
 
 #: fbmstrconstunit.sdetachsectionquestion
 msgid "Detach section?"
-msgstr ""
+msgstr "Отключить секцию?"
 
 #: fbmstrconstunit.sdeterministic
 msgid "Deterministic"
@@ -1611,11 +1611,11 @@ msgstr "Изменить параметр"
 
 #: fbmstrconstunit.seditpatitionkey
 msgid "Edit patition key"
-msgstr ""
+msgstr "Изменить ключ партицирования"
 
 #: fbmstrconstunit.seditpatitionkeyhint
 msgid "Edit patition key (collumn or expression)"
-msgstr ""
+msgstr "Изменить ключ партицирования (колонка или выражение)"
 
 #: fbmstrconstunit.sedittemplate
 msgid "Edit template"
@@ -1790,7 +1790,7 @@ msgstr "Выполнено. Время выполнения : %s."
 
 #: fbmstrconstunit.sexistiontable
 msgid "Existion table"
-msgstr ""
+msgstr "Существующая таблица"
 
 #: fbmstrconstunit.sexit
 msgctxt "fbmstrconstunit.sexit"
@@ -2513,7 +2513,7 @@ msgstr "Импорт из файла \"%s\""
 
 #: fbmstrconstunit.sin
 msgid "In"
-msgstr ""
+msgstr "Диапазон"
 
 #: fbmstrconstunit.sincludeallfrom
 #, object-pascal-format
@@ -3822,11 +3822,11 @@ msgstr "Разделы"
 
 #: fbmstrconstunit.spartitionsectiondesctempate
 msgid "Partition section description"
-msgstr ""
+msgstr "Описание секции партицирования"
 
 #: fbmstrconstunit.spartitionsectionnametempate
 msgid "Partition section name tempate"
-msgstr ""
+msgstr "Шаблон имени партицирования таблицы"
 
 #: fbmstrconstunit.spartitionsections
 msgid "Partition sections"
@@ -3847,6 +3847,10 @@ msgid ""
 "Expression: User can specify expression to create partition key.\n"
 "Example: Let's say, we want to create a partition table based per year for the column 'saledate', having datatype 'date/timestamp', then we need to specify the expression as 'extract(YEAR from saledate)' as partition key."
 msgstr ""
+"Партицированные таблицы поддерживают два типа ключей:\n"
+"Колонка: Пользователь выбирает любую колонку из списка доступных колонок.\n"
+"Выражение: UПользователь указывает выражение для создания ключа партицирования.\n"
+"Example: Let's say, we want to create a partition table based per year for the column 'saledate', having datatype 'date/timestamp', then we need to specify the expression as 'extract(YEAR from saledate)' as partition key."
 
 #: fbmstrconstunit.spassword
 msgctxt "fbmstrconstunit.spassword"
@@ -4298,11 +4302,11 @@ msgstr "Убрать строку"
 
 #: fbmstrconstunit.sremovepatitionkey
 msgid "Remove patition key"
-msgstr ""
+msgstr "Удалить ключ партицирования"
 
 #: fbmstrconstunit.sremovepatitionkeyhint
 msgid "Remove patition key (collumn or expression)"
-msgstr ""
+msgstr "Удалить ключ партицирования (колонка или выражение)"
 
 #: fbmstrconstunit.srename
 #, object-pascal-format
@@ -4602,7 +4606,7 @@ msgstr "&Только целые слова"
 
 #: fbmstrconstunit.ssectiondetachcaption
 msgid "Section detach"
-msgstr ""
+msgstr "Отключить секцию партицирования"
 
 #: fbmstrconstunit.ssectionname
 msgid "Section name"
@@ -4614,7 +4618,7 @@ msgstr "Параметры секции"
 
 #: fbmstrconstunit.ssectionproperty
 msgid "Section property"
-msgstr ""
+msgstr "Свойства секции партицирования"
 
 #: fbmstrconstunit.ssecurity
 msgctxt "fbmstrconstunit.ssecurity"
@@ -4810,7 +4814,7 @@ msgstr "Отображать системные объекты"
 
 #: fbmstrconstunit.sshowttablepartitions
 msgid "Show table's partitions"
-msgstr ""
+msgstr "Отображать секции партицирования таблиц"
 
 #: fbmstrconstunit.sshowview
 msgid "Show view"
