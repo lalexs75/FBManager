@@ -1,21 +1,21 @@
 object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
-  Left = 882
-  Height = 458
-  Top = 414
-  Width = 576
+  Left = 708
+  Height = 482
+  Top = 303
+  Width = 628
   Caption = 'Section property'
-  ClientHeight = 458
-  ClientWidth = 576
+  ClientHeight = 482
+  ClientWidth = 628
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.1.0.0'
   object RadioButton1: TRadioButton
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Edit3
+    AnchorSideTop.Control = Panel1
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 69
+    Top = 106
     Width = 117
     BorderSpacing.Around = 6
     Caption = 'Default section'
@@ -30,7 +30,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 98
+    Top = 135
     Width = 119
     BorderSpacing.Around = 6
     Caption = 'Section params'
@@ -45,8 +45,8 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 34
-    Top = 282
-    Width = 558
+    Top = 319
+    Width = 610
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -55,8 +55,8 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 46
-    Top = 406
-    Width = 564
+    Top = 430
+    Width = 616
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
     HelpButton.Name = 'HelpButton'
@@ -74,7 +74,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 127
+    Top = 164
     Width = 73
     BorderSpacing.Around = 6
     Caption = 'From values'
@@ -88,8 +88,8 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 34
-    Top = 150
-    Width = 558
+    Top = 187
+    Width = 610
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 4
@@ -100,7 +100,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 190
+    Top = 227
     Width = 56
     BorderSpacing.Around = 6
     Caption = 'To values'
@@ -114,8 +114,8 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 34
-    Top = 213
-    Width = 558
+    Top = 250
+    Width = 610
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 5
@@ -126,37 +126,12 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 253
+    Top = 290
     Width = 134
     BorderSpacing.Around = 6
     Caption = 'Define tablespace'
     OnChange = CheckBox1Change
     TabOrder = 6
-  end
-  object Label3: TLabel
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Owner
-    Left = 6
-    Height = 17
-    Top = 6
-    Width = 82
-    BorderSpacing.Around = 6
-    Caption = 'Section name'
-    ParentColor = False
-  end
-  object Edit3: TEdit
-    AnchorSideLeft.Control = Label3
-    AnchorSideTop.Control = Label3
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    Left = 12
-    Height = 34
-    Top = 29
-    Width = 558
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 6
-    TabOrder = 7
   end
   object Label4: TLabel
     AnchorSideLeft.Control = Owner
@@ -164,7 +139,7 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 322
+    Top = 359
     Width = 69
     BorderSpacing.Around = 6
     Caption = 'Description'
@@ -178,10 +153,114 @@ object fbmPGTablePartition_EditSectionForm: TfbmPGTablePartition_EditSectionForm
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 34
-    Top = 345
-    Width = 558
+    Top = 382
+    Width = 610
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
+    TabOrder = 7
+  end
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 100
+    Top = 0
+    Width = 628
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    ClientHeight = 100
+    ClientWidth = 628
     TabOrder = 8
+    object RadioButton3: TRadioButton
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 23
+      Top = 7
+      Width = 99
+      BorderSpacing.Around = 6
+      Caption = 'New section'
+      Checked = True
+      OnChange = RadioButton3Change
+      TabOrder = 0
+    end
+    object RadioButton4: TRadioButton
+      AnchorSideLeft.Control = CLabel
+      AnchorSideTop.Control = Panel1
+      Left = 320
+      Height = 23
+      Top = 7
+      Width = 107
+      BorderSpacing.Around = 6
+      Caption = 'Existing table'
+      OnChange = RadioButton3Change
+      TabOrder = 1
+    end
+    object ComboBox2: TComboBox
+      AnchorSideLeft.Control = Label5
+      AnchorSideTop.Control = Label5
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 34
+      Top = 59
+      Width = 608
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      TabOrder = 2
+      Text = 'ComboBox2'
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = RadioButton3
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 36
+      Width = 82
+      BorderSpacing.Around = 6
+      Caption = 'Section name'
+      ParentColor = False
+    end
+    object Edit3: TEdit
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 13
+      Height = 34
+      Top = 59
+      Width = 608
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      TabOrder = 3
+    end
+    object CLabel: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Panel1
+      Left = 314
+      Height = 1
+      Top = 1
+      Width = 1
+      ParentColor = False
+    end
+    object Label5: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = RadioButton3
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 17
+      Top = 36
+      Width = 81
+      BorderSpacing.Around = 6
+      Caption = 'Existion table'
+      ParentColor = False
+    end
   end
 end

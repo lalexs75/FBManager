@@ -29,7 +29,7 @@ uses
   rxsortmemds,
   lazcontrols,
   zeos_ex,
-  tachartlazaruspkg,
+  tachartlazaruspkg, anchordockpkg,
   zcomponent,
   lr_add_function,
   lrcairoexport,

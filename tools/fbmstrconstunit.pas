@@ -456,6 +456,7 @@ resourcestring
 
   sSchemeOwner                      = 'Scheme owner';
 
+  sExistionTable                    = 'Existion table';
   sRecords                          = 'records';
   sNew                              = 'New ';
   sDrop                             = 'Drop ';

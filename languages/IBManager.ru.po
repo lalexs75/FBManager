@@ -1784,6 +1784,10 @@ msgstr "Выполнить только выделенный участок"
 msgid "Execution complete. Execute time : %s."
 msgstr "Выполнено. Время выполнения : %s."
 
+#: fbmstrconstunit.sexistiontable
+msgid "Existion table"
+msgstr ""
+
 #: fbmstrconstunit.sexit
 msgctxt "fbmstrconstunit.sexit"
 msgid "Close"

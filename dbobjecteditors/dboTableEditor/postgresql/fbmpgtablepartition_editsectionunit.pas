@@ -25,8 +25,8 @@ unit fbmPGTablePartition_EditSectionUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel, PostgreSQLEngineUnit,
-  pg_SqlParserUnit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel,
+  ExtCtrls, AnchorDockPanel, PostgreSQLEngineUnit, pg_SqlParserUnit;
 
 type
 
@@ -36,6 +36,7 @@ type
     ButtonPanel1: TButtonPanel;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
@@ -44,11 +45,17 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    CLabel: TLabel;
+    Label5: TLabel;
+    Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
+    RadioButton3: TRadioButton;
+    RadioButton4: TRadioButton;
     procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RadioButton1Change(Sender: TObject);
+    procedure RadioButton3Change(Sender: TObject);
   private
     FEngine:TSQLEnginePostgre;
     FPartitionType: TPGSQLPartitionType;
@@ -85,6 +92,16 @@ begin
   end;
 end;
 
+procedure TfbmPGTablePartition_EditSectionForm.RadioButton3Change(
+  Sender: TObject);
+begin
+  Label3.Visible:=RadioButton3.Checked;
+  Edit3.Visible:=RadioButton3.Checked;
+
+  Label5.Visible:=RadioButton4.Checked;
+  ComboBox2.Visible:=RadioButton4.Checked;
+end;
+
 procedure TfbmPGTablePartition_EditSectionForm.CheckBox1Change(Sender: TObject);
 begin
   ComboBox1.Enabled:=CheckBox1.Checked;
@@ -98,6 +115,7 @@ begin
   RadioButton2.Caption:=sSectionParams;
   Label4.Caption:=sDescription;
   Label3.Caption:=sSectionName;
+  Label5.Caption:=sExistionTable;
 
   case FPartitionType of
     ptRange:begin
@@ -136,6 +154,7 @@ begin
 
   end;
 
+  RadioButton3Change(nil);
   Localize;
   RadioButton1Change(nil);
   CheckBox1Change(nil);

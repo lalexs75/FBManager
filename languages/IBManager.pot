@@ -1708,6 +1708,10 @@ msgstr ""
 msgid "Execution complete. Execute time : %s."
 msgstr ""
 
+#: fbmstrconstunit.sexistiontable
+msgid "Existion table"
+msgstr ""
+
 #: fbmstrconstunit.sexit
 msgctxt "fbmstrconstunit.sexit"
 msgid "Close"
