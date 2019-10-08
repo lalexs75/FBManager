@@ -18004,7 +18004,8 @@ var
     TConstFKMatch1, TConstFKMatch2, TConstFKMatch3, TConstFKOn,
     TConstFKOn1, TConstFKOn2, TConstFKOn10, TConstFKOn11,
     TConstFKOn12, TConstFKOn13, TConstFKOn14, TSet, T2_1, T4_1,
-    T4_2, T4_3, T4_4, T5, TReset, TDetach, TAtach, TAtach1: TSQLTokenRecord;
+    T4_2, T4_3, T4_4, T5, TReset, TDetach, TAtach, TAtach1,
+    T4_5, T4_6: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER TABLE }
   { TODO : Реализовать парсер ALTER TABLE IF EXISTS }
@@ -18144,9 +18145,11 @@ begin
     T4_2:=AddSQLTokens(stInteger, T3, '', [], 63);
     T4_3:=AddSQLTokens(stFloat, T3, '', [], 63);
     T4_4:=AddSQLTokens(stString, T3, '', [], 63);
-    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ',', [], 64);
+    T4_5:=AddSQLTokens(stKeyword, T3, 'true', [], 63);
+    T4_6:=AddSQLTokens(stKeyword, T3, 'false', [], 63);
+    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4, T4_5, T4_6], ',', [], 64);
       T5.AddChildToken(T2);
-    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4], ')', [], 64);
+    T5:=AddSQLTokens(stSymbol, [T4_1, T4_2, T4_3, T4_4, T4_5, T4_6], ')', [], 64);
 
   TReset:=AddSQLTokens(stKeyword, [FTTableName, FTShemaName], 'RESET', []);
     T1:=AddSQLTokens(stSymbol, TReset, '(', []);
