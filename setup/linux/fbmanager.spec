@@ -1,5 +1,5 @@
 Name: FBManager
-Version: 0.9
+Version: 0.10
 Release: 1
 Summary: Free DataBase Manager
 Group: Development/Databases
