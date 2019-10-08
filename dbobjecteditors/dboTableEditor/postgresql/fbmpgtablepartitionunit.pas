@@ -26,8 +26,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  ActnList, Menus, DB, rxdbgrid, rxmemds, rxctrls, DividerBevel,
-  fdmAbstractEditorUnit, pg_SqlParserUnit, fbmSqlParserUnit,
+  ActnList, Menus, ExtCtrls, DBCtrls, DB, rxdbgrid, rxmemds, rxctrls,
+  DividerBevel, fdmAbstractEditorUnit, pg_SqlParserUnit, fbmSqlParserUnit,
   SQLEngineAbstractUnit, PostgreSQLEngineUnit;
 
 type
@@ -35,13 +35,17 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    DBMemo1: TDBMemo;
     MenuItem8: TMenuItem;
+    Panel1: TPanel;
     rxSectionDescription: TStringField;
+    rxSectionOID: TLongintField;
     rxSectionSchemaID: TLongintField;
     rxSectionTABLE_SPACE_ID: TLongintField;
     rxSectionTABLE_SPACE_NAME: TStringField;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
+    Splitter1: TSplitter;
     sSectionEdit: TAction;
     keyEdit: TAction;
     Edit1: TEdit;
@@ -90,6 +94,7 @@ type
     procedure rxKeysKeyTypeGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
     procedure rxSectionAfterInsert(DataSet: TDataSet);
+    procedure rxSectionAfterPost(DataSet: TDataSet);
     procedure SpeedButton2DblClick(Sender: TObject);
     procedure sSectionAddExecute(Sender: TObject);
     procedure sSectionEditExecute(Sender: TObject);
@@ -201,6 +206,19 @@ begin
   rxSectionDEFAULT.AsBoolean:=false;
 end;
 
+procedure TfbmPGTablePartitionPage.rxSectionAfterPost(DataSet: TDataSet);
+var
+  P: TPGTablePartition;
+begin
+  if DBObject.State <> sdboCreate then
+  begin
+    P:=TPGTable(DBObject).PartitionList.TablePartitionByOID(rxSectionOID.AsInteger);
+    if Assigned(P) then
+      P.Description:=rxSectionDescription.AsString;
+//  UpdateControls;
+  end;
+end;
+
 procedure TfbmPGTablePartitionPage.SpeedButton2DblClick(Sender: TObject);
 begin
   keyEdit.Execute;
@@ -253,6 +271,7 @@ begin
     for P in TPGTable(DBObject).PartitionList do
     begin
       rxSection.Append;
+      rxSectionOID.AsInteger:=P.OID;
       rxSectionNAME.AsString:=P.Name;
       case P.DataType of
         podtDefault:rxSectionDEFAULT.AsBoolean:=true;
@@ -264,6 +283,7 @@ begin
         //podtWith:rxSectionH_MODULUS.AsString:=P.InExp;
       end;
       rxSectionTABLE_SPACE_ID.AsInteger:=P.TableSpaceID;
+      rxSectionDescription.AsString:=P.Description;
       rxSectionSchemaID.AsInteger:=P.SchemaID;
 
       if P.TableSpaceID <> 0 then

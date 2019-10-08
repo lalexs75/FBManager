@@ -225,218 +225,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object RxDBGrid2: TRxDBGrid[7]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = DividerBevel2
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = SpeedButton3
-    AnchorSideBottom.Control = Owner
-    AnchorSideBottom.Side = asrBottom
-    Left = 6
-    Height = 414
-    Top = 229
-    Width = 943
-    ColumnDefValues.BlobText = '(данные)'
-    TitleButtons = False
-    AutoSort = True
-    Columns = <    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'NAME'
-        Width = 119
-        FieldName = 'NAME'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        SizePriority = 0
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'Defaul'
-        Width = 80
-        FieldName = 'DEFAULT'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'R_FROM'
-        Width = 119
-        FieldName = 'R_FROM'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'R_TO'
-        Width = 119
-        FieldName = 'R_TO'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'R_IN'
-        Width = 119
-        FieldName = 'R_IN'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'H_MODULUS'
-        Width = 119
-        FieldName = 'H_MODULUS'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'H_REMINDER'
-        Width = 119
-        FieldName = 'H_REMINDER'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
-      item
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'Tablespace'
-        Width = 122
-        FieldName = 'TABLE_SPACE_NAME'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end>
-    KeyStrokes = <    
-      item
-        Command = rxgcShowFindDlg
-        ShortCut = 16454
-        Enabled = True
-      end    
-      item
-        Command = rxgcShowColumnsDlg
-        ShortCut = 16471
-        Enabled = True
-      end    
-      item
-        Command = rxgcShowFilterDlg
-        ShortCut = 16468
-        Enabled = True
-      end    
-      item
-        Command = rxgcShowSortDlg
-        ShortCut = 16467
-        Enabled = True
-      end    
-      item
-        Command = rxgcShowQuickFilter
-        ShortCut = 16465
-        Enabled = True
-      end    
-      item
-        Command = rxgcHideQuickFilter
-        ShortCut = 16456
-        Enabled = True
-      end    
-      item
-        Command = rxgcSelectAll
-        ShortCut = 16449
-        Enabled = True
-      end    
-      item
-        Command = rxgcDeSelectAll
-        ShortCut = 16429
-        Enabled = True
-      end    
-      item
-        Command = rxgcInvertSelection
-        ShortCut = 16426
-        Enabled = True
-      end    
-      item
-        Command = rxgcOptimizeColumnsWidth
-        ShortCut = 16427
-        Enabled = True
-      end    
-      item
-        Command = rxgcCopyCellValue
-        ShortCut = 16451
-        Enabled = True
-      end>
-    FooterOptions.DrawFullLine = False
-    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
-    SearchOptions.FromStart = False
-    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    AutoFillColumns = True
-    BorderSpacing.Around = 6
-    Color = clWindow
-    DrawFullLine = False
-    FocusColor = clRed
-    SelectedColor = clHighlight
-    GridLineStyle = psSolid
-    DataSource = dsSection
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableInsert]
-    PopupMenu = PopupMenu2
-    TabOrder = 2
-    TitleStyle = tsNative
-    OnDblClick = RxDBGrid2DblClick
-  end
-  object SpeedButton3: TSpeedButton[8]
+  object SpeedButton3: TSpeedButton[7]
     AnchorSideTop.Control = DividerBevel2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
@@ -452,7 +241,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Constraints.MinWidth = 30
     ShowCaption = False
   end
-  object SpeedButton4: TSpeedButton[9]
+  object SpeedButton4: TSpeedButton[8]
     AnchorSideTop.Control = SpeedButton3
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
@@ -468,7 +257,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Constraints.MinWidth = 30
     ShowCaption = False
   end
-  object Edit1: TEdit[10]
+  object Edit1: TEdit[9]
     AnchorSideLeft.Control = Label1
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
@@ -481,9 +270,9 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ReadOnly = True
-    TabOrder = 3
+    TabOrder = 2
   end
-  object SpeedButton5: TSpeedButton[11]
+  object SpeedButton5: TSpeedButton[10]
     AnchorSideTop.Control = SpeedButton2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
@@ -500,7 +289,7 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Constraints.MinWidth = 30
     ShowCaption = False
   end
-  object SpeedButton6: TSpeedButton[12]
+  object SpeedButton6: TSpeedButton[11]
     AnchorSideTop.Control = SpeedButton4
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
@@ -515,6 +304,246 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
     Constraints.MinHeight = 30
     Constraints.MinWidth = 30
     ShowCaption = False
+  end
+  object Panel1: TPanel[12]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DividerBevel2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = SpeedButton3
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 414
+    Top = 229
+    Width = 943
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    ClientHeight = 414
+    ClientWidth = 943
+    TabOrder = 3
+    object RxDBGrid2: TRxDBGrid
+      Left = 1
+      Height = 317
+      Top = 1
+      Width = 941
+      ColumnDefValues.BlobText = '(данные)'
+      TitleButtons = False
+      AutoSort = True
+      Columns = <      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'NAME'
+          Width = 119
+          FieldName = 'NAME'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          SizePriority = 0
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'Defaul'
+          Width = 80
+          FieldName = 'DEFAULT'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'R_FROM'
+          Width = 119
+          FieldName = 'R_FROM'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'R_TO'
+          Width = 119
+          FieldName = 'R_TO'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'R_IN'
+          Width = 119
+          FieldName = 'R_IN'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'H_MODULUS'
+          Width = 119
+          FieldName = 'H_MODULUS'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'H_REMINDER'
+          Width = 119
+          FieldName = 'H_REMINDER'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end      
+        item
+          Title.Alignment = taCenter
+          Title.Orientation = toHorizontal
+          Title.Caption = 'Tablespace'
+          Width = 120
+          FieldName = 'TABLE_SPACE_NAME'
+          EditButtons = <>
+          Filter.DropDownRows = 0
+          Filter.EmptyValue = '(Пусто)'
+          Filter.NotEmptyValue = '(Не пусто)'
+          Filter.AllValue = '(Все значения)'
+          Filter.EmptyFont.Style = [fsItalic]
+          Filter.ItemIndex = -1
+          Footers = <>
+        end>
+      KeyStrokes = <      
+        item
+          Command = rxgcShowFindDlg
+          ShortCut = 16454
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowColumnsDlg
+          ShortCut = 16471
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowFilterDlg
+          ShortCut = 16468
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowSortDlg
+          ShortCut = 16467
+          Enabled = True
+        end      
+        item
+          Command = rxgcShowQuickFilter
+          ShortCut = 16465
+          Enabled = True
+        end      
+        item
+          Command = rxgcHideQuickFilter
+          ShortCut = 16456
+          Enabled = True
+        end      
+        item
+          Command = rxgcSelectAll
+          ShortCut = 16449
+          Enabled = True
+        end      
+        item
+          Command = rxgcDeSelectAll
+          ShortCut = 16429
+          Enabled = True
+        end      
+        item
+          Command = rxgcInvertSelection
+          ShortCut = 16426
+          Enabled = True
+        end      
+        item
+          Command = rxgcOptimizeColumnsWidth
+          ShortCut = 16427
+          Enabled = True
+        end      
+        item
+          Command = rxgcCopyCellValue
+          ShortCut = 16451
+          Enabled = True
+        end>
+      FooterOptions.DrawFullLine = False
+      SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+      SearchOptions.FromStart = False
+      OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+      Align = alClient
+      AutoFillColumns = True
+      Color = clWindow
+      DrawFullLine = False
+      FocusColor = clRed
+      SelectedColor = clHighlight
+      GridLineStyle = psSolid
+      DataSource = dsSection
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableInsert]
+      PopupMenu = PopupMenu2
+      TabOrder = 0
+      TitleStyle = tsNative
+      OnDblClick = RxDBGrid2DblClick
+    end
+    object DBMemo1: TDBMemo
+      Left = 1
+      Height = 90
+      Top = 323
+      Width = 941
+      Align = alBottom
+      DataField = 'Description'
+      DataSource = dsSection
+      TabOrder = 1
+    end
+    object Splitter1: TSplitter
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 318
+      Width = 941
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
   end
   object ActionList1: TActionList[13]
     Images = fbManagerMainForm.ImageListMain
@@ -647,8 +676,13 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
         Name = 'Description'
         DataType = ftString
         Size = 2000
+      end    
+      item
+        Name = 'OID'
+        DataType = ftInteger
       end>
     AfterInsert = rxSectionAfterInsert
+    AfterPost = rxSectionAfterPost
     PacketRecords = 0
     Left = 221
     Top = 232
@@ -759,6 +793,15 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ReadOnly = False
       Required = False
       Size = 2000
+    end
+    object rxSectionOID: TLongintField
+      FieldKind = fkData
+      FieldName = 'OID'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object PopupMenu1: TPopupMenu[16]

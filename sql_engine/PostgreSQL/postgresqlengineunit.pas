@@ -46,6 +46,7 @@ type
   TPGMatView = class;
   TPGIndex = class;
   TPGTableSpace = class;
+  TPGTablePartitionList = class;
   TPGTablePartitionListEnumerator = class;
 
   { Формальное определение тригера }
@@ -521,7 +522,9 @@ type
 
   TPGTablePartition = class
   private
+    FOwner: TPGTablePartitionList;
     FDataType: TPartitionOfDataType;
+    FDescription: string;
     FExpression: string;
     FFromExp: string;
     FInExp: string;
@@ -531,7 +534,9 @@ type
     FSchemaName: string;
     FTableSpaceID: Integer;
     FToExp: string;
+    procedure SetDescription(AValue: string);
   public
+    constructor Create(AOwner:TPGTablePartitionList);
     property OID:integer read FOID;
     property Name:string read FName;
     property Expression:string read FExpression;
@@ -542,22 +547,25 @@ type
     property TableSpaceID:Integer read FTableSpaceID;
     property SchemaID:Integer read FSchemaID;
     property SchemaName:string read FSchemaName;
+    property Description:string read FDescription write SetDescription;
   end;
 
   { TPGTablePartitionList }
 
   TPGTablePartitionList = class
   private
+    FOwner: TDBObject;
     FList:TFPList;
     function GetCount: integer;
     function GetItems(AIndex: integer): TPGTablePartition;
   public
-    constructor Create;
+    constructor Create(AOwner:TDBObject);
     destructor Destroy; override;
     procedure Clear;
     function Add(AOID:Integer):TPGTablePartition;
     function GetEnumerator: TPGTablePartitionListEnumerator;
     property Count:integer read GetCount;
+    function TablePartitionByOID(AOID:Integer):TPGTablePartition;
     property Items[AIndex:integer]:TPGTablePartition read GetItems; default;
   end;
 
@@ -1283,6 +1291,41 @@ begin
     Result:=AName;
 end;
 
+{ TPGTablePartition }
+
+procedure TPGTablePartition.SetDescription(AValue: string);
+var
+  FCmd: TPGSQLCommentOn;
+begin
+  if (AValue <> FDescription) then
+  begin
+    if FOwner.FOwner.State <> sdboCreate then
+    begin
+      FCmd:=TPGSQLCommentOn.Create(nil);
+      FCmd.ObjectKind:=okTable;
+      FCmd.SchemaName:=FSchemaName;
+      FCmd.Name:=Name;
+      FCmd.Description:=AValue;
+      try
+        ExecSQLScript( FCmd.AsSQL, sysConfirmCompileDescEx + [sepInTransaction], FOwner.FOwner.OwnerDB);
+        FDescription:=AValue;
+      except
+        on E:Exception do
+          FOwner.FOwner.OwnerDB.InternalError(E.Message);
+      end;
+      FCmd.Free;
+    end
+    else
+      FDescription:=AValue;
+  end;
+end;
+
+constructor TPGTablePartition.Create(AOwner: TPGTablePartitionList);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+end;
+
 { TPGTablePartitionListEnumerator }
 
 constructor TPGTablePartitionListEnumerator.Create(AList: TPGTablePartitionList
@@ -1315,9 +1358,10 @@ begin
   Result:=TPGTablePartition(FList[AIndex]);
 end;
 
-constructor TPGTablePartitionList.Create;
+constructor TPGTablePartitionList.Create(AOwner: TDBObject);
 begin
   inherited Create;
+  FOwner:=AOwner;
   FList:=TFPList.Create;
 end;
 
@@ -1339,7 +1383,7 @@ end;
 
 function TPGTablePartitionList.Add(AOID: Integer): TPGTablePartition;
 begin
-  Result:=TPGTablePartition.Create;
+  Result:=TPGTablePartition.Create(Self);
   FList.Add(Result);
   Result.FOID:=AOID;
 end;
@@ -1347,6 +1391,17 @@ end;
 function TPGTablePartitionList.GetEnumerator: TPGTablePartitionListEnumerator;
 begin
   Result:=TPGTablePartitionListEnumerator.Create(Self);
+end;
+
+function TPGTablePartitionList.TablePartitionByOID(AOID: Integer
+  ): TPGTablePartition;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    if TPGTablePartition(FList[i]).FOID = AOID then
+      Exit(TPGTablePartition(FList[i]));
+  Result:=nil;
 end;
 
 { TPGForeignTable }
@@ -5376,7 +5431,7 @@ begin
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
   FStorageParameters:=TStringList.Create;
-  FPartitionList:=TPGTablePartitionList.Create;
+  FPartitionList:=TPGTablePartitionList.Create(Self);
 
   UITableOptions:=[utReorderFields, utRenameTable,
      utAddFields, utEditField, utDropFields,
@@ -5641,7 +5696,10 @@ begin
       P.FExpression:=FQuery.FieldByName('partition_value').AsString;
       P.FTableSpaceID:=FQuery.FieldByName('reltablespace').AsInteger;
       P.FSchemaID:=FQuery.FieldByName('relnamespace').AsInteger;
+      P.FDescription:=FQuery.FieldByName('description').AsString;
+
       FScm:=TSQLEnginePostgre(OwnerDB).SchemasRoot.SchemaByOID(P.FSchemaID);
+
       if Assigned(FScm) then
         P.FSchemaName:=FScm.Caption;
 

@@ -1967,6 +1967,17 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_class.relname,'
           '  pg_class.reltablespace,'
           '  pg_class.relnamespace,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description,'
           '  pg_get_expr(pg_class.relpartbound, pg_class.oid) AS partition_value'
           'from'
           '  pg_inherits'
@@ -1977,6 +1988,7 @@ object pgSqlTextModule: TpgSqlTextModule
           '    pg_class.relispartition'
           'order by'
           '  pg_class.relname'
+          ''
         )
       end>
     Left = 162
