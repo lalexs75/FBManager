@@ -442,6 +442,17 @@ resourcestring
   sFromValue                        = 'From value';
   sToValue                          = 'To value';
   sSectionProperty                  = 'Section property';
+  sPartitionTypeHint                = 'Partition table supports two types of keys:'#13+
+                                      'Column: User can select any column from the list of available columns.'#13+
+                                      'Expression: User can specify expression to create partition key.'#13+
+                                      'Example: Let''s say, we want to create a partition table based per year for the column ''saledate'', having datatype ''date/timestamp'', then we need to specify the expression as ''extract(YEAR from saledate)'' as partition key.';
+  sAddPatitionKey                   = 'Add patition key';
+  sAddPatitionKeyHint               = 'Add patition key (collumn or expression)';
+  sRemovePatitionKey                = 'Remove patition key';
+  sRemovePatitionKeyHint            = 'Remove patition key (collumn or expression)';
+  sEditPatitionKey                  = 'Edit patition key';
+  sEditPatitionKeyHint              = 'Edit patition key (collumn or expression)';
+
 
   sSchemeOwner                      = 'Scheme owner';
 

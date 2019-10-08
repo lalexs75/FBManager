@@ -35,6 +35,7 @@ type
   { TfbmPGTablePartitionPage }
 
   TfbmPGTablePartitionPage = class(TEditorPage)
+    sSectionDeatach: TAction;
     DBMemo1: TDBMemo;
     MenuItem8: TMenuItem;
     Panel1: TPanel;
@@ -97,6 +98,7 @@ type
     procedure rxSectionAfterPost(DataSet: TDataSet);
     procedure SpeedButton2DblClick(Sender: TObject);
     procedure sSectionAddExecute(Sender: TObject);
+    procedure sSectionDeatachExecute(Sender: TObject);
     procedure sSectionEditExecute(Sender: TObject);
     procedure sSectionRemoveExecute(Sender: TObject);
   private
@@ -226,6 +228,11 @@ end;
 procedure TfbmPGTablePartitionPage.sSectionAddExecute(Sender: TObject);
 begin
   AddSection;
+end;
+
+procedure TfbmPGTablePartitionPage.sSectionDeatachExecute(Sender: TObject);
+begin
+  NotCompleteFunction;
 end;
 
 procedure TfbmPGTablePartitionPage.sSectionEditExecute(Sender: TObject);
@@ -615,13 +622,20 @@ begin
   ComboBox1.Items[0]:=sNone;
   ComboBox1.Items[1]:=sRange;
   ComboBox1.Items[2]:=sList;
-  keyAdd.Caption:=sAdd;
-  keyRemove.Caption:=sRemove;
-  keyEdit.Caption:=sEdit;
+  ComboBox1.Hint:=sPartitionTypeHint;
+  Edit1.Hint:=sPartitionTypeHint;
+
+  keyAdd.Caption:=sAddPatitionKey;
+  keyAdd.Hint:=sAddPatitionKeyHint;
+  keyRemove.Caption:=sRemovePatitionKey;
+  keyRemove.Hint:=sRemovePatitionKeyHint;
+  keyEdit.Caption:=sEditPatitionKey;
+  keyEdit.Hint:=sEditPatitionKeyHint;
 
   sSectionAdd.Caption:=sAdd;
   sSectionRemove.Caption:=sRemove;
   sSectionEdit.Caption:=sEdit;
+
 end;
 
 function TfbmPGTablePartitionPage.SetupSQLObject(ASQLObject: TSQLCommandDDL

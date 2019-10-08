@@ -589,6 +589,11 @@ inherited fbmPGTablePartitionPage: TfbmPGTablePartitionPage
       ImageIndex = 13
       OnExecute = sSectionRemoveExecute
     end
+    object sSectionDeatach: TAction
+      Category = 'Sections'
+      Caption = 'Section deatach'
+      OnExecute = sSectionDeatachExecute
+    end
   end
   object rxKeys: TRxMemoryData[14]
     FieldDefs = <    
