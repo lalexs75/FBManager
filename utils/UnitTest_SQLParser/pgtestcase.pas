@@ -761,7 +761,7 @@ end;
 
 procedure TPGSQLParserTest.c490AlterTable9;
 begin
-  DoTestSQL(PGSQLParserData.sDML['AlterTable9']);
+  DoTestSQL(PGSQLParserData.sTable['AlterTable9']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

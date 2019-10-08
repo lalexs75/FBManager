@@ -18001,9 +18001,10 @@ var
     TConstFKMatch1, TConstFKMatch2, TConstFKMatch3, TConstFKOn,
     TConstFKOn1, TConstFKOn2, TConstFKOn10, TConstFKOn11,
     TConstFKOn12, TConstFKOn13, TConstFKOn14, TSet, T2_1, T4_1,
-    T4_2, T4_3, T4_4, T5, TReset: TSQLTokenRecord;
+    T4_2, T4_3, T4_4, T5, TReset, TDetach: TSQLTokenRecord;
 begin
   { TODO : Реализовать парсер ALTER TABLE }
+  { TODO : Реализовать парсер ALTER TABLE IF EXISTS }
 (*
   ALTER TABLE [ IF EXISTS ] [ ONLY ] имя [ * ]
       действие [, ... ]
@@ -18379,6 +18380,14 @@ ADD ограничение_таблицы [ NOT VALID ]
   ENABLE TRIGGER [ trigger_name | ALL | USER ]
 *)
   TSymb2.AddChildToken([TAdd, TDrop, TOwnTo, T1, TDisableT, TAltCol]);
+
+  //ALTER TABLE [ IF EXISTS ] имя DETACH PARTITION имя_секции
+  TDetach:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'DETACH', [], 23);
+  TDetach:=AddSQLTokens(stKeyword, TDetach, 'PARTITION', []);
+    T:=AddSQLTokens(stIdentificator, TDetach, '', [], 24);
+    T:=AddSQLTokens(stSymbol, T, '.', [toOptional], 24);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 24);
+
 end;
 
 procedure TPGSQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -18459,6 +18468,9 @@ begin
            FCurOperator:=FOperators.AddItem(ataNone);
          FCurOperator.Options:=FCurOperator.Options + [ooIfNotExists];
        end;
+    23:FCurOperator:=FOperators.AddItem(ataDetachPartition);
+    24:if Assigned(FCurOperator) then FCurOperator.Name:=FCurOperator.Name + AWord;
+
     102:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=AWord;
     103:if Assigned(FCurOperator) then
           FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + ' ' + AWord;
@@ -18685,6 +18697,11 @@ begin
   AddSQLCommand(S);
 end;
 
+function FIfExists:string;
+begin
+  Result:='';
+end;
+
 var
   OP: TAlterTableOperator;
 begin
@@ -18710,6 +18727,7 @@ begin
       ataReSetParams:DoReSetParams(OP);
       ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, OP.ParamValue]);
       ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, OP.ParamValue]);
+      ataDetachPartition:AddSQLCommandEx('ALTER TABLE %s DETACH PARTITION %s', [FullName, OP.Name]); //ALTER TABLE [ IF EXISTS ] имя DETACH PARTITION имя_секции
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;

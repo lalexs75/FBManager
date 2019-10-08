@@ -124,7 +124,8 @@ type
      ataSetTablespace,
      ataAddIndex,
      ataSetParams,
-     ataReSetParams
+     ataReSetParams,
+     ataDetachPartition
     );
 
 
@@ -698,7 +699,8 @@ const
     'ataSetTablespace',
     'ataAddIndex',
     'ataSetParams',
-    'ataReSetParams'
+    'ataReSetParams',
+    'ataDetachPartition'
     );
 
 function IndexSortOrderStr(AValue:TIndexSortOrder):string;

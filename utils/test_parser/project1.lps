@@ -55,14 +55,13 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="321"/>
-        <CursorPos X="3" Y="316"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="437"/>
+        <CursorPos X="14" Y="453"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
-          <Item0 Y="559" ID="9"/>
+          <Item0 Y="560" ID="9"/>
         </Bookmarks>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../tools/fbmstrconstunit.pas"/>
@@ -78,7 +77,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="160"/>
+        <TopLine Value="147"/>
         <CursorPos X="15" Y="177"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -116,8 +115,8 @@
         <UnitName Value="pg_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="3501"/>
-        <CursorPos X="39" Y="3505"/>
+        <TopLine Value="18702"/>
+        <CursorPos Y="18729"/>
         <UsageCount Value="201"/>
         <Bookmarks Count="4">
           <Item0 X="17" Y="547" ID="4"/>
@@ -515,127 +514,114 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="27">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="182" Column="19" TopLine="172"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="3493" Column="5" TopLine="3490"/>
       </Position1>
       <Position2>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2673" Column="3" TopLine="2651"/>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="224" Column="15" TopLine="202"/>
       </Position2>
       <Position3>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="221" Column="34" TopLine="201"/>
+        <Caret Line="6425" TopLine="6414"/>
       </Position3>
       <Position4>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="6402" TopLine="6398"/>
+        <Caret Line="202" Column="15" TopLine="188"/>
       </Position4>
       <Position5>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="221" Column="15" TopLine="203"/>
+        <Caret Line="3497" Column="36" TopLine="3490"/>
       </Position5>
       <Position6>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="6402" TopLine="6398"/>
+        <Caret Line="3498" Column="37" TopLine="3490"/>
       </Position6>
       <Position7>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="221" Column="15" TopLine="191"/>
+        <Caret Line="3497" Column="3" TopLine="3479"/>
       </Position7>
       <Position8>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="199" Column="28" TopLine="191"/>
+        <Caret Line="3498" Column="45" TopLine="3471"/>
       </Position8>
       <Position9>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3429" Column="3" TopLine="3421"/>
+        <Caret Line="203" Column="15" TopLine="184"/>
       </Position9>
       <Position10>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="199" TopLine="189"/>
+        <Caret Line="3504" Column="3" TopLine="3501"/>
       </Position10>
       <Position11>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3432" Column="3" TopLine="3424"/>
+        <Caret Line="203" Column="15" TopLine="185"/>
       </Position11>
       <Position12>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="202" Column="15" TopLine="182"/>
+        <Caret Line="3505" Column="39" TopLine="3501"/>
       </Position12>
       <Position13>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3520" Column="24" TopLine="3505"/>
       </Position13>
       <Position14>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="202" Column="27" TopLine="192"/>
+        <Caret Line="930" Column="28" TopLine="910"/>
       </Position14>
       <Position15>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3492" Column="25" TopLine="3475"/>
+        <Caret Line="18383" Column="54" TopLine="18436"/>
       </Position15>
       <Position16>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="202" Column="15" TopLine="184"/>
+        <Caret Line="18468" Column="20" TopLine="18456"/>
       </Position16>
       <Position17>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3493" Column="5" TopLine="3490"/>
+        <Caret Line="18388" Column="39" TopLine="18371"/>
       </Position17>
       <Position18>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="224" Column="15" TopLine="202"/>
+        <Caret Line="18724" Column="106" TopLine="18694"/>
       </Position18>
       <Position19>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="6425" TopLine="6414"/>
+        <Caret Line="18700" Column="7" TopLine="18688"/>
       </Position19>
       <Position20>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="202" Column="15" TopLine="188"/>
+        <Caret Line="931" Column="15" TopLine="914"/>
       </Position20>
       <Position21>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3497" Column="36" TopLine="3490"/>
+        <Caret Line="18395" Column="3" TopLine="18392"/>
       </Position21>
       <Position22>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3498" Column="37" TopLine="3490"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="177" Column="15" TopLine="159"/>
       </Position22>
       <Position23>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3497" Column="3" TopLine="3479"/>
+        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
+        <Caret Line="2512" Column="3" TopLine="2508"/>
       </Position23>
       <Position24>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3498" Column="45" TopLine="3471"/>
+        <Caret Line="18395" Column="3" TopLine="18386"/>
       </Position24>
       <Position25>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="203" Column="15" TopLine="184"/>
+        <Caret Line="930" Column="15" TopLine="913"/>
       </Position25>
       <Position26>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3504" Column="3" TopLine="3501"/>
+        <Caret Line="18195" Column="19" TopLine="18192"/>
       </Position26>
       <Position27>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="203" Column="15" TopLine="185"/>
+        <Caret Line="932" Column="15" TopLine="912"/>
       </Position27>
-      <Position28>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="3505" Column="39" TopLine="3501"/>
-      </Position28>
-      <Position29>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="177" Column="15" TopLine="159"/>
-      </Position29>
-      <Position30>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2512" Column="3" TopLine="2508"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
