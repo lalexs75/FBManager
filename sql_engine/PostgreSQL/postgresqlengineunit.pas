@@ -4830,17 +4830,20 @@ begin
       S2:='';
       for FD in Fields do
       begin
-        F:=FDataSet.FieldByName(FD.FieldName);
-        if not F.IsNull then
+        F:=FDataSet.FindField(FD.FieldName);
+        if Assigned(F) then
         begin
-          if S1<>'' then
+          if not F.IsNull then
           begin
-            S1:=S1+ ', ';
-            S2:=S2+ ', ';
+            if S1<>'' then
+            begin
+              S1:=S1+ ', ';
+              S2:=S2+ ', ';
+            end;
+            S1:=S1 + FD.FieldName;
+            S2:=S2 +':' + FD.FieldName;
           end;
-          S1:=S1 + FD.FieldName;
-          S2:=S2 +':' + FD.FieldName;
-        end;
+        end
       end;
 
       S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
@@ -4857,23 +4860,26 @@ begin
       begin
         if FD.FieldPK then
         begin
-          F:=quIns.FieldByName(FD.FieldName);
-          if F.DataType in IntegerDataTypes then
-            RA.SetInt(F.Index+1, F.AsInteger)
-          else
-          if F.DataType in StringTypes then
-            RA.SetString(F.Index+1, F.AsString)
-          else
-          if F.DataType = ftTime then
-            RA.SetTime(F.Index+1, F.AsDateTime)
-          else
-          if F.DataType in [ftDateTime, ftTimeStamp] then
-            RA.SetTimestamp(F.Index+1, F.AsDateTime)
-          else
-          if F.DataType = ftDate then
-            RA.SetDate(F.Index+1, F.AsDateTime)
-          else
-            raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
+          F:=quIns.FindField(FD.FieldName);
+          if Assigned(F) then
+          begin
+            if F.DataType in IntegerDataTypes then
+              RA.SetInt(F.Index+1, F.AsInteger)
+            else
+            if F.DataType in StringTypes then
+              RA.SetString(F.Index+1, F.AsString)
+            else
+            if F.DataType = ftTime then
+              RA.SetTime(F.Index+1, F.AsDateTime)
+            else
+            if F.DataType in [ftDateTime, ftTimeStamp] then
+              RA.SetTimestamp(F.Index+1, F.AsDateTime)
+            else
+            if F.DataType = ftDate then
+              RA.SetDate(F.Index+1, F.AsDateTime)
+            else
+              raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
+          end;
         end;
       end;
       quIns.Close;
