@@ -821,6 +821,8 @@ begin
     spvtOutput:Result:='OUT';
     spvtInOut:Result:='INOUT';
 //    ioTable:Result:='TABLE';
+    spvtVariadic:Result:='VARIADIC';
+    spvtTable:Result:='TABLE';
   else
     Result:='';
   end;

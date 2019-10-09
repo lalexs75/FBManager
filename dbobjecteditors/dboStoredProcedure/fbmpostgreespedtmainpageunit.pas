@@ -159,6 +159,7 @@ type
     procedure DefinePopupMenu;
     procedure DoTextEditorDefineVariable(Sender: TObject);
     procedure TextEditorPopUpMenu(Sender: TObject);
+    function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
   public
     function PageName:string;override;
     procedure UpdateEnvOptions;override;
@@ -293,7 +294,8 @@ end;
 procedure TfbmPostGreeFunctionEdtMainPage.rxParamListInOutGetText(Sender: TField;
   var aText: string; DisplayText: Boolean);
 begin
-  case TSPVarType(rxParamListInOut.AsInteger) of
+  aText:=ParamTypeFuncToStr(TSPVarType(rxParamListInOut.AsInteger));
+(*  case TSPVarType(rxParamListInOut.AsInteger) of
     spvtInput:aText:='IN';
     spvtOutput:aText:='OUT';
     spvtInOut:aText:='INOUT';
@@ -301,7 +303,7 @@ begin
     spvtTable:aText:='TABLE';
   else
     aText:='';
-  end;
+  end; *)
 end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.LoadProcedureBody;
@@ -771,6 +773,42 @@ begin
   FMenuDefineInOutParam.Enabled:=F;
 end;
 
+function TfbmPostGreeFunctionEdtMainPage.PGFunctionGetHintData(
+  Sender: Tfdbm_SynEditorFrame; const S1, S2: string; out HintText: string
+  ): Boolean;
+var
+  P: TBookMark;
+begin
+  if (S2 = '') and (S1<>'') then
+  begin
+    rxParamList.DisableControls;
+    P:=rxParamList.Bookmark;
+    if rxParamList.Locate('ParName', S1, [loCaseInsensitive]) then
+    begin
+      Result:=true;
+      HintText:=sParameter + ' : ' + ParamTypeFuncToStr(TSPVarType(rxParamListInOut.AsInteger)) + ' ' + rxParamListParName.AsString + ' ' + rxParamListType.AsString;
+      if rxParamListDesc.AsString <> '' then
+        HintText:=HintText +LineEnding + '---------------------------------------' + LineEnding + rxParamListDesc.AsString;
+    end;
+    rxParamList.Bookmark:=P;
+    rxParamList.EnableControls;
+    if Result then Exit;
+
+
+    FLocalVars.rxLocalVars.DisableControls;
+    P:=FLocalVars.rxLocalVars.Bookmark;
+    if FLocalVars.rxLocalVars.Locate('VAR_NAME', S1, [loCaseInsensitive]) then
+    begin
+      Result:=true;
+      HintText:=sLocalVariables + ' : ' + FLocalVars.rxLocalVarsVAR_NAME.AsString + ' ' + FLocalVars.rxLocalVarsVAR_TYPE.AsString;
+      if FLocalVars.rxLocalVarsVAR_DESC.AsString <> '' then
+        HintText:=HintText +LineEnding + '---------------------------------------' + LineEnding + FLocalVars.rxLocalVarsVAR_DESC.AsString;
+    end;
+    FLocalVars.rxLocalVars.Bookmark:=P;
+    FLocalVars.rxLocalVars.EnableControls;
+  end;
+end;
+
 function TfbmPostGreeFunctionEdtMainPage.PageName: string;
 begin
   Result:=sFunction;
@@ -790,6 +828,8 @@ begin
   EditorFrame.OnGetDBObjectByAlias:=@SynOnGetDBObjectByAlias;
   EditorFrame.TextEditor.OnChange:=@TextEditorChange;
   EditorFrame.OnPopUpMenu:=@TextEditorPopUpMenu;
+  EditorFrame.OnGetHintData:=@PGFunctionGetHintData;
+
   DefinePopupMenu;
 
   FLocalVars:=TfbmPGLocalVarsEditorFrame.Create(Self);
