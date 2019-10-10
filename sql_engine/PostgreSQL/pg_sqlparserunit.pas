@@ -6643,12 +6643,17 @@ begin
     //DefPos:=0;
     DefPos:=Pos(':=',VarType);
     if DefPos = 0 then
+      DefPos:=Pos('=', UpperCase(VarType));
+    if DefPos = 0 then
       DefPos:=Pos('DEFAULT', UpperCase(VarType));
 
     if DefPos > 0 then
     begin
       if VarType[DefPos] = ':' then
         VarDefValue:=Trim(Copy(VarType, DefPos + Length(':='), Length(VarType)))
+      else
+      if VarType[DefPos] = '=' then
+        VarDefValue:=Trim(Copy(VarType, DefPos + Length('='), Length(VarType)))
       else
         VarDefValue:=Trim(Copy(VarType, DefPos + Length('DEFAULT')+1, Length(VarType)));
       VarType:=TrimRight(Copy(VarType, 1, DefPos-1));

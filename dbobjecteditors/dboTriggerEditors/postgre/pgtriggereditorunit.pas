@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, ComCtrls, Buttons, Menus, fdmAbstractEditorUnit, sqlObjects,
+  ExtCtrls, ComCtrls, Buttons, Menus, DB, fdmAbstractEditorUnit, sqlObjects,
   PostgreSQLEngineUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, fbmToolsUnit,
   fbmPGLocalVarsEditorFrameUnit;
@@ -466,10 +466,12 @@ function TpgTriggerEditorPage.OnGetHintData(Sender: Tfdbm_SynEditorFrame;
 var
   DBTable: TPGTable;
   F: TDBField;
+  P: TBookMark;
 begin
   HintText:='';
   Result:=false;
   if (S1<>'') and (S2<>'') then
+  begin
     if (S1 = 'NEW') or (S1 = 'OLD') then
     begin
       DBTable:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]);
@@ -485,7 +487,23 @@ begin
         end;
       end;
     end;
+  end;
 
+  if not Result then
+  if (S1<>'') and (S2='') then
+  begin
+    FLocalVars.rxLocalVars.DisableControls;
+    P:=FLocalVars.rxLocalVars.Bookmark;
+    if FLocalVars.rxLocalVars.Locate('VAR_NAME', S1, [loCaseInsensitive]) then
+    begin
+      Result:=true;
+      HintText:=sLocalVariables + ' : ' + FLocalVars.rxLocalVarsVAR_NAME.AsString + ' ' + FLocalVars.rxLocalVarsVAR_TYPE.AsString;
+      if FLocalVars.rxLocalVarsVAR_DESC.AsString <> '' then
+        HintText:=HintText +LineEnding + '---------------------------------------' + LineEnding + FLocalVars.rxLocalVarsVAR_DESC.AsString;
+    end;
+    FLocalVars.rxLocalVars.Bookmark:=P;
+    FLocalVars.rxLocalVars.EnableControls;
+  end;
 end;
 
 procedure TpgTriggerEditorPage.SetReadOnly(AValue: boolean);
