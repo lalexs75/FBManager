@@ -1852,6 +1852,13 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="otPostgreTableTemplateUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/Postgre/pgdatabasestatunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgDataBaseStatForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pgDataBaseStatUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -59,15 +59,12 @@ type
   end;
 
 implementation
-uses pgActivitiMonitorUnit, fbmStrConstUnit, fbmCreateProcTableUnit,
-  otPostgreProcTemplateUnit, otPostgreTriggerTemplateUnit, IBManMainUnit,
-  IBManDataInspectorUnit, PostgreSQLEngineUnit,
-  pg_tasks, pg_sql_lines_unit,
-  fbmUserEditorUnit,
-  fbmObjectEditorDescriptionUnit,
-  fbmGroupEditFrameUnit,
-  fbmRoleGrantUsersUnit, fbmUserObjectsGrantUnit,
-  fbmDDLPageUnit,
+uses pgActivitiMonitorUnit, pgDataBaseStatUnit, fbmStrConstUnit,
+  fbmCreateProcTableUnit, otPostgreProcTemplateUnit,
+  otPostgreTriggerTemplateUnit, IBManMainUnit, IBManDataInspectorUnit,
+  PostgreSQLEngineUnit, pg_tasks, pg_sql_lines_unit, fbmUserEditorUnit,
+  fbmObjectEditorDescriptionUnit, fbmGroupEditFrameUnit, fbmRoleGrantUsersUnit,
+  fbmUserObjectsGrantUnit, fbmDDLPageUnit,
   //Конфигурация
      cfPostgreeConfigMiskUnit, otPostgreTableTemplateUnit, cfAutoIncFieldUnit,
   //Connection pages
@@ -132,12 +129,8 @@ end;
 
 procedure TPostgreVisualTools.tlsPGDBAnalizExecute(Sender: TObject);
 begin
-  NotImplemented;
-  { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
-  (*
-  1. Список таблиц без PK
-  2. Список FK в таблицах без индексов по соотвутсвующим полям
-  *)
+  if Assigned(fbManDataInpectorForm) and Assigned(fbManDataInpectorForm.CurrentDB) and (fbManDataInpectorForm.CurrentDB.SQLEngine is TSQLEnginePostgre) then
+    ShowDataBaseStatForm(fbManDataInpectorForm.CurrentDB.SQLEngine as TSQLEnginePostgre);
 end;
 
 class function TPostgreVisualTools.GetObjTemplatePagesCount: integer;

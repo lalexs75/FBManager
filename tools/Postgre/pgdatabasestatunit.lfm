@@ -1,0 +1,171 @@
+object pgDataBaseStatForm: TpgDataBaseStatForm
+  Left = 661
+  Height = 479
+  Top = 305
+  Width = 621
+  Caption = 'pgDataBaseStatForm'
+  ClientHeight = 479
+  ClientWidth = 621
+  LCLVersion = '2.1.0.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 479
+    Top = 0
+    Width = 621
+    ActivePage = TabSheet1
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Tables'
+      ClientHeight = 448
+      ClientWidth = 611
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 423
+        Top = 25
+        Width = 611
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = False
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsTablesStat
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+      end
+      object ToolPanel1: TToolPanel
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 611
+        Items = <        
+          item
+            Action = tsRefresh
+            Visible = True
+            ShowCaption = True
+          end>
+        ImageList = fbManagerMainForm.ImageListMain
+        ToolBarStyle = tbsWindowsXP
+        Options = [tpFlatBtns]
+        CustomizeShortCut = False
+        Align = alTop
+        BorderWidth = 4
+        ClientHeight = 25
+        ClientWidth = 611
+        TabOrder = 1
+      end
+    end
+  end
+  object pgStatDB: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+      'application_name=FBManager'
+      'codepage='
+      'controls_cp=CP_UTF8'
+    )
+    DesignConnection = True
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'postgres'
+    User = 'alexs'
+    Protocol = 'postgresql-9'
+    Left = 192
+    Top = 48
+  end
+  object dsTablesStat: TDataSource
+    DataSet = quTablesStat
+    Left = 128
+    Top = 112
+  end
+  object quTablesStat: TZMacroQuery
+    Connection = pgStatDB
+    Params = <>
+    MacroExprDef = '0=0'
+    Left = 168
+    Top = 112
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 168
+    Top = 184
+    object tsRefresh: TAction
+      Caption = 'tsRefresh'
+      ImageIndex = 10
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 88
+    Top = 112
+    object MenuItem1: TMenuItem
+      Action = tsRefresh
+    end
+  end
+end
