@@ -36,6 +36,15 @@ type
   TpgDataBaseStatForm = class(TForm)
     MenuItem1: TMenuItem;
     PopupMenu1: TPopupMenu;
+    quTablesStatavg_rec_count: TFloatField;
+    quTablesStatdescription: TMemoField;
+    quTablesStatindex: TLargeintField;
+    quTablesStatoid: TLongintField;
+    quTablesStatrelkind: TStringField;
+    quTablesStatrelname: TStringField;
+    quTablesStatrelpages: TLongintField;
+    quTablesStattoast: TLargeintField;
+    quTablesStattotal: TLargeintField;
     ToolPanel1: TToolPanel;
     tsRefresh: TAction;
     ActionList1: TActionList;
@@ -82,7 +91,16 @@ end;
 
 procedure TpgDataBaseStatForm.ConnectToDB(ASQLEngine: TSQLEnginePostgre);
 begin
+  quTablesStat.Active:=false;
 
+  pgStatDB.Connected:=false;
+  pgStatDB.User:=ASQLEngine.UserName;
+  pgStatDB.Password:=ASQLEngine.Password;
+  pgStatDB.HostName:=ASQLEngine.ServerName;
+  pgStatDB.Database:=ASQLEngine.DataBaseName;
+  pgStatDB.Connected:=True;
+
+  quTablesStat.Active:=True;
 end;
 
 end.

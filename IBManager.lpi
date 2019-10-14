@@ -1856,6 +1856,7 @@
         <Filename Value="tools/Postgre/pgdatabasestatunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="pgDataBaseStatForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pgDataBaseStatUnit"/>
       </Unit>
