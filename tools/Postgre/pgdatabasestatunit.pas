@@ -54,6 +54,8 @@ type
     RxDBGrid1: TRxDBGrid;
     TabSheet1: TTabSheet;
     quTablesStat: TZMacroQuery;
+    procedure FormCreate(Sender: TObject);
+    procedure tsRefreshExecute(Sender: TObject);
   private
     procedure Localize;
   public
@@ -62,7 +64,7 @@ type
 
 procedure ShowDataBaseStatForm(ASQLEngine: TSQLEnginePostgre);
 implementation
-uses IBManMainUnit;
+uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit;
 
 { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
 (*
@@ -83,6 +85,24 @@ end;
 {$R *.lfm}
 
 { TpgDataBaseStatForm }
+
+procedure TpgDataBaseStatForm.FormCreate(Sender: TObject);
+var
+  R: TRxColumn;
+begin
+  R:=RxDBGrid1.ColumnByFieldName('relkind');
+  R.KeyList.Clear;
+  R.KeyList.Add('r=' + IntToStr(DBObjectKindImages[okTable]));
+  R.KeyList.Add('t=' + IntToStr(DBObjectKindImages[okTable]));
+  R.KeyList.Add('m=' + IntToStr(DBObjectKindImages[okMaterializedView]));
+
+  Localize;
+end;
+
+procedure TpgDataBaseStatForm.tsRefreshExecute(Sender: TObject);
+begin
+  quTablesStat.Refresh;
+end;
 
 procedure TpgDataBaseStatForm.Localize;
 begin
