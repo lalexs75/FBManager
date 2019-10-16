@@ -2430,6 +2430,24 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'REINDEX TABLE CONCURRENTLY my_broken_table;'
         )
+      end    
+      item
+        Caption = 'CreateTable39'
+        Lines.Strings = (
+          'CREATE TABLE people ('
+          '    height_cm numeric,'
+          '    height_in numeric GENERATED ALWAYS AS (height_cm / 2.54) STORED'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable40'
+        Lines.Strings = (
+          'CREATE TABLE people ('
+          '    height_cm numeric,'
+          '    height_in numeric GENERATED ALWAYS AS (height_cm / 2.54)'
+          ');'
+        )
       end>
     Left = 25
     Top = 248

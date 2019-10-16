@@ -520,6 +520,8 @@ type
     procedure c496SQLReindex8;
     procedure c497SQLReindex9;
     procedure c498SQLReindex10;
+    procedure c499CreateTable39;
+    procedure c500CreateTable40;
 end;
 
   { TPGSQLParserData }
@@ -810,6 +812,16 @@ end;
 procedure TPGSQLParserTest.c498SQLReindex10;
 begin
   DoTestSQL(PGSQLParserData.sTable['Reindex10']);
+end;
+
+procedure TPGSQLParserTest.c499CreateTable39;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable39']);
+end;
+
+procedure TPGSQLParserTest.c500CreateTable40;
+begin
+  DoTestSQL(PGSQLParserData.sTable['CreateTable40']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;
