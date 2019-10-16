@@ -513,7 +513,14 @@ type
     procedure c489CreateTable38;
     procedure c490AlterTable9;
     procedure c491AlterTable10;
-  end;
+    procedure c492SQLReindex4;
+    procedure c493SQLReindex5;
+    procedure c494SQLReindex6;
+    procedure c495SQLReindex7;
+    procedure c496SQLReindex8;
+    procedure c497SQLReindex9;
+    procedure c498SQLReindex10;
+end;
 
   { TPGSQLParserData }
 
@@ -768,6 +775,41 @@ end;
 procedure TPGSQLParserTest.c491AlterTable10;
 begin
   DoTestSQL(PGSQLParserData.sTable['AlterTable10']);
+end;
+
+procedure TPGSQLParserTest.c492SQLReindex4;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex4']);
+end;
+
+procedure TPGSQLParserTest.c493SQLReindex5;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex5']);
+end;
+
+procedure TPGSQLParserTest.c494SQLReindex6;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex6']);
+end;
+
+procedure TPGSQLParserTest.c495SQLReindex7;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex7']);
+end;
+
+procedure TPGSQLParserTest.c496SQLReindex8;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex8']);
+end;
+
+procedure TPGSQLParserTest.c497SQLReindex9;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex9']);
+end;
+
+procedure TPGSQLParserTest.c498SQLReindex10;
+begin
+  DoTestSQL(PGSQLParserData.sTable['Reindex10']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

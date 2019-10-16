@@ -2385,6 +2385,51 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'ALTER TABLE measurement ATTACH PARTITION measurement_y2008m02 FOR VALUES FROM (''2008-02-01'') TO (''2008-03-01'');'
         )
+      end    
+      item
+        Caption = 'Reindex4'
+        Lines.Strings = (
+          'REINDEX TABLE CONCURRENTLY my_broken_table;'
+        )
+      end    
+      item
+        Caption = 'Reindex5'
+        Lines.Strings = (
+          'REINDEX SYSTEM CONCURRENTLY aaa;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Reindex6'
+        Lines.Strings = (
+          'REINDEX SYSTEM CONCURRENTLY aa.aaa;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Reindex7'
+        Lines.Strings = (
+          'REINDEX SCHEMA aaa;'
+        )
+      end    
+      item
+        Caption = 'Reindex8'
+        Lines.Strings = (
+          'REINDEX INDEX  aaa.aaa;'
+        )
+      end    
+      item
+        Caption = 'Reindex9'
+        Lines.Strings = (
+          'REINDEX VERBOSE INDEX aaa;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Reindex10'
+        Lines.Strings = (
+          'REINDEX TABLE CONCURRENTLY my_broken_table;'
+        )
       end>
     Left = 25
     Top = 248
