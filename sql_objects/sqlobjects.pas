@@ -153,7 +153,7 @@ type
 
   TMatchParam = (maNone, maFull, maPartial, maSimple);
 
-  TSQLObjectOption = (ooTemporary, ooIfNotExists, ooIfExists);
+  TSQLObjectOption = (ooTemporary, ooIfNotExists, ooIfExists, ooOrReplase);
   TSQLObjectOptions = set of TSQLObjectOption;
   TDropRule = (drNone, drCascade, drRestrict);
   TCascadeRule = TDropRule;

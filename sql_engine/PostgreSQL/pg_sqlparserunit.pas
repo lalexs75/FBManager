@@ -11383,7 +11383,7 @@ var
   T, FSQLTokens, TName, TPar1, TPar, TPar2, T1, T2, T3, T4,
     T31: TSQLTokenRecord;
 begin
-  //CREATE AGGREGATE имя ( [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ) (
+  //CREATE [ OR REPLACE ] AGGREGATE имя ( [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ) (
   //    SFUNC = функция_состояния,
   //    STYPE = тип_данных_состояния
   //    [ , SSPACE = размер_данных_состояния ]
@@ -11406,7 +11406,7 @@ begin
   //    [ , PARALLEL = { SAFE | RESTRICTED | UNSAFE } ]
   //)
   //
-  //CREATE AGGREGATE имя ( [ [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ]
+  //CREATE [ OR REPLACE ] AGGREGATE имя ( [ [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ]
   //                        ORDER BY [ режим_аргумента ] [ имя_аргумента ] тип_данных_аргумента [ , ... ] ) (
   //    SFUNC = функция_состояния,
   //    STYPE = тип_данных_состояния
@@ -11421,7 +11421,7 @@ begin
   //
   //или старый синтаксис
   //
-  //CREATE AGGREGATE имя (
+  //CREATE [ OR REPLACE ] AGGREGATE имя (
   //    BASETYPE = базовый_тип,
   //    SFUNC = функция_состояния,
   //    STYPE = тип_данных_состояния
@@ -11445,7 +11445,9 @@ begin
   //)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
-  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'AGGREGATE', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
+    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], -2);
+  FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'AGGREGATE', [toFindWordLast]);
   TName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 
   TPar:=AddSQLTokens(stSymbol, TName, '(', []);
@@ -11545,7 +11547,11 @@ var
   S, S1, S2: String;
   P: TSQLParserField;
 begin
-  S:='CREATE AGGREGATE ' + Name;
+  S:='CREATE';
+  if ooOrReplase in Options then
+    S:=S + ' OR REPLACE';
+  S:=S +' AGGREGATE ' + Name;
+
   if Params.Count>0 then
   begin
     S1:='';

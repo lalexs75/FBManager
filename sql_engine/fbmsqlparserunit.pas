@@ -879,10 +879,12 @@ end;
 procedure TSQLCreateCommandAbstract.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
-  //-1 - ifnot exists
+  //-1 - if not exists
+  //-2 - Or Replase
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     -1:Options:=Options + [ooIfNotExists];
+    -2:Options:=Options + [ooOrReplase];
   end;
 end;
 

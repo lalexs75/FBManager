@@ -3404,11 +3404,11 @@ object PGSQLParserData: TPGSQLParserData
       item
         Caption = 'CreateAggregate8'
         Lines.Strings = (
-          'CREATE OR REPLACE AGGREGATE sum (complex)'
+          'CREATE OR REPLACE AGGREGATE sum(complex)'
           '('
-          '    sfunc = complex_add,'
-          '    stype = complex,'
-          '    initcond = ''(0,0)'''
+          '  sfunc = complex_add,'
+          '  stype = complex,'
+          '  initcond = ''(0,0)'''
           ');'
         )
       end>
