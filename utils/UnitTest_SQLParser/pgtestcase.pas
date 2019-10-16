@@ -522,6 +522,7 @@ type
     procedure c498SQLReindex10;
     procedure c499CreateTable39;
     procedure c500CreateTable40;
+    procedure c501CreateAggregate8;
 end;
 
   { TPGSQLParserData }
@@ -822,6 +823,11 @@ end;
 procedure TPGSQLParserTest.c500CreateTable40;
 begin
   DoTestSQL(PGSQLParserData.sTable['CreateTable40']);
+end;
+
+procedure TPGSQLParserTest.c501CreateAggregate8;
+begin
+  DoTestSQL(PGSQLParserData.sAggregate['CreateAggregate8']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

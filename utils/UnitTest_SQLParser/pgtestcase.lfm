@@ -3400,6 +3400,17 @@ object PGSQLParserData: TPGSQLParserData
         Lines.Strings = (
           'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
         )
+      end    
+      item
+        Caption = 'CreateAggregate8'
+        Lines.Strings = (
+          'CREATE OR REPLACE AGGREGATE sum (complex)'
+          '('
+          '    sfunc = complex_add,'
+          '    stype = complex,'
+          '    initcond = ''(0,0)'''
+          ');'
+        )
       end>
     Left = 32
     Top = 576
