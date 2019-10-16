@@ -2922,6 +2922,8 @@ type
 // 30 - BY DEFAULT
 // 31 - Array
 // 32 - Array dimension
+// 33 - GENERATED ALWAYS AS >>( генерирующее_выражение )<< STORED |
+// 34 - GENERATED ALWAYS AS ( генерирующее_выражение ) >>STORED<< |
 
 procedure MakeTypeDefTree(ACmd:TSQLCommandAbstract;
   AFirstTokens: array of TSQLTokenRecord;
@@ -2943,7 +2945,8 @@ var
     TD51_3, TD51_3_1, TD51_3_11, TD51_3_12, TD51_3_13, TD51_4,
     TD51_4_1, TD51_4_11, TD51_4_12, TD51_5, TD51_5_1, TD51_6,
     TGenerated, TGenerated1, TGenerated2, TGenerated3,
-    TD_Array1, TD_Array2{, TDefault1}, TColat1_1: TSQLTokenRecord;
+    TD_Array1, TD_Array2{, TDefault1}, TColat1_1, TGenerated4,
+    TGenerated5, TGenerated5_1: TSQLTokenRecord;
   i: Integer;
 begin
   if Length(AFirstTokens) = 0 then
@@ -3300,8 +3303,11 @@ begin
         TGenerated2:=ACmd.AddSQLTokens(stKeyword, TGenerated, 'BY', []);
         TGenerated2:=ACmd.AddSQLTokens(stKeyword, TGenerated2, 'DEFAULT', [], 30 + TagBase);
         TGenerated3:=ACmd.AddSQLTokens(stKeyword, [TGenerated1, TGenerated2], 'AS', []);
-        TGenerated3:=ACmd.AddSQLTokens(stKeyword, TGenerated3, 'IDENTITY', []);
         //{ ALWAYS | BY DEFAULT } AS IDENTITY [ ( параметры_последовательности ) ]
+        TGenerated4:=ACmd.AddSQLTokens(stKeyword, TGenerated3, 'IDENTITY', []);
+        //( генерирующее_выражение ) STORED |
+        TGenerated5:=ACmd.AddSQLTokens(stKeyword, TGenerated3, '(', [], 33 + TagBase);
+        TGenerated5_1:=ACmd.AddSQLTokens(stKeyword, TGenerated5, 'STORED', [], 34 + TagBase);
     end;
   end;
   //Fill next token of command
@@ -3402,7 +3408,9 @@ begin
     TRef4_5.AddChildToken(AEndTokens);
     TRef4_6.AddChildToken(AEndTokens);
     TRef4_7.AddChildToken(AEndTokens);
-    TGenerated3.AddChildToken(AEndTokens);
+    TGenerated4.AddChildToken(AEndTokens);
+    TGenerated5.AddChildToken(AEndTokens);
+    TGenerated5_1.AddChildToken(AEndTokens);
     TD_Array2.AddChildToken(AEndTokens);
   end;
 
@@ -15670,8 +15678,6 @@ var
     TTableStart, TPartition, TPartition1, TAs, TWit2_1, TWit7,
     TPart, TPart1, TWit8, TWit9, TPart2: TSQLTokenRecord;
 begin
-  { TODO : Реализовать парсер CREATE TABLE }
-
   //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы ( [
   //  { имя_столбца тип_данных [ COLLATE правило_сортировки ] [ ограничение_столбца [ ... ] ]
   //    | ограничение_таблицы
@@ -15680,7 +15686,8 @@ begin
   //] )
   //[ INHERITS ( таблица_родитель [, ... ] ) ]
   //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
-  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ USING метод ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITHOUT OIDS ]
   //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
   //[ TABLESPACE табл_пространство ]
   //
@@ -15691,7 +15698,8 @@ begin
   //    [, ... ]
   //) ]
   //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
-  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ USING метод ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITHOUT OIDS ]
   //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
   //[ TABLESPACE табл_пространство ]
   //
@@ -15702,7 +15710,8 @@ begin
   //    [, ... ]
   //) ] { FOR VALUES указание_границ_секции | DEFAULT }
   //[ PARTITION BY { RANGE | LIST | HASH } ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [, ... ] ) ]
-  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
+  //[ USING метод ]
+  //[ WITH ( параметр_хранения [= значение] [, ... ] ) | WITHOUT OIDS ]
   //[ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
   //[ TABLESPACE табл_пространство ]
   //
@@ -15713,11 +15722,12 @@ begin
   //  NULL |
   //  CHECK ( выражение ) [ NO INHERIT ] |
   //  DEFAULT выражение_по_умолчанию |
+  //  GENERATED ALWAYS AS ( генерирующее_выражение ) STORED |
   //  GENERATED { ALWAYS | BY DEFAULT } AS IDENTITY [ ( параметры_последовательности ) ] |
   //  UNIQUE параметры_индекса |
   //  PRIMARY KEY параметры_индекса |
   //  REFERENCES целевая_таблица [ ( целевой_столбец ) ] [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ]
-  //    [ ON DELETE действие ] [ ON UPDATE действие ] }
+  //    [ ON DELETE ссылочное_действие ] [ ON UPDATE ссылочное_действие ] }
   //[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
   //
   //и ограничение_таблицы:
@@ -15726,20 +15736,20 @@ begin
   //{ CHECK ( выражение ) [ NO INHERIT ] |
   //  UNIQUE ( имя_столбца [, ... ] ) параметры_индекса |
   //  PRIMARY KEY ( имя_столбца [, ... ] ) параметры_индекса |
-  //  EXCLUDE [ USING метод_индекса ] ( элемент_исключения WITH оператор [, ... ] ) параметры_индекса [ WHERE ( предикат ) ] |
+  //  EXCLUDE [ USING индексный_метод ] ( элемент_исключения WITH оператор [, ... ] ) параметры_индекса [ WHERE ( предикат ) ] |
   //  FOREIGN KEY ( имя_столбца [, ... ] ) REFERENCES целевая_таблица [ ( целевой_столбец [, ... ] ) ]
-  //    [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE действие ] [ ON UPDATE действие ] }
+  //    [ MATCH FULL | MATCH PARTIAL | MATCH SIMPLE ] [ ON DELETE ссылочное_действие ] [ ON UPDATE ссылочное_действие ] }
   //[ DEFERRABLE | NOT DEFERRABLE ] [ INITIALLY DEFERRED | INITIALLY IMMEDIATE ]
   //
   //и вариант_копирования:
   //
-  //{ INCLUDING | EXCLUDING } { COMMENTS | CONSTRAINTS | DEFAULTS | IDENTITY | INDEXES | STATISTICS | STORAGE | ALL }
+  //{ INCLUDING | EXCLUDING } { COMMENTS | CONSTRAINTS | DEFAULTS | GENERATED | IDENTITY | INDEXES | STATISTICS | STORAGE | ALL }
   //
   //и указание_границ_секции:
   //
-  //IN ( { числовая_константа | строковая_константа | TRUE | FALSE | NULL } [, ...] ) |
-  //FROM ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] )
-  //  TO ( { числовая_константа | строковая_константа | TRUE | FALSE | MINVALUE | MAXVALUE } [, ...] ) |
+  //IN ( выражение_границ_секции [, ...] ) |
+  //FROM ( { выражение_границ_секции | MINVALUE | MAXVALUE } [, ...] )
+  //  TO ( { выражение_границ_секции | MINVALUE | MAXVALUE } [, ...] ) |
   //WITH ( MODULUS числовая_константа, REMAINDER числовая_константа )
   //
   //параметры_индекса в ограничениях UNIQUE, PRIMARY KEY и EXCLUDE:
@@ -15751,15 +15761,6 @@ begin
   //элемент_исключения в ограничении EXCLUDE:
   //
   //{ имя_столбца | ( выражение ) } [ класс_операторов ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
-
-
-  //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
-  //    [ (имя_столбца [, ...] ) ]
-  //    [ WITH ( параметр_хранения [= значение] [, ... ] ) | WITH OIDS | WITHOUT OIDS ]
-  //    [ ON COMMIT { PRESERVE ROWS | DELETE ROWS | DROP } ]
-  //    [ TABLESPACE табл_пространство ]
-  //    AS запрос
-  //    [ WITH [ NO ] DATA ]
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okTable);    //CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'GLOBAL', [], 1);
@@ -16095,6 +16096,10 @@ begin
    130:if Assigned(FCurField) then FCurField.AutoIncType:=faioGeneratedByDefault;
    131:if Assigned(FCurField) then FCurField.ArrayDimension.Add(0); // 31 - Array
    132:if Assigned(FCurField) and (FCurField.ArrayDimension.Count>0) then FCurField.ArrayDimension[FCurField.ArrayDimension.Count-1].Dimension:=StrToInt(AWord); // 32 - Array dimension
+   133:if Assigned(FCurField) then
+       FCurField.ComputedSource:=ASQLParser.GetToBracket(')');
+   134:if Assigned(FCurField) then
+       FCurField.Params:=FCurField.Params + [fpStored];
   end;
 end;
 
@@ -16156,7 +16161,17 @@ begin
       end;
 
       if F.AutoIncType = faioGeneratedAlways then
+      begin
+        if F.ComputedSource <> '' then
+        begin
+          SF:=SF + ' GENERATED ALWAYS AS ('+F.ComputedSource + ')';
+          if fpStored in F.Params then
+            SF:=SF + ' STORED';
+
+        end
+        else
         SF:=SF + ' GENERATED ALWAYS AS IDENTITY'
+      end
       else
       if F.AutoIncType = faioGeneratedByDefault then
         SF:=SF + ' GENERATED BY DEFAULT AS IDENTITY';
