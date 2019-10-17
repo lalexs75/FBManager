@@ -55,6 +55,7 @@ type
     TabSheet1: TTabSheet;
     quTablesStat: TZMacroQuery;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure tsRefreshExecute(Sender: TObject);
   private
     procedure Localize;
@@ -97,6 +98,11 @@ begin
   R.KeyList.Add('m=' + IntToStr(DBObjectKindImages[okMaterializedView]));
 
   Localize;
+end;
+
+procedure TpgDataBaseStatForm.FormDestroy(Sender: TObject);
+begin
+  pgDataBaseStatForm:= nil;
 end;
 
 procedure TpgDataBaseStatForm.tsRefreshExecute(Sender: TObject);

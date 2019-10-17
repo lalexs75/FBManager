@@ -7,6 +7,7 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
   ClientHeight = 479
   ClientWidth = 881
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
@@ -89,6 +90,10 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
             Filter.AllValue = '(Все значения)'
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0'
+            Footer.FieldName = 'total'
+            Footer.ValueType = fvtSum
             Footers = <>
           end        
           item
@@ -104,6 +109,10 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
             Filter.AllValue = '(Все значения)'
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0'
+            Footer.FieldName = 'index'
+            Footer.ValueType = fvtSum
             Footers = <>
           end        
           item
@@ -119,6 +128,10 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
             Filter.AllValue = '(Все значения)'
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0'
+            Footer.FieldName = 'toast'
+            Footer.ValueType = fvtSum
             Footers = <>
           end        
           item
@@ -149,6 +162,10 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
             Filter.AllValue = '(Все значения)'
             Filter.EmptyFont.Style = [fsItalic]
             Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.DisplayFormat = '#,##0'
+            Footer.FieldName = 'relpages'
+            Footer.ValueType = fvtSum
             Footers = <>
           end>
         KeyStrokes = <        
@@ -207,13 +224,18 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
             ShortCut = 16451
             Enabled = True
           end>
-        FooterOptions.DrawFullLine = False
+        FooterOptions.Active = True
+        FooterOptions.Color = clYellow
+        FooterOptions.RowCount = 1
+        FooterOptions.DrawFullLine = True
         SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
         SearchOptions.FromStart = False
-        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        FooterRowCount = 1
         Align = alClient
         Color = clWindow
-        DrawFullLine = False
+        DrawFullLine = True
         FocusColor = clRed
         SelectedColor = clHighlight
         GridLineStyle = psSolid
