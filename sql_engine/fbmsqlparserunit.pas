@@ -54,6 +54,7 @@ type
 type
   TSQLTokenList = class;
   TSQLTokenListEnumerator = class;
+  TSQLCommandSelectCTEListEnumerator = class;
   TSQLCommentOn = class;
   TSQLCommentOnClass = class of TSQLCommentOn;
   TSQLCreateTable = class;
@@ -520,10 +521,60 @@ type
     property OrderByFields:TSQLFields read FOrderByFields;
   end;
 
+  { TSQLCommandSelectCTE }
+
+  TSQLCommandSelectCTE = class
+  private
+    FFields: TSQLFields;
+    FName: string;
+    FSQL: string;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLCommandSelectCTE);
+    property Name:string read FName write FName;
+    property Fields:TSQLFields read FFields;
+    property SQL:string read FSQL write FSQL;
+  end;
+
+  { TSQLCommandSelectCTEList }
+
+  TSQLCommandSelectCTEList = class
+  private
+    FList:TFPList;
+    FRecursive: Boolean;
+    function GetCount: integer;
+    function GetItem(AIndex: integer): TSQLCommandSelectCTE;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    function Add(AName:string):TSQLCommandSelectCTE;
+    procedure Clear;
+    procedure Assign(ASource:TSQLCommandSelectCTEList);
+    function GetEnumerator: TSQLCommandSelectCTEListEnumerator;
+    property Item[AIndex:integer]:TSQLCommandSelectCTE read GetItem; default;
+    property Count:integer read GetCount;
+    property Recursive:Boolean read FRecursive write FRecursive;
+  end;
+
+  { TSQLCommandSelectCTEListEnumerator }
+
+  TSQLCommandSelectCTEListEnumerator = class
+  private
+    FList: TSQLCommandSelectCTEList;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TSQLCommandSelectCTEList);
+    function GetCurrent: TSQLCommandSelectCTE;
+    function MoveNext: Boolean;
+    property Current: TSQLCommandSelectCTE read GetCurrent;
+  end;
+
   { TSQLCommandSelect }
 
   TSQLCommandSelect = class(TSQLCommandAbstractSelect)
   private
+    FCTE: TSQLCommandSelectCTEList;
     FTokenFrom:TSQLTokenRecord;
     //
     FAllRec: boolean;
@@ -531,6 +582,7 @@ type
     FCurTable: TTableItem;
     FParserState:TParserSelectState;
     FWhereExpression: string;
+    FCurCTE: TSQLCommandSelectCTE;
     procedure ParseJoinOn(ASQLParser: TSQLParser);
     procedure ParseFieldExp(ASQLParser: TSQLParser; AWord:string; AChild: TSQLTokenRecord);
   protected
@@ -541,10 +593,11 @@ type
     procedure MakeSQL; override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property AllRec:boolean read FAllRec write FAllRec;
     property WhereExpression:string read FWhereExpression write FWhereExpression;
-//    property CTE:string read FCTE write FCTE; //Common table expression
+    property CTE:TSQLCommandSelectCTEList read FCTE;
   end;
 
   { TSQLCommandDML }
@@ -872,6 +925,106 @@ begin
   Item.Signature:=ReplaceStr(ASignature, ' ',  '_');
   Item.SQLEngineClass:=ASQLEngineClass;
   Item.FItem:=ACmd.Create(nil);
+end;
+
+{ TSQLCommandSelectCTEListEnumerator }
+
+constructor TSQLCommandSelectCTEListEnumerator.Create(
+  AList: TSQLCommandSelectCTEList);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TSQLCommandSelectCTEListEnumerator.GetCurrent: TSQLCommandSelectCTE;
+begin
+  Result := FList[FPosition];
+end;
+
+function TSQLCommandSelectCTEListEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TSQLCommandSelectCTE }
+
+constructor TSQLCommandSelectCTE.Create;
+begin
+  inherited Create;
+  FFields:=TSQLFields.Create;
+end;
+
+destructor TSQLCommandSelectCTE.Destroy;
+begin
+  FreeAndNil(FFields);
+  inherited Destroy;
+end;
+
+procedure TSQLCommandSelectCTE.Assign(ASource: TSQLCommandSelectCTE);
+begin
+  if not Assigned(ASource) then Exit;
+  FName:=ASource.FName;
+  FFields.Assign(ASource.FFields);
+  FSQL:=ASource.FSQL;
+end;
+
+{ TSQLCommandSelectCTEList }
+
+function TSQLCommandSelectCTEList.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TSQLCommandSelectCTEList.GetItem(AIndex: integer
+  ): TSQLCommandSelectCTE;
+begin
+
+end;
+
+constructor TSQLCommandSelectCTEList.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TSQLCommandSelectCTEList.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+function TSQLCommandSelectCTEList.Add(AName: string): TSQLCommandSelectCTE;
+begin
+  Result:=TSQLCommandSelectCTE.Create;
+  FList.Add(Result);
+  Result.Name:=AName;
+end;
+
+procedure TSQLCommandSelectCTEList.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count do
+    TSQLCommandSelectCTE(FList[i]).Free;
+  FList.Free;
+end;
+
+procedure TSQLCommandSelectCTEList.Assign(ASource: TSQLCommandSelectCTEList);
+var
+  P: TSQLCommandSelectCTE;
+begin
+  Clear;
+  if not Assigned(ASource) then Exit;
+  FRecursive:=ASource.FRecursive;
+  for P in ASource do
+    Add(P.Name).Assign(P);
+end;
+
+function TSQLCommandSelectCTEList.GetEnumerator: TSQLCommandSelectCTEListEnumerator;
+begin
+  Result:=TSQLCommandSelectCTEListEnumerator.Create(Self);
 end;
 
 { TSQLCreateCommandAbstract }
@@ -1781,7 +1934,7 @@ var
     TBLV1_ALIAS, TAS_FA, TSymbTbl, T6_1, FSQLTokens1, TWhere: TSQLTokenRecord;
 begin
 (*
-Синтаксис PG 9.6
+Синтаксис PG 12
 [ WITH [ RECURSIVE ] запрос_WITH [, ...] ]
 SELECT [ ALL | DISTINCT [ ON ( выражение [, ...] ) ] ]
     [ * | выражение [ [ AS ] имя_результата ] [, ...] ]
@@ -1822,25 +1975,27 @@ SELECT [ ALL | DISTINCT [ ON ( выражение [, ...] ) ] ]
 
 и запрос_WITH:
 
-    имя_запроса_WITH [ ( имя_столбца [, ...] ) ] AS ( выборка | values | insert | update | delete )
+    имя_запроса_WITH [ ( имя_столбца [, ...] ) ] AS [ [ NOT ] MATERIALIZED ] ( выборка | values | insert | update | delete )
 
 TABLE [ ONLY ] имя_таблицы [ * ]
+
 *)
 
   //Для запросов с CTE (common table expression)
   FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'WITH', [toFirstToken, toFindWordLast]);
-    T:=AddSQLTokens(stKeyword, FSQLTokens1, 'RECURSIVE', []);
+    T:=AddSQLTokens(stKeyword, FSQLTokens1, 'RECURSIVE', [], 82);
     T:=AddSQLTokens(stIdentificator, [FSQLTokens1, T], '', [], 80);
 
     T1:=AddSQLTokens(stSymbol, T, '(', []);
-    T1:=AddSQLTokens(stIdentificator, T1, '', [], 15);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 83);
       T2:=AddSQLTokens(stSymbol, T1, ',', []);
       T2.AddChildToken(T1);
     T1:=AddSQLTokens(stKeyword, T1, ')', []);
 
     T1:=AddSQLTokens(stKeyword, [T, T1], 'AS', []);
     T1:=AddSQLTokens(stSymbol, T1, '(', [], 81);
-//    T1:=AddSQLTokens(stSymbol, T1, ')', []);
+      T2:=AddSQLTokens(stSymbol, T1, ',', []);
+      T2.AddChildToken([T]);
 
   //Разбор основного текста SQL SELECT
   FSQLTokens:=AddSQLTokens(stKeyword, T1, 'SELECT', [toFirstToken, toFindWordLast]);
@@ -2004,14 +2159,13 @@ begin
        end;
     15:if Assigned(FCurTable) then
          FCurTable.Fields.AddParam(AWord);
-    80:begin
-         FCurTable:=Tables.Add(AWord);
-         FCurTable.TableAlias:=AWord;
-         FCurTable.TableType:=stitVirtualTable;
-       end;
-    81: FCurTable.TableExpression := ASQLParser.GetToBracket(')');
-
-    21: FWhereExpression:=ASQLParser.GetToCommandDelemiter;
+    80:FCurCTE:=CTE.Add(AWord);
+    81:if Assigned(FCurCTE) then
+        FCurCTE.SQL := ASQLParser.GetToBracket(')');
+    82:FCTE.Recursive:=true;
+    83:if Assigned(FCurCTE) then
+        FCurCTE.Fields.AddParam(AWord);
+    21:FWhereExpression:=ASQLParser.GetToCommandDelemiter;
   end;
 end;
 
@@ -2129,6 +2283,13 @@ begin
   FSelectable:=true;
   FAllRec:=true;
   FParserState:=pssNone;
+  FCTE:=TSQLCommandSelectCTEList.Create;
+end;
+
+destructor TSQLCommandSelect.Destroy;
+begin
+  FreeAndNil(FCTE);
+  inherited Destroy;
 end;
 
 procedure TSQLCommandSelect.Assign(ASource: TSQLObjectAbstract);
@@ -2137,6 +2298,7 @@ begin
   begin
     AllRec:=TSQLCommandSelect(ASource).AllRec;
     WhereExpression:=TSQLCommandSelect(ASource).WhereExpression;
+    CTE.Assign(TSQLCommandSelect(ASource).CTE);
   end;
   inherited Assign(ASource);
 end;

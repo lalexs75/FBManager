@@ -65,7 +65,7 @@ type
 
 procedure ShowDataBaseStatForm(ASQLEngine: TSQLEnginePostgre);
 implementation
-uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit;
+uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit, fbmStrConstUnit;
 
 { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
 (*
@@ -112,7 +112,8 @@ end;
 
 procedure TpgDataBaseStatForm.Localize;
 begin
-
+  Caption:=sDataBaseStatistic;
+  tsRefresh.Caption:=sRefresh;
 end;
 
 procedure TpgDataBaseStatForm.ConnectToDB(ASQLEngine: TSQLEnginePostgre);

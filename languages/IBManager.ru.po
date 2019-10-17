@@ -993,6 +993,10 @@ msgstr "Свойства базы данных"
 msgid "Database sessions"
 msgstr "Подключения к БД"
 
+#: fbmstrconstunit.sdatabasestatistic
+msgid "Database statistic"
+msgstr ""
+
 #: fbmstrconstunit.sdatabaseuser
 msgid "Database user"
 msgstr "Пользователь БД"

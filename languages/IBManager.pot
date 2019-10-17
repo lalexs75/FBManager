@@ -957,6 +957,10 @@ msgstr ""
 msgid "Database sessions"
 msgstr ""
 
+#: fbmstrconstunit.sdatabasestatistic
+msgid "Database statistic"
+msgstr ""
+
 #: fbmstrconstunit.sdatabaseuser
 msgid "Database user"
 msgstr ""

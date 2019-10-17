@@ -1478,6 +1478,7 @@ resourcestring
   sTransactionPerSecond             = 'Transaction per second';
   sIdle                             = 'Idle';
   sTotal                            = 'Total';
+  sDataBaseStatistic                = 'Database statistic';
 
   sCreateNewFolderTitle             = 'Create DB folder';
   sCreateNewFolderText              = 'Enter DB folder name';
