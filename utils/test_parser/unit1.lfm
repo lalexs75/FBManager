@@ -9,12 +9,12 @@ object Form1: TForm1
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  SessionProperties = 'Height;Left;PageControl1.ActivePage;PageControl2.ActivePage;SynEdit1.Lines;SynEdit3.Lines;SynEdit4.Lines;Top;Width;SynEdit5.Lines'
+  SessionProperties = 'Height;Left;PageControl1.ActivePage;PageControl2.ActivePage;Top;Width'
   LCLVersion = '2.1.0.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 21
-    Top = 725
+    Height = 19
+    Top = 727
     Width = 877
     Panels = <    
       item
@@ -27,7 +27,7 @@ object Form1: TForm1
   end
   object PageControl2: TPageControl
     Left = 0
-    Height = 725
+    Height = 727
     Top = 0
     Width = 877
     ActivePage = TabSheet5
@@ -36,7 +36,7 @@ object Form1: TForm1
     TabOrder = 1
     object TabSheet5: TTabSheet
       Caption = 'SQL Parser test'
-      ClientHeight = 692
+      ClientHeight = 696
       ClientWidth = 867
       object PageControl1: TPageControl
         AnchorSideLeft.Control = TabSheet5
@@ -45,22 +45,22 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Panel1
         Left = 0
-        Height = 324
+        Height = 325
         Top = 0
         Width = 867
-        ActivePage = TabSheet1
+        ActivePage = TabSheet4
         Anchors = [akTop, akLeft, akRight, akBottom]
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 0
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
           Caption = 'FireBird SQL'
-          ClientHeight = 291
+          ClientHeight = 294
           ClientWidth = 857
           inline SynEdit1: TSynEdit
             Left = 0
-            Height = 246
-            Top = 45
+            Height = 247
+            Top = 47
             Width = 857
             Align = alClient
             Font.Height = -13
@@ -580,12 +580,12 @@ object Form1: TForm1
           end
           object Panel4: TPanel
             Left = 0
-            Height = 45
+            Height = 47
             Top = 0
             Width = 857
             Align = alTop
             AutoSize = True
-            ClientHeight = 45
+            ClientHeight = 47
             ClientWidth = 857
             TabOrder = 1
             object Label3: TLabel
@@ -593,9 +593,9 @@ object Form1: TForm1
               AnchorSideBottom.Control = cbFireBirdVersion
               AnchorSideBottom.Side = asrBottom
               Left = 7
-              Height = 19
-              Top = 19
-              Width = 82
+              Height = 17
+              Top = 23
+              Width = 74
               Anchors = [akLeft, akBottom]
               BorderSpacing.Left = 6
               Caption = 'Версия SQL'
@@ -605,8 +605,8 @@ object Form1: TForm1
               AnchorSideLeft.Control = Label3
               AnchorSideLeft.Side = asrBottom
               AnchorSideTop.Control = Panel4
-              Left = 95
-              Height = 31
+              Left = 87
+              Height = 33
               Top = 7
               Width = 389
               BorderSpacing.Around = 6
@@ -618,11 +618,11 @@ object Form1: TForm1
         end
         object TabSheet2: TTabSheet
           Caption = 'Postgre SQL'
-          ClientHeight = 291
+          ClientHeight = 294
           ClientWidth = 857
           inline SynEdit3: TSynEdit
             Left = 0
-            Height = 286
+            Height = 294
             Top = 0
             Width = 857
             Align = alClient
@@ -1144,11 +1144,11 @@ object Form1: TForm1
         end
         object TabSheet3: TTabSheet
           Caption = 'SQLite3'
-          ClientHeight = 291
+          ClientHeight = 294
           ClientWidth = 857
           inline SynEdit4: TSynEdit
             Left = 0
-            Height = 286
+            Height = 294
             Top = 0
             Width = 857
             Align = alClient
@@ -1678,11 +1678,11 @@ object Form1: TForm1
         end
         object TabSheet4: TTabSheet
           Caption = 'MySQL'
-          ClientHeight = 291
+          ClientHeight = 294
           ClientWidth = 857
           inline SynEdit5: TSynEdit
             Left = 0
-            Height = 286
+            Height = 294
             Top = 0
             Width = 857
             Align = alClient
@@ -2190,22 +2190,22 @@ object Form1: TForm1
         AnchorSideRight.Control = TabSheet5
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 45
-        Top = 324
+        Height = 47
+        Top = 325
         Width = 867
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
-        ClientHeight = 45
+        ClientHeight = 47
         ClientWidth = 867
         TabOrder = 1
         object Button1: TButton
           AnchorSideLeft.Control = Panel1
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = Panel1
-          Left = 356
-          Height = 31
+          Left = 359
+          Height = 33
           Top = 7
-          Width = 155
+          Width = 149
           AutoSize = True
           BorderSpacing.Around = 6
           Caption = 'Check SQL Command'
@@ -2217,10 +2217,10 @@ object Form1: TForm1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Button1
           AnchorSideTop.Side = asrCenter
-          Left = 517
+          Left = 514
           Height = 23
-          Top = 11
-          Width = 112
+          Top = 12
+          Width = 105
           BorderSpacing.Left = 6
           Caption = 'Ignore errors'
           TabOrder = 1
@@ -2234,8 +2234,8 @@ object Form1: TForm1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Memo1
         Left = 0
-        Height = 233
-        Top = 369
+        Height = 234
+        Top = 372
         Width = 867
         Anchors = [akTop, akLeft, akRight, akBottom]
         Font.Height = -13
@@ -2735,7 +2735,7 @@ object Form1: TForm1
       object Memo1: TMemo
         Left = 0
         Height = 90
-        Top = 602
+        Top = 606
         Width = 867
         Align = alBottom
         Lines.Strings = (
@@ -2746,7 +2746,7 @@ object Form1: TForm1
     end
     object TabSheet6: TTabSheet
       Caption = 'SQL Tree edit'
-      ClientHeight = 692
+      ClientHeight = 696
       ClientWidth = 867
       object ToolPanel1: TToolPanel
         Left = 0
@@ -2982,7 +2982,7 @@ object Form1: TForm1
               ChildSizing.ShrinkVertical = crsScaleChilds
               ChildSizing.Layout = cclLeftToRightThenTopToBottom
               ChildSizing.ControlsPerLine = 1
-              ClientHeight = 241
+              ClientHeight = 243
               ClientWidth = 139
               Items.Strings = (
                 'stNone'
@@ -3048,7 +3048,7 @@ object Form1: TForm1
               ChildSizing.ShrinkVertical = crsScaleChilds
               ChildSizing.Layout = cclLeftToRightThenTopToBottom
               ChildSizing.ControlsPerLine = 1
-              ClientHeight = 85
+              ClientHeight = 87
               ClientWidth = 139
               Items.Strings = (
                 'toFindWordLast'

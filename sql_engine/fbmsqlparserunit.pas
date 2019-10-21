@@ -979,7 +979,7 @@ end;
 function TSQLCommandSelectCTEList.GetItem(AIndex: integer
   ): TSQLCommandSelectCTE;
 begin
-
+  Result:=TSQLCommandSelectCTE(FList[AIndex]);
 end;
 
 constructor TSQLCommandSelectCTEList.Create;
@@ -1006,9 +1006,9 @@ procedure TSQLCommandSelectCTEList.Clear;
 var
   i: Integer;
 begin
-  for i:=0 to FList.Count do
+  for i:=0 to FList.Count-1 do
     TSQLCommandSelectCTE(FList[i]).Free;
-  FList.Free;
+  FList.Clear;
 end;
 
 procedure TSQLCommandSelectCTEList.Assign(ASource: TSQLCommandSelectCTEList);

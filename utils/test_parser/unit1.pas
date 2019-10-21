@@ -8,6 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynHighlighterSQL, Forms, Controls,
   Graphics, Dialogs, SynEditTypes, TreeFilterEdit, StdCtrls, ExtCtrls, ComCtrls,
   ActnList, Menus, Buttons, PairSplitter, RxIniPropStorage, rxtoolbar, LR_Class,
+  IniFiles,
 
   PostgreSQLEngineUnit,
   FBSQLEngineUnit,
@@ -122,6 +123,8 @@ type
     MySQL:TSQLEngineMySQL;
     procedure DoLoad(P: TSQLTokenRecord);
     procedure UpdateStatus(FSynEdit: TSynEdit);
+    procedure LoadEditorStates;
+    procedure SaveEditorStates;
   public
 
   end;
@@ -129,9 +132,19 @@ type
 var
   Form1: TForm1;
 
+function AppIniFile:TIniFile;
 implementation
 uses SQLEngineAbstractUnit, SQLEngineCommonTypesUnit, fb_utils, fb_SqlParserUnit,
-  TreeAddChildTokenUnit;
+  TreeAddChildTokenUnit, rxAppUtils, base64;
+
+function AppIniFile: TIniFile;
+var
+  S: String;
+begin
+  S:=RxGetAppConfigDir(false) + 'fbm_test_parser.cfg';
+  Result:=TIniFile.Create(S);
+end;
+
 {$R *.lfm}
 
 { TForm1 }
@@ -274,6 +287,7 @@ end;
 
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
+  SaveEditorStates;
   FB.Free;
   PG.Free;
   SQ3.Free;
@@ -302,6 +316,8 @@ begin
   FillStrServersVer(cbFireBirdVersion.Items);
   if cbFireBirdVersion.Items.Count > 0 then
     cbFireBirdVersion.Text:=StrServersVer[gds_verFirebird3_0];
+
+  LoadEditorStates;
 end;
 
 procedure TForm1.ListBox1DblClick(Sender: TObject);
@@ -454,6 +470,30 @@ end;
 procedure TForm1.UpdateStatus(FSynEdit: TSynEdit);
 begin
   StatusBar1.Panels[0].Text:=Format('%-5d:%-3d', [FSynEdit.CaretY, FSynEdit.CaretX]);
+end;
+
+procedure TForm1.LoadEditorStates;
+var
+  Ini: TIniFile;
+begin
+  Ini:=AppIniFile;
+  SynEdit1.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'FirebirdSQL', ''));
+  SynEdit3.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'PostgreSQL', ''));
+  SynEdit4.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'SQLite3', ''));
+  SynEdit5.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'MySQL', ''));
+  Ini.Free;
+end;
+
+procedure TForm1.SaveEditorStates;
+var
+  Ini: TIniFile;
+begin
+  Ini:=AppIniFile;
+  Ini.WriteString('Editors', 'FirebirdSQL', EncodeStringBase64(SynEdit1.Text));
+  Ini.WriteString('Editors', 'PostgreSQL', EncodeStringBase64(SynEdit3.Text));
+  Ini.WriteString('Editors', 'SQLite3', EncodeStringBase64(SynEdit4.Text));
+  Ini.WriteString('Editors', 'MySQL', EncodeStringBase64(SynEdit5.Text));
+  Ini.Free;
 end;
 
 end.
