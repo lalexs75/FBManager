@@ -1280,6 +1280,7 @@ var
   DBObj:TDBObject;
   T: TTableItem;
   F: TSQLParserField;
+  C: TSQLCommandSelectCTE;
 
 begin
   S:=EditorFrame.TextEditor.Text;
@@ -1287,8 +1288,15 @@ begin
   SQLCommand:=GetNextSQLCommand(S, FSQLEngine, true);
   if Assigned(SQLCommand) then
   begin
-    if (SQLCommand is TSQLCommandAbstractSelect) then
+    if (SQLCommand is TSQLCommandSelect) then
     begin
+      C:=TSQLCommandSelect(SQLCommand).CTE.FindItem(DBObjName);
+      if Assigned(C) then
+      begin
+        for F in C.Fields do
+          Items.Add(scotField, F.Caption, '', Format(sFieldFromCTE, [C.Name]));
+      end
+      else
       for T in TSQLCommandAbstractSelect(SQLCommand).Tables do
       begin
         if T.TableType = stitVirtualTable then
@@ -1337,6 +1345,7 @@ var
   SQLCommand:TSQLCommandAbstract;
   T: TTableItem;
   P: TSQLParserField;
+  C: TSQLCommandSelectCTE;
 begin
   SQLCommand:=GetNextSQLCommand(EditorFrame.TextEditor.Text, FSQLEngine, true);
   if Assigned(SQLCommand) then
@@ -1348,10 +1357,17 @@ begin
           Items.Add(P)
       else
       begin
-{        for T in TSQLCommandAbstractSelect(SQLCommand).Tables do
-          Items.FillFieldList(FOwnerRec.GetDBObject(T.Name));
+        for C in TSQLCommandSelect(SQLCommand).CTE do
+        begin
+          if Copy(UpperCase(C.Name), 1, Length(KeyStartWord)) = KeyStartWord then
+            Items.Add(scotDBObject, C.Name, '', 'CTE');
+        end;
+        //for
+        //for T in TSQLCommandAbstractSelect(SQLCommand).Tables do
+        //   Items.FillFieldList(FOwnerRec.GetDBObject(T.Name));
         for T in TSQLCommandAbstractSelect(SQLCommand).Tables do
-          Items.Add(T)}
+          if T.TableType = stitVirtualTable then
+            Items.Add(T)
 
       end;
     end

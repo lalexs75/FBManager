@@ -1888,6 +1888,11 @@ msgstr ""
 msgid "Field Dependencies"
 msgstr ""
 
+#: fbmstrconstunit.sfieldfromcte
+#, object-pascal-format
+msgid "field from named CTE %s"
+msgstr ""
+
 #: fbmstrconstunit.sfieldfromnamedselect
 #, object-pascal-format
 msgid "field from named select %s"

@@ -1966,6 +1966,11 @@ msgstr "Всего столбцов: %d"
 msgid "Field Dependencies"
 msgstr "Объекты, использующие поле"
 
+#: fbmstrconstunit.sfieldfromcte
+#, object-pascal-format
+msgid "field from named CTE %s"
+msgstr ""
+
 #: fbmstrconstunit.sfieldfromnamedselect
 #, object-pascal-format
 msgid "field from named select %s"
