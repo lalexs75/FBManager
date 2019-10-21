@@ -2641,6 +2641,7 @@ type
     FTableSpace: string;
     FCurField: TSQLParserField;
     FCurParam: TSQLParserField;
+    FWhereCondition: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2653,6 +2654,7 @@ type
     property Concurrently:boolean read FConcurrently write FConcurrently;
     property SchemaName;
     property TableSpace:string read FTableSpace write FTableSpace;
+    property WhereCondition:string read FWhereCondition write FWhereCondition;
   end;
 
   { TPGSQLAlterIndex }
@@ -6212,7 +6214,7 @@ var
   T, T1, FSQLTokens, T2, T3, TSchema, TName, TCol, TExp, TSymb,
     TC1, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3, TC2_3_1, TC2_3_2,
     T1_1, T2_1, T2_2, T2_3, T2_4_1, T2_4_2, T2_4_3, T2_5, T2_6,
-    TC1_3, TC1_4_1, TC1_4_2: TSQLTokenRecord;
+    TC1_3, TC1_4_1, TC1_4_2, TWhere: TSQLTokenRecord;
 begin
   inherited InitParserTree;
 
@@ -6289,6 +6291,7 @@ begin
   T1_1.AddChildToken(T2);
   T2_6.AddChildToken(T1);
 
+  TWhere:=AddSQLTokens(stKeyword, [TSymb, T1_1, T2_6], 'WHERE', [toOptional], 23);
 end;
 
 procedure TPGSQLCreateIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6331,6 +6334,7 @@ begin
     21:if Assigned(FCurParam) then
       FCurParam.ParamValue:=AWord;
     22:FCurParam:=nil;
+    23:FWhereCondition:=ASQLParser.GetToCommandDelemiter;
   end;
 end;
 
@@ -6404,6 +6408,10 @@ begin
 
   if TableSpace <> '' then
     S:=S + ' TABLESPACE '+TableSpace;
+
+  if FWhereCondition<>'' then
+    S:=S + ' WHERE '+ WhereCondition;
+
   AddSQLCommand(S);
   if Description <> '' then
     DescribeObject;
@@ -6422,6 +6430,7 @@ begin
     IndexMethod:=TPGSQLCreateIndex(ASource).IndexMethod;
     Concurrently:=TPGSQLCreateIndex(ASource).Concurrently;
     TableSpace:=TPGSQLCreateIndex(ASource).TableSpace;
+    WhereCondition:=TPGSQLCreateIndex(ASource).WhereCondition;
   end;
   inherited Assign(ASource);
 end;
