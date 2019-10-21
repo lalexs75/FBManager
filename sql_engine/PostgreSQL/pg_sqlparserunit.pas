@@ -2637,6 +2637,7 @@ type
   TPGSQLCreateIndex = class(TSQLCreateIndex)
   private
     FConcurrently: boolean;
+    FIncludeFields: TSQLFields;
     FIndexMethod: string;
     FTableSpace: string;
     FCurField: TSQLParserField;
@@ -2648,6 +2649,8 @@ type
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Clear;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
     property IndexMethod:string read FIndexMethod write FIndexMethod;
@@ -2655,6 +2658,7 @@ type
     property SchemaName;
     property TableSpace:string read FTableSpace write FTableSpace;
     property WhereCondition:string read FWhereCondition write FWhereCondition;
+    property IncludeFields:TSQLFields read FIncludeFields;
   end;
 
   { TPGSQLAlterIndex }
@@ -6214,15 +6218,16 @@ var
   T, T1, FSQLTokens, T2, T3, TSchema, TName, TCol, TExp, TSymb,
     TC1, TC1_1, TC1_2, TC2_1, TC2_2, TC2_3, TC2_3_1, TC2_3_2,
     T1_1, T2_1, T2_2, T2_3, T2_4_1, T2_4_2, T2_4_3, T2_5, T2_6,
-    TC1_3, TC1_4_1, TC1_4_2, TWhere: TSQLTokenRecord;
+    TC1_3, TC1_4_1, TC1_4_2, TWhere, TInclude, TInclude_1: TSQLTokenRecord;
 begin
   inherited InitParserTree;
 
-  //CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ name ] ON table [ USING method ]
-  //    ( { column | ( expression ) } [ COLLATE collation ] [ opclass ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] )
-  //    [ WITH ( storage_parameter = value [, ... ] ) ]
-  //    [ TABLESPACE tablespace ]
-  //    [ WHERE predicate ]
+  //CREATE [ UNIQUE ] INDEX [ CONCURRENTLY ] [ [ IF NOT EXISTS ] имя ] ON [ ONLY ] имя_таблицы [ USING метод ]
+  //    ( { имя_столбца | ( выражение ) } [ COLLATE правило_сортировки ] [ класс_операторов ] [ ASC | DESC ] [ NULLS { FIRST | LAST } ] [, ...] )
+  //    [ INCLUDE ( имя_столбца [, ...] ) ]
+  //    [ WITH ( параметр_хранения = значение [, ... ] ) ]
+  //    [ TABLESPACE табл_пространство ]
+  //    [ WHERE предикат ]
 
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okIndex); // CREATE [ UNIQUE ] INDEX
@@ -6274,6 +6279,13 @@ begin
   T1:=AddSQLTokens(stKeyword, TSymb, 'TABLESPACE', [toOptional]);
     T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 10);
 
+  TInclude:=AddSQLTokens(stKeyword, [TSymb], 'INCLUDE', [toOptional]);
+    TInclude_1:=AddSQLTokens(stSymbol, TInclude, '(', []);
+    TInclude_1:=AddSQLTokens(stIdentificator, TInclude_1, '', [], 24);
+    T:=AddSQLTokens(stSymbol, TInclude_1, ',', []);
+      T.AddChildToken(TInclude_1);
+    TInclude_1:=AddSQLTokens(stSymbol, TInclude_1, ')', []);
+
   T2:=AddSQLTokens(stKeyword, TSymb, 'WITH', [toOptional]);
     T2_1:=AddSQLTokens(stSymbol, T2, '(', []);
     T2_2:=AddSQLTokens(stIdentificator, T2_1, '', [], 20);
@@ -6284,14 +6296,13 @@ begin
     T2_5:=AddSQLTokens(stSymbol, [T2_4_1, T2_4_2, T2_4_3], ',', [], 22);
       T2_5.AddChildToken(T2_2);
     T2_6:=AddSQLTokens(stSymbol, [T2_4_1, T2_4_2, T2_4_3], ')', [], 22);
-    //    [ WITH ( storage_parameter = value [, ... ] ) ]
-    //    [ WHERE predicate ]
-//  [ WHERE predicate ]
 
-  T1_1.AddChildToken(T2);
-  T2_6.AddChildToken(T1);
 
-  TWhere:=AddSQLTokens(stKeyword, [TSymb, T1_1, T2_6], 'WHERE', [toOptional], 23);
+  T1_1.AddChildToken([T2, TInclude]);
+  T2_6.AddChildToken([T1, TInclude]);
+  TInclude_1.AddChildToken([T1, T2]);
+
+  TWhere:=AddSQLTokens(stKeyword, [TSymb, T1_1, T2_6, TInclude_1], 'WHERE', [toOptional], 23);
 end;
 
 procedure TPGSQLCreateIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6335,6 +6346,7 @@ begin
       FCurParam.ParamValue:=AWord;
     22:FCurParam:=nil;
     23:FWhereCondition:=ASQLParser.GetToCommandDelemiter;
+    24:FIncludeFields.AddParam(AWord);
   end;
 end;
 
@@ -6406,6 +6418,9 @@ begin
     S:=S + ' WITH ('+S1+')';
   end;
 
+  if FIncludeFields.Count > 0 then
+    S:=S + ' INCLUDE ('+FIncludeFields.AsString+')';
+
   if TableSpace <> '' then
     S:=S + ' TABLESPACE '+TableSpace;
 
@@ -6421,6 +6436,19 @@ constructor TPGSQLCreateIndex.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FSQLCommentOnClass:=TPGSQLCommentOn;
+  FIncludeFields:=TSQLFields.Create;
+end;
+
+destructor TPGSQLCreateIndex.Destroy;
+begin
+  FreeAndNil(FIncludeFields);
+  inherited Destroy;
+end;
+
+procedure TPGSQLCreateIndex.Clear;
+begin
+  inherited Clear;
+  FIncludeFields.Clear;
 end;
 
 procedure TPGSQLCreateIndex.Assign(ASource: TSQLObjectAbstract);
@@ -6431,6 +6459,7 @@ begin
     Concurrently:=TPGSQLCreateIndex(ASource).Concurrently;
     TableSpace:=TPGSQLCreateIndex(ASource).TableSpace;
     WhereCondition:=TPGSQLCreateIndex(ASource).WhereCondition;
+    FIncludeFields.Assign(TPGSQLCreateIndex(ASource).FIncludeFields);
   end;
   inherited Assign(ASource);
 end;
