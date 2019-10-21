@@ -182,9 +182,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Height = 421
       Top = 1
       Width = 743
-      ActivePage = TabSqlEdit
+      ActivePage = tabResult
       Align = alClient
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       OnChange = PageControl1Change
       object TabSqlEdit: TTabSheet
@@ -327,8 +327,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
             TabPosition = tpBottom
             object TabSheet1: TTabSheet
               Caption = 'Grid'
-              ClientHeight = 351
-              ClientWidth = 727
+              ClientHeight = 324
+              ClientWidth = 721
               object dbGrid1: TRxDBGrid
                 Left = 0
                 Height = 324
@@ -415,8 +415,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
             end
             object TabSheet2: TTabSheet
               Caption = 'Form'
-              ClientHeight = 351
-              ClientWidth = 727
+              ClientHeight = 324
+              ClientWidth = 721
               object RxDBVerticalGrid1: TRxDBVerticalGrid
                 Left = 0
                 Height = 321
@@ -1515,7 +1515,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     Top = 227
   end
   object RxDBGridExportPDF1: TRxDBGridExportPDF
-    RxDBGrid = RxDBGrid1
+    RxDBGrid = dbGrid1
     Caption = 'Экспорт в PDF файл'
     ShowSetupForm = True
     FileName = 'data.pdf'
