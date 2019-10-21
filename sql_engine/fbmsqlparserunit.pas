@@ -2174,8 +2174,27 @@ var
   F: TSQLParserField;
   S, S1: String;
   T: TTableItem;
+  CT: TSQLCommandSelectCTE;
 begin
-  S:='SELECT';
+  S:='';
+
+  if FCTE.Count > 0 then
+  begin
+    S:=S + 'WITH';
+    if FCTE.Recursive then S:=S + 'RECURSIVE ';
+    S:=S + LineEnding;
+    S1:='';
+    for CT in FCTE do
+    begin
+      if S1<>'' then S1:=S1 + ',' + LineEnding;
+      S1:=S1 + '  ' + CT.Name;
+      if CT.Fields.Count>0 then S1:=S1 + '(' + CT.Fields.AsString + ')';
+      S1:=S1 + ' as ' + LineEnding + '(' + CT.SQL + ')';
+    end;
+    S:=S + S1 + LineEnding;
+  end;
+
+  S:=S + 'SELECT';
   if not FAllRec then S:=S + 'DISTINCT';
 
   S1:='';
