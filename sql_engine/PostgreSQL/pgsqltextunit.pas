@@ -34,6 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    sqlIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
     sPGRelationFields: TRxTextHolder;
@@ -56,7 +57,6 @@ type
     sqlSequence_v10: TStrHolder;
     sqlTypesList: TStrHolder;
     sqlTrigger: TStrHolder;
-    sqlIndex: TStrHolder;
     sqlIndexTable: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;

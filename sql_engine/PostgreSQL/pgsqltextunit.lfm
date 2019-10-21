@@ -87,46 +87,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202020202870675f636c6173732e72656c6e616d657370616365203d203a72656c6e616d65737061636529'
     )
   end
-  object sqlIndex: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 40
-    Top = 184
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f636c6173732e6f696420617320696e7465676572292c20202020202020202020202020202d2d20d09ad0bed0b420d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '202070675f636c6173732e72656c6e616d652c202020202020202020202d2d20d09dd0b0d0b8d0bcd0b5d0bdd0bed0b2d0b0d0bdd0b8d0b520d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '202070675f636c6173732e72656c616d2c2020202020202020202020202d2d'
-      '202070675f636c6173732e72656c7461626c6573706163652c202020202d2d20d0a2d0b0d0b1d0bbd0b8d187d0bdd0bed0b520d0bfd180d0bed181d182d180d0b0d0bdd181d182d0b2d0be2c20d181d0bed0b4d0b5d180d0b6d0b0d189d0b5d0b520d0b8d0bdd0b4d0b5d0bad181'
-      '202070675f696e6465782e696e64657872656c69642c'
-      '202070675f696e6465782e696e6472656c69642c'
-      '202070675f696e6465782e696e646e617474732c'
-      '202070675f696e6465782e696e646973756e697175652c'
-      '202070675f696e6465782e696e6469737072696d6172792c'
-      '202070675f696e6465782e696e646973636c757374657265642c'
-      '202070675f696e6465782e696e64697376616c69642c'
-      '202070675f696e6465782e696e64636865636b786d696e2c'
-      '202070675f696e6465782e696e64697372656164792c'
-      '2020636173742870675f696e6465782e696e64657870727320617320766172636861722920617320696e6465787072732c'
-      '2020636173742870675f696e6465782e696e647072656420617320766172636861722920617320696e64707265642c'
-      '202070675f616d2e616d6e616d652c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '20207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636c6173732e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f696e646578'
-      '2020696e6e6572206a6f696e2070675f636c617373206f6e202870675f696e6465782e696e64657872656c6964203d2070675f636c6173732e6f696429'
-      '2020696e6e6572206a6f696e2070675f616d206f6e202870675f636c6173732e72656c616d203d2070675f616d2e6f696429'
-      '7768657265'
-      '202020202870675f636c6173732e72656c6e616d65203d203a696e6465785f6e616d6529'
-      '2020616e64'
-      '202020202870675f636c6173732e72656c6e616d657370616365203d203a736368656d615f696429'
-    )
-  end
   object sqlIndexTable: TStrHolder
     Capacity = 64
     Macros = <>
@@ -1993,5 +1953,48 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 162
     Top = 256
+  end
+  object sqlIndex: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlIndex'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),              -- Код индекса'
+          '  pg_class.relname,          -- Наименование индекса'
+          '  pg_class.relam,            --'
+          '  pg_class.reltablespace,    -- Табличное пространство, содержащее индекс'
+          '  pg_index.indexrelid,'
+          '  pg_index.indrelid,'
+          '  pg_index.indnatts,'
+          '  pg_index.indisunique,'
+          '  pg_index.indisprimary,'
+          '  pg_index.indisclustered,'
+          '  pg_index.indisvalid,'
+          '  pg_index.indcheckxmin,'
+          '  pg_index.indisready,'
+          '  pg_get_expr(pg_index.indpred, pg_index.indrelid, true) as where_exp,'
+          '  cast(pg_index.indexprs as varchar) as indexprs,'
+          '  pg_am.amname,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '  where'
+          '     pg_description.objoid = pg_class.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_index'
+          '  inner join pg_class on (pg_index.indexrelid = pg_class.oid)'
+          '  inner join pg_am on (pg_class.relam = pg_am.oid)'
+          'where'
+          '    (pg_class.relname = :index_name)'
+          '  and'
+          '    (pg_class.relnamespace = :schema_id)'
+          ''
+        )
+      end>
+    Left = 37
+    Top = 184
   end
 end

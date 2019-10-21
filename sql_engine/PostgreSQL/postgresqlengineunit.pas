@@ -1000,6 +1000,7 @@ type
     FPGTableSpaceID: integer;
     FSchema:TPGSchema;
     FOID:integer;
+    FWhereExpression: string;
     procedure SetPGTable(const AValue: TDBDataSetObject);
   protected
     function GetCaptionFullPatch:string; override;
@@ -1023,6 +1024,7 @@ type
     property IndexCluster:boolean read FIndexCluster;
     property AccessMetod:string read FAccessMetod;
     property IndexExpression:string read FIndexExpression;
+    property WhereExpression:string read FWhereExpression;
   end;
 
   TPGLanguage = class(TDBObject)
@@ -6952,6 +6954,7 @@ begin
     PI1.IndexOptions.IndexNullPos:=I.NullPos;
     PI1.Collate:=I.CollateName;
   end;
+  FCmd.WhereCondition:=FWhereExpression;
   FCmd.Description:=Description;
   Result:=FCmd.AsSQL;
   FCmd.Free;
@@ -7068,7 +7071,7 @@ begin
   if State <> sdboEdit then exit;
   IndexFields.Clear;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndex.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndex['sqlIndex']);
   try
     Q.ParamByName('index_name').AsString:=Caption;
     Q.ParamByName('schema_id').AsInteger:=FSchema.FSchemaId;
@@ -7089,6 +7092,7 @@ begin
       FPGTableSpace:= TSQLEnginePostgre(OwnerDB).TableSpaceRoot.TableSpaceByOID(FPGTableSpaceID);
       { TODO : Необходимо доработать запрос на получение индексного выражения }
       //FIndexExpression:=Q.FieldByName('indexprs').AsString;
+      FWhereExpression:=Q.FieldByName('where_exp').AsString;
       SSS:=Q.FieldByName('indexprs').AsString;
       if Table.Fields.Count = 0 then
         Table.RefreshFieldList;
