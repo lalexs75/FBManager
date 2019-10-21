@@ -26,9 +26,9 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Buttons, ActnList, Menus, db, rxdbgrid, rxmemds,
+  ExtCtrls, Buttons, ActnList, Menus, ComCtrls, db, rxdbgrid, rxmemds,
   SQLEngineAbstractUnit, fbmSqlParserUnit, fdmAbstractEditorUnit, sqlObjects,
-  PostgreSQLEngineUnit;
+  PostgreSQLEngineUnit, fdbm_SynEditorUnit;
 
 type
 
@@ -46,6 +46,7 @@ type
     npFirst: TAction;
     npLast: TAction;
     npNone: TAction;
+    PageControl1: TPageControl;
     rxIndexFieldsNullsPos: TStringField;
     rxIndexFieldsSortOrder: TStringField;
     soAsc: TAction;
@@ -75,7 +76,6 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
-    Panel1: TPanel;
     Panel2: TPanel;
     PopupMenu1: TPopupMenu;
     PopupMenu2: TPopupMenu;
@@ -87,6 +87,9 @@ type
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     Splitter1: TSplitter;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     procedure cbTablesChange(Sender: TObject);
     procedure fldAddAllExecute(Sender: TObject);
     procedure fldAddExecute(Sender: TObject);
@@ -97,6 +100,7 @@ type
     procedure rxIndexFieldsAfterScroll(DataSet: TDataSet);
     procedure soNoneExecute(Sender: TObject);
   private
+    FWhereFrame:Tfdbm_SynEditorFrame;
     procedure PrintPage;
     procedure RefreshObject;
     function TableName:string;
@@ -230,6 +234,7 @@ begin
   begin
     DBObject.RefreshObject;
     edtIndexName.Text:=DBObject.Caption;
+    FWhereFrame.EditorText:=TPGIndex(DBObject).WhereExpression;
   end;
 
   cbTables.Enabled:=DBObject.State = sdboCreate;
@@ -314,6 +319,13 @@ var
   C: TRxColumn;
 begin
   inherited CreatePage(TheOwner, ADBObject);
+
+  FWhereFrame:=Tfdbm_SynEditorFrame.Create(Self);
+  FWhereFrame.Parent:=TabSheet2;
+  FWhereFrame.SQLEngine:=DBObject.OwnerDB;
+  //FWhereFrame.OnGetFieldsList:=@OnGetFieldsList;
+  FWhereFrame.Name:='edtWhenFrame';
+
   C:=RxDBGrid1.ColumnByFieldName('SortOrder');
   C.PickList.Clear;
   C.PickList.Add('');
@@ -389,6 +401,7 @@ begin
     TPGSQLCreateIndex(ASQLObject).Concurrently:=CheckGroup1.Checked[2];
 //    CheckGroup1.Checked[1]:=TPGIndex(DBObject).IndexCluster;
     TPGSQLCreateIndex(ASQLObject).IndexMethod:=cbAcessMetod.Text;
+    TPGSQLCreateIndex(ASQLObject).WhereCondition:=FWhereFrame.EditorText;
 
     rxIndexFields.First;
     while not rxIndexFields.EOF do

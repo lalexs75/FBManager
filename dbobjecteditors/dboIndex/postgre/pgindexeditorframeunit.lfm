@@ -3,8 +3,8 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
   Width = 871
   ClientHeight = 651
   ClientWidth = 871
-  DesignLeft = 428
-  DesignTop = 170
+  DesignLeft = 427
+  DesignTop = 149
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
@@ -201,7 +201,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     BorderSpacing.Around = 6
     TabOrder = 6
   end
-  object Panel1: TPanel[13]
+  object PageControl1: TPageControl[13]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Memo1
     AnchorSideTop.Side = asrBottom
@@ -209,241 +209,251 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 6
-    Height = 269
+    Left = 0
+    Height = 275
     Top = 376
-    Width = 859
+    Width = 871
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Around = 6
-    ClientHeight = 269
-    ClientWidth = 859
+    TabIndex = 0
     TabOrder = 7
-    object lbFieldList: TListBox
-      Left = 1
-      Height = 267
-      Top = 1
-      Width = 236
-      Align = alLeft
-      ItemHeight = 0
-      OnDblClick = lbFieldListDblClick
-      PopupMenu = PopupMenu1
-      ScrollWidth = 234
-      TabOrder = 0
-      TopIndex = -1
+    object TabSheet1: TTabSheet
+      Caption = 'Fields'
+      ClientHeight = 244
+      ClientWidth = 861
+      object Splitter1: TSplitter
+        Left = 236
+        Height = 244
+        Top = 0
+        Width = 5
+      end
+      object Panel2: TPanel
+        Left = 241
+        Height = 244
+        Top = 0
+        Width = 620
+        Align = alClient
+        ClientHeight = 244
+        ClientWidth = 620
+        TabOrder = 1
+        object SpeedButton1: TSpeedButton
+          AnchorSideLeft.Control = Panel2
+          AnchorSideTop.Control = Panel2
+          Left = 7
+          Height = 28
+          Top = 7
+          Width = 39
+          Action = fldAdd
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton2: TSpeedButton
+          AnchorSideLeft.Control = Panel2
+          AnchorSideTop.Control = SpeedButton1
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 41
+          Width = 39
+          Action = fldAddAll
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton3: TSpeedButton
+          AnchorSideLeft.Control = Panel2
+          AnchorSideTop.Control = SpeedButton2
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 75
+          Width = 39
+          Action = fldRemove
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton4: TSpeedButton
+          AnchorSideLeft.Control = Panel2
+          AnchorSideTop.Control = SpeedButton3
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 109
+          Width = 39
+          Action = fldRemoveAll
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object RxDBGrid1: TRxDBGrid
+          AnchorSideLeft.Control = SpeedButton1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel2
+          AnchorSideRight.Control = Panel2
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel2
+          AnchorSideBottom.Side = asrBottom
+          Left = 52
+          Height = 242
+          Top = 1
+          Width = 567
+          ColumnDefValues.BlobText = '(данные)'
+          TitleButtons = False
+          AutoSort = True
+          Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Field name'
+              Width = 300
+              FieldName = 'FieldName'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Not empty)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                'ASC'
+                'DESC'
+              )
+              SizePriority = 0
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Sort order'
+              Width = 120
+              FieldName = 'SortOrder'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Not empty)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                ''
+                'First'
+                'Last'
+              )
+              SizePriority = 0
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Nulls pos'
+              Width = 120
+              FieldName = 'NullsPos'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Not empty)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end>
+          KeyStrokes = <          
+            item
+              Command = rxgcShowFindDlg
+              ShortCut = 16454
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowColumnsDlg
+              ShortCut = 16471
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowFilterDlg
+              ShortCut = 16468
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowSortDlg
+              ShortCut = 16467
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowQuickFilter
+              ShortCut = 16465
+              Enabled = True
+            end          
+            item
+              Command = rxgcHideQuickFilter
+              ShortCut = 16456
+              Enabled = True
+            end          
+            item
+              Command = rxgcSelectAll
+              ShortCut = 16449
+              Enabled = True
+            end          
+            item
+              Command = rxgcDeSelectAll
+              ShortCut = 16429
+              Enabled = True
+            end          
+            item
+              Command = rxgcInvertSelection
+              ShortCut = 16426
+              Enabled = True
+            end          
+            item
+              Command = rxgcOptimizeColumnsWidth
+              ShortCut = 16427
+              Enabled = True
+            end          
+            item
+              Command = rxgcCopyCellValue
+              ShortCut = 16451
+              Enabled = True
+            end>
+          FooterOptions.Color = clYellow
+          FooterOptions.DrawFullLine = False
+          SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+          SearchOptions.FromStart = False
+          OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+          FooterColor = clYellow
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          AutoFillColumns = True
+          Color = clWindow
+          DrawFullLine = False
+          FocusColor = clRed
+          SelectedColor = clHighlight
+          GridLineStyle = psSolid
+          DataSource = dsIndexFields
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenu2
+          TabOrder = 0
+        end
+      end
+      object lbFieldList: TListBox
+        Left = 0
+        Height = 244
+        Top = 0
+        Width = 236
+        Align = alLeft
+        ItemHeight = 0
+        OnDblClick = lbFieldListDblClick
+        PopupMenu = PopupMenu1
+        ScrollWidth = 234
+        TabOrder = 2
+        TopIndex = -1
+      end
     end
-    object Splitter1: TSplitter
-      Left = 237
-      Height = 267
-      Top = 1
-      Width = 5
+    object TabSheet2: TTabSheet
+      Caption = 'Partial index'
     end
-    object Panel2: TPanel
-      Left = 242
-      Height = 267
-      Top = 1
-      Width = 616
-      Align = alClient
-      ClientHeight = 267
-      ClientWidth = 616
-      TabOrder = 2
-      object SpeedButton1: TSpeedButton
-        AnchorSideLeft.Control = Panel2
-        AnchorSideTop.Control = Panel2
-        Left = 7
-        Height = 28
-        Top = 7
-        Width = 39
-        Action = fldAdd
-        BorderSpacing.Around = 6
-        ShowCaption = False
-      end
-      object SpeedButton2: TSpeedButton
-        AnchorSideLeft.Control = Panel2
-        AnchorSideTop.Control = SpeedButton1
-        AnchorSideTop.Side = asrBottom
-        Left = 7
-        Height = 28
-        Top = 41
-        Width = 39
-        Action = fldAddAll
-        BorderSpacing.Around = 6
-        ShowCaption = False
-      end
-      object SpeedButton3: TSpeedButton
-        AnchorSideLeft.Control = Panel2
-        AnchorSideTop.Control = SpeedButton2
-        AnchorSideTop.Side = asrBottom
-        Left = 7
-        Height = 28
-        Top = 75
-        Width = 39
-        Action = fldRemove
-        BorderSpacing.Around = 6
-        ShowCaption = False
-      end
-      object SpeedButton4: TSpeedButton
-        AnchorSideLeft.Control = Panel2
-        AnchorSideTop.Control = SpeedButton3
-        AnchorSideTop.Side = asrBottom
-        Left = 7
-        Height = 28
-        Top = 109
-        Width = 39
-        Action = fldRemoveAll
-        BorderSpacing.Around = 6
-        ShowCaption = False
-      end
-      object RxDBGrid1: TRxDBGrid
-        AnchorSideLeft.Control = SpeedButton1
-        AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = Panel2
-        AnchorSideRight.Control = Panel2
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = Panel2
-        AnchorSideBottom.Side = asrBottom
-        Left = 52
-        Height = 265
-        Top = 1
-        Width = 563
-        ColumnDefValues.BlobText = '(данные)'
-        TitleButtons = False
-        AutoSort = True
-        Columns = <        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Field name'
-            Width = 296
-            FieldName = 'FieldName'
-            EditButtons = <>
-            Filter.Font.Style = [fsItalic]
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Нет)'
-            Filter.NotEmptyValue = '(Not empty)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            ButtonStyle = cbsPickList
-            PickList.Strings = (
-              'ASC'
-              'DESC'
-            )
-            SizePriority = 0
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Sort order'
-            Width = 120
-            FieldName = 'SortOrder'
-            EditButtons = <>
-            Filter.Font.Style = [fsItalic]
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Нет)'
-            Filter.NotEmptyValue = '(Not empty)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            ButtonStyle = cbsPickList
-            PickList.Strings = (
-              ''
-              'First'
-              'Last'
-            )
-            SizePriority = 0
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Nulls pos'
-            Width = 120
-            FieldName = 'NullsPos'
-            EditButtons = <>
-            Filter.Font.Style = [fsItalic]
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Нет)'
-            Filter.NotEmptyValue = '(Not empty)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end>
-        KeyStrokes = <        
-          item
-            Command = rxgcShowFindDlg
-            ShortCut = 16454
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowColumnsDlg
-            ShortCut = 16471
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowFilterDlg
-            ShortCut = 16468
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowSortDlg
-            ShortCut = 16467
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowQuickFilter
-            ShortCut = 16465
-            Enabled = True
-          end        
-          item
-            Command = rxgcHideQuickFilter
-            ShortCut = 16456
-            Enabled = True
-          end        
-          item
-            Command = rxgcSelectAll
-            ShortCut = 16449
-            Enabled = True
-          end        
-          item
-            Command = rxgcDeSelectAll
-            ShortCut = 16429
-            Enabled = True
-          end        
-          item
-            Command = rxgcInvertSelection
-            ShortCut = 16426
-            Enabled = True
-          end        
-          item
-            Command = rxgcOptimizeColumnsWidth
-            ShortCut = 16427
-            Enabled = True
-          end        
-          item
-            Command = rxgcCopyCellValue
-            ShortCut = 16451
-            Enabled = True
-          end>
-        FooterOptions.Color = clYellow
-        FooterOptions.DrawFullLine = False
-        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
-        SearchOptions.FromStart = False
-        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
-        FooterColor = clYellow
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        AutoFillColumns = True
-        Color = clWindow
-        DrawFullLine = False
-        FocusColor = clRed
-        SelectedColor = clHighlight
-        GridLineStyle = psSolid
-        DataSource = dsIndexFields
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-        PopupMenu = PopupMenu2
-        TabOrder = 0
-      end
+    object TabSheet3: TTabSheet
+      Caption = 'Include fields'
     end
   end
   object ActionList1: TActionList[14]
