@@ -213,9 +213,9 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     Height = 275
     Top = 376
     Width = 871
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 7
     object TabSheet1: TTabSheet
       Caption = 'Fields'
@@ -454,6 +454,98 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
     end
     object TabSheet3: TTabSheet
       Caption = 'Include fields'
+      ClientHeight = 244
+      ClientWidth = 861
+      object lbFieldList1: TListBox
+        Left = 0
+        Height = 244
+        Top = 0
+        Width = 236
+        Align = alLeft
+        ItemHeight = 0
+        OnDblClick = lbFieldList1DblClick
+        PopupMenu = PopupMenu3
+        ScrollWidth = 234
+        TabOrder = 0
+        TopIndex = -1
+      end
+      object Panel3: TPanel
+        Left = 236
+        Height = 244
+        Top = 0
+        Width = 625
+        Align = alClient
+        ClientHeight = 244
+        ClientWidth = 625
+        TabOrder = 1
+        object SpeedButton5: TSpeedButton
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = Panel3
+          Left = 7
+          Height = 28
+          Top = 7
+          Width = 39
+          Action = ifAdd
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton6: TSpeedButton
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = SpeedButton5
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 41
+          Width = 39
+          Action = ifAddAll
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton7: TSpeedButton
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = SpeedButton6
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 75
+          Width = 39
+          Action = ifRemove
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object SpeedButton8: TSpeedButton
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = SpeedButton7
+          AnchorSideTop.Side = asrBottom
+          Left = 7
+          Height = 28
+          Top = 109
+          Width = 39
+          Action = ifRemoveAll
+          BorderSpacing.Around = 6
+          ShowCaption = False
+        end
+        object lbFieldList2: TListBox
+          AnchorSideLeft.Control = SpeedButton5
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel3
+          AnchorSideRight.Control = Panel3
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel3
+          AnchorSideBottom.Side = asrBottom
+          Left = 52
+          Height = 242
+          Top = 1
+          Width = 572
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          ItemHeight = 0
+          OnDblClick = lbFieldList2DblClick
+          PopupMenu = PopupMenu4
+          ScrollWidth = 570
+          TabOrder = 0
+          TopIndex = -1
+        end
+      end
     end
   end
   object ActionList1: TActionList[14]
@@ -517,6 +609,30 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       Category = 'Index options'
       Caption = 'npLast'
       OnExecute = npNoneExecute
+    end
+    object ifAdd: TAction
+      Category = 'Include fields'
+      Caption = 'Add field'
+      ImageIndex = 53
+      OnExecute = ifAddExecute
+    end
+    object ifAddAll: TAction
+      Category = 'Include fields'
+      Caption = 'Add all'
+      ImageIndex = 60
+      OnExecute = ifAddAllExecute
+    end
+    object ifRemove: TAction
+      Category = 'Include fields'
+      Caption = 'Remove field'
+      ImageIndex = 51
+      OnExecute = ifRemoveExecute
+    end
+    object ifRemoveAll: TAction
+      Category = 'Include fields'
+      Caption = 'Remove all'
+      ImageIndex = 59
+      OnExecute = ifRemoveAllExecute
     end
   end
   object PopupMenu1: TPopupMenu[15]
@@ -622,6 +738,34 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
       ReadOnly = False
       Required = False
       Size = 250
+    end
+  end
+  object PopupMenu3: TPopupMenu[19]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 80
+    Top = 544
+    object MenuItem13: TMenuItem
+      Action = ifAdd
+    end
+    object MenuItem14: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem15: TMenuItem
+      Action = ifAddAll
+    end
+  end
+  object PopupMenu4: TPopupMenu[20]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 488
+    Top = 536
+    object MenuItem16: TMenuItem
+      Action = ifRemove
+    end
+    object MenuItem17: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem18: TMenuItem
+      Action = ifRemoveAll
     end
   end
 end

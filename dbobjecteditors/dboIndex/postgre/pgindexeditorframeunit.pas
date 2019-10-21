@@ -35,9 +35,21 @@ type
   { TpgIndexEditorPage }
 
   TpgIndexEditorPage = class(TEditorPage)
+    ifAddAll: TAction;
+    ifRemove: TAction;
+    ifRemoveAll: TAction;
+    ifAdd: TAction;
+    lbFieldList1: TListBox;
+    lbFieldList2: TListBox;
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
@@ -47,6 +59,9 @@ type
     npLast: TAction;
     npNone: TAction;
     PageControl1: TPageControl;
+    Panel3: TPanel;
+    PopupMenu3: TPopupMenu;
+    PopupMenu4: TPopupMenu;
     rxIndexFieldsNullsPos: TStringField;
     rxIndexFieldsSortOrder: TStringField;
     soAsc: TAction;
@@ -86,6 +101,10 @@ type
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SpeedButton8: TSpeedButton;
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -95,6 +114,12 @@ type
     procedure fldAddExecute(Sender: TObject);
     procedure fldRemoveAllExecute(Sender: TObject);
     procedure fldRemoveExecute(Sender: TObject);
+    procedure ifAddAllExecute(Sender: TObject);
+    procedure ifAddExecute(Sender: TObject);
+    procedure ifRemoveAllExecute(Sender: TObject);
+    procedure ifRemoveExecute(Sender: TObject);
+    procedure lbFieldList1DblClick(Sender: TObject);
+    procedure lbFieldList2DblClick(Sender: TObject);
     procedure lbFieldListDblClick(Sender: TObject);
     procedure npNoneExecute(Sender: TObject);
     procedure rxIndexFieldsAfterScroll(DataSet: TDataSet);
@@ -117,7 +142,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, pgTypes, SQLEngineCommonTypesUnit, pg_SqlParserUnit;
+uses fbmStrConstUnit, fbmToolsUnit, pgTypes, SQLEngineCommonTypesUnit, pg_SqlParserUnit, rxboxprocs;
 
 {$R *.lfm}
 
@@ -132,7 +157,10 @@ begin
   begin
     T:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]);
     if Assigned(T) then
+    begin
       T.FillFieldList(lbFieldList.Items, ccoNoneCase, False);
+      T.FillFieldList(lbFieldList1.Items, ccoNoneCase, False);
+    end;
   end;
 
   if DBObject.State = sdboCreate then
@@ -178,6 +206,36 @@ begin
     lbFieldList.ItemIndex:=lbFieldList.Items.Add(rxIndexFieldsFieldName.AsString);
     rxIndexFields.Delete;
   end;
+end;
+
+procedure TpgIndexEditorPage.ifAddAllExecute(Sender: TObject);
+begin
+  BoxMoveAllItems(lbFieldList1, lbFieldList2);
+end;
+
+procedure TpgIndexEditorPage.ifAddExecute(Sender: TObject);
+begin
+  BoxMoveSelectedItems(lbFieldList1, lbFieldList2);
+end;
+
+procedure TpgIndexEditorPage.ifRemoveAllExecute(Sender: TObject);
+begin
+  BoxMoveAllItems(lbFieldList2, lbFieldList1);
+end;
+
+procedure TpgIndexEditorPage.ifRemoveExecute(Sender: TObject);
+begin
+  BoxMoveSelectedItems(lbFieldList2, lbFieldList1);
+end;
+
+procedure TpgIndexEditorPage.lbFieldList1DblClick(Sender: TObject);
+begin
+  ifAdd.Execute;
+end;
+
+procedure TpgIndexEditorPage.lbFieldList2DblClick(Sender: TObject);
+begin
+  ifRemove.Execute;
 end;
 
 procedure TpgIndexEditorPage.lbFieldListDblClick(Sender: TObject);
@@ -319,12 +377,15 @@ var
   C: TRxColumn;
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  PageControl1.ActivePageIndex:=0;
 
   FWhereFrame:=Tfdbm_SynEditorFrame.Create(Self);
   FWhereFrame.Parent:=TabSheet2;
   FWhereFrame.SQLEngine:=DBObject.OwnerDB;
   //FWhereFrame.OnGetFieldsList:=@OnGetFieldsList;
   FWhereFrame.Name:='edtWhenFrame';
+
+  TabSheet3.TabVisible:=TSQLEnginePostgre(DBObject.OwnerDB).ServerVersion > pgVersion10_0;
 
   C:=RxDBGrid1.ColumnByFieldName('SortOrder');
   C.PickList.Clear;
@@ -376,6 +437,11 @@ begin
   fldAddAll.Hint:=sAddAllFields;
   fldRemove.Hint:=sRemoveField;
   fldRemoveAll.Hint:=sRemoveAllFields;
+
+  ifAdd.Caption:=sAddField;
+  ifAddAll.Caption:=sAddAllFields;
+  ifRemove.Caption:=sRemoveField;
+  ifRemoveAll.Caption:=sRemoveAllFields;
 
   CheckGroup1.Items[0]:=sUnique;
   CheckGroup1.Items[1]:=sSeparatedPpages;
