@@ -552,6 +552,7 @@ type
     procedure Clear;
     procedure Assign(ASource:TSQLCommandSelectCTEList);
     function GetEnumerator: TSQLCommandSelectCTEListEnumerator;
+    function FindItem(AName:string):TSQLCommandSelectCTE;
     property Item[AIndex:integer]:TSQLCommandSelectCTE read GetItem; default;
     property Count:integer read GetCount;
     property Recursive:Boolean read FRecursive write FRecursive;
@@ -1025,6 +1026,17 @@ end;
 function TSQLCommandSelectCTEList.GetEnumerator: TSQLCommandSelectCTEListEnumerator;
 begin
   Result:=TSQLCommandSelectCTEListEnumerator.Create(Self);
+end;
+
+function TSQLCommandSelectCTEList.FindItem(AName: string): TSQLCommandSelectCTE;
+var
+  I: Integer;
+begin
+  Result:=nil;
+  AName:=UpperCase(AName);
+  for I:=0 to FList.Count-1 do
+    if UpperCase(TSQLCommandSelectCTE(FList[I]).FName) = AName then
+      Exit(TSQLCommandSelectCTE(FList[I]));
 end;
 
 { TSQLCreateCommandAbstract }
@@ -2058,9 +2070,10 @@ TABLE [ ONLY ] имя_таблицы [ * ]
       TTbl1.AddChildToken(TWhere);
       TTbl2:=AddSQLTokens(stIdentificator, TTbl1, '.', []);
       TTbl2:=AddSQLTokens(stIdentificator, TTbl2, '', [], 4);
+      TBLV1:=AddSQLTokens(stIdentificator, TJ, '(', [], 30);
       TTbl2.AddChildToken(TWhere);
-      TTbl_AS:=AddSQLTokens(stKeyword, [TTbl1, TTbl2], 'AS', []);
-      TTbl_ALIAS:=AddSQLTokens(stIdentificator, [TTbl1, TTbl2, TTbl_AS], '', [], 5);
+      TTbl_AS:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1], 'AS', []);
+      TTbl_ALIAS:=AddSQLTokens(stIdentificator, [TTbl1, TTbl2, TTbl_AS, TBLV1], '', [], 5);
       TTbl_ALIAS.AddChildToken(TWhere);
 
       TAS_FA:=AddSQLTokens(stSymbol, TTbl_ALIAS, '(', [toOptional]);
@@ -2153,7 +2166,8 @@ begin
          FCurTable:=nil;
        end;
     30:begin
-         FCurTable:=Tables.Add('');
+         if not Assigned(FCurTable) then
+           FCurTable:=Tables.Add('');
          FCurTable.TableType:=stitVirtualTable;
          FCurTable.TableExpression:=ASQLParser.GetToBracket(')');
        end;

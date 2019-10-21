@@ -1096,6 +1096,7 @@ resourcestring
   sUserMapping                      = 'UserMapping';
   sPartitionTable                   = 'PartitionTable';
   sFieldFromNamedSelect             = 'field from named select %s';
+  sFieldFromCTE                     = 'field from named CTE %s';
 
   sBuildConnectionString            = 'Build connection string';
   sRegistredDatabase                = 'Registred database';
