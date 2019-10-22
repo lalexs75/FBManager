@@ -42,7 +42,8 @@ type
                       pgVersion9_5,
                       pgVersion9_6,
                       pgVersion10_0,
-                      pgVersion11_0
+                      pgVersion11_0,
+                      pgVersion12_0
                       );
 
 
@@ -173,7 +174,8 @@ const
      'Postgre SQL version 9.5',
      'Postgre SQL version 9.6',
      'Postgre SQL version 10.0',
-     'Postgre SQL version 11.0'
+     'Postgre SQL version 11.0',
+     'Postgre SQL version 12.0'
      );
 
   pgZeosServerVersionProtoStr :array [TPGServerVersion] of string =
@@ -190,7 +192,8 @@ const
      'postgresql-9', //9.5
      'postgresql-9', //9.6
      'postgresql-9', //10.0
-     'postgresql-9'  //11.0
+     'postgresql-9', //11.0
+     'postgresql-9'  //12.0
      );
 
 implementation
