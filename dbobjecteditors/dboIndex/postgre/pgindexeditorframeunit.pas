@@ -327,6 +327,10 @@ begin
       rxIndexFieldsSortOrder.AsString:=IndexSortOrderStr(PGIF.SortOrder);
       rxIndexFieldsNullsPos.AsString:=IndexNullPosStr(PGIF.NullPos);
       rxIndexFields.Post;
+
+      I:=lbFieldList.Items.IndexOf(PGIF.FieldName);
+      if I>=0 then
+        lbFieldList.Items.Delete(I);
     end;
     rxIndexFields.First;
 

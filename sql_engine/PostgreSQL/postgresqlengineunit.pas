@@ -7037,7 +7037,7 @@ begin
     begin
       FIncF:=false;
       if (TSQLEnginePostgre(OwnerDB).RealServerVersionMajor >= 11) then
-        FIncF:=Q.FieldByName('indnkeyatts').AsInteger <= Q.FieldByName('attnum').AsInteger;
+        FIncF:=Q.FieldByName('indnkeyatts').AsInteger < Q.FieldByName('attnum').AsInteger;
 
       if FIncF then
         FIncludeFields.Add(Q.FieldByName('attname').AsString)
