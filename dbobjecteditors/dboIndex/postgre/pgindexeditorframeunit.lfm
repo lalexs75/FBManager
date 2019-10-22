@@ -303,7 +303,7 @@ inherited pgIndexEditorPage: TpgIndexEditorPage
               Title.Alignment = taCenter
               Title.Orientation = toHorizontal
               Title.Caption = 'Field name'
-              Width = 300
+              Width = 311
               FieldName = 'FieldName'
               EditButtons = <>
               Filter.Font.Style = [fsItalic]

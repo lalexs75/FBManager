@@ -992,6 +992,7 @@ type
   TPGIndex = class(TDBIndex)
   private
     FAccessMetod: string;
+    FIncludeFields: TStrings;
     FIndexCluster: boolean;
     FIndexExpression: string;
     FIndexUnique: boolean;
@@ -1025,6 +1026,7 @@ type
     property AccessMetod:string read FAccessMetod;
     property IndexExpression:string read FIndexExpression;
     property WhereExpression:string read FWhereExpression;
+    property IncludeFields:TStrings read FIncludeFields;
   end;
 
   TPGLanguage = class(TDBObject)
@@ -6938,6 +6940,7 @@ var
   FCmd: TPGSQLCreateIndex;
   I: TIndexField;
   PI1: TSQLParserField;
+  S: String;
 begin
   if not Assigned(Table) then
     RefreshObject;
@@ -6957,6 +6960,8 @@ begin
   end;
   FCmd.WhereCondition:=FWhereExpression;
   FCmd.Description:=Description;
+  for S in FIncludeFields do
+    FCmd.IncludeFields.AddParam(S);
   Result:=FCmd.AsSQL;
   FCmd.Free;
 end;
@@ -6989,10 +6994,12 @@ begin
   FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
   FSystemObject:=FSchema.SystemObject;
+  FIncludeFields:=TStringList.Create;
 end;
 
 destructor TPGIndex.Destroy;
 begin
+  FreeAndNil(FIncludeFields);
   inherited Destroy;
 end;
 
@@ -7017,43 +7024,53 @@ var
   PGIF: TIndexField;
   IOPT: LongWord;
   F: TField;
+  FIncF: Boolean;
 begin
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndexFields.Strings.Text);
+  //Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndex['sqlIndexFields']);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.PGIndexFieldsStr(OwnerDB));
+
   Q.ParamByName('indexrelid').AsInteger:=FOID;
   try
     //Выберем индексные поля
     Q.Open;
     while not Q.EOF do
     begin
+      FIncF:=false;
+      if (TSQLEnginePostgre(OwnerDB).RealServerVersionMajor >= 11) then
+        FIncF:=Q.FieldByName('indnkeyatts').AsInteger <= Q.FieldByName('attnum').AsInteger;
 
-      F:=Q.FindField('coldef');
-      if Q.FieldByName('coldef').AsString<>'' then
-        PGIF:=IndexFields.Add(Q.FieldByName('coldef').AsString)
+      if FIncF then
+        FIncludeFields.Add(Q.FieldByName('attname').AsString)
       else
-        PGIF:=IndexFields.Add(Q.FieldByName('attname').AsString);
+      begin
+        F:=Q.FindField('coldef');
+        if Q.FieldByName('coldef').AsString<>'' then
+          PGIF:=IndexFields.Add(Q.FieldByName('coldef').AsString)
+        else
+          PGIF:=IndexFields.Add(Q.FieldByName('attname').AsString);
 
 
-      S:='indoption';
-      IOPT:=Q.FieldByName(S).AsInteger;
-      if (IOPT and $01) <> 0 then
-        PGIF.SortOrder:=indDescending
-      else
-        PGIF.SortOrder:= indDefault//indAscending
-        ;
+        S:='indoption';
+        IOPT:=Q.FieldByName(S).AsInteger;
+        if (IOPT and $01) <> 0 then
+          PGIF.SortOrder:=indDescending
+        else
+          PGIF.SortOrder:= indDefault//indAscending
+          ;
 
-      if (IOPT and $02) <> 0 then
-        PGIF.NullPos:=inpFirst
-      else
-        PGIF.NullPos:= inpDefault
-        ;
+        if (IOPT and $02) <> 0 then
+          PGIF.NullPos:=inpFirst
+        else
+          PGIF.NullPos:= inpDefault
+          ;
 
-      if Q.FieldByName('coll_name').AsString<>'' then
-      begin;
-        if Q.FieldByName('coll_nspname').AsString<>'' then
-          PGIF.CollateName:=Q.FieldByName('coll_nspname').AsString + '.';
-        PGIF.CollateName:=PGIF.CollateName + Q.FieldByName('coll_name').AsString;
+        if Q.FieldByName('coll_name').AsString<>'' then
+        begin;
+          if Q.FieldByName('coll_nspname').AsString<>'' then
+            PGIF.CollateName:=Q.FieldByName('coll_nspname').AsString + '.';
+          PGIF.CollateName:=PGIF.CollateName + Q.FieldByName('coll_name').AsString;
+        end;
       end;
-
       Q.Next;
     end;
     Q.Close;
@@ -7071,8 +7088,9 @@ begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
   IndexFields.Clear;
+  FIncludeFields.Clear;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlIndex['sqlIndex']);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGIndex['sqlIndex']);
   try
     Q.ParamByName('index_name').AsString:=Caption;
     Q.ParamByName('schema_id').AsInteger:=FSchema.FSchemaId;

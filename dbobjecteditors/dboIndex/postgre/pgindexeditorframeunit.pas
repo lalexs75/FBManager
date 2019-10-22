@@ -281,6 +281,8 @@ end;
 procedure TpgIndexEditorPage.RefreshObject;
 var
   PGIF: TIndexField;
+  S: String;
+  I: Integer;
 begin
   rxIndexFields.CloseOpen;
 
@@ -327,6 +329,17 @@ begin
       rxIndexFields.Post;
     end;
     rxIndexFields.First;
+
+    if TabSheet3.TabVisible then
+    begin
+      lbFieldList2.Items.Assign(TPGIndex(DBObject).IncludeFields);
+      for S in lbFieldList2.Items do
+      begin
+        I:=lbFieldList1.Items.IndexOf(S);
+        if I>=0 then
+          lbFieldList1.Items.Delete(I);
+      end;
+    end;
   end;
 end;
 
@@ -455,6 +468,7 @@ end;
 function TpgIndexEditorPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   F: TSQLParserField;
+  S: String;
 begin
   Result:=false;
   if ASQLObject is TPGSQLCreateIndex then
@@ -478,6 +492,10 @@ begin
       rxIndexFields.Next;
     end;
     rxIndexFields.First;
+
+    if TabSheet3.TabVisible then
+      for S in lbFieldList2.Items do
+        TPGSQLCreateIndex(ASQLObject).IncludeFields.AddParam(S);
     Result:=true;
   end;
 end;

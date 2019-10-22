@@ -34,7 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
-    sqlIndex: TRxTextHolder;
+    sPGIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
     sPGRelationFields: TRxTextHolder;
@@ -60,7 +60,6 @@ type
     sqlIndexTable: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;
-    sqlIndexFields: TStrHolder;
     sqlPGUserGroupGrants: TStrHolder;
     sql_PG_DomainRefresh: TStrHolder;
     sql_Pg_Rules: TStrHolder;
@@ -94,6 +93,7 @@ type
     function PGTriggersList(ASQLEngine:TSQLEngineAbstract):string;
     function PGRelationStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGRelationInheritedStr(ASQLEngine:TSQLEngineAbstract):string;
+    function PGIndexFieldsStr(ASQLEngine:TSQLEngineAbstract):string;
   end;
 
 
@@ -159,6 +159,15 @@ begin
     Result:=sPGTableInerited['sTableInerited10']
   else
     Result:=sPGTableInerited['sTableInerited'];
+end;
+
+function TpgSqlTextModule.PGIndexFieldsStr(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 11 then
+    Result:=sPGIndex['sqlIndexFields_11']
+  else
+    Result:=sPGIndex['sqlIndexFields'];
 end;
 
 end.
