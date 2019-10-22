@@ -5433,10 +5433,11 @@ begin
   begin
     FOID:=ADBItem.ObjId;
     FACLListStr:=ADBItem.ObjACLList;
+
+    if ADBItem.ObjType = 'p' then
+      FDBObjectKind:=okPartitionTable;
   end;
 
-  if ADBItem.ObjType = 'p' then
-    FDBObjectKind:=okPartitionTable;
 
   if FACLListStr<>'' then
     TPGACLList(FACLList).ParseACLListStr(FACLListStr);
