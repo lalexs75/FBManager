@@ -434,6 +434,10 @@ end;
 
 procedure TpgIndexEditorPage.Localize;
 begin
+  TabSheet1.Caption:=sFields;
+  TabSheet2.Caption:=sPartialIndex;
+  TabSheet3.Caption:=sIncludeFields;
+
   Label1.Caption:=sIndexName;
   Label2.Caption:=sTableSpace;
   Label3.Caption:=sAccessMetod;
@@ -455,6 +459,11 @@ begin
   ifAddAll.Caption:=sAddAllFields;
   ifRemove.Caption:=sRemoveField;
   ifRemoveAll.Caption:=sRemoveAllFields;
+
+  ifAdd.Hint:=sAddField;
+  ifAddAll.Hint:=sAddAllFields;
+  ifRemove.Hint:=sRemoveField;
+  ifRemoveAll.Hint:=sRemoveAllFields;
 
   CheckGroup1.Items[0]:=sUnique;
   CheckGroup1.Items[1]:=sSeparatedPpages;

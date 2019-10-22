@@ -894,6 +894,8 @@ resourcestring
   sProcedureType                    = 'Procedure type';
   sSQLSecurity                      = 'Sql security';
   sSQLDataAcess                     = 'SQL data acess';
+  sPartialIndex                     = 'Partial index';
+  sIncludeFields                    = 'Include fields';
 
   sDomainName                       = 'Domain name';
   sNotNull                          = 'Not null';

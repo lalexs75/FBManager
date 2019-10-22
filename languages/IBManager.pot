@@ -2441,6 +2441,10 @@ msgctxt "fbmstrconstunit.sincludeallfrom"
 msgid "Include all from %s"
 msgstr ""
 
+#: fbmstrconstunit.sincludefields
+msgid "Include fields"
+msgstr ""
+
 #: fbmstrconstunit.sincrement
 msgid "Increment"
 msgstr ""
@@ -3677,6 +3681,10 @@ msgstr ""
 
 #: fbmstrconstunit.sparamvalue
 msgid "Param value"
+msgstr ""
+
+#: fbmstrconstunit.spartialindex
+msgid "Partial index"
 msgstr ""
 
 #: fbmstrconstunit.spartition
