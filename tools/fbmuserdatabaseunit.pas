@@ -388,6 +388,7 @@ begin
       InternalUpdate4;
     UserDB.Connect;
     SystemVariablesLoad;
+    ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
   end;
 end;
 
@@ -460,22 +461,31 @@ end;
 procedure TUserDBModule.InternalUpdate2;
 begin
   UserDB.Connect;
-  UpdDB2.Execute;
-  UserDB.Disconnect;
+  try
+    UpdDB2.Execute;
+  finally
+    UserDB.Disconnect;
+  end;
 end;
 
 procedure TUserDBModule.InternalUpdate3;
 begin
   UserDB.Connect;
-  UpdDB3.Execute;
-  UserDB.Disconnect;
+  try
+    UpdDB3.Execute;
+  finally
+    UserDB.Disconnect;
+  end;
 end;
 
 procedure TUserDBModule.InternalUpdate4;
 begin
   UserDB.Connect;
-  UpdDB4.Execute;
-  UserDB.Disconnect;
+  try
+    UpdDB4.Execute;
+  finally
+    UserDB.Disconnect;
+  end;
 end;
 
 procedure TUserDBModule.ImportDataBaseList;
@@ -843,8 +853,8 @@ begin
   else
   begin
     InternalCreateUserDB;
+    ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
   end;
-  ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
   SystemVariablesStore;
   LoadLocalize(ConfigValues.ByNameAsString('lngFileName', DefLanguageFile));
 
