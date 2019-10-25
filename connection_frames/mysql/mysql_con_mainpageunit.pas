@@ -76,7 +76,7 @@ type
 
 implementation
 
-uses IBManDataInspectorUnit, ibmanagertypesunit, fbmToolsUnit, mysql_types, fbmStrConstUnit;
+uses IBManDataInspectorUnit, ibmanagertypesunit, fbmToolsUnit, mysql_types, fbmStrConstUnit, rxAppUtils;
 
 {$R *.lfm}
 
@@ -182,7 +182,12 @@ end;
 
 function TMySQL_con_MainPage.Validate: boolean;
 begin
-  Result:=true;
+  Result:=Trim(edtAliasName.Text)<>'';
+  if not Result then
+  begin
+    ErrorBox(sConnectionNameNotSpecified);
+    Exit;
+  end;
 end;
 
 function TMySQL_con_MainPage.TestConnection: boolean;

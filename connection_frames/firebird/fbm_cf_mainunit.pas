@@ -40,7 +40,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     Edit1: TEdit;
-    EditAliasName: TEdit;
+    edtAliasName: TEdit;
     edtDBName: TFileNameEdit;
     EditPassword: TEdit;
     EditRole: TEdit;
@@ -92,8 +92,8 @@ uses rxAppUtils, fbmStrConstUnit, IBManDataInspectorUnit, ibmanagertypesunit, SQ
 
 procedure TfbmCFMainFrame.edtDBNameExit(Sender: TObject);
 begin
-  if EditAliasName.Text = '' then
-    EditAliasName.Text:=Format(sAliasOfDB, [edtDBName.Text]);
+  if edtAliasName.Text = '' then
+    edtAliasName.Text:=Format(sAliasOfDB, [edtDBName.Text]);
 end;
 
 procedure TfbmCFMainFrame.SpeedButton1Click(Sender: TObject);
@@ -174,7 +174,7 @@ begin
   edtDBName.Text:=ASQLEngine.DataBaseName;
   EditUserName.Text:=ASQLEngine.UserName;
   EditPassword.Text:=ASQLEngine.Password;
-  EditAliasName.Text      := ASQLEngine.AliasName;
+  edtAliasName.Text      := ASQLEngine.AliasName;
   cbServerName.Text:=ASQLEngine.ServerName;
 
   EditRole.Text           := TSQLEngineFireBird(ASQLEngine).RoleName;
@@ -193,7 +193,7 @@ end;
 procedure TfbmCFMainFrame.SaveParams;
 begin
   FSQLEngineFireBird.DataBaseName:=edtDBName.Text;
-  FSQLEngineFireBird.AliasName:=EditAliasName.Text;
+  FSQLEngineFireBird.AliasName:=edtAliasName.Text;
   FSQLEngineFireBird.UserName:=EditUserName.Text;
   FSQLEngineFireBird.RoleName:=EditRole.Text;
   FSQLEngineFireBird.Password:=EditPassword.Text;
@@ -218,7 +218,12 @@ end;
 
 function TfbmCFMainFrame.Validate: boolean;
 begin
-  Result:=true;
+  Result:=Trim(edtAliasName.Text)<>'';
+  if not Result then
+  begin
+    ErrorBox(sConnectionNameNotSpecified);
+    Exit;
+  end;
 end;
 
 function TfbmCFMainFrame.TestConnection: boolean;

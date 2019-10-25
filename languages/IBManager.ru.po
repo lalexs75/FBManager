@@ -648,6 +648,10 @@ msgstr "Подключиться"
 msgid "Connection limit"
 msgstr "Лимит подключений"
 
+#: fbmstrconstunit.sconnectionnamenotspecified
+msgid "Connection name (Alis) not specified"
+msgstr "Не указано наименование коннекта (Псевдоним)"
+
 #: fbmstrconstunit.sconnectionparams
 msgid "Connection params"
 msgstr "Параметры подключения"
@@ -6127,4 +6131,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

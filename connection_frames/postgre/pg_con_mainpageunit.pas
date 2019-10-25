@@ -216,7 +216,12 @@ end;
 
 function Tpg_con_MainPage.Validate: boolean;
 begin
-  Result:=true;
+  Result:=Trim(edtAliasName.Text)<>'';
+  if not Result then
+  begin
+    ErrorBox(sConnectionNameNotSpecified);
+    Exit;
+  end;
 end;
 
 function Tpg_con_MainPage.TestConnection: boolean;

@@ -33,7 +33,7 @@ type
   { TConnectionSQLite3MainPage }
 
   TConnectionSQLite3MainPage = class(TConnectionDlgPage)
-    EditAliasName: TEdit;
+    edtAliasName: TEdit;
     EditDBName: TFileNameEdit;
     Label1: TLabel;
     Label5: TLabel;
@@ -50,7 +50,7 @@ type
   end;
 
 implementation
-uses LazUTF8, LazFileUtils, fbmStrConstUnit;
+uses LazUTF8, LazFileUtils, fbmStrConstUnit, rxAppUtils;
 
 {$R *.lfm}
 
@@ -66,13 +66,13 @@ end;
 procedure TConnectionSQLite3MainPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
 begin
   EditDBName.Text:=ASQLEngine.DataBaseName;
-  EditAliasName.Text      := ASQLEngine.AliasName;
+  edtAliasName.Text      := ASQLEngine.AliasName;
 end;
 
 procedure TConnectionSQLite3MainPage.SaveParams;
 begin
   FSQLEngine.DataBaseName:=EditDBName.Text;
-  FSQLEngine.AliasName:=EditAliasName.Text;
+  FSQLEngine.AliasName:=edtAliasName.Text;
 end;
 
 function TConnectionSQLite3MainPage.PageName: string;
@@ -82,7 +82,12 @@ end;
 
 function TConnectionSQLite3MainPage.Validate: boolean;
 begin
-  Result:=FileExistsUTF8(EditDBName.Text);
+  Result:=Trim(edtAliasName.Text)<>'';
+  if not Result then
+  begin
+    ErrorBox(sConnectionNameNotSpecified);
+    Exit;
+  end;
 end;
 
 function TConnectionSQLite3MainPage.TestConnection: boolean;

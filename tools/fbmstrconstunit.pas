@@ -169,6 +169,7 @@ resourcestring
   sConnections                      = 'Connections';
   sTypeOf                           = 'TypeOf';
   sDatabaseUser                     = 'Database user';
+  sConnectionNameNotSpecified       = 'Connection name (Alis) not specified';
 
   sExtractMetaForm                  = 'Extract metadata from DB';
   sDatabase                         = 'Database';

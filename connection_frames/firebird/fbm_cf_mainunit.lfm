@@ -54,7 +54,7 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
   end
   object Label6: TLabel[4]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = EditAliasName
+    AnchorSideTop.Control = edtAliasName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
@@ -67,7 +67,7 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
   object Label7: TLabel[5]
     AnchorSideLeft.Control = Label1
     AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = EditAliasName
+    AnchorSideTop.Control = edtAliasName
     AnchorSideTop.Side = asrBottom
     Left = 341
     Height = 17
@@ -136,7 +136,7 @@ inherited fbmCFMainFrame: TfbmCFMainFrame
     TabOrder = 0
     Text = 'TCP/IP'
   end
-  object EditAliasName: TEdit[10]
+  object edtAliasName: TEdit[10]
     AnchorSideLeft.Control = Label5
     AnchorSideTop.Control = Label5
     AnchorSideTop.Side = asrBottom

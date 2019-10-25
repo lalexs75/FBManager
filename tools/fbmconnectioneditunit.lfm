@@ -7,12 +7,10 @@ inherited fbmConnectionEditForm: TfbmConnectionEditForm
   ClientHeight = 607
   ClientWidth = 793
   OnClose = FormClose
-  OnCloseQuery = nil
   OnCreate = FormCreate
   OnKeyDown = nil
   ShowHint = True
   inherited ButtonPanel1: TButtonPanel
-    Height = 46
     Top = 555
     Width = 781
     object BitBtn1: TBitBtn[0]
@@ -22,7 +20,7 @@ inherited fbmConnectionEditForm: TfbmConnectionEditForm
       Height = 35
       Hint = 'Test connection'
       Top = 0
-      Width = 66
+      Width = 64
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
       BorderSpacing.Left = 6

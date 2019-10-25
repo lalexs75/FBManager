@@ -766,7 +766,7 @@ var
   S, SName, SValue: String;
   i: Integer;
 begin
-  if not Assigned(FSQLEngine) then exit;
+  if not Assigned(SQLEngine) then exit;
   if SQLEngine.DatabaseID > 0 then
     UserDBModule.quDatabasesItem.ParamByName('db_database_id').AsInteger:=SQLEngine.DatabaseID
   else

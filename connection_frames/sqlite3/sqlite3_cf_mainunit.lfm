@@ -46,7 +46,7 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     Caption = 'Database alias'
     ParentColor = False
   end
-  object EditAliasName: TEdit[3]
+  object edtAliasName: TEdit[3]
     AnchorSideLeft.Control = Label5
     AnchorSideTop.Control = Label5
     AnchorSideTop.Side = asrBottom

@@ -622,6 +622,10 @@ msgstr ""
 msgid "Connection limit"
 msgstr ""
 
+#: fbmstrconstunit.sconnectionnamenotspecified
+msgid "Connection name (Alis) not specified"
+msgstr ""
+
 #: fbmstrconstunit.sconnectionparams
 msgid "Connection params"
 msgstr ""
