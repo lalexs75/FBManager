@@ -326,7 +326,7 @@ begin
   if Assigned(fbManDataInpectorForm) then
     fbManDataInpectorForm.UpdateRecentObjects;
 
-  HideCodeContext;
+//  HideCodeContext;
 end;
 
 procedure TfbManagerMainForm.MakeToolsMenu;
