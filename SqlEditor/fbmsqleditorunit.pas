@@ -1346,6 +1346,8 @@ var
   T: TTableItem;
   P: TSQLParserField;
   C: TSQLCommandSelectCTE;
+  DBObj: TDBObject;
+  F: TDBField;
 begin
   SQLCommand:=GetNextSQLCommand(EditorFrame.TextEditor.Text, FSQLEngine, true);
   if Assigned(SQLCommand) then
@@ -1368,6 +1370,16 @@ begin
         for T in TSQLCommandAbstractSelect(SQLCommand).Tables do
           if T.TableType = stitVirtualTable then
             Items.Add(T)
+          else
+          if SQLCommand is TSQLCommandDML then
+          begin
+            DBObj:=FSQLEngine.DBObjectByName(T.FullName);
+            if Assigned(DBObj) then
+              if (DBObj.DBObjectKind in [okTable, okView, okMaterializedView]) and (DBObj is TDBDataSetObject) then
+                for F in TDBDataSetObject(DBObj).Fields do
+                  if Copy(UpperCase(F.FieldName), 1, Length(KeyStartWord)) = KeyStartWord then
+                    Items.Add(F);
+          end;
 
       end;
     end
