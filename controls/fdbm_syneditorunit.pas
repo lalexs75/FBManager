@@ -1823,7 +1823,7 @@ end;
 procedure Tfdbm_SynEditorFrame.ProcessForHint;
 var
   S, S1:string;
-  i, j:integer;
+  i, j, k:integer;
   FCodeContexts:TCodeHintInfo;
   DBObj:TDBObject;
 begin
@@ -1834,19 +1834,24 @@ begin
     exit;
 
   i:=TextEditor.CaretXY.X;
-  while (i>0) and (S[i]<>'(') do
+  K:=0;
+  while (i>0) and (not (S[i] in ['(', ';'])) do
+  begin
+    if S[i] = ',' then Inc(K);
     Dec(i);
+  end;
 
-  if i=0 then  exit;
+  if (i=0) or (S[i] = ';') then exit;
+
   Dec(i);
-  j:=i;
+  j:=i-1;
   while (i>0) and (S[i] in ['A'..'Z', 'a'..'z', '_', '0'..'9','.', '"']) do Dec(i);
   S1:=Trim(Copy(S, i, j-i + 1));
   if S1 <> '' then
   begin
 
     DBObj:=DBRecord.GetDBObject(s1);
-    if Assigned(DBObj) and (DBObj.DBObjectKind in [okStoredProc]) then
+    if Assigned(DBObj) and (DBObj.DBObjectKind in [okStoredProc, okFunction]) then
     begin
       DBObj.RefreshObject;
       FCodeContexts.HintText:=(DBObj as TDBStoredProcObject).CaptionFullPatch;
