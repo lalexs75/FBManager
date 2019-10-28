@@ -201,7 +201,6 @@ end;
 procedure TCodeContextFrm.CalculateHintsBounds;
 var
   DrawWidth: LongInt;
-//  SrcEdit: TSourceEditorInterface;
   SrcEdit: TCustomSynEdit;
   NewBounds: TRect;
   CursorTextXY: TPoint;
@@ -408,7 +407,6 @@ var
   CurHintRect: TRect;
   Details: TThemedElementDetails;
 begin
-  //DebugLn('TCodeContextFrm.DrawHints DrawWidth=',dbgs(MaxWidth),' DrawHeight=',dbgs(MaxHeight),' Draw=',dbgs(Draw));
   if Draw then
   begin
     // make colors theme dependent
@@ -448,7 +446,7 @@ begin
       NewMaxWidth:=CurHintRect.Right;
     NewMaxHeight:=CurHintRect.Bottom;
   end;
-
+(*
   if Assigned(FCodeContexts.DBObject) and (FCodeContexts.DBObject.Description <> '') then
   begin
     W:=Canvas.TextHeight(FCodeContexts.DBObject.Description);
@@ -458,11 +456,12 @@ begin
       Canvas.TextOut(5, W1, FCodeContexts.DBObject.Description);
 
   end;
+*)
   // for fractionals add some space
   inc(NewMaxWidth,12);
-  inc(NewMaxHeight,12);
+  //inc(NewMaxHeight,12);
   // add space for the copy all button
-  inc(NewMaxWidth,16);
+  //inc(NewMaxWidth,16);
 
   if Draw then
   begin
@@ -564,6 +563,13 @@ begin
   Btn.Flat:=true;
   Btn.Parent:=Self;}
   FHints.Add(Item);
+  if Assigned(FCodeContexts.DBObject) and (FCodeContexts.DBObject.Description<>'') then
+  begin
+    Item:=TCodeContextItem.Create;
+    Item.Code:=FCodeContexts.DBObject.Description;
+    Item.Hint:=FCodeContexts.DBObject.Description;
+    FHints.Add(Item);
+  end;
 
   CalculateHintsBounds;
 end;
