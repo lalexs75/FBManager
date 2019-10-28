@@ -297,8 +297,6 @@ end;
 
 
 procedure TSqlEditorPage.SaveNew;
-var
-  AFileName:string;
 begin
   UserDBModule.quSQLPagesIns.ParamByName('db_database_id').AsInteger:=FOwner.DataBaseID;
   if Assigned(FFolder) then
@@ -455,9 +453,9 @@ procedure TSQLEditorPages.Load;
 var
   F: TSQLEditorFolder;
   P: TSqlEditorPage;
-  C: Integer;
+//  C: Integer;
 begin
-  C:=DataBaseID;
+ // C:=DataBaseID;
   UserDBModule.quSQLFolders.ParamByName('db_database_id').AsInteger:=DataBaseID;
   UserDBModule.quSQLFolders.Open;
   while not UserDBModule.quSQLFolders.EOF do

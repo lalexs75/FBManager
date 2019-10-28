@@ -25,7 +25,7 @@ unit fbmOIFoldersUnit;
 interface
 
 uses
-  Classes, SysUtils, IniFiles, ComCtrls, DB;
+  Classes, SysUtils, ComCtrls, DB;
 
 type
   TOIFolderListEnumerator = class;

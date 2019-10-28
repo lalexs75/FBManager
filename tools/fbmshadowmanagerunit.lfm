@@ -5,7 +5,7 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
   Width = 563
   ActiveControl = Panel1
   Caption = 'Shadow manager'
-  ClientHeight = 391
+  ClientHeight = 396
   ClientWidth = 563
   Menu = MainMenu1
   OnClose = FormClose
@@ -13,12 +13,12 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
   LCLVersion = '2.1.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 45
+    Height = 37
     Top = 0
     Width = 563
     Align = alTop
     AutoSize = True
-    ClientHeight = 45
+    ClientHeight = 37
     ClientWidth = 563
     TabOrder = 0
     object Label1: TLabel
@@ -26,9 +26,9 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
       AnchorSideBottom.Control = ComboBox1
       AnchorSideBottom.Side = asrBottom
       Left = 7
-      Height = 19
-      Top = 19
-      Width = 63
+      Height = 15
+      Top = 15
+      Width = 48
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Database'
@@ -40,13 +40,13 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 76
-      Height = 31
+      Left = 61
+      Height = 23
       Top = 7
-      Width = 480
+      Width = 495
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
-      ItemHeight = 0
+      ItemHeight = 15
       OnChange = ComboBox1Change
       Style = csDropDownList
       TabOrder = 0
@@ -54,8 +54,8 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
   end
   object RxDBGrid1: TRxDBGrid
     Left = 0
-    Height = 315
-    Top = 76
+    Height = 327
+    Top = 69
     Width = 563
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -170,44 +170,28 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
-    Top = 45
+    Height = 32
+    Top = 37
     Width = 563
     Items = <    
       item
         Action = shdAdd
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 73
         ShowCaption = True
       end    
       item
         Action = shdDrop
         Visible = True
-        Left = 78
-        Height = 21
-        Top = 5
-        Width = 61
         ShowCaption = True
       end    
       item
         Action = shdRefresh
         Visible = True
-        Left = 139
-        Height = 21
-        Top = 5
-        Width = 79
         ShowCaption = True
       end    
       item
         Action = shdPrintList
         Visible = True
-        Left = 218
-        Height = 21
-        Top = 5
-        Width = 60
         ShowCaption = True
       end>
     ImageList = fbManagerMainForm.ImageListMain
@@ -216,7 +200,7 @@ object fbmShadowManagerForm: TfbmShadowManagerForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 32
     ClientWidth = 563
     TabOrder = 2
   end

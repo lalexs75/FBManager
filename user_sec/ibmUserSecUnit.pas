@@ -26,7 +26,7 @@ interface
 
 uses 
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  LCLType, ComCtrls, StdCtrls, Buttons, ActnList, uib, LMessages,
+  LCLType, ComCtrls, StdCtrls, Buttons, ActnList, uib,
   IBManagerTypesUnit, fbmToolsUnit, DBGrids, DB, rxdbgrid, rxmemds, rxtoolbar,
   RxIniPropStorage, RxDBGridExportSpreadSheet, RxDBGridPrintGrid,
   RxDBGridFooterTools, Menus, LR_DBSet, LR_Class, FBCustomDataSet,
@@ -135,7 +135,7 @@ type
 procedure ShowFBUserManager;
 implementation 
 uses IBManDataInspectorUnit, ibmUserSecEditUserUnit,
-  IBManMainUnit, ibm_loginform, uibase, Clipbrd, fbmStrConstUnit;
+  IBManMainUnit, uibase, Clipbrd, fbmStrConstUnit;
 
 {$R *.lfm}
 

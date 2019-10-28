@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, uib,
   FBCustomDataSet, DB, ExtCtrls, StdCtrls, rxdbgrid, Buttons, ibmanagertypesunit,
-  fbmToolsUnit, LMessages, rxtoolbar, ActnList, Menus, LCLType, LR_DBSet,
+  fbmToolsUnit, rxtoolbar, ActnList, Menus, LCLType, LR_DBSet,
   FBSQLEngineUnit;
 
 type
@@ -81,7 +81,7 @@ type
 
 procedure ShowShadowManagerForm;
 implementation
-uses IBManDataInspectorUnit, IBManMainUnit, ibmsqltextsunit, fbmshadowmanager_editunit,
+uses IBManDataInspectorUnit, IBManMainUnit,
   fbmStrConstUnit;
 
 {$R *.lfm}
@@ -106,8 +106,6 @@ begin
 end;
 
 procedure TfbmShadowManagerForm.shdAddExecute(Sender: TObject);
-var
-  S:string;
 begin
   { TODO 5 -oalexs -cинструменты : Необходимо реализовать созданиефайла тени для птицы }
 {  if Assigned(FCurRec) and ShowQuestion(sCreateShadow) then

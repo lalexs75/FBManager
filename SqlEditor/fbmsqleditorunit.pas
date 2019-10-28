@@ -31,7 +31,7 @@ uses
   Menus, fdbm_SynEditorUnit, ExtCtrls, Buttons, DBCtrls, RxDBGrid, rxtoolbar,
   RxIniPropStorage, RxDBGridExportSpreadSheet, RxDBGridPrintGrid, sqlObjects,
   SQLEngineCommonTypesUnit, RxDBGridFooterTools, RxDBGridExportPdf,
-  rxdbverticalgrid, LCLIntf, EditBtn, StdActns, fpdataexporter, ZMacroQuery,
+  rxdbverticalgrid, LCLIntf, EditBtn, fpdataexporter, ZMacroQuery,
   ZDataset, SQLEngineAbstractUnit, fbmToolsUnit, IniFiles;
 
 const

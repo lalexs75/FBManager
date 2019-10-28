@@ -227,10 +227,10 @@ uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
   , iconvenc
   {$ENDIF}
   ;
-
+(*
 const
   RootNodeSqlHistory = 'sql_history';
-
+*)
 function ExecSQLScript(List: TStrings; const ExecParams: TSqlExecParams;
   const ASQLEngine: TSQLEngineAbstract): boolean;
 var
@@ -463,7 +463,6 @@ end;
 
 procedure TDataBaseRecord.MakeObjectTree;
 var
-  Tr:TTreeView;
   Grp:TDBInspectorRecord;
   P: TDBObject;
 begin
@@ -763,7 +762,7 @@ end;
 
 procedure TDataBaseRecord.Save;
 var
-  S, SName, SValue: String;
+  SName, SValue: String;
   i: Integer;
 begin
   if not Assigned(SQLEngine) then exit;
@@ -1198,8 +1197,6 @@ begin
 end;
 
 function TDBInspectorRecord.GetDescription: string;
-var
-  St: TStrings;
 begin
   if Assigned(DBObject) then
   begin
