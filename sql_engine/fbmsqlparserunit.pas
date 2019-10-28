@@ -501,26 +501,6 @@ type
     property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
   end;
 
-
-  { TSQLCommandAbstractSelect }
-
-  TSQLCommandAbstractSelect = class(TSQLCommandAbstract)
-  private
-    FOrderByFields: TSQLFields;
-    FTables:TSQLTables;
-    FFields:TSQLFields;
-  protected
-    FSelectable: boolean;
-  public
-    constructor Create(AParent:TSQLCommandAbstract);override;
-    destructor Destroy;override;
-    procedure Assign(ASource:TSQLObjectAbstract); override;
-    property Tables:TSQLTables read FTables;
-    property Fields:TSQLFields read FFields;
-    property Selectable:boolean read FSelectable;
-    property OrderByFields:TSQLFields read FOrderByFields;
-  end;
-
   { TSQLCommandSelectCTE }
 
   TSQLCommandSelectCTE = class
@@ -571,11 +551,31 @@ type
     property Current: TSQLCommandSelectCTE read GetCurrent;
   end;
 
+  { TSQLCommandAbstractSelect }
+
+  TSQLCommandAbstractSelect = class(TSQLCommandAbstract)
+  private
+    FCTE: TSQLCommandSelectCTEList;
+    FOrderByFields: TSQLFields;
+    FTables:TSQLTables;
+    FFields:TSQLFields;
+  protected
+    FSelectable: boolean;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Tables:TSQLTables read FTables;
+    property Fields:TSQLFields read FFields;
+    property Selectable:boolean read FSelectable;
+    property OrderByFields:TSQLFields read FOrderByFields;
+    property CTE:TSQLCommandSelectCTEList read FCTE;
+  end;
+
   { TSQLCommandSelect }
 
   TSQLCommandSelect = class(TSQLCommandAbstractSelect)
   private
-    FCTE: TSQLCommandSelectCTEList;
     FTokenFrom:TSQLTokenRecord;
     //
     FAllRec: boolean;
@@ -598,7 +598,6 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property AllRec:boolean read FAllRec write FAllRec;
     property WhereExpression:string read FWhereExpression write FWhereExpression;
-    property CTE:TSQLCommandSelectCTEList read FCTE;
   end;
 
   { TSQLCommandDML }
@@ -2316,12 +2315,10 @@ begin
   FSelectable:=true;
   FAllRec:=true;
   FParserState:=pssNone;
-  FCTE:=TSQLCommandSelectCTEList.Create;
 end;
 
 destructor TSQLCommandSelect.Destroy;
 begin
-  FreeAndNil(FCTE);
   inherited Destroy;
 end;
 
@@ -2345,10 +2342,12 @@ begin
   FFields:=TSQLFields.Create;
   FOrderByFields:=TSQLFields.Create;
   FPlanEnabled:=true;
+  FCTE:=TSQLCommandSelectCTEList.Create;
 end;
 
 destructor TSQLCommandAbstractSelect.Destroy;
 begin
+  FreeAndNil(FCTE);
   FreeAndNil(FTables);
   FreeAndNil(FFields);
   FreeAndNil(FOrderByFields);
