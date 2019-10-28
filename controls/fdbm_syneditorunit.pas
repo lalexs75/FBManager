@@ -1833,7 +1833,6 @@ var
   F: TDBField;
 begin
   S:=TextEditor.LineText;
-//  TextEditor.BookMarkOptions.BookmarkImages;
 
   if S = '' then
     exit;

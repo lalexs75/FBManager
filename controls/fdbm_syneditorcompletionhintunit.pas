@@ -116,9 +116,15 @@ begin
 
   if CodeContextFrm = nil then
     CodeContextFrm := TCodeContextFrm.Create(nil);
-  CodeContextFrm.SetCodeContexts(ACodeContexts);
-  CodeContextFrm.Show;
-  Result := True;
+
+  CodeContextFrm.DisableAlign;
+  try
+    CodeContextFrm.SetCodeContexts(ACodeContexts);
+    CodeContextFrm.Show;
+    Result := True;
+  finally
+    CodeContextFrm.EnableAlign;
+  end;
 end;
 
 procedure HideCodeContext;
@@ -576,6 +582,7 @@ end;
 
 procedure TCodeContextFrm.UpdateHints;
 begin
+  if not Visible then exit;
 
 end;
 
