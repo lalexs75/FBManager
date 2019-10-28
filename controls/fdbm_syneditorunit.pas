@@ -1820,12 +1820,17 @@ begin
   Key:=0;
 end;
 
+type
+  TDBStoredProcObjectHack = class(TDBStoredProcObject);
+
 procedure Tfdbm_SynEditorFrame.ProcessForHint;
 var
   S, S1:string;
   i, j, k:integer;
   FCodeContexts:TCodeHintInfo;
   DBObj:TDBObject;
+  DBObjS:TDBStoredProcObjectHack;
+  F: TDBField;
 begin
   S:=TextEditor.LineText;
 //  TextEditor.BookMarkOptions.BookmarkImages;
@@ -1851,10 +1856,26 @@ begin
   begin
 
     DBObj:=DBRecord.GetDBObject(s1);
-    if Assigned(DBObj) and (DBObj.DBObjectKind in [okStoredProc, okFunction]) then
+    if Assigned(DBObj) and (DBObj is TDBStoredProcObject) and (DBObj.DBObjectKind in [okStoredProc, okFunction]) then
     begin
-      DBObj.RefreshObject;
-      FCodeContexts.HintText:=(DBObj as TDBStoredProcObject).CaptionFullPatch;
+      DBObjS:=TDBStoredProcObjectHack(DBObj);
+      DBObjS.RefreshObject;
+      S:=DBObjS.CaptionFullPatch;
+      S1:='';
+      for i:=0 to DBObjS.FieldsIN.Count-1 do
+      begin
+        F:=DBObjS.FieldsIN[i];
+        if F.IOType in [spvtInput, spvtInOut] then
+        begin
+          if S1<>'' then S1:=S1 + ', ';
+          if i = k then S1:=S1 + '\b';
+          S1:=S1 + F.FieldTypeStr;
+          if i = k then S1:=S1 + '\*';
+        end;
+      end;
+
+      if S1<>'' then S1:='(' + S1 + ')';
+      FCodeContexts.HintText:=S + S1;
       FCodeContexts.EditorFrame:=Self;
       FCodeContexts.DBObject:=DBObj;
       ShowCodeContext(FCodeContexts);
