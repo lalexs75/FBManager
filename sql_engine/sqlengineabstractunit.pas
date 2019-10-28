@@ -3401,7 +3401,7 @@ end;
 function TDBField.FieldTypeStr: string;
 begin
   Result:=DoFormatName(FieldName) + ' ';
-  if FieldTypeDomain<>'' then
+  if Assigned(FieldDomain) then
     Result:=Result + FieldTypeDomain
   else
   begin

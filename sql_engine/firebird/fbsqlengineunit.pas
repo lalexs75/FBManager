@@ -844,9 +844,15 @@ begin
     while not IBQ.Eof do
     begin
       if IBQ.Fields.ByNameAsInteger['RDB$ARGUMENT_POSITION'] > 0 then
-        Item:=FieldsIN.Add(Trim(IBQ.Fields.ByNameAsString['RDB$ARGUMENT_NAME']))
+      begin
+        Item:=FieldsIN.Add(Trim(IBQ.Fields.ByNameAsString['RDB$ARGUMENT_NAME']));
+        Item.IOType:=spvtInput;
+      end
       else
+      begin
         Item:=FieldsOut.Add(Trim(IBQ.Fields.ByNameAsString['RDB$ARGUMENT_NAME']));
+        Item.IOType:=spvtOutput;
+      end;
 
       Item.FieldDescription:=IBQ.Fields.ByNameAsString['RDB$DESCRIPTION'];
       Item.FieldTypeDomain:=Trim(IBQ.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
@@ -3771,9 +3777,15 @@ begin
     while not IBQ.Eof do
     begin
       if IBQ.Fields.ByNameAsInteger['RDB$PARAMETER_TYPE'] = 0 then
-        Item:=FieldsIN.Add(Trim(IBQ.Fields.ByNameAsString['RDB$PARAMETER_NAME'])) //0 - Входящий параметр
+      begin
+        Item:=FieldsIN.Add(Trim(IBQ.Fields.ByNameAsString['RDB$PARAMETER_NAME'])); //0 - Входящий параметр
+        Item.IOType:=spvtInput;
+      end
       else
+      begin
         Item:=FieldsOut.Add(Trim(IBQ.Fields.ByNameAsString['RDB$PARAMETER_NAME'])); //1 - Исходящий параметр
+        Item.IOType:=spvtOutput;
+      end;
 
       Item.FieldDescription:=IBQ.Fields.ByNameAsString['RDB$DESCRIPTION'];
 
