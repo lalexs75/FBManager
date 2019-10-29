@@ -548,6 +548,9 @@ resourcestring
   sINSTEAD                          = 'INSTEAD';
   sNOTHING                          = 'NOTHING';
   sRuleEvent                        = 'Rule event';
+  sFTSConfigurationName             = 'FTS configuration name';
+  sParser                           = 'Parser';
+  sCopyConfiguration                = 'Copy configuration';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';
@@ -1093,7 +1096,7 @@ resourcestring
   sLargeObject                      = 'LargeObject';
   sPolicy                           = 'Policy';
   sAutoIncFields                    = 'AutoIncFields';
-  sFTSConfig                        = 'FTSConfig';
+  sFTSConfig                        = 'FTS configuration';
   sFTSDictionary                    = 'FTSDictionary';
   sFTSParser                        = 'FTSParser';
   sFTSTemplate                      = 'FTSTemplate';

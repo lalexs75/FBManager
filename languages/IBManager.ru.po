@@ -728,6 +728,10 @@ msgstr "Копировать значения ячейки"
 msgid "Copy collumn field title"
 msgstr "Копировать имя поля колонки"
 
+#: fbmstrconstunit.scopyconfiguration
+msgid "Copy configuration"
+msgstr "Копировать конфигурацию"
+
 #: fbmstrconstunit.scopyconnectionstring
 msgid "Copy connection string"
 msgstr "Копировать строку подключения"
@@ -2259,8 +2263,12 @@ msgid "From value"
 msgstr "С значения"
 
 #: fbmstrconstunit.sftsconfig
-msgid "FTSConfig"
-msgstr ""
+msgid "FTS configuration"
+msgstr "Конфигурация FTS"
+
+#: fbmstrconstunit.sftsconfigurationname
+msgid "FTS configuration name"
+msgstr "Имя конфигурации FTS"
 
 #: fbmstrconstunit.sftsdictionary
 msgid "FTSDictionary"
@@ -3828,6 +3836,10 @@ msgstr "Тип параметра"
 #: fbmstrconstunit.sparamvalue
 msgid "Param value"
 msgstr "Значение параметра"
+
+#: fbmstrconstunit.sparser
+msgid "Parser"
+msgstr "Cинтаксический анализатор"
 
 #: fbmstrconstunit.spartialindex
 msgid "Partial index"

@@ -103,6 +103,9 @@ end;
 procedure TfbmFTSConfigEditorPage.Localize;
 begin
   inherited Localize;
+  Label1.Caption:=sFTSConfigurationName;
+  RadioButton1.Caption:=sParser;
+  RadioButton2.Caption:=sCopyConfiguration;
 end;
 
 constructor TfbmFTSConfigEditorPage.CreatePage(TheOwner: TComponent;

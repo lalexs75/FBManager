@@ -696,6 +696,10 @@ msgstr ""
 msgid "Copy collumn field title"
 msgstr ""
 
+#: fbmstrconstunit.scopyconfiguration
+msgid "Copy configuration"
+msgstr ""
+
 #: fbmstrconstunit.scopyconnectionstring
 msgid "Copy connection string"
 msgstr ""
@@ -2176,7 +2180,11 @@ msgid "From value"
 msgstr ""
 
 #: fbmstrconstunit.sftsconfig
-msgid "FTSConfig"
+msgid "FTS configuration"
+msgstr ""
+
+#: fbmstrconstunit.sftsconfigurationname
+msgid "FTS configuration name"
 msgstr ""
 
 #: fbmstrconstunit.sftsdictionary
@@ -3697,6 +3705,10 @@ msgstr ""
 
 #: fbmstrconstunit.sparamvalue
 msgid "Param value"
+msgstr ""
+
+#: fbmstrconstunit.sparser
+msgid "Parser"
 msgstr ""
 
 #: fbmstrconstunit.spartialindex

@@ -358,7 +358,7 @@ end;
 
 class function TPGFTSConfigurations.DBClassTitle: string;
 begin
-  Result:='Configurations';
+  Result:='FTS Configurations';
 end;
 
 procedure TPGFTSConfigurations.SetSqlAssistentData(const List: TStrings);
