@@ -213,6 +213,8 @@ constructor TfbmDomainMainEditorFrame.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  PageControl1.ActivePageIndex:=0;
+  TabSheet6.TabVisible:=feArrayDomain in DBObject.OwnerDB.SQLEngileFeatures;
   LoadStdTypes;
   { TODO : Необходимо переделять для общего случая }
   //FillFieldTypeStr(cbDomainType.Items);

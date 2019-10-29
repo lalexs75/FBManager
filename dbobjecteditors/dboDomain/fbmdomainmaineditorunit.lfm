@@ -9,9 +9,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 13
+    Height = 17
     Top = 6
-    Width = 64
+    Width = 85
     BorderSpacing.Around = 6
     Caption = 'Domain name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = edtDomainName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 13
-    Top = 52
-    Width = 24
+    Height = 17
+    Top = 69
+    Width = 29
     BorderSpacing.Around = 6
     Caption = 'Type'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = edtTypeDesc
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 13
-    Top = 146
-    Width = 19
+    Height = 17
+    Top = 175
+    Width = 24
     BorderSpacing.Around = 6
     Caption = 'Size'
     ParentColor = False
@@ -46,9 +46,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = edtTypeDesc
     AnchorSideTop.Side = asrBottom
     Left = 108
-    Height = 13
-    Top = 146
-    Width = 25
+    Height = 17
+    Top = 175
+    Width = 32
     BorderSpacing.Left = 12
     Caption = 'Scale'
     ParentColor = False
@@ -58,9 +58,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = edtSize
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 13
-    Top = 192
-    Width = 41
+    Height = 17
+    Top = 238
+    Width = 50
     BorderSpacing.Around = 6
     Caption = 'Char set'
     ParentColor = False
@@ -71,9 +71,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = cbCharSets
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 13
-    Top = 238
-    Width = 33
+    Height = 17
+    Top = 300
+    Width = 44
     BorderSpacing.Around = 6
     Caption = 'Collate'
     ParentColor = False
@@ -86,9 +86,9 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 21
+    Height = 34
     Hint = 'Enter new domain name...'
-    Top = 25
+    Top = 29
     Width = 586
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -100,10 +100,10 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 542
-    Height = 17
-    Top = 71
-    Width = 56
+    Left = 523
+    Height = 23
+    Top = 92
+    Width = 75
     Anchors = [akTop, akRight]
     BorderSpacing.Left = 12
     BorderSpacing.Right = 6
@@ -115,8 +115,8 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 21
-    Top = 165
+    Height = 34
+    Top = 198
     Width = 84
     BorderSpacing.Around = 6
     MaxValue = 100000000
@@ -127,8 +127,8 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     Left = 114
-    Height = 21
-    Top = 165
+    Height = 34
+    Top = 198
     Width = 80
     BorderSpacing.Around = 6
     MaxValue = 1000000
@@ -142,12 +142,12 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 21
-    Top = 211
+    Height = 33
+    Top = 261
     Width = 586
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 13
+    ItemHeight = 0
     OnChange = cbCharSetsChange
     Style = csDropDownList
     TabOrder = 4
@@ -160,12 +160,12 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 21
-    Top = 257
+    Height = 33
+    Top = 323
     Width = 586
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 13
+    ItemHeight = 0
     Style = csDropDownList
     TabOrder = 5
     Visible = False
@@ -176,13 +176,13 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = cbNotNull
     Left = 12
-    Height = 21
+    Height = 29
     Hint = 'Enter type for new domain'
-    Top = 71
-    Width = 518
+    Top = 92
+    Width = 499
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 13
+    ItemHeight = 0
     Items.Strings = (
       'SMALLINT'
       'INTEGER'
@@ -213,13 +213,13 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     TabOrder = 7
     object TabSheet4: TTabSheet
       Caption = 'Default'
-      ClientHeight = 211
-      ClientWidth = 596
+      ClientHeight = 206
+      ClientWidth = 594
       inline edtDefaultValue: TSynEdit
         Left = 0
-        Height = 211
+        Height = 206
         Top = 0
-        Width = 596
+        Width = 594
         Align = alClient
         Font.Height = -16
         Font.Name = 'courier'
@@ -228,7 +228,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 57
+        Gutter.Width = 61
         Gutter.MouseActions = <        
           item
             ClickCount = ccAny
@@ -668,7 +668,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
             MouseActions = <>
           end
           object TSynGutterLineNumber
-            Width = 17
+            Width = 21
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -745,7 +745,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     end
     object TabSheet5: TTabSheet
       Caption = 'Check'
-      ClientHeight = 203
+      ClientHeight = 206
       ClientWidth = 594
       inline edtCheck: TSynEdit
         Left = 0
@@ -760,7 +760,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
         ParentColor = False
         ParentFont = False
         TabOrder = 0
-        Gutter.Width = 57
+        Gutter.Width = 61
         Gutter.MouseActions = <        
           item
             ClickCount = ccAny
@@ -1200,7 +1200,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
             MouseActions = <>
           end
           object TSynGutterLineNumber
-            Width = 17
+            Width = 21
             MouseActions = <>
             MarkupInfo.Background = clBtnFace
             MarkupInfo.Foreground = clNone
@@ -1287,7 +1287,7 @@ inherited fbmDomainMainEditorFrame: TfbmDomainMainEditorFrame
     AnchorSideRight.Side = asrBottom
     Left = 6
     Height = 42
-    Top = 98
+    Top = 127
     Width = 592
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6

@@ -73,7 +73,8 @@ type
     feInheritedTables,
     feFieldDepsList,
     feDescribeTableConstraint,
-    feArrayFields);
+    feArrayFields,
+    feArrayDomain);
 
   TSQLEngileFeatures = set of TSQLEngileFeature;
 
