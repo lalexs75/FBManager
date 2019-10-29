@@ -545,6 +545,9 @@ resourcestring
   sUnselectAll                      = 'Unselect all';
   sInvertSelections                 = 'Invert selections';
   sInvoker                          = 'Invoker';
+  sINSTEAD                          = 'INSTEAD';
+  sNOTHING                          = 'NOTHING';
+  sRuleEvent                        = 'Rule event';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';

@@ -265,6 +265,10 @@ begin
   Label1.Caption:=sRuleName;
   Label3.Caption:=sRelationName;
   Label2.Caption:=sConditions;
+
+  CheckBox1.Caption:=sINSTEAD;
+  CheckBox2.Caption:=sNOTHING;
+  RadioGroup1.Caption:=sRuleEvent;
 end;
 
 function TPGRuleEditorPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;

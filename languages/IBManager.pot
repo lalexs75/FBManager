@@ -2539,6 +2539,10 @@ msgstr ""
 msgid "Insert/Update"
 msgstr ""
 
+#: fbmstrconstunit.sinstead
+msgid "INSTEAD"
+msgstr ""
+
 #: fbmstrconstunit.sinteger
 msgid "Integer"
 msgstr ""
@@ -3271,6 +3275,10 @@ msgstr ""
 
 #: fbmstrconstunit.snotconnected
 msgid "Not connected..."
+msgstr ""
+
+#: fbmstrconstunit.snothing
+msgid "NOTHING"
 msgstr ""
 
 #: fbmstrconstunit.snotnull
@@ -4358,6 +4366,10 @@ msgstr ""
 
 #: fbmstrconstunit.srule
 msgid "Rule"
+msgstr ""
+
+#: fbmstrconstunit.sruleevent
+msgid "Rule event"
 msgstr ""
 
 #: fbmstrconstunit.srulename

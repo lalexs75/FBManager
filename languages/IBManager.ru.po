@@ -2634,6 +2634,10 @@ msgstr "Вставлено строк : %d"
 msgid "Insert/Update"
 msgstr "Вставить/Изменить"
 
+#: fbmstrconstunit.sinstead
+msgid "INSTEAD"
+msgstr "ВМЕСТО"
+
 #: fbmstrconstunit.sinteger
 msgid "Integer"
 msgstr "Целые числа"
@@ -3395,6 +3399,10 @@ msgstr " - нет шагов для выполнения"
 #: fbmstrconstunit.snotconnected
 msgid "Not connected..."
 msgstr "Не подключено..."
+
+#: fbmstrconstunit.snothing
+msgid "NOTHING"
+msgstr "НИЧЕГО"
 
 #: fbmstrconstunit.snotnull
 msgctxt "fbmstrconstunit.snotnull"
@@ -4511,6 +4519,10 @@ msgctxt "fbmstrconstunit.srule"
 msgid "Rule"
 msgstr "Правило"
 
+#: fbmstrconstunit.sruleevent
+msgid "Rule event"
+msgstr "Правило события"
+
 #: fbmstrconstunit.srulename
 msgctxt "fbmstrconstunit.srulename"
 msgid "Rule name"
@@ -5142,7 +5154,7 @@ msgstr "Интревал сборки мусора"
 
 #: fbmstrconstunit.ssynchronous
 msgid "Synchronous"
-msgstr ""
+msgstr "Синхронный"
 
 #: fbmstrconstunit.ssyncomdescreatedomain
 msgid "Create domain"
@@ -5342,7 +5354,7 @@ msgstr "Проверка"
 
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
-msgstr ""
+msgstr "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*"
 
 #: fbmstrconstunit.stexttosearch
 msgid "Text to search"
