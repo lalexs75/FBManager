@@ -313,6 +313,9 @@ begin
   edtRuleNew.Caption:=sNewRule;
   edtRuleEdit.Caption:=sModifiRule;
   edtRuleDelete.Caption:=sDeleteRule;
+
+  HeaderControl1.Sections[0].Text:=sRule;
+  HeaderControl1.Sections[1].Text:=sDescription;
 end;
 
 end.

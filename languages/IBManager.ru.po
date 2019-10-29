@@ -999,7 +999,7 @@ msgstr "Подключения к БД"
 
 #: fbmstrconstunit.sdatabasestatistic
 msgid "Database statistic"
-msgstr ""
+msgstr "Статистика базы данных"
 
 #: fbmstrconstunit.sdatabaseuser
 msgid "Database user"
@@ -2809,6 +2809,10 @@ msgstr "Загрузить по умолчанию"
 msgid "Load default templates?"
 msgstr "Загрузить шаблон по умолчанию?"
 
+#: fbmstrconstunit.slocal
+msgid "Local"
+msgstr "Локально"
+
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
 msgstr "Локальные переменные"
@@ -3889,6 +3893,10 @@ msgstr "Вставить"
 #: fbmstrconstunit.spastehint
 msgid "Paste text from clipboard"
 msgstr "Вставить из буфера обмена"
+
+#: fbmstrconstunit.spersistent
+msgid "Persistent"
+msgstr "Постоянно"
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
 msgid "Allow change system catalog directly"
@@ -5666,6 +5674,10 @@ msgstr "Неизвестная категория функции - %d"
 msgid "Unlink table"
 msgstr "Убрать связь"
 
+#: fbmstrconstunit.sunloged
+msgid "Unloged"
+msgstr "Не протоколируется"
+
 #: fbmstrconstunit.sunq
 msgid "UNQ"
 msgstr "UNQ"
@@ -6131,4 +6143,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

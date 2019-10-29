@@ -844,6 +844,7 @@ begin
   FieldListGrid.ColumnByFieldName('FIELD_IS_LOCAL').Title.Caption:=sIsLocal;
   FieldListGrid.ColumnByFieldName('FIELD_DESC_EX').Title.Caption:=sDescription;
   FieldListGrid.ColumnByFieldName('FIELD_COLLATE').Title.Caption:=sCollate;
+  FieldListGrid.ColumnByFieldName('FIELD_CHARSET').Title.Caption:=sCharSet;
 
   RxDBGrid1.ColumnByCaption('OBJECT_NAME').Title.Caption:=sObjectName;
   RxDBGrid1.ColumnByCaption('OBJECT_TYPE').Title.Caption:=sObjectType;

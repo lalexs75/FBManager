@@ -404,6 +404,8 @@ resourcestring
   sInheritsTableFrom                = 'Inherits table from';
   sWithOIDs                         = 'With OIDs';
   sTemporary                        = 'Temporary';
+  sPersistent                       = 'Persistent';
+  sUnloged                          = 'Unloged';
   sTruncate                         = 'Truncate';
   sPreserveRows                     = 'Preserve rows';
   sDeleteRows                       = 'Delete rows';
@@ -1193,6 +1195,7 @@ resourcestring
   sItsExample                       = 'Its example';
   sShowDesigner                     = 'Show designer';
   sGlobal                           = 'Global';
+  sLocal                            = 'Local';
   sDisplay                          = 'Display';
   sColor                            = 'Color';
   sDisplayFont                      = 'Display font';

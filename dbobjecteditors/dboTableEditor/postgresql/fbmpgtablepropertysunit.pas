@@ -180,11 +180,17 @@ begin
   CheckBox3.Caption:=sUseDefFillFactor;
   GroupBox1.Caption:=sInheritsTableFrom;
   CheckBox1.Caption:=sWithOIDs;
+
+  RadioGroup3.Items[0]:=sPersistent;
+  RadioGroup3.Items[1]:=sUnloged;
   RadioGroup3.Items[2]:=sTemporary;
-  RadioGroup1.Items.Clear;
-  RadioGroup1.Items.Add(sPreserveRows);
-  RadioGroup1.Items.Add(sDeleteRows);
-  RadioGroup1.Items.Add(sDropTable);
+
+  RadioGroup1.Items[0]:=sPreserveRows;
+  RadioGroup1.Items[1]:=sDeleteRows;
+  RadioGroup1.Items[2]:=sDropTable;
+
+  RadioGroup2.Items[0]:=sGlobal;
+  RadioGroup2.Items[1]:=sLocal;
 end;
 
 function TfbmpgTablePropertysFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL

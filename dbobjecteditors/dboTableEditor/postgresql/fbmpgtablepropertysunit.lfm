@@ -290,14 +290,15 @@ inherited fbmpgTablePropertysFrame: TfbmpgTablePropertysFrame
   end
   object RadioGroup2: TRadioGroup[10]
     AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 291
+    Left = 294
     Height = 48
     Top = 35
-    Width = 276
+    Width = 273
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
     AutoSize = True
@@ -310,7 +311,7 @@ inherited fbmpgTablePropertysFrame: TfbmpgTablePropertysFrame
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 46
-    ClientWidth = 274
+    ClientWidth = 271
     ItemIndex = 0
     Items.Strings = (
       'Global'

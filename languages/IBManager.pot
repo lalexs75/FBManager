@@ -2706,6 +2706,10 @@ msgstr ""
 msgid "Load default templates?"
 msgstr ""
 
+#: fbmstrconstunit.slocal
+msgid "Local"
+msgstr ""
+
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
 msgstr ""
@@ -3754,6 +3758,10 @@ msgstr ""
 
 #: fbmstrconstunit.spastehint
 msgid "Paste text from clipboard"
+msgstr ""
+
+#: fbmstrconstunit.spersistent
+msgid "Persistent"
 msgstr ""
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
@@ -5469,6 +5477,10 @@ msgstr ""
 
 #: fbmstrconstunit.sunlinktable
 msgid "Unlink table"
+msgstr ""
+
+#: fbmstrconstunit.sunloged
+msgid "Unloged"
 msgstr ""
 
 #: fbmstrconstunit.sunq
