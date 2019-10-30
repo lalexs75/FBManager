@@ -1,6 +1,6 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
-  Height = 839
+  Height = 873
   HorizontalOffset = 694
   VerticalOffset = 128
   Width = 1081
@@ -761,32 +761,6 @@ object pgSqlTextModule: TpgSqlTextModule
       ''
     )
   end
-  object pgFTsParsers: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 200
-    Top = 680
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f74735f7061727365722e6f696420617320696e7465676572292c'
-      '2020636173742870675f74735f7061727365722e7072736e616d65737061636520617320696e7465676572292c'
-      '202070675f74735f7061727365722e7072736e616d652c'
-      '2020636173742870675f74735f7061727365722e6f696420617320696e7465676572292c'
-      '202070675f74735f7061727365722e7072736c65787479706520617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f74735f7061727365722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f74735f7061727365722729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f74735f706172736572'
-      '6f72646572206279'
-      '202070675f74735f7061727365722e7072736e616d65'
-      ''
-    )
-  end
   object pgFtsTempl: TStrHolder
     Capacity = 64
     Macros = <>
@@ -912,24 +886,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020202070675f74735f636f6e6669672e6366676e616d657370616365203d203a6e616d657370616365'
       '2020616e64'
       '2020202070675f74735f636f6e6669672e6f6964203d203a6f6964'
-    )
-  end
-  object pgFTsParsersList: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 200
-    Top = 744
-    StrData = (
-      ''
-      '73656c656374'
-      '202063617365207768656e20737562737472696e672870675f6e616d6573706163652e6e73706e616d652066726f6d203120666f72203329203d202770675f27207468656e20272720656c73652070675f6e616d6573706163652e6e73706e616d65207c7c272e2720656e64207c7c'
-      '202070675f74735f7061727365722e7072736e616d65206173207072736e616d65'
-      '66726f6d'
-      '202070675f74735f706172736572'
-      '2020696e6e6572206a6f696e2070675f6e616d657370616365206f6e202870675f6e616d6573706163652e6f6964203d2070675f74735f7061727365722e7072736e616d65737061636529'
-      '6f72646572206279'
-      '202070675f74735f7061727365722e7072736e616d65'
-      ''
     )
   end
   object sqlSequence_v10: TStrHolder
@@ -2048,5 +2004,49 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 37
     Top = 184
+  end
+  object pgFTsParsers: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'pgFTsParsers'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_ts_parser.oid as integer),'
+          '  cast(pg_ts_parser.prsnamespace as integer),'
+          '  pg_ts_parser.prsname,'
+          '  cast(pg_ts_parser.oid as integer),'
+          '  pg_ts_parser.prslextype as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_ts_parser.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_ts_parser'') as description'
+          'from'
+          '  pg_ts_parser'
+          'order by'
+          '  pg_ts_parser.prsname'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFTsParsersList'
+        Lines.Strings = (
+          'select'
+          '  case when substring(pg_namespace.nspname from 1 for 3) = ''pg_'' then '''' else pg_namespace.nspname ||''.'' end ||'
+          '  pg_ts_parser.prsname as prsname'
+          'from'
+          '  pg_ts_parser'
+          '  inner join pg_namespace on (pg_namespace.oid = pg_ts_parser.prsnamespace)'
+          'order by'
+          '  pg_ts_parser.prsname'
+          ''
+          ''
+        )
+      end>
+    Left = 112
+    Top = 744
   end
 end

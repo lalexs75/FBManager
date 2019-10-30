@@ -138,15 +138,18 @@ type
 
   TPGFTSParsers = class(TDBObject)
   private
+    FOID: integer;
   protected
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
+    property OID:integer read FOID;
   end;
 
   TPGFTSTemplate = class(TDBObject)
@@ -163,7 +166,7 @@ type
   end;
 implementation
 
-uses pgSqlTextUnit, pg_SqlParserUnit;
+uses fbmStrConstUnit, pgSqlTextUnit, pg_SqlParserUnit;
 
 { TPGFTSTemplate }
 
@@ -215,10 +218,28 @@ begin
   Result:=FmtObjName((OwnerRoot as TPGFTSParsersRoot).Schema, Self)
 end;
 
+procedure TPGFTSParsers.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  (*  Statistic.AddValue(sFileFolder, FFolderName);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery('select pg_tablespace_size('+IntToStr(FOID)+') as TableSpaceSize');
+    Q.Open;
+    if Q.RecordCount>0 then
+    begin
+      Statistic.AddValue(sTableSpaceSize, RxPrettySizeName(Q.FieldByName('TableSpaceSize').AsLargeInt));
+    end;
+    Q.Free; *)
+end;
+
 constructor TPGFTSParsers.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+  end;
 end;
 
 destructor TPGFTSParsers.Destroy;
@@ -378,7 +399,7 @@ procedure TPGFTSConfigurations.FillParsersList(const AList: TStrings);
 var
   FQuery: TZQuery;
 begin
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFTsParsersList.ExpandMacros);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFTsParsers['pgFTsParsersList']);
   FQuery.Open;
   while not FQuery.EOF do
   begin
@@ -422,7 +443,7 @@ end;
 
 function TPGFTSParsersRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFTsParsers.Strings.Text;
+  Result:=pgSqlTextModule.pgFTsParsers['pgFTsParsers'];
  end;
 
 function TPGFTSParsersRoot.DBMSValidObject(AItem: TDBItem): boolean;

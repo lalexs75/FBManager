@@ -4189,7 +4189,7 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsBegin(pgSqlTextModule.pgFtsConfigs.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFtsDicts.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFTsParsers.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.pgFTsParsers['pgFTsParsers']);
   RefreshObjectsBegin(pgSqlTextModule.pgFtsTempl.Strings.Text);
 end;
 
@@ -4207,7 +4207,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsEnd(pgSqlTextModule.pgFtsConfigs.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgFtsDicts.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFTsParsers.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.pgFTsParsers['pgFTsParsers']);
   RefreshObjectsEnd(pgSqlTextModule.pgFtsTempl.Strings.Text);
 end;
 

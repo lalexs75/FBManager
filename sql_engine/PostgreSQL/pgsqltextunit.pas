@@ -34,6 +34,7 @@ type
   TpgSqlTextModule = class(TDataModule)
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
+    pgFTsParsers: TRxTextHolder;
     sPGIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
@@ -75,7 +76,6 @@ type
     sPGTasks: TStrHolder;
     pgFtsConfigs: TStrHolder;
     pgFtsDicts: TStrHolder;
-    pgFTsParsers: TStrHolder;
     pgFtsTempl: TStrHolder;
     pgExtensions: TStrHolder;
     pgCollations: TStrHolder;
@@ -83,7 +83,6 @@ type
     pgFSUserMapping: TStrHolder;
     ttt1: TStrHolder;
     pgFtsConfig: TStrHolder;
-    pgFTsParsersList: TStrHolder;
     sqlPgConstFK: TStrHolder;
   private
     { private declarations }

@@ -276,7 +276,7 @@ begin
     );
   RegisterObjEditor(TPGFTSParsers,
       [TfbmObjectEditorDescriptionFrame],
-      [TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+      [TfbmObjectEditorDescriptionFrame, TfbmTableStatisticFrame, TfbmDDLPage]
     );
   RegisterObjEditor(TPGFTSTemplate,
       [TfbmObjectEditorDescriptionFrame],
