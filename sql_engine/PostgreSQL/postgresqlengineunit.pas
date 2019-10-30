@@ -1272,7 +1272,6 @@ uses
   rxstrutils, pg_tasks, pgSQLEngineFTS;
 
 type
-  TSQLParamState = (spsNormal, spsNew, spsOld);
   THackZQuery = class(TZQuery);
   THackZAbstractCachedResultSet = class(TZAbstractCachedResultSet);
 

@@ -42,6 +42,7 @@ type
   TUIShowSysObjects = set of TUIShowSysObject;
 
   TUIParam = (upSqlEditor, upUserName, upPassword, upLocal, upRemote);
+  TSQLParamState = (spsNormal, spsNew, spsOld);
 
   TUIParams = set of TUIParam;
 
