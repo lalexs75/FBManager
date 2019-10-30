@@ -1059,24 +1059,10 @@ begin
       begin
         if FD.FieldPK and FD.FieldAutoInc then
         begin
-{          F:=quIns.FieldByName(FD.FieldName);
-          if F.DataType in IntegerDataTypes then}
+          F:=FDataSet.FindField(FD.FieldName);
+          if Assigned(F) then
             RA.SetInt(F.Index+1, quIns.Fields[0].AsInteger);
-            Break;
-{          else
-          if F.DataType in StringTypes then
-            RA.SetString(F.Index+1, F.AsString)
-          else
-          if F.DataType = ftTime then
-            RA.SetTime(F.Index+1, F.AsDateTime)
-          else
-          if F.DataType in [ftDateTime, ftTimeStamp] then
-            RA.SetTimestamp(F.Index+1, F.AsDateTime)
-          else
-          if F.DataType = ftDate then
-            RA.SetDate(F.Index+1, F.AsDateTime)
-          else
-            raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);}
+          Break;
         end;
       end;
       quIns.Close;
@@ -1382,6 +1368,7 @@ var
   F: TDBField;
 begin
   if not Assigned(FCmdCreateTable) then Exit;
+  inherited RefreshConstraintPrimaryKey;
   for C in FCmdCreateTable.SQLConstraints do
   begin
     if C.ConstraintType = ctPrimaryKey then
@@ -1391,6 +1378,7 @@ begin
         F:=Fields.FieldByName(CF.Caption);
         if Assigned(F) then
           F.FieldPK:=true;
+        Inc(FPKCount);
       end;
     end;
   end;
