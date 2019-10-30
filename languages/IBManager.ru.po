@@ -2271,15 +2271,15 @@ msgid "FTS configuration name"
 msgstr "Имя конфигурации FTS"
 
 #: fbmstrconstunit.sftsdictionary
-msgid "FTSDictionary"
+msgid "FTS dictionary"
 msgstr ""
 
 #: fbmstrconstunit.sftsparser
-msgid "FTSParser"
+msgid "FTS parser"
 msgstr ""
 
 #: fbmstrconstunit.sftstemplate
-msgid "FTSTemplate"
+msgid "FTS template"
 msgstr ""
 
 #: fbmstrconstunit.sfucntnotcomplete
@@ -6167,3 +6167,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

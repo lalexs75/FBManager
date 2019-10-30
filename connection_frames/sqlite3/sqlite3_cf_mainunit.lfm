@@ -32,6 +32,7 @@ inherited ConnectionSQLite3MainPage: TConnectionSQLite3MainPage
     MaxLength = 0
     Spacing = 0
     TabOrder = 0
+    OnExit = EditDBNameExit
     Text = 'EditDBName'
   end
   object Label5: TLabel[2]

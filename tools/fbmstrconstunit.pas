@@ -1097,9 +1097,9 @@ resourcestring
   sPolicy                           = 'Policy';
   sAutoIncFields                    = 'AutoIncFields';
   sFTSConfig                        = 'FTS configuration';
-  sFTSDictionary                    = 'FTSDictionary';
-  sFTSParser                        = 'FTSParser';
-  sFTSTemplate                      = 'FTSTemplate';
+  sFTSDictionary                    = 'FTS dictionary';
+  sFTSParser                        = 'FTS parser';
+  sFTSTemplate                      = 'FTS template';
   sTransform                        = 'Transform';
   sOperator                         = 'Operator';
   sOperatorClass                    = 'OperatorClass';

@@ -37,6 +37,7 @@ type
     EditDBName: TFileNameEdit;
     Label1: TLabel;
     Label5: TLabel;
+    procedure EditDBNameExit(Sender: TObject);
   private
     FSQLEngine:TSQLEngineSQLite3;
   public
@@ -55,6 +56,12 @@ uses LazUTF8, LazFileUtils, fbmStrConstUnit, rxAppUtils;
 {$R *.lfm}
 
 { TConnectionSQLite3MainPage }
+
+procedure TConnectionSQLite3MainPage.EditDBNameExit(Sender: TObject);
+begin
+  if (Trim(edtAliasName.Text) = '') and (Trim(EditDBName.Text)<>'') then
+    edtAliasName.Text:=ExtractFileNameOnly(Trim(EditDBName.Text));
+end;
 
 procedure TConnectionSQLite3MainPage.Localize;
 begin

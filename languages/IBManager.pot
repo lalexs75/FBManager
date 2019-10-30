@@ -2188,15 +2188,15 @@ msgid "FTS configuration name"
 msgstr ""
 
 #: fbmstrconstunit.sftsdictionary
-msgid "FTSDictionary"
+msgid "FTS dictionary"
 msgstr ""
 
 #: fbmstrconstunit.sftsparser
-msgid "FTSParser"
+msgid "FTS parser"
 msgstr ""
 
 #: fbmstrconstunit.sftstemplate
-msgid "FTSTemplate"
+msgid "FTS template"
 msgstr ""
 
 #: fbmstrconstunit.sfucntnotcomplete
