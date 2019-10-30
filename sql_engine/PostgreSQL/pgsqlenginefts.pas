@@ -143,10 +143,12 @@ type
     function InternalGetDDLCreate: string; override;
     function GetCaptionFullPatch: string; override;
     procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
+    function RenameObject(ANewName:string):Boolean; override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     property OID:integer read FOID;
@@ -232,6 +234,11 @@ begin
     Q.Free; *)
 end;
 
+function TPGFTSParsers.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 constructor TPGFTSParsers.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
@@ -250,6 +257,32 @@ end;
 procedure TPGFTSParsers.RefreshObject;
 begin
   inherited RefreshObject;
+end;
+
+function TPGFTSParsers.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterTextSearch;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterTextSearch.Create(nil);
+(*    FCmd.Name:=Caption;
+    FCmd.SchemaName:=SchemaName;
+    FCmd.NewName:=ANewName;
+    FieldsIN.SaveToSQLFields(FCmd.Params);
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+    end; *)
+    Result:=False;
+  end;
 end;
 
 class function TPGFTSParsers.DBClassTitle: string;

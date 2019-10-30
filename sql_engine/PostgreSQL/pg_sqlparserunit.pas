@@ -2093,14 +2093,22 @@ type
   end;
 
   { TPGSQLAlterTextSearch }
+  TAlterTextSearchCommand = (aftsNone, aftsRename, aftsSetShema);
 
-  TPGSQLAlterTextSearch = class(TSQLCommandAbstract)
+  TPGSQLAlterTextSearch = class(TSQLCommandDDL)
   private
+    FAlterCommand: TAlterTextSearchCommand;
+    FNewName: string;
+    FNewSchema: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property AlterCommand:TAlterTextSearchCommand read FAlterCommand write FAlterCommand;
+    property NewName:string read FNewName write FNewName;
+    property NewSchema:string read FNewSchema write FNewSchema;
   end;
 
   { TPGSQLCreateTextSearchConfig }
@@ -9940,24 +9948,21 @@ end;
 
 procedure TPGSQLAlterTextSearch.InitParserTree;
 var
-  T, FSQLTokens: TSQLTokenRecord;
+  T, FSQLTokens, TSearch, TParser1, TSch, TName, TParser2,
+    TParser3: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER TEXT SEARCH }
   (*
-  ALTER TEXT SEARCH CONFIGURATION name
-      ADD MAPPING FOR token_type [, ... ] WITH dictionary_name [, ... ]
-  ALTER TEXT SEARCH CONFIGURATION name
-      ALTER MAPPING FOR token_type [, ... ] WITH dictionary_name [, ... ]
-  ALTER TEXT SEARCH CONFIGURATION name
-      ALTER MAPPING REPLACE old_dictionary WITH new_dictionary
-  ALTER TEXT SEARCH CONFIGURATION name
-      ALTER MAPPING FOR token_type [, ... ] REPLACE old_dictionary WITH new_dictionary
-  ALTER TEXT SEARCH CONFIGURATION name
-      DROP MAPPING [ IF EXISTS ] FOR token_type [, ... ]
+  ALTER TEXT SEARCH CONFIGURATION name ADD MAPPING FOR token_type [, ... ] WITH dictionary_name [, ... ]
+  ALTER TEXT SEARCH CONFIGURATION name ALTER MAPPING FOR token_type [, ... ] WITH dictionary_name [, ... ]
+  ALTER TEXT SEARCH CONFIGURATION name ALTER MAPPING REPLACE old_dictionary WITH new_dictionary
+  ALTER TEXT SEARCH CONFIGURATION name ALTER MAPPING FOR token_type [, ... ] REPLACE old_dictionary WITH new_dictionary
+  ALTER TEXT SEARCH CONFIGURATION name DROP MAPPING [ IF EXISTS ] FOR token_type [, ... ]
   ALTER TEXT SEARCH CONFIGURATION name RENAME TO new_name
   ALTER TEXT SEARCH CONFIGURATION name OWNER TO new_owner
   ALTER TEXT SEARCH CONFIGURATION name SET SCHEMA new_schema
   *)
+
   (*
   ALTER TEXT SEARCH DICTIONARY name (
       option [ = value ] [, ... ]
@@ -9966,34 +9971,72 @@ begin
   ALTER TEXT SEARCH DICTIONARY name OWNER TO new_owner
   ALTER TEXT SEARCH DICTIONARY name SET SCHEMA new_schema
   *)
-  (*
-  ALTER TEXT SEARCH PARSER name RENAME TO new_name
-  ALTER TEXT SEARCH PARSER name SET SCHEMA new_schema
-  *)
 
   (*
   ALTER TEXT SEARCH TEMPLATE name RENAME TO new_name
   ALTER TEXT SEARCH TEMPLATE name SET SCHEMA new_schema
   *)
 
+  (*
+  ALTER TEXT SEARCH PARSER name RENAME TO new_name
+  ALTER TEXT SEARCH PARSER name SET SCHEMA new_schema
+  *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TEXT', []);
-  T:=AddSQLTokens(stKeyword, T, 'SEARCH', [toFindWordLast]);
+  TSearch:=AddSQLTokens(stKeyword, T, 'SEARCH', [toFindWordLast]);
+  TParser1:=AddSQLTokens(stKeyword, TSearch, 'PARSER', [], 10);
+    TSch:=AddSQLTokens(stIdentificator, TParser1, '', [], 1);
+    T:=AddSQLTokens(stSymbol, TSch, '.', []);
+    TName:=AddSQLTokens(stIdentificator, T, '', [], 2);
+  TParser2:=AddSQLTokens(stKeyword, [TSch, TName], 'RENAME', []);
+  TParser2:=AddSQLTokens(stKeyword, TParser2, 'TO', [], 3);
+    AddSQLTokens(stIdentificator, TParser2, '', [], 4);
+  TParser3:=AddSQLTokens(stKeyword, [TSch, TName], 'SET', []);
+  TParser3:=AddSQLTokens(stKeyword, TParser3, 'SCHEMA', [], 5);
+    AddSQLTokens(stIdentificator, TParser3, '', [], 6);
 end;
 
 procedure TPGSQLAlterTextSearch.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    10:ObjectKind:=okFTSParser;
+    3:FAlterCommand:=aftsRename;
+    4:FNewName:=AWord;
+    5:FAlterCommand:=aftsSetShema;
+    6:FNewSchema:=AWord;
+  end;
 end;
 
 procedure TPGSQLAlterTextSearch.MakeSQL;
 var
   Result: String;
 begin
-  Result:='ALTER TEXT SEARCH';
+  Result:='ALTER ' + PGObjectNames[ObjectKind] + ' ' + FullName;
+  case AlterCommand of
+    aftsRename:Result:=Result + ' RENAME TO ' + FNewName;
+    aftsSetShema:Result:=Result + ' SET SCHEMA ' + FNewSchema;
+  end;
   AddSQLCommand(Result);
 end;
+
+procedure TPGSQLAlterTextSearch.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterTextSearch then
+  begin
+    FAlterCommand:=TPGSQLAlterTextSearch(ASource).AlterCommand;
+    FNewName:=TPGSQLAlterTextSearch(ASource).NewName;
+    FNewSchema:=TPGSQLAlterTextSearch(ASource).NewSchema;
+  end;
+  inherited Assign(ASource);
+end;
+
 (*
 { TPGSQLDropUser }
 
