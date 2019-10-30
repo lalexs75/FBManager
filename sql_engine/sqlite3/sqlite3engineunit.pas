@@ -27,7 +27,8 @@ interface
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, DB, ZConnection, ZDataset,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, sqlObjects, ZSqlUpdate,
-  sqlite3_SqlParserUnit, ZSqlProcessor, contnrs, SQLEngineInternalToolsUnit;
+  sqlite3_SqlParserUnit, ZSqlProcessor, ZDbcCache, contnrs,
+  SQLEngineInternalToolsUnit;
 
 type
   TSQLEngineSQLite3 = class;
@@ -95,6 +96,8 @@ type
     FCmdCreateTable:TSQLite3SQLCreateTable;
     procedure InternalCreateDLL(var SQLLines: TStringList; const ATableName: string);
     procedure SetIntSQL(ASql:string);
+    procedure ZUpdateSQLBeforeInsertSQLStatement(const Sender: TObject;
+      StatementIndex: Integer; out Execute: Boolean);
   protected
     procedure SetState(const AValue: TDBObjectState);override;
     function InternalGetDDLCreate: string; override;
@@ -298,6 +301,7 @@ type
     procedure SetSqlAssistentData(const List: TStrings); override;
     procedure FillCharSetList(const List: TStrings); override;
     function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
+    function GetSQLQuery(ASql:string):TZQuery;
     function ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;override;
     function SQLPlan(aDataSet:TDataSet):string;override;
     function GetQueryControl:TSQLQueryControl;override;
@@ -313,7 +317,11 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit;
+uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit, ZDbcCachedResultSet;
+
+type
+  THackZQuery = class(TZQuery);
+  THackZAbstractCachedResultSet = class(TZAbstractCachedResultSet);
 
 { TSystemTablesRoot }
 
@@ -997,6 +1005,86 @@ begin
     raise Exception.Create(FCmdCreateTable.ErrorMessage + '(' + FInternalSQL + ')');
 end;
 
+procedure TSQLite3Table.ZUpdateSQLBeforeInsertSQLStatement(
+  const Sender: TObject; StatementIndex: Integer; out Execute: Boolean);
+var
+  RA: TZRowAccessor;
+  ICRS: IZCachedResultSet;
+  DCRS: TZAbstractCachedResultSet;
+  S1, S2, S: String;
+  FD: TDBField;
+  F: TField;
+  quIns: TZQuery;
+  P: TParam;
+begin
+  RA:=nil;
+
+  ICRS:=THackZQuery(FDataSet).CachedResultSet;
+  if ICRS is TZAbstractCachedResultSet then
+  begin
+    DCRS:=ICRS as TZAbstractCachedResultSet;
+    RA:=THackZAbstractCachedResultSet(DCRS).NewRowAccessor;
+    if Assigned(RA) then
+    begin
+      S1:='';
+      S2:='';
+      for FD in Fields do
+      begin
+        F:=FDataSet.FieldByName(FD.FieldName);
+        if not F.IsNull then
+        begin
+          if S1<>'' then
+          begin
+            S1:=S1+ ', ';
+            S2:=S2+ ', ';
+          end;
+          S1:=S1 + FD.FieldName;
+          S2:=S2 +':' + FD.FieldName;
+        end;
+      end;
+
+      S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+')'; // returning '+MakeSQLInsertFields(false);
+      quIns:=TSQLEngineSQLite3(OwnerDB).GetSQLQuery(S);
+      for F in FDataSet.Fields do
+      begin
+        P:=quIns.Params.FindParam(F.FieldName);
+        if Assigned(P) then
+          P.Assign(F);
+      end;
+      quIns.ExecSQL;
+
+      quIns:=TSQLEngineSQLite3(OwnerDB).GetSQLQuery('select last_insert_rowid()');
+      quIns.Open;
+      for FD in Fields do
+      begin
+        if FD.FieldPK and FD.FieldAutoInc then
+        begin
+{          F:=quIns.FieldByName(FD.FieldName);
+          if F.DataType in IntegerDataTypes then}
+            RA.SetInt(F.Index+1, quIns.Fields[0].AsInteger);
+            Break;
+{          else
+          if F.DataType in StringTypes then
+            RA.SetString(F.Index+1, F.AsString)
+          else
+          if F.DataType = ftTime then
+            RA.SetTime(F.Index+1, F.AsDateTime)
+          else
+          if F.DataType in [ftDateTime, ftTimeStamp] then
+            RA.SetTimestamp(F.Index+1, F.AsDateTime)
+          else
+          if F.DataType = ftDate then
+            RA.SetDate(F.Index+1, F.AsDateTime)
+          else
+            raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);}
+        end;
+      end;
+      quIns.Close;
+      Execute:=false;
+    end;
+  end;
+end;
+
 procedure TSQLite3Table.SetState(const AValue: TDBObjectState);
 begin
   inherited SetState(AValue);
@@ -1369,7 +1457,7 @@ end;
 
 function TSQLite3Table.DataSet(ARecCountLimit: Integer): TDataSet;
 
-function MakeSQLWhere:string;
+function MakeSQLWhere(ASQLParamState:TSQLParamState):string;
 var
   F: TDBField;
 begin
@@ -1379,7 +1467,13 @@ begin
     begin
       if Result<>'' then
         Result:=Result + ' and ';
-      Result:=Result + '('+F.FieldName + ' = :old_' + F.FieldName+')';
+      case ASQLParamState of
+        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :new_' + F.FieldName+')';
+        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :old_' + F.FieldName+')';
+      else
+        //spsNormal
+        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + F.FieldName+')';
+      end;
     end;
   if Result <> '' then
     Result:= ' where '+Result;
@@ -1420,9 +1514,20 @@ begin
       FDataSet.SQL.Text:=FDataSet.SQL.Text+' limit '+IntToStr(ARecCountLimit);
 }
     ZUpdateSQL.InsertSQL.Text:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ') values('+MakeSQLInsertFields(true)+')';
-    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere;
-    ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere;
-    ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere;
+    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere(spsOld);
+    //ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsOld);
+
+    if FPKCount > 0 then
+    begin
+      ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsNew);
+      ZUpdateSQL.BeforeInsertSQLStatement:=@ZUpdateSQLBeforeInsertSQLStatement;
+    end
+    else
+    begin
+      ZUpdateSQL.RefreshSQL.Clear;
+      ZUpdateSQL.BeforeInsertSQLStatement:=nil;
+    end;
   end;
   Result:=FDataSet;
 end;
@@ -1752,10 +1857,18 @@ end;
 function TSQLEngineSQLite3.OpenDataSet(Sql: string; AOwner: TComponent
   ): TDataSet;
 begin
-  Result:=TZQuery.Create(AOwner);
+(*  Result:=TZQuery.Create(AOwner);
   TZQuery(Result).Connection:=Connection;
-  TZQuery(Result).SQL.Text:=Sql;
+  TZQuery(Result).SQL.Text:=Sql; *)
+  Result:=GetSQLQuery(Sql);
   Result.Active:=true;
+end;
+
+function TSQLEngineSQLite3.GetSQLQuery(ASql: string): TZQuery;
+begin
+  Result:=TZQuery.Create(nil);
+  Result.Connection:=FConnection;
+  Result.SQL.Text:=ASql;
 end;
 
 function TSQLEngineSQLite3.ExecSQL(const Sql: string;
