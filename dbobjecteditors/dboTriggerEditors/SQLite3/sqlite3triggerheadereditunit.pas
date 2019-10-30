@@ -306,6 +306,7 @@ begin
   cbOnEvent.Items[0]:=sInsert;
   cbOnEvent.Items[1]:=sUpdate;
   cbOnEvent.Items[2]:=sDelete;
+  CheckBox1.Caption:=sForEachRow;
 end;
 
 function TSQLite3TriggerHeaderEditFrame.PageName: string;

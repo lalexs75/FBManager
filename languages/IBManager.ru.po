@@ -2169,6 +2169,10 @@ msgstr "Размер шрифта"
 msgid "Forced write"
 msgstr "Принудительная запись"
 
+#: fbmstrconstunit.sforeachrow
+msgid "For each row"
+msgstr "Для всех строк"
+
 #: fbmstrconstunit.sforeground
 msgid "Foreground"
 msgstr "Цвет"
@@ -2272,15 +2276,15 @@ msgstr "Имя конфигурации FTS"
 
 #: fbmstrconstunit.sftsdictionary
 msgid "FTS dictionary"
-msgstr ""
+msgstr "Словарь FTS"
 
 #: fbmstrconstunit.sftsparser
 msgid "FTS parser"
-msgstr ""
+msgstr "Cинтаксический анализатор FTS"
 
 #: fbmstrconstunit.sftstemplate
 msgid "FTS template"
-msgstr ""
+msgstr "Шаблон FTS"
 
 #: fbmstrconstunit.sfucntnotcomplete
 msgid "Function not complete..."
@@ -6167,4 +6171,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

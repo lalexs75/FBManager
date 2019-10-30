@@ -2087,6 +2087,10 @@ msgstr ""
 msgid "Forced write"
 msgstr ""
 
+#: fbmstrconstunit.sforeachrow
+msgid "For each row"
+msgstr ""
+
 #: fbmstrconstunit.sforeground
 msgid "Foreground"
 msgstr ""

@@ -551,6 +551,7 @@ resourcestring
   sFTSConfigurationName             = 'FTS configuration name';
   sParser                           = 'Parser';
   sCopyConfiguration                = 'Copy configuration';
+  sForEachRow                       = 'For each row';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';
