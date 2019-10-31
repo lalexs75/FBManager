@@ -523,11 +523,14 @@ type
     procedure c499CreateTable39;
     procedure c500CreateTable40;
     procedure c501CreateAggregate8;
-end;
+    procedure c503AlterTextSearchParser3; //ALTER TEXT SEARCH PARSER — изменить определение анализатора текстового поиска
+    procedure c504AlterTextSearchParser4;
+  end;
 
   { TPGSQLParserData }
 
   TPGSQLParserData= class(TDataModule)
+    sFTS: TRxTextHolder;
     sDataBase: TRxTextHolder;
     sFunctions: TRxTextHolder;
     sAggregate: TRxTextHolder;
@@ -828,6 +831,16 @@ end;
 procedure TPGSQLParserTest.c501CreateAggregate8;
 begin
   DoTestSQL(PGSQLParserData.sAggregate['CreateAggregate8']);
+end;
+
+procedure TPGSQLParserTest.c503AlterTextSearchParser3;
+begin
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchParser3']);
+end;
+
+procedure TPGSQLParserTest.c504AlterTextSearchParser4;
+begin
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchParser4']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;
@@ -2341,82 +2354,82 @@ end;
 
 procedure TPGSQLParserTest.c294AlterTextSearchConfiguration;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchConfiguration1']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchConfiguration1']);
 end;
 
 procedure TPGSQLParserTest.c295AlterTextSearchDictionary1;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchDictionary1']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchDictionary1']);
 end;
 
 procedure TPGSQLParserTest.c296AlterTextSearchDictionary2;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchDictionary2']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchDictionary2']);
 end;
 
 procedure TPGSQLParserTest.c297AlterTextSearchDictionary3;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchDictionary3']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchDictionary3']);
 end;
 
 procedure TPGSQLParserTest.c298AlterTextSearchParser1;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchParser1']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchParser1']);
 end;
 
 procedure TPGSQLParserTest.c299AlterTextSearchParser2;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchParser2']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchParser2']);
 end;
 
 procedure TPGSQLParserTest.c300AlterTextSearchTemplate1;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchTemplate1']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchTemplate1']);
 end;
 
 procedure TPGSQLParserTest.c301AlterTextSearchTemplate2;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['AlterTextSearchTemplate2']);
+  DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchTemplate2']);
 end;
 
 procedure TPGSQLParserTest.c302CreateTextSearchConfiguration;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['sCreateTextSearchConfiguration1']);
+  DoTestSQL(PGSQLParserData.sFTS['CreateTextSearchConfiguration1']);
 end;
 
 procedure TPGSQLParserTest.c303CreateTextSearchDictionary;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['CreateTextSearchDictionary1']);
+  DoTestSQL(PGSQLParserData.sFTS['CreateTextSearchDictionary1']);
 end;
 
 procedure TPGSQLParserTest.c304CreateTextSearchParser;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['CreateTextSearchParser1']);
+  DoTestSQL(PGSQLParserData.sFTS['CreateTextSearchParser1']);
 end;
 
 procedure TPGSQLParserTest.c305CreateTextSearchTemplate;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['CreateTextSearchTemplate1']);
+  DoTestSQL(PGSQLParserData.sFTS['CreateTextSearchTemplate1']);
 end;
 
 procedure TPGSQLParserTest.c306DropTextSearchConfiguration;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['DropTextSearchConfiguration1']);
+  DoTestSQL(PGSQLParserData.sFTS['DropTextSearchConfiguration1']);
 end;
 
 procedure TPGSQLParserTest.c307DropTextSearchDictionary;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['DropTextSearchDictionary1']);
+  DoTestSQL(PGSQLParserData.sFTS['DropTextSearchDictionary1']);
 end;
 
 procedure TPGSQLParserTest.c308DropTextSearchParser;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['DropTextSearchParser1']);
+  DoTestSQL(PGSQLParserData.sFTS['DropTextSearchParser1']);
 end;
 
 procedure TPGSQLParserTest.c309DropTextSearchTemplate;
 begin
-  DoTestSQL(PGSQLParserData.sAggregate['DropTextSearchTemplate1']);
+  DoTestSQL(PGSQLParserData.sFTS['DropTextSearchTemplate1']);
 end;
 
 procedure TPGSQLParserTest.c310AlterTablespace1;

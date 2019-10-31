@@ -1,8 +1,8 @@
 object PGSQLParserData: TPGSQLParserData
   OldCreateOrder = False
   Height = 868
-  HorizontalOffset = 403
-  VerticalOffset = 1
+  HorizontalOffset = 417
+  VerticalOffset = 130
   Width = 1016
   object sComment: TRxTextHolder
     Highlighter = rxSynNone
@@ -2694,7 +2694,7 @@ object PGSQLParserData: TPGSQLParserData
           'DROP SCHEMA mystuff CASCADE;'
         )
       end>
-    Left = 32
+    Left = 25
     Top = 409
   end
   object sSystem: TRxTextHolder
@@ -3156,11 +3156,11 @@ object PGSQLParserData: TPGSQLParserData
           'ALTER SYSTEM SET wal_level TO replica;'
         )
       end>
-    Left = 32
-    Top = 496
+    Left = 25
+    Top = 504
   end
   object sAggregate: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'AlterAggregate1'
@@ -3291,117 +3291,6 @@ object PGSQLParserData: TPGSQLParserData
         )
       end    
       item
-        Caption = 'DropTextSearchTemplate1'
-        Lines.Strings = (
-          'DROP TEXT SEARCH TEMPLATE thesaurus;'
-        )
-      end    
-      item
-        Caption = 'DropTextSearchParser1'
-        Lines.Strings = (
-          'DROP TEXT SEARCH PARSER my_parser;'
-        )
-      end    
-      item
-        Caption = 'DropTextSearchDictionary1'
-        Lines.Strings = (
-          'DROP TEXT SEARCH DICTIONARY english;'
-        )
-      end    
-      item
-        Caption = 'DropTextSearchConfiguration1'
-        Lines.Strings = (
-          'DROP TEXT SEARCH CONFIGURATION my_english;'
-        )
-      end    
-      item
-        Caption = 'CreateTextSearchTemplate1'
-        Lines.Strings = (
-          'CREATE TEXT SEARCH TEMPLATE test1 ('
-          '  INIT = tst_func1,'
-          '  LEXIZE = tst_func2'
-          ');'
-        )
-      end    
-      item
-        Caption = 'CreateTextSearchParser1'
-        Lines.Strings = (
-          'CREATE TEXT SEARCH PARSER имя ('
-          '  START = функция_начала ,'
-          '  GETTOKEN = функция_выдачи_фрагмента ,'
-          '  END = функция_окончания ,'
-          '  LEXTYPES = функция_лекс_типов,''+LineEnding+'
-          '  HEADLINE = функция_выдержек'
-          ');'
-        )
-      end    
-      item
-        Caption = 'CreateTextSearchDictionary1'
-        Lines.Strings = (
-          'CREATE TEXT SEARCH DICTIONARY english_ispell ('
-          '  TEMPLATE = ispell,'
-          '  DictFile = english,'
-          '  AffFile = english,'
-          '  StopWords = english'
-          ');'
-        )
-      end    
-      item
-        Caption = 'sCreateTextSearchConfiguration1'
-        Lines.Strings = (
-          'CREATE TEXT SEARCH CONFIGURATION public.english'
-          '(COPY = pg_catalog.english );'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchTemplate1'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH TEMPLATE test1 RENAME TO test2;'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchTemplate2'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH TEMPLATE test2 SET SCHEMA schema1;'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchParser1'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH PARSER test1 RENAME TO test2;'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchParser2'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH PARSER test1 SET SCHEMA schema2;'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchDictionary1'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH DICTIONARY my_dict ( StopWords = newrussian );'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchDictionary2'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH DICTIONARY my_dict ( language = dutch, StopWords );'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchDictionary3'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH DICTIONARY my_dict ( dummy );'
-        )
-      end    
-      item
-        Caption = 'AlterTextSearchConfiguration1'
-        Lines.Strings = (
-          'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
-        )
-      end    
-      item
         Caption = 'CreateAggregate8'
         Lines.Strings = (
           'CREATE OR REPLACE AGGREGATE sum(complex)'
@@ -3412,7 +3301,7 @@ object PGSQLParserData: TPGSQLParserData
           ');'
         )
       end>
-    Left = 32
+    Left = 25
     Top = 576
   end
   object sFunctions: TRxTextHolder
@@ -3775,5 +3664,134 @@ object PGSQLParserData: TPGSQLParserData
       end>
     Left = 104
     Top = 169
+  end
+  object sFTS: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'DropTextSearchConfiguration1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH TEMPLATE thesaurus;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchParser1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH PARSER my_parser;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchDictionary1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH DICTIONARY english;'
+        )
+      end    
+      item
+        Caption = 'DropTextSearchConfiguration1'
+        Lines.Strings = (
+          'DROP TEXT SEARCH CONFIGURATION my_english;'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchTemplate1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH TEMPLATE test1 ('
+          '  INIT = tst_func1,'
+          '  LEXIZE = tst_func2'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchParser1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH PARSER имя ('
+          '  START = функция_начала ,'
+          '  GETTOKEN = функция_выдачи_фрагмента ,'
+          '  END = функция_окончания ,'
+          '  LEXTYPES = функция_лекс_типов,''+LineEnding+'
+          '  HEADLINE = функция_выдержек'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchDictionary1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH DICTIONARY english_ispell ('
+          '  TEMPLATE = ispell,'
+          '  DictFile = english,'
+          '  AffFile = english,'
+          '  StopWords = english'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTextSearchConfiguration1'
+        Lines.Strings = (
+          'CREATE TEXT SEARCH CONFIGURATION public.english'
+          '(COPY = pg_catalog.english );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchTemplate1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH TEMPLATE test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchTemplate2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH TEMPLATE name SET SCHEMA new_schema;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER test1 SET SCHEMA schema2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser3'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER aa.test1 RENAME TO test2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchParser4'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH PARSER aa.test1 SET SCHEMA schema2;'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( StopWords = newrussian );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary2'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( language = dutch, StopWords );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchDictionary3'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH DICTIONARY my_dict ( dummy );'
+        )
+      end    
+      item
+        Caption = 'AlterTextSearchConfiguration1'
+        Lines.Strings = (
+          'ALTER TEXT SEARCH CONFIGURATION public.english ALTER MAPPING FOR asciiword WITH english_ispell, english_stem;'
+        )
+      end>
+    Left = 104
+    Top = 248
   end
 end

@@ -2093,13 +2093,11 @@ type
   end;
 
   { TPGSQLAlterTextSearch }
-  TAlterTextSearchCommand = (aftsNone, aftsRename, aftsSetShema);
+  TAlterTextSearchCommand = (aftsNone, aftsRename, aftsSetShema, aftsOwnerTo);
 
   TPGSQLAlterTextSearch = class(TSQLCommandDDL)
   private
     FAlterCommand: TAlterTextSearchCommand;
-    FNewName: string;
-    FNewSchema: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2107,8 +2105,6 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property AlterCommand:TAlterTextSearchCommand read FAlterCommand write FAlterCommand;
-    property NewName:string read FNewName write FNewName;
-    property NewSchema:string read FNewSchema write FNewSchema;
   end;
 
   { TPGSQLCreateTextSearchConfig }
@@ -9949,7 +9945,7 @@ end;
 procedure TPGSQLAlterTextSearch.InitParserTree;
 var
   T, FSQLTokens, TSearch, TParser1, TSch, TName, TParser2,
-    TParser3: TSQLTokenRecord;
+    TParser3, TTemplate1, TDict1, TDict2: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для ALTER TEXT SEARCH }
   (*
@@ -9963,27 +9959,16 @@ begin
   ALTER TEXT SEARCH CONFIGURATION name SET SCHEMA new_schema
   *)
 
-  (*
-  ALTER TEXT SEARCH DICTIONARY name (
-      option [ = value ] [, ... ]
-  )
-  ALTER TEXT SEARCH DICTIONARY name RENAME TO new_name
-  ALTER TEXT SEARCH DICTIONARY name OWNER TO new_owner
-  ALTER TEXT SEARCH DICTIONARY name SET SCHEMA new_schema
-  *)
 
-  (*
-  ALTER TEXT SEARCH TEMPLATE name RENAME TO new_name
-  ALTER TEXT SEARCH TEMPLATE name SET SCHEMA new_schema
-  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TEXT', []);
+  TSearch:=AddSQLTokens(stKeyword, T, 'SEARCH', [toFindWordLast]);
 
   (*
   ALTER TEXT SEARCH PARSER name RENAME TO new_name
   ALTER TEXT SEARCH PARSER name SET SCHEMA new_schema
   *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TEXT', []);
-  TSearch:=AddSQLTokens(stKeyword, T, 'SEARCH', [toFindWordLast]);
+
   TParser1:=AddSQLTokens(stKeyword, TSearch, 'PARSER', [], 10);
     TSch:=AddSQLTokens(stIdentificator, TParser1, '', [], 1);
     T:=AddSQLTokens(stSymbol, TSch, '.', []);
@@ -9993,7 +9978,34 @@ begin
     AddSQLTokens(stIdentificator, TParser2, '', [], 4);
   TParser3:=AddSQLTokens(stKeyword, [TSch, TName], 'SET', []);
   TParser3:=AddSQLTokens(stKeyword, TParser3, 'SCHEMA', [], 5);
-    AddSQLTokens(stIdentificator, TParser3, '', [], 6);
+    AddSQLTokens(stIdentificator, TParser3, '', [], 4);
+
+
+  (*
+  ALTER TEXT SEARCH TEMPLATE name RENAME TO new_name
+  ALTER TEXT SEARCH TEMPLATE name SET SCHEMA new_schema
+  *)
+  TTemplate1:=AddSQLTokens(stKeyword, TSearch, 'TEMPLATE', [], 20);
+    TTemplate1.AddChildToken(TSch);
+
+  (*
+  ALTER TEXT SEARCH DICTIONARY name (
+      option [ = value ] [, ... ]
+  )
+  ALTER TEXT SEARCH DICTIONARY name RENAME TO new_name
+  ALTER TEXT SEARCH DICTIONARY name OWNER TO new_owner
+  ALTER TEXT SEARCH DICTIONARY name SET SCHEMA new_schema
+  *)
+  TDict1:=AddSQLTokens(stKeyword, TSearch, 'DICTIONARY', [], 30);
+  TSch:=AddSQLTokens(stIdentificator, TDict1, '', [], 1);
+  T:=AddSQLTokens(stSymbol, TSch, '.', []);
+  TName:=AddSQLTokens(stIdentificator, T, '', [], 2);
+    TSch.AddChildToken([TParser2, TParser3]);
+    TName.AddChildToken([TParser2, TParser3]);
+
+  TDict2:=AddSQLTokens(stKeyword, [TSch, TName], 'OWNER', []);
+  TDict2:=AddSQLTokens(stKeyword, TDict2, 'TO', [], 7);
+    AddSQLTokens(stIdentificator, TDict2, '', [], 4);
 end;
 
 procedure TPGSQLAlterTextSearch.InternalProcessChildToken(
@@ -10007,10 +10019,12 @@ begin
         Name:=AWord;
       end;
     10:ObjectKind:=okFTSParser;
+    20:ObjectKind:=okFTSTemplate;
+    30:ObjectKind:=okFTSDictionary;
     3:FAlterCommand:=aftsRename;
-    4:FNewName:=AWord;
+    4:Params.AddParam(AWord);
     5:FAlterCommand:=aftsSetShema;
-    6:FNewSchema:=AWord;
+    7:FAlterCommand:=aftsOwnerTo;
   end;
 end;
 
@@ -10019,9 +10033,13 @@ var
   Result: String;
 begin
   Result:='ALTER ' + PGObjectNames[ObjectKind] + ' ' + FullName;
-  case AlterCommand of
-    aftsRename:Result:=Result + ' RENAME TO ' + FNewName;
-    aftsSetShema:Result:=Result + ' SET SCHEMA ' + FNewSchema;
+  if Params.Count>0 then
+  begin
+    case AlterCommand of
+      aftsRename:Result:=Result + ' RENAME TO ' + Params[0].Caption;
+      aftsSetShema:Result:=Result + ' SET SCHEMA ' + Params[0].Caption;
+      aftsOwnerTo:Result:=Result + ' OWNER TO ' + Params[0].Caption;
+    end;
   end;
   AddSQLCommand(Result);
 end;
@@ -10029,11 +10047,7 @@ end;
 procedure TPGSQLAlterTextSearch.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TPGSQLAlterTextSearch then
-  begin
     FAlterCommand:=TPGSQLAlterTextSearch(ASource).AlterCommand;
-    FNewName:=TPGSQLAlterTextSearch(ASource).NewName;
-    FNewSchema:=TPGSQLAlterTextSearch(ASource).NewSchema;
-  end;
   inherited Assign(ASource);
 end;
 
