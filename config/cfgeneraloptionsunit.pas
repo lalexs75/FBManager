@@ -67,7 +67,7 @@ var
   R:integer;
   S:string;
 begin
-  S:=lngFolder+DirectorySeparator+'*.po';
+  S:=lngFolder+DirectorySeparator+'*.po*';
   R:=FindFirst(S, faAnyFile, SR);
   while R=0 do
   begin
