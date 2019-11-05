@@ -5572,6 +5572,10 @@ msgstr ""
 msgid "Use existing generator"
 msgstr ""
 
+#: fbmstrconstunit.suseparamschar
+msgid "Use params char"
+msgstr ""
+
 #: fbmstrconstunit.susepgbouncer
 msgid "Connecting via pgBouncer"
 msgstr ""

@@ -860,6 +860,7 @@ begin
 
   //
   pgShowTtablePartiotions:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', PGShowTtablePartiotions);
+  pgUseParamsChar:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Use params char', pgUseParamsChar);
 end;
 
 procedure TUserDBModule.SaveConfig;

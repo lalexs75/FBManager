@@ -4249,6 +4249,7 @@ var
 begin
   Result:='';//inherited GetQueryPlan;
   Q:=TSQLEnginePostgre(Owner).GetSQLQuery('EXPLAIN ' + QuerySQL);
+  Q.ParamCheck:=pgUseParamsChar;
   try
     Q.Open;
     if Q.Fields.Count > 0 then
@@ -4299,6 +4300,7 @@ begin
   inherited Create(AOwner);
   FSQLQuery:=TZQuery.Create(nil);
   FSQLQuery.Connection:=TSQLEnginePostgre(AOwner).FPGConnection;
+  FSQLQuery.ParamCheck:=pgUseParamsChar;
 end;
 
 destructor TPGQueryControl.Destroy;

@@ -1232,6 +1232,7 @@ resourcestring
   sShowObjectOnGrantPageDefault     = 'Show object on grant page default';
   sCreateIndexAfterCreateFK         = 'Create index after create FK';
   sShowTtablePartitions             = 'Show table''s partitions';
+  sUseParamsChar                    = 'Use params char';
 
   sShowAllObjects                   = 'Show all objects';
   sOnlyShowUsers                    = 'Only show users';

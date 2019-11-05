@@ -5770,6 +5770,10 @@ msgstr "Существующая функция"
 msgid "Use existing generator"
 msgstr "Использовать существующий генератор"
 
+#: fbmstrconstunit.suseparamschar
+msgid "Use params char"
+msgstr ""
+
 #: fbmstrconstunit.susepgbouncer
 msgid "Connecting via pgBouncer"
 msgstr "Подключаться через pgBouncer"
@@ -6171,3 +6175,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

@@ -54,7 +54,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
   LCLVersion = '2.1.0.0'
   object ToolPanel2: TToolPanel
     Left = 0
-    Height = 32
+    Height = 34
     Top = 0
     Width = 920
     Items = <    
@@ -150,7 +150,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     CustomizeShortCut = True
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 32
+    ClientHeight = 34
     ClientWidth = 920
     TabOrder = 0
     object lblTimeInfo: TLabel
@@ -158,10 +158,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel2
       AnchorSideRight.Side = asrBottom
-      Left = 848
-      Height = 15
+      Left = 838
+      Height = 17
       Top = 9
-      Width = 61
+      Width = 71
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
       Caption = 'lblTimeInfo'
@@ -170,21 +170,21 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
   end
   object Panel1: TPanel
     Left = 0
-    Height = 570
-    Top = 32
+    Height = 568
+    Top = 34
     Width = 745
     Align = alClient
-    ClientHeight = 570
+    ClientHeight = 568
     ClientWidth = 745
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
-      Height = 423
+      Height = 421
       Top = 1
       Width = 743
-      ActivePage = tabResult
+      ActivePage = TabSqlEdit
       Align = alClient
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       OnChange = PageControl1Change
       object TabSqlEdit: TTabSheet
@@ -204,26 +204,26 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       end
       object tabResult: TTabSheet
         Caption = 'Result'
-        ClientHeight = 395
-        ClientWidth = 735
+        ClientHeight = 390
+        ClientWidth = 733
         object Panel5: TPanel
           Left = 0
-          Height = 395
+          Height = 390
           Top = 0
-          Width = 735
+          Width = 733
           Align = alClient
           Caption = 'Panel5'
-          ClientHeight = 395
-          ClientWidth = 735
+          ClientHeight = 390
+          ClientWidth = 733
           TabOrder = 0
           object Panel2: TPanel
             Left = 1
             Height = 33
             Top = 1
-            Width = 733
+            Width = 731
             Align = alTop
             ClientHeight = 33
-            ClientWidth = 733
+            ClientWidth = 731
             TabOrder = 0
             object SpeedButton1: TSpeedButton
               Left = 81
@@ -263,10 +263,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
               AnchorSideTop.Side = asrCenter
               AnchorSideRight.Control = Panel2
               AnchorSideRight.Side = asrBottom
-              Left = 692
-              Height = 15
-              Top = 9
-              Width = 34
+              Left = 685
+              Height = 17
+              Top = 8
+              Width = 39
               Alignment = taRightJustify
               Anchors = [akTop, akRight]
               BorderSpacing.Right = 6
@@ -317,9 +317,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           end
           object PageControl2: TPageControl
             Left = 1
-            Height = 360
+            Height = 355
             Top = 34
-            Width = 733
+            Width = 731
             ActivePage = TabSheet1
             Align = alClient
             TabIndex = 0
@@ -327,13 +327,13 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
             TabPosition = tpBottom
             object TabSheet1: TTabSheet
               Caption = 'Grid'
-              ClientHeight = 332
-              ClientWidth = 725
+              ClientHeight = 324
+              ClientWidth = 721
               object dbGrid1: TRxDBGrid
                 Left = 0
-                Height = 332
+                Height = 324
                 Top = 0
-                Width = 725
+                Width = 721
                 ColumnDefValues.BlobText = '(примечание)'
                 TitleButtons = True
                 AutoSort = True
@@ -902,7 +902,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Cursor = crVSplit
       Left = 1
       Height = 5
-      Top = 424
+      Top = 422
       Width = 743
       Align = alBottom
       ResizeAnchor = akBottom
@@ -910,7 +910,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     object InfoPageControl: TPageControl
       Left = 1
       Height = 140
-      Top = 429
+      Top = 427
       Width = 743
       ActivePage = tabQueryFields
       Align = alBottom
@@ -931,8 +931,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       end
       object tabQueryFields: TTabSheet
         Caption = 'Query fields'
-        ClientHeight = 112
-        ClientWidth = 735
+        ClientHeight = 109
+        ClientWidth = 733
         object Memo2: TMemo
           AnchorSideLeft.Control = tabQueryFields
           AnchorSideTop.Control = tabQueryFields
@@ -940,9 +940,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideBottom.Control = tabQueryFields
           AnchorSideBottom.Side = asrBottom
           Left = 0
-          Height = 112
+          Height = 109
           Top = 0
-          Width = 626
+          Width = 606
           Anchors = [akTop, akLeft, akRight, akBottom]
           TabOrder = 0
         end
@@ -950,10 +950,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideTop.Control = tabQueryFields
           AnchorSideRight.Control = tabQueryFields
           AnchorSideRight.Side = asrBottom
-          Left = 632
-          Height = 19
+          Left = 612
+          Height = 23
           Top = 6
-          Width = 97
+          Width = 115
           Anchors = [akTop, akRight]
           BorderSpacing.Around = 6
           Caption = 'With data type'
@@ -964,10 +964,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideLeft.Control = CheckBox3
           AnchorSideTop.Control = CheckBox3
           AnchorSideTop.Side = asrBottom
-          Left = 632
-          Height = 15
-          Top = 31
-          Width = 50
+          Left = 612
+          Height = 17
+          Top = 35
+          Width = 60
           Caption = 'Separator'
           FocusControl = Edit1
           ParentColor = False
@@ -978,10 +978,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Control = tabQueryFields
           AnchorSideRight.Side = asrBottom
-          Left = 638
-          Height = 23
-          Top = 52
-          Width = 91
+          Left = 618
+          Height = 34
+          Top = 58
+          Width = 109
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 6
           OnChange = Edit1Change
@@ -993,25 +993,25 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
   end
   object Splitter3: TSplitter
     Left = 745
-    Height = 570
-    Top = 32
+    Height = 568
+    Top = 34
     Width = 5
     Align = alRight
     ResizeAnchor = akRight
   end
   object Panel3: TPanel
     Left = 750
-    Height = 570
-    Top = 32
+    Height = 568
+    Top = 34
     Width = 170
     Align = alRight
-    ClientHeight = 570
+    ClientHeight = 568
     ClientWidth = 170
     TabOrder = 3
     object Panel4: TPanel
       Left = 1
       Height = 162
-      Top = 407
+      Top = 405
       Width = 168
       Align = alBottom
       ClientHeight = 162
@@ -1019,19 +1019,19 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       TabOrder = 0
       object ComboBox1: TComboBox
         Left = 1
-        Height = 23
+        Height = 33
         Top = 1
         Width = 166
         Align = alTop
-        ItemHeight = 15
+        ItemHeight = 0
         OnChange = ComboBox1Change
         Style = csDropDownList
         TabOrder = 0
       end
       object TreeView2: TTreeView
         Left = 1
-        Height = 137
-        Top = 24
+        Height = 127
+        Top = 34
         Width = 166
         Align = alClient
         DragMode = dmAutomatic
@@ -1050,14 +1050,14 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Cursor = crVSplit
       Left = 1
       Height = 5
-      Top = 402
+      Top = 400
       Width = 168
       Align = alBottom
       ResizeAnchor = akBottom
     end
     object TreeView1: TTreeView
       Left = 1
-      Height = 401
+      Height = 399
       Top = 1
       Width = 168
       Align = alClient

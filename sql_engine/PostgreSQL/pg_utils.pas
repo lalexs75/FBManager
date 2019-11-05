@@ -49,6 +49,7 @@ function PGConstraintTypeToDBObjectKind(const S: string): TDBObjectKind;
 
 var
   pgShowTtablePartiotions : boolean = false;
+  pgUseParamsChar : boolean = true;
 
 implementation
 uses strutils, fbmStrConstUnit, dbconst;

@@ -97,4 +97,16 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     Caption = 'Show table''s partitions'
     TabOrder = 3
   end
+  object CheckBox3: TCheckBox[7]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 185
+    Width = 125
+    BorderSpacing.Around = 6
+    Caption = 'Use params char'
+    TabOrder = 4
+  end
 end
