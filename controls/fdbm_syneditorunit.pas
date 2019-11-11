@@ -1848,8 +1848,8 @@ begin
   if (i=0) or (S[i] = ';') then exit;
 
   Dec(i);
-  j:=i-1;
-  while (i>0) and (S[i] in ['A'..'Z', 'a'..'z', '_', '0'..'9','.', '"']) do Dec(i);
+  j:=i{-1};
+  while (i>1) and (S[i] in ['A'..'Z', 'a'..'z', '_', '0'..'9','.', '"']) do Dec(i);
   S1:=Trim(Copy(S, i, j-i + 1));
   if S1 <> '' then
   begin

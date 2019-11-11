@@ -466,12 +466,7 @@ begin
   fbManagerMainForm:=Self;
 
   DoLoadPrefs;
-(*
-  Top:=0;
-  Left:=0;
-  Width:=Screen.Width-1;
-  Height:=Screen.Height-1;
-*)
+
   UpdateEditorInfo(nil);
 
   sysExit.ImageIndex:=0;
