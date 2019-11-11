@@ -42,7 +42,6 @@ type
     lvPrintList: TAction;
     lvUp: TAction;
     MenuItem18: TMenuItem;
-    MenuItem19: TMenuItem;
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
     MenuItem22: TMenuItem;

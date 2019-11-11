@@ -457,10 +457,6 @@ object fbmFBVariableFrame: TfbmFBVariableFrame
     object MenuItem18: TMenuItem
       Action = lvAdd
     end
-    object MenuItem19: TMenuItem
-      Caption = 'Edit local variable'
-      ImageIndex = 8
-    end
     object MenuItem20: TMenuItem
       Action = lvDelete
     end
