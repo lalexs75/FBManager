@@ -238,7 +238,7 @@ object fbmFBVariableFrame: TfbmFBVariableFrame
     Align = alRight
     AutoSize = True
     Caption = 'ToolBar1'
-    Images = fbManagerMainForm.ImageListNormal
+    Images = fbManagerMainForm.ImageListMain
     TabOrder = 1
     object ToolButton8: TToolButton
       Left = 1
