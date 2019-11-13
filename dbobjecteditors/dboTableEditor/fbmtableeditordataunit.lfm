@@ -205,6 +205,20 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Caption = 'Label2'
       ParentColor = False
     end
+    object SpeedButton5: TSpeedButton
+      AnchorSideLeft.Control = SpeedButton4
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 723
+      Height = 31
+      Top = 1
+      Width = 32
+      Action = gridAutoFillCollumn
+      Anchors = [akTop, akLeft, akBottom]
+      ShowCaption = False
+    end
   end
   object DataSource1: TDataSource[2]
     OnStateChange = DataSource1StateChange
@@ -257,6 +271,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     end
     object MenuItem11: TMenuItem
       Action = statFunct
+    end
+    object MenuItem6: TMenuItem
+      Action = gridAutoFillCollumn
     end
     object MenuItem2: TMenuItem
       Caption = '-'
@@ -340,6 +357,12 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     object dataImportBlob: TAction
       Category = 'data'
       Caption = 'dataImportBlob'
+    end
+    object gridAutoFillCollumn: TAction
+      Category = 'Result'
+      Caption = 'Auto fill collumn width'
+      ImageIndex = 105
+      OnExecute = gridAutoFillCollumnExecute
     end
   end
   object FPDataExporter1: TFPDataExporter[5]

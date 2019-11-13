@@ -36,6 +36,7 @@ type
   { TfbmTableEditorDataFrame }
 
   TfbmTableEditorDataFrame = class(TEditorPage)
+    gridAutoFillCollumn: TAction;
     dataImportBlob: TAction;
     dataCopyAsUpdate: TAction;
     dataCopyAsInsert: TAction;
@@ -48,6 +49,8 @@ type
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
+    MenuItem6: TMenuItem;
+    SpeedButton5: TSpeedButton;
     statFilter: TAction;
     statFunct: TAction;
     dataImport: TAction;
@@ -98,6 +101,7 @@ type
     procedure dataImportExecute(Sender: TObject);
     procedure dataPrintExecute(Sender: TObject);
     procedure DataSource1StateChange(Sender: TObject);
+    procedure gridAutoFillCollumnExecute(Sender: TObject);
     procedure RxDBGridExportSpreadSheet1BeforeExecute(Sender: TObject);
     procedure statFilterExecute(Sender: TObject);
     procedure statFunctExecute(Sender: TObject);
@@ -277,6 +281,11 @@ begin
   end
   else
     FPriorState:=dsInactive;
+end;
+
+procedure TfbmTableEditorDataFrame.gridAutoFillCollumnExecute(Sender: TObject);
+begin
+  DataGrid.OptimizeColumnsWidthAll;
 end;
 
 procedure TfbmTableEditorDataFrame.RxDBGridExportSpreadSheet1BeforeExecute(
