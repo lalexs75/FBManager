@@ -4690,10 +4690,13 @@ begin
   FCmd.Description:=Description;
   FCmd.SchemaName:=SchemaName;
 
-  if FTableHasOIDS then
-    FCmd.PGOptions:=FCmd.PGOptions + [pgoWithOids]
-  else
-    FCmd.PGOptions:=FCmd.PGOptions + [pgoWithoutOids];
+  if TSQLEnginePostgre(OwnerDB).RealServerVersionMajor<12 then
+  begin
+    if FTableHasOIDS then
+      FCmd.PGOptions:=FCmd.PGOptions + [pgoWithOids]
+    else
+      FCmd.PGOptions:=FCmd.PGOptions + [pgoWithoutOids];
+  end;
 
   if FOwnerID<>0 then
   begin
@@ -5585,7 +5588,10 @@ begin
         FTableSpaceID:=Q.FieldByName('reltablespace').AsInteger;
         FTableTemp:=Q.FieldByName('relpersistence').AsString = 't';
         FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
-        FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
+
+        if TSQLEnginePostgre(OwnerDB).RealServerVersionMajor<12 then
+          FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
+
         FRelOptions:=Q.FieldByName('reloptions').AsString;
         FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
