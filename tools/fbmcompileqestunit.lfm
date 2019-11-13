@@ -14,8 +14,8 @@ object fbmCompileQestForm: TfbmCompileQestForm
   LCLVersion = '2.1.0.0'
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 375
+    Height = 34
+    Top = 383
     Width = 561
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -31,20 +31,19 @@ object fbmCompileQestForm: TfbmCompileQestForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Left = 6
-      Height = 30
-      Hint = 'Copy SQL text to clipboard...'
+      Height = 22
       Top = 9
-      Width = 57
+      Width = 118
+      Action = actCopyToBuf
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
       BorderSpacing.Left = 6
-      Caption = 'Copy...'
       TabOrder = 3
     end
   end
   inline SynEdit1: TSynEdit
     Left = 0
-    Height = 234
+    Height = 242
     Top = 135
     Width = 573
     Align = alClient
@@ -55,7 +54,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
     ParentColor = False
     ParentFont = False
     TabOrder = 2
-    Gutter.Width = 61
+    Gutter.Width = 57
     Gutter.MouseActions = <    
       item
         ClickCount = ccAny
@@ -496,7 +495,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
         MouseActions = <>
       end
       object TSynGutterLineNumber
-        Width = 21
+        Width = 17
         MouseActions = <>
         MarkupInfo.Background = clBtnFace
         MarkupInfo.Foreground = clNone
@@ -581,7 +580,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
       'Item2'
       'Item3'
     )
-    ItemHeight = 25
+    ItemHeight = 15
     ItemIndex = 0
     OnClick = CheckListBox1Click
     TabOrder = 1
@@ -604,6 +603,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
     Top = 88
     object actCopyToBuf: TAction
       Caption = 'actCopyToBuf'
+      Hint = 'Copy SQL text to clipboard...'
       ImageIndex = 24
       OnExecute = actCopyToBufExecute
     end

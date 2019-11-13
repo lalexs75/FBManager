@@ -104,6 +104,7 @@ procedure TfbmCompileQestForm.Localize;
 begin
   Caption:=sApplyScript;
   actCopyToBuf.Caption:=sCopy;
+  actCopyToBuf.Hint:=sCopyHint;
 end;
 
 end.
