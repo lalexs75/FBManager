@@ -425,6 +425,21 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
         Filter.EmptyFont.Style = [fsItalic]
         Filter.ItemIndex = -1
         Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Default value'
+        Width = 150
+        FieldName = 'FIELD_DEF_VALUE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
       end>
     KeyStrokes = <    
       item
