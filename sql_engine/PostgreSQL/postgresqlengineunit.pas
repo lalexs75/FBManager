@@ -5285,7 +5285,7 @@ var
 begin
   inherited RefreshConstraintPrimaryKey;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPgConstPK.ExpandMacros);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPgConstraints['sqlPgConstPK']);
   try
     Q.ParamByName('conrelid').AsInteger:=FOID;
     Q.Open;
@@ -5324,7 +5324,7 @@ begin
   if not FIndexListLoaded then
     IndexListRefresh;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPgConstFK.ExpandMacros);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPgConstraints['sqlPgConstFK']);
   try
     Q.ParamByName('conrelid').AsInteger:=FOID;
     Q.Open;
@@ -5379,7 +5379,7 @@ var
   F: TDBField;
 begin
   inherited RefreshConstraintUnique;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPgConstUNQ.ExpandMacros);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPgConstraints['sqlPgConstUNQ']);
   try
     Q.ParamByName('conrelid').AsInteger:=FOID;
     Q.Open;
@@ -5412,7 +5412,7 @@ var
 begin
   inherited RefreshConstraintCheck;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlTableConstraint.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPgConstraints['sqlTableConstraint']);
   try
     Q.ParamByName('conrelid').AsInteger:=FOID;
     Q.Open;

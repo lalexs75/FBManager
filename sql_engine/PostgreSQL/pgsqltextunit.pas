@@ -35,6 +35,7 @@ type
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
     pgFTsParsers: TRxTextHolder;
+    sPgConstraints: TRxTextHolder;
     sPGIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
@@ -52,8 +53,6 @@ type
     sPGGroups1: TStrHolder;
     sPGUsers: TStrHolder;
     sqlEventTrigger: TStrHolder;
-    sqlPgConstPK: TStrHolder;
-    sqlPgConstUNQ: TStrHolder;
     sqlSchemasAll: TStrHolder;
     sqlSequence_v10: TStrHolder;
     sqlTypesList: TStrHolder;
@@ -65,7 +64,6 @@ type
     sql_PG_DomainRefresh: TStrHolder;
     sql_Pg_Rules: TStrHolder;
     sql_Pg_Rule: TStrHolder;
-    sqlTableConstraint: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
     sql_PG_ViewRefresh: TStrHolder;
     sqlSchema: TStrHolder;
@@ -83,7 +81,6 @@ type
     pgFSUserMapping: TStrHolder;
     ttt1: TStrHolder;
     pgFtsConfig: TStrHolder;
-    sqlPgConstFK: TStrHolder;
   private
     { private declarations }
   public

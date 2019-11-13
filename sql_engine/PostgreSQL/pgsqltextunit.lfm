@@ -328,33 +328,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f726577726974652e72756c656e616d65203d203a72756c656e616d65'
     )
   end
-  object sqlTableConstraint: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 37
-    Top = 456
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f636f6e73747261696e742e636f6e6e616d652c'
-      '2020636173742870675f636f6e73747261696e742e636f6e73726320617320766172636861722920617320636f6e7372632c'
-      '2020636173742870675f636f6e73747261696e742e636f6e6b6579206173207661726368617228313030292920617320636f6e6b65792c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636f6e73747261696e742e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636f6e73747261696e74'
-      '7768657265'
-      '2020202070675f636f6e73747261696e742e636f6e72656c6964203d203a636f6e72656c6964'
-      '2020616e64'
-      '2020202070675f636f6e73747261696e742e636f6e7479706520203d20276327'
-      '6f72646572206279'
-      '202070675f636f6e73747261696e742e636f6e6e616d65'
-    )
-  end
   object sql_PG_TypesListAll: TStrHolder
     Capacity = 64
     Macros = <>
@@ -930,105 +903,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020202070675f636c6173732e72656c6b696e64203d20275327'
       '2020616e64'
       '2020202070675f636c6173732e72656c6e616d657370616365203d202564'
-    )
-  end
-  object sqlPgConstFK: TStrHolder
-    Capacity = 40
-    Macros = <>
-    Left = 144
-    Top = 328
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f636f6e73747261696e742e636f6e6e616d652c'
-      '2020636173742870675f636f6e73747261696e742e636f6e6b6579206173207661726368617228313030292920617320636f6e6b65792c'
-      '2020636173742870675f636f6e73747261696e742e636f6e666b6579206173207661726368617228313030292920617320636f6e666b65792c'
-      '202070675f636f6e73747261696e742e636f6e6672656c69642c'
-      '202070675f636f6e73747261696e742e636f6e66757064747970652c'
-      '202070675f636f6e73747261696e742e636f6e6664656c747970652c'
-      '202070675f636f6e73747261696e742e636f6e696e6469642c'
-      '2020696e645f636c6173732e72656c6e616d6520617320696e6465785f6e616d652c'
-      '202063617374282863617365'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6675706474797065203d20276327207468656e20274341534341444527'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6675706474797065203d20276127207468656e20274e4f4e4527'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6675706474797065203d20276e27207468656e2027534554204e554c4c27'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6675706474797065203d20276427207468656e20275345542044454641554c5427'
-      '2020656c7365'
-      '20202020274552524f5227'
-      '2020656e642920617320766172636861722831352929206173205550445f52554c452c'
-      '202063617374282863617365'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6664656c74797065203d20276327207468656e20274341534341444527'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6664656c74797065203d20276127207468656e20274e4f4e4527'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6664656c74797065203d20276e27207468656e2027534554204e554c4c27'
-      '202020207768656e2070675f636f6e73747261696e742e636f6e6664656c74797065203d20276427207468656e20275345542044454641554c5427'
-      '2020656c7365'
-      '20202020274552524f5227'
-      '2020656e6429206173207661726368617228313529292061732044454c5f52554c452c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636f6e73747261696e742e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636f6e73747261696e74'
-      '20206c656674206a6f696e2070675f636c61737320696e645f636c617373206f6e2028696e645f636c6173732e6f6964203d2070675f636f6e73747261696e742e636f6e696e64696429'
-      '7768657265'
-      '2020202070675f636f6e73747261696e742e636f6e74797065203d20276627'
-      '2020616e64'
-      '2020202070675f636f6e73747261696e742e636f6e72656c6964203d203a636f6e72656c6964'
-      '6f72646572206279'
-      '202070675f636f6e73747261696e742e636f6e6e616d65'
-    )
-  end
-  object sqlPgConstPK: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 208
-    Top = 328
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f636f6e73747261696e742e636f6e6e616d652c'
-      '2020636173742870675f636f6e73747261696e742e636f6e6b6579206173207661726368617228313030292920617320636f6e6b65792c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636f6e73747261696e742e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636f6e73747261696e74'
-      '7768657265'
-      '20202020636173742870675f636f6e73747261696e742e636f6e7479706520617320766172636861722831302929203d20277027'
-      '2020616e64'
-      '2020202070675f636f6e73747261696e742e636f6e72656c6964203d203a636f6e72656c6964'
-    )
-  end
-  object sqlPgConstUNQ: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 264
-    Top = 328
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f636f6e73747261696e742e636f6e6e616d652c'
-      '2020636173742870675f636f6e73747261696e742e636f6e6b6579206173207661726368617228313030292920617320636f6e6b65792c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f636f6e73747261696e742e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f636f6e73747261696e74'
-      '7768657265'
-      '2020202070675f636f6e73747261696e742e636f6e72656c6964203d203a636f6e72656c6964'
-      '2020616e64'
-      '2020202070675f636f6e73747261696e742e636f6e74797065203d20277527'
-      '6f72646572206279'
-      '202070675f636f6e73747261696e742e636f6e6e616d65'
     )
   end
   object sPGStatistics: TRxTextHolder
@@ -2049,5 +1923,125 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 112
     Top = 744
+  end
+  object sPgConstraints: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlPgConstFK'
+        Lines.Strings = (
+          'select'
+          '  pg_constraint.conname,'
+          '  cast(pg_constraint.conkey as varchar(100)) as conkey,'
+          '  cast(pg_constraint.confkey as varchar(100)) as confkey,'
+          '  pg_constraint.confrelid,'
+          '  pg_constraint.confupdtype,'
+          '  pg_constraint.confdeltype,'
+          '  pg_constraint.conindid,'
+          '  ind_class.relname as index_name,'
+          '  cast((case'
+          '    when pg_constraint.confupdtype = ''c'' then ''CASCADE'''
+          '    when pg_constraint.confupdtype = ''a'' then ''NONE'''
+          '    when pg_constraint.confupdtype = ''n'' then ''SET NULL'''
+          '    when pg_constraint.confupdtype = ''d'' then ''SET DEFAULT'''
+          '  else'
+          '    ''ERROR'''
+          '  end) as varchar(15)) as UPD_RULE,'
+          '  cast((case'
+          '    when pg_constraint.confdeltype = ''c'' then ''CASCADE'''
+          '    when pg_constraint.confdeltype = ''a'' then ''NONE'''
+          '    when pg_constraint.confdeltype = ''n'' then ''SET NULL'''
+          '    when pg_constraint.confdeltype = ''d'' then ''SET DEFAULT'''
+          '  else'
+          '    ''ERROR'''
+          '  end) as varchar(15)) as DEL_RULE,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_constraint.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_constraint'
+          '  left join pg_class ind_class on (ind_class.oid = pg_constraint.conindid)'
+          'where'
+          '    pg_constraint.contype = ''f'''
+          '  and'
+          '    pg_constraint.conrelid = :conrelid'
+          'order by'
+          '  pg_constraint.conname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlPgConstPK'
+        Lines.Strings = (
+          'select'
+          '  pg_constraint.conname,'
+          '  cast(pg_constraint.conkey as varchar(100)) as conkey,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_constraint.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_constraint'
+          'where'
+          '    cast(pg_constraint.contype as varchar(10)) = ''p'''
+          '  and'
+          '    pg_constraint.conrelid = :conrelid'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlPgConstUNQ'
+        Lines.Strings = (
+          'select'
+          '  pg_constraint.conname,'
+          '  cast(pg_constraint.conkey as varchar(100)) as conkey,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_constraint.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_constraint'
+          'where'
+          '    pg_constraint.conrelid = :conrelid'
+          '  and'
+          '    pg_constraint.contype = ''u'''
+          'order by'
+          '  pg_constraint.conname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlTableConstraint'
+        Lines.Strings = (
+          'select'
+          '  pg_constraint.conname,'
+          '  cast(pg_constraint.consrc as varchar) as consrc,'
+          '  cast(pg_constraint.conkey as varchar(100)) as conkey,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_constraint.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_constraint'
+          'where'
+          '    pg_constraint.conrelid = :conrelid'
+          '  and'
+          '    pg_constraint.contype  = ''c'''
+          'order by'
+          '  pg_constraint.conname'
+          ''
+        )
+      end>
+    Left = 224
+    Top = 256
   end
 end
