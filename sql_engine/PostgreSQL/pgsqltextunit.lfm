@@ -2022,7 +2022,7 @@ object pgSqlTextModule: TpgSqlTextModule
         Lines.Strings = (
           'select'
           '  pg_constraint.conname,'
-          '  cast(pg_constraint.consrc as varchar) as consrc,'
+          '  pg_get_constraintdef(pg_constraint.oid) as consrc,'
           '  cast(pg_constraint.conkey as varchar(100)) as conkey,'
           '  (select'
           '     pg_description.description'
