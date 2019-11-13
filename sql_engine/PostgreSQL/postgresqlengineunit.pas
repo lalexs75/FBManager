@@ -5591,7 +5591,7 @@ begin
         FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
         FACLListStr:=Q.FieldByName('relacl').AsString;
 
-        if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion10_0 then
+        if TSQLEnginePostgre(OwnerDB).RealServerVersionMajor >= 10 then
         begin
           FPartitionedTable:=Q.FieldByName('relkind').AsString = 'p';
           if FPartitionedTable then
