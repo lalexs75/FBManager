@@ -6407,7 +6407,7 @@ begin
   FACLListStr:='';
 
   if State <> sdboEdit then exit;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_ViewRefresh.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.PGViewRefreshStr(OwnerDB)); //sql_PG_ViewRefresh.Strings.Text);
   try
     Q.ParamByName('relname').AsString:=Caption;
     Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;

@@ -35,6 +35,7 @@ type
     pgFServRefresh: TStrHolder;
     pgFSUserMapRefresh: TStrHolder;
     pgFTsParsers: TRxTextHolder;
+    sPGView: TRxTextHolder;
     sPgConstraints: TRxTextHolder;
     sPGIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
@@ -65,7 +66,6 @@ type
     sql_Pg_Rules: TStrHolder;
     sql_Pg_Rule: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
-    sql_PG_ViewRefresh: TStrHolder;
     sqlSchema: TStrHolder;
     sqlSequence: TStrHolder;
     sqlEventTriggers: TStrHolder;
@@ -90,6 +90,7 @@ type
     function PGRelationStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGRelationInheritedStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGIndexFieldsStr(ASQLEngine:TSQLEngineAbstract):string;
+    function PGViewRefreshStr(ASQLEngine:TSQLEngineAbstract):string;
   end;
 
 
@@ -164,6 +165,15 @@ begin
     Result:=sPGIndex['sqlIndexFields_11']
   else
     Result:=sPGIndex['sqlIndexFields'];
+end;
+
+function TpgSqlTextModule.PGViewRefreshStr(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 12 then
+    Result:=sPGView['sql_PG_ViewRefresh_12']
+  else
+    Result:=sPGView['sql_PG_ViewRefresh'];
 end;
 
 end.
