@@ -243,7 +243,7 @@ begin
 
   RegisterObjEditor(TPGUser,
     [TfbmUserEditorForm, TfbmObjectEditorDescriptionFrame],
-    [TfbmUserEditorForm, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
+    [TfbmUserEditorForm, TfbmUserObjectsGrantFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]
     );
 
   RegisterObjEditor(TPGGroup,
