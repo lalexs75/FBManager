@@ -36,7 +36,7 @@
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="5443"/>
         <CursorPos X="33" Y="5452"/>
         <UsageCount Value="200"/>
@@ -55,7 +55,7 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="28"/>
         <CursorPos X="31" Y="59"/>
         <UsageCount Value="200"/>
@@ -77,7 +77,7 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="199"/>
         <CursorPos Y="225"/>
         <UsageCount Value="200"/>
@@ -119,9 +119,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="5"/>
-        <TopLine Value="10018"/>
-        <CursorPos Y="10051"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="10020"/>
+        <CursorPos X="23" Y="10035"/>
         <UsageCount Value="201"/>
         <Bookmarks Count="2">
           <Item0 X="24" Y="193" ID="4"/>
@@ -142,7 +142,7 @@
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fb_SqlParserUnit"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -185,7 +185,7 @@
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_engine.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="2646"/>
         <CursorPos Y="2681"/>
         <UsageCount Value="201"/>
@@ -522,11 +522,10 @@
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-base/src/base64.pp"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="74"/>
         <CursorPos X="28" Y="90"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/x86_64/x86_64.inc"/>

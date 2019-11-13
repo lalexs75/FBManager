@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, ComCtrls, ActnList,
-  Menus, IBManagerTypesUnit, StdCtrls, ExtCtrls, LMessages,
+  Menus, IBManagerTypesUnit, StdCtrls, ExtCtrls, LMessages, Buttons,
   TreeFilterEdit, RxIniPropStorage, fbmToolsUnit, SQLEngineAbstractUnit, fbmOIFoldersUnit;
 
 type

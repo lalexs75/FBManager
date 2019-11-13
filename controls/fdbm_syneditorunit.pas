@@ -1847,9 +1847,16 @@ begin
 
   if (i=0) or (S[i] = ';') then exit;
 
+  FCodeContexts.BracketPos.X:=i;
+  FCodeContexts.BracketPos.Y:=TextEditor.CaretXY.Y;
+
   Dec(i);
   j:=i{-1};
   while (i>1) and (S[i] in ['A'..'Z', 'a'..'z', '_', '0'..'9','.', '"']) do Dec(i);
+
+  FCodeContexts.FunctionNamePos.X:=i;
+  FCodeContexts.FunctionNamePos.Y:=TextEditor.CaretXY.Y;
+
   S1:=Trim(Copy(S, i, j-i + 1));
   if S1 <> '' then
   begin
