@@ -298,7 +298,7 @@ begin
       if Q.FieldByName('rolcreaterole').AsBoolean then
         FUserOptions:=FUserOptions + [puoCreateRoles];
 
-      if TSQLEnginePostgre(OwnerDB).ServerVersion < pgVersion9_6 then
+      if TSQLEnginePostgre(OwnerDB).RealServerVersion < 0009006 then
       begin
         if Q.FieldByName('rolcatupdate').AsBoolean then
           FUserOptions:=FUserOptions + [puoChangeSystemCatalog];
