@@ -43,6 +43,7 @@ type
   { TfbmSQLEditorForm }
 
   TfbmSQLEditorForm = class(TForm)
+    resAutoFillCollumnWidth: TAction;
     edtCopy: TAction;
     edtUndo: TAction;
     edtCut: TAction;
@@ -57,6 +58,7 @@ type
     RxDBVerticalGrid1: TRxDBVerticalGrid;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
     statFunct: TAction;
     statFilter: TAction;
     fsCopyTextToClip: TAction;
@@ -186,7 +188,6 @@ type
     MenuItem19: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem20: TMenuItem;
-    MenuItem21: TMenuItem;
     MenuItem22: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -241,6 +242,7 @@ type
     procedure quFindQueryAfterScroll(DataSet: TDataSet);
     procedure quFindQuerysql_editors_history_dateGetText(Sender: TField;
       var aText: string; DisplayText: Boolean);
+    procedure resAutoFillCollumnWidthExecute(Sender: TObject);
     procedure rgCopyTitleExecute(Sender: TObject);
     procedure rgCopyValueExecute(Sender: TObject);
     procedure rgExportAsInsertExecute(Sender: TObject);
@@ -604,6 +606,11 @@ procedure TfbmSQLEditorForm.quFindQuerysql_editors_history_dateGetText(
   Sender: TField; var aText: string; DisplayText: Boolean);
 begin
   aText:=quFindQuerysql_editors_history_date.AsString;
+end;
+
+procedure TfbmSQLEditorForm.resAutoFillCollumnWidthExecute(Sender: TObject);
+begin
+  dbGrid1.OptimizeColumnsWidthAll;
 end;
 
 procedure TfbmSQLEditorForm.rgCopyTitleExecute(Sender: TObject);
@@ -1516,6 +1523,9 @@ begin
 
   CheckBox3.Caption:=sWithDataType;
   Label3.Caption:=sSeparator;
+
+  resAutoFillCollumnWidth.Caption:=sAutoFillCollumnWidth;
+  resAutoFillCollumnWidth.Hint:=sAutoFillCollumnWidthHint;
 
   SetRecordCountCaption('');
   SetDBNavigatorHint(DBNavigator1);

@@ -182,9 +182,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Height = 421
       Top = 1
       Width = 743
-      ActivePage = TabSqlEdit
+      ActivePage = tabResult
       Align = alClient
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       OnChange = PageControl1Change
       object TabSqlEdit: TTabSheet
@@ -311,6 +311,20 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
               Top = 1
               Width = 32
               Action = statFunct
+              Anchors = [akTop, akLeft, akBottom]
+              ShowCaption = False
+            end
+            object SpeedButton5: TSpeedButton
+              AnchorSideLeft.Control = SpeedButton4
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel2
+              AnchorSideBottom.Control = Panel2
+              AnchorSideBottom.Side = asrBottom
+              Left = 341
+              Height = 31
+              Top = 1
+              Width = 32
+              Action = resAutoFillCollumnWidth
               Anchors = [akTop, akLeft, akBottom]
               ShowCaption = False
             end
@@ -1158,6 +1172,12 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     object MenuItem18: TMenuItem
       Action = statFunct
     end
+    object MenuItem22: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem20: TMenuItem
+      Action = resAutoFillCollumnWidth
+    end
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
@@ -1438,6 +1458,12 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       ImageIndex = 24
       OnExecute = edtPasteExecute
       ShortCut = 16470
+    end
+    object resAutoFillCollumnWidth: TAction
+      Category = 'Result'
+      Caption = 'Auto fill collumn width'
+      ImageIndex = 105
+      OnExecute = resAutoFillCollumnWidthExecute
     end
   end
   object FPDataExporter1: TFPDataExporter

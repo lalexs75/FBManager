@@ -1255,6 +1255,8 @@ resourcestring
   sStripyGrids                      = 'Stripy grids';
   sEnableTooltips                   = 'Enable tooltips';
   sEnableSetWGOFromPopup            = 'Enable set "With Grant Options" from popup menu';
+  sAutoFillCollumnWidth             = 'Auto fill collumn width';
+  sAutoFillCollumnWidthHint         = 'Automatically fill column width by actual data width';
 
   sFilterInTable                    = 'Filter in table';
   sFilterInTableHint                = 'Show filter in table';

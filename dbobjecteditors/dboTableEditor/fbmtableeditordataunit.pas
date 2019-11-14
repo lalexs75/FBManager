@@ -410,6 +410,9 @@ begin
 
   dataCopyAsInsert.Caption:=sCopySelectedRecordAsInsert;
   dataCopyAsUpdate.Caption:=sCopySelectedRecordAsUpdate;
+
+  gridAutoFillCollumn.Caption:=sAutoFillCollumnWidth;
+  gridAutoFillCollumn.Caption:=sAutoFillCollumnWidthHint;
 end;
 
 function TfbmTableEditorDataFrame.PageName: string;
