@@ -9513,13 +9513,13 @@ begin
   for OP in Operators do
   begin
     case OP.AlterAction of
-      adaRenameDomain:AddSQLCommandEx('ALTER DOMAIN %s RENAME TO %s', [FullName, OP.ParamValue]);
+      adaRenameDomain:AddSQLCommandEx('ALTER DOMAIN %s RENAME TO %s', [FullName, DoFormatName(OP.ParamValue)]);
       adaSetDefault:AddSQLCommandEx('ALTER DOMAIN %s SET DEFAULT %s', [FullName, OP.ParamValue]);
       adaDropDefault:AddSQLCommandEx('ALTER DOMAIN %s DROP DEFAULT', [FullName]);
       adaSetNotNull:AddSQLCommandEx('ALTER DOMAIN %s SET NOT NULL', [FullName]);
       adaDropNotNull:AddSQLCommandEx('ALTER DOMAIN %s DROP NOT NULL', [FullName]);
-      adaSetSchema:AddSQLCommandEx('ALTER DOMAIN %s SET SCHEMA %s', [FullName, OP.ParamValue]);
-      adaSetOwner:AddSQLCommandEx('ALTER DOMAIN %s OWNER TO %s', [FullName, OP.ParamValue]);
+      adaSetSchema:AddSQLCommandEx('ALTER DOMAIN %s SET SCHEMA %s', [FullName, DoFormatName(OP.ParamValue)]);
+      adaSetOwner:AddSQLCommandEx('ALTER DOMAIN %s OWNER TO %s', [FullName, DoFormatName(OP.ParamValue)]);
       adaRenameConstraint:AddSQLCommandEx('ALTER DOMAIN %s RENAME CONSTRAINT %s TO %s', [FullName, OP.ParamValue, OP.Params.AsString]);
       adaAddConstraint:begin
             if (OP.Params.Count>0) and (OP.Params[0].NotNull) then
