@@ -19601,7 +19601,7 @@ begin
     if P.Caption <> P.TypeName then
       S1:=S1 + ' ' + DoFormatName(P.Caption);
 
-    S1:=S1 + ' ' + P.TypeName;
+    S1:=S1 + ' ' + DoFormatName2(P.TypeName);
   end;
 
   if S1<>'' then

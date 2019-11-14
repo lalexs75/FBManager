@@ -96,6 +96,7 @@ type
 
 
 function DoFormatName(const AName:string; aQute:boolean = false):string;
+function DoFormatName2(const AName:string; aQute:boolean = false):string;
 function sysConfirmCompileDescEx:TSqlExecParams;
 function sysConfirmCompileGrantsEx:TSqlExecParams;
 function FormatStringCase(const AStr:string; ACharCase:TCharCaseOptions):string;
@@ -103,20 +104,8 @@ procedure FBDataSetAfterOpen(DS:TDataSet);
 function DBIsValidIdent(const Ident: string): Boolean;
 
 implementation
-uses LazUTF8, fbmToolsUnit;
-(*
-procedure FreeDBSQLObjectList(First: PDBSQLObject);
-var
-  Next:PDBSQLObject;
-begin
-  while Assigned(First) do
-  begin
-    Next:=First^.NextObj;
-    Dispose(First);
-    First:=Next;
-  end;
-end;
-*)
+uses StrUtils, LazUTF8, fbmToolsUnit;
+
 function DoFormatName(const AName:string; aQute:boolean = false):string;
 var
   FLoCase, FHiCase: Boolean;
@@ -124,7 +113,6 @@ var
 begin
   FLoCase:=false;
   FHiCase:=false;
-  //for i:=1 to Length(AName) do
   I:=1;
   while i < Length(AName) do
   begin
@@ -156,6 +144,31 @@ begin
     Result:=AnsiQuotedStr(AName, '"')
   else
     Result:=AName;
+end;
+
+function DoFormatName2(const AName: string; aQute: boolean): string;
+var
+  i: SizeInt;
+  S: String;
+begin
+  i:=Pos('.', AName);
+  if i > 0 then
+  begin
+    Result:='';
+    S:=AName;
+    repeat
+      if Result <> '' then Result:=Result + '.';
+      Result:=Result + DoFormatName(Copy2SymbDel(S, '.'), aQute);
+      i:=Pos('.', S);
+    until I = 0;
+    if S<>'' then
+    begin
+      if Result <> '' then Result:=Result + '.';
+      Result:=Result + DoFormatName(S, aQute);
+    end;
+  end
+  else
+    Result:=DoFormatName(AName, aQute);
 end;
 
 function sysConfirmCompileDescEx: TSqlExecParams;
