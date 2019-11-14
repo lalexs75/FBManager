@@ -17298,7 +17298,7 @@ begin
     if PGVarTypeNames[R.InReturn]<>'' then
       Result:=Result + ' ' +PGVarTypeNames[R.InReturn];
 
-    if R.Caption<>'' then Result:=Result+' '+R.Caption;
+    if R.Caption<>'' then Result:=Result+' '+DoFormatName(R.Caption);
     Result:=Result+' '+R.TypeName;
   end;
   if (Result <> '') or BracketExists then
