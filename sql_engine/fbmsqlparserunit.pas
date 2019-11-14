@@ -1597,9 +1597,9 @@ end;
 function TSQLCommandDDL.GetFullName: string;
 begin
   if FSchemaName <> '' then
-    Result:=FSchemaName +'.'+Name
+    Result:=DoFormatName(FSchemaName) +'.'+DoFormatName(Name)
   else
-    Result:=Name;
+    Result:=DoFormatName(Name);
 end;
 
 constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
