@@ -18880,8 +18880,8 @@ begin
       ataAddTableConstraint:DoAddConstrint(OP);
       ataDropColumn:DoDropCollumn(OP);
       ataDropConstraint:DoDropConstraint(OP);
-      ataEnableTrigger:AddSQLCommandEx('ALTER TABLE %s ENABLE TRIGGER %s', [FullName, OP.ParamValue]);
-      ataDisableTrigger:AddSQLCommandEx('ALTER TABLE %s DISABLE TRIGGER %s', [FullName, OP.ParamValue]);
+      ataEnableTrigger:AddSQLCommandEx('ALTER TABLE %s ENABLE TRIGGER %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataDisableTrigger:AddSQLCommandEx('ALTER TABLE %s DISABLE TRIGGER %s', [FullName, DoFormatName(OP.ParamValue)]);
       ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, (OP.ParamValue)]);
       ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, DoFormatName(OP.ParamValue)]);
       ataSetParams:DoSetParams(OP);
@@ -19350,9 +19350,9 @@ var
   R: TPGSQLCreateTriggerReferencing;
 begin
   if SchemaName<>'' then
-    FT:=SchemaName +'.' + TableName
+    FT:=DoFormatName(SchemaName) +'.' + DoFormatName(TableName)
   else
-    FT:=TableName;
+    FT:=DoFormatName(TableName);
 
   if Assigned(TriggerFunction) then
     for S in TriggerFunction.SQLText do
@@ -19370,7 +19370,7 @@ begin
       FCmdDrop.Free;
     end;
 
-    S:='CREATE TRIGGER ' + Name;
+    S:='CREATE TRIGGER ' + DoFormatName(Name);
 
     if ttBefore in FTriggerType then
       S:=S + ' BEFORE'
@@ -19453,7 +19453,7 @@ begin
       S:=S + ' ENABLE'
     else
       S:=S + ' DISABLE';
-    S:=S + ' TRIGGER ' + Name;
+    S:=S + ' TRIGGER ' + DoFormatName(Name);
     AddSQLCommand(S);
   end;
 
