@@ -6557,21 +6557,16 @@ begin
   S:=S + ' VIEW ' + FullName;
 
   if Fields.Count > 0 then
-    S:=S + '('+LineEnding + Fields.AsList + ')';
-(*
-  S1:='';
-  for i:=0 to Fields.Count-1 do
   begin
-    F:=TSQLParserField(Fields[i]);
-    S1:=S1 + '  ' + F.Caption;
-    if I<Fields.Count-1 then
-      S1:=S1 + ',';
-    S1:=S1 + LineEnding;
+    S1:='';
+    for F in Fields do
+    begin
+      if S1<>'' then S1:=S1 + ','+LineEnding;
+      S1:=S1 + DoFormatName(F.Caption);
+    end;
+    S:=S + '('+LineEnding + S1 + ')';
   end;
 
-  if S1<>'' then
-    S:=S + '(' + LineEnding + S1 + ')';
-*)
   S:=S + LineEnding +  'AS';
   if (SQLSelect<>'') and (Copy(SQLSelect, 1, Length(LineEnding)) <> LineEnding) then
     S:=S + LineEnding;
