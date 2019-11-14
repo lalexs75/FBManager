@@ -513,8 +513,8 @@ procedure TfbManDataInpectorForm.objRenameExecute(Sender: TObject);
 var
   S: String;
 begin
-  S:=CurrentObject.Caption;
-  if InputQuery(sRenameObject, Format(sRename, [CurrentObject.ObjectType, CurrentObject.Caption]), S) then
+  S:=CurrentObject.DBObject.Caption;
+  if InputQuery(sRenameObject, Format(sRename, [CurrentObject.ObjectType, CurrentObject.DBObject.Caption]), S) then
     CurrentObject.RenameTo(S);
 end;
 
