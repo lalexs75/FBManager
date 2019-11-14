@@ -1181,7 +1181,7 @@ end;
 
 procedure TDBInspectorRecord.RenameTo(const ANewName: string);
 begin
-  if not DBIsValidIdent(ANewName) then Exit;
+//  if not DBIsValidIdent(ANewName) then Exit;
 
   if Assigned(DBObject) then
   begin
