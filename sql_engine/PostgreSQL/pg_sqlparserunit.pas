@@ -6383,12 +6383,12 @@ begin
     S:=S + ' CONCURRENTLY';
 
   if Name<>'' then
-    S:=S + ' ' + Name;
+    S:=S + ' ' + DoFormatName(Name);
   S:=S + ' ON ';
 
   if SchemaName <> '' then
-    S:=S + SchemaName + '.';
-  S:=S + TableName;
+    S:=S + DoFormatName(SchemaName) + '.';
+  S:=S + DoFormatName(TableName);
 
   if FIndexMethod<>'' then
     S:=S + ' USING ' +IndexMethod;
@@ -8591,10 +8591,10 @@ var
   S, Result: String;
   i: Integer;
 begin
-  Result:='ALTER INDEX ' + FIndexName;
+  Result:='ALTER INDEX ' + DoFormatName(FIndexName);
   case FAlterIndexCmd of
-    aoRename:Result:=Result + ' RENAME TO '+FIndexNewName;
-    aoSetTablespace:Result:=Result + ' SET TABLESPACE ' + FTablespaceName;
+    aoRename:Result:=Result + ' RENAME TO '+DoFormatName(FIndexNewName);
+    aoSetTablespace:Result:=Result + ' SET TABLESPACE ' + DoFormatName(FTablespaceName);
     aoSet:begin
              S:='';
              for i:=0 to Params.Count-1 do
