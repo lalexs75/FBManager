@@ -311,6 +311,7 @@ var
   aSql:TStringList;
   S, S1:string;
   P: Classes.TPoint;
+  j: Integer;
 
 begin
   aSql:=TStringList.Create;
@@ -332,16 +333,40 @@ begin
       if Copy(S, 1, 6) = '--$FBM' then
       begin
         Delete(S, 1, 7);
-        S1:=Copy2SpaceDel(S);
-        if rxParamList.Locate('ParName', S1, [loCaseInsensitive]) then
+        S:=Trim(S);
+        if (S<>'') and (S[1] = '"') then
         begin
-          rxParamList.Edit;
-          rxParamListDesc.AsString:=S;
-          rxParamList.Post;
-          aSql.Delete(0);
+          j:=2;
+          while (J<=Length(S)) and (S[J]<>'"') do Inc(j);
+          if (J<=Length(S)) then
+          begin
+            S1:=Copy(S, 2, J - 2);
+            if rxParamList.Locate('ParName', S1, [loCaseInsensitive]) then
+            begin
+              rxParamList.Edit;
+              rxParamListDesc.AsString:=Copy(S, J + 2, Length(S));
+              rxParamList.Post;
+              aSql.Delete(0);
+            end
+            else
+              Break;
+          end
+          else
+            break;
         end
         else
-          Break;
+        begin
+          S1:=Copy2SpaceDel(S);
+          if rxParamList.Locate('ParName', S1, [loCaseInsensitive]) then
+          begin
+            rxParamList.Edit;
+            rxParamListDesc.AsString:=S;
+            rxParamList.Post;
+            aSql.Delete(0);
+          end
+          else
+            Break;
+        end
       end
       else
         Break;

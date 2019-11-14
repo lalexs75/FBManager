@@ -19819,7 +19819,7 @@ begin
   S1:='';
   for P in Params do
     if (P.Caption <> '') and (P.Description <> '') then
-      S1:=S1 + '--$FBM '+P.Caption + ' ' + P.Description + LineEnding;
+      S1:=S1 + '--$FBM '+ DoFormatName(P.Caption) + ' ' + P.Description + LineEnding;
 
   if S1<>'' then
     S:=S1 + S;
