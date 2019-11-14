@@ -1493,8 +1493,27 @@ begin
 end;
 
 function TSQLParserField.FullTypeName: string;
+var
+  i: SizeInt;
+  S: String;
 begin
-  Result:=TypeName;
+  i:=Pos('.', TypeName);
+  if i > 0 then
+  begin
+    S:=TypeName;
+    repeat
+      if Result <> '' then Result:=Result + '.';
+      Result:=Result + DoFormatName(Copy2SymbDel(S, '.'));
+      i:=Pos('.', S);
+    until I = 0;
+    if S<>'' then
+    begin
+      if Result <> '' then Result:=Result + '.';
+      Result:=Result + DoFormatName(S);
+    end;
+  end
+  else
+    Result:=DoFormatName(TypeName);
   if TypeLen > 0 then
   begin
     Result:=Result + '(' + IntToStr(TypeLen);

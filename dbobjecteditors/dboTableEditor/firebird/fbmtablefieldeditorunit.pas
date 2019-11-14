@@ -353,7 +353,8 @@ var
 begin
   if ModalResult = mrOk then
   begin
-    CanClose:=DBIsValidIdent(edtFieldName.Text);
+    //CanClose:=DBIsValidIdent(edtFieldName.Text);
+    CanClose:=Trim(edtFieldName.Text)<>'';
    // if CanClose then
    //   CanClose:=DBIsValidIdent(edtFieldName.Text);
    //  else
@@ -463,7 +464,7 @@ procedure TfbmTableFieldEditorForm.FillDomainList;
 begin
   if Assigned(SQLEngine) then
   begin
-    cbDomains.Items.Clear;
+    //cbDomains.Items.Clear;
     SQLEngine.FillDomainsList(cbDomains.Items, true);
   end;
 end;

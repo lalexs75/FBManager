@@ -1279,10 +1279,14 @@ type
 
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 begin
-  if Assigned(ASch) then
+(*  if Assigned(ASch) then
     Result:=DoFormatName(ASch.Caption, false) + '.'+DoFormatName(AObj.Caption, false)
   else
-    Result:=DoFormatName(AObj.Caption, false);
+    Result:=DoFormatName(AObj.Caption, false); *)
+  if Assigned(ASch) then
+    Result:=ASch.Caption + '.'+AObj.Caption
+  else
+    Result:=AObj.Caption;
 end;
 
 function ExtractObjectName(const AName:string):string;

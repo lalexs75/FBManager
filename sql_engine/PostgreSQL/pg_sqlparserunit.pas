@@ -16221,7 +16221,7 @@ begin
         if SF<>'' then SF:=SF + ','+ LineEnding;
     if F.IsLocal then
     begin
-      SF:=SF + '  ' +F.Caption + ' ' + F.FullTypeName;
+      SF:=SF + '  ' +DoFormatName(F.Caption) + ' ' + F.FullTypeName;
 
       if F.Collate <> '' then SF:=SF + ' COLLATE '+F.Collate;
 
@@ -16232,7 +16232,7 @@ begin
       end;
 
       if F.ConstraintName <> '' then
-        SF:=SF + ' CONSTRAINT '+F.ConstraintName;
+        SF:=SF + ' CONSTRAINT '+DoFormatName(F.ConstraintName);
 
       if fpNotNull in F.Params then
         SF:=SF + ' NOT NULL'
@@ -16292,7 +16292,7 @@ begin
           if S_CON <> '' then S_CON:=S_CON + ','+LineEnding;
 
           if C.ConstraintName <> '' then
-            S_CON:=S_CON + '  CONSTRAINT ' + C.ConstraintName
+            S_CON:=S_CON + '  CONSTRAINT ' + DoFormatName(C.ConstraintName)
           else
             S_CON:=S_CON + ' ';
 
@@ -16492,11 +16492,11 @@ begin
 
   for F in Fields do
     if F.Description <> '' then
-      DescribeObjectEx(okColumn, F.Caption, FullName, F.Description);
+      DescribeObjectEx(okColumn, DoFormatName(F.Caption), FullName, F.Description);
 
   for C in SQLConstraints do
     if C.Description <> '' then
-      DescribeObjectEx(okConstraint, C.ConstraintName, FullName, C.Description);
+      DescribeObjectEx(okConstraint, DoFormatName(C.ConstraintName), FullName, C.Description);
 end;
 
 constructor TPGSQLCreateTable.Create(AParent: TSQLCommandAbstract);
