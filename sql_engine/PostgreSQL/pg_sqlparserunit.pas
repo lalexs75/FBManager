@@ -8183,13 +8183,13 @@ end;
 procedure TPGSQLAlterSchema.MakeSQL;
 begin
   if (FSchemaNewName <> '') and (FSchemaNewName <> Name) then
-    AddSQLCommandEx('ALTER SCHEMA %s RENAME TO %s', [Name, FSchemaNewName]);
+    AddSQLCommandEx('ALTER SCHEMA %s RENAME TO %s', [DoFormatName(Name), DoFormatName(FSchemaNewName)]);
 
   if FSchemaNewOwner <> '' then
-    AddSQLCommandEx('ALTER SCHEMA %s OWNER TO %s', [Name, FSchemaNewOwner]);
+    AddSQLCommandEx('ALTER SCHEMA %s OWNER TO %s', [DoFormatName(Name), DoFormatName(FSchemaNewOwner)]);
 
   if Description <> FOldDescription then
-    AddSQLCommandEx('COMMENT ON SCHEMA %s IS %s', [Name, QuotedStr(Description)]);
+    AddSQLCommandEx('COMMENT ON SCHEMA %s IS %s', [DoFormatName(Name), QuotedStr(Description)]);
 end;
 
 constructor TPGSQLAlterSchema.Create(AParent: TSQLCommandAbstract);
