@@ -347,6 +347,7 @@ type
     procedure SetSchemaId(const AValue: integer);
   protected
     procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
@@ -366,6 +367,7 @@ type
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
     property SchemaId:integer read FSchemaId write SetSchemaId;
     property OwnerName:String read FOwnerName;
+    function RenameObject(ANewName:string):Boolean;override;
     //Объекты
     property DomainsRoot:TPGDomainsRoot read FDomainsRoot;
     property TablesRoot:TPGTablesRoot read FTablesRoot;
@@ -4431,6 +4433,11 @@ begin
   Statistic.AddValue(sOID, IntToStr(FSchemaId));
 end;
 
+function TPGSchema.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 function TPGSchema.GetObjectType: string;
 begin
   Result:='Schema';
@@ -4491,6 +4498,30 @@ end;
 procedure TPGSchema.RefreshDependenciesField(Rec: TDependRecord);
 begin
   //inherited RefreshDependenciesField(Rec);
+end;
+
+function TPGSchema.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterSchema;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterSchema.Create(nil);
+    FCmd.Name:=Caption;
+    FCmd.SchemaNewName:=ANewName;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 constructor TPGSchema.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
