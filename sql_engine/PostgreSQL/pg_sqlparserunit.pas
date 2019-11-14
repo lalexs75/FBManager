@@ -6009,20 +6009,20 @@ begin
   *)
   case ObjectKind of
     okCast:if Params.Count>0 then S:=S + 'CAST ('+Params[0].Caption+' AS '+Params[0].TypeName + ')';
-    okAggregate:S:=S + PGObjectNames[ObjectKind] + ' ' + Name + '(' + AggregateParams + ')';
+    okAggregate:S:=S + PGObjectNames[ObjectKind] + ' ' + DoFormatName(Name) + '(' + AggregateParams + ')';
     okColumn:begin
                S:=S + PGObjectNames[ObjectKind] + ' ';
                if SchemaName <> '' then
-                 S:=S + SchemaName + '.';
-                S:=S + TableName+'.'+Name;
+                 S:=S + DoFormatName(SchemaName) + '.';
+                S:=S + DoFormatName(TableName)+'.'+DoFormatName(Name);
              end;
 
     okCheckConstraint,
     okConstraint:if Params.Count > 0 then
-                   S:=S + 'CONSTRAINT ' + Name + ' ON DOMAIN ' + Params[0].Caption
+                   S:=S + 'CONSTRAINT ' + DoFormatName(Name) + ' ON DOMAIN ' + DoFormatName(Params[0].Caption)
                  else
                  if TableName <> '' then
-                   S:=S + 'CONSTRAINT ' + Name + ' ON ' + TableName;
+                   S:=S + 'CONSTRAINT ' + DoFormatName(Name) + ' ON ' + DoFormatName(TableName);
     okType, okView, okConversion,
     okExtension, okCollation, okLargeObject,
     okDatabase, okDomain, okIndex,
@@ -6048,7 +6048,7 @@ begin
                        S1:=S1 + '  ' + PGVarTypeNames[F.InReturn];
 
                      if F.Caption<>'' then
-                       S1:=S1+ ' ' + F.Caption;
+                       S1:=S1+ ' ' + DoFormatName(F.Caption);
                      S1:=S1 + ' ' +F.FullTypeName;
                    end;
                    S:=S + '(' + S1 + ')';
@@ -6057,10 +6057,10 @@ begin
     okTrigger,
     okRule:
       begin
-        S:=S + PGObjectNames[ObjectKind] + ' ' + Name + ' ON ';
+        S:=S + PGObjectNames[ObjectKind] + ' ' + DoFormatName(Name) + ' ON ';
         if SchemaName <> '' then
-          S:=S + SchemaName + '.';
-        S:=S + TableName;
+          S:=S + DoFormatName(SchemaName) + '.';
+        S:=S + DoFormatName(TableName);
       end;
     okTransform:
       begin
