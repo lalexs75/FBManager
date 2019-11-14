@@ -393,12 +393,14 @@ type
   protected
     function GetCaptionFullPatch:string; override;
     procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     function InternalGetDDLCreate: string; override;
     class function DBClassTitle:string;override;
     procedure RefreshDependencies; override;
+    function RenameObject(ANewName:string):Boolean;override;
     function CreateSQLObject:TSQLCommandDDL; override;
     procedure RefreshObject; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
@@ -5975,6 +5977,11 @@ begin
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
 end;
 
+function TPGDomain.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 constructor TPGDomain.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
@@ -6000,6 +6007,33 @@ end;
 procedure TPGDomain.RefreshDependencies;
 begin
   TSQLEnginePostgre(OwnerDB).RefreshDependencies(Self, FOID);
+end;
+
+function TPGDomain.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterDomain;
+  Op: TAlterDomainOperator;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterDomain.Create(nil);
+    FCmd.Name:=Caption;
+    FCmd.SchemaName:=SchemaName;
+    Op:=FCmd.AddOperator(adaRenameDomain);
+    Op.ParamValue:=ANewName;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 function TPGDomain.CreateSQLObject: TSQLCommandDDL;
