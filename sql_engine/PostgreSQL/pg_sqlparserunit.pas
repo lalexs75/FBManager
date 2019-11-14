@@ -18059,16 +18059,16 @@ begin
   if OP.InitialValue <> '' then
   begin
 
-    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s', [FullName, S1, OP.Field.Caption, OP.DBMSTypeName]);
-    AddSQLCommandEx('UPDATE %s SET %s  = %s', [FullName, OP.Field.Caption, OP.InitialValue]);
+    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.DBMSTypeName]);
+    AddSQLCommandEx('UPDATE %s SET %s  = %s', [FullName, DoFormatName(OP.Field.Caption), OP.InitialValue]);
     S:=OP.Field.FullTypeName;
     if OP.Field.Collate <> '' then S:=S + ' COLLATE '+OP.Field.Collate;
-    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, OP.Field.Caption, S]);
+    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, DoFormatName(OP.Field.Caption), S]);
 
     if OP.Field.DefaultValue <> '' then
-      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, OP.Field.Caption, OP.Field.DefaultValue]);
+      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.DefaultValue]);
     if fpNotNull in OP.Field.Params then
-      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET NOT NULL', [FullName, OP.Field.Caption]);
+      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET NOT NULL', [FullName, DoFormatName(OP.Field.Caption)]);
 //      ALTER TABLE public.aaaa ADD CONSTRAINT aaaa_aa_check CHECK ((aa <> 0));
   end
   else
@@ -18106,7 +18106,7 @@ begin
     if OP.Field.CheckExpr <> '' then S:=S + ' CHECK(' + OP.Field.CheckExpr + ')';
     if OP.Field.DefaultValue <> '' then S:=S + ' DEFAULT '+OP.Field.DefaultValue;
 
-    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s%s', [FullName, S1, OP.Field.Caption, OP.Field.FullTypeName, S]);
+    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s%s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName, S]);
   end;
 
   if OP.Field.Description<>'' then
@@ -18782,7 +18782,7 @@ begin
   S:='ALTER TABLE '+FullName + ' DROP COLUMN ';
   if ooIfExists in OP.Options then
     S:=S + 'IF EXISTS ';
-  S:=S + OP.Field.Caption;
+  S:=S + DoFormatName(OP.Field.Caption);
   if OP.DropRule = drCascade then S:=S + ' CASCADE'
   else
   if OP.DropRule = drRestrict then S:=S + ' RESTRICT';
@@ -18870,24 +18870,24 @@ begin
   begin
     case OP.AlterAction of
       ataAddColumn : AddCollumn(OP);
-      ataRenameColumn : AddSQLCommandEx('ALTER TABLE %s RENAME COLUMN %s TO %s', [FullName, OP.OldField.Caption, OP.Field.Caption]);
-      ataAlterColumnSetDataType : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, OP.Field.Caption, OP.Field.FullTypeName]);
-      ataAlterColumnDropDefault : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s DROP DEFAULT', [FullName, OP.Field.Caption]);
-      ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, OP.Field.Caption, OP.Field.DefaultValue]);
+      ataRenameColumn : AddSQLCommandEx('ALTER TABLE %s RENAME COLUMN %s TO %s', [FullName, DoFormatName(OP.OldField.Caption), DoFormatName(OP.Field.Caption)]);
+      ataAlterColumnSetDataType : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName]);
+      ataAlterColumnDropDefault : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s DROP DEFAULT', [FullName, DoFormatName(OP.Field.Caption)]);
+      ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.DefaultValue]);
       ataAlterColumnSetNotNull,
-      ataAlterColumnDropNotNull:AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [ FullName, OP.Field.Caption, IfThen(OP.AlterAction = ataAlterColumnSetNotNull, 'SET', 'DROP')]);
-      ataAlterColumnDescription : DescribeObjectEx(okColumn, OP.Field.Caption, FullName, OP.Field.Description);
+      ataAlterColumnDropNotNull:AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [ FullName, DoFormatName(OP.Field.Caption), IfThen(OP.AlterAction = ataAlterColumnSetNotNull, 'SET', 'DROP')]);
+      ataAlterColumnDescription : DescribeObjectEx(okColumn, DoFormatName(OP.Field.Caption), FullName, OP.Field.Description);
       ataAddTableConstraint:DoAddConstrint(OP);
       ataDropColumn:DoDropCollumn(OP);
       ataDropConstraint:DoDropConstraint(OP);
       ataEnableTrigger:AddSQLCommandEx('ALTER TABLE %s ENABLE TRIGGER %s', [FullName, OP.ParamValue]);
       ataDisableTrigger:AddSQLCommandEx('ALTER TABLE %s DISABLE TRIGGER %s', [FullName, OP.ParamValue]);
-      ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, OP.ParamValue]);
-      ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, OP.ParamValue]);
+      ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, (OP.ParamValue)]);
+      ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [FullName, DoFormatName(OP.ParamValue)]);
       ataSetParams:DoSetParams(OP);
       ataReSetParams:DoReSetParams(OP);
-      ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, OP.ParamValue]);
-      ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, OP.ParamValue]);
+      ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, DoFormatName(OP.ParamValue)]);
       ataDetachPartition:AddSQLCommandEx('ALTER TABLE %s DETACH PARTITION %s', [FullName, OP.Name]); //ALTER TABLE [ IF EXISTS ] имя DETACH PARTITION имя_секции
       ataAttachPartition:AttachPartition(OP);
     else
