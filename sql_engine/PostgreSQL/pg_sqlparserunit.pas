@@ -19599,7 +19599,7 @@ begin
       S1:=S1 + ' INOUT';
 
     if P.Caption <> P.TypeName then
-      S1:=S1 + ' ' + P.Caption;
+      S1:=S1 + ' ' + DoFormatName(P.Caption);
 
     S1:=S1 + ' ' + P.TypeName;
   end;
