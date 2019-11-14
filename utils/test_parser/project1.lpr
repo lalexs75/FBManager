@@ -8,11 +8,12 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, rxnew, rx, lazcontrols, uiblaz, Unit1, SQLEngineAbstractUnit,
-  SQLEngineCommonTypesUnit, fbmSqlParserUnit, mysql_engine, MySQLKeywords,
-  mysql_SqlParserUnit, mysql_types, SQLite3EngineUnit, sqlite3_keywords,
-  sqlite3_SqlParserUnit, FBSQLEngineUnit, fb_SqlParserUnit, fbKeywordsUnit,
-  sqlObjects, fbmStrConstUnit, zcomponent, PostgreSQLEngineUnit, pgSqlTextUnit,
-  pg_SqlParserUnit, sqlParserConsts, TreeAddChildTokenUnit
+  SQLEngineCommonTypesUnit, fbmSqlParserUnit, SQLEngineInternalToolsUnit,
+  mysql_engine, MySQLKeywords, mysql_SqlParserUnit, mysql_types,
+  SQLite3EngineUnit, sqlite3_keywords, sqlite3_SqlParserUnit, FBSQLEngineUnit,
+  fb_SqlParserUnit, fbKeywordsUnit, sqlObjects, fbmStrConstUnit, zcomponent,
+  PostgreSQLEngineUnit, pgSqlTextUnit, pg_SqlParserUnit, sqlParserConsts,
+  TreeAddChildTokenUnit
   { you can add units after this };
 
 {$R *.res}

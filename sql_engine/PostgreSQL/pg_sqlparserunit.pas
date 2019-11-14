@@ -2846,7 +2846,7 @@ type
   end;
 
 implementation
-uses strutils, rxstrutils;
+uses strutils, rxstrutils, SQLEngineInternalToolsUnit;
 
 procedure CreateInParamsTree(Owner:TSQLCommandDDL; InToken:TSQLTokenRecord; OutToken:array of TSQLTokenRecord; ACmdBase:Integer);
 var
@@ -18008,10 +18008,10 @@ var
 begin
   S:='CREATE SCHEMA';
   if ooIfNotExists in Options then S:=S + ' IF NOT EXISTS';
-  if Name <> '' then S:=S + ' ' + Name;
+  if Name <> '' then S:=S + ' ' + DoFormatName(Name);
 
   if FOwnerUserName <> '' then
-    S:=S + ' AUTHORIZATION ' +FOwnerUserName;
+    S:=S + ' AUTHORIZATION ' +DoFormatName(FOwnerUserName);
 
   if FChildCmd<>'' then
   begin

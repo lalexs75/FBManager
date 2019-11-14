@@ -176,6 +176,11 @@
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SQLEngineInternalToolsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

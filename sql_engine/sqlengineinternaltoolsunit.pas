@@ -124,16 +124,29 @@ var
 begin
   FLoCase:=false;
   FHiCase:=false;
-  for i:=1 to Length(AName) do
+  //for i:=1 to Length(AName) do
+  I:=1;
+  while i < Length(AName) do
   begin
-    if (AName[i]>#127) or (AName[i] = '"') then
-      aQute:=true
+    if (AName[i] = '"') then
+    begin
+      Inc(i);
+      while ((i<Length(AName)) and (AName[i]<>'"')) do Inc(i);
+      aQute:=i<>Length(AName);
+    end
+    else
+    if (AName[i]>#127) then
+    begin
+      aQute:=true;
+      break;
+    end
     else
     if AName[i] in ['a'..'z'] then
       FLoCase:=true
     else
     if AName[i] in ['A'..'Z'] then
       FHiCase:=true;
+    Inc(i);
   end;
 
   if FLoCase and FHiCase then

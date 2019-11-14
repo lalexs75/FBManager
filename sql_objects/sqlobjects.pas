@@ -710,7 +710,7 @@ function StrToIndexSortOrder(AValue:string):TIndexSortOrder;
 function IndexNullPosStr(AValue:TIndexNullPos):string;
 function StrToIndexNullPos(AValue:string):TIndexNullPos;
 implementation
-uses sqlParserConsts, fbmStrConstUnit, strutils, LazUTF8;
+uses sqlParserConsts, fbmStrConstUnit, strutils, LazUTF8, SQLEngineInternalToolsUnit;
 
 function IndexSortOrderStr(AValue: TIndexSortOrder): string;
 begin
@@ -1613,7 +1613,7 @@ end;
 
 function TSQLObjectAbstract.GetFullName: string;
 begin
-  Result:=Name;
+  Result:=Name
 end;
 
 procedure TSQLObjectAbstract.ClearChildList;
