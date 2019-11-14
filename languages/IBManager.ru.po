@@ -247,6 +247,14 @@ msgstr "Подключённая БД"
 msgid "Attachment ID"
 msgstr "ID подключения"
 
+#: fbmstrconstunit.sautofillcollumnwidth
+msgid "Auto fill collumn width"
+msgstr "Подбор ширины колонок"
+
+#: fbmstrconstunit.sautofillcollumnwidthhint
+msgid "Automatically fill column width by actual data width"
+msgstr "Автоматический подбор ширины колонок по содержимому таблицы"
+
 #: fbmstrconstunit.sautograntoncompileobject
 msgid "Auto grant on compile object"
 msgstr "Автоматическая выдача привелегий при компиляции объектов"
@@ -6175,4 +6183,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

@@ -231,6 +231,14 @@ msgstr ""
 msgid "Attachment ID"
 msgstr ""
 
+#: fbmstrconstunit.sautofillcollumnwidth
+msgid "Auto fill collumn width"
+msgstr ""
+
+#: fbmstrconstunit.sautofillcollumnwidthhint
+msgid "Automatically fill column width by actual data width"
+msgstr ""
+
 #: fbmstrconstunit.sautograntoncompileobject
 msgid "Auto grant on compile object"
 msgstr ""
