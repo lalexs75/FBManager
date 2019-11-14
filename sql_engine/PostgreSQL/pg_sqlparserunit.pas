@@ -8136,7 +8136,7 @@ begin
   S:='DROP SCHEMA ';
   if ooIfExists in Options then
     S:=S + 'IF EXISTS ';
-  S:=S + Name;
+  S:=S + DoFormatName(Name);
 
   if DropRule = drCascade then
     S:=S + ' CASCADE'
