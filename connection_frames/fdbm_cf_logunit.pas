@@ -37,13 +37,16 @@ type
     cbLogEditor: TCheckBox;
     cbWriteTimeStamp: TCheckBox;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     ComboBox1: TComboBox;
+    edtEditorLogName1: TFileNameEdit;
     edtMetaLogName: TFileNameEdit;
     edtEditorLogName: TFileNameEdit;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     edtSQLEdtCnt: TSpinEdit;
+    Label12: TLabel;
     procedure cbLogEditorClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
   private
@@ -72,6 +75,9 @@ begin
 
   Label11.Enabled:=cbLogEditor.Checked;
   edtEditorLogName.Enabled:=cbLogEditor.Checked;
+
+  Label12.Enabled:=CheckBox2.Checked;
+  edtEditorLogName1.Enabled:=CheckBox2.Checked;
 end;
 
 procedure TfdbmCFLogFrame.CheckBox1Change(Sender: TObject);

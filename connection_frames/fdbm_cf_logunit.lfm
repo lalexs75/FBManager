@@ -10,9 +10,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = cbLogMeta
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 66
-    Width = 107
+    Height = 17
+    Top = 64
+    Width = 103
     Caption = 'Metadata log file'
     ParentColor = False
   end
@@ -21,21 +21,21 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = cbLogEditor
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 20
-    Top = 165
-    Width = 116
+    Height = 17
+    Top = 156
+    Width = 110
     BorderSpacing.Around = 6
     Caption = 'SQL editor log file'
     ParentColor = False
   end
   object Label1: TLabel[2]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = edtEditorLogName
+    AnchorSideTop.Control = edtEditorLogName1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 234
-    Width = 156
+    Height = 17
+    Top = 311
+    Width = 146
     BorderSpacing.Around = 6
     Caption = 'SQL editor history count'
     ParentColor = False
@@ -45,9 +45,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = cbWriteTimeStamp
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 36
-    Width = 232
+    Height = 23
+    Top = 35
+    Width = 224
     BorderSpacing.Around = 6
     Caption = 'Enable loggin metadata changes'
     OnClick = cbLogEditorClick
@@ -58,9 +58,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = edtMetaLogName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 135
-    Width = 184
+    Height = 23
+    Top = 127
+    Width = 178
     BorderSpacing.Around = 6
     Caption = 'Enable loggin SQL editor'
     OnClick = cbLogEditorClick
@@ -70,9 +70,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 24
+    Height = 23
     Top = 6
-    Width = 184
+    Width = 178
     BorderSpacing.Around = 6
     Caption = 'Write timestamp into log'
     TabOrder = 2
@@ -84,8 +84,8 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 92
+    Height = 34
+    Top = 87
     Width = 567
     DialogOptions = []
     FilterIndex = 0
@@ -105,8 +105,8 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 191
+    Height = 34
+    Top = 179
     Width = 567
     DialogOptions = []
     FilterIndex = 0
@@ -124,8 +124,8 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 260
+    Height = 34
+    Top = 334
     Width = 90
     BorderSpacing.Around = 6
     MaxValue = 1000
@@ -136,9 +136,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideTop.Control = edtSQLEdtCnt
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 303
-    Width = 233
+    Height = 23
+    Top = 374
+    Width = 220
     BorderSpacing.Around = 6
     Caption = 'Use custom codepage for loggin'
     OnChange = CheckBox1Change
@@ -151,8 +151,8 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 333
+    Height = 34
+    Top = 403
     Width = 567
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -162,5 +162,50 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
       'CP866'
     )
     TabOrder = 7
+  end
+  object CheckBox2: TCheckBox[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtEditorLogName
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 219
+    Width = 203
+    BorderSpacing.Around = 6
+    Caption = 'Enable loggin script executive'
+    TabOrder = 8
+  end
+  object Label12: TLabel[12]
+    AnchorSideLeft.Control = cbLogEditor
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 17
+    Top = 248
+    Width = 110
+    BorderSpacing.Around = 6
+    Caption = 'SQL editor log file'
+    ParentColor = False
+  end
+  object edtEditorLogName1: TFileNameEdit[13]
+    AnchorSideLeft.Control = cbWriteTimeStamp
+    AnchorSideTop.Control = Label12
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 34
+    Top = 271
+    Width = 567
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    MaxLength = 0
+    Spacing = 0
+    TabOrder = 9
   end
 end
