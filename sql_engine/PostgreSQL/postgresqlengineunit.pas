@@ -4882,13 +4882,13 @@ begin
               S1:=S1+ ', ';
               S2:=S2+ ', ';
             end;
-            S1:=S1 + FD.FieldName;
-            S2:=S2 +':' + FD.FieldName;
+            S1:=S1 + DoFormatName(FD.FieldName);
+            S2:=S2 +':' + DoFormatName(FD.FieldName);
           end;
         end
       end;
 
-      S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
+      S:='insert into ' + DoFormatName2(CaptionFullPatch) + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
       quIns:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
       for F in FDataSet.Fields do
       begin
@@ -4937,7 +4937,7 @@ begin
   Result:='';
   for F in Fields do
     if AParams then
-      Result:=Result + ' :' + F.FieldName + ','
+      Result:=Result + ' :' + DoFormatName(F.FieldName) + ','
     else
       Result:=Result + ' ' + DoFormatName(F.FieldName) + ',';
   if Result <> '' then
@@ -5845,11 +5845,11 @@ begin
       if Result<>'' then
         Result:=Result + ' and ';
       case ASQLParamState of
-        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :new_' + F.FieldName+')';
-        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :old_' + F.FieldName+')';
+        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('new_' + F.FieldName)+')';
+        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('old_' + F.FieldName)+')';
       else
         //spsNormal
-        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + F.FieldName+')';
+        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName)+')';
       end;
     end;
   if Result <> '' then
@@ -5888,20 +5888,20 @@ begin
   if not FDataSet.Active then
   begin
     RefreshConstraintPrimaryKey;
-    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch+MakeOrderBy;
+    TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch) + MakeOrderBy;
 
     if ARecCountLimit > -1 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
 
-    ZUpdateSQL.InsertSQL.Text:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+
+    ZUpdateSQL.InsertSQL.Text:='insert into ' + DoFormatName2(CaptionFullPatch) + '(' + MakeSQLInsertFields(false) + ')'+
                                   ' values('+MakeSQLInsertFields(true)+')';
-    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
-    ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere(spsOld);
+    ZUpdateSQL.ModifySQL.Text:='update ' + DoFormatName2(CaptionFullPatch) + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    ZUpdateSQL.DeleteSQL.Text:='delete from ' + DoFormatName2(CaptionFullPatch) + MakeSQLWhere(spsOld);
 
     if FPKCount > 0 then
     begin
-      ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsNew);
+      ZUpdateSQL.RefreshSQL.Text:='select * from '+DoFormatName2(CaptionFullPatch) + MakeSQLWhere(spsNew);
       ZUpdateSQL.BeforeInsertSQLStatement:=@ZUpdateSQLBeforeInsertSQLStatement;
     end
     else
