@@ -566,6 +566,10 @@ begin
   Memo1.Text:=AMsg;
   Result:=not FAbortExecute;
   ProgressBar1.Position:=CurCmd;
+
+  if FCurDB.SQLEngine.SQLEngineLogOptions.LogSQLScript then
+    FCurDB.WriteSQLFile(FCurDB.SQLEngine.SQLEngineLogOptions.LogFileSQLScript, AMsg);
+
   Application.ProcessMessages;
 end;
 

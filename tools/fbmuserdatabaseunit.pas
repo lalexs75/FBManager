@@ -42,6 +42,10 @@ type
     quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField;
     quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField;
     quConnectionPluginsdb_database_id: TLargeintField;
+    quDatabasesdb_database_log_script_exec_filename: TStringField;
+    quDatabasesdb_database_use_log_script_exec: TBooleanField;
+    quDatabasesItemdb_database_log_script_exec_filename: TStringField;
+    quDatabasesItemdb_database_use_log_script_exec: TBooleanField;
     quDatabasesItemshow_child_objects: TBooleanField;
     quDatabasesshow_child_objects: TBooleanField;
     quDBOptionsItems: TZQuery;
@@ -182,6 +186,7 @@ type
     quSysConstsys_const_value: TStringField;
     UpdDB3: TZSQLProcessor;
     UpdDB4: TZSQLProcessor;
+    UpdDB5: TZSQLProcessor;
     UserDB: TZConnection;
     InitDB: TZSQLProcessor;
     OldUserDB: TZConnection;
@@ -224,6 +229,7 @@ type
     procedure InternalUpdate2;
     procedure InternalUpdate3;
     procedure InternalUpdate4;
+    procedure InternalUpdate5;
 
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
@@ -366,8 +372,23 @@ begin
 end;
 
 procedure TUserDBModule.InternalCheckDBVersion;
+
 var
   CVer: Integer;
+
+procedure DoBackupBase;
+var
+  S, S1: String;
+  I: Integer;
+begin
+  S:=LocalCfgFolder + UserDBFileName;
+  I:=0;
+  repeat
+    S1:=S + '.ver-'+IntToStr(CVer)+'.' + DateToStr(Date) + '-'+ IntToStr(i) + '.bak';
+  until FileExistsUTF8(S);
+  CopyFile(S, S1, true);
+end;
+
 begin
   UserDB.Connect;
   SystemVariablesLoad;
@@ -375,6 +396,9 @@ begin
   if  CVer< ConfDBVers then
   begin
     UserDB.Disconnect;
+    DoBackupBase;
+
+
     if CVer < 1 then
       InternalConvertDB
     else
@@ -386,6 +410,10 @@ begin
 
     if CVer < 4 then
       InternalUpdate4;
+
+    if CVer < 5 then
+      InternalUpdate5;
+
     UserDB.Connect;
     SystemVariablesLoad;
     ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
@@ -483,6 +511,16 @@ begin
   UserDB.Connect;
   try
     UpdDB4.Execute;
+  finally
+    UserDB.Disconnect;
+  end;
+end;
+
+procedure TUserDBModule.InternalUpdate5;
+begin
+  UserDB.Connect;
+  try
+    UpdDB5.Execute;
   finally
     UserDB.Disconnect;
   end;

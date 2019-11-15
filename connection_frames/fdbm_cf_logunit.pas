@@ -106,12 +106,19 @@ procedure TfdbmCFLogFrame.LoadParams(ASQLEngine:TSQLEngineAbstract);
 begin
   cbLogMeta.Checked:=ASQLEngine.SQLEngineLogOptions.LogMetadata;
   cbLogEditor.Checked:=ASQLEngine.SQLEngineLogOptions.LogSQLEditor;
+  CheckBox2.Checked:=ASQLEngine.SQLEngineLogOptions.LogSQLScript;
+
   cbWriteTimeStamp.Checked:=ASQLEngine.SQLEngineLogOptions.LogTimestamp;
   edtMetaLogName.Text:=ASQLEngine.SQLEngineLogOptions.LogFileMetadata;
   edtEditorLogName.Text:=ASQLEngine.SQLEngineLogOptions.LogFileSQLEditor;
+  edtEditorLogName1.Text:=ASQLEngine.SQLEngineLogOptions.LogFileSQLScript;
+
   edtSQLEdtCnt.Value:=ASQLEngine.SQLEngineLogOptions.HistoryCountSQLEditor;
   CheckBox1.Checked:=ASQLEngine.SQLEngineLogOptions.LogFileCodePage <> '';
   ComboBox1.Text:=ASQLEngine.SQLEngineLogOptions.LogFileCodePage;
+
+
+
   CheckBox1Change(nil);
 end;
 
@@ -123,6 +130,10 @@ begin
   FSQLEngineAbstract.SQLEngineLogOptions.LogFileMetadata  := edtMetaLogName.Text;
   FSQLEngineAbstract.SQLEngineLogOptions.LogFileSQLEditor := edtEditorLogName.Text;
   FSQLEngineAbstract.SQLEngineLogOptions.HistoryCountSQLEditor:=edtSQLEdtCnt.Value;
+
+  FSQLEngineAbstract.SQLEngineLogOptions.LogSQLScript:=CheckBox2.Checked;
+  FSQLEngineAbstract.SQLEngineLogOptions.LogFileSQLScript:=edtEditorLogName1.Text;
+
   if CheckBox1.Checked then
     FSQLEngineAbstract.SQLEngineLogOptions.LogFileCodePage:=ComboBox1.Text
   else

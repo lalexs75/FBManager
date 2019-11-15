@@ -60,7 +60,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   LCLVersion = '2.1.0.0'
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 35
+    Height = 34
     Top = 0
     Width = 759
     Items = <    
@@ -99,7 +99,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     CustomizeShortCut = True
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 35
+    ClientHeight = 34
     ClientWidth = 759
     TabOrder = 0
     object CheckBox1: TCheckBox
@@ -107,10 +107,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 607
-      Height = 22
+      Left = 615
+      Height = 23
       Top = 6
-      Width = 141
+      Width = 133
       Action = vShowObjTree
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -149,7 +149,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Memo1: TMemo
     Left = 0
     Height = 90
-    Top = 599
+    Top = 602
     Width = 759
     Align = alBottom
     Lines.Strings = (
@@ -161,15 +161,15 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 594
+    Top = 597
     Width = 759
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 472
-    Top = 122
+    Height = 476
+    Top = 121
     Width = 121
     Align = alLeft
     ExpandSignSize = 16
@@ -183,14 +183,14 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 472
-    Top = 122
+    Height = 476
+    Top = 121
     Width = 5
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 22
-    Top = 689
+    Height = 19
+    Top = 692
     Width = 759
     Panels = <>
   end
@@ -198,7 +198,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 117
+    Top = 116
     Width = 759
     Align = alTop
     ResizeAnchor = akTop
@@ -206,7 +206,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Panel1: TPanel
     Left = 0
     Height = 82
-    Top = 35
+    Top = 34
     Width = 759
     Align = alTop
     AutoSize = True

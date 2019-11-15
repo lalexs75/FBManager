@@ -173,6 +173,7 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     Width = 203
     BorderSpacing.Around = 6
     Caption = 'Enable loggin script executive'
+    OnClick = cbLogEditorClick
     TabOrder = 8
   end
   object Label12: TLabel[12]
@@ -182,9 +183,9 @@ inherited fdbmCFLogFrame: TfdbmCFLogFrame
     Left = 12
     Height = 17
     Top = 248
-    Width = 110
+    Width = 107
     BorderSpacing.Around = 6
-    Caption = 'SQL editor log file'
+    Caption = 'SQL script log file'
     ParentColor = False
   end
   object edtEditorLogName1: TFileNameEdit[13]

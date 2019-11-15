@@ -13,3 +13,11 @@ CREATE TABLE db_connection_options(
 /*------  01.08.2019 16:28:53 ------*/
 
 ALTER TABLE db_database ADD COLUMN show_child_objects BOOLEAN;
+
+/*------  15.11.2019 13:57:31 ------*/
+
+ALTER TABLE db_database ADD COLUMN db_database_log_script_exec_filename CHAR(250) /* Протоколирование исполнения скриптов */;
+
+/*------  15.11.2019 14:05:54 ------*/
+
+ALTER TABLE db_database ADD COLUMN db_database_use_log_script_exec BOOLEAN /* Использовать протоколирование редактора скриптов */;

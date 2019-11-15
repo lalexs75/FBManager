@@ -336,8 +336,10 @@ type
     LogMetadata:boolean;
     LogMetadataCustomCP:boolean;
     LogSQLEditor:boolean;
+    LogSQLScript:boolean;
     LogFileMetadata:string;
     LogFileSQLEditor:string;
+    LogFileSQLScript:string;
     HistoryCountSQLEditor:integer;
     LogFileCodePage:string;
 
@@ -1078,6 +1080,9 @@ begin
   //HistoryCountSQLEditor:=IniFile.ReadInteger(IniSection, 'HistoryCountSQLEditor', HistoryCountSQLEditor);
   AData.FieldByName('db_database_use_log_meta_custom_charset').AsBoolean:=LogMetadataCustomCP;
   AData.FieldByName('db_database_log_meta_custom_charset').AsString:=LogFileCodePage;
+
+  AData.FieldByName('db_database_use_log_script_exec').AsBoolean:=LogSQLScript;
+  AData.FieldByName('db_database_log_script_exec_filename').AsString:=LogFileSQLScript;
 end;
 
 procedure TSQLEngineLogOptions.Load(AData: TDataSet);
@@ -1090,6 +1095,8 @@ begin
   //HistoryCountSQLEditor:=IniFile.ReadInteger(IniSection, 'HistoryCountSQLEditor', HistoryCountSQLEditor);
   LogMetadataCustomCP:=AData.FieldByName('db_database_use_log_meta_custom_charset').AsBoolean;
   LogFileCodePage:=AData.FieldByName('db_database_log_meta_custom_charset').AsString;
+  LogSQLScript:=AData.FieldByName('db_database_use_log_script_exec').AsBoolean;
+  LogFileSQLScript:=AData.FieldByName('db_database_log_script_exec_filename').AsString;
 end;
 
 { TPrimaryKeyRecord }
