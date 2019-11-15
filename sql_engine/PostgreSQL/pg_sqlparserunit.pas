@@ -6014,7 +6014,7 @@ begin
                S:=S + PGObjectNames[ObjectKind] + ' ';
                if SchemaName <> '' then
                  S:=S + DoFormatName(SchemaName) + '.';
-                S:=S + DoFormatName(TableName)+'.'+DoFormatName(Name);
+                S:=S + DoFormatName2(TableName)+'.'+DoFormatName(Name);
              end;
 
     okCheckConstraint,
@@ -6060,7 +6060,7 @@ begin
         S:=S + PGObjectNames[ObjectKind] + ' ' + DoFormatName(Name) + ' ON ';
         if SchemaName <> '' then
           S:=S + DoFormatName(SchemaName) + '.';
-        S:=S + DoFormatName(TableName);
+        S:=S + DoFormatName2(TableName);
       end;
     okTransform:
       begin
