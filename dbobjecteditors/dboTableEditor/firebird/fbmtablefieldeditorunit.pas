@@ -626,9 +626,9 @@ begin
   S:=StringReplace(S, '%TABLE_NAME%', edtTableName.Text, [rfReplaceAll, rfIgnoreCase]);
   S:=StringReplace(S, '%TRIGGER_NAM%', edtFieldName.Text, [rfReplaceAll, rfIgnoreCase]);
   if RadioButton3.Checked then
-    S:=StringReplace(S, '%GENERATOR_NAME%', Edit3.Text, [rfReplaceAll, rfIgnoreCase])
+    S:=StringReplace(S, '%GENERATOR_NAME%', DoFormatName2(Edit3.Text), [rfReplaceAll, rfIgnoreCase])
   else
-    S:=StringReplace(S, '%GENERATOR_NAME%', ComboBox3.Text, [rfReplaceAll, rfIgnoreCase]);
+    S:=StringReplace(S, '%GENERATOR_NAME%', DoFormatName2(ComboBox3.Text), [rfReplaceAll, rfIgnoreCase]);
   if FTable.SchemaName<>'' then
     S:=StringReplace(S, '%TABLE_SCHEMA_NAME%', FTable.SchemaName, [rfReplaceAll, rfIgnoreCase]);
   Result:=S;
