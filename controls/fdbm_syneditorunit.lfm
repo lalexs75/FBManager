@@ -1141,6 +1141,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     AutoUseSingleIdent = True
     ShortCut = 16416
     EndOfTokenChr = '()[].,;:-+=^*<>/'
+    OnCodeCompletion = SynCompletion1CodeCompletion
     ExecCommandID = ecSynCompletionExecute
     Editor = TextEditor
     ToggleReplaceWhole = False

@@ -233,6 +233,9 @@ type
     procedure edtUndoExecute(Sender: TObject);
     procedure optEditorsExecute(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
+    procedure SynCompletion1CodeCompletion(var Value: string;
+      SourceValue: string; var SourceStart, SourceEnd: TPoint;
+      KeyChar: TUTF8Char; Shift: TShiftState);
     procedure SynCompletion1Execute(Sender: TObject);
     procedure SynCompletion1KeyNextChar(Sender: TObject);
     procedure SynCompletion1KeyPrevChar(Sender: TObject);
@@ -352,7 +355,7 @@ implementation
 uses IBManMainUnit, SynEditTypes, fEditSearch, IBManDataInspectorUnit, LCLIntf,
   fbmInsertDefSqlUnit, LCLProc, LazFileUtils, strutils, rxAppUtils,
   fbmStrConstUnit, fdbm_SynEditorCompletionHintUnit,
-  fdbmSynAutoCompletionsLists, LazUTF8;
+  fdbmSynAutoCompletionsLists, SQLEngineInternalToolsUnit, LazUTF8;
 
 {$R *.lfm}
 
@@ -671,6 +674,13 @@ begin
     FOnPopUpMenu(PopupMenu1);
   ceCommentCode.Enabled:=TextEditor.SelStart < TextEditor.SelEnd;
   ceUncommentCode.Enabled:=ceCommentCode.Enabled;
+end;
+
+procedure Tfdbm_SynEditorFrame.SynCompletion1CodeCompletion(var Value: string;
+  SourceValue: string; var SourceStart, SourceEnd: TPoint; KeyChar: TUTF8Char;
+  Shift: TShiftState);
+begin
+  Value:=DoFormatName(Value);
 end;
 
 procedure Tfdbm_SynEditorFrame.SynCompletion1Execute(Sender: TObject);
@@ -1680,7 +1690,15 @@ begin
         if Result then
         begin
           j:=i-1;
-          while (j>0) and (S[j] in ['A'..'z','"', '0'..'9','$']) do Dec(j);
+          if S[j] = '"' then
+          begin
+            Dec(i);
+            Dec(j);
+            while (j>0) and (S[j] <>'"') do Dec(j);
+            if J = 0 then Exit;
+          end
+          else
+          while (j>0) and (S[j] in ['A'..'z', '0'..'9','$']) do Dec(j);
           aTableName:=Copy(S, j+1, i-j-1);
         end;
       end
