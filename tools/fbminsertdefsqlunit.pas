@@ -179,7 +179,12 @@ end;
 procedure TfbmInsertDefSqlForm.DoFillFieldEx;
 begin
   if Edit2.Text<>'' then
-    DoFillField(FormatStringCase(Edit2.Text, ccoNoneCase)+'.')
+  begin
+    if DoFormatName(Edit2.Text) <> Edit2.Text then
+      DoFillField(DoFormatName(Edit2.Text) + '.')
+    else
+      DoFillField(FormatStringCase(Edit2.Text, ccoNoneCase)+'.')
+  end
   else
     DoFillField('');
 end;
@@ -193,7 +198,7 @@ begin
   begin
     if CheckListBox1.Checked[i] then
     begin
-      SynEdit1.Lines.Add(MS(' ', FMarg)+VarPrf+FormatStringCase(CheckListBox1.Items[i], ccoNoneCase)+',');
+      SynEdit1.Lines.Add(MS(' ', FMarg) + VarPrf + FormatStringCase(CheckListBox1.Items[i], ccoNoneCase)+',');
       j:=SynEdit1.Lines.Count;
     end;
   end;
@@ -207,12 +212,17 @@ begin
   SynEdit1.Lines.Add(MS(' ', FMarg) + FormatStringCase('select', TCharCaseOptions(ConfigValues.ByNameAsInteger('ectCharCaseKeyword', 0))));
   Inc(FMarg, 2);
   if Edit2.Text<>'' then
-    DoFillField(FormatStringCase(Edit2.Text, ccoNoneCase)+'.')
+  begin
+    if DoFormatName(Edit2.Text)<>Edit2.Text then
+      DoFillField(DoFormatName(Edit2.Text) + '.')
+    else
+      DoFillField(FormatStringCase(Edit2.Text, ccoNoneCase)+'.')
+  end
   else
     DoFillField('');
   Dec(FMarg, 2);
   SynEdit1.Lines.Add(MS(' ', FMarg) + FormatStringCase('from', TCharCaseOptions(ConfigValues.ByNameAsInteger('ectCharCaseKeyword', 0))));
-  SynEdit1.Lines.Add(MS(' ', FMarg+2) + Edit1.Text+' '+Edit2.Text);
+  SynEdit1.Lines.Add(MS(' ', FMarg+2) + DoFormatName2(Edit1.Text) + ' '+ DoFormatName(Edit2.Text));
 end;
 
 procedure TfbmInsertDefSqlForm.DoFillSelectIntoSql;
@@ -241,7 +251,7 @@ begin
   SynEdit1.Lines.Add(MS(' ', FMarg) + 'delete');
   SynEdit1.Lines.Add(MS(' ', FMarg) + 'from');
   inc(FMarg, 2);
-  SynEdit1.Lines.Add(MS(' ', FMarg+2) + FObjRec.CaptionFullPatch);
+  SynEdit1.Lines.Add(MS(' ', FMarg+2) + DoFormatName2(FObjRec.CaptionFullPatch));
   Dec(FMarg, 2);
   if (FObjRec is TDBTableObject) and ((FObjRec as TDBTableObject).ConstraintCount > 0) then
   begin
