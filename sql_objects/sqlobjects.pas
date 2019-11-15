@@ -1088,7 +1088,7 @@ var
 begin
   Result:='';
   for T in Self do
-    Result:=Result +  T.FullName + ', ';
+    Result:=Result +  DoFormatName2(T.FullName) + ', ';
   Result:=Copy(Result, 1, Length(Result)-2);
 end;
 
