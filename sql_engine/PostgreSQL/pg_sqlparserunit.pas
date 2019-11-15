@@ -19436,8 +19436,8 @@ begin
     S:=S + ' EXECUTE PROCEDURE ';
 
     if FProcSchema<>'' then
-      S:=S + FProcSchema +'.';
-    S:=S + FProcName + '(' + ')';
+      S:=S + DoFormatName(FProcSchema) +'.';
+    S:=S + DoFormatName(FProcName) + '(' + ')';
     AddSQLCommand(S);
   end;
 

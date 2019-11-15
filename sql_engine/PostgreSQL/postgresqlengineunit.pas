@@ -1281,10 +1281,6 @@ type
 
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 begin
-(*  if Assigned(ASch) then
-    Result:=DoFormatName(ASch.Caption, false) + '.'+DoFormatName(AObj.Caption, false)
-  else
-    Result:=DoFormatName(AObj.Caption, false); *)
   if Assigned(ASch) then
     Result:=ASch.Caption + '.'+AObj.Caption
   else
@@ -4016,6 +4012,7 @@ begin
     except
       on E:Exception do
       begin
+        { TODO : Необходимо передалать сообщение об ошибке компиляции - выводит дополнительную информацию }
         InternalError(E.Message);
         Result:=false;
       end;

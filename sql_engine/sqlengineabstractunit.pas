@@ -2608,11 +2608,14 @@ end;
 function TDBObject.CompileSQLObject(ASqlObject: TSQLCommandDDL;
   ASqlExecParam: TSqlExecParams): boolean;
 begin
-  if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoUpperCase then
-    ASqlObject.Name:=UTF8UpperString(ASqlObject.Name)
-  else
-  if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoLowerCase then
-    ASqlObject.Name:=UTF8LowerCase(ASqlObject.Name);
+  if DoFormatName(ASqlObject.Name) = ASqlObject.Name then
+  begin
+    if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoUpperCase then
+      ASqlObject.Name:=UTF8UpperString(ASqlObject.Name)
+    else
+    if OwnerDB.MiscOptions.ObjectNamesCharCase = ccoLowerCase then
+      ASqlObject.Name:=UTF8LowerCase(ASqlObject.Name);
+  end;
 
   Result:=ExecSQLScriptEx(ASqlObject.SQLText, ASqlExecParam, FOwnerDB);
   if Result then

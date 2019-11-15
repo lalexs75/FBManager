@@ -219,6 +219,7 @@ type
     function GetFullName: string; override;
     property SchemaName:string read FSchemaName write FSchemaName;
     property TableName:string read FTableName write FTableName;
+    procedure SetName(AValue: string); override;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     destructor Destroy;override;
@@ -816,7 +817,7 @@ var
   SQLValidChars : set of char = ['a'..'z','A'..'Z','0'..'9', '_', '$'];
 
 implementation
-uses rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit;
+uses StrUtils, rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit;
 
 
 
@@ -1600,6 +1601,16 @@ begin
     Result:=DoFormatName(FSchemaName) +'.'+DoFormatName(Name)
   else
     Result:=DoFormatName(Name);
+end;
+
+procedure TSQLCommandDDL.SetName(AValue: string);
+var
+  I: SizeInt;
+begin
+  I:=Pos('.', AValue);
+  if (I>0) then
+    FSchemaName:=Copy2SymbDel(AValue, '.');
+  inherited SetName(AValue);
 end;
 
 constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
