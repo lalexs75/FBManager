@@ -6553,7 +6553,7 @@ function TPGView.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
   if not FDataSet.Active then
   begin
-    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch;
+    TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch);
     if ARecCountLimit > -1 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
