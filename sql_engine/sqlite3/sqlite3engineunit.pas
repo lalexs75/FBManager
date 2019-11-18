@@ -1327,7 +1327,7 @@ var
   F: TIndexField;
 begin
   IndexArrayClear;
-  QIndex:=OwnerDB.OpenDataSet('pragma index_list('+CaptionFullPatch+')', nil);
+  QIndex:=OwnerDB.OpenDataSet('pragma index_list('+DoFormatName2(CaptionFullPatch)+')', nil);
   try
     while not QIndex.Eof do
     begin

@@ -2443,7 +2443,7 @@ end;
 
 function TDBObject.GetCaptionFullPatch: string;
 begin
-  Result:=DoFormatName(FCaption);
+  Result:=FCaption;
 end;
 
 function TDBObject.GetCaption: string;
