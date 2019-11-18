@@ -246,7 +246,8 @@ procedure TfbmFBVariableFrame.rxLocalVarsBeforePost(DataSet: TDataSet);
 begin
   if rxLocalVarsParTypeOf.IsNull then
     rxLocalVarsParTypeOf.AsBoolean:=false;
-  rxLocalVarsParName.AsString:=FormatStringCase(rxLocalVarsParName.AsString, FDBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
+  if DoFormatName(rxLocalVarsParName.AsString) = rxLocalVarsParName.AsString then
+    rxLocalVarsParName.AsString:=FormatStringCase(rxLocalVarsParName.AsString, FDBObject.OwnerDB.MiscOptions.ObjectNamesCharCase);
 end;
 
 procedure TfbmFBVariableFrame.rxLocalVarsParTypeChange(Sender: TField);

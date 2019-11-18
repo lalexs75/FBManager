@@ -208,7 +208,7 @@ begin
 
   EditorFrame.EditorText:=ParseLocalVariable(TFireBirdStoredProc(DBObject).ProcedureBody);
 
-  edtProcName.Text:=TFireBirdStoredProc(DBObject).CaptionFullPatch;
+  edtProcName.Text:=DBObject.Caption;
   tabHeader.TabVisible := DBObject.State <> sdboEdit;
   if not tabHeader.TabVisible then
     if PageControl1.ActivePage = tabHeader then

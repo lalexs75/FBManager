@@ -10,21 +10,21 @@ inherited fbmSPEdtMainPageFrame: TfbmSPEdtMainPageFrame
     Height = 200
     Top = 0
     Width = 1038
-    ActivePage = tabReturnParams
+    ActivePage = tabHeader
     Align = alTop
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object tabHeader: TTabSheet
       Caption = 'tabHeader'
-      ClientHeight = 167
+      ClientHeight = 169
       ClientWidth = 1028
       object Label1: TLabel
         AnchorSideLeft.Control = tabHeader
         AnchorSideTop.Control = tabHeader
         Left = 6
-        Height = 20
+        Height = 17
         Top = 6
-        Width = 105
+        Width = 98
         BorderSpacing.Around = 6
         Caption = 'Procedure name'
         ParentColor = False
@@ -36,8 +36,8 @@ inherited fbmSPEdtMainPageFrame: TfbmSPEdtMainPageFrame
         AnchorSideRight.Control = tabHeader
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 37
-        Top = 32
+        Height = 34
+        Top = 29
         Width = 1010
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6

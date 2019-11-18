@@ -6318,7 +6318,7 @@ begin
   FLocal:='';
 
   LP:=TFBLocalVariableParser.Create(nil);
-  LP.OwnerName:=Name;
+  LP.OwnerName:=FullName;
   LP.Params.CopyFrom(Params, [spvtInput]);
   LP.DescType:=fbldParams;
   FIn:=LP.AsSQL;
@@ -6336,7 +6336,7 @@ begin
   S:='CREATE ';
   if CreateMode = cmCreateOrAlter then
     S:=S + 'OR ALTER ';
-  S:=S + 'PROCEDURE ' + Name;
+  S:=S + 'PROCEDURE ' + FullName;
 
 
   if FIn <> '' then
