@@ -857,7 +857,7 @@ type
   end;
 
 implementation
-uses rxstrutils;
+uses rxstrutils, SQLEngineInternalToolsUnit;
 
 type
   TTypeDefMode = (tdfDomain, tdfParams, tdfTypeOnly, tdfTableColDef);
@@ -2241,7 +2241,7 @@ begin
   if ObjectKind = okPackageBody then
     S:=S + ' BODY';
 
-  S:=S + ' ' + Name + LineEnding + 'AS'+LineEnding;
+  S:=S + ' ' + FullName + LineEnding + 'AS'+LineEnding;
 
   if PackageText <> '' then
     S:=S + PackageText
@@ -2257,7 +2257,7 @@ begin
       else
       if P.InReturn = spvtSubProc then S1:=S1 + 'PROCEDURE';
 
-      S:=S + S1 + ' ' + P.Caption + P.CheckExpr + LineEnding;
+      S:=S + S1 + ' ' + DoFormatName(P.Caption) + P.CheckExpr + LineEnding;
 
     end;
     S:=S + 'END';
@@ -2329,7 +2329,7 @@ begin
   S:='DROP PACKAGE ';
   if ObjectKind = okPackageBody then
     S:=S + 'BODY ';
-  S:=S + Name;
+  S:=S + FullName;
 
   AddSQLCommand(S);
 end;
@@ -2367,7 +2367,7 @@ procedure TFBSQLDropIndex.MakeSQL;
 var
   S: String;
 begin
-  S:='DROP INDEX ' + Name;
+  S:='DROP INDEX ' + FullName;
   AddSQLCommand(S);
 end;
 
@@ -2406,7 +2406,7 @@ procedure TFBSQLAlterIndex.MakeSQL;
 var
   S: String;
 begin
-  S:='ALTER INDEX '+Name;
+  S:='ALTER INDEX '+FullName;
   if Active then
     S:=S +' ACTIVE'
   else
@@ -2497,7 +2497,7 @@ begin
   S:='CREATE';
   if Unique then S:=S + ' UNIQUE';
   if SortOrder <> indDefault then S:=S + ' ' + IndexSortOrderNames[SortOrder];
-  S:=S + ' INDEX '+Name + ' ON '+TableName;
+  S:=S + ' INDEX '+FullName + ' ON '+DoFormatName(TableName);
 
   if IndexExpression <> '' then
     S:=S + ' COMPUTED BY ('+IndexExpression + ')'
@@ -2593,7 +2593,7 @@ procedure TFBSQLExecuteProcedure.MakeSQL;
 var
   S: String;
 begin
-  S:='EXECUTE PROCEDURE ' + ProcName;
+  S:='EXECUTE PROCEDURE ' + DoFormatName(ProcName);
   AddSQLCommand(S);
 end;
 
@@ -3188,12 +3188,12 @@ begin
     if F.TypeName = 'UPDATE' then
     begin
       if SU<>'' then SU:=SU + ', ';
-      SU:=SU + F.Caption;
+      SU:=SU + DoFormatName(F.Caption);
     end
     else
     begin;
       if SR<>'' then SR:=SR + ', ';
-      SR:=SR + F.Caption;
+      SR:=SR + DoFormatName(F.Caption);
     end
   end;
 {  if ((GrantTypes * [ogSelect, ogInsert, ogUpdate, ogDelete, ogReference]) = [ogSelect, ogInsert, ogUpdate, ogDelete, ogReference]) and (FCurTable.Fields.Count = 0) then
@@ -3220,7 +3220,7 @@ begin
     S:=S + ' ON ';
     if FCurTable.ObjectKind = okTable then
       S:=S + 'TABLE ';
-    S:=S+ FCurTable.Name + ' FROM ' + Params.AsString
+    S:=S+ DoFormatName2(FCurTable.Name) + ' FROM ' + Params.AsString
   end
   else
   begin
@@ -3470,7 +3470,7 @@ begin
     if SG <> '' then SG:=SG + ', ';
     if G1.ObjectKind <> okNone then
       SG:=SG + FBObjectNames[G1.ObjectKind] + ' ';
-    SG:=SG + G1.Caption;
+    SG:=SG + DoFormatName(G1.Caption);
   end;
 
   if ObjectKind = okRole then
@@ -3523,7 +3523,7 @@ begin
       S:=S + ' PROCEDURE';
   end;
 
-  S:=S + ' ' +FCurTable.Name + ' TO '+SG;
+  S:=S + ' ' +DoFormatName2(FCurTable.Name) + ' TO '+SG;
 
   if ogWGO in GrantTypes then
     S:=S + ' WITH GRANT OPTION';
@@ -4095,10 +4095,10 @@ begin
   if ObjectKind in [okCharSet, okCollation, okDomain, okException,
     okUDF, okFilter, okSequence, okIndex, okStoredProc, okRole,
     okTable, okTrigger, okView, okFunction, okPackage] then
-    S:=S + ' ' + Name
+    S:=S + ' ' + DoFormatName(Name)
   else
   if ObjectKind in [okColumn, okParameter] then
-    S:=S + ' ' + TableName + '.' + Name;
+    S:=S + ' ' + DoFormatName(TableName) + '.' + DoFormatName(Name);
 
   S:=S + ' IS ' + QuotedString(TrimRight(Description), '''');
   AddSQLCommand(S);
@@ -4118,7 +4118,7 @@ end;
 
 procedure TFBSQLDropRole.MakeSQL;
 begin
-  AddSQLCommandEx('DROP ROLE %s', [Name]);
+  AddSQLCommandEx('DROP ROLE %s', [FullName]);
 end;
 
 procedure TFBSQLDropRole.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4158,7 +4158,7 @@ end;
 
 procedure TFBSQLCreateRole.MakeSQL;
 begin
-  AddSQLCommandEx('CREATE ROLE %s', [Name]);
+  AddSQLCommandEx('CREATE ROLE %s', [FullName]);
   if Description <> '' then
     DescribeObject;
 end;
@@ -4215,7 +4215,7 @@ end;
 
 procedure TFBSQLDropTrigger.MakeSQL;
 begin
-  AddSQLCommand('DROP TRIGGER ' + Name);
+  AddSQLCommand('DROP TRIGGER ' + DoFormatName(Name));
 end;
 
 procedure TFBSQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4243,7 +4243,7 @@ end;
 
 procedure TFBSQLDropTable.MakeSQL;
 begin
-  AddSQLCommand('DROP TABLE ' + Name);
+  AddSQLCommand('DROP TABLE ' + FullName);
 end;
 
 procedure TFBSQLDropTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4302,7 +4302,7 @@ end;
 
 procedure TFBSQLDropDomain.MakeSQL;
 begin
-  AddSQLCommand('DROP DOMAIN '+Name);
+  AddSQLCommand('DROP DOMAIN '+FullName);
 end;
 
 procedure TFBSQLDropDomain.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4407,7 +4407,7 @@ var
   S: String;
   OP: TAlterDomainOperator;
 begin
-  S:='ALTER DOMAIN '+Name;
+  S:='ALTER DOMAIN '+FullName;
   for OP in Operators do
   begin
     case OP.AlterAction of
@@ -4523,7 +4523,7 @@ procedure TFBSQLCreateDomain.MakeSQL;
 var
   S: String;
 begin
-  S:='CREATE DOMAIN ' + Name + ' AS ' + DomainType;
+  S:='CREATE DOMAIN ' + FullName + ' AS ' + DomainType;
 
   if TypeLen > 0 then
   begin
@@ -4974,7 +4974,7 @@ begin
   S:='CREATE';
   if FOnCommit <> oncNone then
     S:=S + ' GLOBAL TEMPORARY';
-  S:=S + ' TABLE ' + Name;
+  S:=S + ' TABLE ' + FullName;
   if FFileName <> '' then
     S:=S + ' EXTERNAL FILE ' + QuotedStr(FFileName);
 
@@ -4984,7 +4984,7 @@ begin
   begin
     if S1<>'' then
       S1:=S1 + ','+LineEnding;
-    S1:=S1 + '  ' + F.Caption + ' ' + F.FullTypeName;
+    S1:=S1 + '  ' + DoFormatName(F.Caption) + ' ' + F.FullTypeName;
 (*    if F.TypeArrayDim <> '' then
       S1:=S1 + '[' + F.TypeArrayDim + ']';*)
     if F.ArrayDimension.Count>0 then
@@ -5602,7 +5602,7 @@ end;
 procedure DoChangeType(OP: TAlterTableOperator);
 begin
   if ServerVersion = gds_verFirebird3_0 then
-    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s TYPE %s', [Name, OP.Field.Caption, OP.Field.FullTypeName])
+    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s TYPE %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName])
   else
     AddSQLCommandEx('update RDB$RELATION_FIELDS set RDB$FIELD_SOURCE = ''%s'' where (RDB$FIELD_NAME = ''%s'') and (RDB$RELATION_NAME = ''%s'')',
      [OP.Field.TypeName, OP.Field.Caption, Name]);
@@ -5617,13 +5617,13 @@ begin
   begin
     case OP.AlterAction of
       ataAddColumn : AddCollumn(OP);
-      ataRenameColumn :AddSQLCommandEx('ALTER TABLE %s ALTER %s TO %s', [Name, OP.OldField.Caption, OP.Field.Caption]);
+      ataRenameColumn :AddSQLCommandEx('ALTER TABLE %s ALTER %s TO %s', [FullName, DoFormatName(OP.OldField.Caption), DoFormatName(OP.Field.Caption)]);
 
       ataAlterColumnSetDataType : DoChangeType(OP);
 
-      ataAlterColumnDropDefault : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s DROP DEFAULT', [Name, OP.Field.Caption]);
-      ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [Name, OP.Field.Caption, OP.Field.DefaultValue]);
-      ataDropColumn:AddSQLCommandEx('ALTER TABLE %s DROP %s', [Name, OP.Field.Caption]);
+      ataAlterColumnDropDefault : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s DROP DEFAULT', [FullName, DoFormatName(OP.Field.Caption)]);
+      ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.DefaultValue]);
+      ataDropColumn:AddSQLCommandEx('ALTER TABLE %s DROP %s', [FullName, DoFormatName(OP.Field.Caption)]);
       ataAlterColumnSetNotNull,
       ataAlterColumnDropNotNull:
         begin
@@ -5633,22 +5633,22 @@ begin
               S:='SET'
             else
               S:='DROP';
-            AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [Name, OP.Field.Caption, S]);
+            AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [FullName, DoFormatName(OP.Field.Caption), S]);
             (*
             SET NOT NULL  |  DROP NOT NULL
             *)
           end
           else
             AddSQLCommandEx('update RDB$RELATION_FIELDS set RDB$NULL_FLAG = %d ' + ' where (RDB$FIELD_NAME = ''%s'') and (RDB$RELATION_NAME = ''%s'')',
-            [Ord(fpNotNull in OP.Field.Params), OP.Field.Caption, Name]);
+            [Ord(fpNotNull in OP.Field.Params), DoFormatName(OP.Field.Caption), FullName]);
 
         end;
 
       ataAlterColumnDescription : DescribeObjectEx(okColumn, OP.Field.Caption, Name, OP.Field.Description);
       ataAddTableConstraint:DoAddConstrint(OP);
       ataDropConstraint:for C in OP.Constraints do
-                          AddSQLCommandEx('ALTER TABLE %s DROP CONSTRAINT %s', [Name, C.ConstraintName]);
-      ataAlterColumnPosition : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s POSITION %d', [Name, OP.Field.Caption, OP.Position]);
+                          AddSQLCommandEx('ALTER TABLE %s DROP CONSTRAINT %s', [FullName, C.ConstraintName]);
+      ataAlterColumnPosition : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s POSITION %d', [FullName, DoFormatName(OP.Field.Caption), OP.Position]);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
@@ -5669,7 +5669,7 @@ end;
 
 procedure TFBSQLDropException.MakeSQL;
 begin
-  AddSQLCommandEx('DROP EXCEPTION %s', [Name]);
+  AddSQLCommandEx('DROP EXCEPTION %s', [FullName]);
 end;
 
 procedure TFBSQLDropException.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -5700,10 +5700,10 @@ end;
 
 procedure TFBSQLAlterException.MakeSQL;
 begin
-  AddSQLCommandEx('ALTER EXCEPTION %s %s', [Name, QuotedStr(FMessage)]);
+  AddSQLCommandEx('ALTER EXCEPTION %s %s', [FullName, QuotedStr(FMessage)]);
 
   if FOldDescription <> Description then
-    AddSQLCommandEx('COMMENT ON EXCEPTION %s IS %s', [Name, QuotedStr(Description)]);
+    AddSQLCommandEx('COMMENT ON EXCEPTION %s IS %s', [FullName, QuotedStr(Description)]);
 end;
 
 procedure TFBSQLAlterException.Assign(ASource: TSQLObjectAbstract);
@@ -5760,7 +5760,7 @@ begin
     cmRecreate:S:='RECREATE';
   end;
 
-  AddSQLCommandEx('%s EXCEPTION %s %s', [S, Name, QuotedStr(FMessage)]);
+  AddSQLCommandEx('%s EXCEPTION %s %s', [S, FullName, QuotedStr(FMessage)]);
 
   if Description <> '' then
     DescribeObject;
@@ -5814,7 +5814,7 @@ begin
   else
     S:='SEQUENCE';
 
-  AddSQLCommandEx('DROP %s %s', [S, Name]);
+  AddSQLCommandEx('DROP %s %s', [S, FullName]);
 end;
 
 procedure TFBSQLDropGenerator.Assign(ASource: TSQLObjectAbstract);
@@ -5872,7 +5872,7 @@ begin
   else
     S:='SEQUENCE';
 
-  AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, Name, CurrentValue]);
+  AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, FullName, CurrentValue]);
 
   if Description <> FOldDescription then
     DescribeObject;
@@ -5922,7 +5922,7 @@ begin
   else
     S:='SEQUENCE';
 
-  AddSQLCommandEx('CREATE %s %s', [S, Name]);
+  AddSQLCommandEx('CREATE %s %s', [S, FullName]);
 
   if CurrentValue <> 0 then
     AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, Name, CurrentValue]);
@@ -6111,7 +6111,7 @@ begin
   for P in Params do
   begin
     if FDescType = fbldDescription then
-      AddSQLCommand(Format('COMMENT ON PARAMETER %s.%s IS %s;' + LineEnding, [FOwnerName, P.Caption,  QuotedStr(P.Description)]))
+      AddSQLCommand(Format('COMMENT ON PARAMETER %s.%s IS %s;' + LineEnding, [DoFormatName2(FOwnerName), DoFormatName(P.Caption),  QuotedStr(P.Description)]))
     else
     begin
       if S <> '' then S:=S + LineEnding;
@@ -6119,10 +6119,10 @@ begin
       begin
 
         case P.InReturn of
-          spvtSubFunction:S:=S + 'DECLARE FUNCTION ' + P.Caption + P.CheckExpr;
-          spvtSubProc:S:=S + 'DECLARE PROCEDURE ' + P.Caption + P.CheckExpr;
+          spvtSubFunction:S:=S + 'DECLARE FUNCTION ' + DoFormatName2(P.Caption) + P.CheckExpr;
+          spvtSubProc:S:=S + 'DECLARE PROCEDURE ' + DoFormatName2(P.Caption) + P.CheckExpr;
           spvtLocal:begin
-              S:=S + 'DECLARE VARIABLE ' + P.Caption + DoParamTypeStr(P);
+              S:=S + 'DECLARE VARIABLE ' + DoFormatName(P.Caption) + DoParamTypeStr(P);
               S:=S + ';';
               if (P.Description <> '') then
                 S:=S + ' /* ' + P.Description + ' */';
@@ -6131,7 +6131,7 @@ begin
       end
       else
       begin
-        S:=S + '  ' + P.Caption + DoParamTypeStr(P) + ',';
+        S:=S + '  ' + DoFormatName(P.Caption) + DoParamTypeStr(P) + ',';
       end
     end;
   end;
@@ -6434,10 +6434,10 @@ var
   F: TSQLParserField;
 begin
   case CreateMode of
-    cmCreate:S:='CREATE VIEW ' + Name;
-    cmRecreate:S:='RECREATE VIEW ' + Name;
-    cmCreateOrAlter:S:='CREATE OR ALTER VIEW ' + Name;
-    cmAlter:S:='ALTER VIEW ' + Name;
+    cmCreate:S:='CREATE VIEW ' + FullName;
+    cmRecreate:S:='RECREATE VIEW ' + FullName;
+    cmCreateOrAlter:S:='CREATE OR ALTER VIEW ' + FullName;
+    cmAlter:S:='ALTER VIEW ' + FullName;
   end;
 
   if Fields.Count > 0 then
@@ -6663,10 +6663,10 @@ begin
     if CreateMode = cmCreateOrAlter then
       S:=S+' OR ALTER';
   end;
-  S:=S + ' TRIGGER ' + Name;
+  S:=S + ' TRIGGER ' + DoFormatName(Name);
 
   if TableName <> '' then
-    S:=S + ' FOR ' + TableName + LineEnding;
+    S:=S + ' FOR ' + DoFormatName(TableName) + LineEnding;
 
   if FActive then
     S:=S + ' ACTIVE'
