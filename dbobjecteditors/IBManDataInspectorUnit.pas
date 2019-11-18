@@ -695,9 +695,12 @@ begin
 end;
 
 procedure TfbManDataInpectorForm.objRefreshExecute(Sender: TObject);
+var
+  FC: TDBInspectorRecord;
 begin
-  if Assigned(CurrentObject) and CurrentObject.OwnerDB.Connected then
-    CurrentObject.Refresh;
+  FC:=CurrentObject;
+  if Assigned(FC) and FC.OwnerDB.Connected then
+    FC.Refresh;
   UpdateDBManagerState;
 end;
 

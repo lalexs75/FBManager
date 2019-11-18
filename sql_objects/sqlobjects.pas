@@ -1835,7 +1835,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result +  F.Caption + ', ';
+    Result:=Result +  DoFormatName(F.Caption) + ', ';
   Result:=Copy(Result, 1, Length(Result)-2);
 end;
 
@@ -1845,7 +1845,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result + F.Caption + LineEnding;
+    Result:=Result + DoFormatName(F.Caption) + LineEnding;
 end;
 
 function TSQLFields.GetAsList: string;
@@ -1854,7 +1854,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result + '  ' + F.Caption + ','+LineEnding;
+    Result:=Result + '  ' + DoFormatName(F.Caption) + ','+LineEnding;
   Result:=Copy(Result, 1, Length(Result)-Length(','+LineEnding));
 end;
 

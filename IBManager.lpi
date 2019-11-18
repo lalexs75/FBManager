@@ -1897,6 +1897,9 @@
       <Item>
         <Name Value="Exception"/>
       </Item>
+      <Item>
+        <Name Value="EZDatabaseError"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>
