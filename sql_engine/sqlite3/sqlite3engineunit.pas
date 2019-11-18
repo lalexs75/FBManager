@@ -1270,6 +1270,8 @@ begin
   begin
     for F in FCmdCreateTable.Fields do
     begin
+      if (F.Caption<>'') and (F.Caption[1]='"') then
+        F.Caption:=AnsiDequotedStr(F.Caption, '"');
       Rec:=Fields.Add(F.Caption);
       Rec.LoadFromSQLFieldItem(F);
     end;

@@ -186,6 +186,8 @@ type
 
 implementation
 
+uses SQLEngineInternalToolsUnit;
+
 {
   out tag
   10 - Field name
@@ -691,7 +693,7 @@ begin
   S:=S + ' INDEX';
   if ooIfNotExists in Options then
     S:=' IF NOT EXISTS';
-  S:=S + ' ' + FullName + ' ON ' + TableName + '('+Fields.AsString + ')';
+  S:=S + ' ' + FullName + ' ON ' + DoFormatName2(TableName) + '('+Fields.AsString + ')';
   if WhereExpression <> '' then
     S:=S + ' WHERE ' + WhereExpression;
 
@@ -903,7 +905,7 @@ begin
       S:=S + ' OF ' + Fields.AsString;
   end;
 
-  S:= S + ' ON ' + TableName;
+  S:= S + ' ON ' + DoFormatName2(TableName);
   if ttRow in TriggerType then
     S:=S + ' FOR EACH ROW';
   S:=S + LineEnding;
@@ -1027,7 +1029,7 @@ begin
   if CreateMode in [cmCreateOrAlter, cmRecreate, cmDropAndCreate, cmAlter] then
   begin
     D:=TSQLite3SQLDropView.Create(nil);
-    D.Name:=Name;
+    D.Name:=FullName;
     D.Options:=D.Options + [ooIfExists];
     AddSQLCommand(D.AsSQL);
     D.Free;
@@ -1042,20 +1044,7 @@ begin
     S:=S + ' IF NOT EXISTS';
 
   S:=S +' '+ FullName;
-(*
-  S1:='';
-  for i:=0 to Fields.Count-1 do
-  begin
-    F:=TSQLParserField(Fields[i]);
-    S1:=S1 + '  ' + F.Caption;
-    if I<Fields.Count-1 then
-      S1:=S1 + ',';
-    S1:=S1 + LineEnding;
-  end;
 
-  if S1<>'' then
-    S:=S + '(' + LineEnding + S1 + ')';
-*)
   if Fields.Count > 0 then
     S:=S + '('+LineEnding + Fields.AsList + ')';
 
@@ -1207,9 +1196,9 @@ begin
   for Op in FOperators do
   begin
     case Op.AlterAction of
-      ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [OP.OldName, Op.Name]);
+      ataRenameTable:AddSQLCommandEx('ALTER TABLE %s RENAME TO %s', [DoFormatName2(OP.OldName), DoFormatName2(Op.Name)]);
       ataAddColumn:begin
-          S:=OP.Field.Caption;
+          S:=DoFormatName(OP.Field.Caption);
           if OP.Field.TypeName <> '' then
             S:=S + ' ' + OP.Field.FullTypeName;
           if fpNotNull in OP.Field.Params then
@@ -1233,7 +1222,7 @@ begin
           end;
 
           if OP.Field.Description <> '' then S:=S + ' /* '+ OP.Field.Description +' */';
-          AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s', [GetFullName, S]);
+          AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s', [FullName, S]);
         end
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
@@ -1577,10 +1566,7 @@ begin
   S:=S+'TABLE ';
   if ooIfNotExists in Options then
     S:=S + 'IF NOT EXISTS ';
-  if SchemaName <> '' then
-    S:=S + SchemaName + '.';
-  S:=S+Name;
-
+  S:=S + FullName;
   //Проверим есть ли несколько полей PK
   FCountPK:=0;
   for F in Fields do
@@ -1592,7 +1578,7 @@ begin
   SPK:='';
   for F in Fields do
   begin
-    S1:=S1 + '  ' + F.Caption;
+    S1:=S1 + '  ' + DoFormatName(F.Caption);
     if F.TypeName <> '' then
        S1:=S1 + ' ' + F.FullTypeName;
 
@@ -1656,7 +1642,7 @@ begin
     end;
 
     if C.ConstraintName <> '' then
-      S2:=S2 + ' CONSTRAINT ' + C.ConstraintName;
+      S2:=S2 + ' CONSTRAINT ' + DoFormatName(C.ConstraintName);
 
     if (C.ConstraintType = ctPrimaryKey) and (FCountPK = 0) then
     begin
