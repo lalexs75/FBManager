@@ -1664,7 +1664,7 @@ begin
     if C.ConstraintType = ctForeignKey then
     begin
       S2:=S2 + ' FOREIGN KEY ('+C.ConstraintFields.AsString +
-        ') REFERENCES ' + C.ForeignTable;
+        ') REFERENCES ' + DoFormatName(C.ForeignTable);
       if C.ForeignFields.Count > 0 then
         S2:=S2 + ' (' + C.ForeignFields.AsString + ')';
       if C.ForeignKeyRuleOnUpdate <> fkrNone then
