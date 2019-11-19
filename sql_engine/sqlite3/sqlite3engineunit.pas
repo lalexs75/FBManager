@@ -1155,7 +1155,7 @@ function TSQLite3Table.GetRecordCount: integer;
 var
   Q: TDataSet;
 begin
-  Q:=TSQLEngineSQLite3(OwnerDB).OpenDataSet('select count(*) from ' +CaptionFullPatch, nil);
+  Q:=TSQLEngineSQLite3(OwnerDB).OpenDataSet('select count(*) from ' + DoFormatName(Caption), nil);
   try
     Q.Open;
     Result:=Q.Fields[0].AsInteger;
