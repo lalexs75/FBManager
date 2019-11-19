@@ -1003,6 +1003,8 @@ begin
   end;
   if FCmdCreateTable.State = cmsError then
     raise Exception.Create(FCmdCreateTable.ErrorMessage + '(' + FInternalSQL + ')');
+
+
 end;
 
 procedure TSQLite3Table.ZUpdateSQLBeforeInsertSQLStatement(
@@ -1038,12 +1040,12 @@ begin
             S1:=S1+ ', ';
             S2:=S2+ ', ';
           end;
-          S1:=S1 + FD.FieldName;
-          S2:=S2 +':' + FD.FieldName;
+          S1:=S1 + DoFormatName(FD.FieldName);
+          S2:=S2 +':' + DoFormatName(FD.FieldName);
         end;
       end;
 
-      S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+')'; // returning '+MakeSQLInsertFields(false);
+      S:='insert into ' + DoFormatName(Caption) + '(' + S1 + ')'+ ' values('+S2+')';
       quIns:=TSQLEngineSQLite3(OwnerDB).GetSQLQuery(S);
       for F in FDataSet.Fields do
       begin
@@ -1229,7 +1231,7 @@ begin
   RefreshFieldList;
 
   IndexListRefresh;
-  RefreshConstraintPrimaryKey;
+  //RefreshConstraintPrimaryKey;
 end;
 
 procedure TSQLite3Table.RefreshDependencies;
@@ -1377,6 +1379,8 @@ begin
     begin
       for CF in C.ConstraintFields do
       begin
+        if (CF.Caption<>'') and (CF.Caption[1]='"') then
+          CF.Caption:=AnsiDequotedStr(CF.Caption, '"');
         F:=Fields.FieldByName(CF.Caption);
         if Assigned(F) then
           F.FieldPK:=true;
@@ -1458,11 +1462,11 @@ begin
       if Result<>'' then
         Result:=Result + ' and ';
       case ASQLParamState of
-        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :new_' + F.FieldName+')';
-        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :old_' + F.FieldName+')';
+        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('new_' + F.FieldName)+')';
+        spsOld:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('old_' + F.FieldName)+')';
       else
         //spsNormal
-        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + F.FieldName+')';
+        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName)+')';
       end;
     end;
   if Result <> '' then
@@ -1475,7 +1479,7 @@ var
 begin
   Result:='';
   for F in Fields do
-    Result:=Result + F.FieldName +' = :'+F.FieldName + ',';
+    Result:=Result + DoFormatName(F.FieldName) +' = :'+DoFormatName(F.FieldName) + ',';
   if Result <> '' then
     Result:= Copy(Result, 1, Length(Result) - 1);
 end;
@@ -1487,30 +1491,30 @@ begin
   Result:='';
   for F in Fields do
     if AParams then
-      Result:=Result + ' :' + F.FieldName + ','
+      Result:=Result + ' :' + DoFormatName(F.FieldName) + ','
     else
-      Result:=Result + ' ' + F.FieldName + ',';
+      Result:=Result + ' ' + DoFormatName(F.FieldName) + ',';
   if Result <> '' then
     Result:= Copy(Result, 1, Length(Result) - 1);
 end;
 
+var
+  S: String;
 begin
   if not FDataSet.Active then
   begin
     RefreshConstraintPrimaryKey;
-    TZQuery(FDataSet).SQL.Text:='select * from '+DoFormatName(Caption) {+MakeOrderBy};
-{
-    if ARecCountLimit > -1 then
-      FDataSet.SQL.Text:=FDataSet.SQL.Text+' limit '+IntToStr(ARecCountLimit);
-}
-    ZUpdateSQL.InsertSQL.Text:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ') values('+MakeSQLInsertFields(true)+')';
-    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    TZQuery(FDataSet).SQL.Text:='select * from '+DoFormatName(Caption);
+
+    ZUpdateSQL.InsertSQL.Text:='insert into ' + DoFormatName(Caption) + '(' + MakeSQLInsertFields(false) + ') values('+MakeSQLInsertFields(true)+')';
+    //S:='update ' + DoFormatName(Caption) + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    ZUpdateSQL.ModifySQL.Text:='update ' + DoFormatName(Caption) + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
     ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere(spsOld);
-    //ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsOld);
 
     if FPKCount > 0 then
     begin
-      ZUpdateSQL.RefreshSQL.Text:='select * from '+CaptionFullPatch + MakeSQLWhere(spsNew);
+      S:='select * from '+ DoFormatName(Caption) + MakeSQLWhere(spsNew);
+      ZUpdateSQL.RefreshSQL.Text:='select * from '+ DoFormatName(Caption) + MakeSQLWhere(spsNew);
       ZUpdateSQL.BeforeInsertSQLStatement:=@ZUpdateSQLBeforeInsertSQLStatement;
     end
     else
