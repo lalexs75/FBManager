@@ -2857,6 +2857,7 @@ begin
   if csfLoadedFK in FFlags then
     RefreshConstraintForeignKey;
 
+  //after change table structure need reopen data
   if Assigned(FDataSet) and (FDataSet.Active) then
     FDataSet.Active:=false;
 end;
