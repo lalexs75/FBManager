@@ -498,6 +498,8 @@ begin
   if FCmdCreateTrigger.State = cmsError then
     raise Exception.Create(FCmdCreateTrigger.ErrorMessage + '(' + FInternalSQL + ')');
 
+  if (FCmdCreateTrigger.TableName<>'') and (FCmdCreateTrigger.TableName[1]='"') then
+    FCmdCreateTrigger.TableName:=AnsiDequotedStr(FCmdCreateTrigger.TableName, '"');
   FActive:=true;
   Description:=FCmdCreateTrigger.Description;
 end;
