@@ -1341,7 +1341,7 @@ begin
   CreateColDef(Self, T, [TSymb, TSymb2], true);
   TSymb.CopyChildTokens(T);
 
-  TC:=AddSQLTokens(stKeyword, TSymb, 'CONSTRAINT', []);
+  TC:=AddSQLTokens(stKeyword, TSymb, 'CONSTRAINT', [], 14);
   //TSymb.AddChildToken(TC);
 
   TCN:=AddSQLTokens(stIdentificator, TC, '', [], 40);
@@ -1426,6 +1426,18 @@ begin
   TSymb_cne:=AddSQLTokens(stSymbol, [TSymb6, TSymb4, TRef1_1, TRef1_2, TRef1_3, TRef1_4, TRef1_5,
     TRef2_1, TRef2_2, TRef2_3, TRef2_4, TRef2_5, TCC1], ',', [], 14);
     TSymb_cne.AddChildToken([TCPK, TCU, TCFK, TC, TCC]);
+
+    TRef1_1.AddChildToken(TC);
+    TRef1_2.AddChildToken(TC);
+    TRef1_3.AddChildToken(TC);
+    TRef1_4.AddChildToken(TC);
+    TRef1_5.AddChildToken(TC);
+    TRef2_1.AddChildToken(TC);
+    TRef2_2.AddChildToken(TC);
+    TRef2_3.AddChildToken(TC);
+    TRef2_4.AddChildToken(TC);
+    TRef2_5.AddChildToken(TC);
+
 
   TCofR.AddChildToken([TSymb2]);
   TCofA.AddChildToken([TSymb2]);
@@ -1630,15 +1642,20 @@ begin
 
   S2:='';
   if SPK <> '' then
-    S2:=S2 + ' PRIMARY KEY ('+copy(SPK, 1, Length(SPK)-2) + ')' + LineEnding;
+    S2:=S2 + ' PRIMARY KEY ('+copy(SPK, 1, Length(SPK)-2) + ')' (* + LineEnding *);
 
   for C in SQLConstraints do
   begin
     if (S2 <> '') then
     begin
-      if (C.ConstraintType = ctPrimaryKey) and (FCountPK = 0) then
-        S2:= S2 +',';
-      S2:= S2 + LineEnding;
+      if (C.ConstraintType = ctPrimaryKey) then
+      begin
+        if  (FCountPK = 0) then
+          S2:= S2 +',' + LineEnding;
+      end
+      else
+        S2:= S2 +',' + LineEnding;
+//      S2:= S2 + LineEnding;
     end;
 
     if C.ConstraintName <> '' then

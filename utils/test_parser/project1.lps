@@ -165,8 +165,8 @@
         <UnitName Value="sqlite3_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1445"/>
-        <CursorPos Y="1316"/>
+        <TopLine Value="1633"/>
+        <CursorPos X="37" Y="1654"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 X="80" Y="277" ID="1"/>
@@ -540,43 +540,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="25">
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="125" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="126" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="128" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="129" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="130" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="132" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="134" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="135" TopLine="119"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="136" TopLine="119"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="142" Column="13" TopLine="119"/>
@@ -643,11 +607,59 @@
       </Position>
       <Position>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
-        <Caret Line="1316" TopLine="1331"/>
+        <Caret Line="1647" TopLine="1635"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
-        <Caret Line="277" Column="80" TopLine="301"/>
+        <Caret Line="1649" TopLine="1635"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1651" TopLine="1635"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1653" TopLine="1635"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1661" TopLine="1649"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1664" TopLine="1655"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1675" TopLine="1667"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1678" TopLine="1667"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1681" TopLine="1667"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1694" TopLine="1682"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1647" TopLine="1635"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1590" Column="5" TopLine="1577"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1625" Column="17" TopLine="1605"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1645" Column="83" TopLine="1633"/>
       </Position>
     </JumpHistory>
     <RunParams>
