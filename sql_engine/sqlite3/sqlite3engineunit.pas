@@ -755,7 +755,7 @@ function TSQLite3View.GetRecordCount: integer;
 var
   Q: TDataSet;
 begin
-  Q:=TSQLEngineSQLite3(OwnerDB).OpenDataSet('select count(*) from ' +CaptionFullPatch, nil);
+  Q:=TSQLEngineSQLite3(OwnerDB).OpenDataSet('select count(*) from ' +DoFormatName(Caption), nil);
   try
     Q.Open;
     Result:=Q.Fields[0].AsInteger;
@@ -821,7 +821,7 @@ end;
 function TSQLite3View.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
   if not FDataSet.Active then
-    TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch;
+    TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName(Caption);
   Result:=FDataSet;
 end;
 
@@ -836,7 +836,7 @@ begin
   if State <> sdboEdit then exit;
   Fields.Clear;
 
-  IBQ:=OwnerDB.OpenDataSet('PRAGMA table_info(' + Caption+ ')', nil);
+  IBQ:=OwnerDB.OpenDataSet('PRAGMA table_info(' + DoFormatName(Caption)+ ')', nil);
   try
     IBQ.Open;
     while not IBQ.Eof do
