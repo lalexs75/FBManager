@@ -362,6 +362,8 @@ begin
   FIndexUnique:=FCmdCreateIndex.Unique;
   WhereExpression:=FCmdCreateIndex.WhereExpression;
 
+  if (FCmdCreateIndex.TableName<>'') and (FCmdCreateIndex.TableName[1]='"') then
+    FCmdCreateIndex.TableName:=AnsiDequotedStr(FCmdCreateIndex.TableName, '"');
   SetTable(OwnerDB.DBObjectByName(FCmdCreateIndex.TableName) as TSQLite3Table);
 end;
 
@@ -385,6 +387,8 @@ begin
   if Assigned(FCmdCreateIndex) then
     for R in FCmdCreateIndex.Fields do
     begin
+      if (R.Caption<>'') and (R.Caption[1]='"') then
+        R.Caption:=AnsiDequotedStr(R.Caption, '"');
       F:=FTable.Fields.FieldByName(R.Caption);
       if Assigned(F) then
         IndexFields.Add(F.FieldName);

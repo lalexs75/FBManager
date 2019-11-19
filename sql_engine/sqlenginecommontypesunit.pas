@@ -414,6 +414,7 @@ type
     NullPos:TIndexNullPos;
     CollateName:string;
     procedure Assign(Source: TIndexField);
+    procedure LoadFromSQLFieldItem(SQLField:TSQLParserField);
   end;
 
   { TIndexFields }
@@ -934,6 +935,13 @@ begin
   FieldName:=Source.FieldName;
   SortOrder:=Source.SortOrder;
   NullPos:=Source.NullPos;
+end;
+
+procedure TIndexField.LoadFromSQLFieldItem(SQLField: TSQLParserField);
+begin
+//  SortOrder:TIndexSortOrder;
+//  NullPos:TIndexNullPos;
+//  CollateName:string;
 end;
 
 { TIndexFieldsEnumerator }

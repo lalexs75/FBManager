@@ -161,7 +161,7 @@ procedure Tsqlite3IndexEditorPage.RefreshObject;
 var
   i:integer;
   S:string;
-  F: TIndexItem;
+  F: TIndexField;
 begin
   rxIndexFields.CloseOpen;
   edtIndexName.Enabled:=DBObject.State = sdboCreate;
@@ -200,9 +200,9 @@ begin
   begin
     for i:=0 to  TSQLite3Index(DBObject).IndexFields.Count-1 do
     begin
-      F:=TIndexItem(TSQLite3Index(DBObject).IndexFields[i]);
+      F:=TSQLite3Index(DBObject).IndexFields[i];
       rxIndexFields.Append;
-      rxIndexFieldsFieldName.AsString:=F.IndexField;
+      rxIndexFieldsFieldName.AsString:=F.FieldName;
 {      case PGIF.NullPos of
         inpFirst:rxIndexFieldsNullsPos.AsString:='First';
         inpLast:rxIndexFieldsNullsPos.AsString:='Last';

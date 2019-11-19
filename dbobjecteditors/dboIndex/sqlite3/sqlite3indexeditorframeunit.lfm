@@ -9,9 +9,9 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 19
+    Height = 17
     Top = 6
-    Width = 75
+    Width = 70
     BorderSpacing.Around = 6
     Caption = 'Index name'
     ParentColor = False
@@ -22,9 +22,9 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = CheckGroup1
     Left = 12
-    Height = 31
-    Top = 31
-    Width = 525
+    Height = 34
+    Top = 29
+    Width = 529
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 0
@@ -33,10 +33,10 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 543
+    Left = 547
     Height = 37
     Top = 6
-    Width = 86
+    Width = 82
     Anchors = [akTop, akRight]
     AutoFill = True
     AutoSize = True
@@ -50,7 +50,7 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 35
-    ClientWidth = 84
+    ClientWidth = 80
     Items.Strings = (
       'Unique'
     )
@@ -64,9 +64,9 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideTop.Control = edtIndexName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 19
-    Top = 68
-    Width = 59
+    Height = 17
+    Top = 69
+    Width = 55
     BorderSpacing.Around = 6
     Caption = 'For table'
     ParentColor = False
@@ -78,8 +78,8 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 93
+    Height = 33
+    Top = 92
     Width = 617
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -93,9 +93,9 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideTop.Control = cbTables
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 19
-    Top = 130
-    Width = 169
+    Height = 17
+    Top = 131
+    Width = 158
     BorderSpacing.Around = 6
     Caption = 'Condition for partial index'
     ParentColor = False
@@ -109,17 +109,17 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 335
-    Top = 251
+    Height = 336
+    Top = 250
     Width = 623
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 6
-    ClientHeight = 335
+    ClientHeight = 336
     ClientWidth = 623
     TabOrder = 3
     object lbFieldList: TListBox
       Left = 1
-      Height = 333
+      Height = 334
       Top = 1
       Width = 236
       Align = alLeft
@@ -132,17 +132,17 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     end
     object Splitter1: TSplitter
       Left = 237
-      Height = 333
+      Height = 334
       Top = 1
       Width = 5
     end
     object Panel2: TPanel
       Left = 242
-      Height = 333
+      Height = 334
       Top = 1
       Width = 380
       Align = alClient
-      ClientHeight = 333
+      ClientHeight = 334
       ClientWidth = 380
       TabOrder = 2
       object SpeedButton1: TSpeedButton
@@ -201,7 +201,7 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
         AnchorSideBottom.Control = Panel2
         AnchorSideBottom.Side = asrBottom
         Left = 52
-        Height = 331
+        Height = 332
         Top = 1
         Width = 327
         ColumnDefValues.BlobText = '(данные)'
@@ -355,7 +355,7 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 90
-    Top = 155
+    Top = 154
     Width = 617
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -414,6 +414,7 @@ inherited sqlite3IndexEditorPage: Tsqlite3IndexEditorPage
     Top = 540
   end
   object rxIndexFields: TRxMemoryData[12]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'FieldName'
