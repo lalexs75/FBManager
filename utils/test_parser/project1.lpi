@@ -22,8 +22,8 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="1">
-        <Mode0 Name="default"/>
+      <Modes>
+        <Mode Name="default"/>
       </Modes>
     </RunParams>
     <RequiredPackages Count="10">
@@ -205,19 +205,19 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="4">
-      <Item1>
+    <Exceptions>
+      <Item>
         <Name Value="EAbort"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Name Value="ECodetoolError"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Name Value="EFOpenError"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <Name Value="RunError(216)"/>
-      </Item4>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

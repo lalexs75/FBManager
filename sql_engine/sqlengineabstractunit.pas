@@ -2856,6 +2856,9 @@ begin
 
   if csfLoadedFK in FFlags then
     RefreshConstraintForeignKey;
+
+  if Assigned(FDataSet) and (FDataSet.Active) then
+    FDataSet.Active:=false;
 end;
 
 function TDBTableObject.ConstraintFind(ConstraintName: string): TPrimaryKeyRecord;

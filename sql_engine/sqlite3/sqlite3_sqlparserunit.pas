@@ -274,7 +274,7 @@ begin
     TD20:=AddSQLTokens(stIdentificator, [TF, TF2], 'DECIMAL', [toOptional], 11);   //DECIMAL()
     TD21:=AddSQLTokens(stIdentificator, [TF, TF2], 'REAL', [toOptional], 11);
     TD22:=AddSQLTokens(stIdentificator, [TF, TF2], 'DOUBLE', [toOptional], 11);
-    TD22_1:=AddSQLTokens(stIdentificator, [TF, TF2], 'PRECISION', [toOptional], 12);
+    TD22_1:=AddSQLTokens(stIdentificator, [TD22], 'PRECISION', [toOptional], 11);
     TD23:=AddSQLTokens(stIdentificator, [TF, TF2], 'FLOAT', [toOptional], 11);
     TD24:=AddSQLTokens(stIdentificator, [TF, TF2], 'BOOLEAN', [toOptional], 11);
 

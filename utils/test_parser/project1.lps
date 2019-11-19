@@ -36,11 +36,10 @@
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="8196"/>
         <CursorPos Y="8227"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
@@ -55,7 +54,7 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="2"/>
         <TopLine Value="1612"/>
         <CursorPos Y="1616"/>
         <UsageCount Value="200"/>
@@ -77,7 +76,7 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1583"/>
         <CursorPos Y="1603"/>
         <UsageCount Value="200"/>
@@ -85,7 +84,6 @@
           <Item0 X="47" Y="2186" ID="1"/>
           <Item1 Y="1938" ID="2"/>
         </Bookmarks>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
@@ -118,8 +116,7 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="18000"/>
         <CursorPos Y="18014"/>
         <UsageCount Value="201"/>
@@ -127,7 +124,6 @@
           <Item0 X="24" Y="193" ID="4"/>
           <Item1 X="14" Y="16263" ID="3"/>
         </Bookmarks>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbkeywordsunit.pas"/>
@@ -149,10 +145,11 @@
         <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLite3EngineUnit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1870"/>
-        <CursorPos Y="1905"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="1985"/>
+        <CursorPos Y="2018"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_keywords.pas"/>
@@ -166,8 +163,15 @@
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlite3_SqlParserUnit"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1445"/>
+        <CursorPos Y="1316"/>
         <UsageCount Value="200"/>
+        <Bookmarks Count="1">
+          <Item0 X="80" Y="277" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="treeaddchildtokenunit.pas"/>
@@ -222,18 +226,18 @@
         <UsageCount Value="58"/>
       </Unit>
       <Unit>
-        <Filename Value=""/>
-        <UsageCount Value="9"/>
-      </Unit>
-      <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineInternalToolsUnit"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="116"/>
         <CursorPos X="25" Y="134"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value=""/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/classes/classesh.inc"/>
@@ -536,173 +540,161 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
-      <Position1>
+    <JumpHistory HistoryIndex="25">
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="125" TopLine="119"/>
-      </Position1>
-      <Position2>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="126" TopLine="119"/>
-      </Position2>
-      <Position3>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="128" TopLine="119"/>
-      </Position3>
-      <Position4>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="129" TopLine="119"/>
-      </Position4>
-      <Position5>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="130" TopLine="119"/>
-      </Position5>
-      <Position6>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="18011" Column="16" TopLine="18000"/>
-      </Position6>
-      <Position7>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="18012" TopLine="18000"/>
-      </Position7>
-      <Position8>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="125" TopLine="119"/>
-      </Position8>
-      <Position9>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="126" TopLine="119"/>
-      </Position9>
-      <Position10>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="128" TopLine="119"/>
-      </Position10>
-      <Position11>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="129" TopLine="119"/>
-      </Position11>
-      <Position12>
-        <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <Caret Line="130" TopLine="119"/>
-      </Position12>
-      <Position13>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="132" TopLine="119"/>
-      </Position13>
-      <Position14>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="134" TopLine="119"/>
-      </Position14>
-      <Position15>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="135" TopLine="119"/>
-      </Position15>
-      <Position16>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="136" TopLine="119"/>
-      </Position16>
-      <Position17>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="142" Column="13" TopLine="119"/>
-      </Position17>
-      <Position18>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="18012" TopLine="18000"/>
-      </Position18>
-      <Position19>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="125" TopLine="119"/>
-      </Position19>
-      <Position20>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="126" TopLine="119"/>
-      </Position20>
-      <Position21>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="128" TopLine="119"/>
-      </Position21>
-      <Position22>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="129" TopLine="119"/>
-      </Position22>
-      <Position23>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="130" TopLine="119"/>
-      </Position23>
-      <Position24>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="132" TopLine="119"/>
-      </Position24>
-      <Position25>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="139" TopLine="119"/>
-      </Position25>
-      <Position26>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="141" TopLine="119"/>
-      </Position26>
-      <Position27>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="142" TopLine="119"/>
-      </Position27>
-      <Position28>
-        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Caret Line="18011" TopLine="18000"/>
-      </Position28>
-      <Position29>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="98" Column="10" TopLine="82"/>
-      </Position29>
-      <Position30>
+      </Position>
+      <Position>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
         <Caret Line="134" Column="25" TopLine="116"/>
-      </Position30>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
+        <Caret Line="1895" Column="37" TopLine="1881"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
+        <Caret Line="307" Column="14" TopLine="297"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
+        <Caret Line="2018" TopLine="1985"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="63" Column="32" TopLine="49"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="1316" TopLine="1331"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
+        <Caret Line="277" Column="80" TopLine="301"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0" ActiveMode="default"/>
+      <Modes ActiveMode="default"/>
     </RunParams>
   </ProjectSession>
   <Debugging>
-    <BreakPoints Count="3">
-      <Item1>
+    <BreakPoints>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Line Value="4127"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
         <Line Value="5029"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Line Value="2238"/>
-      </Item3>
+      </Item>
     </BreakPoints>
-    <Watches Count="5">
-      <Item1>
+    <Watches>
+      <Item>
         <Expression Value="S"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Expression Value="AToken"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Expression Value="Child"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <Expression Value="AChild.Tag"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <Expression Value="AWord"/>
-      </Item5>
+      </Item>
     </Watches>
   </Debugging>
 </CONFIG>
