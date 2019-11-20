@@ -1113,7 +1113,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.sql'
-    Options = [ofShowHelp, ofEnableSizing, ofViewDetail]
+    Options = [ofOverwritePrompt, ofShowHelp, ofEnableSizing, ofViewDetail]
     Left = 256
     Top = 112
   end

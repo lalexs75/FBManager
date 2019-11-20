@@ -1,7 +1,7 @@
 object FBMSqlScripForm: TFBMSqlScripForm
-  Left = 523
+  Left = 356
   Height = 711
-  Top = 104
+  Top = 154
   Width = 759
   ActiveControl = ToolPanel1
   Caption = 'Script Executive'
@@ -329,7 +329,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
     object fileSaveAs: TAction
       Category = 'File'
       Caption = 'Save as...'
-      ImageIndex = 58
+      ImageIndex = 97
       OnExecute = fileSaveAsExecute
       ShortCut = 24659
     end
