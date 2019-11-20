@@ -1950,18 +1950,18 @@ begin
           S1:=S1 + ', ';
           S2:=S2 + ', ';
         end;
-        S1:=S1 + F.FieldName;
-        S2:=S2 + ':' + F.FieldName;
+        S1:=S1 + DoFormatName(F.FieldName);
+        S2:=S2 + ':' + DoFormatName(F.FieldName);
       end;
 
       if F.FieldPK then
       begin
         if S3 <> '' then S3 := S3 + ', ';
-        S3 := S3 + F.FieldName;
+        S3 := S3 + DoFormatName(F.FieldName);
       end;
     end;
 
-    TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + Caption + '('+S1+') values (' + S2+ ') RETURNING ('+S3+')';
+    TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + DoFormatName(Caption) + '('+S1+') values (' + S2+ ') RETURNING ('+S3+')';
 
     for F in Fields do
     begin
