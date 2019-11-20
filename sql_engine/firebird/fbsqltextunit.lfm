@@ -541,26 +541,6 @@ object fbSqlTextData: TfbSqlTextData
       '20205244422446554e4354494f4e5f415247554d454e54532e52444224415247554d454e545f504f534954494f4e'
     )
   end
-  object sGenerators: TStrHolder
-    Macros = <>
-    Left = 496
-    Top = 256
-  end
-  object sGenerator: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 496
-    Top = 320
-    StrData = (
-      ''
-      '73656c656374'
-      '20202a'
-      '66726f6d'
-      '20205244422447454e455241544f5253'
-      '7768657265'
-      '20205244422447454e455241544f52532e5244422447454e455241544f525f4e414d45203d203a47454e455241544f525f4e414d45'
-    )
-  end
   object fbtFunction: TStrHolder
     Capacity = 16
     Macros = <>
@@ -708,5 +688,43 @@ object fbSqlTextData: TfbSqlTextData
       end>
     Left = 768
     Top = 8
+  end
+  object sGenerators: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sGenerator'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  RDB$GENERATORS'
+          'where'
+          '  RDB$GENERATORS.RDB$GENERATOR_NAME = :GENERATOR_NAME'
+          ''
+        )
+      end    
+      item
+        Caption = 'sGeneratorRefresh'
+        Lines.Strings = (
+          'select gen_id(%s, 0) as gen_value'
+          'from rdb$database'
+          ''
+        )
+      end    
+      item
+        Caption = 'sGeneratorDesk'
+        Lines.Strings = (
+          'select'
+          '  RDB$GENERATORS.RDB$DESCRIPTION'
+          'from'
+          '  RDB$GENERATORS'
+          'where'
+          '  RDB$GENERATORS.RDB$GENERATOR_NAME = :gen_name'
+          ''
+        )
+      end>
+    Left = 40
+    Top = 144
   end
 end

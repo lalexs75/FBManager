@@ -2332,7 +2332,7 @@ begin
         begin
           Rec.FieldAutoInc:=true;
           if not Assigned(QGen) then
-            QGen:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sGenerator.Strings.Text);
+            QGen:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sGenerators['sGenerator']);
           QGen.Params.ByNameAsString['GENERATOR_NAME']:=QFields.Fields.ByNameAsString['RDB$GENERATOR_NAME'];
           QGen.Open;
           if QGen.Fields.RecordCount > 0 then
@@ -4258,21 +4258,23 @@ procedure TFireBirdGenerator.RefreshObject;
 var
   IBQ:TUIBQuery;
 begin
-  inherited RefreshObject;
-  if State <> sdboEdit then exit;
-
-  IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(Format(ssqlGeneratorRefresh, [Caption]));
-  try
-    IBQ.Open;
-    FGeneratorValue:=IBQ.Fields.ByNameAsInteger['gen_value'];
-    IBQ.Close;
-    IBQ.SQL.Text:=Format(ssqlGeneratorDesk, [Caption]);
-    IBQ.Open;
-    FDescription:=TSQLEngineFireBird(OwnerDB).ConvertString20(IBQ.Fields.ByNameAsAnsiString['RDB$DESCRIPTION'], true);
-    IBQ.Close;
-  finally
-    IBQ.Free;
+  if State = sdboEdit then
+  begin
+    IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(Format(fbSqlModule.sGenerators['sGeneratorRefresh'], [DoFormatName(Caption)]));
+    try
+      IBQ.Open;
+      FGeneratorValue:=IBQ.Fields.ByNameAsInteger['gen_value'];
+      IBQ.Close;
+      IBQ.SQL.Text:=fbSqlModule.sGenerators['sGeneratorDesk'];
+      IBQ.Params.ByNameAsAnsiString['gen_name']:=Caption;
+      IBQ.Open;
+      FDescription:=TSQLEngineFireBird(OwnerDB).ConvertString20(IBQ.Fields.ByNameAsAnsiString['RDB$DESCRIPTION'], true);
+      IBQ.Close;
+    finally
+      IBQ.Free;
+    end;
   end;
+  inherited RefreshObject;
 end;
 
 procedure TFireBirdGenerator.RefreshDependencies;

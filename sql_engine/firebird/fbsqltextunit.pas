@@ -37,12 +37,12 @@ type
     fbtPackageBody: TStrHolder;
     fbtPackageLazy: TStrHolder;
     fbtPackageBodyLazy: TStrHolder;
+    sGenerators: TRxTextHolder;
     sFBStatistic: TRxTextHolder;
     sFBIndexSegs: TStrHolder;
     sFBIndexs: TStrHolder;
     sFBIndex: TStrHolder;
     sFunction: TStrHolder;
-    sGenerator: TStrHolder;
     sPackage: TStrHolder;
     sqlRefreshDomain: TStrHolder;
     ssqlSelectViews: TStrHolder;
@@ -67,7 +67,6 @@ type
     sFunctions: TStrHolder;
     sqlDomains: TStrHolder;
     sFunctionArgs: TStrHolder;
-    sGenerators: TStrHolder;
     fbtFunction: TStrHolder;
     ssqlDependOnField: TStrHolder;
   private
