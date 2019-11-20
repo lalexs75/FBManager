@@ -330,7 +330,6 @@ type
 
     procedure RefreshDependencies;override;
     procedure RefreshDependenciesField(Rec:TDependRecord);override;
-    //procedure MakeSQLStatementsList(AList:TStrings); override;
     function CreateSQLObject:TSQLCommandDDL; override;
     function GetDDLSQLObject(ACommandType:TDDLCommandType):TSQLCommandDDL; override;
 
@@ -2173,7 +2172,7 @@ function TFireBirdTable.GetRecordCount: integer;
 var
   Q:TUIBQuery;
 begin
-  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlCountRecord + Caption);
+  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlCountRecord + DoFormatName(Caption));
   try
     Q.Open;
     Result:=Q.Fields.ByNameAsInteger['count_record'];
@@ -2587,7 +2586,6 @@ begin
     else
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option - [poFetchAll];
   end;
-  //FDataSet.Active:=true;
   Result:=FDataSet;
 end;
 
@@ -3176,7 +3174,7 @@ function TFireBirdView.GetRecordCount: integer;
 var
   Q:TUIBQuery;
 begin
-  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlCountRecord + Caption);
+  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlCountRecord + DoFormatName(Caption));
   try
     Q.Open;
     Result:=Q.Fields.ByNameAsInteger['count_record'];
@@ -3421,18 +3419,13 @@ function TFireBirdView.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
   if not FDataSet.Active then
   begin
-    TFBDataSet(FDataSet).SQLSelect.Text:='select * from '+Caption; //MakeSQLSelect(Caption, FBDataSet.DataBase);
-{    FBDataSet.SQLEdit.Text:=MakeSQLEdit(Caption, FBDataSet.DataBase);
-    FBDataSet.SQLInsert.Text:=MakeSQLInsert(Caption, FBDataSet.DataBase);
-    FBDataSet.SQLDelete.Text:=MakeSQLDelete(Caption, FBDataSet.DataBase);
-    FBDataSet.SQLRefresh.Text:=MakeSQLRefresh(Caption, FBDataSet.DataBase);}
+    TFBDataSet(FDataSet).SQLSelect.Text:='select * from ' + DoFormatName( Caption);
 
     if OwnerDB.DisplayDataOptions.FetchAllData then
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option + [poFetchAll]
     else
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option - [poFetchAll];
   end;
-  //FDataSet.Active:=true;
   Result:=FDataSet;
 end;
 
