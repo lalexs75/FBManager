@@ -2503,10 +2503,10 @@ begin
   for F in Fields do
     if F.FieldPK then
     begin
-      Result:=' order by '+F.FieldName;
+      Result:=' order by ' + DoFormatName(F.FieldName);
       break;
     end;
-  Result:=' select * from '+caption + Result;
+  Result:=' select * from ' + DoFormatName(Caption) + Result;
 end;
 
 function WherePK:string;
@@ -2518,13 +2518,13 @@ begin
     if F.FieldPK then
     begin
       if Result <> '' then Result := Result + ' and ';
-      Result:=Result + '(' + F.FieldName + ' = :' + F.FieldName + ')';
+      Result:=Result + '(' + DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName) + ')';
     end;
 
   if Result = '' then
   begin
     if Result <> '' then Result := Result + ' and ';
-    Result:=Result + '(' + F.FieldName + ' = :' + F.FieldName + ')';
+    Result:=Result + '(' + DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName) + ')';
   end;
 end;
 
@@ -2533,12 +2533,12 @@ var
   S: String;
   F: TDBField;
 begin
-  Result:='update ' + Caption + ' set ';
+  Result:='update ' +  DoFormatName(Caption) + ' set ';
   S:='';
   for F in Fields do
   begin
     if S<> '' then S:=S + ',';
-    S:=S + F.FieldName + ' = :' + F.FieldName;
+    S:=S + DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName);
   end;
   Result:=Result + S + ' where ' + WherePK;
 end;
@@ -2555,7 +2555,7 @@ begin
   end
   else
   begin
-    Result:='insert into ' + Caption + '(';
+    Result:='insert into ' + DoFormatName(Caption) + '(';
     S:='';
     for F in Fields do
     begin
@@ -2564,8 +2564,8 @@ begin
         S:=S + ',';
         Result:=Result + ',';
       end;
-      Result := Result + F.FieldName;
-      S:=S + ' :' + F.FieldName;
+      Result := Result + DoFormatName(F.FieldName);
+      S:=S + ' :' + DoFormatName(F.FieldName);
     end;
     Result:=Result + ') values (' + S+ ')';
   end;
@@ -2579,8 +2579,8 @@ begin
     TFBDataSet(FDataSet).SQLSelect.Text:=MakeSQLSelect;
     TFBDataSet(FDataSet).SQLEdit.Text:=MakeSQLEdit;
     TFBDataSet(FDataSet).SQLInsert.Text:=MakeSQLInsert;
-    TFBDataSet(FDataSet).SQLDelete.Text:='delete from '+Caption + ' where '+WherePK;
-    TFBDataSet(FDataSet).SQLRefresh.Text:='select * from '+Caption + ' where '+WherePK;
+    TFBDataSet(FDataSet).SQLDelete.Text:='delete from '+DoFormatName(Caption) + ' where '+WherePK;
+    TFBDataSet(FDataSet).SQLRefresh.Text:='select * from '+DoFormatName(Caption) + ' where '+WherePK;
 
     if OwnerDB.DisplayDataOptions.FetchAllData then
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option + [poFetchAll]

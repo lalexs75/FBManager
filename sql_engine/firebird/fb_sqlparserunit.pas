@@ -5925,7 +5925,7 @@ begin
   AddSQLCommandEx('CREATE %s %s', [S, FullName]);
 
   if CurrentValue <> 0 then
-    AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, Name, CurrentValue]);
+    AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, FullName, CurrentValue]);
 
   if Description <> '' then
     DescribeObject;
