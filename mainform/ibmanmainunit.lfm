@@ -435,6 +435,11 @@ object fbManagerMainForm: TfbManagerMainForm
       Caption = 'Database comparer'
       OnExecute = tlsDataBaseComparerExecute
     end
+    object hlpDownloadNewVersion: TAction
+      Category = 'Help'
+      Caption = 'Download new version...'
+      OnExecute = hlpDownloadNewVersionExecute
+    end
   end
   object MainMenu1: TMainMenu
     Images = ImageListMain
@@ -566,6 +571,9 @@ object fbManagerMainForm: TfbManagerMainForm
       object MenuItem24: TMenuItem
         Action = hlpVisitToWebSite
         OnClick = hlpVisitToWebSiteExecute
+      end
+      object MenuItem36: TMenuItem
+        Action = hlpDownloadNewVersion
       end
       object MenuItem9: TMenuItem
         Caption = '-'

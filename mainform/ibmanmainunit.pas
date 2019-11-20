@@ -39,7 +39,9 @@ type
   { TfbManagerMainForm }
 
   TfbManagerMainForm = class(TForm)
+    hlpDownloadNewVersion: TAction;
     MenuItem17: TMenuItem;
+    MenuItem36: TMenuItem;
     tlsDataBaseComparer: TAction;
     BookmarkImages: TImageList;
     ilDBObjects: TImageList;
@@ -153,6 +155,7 @@ type
     procedure dbDisconnectExecute(Sender: TObject);
     procedure dbRefreshExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure hlpDownloadNewVersionExecute(Sender: TObject);
     procedure hlpNewsExecute(Sender: TObject);
     procedure hlpSendBugreportExecute(Sender: TObject);
     procedure hlpVisitToWebSiteExecute(Sender: TObject);
@@ -416,6 +419,7 @@ begin
   hlpSendBugreport.Hint:=sMenuSendBugreportHint;
   hlpVisitToWebSite.Caption:=sMenuVisitToWebSite;
   hlpVisitToWebSite.Hint:=sMenuVisitToWebSiteHint;
+  hlpDownloadNewVersion.Caption:=sDownloadNewVersion;
 
   Label1.Caption:=sObjectInspector;
 end;
@@ -490,22 +494,12 @@ end;
 
 procedure TfbManagerMainForm.hlpSendBugreportExecute(Sender: TObject);
 begin
-  {$IFDEF USE_SHAMANGRAD}
-  fbmErrorSubmitForm:=TfbmErrorSubmitForm.Create(Application);
-  try
-    fbmErrorSubmitForm.InitBugTracker('');
-    fbmErrorSubmitForm.ShowModal;
-  finally
-    fbmErrorSubmitForm.Free;
-  end;
-  {$ELSE}
-  ErrorBox('Эта система собрана без поддержки багтрекера.');
-  {$ENDIF}
+  OpenURL('https://github.com/lalexs75/FBManager/issues');
 end;
 
 procedure TfbManagerMainForm.hlpVisitToWebSiteExecute(Sender: TObject);
 begin
-  OpenURL('http://w7site.ru/fpc/fbm/');
+  OpenURL('https://github.com/lalexs75/FBManager/wiki');
 end;
 
 procedure TfbManagerMainForm.FormCloseQuery(Sender: TObject;
@@ -523,6 +517,11 @@ begin
     fbManDataInpectorForm.CloseAllDB;
     Screen.OnActiveFormChange:=nil;
   end;
+end;
+
+procedure TfbManagerMainForm.hlpDownloadNewVersionExecute(Sender: TObject);
+begin
+  OpenURL('http://w7site.ru/fpc/fbm/');
 end;
 
 procedure TfbManagerMainForm.dbCreateExecute(Sender: TObject);

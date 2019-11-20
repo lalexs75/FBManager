@@ -1542,6 +1542,10 @@ msgstr "Домены"
 msgid "Dont lock on creation"
 msgstr "Не блокировать при создании"
 
+#: fbmstrconstunit.sdownloadnewversion
+msgid "Download new version..."
+msgstr ""
+
 #: fbmstrconstunit.sdrop
 msgid "Drop "
 msgstr "Удалить "

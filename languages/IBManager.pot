@@ -1473,6 +1473,10 @@ msgstr ""
 msgid "Dont lock on creation"
 msgstr ""
 
+#: fbmstrconstunit.sdownloadnewversion
+msgid "Download new version..."
+msgstr ""
+
 #: fbmstrconstunit.sdrop
 msgid "Drop "
 msgstr ""

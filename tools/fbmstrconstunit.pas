@@ -107,6 +107,7 @@ resourcestring
   sMenuSendBugreportHint            = 'Send bug report';
   sMenuVisitToWebSite               = 'Visit to web site...';
   sMenuVisitToWebSiteHint           = 'Visit to web site...';
+  sDownloadNewVersion               = 'Download new version...';
 
   sOIDatabases                      = 'Databases';
   sOIWindows                        = 'Windows';
