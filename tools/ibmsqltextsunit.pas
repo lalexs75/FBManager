@@ -62,12 +62,6 @@ const
   ssqlCountRecord =
                   'select count(*) as count_record from ';
 
-(*  ssqlGeneratorRefresh =
-                  'select gen_id(%s, 0) as gen_value from rdb$database';
-  ssqlGeneratorDesk =
-                  'select RDB$GENERATORS.RDB$DESCRIPTION from RDB$GENERATORS where RDB$GENERATORS.RDB$GENERATOR_NAME = ''%s''';
-*)
-
   ssqlSelectTrigersForTable =
                   'select '+
                   '  rdb$triggers.rdb$trigger_sequence as tr_sequence, '+

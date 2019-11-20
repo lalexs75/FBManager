@@ -1826,7 +1826,7 @@ procedure TFBSQLDropFunction.MakeSQL;
 var
   S: String;
 begin
-  S:='DROP FUNCTION '+Name;
+  S:='DROP FUNCTION ' + FullName;
   AddSQLCommand(S);
 end;
 
@@ -2003,10 +2003,10 @@ begin
   S:='CREATE ';
   if CreateMode = cmCreateOrAlter then
     S:=S + 'OR ALTER ';
-  S:=S + 'FUNCTION ' + Name;
+  S:=S + 'FUNCTION ' + FullName;
 
   LP:=TFBLocalVariableParser.Create(nil);
-  LP.OwnerName:=Name;
+  LP.OwnerName:=FullName;
   LP.Params.CopyFrom(Params, [spvtInput]);
   LP.DescType:=fbldParams;
   FIn:=LP.AsSQL;
@@ -4183,7 +4183,7 @@ end;
 
 procedure TFBSQLDropProcedure.MakeSQL;
 begin
-  AddSQLCommand('DROP PROCEDURE ' + Name);
+  AddSQLCommand('DROP PROCEDURE ' + FullName);
 end;
 
 procedure TFBSQLDropProcedure.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4215,7 +4215,7 @@ end;
 
 procedure TFBSQLDropTrigger.MakeSQL;
 begin
-  AddSQLCommand('DROP TRIGGER ' + DoFormatName(Name));
+  AddSQLCommand('DROP TRIGGER ' + FullName);
 end;
 
 procedure TFBSQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -5569,7 +5569,7 @@ begin
   begin
     S:='';
     if C.ConstraintType = ctPrimaryKey then
-      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s PRIMARY KEY(%s)', [Name, C.ConstraintName, C.ConstraintFields.AsString])
+      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s PRIMARY KEY(%s)', [FullName, DoFormatName(C.ConstraintName), C.ConstraintFields.AsString])
     else
     if C.ConstraintType = ctForeignKey then
     begin
@@ -5580,19 +5580,19 @@ begin
         S:=S+' ON DELETE '+ForeignKeyRuleNames[C.ForeignKeyRuleOnDelete];
       if C.IndexName <> '' then
         S:=S + ' USING INDEX ' + C.IndexName;
-      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s FOREIGN KEY (%s) REFERENCES %s(%s)%s', [Name, C.ConstraintName,
+      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s FOREIGN KEY (%s) REFERENCES %s(%s)%s', [FullName, DoFormatName(C.ConstraintName),
                                                                                                     C.ConstraintFields.AsString,
-                                                                                                    C.ForeignTable,
+                                                                                                    DoFormatName(C.ForeignTable),
                                                                                                     C.ForeignFields.AsString,
                                                                                                     S
                                                                                                     ]);
     end
     else
     if C.ConstraintType = ctUnique then
-      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s UNIQUE(%s)', [Name, C.ConstraintName, C.ConstraintFields.AsString])
+      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s UNIQUE(%s)', [FullName, DoFormatName(C.ConstraintName), C.ConstraintFields.AsString])
     else
     if C.ConstraintType = ctTableCheck then
-      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s CHECK (%s)', [Name, C.ConstraintName, C.ConstraintExpression]);
+      S:=Format('ALTER TABLE %s ADD CONSTRAINT %s CHECK (%s)', [FullName, DoFormatName(C.ConstraintName), C.ConstraintExpression]);
     if S<>'' then
       AddSQLCommand(S);
   end;
@@ -5647,7 +5647,7 @@ begin
       ataAlterColumnDescription : DescribeObjectEx(okColumn, OP.Field.Caption, Name, OP.Field.Description);
       ataAddTableConstraint:DoAddConstrint(OP);
       ataDropConstraint:for C in OP.Constraints do
-                          AddSQLCommandEx('ALTER TABLE %s DROP CONSTRAINT %s', [FullName, C.ConstraintName]);
+                          AddSQLCommandEx('ALTER TABLE %s DROP CONSTRAINT %s', [FullName, DoFormatName(C.ConstraintName)]);
       ataAlterColumnPosition : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s POSITION %d', [FullName, DoFormatName(OP.Field.Caption), OP.Position]);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
