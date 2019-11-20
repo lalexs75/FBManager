@@ -452,6 +452,10 @@ msgstr ""
 msgid "Client port"
 msgstr ""
 
+#: fbmstrconstunit.sclipboard
+msgid "Clipboard"
+msgstr ""
+
 #: fbmstrconstunit.scloseallexceptthis
 msgid "Close all except this"
 msgstr ""
@@ -1082,6 +1086,7 @@ msgid "Post"
 msgstr ""
 
 #: fbmstrconstunit.sdbnavhintprior
+msgctxt "fbmstrconstunit.sdbnavhintprior"
 msgid "Prior"
 msgstr ""
 
@@ -1769,6 +1774,10 @@ msgstr ""
 msgid "Export data to Spreadsheet"
 msgstr ""
 
+#: fbmstrconstunit.sexportfolder
+msgid "Export folder"
+msgstr ""
+
 #: fbmstrconstunit.sexporttospreadsheet
 msgid "Export to spreadsheet"
 msgstr ""
@@ -1791,6 +1800,10 @@ msgstr ""
 
 #: fbmstrconstunit.sextractmetaform
 msgid "Extract metadata from DB"
+msgstr ""
+
+#: fbmstrconstunit.sextractto
+msgid "Extract to:"
 msgstr ""
 
 #: fbmstrconstunit.sextrenalfield
@@ -4003,6 +4016,11 @@ msgstr ""
 msgid "Print user list"
 msgstr ""
 
+#: fbmstrconstunit.sprior
+msgctxt "fbmstrconstunit.sprior"
+msgid "Prior"
+msgstr ""
+
 #: fbmstrconstunit.sprocedure
 msgid "Procedure"
 msgstr ""
@@ -4433,7 +4451,7 @@ msgid "Save as ..."
 msgstr ""
 
 #: fbmstrconstunit.ssaveashint
-msgid "Save file with new name"
+msgid "Save file with new name..."
 msgstr ""
 
 #: fbmstrconstunit.ssavedesktopondisconectfromdb

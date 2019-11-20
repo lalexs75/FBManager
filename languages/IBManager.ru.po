@@ -476,6 +476,10 @@ msgstr "Путь к клиентской библиотеке"
 msgid "Client port"
 msgstr "Порт клиента"
 
+#: fbmstrconstunit.sclipboard
+msgid "Clipboard"
+msgstr "Буфер обмена"
+
 #: fbmstrconstunit.scloseallexceptthis
 msgctxt "fbmstrconstunit.scloseallexceptthis"
 msgid "Close all except this"
@@ -982,7 +986,7 @@ msgstr "Список баз данных"
 #: fbmstrconstunit.sdatabasename
 msgctxt "fbmstrconstunit.sdatabasename"
 msgid "Database name"
-msgstr "Имя базы данных : "
+msgstr "Имя базы данных :"
 
 #: fbmstrconstunit.sdatabasenumbackends
 msgid "Database backends"
@@ -1126,6 +1130,7 @@ msgid "Post"
 msgstr "Сохранить изменения"
 
 #: fbmstrconstunit.sdbnavhintprior
+msgctxt "fbmstrconstunit.sdbnavhintprior"
 msgid "Prior"
 msgstr "Превыдущая запись"
 
@@ -1305,7 +1310,7 @@ msgstr "Удалить этот параметр?"
 
 #: fbmstrconstunit.sdeletepartitionkey
 msgid "Delete partition key?"
-msgstr "Удалить ключь партицирования"
+msgstr "Удалить ключ партицирования?"
 
 #: fbmstrconstunit.sdeletequery
 msgid "Delete wthis query?"
@@ -1847,6 +1852,10 @@ msgstr "Экспорт данных в PDF файл"
 msgid "Export data to Spreadsheet"
 msgstr "Экспорт данных в электронную таблицу"
 
+#: fbmstrconstunit.sexportfolder
+msgid "Export folder"
+msgstr "Папка выгрузки"
+
 #: fbmstrconstunit.sexporttospreadsheet
 msgid "Export to spreadsheet"
 msgstr "Экспорт в электронную таблицу"
@@ -1870,6 +1879,10 @@ msgstr "Извлечь всё"
 #: fbmstrconstunit.sextractmetaform
 msgid "Extract metadata from DB"
 msgstr "Извелечение метаданных из БД"
+
+#: fbmstrconstunit.sextractto
+msgid "Extract to:"
+msgstr "Выгрузить как:"
 
 #: fbmstrconstunit.sextrenalfield
 msgid "External field"
@@ -2877,7 +2890,7 @@ msgstr "Нижняя"
 #: fbmstrconstunit.slowercase
 msgctxt "fbmstrconstunit.slowercase"
 msgid "Lower case"
-msgstr "нижний регистр"
+msgstr "Нижний регистр"
 
 #: fbmstrconstunit.smaincaption
 msgctxt "fbmstrconstunit.smaincaption"
@@ -3378,7 +3391,7 @@ msgstr "Новое условие уникальности"
 #: fbmstrconstunit.snext
 msgctxt "fbmstrconstunit.snext"
 msgid "Next"
-msgstr "Следующая запись"
+msgstr "Следующая"
 
 #: fbmstrconstunit.snextrun
 msgctxt "fbmstrconstunit.snextrun"
@@ -4142,6 +4155,11 @@ msgstr "Печать списка условий уникальности"
 msgid "Print user list"
 msgstr "Печать списка пользователей"
 
+#: fbmstrconstunit.sprior
+msgctxt "fbmstrconstunit.sprior"
+msgid "Prior"
+msgstr "Предыдущая"
+
 #: fbmstrconstunit.sprocedure
 msgid "Procedure"
 msgstr "Процедура"
@@ -4588,7 +4606,7 @@ msgid "Save as ..."
 msgstr "Сохранить как..."
 
 #: fbmstrconstunit.ssaveashint
-msgid "Save file with new name"
+msgid "Save file with new name..."
 msgstr "Сохранить в файл..."
 
 #: fbmstrconstunit.ssavedesktopondisconectfromdb
@@ -5780,7 +5798,7 @@ msgstr "Использовать существующий генератор"
 
 #: fbmstrconstunit.suseparamschar
 msgid "Use params char"
-msgstr ""
+msgstr "Использовать символ параметра"
 
 #: fbmstrconstunit.susepgbouncer
 msgid "Connecting via pgBouncer"
@@ -6183,4 +6201,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
