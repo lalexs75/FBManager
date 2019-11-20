@@ -36,6 +36,7 @@ type
   { TfbmTableEditorDataFrame }
 
   TfbmTableEditorDataFrame = class(TEditorPage)
+    dataGenerate: TAction;
     gridAutoFillCollumn: TAction;
     dataImportBlob: TAction;
     dataCopyAsUpdate: TAction;
@@ -49,6 +50,7 @@ type
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
     MenuItem6: TMenuItem;
     SpeedButton5: TSpeedButton;
     statFilter: TAction;
@@ -92,6 +94,7 @@ type
     procedure dataExportExecute(Sender: TObject);
     procedure dataExportToPDFExecute(Sender: TObject);
     procedure dataExportToSpreadSheetExecute(Sender: TObject);
+    procedure dataGenerateExecute(Sender: TObject);
     procedure DataGridColumnSized(Sender: TObject);
     procedure DataGridDblClick(Sender: TObject);
     procedure DataGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
@@ -133,7 +136,8 @@ type
 
 implementation
 uses fbmStrConstUnit, fbmToolsUnit, fbmSQLEditor_ShowMemoUnit, ImportDataUnit,
-  sqlObjects, fbmMakeSQLFromDataSetUnit, LCLType, Clipbrd, rxdconst, rxdbutils;
+  GenerateDataUnit, sqlObjects, fbmMakeSQLFromDataSetUnit, LCLType, Clipbrd,
+  rxdconst, rxdbutils;
 
 {$R *.lfm}
 
@@ -194,6 +198,12 @@ procedure TfbmTableEditorDataFrame.dataExportToSpreadSheetExecute(
   Sender: TObject);
 begin
   RxDBGridExportSpreadSheet1.Execute;
+end;
+
+procedure TfbmTableEditorDataFrame.dataGenerateExecute(Sender: TObject);
+begin
+  //NotImplemented;
+  ShowGenerateDataForm(DBObject as TDBTableObject);
 end;
 
 procedure TfbmTableEditorDataFrame.DataGridColumnSized(Sender: TObject);
@@ -402,6 +412,7 @@ begin
   RxDBGridExportSpreadSheet1.Caption:=sToolsExportSpeadSheet;
   RxDBGridExportPDF1.Caption:=sToolsExportPDF;
   dataImport.Caption:=sImportData;
+  dataGenerate.Caption:=sTestDataGenerator;
 
   statFilter.Caption:=sFilterInTable;
   statFilter.Hint:=sFilterInTableHint;

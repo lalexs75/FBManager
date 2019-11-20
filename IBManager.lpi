@@ -1860,6 +1860,13 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pgDataBaseStatUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="import/generatedataunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="GenerateDataForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="GenerateDataUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

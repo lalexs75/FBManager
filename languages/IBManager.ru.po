@@ -5398,6 +5398,10 @@ msgstr "Отключить данное подключени?"
 msgid "Test"
 msgstr "Проверка"
 
+#: fbmstrconstunit.stestdatagenerator
+msgid "Test data generator"
+msgstr ""
+
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
 msgstr "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*"

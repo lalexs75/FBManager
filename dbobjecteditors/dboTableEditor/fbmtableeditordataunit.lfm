@@ -263,6 +263,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     object MenuItem9: TMenuItem
       Action = dataImport
     end
+    object MenuItem18: TMenuItem
+      Action = dataGenerate
+    end
     object MenuItem12: TMenuItem
       Caption = '-'
     end
@@ -363,6 +366,11 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Caption = 'Auto fill collumn width'
       ImageIndex = 105
       OnExecute = gridAutoFillCollumnExecute
+    end
+    object dataGenerate: TAction
+      Category = 'data'
+      Caption = 'Test data generator'
+      OnExecute = dataGenerateExecute
     end
   end
   object FPDataExporter1: TFPDataExporter[5]

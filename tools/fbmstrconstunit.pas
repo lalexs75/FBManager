@@ -251,6 +251,7 @@ resourcestring
   sGenerateInsertScript             = 'Generate INSERT script';
   sImportedCollumns                 = 'Imported collumns';
   sGoToForeignTable                 = 'Go to foreign table';
+  sTestDataGenerator                = 'Test data generator';
 
   sNewIndex                         = 'New index';
   sEditIndex                        = 'Edit index';
