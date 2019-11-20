@@ -25,36 +25,49 @@ unit fbmExtractUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ButtonPanel, StdCtrls, ExtCtrls, IBManDataInspectorUnit, ibmanagertypesunit,
-  fbmsqlscript;
+  Classes, SysUtils, FileUtil, RxIniPropStorage, rxpagemngr, Forms, Controls,
+  Graphics, Dialogs, ComCtrls, ButtonPanel, StdCtrls, ExtCtrls, EditBtn,
+  Buttons, ActnList, IBManDataInspectorUnit, ibmanagertypesunit, fbmsqlscript;
 
 type
 
   { TfbmExtractForm }
 
   TfbmExtractForm = class(TForm)
+    actAdd: TAction;
+    actRemove: TAction;
+    ActionList1: TActionList;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     Button1: TButton;
     Button2: TButton;
-    Button3: TButton;
     ButtonPanel1: TButtonPanel;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
+    DirectoryEdit1: TDirectoryEdit;
+    FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     PageControl1: TPageControl;
+    PageManager1: TPageManager;
     Panel1: TPanel;
     Panel2: TPanel;
+    RadioGroup1: TRadioGroup;
+    RxIniPropStorage1: TRxIniPropStorage;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TreeView1: TTreeView;
     TreeView2: TTreeView;
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure actAddExecute(Sender: TObject);
+    procedure actRemoveExecute(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
     procedure TreeView1DblClick(Sender: TObject);
     procedure TreeView2DblClick(Sender: TObject);
   private
@@ -63,8 +76,18 @@ type
     procedure SetCurDB(AValue: TDataBaseRecord);
     procedure DoLoadItems;
     procedure Localize;
+
+    function DoMakeScript:string;
+    procedure DoExportFile;
+    procedure DoExportClipboard;
+    procedure DoExportScript;
+    procedure DoExportSepFiles;
+
+    procedure DoUpdateControls;
   public
     property CurDB:TDataBaseRecord read FCurDB write SetCurDB;
+
+    procedure DoExport;
   end;
 
 var
@@ -72,8 +95,8 @@ var
 
 procedure ShowExtractForm;
 implementation
-uses SQLEngineAbstractUnit, IBManMainUnit, fbmStrConstUnit, fbmToolsUnit,
-  rxAppUtils;
+uses SQLEngineAbstractUnit, IBManMainUnit, fbmStrConstUnit, fbmToolsUnit, Clipbrd,
+  LazFileUtils, rxAppUtils;
 
 procedure ShowExtractForm;
 begin
@@ -94,51 +117,21 @@ begin
     CurDB:=nil;
 end;
 
-procedure TfbmExtractForm.Button2Click(Sender: TObject);
+procedure TfbmExtractForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
 begin
-  if Assigned(TreeView2.Selected) then
-  begin
-    TreeView2.Items.Delete(TreeView2.Selected);
-    TreeView2.Selected:=nil;
-  end;
+  if ModalResult = mrOk then
+    DoExport;
 end;
 
-procedure TfbmExtractForm.Button3Click(Sender: TObject);
-
-function DoGetMetaSQL(D:TDBObject):string;
+procedure TfbmExtractForm.CheckBox1Change(Sender: TObject);
 begin
-  Result:='';
-  if not Assigned(D) then exit;
-  Result:=D.DDLCreateSimple;
+  TreeView1.Enabled:=not CheckBox1.Checked;
+  TreeView2.Enabled:=not CheckBox1.Checked;
+  DoUpdateControls;
 end;
 
-var
-  St:string;
-  N: TTreeNode;
-  D: TDBInspectorRecord;
-  i: Integer;
-begin
-  St:='';
-  for i:=0 to TreeView2.Items.Count-1 do
-  begin
-    N:=TreeView2.Items[i];
-    if Assigned(N.Data) then
-    begin
-      D:=TDBInspectorRecord(N.Data);
-      if Assigned(D) then
-        ST:=ST + DoGetMetaSQL(D.DBObject);
-    end;
-  end;
-  if ST <> '' then
-  begin
-    fbManagerMainForm.tlsSqlScript.Execute;
-    FBMSqlScripForm.SetSQLText(ST);
-  end;
-  Close;
-end;
-
-procedure TfbmExtractForm.Button1Click(Sender: TObject);
-
+procedure TfbmExtractForm.actAddExecute(Sender: TObject);
 procedure DoAddItem(AOwnerNode, ANode:TTreeNode);
 var
   N: TTreeNode;
@@ -153,25 +146,61 @@ begin
   for i:=0 to ANode.Count-1 do
     DoAddItem(N, ANode.Items[i]);
 end;
-
 begin
   if Assigned(TreeView1.Selected) then
-  begin
     DoAddItem(nil, TreeView1.Selected);
+
+  DoUpdateControls;
+end;
+
+procedure TfbmExtractForm.actRemoveExecute(Sender: TObject);
+begin
+  if Assigned(TreeView2.Selected) then
+  begin
+    TreeView2.Items.Delete(TreeView2.Selected);
+    TreeView2.Selected:=nil;
   end;
+  DoUpdateControls;
 end;
 
 procedure TfbmExtractForm.FormCreate(Sender: TObject);
 begin
+  {$IFDEF WINDOWOS}
+  BitBtn2.AnchorSide[akRight].Control:=ButtonPanel1.OKButton;
+  {$ELSE}
+  BitBtn2.AnchorSide[akRight].Control:=ButtonPanel1.CancelButton;
+  {$ENDIF}
+
+  BitBtn2.AnchorSide[akTop].Control:=ButtonPanel1.CancelButton;
+  BitBtn2.AnchorSide[akBottom].Control:=ButtonPanel1.CancelButton;
+
+  //BitBtn1.AnchorSide[akRight].Control:=ButtonPanel1.CancelButton;
+  BitBtn1.AnchorSide[akTop].Control:=ButtonPanel1.CancelButton;
+  BitBtn1.AnchorSide[akBottom].Control:=ButtonPanel1.CancelButton;
+
+
   Localize;
   PageControl1.ActivePageIndex:=0;
+  RadioGroup1.ItemIndex:=0;
   FillDBList;
+  RadioGroup1Click(nil);
 end;
 
 procedure TfbmExtractForm.PageControl1Change(Sender: TObject);
 begin
   if (PageControl1.ActivePage = TabSheet2) and (TreeView1.Items.Count = 0) then
     DoLoadItems;
+
+  DoUpdateControls;
+end;
+
+procedure TfbmExtractForm.RadioGroup1Click(Sender: TObject);
+begin
+  Label2.Enabled:=RadioGroup1.ItemIndex = 0;
+  FileNameEdit1.Enabled:=RadioGroup1.ItemIndex = 0;
+
+  Label3.Enabled:=RadioGroup1.ItemIndex = 3;
+  DirectoryEdit1.Enabled:=RadioGroup1.ItemIndex = 3;
 end;
 
 procedure TfbmExtractForm.TreeView1DblClick(Sender: TObject);
@@ -242,8 +271,140 @@ begin
   TabSheet3.Caption:=sProgres;
   Label1.Caption:=sSelectDatabase;
   CheckBox1.Caption:=sExtractAll;
-  Button1.Caption:=sAdd;
-  Button2.Caption:=sRemove;
+
+  actAdd.Caption:=sAdd;
+  actRemove.Caption:=sRemove;
+
+  RadioGroup1.Caption:=sExtractTo;
+  RadioGroup1.Items[0]:=sFile;
+  RadioGroup1.Items[1]:=sClipboard;
+  RadioGroup1.Items[2]:=sMenuSqlScript;
+  RadioGroup1.Items[3]:=sSeparetedFiles;
+
+  Label2.Caption:=sFileName;
+  Label3.Caption:=sExportFolder;
+
+  BitBtn1.Caption:=sPrior;
+  BitBtn2.Caption:=sNext;
+end;
+
+function TfbmExtractForm.DoMakeScript: string;
+
+function DoGetMetaSQL(D:TDBObject):string;
+begin
+  if Assigned(D) then
+    Result:=D.DDLCreateSimple
+  else
+    Result:='';
+end;
+
+var
+  St:string;
+  N: TTreeNode;
+  D: TDBInspectorRecord;
+  i: Integer;
+  FTr: TTreeView;
+begin
+  Result:='';
+  if CheckBox1.Checked then
+    FTr:=TreeView1
+  else
+    FTr:=TreeView2;
+
+  for i:=0 to FTr.Items.Count-1 do
+  begin
+    N:=FTr.Items[i];
+    if Assigned(N.Data) then
+    begin
+      D:=TDBInspectorRecord(N.Data);
+      if Assigned(D) then
+        Result:=Result + DoGetMetaSQL(D.DBObject);
+    end;
+  end;
+end;
+
+procedure TfbmExtractForm.DoExportFile;
+var
+  S: String;
+begin
+  S:=DoMakeScript;
+  if S <> '' then
+  begin
+    //if FileNameEdit1.FileName;
+    SaveTextFile(S, FileNameEdit1.FileName);
+  end;
+end;
+
+procedure TfbmExtractForm.DoExportClipboard;
+var
+  S: String;
+begin
+  S:=DoMakeScript;
+  if S<>'' then
+  begin
+    Clipboard.Open;
+    Clipboard.AsText:=S;
+    Clipboard.Close;
+  end;
+end;
+
+procedure TfbmExtractForm.DoExportScript;
+var
+  S: String;
+begin
+  S:=DoMakeScript;
+  if S <> '' then
+  begin
+    fbManagerMainForm.tlsSqlScript.Execute;
+    FBMSqlScripForm.SetSQLText(S);
+  end;
+end;
+
+procedure TfbmExtractForm.DoExportSepFiles;
+var
+  D: TDBInspectorRecord;
+  i: Integer;
+  N: TTreeNode;
+  FName: String;
+  FTr: TTreeView;
+begin
+  if CheckBox1.Checked then
+    FTr:=TreeView1
+  else
+    FTr:=TreeView2;
+
+  for i:=0 to FTr.Items.Count-1 do
+  begin
+    N:=FTr.Items[i];
+    if Assigned(N.Data) then
+    begin
+      D:=TDBInspectorRecord(N.Data);
+      if Assigned(D.DBObject) and (D.DBObject.State <> sdboVirtualObject) then
+      begin
+        FName:=AppendPathDelim(DirectoryEdit1.Directory) + D.DBObject.CaptionFullPatch + '.' + D.DBObject.DBClassTitle;
+        SaveTextFile(D.DBObject.DDLCreateSimple, FName);
+      end;
+    end;
+  end;
+end;
+
+procedure TfbmExtractForm.DoUpdateControls;
+begin
+  actAdd.Enabled:=not CheckBox1.Checked;
+  actRemove.Enabled:=not CheckBox1.Checked;
+
+  ButtonPanel1.OKButton.Enabled:=PageControl1.ActivePageIndex = 2;
+end;
+
+procedure TfbmExtractForm.DoExport;
+begin
+  case RadioGroup1.ItemIndex of
+    0:DoExportFile;
+    1:DoExportClipboard;
+    2:DoExportScript;
+    3:DoExportSepFiles;
+  else
+  end;
 end;
 
 end.

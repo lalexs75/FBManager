@@ -178,6 +178,7 @@ resourcestring
   sProgres                          = 'Progres';
   sSelectDatabase                   = 'Select database';
   sExtractAll                       = 'Extract all';
+  sExtractTo                        = 'Extract to:';
   sAdd                              = 'Add';
   sAddHint                          = 'Add data';
   sRemove                           = 'Remove';
@@ -332,6 +333,7 @@ resourcestring
   sAttachmentDB                     = 'Attachment DB';
   sAttachmentID                     = 'Attachment ID';
   sNext                             = 'Next';
+  sPrior                            = 'Prior';
   sOldActive                        = 'Old active';
   sOldest                           = 'Oldest';
   sOldSnapshot                      = 'Old snapshot';
@@ -471,6 +473,7 @@ resourcestring
   sRenameObject                     = 'Rename object';
   sShutdown                         = 'Shutdown';
   sFile                             = 'File';
+  sClipboard                        = 'Clipboard';
   sProcess                          = 'Process';
   sProxy                            = 'Proxy';
   sReload                           = 'Reload';
@@ -755,6 +758,7 @@ resourcestring
   sAlwaysCapitalizeDBObjectsNames   = 'Always capitalize database objects names';
   sOtherOptions                     = 'Other options';
   sFileName                         = 'File name';
+  sExportFolder                     = 'Export folder';
   sCompileOptions                   = 'Compile options';
   sAutoVacuum                       = 'Auto vacuum';
   sEncoding                         = 'Encoding';
@@ -1341,7 +1345,7 @@ resourcestring
 
   //SQL editor
   sSaveAs                         = 'Save as ...';
-  sSaveAsHint                     = 'Save file with new name';
+  sSaveAsHint                     = 'Save file with new name...';
   sSetBookmarkNum                 = 'Set/Remove bookmark ';
   sGotoBookmark                   = 'Goto bookmark ';
   sInvertCase                     = 'Invert case';

@@ -9,16 +9,24 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   OnClose = FormClose
   OnCreate = FormCreate
   inherited Panel1: TPanel
+    Height = 47
     Width = 1236
+    ClientHeight = 47
     ClientWidth = 1236
+    inherited Label1: TLabel
+      Height = 17
+      Width = 57
+    end
     inherited ComboBox1: TComboBox
-      Width = 1157
+      Left = 70
+      Height = 33
+      Width = 1159
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
-    Height = 725
-    Top = 101
+    Height = 731
+    Top = 95
     Width = 1236
     ActivePage = TabSheet2
     Align = alClient
@@ -26,7 +34,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     TabOrder = 1
     object TabSheet2: TTabSheet
       Caption = 'General'
-      ClientHeight = 691
+      ClientHeight = 700
       ClientWidth = 1226
       object Panel2: TPanel
         AnchorSideTop.Side = asrBottom
@@ -44,7 +52,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideRight.Control = Panel2
         AnchorSideRight.Side = asrBottom
         Left = 6
-        Height = 37
+        Height = 34
         Top = 47
         Width = 1
         Anchors = [akTop, akLeft, akRight]
@@ -57,7 +65,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideRight.Control = Panel2
         AnchorSideRight.Side = asrBottom
         Left = 6
-        Height = 37
+        Height = 34
         Top = 104
         Width = 1
         Anchors = [akTop, akLeft, akRight]
@@ -87,8 +95,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideBottom.Control = TabSheet2
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 333
-        Top = 352
+        Height = 337
+        Top = 357
         Width = 1214
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
@@ -297,7 +305,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideTop.Side = asrCenter
         Left = 613
         Height = 1
-        Top = 345
+        Top = 350
         Width = 1
         ParentColor = False
       end
@@ -305,9 +313,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
         Left = 6
-        Height = 20
+        Height = 17
         Top = 6
-        Width = 50
+        Width = 48
         BorderSpacing.Around = 6
         Caption = 'General'
         ParentColor = False
@@ -316,9 +324,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideLeft.Control = Label8
         AnchorSideTop.Control = TabSheet2
         Left = 619
-        Height = 20
+        Height = 17
         Top = 6
-        Width = 78
+        Width = 70
         BorderSpacing.Around = 6
         Caption = 'Active users'
         ParentColor = False
@@ -330,7 +338,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideBottom.Control = Label8
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 334
+        Height = 339
         Top = 6
         Width = 601
         AxisList = <        
@@ -388,7 +396,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Label8
         Left = 619
-        Height = 333
+        Height = 338
         Top = 6
         Width = 601
         AxisList = <        
@@ -442,7 +450,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     end
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 691
+      ClientHeight = 700
       ClientWidth = 1226
       object Panel4: TPanel
         AnchorSideLeft.Control = TabSheet2
@@ -496,7 +504,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Anchors = [akTop, akLeft, akRight]
           AutoSize = True
           Caption = 'Buffers'
-          ClientHeight = 75
+          ClientHeight = 78
           ClientWidth = 520
           TabOrder = 2
           object Label6: TLabel
@@ -654,7 +662,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Server info'
-      ClientHeight = 691
+      ClientHeight = 700
       ClientWidth = 1226
       object Memo1: TMemo
         Left = 0
@@ -668,12 +676,12 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   end
   object Panel5: TPanel[2]
     Left = 0
-    Height = 51
-    Top = 50
+    Height = 48
+    Top = 47
     Width = 1236
     Align = alTop
     AutoSize = True
-    ClientHeight = 51
+    ClientHeight = 48
     ClientWidth = 1236
     TabOrder = 2
     object CheckBox3: TCheckBox
@@ -681,10 +689,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = SpinEdit4
       AnchorSideTop.Side = asrCenter
-      Left = 202
-      Height = 24
+      Left = 196
+      Height = 23
       Top = 13
-      Width = 107
+      Width = 103
       BorderSpacing.Left = 6
       Caption = 'Refresh data'
       Checked = True
@@ -697,9 +705,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideBottom.Control = SpinEdit4
       AnchorSideBottom.Side = asrBottom
       Left = 7
-      Height = 20
+      Height = 17
       Top = 24
-      Width = 101
+      Width = 95
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Refresh interval'
@@ -709,8 +717,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Control = Label11
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel5
-      Left = 114
-      Height = 37
+      Left = 108
+      Height = 34
       Top = 7
       Width = 82
       BorderSpacing.Around = 6
@@ -725,10 +733,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = SpinEdit4
       AnchorSideTop.Side = asrCenter
-      Left = 315
-      Height = 24
+      Left = 305
+      Height = 23
       Top = 13
-      Width = 219
+      Width = 211
       BorderSpacing.Left = 6
       Caption = 'Commit transaction on refresh'
       Checked = True

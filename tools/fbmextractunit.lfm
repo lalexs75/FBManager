@@ -6,12 +6,14 @@ object fbmExtractForm: TfbmExtractForm
   Caption = 'Extract form'
   ClientHeight = 417
   ClientWidth = 638
+  OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
+  SessionProperties = 'RadioGroup1.ItemIndex;FileNameEdit1.Text;DirectoryEdit1.Text'
   LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 363
+    Height = 359
     Top = 0
     Width = 638
     ActivePage = TabSheet1
@@ -22,15 +24,15 @@ object fbmExtractForm: TfbmExtractForm
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Database'
-      ClientHeight = 330
+      ClientHeight = 328
       ClientWidth = 628
       object Label1: TLabel
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         Left = 6
-        Height = 19
+        Height = 17
         Top = 6
-        Width = 104
+        Width = 95
         BorderSpacing.Around = 6
         Caption = 'Select database'
         ParentColor = False
@@ -42,8 +44,8 @@ object fbmExtractForm: TfbmExtractForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 31
-        Top = 31
+        Height = 33
+        Top = 29
         Width = 610
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -55,18 +57,18 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Objects'
-      ClientHeight = 330
+      ClientHeight = 328
       ClientWidth = 628
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
         Left = 6
-        Height = 25
+        Height = 23
         Top = 6
-        Width = 100
+        Width = 92
         BorderSpacing.Around = 6
         Caption = 'CheckBox1'
-        Enabled = False
+        OnChange = CheckBox1Change
         TabOrder = 0
       end
       object Panel1: TPanel
@@ -78,12 +80,12 @@ object fbmExtractForm: TfbmExtractForm
         AnchorSideBottom.Control = TabSheet2
         AnchorSideBottom.Side = asrBottom
         Left = 0
-        Height = 291
-        Top = 37
+        Height = 293
+        Top = 35
         Width = 628
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Top = 6
-        ClientHeight = 291
+        ClientHeight = 293
         ClientWidth = 628
         TabOrder = 1
         object TreeView1: TTreeView
@@ -93,7 +95,7 @@ object fbmExtractForm: TfbmExtractForm
           AnchorSideBottom.Control = Panel1
           AnchorSideBottom.Side = asrBottom
           Left = 1
-          Height = 289
+          Height = 291
           Top = 1
           Width = 269
           Anchors = [akTop, akLeft, akRight, akBottom]
@@ -101,7 +103,7 @@ object fbmExtractForm: TfbmExtractForm
           ReadOnly = True
           TabOrder = 0
           OnDblClick = TreeView1DblClick
-          Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+          Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoNoDoubleClickExpand, tvoThemedDraw]
         end
         object TreeView2: TTreeView
           AnchorSideLeft.Control = Panel2
@@ -112,7 +114,7 @@ object fbmExtractForm: TfbmExtractForm
           AnchorSideBottom.Control = Panel1
           AnchorSideBottom.Side = asrBottom
           Left = 359
-          Height = 289
+          Height = 291
           Top = 1
           Width = 268
           Anchors = [akTop, akLeft, akRight, akBottom]
@@ -129,12 +131,12 @@ object fbmExtractForm: TfbmExtractForm
           AnchorSideBottom.Control = Panel1
           AnchorSideBottom.Side = asrBottom
           Left = 270
-          Height = 289
+          Height = 291
           Top = 1
           Width = 89
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
-          ClientHeight = 289
+          ClientHeight = 291
           ClientWidth = 89
           TabOrder = 2
           object Button1: TButton
@@ -144,9 +146,8 @@ object fbmExtractForm: TfbmExtractForm
             Height = 25
             Top = 7
             Width = 75
+            Action = actAdd
             BorderSpacing.Around = 6
-            Caption = 'Add'
-            OnClick = Button1Click
             TabOrder = 0
           end
           object Button2: TButton
@@ -157,9 +158,8 @@ object fbmExtractForm: TfbmExtractForm
             Height = 25
             Top = 38
             Width = 75
+            Action = actRemove
             BorderSpacing.Around = 6
-            Caption = 'Remove'
-            OnClick = Button2Click
             TabOrder = 1
           end
         end
@@ -167,23 +167,105 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Progress'
-      ClientHeight = 330
+      ClientHeight = 328
       ClientWidth = 628
-      object Button3: TButton
-        Left = 264
-        Height = 25
-        Top = 72
-        Width = 75
-        Caption = 'Create'
-        OnClick = Button3Click
+      object RadioGroup1: TRadioGroup
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Control = TabSheet3
+        Left = 6
+        Height = 110
+        Top = 6
+        Width = 132
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'Extract to:'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 92
+        ClientWidth = 130
+        Items.Strings = (
+          'File'
+          'Clipboard'
+          'Script executive'
+          'Separate files'
+        )
+        OnClick = RadioGroup1Click
         TabOrder = 0
+      end
+      object Label2: TLabel
+        AnchorSideLeft.Control = RadioGroup1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = TabSheet3
+        Left = 144
+        Height = 17
+        Top = 6
+        Width = 59
+        BorderSpacing.Around = 6
+        Caption = 'File name'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        AnchorSideLeft.Control = RadioGroup1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = FileNameEdit1
+        AnchorSideTop.Side = asrBottom
+        Left = 144
+        Height = 17
+        Top = 69
+        Width = 55
+        BorderSpacing.Around = 6
+        Caption = 'Directory'
+        ParentColor = False
+      end
+      object FileNameEdit1: TFileNameEdit
+        AnchorSideLeft.Control = Label2
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 150
+        Height = 34
+        Top = 29
+        Width = 472
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxLength = 0
+        TabOrder = 1
+      end
+      object DirectoryEdit1: TDirectoryEdit
+        AnchorSideLeft.Control = Label3
+        AnchorSideTop.Control = Label3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet3
+        AnchorSideRight.Side = asrBottom
+        Left = 150
+        Height = 34
+        Top = 92
+        Width = 472
+        ShowHidden = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 6
+        MaxLength = 0
+        TabOrder = 2
       end
     end
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 369
+    Height = 46
+    Top = 365
     Width = 626
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -195,5 +277,64 @@ object fbmExtractForm: TfbmExtractForm
     CancelButton.DefaultCaption = True
     TabOrder = 1
     ShowButtons = [pbOK, pbCancel, pbHelp]
+    object BitBtn1: TBitBtn
+      AnchorSideRight.Control = BitBtn2
+      AnchorSideBottom.Side = asrBottom
+      Left = 20
+      Height = 33
+      Top = 0
+      Width = 65
+      Anchors = [akTop, akRight, akBottom]
+      AutoSize = True
+      BorderSpacing.Right = 6
+      Caption = 'Back'
+      Images = fbManagerMainForm.ImageListMain
+      ImageIndex = 51
+      TabOrder = 4
+    end
+    object BitBtn2: TBitBtn
+      AnchorSideBottom.Side = asrBottom
+      Left = 91
+      Height = 33
+      Top = 8
+      Width = 64
+      Anchors = [akTop, akRight, akBottom]
+      AutoSize = True
+      BorderSpacing.Right = 6
+      Caption = 'Next'
+      Images = fbManagerMainForm.ImageListMain
+      ImageIndex = 53
+      TabOrder = 5
+    end
+  end
+  object RxIniPropStorage1: TRxIniPropStorage
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 283
+    Top = 40
+  end
+  object PageManager1: TPageManager
+    PageOwner = PageControl1
+    NextBtn = BitBtn2
+    PriorBtn = BitBtn1
+    OnPageChanged = PageControl1Change
+    StatusMessage = 'Step %d from %d'
+    Left = 360
+    Top = 216
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 216
+    Top = 208
+    object actAdd: TAction
+      Caption = 'actAdd'
+      ImageIndex = 53
+      OnExecute = actAddExecute
+    end
+    object actRemove: TAction
+      Caption = 'actRemove'
+      ImageIndex = 51
+      OnExecute = actRemoveExecute
+    end
   end
 end
