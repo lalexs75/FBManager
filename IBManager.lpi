@@ -1864,6 +1864,7 @@
         <Filename Value="import/generatedataunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="GenerateDataForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="GenerateDataUnit"/>
       </Unit>
@@ -1906,6 +1907,9 @@
       </Item>
       <Item>
         <Name Value="EZDatabaseError"/>
+      </Item>
+      <Item>
+        <Name Value="RunError(216)"/>
       </Item>
     </Exceptions>
   </Debugging>

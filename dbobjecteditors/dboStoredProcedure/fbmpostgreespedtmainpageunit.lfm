@@ -19,9 +19,9 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     Height = 219
     Top = 0
     Width = 917
-    ActivePage = TabSheet3
+    ActivePage = TabSheet2
     Align = alTop
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Declaration'
@@ -534,6 +534,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     end
   end
   object rxParamList: TRxMemoryData[2]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'ID'

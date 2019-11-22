@@ -1,8 +1,8 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
-  Height = 873
-  HorizontalOffset = 694
-  VerticalOffset = 128
+  Height = 850
+  HorizontalOffset = 469
+  VerticalOffset = 0
   Width = 1081
   object sqlTypesList: TStrHolder
     Capacity = 40
@@ -1185,7 +1185,8 @@ object pgSqlTextModule: TpgSqlTextModule
           '     pg_description'
           '     inner join pg_class on (pg_class.oid = pg_description.classoid)'
           '   where'
-          '     pg_description.objoid = pg_proc.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_proc'') as description'
+          '     pg_description.objoid = pg_proc.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_proc'') as description,'
+          '  pg_get_expr(pg_proc.proargdefaults, 0) as def_values'
           'from'
           '  pg_proc'
           'where'

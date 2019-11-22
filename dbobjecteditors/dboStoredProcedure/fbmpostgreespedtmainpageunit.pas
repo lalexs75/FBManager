@@ -400,6 +400,7 @@ procedure TfbmPostGreeFunctionEdtMainPage.RefreshObject;
 var
   P: TDBField;
   D: TDBDomain;
+  S: String;
 begin
   edtName.Caption:=TPGFunction(DBObject).Caption;
   cbVolatCat.ItemIndex:=Ord(TPGFunction(DBObject).VolatilityCategories)-1;
@@ -440,6 +441,8 @@ begin
           rxParamListType.AsString:=D.CaptionFullPatch;
       end;
 
+      S:=P.FieldDefaultValue;
+      rxParamListDefValue.AsString:=S;
       rxParamListInOut.AsInteger:=Ord(P.IOType);
       rxParamListOldParType.AsString:=rxParamListType.AsString;
       rxParamList.Post;
@@ -984,6 +987,7 @@ begin
   begin
     F:=ASQLObject.Params.AddParamWithType(rxParamListParName.AsString, rxParamListType.AsString);
     F.InReturn:=TSPVarType(rxParamListInOut.AsInteger);
+    F.DefaultValue:=rxParamListDefValue.AsString;
     if F.InReturn in [spvtOutput, spvtInOut] then
       Inc(FCntOutput);
 

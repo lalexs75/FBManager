@@ -7697,6 +7697,46 @@ begin
   Q.Free;
 end;
 
+procedure FillDefValues(ADefValues:string);
+var
+  S1: TStringList;
+procedure DoAddParam(S:string);
+begin
+  S1.Add(Trim(S));
+end;
+
+var
+  FInStr: Boolean;
+  i, J: Integer;
+  S: String;
+begin
+  S1:=TStringList.Create;
+  i:=1;
+  J:=1;
+  FInStr:=false;
+  while I<=Length(ADefValues) do
+  begin
+    if ADefValues[i] = '''' then
+      FInStr:=not FInStr
+    else
+    if (ADefValues[i]=',') and not FInStr then
+    begin
+      S:=Copy(ADefValues, j, i-j);
+      DoAddParam(Copy(ADefValues, j, i-j));
+      J:=i+1;
+    end;
+    Inc(i);
+  end;
+  if J<i then
+    DoAddParam(Copy(ADefValues, j, i-j));
+
+  for i:=0 to S1.Count - 1 do
+  begin
+    FieldsIN[(FieldsIN.Count-S1.Count) + i].FieldDefaultValue:=S1[i];
+  end;
+  S1.Free;
+end;
+
 procedure RefreshParamsDesc;
 var
   aSql:TStringList;
@@ -7811,8 +7851,10 @@ begin
             CntColums:=StrToIntDef(S, 0);
           if CntColums<=0 then
             CntColums:=Q.FieldByName('pronargs').AsInteger;
-
           ParseParamList(CntColums);
+
+          if Q.FieldByName('pronargdefaults').AsInteger > 0 then
+            FillDefValues(Q.FieldByName('def_values').AsString);
         end;
         RefreshParamsDesc;
       end;
