@@ -19597,6 +19597,9 @@ begin
       S1:=S1 + ' ' + DoFormatName(P.Caption);
 
     S1:=S1 + ' ' + DoFormatName2(P.TypeName);
+
+    if P.DefaultValue <> '' then
+      S1:=S1 + ' DEFAULT ' + P.DefaultValue;
   end;
 
   if S1<>'' then
