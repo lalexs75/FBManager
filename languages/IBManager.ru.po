@@ -2409,10 +2409,8 @@ msgid "Grant execute to"
 msgstr "Привилегии на выполнение для"
 
 #: fbmstrconstunit.sgrantforall
-#, fuzzy
-#| msgid "Grant for all"
 msgid "Grant to all for all objects"
-msgstr "Выдать права для всех"
+msgstr "Выдать права для всех на все объекты"
 
 #: fbmstrconstunit.sgrantforallgo
 msgid "Grant to All with GO"
@@ -2432,7 +2430,7 @@ msgstr "Менеджер прав"
 
 #: fbmstrconstunit.sgranttoall
 msgid "Grant to all"
-msgstr ""
+msgstr "Выдать прав для всех"
 
 #: fbmstrconstunit.sgridoptions
 msgid "Grid options"
