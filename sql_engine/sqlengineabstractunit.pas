@@ -762,7 +762,7 @@ type
     procedure Prepare;virtual; abstract;
     procedure ExecSQL;virtual; abstract;
     function ParseException(E:Exception; out X, Y:integer; out AMsg:string):boolean;virtual;
-    function LoadStatistic(out StatRec:TQueryStatRecord):boolean;virtual;
+    function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean;virtual;
 
     property DataSet:TDataSet read GetDataSet;
     property Owner:TSQLEngineAbstract read FOwner;
@@ -2976,7 +2976,8 @@ begin
   Result:=false;
 end;
 
-function TSQLQueryControl.LoadStatistic(out StatRec: TQueryStatRecord): boolean;
+function TSQLQueryControl.LoadStatistic(out StatRec: TQueryStatRecord;
+  const SQLCommand: TSQLCommandAbstract): boolean;
 begin
   Result:=false;
   FillChar(StatRec, SizeOf(TQueryStatRecord), 0);

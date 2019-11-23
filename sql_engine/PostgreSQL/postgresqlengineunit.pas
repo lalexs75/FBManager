@@ -1259,6 +1259,7 @@ type
   public
     constructor Create(AOwner:TSQLEngineAbstract); override;
     destructor Destroy; override;
+    function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean; override;
     function IsEditable:boolean;override;
     procedure CommitTransaction;override;
     procedure RolbackTransaction;override;
@@ -4312,6 +4313,25 @@ destructor TPGQueryControl.Destroy;
 begin
   FreeAndNil(FSQLQuery);
   inherited Destroy;
+end;
+
+function TPGQueryControl.LoadStatistic(out StatRec: TQueryStatRecord; const SQLCommand:TSQLCommandAbstract): boolean;
+begin
+  Result:=inherited LoadStatistic(StatRec, SQLCommand);
+  if SQLCommand is TSQLCommandUpdate then
+    StatRec.UpdatedRows:=FSQLQuery.RowsAffected
+  else
+  if SQLCommand is TSQLCommandInsert then
+    StatRec.InsertedRows:=FSQLQuery.RowsAffected
+  else
+  if SQLCommand is TSQLCommandDelete then
+    StatRec.DeletedRows:=FSQLQuery.RowsAffected
+  else
+  if SQLCommand is TSQLCommandAbstractSelect then
+    StatRec.SelectedRows:=FSQLQuery.RecordCount
+  else
+    Exit;
+  Result:=true;
 end;
 
 function TPGQueryControl.IsEditable: boolean;

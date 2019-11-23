@@ -626,7 +626,7 @@ type
     procedure Prepare;override;
     procedure ExecSQL;override;
     function ParseException(E:Exception; out X, Y:integer; out AMsg:string):boolean; override;
-    function LoadStatistic(out StatRec:TQueryStatRecord):boolean; override;
+    function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean; override;
   end;
 
   { TSQLEngineFireBird }
@@ -3671,9 +3671,10 @@ begin
   end;
 end;
 
-function TFBQueryControl.LoadStatistic(out StatRec: TQueryStatRecord): boolean;
+function TFBQueryControl.LoadStatistic(out StatRec: TQueryStatRecord;
+  const SQLCommand: TSQLCommandAbstract): boolean;
 begin
-  inherited LoadStatistic(StatRec);
+  inherited LoadStatistic(StatRec, SQLCommand);
   FBQuery.QuerySelect.AffectedRows(StatRec.SelectedRows, StatRec.InsertedRows, StatRec.UpdatedRows, StatRec.DeletedRows);
   Result:=true;
 end;

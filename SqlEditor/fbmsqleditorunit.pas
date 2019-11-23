@@ -32,7 +32,8 @@ uses
   RxIniPropStorage, RxDBGridExportSpreadSheet, RxDBGridPrintGrid, sqlObjects,
   SQLEngineCommonTypesUnit, RxDBGridFooterTools, RxDBGridExportPdf,
   rxdbverticalgrid, LCLIntf, EditBtn, fpdataexporter, ZMacroQuery,
-  ZDataset, SQLEngineAbstractUnit, fbmToolsUnit, IniFiles;
+  ZDataset, SQLEngineAbstractUnit, fbmToolsUnit, IniFiles,
+  fbmSqlParserUnit;
 
 const
   itFolderNode = 43;
@@ -303,7 +304,7 @@ type
     procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
     procedure LMNotyfyDelObject(var Message: TLMessage); message LM_NOTIFY_OBJECT_DELETE;
     procedure ShowResultTab(AShow:boolean);
-    procedure LoadStatistic;
+    procedure LoadStatistic(const SQLCommand:TSQLCommandAbstract);
 
     procedure DataSetAfterScrollRecord(Sender: TDataSet);
     function SynEditAcceptDrag(const Source: TObject): TControl;
@@ -336,7 +337,7 @@ type
 { TODO -cдоработка : Необходимо создать инструмент создания представления по текущему запросу }
 { TODO -oalexs : Необходимо сохранять положение сплитера между список запросов и редактором текста запроса }
 implementation
-uses IBManDataInspectorUnit, Clipbrd, fbmSqlParserUnit, rxdconst,
+uses IBManDataInspectorUnit, Clipbrd, rxdconst,
   SynEditSearch, fbmSQLEditor_ShowMemoUnit, LCLProc, LazUTF8,
   fbmfillqueryparamsunit, SQLEngineInternalToolsUnit,
   fbmStrConstUnit, fbmMakeSQLFromDataSetUnit, fbKeywordsUnit;
@@ -730,7 +731,6 @@ var
   i, ErrX, ErrY:integer;
 
 begin
-  FStartTime:=Now;
   SaveCurrent;
   SaveSQLEdiorsDesktop;
 
@@ -766,6 +766,7 @@ begin
         begin;
           QueryControl.Active:=true;
 
+          LoadStatistic(SQLCommand);
           if SQLCommand.PlanEnabled and ConfigValues.ByNameAsBoolean('SQLEditor/Show query plan', true) then
             ShowInfoMessages(QueryControl.QueryPlan)
           else
@@ -800,8 +801,8 @@ begin
 
           if SQLCommand is TSQLDropCommandAbstract then
             FOwnerRec.DropObject(TSQLDropCommandAbstract(SQLCommand).FullName);
+          LoadStatistic(SQLCommand);
         end;
-        LoadStatistic;
         FEndTime:=Now;
         FOwnerRec.ExecSQLEditor(S, Memo1.Text, FEndTime - FStartTime, SQLCommand, FSqlEditorTextCur.Name);
       end;
@@ -823,7 +824,6 @@ begin
   end
   else
     ShowInfoMessages(sSQLParseError);
-  UpdateExecTimeInfo;
 end;
 
 procedure TfbmSQLEditorForm.editShowPlanExecute(Sender: TObject);
@@ -834,7 +834,7 @@ begin
   begin
     SaveCurrent;
     SaveSQLEdiorsDesktop;
-
+    DoStartExecQuery;
     S:=EditorFrame.TextEditor.SelText;
     if S = '' then
       S:=EditorFrame.TextEditor.Text;
@@ -847,6 +847,7 @@ begin
       on E:Exception do
         ShowInfoMessages(E.Message);
     end;
+    DoStopExecQuery;
   end;
 end;
 
@@ -1215,7 +1216,8 @@ begin
       R.Filter.Style:=TRxFilterStyle(ConfigValues.ByNameAsInteger('Grid filter style', 0));
 end;
 
-procedure TfbmSQLEditorForm.LoadStatistic;
+procedure TfbmSQLEditorForm.LoadStatistic(const SQLCommand: TSQLCommandAbstract
+  );
 
 procedure AddValue(AValue:integer; ACaption:string; var AStr:string);
 begin
@@ -1231,7 +1233,7 @@ var
   StatRec: TQueryStatRecord;
   S: String;
 begin
-  if Memo1.Visible and QueryControl.LoadStatistic(StatRec) then
+  if Memo1.Visible and QueryControl.LoadStatistic(StatRec, SQLCommand) then
   begin
     S:='';
     AddValue(StatRec.SelectedRows, sSelectedRowsInfo, S);
@@ -1239,7 +1241,8 @@ begin
     AddValue(StatRec.UpdatedRows, sUpdatedRowsInfo, S);
     AddValue(StatRec.DeletedRows, sDeletedRowsInfo, S);
     if S<>'' then
-      Memo1.Lines.Text:=Memo1.Lines.Text + LineEnding + S;
+      ShowInfoMessages(S);
+      //Memo1.Lines.Text:=Memo1.Lines.Text + LineEnding + S;
   end;
 end;
 
@@ -1248,8 +1251,11 @@ begin
   tabMessages.TabVisible:=true;
   InfoPageControl.ActivePage:=tabMessages;
   UpdateInfoPageControlState;
-  Memo1.Text:=S;
-  //Memo1.Visible:=S<>'';
+//  if Memo1.Lines.Count>0 then
+  Memo1.Lines.Add(S);{:=Memo1.Lines.Text + S;
+  else
+    S:=LineEnding + S;
+  Memo1.Lines.Text:=Memo1.Lines.Text + S;}
 end;
 
 procedure TfbmSQLEditorForm.DataSetAfterScrollRecord(Sender: TDataSet);
@@ -1611,6 +1617,8 @@ end;
 
 procedure TfbmSQLEditorForm.DoStartExecQuery;
 begin
+  FStartTime:=Now;
+  Memo1.Lines.Clear;
   Screen.Cursor:=crHourGlass;
   editExecQury.Enabled:=false;
   editExecQueryFetchAll.Enabled:=false;
@@ -1619,9 +1627,11 @@ end;
 
 procedure TfbmSQLEditorForm.DoStopExecQuery;
 begin
+  FEndTime:=Now;
   editExecQury.Enabled:=true;
   editExecQueryFetchAll.Enabled:=true;
   Screen.Cursor:=crDefault;
+  UpdateExecTimeInfo;
 end;
 
 procedure TfbmSQLEditorForm.OnEditorChangeStatus(Sender: TObject);
