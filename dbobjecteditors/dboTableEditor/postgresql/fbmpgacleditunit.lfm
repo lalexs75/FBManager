@@ -838,6 +838,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
     Top = 280
   end
   object rxUGList: TRxMemoryData[5]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'UG_TYPE'

@@ -301,7 +301,8 @@ resourcestring
   sGrantor                          = 'Grantor';
   sRoleName1                        = 'Role name';
   sAllOobjects                      = 'All objects';
-  sGrantForAll                      = 'Grant for all';
+  sGrantForAll                      = 'Grant to all for all objects';
+  sGrantToAll                       = 'Grant to all';
   sGrantAll                         = 'Grant all';
   sGrantForAllGO                    = 'Grant to All with GO';
   sGrantAllGO                       = 'Grant All with GO';

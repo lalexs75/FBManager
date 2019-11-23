@@ -811,6 +811,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
     Top = 212
   end
   object rxUGList: TRxMemoryData[4]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'UG_TYPE'

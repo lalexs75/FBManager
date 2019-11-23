@@ -2325,7 +2325,7 @@ msgid "Grant execute to"
 msgstr ""
 
 #: fbmstrconstunit.sgrantforall
-msgid "Grant for all"
+msgid "Grant to all for all objects"
 msgstr ""
 
 #: fbmstrconstunit.sgrantforallgo
@@ -2342,6 +2342,10 @@ msgstr ""
 
 #: fbmstrconstunit.sgrantsmanager
 msgid "Grants manager"
+msgstr ""
+
+#: fbmstrconstunit.sgranttoall
+msgid "Grant to all"
 msgstr ""
 
 #: fbmstrconstunit.sgridoptions

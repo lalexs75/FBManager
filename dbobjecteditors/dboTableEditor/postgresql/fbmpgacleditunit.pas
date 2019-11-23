@@ -428,6 +428,21 @@ begin
   Caption:=sACLEdit;
   Label1.Caption:=sUsersGroups;
   edtPrint.Caption:=sPrint;
+
+  grVL.Caption:=sGrantAll;
+  grVL.Hint:=sGrantAll;
+  grHL.Caption:=sGrantToAll;
+  grHL.Hint:=sGrantToAll;
+  grALL.Caption:=sGrantForAll;
+  grALL.Hint:=sGrantForAll;
+  revVL.Caption:=sRevokeFromAll;
+  revVL.Hint:=sRevokeFromAll;
+  revHL.Caption:=sRevokeAll;
+  revHL.Hint:=sRevokeAll;
+  revALL.Caption:=sRevokeAllFromAll;
+  revALL.Hint:=sRevokeAllFromAll;
+
+
   ComboBox1.Items.Clear;
   ComboBox1.Items.Add(sUsersAndGroups);
   ComboBox1.Items.Add(sOnlyUsers);
@@ -472,14 +487,6 @@ begin
   RxDBGrid1.ColumnByFieldName('ogShutdown').Title.Caption:=sShutdown;
   RxDBGrid1.ColumnByFieldName('ogSuper').Title.Caption:=sSuper;
   RxDBGrid1.ColumnByFieldName('ogMembership').Title.Caption:=sMembership;
-
-  { TODO : Доработать локализацию }
-{  grVL
-  grHL
-  grALL
-  revVL
-  revHL
-  revALL }
 end;
 
 end.

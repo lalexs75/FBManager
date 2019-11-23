@@ -612,6 +612,18 @@ begin
   Caption:=sGrantsManager;
 
   edtPrint.Caption:=sPrint;
+  grVL.Caption:=sGrantAll;
+  grVL.Hint:=sGrantAll;
+  grHL.Caption:=sGrantToAll;
+  grHL.Hint:=sGrantToAll;
+  grALL.Caption:=sGrantForAll;
+  grALL.Hint:=sGrantForAll;
+  revVL.Caption:=sRevokeFromAll;
+  revVL.Hint:=sRevokeFromAll;
+  revHL.Caption:=sRevokeAll;
+  revHL.Hint:=sRevokeAll;
+  revALL.Caption:=sRevokeAllFromAll;
+  revALL.Hint:=sRevokeAllFromAll;
 
   RxDBGrid1.ColumnByFieldName('UG_NAME').Title.Caption:=sNameUserRole;
   RxDBGrid1.ColumnByFieldName('OWNER_USER').Title.Caption:=sGrantOwnUser;
