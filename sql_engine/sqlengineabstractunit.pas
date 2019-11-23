@@ -444,6 +444,7 @@ type
     constructor Create(AOwner:TDBObject); virtual;
     function DDLTypeStr:string; virtual;
     function FieldTypeStr:string;
+    function TypeStr:string;
     procedure LoadFromSQLFieldItem(SQLField:TSQLParserField);
     procedure SaveToSQLFieldItem(SQLField:TSQLParserField);
     function RefreshDependenciesFromField:TStringList; virtual;
@@ -3420,6 +3421,20 @@ begin
     else
     { TODO : Тут надо дописать обработку дополнительных типов данных }
       ;
+  end;
+end;
+
+function TDBField.TypeStr: string;
+begin
+  if Assigned(FieldDomain) then
+    Result:=FieldTypeDomain
+  else
+  begin
+    if Assigned(FFieldTypeRecord) then
+      Result:=FFieldTypeRecord.GetFieldTypeStr(FieldSize, FieldPrec)
+    else
+      { TODO : Тут надо дописать обработку дополнительных типов данных }
+      Result:='';
   end;
 end;
 

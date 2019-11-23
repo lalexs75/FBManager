@@ -1,18 +1,19 @@
 object GenerateDataForm: TGenerateDataForm
-  Left = 508
-  Height = 388
-  Top = 280
-  Width = 654
+  Left = 441
+  Height = 526
+  Top = 216
+  Width = 836
   Caption = 'GenerateDataForm'
-  ClientHeight = 388
-  ClientWidth = 654
+  ClientHeight = 526
+  ClientWidth = 836
+  OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.1.0.0'
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 46
-    Top = 336
-    Width = 642
+    Top = 474
+    Width = 824
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
     HelpButton.Name = 'HelpButton'
@@ -51,42 +52,67 @@ object GenerateDataForm: TGenerateDataForm
     TabOrder = 1
   end
   object Label1: TLabel
-    Left = 208
+    AnchorSideLeft.Control = RadioGroup1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideBottom.Control = SpinEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 173
     Height = 17
-    Top = 24
+    Top = 23
     Width = 130
+    Anchors = [akLeft, akBottom]
     Caption = 'Records to generated'
     ParentColor = False
   end
   object Label2: TLabel
-    Left = 210
+    AnchorSideLeft.Control = SpinEdit1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideBottom.Control = SpinEdit2
+    AnchorSideBottom.Side = asrBottom
+    Left = 440
     Height = 17
-    Top = 84
+    Top = 23
     Width = 81
+    Anchors = [akLeft, akBottom]
     Caption = 'Commit after'
     ParentColor = False
   end
   object SpinEdit1: TSpinEdit
-    Left = 348
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 309
     Height = 34
-    Top = 16
+    Top = 6
     Width = 125
+    BorderSpacing.Around = 6
     MaxValue = 0
     TabOrder = 2
+    Value = 100
   end
   object SpinEdit2: TSpinEdit
-    Left = 348
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    Left = 527
     Height = 34
-    Top = 67
+    Top = 6
     Width = 125
+    BorderSpacing.Around = 6
     MaxValue = 0
     TabOrder = 3
+    Value = 500
   end
   object RxDBGrid1: TRxDBGrid
-    Left = 9
-    Height = 203
-    Top = 119
-    Width = 349
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = RadioGroup2
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 0
+    Height = 392
+    Top = 76
+    Width = 644
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
     AutoSort = True
@@ -107,6 +133,7 @@ object GenerateDataForm: TGenerateDataForm
         Footers = <>
       end    
       item
+        ReadOnly = True
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'FieldName'
@@ -122,9 +149,11 @@ object GenerateDataForm: TGenerateDataForm
         Footers = <>
       end    
       item
+        ReadOnly = True
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'FieldType'
+        Width = 200
         FieldName = 'FieldType'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -195,15 +224,119 @@ object GenerateDataForm: TGenerateDataForm
     SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
     SearchOptions.FromStart = False
     OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clWindow
     DrawFullLine = False
     FocusColor = clRed
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsFields
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
+    PopupMenu = PopupMenu1
     TabOrder = 4
     TitleStyle = tsNative
+  end
+  object RadioGroup2: TRadioGroup
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 650
+    Height = 110
+    Top = 76
+    Width = 180
+    Anchors = [akTop, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Data generator type'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 92
+    ClientWidth = 178
+    Items.Strings = (
+      'Generate randomly'
+      'Get from another table'
+      'Get from list'
+      'Autoincrement'
+    )
+    TabOrder = 5
+  end
+  object GroupBox1: TGroupBox
+    AnchorSideLeft.Control = RadioGroup2
+    AnchorSideTop.Control = RadioGroup2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = RadioGroup2
+    AnchorSideRight.Side = asrBottom
+    Left = 650
+    Height = 150
+    Top = 192
+    Width = 180
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    Caption = 'Integer constarints'
+    ClientHeight = 132
+    ClientWidth = 178
+    TabOrder = 6
+    object Label3: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 6
+      Height = 17
+      Top = 6
+      Width = 61
+      BorderSpacing.Around = 6
+      Caption = 'Min. value'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = SpinEdit3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      Left = 6
+      Height = 17
+      Top = 69
+      Width = 63
+      BorderSpacing.Around = 6
+      Caption = 'Max. value'
+      ParentColor = False
+    end
+    object SpinEdit3: TSpinEdit
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 34
+      Top = 29
+      Width = 160
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxValue = 0
+      TabOrder = 0
+    end
+    object SpinEdit4: TSpinEdit
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label4
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 12
+      Height = 34
+      Top = 92
+      Width = 160
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      MaxValue = 0
+      TabOrder = 1
+    end
   end
   object rxFields: TRxMemoryData
     Capacity = 1024
@@ -221,10 +354,14 @@ object GenerateDataForm: TGenerateDataForm
         Name = 'FieldType'
         DataType = ftString
         Size = 250
+      end    
+      item
+        Name = 'FieldTypeInt'
+        DataType = ftInteger
       end>
     PacketRecords = 0
     Left = 55
-    Top = 137
+    Top = 136
     object rxFieldsCHEKED: TBooleanField
       FieldKind = fkData
       FieldName = 'CHEKED'
@@ -255,10 +392,48 @@ object GenerateDataForm: TGenerateDataForm
       Required = False
       Size = 250
     end
+    object rxFieldsFieldTypeInt: TLongintField
+      FieldKind = fkData
+      FieldName = 'FieldTypeInt'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
   end
   object dsFields: TDataSource
     DataSet = rxFields
     Left = 24
     Top = 137
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 270
+    Top = 142
+    object fldSelAll: TAction
+      Tag = 1
+      Caption = 'fldSelAll'
+      OnExecute = fldSelAllExecute
+    end
+    object fldUnSelAll: TAction
+      Tag = -1
+      Caption = 'fldUnSelAll'
+      OnExecute = fldSelAllExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 24
+    Top = 192
+    object MenuItem1: TMenuItem
+      Action = fldSelAll
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = fldUnSelAll
+    end
   end
 end

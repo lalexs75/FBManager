@@ -26,28 +26,45 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
-  StdCtrls, Spin, DB, rxmemds, rxdbgrid, SQLEngineAbstractUnit;
+  StdCtrls, Spin, ActnList, Menus, DB, rxmemds, rxdbgrid, SQLEngineAbstractUnit;
 
 type
 
   { TGenerateDataForm }
 
   TGenerateDataForm = class(TForm)
+    fldSelAll: TAction;
+    fldUnSelAll: TAction;
+    ActionList1: TActionList;
     ButtonPanel1: TButtonPanel;
     dsFields: TDataSource;
+    GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    PopupMenu1: TPopupMenu;
     RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
     RxDBGrid1: TRxDBGrid;
     rxFields: TRxMemoryData;
     rxFieldsCHEKED: TBooleanField;
     rxFieldsFieldName: TStringField;
     rxFieldsFieldType: TStringField;
+    rxFieldsFieldTypeInt: TLongintField;
     SpinEdit1: TSpinEdit;
     SpinEdit2: TSpinEdit;
+    SpinEdit3: TSpinEdit;
+    SpinEdit4: TSpinEdit;
+    procedure fldSelAllExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     FTable: TDBTableObject;
     procedure Localize;
+    procedure LoadTableInfo;
   public
     constructor CreateGenerateDataForm(ATable:TDBTableObject);
     //function SaveData:boolean;
@@ -56,6 +73,7 @@ type
 
 procedure ShowGenerateDataForm(ATable:TDBTableObject);
 implementation
+uses Math;
 
 procedure ShowGenerateDataForm(ATable: TDBTableObject);
 var
@@ -70,9 +88,39 @@ end;
 
 { TGenerateDataForm }
 
+procedure TGenerateDataForm.fldSelAllExecute(Sender: TObject);
+begin
+  //
+end;
+
+procedure TGenerateDataForm.FormCreate(Sender: TObject);
+begin
+  SpinEdit3.Value:=-MaxInt-1;
+  SpinEdit4.Value:=MaxInt;
+end;
+
 procedure TGenerateDataForm.Localize;
 begin
 
+end;
+
+procedure TGenerateDataForm.LoadTableInfo;
+var
+  F: TDBField;
+begin
+  rxFields.CloseOpen;
+  if not Assigned(FTable) then Exit;
+  for F in FTable.Fields do
+  begin
+    rxFields.Append;
+    rxFieldsCHEKED.AsBoolean:=false;
+    rxFieldsFieldName.AsString:=F.FieldName;
+    rxFieldsFieldType.AsString:=F.TypeStr;
+    rxFieldsFieldTypeInt.AsInteger:=Ord(F.FieldTypeDB);
+    rxFields.Post;
+  end;
+
+  rxFields.First;
 end;
 
 constructor TGenerateDataForm.CreateGenerateDataForm(ATable: TDBTableObject);
@@ -80,6 +128,7 @@ begin
   inherited Create(Application);
   Localize;
   FTable:=ATable;
+  LoadTableInfo;
 end;
 
 end.
