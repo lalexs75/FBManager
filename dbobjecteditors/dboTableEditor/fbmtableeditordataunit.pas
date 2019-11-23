@@ -526,6 +526,7 @@ begin
   dataImport.Enabled:=DBObject is TDBTableObject;
   dataImport.Visible:=DBObject is TDBTableObject;
   MenuItem2.Visible:=DBObject is TDBTableObject;
+  dataGenerate.Visible:=DBObject is TDBTableObject;
 end;
 
 destructor TfbmTableEditorDataFrame.Destroy;
