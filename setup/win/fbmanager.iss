@@ -111,6 +111,9 @@ Source: "W:\FBManager\dlls\libxml2-2.dll"; DestDir: "{app}"; Flags: ignoreversio
 Source: "W:\FBManager\dlls\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "W:\FBManager\dlls\sqlite3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\FBManager\dlls\fblib\fbclient.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\FBManager\dlls\fblib\firebird.msg"; DestDir: "{app}"; Flags: ignoreversion
+Source: "W:\FBManager\dlls\fblib\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "W:\sto\dll\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "W:\sto\dll\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
