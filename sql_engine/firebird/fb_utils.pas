@@ -111,8 +111,9 @@ const
   TRReadWriteTableStability : TTransParams = [tpWrite, tpConsistency];
 
 procedure SetTranStrings(const AItems:TStrings);
+function GetDefaultFB3Lib:string;
 implementation
-uses uibase, fbmStrConstUnit, db;
+uses uibase, fbmStrConstUnit, db, rxlogging;
 
 function StrToFBServersVersion(S: string): TFBServerVersion;
 var
@@ -209,6 +210,20 @@ begin
   AItems.Add(sFBTranParamsReadCommited);
   AItems.Add(sFBTranParamsReadOnlyTableStab);
   AItems.Add(sFBTranParamsReadWriteTableStab);
+end;
+
+function GetDefaultFB3Lib: string;
+var
+  F: String;
+begin
+  F:=ExtractFileDir(ParamStr(0)) + {'\dlls\fblib}'\fbclient.dll';
+  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [F]);
+  if FileExists(F) then
+    Result:=F
+  else
+    Result:=GDS32DLL;
+
+  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [Result]);
 end;
 
 {

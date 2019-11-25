@@ -83,7 +83,8 @@ type
   end;
 
 implementation
-uses fbmToolsUnit, IBManDataInspectorUnit, fbmStrConstUnit, fb_ConstUnit, FBSQLEngineUnit;
+uses fbmToolsUnit, IBManDataInspectorUnit, fbmStrConstUnit, fb_ConstUnit,
+  FBSQLEngineUnit, fb_utils;
 
 {$R *.lfm}
 
@@ -123,10 +124,11 @@ begin
   end;
 
 //  UIBDataBase1.
-  if edtLibName.Text<>'' then
-    UIBDataBase1.LibraryName:=edtLibName.Text;
+//  if edtLibName.Text<>'' then
+//    UIBDataBase1.LibraryName:=edtLibName.Text;
   UIBDataBase1.CharacterSet:=StrToCharacterSet(ComboBox3.Text);
   UIBDataBase1.CreateDatabase(UIBDataBase1.CharacterSet, StrToInt(ComboBox2.Text));
+  UIBDataBase1.LibraryName:=GetDefaultFB3Lib;
 end;
 
 procedure TfbmCreateDataBaseForm.FormCreate(Sender: TObject);
@@ -215,7 +217,7 @@ begin
   //  FServerType:=TFBEngineCreateDBClass(CreateClass).FServerType;
   TSQLEngineFireBird(Result).Protocol:=FProtocol;
 
-  TSQLEngineFireBird(Result).LibraryName:=FLibraryName;
+  //TSQLEngineFireBird(Result).LibraryName:=FLibraryName;
   TSQLEngineFireBird(Result).CharSet:=CharacterSetStr[FCharacterSet];
 
  //  FDBPageSize:=StrToInt(fbmCreateDataBaseForm.ComboBox2.Text);

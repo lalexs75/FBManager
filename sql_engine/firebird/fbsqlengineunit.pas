@@ -667,7 +667,7 @@ type
     function GetLiBraryName: TFileName;
     procedure LoadDBParams;
     procedure OnUIBSqlParse(Sender: TObject; NodeType: TSQLStatement; const Statement: string);
-    procedure SetLibraryName(AValue: TFileName);
+    //procedure SetLibraryName(AValue: TFileName);
   protected
     function GetImageIndex: integer;override;
 
@@ -716,7 +716,7 @@ type
     property TranParamData:integer read FTranParamData write FTranParamData;
     property TranParamMetaData:integer read FTranParamMetaData write FTranParamMetaData;
     property AutoGrantObject:boolean read FAutoGrantObject write FAutoGrantObject;
-    property LibraryName: TFileName read GetLiBraryName write SetLibraryName;
+    property LibraryName: TFileName read GetLiBraryName{ write SetLibraryName};
 
     property FBDatabase:TUIBDataBase read FFBDatabase;
     property FBTransaction: TUIBTransaction read FFBTransaction;
@@ -1377,6 +1377,9 @@ begin
   FBackupOptions:=TFireBirdBackupOptions.Create;
 
   FFBDatabase:=TUIBDataBase.Create(nil);
+{$IFDEF WINDOWS}
+  FFBDatabase.LibraryName:=GetDefaultFB3Lib;
+{$ENDIF}
   FFBTransaction:=TUIBTransaction.Create(nil);
   FFBTransaction.DataBase:=FBDatabase;
   FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
@@ -1432,12 +1435,13 @@ begin
       abort;
 end;
 
+(*
 procedure TSQLEngineFireBird.SetLibraryName(AValue: TFileName);
 begin
   if (AValue <> '') and (FBDatabase.LibraryName <> AValue) then
     FBDatabase.LibraryName:=AValue;
 end;
-
+*)
 function TSQLEngineFireBird.GetImageIndex: integer;
 begin
   if Connected then
@@ -1627,7 +1631,7 @@ begin
   FCharSet:=AData.FieldByName('db_database_connected_charset').AsString;
   FServerVersion:=TFBServerVersion(AData.FieldByName('db_database_server_version').AsInteger);
   FAutoGrantObject:=AData.FieldByName('db_database_auto_grant').AsBoolean;
-  LibraryName:=AData.FieldByName('db_database_library_name').AsString;
+  //LibraryName:=AData.FieldByName('db_database_library_name').AsString;
   FProtocol:= StrToUIBProtocol(AData.FieldByName('db_database_authentication_type').AsString);
 
   FTranParamData:=1;
@@ -1642,7 +1646,7 @@ begin
   AData.FieldByName('db_database_connected_charset').AsString:=FCharSet;
   AData.FieldByName('db_database_server_version').AsInteger:=Ord(FServerVersion);
   AData.FieldByName('db_database_auto_grant').AsBoolean:=FAutoGrantObject;
-  AData.FieldByName('db_database_library_name').AsString:=LibraryName;
+  //AData.FieldByName('db_database_library_name').AsString:=LibraryName;
   AData.FieldByName('db_database_authentication_type').AsString:=UIBProtocolToStr(FProtocol);
 end;
 

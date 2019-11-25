@@ -83,8 +83,8 @@ type
   end;
 
 implementation
-uses rxAppUtils, fbmStrConstUnit, IBManDataInspectorUnit, ibmanagertypesunit, SQLEngineCommonTypesUnit,
-  fbmToolsUnit, Clipbrd, fb_utils;
+uses rxAppUtils, rxlogging, fbmStrConstUnit, IBManDataInspectorUnit,
+  ibmanagertypesunit, SQLEngineCommonTypesUnit, fbmToolsUnit, Clipbrd, fb_utils;
 
 {$R *.lfm}
 
@@ -204,7 +204,7 @@ begin
   FSQLEngineFireBird.ServerVersion:=TFBServerVersion(CB_ServerVersion.ItemIndex);
 
   FSQLEngineFireBird.AutoGrantObject:=CheckBox1.Checked;
-  FSQLEngineFireBird.LibraryName:=FileNameEdit1.FileName;
+  //FSQLEngineFireBird.LibraryName:=FileNameEdit1.FileName;
   if CheckBox2.Checked then
     FSQLEngineFireBird.MiscOptions.ObjectNamesCharCase:=ccoUpperCase
   else
@@ -228,10 +228,13 @@ end;
 
 function TfbmCFMainFrame.TestConnection: boolean;
 begin
+  RxWriteLog(etDebug, 'TfbmCFMainFrame.TestConnection');
+
   UIBDataBaseTest.UserName:=EditUserName.Text;
   UIBDataBaseTest.PassWord:=EditPassword.Text;
   UIBDataBaseTest.Role:=EditRole.Text;
   UIBDataBaseTest.DatabaseName:=MakeConnectionStr;
+  UIBDataBaseTest.LibraryName:=GetDefaultFB3Lib;
 
   Result:=false;
   try
