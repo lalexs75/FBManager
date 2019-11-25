@@ -190,12 +190,13 @@ begin
     rxParamList.Append
   else
   begin
+    rxParamList.Edit;
     fbmPostGreeSPedtMainPage_EditParamForm.Edit1.Text:=rxParamListParName.AsString;
     fbmPostGreeSPedtMainPage_EditParamForm.cbType.Text:=rxParamListType.AsString;
     fbmPostGreeSPedtMainPage_EditParamForm.cbInOut.ItemIndex:=rxParamListInOut.AsInteger-1;
     fbmPostGreeSPedtMainPage_EditParamForm.Memo1.Text:=rxParamListDesc.AsString;
+    fbmPostGreeSPedtMainPage_EditParamForm.Edit2.Text:=rxParamListDefValue.AsString;
 
-    rxParamList.Edit;
   end;//
   if fbmPostGreeSPedtMainPage_EditParamForm.ShowModal = mrOk then
   begin
@@ -204,6 +205,7 @@ begin
     rxParamListInOut.AsInteger := fbmPostGreeSPedtMainPage_EditParamForm.cbInOut.ItemIndex + 1;
 
     rxParamListParName.AsString:=fbmPostGreeSPedtMainPage_EditParamForm.Edit1.Text;
+    rxParamListDefValue.AsString:=fbmPostGreeSPedtMainPage_EditParamForm.Edit2.Text;
     rxParamList.Post;
     Modified:=true;
   end
