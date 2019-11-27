@@ -499,6 +499,7 @@ type
     procedure DeleteField(const AName:string);
     function GetEnumerator: TDBFieldsEnumerator;
     procedure SaveToSQLFields(ASQLFields:TSQLFields);
+    procedure SaveToStrings(AStrings:TStrings);
     property Count:integer read GetCount;
     property Items[AIndex:Integer]:TDBField read GetItem;default;
     property AsString:string read GetAsString;
@@ -3328,6 +3329,15 @@ begin
   begin
     F.SaveToSQLFieldItem(ASQLFields.AddParam(F.FieldName));
   end;
+end;
+
+procedure TDBFields.SaveToStrings(AStrings: TStrings);
+var
+  F: TDBField;
+begin
+  if Assigned(AStrings) then
+    for F in Self do
+      AStrings.Add(F.FieldName);
 end;
 
 { TFieldItem }

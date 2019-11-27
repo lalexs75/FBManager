@@ -285,6 +285,7 @@ object GenerateDataForm: TGenerateDataForm
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       MaxValue = 0
+      OnChange = ComboBox2Change
       TabOrder = 0
     end
     object SpinEdit4: TSpinEdit
@@ -300,20 +301,21 @@ object GenerateDataForm: TGenerateDataForm
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       MaxValue = 0
+      OnChange = ComboBox2Change
       TabOrder = 1
     end
   end
   object GroupBox2: TGroupBox
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrBottom
-    Left = 144
-    Height = 144
-    Top = 320
+    Left = 48
+    Height = 207
+    Top = 272
     Width = 186
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     Caption = 'Get from table'
-    ClientHeight = 126
+    ClientHeight = 189
     ClientWidth = 184
     TabOrder = 6
     object Label5: TLabel
@@ -350,6 +352,7 @@ object GenerateDataForm: TGenerateDataForm
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       ItemHeight = 0
+      OnChange = ComboBox1Change
       TabOrder = 0
       Text = 'ComboBox1'
     end
@@ -366,16 +369,43 @@ object GenerateDataForm: TGenerateDataForm
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
       ItemHeight = 0
+      OnChange = ComboBox2Change
       TabOrder = 1
       Text = 'ComboBox2'
+    end
+    object Label7: TLabel
+      AnchorSideLeft.Control = GroupBox2
+      AnchorSideTop.Control = ComboBox2
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 126
+      Width = 113
+      Caption = 'Number of records'
+      ParentColor = False
+    end
+    object SpinEdit5: TSpinEdit
+      AnchorSideLeft.Control = Label7
+      AnchorSideTop.Control = Label7
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox2
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 149
+      Width = 172
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = ComboBox1Change
+      TabOrder = 2
     end
   end
   object GroupBox3: TGroupBox
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrBottom
-    Left = 352
+    Left = 264
     Height = 105
-    Top = 320
+    Top = 272
     Width = 186
     Anchors = [akTop, akLeft, akRight]
     Caption = 'Get from list'
@@ -437,13 +467,287 @@ object GenerateDataForm: TGenerateDataForm
   object GroupBox4: TGroupBox
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrBottom
-    Left = 616
-    Height = 105
-    Top = 408
+    Left = 256
+    Height = 144
+    Top = 392
     Width = 186
     Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
     Caption = 'Autoincrement'
+    ClientHeight = 126
+    ClientWidth = 184
     TabOrder = 9
+    object Label8: TLabel
+      AnchorSideLeft.Control = GroupBox4
+      AnchorSideTop.Control = GroupBox4
+      Left = 0
+      Height = 17
+      Top = 0
+      Width = 68
+      Caption = 'Initial value'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      AnchorSideLeft.Control = GroupBox4
+      AnchorSideTop.Control = SpinEdit6
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 63
+      Width = 28
+      Caption = 'Step'
+      ParentColor = False
+    end
+    object SpinEdit6: TSpinEdit
+      AnchorSideLeft.Control = Label8
+      AnchorSideTop.Control = Label8
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox4
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 23
+      Width = 172
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = ComboBox2Change
+      TabOrder = 0
+    end
+    object SpinEdit7: TSpinEdit
+      AnchorSideLeft.Control = Label9
+      AnchorSideTop.Control = Label9
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox4
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 86
+      Width = 172
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = ComboBox2Change
+      TabOrder = 1
+    end
+  end
+  object GroupBox5: TGroupBox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 472
+    Height = 293
+    Top = 272
+    Width = 160
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    Caption = 'String constraints'
+    ClientHeight = 275
+    ClientWidth = 158
+    TabOrder = 10
+    object CheckBox1: TCheckBox
+      AnchorSideLeft.Control = GroupBox5
+      AnchorSideTop.Control = GroupBox5
+      Left = 0
+      Height = 23
+      Top = 0
+      Width = 118
+      Caption = 'Generate GUID'
+      OnChange = CheckBox1Change
+      TabOrder = 0
+    end
+    object Label10: TLabel
+      AnchorSideLeft.Control = GroupBox5
+      AnchorSideTop.Control = CheckBox1
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 23
+      Width = 70
+      Caption = 'Min. length'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      AnchorSideLeft.Control = GroupBox5
+      AnchorSideTop.Control = SpinEdit8
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 86
+      Width = 72
+      Caption = 'Max. length'
+      ParentColor = False
+    end
+    object SpinEdit8: TSpinEdit
+      AnchorSideLeft.Control = Label10
+      AnchorSideTop.Control = Label10
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox5
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 46
+      Width = 146
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = ComboBox1Change
+      TabOrder = 1
+    end
+    object SpinEdit9: TSpinEdit
+      AnchorSideLeft.Control = Label11
+      AnchorSideTop.Control = Label11
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox5
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 109
+      Width = 146
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      OnChange = ComboBox1Change
+      TabOrder = 2
+    end
+    object Label12: TLabel
+      AnchorSideLeft.Control = GroupBox5
+      AnchorSideTop.Control = SpinEdit9
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 149
+      Width = 62
+      Caption = 'From char'
+      ParentColor = False
+    end
+    object Label13: TLabel
+      AnchorSideLeft.Control = GroupBox5
+      AnchorSideTop.Control = ComboBox3
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 212
+      Width = 45
+      Caption = 'To char'
+      ParentColor = False
+    end
+    object ComboBox3: TComboBox
+      AnchorSideLeft.Control = Label12
+      AnchorSideTop.Control = Label12
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox5
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 172
+      Width = 146
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = ComboBox1Change
+      TabOrder = 3
+      Text = 'ComboBox3'
+    end
+    object ComboBox4: TComboBox
+      AnchorSideLeft.Control = Label13
+      AnchorSideTop.Control = Label13
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox5
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 235
+      Width = 146
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ItemHeight = 0
+      OnChange = ComboBox1Change
+      TabOrder = 4
+      Text = 'ComboBox4'
+    end
+  end
+  object GroupBox6: TGroupBox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 664
+    Height = 167
+    Top = 369
+    Width = 185
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    Caption = 'Date constraint'
+    ClientHeight = 149
+    ClientWidth = 183
+    TabOrder = 11
+    object Label14: TLabel
+      AnchorSideLeft.Control = GroupBox6
+      AnchorSideTop.Control = GroupBox6
+      Left = 0
+      Height = 17
+      Top = 0
+      Width = 57
+      Caption = 'Min. date'
+      ParentColor = False
+    end
+    object Label15: TLabel
+      AnchorSideLeft.Control = GroupBox6
+      AnchorSideTop.Control = RxDateEdit1
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 17
+      Top = 63
+      Width = 59
+      Caption = 'Max. date'
+      ParentColor = False
+    end
+    object CheckBox2: TCheckBox
+      AnchorSideLeft.Control = GroupBox6
+      AnchorSideTop.Control = RxDateEdit2
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 126
+      Width = 100
+      Caption = 'Include time'
+      OnChange = ComboBox2Change
+      TabOrder = 0
+    end
+    object RxDateEdit1: TRxDateEdit
+      AnchorSideLeft.Control = GroupBox6
+      AnchorSideTop.Control = Label14
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox6
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 23
+      Width = 171
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ButtonWidth = 23
+      MaxLength = 10
+      PasswordChar = #0
+      PopupColor = clWindow
+      TabOrder = 1
+      Text = 't1.  .    '
+      OnChange = ComboBox2Change
+    end
+    object RxDateEdit2: TRxDateEdit
+      AnchorSideLeft.Control = Label15
+      AnchorSideTop.Control = Label15
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox6
+      AnchorSideRight.Side = asrBottom
+      Left = 6
+      Height = 34
+      Top = 86
+      Width = 171
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 6
+      ButtonWidth = 23
+      MaxLength = 10
+      PasswordChar = #0
+      PopupColor = clWindow
+      TabOrder = 2
+      Text = 't2.  .    '
+      OnChange = ComboBox2Change
+    end
   end
   object rxFields: TRxMemoryData
     Capacity = 1024
@@ -501,6 +805,10 @@ object GenerateDataForm: TGenerateDataForm
         Size = 250
       end    
       item
+        Name = 'DataGenExtRecordCount'
+        DataType = ftInteger
+      end    
+      item
         Name = 'DataGenSimpleList'
         DataType = ftMemo
       end    
@@ -525,6 +833,14 @@ object GenerateDataForm: TGenerateDataForm
       item
         Name = 'DataGenAsGUID'
         DataType = ftBoolean
+      end    
+      item
+        Name = 'DataGenAutoIncStart'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'DataGenAutoIncStep'
+        DataType = ftInteger
       end>
     BeforeScroll = rxFieldsBeforeScroll
     AfterScroll = rxFieldsAfterScroll
@@ -645,10 +961,19 @@ object GenerateDataForm: TGenerateDataForm
       Required = False
       Size = 250
     end
+    object rxFieldsDataGenExtRecordCount: TLongintField
+      FieldKind = fkData
+      FieldName = 'DataGenExtRecordCount'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
     object rxFieldsDataGenSimpleList: TMemoField
       FieldKind = fkData
       FieldName = 'DataGenSimpleList'
-      Index = 12
+      Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -659,7 +984,7 @@ object GenerateDataForm: TGenerateDataForm
     object rxFieldsDataGenStrMinLen: TLongintField
       FieldKind = fkData
       FieldName = 'DataGenStrMinLen'
-      Index = 13
+      Index = 14
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -668,7 +993,7 @@ object GenerateDataForm: TGenerateDataForm
     object rxFieldsDataGenStrMaxLen: TLongintField
       FieldKind = fkData
       FieldName = 'DataGenStrMaxLen'
-      Index = 14
+      Index = 15
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -677,7 +1002,7 @@ object GenerateDataForm: TGenerateDataForm
     object rxFieldsDataGenStrStartChar: TStringField
       FieldKind = fkData
       FieldName = 'DataGenStrStartChar'
-      Index = 15
+      Index = 16
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -686,7 +1011,7 @@ object GenerateDataForm: TGenerateDataForm
     object rxFieldsDataGenStrEndChar: TStringField
       FieldKind = fkData
       FieldName = 'DataGenStrEndChar'
-      Index = 16
+      Index = 17
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -695,12 +1020,30 @@ object GenerateDataForm: TGenerateDataForm
     object rxFieldsDataGenAsGUID: TBooleanField
       FieldKind = fkData
       FieldName = 'DataGenAsGUID'
-      Index = 17
+      Index = 18
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       DisplayValues = 'True;False'
+    end
+    object rxFieldsDataGenAutoIncStart: TLongintField
+      FieldKind = fkData
+      FieldName = 'DataGenAutoIncStart'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldsDataGenAutoIncStep: TLongintField
+      FieldKind = fkData
+      FieldName = 'DataGenAutoIncStep'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object dsFields: TDataSource

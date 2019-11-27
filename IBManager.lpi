@@ -53,121 +53,121 @@
         </Mode>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="34">
-      <Item1>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="AnchorDocking"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="rxtools"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <PackageName Value="lr_pdfexport"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <PackageName Value="laz_fpspreadsheet_visual"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <PackageName Value="fbdemofpc"/>
-      </Item5>
-      <Item6>
+      </Item>
+      <Item>
         <PackageName Value="lrSpreadSheetExport"/>
-      </Item6>
-      <Item7>
+      </Item>
+      <Item>
         <PackageName Value="laz_fpspreadsheetexport_visual"/>
-      </Item7>
-      <Item8>
+      </Item>
+      <Item>
         <PackageName Value="LR_ZeosDB"/>
-      </Item8>
-      <Item9>
+      </Item>
+      <Item>
         <PackageName Value="lr_OfficeImport"/>
-      </Item9>
-      <Item10>
+      </Item>
+      <Item>
         <PackageName Value="lr_DialogDesign"/>
-      </Item10>
-      <Item11>
+      </Item>
+      <Item>
         <PackageName Value="lrEmailExport"/>
-      </Item11>
-      <Item12>
+      </Item>
+      <Item>
         <PackageName Value="rxdbgrid_print"/>
-      </Item12>
-      <Item13>
+      </Item>
+      <Item>
         <PackageName Value="rxdbgrid_export_spreadsheet"/>
-      </Item13>
-      <Item14>
+      </Item>
+      <Item>
         <PackageName Value="TAChartLazarusPkg"/>
-      </Item14>
-      <Item15>
+      </Item>
+      <Item>
         <PackageName Value="lrcairoexport"/>
-      </Item15>
-      <Item16>
+      </Item>
+      <Item>
         <PackageName Value="lr_extexp"/>
-      </Item16>
-      <Item17>
+      </Item>
+      <Item>
         <PackageName Value="rx_sort_zeos"/>
-      </Item17>
-      <Item18>
+      </Item>
+      <Item>
         <PackageName Value="rx_sort_fbdataset"/>
-      </Item18>
-      <Item19>
+      </Item>
+      <Item>
         <PackageName Value="zcomponent"/>
-      </Item19>
-      <Item20>
+      </Item>
+      <Item>
         <PackageName Value="zeos_ex"/>
-      </Item20>
-      <Item21>
+      </Item>
+      <Item>
         <PackageName Value="CodeTools"/>
-      </Item21>
-      <Item22>
+      </Item>
+      <Item>
         <PackageName Value="lr_add_function"/>
-      </Item22>
-      <Item23>
+      </Item>
+      <Item>
         <PackageName Value="LazControls"/>
         <MinVersion Valid="True"/>
-      </Item23>
-      <Item24>
+      </Item>
+      <Item>
         <PackageName Value="SQLDBLaz"/>
         <MinVersion Major="1" Release="1" Valid="True"/>
-      </Item24>
-      <Item25>
+      </Item>
+      <Item>
         <PackageName Value="LCLBase"/>
         <MinVersion Major="1" Release="1" Valid="True"/>
-      </Item25>
-      <Item26>
+      </Item>
+      <Item>
         <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item26>
-      <Item27>
+      </Item>
+      <Item>
         <PackageName Value="lazdbexport"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item27>
-      <Item28>
+      </Item>
+      <Item>
         <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item28>
-      <Item29>
+      </Item>
+      <Item>
         <PackageName Value="lazreport"/>
         <MinVersion Minor="9" Valid="True"/>
-      </Item29>
-      <Item30>
+      </Item>
+      <Item>
         <PackageName Value="LCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item30>
-      <Item31>
+      </Item>
+      <Item>
         <PackageName Value="rx"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item31>
-      <Item32>
+      </Item>
+      <Item>
         <PackageName Value="RxNew"/>
         <MinVersion Major="1" Release="2" Build="3" Valid="True"/>
-      </Item32>
-      <Item33>
+      </Item>
+      <Item>
         <PackageName Value="SynEdit"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item33>
-      <Item34>
+      </Item>
+      <Item>
         <PackageName Value="UIBLaz"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item34>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
