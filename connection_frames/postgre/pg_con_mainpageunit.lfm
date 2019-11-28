@@ -9,9 +9,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 17
+    Height = 13
     Top = 6
-    Width = 75
+    Width = 61
     BorderSpacing.Around = 6
     Caption = 'Server name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
     Left = 322
-    Height = 17
+    Height = 13
     Top = 6
-    Width = 67
+    Width = 55
     BorderSpacing.Around = 6
     Caption = 'Server port'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = edtUserName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 190
-    Width = 94
+    Height = 13
+    Top = 144
+    Width = 75
     BorderSpacing.Around = 6
     Caption = 'Database name'
     ParentColor = False
@@ -45,9 +45,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = Edit1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 308
-    Width = 87
+    Height = 13
+    Top = 228
+    Width = 70
     BorderSpacing.Around = 6
     Caption = 'Database alias'
     ParentColor = False
@@ -57,9 +57,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = CB_ServerVersion
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 127
-    Width = 64
+    Height = 13
+    Top = 98
+    Width = 51
     BorderSpacing.Around = 6
     Caption = 'User name'
     ParentColor = False
@@ -70,9 +70,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = CB_ServerVersion
     AnchorSideTop.Side = asrBottom
     Left = 322
-    Height = 17
-    Top = 127
-    Width = 58
+    Height = 13
+    Top = 98
+    Width = 46
     BorderSpacing.Around = 6
     Caption = 'Password'
     ParentColor = False
@@ -82,9 +82,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = cbServerName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 69
-    Width = 84
+    Height = 13
+    Top = 52
+    Width = 70
     BorderSpacing.Around = 6
     Caption = 'Server version'
     ParentColor = False
@@ -96,8 +96,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 34
-    Top = 331
+    Height = 21
+    Top = 247
     Width = 612
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -110,8 +110,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 328
-    Height = 34
-    Top = 150
+    Height = 21
+    Top = 117
     Width = 296
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -128,12 +128,12 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
     Left = 12
-    Height = 29
-    Top = 92
+    Height = 21
+    Top = 71
     Width = 612
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 0
+    ItemHeight = 13
     Items.Strings = (
       'Unknown'
       'Postgres SQL 8.1'
@@ -149,12 +149,12 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 34
-    Top = 29
+    Height = 21
+    Top = 25
     Width = 297
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 0
+    ItemHeight = 13
     MaxLength = 65535
     OnChange = cbServerNameChange
     OnExit = cbServerNameExit
@@ -168,8 +168,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 328
-    Height = 34
-    Top = 29
+    Height = 21
+    Top = 25
     Width = 296
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -185,12 +185,12 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 34
-    Top = 213
+    Height = 21
+    Top = 163
     Width = 612
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 0
+    ItemHeight = 13
     OnChange = cbServerNameChange
     OnExit = edtDBNameExit
     TabOrder = 5
@@ -211,12 +211,12 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 34
-    Top = 150
+    Height = 21
+    Top = 117
     Width = 297
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    ItemHeight = 0
+    ItemHeight = 13
     OnExit = cbServerNameExit
     TabOrder = 3
   end
@@ -227,8 +227,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 0
-    Height = 17
-    Top = 371
+    Height = 13
+    Top = 274
     Width = 630
     Caption = 'Other options'
     Anchors = [akTop, akLeft, akRight]
@@ -241,9 +241,9 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Control = edtDBName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 253
-    Width = 108
+    Height = 13
+    Top = 190
+    Width = 84
     BorderSpacing.Around = 6
     Caption = 'Connection string'
     FocusControl = Edit1
@@ -255,8 +255,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = SpeedButton1
     Left = 12
-    Height = 26
-    Top = 276
+    Height = 13
+    Top = 209
     Width = 589
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 6
@@ -275,8 +275,8 @@ inherited pg_con_MainPage: Tpg_con_MainPage
     AnchorSideBottom.Control = Edit1
     AnchorSideBottom.Side = asrBottom
     Left = 601
-    Height = 26
-    Top = 276
+    Height = 13
+    Top = 209
     Width = 23
     Anchors = [akTop, akRight, akBottom]
     BorderSpacing.Right = 6
@@ -313,7 +313,6 @@ inherited pg_con_MainPage: Tpg_con_MainPage
   end
   object pgTest: TZConnection[19]
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     Properties.Strings = (
       'AutoEncodeStrings='
     )

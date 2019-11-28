@@ -177,7 +177,7 @@ const
      'Postgre SQL version 11.0',
      'Postgre SQL version 12.0'
      );
-
+(*
   pgZeosServerVersionProtoStr :array [TPGServerVersion] of string =
     ('postgresql',
      'postgresql-7',
@@ -195,7 +195,7 @@ const
      'postgresql-9', //11.0
      'postgresql-9'  //12.0
      );
-
+*)
 implementation
 
 { TPGSettingParamsEnumerator }

@@ -227,6 +227,7 @@ end;
 function Tpg_con_MainPage.TestConnection: boolean;
 begin
   Result:=false;
+  pgTest.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
   pgTest.HostName:=cbServerName.Text;
   pgTest.Database:=edtDBName.Text;
   pgTest.User:=edtUserName.Text;

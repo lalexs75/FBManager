@@ -27,8 +27,8 @@ interface
 uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
-  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, pgTypes, pg_SqlParserUnit,
-  SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
+  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, ZCompatibility, pgTypes,
+  pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
 
 
 const
@@ -1274,7 +1274,8 @@ uses
   rxlogging, rxdbutils,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
-  rxstrutils, pg_tasks, pgSQLEngineFTS;
+  rxstrutils, pg_tasks, pgSQLEngineFTS
+  ;
 
 type
   THackZQuery = class(TZQuery);
@@ -1458,6 +1459,9 @@ var
   F: TField;
   FD: TDBField;
   P: TParam;
+  ZT: TZTime;
+  ZTS: TZTimeStamp;
+  ZD: TZDate;
 begin
   RA:=nil;
 
@@ -1507,13 +1511,25 @@ begin
             RA.SetString(F.Index+1, F.AsString)
           else
           if F.DataType = ftTime then
-            RA.SetTime(F.Index+1, F.AsDateTime)
+          begin
+            //RA.SetTime(F.Index+1, F.AsDateTime)
+            DecodeDateTimeToTime(F.AsDateTime, ZT);
+            RA.SetTime(F.Index+1, ZT)
+          end
           else
           if F.DataType in [ftDateTime, ftTimeStamp] then
-            RA.SetTimestamp(F.Index+1, F.AsDateTime)
+          begin
+            //RA.SetTimestamp(F.Index+1, F.AsDateTime)
+            DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
+            RA.SetTimestamp(F.Index+1, ZTS);
+          end
           else
           if F.DataType = ftDate then
-            RA.SetDate(F.Index+1, F.AsDateTime)
+          begin
+            //RA.SetDate(F.Index+1, F.AsDateTime);
+            DecodeDateTimeToDate(F.AsDateTime, ZD);
+            RA.SetDate(F.Index+1, ZD);
+          end
           else
             raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
         end;
@@ -3415,7 +3431,7 @@ end;
 
 procedure TSQLEnginePostgre.UpdatePGProtocol;
 begin
-  FPGConnection.Protocol:=pgZeosServerVersionProtoStr[FServerVersion];
+  FPGConnection.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
   FPGSysDB.Protocol:=FPGConnection.Protocol;
 end;
 
@@ -4878,6 +4894,9 @@ var
   F: TField;
   FD: TDBField;
   P: TParam;
+  ZT: TZTime;
+  ZTS: TZTimeStamp;
+  ZD: TZDate;
 begin
   RA:=nil;
 
@@ -4932,13 +4951,25 @@ begin
               RA.SetString(F.Index+1, F.AsString)
             else
             if F.DataType = ftTime then
-              RA.SetTime(F.Index+1, F.AsDateTime)
+            begin
+              //RA.SetTime(F.Index+1, F.AsDateTime)
+              DecodeDateTimeToTime(F.AsDateTime, ZT);
+              RA.SetTime(F.Index+1, ZT)
+            end
             else
             if F.DataType in [ftDateTime, ftTimeStamp] then
-              RA.SetTimestamp(F.Index+1, F.AsDateTime)
+            begin
+              //RA.SetTimestamp(F.Index+1, F.AsDateTime)
+              DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
+              RA.SetTimestamp(F.Index+1, ZTS)
+            end
             else
             if F.DataType = ftDate then
-              RA.SetDate(F.Index+1, F.AsDateTime)
+            begin
+              //RA.SetDate(F.Index+1, F.AsDateTime)
+              DecodeDateTimeToDate(F.AsDateTime, ZD);
+              RA.SetDate(F.Index+1, ZD)
+            end
             else
               raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
           end;
