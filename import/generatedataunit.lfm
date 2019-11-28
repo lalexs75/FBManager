@@ -45,6 +45,7 @@ object GenerateDataForm: TGenerateDataForm
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 46
     ClientWidth = 159
+    ItemIndex = 0
     Items.Strings = (
       'Generate SQL script'
       'Insert into table'
@@ -423,47 +424,6 @@ object GenerateDataForm: TGenerateDataForm
       TabOrder = 0
     end
   end
-  object RadioGroup2: TDBRadioGroup
-    AnchorSideTop.Control = RadioGroup1
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    Left = 672
-    Height = 110
-    Top = 76
-    Width = 180
-    Anchors = [akTop, akRight]
-    AutoFill = True
-    AutoSize = True
-    BorderSpacing.Around = 6
-    Caption = 'Data generator type'
-    ChildSizing.LeftRightSpacing = 6
-    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-    ChildSizing.EnlargeVertical = crsHomogenousChildResize
-    ChildSizing.ShrinkHorizontal = crsScaleChilds
-    ChildSizing.ShrinkVertical = crsScaleChilds
-    ChildSizing.Layout = cclLeftToRightThenTopToBottom
-    ChildSizing.ControlsPerLine = 1
-    DataField = 'DataGenType'
-    DataSource = dsFields
-    Items.Strings = (
-      'Generate randomly'
-      'Get from another table'
-      'Get from list'
-      'Autoincrement'
-    )
-    OnChange = RadioGroup2Change
-    TabOrder = 8
-    Values.Strings = (
-      '0'
-      '1'
-      '2'
-      '3'
-      '4'
-      '5'
-      '6'
-    )
-  end
   object GroupBox4: TGroupBox
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Side = asrBottom
@@ -476,7 +436,7 @@ object GenerateDataForm: TGenerateDataForm
     Caption = 'Autoincrement'
     ClientHeight = 126
     ClientWidth = 184
-    TabOrder = 9
+    TabOrder = 8
     object Label8: TLabel
       AnchorSideLeft.Control = GroupBox4
       AnchorSideTop.Control = GroupBox4
@@ -541,7 +501,7 @@ object GenerateDataForm: TGenerateDataForm
     Caption = 'String constraints'
     ClientHeight = 275
     ClientWidth = 158
-    TabOrder = 10
+    TabOrder = 9
     object CheckBox1: TCheckBox
       AnchorSideLeft.Control = GroupBox5
       AnchorSideTop.Control = GroupBox5
@@ -674,7 +634,7 @@ object GenerateDataForm: TGenerateDataForm
     Caption = 'Date constraint'
     ClientHeight = 149
     ClientWidth = 183
-    TabOrder = 11
+    TabOrder = 10
     object Label14: TLabel
       AnchorSideLeft.Control = GroupBox6
       AnchorSideTop.Control = GroupBox6
@@ -748,6 +708,39 @@ object GenerateDataForm: TGenerateDataForm
       Text = 't2.  .    '
       OnChange = ComboBox2Change
     end
+  end
+  object RadioGroup2: TRadioGroup
+    AnchorSideTop.Control = RadioGroup1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 672
+    Height = 110
+    Top = 76
+    Width = 180
+    Anchors = [akTop, akRight]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    Caption = 'Data generator type'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 92
+    ClientWidth = 178
+    ItemIndex = 2
+    Items.Strings = (
+      'Generate randomly'
+      'Get from another table'
+      'Get from list'
+      'Autoincrement'
+    )
+    OnClick = RadioGroup2Change
+    TabOrder = 11
   end
   object rxFields: TRxMemoryData
     Capacity = 1024

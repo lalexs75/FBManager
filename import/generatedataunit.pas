@@ -72,7 +72,7 @@ type
     MenuItem3: TMenuItem;
     PopupMenu1: TPopupMenu;
     RadioGroup1: TRadioGroup;
-    RadioGroup2: TDBRadioGroup;
+    RadioGroup2: TRadioGroup;
     RxDateEdit1: TRxDateEdit;
     RxDateEdit2: TRxDateEdit;
     RxDBGrid1: TRxDBGrid;
@@ -193,6 +193,7 @@ end;
 
 procedure TGenerateDataForm.RadioGroup2Change(Sender: TObject);
 begin
+  SaveEditData;
   if rxFields.State <> dsBrowse then
     rxFields.Post;
 
@@ -287,6 +288,7 @@ var
   G: TGroupBox;
 begin
   LockSave;
+  RadioGroup2.ItemIndex:=rxFieldsDataGenType.AsInteger;
   case rxFieldsDataGenType.AsInteger of
     0:if TFieldType(rxFieldsFieldTypeInt.AsInteger) in StringTypes then
         G:=GroupBox5
@@ -351,6 +353,8 @@ begin
 
   if rxFields.State <> dsEdit then
     rxFields.Edit;
+
+  rxFieldsDataGenType.AsInteger:=RadioGroup2.ItemIndex;
 
   if GroupBox1.Visible then
   begin
