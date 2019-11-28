@@ -185,6 +185,8 @@ end;
 
 procedure TpgActivitiMonitorForm.FormCreate(Sender: TObject);
 begin
+  pgStatDB.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
+
   ClearInfoCharts;
 
   FActiveQueryText:=Tfdbm_SynEditorFrame.Create(Self);

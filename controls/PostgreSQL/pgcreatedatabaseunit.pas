@@ -215,6 +215,7 @@ end;
 
 procedure TpgCreateDatabaseForm.FillDBConectionParams;
 begin
+  TestDB.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
   TestDB.HostName:=cbServName.Text;
   TestDB.User:=edtUserName.Text;
   TestDB.Password:=edtPwd.Text;

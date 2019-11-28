@@ -145,6 +145,7 @@ begin
   pgTest.Database:='postgres';
   pgTest.User:=edtUserName.Text;
   pgTest.Password:=edtPassword.Text;
+  pgTest.Protocol:='postgresql';
   if edtPort.Value <> 0 then
     pgTest.Port:=edtPort.Value;
 

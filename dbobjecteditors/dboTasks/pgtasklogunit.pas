@@ -158,6 +158,7 @@ constructor TpgTaskLogPage.CreatePage(TheOwner: TComponent; ADBObject: TDBObject
   );
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  ZConnection1.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
   RxDateEdit1.Date:=IncMonth(Now, -1);
   RxDateEdit2.Date:=Now + 1;
   quLogs.Connection:=TSQLEnginePostgre(DBObject.OwnerDB).PGSysDB;

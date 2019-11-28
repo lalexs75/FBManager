@@ -269,14 +269,12 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
   end
   object pgStatDB: TZConnection
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     Properties.Strings = (
       'AutoEncodeStrings='
       'application_name=FBManager'
       'codepage='
       'controls_cp=CP_UTF8'
     )
-    Connected = True
     DesignConnection = True
     HostName = '127.0.0.1'
     Port = 0

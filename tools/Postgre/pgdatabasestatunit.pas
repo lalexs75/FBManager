@@ -91,6 +91,7 @@ procedure TpgDataBaseStatForm.FormCreate(Sender: TObject);
 var
   R: TRxColumn;
 begin
+  pgStatDB.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
   R:=RxDBGrid1.ColumnByFieldName('relkind');
   R.KeyList.Clear;
   R.KeyList.Add('r=' + IntToStr(DBObjectKindImages[okTable]));

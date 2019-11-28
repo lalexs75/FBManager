@@ -1111,7 +1111,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
   end
   object pgStatDB: TZConnection[7]
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     Properties.Strings = (
       'AutoEncodeStrings='
       'application_name=FBManager'
@@ -1278,6 +1277,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     Top = 328
   end
   object rxActivitiData: TRxMemoryData[10]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'ID'
@@ -1466,6 +1466,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end>
   end
   object rxStatInfo: TRxMemoryData[21]
+    Capacity = 1024
     FieldDefs = <    
       item
         Name = 'PARAM'
