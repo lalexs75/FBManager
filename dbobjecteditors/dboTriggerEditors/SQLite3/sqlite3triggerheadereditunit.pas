@@ -103,9 +103,9 @@ begin
   begin
     S:='';
     case edtType.ItemIndex of
-      0:S:='_b';
-      1:S:='_a';
-      2:S:='_io'
+      0:S:='b';
+      1:S:='a';
+      2:S:='io'
     end;
 
     if CheckBox1.Checked then
@@ -356,7 +356,7 @@ begin
   if cbOnEvent.Checked[1] then
     Result:=Result + [ttUpdate];
 
-  if cbOnEvent.Checked[0] then
+  if cbOnEvent.Checked[2] then
     Result:=Result + [ttDelete];
 end;
 

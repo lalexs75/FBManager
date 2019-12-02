@@ -7,12 +7,12 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
   DesignTop = 293
   object Panel1: TPanel[0]
     Left = 0
-    Height = 191
+    Height = 178
     Top = 0
     Width = 834
     Align = alTop
     AutoSize = True
-    ClientHeight = 191
+    ClientHeight = 178
     ClientWidth = 834
     TabOrder = 0
     object Label2: TLabel
@@ -20,9 +20,9 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideTop.Control = edtTableName
       AnchorSideTop.Side = asrBottom
       Left = 7
-      Height = 17
-      Top = 132
-      Width = 29
+      Height = 15
+      Top = 123
+      Width = 26
       BorderSpacing.Around = 6
       Caption = 'Type'
       ParentColor = False
@@ -30,9 +30,9 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
     object Label3: TLabel
       AnchorSideLeft.Control = Panel1
       Left = 7
-      Height = 17
+      Height = 15
       Top = 7
-      Width = 36
+      Width = 32
       BorderSpacing.Around = 6
       Caption = 'Name'
       ParentColor = False
@@ -42,9 +42,9 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideTop.Control = edtTrgName
       AnchorSideTop.Side = asrBottom
       Left = 7
-      Height = 17
-      Top = 70
-      Width = 71
+      Height = 15
+      Top = 65
+      Width = 62
       BorderSpacing.Around = 6
       Caption = 'Table name'
       ParentColor = False
@@ -56,8 +56,8 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideRight.Control = Label1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 29
-      Top = 155
+      Height = 27
+      Top = 144
       Width = 399
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
@@ -80,8 +80,8 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideRight.Control = Label1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 34
-      Top = 30
+      Height = 31
+      Top = 28
       Width = 399
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
@@ -94,8 +94,8 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Label1
       Left = 13
-      Height = 33
-      Top = 93
+      Height = 31
+      Top = 86
       Width = 398
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
@@ -108,7 +108,7 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       AnchorSideLeft.Control = Label1
       AnchorSideLeft.Side = asrBottom
       Left = 418
-      Height = 189
+      Height = 176
       Top = 1
       Width = 415
       ActivePage = TabSheet1
@@ -118,7 +118,7 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       TabOrder = 3
       object TabSheet1: TTabSheet
         Caption = 'События'
-        ClientHeight = 158
+        ClientHeight = 147
         ClientWidth = 405
         object cbOnEvent: TCheckGroup
           AnchorSideLeft.Control = TabSheet1
@@ -127,7 +127,7 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
           AnchorSideRight.Side = asrBottom
           AnchorSideBottom.Side = asrBottom
           Left = 6
-          Height = 76
+          Height = 74
           Top = 6
           Width = 393
           Anchors = [akTop, akLeft, akRight]
@@ -165,8 +165,8 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
           AnchorSideTop.Side = asrBottom
           Left = 6
           Height = 23
-          Top = 88
-          Width = 104
+          Top = 86
+          Width = 97
           BorderSpacing.Around = 6
           Caption = 'For each row'
           OnClick = edtOrderChange
@@ -175,7 +175,7 @@ inherited SQLite3TriggerHeaderEditFrame: TSQLite3TriggerHeaderEditFrame
       end
       object TabSheet2: TTabSheet
         Caption = 'Колонки'
-        ClientHeight = 158
+        ClientHeight = 147
         ClientWidth = 405
         object SpeedButton1: TSpeedButton
           AnchorSideLeft.Control = TabSheet2
