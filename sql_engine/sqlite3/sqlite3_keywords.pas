@@ -286,41 +286,38 @@ end;
 
 procedure FillFieldTypes(Items: TDBMSFieldTypeList);
 begin
-  Items.Add('CHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('VARCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('TINYTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('TEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('MEDIUMTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('LONGTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('NCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('NVARCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
-  Items.Add('CLOB', 1, true, false, ftString, '', '', tgCharacterTypes);
-
-  Items.Add('TINYINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('SMALLINT', 2, false, false, ftInteger, 'SMALL INT', '', tgNumericTypes);
-  Items.Add('MEDIUMINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('INT', 2, false, false, ftInteger, '', '', tgNumericTypes);
   Items.Add('INTEGER', 2, false, false, ftInteger, 'UNSIGNED'#13'SIGNED'#13'SIGNED INTEGER'#13'UNSIGNED INTEGER', '', tgNumericTypes);
-  Items.Add('BIGINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('INT2', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('INT4', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('INT8', 2, false, false, ftInteger, '', '', tgNumericTypes);
-  Items.Add('LONG', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('VARCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
   Items.Add('NUMERIC', 2, true, true, ftFloat, '', '', tgNumericTypes);
-  Items.Add('DECIMAL', 2, true, true, ftFloat, '', '', tgNumericTypes);
-  Items.Add('REAL', 2, false, false, ftFloat, '', '', tgNumericTypes);
-  Items.Add('DOUBLE', 2, false, false, ftFloat, '', '', tgNumericTypes);
-  Items.Add('DOUBLE PRECISION', 2, false, false, ftFloat, '', '', tgNumericTypes);
-  Items.Add('FLOAT', 2, false, false, ftFloat, '', '', tgNumericTypes);
-
   Items.Add('BOOLEAN',3, false, false, ftBoolean, '', '', tgBooleanTypes);
-
   Items.Add('DATE', 4, false, false, ftDateTime, '', '', tgDateTimeTypes);
   Items.Add('DATETIME', 4, false, false, ftDateTime, '', '', tgDateTimeTypes);
   Items.Add('TIMESTAMP', 4, false, false, ftDateTime, '', '', tgDateTimeTypes);
   Items.Add('TIME', 4, false, false, ftDateTime, '', '', tgDateTimeTypes);
 
+  Items.Add('BIGINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
   Items.Add('BLOB', 5, false, false, ftBlob, '', '', tgBinaryDataTypes);
+  Items.Add('CHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('CLOB', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('DECIMAL', 2, true, true, ftFloat, '', '', tgNumericTypes);
+  Items.Add('DOUBLE', 2, false, false, ftFloat, '', '', tgNumericTypes);
+  Items.Add('DOUBLE PRECISION', 2, false, false, ftFloat, '', '', tgNumericTypes);
+  Items.Add('FLOAT', 2, false, false, ftFloat, '', '', tgNumericTypes);
+  Items.Add('INT', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('INT2', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('INT4', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('INT8', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('LONG', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('LONGTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('MEDIUMINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('MEDIUMTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('NCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('NVARCHAR', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('REAL', 2, false, false, ftFloat, '', '', tgNumericTypes);
+  Items.Add('SMALLINT', 2, false, false, ftInteger, 'SMALL INT', '', tgNumericTypes);
+  Items.Add('TEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
+  Items.Add('TINYINT', 2, false, false, ftInteger, '', '', tgNumericTypes);
+  Items.Add('TINYTEXT', 1, true, false, ftString, '', '', tgCharacterTypes);
 end;
 
 end.
