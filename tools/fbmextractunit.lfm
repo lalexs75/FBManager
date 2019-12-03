@@ -13,7 +13,7 @@ object fbmExtractForm: TfbmExtractForm
   LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 359
+    Height = 371
     Top = 0
     Width = 638
     ActivePage = TabSheet1
@@ -24,15 +24,15 @@ object fbmExtractForm: TfbmExtractForm
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Database'
-      ClientHeight = 328
-      ClientWidth = 628
+      ClientHeight = 342
+      ClientWidth = 630
       object Label1: TLabel
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         Left = 6
-        Height = 17
+        Height = 13
         Top = 6
-        Width = 95
+        Width = 77
         BorderSpacing.Around = 6
         Caption = 'Select database'
         ParentColor = False
@@ -44,12 +44,12 @@ object fbmExtractForm: TfbmExtractForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 33
-        Top = 29
-        Width = 610
+        Height = 21
+        Top = 25
+        Width = 612
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
-        ItemHeight = 0
+        ItemHeight = 13
         OnChange = ComboBox1Change
         Style = csDropDownList
         TabOrder = 0
@@ -57,8 +57,8 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Objects'
-      ClientHeight = 328
-      ClientWidth = 628
+      ClientHeight = 342
+      ClientWidth = 630
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
@@ -167,8 +167,8 @@ object fbmExtractForm: TfbmExtractForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Progress'
-      ClientHeight = 328
-      ClientWidth = 628
+      ClientHeight = 342
+      ClientWidth = 630
       object RadioGroup1: TRadioGroup
         AnchorSideLeft.Control = TabSheet3
         AnchorSideTop.Control = TabSheet3
@@ -188,7 +188,7 @@ object fbmExtractForm: TfbmExtractForm
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 92
-        ClientWidth = 130
+        ClientWidth = 128
         Items.Strings = (
           'File'
           'Clipboard'
@@ -264,8 +264,8 @@ object fbmExtractForm: TfbmExtractForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 365
+    Height = 34
+    Top = 377
     Width = 626
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -280,10 +280,10 @@ object fbmExtractForm: TfbmExtractForm
     object BitBtn1: TBitBtn
       AnchorSideRight.Control = BitBtn2
       AnchorSideBottom.Side = asrBottom
-      Left = 20
-      Height = 33
+      Left = -52
+      Height = 21
       Top = 0
-      Width = 65
+      Width = 68
       Anchors = [akTop, akRight, akBottom]
       AutoSize = True
       BorderSpacing.Right = 6
@@ -294,10 +294,10 @@ object fbmExtractForm: TfbmExtractForm
     end
     object BitBtn2: TBitBtn
       AnchorSideBottom.Side = asrBottom
-      Left = 91
-      Height = 33
+      Left = 22
+      Height = 21
       Top = 8
-      Width = 64
+      Width = 69
       Anchors = [akTop, akRight, akBottom]
       AutoSize = True
       BorderSpacing.Right = 6

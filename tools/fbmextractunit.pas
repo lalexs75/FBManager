@@ -165,7 +165,7 @@ end;
 
 procedure TfbmExtractForm.FormCreate(Sender: TObject);
 begin
-  {$IFDEF WINDOWOS}
+  {$IFDEF WINDOWS}
   BitBtn2.AnchorSide[akRight].Control:=ButtonPanel1.OKButton;
   {$ELSE}
   BitBtn2.AnchorSide[akRight].Control:=ButtonPanel1.CancelButton;
