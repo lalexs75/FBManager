@@ -26,37 +26,37 @@
         <Mode Name="default"/>
       </Modes>
     </RunParams>
-    <RequiredPackages Count="10">
-      <Item1>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="LazControls"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="lazreport"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <PackageName Value="rxnew"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <PackageName Value="fbdemofpc"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <PackageName Value="UIBLaz"/>
-      </Item5>
-      <Item6>
+      </Item>
+      <Item>
         <PackageName Value="SynEdit"/>
-      </Item6>
-      <Item7>
+      </Item>
+      <Item>
         <PackageName Value="rx"/>
-      </Item7>
-      <Item8>
+      </Item>
+      <Item>
         <PackageName Value="rxtools"/>
-      </Item8>
-      <Item9>
+      </Item>
+      <Item>
         <PackageName Value="zcomponent"/>
-      </Item9>
-      <Item10>
+      </Item>
+      <Item>
         <PackageName Value="LCL"/>
-      </Item10>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>

@@ -2845,6 +2845,78 @@ type
     property TableAlias:string read FTableAlias write FTableAlias;
   end;
 
+  { TPGSQLCreatePublication }
+
+  TPGSQLCreatePublicationType = (cpNone, cpForTable, cpForTableOnly, cpForAllTables);
+  TPGSQLCreatePublication = class(TSQLCommandDDL)
+  private
+    FCurTable: TTableItem;
+    FCreatePublicationType: TPGSQLCreatePublicationType;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property CreatePublicationType:TPGSQLCreatePublicationType read FCreatePublicationType write FCreatePublicationType;
+  end;
+
+  { TPGSQLAlterPublication }
+
+  TPGSQLAlterPublication = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TPGSQLDropPublication }
+
+  TPGSQLDropPublication = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TPGSQLCreateSubscription }
+
+  TPGSQLCreateSubscription = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TPGSQLAlterSubscription }
+
+  TPGSQLAlterSubscription = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TPGSQLDropSubscription }
+
+  TPGSQLDropSubscription = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+
 implementation
 uses strutils, rxstrutils, SQLEngineInternalToolsUnit;
 
@@ -3432,6 +3504,207 @@ begin
     TDD1.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
     TDD2.AddChildToken([TDefault, TNN, TNULL, TColat, TConst, TCheck]);
   end;
+end;
+
+{ TPGSQLDropSubscription }
+
+procedure TPGSQLDropSubscription.InitParserTree;
+begin
+  inherited InitParserTree;
+  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  //DROP SUBSCRIPTION [ IF EXISTS ] имя [ CASCADE | RESTRICT ]
+end;
+
+procedure TPGSQLDropSubscription.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLDropSubscription.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLAlterSubscription }
+
+procedure TPGSQLAlterSubscription.InitParserTree;
+begin
+  inherited InitParserTree;
+  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  //ALTER SUBSCRIPTION имя CONNECTION 'строка_подключения'
+  //ALTER SUBSCRIPTION имя SET PUBLICATION имя_публикации [, ...] [ WITH ( параметр_set_publication [= значение] [, ... ] ) ]
+  //ALTER SUBSCRIPTION имя REFRESH PUBLICATION [ WITH ( параметр_обновления [= значение] [, ... ] ) ]
+  //ALTER SUBSCRIPTION имя ENABLE
+  //ALTER SUBSCRIPTION имя DISABLE
+  //ALTER SUBSCRIPTION имя SET ( параметр_подписки [= значение] [, ... ] )
+  //ALTER SUBSCRIPTION имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER SUBSCRIPTION имя RENAME TO новое_имя
+end;
+
+procedure TPGSQLAlterSubscription.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLAlterSubscription.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLCreateSubscription }
+
+procedure TPGSQLCreateSubscription.InitParserTree;
+begin
+  inherited InitParserTree;
+  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  //CREATE SUBSCRIPTION имя_подписки
+  //    CONNECTION 'строка_подключения'
+  //    PUBLICATION имя_публикации [, ...]
+  //    [ WITH ( параметр_подписки [= значение] [, ... ] ) ]
+end;
+
+procedure TPGSQLCreateSubscription.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLCreateSubscription.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLDropPublication }
+
+procedure TPGSQLDropPublication.InitParserTree;
+begin
+  inherited InitParserTree;
+  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  //DROP PUBLICATION [ IF EXISTS ] имя [, ...] [ CASCADE | RESTRICT ]
+end;
+
+procedure TPGSQLDropPublication.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLDropPublication.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLAlterPublication }
+
+procedure TPGSQLAlterPublication.InitParserTree;
+begin
+  inherited InitParserTree;
+  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  //ALTER PUBLICATION имя ADD TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя SET TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя DROP TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя SET ( параметр_публикации [= значение] [, ... ] )
+  //ALTER PUBLICATION имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER PUBLICATION имя RENAME TO новое_имя
+end;
+
+procedure TPGSQLAlterPublication.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLAlterPublication.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLCreatePublication }
+
+procedure TPGSQLCreatePublication.InitParserTree;
+var
+  FSQLTokens, T, TName, TFor, T1, TS, T2, TN, T3, T4: TSQLTokenRecord;
+begin
+  inherited InitParserTree;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'PUBLICATION', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  TFor:=AddSQLTokens(stKeyword, TName, 'FOR', [toOptional]);
+    T:=AddSQLTokens(stKeyword, TFor, 'TABLE', [], 2);
+     T1:=AddSQLTokens(stKeyword, TFor, 'ONLY', [], 3);
+    TS:=AddSQLTokens(stIdentificator, [T, T1], '', [], 4);
+    T2:=AddSQLTokens(stSymbol, TS, '.', [toOptional]);
+    TN:=AddSQLTokens(stIdentificator, T2, '', [], 6);
+    T3:=AddSQLTokens(stSymbol, [TS,TN], '*', [toOptional], 7);
+    T4:=AddSQLTokens(stSymbol, [TS, TN, T3], ',', [toOptional], 8);
+      T4.AddChildToken([TS, TN]);
+
+  //CREATE PUBLICATION имя
+  //    [ FOR TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //      | FOR ALL TABLES ]
+  //    [ WITH ( параметр_публикации [= значение] [, ... ] ) ]
+end;
+
+procedure TPGSQLCreatePublication.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FCreatePublicationType:=cpForTable;
+    3:FCreatePublicationType:=cpForTableOnly;
+    4:FCurTable:=Tables.Add(AWord);
+    6:if Assigned(FCurTable) then
+      begin
+        FCurTable.SchemaName:=FCurTable.Name;
+        FCurTable.Name:=AWord;
+      end;
+    8:FCurTable:=nil;
+
+    //cpForAllTables:S:=S + ' FOR ALL TABLES';
+
+  end;
+end;
+
+procedure TPGSQLCreatePublication.MakeSQL;
+var
+  S, S1: String;
+  T: TTableItem;
+begin
+  S:='CREATE PUBLICATION ' + DoFormatName(Name);
+  //CREATE PUBLICATION имя
+  //    [ FOR TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //      | FOR ALL TABLES ]
+  //    [ WITH ( параметр_публикации [= значение] [, ... ] ) ]
+  case FCreatePublicationType of
+    //cpNone,
+    cpForTable:S:=S + ' FOR TABLE';
+    cpForTableOnly:S:=S + ' FOR TABLE ONLY';
+    cpForAllTables:S:=S + ' FOR ALL TABLES';
+  end;
+  if FCreatePublicationType in [cpForTable, cpForTableOnly] then
+  begin
+    S1:='';
+    for T in Tables do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      if T.SchemaName<>'' then S1:=S1 + DoFormatName(T.SchemaName) + '.';
+      S1:=S1 + DoFormatName(T.Name);
+    end;
+    if S1<>'' then S:=S + ' ' + S1;
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLCreatePublication.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreatePublication then
+  begin
+    FCreatePublicationType:=TPGSQLCreatePublication(ASource).FCreatePublicationType;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLPartitionOfData }

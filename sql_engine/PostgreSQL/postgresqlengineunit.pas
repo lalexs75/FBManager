@@ -8365,6 +8365,12 @@ INSERT — добавить строки в таблицу
 
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterSystem, 'ALTER SYSTEM'); //изменить параметр конфигурации сервера
 
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreatePublication, 'CREATE PUBLICATION');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterPublication, 'ALTER PUBLICATION');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropPublication, 'DROP PUBLICATION');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateSubscription, 'CREATE SUBSCRIPTION');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterSubscription, 'ALTER SUBSCRIPTION');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropSubscription, 'DROP SUBSCRIPTION');
 finalization
 end.
 
@@ -8380,7 +8386,5 @@ end.
 //FTS Dictionares - Словари FTS
 //FTS Parser - Парсеры FTS
 //FTS Templates - Шаблоны FTS
-//Foreign Tables
-//Materialized Views
 //Types
 
