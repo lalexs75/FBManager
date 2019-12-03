@@ -1,8 +1,8 @@
 object PGSQLParserData: TPGSQLParserData
   OldCreateOrder = False
-  Height = 868
-  HorizontalOffset = 417
-  VerticalOffset = 130
+  Height = 850
+  HorizontalOffset = 374
+  VerticalOffset = 1
   Width = 1016
   object sComment: TRxTextHolder
     Highlighter = rxSynNone
@@ -3570,7 +3570,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 649
   end
   object sDataBase: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'DropTablespace1'
@@ -3660,6 +3660,78 @@ object PGSQLParserData: TPGSQLParserData
         Caption = 'AlterServer2'
         Lines.Strings = (
           'ALTER SERVER foo VERSION ''8.4'' OPTIONS (SET host ''baz'');'
+        )
+      end    
+      item
+        Caption = 'CreatePublication1'
+        Lines.Strings = (
+          'CREATE PUBLICATION mypublication FOR TABLE users, departments;'
+        )
+      end    
+      item
+        Caption = 'CreatePublication2'
+        Lines.Strings = (
+          'CREATE PUBLICATION alltables FOR ALL TABLES;'
+        )
+      end    
+      item
+        Caption = 'CreatePublication3'
+        Lines.Strings = (
+          'CREATE PUBLICATION insert_only FOR TABLE mydata'
+          '    WITH (publish = ''insert'');'
+        )
+      end    
+      item
+        Caption = 'AlterPublication1'
+        Lines.Strings = (
+          'ALTER PUBLICATION noinsert SET (publish = ''update, delete'');'
+        )
+      end    
+      item
+        Caption = 'AlterPublication2'
+        Lines.Strings = (
+          'ALTER PUBLICATION mypublication ADD TABLE users, departments;'
+        )
+      end    
+      item
+        Caption = 'DropPublication1'
+        Lines.Strings = (
+          'DROP PUBLICATION mypublication;'
+        )
+      end    
+      item
+        Caption = 'CreateSubscription1'
+        Lines.Strings = (
+          'CREATE SUBSCRIPTION mysub'
+          '         CONNECTION ''host=192.168.1.50 port=5432 user=foo dbname=foodb'''
+          '        PUBLICATION mypublication, insert_only;'
+        )
+      end    
+      item
+        Caption = 'CreateSubscription2'
+        Lines.Strings = (
+          'CREATE SUBSCRIPTION mysub'
+          '         CONNECTION ''host=192.168.1.50 port=5432 user=foo dbname=foodb'''
+          '        PUBLICATION insert_only'
+          '               WITH (enabled = false);'
+        )
+      end    
+      item
+        Caption = 'AlterSubscription1'
+        Lines.Strings = (
+          'ALTER SUBSCRIPTION mysub SET PUBLICATION insert_only;'
+        )
+      end    
+      item
+        Caption = 'AlterSubscription2'
+        Lines.Strings = (
+          'ALTER SUBSCRIPTION mysub DISABLE;'
+        )
+      end    
+      item
+        Caption = 'DropSubscription1'
+        Lines.Strings = (
+          'DROP SUBSCRIPTION mysub;'
         )
       end>
     Left = 104

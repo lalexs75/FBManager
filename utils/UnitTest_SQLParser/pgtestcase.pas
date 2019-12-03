@@ -525,6 +525,17 @@ type
     procedure c501CreateAggregate8;
     procedure c503AlterTextSearchParser3; //ALTER TEXT SEARCH PARSER — изменить определение анализатора текстового поиска
     procedure c504AlterTextSearchParser4;
+    procedure c505CreatePublication1;
+    procedure c506CreatePublication2;
+    procedure c507CreatePublication3;
+    procedure c508AlterPublication1;
+    procedure c509AlterPublication2;
+    procedure c510DropPublication1;
+    procedure c511CreateSubscription1;
+    procedure c512CreateSubscription2;
+    procedure c513AlterSubscription1;
+    procedure c514AlterSubscription2;
+    procedure c515DropSubscription1;
   end;
 
   { TPGSQLParserData }
@@ -841,6 +852,61 @@ end;
 procedure TPGSQLParserTest.c504AlterTextSearchParser4;
 begin
   DoTestSQL(PGSQLParserData.sFTS['AlterTextSearchParser4']);
+end;
+
+procedure TPGSQLParserTest.c505CreatePublication1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['CreatePublication1']);
+end;
+
+procedure TPGSQLParserTest.c506CreatePublication2;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['CreatePublication2']);
+end;
+
+procedure TPGSQLParserTest.c507CreatePublication3;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['CreatePublication3']);
+end;
+
+procedure TPGSQLParserTest.c508AlterPublication1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['AlterPublication1']);
+end;
+
+procedure TPGSQLParserTest.c509AlterPublication2;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['AlterPublication2']);
+end;
+
+procedure TPGSQLParserTest.c510DropPublication1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['DropPublication1']);
+end;
+
+procedure TPGSQLParserTest.c511CreateSubscription1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['CreateSubscription1']);
+end;
+
+procedure TPGSQLParserTest.c512CreateSubscription2;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['CreateSubscription2']);
+end;
+
+procedure TPGSQLParserTest.c513AlterSubscription1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['AlterSubscription1']);
+end;
+
+procedure TPGSQLParserTest.c514AlterSubscription2;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['AlterSubscription2']);
+end;
+
+procedure TPGSQLParserTest.c515DropSubscription1;
+begin
+  DoTestSQL(PGSQLParserData.sDataBase['DropSubscription1']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

@@ -18,39 +18,38 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
-      <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="10">
-      <Item1>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="fbdemofpc"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="UIBLaz"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <PackageName Value="rx"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <PackageName Value="zeos_ex"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <PackageName Value="LR_ZeosDB"/>
-      </Item5>
-      <Item6>
+      </Item>
+      <Item>
         <PackageName Value="rxtools"/>
-      </Item6>
-      <Item7>
+      </Item>
+      <Item>
         <PackageName Value="rxnew"/>
-      </Item7>
-      <Item8>
+      </Item>
+      <Item>
         <PackageName Value="fpcunittestrunner"/>
-      </Item8>
-      <Item9>
+      </Item>
+      <Item>
         <PackageName Value="LCL"/>
-      </Item9>
-      <Item10>
+      </Item>
+      <Item>
         <PackageName Value="FCL"/>
-      </Item10>
+      </Item>
     </RequiredPackages>
     <Units>
       <Unit>
@@ -132,22 +131,22 @@
     </Linking>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="5">
-      <Item1>
+    <Exceptions>
+      <Item>
         <Name Value="EAbort"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Name Value="ECodetoolError"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Name Value="EFOpenError"/>
-      </Item3>
-      <Item4>
+      </Item>
+      <Item>
         <Name Value="EAssertionFailedError"/>
-      </Item4>
-      <Item5>
+      </Item>
+      <Item>
         <Name Value="Exception"/>
-      </Item5>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>
