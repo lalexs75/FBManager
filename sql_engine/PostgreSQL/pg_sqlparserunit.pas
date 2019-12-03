@@ -2851,6 +2851,7 @@ type
   TPGSQLCreatePublication = class(TSQLCommandDDL)
   private
     FCurTable: TTableItem;
+    FCurParam: TSQLParserField;
     FCreatePublicationType: TPGSQLCreatePublicationType;
   protected
     procedure InitParserTree;override;
@@ -3625,7 +3626,8 @@ end;
 
 procedure TPGSQLCreatePublication.InitParserTree;
 var
-  FSQLTokens, T, TName, TFor, T1, TS, T2, TN, T3, T4: TSQLTokenRecord;
+  FSQLTokens, T, TName, TFor, T1, TS, T2, TN, T3, T4, TA,
+    TWith: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
@@ -3640,6 +3642,18 @@ begin
     T3:=AddSQLTokens(stSymbol, [TS,TN], '*', [toOptional], 7);
     T4:=AddSQLTokens(stSymbol, [TS, TN, T3], ',', [toOptional], 8);
       T4.AddChildToken([TS, TN]);
+    TA:=AddSQLTokens(stKeyword, TFor, 'ALL', [], 10);
+    TA:=AddSQLTokens(stKeyword, TA, 'TABLES', []);
+  TWith:=AddSQLTokens(stKeyword, [TName, TA, TS, TN, T3], 'WITH', [toOptional]);
+    T:=AddSQLTokens(stSymbol, TWith, '(', []);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 11);
+    T2:=AddSQLTokens(stSymbol, T1, '=', []);
+    T3:=AddSQLTokens(stString, T2, '', [], 12);
+    T4:=AddSQLTokens(stSymbol, T3, ',', [], 13);
+      T4.AddChildToken(T3);
+
+    T:=AddSQLTokens(stSymbol, T3, ')', [], 14);
+
 
   //CREATE PUBLICATION имя
   //    [ FOR TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
@@ -3663,8 +3677,14 @@ begin
       end;
     8:FCurTable:=nil;
 
-    //cpForAllTables:S:=S + ' FOR ALL TABLES';
+    10:FCreatePublicationType:=cpForAllTables;
 
+    11:FCurParam:=Params.AddParam(AWord);
+    12:if Assigned(FCurParam) then
+      begin
+        if FCurParam.ParamValue<>'' then FCurParam.ParamValue:=FCurParam.ParamValue + ', ';
+        FCurParam.ParamValue:=FCurParam.ParamValue + AWord;
+      end;
   end;
 end;
 
@@ -3672,6 +3692,7 @@ procedure TPGSQLCreatePublication.MakeSQL;
 var
   S, S1: String;
   T: TTableItem;
+  P: TSQLParserField;
 begin
   S:='CREATE PUBLICATION ' + DoFormatName(Name);
   //CREATE PUBLICATION имя
@@ -3695,6 +3716,9 @@ begin
     end;
     if S1<>'' then S:=S + ' ' + S1;
   end;
+
+  if Params.Count>0 then
+    S1:=' WITH ( ' + Params[0].Caption + ' = ' + Params[0].ParamValue + ')';
   AddSQLCommand(S);
 end;
 
