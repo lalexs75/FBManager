@@ -2896,11 +2896,15 @@ type
 
   TPGSQLCreateSubscription = class(TSQLCommandDDL)
   private
+    FConnectionString: string;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ConnectionString:string read FConnectionString write FConnectionString;
   end;
 
   { TPGSQLAlterSubscription }
@@ -3565,9 +3569,29 @@ end;
 { TPGSQLCreateSubscription }
 
 procedure TPGSQLCreateSubscription.InitParserTree;
+var
+  FSQLTokens, T1, T, T2, T2_1, T2_2, T2_3: TSQLTokenRecord;
 begin
   inherited InitParserTree;
-  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SUBSCRIPTION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'CONNECTION', []);
+  T1:=AddSQLTokens(stString, T1, '', [], 2);
+  T1:=AddSQLTokens(stKeyword, T1, 'PUBLICATION', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 3);
+    T:=AddSQLTokens(stSymbol, T1, ',', [toOptional]);
+    T.AddChildToken(T1);
+  T1:=AddSQLTokens(stKeyword, T1, 'WITH', [toOptional]);
+  T1:=AddSQLTokens(stSymbol, T1, '(', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 4);
+    T2:=AddSQLTokens(stSymbol, T1, '=', []);
+    T2_1:=AddSQLTokens(stString, T2, '', [], 5);
+    T2_2:=AddSQLTokens(stInteger, T2, '', [], 5);
+    T2_3:=AddSQLTokens(stIdentificator, T2, '', [], 5);
+    T:=AddSQLTokens(stSymbol, [T1, T2_1, T2_2, T2_3], ',', [], 6);
+    T.AddChildToken(T1);
+  AddSQLTokens(stSymbol, [T1, T2_1, T2_2, T2_3], ')', [], 6);
   //CREATE SUBSCRIPTION имя_подписки
   //    CONNECTION 'строка_подключения'
   //    PUBLICATION имя_публикации [, ...]
@@ -3578,11 +3602,51 @@ procedure TPGSQLCreateSubscription.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FConnectionString:=AWord;
+    3:Tables.Add(AWord);
+    4:FCurParam:=Params.AddParamEx(AWord, '');
+    5:if Assigned(FCurParam) then
+        FCurParam.ParamValue:=AWord;
+  end;
 end;
 
 procedure TPGSQLCreateSubscription.MakeSQL;
+var
+  S, S1: String;
+  P: TSQLParserField;
 begin
-  inherited MakeSQL;
+  S:='CREATE SUBSCRIPTION ' + Name + LineEnding +
+     '  CONNECTION ' + FConnectionString + LineEnding +
+     '  PUBLICATION ' + Tables.AsString ;
+
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for P in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + P.Caption;
+      if P.ParamValue <> '' then S1:=S1 + ' = '+P.ParamValue;
+    end;
+    if S1<>'' then
+      S:=S + LineEnding + '  WITH ('+S1+')';
+  end;
+  AddSQLCommand(S);
+  //CREATE SUBSCRIPTION имя_подписки
+  //    CONNECTION 'строка_подключения'
+  //    PUBLICATION имя_публикации [, ...]
+  //    [ WITH ( параметр_подписки [= значение] [, ... ] ) ]
+end;
+
+procedure TPGSQLCreateSubscription.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLCreateSubscription then
+  begin
+    FConnectionString:=TPGSQLCreateSubscription(ASource).ConnectionString;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropPublication }
