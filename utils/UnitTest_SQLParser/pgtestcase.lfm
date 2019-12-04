@@ -3808,7 +3808,7 @@ object PGSQLParserData: TPGSQLParserData
     Highlighter = rxSynSQL
     Items = <    
       item
-        Caption = 'DropTextSearchConfiguration1'
+        Caption = 'DropTextSearchTemplate1'
         Lines.Strings = (
           'DROP TEXT SEARCH TEMPLATE thesaurus;'
         )
