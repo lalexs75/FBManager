@@ -2864,13 +2864,21 @@ type
 
   { TPGSQLAlterPublication }
 
+  TPGSQLAlterPublicationCommand = (apcNone, apcAddTable, apcSetTable, apcDropTable,
+     apcAddTableOnly, apcSetTableOnly, apcDropTableOnly, apcSet, apcOwnerTo, apcRenameTo);
+
   TPGSQLAlterPublication = class(TSQLCommandDDL)
   private
+    FCommand: TPGSQLAlterPublicationCommand;
+    FCurTable: TTableItem;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Command:TPGSQLAlterPublicationCommand read FCommand write FCommand;
   end;
 
   { TPGSQLDropPublication }
@@ -3580,9 +3588,19 @@ end;
 { TPGSQLDropPublication }
 
 procedure TPGSQLDropPublication.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
 begin
   inherited InitParserTree;
-  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'PUBLICATION', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', []);
+    T:=AddSQLTokens(stKeyword, T, 'EXISTS', [], -1);
+  FSQLTokens:=AddSQLTokens(stIdentificator, [FSQLTokens, T], '', [], 1);
+    T:=AddSQLTokens(stSymbol, FSQLTokens, ',', [ toOptional]);
+    T.AddChildToken(FSQLTokens);
+  AddSQLTokens(stKeyword, FSQLTokens, 'CASCADE', [toOptional], -2);
+  AddSQLTokens(stKeyword, FSQLTokens, 'RESTRICT', [toOptional], -3);
   //DROP PUBLICATION [ IF EXISTS ] имя [, ...] [ CASCADE | RESTRICT ]
 end;
 
@@ -3590,19 +3608,77 @@ procedure TPGSQLDropPublication.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:begin
+        Name:=AWord;
+        Tables.Add(AWord);
+      end;
+  end;
 end;
 
 procedure TPGSQLDropPublication.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='DROP PUBLICATION';
+  if ooIfExists in Options then
+    S:=S + ' IF EXISTS';
+  if Tables.Count>1 then
+    S:=S + ' ' +Tables.AsString
+  else
+    S:=S + ' ' + Name;
+
+  if DropRule = drCascade then S:=S + ' CASCADE'
+  else
+  if DropRule = drRestrict then S:=S + ' RESTRICT';
+  AddSQLCommand(S);
 end;
 
 { TPGSQLAlterPublication }
 
 procedure TPGSQLAlterPublication.InitParserTree;
+var
+  FSQLTokens, T1, T2, TS, T, TN, TZ, TSet, TSet1, T11, T12,
+    T13, T14: TSQLTokenRecord;
 begin
   inherited InitParserTree;
-  //FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DELETE', [toFirstToken, toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'PUBLICATION', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'ADD', [], 2);
+  T1:=AddSQLTokens(stKeyword, T1, 'TABLE', []);
+  T2:=AddSQLTokens(stKeyword, T1, 'ONLY', [], 3);
+  TS:=AddSQLTokens(stIdentificator, [T1, T2], '', [], 4);
+  T:=AddSQLTokens(stSymbol, TS, '.', [toOptional]);
+  TN:=AddSQLTokens(stIdentificator, T, '', [], 5);
+  TZ:=AddSQLTokens(stSymbol, [TS, TN], '*', [toOptional], 6);
+  T:=AddSQLTokens(stSymbol, [TS, TN, TZ], ',', [toOptional], 7);
+    T.AddChildToken(TS);
+
+  TSet:=AddSQLTokens(stKeyword, FSQLTokens, 'SET', [], 8);
+  T1:=AddSQLTokens(stKeyword, TSet, 'TABLE', []);
+  T1.AddChildToken(TS);
+  T2:=AddSQLTokens(stKeyword, T1, 'ONLY', [], 9);
+  T2.AddChildToken(TS);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'DROP', [], 10);
+  T1:=AddSQLTokens(stKeyword, T1, 'TABLE', []);
+  T1.AddChildToken(TS);
+  T2:=AddSQLTokens(stKeyword, T1, 'ONLY', [], 11);
+  T2.AddChildToken(TS);
+
+  TSet1:=AddSQLTokens(stSymbol, TSet, '(', [], 16);
+  T11:=AddSQLTokens(stIdentificator, TSet1, '', [], 12);
+  T12:=AddSQLTokens(stSymbol, T11, '=', []);
+  T13:=AddSQLTokens(stString, T12, '', [], 13);
+  T14:=AddSQLTokens(stSymbol, T13, ',', [], 14);
+    T14.AddChildToken(T13);
+    AddSQLTokens(stSymbol, T13, ')', [], 15);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'RENAME', [], 20);
+  T1:=AddSQLTokens(stKeyword, T1, 'TO', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 21);
   //ALTER PUBLICATION имя ADD TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
   //ALTER PUBLICATION имя SET TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
   //ALTER PUBLICATION имя DROP TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
@@ -3615,11 +3691,86 @@ procedure TPGSQLAlterPublication.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FCommand:=apcAddTable;
+    3:FCommand:=apcAddTableOnly;
+    8:FCommand:=apcSetTable;
+    9:FCommand:=apcSetTableOnly;
+    10:FCommand:=apcDropTable;
+    11:FCommand:=apcDropTableOnly;
+    16:FCommand:=apcSet;
+    4:FCurTable:=Tables.Add(AWord);
+    5:if Assigned(FCurTable) then
+      begin
+        FCurTable.SchemaName:=FCurTable.Name;
+        FCurTable.Name:=AWord;
+      end;
+    7:FCurTable:=nil;
+    12:FCurParam:=Params.AddParamEx(AWord, '');
+    13:if Assigned(FCurParam) then
+      begin
+        if FCurParam.ParamValue<>'' then FCurParam.ParamValue:=FCurParam.ParamValue + ', ';
+        FCurParam.ParamValue:=FCurParam.ParamValue + AWord;
+      end;
+    14, 15:FCurParam:=nil;
+    20:FCommand:=apcRenameTo;
+    21:Params.AddParam(AWord);
+  end;
+  //apcSetTable, apcDropTable,
+  //   apcAddTableOnly, apcSetTableOnly, apcDropTableOnly, apcSet, apcOwnerTo, apcRenameTo);
 end;
 
 procedure TPGSQLAlterPublication.MakeSQL;
+var
+  S, S1: String;
+  T: TTableItem;
 begin
-  inherited MakeSQL;
+  S:='ALTER PUBLICATION '+DoFormatName(Name);
+  case FCommand of
+    apcAddTable:S:=S + ' ADD TABLE ';
+    apcAddTableOnly:S:=S + ' ADD TABLE ONLY ';
+    apcSetTable:S:=S + ' SET TABLE ';
+    apcSetTableOnly:S:=S + ' SET TABLE ONLY ';
+    apcDropTable:S:=S + ' DROP TABLE ';
+    apcDropTableOnly:S:=S + ' DROP TABLE ONLY ';
+    apcSet:S:=S + ' SET ';
+    apcRenameTo:if Params.Count>0 then S:=S + ' RENAME TO '+Params[0].Caption;
+  end;
+
+  if FCommand in [apcAddTable, apcAddTableOnly,apcSetTable, apcDropTable, apcSetTableOnly, apcDropTableOnly] then
+  begin
+    S1:='';
+    for T in Tables do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + DoFormatName2(T.FullName);
+    end;
+    S:=S + S1;
+  end
+  else
+  if FCommand = apcSet then
+  begin
+    if Params.Count>0 then
+      S:=S + '( ' + Params[0].Caption + ' = ' + Params[0].ParamValue + ')';
+  end;
+
+  //ALTER PUBLICATION имя ADD TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя SET TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя DROP TABLE [ ONLY ] имя_таблицы [ * ] [, ...]
+  //ALTER PUBLICATION имя SET ( параметр_публикации [= значение] [, ... ] )
+  //ALTER PUBLICATION имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER PUBLICATION имя RENAME TO новое_имя
+  //TPGSQLAlterPublicationCommand = (apcNone, apcSetTable, apcDropTable,
+  //   apcSetTableOnly, apcDropTableOnly, apcSet, apcOwnerTo, apcRenameTo);
+  AddSQLCommand(S);
+end;
+
+procedure TPGSQLAlterPublication.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGSQLAlterPublication then
+    FCommand:=TPGSQLAlterPublication(ASource).Command;
+  inherited Assign(ASource);
 end;
 
 { TPGSQLCreatePublication }
@@ -3679,7 +3830,7 @@ begin
 
     10:FCreatePublicationType:=cpForAllTables;
 
-    11:FCurParam:=Params.AddParam(AWord);
+    11:FCurParam:=Params.AddParamEx(AWord, '');
     12:if Assigned(FCurParam) then
       begin
         if FCurParam.ParamValue<>'' then FCurParam.ParamValue:=FCurParam.ParamValue + ', ';
@@ -3718,7 +3869,7 @@ begin
   end;
 
   if Params.Count>0 then
-    S1:=' WITH ( ' + Params[0].Caption + ' = ' + Params[0].ParamValue + ')';
+    S:=S + ' WITH ( ' + Params[0].Caption + ' = ' + Params[0].ParamValue + ')';
   AddSQLCommand(S);
 end;
 
