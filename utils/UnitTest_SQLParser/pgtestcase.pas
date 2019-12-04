@@ -536,6 +536,15 @@ type
     procedure c513AlterSubscription1;
     procedure c514AlterSubscription2;
     procedure c515DropSubscription1;
+    procedure c516CreateProcedure1;
+    procedure c517Call1;
+    procedure c518AlterProcedure1;
+    procedure c519AlterProcedure2;
+    procedure c520AlterProcedure3;
+    procedure c521AlterProcedure4;
+    procedure c522AlterProcedure5;
+    procedure c523AlterProcedure6;
+    procedure c524DropProcedure1;
   end;
 
   { TPGSQLParserData }
@@ -907,6 +916,51 @@ end;
 procedure TPGSQLParserTest.c515DropSubscription1;
 begin
   DoTestSQL(PGSQLParserData.sDataBase['DropSubscription1']);
+end;
+
+procedure TPGSQLParserTest.c516CreateProcedure1;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['CreateProcedure1']);
+end;
+
+procedure TPGSQLParserTest.c517Call1;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call1']);
+end;
+
+procedure TPGSQLParserTest.c518AlterProcedure1;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure1']);
+end;
+
+procedure TPGSQLParserTest.c519AlterProcedure2;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure2']);
+end;
+
+procedure TPGSQLParserTest.c520AlterProcedure3;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure3']);
+end;
+
+procedure TPGSQLParserTest.c521AlterProcedure4;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure4']);
+end;
+
+procedure TPGSQLParserTest.c522AlterProcedure5;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure5']);
+end;
+
+procedure TPGSQLParserTest.c523AlterProcedure6;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['AlterProcedure6']);
+end;
+
+procedure TPGSQLParserTest.c524DropProcedure1;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['DropProcedure1']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

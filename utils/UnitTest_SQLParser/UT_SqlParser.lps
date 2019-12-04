@@ -18,11 +18,11 @@
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="890"/>
-        <CursorPos X="57" Y="909"/>
+        <TopLine Value="940"/>
+        <CursorPos X="55" Y="963"/>
         <UsageCount Value="130"/>
         <Bookmarks Count="1">
-          <Item0 Y="575" ID="3"/>
+          <Item0 Y="584" ID="3"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -310,22 +310,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="414" Column="33" TopLine="382"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="2825" TopLine="2820"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="525" Column="15" TopLine="517"/>
-      </Position>
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="838" Column="18" TopLine="826"/>
@@ -427,6 +412,18 @@
       <Position>
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="535" Column="15" TopLine="522"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="909" Column="57" TopLine="890"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="539" Column="36" TopLine="528"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="544" Column="23" TopLine="530"/>
       </Position>
     </JumpHistory>
     <RunParams>

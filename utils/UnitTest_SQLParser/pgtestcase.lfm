@@ -3305,7 +3305,7 @@ object PGSQLParserData: TPGSQLParserData
     Top = 576
   end
   object sFunctions: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'DropEventTrigger1'
@@ -3564,6 +3564,73 @@ object PGSQLParserData: TPGSQLParserData
         Caption = 'CreateTrigger7'
         Lines.Strings = (
           'CREATE TRIGGER paired_items_update AFTER UPDATE ON paired_items REFERENCING NEW TABLE AS newtab OLD TABLE AS oldtab FOR EACH ROW EXECUTE PROCEDURE check_matching_pairs();'
+        )
+      end    
+      item
+        Caption = 'CreateProcedure1'
+        Lines.Strings = (
+          'CREATE PROCEDURE insert_data(a integer, b integer)'
+          'LANGUAGE SQL'
+          'AS $$'
+          'INSERT INTO tbl VALUES (a);'
+          'INSERT INTO tbl VALUES (b);'
+          '$$;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Call1'
+        Lines.Strings = (
+          'CALL insert_data(1, 2);'
+        )
+      end    
+      item
+        Caption = 'AlterProcedure1'
+        Lines.Strings = (
+          'ALTER PROCEDURE insert_data(integer, integer) RENAME TO insert_record;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure2'
+        Lines.Strings = (
+          'ALTER PROCEDURE insert_data(integer, integer) OWNER TO joe;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure3'
+        Lines.Strings = (
+          'ALTER PROCEDURE insert_data(integer, integer) SET SCHEMA accounting;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure4'
+        Lines.Strings = (
+          'ALTER PROCEDURE insert_data(integer, integer) DEPENDS ON EXTENSION myext;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure5'
+        Lines.Strings = (
+          'ALTER PROCEDURE check_password(text) SET search_path = admin, pg_temp;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure6'
+        Lines.Strings = (
+          'ALTER PROCEDURE check_password(text) RESET search_path;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure1'
+        Lines.Strings = (
+          'DROP PROCEDURE do_db_maintenance();'
+          ''
         )
       end>
     Left = 32
