@@ -216,14 +216,13 @@ function GetDefaultFB3Lib: string;
 var
   F: String;
 begin
-  F:=ExtractFileDir(ParamStr(0)) + {'\dlls\fblib}'\fbclient.dll';
-  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [F]);
+  F:= ExtractFileDir(ParamStr(0)) + '\fbclient.dll';
+//  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [F]);
   if FileExists(F) then
     Result:=F
   else
     Result:=GDS32DLL;
-
-  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [Result]);
+//  RxWriteLog(etDebug, 'GetDefaultFB3Lib="%s"', [Result]);
 end;
 
 {
