@@ -155,6 +155,7 @@ type
     function DoConvertTriggerNames(S:string):string;
     procedure DoUpdateAutoIncGenName;
     procedure DoUpdateAutoIncTrigger;
+    procedure DoCheckFiledNameAndTypeFK;
   public
     EditorFrame: Tfdbm_SynEditorFrame;
     EditorFrameDesc: Tfdbm_SynEditorFrame;
@@ -454,10 +455,14 @@ begin
       S:=P1.Items[i];
       P1.Items.Delete(i);
       P2.Items.Add(S);
+      P2.ItemIndex:=P2.Items.Count-1;
       if P1.Items.Count>0 then
         P1.ItemIndex:=0;
     end;
   end;
+
+  if (Sender as TSpeedButton).Tag = 3 then
+    DoCheckFiledNameAndTypeFK;
 end;
 
 procedure TfbmTableFieldEditorForm.FillDomainList;
@@ -652,10 +657,23 @@ begin
     EditorFrame.EditorText:='';
 end;
 
+procedure TfbmTableFieldEditorForm.DoCheckFiledNameAndTypeFK;
+var
+  S: String;
+begin
+  if (edtFieldName.Text = '') or (cbDomainCheck.Checked and (cbDomains.ItemIndex < 0)) or (cbCustomTypeCheck.Checked and (cbFieldType.ItemIndex<0)) then
+  begin
+    if (ListBox4.Items.Count = 0) and (ListBox4.ItemIndex>-1) or (not QuestionBox('Заполнить имя поля и тип согласно внешнего ключа?')) then exit;
+
+    if edtFieldName.Text = '' then
+    begin
+      S:=ListBox4.Items[ListBox4.ItemIndex];
+      edtFieldName.Text:=S;
+    end;
+  end;
+end;
+
 procedure TfbmTableFieldEditorForm.ShowInitialValue(AShow: boolean);
-
-
-
 begin
   Label15.Visible:=AShow;
   Edit1.Visible:=AShow;
