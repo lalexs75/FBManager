@@ -176,7 +176,7 @@ var
   fbmTableFieldEditorForm: TfbmTableFieldEditorForm;
 
 implementation
-uses ibmanagertablefieldeditorArrayBoundunit, strutils, rxAppUtils,
+uses ibmanagertablefieldeditorArrayBoundunit, strutils, rxAppUtils, rxboxprocs,
   fb_utils, SQLEngineCommonTypesUnit, fbmToolsUnit, SQLEngineInternalToolsUnit,
   fbmStrConstUnit;
 
@@ -429,12 +429,13 @@ begin
 end;
 
 procedure TfbmTableFieldEditorForm.SpeedButton4Click(Sender: TObject);
-var
+{var
   i,k:integer;
   P1, P2:TListBox;
-  S:string;
+  //S:string;
+  }
 begin
-  case (Sender as TSpeedButton).Tag of
+(*  case (Sender as TSpeedButton).Tag of
     3:begin
         P1:=ListBox3;
         P2:=ListBox4;
@@ -446,23 +447,30 @@ begin
   else
     exit;
   end;
-
+  //BoxMoveSelectedItems(
   if P1.Items.Count>0 then
   begin
     i:=P1.ItemIndex;
     if (i>=0) and (I<P1.Items.Count) then
     begin
-      S:=P1.Items[i];
+      //S:=P1.Items[i];
+      P2.Items.AddObject(P1.Items[i], P1.Items.Objects[i]);
       P1.Items.Delete(i);
-      P2.Items.Add(S);
       P2.ItemIndex:=P2.Items.Count-1;
       if P1.Items.Count>0 then
         P1.ItemIndex:=0;
     end;
   end;
-
   if (Sender as TSpeedButton).Tag = 3 then
     DoCheckFiledNameAndTypeFK;
+*)
+  if (Sender as TSpeedButton).Tag = 3 then
+  begin
+    BoxMoveSelectedItems(ListBox3, ListBox4);
+    DoCheckFiledNameAndTypeFK;
+  end
+  else
+    BoxMoveSelectedItems(ListBox4, ListBox3)
 end;
 
 procedure TfbmTableFieldEditorForm.FillDomainList;
@@ -490,8 +498,8 @@ begin
 
   SQLEngine.FillStdTypesList(cbFieldType.Items);
   //set def type to NUMERIC
-  if cbFieldType.Items.Count>0 then
-     cbFieldType.ItemIndex:=0;
+  //if cbFieldType.Items.Count>0 then
+  //   cbFieldType.ItemIndex:=0;
 
   //fill charsets
   SQLEngine.FillCharSetList(CB_CharSet.Items);
@@ -659,16 +667,37 @@ end;
 
 procedure TfbmTableFieldEditorForm.DoCheckFiledNameAndTypeFK;
 var
-  S: String;
+  F: TDBField;
+  TT: TDBMSFieldTypeRecord;
 begin
-  if (edtFieldName.Text = '') or (cbDomainCheck.Checked and (cbDomains.ItemIndex < 0)) or (cbCustomTypeCheck.Checked and (cbFieldType.ItemIndex<0)) then
+  if (edtFieldName.Text = '') or (cbDomainCheck.Visible and cbDomainCheck.Checked and (cbDomains.ItemIndex < 0)) or (cbCustomTypeCheck.Checked and (cbFieldType.ItemIndex<0)) then
   begin
-    if (ListBox4.Items.Count = 0) and (ListBox4.ItemIndex>-1) or (not QuestionBox('Заполнить имя поля и тип согласно внешнего ключа?')) then exit;
+    if (ListBox4.Items.Count = 0) and (ListBox4.ItemIndex>-1) or
+      (not QuestionBox(sFillFieldNameAndType)) then exit;
 
     if edtFieldName.Text = '' then
+      edtFieldName.Text:=ListBox4.Items[ListBox4.ItemIndex];
+
+    F:=ListBox4.Items.Objects[ListBox4.ItemIndex] as TDBField;
+    if not Assigned(F) then Exit;
+    if cbDomainCheck.Visible and Assigned(F.FieldDomain) then
     begin
-      S:=ListBox4.Items[ListBox4.ItemIndex];
-      edtFieldName.Text:=S;
+      if cbDomains.ItemIndex<0 then
+      begin
+        cbDomainCheck.Checked:=true;
+        cbDomains.Text:=F.FieldDomain.Caption;
+      end;
+      Exit;
+    end
+    else
+    if cbFieldType.ItemIndex<0 then
+    begin
+      cbCustomTypeCheck.Checked:=true;
+      TT:=FTable.OwnerDB.TypeList.FindType(F.FieldTypeName);
+      if Assigned(TT) then
+        cbFieldType.Text:=TT.TypeName;
+      edtSize.Value:=F.FieldSize;
+      edtScale.Value:=F.FieldPrec;
     end;
   end;
 end;

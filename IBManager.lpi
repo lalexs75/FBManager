@@ -29,7 +29,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="10"/>
       <RevisionNr Value="7"/>
-      <BuildNr Value="5577"/>
+      <BuildNr Value="5579"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.10"/>
@@ -1913,6 +1913,12 @@
       </Item>
       <Item>
         <Name Value="EAccessViolation"/>
+      </Item>
+      <Item>
+        <Name Value="RunError(200)"/>
+      </Item>
+      <Item>
+        <Name Value="EDivByZero"/>
       </Item>
     </Exceptions>
   </Debugging>

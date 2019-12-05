@@ -558,6 +558,7 @@ resourcestring
   sParser                           = 'Parser';
   sCopyConfiguration                = 'Copy configuration';
   sForEachRow                       = 'For each row';
+  sFillFieldNameAndType             = 'Fill field name and type?';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';

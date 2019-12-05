@@ -2076,6 +2076,10 @@ msgstr "Файлы SQL (*.sql)|*.sql|Все файлы (*)|*"
 msgid "Fillfactor"
 msgstr "Фактор заполнения"
 
+#: fbmstrconstunit.sfillfieldnameandtype
+msgid "Fill field name and type?"
+msgstr "Заполнить имя поля и тип согласно внешнего ключа?"
+
 #: fbmstrconstunit.sfillqueryparam
 msgid "Fill query param"
 msgstr "Заполнить параметры запроса"

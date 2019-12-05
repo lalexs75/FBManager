@@ -1996,6 +1996,10 @@ msgstr ""
 msgid "Fillfactor"
 msgstr ""
 
+#: fbmstrconstunit.sfillfieldnameandtype
+msgid "Fill field name and type?"
+msgstr ""
+
 #: fbmstrconstunit.sfillqueryparam
 msgid "Fill query param"
 msgstr ""
