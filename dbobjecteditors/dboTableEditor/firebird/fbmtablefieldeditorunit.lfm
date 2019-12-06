@@ -14,9 +14,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideBottom.Control = edtTableName
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 18
-    Top = 16
-    Width = 78
+    Height = 15
+    Top = 22
+    Width = 64
     Anchors = [akLeft, akBottom]
     BorderSpacing.Left = 6
     Caption = 'Table Name'
@@ -29,9 +29,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideBottom.Control = edtFieldName
     AnchorSideBottom.Side = asrBottom
     Left = 6
-    Height = 18
-    Top = 50
-    Width = 75
+    Height = 15
+    Top = 59
+    Width = 61
     Anchors = [akLeft, akBottom]
     BorderSpacing.Left = 6
     Caption = 'Field Name'
@@ -47,8 +47,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 0
-    Height = 513
-    Top = 102
+    Height = 502
+    Top = 109
     Width = 804
     ActivePage = TabForignKey
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -57,8 +57,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     TabOrder = 4
     object TabSheet1: TTabSheet
       Caption = 'Field type'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       object Label6: TLabel
         AnchorSideLeft.Control = cbDomainCheck
@@ -858,8 +858,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object tabArray: TTabSheet
       Caption = 'Array'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       object dbGrid2: TDBGrid
         AnchorSideLeft.Control = tabArray
@@ -918,8 +918,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Default value'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       inline edtDefaultValue: TSynEdit
         Left = 0
@@ -1449,8 +1449,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Check'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       inline edtCheck: TSynEdit
         Left = 0
@@ -1980,8 +1980,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object TabComputedSource: TTabSheet
       Caption = 'Calculated'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       inline edtComputedSource: TSynEdit
         Left = 0
@@ -2511,8 +2511,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object TabSheet6: TTabSheet
       Caption = 'Autoincremet'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       object Label4: TLabel
         AnchorSideLeft.Control = RadioButton3
@@ -2758,17 +2758,17 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     end
     object TabForignKey: TTabSheet
       Caption = 'Foreign key'
-      ClientHeight = 477
-      ClientWidth = 798
+      ClientHeight = 473
+      ClientWidth = 794
       ParentFont = False
       object Label3: TLabel
         AnchorSideLeft.Control = TabForignKey
         AnchorSideTop.Control = TabForignKey
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 18
+        Height = 15
         Top = 6
-        Width = 60
+        Width = 48
         BorderSpacing.Around = 6
         Caption = 'FK name'
         ParentColor = False
@@ -2780,9 +2780,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = RadioGroup1
         Left = 12
-        Height = 28
-        Top = 30
-        Width = 656
+        Height = 31
+        Top = 27
+        Width = 666
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ParentFont = False
@@ -2793,9 +2793,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Control = edtFKName
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 22
+        Height = 23
         Top = 64
-        Width = 107
+        Width = 93
         BorderSpacing.Around = 6
         Caption = 'Create index'
         OnChange = cbCreateFKIndexChange
@@ -2808,10 +2808,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Control = cbCreateFKIndex
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = RadioGroup1
-        Left = 95
-        Height = 28
-        Top = 92
-        Width = 573
+        Left = 80
+        Height = 31
+        Top = 93
+        Width = 598
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ParentFont = False
@@ -2824,10 +2824,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = edtIndexName
         AnchorSideBottom.Side = asrBottom
-        Left = 674
-        Height = 76
-        Top = 44
-        Width = 118
+        Left = 684
+        Height = 74
+        Top = 50
+        Width = 104
         Anchors = [akRight, akBottom]
         AutoFill = True
         AutoSize = True
@@ -2841,8 +2841,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 56
-        ClientWidth = 114
+        ClientHeight = 58
+        ClientWidth = 102
         ItemIndex = 0
         Items.Strings = (
           'Ascending'
@@ -2856,9 +2856,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Control = edtIndexName
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 18
-        Top = 126
-        Width = 58
+        Height = 15
+        Top = 130
+        Width = 48
         BorderSpacing.Around = 6
         Caption = 'On Table'
         FocusControl = cbFKTableName
@@ -2872,9 +2872,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideRight.Control = TabForignKey
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 32
-        Top = 150
-        Width = 780
+        Height = 31
+        Top = 151
+        Width = 776
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -2889,9 +2889,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideBottom.Control = edtIndexName
         AnchorSideBottom.Side = asrBottom
         Left = 12
-        Height = 18
-        Top = 102
-        Width = 77
+        Height = 15
+        Top = 109
+        Width = 62
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Index name'
@@ -2907,9 +2907,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideBottom.Control = TabForignKey
         AnchorSideBottom.Side = asrBottom
         Left = 0
-        Height = 289
+        Height = 285
         Top = 188
-        Width = 798
+        Width = 794
         ActivePage = TabSheet8
         Anchors = [akTop, akLeft, akRight, akBottom]
         ParentFont = False
@@ -2917,8 +2917,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         TabOrder = 5
         object TabSheet8: TTabSheet
           Caption = 'FKRule'
-          ClientHeight = 253
-          ClientWidth = 792
+          ClientHeight = 256
+          ClientWidth = 784
           ParentFont = False
           object cbFKDeleteRule: TComboBox
             AnchorSideLeft.Control = Label13
@@ -2927,10 +2927,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = TabSheet8
             AnchorSideBottom.Side = asrBottom
-            Left = 483
-            Height = 28
-            Top = 219
-            Width = 303
+            Left = 467
+            Height = 27
+            Top = 223
+            Width = 311
             Anchors = [akLeft, akRight, akBottom]
             BorderSpacing.Around = 6
             ItemHeight = 0
@@ -2950,10 +2950,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideLeft.Control = ListBox4
             AnchorSideBottom.Control = cbFKDeleteRule
             AnchorSideBottom.Side = asrBottom
-            Left = 414
-            Height = 18
-            Top = 229
-            Width = 63
+            Left = 410
+            Height = 15
+            Top = 235
+            Width = 51
             Anchors = [akLeft, akBottom]
             Caption = 'On delete'
             FocusControl = cbFKDeleteRule
@@ -2967,10 +2967,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = TabSheet8
             AnchorSideBottom.Side = asrBottom
-            Left = 77
-            Height = 28
-            Top = 219
-            Width = 302
+            Left = 64
+            Height = 27
+            Top = 223
+            Width = 311
             Anchors = [akLeft, akRight, akBottom]
             BorderSpacing.Left = 6
             BorderSpacing.Top = 6
@@ -2993,9 +2993,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideBottom.Control = cbFKUpdateRule
             AnchorSideBottom.Side = asrBottom
             Left = 0
-            Height = 18
-            Top = 229
-            Width = 71
+            Height = 15
+            Top = 235
+            Width = 58
             Anchors = [akLeft, akBottom]
             Caption = 'On Update'
             FocusControl = cbFKUpdateRule
@@ -3008,16 +3008,16 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Control = SpeedButton4
             AnchorSideBottom.Control = cbFKUpdateRule
             Left = 6
-            Height = 207
+            Height = 211
             Top = 6
-            Width = 373
+            Width = 369
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Left = 6
             BorderSpacing.Top = 6
             ItemHeight = 0
             OnDblClick = ListBox3DblClick
             ParentFont = False
-            ScrollWidth = 371
+            ScrollWidth = 367
             TabOrder = 2
             TopIndex = -1
           end
@@ -3028,16 +3028,16 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Control = TabSheet8
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = cbFKDeleteRule
-            Left = 414
-            Height = 207
+            Left = 410
+            Height = 211
             Top = 6
-            Width = 372
+            Width = 368
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Around = 6
             ItemHeight = 0
             OnDblClick = ListBox4DblClick
             ParentFont = False
-            ScrollWidth = 370
+            ScrollWidth = 366
             TabOrder = 3
             TopIndex = -1
           end
@@ -3047,7 +3047,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideLeft.Side = asrCenter
             AnchorSideTop.Control = SpeedButton4
             AnchorSideTop.Side = asrBottom
-            Left = 385
+            Left = 381
             Height = 26
             Top = 38
             Width = 23
@@ -3105,7 +3105,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideLeft.Control = TabSheet8
             AnchorSideLeft.Side = asrCenter
             AnchorSideTop.Control = TabSheet8
-            Left = 385
+            Left = 381
             Height = 26
             Top = 6
             Width = 23
@@ -3161,8 +3161,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         end
         object TabSheet9: TTabSheet
           Caption = 'Description'
-          ClientHeight = 253
-          ClientWidth = 792
+          ClientHeight = 256
+          ClientWidth = 784
           ParentFont = False
           object Memo1: TMemo
             Left = 0
@@ -3183,10 +3183,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 90
-    Height = 28
+    Left = 76
+    Height = 31
     Top = 6
-    Width = 708
+    Width = 722
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     Enabled = False
@@ -3199,9 +3199,9 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideTop.Control = edtFieldName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 22
-    Top = 74
-    Width = 73
+    Height = 23
+    Top = 80
+    Width = 69
     BorderSpacing.Around = 6
     Caption = 'Not null'
     OnChange = cbNotNullChange
@@ -3214,10 +3214,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 90
-    Height = 28
-    Top = 40
-    Width = 708
+    Left = 76
+    Height = 31
+    Top = 43
+    Width = 722
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Top = 6
     BorderSpacing.Right = 6
@@ -3231,10 +3231,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = edtFieldName
     AnchorSideTop.Side = asrBottom
-    Left = 85
-    Height = 22
-    Top = 74
-    Width = 104
+    Left = 81
+    Height = 23
+    Top = 80
+    Width = 90
     BorderSpacing.Around = 6
     Caption = 'Primary key'
     ParentFont = False
@@ -3242,8 +3242,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 621
+    Height = 46
+    Top = 617
     Width = 792
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -3262,10 +3262,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = edtFieldName
     AnchorSideTop.Side = asrBottom
-    Left = 195
-    Height = 22
-    Top = 74
-    Width = 74
+    Left = 177
+    Height = 23
+    Top = 80
+    Width = 68
     BorderSpacing.Around = 6
     Caption = 'AutoInc'
     ParentFont = False
@@ -3276,10 +3276,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = edtFieldName
     AnchorSideTop.Side = asrBottom
-    Left = 275
-    Height = 22
-    Top = 74
-    Width = 116
+    Left = 251
+    Height = 23
+    Top = 80
+    Width = 100
     BorderSpacing.Around = 6
     Caption = 'References to'
     OnChange = cbForignKeyChange

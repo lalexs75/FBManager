@@ -429,45 +429,12 @@ begin
 end;
 
 procedure TfbmTableFieldEditorForm.SpeedButton4Click(Sender: TObject);
-{var
-  i,k:integer;
-  P1, P2:TListBox;
-  //S:string;
-  }
 begin
-(*  case (Sender as TSpeedButton).Tag of
-    3:begin
-        P1:=ListBox3;
-        P2:=ListBox4;
-      end;
-    4:begin
-        P1:=ListBox4;
-        P2:=ListBox3;
-      end;
-  else
-    exit;
-  end;
-  //BoxMoveSelectedItems(
-  if P1.Items.Count>0 then
-  begin
-    i:=P1.ItemIndex;
-    if (i>=0) and (I<P1.Items.Count) then
-    begin
-      //S:=P1.Items[i];
-      P2.Items.AddObject(P1.Items[i], P1.Items.Objects[i]);
-      P1.Items.Delete(i);
-      P2.ItemIndex:=P2.Items.Count-1;
-      if P1.Items.Count>0 then
-        P1.ItemIndex:=0;
-    end;
-  end;
-  if (Sender as TSpeedButton).Tag = 3 then
-    DoCheckFiledNameAndTypeFK;
-*)
   if (Sender as TSpeedButton).Tag = 3 then
   begin
     BoxMoveSelectedItems(ListBox3, ListBox4);
-    DoCheckFiledNameAndTypeFK;
+    if ConfigValues.ByNameAsBoolean('Fields editro/Ask to fill name from FK', true) then
+      DoCheckFiledNameAndTypeFK;
   end
   else
     BoxMoveSelectedItems(ListBox4, ListBox3)
@@ -669,6 +636,7 @@ procedure TfbmTableFieldEditorForm.DoCheckFiledNameAndTypeFK;
 var
   F: TDBField;
   TT: TDBMSFieldTypeRecord;
+  S: String;
 begin
   if (edtFieldName.Text = '') or (cbDomainCheck.Visible and cbDomainCheck.Checked and (cbDomains.ItemIndex < 0)) or (cbCustomTypeCheck.Checked and (cbFieldType.ItemIndex<0)) then
   begin
@@ -685,7 +653,8 @@ begin
       if cbDomains.ItemIndex<0 then
       begin
         cbDomainCheck.Checked:=true;
-        cbDomains.Text:=F.FieldDomain.Caption;
+        S:=F.FieldDomain.CaptionFullPatch;
+        cbDomains.Text:=F.FieldDomain.CaptionFullPatch;
       end;
       Exit;
     end

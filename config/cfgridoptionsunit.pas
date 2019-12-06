@@ -37,6 +37,7 @@ type
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
     ColorBox1: TColorBox;
     Edit1: TEdit;
     Edit4: TEdit;
@@ -109,6 +110,8 @@ begin
 
   SpinEdit1.Value:=ConfigValues.ByNameAsInteger('DBGrid fetch record count', 1000);
   ColorBox1.Selected:=ConfigValues.ByNameAsInteger('Grid/Alternate color', clSkyBlue);
+
+  CheckBox5.Checked:=ConfigValues.ByNameAsBoolean('Fields editro/Ask to fill name from FK', true);
 end;
 
 procedure TcfGridOptionsFrame.SaveData;
@@ -137,6 +140,7 @@ begin
   ConfigValues.SetByNameAsInteger('DBGrid fetch record count', SpinEdit1.Value);
 
   ConfigValues.SetByNameAsInteger('Grid/Alternate color', ColorBox1.Selected);
+  ConfigValues.SetByNameAsBoolean('Fields editro/Ask to fill name from FK', CheckBox5.Checked);
 end;
 
 procedure TcfGridOptionsFrame.Localize;
