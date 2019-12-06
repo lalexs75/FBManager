@@ -648,6 +648,10 @@ begin
 
     F:=ListBox4.Items.Objects[ListBox4.ItemIndex] as TDBField;
     if not Assigned(F) then Exit;
+
+    if Trim(edtDescription.Text) = '' then
+      edtDescription.Text:=F.FieldDescription;
+
     if cbDomainCheck.Visible and Assigned(F.FieldDomain) then
     begin
       if cbDomains.ItemIndex<0 then
