@@ -1964,6 +1964,8 @@ begin
       end;
     end;
 
+    if (S1='') or (S2='') then Abort;
+
     TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + DoFormatName(Caption) + '('+S1+') values (' + S2+ ') RETURNING ('+S3+')';
 
     for F in Fields do
@@ -1973,6 +1975,9 @@ begin
       begin
         if F1.DataType in IntegerDataTypes then
           TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsInteger[F.FieldName]:=F1.AsInteger
+        else
+        if F1.DataType in NumericDataTypes then
+          TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsDouble[F.FieldName]:=F1.AsFloat
         else
         if F1.DataType in StringTypes then
           TFBDataSet(FDataSet).QueryInsert.Params.ByNameAsString[F.FieldName]:=F1.AsString
