@@ -162,7 +162,11 @@ begin
   begin
     D:=ComboBox1.Items.Objects[ComboBox1.ItemIndex];
     if D is TDBDataSetObject then
+    begin
+      if TDBDataSetObject(D).Fields.Count = 0 then
+        TDBDataSetObject(D).RefreshFieldList;
       TDBDataSetObject(D).Fields.SaveToStrings(ComboBox2.Items);
+    end;
   end;
   SaveEditData;
 end;
