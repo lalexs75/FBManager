@@ -1920,6 +1920,12 @@
       <Item>
         <Name Value="EDivByZero"/>
       </Item>
+      <Item>
+        <Name Value="EUIBError"/>
+      </Item>
+      <Item>
+        <Name Value="EAbort"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

@@ -140,6 +140,7 @@ type
     procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
     procedure ChangeVisualParams;
     procedure SetSQLText(ASQL:string);
+    procedure AddLineText(ASQL:string);
   end;
 
 var
@@ -897,6 +898,11 @@ end;
 procedure TFBMSqlScripForm.SetSQLText(ASQL: string);
 begin
   EditorFrame.EditorText:=ASQL;
+end;
+
+procedure TFBMSqlScripForm.AddLineText(ASQL: string);
+begin
+  EditorFrame.TextEditor.Lines.Add(ASQL);
 end;
 
 end.

@@ -26,8 +26,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
-  StdCtrls, Spin, ActnList, Menus, DBCtrls, DB, rxmemds, rxdbgrid, rxtooledit,
-  SQLEngineAbstractUnit;
+  StdCtrls, Spin, ActnList, Menus, DBCtrls, ComCtrls, DB, rxmemds, rxdbgrid,
+  rxtooledit, SQLEngineAbstractUnit, fbmsqlscript;
 
 type
 
@@ -71,6 +71,7 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     PopupMenu1: TPopupMenu;
+    ProgressBar1: TProgressBar;
     RadioGroup1: TRadioGroup;
     RadioGroup2: TRadioGroup;
     RxDateEdit1: TRxDateEdit;
@@ -79,6 +80,7 @@ type
     rxFields: TRxMemoryData;
     rxFieldsCHEKED: TBooleanField;
     rxFieldsDataGenAsGUID: TBooleanField;
+    rxFieldsDataGenAutoIncCurrent: TLongintField;
     rxFieldsDataGenAutoIncStart: TLongintField;
     rxFieldsDataGenAutoIncStep: TLongintField;
     rxFieldsDataGenDateIncludeTime: TBooleanField;
@@ -111,6 +113,7 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure fldSelAllExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup2Change(Sender: TObject);
     procedure rxFieldsAfterScroll(DataSet: TDataSet);
@@ -125,15 +128,22 @@ type
     procedure UpdateEditControl;
     procedure SaveEditData;
     procedure UpdateRadioGroup2;
+    ///
+    procedure InitWrite;
+    procedure DoneWrite;
+    procedure WriteStartTran;
+    procedure WriteCommitTran;
+    procedure WriteCommand(S:string);
+    function MakeValue:string;
   public
     constructor CreateGenerateDataForm(ATable:TDBTableObject);
-    //function SaveData:boolean;
+    function SaveData:boolean;
   end;
 
 
 procedure ShowGenerateDataForm(ATable:TDBTableObject);
 implementation
-uses Math, rxdbutils, sqlObjects;
+uses Math, rxdbutils, sqlObjects, IBManMainUnit, StrUtils, fbmStrConstUnit;
 
 procedure ShowGenerateDataForm(ATable: TDBTableObject);
 var
@@ -150,7 +160,14 @@ end;
 
 procedure TGenerateDataForm.fldSelAllExecute(Sender: TObject);
 begin
-  //
+  FillValueForField(rxFieldsCHEKED, ((Sender as TComponent).Tag > 0));
+end;
+
+procedure TGenerateDataForm.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  if ModalResult = mrOK then
+    CanClose:=SaveData;
 end;
 
 procedure TGenerateDataForm.ComboBox1Change(Sender: TObject);
@@ -228,7 +245,8 @@ end;
 
 procedure TGenerateDataForm.Localize;
 begin
-
+  fldSelAll.Caption:=sSelectAll;
+  fldUnSelAll.Caption:=sUnselectAll;
 end;
 
 procedure TGenerateDataForm.LoadTableInfo;
@@ -416,6 +434,72 @@ begin
   RadioGroup2.Items.EndUpdate;
 end;
 
+procedure TGenerateDataForm.InitWrite;
+begin
+  fbManagerMainForm.tlsSqlScript.Execute;
+end;
+
+procedure TGenerateDataForm.DoneWrite;
+begin
+
+end;
+
+procedure TGenerateDataForm.WriteStartTran;
+begin
+  WriteCommand('begin');
+end;
+
+procedure TGenerateDataForm.WriteCommitTran;
+begin
+  WriteCommand('commit');
+end;
+
+procedure TGenerateDataForm.WriteCommand(S: string);
+begin
+  FBMSqlScripForm.AddLineText(S + ';');
+end;
+
+function TGenerateDataForm.MakeValue: string;
+var
+  FT: TFieldType;
+  G: TGUID;
+begin
+  Result:='';
+  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
+  if FT in IntegerDataTypes then
+  begin
+    case rxFieldsDataGenType.AsInteger of
+      //1: //Get from table
+      //2: //Get from list
+      3:begin
+          //AutoInc
+          rxFields.Edit;
+          rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
+          rxFields.Post;
+          MakeValue:=IntToStr(rxFieldsDataGenAutoIncCurrent.AsInteger);
+        end;
+    else
+      //0 - random
+      Result:=IntToStr((RandomRange(rxFieldsDataGenIntMin.AsInteger, rxFieldsDataGenIntMax.AsInteger)));
+    end
+  end
+  else
+  if FT in StringTypes then
+  begin
+    //case rxFieldsDataGenType.AsInteger of
+      //1: //Get from table
+      //2: //Get from list
+    //else
+      //0 - random
+      CreateGUID(G);
+      Result:=GUIDToString(G);
+    //end
+  end;
+
+  if FT in StringTypes + DataTimeTypes then
+    Result:=QuotedStr(Result);
+end;
+
 constructor TGenerateDataForm.CreateGenerateDataForm(ATable: TDBTableObject);
 begin
   inherited Create(Application);
@@ -423,6 +507,71 @@ begin
   Localize;
   FTable:=ATable;
   LoadTableInfo;
+end;
+
+function TGenerateDataForm.SaveData: boolean;
+var
+  i: Integer;
+  SFields, SValues: String;
+begin
+  Result:=true;
+  SFields:='';
+  if rxFields.State <> dsBrowse then rxFields.Post;
+  rxFields.First;
+  while not rxFields.EOF do
+  begin
+    if rxFieldsCHEKED.AsBoolean then
+    begin
+      if SFields<>'' then SFields:=SFields + ', ';
+      SFields:=SFields + rxFieldsFieldName.AsString;
+    end;
+    rxFields.Edit;
+    rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncStart.AsInteger;
+    rxFields.Post;
+    rxFields.Next;
+  end;
+
+  if SFields <> '' then
+  begin
+    InitWrite;
+    ProgressBar1.Position:=0;
+    ProgressBar1.Max:=SpinEdit1.Value;
+    WriteStartTran;
+    rxFields.DisableControls;
+    rxFields.AfterScroll:=nil;
+    rxFields.BeforeScroll:=nil;
+    rxFields.First;
+
+    for i:=1 to SpinEdit1.Value do
+    begin
+      rxFields.First;
+      SValues:='';
+      while not rxFields.EOF do
+      begin
+        if rxFieldsCHEKED.AsBoolean then
+        begin
+          if SValues<>'' then SValues:=SValues + ', ';
+          SValues:=SValues + MakeValue;
+        end;
+        rxFields.Next;
+      end;
+      WriteCommand('insert into ' +FTable.CaptionFullPatch+ LineEnding + '  (' + SFields +')' + LineEnding + '  values(' + SValues+')');
+
+      if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
+      begin
+        WriteCommitTran;
+        WriteStartTran;
+      end;
+      ProgressBar1.Position:=i;
+    end;
+
+    rxFields.AfterScroll:=@rxFieldsAfterScroll;
+    rxFields.BeforeScroll:=@rxFieldsBeforeScroll;
+    rxFields.EnableControls;
+    WriteCommitTran;
+    DoneWrite;
+    Result:=true;
+  end;
 end;
 
 end.
