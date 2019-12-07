@@ -495,7 +495,7 @@ object GenerateDataForm: TGenerateDataForm
     AnchorSideRight.Side = asrBottom
     Left = 472
     Height = 293
-    Top = 272
+    Top = 176
     Width = 160
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True

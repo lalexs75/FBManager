@@ -134,6 +134,13 @@ type
     procedure WriteStartTran;
     procedure WriteCommitTran;
     procedure WriteCommand(S:string);
+
+    function DoMakeString:string;
+    function DoMakeInteger:Integer;
+    function DoMakeDate:TDateTime;
+    function DoMakeDateTime:TDateTime;
+    function DoMakeNumeric:Double;
+
     function MakeValue:string;
   public
     constructor CreateGenerateDataForm(ATable:TDBTableObject);
@@ -459,32 +466,11 @@ begin
   FBMSqlScripForm.AddLineText(S + ';');
 end;
 
-function TGenerateDataForm.MakeValue: string;
+function TGenerateDataForm.DoMakeString: string;
 var
-  FT: TFieldType;
   G: TGUID;
 begin
   Result:='';
-  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
-  if FT in IntegerDataTypes then
-  begin
-    case rxFieldsDataGenType.AsInteger of
-      //1: //Get from table
-      //2: //Get from list
-      3:begin
-          //AutoInc
-          rxFields.Edit;
-          rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
-          rxFields.Post;
-          MakeValue:=IntToStr(rxFieldsDataGenAutoIncCurrent.AsInteger);
-        end;
-    else
-      //0 - random
-      Result:=IntToStr((RandomRange(rxFieldsDataGenIntMin.AsInteger, rxFieldsDataGenIntMax.AsInteger)));
-    end
-  end
-  else
-  if FT in StringTypes then
   begin
     //case rxFieldsDataGenType.AsInteger of
       //1: //Get from table
@@ -495,6 +481,74 @@ begin
       Result:=GUIDToString(G);
     //end
   end;
+end;
+
+function TGenerateDataForm.DoMakeInteger: Integer;
+var
+  T: TDBDataSetObject;
+  DS: TDataSet;
+  F: TField;
+  P: LongInt;
+begin
+  case rxFieldsDataGenType.AsInteger of
+    1:begin
+        //Get from table
+        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
+        DS:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
+        DS.Active:=true;
+        P:=Random(DS.RecordCount);
+        DS.RecNo:=P+1;
+        F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
+        Result:=F.AsInteger;
+      end;
+    //2: //Get from list
+    3:begin
+        //AutoInc
+        rxFields.Edit;
+        rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
+        rxFields.Post;
+        Result:=rxFieldsDataGenAutoIncCurrent.AsInteger;
+      end;
+  else
+    //0 - random
+    Result:=RandomRange(rxFieldsDataGenIntMin.AsInteger, rxFieldsDataGenIntMax.AsInteger);
+  end
+end;
+
+function TGenerateDataForm.DoMakeDate: TDateTime;
+begin
+  Result:=Now;
+end;
+
+function TGenerateDataForm.DoMakeDateTime: TDateTime;
+begin
+  Result:=Now;
+end;
+
+function TGenerateDataForm.DoMakeNumeric: Double;
+begin
+  Result:=0;
+end;
+
+function TGenerateDataForm.MakeValue: string;
+var
+  FT: TFieldType;
+begin
+  Result:='';
+  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
+  if FT in IntegerDataTypes then
+    Result:=IntToStr(DoMakeInteger)
+  else
+  if FT in NumericDataTypes then
+    Result:=FloatToStr(DoMakeNumeric)
+  else
+  if FT = ftDate then
+    Result:=DateToStr(DoMakeDate)
+  else
+  if FT in DataTimeTypes - [ftDate] then
+    Result:=DateTimeToStr( DoMakeDateTime)
+  else
+    Result:=DoMakeString; //StringTypes
 
   if FT in StringTypes + DataTimeTypes then
     Result:=QuotedStr(Result);
