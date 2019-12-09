@@ -6,6 +6,7 @@ object GenerateDataForm: TGenerateDataForm
   Caption = 'GenerateDataForm'
   ClientHeight = 626
   ClientWidth = 858
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.1.0.0'
@@ -108,9 +109,9 @@ object GenerateDataForm: TGenerateDataForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = RadioGroup1
     AnchorSideTop.Side = asrBottom
-    AnchorSideBottom.Control = ButtonPanel1
+    AnchorSideBottom.Control = ProgressBar1
     Left = 0
-    Height = 492
+    Height = 466
     Top = 76
     Width = 666
     ColumnDefValues.BlobText = '(данные)'
@@ -494,7 +495,7 @@ object GenerateDataForm: TGenerateDataForm
     AnchorSideRight.Side = asrBottom
     Left = 472
     Height = 293
-    Top = 272
+    Top = 176
     Width = 160
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
@@ -742,6 +743,19 @@ object GenerateDataForm: TGenerateDataForm
     OnClick = RadioGroup2Change
     TabOrder = 11
   end
+  object ProgressBar1: TProgressBar
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = ButtonPanel1
+    Left = 6
+    Height = 20
+    Top = 548
+    Width = 846
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    TabOrder = 12
+  end
   object rxFields: TRxMemoryData
     Capacity = 1024
     FieldDefs = <    
@@ -833,6 +847,10 @@ object GenerateDataForm: TGenerateDataForm
       end    
       item
         Name = 'DataGenAutoIncStep'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'DataGenAutoIncCurrent'
         DataType = ftInteger
       end>
     BeforeScroll = rxFieldsBeforeScroll
@@ -1038,6 +1056,15 @@ object GenerateDataForm: TGenerateDataForm
       ReadOnly = False
       Required = False
     end
+    object rxFieldsDataGenAutoIncCurrent: TLongintField
+      FieldKind = fkData
+      FieldName = 'DataGenAutoIncCurrent'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
   end
   object dsFields: TDataSource
     DataSet = rxFields
@@ -1051,11 +1078,13 @@ object GenerateDataForm: TGenerateDataForm
     object fldSelAll: TAction
       Tag = 1
       Caption = 'fldSelAll'
+      ImageIndex = 15
       OnExecute = fldSelAllExecute
     end
     object fldUnSelAll: TAction
       Tag = -1
       Caption = 'fldUnSelAll'
+      ImageIndex = 46
       OnExecute = fldSelAllExecute
     end
   end

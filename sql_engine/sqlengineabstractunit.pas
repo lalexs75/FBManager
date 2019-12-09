@@ -3336,8 +3336,10 @@ var
   F: TDBField;
 begin
   if Assigned(AStrings) then
+  begin
     for F in Self do
       AStrings.Add(F.FieldName);
+  end;
 end;
 
 { TFieldItem }

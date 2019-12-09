@@ -1,7 +1,7 @@
 object FBMSqlScripForm: TFBMSqlScripForm
   Left = 356
   Height = 711
-  Top = 154
+  Top = 152
   Width = 759
   ActiveControl = ToolPanel1
   Caption = 'Script Executive'

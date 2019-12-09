@@ -26,8 +26,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
-  StdCtrls, Spin, ActnList, Menus, DBCtrls, DB, rxmemds, rxdbgrid, rxtooledit,
-  SQLEngineAbstractUnit;
+  StdCtrls, Spin, ActnList, Menus, DBCtrls, ComCtrls, DB, rxmemds, rxdbgrid,
+  rxtooledit, SQLEngineAbstractUnit, fbmsqlscript;
 
 type
 
@@ -71,6 +71,7 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     PopupMenu1: TPopupMenu;
+    ProgressBar1: TProgressBar;
     RadioGroup1: TRadioGroup;
     RadioGroup2: TRadioGroup;
     RxDateEdit1: TRxDateEdit;
@@ -79,6 +80,7 @@ type
     rxFields: TRxMemoryData;
     rxFieldsCHEKED: TBooleanField;
     rxFieldsDataGenAsGUID: TBooleanField;
+    rxFieldsDataGenAutoIncCurrent: TLongintField;
     rxFieldsDataGenAutoIncStart: TLongintField;
     rxFieldsDataGenAutoIncStep: TLongintField;
     rxFieldsDataGenDateIncludeTime: TBooleanField;
@@ -111,6 +113,7 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure fldSelAllExecute(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup2Change(Sender: TObject);
     procedure rxFieldsAfterScroll(DataSet: TDataSet);
@@ -125,15 +128,29 @@ type
     procedure UpdateEditControl;
     procedure SaveEditData;
     procedure UpdateRadioGroup2;
+    ///
+    procedure InitWrite;
+    procedure DoneWrite;
+    procedure WriteStartTran;
+    procedure WriteCommitTran;
+    procedure WriteCommand(S:string);
+
+    function DoMakeString:string;
+    function DoMakeInteger:Integer;
+    function DoMakeDate:TDateTime;
+    function DoMakeDateTime:TDateTime;
+    function DoMakeNumeric:Double;
+
+    function MakeValue:string;
   public
     constructor CreateGenerateDataForm(ATable:TDBTableObject);
-    //function SaveData:boolean;
+    function SaveData:boolean;
   end;
 
 
 procedure ShowGenerateDataForm(ATable:TDBTableObject);
 implementation
-uses Math, rxdbutils, sqlObjects;
+uses Math, rxdbutils, sqlObjects, IBManMainUnit, StrUtils, fbmStrConstUnit;
 
 procedure ShowGenerateDataForm(ATable: TDBTableObject);
 var
@@ -150,7 +167,14 @@ end;
 
 procedure TGenerateDataForm.fldSelAllExecute(Sender: TObject);
 begin
-  //
+  FillValueForField(rxFieldsCHEKED, ((Sender as TComponent).Tag > 0));
+end;
+
+procedure TGenerateDataForm.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  if ModalResult = mrOK then
+    CanClose:=SaveData;
 end;
 
 procedure TGenerateDataForm.ComboBox1Change(Sender: TObject);
@@ -162,7 +186,11 @@ begin
   begin
     D:=ComboBox1.Items.Objects[ComboBox1.ItemIndex];
     if D is TDBDataSetObject then
+    begin
+      if TDBDataSetObject(D).Fields.Count = 0 then
+        TDBDataSetObject(D).RefreshFieldList;
       TDBDataSetObject(D).Fields.SaveToStrings(ComboBox2.Items);
+    end;
   end;
   SaveEditData;
 end;
@@ -224,7 +252,8 @@ end;
 
 procedure TGenerateDataForm.Localize;
 begin
-
+  fldSelAll.Caption:=sSelectAll;
+  fldUnSelAll.Caption:=sUnselectAll;
 end;
 
 procedure TGenerateDataForm.LoadTableInfo;
@@ -412,6 +441,119 @@ begin
   RadioGroup2.Items.EndUpdate;
 end;
 
+procedure TGenerateDataForm.InitWrite;
+begin
+  fbManagerMainForm.tlsSqlScript.Execute;
+end;
+
+procedure TGenerateDataForm.DoneWrite;
+begin
+
+end;
+
+procedure TGenerateDataForm.WriteStartTran;
+begin
+  WriteCommand('begin');
+end;
+
+procedure TGenerateDataForm.WriteCommitTran;
+begin
+  WriteCommand('commit');
+end;
+
+procedure TGenerateDataForm.WriteCommand(S: string);
+begin
+  FBMSqlScripForm.AddLineText(S + ';');
+end;
+
+function TGenerateDataForm.DoMakeString: string;
+var
+  G: TGUID;
+begin
+  Result:='';
+  begin
+    //case rxFieldsDataGenType.AsInteger of
+      //1: //Get from table
+      //2: //Get from list
+    //else
+      //0 - random
+      CreateGUID(G);
+      Result:=GUIDToString(G);
+    //end
+  end;
+end;
+
+function TGenerateDataForm.DoMakeInteger: Integer;
+var
+  T: TDBDataSetObject;
+  DS: TDataSet;
+  F: TField;
+  P: LongInt;
+begin
+  case rxFieldsDataGenType.AsInteger of
+    1:begin
+        //Get from table
+        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
+        DS:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
+        DS.Active:=true;
+        P:=Random(DS.RecordCount);
+        DS.RecNo:=P+1;
+        F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
+        Result:=F.AsInteger;
+      end;
+    //2: //Get from list
+    3:begin
+        //AutoInc
+        rxFields.Edit;
+        rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
+        rxFields.Post;
+        Result:=rxFieldsDataGenAutoIncCurrent.AsInteger;
+      end;
+  else
+    //0 - random
+    Result:=RandomRange(rxFieldsDataGenIntMin.AsInteger, rxFieldsDataGenIntMax.AsInteger);
+  end
+end;
+
+function TGenerateDataForm.DoMakeDate: TDateTime;
+begin
+  Result:=Now;
+end;
+
+function TGenerateDataForm.DoMakeDateTime: TDateTime;
+begin
+  Result:=Now;
+end;
+
+function TGenerateDataForm.DoMakeNumeric: Double;
+begin
+  Result:=0;
+end;
+
+function TGenerateDataForm.MakeValue: string;
+var
+  FT: TFieldType;
+begin
+  Result:='';
+  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
+  if FT in IntegerDataTypes then
+    Result:=IntToStr(DoMakeInteger)
+  else
+  if FT in NumericDataTypes then
+    Result:=FloatToStr(DoMakeNumeric)
+  else
+  if FT = ftDate then
+    Result:=DateToStr(DoMakeDate)
+  else
+  if FT in DataTimeTypes - [ftDate] then
+    Result:=DateTimeToStr( DoMakeDateTime)
+  else
+    Result:=DoMakeString; //StringTypes
+
+  if FT in StringTypes + DataTimeTypes then
+    Result:=QuotedStr(Result);
+end;
+
 constructor TGenerateDataForm.CreateGenerateDataForm(ATable: TDBTableObject);
 begin
   inherited Create(Application);
@@ -419,6 +561,71 @@ begin
   Localize;
   FTable:=ATable;
   LoadTableInfo;
+end;
+
+function TGenerateDataForm.SaveData: boolean;
+var
+  i: Integer;
+  SFields, SValues: String;
+begin
+  Result:=true;
+  SFields:='';
+  if rxFields.State <> dsBrowse then rxFields.Post;
+  rxFields.First;
+  while not rxFields.EOF do
+  begin
+    if rxFieldsCHEKED.AsBoolean then
+    begin
+      if SFields<>'' then SFields:=SFields + ', ';
+      SFields:=SFields + rxFieldsFieldName.AsString;
+    end;
+    rxFields.Edit;
+    rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncStart.AsInteger;
+    rxFields.Post;
+    rxFields.Next;
+  end;
+
+  if SFields <> '' then
+  begin
+    InitWrite;
+    ProgressBar1.Position:=0;
+    ProgressBar1.Max:=SpinEdit1.Value;
+    WriteStartTran;
+    rxFields.DisableControls;
+    rxFields.AfterScroll:=nil;
+    rxFields.BeforeScroll:=nil;
+    rxFields.First;
+
+    for i:=1 to SpinEdit1.Value do
+    begin
+      rxFields.First;
+      SValues:='';
+      while not rxFields.EOF do
+      begin
+        if rxFieldsCHEKED.AsBoolean then
+        begin
+          if SValues<>'' then SValues:=SValues + ', ';
+          SValues:=SValues + MakeValue;
+        end;
+        rxFields.Next;
+      end;
+      WriteCommand('insert into ' +FTable.CaptionFullPatch+ LineEnding + '  (' + SFields +')' + LineEnding + '  values(' + SValues+')');
+
+      if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
+      begin
+        WriteCommitTran;
+        WriteStartTran;
+      end;
+      ProgressBar1.Position:=i;
+    end;
+
+    rxFields.AfterScroll:=@rxFieldsAfterScroll;
+    rxFields.BeforeScroll:=@rxFieldsBeforeScroll;
+    rxFields.EnableControls;
+    WriteCommitTran;
+    DoneWrite;
+    Result:=true;
+  end;
 end;
 
 end.
