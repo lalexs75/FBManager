@@ -138,9 +138,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideBottom.Control = SpinEdit1
       AnchorSideBottom.Side = asrBottom
       Left = 444
-      Height = 17
-      Top = 10
-      Width = 113
+      Height = 15
+      Top = 11
+      Width = 101
       Anchors = [akLeft, akBottom]
       BorderSpacing.Around = 6
       Caption = 'Count row to fetch'
@@ -152,9 +152,9 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
-      Left = 563
-      Height = 34
-      Top = -1
+      Left = 551
+      Height = 31
+      Top = 1
       Width = 90
       BorderSpacing.Left = 6
       MaxValue = 2000000
@@ -167,7 +167,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 659
+      Left = 647
       Height = 31
       Top = 1
       Width = 32
@@ -182,7 +182,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 691
+      Left = 679
       Height = 31
       Top = 1
       Width = 32
@@ -195,10 +195,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 821
-      Height = 17
-      Top = 8
-      Width = 40
+      Left = 827
+      Height = 15
+      Top = 9
+      Width = 34
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -211,7 +211,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Control = Panel1
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
-      Left = 723
+      Left = 711
       Height = 31
       Top = 1
       Width = 32

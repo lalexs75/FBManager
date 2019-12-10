@@ -202,7 +202,6 @@ end;
 
 procedure TfbmTableEditorDataFrame.dataGenerateExecute(Sender: TObject);
 begin
-  //NotImplemented;
   ShowGenerateDataForm(DBObject as TDBTableObject);
 end;
 

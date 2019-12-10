@@ -2579,6 +2579,8 @@ begin
   end;
 end;
 
+var
+  S: String;
 begin
   if not FDataSet.Active then
   begin
@@ -2587,7 +2589,8 @@ begin
     TFBDataSet(FDataSet).SQLSelect.Text:=MakeSQLSelect;
     TFBDataSet(FDataSet).SQLEdit.Text:=MakeSQLEdit;
     TFBDataSet(FDataSet).SQLInsert.Text:=MakeSQLInsert;
-    TFBDataSet(FDataSet).SQLDelete.Text:='delete from '+DoFormatName(Caption) + ' where '+WherePK;
+    S:='delete from '+DoFormatName(Caption) + ' where '+WherePK;
+    TFBDataSet(FDataSet).SQLDelete.Text:=S;
     TFBDataSet(FDataSet).SQLRefresh.Text:='select * from '+DoFormatName(Caption) + ' where '+WherePK;
 
     if OwnerDB.DisplayDataOptions.FetchAllData then

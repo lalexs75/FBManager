@@ -140,6 +140,7 @@ type
     function DoMakeDate:TDateTime;
     function DoMakeDateTime:TDateTime;
     function DoMakeNumeric:Double;
+    function DoMakeBoolean:string;
 
     function MakeValue:string;
   public
@@ -324,6 +325,9 @@ begin
       else
       if TFieldType(rxFieldsFieldTypeInt.AsInteger) in DataTimeTypes then
         G:=GroupBox6
+      else
+      if TFieldType(rxFieldsFieldTypeInt.AsInteger) = ftBoolean then
+        G:=nil
       else
         G:=GroupBox1;
     1:G:=GroupBox2;
@@ -530,6 +534,36 @@ begin
   Result:=0;
 end;
 
+function TGenerateDataForm.DoMakeBoolean: string;
+begin
+(*  case rxFieldsDataGenType.AsInteger of
+    1:begin
+        //Get from table
+        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
+        DS:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
+        DS.Active:=true;
+        P:=Random(DS.RecordCount);
+        DS.RecNo:=P+1;
+        F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
+        Result:=F.AsInteger;
+      end;
+    //2: //Get from list
+    3:begin
+        //AutoInc
+        rxFields.Edit;
+        rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
+        rxFields.Post;
+        Result:=rxFieldsDataGenAutoIncCurrent.AsInteger;
+      end;
+  else    *)
+    //0 - random
+    if Random(2) = 0 then
+      Result:='false'
+    else
+      Result:='true'
+//  end
+end;
+
 function TGenerateDataForm.MakeValue: string;
 var
   FT: TFieldType;
@@ -547,6 +581,9 @@ begin
   else
   if FT in DataTimeTypes - [ftDate] then
     Result:=DateTimeToStr( DoMakeDateTime)
+  else
+  if FT = ftBoolean then
+    Result:=DoMakeBoolean
   else
     Result:=DoMakeString; //StringTypes
 
