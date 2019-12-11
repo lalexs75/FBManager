@@ -1142,7 +1142,7 @@ type
 
   { TPGSQLCommit }
 
-  TPGSQLCommit = class(TSQLCommandAbstract)
+  TPGSQLCommit = class(TSQLCommit)
   private
     FCommitType: TAbortType;
     FTransactionId: string;
