@@ -184,6 +184,45 @@ type
     property SchemaName;
   end;
 
+  { TSQLite3BeginTransaction }
+
+  TSQLite3BeginTransaction = class(TSQLStartTransaction)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract); override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TSQLite3Commit }
+
+  TSQLite3Commit = class(TSQLCommit)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TSQLite3Rollback }
+
+  TSQLite3Rollback = class(TSQLRollback)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    //procedure Assign(ASource:TSQLObjectAbstract); override;
+    //
+    //property RollbackType:TAbortType read FRollbackType write FRollbackType;
+    //property TransactionId:string read FTransactionId write FTransactionId;
+    //property SavepointName:string read FSavepointName write FSavepointName;
+  end;
 implementation
 
 uses SQLEngineInternalToolsUnit;
@@ -484,6 +523,79 @@ begin
       TC_COLL1.AddChildToken(TC_PK1);
     end;
   end;
+end;
+
+{ TSQLite3Rollback }
+
+procedure TSQLite3Rollback.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TSQLite3Rollback.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TSQLite3Rollback.MakeSQL;
+var
+  S: String;
+begin
+  S:='ROLLBACK TRANSACTION';
+  AddSQLCommand(S);
+end;
+
+{ TSQLite3Commit }
+
+procedure TSQLite3Commit.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TSQLite3Commit.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TSQLite3Commit.MakeSQL;
+var
+  S: String;
+begin
+  S:='COMMIT TRANSACTION';
+  AddSQLCommand(S);
+end;
+
+{ TSQLite3BeginTransaction }
+
+procedure TSQLite3BeginTransaction.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TSQLite3BeginTransaction.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TSQLite3BeginTransaction.MakeSQL;
+var
+  S: String;
+begin
+  S:='BEGIN TRANSACTION';
+  AddSQLCommand(S);
+end;
+
+constructor TSQLite3BeginTransaction.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TSQLite3BeginTransaction.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
 end;
 
 { TSQLite3SQLDropTable }
