@@ -2014,5 +2014,10 @@ initialization
   //Index
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLCreateIndex, 'CREATE INDEX');
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLDropIndex, 'DROP INDEX');
+
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3BeginTransaction, 'BEGIN TRANSACTION');
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3Commit, 'COMMIT');
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3Rollback, 'ROLLBACK');
+
 end.
 
