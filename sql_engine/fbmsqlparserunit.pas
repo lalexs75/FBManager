@@ -55,6 +55,7 @@ type
   TSQLTokenList = class;
   TSQLTokenListEnumerator = class;
   TSQLCommandSelectCTEListEnumerator = class;
+  TSQLStatmentRecordEnumerator = class;
   TSQLCommentOn = class;
   TSQLCommentOnClass = class of TSQLCommentOn;
   TSQLCreateTable = class;
@@ -502,6 +503,19 @@ type
     property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
   end;
 
+  TSQLCommit = class(TSQLCommandDDL)
+  private
+  protected
+  public
+  end;
+
+
+  TSQLRollback = class(TSQLCommandDDL)
+  private
+  protected
+  public
+  end;
+
   { TSQLCommandSelectCTE }
 
   TSQLCommandSelectCTE = class
@@ -786,6 +800,7 @@ function SQLParseCommand(const Sql:string; SQLParserClass:TSQLCommandAbstractCla
 function SQLStatamentAtXY(const ALines:TStrings; X, Y:Integer):string;
 
 procedure RegisterSQLStatment(ASQLEngineClass:TClass; ACmd:TSQLCommandAbstractClass; ASignature:string);
+function FindSQLStatment(ASQLEngineClass:TClass; ACmd:TSQLCommandAbstractClass):TSQLCommandAbstractClass;
 
 type
 
@@ -809,7 +824,21 @@ type
     function GetItems(AIndex: integer): TSQLStatmentRecord;
   public
     destructor Destroy; override;
-    property Items[AIndex:integer]:TSQLStatmentRecord read GetItems;
+    function GetEnumerator: TSQLStatmentRecordEnumerator;
+    property Items[AIndex:integer]:TSQLStatmentRecord read GetItems; default;
+  end;
+
+  { TSQLStatmentRecordEnumerator }
+
+  TSQLStatmentRecordEnumerator = class
+  private
+    FList: TSQLStatmentRecords;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TSQLStatmentRecords);
+    function GetCurrent: TSQLStatmentRecord;
+    function MoveNext: Boolean;
+    property Current: TSQLStatmentRecord read GetCurrent;
   end;
 
 var
@@ -926,6 +955,37 @@ begin
   Item.Signature:=ReplaceStr(ASignature, ' ',  '_');
   Item.SQLEngineClass:=ASQLEngineClass;
   Item.FItem:=ACmd.Create(nil);
+end;
+
+function FindSQLStatment(ASQLEngineClass: TClass; ACmd: TSQLCommandAbstractClass
+  ): TSQLCommandAbstractClass;
+var
+  P: TSQLStatmentRecord;
+begin
+  Result:=nil;
+  for P in SQLStatmentRecordArray do
+    if P.SQLEngineClass = ASQLEngineClass then
+      if P.FItem is ACmd then
+        Result:=P.Cmd;
+end;
+
+{ TSQLStatmentRecordEnumerator }
+
+constructor TSQLStatmentRecordEnumerator.Create(AList: TSQLStatmentRecords);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TSQLStatmentRecordEnumerator.GetCurrent: TSQLStatmentRecord;
+begin
+  Result := FList[FPosition];
+end;
+
+function TSQLStatmentRecordEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
 end;
 
 { TSQLCommandSelectCTEListEnumerator }
@@ -1788,6 +1848,11 @@ begin
   for i:=0 to Count - 1 do
     TSQLStatmentRecord(Get(i)).Free;
   inherited Destroy;
+end;
+
+function TSQLStatmentRecords.GetEnumerator: TSQLStatmentRecordEnumerator;
+begin
+  Result:=TSQLStatmentRecordEnumerator.Create(Self);
 end;
 
 { TSQLCommandDML }
