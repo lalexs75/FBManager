@@ -27,7 +27,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
   StdCtrls, Spin, ActnList, Menus, DBCtrls, ComCtrls, DB, rxmemds, rxdbgrid,
-  rxtooledit, RxTimeEdit, SQLEngineAbstractUnit, fbmsqlscript;
+  rxtooledit, RxTimeEdit, SQLEngineAbstractUnit, fbmsqlscript, fbmSqlParserUnit,
+  sqlObjects;
 
 type
 
@@ -35,12 +36,23 @@ type
 
   TGenerateRecord = class
   private
+    FGenType:Integer;
+    FFieldType:TFieldType;
     FValuesList:TStringList;
+    FInsParam: TSQLParserField;
+    //int params
     FIntMax:Integer;
     FIntMin:Integer;
+    //str params
+    FUseGUID:Boolean;
+    FStrMinLen:Integer;
+    FStrMaxLen:Integer;
 
     FAutoIncCur:Integer;
     FAutoIncStep:Integer;
+
+    FLookUpData:TDataSet;
+    FLookUpField:TField;
   public
     constructor Create;
     destructor Destroy; override;
@@ -150,6 +162,12 @@ type
     FGenList:TFPList;
     FTable: TDBTableObject;
     FLockCount:Integer;
+
+    FCmdIns: TSQLCommandInsert;
+    FCmdStartTran:TSQLStartTransaction;
+    FCmdCommit:TSQLCommit;
+
+    FCurRec:TGenerateRecord;
     procedure LockSave;
     procedure UnLockSave;
     procedure Localize;
@@ -180,8 +198,7 @@ type
 
 procedure ShowGenerateDataForm(ATable:TDBTableObject);
 implementation
-uses Math, rxdbutils, sqlObjects, IBManMainUnit, StrUtils, fbmStrConstUnit,
-  fbmSqlParserUnit;
+uses Math, rxdbutils, IBManMainUnit, StrUtils, fbmStrConstUnit;
 
 procedure ShowGenerateDataForm(ATable: TDBTableObject);
 var
@@ -223,6 +240,13 @@ begin
   for i:=0 to FGenList.Count-1 do
     TGenerateRecord(FGenList[i]).Free;
   FGenList.Free;
+
+  if Assigned(FCmdIns) then
+  begin
+    FCmdIns.Free;
+    FCmdStartTran.Free;
+    FCmdCommit.Free;
+  end;
 end;
 
 procedure TGenerateDataForm.FormCloseQuery(Sender: TObject;
@@ -342,6 +366,15 @@ begin
     rxFieldsDataGenAutoIncStart.AsInteger:=0;
     rxFieldsDataGenAutoIncStep.AsInteger:=1;
 
+    if F.FieldTypeDB = ftString then
+    begin
+      rxFieldsDataGenStrMinLen.AsInteger:=1;
+      if Assigned(F.FieldDomain) then
+        rxFieldsDataGenStrMaxLen.AsInteger:=F.FieldDomain.FieldLength
+      else
+       rxFieldsDataGenStrMaxLen.AsInteger:=F.FieldSize;
+    end;
+
     rxFields.Post;
   end;
 
@@ -438,6 +471,8 @@ begin
   if GroupBox5.Visible then
   begin
     CheckBox1.Checked:=rxFieldsDataGenAsGUID.AsBoolean;
+    SpinEdit8.Value:=rxFieldsDataGenStrMinLen.AsInteger;
+    SpinEdit9.Value:=rxFieldsDataGenStrMaxLen.AsInteger;
   end
   else
   if GroupBox6.Visible then
@@ -496,6 +531,8 @@ begin
   if GroupBox5.Visible then
   begin
     rxFieldsDataGenAsGUID.AsBoolean := CheckBox1.Checked;
+    rxFieldsDataGenStrMinLen.AsInteger:=SpinEdit8.Value;
+    rxFieldsDataGenStrMaxLen.AsInteger:=SpinEdit9.Value;
   end
   else
   if GroupBox6.Visible then
@@ -541,36 +578,80 @@ end;
 function TGenerateDataForm.InitWrite: Boolean;
 var
   P: TGenerateRecord;
+  T: TDBDataSetObject;
+  S: String;
 begin
+  if rxFields.State <> dsBrowse then rxFields.Post;
+
+  rxFields.DisableControls;
+  rxFields.AfterScroll:=nil;
+  rxFields.BeforeScroll:=nil;
   rxFields.First;
+
   while not rxFields.EOF do
   begin
     if rxFieldsCHEKED.AsBoolean then
     begin
+      FCmdIns.Fields.AddParam(rxFieldsFieldName.AsString);
+
       P:=TGenerateRecord.Create;
+      P.FGenType:=rxFieldsDataGenType.AsInteger;
+      P.FFieldType:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
+      S:=rxFieldsDataGenSimpleList.AsString;
+      P.FValuesList.Text:=S;
+      //int params
+      P.FIntMax:=rxFieldsDataGenIntMax.AsInteger;
+      P.FIntMin:=rxFieldsDataGenIntMin.AsInteger;
+      P.FAutoIncCur:=rxFieldsDataGenAutoIncStart.AsInteger;
+      P.FAutoIncStep:=rxFieldsDataGenAutoIncStep.AsInteger;
+
+      //Str params
+      P.FUseGUID:=rxFieldsDataGenAsGUID.AsBoolean;
+      P.FStrMaxLen:=rxFieldsDataGenStrMaxLen.AsInteger;
+      P.FStrMinLen:=rxFieldsDataGenStrMinLen.AsInteger;
+
+      P.FInsParam:=FCmdIns.Params.AddParam('');
+
+      if P.FGenType = 1 then
+      begin
+        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
+        P.FLookUpData:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
+        P.FLookUpData.Active:=true;
+        P.FLookUpField:=P.FLookUpData.FieldByName(rxFieldsDataGenExtFieldName.AsString);
+      end;
       FGenList.Add(P);
     end;
     rxFields.Next;
   end;
   Result:=FGenList.Count > 0;
+  if not Result then Exit;
 
-  if Result then
-    fbManagerMainForm.tlsSqlScript.Execute;
+  FCmdIns.TableName:=FTable.Caption;
+  FCmdIns.SchemaName:=FTable.SchemaName;
+
+  if RadioGroup1.ItemIndex = 0 then
+    fbManagerMainForm.tlsSqlScript.Execute
+  else
+  begin
+
+  end;
 end;
 
 procedure TGenerateDataForm.DoneWrite;
 begin
-
+  rxFields.AfterScroll:=@rxFieldsAfterScroll;
+  rxFields.BeforeScroll:=@rxFieldsBeforeScroll;
+  rxFields.EnableControls;
 end;
 
 procedure TGenerateDataForm.WriteStartTran;
 begin
-  WriteCommand('begin');
+  WriteCommand(FCmdStartTran.AsSQL);
 end;
 
 procedure TGenerateDataForm.WriteCommitTran;
 begin
-  WriteCommand('commit');
+  WriteCommand(FCmdCommit.AsSQL);
 end;
 
 procedure TGenerateDataForm.WriteCommand(S: string);
@@ -581,60 +662,68 @@ end;
 function TGenerateDataForm.DoMakeString: string;
 var
   G: TGUID;
+  FL, i: Integer;
+  P: LongInt;
 begin
   Result:='';
-  begin
-    //case rxFieldsDataGenType.AsInteger of
-      //1: //Get from table
-      //2: //Get from list
-    //else
-      //0 - random
+  case FCurRec.FGenType of
+    1:begin
+       //Get from table
+        P:=Random(FCurRec.FLookUpData.RecordCount);
+        FCurRec.FLookUpData.RecNo:=P+1;
+        Result:=FCurRec.FLookUpField.AsString;
+      end;
+    2:begin
+        //Get from list
+        if FCurRec.FValuesList.Count > 0 then
+          Result:=FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)]
+        else
+          Result:='';
+      end
+  else
+    //0 - random
+    if FCurRec.FUseGUID then
+    begin
       CreateGUID(G);
       Result:=GUIDToString(G);
-    //end
+    end
+    else
+    begin
+      FL:=RandomRange(FCurRec.FStrMinLen, FCurRec.FStrMaxLen);
+      Result:='';
+      for i:=1 to Fl do
+        Result:=Result + Chr(RandomRange(32, 127));
+    end;
   end;
 end;
 
 function TGenerateDataForm.DoMakeInteger: Integer;
 var
-  T: TDBDataSetObject;
-  DS: TDataSet;
-  F: TField;
   P: LongInt;
   A1, A2:Int64;
-  St: TStringList;
 begin
-  case rxFieldsDataGenType.AsInteger of
+  case FCurRec.FGenType of
     1:begin
         //Get from table
-        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
-        DS:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
-        DS.Active:=true;
-        P:=Random(DS.RecordCount);
-        DS.RecNo:=P+1;
-        F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
-        Result:=F.AsInteger;
+        P:=Random(FCurRec.FLookUpData.RecordCount);
+        FCurRec.FLookUpData.RecNo:=P+1;
+        Result:=FCurRec.FLookUpField.AsInteger;
       end;
     2:begin
-        St:=TStringList.Create;
-        St.Text:=rxFieldsDataGenSimpleList.AsString;
-        if St.Count > 0 then
-          Result:=StrToIntDef(St[Random(St.Count)], 0)
+        if FCurRec.FValuesList.Count > 0 then
+          Result:=StrToIntDef(FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)], 0)
         else
           Result:=0;
-        St.Free;
       end;
     3:begin
         //AutoInc
-        rxFields.Edit;
-        rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
-        rxFields.Post;
-        Result:=rxFieldsDataGenAutoIncCurrent.AsInteger;
+        FCurRec.FAutoIncCur:=FCurRec.FAutoIncCur + FCurRec.FAutoIncStep;
+        Result:=FCurRec.FAutoIncCur;
       end;
   else
     //0 - random
-    A1:=rxFieldsDataGenIntMin.AsInteger;
-    A2:=rxFieldsDataGenIntMax.AsInteger;
+    A1:=FCurRec.FIntMin;
+    A2:=FCurRec.FIntMax;
     Result:=RandomRange(A1, A2);
   end
 end;
@@ -655,59 +744,52 @@ begin
 end;
 
 function TGenerateDataForm.DoMakeBoolean: string;
+var
+  P: LongInt;
 begin
-(*  case rxFieldsDataGenType.AsInteger of
+  case FCurRec.FGenType of
     1:begin
         //Get from table
-        T:=FTable.OwnerDB.DBObjectByName(rxFieldsDataGenExtTableName.AsString, false) as TDBDataSetObject;
-        DS:=T.DataSet(rxFieldsDataGenExtRecordCount.AsInteger);
-        DS.Active:=true;
-        P:=Random(DS.RecordCount);
-        DS.RecNo:=P+1;
-        F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
-        Result:=F.AsInteger;
+        P:=Random(FCurRec.FLookUpData.RecordCount);
+        FCurRec.FLookUpData.RecNo:=P+1;
+        Result:=FCurRec.FLookUpField.AsString;
       end;
-    //2: //Get from list
-    3:begin
-        //AutoInc
-        rxFields.Edit;
-        rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncCurrent.AsInteger + rxFieldsDataGenAutoIncStep.AsInteger;
-        rxFields.Post;
-        Result:=rxFieldsDataGenAutoIncCurrent.AsInteger;
+    2:begin
+        if FCurRec.FValuesList.Count > 0 then
+          Result:=FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)]
+        else
+          Result:='null';
       end;
-  else    *)
+  else
     //0 - random
     if Random(2) = 0 then
       Result:='false'
     else
       Result:='true'
-//  end
+  end;
 end;
 
 function TGenerateDataForm.MakeValue: string;
-var
-  FT: TFieldType;
 begin
   Result:='';
-  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
-  if FT in IntegerDataTypes then
+  if FCurRec.FFieldType in IntegerDataTypes then
     Result:=IntToStr(DoMakeInteger)
   else
-  if FT in NumericDataTypes then
+  if FCurRec.FFieldType in NumericDataTypes then
     Result:=FloatToStr(DoMakeNumeric)
   else
-  if FT = ftDate then
+  if FCurRec.FFieldType = ftDate then
     Result:=DateToStr(DoMakeDate)
   else
-  if FT in DataTimeTypes - [ftDate] then
+  if FCurRec.FFieldType in DataTimeTypes - [ftDate] then
     Result:=DateTimeToStr( DoMakeDateTime)
   else
-  if FT = ftBoolean then
+  if FCurRec.FFieldType = ftBoolean then
     Result:=DoMakeBoolean
   else
     Result:=DoMakeString; //StringTypes
 
-  if FT in StringTypes + DataTimeTypes then
+  if FCurRec.FFieldType in StringTypes + DataTimeTypes then
     Result:=QuotedStr(Result);
 end;
 
@@ -717,79 +799,48 @@ begin
   FLockCount:=0;
   Localize;
   FTable:=ATable;
+
+  FCmdIns:=FindSQLStatment(FTable.OwnerDB.ClassType, TSQLCommandInsert).Create(nil) as TSQLCommandInsert;
+  FCmdStartTran:=FindSQLStatment(FTable.OwnerDB.ClassType, TSQLStartTransaction).Create(nil) as TSQLStartTransaction;
+  FCmdCommit:=FindSQLStatment(FTable.OwnerDB.ClassType, TSQLCommit).Create(nil) as TSQLCommit;
+
   LoadTableInfo;
 end;
 
 function TGenerateDataForm.SaveData: boolean;
 var
   i, J: Integer;
-  FCmdIns: TSQLCommandInsert;
-  P: TSQLParserField;
 begin
-  FCmdIns:=TSQLCommandInsert.Create(nil);
-  FCmdIns.TableName:=FTable.Caption;
-  FCmdIns.SchemaName:=FTable.SchemaName;
+  Result:=InitWrite;
+  if not Result then Exit;
+
+  ProgressBar1.Position:=0;
+  ProgressBar1.Max:=SpinEdit1.Value;
+
+  WriteStartTran;
+
+
+  for i:=1 to SpinEdit1.Value do
+  begin
+    for j:=0 to FGenList.Count-1 do
+    begin
+      FCurRec:=TGenerateRecord(FGenList[j]);
+      FCurRec.FInsParam.Caption:=MakeValue;
+    end;
+    WriteCommand(FCmdIns.AsSQL);
+    FCmdIns.SQLText.Clear;
+
+    if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
+    begin
+      WriteCommitTran;
+      WriteStartTran;
+    end;
+    ProgressBar1.Position:=i;
+  end;
+
+  WriteCommitTran;
+  DoneWrite;
   Result:=true;
-  if rxFields.State <> dsBrowse then rxFields.Post;
-  rxFields.First;
-  while not rxFields.EOF do
-  begin
-    if rxFieldsCHEKED.AsBoolean then
-    begin
-      FCmdIns.Fields.AddParam(rxFieldsFieldName.AsString);
-      FCmdIns.Params.AddParam('');
-    end;
-    rxFields.Edit;
-    rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncStart.AsInteger;
-    rxFields.Post;
-    rxFields.Next;
-  end;
-
-  if SFields <> '' then
-  begin
-
-    InitWrite;
-    ProgressBar1.Position:=0;
-    ProgressBar1.Max:=SpinEdit1.Value;
-    WriteStartTran;
-    rxFields.DisableControls;
-    rxFields.AfterScroll:=nil;
-    rxFields.BeforeScroll:=nil;
-    rxFields.First;
-
-    for i:=1 to SpinEdit1.Value do
-    begin
-      rxFields.First;
-      J:=0;
-      while not rxFields.EOF do
-      begin
-        if rxFieldsCHEKED.AsBoolean then
-        begin
-          P:=FCmdIns.Params[j];
-          P.Caption:=MakeValue;
-          Inc(J);
-        end;
-        rxFields.Next;
-      end;
-      WriteCommand(FCmdIns.AsSQL);
-      FCmdIns.SQLText.Clear;
-
-      if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
-      begin
-        WriteCommitTran;
-        WriteStartTran;
-      end;
-      ProgressBar1.Position:=i;
-    end;
-
-    rxFields.AfterScroll:=@rxFieldsAfterScroll;
-    rxFields.BeforeScroll:=@rxFieldsBeforeScroll;
-    rxFields.EnableControls;
-    WriteCommitTran;
-    DoneWrite;
-    Result:=true;
-  end;
-  FCmdIns.Free;
 end;
 
 end.
