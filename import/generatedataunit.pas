@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
   StdCtrls, Spin, ActnList, Menus, DBCtrls, ComCtrls, DB, rxmemds, rxdbgrid,
-  rxtooledit, SQLEngineAbstractUnit, fbmsqlscript;
+  rxtooledit, RxTimeEdit, SQLEngineAbstractUnit, fbmsqlscript;
 
 type
 
@@ -46,12 +46,16 @@ type
     ActionList1: TActionList;
     ButtonPanel1: TButtonPanel;
     dsFields: TDataSource;
+    FloatSpinEdit1: TFloatSpinEdit;
+    FloatSpinEdit2: TFloatSpinEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
     Label1: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -59,6 +63,10 @@ type
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -89,6 +97,8 @@ type
     rxFieldsDataGenExtFieldName: TStringField;
     rxFieldsDataGenExtRecordCount: TLongintField;
     rxFieldsDataGenExtTableName: TStringField;
+    rxFieldsDataGenFloatMax: TFloatField;
+    rxFieldsDataGenFloatMin: TFloatField;
     rxFieldsDataGenIntMax: TLongintField;
     rxFieldsDataGenIntMin: TLongintField;
     rxFieldsDataGenSimpleList: TMemoField;
@@ -100,6 +110,8 @@ type
     rxFieldsFieldName: TStringField;
     rxFieldsFieldType: TStringField;
     rxFieldsFieldTypeInt: TLongintField;
+    RxTimeEdit1: TRxTimeEdit;
+    RxTimeEdit2: TRxTimeEdit;
     SpinEdit1: TSpinEdit;
     SpinEdit2: TSpinEdit;
     SpinEdit3: TSpinEdit;
@@ -151,7 +163,8 @@ type
 
 procedure ShowGenerateDataForm(ATable:TDBTableObject);
 implementation
-uses Math, rxdbutils, sqlObjects, IBManMainUnit, StrUtils, fbmStrConstUnit;
+uses Math, rxdbutils, sqlObjects, IBManMainUnit, StrUtils, fbmStrConstUnit,
+  fbmSqlParserUnit;
 
 procedure ShowGenerateDataForm(ATable: TDBTableObject);
 var
@@ -279,12 +292,16 @@ begin
 
     rxFieldsDataGenIntMin.AsInteger:=-MaxInt-1;
     rxFieldsDataGenIntMax.AsInteger:=MaxInt;
+//                                      -2147483648
+    rxFieldsDataGenFloatMin.AsFloat:=-MaxDouble-1;
+    rxFieldsDataGenFloatMax.AsFloat:=MaxDouble;
 
     rxFieldsDataGenDateMin.AsDateTime:=IncMonth(Date, -1);
-    rxFieldsDataGenDateMax.AsDateTime:=IncMonth(Date, 1);
+    rxFieldsDataGenDateMax.AsDateTime:=IncMonth(Date, 1) + 1 - 1 / SecsPerDay;
 
     rxFieldsDataGenAutoIncStart.AsInteger:=0;
     rxFieldsDataGenAutoIncStep.AsInteger:=1;
+
     rxFields.Post;
   end;
 
@@ -316,20 +333,30 @@ end;
 
 var
   G: TGroupBox;
+  FT: TFieldType;
 begin
   LockSave;
   RadioGroup2.ItemIndex:=rxFieldsDataGenType.AsInteger;
+  FT:=TFieldType(rxFieldsFieldTypeInt.AsInteger);
   case rxFieldsDataGenType.AsInteger of
     0:if TFieldType(rxFieldsFieldTypeInt.AsInteger) in StringTypes then
         G:=GroupBox5
       else
-      if TFieldType(rxFieldsFieldTypeInt.AsInteger) in DataTimeTypes then
+      if TFieldType(rxFieldsFieldTypeInt.AsInteger) in [ftDateTime, ftTimeStamp, ftDate] then
         G:=GroupBox6
       else
-      if TFieldType(rxFieldsFieldTypeInt.AsInteger) = ftBoolean then
-        G:=nil
+      if TFieldType(rxFieldsFieldTypeInt.AsInteger) = ftTime then
+        G:=GroupBox7
       else
-        G:=GroupBox1;
+      if TFieldType(rxFieldsFieldTypeInt.AsInteger) in IntegerDataTypes then
+        G:=GroupBox1
+      else
+      if TFieldType(rxFieldsFieldTypeInt.AsInteger) in NumericDataTypes - IntegerDataTypes then
+        G:=GroupBox8
+      else
+      //if TFieldType(rxFieldsFieldTypeInt.AsInteger) = ftBoolean then
+        G:=nil;
+
     1:G:=GroupBox2;
     2:G:=GroupBox3;
     3:G:=GroupBox4;
@@ -342,6 +369,8 @@ begin
   DoUpdate(GroupBox4, G);
   DoUpdate(GroupBox5, G);
   DoUpdate(GroupBox6, G);
+  DoUpdate(GroupBox7, G);
+  DoUpdate(GroupBox8, G);
 
   if GroupBox1.Visible then
   begin
@@ -376,6 +405,18 @@ begin
     RxDateEdit1.Date:=rxFieldsDataGenDateMin.AsDateTime;
     RxDateEdit2.Date:=rxFieldsDataGenDateMax.AsDateTime;
     CheckBox2.Checked:=rxFieldsDataGenDateIncludeTime.AsBoolean;
+  end
+  else
+  if GroupBox7.Visible then
+  begin
+    RxTimeEdit1.Time:=rxFieldsDataGenDateMin.AsDateTime;
+    RxTimeEdit2.Time:=rxFieldsDataGenDateMax.AsDateTime;
+  end
+  else
+  if GroupBox8.Visible then
+  begin
+    FloatSpinEdit1.Value:=rxFieldsDataGenFloatMin.AsFloat;
+    FloatSpinEdit2.Value:=rxFieldsDataGenFloatMax.AsFloat;
   end;
   UnLockSave;
 end;
@@ -422,6 +463,18 @@ begin
     rxFieldsDataGenDateMin.AsDateTime        := RxDateEdit1.Date;
     rxFieldsDataGenDateMax.AsDateTime        := RxDateEdit2.Date;
     rxFieldsDataGenDateIncludeTime.AsBoolean := CheckBox2.Checked;
+  end
+  else
+  if GroupBox7.Visible then
+  begin
+    rxFieldsDataGenDateMin.AsDateTime        := RxTimeEdit1.Time;
+    rxFieldsDataGenDateMax.AsDateTime        := RxTimeEdit2.Time;
+  end
+  else
+  if GroupBox8.Visible then
+  begin
+    rxFieldsDataGenFloatMin.AsFloat        := FloatSpinEdit1.Value;
+    rxFieldsDataGenFloatMax.AsFloat        := FloatSpinEdit2.Value;
   end;
 end;
 
@@ -467,7 +520,7 @@ end;
 
 procedure TGenerateDataForm.WriteCommand(S: string);
 begin
-  FBMSqlScripForm.AddLineText(S + ';');
+  FBMSqlScripForm.AddLineText(S);
 end;
 
 function TGenerateDataForm.DoMakeString: string;
@@ -493,6 +546,8 @@ var
   DS: TDataSet;
   F: TField;
   P: LongInt;
+  A1, A2:Int64;
+  St: TStringList;
 begin
   case rxFieldsDataGenType.AsInteger of
     1:begin
@@ -505,7 +560,15 @@ begin
         F:=DS.FieldByName(rxFieldsDataGenExtFieldName.AsString);
         Result:=F.AsInteger;
       end;
-    //2: //Get from list
+    2:begin
+        St:=TStringList.Create;
+        St.Text:=rxFieldsDataGenSimpleList.AsString;
+        if St.Count > 0 then
+          Result:=StrToIntDef(St[Random(St.Count)], 0)
+        else
+          Result:=0;
+        St.Free;
+      end;
     3:begin
         //AutoInc
         rxFields.Edit;
@@ -515,7 +578,9 @@ begin
       end;
   else
     //0 - random
-    Result:=RandomRange(rxFieldsDataGenIntMin.AsInteger, rxFieldsDataGenIntMax.AsInteger);
+    A1:=rxFieldsDataGenIntMin.AsInteger;
+    A2:=rxFieldsDataGenIntMax.AsInteger;
+    Result:=RandomRange(A1, A2);
   end
 end;
 
@@ -602,19 +667,22 @@ end;
 
 function TGenerateDataForm.SaveData: boolean;
 var
-  i: Integer;
-  SFields, SValues: String;
+  i, J: Integer;
+  FCmdIns: TSQLCommandInsert;
+  P: TSQLParserField;
 begin
+  FCmdIns:=TSQLCommandInsert.Create(nil);
+  FCmdIns.TableName:=FTable.Caption;
+  FCmdIns.SchemaName:=FTable.SchemaName;
   Result:=true;
-  SFields:='';
   if rxFields.State <> dsBrowse then rxFields.Post;
   rxFields.First;
   while not rxFields.EOF do
   begin
     if rxFieldsCHEKED.AsBoolean then
     begin
-      if SFields<>'' then SFields:=SFields + ', ';
-      SFields:=SFields + rxFieldsFieldName.AsString;
+      FCmdIns.Fields.AddParam(rxFieldsFieldName.AsString);
+      FCmdIns.Params.AddParam('');
     end;
     rxFields.Edit;
     rxFieldsDataGenAutoIncCurrent.AsInteger:=rxFieldsDataGenAutoIncStart.AsInteger;
@@ -624,6 +692,7 @@ begin
 
   if SFields <> '' then
   begin
+
     InitWrite;
     ProgressBar1.Position:=0;
     ProgressBar1.Max:=SpinEdit1.Value;
@@ -636,17 +705,19 @@ begin
     for i:=1 to SpinEdit1.Value do
     begin
       rxFields.First;
-      SValues:='';
+      J:=0;
       while not rxFields.EOF do
       begin
         if rxFieldsCHEKED.AsBoolean then
         begin
-          if SValues<>'' then SValues:=SValues + ', ';
-          SValues:=SValues + MakeValue;
+          P:=FCmdIns.Params[j];
+          P.Caption:=MakeValue;
+          Inc(J);
         end;
         rxFields.Next;
       end;
-      WriteCommand('insert into ' +FTable.CaptionFullPatch+ LineEnding + '  (' + SFields +')' + LineEnding + '  values(' + SValues+')');
+      WriteCommand(FCmdIns.AsSQL);
+      FCmdIns.SQLText.Clear;
 
       if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
       begin
@@ -663,6 +734,7 @@ begin
     DoneWrite;
     Result:=true;
   end;
+  FCmdIns.Free;
 end;
 
 end.

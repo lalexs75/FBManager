@@ -3712,7 +3712,8 @@ end;
 procedure TSQLCommandInsert.MakeSQL;
 var
   i: Integer;
-  Result: String;
+  Result, S: String;
+  P: TSQLParserField;
 begin
   Result:='INSERT INTO ';
   if SchemaName <> '' then
@@ -3733,7 +3734,13 @@ begin
   else
   if InsertType = sitValues then
   begin
-    Result:=Result + ' VALUES (' + Params.AsString + ')';
+    S:='';
+    for P in Params do
+    begin
+      if S<>'' then S:=S + ', ';
+      S:=S + P.Caption;
+    end;
+    Result:=Result + ' VALUES (' + {Params.AsString} S + ')';
 
 (*    {  | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
     [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]
