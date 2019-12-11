@@ -31,6 +31,21 @@ uses
 
 type
 
+  { TGenerateRecord }
+
+  TGenerateRecord = class
+  private
+    FValuesList:TStringList;
+    FIntMax:Integer;
+    FIntMin:Integer;
+
+    FAutoIncCur:Integer;
+    FAutoIncStep:Integer;
+  public
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
   { TGenerateDataForm }
 
   TGenerateDataForm = class(TForm)
@@ -125,12 +140,14 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure fldSelAllExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure RadioGroup2Change(Sender: TObject);
     procedure rxFieldsAfterScroll(DataSet: TDataSet);
     procedure rxFieldsBeforeScroll(DataSet: TDataSet);
   private
+    FGenList:TFPList;
     FTable: TDBTableObject;
     FLockCount:Integer;
     procedure LockSave;
@@ -141,7 +158,7 @@ type
     procedure SaveEditData;
     procedure UpdateRadioGroup2;
     ///
-    procedure InitWrite;
+    function InitWrite:Boolean;
     procedure DoneWrite;
     procedure WriteStartTran;
     procedure WriteCommitTran;
@@ -177,11 +194,35 @@ end;
 
 {$R *.lfm}
 
+{ TGenerateRecord }
+
+constructor TGenerateRecord.Create;
+begin
+  inherited Create;
+  FValuesList:=TStringList.Create;
+end;
+
+destructor TGenerateRecord.Destroy;
+begin
+  FreeAndNil(FValuesList);
+  inherited Destroy;
+end;
+
 { TGenerateDataForm }
 
 procedure TGenerateDataForm.fldSelAllExecute(Sender: TObject);
 begin
   FillValueForField(rxFieldsCHEKED, ((Sender as TComponent).Tag > 0));
+end;
+
+procedure TGenerateDataForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+var
+  i: Integer;
+begin
+  for i:=0 to FGenList.Count-1 do
+    TGenerateRecord(FGenList[i]).Free;
+  FGenList.Free;
 end;
 
 procedure TGenerateDataForm.FormCloseQuery(Sender: TObject;
@@ -229,8 +270,7 @@ end;
 
 procedure TGenerateDataForm.FormCreate(Sender: TObject);
 begin
-  SpinEdit3.Value:=-MaxInt-1;
-  SpinEdit4.Value:=MaxInt;
+  FGenList:=TFPList.Create;
 end;
 
 procedure TGenerateDataForm.RadioGroup2Change(Sender: TObject);
@@ -498,9 +538,24 @@ begin
   RadioGroup2.Items.EndUpdate;
 end;
 
-procedure TGenerateDataForm.InitWrite;
+function TGenerateDataForm.InitWrite: Boolean;
+var
+  P: TGenerateRecord;
 begin
-  fbManagerMainForm.tlsSqlScript.Execute;
+  rxFields.First;
+  while not rxFields.EOF do
+  begin
+    if rxFieldsCHEKED.AsBoolean then
+    begin
+      P:=TGenerateRecord.Create;
+      FGenList.Add(P);
+    end;
+    rxFields.Next;
+  end;
+  Result:=FGenList.Count > 0;
+
+  if Result then
+    fbManagerMainForm.tlsSqlScript.Execute;
 end;
 
 procedure TGenerateDataForm.DoneWrite;

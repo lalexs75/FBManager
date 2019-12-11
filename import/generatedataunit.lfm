@@ -6,6 +6,7 @@ object GenerateDataForm: TGenerateDataForm
   Caption = 'GenerateDataForm'
   ClientHeight = 626
   ClientWidth = 858
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   Position = poScreenCenter
