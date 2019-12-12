@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, DividerBevel, Forms, Controls, Graphics,
   fdmAbstractEditorUnit, PostgreSQLEngineUnit, pg_tasks, Dialogs, StdCtrls,
-  ValEdit, Grids, SQLEngineAbstractUnit;
+  SQLEngineAbstractUnit, fbmSqlParserUnit;
 
 type
 
@@ -57,10 +57,9 @@ type
     function PageName:string;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
-{    procedure SaveState(const SectionName:string; const Ini:TIniFile);override;
-    procedure RestoreState(const SectionName:string; const Ini:TIniFile);override;}
     procedure Localize;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
 implementation
@@ -87,7 +86,7 @@ begin
 
   ComboBox1.Items.Assign(TPGTasksRoot(DBObject.OwnerRoot).JobClassList);
   for i:=0 to ComboBox1.Items.Count-1 do
-    if PtrInt(ComboBox1.Items.Objects[i]) = TPGTask(DBObject).ClassID then
+    if PtrInt(ComboBox1.Items.Objects[i]) = TPGTask(DBObject).TaskClassID then
     begin
       ComboBox1.ItemIndex:=i;
       break;
@@ -132,6 +131,16 @@ constructor TpgTaskMainPage.CreatePage(TheOwner: TComponent;
 begin
   inherited CreatePage(TheOwner, ADBObject);
   LoadTaskData;
+end;
+
+function TpgTaskMainPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
+var
+  FCmd:TPGTaskSQLCmd;
+begin
+  Result:=true;
+  FCmd:=TPGTaskSQLCmd(ASQLObject);
+  FCmd.Name:=Edit1.Text;
+  FCmd.TaskClass:=ComboBox1.Text;
 end;
 
 end.

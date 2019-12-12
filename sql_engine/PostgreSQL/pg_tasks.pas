@@ -26,10 +26,11 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, PostgreSQLEngineUnit, ZDataset, sqlObjects,
-  contnrs, SQLEngineInternalToolsUnit;
+  contnrs, SQLEngineInternalToolsUnit, fbmSqlParserUnit;
 
 type
   TPGTask = class;
+  TPGTaskStepEnumerator = class;
 
   { TPGTasksRoot }
 
@@ -50,19 +51,58 @@ type
 
   TPGTaskStep = class
   private
+    FDescription: string;
     FPGTask: TPGTask;
-  public
     FID:integer;
     FName:string;
     FBody:string;
-    FDesc:string;
     FConnectStr:string; //user=postgres host=192.168.123.4 port=5432 dbname=base_test_analiz
     FDBName:string;
     FEnabled:boolean;
+  public
     constructor Create(APGTask:TPGTask);
     procedure Assign(From:TPGTaskStep);
     function IsEqual(From:TPGTaskStep): Boolean;
     function MakeSQL:string;
+    property Name:string read FName write FName;
+    property Description:string read FDescription write FDescription;
+    property Enabled:boolean read FEnabled write FEnabled;
+    property Body:string read FBody write FBody;
+    property DBName:string read FDBName write FDBName;
+    property ConnectStr:string read FConnectStr write FConnectStr;
+    property ID:integer read FID write FID;
+  end;
+
+  { TPGTaskSteps }
+
+  TPGTaskSteps = class
+  private
+    FOwner: TPGTask;
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItem(AIndex: integer): TPGTaskStep;
+  public
+    constructor Create(AOwner:TPGTask);
+    destructor Destroy;override;
+    procedure Assign(ATaskSteps:TPGTaskSteps);
+    function GetEnumerator: TPGTaskStepEnumerator;
+    function Add:TPGTaskStep;
+    procedure Clear;
+    property Item[AIndex:integer]:TPGTaskStep read GetItem; default;
+    property Count:integer read GetCount;
+  end;
+
+  { TPGTaskStepEnumerator }
+
+  TPGTaskStepEnumerator = class
+  private
+    FList: TPGTaskSteps;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGTaskSteps);
+    function GetCurrent: TPGTaskStep;
+    function MoveNext: Boolean;
+    property Current: TPGTaskStep read GetCurrent;
   end;
 
   { TPGTaskShedule }
@@ -104,16 +144,20 @@ type
     FDateRunNext: TDateTime;
     FEnabled: boolean;
     FTaskID: integer;
-    FSteps:TObjectList;
+    FSteps:TPGTaskSteps;
     FShedule:TObjectList;
-    FClassID:integer;
+    FTaskClassID:integer;
+    function GetTaskClassName: string;
   protected
-//    function InternalGetDDLCreate: string; override;
+    function InternalGetDDLCreate: string; override;
     procedure SetDescription(const AValue: string); override;
+    procedure InternalPrepareDropCmd(R: TSQLDropCommandAbstract); override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
+
+    function CreateSQLObject:TSQLCommandDDL; override;
 
     function CompileTaskShedule(TS:TPGTaskShedule):boolean;
     function DeleteTaskShedule(TS:TPGTaskShedule):boolean;
@@ -123,8 +167,9 @@ type
 
     class function DBClassTitle:string;override;
     property TaskID:integer read FTaskID;
-    property Steps:TObjectList read FSteps;
-    property ClassID:integer read FClassID;
+    property Steps:TPGTaskSteps read FSteps;
+    property TaskClassID:integer read FTaskClassID;
+    property TaskClassName:string read GetTaskClassName;
     property Shedule:TObjectList read FShedule;
     property Enabled:boolean read FEnabled;
     property DateCreate:TDateTime read FDateCreate;
@@ -133,8 +178,185 @@ type
     property DateRunNext:TDateTime read FDateRunNext;
   end;
 
+  { TPGTaskSQLCmd }
+
+  TPGTaskSQLCmd = class(TSQLCommandDDL)
+  private
+    FTaskClass: string;
+    FTaskSteps:TPGTaskSteps;
+  protected
+    procedure MakeSQL; override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract); override;
+    destructor Destroy;override;
+    procedure Clear;override;
+    procedure Assign(ASource:TSQLObjectAbstract);override;
+    property TaskSteps:TPGTaskSteps read FTaskSteps;
+    property TaskClass:string read FTaskClass write FTaskClass;
+  end;
+
+  { TPGSQLDropTask }
+
+  TPGSQLDropTask = class(TSQLDropCommandAbstract)
+  private
+    FJobID: Integer;
+  protected
+    procedure MakeSQL;override;
+  public
+    property JobID:Integer read FJobID write FJobID;
+  end;
+
 implementation
-uses SQLEngineCommonTypesUnit, pg_sql_lines_unit, pgSqlTextUnit;
+uses SQLEngineCommonTypesUnit, pg_sql_lines_unit, pgSqlTextUnit, StrUtils;
+
+{ TPGSQLDropTask }
+
+procedure TPGSQLDropTask.MakeSQL;
+begin
+  AddSQLCommand(Format('delete from pgagent.pga_job where pga_job.jobid = %d', [FJobID]));
+end;
+
+{ TPGTaskStepEnumerator }
+
+constructor TPGTaskStepEnumerator.Create(AList: TPGTaskSteps);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGTaskStepEnumerator.GetCurrent: TPGTaskStep;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGTaskStepEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGTaskSteps }
+
+function TPGTaskSteps.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGTaskSteps.GetItem(AIndex: integer): TPGTaskStep;
+begin
+  Result:=TPGTaskStep(FList[AIndex]);
+end;
+
+constructor TPGTaskSteps.Create(AOwner: TPGTask);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGTaskSteps.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TPGTaskSteps.Assign(ATaskSteps: TPGTaskSteps);
+var
+  T: TPGTaskStep;
+begin
+  Clear;
+  if not Assigned(ATaskSteps) then Exit;
+  for T in ATaskSteps do
+    Add.Assign(T);
+end;
+
+function TPGTaskSteps.GetEnumerator: TPGTaskStepEnumerator;
+begin
+  Result:=TPGTaskStepEnumerator.Create(Self);
+end;
+
+function TPGTaskSteps.Add: TPGTaskStep;
+begin
+  Result:=TPGTaskStep.Create(FOwner);
+end;
+
+procedure TPGTaskSteps.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TPGTaskStep(FList[i]).Free;
+  FList.Clear;
+end;
+
+{ TPGTaskSQLCmd }
+
+procedure TPGTaskSQLCmd.MakeSQL;
+var
+  S, S1: String;
+  T: TPGTaskStep;
+begin
+  S:='do'+LineEnding+'$tasks$'+LineEnding +
+  'declare'+LineEnding +
+  '  f_JobId integer;'+LineEnding +
+  'begin'+LineEnding +
+  '  INSERT INTO pgagent.pga_job (jobjclid, jobname, jobdesc, jobenabled, jobhostagent)'+LineEnding +
+  '  SELECT'+LineEnding +
+  '    pga_jobclass.jclid,'+LineEnding +
+  '    '''+name+''','+LineEnding +
+  '    '''+Description+''','+LineEnding +
+  '    true,'+LineEnding +
+  '    '''''+LineEnding +
+  '  FROM'+LineEnding +
+  '    pgagent.pga_jobclass'+LineEnding +
+  '    WHERE pga_jobclass.jclname='''+TaskClass+''''+LineEnding +
+  '  RETURNING'+LineEnding +
+  '    jobid'+LineEnding +
+  '  into'+LineEnding +
+  '    f_JobId;'+LineEnding;
+
+  for T in FTaskSteps do
+  begin
+    S1:='INSERT INTO pgagent.pga_jobstep' + LineEnding +
+        '  (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
+        'values ' + LineEnding +
+        '  (f_JobId, '''+T.Name+''', ''' + AnsiQuotedStr(T.Description, '''') + ''', '+ BoolToStr(T.Enabled, true)+', ''s'', ''f'', '''+AnsiQuotedStr(T.Body, '''')+''', '''+T.DBName+''', '');' +LineEnding;
+  end;
+
+  S:=S +
+  '  raise EXCEPTION ''f_JobId = %'', f_JobId;'+LineEnding +
+  'end;'+LineEnding +
+  '$tasks$';
+  AddSQLCommand(S);
+end;
+
+constructor TPGTaskSQLCmd.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FTaskSteps:=TPGTaskSteps.Create(nil);
+end;
+
+destructor TPGTaskSQLCmd.Destroy;
+begin
+  FreeAndNil(FTaskSteps);
+  inherited Destroy;
+end;
+
+procedure TPGTaskSQLCmd.Clear;
+begin
+  FTaskSteps.Clear;
+  inherited Clear;
+end;
+
+procedure TPGTaskSQLCmd.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TPGTaskSQLCmd then
+  begin
+    FTaskSteps.Assign(TPGTaskSQLCmd(ASource).TaskSteps);
+  end;
+  inherited Assign(ASource);
+end;
 
 { TPGTaskShedule }
 
@@ -278,7 +500,7 @@ begin
   FID:=From.FID;
   FName:=From.FName;
   FBody:=From.FBody;
-  FDesc:=From.FDesc;
+  FDescription:=From.FDescription;
   FDBName:=From.FDBName;
   FConnectStr:=From.FConnectStr;
   FEnabled:=From.FEnabled;
@@ -290,7 +512,7 @@ begin
     (FID = From.FID) and
     (FName = From.FName) and
     (FBody = From.FBody) and
-    (FDesc = From.FDesc) and
+    (FDescription = From.FDescription) and
     (FDBName = From.FDBName) and
     (FConnectStr = From.FConnectStr) and
     (FEnabled = From.FEnabled);
@@ -311,7 +533,7 @@ begin
       '  jstdbname='''+FDBName+''', '+
       '  jstenabled = '+BoolToStr(FEnabled, 'true', 'false') + ', '+
 //      '  jstkind='s',
-      '  jstdesc=''' + FDesc + ''' '+
+      '  jstdesc=''' + FDescription + ''' '+
       'WHERE '+
       '  jstid='+IntToStr(FID)
   else
@@ -331,7 +553,7 @@ begin
         '(NEXTVAL(''pgagent.pga_schedule_jscid_seq''), ' +//!!
         IntToStr(FPGTask.FTaskID) + ', '+
         '''' +FName + ''', '+
-        '''' + FDesc + ''', '+
+        '''' + FDescription + ''', '+
         BoolToStr(FEnabled, 'true', 'false') + ', '+
         '''s'', '+
         '''f'', ' + //jstonerror,
@@ -342,6 +564,33 @@ end;
 
 { TPGTask }
 
+function TPGTask.GetTaskClassName: string;
+var
+  i: Integer;
+begin
+  Result:='';
+  for i:=0 to TPGTasksRoot(OwnerRoot).JobClassList.Count-1 do
+    if PtrInt(TPGTasksRoot(OwnerRoot).JobClassList.Objects[i]) = TaskClassID then
+    begin
+      Result:=TPGTasksRoot(OwnerRoot).JobClassList[i];
+      //ComboBox1.ItemIndex:=i;
+      break;
+    end;
+end;
+
+function TPGTask.InternalGetDDLCreate: string;
+var
+  FCmd: TPGTaskSQLCmd;
+begin
+  FCmd:=TPGTaskSQLCmd.Create(nil);
+  FCmd.Name:=Caption;
+  FCmd.Description:=Description;
+  FCmd.TaskClass:=TaskClassName;
+  FCmd.TaskSteps.Assign(FSteps);
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
+end;
+
 procedure TPGTask.SetDescription(const AValue: string);
 begin
   if FDescription <> AValue then
@@ -351,12 +600,18 @@ begin
   end;
 end;
 
+procedure TPGTask.InternalPrepareDropCmd(R: TSQLDropCommandAbstract);
+begin
+  inherited InternalPrepareDropCmd(R);
+  (R as TPGSQLDropTask).FJobID:=TaskID;
+end;
+
 
 constructor TPGTask.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   { TODO : Необходимо реализовать отображение в дереве запрещённых задач }
   inherited Create(ADBItem, AOwnerRoot);
-  FSteps:=TObjectList.Create(true);
+  FSteps:=TPGTaskSteps.Create(Self);
   FShedule:=TObjectList.Create(true);
 end;
 
@@ -385,7 +640,7 @@ begin
     begin
       Caption:=Q.FieldByName('jobname').AsString;
       FDescription:=Q.FieldByName('jobdesc').AsString;
-      FClassID:=Q.FieldByName('jobjclid').AsInteger;
+      FTaskClassID:=Q.FieldByName('jobjclid').AsInteger;
       FEnabled:=Q.FieldByName('jobenabled').AsBoolean;
 
       FDateCreate:=Q.FieldByName('jobcreated').AsDateTime;
@@ -416,11 +671,10 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      U:=TPGTaskStep.Create(Self);
-      FSteps.Add(U);
+      U:=FSteps.Add;
       U.FID:=Q.FieldByName('jstid').AsInteger;
       U.FName:=Q.FieldByName('jstname').AsString;
-      U.FDesc:=Q.FieldByName('jstdesc').AsString;
+      U.FDescription:=Q.FieldByName('jstdesc').AsString;
       U.FBody:=Q.FieldByName('jstcode').AsString;
       U.FConnectStr:=Q.FieldByName('jstconnstr').AsString;
       U.FDBName:=Q.FieldByName('jstdbname').AsString;
@@ -460,6 +714,13 @@ begin
   finally
     Q.Free;
   end;
+end;
+
+function TPGTask.CreateSQLObject: TSQLCommandDDL;
+begin
+  //if State = sdboCreate then
+  //else;
+  Result:=TPGTaskSQLCmd.Create(nil);
 end;
 
 function TPGTask.CompileTaskShedule(TS: TPGTaskShedule): boolean;
@@ -511,27 +772,12 @@ end;
 
 
 { TPGTasksRoot }
-(*
-function TPGTasksRoot.GetCountGrp: integer;
-begin
-  Result:=0;
-end;
 
-function TPGTasksRoot.GetImageIndex: integer;
-begin
-  Result:=61;
-end;
-*)
 function TPGTasksRoot.GetObjectType: string;
 begin
  Result:='Tasks';
 end;
-(*
-function TPGTasksRoot.GetGrpObj(AItem: integer): TDBRootObject;
-begin
-  Result:=nil;
-end;
-*)
+
 procedure TPGTasksRoot.RefreshGroup;
 var
   Q:TZQuery;
@@ -573,6 +819,7 @@ constructor TPGTasksRoot.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
   FDBObjectKind:=okTasks;
+  FDropCommandClass:=TPGSQLDropTask;
   FJobClassList:=TStringList.Create;
 end;
 

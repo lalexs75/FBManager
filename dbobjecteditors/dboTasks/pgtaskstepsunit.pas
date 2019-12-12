@@ -89,14 +89,14 @@ begin
       SaveCurrent;
 
     U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
-    Edit1.Text:=U.FName;
-    EditorFrame.EditorText:=U.FBody;
-    Memo1.Text:=U.FDesc;
-    RadioButton1.Checked:=U.FConnectStr = '';
-    RadioButton2.Checked:=U.FConnectStr <> '';
-    ComboBox1.Text:=U.FDBName;
-    EditButton1.Text:=U.FConnectStr;
-    CheckBox1.Checked:=U.FEnabled;
+    Edit1.Text:=U.Name;
+    EditorFrame.EditorText:=U.Body;
+    Memo1.Text:=U.Description;
+    RadioButton1.Checked:=U.ConnectStr = '';
+    RadioButton2.Checked:=U.ConnectStr <> '';
+    ComboBox1.Text:=U.DBName;
+    EditButton1.Text:=U.ConnectStr;
+    CheckBox1.Checked:=U.Enabled;
     FModified:=false;
     FCurStep:=U;
   end;
@@ -133,7 +133,7 @@ begin
   begin
     U:=TPGTaskStep.Create(TPGTask(DBObject));
     U.Assign(TPGTaskStep(TPGTask(DBObject).Steps[i]));
-    ListBox1.Items.Add(U.FName);
+    ListBox1.Items.Add(U.Name);
     ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
   end;
 
@@ -198,13 +198,13 @@ begin
   try
     U:=TPGTaskStep.Create(TPGTask(DBObject));
     U.Assign(FCurStep);
-    U.FID:=FCurStep.FID;
-    U.FName := Edit1.Text;
-    U.FBody := EditorFrame.EditorText;
-    U.FDesc := Memo1.Text;
-    U.FDBName := ComboBox1.Text;
-    U.FConnectStr := EditButton1.Text;
-    U.FEnabled := CheckBox1.Checked;
+    U.ID:=FCurStep.ID;
+    U.Name := Edit1.Text;
+    U.Body := EditorFrame.EditorText;
+    U.Description := Memo1.Text;
+    U.DBName := ComboBox1.Text;
+    U.ConnectStr := EditButton1.Text;
+    U.Enabled := CheckBox1.Checked;
     if not FCurStep.IsEqual(U) then
       Result:=TPGTask(DBObject).CompileTaskStep(U);
   finally
@@ -219,7 +219,7 @@ begin
   ListBox1.Items.Add(sStep+' '+IntToStr(ListBox1.Items.Count+1));
   U:=TPGTaskStep.Create(TPGTask(DBObject));
   ListBox1.Items.Objects[ListBox1.Count-1]:=U;
-  U.FName:=ListBox1.Items[ListBox1.Count-1];
+  U.Name:=ListBox1.Items[ListBox1.Count-1];
   ListBox1.ItemIndex:=ListBox1.Count-1;
   ListBox1Click(nil);
 end;

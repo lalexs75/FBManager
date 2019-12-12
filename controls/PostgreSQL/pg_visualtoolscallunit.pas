@@ -252,8 +252,7 @@ begin
 
   RegisterObjEditor(TPGTask,
     [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame],
-    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame]
-    );
+    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGExtension,
       [TpgExtensionEditor, TfbmObjectEditorDescriptionFrame],

@@ -9,9 +9,9 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 16
     Top = 6
-    Width = 78
+    Width = 71
     BorderSpacing.Around = 6
     Caption = 'Group name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = Edit1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 60
+    Height = 16
+    Top = 60
+    Width = 55
     BorderSpacing.Around = 6
     Caption = 'Object ID'
     ParentColor = False
@@ -35,8 +35,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 32
+    Height = 26
+    Top = 28
     Width = 567
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -49,8 +49,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 6
-    Height = 201
-    Top = 144
+    Height = 184
+    Top = 114
     Width = 573
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
@@ -65,8 +65,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 180
-    ClientWidth = 571
+    ClientHeight = 166
+    ClientWidth = 569
     Items.Strings = (
       'Login enabled'
       'Inherited right from owner roles'
@@ -88,9 +88,9 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = Edit1
     AnchorSideTop.Side = asrBottom
     Left = 126
-    Height = 20
-    Top = 75
-    Width = 63
+    Height = 16
+    Top = 60
+    Width = 56
     BorderSpacing.Around = 6
     Caption = 'Valid until'
     ParentColor = False
@@ -100,8 +100,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 132
-    Height = 37
-    Top = 101
+    Height = 26
+    Top = 82
     Width = 136
     BorderSpacing.Left = 6
     BorderSpacing.Top = 6
@@ -117,8 +117,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 101
+    Height = 26
+    Top = 82
     Width = 108
     BorderSpacing.Around = 6
     TabOrder = 3
@@ -128,10 +128,10 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrCenter
-    Left = 195
-    Height = 24
-    Top = 73
-    Width = 111
+    Left = 188
+    Height = 22
+    Top = 57
+    Width = 100
     Caption = 'Never expirid'
     OnChange = CheckBox1Change
     TabOrder = 4
@@ -141,9 +141,9 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = CheckGroup1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 351
-    Width = 111
+    Height = 16
+    Top = 304
+    Width = 103
     BorderSpacing.Around = 6
     Caption = 'Max. connections'
     ParentColor = False
@@ -153,8 +153,8 @@ inherited fbmGroupEditFrameEditor: TfbmGroupEditFrameEditor
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 377
+    Height = 26
+    Top = 326
     Width = 135
     BorderSpacing.Around = 6
     MaxValue = 65536
