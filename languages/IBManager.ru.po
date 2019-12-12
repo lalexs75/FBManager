@@ -2720,8 +2720,6 @@ msgid "Inserted rows : %d"
 msgstr "Вставлено строк : %d"
 
 #: fbmstrconstunit.sinsertintotable
-#, fuzzy
-msgctxt "fbmstrconstunit.sinsertintotable"
 msgid "Insert into table"
 msgstr "Вставка в таблицу"
 

@@ -107,10 +107,11 @@ object GenerateDataForm: TGenerateDataForm
     AutoSort = True
     Columns = <    
       item
+        SizePriority = 0
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = '...'
-        Width = 35
+        Width = 40
         FieldName = 'CHEKED'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -126,7 +127,7 @@ object GenerateDataForm: TGenerateDataForm
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'FieldName'
-        Width = 150
+        Width = 302
         FieldName = 'FieldName'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -142,7 +143,7 @@ object GenerateDataForm: TGenerateDataForm
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'FieldType'
-        Width = 200
+        Width = 302
         FieldName = 'FieldType'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -214,6 +215,7 @@ object GenerateDataForm: TGenerateDataForm
     SearchOptions.FromStart = False
     OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
     Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoFillColumns = True
     Color = clWindow
     DrawFullLine = False
     FocusColor = clRed

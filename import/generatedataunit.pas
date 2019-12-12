@@ -348,6 +348,11 @@ begin
   fldUnSelAll.Caption:=sUnselectAll;
 
   Caption:=sTestDataGenerator;
+  RadioGroup2.Items[0]:=sGenerateRandomly;
+  RadioGroup2.Items[1]:=sGetFromAnotherTable;
+  RadioGroup2.Items[2]:=sGetFromList;
+  RadioGroup2.Items[3]:=sAutoincremet;
+
   RadioGroup1.Caption:=sGenerateType;
   RadioGroup1.Items[0]:=sGenerateSQLScript;
   RadioGroup1.Items[1]:=sInsertIntoTable;
