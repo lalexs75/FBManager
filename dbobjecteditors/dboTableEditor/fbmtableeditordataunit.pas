@@ -202,7 +202,8 @@ end;
 
 procedure TfbmTableEditorDataFrame.dataGenerateExecute(Sender: TObject);
 begin
-  ShowGenerateDataForm(DBObject as TDBTableObject);
+  if ShowGenerateDataForm(DBObject as TDBTableObject) then
+    DataSource1.DataSet.Refresh;
 end;
 
 procedure TfbmTableEditorDataFrame.DataGridColumnSized(Sender: TObject);

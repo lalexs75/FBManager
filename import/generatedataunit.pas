@@ -43,13 +43,19 @@ type
     //int params
     FIntMax:Integer;
     FIntMin:Integer;
+    FAutoIncCur:Integer;
+    FAutoIncStep:Integer;
     //str params
     FUseGUID:Boolean;
     FStrMinLen:Integer;
     FStrMaxLen:Integer;
-
-    FAutoIncCur:Integer;
-    FAutoIncStep:Integer;
+    //float params
+    FFloatMin:Double;
+    FFloatMax:Double;
+    //DateTiem params;
+    FDateTimeMin:TDateTime;
+    FDateTimeMax:TDateTime;
+    FDateTimeIncludeTime:Boolean;
 
     FLookUpData:TDataSet;
     FLookUpField:TField;
@@ -63,6 +69,7 @@ type
   TGenerateDataForm = class(TForm)
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     ComboBox3: TComboBox;
@@ -94,7 +101,6 @@ type
     Label17: TLabel;
     Label18: TLabel;
     Label19: TLabel;
-    Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -149,6 +155,7 @@ type
     SpinEdit8: TSpinEdit;
     SpinEdit9: TSpinEdit;
     procedure CheckBox1Change(Sender: TObject);
+    procedure CheckBox3Change(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
     procedure fldSelAllExecute(Sender: TObject);
@@ -185,7 +192,6 @@ type
     function DoMakeString:string;
     function DoMakeInteger:Integer;
     function DoMakeDate:TDateTime;
-    function DoMakeDateTime:TDateTime;
     function DoMakeNumeric:Double;
     function DoMakeBoolean:string;
 
@@ -196,16 +202,18 @@ type
   end;
 
 
-procedure ShowGenerateDataForm(ATable:TDBTableObject);
+function ShowGenerateDataForm(ATable:TDBTableObject):Boolean;
 implementation
-uses Math, rxdbutils, IBManMainUnit, StrUtils, fbmStrConstUnit;
+uses Math, rxdbutils, IBManMainUnit, StrUtils, fbmStrConstUnit, fbmToolsNV;
 
-procedure ShowGenerateDataForm(ATable: TDBTableObject);
+function ShowGenerateDataForm(ATable: TDBTableObject): Boolean;
 var
   GenerateDataForm: TGenerateDataForm;
 begin
+  Result:=false;
   GenerateDataForm:=TGenerateDataForm.CreateGenerateDataForm(ATable);
-  GenerateDataForm.ShowModal;
+  if GenerateDataForm.ShowModal = mrOk then
+    Result:=GenerateDataForm.RadioGroup1.ItemIndex = 1;
   GenerateDataForm.Free;
 end;
 
@@ -292,9 +300,15 @@ begin
   ComboBox4.Enabled:=Label10.Enabled;
 end;
 
+procedure TGenerateDataForm.CheckBox3Change(Sender: TObject);
+begin
+  SpinEdit2.Enabled:=CheckBox3.Checked;
+end;
+
 procedure TGenerateDataForm.FormCreate(Sender: TObject);
 begin
   FGenList:=TFPList.Create;
+  CheckBox3Change(nil);
 end;
 
 procedure TGenerateDataForm.RadioGroup2Change(Sender: TObject);
@@ -362,6 +376,7 @@ begin
 
     rxFieldsDataGenDateMin.AsDateTime:=IncMonth(Date, -1);
     rxFieldsDataGenDateMax.AsDateTime:=IncMonth(Date, 1) + 1 - 1 / SecsPerDay;
+    rxFieldsDataGenDateIncludeTime.AsBoolean:=F.FieldTypeDB in [ftDateTime, ftTimeStamp];
 
     rxFieldsDataGenAutoIncStart.AsInteger:=0;
     rxFieldsDataGenAutoIncStep.AsInteger:=1;
@@ -374,6 +389,8 @@ begin
       else
        rxFieldsDataGenStrMaxLen.AsInteger:=F.FieldSize;
     end;
+
+    rxFieldsDataGenExtRecordCount.AsInteger:=1000;
 
     rxFields.Post;
   end;
@@ -479,6 +496,7 @@ begin
   begin
     RxDateEdit1.Date:=rxFieldsDataGenDateMin.AsDateTime;
     RxDateEdit2.Date:=rxFieldsDataGenDateMax.AsDateTime;
+    CheckBox2.Enabled:=TFieldType(rxFieldsFieldTypeInt.AsInteger) in [ftDateTime, ftTimeStamp];
     CheckBox2.Checked:=rxFieldsDataGenDateIncludeTime.AsBoolean;
   end
   else
@@ -610,6 +628,15 @@ begin
       P.FStrMaxLen:=rxFieldsDataGenStrMaxLen.AsInteger;
       P.FStrMinLen:=rxFieldsDataGenStrMinLen.AsInteger;
 
+      //float params
+      P.FFloatMin:=rxFieldsDataGenFloatMin.AsFloat;
+      P.FFloatMax:=rxFieldsDataGenFloatMax.AsFloat;
+
+      //DateTime params
+      P.FDateTimeMin:=rxFieldsDataGenDateMin.AsDateTime;
+      P.FDateTimeMax:=rxFieldsDataGenDateMax.AsDateTime;
+      P.FDateTimeIncludeTime:=rxFieldsDataGenDateIncludeTime.AsBoolean;
+
       P.FInsParam:=FCmdIns.Params.AddParam('');
 
       if P.FGenType = 1 then
@@ -656,7 +683,10 @@ end;
 
 procedure TGenerateDataForm.WriteCommand(S: string);
 begin
-  FBMSqlScripForm.AddLineText(S);
+  if RadioGroup1.ItemIndex = 0 then
+    FBMSqlScripForm.AddLineText(S)
+  else
+    FTable.OwnerDB.ExecSQL(S, []);
 end;
 
 function TGenerateDataForm.DoMakeString: string;
@@ -729,18 +759,59 @@ begin
 end;
 
 function TGenerateDataForm.DoMakeDate: TDateTime;
+var
+  P: LongInt;
 begin
-  Result:=Now;
-end;
-
-function TGenerateDataForm.DoMakeDateTime: TDateTime;
-begin
-  Result:=Now;
+  case FCurRec.FGenType of
+    1:begin
+        //Get from table
+        P:=Random(FCurRec.FLookUpData.RecordCount);
+        FCurRec.FLookUpData.RecNo:=P+1;
+        Result:=FCurRec.FLookUpField.AsDateTime;
+      end;
+    2:begin
+        Result:=0;
+        if FCurRec.FValuesList.Count > 0 then
+        begin
+          if FCurRec.FFieldType = ftTime then
+            Result:=StrToTimeDef(FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)], Now)
+          else
+            Result:=StrToDateDef(FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)], Now);
+        end;
+      end;
+  else
+    //0 - random
+    Result:=FCurRec.FDateTimeMin + (FCurRec.FDateTimeMax - FCurRec.FDateTimeMin) * Random;
+    if (FCurRec.FFieldType = ftDate) or ((FCurRec.FFieldType in [ftDateTime, ftTimeStamp]) and not FCurRec.FDateTimeIncludeTime) then
+      Result:=Round(Result);
+  end;
 end;
 
 function TGenerateDataForm.DoMakeNumeric: Double;
+var
+  P: LongInt;
 begin
-  Result:=0;
+  case FCurRec.FGenType of
+    1:begin
+        //Get from table
+        P:=Random(FCurRec.FLookUpData.RecordCount);
+        FCurRec.FLookUpData.RecNo:=P+1;
+        Result:=FCurRec.FLookUpField.AsFloat;
+      end;
+    2:begin
+        Result:=0;
+        if FCurRec.FValuesList.Count > 0 then
+          Result:=StrToFloatExDef(FCurRec.FValuesList[Random(FCurRec.FValuesList.Count)], 0);
+      end;
+(*    3:begin
+        //AutoInc
+        FCurRec.FAutoIncCur:=FCurRec.FAutoIncCur + FCurRec.FAutoIncStep;
+        Result:=FCurRec.FAutoIncCur;
+      end; *)
+  else
+    //0 - random
+    Result:=FCurRec.FFloatMin + (FCurRec.FFloatMax - FCurRec.FFloatMin) * Random;
+  end
 end;
 
 function TGenerateDataForm.DoMakeBoolean: string;
@@ -776,13 +847,16 @@ begin
     Result:=IntToStr(DoMakeInteger)
   else
   if FCurRec.FFieldType in NumericDataTypes then
-    Result:=FloatToStr(DoMakeNumeric)
+    Result:=FloatToStrEx(DoMakeNumeric)
   else
   if FCurRec.FFieldType = ftDate then
     Result:=DateToStr(DoMakeDate)
   else
-  if FCurRec.FFieldType in DataTimeTypes - [ftDate] then
-    Result:=DateTimeToStr( DoMakeDateTime)
+  if FCurRec.FFieldType = ftTime then
+    Result:=TimeToStr(DoMakeDate)
+  else
+  if FCurRec.FFieldType in [ftDateTime, ftTimeStamp] then
+    Result:=DateTimeToStr( DoMakeDate)
   else
   if FCurRec.FFieldType = ftBoolean then
     Result:=DoMakeBoolean
@@ -817,7 +891,8 @@ begin
   ProgressBar1.Position:=0;
   ProgressBar1.Max:=SpinEdit1.Value;
 
-  WriteStartTran;
+  if CheckBox3.Checked then
+    WriteStartTran;
 
 
   for i:=1 to SpinEdit1.Value do
@@ -830,15 +905,18 @@ begin
     WriteCommand(FCmdIns.AsSQL);
     FCmdIns.SQLText.Clear;
 
-    if (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
+    if CheckBox3.Checked and (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
     begin
       WriteCommitTran;
       WriteStartTran;
     end;
+
     ProgressBar1.Position:=i;
   end;
 
-  WriteCommitTran;
+  if CheckBox3.Checked then
+    WriteCommitTran;
+
   DoneWrite;
   Result:=true;
 end;
