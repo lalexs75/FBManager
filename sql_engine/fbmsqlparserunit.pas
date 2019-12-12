@@ -521,6 +521,22 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
+  { TSQLSavepoint }
+
+  TSQLSavepoint = class(TSQLCommandDDL)
+  private
+  protected
+  public
+  end;
+
+  { TSQLRelaseSavepoint }
+
+  TSQLRelaseSavepoint = class(TSQLCommandDDL)
+  private
+  protected
+  public
+  end;
+
   { TSQLCommandSelectCTE }
 
   TSQLCommandSelectCTE = class

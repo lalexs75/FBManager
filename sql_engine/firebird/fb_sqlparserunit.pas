@@ -732,6 +732,27 @@ type
     property IgnoreLimbo:boolean read FIgnoreLimbo write FIgnoreLimbo;
   end;
 
+  { TFBSQLCommit }
+
+  TFBSQLCommit = class(TSQLCommit)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
+  { TFBSQLRollback }
+
+  TFBSQLRollback = class(TSQLRollback)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
 
   { TFBSQLGrant }
 
@@ -1293,6 +1314,54 @@ begin
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
   end;
+end;
+
+{ TFBSQLRollback }
+
+procedure TFBSQLRollback.InitParserTree;
+var
+  FSQLTokens, T1, T2, T2_1: TSQLTokenRecord;
+begin
+  //ROLLBACK [WORK] [TRANSACTION tr_name ]
+  //[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ROLLBACK', [toFirstToken, toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'WORK', [toOptional], 1);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional]);
+    T2_1:=AddSQLTokens(stIdentificator, T2, '', [toOptional], 2);
+end;
+
+procedure TFBSQLRollback.MakeSQL;
+var
+  S: String;
+begin
+  //ROLLBACK [WORK] [TRANSACTION tr_name ]
+  //[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];
+  S:='ROLLBACK';
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLRollback.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+{ TFBSQLCommit }
+
+procedure TFBSQLCommit.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TFBSQLCommit.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TFBSQLCommit.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
 
 { TFBSQLAlterDatabase }

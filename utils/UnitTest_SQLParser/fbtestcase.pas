@@ -296,6 +296,7 @@ type
   { TFBTestSQLData }
 
   TFBTestSQLData = class(TDataModule)
+    sTransaction: TRxTextHolder;
     sException: TRxTextHolder;
     sComment: TRxTextHolder;
     sDataBase: TRxTextHolder;

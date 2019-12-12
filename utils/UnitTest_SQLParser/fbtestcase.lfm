@@ -1,8 +1,8 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
-  Height = 857
-  HorizontalOffset = 402
-  VerticalOffset = 103
+  Height = 850
+  HorizontalOffset = 277
+  VerticalOffset = 1
   Width = 1113
   object sView: TRxTextHolder
     Highlighter = rxSynNone
@@ -1707,5 +1707,41 @@ object FBTestSQLData: TFBTestSQLData
       end>
     Left = 41
     Top = 539
+  end
+  object sTransaction: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'Строка 1'
+        Lines.Strings = (
+          'ROLLBACK TO SAVEPOINT sp_name RELEASE;'
+          ''
+          'ROLLBACK WORK TO SAVEPOINT sp_name;'
+          ''
+          'ROLLBACK RETAIN SNAPSHOT;'
+          'ROLLBACK TRANSACTION tr_name;'
+          'ROLLBACK WORK;'
+          '--ROLLBACK;'
+          ''
+          'ROLLBACK [WORK] [TRANSACTION tr_name ]'
+          '[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];'
+          ''
+          'SAVEPOINT sp_name'
+          ''
+          'RELEASE SAVEPOINT sp_name [ONLY]'
+          ''
+          'COMMIT;'
+          ''
+          'COMMIT WORK;'
+          'COMMIT TRANSACTION tr_name;'
+          'COMMIT RETAIN;'
+          'COMMIT RETAIN SNAPSHOT;'
+          ''
+          'COMMIT [WORK] [TRANSACTION tr_name ]'
+          '[RELEASE] [RETAIN [SNAPSHOT]];'
+        )
+      end>
+    Left = 32
+    Top = 611
   end
 end

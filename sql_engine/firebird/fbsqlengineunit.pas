@@ -4625,6 +4625,9 @@ FILTER
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRevoke, 'REVOKE');                         //REVOKE
   //SET TRANSACTION
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLSetTransaction, 'SET TRANSACTION');        //SET TRANSACTION
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCommit, 'COMMIT');
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRollback, '');
+
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLExecuteProcedure, 'EXECUTE PROCEDURE');
 
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateIndex, 'CREATE INDEX');

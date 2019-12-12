@@ -51,10 +51,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="427"/>
-        <CursorPos X="43" Y="451"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="130"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mysqltestcase.pas"/>
@@ -75,13 +76,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="SQLite3TestCase"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="294"/>
         <CursorPos X="55" Y="320"/>
         <UsageCount Value="130"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pgcopycmdcase.pas"/>
@@ -314,15 +312,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="2405" Column="3" TopLine="2401"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="318" Column="15" TopLine="313"/>
-      </Position>
+    <JumpHistory HistoryIndex="16">
       <Position>
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="2370" Column="55" TopLine="2341"/>
@@ -384,56 +374,11 @@
         <Caret Line="956" Column="11" TopLine="946"/>
       </Position>
       <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="20" Column="25"/>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="451" Column="43" TopLine="427"/>
       </Position>
       <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="67" Column="25" TopLine="60"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="259" Column="3" TopLine="255"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="62" Column="15" TopLine="52"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="268" Column="48" TopLine="250"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="70" Column="26" TopLine="54"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="287" Column="63" TopLine="275"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="34" Column="15" TopLine="18"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="72" Column="25" TopLine="58"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="295" Column="3" TopLine="291"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="69" Column="15" TopLine="60"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="286" TopLine="281"/>
-      </Position>
-      <Position>
-        <Filename Value="sqlite3testcase.pas"/>
-        <Caret Line="72" Column="15" TopLine="57"/>
+        <Filename Value="fbtestcase.pas"/>
       </Position>
     </JumpHistory>
     <RunParams>
