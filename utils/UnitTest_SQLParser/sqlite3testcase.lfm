@@ -126,7 +126,7 @@ object SQLite3ParserData: TSQLite3ParserData
     Top = 160
   end
   object sTable: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateTable1'
@@ -273,7 +273,12 @@ object SQLite3ParserData: TSQLite3ParserData
       item
         Caption = 'CreateTable12'
         Lines.Strings = (
-          'CREATE TABLE filterActions(id integer primary key, idFilter int, action varchar, params varchar );'
+          'CREATE TABLE "filterActions"('
+          '  id integer PRIMARY KEY,'
+          '  "idFilter" int,'
+          '  action varchar,'
+          '  params varchar'
+          ');'
         )
       end>
     Left = 24
@@ -304,6 +309,18 @@ object SQLite3ParserData: TSQLite3ParserData
         Caption = 'BeginTransaction4'
         Lines.Strings = (
           'BEGIN EXCLUSIVE TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'CommitTransaction1'
+        Lines.Strings = (
+          'COMMIT TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'CommitTransaction2'
+        Lines.Strings = (
+          'END TRANSACTION;'
         )
       end>
     Left = 24

@@ -202,14 +202,18 @@ type
   end;
 
   { TSQLite3Commit }
+  TSQLite3CommitType = (sqlitectEnd, sqlitectCommit);
 
   TSQLite3Commit = class(TSQLCommit)
   private
+    FCommitType: TSQLite3CommitType;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property CommitType:TSQLite3CommitType read FCommitType write FCommitType;
   end;
 
   { TSQLite3Rollback }
@@ -553,22 +557,42 @@ end;
 { TSQLite3Commit }
 
 procedure TSQLite3Commit.InitParserTree;
+var
+  FSQLTokens1, FSQLTokens2: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
+  //END TRANSACTION;
+  //COMMIT TRANSACTION;
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'END', [toFirstToken], 1, okNone);
+  FSQLTokens2:=AddSQLTokens(stKeyword, nil, 'COMMIT', [toFirstToken], 2, okNone);
+  AddSQLTokens(stKeyword, [FSQLTokens1, FSQLTokens2], 'TRANSACTION', [toFindWordLast]);
 end;
 
 procedure TSQLite3Commit.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FCommitType:=sqlitectEnd;
+    2:FCommitType:=sqlitectCommit;
+  end;
 end;
 
 procedure TSQLite3Commit.MakeSQL;
 var
   S: String;
 begin
-  S:='COMMIT TRANSACTION';
+  if FCommitType = sqlitectEnd then
+    S:='END TRANSACTION'
+  else
+    S:='COMMIT TRANSACTION';
   AddSQLCommand(S);
+end;
+
+procedure TSQLite3Commit.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLite3Commit then
+    FCommitType:=TSQLite3Commit(ASource).FCommitType;
+  inherited Assign(ASource);
 end;
 
 { TSQLite3BeginTransaction }

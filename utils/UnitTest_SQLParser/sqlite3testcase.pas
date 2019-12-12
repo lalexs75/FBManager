@@ -65,6 +65,9 @@ type
     procedure BeginTran2;
     procedure BeginTran3;
     procedure BeginTran4;
+
+    procedure CommitTran1;
+    procedure CommitTran2;
     (*
 ANALYZE
 ATTACH DATABASE
@@ -272,6 +275,16 @@ end;
 procedure TSQLite3ParserTest.BeginTran4;
 begin
   DoTestSQL(SQLite3ParserData.sTransaction['BeginTransaction4']);
+end;
+
+procedure TSQLite3ParserTest.CommitTran1;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['CommitTransaction1']);
+end;
+
+procedure TSQLite3ParserTest.CommitTran2;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['CommitTransaction2']);
 end;
 
 procedure TSQLite3ParserTest.SetUp;
