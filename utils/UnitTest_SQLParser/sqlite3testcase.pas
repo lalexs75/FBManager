@@ -60,10 +60,14 @@ type
     procedure DropView1;
     procedure DropView2;
     procedure DropView3;
+
+    procedure BeginTran1;
+    procedure BeginTran2;
+    procedure BeginTran3;
+    procedure BeginTran4;
     (*
 ANALYZE
 ATTACH DATABASE
-BEGIN TRANSACTION
 comment
 COMMIT TRANSACTION
 
@@ -95,6 +99,7 @@ WITH clause
   { TSQLite3ParserData }
 
   TSQLite3ParserData = class(TDataModule)
+    sTransaction: TRxTextHolder;
     sViews: TRxTextHolder;
     sTrigger: TRxTextHolder;
     sIndex: TRxTextHolder;
@@ -247,6 +252,26 @@ end;
 procedure TSQLite3ParserTest.DropView3;
 begin
   DoTestSQL(SQLite3ParserData.sViews['DropView3']);
+end;
+
+procedure TSQLite3ParserTest.BeginTran1;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['BeginTransaction1']);
+end;
+
+procedure TSQLite3ParserTest.BeginTran2;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['BeginTransaction2']);
+end;
+
+procedure TSQLite3ParserTest.BeginTran3;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['BeginTransaction3']);
+end;
+
+procedure TSQLite3ParserTest.BeginTran4;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['BeginTransaction4']);
 end;
 
 procedure TSQLite3ParserTest.SetUp;

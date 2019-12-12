@@ -186,8 +186,11 @@ type
 
   { TSQLite3BeginTransaction }
 
+  TSQLite3TransactionType = (sqlitettNone, sqlitettDeferred, sqlitettImmediate, sqlitettExclusive);
+
   TSQLite3BeginTransaction = class(TSQLStartTransaction)
   private
+    FTransactionType: TSQLite3TransactionType;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -195,6 +198,7 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property TransactionType:TSQLite3TransactionType read FTransactionType write FTransactionType;
   end;
 
   { TSQLite3Commit }
@@ -570,21 +574,46 @@ end;
 { TSQLite3BeginTransaction }
 
 procedure TSQLite3BeginTransaction.InitParserTree;
+var
+  FSQLTokens, T1, T2, T3: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
+  //BEGIN TRANSACTION;
+  //BEGIN DEFERRED TRANSACTION;
+  //BEGIN IMMEDIATE TRANSACTION;
+  //BEGIN EXCLUSIVE TRANSACTION;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'BEGIN', [toFirstToken], 0, okNone);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFERRED', [], 1);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'IMMEDIATE', [], 2);
+    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'EXCLUSIVE', [], 3);
+   AddSQLTokens(stKeyword, [FSQLTokens, T1, T2, T3], 'TRANSACTION', [toFindWordLast]);
 end;
 
 procedure TSQLite3BeginTransaction.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FTransactionType:=sqlitettDeferred;
+    2:FTransactionType:=sqlitettImmediate;
+    3:FTransactionType:=sqlitettExclusive;
+  end;
 end;
 
 procedure TSQLite3BeginTransaction.MakeSQL;
 var
   S: String;
 begin
-  S:='BEGIN TRANSACTION';
+  //BEGIN TRANSACTION;
+  //BEGIN DEFERRED TRANSACTION;
+  //BEGIN IMMEDIATE TRANSACTION;
+  //BEGIN EXCLUSIVE TRANSACTION;
+  S:='BEGIN';
+  case FTransactionType of
+    sqlitettDeferred:S:=S + ' DEFERRED';
+    sqlitettImmediate:S:=S + ' IMMEDIATE';
+    sqlitettExclusive:S:=S + ' EXCLUSIVE';
+  end;
+  S:=S + ' TRANSACTION';
   AddSQLCommand(S);
 end;
 
@@ -595,6 +624,8 @@ end;
 
 procedure TSQLite3BeginTransaction.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TSQLite3BeginTransaction then
+    FTransactionType:=TSQLite3BeginTransaction(ASource).FTransactionType;
   inherited Assign(ASource);
 end;
 

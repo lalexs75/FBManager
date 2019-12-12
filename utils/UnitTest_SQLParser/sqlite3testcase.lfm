@@ -1,10 +1,9 @@
 object SQLite3ParserData: TSQLite3ParserData
   OldCreateOrder = False
-  Height = 771
-  HorizontalOffset = 363
-  VerticalOffset = 79
-  Width = 558
-  PPI = 93
+  Height = 796
+  HorizontalOffset = 386
+  VerticalOffset = 180
+  Width = 576
   object sViews: TRxTextHolder
     Highlighter = rxSynNone
     Items = <    
@@ -62,8 +61,8 @@ object SQLite3ParserData: TSQLite3ParserData
           '  "Country", "Language";'
         )
       end>
-    Left = 23
-    Top = 16
+    Left = 24
+    Top = 17
   end
   object sTrigger: TRxTextHolder
     Highlighter = rxSynNone
@@ -99,8 +98,8 @@ object SQLite3ParserData: TSQLite3ParserData
           'DROP TRIGGER trigger_name;'
         )
       end>
-    Left = 23
-    Top = 85
+    Left = 24
+    Top = 88
   end
   object sIndex: TRxTextHolder
     Highlighter = rxSynNone
@@ -123,8 +122,8 @@ object SQLite3ParserData: TSQLite3ParserData
           'DROP INDEX IF EXISTS db_name.index_name;'
         )
       end>
-    Left = 23
-    Top = 155
+    Left = 24
+    Top = 160
   end
   object sTable: TRxTextHolder
     Highlighter = rxSynNone
@@ -277,7 +276,37 @@ object SQLite3ParserData: TSQLite3ParserData
           'CREATE TABLE filterActions(id integer primary key, idFilter int, action varchar, params varchar );'
         )
       end>
-    Left = 23
-    Top = 240
+    Left = 24
+    Top = 248
+  end
+  object sTransaction: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'BeginTransaction1'
+        Lines.Strings = (
+          'BEGIN TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'BeginTransaction2'
+        Lines.Strings = (
+          'BEGIN DEFERRED TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'BeginTransaction3'
+        Lines.Strings = (
+          'BEGIN IMMEDIATE TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'BeginTransaction4'
+        Lines.Strings = (
+          'BEGIN EXCLUSIVE TRANSACTION;'
+        )
+      end>
+    Left = 24
+    Top = 325
   end
 end

@@ -1,8 +1,8 @@
 object PGSQLParserData: TPGSQLParserData
   OldCreateOrder = False
-  Height = 850
-  HorizontalOffset = 374
-  VerticalOffset = 1
+  Height = 836
+  HorizontalOffset = 545
+  VerticalOffset = 122
   Width = 1016
   object sComment: TRxTextHolder
     Highlighter = rxSynNone
