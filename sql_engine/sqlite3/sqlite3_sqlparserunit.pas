@@ -230,9 +230,9 @@ type
     property FullForm:boolean read FFullForm write FFullForm;
   end;
 
-  { TSQLSavepoint }
+  { TSQLite3Savepoint }
 
-  TSQLSavepoint = class(TSQLCommandDDL)
+  TSQLite3Savepoint = class(TSQLSavepoint)
   private
   protected
     procedure InitParserTree;override;
@@ -241,9 +241,9 @@ type
   public
   end;
 
-  { TSQLRelaseSavepoint }
+  { TSQLite3RelaseSavepoint }
 
-  TSQLRelaseSavepoint = class(TSQLCommandDDL)
+  TSQLite3RelaseSavepoint = class(TSQLRelaseSavepoint)
   private
   protected
     procedure InitParserTree;override;
@@ -556,7 +556,7 @@ end;
 
 { TSQLRelaseSavepoint }
 
-procedure TSQLRelaseSavepoint.InitParserTree;
+procedure TSQLite3RelaseSavepoint.InitParserTree;
 var
   FSQLTokens: TSQLTokenRecord;
 begin
@@ -566,7 +566,7 @@ begin
     AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 end;
 
-procedure TSQLRelaseSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
+procedure TSQLite3RelaseSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
@@ -575,7 +575,7 @@ begin
   end;
 end;
 
-procedure TSQLRelaseSavepoint.MakeSQL;
+procedure TSQLite3RelaseSavepoint.MakeSQL;
 var
   S: String;
 begin
@@ -585,7 +585,7 @@ end;
 
 { TSQLSavepoint }
 
-procedure TSQLSavepoint.InitParserTree;
+procedure TSQLite3Savepoint.InitParserTree;
 var
   FSQLTokens: TSQLTokenRecord;
 begin
@@ -594,7 +594,7 @@ begin
     AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 end;
 
-procedure TSQLSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
+procedure TSQLite3Savepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
@@ -603,7 +603,7 @@ begin
   end;
 end;
 
-procedure TSQLSavepoint.MakeSQL;
+procedure TSQLite3Savepoint.MakeSQL;
 var
   S: String;
 begin
