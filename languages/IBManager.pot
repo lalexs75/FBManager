@@ -536,6 +536,10 @@ msgstr ""
 msgid "Commit"
 msgstr ""
 
+#: fbmstrconstunit.scommitafter
+msgid "Commit after"
+msgstr ""
+
 #: fbmstrconstunit.scommitandclose
 msgid "Commit and close"
 msgstr ""
@@ -989,6 +993,10 @@ msgstr ""
 msgid "Data blocks read from disk"
 msgstr ""
 
+#: fbmstrconstunit.sdatageneratortype
+msgid "Data generator type"
+msgstr ""
+
 #: fbmstrconstunit.sdatatype
 msgid "Data type"
 msgstr ""
@@ -999,6 +1007,10 @@ msgstr ""
 
 #: fbmstrconstunit.sdate
 msgid "Date"
+msgstr ""
+
+#: fbmstrconstunit.sdateconstraint
+msgid "Date constraint"
 msgstr ""
 
 #: fbmstrconstunit.sdatecreated
@@ -2264,8 +2276,24 @@ msgstr ""
 msgid "General"
 msgstr ""
 
+#: fbmstrconstunit.sgenerateguid
+msgid "Generate GUID"
+msgstr ""
+
 #: fbmstrconstunit.sgenerateinsertscript
 msgid "Generate INSERT script"
+msgstr ""
+
+#: fbmstrconstunit.sgeneraterandomly
+msgid "Generate randomly"
+msgstr ""
+
+#: fbmstrconstunit.sgeneratesqlscript
+msgid "Generate SQL script"
+msgstr ""
+
+#: fbmstrconstunit.sgeneratetype
+msgid "Generate type"
 msgstr ""
 
 #: fbmstrconstunit.sgenerator
@@ -2286,6 +2314,18 @@ msgstr ""
 
 #: fbmstrconstunit.sgeneratorvalue
 msgid "Generator value"
+msgstr ""
+
+#: fbmstrconstunit.sgetfromanothertable
+msgid "Get from another table"
+msgstr ""
+
+#: fbmstrconstunit.sgetfromlist
+msgid "Get from list"
+msgstr ""
+
+#: fbmstrconstunit.sgetfromtable
+msgid "Get from table"
 msgstr ""
 
 #: fbmstrconstunit.sglobal
@@ -2494,6 +2534,10 @@ msgstr ""
 msgid "Include fields"
 msgstr ""
 
+#: fbmstrconstunit.sincludetime
+msgid "Include time"
+msgstr ""
+
 #: fbmstrconstunit.sincrement
 msgid "Increment"
 msgstr ""
@@ -2580,6 +2624,11 @@ msgstr ""
 msgid "Inserted rows : %d"
 msgstr ""
 
+#: fbmstrconstunit.sinsertintotable
+msgctxt "fbmstrconstunit.sinsertintotable"
+msgid "Insert into table"
+msgstr ""
+
 #: fbmstrconstunit.sinsertorupdate
 msgid "Insert/Update"
 msgstr ""
@@ -2590,6 +2639,10 @@ msgstr ""
 
 #: fbmstrconstunit.sinteger
 msgid "Integer"
+msgstr ""
+
+#: fbmstrconstunit.sintegerconstarints
+msgid "Integer constarints"
 msgstr ""
 
 #: fbmstrconstunit.sinterfacelanguage
@@ -2827,12 +2880,24 @@ msgstr ""
 msgid "Max connections per hour"
 msgstr ""
 
+#: fbmstrconstunit.smaxdate
+msgid "Max. date"
+msgstr ""
+
+#: fbmstrconstunit.smaxlength
+msgid "Max. length"
+msgstr ""
+
 #: fbmstrconstunit.smaxpagecount
 msgid "Max page count"
 msgstr ""
 
 #: fbmstrconstunit.smaxqueriesperhour
 msgid "Max queries per hour"
+msgstr ""
+
+#: fbmstrconstunit.smaxtime
+msgid "Max. time"
 msgstr ""
 
 #: fbmstrconstunit.smaxupdateperhour
@@ -3130,6 +3195,18 @@ msgstr ""
 msgid "Middle name"
 msgstr ""
 
+#: fbmstrconstunit.smindate
+msgid "Min. date"
+msgstr ""
+
+#: fbmstrconstunit.sminlength
+msgid "Min. length"
+msgstr ""
+
+#: fbmstrconstunit.smintime
+msgid "Min. time"
+msgstr ""
+
 #: fbmstrconstunit.sminutes
 msgid "Minutes"
 msgstr ""
@@ -3350,12 +3427,20 @@ msgstr ""
 msgid "Nulls pos"
 msgstr ""
 
+#: fbmstrconstunit.snumberofrecords
+msgid "Number of records"
+msgstr ""
+
 #: fbmstrconstunit.snumbers
 msgid "Numbers"
 msgstr ""
 
 #: fbmstrconstunit.snumeric
 msgid "Numeric"
+msgstr ""
+
+#: fbmstrconstunit.snumericconstraints
+msgid "Numeric constraints"
 msgstr ""
 
 #: fbmstrconstunit.sobjectid
@@ -4131,6 +4216,10 @@ msgstr ""
 
 #: fbmstrconstunit.srecords
 msgid "records"
+msgstr ""
+
+#: fbmstrconstunit.srecordstogenerated
+msgid "Records to generated"
 msgstr ""
 
 #: fbmstrconstunit.sredo
@@ -4993,6 +5082,10 @@ msgstr ""
 msgid "Stored procedures"
 msgstr ""
 
+#: fbmstrconstunit.sstringconstraints
+msgid "String constraints"
+msgstr ""
+
 #: fbmstrconstunit.sstrings
 msgid "Strings"
 msgstr ""
@@ -5078,6 +5171,7 @@ msgid "group by "
 msgstr ""
 
 #: fbmstrconstunit.ssyncomdesinstable
+msgctxt "fbmstrconstunit.ssyncomdesinstable"
 msgid "Insert into table"
 msgstr ""
 
@@ -5248,6 +5342,10 @@ msgstr ""
 
 #: fbmstrconstunit.stime
 msgid "Time"
+msgstr ""
+
+#: fbmstrconstunit.stimeconstraint
+msgid "Time constraint"
 msgstr ""
 
 #: fbmstrconstunit.stimelife

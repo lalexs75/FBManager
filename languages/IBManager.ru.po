@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -562,6 +562,10 @@ msgstr "Комментировать выделенное"
 msgid "Commit"
 msgstr "Подтвердить"
 
+#: fbmstrconstunit.scommitafter
+msgid "Commit after"
+msgstr "Фиксировать после"
+
 #: fbmstrconstunit.scommitandclose
 msgid "Commit and close"
 msgstr "Подтвердить и закрыть"
@@ -1025,6 +1029,10 @@ msgstr "Пользователь БД"
 msgid "Data blocks read from disk"
 msgstr "Количество прочитанных дисковых блоков"
 
+#: fbmstrconstunit.sdatageneratortype
+msgid "Data generator type"
+msgstr "Тип генерируемых данных"
+
 #: fbmstrconstunit.sdatatype
 msgid "Data type"
 msgstr "Тип данных"
@@ -1036,6 +1044,10 @@ msgstr "Версия данных"
 #: fbmstrconstunit.sdate
 msgid "Date"
 msgstr "Дата"
+
+#: fbmstrconstunit.sdateconstraint
+msgid "Date constraint"
+msgstr "Параметры даты"
 
 #: fbmstrconstunit.sdatecreated
 msgctxt "fbmstrconstunit.sdatecreated"
@@ -1544,7 +1556,7 @@ msgstr "Не блокировать при создании"
 
 #: fbmstrconstunit.sdownloadnewversion
 msgid "Download new version..."
-msgstr ""
+msgstr "Скачать новую версию..."
 
 #: fbmstrconstunit.sdrop
 msgid "Drop "
@@ -2348,9 +2360,25 @@ msgctxt "fbmstrconstunit.sgeneral"
 msgid "General"
 msgstr "Общее"
 
+#: fbmstrconstunit.sgenerateguid
+msgid "Generate GUID"
+msgstr "Генерировать GUID"
+
 #: fbmstrconstunit.sgenerateinsertscript
 msgid "Generate INSERT script"
 msgstr "Создать скрипт на INSERT"
+
+#: fbmstrconstunit.sgeneraterandomly
+msgid "Generate randomly"
+msgstr "Генерировать случайное"
+
+#: fbmstrconstunit.sgeneratesqlscript
+msgid "Generate SQL script"
+msgstr "Создать SQL файл"
+
+#: fbmstrconstunit.sgeneratetype
+msgid "Generate type"
+msgstr "Тип генерации"
 
 #: fbmstrconstunit.sgenerator
 msgid "Generator"
@@ -2371,6 +2399,18 @@ msgstr "Генераторы"
 #: fbmstrconstunit.sgeneratorvalue
 msgid "Generator value"
 msgstr "Значение генератора"
+
+#: fbmstrconstunit.sgetfromanothertable
+msgid "Get from another table"
+msgstr "Взять из другой таблицы"
+
+#: fbmstrconstunit.sgetfromlist
+msgid "Get from list"
+msgstr "Взять из списка"
+
+#: fbmstrconstunit.sgetfromtable
+msgid "Get from table"
+msgstr "Взять из таблицы"
 
 #: fbmstrconstunit.sglobal
 msgid "Global"
@@ -2542,7 +2582,7 @@ msgstr "Игнорировать Limbo"
 
 #: fbmstrconstunit.simagesfilesfilter
 msgid "All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*"
-msgstr ""
+msgstr "Все (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|Изображения в фрмате JPEG (*.jpeg)|*.jpeg|Изображения в фрмате JPG (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*"
 
 #: fbmstrconstunit.simport
 msgid "Import"
@@ -2582,6 +2622,10 @@ msgstr "Включать всё из %s"
 #: fbmstrconstunit.sincludefields
 msgid "Include fields"
 msgstr "Включаемые поля"
+
+#: fbmstrconstunit.sincludetime
+msgid "Include time"
+msgstr "Включить время"
 
 #: fbmstrconstunit.sincrement
 msgctxt "fbmstrconstunit.sincrement"
@@ -2675,6 +2719,12 @@ msgstr "Цвет INSERT"
 msgid "Inserted rows : %d"
 msgstr "Вставлено строк : %d"
 
+#: fbmstrconstunit.sinsertintotable
+#, fuzzy
+msgctxt "fbmstrconstunit.sinsertintotable"
+msgid "Insert into table"
+msgstr "Вставка в таблицу"
+
 #: fbmstrconstunit.sinsertorupdate
 msgid "Insert/Update"
 msgstr "Вставить/Изменить"
@@ -2686,6 +2736,10 @@ msgstr "ВМЕСТО"
 #: fbmstrconstunit.sinteger
 msgid "Integer"
 msgstr "Целые числа"
+
+#: fbmstrconstunit.sintegerconstarints
+msgid "Integer constarints"
+msgstr "Параметры целого"
 
 #: fbmstrconstunit.sinterfacelanguage
 msgid "Interface language"
@@ -2934,6 +2988,14 @@ msgstr "Материализованное представление"
 msgid "Max connections per hour"
 msgstr "Максим. число подключений в час"
 
+#: fbmstrconstunit.smaxdate
+msgid "Max. date"
+msgstr "Макс. дата"
+
+#: fbmstrconstunit.smaxlength
+msgid "Max. length"
+msgstr "Макс. длинна"
+
 #: fbmstrconstunit.smaxpagecount
 msgid "Max page count"
 msgstr "Максимальное число страниц БД"
@@ -2941,6 +3003,10 @@ msgstr "Максимальное число страниц БД"
 #: fbmstrconstunit.smaxqueriesperhour
 msgid "Max queries per hour"
 msgstr "Максим. число запросов в час"
+
+#: fbmstrconstunit.smaxtime
+msgid "Max. time"
+msgstr "Макс. время"
 
 #: fbmstrconstunit.smaxupdateperhour
 msgid "Max update per hour"
@@ -3239,6 +3305,18 @@ msgstr "Только метаданные"
 msgid "Middle name"
 msgstr "Отчество"
 
+#: fbmstrconstunit.smindate
+msgid "Min. date"
+msgstr "Мин. дата"
+
+#: fbmstrconstunit.sminlength
+msgid "Min. length"
+msgstr "Мин. длинна"
+
+#: fbmstrconstunit.smintime
+msgid "Min. time"
+msgstr "Мин. время"
+
 #: fbmstrconstunit.sminutes
 msgctxt "fbmstrconstunit.sminutes"
 msgid "Minutes"
@@ -3475,6 +3553,10 @@ msgstr "Nulls в конце"
 msgid "Nulls pos"
 msgstr "Позиция NULL"
 
+#: fbmstrconstunit.snumberofrecords
+msgid "Number of records"
+msgstr "Кол-во записей"
+
 #: fbmstrconstunit.snumbers
 msgid "Numbers"
 msgstr "Числа"
@@ -3482,6 +3564,10 @@ msgstr "Числа"
 #: fbmstrconstunit.snumeric
 msgid "Numeric"
 msgstr "Числа"
+
+#: fbmstrconstunit.snumericconstraints
+msgid "Numeric constraints"
+msgstr "Параметры числа"
 
 #: fbmstrconstunit.sobjectid
 msgctxt "fbmstrconstunit.sobjectid"
@@ -4274,6 +4360,10 @@ msgstr "Выбирать записей"
 #: fbmstrconstunit.srecords
 msgid "records"
 msgstr "записей"
+
+#: fbmstrconstunit.srecordstogenerated
+msgid "Records to generated"
+msgstr ""
 
 #: fbmstrconstunit.sredo
 msgctxt "fbmstrconstunit.sredo"
@@ -5162,6 +5252,10 @@ msgctxt "fbmstrconstunit.sstoredprocedures"
 msgid "Stored procedures"
 msgstr "Хранимые процедуры"
 
+#: fbmstrconstunit.sstringconstraints
+msgid "String constraints"
+msgstr "Параметры строки"
+
 #: fbmstrconstunit.sstrings
 msgid "Strings"
 msgstr "Строки"
@@ -5247,6 +5341,7 @@ msgid "group by "
 msgstr "Группировка "
 
 #: fbmstrconstunit.ssyncomdesinstable
+msgctxt "fbmstrconstunit.ssyncomdesinstable"
 msgid "Insert into table"
 msgstr "Вставка в таблицу"
 
@@ -5408,7 +5503,7 @@ msgstr "Проверка"
 
 #: fbmstrconstunit.stestdatagenerator
 msgid "Test data generator"
-msgstr ""
+msgstr "Генератор тестовых данных"
 
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
@@ -5430,6 +5525,10 @@ msgstr "Разделитель тысяч"
 msgctxt "fbmstrconstunit.stime"
 msgid "Time"
 msgstr "Время"
+
+#: fbmstrconstunit.stimeconstraint
+msgid "Time constraint"
+msgstr "Параметры времени"
 
 #: fbmstrconstunit.stimelife
 msgctxt "fbmstrconstunit.stimelife"
@@ -5911,7 +6010,7 @@ msgstr ""
 
 #: fbmstrconstunit.svacuumthresholdhint
 msgid "Minimum number of tuple updates or deletes prior to vacuum"
-msgstr ""
+msgstr "Минимальное число блоков (туплов) изменения или удаления до выполнения VACCUUM"
 
 #: fbmstrconstunit.svalidate
 msgid "Validate"
@@ -6217,4 +6316,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

@@ -1,7 +1,7 @@
 object GenerateDataForm: TGenerateDataForm
-  Left = 310
+  Left = 379
   Height = 626
-  Top = 135
+  Top = 137
   Width = 858
   Caption = 'GenerateDataForm'
   ClientHeight = 626

@@ -346,6 +346,47 @@ procedure TGenerateDataForm.Localize;
 begin
   fldSelAll.Caption:=sSelectAll;
   fldUnSelAll.Caption:=sUnselectAll;
+
+  Caption:=sTestDataGenerator;
+  RadioGroup1.Caption:=sGenerateType;
+  RadioGroup1.Items[0]:=sGenerateSQLScript;
+  RadioGroup1.Items[1]:=sInsertIntoTable;
+  Label1.Caption:=sRecordsToGenerated;
+  CheckBox3.Caption:=sCommitAfter;
+  RxDBGrid1.ColumnByFieldName('FieldName').Title.Caption:=sFieldName;
+  RxDBGrid1.ColumnByFieldName('FieldType').Title.Caption:=sFieldType;
+  RadioGroup2.Caption:=sDataGeneratorType;
+  GroupBox3.Caption:=sGetFromList;
+
+  GroupBox2.Caption:=sGetFromTable;
+  Label5.Caption:=sTableName;
+  Label6.Caption:=sFieldName;
+  Label7.Caption:=sNumberOfRecords;
+
+  GroupBox4.Caption:=sAutoincremet;
+  Label8.Caption:=sInitialValue;
+  Label9.Caption:=sStep;
+  GroupBox7.Caption:=stime;
+  Label16.Caption:=sMinTime;
+  Label17.Caption:=sMaxTime;
+
+  GroupBox5.Caption:=sStringConstraints;
+  CheckBox1.Caption:=sGenerateGUID;
+  Label10.Caption:=sMinLength;
+  Label11.Caption:=sMaxLength;
+
+  GroupBox8.Caption:=sNumericConstraints;
+  Label18.Caption:=sMinValue;
+  Label19.Caption:=sMaxValue;
+
+  GroupBox1.Caption:=sIntegerConstarints;
+  Label3.Caption:=sMinValue;
+  Label4.Caption:=sMaxValue;
+
+  GroupBox6.Caption:=sDateConstraint;
+  Label14.Caption:=sMinDate;
+  Label15.Caption:=sMaxDate;
+  CheckBox2.Caption:=sIncludeTime;
 end;
 
 procedure TGenerateDataForm.LoadTableInfo;
@@ -579,16 +620,16 @@ begin
   RadioGroup2.Items.Clear;
   if TFieldType(rxFieldsFieldTypeInt.AsInteger) in IntegerDataTypes then
   begin
-    RadioGroup2.Items.Add('Generate randomly');
-    RadioGroup2.Items.Add('Get from another table');
-    RadioGroup2.Items.Add('Get from list');
-    RadioGroup2.Items.Add('Autoincrement');
+    RadioGroup2.Items.Add(sGenerateRandomly);
+    RadioGroup2.Items.Add(sGetFromAnotherTable);
+    RadioGroup2.Items.Add(sGetFromList);
+    RadioGroup2.Items.Add(sAutoincremet);
   end
   else
   begin
-    RadioGroup2.Items.Add('Generate randomly');
-    RadioGroup2.Items.Add('Get from another table');
-    RadioGroup2.Items.Add('Get from list');
+    RadioGroup2.Items.Add(sGenerateRandomly);
+    RadioGroup2.Items.Add(sGetFromAnotherTable);
+    RadioGroup2.Items.Add(sGetFromList);
   end;
   RadioGroup2.Items.EndUpdate;
 end;
