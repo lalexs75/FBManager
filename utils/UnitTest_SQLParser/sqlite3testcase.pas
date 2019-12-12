@@ -68,17 +68,23 @@ type
 
     procedure CommitTran1;
     procedure CommitTran2;
+
+    procedure RollbackTransaction1;
+    procedure RollbackTransaction2;
+    procedure RollbackTransaction3;
+    procedure RollbackTransaction4;
+
+    procedure Savepoint1;
+    procedure Savepoint2;
     (*
 ANALYZE
 ATTACH DATABASE
 comment
-COMMIT TRANSACTION
 
 CREATE VIRTUAL TABLE
 DELETE
 DETACH DATABASE
 
-END TRANSACTION
 EXPLAIN
 expression
 INDEXED BY
@@ -87,10 +93,7 @@ INSERT
 ON CONFLICT clause
 PRAGMA
 REINDEX
-RELEASE SAVEPOINT
 REPLACE
-ROLLBACK TRANSACTION
-SAVEPOINT
 SELECT
 UPDATE
 UPSERT
@@ -285,6 +288,36 @@ end;
 procedure TSQLite3ParserTest.CommitTran2;
 begin
   DoTestSQL(SQLite3ParserData.sTransaction['CommitTransaction2']);
+end;
+
+procedure TSQLite3ParserTest.RollbackTransaction1;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['RollbackTransaction1']);
+end;
+
+procedure TSQLite3ParserTest.RollbackTransaction2;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['RollbackTransaction2']);
+end;
+
+procedure TSQLite3ParserTest.RollbackTransaction3;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['RollbackTransaction3']);
+end;
+
+procedure TSQLite3ParserTest.RollbackTransaction4;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['RollbackTransaction4']);
+end;
+
+procedure TSQLite3ParserTest.Savepoint1;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['Savepoint1']);
+end;
+
+procedure TSQLite3ParserTest.Savepoint2;
+begin
+  DoTestSQL(SQLite3ParserData.sTransaction['Savepoint2']);
 end;
 
 procedure TSQLite3ParserTest.SetUp;

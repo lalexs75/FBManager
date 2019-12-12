@@ -77,8 +77,8 @@
         <UnitName Value="SQLite3TestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="169"/>
-        <CursorPos X="3" Y="172"/>
+        <TopLine Value="294"/>
+        <CursorPos X="55" Y="320"/>
         <UsageCount Value="130"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -317,25 +317,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="pgtestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="2385" Column="41" TopLine="2354"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="318" Column="15" TopLine="309"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="2404" Column="6" TopLine="2390"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="330" Column="15" TopLine="313"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
         <Caret Line="2405" Column="3" TopLine="2401"/>
       </Position>
       <Position>
@@ -433,6 +414,26 @@
       <Position>
         <Filename Value="sqlite3testcase.pas"/>
         <Caret Line="34" Column="15" TopLine="18"/>
+      </Position>
+      <Position>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="72" Column="25" TopLine="58"/>
+      </Position>
+      <Position>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="295" Column="3" TopLine="291"/>
+      </Position>
+      <Position>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="69" Column="15" TopLine="60"/>
+      </Position>
+      <Position>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="286" TopLine="281"/>
+      </Position>
+      <Position>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="72" Column="15" TopLine="57"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -510,10 +510,15 @@ type
   end;
 
 
+  { TSQLRollback }
+
   TSQLRollback = class(TSQLCommandDDL)
   private
+    FSavepointName: string;
   protected
   public
+    property SavepointName:string read FSavepointName write FSavepointName;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
   { TSQLCommandSelectCTE }
@@ -967,6 +972,17 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLRollback }
+
+procedure TSQLRollback.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLRollback then
+  begin
+    FSavepointName:=TSQLRollback(ASource).FSavepointName;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLStatmentRecordEnumerator }

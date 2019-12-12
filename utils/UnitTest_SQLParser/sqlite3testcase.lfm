@@ -322,6 +322,42 @@ object SQLite3ParserData: TSQLite3ParserData
         Lines.Strings = (
           'END TRANSACTION;'
         )
+      end    
+      item
+        Caption = 'RollbackTransaction1'
+        Lines.Strings = (
+          'ROLLBACK;'
+        )
+      end    
+      item
+        Caption = 'RollbackTransaction2'
+        Lines.Strings = (
+          'ROLLBACK TRANSACTION;'
+        )
+      end    
+      item
+        Caption = 'RollbackTransaction3'
+        Lines.Strings = (
+          'ROLLBACK TO transact1;'
+        )
+      end    
+      item
+        Caption = 'RollbackTransaction4'
+        Lines.Strings = (
+          'ROLLBACK TO SAVEPOINT transact1;'
+        )
+      end    
+      item
+        Caption = 'Savepoint1'
+        Lines.Strings = (
+          'SAVEPOINT transact1;'
+        )
+      end    
+      item
+        Caption = 'Savepoint2'
+        Lines.Strings = (
+          'RELEASE SAVEPOINT transact1;'
+        )
       end>
     Left = 24
     Top = 325

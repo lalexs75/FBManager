@@ -2018,6 +2018,7 @@ initialization
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3BeginTransaction, 'BEGIN TRANSACTION');
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3Commit, 'COMMIT');
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3Rollback, 'ROLLBACK');
-
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLSavepoint, 'SAVEPOINT');
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLRelaseSavepoint, 'RELEASE SAVEPOINT');
 end.
 

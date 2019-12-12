@@ -1173,10 +1173,9 @@ type
 
   { TPGSQLRollback }
 
-  TPGSQLRollback = class(TSQLCommandAbstract)
+  TPGSQLRollback = class(TSQLRollback)
   private
     FRollbackType: TAbortType;
-    FSavepointName: string;
     FTransactionId: string;
   protected
     procedure InitParserTree;override;
@@ -1187,7 +1186,6 @@ type
 
     property RollbackType:TAbortType read FRollbackType write FRollbackType;
     property TransactionId:string read FTransactionId write FTransactionId;
-    property SavepointName:string read FSavepointName write FSavepointName;
   end;
 
   { TPGSQLAbort }
@@ -15990,7 +15988,7 @@ procedure TPGSQLRollback.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FSavepointName:=AWord;
+    1:SavepointName:=AWord;
     2:TransactionId:=AWord;
     3:RollbackType:=atWork;
     4:RollbackType:=atTransaction;
@@ -16010,8 +16008,8 @@ begin
       atWork:S:=S + ' WORK';
       atTransaction:S:=S + ' TRANSACTION';
     end;
-    if FSavepointName <> '' then
-      S:=S + ' TO SAVEPOINT ' + FSavepointName
+    if SavepointName <> '' then
+      S:=S + ' TO SAVEPOINT ' + SavepointName
   end;
   AddSQLCommand(S);
 end;
@@ -16021,7 +16019,6 @@ begin
   if ASource is TPGSQLRollback then
   begin
     TransactionId:=TPGSQLRollback(ASource).TransactionId;
-    SavepointName:=TPGSQLRollback(ASource).SavepointName;
     FRollbackType:=TPGSQLRollback(ASource).FRollbackType;
   end;
   inherited Assign(ASource);

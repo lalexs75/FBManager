@@ -220,17 +220,38 @@ type
 
   TSQLite3Rollback = class(TSQLRollback)
   private
+    FFullForm: boolean;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
-    //procedure Assign(ASource:TSQLObjectAbstract); override;
-    //
-    //property RollbackType:TAbortType read FRollbackType write FRollbackType;
-    //property TransactionId:string read FTransactionId write FTransactionId;
-    //property SavepointName:string read FSavepointName write FSavepointName;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property FullForm:boolean read FFullForm write FFullForm;
   end;
+
+  { TSQLSavepoint }
+
+  TSQLSavepoint = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TSQLRelaseSavepoint }
+
+  TSQLRelaseSavepoint = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
 implementation
 
 uses SQLEngineInternalToolsUnit;
@@ -533,25 +554,120 @@ begin
   end;
 end;
 
+{ TSQLRelaseSavepoint }
+
+procedure TSQLRelaseSavepoint.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  //RELEASE SAVEPOINT transact1;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RELEASE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SAVEPOINT', [toFindWordLast]);
+    AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+end;
+
+procedure TSQLRelaseSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+procedure TSQLRelaseSavepoint.MakeSQL;
+var
+  S: String;
+begin
+  S:='RELEASE SAVEPOINT '+Name;
+  AddSQLCommand(S);
+end;
+
+{ TSQLSavepoint }
+
+procedure TSQLSavepoint.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  //SAVEPOINT transact1;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SAVEPOINT', [toFirstToken, toFindWordLast]);
+    AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+end;
+
+procedure TSQLSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+procedure TSQLSavepoint.MakeSQL;
+var
+  S: String;
+begin
+  S:='SAVEPOINT '+Name;
+  AddSQLCommand(S);
+end;
+
 { TSQLite3Rollback }
 
 procedure TSQLite3Rollback.InitParserTree;
+var
+  FSQLTokens, T1, T2, T: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
+  //ROLLBACK;
+  //ROLLBACK TRANSACTION;
+  //ROLLBACK TO transact1;
+  //ROLLBACK TO SAVEPOINT transact1;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ROLLBACK', [toFirstToken, toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional], 2);
+  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TO', [toOptional]);
+    T1:=AddSQLTokens(stKeyword, T2, 'SAVEPOINT', [], 2);
+    T:=AddSQLTokens(stIdentificator, [T2, T1], '', [], 1);
 end;
 
 procedure TSQLite3Rollback.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:SavepointName:=AWord;
+    2:FullForm:=true;
+  end;
 end;
 
 procedure TSQLite3Rollback.MakeSQL;
 var
   S: String;
 begin
-  S:='ROLLBACK TRANSACTION';
+  //ROLLBACK;
+  //ROLLBACK TRANSACTION;
+  //ROLLBACK TO transact1;
+  //ROLLBACK TO SAVEPOINT transact1;
+  S:='ROLLBACK';
+  if SavepointName = '' then
+  begin
+    if FullForm then
+      S:=S + ' TRANSACTION';
+  end
+  else
+  begin
+    S:=S + ' TO';
+    if FullForm then S:=S+' SAVEPOINT';
+    S:=S + ' '+ SavepointName;
+  end;
   AddSQLCommand(S);
+end;
+
+procedure TSQLite3Rollback.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLite3Rollback then
+  begin
+    FullForm:=TSQLite3Rollback(ASource).FullForm;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLite3Commit }
