@@ -1771,7 +1771,7 @@ begin
     RefreshConstraintPrimaryKey;
     TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch+MakeOrderBy;
 
-    if ARecCountLimit > -1 then
+    if ARecCountLimit > 0 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
 
@@ -5935,19 +5935,22 @@ begin
     Result:=' order by '+Result;
 end;
 
+var
+  S: String;
 begin
   if not FDataSet.Active then
   begin
     RefreshConstraintPrimaryKey;
     TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch) + MakeOrderBy;
 
-    if ARecCountLimit > -1 then
+    if ARecCountLimit > 0 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
 
     ZUpdateSQL.InsertSQL.Text:='insert into ' + DoFormatName2(CaptionFullPatch) + '(' + MakeSQLInsertFields(false) + ')'+
                                   ' values('+MakeSQLInsertFields(true)+')';
     ZUpdateSQL.ModifySQL.Text:='update ' + DoFormatName2(CaptionFullPatch) + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    S:=ZUpdateSQL.ModifySQL.Text;
     ZUpdateSQL.DeleteSQL.Text:='delete from ' + DoFormatName2(CaptionFullPatch) + MakeSQLWhere(spsOld);
 
     if FPKCount > 0 then
@@ -6605,7 +6608,7 @@ begin
   if not FDataSet.Active then
   begin
     TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch);
-    if ARecCountLimit > -1 then
+    if ARecCountLimit > 0 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
 
   end;
