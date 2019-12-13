@@ -391,6 +391,7 @@ type
     FCurFile: TFBSQLDatabaseFile;
     FFiles: TFBSQLDatabaseFiles;
   protected
+    procedure SetName(AValue: string); override;
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -1682,6 +1683,12 @@ begin
 end;
 
 { TFBSQLCreateDatabase }
+
+procedure TFBSQLCreateDatabase.SetName(AValue: string);
+begin
+  if FName = AValue then exit;
+  FName:=AValue;
+end;
 
 procedure TFBSQLCreateDatabase.InitParserTree;
 var
