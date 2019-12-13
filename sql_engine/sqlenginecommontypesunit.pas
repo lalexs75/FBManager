@@ -29,6 +29,8 @@ uses
 
 type
   TTransactionIsolationLevel = (tilNone, tilReadUncommitted, tilReadCommitted, tilSerializable, tilRepeatableRead);
+  TTransactionParam = (tilReadWrite, tilReadOnly, tilWait, tilNoWait, tilRecVersion, tilNoRecVersion, tilRestartRequests);
+  TTransactionParams = set of TTransactionParam;
 
   TDBMSTypesGroup = (tgUnknow, tgNumericTypes, tgMonetaryTypes, tgCharacterTypes,
         tgBinaryDataTypes, tgDateTimeTypes, tgBooleanTypes,

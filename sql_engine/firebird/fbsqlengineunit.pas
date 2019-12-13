@@ -4533,16 +4533,15 @@ begin
 end;
 
 initialization
-
+    //DATABASE
     RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateDatabase, 'CREATE DATABASE');
     RegisterSQLStatment(TSQLEngineFireBird, TFBSQLAlterDatabase, 'ALTER DATABASE');
-{
-    DROP DATABASE
-}
+    RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropDatabase, 'DROP DATABASE');
+
+    //SHADOW
+    RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateShadow, 'CREATE SHADOW');
+    RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropShadow, 'DROP SHADOW');
   {
-SHADOW
-    CREATE SHADOW
-    DROP SHADOW
 
 INDEX
     CREATE INDEX

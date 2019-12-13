@@ -951,7 +951,7 @@ begin
     WriteCommand(FCmdIns.AsSQL);
     FCmdIns.SQLText.Clear;
 
-    if CheckBox3.Checked and (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) then
+    if CheckBox3.Checked and (SpinEdit2.Value>0) and (i mod SpinEdit2.Value = 0) and (i<SpinEdit1.Value) then
     begin
       WriteCommitTran;
       WriteStartTran;

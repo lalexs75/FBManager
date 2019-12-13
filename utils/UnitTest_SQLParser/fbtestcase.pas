@@ -64,7 +64,9 @@ type
     procedure CreateShadow1;
     procedure CreateShadow2;
     //DROP SHADOW
-    procedure DropShadow;
+    procedure DropShadow1;
+    procedure DropShadow2;
+    procedure DropShadow3;
 
     //CREATE DOMAIN
     procedure CreateDomain1;
@@ -300,9 +302,29 @@ type
     procedure Transaction6;
     procedure Transaction7;
     procedure Transaction8;
+    procedure Transaction9;
+    procedure Transaction10;
+    procedure Transaction11;
+
+    procedure Rollback1;
+    procedure Rollback2;
+    procedure Rollback3;
+    procedure Rollback4;
+    procedure Rollback5;
+    procedure Rollback6;
+    procedure Rollback7;
+    procedure Rollback8;
+
     procedure Savepoint1;
     procedure Savepoint2;
     procedure Savepoint3;
+
+    procedure Commit1;
+    procedure Commit2;
+    procedure Commit3;
+    procedure Commit4;
+    procedure Commit5;
+    procedure Commit6;
   end;
 
   { TFBTestSQLData }
@@ -503,9 +525,19 @@ begin
   DoTestSQL(FBTestSQLData.sDataBase['CreateShadow2']);
 end;
 
-procedure TFBSQLParserTest.DropShadow;
+procedure TFBSQLParserTest.DropShadow1;
 begin
   DoTestSQL(FBTestSQLData.sDataBase['DropShadow1']);
+end;
+
+procedure TFBSQLParserTest.DropShadow2;
+begin
+  DoTestSQL(FBTestSQLData.sDataBase['DropShadow2']);
+end;
+
+procedure TFBSQLParserTest.DropShadow3;
+begin
+  DoTestSQL(FBTestSQLData.sDataBase['DropShadow3']);
 end;
 
 procedure TFBSQLParserTest.CreateDomain1;
@@ -1283,6 +1315,61 @@ begin
   DoTestSQL(FBTestSQLData.sTransaction['Transaction8']);
 end;
 
+procedure TFBSQLParserTest.Transaction9;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction9']);
+end;
+
+procedure TFBSQLParserTest.Transaction10;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction10']);
+end;
+
+procedure TFBSQLParserTest.Transaction11;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction11']);
+end;
+
+procedure TFBSQLParserTest.Rollback1;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback1']);
+end;
+
+procedure TFBSQLParserTest.Rollback2;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback2']);
+end;
+
+procedure TFBSQLParserTest.Rollback3;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback3']);
+end;
+
+procedure TFBSQLParserTest.Rollback4;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback4']);
+end;
+
+procedure TFBSQLParserTest.Rollback5;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback5']);
+end;
+
+procedure TFBSQLParserTest.Rollback6;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback6']);
+end;
+
+procedure TFBSQLParserTest.Rollback7;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback7']);
+end;
+
+procedure TFBSQLParserTest.Rollback8;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Rollback8']);
+end;
+
 procedure TFBSQLParserTest.Savepoint1;
 begin
   DoTestSQL(FBTestSQLData.sTransaction['Savepoint1']);
@@ -1296,6 +1383,36 @@ end;
 procedure TFBSQLParserTest.Savepoint3;
 begin
   DoTestSQL(FBTestSQLData.sTransaction['Savepoint3']);
+end;
+
+procedure TFBSQLParserTest.Commit1;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit1']);
+end;
+
+procedure TFBSQLParserTest.Commit2;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit2']);
+end;
+
+procedure TFBSQLParserTest.Commit3;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit3']);
+end;
+
+procedure TFBSQLParserTest.Commit4;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit4']);
+end;
+
+procedure TFBSQLParserTest.Commit5;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit5']);
+end;
+
+procedure TFBSQLParserTest.Commit6;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Commit6']);
 end;
 
 procedure TFBSQLParserTest.SetUp;

@@ -495,11 +495,11 @@ type
   TSQLStartTransaction = class(TSQLCommandDDL)
   private
     FIsolationLevel: TTransactionIsolationLevel;
-    FReadOnly: boolean;
+    FTransactionParam: TTransactionParams;
   protected
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property ReadOnly:boolean read FReadOnly write FReadOnly;
+    property TransactionParam:TTransactionParams read FTransactionParam write FTransactionParam;
     property IsolationLevel:TTransactionIsolationLevel read FIsolationLevel write FIsolationLevel;
   end;
 
@@ -1179,7 +1179,7 @@ procedure TSQLStartTransaction.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TSQLStartTransaction then
   begin
-    ReadOnly:=TSQLStartTransaction(ASource).ReadOnly;
+    TransactionParam:=TSQLStartTransaction(ASource).TransactionParam;
     IsolationLevel:=TSQLStartTransaction(ASource).IsolationLevel;
   end;
   inherited Assign(ASource);

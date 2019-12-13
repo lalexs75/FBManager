@@ -408,7 +408,7 @@ type
   TFBSQLAlterDatabaseCommand  = (fbadaAddFile,
     fbadaAddDifferenceFile,
     fbadaDropDifferenceFile,
-    fbadaBeginEndBackup,
+    fbadaBeginBackup,
     fbadaEndBackup,
     fbadaSetDefaultCharacter,
     fbadaSetLingerToSeconds,
@@ -434,6 +434,50 @@ type
     procedure Assign(ASource:TSQLObjectAbstract);override;
     property Files:TFBSQLDatabaseFiles read FFiles;
     property AlterCommand:TFBSQLAlterDatabaseCommand read FAlterCommand write FAlterCommand;
+  end;
+
+  { TFBSQLDropDatabase }
+
+  TFBSQLDropDatabase = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
+  { TFBSQLCreateShadow }
+
+  TFBSQLCreateShadow = class(TSQLCreateCommandAbstract)
+  private
+    FShadowFileName: string;
+    FShadowNum: Integer;
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ShadowNum:Integer read FShadowNum write FShadowNum;
+    property ShadowFileName:string read FShadowFileName write FShadowFileName;
+  end;
+
+  { TFBSQLDropShadow }
+
+  TFBSQLDropShadowType =  (dshtNone, dshtPreserve, dshtDelete);
+  TFBSQLDropShadow = class(TSQLDropCommandAbstract)
+  private
+    FShadowNum: Integer;
+    FShadowType: TFBSQLDropShadowType;
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ShadowNum:Integer read FShadowNum write FShadowNum;
+    property ShadowType:TFBSQLDropShadowType read FShadowType write FShadowType;
   end;
 
   //Domain
@@ -719,7 +763,8 @@ type
     FIgnoreLimbo: boolean;
     FLockTimeout: integer;
     FNoAutoUndo: boolean;
-    FNoWait: boolean;
+    FTableStability: boolean;
+    FUseIsolationLivel: boolean;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
@@ -727,21 +772,30 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property NoWait:boolean read FNoWait write FNoWait;
+    property UseIsolationLivel:boolean read FUseIsolationLivel write FUseIsolationLivel;
     property NoAutoUndo:boolean read FNoAutoUndo write FNoAutoUndo;
     property LockTimeout:integer read FLockTimeout write FLockTimeout;
     property IgnoreLimbo:boolean read FIgnoreLimbo write FIgnoreLimbo;
+    property TableStability:boolean read FTableStability write FTableStability;
   end;
 
   { TFBSQLCommit }
+  TFBSQLCommitType = (cctNone, cctRetain, cctRetainSnaphot);
 
   TFBSQLCommit = class(TSQLCommit)
   private
+    FCommitType: TFBSQLCommitType;
+    FRelaseTran: boolean;
+    FWorkTran: boolean;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property WorkTran:boolean read FWorkTran write FWorkTran;
+    property RelaseTran:boolean read FRelaseTran write FRelaseTran;
+    property CommitType:TFBSQLCommitType read FCommitType write FCommitType;
   end;
 
   { TFBSQLRollback }
@@ -1350,6 +1404,141 @@ begin
   end;
 end;
 
+{ TFBSQLDropShadow }
+
+procedure TFBSQLDropShadow.InitParserTree;
+var
+  FSQLTokens, T, T2, T1: TSQLTokenRecord;
+begin
+  //DROP SHADOW number [{PRESERVE | DELETE} FILE];
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SHADOW', [toFindWordLast]);
+  T:=AddSQLTokens(stInteger, FSQLTokens, '', [], 1);
+  T1:=AddSQLTokens(stKeyword, T, 'PRESERVE', [toOptional], 2);
+  T2:=AddSQLTokens(stKeyword, T, 'DELETE', [toOptional], 3);
+    AddSQLTokens(stKeyword, [T1, T2], 'FILE', [toOptional]);
+end;
+
+procedure TFBSQLDropShadow.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP SHADOW '+IntToStr(ShadowNum);
+  case ShadowType of
+    dshtPreserve:S:=S + ' PRESERVE FILE';
+    dshtDelete:S:=S + ' DELETE FILE';
+  end;
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLDropShadow.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:ShadowNum:=StrToInt(AWord);
+    2:ShadowType:=dshtPreserve;
+    3:ShadowType:=dshtDelete;
+  end;
+end;
+
+procedure TFBSQLDropShadow.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLDropShadow then
+  begin
+    ShadowNum:=TFBSQLDropShadow(ASource).ShadowNum;
+    ShadowType:=TFBSQLDropShadow(ASource).ShadowType;
+  end;
+  inherited Assign(ASource);
+end;
+
+{ TFBSQLDropDatabase }
+
+procedure TFBSQLDropDatabase.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast]);
+end;
+
+procedure TFBSQLDropDatabase.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP DATABASE';
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLDropDatabase.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+{ TFBSQLCreateShadow }
+
+procedure TFBSQLCreateShadow.InitParserTree;
+var
+  FSQLTokens, T, T1, T2, T3, T4: TSQLTokenRecord;
+begin
+  //CREATE SHADOW sh_num [AUTO | MANUAL] [CONDITIONAL]
+  //' filepath ' [LENGTH [=] num [PAGE[S]]]
+  //[ <secondary_file> ];
+  //
+  //<secondary_file> ::=
+  //FILE ' filepath '
+  //LENGTH [=] num [PAGE[S]] | STARTING [AT [PAGE]] pagenum
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'SHADOW', [toFindWordLast]);
+  T:=AddSQLTokens(stInteger, T, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, T, 'AUTO', [], 2);
+  T2:=AddSQLTokens(stKeyword, T, 'MANUAL', [], 3);
+
+  T3:=AddSQLTokens(stKeyword, [T1, T2], 'CONDITIONAL', [], 4);
+  T4:=AddSQLTokens(stString, [T, T1, T2, T3], '', [], 5);
+end;
+
+procedure TFBSQLCreateShadow.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:ShadowNum:=StrToInt(AWord);
+    5:ShadowFileName:=ExtractQuotedString(AWord, '''');
+  end;
+end;
+
+procedure TFBSQLCreateShadow.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLCreateShadow then
+  begin
+    ShadowNum:=TFBSQLCreateShadow(ASource).ShadowNum;
+    ShadowFileName:=TFBSQLCreateShadow(ASource).ShadowFileName;
+  end;
+  inherited Assign(ASource);
+end;
+
+procedure TFBSQLCreateShadow.MakeSQL;
+var
+  S: String;
+begin
+  //CREATE SHADOW sh_num [AUTO | MANUAL] [CONDITIONAL]
+  //' filepath ' [LENGTH [=] num [PAGE[S]]]
+  //[ <secondary_file> ];
+  //
+  //<secondary_file> ::=
+  //FILE ' filepath '
+  //LENGTH [=] num [PAGE[S]] | STARTING [AT [PAGE]] pagenum
+  S:='CREATE SHADOW '+IntToStr(ShadowNum);
+
+  S:=S + ' ' + AnsiQuotedStr(ShadowFileName, '''');
+  AddSQLCommand(S);
+end;
+
+
 { TFBSQLRelaseSavepoint }
 
 procedure TFBSQLRelaseSavepoint.InitParserTree;
@@ -1400,7 +1589,7 @@ var
 begin
   //SAVEPOINT sp_name
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SAVEPOINT', [toFirstToken, toFindWordLast]);
-    AddSQLTokens(stKeyword, FSQLTokens, '', [], 1);
+    AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 end;
 
 procedure TFBSQLSavepoint.MakeSQL;
@@ -1504,19 +1693,72 @@ end;
 { TFBSQLCommit }
 
 procedure TFBSQLCommit.InitParserTree;
+var
+  FSQLTokens, T1, T2, T2_1, T3, T3_1, T4: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
-end;
+  //COMMIT [WORK] [TRANSACTION tr_name ]
+  //[RELEASE] [RETAIN [SNAPSHOT]];
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'COMMIT', [toFirstToken, toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'WORK', [toOptional], 1);
 
-procedure TFBSQLCommit.MakeSQL;
-begin
-  inherited MakeSQL;
+  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional]);
+    T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 2);
+
+  T3:=AddSQLTokens(stKeyword, FSQLTokens, 'RETAIN', [toOptional], 3);
+    T3_1:=AddSQLTokens(stKeyword, T3, 'SNAPSHOT', [toOptional], 4);
+
+  T4:=AddSQLTokens(stKeyword, [T1, T2, T2_1, T3, T3_1], 'RELEASE', [toOptional], 5);
 end;
 
 procedure TFBSQLCommit.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:WorkTran:=true;
+    2:Name:=AWord;
+    3:CommitType:=cctRetain;
+    4:CommitType:=cctRetainSnaphot;
+    5:RelaseTran:=true;
+  end;
+end;
+
+procedure TFBSQLCommit.MakeSQL;
+var
+  S: String;
+begin
+  S:='COMMIT';
+
+  if WorkTran then
+    S:=S + ' WORK';
+
+  if Name <> '' then
+    S:=S + ' TRANSACTION '+Name;
+
+  if CommitType = cctRetain then
+    S:=S + ' RETAIN'
+  else
+  if CommitType = cctRetainSnaphot then
+    S:=S + ' RETAIN SNAPSHOT';
+
+
+  if RelaseTran then
+    S:=S + ' RELEASE';
+
+  //COMMIT [WORK] [TRANSACTION tr_name ]
+  //[RELEASE] [RETAIN [SNAPSHOT]];
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLCommit.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLCommit then
+  begin
+    WorkTran:=TFBSQLCommit(ASource).WorkTran;
+    CommitType:=TFBSQLCommit(ASource).CommitType;
+    RelaseTran:=TFBSQLCommit(ASource).RelaseTran;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TFBSQLAlterDatabase }
@@ -1530,11 +1772,13 @@ begin
   (*
   ALTER {DATABASE | SCHEMA}
   { <add_sec_clause> [ <add_sec_clausee> ...]}
-  | {ADD DIFFERENCE FILE ' diff_file ' | DROP DIFFERENCE FILE}
+  | {ADD DIFFERENCE FILE ' diff_file '
+  | DROP DIFFERENCE FILE}
   | {{BEGIN | END} BACKUP}
   | {SET DEFAULT CHARACTER SET charset }
   | {SET LINGER TO seconds | DROP LINGER}
-  | {ENCRYPT WITH plugin_name [KEY key_name ] | DECRYPT};
+  | {ENCRYPT WITH plugin_name [KEY key_name ]
+  | DECRYPT};
 
   <add_sec_clause> ::= ADD FILE <sec_file>
   <sec_file> ::= ' filepath '
@@ -1575,9 +1819,11 @@ begin
     T:=AddSQLTokens(stKeyword, T, 'FILE', [], 22);
 
   T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'BEGIN', []);
-    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 22);
-  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'BEGIN', []);
-    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 22);
+    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 23);
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'END', []);
+    T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 24);
+
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'DECRYPT', [], 25);
 end;
 
 procedure TFBSQLAlterDatabase.MakeSQL;
@@ -1594,11 +1840,13 @@ begin
   (*
   ALTER {DATABASE | SCHEMA}
   { <add_sec_clause> [ <add_sec_clausee> ...]}
-  | {ADD DIFFERENCE FILE ' diff_file ' | DROP DIFFERENCE FILE}
+  | {ADD DIFFERENCE FILE ' diff_file '
+  | DROP DIFFERENCE FILE}
   | {{BEGIN | END} BACKUP}
   | {SET DEFAULT CHARACTER SET charset }
   | {SET LINGER TO seconds | DROP LINGER}
-  | {ENCRYPT WITH plugin_name [KEY key_name ] | DECRYPT};
+  | {ENCRYPT WITH plugin_name [KEY key_name ]
+  | DECRYPT};
 
   <add_sec_clause> ::= ADD FILE <sec_file>
   <sec_file> ::= ' filepath '
@@ -1635,7 +1883,21 @@ begin
   end
   else
   if (FAlterCommand = fbadaDropDifferenceFile) then
-    S:=S + LineEnding + '  DROP DIFFERENCE FILE';
+    S:=S + LineEnding + '  DROP DIFFERENCE FILE'
+  else
+  if (FAlterCommand = fbadaBeginBackup) then
+    S:=S + LineEnding + '  BEGIN BACKUP'
+  else
+  if (FAlterCommand = fbadaEndBackup) then
+    S:=S + LineEnding + '  END BACKUP'
+  else
+  if (FAlterCommand = fbadaDecrypt) then
+    S:=S + LineEnding + '  DECRYPT'
+  ;
+
+  //| {SET DEFAULT CHARACTER SET charset }
+  //| {SET LINGER TO seconds | DROP LINGER}
+  //| {ENCRYPT WITH plugin_name [KEY key_name ]
 
   AddSQLCommand(S);
 end;
@@ -1662,6 +1924,9 @@ begin
          FCurFile:=Files.Add(ExtractQuotedString(AWord, ''''));
        end;
     22:FAlterCommand:=fbadaDropDifferenceFile;
+    23:FAlterCommand:=fbadaBeginBackup;
+    24:FAlterCommand:=fbadaEndBackup;
+    25:FAlterCommand:=fbadaDecrypt;
   end;
 end;
 
@@ -3132,18 +3397,18 @@ end;
 constructor TFBSQLSetTransaction.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  IsolationLevel:=tilReadCommitted;
+  //IsolationLevel:=tilReadCommitted;
 end;
 
 procedure TFBSQLSetTransaction.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TFBSQLSetTransaction then
   begin
-    NoWait:=TFBSQLSetTransaction(ASource).NoWait;
     NoAutoUndo:=TFBSQLSetTransaction(ASource).NoAutoUndo;
     LockTimeout:=TFBSQLSetTransaction(ASource).LockTimeout;
     IgnoreLimbo:=TFBSQLSetTransaction(ASource).IgnoreLimbo;
-
+    UseIsolationLivel:=TFBSQLSetTransaction(ASource).UseIsolationLivel;
+    TableStability:=TFBSQLSetTransaction(ASource).TableStability;
   end;
   inherited Assign(ASource);
 end;
@@ -3152,7 +3417,7 @@ procedure TFBSQLSetTransaction.InitParserTree;
 var
   FSQLTokens, TName, TName1, Ttr, TR, TR1, TR2, TW, TW1,
     TW2, TNAU, TLT, TLT1, TTIL, TTIL1, TTIL2, TTIL2_1, TTIL3,
-    TIL, TIL1, TTIL3_1: TSQLTokenRecord;
+    TIL, TIL1, TTIL3_1, TIL4, TIL4_1: TSQLTokenRecord;
 begin
 (*
 SET TRANSACTION
@@ -3165,6 +3430,7 @@ SET TRANSACTION
    [LOCK TIMEOUT seconds]
    [NO AUTO UNDO]
    [IGNORE LIMBO]
+   [RESTART REQUESTS]
    [RESERVING <tables> | USING <dbhandles>]
 
     <tables> ::= <table_spec> [, <table_spec> ...]
@@ -3193,17 +3459,20 @@ SET TRANSACTION
     TLT1:=AddSQLTokens(stInteger, TLT1, '', [], 7);
 
   TIL:=AddSQLTokens(stKeyword, [Ttr, TName1, TR1, TR2, TW, TW2, TNAU, TLT1], 'IGNORE', [toOptional]);
-    TIL1:=AddSQLTokens(stKeyword, TIL, 'LIMBO', [], 8);
+    TIL1:=AddSQLTokens(stKeyword, TIL, 'LIMBO', [toOptional], 8);
 
   TTIL:=AddSQLTokens(stKeyword, [Ttr, TName1, TR1, TR2, TW, TW2, TNAU, TLT1, TIL1], 'ISOLATION', [toOptional]);
-    TTIL1:=AddSQLTokens(stKeyword, TTIL, 'LEVEL', []);
+    TTIL1:=AddSQLTokens(stKeyword, TTIL, 'LEVEL', [], 14);
   TTIL2:=AddSQLTokens(stKeyword, [Ttr, TName1, TR1, TR2, TW, TW2, TNAU, TLT1, TIL1, TTIL1], 'SNAPSHOT', [toOptional], 10);
-    TTIL2_1:=AddSQLTokens(stKeyword, TTIL2, 'TABLE', []);
-    TTIL2_1:=AddSQLTokens(stKeyword, TTIL2, 'STABILITY', []);
+    TTIL2_1:=AddSQLTokens(stKeyword, TTIL2, 'TABLE', [toOptional]);
+    TTIL2_1:=AddSQLTokens(stKeyword, TTIL2_1, 'STABILITY', [], 15);
   TTIL3:=AddSQLTokens(stKeyword, [Ttr, TName1, TR1, TR2, TW, TW2, TNAU, TLT1, TIL1, TTIL1], 'READ', [toOptional]);
   TTIL3:=AddSQLTokens(stKeyword, [TTIL3, TR], 'COMMITTED', [], 11);
-    TTIL3_1:=AddSQLTokens(stKeyword, [TTIL3, TR], 'NO', [], 12);
-    TTIL3_1:=AddSQLTokens(stKeyword, [TTIL3, TTIL3_1], 'RECORD_VERSION', [], 13);
+    TTIL3_1:=AddSQLTokens(stKeyword, [TTIL3, TR], 'NO', [toOptional], 12);
+    TTIL3_1:=AddSQLTokens(stKeyword, [TTIL3, TTIL3_1], 'RECORD_VERSION', [toOptional], 13);
+
+  TIL4:=AddSQLTokens(stKeyword, [Ttr, TName1, TR1, TR2, TW, TW2, TNAU, TLT1, TTIL2, TTIL2_1, TTIL3, TTIL3_1], 'RESTART', [toOptional]);
+    TIL4_1:=AddSQLTokens(stKeyword, TIL4, 'REQUESTS', [toOptional], 16);
 
 (*
 [[ISOLATION LEVEL] {
@@ -3231,6 +3500,7 @@ SET TRANSACTION
   TTIL2_1.AddChildToken([TR, TName, TW, TW1, TLT, TIL1]);
   TTIL3.AddChildToken([TR, TName, TW, TW1, TLT, TIL1]);
   TTIL3_1.AddChildToken([TR, TName, TW, TW1, TLT, TIL1]);
+  TIL4_1.AddChildToken([TR, TName, TW, TW1, TLT, TIL1]);
 end;
 
 procedure TFBSQLSetTransaction.InternalProcessChildToken(
@@ -3238,14 +3508,20 @@ procedure TFBSQLSetTransaction.InternalProcessChildToken(
 begin
   case AChild.Tag of
     1:Name:=AWord;
-    2:ReadOnly:=false;
-    3:ReadOnly:=true;
-    4:NoWait:=false;
-    5:NOWait:=true;
+    2:TransactionParam:=TransactionParam + [tilReadWrite];
+    3:TransactionParam:=TransactionParam + [tilReadOnly];
+    4:TransactionParam:=TransactionParam + [tilWait];
+    5:TransactionParam:=TransactionParam + [tilNoWait];
     6:NoAutoUndo:=true;
     7:LockTimeout:=StrToInt(AWord);
     8:IgnoreLimbo:=true;
     10:IsolationLevel:=tilRepeatableRead;
+    11:IsolationLevel:=tilReadCommitted;
+    12:TransactionParam:=TransactionParam + [tilNoRecVersion];
+    13:if not (tilNoRecVersion in TransactionParam) then TransactionParam:=TransactionParam + [tilRecVersion];
+    14:UseIsolationLivel:=true;
+    15:TableStability:=true;
+    16:TransactionParam:=TransactionParam + [tilRestartRequests];
   end;
 end;
 
@@ -3253,18 +3529,61 @@ procedure TFBSQLSetTransaction.MakeSQL;
 var
   S: String;
 begin
+  (*
+  SET TRANSACTION
+     [NAME tr_name]
+     [READ WRITE | READ ONLY]
+     [[ISOLATION LEVEL] {
+         SNAPSHOT [TABLE STABILITY]
+       | READ COMMITTED [[NO] RECORD_VERSION] }]
+     [WAIT | NO WAIT]
+     [LOCK TIMEOUT seconds]
+     [NO AUTO UNDO]
+     [IGNORE LIMBO]
+     [RESTART REQUESTS]
+     [RESERVING <tables> | USING <dbhandles>]
+
+      <tables> ::= <table_spec> [, <table_spec> ...]
+
+      <table_spec> ::= tablename [, tablename ...]
+        [FOR [SHARED | PROTECTED] {READ | WRITE}]
+
+      <dbhandles> ::= dbhandle [, dbhandle ...]
+  *)
+
   S:='SET TRANSACTION';
   if Name <> '' then
     S:=S + ' NAME ' + Name;
-  if ReadOnly then
-    S:=S + ' READ ONLY'
-  else
+
+  if tilReadOnly in TransactionParam then
+    S:=S + ' READ ONLY';
+  if tilReadWrite in TransactionParam then
     S:=S + ' READ WRITE';
 
-  if NoWait then
-    S:=S + ' NO WAIT'
-  else
+  if tilNoWait in TransactionParam then
+    S:=S + ' NO WAIT';
+  if tilWait in TransactionParam then
     S:=S + ' WAIT';
+
+  if UseIsolationLivel then
+    S:=S + ' ISOLATION LEVEL';
+  case IsolationLevel of
+    tilRepeatableRead:
+      begin
+        S:=S + ' SNAPSHOT';
+        if TableStability then
+          S:=S + ' TABLE STABILITY';
+      end;
+    tilReadCommitted:
+      begin
+        S:=S + ' READ COMMITTED';
+        if tilNoRecVersion in TransactionParam then
+          S:=S + ' NO RECORD_VERSION'
+        else
+        if tilRecVersion in TransactionParam then
+          S:=S + ' RECORD_VERSION';
+      end;
+  end;
 
   if NoAutoUndo then
     S:=S + ' NO AUTO UNDO';
@@ -3275,6 +3594,8 @@ begin
   if IgnoreLimbo then
     S:=S + ' IGNORE LIMBO';
 
+  if tilRestartRequests in TransactionParam then
+    S:=S + ' RESTART REQUESTS';
   AddSQLCommand(S);
 end;
 

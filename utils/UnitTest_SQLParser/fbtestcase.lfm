@@ -1321,7 +1321,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 16
   end
   object sDataBase: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateCollation1'
@@ -1492,67 +1492,78 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterDatabase1'
         Lines.Strings = (
-          'ALTER DATABASE ADD FILE ''D:\test.fdb4'' STARTING AT PAGE 30001;'
+          'ALTER DATABASE'
+          '  ADD FILE ''D:\test.fdb4'' STARTING AT PAGE 30001;'
         )
       end    
       item
         Caption = 'AlterDatabase2'
         Lines.Strings = (
-          'ALTER DATABASE ADD DIFFERENCE FILE ''D:\test.diff'';'
+          'ALTER DATABASE'
+          '  ADD DIFFERENCE FILE ''D:\test.diff'';'
         )
       end    
       item
         Caption = 'AlterDatabase3'
         Lines.Strings = (
-          'ALTER DATABASE DROP DIFFERENCE FILE;'
+          'ALTER DATABASE'
+          '  DROP DIFFERENCE FILE;'
         )
       end    
       item
         Caption = 'AlterDatabase4'
         Lines.Strings = (
-          'ALTER DATABASE BEGIN BACKUP;'
+          'ALTER DATABASE'
+          '  BEGIN BACKUP;'
         )
       end    
       item
         Caption = 'AlterDatabase5'
         Lines.Strings = (
-          'ALTER DATABASE END BACKUP;'
+          'ALTER DATABASE'
+          '  END BACKUP;'
         )
       end    
       item
         Caption = 'AlterDatabase6'
         Lines.Strings = (
-          'ALTER DATABASE SET DEFAULT CHARACTER SET WIN1251;'
+          'ALTER DATABASE'
+          '  SET DEFAULT CHARACTER SET WIN1251;'
         )
       end    
       item
         Caption = 'AlterDatabase7'
         Lines.Strings = (
-          'ALTER DATABASE SET LINGER 30;'
+          'ALTER DATABASE'
+          '  SET LINGER 30;'
         )
       end    
       item
         Caption = 'AlterDatabase8'
         Lines.Strings = (
-          'ALTER DATABASE DROP LINGER;'
+          'ALTER DATABASE'
+          '  DROP LINGER;'
         )
       end    
       item
         Caption = 'AlterDatabase9'
         Lines.Strings = (
-          'ALTER DATABASE SET LINGER 0;'
+          'ALTER DATABASE'
+          '  SET LINGER 0;'
         )
       end    
       item
         Caption = 'AlterDatabase10'
         Lines.Strings = (
-          'ALTER DATABASE ENCRYPT WITH DbCrypt;'
+          'ALTER DATABASE'
+          '  ENCRYPT WITH DbCrypt;'
         )
       end    
       item
         Caption = 'AlterDatabase11'
         Lines.Strings = (
-          'ALTER DATABASE DECRYPT;'
+          'ALTER DATABASE'
+          '  DECRYPT;'
         )
       end    
       item
@@ -1577,6 +1588,18 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'DropShadow1'
         Lines.Strings = (
           'DROP SHADOW 1;'
+        )
+      end    
+      item
+        Caption = 'DropShadow2'
+        Lines.Strings = (
+          'DROP SHADOW 1 DELETE FILE;'
+        )
+      end    
+      item
+        Caption = 'DropShadow3'
+        Lines.Strings = (
+          'DROP SHADOW 1 PRESERVE FILE;'
         )
       end>
     Left = 32
@@ -1775,6 +1798,109 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'Savepoint3'
         Lines.Strings = (
           'RELEASE SAVEPOINT sp_name;'
+        )
+      end    
+      item
+        Caption = 'Commit1'
+        Lines.Strings = (
+          'COMMIT;'
+        )
+      end    
+      item
+        Caption = 'Commit2'
+        Lines.Strings = (
+          'COMMIT WORK;'
+        )
+      end    
+      item
+        Caption = 'Commit3'
+        Lines.Strings = (
+          'COMMIT TRANSACTION tr_name;'
+        )
+      end    
+      item
+        Caption = 'Commit4'
+        Lines.Strings = (
+          'COMMIT RETAIN;'
+        )
+      end    
+      item
+        Caption = 'Commit5'
+        Lines.Strings = (
+          'COMMIT RETAIN SNAPSHOT;'
+        )
+      end    
+      item
+        Caption = 'Commit6'
+        Lines.Strings = (
+          'COMMIT RETAIN SNAPSHOT RELEASE;'
+        )
+      end    
+      item
+        Caption = 'Transaction1'
+        Lines.Strings = (
+          'SET TRANSACTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Transaction2'
+        Lines.Strings = (
+          'SET TRANSACTION READ COMMITTED;'
+        )
+      end    
+      item
+        Caption = 'Transaction3'
+        Lines.Strings = (
+          'SET TRANSACTION READ ONLY;'
+        )
+      end    
+      item
+        Caption = 'Transaction4'
+        Lines.Strings = (
+          'SET TRANSACTION READ WRITE;'
+        )
+      end    
+      item
+        Caption = 'Transaction5'
+        Lines.Strings = (
+          'SET TRANSACTION NAME tr_name;'
+        )
+      end    
+      item
+        Caption = 'Transaction6'
+        Lines.Strings = (
+          'SET TRANSACTION ISOLATION LEVEL SNAPSHOT;'
+        )
+      end    
+      item
+        Caption = 'Transaction7'
+        Lines.Strings = (
+          'SET TRANSACTION SNAPSHOT;'
+        )
+      end    
+      item
+        Caption = 'Transaction8'
+        Lines.Strings = (
+          'SET TRANSACTION ISOLATION LEVEL SNAPSHOT TABLE STABILITY;'
+        )
+      end    
+      item
+        Caption = 'Transaction9'
+        Lines.Strings = (
+          'SET TRANSACTION READ COMMITTED RECORD_VERSION;'
+        )
+      end    
+      item
+        Caption = 'Transaction10'
+        Lines.Strings = (
+          'SET TRANSACTION READ COMMITTED NO RECORD_VERSION;'
+        )
+      end    
+      item
+        Caption = 'Transaction11'
+        Lines.Strings = (
+          'SET TRANSACTION READ COMMITTED RESTART REQUESTS;'
         )
       end>
     Left = 32
