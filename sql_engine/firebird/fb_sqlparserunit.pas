@@ -763,6 +763,31 @@ type
     property TranType:TFBRollbackType read FTranType write FTranType;
   end;
 
+  { TFBSQLSavepoint }
+
+  TFBSQLSavepoint = class(TSQLSavepoint)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
+  { TFBSQLRelaseSavepoint }
+
+  TFBSQLRelaseSavepoint = class(TSQLRelaseSavepoint)
+  private
+    FRelaseOnly: boolean;
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property RelaseOnly:boolean read FRelaseOnly write FRelaseOnly;
+  end;
+
   { TFBSQLGrant }
 
   TFBSQLGrant = class(TSQLCommandGrant)
@@ -1322,6 +1347,76 @@ begin
       TConstRef9.AddChildToken(AEndTokens[i]);
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
+  end;
+end;
+
+{ TFBSQLRelaseSavepoint }
+
+procedure TFBSQLRelaseSavepoint.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  //RELEASE SAVEPOINT sp_name [ONLY]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RELEASE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SAVEPOINT', [toFindWordLast]);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+    AddSQLTokens(stKeyword, FSQLTokens, 'ONLY', [toOptional], 2);
+end;
+
+procedure TFBSQLRelaseSavepoint.MakeSQL;
+var
+  S: String;
+begin
+  S:='RELEASE SAVEPOINT ' + Name;
+  if RelaseOnly then
+    S:=S + ' ONLY';
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLRelaseSavepoint.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:RelaseOnly:=true;
+  end;
+end;
+
+procedure TFBSQLRelaseSavepoint.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLRelaseSavepoint then
+  begin
+    FRelaseOnly:=TFBSQLRelaseSavepoint(ASource).FRelaseOnly;
+  end;
+  inherited Assign(ASource);
+end;
+
+{ TFBSQLSavepoint }
+
+procedure TFBSQLSavepoint.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  //SAVEPOINT sp_name
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SAVEPOINT', [toFirstToken, toFindWordLast]);
+    AddSQLTokens(stKeyword, FSQLTokens, '', [], 1);
+end;
+
+procedure TFBSQLSavepoint.MakeSQL;
+var
+  S: String;
+begin
+  S:='SAVEPOINT '+Name;
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLSavepoint.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
   end;
 end;
 

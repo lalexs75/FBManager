@@ -54,7 +54,7 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="428"/>
         <CursorPos Y="444"/>
         <UsageCount Value="200"/>
@@ -76,9 +76,9 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <EditorIndex Value="6"/>
-        <TopLine Value="1687"/>
-        <CursorPos Y="1702"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="513"/>
+        <CursorPos Y="539"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="1">
           <Item0 Y="1970" ID="2"/>
@@ -101,7 +101,7 @@
         <UnitName Value="FBSQLEngineUnit"/>
         <EditorIndex Value="2"/>
         <TopLine Value="4621"/>
-        <CursorPos X="46" Y="4628"/>
+        <CursorPos X="5" Y="4627"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -142,8 +142,8 @@
         <UnitName Value="fb_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1687"/>
-        <CursorPos Y="1691"/>
+        <TopLine Value="1344"/>
+        <CursorPos X="3" Y="1360"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -226,7 +226,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="70"/>
+        <UsageCount Value="71"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -235,7 +235,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="116"/>
         <CursorPos X="25" Y="134"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value=""/>
@@ -449,11 +449,10 @@
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="635"/>
         <CursorPos Y="657"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/forms.pp"/>
@@ -543,103 +542,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="649" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="650" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="652" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="651" TopLine="630"/>
-      </Position>
-      <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
-        <Caret Line="657" TopLine="635"/>
-      </Position>
+    <JumpHistory HistoryIndex="24">
       <Position>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Caret Line="1701" TopLine="1687"/>
@@ -663,6 +566,82 @@
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
         <Caret Line="394" Column="49" TopLine="382"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1691" TopLine="1687"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1859" TopLine="1845"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1866" Column="48" TopLine="1849"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="397" Column="15" TopLine="383"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="749" Column="71" TopLine="725"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1335" Column="35" TopLine="1312"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="756" Column="15" TopLine="742"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="771" Column="29" TopLine="756"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1360" Column="18" TopLine="1350"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1355" Column="3" TopLine="1339"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1363" Column="3" TopLine="1347"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="782" Column="15" TopLine="766"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1372" Column="7" TopLine="1352"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="788" Column="67" TopLine="767"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1383" Column="60" TopLine="1379"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="784" Column="15" TopLine="773"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1375" Column="23" TopLine="1364"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="783" Column="15" TopLine="771"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="1372" Column="18" TopLine="1355"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -692,13 +671,6 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Line Value="2270"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Line Value="1859"/>
       </Item>
     </BreakPoints>
     <Watches>

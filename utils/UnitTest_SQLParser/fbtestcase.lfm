@@ -1758,6 +1758,24 @@ object FBTestSQLData: TFBTestSQLData
         Lines.Strings = (
           'ROLLBACK TRANSACTION tr_name RELEASE;'
         )
+      end    
+      item
+        Caption = 'Savepoint1'
+        Lines.Strings = (
+          'SAVEPOINT sp_name;'
+        )
+      end    
+      item
+        Caption = 'Savepoint2'
+        Lines.Strings = (
+          'RELEASE SAVEPOINT sp_name ONLY;'
+        )
+      end    
+      item
+        Caption = 'Savepoint3'
+        Lines.Strings = (
+          'RELEASE SAVEPOINT sp_name;'
+        )
       end>
     Left = 32
     Top = 611

@@ -53,8 +53,8 @@
         <UnitName Value="FBTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="378"/>
-        <CursorPos X="3" Y="380"/>
+        <TopLine Value="1279"/>
+        <CursorPos X="51" Y="1298"/>
         <UsageCount Value="130"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -314,7 +314,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="22">
+    <JumpHistory HistoryIndex="24">
       <Position>
         <Filename Value="pgtestcase.pas"/>
         <Caret Line="2370" Column="55" TopLine="2341"/>
@@ -404,6 +404,14 @@
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="37" Column="25" TopLine="14"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="393" Column="20" TopLine="378"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="303" Column="25" TopLine="301"/>
       </Position>
     </JumpHistory>
     <RunParams>

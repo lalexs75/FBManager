@@ -300,6 +300,9 @@ type
     procedure Transaction6;
     procedure Transaction7;
     procedure Transaction8;
+    procedure Savepoint1;
+    procedure Savepoint2;
+    procedure Savepoint3;
   end;
 
   { TFBTestSQLData }
@@ -1278,6 +1281,21 @@ end;
 procedure TFBSQLParserTest.Transaction8;
 begin
   DoTestSQL(FBTestSQLData.sTransaction['Transaction8']);
+end;
+
+procedure TFBSQLParserTest.Savepoint1;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Savepoint1']);
+end;
+
+procedure TFBSQLParserTest.Savepoint2;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Savepoint2']);
+end;
+
+procedure TFBSQLParserTest.Savepoint3;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Savepoint3']);
 end;
 
 procedure TFBSQLParserTest.SetUp;

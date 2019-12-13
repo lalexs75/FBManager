@@ -4623,10 +4623,13 @@ FILTER
   //GRANT
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLGrant, 'GRANT');                           //GRANT
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRevoke, 'REVOKE');                         //REVOKE
-  //SET TRANSACTION
+
+  //TRANSACTION
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLSetTransaction, 'SET TRANSACTION');        //SET TRANSACTION
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCommit, 'COMMIT');
-  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRollback, '');
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRollback, 'ROLLBACK');
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLSavepoint, 'SAVEPOINT');
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLRelaseSavepoint, 'RELASE SAVEPOINT');
 
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLExecuteProcedure, 'EXECUTE PROCEDURE');
 
