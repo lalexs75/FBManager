@@ -1705,40 +1705,58 @@ object FBTestSQLData: TFBTestSQLData
           'IS ''Дата начала'';'
         )
       end>
-    Left = 41
+    Left = 32
     Top = 539
   end
   object sTransaction: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
       item
-        Caption = 'Строка 1'
+        Caption = 'Rollback1'
+        Lines.Strings = (
+          'ROLLBACK;'
+        )
+      end    
+      item
+        Caption = 'Rollback2'
+        Lines.Strings = (
+          'ROLLBACK WORK;'
+        )
+      end    
+      item
+        Caption = 'Rollback3'
+        Lines.Strings = (
+          'ROLLBACK WORK RELEASE;'
+        )
+      end    
+      item
+        Caption = 'Rollback4'
         Lines.Strings = (
           'ROLLBACK TO SAVEPOINT sp_name RELEASE;'
-          ''
+        )
+      end    
+      item
+        Caption = 'Rollback5'
+        Lines.Strings = (
           'ROLLBACK WORK TO SAVEPOINT sp_name;'
-          ''
+        )
+      end    
+      item
+        Caption = 'Rollback6'
+        Lines.Strings = (
           'ROLLBACK RETAIN SNAPSHOT;'
+        )
+      end    
+      item
+        Caption = 'Rollback7'
+        Lines.Strings = (
           'ROLLBACK TRANSACTION tr_name;'
-          'ROLLBACK WORK;'
-          '--ROLLBACK;'
-          ''
-          'ROLLBACK [WORK] [TRANSACTION tr_name ]'
-          '[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];'
-          ''
-          'SAVEPOINT sp_name'
-          ''
-          'RELEASE SAVEPOINT sp_name [ONLY]'
-          ''
-          'COMMIT;'
-          ''
-          'COMMIT WORK;'
-          'COMMIT TRANSACTION tr_name;'
-          'COMMIT RETAIN;'
-          'COMMIT RETAIN SNAPSHOT;'
-          ''
-          'COMMIT [WORK] [TRANSACTION tr_name ]'
-          '[RELEASE] [RETAIN [SNAPSHOT]];'
+        )
+      end    
+      item
+        Caption = 'Rollback8'
+        Lines.Strings = (
+          'ROLLBACK TRANSACTION tr_name RELEASE;'
         )
       end>
     Left = 32

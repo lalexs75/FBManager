@@ -291,6 +291,15 @@ type
     procedure CommentOn6;
     procedure CommentOn7;
     procedure CommentOn8;
+
+    procedure Transaction1;
+    procedure Transaction2;
+    procedure Transaction3;
+    procedure Transaction4;
+    procedure Transaction5;
+    procedure Transaction6;
+    procedure Transaction7;
+    procedure Transaction8;
   end;
 
   { TFBTestSQLData }
@@ -1229,6 +1238,46 @@ end;
 procedure TFBSQLParserTest.CommentOn8;
 begin
   DoTestSQL(FBTestSQLData.sComment['CommentOn8']);
+end;
+
+procedure TFBSQLParserTest.Transaction1;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction1']);
+end;
+
+procedure TFBSQLParserTest.Transaction2;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction2']);
+end;
+
+procedure TFBSQLParserTest.Transaction3;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction3']);
+end;
+
+procedure TFBSQLParserTest.Transaction4;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction4']);
+end;
+
+procedure TFBSQLParserTest.Transaction5;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction5']);
+end;
+
+procedure TFBSQLParserTest.Transaction6;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction6']);
+end;
+
+procedure TFBSQLParserTest.Transaction7;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction7']);
+end;
+
+procedure TFBSQLParserTest.Transaction8;
+begin
+  DoTestSQL(FBTestSQLData.sTransaction['Transaction8']);
 end;
 
 procedure TFBSQLParserTest.SetUp;

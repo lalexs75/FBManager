@@ -744,14 +744,22 @@ type
   end;
 
   { TFBSQLRollback }
+  TFBRollbackType = (rrtNone, rrtRetain, rrtRetainSnaphot, rrtToSavepoint);
 
   TFBSQLRollback = class(TSQLRollback)
   private
+    FRelaseTran: boolean;
+    FTranType: TFBRollbackType;
+    FWorkTran: boolean;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property RelaseTran:boolean read FRelaseTran write FRelaseTran;
+    property WorkTran:boolean read FWorkTran write FWorkTran;
+    property TranType:TFBRollbackType read FTranType write FTranType;
   end;
 
   { TFBSQLGrant }
@@ -1320,14 +1328,41 @@ end;
 
 procedure TFBSQLRollback.InitParserTree;
 var
-  FSQLTokens, T1, T2, T2_1: TSQLTokenRecord;
+  FSQLTokens, T1, T2, T2_1, T3, T3_1, T4, T4_1, T5: TSQLTokenRecord;
 begin
   //ROLLBACK [WORK] [TRANSACTION tr_name ]
   //[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ROLLBACK', [toFirstToken, toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'WORK', [toOptional], 1);
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional]);
-    T2_1:=AddSQLTokens(stIdentificator, T2, '', [toOptional], 2);
+
+  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TRANSACTION', [toOptional]);
+    T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 2);
+
+  T3:=AddSQLTokens(stKeyword, FSQLTokens, 'RETAIN', [toOptional], 3);
+    T3_1:=AddSQLTokens(stKeyword, T3, 'SNAPSHOT', [toOptional], 4);
+
+  T4:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'TO', [toOptional]);
+    T4_1:=AddSQLTokens(stKeyword, T4, 'SAVEPOINT', []);
+    T4_1:=AddSQLTokens(stIdentificator, T4_1, '', [], 5);
+
+  T5:=AddSQLTokens(stKeyword, [FSQLTokens, T1, T2_1, T3_1, T4_1], 'RELEASE', [toOptional], 6);
+end;
+
+procedure TFBSQLRollback.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:WorkTran:=true;
+    2:Name:=AWord;
+    3:FTranType:=rrtRetain;
+    4:FTranType:=rrtRetainSnaphot;
+    5:begin
+        FTranType:=rrtToSavepoint;
+        SavepointName:=AWord;
+      end;
+    6:RelaseTran:=true;
+  end;
 end;
 
 procedure TFBSQLRollback.MakeSQL;
@@ -1337,13 +1372,37 @@ begin
   //ROLLBACK [WORK] [TRANSACTION tr_name ]
   //[RETAIN [SNAPSHOT] | TO SAVEPOINT sp_name] [RELEASE];
   S:='ROLLBACK';
+  if WorkTran then
+    S:=S + ' WORK';
+
+  if Name <> '' then
+    S:=S + ' TRANSACTION '+Name;
+
+  if FTranType = rrtRetain then
+    S:=S + ' RETAIN'
+  else
+  if FTranType = rrtRetainSnaphot then
+    S:=S + ' RETAIN SNAPSHOT'
+  else
+  if (FTranType = rrtToSavepoint) and (SavepointName<>'') then
+    S:=S + ' TO SAVEPOINT ' + SavepointName;
+
+
+  if RelaseTran then
+    S:=S + ' RELEASE';
+
   AddSQLCommand(S);
 end;
 
-procedure TFBSQLRollback.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+procedure TFBSQLRollback.Assign(ASource: TSQLObjectAbstract);
 begin
-  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  if ASource is TFBSQLRollback then
+  begin
+    RelaseTran:=TFBSQLRollback(ASource).RelaseTran;
+    WorkTran:=TFBSQLRollback(ASource).WorkTran;
+    TranType:=TFBSQLRollback(ASource).TranType;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TFBSQLCommit }
