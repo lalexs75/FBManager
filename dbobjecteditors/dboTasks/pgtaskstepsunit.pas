@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, EditBtn, ComCtrls, PostgreSQLEngineUnit, pg_tasks,
+  StdCtrls, EditBtn, ComCtrls, PostgreSQLEngineUnit, pg_tasks, fbmSqlParserUnit,
   fdmAbstractEditorUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit;
 
 type
@@ -69,10 +69,11 @@ type
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     procedure Localize;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
 implementation
-uses ZDataset, pg_sql_lines_unit, fbmStrConstUnit,
+uses ZDataset, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit,
   pgTaskStepsBuildConnectionUnit;
 
 {$R *.lfm}
@@ -125,16 +126,15 @@ end;
 
 procedure TpgTaskStepsPage.LoadTaskData;
 var
-  U:TPGTaskStep;
-  i: Integer;
+  U, U1:TPGTaskStep;
 begin
   ClearData;
-  for i:=0 to TPGTask(DBObject).Steps.Count-1 do
+
+  for U in TPGTask(DBObject).Steps do
   begin
-    U:=TPGTaskStep.Create(TPGTask(DBObject));
-    U.Assign(TPGTaskStep(TPGTask(DBObject).Steps[i]));
-    ListBox1.Items.Add(U.Name);
-    ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
+    U1:=TPGTaskStep.Create(nil);
+    U1.Assign(U);
+    ListBox1.Items.AddObject(U1.Name, U1);
   end;
 
   if ListBox1.Items.Count>0 then
@@ -165,7 +165,7 @@ var
   Q:TZQuery;
 begin
   ComboBox1.Items.Clear;
-  Q:=TSQLEnginePostgre(DBObject.OwnerDB).GetSQLSysQuery(pgDBList);
+  Q:=TSQLEnginePostgre(DBObject.OwnerDB).GetSQLSysQuery(pgSqlTextModule.sqlTasks['pgDBList']);
   try
     Q.Open;
     while not Q.Eof do
@@ -180,20 +180,20 @@ end;
 
 function TpgTaskStepsPage.DeleteTaskStep: boolean;
 begin
-  Result:=false;
+{  Result:=false;
   if Assigned(FCurStep) then
   begin
     TPGTask(DBObject).DeleteTaskStep(FCurStep);
     FCurStep:=nil;
     LoadTaskData;
-  end;
+  end; }
 end;
 
 function TpgTaskStepsPage.SaveCurrent: boolean;
 var
   U:TPGTaskStep;
 begin
-  Result:=FModified and Assigned(FCurStep);
+{  Result:=FModified and Assigned(FCurStep);
   if not Result then exit;
   try
     U:=TPGTaskStep.Create(TPGTask(DBObject));
@@ -209,7 +209,7 @@ begin
       Result:=TPGTask(DBObject).CompileTaskStep(U);
   finally
     U.Free;
-  end;
+  end; }
 end;
 
 function TpgTaskStepsPage.AddNew: boolean;
@@ -273,8 +273,21 @@ begin
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=TabSheet2;
   EditorFrame.TextEditor.OnChange:=@Edit1Change;
-  LoadTaskData;
   LoadDBList;
+  LoadTaskData;
+end;
+
+function TpgTaskStepsPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
+var
+  FCmd: TPGSQLTaskCreate;
+begin
+  if ASQLObject is TPGSQLTaskCreate then
+  begin
+    Result:=true;
+    FCmd:=TPGSQLTaskCreate(ASQLObject);
+  end
+  else
+    Result:=false;
 end;
 
 end.

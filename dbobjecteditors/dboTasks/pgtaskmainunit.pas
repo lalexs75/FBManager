@@ -135,12 +135,18 @@ end;
 
 function TpgTaskMainPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
-  FCmd:TPGTaskSQLCmd;
+  FCmd: TPGSQLTaskCreate;
 begin
-  Result:=true;
-  FCmd:=TPGTaskSQLCmd(ASQLObject);
-  FCmd.Name:=Edit1.Text;
-  FCmd.TaskClass:=ComboBox1.Text;
+  if ASQLObject is TPGSQLTaskCreate then
+  begin
+    Result:=true;
+    FCmd:=TPGSQLTaskCreate(ASQLObject);
+    FCmd.Name:=Edit1.Text;
+    FCmd.TaskClass:=ComboBox1.Text;
+
+  end
+  else
+    Result:=false;
 end;
 
 end.

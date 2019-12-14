@@ -92,76 +92,76 @@ const
       '       statements;'+LineEnding+
       'end;';
 
-const
-  pgTasksSchema = 'select * from pg_namespace where pg_namespace.nspname = ''pgagent''';
+//const
+  //pgTasksSchema = 'select * from pg_namespace where pg_namespace.nspname = ''pgagent''';
 
-  pgTaskClassList =
-    'select '+
-    '  pga_jobclass.jclid, '+
-    '  pga_jobclass.jclname '+
-    'from '+
-    '  pgagent.pga_jobclass '+
-    'order by '+
-    '  pga_jobclass.jclid';
+  //pgTaskClassList =
+  //  'select '+
+  //  '  pga_jobclass.jclid, '+
+  //  '  pga_jobclass.jclname '+
+  //  'from '+
+  //  '  pgagent.pga_jobclass '+
+  //  'order by '+
+  //  '  pga_jobclass.jclid';
 
 
-  pgTasksJobData =
-    'select '+
-      '  pga_job.jobjclid, '+
-      '  pga_job.jobname, '+
-      '  pga_job.jobdesc, '+
-      '  pga_job.jobhostagent, '+
-      '  pga_job.jobenabled, '+
-      '  pga_job.jobcreated, '+
-      '  pga_job.jobchanged, '+
-      '  pga_job.jobagentid, '+
-      '  pga_job.jobnextrun, '+
-      '  pga_job.joblastrun '+
-      'from '+
-      '  pgagent.pga_job '+
-      'where '+
-      '  pga_job.jobid = :jobid';
+  //pgTasksJobData =
+  //  'select '+
+  //    '  pga_job.jobjclid, '+
+  //    '  pga_job.jobname, '+
+  //    '  pga_job.jobdesc, '+
+  //    '  pga_job.jobhostagent, '+
+  //    '  pga_job.jobenabled, '+
+  //    '  pga_job.jobcreated, '+
+  //    '  pga_job.jobchanged, '+
+  //    '  pga_job.jobagentid, '+
+  //    '  pga_job.jobnextrun, '+
+  //    '  pga_job.joblastrun '+
+  //    'from '+
+  //    '  pgagent.pga_job '+
+  //    'where '+
+  //    '  pga_job.jobid = :jobid';
 
-  pgTaskStepList =
-    'select '+
-    '  pga_jobstep.jstid, '+
-    '  pga_jobstep.jstname, '+
-    '  pga_jobstep.jstdesc, '+
-    '  pga_jobstep.jstenabled, '+
-    '  pga_jobstep.jstkind, '+
-    '  pga_jobstep.jstcode, '+
-    '  pga_jobstep.jstconnstr, '+
-    '  pga_jobstep.jstdbname, '+
-    '  pga_jobstep.jstonerror, '+
-    '  pga_jobstep.jscnextrun '+
-    'from '+
-    '  pgagent.pga_jobstep '+
-    'where '+
-    '  pga_jobstep.jstjobid = :jstjobid '+
-    'order by '+
-    '  pga_jobstep.jstname';
+  //pgTaskStepList =
+  //  'select '+
+  //  '  pga_jobstep.jstid, '+
+  //  '  pga_jobstep.jstname, '+
+  //  '  pga_jobstep.jstdesc, '+
+  //  '  pga_jobstep.jstenabled, '+
+  //  '  pga_jobstep.jstkind, '+
+  //  '  pga_jobstep.jstcode, '+
+  //  '  pga_jobstep.jstconnstr, '+
+  //  '  pga_jobstep.jstdbname, '+
+  //  '  pga_jobstep.jstonerror, '+
+  //  '  pga_jobstep.jscnextrun '+
+  //  'from '+
+  //  '  pgagent.pga_jobstep '+
+  //  'where '+
+  //  '  pga_jobstep.jstjobid = :jstjobid '+
+  //  'order by '+
+  //  '  pga_jobstep.jstname';
 
-  pgTaskSheduleList =
-    'select '+
-    '  pga_schedule.jscid, '+
-    '  pga_schedule.jscname, '+
-    '  pga_schedule.jscdesc, '+
-    '  pga_schedule.jscenabled, '+
-    '  pga_schedule.jscstart, '+
-    '  pga_schedule.jscend, '+
-    '  pga_schedule.jscminutes, '+
-    '  pga_schedule.jschours, '+
-    '  pga_schedule.jscweekdays, '+
-    '  pga_schedule.jscmonthdays, '+
-    '  pga_schedule.jscmonths '+
-    'from '+
-    '  pgagent.pga_schedule '+
-    'where '+
-    '  pga_schedule.jscjobid = :jscjobid '+
-    'order by '+
-    '  pga_schedule.jscid';
+  //pgTaskSheduleList =
+  //  'select '+
+  //  '  pga_schedule.jscid, '+
+  //  '  pga_schedule.jscname, '+
+  //  '  pga_schedule.jscdesc, '+
+  //  '  pga_schedule.jscenabled, '+
+  //  '  pga_schedule.jscstart, '+
+  //  '  pga_schedule.jscend, '+
+  //  '  pga_schedule.jscminutes, '+
+  //  '  pga_schedule.jschours, '+
+  //  '  pga_schedule.jscweekdays, '+
+  //  '  pga_schedule.jscmonthdays, '+
+  //  '  pga_schedule.jscmonths '+
+  //  'from '+
+  //  '  pgagent.pga_schedule '+
+  //  'where '+
+  //  '  pga_schedule.jscjobid = :jscjobid '+
+  //  'order by '+
+  //  '  pga_schedule.jscid';
 
-  pgDBList = 'select pg_database.datname from pg_database where not pg_database.datname like ''template%'' order by pg_database.datname';
+  //pgDBList = 'select pg_database.datname from pg_database where not pg_database.datname like ''template%'' order by pg_database.datname';
 
 implementation
 

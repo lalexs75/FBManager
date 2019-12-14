@@ -56,7 +56,6 @@ type
   private
     SQLEngine:TSQLEnginePostgre;
     procedure LoadUserData;
-//    function CompileUser:boolean;
     procedure PrintUserCard;
     function UserOptions:TPGUserOptions;
   public
@@ -177,7 +176,7 @@ end;
 
 function TfbmUserEditorForm.PageName: string;
 begin
-  Result:='User name';
+  Result:=sUserName1;
 end;
 
 function TfbmUserEditorForm.DoMetod(PageAction: TEditorPageAction): boolean;
@@ -186,7 +185,6 @@ begin
   case PageAction of
     epaPrint:PrintUserCard;
     epaRefresh:LoadUserData;
-    //epaCompile:Result:=CompileUser;
   end;
 end;
 

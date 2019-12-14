@@ -1,8 +1,8 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 469
-  VerticalOffset = 0
+  HorizontalOffset = 309
+  VerticalOffset = 1
   Width = 1081
   object sqlTypesList: TStrHolder
     Capacity = 40
@@ -362,34 +362,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f747970652e7479706e616d65'
     )
   end
-  object sqlSchema: TStrHolder
-    Capacity = 19
-    Macros = <>
-    Left = 37
-    Top = 528
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f6e616d6573706163652e6f696420617320696e7465676572292c'
-      '202070675f6e616d6573706163652e6e73706e616d652c'
-      '202070675f6e616d6573706163652e6e73706f776e65722c'
-      '202070675f757365722e7573656e616d65202c'
-      '202070675f6e616d6573706163652e6e737061636c2061732061636c5f6c6973742c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020202020696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f6e616d6573706163652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f6e616d6573706163652729206173206465736372697074696f6e20'
-      '66726f6d'
-      '202070675f6e616d657370616365'
-      '2020696e6e6572206a6f696e2070675f75736572206f6e202870675f6e616d6573706163652e6e73706f776e6572203d2070675f757365722e757365737973696429'
-      '7768657265'
-      '202070675f6e616d6573706163652e6e73706e616d65203d203a6e73706e616d65'
-      ''
-    )
-  end
   object sqlSequence: TStrHolder
     Capacity = 18
     Macros = <    
@@ -444,34 +416,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f6576656e745f74726967676572'
       '6f72646572206279'
       '202070675f6576656e745f747269676765722e6576746e616d6520'
-    )
-  end
-  object sqlSchemasAll: TStrHolder
-    Capacity = 19
-    Macros = <>
-    Left = 112
-    Top = 528
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f6e616d6573706163652e6f696420617320696e7465676572292c'
-      '2020636173742870675f6e616d6573706163652e6f696420617320696e7465676572292c'
-      '202070675f6e616d6573706163652e6e73706e616d652c'
-      '202070675f6e616d6573706163652e6e73706f776e65722c'
-      '202070675f757365722e7573656e616d6520617320646174612c'
-      '202070675f6e616d6573706163652e6e737061636c2061732061636c5f6c6973742c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f6e616d6573706163652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f6e616d6573706163652729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f6e616d657370616365'
-      '2020696e6e6572206a6f696e2070675f75736572206f6e202870675f6e616d6573706163652e6e73706f776e6572203d2070675f757365722e757365737973696429'
-      '6f72646572206279'
-      '202070675f6e616d6573706163652e6e73706e616d65'
-      ''
     )
   end
   object sPGUsers: TStrHolder
@@ -638,87 +582,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f67726f75702e67726f6e616d65203d203a67726f6e616d65'
     )
   end
-  object pgFtsConfigs: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 40
-    Top = 680
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f74735f636f6e6669672e6f696420617320696e7465676572292c'
-      '2020636173742870675f74735f636f6e6669672e6366676e616d65737061636520617320696e7465676572292c'
-      '202070675f74735f636f6e6669672e6366676e616d652c'
-      '202070675f74735f636f6e6669672e6366676e616d6573706163652c'
-      '202070675f74735f636f6e6669672e6366676e616d6520617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f74735f636f6e6669672e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f74735f636f6e6669672729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f74735f636f6e666967'
-      '6f72646572206279'
-      '202070675f74735f636f6e6669672e6366676e616d65'
-      ''
-    )
-  end
-  object pgFtsDicts: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 112
-    Top = 680
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f74735f646963742e6f696420617320696e7465676572292c'
-      '2020636173742870675f74735f646963742e646963746e616d65737061636520617320696e7465676572292c'
-      '202070675f74735f646963742e646963746e616d652c'
-      '202070675f74735f646963742e646963746f776e65722c'
-      '202070675f74735f646963742e64696374696e69746f7074696f6e20617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f74735f646963742e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f74735f646963742729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f74735f64696374'
-      '6f72646572206279'
-      '202070675f74735f646963742e646963746e616d65'
-      ''
-      ''
-    )
-  end
-  object pgFtsTempl: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 288
-    Top = 680
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f74735f74656d706c6174652e6f696420617320696e7465676572292c'
-      '2020636173742870675f74735f74656d706c6174652e746d706c6e616d65737061636520617320696e7465676572292c'
-      '202070675f74735f74656d706c6174652e746d706c6e616d652c'
-      '202070675f74735f74656d706c6174652e746d706c696e69742c'
-      '202070675f74735f74656d706c6174652e746d706c6c6578697a6520617320646174612c'
-      ''
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f74735f74656d706c6174652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f74735f74656d706c6174652729206173206465736372697074696f6e'
-      ''
-      '66726f6d'
-      '202070675f74735f74656d706c617465'
-      '6f72646572206279'
-      '202070675f74735f74656d706c6174652e746d706c6e616d65'
-      ''
-    )
-  end
   object pgExtensions: TStrHolder
     Capacity = 16
     Macros = <>
@@ -787,35 +650,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f657874656e73696f6e'
       '7768657265'
       '202070675f657874656e73696f6e2e6f6964203d203a6f6964'
-    )
-  end
-  object pgFtsConfig: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 40
-    Top = 744
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f74735f636f6e6669672e6f69642c'
-      '202070675f74735f636f6e6669672e6366676e616d652c'
-      '202070675f74735f636f6e6669672e6366676e616d6573706163652c'
-      '202070675f74735f636f6e6669672e6366676f776e65722c'
-      '202070675f74735f636f6e6669672e6366677061727365722c'
-      '202070675f74735f7061727365722e7072736e616d652c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f74735f636f6e6669672e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f74735f636f6e6669672729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f74735f636f6e666967'
-      '2020696e6e6572206a6f696e2070675f74735f706172736572206f6e202870675f74735f636f6e6669672e636667706172736572203d2070675f74735f7061727365722e6f696429'
-      '7768657265'
-      '2020202070675f74735f636f6e6669672e6366676e616d657370616365203d203a6e616d657370616365'
-      '2020616e64'
-      '2020202070675f74735f636f6e6669672e6f6964203d203a6f6964'
     )
   end
   object sqlSequence_v10: TStrHolder
@@ -1838,7 +1672,7 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 37
     Top = 184
   end
-  object pgFTsParsers: TRxTextHolder
+  object sqlFts: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
       item
@@ -1878,9 +1712,107 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
           ''
         )
+      end    
+      item
+        Caption = 'pgFtsConfigs'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_ts_config.oid as integer),'
+          '  cast(pg_ts_config.cfgnamespace as integer),'
+          '  pg_ts_config.cfgname,'
+          '  pg_ts_config.cfgnamespace,'
+          '  pg_ts_config.cfgname as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_ts_config.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_ts_config'') as description'
+          'from'
+          '  pg_ts_config'
+          'order by'
+          '  pg_ts_config.cfgname'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFtsConfig'
+        Lines.Strings = (
+          'select'
+          '  pg_ts_config.oid,'
+          '  pg_ts_config.cfgname,'
+          '  pg_ts_config.cfgnamespace,'
+          '  pg_ts_config.cfgowner,'
+          '  pg_ts_config.cfgparser,'
+          '  pg_ts_parser.prsname,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_ts_config.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_ts_config'') as description'
+          'from'
+          '  pg_ts_config'
+          '  inner join pg_ts_parser on (pg_ts_config.cfgparser = pg_ts_parser.oid)'
+          'where'
+          '    pg_ts_config.cfgnamespace = :namespace'
+          '  and'
+          '    pg_ts_config.oid = :oid'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFtsDicts'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_ts_dict.oid as integer),'
+          '  cast(pg_ts_dict.dictnamespace as integer),'
+          '  pg_ts_dict.dictname,'
+          '  pg_ts_dict.dictowner,'
+          '  pg_ts_dict.dictinitoption as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_ts_dict.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_ts_dict'') as description'
+          'from'
+          '  pg_ts_dict'
+          'order by'
+          '  pg_ts_dict.dictname'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFtsTempl'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_ts_template.oid as integer),'
+          '  cast(pg_ts_template.tmplnamespace as integer),'
+          '  pg_ts_template.tmplname,'
+          '  pg_ts_template.tmplinit,'
+          '  pg_ts_template.tmpllexize as data,'
+          ''
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_ts_template.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_ts_template'') as description'
+          ''
+          'from'
+          '  pg_ts_template'
+          'order by'
+          '  pg_ts_template.tmplname'
+          ''
+          ''
+        )
       end>
-    Left = 112
-    Top = 744
+    Left = 32
+    Top = 680
   end
   object sPgConstraints: TRxTextHolder
     Highlighter = rxSynSQL
@@ -2078,5 +2010,174 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 504
     Top = 256
+  end
+  object sqlTasks: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'pgTaskSheduleList'
+        Lines.Strings = (
+          'select'
+          '  pga_schedule.jscid,'
+          '  pga_schedule.jscname,'
+          '  pga_schedule.jscdesc,'
+          '  pga_schedule.jscenabled,'
+          '  pga_schedule.jscstart,'
+          '  pga_schedule.jscend,'
+          '  cast(pga_schedule.jscminutes as varchar(500)) as jscminutes,'
+          '  cast(pga_schedule.jschours as varchar(500)) as jschours,'
+          '  cast(pga_schedule.jscweekdays as varchar(500)) as jscweekdays,'
+          '  cast(pga_schedule.jscmonthdays as varchar(500)) as jscmonthdays,'
+          '  cast(pga_schedule.jscmonths as varchar(500)) as jscmonths'
+          'from'
+          '  pgagent.pga_schedule'
+          'where'
+          '  pga_schedule.jscjobid = :jscjobid'
+          'order by'
+          '  pga_schedule.jscid'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgTaskStepList'
+        Lines.Strings = (
+          'select'
+          '  pga_jobstep.jstid,'
+          '  pga_jobstep.jstname,'
+          '  pga_jobstep.jstdesc,'
+          '  pga_jobstep.jstenabled,'
+          '  pga_jobstep.jstkind,'
+          '  pga_jobstep.jstcode,'
+          '  pga_jobstep.jstconnstr,'
+          '  pga_jobstep.jstdbname,'
+          '  pga_jobstep.jstonerror,'
+          '  pga_jobstep.jscnextrun'
+          'from'
+          '  pgagent.pga_jobstep'
+          'where'
+          '  pga_jobstep.jstjobid = :jstjobid'
+          'order by'
+          '  pga_jobstep.jstname'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgTasksSchema'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  pg_namespace'
+          'where'
+          '  pg_namespace.nspname = ''pgagent'''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgTaskClassList'
+        Lines.Strings = (
+          'select'
+          '  pga_jobclass.jclid,'
+          '  pga_jobclass.jclname'
+          'from'
+          '  pgagent.pga_jobclass'
+          'order by'
+          '  pga_jobclass.jclid'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgTasksJobData'
+        Lines.Strings = (
+          'select'
+          '  pga_job.jobjclid,'
+          '  pga_job.jobname,'
+          '  pga_job.jobdesc,'
+          '  pga_job.jobhostagent,'
+          '  pga_job.jobenabled,'
+          '  pga_job.jobcreated,'
+          '  pga_job.jobchanged,'
+          '  pga_job.jobagentid,'
+          '  pga_job.jobnextrun,'
+          '  pga_job.joblastrun'
+          'from'
+          '  pgagent.pga_job'
+          'where'
+          '  pga_job.jobid = :jobid'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgDBList'
+        Lines.Strings = (
+          'select'
+          '  pg_database.datname'
+          'from'
+          '  pg_database'
+          'where'
+          '  not pg_database.datname like ''template%'''
+          'order by'
+          '  pg_database.datname'
+          ''
+        )
+      end>
+    Left = 32
+    Top = 464
+  end
+  object sqlSchema: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlSchema'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_namespace.oid as integer),'
+          '  pg_namespace.nspname,'
+          '  pg_namespace.nspowner,'
+          '  pg_user.usename ,'
+          '  pg_namespace.nspacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_namespace.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_namespace'') as description'
+          'from'
+          '  pg_namespace'
+          '  inner join pg_user on (pg_namespace.nspowner = pg_user.usesysid)'
+          'where'
+          '  pg_namespace.nspname = :nspname'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlSchemasAll'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_namespace.oid as integer),'
+          '  cast(pg_namespace.oid as integer),'
+          '  pg_namespace.nspname,'
+          '  pg_namespace.nspowner,'
+          '  pg_user.usename as data,'
+          '  pg_namespace.nspacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_namespace.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_namespace'') as description'
+          'from'
+          '  pg_namespace'
+          '  inner join pg_user on (pg_namespace.nspowner = pg_user.usesysid)'
+          'order by'
+          '  pg_namespace.nspname'
+          ''
+          ''
+        )
+      end>
+    Left = 32
+    Top = 528
   end
 end

@@ -3417,7 +3417,7 @@ begin
   if not FPGSysDB.Connected then exit;
   Q:=TZQuery.Create(nil);
   Q.Connection:=FPGSysDB;
-  Q.SQL.Text:=pgTasksSchema;
+  Q.SQL.Text:=pgSqlTextModule.sqlTasks['pgTasksSchema'];
 
   try
     Q.Open;
@@ -4204,15 +4204,15 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlSchemasAll.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.pgFSUserMapping.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFServ']);
   RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFDW']);
-  RefreshObjectsBegin(pgSqlTextModule.pgFtsConfigs.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFtsDicts.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFTsParsers['pgFTsParsers']);
-  RefreshObjectsBegin(pgSqlTextModule.pgFtsTempl.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsConfigs']);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsDicts']);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFTsParsers']);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsTempl']);
 end;
 
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
@@ -4222,15 +4222,15 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.sqlSchemasAll.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.pgFSUserMapping.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFServ']);
   RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFDW']);
-  RefreshObjectsEnd(pgSqlTextModule.pgFtsConfigs.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFtsDicts.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFTsParsers['pgFTsParsers']);
-  RefreshObjectsEnd(pgSqlTextModule.pgFtsTempl.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsConfigs']);
+  RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsDicts']);
+  RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFTsParsers']);
+  RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsTempl']);
 end;
 
 
@@ -4384,7 +4384,7 @@ end;
 
 function TPGSchemasRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sqlSchemasAll.Strings.Text;
+  Result:=pgSqlTextModule.sqlSchema['sqlSchemasAll'];
 end;
 
 function TPGSchemasRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -4489,7 +4489,7 @@ begin
   inherited RefreshObject;
   FACLListStr:='';
   if State <> sdboEdit then exit;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlSchema.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlSchema['sqlSchema']);
   try
     Q.ParamByName('nspname').AsString:=Caption;
     Q.Open;

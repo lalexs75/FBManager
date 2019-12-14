@@ -389,7 +389,7 @@ begin
   inherited RefreshObject;
   if State = sdboEdit then
   begin
-    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFtsConfig.Strings.Text);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlFts['pgFtsConfig']);
     try
       Q.ParamByName('oid').AsInteger:=FOID;
       Q.ParamByName('namespace').AsInteger:=(OwnerRoot as TPGDBRootObject).SchemaId;
@@ -432,7 +432,7 @@ procedure TPGFTSConfigurations.FillParsersList(const AList: TStrings);
 var
   FQuery: TZQuery;
 begin
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFTsParsers['pgFTsParsersList']);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlFts['pgFTsParsersList']);
   FQuery.Open;
   while not FQuery.EOF do
   begin
@@ -447,7 +447,7 @@ end;
 
 function TPGFTSTemplatesRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFtsTempl.Strings.Text;
+  Result:=pgSqlTextModule.sqlFts['pgFtsTempl'];
 end;
 
 function TPGFTSTemplatesRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -476,7 +476,7 @@ end;
 
 function TPGFTSParsersRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFTsParsers['pgFTsParsers'];
+  Result:=pgSqlTextModule.sqlFts['pgFTsParsers'];
  end;
 
 function TPGFTSParsersRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -505,7 +505,7 @@ end;
 
 function TPGFTSDictionaresRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFtsDicts.Strings.Text;
+  Result:=pgSqlTextModule.sqlFts['pgFtsDicts'];
 end;
 
 function TPGFTSDictionaresRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -534,7 +534,7 @@ end;
 
 function TPGFTSConfigurationsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFtsConfigs.Strings.Text;
+  Result:=pgSqlTextModule.sqlFts['pgFtsConfigs'];
 end;
 
 function TPGFTSConfigurationsRoot.DBMSValidObject(AItem: TDBItem): boolean;

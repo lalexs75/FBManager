@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, rxtooledit, RxTimeEdit, rxtoolbar, Forms, Controls,
   Graphics, Dialogs, StdCtrls, ExtCtrls, ComCtrls, CheckLst, SQLEngineAbstractUnit,
-  PostgreSQLEngineUnit, pg_tasks, fdmAbstractEditorUnit;
+  PostgreSQLEngineUnit, pg_tasks, fdmAbstractEditorUnit, fbmSqlParserUnit;
 
 type
 
@@ -97,6 +97,7 @@ type
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     procedure Localize;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
 implementation
@@ -120,27 +121,27 @@ begin
     end;
 
     FCurShedule:=TPGTaskShedule(ListBox1.Items.Objects[ListBox1.ItemIndex]);
-    Edit1.Text:=FCurShedule.FName;
-    Edit2.Text:=IntToStr(FCurShedule.FID);
-    Memo1.Text:=FCurShedule.FDesc;
-    CheckBox1.Checked:=FCurShedule.FEnabled;
-    RxDateEdit1.Date:=FCurShedule.FDateStart;
-    RxDateEdit2.Date:=FCurShedule.FDateStop;
+    Edit1.Text:=FCurShedule.Name;
+    Edit2.Text:=IntToStr(FCurShedule.ID);
+    Memo1.Text:=FCurShedule.Description;
+    CheckBox1.Checked:=FCurShedule.Enabled;
+    RxDateEdit1.Date:=FCurShedule.DateStart;
+    RxDateEdit2.Date:=FCurShedule.DateStart;
 
     for i:=1 to 7 do
-      CheckListBox1.Checked[i-1]:=FCurShedule.FDayWeek[i];
+      CheckListBox1.Checked[i-1]:=FCurShedule.DayWeek[i];
 
     for i:=1 to 32 do
-      CheckListBox2.Checked[i-1]:=FCurShedule.FDayMonth[i];
+      CheckListBox2.Checked[i-1]:=FCurShedule.DayMonth[i];
 
     for i:=1 to 12 do
-      CheckListBox3.Checked[i-1]:=FCurShedule.FMonth[i];
+      CheckListBox3.Checked[i-1]:=FCurShedule.Month[i];
 
     for i:=0 to 23 do
-      CheckListBox4.Checked[i]:=FCurShedule.FHours[i];
+      CheckListBox4.Checked[i]:=FCurShedule.Hours[i];
 
     for i:=0 to 59 do
-      CheckListBox5.Checked[i]:=FCurShedule.FMinutes[i];
+      CheckListBox5.Checked[i]:=FCurShedule.Minutes[i];
     FModified:=false
   end;
 end;
@@ -178,9 +179,9 @@ begin
     U:=TPGTaskShedule.Create(TPGTask(DBObject));
     U.Assign(TPGTaskShedule(TPGTask(DBObject).Shedule[i]));
 
-    ListBox1.Items.Add(U.FName);
+    ListBox1.Items.Add(U.Name);
     ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
-    U.FIndex:=ListBox1.Items.Count-1;
+    U.Index:=ListBox1.Items.Count-1;
   end;
 
   if ListBox1.Items.Count>0 then
@@ -243,27 +244,27 @@ var
 begin
   if FModified and Assigned(FCurShedule) then
   begin
-    FIndex:=FCurShedule.FIndex;
-    FCurShedule.FName         := Edit1.Text;
-    FCurShedule.FDesc         := Memo1.Text;
-    FCurShedule.FEnabled      := CheckBox1.Checked;
-    FCurShedule.FDateStart    := RxDateEdit1.Date;
-    FCurShedule.FDateStop     := RxDateEdit2.Date;
+    FIndex:=FCurShedule.Index;
+    FCurShedule.Name         := Edit1.Text;
+    FCurShedule.Description         := Memo1.Text;
+    FCurShedule.Enabled      := CheckBox1.Checked;
+    FCurShedule.DateStart    := RxDateEdit1.Date;
+    FCurShedule.DateStop     := RxDateEdit2.Date;
 
     for i:=1 to 7 do
-      FCurShedule.FDayWeek[i]:=CheckListBox1.Checked[i-1];
+      FCurShedule.DayWeek[i]:=CheckListBox1.Checked[i-1];
 
     for i:=1 to 32 do
-      FCurShedule.FDayMonth[i]:=CheckListBox2.Checked[i-1];
+      FCurShedule.DayMonth[i]:=CheckListBox2.Checked[i-1];
 
     for i:=1 to 12 do
-      FCurShedule.FMonth[i]:=CheckListBox3.Checked[i-1];
+      FCurShedule.Month[i]:=CheckListBox3.Checked[i-1];
 
     for i:=0 to 23 do
-      FCurShedule.FHours[i]:=CheckListBox4.Checked[i];
+      FCurShedule.Hours[i]:=CheckListBox4.Checked[i];
 
     for i:=0 to 59 do
-      FCurShedule.FMinutes[i]:=CheckListBox5.Checked[i];
+      FCurShedule.Minutes[i]:=CheckListBox5.Checked[i];
 
     TPGTask(DBObject).CompileTaskShedule(FCurShedule);
 
@@ -279,12 +280,12 @@ var
   U: TPGTaskShedule;
 begin
   U:=TPGTaskShedule.Create(TPGTask(DBObject));
-  ListBox1.Items.Add(U.FName);
+  ListBox1.Items.Add(U.Name);
   ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
-  U.FIndex:=ListBox1.Items.Count-1;
-  U.FName:=sShedule + ' '+IntToStr(U.FIndex+1);
-  ListBox1.Items[U.FIndex]:=U.FName;
-  ListBox1.ItemIndex:=U.FIndex;
+  U.Index:=ListBox1.Items.Count-1;
+  U.Name:=sShedule + ' '+IntToStr(U.Index+1);
+  ListBox1.Items[U.Index]:=U.Name;
+  ListBox1.ItemIndex:=U.Index;
   ListBox1Click(nil);
   FModified:=true;
   FCurShedule:=U;
@@ -352,6 +353,19 @@ begin
   Panel1Resize(nil);
 
   LoadTaskData;
+end;
+
+function TpgTaskShedulePage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
+var
+  FCmd: TPGSQLTaskCreate;
+begin
+  if ASQLObject is TPGSQLTaskCreate then
+  begin
+    Result:=true;
+    FCmd:=TPGSQLTaskCreate(ASQLObject);
+  end
+  else
+    Result:=false;
 end;
 
 end.
