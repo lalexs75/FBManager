@@ -1233,7 +1233,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 319
   end
   object sGenerator: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateSequence1'
@@ -1294,9 +1294,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'RecreateSequence1'
         Lines.Strings = (
-          'RECREATE SEQUENCE EMP_NO_GEN'
-          'START WITH 10'
-          'INCREMENT BY 1;'
+          'RECREATE SEQUENCE EMP_NO_GEN START WITH 10 INCREMENT BY 1;'
         )
       end    
       item
@@ -1535,7 +1533,7 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'AlterDatabase7'
         Lines.Strings = (
           'ALTER DATABASE'
-          '  SET LINGER 30;'
+          '  SET LINGER TO 30;'
         )
       end    
       item
@@ -1549,7 +1547,7 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'AlterDatabase9'
         Lines.Strings = (
           'ALTER DATABASE'
-          '  SET LINGER 0;'
+          '  SET LINGER TO 0;'
         )
       end    
       item

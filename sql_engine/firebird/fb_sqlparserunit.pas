@@ -289,10 +289,10 @@ type
   end;
 
   { TFBSQLCreateGenerator }
-
+  TFBSQLSequenceStyle = (fbssSequence, fbssGenerator);
   TFBSQLCreateGenerator = class(TSQLCreateSequence)
   private
-    FOldStyle: boolean;
+    FSequenceStyle: TFBSQLSequenceStyle;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -300,13 +300,19 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property OldStyle:boolean read FOldStyle write FOldStyle;
+    property SequenceStyle:TFBSQLSequenceStyle read FSequenceStyle write FSequenceStyle;
   end;
 
   { TFBSQLAlterGenerator }
+  TfbAlterGenCommand = (fbagAlter, fbagSetGenerator, fbagRecreate);
+  TfbAlterGenParam = (fbagRestart, fbagRestartWith,
+    fbagRestartIncrement, fbagRestartIncrementBy);
+  TfbAlterGenParams = set of TfbAlterGenParam;
 
   TFBSQLAlterGenerator = class(TFBSQLCreateGenerator)
   private
+    FCommand: TfbAlterGenCommand;
+    FCommandParams: TfbAlterGenParams;
     FOldDescription: string;
   protected
     procedure InitParserTree;override;
@@ -314,6 +320,8 @@ type
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Command:TfbAlterGenCommand read FCommand write FCommand;
+    property CommandParams:TfbAlterGenParams read FCommandParams write FCommandParams;
     property OldDescription: string read FOldDescription write FOldDescription;
   end;
 
@@ -1776,7 +1784,8 @@ begin
   | DROP DIFFERENCE FILE}
   | {{BEGIN | END} BACKUP}
   | {SET DEFAULT CHARACTER SET charset }
-  | {SET LINGER TO seconds | DROP LINGER}
+  | {SET LINGER TO seconds
+  | DROP LINGER}
   | {ENCRYPT WITH plugin_name [KEY key_name ]
   | DECRYPT};
 
@@ -1815,8 +1824,10 @@ begin
     TAddDiff:=AddSQLTokens(stString, TAddDiff, '', [], 21);
 
   T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'DROP', []);
-    T:=AddSQLTokens(stKeyword, T, 'DIFFERENCE', []);
-    T:=AddSQLTokens(stKeyword, T, 'FILE', [], 22);
+    T1:=AddSQLTokens(stKeyword, T, 'DIFFERENCE', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'FILE', [], 22);
+
+    T1:=AddSQLTokens(stKeyword, T, 'LINGER', [], 28);
 
   T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'BEGIN', []);
     T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 23);
@@ -1824,6 +1835,22 @@ begin
     T:=AddSQLTokens(stKeyword, T, 'BACKUP', [], 24);
 
   T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'DECRYPT', [], 25);
+
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'SET', []);
+    T1:=AddSQLTokens(stKeyword, T, 'DEFAULT', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'CHARACTER', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'SET', []);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 26);
+
+    T1:=AddSQLTokens(stKeyword, T, 'LINGER', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'TO', []);
+    T1:=AddSQLTokens(stInteger, T1, '', [], 27);
+
+  T:=AddSQLTokens(stKeyword, [TDB, TSCH], 'ENCRYPT', []);
+    T1:=AddSQLTokens(stKeyword, T, 'WITH', []);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 29);
+    T1:=AddSQLTokens(stKeyword, T1, 'KEY', [toOptional]);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 30);
 end;
 
 procedure TFBSQLAlterDatabase.MakeSQL;
@@ -1893,11 +1920,23 @@ begin
   else
   if (FAlterCommand = fbadaDecrypt) then
     S:=S + LineEnding + '  DECRYPT'
+  else
+  if (FAlterCommand = fbadaSetDefaultCharacter) then
+    S:=S + LineEnding + '  SET DEFAULT CHARACTER SET '+Params[0].Caption
+  else
+  if (FAlterCommand = fbadaSetLingerToSeconds) then
+    S:=S + LineEnding + '  SET LINGER TO '+Params[0].Caption
+  else
+  if (FAlterCommand = fbadaDropLinger) then
+    S:=S + LineEnding + '  DROP LINGER'
+  else
+  if (FAlterCommand = fbadaEncryptWithPlugin) then
+  begin
+    S:=S + LineEnding + '  ENCRYPT WITH '+Params[0].Caption;
+    if Params.Count>1 then
+      S:=S + ' KEY '+Params[1].Caption;
+  end
   ;
-
-  //| {SET DEFAULT CHARACTER SET charset }
-  //| {SET LINGER TO seconds | DROP LINGER}
-  //| {ENCRYPT WITH plugin_name [KEY key_name ]
 
   AddSQLCommand(S);
 end;
@@ -1927,6 +1966,20 @@ begin
     23:FAlterCommand:=fbadaBeginBackup;
     24:FAlterCommand:=fbadaEndBackup;
     25:FAlterCommand:=fbadaDecrypt;
+    26:begin
+         FAlterCommand:=fbadaSetDefaultCharacter;
+         Params.AddParam(AWord);
+       end;
+    27:begin
+         FAlterCommand:=fbadaSetLingerToSeconds;
+         Params.AddParam(AWord);
+       end;
+    28:FAlterCommand:=fbadaDropLinger;
+    29:begin
+         FAlterCommand:=fbadaEncryptWithPlugin;
+         Params.AddParam(AWord);
+       end;
+    30:Params.AddParam(AWord);
   end;
 end;
 
@@ -4289,7 +4342,7 @@ end;
 
 procedure TFBSQLDropUDF.MakeSQL;
 begin
-  AddSQLCommand('DROP EXTERNAL FUNCTION "' + Name+'"');
+  AddSQLCommand('DROP EXTERNAL FUNCTION ' + DoFormatName(Name));
 end;
 
 procedure TFBSQLDropUDF.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4398,11 +4451,11 @@ ENTRY_POINT 'entry_point' MODULE_NAME 'library_name';
 
     TP1:=AddSQLTokens(stKeyword, T, 'CSTRING', [], 2);
       TS1:=AddSQLTokens(stSymbol, TP1, '(', []);
-      T:=AddSQLTokens(stInteger, TS1, '', [], 103);
+      T:=AddSQLTokens(stInteger, TS1, '', [], 104);
       TS1:=AddSQLTokens(stSymbol, T, ')', []);
-      TNull:=AddSQLTokens(stKeyword, TS1, 'NULL', [], 104);
+      TNull:=AddSQLTokens(stKeyword, TS1, 'NULL', [], 113);
       T2:=AddSQLTokens(stKeyword, TS1, 'BY', []);
-      T2_1:=AddSQLTokens(stKeyword, T2, 'DESCRIPTOR', [], 105);
+      T2_1:=AddSQLTokens(stKeyword, T2, 'DESCRIPTOR', [], 113);
 
   TSymb:=AddSQLTokens(stSymbol, [TS1, TNull, T2_1], ',', [], 101);
     TSymb.AddChildToken(TP1);
@@ -4410,7 +4463,7 @@ ENTRY_POINT 'entry_point' MODULE_NAME 'library_name';
 
   TRet:=AddSQLTokens(stKeyword, [TNull, T2_1, TS1], 'RETURNS', []);
 
-  MakeTypeDefTree(Self, [TName, TSymb], [TSymb, TNull, T2, TRet], tdfTypeOnly, 0);
+  MakeTypeDefTree(Self, [TName, TSymb], [TSymb, TNull, T2, TRet], tdfTypeOnly, 100);
 
   TP1:=AddSQLTokens(stKeyword, TRet, 'CSTRING', [], 120);
     TS1:=AddSQLTokens(stSymbol, TP1, '(', []);
@@ -4440,13 +4493,13 @@ begin
   case AChild.Tag of
     100:Name:=AWord;
     101: FCurParam:=nil;
-    2:FCurParam:=Params.AddParamWithType('', AWord);
+    102:FCurParam:=Params.AddParamWithType('', AWord);
     120,
     125,
     202:ResultParam.TypeName:=AWord;
-    103:if Assigned(FCurParam) then FCurParam.TypeLen:=StrToInt(AWord);
-    104:if Assigned(FCurParam) then FCurParam.DefaultValue:=AWord;
-    105:if Assigned(FCurParam) then FCurParam.DefaultValue:='BY DESCRIPTOR';
+    104:if Assigned(FCurParam) then FCurParam.TypeLen:=StrToInt(AWord);
+    105:if Assigned(FCurParam) then FCurParam.TypePrec:=StrToInt(AWord);
+    113:if Assigned(FCurParam) then FCurParam.DefaultValue:='BY DESCRIPTOR';
     121:ResultParam.TypeLen:=StrToInt(AWord);
     122:ResultParam.DefaultValue:='BY DESCRIPTOR';
     123:ResultParam.DefaultValue:='BY VALUE';
@@ -6382,35 +6435,91 @@ end;
 
 procedure TFBSQLAlterGenerator.InitParserTree;
 var
-  FSQLTokens, T1, T2, T: TSQLTokenRecord;
+  FSQLTokens, T1, T2, T, T3, T4, T5, T5_1, T6, T7: TSQLTokenRecord;
 begin
   //ALTER SEQUENCE GNID_SYS_CLIENT RESTART WITH 4139521
   //ALTER SEQUENCE EMP_NO_GEN RESTART WITH 145;
+  //ALTER {SEQUENCE | GENERATOR} seq_name
+
+  //[RESTART [WITH new_val ]]
+  //[INCREMENT [BY] increment ];
+
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okSequence);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast], 1);
-  T:=AddSQLTokens(stIdentificator, T1, '', [], 2);
-    T2.AddChildToken(T);
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 1);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast]);
+    T2:=AddSQLTokens(stIdentificator, T2, '', [], 2);
 
-  T:=AddSQLTokens(stKeyword, T, 'RESTART', []);
-  T:=AddSQLTokens(stKeyword, T, 'WITH', []);
-  T:=AddSQLTokens(stInteger, T, '', [], 3);
+  T3:=AddSQLTokens(stKeyword, [T1, T2], 'RESTART', [], 3);
+    T4:=AddSQLTokens(stKeyword, T3, 'WITH', [toOptional]);
+    T4:=AddSQLTokens(stInteger, T4, '', [], 4);
+
+  T5:=AddSQLTokens(stKeyword, [T1, T2, T3, T4], 'INCREMENT', [toOptional], 5);
+    T:=AddSQLTokens(stKeyword, T5, 'BY', [], 6);
+    T5_1:=AddSQLTokens(stInteger, [T5,T], '', [], 7);
+
+  //RECREATE {SEQUENCE | GENERATOR} seq_name
+  //[START WITH value ] [INCREMENT [BY] increment ];
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 0, okSequence);
+    T6:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);
+    T6:=AddSQLTokens(stIdentificator, T6, '', [], 9);
+    T7:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast]);
+    T7:=AddSQLTokens(stIdentificator, T7, '', [], 10);
+
+  T3:=AddSQLTokens(stKeyword, [T6, T7], 'START', []);
+    T4:=AddSQLTokens(stKeyword, T3, 'WITH', [toOptional]);
+    T4:=AddSQLTokens(stInteger, T4, '', [], 4);
+
+  T5:=AddSQLTokens(stKeyword, [T6, T7, T3, T4], 'INCREMENT', [toOptional], 5);
+    T:=AddSQLTokens(stKeyword, T5, 'BY', [], 6);
+    T5_1:=AddSQLTokens(stInteger, [T5,T], '', [], 7);
+
   //SET GENERATOR EMP_NO_GEN TO 145;
+  //SET GENERATOR seq_name TO new_val ;
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFirstToken], 0, okSequence);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast]);
-  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 2);
+  FSQLTokens:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 8);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TO', []);
-  FSQLTokens:=AddSQLTokens(stInteger, FSQLTokens, '', [], 3);
+  FSQLTokens:=AddSQLTokens(stInteger, FSQLTokens, '', [], 4);
 end;
 
 procedure TFBSQLAlterGenerator.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   case AChild.Tag of
-    1:FOldStyle:=true;
-    2:Name:=AWord;
-    3:CurrentValue:=StrToInt(AWord);
+    1:begin
+        Command:=fbagAlter;
+        SequenceStyle:=fbssSequence;
+        Name:=AWord;
+      end;
+    2:begin
+        Command:=fbagAlter;
+        SequenceStyle:=fbssGenerator;
+        Name:=AWord;
+      end;
+    3:CommandParams:=CommandParams + [fbagRestart];
+    4:begin
+        CommandParams:=CommandParams - [fbagRestart] + [fbagRestartWith];
+        CurrentValue:=StrToInt(AWord);
+      end;
+    5:CommandParams:=CommandParams - [fbagRestartIncrementBy] + [fbagRestartIncrement];
+    6:CommandParams:=CommandParams + [fbagRestartIncrementBy] - [fbagRestartIncrement];
+    7:IncrementBy:=StrToInt(AWord);
+    8:begin
+        Command:=fbagSetGenerator;
+        Name:=AWord;
+      end;
+    9:begin
+        Command:=fbagRecreate;
+        SequenceStyle:=fbssSequence;
+        Name:=AWord;
+      end;
+    10:begin
+        Command:=fbagRecreate;
+        SequenceStyle:=fbssGenerator;
+        Name:=AWord;
+      end;
   end;
 end;
 
@@ -6418,15 +6527,54 @@ procedure TFBSQLAlterGenerator.MakeSQL;
 var
   S: String;
 begin
-  if FOldStyle then
-    S:='GENERATOR'
+  if Command = fbagSetGenerator then
+  begin
+    S:=Format('SET GENERATOR %s TO %d', [FullName, CurrentValue]);
+  end
   else
-    S:='SEQUENCE';
+  begin
+    if SequenceStyle = fbssGenerator then
+      S:='GENERATOR'
+    else
+      S:='SEQUENCE';
 
-  AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, FullName, CurrentValue]);
 
+    if Command = fbagAlter then
+    begin
+      S:='ALTER '+S+' ' + FullName;
+      if fbagRestart in CommandParams then
+        S:=S + ' RESTART'
+      else
+      if fbagRestartWith in CommandParams then
+        S:=S + ' RESTART WITH '+IntToStr(CurrentValue);
+    end
+    else
+    if Command = fbagRecreate then
+    begin
+      S:='RECREATE '+S+' ' + FullName;
+      if fbagRestartWith in CommandParams then
+        S:=S + ' START WITH '+IntToStr(CurrentValue);
+    end;
+
+    if fbagRestartIncrement in CommandParams then
+      S:=S + ' INCREMENT '+IntToStr(IncrementBy)
+    else
+    if fbagRestartIncrementBy in CommandParams  then
+      S:=S + ' INCREMENT BY '+IntToStr(IncrementBy);
+
+  end;
+
+  AddSQLCommand(S);
   if Description <> FOldDescription then
     DescribeObject;
+
+
+  //ALTER {SEQUENCE | GENERATOR} seq_name
+  //[RESTART [WITH new_val ]]
+  //[INCREMENT [BY] increment ];
+
+  //RECREATE {SEQUENCE | GENERATOR} seq_name
+  //[START WITH value ] [INCREMENT [BY] increment ];
 end;
 
 procedure TFBSQLAlterGenerator.Assign(ASource: TSQLObjectAbstract);
@@ -6434,7 +6582,8 @@ begin
   if ASource is TFBSQLAlterGenerator then
   begin
     OldDescription:=TFBSQLAlterGenerator(ASource).OldDescription;
-
+    Command:=TFBSQLAlterGenerator(ASource).Command;
+    CommandParams:=TFBSQLAlterGenerator(ASource).CommandParams;
   end;
   inherited Assign(ASource);
 end;
@@ -6445,8 +6594,14 @@ procedure TFBSQLCreateGenerator.InitParserTree;
 var
   T1, T2, T, FSQLTokens: TSQLTokenRecord;
 begin
-  //CREATE SEQUENCE name
-  //CREATE GENERATOR name
+  //CREATE {SEQUENCE | GENERATOR} seq_name
+  //[START WITH value ] [INCREMENT [BY] increment ];
+
+  //CREATE OR ALTER {SEQUENCE | GENERATOR} seq_name
+  //[{START WITH value | RESTART}]
+  //[INCREMENT [BY] increment ];
+
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okSequence);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);
     T2:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast], 1);
@@ -6459,7 +6614,7 @@ procedure TFBSQLCreateGenerator.InternalProcessChildToken(
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:FOldStyle:=true;
+    1:SequenceStyle:=fbssGenerator;
     2:Name:=AWord;
   end;
 end;
@@ -6468,7 +6623,7 @@ procedure TFBSQLCreateGenerator.MakeSQL;
 var
   S: String;
 begin
-  if FOldStyle then
+  if SequenceStyle = fbssGenerator then
     S:='GENERATOR'
   else
     S:='SEQUENCE';
@@ -6492,7 +6647,7 @@ procedure TFBSQLCreateGenerator.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TFBSQLCreateGenerator then
   begin
-    OldStyle:=TFBSQLCreateGenerator(ASource).OldStyle;
+    SequenceStyle:=TFBSQLCreateGenerator(ASource).SequenceStyle;
   end;
   inherited Assign(ASource);
 end;
