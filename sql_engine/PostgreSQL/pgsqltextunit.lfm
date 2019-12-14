@@ -745,80 +745,6 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 968
     Top = 32
   end
-  object pgFSUserMapping: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 688
-    Top = 408
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f757365725f6d617070696e67732e756d696420617320696e7465676572292c'
-      '2020636173742870675f757365725f6d617070696e67732e737276696420617320696e7465676572292c'
-      '202070675f757365725f6d617070696e67732e7573656e616d652c'
-      '202070675f757365725f6d617070696e67732e756d757365722c'
-      '202070675f757365725f6d617070696e67732e756d6f7074696f6e7320617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f757365725f6d617070696e67732e756d696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f757365725f6d617070696e67732729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f757365725f6d617070696e6773'
-      '6f72646572206279'
-      '202070675f757365725f6d617070696e67732e7573656e616d65'
-      '20202020202020202020202020202020202020202020202020202020202020'
-    )
-  end
-  object pgFSUserMapRefresh: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 688
-    Top = 472
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f757365725f6d617070696e672e6f69642c'
-      '202070675f757365725f6d617070696e672e2a'
-      '66726f6d'
-      '202070675f757365725f6d617070696e67'
-      '7768657265'
-      '202070675f757365725f6d617070696e672e6f6964203d203a756d6964'
-    )
-  end
-  object pgFServRefresh: TStrHolder
-    Capacity = 64
-    Macros = <    
-      item
-        Name = 'Macro1'
-      end>
-    Left = 736
-    Top = 336
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f666f726569676e5f7365727665722e6f69642c'
-      '202070675f666f726569676e5f7365727665722e7372766e616d652c'
-      '202070675f666f726569676e5f7365727665722e7372766f776e65722c'
-      '202070675f666f726569676e5f7365727665722e7372766664772c'
-      '202070675f666f726569676e5f7365727665722e737276747970652c'
-      '202070675f666f726569676e5f7365727665722e73727676657273696f6e2c'
-      '202070675f666f726569676e5f7365727665722e73727661636c2c'
-      '202070675f666f726569676e5f7365727665722e7372766f7074696f6e732c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f666f726569676e5f7365727665722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f666f726569676e5f7365727665722729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f666f726569676e5f736572766572'
-      '7768657265'
-      '2020254d6163726f31'
-      ''
-    )
-  end
   object sForeignObj: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
@@ -847,9 +773,71 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
           ''
         )
+      end    
+      item
+        Caption = 'pgFServRefresh'
+        Lines.Strings = (
+          'select'
+          '  pg_foreign_server.oid,'
+          '  pg_foreign_server.srvname,'
+          '  pg_foreign_server.srvowner,'
+          '  pg_foreign_server.srvfdw,'
+          '  pg_foreign_server.srvtype,'
+          '  pg_foreign_server.srvversion,'
+          '  pg_foreign_server.srvacl,'
+          '  pg_foreign_server.srvoptions,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_server.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_server'') as description'
+          'from'
+          '  pg_foreign_server'
+          'where'
+          '  %Macro1'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFSUserMapping'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_user_mappings.umid as integer),'
+          '  cast(pg_user_mappings.srvid as integer),'
+          '  pg_user_mappings.usename,'
+          '  pg_user_mappings.umuser,'
+          '  pg_user_mappings.umoptions as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_user_mappings.umid and pg_description.objsubid = 0 and pg_class.relname = ''pg_user_mappings'') as description'
+          'from'
+          '  pg_user_mappings'
+          'order by'
+          '  pg_user_mappings.usename'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'pgFSUserMapRefresh'
+        Lines.Strings = (
+          'select'
+          '  pg_user_mapping.oid,'
+          '  pg_user_mapping.*'
+          'from'
+          '  pg_user_mapping'
+          'where'
+          '  pg_user_mapping.oid = :umid'
+          ''
+        )
       end>
-    Left = 856
-    Top = 336
+    Left = 728
+    Top = 272
   end
   object sqlTableSpaces: TRxTextHolder
     Highlighter = rxSynSQL

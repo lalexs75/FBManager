@@ -32,8 +32,6 @@ type
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
-    pgFServRefresh: TStrHolder;
-    pgFSUserMapRefresh: TStrHolder;
     sqlFts: TRxTextHolder;
     sqlTasks: TRxTextHolder;
     sqlSchema: TRxTextHolder;
@@ -75,7 +73,6 @@ type
     pgExtensions: TStrHolder;
     pgCollations: TStrHolder;
     pgExtension: TStrHolder;
-    pgFSUserMapping: TStrHolder;
     ttt1: TStrHolder;
   private
     { private declarations }

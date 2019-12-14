@@ -4206,7 +4206,7 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
   RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.pgFSUserMapping.Strings.Text);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['pgFSUserMapping']);
   RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFServ']);
   RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsConfigs']);
@@ -4224,7 +4224,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
-  RefreshObjectsEnd(pgSqlTextModule.pgFSUserMapping.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sForeignObj['pgFSUserMapping']);
   RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFServ']);
   RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFDW']);
   RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsConfigs']);

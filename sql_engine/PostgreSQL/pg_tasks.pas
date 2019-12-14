@@ -140,6 +140,13 @@ type
     Minutes:TMinutesArray;
     constructor Create(APGTask:TPGTask);
     procedure Assign(From:TPGTaskShedule);
+
+    function MonthStr:string; inline;
+    function DayMonthStr:string; inline;
+    function DayWeekStr:string; inline;
+    function HoursStr:string; inline;
+    function MinutesStr:string; inline;
+
     property Index:integer read FIndex write FIndex;
     property ID:integer read FID write FID;
     property Name:string read FName write FName;
@@ -228,6 +235,7 @@ type
   TPGSQLTaskCreate = class(TSQLCommandDDL)
   private
     FTaskClass: string;
+    FTaskShedule: TPGTaskSheduleList;
     FTaskSteps:TPGTaskSteps;
   protected
     procedure MakeSQL; override;
@@ -237,6 +245,7 @@ type
     procedure Clear;override;
     procedure Assign(ASource:TSQLObjectAbstract);override;
     property TaskSteps:TPGTaskSteps read FTaskSteps;
+    property TaskShedule:TPGTaskSheduleList read FTaskShedule;
     property TaskClass:string read FTaskClass write FTaskClass;
   end;
 
@@ -460,6 +469,7 @@ procedure TPGSQLTaskCreate.MakeSQL;
 var
   S, S1: String;
   T: TPGTaskStep;
+  TL: TPGTaskShedule;
 begin
   S:='do'+LineEnding+'$tasks$'+LineEnding +
   'declare'+LineEnding +
@@ -482,10 +492,27 @@ begin
 
   for T in FTaskSteps do
   begin
-    S1:='INSERT INTO pgagent.pga_jobstep' + LineEnding +
-        '  (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
-        'values ' + LineEnding +
-        '  (f_JobId, '''+T.Name+''', ''' + AnsiQuotedStr(T.Description, '''') + ''', '+ BoolToStr(T.Enabled, true)+', ''s'', ''f'', '''+AnsiQuotedStr(T.Body, '''')+''', '''+T.DBName+''', '');' +LineEnding;
+    S1:='  INSERT INTO pgagent.pga_jobstep' + LineEnding +
+        '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
+        '  values ' + LineEnding +
+        '    (f_JobId, '+AnsiQuotedStr(T.Name, '''')+', ' + AnsiQuotedStr(T.Description, '''') + ', '+
+                 BoolToStr(T.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(T.Body, '''')+', '''+T.DBName+''', '''');' +LineEnding;
+    S:=S + S1;
+  end;
+
+
+  for TL in FTaskShedule do
+  begin
+    S1:='  INSERT INTO pgagent.pga_schedule (jscjobid, jscname, jscdesc, '+
+            'jscminutes, jschours, jscweekdays, jscmonthdays, '+
+            'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
+        '  VALUES(f_JobId, ' + AnsiQuotedStr(TL.Name, '''') + ', ' +
+            AnsiQuotedStr(TL.Description, '''') + ', '+
+            TL.MinutesStr + ', '+TL.HoursStr + ', ' + TL.DayWeekStr + ', ' + TL.DayMonthStr + ','+
+            TL.MonthStr +', ' + BoolToStr(TL.Enabled, true) + ',' +
+            ''''+DateTimeToStr(TL.DateStart)+''','''  + DateTimeToStr(TL.DateStop) + ''');' + LineEnding;
+          //TL. '{t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f}', '{t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t,t,t,t,t,t}', true, '2019-12-14 00:00:00', '2019-12-31 00:00:00')';
+    S:=S + S1;
   end;
 
   S:=S +
@@ -499,10 +526,12 @@ constructor TPGSQLTaskCreate.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FTaskSteps:=TPGTaskSteps.Create(nil);
+  FTaskShedule:=TPGTaskSheduleList.Create(nil);
 end;
 
 destructor TPGSQLTaskCreate.Destroy;
 begin
+  FreeAndNil(FTaskShedule);
   FreeAndNil(FTaskSteps);
   inherited Destroy;
 end;
@@ -518,6 +547,7 @@ begin
   if ASource is TPGSQLTaskCreate then
   begin
     FTaskSteps.Assign(TPGSQLTaskCreate(ASource).TaskSteps);
+    FTaskShedule.Assign(TPGSQLTaskCreate(ASource).TaskShedule);
   end;
   inherited Assign(ASource);
 end;
@@ -551,7 +581,7 @@ var
 begin
   Result:='';
   for i:=Low(A) to High(A) do Result:=Result + BoolToStr(A[i], 't', 'f')+',';
-  Result:=Copy(Result, 1, Length(Result) - 1);
+  Result:='{'+Copy(Result, 1, Length(Result) - 1) + '}';
 end;
 
 procedure TPGTaskShedule.SetMonth(S: string);
@@ -659,6 +689,31 @@ begin
   Minutes:=From.Minutes;
 end;
 
+function TPGTaskShedule.MonthStr: string; inline;
+begin
+  Result:=DoMakeArray(Month);
+end;
+
+function TPGTaskShedule.DayMonthStr: string; inline;
+begin
+  Result:=DoMakeArray(DayMonth);
+end;
+
+function TPGTaskShedule.DayWeekStr: string; inline;
+begin
+  Result:=DoMakeArray(DayWeek);
+end;
+
+function TPGTaskShedule.HoursStr: string; inline;
+begin
+  Result:=DoMakeArray(Hours);
+end;
+
+function TPGTaskShedule.MinutesStr: string; inline;
+begin
+  Result:=DoMakeArray(Minutes);
+end;
+
 { TPGTaskStep }
 
 constructor TPGTaskStep.Create(APGTask: TPGTask);
@@ -761,6 +816,7 @@ begin
   FCmd.Description:=Description;
   FCmd.TaskClass:=TaskClassName;
   FCmd.TaskSteps.Assign(FSteps);
+  FCmd.TaskShedule.Assign(FShedule);
   Result:=FCmd.AsSQL;
   FCmd.Free;
 end;

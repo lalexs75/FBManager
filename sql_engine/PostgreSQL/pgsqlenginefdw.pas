@@ -216,7 +216,7 @@ end;
 
 function TPGForeignUserMapping.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgFSUserMapping.Strings.Text;
+  Result:=pgSqlTextModule.sForeignObj['pgFSUserMapping'];
 end;
 
 function TPGForeignUserMapping.DBMSValidObject(AItem: TDBItem): boolean;
@@ -290,7 +290,7 @@ begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
   FOptions.Clear;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFSUserMapRefresh.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sForeignObj['pgFSUserMapRefresh']);
   try
     Q.ParamByName('umid').AsInteger:=FOID;
     Q.Open;
@@ -432,8 +432,9 @@ begin
     S:=Format('pg_foreign_server.srvname = ''%s'' and pg_foreign_server.srvfdw = %d', [Caption, (OwnerRoot.OwnerRoot as TPGForeignDataWrapper).OID])
   else
     S:='pg_foreign_server.oid = '+IntToStr(FServerID); // :oid --33893';
-  pgSqlTextModule.pgFServRefresh.MacroByName('Macro1').Value:=S;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgFServRefresh.ExpandMacros);
+  //pgSqlTextModule.pgFServRefresh.MacroByName('Macro1').Value:=S;
+  S:=pgSqlTextModule.sForeignObj['pgFServRefresh'] + ' ' + S;
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S); //pgSqlTextModule.pgFServRefresh.ExpandMacros);
   try
     Q.Open;
     if Q.RecordCount > 0 then
