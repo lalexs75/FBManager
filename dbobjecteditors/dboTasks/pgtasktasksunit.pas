@@ -25,15 +25,36 @@ unit pgTaskTasksUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, rxtooledit, RxTimeEdit, rxtoolbar, Forms, Controls,
-  Graphics, Dialogs, StdCtrls, ExtCtrls, ComCtrls, CheckLst, SQLEngineAbstractUnit,
-  PostgreSQLEngineUnit, pg_tasks, fdmAbstractEditorUnit, fbmSqlParserUnit;
+  Classes, SysUtils, FileUtil, rxtooledit, RxTimeEdit, rxtoolbar, Forms,
+  Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, ComCtrls, CheckLst, Menus,
+  ActnList, SQLEngineAbstractUnit, PostgreSQLEngineUnit, pg_tasks,
+  fdmAbstractEditorUnit, fbmSqlParserUnit;
 
 type
 
   { TpgTaskShedulePage }
 
   TpgTaskShedulePage = class(TEditorPage)
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    minUnselectAll: TAction;
+    minSelectAll: TAction;
+    hrSelectAll: TAction;
+    hrUnselectAll: TAction;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
+    mnUnselectAll: TAction;
+    mnSelectAll: TAction;
+    domSelectAll: TAction;
+    domUnSelectAll: TAction;
+    dowSelectAll: TAction;
+    dowUnSelectAll: TAction;
+    ActionList1: TActionList;
     CheckBox1: TCheckBox;
     CheckListBox1: TCheckListBox;
     CheckListBox2: TCheckListBox;
@@ -53,12 +74,23 @@ type
     Label7: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    PopupMenu1: TPopupMenu;
+    PopupMenu2: TPopupMenu;
+    PopupMenu3: TPopupMenu;
+    PopupMenu4: TPopupMenu;
+    PopupMenu5: TPopupMenu;
     RxDateEdit1: TRxDateEdit;
     RxDateEdit2: TRxDateEdit;
     RxTimeEdit1: TRxTimeEdit;
@@ -77,6 +109,7 @@ type
     ToolPanel4: TToolPanel;
     ToolPanel5: TToolPanel;
     procedure CheckListBox1Click(Sender: TObject);
+    procedure dowSelectAllExecute(Sender: TObject);
     procedure HeaderControl1SectionResize(HeaderControl: TCustomHeaderControl;
       Section: THeaderSection);
     procedure ListBox1Click(Sender: TObject);
@@ -91,6 +124,7 @@ type
     procedure CompileShedule;
     procedure AddShedule;
     procedure DelShedule;
+    function CurrentItem:TPGTaskShedule;
   public
     function PageName:string;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
@@ -157,8 +191,44 @@ begin
 end;
 
 procedure TpgTaskShedulePage.CheckListBox1Click(Sender: TObject);
+var
+  U: TPGTaskShedule;
 begin
   FModified:=true;
+  U:=CurrentItem;
+  if Assigned(U) then
+  begin
+    U.Name:=Edit1.Text;
+    U.Enabled:=CheckBox1.Checked;
+    U.DateStart:=RxDateEdit1.Date + RxTimeEdit1.Time;
+    U.DateStop:=RxDateEdit2.Date + RxTimeEdit2.Time;
+    U.Description:=Memo1.Lines.Text;
+
+    for i:=0 to CheckListBox1.Items.Count-1 do
+      U.DayWeek[i+1]:=CheckListBox1.Checked[i];
+
+    for i:=0 to CheckListBox2.Items.Count-1 do
+      U.DayMonth[i+1]:=CheckListBox2.Checked[i];
+  end;
+end;
+
+procedure TpgTaskShedulePage.dowSelectAllExecute(Sender: TObject);
+var
+  L: TCheckListBox;
+  B: PtrInt;
+  i: Integer;
+begin
+  B:=(Sender as TComponent).Tag;
+  case B of
+    1, -1:L:=CheckListBox1;
+    2, -2:L:=CheckListBox2;
+    3, -3:L:=CheckListBox3;
+    4, -4:L:=CheckListBox4;
+    5, -5:L:=CheckListBox5;
+  end;
+
+  for i:=0 to L.Items.Count-1 do
+    L.Checked[i]:=B > 0;
 end;
 
 procedure TpgTaskShedulePage.Panel1Resize(Sender: TObject);
@@ -170,17 +240,15 @@ end;
 
 procedure TpgTaskShedulePage.LoadTaskData;
 var
-  U:TPGTaskShedule;
-  i: Integer;
+  U, U1:TPGTaskShedule;
 begin
   ClearData;
-  for i:=0 to TPGTask(DBObject).Shedule.Count-1 do
+  for U1 in TPGTask(DBObject).Shedule do
   begin
-    U:=TPGTaskShedule.Create(TPGTask(DBObject));
-    U.Assign(TPGTaskShedule(TPGTask(DBObject).Shedule[i]));
+    U:=TPGTaskShedule.Create(nil);
+    U.Assign(U1);
 
-    ListBox1.Items.Add(U.Name);
-    ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
+    ListBox1.Items.AddObject(U.Name, U);
     U.Index:=ListBox1.Items.Count-1;
   end;
 
@@ -301,6 +369,13 @@ begin
   end;
 end;
 
+function TpgTaskShedulePage.CurrentItem: TPGTaskShedule;
+begin
+  Result:=nil;
+  if (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count) then
+    Result:=TPGTaskShedule(ListBox1.Items.Objects[ListBox1.ItemIndex]);
+end;
+
 function TpgTaskShedulePage.PageName: string;
 begin
   Result:=sShedule;
@@ -343,6 +418,17 @@ begin
   Label5.Caption:=sDateFinish;
   Label4.Caption:=sTime;
   Label7.Caption:=sDescription;
+
+  dowSelectAll.Caption:=sSelectAll;
+  dowUnSelectAll.Caption:=sUnselectAll;
+  domSelectAll.Caption:=sSelectAll;
+  domUnSelectAll.Caption:=sUnselectAll;
+  mnSelectAll.Caption:=sSelectAll;
+  mnUnSelectAll.Caption:=sUnselectAll;
+  hrSelectAll.Caption:=sSelectAll;
+  hrUnSelectAll.Caption:=sUnselectAll;
+  minSelectAll.Caption:=sSelectAll;
+  minUnSelectAll.Caption:=sUnselectAll;
 end;
 
 constructor TpgTaskShedulePage.CreatePage(TheOwner: TComponent;
@@ -358,11 +444,18 @@ end;
 function TpgTaskShedulePage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
+  U: TPGTaskShedule;
+  I: Integer;
 begin
   if ASQLObject is TPGSQLTaskCreate then
   begin
     Result:=true;
     FCmd:=TPGSQLTaskCreate(ASQLObject);
+    for I:=0 to ListBox1.Items.Count -1 do
+    begin
+      U:=FCmd.TaskShedule.Add;
+      U.Assign(TPGTaskShedule(ListBox1.Items.Objects[i]));
+    end;
   end
   else
     Result:=false;

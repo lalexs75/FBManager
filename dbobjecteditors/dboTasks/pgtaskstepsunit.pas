@@ -280,11 +280,19 @@ end;
 function TpgTaskStepsPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
+  U: TPGTaskStep;
+  i: Integer;
 begin
   if ASQLObject is TPGSQLTaskCreate then
   begin
     Result:=true;
     FCmd:=TPGSQLTaskCreate(ASQLObject);
+
+    for i:=0 to ListBox1.Items.Count-1 do
+    begin
+      U:=FCmd.TaskSteps.Add;
+      U.Assign(TPGTaskStep(ListBox1.Items.Objects[i]));
+    end;
   end
   else
     Result:=false;

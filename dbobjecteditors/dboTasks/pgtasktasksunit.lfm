@@ -28,9 +28,9 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     Height = 495
     Top = 0
     Width = 703
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Propertys'
@@ -315,6 +315,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Top = 1
           Width = 208
           Items = <>
+          ImageList = fbManagerMainForm.ImageListMain
           Options = []
           CustomizeShortCut = False
           Align = alTop
@@ -329,6 +330,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Align = alClient
           ItemHeight = 0
           OnClick = CheckListBox1Click
+          PopupMenu = PopupMenu1
           TabOrder = 1
           TopIndex = -1
         end
@@ -349,6 +351,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Top = 1
           Width = 265
           Items = <>
+          ImageList = fbManagerMainForm.ImageListMain
           Options = []
           CustomizeShortCut = False
           Align = alTop
@@ -364,6 +367,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Columns = 2
           ItemHeight = 0
           OnClick = CheckListBox1Click
+          PopupMenu = PopupMenu2
           TabOrder = 1
           TopIndex = -1
         end
@@ -384,6 +388,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Top = 1
           Width = 208
           Items = <>
+          ImageList = fbManagerMainForm.ImageListMain
           Options = []
           CustomizeShortCut = False
           Align = alTop
@@ -398,6 +403,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Align = alClient
           ItemHeight = 0
           OnClick = CheckListBox1Click
+          PopupMenu = PopupMenu3
           TabOrder = 1
           TopIndex = -1
         end
@@ -457,6 +463,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Top = 1
           Width = 208
           Items = <>
+          ImageList = fbManagerMainForm.ImageListMain
           Options = []
           CustomizeShortCut = False
           Align = alTop
@@ -472,6 +479,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Columns = 2
           ItemHeight = 0
           OnClick = CheckListBox1Click
+          PopupMenu = PopupMenu4
           TabOrder = 1
           TopIndex = -1
         end
@@ -497,6 +505,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Top = 1
           Width = 480
           Items = <>
+          ImageList = fbManagerMainForm.ImageListMain
           Options = []
           CustomizeShortCut = False
           Align = alTop
@@ -512,6 +521,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
           Columns = 4
           ItemHeight = 0
           OnClick = CheckListBox1Click
+          PopupMenu = PopupMenu5
           TabOrder = 1
           TopIndex = -1
         end
@@ -519,6 +529,149 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     end
     object TabSheet4: TTabSheet
       Caption = 'Except'
+    end
+  end
+  object PopupMenu1: TPopupMenu[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 255
+    Top = 155
+    object MenuItem1: TMenuItem
+      Action = dowSelectAll
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = dowUnSelectAll
+    end
+  end
+  object PopupMenu2: TPopupMenu[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 417
+    Top = 159
+    object MenuItem4: TMenuItem
+      Action = domSelectAll
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Action = domUnSelectAll
+    end
+  end
+  object PopupMenu3: TPopupMenu[5]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 654
+    Top = 164
+    object MenuItem7: TMenuItem
+      Action = mnSelectAll
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = mnUnselectAll
+    end
+  end
+  object ActionList1: TActionList[6]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 248
+    Top = 96
+    object dowSelectAll: TAction
+      Tag = 1
+      Category = 'DayOfWeek'
+      Caption = 'Select all'
+      ImageIndex = 15
+      OnExecute = dowSelectAllExecute
+    end
+    object dowUnSelectAll: TAction
+      Tag = -1
+      Category = 'DayOfWeek'
+      Caption = 'Unselect all'
+      ImageIndex = 46
+      OnExecute = dowSelectAllExecute
+    end
+    object domSelectAll: TAction
+      Tag = 2
+      Category = 'DayOfMonth'
+      Caption = 'Select all'
+      ImageIndex = 15
+    end
+    object domUnSelectAll: TAction
+      Tag = -2
+      Category = 'DayOfMonth'
+      Caption = 'Unselect all'
+      ImageIndex = 46
+    end
+    object mnSelectAll: TAction
+      Tag = 3
+      Category = 'Month'
+      Caption = 'Select all'
+      ImageIndex = 15
+      OnExecute = dowSelectAllExecute
+    end
+    object mnUnselectAll: TAction
+      Tag = -3
+      Category = 'Month'
+      Caption = 'Unselect all'
+      ImageIndex = 46
+      OnExecute = dowSelectAllExecute
+    end
+    object hrSelectAll: TAction
+      Tag = 4
+      Category = 'Hour'
+      Caption = 'Select all'
+      ImageIndex = 15
+      OnExecute = dowSelectAllExecute
+    end
+    object hrUnselectAll: TAction
+      Tag = -4
+      Category = 'Hour'
+      Caption = 'Unselect all'
+      ImageIndex = 46
+      OnExecute = dowSelectAllExecute
+    end
+    object minSelectAll: TAction
+      Tag = 5
+      Category = 'Minutes'
+      Caption = 'Select all'
+      ImageIndex = 15
+      OnExecute = dowSelectAllExecute
+    end
+    object minUnselectAll: TAction
+      Tag = -5
+      Category = 'Minutes'
+      Caption = 'Unselect all'
+      ImageIndex = 46
+      OnExecute = dowSelectAllExecute
+    end
+  end
+  object PopupMenu4: TPopupMenu[7]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 261
+    Top = 290
+    object MenuItem10: TMenuItem
+      Action = hrSelectAll
+    end
+    object MenuItem12: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem11: TMenuItem
+      Action = hrUnselectAll
+    end
+  end
+  object PopupMenu5: TPopupMenu[8]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 591
+    Top = 287
+    object MenuItem13: TMenuItem
+      Action = minSelectAll
+    end
+    object MenuItem15: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem14: TMenuItem
+      Action = minUnselectAll
     end
   end
 end

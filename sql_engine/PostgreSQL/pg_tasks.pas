@@ -488,35 +488,46 @@ begin
   '  RETURNING'+LineEnding +
   '    jobid'+LineEnding +
   '  into'+LineEnding +
-  '    f_JobId;'+LineEnding;
+  '    f_JobId;'+LineEnding+LineEnding;
 
-  for T in FTaskSteps do
+  if FTaskSteps.Count > 0 then
   begin
-    S1:='  INSERT INTO pgagent.pga_jobstep' + LineEnding +
-        '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
-        '  values ' + LineEnding +
-        '    (f_JobId, '+AnsiQuotedStr(T.Name, '''')+', ' + AnsiQuotedStr(T.Description, '''') + ', '+
-                 BoolToStr(T.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(T.Body, '''')+', '''+T.DBName+''', '''');' +LineEnding;
-    S:=S + S1;
+    S:=S + '  /*------------- JOB STEPS -----------*/' + LineEnding;
+    for T in FTaskSteps do
+    begin
+      S1:='  INSERT INTO pgagent.pga_jobstep' + LineEnding +
+          '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
+          '  values ' + LineEnding +
+          '    (f_JobId, '+AnsiQuotedStr(T.Name, '''')+', ' + AnsiQuotedStr(T.Description, '''') + ', '+
+                   BoolToStr(T.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(T.Body, '''')+', '''+T.DBName+''', '''');' +LineEnding;
+      S:=S + S1;
+    end;
+    S:=S + LineEnding + LineEnding;
   end;
 
 
-  for TL in FTaskShedule do
+  if FTaskShedule.Count > 0 then
   begin
-    S1:='  INSERT INTO pgagent.pga_schedule (jscjobid, jscname, jscdesc, '+
-            'jscminutes, jschours, jscweekdays, jscmonthdays, '+
-            'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
-        '  VALUES(f_JobId, ' + AnsiQuotedStr(TL.Name, '''') + ', ' +
-            AnsiQuotedStr(TL.Description, '''') + ', '+
-            TL.MinutesStr + ', '+TL.HoursStr + ', ' + TL.DayWeekStr + ', ' + TL.DayMonthStr + ','+
-            TL.MonthStr +', ' + BoolToStr(TL.Enabled, true) + ',' +
-            ''''+DateTimeToStr(TL.DateStart)+''','''  + DateTimeToStr(TL.DateStop) + ''');' + LineEnding;
-          //TL. '{t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f,t,f,f,f,f}', '{t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t,t}', '{t,t,t,t,t,t,t,t,t,t,t,t}', true, '2019-12-14 00:00:00', '2019-12-31 00:00:00')';
-    S:=S + S1;
+    S:=S + '  /*------------- JOB SHEDULE -----------*/' + LineEnding;
+    for TL in FTaskShedule do
+    begin
+      S1:='  INSERT INTO pgagent.pga_schedule (jscjobid, jscname, jscdesc, '+
+              'jscminutes, jschours, jscweekdays, jscmonthdays, '+
+              'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
+          '  VALUES(f_JobId, ' + AnsiQuotedStr(TL.Name, '''') + ', ' +
+              AnsiQuotedStr(TL.Description, '''') + ', '+
+              AnsiQuotedStr(TL.MinutesStr, '''') +  + ', '+
+              AnsiQuotedStr(TL.HoursStr, '''') +  + ', ' +
+              AnsiQuotedStr(TL.DayWeekStr, '''') +  + ', ' +
+              AnsiQuotedStr(TL.DayMonthStr, '''') +  + ','+
+              AnsiQuotedStr(TL.MonthStr, '''') +  +', ' + BoolToStr(TL.Enabled, true) + ',' +
+              ''''+DateTimeToStr(TL.DateStart)+''','''  + DateTimeToStr(TL.DateStop) + ''');' + LineEnding;
+      S:=S + S1;
+    end;
+    S:=S + LineEnding + LineEnding;
   end;
 
-  S:=S +
-  '  raise EXCEPTION ''f_JobId = %'', f_JobId;'+LineEnding +
+   S:=S +
   'end;'+LineEnding +
   '$tasks$';
   AddSQLCommand(S);
