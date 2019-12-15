@@ -825,8 +825,8 @@ procedure TPGTask.SetDescription(const AValue: string);
 begin
   if FDescription <> AValue then
   begin
-    TSQLEnginePostgre(OwnerDB).ExecSysSQL(Format('UPDATE pgagent.pga_job SET jobdesc = ''%s'' WHERE jobid=%d', [FDescription, FTaskID]));
-     FDescription:=AValue;
+    TSQLEnginePostgre(OwnerDB).ExecSysSQL(Format('UPDATE pgagent.pga_job SET jobdesc = %s WHERE jobid=%d', [AnsiQuotedStr(AValue, ''''), FTaskID]));
+    FDescription:=AValue;
   end;
 end;
 

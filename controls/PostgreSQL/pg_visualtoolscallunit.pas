@@ -251,8 +251,8 @@ begin
     [TfbmGroupEditFrameEditor, TfbmRoleGrantUsersFrame, TfbmUserObjectsGrantFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGTask,
-    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame],
-    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TfbmObjectEditorDescriptionFrame],
+    [TpgTaskMainPage, TpgTaskStepsPage, TpgTaskShedulePage, TpgTaskLogPage, TfbmObjectEditorDescriptionFrame, TfbmTableStatisticFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TPGExtension,
       [TpgExtensionEditor, TfbmObjectEditorDescriptionFrame],
