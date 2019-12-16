@@ -25,7 +25,7 @@ unit PostgreSQLEngineUnit;
 interface
 
 uses
-  Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects,
+  Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects, ZClasses,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
   ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, ZCompatibility, pgTypes,
   pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
@@ -1271,7 +1271,7 @@ type
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses
-  rxlogging, rxdbutils,
+  rxlogging, rxdbutils, ibmSqlUtilsUnit,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   rxstrutils, pg_tasks, pgSQLEngineFTS
@@ -1459,9 +1459,6 @@ var
   F: TField;
   FD: TDBField;
   P: TParam;
-  ZT: TZTime;
-  ZTS: TZTimeStamp;
-  ZD: TZDate;
 begin
   RA:=nil;
 
@@ -1491,50 +1488,18 @@ begin
 
       S:='insert into ' + CaptionFullPatch + '(' + S1 + ')'+ ' values('+S2+') returning '+MakeSQLInsertFields(false);
       quIns:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(S);
+
       for F in FDataSet.Fields do
       begin
         P:=quIns.Params.FindParam(F.FieldName);
         if Assigned(P) then
           P.Assign(F);
       end;
-      quIns.Open;
 
-      for FD in Fields do
-      begin
-        if FD.FieldPK then
-        begin
-          F:=quIns.FieldByName(FD.FieldName);
-          if F.DataType in IntegerDataTypes then
-            RA.SetInt(F.Index+1, F.AsInteger)
-          else
-          if F.DataType in StringTypes then
-            RA.SetString(F.Index+1, F.AsString)
-          else
-          if F.DataType = ftTime then
-          begin
-            //RA.SetTime(F.Index+1, F.AsDateTime)
-            DecodeDateTimeToTime(F.AsDateTime, ZT);
-            RA.SetTime(F.Index+1, ZT)
-          end
-          else
-          if F.DataType in [ftDateTime, ftTimeStamp] then
-          begin
-            //RA.SetTimestamp(F.Index+1, F.AsDateTime)
-            DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
-            RA.SetTimestamp(F.Index+1, ZTS);
-          end
-          else
-          if F.DataType = ftDate then
-          begin
-            //RA.SetDate(F.Index+1, F.AsDateTime);
-            DecodeDateTimeToDate(F.AsDateTime, ZD);
-            RA.SetDate(F.Index+1, ZD);
-          end
-          else
-            raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
-        end;
-      end;
+      quIns.Open;
+      FillZParams(Fields, RA, quIns);
       quIns.Close;
+
       Execute:=false;
     end;
   end;
@@ -1765,6 +1730,8 @@ begin
     Result:=' order by '+Result;
 end;
 
+var
+  S: String;
 begin
   if not FDataSet.Active then
   begin
@@ -1777,7 +1744,8 @@ begin
 
     ZUpdateSQL.InsertSQL.Text:='insert into ' + CaptionFullPatch + '(' + MakeSQLInsertFields(false) + ')'+
                                   ' values('+MakeSQLInsertFields(true)+')';
-    ZUpdateSQL.ModifySQL.Text:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    S:='update ' + CaptionFullPatch + ' set '+ MakeSQLEditFields + MakeSQLWhere(spsOld);
+    ZUpdateSQL.ModifySQL.Text:=S;
     ZUpdateSQL.DeleteSQL.Text:='delete from ' + CaptionFullPatch + MakeSQLWhere(spsOld);
 
     if FPKCount > 0 then
@@ -4893,12 +4861,9 @@ var
   RA: TZRowAccessor;
   quIns: TZQuery;
   S, S1, S2: String;
-  F: TField;
-  FD: TDBField;
   P: TParam;
-  ZT: TZTime;
-  ZTS: TZTimeStamp;
-  ZD: TZDate;
+  FD: TDBField;
+  F: TField;
 begin
   RA:=nil;
 
@@ -4937,46 +4902,9 @@ begin
         if Assigned(P) then
           P.Assign(F);
       end;
-      quIns.Open;
 
-      for FD in Fields do
-      begin
-        if FD.FieldPK then
-        begin
-          F:=quIns.FindField(FD.FieldName);
-          if Assigned(F) then
-          begin
-            if F.DataType in IntegerDataTypes then
-              RA.SetInt(F.Index+1, F.AsInteger)
-            else
-            if F.DataType in StringTypes then
-              RA.SetString(F.Index+1, F.AsString)
-            else
-            if F.DataType = ftTime then
-            begin
-              //RA.SetTime(F.Index+1, F.AsDateTime)
-              DecodeDateTimeToTime(F.AsDateTime, ZT);
-              RA.SetTime(F.Index+1, ZT)
-            end
-            else
-            if F.DataType in [ftDateTime, ftTimeStamp] then
-            begin
-              //RA.SetTimestamp(F.Index+1, F.AsDateTime)
-              DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
-              RA.SetTimestamp(F.Index+1, ZTS)
-            end
-            else
-            if F.DataType = ftDate then
-            begin
-              //RA.SetDate(F.Index+1, F.AsDateTime)
-              DecodeDateTimeToDate(F.AsDateTime, ZD);
-              RA.SetDate(F.Index+1, ZD)
-            end
-            else
-              raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
-          end;
-        end;
-      end;
+      quIns.Open;
+      FillZParams(Fields, RA, quIns);
       quIns.Close;
       Execute:=false;
     end;

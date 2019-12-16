@@ -25,7 +25,8 @@ unit ibmSqlUtilsUnit;
 interface
 
 uses
-  Classes, SysUtils, uib, uibmetadata, uiblib, fb_ConstUnit;
+  Classes, SysUtils, DB, uib, uibmetadata, uiblib, fb_ConstUnit, ZClasses,
+  ZDbcCache, SQLEngineAbstractUnit, ZDataset;
 
 function TEndTransModeToString(Mode:TEndTransMode):string;
 
@@ -34,8 +35,9 @@ function FieldInMetaListConstr(AFieldName:string; MC:TMetaConstraint):boolean;
 function CommentSQLCode(var AText:string; ACommentString:string = sCommentFBMStyle):boolean;
 function UnCommentSQLCode(var AText:string):boolean;
 
+procedure FillZParams(AFields:TDBFields; RA: TZRowAccessor; quIns: TZQuery);
 implementation
-uses Dialogs, ibmSqlTextsUnit, fbmSqlParserUnit;
+uses Dialogs, ibmSqlTextsUnit, fbmSqlParserUnit, rxdbutils;
 
 function TEndTransModeToString(Mode:TEndTransMode):string;
 begin
@@ -189,6 +191,66 @@ begin
   finally
     P.Free;
   end;
+end;
+
+procedure FillZParams(AFields: TDBFields; RA: TZRowAccessor; quIns: TZQuery);
+var
+  FD: TDBField;
+  F: TField;
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+  ZT: TZTime;
+  ZTS: TZTimeStamp;
+  ZD: TZDate;
+  {$ENDIF}
+begin
+  for FD in AFields do
+  begin
+    if FD.FieldPK then
+    begin
+      F:=quIns.FindField(FD.FieldName);
+      if Assigned(F) then
+      begin
+        if F.DataType in IntegerDataTypes then
+          RA.SetInt(F.Index+1, F.AsInteger)
+        else
+        if F.DataType in StringTypes then
+          RA.SetString(F.Index+1, F.AsString)
+        else
+        if F.DataType = ftTime then
+        begin
+          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          DecodeDateTimeToTime(F.AsDateTime, ZT);
+          RA.SetTime(F.Index+1, ZT)
+          {$ELSE}
+          RA.SetTime(F.Index+1, F.AsDateTime)
+          {$ENDIF}
+        end
+        else
+        if F.DataType in [ftDateTime, ftTimeStamp] then
+        begin
+          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
+          RA.SetTimestamp(F.Index+1, ZTS)
+          {$ELSE}
+          RA.SetTimestamp(F.Index+1, F.AsDateTime)
+          {$ENDIF}
+        end
+        else
+        if F.DataType = ftDate then
+        begin
+          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          DecodeDateTimeToDate(F.AsDateTime, ZD);
+          RA.SetDate(F.Index+1, ZD)
+          {$ELSE}
+          RA.SetDate(F.Index+1, F.AsDateTime)
+          {$ENDIF}
+        end
+        else
+          raise Exception.CreateFmt('Unknow data type for refresh : %s', [Fieldtypenames[F.DataType]]);
+      end;
+    end;
+  end;
+
 end;
 
 end.
