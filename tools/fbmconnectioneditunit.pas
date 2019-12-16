@@ -161,7 +161,9 @@ begin
   for i:=0 to ListBox1.Items.Count - 1 do
   begin
     P:=ListBox1.Items.Objects[i] as TConnectionDlgPage;
+    P.Lock;
     P.LoadParams(ASQLEngine);
+    P.UnLock;
   end;
 end;
 

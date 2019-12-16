@@ -28,9 +28,9 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     Height = 495
     Top = 0
     Width = 703
-    ActivePage = TabSheet2
+    ActivePage = TabSheet3
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Propertys'

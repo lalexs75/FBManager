@@ -138,7 +138,7 @@ end;
 
 procedure Tpg_con_MainPage.DoTryFillDBList;
 begin
-  if (cbServerName.Text = '') or (edtUserName.Text = '') or
+  if (LockCount>0) or (cbServerName.Text = '') or (edtUserName.Text = '') or
     ((pgTest.HostName = cbServerName.Text) and (pgTest.User = edtUserName.Text) and (pgTest.Password = edtPassword.Text)) then exit;
 
   pgTest.HostName:=cbServerName.Text;

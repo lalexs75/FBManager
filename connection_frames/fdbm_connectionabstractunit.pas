@@ -32,10 +32,16 @@ type
   { TConnectionDlgPage }
 
   TConnectionDlgPage = class(TPagedDialogPage)
+  private
+    FLockCount:integer;
+  protected
+    property LockCount:integer read FLockCount;
   public
     procedure LoadParams(ASQLEngine:TSQLEngineAbstract);virtual;abstract;
     procedure SaveParams;virtual;abstract;
     function TestConnection:boolean;virtual;
+    procedure Lock;
+    procedure UnLock;
   end;
 
 implementation
@@ -47,6 +53,17 @@ implementation
 function TConnectionDlgPage.TestConnection: boolean;
 begin
   Result:=true;
+end;
+
+procedure TConnectionDlgPage.Lock;
+begin
+  Inc(FLockCount);
+end;
+
+procedure TConnectionDlgPage.UnLock;
+begin
+  if FLockCount>0 then
+    Dec(FLockCount);
 end;
 
 end.

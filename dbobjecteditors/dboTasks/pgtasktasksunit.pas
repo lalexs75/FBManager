@@ -210,6 +210,15 @@ begin
 
     for i:=0 to CheckListBox2.Items.Count-1 do
       U.DayMonth[i+1]:=CheckListBox2.Checked[i];
+
+    for i:=0 to CheckListBox3.Items.Count-1 do
+      U.Month[i+1]:=CheckListBox3.Checked[i];
+
+    for i:=0 to CheckListBox4.Items.Count-1 do
+      U.Hours[i]:=CheckListBox4.Checked[i];
+
+    for i:=0 to CheckListBox5.Items.Count-1 do
+      U.Minutes[i]:=CheckListBox5.Checked[i];
   end;
 end;
 
