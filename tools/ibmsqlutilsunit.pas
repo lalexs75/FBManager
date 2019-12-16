@@ -37,7 +37,8 @@ function UnCommentSQLCode(var AText:string):boolean;
 
 procedure FillZParams(AFields:TDBFields; RA: TZRowAccessor; quIns: TZQuery);
 implementation
-uses Dialogs, ibmSqlTextsUnit, fbmSqlParserUnit, rxdbutils;
+uses Dialogs, ibmSqlTextsUnit, fbmSqlParserUnit, rxdbutils, ZCompatibility,
+  ZSysUtils;
 
 function TEndTransModeToString(Mode:TEndTransMode):string;
 begin
