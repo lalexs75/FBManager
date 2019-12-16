@@ -4272,6 +4272,8 @@ begin
   Result:='';//inherited GetQueryPlan;
   Q:=TSQLEnginePostgre(Owner).GetSQLQuery('EXPLAIN ' + QuerySQL);
   Q.ParamCheck:=pgUseParamsChar;
+  if FSQLQuery.Params.Count>0 then
+    Q.Params.AssignValues(FSQLQuery.Params);
   try
     Q.Open;
     if Q.Fields.Count > 0 then

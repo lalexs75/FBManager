@@ -213,7 +213,10 @@ begin
 end;
 
 procedure TfbmSQLParamValueEditorFrame.GetParam(AParam: TParam);
+var
+  S: String;
 begin
+  S:=AParam.Name;
   if CheckBox2.Checked then
     AParam.Clear
   else
