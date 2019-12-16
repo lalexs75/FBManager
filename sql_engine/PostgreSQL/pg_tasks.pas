@@ -516,11 +516,11 @@ begin
               'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
           '  VALUES(f_JobId, ' + AnsiQuotedStr(TL.Name, '''') + ', ' +
               AnsiQuotedStr(TL.Description, '''') + ', '+
-              AnsiQuotedStr(TL.MinutesStr, '''') +  + ', '+
-              AnsiQuotedStr(TL.HoursStr, '''') +  + ', ' +
-              AnsiQuotedStr(TL.DayWeekStr, '''') +  + ', ' +
-              AnsiQuotedStr(TL.DayMonthStr, '''') +  + ','+
-              AnsiQuotedStr(TL.MonthStr, '''') +  +', ' + BoolToStr(TL.Enabled, true) + ',' +
+              AnsiQuotedStr(TL.MinutesStr, '''') + ', '+
+              AnsiQuotedStr(TL.HoursStr, '''') +  ', ' +
+              AnsiQuotedStr(TL.DayWeekStr, '''') +  ', ' +
+              AnsiQuotedStr(TL.DayMonthStr, '''') +  ','+
+              AnsiQuotedStr(TL.MonthStr, '''') + ', ' + BoolToStr(TL.Enabled, true) + ',' +
               ''''+DateTimeToStr(TL.DateStart)+''','''  + DateTimeToStr(TL.DateStop) + ''');' + LineEnding;
       S:=S + S1;
     end;

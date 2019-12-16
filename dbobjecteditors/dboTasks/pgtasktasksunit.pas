@@ -193,6 +193,7 @@ end;
 procedure TpgTaskShedulePage.CheckListBox1Click(Sender: TObject);
 var
   U: TPGTaskShedule;
+  i: Integer;
 begin
   FModified:=true;
   U:=CurrentItem;
