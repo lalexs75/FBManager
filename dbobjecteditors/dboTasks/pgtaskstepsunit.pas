@@ -182,7 +182,7 @@ begin
 
   for U in TPGTask(DBObject).Steps do
   begin
-    U1:=TPGTaskStep.Create(nil);
+    U1:=TPGTaskStep.Create;
     U1.Assign(U);
     ListBox1.Items.AddObject(U1.Name, U1);
   end;
@@ -253,7 +253,7 @@ var
   U: TPGTaskStep;
 begin
   Result:=true;
-  U:=TPGTaskStep.Create(TPGTask(DBObject));
+  U:=TPGTaskStep.Create;
   ListBox1.Items.AddObject(sStep+' '+IntToStr(ListBox1.Items.Count+1), U);
   U.Name:=ListBox1.Items[ListBox1.Count-1];
   ListBox1.ItemIndex:=ListBox1.Count-1;

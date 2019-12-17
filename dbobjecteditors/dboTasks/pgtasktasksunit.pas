@@ -323,7 +323,7 @@ begin
   ClearDelList;
   for U1 in TPGTask(DBObject).Shedule do
   begin
-    U:=TPGTaskShedule.Create(nil);
+    U:=TPGTaskShedule.Create;
     U.Assign(U1);
 
     ListBox1.Items.AddObject(U.Name, U);
@@ -389,7 +389,7 @@ procedure TpgTaskShedulePage.AddShedule;
 var
   U: TPGTaskShedule;
 begin
-  U:=TPGTaskShedule.Create(TPGTask(DBObject));
+  U:=TPGTaskShedule.Create;
   U.Name:=sShedule + ' '+IntToStr(ListBox1.Items.Count + 1);
   ListBox1.Items.AddObject(U.Name, U);
   U.Index:=ListBox1.Items.Count-1;
@@ -539,6 +539,20 @@ begin
     begin
       Op:=FCmd1.AddOperator(pgtaDropShedule);
       Op.ID:=TPGTaskShedule(FDelList[i]).ID;
+    end;
+
+    for i:=0 to ListBox1.Items.Count-1 do
+    begin
+      U:=TPGTaskShedule(ListBox1.Items.Objects[i]);
+      if U.ID < 0 then
+      begin
+        Op:=FCmd1.AddOperator(pgtaAlterShedule);
+        Op.Shedule.Assign(U);
+      end
+      else
+      begin
+
+      end;
     end;
   end
   else

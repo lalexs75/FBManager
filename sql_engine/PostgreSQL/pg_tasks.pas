@@ -55,7 +55,7 @@ type
   TPGTaskStep = class
   private
     FDescription: string;
-    FPGTask: TPGTask;
+    //FPGTask: TPGTask;
     FID:integer;
     FName:string;
     FBody:string;
@@ -63,10 +63,10 @@ type
     FDBName:string;
     FEnabled:boolean;
   public
-    constructor Create(APGTask:TPGTask);
+    constructor Create{(APGTask:TPGTask)};
     procedure Assign(From:TPGTaskStep);
     function IsEqual(From:TPGTaskStep): Boolean;
-    function MakeSQL:string;
+    //function MakeSQL:string;
     property Name:string read FName write FName;
     property Description:string read FDescription write FDescription;
     property Enabled:boolean read FEnabled write FEnabled;
@@ -80,12 +80,12 @@ type
 
   TPGTaskSteps = class
   private
-    FOwner: TPGTask;
+    //FOwner: TPGTask;
     FList:TFPList;
     function GetCount: integer;
     function GetItem(AIndex: integer): TPGTaskStep;
   public
-    constructor Create(AOwner:TPGTask);
+    constructor Create{(AOwner:TPGTask)};
     destructor Destroy;override;
     procedure Assign(ATaskSteps:TPGTaskSteps);
     function GetEnumerator: TPGTaskStepEnumerator;
@@ -118,7 +118,6 @@ type
   TPGTaskShedule = class
   private
     FDescription: string;
-    FPGTask:TPGTask;
     FIndex:integer;
     FID:integer;
     FName:string;
@@ -133,14 +132,14 @@ type
     procedure SetHours(S:string);
     procedure SetMinutes(S:string);
     //
-    function MakeSQL:string;
+    //function MakeSQL:string;
   public
     Month:TMonthArray;
     DayMonth:TDayMonthArray;
     DayWeek:TDayWeekArray;
     Hours:THoursArray;
     Minutes:TMinutesArray;
-    constructor Create(APGTask:TPGTask);
+    constructor Create;
     procedure Assign(From:TPGTaskShedule);
 
     function MonthStr:string; inline;
@@ -162,12 +161,11 @@ type
 
   TPGTaskSheduleList = class
   private
-    FOwner:TPGTask;
     FList:TFPList;
     function GetCount: integer;
     function GetItem(AIndex: integer): TPGTaskShedule;
   public
-    constructor Create(AOwner:TPGTask);
+    constructor Create;
     destructor Destroy;override;
     procedure Assign(ATaskSteps:TPGTaskSheduleList);
     function GetEnumerator: TPGTaskSheduleListEnumerator;
@@ -255,13 +253,21 @@ type
   TPGAlterTaskOperator = class
   private
     FAlterAction: TPGSQLTaskAlterAction;
+    FCaption: string;
+    FEnabled: Boolean;
     FID: Integer;
+    FShedule: TPGTaskShedule;
+    FStep: TPGTaskStep;
   public
     constructor Create;
     destructor Destroy;override;
     procedure Assign(Source: TPGAlterTaskOperator);
     property AlterAction:TPGSQLTaskAlterAction read FAlterAction write FAlterAction;
     property ID:Integer read FID write FID;
+    property Step:TPGTaskStep read FStep;
+    property Shedule:TPGTaskShedule read FShedule;
+    property Caption:string read FCaption write FCaption;
+    property Enabled:Boolean read FEnabled write FEnabled;
   end;
 
   { TPGAlterTaskOperators }
@@ -407,11 +413,15 @@ end;
 
 constructor TPGAlterTaskOperator.Create;
 begin
-
+  inherited Create;
+  FStep:=TPGTaskStep.Create;
+  FShedule:=TPGTaskShedule.Create;
 end;
 
 destructor TPGAlterTaskOperator.Destroy;
 begin
+  FreeAndNil(FStep);
+  FreeAndNil(FShedule);
   inherited Destroy;
 end;
 
@@ -419,6 +429,11 @@ procedure TPGAlterTaskOperator.Assign(Source: TPGAlterTaskOperator);
 begin
   if not Assigned(Source) then Exit;
   FAlterAction:=Source.FAlterAction;
+  FCaption:=Source.Caption;
+  FID:=Source.ID;
+  FShedule.Assign(Source.Shedule);
+  FStep.Assign(Source.Step);
+  FEnabled:=Source.FEnabled;
 end;
 
 { TPGSQLTaskAlter }
@@ -434,6 +449,26 @@ begin
     case Op.AlterAction of
       pgtaDropTaskItem:S:=S + '  DELETE FROM pgagent.pga_jobstep WHERE jstid='+IntToStr(Op.ID) +';'+LineEnding;
       pgtaDropShedule:S:=S + '  DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(Op.ID) +';'+LineEnding;
+      pgtaAlterTask:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+
+                            ', jobenabled='+BoolToStr(OP.Enabled, true)+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
+(*
+      '  INSERT INTO pgagent.pga_job (jobjclid, jobname, jobdesc, jobenabled, jobhostagent)'+LineEnding +
+      '  SELECT'+LineEnding +
+      '    pga_jobclass.jclid,'+LineEnding +
+      '    '''+name+''','+LineEnding +
+      '    '''+Description+''','+LineEnding +
+      '    true,'+LineEnding +
+      '    '''''+LineEnding +
+      '  FROM'+LineEnding +
+      '    pgagent.pga_jobclass'+LineEnding +
+      '    WHERE pga_jobclass.jclname='''+TaskClass+''''+LineEnding +
+      '  RETURNING'+LineEnding +
+      '    jobid'+LineEnding +
+*)
+          //pgtaCreateShedule, pgtaCreateTaskItem,
+          //pgtaAlterShedule, pgtaAlterTaskItem,
+    else
+      raise Exception.Create('TPGSQLTaskAlter - Unknow operator');
     end;
   end;
   if S<>'' then
@@ -506,10 +541,9 @@ begin
   Result:=TPGTaskShedule(FList[AIndex]);
 end;
 
-constructor TPGTaskSheduleList.Create(AOwner: TPGTask);
+constructor TPGTaskSheduleList.Create;
 begin
   inherited Create;
-  FOwner:=AOwner;
   FList:=TFPList.Create;
 end;
 
@@ -536,7 +570,7 @@ end;
 
 function TPGTaskSheduleList.Add: TPGTaskShedule;
 begin
-  Result:=TPGTaskShedule.Create(FOwner);
+  Result:=TPGTaskShedule.Create;
   FList.Add(Result);
 end;
 
@@ -587,10 +621,10 @@ begin
   Result:=TPGTaskStep(FList[AIndex]);
 end;
 
-constructor TPGTaskSteps.Create(AOwner: TPGTask);
+constructor TPGTaskSteps.Create;
 begin
   inherited Create;
-  FOwner:=AOwner;
+  //FOwner:=AOwner;
   FList:=TFPList.Create;
 end;
 
@@ -618,7 +652,7 @@ end;
 
 function TPGTaskSteps.Add: TPGTaskStep;
 begin
-  Result:=TPGTaskStep.Create(FOwner);
+  Result:=TPGTaskStep.Create;
   FList.Add(Result);
 end;
 
@@ -704,8 +738,8 @@ end;
 constructor TPGSQLTaskCreate.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FTaskSteps:=TPGTaskSteps.Create(nil);
-  FTaskShedule:=TPGTaskSheduleList.Create(nil);
+  FTaskSteps:=TPGTaskSteps.Create;
+  FTaskShedule:=TPGTaskSheduleList.Create;
 end;
 
 destructor TPGSQLTaskCreate.Destroy;
@@ -802,7 +836,7 @@ begin
   else
     DoParse(Copy(S, 2, Length(S)-2), Minutes);
 end;
-
+(*
 function TPGTaskShedule.MakeSQL: string;
 begin
   if FID > -1 then
@@ -843,13 +877,12 @@ begin
             '''' + DateTimeToStr(FDateStop) + ''')';
   end;
 end;
-
-constructor TPGTaskShedule.Create(APGTask: TPGTask);
+*)
+constructor TPGTaskShedule.Create;
 begin
   inherited Create;
   FID:=-1;
   FIndex:=-1;
-  FPGTask:=APGTask;
 end;
 
 procedure TPGTaskShedule.Assign(From: TPGTaskShedule);
@@ -895,12 +928,12 @@ end;
 
 { TPGTaskStep }
 
-constructor TPGTaskStep.Create(APGTask: TPGTask);
+constructor TPGTaskStep.Create;
 begin
   inherited Create;
   FID:=-1;
 //  FIndex:=-1;
-  FPGTask:=APGTask;
+  //FPGTask:=APGTask;
 end;
 
 procedure TPGTaskStep.Assign(From: TPGTaskStep);
@@ -925,7 +958,7 @@ begin
     (FConnectStr = From.FConnectStr) and
     (FEnabled = From.FEnabled);
 end;
-
+(*
 function TPGTaskStep.MakeSQL: string;
 var
   S: String;
@@ -969,7 +1002,7 @@ begin
         '''' + FDBName + ''', '+
         '''' + FConnectStr + ''')';
 end;
-
+*)
 { TPGTask }
 
 function TPGTask.GetTaskClassName: string;
@@ -1020,8 +1053,8 @@ constructor TPGTask.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   { TODO : Необходимо реализовать отображение в дереве запрещённых задач }
   inherited Create(ADBItem, AOwnerRoot);
-  FSteps:=TPGTaskSteps.Create(Self);
-  FShedule:=TPGTaskSheduleList.Create(Self);
+  FSteps:=TPGTaskSteps.Create;
+  FShedule:=TPGTaskSheduleList.Create;
 end;
 
 destructor TPGTask.Destroy;
