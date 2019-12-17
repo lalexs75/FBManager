@@ -451,6 +451,12 @@ begin
       pgtaDropShedule:S:=S + '  DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(Op.ID) +';'+LineEnding;
       pgtaAlterTask:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+
                             ', jobenabled='+BoolToStr(OP.Enabled, true)+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
+      pgtaCreateTaskItem:S:=S +'  INSERT INTO pgagent.pga_jobstep' + LineEnding +
+          '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
+          '  values ' + LineEnding +
+          '    ('+IntToStr(OP.ID)+', '+AnsiQuotedStr(OP.Step.Name, '''')+', ' + AnsiQuotedStr(OP.Step.Description, '''') + ', '+
+                   BoolToStr(OP.Step.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(OP.Step.Body, '''')+', '''+OP.Step.DBName+''', '''');' +LineEnding;
+
 (*
       '  INSERT INTO pgagent.pga_job (jobjclid, jobname, jobdesc, jobenabled, jobhostagent)'+LineEnding +
       '  SELECT'+LineEnding +

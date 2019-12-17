@@ -366,6 +366,21 @@ begin
       Op:=FCmd1.AddOperator(pgtaDropTaskItem);
       Op.ID:=TPGTaskStep(FDelList[i]).ID;
     end;
+
+    for i:=0 to ListBox1.Items.Count-1 do
+    begin
+      U:=TPGTaskStep(ListBox1.Items.Objects[i]);
+      if U.ID < 0 then
+      begin
+        Op:=FCmd1.AddOperator(pgtaCreateTaskItem);
+        OP.Step.Assign(U);
+        OP.ID:=TPGTask(DBObject).TaskID;
+      end
+      else
+      begin
+
+      end;
+    end;
   end
   else
     Result:=false;
