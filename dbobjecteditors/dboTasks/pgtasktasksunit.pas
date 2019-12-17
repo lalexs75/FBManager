@@ -135,6 +135,8 @@ type
     procedure taskAddExecute(Sender: TObject);
     procedure taskRemoveExecute(Sender: TObject);
   private
+    FDelList:TFPList;
+    procedure ClearDelList;
     procedure LoadTaskData;
     procedure RefreshTaskData;
     procedure ClearData;
@@ -149,6 +151,7 @@ type
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     procedure Localize;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
+    destructor Destroy; override;
     function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; override;
   end;
 
@@ -215,7 +218,6 @@ procedure TpgTaskShedulePage.HeaderControl1SectionResize(
 begin
   case Section.OriginalIndex of
     0:Panel1.Width:=Section.Width;
-//    1;Panel3.Width:=Section.Width;
     2:Panel3.Width:=Section.Width;
   end;
 end;
@@ -225,8 +227,6 @@ procedure TpgTaskShedulePage.HeaderControl2SectionResize(
 begin
   case Section.OriginalIndex of
     0:Panel4.Width:=Section.Width;
-//    1;Panel3.Width:=Section.Width;
-//    2:Panel3.Width:=Section.Width;
   end;
 end;
 
@@ -306,11 +306,21 @@ begin
   DelShedule;
 end;
 
+procedure TpgTaskShedulePage.ClearDelList;
+var
+  i: Integer;
+begin
+  for i:=0 to FDelList.Count-1 do
+    TPGTaskShedule(FDelList[i]).Free;
+  FDelList.Clear;
+end;
+
 procedure TpgTaskShedulePage.LoadTaskData;
 var
   U, U1:TPGTaskShedule;
 begin
   ClearData;
+  ClearDelList;
   for U1 in TPGTask(DBObject).Shedule do
   begin
     U:=TPGTaskShedule.Create(nil);
@@ -396,14 +406,10 @@ begin
   begin
     U:=CurrentItem;
     if DBObject.State = sdboCreate then
-    begin
-      ListBox1.Items.Delete(ListBox1.ItemIndex);
-      U.Free;
-    end
+      U.Free
     else
-    begin
-      NotImplemented;
-    end;
+      FDelList.Add(U);
+    ListBox1.Items.Delete(ListBox1.ItemIndex);
 
     if ListBox1.Items.Count>0 then
       ListBox1.ItemIndex:=0;
@@ -490,6 +496,7 @@ constructor TpgTaskShedulePage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  FDelList:=TFPList.Create;
   PageControl1.ActivePageIndex:=0;
   FillLists;
   Panel1Resize(nil);
@@ -498,20 +505,40 @@ begin
   LoadTaskData;
 end;
 
+destructor TpgTaskShedulePage.Destroy;
+begin
+  ClearDelList;
+  FDelList.Free;
+  ClearData;
+  inherited Destroy;
+end;
+
 function TpgTaskShedulePage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
   U: TPGTaskShedule;
   I: Integer;
+  FCmd1: TPGSQLTaskAlter;
+  Op: TPGAlterTaskOperator;
 begin
+  Result:=true;
   if ASQLObject is TPGSQLTaskCreate then
   begin
-    Result:=true;
     FCmd:=TPGSQLTaskCreate(ASQLObject);
     for I:=0 to ListBox1.Items.Count -1 do
     begin
       U:=FCmd.TaskShedule.Add;
       U.Assign(TPGTaskShedule(ListBox1.Items.Objects[i]));
+    end;
+  end
+  else
+  if ASQLObject is TPGSQLTaskAlter then
+  begin
+    FCmd1:=TPGSQLTaskAlter(ASQLObject);
+    for i:=0 to FDelList.Count-1 do
+    begin
+      Op:=FCmd1.AddOperator(pgtaDropShedule);
+      Op.ID:=TPGTaskShedule(FDelList[i]).ID;
     end;
   end
   else

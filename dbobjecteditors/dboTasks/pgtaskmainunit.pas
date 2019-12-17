@@ -136,6 +136,7 @@ end;
 function TpgTaskMainPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
+  FCmd1: TPGSQLTaskAlter;
 begin
   Result:=Edit1.Text <> '';
   if not Result then Exit;
@@ -146,6 +147,16 @@ begin
     FCmd:=TPGSQLTaskCreate(ASQLObject);
     FCmd.Name:=Edit1.Text;
     FCmd.TaskClass:=ComboBox1.Text;
+  end
+  else
+  if ASQLObject is TPGSQLTaskAlter then
+  begin
+    FCmd1:=TPGSQLTaskAlter(ASQLObject);
+{    for i:=0 to FDelList.Count-1 do
+    begin
+      Op:=FCmd1.AddOperator(pgtaDropTaskItem);
+      Op.ID:=TPGTaskStep(FDelList[i]).ID;
+    end;}
 
   end
   else

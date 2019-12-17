@@ -33,6 +33,7 @@ type
   TPGTask = class;
   TPGTaskStepEnumerator = class;
   TPGTaskSheduleListEnumerator = class;
+  TPGAlterTaskOperatorsEnumerator = class;
 
   { TPGTasksRoot }
 
@@ -213,12 +214,6 @@ type
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
 
-    //function CompileTaskShedule(TS:TPGTaskShedule):boolean;
-    //function DeleteTaskShedule(TS:TPGTaskShedule):boolean;
-    //
-    //function CompileTaskStep(TS:TPGTaskStep):boolean;
-    //function DeleteTaskStep(TS:TPGTaskStep):boolean;
-
     class function DBClassTitle:string;override;
     property TaskID:integer read FTaskID;
     property Steps:TPGTaskSteps read FSteps;
@@ -255,10 +250,57 @@ type
     pgtaAlterShedule, pgtaAlterTaskItem, pgtaDropShedule, pgtaDropTaskItem,
     pgtaAlterTask);
 
+  { TPGAlterTaskOperator }
+
+  TPGAlterTaskOperator = class
+  private
+    FAlterAction: TPGSQLTaskAlterAction;
+    FID: Integer;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    procedure Assign(Source: TPGAlterTaskOperator);
+    property AlterAction:TPGSQLTaskAlterAction read FAlterAction write FAlterAction;
+    property ID:Integer read FID write FID;
+  end;
+
+  { TPGAlterTaskOperators }
+
+  TPGAlterTaskOperators = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(Index: integer): TPGAlterTaskOperator;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    function GetEnumerator: TPGAlterTaskOperatorsEnumerator;
+    procedure Clear;
+    procedure Assign(ASource:TPGAlterTaskOperators);
+    function AddItem(AlterAction:TPGSQLTaskAlterAction):TPGAlterTaskOperator;
+
+    property Count:integer read GetCount;
+    property Items[Index:integer]:TPGAlterTaskOperator read GetItems;default;
+  end;
+
+  { TPGAlterTaskOperatorsEnumerator }
+
+  TPGAlterTaskOperatorsEnumerator = class
+  private
+    FList: TPGAlterTaskOperators;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TPGAlterTaskOperators);
+    function GetCurrent: TPGAlterTaskOperator;
+    function MoveNext: Boolean;
+    property Current: TPGAlterTaskOperator read GetCurrent;
+  end;
+
   { TPGSQLTaskAlter }
 
   TPGSQLTaskAlter = class(TSQLCommandDDL)
   private
+    FOperators: TPGAlterTaskOperators;
   protected
     procedure MakeSQL; override;
   public
@@ -266,6 +308,8 @@ type
     destructor Destroy;override;
     procedure Clear;override;
     procedure Assign(ASource:TSQLObjectAbstract);override;
+    function AddOperator(AlterAction: TPGSQLTaskAlterAction): TPGAlterTaskOperator;
+    property Operators:TPGAlterTaskOperators read FOperators;
   end;
 
   { TPGSQLDropTask }
@@ -282,31 +326,153 @@ type
 implementation
 uses pg_sql_lines_unit, pgSqlTextUnit, StrUtils;
 
+{ TPGAlterTaskOperatorsEnumerator }
+
+constructor TPGAlterTaskOperatorsEnumerator.Create(AList: TPGAlterTaskOperators
+  );
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TPGAlterTaskOperatorsEnumerator.GetCurrent: TPGAlterTaskOperator;
+begin
+  Result := FList[FPosition];
+end;
+
+function TPGAlterTaskOperatorsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TPGAlterTaskOperators }
+
+function TPGAlterTaskOperators.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TPGAlterTaskOperators.GetItems(Index: integer): TPGAlterTaskOperator;
+begin
+  Result:=TPGAlterTaskOperator(FList[Index]);
+end;
+
+constructor TPGAlterTaskOperators.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TPGAlterTaskOperators.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+function TPGAlterTaskOperators.GetEnumerator: TPGAlterTaskOperatorsEnumerator;
+begin
+  Result:=TPGAlterTaskOperatorsEnumerator.Create(Self);
+end;
+
+procedure TPGAlterTaskOperators.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TPGAlterTaskOperator(FList[i]).Free;
+  FList.Clear;
+end;
+
+procedure TPGAlterTaskOperators.Assign(ASource: TPGAlterTaskOperators);
+var
+  P: TPGAlterTaskOperator;
+begin
+  Clear;
+  if not Assigned(ASource) then Exit;
+  for P in Self do
+    AddItem(P.AlterAction).Assign(P);
+end;
+
+function TPGAlterTaskOperators.AddItem(AlterAction: TPGSQLTaskAlterAction
+  ): TPGAlterTaskOperator;
+begin
+  Result:=TPGAlterTaskOperator.Create;
+  Result.FAlterAction:=AlterAction;
+  FList.Add(Result);
+end;
+
+{ TPGAlterTaskOperator }
+
+constructor TPGAlterTaskOperator.Create;
+begin
+
+end;
+
+destructor TPGAlterTaskOperator.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TPGAlterTaskOperator.Assign(Source: TPGAlterTaskOperator);
+begin
+  if not Assigned(Source) then Exit;
+  FAlterAction:=Source.FAlterAction;
+end;
+
 { TPGSQLTaskAlter }
 
 procedure TPGSQLTaskAlter.MakeSQL;
+var
+  Op: TPGAlterTaskOperator;
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='';
+  for Op in Operators do
+  begin
+    case Op.AlterAction of
+      pgtaDropTaskItem:S:=S + '  DELETE FROM pgagent.pga_jobstep WHERE jstid='+IntToStr(Op.ID) +';'+LineEnding;
+      pgtaDropShedule:S:=S + '  DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(Op.ID) +';'+LineEnding;
+    end;
+  end;
+  if S<>'' then
+    S:='do'+LineEnding+'$tasks$'+LineEnding + 'begin'+LineEnding + S +  'end;'+LineEnding + '$tasks$';
+  AddSQLCommand(S);
 end;
 
 constructor TPGSQLTaskAlter.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
+  FOperators:=TPGAlterTaskOperators.Create;
 end;
 
 destructor TPGSQLTaskAlter.Destroy;
 begin
+  Clear;
+  FOperators.Free;
   inherited Destroy;
 end;
 
 procedure TPGSQLTaskAlter.Clear;
 begin
+  FOperators.Clear;
   inherited Clear;
 end;
 
 procedure TPGSQLTaskAlter.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TPGSQLTaskAlter then
+  begin
+    FOperators.Assign(TPGSQLTaskAlter(ASource).FOperators);
+  end;
   inherited Assign(ASource);
+end;
+
+function TPGSQLTaskAlter.AddOperator(AlterAction: TPGSQLTaskAlterAction
+  ): TPGAlterTaskOperator;
+begin
+  Result:=FOperators.AddItem(AlterAction);
 end;
 
 { TPGTaskSheduleListEnumerator }

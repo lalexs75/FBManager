@@ -65,6 +65,8 @@ type
     procedure stepDeleteExecute(Sender: TObject);
   private
     EditorFrame:Tfdbm_SynEditorFrame;
+    FDelList:TFPList;
+    procedure ClearDelList;
     procedure LoadTaskData;
     procedure ClearData;
     procedure LoadDBList;
@@ -162,11 +164,21 @@ begin
   DeleteTaskStep;
 end;
 
+procedure TpgTaskStepsPage.ClearDelList;
+var
+  i: Integer;
+begin
+  for i:=0 to FDelList.Count-1 do
+    TPGTaskStep(FDelList[i]).Free;
+  FDelList.Clear;
+end;
+
 procedure TpgTaskStepsPage.LoadTaskData;
 var
   U, U1:TPGTaskStep;
 begin
   ClearData;
+  ClearDelList;
 
   for U in TPGTask(DBObject).Steps do
   begin
@@ -226,15 +238,10 @@ begin
   begin
     U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
     if DBObject.State = sdboCreate then
-    begin
-      ListBox1.Items.Delete(ListBox1.ItemIndex);
-      U.Free;
-    end
+      U.Free
     else
-    begin
-      NotImplemented;
-    end;
-
+      FDelList.Add(U);
+    ListBox1.Items.Delete(ListBox1.ItemIndex);
     if ListBox1.Items.Count>0 then
       ListBox1.ItemIndex:=0;
   end;
@@ -245,6 +252,7 @@ function TpgTaskStepsPage.AddNew: boolean;
 var
   U: TPGTaskStep;
 begin
+  Result:=true;
   U:=TPGTaskStep.Create(TPGTask(DBObject));
   ListBox1.Items.AddObject(sStep+' '+IntToStr(ListBox1.Items.Count+1), U);
   U.Name:=ListBox1.Items[ListBox1.Count-1];
@@ -274,6 +282,8 @@ end;
 
 destructor TpgTaskStepsPage.Destroy;
 begin
+  ClearDelList;
+  FDelList.Free;
   ClearData;
   inherited Destroy;
 end;
@@ -316,7 +326,7 @@ constructor TpgTaskStepsPage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
-//  FCurStep:=nil;
+  FDelList:=TFPList.Create;
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=TabSheet2;
   EditorFrame.TextEditor.OnChange:=@edtStepNameChange;
@@ -329,9 +339,12 @@ var
   FCmd: TPGSQLTaskCreate;
   U: TPGTaskStep;
   i: Integer;
+  FCmd1: TPGSQLTaskAlter;
+  Op: TPGAlterTaskOperator;
 begin
-  Result:=(edtStepName.Caption<>'') and ((RadioButton1.Checked and (ComboBox1.Text<>'')) or (RadioButton2.Checked and (EditButton1.Text<>'')));
+  //Result:=(edtStepName.Caption<>'') and ((RadioButton1.Checked and (ComboBox1.Text<>'')) or (RadioButton2.Checked and (EditButton1.Text<>'')));
 
+  Result:=true;
   if not Result then exit;
   if ASQLObject is TPGSQLTaskCreate then
   begin
@@ -342,6 +355,16 @@ begin
     begin
       U:=FCmd.TaskSteps.Add;
       U.Assign(TPGTaskStep(ListBox1.Items.Objects[i]));
+    end;
+  end
+  else
+  if ASQLObject is TPGSQLTaskAlter then
+  begin
+    FCmd1:=TPGSQLTaskAlter(ASQLObject);
+    for i:=0 to FDelList.Count-1 do
+    begin
+      Op:=FCmd1.AddOperator(pgtaDropTaskItem);
+      Op.ID:=TPGTaskStep(FDelList[i]).ID;
     end;
   end
   else
