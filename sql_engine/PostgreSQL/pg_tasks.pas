@@ -1068,6 +1068,7 @@ constructor TPGTasksRoot.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDropModeParams:=FDropModeParams + [sepSystemExec];
   FDBObjectKind:=okTasks;
   FDropCommandClass:=TPGSQLDropTask;
   FJobClassList:=TStringList.Create;

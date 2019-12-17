@@ -376,6 +376,7 @@ type
     FGroupObjects:TDBObjectsList;
     FDropCommandClass:TSQLDropCommandAbstractClass;
     FDBObjectClass:TDBObjectClass;
+    FDropModeParams:TSqlExecParams;
     function GetObjName(AIndex: integer): string;
     function GetDDLAlter: string; override;
     //
@@ -2190,6 +2191,7 @@ constructor TDBRootObject.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(nil, AOwnerRoot);
+  FDropModeParams:=[sepInTransaction, sepShowCompForm];
   FObjects:=TDBObjectsList.Create(true);
   FGroupObjects:=TDBObjectsList.Create(true);
   FCaption:=ACaption;
@@ -2203,6 +2205,7 @@ constructor TDBRootObject.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FDropModeParams:=[sepInTransaction, sepShowCompForm];
   FObjects:=TDBObjectsList.Create(true);
   FGroupObjects:=TDBObjectsList.Create(true);
   FOwnerDB:=AOwnerRoot.OwnerDB;
@@ -2327,7 +2330,7 @@ begin
     if (R is TSQLDropTrigger) and (AItem is TDBTriggerObject) then
       TSQLDropTrigger(R).TableName:=TDBTriggerObject(AItem).TableName;
 
-    Result:=ExecSQLScript(R.AsSQL, [sepInTransaction, sepShowCompForm], OwnerDB);
+    Result:=ExecSQLScript(R.AsSQL, FDropModeParams, OwnerDB);
     R.Free;
 
     if Result then
