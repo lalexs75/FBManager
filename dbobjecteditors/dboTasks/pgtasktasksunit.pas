@@ -35,6 +35,13 @@ type
   { TpgTaskShedulePage }
 
   TpgTaskShedulePage = class(TEditorPage)
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    minEvery5: TAction;
+    minEvery30: TAction;
+    minEvery10: TAction;
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
@@ -112,8 +119,12 @@ type
     procedure dowSelectAllExecute(Sender: TObject);
     procedure HeaderControl1SectionResize(HeaderControl: TCustomHeaderControl;
       Section: THeaderSection);
+    procedure HeaderControl2SectionResize(HeaderControl: TCustomHeaderControl;
+      Section: THeaderSection);
     procedure ListBox1Click(Sender: TObject);
+    procedure minEvery5Execute(Sender: TObject);
     procedure Panel1Resize(Sender: TObject);
+    procedure Panel4Resize(Sender: TObject);
   private
     FModified:boolean;
     FCurShedule:TPGTaskShedule;
@@ -180,6 +191,16 @@ begin
   end;
 end;
 
+procedure TpgTaskShedulePage.minEvery5Execute(Sender: TObject);
+var
+  C: PtrInt;
+  i: Integer;
+begin
+  C:=(Sender as TComponent).Tag;
+  for i:=0 to CheckListBox5.Items.Count-1 do
+    CheckListBox5.Checked[i]:=i mod c = 0;
+end;
+
 procedure TpgTaskShedulePage.HeaderControl1SectionResize(
   HeaderControl: TCustomHeaderControl; Section: THeaderSection);
 begin
@@ -187,6 +208,16 @@ begin
     0:Panel1.Width:=Section.Width;
 //    1;Panel3.Width:=Section.Width;
     2:Panel3.Width:=Section.Width;
+  end;
+end;
+
+procedure TpgTaskShedulePage.HeaderControl2SectionResize(
+  HeaderControl: TCustomHeaderControl; Section: THeaderSection);
+begin
+  case Section.OriginalIndex of
+    0:Panel4.Width:=Section.Width;
+//    1;Panel3.Width:=Section.Width;
+//    2:Panel3.Width:=Section.Width;
   end;
 end;
 
@@ -246,6 +277,12 @@ begin
   HeaderControl1.Sections[0].Width:=Panel1.Width;
   HeaderControl1.Sections[1].Width:=Panel2.Width;
   HeaderControl1.Sections[2].Width:=Panel3.Width;
+end;
+
+procedure TpgTaskShedulePage.Panel4Resize(Sender: TObject);
+begin
+  HeaderControl2.Sections[0].Width:=Panel4.Width;
+  HeaderControl2.Sections[1].Width:=Panel5.Width;
 end;
 
 procedure TpgTaskShedulePage.LoadTaskData;
@@ -439,6 +476,10 @@ begin
   hrUnSelectAll.Caption:=sUnselectAll;
   minSelectAll.Caption:=sSelectAll;
   minUnSelectAll.Caption:=sUnselectAll;
+
+  minEvery5.Caption:=sEvery5;
+  minEvery10.Caption:=sEvery10;
+  minEvery30.Caption:=sEvery30;
 end;
 
 constructor TpgTaskShedulePage.CreatePage(TheOwner: TComponent;
@@ -447,6 +488,7 @@ begin
   inherited CreatePage(TheOwner, ADBObject);
   FillLists;
   Panel1Resize(nil);
+  Panel4Resize(nil);
 
   LoadTaskData;
 end;

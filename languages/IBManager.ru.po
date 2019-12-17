@@ -1762,6 +1762,18 @@ msgstr "Триггер по событию"
 msgid "Event triggers"
 msgstr "Триггера по событию"
 
+#: fbmstrconstunit.severy10
+msgid "Every 10 minutes"
+msgstr "Каждые 10 минут"
+
+#: fbmstrconstunit.severy30
+msgid "Every 30 minutes"
+msgstr "Каждые 30 минут"
+
+#: fbmstrconstunit.severy5
+msgid "Every 5 minutes"
+msgstr "Каждые 5 минут"
+
 #: fbmstrconstunit.sexcep
 msgid "Excep"
 msgstr "Исключая"
@@ -2720,6 +2732,7 @@ msgid "Inserted rows : %d"
 msgstr "Вставлено строк : %d"
 
 #: fbmstrconstunit.sinsertintotable
+msgctxt "fbmstrconstunit.sinsertintotable"
 msgid "Insert into table"
 msgstr "Вставка в таблицу"
 
@@ -6314,3 +6327,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

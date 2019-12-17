@@ -1686,6 +1686,18 @@ msgstr ""
 msgid "Event triggers"
 msgstr ""
 
+#: fbmstrconstunit.severy10
+msgid "Every 10 minutes"
+msgstr ""
+
+#: fbmstrconstunit.severy30
+msgid "Every 30 minutes"
+msgstr ""
+
+#: fbmstrconstunit.severy5
+msgid "Every 5 minutes"
+msgstr ""
+
 #: fbmstrconstunit.sexcep
 msgid "Excep"
 msgstr ""
