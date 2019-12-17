@@ -3992,6 +3992,10 @@ end;
 
 function TSQLEnginePostgre.ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;
 begin
+  if sepSystemExec in ExecParams then
+    Result:=ExecSysSQL(Sql)
+  else
+  begin
     try
       Result:=FPGConnection.ExecuteDirect(SQL);
     except
@@ -4002,6 +4006,7 @@ begin
         Result:=false;
       end;
     end;
+  end;
 end;
 
 function TSQLEnginePostgre.ExecSysSQL(const Sql: string): boolean;

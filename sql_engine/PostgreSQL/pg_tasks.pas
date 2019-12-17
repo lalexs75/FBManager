@@ -25,8 +25,9 @@ unit pg_tasks;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, PostgreSQLEngineUnit, ZDataset, sqlObjects,
-  contnrs, SQLEngineInternalToolsUnit, fbmSqlParserUnit;
+  Classes, SysUtils, SQLEngineAbstractUnit, PostgreSQLEngineUnit, ZDataset,
+  sqlObjects, contnrs, SQLEngineInternalToolsUnit, fbmSqlParserUnit,
+  SQLEngineCommonTypesUnit;
 
 type
   TPGTask = class;
@@ -210,6 +211,7 @@ type
     procedure RefreshObject; override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
+    function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
 
     function CompileTaskShedule(TS:TPGTaskShedule):boolean;
     function DeleteTaskShedule(TS:TPGTaskShedule):boolean;
@@ -278,7 +280,7 @@ type
   end;
 
 implementation
-uses SQLEngineCommonTypesUnit, pg_sql_lines_unit, pgSqlTextUnit, StrUtils;
+uses pg_sql_lines_unit, pgSqlTextUnit, StrUtils;
 
 { TPGSQLTaskAlter }
 
@@ -962,6 +964,12 @@ begin
     Result:=TPGSQLTaskCreate.Create(nil)
   else
     Result:=TPGSQLTaskAlter.Create(nil);
+end;
+
+function TPGTask.CompileSQLObject(ASqlObject: TSQLCommandDDL;
+  ASqlExecParam: TSqlExecParams): boolean;
+begin
+  Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam + [sepSystemExec]);
 end;
 
 function TPGTask.CompileTaskShedule(TS: TPGTaskShedule): boolean;

@@ -100,7 +100,8 @@ type
 
   TSqlExecParam = (sepInTransaction, //Выполнять запрос в контексте транзакции (не для всех серверов)
                    sepShowCompForm,  //При выполнении запроса отобразить окно подтверждения компиляции
-                   sepNotRefresh     //Не рефрешить после компиляции
+                   sepNotRefresh,     //Не рефрешить после компиляции
+                   sepSystemExec
                    );
   TSqlExecParams = set of TSqlExecParam;
 
