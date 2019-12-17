@@ -13,6 +13,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     Align = alLeft
     ItemHeight = 0
     OnClick = ListBox1Click
+    PopupMenu = PopupMenu6
     ScrollWidth = 134
     TabOrder = 0
     TopIndex = -1
@@ -28,9 +29,9 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     Height = 495
     Top = 0
     Width = 703
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Propertys'
@@ -598,7 +599,23 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Caption = 'Except'
     end
   end
-  object PopupMenu1: TPopupMenu[3]
+  object Label8: TLabel[3]
+    AnchorSideLeft.Control = Splitter1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 141
+    Height = 17
+    Top = 239
+    Width = 703
+    Alignment = taCenter
+    Anchors = [akTop, akLeft, akRight]
+    Caption = 'Press ADD to add new shedule'
+    ParentColor = False
+  end
+  object PopupMenu1: TPopupMenu[4]
     Images = fbManagerMainForm.ImageListMain
     Left = 255
     Top = 155
@@ -612,7 +629,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Action = dowUnSelectAll
     end
   end
-  object PopupMenu2: TPopupMenu[4]
+  object PopupMenu2: TPopupMenu[5]
     Images = fbManagerMainForm.ImageListMain
     Left = 417
     Top = 159
@@ -626,7 +643,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Action = domUnSelectAll
     end
   end
-  object PopupMenu3: TPopupMenu[5]
+  object PopupMenu3: TPopupMenu[6]
     Images = fbManagerMainForm.ImageListMain
     Left = 654
     Top = 164
@@ -640,7 +657,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Action = mnUnselectAll
     end
   end
-  object ActionList1: TActionList[6]
+  object ActionList1: TActionList[7]
     Images = fbManagerMainForm.ImageListMain
     Left = 248
     Top = 96
@@ -732,8 +749,20 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Caption = 'Every 5 minutes'
       OnExecute = minEvery5Execute
     end
+    object taskAdd: TAction
+      Category = 'Task list'
+      Caption = 'taskAdd'
+      ImageIndex = 12
+      OnExecute = taskAddExecute
+    end
+    object taskRemove: TAction
+      Category = 'Task list'
+      Caption = 'taskRemove'
+      ImageIndex = 13
+      OnExecute = taskRemoveExecute
+    end
   end
-  object PopupMenu4: TPopupMenu[7]
+  object PopupMenu4: TPopupMenu[8]
     Images = fbManagerMainForm.ImageListMain
     Left = 261
     Top = 290
@@ -747,7 +776,7 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
       Action = hrUnselectAll
     end
   end
-  object PopupMenu5: TPopupMenu[8]
+  object PopupMenu5: TPopupMenu[9]
     Images = fbManagerMainForm.ImageListMain
     Left = 591
     Top = 287
@@ -771,6 +800,20 @@ inherited pgTaskShedulePage: TpgTaskShedulePage
     end
     object MenuItem14: TMenuItem
       Action = minUnselectAll
+    end
+  end
+  object PopupMenu6: TPopupMenu[10]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 40
+    Top = 120
+    object MenuItem20: TMenuItem
+      Action = taskAdd
+    end
+    object MenuItem21: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem22: TMenuItem
+      Action = taskRemove
     end
   end
 end

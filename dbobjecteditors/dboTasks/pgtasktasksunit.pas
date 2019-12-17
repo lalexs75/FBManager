@@ -35,6 +35,12 @@ type
   { TpgTaskShedulePage }
 
   TpgTaskShedulePage = class(TEditorPage)
+    Label8: TLabel;
+    MenuItem20: TMenuItem;
+    MenuItem21: TMenuItem;
+    MenuItem22: TMenuItem;
+    taskRemove: TAction;
+    taskAdd: TAction;
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
@@ -98,6 +104,7 @@ type
     PopupMenu3: TPopupMenu;
     PopupMenu4: TPopupMenu;
     PopupMenu5: TPopupMenu;
+    PopupMenu6: TPopupMenu;
     RxDateEdit1: TRxDateEdit;
     RxDateEdit2: TRxDateEdit;
     RxTimeEdit1: TRxTimeEdit;
@@ -125,17 +132,17 @@ type
     procedure minEvery5Execute(Sender: TObject);
     procedure Panel1Resize(Sender: TObject);
     procedure Panel4Resize(Sender: TObject);
+    procedure taskAddExecute(Sender: TObject);
+    procedure taskRemoveExecute(Sender: TObject);
   private
-    FModified:boolean;
-    FCurShedule:TPGTaskShedule;
     procedure LoadTaskData;
     procedure RefreshTaskData;
     procedure ClearData;
     procedure FillLists;
-    procedure CompileShedule;
     procedure AddShedule;
     procedure DelShedule;
     function CurrentItem:TPGTaskShedule;
+    procedure UpdateTaskEditor;
   public
     function PageName:string;override;
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
@@ -146,7 +153,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit;
+uses fbmStrConstUnit, fbmToolsUnit;
 
 {$R *.lfm}
 
@@ -154,40 +161,39 @@ uses fbmStrConstUnit;
 
 procedure TpgTaskShedulePage.ListBox1Click(Sender: TObject);
 var
-//  U: TPGTaskShedule;
   i: Integer;
+  FCurShedule: TPGTaskShedule;
 begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
   begin
+    LockCntls;
+    FCurShedule:=CurrentItem;
     if Assigned(FCurShedule) then
     begin
-      if FModified then
-        CompileShedule;
+      Edit1.Text:=FCurShedule.Name;
+      Edit2.Text:=IntToStr(FCurShedule.ID);
+      Memo1.Text:=FCurShedule.Description;
+      CheckBox1.Checked:=FCurShedule.Enabled;
+      RxDateEdit1.Date:=FCurShedule.DateStart;
+      RxDateEdit2.Date:=FCurShedule.DateStart;
+
+      for i:=1 to 7 do
+        CheckListBox1.Checked[i-1]:=FCurShedule.DayWeek[i];
+
+      for i:=1 to 32 do
+        CheckListBox2.Checked[i-1]:=FCurShedule.DayMonth[i];
+
+      for i:=1 to 12 do
+        CheckListBox3.Checked[i-1]:=FCurShedule.Month[i];
+
+      for i:=0 to 23 do
+        CheckListBox4.Checked[i]:=FCurShedule.Hours[i];
+
+      for i:=0 to 59 do
+        CheckListBox5.Checked[i]:=FCurShedule.Minutes[i];
+
     end;
-
-    FCurShedule:=TPGTaskShedule(ListBox1.Items.Objects[ListBox1.ItemIndex]);
-    Edit1.Text:=FCurShedule.Name;
-    Edit2.Text:=IntToStr(FCurShedule.ID);
-    Memo1.Text:=FCurShedule.Description;
-    CheckBox1.Checked:=FCurShedule.Enabled;
-    RxDateEdit1.Date:=FCurShedule.DateStart;
-    RxDateEdit2.Date:=FCurShedule.DateStart;
-
-    for i:=1 to 7 do
-      CheckListBox1.Checked[i-1]:=FCurShedule.DayWeek[i];
-
-    for i:=1 to 32 do
-      CheckListBox2.Checked[i-1]:=FCurShedule.DayMonth[i];
-
-    for i:=1 to 12 do
-      CheckListBox3.Checked[i-1]:=FCurShedule.Month[i];
-
-    for i:=0 to 23 do
-      CheckListBox4.Checked[i]:=FCurShedule.Hours[i];
-
-    for i:=0 to 59 do
-      CheckListBox5.Checked[i]:=FCurShedule.Minutes[i];
-    FModified:=false
+    UnLockCntls;
   end;
 end;
 
@@ -196,9 +202,12 @@ var
   C: PtrInt;
   i: Integer;
 begin
+  LockCntls;
   C:=(Sender as TComponent).Tag;
   for i:=0 to CheckListBox5.Items.Count-1 do
     CheckListBox5.Checked[i]:=i mod c = 0;
+  UnLockCntls;
+  CheckListBox1Click(nil);
 end;
 
 procedure TpgTaskShedulePage.HeaderControl1SectionResize(
@@ -226,9 +235,8 @@ var
   U: TPGTaskShedule;
   i: Integer;
 begin
-  FModified:=true;
   U:=CurrentItem;
-  if Assigned(U) then
+  if Assigned(U) and (LockCount = 0) then
   begin
     U.Name:=Edit1.Text;
     U.Enabled:=CheckBox1.Checked;
@@ -259,6 +267,7 @@ var
   B: PtrInt;
   i: Integer;
 begin
+  LockCntls;
   B:=(Sender as TComponent).Tag;
   case B of
     1, -1:L:=CheckListBox1;
@@ -270,6 +279,8 @@ begin
 
   for i:=0 to L.Items.Count-1 do
     L.Checked[i]:=B > 0;
+  UnLockCntls;
+  CheckListBox1Click(nil);
 end;
 
 procedure TpgTaskShedulePage.Panel1Resize(Sender: TObject);
@@ -283,6 +294,16 @@ procedure TpgTaskShedulePage.Panel4Resize(Sender: TObject);
 begin
   HeaderControl2.Sections[0].Width:=Panel4.Width;
   HeaderControl2.Sections[1].Width:=Panel5.Width;
+end;
+
+procedure TpgTaskShedulePage.taskAddExecute(Sender: TObject);
+begin
+  AddShedule;
+end;
+
+procedure TpgTaskShedulePage.taskRemoveExecute(Sender: TObject);
+begin
+  DelShedule;
 end;
 
 procedure TpgTaskShedulePage.LoadTaskData;
@@ -304,6 +325,7 @@ begin
     ListBox1.ItemIndex:=0;
     ListBox1Click(nil);
   end;
+  UpdateTaskEditor;
 end;
 
 procedure TpgTaskShedulePage.RefreshTaskData;
@@ -353,64 +375,40 @@ begin
     CheckListBox5.Items.Add(IntToStr(i));
 end;
 
-procedure TpgTaskShedulePage.CompileShedule;
-var
-  i, FIndex: Integer;
-begin
-  if FModified and Assigned(FCurShedule) then
-  begin
-    FIndex:=FCurShedule.Index;
-    FCurShedule.Name         := Edit1.Text;
-    FCurShedule.Description         := Memo1.Text;
-    FCurShedule.Enabled      := CheckBox1.Checked;
-    FCurShedule.DateStart    := RxDateEdit1.Date;
-    FCurShedule.DateStop     := RxDateEdit2.Date;
-
-    for i:=1 to 7 do
-      FCurShedule.DayWeek[i]:=CheckListBox1.Checked[i-1];
-
-    for i:=1 to 32 do
-      FCurShedule.DayMonth[i]:=CheckListBox2.Checked[i-1];
-
-    for i:=1 to 12 do
-      FCurShedule.Month[i]:=CheckListBox3.Checked[i-1];
-
-    for i:=0 to 23 do
-      FCurShedule.Hours[i]:=CheckListBox4.Checked[i];
-
-    for i:=0 to 59 do
-      FCurShedule.Minutes[i]:=CheckListBox5.Checked[i];
-
-    FModified:=false;
-    LoadTaskData;
-    ListBox1.ItemIndex:=FIndex;
-    ListBox1Click(nil);
-  end;
-end;
-
 procedure TpgTaskShedulePage.AddShedule;
 var
   U: TPGTaskShedule;
 begin
   U:=TPGTaskShedule.Create(TPGTask(DBObject));
-  ListBox1.Items.Add(U.Name);
-  ListBox1.Items.Objects[ListBox1.Items.Count-1]:=U;
+  U.Name:=sShedule + ' '+IntToStr(ListBox1.Items.Count + 1);
+  ListBox1.Items.AddObject(U.Name, U);
   U.Index:=ListBox1.Items.Count-1;
-  U.Name:=sShedule + ' '+IntToStr(U.Index+1);
-  ListBox1.Items[U.Index]:=U.Name;
   ListBox1.ItemIndex:=U.Index;
   ListBox1Click(nil);
-  FModified:=true;
-  FCurShedule:=U;
+  UpdateTaskEditor;
 end;
 
 procedure TpgTaskShedulePage.DelShedule;
+var
+  U: TPGTaskShedule;
 begin
-  if Assigned(FCurShedule) then
+  if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count)then
   begin
-    FCurShedule:=nil;
-    LoadTaskData;
+    U:=CurrentItem;
+    if DBObject.State = sdboCreate then
+    begin
+      ListBox1.Items.Delete(ListBox1.ItemIndex);
+      U.Free;
+    end
+    else
+    begin
+      NotImplemented;
+    end;
+
+    if ListBox1.Items.Count>0 then
+      ListBox1.ItemIndex:=0;
   end;
+  UpdateTaskEditor;
 end;
 
 function TpgTaskShedulePage.CurrentItem: TPGTaskShedule;
@@ -420,6 +418,13 @@ begin
     Result:=TPGTaskShedule(ListBox1.Items.Objects[ListBox1.ItemIndex]);
 end;
 
+procedure TpgTaskShedulePage.UpdateTaskEditor;
+begin
+  PageControl1.Visible:=ListBox1.Items.Count > 0;
+  Label8.Visible:=ListBox1.Items.Count = 0;
+  taskRemove.Enabled:=ListBox1.Items.Count>0;
+end;
+
 function TpgTaskShedulePage.PageName: string;
 begin
   Result:=sShedule;
@@ -427,12 +432,11 @@ end;
 
 function TpgTaskShedulePage.DoMetod(PageAction: TEditorPageAction): boolean;
 begin
+  Result:=true;
   case PageAction of
     epaAdd:AddShedule;
     epaDelete:DelShedule;
     epaRefresh:RefreshTaskData;
-//    epaPrint,
-    epaCompile:CompileShedule;
   end;
 end;
 
@@ -477,12 +481,16 @@ begin
   minEvery5.Caption:=sEvery5;
   minEvery10.Caption:=sEvery10;
   minEvery30.Caption:=sEvery30;
+
+  taskAdd.Caption:=sAdd;
+  taskRemove.Caption:=sRemove;
 end;
 
 constructor TpgTaskShedulePage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  PageControl1.ActivePageIndex:=0;
   FillLists;
   Panel1Resize(nil);
   Panel4Resize(nil);

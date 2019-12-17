@@ -96,7 +96,8 @@ var
 begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
   begin
-    U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
+    U:=CurrentItem;
+    LockCntls;
     edtStepName.Text:=U.Name;
     EditorFrame.EditorText:=U.Body;
     Memo1.Text:=U.Description;
@@ -105,6 +106,7 @@ begin
     ComboBox1.Text:=U.DBName;
     EditButton1.Text:=U.ConnectStr;
     CheckBox1.Checked:=U.Enabled;
+    UnLockCntls;
   end;
 end;
 
@@ -122,7 +124,7 @@ var
   U: TPGTaskStep;
 begin
   U:=CurrentItem;
-  if Assigned(U) then
+  if Assigned(U) and (LockCount = 0) then
   begin
     U.Name:=edtStepName.Text;
     U.Enabled:=CheckBox1.Checked;
@@ -278,6 +280,7 @@ end;
 
 function TpgTaskStepsPage.DoMetod(PageAction: TEditorPageAction): boolean;
 begin
+  Result:=true;
   case PageAction of
     epaRefresh:LoadTaskData;
 //    epaPrint,

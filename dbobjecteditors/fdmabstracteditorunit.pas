@@ -41,14 +41,18 @@ type
   private
     FDetailPage:TEditorPage;
     FDBObject: TDBObject;
+    FLockCount: Integer;
     FModified: boolean;
     procedure SetDBObject(AValue: TDBObject);
     procedure SetModified(AValue: boolean);
   protected
     FReadOnly: boolean;
+    procedure LockCntls;
+    procedure UnLockCntls;
     procedure SetReadOnly(AValue: boolean);virtual;
     procedure ShowDetailObject(ADetailDBObject:TDBObject; AParent:TWinControl);
     function FindPageByClass(APageClass:TEditorPageClass):TEditorPage;
+    property LockCount:Integer read FLockCount;
   public
     FModifiedEvent:TNotifyEvent;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); virtual;
@@ -125,6 +129,17 @@ begin
   FModified:=AValue;
   if Assigned(FModifiedEvent) then
     FModifiedEvent(Self);
+end;
+
+procedure TEditorPage.LockCntls;
+begin
+  Inc(FLockCount);
+end;
+
+procedure TEditorPage.UnLockCntls;
+begin
+  if FLockCount > 0 then
+    Dec(FLockCount);
 end;
 
 procedure TEditorPage.SetReadOnly(AValue: boolean);
