@@ -137,6 +137,9 @@ function TpgTaskMainPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
 begin
+  Result:=Edit1.Text <> '';
+  if not Result then Exit;
+
   if ASQLObject is TPGSQLTaskCreate then
   begin
     Result:=true;

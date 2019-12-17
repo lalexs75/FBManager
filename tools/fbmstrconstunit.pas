@@ -1082,9 +1082,12 @@ resourcestring
   sConnectionString                 = 'Connection string';
   sCopyConnectionString             = 'Copy connection string';
   sConnectionStringCopied           = 'Connection string has been successfully copied to clipboard.';
-  sEvery5                          = 'Every 5 minutes';
+  sEvery5                           = 'Every 5 minutes';
   sEvery10                          = 'Every 10 minutes';
   sEvery30                          = 'Every 30 minutes';
+  sAddStep                          = 'Add step';
+  sRemoveStep                       = 'Remove step';
+  sClickADDForNewStep               = 'Click ADD button for add new step';
 
 
   sSteps                            = 'Steps';

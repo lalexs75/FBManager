@@ -381,8 +381,6 @@ begin
     for i:=0 to 59 do
       FCurShedule.Minutes[i]:=CheckListBox5.Checked[i];
 
-    TPGTask(DBObject).CompileTaskShedule(FCurShedule);
-
     FModified:=false;
     LoadTaskData;
     ListBox1.ItemIndex:=FIndex;
@@ -410,7 +408,6 @@ procedure TpgTaskShedulePage.DelShedule;
 begin
   if Assigned(FCurShedule) then
   begin
-    TPGTask(DBObject).DeleteTaskShedule(FCurShedule);
     FCurShedule:=nil;
     LoadTaskData;
   end;

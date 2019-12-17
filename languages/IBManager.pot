@@ -86,6 +86,10 @@ msgstr ""
 msgid "Add patition key (collumn or expression)"
 msgstr ""
 
+#: fbmstrconstunit.saddstep
+msgid "Add step"
+msgstr ""
+
 #: fbmstrconstunit.saddtemplate
 msgid "Add template"
 msgstr ""
@@ -430,6 +434,10 @@ msgstr ""
 
 #: fbmstrconstunit.sclearsearchresult
 msgid "Clear search result"
+msgstr ""
+
+#: fbmstrconstunit.sclickaddfornewstep
+msgid "Click ADD button for add new step"
 msgstr ""
 
 #: fbmstrconstunit.sclientaddress
@@ -4354,6 +4362,10 @@ msgstr ""
 
 #: fbmstrconstunit.sremovepatitionkeyhint
 msgid "Remove patition key (collumn or expression)"
+msgstr ""
+
+#: fbmstrconstunit.sremovestep
+msgid "Remove step"
 msgstr ""
 
 #: fbmstrconstunit.srename

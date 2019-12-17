@@ -213,11 +213,11 @@ type
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
 
-    function CompileTaskShedule(TS:TPGTaskShedule):boolean;
-    function DeleteTaskShedule(TS:TPGTaskShedule):boolean;
-
-    function CompileTaskStep(TS:TPGTaskStep):boolean;
-    function DeleteTaskStep(TS:TPGTaskStep):boolean;
+    //function CompileTaskShedule(TS:TPGTaskShedule):boolean;
+    //function DeleteTaskShedule(TS:TPGTaskShedule):boolean;
+    //
+    //function CompileTaskStep(TS:TPGTaskStep):boolean;
+    //function DeleteTaskStep(TS:TPGTaskStep):boolean;
 
     class function DBClassTitle:string;override;
     property TaskID:integer read FTaskID;
@@ -972,6 +972,7 @@ begin
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam + [sepSystemExec]);
 end;
 
+(*
 function TPGTask.CompileTaskShedule(TS: TPGTaskShedule): boolean;
 var
   sSQL:string;
@@ -1013,7 +1014,7 @@ function TPGTask.DeleteTaskStep(TS: TPGTaskStep): boolean;
 begin
   Result:=false;
 end;
-
+*)
 class function TPGTask.DBClassTitle: string;
 begin
   Result:='Task';

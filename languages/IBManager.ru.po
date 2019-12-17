@@ -101,6 +101,10 @@ msgstr "Добавить ключ партицирования"
 msgid "Add patition key (collumn or expression)"
 msgstr "Добавить ключ партицирования (столбец или выражение)"
 
+#: fbmstrconstunit.saddstep
+msgid "Add step"
+msgstr "Добавить шаг задания"
+
 #: fbmstrconstunit.saddtemplate
 msgid "Add template"
 msgstr "Добавить шаблон"
@@ -455,6 +459,10 @@ msgstr "Очистить текущий запрос..."
 #: fbmstrconstunit.sclearsearchresult
 msgid "Clear search result"
 msgstr "Очистить результат поиска"
+
+#: fbmstrconstunit.sclickaddfornewstep
+msgid "Click ADD button for add new step"
+msgstr "Нажмите кнопку ДОБАВИТЬ для добавления нового шага"
 
 #: fbmstrconstunit.sclientaddress
 msgid "Client address"
@@ -4499,6 +4507,10 @@ msgstr "Удалить ключ партицирования"
 #: fbmstrconstunit.sremovepatitionkeyhint
 msgid "Remove patition key (collumn or expression)"
 msgstr "Удалить ключ партицирования (колонка или выражение)"
+
+#: fbmstrconstunit.sremovestep
+msgid "Remove step"
+msgstr "Удалить шаг задания"
 
 #: fbmstrconstunit.srename
 #, object-pascal-format

@@ -26,42 +26,52 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, EditBtn, ComCtrls, PostgreSQLEngineUnit, pg_tasks, fbmSqlParserUnit,
-  fdmAbstractEditorUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit;
+  StdCtrls, EditBtn, ComCtrls, ActnList, Menus, PostgreSQLEngineUnit, pg_tasks,
+  fbmSqlParserUnit, fdmAbstractEditorUnit, fdbm_SynEditorUnit,
+  SQLEngineAbstractUnit;
 
 type
 
   { TpgTaskStepsPage }
 
   TpgTaskStepsPage = class(TEditorPage)
+    Label3: TLabel;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    stepDelete: TAction;
+    stepAdd: TAction;
+    ActionList1: TActionList;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
-    Edit1: TEdit;
+    edtStepName: TEdit;
     EditButton1: TEditButton;
     Label1: TLabel;
     Label2: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
     PageControl1: TPageControl;
+    PopupMenu1: TPopupMenu;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    procedure Edit1Change(Sender: TObject);
+    procedure edtStepNameChange(Sender: TObject);
     procedure EditButton1ButtonClick(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
     procedure RadioButton1Change(Sender: TObject);
+    procedure stepAddExecute(Sender: TObject);
+    procedure stepDeleteExecute(Sender: TObject);
   private
     EditorFrame:Tfdbm_SynEditorFrame;
-    FModified: Boolean;
-    FCurStep: TPGTaskStep;
     procedure LoadTaskData;
     procedure ClearData;
     procedure LoadDBList;
     function DeleteTaskStep:boolean;
-    function SaveCurrent:boolean;
     function AddNew:boolean;
+    procedure UpdateStepEditor;
+    function CurrentItem:TPGTaskStep;
   public
     function PageName:string;override;
     destructor Destroy; override;
@@ -73,7 +83,7 @@ type
   end;
 
 implementation
-uses ZDataset, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit,
+uses ZDataset, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit, fbmToolsUnit,
   pgTaskStepsBuildConnectionUnit;
 
 {$R *.lfm}
@@ -86,11 +96,8 @@ var
 begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
   begin
-    if FModified then
-      SaveCurrent;
-
     U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
-    Edit1.Text:=U.Name;
+    edtStepName.Text:=U.Name;
     EditorFrame.EditorText:=U.Body;
     Memo1.Text:=U.Description;
     RadioButton1.Checked:=U.ConnectStr = '';
@@ -98,8 +105,6 @@ begin
     ComboBox1.Text:=U.DBName;
     EditButton1.Text:=U.ConnectStr;
     CheckBox1.Checked:=U.Enabled;
-    FModified:=false;
-    FCurStep:=U;
   end;
 end;
 
@@ -112,16 +117,47 @@ begin
   pgTaskStepsBuildConnectionForm.Free;
 end;
 
-procedure TpgTaskStepsPage.Edit1Change(Sender: TObject);
+procedure TpgTaskStepsPage.edtStepNameChange(Sender: TObject);
+var
+  U: TPGTaskStep;
 begin
-  FModified:=true;
+  U:=CurrentItem;
+  if Assigned(U) then
+  begin
+    U.Name:=edtStepName.Text;
+    U.Enabled:=CheckBox1.Checked;
+    U.Body := EditorFrame.EditorText;
+    U.Description := Memo1.Text;
+    U.Enabled := CheckBox1.Checked;
+
+    if RadioButton1.Checked then
+    begin
+      U.DBName := ComboBox1.Text;
+      U.ConnectStr := '';
+    end
+    else
+    begin
+      U.ConnectStr := EditButton1.Text;
+      U.DBName := '';
+    end;
+  end;
 end;
 
 procedure TpgTaskStepsPage.RadioButton1Change(Sender: TObject);
 begin
   ComboBox1.Enabled:=RadioButton1.Checked;
   EditButton1.Enabled:=RadioButton2.Checked;
-  Edit1Change(nil);
+  edtStepNameChange(nil);
+end;
+
+procedure TpgTaskStepsPage.stepAddExecute(Sender: TObject);
+begin
+  AddNew;
+end;
+
+procedure TpgTaskStepsPage.stepDeleteExecute(Sender: TObject);
+begin
+  DeleteTaskStep;
 end;
 
 procedure TpgTaskStepsPage.LoadTaskData;
@@ -140,9 +176,10 @@ begin
   if ListBox1.Items.Count>0 then
   begin
     ListBox1.ItemIndex:=0;
-    FModified:=false;
     ListBox1Click(nil);
   end;
+
+  UpdateStepEditor;
 end;
 
 procedure TpgTaskStepsPage.ClearData;
@@ -179,49 +216,53 @@ begin
 end;
 
 function TpgTaskStepsPage.DeleteTaskStep: boolean;
-begin
-{  Result:=false;
-  if Assigned(FCurStep) then
-  begin
-    TPGTask(DBObject).DeleteTaskStep(FCurStep);
-    FCurStep:=nil;
-    LoadTaskData;
-  end; }
-end;
-
-function TpgTaskStepsPage.SaveCurrent: boolean;
 var
-  U:TPGTaskStep;
+  U: TPGTaskStep;
 begin
-{  Result:=FModified and Assigned(FCurStep);
-  if not Result then exit;
-  try
-    U:=TPGTaskStep.Create(TPGTask(DBObject));
-    U.Assign(FCurStep);
-    U.ID:=FCurStep.ID;
-    U.Name := Edit1.Text;
-    U.Body := EditorFrame.EditorText;
-    U.Description := Memo1.Text;
-    U.DBName := ComboBox1.Text;
-    U.ConnectStr := EditButton1.Text;
-    U.Enabled := CheckBox1.Checked;
-    if not FCurStep.IsEqual(U) then
-      Result:=TPGTask(DBObject).CompileTaskStep(U);
-  finally
-    U.Free;
-  end; }
+  Result:=true;
+  if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count)then
+  begin
+    U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
+    if DBObject.State = sdboCreate then
+    begin
+      ListBox1.Items.Delete(ListBox1.ItemIndex);
+      U.Free;
+    end
+    else
+    begin
+      NotImplemented;
+    end;
+
+    if ListBox1.Items.Count>0 then
+      ListBox1.ItemIndex:=0;
+  end;
+  UpdateStepEditor;
 end;
 
 function TpgTaskStepsPage.AddNew: boolean;
 var
   U: TPGTaskStep;
 begin
-  ListBox1.Items.Add(sStep+' '+IntToStr(ListBox1.Items.Count+1));
   U:=TPGTaskStep.Create(TPGTask(DBObject));
-  ListBox1.Items.Objects[ListBox1.Count-1]:=U;
+  ListBox1.Items.AddObject(sStep+' '+IntToStr(ListBox1.Items.Count+1), U);
   U.Name:=ListBox1.Items[ListBox1.Count-1];
   ListBox1.ItemIndex:=ListBox1.Count-1;
   ListBox1Click(nil);
+  UpdateStepEditor;
+end;
+
+procedure TpgTaskStepsPage.UpdateStepEditor;
+begin
+  PageControl1.Visible:=ListBox1.Items.Count>0;
+  Label3.Visible:=ListBox1.Items.Count = 0;
+  stepDelete.Enabled:=ListBox1.Items.Count>0;
+end;
+
+function TpgTaskStepsPage.CurrentItem: TPGTaskStep;
+begin
+  Result:=nil;
+  if (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count) then
+    Result:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
 end;
 
 function TpgTaskStepsPage.PageName: string;
@@ -240,7 +281,7 @@ begin
   case PageAction of
     epaRefresh:LoadTaskData;
 //    epaPrint,
-    epaCompile:Result:=SaveCurrent;
+//    epaCompile:Result:=SaveCurrent;
     epaAdd:Result:=AddNew;
     epaDelete:Result:=DeleteTaskStep;
   else
@@ -263,16 +304,19 @@ begin
   RadioButton1.Caption:=sDatabaseOnCurrentServer;
   RadioButton2.Caption:=sConnectionString;
   Label1.Caption:=sDescription;
+  stepAdd.Caption:=sAddStep;
+  stepDelete.Caption:=sRemoveStep;
+  Label3.Caption:=sClickADDForNewStep;
 end;
 
 constructor TpgTaskStepsPage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
-  FCurStep:=nil;
+//  FCurStep:=nil;
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=TabSheet2;
-  EditorFrame.TextEditor.OnChange:=@Edit1Change;
+  EditorFrame.TextEditor.OnChange:=@edtStepNameChange;
   LoadDBList;
   LoadTaskData;
 end;
@@ -283,6 +327,9 @@ var
   U: TPGTaskStep;
   i: Integer;
 begin
+  Result:=(edtStepName.Caption<>'') and ((RadioButton1.Checked and (ComboBox1.Text<>'')) or (RadioButton2.Checked and (EditButton1.Text<>'')));
+
+  if not Result then exit;
   if ASQLObject is TPGSQLTaskCreate then
   begin
     Result:=true;
