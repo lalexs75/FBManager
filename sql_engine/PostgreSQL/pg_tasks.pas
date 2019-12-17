@@ -80,16 +80,16 @@ type
 
   TPGTaskSteps = class
   private
-    //FOwner: TPGTask;
     FList:TFPList;
     function GetCount: integer;
     function GetItem(AIndex: integer): TPGTaskStep;
   public
-    constructor Create{(AOwner:TPGTask)};
+    constructor Create;
     destructor Destroy;override;
     procedure Assign(ATaskSteps:TPGTaskSteps);
     function GetEnumerator: TPGTaskStepEnumerator;
     function Add:TPGTaskStep;
+    function Find(AID:Integer):TPGTaskStep;
     procedure Clear;
     property Item[AIndex:integer]:TPGTaskStep read GetItem; default;
     property Count:integer read GetCount;
@@ -456,6 +456,17 @@ begin
           '  values ' + LineEnding +
           '    ('+IntToStr(OP.ID)+', '+AnsiQuotedStr(OP.Step.Name, '''')+', ' + AnsiQuotedStr(OP.Step.Description, '''') + ', '+
                    BoolToStr(OP.Step.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(OP.Step.Body, '''')+', '''+OP.Step.DBName+''', '''');' +LineEnding;
+      pgtaAlterTaskItem:S:=S +'  UPDATE '+
+                                '  pgagent.pga_jobstep '+
+                                'SET '+
+                                '  jstname = '+AnsiQuotedStr(OP.Step.Name, '''') + ', '+
+                                '  jstconnstr = '+ AnsiQuotedStr(OP.Step.ConnectStr, '''') + ', '+
+                                '  jstdbname='+AnsiQuotedStr(OP.Step.DBName, '''')+', '+
+                                '  jstenabled = '+BoolToStr(OP.Step.Enabled, true) + ', '+
+                                //      '  jstkind='s',
+                                '  jstdesc=' + AnsiQuotedStr(OP.Step.Description, '''') + ' '+
+                                'WHERE '+
+                                '  jstid='+IntToStr(OP.Step.ID) + ';'+LineEnding;
 
 (*
       '  INSERT INTO pgagent.pga_job (jobjclid, jobname, jobdesc, jobenabled, jobhostagent)'+LineEnding +
@@ -472,7 +483,7 @@ begin
       '    jobid'+LineEnding +
 *)
           //pgtaCreateShedule, pgtaCreateTaskItem,
-          //pgtaAlterShedule, pgtaAlterTaskItem,
+          //pgtaAlterShedule,
     else
       raise Exception.Create('TPGSQLTaskAlter - Unknow operator');
     end;
@@ -660,6 +671,16 @@ function TPGTaskSteps.Add: TPGTaskStep;
 begin
   Result:=TPGTaskStep.Create;
   FList.Add(Result);
+end;
+
+function TPGTaskSteps.Find(AID: Integer): TPGTaskStep;
+var
+  S: TPGTaskStep;
+begin
+  for S in Self do
+    if S.ID = AID then
+      Exit(S);
+  Result:=nil;
 end;
 
 procedure TPGTaskSteps.Clear;

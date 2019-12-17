@@ -337,7 +337,7 @@ end;
 function TpgTaskStepsPage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
-  U: TPGTaskStep;
+  U, U1: TPGTaskStep;
   i: Integer;
   FCmd1: TPGSQLTaskAlter;
   Op: TPGAlterTaskOperator;
@@ -378,7 +378,13 @@ begin
       end
       else
       begin
-
+        U1:=TPGTask(DBObject).Steps.Find(U.ID);
+        if Assigned(U1) and (not U.IsEqual(U1)) then
+        begin
+          Op:=FCmd1.AddOperator(pgtaAlterTaskItem);
+          OP.Step.Assign(U);
+          OP.ID:=TPGTask(DBObject).TaskID;
+        end;
       end;
     end;
   end
