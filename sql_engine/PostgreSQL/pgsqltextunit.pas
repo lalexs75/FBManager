@@ -32,6 +32,9 @@ type
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
+    sTriggers: TRxTextHolder;
+    sExtensions: TRxTextHolder;
+    sRoleAndUser: TRxTextHolder;
     sqlFts: TRxTextHolder;
     sqlTasks: TRxTextHolder;
     sqlSchema: TRxTextHolder;
@@ -41,38 +44,25 @@ type
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
     sPGRelationFields: TRxTextHolder;
-    sPGTriggersList: TRxTextHolder;
     sPGClass: TRxTextHolder;
-    sPGForeignTable: TRxTextHolder;
-    sPGForeignData: TRxTextHolder;
     sqlPGFuntions: TRxTextHolder;
     sPGSystem: TRxTextHolder;
     sql_PG_LangList: TRxTextHolder;
     sqlTableSpaces: TRxTextHolder;
     sForeignObj: TRxTextHolder;
     sPGStatistics: TRxTextHolder;
-    sPGGroups1: TStrHolder;
-    sPGUsers: TStrHolder;
-    sqlEventTrigger: TStrHolder;
     sqlSequence_v10: TStrHolder;
     sqlTypesList: TStrHolder;
-    sqlTrigger: TStrHolder;
     sqlIndexTable: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;
-    sqlPGUserGroupGrants: TStrHolder;
     sql_PG_DomainRefresh: TStrHolder;
     sql_Pg_Rules: TStrHolder;
     sql_Pg_Rule: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
     sqlSequence: TStrHolder;
-    sqlEventTriggers: TStrHolder;
-    sPGGroups: TStrHolder;
-    sPGRoleParams: TStrHolder;
     sPGTasks: TStrHolder;
-    pgExtensions: TStrHolder;
     pgCollations: TStrHolder;
-    pgExtension: TStrHolder;
     ttt1: TStrHolder;
   private
     { private declarations }
@@ -126,12 +116,12 @@ function TpgSqlTextModule.PGTriggersList(ASQLEngine: TSQLEngineAbstract
   ): string;
 begin
   if (TSQLEnginePostgre(ASQLEngine).RealServerVersion >= 00090004) then
-    Result:=sPGTriggersList['sPGTriggerList9_4']
+    Result:=sTriggers['sPGTriggerList9_4']
   else
   if (TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 0009) then
-    Result:=sPGTriggersList['sPGTriggerList9_4']
+    Result:=sTriggers['sPGTriggerList9_4']
   else
-    Result:=sPGTriggersList['sPGTriggerList8_0']
+    Result:=sTriggers['sPGTriggerList8_0']
 end;
 
 function TpgSqlTextModule.PGRelationStr(ASQLEngine: TSQLEngineAbstract): string;

@@ -266,7 +266,7 @@ begin
   if State <> sdboEdit then exit;
   inherited RefreshObject;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sPGRoleParams.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sRoleAndUser['sPGRoleParams']);
   try
     Q.ParamByName('rolname').AsString:=Caption;
     Q.Open;
@@ -368,7 +368,7 @@ end;
 
 function TPGUsersRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sPGUsers.Strings.Text;
+  Result:=pgSqlTextModule.sRoleAndUser['sPGUsers'];
 end;
 
 function TPGUsersRoot.GetObjectType: string;
@@ -390,7 +390,7 @@ end;
 
 function TPGGroupsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sPGGroups.Strings.Text;
+  Result:=pgSqlTextModule.sRoleAndUser['sPGGroups'];
 end;
 
 function TPGGroupsRoot.GetObjectType: string;
@@ -469,7 +469,7 @@ var
 begin
   if State <> sdboEdit then exit;
   inherited RefreshObject;
-  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sPGRoleParams.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sRoleAndUser['sPGRoleParams']);
   try
     Q.ParamByName('rolname').AsString:=Caption;
     Q.Open;
@@ -630,7 +630,7 @@ var
   Q:TZQuery;
   M:TUserRoleGrant;
 begin
-  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sqlPGUserGroupGrants.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sRoleAndUser['sqlPGUserGroupGrants']);
   try
     Q.ParamByName('roleid').AsInteger:=FOID;
     Q.Open;
@@ -654,7 +654,7 @@ var
 begin
   inherited SetSqlAssistentData(List);
   List.Add(sMembers);
-  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sqlPGUserGroupGrants.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery(pgSqlTextModule.sRoleAndUser['sqlPGUserGroupGrants']);
   try
     Q.ParamByName('roleid').AsInteger:=FOID;
     Q.Open;

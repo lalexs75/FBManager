@@ -396,6 +396,7 @@ begin
   ListBox1.ItemIndex:=U.Index;
   ListBox1Click(nil);
   UpdateTaskEditor;
+  PageControl1.ActivePageIndex:=0;
 end;
 
 procedure TpgTaskShedulePage.DelShedule;
@@ -405,14 +406,17 @@ begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count)then
   begin
     U:=CurrentItem;
-    if DBObject.State = sdboCreate then
+    if (DBObject.State = sdboCreate) or (U.ID < 0) then
       U.Free
     else
       FDelList.Add(U);
     ListBox1.Items.Delete(ListBox1.ItemIndex);
 
     if ListBox1.Items.Count>0 then
+    begin
       ListBox1.ItemIndex:=0;
+      ListBox1Click(nil);
+    end;
   end;
   UpdateTaskEditor;
 end;

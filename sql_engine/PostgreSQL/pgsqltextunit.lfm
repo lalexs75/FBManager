@@ -1,8 +1,8 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 309
-  VerticalOffset = 1
+  HorizontalOffset = 349
+  VerticalOffset = 123
   Width = 1081
   object sqlTypesList: TStrHolder
     Capacity = 40
@@ -51,40 +51,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020616e64'
       '2020202070675f747970652e747970656c656d203d2030'
       '2a2f'
-    )
-  end
-  object sqlTrigger: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 128
-    Top = 36
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f747269676765722e6f696420617320696e7465676572292c'
-      '202070675f747269676765722e74676e616d652c'
-      '202070675f747269676765722e746772656c69642c'
-      '202070675f747269676765722e7467747970652c'
-      '2020636173742870675f747269676765722e7467656e61626c6564206173207661726368617228312929206173207467656e61626c65642c'
-      '202070675f747269676765722e746764656665727261626c652c'
-      '202070675f747269676765722e74676e617267732c'
-      '2020636173742870675f747269676765722e746761747472206173207661726368617229207467617474722c'
-      '202070675f747269676765722e7467666f69642c'
-      '202070675f6765745f747269676765726465662870675f747269676765722e6f69642920617320735f74675f6465662c'
-      '20202873656c65637420'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e20'
-      '20202066726f6d20'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e202870675f636c6173732e6f6964203d2070675f6465736372697074696f6e2e636c6173736f696429'
-      '202020776865726520'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f747269676765722e6f696420616e642070675f636c6173732e72656c6e616d65203d202770675f747269676765722720616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e20'
-      ''
-      '66726f6d'
-      '202070675f74726967676572'
-      '2020696e6e6572206a6f696e2070675f636c617373206f6e202870675f747269676765722e746772656c6964203d2070675f636c6173732e6f696429'
-      '7768657265'
-      '202020202870675f747269676765722e74676e616d65203d203a74676e616d6529'
-      '2020616e64'
-      '202020202870675f636c6173732e72656c6e616d657370616365203d203a72656c6e616d65737061636529'
     )
   end
   object sqlIndexTable: TStrHolder
@@ -197,27 +163,6 @@ object pgSqlTextModule: TpgSqlTextModule
     Macros = <>
     Left = 40
     Top = 400
-  end
-  object sqlPGUserGroupGrants: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 208
-    Top = 400
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f617574685f6d656d626572732e61646d696e5f6f7074696f6e2c'
-      '202070675f617574685f6d656d626572732e6772616e746f722c'
-      '202070675f757365725f6772616e746f722e7573656e616d6520617320757365725f6772616e746f722c'
-      '202070675f757365725f746573742e7573656e616d6520617320757365725f6d656d626572'
-      '66726f6d'
-      '202070675f617574685f6d656d62657273'
-      '2020696e6e6572206a6f696e2070675f757365722070675f757365725f6772616e746f72206f6e202870675f757365725f6772616e746f722e7573657379736964203d2070675f617574685f6d656d626572732e6772616e746f7229'
-      '2020696e6e6572206a6f696e2070675f757365722070675f757365725f74657374206f6e202870675f757365725f746573742e7573657379736964203d2070675f617574685f6d656d626572732e6d656d62657229'
-      '7768657265'
-      '2d2d202070675f617574685f6d656d626572732e726f6c656964203d2020313339393236202d2d203a726f6c656964'
-      '202070675f617574685f6d656d626572732e726f6c656964203d20203a726f6c656964'
-    )
   end
   object sql_PG_DomainRefresh: TStrHolder
     Capacity = 37
@@ -395,97 +340,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020202070675f636c6173732e72656c6e616d657370616365203d202564'
     )
   end
-  object sqlEventTriggers: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 224
-    Top = 104
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f6576656e745f747269676765722e6f69642c'
-      '202070675f6576656e745f747269676765722e6f69642c'
-      '202070675f6576656e745f747269676765722e6576746e616d652c20'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f6576656e745f747269676765722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f6576656e745f74726967676572'
-      '6f72646572206279'
-      '202070675f6576656e745f747269676765722e6576746e616d6520'
-    )
-  end
-  object sPGUsers: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 728
-    Top = 36
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f757365722e75736573797369642c20'
-      '202070675f757365722e75736573797369642c20'
-      '202070675f757365722e7573656e616d652c20'
-      '202873656c65637420'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e20'
-      '20202066726f6d20'
-      '202020202070675f6465736372697074696f6e20'
-      '202020776865726520'
-      '2020202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f757365722e757365737973696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e20'
-      '66726f6d20'
-      '202070675f7573657220'
-      '6f7264657220627920'
-      '202070675f757365722e7573656e616d65'
-    )
-  end
-  object sPGGroups: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 728
-    Top = 104
-    StrData = (
-      ''
-      '73656c65637420'
-      '202070675f67726f75702e67726f73797369642c20'
-      '202070675f67726f75702e67726f73797369642c20'
-      '202070675f67726f75702e67726f6e616d652c20'
-      '20202873656c65637420'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e20'
-      '20202066726f6d20'
-      '202020202070675f6465736372697074696f6e20'
-      '202020776865726520'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f67726f75702e67726f737973696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e20'
-      '66726f6d20'
-      '202070675f67726f757020'
-      '6f7264657220627920'
-      '202070675f67726f75702e67726f6e616d65'
-    )
-  end
-  object sPGRoleParams: TStrHolder
-    Capacity = 13
-    Macros = <>
-    Left = 728
-    Top = 176
-    StrData = (
-      ''
-      '73656c65637420'
-      '202070675f6175746869642e2a2c20'
-      '202070675f6175746869642e726f6c76616c6964756e74696c203d2027696e66696e697479272061732076616c6964756e74696c696e66696e6974792c'
-      '20202873656c65637420'
-      '202020202070675f73686465736372697074696f6e2e6465736372697074696f6e20'
-      '202066726f6d20'
-      '2020202070675f73686465736372697074696f6e20'
-      '2020776865726520'
-      '2020202070675f73686465736372697074696f6e2e6f626a6f6964203d2070675f6175746869642e6f69642920206173206465736372697074696f6e20'
-      '66726f6d20'
-      '202070675f61757468696420'
-      '776865726520'
-      '20202870675f6175746869642e726f6c6e616d65203d203a726f6c6e616d6529'
-    )
-  end
   object sPGTasks: TStrHolder
     Capacity = 16
     Macros = <>
@@ -536,75 +390,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f70726f632e70726f6e616d65'
     )
   end
-  object sqlEventTrigger: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 224
-    Top = 184
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f6576656e745f747269676765722e6f69642c'
-      '202070675f6576656e745f747269676765722e2a2c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f6576656e745f747269676765722e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f6576656e745f74726967676572'
-      '7768657265'
-      '202070675f6576656e745f747269676765722e6576746e616d65203d203a6576746e616d65'
-    )
-  end
-  object sPGGroups1: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 800
-    Top = 104
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f67726f75702e67726f73797369642c'
-      '202070675f67726f75702e67726f73797369642c'
-      '202070675f67726f75702e67726f6e616d652c'
-      '202070675f67726f75702e67726f6c6973742c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f67726f75702e67726f737973696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203029206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f67726f7570'
-      '7768657265'
-      '202070675f67726f75702e67726f6e616d65203d203a67726f6e616d65'
-    )
-  end
-  object pgExtensions: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 432
-    Top = 336
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f657874656e73696f6e2e6f696420617320696e7465676572292c'
-      '2020636173742870675f657874656e73696f6e2e6578746e616d65737061636520617320696e7465676572292c'
-      '202070675f657874656e73696f6e2e6578746e616d652c'
-      '202070675f657874656e73696f6e2e6578746e616d6573706163652c'
-      '202070675f657874656e73696f6e2e65787476657273696f6e20617320646174612c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f657874656e73696f6e2e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f657874656e73696f6e2729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f657874656e73696f6e'
-    )
-  end
   object pgCollations: TStrHolder
     Capacity = 64
     Macros = <>
@@ -629,27 +414,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '202070675f636f6c6c6174696f6e'
       ''
       ''
-    )
-  end
-  object pgExtension: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 432
-    Top = 408
-    StrData = (
-      ''
-      '73656c656374'
-      '202070675f657874656e73696f6e2e2a2c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e20696e6e6572206a6f696e2070675f636c617373206f6e2070675f636c6173732e6f69643d70675f6465736372697074696f6e2e636c6173736f6964'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f657874656e73696f6e2e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f657874656e73696f6e2729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f657874656e73696f6e'
-      '7768657265'
-      '202070675f657874656e73696f6e2e6f6964203d203a6f6964'
     )
   end
   object sqlSequence_v10: TStrHolder
@@ -835,9 +599,119 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_user_mapping.oid = :umid'
           ''
         )
+      end    
+      item
+        Caption = 'sFDW'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_foreign_data_wrapper.oid as integer),'
+          '  cast(pg_foreign_data_wrapper.oid as integer),'
+          '  pg_foreign_data_wrapper.fdwname,'
+          '  pg_foreign_data_wrapper.fdwowner,'
+          '  pg_foreign_data_wrapper.fdwoptions as data,'
+          '  pg_foreign_data_wrapper.fdwacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description'
+          'from'
+          '  pg_foreign_data_wrapper'
+          'order by'
+          '  pg_foreign_data_wrapper.fdwname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sFDWobj'
+        Lines.Strings = (
+          'select'
+          '  pg_foreign_data_wrapper.oid,'
+          '  pg_foreign_data_wrapper.*,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description,'
+          ''
+          '  COALESCE(ns_validator.nspname, '''') || ''.'' || proc_validator.proname as validator_name,'
+          '  COALESCE(ns_handler.nspname, '''') || ''.'' || proc_handler.proname as handler_name'
+          'from'
+          '  pg_foreign_data_wrapper'
+          '  LEFT OUTER JOIN pg_proc proc_validator ON proc_validator.oid = pg_foreign_data_wrapper.fdwvalidator'
+          '  LEFT OUTER JOIN pg_proc proc_handler ON proc_handler.oid = pg_foreign_data_wrapper.fdwhandler'
+          '  LEFT OUTER JOIN pg_namespace ns_validator ON ns_validator.oid = proc_validator.pronamespace'
+          '  LEFT OUTER JOIN pg_namespace ns_handler ON ns_handler.oid = proc_handler.pronamespace'
+          'where'
+          '  pg_foreign_data_wrapper.oid = :oid'
+        )
+      end    
+      item
+        Caption = 'sFServ'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_foreign_server.oid as integer),'
+          '  cast(pg_foreign_server.srvfdw as integer),'
+          '  pg_foreign_server.srvname,'
+          '  pg_foreign_server.srvowner,'
+          '  pg_foreign_server.srvoptions as data,'
+          '  pg_foreign_server.srvacl as acl_list,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_foreign_server.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_server'') as description'
+          'from'
+          '  pg_foreign_server'
+          'order by'
+          '  pg_foreign_server.srvname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sForeignTable'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.reltablespace,'
+          '  pg_class.relname,'
+          '  pg_class.relowner,'
+          '  pg_class.relhassubclass,'
+          '  pg_class.relpersistence,'
+          '  pg_class.reloptions,'
+          '  tst.reloptions as tst_reloptions,'
+          '  pg_foreign_table.ftserver,'
+          '  pg_foreign_table.ftoptions,'
+          '  pg_class.relacl,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          '  inner join pg_foreign_table on (pg_foreign_table.ftrelid = pg_class.oid)'
+          'WHERE'
+          '    (pg_class.relkind = ''f'')'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
       end>
-    Left = 728
-    Top = 272
+    Left = 432
+    Top = 416
   end
   object sqlTableSpaces: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1051,128 +925,6 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 432
     Top = 32
   end
-  object sPGForeignData: TRxTextHolder
-    Highlighter = rxSynSQL
-    Items = <    
-      item
-        Caption = 'sFDW'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_foreign_data_wrapper.oid as integer),'
-          '  cast(pg_foreign_data_wrapper.oid as integer),'
-          '  pg_foreign_data_wrapper.fdwname,'
-          '  pg_foreign_data_wrapper.fdwowner,'
-          '  pg_foreign_data_wrapper.fdwoptions as data,'
-          '  pg_foreign_data_wrapper.fdwacl as acl_list,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
-          '   where'
-          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description'
-          'from'
-          '  pg_foreign_data_wrapper'
-          'order by'
-          '  pg_foreign_data_wrapper.fdwname'
-          ''
-        )
-      end    
-      item
-        Caption = 'sFDWobj'
-        Lines.Strings = (
-          'select'
-          '  pg_foreign_data_wrapper.oid,'
-          '  pg_foreign_data_wrapper.*,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
-          '   where'
-          '     pg_description.objoid = pg_foreign_data_wrapper.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_data_wrapper'') as description,'
-          ''
-          '  COALESCE(ns_validator.nspname, '''') || ''.'' || proc_validator.proname as validator_name,'
-          '  COALESCE(ns_handler.nspname, '''') || ''.'' || proc_handler.proname as handler_name'
-          'from'
-          '  pg_foreign_data_wrapper'
-          '  LEFT OUTER JOIN pg_proc proc_validator ON proc_validator.oid = pg_foreign_data_wrapper.fdwvalidator'
-          '  LEFT OUTER JOIN pg_proc proc_handler ON proc_handler.oid = pg_foreign_data_wrapper.fdwhandler'
-          '  LEFT OUTER JOIN pg_namespace ns_validator ON ns_validator.oid = proc_validator.pronamespace'
-          '  LEFT OUTER JOIN pg_namespace ns_handler ON ns_handler.oid = proc_handler.pronamespace'
-          'where'
-          '  pg_foreign_data_wrapper.oid = :oid'
-        )
-      end    
-      item
-        Caption = 'sFServ'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_foreign_server.oid as integer),'
-          '  cast(pg_foreign_server.srvfdw as integer),'
-          '  pg_foreign_server.srvname,'
-          '  pg_foreign_server.srvowner,'
-          '  pg_foreign_server.srvoptions as data,'
-          '  pg_foreign_server.srvacl as acl_list,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
-          '   where'
-          '     pg_description.objoid = pg_foreign_server.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_foreign_server'') as description'
-          'from'
-          '  pg_foreign_server'
-          'order by'
-          '  pg_foreign_server.srvname'
-          ''
-        )
-      end>
-    Left = 968
-    Top = 169
-  end
-  object sPGForeignTable: TRxTextHolder
-    Highlighter = rxSynSQL
-    Items = <    
-      item
-        Caption = 'sForeignTable'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_class.oid as integer),'
-          '  pg_class.reltablespace,'
-          '  pg_class.relname,'
-          '  pg_class.relowner,'
-          '  pg_class.relhassubclass,'
-          '  pg_class.relpersistence,'
-          '  pg_class.reloptions,'
-          '  tst.reloptions as tst_reloptions,'
-          '  pg_foreign_table.ftserver,'
-          '  pg_foreign_table.ftoptions,'
-          '  pg_class.relacl,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description'
-          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
-          '   where'
-          '       pg_description.objsubid = 0'
-          '     and'
-          '       pg_class1.relname = ''pg_class'''
-          '     and'
-          '       pg_description.objoid = pg_class.oid) as description'
-          'from'
-          '  pg_class'
-          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
-          '  inner join pg_foreign_table on (pg_foreign_table.ftrelid = pg_class.oid)'
-          'WHERE'
-          '    (pg_class.relkind = ''f'')'
-          '  and'
-          '    (pg_class.relnamespace = :relnamespace)'
-          '  and'
-          '    (pg_class.relname  =  :relname)'
-          ''
-        )
-      end>
-    Left = 968
-    Top = 240
-  end
   object sPGClass: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
@@ -1233,66 +985,6 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 432
     Top = 256
-  end
-  object sPGTriggersList: TRxTextHolder
-    Highlighter = rxSynSQL
-    Items = <    
-      item
-        Caption = 'sPGTriggerList9_4'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_trigger.oid as integer),'
-          '  pg_class.relnamespace,'
-          '  pg_trigger.tgname,'
-          '  pg_class.relname,'
-          '  cast(pg_trigger.tgfoid as integer),'
-          '  pg_trigger.tgtype,'
-          '  pg_trigger.tgenabled,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description inner join pg_class on (pg_class.oid = pg_description.classoid)'
-          '   where'
-          '     pg_description.objoid = pg_trigger.oid and pg_class.relname = ''pg_trigger'' and pg_description.objsubid = 0) as description'
-          'from'
-          '  pg_trigger'
-          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
-          'where'
-          '  pg_trigger.tgconstrrelid = 0'
-          'order by'
-          '  pg_trigger.tgname'
-          ''
-        )
-      end    
-      item
-        Caption = 'sPGTriggerList8_0'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_trigger.oid as integer),'
-          '  pg_class.relnamespace,'
-          '  pg_trigger.tgname,'
-          '  pg_class.relname,'
-          '  cast(pg_trigger.tgfoid as integer),'
-          '  pg_trigger.tgtype,'
-          '  pg_trigger.tgenabled,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description'
-          '   where'
-          '     pg_description.objoid = pg_trigger.oid and pg_description.objsubid = 0) as description'
-          'from'
-          '  pg_trigger'
-          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
-          'where'
-          '  not pg_trigger.tgisconstraint'
-          'order by'
-          '  pg_trigger.tgname'
-          ''
-        )
-      end>
-    Left = 224
-    Top = 36
   end
   object sPGRelationFields: TRxTextHolder
     Highlighter = rxSynSQL
@@ -2167,5 +1859,283 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 32
     Top = 528
+  end
+  object sRoleAndUser: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sPGUsers'
+        Lines.Strings = (
+          'select'
+          '  pg_user.usesysid,'
+          '  pg_user.usesysid,'
+          '  pg_user.usename,'
+          ' (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '       pg_description.objoid = pg_user.usesysid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_user'
+          'order by'
+          '  pg_user.usename'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGGroups'
+        Lines.Strings = (
+          'select'
+          '  pg_group.grosysid,'
+          '  pg_group.grosysid,'
+          '  pg_group.groname,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_group.grosysid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_group'
+          'order by'
+          '  pg_group.groname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGGroups1'
+        Lines.Strings = (
+          'select'
+          '  pg_group.grosysid,'
+          '  pg_group.grosysid,'
+          '  pg_group.groname,'
+          '  pg_group.grolist,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_group.grosysid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_group'
+          'where'
+          '  pg_group.groname = :groname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGRoleParams'
+        Lines.Strings = (
+          'select'
+          '  pg_authid.*,'
+          '  pg_authid.rolvaliduntil = ''infinity'' as validuntilinfinity,'
+          '  (select'
+          '     pg_shdescription.description'
+          '  from'
+          '    pg_shdescription'
+          '  where'
+          '    pg_shdescription.objoid = pg_authid.oid)  as description'
+          'from'
+          '  pg_authid'
+          'where'
+          '  (pg_authid.rolname = :rolname)'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlPGUserGroupGrants'
+        Lines.Strings = (
+          'select'
+          '  pg_auth_members.admin_option,'
+          '  pg_auth_members.grantor,'
+          '  pg_user_grantor.usename as user_grantor,'
+          '  pg_user_test.usename as user_member'
+          'from'
+          '  pg_auth_members'
+          '  inner join pg_user pg_user_grantor on (pg_user_grantor.usesysid = pg_auth_members.grantor)'
+          '  inner join pg_user pg_user_test on (pg_user_test.usesysid = pg_auth_members.member)'
+          'where'
+          '--  pg_auth_members.roleid =  139926 -- :roleid'
+          '  pg_auth_members.roleid =  :roleid'
+          ''
+        )
+      end>
+    Left = 728
+    Top = 32
+  end
+  object sExtensions: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'pgExtensions'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_extension.oid as integer),'
+          '  cast(pg_extension.extnamespace as integer),'
+          '  pg_extension.extname,'
+          '  pg_extension.extnamespace,'
+          '  pg_extension.extversion as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_extension.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_extension'') as description'
+          'from'
+          '  pg_extension'
+          ''
+        )
+      end    
+      item
+        Caption = 'pgExtension'
+        Lines.Strings = (
+          'select'
+          '  pg_extension.*,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on pg_class.oid=pg_description.classoid'
+          '   where'
+          '     pg_description.objoid = pg_extension.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_extension'') as description'
+          'from'
+          '  pg_extension'
+          'where'
+          '  pg_extension.oid = :oid'
+          ''
+        )
+      end>
+    Left = 432
+    Top = 336
+  end
+  object sTriggers: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlTrigger'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_trigger.oid as integer),'
+          '  pg_trigger.tgname,'
+          '  pg_trigger.tgrelid,'
+          '  pg_trigger.tgtype,'
+          '  cast(pg_trigger.tgenabled as varchar(1)) as tgenabled,'
+          '  pg_trigger.tgdeferrable,'
+          '  pg_trigger.tgnargs,'
+          '  cast(pg_trigger.tgattr as varchar) tgattr,'
+          '  pg_trigger.tgfoid,'
+          '  pg_get_triggerdef(pg_trigger.oid) as s_tg_def,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_trigger.oid and pg_class.relname = ''pg_trigger'' and pg_description.objsubid = 0) as description'
+          ''
+          'from'
+          '  pg_trigger'
+          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
+          'where'
+          '    (pg_trigger.tgname = :tgname)'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGTriggerList9_4'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_trigger.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  pg_trigger.tgname,'
+          '  pg_class.relname,'
+          '  cast(pg_trigger.tgfoid as integer),'
+          '  pg_trigger.tgtype,'
+          '  pg_trigger.tgenabled,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_trigger.oid and pg_class.relname = ''pg_trigger'' and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_trigger'
+          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
+          'where'
+          '  pg_trigger.tgconstrrelid = 0'
+          'order by'
+          '  pg_trigger.tgname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sPGTriggerList8_0'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_trigger.oid as integer),'
+          '  pg_class.relnamespace,'
+          '  pg_trigger.tgname,'
+          '  pg_class.relname,'
+          '  cast(pg_trigger.tgfoid as integer),'
+          '  pg_trigger.tgtype,'
+          '  pg_trigger.tgenabled,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_trigger.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_trigger'
+          '  inner join pg_class on (pg_trigger.tgrelid = pg_class.oid)'
+          'where'
+          '  not pg_trigger.tgisconstraint'
+          'order by'
+          '  pg_trigger.tgname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlEventTriggers'
+        Lines.Strings = (
+          'select'
+          '  pg_event_trigger.oid,'
+          '  pg_event_trigger.oid,'
+          '  pg_event_trigger.evtname,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_event_trigger.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_event_trigger'
+          'order by'
+          '  pg_event_trigger.evtname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlEventTrigger'
+        Lines.Strings = (
+          'select'
+          '  pg_event_trigger.oid,'
+          '  pg_event_trigger.*,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '   where'
+          '     pg_description.objoid = pg_event_trigger.oid and pg_description.objsubid = 0) as description'
+          'from'
+          '  pg_event_trigger'
+          'where'
+          '  pg_event_trigger.evtname = :evtname'
+          ''
+        )
+      end>
+    Left = 160
+    Top = 36
   end
 end

@@ -98,12 +98,11 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideLeft.Control = RadioButton1
         AnchorSideTop.Control = RadioButton1
         AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = TabSheet1
-        AnchorSideRight.Side = asrBottom
+        AnchorSideRight.Control = RadioGroup1
         Left = 12
         Height = 34
         Top = 104
-        Width = 665
+        Width = 427
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -197,6 +196,68 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         )
         OnChange = edtStepNameChange
         TabOrder = 6
+      end
+      object RadioGroup1: TRadioGroup
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = RadioGroup2
+        AnchorSideBottom.Control = RadioGroup2
+        AnchorSideBottom.Side = asrBottom
+        Left = 445
+        Height = 87
+        Top = 75
+        Width = 140
+        Anchors = [akTop, akRight, akBottom]
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Top = 6
+        Caption = 'Step type'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 69
+        ClientWidth = 138
+        Items.Strings = (
+          'SQL command'
+          'Command script'
+        )
+        OnClick = edtStepNameChange
+        TabOrder = 7
+      end
+      object RadioGroup2: TRadioGroup
+        AnchorSideTop.Control = CheckBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TabSheet1
+        AnchorSideRight.Side = asrBottom
+        Left = 591
+        Height = 87
+        Top = 75
+        Width = 86
+        Anchors = [akTop, akRight]
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Around = 6
+        Caption = 'On error'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 69
+        ClientWidth = 84
+        Items.Strings = (
+          'Error'
+          'Success'
+          'Ignore'
+        )
+        OnClick = edtStepNameChange
+        TabOrder = 8
       end
     end
     object TabSheet2: TTabSheet

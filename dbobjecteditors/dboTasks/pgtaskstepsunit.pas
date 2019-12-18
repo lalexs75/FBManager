@@ -39,6 +39,8 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
     stepDelete: TAction;
     stepAdd: TAction;
     ActionList1: TActionList;
@@ -108,6 +110,8 @@ begin
     ComboBox1.Text:=U.DBName;
     EditButton1.Text:=U.ConnectStr;
     CheckBox1.Checked:=U.Enabled;
+    RadioGroup1.ItemIndex:=Ord(U.StepType);
+    RadioGroup2.ItemIndex:=Ord(U.StepResultType);
     UnLockCntls;
   end;
 end;
@@ -144,6 +148,10 @@ begin
       U.ConnectStr := EditButton1.Text;
       U.DBName := '';
     end;
+
+    U.StepType:=TTaskStepType(RadioGroup1.ItemIndex);
+    U.StepResultType:=TTaskStepResultType(RadioGroup2.ItemIndex);
+
   end;
 end;
 
@@ -237,13 +245,16 @@ begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex < ListBox1.Items.Count)then
   begin
     U:=TPGTaskStep(ListBox1.Items.Objects[ListBox1.ItemIndex]);
-    if DBObject.State = sdboCreate then
+    if (DBObject.State = sdboCreate) or (U.ID < 0) then
       U.Free
     else
       FDelList.Add(U);
     ListBox1.Items.Delete(ListBox1.ItemIndex);
     if ListBox1.Items.Count>0 then
+    begin
       ListBox1.ItemIndex:=0;
+      ListBox1Click(nil);
+    end;
   end;
   UpdateStepEditor;
 end;
@@ -259,6 +270,7 @@ begin
   ListBox1.ItemIndex:=ListBox1.Count-1;
   ListBox1Click(nil);
   UpdateStepEditor;
+  PageControl1.ActivePageIndex:=0;
 end;
 
 procedure TpgTaskStepsPage.UpdateStepEditor;
@@ -320,6 +332,7 @@ begin
   stepAdd.Caption:=sAddStep;
   stepDelete.Caption:=sRemoveStep;
   Label3.Caption:=sClickADDForNewStep;
+  Label2.Caption:=sDescription;
 end;
 
 constructor TpgTaskStepsPage.CreatePage(TheOwner: TComponent;

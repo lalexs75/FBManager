@@ -1630,7 +1630,7 @@ begin
   FForeignTableOptions.Clear;
   if State = sdboEdit then
   begin
-    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGForeignTable['sForeignTable']);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sForeignObj['sForeignTable']);
     try
       Q.ParamByName('relname').AsString:=Caption;
       Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;
@@ -2026,7 +2026,7 @@ begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.pgExtension.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sExtensions['pgExtension']);
   try
     Q.ParamByName('oid').AsInteger:=FOID;
     Q.Open;
@@ -2094,7 +2094,7 @@ end;
 
 function TPGExtensionsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.pgExtensions.Strings.Text;
+  Result:=pgSqlTextModule.sExtensions['pgExtensions'];
 end;
 
 function TPGExtensionsRoot.GetObjectType: string;
@@ -2523,7 +2523,7 @@ begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlEventTrigger.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sTriggers['sqlEventTrigger']);
   try
     Q.ParamByName('evtname').AsString:=Caption;
     Q.Open;
@@ -2549,7 +2549,7 @@ end;
 function TPGEventTriggersRoot.DBMSObjectsList: string;
 begin
   if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion9_3 then
-    Result:=pgSqlTextModule.sqlEventTriggers.Strings.Text
+    Result:=pgSqlTextModule.sTriggers['sqlEventTriggers']
   else
     Result:='';
 end;
@@ -4180,8 +4180,8 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsBegin(pgSqlTextModule.sForeignObj['pgFSUserMapping']);
-  RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFServ']);
-  RefreshObjectsBegin(pgSqlTextModule.sPGForeignData['sFDW']);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFServ']);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFDW']);
   RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsConfigs']);
   RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsDicts']);
   RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFTsParsers']);
@@ -4198,8 +4198,8 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sForeignObj['pgFSUserMapping']);
-  RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFServ']);
-  RefreshObjectsEnd(pgSqlTextModule.sPGForeignData['sFDW']);
+  RefreshObjectsEnd(pgSqlTextModule.sForeignObj['sFServ']);
+  RefreshObjectsEnd(pgSqlTextModule.sForeignObj['sFDW']);
   RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsConfigs']);
   RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFtsDicts']);
   RefreshObjectsEnd(pgSqlTextModule.sqlFts['pgFTsParsers']);
@@ -6768,7 +6768,7 @@ begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlTrigger.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sTriggers['sqlTrigger']);
   try
     Q.ParamByName('tgname').AsString:=Caption;
     Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;

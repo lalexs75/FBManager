@@ -179,7 +179,7 @@ uses fbmStrConstUnit, pg_SqlParserUnit, pgSqlTextUnit, pg_utils,
 
 function TPGForeignServerRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sPGForeignData['sFServ'];
+  Result:=pgSqlTextModule.sForeignObj['sFServ'];
 end;
 
 function TPGForeignServerRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -589,7 +589,7 @@ begin
   if State <> sdboEdit then exit;
   FOptions.Clear;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGForeignData['sFDWobj']);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sForeignObj['sFDWobj']);
   try
     Q.ParamByName('oid').AsInteger:=FOID;
     Q.Open;
@@ -633,7 +633,7 @@ end;
 
 function TPGForeignDataWrapperRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sPGForeignData['sFDW'];
+  Result:=pgSqlTextModule.sForeignObj['sFDW'];
 end;
 
 constructor TPGForeignDataWrapperRoot.Create(AOwnerDB: TSQLEngineAbstract;

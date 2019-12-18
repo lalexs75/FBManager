@@ -52,24 +52,29 @@ type
 
   { TPGTaskStep }
 
+  TTaskStepType = (tstSQL, tstBatch);
+  TTaskStepResultType = (tsrtFailure, tsrtSuccess, tsrtIgnore);
+
   TPGTaskStep = class
   private
     FDescription: string;
-    //FPGTask: TPGTask;
     FID:integer;
     FName:string;
     FBody:string;
     FConnectStr:string; //user=postgres host=192.168.123.4 port=5432 dbname=base_test_analiz
     FDBName:string;
     FEnabled:boolean;
+    FStepResultType: TTaskStepResultType;
+    FStepType: TTaskStepType;
   public
-    constructor Create{(APGTask:TPGTask)};
+    constructor Create;
     procedure Assign(From:TPGTaskStep);
     function IsEqual(From:TPGTaskStep): Boolean;
-    //function MakeSQL:string;
     property Name:string read FName write FName;
     property Description:string read FDescription write FDescription;
     property Enabled:boolean read FEnabled write FEnabled;
+    property StepType:TTaskStepType read FStepType write FStepType;
+    property StepResultType:TTaskStepResultType read FStepResultType write FStepResultType;
     property Body:string read FBody write FBody;
     property DBName:string read FDBName write FDBName;
     property ConnectStr:string read FConnectStr write FConnectStr;
@@ -125,7 +130,6 @@ type
     FDateStart:TDateTime;
     FDateStop:TDateTime;
     procedure DoParse(S:string;var A:array of boolean);
-    function DoMakeArray(const A:array of boolean):string;
     procedure SetMonth(S:string);
     procedure SetDayMonth(S:string);
     procedure SetDayWeek(S:string);
@@ -204,10 +208,12 @@ type
     function InternalGetDDLCreate: string; override;
     procedure SetDescription(const AValue: string); override;
     procedure InternalPrepareDropCmd(R: TSQLDropCommandAbstract); override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
@@ -330,7 +336,138 @@ type
   end;
 
 implementation
-uses pg_sql_lines_unit, pgSqlTextUnit, StrUtils;
+uses rxstrutils, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit, StrUtils;
+
+function DoMakeArray(const A: array of boolean): string;
+var
+  i: Integer;
+begin
+  Result:='';
+  for i:=Low(A) to High(A) do Result:=Result + BoolToStr(A[i], 't', 'f')+',';
+  Result:='{'+Copy(Result, 1, Length(Result) - 1) + '}';
+end;
+
+function CreateStepSQL(AJobID:string; AStep:TPGTaskStep; ALeftMargin:Integer):string;
+var
+  S1, S2, SDBName, SConnStr, S3: String;
+begin
+  S1:=MakeStr(' ', ALeftMargin);
+  if AStep.StepType = tstSQL then
+  begin
+    S2:='''s''';
+    SDBName:=AStep.DBName;
+    SConnStr:='';
+  end
+  else
+  begin
+    //tstBatch;
+    S2:='''b''';
+    SDBName:='';
+    SConnStr:=AStep.ConnectStr;
+  end;
+
+  case AStep.StepResultType of
+    tsrtFailure:S3:='''f''';
+    tsrtSuccess:S3:='''s''';
+    tsrtIgnore:S3:='''i''';
+  end;
+
+  Result:=
+    S1 + 'INSERT INTO pgagent.pga_jobstep' + LineEnding +
+    S1 + '  (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
+    S1 + 'values ' + LineEnding +
+    S1 + '  ('+AJobID+', '+
+              AnsiQuotedStr(AStep.Name, '''')+', ' +
+              AnsiQuotedStr(AStep.Description, '''') + ', '+
+              BoolToStr(AStep.Enabled, true)+', '+
+              S2 + ', '+
+              S3 + ', '+
+              AnsiQuotedStr(AStep.Body, '''')+', '+
+              AnsiQuotedStr(SDBName, '''') + ', '+
+              AnsiQuotedStr(SConnStr, '''') + ');' +LineEnding;
+end;
+
+function AlterStepSQL(AStep:TPGTaskStep; ALeftMargin:Integer):string;
+var
+  S1, S2, SDBName, SConnStr, S3: String;
+begin
+
+  if AStep.StepType = tstSQL then
+  begin
+    S2:='''s''';
+    SDBName:=AStep.DBName;
+    SConnStr:='';
+  end
+  else
+  begin
+    //tstBatch;
+    S2:='''b''';
+    SDBName:='';
+    SConnStr:=AStep.ConnectStr;
+  end;
+
+  case AStep.StepResultType of
+    tsrtFailure:S3:='''f''';
+    tsrtSuccess:S3:='''s''';
+    tsrtIgnore:S3:='''i''';
+  end;
+
+  S1:=MakeStr(' ', ALeftMargin);
+  Result:=
+    S1 + 'UPDATE pgagent.pga_jobstep '+
+         'SET '+
+           'jstname = '+AnsiQuotedStr(AStep.Name, '''') + ', '+
+           'jstconnstr = '+ AnsiQuotedStr(SConnStr, '''') + ', '+
+           'jstdbname='+AnsiQuotedStr(SDBName, '''')+', '+
+           'jstenabled = '+BoolToStr(AStep.Enabled, true) + ', '+
+           'jstkind='+S2+', '+
+           'jstonerror='+S3+', '+
+           'jstdesc=' + AnsiQuotedStr(AStep.Description, '''') + ' '+
+         'WHERE '+
+           'jstid='+IntToStr(AStep.ID) + ';'+LineEnding;
+end;
+
+function CreateSheduleSQL(AJobID:string; AShedule:TPGTaskShedule; ALeftMargin:Integer):string;
+var
+  S1: String;
+begin
+  S1:=MakeStr(' ', ALeftMargin);
+  Result:=
+    S1 + 'INSERT INTO pgagent.pga_schedule (jscjobid, jscname, jscdesc, '+
+              'jscminutes, jschours, jscweekdays, jscmonthdays, '+
+              'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
+    S1 + 'VALUES('+AJobID+', ' +
+              AnsiQuotedStr(AShedule.Name, '''') + ', ' +
+              AnsiQuotedStr(AShedule.Description, '''') + ', '+
+              AnsiQuotedStr(AShedule.MinutesStr, '''') + ', '+
+              AnsiQuotedStr(AShedule.HoursStr, '''') +  ', ' +
+              AnsiQuotedStr(AShedule.DayWeekStr, '''') +  ', ' +
+              AnsiQuotedStr(AShedule.DayMonthStr, '''') +  ','+
+              AnsiQuotedStr(AShedule.MonthStr, '''') + ', ' +
+              BoolToStr(AShedule.Enabled, true) + ',' +
+              '''' + DateTimeToStr(AShedule.DateStart)+''', '+
+              '''' + DateTimeToStr(AShedule.DateStop) + ''');' + LineEnding;
+end;
+
+function AlterSheduleSQL(AShedule:TPGTaskShedule; ALeftMargin:Integer):string;
+var
+  S1: String;
+begin
+  S1:=MakeStr(' ', ALeftMargin);
+  Result:=S1 +
+    'UPDATE pgagent.pga_schedule SET '+
+      'jscname = ' + AnsiQuotedStr(AShedule.Name, '''') + ',' +
+      'jscdesc = ' + AnsiQuotedStr(AShedule.Description, '''')  + ',' +
+      'jscenabled = ' +BoolToStr(AShedule.Enabled, true) + ', '+
+      'jscweekdays = ''{' + DoMakeArray(AShedule.DayWeek) + '}'', '+
+      'jscmonthdays = ''{' + DoMakeArray(AShedule.DayMonth)+'}'', '+
+      'jscmonths = ''{' + DoMakeArray(AShedule.Month)+'}'', '+
+      'jscminutes = ''{' + DoMakeArray(AShedule.Minutes)+'}'', '+
+      'jschours = ''{' + DoMakeArray(AShedule.Hours)+'}'', '+
+      'jscstart = ''' + DateTimeToStr(AShedule.DateStart) + ''', ' +
+      'jscend = ''' + DateTimeToStr(AShedule.DateStop) + ''' ' +
+    'WHERE jscid='+IntToStr(AShedule.ID)+';';
+end;
 
 { TPGAlterTaskOperatorsEnumerator }
 
@@ -451,39 +588,10 @@ begin
       pgtaDropShedule:S:=S + '  DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(Op.ID) +';'+LineEnding;
       pgtaAlterTask:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+
                             ', jobenabled='+BoolToStr(OP.Enabled, true)+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
-      pgtaCreateTaskItem:S:=S +'  INSERT INTO pgagent.pga_jobstep' + LineEnding +
-          '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
-          '  values ' + LineEnding +
-          '    ('+IntToStr(OP.ID)+', '+AnsiQuotedStr(OP.Step.Name, '''')+', ' + AnsiQuotedStr(OP.Step.Description, '''') + ', '+
-                   BoolToStr(OP.Step.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(OP.Step.Body, '''')+', '''+OP.Step.DBName+''', '''');' +LineEnding;
-      pgtaAlterTaskItem:S:=S +'  UPDATE '+
-                                '  pgagent.pga_jobstep '+
-                                'SET '+
-                                '  jstname = '+AnsiQuotedStr(OP.Step.Name, '''') + ', '+
-                                '  jstconnstr = '+ AnsiQuotedStr(OP.Step.ConnectStr, '''') + ', '+
-                                '  jstdbname='+AnsiQuotedStr(OP.Step.DBName, '''')+', '+
-                                '  jstenabled = '+BoolToStr(OP.Step.Enabled, true) + ', '+
-                                //      '  jstkind='s',
-                                '  jstdesc=' + AnsiQuotedStr(OP.Step.Description, '''') + ' '+
-                                'WHERE '+
-                                '  jstid='+IntToStr(OP.Step.ID) + ';'+LineEnding;
-
-(*
-      '  INSERT INTO pgagent.pga_job (jobjclid, jobname, jobdesc, jobenabled, jobhostagent)'+LineEnding +
-      '  SELECT'+LineEnding +
-      '    pga_jobclass.jclid,'+LineEnding +
-      '    '''+name+''','+LineEnding +
-      '    '''+Description+''','+LineEnding +
-      '    true,'+LineEnding +
-      '    '''''+LineEnding +
-      '  FROM'+LineEnding +
-      '    pgagent.pga_jobclass'+LineEnding +
-      '    WHERE pga_jobclass.jclname='''+TaskClass+''''+LineEnding +
-      '  RETURNING'+LineEnding +
-      '    jobid'+LineEnding +
-*)
-          //pgtaCreateShedule, pgtaCreateTaskItem,
-          //pgtaAlterShedule,
+      pgtaCreateTaskItem:S:=S + CreateStepSQL(IntToStr(OP.ID), OP.Step, 2);
+      pgtaCreateShedule:S:=S + CreateSheduleSQL(IntToStr(OP.ID), OP.Shedule, 2);
+      pgtaAlterTaskItem:S:=S + AlterStepSQL(OP.Step, 2);
+      pgtaAlterShedule:S:=S + AlterSheduleSQL(OP.Shedule, 2);
     else
       raise Exception.Create('TPGSQLTaskAlter - Unknow operator');
     end;
@@ -696,7 +804,7 @@ end;
 
 procedure TPGSQLTaskCreate.MakeSQL;
 var
-  S, S1: String;
+  S: String;
   T: TPGTaskStep;
   TL: TPGTaskShedule;
 begin
@@ -723,14 +831,7 @@ begin
   begin
     S:=S + '  /*------------- JOB STEPS -----------*/' + LineEnding;
     for T in FTaskSteps do
-    begin
-      S1:='  INSERT INTO pgagent.pga_jobstep' + LineEnding +
-          '    (jstjobid, jstname, jstdesc, jstenabled, jstkind, jstonerror, jstcode, jstdbname, jstconnstr)' + LineEnding +
-          '  values ' + LineEnding +
-          '    (f_JobId, '+AnsiQuotedStr(T.Name, '''')+', ' + AnsiQuotedStr(T.Description, '''') + ', '+
-                   BoolToStr(T.Enabled, true)+', ''s'', ''f'', '+AnsiQuotedStr(T.Body, '''')+', '''+T.DBName+''', '''');' +LineEnding;
-      S:=S + S1;
-    end;
+      S:=S + CreateStepSQL('f_JobId', T, 2);
     S:=S + LineEnding + LineEnding;
   end;
 
@@ -739,20 +840,7 @@ begin
   begin
     S:=S + '  /*------------- JOB SHEDULE -----------*/' + LineEnding;
     for TL in FTaskShedule do
-    begin
-      S1:='  INSERT INTO pgagent.pga_schedule (jscjobid, jscname, jscdesc, '+
-              'jscminutes, jschours, jscweekdays, jscmonthdays, '+
-              'jscmonths, jscenabled, jscstart, jscend)' + LineEnding +
-          '  VALUES(f_JobId, ' + AnsiQuotedStr(TL.Name, '''') + ', ' +
-              AnsiQuotedStr(TL.Description, '''') + ', '+
-              AnsiQuotedStr(TL.MinutesStr, '''') + ', '+
-              AnsiQuotedStr(TL.HoursStr, '''') +  ', ' +
-              AnsiQuotedStr(TL.DayWeekStr, '''') +  ', ' +
-              AnsiQuotedStr(TL.DayMonthStr, '''') +  ','+
-              AnsiQuotedStr(TL.MonthStr, '''') + ', ' + BoolToStr(TL.Enabled, true) + ',' +
-              ''''+DateTimeToStr(TL.DateStart)+''','''  + DateTimeToStr(TL.DateStop) + ''');' + LineEnding;
-      S:=S + S1;
-    end;
+      S:=S + CreateSheduleSQL('f_JobId', TL, 2);
     S:=S + LineEnding + LineEnding;
   end;
 
@@ -813,15 +901,6 @@ begin
     else
       break;
   end;
-end;
-
-function TPGTaskShedule.DoMakeArray(const A: array of boolean): string;
-var
-  i: Integer;
-begin
-  Result:='';
-  for i:=Low(A) to High(A) do Result:=Result + BoolToStr(A[i], 't', 'f')+',';
-  Result:='{'+Copy(Result, 1, Length(Result) - 1) + '}';
 end;
 
 procedure TPGTaskShedule.SetMonth(S: string);
@@ -965,6 +1044,7 @@ end;
 
 procedure TPGTaskStep.Assign(From: TPGTaskStep);
 begin
+  if not Assigned(From) then Exit;
   FID:=From.FID;
   FName:=From.FName;
   FBody:=From.FBody;
@@ -972,6 +1052,8 @@ begin
   FDBName:=From.FDBName;
   FConnectStr:=From.FConnectStr;
   FEnabled:=From.FEnabled;
+  FStepType:=From.FStepType;
+  FStepResultType:=From.FStepResultType;
 end;
 
 function TPGTaskStep.IsEqual(From: TPGTaskStep): Boolean;
@@ -983,53 +1065,11 @@ begin
     (FDescription = From.FDescription) and
     (FDBName = From.FDBName) and
     (FConnectStr = From.FConnectStr) and
-    (FEnabled = From.FEnabled);
+    (FEnabled = From.FEnabled) and
+    (FStepType = From.FStepType) and
+    (FStepResultType = From.FStepResultType);
 end;
-(*
-function TPGTaskStep.MakeSQL: string;
-var
-  S: String;
-begin
-  Result:='';
-  if FID > -1 then
-    Result:=
-      'UPDATE '+
-      '  pgagent.pga_jobstep '+
-      'SET '+
-      '  jstname = '''+FName + ''', '+
-      '  jstconnstr = '''+ FConnectStr + ''', '+
-      '  jstdbname='''+FDBName+''', '+
-      '  jstenabled = '+BoolToStr(FEnabled, 'true', 'false') + ', '+
-//      '  jstkind='s',
-      '  jstdesc=''' + FDescription + ''' '+
-      'WHERE '+
-      '  jstid='+IntToStr(FID)
-  else
-    Result:=
-      'INSERT INTO pgagent.pga_jobstep '+
-        '(jstid, '+
-        'jstjobid, '+
-        'jstname, '+
-        'jstdesc, '+
-        'jstenabled, '+
-        'jstkind, '+
-        'jstonerror, '+
-        'jstcode, '+
-        'jstdbname, '+
-        'jstconnstr)'+
-      'values '+
-        '(NEXTVAL(''pgagent.pga_schedule_jscid_seq''), ' +//!!
-        IntToStr(FPGTask.FTaskID) + ', '+
-        '''' +FName + ''', '+
-        '''' + FDescription + ''', '+
-        BoolToStr(FEnabled, 'true', 'false') + ', '+
-        '''s'', '+
-        '''f'', ' + //jstonerror,
-        '''' + FBody + ''', ' +
-        '''' + FDBName + ''', '+
-        '''' + FConnectStr + ''')';
-end;
-*)
+
 { TPGTask }
 
 function TPGTask.GetTaskClassName: string;
@@ -1073,6 +1113,12 @@ procedure TPGTask.InternalPrepareDropCmd(R: TSQLDropCommandAbstract);
 begin
   inherited InternalPrepareDropCmd(R);
   (R as TPGSQLDropTask).FJobID:=TaskID;
+end;
+
+procedure TPGTask.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FTaskID));
 end;
 
 
@@ -1182,6 +1228,12 @@ begin
   finally
     Q.Free;
   end;
+end;
+
+procedure TPGTask.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+  List.Add(FDescription);
 end;
 
 function TPGTask.CreateSQLObject: TSQLCommandDDL;
