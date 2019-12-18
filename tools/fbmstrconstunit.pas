@@ -1088,7 +1088,12 @@ resourcestring
   sAddStep                          = 'Add step';
   sRemoveStep                       = 'Remove step';
   sClickADDForNewStep               = 'Click ADD button for add new step';
-
+  sStepType                         = 'Step type';
+  sOnError                          = 'On error';
+  sSQLCommand                       = 'SQL command';
+  sCommandcript                     = 'Command script';
+  sSuccess                          = 'Success';
+  sIgnore                           = 'Ignore';
 
   sSteps                            = 'Steps';
   sStep                             = 'Step';

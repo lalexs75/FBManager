@@ -552,6 +552,10 @@ msgstr "Использовать стиль FBManager /*$$FBMC$$*/"
 msgid "Use IBExpert style /*$$IBEC$$*/"
 msgstr "Использовать стиль  IBExpert /*$$IBEC$$*/"
 
+#: fbmstrconstunit.scommandcript
+msgid "Command script"
+msgstr "Последовательность команд"
+
 #: fbmstrconstunit.scomment
 msgid "Comment"
 msgstr "Коментарий"
@@ -2592,6 +2596,10 @@ msgstr "Регистр идентификаторов"
 msgid "Idle"
 msgstr "Простой"
 
+#: fbmstrconstunit.signore
+msgid "Ignore"
+msgstr "Игнорировать"
+
 #: fbmstrconstunit.signorechecksums
 msgid "Ignore checksums"
 msgstr "Игнорировать контрольные суммы"
@@ -3818,6 +3826,10 @@ msgstr "При удалении"
 msgid "One Relation At A Time"
 msgstr "Одна таблица за раз"
 
+#: fbmstrconstunit.sonerror
+msgid "On error"
+msgstr ""
+
 #: fbmstrconstunit.sonevent
 msgid "On event"
 msgstr "Для события"
@@ -4382,7 +4394,7 @@ msgstr "записей"
 
 #: fbmstrconstunit.srecordstogenerated
 msgid "Records to generated"
-msgstr ""
+msgstr "Кол-во записей для создания"
 
 #: fbmstrconstunit.sredo
 msgctxt "fbmstrconstunit.sredo"
@@ -5078,6 +5090,10 @@ msgstr "Текст SQL запроса"
 msgid "SQL builder"
 msgstr "Построитель SQL"
 
+#: fbmstrconstunit.ssqlcommand
+msgid "SQL command"
+msgstr "Команда SQL"
+
 #: fbmstrconstunit.ssqldataacess
 msgid "SQL data acess"
 msgstr "SQL доступ к данным"
@@ -5252,6 +5268,10 @@ msgstr "Название шага"
 msgid "Steps"
 msgstr "Шаги"
 
+#: fbmstrconstunit.ssteptype
+msgid "Step type"
+msgstr "Тип шага"
+
 #: fbmstrconstunit.sstop
 msgid "Stop"
 msgstr "Остановить"
@@ -5298,6 +5318,10 @@ msgstr "Подтип"
 #: fbmstrconstunit.ssuccesconnection
 msgid "Successful connection"
 msgstr "Успешное подключение..."
+
+#: fbmstrconstunit.ssuccess
+msgid "Success"
+msgstr "Успех"
 
 #: fbmstrconstunit.ssuccessfullyfinished
 msgid " - successfully finished"

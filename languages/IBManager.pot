@@ -526,6 +526,10 @@ msgstr ""
 msgid "Use IBExpert style /*$$IBEC$$*/"
 msgstr ""
 
+#: fbmstrconstunit.scommandcript
+msgid "Command script"
+msgstr ""
+
 #: fbmstrconstunit.scomment
 msgid "Comment"
 msgstr ""
@@ -2503,6 +2507,10 @@ msgstr ""
 msgid "Idle"
 msgstr ""
 
+#: fbmstrconstunit.signore
+msgid "Ignore"
+msgstr ""
+
 #: fbmstrconstunit.signorechecksums
 msgid "Ignore checksums"
 msgstr ""
@@ -3688,6 +3696,10 @@ msgstr ""
 
 #: fbmstrconstunit.sonerelationatatime
 msgid "One Relation At A Time"
+msgstr ""
+
+#: fbmstrconstunit.sonerror
+msgid "On error"
 msgstr ""
 
 #: fbmstrconstunit.sonevent
@@ -4916,6 +4928,10 @@ msgstr ""
 msgid "SQL builder"
 msgstr ""
 
+#: fbmstrconstunit.ssqlcommand
+msgid "SQL command"
+msgstr ""
+
 #: fbmstrconstunit.ssqldataacess
 msgid "SQL data acess"
 msgstr ""
@@ -5085,6 +5101,10 @@ msgstr ""
 msgid "Steps"
 msgstr ""
 
+#: fbmstrconstunit.ssteptype
+msgid "Step type"
+msgstr ""
+
 #: fbmstrconstunit.sstop
 msgid "Stop"
 msgstr ""
@@ -5128,6 +5148,10 @@ msgstr ""
 
 #: fbmstrconstunit.ssuccesconnection
 msgid "Successful connection"
+msgstr ""
+
+#: fbmstrconstunit.ssuccess
+msgid "Success"
 msgstr ""
 
 #: fbmstrconstunit.ssuccessfullyfinished

@@ -252,7 +252,7 @@ type
 
   TPGSQLTaskAlterAction = (pgtaCreateShedule, pgtaCreateTaskItem,
     pgtaAlterShedule, pgtaAlterTaskItem, pgtaDropShedule, pgtaDropTaskItem,
-    pgtaAlterTask);
+    pgtaAlterTask, pgtaAlterTaskRename);
 
   { TPGAlterTaskOperator }
 
@@ -592,6 +592,7 @@ begin
       pgtaCreateShedule:S:=S + CreateSheduleSQL(IntToStr(OP.ID), OP.Shedule, 2);
       pgtaAlterTaskItem:S:=S + AlterStepSQL(OP.Step, 2);
       pgtaAlterShedule:S:=S + AlterSheduleSQL(OP.Shedule, 2);
+      pgtaAlterTaskRename:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
     else
       raise Exception.Create('TPGSQLTaskAlter - Unknow operator');
     end;

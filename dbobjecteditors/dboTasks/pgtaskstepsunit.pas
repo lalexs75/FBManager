@@ -333,6 +333,16 @@ begin
   stepDelete.Caption:=sRemoveStep;
   Label3.Caption:=sClickADDForNewStep;
   Label2.Caption:=sDescription;
+
+  RadioGroup1.Caption:=sStepType;
+  RadioGroup1.Items[0]:=sSQLCommand;
+  RadioGroup1.Items[1]:=sCommandcript;
+
+  RadioGroup2.Caption:=sOnError;
+  RadioGroup2.Items[0]:=sError;
+  RadioGroup2.Items[1]:=sSuccess;
+  RadioGroup2.Items[2]:=sIgnore;
+
 end;
 
 constructor TpgTaskStepsPage.CreatePage(TheOwner: TComponent;
