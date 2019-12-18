@@ -209,6 +209,7 @@ type
     procedure SetDescription(const AValue: string); override;
     procedure InternalPrepareDropCmd(R: TSQLDropCommandAbstract); override;
     procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
@@ -217,6 +218,7 @@ type
 
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
+    function RenameObject(ANewName:string):Boolean;override;
 
     class function DBClassTitle:string;override;
     property TaskID:integer read FTaskID;
@@ -1122,6 +1124,11 @@ begin
   Statistic.AddValue(sOID, IntToStr(FTaskID));
 end;
 
+function TPGTask.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 
 constructor TPGTask.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
@@ -1250,6 +1257,32 @@ function TPGTask.CompileSQLObject(ASqlObject: TSQLCommandDDL;
 begin
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam + [sepSystemExec]);
 //  if Result;
+end;
+
+function TPGTask.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLTaskAlter;
+  Op: TPGAlterTaskOperator;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLTaskAlter.Create(nil);
+    Op:=FCmd.AddOperator(pgtaAlterTaskRename);
+    Op.Caption:=ANewName;
+    Op.ID:=TaskID;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh, sepSystemExec]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 class function TPGTask.DBClassTitle: string;
