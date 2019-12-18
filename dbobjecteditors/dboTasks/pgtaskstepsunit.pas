@@ -384,6 +384,7 @@ begin
   if ASQLObject is TPGSQLTaskAlter then
   begin
     FCmd1:=TPGSQLTaskAlter(ASQLObject);
+    FCmd1.TaskID:=TPGTask(DBObject).TaskID;
     for i:=0 to FDelList.Count-1 do
     begin
       Op:=FCmd1.AddOperator(pgtaDropTaskItem);
@@ -397,7 +398,6 @@ begin
       begin
         Op:=FCmd1.AddOperator(pgtaCreateTaskItem);
         OP.Step.Assign(U);
-        OP.ID:=TPGTask(DBObject).TaskID;
       end
       else
       begin
@@ -406,7 +406,6 @@ begin
         begin
           Op:=FCmd1.AddOperator(pgtaAlterTaskItem);
           OP.Step.Assign(U);
-          OP.ID:=TPGTask(DBObject).TaskID;
         end;
       end;
     end;

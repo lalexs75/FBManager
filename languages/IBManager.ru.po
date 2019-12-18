@@ -3515,6 +3515,10 @@ msgctxt "fbmstrconstunit.snextrun"
 msgid "Next run"
 msgstr "Следующий запуск"
 
+#: fbmstrconstunit.sno
+msgid "No"
+msgstr "Нет"
+
 #: fbmstrconstunit.snogarbagecollection
 msgctxt "fbmstrconstunit.snogarbagecollection"
 msgid "No Garbage Collection"
@@ -3828,7 +3832,7 @@ msgstr "Одна таблица за раз"
 
 #: fbmstrconstunit.sonerror
 msgid "On error"
-msgstr ""
+msgstr "При ошибке"
 
 #: fbmstrconstunit.sonevent
 msgid "On event"
@@ -4217,6 +4221,10 @@ msgstr "Подготовить запрос"
 #: fbmstrconstunit.spreserverows
 msgid "Preserve rows"
 msgstr "Сохранять строки"
+
+#: fbmstrconstunit.spressaddtoaddnewshedule
+msgid "Press ADD to add new shedule"
+msgstr "Нажмите ДОБАВИТЬ для добавления нового времени запуска"
 
 #: fbmstrconstunit.spressshiftspacetoactivate
 msgid "Press Shift+Space to activate"

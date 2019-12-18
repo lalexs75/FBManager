@@ -689,7 +689,7 @@ type
 
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
-    procedure RefreshObjectsBegin(const ASQLText:string);override;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
 
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
@@ -1652,11 +1652,11 @@ end;
 
 procedure TSQLEngineFireBird.RefreshObjectsBeginFull;
 begin
-  RefreshObjectsBegin(fbSqlModule.sqlDomains.Strings.Text);
-  RefreshObjectsBegin(fbSqlModule.ssqlSelectTables.Strings.Text);
+  RefreshObjectsBegin(fbSqlModule.sqlDomains.Strings.Text, false);
+  RefreshObjectsBegin(fbSqlModule.ssqlSelectTables.Strings.Text, false);
   if ServerVersion in [gds_verFirebird3_0] then
   begin
-    RefreshObjectsBegin(fbSqlModule.sFunctions.Strings.Text);
+    RefreshObjectsBegin(fbSqlModule.sFunctions.Strings.Text, false);
   end;
 end;
 
@@ -1670,7 +1670,8 @@ begin
   end;
 end;
 
-procedure TSQLEngineFireBird.RefreshObjectsBegin(const ASQLText: string);
+procedure TSQLEngineFireBird.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 var
   DBObj: TDBItems;
   FQuery: TUIBQuery;

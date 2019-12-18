@@ -224,7 +224,9 @@ begin
           RecreatePages
         else
           RefreshPages;
-        FInspectorRecord.UpdateCaption1;
+
+        if OldState<>sdboCreate then
+          FInspectorRecord.UpdateCaption1;
 
         SetPageNum(0);
         if Assigned(OnCreateNewDBObject) then

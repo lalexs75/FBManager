@@ -43,7 +43,6 @@ type
     sPGIndex: TRxTextHolder;
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
-    sPGRelationFields: TRxTextHolder;
     sPGClass: TRxTextHolder;
     sqlPGFuntions: TRxTextHolder;
     sPGSystem: TRxTextHolder;
@@ -53,7 +52,6 @@ type
     sPGStatistics: TRxTextHolder;
     sqlSequence_v10: TStrHolder;
     sqlTypesList: TStrHolder;
-    sqlIndexTable: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;
     sql_PG_DomainRefresh: TStrHolder;
@@ -61,7 +59,6 @@ type
     sql_Pg_Rule: TStrHolder;
     sql_PG_TypesListAll: TStrHolder;
     sqlSequence: TStrHolder;
-    sPGTasks: TStrHolder;
     pgCollations: TStrHolder;
     ttt1: TStrHolder;
   private

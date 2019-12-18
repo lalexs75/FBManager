@@ -900,7 +900,7 @@ type
     procedure FillCharSetList(const List: TStrings); virtual;
     procedure FillCollationList(const ACharSet:string; const List: TStrings); virtual;
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):boolean; virtual;
-    procedure RefreshObjectsBegin(const ASQLText:string);virtual;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);virtual;
     procedure RefreshObjectsEnd(const ASQLText:string);virtual;
 
     procedure RefreshObjectsBeginFull;virtual;
@@ -2001,7 +2001,8 @@ begin
   Result:=false;
 end;
 
-procedure TSQLEngineAbstract.RefreshObjectsBegin(const ASQLText:string);
+procedure TSQLEngineAbstract.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 begin
 
 end;
@@ -2244,7 +2245,7 @@ begin
     S:=DBMSObjectsList;
     if S<>'' then
     begin
-      OwnerDB.RefreshObjectsBegin(S);
+      OwnerDB.RefreshObjectsBegin(S, (sepSystemExec in FDropModeParams));
       DL:=OwnerDB.CashedItems[S];
 
       if Assigned(DL) then

@@ -85,6 +85,7 @@ begin
   CheckBox1.Checked:=TPGTask(DBObject).Enabled;
 
   ComboBox1.Items.Assign(TPGTasksRoot(DBObject.OwnerRoot).JobClassList);
+
   for i:=0 to ComboBox1.Items.Count-1 do
     if PtrInt(ComboBox1.Items.Objects[i]) = TPGTask(DBObject).TaskClassID then
     begin

@@ -3395,6 +3395,10 @@ msgstr ""
 msgid "Next run"
 msgstr ""
 
+#: fbmstrconstunit.sno
+msgid "No"
+msgstr ""
+
 #: fbmstrconstunit.snogarbagecollection
 msgid "No Garbage Collection"
 msgstr ""
@@ -4079,6 +4083,10 @@ msgstr ""
 
 #: fbmstrconstunit.spreserverows
 msgid "Preserve rows"
+msgstr ""
+
+#: fbmstrconstunit.spressaddtoaddnewshedule
+msgid "Press ADD to add new shedule"
 msgstr ""
 
 #: fbmstrconstunit.spressshiftspacetoactivate

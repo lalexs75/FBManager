@@ -7,8 +7,8 @@ object pgSqlTextModule: TpgSqlTextModule
   object sqlTypesList: TStrHolder
     Capacity = 40
     Macros = <>
-    Left = 40
-    Top = 36
+    Left = 376
+    Top = 186
     StrData = (
       ''
       '73656c656374'
@@ -51,41 +51,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020616e64'
       '2020202070675f747970652e747970656c656d203d2030'
       '2a2f'
-    )
-  end
-  object sqlIndexTable: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 96
-    Top = 184
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f636c6173732e6f696420617320696e7465676572292c20202020202020202020202020202d2d20d09ad0bed0b420d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '202070675f636c6173732e72656c6e616d652c202020202020202020202d2d20d09dd0b0d0b8d0bcd0b5d0bdd0bed0b2d0b0d0bdd0b8d0b520d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '202070675f636c6173732e72656c7461626c6573706163652c202020202d2d20d0a2d0b0d0b1d0bbd0b8d187d0bdd0bed0b520d0bfd180d0bed181d182d180d0b0d0bdd181d182d0b2d0be2c20d181d0bed0b4d0b5d180d0b6d0b0d189d0b5d0b520d0b8d0bdd0b4d0b5d0bad181'
-      '202070675f696e6465782e2a'
-      '2d2d202070675f696e6465782e696e646973756e697175652020202020202d2d20d09fd180d0b8d0b7d0bdd0b0d0ba20d183d0bdd0b8d0bad0b0d0bbd18cd0bdd0bed181d182d0b820d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '2d2d202070675f636c6173732e72656c616d2c2020202020202020202020202d2d'
-      '2d2d202070675f696e6465782e696e64657872656c69642c202020202020202d2d20d09ad0bed0b420d0b8d0bdd0b4d0b5d0bad181d0b0202870675f636c6173732e6f696429'
-      '2d2d202070675f696e6465782e696e6472656c69642c2020202020202020202d2d20d09ad0bed0b420d182d0b0d0b1d0bbd0b8d186d18b2c20d0ba20d0bad0bed182d0bed180d0bed0b920d0bed182d0bdd0bed181d0b8d182d181d18f20d0b8d0bdd0b4d0b5d0bad181'
-      '2d2d202070675f696e6465782e696e646e617474732c2020202020202020202d2d20d09ad0bed0bb2dd0b2d0be20d0bfd0bed0bbd0b5d0b92c20d0b8d181d0bfd0bed0bbd18cd0b7d183d0b5d0bcd18bd18520d0b4d0bbd18f20d0bfd0bed181d182d180d0bed0b5d0bdd0b8d18f20d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '2d2d202070675f696e6465782e696e6469737072696d6172792c20202020202d2d20d09fd180d0b8d0b7d0bdd0b0d0ba20d182d0bed0b3d0be2c20d187d182d0be20d0b8d0bdd0b4d0b5d0bad18120d18fd0b2d0bbd18fd0b5d182d181d18f20d0bfd180d0b5d0b2d0b8d187d0bdd18bd0bc20d0bad0bbd18ed187d0b5d0bc20d182d0b0d0b1d0bbd0b8d186d18b'
-      '2d2d202070675f696e6465782e696e646973636c757374657265642c2020202d2d20d09fd180d0b8d0b7d0bdd0b0d0ba20d0bad0bbd0b0d181d182d0b5d180d0bdd0bed0b3d0be20d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '2d2d202070675f696e6465782e696e64697376616c69642c'
-      '2d2d202070675f696e6465782e696e64636865636b786d696e2c'
-      '2d2d202070675f696e6465782e696e64697372656164792c'
-      '2d2d202070675f696e6465782e696e6465787072732c2020202020202020202d2d20d0a1d182d180d0bed0bad0b020d0b2d18bd180d0b0d0b6d0b5d0bdd0b8d18f20d0b8d0bdd0b4d0b5d0bad181d0b0'
-      '2d2d202070675f696e6465782e696e6470726564'
-      '66726f6d'
-      '202070675f636c617373'
-      '2020696e6e6572206a6f696e2070675f696e646578206f6e202870675f696e6465782e696e64657872656c6964203d2070675f636c6173732e6f696429'
-      '7768657265'
-      '2020202070675f636c6173732e72656c6b696e64203d20276927'
-      '2020616e64'
-      '2020202070675f696e6465782e696e6472656c6964203d20203a696e6472656c6964'
-      '6f72646572206279'
-      '202070675f636c6173732e72656c6e616d65'
     )
   end
   object sqlPgDepends: TStrHolder
@@ -338,31 +303,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020202070675f636c6173732e72656c6b696e64203d20275327'
       '2020616e64'
       '2020202070675f636c6173732e72656c6e616d657370616365203d202564'
-    )
-  end
-  object sPGTasks: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 856
-    Top = 36
-    StrData = (
-      ''
-      '73656c656374'
-      '20207067615f6a6f622e6a6f6269642c'
-      '20207067615f6a6f622e6a6f626a636c69642c20'
-      '20207067615f6a6f622e6a6f626e616d652c20'
-      '20207067615f6a6f622e6a6f62646573632c20'
-      '20207067615f6a6f622e6a6f62686f73746167656e742c20'
-      '20207067615f6a6f622e6a6f62656e61626c65642c20'
-      '20207067615f6a6f622e6a6f62637265617465642c20'
-      '20207067615f6a6f622e6a6f626368616e6765642c20'
-      '20207067615f6a6f622e6a6f626167656e7469642c20'
-      '20207067615f6a6f622e6a6f626e65787472756e2c20'
-      '20207067615f6a6f622e6a6f626c61737472756e20'
-      '66726f6d20'
-      '202070676167656e742e7067615f6a6f6220'
-      '6f7264657220627920'
-      '20207067615f6a6f622e6a6f626e616d6520'
     )
   end
   object ttt1: TStrHolder
@@ -986,9 +926,70 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 432
     Top = 256
   end
-  object sPGRelationFields: TRxTextHolder
+  object sPGRelation: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
+      item
+        Caption = 'sqlPGRelation'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.*,'
+          '  tst.reloptions as tst_reloptions,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          'WHERE'
+          '    (pg_class.relkind in (''r'', ''p''))'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlPGRelation10'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),'
+          '  pg_class.*,'
+          '  (CASE WHEN pg_class.relkind = ''p'' THEN pg_get_partkeydef(pg_class.oid) ELSE '''' END) AS partition_type,'
+          '  tst.reloptions as tst_reloptions,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
+          '   where'
+          '       pg_description.objsubid = 0'
+          '     and'
+          '       pg_class1.relname = ''pg_class'''
+          '     and'
+          '       pg_description.objoid = pg_class.oid) as description'
+          'from'
+          '  pg_class'
+          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
+          'WHERE'
+          '    (pg_class.relkind in (''r'', ''p''))'
+          '  and'
+          '    (pg_class.relnamespace = :relnamespace)'
+          '  and'
+          '    (pg_class.relname  =  :relname)'
+          ''
+        )
+      end    
       item
         Caption = 'RelationFields'
         Lines.Strings = (
@@ -1055,73 +1056,6 @@ object pgSqlTextModule: TpgSqlTextModule
           '    not pg_attribute.attisdropped'
           'order by'
           '  pg_attribute.attnum'
-          ''
-        )
-      end>
-    Left = 96
-    Top = 256
-  end
-  object sPGRelation: TRxTextHolder
-    Highlighter = rxSynSQL
-    Items = <    
-      item
-        Caption = 'sqlPGRelation'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_class.oid as integer),'
-          '  pg_class.*,'
-          '  tst.reloptions as tst_reloptions,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description'
-          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
-          '   where'
-          '       pg_description.objsubid = 0'
-          '     and'
-          '       pg_class1.relname = ''pg_class'''
-          '     and'
-          '       pg_description.objoid = pg_class.oid) as description'
-          'from'
-          '  pg_class'
-          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
-          'WHERE'
-          '    (pg_class.relkind in (''r'', ''p''))'
-          '  and'
-          '    (pg_class.relnamespace = :relnamespace)'
-          '  and'
-          '    (pg_class.relname  =  :relname)'
-          ''
-        )
-      end    
-      item
-        Caption = 'sqlPGRelation10'
-        Lines.Strings = (
-          'select'
-          '  cast(pg_class.oid as integer),'
-          '  pg_class.*,'
-          '  (CASE WHEN pg_class.relkind = ''p'' THEN pg_get_partkeydef(pg_class.oid) ELSE '''' END) AS partition_type,'
-          '  tst.reloptions as tst_reloptions,'
-          '  (select'
-          '     pg_description.description'
-          '   from'
-          '     pg_description'
-          '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
-          '   where'
-          '       pg_description.objsubid = 0'
-          '     and'
-          '       pg_class1.relname = ''pg_class'''
-          '     and'
-          '       pg_description.objoid = pg_class.oid) as description'
-          'from'
-          '  pg_class'
-          '  LEFT OUTER JOIN pg_class tst ON tst.oid = pg_class.reltoastrelid'
-          'WHERE'
-          '    (pg_class.relkind in (''r'', ''p''))'
-          '  and'
-          '    (pg_class.relnamespace = :relnamespace)'
-          '  and'
-          '    (pg_class.relname  =  :relname)'
           ''
         )
       end>
@@ -1346,6 +1280,38 @@ object pgSqlTextModule: TpgSqlTextModule
           'order by'
           '   pg_attribute.attnum'
           ''
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlIndexTable'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_class.oid as integer),              -- Код индекса'
+          '  pg_class.relname,          -- Наименование индекса'
+          '  pg_class.reltablespace,    -- Табличное пространство, содержащее индекс'
+          '  pg_index.*'
+          '--  pg_index.indisunique      -- Признак уникальности индекса'
+          '--  pg_class.relam,            --'
+          '--  pg_index.indexrelid,       -- Код индекса (pg_class.oid)'
+          '--  pg_index.indrelid,         -- Код таблицы, к которой относится индекс'
+          '--  pg_index.indnatts,         -- Кол-во полей, используемых для построения индекса'
+          '--  pg_index.indisprimary,     -- Признак того, что индекс является превичным ключем таблицы'
+          '--  pg_index.indisclustered,   -- Признак кластерного индекса'
+          '--  pg_index.indisvalid,'
+          '--  pg_index.indcheckxmin,'
+          '--  pg_index.indisready,'
+          '--  pg_index.indexprs,         -- Строка выражения индекса'
+          '--  pg_index.indpred'
+          'from'
+          '  pg_class'
+          '  inner join pg_index on (pg_index.indexrelid = pg_class.oid)'
+          'where'
+          '    pg_class.relkind = ''i'''
+          '  and'
+          '    pg_index.indrelid =  :indrelid'
+          'order by'
+          '  pg_class.relname'
           ''
         )
       end>
@@ -1770,6 +1736,7 @@ object pgSqlTextModule: TpgSqlTextModule
         Caption = 'pgTasksJobData'
         Lines.Strings = (
           'select'
+          '  pga_job.jobid,'
           '  pga_job.jobjclid,'
           '  pga_job.jobname,'
           '  pga_job.jobdesc,'
@@ -1783,8 +1750,9 @@ object pgSqlTextModule: TpgSqlTextModule
           'from'
           '  pgagent.pga_job'
           'where'
-          '  pga_job.jobid = :jobid'
-          ''
+          '/*    pga_job.jobid = :jobid'
+          '  or */'
+          '    pga_job.jobname = :jobname'
         )
       end    
       item
@@ -1799,6 +1767,42 @@ object pgSqlTextModule: TpgSqlTextModule
           'order by'
           '  pg_database.datname'
           ''
+        )
+      end    
+      item
+        Caption = 'sPGTasks'
+        Lines.Strings = (
+          'select'
+          '  pga_job.jobid,'
+          '  pga_job.jobjclid,'
+          '  pga_job.jobname,'
+          '  pga_job.jobdesc,'
+          '  pga_job.jobhostagent,'
+          '  pga_job.jobenabled,'
+          '  pga_job.jobcreated,'
+          '  pga_job.jobchanged,'
+          '  pga_job.jobagentid,'
+          '  pga_job.jobnextrun,'
+          '  pga_job.joblastrun'
+          'from'
+          '  pgagent.pga_job'
+          'order by'
+          '  pga_job.jobname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sTasksAll'
+        Lines.Strings = (
+          'select'
+          '  cast(pga_job.jobid as integer),'
+          '  cast(pga_job.jobid as integer),'
+          '  pga_job.jobname,'
+          '  pga_job.jobdesc as description'
+          'from'
+          '  pgagent.pga_job'
+          'order by'
+          '  pga_job.jobname'
         )
       end>
     Left = 32
@@ -2135,7 +2139,7 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 160
-    Top = 36
+    Left = 136
+    Top = 104
   end
 end

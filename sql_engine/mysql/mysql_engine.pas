@@ -352,7 +352,7 @@ type
 
 
     //Create connection dialog functions
-    procedure RefreshObjectsBegin(const ASQLText:string);override;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
 
     property ServerVersion:TMySQLServerVersion read FServerVersion write FServerVersion;
     property TriggersRoot:TMySQLTriggersRoot read FTriggersRoot;
@@ -2520,7 +2520,8 @@ begin
   SQLScript.Free;
 end;
 
-procedure TSQLEngineMySQL.RefreshObjectsBegin(const ASQLText: string);
+procedure TSQLEngineMySQL.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 var
   DBObj: TDBItems;
   FQuery: TZQuery;

@@ -41,12 +41,13 @@ type
   private
     FJobClassList: TStringList;
   protected
-    //
+    function DBMSObjectsList:string; override;
+    procedure RefreshClassList;
   public
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
     function GetObjectType: string;override;
-    procedure RefreshGroup; override;
+    function JobClassName(AJobClassID:Integer):string;
     property JobClassList:TStringList read FJobClassList;
   end;
 
@@ -123,7 +124,7 @@ type
   TPGTaskShedule = class
   private
     FDescription: string;
-    FIndex:integer;
+    //FIndex:integer;
     FID:integer;
     FName:string;
     FEnabled:boolean;
@@ -145,6 +146,7 @@ type
     Minutes:TMinutesArray;
     constructor Create;
     procedure Assign(From:TPGTaskShedule);
+    function IsEqual(From:TPGTaskShedule): Boolean;
 
     function MonthStr:string; inline;
     function DayMonthStr:string; inline;
@@ -152,7 +154,7 @@ type
     function HoursStr:string; inline;
     function MinutesStr:string; inline;
 
-    property Index:integer read FIndex write FIndex;
+    //property Index:integer read FIndex write FIndex;
     property ID:integer read FID write FID;
     property Name:string read FName write FName;
     property Description:string read FDescription write FDescription;
@@ -174,6 +176,7 @@ type
     procedure Assign(ATaskSteps:TPGTaskSheduleList);
     function GetEnumerator: TPGTaskSheduleListEnumerator;
     function Add:TPGTaskShedule;
+    function Find(AID:Integer):TPGTaskShedule;
     procedure Clear;
     property Item[AIndex:integer]:TPGTaskShedule read GetItem; default;
     property Count:integer read GetCount;
@@ -315,6 +318,7 @@ type
   TPGSQLTaskAlter = class(TSQLCommandDDL)
   private
     FOperators: TPGAlterTaskOperators;
+    FTaskID: Integer;
   protected
     procedure MakeSQL; override;
   public
@@ -324,6 +328,7 @@ type
     procedure Assign(ASource:TSQLObjectAbstract);override;
     function AddOperator(AlterAction: TPGSQLTaskAlterAction): TPGAlterTaskOperator;
     property Operators:TPGAlterTaskOperators read FOperators;
+    property TaskID:Integer read FTaskID write FTaskID;
   end;
 
   { TPGSQLDropTask }
@@ -338,7 +343,18 @@ type
   end;
 
 implementation
-uses rxstrutils, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit, StrUtils;
+uses rxstrutils, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit,
+  fbmToolsUnit, StrUtils;
+
+function IsEqualArrayBool(const A, B: array of boolean): Boolean;
+var
+  i: Integer;
+begin
+  Result:=Length(A) = Length(B);
+  if Result then
+    for i:=Low(A) to High(A) do
+      if A[i]<>B[i] then Exit(false);
+end;
 
 function DoMakeArray(const A: array of boolean): string;
 var
@@ -461,14 +477,14 @@ begin
       'jscname = ' + AnsiQuotedStr(AShedule.Name, '''') + ',' +
       'jscdesc = ' + AnsiQuotedStr(AShedule.Description, '''')  + ',' +
       'jscenabled = ' +BoolToStr(AShedule.Enabled, true) + ', '+
-      'jscweekdays = ''{' + DoMakeArray(AShedule.DayWeek) + '}'', '+
-      'jscmonthdays = ''{' + DoMakeArray(AShedule.DayMonth)+'}'', '+
-      'jscmonths = ''{' + DoMakeArray(AShedule.Month)+'}'', '+
-      'jscminutes = ''{' + DoMakeArray(AShedule.Minutes)+'}'', '+
-      'jschours = ''{' + DoMakeArray(AShedule.Hours)+'}'', '+
+      'jscweekdays = ''' + DoMakeArray(AShedule.DayWeek) + ''', '+
+      'jscmonthdays = ''' + DoMakeArray(AShedule.DayMonth)+''', '+
+      'jscmonths = ''' + DoMakeArray(AShedule.Month)+''', '+
+      'jscminutes = ''' + DoMakeArray(AShedule.Minutes)+''', '+
+      'jschours = ''' + DoMakeArray(AShedule.Hours)+''', '+
       'jscstart = ''' + DateTimeToStr(AShedule.DateStart) + ''', ' +
       'jscend = ''' + DateTimeToStr(AShedule.DateStop) + ''' ' +
-    'WHERE jscid='+IntToStr(AShedule.ID)+';';
+    'WHERE jscid='+IntToStr(AShedule.ID)+';' + LineEnding;
 end;
 
 { TPGAlterTaskOperatorsEnumerator }
@@ -590,10 +606,12 @@ begin
       pgtaDropShedule:S:=S + '  DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(Op.ID) +';'+LineEnding;
       pgtaAlterTask:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+
                             ', jobenabled='+BoolToStr(OP.Enabled, true)+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
-      pgtaCreateTaskItem:S:=S + CreateStepSQL(IntToStr(OP.ID), OP.Step, 2);
-      pgtaCreateShedule:S:=S + CreateSheduleSQL(IntToStr(OP.ID), OP.Shedule, 2);
+      pgtaCreateTaskItem:S:=S + CreateStepSQL(IntToStr(TaskID), OP.Step, 2);
+      pgtaCreateShedule:S:=S + CreateSheduleSQL(IntToStr(TaskID), OP.Shedule, 2);
+
       pgtaAlterTaskItem:S:=S + AlterStepSQL(OP.Step, 2);
       pgtaAlterShedule:S:=S + AlterSheduleSQL(OP.Shedule, 2);
+
       pgtaAlterTaskRename:S:=S + '  UPDATE pgagent.pga_job set jobname = '+AnsiQuotedStr(OP.Caption, '''')+' where jobid='+IntToStr(Op.ID) +';'+LineEnding;
     else
       raise Exception.Create('TPGSQLTaskAlter - Unknow operator');
@@ -700,6 +718,16 @@ function TPGTaskSheduleList.Add: TPGTaskShedule;
 begin
   Result:=TPGTaskShedule.Create;
   FList.Add(Result);
+end;
+
+function TPGTaskSheduleList.Find(AID: Integer): TPGTaskShedule;
+var
+  U: TPGTaskShedule;
+begin
+  Result:=nil;
+  for U in Self do
+    if U.ID = AID then
+      Exit(U);
 end;
 
 procedure TPGTaskSheduleList.Clear;
@@ -991,7 +1019,7 @@ constructor TPGTaskShedule.Create;
 begin
   inherited Create;
   FID:=-1;
-  FIndex:=-1;
+  //FIndex:=-1;
 end;
 
 procedure TPGTaskShedule.Assign(From: TPGTaskShedule);
@@ -1008,6 +1036,24 @@ begin
   DayWeek:=From.DayWeek;
   Hours:=From.Hours;
   Minutes:=From.Minutes;
+end;
+
+function TPGTaskShedule.IsEqual(From: TPGTaskShedule): Boolean;
+begin
+  Result:=Assigned(From) and
+    (FDescription = From.FDescription) and
+    //FIndex = From.FIndex and
+    (FID = From.FID) and
+    (FName = From.FName) and
+    (FEnabled = From.FEnabled) and
+    (FDateStart = From.FDateStart) and
+    (FDateStop = From.FDateStop) and
+    IsEqualArrayBool(Month, From.Month) and
+    IsEqualArrayBool(DayMonth, From.DayMonth) and
+    IsEqualArrayBool(DayWeek, From.DayWeek) and
+    IsEqualArrayBool(Hours, From.Hours) and
+    IsEqualArrayBool(Minutes, From.Minutes)
+    ;
 end;
 
 function TPGTaskShedule.MonthStr: string; inline;
@@ -1122,6 +1168,15 @@ procedure TPGTask.InternalRefreshStatistic;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FTaskID));
+  Statistic.AddValue(sEnabled, BoolToStr(FEnabled, sYes, sNo));
+  Statistic.AddValue(sTaskClass, TPGTasksRoot(OwnerRoot).JobClassName(FTaskClassID));
+
+  Statistic.AddValue(sDateCreated, DateTimeToStr(DateCreate));
+  Statistic.AddValue(sDateModified, DateTimeToStr(DateModify));
+  Statistic.AddValue(sLastRun, DateTimeToStr(DateRunLast));
+  Statistic.AddValue(sNextRun, DateTimeToStr(DateRunNext));
+
+  Statistic.AddValue(sDescription, StrConvertDesc(FDescription));
 end;
 
 function TPGTask.GetEnableRename: boolean;
@@ -1132,10 +1187,11 @@ end;
 
 constructor TPGTask.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
-  { TODO : Необходимо реализовать отображение в дереве запрещённых задач }
   inherited Create(ADBItem, AOwnerRoot);
   FSteps:=TPGTaskSteps.Create;
   FShedule:=TPGTaskSheduleList.Create;
+  if Assigned(ADBItem) then
+    FTaskID:=ADBItem.ObjId;
 end;
 
 destructor TPGTask.Destroy;
@@ -1156,11 +1212,13 @@ begin
 
 
   Q:=TSQLEnginePostgre(OwnerDB).GetSQLSysQuery(pgSqlTextModule.sqlTasks['pgTasksJobData']);
-  Q.ParamByName('jobid').AsInteger:=FTaskID;
+  //Q.ParamByName('jobid').AsInteger:=FTaskID;
+  Q.ParamByName('jobname').AsString:=Caption;
   try
     Q.Open;
     if not Q.Eof then
     begin
+      FTaskID:=Q.FieldByName('jobid').AsInteger;
       Caption:=Q.FieldByName('jobname').AsString;
       FDescription:=Q.FieldByName('jobdesc').AsString;
       FTaskClassID:=Q.FieldByName('jobjclid').AsInteger;
@@ -1297,7 +1355,7 @@ function TPGTasksRoot.GetObjectType: string;
 begin
  Result:='Tasks';
 end;
-
+(*
 procedure TPGTasksRoot.RefreshGroup;
 var
   Q:TZQuery;
@@ -1317,7 +1375,7 @@ begin
     Q.Free;
   end;
 
-  Q:=TSQLEnginePostgre(OwnerDB).GetSQLSysQuery(pgSqlTextModule.sPGTasks.Strings.Text);
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLSysQuery(pgSqlTextModule.sqlTasks['sPGTasks']);
   try
     Q.Open;
     while not Q.Eof do
@@ -1326,6 +1384,39 @@ begin
       U.Caption:=Q.FieldByName('jobname').AsString;
       U.FTaskID:=Q.FieldByName('jobid').AsInteger;
       U.FDescription:=Q.FieldByName('jobdesc').AsString;
+      Q.Next;
+    end;
+  finally
+    Q.Free;
+  end;
+end;
+*)
+function TPGTasksRoot.JobClassName(AJobClassID: Integer): string;
+var
+  i: Integer;
+begin
+  for i:=0 to FJobClassList.Count-1 do
+    if PtrInt(FJobClassList.Objects[i]) = AJobClassID then
+      Exit(FJobClassList[i]);
+  Result:='';
+end;
+
+function TPGTasksRoot.DBMSObjectsList: string;
+begin
+  Result:=pgSqlTextModule.sqlTasks['sTasksAll'];
+end;
+
+procedure TPGTasksRoot.RefreshClassList;
+var
+  Q: TZQuery;
+begin
+  FJobClassList.Clear;
+  Q:=TSQLEnginePostgre(OwnerDB).GetSQLSysQuery(pgSqlTextModule.sqlTasks['pgTaskClassList']);
+  try
+    Q.Open;
+    while not Q.Eof do
+    begin
+      FJobClassList.AddObject(Q.FieldByName('jclname').AsString, TObject(Pointer(Q.FieldByName('jclid').AsInteger)));
       Q.Next;
     end;
   finally
@@ -1342,6 +1433,8 @@ begin
   FDBObjectKind:=okTasks;
   FDropCommandClass:=TPGSQLDropTask;
   FJobClassList:=TStringList.Create;
+
+  RefreshClassList;
 end;
 
 destructor TPGTasksRoot.Destroy;

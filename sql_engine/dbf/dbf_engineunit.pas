@@ -80,7 +80,7 @@ type
     constructor Create; override;
     destructor Destroy; override;
     //Create connection dialog functions
-    procedure RefreshObjectsBegin(const ASQLText:string);override;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
   end;
 
 implementation
@@ -163,7 +163,8 @@ begin
   inherited Destroy;
 end;
 
-procedure TDBFEngine.RefreshObjectsBegin(const ASQLText: string);
+procedure TDBFEngine.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 var
   DBObj: TDBItems;
   Rec: TRawByteSearchRec;

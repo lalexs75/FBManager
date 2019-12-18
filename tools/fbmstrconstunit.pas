@@ -227,6 +227,7 @@ resourcestring
 
   sFindInMetatadaResult             = 'Find in metadata result';
   sYes                              = 'Yes';
+  sNo                               = 'No';
 
   sNewField                         = 'New field';
   sEditField                        = 'Edit field';
@@ -1094,6 +1095,7 @@ resourcestring
   sCommandcript                     = 'Command script';
   sSuccess                          = 'Success';
   sIgnore                           = 'Ignore';
+  sPressADDtoAddNewShedule          = 'Press ADD to add new shedule';
 
   sSteps                            = 'Steps';
   sStep                             = 'Step';

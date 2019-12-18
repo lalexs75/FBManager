@@ -293,7 +293,7 @@ type
     procedure Load(const AData: TDataSet);override;
     procedure Store(const AData: TDataSet);override;
 
-    procedure RefreshObjectsBegin(const ASQLText:string);override;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
 
@@ -1782,7 +1782,8 @@ begin
   inherited Store(AData);
 end;
 
-procedure TSQLEngineSQLite3.RefreshObjectsBegin(const ASQLText: string);
+procedure TSQLEngineSQLite3.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 var
   DBObj: TDBItems;
   P: TDBItem;
@@ -1809,7 +1810,7 @@ end;
 
 procedure TSQLEngineSQLite3.RefreshObjectsBeginFull;
 begin
-  RefreshObjectsBegin(sqlite3Text.sqlTables.Strings.Text);
+  RefreshObjectsBegin(sqlite3Text.sqlTables.Strings.Text, false);
 end;
 
 procedure TSQLEngineSQLite3.RefreshObjectsEndFull;

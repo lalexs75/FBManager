@@ -1182,7 +1182,7 @@ type
     destructor Destroy; override;
     procedure Load(const AData: TDataSet);override;
     procedure Store(const AData: TDataSet);override;
-    procedure RefreshObjectsBegin(const ASQLText:string);override;
+    procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
 
     property ServerVersion:TPGServerVersion read FServerVersion write FServerVersion;
     property RealServerVersionMinor:Integer read FRealServerVersionMinor;
@@ -1664,7 +1664,7 @@ begin
   if State <> sdboEdit then exit;
   Fields.Clear;
 
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelationFields['RelationFields']);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelation['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -2286,7 +2286,7 @@ var
   Rec:TPGIndexItem;
 begin
   IndexArrayClear;
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlIndexTable.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGIndex['sqlIndexTable']);
   try
     FQuery.ParamByName('indrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -3593,7 +3593,8 @@ begin
   Result:='Postgree SQL Server';
 end;
 
-procedure TSQLEnginePostgre.RefreshObjectsBegin(const ASQLText:string);
+procedure TSQLEnginePostgre.RefreshObjectsBegin(const ASQLText: string;
+  ASystemQuery: Boolean);
 var
   DBObj: TDBItems;
   FQuery: TZQuery;
@@ -3604,7 +3605,10 @@ begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
   if DBObj.CountUse = 1 then
   begin
-    FQuery:=GetSQLQuery(ASQLText);
+    if ASystemQuery then
+      FQuery:=GetSQLSysQuery(ASQLText)
+    else
+      FQuery:=GetSQLQuery(ASQLText);
     FQuery.Open;
 
     FDesc:=FQuery.FindField('description');
@@ -4172,20 +4176,20 @@ end;
 
 procedure TSQLEnginePostgre.RefreshObjectsBeginFull;
 begin
-  RefreshObjectsBegin(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self));
-  RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self));
-  RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
-  RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text);
-  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['pgFSUserMapping']);
-  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFServ']);
-  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFDW']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsConfigs']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsDicts']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFTsParsers']);
-  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsTempl']);
+  RefreshObjectsBegin(pgSqlTextModule.sql_Pg_Rules.Strings.Text, false);
+  RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text, false);
+  RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self), false);
+  RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self), false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll'], false);
+  RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text, false);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['pgFSUserMapping'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFServ'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sForeignObj['sFDW'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsConfigs'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsDicts'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFTsParsers'], false);
+  RefreshObjectsBegin(pgSqlTextModule.sqlFts['pgFtsTempl'], false);
 end;
 
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
@@ -5133,7 +5137,7 @@ begin
   if State <> sdboEdit then exit;
   Fields.Clear;
 
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelationFields['RelationFields']);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGRelation['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -5196,7 +5200,7 @@ var
   Rec:TPGIndexItem;
 begin
   IndexArrayClear;
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sqlIndexTable.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGIndex['sqlIndexTable']);
   try
     FQuery.ParamByName('indrelid').AsInteger:=FOID;
     FQuery.Open;
@@ -6354,7 +6358,7 @@ var
 begin
   if State <> sdboEdit then exit;
   Fields.Clear;
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGRelationFields['RelationFields']);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sPGRelation['RelationFields']);
   try
     FQuery.ParamByName('attrelid').AsInteger:=FOID;
     FQuery.Open;

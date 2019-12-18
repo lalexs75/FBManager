@@ -178,7 +178,10 @@ begin
       Memo1.Text:=FCurShedule.Description;
       CheckBox1.Checked:=FCurShedule.Enabled;
       RxDateEdit1.Date:=FCurShedule.DateStart;
-      RxDateEdit2.Date:=FCurShedule.DateStart;
+      RxDateEdit2.Date:=FCurShedule.DateStop;
+      RxTimeEdit1.Time:=FCurShedule.DateStart;
+      RxTimeEdit2.Time:=FCurShedule.DateStop;
+
 
       for i:=1 to 7 do
         CheckListBox1.Checked[i-1]:=FCurShedule.DayWeek[i];
@@ -327,7 +330,6 @@ begin
     U.Assign(U1);
 
     ListBox1.Items.AddObject(U.Name, U);
-    U.Index:=ListBox1.Items.Count-1;
   end;
 
   if ListBox1.Items.Count>0 then
@@ -392,8 +394,7 @@ begin
   U:=TPGTaskShedule.Create;
   U.Name:=sShedule + ' '+IntToStr(ListBox1.Items.Count + 1);
   ListBox1.Items.AddObject(U.Name, U);
-  U.Index:=ListBox1.Items.Count-1;
-  ListBox1.ItemIndex:=U.Index;
+  ListBox1.ItemIndex:=ListBox1.Items.Count-1;
   ListBox1Click(nil);
   UpdateTaskEditor;
   PageControl1.ActivePageIndex:=0;
@@ -494,6 +495,8 @@ begin
 
   taskAdd.Caption:=sAdd;
   taskRemove.Caption:=sRemove;
+
+  Label8.Caption:=sPressADDtoAddNewShedule;
 end;
 
 constructor TpgTaskShedulePage.CreatePage(TheOwner: TComponent;
@@ -520,7 +523,7 @@ end;
 function TpgTaskShedulePage.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   FCmd: TPGSQLTaskCreate;
-  U: TPGTaskShedule;
+  U, U1: TPGTaskShedule;
   I: Integer;
   FCmd1: TPGSQLTaskAlter;
   Op: TPGAlterTaskOperator;
@@ -539,6 +542,7 @@ begin
   if ASQLObject is TPGSQLTaskAlter then
   begin
     FCmd1:=TPGSQLTaskAlter(ASQLObject);
+    FCmd1.TaskID:=TPGTask(DBObject).TaskID;
     for i:=0 to FDelList.Count-1 do
     begin
       Op:=FCmd1.AddOperator(pgtaDropShedule);
@@ -550,12 +554,17 @@ begin
       U:=TPGTaskShedule(ListBox1.Items.Objects[i]);
       if U.ID < 0 then
       begin
-        Op:=FCmd1.AddOperator(pgtaAlterShedule);
+        Op:=FCmd1.AddOperator(pgtaCreateShedule);
         Op.Shedule.Assign(U);
       end
       else
       begin
-
+        U1:=TPGTask(DBObject).Shedule.Find(U.ID);
+        if Assigned(U1) and (not U.IsEqual(U1)) then
+        begin
+          Op:=FCmd1.AddOperator(pgtaAlterShedule);
+          Op.Shedule.Assign(U);
+        end;
       end;
     end;
   end
