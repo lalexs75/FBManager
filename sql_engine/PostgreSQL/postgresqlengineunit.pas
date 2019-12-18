@@ -3291,7 +3291,7 @@ begin
   FIDTypeEventTrigger:=-1;
   FIDTypeFDWHandler:=-1;
   FIDTypeLangHandler:=-1;
-  Q:=GetSQLQuery(pgSqlTextModule.sqlTypesList.Strings.Text);
+  Q:=GetSQLQuery(pgSqlTextModule.sDomains['sqlTypesList']);
   try
     Q.Open;
     FTypeOID:=Q.FieldByName('oid');
@@ -4177,7 +4177,7 @@ end;
 procedure TSQLEnginePostgre.RefreshObjectsBeginFull;
 begin
   RefreshObjectsBegin(pgSqlTextModule.sql_Pg_Rules.Strings.Text, false);
-  RefreshObjectsBegin(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text, false);
+  RefreshObjectsBegin(pgSqlTextModule.sDomains['sql_PG_TypesListAll'], false);
   RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self), false);
   RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self), false);
   RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList'], false);
@@ -4194,7 +4194,7 @@ end;
 
 procedure TSQLEnginePostgre.RefreshObjectsEndFull;
 begin
-  RefreshObjectsEnd(pgSqlTextModule.sql_PG_TypesListAll.Strings.Text);
+  RefreshObjectsEnd(pgSqlTextModule.sDomains['sql_PG_TypesListAll']);
   RefreshObjectsEnd(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsEnd(pgSqlTextModule.PGTriggersList(Self));
   RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
@@ -5910,7 +5910,7 @@ end;
 
 function TPGDomainsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sql_PG_TypesListAll.Strings.Text;
+  Result:=pgSqlTextModule.sDomains['sql_PG_TypesListAll'];
 end;
 
 function TPGDomainsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -6045,7 +6045,7 @@ begin
   inherited RefreshObject;
 
   if State = sdboCreate then exit;
-  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sql_PG_DomainRefresh.Strings.Text);
+  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sDomains['sql_PG_DomainRefresh']);
   try
     FQuery.ParamByName('typname').AsString:=Caption;
     FQuery.ParamByName('nspname').AsString:=Schema.Caption;

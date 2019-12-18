@@ -32,6 +32,7 @@ type
   { TpgSqlTextModule }
 
   TpgSqlTextModule = class(TDataModule)
+    sDomains: TRxTextHolder;
     sTriggers: TRxTextHolder;
     sExtensions: TRxTextHolder;
     sRoleAndUser: TRxTextHolder;
@@ -51,13 +52,10 @@ type
     sForeignObj: TRxTextHolder;
     sPGStatistics: TRxTextHolder;
     sqlSequence_v10: TStrHolder;
-    sqlTypesList: TStrHolder;
     sqlPgDepends: TStrHolder;
     sqlPgGetACLParams: TStrHolder;
-    sql_PG_DomainRefresh: TStrHolder;
     sql_Pg_Rules: TStrHolder;
     sql_Pg_Rule: TStrHolder;
-    sql_PG_TypesListAll: TStrHolder;
     sqlSequence: TStrHolder;
     pgCollations: TStrHolder;
     ttt1: TStrHolder;

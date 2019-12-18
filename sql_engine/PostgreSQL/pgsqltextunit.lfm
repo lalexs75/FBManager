@@ -4,55 +4,6 @@ object pgSqlTextModule: TpgSqlTextModule
   HorizontalOffset = 349
   VerticalOffset = 123
   Width = 1081
-  object sqlTypesList: TStrHolder
-    Capacity = 40
-    Macros = <>
-    Left = 376
-    Top = 186
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f747970652e6f696420617320696e746567657229206173206f69642c'
-      '202070675f747970652e2a'
-      '2f2a2020636173742870675f747970652e747970747970652061732076617263686172283129292c'
-      '2020636173742870675f747970652e6f696420617320696e7465676572292c'
-      '202070675f747970652e7479706e616d652c'
-      '202070675f747970652e7479706e616d6573706163652c'
-      '202070675f747970652e7479706f776e65722c'
-      '202070675f747970652e7479706c656e2c'
-      '202070675f747970652e747970627976616c2c'
-      '202070675f747970652e74797063617465676f72792c'
-      '202070675f747970652e74797069737072656665727265642c'
-      '202070675f747970652e7479706973646566696e65642c'
-      '202070675f747970652e74797064656c696d2c'
-      '202070675f747970652e74797072656c69642c'
-      '202070675f747970652e747970656c656d2c'
-      '202070675f747970652e74797061727261792c'
-      '202070675f747970652e747970696e7075742c'
-      '202070675f747970652e7479706f75747075742c'
-      '202070675f747970652e747970726563656976652c'
-      '202070675f747970652e74797073656e642c'
-      '202070675f747970652e7479706d6f64696e2c'
-      '202070675f747970652e7479706d6f646f75742c'
-      '202070675f747970652e747970616e616c797a652c'
-      '202070675f747970652e747970616c69676e2c'
-      '202070675f747970652e74797073746f726167652c'
-      '202070675f747970652e7479706e6f746e756c6c2c'
-      '202070675f747970652e74797062617365747970652c'
-      '202070675f747970652e7479707479706d6f642c'
-      '202070675f747970652e7479706e64696d732c'
-      '202070675f747970652e74797064656661756c7462696e2c'
-      '202070675f747970652e74797064656661756c74202a2f'
-      '66726f6d'
-      '202070675f74797065'
-      '2f2a'
-      '7768657265'
-      '2020202070675f747970652e7479707479706520696e20282762272c2027702729'
-      '2020616e64'
-      '2020202070675f747970652e747970656c656d203d2030'
-      '2a2f'
-    )
-  end
   object sqlPgDepends: TStrHolder
     Capacity = 62
     Macros = <>
@@ -129,52 +80,6 @@ object pgSqlTextModule: TpgSqlTextModule
     Left = 40
     Top = 400
   end
-  object sql_PG_DomainRefresh: TStrHolder
-    Capacity = 37
-    Macros = <>
-    Left = 432
-    Top = 104
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f747970652e6f696420617320696e7465676572292c'
-      '202070675f747970652e7479706e616d652c'
-      '202070675f747970652e7479706c656e2c'
-      '202070675f747970652e747970656c656d2c'
-      '202070675f747970652e74797064656c696d2c'
-      '202070675f747970652e7479706e6f746e756c6c2c'
-      '202070675f747970652e7479707479706d6f642c'
-      '202070675f747970652e74797062617365747970652c'
-      '202070675f747970652e74797064656661756c742c'
-      '20202873656c656374'
-      '202020202070675f747970655f626173652e7479706e616d65'
-      '20202066726f6d'
-      '202020202070675f747970652070675f747970655f62617365'
-      '2020207768657265'
-      '202020202070675f747970655f626173652e6f6964203d2070675f747970652e74797062617365747970652920617320626173655f747970655f6e616d652c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020202020696e6e6572206a6f696e2070675f636c617373206f6e202870675f636c6173732e6f6964203d2070675f6465736372697074696f6e2e636c6173736f696429'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f747970652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f747970652729206173206465736372697074696f6e2c'
-      '20202070675f757365722e7573656e616d65206173206f776e5f757365725f6e616d652c'
-      '20202070675f636f6e73747261696e742e636f6e6e616d652c'
-      '20202070675f6765745f636f6e73747261696e746465662870675f636f6e73747261696e742e6f69642920617320636f6e737263'
-      '66726f6d'
-      '202070675f74797065'
-      '2020696e6e6572206a6f696e2070675f6e616d657370616365206f6e202870675f747970652e7479706e616d657370616365203d2070675f6e616d6573706163652e6f696429'
-      '2020696e6e6572206a6f696e2070675f75736572206f6e202870675f757365722e7573657379736964203d2070675f747970652e7479706f776e657229'
-      '20206c656674206a6f696e2070675f636f6e73747261696e74206f6e202870675f636f6e73747261696e742e636f6e7479706964203d2070675f747970652e6f696429'
-      '7768657265'
-      '20202020636173742870675f747970652e74797074797065206173207661726368617228332929203d20276427'
-      '2020616e64'
-      '2020202070675f747970652e7479706e616d65203d203a7479706e616d65'
-      '2020616e64'
-      '2020202070675f6e616d6573706163652e6e73706e616d65203d203a6e73706e616d65'
-    )
-  end
   object sql_Pg_Rules: TStrHolder
     Capacity = 64
     Macros = <>
@@ -232,44 +137,6 @@ object pgSqlTextModule: TpgSqlTextModule
       '2020696e6e6572206a6f696e2070675f636c617373206f6e202870675f636c6173732e6f6964203d2070675f726577726974652e65765f636c61737329'
       '7768657265'
       '202070675f726577726974652e72756c656e616d65203d203a72756c656e616d65'
-    )
-  end
-  object sql_PG_TypesListAll: TStrHolder
-    Capacity = 64
-    Macros = <>
-    Left = 432
-    Top = 186
-    StrData = (
-      ''
-      '73656c656374'
-      '2020636173742870675f747970652e6f696420617320696e7465676572292c'
-      '202070675f747970652e7479706e616d6573706163652c'
-      '202070675f747970652e7479706e616d652c'
-      '2020636173742870675f747970652e7479707479706520617320766172636861722833292920617320747970747970652c'
-      '202070675f747970652e7479706f776e65722c'
-      '202070675f747970652e7479706c656e2c'
-      '202070675f747970652e747970627976616c2c'
-      '202070675f747970652e747970747970652c'
-      '202070675f747970652e7479706e6f746e756c6c2c'
-      '202070675f747970652e74797062617365747970652c'
-      '20202873656c656374'
-      '202020202070675f747970655f626173652e7479706e616d65'
-      '20202066726f6d'
-      '202020202070675f747970652070675f747970655f62617365'
-      '2020207768657265'
-      '202020202070675f747970655f626173652e6f6964203d2070675f747970652e74797062617365747970652920617320626173655f747970655f6e616d652c'
-      '20202873656c656374'
-      '202020202070675f6465736372697074696f6e2e6465736372697074696f6e'
-      '20202020202d2d636f756e74282a29'
-      '20202066726f6d'
-      '202020202070675f6465736372697074696f6e'
-      '2020202020696e6e6572206a6f696e2070675f636c617373206f6e202870675f636c6173732e6f6964203d2070675f6465736372697074696f6e2e636c6173736f696429'
-      '2020207768657265'
-      '202020202070675f6465736372697074696f6e2e6f626a6f6964203d2070675f747970652e6f696420616e642070675f6465736372697074696f6e2e6f626a7375626964203d203020616e642070675f636c6173732e72656c6e616d65203d202770675f747970652729206173206465736372697074696f6e'
-      '66726f6d'
-      '202070675f74797065'
-      '6f72646572206279'
-      '202070675f747970652e7479706e616d65'
     )
   end
   object sqlSequence: TStrHolder
@@ -2141,5 +2008,135 @@ object pgSqlTextModule: TpgSqlTextModule
       end>
     Left = 136
     Top = 104
+  end
+  object sDomains: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sql_PG_DomainRefresh'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_type.oid as integer),'
+          '  pg_type.typname,'
+          '  pg_type.typlen,'
+          '  pg_type.typelem,'
+          '  pg_type.typdelim,'
+          '  pg_type.typnotnull,'
+          '  pg_type.typtypmod,'
+          '  pg_type.typbasetype,'
+          '  pg_type.typdefault,'
+          '  (select'
+          '     pg_type_base.typname'
+          '   from'
+          '     pg_type pg_type_base'
+          '   where'
+          '     pg_type_base.oid = pg_type.typbasetype) as base_type_name,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_type.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_type'') as description,'
+          '   pg_user.usename as own_user_name,'
+          '   pg_constraint.conname,'
+          '   pg_get_constraintdef(pg_constraint.oid) as consrc'
+          'from'
+          '  pg_type'
+          '  inner join pg_namespace on (pg_type.typnamespace = pg_namespace.oid)'
+          '  inner join pg_user on (pg_user.usesysid = pg_type.typowner)'
+          '  left join pg_constraint on (pg_constraint.contypid = pg_type.oid)'
+          'where'
+          '    cast(pg_type.typtype as varchar(3)) = ''d'''
+          '  and'
+          '    pg_type.typname = :typname'
+          '  and'
+          '    pg_namespace.nspname = :nspname'
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlTypesList'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_type.oid as integer) as oid,'
+          '  pg_type.*'
+          '/*  cast(pg_type.typtype as varchar(1)),'
+          '  cast(pg_type.oid as integer),'
+          '  pg_type.typname,'
+          '  pg_type.typnamespace,'
+          '  pg_type.typowner,'
+          '  pg_type.typlen,'
+          '  pg_type.typbyval,'
+          '  pg_type.typcategory,'
+          '  pg_type.typispreferred,'
+          '  pg_type.typisdefined,'
+          '  pg_type.typdelim,'
+          '  pg_type.typrelid,'
+          '  pg_type.typelem,'
+          '  pg_type.typarray,'
+          '  pg_type.typinput,'
+          '  pg_type.typoutput,'
+          '  pg_type.typreceive,'
+          '  pg_type.typsend,'
+          '  pg_type.typmodin,'
+          '  pg_type.typmodout,'
+          '  pg_type.typanalyze,'
+          '  pg_type.typalign,'
+          '  pg_type.typstorage,'
+          '  pg_type.typnotnull,'
+          '  pg_type.typbasetype,'
+          '  pg_type.typtypmod,'
+          '  pg_type.typndims,'
+          '  pg_type.typdefaultbin,'
+          '  pg_type.typdefault */'
+          'from'
+          '  pg_type'
+          '/*'
+          'where'
+          '    pg_type.typtype in (''b'', ''p'')'
+          '  and'
+          '    pg_type.typelem = 0'
+          '*/'
+          ''
+        )
+      end    
+      item
+        Caption = 'sql_PG_TypesListAll'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_type.oid as integer),'
+          '  pg_type.typnamespace,'
+          '  pg_type.typname,'
+          '  cast(pg_type.typtype as varchar(3)) as typtype,'
+          '  pg_type.typowner,'
+          '  pg_type.typlen,'
+          '  pg_type.typbyval,'
+          '  pg_type.typtype,'
+          '  pg_type.typnotnull,'
+          '  pg_type.typbasetype,'
+          '  (select'
+          '     pg_type_base.typname'
+          '   from'
+          '     pg_type pg_type_base'
+          '   where'
+          '     pg_type_base.oid = pg_type.typbasetype) as base_type_name,'
+          '  (select'
+          '     pg_description.description'
+          '     --count(*)'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_type.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_type'') as description'
+          'from'
+          '  pg_type'
+          'order by'
+          '  pg_type.typname'
+          ''
+        )
+      end>
+    Left = 37
+    Top = 36
   end
 end
