@@ -88,7 +88,6 @@ type
     FDBGroup:TDBRootObject;
 
     FCaption: string;
-    //procedure SetDescription(const AValue: string);virtual;
     function GetImageIndex:integer;virtual;
     function GetObjectType: string;virtual;
     function GetCaption: string;virtual;
@@ -108,13 +107,13 @@ type
     procedure ShowObject;virtual;
     procedure Refresh;virtual;
     procedure UpdateCaption;
+    procedure UpdateCaption1;
     procedure ShowSQLEditor;virtual;
     procedure SetSqlAssistentData(List:TStrings);virtual;
     procedure ObjectEditorSave;
     procedure ObjectEditorRestore;
     procedure SetFocus;
     procedure FillListForNames(AList:TStrings);
-    //procedure EditOpbject(AObjectName:string);
     procedure DropObject(AItem:TDBInspectorRecord);
     procedure DropObject(AObjectName:string); overload;
     function SelectObject(AObjectName: string):boolean;
@@ -125,8 +124,10 @@ type
     function EnableRename:boolean;virtual;
     function IncludedFields:boolean;virtual;
     procedure FillFieldList(List:TStrings);virtual;
+
     property Caption:string read GetCaption write SetCaption;
     property CaptionFullPatch:string read GetCaptionFullPatch;
+
     property Description:string read GetDescription {write SetDescription};
     property ObjectType:string read GetObjectType;
 
@@ -1498,6 +1499,12 @@ begin
     FOwner.SelectedIndex:=GetImageIndex;
     FOwner.StateIndex:=GetImageIndex;
   end;
+end;
+
+procedure TDBInspectorRecord.UpdateCaption1;
+begin
+  if Assigned(DBObject) and (DBObject.Caption <> FCaption) then
+    SetCaption(DBObject.Caption);
 end;
 
 procedure TDBInspectorRecord.ShowSQLEditor;

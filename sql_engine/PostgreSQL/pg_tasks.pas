@@ -1248,51 +1248,9 @@ function TPGTask.CompileSQLObject(ASqlObject: TSQLCommandDDL;
   ASqlExecParam: TSqlExecParams): boolean;
 begin
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam + [sepSystemExec]);
+//  if Result;
 end;
 
-(*
-function TPGTask.CompileTaskShedule(TS: TPGTaskShedule): boolean;
-var
-  sSQL:string;
-begin
-  Result:=false;
-  sSQL:=TS.MakeSQL;
-  if sSQL <> '' then
-  begin
-    TSQLEnginePostgre(OwnerDB).ExecSysSQL(TS.MakeSQL);
-    RefreshObject;
-    Result:=true;
-  end;
-end;
-
-function TPGTask.DeleteTaskShedule(TS: TPGTaskShedule): boolean;
-begin
-  if Assigned(TS) and (TS.FID>-1) then
-  begin
-    TSQLEnginePostgre(OwnerDB).ExecSysSQL('DELETE FROM pgagent.pga_schedule WHERE jscid='+IntToStr(TS.FID));
-    RefreshObject;
-  end;
-end;
-
-function TPGTask.CompileTaskStep(TS: TPGTaskStep): boolean;
-var
-  sSQL:string;
-begin
-  Result:=false;
-  sSQL:=TS.MakeSQL;
-  if sSQL <> '' then
-  begin
-    TSQLEnginePostgre(OwnerDB).ExecSysSQL(sSQL);
-    RefreshObject;
-    Result:=true;
-  end;
-end;
-
-function TPGTask.DeleteTaskStep(TS: TPGTaskStep): boolean;
-begin
-  Result:=false;
-end;
-*)
 class function TPGTask.DBClassTitle: string;
 begin
   Result:='Task';

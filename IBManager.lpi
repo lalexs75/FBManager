@@ -27,12 +27,12 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
-      <MinorVersionNr Value="10"/>
-      <RevisionNr Value="7"/>
-      <BuildNr Value="5580"/>
+      <MinorVersionNr Value="11"/>
+      <RevisionNr Value="1"/>
+      <BuildNr Value="5584"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
-      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.10"/>
+      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.11"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="default" Default="True"/>

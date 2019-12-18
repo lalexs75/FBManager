@@ -224,6 +224,8 @@ begin
           RecreatePages
         else
           RefreshPages;
+        FInspectorRecord.UpdateCaption1;
+
         SetPageNum(0);
         if Assigned(OnCreateNewDBObject) then
             OnCreateNewDBObject(Self, FInspectorRecord.DBObject);
