@@ -2760,6 +2760,18 @@ msgstr "Вставить/Изменить"
 msgid "INSTEAD"
 msgstr "ВМЕСТО"
 
+#: fbmstrconstunit.sinsteadofdelete
+msgid "Instead of delete"
+msgstr ""
+
+#: fbmstrconstunit.sinsteadofinsert
+msgid "Instead of insert"
+msgstr ""
+
+#: fbmstrconstunit.sinsteadofupdate
+msgid "Instead of update"
+msgstr ""
+
 #: fbmstrconstunit.sinteger
 msgid "Integer"
 msgstr "Целые числа"

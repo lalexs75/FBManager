@@ -35,7 +35,8 @@ const
   PostgreSQLDefTCPPort = 5432;
 
 type
-  TTriggersLists = array [0..5] of TList;
+  TTableTriggersLists = array [0..5] of TFPList;
+  TViewTriggersLists = array [0..2] of TFPList;
 
 type
   TSQLEnginePostgre = class;
@@ -606,7 +607,7 @@ type
     FToastAutovacuumOptions: TPGAutovacuumOptions;
     FToastRelOID: Integer;
     FToastRelOptions: String;
-    FTriggerList:TTriggersLists;
+    FTriggerList:TTableTriggersLists;
     FInhTables:TList;
     ZUpdateSQL:TZUpdateSQL;
     FOwnerID:integer;
@@ -756,6 +757,7 @@ type
     FStorageParameters: TStrings;
     FToastRelOID: Integer;
     FToastRelOptions: String;
+    FTriggerList:TViewTriggersLists;
   protected
     function GetDDLAlter : string; override;
     function GetCaptionFullPatch:string; override;
@@ -764,6 +766,13 @@ type
     property ToastRelOID:Integer read FToastRelOID;
     property ToastRelOptions: String read FToastRelOptions;
     procedure InternalRefreshStatistic; override;
+
+
+    function GetTrigger(ACat:integer; AItem: integer): TDBTriggerObject; override;
+    function GetTriggersCategories(AItem: integer): string; override;
+    function GetTriggersCategoriesType(AItem: integer): TTriggerTypes;override;
+    function GetTriggersCategoriesCount: integer; override;
+    function GetTriggersCount(AItem: integer): integer; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -776,7 +785,11 @@ type
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean;override;
 
+    procedure TriggersListRefresh; override;
+    procedure RecompileTriggers; override;
     function TriggerNew(TriggerTypes:TTriggerTypes):TDBTriggerObject;override;
+    function TriggerDelete(const ATrigger:TDBTriggerObject):Boolean;override;
+
     procedure Commit;override;
     procedure RollBack;override;
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
@@ -5498,12 +5511,12 @@ begin
   ZUpdateSQL:=TZUpdateSQL.Create(nil);
   TZQuery(FDataSet).UpdateObject:=ZUpdateSQL;
 
-  FTriggerList[0]:=TList.Create;  //before insert
-  FTriggerList[1]:=TList.Create;  //after insert
-  FTriggerList[2]:=TList.Create;  //before update
-  FTriggerList[3]:=TList.Create;  //after update
-  FTriggerList[4]:=TList.Create;  //before delete
-  FTriggerList[5]:=TList.Create;  //after delete
+  FTriggerList[0]:=TFPList.Create;  //before insert
+  FTriggerList[1]:=TFPList.Create;  //after insert
+  FTriggerList[2]:=TFPList.Create;  //before update
+  FTriggerList[3]:=TFPList.Create;  //after update
+  FTriggerList[4]:=TFPList.Create;  //before delete
+  FTriggerList[5]:=TFPList.Create;  //after delete
 end;
 
 destructor TPGTable.Destroy;
@@ -6414,9 +6427,58 @@ begin
   end;
 end;
 
+function TPGView.GetTrigger(ACat: integer; AItem: integer): TDBTriggerObject;
+begin
+  if (ACat>=0) and (ACat<3) then
+    Result:=TPGTrigger(FTriggerList[ACat].Items[AItem])
+  else
+    Result:=nil;
+end;
+
+function TPGView.GetTriggersCategories(AItem: integer): string;
+begin
+  case AItem of
+    0:Result:=sInsteadOfInsert;
+    1:Result:=sInsteadOfUpdate;
+    2:Result:=sInsteadOfDelete;
+  else
+    Result:='';
+  end;
+end;
+
+function TPGView.GetTriggersCategoriesType(AItem: integer): TTriggerTypes;
+begin
+  case AItem of
+    0:Result:=[ttInsteadOf, ttInsert];
+    1:Result:=[ttInsteadOf, ttUpdate];
+    2:Result:=[ttInsteadOf, ttDelete];
+  else
+    Result:=[];
+  end;
+end;
+
+function TPGView.GetTriggersCategoriesCount: integer;
+begin
+  Result:=3;
+  if FTriggerList[0].Count = 0 then
+    TriggersListRefresh;
+end;
+
+function TPGView.GetTriggersCount(AItem: integer): integer;
+begin
+  if (AItem >=0) and (AItem<3) then
+    Result:=FTriggerList[AItem].Count
+  else
+    Result:=0;
+end;
+
 constructor TPGView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FTriggerList[0]:=TFPList.Create;  //before insert
+  FTriggerList[1]:=TFPList.Create;  //after insert
+  FTriggerList[2]:=TFPList.Create;  //before update
+
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
@@ -6446,6 +6508,9 @@ destructor TPGView.Destroy;
 begin
   FreeAndNil(FRuleList);
   FreeAndNil(FStorageParameters);
+  FreeAndNil(FTriggerList[0]);
+  FreeAndNil(FTriggerList[1]);
+  FreeAndNil(FTriggerList[2]);
   inherited Destroy;
 end;
 
@@ -6520,6 +6585,42 @@ begin
   Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
 end;
 
+procedure TPGView.TriggersListRefresh;
+var
+  i:integer;
+  Trig:TPGTrigger;
+begin
+  FTriggerList[0].Clear;
+  FTriggerList[1].Clear;
+  FTriggerList[2].Clear;
+
+  for i:=0 to FSchema.FTriggers.CountObject - 1 do
+  begin
+    Trig:=TPGTrigger(FSchema.FTriggers.Items[i]);
+
+    if not Assigned(Trig.FTriggerTable) then
+      Trig.RefreshObject;
+
+    if Trig.FTriggerTable = Self then
+    begin
+      if ttInsteadOf in Trig.TriggerType then
+      begin
+        if ttInsert in Trig.TriggerType then
+          FTriggerList[0].Add(Trig);
+        if ttUpdate in Trig.TriggerType then
+          FTriggerList[1].Add(Trig);
+        if ttDelete in Trig.TriggerType then
+          FTriggerList[2].Add(Trig);
+      end;
+    end;
+  end;
+end;
+
+procedure TPGView.RecompileTriggers;
+begin
+  inherited RecompileTriggers;
+end;
+
 function TPGView.TriggerNew(TriggerTypes: TTriggerTypes): TDBTriggerObject;
 begin
   Result:=OwnerDB.NewObjectByKind(FSchema.Triggers, okTrigger) as TDBTriggerObject;
@@ -6530,6 +6631,11 @@ begin
     Result.Active:=true;
     Result.RefreshEditor;
   end;
+end;
+
+function TPGView.TriggerDelete(const ATrigger: TDBTriggerObject): Boolean;
+begin
+  Result:=FSchema.Triggers.DropObject(ATrigger);
 end;
 
 procedure TPGView.Commit;
@@ -6635,6 +6741,15 @@ begin
     if TPGTable(FSchema.TablesRoot.Items[i]).FOID = ATableId then
     begin
       FTriggerTable:=TPGTable(FSchema.TablesRoot.Items[i]);
+      exit;
+    end;
+  end;
+
+  for I:=0 to FSchema.Views.CountObject - 1 do
+  begin
+    if TPGView(FSchema.Views.Items[i]).FOID = ATableId then
+    begin
+      FTriggerTable:=TPGView(FSchema.Views.Items[i]);
       exit;
     end;
   end;

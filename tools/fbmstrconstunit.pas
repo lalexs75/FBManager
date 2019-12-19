@@ -538,6 +538,11 @@ resourcestring
   sAfterUpdate                      = 'After update';
   sBeforeDelete                     = 'Before delete';
   sAfterDelete                      = 'After delete';
+
+  sInsteadOfInsert                  = 'Instead of insert';
+  sInsteadOfUpdate                  = 'Instead of update';
+  sInsteadOfDelete                  = 'Instead of delete';
+
   sTriggerName                      = 'Trigger name';
   sTriggerActive                    = 'Active';
   sTriggerTable                     = 'For table';
