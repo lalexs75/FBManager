@@ -124,7 +124,8 @@ uses
   SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
   fbmToolsNV, fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit,
   fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit,
-  otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit
+  otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit, 
+pg_definitions
 
   ;
 

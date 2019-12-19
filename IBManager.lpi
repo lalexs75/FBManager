@@ -1868,6 +1868,10 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="GenerateDataUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="sql_engine/PostgreSQL/pg_definitions.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

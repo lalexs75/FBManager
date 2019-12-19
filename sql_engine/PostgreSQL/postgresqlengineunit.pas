@@ -1271,7 +1271,7 @@ type
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses
-  rxlogging, rxdbutils, ibmSqlUtilsUnit,
+  rxlogging, rxdbutils, ibmSqlUtilsUnit, pg_definitions,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   rxstrutils, pg_tasks, pgSQLEngineFTS
@@ -6789,24 +6789,32 @@ begin
 
       FActive:=Q.FieldByName('tgenabled').AsString<>'D';
       FTrTp:=Q.FieldByName('tgtype').AsInteger;
-      if FTrTp and $02 <> 0 then
-        TriggerType:=TriggerType + [ttBefore]
-      else
-        TriggerType:=TriggerType + [ttAfter];
 
-      if FTrTp and $01 <> 0 then
+      if FTrTp and pg_TRIGGER_TYPE_ROW <> 0 then
         TriggerType:=TriggerType + [ttRow]
       else
         TriggerType:=TriggerType + [ttStatement];
 
-      if FTrTp and $04 <> 0 then
+      if FTrTp and pg_TRIGGER_TYPE_INSTEAD <> 0 then
+        TriggerType:=TriggerType + [ttInsteadOf]
+      else
+      if FTrTp and pg_TRIGGER_TYPE_BEFORE <> 0 then
+        TriggerType:=TriggerType + [ttBefore]
+      else
+        TriggerType:=TriggerType + [ttAfter];
+
+
+      if FTrTp and pg_TRIGGER_TYPE_INSERT <> 0 then
         TriggerType:=TriggerType + [ttInsert];
 
-      if FTrTp and $08 <> 0 then
+      if FTrTp and pg_TRIGGER_TYPE_DELETE <> 0 then
         TriggerType:=TriggerType + [ttDelete];
 
-      if FTrTp and $10 <> 0 then
+      if FTrTp and pg_TRIGGER_TYPE_UPDATE <> 0 then
         TriggerType:=TriggerType + [ttUpdate];
+
+      if FTrTp and pg_TRIGGER_TYPE_TRUNCATE <> 0 then
+        TriggerType:=TriggerType + [ttTruncate];
 
       SetTriggerSPId(Q.FieldByName('tgfoid').AsInteger);
       SetTriggerTableId(Q.FieldByName('tgrelid').AsInteger);
