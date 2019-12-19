@@ -7072,7 +7072,7 @@ begin
     for F in Fields do
     begin
       if S1<>'' then S1:=S1 + ','+LineEnding;
-      S1:=S1 + DoFormatName(F.Caption);
+      S1:=S1 + '  ' + DoFormatName(F.Caption);
     end;
     S:=S + '('+LineEnding + S1 + ')';
   end;

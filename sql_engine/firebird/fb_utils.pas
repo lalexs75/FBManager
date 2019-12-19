@@ -216,7 +216,7 @@ function GetDefaultFB3Lib: string;
 {$IFDEF WINDOWS}
 var
   F: String;
-  {$ENDIF}
+{$ENDIF}
 begin
   {$IFDEF WINDOWS}
   F:= ExtractFileDir(ParamStr(0)) + '\fbclient.dll';
