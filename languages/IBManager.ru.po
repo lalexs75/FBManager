@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -2038,7 +2038,7 @@ msgstr "Объекты, использующие поле"
 #: fbmstrconstunit.sfieldfromcte
 #, object-pascal-format
 msgid "field from named CTE %s"
-msgstr "Поле из именнванного CTE %s"
+msgstr "поле из именованного CTE %s"
 
 #: fbmstrconstunit.sfieldfromnamedselect
 #, object-pascal-format
@@ -2762,15 +2762,15 @@ msgstr "ВМЕСТО"
 
 #: fbmstrconstunit.sinsteadofdelete
 msgid "Instead of delete"
-msgstr ""
+msgstr "Вместо delete"
 
 #: fbmstrconstunit.sinsteadofinsert
 msgid "Instead of insert"
-msgstr ""
+msgstr "Вместо insert"
 
 #: fbmstrconstunit.sinsteadofupdate
 msgid "Instead of update"
-msgstr ""
+msgstr "Вместо update"
 
 #: fbmstrconstunit.sinteger
 msgid "Integer"
@@ -4958,7 +4958,7 @@ msgstr "Версия сервера"
 
 #: fbmstrconstunit.ssetbookmarknum
 msgid "Set/Remove bookmark "
-msgstr "Установить/Снять закладку"
+msgstr "Установить/Снять закладку "
 
 #: fbmstrconstunit.sshedule
 msgid "Shedule"
@@ -6383,4 +6383,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
