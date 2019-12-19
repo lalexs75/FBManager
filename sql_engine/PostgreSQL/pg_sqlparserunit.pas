@@ -4136,7 +4136,10 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:FDeleteOnly:=true;
-    2:TableName:=AWord;
+    2:begin
+        TableName:=AWord;
+        FSelectable:=Pos('RETURNING', UpperCase(ASQLParser.SQL)) > 0;
+      end;
     3:begin
         SchemaName:=TableName;
         TableName:=AWord;
