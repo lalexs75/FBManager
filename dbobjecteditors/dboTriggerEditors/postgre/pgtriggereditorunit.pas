@@ -43,6 +43,7 @@ type
     cbLang: TComboBox;
     edtCaption: TEdit;
     edtNewProcName: TEdit;
+    GroupBox1: TGroupBox;
     lblTriggerName: TLabel;
     lblForTable: TLabel;
     lblLanguage: TLabel;
@@ -50,10 +51,12 @@ type
     ListBox2: TListBox;
     PageControl1: TPageControl;
     PageControl2: TPageControl;
+    rbBefore: TRadioButton;
+    rbAfter: TRadioButton;
+    rbInstead: TRadioButton;
     rbExistFunc: TRadioButton;
     rbCreateNewFunc: TRadioButton;
     rgRowScope: TRadioGroup;
-    rgType: TRadioGroup;
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
@@ -68,6 +71,7 @@ type
     procedure cbOnEventClick(Sender: TObject);
     procedure cbOnEventItemClick(Sender: TObject; Index: integer);
     procedure cbProcListChange(Sender: TObject);
+    procedure cbTablesChange(Sender: TObject);
     procedure ListBox2Click(Sender: TObject);
     procedure rbCreateNewFuncChange(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -128,6 +132,20 @@ begin
   end;
 end;
 
+procedure TpgTriggerEditorPage.cbTablesChange(Sender: TObject);
+var
+  DBTable:TDBDataSetObject;
+begin
+  if (cbTables.Items.Count>0) and (cbTables.ItemIndex>=0) and (cbTables.ItemIndex<cbTables.Items.Count) then
+  begin
+    DBTable:=cbTables.Items.Objects[cbTables.ItemIndex] as TDBDataSetObject;
+    cbEnabled.Enabled:=DBTable is TDBTableObject;
+    rbBefore.Enabled:=DBTable is TDBTableObject;
+    rbAfter.Enabled:=DBTable is TDBTableObject;
+    rbInstead.Enabled:=DBTable is TDBViewObject;
+  end;
+end;
+
 procedure TpgTriggerEditorPage.ListBox2Click(Sender: TObject);
 begin
   UpdateFieldButtons;
@@ -141,10 +159,14 @@ begin
   //Создадим имя тригера из меток срабатывания
   if (DBObject.State <> sdboEdit) and ((not edtCaption.Modified) or ((not edtNewProcName.Modified) and rbCreateNewFunc.Checked)) then
   begin
-    if rgType.ItemIndex = 0 then
+    if rbBefore.Checked then
       S:='_b'
     else
-      S:='_a';
+    if rbAfter.Checked then
+      S:='_a'
+    else
+    if rbInstead.Checked then
+      S:='_o';
 
     if rgRowScope.ItemIndex = 0 then
       S:=S+'r'
@@ -307,6 +329,7 @@ var
   P:TPGFunction;
   T:TPGTable;
   L:TPGLanguage;
+  V: TPGView;
 begin
   cbLang.Items.Clear;
   for i:=0 to TSQLEnginePostgre(DBObject.OwnerDB).LanguageRoot.CountObject - 1 do
@@ -319,7 +342,10 @@ begin
 
   cbEnabled.Checked:=TPGTrigger(DBObject).Active;
 
-  rgType.ItemIndex:=Ord(ttAfter in TPGTrigger(DBObject).TriggerType);
+  rbBefore.Checked:=ttBefore in TPGTrigger(DBObject).TriggerType;
+  rbAfter.Checked:=ttAfter in TPGTrigger(DBObject).TriggerType;
+  rbInstead.Checked:=ttInsteadOf in TPGTrigger(DBObject).TriggerType;
+
   rgRowScope.ItemIndex:=Ord(ttStatement in TPGTrigger(DBObject).TriggerType);
 
   cbOnEvent.Checked[0]:= ttInsert in TPGTrigger(DBObject).TriggerType;
@@ -337,13 +363,30 @@ begin
 
 
   cbTables.Clear;
+  TPGTrigger(DBObject).Schema.TablesRoot.FillListForNames(cbTables.Items, true);
+  TPGTrigger(DBObject).Schema.Views.FillListForNames(cbTables.Items, true);
+  I:=cbTables.Items.IndexOfObject(TPGTrigger(DBObject).TriggerTable);
+  if (I>-1) and (I<cbTables.Items.Count) then
+  begin
+    cbTables.ItemIndex:=I;
+    cbTablesChange(nil);
+(*
   for i:=0 to TPGTrigger(DBObject).Schema.TablesRoot.CountObject - 1 do
   begin
     T:=TPGTable(TPGTrigger(DBObject).Schema.TablesRoot.Items[i]);
-    cbTables.Items.Add(T.CaptionFullPatch);
-    cbTables.Items.Objects[cbTables.Items.Count - 1]:=T;
+    cbTables.Items.AddObject(T.CaptionFullPatch, T);
     if TPGTrigger(DBObject).TriggerTable = T then
       cbTables.ItemIndex:=cbTables.Items.Count - 1;
+  end;
+
+  for i:=0 to TPGTrigger(DBObject).Schema.Views.CountObject - 1 do
+  begin
+    V:=TPGView(TPGTrigger(DBObject).Schema.Views.Items[i]);
+    cbTables.Items.AddObject(V.CaptionFullPatch, V);
+    if TPGTrigger(DBObject).TriggerTable = V then
+      cbTables.ItemIndex:=cbTables.Items.Count - 1;
+  end;
+*)
   end;
 
   cbProcList.Items.Clear;
@@ -464,7 +507,7 @@ end;
 function TpgTriggerEditorPage.OnGetHintData(Sender: Tfdbm_SynEditorFrame;
   const S1, S2: string; out HintText: string): Boolean;
 var
-  DBTable: TPGTable;
+  DBTable: TDBDataSetObject;
   F: TDBField;
   P: TBookMark;
 begin
@@ -474,7 +517,7 @@ begin
   begin
     if (S1 = 'NEW') or (S1 = 'OLD') then
     begin
-      DBTable:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]);
+      DBTable:=TDBDataSetObject(cbTables.Items.Objects[cbTables.ItemIndex]);
       if Assigned(DBTable) then
       begin
         F:=DBTable.Fields.FieldByName(S2);
@@ -666,7 +709,7 @@ begin
   inherited Localize;
   lblTriggerName.Caption:=sTriggerName;
   cbEnabled.Caption:=sTriggerActive;
-  lblForTable.Caption:=sTriggerTable;
+  lblForTable.Caption:=sTriggerTableView;
   rbExistFunc.Caption:=sUseExistingFunction;
   rbCreateNewFunc.Caption:=sCreateNewFunction;
   lblLanguage.Caption:=sLanguage;
@@ -677,9 +720,10 @@ begin
   cbOnEvent.Items[1]:=sUpdate;
   cbOnEvent.Items[2]:=sDelete;
 
-  rgType.Caption:=sType;
-  rgType.Items[0]:=sBefore;
-  rgType.Items[1]:=sAfter;
+  GroupBox1.Caption:=sType;
+  rbBefore.Caption:=sBefore;
+  rbAfter.Caption:=sAfter;
+  rbInstead.Caption:=sINSTEAD;
 
   rgRowScope.Caption:=sRowScope;
   rgRowScope.Items[0]:=sRow;
@@ -739,8 +783,8 @@ begin
   end;
 
   FCmd.Name:=edtCaption.Text;
-  FCmd.TableName:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]).Caption;
-  FCmd.SchemaName:=TPGTable(cbTables.Items.Objects[cbTables.ItemIndex]).SchemaName;
+  FCmd.TableName:=TDBDataSetObject(cbTables.Items.Objects[cbTables.ItemIndex]).Caption;
+  FCmd.SchemaName:=TDBDataSetObject(cbTables.Items.Objects[cbTables.ItemIndex]).SchemaName;
 
   if rbCreateNewFunc.Checked then
   begin
@@ -762,10 +806,15 @@ begin
   if cbOnEvent.Checked[2] then
     FCmd.TriggerType:=FCmd.TriggerType + [ttDelete];
 
-  if rgType.ItemIndex = 0 then
+  if rbBefore.Checked then
     FCmd.TriggerType:=FCmd.TriggerType + [ttBefore]
   else
-    FCmd.TriggerType:=FCmd.TriggerType + [ttAfter];
+  if rbAfter.Checked then
+    FCmd.TriggerType:=FCmd.TriggerType + [ttAfter]
+  else
+  if rbInstead.Checked then
+    FCmd.TriggerType:=FCmd.TriggerType + [ttInsteadOf];
+
 
   if rgRowScope.ItemIndex = 0 then
     FCmd.TriggerType:=FCmd.TriggerType + [ttRow]
@@ -773,11 +822,16 @@ begin
     FCmd.TriggerType:=FCmd.TriggerType + [ttStatement];
 
 
+  if TDBDataSetObject(cbTables.Items.Objects[cbTables.ItemIndex]) is TDBViewObject then
+    FCmd.TriggerState:=ttsUnknow
+  else
   if (DBObject.State = sdboCreate) or (cbEnabled.Checked <> TPGTrigger(DBObject).Active) then
+  begin
     if cbEnabled.Checked then
       FCmd.TriggerState:=ttsEnabled
     else
       FCmd.TriggerState:=ttsDisable;
+  end;
 
   FCmd.TriggerWhen:=Trim(edtWhenFrame.EditorText);
 

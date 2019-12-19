@@ -6767,20 +6767,26 @@ end;
 
 function TPGTrigger.InternalGetDDLCreate: string;
 var
-  TrRec:TPGTrigerDef;
-  ACL:TStringList;
-  i:integer;
   FCmd: TPGSQLCreateTrigger;
   S: String;
+  TT: TDBDataSetObject;
 begin
   FCmd:=TPGSQLCreateTrigger.Create(nil);
   FCmd.Name:=Caption;
   FCmd.Description:=Description;
   FCmd.TriggerType:=TriggerType;
-  if Active then
-    FCmd.TriggerState:=ttsEnabled
+
+  TT:=TriggerTable;
+  if (not Assigned(TT)) or (TT is TDBViewObject) then
+    FCmd.TriggerState:=ttsUnknow
   else
-    FCmd.TriggerState:=ttsDisable;
+  begin
+    if Active then
+      FCmd.TriggerState:=ttsEnabled
+    else
+      FCmd.TriggerState:=ttsDisable;
+  end;
+
   FCmd.TriggerWhen:=TriggerWhen;
   for S in UpdateFieldsWhere do
     FCmd.Params.AddParam(S);

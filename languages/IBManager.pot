@@ -2662,7 +2662,7 @@ msgid "Insert/Update"
 msgstr ""
 
 #: fbmstrconstunit.sinstead
-msgid "INSTEAD"
+msgid "Instead"
 msgstr ""
 
 #: fbmstrconstunit.sinsteadofdelete
@@ -5615,6 +5615,10 @@ msgstr ""
 #: fbmstrconstunit.striggertable
 msgctxt "fbmstrconstunit.striggertable"
 msgid "For table"
+msgstr ""
+
+#: fbmstrconstunit.striggertableview
+msgid "For table\\view"
 msgstr ""
 
 #: fbmstrconstunit.striggertext

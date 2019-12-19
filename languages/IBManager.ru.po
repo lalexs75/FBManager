@@ -2757,20 +2757,20 @@ msgid "Insert/Update"
 msgstr "Вставить/Изменить"
 
 #: fbmstrconstunit.sinstead
-msgid "INSTEAD"
-msgstr "ВМЕСТО"
+msgid "Instead"
+msgstr "Вместо"
 
 #: fbmstrconstunit.sinsteadofdelete
 msgid "Instead of delete"
-msgstr "Вместо delete"
+msgstr "Вместо удаления"
 
 #: fbmstrconstunit.sinsteadofinsert
 msgid "Instead of insert"
-msgstr "Вместо insert"
+msgstr "Вместо вставки"
 
 #: fbmstrconstunit.sinsteadofupdate
 msgid "Instead of update"
-msgstr "Вместо update"
+msgstr "Вместо изменения"
 
 #: fbmstrconstunit.sinteger
 msgid "Integer"
@@ -5809,6 +5809,10 @@ msgctxt "fbmstrconstunit.striggertable"
 msgid "For table"
 msgstr "Для таблицы"
 
+#: fbmstrconstunit.striggertableview
+msgid "For table\\view"
+msgstr "Для таблицы\\представления"
+
 #: fbmstrconstunit.striggertext
 msgid "Trigger text"
 msgstr "Текст триггера"
@@ -6383,3 +6387,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

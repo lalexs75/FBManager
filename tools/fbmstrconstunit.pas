@@ -546,6 +546,7 @@ resourcestring
   sTriggerName                      = 'Trigger name';
   sTriggerActive                    = 'Active';
   sTriggerTable                     = 'For table';
+  sTriggerTableView                 = 'For table\view';
   sTriggerForEvent                  = 'For event';
   sUseExistingFunction              = 'Use existing function';
   sUseExistingGenerator             = 'Use existing generator';
@@ -581,7 +582,7 @@ resourcestring
   sUnselectAll                      = 'Unselect all';
   sInvertSelections                 = 'Invert selections';
   sInvoker                          = 'Invoker';
-  sINSTEAD                          = 'INSTEAD';
+  sInstead                          = 'Instead';
   sNOTHING                          = 'NOTHING';
   sRuleEvent                        = 'Rule event';
   sFTSConfigurationName             = 'FTS configuration name';

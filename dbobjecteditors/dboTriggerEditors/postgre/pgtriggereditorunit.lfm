@@ -65,50 +65,17 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             OnClick = cbOnEventClick
             TabOrder = 0
           end
-          object rgType: TRadioGroup
-            AnchorSideLeft.Control = rgRowScope
-            AnchorSideTop.Control = TabSheet1
-            AnchorSideRight.Control = rgRowScope
-            AnchorSideBottom.Control = cbOnEvent
-            AnchorSideBottom.Side = asrBottom
-            Left = 248
-            Height = 105
-            Top = 6
-            Width = 81
-            Anchors = [akTop, akRight, akBottom]
-            AutoFill = True
-            AutoSize = True
-            BorderSpacing.Top = 6
-            BorderSpacing.Right = 6
-            Caption = 'Type'
-            ChildSizing.LeftRightSpacing = 6
-            ChildSizing.TopBottomSpacing = 6
-            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-            ChildSizing.EnlargeVertical = crsHomogenousChildResize
-            ChildSizing.ShrinkHorizontal = crsScaleChilds
-            ChildSizing.ShrinkVertical = crsScaleChilds
-            ChildSizing.Layout = cclLeftToRightThenTopToBottom
-            ChildSizing.ControlsPerLine = 1
-            ClientHeight = 87
-            ClientWidth = 79
-            Items.Strings = (
-              'Before'
-              'After'
-            )
-            OnClick = cbOnEventClick
-            TabOrder = 1
-          end
           object cbOnEvent: TCheckGroup
             AnchorSideLeft.Control = TabSheet1
             AnchorSideTop.Control = cbEnabled
             AnchorSideTop.Side = asrBottom
-            AnchorSideRight.Control = rgType
+            AnchorSideRight.Control = GroupBox1
             AnchorSideBottom.Control = rgRowScope
             AnchorSideBottom.Side = asrBottom
             Left = 6
             Height = 76
             Top = 35
-            Width = 236
+            Width = 232
             Anchors = [akTop, akLeft, akRight]
             AutoFill = True
             AutoSize = True
@@ -125,7 +92,7 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
             ClientHeight = 58
-            ClientWidth = 234
+            ClientWidth = 230
             Columns = 2
             Items.Strings = (
               'Insert'
@@ -134,7 +101,7 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             )
             OnClick = cbOnEventClick
             OnItemClick = cbOnEventItemClick
-            TabOrder = 2
+            TabOrder = 1
             Data = {
               03000000020202
             }
@@ -148,7 +115,60 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
             Width = 62
             BorderSpacing.Around = 6
             Caption = 'Active'
+            TabOrder = 2
+          end
+          object GroupBox1: TGroupBox
+            AnchorSideTop.Control = TabSheet1
+            AnchorSideRight.Control = rgRowScope
+            AnchorSideBottom.Side = asrBottom
+            Left = 244
+            Height = 105
+            Top = 6
+            Width = 85
+            Anchors = [akTop, akRight, akBottom]
+            AutoSize = True
+            BorderSpacing.Top = 6
+            BorderSpacing.Right = 6
+            Caption = 'Type'
+            ClientHeight = 87
+            ClientWidth = 83
             TabOrder = 3
+            object rbBefore: TRadioButton
+              AnchorSideLeft.Control = GroupBox1
+              AnchorSideTop.Side = asrBottom
+              Left = 6
+              Height = 23
+              Top = 6
+              Width = 67
+              BorderSpacing.Around = 6
+              Caption = 'Before'
+              Checked = True
+              TabOrder = 0
+            end
+            object rbAfter: TRadioButton
+              AnchorSideLeft.Control = GroupBox1
+              AnchorSideTop.Control = rbBefore
+              AnchorSideTop.Side = asrBottom
+              Left = 6
+              Height = 23
+              Top = 35
+              Width = 57
+              BorderSpacing.Around = 6
+              Caption = 'After'
+              TabOrder = 1
+            end
+            object rbInstead: TRadioButton
+              AnchorSideLeft.Control = GroupBox1
+              AnchorSideTop.Control = rbAfter
+              AnchorSideTop.Side = asrBottom
+              Left = 6
+              Height = 23
+              Top = 64
+              Width = 71
+              BorderSpacing.Around = 6
+              Caption = 'Instead'
+              TabOrder = 2
+            end
           end
         end
         object TabSheet2: TTabSheet
@@ -460,10 +480,10 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         Left = 7
         Height = 17
         Top = 86
-        Width = 55
+        Width = 92
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
-        Caption = 'For table'
+        Caption = 'For table / view'
         ParentColor = False
       end
       object lblTriggerName: TLabel
@@ -495,13 +515,14 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
         AnchorSideTop.Control = edtCaption
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Splitter2
-        Left = 68
+        Left = 105
         Height = 33
         Top = 70
-        Width = 469
+        Width = 432
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
+        OnChange = cbTablesChange
         Style = csDropDownList
         TabOrder = 5
       end
