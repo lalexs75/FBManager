@@ -119,7 +119,7 @@ begin
     end
     else
     if (DBObject.State <> sdboCreate) and (TSQLCreateView(ASQLObject).CreateMode = cmCreate) then
-      TSQLCreateView(ASQLObject).CreateMode := cmCreateOrAlter;
+      TSQLCreateView(ASQLObject).Options := TSQLCreateView(ASQLObject).Options + [ooOrReplase];
   end
   else
     Result:=true;

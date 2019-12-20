@@ -76,7 +76,7 @@ type
 
 implementation
 uses rxAppUtils, LR_Class, IBManMainUnit, fbmStrConstUnit, mysql_SqlParserUnit, mysql_types,
-  ibmSqlUtilsUnit, fbmToolsUnit, fb_ConstUnit;
+  ibmSqlUtilsUnit, fbmToolsUnit, sqlObjects, fb_ConstUnit;
 
 {$R *.lfm}
 
@@ -385,7 +385,7 @@ begin
   Rec.TableName:=edtTableName.Text;
 
   if DBObject.State = sdboEdit then
-    Rec.CreateMode := cmCreateOrAlter;
+    Rec.Options := Rec.Options + [ooOrReplase];
 
   Rec.TriggerType:=[];
 

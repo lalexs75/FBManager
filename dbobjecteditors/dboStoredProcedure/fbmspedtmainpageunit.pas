@@ -178,7 +178,7 @@ begin
     SP.Body:=EditorFrame.EditorText;
 
     if DBObject.State = sdboEdit then
-      SP.CreateMode:=cmCreateOrAlter;
+      SP.Options:=Sp.Options + [ooOrReplase];
 
     InputParFrame.SaveParams(SP.Params);
     OutputParFrame.SaveParams(SP.Params);

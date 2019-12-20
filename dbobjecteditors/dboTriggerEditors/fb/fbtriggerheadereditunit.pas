@@ -446,7 +446,7 @@ begin
   Rec.TableName:=edtTableName.Text;
 
   if DBObject.State = sdboEdit then
-    Rec.CreateMode := cmCreateOrAlter;
+    Rec.Options := Rec.Options + [ooOrReplase];
 
   Rec.Active:=cbActive.Checked;
   Rec.Position:=edtOrder.Value;

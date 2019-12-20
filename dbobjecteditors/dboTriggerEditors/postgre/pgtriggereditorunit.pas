@@ -772,7 +772,7 @@ begin
       FCmd.TriggerFunction.SchemaName:=FPrc.SchemaName;
     end;
 
-    FCmd.TriggerFunction.CreateMode:=cmCreateOrAlter;
+    FCmd.TriggerFunction.Options:=FCmd.TriggerFunction.Options + [ooOrReplase];
     FCmd.TriggerFunction.Language:=cbLang.Text;
     F:=FCmd.TriggerFunction.Output.AddParam('');
     F.TypeName:='trigger';
@@ -844,7 +844,7 @@ begin
       and CheckWhereFields then
       FCmd.TriggerType:=[] //Не надо перекомпилировать сам триггер
     else
-      FCmd.CreateMode:=cmCreateOrAlter; //Пересоздадим триггер
+      FCmd.Options:=FCmd.Options + [ooOrReplase]; //Пересоздадим триггер
 
   Result:=true;
 end;

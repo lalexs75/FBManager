@@ -1063,7 +1063,7 @@ begin
   end
   else
     if (DBObject.State = sdboEdit)  then
-      FCmd.CreateMode:=cmCreateOrAlter;
+      FCmd.Options:=FCmd.Options + [ooOrReplase];
 end;
 
 end.
