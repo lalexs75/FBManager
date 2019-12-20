@@ -728,6 +728,33 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_proc.proname'
           ''
         )
+      end    
+      item
+        Caption = 'PGFuntionList_11'
+        Lines.Strings = (
+          'select'
+          '  cast(pg_proc.oid as integer),'
+          '  pg_proc.pronamespace,'
+          '  cast(pg_proc.proname as varchar(250)) as proname,'
+          '  pg_proc.prorettype,'
+          '  pg_proc.proacl as acl_list,'
+          '  COALESCE(cast(pg_proc.proargmodes as varchar), '''') || ''|'' ||'
+          '  COALESCE(cast(pg_proc.proargtypes as varchar), '''') || ''|'' ||'
+          '  COALESCE(cast(pg_proc.proargnames as varchar), '''') as data,'
+          '  (select'
+          '     pg_description.description'
+          '   from'
+          '     pg_description'
+          '     inner join pg_class on (pg_class.oid = pg_description.classoid)'
+          '   where'
+          '     pg_description.objoid = pg_proc.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_proc'') as description,'
+          '  pg_proc.prokind as kind_2'
+          'from'
+          '  pg_proc'
+          'order by'
+          '  pg_proc.proname'
+          ''
+        )
       end>
     Left = 432
     Top = 32

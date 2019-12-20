@@ -285,6 +285,18 @@ type
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
+  { TPGProceduresRoot }
+
+  TPGProceduresRoot = class(TPGDBRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+  end;
+
   { TPGTriggerProcRoot }
 
   TPGTriggerProcRoot = class(TPGFunctionsRoot)
@@ -324,6 +336,7 @@ type
   private
     FACLListStr: string;
     FForeignTablesRoot: TPGForeignTablesRoot;
+    FFunctions: TPGFunctionsRoot;
     FOwnerName: String;
     FSchemaId: integer;
     FTablesRoot:TPGTablesRoot;
@@ -332,10 +345,10 @@ type
     FViews:TPGViewsRoot;
     FTriggers:TPGTriggersRoot;
     FIndexs:TPGIndexRoot;
-    FProcedures:TPGFunctionsRoot;
     FTriggerProc:TPGTriggerProcRoot;
     FRulesRoot:TPGRulesRoot;
     FMatViews:TPGMatViewsRoot;
+    FProcedures:TPGProceduresRoot;
     FFTSRoot:TDBRootObject;
     FCollationRoot:TPGCollationRoot;
 {
@@ -376,9 +389,10 @@ type
     property SequencesRoot:TPGSequencesRoot read FSequencesRoot;
     property Views:TPGViewsRoot read FViews;
     property MatViews:TPGMatViewsRoot read FMatViews;
+    property Functions:TPGFunctionsRoot read FFunctions;
+    property Procedures:TPGProceduresRoot read FProcedures;
     property Triggers:TPGTriggersRoot read FTriggers;
     property Indexs:TPGIndexRoot read FIndexs;
-    property Procedures:TPGFunctionsRoot read FProcedures;
     property TriggerProc:TPGTriggerProcRoot read FTriggerProc;
     property RulesRoot:TPGRulesRoot read FRulesRoot;
     property ACLListStr:string read FACLListStr;
@@ -1005,6 +1019,14 @@ type
     procedure InternalInitACLList; override;
   end;
 
+  TPGProcedure = class(TDBStoredProcObject)
+  private
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
+    class function DBClassTitle:string;override;
+  end;
+
   { TPGIndex }
   TPGIndex = class(TDBIndex)
   private
@@ -1311,6 +1333,50 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGProcedure }
+
+constructor TPGProcedure.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+end;
+
+destructor TPGProcedure.Destroy;
+begin
+  inherited Destroy;
+end;
+
+class function TPGProcedure.DBClassTitle: string;
+begin
+  Result:=inherited DBClassTitle;
+end;
+
+{ TPGProceduresRoot }
+
+function TPGProceduresRoot.DBMSObjectsList: string;
+begin
+  Result:=pgSqlTextModule.PGFunctionList(OwnerDB); //sqlPGFuntions['PGFuntionList'];
+end;
+
+function TPGProceduresRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=Assigned(AItem) and (AItem.Kind2 = 'p');
+end;
+
+function TPGProceduresRoot.GetObjectType: string;
+begin
+  Result:='Procedure';
+end;
+
+constructor TPGProceduresRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okStoredProc;
+  FDropCommandClass:=TPGSQLDropProcedure;
 end;
 
 { TPGTablePartition }
@@ -3613,7 +3679,7 @@ var
   FQuery: TZQuery;
   P: TDBItem;
 
-  FDesc, FOwnData, FObjData, FAclList: TField;
+  FDesc, FOwnData, FObjData, FAclList, FKind2: TField;
 begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
   if DBObj.CountUse = 1 then
@@ -3631,6 +3697,7 @@ begin
     FOwnData:=FQuery.FindField('own_data');
     FObjData:=FQuery.FindField('data');
     FAclList:=FQuery.FindField('acl_list');
+    FKind2:=FQuery.FindField('kind_2');
 
     while not FQuery.Eof do
     begin
@@ -3646,8 +3713,9 @@ begin
 
       if Assigned(FObjData) then
         P.ObjData:=FObjData.AsString;
-(*      if Assigned(FData) then
-        P.ObjData:=FData.AsString; *)
+
+      if Assigned(FKind2) then
+        P.Kind2:=FKind2.AsString;
 
       if Assigned(FAclList) then
         P.ObjACLList:=FAclList.AsString;
@@ -4193,7 +4261,7 @@ begin
   RefreshObjectsBegin(pgSqlTextModule.sDomains['sql_PG_TypesListAll'], false);
   RefreshObjectsBegin(pgSqlTextModule.PGClassStr(Self), false);
   RefreshObjectsBegin(pgSqlTextModule.PGTriggersList(Self), false);
-  RefreshObjectsBegin(pgSqlTextModule.sqlPGFuntions['PGFuntionList'], false);
+  RefreshObjectsBegin(pgSqlTextModule.PGFunctionList(Self), false);
   RefreshObjectsBegin(pgSqlTextModule.sqlSchema['sqlSchemasAll'], false);
   RefreshObjectsBegin(pgSqlTextModule.pgCollations.Strings.Text, false);
   RefreshObjectsBegin(pgSqlTextModule.sForeignObj['pgFSUserMapping'], false);
@@ -4210,7 +4278,7 @@ begin
   RefreshObjectsEnd(pgSqlTextModule.sDomains['sql_PG_TypesListAll']);
   RefreshObjectsEnd(pgSqlTextModule.PGClassStr(Self));
   RefreshObjectsEnd(pgSqlTextModule.PGTriggersList(Self));
-  RefreshObjectsEnd(pgSqlTextModule.sqlPGFuntions['PGFuntionList']);
+  RefreshObjectsEnd(pgSqlTextModule.PGFunctionList(Self));
   RefreshObjectsEnd(pgSqlTextModule.sql_Pg_Rules.Strings.Text);
   RefreshObjectsEnd(pgSqlTextModule.sqlSchema['sqlSchemasAll']);
   RefreshObjectsEnd(pgSqlTextModule.pgCollations.Strings.Text);
@@ -4579,8 +4647,10 @@ begin
   FTriggers:=TPGTriggersRoot.Create(OwnerDB, TPGTrigger, sTriggers, Self);
   FIndexs:=TPGIndexRoot.Create(OwnerDB, TPGIndex, sIndexs, Self);
 
-  FProcedures:=TPGFunctionsRoot.Create(OwnerDB, TPGFunction, sFunctions, Self);
-  FProcedures.FProcType:=-1;
+  FFunctions:=TPGFunctionsRoot.Create(OwnerDB, TPGFunction, sFunction, Self);
+  if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion11_0 then
+    FProcedures:=TPGProceduresRoot.Create(OwnerDB, TPGProcedure, sProcedure, Self);
+
   FTriggerProc:=TPGTriggerProcRoot.Create(OwnerDB, TPGTriggerFunction, sTriggerProc, Self);
   FRulesRoot:=TPGRulesRoot.Create(OwnerDB, TPGRule, sRules, Self);
 
@@ -4601,7 +4671,11 @@ begin
   FViews.FSchema:=Self;
   FTriggers.FSchema:=Self;
   FIndexs.FSchema:=Self;
-  FProcedures.FSchema:=Self;
+  FFunctions.FSchema:=Self;
+  FFunctions.FProcType:=-1;
+
+  if Assigned(FProcedures) then
+    FProcedures.FSchema:=Self;
   FTriggerProc.FSchema:=Self;
   FRulesRoot.FSchema:=Self;
   FCollationRoot.FSchema:=Self;
@@ -4621,7 +4695,9 @@ begin
   FDomainsRoot.FillListForNames(List, AFullNames);
   FSequencesRoot.FillListForNames(List, AFullNames);
   FViews.FillListForNames(List, AFullNames);
-  FProcedures.FillListForNames(List, AFullNames);
+  Functions.FillListForNames(List, AFullNames);
+  if Assigned(Procedures) then
+    FProcedures.FillListForNames(List, AFullNames);
 end;
 
 function TPGSchema.CreateSQLObject: TSQLCommandDDL;
@@ -4653,9 +4729,13 @@ begin
   FreeAndNil(FTablesRoot);
   FreeAndNil(FDomainsRoot);
   FreeAndNil(FSequencesRoot);
-  FreeAndNil(FProcedures);
+
+  if Assigned(FProcedures) then
+    FreeAndNil(FProcedures);
+
   FreeAndNil(FViews);
   FreeAndNil(FTriggers);
+  FreeAndNil(FFunctions);
   FreeAndNil(FRulesRoot);
   FreeAndNil(FIndexs);
   FreeAndNil(FCollationRoot);
@@ -6997,7 +7077,7 @@ end;
 
 function TPGFunctionsRoot.DBMSObjectsList: string;
 begin
-  Result:=pgSqlTextModule.sqlPGFuntions['PGFuntionList'];
+  Result:=pgSqlTextModule.PGFunctionList(OwnerDB);
 end;
 
 function TPGFunctionsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -7021,7 +7101,9 @@ begin
           (TSQLEnginePostgre(OwnerDB).FIDTypeEventTrigger = StrToIntDef(AItem.ObjType, -2))
         )
       )
-    );
+    )
+    and
+    (AItem.Kind2<>'p');
 end;
 
 function TPGFunctionsRoot.DropObject(AItem: TDBObject): boolean;

@@ -41,6 +41,7 @@ type
       ObjRelName:string;
       ObjData:string;
       ObjType2:Integer;
+      Kind2:string;
       ObjACLList:string;
     end;
 

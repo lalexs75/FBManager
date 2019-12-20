@@ -69,6 +69,7 @@ type
     function PGRelationInheritedStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGIndexFieldsStr(ASQLEngine:TSQLEngineAbstract):string;
     function PGViewRefreshStr(ASQLEngine:TSQLEngineAbstract):string;
+    function PGFunctionList(ASQLEngine:TSQLEngineAbstract):string;
   end;
 
 
@@ -152,6 +153,15 @@ begin
     Result:=sPGView['sql_PG_ViewRefresh_12']
   else
     Result:=sPGView['sql_PG_ViewRefresh'];
+end;
+
+function TpgSqlTextModule.PGFunctionList(ASQLEngine: TSQLEngineAbstract
+  ): string;
+begin
+  if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 11 then
+    Result:=sqlPGFuntions['PGFuntionList_11']
+  else
+    Result:=sqlPGFuntions['PGFuntionList'];
 end;
 
 end.
