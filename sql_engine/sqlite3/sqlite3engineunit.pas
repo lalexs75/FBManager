@@ -445,7 +445,7 @@ function TSQLite3Index.CreateSQLObject: TSQLCommandDDL;
 begin
   Result:=TSQLite3SQLCreateIndex.Create(nil);
   if State = sdboEdit then
-    TSQLite3SQLCreateIndex(Result).CreateMode:=cmCreateOrAlter;
+    TSQLite3SQLCreateIndex(Result).Options:=TSQLite3SQLCreateIndex(Result).Options + [ooOrReplase];
 end;
 
 { TIndexRoot }

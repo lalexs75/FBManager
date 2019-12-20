@@ -2458,7 +2458,7 @@ END
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
   FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 1, okStoredProc);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-    T:=AddSQLTokens(stKeyword, T, 'ALTER', [toFirstToken], 1);
+    T:=AddSQLTokens(stKeyword, T, 'ALTER', [toFirstToken], -2);
   T:=AddSQLTokens(stKeyword, [FSQLTokens, T, FSQLTokens1], 'FUNCTION', [toFindWordLast]);
 
 
@@ -2497,7 +2497,7 @@ var
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-      1:CreateMode:=cmCreateOrAlter;
+      //1:CreateMode:=cmCreateOrAlter;
     101:begin
           FCurParam:=Params.AddParam(AWord);
           FCurParam.InReturn:=spvtInput;
@@ -2549,7 +2549,7 @@ var
   i: Integer;
 begin
   S:='CREATE ';
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
     S:=S + 'OR ALTER ';
   S:=S + 'FUNCTION ' + FullName;
 
@@ -2746,7 +2746,7 @@ begin
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okPackage);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-    T1:=AddSQLTokens(stKeyword, T1, 'ALTER', [], 1);
+    T1:=AddSQLTokens(stKeyword, T1, 'ALTER', [], -2);
   T1:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'PACKAGE', [toFindWordLast]);
     TPkgBody:=AddSQLTokens(stKeyword, T1, 'BODY', [], 2);
   //Разбор заголовка пакета (CREATE OR ALTER PACKAGE)
@@ -2781,7 +2781,7 @@ var
   P: TSQLParserField;
 begin
   S:='CREATE ';
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
     S:=S + 'OR ALTER';
   S:=S + ' PACKAGE';
 
@@ -2821,7 +2821,7 @@ procedure TFBSQLCreatePackage.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:ObjectKind:=okPackageBody;
     3:Name:=AWord;
     4:begin
@@ -6330,7 +6330,7 @@ begin
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okException);
       T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-      T1:=AddSQLTokens(stKeyword, T1, 'ALTER', [], 1);
+      T1:=AddSQLTokens(stKeyword, T1, 'ALTER', [], -2);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'EXCEPTION', [toFindWordLast]);
       T1.AddChildToken(T);
     T:=AddSQLTokens(stIdentificator, T, '', [], 2);
@@ -6347,7 +6347,7 @@ procedure TFBSQLCreateException.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:Name:=AWord;
     3:FMessage:=AnsiDequotedStr(AWord, '''');
     4:CreateMode:=cmRecreate;
@@ -6359,8 +6359,11 @@ var
   S: String;
 begin
   case CreateMode of
-    cmCreate:S:='CREATE';
-    cmCreateOrAlter:S:='CREATE OR ALTER';
+    cmCreate:
+       begin
+         S:='CREATE';
+         if ooOrReplase in Options then S:=S+ ' OR ALTER';
+        end;
     cmRecreate:S:='RECREATE';
   end;
 
@@ -6938,7 +6941,7 @@ END
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
   FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 1, okStoredProc);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-    T:=AddSQLTokens(stKeyword, T, 'ALTER', [toFirstToken], 1);
+    T:=AddSQLTokens(stKeyword, T, 'ALTER', [toFirstToken], -2);
   T:=AddSQLTokens(stKeyword, [FSQLTokens, T, FSQLTokens1], 'PROCEDURE', [toFindWordLast]);
 
 
@@ -6970,7 +6973,7 @@ var
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-      1:CreateMode:=cmCreateOrAlter;
+      //1:CreateMode:=cmCreateOrAlter;
     101:begin
           FCurParam:=Params.AddParam(AWord);
           FCurParam.InReturn:=spvtInput;
@@ -7040,7 +7043,7 @@ begin
   FLocal:=LP.AsSQL;
 
   S:='CREATE ';
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
     S:=S + 'OR ALTER ';
   S:=S + 'PROCEDURE ' + FullName;
 
@@ -7089,7 +7092,7 @@ var
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okView);    //CREATE
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);                  //OR
-    T:=AddSQLTokens(stKeyword, T, 'ALTER', [], 1);                      //OR ALTER
+    T:=AddSQLTokens(stKeyword, T, 'ALTER', [], -2);                      //OR ALTER
 
   FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 2, okView);    //RECREATE
   FSQLTokens2:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 6, okView);    //RECREATE
@@ -7119,7 +7122,7 @@ var
   C: TParserPosition;
 begin
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:CreateMode:=cmRecreate;
     3:Name:=AWord;
     4:Fields.AddParam(AWord);
@@ -7140,9 +7143,14 @@ var
   F: TSQLParserField;
 begin
   case CreateMode of
-    cmCreate:S:='CREATE VIEW ' + FullName;
+    cmCreate:
+       begin
+         S:='CREATE ' + FullName;
+         if ooOrReplase in Options then S:=S + 'ALTER ';
+         S:=S + 'VIEW ' + FullName;
+       end;
     cmRecreate:S:='RECREATE VIEW ' + FullName;
-    cmCreateOrAlter:S:='CREATE OR ALTER VIEW ' + FullName;
+    //cmCreateOrAlter:S:='CREATE OR ALTER VIEW ' + FullName;
     cmAlter:S:='ALTER VIEW ' + FullName;
   end;
 
@@ -7291,7 +7299,7 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
 
   //Строим дерево граматического разбора
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);    //CREATE TRIGGER
-    Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', [], 22);
+    Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', [], -2);
     Par1:=AddSQLTokens(stKeyword, Par1, 'ALTER', [toFirstToken], 1);
   FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'TRIGGER', [toFindWordLast]);    //CREATE TRIGGER
 
@@ -7335,8 +7343,8 @@ procedure TFBSQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    22:CreateMode:=cmCreateOrAlter;
-    1:if CreateMode <> cmCreateOrAlter then CreateMode:=cmAlter;
+    //22:CreateMode:=cmCreateOrAlter;
+    1:if not (ooOrReplase in Options) then CreateMode:=cmAlter;
     2:Name:=AWord;
     3:TableName:=AWord;
     4:FActive:=true;
@@ -7366,7 +7374,7 @@ begin
   else
   begin
     S:='CREATE';
-    if CreateMode = cmCreateOrAlter then
+    if ooOrReplase in Options then
       S:=S+' OR ALTER';
   end;
   S:=S + ' TRIGGER ' + DoFormatName(Name);

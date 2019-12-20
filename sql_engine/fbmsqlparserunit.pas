@@ -32,7 +32,7 @@ const
 
 type
   TSQLParserSintax = (siGlobal, siPostgreSQL, siFirebird);
-  TCreateMode = (cmCreate, cmAlter, cmCreateOrAlter, cmRecreate, cmDropAndCreate);
+  TCreateMode = (cmCreate, cmAlter, {cmCreateOrAlter, }cmRecreate, cmDropAndCreate);
 
   TVisibleType = (vtNone, vtGlobal, vtLocal);
 

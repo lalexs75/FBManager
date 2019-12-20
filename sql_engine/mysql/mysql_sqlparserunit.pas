@@ -1997,7 +1997,7 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], 1);
+    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], -2);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', []);
     T:=AddSQLTokens(stKeyword, T, 'NOT', []);
@@ -2064,7 +2064,7 @@ procedure TMySQLCreateUser.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:Options:=Options + [ooIfNotExists];
     3:Name:=AWord;
     4:HostName:=AWord;
@@ -2125,7 +2125,7 @@ begin
     | MAX_USER_CONNECTIONS count
   *)
   S:='CREATE ';
-  if cmCreateOrAlter = CreateMode then
+  if ooOrReplase in Options then
     S:=S + 'OR REPLACE ';
   S:=S + 'USER ' + Name;
 
@@ -2586,7 +2586,7 @@ var
   S: String;
   FCmd: TMySQLDropTrigger;
 begin
-  if cmCreateOrAlter = CreateMode then
+  if ooOrReplase in Options then
   begin
     FCmd:=TMySQLDropTrigger.Create(nil);
     FCmd.TableName:=TableName;
@@ -2929,7 +2929,7 @@ var
   FConstr: TSQLConstraintItem;
 begin
   S:='ALTER';
-  if CreateMode = cmCreateOrAlter then S:=S + ' IGNORE';
+  if ooOrReplase in Options then S:=S + ' IGNORE';
   S:=S + ' TABLE ' + FullName;
   if OP.Field.Description<>'' then SDesc:=' COMMENT '+QuotedString(OP.Field.Description, '''');
 
@@ -2981,7 +2981,7 @@ var
   S: String;
 begin
   S:='ALTER';
-  if CreateMode = cmCreateOrAlter then S:=S + ' IGNORE';
+  if ooOrReplase in Options then S:=S + ' IGNORE';
   S:=S + ' TABLE ' + FullName;
   AddSQLCommandEx('%s MODIFY COLUMN %s %s', [S, OP.Field.Caption, ColDataType(OP.Field)]);
 end;
@@ -3117,7 +3117,7 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'ONLINE', [], 11);
-    T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'IGNORE', [], 1);
+    T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'IGNORE', [], -2);
   T:=AddSQLTokens(stKeyword, [T, T1, FSQLTokens], 'TABLE', [toFindWordLast]);
   TName:=AddSQLTokens(stIdentificator, T, '', [], 2);
   TAdd:=AddSQLTokens(stKeyword, TName, 'ADD', []);
@@ -3290,7 +3290,7 @@ procedure TMySQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:Name:=AWord;
     3:begin
         if not Assigned(FCurOper) then
@@ -3478,7 +3478,7 @@ var
   Op: TAlterTableOperator;
 begin
   S:='ALTER';
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
     S:=S + ' IGNORE';
   S:=S + ' TABLE ' + FullName;
   for Op in FOperators do
@@ -4157,7 +4157,7 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okView);    //CREATE
   FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okView);    //CREATE
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-    T1:=AddSQLTokens(stKeyword, T1, 'REPLACE', [], 1);
+    T1:=AddSQLTokens(stKeyword, T1, 'REPLACE', [], -2);
 
     TAlg:=AddSQLTokens(stKeyword, [FSQLTokens, T1, FSQLTokens1], 'ALGORITHM', []);
       T:=AddSQLTokens(stSymbol, TAlg, '=', []);
@@ -4200,7 +4200,7 @@ var
   CP: TParserPosition;
 begin
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:Name:=AWord;
     3:begin
         SchemaName:=Name;
@@ -4227,7 +4227,7 @@ var
   S: String;
 begin
   S:='CREATE';
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
     S:=S + ' OR REPLACE';
 
   case ViewAlgorithm of

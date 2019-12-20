@@ -545,6 +545,13 @@ type
     procedure c522AlterProcedure5;
     procedure c523AlterProcedure6;
     procedure c524DropProcedure1;
+    procedure c525Call2;
+    procedure c526Call3;
+    procedure c527Call4;
+    procedure c528Call5;
+    procedure c529Call6;
+    procedure c530Call7;
+    procedure c531Call8;
   end;
 
   { TPGSQLParserData }
@@ -961,6 +968,41 @@ end;
 procedure TPGSQLParserTest.c524DropProcedure1;
 begin
   DoTestSQL(PGSQLParserData.sFunctions['DropProcedure1']);
+end;
+
+procedure TPGSQLParserTest.c525Call2;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call2']);
+end;
+
+procedure TPGSQLParserTest.c526Call3;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call3']);
+end;
+
+procedure TPGSQLParserTest.c527Call4;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call4']);
+end;
+
+procedure TPGSQLParserTest.c528Call5;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call5']);
+end;
+
+procedure TPGSQLParserTest.c529Call6;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call6']);
+end;
+
+procedure TPGSQLParserTest.c530Call7;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call7']);
+end;
+
+procedure TPGSQLParserTest.c531Call8;
+begin
+  DoTestSQL(PGSQLParserData.sFunctions['Call8']);
 end;
 
 procedure TPGSQLParserTest.c079SQLEnd1;

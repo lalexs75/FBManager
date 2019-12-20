@@ -3632,8 +3632,50 @@ object PGSQLParserData: TPGSQLParserData
           'DROP PROCEDURE do_db_maintenance();'
           ''
         )
+      end    
+      item
+        Caption = 'Call2'
+        Lines.Strings = (
+          'CALL bb1.do_db_maintenance(a1, a2, a3);'
+        )
+      end    
+      item
+        Caption = 'Call3'
+        Lines.Strings = (
+          'CALL do_db_maintenance(a1, a2, a3);'
+        )
+      end    
+      item
+        Caption = 'Call4'
+        Lines.Strings = (
+          'CALL aa.do_db_maintenance();'
+        )
+      end    
+      item
+        Caption = 'Call5'
+        Lines.Strings = (
+          'CALL do_db_maintenance();'
+        )
+      end    
+      item
+        Caption = 'Call6'
+        Lines.Strings = (
+          'CALL aa.insert_data(1, 2);'
+        )
+      end    
+      item
+        Caption = 'Call7'
+        Lines.Strings = (
+          'CALL insert_data(a1, 2);'
+        )
+      end    
+      item
+        Caption = 'Call8'
+        Lines.Strings = (
+          'CALL insert_data(a1, ''2'', 12.3);'
+        )
       end>
-    Left = 32
+    Left = 25
     Top = 649
   end
   object sDataBase: TRxTextHolder

@@ -8389,6 +8389,11 @@ INSERT — добавить строки в таблицу
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterFunction, 'ALTER FUNCTION');       //ALTER FUNCTION — изменить определение функции
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropFunction, 'DROP FUNCTION');         //DROP FUNCTION — удалить функцию
 
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateProcedure, 'CREATE PROCEDURE');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterProcedure, 'ALTER PROCEDURE');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLDropProcedure, 'DROP PROCEDURE');
+  RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCall, 'CALL');
+
   //TRIGGER
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLCreateTrigger, 'CREATE TRIGGER');       //CREATE TRIGGER — создать триггер
   RegisterSQLStatment(TSQLEnginePostgre, TPGSQLAlterTrigger, 'ALTER TRIGGER');         //ALTER TRIGGER — изменить определение триггера

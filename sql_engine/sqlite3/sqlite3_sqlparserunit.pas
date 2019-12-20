@@ -957,7 +957,7 @@ var
   S: String;
   P: TSQLite3SQLDropIndex;
 begin
-  if CreateMode in [cmCreateOrAlter, cmRecreate, cmDropAndCreate, cmAlter] then
+  if (CreateMode in [cmRecreate, cmDropAndCreate, cmAlter]) or (ooOrReplase in Options) then
   begin
     P:=TSQLite3SQLDropIndex.Create(nil);
     P.Name:=Name;
@@ -1147,7 +1147,7 @@ var
   S: String;
   D: TSQLite3SQLDropTrigger;
 begin
-  if CreateMode in [cmCreateOrAlter, cmRecreate, cmDropAndCreate, cmAlter] then
+  if (CreateMode in [cmRecreate, cmDropAndCreate, cmAlter]) or (ooOrReplase in Options) then
   begin
     D:=TSQLite3SQLDropTrigger.Create(nil);
     D.Name:=Name;
@@ -1309,7 +1309,7 @@ var
   F: TSQLParserField;
   i: Integer;
 begin
-  if CreateMode in [cmCreateOrAlter, cmRecreate, cmDropAndCreate, cmAlter] then
+  if (CreateMode in [cmRecreate, cmDropAndCreate, cmAlter]) or (ooOrReplase in Options) then
   begin
     D:=TSQLite3SQLDropView.Create(nil);
     D.Name:=FullName;

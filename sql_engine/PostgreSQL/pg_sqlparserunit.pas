@@ -497,6 +497,52 @@ type
     property ConfigParams: TSQLFields read FConfigParams;
   end;
 
+  { TPGSQLCreateProcedure }
+
+  TPGSQLCreateProcedure = class(TSQLCommandCreateProcedure)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL; override;
+  public
+  end;
+
+  { TPGSQLAlterProcedure }
+
+  TPGSQLAlterProcedure = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL; override;
+  public
+  end;
+
+  { TPGSQLDropProcedure }
+
+  TPGSQLDropProcedure = class(TSQLDropCommandAbstract)
+  private
+    FCurName: TTableItem;
+    FCurParam: TSQLParserField;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TPGSQLCall }
+
+  TPGSQLCall = class(TSQLCommandDML)
+  private
+  protected
+    function GetFullName: string; override;
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
   { TPGSQLCreateRule }
 
   TPGSQLCreateRule = class(TSQLCreateCommandAbstract)
@@ -3517,6 +3563,281 @@ begin
   end;
 end;
 
+{ TPGSQLCall }
+
+function TPGSQLCall.GetFullName: string;
+begin
+  if SchemaName <> '' then
+    Result:= SchemaName + '.' + Name
+  else
+    Result:=Name;
+end;
+
+procedure TPGSQLCall.InitParserTree;
+var
+  FSQLTokens, TS, T, TN, T2, T1, T3, T4: TSQLTokenRecord;
+begin
+  //CALL имя ( [ аргумент ] [, ...] )
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CALL', [toFirstToken, toFindWordLast]);
+  TS:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+    T:=AddSQLTokens(stSymbol, TS, '.', []);
+  TN:=AddSQLTokens(stIdentificator, T, '', [], 2);
+
+  T:=AddSQLTokens(stSymbol, [TS, TN], '(', []);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 3);
+    T2:=AddSQLTokens(stInteger, T, '', [], 3);
+    T3:=AddSQLTokens(stString, T, '', [], 3);
+    T4:=AddSQLTokens(stFloat, T, '', [], 3);
+
+    TS:=AddSQLTokens(stSymbol, [T1, T2, T3, T4], ',', []);
+    TS.AddChildToken([T1, T2, T3, T4]);
+  T:=AddSQLTokens(stSymbol, [T, T1, T2, T3, T4], ')', []);
+
+end;
+
+procedure TPGSQLCall.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    3:Params.AddParam(AWord);
+  end;
+end;
+
+procedure TPGSQLCall.MakeSQL;
+var
+  S: String;
+begin
+  S:='CALL ' + FullName+ '(' + Params.AsString + ')';
+  AddSQLCommand(S);
+end;
+
+{ TPGSQLDropProcedure }
+
+procedure TPGSQLDropProcedure.InitParserTree;
+var
+  FSQLTokens, T, TS, TN, TSymb, TSymb2, TSymb3: TSQLTokenRecord;
+begin
+  //DROP PROCEDURE [ IF EXISTS ] имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ] [, ...]
+  //    [ CASCADE | RESTRICT ]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURE', [toFindWordLast]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [], -1);
+    T:=AddSQLTokens(stKeyword, T, 'EXISTS', []);
+  TS:=AddSQLTokens(stIdentificator, [FSQLTokens, T], '', [], 1);
+    T:=AddSQLTokens(stSymbol, TS, '.', []);
+  TN:=AddSQLTokens(stIdentificator, T, '', [], 2);
+
+  TSymb:=AddSQLTokens(stSymbol, [TS, TN], '(', [toOptional]);
+  TSymb2:=AddSQLTokens(stSymbol, TSymb, ')', [], 5);
+
+  CreateInParamsTree(Self, TSymb, TSymb2, 100);
+
+  AddSQLTokens(stKeyword, TSymb2, 'CASCADE', [toOptional], -2);
+  AddSQLTokens(stKeyword, TSymb2, 'RESTRICT', [toOptional], -3);
+
+  TSymb3:=AddSQLTokens(stSymbol, [TSymb2, TS, TN], ',', [ toOptional], 10);
+    TSymb3.AddChildToken(TS);
+(*
+  T:=AddSQLTokens(stIdentificator, TSymb3, '', [], 11);
+    T2:=AddSQLTokens(stSymbol, T, '.', []);
+    T2:=AddSQLTokens(stIdentificator, T2, '', [], 12);
+//  T1.AddChildToken(T);
+    T.AddChildToken(TSymb);
+    T2.AddChildToken(TSymb);
+*)
+end;
+
+procedure TPGSQLDropProcedure.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    101..104:begin
+        {if Assigned(FCurName) then
+          FCurParam:=FCurName.Fields.AddParam('')
+        else}
+          FCurParam:=Params.AddParam('');
+        case AChild.Tag of
+          101:FCurParam.InReturn:=spvtInput;
+          102:FCurParam.InReturn:=spvtOutput;
+          103:FCurParam.InReturn:=spvtInOut;
+          104:FCurParam.InReturn:=spvtVariadic;
+        end;
+      end;
+    105:begin
+          if not Assigned(FCurParam) then
+          begin
+{            if Assigned(FCurName) then
+              FCurParam:=FCurName.Fields.AddParamWithType('', AWord)
+            else}
+              FCurParam:=Params.AddParamWithType('', AWord)
+          end
+          else
+            FCurParam.TypeName:=AWord;
+        end;
+    106:if Assigned(FCurParam) then
+        begin
+           if FCurParam.Caption = '' then
+           begin
+             FCurParam.Caption:=FCurParam.TypeName;
+             FCurParam.TypeName:=AWord;
+           end
+           else
+             FCurParam.TypeName:=FCurParam.TypeName + AWord;
+        end;
+    107:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + AWord;
+    108:if Assigned(FCurParam) then FCurParam.TypeName:=FCurParam.TypeName + ' ' + AWord;
+    109,
+    110:FCurParam:=nil;
+  end;
+end;
+
+procedure TPGSQLDropProcedure.MakeSQL;
+
+function CreateParamsStr(FPars:TSQLFields):string;
+var
+  R: TSQLParserField;
+begin
+  Result:='';
+  for R in FPars do
+  begin
+    if Result<>'' then Result:=Result + ',';
+
+    if PGVarTypeNames[R.InReturn]<>'' then
+      Result:=Result + ' ' +PGVarTypeNames[R.InReturn];
+
+    if R.Caption<>'' then Result:=Result+' '+DoFormatName(R.Caption);
+    Result:=Result+' '+R.TypeName;
+  end;
+//  if (Result <> '') {or BracketExists} then
+    Result:='('+Result+')';
+end;
+
+var
+  S: String;
+begin
+  S:='DROP PROCEDURE ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+//  S:=S + FullName;
+
+  //[ IF EXISTS ] имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ] [, ...]
+  //    [ CASCADE | RESTRICT ]
+
+  S:=S + FullName + CreateParamsStr(Params);
+
+//  for T in Tables do
+//    S:=S + ', ' + T.Name + CreateParamsStr(T.Fields);
+
+  if DropRule = drCascade then S:=S + ' CASCADE'
+  else
+  if DropRule = drRestrict then S:=S + ' RESTRICT';
+
+  AddSQLCommand(S);
+end;
+
+{ TPGSQLAlterProcedure }
+
+procedure TPGSQLAlterProcedure.InitParserTree;
+begin
+  //ALTER PROCEDURE имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    действие [ ... ] [ RESTRICT ]
+  //ALTER PROCEDURE имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    RENAME TO новое_имя
+  //ALTER PROCEDURE имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  //ALTER PROCEDURE имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    SET SCHEMA новая_схема
+  //ALTER PROCEDURE имя [ ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [, ...] ] ) ]
+  //    DEPENDS ON EXTENSION имя_расширения
+  //
+  //Где действие может быть следующим:
+  //
+  //    [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
+  //    SET параметр_конфигурации { TO | = } { значение | DEFAULT }
+  //    SET параметр_конфигурации FROM CURRENT
+  //    RESET параметр_конфигурации
+  //    RESET ALL
+end;
+
+procedure TPGSQLAlterProcedure.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TPGSQLAlterProcedure.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TPGSQLCreateProcedure }
+
+procedure TPGSQLCreateProcedure.InitParserTree;
+var
+  FSQLTokens, T, Par1, Par2: TSQLTokenRecord;
+begin
+  //CREATE [ OR REPLACE ] PROCEDURE
+  //    имя ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ { DEFAULT | = } выражение_по_умолчанию ] [, ...] ] )
+  //  { LANGUAGE имя_языка
+  //    | TRANSFORM { FOR TYPE имя_типа } [, ... ]
+  //    | [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
+  //    | SET параметр_конфигурации { TO значение | = значение | FROM CURRENT }
+  //    | AS 'определение'
+  //    | AS 'объектный_файл', 'объектный_символ'
+  //  } ...
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
+    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], -1);
+  FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'PROCEDURE', [toFindWordLast]);
+
+  Par1:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 7);
+  Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+  Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
+end;
+
+procedure TPGSQLCreateProcedure.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    7:Name:=AWord;
+    8:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+  end;
+end;
+
+procedure TPGSQLCreateProcedure.MakeSQL;
+var
+  S: String;
+begin
+  //CREATE [ OR REPLACE ] PROCEDURE
+  //    имя ( [ [ режим_аргумента ] [ имя_аргумента ] тип_аргумента [ { DEFAULT | = } выражение_по_умолчанию ] [, ...] ] )
+  //  { LANGUAGE имя_языка
+  //    | TRANSFORM { FOR TYPE имя_типа } [, ... ]
+  //    | [ EXTERNAL ] SECURITY INVOKER | [ EXTERNAL ] SECURITY DEFINER
+  //    | SET параметр_конфигурации { TO значение | = значение | FROM CURRENT }
+  //    | AS 'определение'
+  //    | AS 'объектный_файл', 'объектный_символ'
+  //  } ...
+  S:='CREATE ';
+  AddSQLCommand(S);
+end;
+
 { TPGSQLDropSubscription }
 
 procedure TPGSQLDropSubscription.InitParserTree;
@@ -5810,7 +6131,7 @@ var
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+//    1:CreateMode:=cmCreateOrAlter;
     2:Options:=Options + [ooTemporary];
     3:Name:=AWord;
     4:begin
@@ -6103,7 +6424,7 @@ begin
     for S in TriggerFunction.SQLText do
       AddSQLCommand(S);
 
-  if CreateMode = cmCreateOrAlter then
+  if ooOrReplase in Options then
   begin
     FCmdDrop:=TPGSQLDropEventTrigger.Create(nil);
     FCmdDrop.Name:=Name;
@@ -6995,7 +7316,7 @@ CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] [ RECURSIVE ] VIEW имя [ ( имя_
 *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okView);    //CREATE
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);                  //OR
-    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], 1);                      //OR REPLACE
+    T:=AddSQLTokens(stKeyword, T, 'REPLACE', [], -2);                      //OR REPLACE
 
     T1:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'TEMP', [], 2);                        //TEMP
     T2:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'TEMPORARY', [], 2);                   //TEMPORARY
@@ -7026,7 +7347,7 @@ var
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:CreateMode:=cmCreateOrAlter;
+    //1:CreateMode:=cmCreateOrAlter;
     2:Options:=Options + [ooTemporary];
     3:Name:=AWord;
     4:begin
@@ -7058,7 +7379,7 @@ var
   i: Integer;
 begin
   S:='CREATE';
-  if CreateMode in [cmCreateOrAlter, cmRecreate] then
+  if (CreateMode = cmRecreate) or (ooOrReplase in Options) then
     S:=S + ' OR REPLACE';
 
   if ooTemporary in Options then
@@ -19867,7 +20188,7 @@ begin
 
   if TriggerType <> [] then
   begin
-    if CreateMode = cmCreateOrAlter then
+    if ooOrReplase in Options then
     begin
       FCmdDrop:=TPGSQLDropTrigger.Create(nil);
       FCmdDrop.Name:=Name;
@@ -20167,7 +20488,7 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
       Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
-      Par1:=AddSQLTokens(stKeyword, Par1, 'REPLACE', [], 6);
+      Par1:=AddSQLTokens(stKeyword, Par1, 'REPLACE', [], -2);
   Par1:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'FUNCTION', [toFindWordLast]);
     Par1:=AddSQLTokens(stIdentificator, Par1, '', [], 7);
     Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
@@ -20251,7 +20572,7 @@ procedure TPGSQLCreateFunction.InternalProcessChildToken(
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    6:CreateMode:=cmCreateOrAlter;
+    //6:CreateMode:=cmCreateOrAlter;
     7:Name:=AWord;
     8:begin
         SchemaName:=Name;
@@ -20369,7 +20690,7 @@ begin
     AddSQLCommand(FPGSQLDropFunction.AsSQL);
 
   S:='CREATE';
-  if CreateMode = cmCreateOrAlter then S:=S + ' OR REPLACE';
+  if ooOrReplase in Options then S:=S + ' OR REPLACE';
 
   S:=S + ' FUNCTION ' + FunctionName + LineEnding;
 

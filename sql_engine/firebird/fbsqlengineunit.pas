@@ -890,7 +890,7 @@ begin
   Result:=TFBSQLCreateFunction.Create(nil);
   Result.Name:=Caption;
   if State = sdboEdit then
-    TFBSQLCreateFunction(Result).CreateMode:=cmCreateOrAlter;
+    TFBSQLCreateFunction(Result).Options:=TFBSQLCreateFunction(Result).Options + [ooOrReplase];
 end;
 
 procedure TFireBirdFunction.RefreshObject;
@@ -947,13 +947,13 @@ var
   FCmd, FCmd1: TFBSQLCreatePackage;
 begin
   FCmd:=TFBSQLCreatePackage.Create(nil);
-  FCmd.CreateMode:=cmCreateOrAlter;
+  FCmd.Options:=FCmd.Options + [ooOrReplase];
   FCmd.Description:=Description;
   FCmd.Name:=Caption;
   FCmd.PackageText:=PackageHeader;
   FCmd1:=TFBSQLCreatePackage.Create(nil);
   FCmd.AddChild(FCmd1);
-  FCmd1.CreateMode:=cmCreateOrAlter;
+  FCmd1.Options:=FCmd1.Options + [ooOrReplase];
   FCmd1.Name:=Caption;
   FCmd1.ObjectKind:=okPackageBody;
   FCmd1.PackageText:=PackageBody;
@@ -981,7 +981,7 @@ begin
   Result.Name:=Caption;
 
   if State <> sdboCreate then
-     TFBSQLCreatePackage(Result).CreateMode:=cmCreateOrAlter;
+     TFBSQLCreatePackage(Result).Options:=TFBSQLCreatePackage(Result).Options + [ooOrReplase];
 end;
 
 procedure TFireBirdPackage.RefreshObject;
@@ -3069,7 +3069,7 @@ begin
   Rec:=TFBSQLCreateTrigger.Create(nil);
   Rec.Name:=CaptionFullPatch;
   Rec.TableName:=TableName;
-  Rec.CreateMode:=cmCreateOrAlter;
+  Rec.Options:=Rec.Options + [ooOrReplase];
   Rec.Active:=Active;
   Rec.Position:=Sequence;
   Rec.TriggerType:=TriggerType;
@@ -3106,7 +3106,7 @@ function TFireBirdTriger.CreateSQLObject: TSQLCommandDDL;
 begin
   Result:=TFBSQLCreateTrigger.Create(nil);
   if State = sdboEdit then
-    TFBSQLCreateTrigger(Result).CreateMode := cmCreateOrAlter;
+    TFBSQLCreateTrigger(Result).Options := TFBSQLCreateTrigger(Result).Options + [ooOrReplase];
 end;
 
 function TFireBirdTriger.CompileSQLObject(ASqlObject: TSQLCommandDDL;
@@ -3212,7 +3212,7 @@ begin
   V:=TFBSQLCreateView.Create(nil);
   try
     V.Name:=Caption;
-    V.CreateMode:=cmCreateOrAlter;
+    V.Options:=V.Options + [ooOrReplase];
     for F in Fields do
     begin
       F1:=V.Fields.AddParam(F.FieldName);
