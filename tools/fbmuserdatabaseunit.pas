@@ -218,6 +218,7 @@ type
     usSQLPages: TZUpdateSQL;
     usConnectionPlugins: TZUpdateSQL;
     usDBOptions: TZUpdateSQL;
+    procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
     procedure SystemVariablesLoad;
@@ -250,7 +251,8 @@ var
 
 procedure InitDataModule;
 implementation
-uses fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues, fb_ConstUnit, variants, pg_utils;
+uses fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues, fb_ConstUnit,
+  variants, pg_utils, ZClasses;
 
 {$R *.lfm}
 
@@ -317,6 +319,15 @@ end;
 procedure TUserDBModule.DataModuleDestroy(Sender: TObject);
 begin
   UserDBModule:=nil;
+end;
+
+procedure TUserDBModule.DataModuleCreate(Sender: TObject);
+begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+  UserDB.Protocol:='sqlite';
+  {$ELSE}
+  UserDB.Protocol:='sqlite-3';
+  {$ENDIF}
 end;
 
 procedure TUserDBModule.SystemVariablesLoad;

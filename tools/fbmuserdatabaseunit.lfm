@@ -1,4 +1,5 @@
 object UserDBModule: TUserDBModule
+  OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 608
@@ -7,13 +8,11 @@ object UserDBModule: TUserDBModule
   Width = 906
   object UserDB: TZConnection
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
       'codepage=UTF-8'
     )
-    Connected = True
     DesignConnection = True
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
@@ -335,7 +334,6 @@ object UserDBModule: TUserDBModule
   end
   object OldUserDB: TZConnection
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
