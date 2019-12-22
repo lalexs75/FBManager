@@ -20465,7 +20465,8 @@ var
     T17, T17_1, T18, T19,
     T20, TSymb, TSymb2, TSymbOut, T200_1, T201_1,
     T202_1, T202, T203, T203_1, T204, T205, T206, T207, T208,
-    T208_1, T209, T210, T210_1, Par1_RetSet, T17_2, T200_2: TSQLTokenRecord;
+    T208_1, T209, T210, T210_1, Par1_RetSet, T17_2, T200_2,
+    T17_3, T17_4: TSQLTokenRecord;
 begin
   (*
   CREATE [ OR REPLACE ] FUNCTION
@@ -20503,7 +20504,9 @@ begin
     Par1_RetSet:=AddSQLTokens(stKeyword, Par1, 'SETOF', [], 21);
     T17:=AddSQLTokens(stKeyword, [Par1, Par1_RetSet], 'TRIGGER', [], 17);
     T17_1:=AddSQLTokens(stIdentificator, [Par1, Par1_RetSet], '', [], 17);
-//    T17_2:=AddSQLTokens(stIdentificator, T17_1, '', [], 17);
+    T17_2:=AddSQLTokens(stIdentificator, T17_1, '', [], 17);
+    T17_3:=AddSQLTokens(stIdentificator, T17_2, '', [], 17);
+    T17_4:=AddSQLTokens(stIdentificator, T17_3, '', [], 17);
     T18:=AddSQLTokens(stKeyword, [Par1, Par1_RetSet], 'TABLE', [], 18);
       T:=AddSQLTokens(stSymbol, T18, '(', []);
 
@@ -20513,7 +20516,7 @@ begin
         T.AddChildToken(T19);
   TSymbOut:=AddSQLTokens(stSymbol, [T19, T20], ')', []);
 
-  FTLanguage:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, { T17_2,} TSymbOut], 'LANGUAGE', []);
+  FTLanguage:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, {T17_2, }T17_4, TSymbOut], 'LANGUAGE', []);
     T200_1:=AddSQLTokens(stIdentificator, FTLanguage, '', [], 200);
     T200_2:=AddSQLTokens(stString, FTLanguage, '', [], 200);
 
@@ -20537,7 +20540,7 @@ begin
   T206:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204], 'STABLE', [toOptional], 206);
     T206.AddChildToken([T202, T203, T204]);
   T207:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204], 'VOLATILE', [toOptional], 207);
-    T207.AddChildToken([T202, T203, T204]);
+    T207.AddChildToken([T202, T203, T204, FTAS]);
 
   T208:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204,
       T205, T206, T207], 'CALLED', [toOptional]);
