@@ -20465,7 +20465,7 @@ var
     T17, T17_1, T18, T19,
     T20, TSymb, TSymb2, TSymbOut, T200_1, T201_1,
     T202_1, T202, T203, T203_1, T204, T205, T206, T207, T208,
-    T208_1, T209, T210, T210_1, Par1_RetSet: TSQLTokenRecord;
+    T208_1, T209, T210, T210_1, Par1_RetSet, T17_2, T200_2: TSQLTokenRecord;
 begin
   (*
   CREATE [ OR REPLACE ] FUNCTION
@@ -20503,6 +20503,7 @@ begin
     Par1_RetSet:=AddSQLTokens(stKeyword, Par1, 'SETOF', [], 21);
     T17:=AddSQLTokens(stKeyword, [Par1, Par1_RetSet], 'TRIGGER', [], 17);
     T17_1:=AddSQLTokens(stIdentificator, [Par1, Par1_RetSet], '', [], 17);
+//    T17_2:=AddSQLTokens(stIdentificator, T17_1, '', [], 17);
     T18:=AddSQLTokens(stKeyword, [Par1, Par1_RetSet], 'TABLE', [], 18);
       T:=AddSQLTokens(stSymbol, T18, '(', []);
 
@@ -20512,43 +20513,44 @@ begin
         T.AddChildToken(T19);
   TSymbOut:=AddSQLTokens(stSymbol, [T19, T20], ')', []);
 
-  FTLanguage:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut], 'LANGUAGE', []);
+  FTLanguage:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, { T17_2,} TSymbOut], 'LANGUAGE', []);
     T200_1:=AddSQLTokens(stIdentificator, FTLanguage, '', [], 200);
+    T200_2:=AddSQLTokens(stString, FTLanguage, '', [], 200);
 
-  FTAS:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1], 'AS', []);
+  FTAS:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2], 'AS', []);
     T201_1:=AddSQLTokens(stString, FTAS, '', [], 201);
     T201_1.AddChildToken(FTLanguage);
 
-  T202:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1], 'COST', [toOptional]);
+  T202:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1], 'COST', [toOptional]);
     T202_1:=AddSQLTokens(stInteger, T202, '', [], 202);
     T202_1.AddChildToken([FTLanguage, FTAS]);
 
-  T203:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1], 'ROWS', [toOptional]);
+  T203:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1], 'ROWS', [toOptional]);
     T203_1:=AddSQLTokens(stInteger, T202, '', [], 203);
     T203_1.AddChildToken([T202]);
 
-  T204:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1], 'WINDOW', [toOptional], 204);
+  T204:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1], 'WINDOW', [toOptional], 204);
     T204.AddChildToken([T202, T203]);
 
-  T205:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204], 'IMMUTABLE', [toOptional], 205);
+  T205:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204], 'IMMUTABLE', [toOptional], 205);
     T205.AddChildToken([T202, T203, T204]);
-  T206:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204], 'STABLE', [toOptional], 206);
+  T206:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204], 'STABLE', [toOptional], 206);
     T206.AddChildToken([T202, T203, T204]);
-  T207:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204], 'VOLATILE', [toOptional], 207);
+  T207:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204], 'VOLATILE', [toOptional], 207);
     T207.AddChildToken([T202, T203, T204]);
 
-  T208:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204,
+  T208:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204,
       T205, T206, T207], 'CALLED', [toOptional]);
     T208_1:=AddSQLTokens(stKeyword, T208, 'ON', []);
     T208_1:=AddSQLTokens(stKeyword, T208_1, 'NULL', []);
     T208_1:=AddSQLTokens(stKeyword, T208_1, 'INPUT', [], 208);
     T208_1.AddChildToken([T202, T203, T204, T205, T206, T207]);
 
-  T209:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204,
+  T209:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204,
       T205, T206, T207], 'STRICT', [toOptional], 209);
     T209.AddChildToken([T202, T203, T204, T205, T206, T207]);
 
-  T210:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T201_1, T202_1, T203_1, T204,
+  T210:=AddSQLTokens(stKeyword, [TSymb2, T17, T17_1, TSymbOut, T200_1, T200_2, T201_1, T202_1, T203_1, T204,
       T205, T206, T207], 'RETURNS', [toOptional]);
     T210_1:=AddSQLTokens(stKeyword, T210, 'NULL', []);
     T210_1:=AddSQLTokens(stKeyword, T210_1, 'ON', []);
