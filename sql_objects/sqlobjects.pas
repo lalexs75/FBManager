@@ -705,6 +705,22 @@ const
     'ataAttachPartition'
     );
 
+  AlterDomainActionStr : array [TAlterDomainAction] of string =
+    ('adaRenameDomain',
+     'adaSetDefault',
+     'adaDropDefault',
+     'adaSetNotNull',
+     'adaDropNotNull',
+     'adaAddConstraint',
+     'adaDropConstraint',
+     'adaRenameConstraint',
+     'adaSetCheckExpression',
+     'adaDropCheckExpression',
+     'adaType',
+     'adaSetSchema',
+     'adaSetOwner',
+     'adaValidateConstraint');
+
 function IndexSortOrderStr(AValue:TIndexSortOrder):string;
 function StrToIndexSortOrder(AValue:string):TIndexSortOrder;
 function IndexNullPosStr(AValue:TIndexNullPos):string;

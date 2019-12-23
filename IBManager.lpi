@@ -1895,41 +1895,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EConvertError"/>
-      </Item>
-      <Item>
-        <Name Value="EZSQLException"/>
-      </Item>
-      <Item>
-        <Name Value="EReadError"/>
-      </Item>
-      <Item>
-        <Name Value="Exception"/>
-      </Item>
-      <Item>
-        <Name Value="EZDatabaseError"/>
-      </Item>
-      <Item>
-        <Name Value="RunError(216)"/>
-      </Item>
-      <Item>
-        <Name Value="EAccessViolation"/>
-      </Item>
-      <Item>
-        <Name Value="RunError(200)"/>
-      </Item>
-      <Item>
-        <Name Value="EDivByZero"/>
-      </Item>
-      <Item>
-        <Name Value="EUIBError"/>
-      </Item>
-      <Item>
-        <Name Value="EAbort"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>

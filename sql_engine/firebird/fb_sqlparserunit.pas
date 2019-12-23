@@ -508,6 +508,8 @@ type
 
   TFBSQLAlterDomain = class(TSQLAlterDomain)
   private
+    FCurOperator: TAlterDomainOperator;
+    FCurField: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
@@ -4920,7 +4922,8 @@ end;
 
 procedure TFBSQLAlterDomain.InitParserTree;
 var
-  T1, FSQLTokens, T, T2: TSQLTokenRecord;
+  T1, FSQLTokens, T, T2, T1_1, TC1, TC1_1, TC2, T3, TD1, TD2,
+    TD3, TD4: TSQLTokenRecord;
 begin
   (*
   ALTER DOMAIN name
@@ -4984,46 +4987,80 @@ begin
 
 
   T1:=AddSQLTokens(stKeyword, T, 'SET', []);
-  T1:=AddSQLTokens(stKeyword, T1, 'DEFAULT', []);
-    AddSQLTokens(stString, T1, '', [], 10);
-    AddSQLTokens(stInteger, T1, '', [], 10);
-    AddSQLTokens(stIdentificator, T1, '', [], 10);
-    AddSQLTokens(stKeyword, T1, 'NULL', [], 10);
-    AddSQLTokens(stKeyword, T1, 'USER', [], 10);
+  T1_1:=AddSQLTokens(stKeyword, T1, 'DEFAULT', []);
+    AddSQLTokens(stString, T1_1, '', [], 10);
+    AddSQLTokens(stInteger, T1_1, '', [], 10);
+    AddSQLTokens(stIdentificator, T1_1, '', [], 10);
+    AddSQLTokens(stKeyword, T1_1, 'NULL', [], 10);
+    AddSQLTokens(stKeyword, T1_1, 'USER', [], 10);
     T2:=AddSQLTokens(stKeyword, T1, 'NOT', []);
     T2:=AddSQLTokens(stKeyword, T2, 'NULL', [], 41);
 
-  T1:=AddSQLTokens(stKeyword, T, 'DROP', []);
-    AddSQLTokens(stKeyword, T1, 'DEFAULT', [], 20);
-    AddSQLTokens(stKeyword, T1, 'CONSTRAINT', [], 40);
-    T2:=AddSQLTokens(stKeyword, T1, 'NOT', []);
-    T2:=AddSQLTokens(stKeyword, T2, 'NULL', [], 42);
+  TD1:=AddSQLTokens(stKeyword, T, 'DROP', []);
+    TD2:=AddSQLTokens(stKeyword, TD1, 'DEFAULT', [], 20);
+    TD3:=AddSQLTokens(stKeyword, TD1, 'CONSTRAINT', [], 40);
+    TD4:=AddSQLTokens(stKeyword, TD1, 'NOT', []);
+    TD4:=AddSQLTokens(stKeyword, TD4, 'NULL', [], 42);
 
-  T1:=AddSQLTokens(stKeyword, T, 'ADD', []);     //[ADD [CONSTRAINT] CHECK (<dom_search_condition>)]
-    T2:=AddSQLTokens(stKeyword, T1, 'CONSTRAINT', []);
-  T1:=AddSQLTokens(stKeyword, T1, 'CHECK', [], 30);
-    T2.AddChildToken(T1)
+  TC1:=AddSQLTokens(stKeyword, [T, TD2, TD3, TD4], 'ADD', [toOptional]);     //[ADD [CONSTRAINT] CHECK (<dom_search_condition>)]
+    TC1_1:=AddSQLTokens(stKeyword, TC1, 'CONSTRAINT', []);
+  TC2:=AddSQLTokens(stKeyword, [TC1, TC1_1], 'CHECK', [], 30);
 
+  T3:=AddSQLTokens(stKeyword, [T, TC2, TD2, TD3, TD4], 'TYPE', [toOptional], 50);
+    MakeTypeDefTree(Self, T3, [TC1, TD1], tdfDomain, 50);
 end;
 
 procedure TFBSQLAlterDomain.MakeSQL;
+
+function MakeTypeStr(AField: TSQLParserField):string;
+begin
+  Result:=AField.FullTypeName;
+  if AField.ArrayDimension.Count>0 then
+  begin
+    AField.ArrayDimension.ArrayFormat:=fafFirebirdSQL;
+    Result:=Result+AField.ArrayDimension.AsString;
+  end;
+
+  if AField.CharSetName <> '' then
+    Result:=Result + ' CHARACTER SET ' + AField.CharSetName;
+
+  if AField.Collate <> '' then
+    Result:=Result + ' COLLATE ' + AField.Collate;
+
+  if AField.DefaultValue <> '' then
+    Result:=Result + ' DEFAULT '+AField.DefaultValue;
+
+  if fpNotNull in AField.Params then
+    Result:=Result + ' NOT NULL';
+
+//  if F.ComputedSource <> '' then
+//    S1:=S1 + ' COMPUTED BY (' + F.ComputedSource + ')'
+end;
+
 var
-  S: String;
+  S, S1: String;
   OP: TAlterDomainOperator;
 begin
   S:='ALTER DOMAIN '+FullName;
+  S1:='';
   for OP in Operators do
   begin
     case OP.AlterAction of
-      adaRenameDomain:AddSQLCommand(S + ' TO '+OP.ParamValue);
-      adaSetDefault:AddSQLCommand(S + ' SET DEFAULT '+OP.ParamValue);
-      adaDropDefault:AddSQLCommand(S + ' DROP DEFAULT');
-      adaSetNotNull:AddSQLCommand(S + ' SET NOT NULL');
-      adaDropNotNull:AddSQLCommand(S + ' DROP NOT NULL');
-      adaDropConstraint:AddSQLCommand(S + ' DROP CONSTRAINT');
-      adaAddConstraint:AddSQLCommandEx(S + ' ADD CONSTRAINT CHECK (%s)', [OP.ParamValue]);
+      adaRenameDomain: S1:=S1 + LineEnding + '  TO '+OP.ParamValue; //AddSQLCommand(S + ' TO '+OP.ParamValue);
+      adaSetDefault:S1:=S1 + LineEnding + '  SET DEFAULT '+OP.ParamValue; //AddSQLCommand(S + ' SET DEFAULT '+OP.ParamValue);
+      adaDropDefault:S1:=S1 + LineEnding + '  DROP DEFAULT';//AddSQLCommand(S + ' DROP DEFAULT');
+      adaSetNotNull:S1:=S1 + LineEnding + '  SET NOT NULL';//AddSQLCommand(S + ' SET NOT NULL');
+      adaDropNotNull:S1:=S1 + LineEnding + '  DROP NOT NULL';//AddSQLCommand(S + ' DROP NOT NULL');
+      adaDropConstraint:S1:=S1 + LineEnding + '  DROP CONSTRAINT';//AddSQLCommand(S + ' DROP CONSTRAINT');
+      adaAddConstraint:S1:=S1 + LineEnding + Format('  ADD CONSTRAINT CHECK (%s)', [OP.ParamValue]);//AddSQLCommandEx(S + ' ADD CONSTRAINT CHECK (%s)', [OP.ParamValue]);
+      adaType:S1:=S1 + LineEnding + '  TYPE '+MakeTypeStr(OP.Params[0]);//AddSQLCommand(S + ' TYPE '+MakeTypeStr(OP.Params[0]));
+    else
+      raise Exception.CreateFmt('Uknow AlterDomain command : %s', [AlterDomainActionStr[OP.AlterAction]]);
     end;
   end;
+
+  if S1<>'' then
+    AddSQLCommand(S + S1);
   if Description<>'' then
     DescribeObject;
 end;
@@ -5045,6 +5082,23 @@ begin
     40:Operators.AddItem(adaDropConstraint);
     41:Operators.AddItem(adaSetNotNull);
     42:Operators.AddItem(adaDropNotNull);
+
+    50:begin
+         FCurOperator:=Operators.AddItem(adaType);
+         FCurField:=FCurOperator.Params.AddParam('');
+       end;
+    52:FCurField.TypeName:=AWord;
+    53:FCurField.TypeName:='DOUBLE PRECISION';
+    54:FCurField.TypeLen:=StrToInt(AWord);
+    55:FCurField.TypePrec:=StrToInt(AWord);
+    56:FCurField.TypeName:='CHARACTER VARYING';
+    57:FCurField.CharSetName:=AWord;
+    58:FCurField.NotNull:=true;
+    59:FCurField.CheckExpr:=ASQLParser.GetToBracket(')');
+    60:FCurField.Collate:=AWord;
+    61:FCurField.TypeName:='NATIONAL CHARACTER';
+    62:FCurField.TypeName:='NATIONAL CHAR';
+    63:FCurField.DefaultValue:=AWord;
   end;
 end;
 
