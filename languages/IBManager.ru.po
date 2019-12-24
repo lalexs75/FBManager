@@ -1696,6 +1696,10 @@ msgstr "Разрешено"
 msgid "Enable loggin metadata changes"
 msgstr "Разрешить протоколирование изменения метаданных"
 
+#: fbmstrconstunit.senablelogginscriptexecutive
+msgid "Enable loggin script executive"
+msgstr "Разрешить протоколирование редактора скриптов"
+
 #: fbmstrconstunit.senablelogginsqleditor
 msgid "Enable loggin SQL editor"
 msgstr "Разрешить протоколирование редактора SQL"
@@ -5158,6 +5162,10 @@ msgstr "Имя страницы SQL"
 #: fbmstrconstunit.ssqlparseerror
 msgid "Error in SQL text"
 msgstr "Ошибка в тексте запроса SQL"
+
+#: fbmstrconstunit.ssqlscriptlogfile
+msgid "SQL script log file"
+msgstr "Файл протоколирования SQL скрипта"
 
 #: fbmstrconstunit.ssqlsecurity
 msgid "Sql security"

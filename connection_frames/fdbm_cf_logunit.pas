@@ -95,6 +95,8 @@ begin
   cbLogMeta.Caption:=sEnableLogginMetadataChanges;
   cbLogEditor.Caption:=sEnableLogginSQLEditor;
   CheckBox1.Caption:=sUseCustomCodepageForLoggin;
+  CheckBox2.Caption:=sEnableLogginScriptExecutive;
+  Label12.Caption:=sSQLscriptLogFile;
 end;
 
 procedure TfdbmCFLogFrame.Activate;

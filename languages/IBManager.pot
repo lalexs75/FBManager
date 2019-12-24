@@ -1622,6 +1622,10 @@ msgstr ""
 msgid "Enable loggin metadata changes"
 msgstr ""
 
+#: fbmstrconstunit.senablelogginscriptexecutive
+msgid "Enable loggin script executive"
+msgstr ""
+
 #: fbmstrconstunit.senablelogginsqleditor
 msgid "Enable loggin SQL editor"
 msgstr ""
@@ -4994,6 +4998,10 @@ msgstr ""
 
 #: fbmstrconstunit.ssqlparseerror
 msgid "Error in SQL text"
+msgstr ""
+
+#: fbmstrconstunit.ssqlscriptlogfile
+msgid "SQL script log file"
 msgstr ""
 
 #: fbmstrconstunit.ssqlsecurity
