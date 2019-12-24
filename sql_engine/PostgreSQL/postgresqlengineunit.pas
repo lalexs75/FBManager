@@ -1021,10 +1021,32 @@ type
 
   TPGProcedure = class(TDBStoredProcObject)
   private
+    FACLListStr: string;
+    FFunctionConfig: TStrings;
+    FLanguage: TPGLanguage;
+    FLanguageOID: integer;
+    FSchema: TPGSchema;
+    FOID:integer;
+    function GetNameWithParams:string;
+    procedure DoInitInParams(AParamsArray:string);
+  protected
+    procedure InternalInitACLList;
+    procedure InternalSetDescription(ACommentOn: TSQLCommentOn);override;
+    function GetCaptionFullPatch:string; override;
+    function GetEnableRename: boolean; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
+    procedure RefreshObject; override;
+    procedure RefreshDependencies; override;
+
+    property Schema:TPGSchema read FSchema;
+    property Language:TPGLanguage read FLanguage;
+    property LanguageOID:integer read FLanguageOID;
+    property FunctionConfig:TStrings read FFunctionConfig;
   end;
 
   { TPGIndex }
@@ -1337,20 +1359,259 @@ end;
 
 { TPGProcedure }
 
+function TPGProcedure.GetNameWithParams: string;
+var
+  P: TDBField;
+begin
+  Result:='';
+  for P in FieldsIN do
+  begin
+    if Result <> '' then Result:=Result + ',';
+    Result:=Result + ' ' + PGVarTypeNames[P.IOType];
+    if P.FieldTypeDomain <> '' then
+      Result:=Result + ' ' + P.FieldTypeDomain
+    else
+      Result:=Result + ' ' + P.FieldTypeName;
+  end;
+  Result:=GetCaptionFullPatch+'('+Result+')';
+end;
+
+procedure TPGProcedure.DoInitInParams(AParamsArray: string);
+var
+  S1, S2, S3: String;
+  FCnt1, i: Integer;
+  FModes: TCharArray;
+  FItm: TStringList;
+  F: TDBField;
+begin
+  S1:=Copy2SymbDel( AParamsArray, '|');
+  S2:=Copy2SymbDel( AParamsArray, '|');
+  S3:=AParamsArray;
+  FCnt1:=ParsePGArrayChar(S1, FModes);
+
+  FieldsIN.Clear;
+  FItm:=TStringList.Create;
+  ParsePGArrayString(S3, FItm);
+  for i:=0 to FItm.Count-1 do
+  begin
+    F:=FieldsIN.Add(FItm[i]);
+    if I<FCnt1 then
+      case FModes[i] of
+        'i':F.IOType:=spvtInput;
+        'o':F.IOType:=spvtOutput;
+        'b':F.IOType:=spvtInOut;
+        'v':F.IOType:=spvtVariadic;
+        't':F.IOType:=spvtTable;
+      end
+    else
+      F.IOType:=spvtInput;
+  end;
+  FItm.Free;
+end;
+
+procedure TPGProcedure.InternalInitACLList;
+begin
+
+end;
+
+procedure TPGProcedure.InternalSetDescription(ACommentOn: TSQLCommentOn);
+begin
+  inherited InternalSetDescription(ACommentOn);
+end;
+
+function TPGProcedure.GetCaptionFullPatch: string;
+begin
+  Result:=inherited GetCaptionFullPatch;
+end;
+
+function TPGProcedure.GetEnableRename: boolean;
+begin
+  Result:=inherited GetEnableRename;
+end;
+
+procedure TPGProcedure.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+end;
+
 constructor TPGProcedure.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FFunctionConfig:=TStringList.Create;
+  //FResultType:=TDBField.Create(Self);
+  FSchema:=TPGDBRootObject(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+    //FReturnTypeOID:=StrToInt(ADBItem.ObjType);
+    FACLListStr:=ADBItem.ObjACLList;
+    if (ADBItem.ObjData<>'') and (ussExpandObjectDetails in OwnerDB.UIShowSysObjects) then
+      DoInitInParams(ADBItem.ObjData);
+  end;
+
+  FSystemObject:=FSchema.SystemObject;
+  InternalInitACLList;
 end;
 
 destructor TPGProcedure.Destroy;
 begin
+  FreeAndNil(FFunctionConfig);
   inherited Destroy;
 end;
 
 class function TPGProcedure.DBClassTitle: string;
 begin
   Result:=inherited DBClassTitle;
+end;
+
+function TPGProcedure.InternalGetDDLCreate: string;
+var
+  FCmd: TPGSQLCreateProcedure;
+  i: Integer;
+  ACL: TStringList;
+begin
+  if not Assigned(Language) then
+    RefreshObject;
+
+  FCmd:=TPGSQLCreateProcedure.Create(nil);
+  FCmd.SchemaName:=SchemaName;
+  FCmd.Name:=Caption;
+  //FCmd.SetOF:=FReturnSetType;
+  FieldsIN.SaveToSQLFields(FCmd.Params);
+
+  FCmd.Body:=ProcedureBody;
+  FCmd.Description:=Description;
+//  FCmd.VolatilityCategories:=VolatilityCategories;
+//  FCmd.Cost:=AVGTime;
+(*
+  for i:=0 to FFunctionConfig.Count-1 do
+  begin
+    S:=FFunctionConfig[i];
+    FCmdA:=TPGSQLAlterFunction.Create(FCmd);
+    FCmd.AddChild(FCmdA);
+    FCmdA.SchemaName:=SchemaName;
+    FCmdA.Name:=Caption;
+    FCmdA.Params.Assign(FCmd.Params);
+
+    FCmdA.AlterOperator:=pgafoSet1;
+    P:=FCmdA.ConfigParams.AddParam(Copy2SymbDel(S, '='));
+    P.ParamValue:=QuotedString(S, '''');
+  end;
+*)
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
+
+  if Assigned(FACLList) then
+  begin
+    ACL:=TStringList.Create;
+    try
+      FACLList.RefreshList;
+      FACLList.MakeACLListSQL(nil, ACL, true);
+      Result:=Result + LineEnding + LineEnding + ACL.Text;
+    finally
+      ACL.Free;
+    end;
+  end;
+end;
+
+procedure TPGProcedure.RefreshObject;
+var
+  CntColums: Integer;
+begin
+  FLanguage:=nil;
+  FLanguageOID:=0;
+  CntColums:=0;
+  FieldsIN.Clear;
+  FFunctionConfig.Clear;
+  inherited RefreshObject;
+  if State = sdboEdit then
+  begin
+(*    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGFuntions['PGFuntion']);
+    try
+      if FOID = 0 then
+        Q.ParamByName('proname').AsString:=Caption
+      else
+        Q.ParamByName('oid').AsInteger:=FOID;
+
+      Q.ParamByName('pronamespace').AsInteger:=FSchema.SchemaId;
+      Q.Open;
+      if Q.RecordCount>0 then
+      begin
+        FDescription:= Q.FieldByName('description').AsString;
+
+        if FOID = 0 then
+          FOID:=Q.FieldByName('oid').AsInteger;
+        FProcedureBody:=Trim(Q.FieldByName('prosrc').AsString);
+        FVolatilityCategories:=StrToPGSPVolatCat(Q.FieldByName('provolatile').AsString);
+        //FisWindow:=Q.FieldByName('proIsWindow').AsBoolean;
+
+        FAVGTime:=trunc(Q.FieldByName('procost').AsFloat);
+        FAVGRows:=trunc(Q.FieldByName('prorows').AsFloat);
+        FACLListStr:=Q.FieldByName('proacl').AsString;
+
+        FLanguageOID:=Q.FieldByName('prolang').AsInteger;
+        FisStrict:=Q.FieldByName('proisstrict').AsBoolean;
+        FReturnTypeOID:=Q.FieldByName('prorettype').AsInteger;
+        { TODO : Доработать выборку результирующего типа }
+        ResultPgDomain:=TSQLEnginePostgre(OwnerDB).FindDomainByID(Q.FieldByName('prorettype').AsInteger);
+
+        if Assigned(ResultPgDomain) then
+        begin
+          if not ResultPgDomain.Loaded then ResultPgDomain.RefreshObject;
+
+          ResultType.FieldTypeDomain:=ResultPgDomain.CaptionFullPatch;
+//          if Assigned(ResultPgDomain.FieldType) then
+          ResultType.FieldTypeName:=ResultPgDomain.FieldType.TypeName;
+        end
+        else
+        begin
+          ResultType.FieldTypeDomain:='';
+          RP:=OwnerDB.TypeList.FindTypeByID(Q.FieldByName('prorettype').AsInteger);
+          if Assigned(RP) then
+            ResultType.FieldTypeName:=RP.TypeName
+          else
+            raise Exception.CreateFmt('not found type with OID = %d', [Q.FieldByName('prorettype').AsInteger]);
+        end;
+        FReturnSetType:=Q.FieldByName('proretset').AsBoolean;
+
+        if Q.FieldByName('proconfig').AsString<>'' then
+          ParsePGArrayString(Q.FieldByName('proconfig').AsString, FFunctionConfig);
+
+        if Q.FieldByName('name_dims').AsString<>'' then
+        begin
+          { TODO : Необходимо обработать ситуацию только с колонками выходных параметров. Кол-во колонок в из запроса возвращается равным нулю! }
+          S:=Q.FieldByName('name_dims').AsString;
+          Delete(S, 1, Pos(':', S));
+          S:=Copy(S, 1, Length(S)-1);
+          if S<>'' then
+            CntColums:=StrToIntDef(S, 0);
+          if CntColums<=0 then
+            CntColums:=Q.FieldByName('pronargs').AsInteger;
+          ParseParamList(CntColums);
+
+          if Q.FieldByName('pronargdefaults').AsInteger > 0 then
+            FillDefValues(Q.FieldByName('def_values').AsString);
+        end;
+        RefreshParamsDesc;
+      end;
+    finally
+      Q.Free;
+    end; *)
+  end;
+
+  if FLanguageOID<>0 then
+    FLanguage:=TSQLEnginePostgre(OwnerDB).LanguageRoot.LangByOID(FLanguageOID);
+
+  if Assigned(FACLList) and (FACLListStr<>'') then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
+end;
+
+procedure TPGProcedure.RefreshDependencies;
+begin
+  inherited RefreshDependencies;
 end;
 
 { TPGProceduresRoot }
@@ -7842,6 +8103,34 @@ end;
 
 procedure TPGFunction.RefreshObject;
 
+
+procedure ParseParamList2(AParamTypes:string);
+var
+  Items: TPGIntegerArray;
+  O: Integer;
+  F: TDBField;
+  PTT: TDBMSFieldTypeRecord;
+  D: TPGDomain;
+begin
+  ParsePGArrayInt(AParamTypes, Items, ' ');
+
+  for O in Items do
+  begin
+    F:=FieldsIN.Add('');
+    F.IOType:=spvtInput;
+
+    PTT:=OwnerDB.TypeList.FindTypeByID(O);
+    if Assigned(PTT) then
+      F.FieldTypeName:=PTT.TypeName
+    else
+    begin
+      D:=TSQLEnginePostgre(OwnerDB).FindDomainByID(O);
+      if Assigned(D) then
+        F.FieldTypeDomain := D.CaptionFullPatch;
+    end;
+  end;
+end;
+
 procedure ParseParamList(CntArg:integer);
 var
   aSQLPars:string;
@@ -8057,6 +8346,13 @@ begin
             CntColums:=Q.FieldByName('pronargs').AsInteger;
           ParseParamList(CntColums);
 
+          if Q.FieldByName('pronargdefaults').AsInteger > 0 then
+            FillDefValues(Q.FieldByName('def_values').AsString);
+        end
+        else
+        if Q.FieldByName('pronargs').AsInteger > 0 then
+        begin
+          ParseParamList2(Q.FieldByName('proargtypes').AsString);
           if Q.FieldByName('pronargdefaults').AsInteger > 0 then
             FillDefValues(Q.FieldByName('def_values').AsString);
         end;

@@ -505,6 +505,10 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL; override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
   end;
 
   { TPGSQLAlterProcedure }
@@ -3836,6 +3840,21 @@ begin
   //  } ...
   S:='CREATE ';
   AddSQLCommand(S);
+end;
+
+constructor TPGSQLCreateProcedure.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TPGSQLCreateProcedure.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TPGSQLCreateProcedure.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
 end;
 
 { TPGSQLDropSubscription }

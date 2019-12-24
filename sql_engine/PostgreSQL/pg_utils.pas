@@ -30,11 +30,14 @@ uses
   Classes, SysUtils, contnrs, SQLEngineCommonTypesUnit, DB, PostgreSQLEngineUnit,
   SQLEngineAbstractUnit, sqlObjects, pgTypes;
 
+type
+  TPGIntegerArray = array of integer;
+
 procedure FillFieldTypes(Items:TDBMSFieldTypeList);
 function ConvertFieldList(pgFieldList:string;const Obj:TDBDataSetObject):string;
 function ParsePGArrayString(ArrayStr:string;const Items:TStrings):integer;
 function ParsePGArrayChar(ArrayStr:string;out Items:TCharArray; ADelimiter:Char = ','):integer;
-function ParsePGArrayInt(ArrayStr:string;out Items:TIntegerArray; ADelimiter:Char = ','):integer;
+function ParsePGArrayInt(ArrayStr:string;out Items:TPGIntegerArray; ADelimiter:Char = ','):integer;
 function ParsePGArrayByte(ArrayStr:string;out Items:TByteArray; ADelimiter:Char = ','):integer;
 
 function StrToPGSPVolatCat(const S:string):TPGSPVolatCat;
@@ -329,9 +332,39 @@ begin
   Inc(Result);
 end;
 
-function ParsePGArrayInt(ArrayStr: string; out Items: TIntegerArray; ADelimiter:Char = ','): integer;
+function ParsePGArrayInt(ArrayStr: string; out Items: TPGIntegerArray; ADelimiter:Char = ','): integer;
+var
+  FCnt, i, j: Integer;
 begin
-  AbstractError;
+  FCnt:=DoCountItems(ArrayStr, ADelimiter);
+
+  SetLength(Items, FCnt);
+
+  if ArrayStr = '' then Exit(0);
+
+  i:=1;
+  Result:=0;
+  j:=1;
+  while I<Length(ArrayStr) do
+  begin
+    Inc(I);
+    if ArrayStr[i] = '{' then
+    else
+    if ArrayStr[i] = '}' then I:=Length(ArrayStr) + 1
+    else
+    if ArrayStr[i] = ADelimiter then
+    begin
+      Items[Result]:=StrToInt(Copy(ArrayStr, j, i - j));
+      j:=i+1;
+      Inc(Result);
+    end
+  end;
+
+  if j<i then
+  begin
+    Items[Result]:=StrToInt(Copy(ArrayStr, j, i - j + 1));
+    Inc(Result);
+  end
 end;
 
 function ParsePGArrayByte(ArrayStr: string; out Items: TByteArray; ADelimiter:Char = ','): integer;
