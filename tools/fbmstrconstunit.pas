@@ -310,6 +310,8 @@ resourcestring
   sCreateMySQLDatabase              = 'Create MySQL database...';
   sHandlerID                        = 'Handler ID';
   sValidatorID                      = 'Validator ID';
+  sEnableLogginScriptExecutive      = 'Enable loggin script executive';
+  sSQLscriptLogFile                 = 'SQL script log file';
 
   sSelectConnectionType             = 'Select connection type';
   sFKName                           = 'Forign key name';
