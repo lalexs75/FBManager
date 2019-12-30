@@ -4603,7 +4603,7 @@ FILTER
 
   //ROLE
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateRole, 'CREATE ROLE');           //CREATE ROLE
-  //ALTER ROLE
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLAlterRole, 'ALTER ROLE');
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropRole, 'DROP ROLE');               //DROP ROLE
 
   //EXTERNAL FUNCTION

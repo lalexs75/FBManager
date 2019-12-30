@@ -1187,7 +1187,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'DropExternalFunction1'
         Lines.Strings = (
-          'DROP EXTERNAL FUNCTION funcname ;'
+          'DROP EXTERNAL FUNCTION funcname;'
         )
       end>
     Left = 32

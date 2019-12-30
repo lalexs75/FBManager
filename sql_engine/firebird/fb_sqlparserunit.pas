@@ -651,6 +651,22 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
   end;
 
+  { TFBSQLAlterRole }
+  TFBSQLAlterRoleAction = (araSet, araDrop);
+
+  TFBSQLAlterRole = class(TSQLCommandDDL)
+  private
+    FAlterRoleAction: TFBSQLAlterRoleAction;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property AlterRoleAction:TFBSQLAlterRoleAction read FAlterRoleAction write FAlterRoleAction;
+  end;
+
   { TFBSQLDropRole }
 
   TFBSQLDropRole = class(TSQLDropCommandAbstract)
@@ -1481,6 +1497,64 @@ begin
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
   end;
+end;
+
+{ TFBSQLAlterRole }
+
+procedure TFBSQLAlterRole.InitParserTree;
+var
+  FSQLTokens, T, T1, T2: TSQLTokenRecord;
+begin
+  //ALTER ROLE RDB$ADMIN SET AUTO ADMIN MAPPING -- включение
+  //ALTER ROLE RDB$ADMIN DROP AUTO ADMIN MAPPING -- выключение
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T1:=AddSQLTokens(stKeyword, T, 'SET', [], 2);
+  T2:=AddSQLTokens(stKeyword, T, 'DROP', [], 3);
+  T:=AddSQLTokens(stIdentificator, [T1, T2], 'AUTO', []);
+  T:=AddSQLTokens(stIdentificator, T, 'ADMIN', []);
+  T:=AddSQLTokens(stIdentificator, T, 'MAPPING', []);
+end;
+
+procedure TFBSQLAlterRole.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FAlterRoleAction:=araSet;
+    3:FAlterRoleAction:=araDrop;
+  end;
+end;
+
+procedure TFBSQLAlterRole.MakeSQL;
+var
+  S: String;
+begin
+  //ALTER ROLE RDB$ADMIN SET AUTO ADMIN MAPPING -- включение
+  //ALTER ROLE RDB$ADMIN DROP AUTO ADMIN MAPPING -- выключение
+  S:='ALTER ROLE '+Name;
+  case FAlterRoleAction of
+    araSet:S:=S + ' SET';
+    araDrop:S:=S + ' DROP';
+  end;
+  S:=S +' AUTO ADMIN MAPPING';
+  AddSQLCommand(S);
+end;
+
+constructor TFBSQLAlterRole.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TFBSQLAlterRole.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLAlterRole then
+  begin
+    FAlterRoleAction:=TFBSQLAlterRole(ASource).FAlterRoleAction;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TFBSQLDropCollation }
@@ -6755,7 +6829,7 @@ begin
     T:=AddSQLTokens(stString, T, '', [], 3);
 
   //RECREATE EXCEPTION exception_name 'message'
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 0, okException);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 4, okException);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'EXCEPTION', [toFindWordLast]);
     T:=AddSQLTokens(stIdentificator, T, '', [], 2);
     T:=AddSQLTokens(stString, T, '', [], 3);
