@@ -4616,7 +4616,7 @@ FILTER
 
   //COLLATION
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateCollation, 'CREATE COLLATION');      //CREATE COLLATION
-  //DROP COLLATION
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropCollation, 'DROP COLLATION');
 
   //COMMENTS
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCommentOn, 'COMMENT ON');                  //COMMENT ON

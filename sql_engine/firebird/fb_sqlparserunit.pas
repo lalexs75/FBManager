@@ -758,6 +758,17 @@ type
     property CharSet:string read FCharSet write FCharSet;
   end;
 
+  { TFBSQLDropCollation }
+
+  TFBSQLDropCollation = class(TSQLDropCommandAbstract)
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
+
   { TFBSQLSet }
 
   TFBSQLSet = class(TSQLCommandDDL)
@@ -1453,6 +1464,35 @@ begin
       TConstRef9.AddChildToken(AEndTokens[i]);
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
+  end;
+end;
+
+{ TFBSQLDropCollation }
+
+procedure TFBSQLDropCollation.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  //DROP COLLATION collname ;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'COLLATION', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+end;
+
+procedure TFBSQLDropCollation.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP COLLATION '+Name;
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLDropCollation.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
   end;
 end;
 
