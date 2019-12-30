@@ -1619,9 +1619,9 @@ object FBTestSQLData: TFBTestSQLData
         )
       end    
       item
-        Caption = 'AlterException1'
+        Caption = 'CreateException3'
         Lines.Strings = (
-          'ALTER EXCEPTION E_LARGE_VALUE ''Значение превышает максимально допустимое'';'
+          'CREATE EXCEPTION E_INCORRECT_WORKTIME ''The working day has not started yet.'';'
         )
       end    
       item
@@ -1631,9 +1631,9 @@ object FBTestSQLData: TFBTestSQLData
         )
       end    
       item
-        Caption = 'DropException1'
+        Caption = 'CreateOrAlterException2'
         Lines.Strings = (
-          'DROP EXCEPTION E_LARGE_VALUE;'
+          'CREATE OR ALTER EXCEPTION exception_name ''message'';'
         )
       end    
       item
@@ -1643,21 +1643,21 @@ object FBTestSQLData: TFBTestSQLData
         )
       end    
       item
-        Caption = 'CreateException3'
+        Caption = 'AlterException1'
         Lines.Strings = (
-          'CREATE EXCEPTION E_INCORRECT_WORKTIME ''The working day has not started yet.'';'
-        )
-      end    
-      item
-        Caption = 'CreateOrAlterException2'
-        Lines.Strings = (
-          'CREATE OR ALTER EXCEPTION exception_name ''message'';'
+          'ALTER EXCEPTION E_LARGE_VALUE ''Значение превышает максимально допустимое'';'
         )
       end    
       item
         Caption = 'AlterException2'
         Lines.Strings = (
           'ALTER EXCEPTION exception_name ''message 1 по русски'';'
+        )
+      end    
+      item
+        Caption = 'DropException1'
+        Lines.Strings = (
+          'DROP EXCEPTION E_LARGE_VALUE;'
         )
       end    
       item

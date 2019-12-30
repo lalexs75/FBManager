@@ -456,11 +456,14 @@ type
   end;
 
   { TFBSQLCreateShadow }
+  TFBSQLCreateShadowMode = (cshmNone, cshmAuto, cshmManual);
 
   TFBSQLCreateShadow = class(TSQLCreateCommandAbstract)
   private
-    FShadowFileName: string;
+    FCreateMode: TFBSQLCreateShadowMode;
+    //FShadowFileName: string;
     FShadowNum: Integer;
+    FCurFile: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
@@ -468,7 +471,8 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property ShadowNum:Integer read FShadowNum write FShadowNum;
-    property ShadowFileName:string read FShadowFileName write FShadowFileName;
+    property CreateMode:TFBSQLCreateShadowMode read FCreateMode write FCreateMode;
+    //property ShadowFileName:string read FShadowFileName write FShadowFileName;
   end;
 
   { TFBSQLDropShadow }
@@ -1490,7 +1494,8 @@ end;
 
 procedure TFBSQLCreateShadow.InitParserTree;
 var
-  FSQLTokens, T, T1, T2, T3, T4: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2, T3, T4, TLen, TLen1, TLen2_1, TLen2_2,
+    TFile1: TSQLTokenRecord;
 begin
   //CREATE SHADOW sh_num [AUTO | MANUAL] [CONDITIONAL]
   //' filepath ' [LENGTH [=] num [PAGE[S]]]
@@ -1509,6 +1514,15 @@ begin
 
   T3:=AddSQLTokens(stKeyword, [T1, T2], 'CONDITIONAL', [], 4);
   T4:=AddSQLTokens(stString, [T, T1, T2, T3], '', [], 5);
+
+  TLen:=AddSQLTokens(stKeyword, T4, 'LENGTH', [toOptional]);
+    TLen1:=AddSQLTokens(stSymbol, TLen, '=', [], 6);
+  TLen1:=AddSQLTokens(stInteger, [TLen, TLen1], '', [], 7);
+  TLen2_1:=AddSQLTokens(stKeyword, TLen1, 'PAGE', [toOptional], 8);
+  TLen2_2:=AddSQLTokens(stKeyword, TLen1, 'PAGES', [toOptional], 8);
+
+  TFile1:=AddSQLTokens(stKeyword, [T4, TLen1, TLen2_1, TLen2_2], 'FILE', [toOptional]);
+    TFile1.AddChildToken(T4);
 end;
 
 procedure TFBSQLCreateShadow.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -1517,7 +1531,12 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:ShadowNum:=StrToInt(AWord);
-    5:ShadowFileName:=ExtractQuotedString(AWord, '''');
+    2:FCreateMode:=cshmAuto;
+    3:FCreateMode:=cshmManual;
+    5:FCurFile:=Params.AddParam(ExtractQuotedString(AWord, ''''));
+    6:FCurFile.TypePrec:=1;
+    7:FCurFile.TypeLen:=StrToInt(AWord);
+    8:FCurFile.TypeName:=AWord;
   end;
 end;
 
@@ -1526,7 +1545,8 @@ begin
   if ASource is TFBSQLCreateShadow then
   begin
     ShadowNum:=TFBSQLCreateShadow(ASource).ShadowNum;
-    ShadowFileName:=TFBSQLCreateShadow(ASource).ShadowFileName;
+    CreateMode:=TFBSQLCreateShadow(ASource).CreateMode;
+    //ShadowFileName:=TFBSQLCreateShadow(ASource).ShadowFileName;
   end;
   inherited Assign(ASource);
 end;
@@ -1534,6 +1554,7 @@ end;
 procedure TFBSQLCreateShadow.MakeSQL;
 var
   S: String;
+  i: Integer;
 begin
   //CREATE SHADOW sh_num [AUTO | MANUAL] [CONDITIONAL]
   //' filepath ' [LENGTH [=] num [PAGE[S]]]
@@ -1544,7 +1565,36 @@ begin
   //LENGTH [=] num [PAGE[S]] | STARTING [AT [PAGE]] pagenum
   S:='CREATE SHADOW '+IntToStr(ShadowNum);
 
-  S:=S + ' ' + AnsiQuotedStr(ShadowFileName, '''');
+  case FCreateMode of
+    cshmAuto:S:=S + ' AUTO';
+    cshmManual:S:=S + ' MANUAL';
+  end;
+
+  if Params.Count>0 then
+  begin
+    FCurFile:=Params[0];
+    S:=S + ' ' + AnsiQuotedStr(FCurFile.Caption, '''');
+    if FCurFile.TypeLen>0 then
+    begin
+      S:=S + ' LENGTH ';
+      if FCurFile.TypePrec > 0 then S:=S + '= ';
+      S:=S + IntToStr(FCurFile.TypeLen);
+      if FCurFile.TypeName<>'' then S:=S + ' '+FCurFile.TypeName;
+    end;
+  end;
+  if Params.Count>1 then
+    for i:=1 to Params.Count-1 do
+    begin
+      FCurFile:=Params[i];
+      S:=S + ' FILE ' + AnsiQuotedStr(FCurFile.Caption, '''');
+      if FCurFile.TypeLen>0 then
+      begin
+        S:=S + ' LENGTH ';
+        if FCurFile.TypePrec > 0 then S:=S + '= ';
+        S:=S + IntToStr(FCurFile.TypeLen);
+        if FCurFile.TypeName<>'' then S:=S + ' '+FCurFile.TypeName;
+      end;
+    end;
   AddSQLCommand(S);
 end;
 
@@ -6400,6 +6450,7 @@ end;
 procedure TFBSQLCreateException.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     //1:CreateMode:=cmCreateOrAlter;
     2:Name:=AWord;

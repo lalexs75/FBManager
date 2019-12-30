@@ -28,11 +28,6 @@ type
     procedure SequenceAlter;
     procedure SequenceDrop1;
 
-    procedure ExceptionCreate;
-    procedure ExceptionCreateOrAlter;
-    procedure ExceptionAlter;
-    procedure ExceptionDrop;
-
     //CREATE DATABASE
     procedure CreateDatabase1;
     procedure CreateDatabase2;
@@ -248,16 +243,15 @@ type
     procedure AlterExternalFunction2;
     procedure DropExternalFunction;
 
-    //CREATE EXCEPTION
-    //ALTER EXCEPTION
-    //CREATE OR ALTER EXCEPTION
-    //DROP EXCEPTION
-    //RECREATE EXCEPTION
     procedure CreateException1;
     procedure CreateException2;
-    procedure AlterException;
-    procedure CreateOrAlterException;
-    procedure DropException;
+    procedure CreateException3;
+    procedure AlterException1;
+    procedure AlterException2;
+    procedure CreateOrAlterException1;
+    procedure CreateOrAlterException2;
+    procedure DropException1;
+    procedure DropException2;
     procedure RecreateException;
 
     //CREATE ROLE
@@ -379,26 +373,6 @@ begin
   DoTestSQL(FBTestSQLData.sGenerator['DropSequence2']);
 end;
 
-
-procedure TFBSQLParserTest.ExceptionCreate;
-begin
-  DoTestSQL(FBTestSQLData.sException['CreateException3']);
-end;
-
-procedure TFBSQLParserTest.ExceptionCreateOrAlter;
-begin
-  DoTestSQL(FBTestSQLData.sException['CreateOrAlterException2']);
-end;
-
-procedure TFBSQLParserTest.ExceptionAlter;
-begin
-  DoTestSQL(FBTestSQLData.sException['AlterException2']);
-end;
-
-procedure TFBSQLParserTest.ExceptionDrop;
-begin
-  DoTestSQL(FBTestSQLData.sException['DropException2']);
-end;
 
 procedure TFBSQLParserTest.CreateDatabase1;
 begin
@@ -1145,24 +1119,44 @@ begin
   DoTestSQL(FBTestSQLData.sException['CreateException2']);
 end;
 
-procedure TFBSQLParserTest.AlterException;
+procedure TFBSQLParserTest.CreateException3;
+begin
+  DoTestSQL(FBTestSQLData.sException['CreateException3']);
+end;
+
+procedure TFBSQLParserTest.AlterException1;
 begin
   DoTestSQL(FBTestSQLData.sException['AlterException1']);
 end;
 
-procedure TFBSQLParserTest.CreateOrAlterException;
+procedure TFBSQLParserTest.AlterException2;
+begin
+  DoTestSQL(FBTestSQLData.sException['AlterException2']);
+end;
+
+procedure TFBSQLParserTest.CreateOrAlterException1;
 begin
   DoTestSQL(FBTestSQLData.sException['CreateOrAlterException1']);
 end;
 
-procedure TFBSQLParserTest.DropException;
+procedure TFBSQLParserTest.CreateOrAlterException2;
 begin
-  DoTestSQL(FBTestSQLData.sException['CreateOrAlterException1']);
+  DoTestSQL(FBTestSQLData.sException['CreateOrAlterException2']);
+end;
+
+procedure TFBSQLParserTest.DropException1;
+begin
+  DoTestSQL(FBTestSQLData.sException['DropException1']);
+end;
+
+procedure TFBSQLParserTest.DropException2;
+begin
+  DoTestSQL(FBTestSQLData.sException['DropException2']);
 end;
 
 procedure TFBSQLParserTest.RecreateException;
 begin
-  DoTestSQL(FBTestSQLData.sException['CreateOrAlterException1']);
+  DoTestSQL(FBTestSQLData.sException['RecreateException']);
 end;
 
 procedure TFBSQLParserTest.CreateRole;
