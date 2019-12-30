@@ -497,6 +497,8 @@ type
 
   TFBSQLCreateDomain = class(TSQLCreateDomain)
   private
+    FArrayMax: integer;
+    FArrayMin: integer;
     FComputedSrc: string;
   protected
     procedure InitParserTree;override;
@@ -506,6 +508,8 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract);override;
     property ComputedSrc:string read FComputedSrc write FComputedSrc;
+    property ArrayMin:integer read FArrayMin write FArrayMin;
+    property ArrayMax:integer read FArrayMax write FArrayMax;
   end;
 
   { TFBSQLAlterDomain }
@@ -1107,9 +1111,9 @@ begin
     TArr1_1:=ACmd.AddSQLTokens(stInteger, TArr1, '', [], 31 + TagBase);
     TArr2:=ACmd.AddSQLTokens(stSymbol, TArr1_1, ':', []);
     TArr2:=ACmd.AddSQLTokens(stInteger, TArr2, '', [], 32 + TagBase);
-    TArr2_1:=ACmd.AddSQLTokens(stSymbol, TArr2, ',', []);
+    TArr2_1:=ACmd.AddSQLTokens(stSymbol, [TArr1_1, TArr2], ',', []);
     TArr2_1.AddChildToken(TArr1_1);
-    TArr2:=ACmd.AddSQLTokens(stSymbol, TArr2, ']', []);
+    TArr2:=ACmd.AddSQLTokens(stSymbol, [TArr1_1, TArr2], ']', []);
   TArr2.AddChildToken(TCSet);
 
   (*
@@ -5255,6 +5259,14 @@ begin
 
   if CollationName<>'' then
     S:=S + ' COLLATE ' + CollationName;
+
+  if ArrayMax > 0 then
+  begin
+    S:=S + ' [';
+    if ArrayMin>0 then
+      S:=S + IntToStr(ArrayMin)+':';
+    S:=S + IntToStr(ArrayMax)+']';
+  end;
   AddSQLCommand(S);
 
   if Description <> '' then
@@ -5278,6 +5290,11 @@ begin
     11:DomainType:='NATIONAL CHARACTER';
     12:DomainType:='NATIONAL CHAR';
     13:DefaultValue:=AWord;
+    31:ArrayMax:=StrToInt(AWord);
+    32:begin
+         ArrayMin:=ArrayMax;
+         ArrayMax:=StrToInt(AWord);
+       end;
   end;
 end;
 
@@ -5285,6 +5302,8 @@ constructor TFBSQLCreateDomain.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FSQLCommentOnClass:=TFBSQLCommentOn;
+  FArrayMin:=-1;
+  FArrayMax:=-1;
 end;
 
 procedure TFBSQLCreateDomain.Assign(ASource: TSQLObjectAbstract);
@@ -5292,6 +5311,8 @@ begin
   if ASource is TFBSQLCreateDomain then
   begin
     ComputedSrc:=TFBSQLCreateDomain(ASource).ComputedSrc;
+    ArrayMin:=TFBSQLCreateDomain(ASource).ArrayMin;
+    ArrayMax:=TFBSQLCreateDomain(ASource).ArrayMax;
   end;
   inherited Assign(ASource);
 end;
