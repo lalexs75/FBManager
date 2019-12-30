@@ -8,6 +8,7 @@ object UserDBModule: TUserDBModule
   Width = 906
   object UserDB: TZConnection
     ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
@@ -334,6 +335,7 @@ object UserDBModule: TUserDBModule
   end
   object OldUserDB: TZConnection
     ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
@@ -3455,12 +3457,12 @@ object UserDBModule: TUserDBModule
       ''
       'ALTER TABLE db_database ADD COLUMN show_child_objects BOOLEAN;'
       ''
-      ' COMMIT; '
+      'COMMIT; '
     )
     Connection = UserDB
     Delimiter = ';'
     Left = 744
-    Top = 136
+    Top = 144
   end
   object UpdDB5: TZSQLProcessor
     Params = <>

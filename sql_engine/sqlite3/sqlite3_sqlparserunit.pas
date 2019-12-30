@@ -84,6 +84,22 @@ type
     property SchemaName;
   end;
 
+
+  { TSQLite3SQLCreateVirtualTable }
+
+  TSQLite3SQLCreateVirtualTable = class(TSQLCreateTable)
+  private
+    FModuleName: string;
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+    property ModuleName:string read FModuleName write FModuleName;
+  end;
+
   { TSQLite3SQLDropTable }
 
   TSQLite3SQLDropTable = class(TSQLDropCommandAbstract)
@@ -552,6 +568,81 @@ begin
       TC_COLL1.AddChildToken(TC_PK1);
     end;
   end;
+end;
+
+{ TSQLite3SQLCreateVirtualTable }
+
+procedure TSQLite3SQLCreateVirtualTable.InitParserTree;
+var
+  FSQLTokens, T1, T, TSchema, TSchema1, TName, TName1, T2, T3,
+    T4: TSQLTokenRecord;
+begin
+  (*
+    CREATE VIRTUAL TABLE [IF NOT EXISTS] [{schema-name} .]  tablename
+    	USING module-name [(<module-argument> [, <module-argument>])];
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'VIRTUAL', []);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'TABLE', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, T, 'IF', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'NOT', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', [], -1);
+
+  TSchema:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+  TSchema1:=AddSQLTokens(stString, [T, T1], '', [], 1);
+   T:=AddSQLTokens(stSymbol, [TSchema, TSchema1], '.', []);
+   TName:=AddSQLTokens(stIdentificator, T, '', [], 2);
+   TName1:=AddSQLTokens(stString, T, '', [], 2);
+
+  T:=AddSQLTokens(stKeyword, [TSchema, TSchema1, TName, TName1], 'USING', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 3);
+  T:=AddSQLTokens(stSymbol, T, '(', [toOptional]);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 4);
+    T2:=AddSQLTokens(stString, T, '', [], 4);
+    T3:=AddSQLTokens(stInteger, T, '', [], 4);
+    T4:=AddSQLTokens(stFloat, T, '', [], 4);
+    T:=AddSQLTokens(stSymbol, [T1, T2, T3, T4], ',', []);
+    T.AddChildToken([T1, T2, T3, T4]);
+  T:=AddSQLTokens(stSymbol, [T1, T2, T3, T4], ')', []);
+end;
+
+procedure TSQLite3SQLCreateVirtualTable.MakeSQL;
+var
+  S: String;
+begin
+  S:='CREATE VIRTUAL TABLE ';
+  if ooIfNotExists in Options then
+    S:=S + 'IF NOT EXISTS ';
+  S:=S + FullName + ' USING ' + ModuleName;
+
+  if Params.Count>0 then
+    S:=S + '('+Params.AsString + ')';
+
+  AddSQLCommand(S);
+end;
+
+procedure TSQLite3SQLCreateVirtualTable.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    3:ModuleName:=AWord;
+    4:Params.AddParam(AWord);
+  end;
+end;
+
+procedure TSQLite3SQLCreateVirtualTable.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLite3SQLCreateVirtualTable then
+  begin
+    ModuleName:=TSQLite3SQLCreateVirtualTable(ASource).ModuleName;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLRelaseSavepoint }

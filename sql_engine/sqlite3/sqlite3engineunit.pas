@@ -2001,6 +2001,8 @@ initialization
 
   //Tables
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLCreateTable, 'CREATE TABLE');
+  RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLCreateVirtualTable, 'CREATE VIRTUAL TABLE');
+
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLAlterTable, 'ALTER TABLE');
   RegisterSQLStatment(TSQLEngineSQLite3, TSQLite3SQLDropTable, 'DROP TABLE');
 

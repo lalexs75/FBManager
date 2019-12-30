@@ -285,13 +285,12 @@ object SQLite3ParserData: TSQLite3ParserData
         Caption = 'CreateVirtualTable1'
         Lines.Strings = (
           'CREATE VIRTUAL TABLE tablename USING modulename;'
-          ''
         )
       end    
       item
         Caption = 'CreateVirtualTable2'
         Lines.Strings = (
-          'CREATE VIRTUAL TABLE database_name.table_name USING weblog( ''access.log'', ''a'' );'
+          'CREATE VIRTUAL TABLE database_name.table_name USING weblog(''access.log'', ''a'');'
         )
       end    
       item
@@ -309,13 +308,13 @@ object SQLite3ParserData: TSQLite3ParserData
       item
         Caption = 'CreateVirtualTable5'
         Lines.Strings = (
-          'CREATE VIRTUAL TABLE database_name.table_name USING fts3( );'
+          'CREATE VIRTUAL TABLE database_name.table_name USING fts3(23);'
         )
       end    
       item
         Caption = 'CreateVirtualTable6'
         Lines.Strings = (
-          'CREATE VIRTUAL TABLE table_name USING perl ("Perl::Backend", arg0, arg1);'
+          'CREATE VIRTUAL TABLE table_name USING perl("Perl::Backend", arg0, arg1);'
         )
       end>
     Left = 24
