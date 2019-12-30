@@ -1,8 +1,8 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 276
-  VerticalOffset = 50
+  HorizontalOffset = 337
+  VerticalOffset = 44
   Width = 1113
   object sView: TRxTextHolder
     Highlighter = rxSynNone

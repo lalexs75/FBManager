@@ -5914,7 +5914,11 @@ begin
           FCurFK:=0;
        end;
     102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
-    103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
+    103:if Assigned(FCurField) then
+        begin
+          if FCurField.TypeName<>'' then FCurField.TypeName:=FCurField.TypeName + ' ';
+          FCurField.TypeName:=FCurField.TypeName + AWord;
+        end;
     104:if Assigned(FCurField) then FCurField.TypeLen:=StrToInt(AWord);
     105:if Assigned(FCurField) then FCurField.TypePrec:=StrToInt(AWord);
     107:if Assigned(FCurField) then FCurField.CharSetName:=AWord;
