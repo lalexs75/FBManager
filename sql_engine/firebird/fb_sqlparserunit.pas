@@ -5694,7 +5694,7 @@ var
     TConstrFK1, TConstrFK2, TConstrFK3, TConstrFK4, TConstrFK5,
     TConstrFK6, TConstrFK7, TConstrFK8, TUseInd, TConstrFK1_1,
     TUseInd1, TUseInd2, TUseInd3, TUseInd4, TUseInd5, TUseInd6,
-    TOnComm, TOnComm1, TOnComm2: TSQLTokenRecord;
+    TOnComm, TOnComm1, TOnComm2, FSQLTokens1: TSQLTokenRecord;
 begin
   (*
   RECREATE [GLOBAL TEMPORARY] TABLE tablename
@@ -5793,9 +5793,10 @@ begin
     | func([<val> [, <val> ...]])  *)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okException);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'GLOBAL', []);
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], -2, okException);
+    T:=AddSQLTokens(stKeyword, [FSQLTokens1, FSQLTokens], 'GLOBAL', []);
     T:=AddSQLTokens(stKeyword, T, 'TEMPORARY', [], 2);
-  T:=AddSQLTokens(stKeyword, [FSQLTokens, T], 'TABLE', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, FSQLTokens1, T], 'TABLE', [toFindWordLast]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T1:=AddSQLTokens(stKeyword, T, 'EXTERNAL', []);
     T2:=AddSQLTokens(stKeyword, T1, 'FILE', []);
@@ -5899,6 +5900,7 @@ end;
 procedure TFBSQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
     2:Options:=Options + [ooTemporary];
@@ -6071,7 +6073,10 @@ var
   F: TSQLParserField;
   C: TSQLConstraintItem;
 begin
-  S:='CREATE';
+  if ooOrReplase in Options then
+    S:='RECREATE'
+  else
+    S:='CREATE';
   if FOnCommit <> oncNone then
     S:=S + ' GLOBAL TEMPORARY';
   S:=S + ' TABLE ' + FullName;
