@@ -66,7 +66,10 @@ type
                    okOperatorClass,
                    okOperatorFamily,
                    okUserMapping,
-                   okPartitionTable
+                   okPartitionTable,
+                   okProcedureParametr,
+                   okFunctionParametr
+
                    );
   TDBObjectKinds = set of TDBObjectKind;
 

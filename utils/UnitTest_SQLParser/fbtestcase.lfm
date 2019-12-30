@@ -1720,23 +1720,25 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CommentOn6'
         Lines.Strings = (
-          'COMMENT ON FUNCTION APP_VAR.GET_DATEBEGIN'
-          'IS ''Возвращает дату начала периода'';'
+          'COMMENT ON FUNCTION APP_VAR.GET_DATEBEGIN IS ''Возвращает дату начала периода'';'
         )
       end    
       item
         Caption = 'CommentOn7'
         Lines.Strings = (
-          'COMMENT ON PROCEDURE APP_VAR.SET_DATERANGE'
-          'IS ''Установка диапазона дат'';'
+          'COMMENT ON PROCEDURE APP_VAR.SET_DATERANGE IS ''Установка диапазона дат'';'
         )
       end    
       item
         Caption = 'CommentOn8'
         Lines.Strings = (
-          'COMMENT ON'
-          'PROCEDURE PARAMETER APP_VAR.SET_DATERANGE.ADATEBEGIN'
-          'IS ''Дата начала'';'
+          'COMMENT ON PROCEDURE PARAMETER APP_VAR.SET_DATERANGE.ADATEBEGIN IS ''Дата начала'';'
+        )
+      end    
+      item
+        Caption = 'CommentOn9'
+        Lines.Strings = (
+          'COMMENT ON FUNCTION PARAMETER APP_VAR.SET_DATERANGE.ADATEBEGIN IS ''Дата начала'';'
         )
       end>
     Left = 32

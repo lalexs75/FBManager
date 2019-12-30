@@ -90,7 +90,9 @@ const
      '',              //okOperatorClass,
      '',              //okOperatorFamily
      '',              //okUserMapping
-     ''               //okPartitionTable
+     '',              //okPartitionTable
+     'PROCEDURE PARAMETER', //okProcedureParametr
+     'FUNCTION PARAMETER'   //okFunctionParametr
      );
 
 type
@@ -4649,7 +4651,7 @@ procedure TFBSQLCommentOn.InitParserTree;
 var
   FSQLTokens, T, T10, T11, T13, T15, T15_1, T14, T16, T17, T18,
     T25, T24, T23, T22, T21, T20, T19, T25_1, TS, T26, T26_1,
-    TName, T11_1, T12, T26_2: TSQLTokenRecord;
+    TName, T11_1, T12, T26_2, T27, TName1, T28: TSQLTokenRecord;
 begin
   (*
   COMMENT ON <object> IS {'sometext' | NULL}
@@ -4698,22 +4700,26 @@ begin
   T22:=AddSQLTokens(stKeyword, T, 'TABLE', [], 22);
   T23:=AddSQLTokens(stKeyword, T, 'TRIGGER', [], 23);
   T24:=AddSQLTokens(stKeyword, T, 'VIEW', [], 24);
+  T27:=AddSQLTokens(stKeyword, T, 'PACKAGE', [], 27);
+  T28:=AddSQLTokens(stKeyword, T, 'FUNCTION', [], 28);
 
   TName:=AddSQLTokens(stIdentificator, [T11_1, T12, T13, T14, T15_1, T16, T17,
-      T18, T19, T20, T21, T22, T23, T24], '', [], 1);
+      T18, T19, T20, T21, T22, T23, T24, T27, T28], '', [], 1);
+  TName1:=AddSQLTokens(stSymbol, TName, '.', []);
+  TName1:=AddSQLTokens(stIdentificator, TName1, '', [], 3);
 
   T25:=AddSQLTokens(stKeyword, T, 'COLUMN', [], 25);        //COLUMN relationname.fieldname
     T25_1:=AddSQLTokens(stIdentificator, T25, '', [], 251);
     TS:=AddSQLTokens(stSymbol, T25_1, '.', []);
     T25_1:=AddSQLTokens(stIdentificator, TS, '', [], 252);
-  T26:=AddSQLTokens(stKeyword, [T, T19], 'PARAMETER', [], 26);     //PARAMETER procname.paramname
+  T26:=AddSQLTokens(stKeyword, [T, T19, T28], 'PARAMETER', [], 26);     //PARAMETER procname.paramname
     T26_1:=AddSQLTokens(stIdentificator, T26, '', [], 261);
     TS:=AddSQLTokens(stSymbol, T26_1, '.', []);
     T26_1:=AddSQLTokens(stIdentificator, TS, '', [], 262);
     TS:=AddSQLTokens(stSymbol, T26_1, '.', []);
     T26_2:=AddSQLTokens(stIdentificator, TS, '', [], 263);
 
-  T:=AddSQLTokens(stKeyword, [T10, TName, T25_1, T26_1, T26_2], 'IS', []);
+  T:=AddSQLTokens(stKeyword, [T10, TName, TName1, T25_1, T26_1, T26_2], 'IS', []);
      AddSQLTokens(stString, T, '', [], 2);
      AddSQLTokens(stKeyword, T, 'NULL', [], 2);
 end;
@@ -4725,6 +4731,10 @@ begin
   case AChild.Tag of
     1:Name:=AWord;
     2:Description:=ExtractQuotedString(AWord, '''');
+    3:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
     10:ObjectKind:=okDatabase;
     11:ObjectKind:=okCharSet;
     12:ObjectKind:=okCollation;
@@ -4741,26 +4751,46 @@ begin
     23:ObjectKind:=okTrigger;
     24:ObjectKind:=okView;
     25:ObjectKind:=okColumn;
+    27:ObjectKind:=okPackage;
+    28:ObjectKind:=okFunction;
     251:TableName:=AWord;
     252:Name:=AWord;
-    26:ObjectKind:=okParameter;
+    26:begin
+         if ObjectKind = okStoredProc then
+           ObjectKind:=okProcedureParametr
+         else
+         if ObjectKind = okFunction then
+           ObjectKind:=okFunctionParametr
+         else
+           ObjectKind:=okParameter;
+       end;
     261:TableName:=AWord;
     262:Name:=AWord;
+    263:begin
+          SchemaName:=TableName;
+          TableName:=Name;
+          Name:=AWord;
+        end;
   end;
 end;
 
 procedure TFBSQLCommentOn.MakeSQL;
 var
-  S: String;
+  S, S1: String;
 begin
   S:='COMMENT ON ' + FBObjectNames[ObjectKind];
   if ObjectKind in [okCharSet, okCollation, okDomain, okException,
     okUDF, okFilter, okSequence, okIndex, okStoredProc, okRole,
     okTable, okTrigger, okView, okFunction, okPackage] then
-    S:=S + ' ' + DoFormatName(Name)
+    S:=S + ' ' + FullName
   else
-  if ObjectKind in [okColumn, okParameter] then
-    S:=S + ' ' + DoFormatName(TableName) + '.' + DoFormatName(Name);
+  if ObjectKind in [okColumn, okParameter, okProcedureParametr, okFunctionParametr] then
+  begin
+    if SchemaName<>'' then S1:=DoFormatName(SchemaName)+'.'
+    else S1:='' ;
+    S:=S + ' ' + S1 + DoFormatName(TableName) + '.' + DoFormatName(Name)
+  end;
+
 
   S:=S + ' IS ' + QuotedString(TrimRight(Description), '''');
   AddSQLCommand(S);

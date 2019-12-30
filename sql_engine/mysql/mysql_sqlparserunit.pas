@@ -91,7 +91,9 @@ const
      '',            //okOperatorClass,
      '',            //okOperatorFamily
      '',            //okUserMapping
-     ''             //okPartitionTable
+     '',            //okPartitionTable
+     '',            //okProcedureParametr
+     ''             //okFunctionParametr
      );
 
 type

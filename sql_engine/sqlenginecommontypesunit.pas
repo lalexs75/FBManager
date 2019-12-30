@@ -175,7 +175,9 @@ const
       sOperatorClass,         //okOperatorClass
       sOperatorFamily,        //okOperatorFamily
       sUserMapping,           //okUserMapping
-      sPartitionTable         //okPartitionTable
+      sPartitionTable,        //okPartitionTable
+      '',                     //okProcedureParametr
+      ''                      //okFunctionParametr
       );
 
   DBObjectKindImages: array [TDBObjectKind] of integer =
@@ -237,7 +239,9 @@ const
        -1, //okOperatorClass,
        -1, //okOperatorFamily,
        49, //okUserMapping
-       88  //okPartitionTable
+       88, //okPartitionTable
+       -1, //okProcedureParametr
+       -1  //okFunctionParametr
      );
 
   DBObjectKindFolderImages: array [TDBObjectKind] of integer =
@@ -299,7 +303,9 @@ const
        -1, //okOperatorClass,
        -1, //okOperatorFamily
        49, //okUserMapping
-       3   //okPartitionTable
+       3,  //okPartitionTable
+       -1, //okProcedureParametr
+       -1  //okFunctionParametr
        );
 
 

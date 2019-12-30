@@ -88,7 +88,9 @@ const
      'OPERATOR CLASS',               //okOperatorClass,
      'OPERATOR FAMILY',              //okOperatorFamily
      'USER MAPPING FOR',             //okUserMapping
-     'TABLE'                         //okPartitionTable
+     'TABLE',                        //okPartitionTable
+     '',                             //okProcedureParametr
+     ''                              //okFunctionParametr
     );
 
   PGVarTypeNames : array [TSPVarType] of string =

@@ -287,6 +287,7 @@ type
     procedure CommentOn6;
     procedure CommentOn7;
     procedure CommentOn8;
+    procedure CommentOn9;
 
     procedure Transaction1;
     procedure Transaction2;
@@ -1267,6 +1268,11 @@ end;
 procedure TFBSQLParserTest.CommentOn8;
 begin
   DoTestSQL(FBTestSQLData.sComment['CommentOn8']);
+end;
+
+procedure TFBSQLParserTest.CommentOn9;
+begin
+  DoTestSQL(FBTestSQLData.sComment['CommentOn9']);
 end;
 
 procedure TFBSQLParserTest.Transaction1;
