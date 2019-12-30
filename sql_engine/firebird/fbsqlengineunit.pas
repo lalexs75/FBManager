@@ -4637,6 +4637,9 @@ FILTER
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLAlterIndex, 'ALTER INDEX');
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropIndex, 'DROP INDEX');
 
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDeclareFilter, 'DECLARE FILTER');
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropFilter, 'DROP FILTER');
+
   //Package
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreatePackage, 'CREATE PACKAGE');
   //RegisterSQLStatment(TSQLEngineFireBird, TFBSQLAlterIndex, 'ALTER INDEX');

@@ -985,6 +985,30 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
   end;
 
+  { TFBSQLDeclareFilter }
+
+  TFBSQLDeclareFilter = class(TSQLCreateCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TFBSQLDropFilter }
+
+  TFBSQLDropFilter = class(TSQLDropCommandAbstract)
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
+
 implementation
 uses rxstrutils, SQLEngineInternalToolsUnit;
 
@@ -1422,6 +1446,69 @@ begin
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
   end;
+end;
+
+{ TFBSQLDropFilter }
+
+procedure TFBSQLDropFilter.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  //DROP FILTER filtername ;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'FILTER', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+end;
+
+procedure TFBSQLDropFilter.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP FILTER ' + Name;
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLDropFilter.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+{ TFBSQLDeclareFilter }
+
+procedure TFBSQLDeclareFilter.InitParserTree;
+begin
+  //DECLARE FILTER filtername
+  //INPUT_TYPE <sub_type> OUTPUT_TYPE <sub_type>
+  //ENTRY_POINT ' function_name ' MODULE_NAME ' library_name ';
+  //<sub_type> ::= number | <mnemonic>
+  //<mnemonic> ::= binary | text | blr | acl | ranges | summary |
+  //format | transaction_description |
+  //external_file_description | user_defined
+end;
+
+procedure TFBSQLDeclareFilter.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TFBSQLDeclareFilter.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+constructor TFBSQLDeclareFilter.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TFBSQLDeclareFilter.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
 end;
 
 { TFBSQLDropShadow }
