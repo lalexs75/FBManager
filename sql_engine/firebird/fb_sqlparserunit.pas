@@ -5904,7 +5904,7 @@ begin
   case AChild.Tag of
     1:Name:=AWord;
     2:Options:=Options + [ooTemporary];
-    3:FFileName:=AWord;
+    3:FFileName:=ExtractQuotedString(AWord, '''');
     4:begin
         FCurConst:=nil;
         FCurField:=nil;
@@ -5978,15 +5978,21 @@ begin
           end;
         end;
     117:begin
-          if Assigned(FCurConst) then
+(*          if Assigned(FCurConst) then
             FCurConst.ConstraintType:=ctForeignKey
           else
             FCurConst:=SQLConstraints.Add(ctForeignKey, '');
           FCurConst.ForeignTable:=AWord;
           if Assigned(FCurField) then
             FCurConst.ConstraintFields.AddParam(FCurField.Caption);
+*)
+         if Assigned(FCurField) then
+            FCurField.ReferencesTableName:=AWord;
         end;
-    118:if Assigned(FCurConst) and (FCurConst.ConstraintType = ctForeignKey) then FCurConst.ForeignFields.AddParam(AWord);
+    118:begin
+          //if Assigned(FCurConst) and (FCurConst.ConstraintType = ctForeignKey) then FCurConst.ForeignFields.AddParam(AWord);
+          if Assigned(FCurField) then FCurField.ReferencesTableFields:=AWord;
+        end;
     119,
     209:FCurFK:=1; //'UPDATE', [], 19 + TagBase);
     120,
@@ -6130,6 +6136,9 @@ begin
     end; }
     if F.PrimaryKey then
       S1:=S1 + ' PRIMARY KEY';
+
+    if F.ReferencesTableName <> '' then
+      S1:=S1 + ' REFERENCES '+F.ReferencesTableName+'('+F.ReferencesTableFields+')';
   end;
 
   if S1 = '' then exit;

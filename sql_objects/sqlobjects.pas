@@ -264,6 +264,8 @@ type
     FObjectKind: TDBObjectKind;
     FParams: TFieldParams;
     FRealName: string;
+    FReferencesTableFields: string;
+    FReferencesTableName: string;
     FTableName: string;
     //FTypeArrayDim: string;
     FTypeLen: integer;
@@ -314,6 +316,9 @@ type
     property ArrayDimension:TSQLParserFieldArrays read FArrayDimension;
     property ConstraintName:string read FConstraintName write FConstraintName;
     property IndexOptions:TIndexOptions read FIndexOptions;
+
+    property ReferencesTableName:string read FReferencesTableName write FReferencesTableName;
+    property ReferencesTableFields:string read FReferencesTableFields write FReferencesTableFields;
   end;
 
 
@@ -1569,6 +1574,8 @@ begin
   FConstraintName:=AItem.FConstraintName;
   FArrayDimension.Assign(AItem.FArrayDimension);
   FIndexOptions.Assign(AItem.IndexOptions);
+  FReferencesTableName:=AItem.FReferencesTableName;
+  FReferencesTableFields:=AItem.FReferencesTableFields;
 end;
 
 procedure TSQLParserField.Clear;
