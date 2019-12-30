@@ -4649,7 +4649,7 @@ procedure TFBSQLCommentOn.InitParserTree;
 var
   FSQLTokens, T, T10, T11, T13, T15, T15_1, T14, T16, T17, T18,
     T25, T24, T23, T22, T21, T20, T19, T25_1, TS, T26, T26_1,
-    TName, T11_1, T12: TSQLTokenRecord;
+    TName, T11_1, T12, T26_2: TSQLTokenRecord;
 begin
   (*
   COMMENT ON <object> IS {'sometext' | NULL}
@@ -4706,12 +4706,14 @@ begin
     T25_1:=AddSQLTokens(stIdentificator, T25, '', [], 251);
     TS:=AddSQLTokens(stSymbol, T25_1, '.', []);
     T25_1:=AddSQLTokens(stIdentificator, TS, '', [], 252);
-  T26:=AddSQLTokens(stKeyword, T, 'PARAMETER', [], 26);     //PARAMETER procname.paramname
+  T26:=AddSQLTokens(stKeyword, [T, T19], 'PARAMETER', [], 26);     //PARAMETER procname.paramname
     T26_1:=AddSQLTokens(stIdentificator, T26, '', [], 261);
     TS:=AddSQLTokens(stSymbol, T26_1, '.', []);
     T26_1:=AddSQLTokens(stIdentificator, TS, '', [], 262);
+    TS:=AddSQLTokens(stSymbol, T26_1, '.', []);
+    T26_2:=AddSQLTokens(stIdentificator, TS, '', [], 263);
 
-  T:=AddSQLTokens(stKeyword, [T10, TName, T25_1, T26_1], 'IS', []);
+  T:=AddSQLTokens(stKeyword, [T10, TName, T25_1, T26_1, T26_2], 'IS', []);
      AddSQLTokens(stString, T, '', [], 2);
      AddSQLTokens(stKeyword, T, 'NULL', [], 2);
 end;
@@ -5050,7 +5052,7 @@ begin
     T2:=AddSQLTokens(stKeyword, T1, 'NOT', []);
     T2:=AddSQLTokens(stKeyword, T2, 'NULL', [], 41);
 
-  TD1:=AddSQLTokens(stKeyword, T, 'DROP', []);
+  TD1:=AddSQLTokens(stKeyword, T, 'DROP', [toOptional]);
     TD2:=AddSQLTokens(stKeyword, TD1, 'DEFAULT', [], 20);
     TD3:=AddSQLTokens(stKeyword, TD1, 'CONSTRAINT', [], 40);
     TD4:=AddSQLTokens(stKeyword, TD1, 'NOT', []);

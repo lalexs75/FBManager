@@ -138,7 +138,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 16
   end
   object sDomain: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateDomain1'
@@ -179,85 +179,100 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterDomain1'
         Lines.Strings = (
-          'ALTER DOMAIN CUSTNO INTEGER DEFAULT 2000;'
+          'ALTER DOMAIN CUSTNO'
+          '  TYPE INTEGER DEFAULT 2000;'
         )
       end    
       item
         Caption = 'AlterDomain2'
         Lines.Strings = (
-          'ALTER DOMAIN D_BOOLEAN TO D_BOOL;'
+          'ALTER DOMAIN D_BOOLEAN'
+          '  TO D_BOOL;'
         )
       end    
       item
         Caption = 'AlterDomain3'
         Lines.Strings = (
-          'ALTER DOMAIN D_DATE DROP DEFAULT ADD CONSTRAINT CHECK (VALUE >= date ''01.01.2000'');'
+          'ALTER DOMAIN D_DATE'
+          '  DROP DEFAULT'
+          '  ADD CONSTRAINT CHECK (VALUE >= date ''01.01.2000'');'
         )
       end    
       item
         Caption = 'AlterDomain4'
         Lines.Strings = (
-          'ALTER DOMAIN D_DATE DROP CONSTRAINT;'
+          'ALTER DOMAIN D_DATE'
+          '  DROP CONSTRAINT;'
         )
       end    
       item
         Caption = 'AlterDomain5'
         Lines.Strings = (
-          'ALTER DOMAIN D_DATE ADD CONSTRAINT CHECK (VALUE BETWEEN date ''01.01.1900'' AND date ''31.12.2100'');'
+          'ALTER DOMAIN D_DATE'
+          '  ADD CONSTRAINT CHECK (VALUE BETWEEN date ''01.01.1900'' AND date ''31.12.2100'');'
         )
       end    
       item
         Caption = 'AlterDomain6'
         Lines.Strings = (
-          'ALTER DOMAIN FIRSTNAME TYPE VARCHAR(50) CHARACTER SET UTF8;'
+          'ALTER DOMAIN FIRSTNAME'
+          '  TYPE VARCHAR(50) CHARACTER SET UTF8;'
         )
       end    
       item
         Caption = 'AlterDomain7'
         Lines.Strings = (
-          'ALTER DOMAIN FIRSTNAME SET NOT NULL;'
+          'ALTER DOMAIN FIRSTNAME'
+          '  SET NOT NULL;'
         )
       end    
       item
         Caption = 'AlterDomain8'
         Lines.Strings = (
-          'ALTER DOMAIN name ADD CONSTRAINT CHECK (values >1);'
+          'ALTER DOMAIN name'
+          '  ADD CONSTRAINT CHECK (values >1);'
         )
       end    
       item
         Caption = 'AlterDomain9'
         Lines.Strings = (
-          'ALTER DOMAIN name DROP CONSTRAINT;'
+          'ALTER DOMAIN name'
+          '  DROP CONSTRAINT;'
         )
       end    
       item
         Caption = 'AlterDomain10'
         Lines.Strings = (
-          'ALTER DOMAIN name DROP DEFAULT;'
+          'ALTER DOMAIN name'
+          '  DROP DEFAULT;'
         )
       end    
       item
         Caption = 'AlterDomain11'
         Lines.Strings = (
-          'ALTER DOMAIN name SET DEFAULT USER;'
+          'ALTER DOMAIN name'
+          '  DROP DEFAULT;'
         )
       end    
       item
         Caption = 'AlterDomain12'
         Lines.Strings = (
-          'ALTER DOMAIN name SET DEFAULT NULL;'
+          'ALTER DOMAIN name'
+          '  SET DEFAULT NULL;'
         )
       end    
       item
         Caption = 'AlterDomain13'
         Lines.Strings = (
-          'ALTER DOMAIN name SET DEFAULT 123;'
+          'ALTER DOMAIN name'
+          '  SET DEFAULT 123;'
         )
       end    
       item
         Caption = 'AlterDomain14'
         Lines.Strings = (
-          'ALTER DOMAIN name SET DEFAULT ''aa asd ыфа'';'
+          'ALTER DOMAIN name'
+          '  SET DEFAULT ''aa asd ыфа'';'
         )
       end    
       item
@@ -1670,7 +1685,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 472
   end
   object sComment: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CommentOn1'
@@ -1687,15 +1702,13 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CommentOn3'
         Lines.Strings = (
-          'COMMENT ON COLUMN METALS.ISALLOY'
-          'IS ''0 = чистый металл, 1 = сплав'';'
+          'COMMENT ON COLUMN METALS.ISALLOY IS ''0 = чистый металл, 1 = сплав'';'
         )
       end    
       item
         Caption = 'CommentOn4'
         Lines.Strings = (
-          'COMMENT ON PARAMETER ADD_EMP_PROJ.EMP_NO'
-          'IS ''Код сотрудника'';'
+          'COMMENT ON PARAMETER ADD_EMP_PROJ.EMP_NO IS ''Код сотрудника'';'
         )
       end    
       item
