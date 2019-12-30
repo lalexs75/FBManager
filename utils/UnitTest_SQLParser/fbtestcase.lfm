@@ -1,8 +1,8 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 277
-  VerticalOffset = 1
+  HorizontalOffset = 276
+  VerticalOffset = 50
   Width = 1113
   object sView: TRxTextHolder
     Highlighter = rxSynNone
@@ -1345,39 +1345,25 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateCollation2'
         Lines.Strings = (
-          'CREATE COLLATION LAT_UNI'
-          'FOR ISO8859_1'
-          'FROM EXTERNAL (''ISO8859_1_UNICODE'');'
+          'CREATE COLLATION LAT_UNI FOR ISO8859_1 FROM EXTERNAL (''ISO8859_1_UNICODE'');'
         )
       end    
       item
         Caption = 'CreateCollation3'
         Lines.Strings = (
-          'CREATE COLLATION ES_ES_NOPAD_CI'
-          'FOR ISO8859_1'
-          'FROM ES_ES'
-          'NO PAD'
-          'CASE INSENSITIVE;'
+          'CREATE COLLATION ES_ES_NOPAD_CI FOR ISO8859_1 FROM ES_ES NO PAD CASE INSENSITIVE;'
         )
       end    
       item
         Caption = 'CreateCollation4'
         Lines.Strings = (
-          'CREATE COLLATION ES_ES_CI_COMPR'
-          'FOR ISO8859_1'
-          'FROM ES_ES'
-          'CASE INSENSITIVE'
-          '''DISABLE-COMPRESSIONS=0'';'
+          'CREATE COLLATION ES_ES_CI_COMPR FOR ISO8859_1 FROM ES_ES CASE INSENSITIVE ''DISABLE-COMPRESSIONS=0'';'
         )
       end    
       item
         Caption = 'CreateCollation5'
         Lines.Strings = (
-          'CREATE COLLATION ES_ES_CI_COMPR'
-          'FOR ISO8859_1'
-          'FROM ES_ES'
-          'CASE INSENSITIVE'
-          '''DISABLE-COMPRESSIONS=0'';'
+          'CREATE COLLATION ES_ES_CI_COMPR FOR ISO8859_1 FROM ES_ES CASE INSENSITIVE ''DISABLE-COMPRESSIONS=0'';'
         )
       end    
       item
@@ -1395,25 +1381,19 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'DeclareFilter1'
         Lines.Strings = (
-          'DECLARE FILTER DESC_FILTER'
-          'INPUT_TYPE 1'
-          'OUTPUT_TYPE -4'
-          'ENTRY_POINT ''desc_filter'''
-          'MODULE_NAME ''FILTERLIB'';'
+          'DECLARE FILTER DESC_FILTER INPUT_TYPE 1 OUTPUT_TYPE -4 ENTRY_POINT ''desc_filter'' MODULE_NAME ''FILTERLIB'';'
         )
       end    
       item
         Caption = 'DeclareFilter2'
         Lines.Strings = (
-          'DECLARE FILTER FUNNEL'
-          'INPUT_TYPE blr OUTPUT_TYPE text'
-          'ENTRY_POINT ''blr2asc'' MODULE_NAME ''myfilterlib'';'
+          'DECLARE FILTER FUNNEL INPUT_TYPE blr OUTPUT_TYPE text ENTRY_POINT ''blr2asc'' MODULE_NAME ''myfilterlib'';'
         )
       end    
       item
         Caption = 'DropFilter1'
         Lines.Strings = (
-          'DROP FILTER filtername ;'
+          'DROP FILTER filtername;'
         )
       end    
       item

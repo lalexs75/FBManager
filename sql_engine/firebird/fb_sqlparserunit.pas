@@ -745,9 +745,20 @@ type
 
   { TFBSQLCreateCollation }
 
+  TFBSQLCreateCollationPadType = (fbcpNone, fbcpNoPad, fbcpPadSpace);
+  TFBSQLCreateCollationCaseSens = (fbccsNone, fbccsInsensitive, fbccsSensitive);
+  TFBSQLCreateCollationAccentSens = (fbcaNone, fbcaInsensitive, fbcaSensitive);
+
+  //[ACCENT [IN]SENSITIVE]
+
   TFBSQLCreateCollation = class(TSQLCreateCommandAbstract)
   private
+    FAccentSens: TFBSQLCreateCollationAccentSens;
+    FAttributes: string;
+    FBaseColl: string;
+    FCaseSens: TFBSQLCreateCollationCaseSens;
     FCharSet: string;
+    FPadType: TFBSQLCreateCollationPadType;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
@@ -756,6 +767,11 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property CharSet:string read FCharSet write FCharSet;
+    property PadType:TFBSQLCreateCollationPadType read FPadType write FPadType;
+    property CaseSens:TFBSQLCreateCollationCaseSens read FCaseSens write FCaseSens;
+    property AccentSens:TFBSQLCreateCollationAccentSens read FAccentSens write FAccentSens;
+    property Attributes:string read FAttributes write FAttributes;
+    property BaseColl:string read FBaseColl write FBaseColl;
   end;
 
   { TFBSQLDropCollation }
@@ -4443,7 +4459,8 @@ end;
 
 procedure TFBSQLCreateCollation.InitParserTree;
 var
-  FSQLTokens, T, T1, T2: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2, T3, T3_1, T4, T4_1, T5, T5_1, T5_2,
+    T6, T6_1, T6_2, T7: TSQLTokenRecord;
 begin
   (*
   CREATE COLLATION collname
@@ -4464,23 +4481,29 @@ begin
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'FOR', []);
   T:=AddSQLTokens(stIdentificator, T, '', [], 2);
 
-  T1:=AddSQLTokens(stKeyword, T, 'FROM', []);
+  T1:=AddSQLTokens(stKeyword, T, 'FROM', [toOptional]);
   T1:=AddSQLTokens(stIdentificator, T1, '', [], 3);
 
-  T2:=AddSQLTokens(stSymbol, T1, '(', []);
+  T2:=AddSQLTokens(stSymbol, T1, '(', [toOptional]);
   T2:=AddSQLTokens(stString, T2, '', [], 4);
   T2:=AddSQLTokens(stSymbol, T2, ')', []);
 
-  //[NO PAD | PAD SPACE]
-end;
+  T3:=AddSQLTokens(stKeyword, [T, T1, T2], 'NO', [toOptional]);
+  T3_1:=AddSQLTokens(stKeyword, T3, 'PAD', [], 5);
 
-procedure TFBSQLCreateCollation.MakeSQL;
-var
-  S: String;
-begin
-  S:='CREATE COLLATION '+Name+ ' FOR ' + CharSet;
+  T4:=AddSQLTokens(stKeyword, [T, T1, T2], 'PAD', [toOptional]);
+  T4_1:=AddSQLTokens(stKeyword, T3, 'SPACE', [], 6);
 
-  AddSQLCommand(S);
+  T5:=AddSQLTokens(stKeyword, [T, T1, T2, T3_1, T4_1], 'CASE', [toOptional]);
+    T5_1:=AddSQLTokens(stKeyword, T5, 'INSENSITIVE', [], 7);
+    T5_2:=AddSQLTokens(stKeyword, T5, 'SENSITIVE', [], 8);
+
+  T6:=AddSQLTokens(stKeyword, [T, T1, T2, T3_1, T4_1, T5_1, T5_2], 'ACCENT', [toOptional]);
+    T6_1:=AddSQLTokens(stKeyword, T5, 'INSENSITIVE', [], 9);
+    T6_2:=AddSQLTokens(stKeyword, T5, 'SENSITIVE', [], 10);
+
+
+  T7:=AddSQLTokens(stString, [T, T1, T2, T3_1, T4_1, T5_1, T5_2, T6_1, T6_2], '', [toOptional], 11);
 end;
 
 procedure TFBSQLCreateCollation.InternalProcessChildToken(
@@ -4489,7 +4512,66 @@ begin
   case AChild.Tag of
     1:Name:=AWord;
     2:CharSet:=AWord;
+    3:BaseColl:=AWord;
+    4:Params.AddParam(AWord);
+    5:PadType:=fbcpNoPad;
+    6:PadType:=fbcpPadSpace;
+    7:CaseSens:=fbccsInsensitive;
+    8:CaseSens:=fbccsSensitive;
+    9:AccentSens:=fbcaInsensitive;
+    10:AccentSens:=fbcaSensitive;
+    11:Attributes:=AWord;
   end;
+end;
+
+procedure TFBSQLCreateCollation.MakeSQL;
+var
+  S: String;
+begin
+  (*
+  CREATE COLLATION collname
+  FOR charset
+  [FROM basecoll | FROM EXTERNAL ('extname')]
+  [NO PAD | PAD SPACE]
+  [CASE [IN]SENSITIVE]
+  [ACCENT [IN]SENSITIVE]
+  ['<specific-attributes>'];
+
+  <specific-attributes> ::= <attribute> [; <attribute> ...]
+
+  <attribute> ::= attrname=attrvalue
+  *)
+  S:='CREATE COLLATION '+Name+ ' FOR ' + CharSet;
+
+  if BaseColl <> '' then
+  begin
+    S:=S + ' FROM ' + BaseColl;
+    if Params.Count>0 then
+     S:=S + ' ('+Params.AsString+')';
+  end;
+
+  if PadType = fbcpNoPad then
+    S:=S + ' NO PAD'
+  else
+  if PadType = fbcpPadSpace then
+    S:=S + ' PAD SPACE';
+
+  if CaseSens = fbccsInsensitive then
+    S:=S + ' CASE INSENSITIVE'
+  else
+  if CaseSens = fbccsSensitive then
+    S:=S + ' CASE SENSITIVE';
+
+  if AccentSens = fbcaInsensitive then
+    S:=S + 'ACCENT INSENSITIVE'
+  else
+  if AccentSens = fbcaSensitive then
+    S:=S + 'ACCENT SENSITIVE';
+
+
+  if Attributes<>'' then
+    S:=S + ' ' + Attributes;
+  AddSQLCommand(S);
 end;
 
 constructor TFBSQLCreateCollation.Create(AParent: TSQLCommandAbstract);
@@ -4503,7 +4585,11 @@ begin
   if ASource is TFBSQLCreateCollation then
   begin
     CharSet:=TFBSQLCreateCollation(ASource).CharSet;
-
+    PadType:=TFBSQLCreateCollation(ASource).PadType;
+    CaseSens:=TFBSQLCreateCollation(ASource).CaseSens;
+    AccentSens:=TFBSQLCreateCollation(ASource).AccentSens;
+    Attributes:=TFBSQLCreateCollation(ASource).Attributes;
+    BaseColl:=TFBSQLCreateCollation(ASource).BaseColl;
   end;
   inherited Assign(ASource);
 end;
