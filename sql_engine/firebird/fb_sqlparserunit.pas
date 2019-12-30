@@ -5961,14 +5961,14 @@ begin
     115,
     201:FCurConst:=SQLConstraints.Add(ctNone, AWord);
     116:begin
-          if not Assigned(FCurConst) then
+{          if not Assigned(FCurConst) then
             FCurConst:=SQLConstraints.Find(ctPrimaryKey)
           else
-            FCurConst.ConstraintType:=ctPrimaryKey;
+            FCurConst.ConstraintType:=ctPrimaryKey;}
           if Assigned(FCurField) then
           begin
-            FCurConst.ConstraintFields.AddParam(FCurField.Caption);
-//            FCurField.PrimaryKey:=true;
+//            FCurConst.ConstraintFields.AddParam(FCurField.Caption);
+            FCurField.PrimaryKey:=true;
           end;
         end;
     117:begin
@@ -6114,11 +6114,13 @@ begin
         S1:=S1 + ' NOT NULL';
     end;
 
-    if F.PrimaryKey then
+{    if F.PrimaryKey then
     begin
       if SPK<>'' then SPK:=SPK + ',';
       SPK:=SPK + F.Caption;
-    end;
+    end; }
+    if F.PrimaryKey then
+      S1:=S1 + ' PRIMARY KEY';
   end;
 
   if S1 = '' then exit;
