@@ -989,6 +989,10 @@ type
 
   TFBSQLDeclareFilter = class(TSQLCreateCommandAbstract)
   private
+    FEntryPoint: string;
+    FInputType: string;
+    FModuleName: string;
+    FOutputType: string;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
@@ -996,6 +1000,10 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property InputType:string read FInputType write FInputType;
+    property OutputType:string read FOutputType write FOutputType;
+    property EntryPoint:string read FEntryPoint write FEntryPoint;
+    property ModuleName:string read FModuleName write FModuleName;
   end;
 
   { TFBSQLDropFilter }
@@ -1480,25 +1488,58 @@ end;
 { TFBSQLDeclareFilter }
 
 procedure TFBSQLDeclareFilter.InitParserTree;
+var
+  FSQLTokens, T, T1, T2: TSQLTokenRecord;
 begin
   //DECLARE FILTER filtername
   //INPUT_TYPE <sub_type> OUTPUT_TYPE <sub_type>
   //ENTRY_POINT ' function_name ' MODULE_NAME ' library_name ';
   //<sub_type> ::= number | <mnemonic>
-  //<mnemonic> ::= binary | text | blr | acl | ranges | summary |
-  //format | transaction_description |
-  //external_file_description | user_defined
-end;
+  //<mnemonic> ::= binary | text | blr | acl | ranges | summary | format | transaction_description | external_file_description | user_defined
 
-procedure TFBSQLDeclareFilter.MakeSQL;
-begin
-  inherited MakeSQL;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DECLARE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'FILTER', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, 'FILTER', [], 1);
+  T:=AddSQLTokens(stKeyword, T, 'INPUT_TYPE', []);
+
+  T1:=AddSQLTokens(stInteger, T, '', [], 2);
+  T2:=AddSQLTokens(stIdentificator, T, '', [], 2);
+
+  T:=AddSQLTokens(stKeyword, [T1, T2], 'OUTPUT_TYPE', []);
+  T1:=AddSQLTokens(stInteger, T, '', [], 3);
+  T2:=AddSQLTokens(stIdentificator, T, '', [], 3);
+
+  T:=AddSQLTokens(stKeyword, [T1, T2], 'ENTRY_POINT', []);
+  T1:=AddSQLTokens(stString, T, '', [], 4);
+
+  T:=AddSQLTokens(stKeyword, T1, 'MODULE_NAME', []);
+  T1:=AddSQLTokens(stString, T, '', [], 5);
 end;
 
 procedure TFBSQLDeclareFilter.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:InputType:=AWord;
+    3:OutputType:=AWord;
+    4:EntryPoint:=AWord;
+    5:ModuleName:=AWord;
+  end;
+end;
+
+procedure TFBSQLDeclareFilter.MakeSQL;
+var
+  S: String;
+begin
+  //DECLARE FILTER filtername
+  //INPUT_TYPE <sub_type> OUTPUT_TYPE <sub_type>
+  //ENTRY_POINT ' function_name ' MODULE_NAME ' library_name ';
+  //<sub_type> ::= number | <mnemonic>
+  //<mnemonic> ::= binary | text | blr | acl | ranges | summary | format | transaction_description | external_file_description | user_defined
+  S:='DECLARE FILTER '+Name + ' INPUT_TYPE '+ InputType + ' OUTPUT_TYPE ' + OutputType + ' ENTRY_POINT ' + EntryPoint + ' MODULE_NAME ' + ModuleName;
+  AddSQLCommand(S);
 end;
 
 constructor TFBSQLDeclareFilter.Create(AParent: TSQLCommandAbstract);
@@ -1508,6 +1549,13 @@ end;
 
 procedure TFBSQLDeclareFilter.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TFBSQLDeclareFilter then
+  begin
+    InputType:=TFBSQLDeclareFilter(ASource).InputType;
+    OutputType:=TFBSQLDeclareFilter(ASource).OutputType;
+    EntryPoint:=TFBSQLDeclareFilter(ASource).EntryPoint;
+    ModuleName:=TFBSQLDeclareFilter(ASource).ModuleName;
+  end;
   inherited Assign(ASource);
 end;
 
