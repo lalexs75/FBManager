@@ -280,6 +280,43 @@ object SQLite3ParserData: TSQLite3ParserData
           '  params varchar'
           ');'
         )
+      end    
+      item
+        Caption = 'CreateVirtualTable1'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE tablename USING modulename;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateVirtualTable2'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE database_name.table_name USING weblog( ''access.log'', ''a'' );'
+        )
+      end    
+      item
+        Caption = 'CreateVirtualTable3'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE database_name.table_name USING weblog(1);'
+        )
+      end    
+      item
+        Caption = 'CreateVirtualTable4'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE database_name.table_name USING weblog(1, 2);'
+        )
+      end    
+      item
+        Caption = 'CreateVirtualTable5'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE database_name.table_name USING fts3( );'
+        )
+      end    
+      item
+        Caption = 'CreateVirtualTable6'
+        Lines.Strings = (
+          'CREATE VIRTUAL TABLE table_name USING perl ("Perl::Backend", arg0, arg1);'
+        )
       end>
     Left = 24
     Top = 248

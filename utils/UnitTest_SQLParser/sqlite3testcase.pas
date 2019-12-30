@@ -32,6 +32,13 @@ type
     procedure CreateTable10;
     procedure CreateTable11;
     procedure CreateTable12;
+
+    procedure CreateVirtualTable1;
+    procedure CreateVirtualTable2;
+    procedure CreateVirtualTable3;
+    procedure CreateVirtualTable4;
+    procedure CreateVirtualTable5;
+    procedure CreateVirtualTable6;
     //ALTER TABLE
     procedure AlterTable1;
     procedure AlterTable2;
@@ -173,6 +180,36 @@ end;
 procedure TSQLite3ParserTest.CreateTable12;
 begin
   DoTestSQL(SQLite3ParserData.sTable['CreateTable12']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable1;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable1']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable2;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable2']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable3;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable3']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable4;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable4']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable5;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable5']);
+end;
+
+procedure TSQLite3ParserTest.CreateVirtualTable6;
+begin
+  DoTestSQL(SQLite3ParserData.sTable['CreateVirtualTable6']);
 end;
 
 procedure TSQLite3ParserTest.AlterTable1;
