@@ -27,8 +27,8 @@ interface
 uses
   Classes, SysUtils, FileUtil, rxdbgrid, rxtooledit, RxDBGridExportSpreadSheet,
   RxDBGridPrintGrid, ZDataset, ZConnection, Forms, Controls, Graphics, Dialogs,
-  ExtCtrls, StdCtrls, Buttons, ActnList, db, fdmAbstractEditorUnit, pg_tasks,
-  SQLEngineAbstractUnit;
+  ExtCtrls, StdCtrls, Buttons, ActnList, Menus, db, fdmAbstractEditorUnit,
+  pg_tasks, SQLEngineAbstractUnit;
 
 type
 
@@ -41,7 +41,9 @@ type
     dsLogs: TDataSource;
     Label1: TLabel;
     Label2: TLabel;
+    MenuItem1: TMenuItem;
     Panel1: TPanel;
+    PopupMenu1: TPopupMenu;
     quLogsjlgduration: TStringField;
     quLogsjlgid: TLongintField;
     quLogsjlgjobid: TLongintField;

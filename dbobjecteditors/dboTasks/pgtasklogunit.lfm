@@ -5,12 +5,12 @@ inherited pgTaskLogPage: TpgTaskLogPage
   ClientWidth = 763
   object Panel1: TPanel[0]
     Left = 0
-    Height = 48
+    Height = 47
     Top = 0
     Width = 763
     Align = alTop
     AutoSize = True
-    ClientHeight = 48
+    ClientHeight = 47
     ClientWidth = 763
     TabOrder = 0
     object Label1: TLabel
@@ -19,7 +19,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
       AnchorSideBottom.Side = asrBottom
       Left = 7
       Height = 17
-      Top = 24
+      Top = 23
       Width = 63
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
@@ -33,7 +33,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
       AnchorSideBottom.Side = asrBottom
       Left = 209
       Height = 17
-      Top = 24
+      Top = 23
       Width = 46
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
@@ -45,7 +45,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel1
       Left = 76
-      Height = 34
+      Height = 33
       Top = 7
       Width = 127
       BorderSpacing.Around = 6
@@ -61,7 +61,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel1
       Left = 261
-      Height = 34
+      Height = 33
       Top = 7
       Width = 149
       BorderSpacing.Around = 6
@@ -88,11 +88,11 @@ inherited pgTaskLogPage: TpgTaskLogPage
   end
   object RxDBGrid1: TRxDBGrid[1]
     Left = 0
-    Height = 455
-    Top = 48
+    Height = 456
+    Top = 47
     Width = 763
     ColumnDefValues.BlobText = '(данные)'
-    TitleButtons = False
+    TitleButtons = True
     AutoSort = True
     OnGetCellProps = RxDBGrid1GetCellProps
     Columns = <    
@@ -229,7 +229,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
     FooterOptions.DrawFullLine = False
     SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
     SearchOptions.FromStart = False
-    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
     Align = alClient
     Color = clWindow
     DrawFullLine = False
@@ -237,7 +237,8 @@ inherited pgTaskLogPage: TpgTaskLogPage
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsLogs
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 1
     TitleStyle = tsNative
@@ -257,7 +258,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
       '  and'
       '    pga_joblog.jlgstart BETWEEN :date_start and :date_end'
       'order by'
-      '  pga_joblog.jlgstart    '
+      '  pga_joblog.jlgstart  desc  '
     )
     Params = <    
       item
@@ -379,6 +380,7 @@ inherited pgTaskLogPage: TpgTaskLogPage
   end
   object ZConnection1: TZConnection[7]
     ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
     Properties.Strings = (
       'AutoEncodeStrings='
     )
@@ -389,5 +391,13 @@ inherited pgTaskLogPage: TpgTaskLogPage
     Protocol = 'postgresql-9'
     Left = 40
     Top = 113
+  end
+  object PopupMenu1: TPopupMenu[8]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 208
+    Top = 179
+    object MenuItem1: TMenuItem
+      Action = actRefreshData
+    end
   end
 end
