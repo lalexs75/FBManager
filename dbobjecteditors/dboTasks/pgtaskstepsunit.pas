@@ -349,10 +349,12 @@ constructor TpgTaskStepsPage.CreatePage(TheOwner: TComponent;
   ADBObject: TDBObject);
 begin
   inherited CreatePage(TheOwner, ADBObject);
+  PageControl1.ActivePageIndex:=0;
   FDelList:=TFPList.Create;
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=TabSheet2;
   EditorFrame.TextEditor.OnChange:=@edtStepNameChange;
+  EditorFrame.SQLEngine:=DBObject.OwnerDB;
   LoadDBList;
   LoadTaskData;
 end;

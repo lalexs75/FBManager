@@ -31,8 +31,8 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 34
-        Top = 173
+        Height = 33
+        Top = 171
         Width = 665
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -87,7 +87,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 23
-        Top = 144
+        Top = 142
         Width = 134
         BorderSpacing.Around = 6
         Caption = 'Connection string'
@@ -100,8 +100,8 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = RadioGroup1
         Left = 12
-        Height = 34
-        Top = 104
+        Height = 33
+        Top = 103
         Width = 427
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -115,7 +115,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 23
-        Top = 75
+        Top = 74
         Width = 187
         BorderSpacing.Around = 6
         Caption = 'Database on current server'
@@ -130,7 +130,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 23
-        Top = 46
+        Top = 45
         Width = 76
         BorderSpacing.Around = 6
         Caption = 'Enabled'
@@ -144,7 +144,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 77
-        Height = 34
+        Height = 33
         Top = 6
         Width = 600
         Anchors = [akTop, akLeft, akRight]
@@ -158,7 +158,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideBottom.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 23
+        Top = 22
         Width = 65
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
@@ -171,7 +171,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 213
+        Top = 210
         Width = 69
         BorderSpacing.Around = 6
         Caption = 'Description'
@@ -186,8 +186,8 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
         Left = 12
-        Height = 280
-        Top = 236
+        Height = 283
+        Top = 233
         Width = 665
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Around = 6
@@ -205,7 +205,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideBottom.Side = asrBottom
         Left = 445
         Height = 87
-        Top = 75
+        Top = 74
         Width = 140
         Anchors = [akTop, akRight, akBottom]
         AutoFill = True
@@ -235,7 +235,7 @@ inherited pgTaskStepsPage: TpgTaskStepsPage
         AnchorSideRight.Side = asrBottom
         Left = 591
         Height = 87
-        Top = 75
+        Top = 74
         Width = 86
         Anchors = [akTop, akRight]
         AutoFill = True
