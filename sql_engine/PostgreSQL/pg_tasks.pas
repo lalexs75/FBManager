@@ -440,6 +440,7 @@ begin
            'jstenabled = '+BoolToStr(AStep.Enabled, true) + ', '+
            'jstkind='+S2+', '+
            'jstonerror='+S3+', '+
+           'jstcode='+AnsiQuotedStr(AStep.Body, '''')+', '+
            'jstdesc=' + AnsiQuotedStr(AStep.Description, '''') + ' '+
          'WHERE '+
            'jstid='+IntToStr(AStep.ID) + ';'+LineEnding;
