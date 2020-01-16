@@ -376,7 +376,7 @@ begin
       U:=TPGTaskStep(ListBox1.Items.Objects[i]);
       Result:=not TestForRussianChar(U.Body);
       if not Result then
-        ErrorBox(spgAgentFixBugNotAscii); // 'В pgAdmin есть ошибка. Напрямую использовать русские символы нельзя. Воспользуйтесь ESC последовательностями.');
+        ErrorBox(spgAgentFixBugNotAscii);
     end;
   end;
 
