@@ -885,7 +885,8 @@ end;
 
 procedure TfbManDataInpectorForm.TreeView1SelectionChanged(Sender: TObject);
 begin
-  UpdateDBManagerState;
+//  UpdateDBManagerState;
+  TreeView1Click(Sender);
 end;
 
 procedure TfbManDataInpectorForm.DoChangePrefParams;
