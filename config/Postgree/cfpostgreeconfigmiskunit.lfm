@@ -68,7 +68,7 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label3
     Left = 12
-    Height = 34
+    Height = 33
     Top = 116
     Width = 260
     Anchors = [akTop, akLeft, akRight]
@@ -91,7 +91,7 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 156
+    Top = 155
     Width = 165
     BorderSpacing.Around = 6
     Caption = 'Show table''s partitions'
@@ -103,10 +103,23 @@ inherited cfPostgreeConfigMiskFrame: TcfPostgreeConfigMiskFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 185
+    Top = 184
     Width = 125
     BorderSpacing.Around = 6
     Caption = 'Use params char'
     TabOrder = 4
+  end
+  object CheckBox4: TCheckBox[8]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox3
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 23
+    Hint = 'fix pgAgent bug'
+    Top = 213
+    Width = 297
+    BorderSpacing.Around = 6
+    Caption = 'pgAgent: check for russian chars in SQL body'
+    TabOrder = 5
   end
 end

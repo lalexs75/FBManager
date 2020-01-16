@@ -985,6 +985,8 @@ resourcestring
   sPGAllowCreateReplications        = 'Allow create replications and backup';
   sPartitionSectionNameTempate      = 'Partition section name tempate';
   sPartitionSectionDescTempate      = 'Partition section description';
+  spgAgentFixBugNotAscii            = 'There is an error in pgAgent. You cannot use Russian characters directly. Use ESC sequences.';
+  pgAgentCheckForNotAscii           = 'pgAgent: check for russian chars in SQL body';
 
 
 

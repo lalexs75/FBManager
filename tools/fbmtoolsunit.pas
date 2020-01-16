@@ -114,6 +114,7 @@ const
   AllFilesMask1 = '*';
 {$ENDIF}
 
+function TestForRussianChar(S:string):Boolean;
 implementation
 uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging, gettext,
   Translations, LResources, strutils, rxstrutils, SynEditTypes,
@@ -432,6 +433,18 @@ begin
     Result:=(Source as TDragControlObject).Control
   else
     Result:=nil;
+end;
+
+function TestForRussianChar(S: string): Boolean;
+const
+  sRC = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЪЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщыъьэюя';
+var
+  i: Integer;
+begin
+  Result:=false;
+  for i:=1 to UTF8Length(sRC) do
+    if UTF8Pos(UTF8Copy(sRC, i, 1), S) > 0 then
+      Exit(true);
 end;
 
 

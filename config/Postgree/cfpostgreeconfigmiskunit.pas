@@ -36,6 +36,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     Label1: TLabel;
@@ -75,6 +76,7 @@ begin
   CheckBox2.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', PGShowTtablePartiotions);
   CheckBox3.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\Use params char', pgUseParamsChar);
   Edit1.Text:=IntToStr(ConfigValues.ByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', 0));
+  CheckBox4.Checked:=ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\pgAgent\fix bug with not ASCI chars', true);
 end;
 
 procedure TcfPostgreeConfigMiskFrame.SaveData;
@@ -84,6 +86,7 @@ begin
   ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre\Show table partiotions', CheckBox2.Checked);
   ConfigValues.SetByNameAsInteger('TSQLEnginePostgre\Initial value for new sequence', StrToInt64Def(Edit1.Text, 0));
   ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre\Use params char', CheckBox3.Checked);
+  ConfigValues.SetByNameAsBoolean('TSQLEnginePostgre\pgAgent\fix bug with not ASCI chars', CheckBox4.Checked);
 
   PGShowTtablePartiotions:=CheckBox2.Checked;
   pgUseParamsChar:=CheckBox3.Checked;
@@ -97,6 +100,7 @@ begin
   CheckBox1.Caption:=sCreateIndexAfterCreateFK;
   CheckBox2.Caption:=sShowTtablePartitions;
   CheckBox3.Caption:=sUseParamsChar;
+  CheckBox4.Caption:=pgAgentCheckForNotAscii;
 
   ComboBox1.Items.Clear;
   ComboBox1.Items.Add(sShowAllObjects);

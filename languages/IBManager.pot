@@ -9,6 +9,10 @@ msgstr ""
 msgid "No action"
 msgstr ""
 
+#: fbmstrconstunit.pgagentcheckfornotascii
+msgid "pgAgent: check for russian chars in SQL body"
+msgstr ""
+
 #: fbmstrconstunit.saborted
 msgid " - aborted"
 msgstr ""
@@ -3956,6 +3960,10 @@ msgstr ""
 
 #: fbmstrconstunit.spersistent
 msgid "Persistent"
+msgstr ""
+
+#: fbmstrconstunit.spgagentfixbugnotascii
+msgid "There is an error in pgAgent. You cannot use Russian characters directly. Use ESC sequences."
 msgstr ""
 
 #: fbmstrconstunit.spgallowchangesystemcatalog

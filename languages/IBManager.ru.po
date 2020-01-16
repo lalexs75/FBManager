@@ -19,6 +19,10 @@ msgstr "Поле IDENTITY"
 msgid "No action"
 msgstr "Ничего не делать"
 
+#: fbmstrconstunit.pgagentcheckfornotascii
+msgid "pgAgent: check for russian chars in SQL body"
+msgstr ""
+
 #: fbmstrconstunit.saborted
 msgid " - aborted"
 msgstr " - прервано"
@@ -4091,6 +4095,10 @@ msgstr "Вставить из буфера обмена"
 #: fbmstrconstunit.spersistent
 msgid "Persistent"
 msgstr "Постоянно"
+
+#: fbmstrconstunit.spgagentfixbugnotascii
+msgid "There is an error in pgAgent. You cannot use Russian characters directly. Use ESC sequences."
+msgstr ""
 
 #: fbmstrconstunit.spgallowchangesystemcatalog
 msgid "Allow change system catalog directly"

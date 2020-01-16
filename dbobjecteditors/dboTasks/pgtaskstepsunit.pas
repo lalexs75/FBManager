@@ -88,7 +88,7 @@ type
 
 implementation
 uses ZDataset, pg_sql_lines_unit, pgSqlTextUnit, fbmStrConstUnit, fbmToolsUnit,
-  pgTaskStepsBuildConnectionUnit;
+  pgTaskStepsBuildConnectionUnit, LazUTF8, rxAppUtils;
 
 {$R *.lfm}
 
@@ -367,9 +367,19 @@ var
   FCmd1: TPGSQLTaskAlter;
   Op: TPGAlterTaskOperator;
 begin
-  //Result:=(edtStepName.Caption<>'') and ((RadioButton1.Checked and (ComboBox1.Text<>'')) or (RadioButton2.Checked and (EditButton1.Text<>'')));
-
   Result:=true;
+
+  if ConfigValues.ByNameAsBoolean('TSQLEnginePostgre\pgAgent\fix bug with not ASCI chars', true) then
+  begin
+    for i:=0 to ListBox1.Items.Count-1 do
+    begin
+      U:=TPGTaskStep(ListBox1.Items.Objects[i]);
+      Result:=not TestForRussianChar(U.Body);
+      if not Result then
+        ErrorBox(spgAgentFixBugNotAscii); // 'В pgAdmin есть ошибка. Напрямую использовать русские символы нельзя. Воспользуйтесь ESC последовательностями.');
+    end;
+  end;
+
   if not Result then exit;
   if ASQLObject is TPGSQLTaskCreate then
   begin
