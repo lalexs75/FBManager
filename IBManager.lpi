@@ -1895,11 +1895,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EConvertError"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>

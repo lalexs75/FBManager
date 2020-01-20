@@ -1,8 +1,8 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 349
-  VerticalOffset = 123
+  HorizontalOffset = 309
+  VerticalOffset = 1
   Width = 1081
   object sqlPgDepends: TStrHolder
     Capacity = 62
@@ -1748,7 +1748,7 @@ object pgSqlTextModule: TpgSqlTextModule
           '     pg_description.objoid = pg_namespace.oid and pg_description.objsubid = 0 and pg_class.relname = ''pg_namespace'') as description'
           'from'
           '  pg_namespace'
-          '  inner join pg_user on (pg_namespace.nspowner = pg_user.usesysid)'
+          '  left join pg_user on (pg_namespace.nspowner = pg_user.usesysid)'
           'order by'
           '  pg_namespace.nspname'
           ''
