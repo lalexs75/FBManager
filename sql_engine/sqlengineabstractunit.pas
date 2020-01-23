@@ -80,7 +80,7 @@ type
   TSQLEngileFeatures = set of TSQLEngileFeature;
 
   TDBFieldOption = (foNotNull, foLocal, foPrimaryKey, foSystemFiled,
-     foAutoInc, foComputed);
+     foAutoInc, foComputed, foVirtual);
 
   TDBFieldOptions = set of TDBFieldOption;
 type
@@ -3478,6 +3478,9 @@ begin
     FFieldCollateName:=SQLField.Collate;
     FieldComputedSource:=SQLField.ComputedSource;
     FIOType:=SQLField.InReturn;
+
+    if fpVirtual in SQLField.Params then
+      FieldOptions:=FieldOptions + [foVirtual];
   end;
 end;
 

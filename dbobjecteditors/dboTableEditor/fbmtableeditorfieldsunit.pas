@@ -86,6 +86,8 @@ type
     rxFieldListAUTO_INC_TRIGGER_BODY: TMemoField;
     rxFieldListAUTO_INC_TRIGGER_DESC: TMemoField;
     rxFieldListAUTO_INC_TRIGGER_NAME: TStringField;
+    rxFieldListCALC_FIELD_STORED_TYPE: TLongintField;
+    rxFieldListCALC_FIELD_STORED_TYPE_OLD: TLongintField;
     rxFieldListFIELD_AUTOINC: TBooleanField;
     rxFieldListFIELD_CHARSET: TStringField;
     rxFieldListFIELD_CHECK: TStringField;
@@ -319,7 +321,13 @@ begin
   rxFieldListFIELD_CHARSET.AsString:=R.FieldCharSetName;
 
   if foComputed in R.FieldOptions then
+  begin
     rxFieldListFIELD_COMPUTED_SOURCE.AsString:=R.FieldComputedSource;
+    if foVirtual in R.FieldOptions then
+      rxFieldListCALC_FIELD_STORED_TYPE.AsInteger:=1
+    else
+      rxFieldListCALC_FIELD_STORED_TYPE.AsInteger:=0;
+  end;
 
   rxFieldListOLD_FIELD_AUTOINC.Assign(rxFieldListFIELD_AUTOINC);
   rxFieldListOLD_FIELD_DEF_VALUE.Assign(rxFieldListFIELD_DEF_VALUE);
@@ -392,7 +400,15 @@ begin
     end;
 
     if feComputedTableFields in DBObject.OwnerDB.SQLEngileFeatures then
+    begin
       AItem.ComputedSource:=rxFieldListFIELD_COMPUTED_SOURCE.AsString;
+      if rxFieldListCALC_FIELD_STORED_TYPE.AsInteger = 0 then
+        AItem.Params:=AItem.Params + [fpStored]
+      else
+      if rxFieldListCALC_FIELD_STORED_TYPE.AsInteger = 1 then
+        AItem.Params:=AItem.Params + [fpVirtual]
+      ;
+    end;
   end;
 end;
 
@@ -466,7 +482,10 @@ begin
   end;
 
   if feComputedTableFields in DBObject.OwnerDB.SQLEngileFeatures then
+  begin
     fbmTableFieldEditorForm.edtComputedSource.Text:=rxFieldListFIELD_COMPUTED_SOURCE.AsString;
+    fbmTableFieldEditorForm.ComboBox2.ItemIndex:=rxFieldListCALC_FIELD_STORED_TYPE.AsInteger;
+  end;
 
   if okSequence in DBObject.OwnerDB.SQLEngineCapability then
   begin
@@ -733,7 +752,10 @@ begin
   end;
 
   if feComputedTableFields in DBObject.OwnerDB.SQLEngileFeatures then
-    rxFieldListFIELD_COMPUTED_SOURCE.AsString:=fbmTableFieldEditorForm.edtComputedSource.Text;
+  begin
+    rxFieldListFIELD_COMPUTED_SOURCE.AsString:=TrimRight(fbmTableFieldEditorForm.edtComputedSource.Text);
+    rxFieldListCALC_FIELD_STORED_TYPE.AsInteger:=fbmTableFieldEditorForm.ComboBox2.ItemIndex;
+  end;
 
   if (okSequence in DBObject.OwnerDB.SQLEngineCapability) and (fbmTableFieldEditorForm.TabSheet6.TabVisible) then
   begin

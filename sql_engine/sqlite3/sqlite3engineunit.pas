@@ -1644,7 +1644,7 @@ begin
                    okUniqueConstraint,
                    okAutoIncFields
                    ];
-
+  FSQLEngileFeatures:=FSQLEngileFeatures + [feComputedTableFields];
 end;
 
 procedure TSQLEngineSQLite3.LoadDBParams;

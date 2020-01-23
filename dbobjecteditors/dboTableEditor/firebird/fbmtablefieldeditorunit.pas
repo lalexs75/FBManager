@@ -50,6 +50,7 @@ type
     cbFKUpdateRule: TComboBox;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     ComboBox3: TComboBox;
     CB_CharSet: TComboBox;
     cbCollations: TComboBox;
@@ -73,6 +74,8 @@ type
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -90,6 +93,7 @@ type
     cbCustomTypeCheck: TRadioButton;
     PageControl2: TPageControl;
     PageControl3: TPageControl;
+    Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;

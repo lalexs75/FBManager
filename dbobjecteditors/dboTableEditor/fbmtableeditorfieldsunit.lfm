@@ -184,8 +184,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object FieldListGrid: TRxDBGrid[1]
     Left = 0
-    Height = 274
-    Top = 71
+    Height = 275
+    Top = 70
     Width = 1070
     ColumnDefValues.BlobText = '(примечание)'
     TitleButtons = True
@@ -531,12 +531,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object Panel1: TPanel[3]
     Left = 0
-    Height = 71
+    Height = 70
     Top = 0
     Width = 1070
     Align = alTop
     AutoSize = True
-    ClientHeight = 71
+    ClientHeight = 70
     ClientWidth = 1070
     TabOrder = 3
     object Label1: TLabel
@@ -557,7 +557,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 34
+      Height = 33
       Top = 30
       Width = 1050
       Anchors = [akTop, akLeft, akRight]
@@ -822,6 +822,14 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       end    
       item
         Name = 'AUTO_INC_GEN_TYPE_SEQ_PARAMS'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'CALC_FIELD_STORED_TYPE'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'CALC_FIELD_STORED_TYPE_OLD'
         DataType = ftInteger
       end>
     AfterPost = rxFieldListAfterPost
@@ -1310,6 +1318,24 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       FieldKind = fkData
       FieldName = 'AUTO_INC_GEN_TYPE_SEQ_PARAMS'
       Index = 46
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListCALC_FIELD_STORED_TYPE: TLongintField
+      FieldKind = fkData
+      FieldName = 'CALC_FIELD_STORED_TYPE'
+      Index = 47
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxFieldListCALC_FIELD_STORED_TYPE_OLD: TLongintField
+      FieldKind = fkData
+      FieldName = 'CALC_FIELD_STORED_TYPE_OLD'
+      Index = 48
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
