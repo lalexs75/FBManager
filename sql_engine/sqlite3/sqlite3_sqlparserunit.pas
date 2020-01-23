@@ -319,7 +319,8 @@ var
     TCofA1, TCofF1, TCofI1, TCofRe1, TC_UN, TCFK, TSymb4, T3_1,
     T3_2, T5, T6, T_FU, T_FD, TC_PK1, TC_CHK, TC_COLL,
     TC_COLL1, TC_CHK1, TF2, TD_MS, TD_MU, TD_MSmallInt,
-    TCFK_TBL, TCFK_TBLs: TSQLTokenRecord;
+    TCFK_TBL, TCFK_TBLs, TGenAs1, TGenAs1_1, TGenAs2, TGenAs3,
+    TGenAs4_1, TGenAs4_2: TSQLTokenRecord;
 begin
   with Sender do
   begin
@@ -542,6 +543,26 @@ begin
       T4.AddChildToken([T1, TC_NN]);
       T5.AddChildToken([T1, TC_NN]);
       T6.AddChildToken([T1, TC_NN]);
+
+    if AForCreate then
+    begin
+      //GENERATED ALWAYS AS (substr(c,b,b+1)) STORED
+
+      TGenAs1:=AddSQLTokens(stIdentificator, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
+                                     TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
+                                     TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
+        TD_MS, TD_MU], 'GENERATED', []);
+        TGenAs1_1:=AddSQLTokens(stIdentificator, TGenAs1, 'ALWAYS', []);
+        TGenAs2:=AddSQLTokens(stIdentificator, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
+                                     TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
+                                     TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
+          TD_MS, TD_MU, TGenAs1_1], 'AS', []);
+        TGenAs3:=AddSQLTokens(stSymbol, TGenAs2, '(', [], 52);
+          TGenAs4_1:=AddSQLTokens(stSymbol, TGenAs3, 'STORED', [], 53);
+          TGenAs4_2:=AddSQLTokens(stSymbol, TGenAs3, 'VIRTUAL', [], 54);
+        DoFillEndTags([TGenAs3, TGenAs4_1, TGenAs4_2]);
+    end;
+
 
 
     if AForCreate then
@@ -1924,6 +1945,14 @@ begin
          FCurConstraint.ConstraintType:=ctTableCheck;
 
     51:if Assigned(FCurConstraint) then FCurConstraint.ConstraintExpression:=ASQLParser.GetToBracket(')');
+
+    52:if Assigned(FCurFiled) then
+       FCurFiled.ComputedSource:=ASQLParser.GetToBracket(')');
+    53:if Assigned(FCurFiled) then
+       FCurFiled.Params:=FCurFiled.Params + [fpStored];
+    54:if Assigned(FCurFiled) then
+       FCurFiled.Params:=FCurFiled.Params + [fpVirtual];
+
     66:FWithoutRowID:=UpperCase(AWord) = 'ROWID';
   end;
 end;
@@ -2001,6 +2030,16 @@ begin
 
     if fpAutoInc in F.Params then
        S1:=S1 + ' AUTOINCREMENT';
+
+    if F.ComputedSource <> '' then
+    begin
+      S1:=S1 + ' GENERATED ALWAYS AS (' + F.ComputedSource + ')';
+      if fpVirtual in F.Params then
+        S1:=S1 + ' VIRTUAL'
+      else
+      if fpStored in F.Params then
+        S1:=S1 + ' STORED'
+    end;
 
     if F.Collate <> '' then
         S1:=S1 + ' COLLATE ' + F.Collate;
