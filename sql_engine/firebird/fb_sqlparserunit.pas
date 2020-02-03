@@ -7108,7 +7108,7 @@ end;
 
 procedure TFBSQLCreateGenerator.InitParserTree;
 var
-  T1, T2, T, FSQLTokens: TSQLTokenRecord;
+  T1, T2, T, FSQLTokens, T3, T4, T1_1, T2_1: TSQLTokenRecord;
 begin
   //CREATE {SEQUENCE | GENERATOR} seq_name
   //[START WITH value ] [INCREMENT [BY] increment ];
@@ -7119,10 +7119,20 @@ begin
 
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okSequence);
-    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);
-    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'GENERATOR', [toFindWordLast], 1);
-  T:=AddSQLTokens(stIdentificator, T1, '', [], 2);
-    T2.AddChildToken(T);
+    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
+    T4:=AddSQLTokens(stKeyword, T3, 'ALTER', [], -2);
+
+    T1:=AddSQLTokens(stKeyword, [FSQLTokens, T4], 'SEQUENCE', [toFindWordLast]);
+    T2:=AddSQLTokens(stKeyword, [FSQLTokens, T4], 'GENERATOR', [toFindWordLast], 1);
+  T:=AddSQLTokens(stIdentificator, [T1, T2], '', [], 2);
+
+  T1:=AddSQLTokens(stKeyword, T, 'START', [toOptional]);
+    T1_1:=AddSQLTokens(stKeyword, T1, 'WITH', []);
+    T1_1:=AddSQLTokens(stInteger, T1_1, '', [], 3);
+
+  T2:=AddSQLTokens(stKeyword, [T, T1_1], 'INCREMENT', [toOptional]);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'BY', []);
+    T2_1:=AddSQLTokens(stInteger, T2_1, '', [], 4);
 end;
 
 procedure TFBSQLCreateGenerator.InternalProcessChildToken(
@@ -7132,6 +7142,8 @@ begin
   case AChild.Tag of
     1:SequenceStyle:=fbssGenerator;
     2:Name:=AWord;
+    3:MinValue:=StrToInt(AWord);
+    4:IncrementBy:=StrToInt(AWord);
   end;
 end;
 
@@ -7139,12 +7151,25 @@ procedure TFBSQLCreateGenerator.MakeSQL;
 var
   S: String;
 begin
-  if SequenceStyle = fbssGenerator then
-    S:='GENERATOR'
-  else
-    S:='SEQUENCE';
+  S:='CREATE ';
 
-  AddSQLCommandEx('CREATE %s %s', [S, FullName]);
+  if ooOrReplase in Options then
+    S:=S + 'OR ALTER ';
+
+  if SequenceStyle = fbssGenerator then
+    S:=S + 'GENERATOR '
+  else
+    S:=S + 'SEQUENCE ';
+
+  S:=S + FullName;
+
+  if MinValue <> 0 then
+    S:=S + LineEnding + 'START WITH ' + IntToStr(MinValue);
+
+  if IncrementBy <> 0 then
+    S:=S + LineEnding + 'INCREMENT BY '+ IntToStr(IncrementBy);
+
+  AddSQLCommand(S);
 
   if CurrentValue <> 0 then
     AddSQLCommandEx('ALTER %s %s RESTART WITH %d', [S, FullName, CurrentValue]);

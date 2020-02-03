@@ -1259,19 +1259,23 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateSequence2'
         Lines.Strings = (
-          'CREATE SEQUENCE EMP_NO_GEN START WITH 5;'
+          'CREATE SEQUENCE EMP_NO_GEN'
+          'START WITH 5;'
         )
       end    
       item
         Caption = 'CreateSequence3'
         Lines.Strings = (
-          'CREATE SEQUENCE EMP_NO_GEN INCREMENT BY 10;'
+          'CREATE SEQUENCE EMP_NO_GEN'
+          'INCREMENT BY 10;'
         )
       end    
       item
         Caption = 'CreateSequence4'
         Lines.Strings = (
-          'CREATE SEQUENCE EMP_NO_GEN START WITH 5 INCREMENT BY 10;'
+          'CREATE SEQUENCE EMP_NO_GEN'
+          'START WITH 5'
+          'INCREMENT BY 10;'
         )
       end    
       item
