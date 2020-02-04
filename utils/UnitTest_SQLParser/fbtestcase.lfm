@@ -520,82 +520,76 @@ object FBTestSQLData: TFBTestSQLData
     Top = 159
   end
   object sProcedure: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateTrigger1'
         Lines.Strings = (
           'CREATE TRIGGER SET_CUST_NO FOR CUSTOMER'
-          'ACTIVE BEFORE INSERT POSITION 0'
+          ' ACTIVE BEFORE INSERT'
+          ' POSITION 0'
           'AS'
           'BEGIN'
           '  IF (NEW.CUST_NO IS NULL) THEN'
           '  NEW.CUST_NO = GEN_ID(CUST_NO_GEN, 1);'
-          'END'
+          'END;'
         )
       end    
       item
         Caption = 'CreateTrigger2'
         Lines.Strings = (
-          'CREATE TRIGGER set_cust_no'
-          'ACTIVE BEFORE INSERT POSITION 0 ON customer'
+          'CREATE TRIGGER set_cust_no ACTIVE BEFORE INSERT'
+          ' POSITION 0'
+          ' ON customer'
           'AS'
           'BEGIN'
-          'IF (NEW.cust_no IS NULL) THEN'
-          'NEW.cust_no = GEN_ID(cust_no_gen, 1);'
-          'END'
+          '  IF (NEW.cust_no IS NULL) THEN'
+          '    NEW.cust_no = GEN_ID(cust_no_gen, 1);'
+          'END;'
         )
       end    
       item
         Caption = 'CreateTrigger3'
         Lines.Strings = (
-          'CREATE TRIGGER TR_CUST_LOG'
-          'ACTIVE AFTER INSERT OR UPDATE OR DELETE POSITION 10'
-          'ON CUSTOMER'
+          'CREATE TRIGGER TR_CUST_LOG ACTIVE AFTER INSERT OR UPDATE OR DELETE'
+          ' POSITION 10'
+          ' ON CUSTOMER'
           'AS'
           'BEGIN'
-          '  INSERT INTO CHANGE_LOG (LOG_ID,'
-          '  ID_TABLE,'
-          '  TABLE_NAME,'
-          '  MUTATION)'
-          'VALUES (NEXT VALUE FOR SEQ_CHANGE_LOG,'
-          '  OLD.CUST_NO,'
-          '  ''CUSTOMER'','
-          '  CASE'
-          '  WHEN INSERTING THEN ''INSERT'''
-          '  WHEN UPDATING THEN ''UPDATE'''
-          '  WHEN DELETING THEN ''DELETE'''
-          '  END);'
-          'END'
+          '  INSERT INTO CHANGE_LOG (LOG_ID, ID_TABLE, TABLE_NAME, MUTATION)'
+          '  VALUES (NEXT VALUE FOR SEQ_CHANGE_LOG,'
+          '     OLD.CUST_NO,'
+          '     ''CUSTOMER'','
+          '     CASE'
+          '       WHEN INSERTING THEN ''INSERT'''
+          '       WHEN UPDATING THEN ''UPDATE'''
+          '       WHEN DELETING THEN ''DELETE'''
+          '     END);'
+          'END;'
         )
       end    
       item
         Caption = 'CreateTrigger4'
         Lines.Strings = (
-          'CREATE TRIGGER tr_log_connect'
-          'INACTIVE ON CONNECT POSITION 0'
+          'CREATE TRIGGER tr_log_connect INACTIVE ON CONNECT'
+          ' POSITION 0'
           'AS'
           'BEGIN'
-          'INSERT INTO LOG_CONNECT (ID,'
-          'USERNAME,'
-          'ATIME)'
-          'VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT,'
-          'CURRENT_USER,'
-          'CURRENT_TIMESTAMP);'
-          'END'
+          '  INSERT INTO LOG_CONNECT (ID, USERNAME, ATIME)'
+          '  VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT, CURRENT_USER, CURRENT_TIMESTAMP);'
+          'END;'
         )
       end    
       item
         Caption = 'CreateTrigger5'
         Lines.Strings = (
-          'CREATE TRIGGER TR_LIMIT_WORKTIME ACTIVE'
-          'ON CONNECT POSITION 1'
+          'CREATE TRIGGER TR_LIMIT_WORKTIME ACTIVE ON CONNECT'
+          ' POSITION 1'
           'AS'
           'BEGIN'
-          'IF ((CURRENT_USER <> ''SYSDBA'') AND'
-          'NOT (CURRENT_TIME BETWEEN time ''9:00'' AND time ''17:00'')) THEN'
-          'EXCEPTION E_INCORRECT_WORKTIME;'
-          'END'
+          '  IF ((CURRENT_USER <> ''SYSDBA'') AND NOT (CURRENT_TIME BETWEEN time ''9:00'' AND time ''17:00'')) THEN'
+          '    EXCEPTION E_INCORRECT_WORKTIME;'
+          'END;'
         )
       end    
       item

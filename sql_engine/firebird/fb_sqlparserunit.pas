@@ -125,6 +125,25 @@ type
   TTriggerDBEvent = (tdbeNone, tdbeConnect, tdbeDisconnect,
     tdbeTransactionStart, tdbeTransactionCommit, tdbeTransactionRollback);
 
+  TTriggerDDLvent = (tddleAnyDdlStatement,
+    tddleCreateTable, tddleAlterTable, tddleDropTable,
+    tddleCreateProcedure, tddleAlterProcedure, tddleDropProcedure,
+    tddleCreateFunction, tddleAlterFunction, tddleDropFunction,
+    tddleCreateTrigger, tddleAlterTrigger, tddleDropTrigger,
+    tddleCreateEexception, tddleAlterException, tddleDropException,
+    tddleCreateView, tddleAlterView, tddleDropView,
+    tddleCreateDomain, tddleAlterDomain, tddleDropDomain,
+    tddleCreateRole, tddleAlterRole, tddleDropRole,
+    tddleCreateSequence, tddleAlterSequence, tddleDropSequence,
+    tddleCreateUser, tddleAlterUser, tddleDropUser,
+    tddleCreateIndex, tddleAlterIndex, tddleDropIndex,
+    tddleCreateCollation, tddleDropCollation,
+    tddleAlterCharacterSet,
+    tddleCreatePackage, tddleAlterPackage, tddleDropPackage,
+    tddleCreatePackageBody, tddleDropPackageBody,
+    tddleCreateMapping, tddleAlterMapping, tddleDropMapping);
+  TTriggerDDLvents = set of TTriggerDDLvent;
+
   TFBSQLCreateTrigger = class(TSQLCreateTrigger)
   private
     FActive: boolean;
@@ -132,6 +151,7 @@ type
     FPosition: integer;
     FSintax2003: Boolean;
     FTriggerDBEvent: TTriggerDBEvent;
+    FTriggerDDLvents: TTriggerDDLvents;
     FTriggerType: TTriggerTypes;
     procedure ParseLocalVariables(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
     procedure SetBody(AValue: string);
@@ -149,6 +169,7 @@ type
     property TableName;
     property Sintax2003:Boolean read FSintax2003 write FSintax2003;
     property TriggerDBEvent:TTriggerDBEvent read FTriggerDBEvent write FTriggerDBEvent;
+    property TriggerDDLvents:TTriggerDDLvents read FTriggerDDLvents write FTriggerDDLvents;
   end;
 
   { TFBSQLAlterTrigger }
@@ -1068,6 +1089,54 @@ type
   public
   end;
 
+const
+  FBddlEventsNames : array [TTriggerDDLvent] of string = (
+    'ANY DDL STATEMENT',   //tddleAnyDdlStatement
+    'CREATE TABLE',        //tddleCreateTable
+    'ALTER TABLE',         //tddleAlterTable
+    'DROP TABLE',          //tddleDropTable,
+    'CREATE PROCEDURE',    //tddleCreateProcedure
+    'ALTER PROCEDURE',     //tddleAlterProcedure
+    'DROP PROCEDURE',      //tddleDropProcedure
+    'CREATE FUNCTION',     //tddleCreateFunction
+    'ALTER FUNCTION',      //tddleAlterFunction
+    'DROP FUNCTION',       //tddleDropFunction
+    'CREATE TRIGGER',      //tddleCreateTrigger
+    'ALTER TRIGGER',       //tddleAlterTrigger
+    'DROP TRIGGER',        //tddleDropTrigger
+    'CREATE EXCEPTION',    //tddleCreateEexception
+    'ALTER EXCEPTION',     //tddleAlterException
+    'DROP EXCEPTION',      //tddleDropException
+    'CREATE VIEW',         //tddleCreateView
+    'ALTER VIEW',          //tddleAlterView
+    'DROP VIEW',           //tddleDropView
+    'CREATE DOMAIN',       //tddleCreateDomain
+    'ALTER DOMAIN',        //tddleAlterDomain
+    'DROP DOMAIN',         //tddleDropDomain
+    'CREATE ROLE',         //tddleCreateRole
+    'ALTER ROLE',          //tddleAlterRole
+    'DROP ROLE',           //tddleDropRole
+    'CREATE SEQUENCE',     //tddleCreateSequence
+    'ALTER SEQUENCE',      //tddleAlterSequence
+    'DROP SEQUENCE',       //tddleDropSequence
+    'CREATE USER',         //tddleCreateUser
+    'ALTER USER',          //tddleAlterUser
+    'DROP USER',           //tddleDropUser
+    'CREATE INDEX',        //tddleCreateIndex
+    'ALTER INDEX',         //tddleAlterIndex
+    'DROP INDEX',          //tddleDropIndex
+    'CREATE COLLATION',    //tddleCreateCollation
+    'DROP COLLATION',      //tddleDropCollation
+    'ALTER CHARACTER SET', //tddleAlterCharacterSet
+    'CREATE PACKAGE',      //tddleCreatePackage
+    'ALTER PACKAGE',       //tddleAlterPackage
+    'DROP PACKAGE',        //tddleDropPackage
+    'CREATE PACKAGE BODY', //tddleCreatePackageBody
+    'DROP PACKAGE BODY',   //tddleDropPackageBody
+    'CREATE MAPPING',      //tddleCreateMapping
+    'ALTER MAPPING',       //tddleAlterMapping
+    'DROP MAPPING'         //tddleDropMapping
+  );
 
 implementation
 uses rxstrutils, SQLEngineInternalToolsUnit;
@@ -7768,7 +7837,16 @@ procedure TFBSQLCreateTrigger.InitParserTree;
 var
   FSQLTokens, Par1, State1, State2, Par2, Symb, State3,
     TrigName, Ton, Ton1, TDBOn, TDBOn1, TDBOn2, TDBOn3,
-    TDBOn3_1, TDBOn3_2, TDBOn3_3: TSQLTokenRecord;
+    TDBOn3_1, TDBOn3_2, TDBOn3_3, TBefore, TAfter, TDDLS1,
+    TDDLS2, TDDLS2_1, TDDLS2_2, TDDLS2_3, TDDLS2_4, TDDLS2_5,
+    TDDLS2_6, TDDLS2_7, TDDLS2_8, TDDLS2_9, TDDLS2_10,
+    TDDLS2_11, TDDLS2_12, TDDLS2_13, TDDLS2_14, TDDLS2_15,
+    TDDLS3, TDDLS3_1, TDDLS3_2, TDDLS3_3, TDDLS3_4, TDDLS3_5,
+    TDDLS3_6, TDDLS3_7, TDDLS3_8, TDDLS3_9, TDDLS3_10,
+    TDDLS3_11, TDDLS3_12, TDDLS3_13, TDDLS3_14, TDDLS4,
+    TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
+    TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11,
+    TDDLS4_12, TDDLS4_13, TDDLS4_14, TDDLS4_15: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   (*
@@ -7867,22 +7945,15 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
       TDBOn3_2:=AddSQLTokens(stKeyword, TDBOn3, 'COMMIT', [], 16);
       TDBOn3_3:=AddSQLTokens(stKeyword, TDBOn3, 'ROLLBACK', [], 17);
 
-    Par1:=AddSQLTokens(stKeyword, State1, 'BEFORE', [toOptional], 6);         // |BEFORE|
-    Par2:=AddSQLTokens(stKeyword, State1, 'AFTER', [toOptional], 7);          // |AFTER|
-    State2.AddChildToken(Par1);
-    State2.AddChildToken(Par2);
+    TBefore:=AddSQLTokens(stKeyword, [State1, State2, TrigName], 'BEFORE', [toOptional], 6);         // |BEFORE|
+    TAfter:=AddSQLTokens(stKeyword, [State1, State2, TrigName], 'AFTER', [toOptional], 7);          // |AFTER|
 
-    State1:=AddSQLTokens(stKeyword, Par1, 'INSERT', [], 8);          // |INSERT|
+    State1:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'INSERT', [], 8);          // |INSERT|
     Symb:=AddSQLTokens(stKeyword, State1, 'OR', []);             //OR
-    State2:=AddSQLTokens(stKeyword, Par1, 'UPDATE', [], 9);          // |UPDATE|
-    Symb.AddChildToken(State2);
+    State2:=AddSQLTokens(stKeyword, [TBefore, TAfter, Symb], 'UPDATE', [], 9);          // |UPDATE|
     Symb:=AddSQLTokens(stKeyword, State2, 'OR', []);             //OR
-    State3:=AddSQLTokens(stKeyword, Par1, 'DELETE', [], 10);          // |DELETE|
-    Symb.AddChildToken(State3);
+    State3:=AddSQLTokens(stKeyword, [TBefore, TAfter, Symb], 'DELETE', [], 10);          // |DELETE|
 
-    Par2.AddChildToken(State1);
-    Par2.AddChildToken(State2);
-    Par2.AddChildToken(State3);
 
     Par1:=AddSQLTokens(stKeyword, [State1, TDBOn1, TDBOn2, TDBOn3_1, TDBOn3_2, TDBOn3_3], 'POSITION', []);        //POSITION
     Par2:=AddSQLTokens(stInteger, Par1, '', [], 11);                    //  number
@@ -7892,9 +7963,70 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
   Ton:=AddSQLTokens(stKeyword, Par2, 'ON', [], 12);
     Ton1:=AddSQLTokens(stIdentificator, Ton, '', [], 3);
 
-    Par1:=AddSQLTokens(stKeyword, [Par2, Ton1], 'AS', [], 20);                //AS
+  TDDLS1:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'ANY', [], 25); //AS
+    TDDLS1:=AddSQLTokens(stKeyword, TDDLS1, 'DDL', []); //AS
+    TDDLS1:=AddSQLTokens(stKeyword, TDDLS1, 'STATEMENT', []); //AS
 
+  TDDLS2:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'CREATE', []); //AS
+      TDDLS2_1:=AddSQLTokens(stKeyword, TDDLS2, 'TABLE', [], 26);
+      TDDLS2_2:=AddSQLTokens(stKeyword, TDDLS2, 'PROCEDURE', [], 27);
+      TDDLS2_3:=AddSQLTokens(stKeyword, TDDLS2, 'FUNCTION', [], 28);
+      TDDLS2_4:=AddSQLTokens(stKeyword, TDDLS2, 'TRIGGER', [], 29);
+      TDDLS2_5:=AddSQLTokens(stKeyword, TDDLS2, 'EXCEPTION', [], 30);
+      TDDLS2_6:=AddSQLTokens(stKeyword, TDDLS2, 'VIEW', [], 31);
+      TDDLS2_7:=AddSQLTokens(stKeyword, TDDLS2, 'DOMAIN', [], 32);
+      TDDLS2_8:=AddSQLTokens(stKeyword, TDDLS2, 'ROLE', [], 33);
+      TDDLS2_9:=AddSQLTokens(stKeyword, TDDLS2, 'SEQUENCE', [], 34);
+      TDDLS2_10:=AddSQLTokens(stKeyword, TDDLS2, 'USER', [], 35);
+      TDDLS2_11:=AddSQLTokens(stKeyword, TDDLS2, 'INDEX', [], 36);
+      TDDLS2_12:=AddSQLTokens(stKeyword, TDDLS2, 'COLLATION', [], 37);
+      TDDLS2_13:=AddSQLTokens(stKeyword, TDDLS2, 'PACKAGE', [], 38);
+      TDDLS2_14:=AddSQLTokens(stKeyword, TDDLS2, 'PACKAGE', []);
+        TDDLS2_14:=AddSQLTokens(stKeyword, TDDLS2_14, 'BODY', [], 39);
+      TDDLS2_15:=AddSQLTokens(stKeyword, TDDLS2, 'MAPPING', [], 40);
+
+  TDDLS3:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'ALTER', []); //AS
+     TDDLS3_1:=AddSQLTokens(stKeyword, TDDLS3, 'TABLE', [], 41);
+     TDDLS3_2:=AddSQLTokens(stKeyword, TDDLS3, 'PROCEDURE', [], 42);
+     TDDLS3_3:=AddSQLTokens(stKeyword, TDDLS3, 'FUNCTION', [], 43);
+     TDDLS3_4:=AddSQLTokens(stKeyword, TDDLS3, 'TRIGGER', [], 44);
+     TDDLS3_5:=AddSQLTokens(stKeyword, TDDLS3, 'EXCEPTION', [], 45);
+     TDDLS3_6:=AddSQLTokens(stKeyword, TDDLS3, 'VIEW', [], 46);
+     TDDLS3_7:=AddSQLTokens(stKeyword, TDDLS3, 'DOMAIN', [], 47);
+     TDDLS3_8:=AddSQLTokens(stKeyword, TDDLS3, 'ROLE', [], 48);
+     TDDLS3_9:=AddSQLTokens(stKeyword, TDDLS3, 'SEQUENCE', [], 49);
+     TDDLS3_10:=AddSQLTokens(stKeyword, TDDLS3, 'USER', [], 50);
+     TDDLS3_11:=AddSQLTokens(stKeyword, TDDLS3, 'INDEX', [], 51);
+     TDDLS3_12:=AddSQLTokens(stKeyword, TDDLS3, 'CHARACTER', [], 52);
+       TDDLS3_12:=AddSQLTokens(stKeyword, TDDLS3_12, 'SET', [], 53);
+     TDDLS3_13:=AddSQLTokens(stKeyword, TDDLS3, 'PACKAGE', [], 54);
+     TDDLS3_14:=AddSQLTokens(stKeyword, TDDLS3, 'MAPPING', [], 55);
+
+
+  TDDLS4:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'DROP', []);
+    TDDLS4_1:=AddSQLTokens(stKeyword, TDDLS4, 'TABLE', [], 56);
+    TDDLS4_2:=AddSQLTokens(stKeyword, TDDLS4, 'PROCEDURE', [], 57);
+    TDDLS4_3:=AddSQLTokens(stKeyword, TDDLS4, 'FUNCTION', [], 58);
+    TDDLS4_4:=AddSQLTokens(stKeyword, TDDLS4, 'TRIGGER', [], 59);
+    TDDLS4_5:=AddSQLTokens(stKeyword, TDDLS4, 'EXCEPTION', [], 60);
+    TDDLS4_6:=AddSQLTokens(stKeyword, TDDLS4, 'VIEW', [], 61);
+    TDDLS4_7:=AddSQLTokens(stKeyword, TDDLS4, 'DOMAIN', [], 62);
+    TDDLS4_8:=AddSQLTokens(stKeyword, TDDLS4, 'ROLE', [], 63);
+    TDDLS4_9:=AddSQLTokens(stKeyword, TDDLS4, 'SEQUENCE', [], 64);
+    TDDLS4_10:=AddSQLTokens(stKeyword, TDDLS4, 'USER', [], 65);
+    TDDLS4_11:=AddSQLTokens(stKeyword, TDDLS4, 'INDEX', [], 66);
+    TDDLS4_12:=AddSQLTokens(stKeyword, TDDLS4, 'COLLATION', [], 67);
+    TDDLS4_13:=AddSQLTokens(stKeyword, TDDLS4, 'PACKAGE', [], 68);
+    TDDLS4_14:=AddSQLTokens(stKeyword, TDDLS4, 'PACKAGE', []);
+      TDDLS4_14:=AddSQLTokens(stKeyword, TDDLS4_1, 'BODY', [], 69);
+    TDDLS4_15:=AddSQLTokens(stKeyword, TDDLS4, 'MAPPING', [], 70);
+
+  Par1:=AddSQLTokens(stKeyword, [Par2, Ton1, State1, State2, State3, TDDLS1], 'AS', [], 20);                //AS
     Par1:=AddSQLTokens(stKeyword, Par1, 'begin', [], 21); //AS
+
+//    ANY DDL STATEMENT
+//  | <ddl_event_item> [{OR <ddl_event_item> } ...]
+
 end;
 
 procedure TFBSQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -7925,6 +8057,23 @@ begin
          ASQLParser.Position:=ASQLParser.WordPosition;
          Body:=GetToEndpSQL(ASQLParser);
        end;
+    25:FTriggerDDLvents:=[tddleAnyDdlStatement];
+    //tddleCreateTable, tddleAlterTable, tddleDropTable,
+    //tddleCreateProcedure, tddleAlterProcedure, tddleDropProcedure,
+    //tddleCreateFunction, tddleAlterFunction, tddleDropFunction,
+    //tddleCreateTrigger, tddleAlterTrigger, tddleDropTrigger,
+    //tddleCreateEexception, tddleAlterException, tddleDropException,
+    //tddleCreateView, tddleAlterView, tddleDropView,
+    //tddleCreateDomain, tddleAlterDomain, tddleDropDomain,
+    //tddleCreateRole, tddleAlterRole, tddleDropRole,
+    //tddleCreateSequence, tddleAlterSequence, tddleDropSequence,
+    //tddleCreateUser, tddleAlterUser, tddleDropUser,
+    //tddleCreateIndex, tddleAlterIndex, tddleDropIndex,
+    //tddleCreateCollation, tddleDropCollation,
+    //tddleAlterCharacterSet,
+    //tddleCreatePackage, tddleAlterPackage, tddleDropPackage,
+    //tddleCreatePackageBody, tddleDropPackageBody,
+    //tddleCreateMapping, tddleAlterMapping, tddleDropMapping);;
   end;
 end;
 
@@ -7932,6 +8081,7 @@ procedure TFBSQLCreateTrigger.MakeSQL;
 var
   S, S1: String;
   L: TFBLocalVariableParser;
+  D: TTriggerDDLvent;
 begin
   S:='';
   if CreateMode = cmAlter then
@@ -7952,29 +8102,60 @@ begin
   else
     S:=S + ' INACTIVE';
 
-  if ttBefore in FTriggerType then
-    S:=S + ' BEFORE'
+  if FTriggerDBEvent <> tdbeNone then
+  begin
+    S:=S + ' ON';
+    case FTriggerDBEvent of
+      tdbeConnect:S:=S + ' CONNECT';
+      tdbeDisconnect:S:=S + ' DISCONNECT';
+      tdbeTransactionStart:S:=S + ' TRANSACTION START';
+      tdbeTransactionCommit:S:=S + ' TRANSACTION COMMIT';
+      tdbeTransactionRollback:S:=S + ' TRANSACTION ROLLBACK';
+    end;
+  end
   else
-  if ttAfter in FTriggerType then
-    S:=S + ' AFTER';
-
-  S1:='';
-  if ttInsert in FTriggerType then
-    S1:=S1 + 'INSERT';
-
-  if ttUpdate in FTriggerType then
   begin
-    if S1 <> '' then S1:=S1 + ' OR ';
-    S1:=S1 + 'UPDATE';
-  end;
+    if ttBefore in FTriggerType then
+      S:=S + ' BEFORE'
+    else
+    if ttAfter in FTriggerType then
+      S:=S + ' AFTER';
+    if FTriggerDDLvents<>[] then
+    begin
+      S1:='';
+      if tddleAnyDdlStatement in FTriggerDDLvents then
+        S1:=S1 + ' ' + FBddlEventsNames[tddleAnyDdlStatement]
+      else
+      begin
+        for D in FTriggerDDLvents do
+        begin
+          if S1<>'' then S1:=S1 + ' OR';
+          S1:=S1 + FBddlEventsNames[D];
+        end
+      end;
+      S:=S + S1 + LineEnding;
+    end
+    else
+    begin
 
-  if ttDelete in FTriggerType then
-  begin
-    if S1 <> '' then S1:=S1 + ' OR ';
-    S1:=S1 + 'DELETE';
-  end;
+      S1:='';
+      if ttInsert in FTriggerType then
+        S1:=S1 + 'INSERT';
 
-  S:=S + ' ' +S1 + LineEnding;
+      if ttUpdate in FTriggerType then
+      begin
+        if S1 <> '' then S1:=S1 + ' OR ';
+        S1:=S1 + 'UPDATE';
+      end;
+
+      if ttDelete in FTriggerType then
+      begin
+        if S1 <> '' then S1:=S1 + ' OR ';
+        S1:=S1 + 'DELETE';
+      end;
+      S:=S + ' ' +S1 + LineEnding;
+    end;
+  end;
 
   if FPosition > -1 then
     S:=S + ' POSITION '+ IntToStr(FPosition) + LineEnding;
@@ -8018,6 +8199,7 @@ begin
     FBody:=TFBSQLCreateTrigger(ASource).FBody;
     FSintax2003:=TFBSQLCreateTrigger(ASource).FSintax2003;
     FTriggerDBEvent:=TFBSQLCreateTrigger(ASource).TriggerDBEvent;
+    FTriggerDDLvents:=TFBSQLCreateTrigger(ASource).FTriggerDDLvents;
   end;
   inherited Assign(ASource);
 end;
