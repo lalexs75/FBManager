@@ -529,8 +529,8 @@ object FBTestSQLData: TFBTestSQLData
           'ACTIVE BEFORE INSERT POSITION 0'
           'AS'
           'BEGIN'
-          'IF (NEW.CUST_NO IS NULL) THEN'
-          'NEW.CUST_NO = GEN_ID(CUST_NO_GEN, 1);'
+          '  IF (NEW.CUST_NO IS NULL) THEN'
+          '  NEW.CUST_NO = GEN_ID(CUST_NO_GEN, 1);'
           'END'
         )
       end    

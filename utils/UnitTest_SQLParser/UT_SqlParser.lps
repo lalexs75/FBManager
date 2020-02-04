@@ -53,8 +53,8 @@
         <UnitName Value="FBTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="1106"/>
-        <CursorPos X="51" Y="1119"/>
+        <TopLine Value="816"/>
+        <CursorPos X="3" Y="820"/>
         <UsageCount Value="130"/>
         <Bookmarks Count="2">
           <Item0 Y="378" ID="1"/>
@@ -323,18 +323,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="fbtestcase.pas"/>
-        <Caret Line="392" Column="3" TopLine="377"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="246" TopLine="233"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="396" Column="3" TopLine="392"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
         <Caret Line="1156" Column="3" TopLine="1141"/>
       </Position>
       <Position>
@@ -435,6 +423,17 @@
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="244" Column="27" TopLine="220"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1119" Column="132" TopLine="1106"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="151" Column="27" TopLine="127"/>
       </Position>
     </JumpHistory>
     <RunParams>

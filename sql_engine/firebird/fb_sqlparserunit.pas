@@ -122,14 +122,20 @@ type
 
   { TFBSQLCreateTrigger }
 
-  TFBSQLCreateTrigger = class(TSQLCommandCreateProcedure)
+  TTriggerDBEvent = (tdbeNone, tdbeConnect, tdbeDisconnect,
+    tdbeTransactionStart, tdbeTransactionCommit, tdbeTransactionRollback);
+
+  TFBSQLCreateTrigger = class(TSQLCreateTrigger)
   private
     FActive: boolean;
+    FBody: string;
     FPosition: integer;
+    FSintax2003: Boolean;
+    FTriggerDBEvent: TTriggerDBEvent;
     FTriggerType: TTriggerTypes;
     procedure ParseLocalVariables(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+    procedure SetBody(AValue: string);
   protected
-    procedure SetBody(AValue: string); override;
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
@@ -139,7 +145,10 @@ type
     property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
     property Active:boolean read FActive write FActive;
     property Position:integer read FPosition write FPosition;
+    property Body:string read FBody write SetBody;
     property TableName;
+    property Sintax2003:Boolean read FSintax2003 write FSintax2003;
+    property TriggerDBEvent:TTriggerDBEvent read FTriggerDBEvent write FTriggerDBEvent;
   end;
 
   { TFBSQLAlterTrigger }
@@ -7752,13 +7761,14 @@ begin
 
   AValue:=Copy(AValue, B, Length(AValue));
 
-  inherited SetBody(AValue);
+  FBody:=AValue;
 end;
 
 procedure TFBSQLCreateTrigger.InitParserTree;
 var
   FSQLTokens, Par1, State1, State2, Par2, Symb, State3,
-    TrigName: TSQLTokenRecord;
+    TrigName, Ton, Ton1, TDBOn, TDBOn1, TDBOn2, TDBOn3,
+    TDBOn3_1, TDBOn3_2, TDBOn3_3: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   (*
@@ -7849,6 +7859,14 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     State2:=AddSQLTokens(stKeyword, [Par1, TrigName], 'INACTIVE', [], 5);       // |INACTIVE|
     //Par1.AddChildToken(State2);
 
+    TDBOn:=AddSQLTokens(stKeyword, [State1, State2], 'ON', []);
+      TDBOn1:=AddSQLTokens(stKeyword, TDBOn, 'CONNECT', [], 13);
+      TDBOn2:=AddSQLTokens(stKeyword, TDBOn, 'DISCONNECT', [], 14);
+      TDBOn3:=AddSQLTokens(stKeyword, TDBOn, 'TRANSACTION', []);
+      TDBOn3_1:=AddSQLTokens(stKeyword, TDBOn3, 'START', [], 15);
+      TDBOn3_2:=AddSQLTokens(stKeyword, TDBOn3, 'COMMIT', [], 16);
+      TDBOn3_3:=AddSQLTokens(stKeyword, TDBOn3, 'ROLLBACK', [], 17);
+
     Par1:=AddSQLTokens(stKeyword, State1, 'BEFORE', [toOptional], 6);         // |BEFORE|
     Par2:=AddSQLTokens(stKeyword, State1, 'AFTER', [toOptional], 7);          // |AFTER|
     State2.AddChildToken(Par1);
@@ -7866,12 +7884,15 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     Par2.AddChildToken(State2);
     Par2.AddChildToken(State3);
 
-    Par1:=AddSQLTokens(stKeyword, State1, 'POSITION', []);        //POSITION
+    Par1:=AddSQLTokens(stKeyword, [State1, TDBOn1, TDBOn2, TDBOn3_1, TDBOn3_2, TDBOn3_3], 'POSITION', []);        //POSITION
     Par2:=AddSQLTokens(stInteger, Par1, '', [], 11);                    //  number
     State2.AddChildToken(Par1);
     State3.AddChildToken(Par1);
 
-    Par1:=AddSQLTokens(stKeyword, Par2, 'AS', [], 20);                //AS
+  Ton:=AddSQLTokens(stKeyword, Par2, 'ON', [], 12);
+    Ton1:=AddSQLTokens(stIdentificator, Ton, '', [], 3);
+
+    Par1:=AddSQLTokens(stKeyword, [Par2, Ton1], 'AS', [], 20);                //AS
 
     Par1:=AddSQLTokens(stKeyword, Par1, 'begin', [], 21); //AS
 end;
@@ -7893,6 +7914,12 @@ begin
     9:FTriggerType:=FTriggerType + [ttUpdate];
     10:FTriggerType:=FTriggerType + [ttDelete];
     11:FPosition:=StrToInt(AWord);
+    12:FSintax2003:=true;
+    13:FTriggerDBEvent:=tdbeConnect;
+    14:FTriggerDBEvent:=tdbeDisconnect;
+    15:FTriggerDBEvent:=tdbeTransactionStart;
+    16:FTriggerDBEvent:=tdbeTransactionCommit;
+    17:FTriggerDBEvent:=tdbeTransactionRollback;
     20:ParseLocalVariables(ASQLParser, AChild, AWord);
     21:begin
          ASQLParser.Position:=ASQLParser.WordPosition;
@@ -7917,7 +7944,7 @@ begin
   end;
   S:=S + ' TRIGGER ' + DoFormatName(Name);
 
-  if TableName <> '' then
+  if (TableName <> '') and not FSintax2003 then
     S:=S + ' FOR ' + DoFormatName(TableName) + LineEnding;
 
   if FActive then
@@ -7949,8 +7976,11 @@ begin
 
   S:=S + ' ' +S1 + LineEnding;
 
-  if FPosition > 0 then
-    S:=S + '  POSITION '+ IntToStr(FPosition) + LineEnding;
+  if FPosition > -1 then
+    S:=S + ' POSITION '+ IntToStr(FPosition) + LineEnding;
+
+  if (TableName <> '') and FSintax2003 then
+    S:=S + ' ON ' + DoFormatName(TableName) + LineEnding;
 
   if (Body<>'') or (Params.Count > 0) then
   begin
@@ -7973,6 +8003,7 @@ begin
   inherited Create(AParent);
   FActive:=true;
   FTriggerType:=[];
+  FPosition:=-1;
   ObjectKind:=okTrigger;
   FSQLCommentOnClass:=TFBSQLCommentOn;
 end;
@@ -7984,7 +8015,9 @@ begin
     TriggerType:=TFBSQLCreateTrigger(ASource).TriggerType;
     Active:=TFBSQLCreateTrigger(ASource).Active;
     Position:=TFBSQLCreateTrigger(ASource).Position;
-
+    FBody:=TFBSQLCreateTrigger(ASource).FBody;
+    FSintax2003:=TFBSQLCreateTrigger(ASource).FSintax2003;
+    FTriggerDBEvent:=TFBSQLCreateTrigger(ASource).TriggerDBEvent;
   end;
   inherited Assign(ASource);
 end;
