@@ -1272,6 +1272,8 @@ begin
   SetHandlers(false);
   TextEditor.Text:=AValue;
   SetHandlers(true);
+  if Assigned(TextEditor.OnChange) then
+    TextEditor.OnChange(TextEditor);
 end;
 
 procedure Tfdbm_SynEditorFrame.SetModified(const AValue: boolean);

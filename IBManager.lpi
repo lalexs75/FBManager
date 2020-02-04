@@ -1895,4 +1895,14 @@
       </Options>
     </Linking>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions>
+      <Item>
+        <Name Value="EUIBError"/>
+      </Item>
+      <Item>
+        <Name Value="EUIBGSecError"/>
+      </Item>
+    </Exceptions>
+  </Debugging>
 </CONFIG>

@@ -292,6 +292,7 @@ begin
       EditorFrame.EditorText:=TPGTrigger(DBObject).TriggerSP.ProcedureBody;
   end;
   EditorFrame.Modified:=false;
+  Modified:=false;
 end;
 
 procedure TpgTriggerEditorPage.LoadTriggerFields;
@@ -566,6 +567,7 @@ begin
   if CommentSQLCode(S, SysCommentStyle) then
   begin
     EditorFrame.EditorText:=S;
+    EditorFrame.TextEditor.Modified:=true;
     Result:=true;
   end;
 end;
@@ -579,6 +581,7 @@ begin
   if UnCommentSQLCode(S) then
   begin
     EditorFrame.EditorText:=S;
+    EditorFrame.TextEditor.Modified:=true;
     Result:=true;
   end;
 end;
