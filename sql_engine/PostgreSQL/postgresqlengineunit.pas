@@ -7119,13 +7119,13 @@ begin
 
   TT:=TriggerTable;
   if (not Assigned(TT)) or (TT is TDBViewObject) then
-    FCmd.TriggerState:=ttsUnknow
+    FCmd.TriggerState:=trsNone
   else
   begin
     if Active then
-      FCmd.TriggerState:=ttsEnabled
+      FCmd.TriggerState:=trsActive
     else
-      FCmd.TriggerState:=ttsDisable;
+      FCmd.TriggerState:=trsInactive;
   end;
 
   FCmd.TriggerWhen:=TriggerWhen;
@@ -7168,9 +7168,9 @@ begin
     FCmd.TableName:=FTriggerTable.Caption;
     FCmd.SchemaName:=FTriggerTable.SchemaName;
     if AValue then
-      FCmd.TriggerState:=ttsEnabled
+      FCmd.TriggerState:=trsActive
     else
-      FCmd.TriggerState:=ttsDisable;
+      FCmd.TriggerState:=trsInactive;
     if CompileSQLObject(FCmd, [sepInTransaction]) then
       FActive:=AValue;
     FCmd.Free;

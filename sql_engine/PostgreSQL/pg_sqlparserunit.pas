@@ -142,7 +142,6 @@ type
 
   TExceptionLevel = (elDEBUG, elLOG, elINFO, elNOTICE, elWARNING, elEXCEPTION);
   TEventTriggerState = (etNone, etDisable, etEnable, etReplica, etAlways);
-  TTriggerState = (ttsUnknow, ttsEnabled, ttsDisable);
 
   TPGOption = (pgoWithOids, pgoWithoutOids);
   TPGOptions = set of TPGOption;
@@ -781,7 +780,6 @@ type
     FReferencings: TPGSQLCreateTriggerReferencings;
     FTriggerFunction: TPGSQLCreateFunction;
     FTriggerState: TTriggerState;
-    FTriggerType: TTriggerTypes;
     FTriggerWhen: string;
     FCurRef: TPGSQLCreateTriggerReferencing;
     procedure ParseWhen(SQLParser:TSQLParser);
@@ -799,7 +797,6 @@ type
     property TableName;
     property Multiline:boolean read FMultiline write FMultiline;
     property TriggerWhen:string read FTriggerWhen write FTriggerWhen;
-    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
     property ProcName:string read FProcName write FProcName;
     property ProcSchema:string read FProcSchema write FProcSchema;
     property TriggerState:TTriggerState read FTriggerState write FTriggerState;
@@ -6469,10 +6466,10 @@ begin
     AddSQLCommand(S);
   end;
 
-  if FTriggerState <> ttsUnknow then
+  if FTriggerState <> trsNone then
   begin
     S:='ALTER EVENT TRIGGER ' + FullName;
-    if FTriggerState = ttsEnabled then
+    if FTriggerState = trsActive then
       S:=S + ' ENABLE'
     else
       S:=S + ' DISABLE';
@@ -19333,8 +19330,8 @@ ADD ограничение_таблицы [ NOT VALID ]
     NOT OF
     OWNER TO new_owner
 *)
-  TEnableT:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'ENABLE', [], 18);
-  TDisableT:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'DISABLE', [], 19);
+  TEnableT:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'ENABLE', [], -4);
+  TDisableT:=AddSQLTokens(stKeyword, [FTShemaName, FTTableName], 'DISABLE', [], -5);
     TTrig:=AddSQLTokens(stKeyword, [TEnableT, TDisableT], 'TRIGGER', []);
     TTrigName:=AddSQLTokens(stIdentificator, TTrig, '', [], 20);
     TTrigNameAll:=AddSQLTokens(stKeyword, TTrig, 'ALL', [], 20);
@@ -19441,13 +19438,11 @@ begin
     14:if Assigned(FCurOperator) then FCurOperator.DropRule:=drRestrict;
     15:if Assigned(FCurOperator) then FCurOperator.DropRule:=drCascade;
     17:FCurOperator:=FOperators.AddItem(ataOwnerTo, AWord);
-    18:FEnableState:=ttsEnabled;
-    19:FEnableState:=ttsDisable;
     20:begin
-         if FEnableState = ttsEnabled then
+         if FEnableState = trsActive then
            FCurOperator:=FOperators.AddItem(ataEnableTrigger, AWord)
          else
-         if FEnableState = ttsDisable then
+         if FEnableState = trsInactive then
            FCurOperator:=FOperators.AddItem(ataDisableTrigger, AWord)
        end;
     21:begin
@@ -20142,21 +20137,21 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
-    2:FTriggerType:=FTriggerType + [ttBefore];
-    3:FTriggerType:=FTriggerType + [ttAfter];
-    4:FTriggerType:=FTriggerType + [ttInsert];
-    5:FTriggerType:=FTriggerType + [ttUpdate];
-    6:FTriggerType:=FTriggerType + [ttDelete];
-    7:FTriggerType:=FTriggerType + [ttTruncate];
-    31:FTriggerType:=FTriggerType + [ttInsteadOf];
+    2:TriggerType:=TriggerType + [ttBefore];
+    3:TriggerType:=TriggerType + [ttAfter];
+    4:TriggerType:=TriggerType + [ttInsert];
+    5:TriggerType:=TriggerType + [ttUpdate];
+    6:TriggerType:=TriggerType + [ttDelete];
+    7:TriggerType:=TriggerType + [ttTruncate];
+    31:TriggerType:=TriggerType + [ttInsteadOf];
     8:Params.AddParam(AWord);
     9:TableName:=AWord;
     10:begin
          SchemaName:=TableName;
          TableName:=AWord;
        end;
-    11:FTriggerType:=FTriggerType + [ttRow];
-    12:FTriggerType:=FTriggerType + [ttStatement];
+    11:TriggerType:=TriggerType + [ttRow];
+    12:TriggerType:=TriggerType + [ttStatement];
     13:ParseWhen(ASQLParser);
     14:FProcName:=AWord;
     15:begin
@@ -20221,19 +20216,19 @@ begin
 
     S:='CREATE TRIGGER ' + DoFormatName(Name);
 
-    if ttBefore in FTriggerType then
+    if ttBefore in TriggerType then
       S:=S + ' BEFORE'
     else
-    if ttAfter in FTriggerType then
+    if ttAfter in TriggerType then
       S:=S + ' AFTER'
     else
-    if ttInsteadOf in FTriggerType then
+    if ttInsteadOf in TriggerType then
       S:=S + ' INSTEAD OF';
 
     S1:='';
-    if ttInsert in FTriggerType then S1:=S1 + ' INSERT';
+    if ttInsert in TriggerType then S1:=S1 + ' INSERT';
 
-    if ttUpdate in FTriggerType then
+    if ttUpdate in TriggerType then
     begin
       if S1<>'' then S1:=S1 + ' OR';
       S1:=S1 + ' UPDATE';
@@ -20241,13 +20236,13 @@ begin
         S1:=S1 + ' OF ' + Params.AsString;
     end;
 
-    if ttDelete in FTriggerType then
+    if ttDelete in TriggerType then
     begin
       if S1<>'' then S1:=S1 + ' OR';
       S1:=S1 + ' DELETE';
     end;
 
-    if ttTruncate in FTriggerType then
+    if ttTruncate in TriggerType then
     begin
       if S1<>'' then S1:=S1 + ' OR';
       S1:=S1 + ' TRUNCATE';
@@ -20274,10 +20269,10 @@ begin
     end;
 
     S:=S + ' FOR EACH';
-    if ttRow in FTriggerType then
+    if ttRow in TriggerType then
       S:=S + ' ROW'
     else
-    if ttStatement in FTriggerType then
+    if ttStatement in TriggerType then
       S:=S + ' STATEMENT';
 
     if FTriggerWhen<>'' then
@@ -20295,10 +20290,10 @@ begin
     AddSQLCommand(S);
   end;
 
-  if FTriggerState <> ttsUnknow then
+  if FTriggerState <> trsNone then
   begin
     S:='ALTER TABLE ' + FT;
-    if FTriggerState = ttsEnabled then
+    if FTriggerState = trsActive then
       S:=S + ' ENABLE'
     else
       S:=S + ' DISABLE';
@@ -20331,7 +20326,6 @@ begin
   if ASource is TPGSQLCreateTrigger then
   begin
     TriggerWhen:=TPGSQLCreateTrigger(ASource).TriggerWhen;
-    TriggerType:=TPGSQLCreateTrigger(ASource).TriggerType;
     ProcName:=TPGSQLCreateTrigger(ASource).ProcName;
     ProcSchema:=TPGSQLCreateTrigger(ASource).ProcSchema;
     TriggerState:=TPGSQLCreateTrigger(ASource).TriggerState;

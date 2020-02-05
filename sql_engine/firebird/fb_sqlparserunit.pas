@@ -146,26 +146,20 @@ type
 
   TFBSQLCreateTrigger = class(TSQLCreateTrigger)
   private
-    FActive: boolean;
-    FBody: string;
     FPosition: integer;
     FSintax2003: Boolean;
     FTriggerDBEvent: TTriggerDBEvent;
     FTriggerDDLvents: TTriggerDDLvents;
-    FTriggerType: TTriggerTypes;
     procedure ParseLocalVariables(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
-    procedure SetBody(AValue: string);
   protected
+    procedure SetBody(AValue: string);override;
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
-    property Active:boolean read FActive write FActive;
     property Position:integer read FPosition write FPosition;
-    property Body:string read FBody write SetBody;
     property TableName;
     property Sintax2003:Boolean read FSintax2003 write FSintax2003;
     property TriggerDBEvent:TTriggerDBEvent read FTriggerDBEvent write FTriggerDBEvent;
@@ -7830,7 +7824,7 @@ begin
 
   AValue:=Copy(AValue, B, Length(AValue));
 
-  FBody:=AValue;
+  inherited SetBody(AValue);
 end;
 
 procedure TFBSQLCreateTrigger.InitParserTree;
@@ -7933,8 +7927,8 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     Par1:=AddSQLTokens(stKeyword, TrigName, 'FOR', []);              //FOR
     Par1:=AddSQLTokens(stIdentificator, Par1, '', [], 3);            //  table_name
 
-    State1:=AddSQLTokens(stKeyword, [Par1, TrigName], 'ACTIVE', [], 4);         // |ACTIVE|
-    State2:=AddSQLTokens(stKeyword, [Par1, TrigName], 'INACTIVE', [], 5);       // |INACTIVE|
+    State1:=AddSQLTokens(stKeyword, [Par1, TrigName], 'ACTIVE', [], -4);         // |ACTIVE|
+    State2:=AddSQLTokens(stKeyword, [Par1, TrigName], 'INACTIVE', [], -5);       // |INACTIVE|
     //Par1.AddChildToken(State2);
 
     TDBOn:=AddSQLTokens(stKeyword, [State1, State2], 'ON', []);
@@ -8038,13 +8032,11 @@ begin
     1:if not (ooOrReplase in Options) then CreateMode:=cmAlter;
     2:Name:=AWord;
     3:TableName:=AWord;
-    4:FActive:=true;
-    5:FActive:=false;
-    6:FTriggerType:=FTriggerType + [ttBefore];
-    7:FTriggerType:=FTriggerType + [ttAfter];
-    8:FTriggerType:=FTriggerType + [ttInsert];
-    9:FTriggerType:=FTriggerType + [ttUpdate];
-    10:FTriggerType:=FTriggerType + [ttDelete];
+    6:TriggerType:=TriggerType + [ttBefore];
+    7:TriggerType:=TriggerType + [ttAfter];
+    8:TriggerType:=TriggerType + [ttInsert];
+    9:TriggerType:=TriggerType + [ttUpdate];
+    10:TriggerType:=TriggerType + [ttDelete];
     11:FPosition:=StrToInt(AWord);
     12:FSintax2003:=true;
     13:FTriggerDBEvent:=tdbeConnect;
@@ -8097,10 +8089,10 @@ begin
   if (TableName <> '') and not FSintax2003 then
     S:=S + ' FOR ' + DoFormatName(TableName) + LineEnding;
 
-  if FActive then
-    S:=S + ' ACTIVE'
-  else
-    S:=S + ' INACTIVE';
+  case TriggerState of
+    trsActive:S:=S + ' ACTIVE';
+    trsInactive:S:=S + ' INACTIVE';
+  end;
 
   if FTriggerDBEvent <> tdbeNone then
   begin
@@ -8115,10 +8107,10 @@ begin
   end
   else
   begin
-    if ttBefore in FTriggerType then
+    if ttBefore in TriggerType then
       S:=S + ' BEFORE'
     else
-    if ttAfter in FTriggerType then
+    if ttAfter in TriggerType then
       S:=S + ' AFTER';
     if FTriggerDDLvents<>[] then
     begin
@@ -8139,16 +8131,16 @@ begin
     begin
 
       S1:='';
-      if ttInsert in FTriggerType then
+      if ttInsert in TriggerType then
         S1:=S1 + 'INSERT';
 
-      if ttUpdate in FTriggerType then
+      if ttUpdate in TriggerType then
       begin
         if S1 <> '' then S1:=S1 + ' OR ';
         S1:=S1 + 'UPDATE';
       end;
 
-      if ttDelete in FTriggerType then
+      if ttDelete in TriggerType then
       begin
         if S1 <> '' then S1:=S1 + ' OR ';
         S1:=S1 + 'DELETE';
@@ -8182,8 +8174,6 @@ end;
 constructor TFBSQLCreateTrigger.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FActive:=true;
-  FTriggerType:=[];
   FPosition:=-1;
   ObjectKind:=okTrigger;
   FSQLCommentOnClass:=TFBSQLCommentOn;
@@ -8193,10 +8183,7 @@ procedure TFBSQLCreateTrigger.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TFBSQLCreateTrigger then
   begin
-    TriggerType:=TFBSQLCreateTrigger(ASource).TriggerType;
-    Active:=TFBSQLCreateTrigger(ASource).Active;
     Position:=TFBSQLCreateTrigger(ASource).Position;
-    FBody:=TFBSQLCreateTrigger(ASource).FBody;
     FSintax2003:=TFBSQLCreateTrigger(ASource).FSintax2003;
     FTriggerDBEvent:=TFBSQLCreateTrigger(ASource).TriggerDBEvent;
     FTriggerDDLvents:=TFBSQLCreateTrigger(ASource).FTriggerDDLvents;

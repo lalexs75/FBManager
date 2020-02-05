@@ -264,9 +264,23 @@ type
     property CreateMode:TCreateMode read FCreateMode write FCreateMode;
   end;
 
+  TTriggerState = (trsNone, trsActive, trsInactive);
+
+  { TSQLCreateTrigger }
+
   TSQLCreateTrigger = class(TSQLCreateCommandAbstract)
+  private
+    FTriggerState: TTriggerState;
+    FTriggerType: TTriggerTypes;
+    FBody: string;
   protected
+    procedure SetBody(AValue: string); virtual;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Body:string read FBody write SetBody;
+    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
+    property TriggerState:TTriggerState read FTriggerState write FTriggerState;
   end;
 
   TSQLDropTrigger = class(TSQLDropCommandAbstract)
@@ -988,6 +1002,35 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLCreateTrigger }
+
+procedure TSQLCreateTrigger.SetBody(AValue: string);
+begin
+  if FBody = AValue then Exit;
+  FBody:=AValue;
+end;
+
+procedure TSQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    -4:TriggerState:=trsActive;
+    -5:TriggerState:=trsInactive;
+  end;
+end;
+
+procedure TSQLCreateTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCreateTrigger then
+  begin
+    FTriggerType:=TSQLCreateTrigger(ASource).FTriggerType;
+    FTriggerState:=TSQLCreateTrigger(ASource).FTriggerState;
+    FBody:=TSQLCreateTrigger(ASource).FBody;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLRollback }

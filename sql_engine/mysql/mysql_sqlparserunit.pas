@@ -295,12 +295,11 @@ type
 
   { TMySQLCreateTrigger }
 
-  TMySQLCreateTrigger = class(TSQLCommandCreateProcedure)
+  TMySQLCreateTrigger = class(TSQLCreateTrigger)
   private
     FDefiner: string;
     FTriggerOrder: TTriggerType;
     FTriggerOrderName: string;
-    FTriggerType: TTriggerTypes;
     procedure OnProcessComment(Sender:TSQLParser; AComment:string);
   protected
     procedure InitParserTree;override;
@@ -309,7 +308,6 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
     property Definer:string read FDefiner write FDefiner;
     property TriggerOrder:TTriggerType read FTriggerOrder write FTriggerOrder;
     property TriggerOrderName:string read FTriggerOrderName write FTriggerOrderName;
@@ -2640,7 +2638,6 @@ procedure TMySQLCreateTrigger.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TMySQLCreateTrigger then
   begin
-    TriggerType:=TMySQLCreateTrigger(ASource).TriggerType;
     Definer:=TMySQLCreateTrigger(ASource).Definer;
     TriggerOrder:=TMySQLCreateTrigger(ASource).TriggerOrder;
     TriggerOrderName:=TMySQLCreateTrigger(ASource).TriggerOrderName;

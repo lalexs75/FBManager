@@ -3070,7 +3070,11 @@ begin
   Rec.Name:=CaptionFullPatch;
   Rec.TableName:=TableName;
   Rec.Options:=Rec.Options + [ooOrReplase];
-  Rec.Active:=Active;
+
+  if Active then
+    Rec.TriggerState:=trsActive
+  else
+    Rec.TriggerState:=trsInactive;
   Rec.Position:=Sequence;
   Rec.TriggerType:=TriggerType;
   Rec.Body:=TriggerBody;

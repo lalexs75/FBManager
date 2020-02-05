@@ -520,7 +520,7 @@ end;
 function TSQLite3Triger.GetTriggerBody: string;
 begin
   if Assigned(FCmdCreateTrigger) then
-    Result:=FCmdCreateTrigger.TriggerBody
+    Result:=FCmdCreateTrigger.Body
   else
     Result:=''
 end;

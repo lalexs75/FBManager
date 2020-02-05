@@ -145,10 +145,7 @@ type
 
   TSQLite3SQLCreateTrigger = class(TSQLCreateTrigger)
   private
-    FTableName: string;
     FTemp: boolean;
-    FTriggerBody: string;
-    FTriggerType: TTriggerTypes;
     FTriggerWhen: string;
     procedure OnProcessComment(Sender:TSQLParser; AComment:string);
   protected
@@ -158,10 +155,8 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property Temp : boolean read FTemp write FTemp;
-    property TableName:string read FTableName write FTableName;
-    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
+    property TableName;
     property TriggerWhen:string read FTriggerWhen write FTriggerWhen;
-    property TriggerBody:string read FTriggerBody write FTriggerBody;
   end;
 
   { TSQLite3SQLDropTrigger }
@@ -1232,7 +1227,7 @@ begin
       end;
    15:begin
         ASQLParser.OnProcessComment:=nil;
-        TriggerBody:=AWord;
+        Body:=AWord;
         P:=ASQLParser.Position;
         while not ASQLParser.Eof do
         begin
@@ -1241,7 +1236,7 @@ begin
           S:=UpperCase(ASQLParser.GetNextWord);
           if S = 'END' then
           begin
-            TriggerBody:=AWord + Copy(ASQLParser.SQL, P.Position, ASQLParser.Position.Position - P.Position);
+            Body:=AWord + Copy(ASQLParser.SQL, P.Position, ASQLParser.Position.Position - P.Position);
             ASQLParser.Position:=C;
             Break;
           end
@@ -1308,11 +1303,11 @@ begin
   if TriggerWhen <> '' then
     S:=S + '  WHEN ' + TriggerWhen + LineEnding;
 
-  if TriggerBody <> '' then
+  if Body <> '' then
   begin
     if Description <> '' then
       S:=S + '/* ' + Description + ' */' + LineEnding;
-    S:=S + TriggerBody;
+    S:=S + Body;
   end;
   AddSQLCommand(S);
 end;
@@ -1322,10 +1317,7 @@ begin
   if ASource is TSQLite3SQLCreateTrigger then
   begin
     Temp:=TSQLite3SQLCreateTrigger(ASource).Temp;
-    TableName:=TSQLite3SQLCreateTrigger(ASource).TableName;
-    TriggerType:=TSQLite3SQLCreateTrigger(ASource).TriggerType;
     TriggerWhen:=TSQLite3SQLCreateTrigger(ASource).TriggerWhen;
-    TriggerBody:=TSQLite3SQLCreateTrigger(ASource).TriggerBody;
   end;
   inherited Assign(ASource);
 end;
