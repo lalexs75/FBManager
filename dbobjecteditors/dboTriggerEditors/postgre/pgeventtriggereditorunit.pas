@@ -539,9 +539,9 @@ begin
   if (DBObject.State = sdboEdit) then
   begin
     if cbEnabled.Checked then
-      FCmd.TriggerState:=ttsEnabled
+      FCmd.TriggerState:=trsActive
     else
-      FCmd.TriggerState:=ttsDisable;
+      FCmd.TriggerState:=trsInactive;
 
     if (Trim(edtWhenFrame.EditorText) <> Trim(TPGEventTrigger(DBObject).TriggerWhen)) or
        (cbEventTriggerType.Text <> TPGEventTrigger(DBObject).TriggerEvent) then
@@ -550,7 +550,7 @@ begin
   else
   begin
     if not cbEnabled.Checked then
-      FCmd.TriggerState:=ttsDisable;
+      FCmd.TriggerState:=trsInactive;
   end;
 
   Result:=true;

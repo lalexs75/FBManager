@@ -391,7 +391,7 @@ begin
     Rec.CreateMode:=cmDropAndCreate;
 
   Rec.TriggerType:=TriggerType;
-  Rec.TriggerBody:=EditorFrame.EditorText;
+  Rec.Body:=EditorFrame.EditorText;
 
   if Rec.TriggerType = [] then
     InfoBox(sPrecompileError)

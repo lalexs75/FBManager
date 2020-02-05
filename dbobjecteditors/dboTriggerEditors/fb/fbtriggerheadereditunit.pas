@@ -448,7 +448,11 @@ begin
   if DBObject.State = sdboEdit then
     Rec.Options := Rec.Options + [ooOrReplase];
 
-  Rec.Active:=cbActive.Checked;
+  if cbActive.Checked then
+    Rec.TriggerState:=trsActive
+  else
+    Rec.TriggerState:=trsInactive
+    ;
   Rec.Position:=edtOrder.Value;
 
   Rec.TriggerType:=[];

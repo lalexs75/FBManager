@@ -826,14 +826,14 @@ begin
 
 
   if TDBDataSetObject(cbTables.Items.Objects[cbTables.ItemIndex]) is TDBViewObject then
-    FCmd.TriggerState:=ttsUnknow
+    FCmd.TriggerState:=trsNone
   else
   if (DBObject.State = sdboCreate) or (cbEnabled.Checked <> TPGTrigger(DBObject).Active) then
   begin
     if cbEnabled.Checked then
-      FCmd.TriggerState:=ttsEnabled
+      FCmd.TriggerState:=trsActive
     else
-      FCmd.TriggerState:=ttsDisable;
+      FCmd.TriggerState:=trsInactive;
   end;
 
   FCmd.TriggerWhen:=Trim(edtWhenFrame.EditorText);
