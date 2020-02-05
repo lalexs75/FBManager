@@ -1089,21 +1089,27 @@ const
     'CREATE TABLE',        //tddleCreateTable
     'ALTER TABLE',         //tddleAlterTable
     'DROP TABLE',          //tddleDropTable,
+
     'CREATE PROCEDURE',    //tddleCreateProcedure
     'ALTER PROCEDURE',     //tddleAlterProcedure
     'DROP PROCEDURE',      //tddleDropProcedure
+
     'CREATE FUNCTION',     //tddleCreateFunction
     'ALTER FUNCTION',      //tddleAlterFunction
     'DROP FUNCTION',       //tddleDropFunction
+
     'CREATE TRIGGER',      //tddleCreateTrigger
     'ALTER TRIGGER',       //tddleAlterTrigger
     'DROP TRIGGER',        //tddleDropTrigger
+
     'CREATE EXCEPTION',    //tddleCreateEexception
     'ALTER EXCEPTION',     //tddleAlterException
     'DROP EXCEPTION',      //tddleDropException
+
     'CREATE VIEW',         //tddleCreateView
     'ALTER VIEW',          //tddleAlterView
     'DROP VIEW',           //tddleDropView
+
     'CREATE DOMAIN',       //tddleCreateDomain
     'ALTER DOMAIN',        //tddleAlterDomain
     'DROP DOMAIN',         //tddleDropDomain
@@ -1131,6 +1137,7 @@ const
     'ALTER MAPPING',       //tddleAlterMapping
     'DROP MAPPING'         //tddleDropMapping
   );
+
 
 implementation
 uses rxstrutils, SQLEngineInternalToolsUnit;
@@ -7840,7 +7847,7 @@ var
     TDDLS3_11, TDDLS3_12, TDDLS3_13, TDDLS3_14, TDDLS4,
     TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
     TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11,
-    TDDLS4_12, TDDLS4_13, TDDLS4_14, TDDLS4_15: TSQLTokenRecord;
+    TDDLS4_12, TDDLS4_13, TDDLS4_14, TDDLS4_15, TDDLS5: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   (*
@@ -7991,7 +7998,7 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
      TDDLS3_9:=AddSQLTokens(stKeyword, TDDLS3, 'SEQUENCE', [], 49);
      TDDLS3_10:=AddSQLTokens(stKeyword, TDDLS3, 'USER', [], 50);
      TDDLS3_11:=AddSQLTokens(stKeyword, TDDLS3, 'INDEX', [], 51);
-     TDDLS3_12:=AddSQLTokens(stKeyword, TDDLS3, 'CHARACTER', [], 52);
+     TDDLS3_12:=AddSQLTokens(stKeyword, TDDLS3, 'CHARACTER', []);
        TDDLS3_12:=AddSQLTokens(stKeyword, TDDLS3_12, 'SET', [], 53);
      TDDLS3_13:=AddSQLTokens(stKeyword, TDDLS3, 'PACKAGE', [], 54);
      TDDLS3_14:=AddSQLTokens(stKeyword, TDDLS3, 'MAPPING', [], 55);
@@ -8015,7 +8022,25 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
       TDDLS4_14:=AddSQLTokens(stKeyword, TDDLS4_1, 'BODY', [], 69);
     TDDLS4_15:=AddSQLTokens(stKeyword, TDDLS4, 'MAPPING', [], 70);
 
-  Par1:=AddSQLTokens(stKeyword, [Par2, Ton1, State1, State2, State3, TDDLS1], 'AS', [], 20);                //AS
+  TDDLS5:=AddSQLTokens(stKeyword, [TDDLS2_1, TDDLS2_2, TDDLS2_3, TDDLS2_4, TDDLS2_5, TDDLS2_6, TDDLS2_7,
+    TDDLS2_8, TDDLS2_9, TDDLS2_10, TDDLS2_11, TDDLS2_12, TDDLS2_13, TDDLS2_14,
+    TDDLS2_15, TDDLS3_1, TDDLS3_2, TDDLS3_3, TDDLS3_4, TDDLS3_5, TDDLS3_6,
+    TDDLS3_7, TDDLS3_8, TDDLS3_9, TDDLS3_10, TDDLS3_11, TDDLS3_12, TDDLS3_13,
+    TDDLS3_14, TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
+    TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11, TDDLS4_12, TDDLS4_13,
+    TDDLS4_14, TDDLS4_15], 'OR', []);
+    TDDLS5.AddChildToken([TDDLS2, TDDLS3, TDDLS4]);
+
+
+
+  Par1:=AddSQLTokens(stKeyword, [Par2, Ton1, State1, State2, State3, TDDLS1, TDDLS2_1, TDDLS2_2, TDDLS2_3, TDDLS2_4, TDDLS2_5, TDDLS2_6, TDDLS2_7,
+    TDDLS2_8, TDDLS2_9, TDDLS2_10, TDDLS2_11, TDDLS2_12, TDDLS2_13, TDDLS2_14,
+    TDDLS2_15, TDDLS3_1, TDDLS3_2, TDDLS3_3, TDDLS3_4, TDDLS3_5, TDDLS3_6,
+    TDDLS3_7, TDDLS3_8, TDDLS3_9, TDDLS3_10, TDDLS3_11, TDDLS3_12, TDDLS3_13,
+    TDDLS3_14, TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
+    TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11, TDDLS4_12, TDDLS4_13,
+    TDDLS4_14, TDDLS4_15
+    ], 'AS', [], 20);                //AS
     Par1:=AddSQLTokens(stKeyword, Par1, 'begin', [], 21); //AS
 
 //    ANY DDL STATEMENT
@@ -8050,22 +8075,50 @@ begin
          Body:=GetToEndpSQL(ASQLParser);
        end;
     25:FTriggerDDLvents:=[tddleAnyDdlStatement];
-    //tddleCreateTable, tddleAlterTable, tddleDropTable,
-    //tddleCreateProcedure, tddleAlterProcedure, tddleDropProcedure,
-    //tddleCreateFunction, tddleAlterFunction, tddleDropFunction,
-    //tddleCreateTrigger, tddleAlterTrigger, tddleDropTrigger,
-    //tddleCreateEexception, tddleAlterException, tddleDropException,
-    //tddleCreateView, tddleAlterView, tddleDropView,
-    //tddleCreateDomain, tddleAlterDomain, tddleDropDomain,
-    //tddleCreateRole, tddleAlterRole, tddleDropRole,
-    //tddleCreateSequence, tddleAlterSequence, tddleDropSequence,
-    //tddleCreateUser, tddleAlterUser, tddleDropUser,
-    //tddleCreateIndex, tddleAlterIndex, tddleDropIndex,
-    //tddleCreateCollation, tddleDropCollation,
-    //tddleAlterCharacterSet,
-    //tddleCreatePackage, tddleAlterPackage, tddleDropPackage,
-    //tddleCreatePackageBody, tddleDropPackageBody,
-    //tddleCreateMapping, tddleAlterMapping, tddleDropMapping);;
+    26:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateTable];
+    27:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateProcedure];
+    28:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateFunction];
+    29:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateTrigger];
+    30:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateEexception];
+    31:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateView];
+    32:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateDomain];
+    33:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateRole];
+    34:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateSequence];
+    35:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateUser];
+    36:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateIndex];
+    37:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateCollation];
+    38:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreatePackage];
+    39:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreatePackageBody];
+    40:FTriggerDDLvents:=FTriggerDDLvents + [tddleCreateMapping];
+    41:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterTable];
+    42:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterProcedure];
+    43:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterFunction];
+    44:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterTrigger];
+    45:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterException];
+    46:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterView];
+    47:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterDomain];
+    48:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterRole];
+    49:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterSequence];
+    50:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterUser];
+    51:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterIndex];
+    53:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterCharacterSet];
+    54:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterPackage];
+    55:FTriggerDDLvents:=FTriggerDDLvents + [tddleAlterMapping];
+    56:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropTable];
+    57:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropProcedure];
+    58:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropFunction];
+    59:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropTrigger];
+    60:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropException];
+    61:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropView];
+    62:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropDomain];
+    63:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropRole];
+    64:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropSequence];
+    65:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropUser];
+    66:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropIndex];
+    67:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropCollation];
+    68:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropPackage];
+    69:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropPackageBody];
+    70:FTriggerDDLvents:=FTriggerDDLvents + [tddleDropMapping];
   end;
 end;
 
@@ -8122,7 +8175,7 @@ begin
         for D in FTriggerDDLvents do
         begin
           if S1<>'' then S1:=S1 + ' OR';
-          S1:=S1 + FBddlEventsNames[D];
+          S1:=S1 + ' ' + FBddlEventsNames[D];
         end
       end;
       S:=S + S1 + LineEnding;
