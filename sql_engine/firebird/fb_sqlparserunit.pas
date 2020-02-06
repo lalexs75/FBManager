@@ -7377,7 +7377,7 @@ begin
         FCurField.TypeOf:=true;
       end;
     4:if Assigned(FCurField) then FCurField.TypeName:=AWord; //обычный тип или домен
-    5:if Assigned(FCurField) then FCurField.TypeName:=AWord; //обычный тип или домен
+    5:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + '.' + AWord; //обычный тип или домен
     6:if Assigned(FCurField) then FCurField.TypeLen:=StrToInt(AWord);
     7:if Assigned(FCurField) then FCurField.TypePrec:=StrToInt(AWord);
     90:if Assigned(FCurField) then FCurField.TypeName:='CURSOR FOR (' + ASQLParser.GetToBracket(')') + ')';

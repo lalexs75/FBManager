@@ -571,8 +571,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateTrigger4'
         Lines.Strings = (
-          'CREATE TRIGGER tr_log_connect INACTIVE ON CONNECT'
-          ' POSITION 0'
+          'CREATE TRIGGER tr_log_connect INACTIVE ON CONNECT POSITION 0'
           'AS'
           'BEGIN'
           '  INSERT INTO LOG_CONNECT (ID, USERNAME, ATIME)'
@@ -583,8 +582,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateTrigger5'
         Lines.Strings = (
-          'CREATE TRIGGER TR_LIMIT_WORKTIME ACTIVE ON CONNECT'
-          ' POSITION 1'
+          'CREATE TRIGGER TR_LIMIT_WORKTIME ACTIVE ON CONNECT POSITION 1'
           'AS'
           'BEGIN'
           '  IF ((CURRENT_USER <> ''SYSDBA'') AND NOT (CURRENT_TIME BETWEEN time ''9:00'' AND time ''17:00'')) THEN'
@@ -598,10 +596,9 @@ object FBTestSQLData: TFBTestSQLData
           'CREATE TRIGGER trig_ddl_sp BEFORE CREATE PROCEDURE'
           'AS'
           'BEGIN'
-          'IF (rdb$get_context(''DDL_TRIGGER'', ''OBJECT_NAME'')'
-          'NOT STARTING ''SP_'') THEN'
-          'EXCEPTION e_invalid_sp_name;'
-          'END'
+          '  IF (rdb$get_context(''DDL_TRIGGER'', ''OBJECT_NAME'') NOT STARTING ''SP_'') THEN'
+          '    EXCEPTION e_invalid_sp_name;'
+          'END;'
         )
       end    
       item
@@ -610,9 +607,9 @@ object FBTestSQLData: TFBTestSQLData
           'CREATE TRIGGER trig_ddl BEFORE ANY DDL STATEMENT'
           'AS'
           'BEGIN'
-          'IF (current_user <> ''SUPER_USER'') THEN'
-          'EXCEPTION e_access_denied;'
-          'END'
+          '  IF (current_user <> ''SUPER_USER'') THEN'
+          '    EXCEPTION e_access_denied;'
+          'END;'
         )
       end    
       item
@@ -652,17 +649,18 @@ object FBTestSQLData: TFBTestSQLData
           'CREATE TRIGGER trig_ddl_log_after AFTER ANY DDL STATEMENT'
           'AS'
           'BEGIN'
-          '-- Здесь нам требуется автономная транзакция,'
-          '-- потому что в оригинальной транзакции'
-          '-- мы не увидим запись, вставленную в'
-          '-- BEFORE триггере в автономной транзакции,'
-          '-- если пользовательская транзакции не запущена'
-          '-- с режимом изоляции READ COMMITTED.'
-          'IN AUTONOMOUS TRANSACTION DO'
-          'UPDATE ddl_log SET ok = ''Y'''
-          'WHERE'
-          'id = rdb$get_context(''USER_SESSION'', ''trig_ddl_log_id'');'
-          'END'
+          '  -- Здесь нам требуется автономная транзакция,'
+          '  -- потому что в оригинальной транзакции'
+          '  -- мы не увидим запись, вставленную в'
+          '  -- BEFORE триггере в автономной транзакции,'
+          '  -- если пользовательская транзакции не запущена'
+          '  -- с режимом изоляции READ COMMITTED.'
+          '  IN AUTONOMOUS TRANSACTION DO'
+          '   UPDATE ddl_log'
+          '   SET ok = ''Y'''
+          '   WHERE'
+          '    id = rdb$get_context(''USER_SESSION'', ''trig_ddl_log_id'');'
+          'END;'
         )
       end    
       item
