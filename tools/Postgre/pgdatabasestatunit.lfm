@@ -9,422 +9,44 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   LCLVersion = '2.1.0.0'
-  object PageControl1: TPageControl
+  object ToolPanel1: TToolPanel
     Left = 0
-    Height = 479
+    Height = 34
     Top = 0
     Width = 881
-    ActivePage = TabSheet1
-    Align = alClient
-    TabIndex = 0
+    Items = <    
+      item
+        Action = tsRefresh
+        Visible = True
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 34
+    ClientWidth = 881
     TabOrder = 0
-    object TabSheet1: TTabSheet
-      Caption = 'Object size...'
-      ClientHeight = 448
-      ClientWidth = 871
-      object RxDBGrid1: TRxDBGrid
-        Left = 0
-        Height = 414
-        Top = 34
-        Width = 871
-        ColumnDefValues.BlobText = '(данные)'
-        TitleButtons = True
-        AutoSort = True
-        Columns = <        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'OID'
-            Width = 60
-            FieldName = 'oid'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = '...'
-            Width = 32
-            FieldName = 'relkind'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-            ImageList = fbManagerMainForm.ImageList2
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Relation name'
-            Width = 250
-            FieldName = 'relname'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Total size'
-            Width = 90
-            FieldName = 'total'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footer.Alignment = taRightJustify
-            Footer.DisplayFormat = '#,##0'
-            Footer.FieldName = 'total'
-            Footer.ValueType = fvtSum
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Index size'
-            Width = 90
-            FieldName = 'index'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footer.Alignment = taRightJustify
-            Footer.DisplayFormat = '#,##0'
-            Footer.FieldName = 'index'
-            Footer.ValueType = fvtSum
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Toast size'
-            Width = 90
-            FieldName = 'toast'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footer.Alignment = taRightJustify
-            Footer.DisplayFormat = '#,##0'
-            Footer.FieldName = 'toast'
-            Footer.ValueType = fvtSum
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Avg. rec. count'
-            Width = 90
-            FieldName = 'avg_rec_count'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Pages count'
-            Width = 90
-            FieldName = 'relpages'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Пусто)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footer.Alignment = taRightJustify
-            Footer.DisplayFormat = '#,##0'
-            Footer.FieldName = 'relpages'
-            Footer.ValueType = fvtSum
-            Footers = <>
-          end>
-        KeyStrokes = <        
-          item
-            Command = rxgcShowFindDlg
-            ShortCut = 16454
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowColumnsDlg
-            ShortCut = 16471
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowFilterDlg
-            ShortCut = 16468
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowSortDlg
-            ShortCut = 16467
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowQuickFilter
-            ShortCut = 16465
-            Enabled = True
-          end        
-          item
-            Command = rxgcHideQuickFilter
-            ShortCut = 16456
-            Enabled = True
-          end        
-          item
-            Command = rxgcSelectAll
-            ShortCut = 16449
-            Enabled = True
-          end        
-          item
-            Command = rxgcDeSelectAll
-            ShortCut = 16429
-            Enabled = True
-          end        
-          item
-            Command = rxgcInvertSelection
-            ShortCut = 16426
-            Enabled = True
-          end        
-          item
-            Command = rxgcOptimizeColumnsWidth
-            ShortCut = 16427
-            Enabled = True
-          end        
-          item
-            Command = rxgcCopyCellValue
-            ShortCut = 16451
-            Enabled = True
-          end>
-        FooterOptions.Active = True
-        FooterOptions.Color = clYellow
-        FooterOptions.RowCount = 1
-        FooterOptions.DrawFullLine = True
-        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
-        SearchOptions.FromStart = False
-        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
-        FooterColor = clYellow
-        FooterRowCount = 1
-        Align = alClient
-        Color = clWindow
-        DrawFullLine = True
-        FocusColor = clRed
-        SelectedColor = clHighlight
-        GridLineStyle = psSolid
-        DataSource = dsTablesStat
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
-        TabOrder = 0
-        TitleStyle = tsNative
-      end
-      object ToolPanel1: TToolPanel
-        Left = 0
-        Height = 34
-        Top = 0
-        Width = 871
-        Items = <        
-          item
-            Action = tsRefresh
-            Visible = True
-            ShowCaption = True
-          end>
-        ImageList = fbManagerMainForm.ImageListMain
-        ToolBarStyle = tbsWindowsXP
-        Options = [tpFlatBtns]
-        CustomizeShortCut = False
-        Align = alTop
-        BorderWidth = 4
-        ClientHeight = 34
-        ClientWidth = 871
-        TabOrder = 1
-      end
-    end
   end
-  object pgStatDB: TZConnection
-    ControlsCodePage = cCP_UTF8
-    Properties.Strings = (
-      'AutoEncodeStrings='
-      'application_name=FBManager'
-      'codepage='
-      'controls_cp=CP_UTF8'
+  object TabControl1: TTabControl
+    Left = 0
+    Height = 445
+    Top = 34
+    Width = 881
+    OnChange = TabControl1Change
+    TabIndex = 0
+    Tabs.Strings = (
+      'New Tab'
     )
-    DesignConnection = True
-    HostName = '127.0.0.1'
-    Port = 0
-    Database = 'postgres'
-    User = 'alexs'
-    Protocol = 'postgresql-9'
-    Left = 192
-    Top = 48
-  end
-  object dsTablesStat: TDataSource
-    DataSet = quTablesStat
-    Left = 128
-    Top = 112
-  end
-  object quTablesStat: TZMacroQuery
-    Connection = pgStatDB
-    SQL.Strings = (
-      'select'
-      '  cast(pg_class.oid as integer),'
-      '  cast(pg_namespace.nspname || ''.'' || pg_class.relname as varchar(500)) relname,'
-      '  pg_class.relkind,'
-      '  pg_total_relation_size(pg_class.oid) AS total,'
-      '  pg_indexes_size(pg_class.oid) AS INDEX,'
-      '  pg_total_relation_size(reltoastrelid) AS toast,'
-      '  pg_class.reltuples as avg_rec_count,'
-      '  pg_class.relpages,'
-      ''
-      '  (select'
-      '     pg_description.description'
-      '   from'
-      '     pg_description'
-      '     inner join pg_class pg_class1 on (pg_class1.oid = pg_description.classoid)'
-      '   where'
-      '       pg_description.objsubid = 0'
-      '     and'
-      '       pg_class1.relname = ''pg_class'''
-      '     and'
-      '       pg_description.objoid = pg_class.oid) as description'
-      'from'
-      '  pg_class'
-      '  inner join pg_namespace on (pg_namespace.oid = pg_class.relnamespace)'
-      'where'
-      '    pg_class.relkind in (''r'', ''t'', ''m'')'
-      '  and'
-      '    (pg_namespace.nspname <> ''information_schema'')'
-      '  and'
-      '    (substring(pg_namespace.nspname from 1 for 3) <> ''pg_'')'
-      'order by'
-      '  2'
-    )
-    Params = <>
-    MacroExprDef = '0=0'
-    Left = 168
-    Top = 112
-    object quTablesStatoid: TLongintField
-      FieldKind = fkData
-      FieldName = 'oid'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-    end
-    object quTablesStatrelkind: TStringField
-      FieldKind = fkData
-      FieldName = 'relkind'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 4
-    end
-    object quTablesStattotal: TLargeintField
-      FieldKind = fkData
-      FieldName = 'total'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      DisplayFormat = '#,##0'
-    end
-    object quTablesStatindex: TLargeintField
-      FieldKind = fkData
-      FieldName = 'index'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      DisplayFormat = '#,##0'
-    end
-    object quTablesStattoast: TLargeintField
-      FieldKind = fkData
-      FieldName = 'toast'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      DisplayFormat = '#,##0'
-    end
-    object quTablesStatavg_rec_count: TFloatField
-      FieldKind = fkData
-      FieldName = 'avg_rec_count'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      DisplayFormat = '#,##0'
-      Precision = 4
-    end
-    object quTablesStatrelpages: TLongintField
-      FieldKind = fkData
-      FieldName = 'relpages'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      DisplayFormat = '#,##0'
-    end
-    object quTablesStatdescription: TMemoField
-      FieldKind = fkData
-      FieldName = 'description'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quTablesStatrelname: TStringField
-      FieldKind = fkData
-      FieldName = 'relname'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 2000
-    end
+    Align = alClient
+    TabOrder = 1
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
-    Left = 168
-    Top = 184
+    Left = 248
+    Top = 16
     object tsRefresh: TAction
       Caption = 'Refresh'
       ImageIndex = 10
@@ -433,8 +55,8 @@ object pgDataBaseStatForm: TpgDataBaseStatForm
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 88
-    Top = 112
+    Left = 168
+    Top = 16
     object MenuItem1: TMenuItem
       Action = tsRefresh
     end

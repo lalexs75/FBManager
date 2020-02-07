@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, ActnList,
   Menus, DB, rxdbgrid, rxtoolbar, ZMacroQuery, ZConnection,
-  PostgreSQLEngineUnit;
+  PostgreSQLEngineUnit, fbmAbstractSQLEngineToolsUnit;
 
 type
 
@@ -36,36 +36,28 @@ type
   TpgDataBaseStatForm = class(TForm)
     MenuItem1: TMenuItem;
     PopupMenu1: TPopupMenu;
-    quTablesStatavg_rec_count: TFloatField;
-    quTablesStatdescription: TMemoField;
-    quTablesStatindex: TLargeintField;
-    quTablesStatoid: TLongintField;
-    quTablesStatrelkind: TStringField;
-    quTablesStatrelname: TStringField;
-    quTablesStatrelpages: TLongintField;
-    quTablesStattoast: TLargeintField;
-    quTablesStattotal: TLargeintField;
+    TabControl1: TTabControl;
     ToolPanel1: TToolPanel;
     tsRefresh: TAction;
     ActionList1: TActionList;
-    dsTablesStat: TDataSource;
-    PageControl1: TPageControl;
-    pgStatDB: TZConnection;
-    RxDBGrid1: TRxDBGrid;
-    TabSheet1: TTabSheet;
-    quTablesStat: TZMacroQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure TabControl1Change(Sender: TObject);
     procedure tsRefreshExecute(Sender: TObject);
   private
+    FCurPage:TAbstractSQLEngineTools;
+    FPgList:TFPList;
     procedure Localize;
+    procedure AddToolsFrame(ATools:TAbstractSQLEngineTools);
+    procedure SetCurPageIndex(AIndex:Integer);
   public
     procedure ConnectToDB(ASQLEngine: TSQLEnginePostgre);
   end;
 
 procedure ShowDataBaseStatForm(ASQLEngine: TSQLEnginePostgre);
 implementation
-uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit, fbmStrConstUnit;
+uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit, fbmStrConstUnit,
+  pgDBObjectsSizeUnit, pgToolsFindDuplicateUnit;
 
 { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
 (*
@@ -91,44 +83,75 @@ procedure TpgDataBaseStatForm.FormCreate(Sender: TObject);
 var
   R: TRxColumn;
 begin
-  pgStatDB.Protocol:='postgresql'; //pgZeosServerVersionProtoStr[FServerVersion];
-  R:=RxDBGrid1.ColumnByFieldName('relkind');
-  R.KeyList.Clear;
-  R.KeyList.Add('r=' + IntToStr(DBObjectKindImages[okTable]));
-  R.KeyList.Add('t=' + IntToStr(DBObjectKindImages[okTable]));
-  R.KeyList.Add('m=' + IntToStr(DBObjectKindImages[okMaterializedView]));
+  FPgList:=TFPList.Create;
+  TabControl1.Tabs.Clear;
 
+  AddToolsFrame(TpgDBObjectsSizeTools.Create(Self));
+  AddToolsFrame(TpgToolsFindDuplicateFrame.Create(Self));
+
+  TabControl1.TabIndex:=0;
+  SetCurPageIndex(0);
   Localize;
 end;
 
 procedure TpgDataBaseStatForm.FormDestroy(Sender: TObject);
 begin
   pgDataBaseStatForm:= nil;
+  FreeAndNil(FPgList);
+end;
+
+procedure TpgDataBaseStatForm.TabControl1Change(Sender: TObject);
+var
+  W, H, L, T: Integer;
+begin
+  SetCurPageIndex(TabControl1.TabIndex);
+  FCurPage.RefreshPage;
 end;
 
 procedure TpgDataBaseStatForm.tsRefreshExecute(Sender: TObject);
 begin
-  quTablesStat.Refresh;
+  if Assigned(FCurPage) then
+    FCurPage.RefreshPage;
 end;
 
 procedure TpgDataBaseStatForm.Localize;
+var
+  i: Integer;
 begin
   Caption:=sDataBaseStatistic;
   tsRefresh.Caption:=sRefresh;
+
+  for i:=0 to FPgList.Count-1 do
+    TAbstractSQLEngineTools(FPgList[i]).Localize;
+end;
+
+procedure TpgDataBaseStatForm.AddToolsFrame(ATools: TAbstractSQLEngineTools);
+begin
+  TabControl1.Tabs.Add(ATools.PageName);
+  FPgList.Add(ATools);
+  ATools.Parent:=TabControl1;
+  ATools.Align:=alClient;
+  ATools.Hide;
+end;
+
+procedure TpgDataBaseStatForm.SetCurPageIndex(AIndex: Integer);
+begin
+  if Assigned(FCurPage) then
+    FCurPage.Hide;
+
+  FCurPage:=TAbstractSQLEngineTools(FPgList[AIndex]);
+  FCurPage.Show;
+  FCurPage.BringToFront;
 end;
 
 procedure TpgDataBaseStatForm.ConnectToDB(ASQLEngine: TSQLEnginePostgre);
+var
+  i: Integer;
 begin
-  quTablesStat.Active:=false;
+  for i:=0 to FPgList.Count-1 do
+    TAbstractSQLEngineTools(FPgList[i]).SQLEngine:=ASQLEngine;
 
-  pgStatDB.Connected:=false;
-  pgStatDB.User:=ASQLEngine.UserName;
-  pgStatDB.Password:=ASQLEngine.Password;
-  pgStatDB.HostName:=ASQLEngine.ServerName;
-  pgStatDB.Database:=ASQLEngine.DataBaseName;
-  pgStatDB.Connected:=True;
-
-  quTablesStat.Active:=True;
+  tsRefresh.Execute;
 end;
 
 end.
