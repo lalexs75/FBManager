@@ -1872,6 +1872,18 @@
         <Filename Value="sql_engine/PostgreSQL/pg_definitions.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/Postgre/pgtoolsfindduplicateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Frame1"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgToolsFindDuplicateUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="tools/fbmabstractsqlenginetoolsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="fbmAbstractSQLEngineToolsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

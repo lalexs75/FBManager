@@ -125,7 +125,7 @@ uses
   fbmToolsNV, fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit,
   fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit,
   otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit, 
-pg_definitions
+pg_definitions, pgToolsFindDuplicateUnit, fbmAbstractSQLEngineToolsUnit
 
   ;
 
