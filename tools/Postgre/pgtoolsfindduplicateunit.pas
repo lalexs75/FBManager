@@ -59,15 +59,18 @@ function TpgToolsFindDuplicateFrame.DoFindDups(P: TDBRootObject): TFPList;
 var
   i, j: Integer;
   P1, P2: TDBObject;
-  N, M: TTreeNode;
+  N, M, MR: TTreeNode;
   P3: TDBRootObject;
   A: TFPList;
+  St:TStringList;
 begin
+  St:=TStringList.Create;
+  St.Sorted:=true;
   Result:=nil;
   for i:=0 to P.CountObject-2 do
   begin
     P1:=P.Objects[i];
-    if P1.State <> sdboVirtualObject then
+    if (P1.State <> sdboVirtualObject) and (ST.IndexOf(P1.Caption) < 0) then
     begin
       for j:=i+1 to P.CountObject-1 do
       begin
@@ -76,21 +79,30 @@ begin
         begin
           if not Assigned(Result) then
             Result:=TFPList.Create;
-
-          if Result.IndexOf(P1)<0 then
+          if not Assigned(MR) then
           begin
-            N:=TreeView1.Items.Add(nil, P1.Caption);
-            N.Data:=P1;
+            ST.Add(P1.Caption);
+            MR:=TreeView1.Items.Add(nil, P1.Caption);
+            Result.Add(MR);
+            N:=TreeView1.Items.AddChild(MR, P1.CaptionFullPatch);
             N.ImageIndex:=DBObjectKindImages[P1.DBObjectKind];
             N.SelectedIndex:=DBObjectKindImages[P1.DBObjectKind];
             N.StateIndex:=DBObjectKindImages[P1.DBObjectKind];
-            Result.Add(N);
+            N.Data:=P1;
           end;
 
+          N:=TreeView1.Items.AddChild(MR, P2.CaptionFullPatch);
+          N.ImageIndex:=DBObjectKindImages[P2.DBObjectKind];
+          N.SelectedIndex:=DBObjectKindImages[P2.DBObjectKind];
+          N.StateIndex:=DBObjectKindImages[P2.DBObjectKind];
+          N.Data:=P2;
         end;
       end;
     end;
+    MR:=nil;
   end;
+  St.Free;
+
 
   for i:=0 to P.CountGroups-1 do
   begin
