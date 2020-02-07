@@ -30,10 +30,11 @@ uses
   SQLEngineCommonTypesUnit,  IniFiles;
 
 const
-  LM_EDITOR_CHANGE_PARMAS    = LM_INTERFACELAST + 1;        //Изменение параметров редакторов SQL - необходимо перечитать
-  LM_PREF_CHANGE_PARMAS      = LM_EDITOR_CHANGE_PARMAS + 1; //Изменение параметров среды
-  LM_OBJECT_TEMPLATE_CHANGE  = LM_PREF_CHANGE_PARMAS + 1;   //Изменение шаблонов объектов
-  LM_NOTIFY_OBJECT_DELETE    = LM_OBJECT_TEMPLATE_CHANGE + 1;   //Сообщение об удалении объекта БД
+  LM_EDITOR_CHANGE_PARMAS    = LM_INTERFACELAST + 1;             //Изменение параметров редакторов SQL - необходимо перечитать
+  LM_PREF_CHANGE_PARMAS      = LM_EDITOR_CHANGE_PARMAS + 1;      //Изменение параметров среды
+  LM_OBJECT_TEMPLATE_CHANGE  = LM_PREF_CHANGE_PARMAS + 1;        //Изменение шаблонов объектов
+  LM_NOTIFY_OBJECT_DELETE    = LM_OBJECT_TEMPLATE_CHANGE + 1;    //Сообщение об удалении объекта БД
+  LM_NOTIFY_DISCONECT_ENGINE = LM_NOTIFY_OBJECT_DELETE + 1;    //Сообщение об удалении объекта БД
   ConfDBVers                 = 5;
 
 
@@ -144,8 +145,13 @@ begin
     begin
       F:=Screen.Forms[i];
       F.Perform(Msg, PtrInt(AInfo), 0);
-      for j:=0 to F.ControlCount-1 do
-        F.Controls[j].Perform(Msg, PtrInt(AInfo), 0);
+      //for j:=0 to F.ControlCount-1 do
+      //  F.Controls[j].Perform(Msg, PtrInt(AInfo), 0);
+      for j:=0 to F.ComponentCount-1 do
+      begin
+        if F.Components[j] is TControl then
+          TControl(F.Components[j]).Perform(Msg, PtrInt(AInfo), 0);
+      end;
     end;
   end;
 end;
