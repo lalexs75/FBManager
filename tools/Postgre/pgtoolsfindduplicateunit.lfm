@@ -26,6 +26,8 @@ inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
     Images = fbManagerMainForm.ImageList2
     ReadOnly = True
     TabOrder = 0
+    OnClick = TreeView1Click
+    OnDblClick = TreeView1DblClick
     Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
   end
   object Splitter1: TSplitter[2]
@@ -33,23 +35,5 @@ inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
     Height = 348
     Top = 0
     Width = 5
-  end
-  object pgStatDB: TZConnection[3]
-    ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
-    Properties.Strings = (
-      'AutoEncodeStrings='
-      'application_name=FBManager'
-      'codepage='
-      'controls_cp=CP_UTF8'
-    )
-    DesignConnection = True
-    HostName = '127.0.0.1'
-    Port = 0
-    Database = 'postgres'
-    User = 'alexs'
-    Protocol = 'postgresql-9'
-    Left = 348
-    Top = 44
   end
 end

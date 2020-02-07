@@ -25,8 +25,8 @@ unit pgToolsFindDuplicateUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, StdCtrls, ComCtrls, ExtCtrls, ZConnection,
-  SQLEngineAbstractUnit, fbmAbstractSQLEngineToolsUnit, LMessages,
+  Classes, SysUtils, Forms, StdCtrls, ComCtrls, ExtCtrls, Controls,
+  SQLEngineAbstractUnit, fbmAbstractSQLEngineToolsUnit, LMessages, fdbm_SynEditorUnit,
   fbmToolsUnit;
 
 type
@@ -35,25 +35,42 @@ type
 
   TpgToolsFindDuplicateFrame = class(TAbstractSQLEngineTools)
     Label1: TLabel;
-    pgStatDB: TZConnection;
     Splitter1: TSplitter;
     TreeView1: TTreeView;
+    procedure TreeView1Click(Sender: TObject);
+    procedure TreeView1DblClick(Sender: TObject);
   private
+    EditorFrame:Tfdbm_SynEditorFrame;
     function DoFindDups(P:TDBRootObject):TFPList;
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
     procedure DoLoadData;
     procedure LMNotyfyDisconectEngine(var Message: TLMessage); message LM_NOTIFY_DISCONECT_ENGINE;
   public
+    constructor Create(TheOwner: TComponent); override;
     function PageName:string; override;
     procedure RefreshPage; override;
   end;
 
 implementation
-uses SQLEngineCommonTypesUnit;
+uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit;
 
 {$R *.lfm}
 
 { TpgToolsFindDuplicateFrame }
+
+procedure TpgToolsFindDuplicateFrame.TreeView1Click(Sender: TObject);
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+    EditorFrame.EditorText:=TDBObject(TreeView1.Selected.Data).DDLCreate
+  else
+    EditorFrame.EditorText:='';
+end;
+
+procedure TpgToolsFindDuplicateFrame.TreeView1DblClick(Sender: TObject);
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+    fbManDataInpectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
+end;
 
 function TpgToolsFindDuplicateFrame.DoFindDups(P: TDBRootObject): TFPList;
 var
@@ -131,6 +148,7 @@ end;
 procedure TpgToolsFindDuplicateFrame.SetSQLEngine(AValue: TSQLEngineAbstract);
 begin
   inherited SetSQLEngine(AValue);
+  EditorFrame.SQLEngine:=AValue;
 end;
 
 procedure TpgToolsFindDuplicateFrame.DoLoadData;
@@ -178,6 +196,15 @@ begin
   D:=Pointer(IntPtr(Message.WParam));
   if D = Pointer(FSQLEngine) then
     RefreshPage;
+end;
+
+constructor TpgToolsFindDuplicateFrame.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+  EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
+  EditorFrame.Parent:=Self;
+  EditorFrame.Align:=alClient;
+  EditorFrame.ReadOnly:=true;
 end;
 
 function TpgToolsFindDuplicateFrame.PageName: string;
