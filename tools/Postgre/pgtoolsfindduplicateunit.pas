@@ -26,17 +26,25 @@ interface
 
 uses
   Classes, SysUtils, Forms, StdCtrls, ComCtrls, ExtCtrls, Controls,
-  SQLEngineAbstractUnit, fbmAbstractSQLEngineToolsUnit, LMessages, fdbm_SynEditorUnit,
-  fbmToolsUnit;
+  SQLEngineAbstractUnit, fbmAbstractSQLEngineToolsUnit, LMessages, ActnList,
+  Menus, fdbm_SynEditorUnit, fbmToolsUnit;
 
 type
 
   { TpgToolsFindDuplicateFrame }
 
   TpgToolsFindDuplicateFrame = class(TAbstractSQLEngineTools)
+    actEditObject: TAction;
+    actShowObjectInTree: TAction;
+    ActionList1: TActionList;
     Label1: TLabel;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
     TreeView1: TTreeView;
+    procedure actEditObjectExecute(Sender: TObject);
+    procedure actShowObjectInTreeExecute(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
     procedure TreeView1DblClick(Sender: TObject);
   private
@@ -59,17 +67,39 @@ uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit;
 { TpgToolsFindDuplicateFrame }
 
 procedure TpgToolsFindDuplicateFrame.TreeView1Click(Sender: TObject);
+var
+  D: TDBObject;
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    EditorFrame.EditorText:=TDBObject(TreeView1.Selected.Data).DDLCreate
+    D:=TDBObject(TreeView1.Selected.Data)
+  else
+    D:=nil;
+
+  if Assigned(D) then
+    EditorFrame.EditorText:=D.DDLCreate
   else
     EditorFrame.EditorText:='';
+
+  actEditObject.Enabled:=Assigned(D);
+  actShowObjectInTree.Enabled:=Assigned(D);
+end;
+
+procedure TpgToolsFindDuplicateFrame.actEditObjectExecute(Sender: TObject);
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+    fbManDataInpectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
+end;
+
+procedure TpgToolsFindDuplicateFrame.actShowObjectInTreeExecute(Sender: TObject
+  );
+begin
+  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
+    fbManDataInpectorForm.SelectObject(TDBObject(TreeView1.Selected.Data));
 end;
 
 procedure TpgToolsFindDuplicateFrame.TreeView1DblClick(Sender: TObject);
 begin
-  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    fbManDataInpectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
+  actEditObject.Execute;
 end;
 
 function TpgToolsFindDuplicateFrame.DoFindDups(P: TDBRootObject): TFPList;
@@ -205,6 +235,9 @@ begin
   EditorFrame.Parent:=Self;
   EditorFrame.Align:=alClient;
   EditorFrame.ReadOnly:=true;
+
+  actEditObject.Enabled:=false;
+  actShowObjectInTree.Enabled:=false;
 end;
 
 function TpgToolsFindDuplicateFrame.PageName: string;

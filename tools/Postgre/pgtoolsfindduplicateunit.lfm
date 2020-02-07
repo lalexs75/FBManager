@@ -24,6 +24,7 @@ inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
     Width = 177
     Align = alLeft
     Images = fbManagerMainForm.ImageList2
+    PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 0
     OnClick = TreeView1Click
@@ -35,5 +36,29 @@ inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
     Height = 348
     Top = 0
     Width = 5
+  end
+  object ActionList1: TActionList[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 152
+    Top = 136
+    object actEditObject: TAction
+      Caption = 'actEditObject'
+      OnExecute = actEditObjectExecute
+    end
+    object actShowObjectInTree: TAction
+      Caption = 'actShowObjectInTree'
+      OnExecute = actShowObjectInTreeExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[4]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 56
+    Top = 136
+    object MenuItem1: TMenuItem
+      Action = actEditObject
+    end
+    object MenuItem2: TMenuItem
+      Action = actShowObjectInTree
+    end
   end
 end
