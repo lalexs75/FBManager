@@ -1,0 +1,4 @@
+inherited AbstractSQLEngineTools: TAbstractSQLEngineTools
+  TabOrder = 0
+  DesignTop = 6
+end
