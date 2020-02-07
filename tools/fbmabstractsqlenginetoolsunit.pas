@@ -32,14 +32,18 @@ type
   { TAbstractSQLEngineTools }
 
   TAbstractSQLEngineTools = class(TPagedDialogPage)
+  private
   protected
     FSQLEngine: TSQLEngineAbstract;
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); virtual;
   public
+    procedure RefreshPage; virtual; abstract;
     property SQLEngine:TSQLEngineAbstract read FSQLEngine write SetSQLEngine;
   end;
 
 implementation
+
+{$R *.lfm}
 
 { TAbstractSQLEngineTools }
 

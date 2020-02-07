@@ -3515,6 +3515,10 @@ msgstr ""
 msgid "Objects"
 msgstr ""
 
+#: fbmstrconstunit.sobjectssize
+msgid "Objects size"
+msgstr ""
+
 #: fbmstrconstunit.sobjecttype
 msgid "Object type"
 msgstr ""

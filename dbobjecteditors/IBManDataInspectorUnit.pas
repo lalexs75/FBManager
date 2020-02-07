@@ -223,8 +223,6 @@ type
     procedure CloseAllDB;
     function RegisterNewDB(ASQLEngine: TSQLEngineAbstract):TDataBaseRecord;
     procedure CreateNewDB(ASqlEngineName:string);
-{    procedure FillServerList(const AList:TStrings);
-    function FillServerListType(const AList:TStrings; AClass:TSQLEngineAbstractClass):integer;}
     procedure EditObject(DBObject:TDBObject);
     procedure SelectObject(DBObject:TDBObject);
     procedure UpdateRecentObjects;

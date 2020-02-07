@@ -1,9 +1,55 @@
-object Frame1: TFrame1
-  Left = 0
-  Height = 240
-  Top = 0
-  Width = 320
-  TabOrder = 0
+inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
+  Height = 348
+  Width = 512
+  ClientHeight = 348
+  ClientWidth = 512
   DesignLeft = 748
   DesignTop = 446
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    AnchorSideTop.Side = asrCenter
+    Left = 128
+    Height = 17
+    Top = 166
+    Width = 257
+    Caption = 'For work this function connect to database'
+    ParentColor = False
+  end
+  object TreeView1: TTreeView[1]
+    Left = 0
+    Height = 348
+    Top = 0
+    Width = 177
+    Align = alLeft
+    Images = fbManagerMainForm.ImageList2
+    ReadOnly = True
+    TabOrder = 0
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+  end
+  object Splitter1: TSplitter[2]
+    Left = 177
+    Height = 348
+    Top = 0
+    Width = 5
+  end
+  object pgStatDB: TZConnection[3]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+      'application_name=FBManager'
+      'codepage='
+      'controls_cp=CP_UTF8'
+    )
+    DesignConnection = True
+    HostName = '127.0.0.1'
+    Port = 0
+    Database = 'postgres'
+    User = 'alexs'
+    Protocol = 'postgresql-9'
+    Left = 348
+    Top = 44
+  end
 end

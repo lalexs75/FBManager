@@ -3643,6 +3643,10 @@ msgstr "Имя объекта"
 msgid "Objects"
 msgstr "Объекты"
 
+#: fbmstrconstunit.sobjectssize
+msgid "Objects size"
+msgstr ""
+
 #: fbmstrconstunit.sobjecttype
 msgid "Object type"
 msgstr "Тип объекта"

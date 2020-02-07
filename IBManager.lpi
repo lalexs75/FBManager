@@ -1875,14 +1875,26 @@
       <Unit>
         <Filename Value="tools/Postgre/pgtoolsfindduplicateunit.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="Frame1"/>
+        <ComponentName Value="pgToolsFindDuplicateFrame"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgToolsFindDuplicateUnit"/>
       </Unit>
       <Unit>
         <Filename Value="tools/fbmabstractsqlenginetoolsunit.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="AbstractSQLEngineTools"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fbmAbstractSQLEngineToolsUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="tools/Postgre/pgdbobjectssizeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgDBObjectsSizeTools"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgDBObjectsSizeUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
