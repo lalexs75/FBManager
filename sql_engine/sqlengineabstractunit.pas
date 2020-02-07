@@ -103,6 +103,8 @@ type
   TExecSQLScriptEvent = function (List: TStrings; const ExecParams: TSqlExecParams; const ASQLEngine:TSQLEngineAbstract) : boolean;
   TObjectByKind = function(AOwnerRoot: TDBRootObject; ADBObjectKind: TDBObjectKind):TDBObject of object;
   TDBObjectEvent = function(ADBObject:TDBObject):boolean of object;
+  TSQLEngineEvent = procedure(const ASQLEngine:TSQLEngineAbstract) of object;
+
   TCreateObject = function(ADBObjectKind: TDBObjectKind; AOwnerObject:TDBObject):TDBObject of object;
   TInternalError = procedure(const S:string) of object;
 
@@ -831,6 +833,10 @@ type
     FDatabaseID: integer;
     FDataBaseName: string;
     FDescription: string;
+    FOnAfterConnect: TSQLEngineEvent;
+    FOnAfterDisconnect: TSQLEngineEvent;
+    FOnBeforeConnect: TSQLEngineEvent;
+    FOnBeforeDisconnect: TSQLEngineEvent;
     FOnInternalError: TInternalError;
     FPassword: string;
     FProperties: TStrings;
@@ -888,6 +894,7 @@ type
     procedure DoBeforeConnect; virtual;
     procedure DoAfterDisconnect; virtual;
     procedure DoAfterConnect; virtual;
+
   public
     MiscOptions:TSQLEngineMiscOptions;
     procedure NotyfiOnDestroy(ADBObject:TDBObject);
@@ -977,6 +984,10 @@ type
     property OnCreateObject:TCreateObject read FOnCreateObject write FOnCreateObject;
     property OnDestroyObject:TDBObjectEvent read FOnDestroyObject write FOnDestroyObject;
     property OnInternalError:TInternalError read FOnInternalError write FOnInternalError;
+    property OnBeforeConnect:TSQLEngineEvent read FOnBeforeConnect write FOnBeforeConnect;
+    property OnAfterConnect:TSQLEngineEvent read FOnAfterConnect write FOnAfterConnect;
+    property OnBeforeDisconnect:TSQLEngineEvent read FOnBeforeDisconnect write FOnBeforeDisconnect;
+    property OnAfterDisconnect:TSQLEngineEvent read FOnAfterDisconnect write FOnAfterDisconnect;
   end;
 
   TSQLEngineAbstractClass = class of TSQLEngineAbstract;
@@ -1736,13 +1747,16 @@ end;
 
 procedure TSQLEngineAbstract.DoBeforeDisconnect;
 begin
-
+  if Assigned(FOnBeforeDisconnect) then
+    FOnBeforeDisconnect(Self);
 end;
 
 procedure TSQLEngineAbstract.DoBeforeConnect;
 var
   i: Integer;
 begin
+  if Assigned(FOnBeforeConnect) then
+    FOnBeforeConnect(Self);
   for i:=0 to FConnectionPlugins.Count-1 do
     if FConnectionPlugins[i].Enabled then
       FConnectionPlugins[i].Connected:=true;
@@ -1755,11 +1769,14 @@ begin
   for i:=0 to FConnectionPlugins.Count-1 do
     if FConnectionPlugins[i].Connected then
       FConnectionPlugins[i].Connected:=false;
+  if Assigned(FOnAfterDisconnect) then
+    FOnAfterDisconnect(Self);
 end;
 
 procedure TSQLEngineAbstract.DoAfterConnect;
 begin
-
+  if Assigned(FOnAfterConnect) then
+    FOnAfterConnect(Self);
 end;
 
 procedure TSQLEngineAbstract.NotyfiOnDestroy(ADBObject: TDBObject);

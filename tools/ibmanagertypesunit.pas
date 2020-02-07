@@ -163,6 +163,7 @@ type
     procedure SQLBodyGetTextEvent(Sender: TField; var aText: string; DisplayText: Boolean);
     procedure InternalError(const S:string);
     function OnDeleteDBObject(ADBObject:TDBObject):boolean;
+    procedure SQLEngineAfterDisconnect(const ASQLEngine: TSQLEngineAbstract);
   protected
     function GetImageIndex:integer; override;
     procedure SaveDesktop;
@@ -221,17 +222,14 @@ procedure WriteSQLGlobal(FileName, LogString, UserName:string; LogTimestamp:bool
 implementation
 uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
   {$IFDEF DEBUG_LOG}rxlogging,{$ENDIF}
-  IBManDataInspectorUnit, SQLEngineInternalToolsUnit, fbmRefreshObjTreeUnit,
+  IBManDataInspectorUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
   IBManMainUnit, LazUTF8, LazFileUtils, Variants
   {$IFNDEF WINDOWS}
   , iconvenc
   {$ENDIF}
   ;
-(*
-const
-  RootNodeSqlHistory = 'sql_history';
-*)
+
 function ExecSQLScript(List: TStrings; const ExecParams: TSqlExecParams;
   const ASQLEngine: TSQLEngineAbstract): boolean;
 var
@@ -587,6 +585,12 @@ begin
   Result:=true;
 end;
 
+procedure TDataBaseRecord.SQLEngineAfterDisconnect(
+  const ASQLEngine: TSQLEngineAbstract);
+begin
+  LM_SendToAll(LM_NOTIFY_DISCONECT_ENGINE, FSQLEngine);
+end;
+
 function TDataBaseRecord.AliasFileItemName: string;
 var
   i:integer;
@@ -678,6 +682,7 @@ begin
     FSQLEngine.OnCreateObject:=@CreateObject;
     FSQLEngine.OnInternalError:=@InternalError;
     FSQLEngine.OnDestroyObject:=@OnDeleteDBObject;
+    FSQLEngine.OnAfterDisconnect:=@SQLEngineAfterDisconnect;
 
 
     for i:=0 to SQLEngineAbstractClassCount-1 do
@@ -759,6 +764,8 @@ begin
   FreeAndNil(RecentDBItems);
   FreeAndNil(RecentSQLScrip);
   inherited Destroy;
+  { TODO : Не верно работает очистка ресурсов }
+  //FreeAndNil(FSQLEngine);
 end;
 
 procedure TDataBaseRecord.Save;
