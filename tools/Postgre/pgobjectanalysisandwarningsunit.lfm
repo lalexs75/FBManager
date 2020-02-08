@@ -1,0 +1,4 @@
+inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
+  DesignLeft = 615
+  DesignTop = 392
+end

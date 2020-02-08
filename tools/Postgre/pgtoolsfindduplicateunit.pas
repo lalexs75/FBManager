@@ -47,7 +47,7 @@ type
     procedure actShowObjectInTreeExecute(Sender: TObject);
     procedure TreeView1Click(Sender: TObject);
     procedure TreeView1DblClick(Sender: TObject);
-  private
+  protected
     EditorFrame:Tfdbm_SynEditorFrame;
     function DoFindDups(P:TDBRootObject):TFPList;
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;

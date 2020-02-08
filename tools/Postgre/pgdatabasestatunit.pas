@@ -57,7 +57,8 @@ type
 procedure ShowDataBaseStatForm(ASQLEngine: TSQLEnginePostgre);
 implementation
 uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit, fbmStrConstUnit,
-  pgDBObjectsSizeUnit, pgToolsFindDuplicateUnit;
+  pgDBObjectsSizeUnit, pgToolsFindDuplicateUnit,
+  pgObjectAnalysisAndWarningsUnit;
 
 { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
 (*
@@ -88,6 +89,7 @@ begin
 
   AddToolsFrame(TpgDBObjectsSizeTools.Create(Self));
   AddToolsFrame(TpgToolsFindDuplicateFrame.Create(Self));
+  AddToolsFrame(TpgObjectAnalysisAndWarningsTools.Create(Self));
 
   TabControl1.TabIndex:=0;
   SetCurPageIndex(0);

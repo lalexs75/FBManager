@@ -1896,6 +1896,14 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="pgDBObjectsSizeUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/Postgre/pgobjectanalysisandwarningsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pgObjectAnalysisAndWarningsTools"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="pgObjectAnalysisAndWarningsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
