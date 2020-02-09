@@ -163,6 +163,7 @@ type
     procedure SQLBodyGetTextEvent(Sender: TField; var aText: string; DisplayText: Boolean);
     procedure InternalError(const S:string);
     function OnDeleteDBObject(ADBObject:TDBObject):boolean;
+    procedure SQLEngineAfterConnect(const ASQLEngine: TSQLEngineAbstract);
     procedure SQLEngineAfterDisconnect(const ASQLEngine: TSQLEngineAbstract);
   protected
     function GetImageIndex:integer; override;
@@ -585,10 +586,16 @@ begin
   Result:=true;
 end;
 
+procedure TDataBaseRecord.SQLEngineAfterConnect(
+  const ASQLEngine: TSQLEngineAbstract);
+begin
+  LM_SendToAll(LM_NOTIFY_CONNECT_ENGINE, FSQLEngine);
+end;
+
 procedure TDataBaseRecord.SQLEngineAfterDisconnect(
   const ASQLEngine: TSQLEngineAbstract);
 begin
-  LM_SendToAll(LM_NOTIFY_DISCONECT_ENGINE, FSQLEngine);
+  LM_SendToAll(LM_NOTIFY_DISCONNECT_ENGINE, FSQLEngine);
 end;
 
 function TDataBaseRecord.AliasFileItemName: string;
@@ -683,6 +690,7 @@ begin
     FSQLEngine.OnInternalError:=@InternalError;
     FSQLEngine.OnDestroyObject:=@OnDeleteDBObject;
     FSQLEngine.OnAfterDisconnect:=@SQLEngineAfterDisconnect;
+    FSQLEngine.OnAfterConnect:=@SQLEngineAfterConnect;
 
 
     for i:=0 to SQLEngineAbstractClassCount-1 do

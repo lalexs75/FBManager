@@ -1,4 +1,50 @@
 inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
-  DesignLeft = 615
-  DesignTop = 392
+  Height = 529
+  Width = 546
+  ClientHeight = 529
+  ClientWidth = 546
+  DesignLeft = 493
+  DesignTop = 235
+  object TabControl1: TTabControl[0]
+    Left = 0
+    Height = 529
+    Top = 0
+    Width = 546
+    OnChange = TabControl1Change
+    TabIndex = 0
+    Tabs.Strings = (
+      'Lost trigger functions'
+    )
+    Align = alClient
+    TabOrder = 0
+    object TreeView1: TTreeView
+      Left = 2
+      Height = 494
+      Top = 33
+      Width = 177
+      Align = alLeft
+      Images = fbManagerMainForm.ImageList2
+      ReadOnly = True
+      TabOrder = 1
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    end
+    object Splitter1: TSplitter
+      Left = 179
+      Height = 494
+      Top = 33
+      Width = 5
+    end
+  end
+  object Label1: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    AnchorSideTop.Side = asrCenter
+    Left = 135
+    Height = 18
+    Top = 255
+    Width = 276
+    Caption = 'For work this function connect to database'
+    ParentColor = False
+  end
 end

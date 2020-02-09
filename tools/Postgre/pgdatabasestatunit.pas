@@ -60,12 +60,6 @@ uses IBManMainUnit, sqlObjects, SQLEngineCommonTypesUnit, fbmStrConstUnit,
   pgDBObjectsSizeUnit, pgToolsFindDuplicateUnit,
   pgObjectAnalysisAndWarningsUnit;
 
-{ TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
-(*
-1. Список таблиц без PK
-2. Список FK в таблицах без индексов по соотвутсвующим полям
-*)
-
 var
   pgDataBaseStatForm: TpgDataBaseStatForm = nil;
 

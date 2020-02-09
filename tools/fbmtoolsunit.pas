@@ -30,11 +30,12 @@ uses
   SQLEngineCommonTypesUnit,  IniFiles;
 
 const
-  LM_EDITOR_CHANGE_PARMAS    = LM_INTERFACELAST + 1;             //Изменение параметров редакторов SQL - необходимо перечитать
-  LM_PREF_CHANGE_PARMAS      = LM_EDITOR_CHANGE_PARMAS + 1;      //Изменение параметров среды
-  LM_OBJECT_TEMPLATE_CHANGE  = LM_PREF_CHANGE_PARMAS + 1;        //Изменение шаблонов объектов
-  LM_NOTIFY_OBJECT_DELETE    = LM_OBJECT_TEMPLATE_CHANGE + 1;    //Сообщение об удалении объекта БД
-  LM_NOTIFY_DISCONECT_ENGINE = LM_NOTIFY_OBJECT_DELETE + 1;    //Сообщение об удалении объекта БД
+  LM_EDITOR_CHANGE_PARMAS      = LM_INTERFACELAST + 1;             //Изменение параметров редакторов SQL - необходимо перечитать
+  LM_PREF_CHANGE_PARMAS        = LM_EDITOR_CHANGE_PARMAS + 1;      //Изменение параметров среды
+  LM_OBJECT_TEMPLATE_CHANGE    = LM_PREF_CHANGE_PARMAS + 1;        //Изменение шаблонов объектов
+  LM_NOTIFY_OBJECT_DELETE      = LM_OBJECT_TEMPLATE_CHANGE + 1;    //Сообщение об удалении объекта БД
+  LM_NOTIFY_DISCONNECT_ENGINE  = LM_NOTIFY_OBJECT_DELETE + 1;      //After disconnect engine
+  LM_NOTIFY_CONNECT_ENGINE     = LM_NOTIFY_DISCONNECT_ENGINE + 1;  //After connect engine
   ConfDBVers                 = 5;
 
 

@@ -52,7 +52,8 @@ type
     function DoFindDups(P:TDBRootObject):TFPList;
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
     procedure DoLoadData;
-    procedure LMNotyfyDisconectEngine(var Message: TLMessage); message LM_NOTIFY_DISCONECT_ENGINE;
+    procedure LMNotyfyDisconectEngine(var Message: TLMessage); message LM_NOTIFY_DISCONNECT_ENGINE;
+    procedure LMNotyfyConectEngine(var Message: TLMessage); message LM_NOTIFY_CONNECT_ENGINE;
   public
     constructor Create(TheOwner: TComponent); override;
     function PageName:string; override;
@@ -228,6 +229,16 @@ begin
     RefreshPage;
 end;
 
+procedure TpgToolsFindDuplicateFrame.LMNotyfyConectEngine(var Message: TLMessage
+  );
+var
+  D: Pointer;
+begin
+  D:=Pointer(IntPtr(Message.WParam));
+  if D = Pointer(FSQLEngine) then
+    RefreshPage;
+end;
+
 constructor TpgToolsFindDuplicateFrame.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
@@ -250,6 +261,7 @@ begin
   Label1.Visible:=not FSQLEngine.Connected;
   TreeView1.Visible:=FSQLEngine.Connected;
   Splitter1.Visible:=FSQLEngine.Connected;
+  EditorFrame.Visible:=FSQLEngine.Connected;
 
   if FSQLEngine.Connected then
     DoLoadData
