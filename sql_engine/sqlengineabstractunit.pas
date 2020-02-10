@@ -926,9 +926,6 @@ type
     procedure FillDomainsList(const Items:TStrings; const ClearItems:boolean);virtual;
     procedure FillStdTypesList(const Items:TStrings);
 
-    //function ShowObjectItem:integer;virtual;
-    //procedure ShowObjectGetItem(Item:integer; out ItemName:string; out ItemValue:boolean);virtual;abstract;
-    //procedure ShowObjectSetItem(Item:integer; ItemValue:boolean);virtual;abstract;
 
     function NewObjectByKind(AOwnerRoot:TDBRootObject; ADBObjectKind: TDBObjectKind):TDBObject;
     function EditObject(ADBObject:TDBObject):boolean;
@@ -940,8 +937,6 @@ type
 
     property Groups:TDBObjectsList read FGroups;
 
-//    property CountRootObject:integer read GetCountRootObject;
-//    property RootObject[AIndex:integer]:TDBRootObject read GetRootObject;
     property CashedItems:TDBObjectsItems read FCashedItems;
 
     property TypeList:TDBMSFieldTypeList read FTypeList;
@@ -1893,8 +1888,8 @@ begin
 
   if FConnected then
   begin
+    InitGroupsObjects;
     DoAfterConnect;
-    InitGroupsObjects
   end
   else
   begin
