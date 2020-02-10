@@ -19,19 +19,22 @@ inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
     TabOrder = 0
     object TreeView1: TTreeView
       Left = 2
-      Height = 494
-      Top = 33
+      Height = 498
+      Top = 29
       Width = 177
       Align = alLeft
       Images = fbManagerMainForm.ImageList2
       ReadOnly = True
+      RightClickSelect = True
       TabOrder = 1
-      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      OnClick = TreeView1Click
+      OnDblClick = TreeView1DblClick
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
     end
     object Splitter1: TSplitter
       Left = 179
-      Height = 494
-      Top = 33
+      Height = 498
+      Top = 29
       Width = 5
     end
   end
@@ -40,11 +43,35 @@ inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
     AnchorSideTop.Side = asrCenter
-    Left = 135
-    Height = 18
-    Top = 255
-    Width = 276
+    Left = 145
+    Height = 17
+    Top = 256
+    Width = 257
     Caption = 'For work this function connect to database'
     ParentColor = False
+  end
+  object ActionList1: TActionList[2]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 294
+    Top = 82
+    object actEditObject: TAction
+      Caption = 'actEditObject'
+      OnExecute = actEditObjectExecute
+    end
+    object actShowObjectInTree: TAction
+      Caption = 'actShowObjectInTree'
+      OnExecute = actShowObjectInTreeExecute
+    end
+  end
+  object PopupMenu1: TPopupMenu[3]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 56
+    Top = 192
+    object MenuItem1: TMenuItem
+      Action = actEditObject
+    end
+    object MenuItem2: TMenuItem
+      Action = actShowObjectInTree
+    end
   end
 end

@@ -888,14 +888,14 @@ type
     FSchema:TPGSchema;
     FOID:integer;
     FTriggerWhen: string;
-    FTrigSPId:integer;
+    FTriggerFunctionOID:integer;
     FTrigTableId:integer;
     FTriggerSP:TPGFunction;
     FUpdateFieldsWhere: TStrings;
     function GetTriggerSP: TPGFunction;
     function GetTriggerSPName: string;
     procedure SetTriggerSPName(const AValue: string);
-    procedure SetTriggerSPId(ASpId:integer);
+    procedure SetTriggerFunctionOID(AFunctionOID:integer);
     procedure SetTriggerTableId(ATableId:integer);
   protected
     function GetTableName: string;override;
@@ -913,8 +913,11 @@ type
 
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean; override;
+
+    property TriggerFunctionOID:integer read FTriggerFunctionOID;
     property TriggerSPName:string read GetTriggerSPName write SetTriggerSPName;
     property TriggerSP:TPGFunction read  GetTriggerSP;
+
     property Schema:TPGSchema read FSchema;
     property TriggerWhen:string read FTriggerWhen;
     property UpdateFieldsWhere:TStrings read FUpdateFieldsWhere;
@@ -1010,6 +1013,7 @@ type
     property FieldsIN;
     property ACLListStr:string read FACLListStr;
     property FunctionConfig:TStrings read FFunctionConfig;
+    property FunctionOID:Integer read FOID;
   end;
 
   { TPGTriggerFunction }
@@ -1047,6 +1051,7 @@ type
     property Language:TPGLanguage read FLanguage;
     property LanguageOID:integer read FLanguageOID;
     property FunctionConfig:TStrings read FFunctionConfig;
+    property ProcedureOID:Integer read FOID;
   end;
 
   { TPGIndex }
@@ -7046,13 +7051,13 @@ begin
   //
 end;
 
-procedure TPGTrigger.SetTriggerSPId(ASpId: integer);
+procedure TPGTrigger.SetTriggerFunctionOID(AFunctionOID: integer);
 var
   i,j:integer;
   Sc:TPGSchema;
 begin
-  if FTrigSPId = ASpId then exit;
-  FTrigSPId:=ASpId;
+  if FTriggerFunctionOID = AFunctionOID then exit;
+  FTriggerFunctionOID:=AFunctionOID;
 
   FTriggerSP:=nil;
   for j:=0 to TSQLEnginePostgre(OwnerDB).SchemasRoot.CountGroups - 1 do
@@ -7060,7 +7065,7 @@ begin
     Sc:=TSQLEnginePostgre(OwnerDB).SchemasRoot.Groups[j] as TPGSchema;
     for i:=0 to Sc.FTriggerProc.CountObject - 1 do
     begin
-      if TPGFunction(Sc.FTriggerProc.Items[i]).FOID = ASpId then
+      if TPGFunction(Sc.FTriggerProc.Items[i]).FOID = AFunctionOID then
       begin
         FTriggerSP:=TPGFunction(Sc.FTriggerProc.Items[i]);
         exit;
@@ -7181,7 +7186,7 @@ procedure TPGTrigger.InternalRefreshStatistic;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
-  Statistic.AddValue(sOIDFunction, IntToStr(FTrigSPId));
+  Statistic.AddValue(sOIDFunction, IntToStr(FTriggerFunctionOID));
   if Assigned(FTriggerSP) then
     Statistic.AddValue(sFunctionName, FTriggerSP.CaptionFullPatch);
   Statistic.AddValue(sOIDTable, IntToStr(FTrigTableId));
@@ -7196,6 +7201,7 @@ begin
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
+    FTriggerFunctionOID:=ADBItem.ObjOwnData;
   end;
 
   FUpdateFieldsWhere:=TStringList.Create;
@@ -7278,7 +7284,7 @@ begin
       if FTrTp and pg_TRIGGER_TYPE_TRUNCATE <> 0 then
         TriggerType:=TriggerType + [ttTruncate];
 
-      SetTriggerSPId(Q.FieldByName('tgfoid').AsInteger);
+      SetTriggerFunctionOID(Q.FieldByName('tgfoid').AsInteger);
       SetTriggerTableId(Q.FieldByName('tgrelid').AsInteger);
 
       FDescription:=Q.FieldByName('description').AsString;

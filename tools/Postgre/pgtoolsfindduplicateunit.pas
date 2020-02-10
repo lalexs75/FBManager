@@ -54,6 +54,7 @@ type
     procedure DoLoadData;
     procedure LMNotyfyDisconectEngine(var Message: TLMessage); message LM_NOTIFY_DISCONNECT_ENGINE;
     procedure LMNotyfyConectEngine(var Message: TLMessage); message LM_NOTIFY_CONNECT_ENGINE;
+    procedure Localize;override;
   public
     constructor Create(TheOwner: TComponent); override;
     function PageName:string; override;
@@ -237,6 +238,11 @@ begin
   D:=Pointer(IntPtr(Message.WParam));
   if D = Pointer(FSQLEngine) then
     RefreshPage;
+end;
+
+procedure TpgToolsFindDuplicateFrame.Localize;
+begin
+  inherited Localize;
 end;
 
 constructor TpgToolsFindDuplicateFrame.Create(TheOwner: TComponent);

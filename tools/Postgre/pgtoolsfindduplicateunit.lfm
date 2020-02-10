@@ -10,10 +10,10 @@ inherited pgToolsFindDuplicateFrame: TpgToolsFindDuplicateFrame
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
     AnchorSideTop.Side = asrCenter
-    Left = 118
-    Height = 18
-    Top = 165
-    Width = 276
+    Left = 128
+    Height = 17
+    Top = 166
+    Width = 257
     Caption = 'For work this function connect to database'
     ParentColor = False
   end
