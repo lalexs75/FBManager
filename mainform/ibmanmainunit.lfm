@@ -5,7 +5,7 @@ object fbManagerMainForm: TfbManagerMainForm
   Width = 1239
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'
-  ClientHeight = 773
+  ClientHeight = 774
   ClientWidth = 1239
   Constraints.MinHeight = 120
   Menu = MainMenu1
@@ -16,8 +16,8 @@ object fbManagerMainForm: TfbManagerMainForm
   LCLVersion = '2.1.0.0'
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 22
-    Top = 751
+    Height = 18
+    Top = 756
     Width = 1239
     Panels = <    
       item
@@ -37,7 +37,7 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 35
+    Height = 34
     Top = 0
     Width = 1239
     Items = <    
@@ -116,7 +116,7 @@ object fbManagerMainForm: TfbManagerMainForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 35
+    ClientHeight = 34
     ClientWidth = 1239
     ParentFont = False
     TabOrder = 0
@@ -154,11 +154,11 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object InspectorPanel: TPanel
     Left = 0
-    Height = 691
-    Top = 35
+    Height = 697
+    Top = 34
     Width = 219
     Align = alLeft
-    ClientHeight = 691
+    ClientHeight = 697
     ClientWidth = 219
     ParentFont = False
     TabOrder = 2
@@ -227,8 +227,8 @@ object fbManagerMainForm: TfbManagerMainForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = InspectorCloseButton
         Left = 1
-        Height = 18
-        Top = 1
+        Height = 17
+        Top = 2
         Width = 197
         Alignment = taCenter
         Anchors = [akTop, akLeft, akRight]
@@ -240,14 +240,14 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object Splitter1: TSplitter
     Left = 219
-    Height = 691
-    Top = 35
+    Height = 697
+    Top = 34
     Width = 5
   end
   object RxMDITasks1: TRxMDITasks
     Left = 0
     Height = 25
-    Top = 726
+    Top = 731
     Width = 1239
     Align = alBottom
     FlatButton = False
@@ -255,8 +255,8 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object RxMDIPanel1: TRxMDIPanel
     Left = 224
-    Height = 691
-    Top = 35
+    Height = 697
+    Top = 34
     Width = 1015
     CloseButton = RxMDICloseButton1
     TaskPanel = RxMDITasks1

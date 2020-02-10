@@ -547,6 +547,9 @@ procedure TfbManagerMainForm.ApplicationProperties1Exception(Sender: TObject;
 begin
   ErrorBoxExcpt(E);
   rxWriteLog(etError, E.Message);
+
+  if Assigned(UserDBModule) then
+    UserDBModule.ZSQLMonitor1.SaveToFile(RxDefaultLogFileName);
 end;
 
 procedure TfbManagerMainForm.ApplicationProperties1Hint(Sender: TObject);

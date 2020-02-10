@@ -3481,4 +3481,10 @@ object UserDBModule: TUserDBModule
     Left = 744
     Top = 200
   end
+  object ZSQLMonitor1: TZSQLMonitor
+    Active = True
+    MaxTraceCount = 50
+    Left = 40
+    Top = 128
+  end
 end

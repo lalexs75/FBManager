@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, SynEdit,
   ZMacroQuery, RxTextHolder, ZConnection, ZSqlProcessor, ZDataset, ZSqlUpdate,
-  ibmanagertypesunit, IniFiles, LCLType, db;
+  ZSqlMonitor, ibmanagertypesunit, IniFiles, LCLType, db;
 
 const
   UserDBFileName              = 'fbm_data.db';
@@ -211,6 +211,7 @@ type
     quLastID: TZReadOnlyQuery;
     quRecentClear: TZReadOnlyQuery;
     quInsRecent: TZReadOnlyQuery;
+    ZSQLMonitor1: TZSQLMonitor;
     ZUpdateSQL4: TZUpdateSQL;
     usRecentItems: TZUpdateSQL;
     usSQLHistory: TZUpdateSQL;
