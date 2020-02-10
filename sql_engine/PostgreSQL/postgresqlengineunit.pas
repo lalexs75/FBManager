@@ -890,11 +890,11 @@ type
     FTriggerWhen: string;
     FTriggerFunctionOID:integer;
     FTrigTableId:integer;
-    FTriggerSP:TPGFunction;
+    FTriggerFunction:TPGFunction;
     FUpdateFieldsWhere: TStrings;
-    function GetTriggerSP: TPGFunction;
-    function GetTriggerSPName: string;
-    procedure SetTriggerSPName(const AValue: string);
+    function GetTriggerFunction: TPGFunction;
+    function GetTriggerFunctionName: string;
+    procedure SetTriggerFunctionName(const AValue: string);
     procedure SetTriggerFunctionOID(AFunctionOID:integer);
     procedure SetTriggerTableId(ATableId:integer);
   protected
@@ -915,8 +915,8 @@ type
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean; override;
 
     property TriggerFunctionOID:integer read FTriggerFunctionOID;
-    property TriggerSPName:string read GetTriggerSPName write SetTriggerSPName;
-    property TriggerSP:TPGFunction read  GetTriggerSP;
+    property TriggerSPName:string read GetTriggerFunctionName write SetTriggerFunctionName;
+    property TriggerFunction:TPGFunction read GetTriggerFunction;
 
     property Schema:TPGSchema read FSchema;
     property TriggerWhen:string read FTriggerWhen;
@@ -7039,18 +7039,18 @@ end;
 
 { TPGTrigger }
 
-function TPGTrigger.GetTriggerSPName: string;
+function TPGTrigger.GetTriggerFunctionName: string;
 var
   P:TPGFunction;
 begin
-  P:=GetTriggerSP;
+  P:=GetTriggerFunction;
   if Assigned(P) then
     Result:=P.CaptionFullPatch
   else
     Result:='';
 end;
 
-procedure TPGTrigger.SetTriggerSPName(const AValue: string);
+procedure TPGTrigger.SetTriggerFunctionName(const AValue: string);
 begin
   //
 end;
@@ -7060,10 +7060,10 @@ var
   i,j:integer;
   Sc:TPGSchema;
 begin
-  if FTriggerFunctionOID = AFunctionOID then exit;
+  if (FTriggerFunctionOID = AFunctionOID) and Assigned(FTriggerFunction) then exit;
   FTriggerFunctionOID:=AFunctionOID;
 
-  FTriggerSP:=nil;
+  FTriggerFunction:=nil;
   for j:=0 to TSQLEnginePostgre(OwnerDB).SchemasRoot.CountGroups - 1 do
   begin
     Sc:=TSQLEnginePostgre(OwnerDB).SchemasRoot.Groups[j] as TPGSchema;
@@ -7071,7 +7071,7 @@ begin
     begin
       if TPGFunction(Sc.FTriggerProc.Items[i]).FOID = AFunctionOID then
       begin
-        FTriggerSP:=TPGFunction(Sc.FTriggerProc.Items[i]);
+        FTriggerFunction:=TPGFunction(Sc.FTriggerProc.Items[i]);
         exit;
       end;
     end;
@@ -7105,14 +7105,14 @@ begin
   end;
 end;
 
-function TPGTrigger.GetTriggerSP: TPGFunction;
+function TPGTrigger.GetTriggerFunction: TPGFunction;
 begin
-  if not Assigned(FTriggerSP) then
+  if not Assigned(FTriggerFunction) then
     RefreshObject;
 
-  if Assigned(FTriggerSP) and not FTriggerSP.Loaded then
-    FTriggerSP.RefreshObject;
-  Result:=FTriggerSP;
+  if Assigned(FTriggerFunction) and not FTriggerFunction.Loaded then
+    FTriggerFunction.RefreshObject;
+  Result:=FTriggerFunction;
 end;
 
 function TPGTrigger.InternalGetDDLCreate: string;
@@ -7147,10 +7147,10 @@ begin
     FCmd.TableName:=FTriggerTable.Caption;
   end;
 
-  if Assigned(FTriggerSP) then
+  if Assigned(FTriggerFunction) then
   begin
-    FCmd.ProcName:=FTriggerSP.Caption;
-    FCmd.ProcSchema:=FTriggerSP.SchemaName;
+    FCmd.ProcName:=FTriggerFunction.Caption;
+    FCmd.ProcSchema:=FTriggerFunction.SchemaName;
   end;
   Result:=FCmd.AsSQL;
   FCmd.Free;
@@ -7191,8 +7191,8 @@ begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sOIDFunction, IntToStr(FTriggerFunctionOID));
-  if Assigned(FTriggerSP) then
-    Statistic.AddValue(sFunctionName, FTriggerSP.CaptionFullPatch);
+  if Assigned(FTriggerFunction) then
+    Statistic.AddValue(sFunctionName, FTriggerFunction.CaptionFullPatch);
   Statistic.AddValue(sOIDTable, IntToStr(FTrigTableId));
   if Assigned(FTriggerTable) then
     Statistic.AddValue(sTableName, FTriggerTable.CaptionFullPatch);
@@ -7330,16 +7330,16 @@ begin
   begin
     P:=(ASqlObject as TPGSQLCreateTrigger).TriggerFunction;
     FProcSchma:=TSQLEnginePostgre(OwnerDB).SchemasRoot.ObjByName(P.SchemaName) as TPGSchema;
-    FTriggerSP:=FProcSchma.TriggerProc.NewDBObject as TPGFunction;
-    FTriggerSP.Caption:=P.Name;
-    FTriggerSP.State:=sdboEdit;
-    FTriggerSP.RefreshObject;
+    FTriggerFunction:=FProcSchma.TriggerProc.NewDBObject as TPGFunction;
+    FTriggerFunction.Caption:=P.Name;
+    FTriggerFunction.State:=sdboEdit;
+    FTriggerFunction.RefreshObject;
     FTriggerTable.RefreshEditor;
   end
   else
   if (FOldState = sdboEdit) and Assigned((ASqlObject as TPGSQLCreateTrigger).TriggerFunction) then
   begin
-    FTriggerSP.RefreshObject;
+    FTriggerFunction.RefreshObject;
     FTriggerTable.RefreshEditor;
   end;
 end;

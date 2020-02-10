@@ -284,12 +284,12 @@ end;
 
 procedure TpgTriggerEditorPage.LoadTrigerBody;
 begin
-  if Assigned(TPGTrigger(DBObject).TriggerSP) then
+  if Assigned(TPGTrigger(DBObject).TriggerFunction) then
   begin
     if TabSheet5.TabVisible then
-      EditorFrame.EditorText:=FLocalVars.ParseSQL(TPGTrigger(DBObject).TriggerSP.ProcedureBody)
+      EditorFrame.EditorText:=FLocalVars.ParseSQL(TPGTrigger(DBObject).TriggerFunction.ProcedureBody)
     else
-      EditorFrame.EditorText:=TPGTrigger(DBObject).TriggerSP.ProcedureBody;
+      EditorFrame.EditorText:=TPGTrigger(DBObject).TriggerFunction.ProcedureBody;
   end;
   EditorFrame.Modified:=false;
   Modified:=false;
@@ -402,7 +402,7 @@ begin
         begin
           cbProcList.Items.Add(P.CaptionFullPatch);
           cbProcList.Items.Objects[cbProcList.Items.Count-1]:=P;
-          if P = TPGTrigger(DBObject).TriggerSP then
+          if P = TPGTrigger(DBObject).TriggerFunction then
             cbProcList.ItemIndex:=cbProcList.Items.Count - 1;
         end;
       end;
