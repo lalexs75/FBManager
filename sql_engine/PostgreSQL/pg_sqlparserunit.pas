@@ -1330,7 +1330,7 @@ type
 
   { TPGSQLShow }
 
-  TPGSQLShow = class(TSQLCommandAbstract)
+  TPGSQLShow = class(TSQLCommandAbstractSelect)
   private
     FParamName: string;
   protected
@@ -1338,6 +1338,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
     property ParamName: string read FParamName write FParamName;
@@ -15615,6 +15616,13 @@ begin
   else
     S:='SHOW ALL';
   AddSQLCommand(S);
+end;
+
+constructor TPGSQLShow.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FSelectable:=true;
+  PlanEnabled:=false;
 end;
 
 procedure TPGSQLShow.Assign(ASource: TSQLObjectAbstract);
