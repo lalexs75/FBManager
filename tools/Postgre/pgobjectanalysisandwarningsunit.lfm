@@ -15,6 +15,7 @@ inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
     Tabs.Strings = (
       'Lost trigger functions'
       'Foreign key without index'
+      'Tables wihout primary key'
     )
     Align = alClient
     TabOrder = 0

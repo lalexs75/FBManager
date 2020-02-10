@@ -57,6 +57,7 @@ type
 
     procedure DoLoadLostTriggerFunctions;
     procedure DoFKWithoutIndex;
+    procedure DoLoadTablesWithoutPK;
   protected
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
     procedure Localize;override;
@@ -78,7 +79,6 @@ uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit, fbmStrConstUnit,
 { TODO -oalexs : Необходимо реализовать анализ статистики и производительности по БД }
 (*
 1. Список таблиц без PK
-2. Список FK в таблицах без индексов по соотвутсвующим полям
 *)
 
 { TpgObjectAnalysisAndWarningsTools }
@@ -141,6 +141,7 @@ begin
   case TabControl1.TabIndex of
     0:DoLoadLostTriggerFunctions;
     1:DoFKWithoutIndex;
+    3:DoLoadTablesWithoutPK;
   end;
   TreeView1.Items.EndUpdate;
 end;
@@ -280,6 +281,11 @@ begin
     end;
     FCurTablesNode:=nil;
   end;
+end;
+
+procedure TpgObjectAnalysisAndWarningsTools.DoLoadTablesWithoutPK;
+begin
+
 end;
 
 procedure TpgObjectAnalysisAndWarningsTools.SetSQLEngine(
