@@ -3871,7 +3871,7 @@ begin
     begin
       try
         FPGSysDB.Connected:=true;
-        DoInitPGTasks;
+        //DoInitPGTasks;
       except
       end;
     end;
@@ -3911,6 +3911,9 @@ begin
   end;
 
   AddObjectsGroup(FExtensions, TPGExtensionsRoot, TPGExtension, sExtensions);
+
+
+  DoInitPGTasks;
 end;
 
 procedure TSQLEnginePostgre.DoneGroupsObjects;
@@ -3921,6 +3924,7 @@ begin
   FSchemasRoot:=nil;
   FEventTriggers:=nil;
   FForeignDataWrappers:=nil;
+  FTasks:=nil;
 end;
 
 function TSQLEnginePostgre.GetCharSet: string;

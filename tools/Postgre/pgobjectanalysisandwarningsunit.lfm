@@ -24,6 +24,7 @@ inherited pgObjectAnalysisAndWarningsTools: TpgObjectAnalysisAndWarningsTools
       Width = 177
       Align = alLeft
       Images = fbManagerMainForm.ImageList2
+      PopupMenu = PopupMenu1
       ReadOnly = True
       RightClickSelect = True
       TabOrder = 1
