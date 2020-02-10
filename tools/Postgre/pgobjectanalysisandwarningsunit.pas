@@ -53,6 +53,10 @@ type
     EditorFrame:Tfdbm_SynEditorFrame;
     procedure InternalLoadData;
     function DoFindTrigger(TF:TPGFunction):boolean;
+    procedure DoInitCurRootNode(var ACurTrgFucNode: TTreeNode; AShema: TPGSchema; AGroupObj:TDBRootObject);
+
+    procedure DoLoadLostTriggerFunctions;
+    procedure DoFKWithoutIndex;
   protected
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
     procedure Localize;override;
@@ -66,7 +70,8 @@ type
 
 implementation
 
-uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit;
+uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit, fbmStrConstUnit,
+  sqlObjects;
 
 {$R *.lfm}
 
@@ -74,7 +79,6 @@ uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit;
 (*
 1. Список таблиц без PK
 2. Список FK в таблицах без индексов по соотвутсвующим полям
-3. Список "потерянных тригерных процедур"
 *)
 
 { TpgObjectAnalysisAndWarningsTools }
@@ -130,45 +134,13 @@ var
   TF: TPGFunction;
   FCurTrgFucNode, NF: TTreeNode;
 
-procedure InitCurTrgFucNode;
-var
-  N: TTreeNode;
-begin
-  N:=TreeView1.Items.Add(nil, Shm.Caption);
-  N.ImageIndex:=DBObjectKindImages[Shm.DBObjectKind];
-  N.SelectedIndex:=DBObjectKindImages[Shm.DBObjectKind];
-  N.StateIndex:=DBObjectKindImages[Shm.DBObjectKind];
-
-  FCurTrgFucNode:=TreeView1.Items.AddChild(N, Shm.TriggerProc.Caption);
-  FCurTrgFucNode.ImageIndex:=DBObjectKindImages[Shm.TriggerProc.DBObjectKind];
-  FCurTrgFucNode.SelectedIndex:=DBObjectKindImages[Shm.TriggerProc.DBObjectKind];
-  FCurTrgFucNode.StateIndex:=DBObjectKindImages[Shm.TriggerProc.DBObjectKind];
-end;
-
 begin
   TreeView1.Items.BeginUpdate;
   TreeView1.Items.Clear;
-  D:=TSQLEnginePostgre(FSQLEngine);
-  FCurTrgFucNode:=nil;
-  for i:=0 to D.SchemasRoot.CountGroups-1 do
-  begin
-    Shm:=TPGSchema(D.SchemasRoot.Groups[i]);
 
-    for j:=0 to Shm.TriggerProc.CountObject-1 do
-    begin
-      TF:=TPGFunction(Shm.TriggerProc.Items[j]);
-      if not DoFindTrigger(TF) then
-      begin
-        if not Assigned(FCurTrgFucNode) then
-          InitCurTrgFucNode;
-        NF:=TreeView1.Items.AddChild(FCurTrgFucNode, TF.Caption);
-        NF.ImageIndex:=DBObjectKindImages[TF.DBObjectKind];
-        NF.SelectedIndex:=DBObjectKindImages[TF.DBObjectKind];
-        NF.StateIndex:=DBObjectKindImages[TF.DBObjectKind];
-        NF.Data:=TF;
-      end;
-    end;
-    FCurTrgFucNode:=nil;
+  case TabControl1.TabIndex of
+    0:DoLoadLostTriggerFunctions;
+    1:DoFKWithoutIndex;
   end;
   TreeView1.Items.EndUpdate;
 end;
@@ -195,6 +167,121 @@ begin
   end;
 end;
 
+procedure TpgObjectAnalysisAndWarningsTools.DoInitCurRootNode(
+  var ACurTrgFucNode: TTreeNode; AShema: TPGSchema; AGroupObj: TDBRootObject);
+var
+  N: TTreeNode;
+begin
+  N:=TreeView1.Items.Add(nil, AShema.Caption);
+  N.ImageIndex:=DBObjectKindImages[AShema.DBObjectKind];
+  N.SelectedIndex:=DBObjectKindImages[AShema.DBObjectKind];
+  N.StateIndex:=DBObjectKindImages[AShema.DBObjectKind];
+
+  ACurTrgFucNode:=TreeView1.Items.AddChild(N, AGroupObj.Caption);
+  ACurTrgFucNode.ImageIndex:=DBObjectKindImages[AGroupObj.DBObjectKind];
+  ACurTrgFucNode.SelectedIndex:=DBObjectKindImages[AGroupObj.DBObjectKind];
+  ACurTrgFucNode.StateIndex:=DBObjectKindImages[AGroupObj.DBObjectKind];
+end;
+
+procedure TpgObjectAnalysisAndWarningsTools.DoLoadLostTriggerFunctions;
+var
+  D: TSQLEnginePostgre;
+  FCurTrgFucNode, NF: TTreeNode;
+  Shm: TPGSchema;
+  i, j: Integer;
+  TF: TPGFunction;
+begin
+  D:=TSQLEnginePostgre(FSQLEngine);
+  FCurTrgFucNode:=nil;
+  for i:=0 to D.SchemasRoot.CountGroups-1 do
+  begin
+    Shm:=TPGSchema(D.SchemasRoot.Groups[i]);
+
+    for j:=0 to Shm.TriggerProc.CountObject-1 do
+    begin
+      TF:=TPGFunction(Shm.TriggerProc.Items[j]);
+      if not DoFindTrigger(TF) then
+      begin
+        if not Assigned(FCurTrgFucNode) then
+          DoInitCurRootNode(FCurTrgFucNode, Shm, Shm.TriggerProc);
+        NF:=TreeView1.Items.AddChild(FCurTrgFucNode, TF.Caption);
+        NF.ImageIndex:=DBObjectKindImages[TF.DBObjectKind];
+        NF.SelectedIndex:=DBObjectKindImages[TF.DBObjectKind];
+        NF.StateIndex:=DBObjectKindImages[TF.DBObjectKind];
+        NF.Data:=TF;
+      end;
+    end;
+    FCurTrgFucNode:=nil;
+  end;
+end;
+
+procedure TpgObjectAnalysisAndWarningsTools.DoFKWithoutIndex;
+var
+  D: TSQLEnginePostgre;
+  Shm: TPGSchema;
+  i, j, CI, II: Integer;
+  T: TPGTable;
+  Cntr: TPrimaryKeyRecord;
+  FCurTablesNode, NF, NF1: TTreeNode;
+  Ind: TPGIndexItem;
+  F: Boolean;
+begin
+  D:=TSQLEnginePostgre(FSQLEngine);
+  FCurTablesNode:=nil;
+  for i:=0 to D.SchemasRoot.CountGroups-1 do
+  begin
+    Shm:=TPGSchema(D.SchemasRoot.Groups[i]);
+
+    for j:=0 to Shm.TablesRoot.CountObject-1 do
+    begin
+      T:=TPGTable(Shm.TablesRoot.Items[j]);
+      NF:=nil;
+
+      if T.ConstraintCount = 0 then T.RefreshConstraintForeignKey;
+      for CI:=0 to T.ConstraintCount-1 do
+      begin
+        Cntr:=T.Constraint[CI];
+        if Cntr.ConstraintType = ctForeignKey then
+        begin
+          if Cntr.FieldListArr.Count > 0 then
+          begin
+            F:=false;
+            for II:=0 to T.IndexCount-1 do
+            begin
+              Ind:=TPGIndexItem(T.IndexItem[II]);
+              if Ind.IndexField = Cntr.FieldList then
+              begin
+                F:=true;
+                break;
+              end;
+            end;
+
+            if not F then
+            begin
+              if not Assigned(FCurTablesNode) then
+                DoInitCurRootNode(FCurTablesNode, Shm, Shm.TablesRoot);
+
+              if not Assigned(NF) then
+              begin
+                NF:=TreeView1.Items.AddChild(FCurTablesNode, T.Caption);
+                NF.ImageIndex:=DBObjectKindImages[T.DBObjectKind];
+                NF.SelectedIndex:=DBObjectKindImages[T.DBObjectKind];
+                NF.StateIndex:=DBObjectKindImages[T.DBObjectKind];
+                NF.Data:=T;
+              end;
+              NF1:=TreeView1.Items.AddChild(NF, Cntr.Name);
+              NF1.ImageIndex:=DBObjectKindImages[okForeignKey];
+              NF1.SelectedIndex:=DBObjectKindImages[okForeignKey];
+              NF1.StateIndex:=DBObjectKindImages[okForeignKey];
+            end;
+          end;
+        end;
+      end;
+    end;
+    FCurTablesNode:=nil;
+  end;
+end;
+
 procedure TpgObjectAnalysisAndWarningsTools.SetSQLEngine(
   AValue: TSQLEngineAbstract);
 begin
@@ -205,6 +292,9 @@ end;
 procedure TpgObjectAnalysisAndWarningsTools.Localize;
 begin
   inherited Localize;
+
+  actEditObject.Caption:=sEditObject;
+  actShowObjectInTree.Caption:=sShowObjectInTree;
 end;
 
 procedure TpgObjectAnalysisAndWarningsTools.LMNotyfyDisconectEngine(

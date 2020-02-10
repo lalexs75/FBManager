@@ -1582,6 +1582,10 @@ msgstr ""
 msgid "Edit local variable"
 msgstr ""
 
+#: fbmstrconstunit.seditobject
+msgid "Edit object"
+msgstr ""
+
 #: fbmstrconstunit.seditor
 msgid "Editor"
 msgstr ""
@@ -4856,6 +4860,10 @@ msgstr ""
 
 #: fbmstrconstunit.sshowobjectdescriptionsashint
 msgid "Show object descriptions as hint"
+msgstr ""
+
+#: fbmstrconstunit.sshowobjectintree
+msgid "Show object in object tree"
 msgstr ""
 
 #: fbmstrconstunit.sshowobjectnameinobjecteditorform

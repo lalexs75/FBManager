@@ -276,7 +276,7 @@ resourcestring
   sDateConstraint                   = 'Date constraint';
   sMinDate                          = 'Min. date';
   sMaxDate                          = 'Max. date';
-  sIncludeTime                     = 'Include time';
+  sIncludeTime                      = 'Include time';
 
   sNewIndex                         = 'New index';
   sEditIndex                        = 'Edit index';
@@ -601,6 +601,8 @@ resourcestring
   sNewTrigger                       = 'New trigger';
   sModifiTrigger                    = 'Modifi trigger';
   sDeleteTrigger                    = 'Delete trigger';
+  sEditObject                       = 'Edit object';
+  sShowObjectInTree                 = 'Show object in object tree';
 
   sNewRule                          = 'New rule';
   sModifiRule                       = 'Modifi rule';

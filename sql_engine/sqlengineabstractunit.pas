@@ -608,7 +608,7 @@ type
     FFKListLoaded:boolean;
     FPKListLoaded:boolean;
     FPKCount:integer;
-    FConstraintList:TList;
+    FConstraintList:TFPList;
     FCashedState:TTableCashedStateFlags;
 
     function GetIndexFields(const AIndexName:string; const AForce:boolean):string; virtual;
@@ -2828,7 +2828,7 @@ constructor TDBTableObject.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
-  FConstraintList:=TList.Create;
+  FConstraintList:=TFPList.Create;
   FFKListLoaded:=false;
   FPKListLoaded:=false;
 end;

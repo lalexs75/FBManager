@@ -62,7 +62,7 @@ type
   end;
 
 implementation
-uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit;
+uses SQLEngineCommonTypesUnit, IBManDataInspectorUnit, fbmStrConstUnit;
 
 {$R *.lfm}
 
@@ -243,6 +243,8 @@ end;
 procedure TpgToolsFindDuplicateFrame.Localize;
 begin
   inherited Localize;
+  actEditObject.Caption:=sEditObject;
+  actShowObjectInTree.Caption:=sShowObjectInTree;
 end;
 
 constructor TpgToolsFindDuplicateFrame.Create(TheOwner: TComponent);

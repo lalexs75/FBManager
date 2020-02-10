@@ -1653,6 +1653,10 @@ msgstr "Изменить индекс"
 msgid "Edit local variable"
 msgstr "Изменить локальную переменную"
 
+#: fbmstrconstunit.seditobject
+msgid "Edit object"
+msgstr ""
+
 #: fbmstrconstunit.seditor
 msgid "Editor"
 msgstr "Редактор"
@@ -5017,6 +5021,10 @@ msgstr "Отображать номера строк"
 #: fbmstrconstunit.sshowobjectdescriptionsashint
 msgid "Show object descriptions as hint"
 msgstr "Отображать примечание объектов в оперативной подсказке"
+
+#: fbmstrconstunit.sshowobjectintree
+msgid "Show object in object tree"
+msgstr ""
 
 #: fbmstrconstunit.sshowobjectnameinobjecteditorform
 msgid "Show object name in object editor form"
