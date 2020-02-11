@@ -104,6 +104,13 @@ type
     function PublicSchema:TPGSchema;
   end;
 
+  { TPGSystemCatalogRoot }
+
+  TPGSystemCatalogRoot = class(TPGSchemasRoot)
+  protected
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+  end;
 
   { TPGTableSpaceRoot }
 
@@ -1195,6 +1202,7 @@ type
     FAccessMethod: TStringList;
     FPGSettingParams: TPGSettingParams;
   private
+    FSystemCatalog: TPGSystemCatalogRoot;
     FSchemasRoot:TPGSchemasRoot;
     FSecurityRoot:TDBRootObject;//TPGSecurityRoot;
     FTableSpaceRoot:TPGTableSpaceRoot;
@@ -1290,6 +1298,8 @@ type
     property LanguageRoot:TPGLanguageRoot read FLanguageRoot;
     property TableSpaceRoot:TPGTableSpaceRoot read FTableSpaceRoot;
     property SecurityRoot:TDBRootObject read FSecurityRoot;
+    property SystemCatalog:TPGSystemCatalogRoot read FSystemCatalog;
+
     property UsePGShedule:Boolean read FUsePGShedule write FUsePGShedule;
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
     property UsePGBouncer:Boolean read GetUsePGBouncer write SetUsePGBouncer;
@@ -1360,6 +1370,21 @@ begin
     Result:=Copy(AName, L+1, Length(AName))
   else
     Result:=AName;
+end;
+
+{ TPGSystemCatalogRoot }
+
+function TPGSystemCatalogRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=Assigned(AItem) and ((AItem.ObjName = 'information_schema') or (Copy(AItem.ObjName, 1, 3) = 'pg_'));
+end;
+
+constructor TPGSystemCatalogRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FSystemObject:=true;
 end;
 
 { TPGProcedure }
@@ -3912,6 +3937,9 @@ begin
 
   AddObjectsGroup(FExtensions, TPGExtensionsRoot, TPGExtension, sExtensions);
 
+  if (ussSystemTable in UIShowSysObjects) then
+    AddObjectsGroup(FSystemCatalog, TPGSystemCatalogRoot, TPGSchema, sSystemCatalog);
+
 
   DoInitPGTasks;
 end;
@@ -3922,6 +3950,7 @@ begin
   FLanguageRoot:=nil;
   FSecurityRoot:=nil;
   FSchemasRoot:=nil;
+  FSystemCatalog:=nil;
   FEventTriggers:=nil;
   FForeignDataWrappers:=nil;
   FTasks:=nil;
@@ -4719,7 +4748,7 @@ end;
 
 function TPGSchemasRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=Assigned(AItem) and ((ussSystemTable in OwnerDB.UIShowSysObjects) or ((AItem.ObjName <> 'information_schema') and (Copy(AItem.ObjName, 1, 3) <> 'pg_')));
+  Result:=Assigned(AItem) and ((AItem.ObjName <> 'information_schema') and (Copy(AItem.ObjName, 1, 3) <> 'pg_'));
 end;
 
 function TPGSchemasRoot.GetObjectType: string;
