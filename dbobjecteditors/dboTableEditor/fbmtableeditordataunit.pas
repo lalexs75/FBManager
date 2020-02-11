@@ -272,19 +272,35 @@ procedure TfbmTableEditorDataFrame.DataSource1StateChange(Sender: TObject);
 var
   i:integer;
   C:TRxColumn;
+  F: TDBField;
+  S: String;
 begin
   if Assigned(DataSource1.DataSet) then
   begin
     if (FPriorState = dsInactive) and (DataSource1.DataSet.State = dsBrowse) then
     begin
-      if DataSource1.DataSet.Active and (FColSizes.Count>0) then
+      if DataSource1.DataSet.Active then
       begin
         for i:=0 to FColSizes.Count-1 do
         begin
           C:=DataGrid.ColumnByFieldName(FColSizes.Names[i]);
           if Assigned(C) then
             C.Width:=StrToIntDef(FColSizes.ValueFromIndex[i], C.Width);
-        end
+        end;
+        //Update grid collumn hints
+        for F in TDBDataSetObject(DBObject).Fields do
+        begin
+          S:=Trim(F.FieldDescription);
+          if S <> '' then
+          begin
+            C:=DataGrid.ColumnByFieldName(F.FieldName);
+            if Assigned(C) then
+            begin
+              TRxColumnTitle(C.Title).ShowHint:=true;
+              TRxColumnTitle(C.Title).Hint:=S;
+            end;
+          end;
+        end;
       end;
     end;
     FPriorState:=DataSource1.DataSet.State;
