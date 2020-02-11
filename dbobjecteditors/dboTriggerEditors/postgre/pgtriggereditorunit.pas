@@ -155,6 +155,7 @@ procedure TpgTriggerEditorPage.cbOnEventClick(Sender: TObject);
 var
   S, S1:string;
   i:integer;
+  F: Boolean;
 begin
   //Создадим имя тригера из меток срабатывания
   if (DBObject.State <> sdboEdit) and ((not edtCaption.Modified) or ((not edtNewProcName.Modified) and rbCreateNewFunc.Checked)) then
@@ -199,7 +200,17 @@ begin
       repeat
         S1:='trp_'+TPGTrigger(DBObject).TableName+S + '_' + IntToStr(i);
         inc(i);
-      until not (Assigned(TPGTrigger(DBObject).Schema.TriggerProc.ObjByName(S1)) or Assigned(TPGTrigger(DBObject).Schema.Procedures.ObjByName(S1)));
+
+        F:=false;
+        if Assigned(TPGTrigger(DBObject).Schema.TriggerProc) then
+          F:=F or Assigned(TPGTrigger(DBObject).Schema.TriggerProc.ObjByName(S1));
+
+        if Assigned(TPGTrigger(DBObject).Schema.Functions) then
+          F:=F or Assigned(TPGTrigger(DBObject).Schema.Functions.ObjByName(S1));
+
+        if Assigned(TPGTrigger(DBObject).Schema.Procedures) then
+          F:=F or Assigned(TPGTrigger(DBObject).Schema.Procedures.ObjByName(S1));
+      until not F;
 
       edtNewProcName.Text:=S1;
       edtNewProcName.Modified:=false;
