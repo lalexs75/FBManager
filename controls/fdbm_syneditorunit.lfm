@@ -1051,7 +1051,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Caption = 'Comment code'
       ImageIndex = 28
       OnExecute = ceCommentCodeExecute
-      ShortCut = 41027
+      ShortCut = 24662
     end
     object ceUncommentCode: TAction
       Category = 'Code exploer'
