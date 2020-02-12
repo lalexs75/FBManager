@@ -1,8 +1,8 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 337
-  VerticalOffset = 44
+  HorizontalOffset = 343
+  VerticalOffset = 73
   Width = 1113
   object sView: TRxTextHolder
     Highlighter = rxSynNone
@@ -640,7 +640,7 @@ object FBTestSQLData: TFBTestSQLData
           '    INTO id;'
           '    rdb$set_context(''USER_SESSION'', ''trig_ddl_log_id'', id);'
           '  END'
-          'END'
+          'END;'
         )
       end    
       item
@@ -685,19 +685,12 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterTrigger4'
         Lines.Strings = (
-          'ALTER TRIGGER tr_log_connect'
-          'ACTIVE POSITION 1'
+          'ALTER TRIGGER tr_log_connect ACTIVE POSITION 1'
           'AS'
           'BEGIN'
-          'INSERT INTO LOG_CONNECT (ID,'
-          'USERNAME,'
-          'ROLENAME,'
-          'ATIME)'
-          'VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT,'
-          'CURRENT_USER,'
-          'CURRENT_ROLE,'
-          'CURRENT_TIMESTAMP);'
-          'END'
+          '  INSERT INTO LOG_CONNECT (ID, USERNAME, ROLENAME, ATIME)'
+          '  VALUES (NEXT VALUE FOR SEQ_LOG_CONNECT, CURRENT_USER, CURRENT_ROLE, CURRENT_TIMESTAMP);'
+          'END;'
         )
       end    
       item

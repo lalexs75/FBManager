@@ -7291,8 +7291,8 @@ begin
 
   declare variable f_delta numeric(18,2) = 0;
 *)
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DECLARE', [toFirstToken, toFindWordLast]);
-    T:=AddSQLTokens(stKeyword, FSQLTokens, 'VARIABLE', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DECLARE', [toFirstToken, toFindWordLast], 92);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'VARIABLE', [], 91);
   T1:=AddSQLTokens(stIdentificator, [FSQLTokens, T], '', [], 1); //variable name
 
   TCurs1:=AddSQLTokens(stKeyword, T1, 'CURSOR', []); //variable name
@@ -7366,7 +7366,11 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:begin
-        FCurField:=Params.AddParam(AWord);
+        if not Assigned(FCurField) then
+          FCurField:=Params.AddParam(AWord)
+        else
+          FCurField.Caption:=AWord;
+
         FCurField.InReturn:=spvtLocal;
       end;
     2:if Assigned(FCurField) then FCurField.TypeName:=AWord; //обычный тип или домен
@@ -7376,11 +7380,21 @@ begin
         FCurField.TypeName:=AWord; //домен TYPE OF
         FCurField.TypeOf:=true;
       end;
-    4:if Assigned(FCurField) then FCurField.TypeName:=AWord; //обычный тип или домен
-    5:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + '.' + AWord; //обычный тип или домен
+    4:if Assigned(FCurField) then
+         FCurField.ReferencesTableFields:=AWord;
+    5:if Assigned(FCurField) then
+      begin
+        FCurField.ReferencesTableName:=FCurField.ReferencesTableFields;
+        FCurField.ReferencesTableFields:=AWord;
+      end;
     6:if Assigned(FCurField) then FCurField.TypeLen:=StrToInt(AWord);
     7:if Assigned(FCurField) then FCurField.TypePrec:=StrToInt(AWord);
     90:if Assigned(FCurField) then FCurField.TypeName:='CURSOR FOR (' + ASQLParser.GetToBracket(')') + ')';
+    91:begin
+         FCurField:=Params.AddParam('');
+         FCurField.ObjectKind:=okFunctionParametr;
+       end;
+    92:FCurField:=nil;
     99:if Assigned(FCurField) then FCurField.DefaultValue:=AWord;
     100:begin
         if Assigned(FCurField) then
@@ -7443,13 +7457,24 @@ begin
       if S <> '' then S:=S + LineEnding;
       if FDescType = fbldLocal then
       begin
-
+        if P.ReferencesTableFields <> '' then
+        begin
+          S:=S + 'DECLARE ';
+          if P.ObjectKind = okFunctionParametr then
+            S:=S + 'VARIABLE ';
+          S:=S + DoFormatName(P.Caption) +' TYPE OF COLUMN ' + DoFormatName(P.ReferencesTableName) + '.' + DoFormatName(P.ReferencesTableFields) + ';';
+        end
+        else
         case P.InReturn of
           spvtSubFunction:S:=S + 'DECLARE FUNCTION ' + DoFormatName2(P.Caption) + P.CheckExpr;
           spvtSubProc:S:=S + 'DECLARE PROCEDURE ' + DoFormatName2(P.Caption) + P.CheckExpr;
-          spvtLocal:begin
-              S:=S + 'DECLARE VARIABLE ' + DoFormatName(P.Caption) + DoParamTypeStr(P);
-              S:=S + ';';
+          spvtLocal:
+            begin
+              S:=S + 'DECLARE ';
+              if P.ObjectKind = okFunctionParametr then
+                S:=S + 'VARIABLE ';
+
+              S:=S + DoFormatName(P.Caption) + DoParamTypeStr(P) + ';';
               if (P.Description <> '') then
                 S:=S + ' /* ' + P.Description + ' */';
             end;

@@ -1551,6 +1551,7 @@ end;
 procedure TSQLParserField.Assign(AItem: TSQLParserField);
 begin
   if not Assigned(AItem) then Exit;
+  FObjectKind:=AItem.FObjectKind;
   Caption:=AItem.Caption;
   RealName:=AItem.RealName;
   TableName:=AItem.TableName;
