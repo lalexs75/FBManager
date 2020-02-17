@@ -1698,6 +1698,11 @@ msgstr ""
 msgid "Error in variable defenition"
 msgstr ""
 
+#: fbmstrconstunit.serrorwritelogfile
+#, object-pascal-format
+msgid "Error write log file name %s"
+msgstr ""
+
 #: fbmstrconstunit.sevent
 msgid "Event"
 msgstr ""

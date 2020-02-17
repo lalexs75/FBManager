@@ -1629,7 +1629,7 @@ resourcestring
   sPostgreSQLHelpURLHint                       = 'Path to the PostgreSQL documentation. $VERSION$ will be replaced with the major.minor version number.';
   sConfigHelpPage                              = 'Documentation and help';
   sObjectsSize                                 = 'Objects size';
-
+  sErrorWriteLogFile                           = 'Error write log file name %s';
 
 implementation
 

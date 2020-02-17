@@ -1774,6 +1774,11 @@ msgstr "Ошибка в имени параметра"
 msgid "Error in variable defenition"
 msgstr "Ошибка объявления переменной"
 
+#: fbmstrconstunit.serrorwritelogfile
+#, object-pascal-format
+msgid "Error write log file name %s"
+msgstr ""
+
 #: fbmstrconstunit.sevent
 msgid "Event"
 msgstr "Событие"

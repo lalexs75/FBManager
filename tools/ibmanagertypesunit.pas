@@ -225,7 +225,7 @@ uses Controls, fbmSQLEditorUnit, fbmCompileQestUnit, FileUtil, rxAppUtils,
   {$IFDEF DEBUG_LOG}rxlogging,{$ENDIF}
   IBManDataInspectorUnit, fbmRefreshObjTreeUnit,
   fbmDBObjectEditorUnit, typinfo, fbmConnectionEditUnit, fbmUserDataBaseUnit,
-  IBManMainUnit, LazUTF8, LazFileUtils, Variants
+  IBManMainUnit, LazUTF8, LazFileUtils, Variants, fbmStrConstUnit
   {$IFNDEF WINDOWS}
   , iconvenc
   {$ENDIF}
@@ -320,27 +320,27 @@ procedure WriteSQLGlobal(FileName, LogString, UserName: string; LogTimestamp: bo
 var
   F:TextFile;
 begin
-  AssignFile(F, FileName);
-  try
-    if FileExists( FileName) then Append(F)
-    else Rewrite(F);
-    if LogTimestamp then
-    begin
+  if FileIsWritable(FileName) then
+  begin
+    AssignFile(F, FileName);
+    try
+      if FileExists( FileName) then Append(F)
+      else Rewrite(F);
+      if LogTimestamp then
+      begin
+        writeln(f);
+        writeln(f, '/*------ '+UserName+' '+DateTimeToStr(Now)+' ------*/');
+      end;
       writeln(f);
-      writeln(f, '/*------ '+UserName+' '+DateTimeToStr(Now)+' ------*/');
+      writeln(f, LogString)
+    finally
+       CloseFile(F);
     end;
-    writeln(f);
-    writeln(f, LogString)
-  finally
-     CloseFile(F);
-  end;
+  end
+  else
+    ErrorBox(sErrorWriteLogFile, [FileName]);
 end;
-(*
-procedure WriteLog(FileName, LogString: string);
-begin
 
-end;
-*)
 { TDBInspectorRecordListEnumerator }
 
 constructor TDBInspectorRecordListEnumerator.Create(
