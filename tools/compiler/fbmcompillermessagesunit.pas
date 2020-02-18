@@ -31,7 +31,8 @@ uses
 type
   TfbmCompillerMessagesFrame = class;
   TppMsgType = (ppNone, ppLocalVarNotUsed,
-    ppLocalVarErrorDefine, ppInParamNotUsed, ppOutParamNotUsed);
+    ppLocalVarErrorDefine, ppInParamNotUsed, ppOutParamNotUsed, ppParamNameNotDefined,
+    ppParamTypeNotDefined);
 
   TppMsgRec = record
 
@@ -101,6 +102,8 @@ begin
   case TppMsgType(rxMsgListMsgType.AsInteger) of
     ppInParamNotUsed, ppOutParamNotUsed,
     ppLocalVarNotUsed:aText:=sWarning;
+    ppParamNameNotDefined,
+    ppParamTypeNotDefined,
     ppLocalVarErrorDefine:aText:=sError;
   else
     //ppNone
@@ -125,6 +128,8 @@ begin
   case AMsgType of
     ppInParamNotUsed, ppOutParamNotUsed,
     ppLocalVarNotUsed:rxMsgListMsgTypeImg.AsInteger:=1;
+    ppParamNameNotDefined,
+    ppParamTypeNotDefined,
     ppLocalVarErrorDefine:rxMsgListMsgTypeImg.AsInteger:=2;
   else
     rxMsgListMsgTypeImg.AsInteger:=0;

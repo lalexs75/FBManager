@@ -887,10 +887,20 @@ begin
   while not rxParamList.EOF do
   begin
     sLocalVars.AddObject(rxParamListParName.AsString, TObject(PtrInt(rxParamListInOut.AsInteger)));
+
+    if (not IsValidIdent(rxParamListParName.AsString)) then
+      ShowMsg(ppParamNameNotDefined, Format(sParamNameNotDefined, [rxParamListParName.AsString]));
+
+    if (Trim(rxParamListType.AsString) = '') then
+      ShowMsg(ppParamTypeNotDefined, Format(sParamTypeNotDefined, [rxParamListType.AsString]));
+
     rxParamList.Next;
   end;
   rxParamList.Bookmark:=B;
   rxParamList.EnableControls;
+
+
+//  if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) or (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then
 
   P:=TSQLParser.Create(Trim(EditorFrame.EditorText), DBObject.OwnerDB);
   while not P.Eof do
@@ -919,17 +929,7 @@ begin
       spvtVariadic,
       spvtInput:ShowMsg(ppInParamNotUsed, Format(sInputParamNotUsed, [S]));
       spvtTable,
-      spvtOutput:ShowMsg(ppOutParamNotUsed, Format(sOutpuParamNotUsed, [S]));
-
-      (*  case TSPVarType(rxParamListInOut.AsInteger) of
-          spvtInput:aText:='IN';
-          spvtOutput:aText:='OUT';
-          spvtInOut:aText:='INOUT';
-          spvtVariadic:aText:='VARIADIC';
-          spvtTable:aText:='TABLE';
-        else
-          aText:='';
-        end; *)
+      spvtOutput:ShowMsg(ppOutParamNotUsed, Format(sOutputParamNotUsed, [S]));
     else
       ShowMsg(ppNone, S);
     end;

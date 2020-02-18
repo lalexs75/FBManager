@@ -15,7 +15,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 14
+    Height = 19
     Top = 0
     Width = 1105
     Anchors = [akTop, akLeft, akRight]
@@ -49,29 +49,13 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 239
-    Top = 14
+    Height = 234
+    Top = 19
     Width = 1125
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
     AutoSort = True
     Columns = <    
-      item
-        SizePriority = 0
-        Title.Alignment = taCenter
-        Title.Orientation = toHorizontal
-        Title.Caption = 'ID'
-        Width = 35
-        FieldName = 'ID'
-        EditButtons = <>
-        Filter.DropDownRows = 0
-        Filter.EmptyValue = '(Пусто)'
-        Filter.NotEmptyValue = '(Не пусто)'
-        Filter.AllValue = '(Все значения)'
-        Filter.EmptyFont.Style = [fsItalic]
-        Filter.ItemIndex = -1
-        Footers = <>
-      end    
       item
         SizePriority = 0
         Title.Alignment = taCenter
@@ -114,7 +98,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Text'
-        Width = 882
+        Width = 922
         FieldName = 'Text'
         EditButtons = <>
         Filter.DropDownRows = 0

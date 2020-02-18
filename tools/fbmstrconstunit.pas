@@ -1635,7 +1635,9 @@ resourcestring
   sWarning                                     = 'Warning';
   sLocalVariableNotUsed                        = 'Variable ''%s'' declared, but not used';
   sInputParamNotUsed                           = 'Input parametr ''%s'' declared, but not used';
-  sOutpuParamNotUsed                           = 'Outpur parametr ''%s'' declared, but not used';
+  sOutputParamNotUsed                          = 'Output parametr ''%s'' declared, but not used';
+  sParamNameNotDefined                         = 'Param name not defined, or error in param name - ''%s''';
+  sParamTypeNotDefined                         = 'Param type not defined - ''%s''';
 
 implementation
 

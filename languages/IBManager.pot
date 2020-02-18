@@ -3832,13 +3832,13 @@ msgstr ""
 msgid "Other options"
 msgstr ""
 
-#: fbmstrconstunit.soutpuparamnotused
-#, object-pascal-format
-msgid "Outpur parametr '%s' declared, but not used"
-msgstr ""
-
 #: fbmstrconstunit.soutput
 msgid "Output"
+msgstr ""
+
+#: fbmstrconstunit.soutputparamnotused
+#, object-pascal-format
+msgid "Output parametr '%s' declared, but not used"
 msgstr ""
 
 #: fbmstrconstunit.sowner
@@ -3893,6 +3893,11 @@ msgstr ""
 msgid "Param name"
 msgstr ""
 
+#: fbmstrconstunit.sparamnamenotdefined
+#, object-pascal-format
+msgid "Param name not defined, or error in param name - '%s'"
+msgstr ""
+
 #: fbmstrconstunit.sparamprop
 msgid "Param property"
 msgstr ""
@@ -3907,6 +3912,11 @@ msgstr ""
 
 #: fbmstrconstunit.sparamtype
 msgid "Param type"
+msgstr ""
+
+#: fbmstrconstunit.sparamtypenotdefined
+#, object-pascal-format
+msgid "Param type not defined - '%s'"
 msgstr ""
 
 #: fbmstrconstunit.sparamvalue
