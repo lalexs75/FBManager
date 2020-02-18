@@ -6,7 +6,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
   ClientHeight = 253
   ClientWidth = 1125
   TabOrder = 0
-  DesignLeft = 560
+  DesignLeft = 307
   DesignTop = 386
   object StaticText1: TStaticText
     AnchorSideLeft.Control = Owner
@@ -15,7 +15,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 19
+    Height = 22
     Top = 0
     Width = 1105
     Anchors = [akTop, akLeft, akRight]
@@ -49,8 +49,8 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 234
-    Top = 19
+    Height = 231
+    Top = 22
     Width = 1125
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -98,7 +98,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Text'
-        Width = 922
+        Width = 917
         FieldName = 'Text'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -257,6 +257,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     object lvClear: TAction
       Caption = 'Clear mesaages'
       ImageIndex = 45
+      OnExecute = lvClearExecute
     end
     object lvRemoveVar: TAction
       Caption = 'lvRemoveVar'

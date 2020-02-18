@@ -25,8 +25,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Declaration'
-      ClientHeight = 188
-      ClientWidth = 907
+      ClientHeight = 183
+      ClientWidth = 911
       object cbVolatCat: TComboBox
         AnchorSideLeft.Control = Label6
         AnchorSideLeft.Side = asrBottom
@@ -193,8 +193,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 93
-        ClientWidth = 114
+        ClientHeight = 91
+        ClientWidth = 112
         Items.Strings = (
           'Single value'
           'Set of values'
@@ -243,8 +243,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         AutoSize = True
         BorderSpacing.Around = 6
         Caption = 'Options'
-        ClientHeight = 93
-        ClientWidth = 204
+        ClientHeight = 91
+        ClientWidth = 202
         TabOrder = 7
         object cbIsWindow: TCheckBox
           AnchorSideLeft.Control = Panel1
@@ -285,13 +285,13 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
     end
     object TabSheet2: TTabSheet
       Caption = 'Params'
-      ClientHeight = 188
-      ClientWidth = 907
+      ClientHeight = 183
+      ClientWidth = 911
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 188
+        Height = 183
         Top = 0
-        Width = 883
+        Width = 887
         ColumnDefValues.BlobText = '(примечание)'
         TitleButtons = False
         AutoSort = True
@@ -397,7 +397,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Desc'
-            Width = 263
+            Width = 262
             FieldName = 'Desc'
             EditButtons = <>
             Filter.Font.Style = [fsItalic]
@@ -486,8 +486,8 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
         OnKeyDown = RxDBGrid1KeyDown
       end
       object ToolBar1: TToolBar
-        Left = 883
-        Height = 188
+        Left = 887
+        Height = 183
         Top = 0
         Width = 24
         Align = alRight

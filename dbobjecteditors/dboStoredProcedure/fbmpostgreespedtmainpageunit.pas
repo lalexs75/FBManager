@@ -881,6 +881,24 @@ begin
   sLocalVars.CaseSensitive:=false;
   FLocalVars.FillStringList(sLocalVars);
 
+  FLocalVars.rxLocalVars.DisableControls;
+  B:=FLocalVars.rxLocalVars.Bookmark;
+  FLocalVars.rxLocalVars.First;
+  while not FLocalVars.rxLocalVars.EOF do
+  begin
+    sLocalVars.AddObject(FLocalVars.rxLocalVarsVAR_NAME.AsString);
+
+    if (not IsValidIdent(FLocalVars.rxLocalVarsVAR_NAME.AsString)) then
+      ShowMsg(ppLocalVarNameNotDefined, Format(sParamNameNotDefined, [FLocalVars.rxLocalVarsVAR_NAME.AsString]));
+
+    if (Trim(FLocalVars.rxLocalVarsVAR_TYPE.AsString) = '') then
+      ShowMsg(ppLocalVarTypeNotDefined, Format(sParamTypeNotDefined, [FLocalVars.rxLocalVarsVAR_TYPE.AsString]));
+    FLocalVars.rxLocalVars.Next;
+  end;
+  FLocalVars.rxLocalVars.Bookmark:=B;
+  FLocalVars.rxLocalVars.EnableControls;
+
+
   rxParamList.DisableControls;
   B:=rxParamList.Bookmark;
   rxParamList.First;
@@ -898,6 +916,7 @@ begin
   end;
   rxParamList.Bookmark:=B;
   rxParamList.EnableControls;
+
 
 
 //  if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) or (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then

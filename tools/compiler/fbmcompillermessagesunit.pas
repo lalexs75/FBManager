@@ -32,13 +32,13 @@ type
   TfbmCompillerMessagesFrame = class;
   TppMsgType = (ppNone, ppLocalVarNotUsed,
     ppLocalVarErrorDefine, ppInParamNotUsed, ppOutParamNotUsed, ppParamNameNotDefined,
-    ppParamTypeNotDefined);
+    ppParamTypeNotDefined, ppLocalVarNameNotDefined, ppLocalVarTypeNotDefined);
 
   TppMsgRec = record
 
   end;
 
-  TppMsgListDbl = procedure(Sender:TfbmCompillerMessagesFrame) of object;
+  TppMsgListDblClick = procedure(Sender:TfbmCompillerMessagesFrame) of object;
 
   { TfbmCompillerMessagesFrame }
 
@@ -58,6 +58,7 @@ type
     rxMsgListText: TStringField;
     SpeedButton1: TSpeedButton;
     StaticText1: TStaticText;
+    procedure lvClearExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure rxMsgListMsgTypeGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
@@ -71,7 +72,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit;
+uses fbmStrConstUnit, fbmToolsUnit;
 
 {$R *.lfm}
 
@@ -104,6 +105,8 @@ begin
     ppLocalVarNotUsed:aText:=sWarning;
     ppParamNameNotDefined,
     ppParamTypeNotDefined,
+    ppLocalVarNameNotDefined,
+    ppLocalVarTypeNotDefined,
     ppLocalVarErrorDefine:aText:=sError;
   else
     //ppNone
@@ -114,6 +117,12 @@ end;
 procedure TfbmCompillerMessagesFrame.RxDBGrid1DblClick(Sender: TObject);
 begin
   //
+end;
+
+procedure TfbmCompillerMessagesFrame.lvClearExecute(Sender: TObject);
+begin
+  if QuestionBox(sClearMessageListQuestion) then
+    rxMsgList.CloseOpen;
 end;
 
 procedure TfbmCompillerMessagesFrame.AddMsg(AMsgType: TppMsgType; AMsg: string);
@@ -130,6 +139,8 @@ begin
     ppLocalVarNotUsed:rxMsgListMsgTypeImg.AsInteger:=1;
     ppParamNameNotDefined,
     ppParamTypeNotDefined,
+    ppLocalVarNameNotDefined,
+    ppLocalVarTypeNotDefined,
     ppLocalVarErrorDefine:rxMsgListMsgTypeImg.AsInteger:=2;
   else
     rxMsgListMsgTypeImg.AsInteger:=0;

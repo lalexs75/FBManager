@@ -1638,6 +1638,9 @@ resourcestring
   sOutputParamNotUsed                          = 'Output parametr ''%s'' declared, but not used';
   sParamNameNotDefined                         = 'Param name not defined, or error in param name - ''%s''';
   sParamTypeNotDefined                         = 'Param type not defined - ''%s''';
+  sLocalVariableNameNotDefined                 = 'Variable name not defined, or error in param name - ''%s''';
+  sLocalVariableTypeNotDefined                 = 'Variable type not defined - ''%s''';
+  sClearMessageListQuestion                    = 'Clear message list?';
 
 implementation
 
