@@ -1777,7 +1777,7 @@ msgstr "Ошибка объявления переменной"
 #: fbmstrconstunit.serrorwritelogfile
 #, object-pascal-format
 msgid "Error write log file name %s"
-msgstr ""
+msgstr "Ошибка записи файла %s"
 
 #: fbmstrconstunit.sevent
 msgid "Event"
@@ -2745,7 +2745,7 @@ msgstr "Ввод/Вывод"
 #: fbmstrconstunit.sinputparamnotused
 #, object-pascal-format
 msgid "Input parametr '%s' declared, but not used"
-msgstr ""
+msgstr "Входящий параметра '%s' определён, но не используется"
 
 #: fbmstrconstunit.sinputparams
 msgid "Input params"
@@ -2980,7 +2980,7 @@ msgstr "Локально"
 #: fbmstrconstunit.slocalvariablenotused
 #, object-pascal-format
 msgid "Variable '%s' declared, but not used"
-msgstr ""
+msgstr "Переменная '%s' определена но не используется"
 
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
@@ -3664,7 +3664,7 @@ msgstr "Объекты"
 
 #: fbmstrconstunit.sobjectssize
 msgid "Objects size"
-msgstr ""
+msgstr "Размер объекта"
 
 #: fbmstrconstunit.sobjecttype
 msgid "Object type"
@@ -3961,14 +3961,14 @@ msgstr "Другое"
 msgid "Other options"
 msgstr "Прочие параметры"
 
-#: fbmstrconstunit.soutpuparamnotused
-#, object-pascal-format
-msgid "Outpur parametr '%s' declared, but not used"
-msgstr ""
-
 #: fbmstrconstunit.soutput
 msgid "Output"
 msgstr "Выход"
+
+#: fbmstrconstunit.soutputparamnotused
+#, object-pascal-format
+msgid "Output parametr '%s' declared, but not used"
+msgstr "Выходной параметр '%s' определён, но не используется"
 
 #: fbmstrconstunit.sowner
 msgid "Owner"
@@ -4022,6 +4022,11 @@ msgstr "Параметр"
 msgid "Param name"
 msgstr "Имя параметра"
 
+#: fbmstrconstunit.sparamnamenotdefined
+#, object-pascal-format
+msgid "Param name not defined, or error in param name - '%s'"
+msgstr "Не определено имя параметра или ошибка в имени параметра - '%s'"
+
 #: fbmstrconstunit.sparamprop
 msgid "Param property"
 msgstr "Свойства параметра"
@@ -4038,6 +4043,11 @@ msgstr "История параметров"
 #: fbmstrconstunit.sparamtype
 msgid "Param type"
 msgstr "Тип параметра"
+
+#: fbmstrconstunit.sparamtypenotdefined
+#, object-pascal-format
+msgid "Param type not defined - '%s'"
+msgstr "Тип параметра не определён - '%s'"
 
 #: fbmstrconstunit.sparamvalue
 msgid "Param value"
@@ -5044,7 +5054,7 @@ msgstr "Отображать примечание объектов в опера
 
 #: fbmstrconstunit.sshowobjectintree
 msgid "Show object in object tree"
-msgstr ""
+msgstr "Отобразить объект в инспекторе объектов"
 
 #: fbmstrconstunit.sshowobjectnameinobjecteditorform
 msgid "Show object name in object editor form"
@@ -5622,7 +5632,7 @@ msgstr "Генератор тестовых данных"
 
 #: fbmstrconstunit.stext
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
@@ -6183,7 +6193,7 @@ msgstr "Представления"
 
 #: fbmstrconstunit.swarning
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
 #: fbmstrconstunit.swidget
 msgid "Widget : "
@@ -6443,4 +6453,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
