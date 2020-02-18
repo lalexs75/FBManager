@@ -126,7 +126,7 @@ uses
   fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit,
   otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit, 
 pg_definitions, pgToolsFindDuplicateUnit, fbmAbstractSQLEngineToolsUnit, 
-pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit
+pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit, fbmCompillerMessagesUnit
 
   ;
 

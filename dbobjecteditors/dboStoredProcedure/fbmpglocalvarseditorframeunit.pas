@@ -84,6 +84,7 @@ type
     procedure Localize;
     function VriablesList(ForPG:boolean):string;
     procedure FillSynCompletionList(const KeyStartWord:string; const AItems:TSynCompletionObjList);
+    procedure FillStringList(const AItems:TStringList); inline;
     function ParseSQL(SqlLine:string):string;
     procedure AddVariable(AVarName:string);
     property OwnerDB:TSQLEngineAbstract read FOwnerDB write FOwnerDB;
@@ -92,7 +93,7 @@ type
 
 implementation
 uses fbmSqlParserUnit, fbmToolsUnit, fbmStrConstUnit, SQLEngineCommonTypesUnit, pg_SqlParserUnit,
-  PostgreSQLEngineUnit, FBSQLEngineUnit, fb_SqlParserUnit;
+  PostgreSQLEngineUnit, FBSQLEngineUnit, fb_SqlParserUnit, rxdbutils;
 
 {$R *.lfm}
 
@@ -285,6 +286,11 @@ begin
     rxLocalVars.Bookmark:=B;
     rxLocalVars.EnableControls;
   end;
+end;
+
+procedure TfbmPGLocalVarsEditorFrame.FillStringList(const AItems: TStringList);
+begin
+  FieldValueToStrings(rxLocalVars, 'VAR_NAME', AItems);
 end;
 
 function TfbmPGLocalVarsEditorFrame.ParseSQL(SqlLine: string): string;

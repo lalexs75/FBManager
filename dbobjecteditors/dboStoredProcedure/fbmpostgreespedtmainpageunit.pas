@@ -28,8 +28,8 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, Spin, ActnList, Menus, ComCtrls, db, rxmemds, rxdbgrid, rxtoolbar,
   sqlObjects, fdmAbstractEditorUnit, PostgreSQLEngineUnit, fdbm_SynEditorUnit,
-  fbmToolsUnit, LMessages, SQLEngineAbstractUnit, fbmSqlParserUnit,
-  fbmPGLocalVarsEditorFrameUnit, SQLEngineCommonTypesUnit;
+  fbmToolsUnit, fbmCompillerMessagesUnit, LMessages, SQLEngineAbstractUnit,
+  fbmSqlParserUnit, fbmPGLocalVarsEditorFrameUnit, SQLEngineCommonTypesUnit;
 
 type
   TpgTypeParRec = record
@@ -104,6 +104,7 @@ type
     edtAVGTime: TSpinEdit;
     edtAVGRows: TSpinEdit;
     Splitter1: TSplitter;
+    Splitter2: TSplitter;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -136,6 +137,8 @@ type
     FParamModified:boolean;
     EditorFrame:Tfdbm_SynEditorFrame;
     FLocalVars:TfbmPGLocalVarsEditorFrame;
+
+    FCompillerMessages:TfbmCompillerMessagesFrame;
     procedure LoadProcedureBody;
     procedure PrintPage;
     procedure TextEditorChange(Sender: TObject);
@@ -160,6 +163,9 @@ type
     procedure DoTextEditorDefineVariable(Sender: TObject);
     procedure TextEditorPopUpMenu(Sender: TObject);
     function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
+
+    procedure ShowMsg(AMsg:string);
+    procedure DoPreParseCode;
   public
     function PageName:string;override;
     procedure UpdateEnvOptions;override;
@@ -839,6 +845,70 @@ begin
   end;
 end;
 
+procedure TfbmPostGreeFunctionEdtMainPage.ShowMsg(AMsg: string);
+begin
+  if not Assigned(FCompillerMessages) then
+  begin
+    FCompillerMessages:=TfbmCompillerMessagesFrame.Create(Self);
+    FCompillerMessages.Parent:=Self;
+    FCompillerMessages.Align:=alBottom;
+    FCompillerMessages.AnchorSideBottom.Control:=Self;
+    FCompillerMessages.AnchorSideLeft.Control:=Self;
+    FCompillerMessages.AnchorSideRight.Control:=Self;
+    FCompillerMessages.Anchors:=[akLeft, akRight, akBottom];
+    Splitter2.Visible:=true;
+    Splitter2.Top:=FCompillerMessages.Top - Splitter2.Height;
+  end
+  else
+  if not FCompillerMessages.Visible then
+  begin
+    FCompillerMessages.Visible:=true;
+    Splitter2.Visible:=true;
+    Splitter2.Top:=FCompillerMessages.Top - Splitter2.Height;
+    FCompillerMessages.Clear;
+  end;
+
+  FCompillerMessages.AddMsg(AMsg);
+
+end;
+
+procedure TfbmPostGreeFunctionEdtMainPage.DoPreParseCode;
+var
+  P: TSQLParser;
+  S: String;
+  sLocalVars:TStringList;
+  i: Integer;
+begin
+  if not TabSheet3.TabVisible then
+    exit; { TODO : Доделать получение локальных переменных парсером }
+    //aSql.Text:=FLocalVars.ParseSQL(aSql.Text);
+
+  sLocalVars:=TStringList.Create;
+  sLocalVars.Sorted:=true;
+  sLocalVars.CaseSensitive:=false;
+  FLocalVars.FillStringList(sLocalVars);
+
+  P:=TSQLParser.Create(Trim(EditorFrame.EditorText), DBObject.OwnerDB);
+  while not P.Eof do
+  begin
+    S:=P.GetNextWord;
+    if S<>'' then
+    begin
+      if P.WordType(nil, S, nil) = stIdentificator then
+      begin
+        i:=sLocalVars.IndexOf(S);
+        if i > -1 then
+          sLocalVars.Delete(i);
+      end;
+    end;
+  end;
+  P.Free;
+
+  for S in sLocalVars do
+    ShowMsg(S);
+  sLocalVars.Free;
+end;
+
 function TfbmPostGreeFunctionEdtMainPage.PageName: string;
 begin
   Result:=sFunction;
@@ -947,6 +1017,11 @@ var
   D: TDBDomain;
   FCntOutput: Integer;
 begin
+  if Assigned(FCompillerMessages) then
+    FCompillerMessages.Clear;
+
+  DoPreParseCode;
+
   Result:=false;
   FParamModified:=false;
   if not (ASQLObject is TPGSQLCreateFunction) then exit;
