@@ -1,10 +1,10 @@
 object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
   Left = 0
-  Height = 240
+  Height = 253
   Top = 0
-  Width = 431
-  ClientHeight = 240
-  ClientWidth = 431
+  Width = 1125
+  ClientHeight = 253
+  ClientWidth = 1125
   TabOrder = 0
   DesignLeft = 560
   DesignTop = 386
@@ -15,13 +15,12 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 19
+    Height = 14
     Top = 0
-    Width = 411
+    Width = 1105
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     Caption = 'Messages'
-    Font.Orientation = 90
     ParentFont = False
     TabOrder = 0
   end
@@ -30,7 +29,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 411
+    Left = 1105
     Height = 20
     Top = 0
     Width = 20
@@ -38,6 +37,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AutoSize = True
     Images = fbManagerMainForm.ImageListMain
     ImageIndex = 106
+    Spacing = 0
     OnClick = SpeedButton1Click
   end
   object RxDBGrid1: TRxDBGrid
@@ -49,19 +49,58 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 221
-    Top = 19
-    Width = 431
+    Height = 239
+    Top = 14
+    Width = 1125
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
     AutoSort = True
     Columns = <    
       item
+        SizePriority = 0
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'ID'
-        Width = 70
+        Width = 35
         FieldName = 'ID'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        SizePriority = 0
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = '...'
+        Width = 26
+        FieldName = 'MsgTypeImg'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+        ImageList = fbManagerMainForm.ImageListMain
+        KeyList.Strings = (
+          '0=113'
+          '1=117'
+          '2=110'
+        )
+      end    
+      item
+        SizePriority = 0
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Type'
+        Width = 150
+        FieldName = 'MsgType'
         EditButtons = <>
         Filter.DropDownRows = 0
         Filter.EmptyValue = '(Пусто)'
@@ -75,7 +114,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Text'
-        Width = 600
+        Width = 882
         FieldName = 'Text'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -147,15 +186,18 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     SearchOptions.FromStart = False
     OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
     Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoFillColumns = True
     Color = clWindow
     DrawFullLine = False
     FocusColor = clRed
     SelectedColor = clHighlight
     GridLineStyle = psSolid
     DataSource = dsMsgList
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgRowLines, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 1
+    OnDblClick = RxDBGrid1DblClick
   end
   object rxMsgList: TRxMemoryData
     FieldDefs = <    
@@ -167,9 +209,17 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Name = 'Text'
         DataType = ftString
         Size = 500
+      end    
+      item
+        Name = 'MsgType'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'MsgTypeImg'
+        DataType = ftInteger
       end>
     PacketRecords = 0
-    Left = 138
+    Left = 144
     Top = 116
     object rxMsgListID: TLongintField
       FieldKind = fkData
@@ -190,10 +240,54 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
       Required = False
       Size = 500
     end
+    object rxMsgListMsgType: TLongintField
+      Alignment = taLeftJustify
+      FieldKind = fkData
+      FieldName = 'MsgType'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      OnGetText = rxMsgListMsgTypeGetText
+    end
+    object rxMsgListMsgTypeImg: TLongintField
+      FieldKind = fkData
+      FieldName = 'MsgTypeImg'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
   end
   object dsMsgList: TDataSource
     DataSet = rxMsgList
     Left = 104
     Top = 116
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 288
+    Top = 59
+    object lvClear: TAction
+      Caption = 'Clear mesaages'
+      ImageIndex = 45
+    end
+    object lvRemoveVar: TAction
+      Caption = 'lvRemoveVar'
+      ImageIndex = 107
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = fbManagerMainForm.ImageListMain
+    Left = 288
+    Top = 116
+    object MenuItem1: TMenuItem
+      Action = lvClear
+    end
+    object MenuItem2: TMenuItem
+      Action = lvRemoveVar
+    end
   end
 end

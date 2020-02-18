@@ -2742,6 +2742,11 @@ msgstr "Вход"
 msgid "Input/Output"
 msgstr "Ввод/Вывод"
 
+#: fbmstrconstunit.sinputparamnotused
+#, object-pascal-format
+msgid "Input parametr '%s' declared, but not used"
+msgstr ""
+
 #: fbmstrconstunit.sinputparams
 msgid "Input params"
 msgstr "Входные параметры"
@@ -2971,6 +2976,11 @@ msgstr "Загрузить шаблон по умолчанию?"
 #: fbmstrconstunit.slocal
 msgid "Local"
 msgstr "Локально"
+
+#: fbmstrconstunit.slocalvariablenotused
+#, object-pascal-format
+msgid "Variable '%s' declared, but not used"
+msgstr ""
 
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
@@ -3950,6 +3960,11 @@ msgstr "Другое"
 #: fbmstrconstunit.sotheroptions
 msgid "Other options"
 msgstr "Прочие параметры"
+
+#: fbmstrconstunit.soutpuparamnotused
+#, object-pascal-format
+msgid "Outpur parametr '%s' declared, but not used"
+msgstr ""
 
 #: fbmstrconstunit.soutput
 msgid "Output"
@@ -5605,6 +5620,10 @@ msgstr "Проверка"
 msgid "Test data generator"
 msgstr "Генератор тестовых данных"
 
+#: fbmstrconstunit.stext
+msgid "Text"
+msgstr ""
+
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
 msgstr "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*"
@@ -6161,6 +6180,10 @@ msgstr "Представление"
 msgctxt "fbmstrconstunit.sviews"
 msgid "Views"
 msgstr "Представления"
+
+#: fbmstrconstunit.swarning
+msgid "Warning"
+msgstr ""
 
 #: fbmstrconstunit.swidget
 msgid "Widget : "

@@ -2647,6 +2647,11 @@ msgstr ""
 msgid "Input/Output"
 msgstr ""
 
+#: fbmstrconstunit.sinputparamnotused
+#, object-pascal-format
+msgid "Input parametr '%s' declared, but not used"
+msgstr ""
+
 #: fbmstrconstunit.sinputparams
 msgid "Input params"
 msgstr ""
@@ -2867,6 +2872,11 @@ msgstr ""
 
 #: fbmstrconstunit.slocal
 msgid "Local"
+msgstr ""
+
+#: fbmstrconstunit.slocalvariablenotused
+#, object-pascal-format
+msgid "Variable '%s' declared, but not used"
 msgstr ""
 
 #: fbmstrconstunit.slocalvariables
@@ -3820,6 +3830,11 @@ msgstr ""
 
 #: fbmstrconstunit.sotheroptions
 msgid "Other options"
+msgstr ""
+
+#: fbmstrconstunit.soutpuparamnotused
+#, object-pascal-format
+msgid "Outpur parametr '%s' declared, but not used"
 msgstr ""
 
 #: fbmstrconstunit.soutput
@@ -5425,6 +5440,10 @@ msgstr ""
 msgid "Test data generator"
 msgstr ""
 
+#: fbmstrconstunit.stext
+msgid "Text"
+msgstr ""
+
 #: fbmstrconstunit.stextfilesfilter
 msgid "Text files (*.txt)|*.txt|All files (*.*)|*.*"
 msgstr ""
@@ -5960,6 +5979,10 @@ msgstr ""
 
 #: fbmstrconstunit.sviews
 msgid "Views"
+msgstr ""
+
+#: fbmstrconstunit.swarning
+msgid "Warning"
 msgstr ""
 
 #: fbmstrconstunit.swidget

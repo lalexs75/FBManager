@@ -164,7 +164,7 @@ type
     procedure TextEditorPopUpMenu(Sender: TObject);
     function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
 
-    procedure ShowMsg(AMsg:string);
+    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string);
     procedure DoPreParseCode;
   public
     function PageName:string;override;
@@ -303,15 +303,6 @@ procedure TfbmPostGreeFunctionEdtMainPage.rxParamListInOutGetText(Sender: TField
   var aText: string; DisplayText: Boolean);
 begin
   aText:=ParamTypeFuncToStr(TSPVarType(rxParamListInOut.AsInteger));
-(*  case TSPVarType(rxParamListInOut.AsInteger) of
-    spvtInput:aText:='IN';
-    spvtOutput:aText:='OUT';
-    spvtInOut:aText:='INOUT';
-    spvtVariadic:aText:='VARIADIC';
-    spvtTable:aText:='TABLE';
-  else
-    aText:='';
-  end; *)
 end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.LoadProcedureBody;
@@ -845,7 +836,8 @@ begin
   end;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.ShowMsg(AMsg: string);
+procedure TfbmPostGreeFunctionEdtMainPage.ShowMsg(AMsgType: TppMsgType;
+  AMsg: string);
 begin
   if not Assigned(FCompillerMessages) then
   begin
@@ -868,8 +860,7 @@ begin
     FCompillerMessages.Clear;
   end;
 
-  FCompillerMessages.AddMsg(AMsg);
-
+  FCompillerMessages.AddMsg(AMsgType, AMsg);
 end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.DoPreParseCode;
@@ -878,6 +869,8 @@ var
   S: String;
   sLocalVars:TStringList;
   i: Integer;
+  B: TBookMark;
+  J: TSPVarType;
 begin
   if not TabSheet3.TabVisible then
     exit; { TODO : Доделать получение локальных переменных парсером }
@@ -887,6 +880,17 @@ begin
   sLocalVars.Sorted:=true;
   sLocalVars.CaseSensitive:=false;
   FLocalVars.FillStringList(sLocalVars);
+
+  rxParamList.DisableControls;
+  B:=rxParamList.Bookmark;
+  rxParamList.First;
+  while not rxParamList.EOF do
+  begin
+    sLocalVars.AddObject(rxParamListParName.AsString, TObject(PtrInt(rxParamListInOut.AsInteger)));
+    rxParamList.Next;
+  end;
+  rxParamList.Bookmark:=B;
+  rxParamList.EnableControls;
 
   P:=TSQLParser.Create(Trim(EditorFrame.EditorText), DBObject.OwnerDB);
   while not P.Eof do
@@ -904,8 +908,32 @@ begin
   end;
   P.Free;
 
-  for S in sLocalVars do
-    ShowMsg(S);
+  for i:=0 to sLocalVars.Count-1 do
+  begin
+    S:=sLocalVars[i];
+    J:=TSPVarType(IntPtr(sLocalVars.Objects[i]));
+
+    case J of
+      spvtLocal:ShowMsg(ppLocalVarNotUsed, Format(sLocalVariableNotUsed, [S]));
+      spvtInOut,
+      spvtVariadic,
+      spvtInput:ShowMsg(ppInParamNotUsed, Format(sInputParamNotUsed, [S]));
+      spvtTable,
+      spvtOutput:ShowMsg(ppOutParamNotUsed, Format(sOutpuParamNotUsed, [S]));
+
+      (*  case TSPVarType(rxParamListInOut.AsInteger) of
+          spvtInput:aText:='IN';
+          spvtOutput:aText:='OUT';
+          spvtInOut:aText:='INOUT';
+          spvtVariadic:aText:='VARIADIC';
+          spvtTable:aText:='TABLE';
+        else
+          aText:='';
+        end; *)
+    else
+      ShowMsg(ppNone, S);
+    end;
+  end;
   sLocalVars.Free;
 end;
 

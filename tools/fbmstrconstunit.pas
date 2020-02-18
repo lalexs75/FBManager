@@ -592,6 +592,7 @@ resourcestring
   sCopyConfiguration                = 'Copy configuration';
   sForEachRow                       = 'For each row';
   sFillFieldNameAndType             = 'Fill field name and type?';
+  sText                             = 'Text';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';
@@ -1630,6 +1631,11 @@ resourcestring
   sConfigHelpPage                              = 'Documentation and help';
   sObjectsSize                                 = 'Objects size';
   sErrorWriteLogFile                           = 'Error write log file name %s';
+
+  sWarning                                     = 'Warning';
+  sLocalVariableNotUsed                        = 'Variable ''%s'' declared, but not used';
+  sInputParamNotUsed                           = 'Input parametr ''%s'' declared, but not used';
+  sOutpuParamNotUsed                           = 'Outpur parametr ''%s'' declared, but not used';
 
 implementation
 
