@@ -104,7 +104,6 @@ type
     edtAVGTime: TSpinEdit;
     edtAVGRows: TSpinEdit;
     Splitter1: TSplitter;
-    Splitter2: TSplitter;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -138,7 +137,6 @@ type
     EditorFrame:Tfdbm_SynEditorFrame;
     FLocalVars:TfbmPGLocalVarsEditorFrame;
 
-    FCompillerMessages:TfbmCompillerMessagesFrame;
     procedure LoadProcedureBody;
     procedure PrintPage;
     procedure TextEditorChange(Sender: TObject);
@@ -164,9 +162,8 @@ type
     procedure TextEditorPopUpMenu(Sender: TObject);
     function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
 
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
-    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
+    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
+    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
 
     procedure DoPreParseCode;
   public
@@ -911,34 +908,6 @@ begin
   end;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.ShowMsg(AMsgType: TppMsgType;
-  AMsg: string; AInfo1, AInfo2: Integer);
-begin
-  if not Assigned(FCompillerMessages) then
-  begin
-    FCompillerMessages:=TfbmCompillerMessagesFrame.Create(Self);
-    FCompillerMessages.Parent:=Self;
-    FCompillerMessages.Align:=alBottom;
-    FCompillerMessages.AnchorSideBottom.Control:=Self;
-    FCompillerMessages.AnchorSideLeft.Control:=Self;
-    FCompillerMessages.AnchorSideRight.Control:=Self;
-    FCompillerMessages.Anchors:=[akLeft, akRight, akBottom];
-    FCompillerMessages.OnMsgListDblClick:=@ppMsgListDblClick;
-    FCompillerMessages.OnMsgListRemoveNotUsedVar:=@ppMsgListRemoveVar;
-    Splitter2.Visible:=true;
-    Splitter2.Top:=FCompillerMessages.Top - Splitter2.Height;
-  end
-  else
-  if not FCompillerMessages.Visible then
-  begin
-    FCompillerMessages.Visible:=true;
-    Splitter2.Visible:=true;
-    Splitter2.Top:=FCompillerMessages.Top - Splitter2.Height;
-    FCompillerMessages.Clear;
-  end;
-
-  FCompillerMessages.AddMsg(AMsgType, AMsg, AInfo1, AInfo2);
-end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.DoPreParseCode;
 var

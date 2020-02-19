@@ -533,17 +533,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       Caption = 'Local variables'
     end
   end
-  object Splitter2: TSplitter[2]
-    Cursor = crVSplit
-    Left = 0
-    Height = 5
-    Top = 601
-    Width = 917
-    Align = alBottom
-    ResizeAnchor = akBottom
-    Visible = False
-  end
-  object rxParamList: TRxMemoryData[3]
+  object rxParamList: TRxMemoryData[2]
     Capacity = 1024
     FieldDefs = <    
       item
@@ -685,12 +675,12 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       Size = 200
     end
   end
-  object dsParamList: TDataSource[4]
+  object dsParamList: TDataSource[3]
     DataSet = rxParamList
     Left = 280
     Top = 219
   end
-  object ActionList1: TActionList[5]
+  object ActionList1: TActionList[4]
     Images = fbManagerMainForm.ImageListMain
     Left = 464
     Top = 224
@@ -732,7 +722,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       OnExecute = parPrintListExecute
     end
   end
-  object PopupMenu1: TPopupMenu[6]
+  object PopupMenu1: TPopupMenu[5]
     Images = fbManagerMainForm.ImageListMain
     Left = 360
     Top = 216
@@ -761,7 +751,7 @@ inherited fbmPostGreeFunctionEdtMainPage: TfbmPostGreeFunctionEdtMainPage
       Action = parPrintList
     end
   end
-  object PopupMenu2: TPopupMenu[7]
+  object PopupMenu2: TPopupMenu[6]
     Images = fbManagerMainForm.ImageListMain
     Left = 176
     Top = 219
