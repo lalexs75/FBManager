@@ -101,6 +101,7 @@ type
     procedure DefinePopupMenu;
     procedure DoTextEditorDefineVariable(Sender: TObject);
     procedure TextEditorPopUpMenu(Sender: TObject);
+    procedure DoPreParseCode;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -656,6 +657,11 @@ begin
   FMenuDefineVariable.Enabled:=TabSheet5.TabVisible and F;
 end;
 
+procedure TpgTriggerEditorPage.DoPreParseCode;
+begin
+
+end;
+
 
 function TpgTriggerEditorPage.PageName: string;
 begin
@@ -767,8 +773,13 @@ var
   S: String;
   FPrc: TPGFunction;
 begin
+  if Assigned(FCompillerMessages) then
+    FCompillerMessages.Clear;
+
+  DoPreParseCode;
+
   Result:=false;
-//  Exit;
+
   FCmd:=ASQLObject as TPGSQLCreateTrigger;
 
   if rbCreateNewFunc.Checked or EditorFrame.Modified then

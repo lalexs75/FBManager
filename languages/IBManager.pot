@@ -336,6 +336,26 @@ msgstr ""
 msgid "Time spent writing data file blocks by backends in this database, in milliseconds"
 msgstr ""
 
+#: fbmstrconstunit.sblockedpid
+msgid "Blocked pid"
+msgstr ""
+
+#: fbmstrconstunit.sblockedstatement
+msgid "Blocked statement"
+msgstr ""
+
+#: fbmstrconstunit.sblockeduser
+msgid "Blocked user"
+msgstr ""
+
+#: fbmstrconstunit.sblockingpid
+msgid "Blocking pid"
+msgstr ""
+
+#: fbmstrconstunit.sblockinguser
+msgid "Blocking user"
+msgstr ""
+
 #: fbmstrconstunit.sbody
 msgid "Body"
 msgstr ""
@@ -918,6 +938,10 @@ msgstr ""
 
 #: fbmstrconstunit.sctype
 msgid "CType"
+msgstr ""
+
+#: fbmstrconstunit.scurrentstatementinblockingprocess
+msgid "Current statement in blocking process"
 msgstr ""
 
 #: fbmstrconstunit.scurrentvalue
@@ -4045,6 +4069,10 @@ msgstr ""
 
 #: fbmstrconstunit.spginheritedright
 msgid "Inherited right from owner roles"
+msgstr ""
+
+#: fbmstrconstunit.spglocks
+msgid "PG locks"
 msgstr ""
 
 #: fbmstrconstunit.spgloginenabled

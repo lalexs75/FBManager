@@ -1643,6 +1643,13 @@ resourcestring
   sLocalVariableNameNotDefined                 = 'Variable name not defined, or error in param name - ''%s''';
   sLocalVariableTypeNotDefined                 = 'Variable type not defined - ''%s''';
   sClearMessageListQuestion                    = 'Clear message list?';
+  sBlockedPid                                  = 'Blocked pid';
+  sBlockedUser                                 = 'Blocked user';
+  sBlockingPid                                 = 'Blocking pid';
+  sBlockingUser                                = 'Blocking user';
+  sPGLocks                                     = 'PG locks';
+  sBlockedStatement                            = 'Blocked statement';
+  sCurrentStatementInBlockingProcess           = 'Current statement in blocking process';
 
 implementation
 

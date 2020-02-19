@@ -925,7 +925,6 @@ begin
   sLocalVars:=TStringList.Create;
   sLocalVars.Sorted:=true;
   sLocalVars.CaseSensitive:=false;
-  FLocalVars.FillStringList(sLocalVars);
 
   FLocalVars.rxLocalVars.DisableControls;
   B:=FLocalVars.rxLocalVars.Bookmark;

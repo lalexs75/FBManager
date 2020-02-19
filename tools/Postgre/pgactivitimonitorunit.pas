@@ -29,7 +29,7 @@ uses
   ExtCtrls, StdCtrls, ActnList, Spin, Grids, Menus, Buttons, ibmanagertypesunit,
   db, fdbm_monitorabstractunit, SQLEngineAbstractUnit, rxdbgrid, rxtoolbar,
   rxmemds, RxIniPropStorage, TASources, TAGraph, TASeries, TALegendPanel,
-  TADbSource, TAIntervalSources, SynEdit, ZDataset, ZConnection,
+  TADbSource, TAIntervalSources, SynEdit, ZMacroQuery, ZDataset, ZConnection,
   fdbm_SynEditorUnit, PostgreSQLEngineUnit;
 
 type
@@ -37,9 +37,31 @@ type
   { TpgActivitiMonitorForm }
 
   TpgActivitiMonitorForm = class(TfdbmMonitorAbstractForm)
+    dsPGLocks: TDataSource;
+    Panel5: TPanel;
+    PopupMenu2: TPopupMenu;
+    quPGLocksblocked_pid: TLongintField;
+    quPGLocksblocked_statement: TMemoField;
+    quPGLocksblocked_user: TStringField;
+    quPGLocksblocking_pid: TLongintField;
+    quPGLocksblocking_user: TStringField;
+    quPGLockscurrent_statement_in_blocking_process: TMemoField;
+    Splitter5: TSplitter;
+    StaticText1: TStaticText;
+    StaticText2: TStaticText;
+    tlsRefreskPGLocks: TAction;
+    CheckBox3: TCheckBox;
+    Label4: TLabel;
     MenuItem4: TMenuItem;
+    Panel4: TPanel;
+    RxDBGrid4: TRxDBGrid;
     SpeedButton1: TSpeedButton;
-    tlsRefresh: TAction;
+    SpeedButton2: TSpeedButton;
+    SpinEdit2: TSpinEdit;
+    Splitter4: TSplitter;
+    TabSheet3: TTabSheet;
+    Timer3: TTimer;
+    tlsRefreshConnectionsList: TAction;
     DateTimeIntervalChartSource1: TDateTimeIntervalChartSource;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -131,22 +153,30 @@ type
     quDBStat: TZReadOnlyQuery;
     quCancelQuery: TZReadOnlyQuery;
     quTerminate: TZReadOnlyQuery;
+    quPGLocks: TZQuery;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure pgStatDBBeforeConnect(Sender: TObject);
     procedure quActiveSessionsAfterScroll(DataSet: TDataSet);
     procedure quConnectionsAfterScroll(DataSet: TDataSet);
+    procedure quPGLocksAfterScroll(DataSet: TDataSet);
     procedure SpinEdit1Change(Sender: TObject);
+    procedure SpinEdit2Change(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
+    procedure Timer3Timer(Sender: TObject);
     procedure tlsCancelQueryExecute(Sender: TObject);
     procedure tlsDisconectConnectionExecute(Sender: TObject);
-    procedure tlsRefreshExecute(Sender: TObject);
+    procedure tlsRefreshConnectionsListExecute(Sender: TObject);
+    procedure tlsRefreskPGLocksExecute(Sender: TObject);
   private
     FActiveQueryText:Tfdbm_SynEditorFrame;
     FActiveQueryText2:Tfdbm_SynEditorFrame;
+    FActiveQueryText3:Tfdbm_SynEditorFrame;
+    FActiveQueryText4:Tfdbm_SynEditorFrame;
     procedure RefreshInfoCharts;
     procedure RefreshConnections;
+    procedure RefreshPGLocks;
     procedure LoadDBStat;
     procedure ClearInfoCharts;
   protected
@@ -207,6 +237,27 @@ begin
   FActiveQueryText2.TextEditor.Gutter.Visible:=false;
   Splitter3.Left:=FActiveQueryText2.Top - Splitter3.Width;
 
+  FActiveQueryText3:=Tfdbm_SynEditorFrame.Create(Self);
+  FActiveQueryText3.Name:='FActiveQueryText3';
+  FActiveQueryText3.Parent:=Panel5;
+  FActiveQueryText3.Top:=StaticText1.Height;
+  FActiveQueryText3.ReadOnly:=true;
+  FActiveQueryText3.Align:=alTop;
+  //FActiveQueryText3.Width:=TabSheet3.Width div 4;
+  FActiveQueryText3.TextEditor.Gutter.Visible:=false;
+  Splitter5.Align:=alTop;
+
+  FActiveQueryText4:=Tfdbm_SynEditorFrame.Create(Self);
+  FActiveQueryText4.Name:='FActiveQueryText4';
+  FActiveQueryText4.Parent:=Panel5;
+  FActiveQueryText4.ReadOnly:=true;
+  FActiveQueryText4.Align:=alClient;
+  //FActiveQueryText4.Width:=TabSheet3.Width div 4;
+  FActiveQueryText4.TextEditor.Gutter.Visible:=false;
+
+  StaticText2.Top:=Splitter5.Top + Splitter5.Height;
+  StaticText2.Align:=alTop;
+
   DoFillDatabaseList(TSQLEnginePostgre);
 
   PageControl1.ActivePageIndex:=0;
@@ -214,9 +265,11 @@ end;
 
 procedure TpgActivitiMonitorForm.PageControl1Change(Sender: TObject);
 begin
-  Timer2.Enabled:=PageControl1.ActivePage = TabSheet1;
+  Timer2.Enabled:=(PageControl1.ActivePage = TabSheet1) and (CheckBox2.Checked);
+  Timer3.Enabled:=(PageControl1.ActivePage = TabSheet3) and (CheckBox3.Checked);
 
   quConnections.Active:=(PageControl1.ActivePage = TabSheet1) and (quConnections.Connection.Connected);
+  quPGLocks.Active:=(PageControl1.ActivePage = TabSheet3) and (quConnections.Connection.Connected);
 
   if PageControl1.ActivePage = TabSheet2 then
     LoadDBStat;
@@ -245,11 +298,24 @@ begin
   FActiveQueryText2.EditorText:=quConnectionsquery.AsString;
 end;
 
+procedure TpgActivitiMonitorForm.quPGLocksAfterScroll(DataSet: TDataSet);
+begin
+  FActiveQueryText3.EditorText:=quPGLocksblocked_statement.AsString;
+  FActiveQueryText4.EditorText:=quPGLockscurrent_statement_in_blocking_process.AsString;
+end;
+
 procedure TpgActivitiMonitorForm.SpinEdit1Change(Sender: TObject);
 begin
   Timer2.Enabled:=false;
   Timer2.Interval:=SpinEdit1.Value * 1000;
-  Timer2.Enabled:=PageControl1.ActivePage = TabSheet1;
+  Timer2.Enabled:=(PageControl1.ActivePage = TabSheet1) and CheckBox2.Checked;
+end;
+
+procedure TpgActivitiMonitorForm.SpinEdit2Change(Sender: TObject);
+begin
+  Timer3.Enabled:=false;
+  Timer3.Interval:=SpinEdit2.Value * 1000;
+  Timer3.Enabled:=(PageControl1.ActivePage = TabSheet3) and CheckBox3.Checked;
 end;
 
 procedure TpgActivitiMonitorForm.Timer2Timer(Sender: TObject);
@@ -260,6 +326,12 @@ begin
   end;
 end;
 
+procedure TpgActivitiMonitorForm.Timer3Timer(Sender: TObject);
+begin
+  if pgStatDB.Connected and CheckBox3.Checked then
+    RefreshPGLocks;
+end;
+
 procedure TpgActivitiMonitorForm.tlsCancelQueryExecute(Sender: TObject);
 begin
   if QuestionBox(sCancelQueryQuestion) then
@@ -267,7 +339,7 @@ begin
     quCancelQuery.ParamByName('pid').AsInteger:=quConnectionspid.AsInteger;
     quCancelQuery.Open;
     quCancelQuery.Close;
-    tlsRefresh.Execute;
+    tlsRefreshConnectionsList.Execute;
   end;
 end;
 
@@ -278,13 +350,18 @@ begin
     quTerminate.ParamByName('pid').AsInteger:=quConnectionspid.AsInteger;
     quTerminate.Open;
     quTerminate.Close;
-    tlsRefresh.Execute;
+    tlsRefreshConnectionsList.Execute;
   end;
 end;
 
-procedure TpgActivitiMonitorForm.tlsRefreshExecute(Sender: TObject);
+procedure TpgActivitiMonitorForm.tlsRefreshConnectionsListExecute(Sender: TObject);
 begin
   RefreshConnections;
+end;
+
+procedure TpgActivitiMonitorForm.tlsRefreskPGLocksExecute(Sender: TObject);
+begin
+  RefreshPGLocks;
 end;
 
 procedure TpgActivitiMonitorForm.Localize;
@@ -294,12 +371,17 @@ begin
   tabDashboard.Caption:=sDashboard;
   TabSheet1.Caption:=sConnections;
   TabSheet2.Caption:=sStatistic;
+  TabSheet3.Caption:=sPGLocks;
   Label3.Caption:=sRefreshIntervalInSeconds;
   CheckBox1.Caption:=sRefresh;
   CheckBox2.Caption:=sRefresh;
-  tlsRefresh.Caption:=sRefreshDataHint;
+  CheckBox3.Caption:=sRefresh;
+  tlsRefreshConnectionsList.Caption:=sRefreshDataHint;
+  tlsRefreskPGLocks.Caption:=sRefreshDataHint;
   tlsCancelQuery.Caption:=sCancelQuery;
   tlsDisconectConnection.Caption:=sDisconectConnection;
+  StaticText1.Caption:=sBlockedStatement;
+  StaticText2.Caption:=sCurrentStatementInBlockingProcess;
 
   RxDBGrid3.ColumnByFieldName('PARAM').Title.Caption:=sParamName;
   RxDBGrid3.ColumnByFieldName('VALUE').Title.Caption:=sParamValue;
@@ -328,6 +410,11 @@ begin
   RxDBGrid2.ColumnByFieldName('backend_start').Title.Caption:=sBackendStart;
   RxDBGrid2.ColumnByFieldName('query_start').Title.Caption:=sQueryStart;
 //  RxDBGrid2.ColumnByFieldName('query').Title.Caption:=sQuery;
+
+  RxDBGrid4.ColumnByFieldName('blocked_pid').Title.Caption:=sBlockedPid;
+  RxDBGrid4.ColumnByFieldName('blocked_user').Title.Caption:=sBlockedUser;
+  RxDBGrid4.ColumnByFieldName('blocking_pid').Title.Caption:=sBlockingPid;
+  RxDBGrid4.ColumnByFieldName('blocking_user').Title.Caption:=sBlockingUser;
 
   Chart1.Title.Text.Text:=sDatabaseSessions;
   (Chart1.Series[0] as TLineSeries).Title:=sActive;
@@ -360,6 +447,8 @@ begin
 
   FActiveQueryText.SQLEngine:=ASQLEngine;
   FActiveQueryText2.SQLEngine:=ASQLEngine;
+  FActiveQueryText3.SQLEngine:=ASQLEngine;
+  FActiveQueryText4.SQLEngine:=ASQLEngine;
 end;
 
 procedure TpgActivitiMonitorForm.StatTimeTick;
@@ -415,6 +504,12 @@ procedure TpgActivitiMonitorForm.RefreshConnections;
 begin
   quConnections.Close;
   quConnections.Open;
+end;
+
+procedure TpgActivitiMonitorForm.RefreshPGLocks;
+begin
+  quPGLocks.Close;
+  quPGLocks.Open;
 end;
 
 procedure TpgActivitiMonitorForm.LoadDBStat;

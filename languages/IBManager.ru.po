@@ -356,6 +356,26 @@ msgstr "Сколько раз дисковые блоки обнаруживал
 msgid "Time spent writing data file blocks by backends in this database, in milliseconds"
 msgstr "Время, затраченное серверными процессами в этой базе данных, на запись блоков в файлы данных, в миллисекундах"
 
+#: fbmstrconstunit.sblockedpid
+msgid "Blocked pid"
+msgstr ""
+
+#: fbmstrconstunit.sblockedstatement
+msgid "Blocked statement"
+msgstr ""
+
+#: fbmstrconstunit.sblockeduser
+msgid "Blocked user"
+msgstr ""
+
+#: fbmstrconstunit.sblockingpid
+msgid "Blocking pid"
+msgstr ""
+
+#: fbmstrconstunit.sblockinguser
+msgid "Blocking user"
+msgstr ""
+
 #: fbmstrconstunit.sbody
 msgid "Body"
 msgstr "Текст"
@@ -951,6 +971,10 @@ msgstr "Критерий"
 
 #: fbmstrconstunit.sctype
 msgid "CType"
+msgstr ""
+
+#: fbmstrconstunit.scurrentstatementinblockingprocess
+msgid "Current statement in blocking process"
 msgstr ""
 
 #: fbmstrconstunit.scurrentvalue
@@ -4181,6 +4205,10 @@ msgstr "Подтверждение пароля"
 msgid "Inherited right from owner roles"
 msgstr "Наследует права из родительских ролей"
 
+#: fbmstrconstunit.spglocks
+msgid "PG locks"
+msgstr ""
+
 #: fbmstrconstunit.spgloginenabled
 msgid "Login enabled"
 msgstr "Вход разрешён"
@@ -6475,3 +6503,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

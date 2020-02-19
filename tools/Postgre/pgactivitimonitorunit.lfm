@@ -2,52 +2,43 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
   Left = 385
   Height = 648
   Top = 169
-  Width = 1181
+  Width = 1271
   Caption = 'Activiti monitor'
   ClientHeight = 648
-  ClientWidth = 1181
+  ClientWidth = 1271
   OnClose = FormClose
   OnCreate = FormCreate
   inherited Panel1: TPanel
-    Height = 46
-    Width = 1181
-    ClientHeight = 46
-    ClientWidth = 1181
+    Width = 1271
+    ClientWidth = 1271
     TabOrder = 1
-    inherited Label1: TLabel
-      Height = 17
-      Top = 22
-      Width = 57
-    end
     inherited ComboBox1: TComboBox
-      Left = 70
-      Height = 32
-      Width = 1104
+      Width = 1194
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
     Height = 602
     Top = 46
-    Width = 1181
-    ActivePage = TabSheet1
+    Width = 1271
+    ActivePage = TabSheet3
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
       ClientHeight = 571
-      ClientWidth = 1171
+      ClientWidth = 1261
       object Chart1: TChart
         AnchorSideLeft.Control = tabDashboard
         AnchorSideTop.Control = tabDashboard
         AnchorSideRight.Control = Label2
         AnchorSideBottom.Control = Splitter2
         Left = 0
-        Height = 315
+        Height = 316
         Top = 0
-        Width = 585
+        Width = 630
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -101,7 +92,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = tabDashboard
         AnchorSideTop.Side = asrCenter
-        Left = 585
+        Left = 630
         Height = 1
         Top = 285
         Width = 1
@@ -114,10 +105,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Control = tabDashboard
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
-        Left = 586
-        Height = 315
+        Left = 631
+        Height = 316
         Top = 0
-        Width = 585
+        Width = 630
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -166,14 +157,14 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       object Panel3: TPanel
         Left = 0
         Height = 250
-        Top = 320
-        Width = 1171
+        Top = 321
+        Width = 1261
         Align = alBottom
         ClientHeight = 250
-        ClientWidth = 1171
+        ClientWidth = 1261
         TabOrder = 2
         object Splitter1: TSplitter
-          Left = 1165
+          Left = 1255
           Height = 248
           Top = 1
           Width = 5
@@ -186,7 +177,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 1
           Height = 23
           Top = 1
-          Width = 171
+          Width = 157
           Caption = 'Refresh active session'
           Checked = True
           State = cbChecked
@@ -202,7 +193,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 1
           Height = 225
           Top = 24
-          Width = 1164
+          Width = 1254
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = True
           AutoSort = True
@@ -428,8 +419,8 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 315
-        Width = 1171
+        Top = 316
+        Width = 1261
         Align = alBottom
         ResizeAnchor = akBottom
       end
@@ -437,12 +428,12 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     object TabSheet1: TTabSheet
       Caption = 'Connections'
       ClientHeight = 571
-      ClientWidth = 1171
+      ClientWidth = 1261
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 521
         Top = 50
-        Width = 1166
+        Width = 1256
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -697,22 +688,23 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 50
         Top = 0
-        Width = 1171
+        Width = 1261
         Align = alTop
         ClientHeight = 50
-        ClientWidth = 1171
+        ClientWidth = 1261
         TabOrder = 1
         object CheckBox2: TCheckBox
           AnchorSideLeft.Control = SpinEdit1
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
           AnchorSideTop.Side = asrCenter
-          Left = 346
+          Left = 331
           Height = 23
           Top = 14
           Width = 73
           BorderSpacing.Left = 6
           Caption = 'Refresh'
+          OnChange = SpinEdit1Change
           TabOrder = 0
         end
         object Label3: TLabel
@@ -720,7 +712,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit1
           AnchorSideBottom.Side = asrBottom
-          Left = 79
+          Left = 64
           Height = 17
           Top = 23
           Width = 169
@@ -732,7 +724,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Label3
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
-          Left = 254
+          Left = 239
           Height = 33
           Top = 7
           Width = 86
@@ -750,8 +742,8 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 7
           Height = 36
           Top = 7
-          Width = 66
-          Action = tlsRefresh
+          Width = 51
+          Action = tlsRefreshConnectionsList
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
           BorderSpacing.Around = 6
@@ -759,7 +751,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         end
       end
       object Splitter3: TSplitter
-        Left = 1166
+        Left = 1256
         Height = 521
         Top = 50
         Width = 5
@@ -767,10 +759,307 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         ResizeAnchor = akRight
       end
     end
+    object TabSheet3: TTabSheet
+      Caption = 'PG locks'
+      ClientHeight = 571
+      ClientWidth = 1261
+      object Panel4: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 1261
+        Align = alTop
+        ClientHeight = 50
+        ClientWidth = 1261
+        TabOrder = 0
+        object CheckBox3: TCheckBox
+          AnchorSideLeft.Control = SpinEdit2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel4
+          AnchorSideTop.Side = asrCenter
+          Left = 351
+          Height = 23
+          Top = 14
+          Width = 73
+          BorderSpacing.Left = 6
+          Caption = 'Refresh'
+          OnChange = SpinEdit2Change
+          TabOrder = 0
+        end
+        object Label4: TLabel
+          AnchorSideLeft.Control = SpeedButton2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideBottom.Control = SpinEdit2
+          AnchorSideBottom.Side = asrBottom
+          Left = 84
+          Height = 17
+          Top = 23
+          Width = 169
+          Anchors = [akLeft, akBottom]
+          Caption = 'Refresh interval (in seconds)'
+          ParentColor = False
+        end
+        object SpinEdit2: TSpinEdit
+          AnchorSideLeft.Control = Label4
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel4
+          Left = 259
+          Height = 33
+          Top = 7
+          Width = 86
+          BorderSpacing.Around = 6
+          MaxValue = 10000
+          OnChange = SpinEdit2Change
+          TabOrder = 1
+          Value = 10
+        end
+        object SpeedButton2: TSpeedButton
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Panel4
+          AnchorSideBottom.Control = Panel4
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 36
+          Top = 7
+          Width = 71
+          Action = tlsRefreskPGLocks
+          Anchors = [akTop, akLeft, akBottom]
+          AutoSize = True
+          BorderSpacing.Around = 6
+          Flat = True
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            200000000000000400006400000064000000000000000000000000000000A466
+            365FAA552B06000000000000000080800002A4653449A86D3D96AC7143CBAC71
+            43CBA96B3E91A665352B0000000000000000000000000000000000000000A467
+            35FDA96D3DB8AA552B06A567344AA96E3EDFB47D51F1D6AC8DFEE6C3A9FFE7C3
+            AAFFD1A584FBAA6E3FF3A6683A7300000000000000000000000000000000A566
+            35FEBE875DF5A86A3ADFAD7344F3E7BDA1FFFFDFCBFFFFE1CEFFFFE3D2FFF1D1
+            BCFFF2D3BEFFF4D5C1FFB07749F3A467375C000000000000000000000000A566
+            35FEFDCBABFFDBA680FFFACCAEFFFFD4B8FFFFD6BBFFDFB08EFEAD7142F3A96E
+            3EE8A96D3DE5AD7142F3CFA07CFFA86C3BF1A2682E160000000000000000A566
+            35FEFFC49DFFFFC6A1FFFFC8A4FFFEC9A5FFC68C61F6A96C3BD9A56834360000
+            000000000000A4653535A86C3CDCA76939FEA56738770000000000000000A566
+            35FEFFBB8DFFFFBD90FFFFBF94FFDC9E72FFA76836F0A5692D11000000000000
+            00000000000000000000A46D370EA96C3DC6A86B3ADC0000000000000000A566
+            35FEFFB380FFFFB380FFFFB583FFFDB585FFBE7F4EF5AA6C3AB9AA552B060000
+            0000000000000000000000000000926D2407A466365F0000000000000000A668
+            36F0A46735FDA46735FDA46735FDA46735FDA46735FDA46735FDA36735610000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000A3673561A46735FDA566
+            35FEA56635FEA56635FEA56635FEA56635FEA66937F10000000000000000A466
+            365F926D240700000000000000000000000000000000AA552B06A96B39B8BE7E
+            4DF4FDB585FFFFB583FFFFB380FFFFB380FFA56635FE0000000000000000A86B
+            3ADCA86B3CC59D623B0D00000000000000000000000000000000A5692D11A768
+            36F0DC9E72FFFFBF94FFFFBD90FFFFBB8DFFA56635FE0000000000000000A667
+            3779A76938FEA96C3CD9A56535300000000000000000A4653535A96C3BD9C68C
+            61F6FEC9A5FFFFC8A4FFFFC6A1FFFFC49DFFA56635FE00000000000000009F6A
+            3518A86C3CF1CE9E7BFEAB7040F4AB6E3FE3AA6D3DE7AC7142F3DFB08EFEFFD6
+            BBFFFFD4B8FFFACCAEFFDBA680FFFDCBABFFA56635FE00000000000000000000
+            0000A469365FB0794CF3F4D6C3FFF0D0BBFFF0D1BCFFFFE3D2FFFFE1CEFFFFDF
+            CBFFE7BDA1FFAD7344F4A86A3ADFBE875DF5A56635FE00000000000000000000
+            000000000000A76B3C77AB6F40F3D2A887FBE8C5ACFFEBC9B1FFD7AE90FEB47E
+            53F1AA6E3FE0A567344AAA552B06A96D3DB8A46735FD00000000000000000000
+            00000000000000000000A367362FA86C3D93AC7143CBAB7041CFA96D3D9AA366
+            334B808000020000000000000000AA552B06A466365F00000000
+          }
+        end
+      end
+      object RxDBGrid4: TRxDBGrid
+        Left = 0
+        Height = 521
+        Top = 50
+        Width = 924
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Blocked PID'
+            Width = 120
+            FieldName = 'blocked_pid'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footer.Alignment = taRightJustify
+            Footer.ValueType = fvtCount
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Blocked User'
+            Width = 200
+            FieldName = 'blocked_user'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Blocking PID'
+            Width = 120
+            FieldName = 'blocking_pid'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'Blocking User'
+            Width = 250
+            FieldName = 'blocking_user'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clYellow
+        FooterOptions.RowCount = 1
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickFilter]
+        FooterColor = clYellow
+        FooterRowCount = 1
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = True
+        FocusColor = clRed
+        SelectedColor = clHighlight
+        GridLineStyle = psSolid
+        DataSource = dsPGLocks
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+      end
+      object Splitter4: TSplitter
+        Left = 924
+        Height = 521
+        Top = 50
+        Width = 5
+        Align = alRight
+        ResizeAnchor = akRight
+      end
+      object Panel5: TPanel
+        Left = 929
+        Height = 521
+        Top = 50
+        Width = 332
+        Align = alRight
+        ClientHeight = 521
+        ClientWidth = 332
+        TabOrder = 3
+        object Splitter5: TSplitter
+          Cursor = crVSplit
+          Left = 1
+          Height = 5
+          Top = 515
+          Width = 330
+          Align = alBottom
+          ResizeAnchor = akBottom
+        end
+        object StaticText2: TStaticText
+          Left = 33
+          Height = 17
+          Top = 299
+          Width = 65
+          Caption = 'Current statement in blocking process'
+          TabOrder = 1
+        end
+        object StaticText1: TStaticText
+          Left = 1
+          Height = 17
+          Top = 1
+          Width = 330
+          Align = alTop
+          Caption = 'Blocked statement'
+          TabOrder = 2
+        end
+      end
+    end
     object TabSheet2: TTabSheet
       Caption = 'Statistic'
       ClientHeight = 571
-      ClientWidth = 1171
+      ClientWidth = 1261
       object RxDBGrid3: TRxDBGrid
         Left = 0
         Height = 571
@@ -784,7 +1073,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 572
+            Width = 577
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -799,7 +1088,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 572
+            Width = 578
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -899,10 +1188,14 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       Caption = 'Disconect connection'
       OnExecute = tlsDisconectConnectionExecute
     end
-    object tlsRefresh: TAction
-      Caption = 'tlsRefresh'
+    object tlsRefreshConnectionsList: TAction
+      Caption = 'Refresh'
       ImageIndex = 10
-      OnExecute = tlsRefreshExecute
+      OnExecute = tlsRefreshConnectionsListExecute
+    end
+    object tlsRefreskPGLocks: TAction
+      Caption = 'Refresh'
+      OnExecute = tlsRefreskPGLocksExecute
     end
   end
   object dsActiveSessions: TDataSource[4]
@@ -1119,6 +1412,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       'codepage='
       'controls_cp=CP_UTF8'
     )
+    Connected = True
     DesignConnection = True
     BeforeConnect = pgStatDBBeforeConnect
     HostName = '127.0.0.1'
@@ -1523,7 +1817,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       Caption = '-'
     end
     object MenuItem4: TMenuItem
-      Action = tlsRefresh
+      Action = tlsRefreshConnectionsList
     end
   end
   object DateTimeIntervalChartSource1: TDateTimeIntervalChartSource[24]
@@ -1575,5 +1869,114 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Name = 'pid'
         ParamType = ptUnknown
       end>
+  end
+  object Timer3: TTimer[27]
+    Enabled = False
+    Interval = 10000
+    OnTimer = Timer3Timer
+    Left = 376
+    Top = 224
+  end
+  object dsPGLocks: TDataSource[28]
+    DataSet = quPGLocks
+    Left = 432
+    Top = 568
+  end
+  object quPGLocks: TZQuery[29]
+    Connection = pgStatDB
+    AfterOpen = quPGLocksAfterScroll
+    AfterScroll = quPGLocksAfterScroll
+    SQL.Strings = (
+      'SELECT blocked_locks.pid     AS blocked_pid,'
+      '         blocked_activity.usename  AS blocked_user,'
+      '         blocking_locks.pid     AS blocking_pid,'
+      '         blocking_activity.usename AS blocking_user,'
+      '         blocked_activity.query    AS blocked_statement,'
+      '         blocking_activity.query   AS current_statement_in_blocking_process'
+      '   FROM  pg_catalog.pg_locks         blocked_locks'
+      '    JOIN pg_catalog.pg_stat_activity blocked_activity  ON blocked_activity.pid = blocked_locks.pid'
+      '    JOIN pg_catalog.pg_locks         blocking_locks'
+      '        ON blocking_locks.locktype = blocked_locks.locktype'
+      '        AND blocking_locks.DATABASE IS NOT DISTINCT FROM blocked_locks.DATABASE'
+      '        AND blocking_locks.relation IS NOT DISTINCT FROM blocked_locks.relation'
+      '        AND blocking_locks.page IS NOT DISTINCT FROM blocked_locks.page'
+      '        AND blocking_locks.tuple IS NOT DISTINCT FROM blocked_locks.tuple'
+      '        AND blocking_locks.virtualxid IS NOT DISTINCT FROM blocked_locks.virtualxid'
+      '        AND blocking_locks.transactionid IS NOT DISTINCT FROM blocked_locks.transactionid'
+      '        AND blocking_locks.classid IS NOT DISTINCT FROM blocked_locks.classid'
+      '        AND blocking_locks.objid IS NOT DISTINCT FROM blocked_locks.objid'
+      '        AND blocking_locks.objsubid IS NOT DISTINCT FROM blocked_locks.objsubid'
+      '        AND blocking_locks.pid != blocked_locks.pid'
+      ''
+      '    JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_activity.pid = blocking_locks.pid'
+      '   WHERE NOT blocked_locks.GRANTED;'
+    )
+    Params = <>
+    Left = 472
+    Top = 568
+    object quPGLocksblocked_pid: TLongintField
+      FieldKind = fkData
+      FieldName = 'blocked_pid'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quPGLocksblocked_user: TStringField
+      FieldKind = fkData
+      FieldName = 'blocked_user'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quPGLocksblocking_pid: TLongintField
+      FieldKind = fkData
+      FieldName = 'blocking_pid'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object quPGLocksblocking_user: TStringField
+      FieldKind = fkData
+      FieldName = 'blocking_user'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 256
+    end
+    object quPGLocksblocked_statement: TMemoField
+      FieldKind = fkData
+      FieldName = 'blocked_statement'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object quPGLockscurrent_statement_in_blocking_process: TMemoField
+      FieldKind = fkData
+      FieldName = 'current_statement_in_blocking_process'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object PopupMenu2: TPopupMenu[30]
+    Left = 512
+    Top = 568
   end
 end
