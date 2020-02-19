@@ -35,10 +35,13 @@ type
     ppParamTypeNotDefined, ppLocalVarNameNotDefined, ppLocalVarTypeNotDefined);
 
   TppMsgRec = record
-
+    MsgType:TppMsgType;
+    InfoMsg:string;
+    Info1:Integer;
+    Info2:Integer;
   end;
 
-  TppMsgListDblClick = procedure(Sender:TfbmCompillerMessagesFrame) of object;
+  TppMsgListEvent = procedure(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec) of object;
 
   { TfbmCompillerMessagesFrame }
 
@@ -53,22 +56,32 @@ type
     RxDBGrid1: TRxDBGrid;
     rxMsgList: TRxMemoryData;
     rxMsgListID: TLongintField;
+    rxMsgListInfo1: TLongintField;
+    rxMsgListInfo2: TLongintField;
+    rxMsgListInfoMsg: TStringField;
     rxMsgListMsgType: TLongintField;
     rxMsgListMsgTypeImg: TLongintField;
     rxMsgListText: TStringField;
     SpeedButton1: TSpeedButton;
     StaticText1: TStaticText;
     procedure lvClearExecute(Sender: TObject);
+    procedure lvRemoveVarExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
+    procedure rxMsgListAfterScroll(DataSet: TDataSet);
     procedure rxMsgListMsgTypeGetText(Sender: TField; var aText: string;
       DisplayText: Boolean);
     procedure SpeedButton1Click(Sender: TObject);
   private
+    FOnMsgListDblClick: TppMsgListEvent;
+    FOnMsgListRemoveNotUsedVar: TppMsgListEvent;
     procedure Localize;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure AddMsg(AMsgType:TppMsgType; AMsg:string);
+    procedure AddMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2:Integer);
     procedure Clear;
+
+    property OnMsgListDblClick:TppMsgListEvent read FOnMsgListDblClick write FOnMsgListDblClick;
+    property OnMsgListRemoveNotUsedVar:TppMsgListEvent read FOnMsgListRemoveNotUsedVar write FOnMsgListRemoveNotUsedVar;
   end;
 
 implementation
@@ -89,6 +102,8 @@ begin
   RxDBGrid1.ColumnByFieldName('Text').Title.Caption:=sText;
 
   StaticText1.Caption:=sMessages;
+  lvClear.Caption:=sClearMesaages;
+  lvRemoveVar.Caption:=sRemoveVariable;
 end;
 
 constructor TfbmCompillerMessagesFrame.Create(TheOwner: TComponent);
@@ -115,8 +130,22 @@ begin
 end;
 
 procedure TfbmCompillerMessagesFrame.RxDBGrid1DblClick(Sender: TObject);
+var
+  RecInfo: TppMsgRec;
 begin
-  //
+  if (rxMsgList.Active) and (rxMsgList.RecordCount>0) and Assigned(FOnMsgListDblClick) then
+  begin
+    RecInfo.MsgType:=TppMsgType(rxMsgListMsgType.AsInteger);
+    RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
+    RecInfo.Info1:=rxMsgListInfo1.AsInteger;
+    RecInfo.Info2:=rxMsgListInfo2.AsInteger;
+    FOnMsgListDblClick(Self, RecInfo)
+  end;
+end;
+
+procedure TfbmCompillerMessagesFrame.rxMsgListAfterScroll(DataSet: TDataSet);
+begin
+  lvRemoveVar.Enabled:=TppMsgType(rxMsgListMsgType.AsInteger) in [ppLocalVarNotUsed, ppInParamNotUsed, ppOutParamNotUsed];
 end;
 
 procedure TfbmCompillerMessagesFrame.lvClearExecute(Sender: TObject);
@@ -125,14 +154,44 @@ begin
     rxMsgList.CloseOpen;
 end;
 
-procedure TfbmCompillerMessagesFrame.AddMsg(AMsgType: TppMsgType; AMsg: string);
+procedure TfbmCompillerMessagesFrame.lvRemoveVarExecute(Sender: TObject);
+var
+  RecInfo: TppMsgRec;
+begin
+  if (rxMsgList.Active) and (rxMsgList.RecordCount>0) and Assigned(FOnMsgListRemoveNotUsedVar) then
+  begin
+    RecInfo.MsgType:=TppMsgType(rxMsgListMsgType.AsInteger);
+    RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
+    RecInfo.Info1:=rxMsgListInfo1.AsInteger;
+    RecInfo.Info2:=rxMsgListInfo2.AsInteger;
+    FOnMsgListRemoveNotUsedVar(Self, RecInfo)
+  end;
+end;
+
+procedure TfbmCompillerMessagesFrame.AddMsg(AMsgType: TppMsgType; AMsg: string;
+  AInfo1, AInfo2: Integer);
 begin
   if not rxMsgList.Active then
     rxMsgList.Open;
   rxMsgList.Append;
   rxMsgListID.AsInteger:=rxMsgList.RecordCount + 1;
   rxMsgListMsgType.AsInteger:=Ord(AMsgType);
-  rxMsgListText.AsString:=AMsg;
+  rxMsgListInfoMsg.AsString:=AMsg;
+
+  case AMsgType of
+    ppLocalVarNameNotDefined:rxMsgListText.AsString:=Format(sLocalVariableNameNotDefined, [AMsg]);
+    ppLocalVarTypeNotDefined:rxMsgListText.AsString:=Format(sLocalVariableTypeNotDefined, [AMsg]);
+    ppParamNameNotDefined:rxMsgListText.AsString:=Format(sParamNameNotDefined, [AMsg]);
+    ppParamTypeNotDefined:rxMsgListText.AsString:=Format(sParamTypeNotDefined, [AMsg]);
+    ppLocalVarNotUsed:rxMsgListText.AsString:=Format(sLocalVariableNotUsed, [AMsg]);
+    ppInParamNotUsed:rxMsgListText.AsString:=Format(sInputParamNotUsed, [AMsg]);
+    ppOutParamNotUsed:rxMsgListText.AsString:=Format(sOutputParamNotUsed, [AMsg]);
+  else
+    rxMsgListText.AsString:=AMsg;
+  end;
+
+  rxMsgListInfo1.AsInteger:=AInfo1;
+  rxMsgListInfo2.AsInteger:=AInfo2;
 
   case AMsgType of
     ppInParamNotUsed, ppOutParamNotUsed,

@@ -436,6 +436,14 @@ msgstr ""
 msgid "Clear current query..."
 msgstr ""
 
+#: fbmstrconstunit.sclearmesaages
+msgid "Clear mesaages"
+msgstr ""
+
+#: fbmstrconstunit.sclearmessagelistquestion
+msgid "Clear message list?"
+msgstr ""
+
 #: fbmstrconstunit.sclearsearchresult
 msgid "Clear search result"
 msgstr ""
@@ -2874,6 +2882,11 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
+#: fbmstrconstunit.slocalvariablenamenotdefined
+#, object-pascal-format
+msgid "Variable name not defined, or error in param name - '%s'"
+msgstr ""
+
 #: fbmstrconstunit.slocalvariablenotused
 #, object-pascal-format
 msgid "Variable '%s' declared, but not used"
@@ -2881,6 +2894,11 @@ msgstr ""
 
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
+msgstr ""
+
+#: fbmstrconstunit.slocalvariabletypenotdefined
+#, object-pascal-format
+msgid "Variable type not defined - '%s'"
 msgstr ""
 
 #: fbmstrconstunit.slockingmode
@@ -4448,6 +4466,10 @@ msgstr ""
 
 #: fbmstrconstunit.sremovestep
 msgid "Remove step"
+msgstr ""
+
+#: fbmstrconstunit.sremovevariable
+msgid "Remove variable"
 msgstr ""
 
 #: fbmstrconstunit.srename

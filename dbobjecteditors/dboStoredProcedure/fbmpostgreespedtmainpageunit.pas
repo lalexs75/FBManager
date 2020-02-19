@@ -164,7 +164,10 @@ type
     procedure TextEditorPopUpMenu(Sender: TObject);
     function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
 
-    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string);
+    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
+    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
+    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
+
     procedure DoPreParseCode;
   public
     function PageName:string;override;
@@ -836,8 +839,80 @@ begin
   end;
 end;
 
+procedure TfbmPostGreeFunctionEdtMainPage.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+begin
+
+  case AInfo.MsgType of
+    ppLocalVarNameNotDefined:
+      begin
+        PageControl1.ActivePage:=TabSheet3;
+        FLocalVars.RxDBGrid2.SelectedField:=FLocalVars.rxLocalVarsVAR_NAME;
+        FLocalVars.rxLocalVars.RecNo:=AInfo.Info2;
+      end;
+    ppLocalVarTypeNotDefined:
+      begin
+        PageControl1.ActivePage:=TabSheet3;
+        FLocalVars.RxDBGrid2.SelectedField:=FLocalVars.rxLocalVarsVAR_NAME;
+        FLocalVars.rxLocalVars.RecNo:=AInfo.Info2;
+      end;
+    ppParamNameNotDefined:
+      begin
+        PageControl1.ActivePage:=TabSheet2;
+        RxDBGrid1.SelectedField:=rxParamListParName;
+        rxParamList.RecNo:=AInfo.Info2;
+      end;
+    ppParamTypeNotDefined:
+      begin
+        PageControl1.ActivePage:=TabSheet2;
+        RxDBGrid1.SelectedField:=rxParamListParName;
+        rxParamList.RecNo:=AInfo.Info2;
+      end;
+    ppLocalVarNotUsed:
+      begin
+        PageControl1.ActivePage:=TabSheet3;
+        FLocalVars.RxDBGrid2.SelectedField:=FLocalVars.rxLocalVarsVAR_NAME;
+        FLocalVars.rxLocalVars.Locate('VAR_NAME', AInfo.InfoMsg, []);
+      end;
+    ppInParamNotUsed:
+      begin
+        PageControl1.ActivePage:=TabSheet2;
+        RxDBGrid1.SelectedField:=rxParamListParName;
+        rxParamList.Locate('ParName', AInfo.InfoMsg, []);
+      end;
+    ppOutParamNotUsed:
+      begin
+        PageControl1.ActivePage:=TabSheet2;
+        RxDBGrid1.SelectedField:=rxParamListParName;
+        rxParamList.Locate('ParName', AInfo.InfoMsg, []);
+      end;
+  end;
+end;
+
+procedure TfbmPostGreeFunctionEdtMainPage.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+begin
+  case AInfo.MsgType of
+    ppLocalVarNotUsed:
+      begin
+        PageControl1.ActivePage:=TabSheet3;
+        FLocalVars.RxDBGrid2.SelectedField:=FLocalVars.rxLocalVarsVAR_NAME;
+        if FLocalVars.rxLocalVars.Locate('VAR_NAME', AInfo.InfoMsg, []) then
+          FLocalVars.lvDelete.Execute;
+      end;
+    ppOutParamNotUsed,
+    ppInParamNotUsed:
+      begin
+        PageControl1.ActivePage:=TabSheet2;
+        RxDBGrid1.SelectedField:=rxParamListParName;
+        if rxParamList.Locate('ParName', AInfo.InfoMsg, []) then
+          parDel.Execute;
+      end;
+  end;
+end;
+
 procedure TfbmPostGreeFunctionEdtMainPage.ShowMsg(AMsgType: TppMsgType;
-  AMsg: string);
+  AMsg: string; AInfo1, AInfo2: Integer);
 begin
   if not Assigned(FCompillerMessages) then
   begin
@@ -848,6 +923,8 @@ begin
     FCompillerMessages.AnchorSideLeft.Control:=Self;
     FCompillerMessages.AnchorSideRight.Control:=Self;
     FCompillerMessages.Anchors:=[akLeft, akRight, akBottom];
+    FCompillerMessages.OnMsgListDblClick:=@ppMsgListDblClick;
+    FCompillerMessages.OnMsgListRemoveNotUsedVar:=@ppMsgListRemoveVar;
     Splitter2.Visible:=true;
     Splitter2.Top:=FCompillerMessages.Top - Splitter2.Height;
   end
@@ -860,7 +937,7 @@ begin
     FCompillerMessages.Clear;
   end;
 
-  FCompillerMessages.AddMsg(AMsgType, AMsg);
+  FCompillerMessages.AddMsg(AMsgType, AMsg, AInfo1, AInfo2);
 end;
 
 procedure TfbmPostGreeFunctionEdtMainPage.DoPreParseCode;
@@ -886,13 +963,13 @@ begin
   FLocalVars.rxLocalVars.First;
   while not FLocalVars.rxLocalVars.EOF do
   begin
-    sLocalVars.AddObject(FLocalVars.rxLocalVarsVAR_NAME.AsString);
+    sLocalVars.Add(FLocalVars.rxLocalVarsVAR_NAME.AsString);
 
     if (not IsValidIdent(FLocalVars.rxLocalVarsVAR_NAME.AsString)) then
-      ShowMsg(ppLocalVarNameNotDefined, Format(sParamNameNotDefined, [FLocalVars.rxLocalVarsVAR_NAME.AsString]));
+      ShowMsg(ppLocalVarNameNotDefined, FLocalVars.rxLocalVarsVAR_NAME.AsString, 1, FLocalVars.rxLocalVars.RecNo);
 
     if (Trim(FLocalVars.rxLocalVarsVAR_TYPE.AsString) = '') then
-      ShowMsg(ppLocalVarTypeNotDefined, Format(sParamTypeNotDefined, [FLocalVars.rxLocalVarsVAR_TYPE.AsString]));
+      ShowMsg(ppLocalVarTypeNotDefined, FLocalVars.rxLocalVarsVAR_TYPE.AsString, 1, FLocalVars.rxLocalVars.RecNo);
     FLocalVars.rxLocalVars.Next;
   end;
   FLocalVars.rxLocalVars.Bookmark:=B;
@@ -907,10 +984,10 @@ begin
     sLocalVars.AddObject(rxParamListParName.AsString, TObject(PtrInt(rxParamListInOut.AsInteger)));
 
     if (not IsValidIdent(rxParamListParName.AsString)) then
-      ShowMsg(ppParamNameNotDefined, Format(sParamNameNotDefined, [rxParamListParName.AsString]));
+      ShowMsg(ppParamNameNotDefined, rxParamListParName.AsString, 2, rxParamList.RecNo);
 
     if (Trim(rxParamListType.AsString) = '') then
-      ShowMsg(ppParamTypeNotDefined, Format(sParamTypeNotDefined, [rxParamListType.AsString]));
+      ShowMsg(ppParamTypeNotDefined, rxParamListType.AsString, 2, rxParamList.RecNo);
 
     rxParamList.Next;
   end;
@@ -943,14 +1020,14 @@ begin
     J:=TSPVarType(IntPtr(sLocalVars.Objects[i]));
 
     case J of
-      spvtLocal:ShowMsg(ppLocalVarNotUsed, Format(sLocalVariableNotUsed, [S]));
+      spvtLocal:ShowMsg(ppLocalVarNotUsed, S, -1, -1);
       spvtInOut,
       spvtVariadic,
-      spvtInput:ShowMsg(ppInParamNotUsed, Format(sInputParamNotUsed, [S]));
+      spvtInput:ShowMsg(ppInParamNotUsed,  S, -1, -1);
       spvtTable,
-      spvtOutput:ShowMsg(ppOutParamNotUsed, Format(sOutputParamNotUsed, [S]));
+      spvtOutput:ShowMsg(ppOutParamNotUsed, S, -1, -1);
     else
-      ShowMsg(ppNone, S);
+      ShowMsg(ppNone, S, -1, -1);
     end;
   end;
   sLocalVars.Free;

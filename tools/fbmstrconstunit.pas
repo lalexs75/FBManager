@@ -593,6 +593,8 @@ resourcestring
   sForEachRow                       = 'For each row';
   sFillFieldNameAndType             = 'Fill field name and type?';
   sText                             = 'Text';
+  sClearMesaages                    = 'Clear mesaages';
+  sRemoveVariable                   = 'Remove variable';
 
   sDeactivateTrigger                = 'Deactivate trigger';
   sActivateTrigger                  = 'Activate trigger';

@@ -460,6 +460,14 @@ msgstr "Очистить"
 msgid "Clear current query..."
 msgstr "Очистить текущий запрос..."
 
+#: fbmstrconstunit.sclearmesaages
+msgid "Clear mesaages"
+msgstr ""
+
+#: fbmstrconstunit.sclearmessagelistquestion
+msgid "Clear message list?"
+msgstr ""
+
 #: fbmstrconstunit.sclearsearchresult
 msgid "Clear search result"
 msgstr "Очистить результат поиска"
@@ -2977,6 +2985,11 @@ msgstr "Загрузить шаблон по умолчанию?"
 msgid "Local"
 msgstr "Локально"
 
+#: fbmstrconstunit.slocalvariablenamenotdefined
+#, object-pascal-format
+msgid "Variable name not defined, or error in param name - '%s'"
+msgstr ""
+
 #: fbmstrconstunit.slocalvariablenotused
 #, object-pascal-format
 msgid "Variable '%s' declared, but not used"
@@ -2985,6 +2998,11 @@ msgstr "Переменная '%s' определена но не использ�
 #: fbmstrconstunit.slocalvariables
 msgid "Local variables"
 msgstr "Локальные переменные"
+
+#: fbmstrconstunit.slocalvariabletypenotdefined
+#, object-pascal-format
+msgid "Variable type not defined - '%s'"
+msgstr ""
 
 #: fbmstrconstunit.slockingmode
 msgid "Locking mode"
@@ -4593,6 +4611,10 @@ msgstr "Удалить ключ партицирования (колонка и�
 #: fbmstrconstunit.sremovestep
 msgid "Remove step"
 msgstr "Удалить шаг задания"
+
+#: fbmstrconstunit.sremovevariable
+msgid "Remove variable"
+msgstr ""
 
 #: fbmstrconstunit.srename
 #, object-pascal-format
@@ -6453,3 +6475,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

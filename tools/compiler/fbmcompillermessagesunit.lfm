@@ -15,7 +15,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 22
+    Height = 19
     Top = 0
     Width = 1105
     Anchors = [akTop, akLeft, akRight]
@@ -49,8 +49,8 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 231
-    Top = 22
+    Height = 234
+    Top = 19
     Width = 1125
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -98,7 +98,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Text'
-        Width = 917
+        Width = 922
         FieldName = 'Text'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -201,7 +201,21 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
       item
         Name = 'MsgTypeImg'
         DataType = ftInteger
+      end    
+      item
+        Name = 'Info1'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Info2'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'InfoMsg'
+        DataType = ftString
+        Size = 500
       end>
+    AfterScroll = rxMsgListAfterScroll
     PacketRecords = 0
     Left = 144
     Top = 116
@@ -244,6 +258,34 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
       ReadOnly = False
       Required = False
     end
+    object rxMsgListInfo1: TLongintField
+      FieldKind = fkData
+      FieldName = 'Info1'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxMsgListInfo2: TLongintField
+      FieldKind = fkData
+      FieldName = 'Info2'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object rxMsgListInfoMsg: TStringField
+      FieldKind = fkData
+      FieldName = 'InfoMsg'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 500
+    end
   end
   object dsMsgList: TDataSource
     DataSet = rxMsgList
@@ -260,8 +302,9 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
       OnExecute = lvClearExecute
     end
     object lvRemoveVar: TAction
-      Caption = 'lvRemoveVar'
+      Caption = 'Remove variable'
       ImageIndex = 107
+      OnExecute = lvRemoveVarExecute
     end
   end
   object PopupMenu1: TPopupMenu
