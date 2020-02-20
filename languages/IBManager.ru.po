@@ -4207,7 +4207,7 @@ msgstr "Наследует права из родительских ролей"
 
 #: fbmstrconstunit.spglocks
 msgid "PG locks"
-msgstr ""
+msgstr "Блокировки PostgreSQL"
 
 #: fbmstrconstunit.spgloginenabled
 msgid "Login enabled"

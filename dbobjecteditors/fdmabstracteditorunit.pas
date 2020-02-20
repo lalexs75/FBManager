@@ -59,7 +59,6 @@ type
     procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
     procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
 
-    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
   public
     FModifiedEvent:TNotifyEvent;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); virtual;
@@ -75,6 +74,7 @@ type
     procedure Localize;virtual;
     function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; virtual;
     procedure NotyfiDeleted(ADBObject:TDBObject); virtual;
+    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
     class function PageExists(ADBObject:TDBObject):Boolean; virtual;
   public
     property ReadOnly:boolean read FReadOnly write SetReadOnly;

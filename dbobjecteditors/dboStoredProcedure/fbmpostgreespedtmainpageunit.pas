@@ -179,7 +179,7 @@ type
 implementation
 uses rxAppUtils, LR_Class, LCLType, rxstrutils, IBManMainUnit, strutils, fbmStrConstUnit,
   pgTypes, ibmSqlUtilsUnit, pg_sql_lines_unit, pg_SqlParserUnit,
-  fbmPostGreeSPedtMainPage_EditParamUnit;
+  fbmPostGreeSPedtMainPage_EditParamUnit, fbmPgObjectEditorsUtils;
 
 {$R *.lfm}
 
@@ -922,83 +922,9 @@ begin
     exit; { TODO : Доделать получение локальных переменных парсером }
     //aSql.Text:=FLocalVars.ParseSQL(aSql.Text);
 
-  sLocalVars:=TStringList.Create;
-  sLocalVars.Sorted:=true;
-  sLocalVars.CaseSensitive:=false;
+  PGPreParsePlSQL(Self, EditorFrame.EditorText, FLocalVars,
+    rxParamList, rxParamListParName, rxParamListType, rxParamListInOut);
 
-  FLocalVars.rxLocalVars.DisableControls;
-  B:=FLocalVars.rxLocalVars.Bookmark;
-  FLocalVars.rxLocalVars.First;
-  while not FLocalVars.rxLocalVars.EOF do
-  begin
-    sLocalVars.Add(FLocalVars.rxLocalVarsVAR_NAME.AsString);
-
-    if (not IsValidIdent(FLocalVars.rxLocalVarsVAR_NAME.AsString)) then
-      ShowMsg(ppLocalVarNameNotDefined, FLocalVars.rxLocalVarsVAR_NAME.AsString, 1, FLocalVars.rxLocalVars.RecNo);
-
-    if (Trim(FLocalVars.rxLocalVarsVAR_TYPE.AsString) = '') then
-      ShowMsg(ppLocalVarTypeNotDefined, FLocalVars.rxLocalVarsVAR_TYPE.AsString, 1, FLocalVars.rxLocalVars.RecNo);
-    FLocalVars.rxLocalVars.Next;
-  end;
-  FLocalVars.rxLocalVars.Bookmark:=B;
-  FLocalVars.rxLocalVars.EnableControls;
-
-
-  rxParamList.DisableControls;
-  B:=rxParamList.Bookmark;
-  rxParamList.First;
-  while not rxParamList.EOF do
-  begin
-    sLocalVars.AddObject(rxParamListParName.AsString, TObject(PtrInt(rxParamListInOut.AsInteger)));
-
-    if (not IsValidIdent(rxParamListParName.AsString)) then
-      ShowMsg(ppParamNameNotDefined, rxParamListParName.AsString, 2, rxParamList.RecNo);
-
-    if (Trim(rxParamListType.AsString) = '') then
-      ShowMsg(ppParamTypeNotDefined, rxParamListType.AsString, 2, rxParamList.RecNo);
-
-    rxParamList.Next;
-  end;
-  rxParamList.Bookmark:=B;
-  rxParamList.EnableControls;
-
-
-
-//  if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) or (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then
-
-  P:=TSQLParser.Create(Trim(EditorFrame.EditorText), DBObject.OwnerDB);
-  while not P.Eof do
-  begin
-    S:=P.GetNextWord;
-    if S<>'' then
-    begin
-      if P.WordType(nil, S, nil) = stIdentificator then
-      begin
-        i:=sLocalVars.IndexOf(S);
-        if i > -1 then
-          sLocalVars.Delete(i);
-      end;
-    end;
-  end;
-  P.Free;
-
-  for i:=0 to sLocalVars.Count-1 do
-  begin
-    S:=sLocalVars[i];
-    J:=TSPVarType(IntPtr(sLocalVars.Objects[i]));
-
-    case J of
-      spvtLocal:ShowMsg(ppLocalVarNotUsed, S, -1, -1);
-      spvtInOut,
-      spvtVariadic,
-      spvtInput:ShowMsg(ppInParamNotUsed,  S, -1, -1);
-      spvtTable,
-      spvtOutput:ShowMsg(ppOutParamNotUsed, S, -1, -1);
-    else
-      ShowMsg(ppNone, S, -1, -1);
-    end;
-  end;
-  sLocalVars.Free;
 end;
 
 function TfbmPostGreeFunctionEdtMainPage.PageName: string;
@@ -1118,13 +1044,21 @@ begin
   FParamModified:=false;
   if not (ASQLObject is TPGSQLCreateFunction) then exit;
 
-  if TabSheet3.TabVisible then
+(*  if TabSheet3.TabVisible then
     if not FLocalVars.Validate then
     begin
       PageControl1.ActivePage:=TabSheet3;
       ErrorBox(sErrorVariableDefenition);
       Exit;
     end;
+*)
+  if Assigned(FCompillerMessages) then
+  if FCompillerMessages.IsError then
+  begin
+    //PageControl1.ActivePage:=TabSheet3;
+    ErrorBox(sErrorVariableDefenition);
+    Exit;
+  end;
 
   if (DBObject.State = sdboEdit)  then
   begin

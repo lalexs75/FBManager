@@ -10,9 +10,9 @@ inherited pgTriggerEditorPage: TpgTriggerEditorPage
     Height = 232
     Top = 0
     Width = 1013
-    ActivePage = TabSheet4
+    ActivePage = TabSheet5
     Align = alTop
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheet4: TTabSheet
       Caption = 'Declaration'

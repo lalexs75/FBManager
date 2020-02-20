@@ -72,6 +72,7 @@ type
       DisplayText: Boolean);
     procedure SpeedButton1Click(Sender: TObject);
   private
+    FIsError: boolean;
     FOnMsgListDblClick: TppMsgListEvent;
     FOnMsgListRemoveNotUsedVar: TppMsgListEvent;
     procedure Localize;
@@ -79,6 +80,7 @@ type
     constructor Create(TheOwner: TComponent); override;
     procedure AddMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2:Integer);
     procedure Clear;
+    property IsError:boolean read FIsError;
 
     property OnMsgListDblClick:TppMsgListEvent read FOnMsgListDblClick write FOnMsgListDblClick;
     property OnMsgListRemoveNotUsedVar:TppMsgListEvent read FOnMsgListRemoveNotUsedVar write FOnMsgListRemoveNotUsedVar;
@@ -206,11 +208,14 @@ begin
     //ppNone
   end;
   rxMsgList.Post;
+
+  FIsError:=FIsError or (rxMsgListMsgTypeImg.AsInteger=2);
 end;
 
 procedure TfbmCompillerMessagesFrame.Clear;
 begin
   rxMsgList.CloseOpen;
+  FIsError:=false;
 end;
 
 end.

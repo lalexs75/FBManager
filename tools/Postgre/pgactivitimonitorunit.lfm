@@ -9,10 +9,19 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
   OnClose = FormClose
   OnCreate = FormCreate
   inherited Panel1: TPanel
+    Height = 46
     Width = 1271
+    ClientHeight = 46
     ClientWidth = 1271
     TabOrder = 1
+    inherited Label1: TLabel
+      Height = 17
+      Top = 22
+      Width = 57
+    end
     inherited ComboBox1: TComboBox
+      Left = 70
+      Height = 32
       Width = 1194
     end
   end
@@ -878,7 +887,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Blocked PID'
-            Width = 120
+            Width = 150
             FieldName = 'blocked_pid'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -910,7 +919,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'Blocking PID'
-            Width = 120
+            Width = 150
             FieldName = 'blocking_pid'
             EditButtons = <>
             Filter.DropDownRows = 0

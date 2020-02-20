@@ -25,7 +25,8 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, rxmemds, rxdbgrid, Forms, Controls, ActnList,
-  Menus, ComCtrls, db, sqlObjects, SQLEngineAbstractUnit, fdbm_SynEditorUnit, Graphics;
+  Menus, ComCtrls, db, sqlObjects, SQLEngineAbstractUnit, fdbm_SynEditorUnit, Graphics,
+  fdmAbstractEditorUnit;
 
 type
   TVarParRec = record
@@ -87,13 +88,15 @@ type
     procedure FillStringList(const AItems:TStringList); inline;
     function ParseSQL(SqlLine:string):string;
     procedure AddVariable(AVarName:string);
+    procedure DoPreParse(AVarList:TStringList; AOwner: TEditorPage);
     property OwnerDB:TSQLEngineAbstract read FOwnerDB write FOwnerDB;
-    function Validate:boolean;
+    //function Validate:boolean;
   end;
 
 implementation
 uses fbmSqlParserUnit, fbmToolsUnit, fbmStrConstUnit, SQLEngineCommonTypesUnit, pg_SqlParserUnit,
-  PostgreSQLEngineUnit, FBSQLEngineUnit, fb_SqlParserUnit, rxdbutils;
+  PostgreSQLEngineUnit, FBSQLEngineUnit, fb_SqlParserUnit, rxdbutils,
+  fbmCompillerMessagesUnit;
 
 {$R *.lfm}
 
@@ -342,6 +345,29 @@ begin
   end;
 end;
 
+procedure TfbmPGLocalVarsEditorFrame.DoPreParse(AVarList: TStringList;
+  AOwner: TEditorPage);
+var
+  B: TBookMark;
+begin
+  rxLocalVars.DisableControls;
+  B:=rxLocalVars.Bookmark;
+  rxLocalVars.First;
+  while not rxLocalVars.EOF do
+  begin
+    AVarList.Add(rxLocalVarsVAR_NAME.AsString);
+
+    if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) then
+      AOwner.ShowMsg(ppLocalVarNameNotDefined, rxLocalVarsVAR_NAME.AsString, 1, rxLocalVars.RecNo);
+
+    if (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then
+      AOwner.ShowMsg(ppLocalVarTypeNotDefined, rxLocalVarsVAR_TYPE.AsString, 1, rxLocalVars.RecNo);
+    rxLocalVars.Next;
+  end;
+  rxLocalVars.Bookmark:=B;
+  rxLocalVars.EnableControls;
+end;
+(*
 function TfbmPGLocalVarsEditorFrame.Validate: boolean;
 var
   P: TBookMark;
@@ -365,6 +391,6 @@ begin
   if not Result then
     rxLocalVars.Bookmark:=P;
 end;
-
+*)
 end.
 

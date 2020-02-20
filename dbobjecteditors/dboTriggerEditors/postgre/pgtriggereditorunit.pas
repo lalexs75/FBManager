@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, Buttons, Menus, DB, fdmAbstractEditorUnit, sqlObjects,
   PostgreSQLEngineUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit,
-  SQLEngineCommonTypesUnit, fbmSqlParserUnit, fbmToolsUnit,
+  SQLEngineCommonTypesUnit, fbmSqlParserUnit, fbmToolsUnit, fbmCompillerMessagesUnit,
   fbmPGLocalVarsEditorFrameUnit;
 
 type
@@ -102,6 +102,8 @@ type
     procedure DoTextEditorDefineVariable(Sender: TObject);
     procedure TextEditorPopUpMenu(Sender: TObject);
     procedure DoPreParseCode;
+    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
+    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -115,7 +117,7 @@ type
 
 implementation
 uses fbmStrConstUnit, pg_sql_lines_unit, PGKeywordsUnit, pg_SqlParserUnit, rxstrutils,
-  ibmSqlUtilsUnit, LazUTF8;
+  ibmSqlUtilsUnit, fbmPgObjectEditorsUtils, LazUTF8;
 
 {$R *.lfm}
 
@@ -659,7 +661,22 @@ end;
 
 procedure TpgTriggerEditorPage.DoPreParseCode;
 begin
+  if not TabSheet5.TabVisible then
+    exit; { TODO : Доделать получение локальных переменных парсером }
 
+  PGPreParsePlSQL(Self, EditorFrame.EditorText, FLocalVars, nil, nil, nil, nil);
+end;
+
+procedure TpgTriggerEditorPage.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+begin
+  inherited ppMsgListDblClick(Sender, AInfo);
+end;
+
+procedure TpgTriggerEditorPage.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+begin
+  inherited ppMsgListRemoveVar(Sender, AInfo);
 end;
 
 
@@ -773,12 +790,19 @@ var
   S: String;
   FPrc: TPGFunction;
 begin
+  Result:=false;
   if Assigned(FCompillerMessages) then
     FCompillerMessages.Clear;
 
   DoPreParseCode;
+  if Assigned(FCompillerMessages) then
+  if FCompillerMessages.IsError then
+  begin
+    //PageControl1.ActivePage:=TabSheet3;
+    //ErrorBox(sErrorVariableDefenition);
+    Exit;
+  end;
 
-  Result:=false;
 
   FCmd:=ASQLObject as TPGSQLCreateTrigger;
 

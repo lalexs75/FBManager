@@ -124,9 +124,10 @@ uses
   SSHConnectionUnit, SSHConnectionPluginConfigUnit, fbmSQLScriptRunQuestionUnit,
   fbmToolsNV, fbmUserObjectsGrantUnit, fbmDocsSystemConfigUnit,
   fbmPGTablePartition_EditKeyUnit, fbmPGTablePartition_EditSectionUnit,
-  otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit, 
-pg_definitions, pgToolsFindDuplicateUnit, fbmAbstractSQLEngineToolsUnit, 
-pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit, fbmCompillerMessagesUnit
+  otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit,
+  pg_definitions, pgToolsFindDuplicateUnit, fbmAbstractSQLEngineToolsUnit,
+  pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit,
+  fbmCompillerMessagesUnit, fbmPgObjectEditorsUtils
 
   ;
 

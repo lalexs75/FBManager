@@ -373,6 +373,7 @@ begin
   TabSheet2.Caption:=sStatistic;
   TabSheet3.Caption:=sPGLocks;
   Label3.Caption:=sRefreshIntervalInSeconds;
+  Label4.Caption:=sRefreshIntervalInSeconds;
   CheckBox1.Caption:=sRefresh;
   CheckBox2.Caption:=sRefresh;
   CheckBox3.Caption:=sRefresh;
