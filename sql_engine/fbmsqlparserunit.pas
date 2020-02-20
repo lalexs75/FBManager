@@ -794,7 +794,7 @@ type
    public
     //global functions
     function Eof:boolean;
-    function WordType(Sender:TSQLTokenRecord; AWord:string; ACmd:TSQLCommandAbstract):TSQLToken;
+    class function WordType(Sender:TSQLTokenRecord; AWord:string; ACmd:TSQLCommandAbstract):TSQLToken;
 
     function GetNextWord:string;
     procedure SkipSpace;
@@ -3577,7 +3577,7 @@ begin
   Delete(FSql, FPosition.Position, ATextLen);
 end;
 
-function TSQLParser.WordType(Sender: TSQLTokenRecord; AWord: string;
+class function TSQLParser.WordType(Sender: TSQLTokenRecord; AWord: string;
   ACmd: TSQLCommandAbstract): TSQLToken;
 
 function IsValidIdent1(S:string):boolean;

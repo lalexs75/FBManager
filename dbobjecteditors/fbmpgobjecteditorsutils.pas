@@ -60,7 +60,7 @@ begin
     begin
       sLV.AddObject(AParName.AsString, TObject(PtrInt(AParIOType.AsInteger)));
 
-      if (not IsValidIdent(AParName.AsString)) then
+      if (TSQLParser.WordType(nil, AParName.AsString, nil) <> stIdentificator) then
         AOwner.ShowMsg(ppParamNameNotDefined, AParName.AsString, 2, AParDS.RecNo);
 
       if (Trim(AParType.AsString) = '') then

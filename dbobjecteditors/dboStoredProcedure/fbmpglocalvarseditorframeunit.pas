@@ -357,7 +357,7 @@ begin
   begin
     AVarList.Add(rxLocalVarsVAR_NAME.AsString);
 
-    if (not IsValidIdent(rxLocalVarsVAR_NAME.AsString)) then
+    if (TSQLParser.WordType(nil, rxLocalVarsVAR_NAME.AsString, nil) <> stIdentificator) then
       AOwner.ShowMsg(ppLocalVarNameNotDefined, rxLocalVarsVAR_NAME.AsString, 1, rxLocalVars.RecNo);
 
     if (Trim(rxLocalVarsVAR_TYPE.AsString) = '') then
