@@ -1,0 +1,24 @@
+object ExportDM: TExportDM
+  OldCreateOrder = False
+  Height = 308
+  HorizontalOffset = 611
+  VerticalOffset = 274
+  Width = 461
+  object MainDB: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
+    Port = 0
+    Protocol = 'firebirdd-2.5'
+    Left = 40
+    Top = 16
+  end
+  object quS: TZReadOnlyQuery
+    Connection = MainDB
+    Params = <>
+    Left = 40
+    Top = 93
+  end
+end
