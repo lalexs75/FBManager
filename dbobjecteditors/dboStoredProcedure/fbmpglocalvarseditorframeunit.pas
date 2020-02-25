@@ -75,9 +75,12 @@ type
     procedure RxDBGrid2GetCellProps(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor);
     procedure rxLocalVarsAfterEdit(DataSet: TDataSet);
+    procedure rxLocalVarsAfterPost(DataSet: TDataSet);
     procedure rxLocalVarsAfterScroll(DataSet: TDataSet);
   private
+    FModified: boolean;
     FOwnerDB: TSQLEngineAbstract;
+
     procedure GetCurParRecord(var R:TVarParRec);
     procedure SetCurParRecord(var R:TVarParRec);
   public
@@ -90,7 +93,7 @@ type
     procedure AddVariable(AVarName:string);
     procedure DoPreParse(AVarList:TStringList; AOwner: TEditorPage);
     property OwnerDB:TSQLEngineAbstract read FOwnerDB write FOwnerDB;
-    //function Validate:boolean;
+    property Modified:boolean read FModified write FModified;
   end;
 
 implementation
@@ -173,6 +176,12 @@ procedure TfbmPGLocalVarsEditorFrame.rxLocalVarsAfterEdit(DataSet: TDataSet);
 begin
   if rxLocalVarsIsError.AsBoolean then
     rxLocalVarsIsError.AsBoolean:=false;
+end;
+
+procedure TfbmPGLocalVarsEditorFrame.rxLocalVarsAfterPost(DataSet: TDataSet);
+begin
+  FModified:=true;
+  rxLocalVarsAfterScroll(DataSet);
 end;
 
 procedure TfbmPGLocalVarsEditorFrame.rxLocalVarsAfterScroll(DataSet: TDataSet);
@@ -330,6 +339,7 @@ begin
     LVP.Free;
   end;
   rxLocalVars.First;
+  FModified:=false;
 end;
 
 procedure TfbmPGLocalVarsEditorFrame.AddVariable(AVarName: string);

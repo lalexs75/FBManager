@@ -789,6 +789,7 @@ var
   F: TSQLParserField;
   S: String;
   FPrc: TPGFunction;
+  B: Boolean;
 begin
   Result:=false;
   if Assigned(FCompillerMessages) then
@@ -806,7 +807,11 @@ begin
 
   FCmd:=ASQLObject as TPGSQLCreateTrigger;
 
-  if rbCreateNewFunc.Checked or EditorFrame.Modified then
+  B:=false;
+  if TabSheet5.TabVisible then
+    B:=FLocalVars.Modified;
+
+  if rbCreateNewFunc.Checked or EditorFrame.Modified or B then
   begin
     FCmd.TriggerFunction:=TPGSQLCreateFunction.Create(nil);
     if rbCreateNewFunc.Checked then

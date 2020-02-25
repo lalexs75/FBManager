@@ -1332,6 +1332,7 @@ type
     constructor Create(AOwner:TSQLEngineAbstract); override;
     destructor Destroy; override;
     function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean; override;
+    function ParseException(E:Exception; out X, Y:integer; out AMsg:string):boolean;override;
     function IsEditable:boolean;override;
     procedure CommitTransaction;override;
     procedure RolbackTransaction;override;
@@ -1343,10 +1344,10 @@ type
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses
-  rxlogging, rxdbutils, ibmSqlUtilsUnit, pg_definitions,
+  rxlogging, rxdbutils, ibmSqlUtilsUnit, pg_definitions, rxstrutils, ZDbcIntfs,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
-  rxstrutils, pg_tasks, pgSQLEngineFTS
+  pg_tasks, pgSQLEngineFTS
   ;
 
 type
@@ -4707,6 +4708,37 @@ begin
   else
     Exit;
   Result:=true;
+end;
+
+function TPGQueryControl.ParseException(E: Exception; out X, Y: integer; out
+  AMsg: string): boolean;
+var
+  St: TStringList;
+  S: String;
+  I: SizeInt;
+begin
+  X:=0;
+  if E is EZSQLException then
+  begin
+    AMsg:=E.Message;
+    St:=TStringList.Create;
+    St.Text:=AMsg;
+    if ST.Count>1 then
+    begin
+      S:=St[1];
+      I:=Pos(':', S);
+      if I>0 then
+      begin
+        S:=Copy(S, 1, I-1);
+        S:=ExtractWord(2, S, [' ']);
+        Y:=StrToIntDef(S, -1);
+        Result:=Y>0;
+      end;
+    end;
+    ST.Free;
+  end
+  else
+    Result:=inherited ParseException(E, X, Y, AMsg);
 end;
 
 function TPGQueryControl.IsEditable: boolean;

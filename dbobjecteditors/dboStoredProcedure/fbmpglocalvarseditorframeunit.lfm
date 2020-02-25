@@ -261,8 +261,8 @@ object fbmPGLocalVarsEditorFrame: TfbmPGLocalVarsEditorFrame
     AfterOpen = rxLocalVarsAfterScroll
     AfterClose = rxLocalVarsAfterScroll
     AfterEdit = rxLocalVarsAfterEdit
-    AfterPost = rxLocalVarsAfterScroll
-    AfterDelete = rxLocalVarsAfterScroll
+    AfterPost = rxLocalVarsAfterPost
+    AfterDelete = rxLocalVarsAfterPost
     AfterScroll = rxLocalVarsAfterScroll
     PacketRecords = 0
     Left = 256
