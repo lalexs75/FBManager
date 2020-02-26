@@ -28,7 +28,8 @@ uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, rxtoolbar,
   ComCtrls, ActnList, LMessages, fbmToolsUnit, SynEdit, DB,
   RxIniPropStorage, ExtCtrls, fdmAbstractEditorUnit, ibmanagertypesunit,
-  Menus, StdCtrls, SQLEngineAbstractUnit, sqlObjects, IniFiles, fbm_VisualEditorsAbstractUnit;
+  Menus, StdCtrls, SQLEngineAbstractUnit, sqlObjects, IniFiles, fbm_VisualEditorsAbstractUnit,
+  fbmCompillerMessagesUnit;
 
 type
 
@@ -87,6 +88,10 @@ type
   private
     FCurEditor:TEditorPage;
     FInspectorRecord: TDBInspectorRecord;
+
+    FCompillerMessages:TfbmCompillerMessagesFrame;
+    FCompillerMessagesSplitter: TSplitter;
+
     procedure AddPage(P:TEditorPage);
     procedure DoSetEnvOptions;
     procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
@@ -98,6 +103,8 @@ type
     procedure SetInspectorRecord(AValue: TDBInspectorRecord);
     procedure OnUpdateModified(Sender: TObject);
     procedure SetObjectCaption(AModified:boolean);
+    //procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
+    //procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
   public
     OnCreateNewDBObject:TOnCreateNewDBObject;
     constructor CreateObjectEditor(ADataBaseRecord: TDBInspectorRecord);
@@ -108,6 +115,8 @@ type
 
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
     procedure RestoreState(const ObjName:string; const Ini:TIniFile);
+    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
+    procedure HideMsg;
 
     property InspectorRecord:TDBInspectorRecord read FInspectorRecord write SetInspectorRecord;
   end;
@@ -258,6 +267,10 @@ begin
     else
       FCurEditor.DoMetod(epaCompile);
   end;
+
+  if Assigned(FCompillerMessages) then
+    if FCompillerMessages.rxMsgList.RecordCount = 0 then
+      HideMsg;
 end;
 
 procedure TfbmDBObjectEditorForm.edtDelExecute(Sender: TObject);
@@ -584,6 +597,17 @@ begin
     if Assigned(P) then
       P.RestoreState(ObjName+'.'+P.PageName, Ini);
   end;
+end;
+
+procedure TfbmDBObjectEditorForm.ShowMsg(AMsgType: TppMsgType; AMsg: string;
+  AInfo1, AInfo2: Integer);
+begin
+
+end;
+
+procedure TfbmDBObjectEditorForm.HideMsg;
+begin
+
 end;
 
 end.

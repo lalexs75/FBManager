@@ -128,8 +128,8 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   end
   object ListBox1: TListBox
     Left = 0
-    Height = 523
-    Top = 46
+    Height = 524
+    Top = 45
     Width = 100
     Align = alLeft
     ItemHeight = 0
@@ -140,19 +140,19 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   end
   object Splitter1: TSplitter
     Left = 100
-    Height = 523
-    Top = 46
+    Height = 524
+    Top = 45
     Width = 5
   end
   object Panel1: TPanel
     Left = 0
-    Height = 46
+    Height = 45
     Top = 0
     Width = 912
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 46
+    ClientHeight = 45
     ClientWidth = 912
     TabOrder = 3
     object Label1: TLabel
@@ -161,7 +161,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideBottom.Side = asrBottom
       Left = 6
       Height = 17
-      Top = 23
+      Top = 22
       Width = 76
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
@@ -175,7 +175,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 88
-      Height = 34
+      Height = 33
       Top = 6
       Width = 818
       Anchors = [akTop, akLeft, akRight]
