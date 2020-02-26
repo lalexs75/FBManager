@@ -116,6 +116,7 @@ begin
   St:=TStringList.Create;
   St.Sorted:=true;
   Result:=nil;
+  MR:=nil;
   for i:=0 to P.CountObject-2 do
   begin
     P1:=P.Objects[i];
