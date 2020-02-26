@@ -4703,7 +4703,7 @@ begin
   if SQLCommand is TSQLCommandDelete then
     StatRec.DeletedRows:=FSQLQuery.RowsAffected
   else
-  if SQLCommand is TSQLCommandAbstractSelect then
+  if (SQLCommand is TSQLCommandAbstractSelect) and (TSQLCommandAbstractSelect(SQLCommand).Selectable) and (FSQLQuery.Active) then
     StatRec.SelectedRows:=FSQLQuery.RecordCount
   else
     Exit;

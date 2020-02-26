@@ -1166,6 +1166,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
     property TableName: string read FTableName write FTableName;
@@ -16574,6 +16575,13 @@ begin
   if FDropRule = drCascade then
     S:= S + ' RESTRICT';
   AddSQLCommand(S);
+end;
+
+constructor TPGSQLTruncate.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  PlanEnabled:=false;
+  FSelectable:=false;
 end;
 
 procedure TPGSQLTruncate.Assign(ASource: TSQLObjectAbstract);
