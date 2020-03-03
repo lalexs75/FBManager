@@ -47,8 +47,6 @@ type
     procedure SetModified(AValue: boolean);
   protected
     FReadOnly: boolean;
-    FCompillerMessages:TfbmCompillerMessagesFrame;
-    FCompillerMessagesSplitter: TSplitter;
     procedure LockCntls;
     procedure UnLockCntls;
     procedure SetReadOnly(AValue: boolean);virtual;
@@ -56,12 +54,11 @@ type
     function FindPageByClass(APageClass:TEditorPageClass):TEditorPage;
     property LockCount:Integer read FLockCount;
 
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
-
   public
     FModifiedEvent:TNotifyEvent;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); virtual;
+    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
+    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
     function PageName:string;virtual;abstract;
     function ImageName:string;virtual;
     procedure Activate;virtual;
@@ -84,7 +81,7 @@ type
 
 function ProcessEditorPageAction(Pages:TStrings; Action:TEditorPageAction; out ErrorPage:integer):boolean;
 implementation
-uses ibmanagertypesunit, IBManDataInspectorUnit;
+uses ibmanagertypesunit, IBManDataInspectorUnit, fbmDBObjectEditorUnit;
 
 {$R *.lfm}
 
@@ -210,33 +207,8 @@ end;
 procedure TEditorPage.ShowMsg(AMsgType: TppMsgType; AMsg: string; AInfo1,
   AInfo2: Integer);
 begin
-  if not Assigned(FCompillerMessages) then
-  begin
-    FCompillerMessages:=TfbmCompillerMessagesFrame.Create(Self);
-    FCompillerMessages.Parent:=Self;
-    FCompillerMessages.Align:=alBottom;
-    FCompillerMessages.AnchorSideBottom.Control:=Self;
-    FCompillerMessages.AnchorSideLeft.Control:=Self;
-    FCompillerMessages.AnchorSideRight.Control:=Self;
-    FCompillerMessages.Anchors:=[akLeft, akRight, akBottom];
-    FCompillerMessages.OnMsgListDblClick:=@ppMsgListDblClick;
-    FCompillerMessages.OnMsgListRemoveNotUsedVar:=@ppMsgListRemoveVar;
-    FCompillerMessagesSplitter:=TSplitter.Create(Self);
-    FCompillerMessagesSplitter.Parent:=Self;
-    FCompillerMessagesSplitter.Align:=alBottom;
-    FCompillerMessagesSplitter.Visible:=true;
-    FCompillerMessagesSplitter.Top:=FCompillerMessages.Top - FCompillerMessagesSplitter.Height;
-  end
-  else
-  if not FCompillerMessages.Visible then
-  begin
-    FCompillerMessages.Visible:=true;
-    FCompillerMessagesSplitter.Visible:=true;
-    FCompillerMessagesSplitter.Top:=FCompillerMessages.Top - FCompillerMessagesSplitter.Height;
-    FCompillerMessages.Clear;
-  end;
-
-  FCompillerMessages.AddMsg(AMsgType, AMsg, AInfo1, AInfo2);
+  if Assigned(Owner) and (Owner is TfbmDBObjectEditorForm) then
+    TfbmDBObjectEditorForm(Owner).ShowMsg(Self, AMsgType, AMsg, AInfo1, AInfo2);
 end;
 
 function TEditorPage.ImageName: string;

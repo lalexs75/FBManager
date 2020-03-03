@@ -39,6 +39,7 @@ type
     InfoMsg:string;
     Info1:Integer;
     Info2:Integer;
+    OwnerPageName:string;
   end;
 
   TppMsgListEvent = procedure(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec) of object;
@@ -59,6 +60,7 @@ type
     rxMsgListInfo1: TLongintField;
     rxMsgListInfo2: TLongintField;
     rxMsgListInfoMsg: TStringField;
+    rxMsgListMsgOwner: TStringField;
     rxMsgListMsgType: TLongintField;
     rxMsgListMsgTypeImg: TLongintField;
     rxMsgListText: TStringField;
@@ -78,7 +80,7 @@ type
     procedure Localize;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure AddMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2:Integer);
+    procedure AddMsg(AOwnerName:string; AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2:Integer);
     procedure Clear;
     property IsError:boolean read FIsError;
 
@@ -87,7 +89,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmToolsUnit;
+uses fbmStrConstUnit, fbmToolsUnit, fbmDBObjectEditorUnit;
 
 {$R *.lfm}
 
@@ -95,7 +97,8 @@ uses fbmStrConstUnit, fbmToolsUnit;
 
 procedure TfbmCompillerMessagesFrame.SpeedButton1Click(Sender: TObject);
 begin
-  Hide;
+  if (Owner is TfbmDBObjectEditorForm) then
+    TfbmDBObjectEditorForm(Owner).HideMsg;
 end;
 
 procedure TfbmCompillerMessagesFrame.Localize;
@@ -141,6 +144,7 @@ begin
     RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
     RecInfo.Info1:=rxMsgListInfo1.AsInteger;
     RecInfo.Info2:=rxMsgListInfo2.AsInteger;
+    RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
     FOnMsgListDblClick(Self, RecInfo)
   end;
 end;
@@ -166,16 +170,18 @@ begin
     RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
     RecInfo.Info1:=rxMsgListInfo1.AsInteger;
     RecInfo.Info2:=rxMsgListInfo2.AsInteger;
+    RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
     FOnMsgListRemoveNotUsedVar(Self, RecInfo)
   end;
 end;
 
-procedure TfbmCompillerMessagesFrame.AddMsg(AMsgType: TppMsgType; AMsg: string;
-  AInfo1, AInfo2: Integer);
+procedure TfbmCompillerMessagesFrame.AddMsg(AOwnerName: string;
+  AMsgType: TppMsgType; AMsg: string; AInfo1, AInfo2: Integer);
 begin
   if not rxMsgList.Active then
     rxMsgList.Open;
   rxMsgList.Append;
+  rxMsgListMsgOwner.AsString:=AOwnerName;
   rxMsgListID.AsInteger:=rxMsgList.RecordCount + 1;
   rxMsgListMsgType.AsInteger:=Ord(AMsgType);
   rxMsgListInfoMsg.AsString:=AMsg;

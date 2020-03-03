@@ -103,8 +103,8 @@ type
     procedure SetInspectorRecord(AValue: TDBInspectorRecord);
     procedure OnUpdateModified(Sender: TObject);
     procedure SetObjectCaption(AModified:boolean);
-    //procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
-    //procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
+    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
+    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
   public
     OnCreateNewDBObject:TOnCreateNewDBObject;
     constructor CreateObjectEditor(ADataBaseRecord: TDBInspectorRecord);
@@ -115,7 +115,7 @@ type
 
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
     procedure RestoreState(const ObjName:string; const Ini:TIniFile);
-    procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
+    procedure ShowMsg(AOwner:TEditorPage; AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
     procedure HideMsg;
 
     property InspectorRecord:TDBInspectorRecord read FInspectorRecord write SetInspectorRecord;
@@ -207,6 +207,9 @@ var
   SqlCmd: TSQLCommandDDL;
   EditorPage: TEditorPage;
 begin
+  if Assigned(FCompillerMessages) then
+    FCompillerMessages.Clear;
+
   OldState:=FInspectorRecord.DBObject.State;
   SqlCmd:=FInspectorRecord.DBObject.CreateSQLObject;
   ErrorPage:=-1;
@@ -518,6 +521,46 @@ begin
   fbManagerMainForm.RxMDIPanel1.ChildWindowsUpdateCaption(Self);
 end;
 
+procedure TfbmDBObjectEditorForm.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+var
+  EditorPage: TEditorPage;
+  i: Integer;
+begin
+  for i:=0 to ListBox1.Items.Count - 1 do
+  begin
+    if Assigned(ListBox1.Items.Objects[i]) then
+    begin
+      EditorPage:=ListBox1.Items.Objects[i] as TEditorPage;
+      if EditorPage.Name = AInfo.OwnerPageName then
+      begin
+        EditorPage.ppMsgListDblClick(Sender, AInfo);
+        break;
+      end;
+    end;
+  end;
+end;
+
+procedure TfbmDBObjectEditorForm.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+var
+  EditorPage: TEditorPage;
+  i: Integer;
+begin
+  for i:=0 to ListBox1.Items.Count - 1 do
+  begin
+    if Assigned(ListBox1.Items.Objects[i]) then
+    begin
+      EditorPage:=ListBox1.Items.Objects[i] as TEditorPage;
+      if EditorPage.Name = AInfo.OwnerPageName then
+      begin
+        EditorPage.ppMsgListRemoveVar(Sender, AInfo);
+        break;
+      end;
+    end;
+  end;
+end;
+
 constructor TfbmDBObjectEditorForm.CreateObjectEditor(
   ADataBaseRecord: TDBInspectorRecord);
 begin
@@ -599,15 +642,42 @@ begin
   end;
 end;
 
-procedure TfbmDBObjectEditorForm.ShowMsg(AMsgType: TppMsgType; AMsg: string;
-  AInfo1, AInfo2: Integer);
+procedure TfbmDBObjectEditorForm.ShowMsg(AOwner: TEditorPage;
+  AMsgType: TppMsgType; AMsg: string; AInfo1, AInfo2: Integer);
 begin
+  if not Assigned(FCompillerMessages) then
+  begin
+    FCompillerMessages:=TfbmCompillerMessagesFrame.Create(Self);
+    FCompillerMessages.Parent:=Self;
+    FCompillerMessages.Align:=alBottom;
+    FCompillerMessages.AnchorSideBottom.Control:=Self;
+    FCompillerMessages.AnchorSideLeft.Control:=Self;
+    FCompillerMessages.AnchorSideRight.Control:=Self;
+    FCompillerMessages.Anchors:=[akLeft, akRight, akBottom];
+    FCompillerMessages.OnMsgListDblClick:=@ppMsgListDblClick;
+    FCompillerMessages.OnMsgListRemoveNotUsedVar:=@ppMsgListRemoveVar;
+    FCompillerMessagesSplitter:=TSplitter.Create(Self);
+    FCompillerMessagesSplitter.Parent:=Self;
+    FCompillerMessagesSplitter.Align:=alBottom;
+    FCompillerMessagesSplitter.Visible:=true;
+    FCompillerMessagesSplitter.Top:=FCompillerMessages.Top - FCompillerMessagesSplitter.Height;
+  end
+  else
+  if not FCompillerMessages.Visible then
+  begin
+    FCompillerMessages.Visible:=true;
+    FCompillerMessagesSplitter.Visible:=true;
+    FCompillerMessagesSplitter.Top:=FCompillerMessages.Top - FCompillerMessagesSplitter.Height;
+    FCompillerMessages.Clear;
+  end;
 
+  FCompillerMessages.AddMsg(AOwner.Name, AMsgType, AMsg, AInfo1, AInfo2);
 end;
 
 procedure TfbmDBObjectEditorForm.HideMsg;
 begin
-
+  FCompillerMessages.Visible:=false;
+  FCompillerMessagesSplitter.Visible:=false;
 end;
 
 end.

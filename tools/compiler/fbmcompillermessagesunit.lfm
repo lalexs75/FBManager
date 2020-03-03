@@ -214,6 +214,11 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Name = 'InfoMsg'
         DataType = ftString
         Size = 500
+      end    
+      item
+        Name = 'MsgOwner'
+        DataType = ftString
+        Size = 300
       end>
     AfterScroll = rxMsgListAfterScroll
     PacketRecords = 0
@@ -285,6 +290,16 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
       ReadOnly = False
       Required = False
       Size = 500
+    end
+    object rxMsgListMsgOwner: TStringField
+      FieldKind = fkData
+      FieldName = 'MsgOwner'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 300
     end
   end
   object dsMsgList: TDataSource

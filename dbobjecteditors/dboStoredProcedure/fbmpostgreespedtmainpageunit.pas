@@ -1035,8 +1035,8 @@ var
   D: TDBDomain;
   FCntOutput: Integer;
 begin
-  if Assigned(FCompillerMessages) then
-    FCompillerMessages.Clear;
+  //if Assigned(FCompillerMessages) then
+  //  FCompillerMessages.Clear;
 
   DoPreParseCode;
 
@@ -1051,15 +1051,14 @@ begin
       ErrorBox(sErrorVariableDefenition);
       Exit;
     end;
-*)
+
   if Assigned(FCompillerMessages) then
   if FCompillerMessages.IsError then
   begin
-    //PageControl1.ActivePage:=TabSheet3;
     ErrorBox(sErrorVariableDefenition);
     Exit;
   end;
-
+*)
   if (DBObject.State = sdboEdit)  then
   begin
 

@@ -792,17 +792,8 @@ var
   B: Boolean;
 begin
   Result:=false;
-  if Assigned(FCompillerMessages) then
-    FCompillerMessages.Clear;
 
   DoPreParseCode;
-  if Assigned(FCompillerMessages) then
-  if FCompillerMessages.IsError then
-  begin
-    //PageControl1.ActivePage:=TabSheet3;
-    //ErrorBox(sErrorVariableDefenition);
-    Exit;
-  end;
 
 
   FCmd:=ASQLObject as TPGSQLCreateTrigger;
