@@ -7963,7 +7963,7 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     State2:=AddSQLTokens(stKeyword, [Par1, TrigName], 'INACTIVE', [], -5);       // |INACTIVE|
     //Par1.AddChildToken(State2);
 
-    TDBOn:=AddSQLTokens(stKeyword, [State1, State2], 'ON', []);
+    TDBOn:=AddSQLTokens(stKeyword, [State1, State2], 'ON', [toOptional]);
       TDBOn1:=AddSQLTokens(stKeyword, TDBOn, 'CONNECT', [], 13);
       TDBOn2:=AddSQLTokens(stKeyword, TDBOn, 'DISCONNECT', [], 14);
       TDBOn3:=AddSQLTokens(stKeyword, TDBOn, 'TRANSACTION', []);
