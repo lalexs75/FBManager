@@ -2217,11 +2217,11 @@ TABLE [ ONLY ] имя_таблицы [ * ]
   TWhere:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TTbl_ALIAS, TAS_FA], 'WHERE', [toOptional], 21);
 
 
-  TJI:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS], 'INNER', [toOptional], 10);
-  TJL:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS], 'LEFT', [toOptional], 11);
-  TJR:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS], 'RIGTH', [toOptional], 12);
-  TJF:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS], 'FULL', [toOptional], 13);
-  TJ:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TJI, TJL, TJR, TJF, TBLV1_ALIAS], 'JOIN', [toOptional], 14);
+  TJI:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'INNER', [toOptional], 10);
+  TJL:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'LEFT', [toOptional], 11);
+  TJR:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'RIGTH', [toOptional], 12);
+  TJF:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'FULL', [toOptional], 13);
+  TJ:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TJI, TJL, TJR, TJF, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'JOIN', [toOptional], 14);
     TTbl1:=AddSQLTokens(stIdentificator, TJ, '', [], 3);
       TTbl1.AddChildToken(TWhere);
       TTbl2:=AddSQLTokens(stIdentificator, TTbl1, '.', []);
