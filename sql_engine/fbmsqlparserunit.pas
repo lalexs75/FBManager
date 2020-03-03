@@ -2345,7 +2345,7 @@ begin
   if FCTE.Count > 0 then
   begin
     S:=S + 'WITH';
-    if FCTE.Recursive then S:=S + 'RECURSIVE ';
+    if FCTE.Recursive then S:=S + ' RECURSIVE';
     S:=S + LineEnding;
     S1:='';
     for CT in FCTE do
