@@ -552,10 +552,12 @@ type
   end;
 
   { TSQLCommandSelectCTE }
+  TCTEMaterializedFlag = (ctemfDefault, ctemfMaterialized, ctemfNotMaterialized);
 
   TSQLCommandSelectCTE = class
   private
     FFields: TSQLFields;
+    FMaterializedFlag: TCTEMaterializedFlag;
     FName: string;
     FSQL: string;
   public
@@ -565,6 +567,7 @@ type
     property Name:string read FName write FName;
     property Fields:TSQLFields read FFields;
     property SQL:string read FSQL write FSQL;
+    property MaterializedFlag:TCTEMaterializedFlag read FMaterializedFlag write FMaterializedFlag;
   end;
 
   { TSQLCommandSelectCTEList }
@@ -1103,6 +1106,7 @@ begin
   FName:=ASource.FName;
   FFields.Assign(ASource.FFields);
   FSQL:=ASource.FSQL;
+  FMaterializedFlag:=ASource.FMaterializedFlag;
 end;
 
 { TSQLCommandSelectCTEList }
@@ -2155,7 +2159,9 @@ TABLE [ ONLY ] имя_таблицы [ * ]
     T1:=AddSQLTokens(stKeyword, T1, ')', []);
 
     T1:=AddSQLTokens(stKeyword, [T, T1], 'AS', []);
-    T1:=AddSQLTokens(stSymbol, T1, '(', [], 81);
+      T2:=AddSQLTokens(stKeyword, T1, 'NOT', [], 84);
+      T3:=AddSQLTokens(stKeyword, [T1, T2], 'MATERIALIZED', [], 85);
+    T1:=AddSQLTokens(stSymbol, [T1, T2, T3], '(', [], 81);
       T2:=AddSQLTokens(stSymbol, T1, ',', []);
       T2.AddChildToken([T]);
 
@@ -2327,6 +2333,11 @@ begin
     81:if Assigned(FCurCTE) then
         FCurCTE.SQL := ASQLParser.GetToBracket(')');
     82:FCTE.Recursive:=true;
+    84:if Assigned(FCurCTE) then
+        FCurCTE.MaterializedFlag:=ctemfNotMaterialized;
+    85:if Assigned(FCurCTE) then
+        if FCurCTE.MaterializedFlag = ctemfDefault then
+        FCurCTE.MaterializedFlag:=ctemfMaterialized;
     83:if Assigned(FCurCTE) then
         FCurCTE.Fields.AddParam(AWord);
     21:FWhereExpression:=ASQLParser.GetToCommandDelemiter;
@@ -2353,7 +2364,14 @@ begin
       if S1<>'' then S1:=S1 + ',' + LineEnding;
       S1:=S1 + '  ' + CT.Name;
       if CT.Fields.Count>0 then S1:=S1 + '(' + CT.Fields.AsString + ')';
-      S1:=S1 + ' as ' + LineEnding + '(' + CT.SQL + ')';
+
+
+      S1:=S1 + ' AS';
+      case CT.MaterializedFlag of
+        ctemfMaterialized:S1:=S1 + ' MATERIALIZED';
+        ctemfNotMaterialized:S1:=S1 + ' NOT MATERIALIZED';
+      end;
+      S1:=S1 + LineEnding + '(' + CT.SQL + ')';
     end;
     S:=S + S1 + LineEnding;
   end;
