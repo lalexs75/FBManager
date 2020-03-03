@@ -166,6 +166,10 @@ msgstr ""
 msgid "Always show glyph"
 msgstr ""
 
+#: fbmstrconstunit.sanalysisandwarnings
+msgid "Analysis and Warnings"
+msgstr ""
+
 #: fbmstrconstunit.sanalyzescalefactor
 msgid "Analyze scale factor"
 msgstr ""
@@ -278,6 +282,10 @@ msgstr ""
 
 #: fbmstrconstunit.savglines
 msgid "AVG lines"
+msgstr ""
+
+#: fbmstrconstunit.savgreccount
+msgid "Avg. rec. count"
 msgstr ""
 
 #: fbmstrconstunit.savgtime
@@ -1577,6 +1585,10 @@ msgstr ""
 msgid "Duplicate index name"
 msgstr ""
 
+#: fbmstrconstunit.sduplicateobjects
+msgid "Duplicate objects"
+msgstr ""
+
 #: fbmstrconstunit.sduration
 msgid "Duration"
 msgstr ""
@@ -2227,6 +2239,10 @@ msgstr ""
 
 #: fbmstrconstunit.sforeignkeys
 msgid "Foreign keys"
+msgstr ""
+
+#: fbmstrconstunit.sforeignkeywithoutindex
+msgid "Foreign key without index"
 msgstr ""
 
 #: fbmstrconstunit.sforeignserver
@@ -2951,6 +2967,10 @@ msgstr ""
 
 #: fbmstrconstunit.slogtoscreen
 msgid "Log to screen"
+msgstr ""
+
+#: fbmstrconstunit.slosttriggerfunctions
+msgid "Lost trigger functions"
 msgstr ""
 
 #: fbmstrconstunit.slower
@@ -3917,6 +3937,10 @@ msgstr ""
 
 #: fbmstrconstunit.spages
 msgid "Pages"
+msgstr ""
+
+#: fbmstrconstunit.spagescount
+msgid "Pages count"
 msgstr ""
 
 #: fbmstrconstunit.spagesize
@@ -5430,6 +5454,10 @@ msgstr ""
 
 #: fbmstrconstunit.stablespacesize
 msgid "Table space size"
+msgstr ""
+
+#: fbmstrconstunit.stableswihoutprimarykey
+msgid "Tables wihout primary key"
 msgstr ""
 
 #: fbmstrconstunit.stargetcpu

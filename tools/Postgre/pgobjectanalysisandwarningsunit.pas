@@ -301,6 +301,9 @@ begin
 
   actEditObject.Caption:=sEditObject;
   actShowObjectInTree.Caption:=sShowObjectInTree;
+  TabControl1.Tabs[0]:=sLostTriggerFunctions;
+  TabControl1.Tabs[1]:=sForeignKeyWithoutIndex;
+  TabControl1.Tabs[2]:=sTablesWihoutPrimaryKey;
 end;
 
 procedure TpgObjectAnalysisAndWarningsTools.LMNotyfyDisconectEngine(
@@ -331,7 +334,7 @@ end;
 
 function TpgObjectAnalysisAndWarningsTools.PageName: string;
 begin
-  Result:='Analysis and Warnings';
+  Result:=sAnalysisAndWarnings;
 end;
 
 procedure TpgObjectAnalysisAndWarningsTools.RefreshPage;

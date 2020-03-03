@@ -1651,6 +1651,14 @@ resourcestring
   sBlockedStatement                            = 'Blocked statement';
   sCurrentStatementInBlockingProcess           = 'Current statement in blocking process';
 
+  sLostTriggerFunctions                        = 'Lost trigger functions';
+  sForeignKeyWithoutIndex                      = 'Foreign key without index';
+  sTablesWihoutPrimaryKey                      = 'Tables wihout primary key';
+  sAnalysisAndWarnings                         = 'Analysis and Warnings';
+  sDuplicateObjects                            = 'Duplicate objects';
+  sAvgRecCount                                 = 'Avg. rec. count';
+  sPagesCount                                  = 'Pages count';
+
 implementation
 
 end.

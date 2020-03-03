@@ -262,7 +262,7 @@ end;
 
 function TpgToolsFindDuplicateFrame.PageName: string;
 begin
-  Result:='Duplicate objects';
+  Result:=sDuplicateObjects;
 end;
 
 procedure TpgToolsFindDuplicateFrame.RefreshPage;

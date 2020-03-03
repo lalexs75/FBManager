@@ -1,15 +1,15 @@
 inherited pgDBObjectsSizeTools: TpgDBObjectsSizeTools
   Height = 323
-  Width = 428
+  Width = 834
   ClientHeight = 323
-  ClientWidth = 428
+  ClientWidth = 834
   DesignLeft = 688
   DesignTop = 372
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
     Height = 323
     Top = 0
-    Width = 428
+    Width = 834
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
     AutoSort = True

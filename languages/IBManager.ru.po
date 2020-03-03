@@ -181,6 +181,10 @@ msgstr "Всегда приводить имена объектов в верх�
 msgid "Always show glyph"
 msgstr "Всегда отображать картинку"
 
+#: fbmstrconstunit.sanalysisandwarnings
+msgid "Analysis and Warnings"
+msgstr "Анализ и предупреждения"
+
 #: fbmstrconstunit.sanalyzescalefactor
 msgid "Analyze scale factor"
 msgstr "Множитель ANALYZE"
@@ -296,6 +300,10 @@ msgstr "Доступные тэги:"
 msgctxt "fbmstrconstunit.savglines"
 msgid "AVG lines"
 msgstr "Среднее: записей"
+
+#: fbmstrconstunit.savgreccount
+msgid "Avg. rec. count"
+msgstr "Среднее кол-во записей"
 
 #: fbmstrconstunit.savgtime
 msgctxt "fbmstrconstunit.savgtime"
@@ -1647,6 +1655,10 @@ msgstr "Удалить условие уникальности"
 msgid "Duplicate index name"
 msgstr "Индекс с таким именем уже существует"
 
+#: fbmstrconstunit.sduplicateobjects
+msgid "Duplicate objects"
+msgstr "Дубликаты объектов"
+
 #: fbmstrconstunit.sduration
 msgctxt "fbmstrconstunit.sduration"
 msgid "Duration"
@@ -2310,6 +2322,10 @@ msgstr "Правило внешнего ключа"
 #: fbmstrconstunit.sforeignkeys
 msgid "Foreign keys"
 msgstr "Внешние ключи"
+
+#: fbmstrconstunit.sforeignkeywithoutindex
+msgid "Foreign key without index"
+msgstr "Внешние ключи без индекса"
 
 #: fbmstrconstunit.sforeignserver
 msgid "Foreign server"
@@ -3056,6 +3072,10 @@ msgstr "Протокол в файл"
 #: fbmstrconstunit.slogtoscreen
 msgid "Log to screen"
 msgstr "Протокол на экран"
+
+#: fbmstrconstunit.slosttriggerfunctions
+msgid "Lost trigger functions"
+msgstr "Потерянные триггерные функции"
 
 #: fbmstrconstunit.slower
 msgid "Lower"
@@ -4047,6 +4067,10 @@ msgstr "Кол-во страниц = "
 #: fbmstrconstunit.spages
 msgid "Pages"
 msgstr "Страниц"
+
+#: fbmstrconstunit.spagescount
+msgid "Pages count"
+msgstr "Кол-во страниц"
 
 #: fbmstrconstunit.spagesize
 msgid "Page size      = "
@@ -5606,6 +5630,10 @@ msgstr "Имя табличного пространства"
 #: fbmstrconstunit.stablespacesize
 msgid "Table space size"
 msgstr "Размер табличного хранилища"
+
+#: fbmstrconstunit.stableswihoutprimarykey
+msgid "Tables wihout primary key"
+msgstr "Таблицы без первичного ключа"
 
 #: fbmstrconstunit.stargetcpu
 msgid "Target CPU : "

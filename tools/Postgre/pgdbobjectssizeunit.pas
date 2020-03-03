@@ -60,6 +60,7 @@ type
   private
   protected
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
+    procedure Localize;override;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure RefreshPage; override;
@@ -86,6 +87,19 @@ begin
   pgStatDB.Password:=AValue.Password;
   pgStatDB.HostName:=AValue.ServerName;
   pgStatDB.Database:=AValue.DataBaseName;
+end;
+
+procedure TpgDBObjectsSizeTools.Localize;
+begin
+  inherited Localize;
+
+  RxDBGrid1.ColumnByFieldName('oid').Title.Caption:=sOID;
+  RxDBGrid1.ColumnByFieldName('relname').Title.Caption:=sRelationName;
+  RxDBGrid1.ColumnByFieldName('total').Title.Caption:=sTotalSize;
+  RxDBGrid1.ColumnByFieldName('index').Title.Caption:=sIndexSize;
+  RxDBGrid1.ColumnByFieldName('toast').Title.Caption:=sToastSize;
+  RxDBGrid1.ColumnByFieldName('avg_rec_count').Title.Caption:=sAvgRecCount;
+  RxDBGrid1.ColumnByFieldName('relpages').Title.Caption:=sPagesCount;
 end;
 
 constructor TpgDBObjectsSizeTools.Create(TheOwner: TComponent);
