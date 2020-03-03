@@ -637,6 +637,7 @@ type
     FParserState:TParserSelectState;
     FWhereExpression: string;
     FCurCTE: TSQLCommandSelectCTE;
+    FCurOrderByField: TSQLParserField;
     procedure ParseJoinOn(ASQLParser: TSQLParser);
     procedure ParseFieldExp(ASQLParser: TSQLParser; AWord:string; AChild: TSQLTokenRecord);
   protected
@@ -2097,7 +2098,9 @@ var
   Par1, FSQLTokens, Par2, T, TSymb, TTbl1, TTbl2, TJI,
     TJL, TJR, TJF, TJ, TOn, T1, TTbl_AS, TTbl_ALIAS, T_AS,
     T_AL, T2, T3, T4, T5, T6, T7, T1_Symb, TBLV1, TBLV1_AS,
-    TBLV1_ALIAS, TAS_FA, TSymbTbl, T6_1, FSQLTokens1, TWhere: TSQLTokenRecord;
+    TBLV1_ALIAS, TAS_FA, TSymbTbl, T6_1, FSQLTokens1, TWhere,
+    TOrderBy, TTbl3, TTbl4, TOrderBy_1, TOrderBy1, TOrderBy1_1,
+    TOrderBy_2, TOrderBy2: TSQLTokenRecord;
 begin
 (*
 Синтаксис PG 12
@@ -2222,14 +2225,14 @@ TABLE [ ONLY ] имя_таблицы [ * ]
   TJR:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'RIGTH', [toOptional], 12);
   TJF:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'FULL', [toOptional], 13);
   TJ:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TJI, TJL, TJR, TJF, TBLV1_ALIAS, TTbl_AS, TTbl_ALIAS], 'JOIN', [toOptional], 14);
-    TTbl1:=AddSQLTokens(stIdentificator, TJ, '', [], 3);
-      TTbl1.AddChildToken(TWhere);
-      TTbl2:=AddSQLTokens(stIdentificator, TTbl1, '.', []);
-      TTbl2:=AddSQLTokens(stIdentificator, TTbl2, '', [], 4);
+    TTbl3:=AddSQLTokens(stIdentificator, TJ, '', [], 3);
+      TTbl3.AddChildToken(TWhere);
+      TTbl4:=AddSQLTokens(stIdentificator, TTbl3, '.', []);
+      TTbl4:=AddSQLTokens(stIdentificator, TTbl4, '', [], 4);
       TBLV1:=AddSQLTokens(stIdentificator, TJ, '(', [], 30);
-      TTbl2.AddChildToken(TWhere);
-      TTbl_AS:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TBLV1], 'AS', []);
-      TTbl_ALIAS:=AddSQLTokens(stIdentificator, [TTbl1, TTbl2, TTbl_AS, TBLV1], '', [], 5);
+      TTbl4.AddChildToken(TWhere);
+      TTbl_AS:=AddSQLTokens(stKeyword, [TTbl3, TTbl4, TBLV1], 'AS', []);
+      TTbl_ALIAS:=AddSQLTokens(stIdentificator, [TTbl3, TTbl4, TTbl_AS, TBLV1], '', [], 5);
       TTbl_ALIAS.AddChildToken(TWhere);
 
       TAS_FA:=AddSQLTokens(stSymbol, TTbl_ALIAS, '(', [toOptional]);
@@ -2239,10 +2242,22 @@ TABLE [ ONLY ] имя_таблицы [ * ]
           TAS_FA:=AddSQLTokens(stKeyword, TAS_FA, ')', [], 16);
           TAS_FA.AddChildToken(TWhere);
 
-    TOn:=AddSQLTokens(stKeyword, [TTbl1, TTbl2, TTbl_ALIAS, TAS_FA], 'ON', [], 20);
+    TOn:=AddSQLTokens(stKeyword, [TTbl3, TTbl4, TTbl_ALIAS, TAS_FA], 'ON', [], 20);
     TOn.AddChildToken([TJI, TJL, TJR, TJF, TJ, TSymbTbl, TWhere]);
 
+  //[ ORDER BY выражение [ ASC | DESC | USING оператор ] [ NULLS { FIRST | LAST } ] [, ...] ]
+  TOrderBy:=AddSQLTokens(stKeyword, [TOn, TTbl1, TTbl2, TTbl3, TTbl4, TTbl_ALIAS], 'ORDER', []);
+  TOrderBy_1:=AddSQLTokens(stKeyword, TOrderBy, 'BY', []);
+    TOrderBy1:=AddSQLTokens(stIdentificator, TOrderBy_1, '', [], 201);
+    TOrderBy1_1:=AddSQLTokens(stSymbol, TOrderBy1, '.', [toOptional], 201);
+    TOrderBy1_1:=AddSQLTokens(stIdentificator, TOrderBy1_1, '.', [], 201);
 
+    TOrderBy_2:=AddSQLTokens(stSymbol, [TOrderBy1, TOrderBy1_1], ',', [toOptional], 202);
+
+    TOrderBy2:=AddSQLTokens(stInteger, [TOrderBy_1, TOrderBy_2], '', [], 201);
+    TOrderBy2.AddChildToken(TOrderBy_2);
+
+  TOrderBy_2.AddChildToken([TOrderBy1])
 end;
 
 procedure TSQLCommandSelect.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -2341,6 +2356,13 @@ begin
     83:if Assigned(FCurCTE) then
         FCurCTE.Fields.AddParam(AWord);
     21:FWhereExpression:=ASQLParser.GetToCommandDelemiter;
+
+    201:begin
+          if not Assigned(FCurOrderByField) then
+            FCurOrderByField:=OrderByFields.AddParam('');
+          FCurOrderByField.Caption:=FCurOrderByField.Caption + AWord;
+        end;
+    202:FCurOrderByField:=nil;
   end;
 end;
 
