@@ -87,6 +87,7 @@ type
     constructor Create(TheOwner: TComponent); override;
     procedure Localize;
     function VriablesList(ForPG:boolean):string;
+    function DeleteVariable:Boolean;
     procedure FillSynCompletionList(const KeyStartWord:string; const AItems:TSynCompletionObjList);
     procedure FillStringList(const AItems:TStringList); inline;
     function ParseSQL(SqlLine:string):string;
@@ -113,12 +114,7 @@ end;
 
 procedure TfbmPGLocalVarsEditorFrame.lvDeleteExecute(Sender: TObject);
 begin
-  if rxLocalVars.RecordCount > 0 then
-  begin
-    RxDBGrid2.SetFocus;
-    if QuestionBoxFmt(sDeleteLocalVarQuest, [rxLocalVarsVAR_NAME.AsString]) then
-      rxLocalVars.Delete;
-  end;
+  DeleteVariable;
 end;
 
 procedure TfbmPGLocalVarsEditorFrame.lvDownExecute(Sender: TObject);
@@ -272,6 +268,20 @@ begin
 
   if (Result <> '') and ForPG then
     Result:='declare' + LineEnding + Result;
+end;
+
+function TfbmPGLocalVarsEditorFrame.DeleteVariable: Boolean;
+begin
+  Result:=false;
+  if rxLocalVars.RecordCount > 0 then
+  begin
+    RxDBGrid2.SetFocus;
+    if QuestionBoxFmt(sDeleteLocalVarQuest, [rxLocalVarsVAR_NAME.AsString]) then
+    begin
+      rxLocalVars.Delete;
+      Result:=true;
+    end;
+  end;
 end;
 
 procedure TfbmPGLocalVarsEditorFrame.FillSynCompletionList(

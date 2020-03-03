@@ -42,7 +42,7 @@ type
     OwnerPageName:string;
   end;
 
-  TppMsgListEvent = procedure(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec) of object;
+  TppMsgListEvent = function(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean of object;
 
   { TfbmCompillerMessagesFrame }
 
@@ -151,7 +151,7 @@ end;
 
 procedure TfbmCompillerMessagesFrame.rxMsgListAfterScroll(DataSet: TDataSet);
 begin
-  lvRemoveVar.Enabled:=TppMsgType(rxMsgListMsgType.AsInteger) in [ppLocalVarNotUsed, ppInParamNotUsed, ppOutParamNotUsed];
+  lvRemoveVar.Enabled:=TppMsgType(rxMsgListMsgType.AsInteger) in [ppLocalVarNotUsed] //, ppInParamNotUsed, ppOutParamNotUsed];
 end;
 
 procedure TfbmCompillerMessagesFrame.lvClearExecute(Sender: TObject);
@@ -171,7 +171,8 @@ begin
     RecInfo.Info1:=rxMsgListInfo1.AsInteger;
     RecInfo.Info2:=rxMsgListInfo2.AsInteger;
     RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
-    FOnMsgListRemoveNotUsedVar(Self, RecInfo)
+    if FOnMsgListRemoveNotUsedVar(Self, RecInfo) then
+      rxMsgList.Delete;
   end;
 end;
 

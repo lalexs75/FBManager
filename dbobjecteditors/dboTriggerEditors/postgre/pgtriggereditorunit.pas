@@ -102,8 +102,8 @@ type
     procedure DoTextEditorDefineVariable(Sender: TObject);
     procedure TextEditorPopUpMenu(Sender: TObject);
     procedure DoPreParseCode;
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
+    function ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):boolean; override;
+    function ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):boolean; override;
   public
     function PageName:string;override;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); override;
@@ -667,14 +667,14 @@ begin
   PGPreParsePlSQL(Self, EditorFrame.EditorText, FLocalVars, nil, nil, nil, nil);
 end;
 
-procedure TpgTriggerEditorPage.ppMsgListDblClick(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TpgTriggerEditorPage.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): boolean;
 begin
   inherited ppMsgListDblClick(Sender, AInfo);
 end;
 
-procedure TpgTriggerEditorPage.ppMsgListRemoveVar(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TpgTriggerEditorPage.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): boolean;
 begin
   inherited ppMsgListRemoveVar(Sender, AInfo);
 end;

@@ -162,8 +162,8 @@ type
     procedure TextEditorPopUpMenu(Sender: TObject);
     function PGFunctionGetHintData(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean;
 
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); override;
+    function ppMsgListDblClick(Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec):Boolean; override;
+    function ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean; override;
 
     procedure DoPreParseCode;
   public
@@ -836,8 +836,8 @@ begin
   end;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.ppMsgListDblClick(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TfbmPostGreeFunctionEdtMainPage.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): Boolean;
 begin
 
   case AInfo.MsgType of
@@ -886,25 +886,28 @@ begin
   end;
 end;
 
-procedure TfbmPostGreeFunctionEdtMainPage.ppMsgListRemoveVar(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TfbmPostGreeFunctionEdtMainPage.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): Boolean;
 begin
+  Result:=false;
   case AInfo.MsgType of
     ppLocalVarNotUsed:
       begin
         PageControl1.ActivePage:=TabSheet3;
         FLocalVars.RxDBGrid2.SelectedField:=FLocalVars.rxLocalVarsVAR_NAME;
         if FLocalVars.rxLocalVars.Locate('VAR_NAME', AInfo.InfoMsg, []) then
-          FLocalVars.lvDelete.Execute;
+          Result:=FLocalVars.DeleteVariable;
       end;
-    ppOutParamNotUsed,
+(*    ppOutParamNotUsed,
     ppInParamNotUsed:
       begin
         PageControl1.ActivePage:=TabSheet2;
         RxDBGrid1.SelectedField:=rxParamListParName;
         if rxParamList.Locate('ParName', AInfo.InfoMsg, []) then
           parDel.Execute;
-      end;
+      end; *)
+  else
+    Result:=false;
   end;
 end;
 

@@ -181,6 +181,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 1
+    TitleStyle = tsNative
     OnDblClick = RxDBGrid1DblClick
   end
   object rxMsgList: TRxMemoryData
@@ -220,6 +221,8 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         DataType = ftString
         Size = 300
       end>
+    AfterPost = rxMsgListAfterScroll
+    AfterDelete = rxMsgListAfterScroll
     AfterScroll = rxMsgListAfterScroll
     PacketRecords = 0
     Left = 144

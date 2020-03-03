@@ -57,8 +57,8 @@ type
   public
     FModifiedEvent:TNotifyEvent;
     constructor CreatePage(TheOwner: TComponent; ADBObject:TDBObject); virtual;
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec); virtual;
+    function ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean; virtual;
+    function ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean; virtual;
     function PageName:string;virtual;abstract;
     function ImageName:string;virtual;
     procedure Activate;virtual;
@@ -192,14 +192,14 @@ begin
   end;
 end;
 
-procedure TEditorPage.ppMsgListDblClick(Sender: TfbmCompillerMessagesFrame;
-  AInfo: TppMsgRec);
+function TEditorPage.ppMsgListDblClick(Sender: TfbmCompillerMessagesFrame;
+  AInfo: TppMsgRec): Boolean;
 begin
 
 end;
 
-procedure TEditorPage.ppMsgListRemoveVar(Sender: TfbmCompillerMessagesFrame;
-  AInfo: TppMsgRec);
+function TEditorPage.ppMsgListRemoveVar(Sender: TfbmCompillerMessagesFrame;
+  AInfo: TppMsgRec): Boolean;
 begin
 
 end;

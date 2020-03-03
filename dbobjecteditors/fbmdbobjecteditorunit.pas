@@ -103,8 +103,8 @@ type
     procedure SetInspectorRecord(AValue: TDBInspectorRecord);
     procedure OnUpdateModified(Sender: TObject);
     procedure SetObjectCaption(AModified:boolean);
-    procedure ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
-    procedure ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec);
+    function ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean;
+    function ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean;
   public
     OnCreateNewDBObject:TOnCreateNewDBObject;
     constructor CreateObjectEditor(ADataBaseRecord: TDBInspectorRecord);
@@ -521,12 +521,13 @@ begin
   fbManagerMainForm.RxMDIPanel1.ChildWindowsUpdateCaption(Self);
 end;
 
-procedure TfbmDBObjectEditorForm.ppMsgListDblClick(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TfbmDBObjectEditorForm.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): Boolean;
 var
   EditorPage: TEditorPage;
   i: Integer;
 begin
+  Result:=false;
   for i:=0 to ListBox1.Items.Count - 1 do
   begin
     if Assigned(ListBox1.Items.Objects[i]) then
@@ -534,19 +535,21 @@ begin
       EditorPage:=ListBox1.Items.Objects[i] as TEditorPage;
       if EditorPage.Name = AInfo.OwnerPageName then
       begin
-        EditorPage.ppMsgListDblClick(Sender, AInfo);
+        SetPageNum(i);
+        Result:=EditorPage.ppMsgListDblClick(Sender, AInfo);
         break;
       end;
     end;
   end;
 end;
 
-procedure TfbmDBObjectEditorForm.ppMsgListRemoveVar(
-  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec);
+function TfbmDBObjectEditorForm.ppMsgListRemoveVar(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): Boolean;
 var
   EditorPage: TEditorPage;
   i: Integer;
 begin
+  Result:=false;
   for i:=0 to ListBox1.Items.Count - 1 do
   begin
     if Assigned(ListBox1.Items.Objects[i]) then
@@ -554,7 +557,8 @@ begin
       EditorPage:=ListBox1.Items.Objects[i] as TEditorPage;
       if EditorPage.Name = AInfo.OwnerPageName then
       begin
-        EditorPage.ppMsgListRemoveVar(Sender, AInfo);
+        SetPageNum(i);
+        Result:=EditorPage.ppMsgListRemoveVar(Sender, AInfo);
         break;
       end;
     end;
