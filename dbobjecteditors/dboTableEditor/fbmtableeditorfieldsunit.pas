@@ -1286,6 +1286,7 @@ var
   C: TSQLConstraintItem;
   C_PK : TSQLConstraintItem;
   AIO: TAutoIncObject;
+  FExistsPK:Boolean;
 begin
   if DBObject is TDBViewObject then
   begin
@@ -1294,6 +1295,7 @@ begin
     exit;
   end;
 
+  FExistsPK:=false;
   if (DBObject.State = sdboCreate) then
   begin
     if edtTableName.Text = '' then
@@ -1310,7 +1312,8 @@ begin
     begin
       F:=R.Fields.AddParam(rxFieldListFIELD_NAME.AsString);
       FillSQLField(F);
-
+      if F.PrimaryKey then
+        FExistsPK:=true;
       if F.PrimaryKey and(fePKAutoName in DBObject.OwnerDB.SQLEngileFeatures)  then
       begin
         //Костыль для птицы и имени PK
@@ -1387,6 +1390,9 @@ begin
 
     if Assigned(AIO) then
       FreeAndNil(AIO);
+
+    if not FExistsPK then
+      ShowMsg(ppTableNotHavePK, R.FullName, 0, 0);
   end;
   Result:=true;
 end;

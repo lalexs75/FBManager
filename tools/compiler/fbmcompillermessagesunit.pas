@@ -32,7 +32,8 @@ type
   TfbmCompillerMessagesFrame = class;
   TppMsgType = (ppNone, ppLocalVarNotUsed,
     ppLocalVarErrorDefine, ppInParamNotUsed, ppOutParamNotUsed, ppParamNameNotDefined,
-    ppParamTypeNotDefined, ppLocalVarNameNotDefined, ppLocalVarTypeNotDefined);
+    ppParamTypeNotDefined, ppLocalVarNameNotDefined, ppLocalVarTypeNotDefined,
+    ppTableNotHavePK);
 
   TppMsgRec = record
     MsgType:TppMsgType;
@@ -121,6 +122,7 @@ procedure TfbmCompillerMessagesFrame.rxMsgListMsgTypeGetText(Sender: TField;
   var aText: string; DisplayText: Boolean);
 begin
   case TppMsgType(rxMsgListMsgType.AsInteger) of
+    ppTableNotHavePK,
     ppInParamNotUsed, ppOutParamNotUsed,
     ppLocalVarNotUsed:aText:=sWarning;
     ppParamNameNotDefined,
@@ -195,6 +197,7 @@ begin
     ppLocalVarNotUsed:rxMsgListText.AsString:=Format(sLocalVariableNotUsed, [AMsg]);
     ppInParamNotUsed:rxMsgListText.AsString:=Format(sInputParamNotUsed, [AMsg]);
     ppOutParamNotUsed:rxMsgListText.AsString:=Format(sOutputParamNotUsed, [AMsg]);
+    ppTableNotHavePK:rxMsgListText.AsString:=Format(sTableNotHavePK, [AMsg]);
   else
     rxMsgListText.AsString:=AMsg;
   end;
@@ -203,6 +206,7 @@ begin
   rxMsgListInfo2.AsInteger:=AInfo2;
 
   case AMsgType of
+    ppTableNotHavePK,
     ppInParamNotUsed, ppOutParamNotUsed,
     ppLocalVarNotUsed:rxMsgListMsgTypeImg.AsInteger:=1;
     ppParamNameNotDefined,

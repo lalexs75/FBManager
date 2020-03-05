@@ -1642,6 +1642,7 @@ resourcestring
   sParamTypeNotDefined                         = 'Param type not defined - ''%s''';
   sLocalVariableNameNotDefined                 = 'Variable name not defined, or error in param name - ''%s''';
   sLocalVariableTypeNotDefined                 = 'Variable type not defined - ''%s''';
+  sTableNotHavePK                              = 'Table "%s" not have primary key';
   sClearMessageListQuestion                    = 'Clear message list?';
   sBlockedPid                                  = 'Blocked pid';
   sBlockedUser                                 = 'Blocked user';
