@@ -6266,6 +6266,24 @@ begin
         Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName)+')';
       end;
     end;
+
+  if Result = '' then
+  begin
+    for F in Fields do
+    begin
+      if Result<>'' then
+        Result:=Result + ' and ';
+      case ASQLParamState of
+        spsNew:Result:=Result + '('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('new_' + F.FieldName)+')';
+        spsOld:Result:=Result + '( ('+DoFormatName(F.FieldName) + ' = :'+DoFormatName('old_' + F.FieldName)+') or '+
+      '   (('+DoFormatName(F.FieldName) + ' is null) and (:'+DoFormatName('old_' + F.FieldName)+' is null)))';
+      else
+        //spsNormal
+        Result:=Result + '('+DoFormatName(F.FieldName) + ' = :' + DoFormatName(F.FieldName)+')';
+      end;
+    end;
+  end;
+
   if Result <> '' then
     Result:= ' where '+Result;
 end;

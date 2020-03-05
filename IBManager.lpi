@@ -1940,4 +1940,14 @@
       </Options>
     </Linking>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions>
+      <Item>
+        <Name Value="EZSQLException"/>
+      </Item>
+      <Item>
+        <Name Value="EZDatabaseError"/>
+      </Item>
+    </Exceptions>
+  </Debugging>
 </CONFIG>
