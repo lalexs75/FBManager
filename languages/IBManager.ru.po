@@ -5604,6 +5604,11 @@ msgctxt "fbmstrconstunit.stablename"
 msgid "Table name"
 msgstr "Имя таблицы"
 
+#: fbmstrconstunit.stablenothavepk
+#, object-pascal-format
+msgid "Table \"%s\" not have primary key"
+msgstr ""
+
 #: fbmstrconstunit.stableowner
 msgctxt "fbmstrconstunit.stableowner"
 msgid "Table owner"
@@ -6531,3 +6536,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

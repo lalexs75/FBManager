@@ -185,7 +185,7 @@ type
 implementation
 uses rxAppUtils, fbmStrConstUnit, ib_manager_table_editor_field_order_unit, fbmToolsUnit,
   fbmDBObjectEditorUnit, IBManDataInspectorUnit, SQLEngineInternalToolsUnit,
-  fbmTableFieldEditorUnit, Clipbrd;
+  fbmTableFieldEditorUnit, Clipbrd, fbmCompillerMessagesUnit;
 
 {$R *.lfm}
 

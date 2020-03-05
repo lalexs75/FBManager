@@ -5432,6 +5432,11 @@ msgstr ""
 msgid "Table name"
 msgstr ""
 
+#: fbmstrconstunit.stablenothavepk
+#, object-pascal-format
+msgid "Table \"%s\" not have primary key"
+msgstr ""
+
 #: fbmstrconstunit.stableowner
 msgid "Table owner"
 msgstr ""
