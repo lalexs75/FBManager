@@ -4,9 +4,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lazaruside\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-19 17:07+0200\n"
+"PO-Revision-Date: 2019-12-24 09:53+0200\n"
 "Last-Translator: Olexandr Pylypchuk <lxlalexlxl@ukr.net>\n"
-"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -734,6 +734,28 @@ msgstr "Зелений"
 msgid "List index exceeds bounds (%d)"
 msgstr "Індекс списку поза діапазоном (%d)"
 
+#: lclstrconsts.rsmacosmenuhide
+#, object-pascal-format
+msgid "Hide %s"
+msgstr "Приховати %s"
+
+#: lclstrconsts.rsmacosmenuhideothers
+msgid "Hide Others"
+msgstr "Приховати решту"
+
+#: lclstrconsts.rsmacosmenuquit
+#, object-pascal-format
+msgid "Quit %s"
+msgstr "Вийти з %s"
+
+#: lclstrconsts.rsmacosmenuservices
+msgid "Services"
+msgstr "Служби"
+
+#: lclstrconsts.rsmacosmenushowall
+msgid "Show All"
+msgstr "Показати все"
+
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
 msgstr "Коричнево-малиновий"
@@ -1199,10 +1221,6 @@ msgstr "Жовтий"
 #: lclstrconsts.scannotfocus
 msgid "Cannot focus a disabled or invisible window"
 msgstr "Не можна дати фокус вимкненому або невидимому вікну"
-
-#: lclstrconsts.scannotsetdesigntimeppi
-msgid "Cannot set design time PPI."
-msgstr "Неможливо встановити ПНД часу розробки."
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
