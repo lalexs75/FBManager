@@ -93,7 +93,6 @@
         <TopLine Value="832"/>
         <CursorPos Y="847"/>
         <UsageCount Value="13"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit11>
       <Unit12>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/component/ZConnection.pas"/>
@@ -101,7 +100,6 @@
         <TopLine Value="48"/>
         <CursorPos X="14" Y="78"/>
         <UsageCount Value="11"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit12>
       <Unit13>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6.pas"/>
@@ -109,7 +107,6 @@
         <TopLine Value="202"/>
         <CursorPos X="3" Y="207"/>
         <UsageCount Value="11"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit13>
       <Unit14>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/plain/ZPlainFirebirdDriver.pas"/>
@@ -117,7 +114,6 @@
         <TopLine Value="961"/>
         <CursorPos Y="980"/>
         <UsageCount Value="11"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit14>
       <Unit15>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6Utils.pas"/>
@@ -125,7 +121,6 @@
         <TopLine Value="951"/>
         <CursorPos Y="970"/>
         <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit15>
       <Unit16>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6ResultSet.pas"/>
@@ -133,7 +128,6 @@
         <TopLine Value="1867"/>
         <CursorPos Y="1887"/>
         <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit16>
       <Unit17>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcCachedResultSet.pas"/>
@@ -141,7 +135,6 @@
         <TopLine Value="2427"/>
         <CursorPos Y="2447"/>
         <UsageCount Value="10"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit17>
       <Unit18>
         <Filename Value="/usr/local/share/lazarus/lcl/dbgrids.pas"/>
