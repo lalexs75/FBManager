@@ -268,12 +268,13 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     TabStop = True
   end
   object Label2: TLabel[8]
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = CheckBox4
+    AnchorSideLeft.Control = CLabel
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox1
     AnchorSideTop.Side = asrBottom
-    Left = 6
+    Left = 321
     Height = 17
-    Top = 381
+    Top = 326
     Width = 98
     BorderSpacing.Around = 6
     Caption = 'Record for fetch'
@@ -283,9 +284,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Label2
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
-    Left = 12
+    Left = 327
     Height = 33
-    Top = 404
+    Top = 349
     Width = 194
     BorderSpacing.Around = 6
     MaxValue = 2000000000
@@ -365,7 +366,7 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 443
+    Top = 388
     Width = 452
     BorderSpacing.Around = 6
     Caption = 'On create new field with FK ask to fill field name and type from FK field'
@@ -382,12 +383,12 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     ParentColor = False
   end
   object CheckBox6: TCheckBox[17]
-    AnchorSideLeft.Control = CLabel
-    AnchorSideTop.Control = ColorBox1
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox5
     AnchorSideTop.Side = asrBottom
-    Left = 320
+    Left = 6
     Height = 23
-    Top = 326
+    Top = 417
     Width = 299
     BorderSpacing.Around = 6
     Caption = 'Enable edit data in tables without primary key'

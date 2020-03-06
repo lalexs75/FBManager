@@ -192,7 +192,7 @@ msgstr "Множитель ANALYZE"
 #: fbmstrconstunit.sanalyzescalefactorhint
 msgctxt "fbmstrconstunit.sanalyzescalefactorhint"
 msgid "Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples"
-msgstr ""
+msgstr "Количество вставок, обновлений или удалений кортежей перед анализом в виде доли от кортежей"
 
 #: fbmstrconstunit.sanalyzethreshold
 msgid "Analyze threshold"
@@ -874,7 +874,7 @@ msgstr "Создать DELETE процедуру"
 
 #: fbmstrconstunit.screatefieldfkaskfillfieldname
 msgid "On create new field with FK ask to fill field name and type from FK field"
-msgstr ""
+msgstr "При создании нового поля с FK спросить имя на основе FK поля"
 
 #: fbmstrconstunit.screateindex
 msgid "Create index"
@@ -1750,7 +1750,7 @@ msgstr "Разрешено"
 
 #: fbmstrconstunit.senableeditdatawopk
 msgid "Enable edit data in tables without primary key"
-msgstr ""
+msgstr "Разрешить редактирование данных для таблиц без первичного ключа"
 
 #: fbmstrconstunit.senablelogginmetadatachanges
 msgid "Enable loggin metadata changes"
@@ -2371,7 +2371,7 @@ msgstr ""
 
 #: fbmstrconstunit.sfreezemaxagehint
 msgid "Age at which to autovacuum a table to prevent transaction ID wraparound"
-msgstr ""
+msgstr "Возраст, в котором можно выполнить автоматическую очистку таблицы, чтобы предотвратить повторное использование идентификатора транзакции"
 
 #: fbmstrconstunit.sfreezeminage
 msgctxt "fbmstrconstunit.sfreezeminage"
@@ -5615,7 +5615,7 @@ msgstr "Имя таблицы"
 #: fbmstrconstunit.stablenothavepk
 #, object-pascal-format
 msgid "Table \"%s\" not have primary key"
-msgstr ""
+msgstr "Таблица \"%s\" не имеет первичного ключа"
 
 #: fbmstrconstunit.stableowner
 msgctxt "fbmstrconstunit.stableowner"
@@ -6544,4 +6544,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
