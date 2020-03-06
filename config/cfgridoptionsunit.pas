@@ -38,6 +38,7 @@ type
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
     ColorBox1: TColorBox;
     Edit1: TEdit;
     Edit4: TEdit;
@@ -51,6 +52,7 @@ type
     Label11: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    CLabel: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -99,8 +101,8 @@ begin
   Edit6.Text:=ConfigValues.ByNameAsString('goffNumeric', '');
   Edit7.Text:=ConfigValues.ByNameAsString('goffInteger', '');
 
-  Edit9.Text:=DateSeparator;
-  Edit1.Text:=ThousandSeparator;
+  Edit9.Text:=DefaultFormatSettings.DateSeparator;
+  Edit1.Text:=DefaultFormatSettings.ThousandSeparator;
   CheckBox1.Checked:=ConfigValues.ByNameAsBoolean('Grid/Show memo values', true);
   CheckBox2.Checked:=ConfigValues.ByNameAsBoolean('Grid/Allow multiselect', true);
   CheckBox3.Checked:=ConfigValues.ByNameAsBoolean('Grid/Stripy grids', true);
@@ -112,6 +114,7 @@ begin
   ColorBox1.Selected:=ConfigValues.ByNameAsInteger('Grid/Alternate color', clSkyBlue);
 
   CheckBox5.Checked:=ConfigValues.ByNameAsBoolean('Fields editro/Ask to fill name from FK', true);
+  CheckBox6.Checked:=ConfigValues.ByNameAsBoolean('Grid/Enable edit data in tables without primary key', true);
 end;
 
 procedure TcfGridOptionsFrame.SaveData;
@@ -124,12 +127,12 @@ begin
   ConfigValues.SetByNameAsString('goffInteger', Edit7.Text);
 
   if Edit9.Text<>'' then
-    DateSeparator:=Edit9.Text[1];
+    DefaultFormatSettings.DateSeparator:=Edit9.Text[1];
   if Edit1.Text<>'' then
-    ThousandSeparator:=Edit1.Text[1];
+    DefaultFormatSettings.ThousandSeparator:=Edit1.Text[1];
 
-  ConfigValues.SetByNameAsString('DateSeparator', QuotedString(DateSeparator, '"'));
-  ConfigValues.SetByNameAsString('ThousandSeparator',  QuotedString(ThousandSeparator, '"'));
+  ConfigValues.SetByNameAsString('DateSeparator', QuotedString(DefaultFormatSettings.DateSeparator, '"'));
+  ConfigValues.SetByNameAsString('ThousandSeparator',  QuotedString(DefaultFormatSettings.ThousandSeparator, '"'));
   ConfigValues.SetByNameAsBoolean('Grid/Show memo values', CheckBox1.Checked);
   ConfigValues.SetByNameAsBoolean('Grid/Show memo values', CheckBox1.Checked);
   ConfigValues.SetByNameAsBoolean('Grid/Allow multiselect', CheckBox2.Checked);
@@ -141,6 +144,7 @@ begin
 
   ConfigValues.SetByNameAsInteger('Grid/Alternate color', ColorBox1.Selected);
   ConfigValues.SetByNameAsBoolean('Fields editro/Ask to fill name from FK', CheckBox5.Checked);
+  ConfigValues.SetByNameAsBoolean('Grid/Enable edit data in tables without primary key', CheckBox6.Checked);
 end;
 
 procedure TcfGridOptionsFrame.Localize;
@@ -166,6 +170,8 @@ begin
   CheckBox2.Caption:=sAllowMultiselect;
   CheckBox3.Caption:=sStripyGrids;
   CheckBox4.Caption:=sEnableTooltips;
+  CheckBox5.Caption:=sCreateFieldFKAskFillFieldName;
+  CheckBox6.Caption:=sEnableEditDataWOPK;
 
   RadioGroup2.Caption:=sFilterStyle;
   RadioGroup2.Items[0]:=sSimple;

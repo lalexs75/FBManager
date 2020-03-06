@@ -840,6 +840,10 @@ msgstr ""
 msgid "Create DELETE procedure"
 msgstr ""
 
+#: fbmstrconstunit.screatefieldfkaskfillfieldname
+msgid "On create new field with FK ask to fill field name and type from FK field"
+msgstr ""
+
 #: fbmstrconstunit.screateindex
 msgid "Create index"
 msgstr ""
@@ -1668,6 +1672,10 @@ msgstr ""
 
 #: fbmstrconstunit.senabled
 msgid "Enabled"
+msgstr ""
+
+#: fbmstrconstunit.senableeditdatawopk
+msgid "Enable edit data in tables without primary key"
 msgstr ""
 
 #: fbmstrconstunit.senablelogginmetadatachanges

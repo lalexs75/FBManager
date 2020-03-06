@@ -1317,6 +1317,8 @@ resourcestring
   sEnableSetWGOFromPopup            = 'Enable set "With Grant Options" from popup menu';
   sAutoFillCollumnWidth             = 'Auto fill collumn width';
   sAutoFillCollumnWidthHint         = 'Automatically fill column width by actual data width';
+  sCreateFieldFKAskFillFieldName    = 'On create new field with FK ask to fill field name and type from FK field';
+  sEnableEditDataWOPK               = 'Enable edit data in tables without primary key';
 
   sFilterInTable                    = 'Filter in table';
   sFilterInTableHint                = 'Show filter in table';

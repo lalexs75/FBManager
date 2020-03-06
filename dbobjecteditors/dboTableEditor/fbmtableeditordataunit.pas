@@ -137,7 +137,7 @@ type
 implementation
 uses fbmStrConstUnit, fbmToolsUnit, fbmSQLEditor_ShowMemoUnit, ImportDataUnit,
   GenerateDataUnit, sqlObjects, fbmMakeSQLFromDataSetUnit, LCLType, Clipbrd,
-  rxdconst, rxdbutils;
+  rxdconst, rxdbutils, fbmCompillerMessagesUnit;
 
 {$R *.lfm}
 
@@ -302,6 +302,19 @@ begin
           end;
         end;
       end;
+    end
+    else
+    if ( not(FPriorState in dsEditModes)) and (DataSource1.DataSet.State in dsEditModes) then
+    begin
+      if DBObject is TDBTableObject then
+        if not TDBTableObject(DBObject).ExistsPrimaryKey then
+          if not ConfigValues.ByNameAsBoolean('Grid/Enable edit data in tables without primary key', true) then
+          begin
+            ClearMsg;
+            ShowMsg(ppTableNotHavePK, DBObject.CaptionFullPatch, 0, 0);
+            DataSource1.DataSet.Cancel;
+            abort;
+          end;
     end;
     FPriorState:=DataSource1.DataSet.State;
   end
@@ -471,6 +484,13 @@ begin
     DataSetAfterScrollRecord(DS);
   end;
   SetRxDBGridOptions(DataGrid);
+
+(*  DataGrid.ReadOnly:=false;
+  if DBObject is TDBTableObject then
+    if not TDBTableObject(DBObject).ExistsPrimaryKey then
+      if not ConfigValues.ByNameAsBoolean('Grid/Enable edit data in tables without primary key', true) then
+        DataGrid.ReadOnly:=true;
+*)
 end;
 
 procedure TfbmTableEditorDataFrame.UpdateEnvOptions;

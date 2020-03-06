@@ -72,6 +72,7 @@ type
     function SetupSQLObject(ASQLObject:TSQLCommandDDL):boolean; virtual;
     procedure NotyfiDeleted(ADBObject:TDBObject); virtual;
     procedure ShowMsg(AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
+    procedure ClearMsg;
     class function PageExists(ADBObject:TDBObject):Boolean; virtual;
   public
     property ReadOnly:boolean read FReadOnly write SetReadOnly;
@@ -209,6 +210,12 @@ procedure TEditorPage.ShowMsg(AMsgType: TppMsgType; AMsg: string; AInfo1,
 begin
   if Assigned(Owner) and (Owner is TfbmDBObjectEditorForm) then
     TfbmDBObjectEditorForm(Owner).ShowMsg(Self, AMsgType, AMsg, AInfo1, AInfo2);
+end;
+
+procedure TEditorPage.ClearMsg;
+begin
+  if Assigned(Owner) and (Owner is TfbmDBObjectEditorForm) then
+    TfbmDBObjectEditorForm(Owner).ClearMsg;
 end;
 
 function TEditorPage.ImageName: string;

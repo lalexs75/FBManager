@@ -1948,6 +1948,9 @@
       <Item>
         <Name Value="EZDatabaseError"/>
       </Item>
+      <Item>
+        <Name Value="EAbort"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

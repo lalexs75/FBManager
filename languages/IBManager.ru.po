@@ -872,6 +872,10 @@ msgstr "Создать "
 msgid "Create DELETE procedure"
 msgstr "Создать DELETE процедуру"
 
+#: fbmstrconstunit.screatefieldfkaskfillfieldname
+msgid "On create new field with FK ask to fill field name and type from FK field"
+msgstr ""
+
 #: fbmstrconstunit.screateindex
 msgid "Create index"
 msgstr "Создать индекс"
@@ -1743,6 +1747,10 @@ msgstr "Разрешить автодополнение"
 msgctxt "fbmstrconstunit.senabled"
 msgid "Enabled"
 msgstr "Разрешено"
+
+#: fbmstrconstunit.senableeditdatawopk
+msgid "Enable edit data in tables without primary key"
+msgstr ""
 
 #: fbmstrconstunit.senablelogginmetadatachanges
 msgid "Enable loggin metadata changes"

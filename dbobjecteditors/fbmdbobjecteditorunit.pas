@@ -117,6 +117,7 @@ type
     procedure RestoreState(const ObjName:string; const Ini:TIniFile);
     procedure ShowMsg(AOwner:TEditorPage; AMsgType:TppMsgType; AMsg:string; AInfo1, AInfo2: Integer);
     procedure HideMsg;
+    procedure ClearMsg;
 
     property InspectorRecord:TDBInspectorRecord read FInspectorRecord write SetInspectorRecord;
   end;
@@ -680,8 +681,15 @@ end;
 
 procedure TfbmDBObjectEditorForm.HideMsg;
 begin
+  if not Assigned(FCompillerMessages) then Exit;
   FCompillerMessages.Visible:=false;
   FCompillerMessagesSplitter.Visible:=false;
+end;
+
+procedure TfbmDBObjectEditorForm.ClearMsg;
+begin
+  if not Assigned(FCompillerMessages) then Exit;
+  FCompillerMessages.Clear;
 end;
 
 end.

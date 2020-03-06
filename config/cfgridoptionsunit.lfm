@@ -1,18 +1,18 @@
 inherited cfGridOptionsFrame: TcfGridOptionsFrame
   Height = 501
-  Width = 604
+  Width = 628
   ClientHeight = 501
-  ClientWidth = 604
+  ClientWidth = 628
   DesignLeft = 397
   DesignTop = 177
   object Label11: TLabel[0]
     AnchorSideLeft.Control = RadioGroup1
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = RadioGroup1
-    Left = 104
-    Height = 15
+    Left = 111
+    Height = 17
     Top = 6
-    Width = 80
+    Width = 90
     BorderSpacing.Left = 12
     Caption = 'Date separator'
     ParentColor = False
@@ -21,10 +21,10 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Edit9
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 228
-    Height = 15
+    Left = 235
+    Height = 17
     Top = 6
-    Width = 109
+    Width = 121
     BorderSpacing.Around = 6
     Caption = 'Thousand separator'
     ParentColor = False
@@ -33,9 +33,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Label11
     AnchorSideTop.Control = Label11
     AnchorSideTop.Side = asrBottom
-    Left = 110
-    Height = 31
-    Top = 27
+    Left = 117
+    Height = 33
+    Top = 29
     Width = 112
     BorderSpacing.Around = 6
     TabOrder = 1
@@ -48,23 +48,23 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 6
-    Height = 138
-    Top = 109
-    Width = 592
+    Height = 148
+    Top = 111
+    Width = 616
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'Fields format'
-    ClientHeight = 122
-    ClientWidth = 590
+    ClientHeight = 130
+    ClientWidth = 614
     TabOrder = 2
     object Label5: TLabel
       AnchorSideLeft.Control = GroupBox1
       AnchorSideTop.Control = GroupBox1
       Left = 6
-      Height = 15
+      Height = 17
       Top = 6
-      Width = 25
+      Width = 29
       BorderSpacing.Left = 6
       BorderSpacing.Top = 6
       Caption = 'Date'
@@ -76,9 +76,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Label5
       Left = 148
-      Height = 15
+      Height = 17
       Top = 6
-      Width = 27
+      Width = 30
       BorderSpacing.Left = 12
       Caption = 'Time'
       FocusControl = Edit5
@@ -89,9 +89,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Edit4
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 15
-      Top = 64
-      Width = 47
+      Height = 17
+      Top = 68
+      Width = 50
       Caption = 'Numeric'
       FocusControl = Edit6
       ParentColor = False
@@ -101,9 +101,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Label7
       Left = 148
-      Height = 15
-      Top = 64
-      Width = 38
+      Height = 17
+      Top = 68
+      Width = 44
       BorderSpacing.Left = 12
       Caption = 'Integer'
       FocusControl = Edit7
@@ -114,9 +114,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Label5
       Left = 292
-      Height = 15
+      Height = 17
       Top = 6
-      Width = 62
+      Width = 70
       BorderSpacing.Left = 12
       Caption = 'TimeStamp'
       FocusControl = Edit8
@@ -127,8 +127,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Label5
       AnchorSideTop.Side = asrBottom
       Left = 12
-      Height = 31
-      Top = 27
+      Height = 33
+      Top = 29
       Width = 124
       BorderSpacing.Around = 6
       TabOrder = 0
@@ -139,8 +139,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Label6
       AnchorSideTop.Side = asrBottom
       Left = 154
-      Height = 31
-      Top = 27
+      Height = 33
+      Top = 29
       Width = 126
       BorderSpacing.Around = 6
       TabOrder = 1
@@ -151,8 +151,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Label7
       AnchorSideTop.Side = asrBottom
       Left = 12
-      Height = 31
-      Top = 85
+      Height = 33
+      Top = 91
       Width = 124
       BorderSpacing.Around = 6
       TabOrder = 2
@@ -163,8 +163,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Label8
       AnchorSideTop.Side = asrBottom
       Left = 154
-      Height = 31
-      Top = 85
+      Height = 33
+      Top = 91
       Width = 126
       BorderSpacing.Around = 6
       TabOrder = 3
@@ -175,8 +175,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
       AnchorSideTop.Control = Label9
       AnchorSideTop.Side = asrBottom
       Left = 298
-      Height = 31
-      Top = 27
+      Height = 33
+      Top = 29
       Width = 112
       BorderSpacing.Around = 6
       TabOrder = 4
@@ -187,9 +187,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 97
+    Height = 99
     Top = 6
-    Width = 86
+    Width = 93
     AutoFill = True
     AutoSize = True
     BorderSpacing.Around = 6
@@ -203,7 +203,7 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
     ClientHeight = 81
-    ClientWidth = 84
+    ClientWidth = 91
     Items.Strings = (
       'Lazarus'
       'Standart'
@@ -216,9 +216,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Label1
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
-    Left = 234
-    Height = 31
-    Top = 27
+    Left = 241
+    Height = 33
+    Top = 29
     Width = 134
     BorderSpacing.Around = 6
     TabOrder = 3
@@ -230,8 +230,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 253
-    Width = 179
+    Top = 265
+    Width = 194
     BorderSpacing.Around = 6
     Caption = 'Display memo values as text'
     TabOrder = 4
@@ -240,10 +240,10 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideLeft.Control = Edit1
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 374
-    Height = 62
+    Left = 381
+    Height = 64
     Top = 6
-    Width = 164
+    Width = 177
     AutoFill = True
     AutoSize = True
     BorderSpacing.Around = 6
@@ -256,7 +256,7 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
     ClientHeight = 46
-    ClientWidth = 162
+    ClientWidth = 175
     Columns = 2
     Items.Strings = (
       'Simple'
@@ -272,9 +272,9 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Control = CheckBox4
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 15
-    Top = 369
-    Width = 88
+    Height = 17
+    Top = 381
+    Width = 98
     BorderSpacing.Around = 6
     Caption = 'Record for fetch'
     ParentColor = False
@@ -284,8 +284,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 31
-    Top = 390
+    Height = 33
+    Top = 404
     Width = 194
     BorderSpacing.Around = 6
     MaxValue = 2000000000
@@ -299,8 +299,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 282
-    Width = 118
+    Top = 294
+    Width = 130
     BorderSpacing.Around = 6
     Caption = 'Allow multiselect'
     TabOrder = 7
@@ -311,21 +311,22 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 311
-    Width = 89
+    Top = 323
+    Width = 94
     BorderSpacing.Around = 6
     Caption = 'Stripy grids'
     TabOrder = 8
   end
   object Label3: TLabel[12]
-    AnchorSideLeft.Control = CheckBox1
+    AnchorSideLeft.Control = CLabel
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = GroupBox1
     AnchorSideTop.Side = asrBottom
-    Left = 191
-    Height = 15
-    Top = 253
-    Width = 80
+    Left = 321
+    Height = 17
+    Top = 265
+    Width = 91
+    BorderSpacing.Around = 6
     Caption = 'Alternate color'
     FocusControl = ColorBox1
     ParentColor = False
@@ -336,10 +337,10 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 197
-    Height = 31
-    Top = 274
-    Width = 401
+    Left = 327
+    Height = 32
+    Top = 288
+    Width = 295
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -352,8 +353,8 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 340
-    Width = 106
+    Top = 352
+    Width = 118
     BorderSpacing.Around = 6
     Caption = 'Enable tooltips'
     TabOrder = 10
@@ -364,10 +365,32 @@ inherited cfGridOptionsFrame: TcfGridOptionsFrame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 23
-    Top = 427
-    Width = 406
+    Top = 443
+    Width = 452
     BorderSpacing.Around = 6
     Caption = 'On create new field with FK ask to fill field name and type from FK field'
     TabOrder = 11
+  end
+  object CLabel: TLabel[16]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 314
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object CheckBox6: TCheckBox[17]
+    AnchorSideLeft.Control = CLabel
+    AnchorSideTop.Control = ColorBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 320
+    Height = 23
+    Top = 326
+    Width = 299
+    BorderSpacing.Around = 6
+    Caption = 'Enable edit data in tables without primary key'
+    TabOrder = 12
   end
 end
