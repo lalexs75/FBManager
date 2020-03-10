@@ -383,13 +383,13 @@ object fbManagerMainForm: TfbManagerMainForm
       Category = 'Help'
       Caption = 'Latest news...'
       Hint = 'Show latest news...'
-      ImageIndex = 46
+      ImageIndex = 112
       OnExecute = hlpNewsExecute
     end
     object hlpSendBugreport: TAction
       Category = 'Help'
       Caption = 'Send bug report'
-      ImageIndex = 47
+      ImageIndex = 117
       OnExecute = hlpSendBugreportExecute
     end
     object hlpVisitToWebSite: TAction
