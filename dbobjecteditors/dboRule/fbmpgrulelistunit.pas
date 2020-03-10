@@ -289,16 +289,16 @@ end;
 function TPGRuleListPage.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-  Result:=PageAction in [epaPrint, epaRefresh, epaCompile];
+  Result:=PageAction in [epaAdd, epaEdit, epaDelete, epaPrint, epaRefresh{, epaCompile}];
 end;
 
 function TPGRuleListPage.DoMetod(PageAction: TEditorPageAction): boolean;
 begin
   Result:=true;
   case PageAction of
-{    epaAdd:fldNew.Execute;
-    epaEdit:fldEdit.Execute;
-    epaDelete:fldDelete.Execute;}
+    epaAdd:edtRuleNew.Execute;
+    epaEdit:edtRuleEdit.Execute;
+    epaDelete:edtRuleDelete.Execute;
     epaRefresh:RefreshRulesTree;
 {    epaPrint:fldPrint.Execute;
     epaCompile:Result:=Compile;}
