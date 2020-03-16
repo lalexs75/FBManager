@@ -319,8 +319,14 @@ end;
 procedure WriteSQLGlobal(FileName, LogString, UserName: string; LogTimestamp: boolean);
 var
   F:TextFile;
+  S: String;
+  B: Boolean;
 begin
-  if FileIsWritable(FileName) then
+  S:=ExtractFileDir(FileName);
+  B:=DirectoryIsWritable(S);
+  if FileExistsUTF8(FileName) then
+    B:=FileIsWritable(FileName);
+  if B then
   begin
     AssignFile(F, FileName);
     try
