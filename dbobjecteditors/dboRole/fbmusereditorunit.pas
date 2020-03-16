@@ -114,38 +114,7 @@ begin
   end;
   SpinEdit1.Value:=TPGUser(DBObject).ConnectionsLimit;
 end;
-(*
-function TfbmUserEditorForm.CompileUser:boolean;
-var
-  AUserOptions:TPGUserOptions;
-begin
-  AUserOptions:=[puoLoginEnabled];
 
-  if cgUserRigth.Checked[0] then
-    AUserOptions:=AUserOptions + [puoInheritedRight];
-  if cgUserRigth.Checked[1] then
-    AUserOptions:=AUserOptions + [puoSuperuser];
-  if cgUserRigth.Checked[2] then
-    AUserOptions:=AUserOptions + [puoCreateDatabaseObjects];
-  if cgUserRigth.Checked[3] then
-    AUserOptions:=AUserOptions + [puoCreateRoles];
-  if cgUserRigth.Checked[4] then
-    AUserOptions:=AUserOptions + [puoChangeSystemCatalog];
-  if cgUserRigth.Checked[5] then
-    AUserOptions:=AUserOptions + [puoCreateReplications];
-
-  if cbPwdNewer.Checked then
-    AUserOptions:=AUserOptions + [puoNeverExpired];
-
-  Result:=false;
-  if (edtPwd.Text<>'') and (edtPwd.Text <> edtPwdConfirm.Text) then
-  begin
-    ErrorBox(sPasswordMismath);
-    exit;
-  end;
-  Result:=TPGUser(DBObject).CompileUser(edtUserName.Text, edtPwd.Text, AUserOptions, edtPwdDate.Date, SpinEdit1.Value);
-end;
-*)
 procedure TfbmUserEditorForm.PrintUserCard;
 begin
   { TODO : Необходимо реализовать печать карточки оператора Postgre }
@@ -240,11 +209,55 @@ end;
 function TfbmUserEditorForm.SetupSQLObject(ASQLObject: TSQLCommandDDL): boolean;
 var
   CU: TPGSQLCreateRole;
-begin
-  if DBObject.State = sdboEdit then
-  begin;
-    if not (ASQLObject is TPGSQLAlterRole) then Exit;
+  AU: TPGSQLAlterRole;
 
+begin
+  Result:=false;
+  if DBObject.State = sdboEdit then
+  begin
+    if not (ASQLObject is TPGSQLAlterRole) then Exit;
+    if edtPwd.Text <> edtPwdConfirm.Text then Exit;
+
+    AU:=TPGSQLAlterRole(ASQLObject);
+    if edtUserName.Text <> DBObject.Caption then
+    begin
+      if not Assigned(AU) then
+      begin
+        AU:=TPGSQLAlterRole.Create(ASQLObject);
+        ASQLObject.AddChild(AU);
+        AU.Name:=DBObject.Caption;
+      end;
+      AU.RoleNewName:=edtUserName.Text;
+      AU.RoleOperator:=artRename;
+      AU:=nil;
+      Result:=True;
+    end;
+
+    if edtPwd.Text <> '' then
+    begin
+      if not Assigned(AU) then
+      begin
+        AU:=TPGSQLAlterRole.Create(ASQLObject);
+        ASQLObject.AddChild(AU);
+        AU.Name:=edtUserName.Text;
+      end;
+      AU.Password:=edtPwd.Text;
+      AU:=nil;
+      Result:=True;
+    end;
+
+    if TPGUser(DBObject).UserOptions <> UserOptions then
+    begin
+      if not Assigned(AU) then
+      begin
+        AU:=TPGSQLAlterRole.Create(ASQLObject);
+        ASQLObject.AddChild(AU);
+        AU.Name:=edtUserName.Text;
+      end;
+      AU.RoleOptions:=UserOptions;
+      AU:=nil;
+      Result:=True;
+    end;
   end
   else
   if DBObject.State = sdboCreate then
