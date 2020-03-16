@@ -8071,7 +8071,7 @@ begin
   begin
     if FIsWith then S:=S + ' WITH';
 
-    if ConnectionLimit > 0 then
+    if ConnectionLimit <> 0 then
       S:=S + ' CONNECTION LIMIT ' + IntToStr(FConnectionLimit)
     else
     begin

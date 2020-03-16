@@ -258,6 +258,19 @@ begin
       AU:=nil;
       Result:=True;
     end;
+
+    if TPGUser(DBObject).ConnectionsLimit <> SpinEdit1.Value then
+    begin
+      if not Assigned(AU) then
+      begin
+        AU:=TPGSQLAlterRole.Create(ASQLObject);
+        ASQLObject.AddChild(AU);
+        AU.Name:=edtUserName.Text;
+      end;
+      AU.ConnectionLimit:=SpinEdit1.Value;
+      AU:=nil;
+      Result:=True;
+    end;
   end
   else
   if DBObject.State = sdboCreate then
