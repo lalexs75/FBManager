@@ -8071,29 +8071,34 @@ begin
   begin
     if FIsWith then S:=S + ' WITH';
 
-    for RO in RoleOptions do
-      if PGUserOptionStr[RO]<>'' then
-        S:=S + ' ' + PGUserOptionStr[RO];
-
-    S1:='';
-    if puoNullPassword in RoleOptions then
-      S1:='NULL'
+    if ConnectionLimit > 0 then
+      S:=S + ' CONNECTION LIMIT ' + IntToStr(FConnectionLimit)
     else
-    if Password <>'' then
-      S1:=QuotedString(Password,  '''');
-
-    if S1 <> '' then
     begin
-      if puoPasswordEncrypted in FRoleOptions then
-        S:=S + ' ENCRYPTED'
-      else
-      if puoPasswordUnencrypted in FRoleOptions then
-        S:=S + ' UNENCRYPTED';
-      S:=S + ' PASSWORD ' + S1;
-    end;
+      for RO in RoleOptions do
+        if PGUserOptionStr[RO]<>'' then
+          S:=S + ' ' + PGUserOptionStr[RO];
 
-    if ValidUntil <> '' then
-      S:=S + ' VALID UNTIL ' + QuotedString(ValidUntil, '''');
+      S1:='';
+      if puoNullPassword in RoleOptions then
+        S1:='NULL'
+      else
+      if Password <>'' then
+        S1:=QuotedString(Password,  '''');
+
+      if S1 <> '' then
+      begin
+        if puoPasswordEncrypted in FRoleOptions then
+          S:=S + ' ENCRYPTED'
+        else
+        if puoPasswordUnencrypted in FRoleOptions then
+          S:=S + ' UNENCRYPTED';
+        S:=S + ' PASSWORD ' + S1;
+      end;
+
+      if ValidUntil <> '' then
+        S:=S + ' VALID UNTIL ' + QuotedString(ValidUntil, '''');
+    end;
   end;
   AddSQLCommand(S);
 end;

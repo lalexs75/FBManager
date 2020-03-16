@@ -1951,6 +1951,9 @@
       <Item>
         <Name Value="EAbort"/>
       </Item>
+      <Item>
+        <Name Value="EConvertError"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>
