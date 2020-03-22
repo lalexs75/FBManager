@@ -25,7 +25,7 @@ unit SQLiteActivitiMonitorUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   ComCtrls, DB, rxmemds, rxdbgrid, fdbm_monitorabstractunit,
   SQLEngineAbstractUnit, ZConnection, ZDataset;
 

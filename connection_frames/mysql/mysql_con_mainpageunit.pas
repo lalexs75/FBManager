@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, ZConnection, ZDataset, Forms, Controls, StdCtrls,
-  EditBtn, Spin, DB, fdbm_ConnectionAbstractUnit, mysql_engine,
+  Spin, DB, fdbm_ConnectionAbstractUnit, mysql_engine,
   SQLEngineAbstractUnit;
 
 type

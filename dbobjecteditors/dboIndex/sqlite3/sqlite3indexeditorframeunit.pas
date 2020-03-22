@@ -87,7 +87,7 @@ type
 
 implementation
 uses fbmStrConstUnit, fbmToolsUnit, pgTypes, SQLEngineCommonTypesUnit,
-  SQLite3EngineUnit, rxdbutils;
+  SQLite3EngineUnit;
 
 {$R *.lfm}
 

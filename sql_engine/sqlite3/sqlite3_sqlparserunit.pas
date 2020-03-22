@@ -1376,7 +1376,6 @@ procedure TSQLite3SQLCreateView.InternalProcessChildToken(
   ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
 var
 //  C, X, Y: Integer;
-  S: String;
   C: TParserPosition;
 begin
   case AChild.Tag of
@@ -1408,10 +1407,8 @@ end;
 
 procedure TSQLite3SQLCreateView.MakeSQL;
 var
-  S, S1: String;
+  S: String;
   D: TSQLite3SQLDropView;
-  F: TSQLParserField;
-  i: Integer;
 begin
   if (CreateMode in [cmRecreate, cmDropAndCreate, cmAlter]) or (ooOrReplase in Options) then
   begin

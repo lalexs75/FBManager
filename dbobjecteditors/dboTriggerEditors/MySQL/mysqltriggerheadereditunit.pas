@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  StdCtrls, Spin, ExtCtrls, fdmAbstractEditorUnit, fdbm_SynEditorUnit,
+  StdCtrls, ExtCtrls, fdmAbstractEditorUnit, fdbm_SynEditorUnit,
   SQLEngineAbstractUnit, mysql_engine, SQLEngineCommonTypesUnit,
   fbmSqlParserUnit;
 

@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  CheckLst, IniFiles, fbmSqlParserUnit, fdmAbstractEditorUnit, SQLEngineAbstractUnit,
+  IniFiles, fbmSqlParserUnit, fdmAbstractEditorUnit, SQLEngineAbstractUnit,
   mysql_engine, sqlObjects, SQLEngineCommonTypesUnit;
 
 type
