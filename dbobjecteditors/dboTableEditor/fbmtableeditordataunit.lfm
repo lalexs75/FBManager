@@ -1,15 +1,15 @@
 inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
   Height = 464
-  Width = 868
+  Width = 897
   ClientHeight = 464
-  ClientWidth = 868
+  ClientWidth = 897
   DesignLeft = 352
   DesignTop = 314
   object DataGrid: TRxDBGrid[0]
     Left = 0
     Height = 431
     Top = 33
-    Width = 868
+    Width = 897
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
     AutoSort = True
@@ -75,6 +75,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     SearchOptions.FromStart = False
     OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu]
     FooterColor = clYellow
+    BeforeSorting = DataGridBeforeSorting
     Align = alClient
     Color = clWindow
     DrawFullLine = False
@@ -95,10 +96,10 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
     Left = 0
     Height = 33
     Top = 0
-    Width = 868
+    Width = 897
     Align = alTop
     ClientHeight = 33
-    ClientWidth = 868
+    ClientWidth = 897
     TabOrder = 1
     object SpeedButton1: TSpeedButton
       AnchorSideLeft.Control = DBNavigator1
@@ -195,7 +196,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 821
+      Left = 850
       Height = 17
       Top = 8
       Width = 40
@@ -218,6 +219,20 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Action = gridAutoFillCollumn
       Anchors = [akTop, akLeft, akBottom]
       ShowCaption = False
+    end
+    object SpeedButton6: TSpeedButton
+      AnchorSideLeft.Control = SpeedButton5
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 755
+      Height = 31
+      Top = 1
+      Width = 88
+      Action = dataFetchAll
+      Anchors = [akTop, akLeft, akBottom]
+      AutoSize = True
     end
   end
   object DataSource1: TDataSource[2]
@@ -371,6 +386,14 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Category = 'data'
       Caption = 'Test data generator'
       OnExecute = dataGenerateExecute
+    end
+    object dataFetchAll: TAction
+      Category = 'Result'
+      Caption = 'Fetch all...'
+      Hint = 'Fetch all data from table'
+      ImageIndex = 118
+      OnExecute = dataFetchAllExecute
+      Visible = False
     end
   end
   object FPDataExporter1: TFPDataExporter[5]

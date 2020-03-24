@@ -36,6 +36,7 @@ type
   { TfbmTableEditorDataFrame }
 
   TfbmTableEditorDataFrame = class(TEditorPage)
+    dataFetchAll: TAction;
     dataGenerate: TAction;
     gridAutoFillCollumn: TAction;
     dataImportBlob: TAction;
@@ -53,6 +54,7 @@ type
     MenuItem18: TMenuItem;
     MenuItem6: TMenuItem;
     SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     statFilter: TAction;
     statFunct: TAction;
     dataImport: TAction;
@@ -94,7 +96,9 @@ type
     procedure dataExportExecute(Sender: TObject);
     procedure dataExportToPDFExecute(Sender: TObject);
     procedure dataExportToSpreadSheetExecute(Sender: TObject);
+    procedure dataFetchAllExecute(Sender: TObject);
     procedure dataGenerateExecute(Sender: TObject);
+    procedure DataGridBeforeSorting(Sender: TObject);
     procedure DataGridColumnSized(Sender: TObject);
     procedure DataGridDblClick(Sender: TObject);
     procedure DataGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
@@ -200,10 +204,33 @@ begin
   RxDBGridExportSpreadSheet1.Execute;
 end;
 
+procedure TfbmTableEditorDataFrame.dataFetchAllExecute(Sender: TObject);
+begin
+//  TDBDataSetObject(DBObject).DataSet(0).fe;
+end;
+
 procedure TfbmTableEditorDataFrame.dataGenerateExecute(Sender: TObject);
 begin
   if ShowGenerateDataForm(DBObject as TDBTableObject) then
     DataSource1.DataSet.Refresh;
+end;
+
+procedure TfbmTableEditorDataFrame.DataGridBeforeSorting(Sender: TObject);
+var
+  DS: TDataSet;
+  P: LongInt;
+begin
+  if SpinEdit1.Value > 0 then
+  begin
+    DS:=TDBDataSetObject(DBObject).DataSet(0);
+    DS.DisableControls;
+    P:=DS.RecNo;
+    DS.Active:=false;
+    SpinEdit1.Value:=0;
+    DS.Active:=true;
+    DS.RecNo:=P;
+    DS.EnableControls;
+  end;
 end;
 
 procedure TfbmTableEditorDataFrame.DataGridColumnSized(Sender: TObject);
@@ -453,6 +480,9 @@ begin
 
   gridAutoFillCollumn.Caption:=sAutoFillCollumnWidth;
   gridAutoFillCollumn.Caption:=sAutoFillCollumnWidthHint;
+
+  dataFetchAll.Caption:=sFetchAll;
+  dataFetchAll.Hint:=sFetchAll;
 end;
 
 function TfbmTableEditorDataFrame.PageName: string;
