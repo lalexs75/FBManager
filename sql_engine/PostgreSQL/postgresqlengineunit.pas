@@ -5384,12 +5384,18 @@ end;
 procedure TPGTable.InternalRefreshStatistic;
 var
   FQuery: TZQuery;
+  U: TDBObject;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
   Statistic.AddValue(sToastOID, IntToStr(FToastRelOID));
 
+  U:=TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID);
+  if Assigned(U) then
+    Statistic.AddValue(sOwner, U.Caption)
+  else
+     Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
   FQuery.ParamByName('oid').AsInteger:=FOID;
