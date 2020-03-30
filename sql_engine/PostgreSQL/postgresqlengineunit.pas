@@ -979,6 +979,7 @@ type
     FReturnTypeOID: integer;
     FSchema:TPGSchema;
     FOID:integer;
+    FUserOwnerID: integer;
     FVolatilityCategories: TPGSPVolatCat;
     function GetNameWithParams:string;
     procedure DoInitInParams(AParamsArray:string);
@@ -1021,6 +1022,7 @@ type
     property ACLListStr:string read FACLListStr;
     property FunctionConfig:TStrings read FFunctionConfig;
     property FunctionOID:Integer read FOID;
+    property UserOwnerID:integer read FUserOwnerID;
   end;
 
   { TPGTriggerFunction }
@@ -7999,9 +8001,17 @@ var
   FQuery: TZQuery;
   i: Integer;
   S, S1: String;
+  U: TDBObject;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
+
+  U:=TSQLEnginePostgre(OwnerDB).FindUserByID(FUserOwnerID);
+  if Assigned(U) then
+    Statistic.AddValue(sOwner, U.Caption)
+  else
+     Statistic.AddValue(sOwnerID, IntToStr(FUserOwnerID));
+
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat2_Functions']);
   FQuery.ParamByName('funcid').AsInteger:=FOID;
@@ -8372,7 +8382,7 @@ begin
   inherited RefreshObject;
   if State = sdboEdit then
   begin
-    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGFuntions['PGFuntion']);
+    Q:=TSQLEnginePostgre(OwnerDB).GetSQLQuery(pgSqlTextModule.sqlPGFunctions['PGFuntion']);
     try
       if FOID = 0 then
         Q.ParamByName('proname').AsString:=Caption
@@ -8445,6 +8455,7 @@ begin
           if Q.FieldByName('pronargdefaults').AsInteger > 0 then
             FillDefValues(Q.FieldByName('def_values').AsString);
         end;
+        FUserOwnerID:=Q.FieldByName('proowner').AsInteger;
         RefreshParamsDesc;
       end;
     finally
