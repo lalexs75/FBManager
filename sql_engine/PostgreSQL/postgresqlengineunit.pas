@@ -771,6 +771,7 @@ type
   TPGView = class(TDBViewObject)
   private
     FACLListStr: string;
+    FOwnerID: integer;
     FRelOptions: String;
     FSchema:TPGSchema;
     FOID:integer;
@@ -820,6 +821,7 @@ type
     property RelOptions: String read FRelOptions;
     property StorageParameters:TStrings read FStorageParameters;
     property ACLListStr:string read FACLListStr;
+    property OwnerID:integer read FOwnerID;
   end;
 
   TPGMatView = class(TPGView)
@@ -1903,12 +1905,17 @@ end;
 procedure TPGForeignTable.InternalRefreshStatistic;
 var
   S: String;
+  U: TDBObject;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
 
-  Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
+  U:=TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID);
+  if Assigned(U) then
+    Statistic.AddValue(sOwner, U.Caption)
+  else
+    Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
   S:=OwnerName;
   if S<>'' then
     Statistic.AddValue(sOwner, S);
@@ -5395,7 +5402,7 @@ begin
   if Assigned(U) then
     Statistic.AddValue(sOwner, U.Caption)
   else
-     Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
+    Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
 
   FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGStatistics['Stat1_Sizes']);
   FQuery.ParamByName('oid').AsInteger:=FOID;
@@ -6853,10 +6860,18 @@ procedure TPGView.InternalRefreshStatistic;
 var
   S: String;
   i: Integer;
+  U: TDBObject;
 begin
   inherited InternalRefreshStatistic;
   Statistic.AddValue(sOID, IntToStr(FOID));
   Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+
+  U:=TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID);
+  if Assigned(U) then
+    Statistic.AddValue(sOwner, U.Caption)
+  else
+    Statistic.AddValue(sOwnerID, IntToStr(FOwnerID));
+
   for i:=0 to FStorageParameters.Count-1 do
   begin
     S:=FStorageParameters[i];
@@ -6983,6 +6998,7 @@ begin
       FOID:=Q.FieldByName('oid').AsInteger;
       FSQLBody:=Q.FieldByName('definition').AsString;
       FRelOptions:=Q.FieldByName('reloptions').AsString;
+      FOwnerID:=Q.FieldByName('relowner').AsInteger;
 
       FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
       FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
