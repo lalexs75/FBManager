@@ -45,7 +45,7 @@ type
     sPGTableInerited: TRxTextHolder;
     sPGRelation: TRxTextHolder;
     sPGClass: TRxTextHolder;
-    sqlPGFuntions: TRxTextHolder;
+    sqlPGFunctions: TRxTextHolder;
     sPGSystem: TRxTextHolder;
     sql_PG_LangList: TRxTextHolder;
     sqlTableSpaces: TRxTextHolder;
@@ -159,9 +159,9 @@ function TpgSqlTextModule.PGFunctionList(ASQLEngine: TSQLEngineAbstract
   ): string;
 begin
   if TSQLEnginePostgre(ASQLEngine).RealServerVersionMajor >= 11 then
-    Result:=sqlPGFuntions['PGFuntionList_11']
+    Result:=sqlPGFunctions['PGFuntionList_11']
   else
-    Result:=sqlPGFuntions['PGFuntionList'];
+    Result:=sqlPGFunctions['PGFuntionList'];
 end;
 
 end.

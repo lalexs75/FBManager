@@ -1,14 +1,15 @@
 object pgSqlTextModule: TpgSqlTextModule
   OldCreateOrder = False
-  Height = 850
-  HorizontalOffset = 309
+  Height = 832
+  HorizontalOffset = 303
   VerticalOffset = 1
-  Width = 1081
+  Width = 1058
+  PPI = 94
   object sqlPgDepends: TStrHolder
     Capacity = 62
     Macros = <>
-    Left = 40
-    Top = 328
+    Left = 39
+    Top = 321
     StrData = (
       ''
       '73656c6563742064697374696e6374'
@@ -77,14 +78,14 @@ object pgSqlTextModule: TpgSqlTextModule
   end
   object sqlPgGetACLParams: TStrHolder
     Macros = <>
-    Left = 40
-    Top = 400
+    Left = 39
+    Top = 392
   end
   object sql_Pg_Rules: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 510
-    Top = 36
+    Left = 499
+    Top = 35
     StrData = (
       ''
       '73656c656374'
@@ -113,8 +114,8 @@ object pgSqlTextModule: TpgSqlTextModule
   object sql_Pg_Rule: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 510
-    Top = 104
+    Left = 499
+    Top = 102
     StrData = (
       ''
       '73656c656374'
@@ -148,8 +149,8 @@ object pgSqlTextModule: TpgSqlTextModule
       item
         Name = 'd'
       end>
-    Left = 37
-    Top = 608
+    Left = 36
+    Top = 595
     StrData = (
       ''
       '73656c656374'
@@ -175,8 +176,8 @@ object pgSqlTextModule: TpgSqlTextModule
   object ttt1: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 436
-    Top = 700
+    Left = 427
+    Top = 685
     StrData = (
       ''
       '73656c656374'
@@ -200,8 +201,8 @@ object pgSqlTextModule: TpgSqlTextModule
   object pgCollations: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 520
-    Top = 336
+    Left = 509
+    Top = 329
     StrData = (
       ''
       '73656c656374'
@@ -229,8 +230,8 @@ object pgSqlTextModule: TpgSqlTextModule
       item
         Name = 'd'
       end>
-    Left = 104
-    Top = 608
+    Left = 102
+    Top = 595
     StrData = (
       ''
       '73656c656374'
@@ -313,8 +314,8 @@ object pgSqlTextModule: TpgSqlTextModule
           '*/'
         )
       end>
-    Left = 968
-    Top = 32
+    Left = 948
+    Top = 31
   end
   object sForeignObj: TRxTextHolder
     Highlighter = rxSynSQL
@@ -517,8 +518,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 432
-    Top = 416
+    Left = 423
+    Top = 407
   end
   object sqlTableSpaces: TRxTextHolder
     Highlighter = rxSynSQL
@@ -583,8 +584,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 37
-    Top = 104
+    Left = 36
+    Top = 102
   end
   object sql_PG_LangList: TRxTextHolder
     Highlighter = rxSynSQL
@@ -638,8 +639,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 432
-    Top = 480
+    Left = 423
+    Top = 470
   end
   object sPGSystem: TRxTextHolder
     Highlighter = rxSynSQL
@@ -669,10 +670,10 @@ object pgSqlTextModule: TpgSqlTextModule
           '  context in (''user'', ''superuser'')'
         )
       end>
-    Left = 968
-    Top = 96
+    Left = 948
+    Top = 94
   end
-  object sqlPGFuntions: TRxTextHolder
+  object sqlPGFunctions: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
       item
@@ -756,8 +757,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 432
-    Top = 32
+    Left = 423
+    Top = 31
   end
   object sPGClass: TRxTextHolder
     Highlighter = rxSynSQL
@@ -817,8 +818,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 432
-    Top = 256
+    Left = 423
+    Top = 251
   end
   object sPGRelation: TRxTextHolder
     Highlighter = rxSynSQL
@@ -953,8 +954,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 40
-    Top = 256
+    Left = 39
+    Top = 251
   end
   object sPGTableInerited: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1026,8 +1027,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 162
-    Top = 256
+    Left = 159
+    Top = 251
   end
   object sPGIndex: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1209,8 +1210,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 37
-    Top = 184
+    Left = 36
+    Top = 180
   end
   object sqlFts: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1351,8 +1352,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 32
-    Top = 680
+    Left = 31
+    Top = 666
   end
   object sPgConstraints: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1471,8 +1472,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 224
-    Top = 256
+    Left = 219
+    Top = 251
   end
   object sPGView: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1548,8 +1549,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 504
-    Top = 256
+    Left = 494
+    Top = 251
   end
   object sqlTasks: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1699,8 +1700,8 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pga_job.jobname'
         )
       end>
-    Left = 32
-    Top = 464
+    Left = 31
+    Top = 454
   end
   object sqlSchema: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1755,8 +1756,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 32
-    Top = 528
+    Left = 31
+    Top = 517
   end
   object sRoleAndUser: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1859,8 +1860,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 728
-    Top = 32
+    Left = 713
+    Top = 31
   end
   object sExtensions: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1903,8 +1904,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 432
-    Top = 336
+    Left = 423
+    Top = 329
   end
   object sTriggers: TRxTextHolder
     Highlighter = rxSynSQL
@@ -2033,8 +2034,8 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 136
-    Top = 104
+    Left = 133
+    Top = 102
   end
   object sDomains: TRxTextHolder
     Highlighter = rxSynSQL
@@ -2163,7 +2164,7 @@ object pgSqlTextModule: TpgSqlTextModule
           ''
         )
       end>
-    Left = 37
-    Top = 36
+    Left = 36
+    Top = 35
   end
 end
