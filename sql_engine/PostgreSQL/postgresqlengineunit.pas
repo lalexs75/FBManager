@@ -3859,12 +3859,15 @@ end;
 function TSQLEnginePostgre.InternalSetConnected(const AValue: boolean): boolean;
 var
   FSubVersion: Integer;
+  S: String;
 begin
   FAutovacuumOptions.Clear;
 
   if AValue then
   begin
     FPGConnection.Properties.Clear;
+    FPGSysDB.Properties.Clear;
+
     FPGConnection.HostName:=ServerName;
     FPGConnection.Database:=DataBaseName;
     FPGConnection.User:=UserName;
@@ -3908,6 +3911,11 @@ begin
         FPGSysDB.Connected:=true;
         //DoInitPGTasks;
       except
+        on E:Exception do
+        begin
+          S:=E.Message;
+          RxWriteLog(etError, S);
+        end
       end;
     end;
   end
