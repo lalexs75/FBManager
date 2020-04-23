@@ -1242,7 +1242,6 @@ type
     FRealServerVersion: Integer;
     FRealServerVersionMajor: Integer;
     FRealServerVersionMinor: Integer;
-    FUsePGShedule: Boolean;
     //
     FOnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent;
     function GetAutovacuumOptions: TPGAutovacuumOptions;
@@ -1304,7 +1303,6 @@ type
     property SecurityRoot:TDBRootObject read FSecurityRoot;
     property SystemCatalog:TPGSystemCatalogRoot read FSystemCatalog;
 
-    property UsePGShedule:Boolean read FUsePGShedule write FUsePGShedule;
     property EventTriggers:TPGEventTriggersRoot read FEventTriggers;
     property UsePGBouncer:Boolean read GetUsePGBouncer write SetUsePGBouncer;
     property AutovacuumOptions:TPGAutovacuumOptions read GetAutovacuumOptions;
@@ -3905,7 +3903,7 @@ begin
     DecodeSQLVersioning(FPGConnection.ServerVersion,  FRealServerVersionMajor, FRealServerVersionMinor, FSubVersion);
     FRealServerVersion:=FRealServerVersionMajor * 1000 + FRealServerVersionMinor;
     //
-    if FUsePGShedule then
+    if UseSheduller then
     begin
       try
         FPGSysDB.Connected:=true;
@@ -4318,7 +4316,7 @@ var
   FSSHConnectionPlugin: TSSHConnectionPlugin;
 begin
   inherited Create;
-  FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint];
+  FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint, feSheduller];
   FSQLCommentOnClass:=TPGSQLCommentOn;
   FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
@@ -4341,14 +4339,12 @@ procedure TSQLEnginePostgre.Load(const AData: TDataSet);
 begin
   inherited Load(AData);
   FServerVersion:=TPGServerVersion(AData.FieldByName('db_database_server_version').AsInteger);
-  FUsePGShedule:=AData.FieldByName('db_database_shedule').AsBoolean;
 end;
 
 procedure TSQLEnginePostgre.Store(const AData: TDataSet);
 begin
   inherited Store(AData);
   AData.FieldByName('db_database_server_version').AsInteger:=Ord(FServerVersion);
-  AData.FieldByName('db_database_shedule').AsBoolean:=FUsePGShedule;
 end;
 
 function TSQLEnginePostgre.ExecuteSQLScript(const ASQL: string;

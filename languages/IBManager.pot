@@ -146,6 +146,10 @@ msgstr ""
 msgid "Allow multiselect"
 msgstr ""
 
+#: fbmstrconstunit.salsowriteshedullercommands
+msgid "Also write sheduller commands"
+msgstr ""
+
 #: fbmstrconstunit.salter
 msgid "Alter"
 msgstr ""

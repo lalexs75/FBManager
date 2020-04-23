@@ -312,6 +312,7 @@ resourcestring
   sValidatorID                      = 'Validator ID';
   sEnableLogginScriptExecutive      = 'Enable loggin script executive';
   sSQLscriptLogFile                 = 'SQL script log file';
+  sAlsoWriteShedullerCommands       = 'Also write sheduller commands';
 
   sSelectConnectionType             = 'Select connection type';
   sFKName                           = 'Forign key name';

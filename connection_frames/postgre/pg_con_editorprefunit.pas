@@ -81,10 +81,10 @@ begin
   CheckBox1.Checked := ASQLEngine.SPEditLazzyMode;
   CheckBox2.Checked := ASQLEngine.TriggerEditLazzyMode;
   DirectoryEdit1.Text:=ASQLEngine.ReportManagerFolder;
+  CheckBox3.Checked:=ASQLEngine.UseSheduller;
 
   if ASQLEngine is TSQLEnginePostgre then
   begin
-    CheckBox3.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGShedule;
     CheckBox4.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGBouncer;
   end;
 end;
@@ -94,10 +94,10 @@ begin
   FSQLEngine.SPEditLazzyMode:=CheckBox1.Checked;
   FSQLEngine.TriggerEditLazzyMode:=CheckBox2.Checked;
   FSQLEngine.ReportManagerFolder:=DirectoryEdit1.Text;
+  FSQLEngine.UseSheduller:=CheckBox3.Checked;
 
   if FSQLEngine is TSQLEnginePostgre then
   begin
-    TSQLEnginePostgre(FSQLEngine).UsePGShedule:=CheckBox3.Checked;
     TSQLEnginePostgre(FSQLEngine).UsePGBouncer:=CheckBox4.Checked;
   end;
 end;
@@ -123,7 +123,7 @@ begin
   inherited Create(AOwner);
   FSQLEngine:=ASQLEngine;
 
-  CheckBox3.Visible:=ASQLEngine is TSQLEnginePostgre;
+  CheckBox3.Visible:=feSheduller in ASQLEngine.SQLEngileFeatures;
   CheckBox4.Visible:=ASQLEngine is TSQLEnginePostgre;
 end;
 

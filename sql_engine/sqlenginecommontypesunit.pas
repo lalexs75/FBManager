@@ -341,21 +341,34 @@ type
   { TSQLEngineLogOptions }
 
   TSQLEngineLogOptions = class
-    LogTimestamp:boolean;
-    LogMetadata:boolean;
-    LogMetadataCustomCP:boolean;
-    LogSQLEditor:boolean;
-    LogSQLScript:boolean;
-    LogFileMetadata:string;
-    LogFileSQLEditor:string;
-    LogFileSQLScript:string;
-    HistoryCountSQLEditor:integer;
-    LogFileCodePage:string;
-
+  private
+    FHistoryCountSQLEditor: integer;
+    FLogFileCodePage: string;
+    FLogFileMetadata: string;
+    FLogFileSQLEditor: string;
+    FLogFileSQLScript: string;
+    FLogMetadata: boolean;
+    FLogMetadataCustomCP: boolean;
+    FLogMetadataSheduler: boolean;
+    FLogSQLEditor: boolean;
+    FLogSQLScript: boolean;
+    FLogTimestamp: boolean;
   public
     constructor Create;
     procedure Store(AData:TDataSet);
     procedure Load(AData:TDataSet);
+
+    property LogMetadataSheduler:boolean read FLogMetadataSheduler write FLogMetadataSheduler;
+    property LogTimestamp:boolean read FLogTimestamp write FLogTimestamp;
+    property LogMetadata:boolean read FLogMetadata write FLogMetadata;
+    property LogMetadataCustomCP:boolean read FLogMetadataCustomCP write FLogMetadataCustomCP;
+    property LogSQLEditor:boolean read FLogSQLEditor write FLogSQLEditor;
+    property LogSQLScript:boolean read FLogSQLScript write FLogSQLScript;
+    property LogFileMetadata:string read FLogFileMetadata write FLogFileMetadata;
+    property LogFileSQLEditor:string read FLogFileSQLEditor write FLogFileSQLEditor;
+    property LogFileSQLScript:string read FLogFileSQLScript write FLogFileSQLScript;
+    property HistoryCountSQLEditor:integer read FHistoryCountSQLEditor write FHistoryCountSQLEditor;
+    property LogFileCodePage:string read FLogFileCodePage write FLogFileCodePage;
   end;
 
   { TSQLEngineDisplayDataOptions }

@@ -75,7 +75,8 @@ type
     feFieldDepsList,
     feDescribeTableConstraint,
     feArrayFields,
-    feArrayDomain);
+    feArrayDomain,
+    feSheduller);
 
   TSQLEngileFeatures = set of TSQLEngileFeature;
 
@@ -864,6 +865,7 @@ type
     FOnDestroyObject:TDBObjectEvent;
 
     FGroups:TDBObjectsList;
+    FUseSheduller: Boolean;
 
     procedure ClearQueryControlList;
     procedure SetConnected(const AValue: boolean);
@@ -951,6 +953,7 @@ type
     property UserName:string read FUserName write SetUserName;
     property Password:string read FPassword write SetPassword;
     property RemotePort:integer read FRemotePort write FRemotePort;
+    property UseSheduller:Boolean read FUseSheduller write FUseSheduller;
 
     property Connected:boolean read GetConnected write SetConnected;
     property ServerInfoVersion:string read GetServerInfoVersion;
@@ -1960,6 +1963,7 @@ begin
   FSPEditLazzyMode:=AData.FieldByName('sp_editor_lazzy_mode').AsBoolean;
   FTriggerEditLazzyMode:=AData.FieldByName('trg_editor_lazzy_mode').AsBoolean;
   FRemotePort:=AData.FieldByName('db_database_remote_port').AsInteger;
+  FUseSheduller:=AData.FieldByName('db_database_shedule').AsBoolean;
 end;
 
 procedure TSQLEngineAbstract.Store(const AData: TDataSet);
@@ -1982,6 +1986,7 @@ begin
   AData.FieldByName('sp_editor_lazzy_mode').AsBoolean:=FSPEditLazzyMode;
   AData.FieldByName('trg_editor_lazzy_mode').AsBoolean:=FTriggerEditLazzyMode;
   AData.FieldByName('db_database_remote_port').AsInteger:=FRemotePort;
+  AData.FieldByName('db_database_shedule').AsBoolean:=FUseSheduller;
 end;
 
 procedure TSQLEngineAbstract.SetSqlAssistentData(const List: TStrings);

@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, SQLEngineAbstractUnit,
-  fbmConnectionEditUnit, StdCtrls, EditBtn, Spin, fdbm_ConnectionAbstractUnit;
+  StdCtrls, EditBtn, Spin, fdbm_ConnectionAbstractUnit;
 
 type
 
@@ -38,6 +38,7 @@ type
     cbWriteTimeStamp: TCheckBox;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    cbLogMetaSheduler: TCheckBox;
     ComboBox1: TComboBox;
     edtEditorLogName1: TFileNameEdit;
     edtMetaLogName: TFileNameEdit;
@@ -97,6 +98,7 @@ begin
   CheckBox1.Caption:=sUseCustomCodepageForLoggin;
   CheckBox2.Caption:=sEnableLogginScriptExecutive;
   Label12.Caption:=sSQLscriptLogFile;
+  cbLogMetaSheduler.Caption:=sAlsoWriteShedullerCommands;
 end;
 
 procedure TfdbmCFLogFrame.Activate;
@@ -107,6 +109,8 @@ end;
 procedure TfdbmCFLogFrame.LoadParams(ASQLEngine:TSQLEngineAbstract);
 begin
   cbLogMeta.Checked:=ASQLEngine.SQLEngineLogOptions.LogMetadata;
+  cbLogMetaSheduler.Checked:=ASQLEngine.SQLEngineLogOptions.LogMetadataSheduler;
+
   cbLogEditor.Checked:=ASQLEngine.SQLEngineLogOptions.LogSQLEditor;
   CheckBox2.Checked:=ASQLEngine.SQLEngineLogOptions.LogSQLScript;
 
@@ -127,6 +131,7 @@ end;
 procedure TfdbmCFLogFrame.SaveParams;
 begin
   FSQLEngineAbstract.SQLEngineLogOptions.LogMetadata      := cbLogMeta.Checked;
+  FSQLEngineAbstract.SQLEngineLogOptions.LogMetadataSheduler:=cbLogMetaSheduler.Checked;
   FSQLEngineAbstract.SQLEngineLogOptions.LogSQLEditor := cbLogEditor.Checked;
   FSQLEngineAbstract.SQLEngineLogOptions.LogTimestamp     := cbWriteTimeStamp.Checked;
   FSQLEngineAbstract.SQLEngineLogOptions.LogFileMetadata  := edtMetaLogName.Text;
@@ -161,6 +166,8 @@ constructor TfdbmCFLogFrame.Create(ASQLEngineAbstract: TSQLEngineAbstract;
 begin
   inherited Create(AOwner);
   FSQLEngineAbstract:=ASQLEngineAbstract;
+
+  cbLogMetaSheduler.Enabled:=feSheduller in ASQLEngineAbstract.SQLEngileFeatures;
 end;
 
 end.
