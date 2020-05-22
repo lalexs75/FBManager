@@ -19404,7 +19404,8 @@ procedure TPGSQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    -5:;
+    -4:FEnableState := trsActive;
+    -5:FEnableState := trsInactive;
     1:FOnly:=true;
     2:Name:=AWord;
     3:begin

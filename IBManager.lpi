@@ -28,8 +28,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="12"/>
-      <RevisionNr Value="4"/>
-      <BuildNr Value="5616"/>
+      <RevisionNr Value="5"/>
+      <BuildNr Value="5618"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.11"/>
@@ -1940,4 +1940,11 @@
       </Options>
     </Linking>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions>
+      <Item>
+        <Name Value="EZSQLException"/>
+      </Item>
+    </Exceptions>
+  </Debugging>
 </CONFIG>

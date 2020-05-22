@@ -737,6 +737,7 @@ begin
   S:=Trim(EditorFrame.TextEditor.SelText);
   if TabSheet3.TabVisible and (S<>'') then
   begin
+    if S[Length(S)] = ';' then Delete(S, Length(S), 1);
     St:=TStringList.Create;
     if Pos(',', S)>0 then
       StrToStrings(S, St, ',')
