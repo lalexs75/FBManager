@@ -262,7 +262,7 @@ procedure TfbmTableEditorDataFrame.DataGridKeyDown(Sender: TObject;
 begin
   if ssCtrl in Shift then
   begin
-    if TDBDataSetObject(DBObject).DataSet(-1).Active then
+    if Assigned(DataSource1.DataSet) and  DataSource1.DataSet.Active then
     begin
       if Key = VK_ADD then
       begin
