@@ -826,8 +826,11 @@ end;
 
 function TSQLite3View.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
+  begin
     TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName(Caption);
+    FRecordCountLimit:=ARecCountLimit;
+  end;
   Result:=FDataSet;
 end;
 
@@ -1507,7 +1510,7 @@ end;
 var
   S: String;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     RefreshConstraintPrimaryKey;
     TZQuery(FDataSet).SQL.Text:='select * from '+DoFormatName(Caption);
@@ -1528,6 +1531,7 @@ begin
       ZUpdateSQL.RefreshSQL.Clear;
       ZUpdateSQL.BeforeInsertSQLStatement:=nil;
     end;
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;

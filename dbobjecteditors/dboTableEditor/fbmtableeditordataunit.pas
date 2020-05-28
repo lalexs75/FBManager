@@ -52,6 +52,8 @@ type
     MenuItem16: TMenuItem;
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    MenuItem20: TMenuItem;
     MenuItem6: TMenuItem;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
@@ -206,7 +208,8 @@ end;
 
 procedure TfbmTableEditorDataFrame.dataFetchAllExecute(Sender: TObject);
 begin
-//  TDBDataSetObject(DBObject).DataSet(0).fe;
+  SpinEdit1.Value:=0;
+  TDBDataSetObject(DBObject).DataSet(0).Active:=true;
 end;
 
 procedure TfbmTableEditorDataFrame.dataGenerateExecute(Sender: TObject);

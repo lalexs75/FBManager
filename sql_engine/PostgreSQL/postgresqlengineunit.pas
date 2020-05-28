@@ -2111,7 +2111,7 @@ end;
 var
   S: String;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     RefreshConstraintPrimaryKey;
     TZQuery(FDataSet).SQL.Text:='select * from '+CaptionFullPatch+MakeOrderBy;
@@ -2136,6 +2136,7 @@ begin
       ZUpdateSQL.RefreshSQL.Clear;
       ZUpdateSQL.BeforeInsertSQLStatement:=nil;
     end;
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;
@@ -6338,8 +6339,9 @@ end;
 var
   S: String;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
+    FDataSet.Active:=false;
     RefreshConstraintPrimaryKey;
     TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch) + MakeOrderBy;
 
@@ -6363,6 +6365,7 @@ begin
       ZUpdateSQL.RefreshSQL.Clear;
       ZUpdateSQL.BeforeInsertSQLStatement:=nil;
     end;
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;
@@ -7107,12 +7110,12 @@ end;
 
 function TPGView.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active)  or (FRecordCountLimit <> ARecCountLimit)  then
   begin
     TZQuery(FDataSet).SQL.Text:='select * from '+ DoFormatName2(CaptionFullPatch);
     if ARecCountLimit > 0 then
       TZQuery(FDataSet).SQL.Text:=TZQuery(FDataSet).SQL.Text+' limit '+IntToStr(ARecCountLimit);
-
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;

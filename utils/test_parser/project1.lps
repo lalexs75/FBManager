@@ -120,8 +120,8 @@
         <UnitName Value="pg_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="19395"/>
-        <CursorPos X="22" Y="19408"/>
+        <TopLine Value="19453"/>
+        <CursorPos Y="19468"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>
@@ -228,7 +228,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="111"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -237,7 +237,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="124"/>
         <CursorPos Y="148"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="74"/>
       </Unit>
       <Unit>
         <Filename Value=""/>
@@ -547,10 +547,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="2265" Column="3" TopLine="2261"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <Caret Line="2325" Column="3" TopLine="2321"/>
       </Position>
       <Position>
@@ -663,6 +659,10 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <Caret Line="19464" TopLine="19452"/>
       </Position>
+      <Position>
+        <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
+        <Caret Line="19408" Column="22" TopLine="19395"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -691,20 +691,6 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <Line Value="3665"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Line Value="19468"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <Line Value="19465"/>
       </Item>
     </BreakPoints>
     <Watches>

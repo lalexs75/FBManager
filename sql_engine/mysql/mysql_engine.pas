@@ -1198,9 +1198,10 @@ end;
 
 function TMySQLView.DataSet(ARecCountLimit: integer): TDataSet;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     TZQuery(FDataSet).SQL.Text:='select * from '+Caption;
+    FRecordCountLimit:=ARecCountLimit;
   end;
   FDataSet.Active:=true;
   Result:=FDataSet;
@@ -2085,7 +2086,7 @@ end;
 
 function TMySQLTable.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     TZQuery(FDataSet).SQL.Text:='select * from '+Caption;
 {    FDataSet.SQL.Text:=MakeSQLSelect(Caption, FDataSet.DataBase);
@@ -2098,6 +2099,7 @@ begin
       FDataSet.Option := FDataSet.Option + [poFetchAll]
     else
       FDataSet.Option := FDataSet.Option - [poFetchAll];}
+    FRecordCountLimit:=ARecCountLimit;
   end;
   FDataSet.Active:=true;
   Result:=FDataSet;

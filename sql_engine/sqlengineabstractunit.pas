@@ -531,6 +531,7 @@ type
     function GetIndexCount: integer;
     function GetIndexItem(AItem: integer): TIndexItem;
   protected
+    FRecordCountLimit:Integer;
     FIndexItems:TIndexItems;
     FIndexListLoaded:boolean;
     FDataSet:TDataSet;

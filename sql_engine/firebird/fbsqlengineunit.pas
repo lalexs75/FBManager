@@ -2583,7 +2583,7 @@ end;
 var
   S: String;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     if not Loaded then
       RefreshObject;
@@ -2598,6 +2598,7 @@ begin
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option + [poFetchAll]
     else
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option - [poFetchAll];
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;
@@ -3434,7 +3435,7 @@ end;
 
 function TFireBirdView.DataSet(ARecCountLimit: Integer): TDataSet;
 begin
-  if not FDataSet.Active then
+  if (not FDataSet.Active ) or (FRecordCountLimit <> ARecCountLimit) then
   begin
     TFBDataSet(FDataSet).SQLSelect.Text:='select * from ' + DoFormatName( Caption);
 
@@ -3442,6 +3443,7 @@ begin
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option + [poFetchAll]
     else
       TFBDataSet(FDataSet).Option := TFBDataSet(FDataSet).Option - [poFetchAll];
+    FRecordCountLimit:=ARecCountLimit;
   end;
   Result:=FDataSet;
 end;
