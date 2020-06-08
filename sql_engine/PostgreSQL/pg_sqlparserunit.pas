@@ -18541,11 +18541,19 @@ procedure TPGSQLAlterSequence.MakeSQL;
 var
   S: String;
 begin
-  S:='ALTER SEQUENCE ' + FullName;
 
   if (FSequenceOldName <> '') and (Name <> FSequenceOldName) then
-    AddSQLCommand(S + ' RENAME TO ' + Name);
+  begin
+    S:='ALTER SEQUENCE ';
 
+    if SchemaName <> '' then
+      S:=S + DoFormatName(SchemaName);
+    S:=S + '.' + DoFormatName(SequenceOldName);
+    AddSQLCommand(S + ' RENAME TO ' + DoFormatName(Name));
+  end
+  else
+  begin
+//                                     DoFormatName(Name);
   if (OldValue <> CurrentValue) then
     AddSQLCommand('SELECT setval('''+FullName+''', '+IntToStr(CurrentValue)+', true)');
 (*
@@ -18589,7 +18597,7 @@ begin
       Result:=Result + ' OWNED BY ' + FOwnedBy;
   end;
 *)
-
+  end;
 end;
 
 procedure TPGSQLAlterSequence.Assign(ASource: TSQLObjectAbstract);

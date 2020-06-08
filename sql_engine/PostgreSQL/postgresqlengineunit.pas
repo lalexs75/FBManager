@@ -866,6 +866,7 @@ type
     FStartValue: Int64;
   protected
     function GetCaptionFullPatch:string; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     class function DBClassTitle:string;override;
@@ -877,6 +878,7 @@ type
     procedure RefreshObject;override;
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
+    function RenameObject(ANewName:string):Boolean;override;
 
     property LastValue:Int64 read FLastValue;
     property StartValue:Int64 read FStartValue;
@@ -6621,6 +6623,11 @@ begin
   Result:=FmtObjName(FSchema, Self);
 end;
 
+function TPGSequence.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 constructor TPGSequence.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -6730,6 +6737,33 @@ end;
 procedure TPGSequence.RefreshDependenciesField(Rec: TDependRecord);
 begin
   //inherited RefreshDependenciesField(Rec);
+end;
+
+function TPGSequence.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterSequence;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterSequence.Create(nil);
+    FCmd.SequenceOldName:=Caption;
+    FCmd.Name:=ANewName;
+    FCmd.SchemaName:=SchemaName;
+{    Op:=FCmd.AddOperator(adaRenameDomain);
+    Op.ParamValue:=ANewName;}
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 { TPGViewsRoot }
