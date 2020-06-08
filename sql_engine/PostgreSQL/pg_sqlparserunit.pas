@@ -695,7 +695,7 @@ type
   TPGSQLAlterSequence = class(TPGSQLCreateSequence)
   private
     FOldValue: Int64;
-    FSequenceOldName: string;
+    FSequenceNewName: string;
     FSequenceOldOwner: string;
     FSequenceOldSchema: string;
   protected
@@ -705,7 +705,7 @@ type
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SequenceOldOwner:string read FSequenceOldOwner write FSequenceOldOwner ;
-    property SequenceOldName:string read FSequenceOldName write FSequenceOldName;
+    property SequenceNewName:string read FSequenceNewName write FSequenceNewName;
     property SequenceOldSchema:string read FSequenceOldSchema write FSequenceOldSchema;
     property OldValue:Int64 read FOldValue write FOldValue;
   end;
@@ -18428,20 +18428,26 @@ var
     T15, T16, T17, T18, T19, T3_1, T4_1, T5_1, T9_1, T15_1,
     T14_1, T20, T2, FSQLTokens: TSQLTokenRecord;
 begin
-  (*
-  ALTER SEQUENCE name [ INCREMENT [ BY ] increment ]
-      [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
-      [ START [ WITH ] start ]
-      [ RESTART [ [ WITH ] restart ] ]
-      [ CACHE cache ] [ [ NO ] CYCLE ]
-      [ OWNED BY { table.column | NONE } ]
-  ALTER SEQUENCE name OWNER TO new_owner
-  ALTER SEQUENCE name RENAME TO new_name
-  ALTER SEQUENCE name SET SCHEMA new_schema
-  *)
+(*
+  ALTER SEQUENCE [ IF EXISTS ] имя
+      [ AS тип_данных ]
+      [ INCREMENT [ BY ] шаг ]
+      [ MINVALUE мин_значение | NO MINVALUE ] [ MAXVALUE макс_значение | NO MAXVALUE ]
+      [ START [ WITH ] начало ]
+      [ RESTART [ [ WITH ] перезапуск ] ]
+      [ CACHE кеш ] [ [ NO ] CYCLE ]
+      [ OWNED BY { имя_таблицы.имя_столбца | NONE } ]
+  ALTER SEQUENCE [ IF EXISTS ] имя OWNER TO { новый_владелец | CURRENT_USER | SESSION_USER }
+  ALTER SEQUENCE [ IF EXISTS ] имя RENAME TO новое_имя
+  ALTER SEQUENCE [ IF EXISTS ] имя SET SCHEMA новая_схема
+*)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0 , okSequence);
     T10:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);
-  T2:=AddSQLTokens(stIdentificator, T10, '', [], 1);
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T10], 'IF', []);
+  T:=AddSQLTokens(stKeyword, T, 'EXISTS', [], -10);
+
+  T2:=AddSQLTokens(stIdentificator, [T10, T], '', [], 1);
   T10:=AddSQLTokens(stSymbol, T2, '.', []);
   T:=AddSQLTokens(stIdentificator, T10, '', [], 2);
 
@@ -18513,8 +18519,9 @@ end;
 procedure TPGSQLAlterSequence.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
-  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  //inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
+    -10:Options:=Options + [ooIfExists];
     1:Name:=AWord;
     2:begin
         SchemaName:=Name;
@@ -18527,9 +18534,9 @@ begin
     8:NoMaxValue:=true;
     9:Start:=StrToInt64(AWord);
     10:NoCycle:=true;
-{    11:FSequenceNewOwner:=AWord;
+//    11:FSequenceNewOwner:=AWord;
     12:FSequenceNewName:=AWord;
-    13:FSequenceNewSchema:=AWord;}
+//    13:FSequenceNewSchema:=AWord;
     14:Restart:=StrToInt64(AWord);
     15:Cache:=StrToInt64(AWord);
     17, 20:FOwnedBy:=AWord;
@@ -18539,17 +18546,17 @@ end;
 
 procedure TPGSQLAlterSequence.MakeSQL;
 var
-  S: String;
+  S, S1: String;
 begin
+  if ooIfExists in Options then
+    S1:='IF EXISTS '
+  else
+    S1:='';
 
-  if (FSequenceOldName <> '') and (Name <> FSequenceOldName) then
+  S:='ALTER SEQUENCE '+S1+FullName;
+  if (FSequenceNewName <> '') and (Name <> FSequenceNewName) then
   begin
-    S:='ALTER SEQUENCE ';
-
-    if SchemaName <> '' then
-      S:=S + DoFormatName(SchemaName);
-    S:=S + '.' + DoFormatName(SequenceOldName);
-    AddSQLCommand(S + ' RENAME TO ' + DoFormatName(Name));
+    AddSQLCommand(S + ' RENAME TO ' + DoFormatName(SequenceNewName));
   end
   else
   begin
@@ -18605,7 +18612,7 @@ begin
   if ASource is TPGSQLAlterSequence then
   begin
     SequenceOldOwner:=TPGSQLAlterSequence(ASource).SequenceOldOwner ;
-    SequenceOldName:=TPGSQLAlterSequence(ASource).SequenceOldName;
+    SequenceNewName:=TPGSQLAlterSequence(ASource).SequenceNewName;
     SequenceOldSchema:=TPGSQLAlterSequence(ASource).SequenceOldSchema;
     OldValue:=TPGSQLAlterSequence(ASource).OldValue;
   end;
