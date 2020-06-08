@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, SynEdit,
   ZMacroQuery, RxTextHolder, ZConnection, ZSqlProcessor, ZDataset, ZSqlUpdate,
-  ZSqlMonitor, ibmanagertypesunit, IniFiles, LCLType, db;
+  ZSqlMonitor, ibmanagertypesunit, IniFiles, LCLType, db, LR_ChBox;
 
 const
   UserDBFileName              = 'fbm_data.db';
@@ -222,6 +222,8 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
+    FfrCheckBox:TfrCheckBoxObject;
+    procedure DoIntLRObjects;
     procedure SystemVariablesLoad;
     procedure SystemVariablesStore;
     //procedure ImportOldConfig;
@@ -322,8 +324,14 @@ begin
   UserDBModule:=nil;
 end;
 
+procedure TUserDBModule.DoIntLRObjects;
+begin
+  FfrCheckBox:=TfrCheckBoxObject.Create(Self);
+end;
+
 procedure TUserDBModule.DataModuleCreate(Sender: TObject);
 begin
+  DoIntLRObjects;
   {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
   UserDB.Protocol:='sqlite';
   {$ELSE}

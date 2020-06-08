@@ -9329,10 +9329,6 @@ object fbManagerMainForm: TfbManagerMainForm
     Left = 177
     Top = 64
   end
-  object frCheckBoxObject1: TfrCheckBoxObject
-    Left = 145
-    Top = 64
-  end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
     KeywordPrefix = 'en/'

@@ -98,7 +98,6 @@ type
     wndCloseAll: TAction;
     dbRefresh: TAction;
     frBarCodeObject1: TfrBarCodeObject;
-    frCheckBoxObject1: TfrCheckBoxObject;
     frHTMExport1: TfrHTMExport;
     frReport1: TfrReport;
     frRoundRectObject1: TfrRoundRectObject;

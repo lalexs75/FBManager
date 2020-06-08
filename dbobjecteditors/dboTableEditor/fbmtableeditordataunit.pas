@@ -150,10 +150,14 @@ uses fbmStrConstUnit, fbmToolsUnit, fbmSQLEditor_ShowMemoUnit, ImportDataUnit,
 { TfbmTableEditorDataFrame }
 
 procedure TfbmTableEditorDataFrame.dataExportExecute(Sender: TObject);
+var
+  DS: TDataSet;
 begin
-  if TDBDataSetObject(DBObject).DataSet(-1).Active then
+  DS:=DataSource1.DataSet;
+  if not Assigned(DS) then Exit;
+  if DS.Active then
   begin
-    FPDataExporter1.Dataset:=TDBDataSetObject(DBObject).DataSet(-1);
+    FPDataExporter1.Dataset:=DS;
     FPDataExporter1.TableNameHint:=TDBDataSetObject(DBObject).CaptionFullPatch;
     FPDataExporter1.Execute;
   end;
@@ -244,9 +248,12 @@ end;
 procedure TfbmTableEditorDataFrame.DataGridDblClick(Sender: TObject);
 var
   DT: TFieldType;
+  DS: TDataSet;
 begin
+  if not Assigned(DataSource1.DataSet) then Exit;
+  DS:=DataSource1.DataSet;
   DT:=DataGrid.SelectedColumn.Field.DataType;
-  if TDBDataSetObject(DBObject).DataSet(-1).Active and (TDBDataSetObject(DBObject).DataSet(-1).RecordCount>0) and (DataGrid.SelectedColumn.Field.DataType in [ftMemo, ftBlob] ) then
+  if DS.Active and (DS.RecordCount>0) and (DataGrid.SelectedColumn.Field.DataType in [ftMemo, ftBlob] ) then
   begin
     fbmSQLEditor_ShowMemoForm:=TfbmSQLEditor_ShowMemoForm.Create(Application);
     fbmSQLEditor_ShowMemoForm.Datasource1.DataSet:=DataGrid.DataSource.DataSet;

@@ -139,8 +139,8 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideBottom.Control = SpinEdit1
       AnchorSideBottom.Side = asrBottom
       Left = 444
-      Height = 15
-      Top = 7
+      Height = 17
+      Top = 10
       Width = 113
       Anchors = [akLeft, akBottom]
       BorderSpacing.Around = 6
@@ -154,8 +154,8 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
       Left = 563
-      Height = 24
-      Top = 4
+      Height = 33
+      Top = 0
       Width = 90
       BorderSpacing.Left = 6
       MaxValue = 2000000
@@ -197,8 +197,8 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 850
-      Height = 15
-      Top = 9
+      Height = 17
+      Top = 8
       Width = 40
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
@@ -229,7 +229,7 @@ inherited fbmTableEditorDataFrame: TfbmTableEditorDataFrame
       Left = 755
       Height = 31
       Top = 1
-      Width = 66
+      Width = 68
       Action = dataFetchAll
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
