@@ -151,7 +151,8 @@ begin
 
     if ASQLObject is TPGSQLAlterSequence then
     begin
-      TPGSQLAlterSequence(ASQLObject).SequenceOldName:=DBObject.Caption;
+      //TPGSQLCreateSequence(ASQLObject).Name:=edtSeqName.Text;
+      //TPGSQLAlterSequence(ASQLObject).SequenceNewName:=DBObject.Caption;
       TPGSQLAlterSequence(ASQLObject).OldValue:=TPGSequence(DBObject).LastValue;
     end;
   end

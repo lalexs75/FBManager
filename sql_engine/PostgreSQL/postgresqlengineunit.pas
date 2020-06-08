@@ -6675,12 +6675,13 @@ begin
   begin
     Result:=TPGSQLAlterSequence.Create(nil);
     TPGSQLAlterSequence(Result).Name:=Caption;
+    TPGSQLAlterSequence(Result).SchemaName:=Schema.Caption;
 
     TPGSQLAlterSequence(Result).OwnedBy:='';
     TPGSQLAlterSequence(Result).SequenceOldOwner:='';
 
-    TPGSQLAlterSequence(Result).SequenceOldName:=Caption;
-    TPGSQLAlterSequence(Result).SequenceOldSchema:=Schema.Caption;
+    //TPGSQLAlterSequence(Result).SequenceOldName:=Caption;
+    //TPGSQLAlterSequence(Result).SequenceOldSchema:=Schema.Caption;
   end;
   TPGSQLCreateSequence(Result).SchemaName:=Schema.Caption;
 end;
@@ -6751,8 +6752,8 @@ begin
   else
   begin
     FCmd:=TPGSQLAlterSequence.Create(nil);
-    FCmd.SequenceOldName:=Caption;
-    FCmd.Name:=ANewName;
+    FCmd.SequenceNewName:=ANewName;
+    FCmd.Name:=Caption;
     FCmd.SchemaName:=SchemaName;
 {    Op:=FCmd.AddOperator(adaRenameDomain);
     Op.ParamValue:=ANewName;}
