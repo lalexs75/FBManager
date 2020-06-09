@@ -469,6 +469,16 @@ type
     property MaxValue:Int64 read FMaxValue write FMaxValue;
   end;
 
+  { TSQLAlterSequence }
+
+  TAlterSequenceCommand = (ascAlter, ascMinValue, ascMaxValue, ascSetStart, ascRestart,
+    ascOwnedBy, ascRename, ascOwnerTo, ascSetSchema);
+  TSQLAlterSequence = class(TSQLCreateCommandAbstract)
+  protected
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
 
   { TSQLCommandCreateUDF }
 
@@ -1006,6 +1016,18 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLAlterSequence }
+
+constructor TSQLAlterSequence.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TSQLAlterSequence.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
 end;
 
 { TSQLCreateTrigger }
