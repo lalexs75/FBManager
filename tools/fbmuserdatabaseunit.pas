@@ -647,30 +647,12 @@ begin
     quDatabasesdb_database_log_meta_custom_charset.AsString:=DBListStream.ReadString(aItemName, 'LogFileCodePage', '');
     quDatabasesdb_database_use_log_write_timestamp.AsBoolean:=DBListStream.ReadBool(aItemName, 'LogTimestamp', false);
 
-{
-//    HistoryCountSQLEditor:=IniFile.ReadInteger(IniSection, 'HistoryCountSQLEditor', HistoryCountSQLEditor);
-//FetchAllData:=IniFile.ReadBool(IniSection, 'FetchAllData', FetchAllData);
-    FBackupOptions.Load(IniFile, IniSection);
-    FProtocol:= TUIBProtocol(IniFile.ReadInteger(IniSection, 'Protocol', 0));
-    FRestoreOptions.Load(IniFile, IniSection);
-    FShowSysINF_SCH:=IniFile.ReadBool(IniSection, 'ShowSysINF_SCH', FShowSysINF_SCH);
-    FShowSysPG_CATALOG:=IniFile.ReadBool(IniSection, 'ShowSysPG_CATALOG', FShowSysPG_CATALOG);
-    FShowSysPG_TEMP_1:=IniFile.ReadBool(IniSection, 'ShowSysPG_TEMP_1', FShowSysPG_TEMP_1);
-    FShowSysPG_TEMP_2:=IniFile.ReadBool(IniSection, 'ShowSysPG_TEMP_2', FShowSysPG_TEMP_2);
-    FShowSysPG_TOAST:=IniFile.ReadBool(IniSection, 'ShowSysPG_TOAST', FShowSysPG_TOAST);
-    FShowSysPG_TOAST_TEMP_1:=IniFile.ReadBool(IniSection, 'ShowSysPG_TOAST_TEMP_1', FShowSysPG_TOAST_TEMP_1);
-    FShowSysPG_TOAST_TEMP_2:=IniFile.ReadBool(IniSection, 'ShowSysPG_TOAST_TEMP_2', FShowSysPG_TOAST_TEMP_2);
-    FTranParamData:=IniFile.ReadInteger(IniSection, 'TranParamData', 0 {defTranParamData});
-    FTranParamMetaData:=IniFile.ReadInteger(IniSection, 'TranParamMetaData', 0 {defTranParamMetaData});
-}
 
     S:=DBListStream.ReadString(aItemName, 'OIFolder', '');
     if S <> '' then
       if quFolders.Locate('db_folders_name', S, []) then
         quDatabasesdb_folders_id.AsInteger:=quFoldersdb_folders_id.AsInteger;
 
-    //FSQLEngineLogOptions.Load(IniFile, IniSection);
-    //FDisplayDataOptions.Load(IniFile, IniSection);
     quDatabases.Post;
   end;
   quDatabases.Refresh;
@@ -714,7 +696,6 @@ begin
     if SDataFolder <> '' then
     begin
       ImportLoadRecentObjects(quDatabasesdb_database_id.AsInteger, SDataFolder);
-//      ImportLoadSQLHistory(quDatabasesdb_database_id.AsInteger, SDataFolder);
       ImportLoadSQLPages(DBListStream, AItemName, quDatabasesdb_database_id.AsInteger, SDataFolder);
 
       DeleteDirectory(LocalCfgFolder + SDataFolder, false);
@@ -809,57 +790,7 @@ begin
   Ini.Free;
   DeleteFileUTF8(AFileName);
 end;
-(*
-const
-  RootNodeSqlHistory = 'sql_history';
 
-procedure TUserDBModule.ImportLoadSQLHistory(DataBaseID: integer;
-  ADataFolder: string);
-procedure ParceSqlHistory(const Doc:TXMLDocument);
-var
-  Root, Node:TDOMElement;
-  Cnt, i:integer;
-begin
-  Root:=Doc.FindNode(RootNodeSqlHistory) as TDOMElement;
-  Cnt:=StrToIntDef(Root.GetAttribute('Count'), 0);
-  for i:= 0 to Cnt-1 do
-  begin
-    Node:=TDOMElement(Root.FindNode('Item_'+IntToStr(i)));
-    if Assigned(Node) then
-    begin
-      quSQLHistory.Append;
-      //quSQLHistorysql_editors_history_id,
-      quSQLHistorydb_database_id.AsInteger:=DataBaseID;
-      quSQLHistorysql_editors_history_date.AsDateTime:=StrToFloat(Node.GetAttribute('date'));
-      if Node.GetAttribute('sql_type')<>'' then
-        quSQLHistorysql_editors_history_sql_type.AsInteger:=StrToIntDef(Node.GetAttribute('sql_type'), 0);
-      if Node.GetAttribute('exec_time')<>'' then
-        quSQLHistorysql_editors_history_exec_time.AsDateTime:=StrToTimeDef(Node.GetAttribute('exec_time'), 0);
-      quSQLHistorysql_editors_history_sql_page_name.AsString:=Node.GetAttribute('plan');
-      quSQLHistorysql_editors_history_sql_text.AsString:=Node.GetAttribute('text');
-      quSQLHistorysql_editors_history_sql_plan.AsString:=Node.GetAttribute('src_page_name');
-      quSQLHistory.Post;
-    end;
-  end;
-end;
-
-var
-  Doc:TXMLDocument;
-  AFileName: String;
-begin
-  AFileName:=AppendPathDelim(GlobalCfgFolder + ADataFolder) + 'sql_history.cfg';
-  if FileExistsUTF8(AFileName) then
-  begin
-    ReadXMLFile(Doc, UTF8ToSys(AFileName));
-    try
-      ParceSqlHistory(Doc);
-    finally
-      Doc.Free;
-    end;
-    DeleteFileUTF8(AFileName);
-  end;
-end;
-*)
 procedure TUserDBModule.ImportLoadSQLPages(Ini: TIniFile;
   AItemName: string; DataBaseID: integer; ADataFolder: string);
 var
