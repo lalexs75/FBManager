@@ -101,6 +101,7 @@ end;
 procedure TMySQL_con_MainPage.FillServerData;
 begin
   dbTest.Database:='information_schema';
+  dbTest.HostName:=cbServerName.Text;
   if edtPort.Value <> 0 then
     dbTest.Port:=edtPort.Value;
   dbTest.User:=edtUserName.Text;

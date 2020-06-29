@@ -28,11 +28,11 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="12"/>
-      <RevisionNr Value="8"/>
-      <BuildNr Value="5622"/>
+      <RevisionNr Value="9"/>
+      <BuildNr Value="5625"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
-      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.11"/>
+      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.12"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="default" Default="True"/>
@@ -1944,6 +1944,9 @@
     <Exceptions>
       <Item>
         <Name Value="EConvertError"/>
+      </Item>
+      <Item>
+        <Name Value="EZSQLException"/>
       </Item>
     </Exceptions>
   </Debugging>

@@ -155,8 +155,19 @@ end;
 
 
 procedure TObjTreeRefresh.Execute;
+var
+  P: TObjRec;
 begin
-
+{  for i:=0 to FList.Count-1 do
+  begin
+    P:=FList[i];
+    if P.ObjectKind = okScheme then
+    begin
+      FDataBase.DBObject.c
+      for i:=0 to FDataBase.ObjectCount-1 do
+      P:=FDataBase.DBObject[];
+    end;
+  end;}
 end;
 
 end.

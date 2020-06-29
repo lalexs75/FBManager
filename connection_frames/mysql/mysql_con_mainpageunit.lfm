@@ -11,7 +11,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     Left = 6
     Height = 17
     Top = 6
-    Width = 75
+    Width = 74
     BorderSpacing.Around = 6
     Caption = 'Server name'
     ParentColor = False
@@ -23,7 +23,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     Left = 303
     Height = 17
     Top = 6
-    Width = 67
+    Width = 66
     BorderSpacing.Around = 6
     Caption = 'Server port'
     ParentColor = False
@@ -34,8 +34,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 190
-    Width = 94
+    Top = 188
+    Width = 93
     BorderSpacing.Around = 6
     Caption = 'Database name'
     ParentColor = False
@@ -46,8 +46,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 253
-    Width = 87
+    Top = 250
+    Width = 86
     BorderSpacing.Around = 6
     Caption = 'Database alias'
     ParentColor = False
@@ -58,7 +58,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 127
+    Top = 126
     Width = 64
     BorderSpacing.Around = 6
     Caption = 'User name'
@@ -71,7 +71,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 303
     Height = 17
-    Top = 127
+    Top = 126
     Width = 58
     BorderSpacing.Around = 6
     Caption = 'Password'
@@ -83,8 +83,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 69
-    Width = 84
+    Top = 68
+    Width = 83
     BorderSpacing.Around = 6
     Caption = 'Server version'
     ParentColor = False
@@ -96,8 +96,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 34
-    Top = 276
+    Height = 33
+    Top = 273
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -109,8 +109,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 34
-    Top = 150
+    Height = 33
+    Top = 149
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -124,8 +124,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 309
-    Height = 34
-    Top = 150
+    Height = 33
+    Top = 149
     Width = 278
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -143,7 +143,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideBottom.Side = asrBottom
     Left = 12
     Height = 29
-    Top = 92
+    Top = 91
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -163,7 +163,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Label1
     Left = 12
-    Height = 34
+    Height = 33
     Top = 29
     Width = 278
     Anchors = [akTop, akLeft, akRight]
@@ -181,7 +181,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 309
-    Height = 34
+    Height = 33
     Top = 29
     Width = 278
     Anchors = [akTop, akLeft, akRight]
@@ -207,8 +207,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 34
-    Top = 339
+    Height = 33
+    Top = 335
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -221,7 +221,7 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 316
+    Top = 312
     Width = 50
     BorderSpacing.Around = 6
     Caption = 'Char set'
@@ -234,8 +234,8 @@ inherited MySQL_con_MainPage: TMySQL_con_MainPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 34
-    Top = 213
+    Height = 33
+    Top = 211
     Width = 575
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6

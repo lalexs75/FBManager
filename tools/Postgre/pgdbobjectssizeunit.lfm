@@ -224,8 +224,10 @@ inherited pgDBObjectsSizeTools: TpgDBObjectsSizeTools
     GridLineStyle = psSolid
     DataSource = dsTablesStat
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
+    ReadOnly = True
     TabOrder = 0
     TitleStyle = tsNative
+    OnDblClick = RxDBGrid1DblClick
   end
   object dsTablesStat: TDataSource[1]
     DataSet = rxData

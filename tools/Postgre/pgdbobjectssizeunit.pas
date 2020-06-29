@@ -27,7 +27,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZMacroQuery,
   ZConnection, rxdbgrid, rxmemds, DB, fbmAbstractSQLEngineToolsUnit,
-  SQLEngineCommonTypesUnit, sqlObjects, SQLEngineAbstractUnit;
+  ibmanagertypesunit, SQLEngineCommonTypesUnit, sqlObjects,
+  SQLEngineAbstractUnit;
 
 type
 
@@ -57,6 +58,7 @@ type
     rxDatarelpages: TLongintField;
     rxDatatoast: TLargeintField;
     rxDatatotal: TLargeintField;
+    procedure RxDBGrid1DblClick(Sender: TObject);
   private
   protected
     procedure SetSQLEngine(AValue: TSQLEngineAbstract); override;
@@ -68,7 +70,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, PostgreSQLEngineUnit;
+uses fbmStrConstUnit, IBManDataInspectorUnit, PostgreSQLEngineUnit;
 
 {$R *.lfm}
 
@@ -77,6 +79,18 @@ uses fbmStrConstUnit, PostgreSQLEngineUnit;
 function TpgDBObjectsSizeTools.PageName: string;
 begin
   Result:=sObjectsSize;
+end;
+
+procedure TpgDBObjectsSizeTools.RxDBGrid1DblClick(Sender: TObject);
+var
+  D: TDataBaseRecord;
+begin
+  if rxData.Active and (rxData.RecordCount > 0) then
+  begin
+    D:=fbManDataInpectorForm.DBBySQLEngine(SQLEngine);
+    if Assigned(D) and D.Connected then
+      D.ObjectShowEditor(rxDatarelname.AsString);
+  end;
 end;
 
 procedure TpgDBObjectsSizeTools.SetSQLEngine(AValue: TSQLEngineAbstract);
