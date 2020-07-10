@@ -345,6 +345,7 @@ begin
   TabSheet1.Caption:=sDeclaration;
   tabLocalVar.Caption:=sLocalVariables;
 
+  edtType.Clear;
   edtType.Items.Add(sBefore);
   edtType.Items.Add(sAfter);
 end;

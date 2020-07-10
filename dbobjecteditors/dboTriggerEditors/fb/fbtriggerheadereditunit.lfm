@@ -86,10 +86,10 @@ inherited fbTriggerHeaderEditFrame: TfbTriggerHeaderEditFrame
         AnchorSideTop.Control = edtTrgName
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
-        Left = 284
+        Left = 283
         Height = 23
         Top = 68
-        Width = 109
+        Width = 108
         BorderSpacing.Around = 6
         Caption = 'Trigger Active'
         TabOrder = 0
@@ -165,7 +165,7 @@ inherited fbTriggerHeaderEditFrame: TfbTriggerHeaderEditFrame
         Left = 191
         Height = 23
         Top = 68
-        Width = 87
+        Width = 86
         BorderSpacing.Left = 6
         Caption = 'On Delete'
         OnChange = edtOrderChange
