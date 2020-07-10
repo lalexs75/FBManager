@@ -3071,6 +3071,7 @@ begin
   Rec.Name:=CaptionFullPatch;
   Rec.TableName:=TableName;
   Rec.Options:=Rec.Options + [ooOrReplase];
+  Rec.Description:=Description;
 
   if Active then
     Rec.TriggerState:=trsActive

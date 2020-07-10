@@ -3,10 +3,11 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="19">
+    <Units Count="22">
       <Unit0>
         <Filename Value="fbm_export.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <UsageCount Value="38"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -16,7 +17,6 @@
         <ComponentName Value="ExportDM"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="38"/>
         <CursorPos Y="68"/>
@@ -144,8 +144,29 @@
         <CursorPos X="3" Y="164"/>
         <UsageCount Value="10"/>
       </Unit18>
+      <Unit19>
+        <Filename Value="D:/lazarus/components/scancode_fpc/scancode_user_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="36"/>
+        <CursorPos X="31" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="D:/lazarus/components/protobuf-fpc/xmlobject/xmlobject.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="23"/>
+        <CursorPos X="64" Y="38"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="D:/lazarus/components/scancode_fpc/scancode_stock_api.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="28"/>
+        <CursorPos X="31" Y="48"/>
+        <UsageCount Value="10"/>
+      </Unit21>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="fbm_export.lpr"/>
         <Caret Line="92" TopLine="65"/>
@@ -241,6 +262,10 @@
         <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
         <Caret Line="29" Column="24" TopLine="16"/>
       </Position24>
+      <Position25>
+        <Filename Value="pg_export_dm_unit.pas"/>
+        <Caret Line="68" TopLine="38"/>
+      </Position25>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

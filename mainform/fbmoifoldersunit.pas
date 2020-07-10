@@ -275,7 +275,7 @@ begin
   try
     for i:=0 to fbManDataInpectorForm.DBList.Count-1 do
       if fbManDataInpectorForm.DBList[i].OIFolder = Self then
-        fbManDataInpectorForm.DBList[i].OIFolder:=nil;
+        fbManDataInpectorForm.DBList[i].OIFolder:= nil;
     FOwner.Free;
   finally
     fbManDataInpectorForm.TreeView1.EndUpdate;
