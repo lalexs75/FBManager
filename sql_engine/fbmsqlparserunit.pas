@@ -2204,7 +2204,7 @@ TABLE [ ONLY ] имя_таблицы [ * ]
     T2:=AddSQLTokens(stSymbol, [FSQLTokens, Par1, Par2, T1_Symb], '*', [], 53);
     T3:=AddSQLTokens(stSymbol, [FSQLTokens, Par1, Par2], '+', [], 52);
     T4:=AddSQLTokens(stSymbol, [FSQLTokens, Par1, Par2], '-', [], 52);
-    T5:=AddSQLTokens(stSymbol, [FSQLTokens, Par1, Par2], '(', [], 52);
+    T5:=AddSQLTokens(stSymbol, [FSQLTokens, Par1, Par2], '(', [], 54);
     T6:=AddSQLTokens(stInteger, [FSQLTokens, Par1, Par2], '', [], 52);
     T6_1:=AddSQLTokens(stFloat, [FSQLTokens, Par1, Par2], '', [], 52);
     T7:=AddSQLTokens(stString, [FSQLTokens, Par1, Par2], '', [], 52);
@@ -2284,6 +2284,8 @@ end;
 
 procedure TSQLCommandSelect.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
+var
+  S: String;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -2306,6 +2308,14 @@ begin
          FCurField:=Fields.AddParamEx('', '');
          FCurField.InReturn:=spvtLocal;
          ParseFieldExp(ASQLParser, AWord, AChild);
+       end;
+    54:begin
+         FParserState:=pssFields;
+         FCurField:=Fields.AddParamEx('', '');
+         FCurField.InReturn:=spvtLocal;
+         S:=ASQLParser.GetToBracket(')');
+         FCurField.Caption:='(' + S + ')';
+         //ParseFieldExp(ASQLParser, AWord, AChild);
        end;
     53:if Assigned(FCurField) then
        begin
