@@ -184,11 +184,13 @@ type
   TIndexOptions = class
   private
     FIndexNullPos: TIndexNullPos;
+    FName: string;
     FSortOrder: TIndexSortOrder;
   public
     procedure Assign(ASource:TIndexOptions);
     procedure Clear;
 
+    property Name:string read FName write FName;
     property SortOrder:TIndexSortOrder read FSortOrder write FSortOrder;
     property IndexNullPos:TIndexNullPos read FIndexNullPos write FIndexNullPos;
   end;
@@ -789,6 +791,7 @@ begin
   if not Assigned(ASource) then Exit;
   FIndexNullPos:=ASource.FIndexNullPos;
   FSortOrder:=ASource.FSortOrder;
+  FName:=ASource.FName;
 end;
 
 procedure TIndexOptions.Clear;

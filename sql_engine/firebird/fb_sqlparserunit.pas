@@ -1501,12 +1501,12 @@ begin
 
     //<using_index> ::= USING [ASC[ENDING] | DESC[ENDING]] INDEX indexname
     TUseInd:=ACmd.AddSQLTokens(stKeyword, [TConstPK1, TConstUNC, TConstRef1, TConstRef2], 'USING', []);
-      TUseInd1:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'ASC', [], 33);
-      TUseInd2:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'ASCENDING', [], 33);
-      TUseInd3:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'DESC', [], 34);
-      TUseInd4:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'DESCENDING', [], 34);
+      TUseInd1:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'ASC', [], 33 + TagBase);
+      TUseInd2:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'ASCENDING', [], 33 + TagBase);
+      TUseInd3:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'DESC', [], 34 + TagBase);
+      TUseInd4:=ACmd.AddSQLTokens(stKeyword, TUseInd, 'DESCENDING', [], 34 + TagBase);
       TUseInd5:=ACmd.AddSQLTokens(stKeyword, [TUseInd, TUseInd1, TUseInd2, TUseInd3, TUseInd4], 'INDEX', []);
-      TUseInd6:=ACmd.AddSQLTokens(stIdentificator, TUseInd5, '', [], 35);
+      TUseInd6:=ACmd.AddSQLTokens(stIdentificator, TUseInd5, '', [], 35 + TagBase);
         TUseInd6.AddChildToken([TConstRef3, TCO]);
   end;
 
@@ -6018,6 +6018,9 @@ begin
     113:if Assigned(FCurField) then FCurField.DefaultValue:=AWord;
     114:if Assigned(FCurField) then FCurField.ComputedSource:=ASQLParser.GetToBracket(')');
 
+    125:if Assigned(FCurField) then
+          FCurField.Params:= FCurField.Params + [fpUnique];
+
     131:if Assigned(FCurField) then
         begin
           FCurField.ArrayDimension.Add(StrToInt(AWord));
@@ -6033,11 +6036,15 @@ begin
 //          FCurField.ArrayDimension.Add(StrToInt(AWord));
 //          FCurField.TypeArrayDim:=FCurField.TypeArrayDim + ':' + AWord;
         end;
-    133,
+    133:if Assigned(FCurField) then
+          FCurField.IndexOptions.SortOrder:=indAscending;
+    134:if Assigned(FCurField) then
+          FCurField.IndexOptions.SortOrder:=indDescending;
+    135:if Assigned(FCurField) then
+          FCurField.IndexOptions.Name:=AWord;
+
     233:if Assigned(FCurConst) then FCurConst.IndexSortOrder:=indAscending;
-    134,
     234:if Assigned(FCurConst) then FCurConst.IndexSortOrder:=indDescending;
-    135,
     235:if Assigned(FCurConst) then FCurConst.IndexName:=AWord;
     36:if Assigned(FCurField) then
          FCurField.Params:=FCurField.Params + [fpAutoInc];
@@ -6103,14 +6110,6 @@ begin
               FCurConst.ForeignKeyRuleOnUpdate:=fkrSetNull
             else
               FCurConst.ForeignKeyRuleOnDelete:=fkrSetNull;
-        end;
-    125:begin
-          if Assigned(FCurConst) then
-            FCurConst.ConstraintType:=ctUnique
-          else
-            FCurConst:=SQLConstraints.Add(ctUnique, '');
-          if Assigned(FCurField) then
-            FCurConst.ConstraintFields.AddParam(FCurField.Caption);
         end;
     202:begin
           if not Assigned(FCurConst) then
@@ -6204,6 +6203,9 @@ begin
 
       if fpNotNull in F.Params then
         S1:=S1 + ' NOT NULL';
+
+      if fpUnique in F.Params then
+        S1:=S1 + ' UNIQUE';
     end;
 
     if F.PrimaryKey  and (not Assigned(FFindPKC)) then
@@ -6215,6 +6217,16 @@ begin
 
     if F.ReferencesTableName <> '' then
       S1:=S1 + ' REFERENCES '+F.ReferencesTableName+'('+F.ReferencesTableFields+')';
+
+    if F.IndexOptions.Name <> '' then
+    begin
+      S1:=S1 + ' USING';
+      if F.IndexOptions.SortOrder = indAscending then S1:=S1 + ' ASC'
+      else
+      if F.IndexOptions.SortOrder = indDescending then S1:=S1 + ' DESC';
+      S1:=S1 + ' INDEX ' + F.IndexOptions.Name;
+//      USING [ASC[ENDING] | DESC[ENDING]] INDEX indexname
+    end;
   end;
 
   if S1 = '' then exit;
@@ -6235,7 +6247,12 @@ begin
         begin
           S_CONSTR:=S_CONSTR + ' PRIMARY KEY (' + C.ConstraintFields.AsString + ')';
           if C.IndexName <> '' then
-            S_CONSTR:=S_CONSTR + ' USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
+          begin
+            S_CONSTR:=S_CONSTR + ' USING';
+            if C.IndexSortOrder <> indDefault then
+              S_CONSTR:=S_CONSTR + ' ' + IndexSortOrderNames[C.IndexSortOrder];
+            S_CONSTR:=S_CONSTR + ' INDEX '+C.IndexName;
+          end;
         end;
       ctForeignKey:
          begin
@@ -6247,13 +6264,23 @@ begin
            if C.ForeignKeyRuleOnDelete<>fkrNone then S_CONSTR:=S_CONSTR+' ON DELETE ' + ForeignKeyRuleNames[C.ForeignKeyRuleOnDelete];
 
            if C.IndexName <> '' then
-             S_CONSTR:=S_CONSTR + ' USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
+           begin
+             S_CONSTR:=S_CONSTR + ' USING';
+             if C.IndexSortOrder <> indDefault then
+               S_CONSTR:=S_CONSTR + ' ' + IndexSortOrderNames[C.IndexSortOrder];
+             S_CONSTR:=S_CONSTR + ' INDEX '+C.IndexName;
+           end;
          end;
       ctUnique:
          begin
            S_CONSTR:=S_CONSTR + ' UNIQUE ('+C.ConstraintFields.AsString + ')' ;
            if C.IndexName <> '' then
-             S_CONSTR:=S_CONSTR + ' USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
+           begin
+             S_CONSTR:=S_CONSTR + ' USING';
+             if C.IndexSortOrder <> indDefault then
+               S_CONSTR:=S_CONSTR + ' ' + IndexSortOrderNames[C.IndexSortOrder];
+             S_CONSTR:=S_CONSTR + ' INDEX '+C.IndexName;
+           end;
          end;
       ctTableCheck:S_CONSTR:=S_CONSTR + ' CHECK ('+C.ConstraintExpression + ')';
     end;
