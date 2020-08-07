@@ -1449,7 +1449,7 @@ begin
          TS1, T16, T17, T18, T19, T20, TS2,
          TBlob, TBlob1, TBlob2, TBlob3_1, TBlob3, TBlob4,TArr2,
          TCollumn4, TDomain3, TD1, TD2, TD3, TD4, TNN1, TCO1,
-         TConst1
+         TConst1, TGenBy1
          ],
       'PRIMARY', [toOptional]);
     TConstPK1:=ACmd.AddSQLTokens(stIdentificator, TConstPK, 'KEY', [], 16 + TagBase);
@@ -6157,8 +6157,10 @@ begin
     S:='RECREATE'
   else
     S:='CREATE';
-  if FOnCommit <> oncNone then
+//  if FOnCommit <> oncNone then
+  if ooTemporary in Options then
     S:=S + ' GLOBAL TEMPORARY';
+
   S:=S + ' TABLE ' + FullName;
   if FFileName <> '' then
     S:=S + ' EXTERNAL FILE ' + QuotedStr(FFileName);

@@ -341,6 +341,7 @@ var
   FBTestSQLData:TFBTestSQLData = nil;
 
 implementation
+uses fb_SqlParserUnit, fb_utils;
 
 {$R *.lfm}
 
@@ -1445,6 +1446,12 @@ begin
   AssertNotNull('Не найден парсер выражения : '+ASql, V);
   if Assigned(V) then
   begin
+    if V is TFBSQLAlterTable then
+      TFBSQLAlterTable(V).ServerVersion:=gds_verFirebird3_0
+    else
+    if V is TFBSQLCreateTable then
+      TFBSQLCreateTable(V).ServerVersion:=gds_verFirebird3_0;
+
     AssertFalse(V.ErrorMessage + '(' + ASql +')', V.ErrorMessage<>'');
     AssertEquals(ASql, Trim(V.AsSQL));
     V.Free;
