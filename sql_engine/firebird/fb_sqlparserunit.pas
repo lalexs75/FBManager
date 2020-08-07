@@ -7814,7 +7814,7 @@ begin
   case CreateMode of
     cmCreate:
        begin
-         S:='CREATE ' + FullName;
+         S:='CREATE ';
          if ooOrReplase in Options then S:=S + 'ALTER ';
          S:=S + 'VIEW ' + FullName;
        end;

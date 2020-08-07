@@ -5,7 +5,7 @@ object FBTestSQLData: TFBTestSQLData
   VerticalOffset = 73
   Width = 1113
   object sView: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'RecreateView1'
@@ -78,7 +78,8 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateView1'
         Lines.Strings = (
-          'CREATE VIEW ENTRY_LEVEL_JOBS AS'
+          'CREATE VIEW ENTRY_LEVEL_JOBS'
+          'as'
           'SELECT JOB_CODE, JOB_TITLE'
           'FROM JOB'
           'WHERE MAX_SALARY < 15000;'
@@ -87,7 +88,8 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateView2'
         Lines.Strings = (
-          'CREATE VIEW ENTRY_LEVEL_JOBS AS'
+          'CREATE VIEW ENTRY_LEVEL_JOBS'
+          'as'
           'SELECT JOB_CODE, JOB_TITLE'
           'FROM JOB'
           'WHERE MAX_SALARY < 15000'
@@ -97,11 +99,11 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateView3'
         Lines.Strings = (
-          'CREATE VIEW PRICE_WITH_MARKUP ('
+          'CREATE VIEW PRICE_WITH_MARKUP('
           '  CODE_PRICE,'
           '  COST,'
-          '  COST_WITH_MARKUP'
-          ') AS'
+          '  COST_WITH_MARKUP)'
+          'as'
           'SELECT'
           '  CODE_PRICE,'
           '  COST,'
@@ -112,7 +114,8 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateView4'
         Lines.Strings = (
-          'CREATE VIEW PRICE_WITH_MARKUP AS'
+          'CREATE VIEW PRICE_WITH_MARKUP'
+          'as'
           'SELECT'
           '  CODE_PRICE,'
           '  COST,'
@@ -123,7 +126,8 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateView5'
         Lines.Strings = (
-          'CREATE VIEW GOODS_PRICE AS'
+          'CREATE VIEW GOODS_PRICE'
+          'as'
           'SELECT'
           '  goods.name AS goodsname,'
           '  price.cost AS cost,'
