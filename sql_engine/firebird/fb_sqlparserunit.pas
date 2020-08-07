@@ -7790,8 +7790,8 @@ procedure TFBSQLCreateView.InternalProcessChildToken(ASQLParser: TSQLParser;
 var
   C: TParserPosition;
 begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    //1:CreateMode:=cmCreateOrAlter;
     2:CreateMode:=cmRecreate;
     3:Name:=AWord;
     4:Fields.AddParam(AWord);
@@ -7815,7 +7815,7 @@ begin
     cmCreate:
        begin
          S:='CREATE ';
-         if ooOrReplase in Options then S:=S + 'ALTER ';
+         if ooOrReplase in Options then S:=S + 'OR ALTER ';
          S:=S + 'VIEW ' + FullName;
        end;
     cmRecreate:S:='RECREATE VIEW ' + FullName;
