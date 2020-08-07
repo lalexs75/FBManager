@@ -10,7 +10,8 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'RecreateView1'
         Lines.Strings = (
-          'RECREATE VIEW v_films AS'
+          'RECREATE VIEW v_films'
+          'as'
           'SELECT f.id, f.title, s.audio, v.video'
           'FROM t_films f'
           'LEFT JOIN t_sound s ON f.id = s.id'
@@ -20,12 +21,11 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'RecreateView2'
         Lines.Strings = (
-          'RECREATE VIEW PRICE_WITH_MARKUP ('
+          'RECREATE VIEW PRICE_WITH_MARKUP('
           '  CODE_PRICE,'
           '  COST,'
-          '  COST_WITH_MARKUP'
-          ')'
-          'AS'
+          '  COST_WITH_MARKUP)'
+          'as'
           'SELECT'
           '  CODE_PRICE,'
           '  COST,'
@@ -48,11 +48,11 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'CreateOrAlterView1'
         Lines.Strings = (
-          'CREATE OR ALTER VIEW PRICE_WITH_MARKUP ('
+          'CREATE OR ALTER VIEW PRICE_WITH_MARKUP('
           '  CODE_PRICE,'
           '  COST,'
-          '  COST_WITH_MARKUP'
-          ') AS'
+          '  COST_WITH_MARKUP)'
+          'as'
           'SELECT'
           '  CODE_PRICE,'
           '  COST,'
@@ -63,11 +63,11 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterView1'
         Lines.Strings = (
-          'ALTER VIEW PRICE_WITH_MARKUP ('
+          'ALTER VIEW PRICE_WITH_MARKUP('
           '  CODE_PRICE,'
           '  COST,'
-          '  COST_WITH_MARKUP'
-          ') AS'
+          '  COST_WITH_MARKUP)'
+          'as'
           'SELECT'
           '  CODE_PRICE,'
           '  COST,'
