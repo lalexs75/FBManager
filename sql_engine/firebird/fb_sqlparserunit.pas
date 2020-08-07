@@ -1083,6 +1083,16 @@ type
   public
   end;
 
+  { TFBSQL_SET }
+
+  TFBSQL_SET = class(TSQLCommandDDL)
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+  end;
+
 const
   FBddlEventsNames : array [TTriggerDDLvent] of string = (
     'ANY DDL STATEMENT',   //tddleAnyDdlStatement
@@ -1575,6 +1585,37 @@ begin
       TConstRef9.AddChildToken(AEndTokens[i]);
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
+  end;
+end;
+
+{ TFBSQL_SET }
+
+procedure TFBSQL_SET.InitParserTree;
+var
+  FSQLTokens, T1: TSQLTokenRecord;
+begin
+  inherited InitParserTree;
+  //SET STATISTICS INDEX indexname;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFirstToken, toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'STATISTICS', []);
+  T1:=AddSQLTokens(stKeyword, T1, 'INDEX', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 1);
+end;
+
+procedure TFBSQL_SET.MakeSQL;
+var
+  S: String;
+begin
+  S:='SET STATISTICS INDEX ' + Name;
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQL_SET.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
   end;
 end;
 
