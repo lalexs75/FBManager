@@ -7848,6 +7848,8 @@ procedure TFBSQLCreateView.Assign(ASource: TSQLObjectAbstract);
 begin
   if ASource is TFBSQLCreateView then
   begin
+    if not Assigned (FSQLCommandSelect) then
+      FSQLCommandSelect:=TSQLCommandSelect.Create(nil);
     SQLCommandSelect.Assign(TFBSQLCreateView(ASource).SQLCommandSelect);
   end;
   inherited Assign(ASource);
