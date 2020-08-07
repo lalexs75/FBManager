@@ -6043,18 +6043,14 @@ begin
          FCurField.Params:=FCurField.Params + [fpAutoInc];
     37:if Assigned(FCurField) then
          FCurField.AutoIncInitValue:=StrToInt(AWord);
-    115,
     201:FCurConst:=SQLConstraints.Add(ctNone, AWord);
-    116:begin
-{          if not Assigned(FCurConst) then
-            FCurConst:=SQLConstraints.Find(ctPrimaryKey)
-          else
-            FCurConst.ConstraintType:=ctPrimaryKey;}
+    115:begin
           if Assigned(FCurField) then
-          begin
-//            FCurConst.ConstraintFields.AddParam(FCurField.Caption);
+            FCurField.ConstraintName:=AWord;
+        end;
+    116:begin
+          if Assigned(FCurField) then
             FCurField.PrimaryKey:=true;
-          end;
         end;
     117:begin
 (*          if Assigned(FCurConst) then
@@ -6156,7 +6152,7 @@ procedure TFBSQLCreateTable.MakeSQL;
 var
   S, S1, SPK, S_CONSTR: String;
   F: TSQLParserField;
-  C: TSQLConstraintItem;
+  C, FFindPKC: TSQLConstraintItem;
 begin
   if ooOrReplase in Options then
     S:='RECREATE'
@@ -6167,6 +6163,8 @@ begin
   S:=S + ' TABLE ' + FullName;
   if FFileName <> '' then
     S:=S + ' EXTERNAL FILE ' + QuotedStr(FFileName);
+
+  FFindPKC:=SQLConstraints.Find(ctPrimaryKey, false);
 
   S1:='';
   SPK:='';
@@ -6208,13 +6206,12 @@ begin
         S1:=S1 + ' NOT NULL';
     end;
 
-{    if F.PrimaryKey then
+    if F.PrimaryKey  and (not Assigned(FFindPKC)) then
     begin
-      if SPK<>'' then SPK:=SPK + ',';
-      SPK:=SPK + F.Caption;
-    end; }
-    if F.PrimaryKey then
+      if F.ConstraintName <> '' then
+        S1:=S1 + ' CONSTRAINT ' + F.ConstraintName;
       S1:=S1 + ' PRIMARY KEY';
+    end;
 
     if F.ReferencesTableName <> '' then
       S1:=S1 + ' REFERENCES '+F.ReferencesTableName+'('+F.ReferencesTableFields+')';
@@ -6229,19 +6226,20 @@ begin
     if S_CONSTR <> '' then
       S_CONSTR:=S_CONSTR + ',' + LineEnding;
 
+    S_CONSTR:=S_CONSTR + ' ';
     if ((SPK = '') or (C.ConstraintType<>ctPrimaryKey)) and (C.ConstraintName <> '') then
-      S_CONSTR:=S_CONSTR + '  CONSTRAINT ' + C.ConstraintName;
+      S_CONSTR:=S_CONSTR + ' CONSTRAINT ' + C.ConstraintName;
 
     case C.ConstraintType of
       ctPrimaryKey:if SPK = '' then
         begin
-          S_CONSTR:=S_CONSTR + '  PRIMARY KEY (' + C.ConstraintFields.AsString + ')';
+          S_CONSTR:=S_CONSTR + ' PRIMARY KEY (' + C.ConstraintFields.AsString + ')';
           if C.IndexName <> '' then
-            S_CONSTR:=S_CONSTR + '  USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
+            S_CONSTR:=S_CONSTR + ' USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
         end;
       ctForeignKey:
          begin
-           S_CONSTR:=S_CONSTR + '  FOREIGN KEY ('+ C.ConstraintFields.AsString + ') REFERENCES ' + C.ForeignTable;
+           S_CONSTR:=S_CONSTR + ' FOREIGN KEY ('+ C.ConstraintFields.AsString + ') REFERENCES ' + C.ForeignTable;
            if C.ForeignFields.Count > 0 then
              S_CONSTR:=S_CONSTR + ' (' + C.ForeignFields.AsString + ')';
 
@@ -6253,17 +6251,17 @@ begin
          end;
       ctUnique:
          begin
-           S_CONSTR:=S_CONSTR + '  UNIQUE ('+C.ConstraintFields.AsString + ')' ;
+           S_CONSTR:=S_CONSTR + ' UNIQUE ('+C.ConstraintFields.AsString + ')' ;
            if C.IndexName <> '' then
              S_CONSTR:=S_CONSTR + ' USING ' + IndexSortOrderNames[C.IndexSortOrder]+ ' INDEX '+C.IndexName;
          end;
-      ctTableCheck:S_CONSTR:=S_CONSTR + '  CHECK ('+C.ConstraintExpression + ')';
+      ctTableCheck:S_CONSTR:=S_CONSTR + ' CHECK ('+C.ConstraintExpression + ')';
     end;
   end;
 
   S:=S + '(' + LineEnding + S1;
   if SPK <> '' then
-    S:=S +',' + LineEnding + '  PRIMARY KEY (' + SPK + ')';
+    S:=S +',' + LineEnding + ' PRIMARY KEY (' + SPK + ')';
   if S_CONSTR <> '' then
     S:=S +',' + LineEnding + S_CONSTR;
 
