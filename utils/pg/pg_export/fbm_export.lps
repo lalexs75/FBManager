@@ -3,7 +3,7 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="22">
+    <Units Count="23">
       <Unit0>
         <Filename Value="fbm_export.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -165,8 +165,16 @@
         <CursorPos X="31" Y="48"/>
         <UsageCount Value="10"/>
       </Unit21>
+      <Unit22>
+        <Filename Value="D:/lazarus/components/scancode_fpc/scancodemt.pas"/>
+        <UnitName Value="ScancodeMT"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="379"/>
+        <CursorPos X="3" Y="390"/>
+        <UsageCount Value="10"/>
+      </Unit22>
     </Units>
-    <JumpHistory Count="25" HistoryIndex="24">
+    <JumpHistory Count="26" HistoryIndex="25">
       <Position1>
         <Filename Value="fbm_export.lpr"/>
         <Caret Line="92" TopLine="65"/>
@@ -266,6 +274,9 @@
         <Filename Value="pg_export_dm_unit.pas"/>
         <Caret Line="68" TopLine="38"/>
       </Position25>
+      <Position26>
+        <Filename Value="fbm_export.lpr"/>
+      </Position26>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -227,6 +227,9 @@ begin
       R:=Node.DisplayRect(False);
       R.Left:=R.Left + HeaderControl1.Sections[0].Width;
 
+      TreeView1.Canvas.Brush.Color:=TreeView1.BackgroundColor;
+      TreeView1.Canvas.FillRect(R);
+
       //Draw trigger active checkbox
       if Trigger.Active then
         Details := ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal)
@@ -235,6 +238,7 @@ begin
       CSize := ThemeServices.GetDetailSize(Details);
 
       PaintRect := Bounds(R.Left + ((HeaderControl1.Sections[1].Width - CSize.cx) div 2) , (R.Top + R.Bottom - CSize.cy) div 2, CSize.cx, CSize.cy);
+
       ThemeServices.DrawElement(TreeView1.Canvas.Handle, Details, PaintRect, nil);
 
       R.Left:=R.Left + HeaderControl1.Sections[1].Width;
