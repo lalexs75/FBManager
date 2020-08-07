@@ -1420,11 +1420,11 @@ begin
     //  {COMPUTED [BY] | GENERATED ALWAYS AS} (<expression>)
     TCompBy1:=ACmd.AddSQLTokens(stKeyword, [T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TS, TS1, T16, T17, T18, T19, T20, TS2,
     TBlob, TBlob1, TBlob2, TBlob3_1, TBlob3, TBlob4],
-      'COMPUTED', []);
+      'COMPUTED', [toOptional]);
     TCompBy2:=ACmd.AddSQLTokens(stKeyword, TCompBy1, 'BY', []);
     TCompBy3:=ACmd.AddSQLTokens(stKeyword, [T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TS, TS1, T16, T17, T18, T19, T20, TS2,
     TBlob, TBlob1, TBlob2, TBlob3_1, TBlob3, TBlob4],
-      'GENERATED', []);
+      'GENERATED', [toOptional]);
     TCompBy4:=ACmd.AddSQLTokens(stKeyword, TCompBy3, 'ALWAYS', []);
     TCompBy4:=ACmd.AddSQLTokens(stKeyword, TCompBy4, 'AS', []);
     TCompBy5:=ACmd.AddSQLTokens(stSymbol, [TCompBy4, TCompBy2], '(', [], 14 + TagBase);
@@ -6454,7 +6454,8 @@ var
     TAddOpConstrPK, TAddOpField, TAddOpConstrFL_PK,
     TAddOpConstrFK, TAddOpConstrFK_U, TAddOpConstrFK_D,
     TConstRef6, TConstRef7, TConstRef8, TConstRef9,
-    TAlterOpColRename, TDropField, TAlterOpColAlterType, T1: TSQLTokenRecord;
+    TAlterOpColRename, TDropField, TAlterOpColAlterType, T1,
+    FGenAlways1, FGenAlways1_1, FGenAlways2, FGenAlways3: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okException);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]);
@@ -6528,6 +6529,14 @@ begin
       TConstRef8.AddChildToken(TAddOpConstrFK);
 
 
+  //{COMPUTED [BY] | GENERATED ALWAYS AS} (<expression>)
+  FGenAlways1:=AddSQLTokens(stKeyword, FColName, 'COMPUTED', [], 30);
+    FGenAlways1_1:=AddSQLTokens(stKeyword, FGenAlways1, 'BY', [], 31);
+  FGenAlways2:=AddSQLTokens(stKeyword, FColName, 'GENERATED', []);
+  FGenAlways2:=AddSQLTokens(stKeyword, FGenAlways2, 'ALWAYS', []);
+  FGenAlways2:=AddSQLTokens(stKeyword, FGenAlways2, 'AS', [], 32);
+  FGenAlways3:=AddSQLTokens(stSymbol, [FGenAlways1, FGenAlways1_1, FGenAlways2], '(', [], 33);
+
 
 //     [<using_index>]
 //ALTER TABLE DEL_TB_ATICLES_COST ADD delete_user_name TYPE_USER_NAME;
@@ -6544,12 +6553,11 @@ begin
         | CHECK (<check_condition>) }
 *)
   T:=AddSQLTokens(stSymbol, [FDefCol1, FDefCol2, FDefColDrop, FDefColPos, TDropOpConst, TAddOpConstrFL_PK,
-     TConstRef6, TConstRef7, TConstRef9, TConstRef8, TAlterOpColRename, TDropField], ',', [toOptional], 5);
+     TConstRef6, TConstRef7, TConstRef9, TConstRef8, TAlterOpColRename, TDropField, FGenAlways3], ',', [toOptional], 5);
     T.AddChildToken([TAlterOp, TDropOp, TAddOp]);
 
     MakeTypeDefTree(Self,  [TAddOpField], [T], tdfTableColDef, 100);
     MakeTypeDefTree(Self,  [TAlterOpColAlterType], [T], tdfTypeOnly, 100);
-
 
 //    ALTER TABLE DEL_TB_DOC ADD CONSTRAINT PK_DEL_TB_DOC PRIMARY KEY (TB_DOC_ID);
 //ALTER COLUMN SPR_FILIAL_NAME SET DEFAULT null;
@@ -6778,6 +6786,11 @@ begin
         FCurOperator.AlterAction:=ataAlterColumnSetDataType;
     25:if Assigned(FCurOperator) then
         FCurOperator.Field.TypeName:=AWord;
+    30,31,32:if Assigned(FCurOperator) then
+        FCurOperator.AlterAction:=ataAlterColumnSetComputedBy;
+    33:if Assigned(FCurOperator) then
+       FCurOperator.Field.ComputedSource:=ASQLParser.GetToBracket(')');
+
     102:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=AWord;
     103:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + ' ' + AWord;
     104:if Assigned(FCurOperator) then FCurOperator.Field.TypeLen:=StrToInt(AWord);
@@ -6912,6 +6925,7 @@ begin
       ataDropConstraint:for C in OP.Constraints do
                           AddSQLCommandEx('ALTER TABLE %s DROP CONSTRAINT %s', [FullName, DoFormatName(C.ConstraintName)]);
       ataAlterColumnPosition : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s POSITION %d', [FullName, DoFormatName(OP.Field.Caption), OP.Position]);
+      ataAlterColumnSetComputedBy:AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s COMPUTED BY (%s)', [FullName, DoFormatName(OP.Field.Caption), OP.Field.ComputedSource]);
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;

@@ -103,6 +103,7 @@ type
      ataAlterColumnReset,
      ataAlterColumnSetStorage,
      ataAlterColumnPosition,
+     ataAlterColumnSetComputedBy,
      ataRenameColumn,
      ataAlterColumnDescription,
 
@@ -687,6 +688,7 @@ const
     'ataAlterColumnReset',
     'ataAlterColumnSetStorage',
     'ataAlterColumnPosition',
+    'ataAlterColumnSetComputedBy',
     'ataRenameColumn',
     'ataAlterColumnDescription',
     'ataAddTableConstraint',
