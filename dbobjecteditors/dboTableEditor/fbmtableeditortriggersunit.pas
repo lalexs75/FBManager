@@ -227,8 +227,11 @@ begin
       R:=Node.DisplayRect(False);
       R.Left:=R.Left + HeaderControl1.Sections[0].Width;
 
-      TreeView1.Canvas.Brush.Color:=TreeView1.BackgroundColor;
-      TreeView1.Canvas.FillRect(R);
+        if (cdsSelected in State) then
+          TreeView1.Canvas.Brush.Color:=TreeView1.SelectionColor
+        else
+          TreeView1.Canvas.Brush.Color:=TreeView1.BackgroundColor;
+        TreeView1.Canvas.FillRect(R);
 
       //Draw trigger active checkbox
       if Trigger.Active then
