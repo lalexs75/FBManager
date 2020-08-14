@@ -2527,7 +2527,7 @@ msgstr "Перейти к закладке "
 
 #: fbmstrconstunit.sgotoforeigntable
 msgid "Go to foreign table"
-msgstr "Перейти к таблице вненего ключа"
+msgstr "Перейти к таблице вншенего ключа"
 
 #: fbmstrconstunit.sgotoresulttabafterexecute
 msgid "Go to Result tab after execute"
