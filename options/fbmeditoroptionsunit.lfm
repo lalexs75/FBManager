@@ -17,22 +17,22 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     Height = 333
     Top = 0
     Width = 687
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alTop
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Global'
-      ClientHeight = 298
-      ClientWidth = 681
+      ClientHeight = 302
+      ClientWidth = 677
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         Left = 6
-        Height = 22
+        Height = 23
         Top = 6
-        Width = 130
+        Width = 123
         BorderSpacing.Around = 6
         Caption = 'Syntax highlight'
         OnChange = CheckBox1Change
@@ -43,9 +43,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = CheckBox1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 22
-        Top = 34
-        Width = 75
+        Height = 23
+        Top = 35
+        Width = 77
         BorderSpacing.Around = 6
         Caption = 'Show ///'
         OnChange = CheckBox1Change
@@ -56,9 +56,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = CheckBox4
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 22
-        Top = 62
-        Width = 156
+        Height = 23
+        Top = 64
+        Width = 142
         BorderSpacing.Around = 6
         Caption = 'Caret always visible'
         OnChange = CheckBox1Change
@@ -69,9 +69,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = CheckBox5
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 22
-        Top = 90
-        Width = 112
+        Height = 23
+        Top = 93
+        Width = 107
         BorderSpacing.Around = 6
         Caption = 'Vertical block'
         TabOrder = 3
@@ -79,13 +79,13 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Display'
-      ClientHeight = 298
-      ClientWidth = 681
+      ClientHeight = 302
+      ClientWidth = 677
       object Label1: TLabel
         Left = 6
-        Height = 21
+        Height = 17
         Top = 6
-        Width = 78
+        Width = 72
         Caption = 'Display font'
         ParentColor = False
       end
@@ -94,9 +94,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = Edit1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 21
-        Top = 72
-        Width = 59
+        Height = 17
+        Top = 68
+        Width = 54
         HelpKeyword = 'SpinEdit1'
         Caption = 'Font size'
         FocusControl = SpinEdit1
@@ -108,9 +108,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideBottom.Control = SpinEdit2
         AnchorSideBottom.Side = asrBottom
         Left = 12
-        Height = 21
-        Top = 181
-        Width = 149
+        Height = 17
+        Top = 175
+        Width = 137
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Show only line number'
@@ -121,9 +121,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideBottom.Control = SpinEdit3
         AnchorSideBottom.Side = asrBottom
         Left = 12
-        Height = 21
-        Top = 251
-        Width = 160
+        Height = 17
+        Top = 243
+        Width = 150
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'border position (in chars)'
@@ -136,8 +136,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Control = Button3
         Left = 12
         Height = 33
-        Top = 33
-        Width = 552
+        Top = 29
+        Width = 558
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         Enabled = False
@@ -150,10 +150,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
-        Left = 570
+        Left = 576
         Height = 41
-        Top = 29
-        Width = 95
+        Top = 25
+        Width = 89
         Anchors = [akTop, akRight]
         AutoSize = True
         BorderSpacing.Right = 12
@@ -168,7 +168,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         Left = 12
         Height = 33
-        Top = 99
+        Top = 91
         Width = 82
         BorderSpacing.Around = 6
         OnChange = CheckBox1Change
@@ -179,9 +179,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = SpinEdit1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 25
-        Top = 138
-        Width = 150
+        Height = 23
+        Top = 130
+        Width = 140
         BorderSpacing.Around = 6
         Caption = 'Show line numbers'
         OnChange = CheckBox6Change
@@ -192,9 +192,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = CheckBox6
         AnchorSideTop.Side = asrBottom
-        Left = 167
+        Left = 155
         Height = 33
-        Top = 169
+        Top = 159
         Width = 82
         BorderSpacing.Around = 6
         MaxValue = 20
@@ -208,9 +208,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = Label7
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 25
-        Top = 208
-        Width = 143
+        Height = 23
+        Top = 198
+        Width = 135
         BorderSpacing.Around = 6
         Caption = 'Show right border'
         OnChange = CheckBox7Change
@@ -221,12 +221,13 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = CheckBox7
         AnchorSideTop.Side = asrBottom
-        Left = 178
+        Left = 168
         Height = 33
-        Top = 239
+        Top = 227
         Width = 66
         BorderSpacing.Left = 6
         BorderSpacing.Top = 6
+        MaxValue = 1000
         OnChange = CheckBox1Change
         TabOrder = 6
       end
@@ -235,10 +236,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = Edit1
         AnchorSideTop.Side = asrBottom
-        Left = 255
-        Height = 25
-        Top = 72
-        Width = 145
+        Left = 243
+        Height = 23
+        Top = 68
+        Width = 138
         BorderSpacing.Around = 6
         Caption = 'Disable antialiased'
         OnChange = CheckBox1Change
@@ -247,8 +248,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Color'
-      ClientHeight = 298
-      ClientWidth = 681
+      ClientHeight = 302
+      ClientWidth = 677
       object ColorButton1: TColorButton
         AnchorSideLeft.Control = Label3
         AnchorSideLeft.Side = asrBottom
@@ -514,8 +515,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Codetools and auto code completion'
-      ClientHeight = 298
-      ClientWidth = 681
+      ClientHeight = 302
+      ClientWidth = 677
       object Label9: TLabel
         AnchorSideLeft.Control = TabSheet4
         AnchorSideTop.Control = TabSheet4
@@ -561,8 +562,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 91
-        ClientWidth = 322
+        ClientHeight = 92
+        ClientWidth = 324
         Enabled = False
         Items.Strings = (
           'Upper case'
@@ -594,8 +595,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 91
-        ClientWidth = 317
+        ClientHeight = 92
+        ClientWidth = 319
         Items.Strings = (
           'Upper case'
           'Lower case'
@@ -705,7 +706,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   inline SynEdit1: TSynEdit
     Cursor = crDefault
     Left = 0
-    Height = 163
+    Height = 159
     Top = 339
     Width = 687
     Align = alClient
@@ -1143,6 +1144,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     SelectedColor.ItalicPriority = 50
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
+    ScrollOnEditLeftOptions.ScrollExtraPercent = 20
+    ScrollOnEditLeftOptions.ScrollExtraMax = 10
+    ScrollOnEditRightOptions.ScrollExtraPercent = 30
+    ScrollOnEditRightOptions.ScrollExtraMax = 25
     BracketHighlightStyle = sbhsBoth
     BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
@@ -1236,8 +1241,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 42
-    Top = 508
+    Height = 46
+    Top = 504
     Width = 675
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -1268,13 +1273,118 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   object SynSQLSyn1: TSynSQLSyn
     DefaultFilter = 'Ôàéëû SQL (*.sql)|*.sql'
     Enabled = False
+    CommentAttri.BackPriority = 0
+    CommentAttri.ForePriority = 0
+    CommentAttri.FramePriority = 0
+    CommentAttri.BoldPriority = 0
+    CommentAttri.ItalicPriority = 0
+    CommentAttri.UnderlinePriority = 0
+    CommentAttri.StrikeOutPriority = 0
+    DataTypeAttri.BackPriority = 0
+    DataTypeAttri.ForePriority = 0
+    DataTypeAttri.FramePriority = 0
+    DataTypeAttri.BoldPriority = 0
+    DataTypeAttri.ItalicPriority = 0
+    DataTypeAttri.UnderlinePriority = 0
+    DataTypeAttri.StrikeOutPriority = 0
+    DefaultPackageAttri.BackPriority = 0
+    DefaultPackageAttri.ForePriority = 0
+    DefaultPackageAttri.FramePriority = 0
+    DefaultPackageAttri.BoldPriority = 0
+    DefaultPackageAttri.ItalicPriority = 0
+    DefaultPackageAttri.UnderlinePriority = 0
+    DefaultPackageAttri.StrikeOutPriority = 0
+    ExceptionAttri.BackPriority = 0
+    ExceptionAttri.ForePriority = 0
+    ExceptionAttri.FramePriority = 0
+    ExceptionAttri.BoldPriority = 0
+    ExceptionAttri.ItalicPriority = 0
+    ExceptionAttri.UnderlinePriority = 0
+    ExceptionAttri.StrikeOutPriority = 0
+    FunctionAttri.BackPriority = 0
+    FunctionAttri.ForePriority = 0
+    FunctionAttri.FramePriority = 0
+    FunctionAttri.BoldPriority = 0
+    FunctionAttri.ItalicPriority = 0
+    FunctionAttri.UnderlinePriority = 0
+    FunctionAttri.StrikeOutPriority = 0
+    IdentifierAttri.BackPriority = 0
+    IdentifierAttri.ForePriority = 0
+    IdentifierAttri.FramePriority = 0
+    IdentifierAttri.BoldPriority = 0
+    IdentifierAttri.ItalicPriority = 0
+    IdentifierAttri.UnderlinePriority = 0
+    IdentifierAttri.StrikeOutPriority = 0
+    KeyAttri.BackPriority = 0
+    KeyAttri.ForePriority = 0
+    KeyAttri.FramePriority = 0
+    KeyAttri.BoldPriority = 0
+    KeyAttri.ItalicPriority = 0
+    KeyAttri.UnderlinePriority = 0
+    KeyAttri.StrikeOutPriority = 0
+    NumberAttri.BackPriority = 0
+    NumberAttri.ForePriority = 0
+    NumberAttri.FramePriority = 0
+    NumberAttri.BoldPriority = 0
+    NumberAttri.ItalicPriority = 0
+    NumberAttri.UnderlinePriority = 0
+    NumberAttri.StrikeOutPriority = 0
+    PLSQLAttri.BackPriority = 0
+    PLSQLAttri.ForePriority = 0
+    PLSQLAttri.FramePriority = 0
+    PLSQLAttri.BoldPriority = 0
+    PLSQLAttri.ItalicPriority = 0
+    PLSQLAttri.UnderlinePriority = 0
+    PLSQLAttri.StrikeOutPriority = 0
+    SpaceAttri.BackPriority = 0
+    SpaceAttri.ForePriority = 0
+    SpaceAttri.FramePriority = 0
+    SpaceAttri.BoldPriority = 0
+    SpaceAttri.ItalicPriority = 0
+    SpaceAttri.UnderlinePriority = 0
+    SpaceAttri.StrikeOutPriority = 0
+    SQLPlusAttri.BackPriority = 0
+    SQLPlusAttri.ForePriority = 0
+    SQLPlusAttri.FramePriority = 0
+    SQLPlusAttri.BoldPriority = 0
+    SQLPlusAttri.ItalicPriority = 0
+    SQLPlusAttri.UnderlinePriority = 0
+    SQLPlusAttri.StrikeOutPriority = 0
     StringAttri.Foreground = clAqua
+    StringAttri.BackPriority = 0
+    StringAttri.ForePriority = 0
+    StringAttri.FramePriority = 0
+    StringAttri.BoldPriority = 0
+    StringAttri.ItalicPriority = 0
+    StringAttri.UnderlinePriority = 0
+    StringAttri.StrikeOutPriority = 0
+    SymbolAttri.BackPriority = 0
+    SymbolAttri.ForePriority = 0
+    SymbolAttri.FramePriority = 0
+    SymbolAttri.BoldPriority = 0
+    SymbolAttri.ItalicPriority = 0
+    SymbolAttri.UnderlinePriority = 0
+    SymbolAttri.StrikeOutPriority = 0
     TableNameAttri.Background = clWhite
     TableNameAttri.Foreground = clGreen
     TableNameAttri.Style = [fsUnderline]
+    TableNameAttri.BackPriority = 0
+    TableNameAttri.ForePriority = 0
+    TableNameAttri.FramePriority = 0
+    TableNameAttri.BoldPriority = 0
+    TableNameAttri.ItalicPriority = 0
+    TableNameAttri.UnderlinePriority = 0
+    TableNameAttri.StrikeOutPriority = 0
     TableNames.Strings = (
       'user_data'
     )
+    VariableAttri.BackPriority = 0
+    VariableAttri.ForePriority = 0
+    VariableAttri.FramePriority = 0
+    VariableAttri.BoldPriority = 0
+    VariableAttri.ItalicPriority = 0
+    VariableAttri.UnderlinePriority = 0
+    VariableAttri.StrikeOutPriority = 0
     SQLDialect = sqlInterbase6
     Left = 152
     Top = 352
