@@ -4786,6 +4786,10 @@ msgstr "Убрать все права у всех"
 msgid "Revoke from all"
 msgstr "Убрать все права"
 
+#: fbmstrconstunit.srightmarginposition
+msgid "Right margin position"
+msgstr ""
+
 #: fbmstrconstunit.srolback
 msgid "Rolback"
 msgstr "Откатить"
@@ -5185,7 +5189,9 @@ msgid "Show result grid on first page"
 msgstr "Отображать результат на первой странице"
 
 #: fbmstrconstunit.sshowrightborder
-msgid "Show right border"
+#, fuzzy
+#| msgid "Show right border"
+msgid "Show right margin"
 msgstr "Отображать правую границу"
 
 #: fbmstrconstunit.sshowsystemobjects

@@ -1276,7 +1276,8 @@ resourcestring
   sDisableAntialiased               = 'Disable antialiased';
   sShowLineNumbers                  = 'Show line numbers';
   sShowOnlyLineNumber               = 'Show only line number';
-  sShowRightBorder                  = 'Show right border';
+  sShowRightBorder                  = 'Show right margin';
+  sRightMarginPosition              = 'Right margin position';
   sEditorOptions                    = 'Editor options';
   sSyntaxHighlight                  = 'Syntax highlight';
   sCaretAlwaysVisible               = 'Caret always visible';

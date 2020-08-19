@@ -317,8 +317,7 @@ begin
   CheckBox6.Caption:=sShowLineNumbers;
   Label7.Caption:=sShowOnlyLineNumber;
   CheckBox7.Caption:=sShowRightBorder;
-
-  Label8.Caption:=sEditorOptions;
+  Label8.Caption:=sRightMarginPosition;
 
   CheckBox1.Caption:=sSyntaxHighlight;
   CheckBox5.Caption:=sCaretAlwaysVisible;

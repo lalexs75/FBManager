@@ -123,10 +123,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 12
         Height = 17
         Top = 243
-        Width = 150
+        Width = 130
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
-        Caption = 'border position (in chars)'
+        Caption = 'Right margin position'
         ParentColor = False
       end
       object Edit1: TEdit
@@ -210,9 +210,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 6
         Height = 23
         Top = 198
-        Width = 135
+        Width = 137
         BorderSpacing.Around = 6
-        Caption = 'Show right border'
+        Caption = 'Show right margin'
         OnChange = CheckBox7Change
         TabOrder = 5
       end
@@ -221,7 +221,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = CheckBox7
         AnchorSideTop.Side = asrBottom
-        Left = 168
+        Left = 148
         Height = 33
         Top = 227
         Width = 66
