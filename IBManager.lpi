@@ -28,8 +28,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="12"/>
-      <RevisionNr Value="10"/>
-      <BuildNr Value="5630"/>
+      <RevisionNr Value="11"/>
+      <BuildNr Value="5633"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.12"/>
