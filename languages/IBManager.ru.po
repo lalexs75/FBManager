@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: fbmstrconstunit.aidentityfield
 msgid "IDENTITY field"
@@ -4788,7 +4788,7 @@ msgstr "Убрать все права"
 
 #: fbmstrconstunit.srightmarginposition
 msgid "Right margin position"
-msgstr ""
+msgstr "Правая граница"
 
 #: fbmstrconstunit.srolback
 msgid "Rolback"
@@ -5189,8 +5189,6 @@ msgid "Show result grid on first page"
 msgstr "Отображать результат на первой странице"
 
 #: fbmstrconstunit.sshowrightborder
-#, fuzzy
-#| msgid "Show right border"
 msgid "Show right margin"
 msgstr "Отображать правую границу"
 
@@ -6554,4 +6552,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-

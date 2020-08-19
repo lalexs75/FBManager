@@ -17,10 +17,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     Height = 333
     Top = 0
     Width = 687
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alTop
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Global'
@@ -65,10 +65,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         TabOrder = 2
       end
       object CheckBox13: TCheckBox
-        AnchorSideLeft.Control = CheckBox5
+        AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = CheckBox5
         AnchorSideTop.Side = asrBottom
-        Left = 12
+        Left = 6
         Height = 23
         Top = 93
         Width = 107
@@ -255,7 +255,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = Label5
         AnchorSideTop.Side = asrBottom
-        Left = 87
+        Left = 86
         Height = 25
         Top = 29
         Width = 75
@@ -274,7 +274,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 6
         Height = 17
         Top = 37
-        Width = 41
+        Width = 40
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         BorderSpacing.Right = 40
@@ -285,10 +285,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Control = Label3
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 87
+        Left = 86
         Height = 17
         Top = 6
-        Width = 77
+        Width = 72
         BorderSpacing.Around = 6
         Caption = 'Background'
         ParentColor = False
@@ -297,10 +297,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Control = ColorButton1
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TabSheet3
-        Left = 208
+        Left = 207
         Height = 17
         Top = 6
-        Width = 74
+        Width = 72
         BorderSpacing.Around = 6
         Caption = 'Foreground'
         ParentColor = False
@@ -310,7 +310,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = Label5
         AnchorSideTop.Side = asrBottom
-        Left = 208
+        Left = 207
         Height = 25
         Top = 29
         Width = 75
@@ -325,7 +325,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton1
         AnchorSideTop.Side = asrBottom
-        Left = 87
+        Left = 86
         Height = 25
         Top = 60
         Width = 75
@@ -343,7 +343,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 6
         Height = 17
         Top = 68
-        Width = 45
+        Width = 42
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Strings'
@@ -354,7 +354,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton1
         AnchorSideTop.Side = asrBottom
-        Left = 208
+        Left = 207
         Height = 25
         Top = 60
         Width = 75
@@ -370,10 +370,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = ColorButton2
         AnchorSideBottom.Side = asrBottom
-        Left = 289
-        Height = 22
-        Top = 32
-        Width = 87
+        Left = 288
+        Height = 23
+        Top = 31
+        Width = 85
         Anchors = [akLeft, akBottom]
         Caption = 'Underline'
         OnChange = CheckBox1Change
@@ -385,10 +385,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = ColorButton4
         AnchorSideBottom.Side = asrBottom
-        Left = 289
-        Height = 22
-        Top = 63
-        Width = 87
+        Left = 288
+        Height = 23
+        Top = 62
+        Width = 85
         Anchors = [akLeft, akBottom]
         Caption = 'Underline'
         OnChange = CheckBox1Change
@@ -402,7 +402,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 6
         Height = 17
         Top = 99
-        Width = 64
+        Width = 61
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Comment'
@@ -413,7 +413,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton3
         AnchorSideTop.Side = asrBottom
-        Left = 87
+        Left = 86
         Height = 25
         Top = 91
         Width = 75
@@ -428,7 +428,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton4
         AnchorSideTop.Side = asrBottom
-        Left = 208
+        Left = 207
         Height = 25
         Top = 91
         Width = 75
@@ -444,10 +444,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = ColorButton6
         AnchorSideBottom.Side = asrBottom
-        Left = 289
-        Height = 22
-        Top = 94
-        Width = 87
+        Left = 288
+        Height = 23
+        Top = 93
+        Width = 85
         Anchors = [akLeft, akBottom]
         Caption = 'Underline'
         OnChange = CheckBox1Change
@@ -461,7 +461,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Left = 6
         Height = 17
         Top = 130
-        Width = 59
+        Width = 55
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Numbers'
@@ -472,7 +472,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton5
         AnchorSideTop.Side = asrBottom
-        Left = 87
+        Left = 86
         Height = 25
         Top = 122
         Width = 75
@@ -487,7 +487,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = ColorButton6
         AnchorSideTop.Side = asrBottom
-        Left = 208
+        Left = 207
         Height = 25
         Top = 122
         Width = 75
@@ -503,10 +503,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = ColorButton8
         AnchorSideBottom.Side = asrBottom
-        Left = 289
-        Height = 22
-        Top = 125
-        Width = 87
+        Left = 288
+        Height = 23
+        Top = 124
+        Width = 85
         Anchors = [akLeft, akBottom]
         Caption = 'Underline'
         OnChange = CheckBox1Change
@@ -521,9 +521,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Control = TabSheet4
         AnchorSideTop.Control = TabSheet4
         Left = 6
-        Height = 20
+        Height = 17
         Top = 6
-        Width = 126
+        Width = 113
         BorderSpacing.Left = 6
         BorderSpacing.Top = 6
         BorderSpacing.Right = 42
@@ -534,9 +534,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideLeft.Control = Label13
         AnchorSideTop.Control = TabSheet4
         Left = 344
-        Height = 20
+        Height = 17
         Top = 6
-        Width = 128
+        Width = 119
         BorderSpacing.Around = 6
         Caption = 'Identifiers char case'
         ParentColor = False
@@ -547,8 +547,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Label13
         Left = 6
-        Height = 110
-        Top = 32
+        Height = 106
+        Top = 29
         Width = 326
         Anchors = [akTop, akLeft, akRight]
         AutoFill = True
@@ -562,7 +562,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 92
+        ClientHeight = 104
         ClientWidth = 324
         Enabled = False
         Items.Strings = (
@@ -580,8 +580,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Control = TabSheet4
         AnchorSideRight.Side = asrBottom
         Left = 350
-        Height = 110
-        Top = 32
+        Height = 106
+        Top = 29
         Width = 321
         Anchors = [akTop, akLeft, akRight]
         AutoFill = True
@@ -595,7 +595,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 92
+        ClientHeight = 104
         ClientWidth = 319
         Items.Strings = (
           'Upper case'
@@ -610,9 +610,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = rgCharCaseKeyword
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 24
-        Top = 148
-        Width = 171
+        Height = 23
+        Top = 141
+        Width = 163
         BorderSpacing.Around = 6
         Caption = 'Highlight current word'
         TabOrder = 2
@@ -624,8 +624,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Control = Label11
         Left = 6
         Height = 52
-        Top = 178
-        Width = 555
+        Top = 170
+        Width = 565
         Frequency = 100
         Max = 4000
         Min = 100
@@ -640,10 +640,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TrackBar1
         AnchorSideBottom.Side = asrCenter
-        Left = 567
-        Height = 20
-        Top = 194
-        Width = 104
+        Left = 577
+        Height = 17
+        Top = 187
+        Width = 94
         Anchors = [akRight, akBottom]
         BorderSpacing.Right = 6
         Caption = '(delay 1000 ms)'
@@ -654,9 +654,9 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideTop.Control = TrackBar1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 24
-        Top = 236
-        Width = 172
+        Height = 23
+        Top = 228
+        Width = 167
         BorderSpacing.Around = 6
         Caption = 'Enable autocompletion'
         TabOrder = 4
@@ -668,8 +668,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Control = Label12
         Left = 6
         Height = 52
-        Top = 266
-        Width = 555
+        Top = 257
+        Width = 565
         Max = 4000
         OnChange = TrackBar2Change
         Position = 1000
@@ -682,10 +682,10 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TrackBar2
         AnchorSideBottom.Side = asrCenter
-        Left = 567
-        Height = 20
-        Top = 282
-        Width = 104
+        Left = 577
+        Height = 17
+        Top = 274
+        Width = 94
         Anchors = [akRight, akBottom]
         BorderSpacing.Right = 6
         Caption = '(delay 1000 ms)'
