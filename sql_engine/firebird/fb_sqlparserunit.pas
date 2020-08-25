@@ -1596,9 +1596,9 @@ var
 begin
   inherited InitParserTree;
   //SET STATISTICS INDEX indexname;
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFirstToken, toFindWordLast]);
-  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'STATISTICS', []);
-  T1:=AddSQLTokens(stKeyword, T1, 'INDEX', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFirstToken]);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'STATISTICS', [toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, T1, 'INDEX', [toFindWordLast]);
   T1:=AddSQLTokens(stIdentificator, T1, '', [], 1);
 end;
 
