@@ -168,12 +168,25 @@ type
 
   { TFBSQLAlterTrigger }
 
-  TFBSQLAlterTrigger = class(TFBSQLCreateTrigger)
+  TFBSQLAlterTrigger = class(TSQLAlterTrigger)
+  private
+    FBody: string;
+    FPosition: integer;
+    FTriggerDBEvent: TTriggerDBEvent;
+    FTriggerDDLvents: TTriggerDDLvents;
+    procedure ParseLocalVariables(ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+    procedure SetBody(AValue: string);
   protected
-{    procedure InitParserTree;override;
+    procedure InitParserTree;override;
     procedure MakeSQL;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;}
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Position:integer read FPosition write FPosition;
+    property TriggerDBEvent:TTriggerDBEvent read FTriggerDBEvent write FTriggerDBEvent;
+    property TriggerDDLvents:TTriggerDDLvents read FTriggerDDLvents write FTriggerDDLvents;
+    property Body:string read FBody write SetBody;
+    property TableName;
   end;
 
 
@@ -1586,6 +1599,181 @@ begin
       TUseInd6.AddChildToken(AEndTokens[i]);
     end;
   end;
+end;
+
+{ TFBSQLAlterTrigger }
+
+procedure TFBSQLAlterTrigger.ParseLocalVariables(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+var
+  L: TFBLocalVariableParser;
+begin
+  L:=TFBLocalVariableParser.Create(nil);
+  L.ParseLocalVars(ASQLParser);
+  Params.CopyFrom(L.Params, []);
+  L.Free;
+end;
+
+procedure TFBSQLAlterTrigger.SetBody(AValue: string);
+begin
+  if FBody=AValue then Exit;
+  FBody:=AValue;
+end;
+
+procedure TFBSQLAlterTrigger.InitParserTree;
+var
+  FSQLTokens, T, TName, TAC1, TAC2, TBef, TAft, TM1, TM2, TM3,
+    TPos, TPos1, TAs, TBeg: TSQLTokenRecord;
+begin
+  inherited InitParserTree;
+(*
+  ALTER TRIGGER trigname {
+  [ACTIVE | INACTIVE]
+  [
+  {BEFORE | AFTER} { <mutation_list> | <ddl_events> }
+  | ON db_event
+  ]
+  [POSITION number ]
+  [{ <psql-body> | <external-body> }]
+  <psql-body> ::=
+  AS
+  [ <declarations> ]
+  BEGIN
+  [ <PSQL_statements> ]
+  END
+  <external-body> ::=
+  EXTERNAL NAME ' <extname> ' ENGINE <engine>
+  [AS <extbody> ]
+  <mutation_list> ::= <mutation> [OR <mutation> [OR <mutation> ]]
+  <mutation> ::= { INSERT | UPDATE | DELETE }
+*)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  TAC1:=AddSQLTokens(stKeyword, TName, 'ACTIVE', [toOptional], 2);
+  TAC2:=AddSQLTokens(stKeyword, TName, 'INACTIVE', [toOptional], 3);
+
+  TBef:=AddSQLTokens(stKeyword, [TName, TAC1, TAC2], 'BEFORE', [toOptional], 4);
+  TAft:=AddSQLTokens(stKeyword, [TName, TAC1, TAC2], 'AFTER', [toOptional], 5);
+
+  TM1:=AddSQLTokens(stKeyword, [TBef, TAft], 'INSERT', [], 6);
+    T:=AddSQLTokens(stKeyword, [TM1], 'OR', [toOptional]);
+  TM2:=AddSQLTokens(stKeyword, [TBef, TAft, T], 'UPDATE', [], 7);
+    T:=AddSQLTokens(stKeyword, [TM2], 'OR', [toOptional]);
+  TM3:=AddSQLTokens(stKeyword, [TBef, TAft, T], 'DELETE', [], 8);
+
+  TPos:=AddSQLTokens(stKeyword, [TName, TAC1, TAC2, TM1, TM2, TM3], 'POSITION', [toOptional]);
+    TPos1:=AddSQLTokens(stInteger, [TPos], '', [], 9);
+
+  TAs:=AddSQLTokens(stKeyword, [TName, TAC1, TAC2, TM1, TM2, TM3, TPos1], 'AS', [toOptional], 20);
+  TBeg:=AddSQLTokens(stKeyword, [TAs], 'BEGIN', [], 21);
+end;
+
+procedure TFBSQLAlterTrigger.MakeSQL;
+var
+  S, S1: String;
+  L: TFBLocalVariableParser;
+begin
+  S:='ALTER TRIGGER ' + DoFormatName(Name);
+  if TriggerState = trsActive then S:=S + ' ACTIVE'
+  else
+  if TriggerState = trsInactive then S:=S + ' INACTIVE';
+
+  if ttBefore in TriggerType then
+    S:=S + ' BEFORE'
+  else
+  if ttAfter in TriggerType then
+    S:=S + ' AFTER'
+  ;
+
+  S1:='';
+  if ttInsert in TriggerType then S1:=S1 + ' INSERT';
+
+  if ttUpdate in TriggerType then
+  begin
+    if S1<>'' then S1:=S1 + ' OR';
+    S1:=S1 + ' UPDATE';
+  end;
+
+  if ttDelete in TriggerType then
+  begin
+    if S1<>'' then S1:=S1 + ' OR';
+    S1:=S1 + ' DELETE';
+  end;
+
+  if S<>'' then
+    S:=S + S1;
+
+  if Position > 0 then
+    S:=S + ' POSITION ' + IntToStr(Position);
+
+
+  if (Body<>'') or (Params.Count > 0) then
+  begin
+    L:=TFBLocalVariableParser.Create(nil);
+    L.Params.CopyFrom(Params);
+    L.OwnerName:=Name;
+    L.DescType:=fbldLocal;
+    S:=S + LineEnding+'AS' + LineEnding + L.AsSQL + Body;
+    L.Free;
+  end;
+  (*
+    ALTER TRIGGER trigname {
+    [ACTIVE | INACTIVE]
+    [
+    {BEFORE | AFTER} { <mutation_list> | <ddl_events> }
+    | ON db_event
+    ]
+    [POSITION number ]
+    [{ <psql-body> | <external-body> }]
+    <psql-body> ::=
+    AS
+    [ <declarations> ]
+    BEGIN
+    [ <PSQL_statements> ]
+    END
+    <external-body> ::=
+    EXTERNAL NAME ' <extname> ' ENGINE <engine>
+    [AS <extbody> ]
+    <mutation_list> ::= <mutation> [OR <mutation> [OR <mutation> ]]
+    <mutation> ::= { INSERT | UPDATE | DELETE }
+  *)
+  AddSQLCommand(S);
+end;
+
+procedure TFBSQLAlterTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:TriggerState:=trsActive;
+    3:TriggerState:=trsInactive;
+    4:TriggerType:=TriggerType + [ttBefore];
+    5:TriggerType:=TriggerType + [ttAfter];
+    6:TriggerType:=TriggerType + [ttInsert];
+    7:TriggerType:=TriggerType + [ttUpdate];
+    8:TriggerType:=TriggerType + [ttDelete];
+    9:Position:=StrToInt(AWord);
+    20:ParseLocalVariables(ASQLParser, AChild, AWord);
+    21:begin
+         ASQLParser.Position:=ASQLParser.WordPosition;
+         Body:=GetToEndpSQL(ASQLParser);
+       end;
+  end;
+end;
+
+procedure TFBSQLAlterTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLAlterTrigger then
+  begin
+    Position:=TFBSQLAlterTrigger(ASource).Position;
+    TriggerDBEvent:=TFBSQLAlterTrigger(ASource).TriggerDBEvent;
+    TriggerDDLvents:=TFBSQLAlterTrigger(ASource).TriggerDDLvents;
+    Body:=TFBSQLAlterTrigger(ASource).Body;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TFBSQL_SET }
@@ -7956,7 +8144,8 @@ var
     TDDLS3_11, TDDLS3_12, TDDLS3_13, TDDLS3_14, TDDLS4,
     TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
     TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11,
-    TDDLS4_12, TDDLS4_13, TDDLS4_14, TDDLS4_15, TDDLS5: TSQLTokenRecord;
+    TDDLS4_12, TDDLS4_13, TDDLS4_14, TDDLS4_15, TDDLS5,
+    FSQLTokens1: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   (*
@@ -8034,10 +8223,12 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
 *)
 
   //Строим дерево граматического разбора
+
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);    //CREATE TRIGGER
     Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', [], -2);
-    Par1:=AddSQLTokens(stKeyword, Par1, 'ALTER', [toFirstToken], 1);
-  FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'TRIGGER', [toFindWordLast]);    //CREATE TRIGGER
+    Par1:=AddSQLTokens(stKeyword, Par1, 'ALTER', [], 1);
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'RECREATE', [toFirstToken], 4);    //RECREATE TRIGGER
+  FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, Par1, FSQLTokens1], 'TRIGGER', [toFindWordLast]);    //CREATE TRIGGER
 
     TrigName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 2);       //  trigger_name
     Par1:=AddSQLTokens(stKeyword, TrigName, 'FOR', []);              //FOR
@@ -8059,18 +8250,18 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     TAfter:=AddSQLTokens(stKeyword, [State1, State2, TrigName], 'AFTER', [toOptional], 7);          // |AFTER|
 
     State1:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'INSERT', [], 8);          // |INSERT|
-    Symb:=AddSQLTokens(stKeyword, State1, 'OR', []);             //OR
+    Symb:=AddSQLTokens(stKeyword, State1, 'OR', [toOptional]);             //OR
     State2:=AddSQLTokens(stKeyword, [TBefore, TAfter, Symb], 'UPDATE', [], 9);          // |UPDATE|
-    Symb:=AddSQLTokens(stKeyword, State2, 'OR', []);             //OR
+    Symb:=AddSQLTokens(stKeyword, State2, 'OR', [toOptional]);             //OR
     State3:=AddSQLTokens(stKeyword, [TBefore, TAfter, Symb], 'DELETE', [], 10);          // |DELETE|
 
 
-    Par1:=AddSQLTokens(stKeyword, [State1, TDBOn1, TDBOn2, TDBOn3_1, TDBOn3_2, TDBOn3_3], 'POSITION', []);        //POSITION
+    Par1:=AddSQLTokens(stKeyword, [State1, TDBOn1, TDBOn2, TDBOn3_1, TDBOn3_2, TDBOn3_3], 'POSITION', [toOptional]);        //POSITION
     Par2:=AddSQLTokens(stInteger, Par1, '', [], 11);                    //  number
     State2.AddChildToken(Par1);
     State3.AddChildToken(Par1);
 
-  Ton:=AddSQLTokens(stKeyword, Par2, 'ON', [], 12);
+  Ton:=AddSQLTokens(stKeyword, Par2, 'ON', [toOptional], 12);
     Ton1:=AddSQLTokens(stIdentificator, Ton, '', [], 3);
 
   TDDLS1:=AddSQLTokens(stKeyword, [TBefore, TAfter], 'ANY', [], 25); //AS
@@ -8149,7 +8340,7 @@ CREATE TABLE | ALTER TABLE | DROP TABLE
     TDDLS3_14, TDDLS4_1, TDDLS4_2, TDDLS4_3, TDDLS4_4, TDDLS4_5, TDDLS4_6,
     TDDLS4_7, TDDLS4_8, TDDLS4_9, TDDLS4_10, TDDLS4_11, TDDLS4_12, TDDLS4_13,
     TDDLS4_14, TDDLS4_15
-    ], 'AS', [], 20);                //AS
+    ], 'AS', [toOptional], 20);                //AS
     Par1:=AddSQLTokens(stKeyword, Par1, 'begin', [], 21); //AS
 
 //    ANY DDL STATEMENT
@@ -8166,6 +8357,7 @@ begin
     1:if not (ooOrReplase in Options) then CreateMode:=cmAlter;
     2:Name:=AWord;
     3:TableName:=AWord;
+    4:CreateMode:=cmRecreate;
     6:TriggerType:=TriggerType + [ttBefore];
     7:TriggerType:=TriggerType + [ttAfter];
     8:TriggerType:=TriggerType + [ttInsert];
@@ -8238,6 +8430,9 @@ var
   D: TTriggerDDLvent;
 begin
   S:='';
+  if CreateMode = cmRecreate then
+    S:='RECREATE'
+  else
   if CreateMode = cmAlter then
     S:=S+'ALTER'
   else

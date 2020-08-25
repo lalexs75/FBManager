@@ -683,8 +683,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterTrigger3'
         Lines.Strings = (
-          'ALTER TRIGGER TR_CUST_LOG'
-          'INACTIVE AFTER INSERT OR UPDATE;'
+          'ALTER TRIGGER TR_CUST_LOG INACTIVE AFTER INSERT OR UPDATE;'
         )
       end    
       item
@@ -719,13 +718,14 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'RecreateTrigger1'
         Lines.Strings = (
-          'RECREATE TRIGGER set_cust_no'
-          'ACTIVE BEFORE INSERT POSITION 0 ON customer'
+          'RECREATE TRIGGER set_cust_no ACTIVE BEFORE INSERT'
+          ' POSITION 0'
+          ' ON customer'
           'AS'
           'BEGIN'
-          'IF (NEW.cust_no IS NULL) THEN'
-          'NEW.cust_no = GEN_ID(cust_no_gen, 1);'
-          'END'
+          '  IF (NEW.cust_no IS NULL) THEN'
+          '  NEW.cust_no = GEN_ID(cust_no_gen, 1);'
+          'END;'
         )
       end    
       item

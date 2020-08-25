@@ -806,7 +806,7 @@ type
 
   { TPGSQLAlterTrigger }
 
-  TPGSQLAlterTrigger = class(TSQLCommandDDL)
+  TPGSQLAlterTrigger = class(TSQLAlterTrigger)
   private
     FDependsName: string;
     FTriggerNewName: string;

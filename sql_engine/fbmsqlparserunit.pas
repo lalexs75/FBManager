@@ -283,6 +283,19 @@ type
     property TriggerState:TTriggerState read FTriggerState write FTriggerState;
   end;
 
+  { TSQLAlterTrigger }
+
+  TSQLAlterTrigger = class(TSQLCommandDDL)
+  private
+    FTriggerState: TTriggerState;
+    FTriggerType: TTriggerTypes;
+  protected
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property TriggerType:TTriggerTypes read FTriggerType write FTriggerType;
+    property TriggerState:TTriggerState read FTriggerState write FTriggerState;
+  end;
+
   TSQLDropTrigger = class(TSQLDropCommandAbstract)
   public
     property TableName;
@@ -1016,6 +1029,19 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLAlterTrigger }
+
+procedure TSQLAlterTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLAlterTrigger then
+  begin
+    FTriggerType:=TSQLAlterTrigger(ASource).FTriggerType;
+    FTriggerState:=TSQLAlterTrigger(ASource).FTriggerState;
+    //FBody:=TSQLCreateTrigger(ASource).FBody;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLAlterSequence }
