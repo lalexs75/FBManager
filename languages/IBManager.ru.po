@@ -488,6 +488,10 @@ msgstr "Название ограничения"
 msgid "Clear"
 msgstr "Очистить"
 
+#: fbmstrconstunit.sclearall
+msgid "Clear all"
+msgstr "Очистить всё"
+
 #: fbmstrconstunit.sclearcurrentquery
 msgid "Clear current query..."
 msgstr "Очистить текущий запрос..."
@@ -6552,3 +6556,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

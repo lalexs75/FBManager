@@ -642,6 +642,7 @@ resourcestring
   sNewQuerySet                      = 'New query set';
   sNewQuerySetHint                  = 'New query set';
   sClear                            = 'Clear';
+  sClearAll                         = 'Clear all';
   sOpenInEditor                     = 'Open in editor';
   sOpenInEditorHint                 = 'Open text from history in SQL editor';
   sDeleteStatement                  = 'Delete statement';

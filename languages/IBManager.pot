@@ -464,6 +464,10 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
+#: fbmstrconstunit.sclearall
+msgid "Clear all"
+msgstr ""
+
 #: fbmstrconstunit.sclearcurrentquery
 msgid "Clear current query..."
 msgstr ""

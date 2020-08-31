@@ -347,13 +347,12 @@ end;
 procedure TFBMSqlScripForm.scriptRunExecute(Sender: TObject);
 var
   ObjRefresh:TObjTreeRefresh;
+  P: TSQLParser;
 procedure DoParseScript(S:string);
 var
-  P: TSQLParser;
   Stm: TSQLTextStatement;
   i: Integer;
 begin
-  P:=TSQLParser.Create(S, FCurDB.SQLEngine);
   if (FCurDB.SQLEngine is TSQLEngineFireBird) then
     P.ParserSintax:=siFirebird;
   try
@@ -365,7 +364,22 @@ begin
     end;
     ProgressBar1.Max:=P.StatementCount;
   finally
-    P.Free;
+  end;
+end;
+
+procedure DoProcessErrorCmd;
+var
+  FErrorCmd: TSQLTextStatement;
+begin
+  if (CurCmd > 0) and (CurCmd <= P.StatementCount) then
+  begin
+    FErrorCmd:=P.Statements[CurCmd-1];
+    EditorFrame.TextEditor.CaretXY:=FErrorCmd.PosStart;
+
+    EditorFrame.TextEditor.BeginUpdate;
+    EditorFrame.TextEditor.BlockBegin:=FErrorCmd.PosStart;
+    EditorFrame.TextEditor.BlockEnd:=FErrorCmd.PosEnd;
+    EditorFrame.TextEditor.EndUpdate;
   end;
 end;
 
@@ -373,12 +387,14 @@ procedure DoRunScript;
 var
   S: String;
 begin
+  S:=EditorFrame.TextEditor.SelText;
+  if S = '' then
+    S:=EditorFrame.TextEditor.Text;
+
+  P:=TSQLParser.Create(S, FCurDB.SQLEngine);
   ProgressBar1.Position:=1;
   try
     CurCmd:=1;
-    S:=EditorFrame.TextEditor.SelText;
-    if S = '' then
-      S:=EditorFrame.TextEditor.Text;
 
     DoParseScript(S);
 
@@ -391,6 +407,10 @@ begin
       FAbortExecute:=true;
     end;
   end;
+
+  if FAbortExecute then
+    DoProcessErrorCmd;
+  P.Free;
 end;
 
 var
@@ -676,6 +696,8 @@ begin
   flRemove.Caption:=sRemoveFile;
   flUp.Caption:=sMoveUp;
   flDown.Caption:=sMoveDown;
+
+  flClearAll.Caption:=sClearAll;
 end;
 
 procedure TFBMSqlScripForm.UpdateTreeVisible;
