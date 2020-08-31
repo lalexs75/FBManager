@@ -204,6 +204,7 @@ begin
     if ListBox1.Items.Count > 0 then
     begin
       ListBox1.ItemIndex:=0;
+      ListBox1Click(nil);
     end;
   end;
   UpdateFileListActions;
