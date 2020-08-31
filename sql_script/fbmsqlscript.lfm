@@ -393,6 +393,8 @@ object FBMSqlScripForm: TFBMSqlScripForm
     object flClearAll: TAction
       Category = 'Files list'
       Caption = 'Clear all..'
+      ImageIndex = 45
+      OnExecute = flClearAllExecute
     end
   end
   object PopupMenu1: TPopupMenu
@@ -454,6 +456,12 @@ object FBMSqlScripForm: TFBMSqlScripForm
     end
     object MenuItem7: TMenuItem
       Action = flRemove
+    end
+    object MenuItem16: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem15: TMenuItem
+      Action = flClearAll
     end
     object MenuItem12: TMenuItem
       Caption = '-'

@@ -47,6 +47,8 @@ type
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
     Panel1: TPanel;
@@ -94,6 +96,7 @@ type
     procedure fileSaveAsExecute(Sender: TObject);
     procedure fileSaveExecute(Sender: TObject);
     procedure flAddExecute(Sender: TObject);
+    procedure flClearAllExecute(Sender: TObject);
     procedure flRemoveExecute(Sender: TObject);
     procedure flUpExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -196,6 +199,13 @@ begin
   UpdateFileListActions;
 end;
 
+procedure TFBMSqlScripForm.flClearAllExecute(Sender: TObject);
+begin
+  ListBox1.Items.Clear;
+  ListBox1Click(nil);
+  UpdateFileListActions;
+end;
+
 procedure TFBMSqlScripForm.flRemoveExecute(Sender: TObject);
 begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
@@ -281,15 +291,21 @@ var
 begin
   UpdateFileListActions;
 
-  if (ListBox1.Items.Count = 0) or (ListBox1.ItemIndex<0) or (ListBox1.ItemIndex>ListBox1.Items.Count-1) then Exit;
-  S:=ListBox1.Items[ListBox1.ItemIndex];
-  if FileExists(S) then
+  if (ListBox1.Items.Count = 0) or (ListBox1.ItemIndex<0) or (ListBox1.ItemIndex>ListBox1.Items.Count-1) then
   begin
-    EditorFrame.OpenFile(S);
-    UpdateFileName;
+    EditorFrame.EditorText:='';
   end
   else
-    ErrorBox(sFileNotFound, [S]);
+  begin
+    S:=ListBox1.Items[ListBox1.ItemIndex];
+    if FileExists(S) then
+    begin
+      EditorFrame.OpenFile(S);
+      UpdateFileName;
+    end
+    else
+      ErrorBox(sFileNotFound, [S]);
+  end;
 end;
 
 procedure TFBMSqlScripForm.objTreeCommentCmdExecute(Sender: TObject);
