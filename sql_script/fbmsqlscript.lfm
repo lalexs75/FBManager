@@ -107,10 +107,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = ToolPanel1
       AnchorSideRight.Side = asrBottom
-      Left = 615
-      Height = 23
+      Left = 608
+      Height = 22
       Top = 6
-      Width = 133
+      Width = 140
       Action = vShowObjTree
       Anchors = [akTop, akRight]
       BorderSpacing.Right = 6
@@ -149,7 +149,7 @@ object FBMSqlScripForm: TFBMSqlScripForm
   object Memo1: TMemo
     Left = 0
     Height = 90
-    Top = 602
+    Top = 600
     Width = 759
     Align = alBottom
     Lines.Strings = (
@@ -161,14 +161,14 @@ object FBMSqlScripForm: TFBMSqlScripForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 597
+    Top = 595
     Width = 759
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object TreeView1: TTreeView
     Left = 0
-    Height = 476
+    Height = 474
     Top = 121
     Width = 121
     Align = alLeft
@@ -183,14 +183,14 @@ object FBMSqlScripForm: TFBMSqlScripForm
   end
   object Splitter2: TSplitter
     Left = 121
-    Height = 476
+    Height = 474
     Top = 121
     Width = 5
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 19
-    Top = 692
+    Height = 21
+    Top = 690
     Width = 759
     Panels = <>
   end
@@ -389,6 +389,10 @@ object FBMSqlScripForm: TFBMSqlScripForm
       Caption = 'flDown'
       ImageIndex = 52
       OnExecute = flUpExecute
+    end
+    object flClearAll: TAction
+      Category = 'Files list'
+      Caption = 'Clear all..'
     end
   end
   object PopupMenu1: TPopupMenu

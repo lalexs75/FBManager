@@ -38,6 +38,7 @@ type
   { TFBMSqlScripForm }
 
   TFBMSqlScripForm = class(TForm)
+    flClearAll: TAction;
     flUp: TAction;
     flDown: TAction;
     flRemove: TAction;
@@ -198,7 +199,13 @@ end;
 procedure TFBMSqlScripForm.flRemoveExecute(Sender: TObject);
 begin
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>-1) and (ListBox1.ItemIndex<ListBox1.Items.Count) then
+  begin
     ListBox1.Items.Delete(ListBox1.ItemIndex);
+    if ListBox1.Items.Count > 0 then
+    begin
+      ListBox1.ItemIndex:=0;
+    end;
+  end;
   UpdateFileListActions;
 end;
 
