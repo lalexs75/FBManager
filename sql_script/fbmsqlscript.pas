@@ -118,7 +118,9 @@ type
     EditorFrame:Tfdbm_SynEditorFrame;
     CurCmd:integer;
     FAbortExecute:Boolean;
+    FOldError: TInternalError;
 
+    procedure OnSQLInternalError(const S:string);
     procedure TextEditorKeyPress(Sender: TObject; var Key: char);
     procedure DBMenuClick(Sender: TObject);
     procedure DoFillDatabaseList;
@@ -393,6 +395,9 @@ begin
 
   P:=TSQLParser.Create(S, FCurDB.SQLEngine);
   ProgressBar1.Position:=1;
+  FOldError:=EditorFrame.SQLEngine.OnInternalError;
+  EditorFrame.SQLEngine.OnInternalError:=@OnSQLInternalError;
+
   try
     CurCmd:=1;
 
@@ -407,7 +412,7 @@ begin
       FAbortExecute:=true;
     end;
   end;
-
+  EditorFrame.SQLEngine.OnInternalError:=FOldError;
   if FAbortExecute then
     DoProcessErrorCmd;
   P.Free;
@@ -552,6 +557,13 @@ procedure TFBMSqlScripForm.vShowObjTreeExecute(Sender: TObject);
 begin
   vShowObjTree.Checked:=not vShowObjTree.Checked;
   UpdateTreeVisible;
+end;
+
+procedure TFBMSqlScripForm.OnSQLInternalError(const S: string);
+begin
+  if Assigned(FOldError) then
+    FOldError(S);
+  Memo1.Text:=Memo1.Text + LineEnding + '------- Error ---- ' + LineEnding + S;
 end;
 
 procedure TFBMSqlScripForm.TextEditorKeyPress(Sender: TObject; var Key: char);
