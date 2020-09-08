@@ -49,6 +49,7 @@ type
     function Find(ASchemaName, AObjName: string; AObjectKind: TDBObjectKind ): TObjRec;
     property Item[AIndex:Integer]:TObjRec read GetItem; default;
     property Count:integer read GetCount;
+    //function GetEnumerator: TDBObjectsListEnumerator;
   end;
 
   { TObjTreeRefresh }
@@ -167,7 +168,9 @@ begin
       for i:=0 to FDataBase.ObjectCount-1 do
       P:=FDataBase.DBObject[];
     end;
-  end;}
+  end;
+
+    FDataBase.ObjectCount;}
 end;
 
 end.
