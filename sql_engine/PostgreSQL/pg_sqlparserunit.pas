@@ -3268,6 +3268,8 @@ begin
       TD_Array2, TSymb, TSymb1,
       TConst1, TColat1, TColat1_1], 'NOT', [toOptional]);
       TNN1:=ACmd.AddSQLTokens(stKeyword, TNN, 'NULL', [], 7 + TagBase);
+        TNN1.AddChildToken(TConst);
+
     TNULL:=ACmd.AddSQLTokens(stKeyword, [TD1, TD2, TD3, TD4, TD5, TD6, TD7,
       TD8, TD9, TD10, TD11, TD12, TD13_1, TD14, TD15, TD16, TD17, TD18, TD19,
       TD20, TD21, TD22, TD23, TD24, TD25, TD26, TD27, TD28, TD29, TD30, TD31,

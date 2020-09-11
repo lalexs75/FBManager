@@ -3392,7 +3392,7 @@ begin
     T1.AddChildToken([TEnd, TFunc]);
 
   TProc:=AddSQLTokens(stKeyword, [T, T1], 'PROCEDURE', [], 5);
-    T1:=AddSQLTokens(stIdentificator, TFunc, '', [], 6);
+    T1:=AddSQLTokens(stIdentificator, TProc, '', [], 6);
     T1.AddChildToken([TFunc, TEnd, TProc]);
 
 (*
@@ -3403,6 +3403,17 @@ begin
 
   //Разбор тела пакета (CREATE OR ALTER PACKAGE BODY)
   TPkgName:=AddSQLTokens(stIdentificator, TPkgBody, '', [], 3);
+  T:=AddSQLTokens(stKeyword, TPkgName, 'AS', []);
+  T:=AddSQLTokens(stKeyword, T, 'BEGIN', []);
+  TEnd:=AddSQLTokens(stKeyword, nil, 'END', []);
+
+  TFunc:=AddSQLTokens(stKeyword, T, 'FUNCTION', [], 4);
+    T1:=AddSQLTokens(stIdentificator, TFunc, '', [], 6);
+    T1.AddChildToken([TEnd, TFunc]);
+
+  TProc:=AddSQLTokens(stKeyword, [T, T1], 'PROCEDURE', [], 5);
+    T1:=AddSQLTokens(stIdentificator, TProc, '', [], 6);
+    T1.AddChildToken([TFunc, TEnd, TProc]);
 
 end;
 
@@ -3466,7 +3477,7 @@ begin
     6:if Assigned(FcurItem) then
       begin
         FcurItem.Caption:=AWord;
-        FcurItem.CheckExpr:=ASQLParser.GetToWord(';');
+        FcurItem.CheckExpr:=GetToEndpSQL(ASQLParser); //ASQLParser.GetToWord(';');
       end;
   end;
 end;
