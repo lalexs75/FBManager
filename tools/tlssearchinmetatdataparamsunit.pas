@@ -135,6 +135,7 @@ begin
     if FStage and tlsProgressOperationForm.OpCancel then
       break;
   end;
+
   HideProgress;
 end;
 

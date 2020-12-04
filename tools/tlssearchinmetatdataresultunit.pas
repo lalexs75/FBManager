@@ -61,7 +61,9 @@ type
     procedure TreeView1DblClick(Sender: TObject);
   private
     FRootNode:TTreeNode;
+    FRootNodeText:string;
     procedure Localize;
+    procedure UpdateRootNodeText;
   public
     EditorFrame:Tfdbm_SynEditorFrame;
     procedure AddDBObject(AObj:TDBObject);
@@ -170,6 +172,16 @@ begin
   otCopyListToClibrd.Hint:=sCopylistToClipboardHint;
 end;
 
+procedure TtlsSearchInMetatDataResultForm.UpdateRootNodeText;
+begin
+  if not Assigned(FRootNode) then Exit;
+
+  if FRootNode.Count>0 then
+    FRootNode.Text:=Format('%s : %s (%d)', [sTextToSearch, FRootNodeText, FRootNode.Count])
+  else
+    FRootNode.Text:=Format('%s : %s', [sTextToSearch, FRootNodeText])
+end;
+
 procedure TtlsSearchInMetatDataResultForm.AddDBObject(AObj: TDBObject);
 var
   P:TTreeNode;
@@ -182,6 +194,8 @@ begin
 
   P.ImageIndex:=DBObjectKindImages[AObj.DBObjectKind];
   P.SelectedIndex:=DBObjectKindImages[AObj.DBObjectKind];
+
+  UpdateRootNodeText;
 end;
 
 procedure TtlsSearchInMetatDataResultForm.ClearDBObjectsList;
@@ -193,7 +207,9 @@ end;
 
 procedure TtlsSearchInMetatDataResultForm.AddRootNode(ATextToSearch: string);
 begin
-  FRootNode:=TreeView1.Items.AddFirst(FRootNode, sTextToSearch + ' : ' + ATextToSearch);
+  FRootNodeText:=ATextToSearch;
+  FRootNode:=TreeView1.Items.AddFirst(FRootNode, '');
+  UpdateRootNodeText;
 //  FRootNode.ImageIndex:=22;
 //  FRootNode.SelectedIndex:=22;
   FRootNode.Expanded:=true;
