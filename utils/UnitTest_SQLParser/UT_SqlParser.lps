@@ -17,11 +17,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="PGTestCase"/>
-        <TopLine Value="988"/>
-        <CursorPos X="46" Y="1005"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="812"/>
+        <CursorPos X="49" Y="816"/>
         <UsageCount Value="142"/>
         <Bookmarks Count="1">
-          <Item0 Y="591" ID="3"/>
+          <Item0 Y="592" ID="3"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -51,7 +52,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="1432"/>
         <CursorPos X="132" Y="1457"/>
@@ -320,30 +320,7 @@
         <UsageCount Value="9"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="71" Column="25" TopLine="43"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="556" Column="125" TopLine="535"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="282" Column="23" TopLine="258"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="1249" Column="14" TopLine="1230"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="290" Column="25" TopLine="272"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="1285" Column="56" TopLine="1267"/>
@@ -430,6 +407,33 @@
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="344" Column="32" TopLine="322"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="1005" Column="7" TopLine="988"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="494" Column="15" TopLine="480"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="466" Column="30" TopLine="442"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="515" Column="31" TopLine="491"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="812" TopLine="807"/>
+      </Position>
+      <Position>
+        <Filename Value="pgtestcase.pas"/>
+        <Caret Line="516" Column="15" TopLine="501"/>
       </Position>
     </JumpHistory>
     <RunParams>

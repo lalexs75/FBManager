@@ -513,6 +513,7 @@ type
     procedure c489CreateTable38;
     procedure c490AlterTable9;
     procedure c491AlterTable10;
+    procedure c491AlterTable11;
     procedure c492SQLReindex4;
     procedure c493SQLReindex5;
     procedure c494SQLReindex6;
@@ -808,6 +809,11 @@ end;
 procedure TPGSQLParserTest.c491AlterTable10;
 begin
   DoTestSQL(PGSQLParserData.sTable['AlterTable10']);
+end;
+
+procedure TPGSQLParserTest.c491AlterTable11;
+begin
+  DoTestSQL(PGSQLParserData.sTable['AlterTable11']);
 end;
 
 procedure TPGSQLParserTest.c492SQLReindex4;

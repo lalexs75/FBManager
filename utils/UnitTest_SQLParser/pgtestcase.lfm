@@ -2448,6 +2448,12 @@ object PGSQLParserData: TPGSQLParserData
           '  height_in numeric GENERATED ALWAYS AS (height_cm / 2.54)'
           ');'
         )
+      end    
+      item
+        Caption = 'AlterTable11'
+        Lines.Strings = (
+          'ALTER TABLE foo ALTER COLUMN foo_timestamp SET DATA TYPE timestamp with time zone USING timestamp with time zone ''epoch'' + foo_timestamp * interval ''1 second'';'
+        )
       end>
     Left = 25
     Top = 248
