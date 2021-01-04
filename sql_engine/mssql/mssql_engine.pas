@@ -266,8 +266,8 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-//    procedure Load(const IniFile: TIniFile; const IniSection: string);override;
-//    procedure Store(const IniFile: TIniFile; const IniSection: string);override;
+    procedure Load(const AData: TDataSet);override;
+    procedure Store(const AData: TDataSet);override;
     procedure SetSqlAssistentData(const List: TStrings); override;
 {    procedure FillCharSetList(const List: TStrings); override;
     function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
@@ -522,20 +522,19 @@ begin
   FreeAndNil(FMSSQLConnection);
   inherited Destroy;
 end;
-(*
-procedure TMSSQLEngine.Load(const IniFile: TIniFile; const IniSection: string);
+
+procedure TMSSQLEngine.Load(const AData: TDataSet);
 begin
-  inherited Load(IniFile, IniSection);
-  FServerVersion:=TCTServerVersion(IniFile.ReadInteger(IniSection, 'Server version', 2));
+  inherited;
+//  FServerVersion:=TCTServerVersion(IniFile.ReadInteger(IniSection, 'Server version', 2));
 end;
 
-procedure TMSSQLEngine.Store(const IniFile: TIniFile; const IniSection: string
-  );
+procedure TMSSQLEngine.Store(const AData: TDataSet);
 begin
-  inherited Store(IniFile, IniSection);
-  IniFile.WriteInteger(IniSection, 'Server version', Ord(FServerVersion));
+  inherited;
+//  IniFile.WriteInteger(IniSection, 'Server version', Ord(FServerVersion));
 end;
-*)
+
 procedure TMSSQLEngine.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);

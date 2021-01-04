@@ -29,10 +29,10 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="13"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="5642"/>
+      <BuildNr Value="5644"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
-      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.12"/>
+      <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.13"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="default" Default="True"/>
@@ -898,7 +898,7 @@
         <UnitName Value="cfKeyboardTemplatesUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="sql_engine/mssql/mssq_engine.pas"/>
+        <Filename Value="sql_engine/mssql/mssql_engine.pas"/>
         <IsPartOfProject Value="True"/>
         <DisableI18NForLFM Value="True"/>
       </Unit>

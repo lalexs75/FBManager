@@ -25,7 +25,8 @@ unit mssql_VisualToolsCallUnit;
 interface
 
 uses
-  Classes, SysUtils, fbm_VisualEditorsAbstractUnit;
+  Classes, SysUtils, SQLEngineAbstractUnit, mssql_engine, fbm_VisualEditorsAbstractUnit, SynHighlighterSQL, Forms,
+  fdbm_PagedDialogPageUnit, cfAbstractConfigFrameUnit;
 
 type
 
@@ -53,6 +54,8 @@ type
   end;
 
 implementation
+uses fbmStrConstUnit,
+  cf_mssql_mainUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit;
 
 { TMSSQLVisualTools }
 
@@ -68,14 +71,23 @@ end;
 
 class function TMSSQLVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=inherited ConnectionDlgPageCount;
+  Result:=3;
 end;
 
 class function TMSSQLVisualTools.ConnectionDlgPage(
   ASQLEngine: TSQLEngineAbstract; APageNum: integer; AOwner: TForm
   ): TPagedDialogPage;
 begin
-
+  case APageNum of
+    0:Result:=Tcf_mssql_main_frame.Create(ASQLEngine, AOwner);
+    1:Result:=TfdbmCFLogFrame.Create(ASQLEngine, AOwner);
+//    2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
+//    3:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
+//    4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
+    2:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+  else
+    Result:=nil;
+  end;
 end;
 
 class function TMSSQLVisualTools.ConfigDlgPageCount: integer;
@@ -86,12 +98,12 @@ end;
 class function TMSSQLVisualTools.ConfigDlgPage(APageNum: integer; AOwner: TForm
   ): TFBMConfigPageAbstract;
 begin
-
+  Result:=nil;
 end;
 
 class function TMSSQLVisualTools.GetMenuItems(Index: integer): TMenuItemRec;
 begin
-
+//  Result:=nil;
 end;
 
 class function TMSSQLVisualTools.GetMenuItemCount: integer;
@@ -107,13 +119,15 @@ end;
 class function TMSSQLVisualTools.GetObjTemplate(Index: integer;
   Owner: TComponent): TFBMConfigPageAbstract;
 begin
-
+  Result:=nil;
 end;
 
 class function TMSSQLVisualTools.GetCreateObject: TSQLEngineCreateDBAbstractClass;
 begin
-
+  Result:=nil;
 end;
 
+initialization
+  RegisterSQLEngine(TMSSQLEngine, TMSSQLVisualTools, sMSSQLServer);
 end.
 

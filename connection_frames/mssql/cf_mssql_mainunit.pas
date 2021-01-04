@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   StdCtrls, {TDSCTDataBase, }fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
-  mssq_engine, ZConnection, ZDataset;
+  mssql_engine, ZConnection, ZDataset;
 (*
 const
   ServerNames : array [TCTServerVersion] of string =
@@ -39,13 +39,12 @@ type
   { Tcf_mssql_main_frame }
 
   Tcf_mssql_main_frame = class(TConnectionDlgPage)
-    Button1: TButton;
     Button2: TButton;
     Edit1: TEdit;
     edtAlias: TEdit;
-    edtDataBase: TComboBox;
-    edtPass: TEdit;
-    edtServer: TComboBox;
+    edtDBName: TComboBox;
+    edtPassword: TEdit;
+    cbServerName: TComboBox;
     edtSvrVersion: TComboBox;
     edtUserName: TEdit;
     Label1: TLabel;
@@ -55,12 +54,12 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    CLabel: TLabel;
     quGetDBList: TZQuery;
-    TDSCTDataBase1: TZConnection;
-    procedure Button1Click(Sender: TObject);
+    Test_DB: TZConnection;
     procedure Button2Click(Sender: TObject);
-    procedure edtDataBaseChange(Sender: TObject);
-    procedure edtDataBaseDropDown(Sender: TObject);
+    procedure edtDBNameChange(Sender: TObject);
+    procedure edtDBNameDropDown(Sender: TObject);
   private
     FSQLEngine:TMSSQLEngine;
     FDataBase:TZConnection;
@@ -72,6 +71,7 @@ type
     procedure SaveParams;override;
     function PageName:string;override;
     function Validate:boolean;override;
+    function TestConnection:boolean;override;
     constructor Create(ASQLEngineAbstract:TSQLEngineAbstract; AOwner:TForm);
   end;
 
@@ -79,7 +79,7 @@ var
   cf_mssql_main_frame: Tcf_mssql_main_frame;
 
 implementation
-uses IniFiles, mssql_FreeTDSConfig_Unit;
+uses IniFiles, mssql_FreeTDSConfig_Unit, fbmToolsUnit;
 
 {$R *.lfm}
 
@@ -102,28 +102,28 @@ end;
 
 procedure Tcf_mssql_main_frame.Button2Click(Sender: TObject);
 begin
-  ShowTDSConfigForm;
+//  ShowTDSConfigForm;
 end;
 
-procedure Tcf_mssql_main_frame.edtDataBaseChange(Sender: TObject);
+procedure Tcf_mssql_main_frame.edtDBNameChange(Sender: TObject);
 begin
   if edtAlias.Text = '' then
-    edtAlias.Text:=edtDataBase.Text + ' on '+edtServer.Text;
+    edtAlias.Text:=edtDBName.Text + ' on '+cbServerName.Text;
 end;
 
-procedure Tcf_mssql_main_frame.edtDataBaseDropDown(Sender: TObject);
+procedure Tcf_mssql_main_frame.edtDBNameDropDown(Sender: TObject);
 begin
 (*
-  SetDataBaseProps(TDSCTDataBase1);
+  SetDataBaseProps(Test_DB);
   try
-    TDSCTDataBase1.Connected:=true;
-    if TDSCTDataBase1.Connected then
+    Test_DB.Connected:=true;
+    if Test_DB.Connected then
     begin
-      edtDataBase.Items.Clear;
+      edtDBName.Items.Clear;
       quGetDBList.Open;
       while not quGetDBList.Eof do
       begin
-        edtDataBase.Items.Add(quGetDBList.AsString[0]);
+        edtDBName.Items.Add(quGetDBList.AsString[0]);
         quGetDBList.Next;
       end;
       quGetDBList.Close;
@@ -131,7 +131,7 @@ begin
   finally
     if quGetDBList.Active then
       quGetDBList.Close;
-    TDSCTDataBase1.Connected:=false;
+    Test_DB.Connected:=false;
   end;
 *)
 end;
@@ -140,32 +140,23 @@ procedure Tcf_mssql_main_frame.LoadConf;
 //var
 //  i:TCTServerVersion;
 begin
-  //LoadServerList(edtServer.Items);
+  //LoadServerList(cbServerName.Items);
   //edtSvrVersion.Items.Clear;
   //for i:= Low(TCTServerVersion) to high(TCTServerVersion) do
   //  edtSvrVersion.Items.Add(ServerNames[i]);
 end;
 
 procedure Tcf_mssql_main_frame.SetDataBaseProps(ADataBase: TZConnection);
+var
+  S: String;
 begin
-  //ADataBase.Database:=edtDataBase.Text;
+  S:='/usr/lib64/libsybdb.so';
+  Test_DB.LibraryLocation:=S;
+  //ADataBase.Database:=edtDBName.Text;
   //ADataBase.UserName:=edtUserName.Text;
-  //ADataBase.Password:=edtPass.Text;
-  //ADataBase.ServerName:=edtServer.Text;
+  //ADataBase.Password:=edtPassword.Text;
+  //ADataBase.ServerName:=cbServerName.Text;
   //ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
-end;
-
-procedure Tcf_mssql_main_frame.Button1Click(Sender: TObject);
-begin
-  SetDataBaseProps(TDSCTDataBase1);
-  try
-    TDSCTDataBase1.Connected:=true;
-    ShowMessage('sreg_succes_connected');
-  except
-    on E:Exception do
-      ShowMessage('sreg_connection_error' + ' : ' +  E.Message);
-  end;
-  TDSCTDataBase1.Connected:=false;
 end;
 
 procedure Tcf_mssql_main_frame.Activate;
@@ -175,22 +166,22 @@ end;
 
 procedure Tcf_mssql_main_frame.LoadParams(ASQLEngine: TSQLEngineAbstract);
 begin
-  //edtServer.Text:=TMSSQLEngine(ASQLEngine).ServerName;
-  //edtDataBase.Text:=TMSSQLEngine(ASQLEngine).DataBaseName;
-  //edtUserName.Text:=TMSSQLEngine(ASQLEngine).UserName;
-  //edtPass.Text:=TMSSQLEngine(ASQLEngine).Password;
+  cbServerName.Text:=TMSSQLEngine(ASQLEngine).ServerName;
+  edtDBName.Text:=TMSSQLEngine(ASQLEngine).DataBaseName;
+  edtUserName.Text:=TMSSQLEngine(ASQLEngine).UserName;
+  edtPassword.Text:=TMSSQLEngine(ASQLEngine).Password;
   //edtSvrVersion.ItemIndex:=Ord(TMSSQLEngine(ASQLEngine).ServerVersion);
-  //edtAlias.Text:=TMSSQLEngine(ASQLEngine).AliasName;
+  edtAlias.Text:=TMSSQLEngine(ASQLEngine).AliasName;
 end;
 
 procedure Tcf_mssql_main_frame.SaveParams;
 begin
-  //FSQLEngine.ServerName    := edtServer.Text;
-  //FSQLEngine.DataBaseName  := edtDataBase.Text;
-  //FSQLEngine.UserName      := edtUserName.Text;
-  //FSQLEngine.Password      := edtPass.Text;
+  FSQLEngine.ServerName    := cbServerName.Text;
+  FSQLEngine.DataBaseName  := edtDBName.Text;
+  FSQLEngine.UserName      := edtUserName.Text;
+  FSQLEngine.Password      := edtPassword.Text;
   //FSQLEngine.ServerVersion := TCTServerVersion(edtSvrVersion.ItemIndex);
-  //FSQLEngine.AliasName     := edtAlias.Text;
+  FSQLEngine.AliasName     := edtAlias.Text;
 end;
 
 function Tcf_mssql_main_frame.PageName: string;
@@ -201,6 +192,27 @@ end;
 function Tcf_mssql_main_frame.Validate: boolean;
 begin
   Result:=true;
+end;
+
+function Tcf_mssql_main_frame.TestConnection: boolean;
+begin
+  Result:=false;
+  SetDataBaseProps(Test_DB);
+  Test_DB.HostName:=cbServerName.Text;
+  Test_DB.Database:=edtDBName.Text;
+  Test_DB.User:=edtUserName.Text;
+  Test_DB.Password:=edtPassword.Text;
+  //if edtPort.Value <> 0 then
+  //  Test_DB.Port:=edtPort.Value;
+
+  try
+    Test_DB.Connected:=true;
+    Result:=Test_DB.Connected;
+  except
+    on E:Exception do
+      ErrorBoxExcpt(E);
+  end;
+  Test_DB.Connected:=false;
 end;
 
 constructor Tcf_mssql_main_frame.Create(ASQLEngineAbstract: TSQLEngineAbstract;

@@ -18,21 +18,24 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
   end
   object Label2: TLabel[1]
     AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cbServerName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 65
+    Top = 68
     Width = 64
     BorderSpacing.Around = 6
     Caption = 'User name'
     ParentColor = False
   end
   object Label3: TLabel[2]
+    AnchorSideLeft.Control = CLabel
     AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cbServerName
     AnchorSideTop.Side = asrBottom
-    Left = 246
+    Left = 325
     Height = 17
-    Top = 67
+    Top = 68
     Width = 58
     BorderSpacing.Around = 6
     Caption = 'Password'
@@ -40,19 +43,21 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
   end
   object Label4: TLabel[3]
     AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = edtUserName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 124
+    Top = 130
     Width = 56
     BorderSpacing.Around = 6
     Caption = 'Database'
     ParentColor = False
   end
   object Label5: TLabel[4]
+    AnchorSideLeft.Control = CLabel
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
-    Left = 326
+    Left = 325
     Height = 17
     Top = 6
     Width = 83
@@ -66,7 +71,7 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 225
+    Top = 231
     Width = 65
     BorderSpacing.Around = 6
     Caption = 'Alias name'
@@ -78,87 +83,74 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 17
-    Top = 287
+    Top = 293
     Width = 78
     BorderSpacing.Around = 6
     Caption = 'Library name'
     Enabled = False
     ParentColor = False
   end
-  object edtServer: TComboBox[7]
+  object cbServerName: TComboBox[7]
     AnchorSideLeft.Control = Label1
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CLabel
     Left = 12
     Height = 33
     Top = 29
-    Width = 308
+    Width = 300
+    Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
     TabOrder = 0
-    Text = 'edtServer'
   end
-  object Button1: TButton[8]
+  object edtUserName: TEdit[8]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CLabel
+    Left = 12
+    Height = 33
+    Top = 91
+    Width = 300
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 1
+    Text = 'edtUserName'
+  end
+  object edtPassword: TEdit[9]
+    AnchorSideLeft.Control = Label3
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 519
+    Left = 331
     Height = 33
-    Top = 90
-    Width = 112
-    Anchors = [akTop, akRight]
-    AutoSize = True
-    BorderSpacing.Around = 6
-    Caption = 'Test connection'
-    OnClick = Button1Click
-    TabOrder = 1
-  end
-  object edtUserName: TEdit[9]
-    AnchorSideLeft.Control = Label2
-    AnchorSideTop.Control = Label2
-    AnchorSideTop.Side = asrBottom
-    Left = 12
-    Height = 33
-    Top = 88
-    Width = 228
-    BorderSpacing.Around = 6
-    TabOrder = 2
-    Text = 'edtUserName'
-  end
-  object edtPass: TEdit[10]
-    AnchorSideLeft.Control = Label3
-    AnchorSideTop.Control = Label3
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Button1
-    Left = 252
-    Height = 33
-    Top = 90
-    Width = 261
+    Top = 91
+    Width = 300
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     EchoMode = emPassword
     PasswordChar = '*'
-    TabOrder = 3
-    Text = 'edtPass'
+    TabOrder = 2
   end
-  object edtSvrVersion: TComboBox[11]
+  object edtSvrVersion: TComboBox[10]
     AnchorSideLeft.Control = Label5
     AnchorSideTop.Control = Label5
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 332
+    Left = 331
     Height = 32
     Top = 29
-    Width = 299
+    Width = 300
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
     Style = csDropDownList
-    TabOrder = 4
+    TabOrder = 3
   end
-  object edtDataBase: TComboBox[12]
+  object edtDBName: TComboBox[11]
     AnchorSideLeft.Control = Label4
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
@@ -166,31 +158,31 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 33
-    Top = 147
+    Top = 153
     Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
-    OnChange = edtDataBaseChange
-    OnDropDown = edtDataBaseDropDown
-    TabOrder = 5
-    Text = 'edtDataBase'
+    OnChange = edtDBNameChange
+    OnDropDown = edtDBNameDropDown
+    TabOrder = 4
   end
-  object Button2: TButton[13]
+  object Button2: TButton[12]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = edtDataBase
+    AnchorSideTop.Control = edtDBName
     AnchorSideTop.Side = asrBottom
     Left = 6
     Height = 33
-    Top = 186
+    Top = 192
     Width = 136
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'FreeTDS.conf editor'
+    Enabled = False
     OnClick = Button2Click
-    TabOrder = 6
+    TabOrder = 5
   end
-  object edtAlias: TEdit[14]
+  object edtAlias: TEdit[13]
     AnchorSideLeft.Control = Label6
     AnchorSideTop.Control = Label6
     AnchorSideTop.Side = asrBottom
@@ -198,14 +190,14 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 33
-    Top = 248
+    Top = 254
     Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
-    TabOrder = 7
+    TabOrder = 6
     Text = 'edtAlias'
   end
-  object Edit1: TEdit[15]
+  object Edit1: TEdit[14]
     AnchorSideLeft.Control = Label7
     AnchorSideTop.Control = Label7
     AnchorSideTop.Side = asrBottom
@@ -213,17 +205,31 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 33
-    Top = 310
+    Top = 316
     Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     Enabled = False
-    TabOrder = 8
+    TabOrder = 7
   end
-  object TDSCTDataBase1: TZConnection[16]
+  object CLabel: TLabel[15]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 318
+    Height = 1
+    Top = 0
+    Width = 1
+    ParentColor = False
+  end
+  object Test_DB: TZConnection[16]
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = False
+    Properties.Strings = (
+      'AutoEncodeStrings='
+    )
     Port = 0
+    Protocol = 'FreeTDS_MsSQL>=2005'
     Left = 420
     Top = 212
   end
