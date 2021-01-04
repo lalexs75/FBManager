@@ -71,8 +71,8 @@
         <UnitName Value="MySQLTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="226"/>
-        <CursorPos X="54" Y="236"/>
+        <TopLine Value="248"/>
+        <CursorPos X="47" Y="264"/>
         <UsageCount Value="142"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -325,21 +325,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="fbtestcase.pas"/>
-        <Caret Line="153" Column="22" TopLine="139"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="97" Column="23" TopLine="71"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="635" Column="13" TopLine="631"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
         <Caret Line="21" Column="15" TopLine="5"/>
       </Position>
       <Position>
@@ -438,6 +423,22 @@
       <Position>
         <Filename Value="mysqltestcase.pas"/>
         <Caret Line="24" Column="15" TopLine="8"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="255" Column="17" TopLine="226"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="28" Column="31" TopLine="13"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="252" Column="37" TopLine="250"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="30" Column="30" TopLine="12"/>
       </Position>
     </JumpHistory>
     <RunParams>

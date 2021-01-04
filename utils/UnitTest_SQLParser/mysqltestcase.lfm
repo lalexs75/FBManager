@@ -1166,6 +1166,25 @@ object MySQLParserData: TMySQLParserData
           'SHOW GRANTS FOR ''alexs''@''bigbrother'';'
           ''
         )
+      end    
+      item
+        Caption = 'ShowEngine1'
+        Lines.Strings = (
+          'SHOW ENGINE engine_name;'
+          ''
+        )
+      end    
+      item
+        Caption = 'ShowEngine2'
+        Lines.Strings = (
+          'SHOW ENGINE engine_name STATUS;'
+        )
+      end    
+      item
+        Caption = 'ShowEngine3'
+        Lines.Strings = (
+          'SHOW ENGINE engine_name MUTEX;'
+        )
       end>
     Left = 48
     Top = 336
