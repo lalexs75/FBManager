@@ -2679,6 +2679,7 @@ initialization
   RegisterSQLStatment(TSQLEngineMySQL, TMySQLGrant, 'GRANT');
   RegisterSQLStatment(TSQLEngineMySQL, TMySQLRevoke, 'REVOKE');
   RegisterSQLStatment(TSQLEngineMySQL, TMySQLRename, 'RENAME');
+  RegisterSQLStatment(TSQLEngineMySQL, TMySQLRepairTable, 'REPAIR');
 
 end.
 

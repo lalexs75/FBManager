@@ -414,6 +414,17 @@ type
   public
   end;
 
+  { TMySQLRepairTable }
+
+  TMySQLRepairTable = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
   { TMySQLSHOW }
 
   TMySQLSHOW = class(TSQLCommandDML)
@@ -1063,6 +1074,53 @@ begin
       TRef3_6.AddChildToken(AEndTokens[i]);
     end;
   end;
+end;
+
+{ TMySQLRepairTable }
+
+procedure TMySQLRepairTable.InitParserTree;
+var
+  FSQLTokens, T1, T2, TSymb: TSQLTokenRecord;
+begin
+  //REPAIR [NO_WRITE_TO_BINLOG | LOCAL]
+  //  TABLE tbl_name [, tbl_name] ...
+  //  [QUICK] [EXTENDED] [USE_FRM]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REPAIR', [toFirstToken]);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'NO_WRITE_TO_BINLOG', [toOptional], 1);
+    T2:=AddSQLTokens(stKeyword, FSQLTokens, 'LOCAL', [toOptional], 2);
+  T1:=AddSQLTokens(stKeyword, [FSQLTokens, T1, T2], 'TABLE', [toFindWordLast]);
+  T2:=AddSQLTokens(stIdentificator, T1, '', [], 3);
+  T1:=AddSQLTokens(stString, T1, '', [], 3);
+    TSymb:=AddSQLTokens(stSymbol, [T1, T2], ',', []);
+    TSymb.AddChildToken([T1, T2]);
+  AddSQLTokens(stKeyword, [T1, T2], 'QUICK', [toOptional], 4);
+  AddSQLTokens(stKeyword, [T1, T2], 'EXTENDED', [toOptional], 4);
+  AddSQLTokens(stKeyword, [T1, T2], 'USE_FRM', [toOptional], 4);
+
+    //  [QUICK] [EXTENDED] [USE_FRM]
+
+end;
+
+procedure TMySQLRepairTable.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    //1
+    //2
+    3:Tables.Add(AWord);
+    4:Params.AddParam(AWord);
+  end;
+end;
+
+procedure TMySQLRepairTable.MakeSQL;
+var
+  S: String;
+begin
+  S:='REPAIR '; //[NO_WRITE_TO_BINLOG | LOCAL]
+  S:=S + 'TABLE ' + Tables.AsString;
+  if Params.Count>0 then S:=S + ' ' + Params.AsString;
+  AddSQLCommand(S);
 end;
 
 { TMySQLRename }
@@ -5082,4 +5140,5 @@ begin
 end;
 
 end.
+
 
