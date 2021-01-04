@@ -127,7 +127,7 @@ uses
   otPostgreTableTemplateUnit, pgDataBaseStatUnit, GenerateDataUnit,
   pg_definitions, pgToolsFindDuplicateUnit, fbmAbstractSQLEngineToolsUnit,
   pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit,
-  fbmCompillerMessagesUnit, fbmPgObjectEditorsUtils
+  fbmCompillerMessagesUnit, fbmPgObjectEditorsUtils, mssql_VisualToolsCallUnit
 
   ;
 

@@ -1917,6 +1917,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmPgObjectEditorsUtils"/>
       </Unit>
+      <Unit>
+        <Filename Value="controls/MsSql/mssql_visualtoolscallunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mssql_VisualToolsCallUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -1926,7 +1931,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="sql_engine"/>
-      <OtherUnitFiles Value="config/FireBird;controls;dbobjecteditors/dboDomain;dbobjecteditors/dboException;dbobjecteditors/dboGenerator;dbobjecteditors/dboRole;dbobjecteditors/dboStoredProcedure;dbobjecteditors/dboTableEditor/firebird;dbobjecteditors/dboTableEditor;dbobjecteditors/dboTriggerEditors/fb;dbobjecteditors/dboTriggerEditors;dbobjecteditors/dboUDF;dbobjecteditors/dboViewEditors;dbobjecteditors;ErrorForms;firebird_forms;help_forms;mainform;options;Servises;SqlEditor;sql_engine/firebird;sql_engine/mssql;sql_engine/oracle;sql_engine/PostgreSQL;sql_engine;sql_script;tools;user_sec;config;connection_frames;connection_frames/dbf;connection_frames/firebird;connection_frames/mssql;connection_frames/oracle;dbobjecteditors/dboGroups;connection_frames/postgre;dbobjecteditors/dboTableEditor/postgresql;dbobjecteditors/dboScheme;dbobjecteditors/dboTriggerEditors/postgre;dbobjecteditors/dboGenerator/postgres;tools/Postgre;dbobjecteditors/dboIndex/postgre;dbobjecteditors/dboTableSpace;dbobjecteditors/dboLanguages/Postgre;config/Postgree;sql_engine/mysql;connection_frames/mysql;dbobjecteditors/dboTableEditor/mysql;dbobjecteditors/dboRule;dbobjecteditors/dboTasks;sql_objects;sql_engine/dbf;sql_engine/sqlite3;connection_frames/sqlite3;dbobjecteditors/dboTriggerEditors/SQLite3;controls/sqlite3;controls/firebird;controls/PostgreSQL;dbobjecteditors/dboIndex/sqlite3;controls/MySQL;dbobjecteditors/dboTriggerEditors/MySQL;import;dbobjecteditors/dboIndex/firebird;dbobjecteditors/dboFTS;dbobjecteditors/dboFDW;dbobjecteditors/dboPackage;utils/pg/pg_export;config/MySQL;tools/SQLite;sql_engine/plugins;dbobjecteditors/dboStoredProcedure/pg;tools/compiler"/>
+      <OtherUnitFiles Value="config/FireBird;controls;dbobjecteditors/dboDomain;dbobjecteditors/dboException;dbobjecteditors/dboGenerator;dbobjecteditors/dboRole;dbobjecteditors/dboStoredProcedure;dbobjecteditors/dboTableEditor/firebird;dbobjecteditors/dboTableEditor;dbobjecteditors/dboTriggerEditors/fb;dbobjecteditors/dboTriggerEditors;dbobjecteditors/dboUDF;dbobjecteditors/dboViewEditors;dbobjecteditors;ErrorForms;firebird_forms;help_forms;mainform;options;Servises;SqlEditor;sql_engine/firebird;sql_engine/mssql;sql_engine/oracle;sql_engine/PostgreSQL;sql_engine;sql_script;tools;user_sec;config;connection_frames;connection_frames/dbf;connection_frames/firebird;connection_frames/mssql;connection_frames/oracle;dbobjecteditors/dboGroups;connection_frames/postgre;dbobjecteditors/dboTableEditor/postgresql;dbobjecteditors/dboScheme;dbobjecteditors/dboTriggerEditors/postgre;dbobjecteditors/dboGenerator/postgres;tools/Postgre;dbobjecteditors/dboIndex/postgre;dbobjecteditors/dboTableSpace;dbobjecteditors/dboLanguages/Postgre;config/Postgree;sql_engine/mysql;connection_frames/mysql;dbobjecteditors/dboTableEditor/mysql;dbobjecteditors/dboRule;dbobjecteditors/dboTasks;sql_objects;sql_engine/dbf;sql_engine/sqlite3;connection_frames/sqlite3;dbobjecteditors/dboTriggerEditors/SQLite3;controls/sqlite3;controls/firebird;controls/PostgreSQL;dbobjecteditors/dboIndex/sqlite3;controls/MySQL;dbobjecteditors/dboTriggerEditors/MySQL;import;dbobjecteditors/dboIndex/firebird;dbobjecteditors/dboFTS;dbobjecteditors/dboFDW;dbobjecteditors/dboPackage;utils/pg/pg_export;config/MySQL;tools/SQLite;sql_engine/plugins;dbobjecteditors/dboStoredProcedure/pg;tools/compiler;controls/MsSql"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/$(LCLWidgetType)"/>
     </SearchPaths>
     <Linking>
