@@ -1185,6 +1185,14 @@ object MySQLParserData: TMySQLParserData
         Lines.Strings = (
           'SHOW ENGINE engine_name MUTEX;'
         )
+      end    
+      item
+        Caption = 'ShowVariables1'
+        Lines.Strings = (
+          'SHOW GLOBAL VARIABLES like ''ft_min_word_len'';'
+          ''
+          ''
+        )
       end>
     Left = 48
     Top = 336

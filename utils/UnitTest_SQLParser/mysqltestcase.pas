@@ -28,6 +28,8 @@ type
     procedure TestShowEngine1;
     procedure TestShowEngine2;
     procedure TestShowEngine3;
+    procedure ShowVariables1;
+
     //ALTER DATABASE Syntax
     procedure AlterDatabase;
     //CREATE DATABASE Syntax
@@ -262,6 +264,11 @@ end;
 procedure TMySQLParserTest.TestShowEngine3;
 begin
   DoTestSQL(MySQLParserData.sShow['ShowEngine3']);
+end;
+
+procedure TMySQLParserTest.ShowVariables1;
+begin
+  DoTestSQL(MySQLParserData.sShow['ShowVariables1']);
 end;
 
 procedure TMySQLParserTest.TestShowGrantsForUser1;
