@@ -9,14 +9,14 @@ object fbmCreateConnectionForm: TfbmCreateConnectionForm
   ClientWidth = 438
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.7'
+  LCLVersion = '2.1.0.0'
   object Label1: TLabel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 148
+    Width = 135
     BorderSpacing.Around = 6
     Caption = 'Select connection type'
     ParentColor = False
@@ -26,9 +26,9 @@ object fbmCreateConnectionForm: TfbmCreateConnectionForm
     AnchorSideTop.Control = ListBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 190
-    Width = 84
+    Height = 17
+    Top = 187
+    Width = 77
     BorderSpacing.Around = 6
     Caption = 'Description...'
     ParentColor = False
@@ -57,12 +57,13 @@ object fbmCreateConnectionForm: TfbmCreateConnectionForm
     AnchorSideRight.Side = asrBottom
     Left = 12
     Height = 152
-    Top = 32
+    Top = 29
     Width = 420
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
     OnClick = ListBox1Click
+    OnDblClick = ListBox1DblClick
     ScrollWidth = 418
     TabOrder = 1
     TopIndex = -1
@@ -75,8 +76,8 @@ object fbmCreateConnectionForm: TfbmCreateConnectionForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 12
-    Height = 137
-    Top = 216
+    Height = 143
+    Top = 210
     Width = 420
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 6

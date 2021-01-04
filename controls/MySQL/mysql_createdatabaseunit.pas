@@ -101,7 +101,8 @@ procedure Tmysql_CreateDatabaseForm.edtUserNameChange(Sender: TObject);
 begin
   try
     FillDBConectionParams;
-    TestDB.Connected:=true;
+    if (TestDB.HostName <> '') and (TestDB.User<>'') then
+      TestDB.Connected:=true;
     FillItems;
   except
   end;
@@ -146,13 +147,16 @@ end;
 procedure Tmysql_CreateDatabaseForm.FillItems;
 begin
   edtCodePage.Items.Clear;
-  quCharsets.Open;
-  while not quCharsets.EOF do
+  if TestDB.Connected then
   begin
-    edtCodePage.Items.Add(quCharsetsCHARACTER_SET_NAME.AsString);
-    quCharsets.Next;
+    quCharsets.Open;
+    while not quCharsets.EOF do
+    begin
+      edtCodePage.Items.Add(quCharsetsCHARACTER_SET_NAME.AsString);
+      quCharsets.Next;
+    end;
+    quCharsets.Close;
   end;
-  quCharsets.Close;
 end;
 
 function Tmysql_CreateDatabaseForm.CreateDataBase: boolean;

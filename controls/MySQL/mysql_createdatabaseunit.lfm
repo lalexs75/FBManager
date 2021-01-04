@@ -78,7 +78,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         Width = 364
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
-        OnChange = edtUserNameChange
+        OnExit = edtUserNameChange
         TabOrder = 3
       end
       object edtUserName: TEdit
@@ -92,7 +92,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         Width = 298
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
-        OnChange = edtUserNameChange
+        OnExit = edtUserNameChange
         TabOrder = 2
       end
       object Label5: TLabel

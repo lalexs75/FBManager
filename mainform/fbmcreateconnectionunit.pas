@@ -40,6 +40,7 @@ type
     Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
   private
     procedure Localize;
   public
@@ -69,6 +70,11 @@ begin
   Memo1.Lines.Clear;
   if (ListBox1.Items.Count>0) and (ListBox1.ItemIndex>=0) then
     Memo1.Lines.Add(SQLEngineAbstractClassArray[ListBox1.ItemIndex].Description);
+end;
+
+procedure TfbmCreateConnectionForm.ListBox1DblClick(Sender: TObject);
+begin
+  ModalResult:=mrOK;
 end;
 
 procedure TfbmCreateConnectionForm.Localize;
