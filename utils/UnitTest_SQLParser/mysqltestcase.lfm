@@ -5,7 +5,7 @@ object MySQLParserData: TMySQLParserData
   VerticalOffset = 209
   Width = 614
   object sTable: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'TruncateTable1'
@@ -520,12 +520,18 @@ object MySQLParserData: TMySQLParserData
           '    INDEX DIRECTORY = ''/var/appdata/98/idx'''
           ');'
         )
+      end    
+      item
+        Caption = 'RepairTable1'
+        Lines.Strings = (
+          'REPAIR TABLE assa QUICK;'
+        )
       end>
     Left = 48
     Top = 32
   end
   object sFunction: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateProcedure1'
@@ -814,7 +820,7 @@ object MySQLParserData: TMySQLParserData
     Top = 104
   end
   object sServer: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateDatabase1'
@@ -1073,7 +1079,7 @@ object MySQLParserData: TMySQLParserData
     Top = 192
   end
   object sView: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'CreateView1'
@@ -1133,7 +1139,7 @@ object MySQLParserData: TMySQLParserData
     Top = 272
   end
   object sShow: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'ShowFullCollumns1'

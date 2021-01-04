@@ -97,6 +97,8 @@ type
     procedure DropTable2;
     procedure DropTable3;
     procedure DropTable4;
+    //REPAIR TABLE
+    procedure RepairTable1;
 
     //ALTER VIEW Syntax
     procedure AlterView;
@@ -109,6 +111,7 @@ type
     procedure CreateView6;
     //DROP VIEW Syntax
     procedure DropView;
+
 
     //CREATE TRIGGER Syntax
     procedure CreateTrigger1;
@@ -614,6 +617,11 @@ end;
 procedure TMySQLParserTest.DropView;
 begin
   DoTestSQL(MySQLParserData.sView['DropView1']);
+end;
+
+procedure TMySQLParserTest.RepairTable1;
+begin
+  DoTestSQL(MySQLParserData.sTable['RepairTable1']);
 end;
 
 procedure TMySQLParserTest.CreateTrigger1;
