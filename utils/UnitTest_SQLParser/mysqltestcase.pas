@@ -21,7 +21,10 @@ type
     procedure DoTestSQL(ASql: string);
   published
     procedure TestShowFullCollumns;
-    procedure TestShowGrantsForUser;
+    procedure TestShowGrantsForUser1;
+    procedure TestShowGrantsForUser2;
+    procedure TestShowGrantsForUser3;
+    procedure TestShowGrantsForUser4;
     //ALTER DATABASE Syntax
     procedure AlterDatabase;
     //CREATE DATABASE Syntax
@@ -228,7 +231,22 @@ begin
   DoTestSQL(MySQLParserData.sShow['ShowFullCollumns1']);
 end;
 
-procedure TMySQLParserTest.TestShowGrantsForUser;
+procedure TMySQLParserTest.TestShowGrantsForUser2;
+begin
+  DoTestSQL(MySQLParserData.sShow['ShowGrantsForUser2']);
+end;
+
+procedure TMySQLParserTest.TestShowGrantsForUser3;
+begin
+  DoTestSQL(MySQLParserData.sShow['ShowGrantsForUser3']);
+end;
+
+procedure TMySQLParserTest.TestShowGrantsForUser4;
+begin
+  DoTestSQL(MySQLParserData.sShow['ShowGrantsForUser4']);
+end;
+
+procedure TMySQLParserTest.TestShowGrantsForUser1;
 begin
   DoTestSQL(MySQLParserData.sShow['ShowGrantsForUser1']);
 end;

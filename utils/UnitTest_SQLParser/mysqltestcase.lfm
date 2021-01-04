@@ -1147,6 +1147,25 @@ object MySQLParserData: TMySQLParserData
           'SHOW GRANTS FOR alexs@bigbrother;'
           ''
         )
+      end    
+      item
+        Caption = 'ShowGrantsForUser2'
+        Lines.Strings = (
+          'SHOW GRANTS FOR ''alexs''@bigbrother;'
+        )
+      end    
+      item
+        Caption = 'ShowGrantsForUser3'
+        Lines.Strings = (
+          'SHOW GRANTS FOR alexs@''bigbrother'';'
+        )
+      end    
+      item
+        Caption = 'ShowGrantsForUser4'
+        Lines.Strings = (
+          'SHOW GRANTS FOR ''alexs''@''bigbrother'';'
+          ''
+        )
       end>
     Left = 48
     Top = 336
