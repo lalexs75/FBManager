@@ -8,7 +8,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="15"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
       </Unit>
       <Unit>
         <Filename Value="pgtestcase.pas"/>
@@ -19,7 +19,7 @@
         <UnitName Value="PGTestCase"/>
         <TopLine Value="812"/>
         <CursorPos X="49" Y="816"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
         <Bookmarks Count="1">
           <Item0 Y="592" ID="3"/>
         </Bookmarks>
@@ -33,7 +33,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="31" Y="31"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
       </Unit>
       <Unit>
         <Filename Value="fbmanager_define.inc"/>
@@ -42,7 +42,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
       </Unit>
       <Unit>
         <Filename Value="fbtestcase.pas"/>
@@ -51,16 +51,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1432"/>
         <CursorPos X="132" Y="1457"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
         <Bookmarks Count="2">
           <Item0 Y="379" ID="1"/>
           <Item1 X="3" Y="1156" ID="2"/>
         </Bookmarks>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mysqltestcase.pas"/>
@@ -71,9 +69,9 @@
         <UnitName Value="MySQLTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="84"/>
-        <CursorPos Y="102"/>
-        <UsageCount Value="142"/>
+        <TopLine Value="860"/>
+        <CursorPos X="3" Y="864"/>
+        <UsageCount Value="144"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -84,12 +82,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="SQLite3TestCase"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="187"/>
         <CursorPos X="58" Y="217"/>
-        <UsageCount Value="142"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
+        <UsageCount Value="144"/>
       </Unit>
       <Unit>
         <Filename Value="pgcopycmdcase.pas"/>
@@ -98,14 +94,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="362"/>
         <CursorPos X="3" Y="418"/>
-        <UsageCount Value="140"/>
+        <UsageCount Value="142"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SSHConnectionUnit"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="38"/>
       </Unit>
       <Unit>
         <Filename Value=""/>
@@ -250,10 +246,11 @@
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
         <UnitName Value="RxTextHolder"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="71"/>
-        <CursorPos X="3" Y="71"/>
-        <UsageCount Value="9"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="105"/>
+        <CursorPos Y="126"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/rxtextholder_editor.pas"/>
@@ -324,120 +321,124 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="466" Column="30" TopLine="442"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="515" Column="31" TopLine="491"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="812" TopLine="807"/>
-      </Position>
-      <Position>
-        <Filename Value="pgtestcase.pas"/>
-        <Caret Line="516" Column="15" TopLine="501"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="811" Column="61" TopLine="798"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="23" Column="23"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="172" Column="90" TopLine="162"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="227" Column="53" TopLine="201"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="24" Column="40" TopLine="7"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="239" TopLine="231"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="23" Column="15" TopLine="10"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="231" Column="26" TopLine="226"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="27" Column="37" TopLine="8"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="236" Column="3" TopLine="234"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="24" Column="15" TopLine="8"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="255" Column="17" TopLine="226"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="28" Column="31" TopLine="13"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="252" Column="37" TopLine="250"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="30" Column="30" TopLine="12"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="274" Column="20" TopLine="248"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="31" Column="5" TopLine="17"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="295" Column="6" TopLine="268"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="112" Column="19" TopLine="100"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="113" Column="15" TopLine="88"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="113" Column="28" TopLine="89"/>
-      </Position>
-      <Position>
         <Filename Value="mysqltestcase.pas"/>
         <Caret Line="622" TopLine="614"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="207" Column="21" TopLine="195"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="924" Column="3" TopLine="920"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="208" Column="15" TopLine="195"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="929" Column="3" TopLine="925"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="209" Column="15" TopLine="196"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="934" Column="3" TopLine="930"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="210" Column="15" TopLine="197"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="939" Column="3" TopLine="935"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="211" Column="15" TopLine="198"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="944" TopLine="939"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="119" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="120" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="121" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="122" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="123" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="124" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="125" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
+        <Caret Line="126" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="982" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="983" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="985" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="989" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="990" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="991" TopLine="968"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="993" TopLine="970"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="949" Column="3" TopLine="930"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="205" Column="15" TopLine="200"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="932" Column="6" TopLine="915"/>
+      </Position>
+      <Position>
+        <Filename Value="mysqltestcase.pas"/>
+        <Caret Line="188" Column="15" TopLine="186"/>
       </Position>
     </JumpHistory>
     <RunParams>

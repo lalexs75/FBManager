@@ -22,37 +22,50 @@ object MySQLParserData: TMySQLParserData
       item
         Caption = 'RenameTable1'
         Lines.Strings = (
-          'RENAME TABLE old_table TO new_table;'
+          'RENAME TABLE'
+          '  old_table TO new_table;'
         )
       end    
       item
         Caption = 'RenameTable2'
         Lines.Strings = (
-          'RENAME TABLE old_table1 TO new_table1, old_table2 TO new_table2, old_table3 TO new_table3;'
+          'RENAME TABLE'
+          '  old_table1 TO new_table1,'
+          '  old_table2 TO new_table2,'
+          '  old_table3 TO new_table3;'
         )
       end    
       item
         Caption = 'RenameTable3'
         Lines.Strings = (
-          'RENAME TABLE old_table TO tmp_table, new_table TO old_table, tmp_table TO new_table;'
+          'RENAME TABLE'
+          '  old_table TO tmp_table,'
+          '  new_table TO old_table,'
+          '  tmp_table TO new_table;'
+          ''
         )
       end    
       item
         Caption = 'RenameTable4'
         Lines.Strings = (
-          'RENAME TABLE old_table1 TO new_table1, new_table1 TO new_table2;'
+          'RENAME TABLE'
+          '  old_table1 TO new_table1,'
+          '  new_table1 TO new_table2;'
         )
       end    
       item
         Caption = 'RenameTable5'
         Lines.Strings = (
-          'RENAME TABLE old_table1 TO new_table1, new_table1 TO new_table2;'
+          'RENAME TABLE'
+          '  aa.old_table1 TO aa.new_table1,'
+          '  new_table1 TO new_table2;'
         )
       end    
       item
         Caption = 'RenameTable6'
         Lines.Strings = (
-          'RENAME TABLE current_db.tbl_name TO other_db.tbl_name;'
+          'RENAME TABLE'
+          '  current_db.tbl_name TO other_db.tbl_name;'
         )
       end    
       item

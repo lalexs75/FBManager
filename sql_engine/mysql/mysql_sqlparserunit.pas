@@ -396,11 +396,14 @@ type
 
   TMySQLTruncateTable= class(TSQLCommandDDL)
   private
+    FIsTable: boolean;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property IsTable:boolean read FIsTable write FIsTable;
   end;
 
   { TMySQLSET }
@@ -2837,27 +2840,43 @@ begin
   TRUNCATE [TABLE] tbl_name
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'TRUNCATE', [toFirstToken, toFindWordLast], 0);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', []);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [], 2);
   T:=AddSQLTokens(stIdentificator, [T, FSQLTokens], '', [], 1);
 end;
 
 procedure TMySQLTruncateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
-  if AChild.Tag = 1 then
-    Name:=AWord;
+  inherited;
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:FIsTable:=true;
+  end;
 end;
 
 procedure TMySQLTruncateTable.MakeSQL;
+var
+  S: String;
 begin
-  AddSQLCommandEx('TRUNCATE TABLE %s', [FullName]);
+  S:='TRUNCATE ';
+  if FIsTable then S:=S + 'TABLE ';
+  S:=S + FullName;
+  AddSQLCommand(S);
+end;
+
+procedure TMySQLTruncateTable.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMySQLTruncateTable then
+    IsTable:=TMySQLTruncateTable(ASource).IsTable;
+  inherited Assign(ASource);
 end;
 
 { TMySQLRenameTable }
 
 procedure TMySQLRenameTable.InitParserTree;
 var
-  FSQLTokens, T, TOldName, TNewName, TSymb: TSQLTokenRecord;
+  FSQLTokens, T, TOldName, TNewName, TSymb, TOldName1,
+    TNewName1: TSQLTokenRecord;
 begin
   (*
   RENAME TABLE tbl_name TO new_tbl_name
@@ -2865,10 +2884,18 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'RENAME', [toFirstToken], 0);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]);
+
   TOldName:=AddSQLTokens(stIdentificator, T, '', [], 1);
-  T:=AddSQLTokens(stKeyword, TOldName, 'TO', []);
+    TSymb:=AddSQLTokens(stSymbol, TOldName, '.', []);
+  TOldName1:=AddSQLTokens(stIdentificator, TSymb, '', [], 4);
+
+  T:=AddSQLTokens(stKeyword, [TOldName, TOldName1], 'TO', []);
+
   TNewName:=AddSQLTokens(stIdentificator, T, '', [], 2);
-  TSymb:=AddSQLTokens(stSymbol, TNewName, ',', [toOptional], 3);
+    TSymb:=AddSQLTokens(stSymbol, TNewName, '.', [toOptional]);
+  TNewName1:=AddSQLTokens(stIdentificator, TSymb, '', [], 5);
+
+  TSymb:=AddSQLTokens(stSymbol, [TNewName, TNewName1], ',', [toOptional], 3);
     TSymb.AddChildToken(TOldName);
 end;
 
@@ -2879,6 +2906,10 @@ begin
     1:FCurTable:=Params.AddParam(AWord);
     2:if Assigned(FCurTable) then FCurTable.TableName:=AWord;
     3:FCurTable:=nil;
+    4:if Assigned(FCurTable) then
+      FCurTable.Caption:=FCurTable.Caption + '.' + AWord;
+    5:if Assigned(FCurTable) then
+      FCurTable.TableName:=FCurTable.TableName + '.' + AWord;
   end;
 end;
 
@@ -3664,8 +3695,8 @@ begin
   DROP {PROCEDURE | FUNCTION} [IF EXISTS] sp_name
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0);
-  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURE', [toFindWordLast], 1);
-  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast], 2);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURE', [toFindWordLast], 1, okStoredProc);
+  T2:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast], 2, okFunction);
     T:=AddSQLTokens(stKeyword, [T1, T2], 'IF', []);
     T:=AddSQLTokens(stKeyword, T, 'EXISTS', [], -1);
   TName:=AddSQLTokens(stIdentificator, [T, T1, T2], '', [], 3);
@@ -3676,7 +3707,7 @@ procedure TMySQLDropFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1,
+    1:ObjectKind:=okStoredProc;
     2:ObjectKind:=okStoredProc;
     3:Name:=AWord;
   end;
@@ -3687,7 +3718,10 @@ var
   S: String;
 begin
   //  DROP {PROCEDURE | FUNCTION} [IF EXISTS] sp_name
-  S:='DROP FUNCTION ';
+  if ObjectKind = okFunction then
+    S:='DROP FUNCTION '
+  else
+    S:='DROP PROCEDURE ';
   if ooIfExists in Options then
     S:=S + 'IF EXISTS ';
   S:=S + FullName;
