@@ -5,6 +5,7 @@ object MySQLParserData: TMySQLParserData
   VerticalOffset = 209
   Width = 614
   object sTable: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'TruncateTable1'
@@ -524,6 +525,7 @@ object MySQLParserData: TMySQLParserData
     Top = 32
   end
   object sFunction: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateProcedure1'
@@ -812,6 +814,7 @@ object MySQLParserData: TMySQLParserData
     Top = 104
   end
   object sServer: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateDatabase1'
@@ -1070,6 +1073,7 @@ object MySQLParserData: TMySQLParserData
     Top = 192
   end
   object sView: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'CreateView1'
@@ -1129,11 +1133,19 @@ object MySQLParserData: TMySQLParserData
     Top = 272
   end
   object sShow: TRxTextHolder
+    Highlighter = rxSynNone
     Items = <    
       item
         Caption = 'ShowFullCollumns1'
         Lines.Strings = (
           'SHOW FULL COLUMNS FROM `v_test1`;'
+        )
+      end    
+      item
+        Caption = 'ShowGrantsForUser1'
+        Lines.Strings = (
+          'SHOW GRANTS FOR alexs@bigbrother;'
+          ''
         )
       end>
     Left = 48

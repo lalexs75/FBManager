@@ -21,6 +21,7 @@ type
     procedure DoTestSQL(ASql: string);
   published
     procedure TestShowFullCollumns;
+    procedure TestShowGrantsForUser;
     //ALTER DATABASE Syntax
     procedure AlterDatabase;
     //CREATE DATABASE Syntax
@@ -225,6 +226,11 @@ implementation
 procedure TMySQLParserTest.TestShowFullCollumns;
 begin
   DoTestSQL(MySQLParserData.sShow['ShowFullCollumns1']);
+end;
+
+procedure TMySQLParserTest.TestShowGrantsForUser;
+begin
+  DoTestSQL(MySQLParserData.sShow['ShowGrantsForUser1']);
 end;
 
 procedure TMySQLParserTest.AlterDatabase;

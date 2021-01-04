@@ -113,14 +113,16 @@ type
       myShowCreateTrigger,
       myShowCreateView,
       myShowDatabases,
-(*    SHOW ENGINE engine_name {STATUS | MUTEX}
+      myShowEngine,
+(*
     SHOW [STORAGE] ENGINES
     SHOW ERRORS [LIMIT [offset,] row_count]
     SHOW [FULL] EVENTS
     SHOW FUNCTION CODE func_name
     SHOW FUNCTION STATUS [like_or_where]
-    SHOW GRANTS FOR user
-    SHOW INDEX FROM tbl_name [FROM db_name]
+*)
+      myShowGrantsForUser,
+(*    SHOW INDEX FROM tbl_name [FROM db_name]
     SHOW INNODB STATUS
     SHOW OPEN TABLES [FROM db_name] [like_or_where] *)
     myShowPlugins,
@@ -1606,7 +1608,7 @@ end;
 
 procedure TMySQLSHOW.InitParserTree;
 var
-  FSQLTokens, T1, T2, TLike, TWhere, T3, TFull: TSQLTokenRecord;
+  FSQLTokens, T1, T2, TLike, TWhere, T3, TFull, T2_1, T2_2: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SHOW', [toFirstToken]);
 
@@ -1640,13 +1642,28 @@ begin
     T1:=AddSQLTokens(stIdentificator, T1, '', [], 4);  //SHOW [FULL] COLUMNS FROM tbl_name [FROM db_name] [like_or_where]
 
   T1:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASES', [toFindWordLast], 16);  //SHOW DATABASES [like_or_where]
-(*    SHOW ENGINE engine_name {STATUS | MUTEX}
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'ENGINE', [toFindWordLast]);  //SHOW ENGINE engine_name {STATUS | MUTEX}
+    T1:=AddSQLTokens(stIdentificator, T1, '', [], 20);
+    AddSQLTokens(stKeyword, T1, 'STATUS', [toOptional], 21);
+    AddSQLTokens(stKeyword, T1, 'MUTEX', [toOptional], 21);
+
+  (*
     SHOW [STORAGE] ENGINES
     SHOW ERRORS [LIMIT [offset,] row_count]
     SHOW [FULL] EVENTS
     SHOW FUNCTION CODE func_name
     SHOW FUNCTION STATUS [like_or_where]
-    SHOW GRANTS FOR user
+*)
+
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'GRANTS', [toFindWordLast]);  //SHOW GRANTS FOR user
+    T1:=AddSQLTokens(stKeyword, T1, 'FOR', []);
+      T2_1:=AddSQLTokens(stIdentificator, T1, '', [], 19);
+      T2_2:=AddSQLTokens(stString, T1, '', [], 19);
+      T3:=AddSQLTokens(stSymbol, [T2_1, T2_2], '@', [], 19);
+        AddSQLTokens(stIdentificator, T3, '', [], 19);
+        AddSQLTokens(stString, T3, '', [], 19);
+(*
     SHOW INDEX FROM tbl_name [FROM db_name]
     SHOW INNODB STATUS
     SHOW OPEN TABLES [FROM db_name] [like_or_where]
@@ -1767,6 +1784,18 @@ begin
     16:FShowCommand:=myShowDatabases;
     17:FFull:=true;
     18:FShowCommand:=myShowCollumnsFromTable;
+    19:begin
+         FShowCommand:=myShowGrantsForUser;
+         if Params.Count = 0 then
+           Params.AddParam(AWord)
+         else
+           Params[0].Caption:=Params[0].Caption + AWord;
+       end;
+    20:begin
+         FShowCommand:=myShowEngine;
+         Params.AddParam(AWord)
+       end;
+    21:Params.AddParam(AWord);
   end;
 end;
 
@@ -1784,6 +1813,7 @@ end;
 var
   S: String;
 begin
+  S:='';
   case FShowCommand of
     myShowAuthors:S:='SHOW AUTHORS';
     myShowContributors:S:='SHOW CONTRIBUTORS';
@@ -1800,8 +1830,13 @@ begin
     myShowPlugins:S:='SHOW PLUGINS';
     myShowDatabases:S:='SHOW DATABASES'; //SHOW DATABASES [like_or_where]
     myShowCollumnsFromTable:S:='SHOW FULL COLUMNS FROM '+TableName + DoLikeOrWhere;// [FROM db_name] [like_or_where]
-  else
-    S:='';
+    myShowGrantsForUser:if Params.Count>0 then S:='SHOW GRANTS FOR '+Params[0].Caption;
+    myShowEngine:
+      if Params.Count>0 then
+      begin
+        S:='SHOW ENGINE '+Params[0].Caption;
+        if Params.Count>1 then S:=S + ' ' + Params[1].Caption;
+      end;
   end;
   if S<>'' then
     AddSQLCommand(S);
