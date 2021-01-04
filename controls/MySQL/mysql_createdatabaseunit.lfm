@@ -9,7 +9,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.9.0.0'
+  LCLVersion = '2.1.0.0'
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 46
@@ -38,7 +38,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Create params'
-      ClientHeight = 425
+      ClientHeight = 428
       ClientWidth = 692
       object edtCodePage: TComboBox
         AnchorSideLeft.Control = Label8
@@ -46,8 +46,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Label6
         Left = 12
-        Height = 37
-        Top = 216
+        Height = 33
+        Top = 193
         Width = 328
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -59,9 +59,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = DividerBevel2
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 20
-        Top = 190
-        Width = 49
+        Height = 17
+        Top = 170
+        Width = 47
         BorderSpacing.Around = 6
         Caption = 'Charset'
         ParentColor = False
@@ -73,8 +73,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 322
-        Height = 37
-        Top = 121
+        Height = 33
+        Top = 108
         Width = 364
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -87,8 +87,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Label5
         Left = 12
-        Height = 37
-        Top = 121
+        Height = 33
+        Top = 108
         Width = 298
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -100,9 +100,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = edtDataBaseName
         AnchorSideTop.Side = asrBottom
         Left = 316
-        Height = 20
-        Top = 95
-        Width = 61
+        Height = 17
+        Top = 85
+        Width = 58
         BorderSpacing.Top = 6
         Caption = 'Password'
         ParentColor = False
@@ -112,9 +112,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = edtDataBaseName
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 20
-        Top = 95
-        Width = 69
+        Height = 17
+        Top = 85
+        Width = 64
         BorderSpacing.Around = 6
         Caption = 'User name'
         ParentColor = False
@@ -126,8 +126,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 588
-        Height = 37
-        Top = 52
+        Height = 33
+        Top = 46
         Width = 98
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -141,8 +141,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = DividerBevel1
         AnchorSideTop.Side = asrBottom
         Left = 582
-        Height = 20
-        Top = 26
+        Height = 17
+        Top = 23
         Width = 26
         BorderSpacing.Around = 6
         Caption = 'Port'
@@ -154,9 +154,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = DividerBevel1
         AnchorSideTop.Side = asrBottom
         Left = 316
-        Height = 20
-        Top = 26
-        Width = 70
+        Height = 17
+        Top = 23
+        Width = 66
         BorderSpacing.Around = 6
         Caption = 'Host name'
         ParentColor = False
@@ -166,9 +166,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = DividerBevel3
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 24
-        Top = 285
-        Width = 157
+        Height = 23
+        Top = 255
+        Width = 147
         BorderSpacing.Around = 6
         Caption = 'Register after create'
         TabOrder = 6
@@ -178,8 +178,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = Label1
         AnchorSideTop.Side = asrBottom
         Left = 12
-        Height = 37
-        Top = 52
+        Height = 33
+        Top = 46
         Width = 298
         BorderSpacing.Around = 6
         TabOrder = 0
@@ -189,9 +189,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = DividerBevel1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 20
-        Top = 26
-        Width = 98
+        Height = 17
+        Top = 23
+        Width = 93
         BorderSpacing.Around = 6
         Caption = 'Database name'
         ParentColor = False
@@ -201,9 +201,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = CheckBox1
         AnchorSideTop.Side = asrBottom
         Left = 6
-        Height = 24
-        Top = 315
-        Width = 164
+        Height = 23
+        Top = 284
+        Width = 156
         BorderSpacing.Around = 6
         Caption = 'SQL metadata log file'
         TabOrder = 7
@@ -215,8 +215,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 37
-        Top = 345
+        Height = 33
+        Top = 313
         Width = 674
         DialogOptions = []
         FilterIndex = 0
@@ -234,7 +234,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 20
+        Height = 17
         Top = 0
         Width = 692
         Caption = 'Connection params'
@@ -249,8 +249,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 20
-        Top = 164
+        Height = 17
+        Top = 147
         Width = 692
         Caption = 'Databse property'
         Anchors = [akTop, akLeft, akRight]
@@ -264,8 +264,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 20
-        Top = 259
+        Height = 17
+        Top = 232
         Width = 692
         Caption = 'FBManager options'
         Anchors = [akTop, akLeft, akRight]
@@ -279,9 +279,9 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 352
-        Height = 20
-        Top = 190
-        Width = 45
+        Height = 17
+        Top = 170
+        Width = 44
         BorderSpacing.Around = 6
         Caption = 'Collate'
         ParentColor = False
@@ -293,8 +293,8 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         Left = 358
-        Height = 37
-        Top = 216
+        Height = 33
+        Top = 193
         Width = 328
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -306,12 +306,12 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
         AnchorSideTop.Control = Label2
         AnchorSideTop.Side = asrBottom
         Left = 322
-        Height = 37
-        Top = 52
+        Height = 33
+        Top = 46
         Width = 254
         BorderSpacing.Around = 6
         ItemHeight = 0
-        OnChange = edtUserNameChange
+        OnExit = edtUserNameChange
         TabOrder = 9
       end
       object Label6: TLabel
@@ -335,7 +335,7 @@ object mysql_CreateDatabaseForm: Tmysql_CreateDatabaseForm
     Properties.Strings = (
       'AutoEncodeStrings='
     )
-    Connected = True
+    DesignConnection = True
     HostName = '127.0.0.1'
     Port = 0
     Protocol = 'mysql'
