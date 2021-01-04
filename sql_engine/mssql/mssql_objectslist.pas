@@ -1,6 +1,6 @@
 { Free DB Manager
 
-  Copyright (C) 2005-2021 Lagunov Aleksey  alexs75 at yandex.ru
+  Copyright (C) 2005-2020 Lagunov Aleksey  alexs75 at yandex.ru
 
   This source is free software; you can redistribute it and/or modify it under
   the terms of the GNU General Public License as published by the Free
@@ -25,44 +25,12 @@ unit mssql_ObjectsList;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, fbm_VisualEditorsAbstractUnit, Forms;
+  Classes, SysUtils;
 
-type
-
-  TMSSQLVisualTools = class(TDBVisualTools)
-  private
-    procedure tlsShowTdsCfgManagerExecute(Sender: TObject);
-  protected
-    class function GetMenuItems(Index: integer): TMenuItemRec; override;
-    class function GetMenuItemCount:integer; override;
-  end;
 
 implementation
 uses fbmStrConstUnit{, mssql_FreeTDSConfig_Unit};
 
-{ TMSSQLVisualTools }
-
-procedure TMSSQLVisualTools.tlsShowTdsCfgManagerExecute(Sender: TObject);
-begin
-  //ShowTDSConfigForm;
-end;
-
-class function TMSSQLVisualTools.GetMenuItems(Index: integer): TMenuItemRec;
-begin
-  FillChar(Result, Sizeof(Result), 0);
-  Result.ImageIndex:=-1;
-  case Index of
-    0:begin
-        Result.ItemName:=sFreeTdsConfigEditor;
-//        Result.OnClick:=@tlsShowTdsCfgManagerExecute;
-      end;
-  end;
-end;
-
-class function TMSSQLVisualTools.GetMenuItemCount: integer;
-begin
-  Result:=1;
-end;
 
 end.
 
