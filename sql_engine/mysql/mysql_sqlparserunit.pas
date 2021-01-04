@@ -102,6 +102,8 @@ type
   TProcSqlAccess = (saContainsSql, saNoSql, saReadsSqlData, saModifiesSqlData);
   TProcSecurity = (psDefiner, psInvoker);
 
+  TMySetScope = (mssNone, mssGlobal, mssSession);
+
   TMySQLShowCommand = (
       myShowAuthors,
       myShowCollumnsFromTable,
@@ -132,11 +134,14 @@ type
       myShowProcesslist,
 //    SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
     myShowProfiles,
-(*    SHOW [GLOBAL | SESSION] STATUS [like_or_where]
+    myShowStatus,
+(*
     SHOW TABLE STATUS [FROM db_name] [like_or_where]
     SHOW TABLES [FROM db_name] [like_or_where]
     SHOW TRIGGERS [FROM db_name] [like_or_where]
-    SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
+*)
+    myShowVariables,
+(*
     SHOW WARNINGS [LIMIT [offset,] row_count]
 *)
     myShowCharacterSET,
@@ -414,6 +419,7 @@ type
   TMySQLSHOW = class(TSQLCommandDML)
   private
     FFull: boolean;
+    FSetScope: TMySetScope;
     FShowCommand:TMySQLShowCommand;
     FLikeStr:string;
     FWhere:string;
@@ -428,6 +434,7 @@ type
     property Where:string read FWhere write FWhere;
     property Full:boolean read FFull write FFull;
     property ShowCommand:TMySQLShowCommand read FShowCommand write FShowCommand;
+    property SetScope:TMySetScope read FSetScope write FSetScope;
   end;
 
   { TMySQLCreateTablespace }
@@ -1602,13 +1609,15 @@ begin
     Where:=TMySQLSHOW(ASource).Where;
     Full:=TMySQLSHOW(ASource).Full;
     ShowCommand:=TMySQLSHOW(ASource).ShowCommand;
+    SetScope:=TMySQLSHOW(ASource).SetScope;
   end;
   inherited Assign(ASource);
 end;
 
 procedure TMySQLSHOW.InitParserTree;
 var
-  FSQLTokens, T1, T2, TLike, TWhere, T3, TFull, T2_1, T2_2: TSQLTokenRecord;
+  FSQLTokens, T1, T2, TLike, TWhere, T3, TFull, T2_1, T2_2, TG,
+    TS: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SHOW', [toFirstToken]);
 
@@ -1676,11 +1685,9 @@ begin
 
 (*    SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
     SHOW PROFILES
-    SHOW [GLOBAL | SESSION] STATUS [like_or_where]
     SHOW TABLE STATUS [FROM db_name] [like_or_where]
     SHOW TABLES [FROM db_name] [like_or_where]
     SHOW TRIGGERS [FROM db_name] [like_or_where]
-    SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
     SHOW WARNINGS [LIMIT [offset,] row_count]
 *)
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'CHARACTER', []);
@@ -1689,6 +1696,14 @@ begin
 
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'COLLATION', [toFindWordLast], 6);
       T1.AddChildToken([TLike, TWhere]);
+
+    TG:=AddSQLTokens(stKeyword, FSQLTokens, 'GLOBAL', [], 22);
+    TS:=AddSQLTokens(stKeyword, FSQLTokens, 'SESSION', [], 23);
+
+    T1:=AddSQLTokens(stKeyword, [FSQLTokens, TG, TS], 'STATUS', [toFindWordLast], 24); //SHOW [GLOBAL | SESSION] STATUS [like_or_where]
+    T1:=AddSQLTokens(stKeyword, [FSQLTokens, TG, TS], 'VARIABLES', [toFindWordLast], 25); //SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
+
+
 (*
     SHOW COLUMNS
     SHOW DATABASES
@@ -1763,6 +1778,8 @@ end;
 
 procedure TMySQLSHOW.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
+var
+  S: String;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -1796,6 +1813,20 @@ begin
          Params.AddParam(AWord)
        end;
     21:Params.AddParam(AWord);
+    22:FSetScope:=mssGlobal;
+    23:FSetScope:=mssSession;
+    24:begin
+         FShowCommand:=myShowStatus;
+         S:=ASQLParser.GetToCommandDelemiter;
+         if S<>'' then
+           Params.AddParam(S);
+       end;
+    25:begin
+         FShowCommand:=myShowVariables;
+         S:=ASQLParser.GetToCommandDelemiter;
+         if S<>'' then
+           Params.AddParam(S);
+       end;
   end;
 end;
 
@@ -1837,12 +1868,29 @@ begin
         S:='SHOW ENGINE '+Params[0].Caption;
         if Params.Count>1 then S:=S + ' ' + Params[1].Caption;
       end;
+    myShowStatus:
+      begin
+        S:='SHOW ';
+        if FSetScope = mssSession then S:=S + 'SESSION '
+        else
+        if FSetScope = mssGlobal then S:=S + 'GLOBAL ';
+        S:=S + 'STATUS';
+        if Params.Count>0 then S:=S + Params[0].Caption
+      end;
+    myShowVariables:
+      begin
+        S:='SHOW ';
+        if FSetScope = mssSession then S:=S + 'SESSION '
+        else
+        if FSetScope = mssGlobal then S:=S + 'GLOBAL ';
+        S:=S + 'VARIABLES';
+        if Params.Count>0 then S:=S + Params[0].Caption
+      end;
   end;
   if S<>'' then
     AddSQLCommand(S);
   (*
 
-      SHOW ENGINE engine_name {STATUS | MUTEX}
       SHOW [STORAGE] ENGINES
       SHOW ERRORS [LIMIT [offset,] row_count]
       SHOW [FULL] EVENTS
@@ -1858,11 +1906,9 @@ begin
 
       SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
       SHOW PROFILES
-      SHOW [GLOBAL | SESSION] STATUS [like_or_where]
       SHOW TABLE STATUS [FROM db_name] [like_or_where]
       SHOW TABLES [FROM db_name] [like_or_where]
       SHOW TRIGGERS [FROM db_name] [like_or_where]
-      SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
       SHOW WARNINGS [LIMIT [offset,] row_count]
 
 

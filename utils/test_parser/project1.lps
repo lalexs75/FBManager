@@ -203,8 +203,8 @@
         <UnitName Value="mysql_SqlParserUnit"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="1825"/>
-        <CursorPos X="11" Y="1839"/>
+        <TopLine Value="1864"/>
+        <CursorPos X="39" Y="1878"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>
@@ -541,94 +541,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="1783" TopLine="1757"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="1788" TopLine="1763"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="139" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="141" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="144" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="145" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="146" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="148" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="150" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="139" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="141" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
-        <Caret Line="150" TopLine="124"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3109" TopLine="3061"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3110" TopLine="3095"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3051" TopLine="3035"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3052" TopLine="3035"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3054" TopLine="3035"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3062" TopLine="3038"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3068" TopLine="3053"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3069" TopLine="3053"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="1759" TopLine="1743"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="1760" TopLine="1743"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
         <Caret Line="1761" TopLine="1743"/>
       </Position>
       <Position>
@@ -658,6 +570,92 @@
       <Position>
         <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
         <Caret Line="1842" Column="63" TopLine="1812"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1845" TopLine="1830"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1850" Column="20" TopLine="1831"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="421" Column="15" TopLine="410"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="649" Column="100" TopLine="623"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="650" Column="100" TopLine="624"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1697" TopLine="1672"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="437" Column="66" TopLine="410"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="432" Column="56" TopLine="410"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="427" Column="56" TopLine="410"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1638" Column="3" TopLine="1634"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="428" Column="15" TopLine="411"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1813" Column="3" TopLine="1785"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="427" Column="15" TopLine="412"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1704" Column="88" TopLine="1682"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="428" Column="15" TopLine="411"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1814" Column="28" TopLine="1796"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1817" Column="8" TopLine="1797"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="427" Column="15" TopLine="412"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="428" Column="15" TopLine="411"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <Caret Line="1885" Column="2" TopLine="1861"/>
       </Position>
     </JumpHistory>
     <RunParams>
