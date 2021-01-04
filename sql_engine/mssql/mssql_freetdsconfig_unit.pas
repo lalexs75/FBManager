@@ -143,6 +143,7 @@ var
   P:TAliasItem;
   S:string;
 begin
+(*
   if not FileExistsUTF8(AFileName) then exit;
   FConfigFileName:=AFileName;
   ClearList;
@@ -179,6 +180,7 @@ begin
     ListBox1.ItemIndex:=0;
     ListBox1Click(nil);
   end;
+*)
 end;
 
 procedure TmssqlFreeTDSConfigForm.SaveConfigFile(const AFileName: string);

@@ -1,17 +1,17 @@
 inherited cf_mssql_main_frame: Tcf_mssql_main_frame
   Height = 525
-  Width = 595
+  Width = 637
   ClientHeight = 525
-  ClientWidth = 595
-  DesignLeft = 488
-  DesignTop = 217
+  ClientWidth = 637
+  DesignLeft = 584
+  DesignTop = 210
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 18
+    Height = 17
     Top = 6
-    Width = 90
+    Width = 75
     BorderSpacing.Around = 6
     Caption = 'Select server'
     ParentColor = False
@@ -20,9 +20,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 18
+    Height = 17
     Top = 65
-    Width = 74
+    Width = 64
     BorderSpacing.Around = 6
     Caption = 'User name'
     ParentColor = False
@@ -31,9 +31,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Side = asrBottom
     Left = 246
-    Height = 18
+    Height = 17
     Top = 67
-    Width = 64
+    Width = 58
     BorderSpacing.Around = 6
     Caption = 'Password'
     ParentColor = False
@@ -42,9 +42,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 18
+    Height = 17
     Top = 124
-    Width = 65
+    Width = 56
     BorderSpacing.Around = 6
     Caption = 'Database'
     ParentColor = False
@@ -53,9 +53,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
     Left = 326
-    Height = 18
+    Height = 17
     Top = 6
-    Width = 100
+    Width = 83
     BorderSpacing.Around = 6
     Caption = 'Server version'
     ParentColor = False
@@ -65,9 +65,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Control = Button2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 18
-    Top = 214
-    Width = 75
+    Height = 17
+    Top = 225
+    Width = 65
     BorderSpacing.Around = 6
     Caption = 'Alias name'
     ParentColor = False
@@ -77,9 +77,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Control = edtAlias
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 18
-    Top = 271
-    Width = 92
+    Height = 17
+    Top = 287
+    Width = 78
     BorderSpacing.Around = 6
     Caption = 'Library name'
     Enabled = False
@@ -90,8 +90,8 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Control = Label1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 27
-    Top = 30
+    Height = 33
+    Top = 29
     Width = 308
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -103,9 +103,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 477
-    Height = 27
-    Top = 91
+    Left = 519
+    Height = 33
+    Top = 90
     Width = 112
     Anchors = [akTop, akRight]
     AutoSize = True
@@ -119,8 +119,8 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 27
-    Top = 89
+    Height = 33
+    Top = 88
     Width = 228
     BorderSpacing.Around = 6
     TabOrder = 2
@@ -132,9 +132,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Button1
     Left = 252
-    Height = 27
-    Top = 91
-    Width = 219
+    Height = 33
+    Top = 90
+    Width = 261
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     EchoMode = emPassword
@@ -149,9 +149,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 332
-    Height = 29
-    Top = 30
-    Width = 257
+    Height = 32
+    Top = 29
+    Width = 299
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -165,9 +165,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 27
-    Top = 148
-    Width = 577
+    Height = 33
+    Top = 147
+    Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -181,9 +181,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideTop.Control = edtDataBase
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 27
-    Top = 181
-    Width = 141
+    Height = 33
+    Top = 186
+    Width = 136
     AutoSize = True
     BorderSpacing.Around = 6
     Caption = 'FreeTDS.conf editor'
@@ -197,9 +197,9 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 27
-    Top = 238
-    Width = 577
+    Height = 33
+    Top = 248
+    Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     TabOrder = 7
@@ -212,24 +212,22 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 27
-    Top = 295
-    Width = 577
+    Height = 33
+    Top = 310
+    Width = 619
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
     Enabled = False
     TabOrder = 8
   end
-  object TDSCTDataBase1: TTDSCTDataBase[16]
-    Connected = False
-    AllowStreamedConnected = False
-    ServerVersion = svMSSQL6
-    LoginTimeout = 0
-    left = 420
-    top = 212
+  object TDSCTDataBase1: TZConnection[16]
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
+    Port = 0
+    Left = 420
+    Top = 212
   end
-  object quGetDBList: TTDSCTQuery[17]
-    DataBase = TDSCTDataBase1
+  object quGetDBList: TZQuery[17]
     SQL.Strings = (
       'select'
       '  sys.databases.[name]'
@@ -237,8 +235,7 @@ inherited cf_mssql_main_frame: Tcf_mssql_main_frame
       '  sys.databases'
     )
     Params = <>
-    CommandType = ctCommand
-    left = 476
-    top = 212
+    Left = 476
+    Top = 212
   end
 end

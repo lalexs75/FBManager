@@ -25,43 +25,41 @@ unit mssql_ObjectsList;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, Forms;
+  Classes, SysUtils, SQLEngineAbstractUnit, fbm_VisualEditorsAbstractUnit, Forms;
 
 type
-
-  { TFireBirdVisualTools }
 
   TMSSQLVisualTools = class(TDBVisualTools)
   private
     procedure tlsShowTdsCfgManagerExecute(Sender: TObject);
   protected
-    function GetMenuItems(Index: integer): TMenuItemRec; override;
-    function GetMenuItemCount:integer; override;
+    class function GetMenuItems(Index: integer): TMenuItemRec; override;
+    class function GetMenuItemCount:integer; override;
   end;
 
 implementation
-uses fbmStrConstUnit, mssql_FreeTDSConfig_Unit;
+uses fbmStrConstUnit{, mssql_FreeTDSConfig_Unit};
 
 { TMSSQLVisualTools }
 
 procedure TMSSQLVisualTools.tlsShowTdsCfgManagerExecute(Sender: TObject);
 begin
-  ShowTDSConfigForm;
+  //ShowTDSConfigForm;
 end;
 
-function TMSSQLVisualTools.GetMenuItems(Index: integer): TMenuItemRec;
+class function TMSSQLVisualTools.GetMenuItems(Index: integer): TMenuItemRec;
 begin
   FillChar(Result, Sizeof(Result), 0);
   Result.ImageIndex:=-1;
   case Index of
     0:begin
         Result.ItemName:=sFreeTdsConfigEditor;
-        Result.OnClick:=@tlsShowTdsCfgManagerExecute;
+//        Result.OnClick:=@tlsShowTdsCfgManagerExecute;
       end;
   end;
 end;
 
-function TMSSQLVisualTools.GetMenuItemCount: integer;
+class function TMSSQLVisualTools.GetMenuItemCount: integer;
 begin
   Result:=1;
 end;

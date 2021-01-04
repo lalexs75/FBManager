@@ -26,14 +26,14 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, TDSCTDataBase, fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
-  mssq_engine;
-
+  StdCtrls, {TDSCTDataBase, }fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
+  mssq_engine, ZConnection, ZDataset;
+(*
 const
   ServerNames : array [TCTServerVersion] of string =
     ('MS SQL 6.0', 'MS SQL 6.5', 'MS SQL 7.0', 'MS SQL 2000',
      'MS SQL 2005', 'MS SQL 2008', 'Sybase SQL 10', 'Sybase SQL 9');
-
+*)
 type
 
   { Tcf_mssql_main_frame }
@@ -55,17 +55,17 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    quGetDBList: TTDSCTQuery;
-    TDSCTDataBase1: TTDSCTDataBase;
+    quGetDBList: TZQuery;
+    TDSCTDataBase1: TZConnection;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure edtDataBaseChange(Sender: TObject);
     procedure edtDataBaseDropDown(Sender: TObject);
   private
     FSQLEngine:TMSSQLEngine;
-    FDataBase:TTDSCTDataBase;
+    FDataBase:TZConnection;
     procedure LoadConf;
-    procedure SetDataBaseProps(ADataBase:TTDSCTDataBase);
+    procedure SetDataBaseProps(ADataBase:TZConnection);
   public
     procedure Activate;override;
     procedure LoadParams(ASQLEngine:TSQLEngineAbstract);override;
@@ -88,12 +88,14 @@ var
   Ini:TIniFile;
   k:integer;
 begin
+  (*
   Ini:=TIniFile.Create(Utf8to ConfFileName);
   Ini.ReadSections(Values);
   Ini.Free;
   k:=Values.IndexOf('global');
   if k>=0 then
     Values.Delete(k);
+*)
 end;
 
 { Tcf_mssql_main_frame }
@@ -111,6 +113,7 @@ end;
 
 procedure Tcf_mssql_main_frame.edtDataBaseDropDown(Sender: TObject);
 begin
+(*
   SetDataBaseProps(TDSCTDataBase1);
   try
     TDSCTDataBase1.Connected:=true;
@@ -130,25 +133,26 @@ begin
       quGetDBList.Close;
     TDSCTDataBase1.Connected:=false;
   end;
+*)
 end;
 
 procedure Tcf_mssql_main_frame.LoadConf;
-var
-  i:TCTServerVersion;
+//var
+//  i:TCTServerVersion;
 begin
-  LoadServerList(edtServer.Items);
-  edtSvrVersion.Items.Clear;
-  for i:= Low(TCTServerVersion) to high(TCTServerVersion) do
-    edtSvrVersion.Items.Add(ServerNames[i]);
+  //LoadServerList(edtServer.Items);
+  //edtSvrVersion.Items.Clear;
+  //for i:= Low(TCTServerVersion) to high(TCTServerVersion) do
+  //  edtSvrVersion.Items.Add(ServerNames[i]);
 end;
 
-procedure Tcf_mssql_main_frame.SetDataBaseProps(ADataBase: TTDSCTDataBase);
+procedure Tcf_mssql_main_frame.SetDataBaseProps(ADataBase: TZConnection);
 begin
-  ADataBase.Database:=edtDataBase.Text;
-  ADataBase.UserName:=edtUserName.Text;
-  ADataBase.Password:=edtPass.Text;
-  ADataBase.ServerName:=edtServer.Text;
-  ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
+  //ADataBase.Database:=edtDataBase.Text;
+  //ADataBase.UserName:=edtUserName.Text;
+  //ADataBase.Password:=edtPass.Text;
+  //ADataBase.ServerName:=edtServer.Text;
+  //ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
 end;
 
 procedure Tcf_mssql_main_frame.Button1Click(Sender: TObject);
@@ -171,22 +175,22 @@ end;
 
 procedure Tcf_mssql_main_frame.LoadParams(ASQLEngine: TSQLEngineAbstract);
 begin
-  edtServer.Text:=TMSSQLEngine(ASQLEngine).ServerName;
-  edtDataBase.Text:=TMSSQLEngine(ASQLEngine).DataBaseName;
-  edtUserName.Text:=TMSSQLEngine(ASQLEngine).UserName;
-  edtPass.Text:=TMSSQLEngine(ASQLEngine).Password;
-  edtSvrVersion.ItemIndex:=Ord(TMSSQLEngine(ASQLEngine).ServerVersion);
-  edtAlias.Text:=TMSSQLEngine(ASQLEngine).AliasName;
+  //edtServer.Text:=TMSSQLEngine(ASQLEngine).ServerName;
+  //edtDataBase.Text:=TMSSQLEngine(ASQLEngine).DataBaseName;
+  //edtUserName.Text:=TMSSQLEngine(ASQLEngine).UserName;
+  //edtPass.Text:=TMSSQLEngine(ASQLEngine).Password;
+  //edtSvrVersion.ItemIndex:=Ord(TMSSQLEngine(ASQLEngine).ServerVersion);
+  //edtAlias.Text:=TMSSQLEngine(ASQLEngine).AliasName;
 end;
 
 procedure Tcf_mssql_main_frame.SaveParams;
 begin
-  FSQLEngine.ServerName    := edtServer.Text;
-  FSQLEngine.DataBaseName  := edtDataBase.Text;
-  FSQLEngine.UserName      := edtUserName.Text;
-  FSQLEngine.Password      := edtPass.Text;
-  FSQLEngine.ServerVersion := TCTServerVersion(edtSvrVersion.ItemIndex);
-  FSQLEngine.AliasName     := edtAlias.Text;
+  //FSQLEngine.ServerName    := edtServer.Text;
+  //FSQLEngine.DataBaseName  := edtDataBase.Text;
+  //FSQLEngine.UserName      := edtUserName.Text;
+  //FSQLEngine.Password      := edtPass.Text;
+  //FSQLEngine.ServerVersion := TCTServerVersion(edtSvrVersion.ItemIndex);
+  //FSQLEngine.AliasName     := edtAlias.Text;
 end;
 
 function Tcf_mssql_main_frame.PageName: string;

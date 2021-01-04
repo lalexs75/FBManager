@@ -5,7 +5,7 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
   Width = 724
   ActiveControl = ToolPanel1
   Caption = 'Free TDS Config editor'
-  ClientHeight = 572
+  ClientHeight = 570
   ClientWidth = 724
   Icon.Data = {
     7E04000000000100010010100000010020006804000016000000280000001000
@@ -50,11 +50,11 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '1.1'
+  LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 541
-    Top = 31
+    Height = 536
+    Top = 34
     Width = 724
     ActivePage = TabSheet2
     Align = alClient
@@ -62,8 +62,8 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Global'
-      ClientHeight = 508
-      ClientWidth = 718
+      ClientHeight = 505
+      ClientWidth = 714
       object Label1: TLabel
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
@@ -218,12 +218,12 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Aliases'
-      ClientHeight = 508
-      ClientWidth = 718
+      ClientHeight = 505
+      ClientWidth = 714
       object ListBox1: TListBox
         Left = 0
-        Height = 477
-        Top = 31
+        Height = 471
+        Top = 34
         Width = 211
         Align = alLeft
         ItemHeight = 0
@@ -234,51 +234,38 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
       end
       object ToolPanel2: TToolPanel
         Left = 0
-        Height = 31
+        Height = 34
         Top = 0
-        Width = 718
+        Width = 714
         Items = <        
           item
             Action = alAdd
             Visible = True
-            Left = 5
-            Height = 21
-            Top = 5
-            Width = 63
             ShowCaption = True
           end        
           item
             Visible = True
-            Left = 68
-            Height = 21
-            Top = 5
-            Width = 7
             ShowCaption = False
             ButtonStyle = tbrSeparator
           end        
           item
             Action = alDel
             Visible = True
-            Left = 75
-            Height = 21
-            Top = 5
-            Width = 70
             ShowCaption = True
           end>
-        ImageList = fbManagerMainForm.ImageListNormal
-        ImageListSelected = fbManagerMainForm.ImageListSelected
         ToolBarStyle = tbsWindowsXP
         Options = [tpFlatBtns]
+        CustomizeShortCut = False
         Align = alTop
         BorderWidth = 4
-        ClientHeight = 31
-        ClientWidth = 718
+        ClientHeight = 34
+        ClientWidth = 714
         TabOrder = 1
       end
       object Splitter1: TSplitter
         Left = 211
-        Height = 477
-        Top = 31
+        Height = 471
+        Top = 34
         Width = 5
       end
       object Label7: TLabel
@@ -286,9 +273,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideTop.Control = ToolPanel2
         AnchorSideTop.Side = asrBottom
         Left = 217
-        Height = 15
-        Top = 37
-        Width = 27
+        Height = 17
+        Top = 40
+        Width = 29
         BorderSpacing.Around = 6
         Caption = 'Host'
         ParentColor = False
@@ -298,9 +285,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideTop.Control = Edit5
         AnchorSideTop.Side = asrBottom
         Left = 217
-        Height = 15
-        Top = 89
-        Width = 23
+        Height = 17
+        Top = 102
+        Width = 26
         BorderSpacing.Around = 6
         Caption = 'Port'
         ParentColor = False
@@ -310,9 +297,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideTop.Control = Edit6
         AnchorSideTop.Side = asrBottom
         Left = 217
-        Height = 15
-        Top = 141
-        Width = 73
+        Height = 17
+        Top = 164
+        Width = 72
         BorderSpacing.Around = 6
         Caption = 'TDS Version'
         ParentColor = False
@@ -322,8 +309,8 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideTop.Control = ComboBox3
         AnchorSideTop.Side = asrBottom
         Left = 217
-        Height = 15
-        Top = 195
+        Height = 17
+        Top = 226
         Width = 83
         BorderSpacing.Around = 6
         Caption = 'Client charset'
@@ -336,9 +323,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
         Left = 223
-        Height = 25
-        Top = 58
-        Width = 489
+        Height = 33
+        Top = 63
+        Width = 485
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 3
@@ -351,9 +338,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
         Left = 223
-        Height = 25
-        Top = 110
-        Width = 489
+        Height = 33
+        Top = 125
+        Width = 485
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 4
@@ -366,9 +353,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
         Left = 223
-        Height = 27
-        Top = 216
-        Width = 489
+        Height = 33
+        Top = 249
+        Width = 485
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -382,9 +369,9 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
         Left = 223
-        Height = 27
-        Top = 162
-        Width = 489
+        Height = 33
+        Top = 187
+        Width = 485
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -395,60 +382,42 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 31
+    Height = 34
     Top = 0
     Width = 724
     Items = <    
       item
         Action = flOpen
         Visible = True
-        Left = 5
-        Height = 21
-        Top = 5
-        Width = 63
         ShowCaption = True
       end    
       item
         Action = flSave
         Visible = True
-        Left = 68
-        Height = 21
-        Top = 5
-        Width = 69
         ShowCaption = True
       end    
       item
         Visible = True
-        Left = 137
-        Height = 21
-        Top = 5
-        Width = 7
         ShowCaption = False
         ButtonStyle = tbrSeparator
       end    
       item
         Action = flSaveAs
         Visible = True
-        Left = 144
-        Height = 21
-        Top = 5
-        Width = 26
         ShowCaption = False
       end>
-    ImageList = fbManagerMainForm.ImageListNormal
-    ImageListSelected = fbManagerMainForm.ImageListSelected
     ToolBarStyle = tbsWindowsXP
     Options = [tpFlatBtns]
+    CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 31
+    ClientHeight = 34
     ClientWidth = 724
     TabOrder = 1
   end
   object MainMenu1: TMainMenu
-    Images = fbManagerMainForm.ImageListNormal
-    left = 248
-    top = 32
+    Left = 248
+    Top = 32
     object MenuItem1: TMenuItem
       Caption = 'Window'
       object MenuItem2: TMenuItem
@@ -473,9 +442,8 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
     end
   end
   object ActionList1: TActionList
-    Images = fbManagerMainForm.ImageListNormal
-    left = 304
-    top = 32
+    Left = 304
+    Top = 32
     object wndClose: TAction
       Category = 'Window'
       Caption = 'Close'
@@ -517,11 +485,11 @@ object mssqlFreeTDSConfigForm: TmssqlFreeTDSConfigForm
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cfg'
-    left = 305
-    top = 97
+    Left = 305
+    Top = 97
   end
   object SaveDialog1: TSaveDialog
-    left = 368
-    top = 97
+    Left = 368
+    Top = 97
   end
 end

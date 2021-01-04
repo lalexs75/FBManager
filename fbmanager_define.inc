@@ -33,8 +33,7 @@
 {$DEFINE MySQL}
 {$DEFINE SQLite3}
 
-//Как нить реализовать
-{.$DEFINE MS_SQL}
+{$DEFINE MS_SQL}
 
 
 {$if FPC_FULLVERSION<20701}

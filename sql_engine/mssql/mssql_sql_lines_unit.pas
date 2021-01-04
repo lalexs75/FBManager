@@ -25,7 +25,7 @@ unit mssql_sql_lines_unit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineCommonTypesUnit, TDSCTDataBase;
+  Classes, SysUtils, SQLEngineCommonTypesUnit;
 
 const
   sql_MSSQL_TablesList = 'select '+
@@ -91,14 +91,14 @@ type
   end;
 
   TKeywordRecords = array [0..CountKeyWords-1] of TKeywordRecord;
-
+(*
 const
   CTServerVersionStr : array [TCTServerVersion] of string =
     ('MS SQL 6.0', 'MS SQL 6.5', 'MS SQL 7.0', 'MS SQL 2000', 'MS SQL 2005', 'MS SQL 2008',
      'Sybase SQL 10', 'Sybase SQL 9.0');
 //   (svMSSQL6, svMSSQL65, svMSSQL70,
 //    svMSSQL2000, svMSSQL2005, svMSSQL2008, SybaseSQL10, SybaseSQL9);
-
+*)
 function CreateMSSQLKeyWords:TKeywordList;
 implementation
 
@@ -140,8 +140,8 @@ var
   i:integer;
 begin
   Result:=TKeywordList.Create(ktKeyword);
-  for i:= 0 to CountKeyWords-1 do
-    Result.WordList.Add(MSSQLKeywords[i].Key);
+  //for i:= 0 to CountKeyWords-1 do
+  //  Result.WordList.Add(MSSQLKeywords[i].Key);
 end;
 
 end.
