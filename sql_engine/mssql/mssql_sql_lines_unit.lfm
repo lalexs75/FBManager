@@ -1,0 +1,34 @@
+object mssqlSQLTexts: TmssqlSQLTexts
+  OldCreateOrder = False
+  Left = 567
+  Top = 276
+  Height = 298
+  HorizontalOffset = 504
+  VerticalOffset = 180
+  Width = 394
+  object sSchemas: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'ShemasAll'
+        Lines.Strings = (
+          'select'
+          '  sys.schemas.schema_id,'
+          '  sys.schemas.schema_id,'
+          '  sys.schemas.[name] as name,'
+          '  null as owner,'
+          ''
+          '  null as data,'
+          '  null as acl_list,'
+          '  null as description'
+          'from'
+          '  sys.schemas'
+          'order by'
+          '  sys.schemas.[name]'
+          ''
+        )
+      end>
+    Left = 40
+    Top = 24
+  end
+end

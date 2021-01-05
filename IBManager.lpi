@@ -914,6 +914,9 @@
         <Filename Value="sql_engine/mssql/mssql_sql_lines_unit.pas"/>
         <IsPartOfProject Value="True"/>
         <DisableI18NForLFM Value="True"/>
+        <ComponentName Value="mssqlSQLTexts"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
       </Unit>
       <Unit>
         <Filename Value="SqlEditor/dsdesignerunit.pas"/>
@@ -1921,6 +1924,10 @@
         <Filename Value="controls/MsSql/mssql_visualtoolscallunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="mssql_VisualToolsCallUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="sql_engine/mssql/mssql_sql_parser.pas"/>
+        <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
   </ProjectOptions>

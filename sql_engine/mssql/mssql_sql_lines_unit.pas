@@ -25,7 +25,7 @@ unit mssql_sql_lines_unit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineCommonTypesUnit;
+  Classes, SysUtils, SQLEngineCommonTypesUnit, RxTextHolder;
 
 const
   sql_MSSQL_TablesList = 'select '+
@@ -71,13 +71,13 @@ const
                          'order by '+
                          '  sys.all_objects.[name]';
 
-  sql_MSSQL_Schemas = 'select '+
+{  sql_MSSQL_Schemas = 'select '+
                       '  sys.schemas.schema_id, '+
                       '  sys.schemas.[name] '+
                       'from '+
                       '  sys.schemas '+
                       'order by '+
-                      '  sys.schemas.[name]';
+                      '  sys.schemas.[name]'; }
 
 
 const
@@ -99,8 +99,35 @@ const
 //   (svMSSQL6, svMSSQL65, svMSSQL70,
 //    svMSSQL2000, svMSSQL2005, svMSSQL2008, SybaseSQL10, SybaseSQL9);
 *)
+type
+
+  { TmssqlSQLTexts }
+
+  TmssqlSQLTexts = class(TDataModule)
+    sSchemas: TRxTextHolder;
+  private
+
+  public
+
+  end;
+
+function msSQLTexts: TmssqlSQLTexts;
+
 function CreateMSSQLKeyWords:TKeywordList;
 implementation
+uses CustApp;
+
+{$R *.lfm}
+
+var
+  FSQLTexts: TmssqlSQLTexts = nil;
+
+function msSQLTexts: TmssqlSQLTexts;
+begin
+  if not Assigned(FSQLTexts) then
+    FSQLTexts:=TmssqlSQLTexts.Create(CustomApplication);
+  Result:=FSQLTexts;
+end;
 
 const
   MSSQLKeywords : TKeywordRecords =

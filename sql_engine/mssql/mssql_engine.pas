@@ -24,42 +24,45 @@ unit mssql_engine;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, DB, Forms, SQLEngineInternalToolsUnit,
-  fdmAbstractEditorUnit, fdbm_PagedDialogPageUnit, sqldb, contnrs, ZDataset, ZConnection,
+  Classes, SysUtils, SQLEngineAbstractUnit, DB, SQLEngineInternalToolsUnit,
+  sqlObjects, ZDataset, ZConnection,
   mssql_ObjectsList, SQLEngineCommonTypesUnit;
 
 type
   TMSSQLEngine = class;
   TMSSQLSSchema = class;
 
-  { TMSSQLSchemasRoot }
+  { TMSSQLSSchemasRoot }
 
-  TMSSQLSchemasRoot = class(TDBRootObject)
+  TMSSQLSSchemasRoot = class(TDBRootObject)
   private
-    FSchemasList:TObjectList;
   protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
   public
     function GetObjectType: string;override;
-    procedure RefreshGroup; override;
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
   end;
 
   TMSSQLRootObject = class(TDBRootObject)
-
-  end;
-
-  { TMSSQLTablesRoot }
-
-  TMSSQLTablesRoot = class(TDBRootObject)
   private
     FSchemaId: integer;
     FSchema:TMSSQLSSchema;
   public
-    function GetObjectType: string;override;
-    procedure RefreshGroup; override;
-    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
     property SchemaId:integer read FSchemaId;
+  end;
+
+  { TMSSQLTablesRoot }
+
+  TMSSQLTablesRoot = class(TMSSQLRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
   { TMSSQLViewsRoot }
@@ -117,6 +120,7 @@ type
   public
     function GetObjectType: string;override;
     procedure RefreshGroup; override;
+    procedure RefreshObject; override;
     //function GetGrpObj(AItem:integer):TDBRootObject;override;
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
@@ -238,7 +242,7 @@ type
     //
     FStorepProc:TMSSQLStoredProcRoot;
     FViews:TMSSQLViewsRoot;
-    FSchemasRoot:TMSSQLSchemasRoot;
+    FSchemasRoot:TMSSQLSSchemasRoot;
 {    FOraUsers:TOraUsersRoot;}
 {    FOraSequences:TOraSequencesRoot;
     FOraTriggers:TOraTriggersRoot;}
@@ -292,7 +296,7 @@ type
 {    property TrigersRoot:TTrigersRoot read FTrigersRoot;
     property GeneratorsRoot:TGeneratorsRoot read FGeneratorsRoot;}
     property StoredProcRoot:TMSSQLStoredProcRoot read FStorepProc;
-    property SchemasRoot:TMSSQLSchemasRoot read FSchemasRoot;
+    property SchemasRoot:TMSSQLSSchemasRoot read FSchemasRoot;
 {    property ExceptionRoot:TExceptionRoot read FExceptionRoot;
     property UDFRoot:TUDFRoot read FUDFRoot;
     property RoleRoot:TRoleRoot read FRoleRoot;
@@ -300,7 +304,7 @@ type
   end;
 
 implementation
-uses fdbm_cf_LogUnit, cf_mssql_mainUnit, fbmStrConstUnit, mssql_sql_lines_unit,
+uses fbmStrConstUnit, mssql_sql_lines_unit,
   fbmToolsUnit, fbmSqlParserUnit;
 
 { TMSSQLEngine }
@@ -364,40 +368,56 @@ end;
 *)
 procedure TMSSQLEngine.RefreshObjectsBegin(const ASQLText: string;
   ASystemQuery: Boolean);
-//var
-//  FQuery:TTDSCTQuery;
-//  P, PriorP:PDBSQLObject;
-//  K:integer;
-//  DBObj:TDBObjectsItem;
+var
+  DBObj: TDBItems;
+  FQuery: TZQuery;
+  FDesc, FOwnData, FObjData, FAclList, FKind2: TField;
+  P: TDBItem;
 begin
-(*
-  DBObj:=FCashedItems.AddTypes('AllObjects');
-  if DBObj.CountUse=1 then
+  DBObj:=FCashedItems.AddTypes(ASQLText);
+  if DBObj.CountUse = 1 then
   begin
-    FQuery:=GetSqlQuery(sql_MSSQL_ObjListAll);
+{    if ASystemQuery then
+      FQuery:=GetSQLSysQuery(ASQLText)
+    else}
+      FQuery:=GetSQLQuery(ASQLText);
     FQuery.Open;
+
+    FDesc:=FQuery.FindField('description');
+    if not Assigned(FDesc) then
+      if FQuery.Fields.Count > 4 then
+        FDesc:=FQuery.Fields[4];
+    FOwnData:=FQuery.FindField('own_data');
+    FObjData:=FQuery.FindField('data');
+    FAclList:=FQuery.FindField('acl_list');
+    FKind2:=FQuery.FindField('kind_2');
+
     while not FQuery.Eof do
     begin
+      P:=DBObj.Add(FQuery.Fields[2].AsString);
+      P.ObjId:=FQuery.Fields[0].AsInteger;    //sys.all_objects.object_id
+      P.SchemeID:=FQuery.Fields[1].AsInteger; // sys.all_objects.schema_id
+      P.ObjType:=Trim(FQuery.Fields[3].AsString);   //sys.all_objects.[type]
 
-      New(P);
-      if not Assigned(DBObj.First) then
-        DBObj.First:=P
-      else
-        PriorP^.NextObj:=P;
+      if Assigned(FDesc) then
+        P.ObjDesc:=Trim(FDesc.AsString);
+      if Assigned(FOwnData) then
+        P.ObjOwnData:=FOwnData.AsInteger;
 
-      P^.NextObj:=nil;
-      P^.ObjId:=FQuery.AsInteger[0];    //sys.all_objects.object_id
-      P^.ObjName:=FQuery.AsString[1];   //sys.all_objects.[name]
-      P^.SchemeID:=FQuery.AsInteger[2]; // sys.all_objects.schema_id
-      P^.ObjType:=Trim(FQuery.AsString[3]);   //sys.all_objects.[type]
+      if Assigned(FObjData) then
+        P.ObjData:=FObjData.AsString;
+
+      if Assigned(FKind2) then
+        P.Kind2:=FKind2.AsString;
+
+      if Assigned(FAclList) then
+        P.ObjACLList:=FAclList.AsString;
 
       FQuery.Next;
-      PriorP:=P;
     end;
     FQuery.Close;
     FreeAndNil(FQuery);
   end;
-*)
 end;
 
 procedure TMSSQLEngine.RefreshObjectsEnd(const ASQLText:string);
@@ -461,10 +481,10 @@ end;
 *)
 procedure TMSSQLEngine.InitGroupsObjects;
 begin
+  AddObjectsGroup(FSchemasRoot, TMSSQLSSchemasRoot, TMSSQLSSchema, sSchemes);
   //AddObjectsGroup(FTablesRoot, TMSSQLTablesRoot, );
   //AddObjectsGroup(FStorepProc, TMSSQLStoredProcRoot.Create(Self);
   //AddObjectsGroup(FViews, TMSSQLViewsRoot.Create(Self);
-  //AddObjectsGroup(FSchemasRoot, TMSSQLSchemasRoot.Create(Self);
 end;
 
 procedure TMSSQLEngine.DoneGroupsObjects;
@@ -584,11 +604,21 @@ end;
 *)
 { TMSSQLTablesRoot }
 
+function TMSSQLTablesRoot.DBMSObjectsList: string;
+begin
+  Result:=inherited DBMSObjectsList;
+end;
+
+function TMSSQLTablesRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=inherited DBMSValidObject(AItem);
+end;
+
 function TMSSQLTablesRoot.GetObjectType: string;
 begin
   Result:='Table';
 end;
-
+(*
 procedure TMSSQLTablesRoot.RefreshGroup;
 //var
 //  U:TMSSQLTable;
@@ -608,7 +638,7 @@ begin
   //end;
   //FOwnerDB.RefreshObjectsEnd('');
 end;
-
+*)
 constructor TMSSQLTablesRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
@@ -1046,29 +1076,25 @@ begin
   FQuery.ExecSQL;
 end;
 
-{ TMSSQLSchemasRoot }
-(*
-function TMSSQLSchemasRoot.GetCountGrp: integer;
+{ TMSSQLSSchemasRoot }
+
+function TMSSQLSSchemasRoot.DBMSObjectsList: string;
 begin
-  Result:=FSchemasList.Count;
+  Result:=msSQLTexts.sSchemas['ShemasAll'];
 end;
 
-function TMSSQLSchemasRoot.GetImageIndex: integer;
+function TMSSQLSSchemasRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=21;
+  Result:=true;
 end;
-*)
-function TMSSQLSchemasRoot.GetObjectType: string;
+
+function TMSSQLSSchemasRoot.GetObjectType: string;
 begin
   Result:='Schema';
 end;
+
 (*
-function TMSSQLSchemasRoot.GetGrpObj(AItem: integer): TDBRootObject;
-begin
-  Result:=TDBRootObject(FSchemasList[AItem]);
-end;
-*)
-procedure TMSSQLSchemasRoot.RefreshGroup;
+procedure TMSSQLSSchemasRoot.RefreshGroup;
 //var
 //  Q:TTDSCTQuery;
 //  U:TMSSQLSSchema;
@@ -1089,21 +1115,19 @@ begin
   //  Q.Free;
   //end;
 end;
-
-constructor TMSSQLSchemasRoot.Create(AOwnerDB: TSQLEngineAbstract;
+*)
+constructor TMSSQLSSchemasRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
 begin
   inherited;
-  //FCaption:=sSchemes;
-  //FDBObjectKind:=okScheme;
-  //FOwnerDB:=AMSSQLEngine;
-  //FSchemasList:=TObjectList.Create(true);
+  FDBObjectKind:=okScheme;
+//  FDropCommandClass:=TPGSQLDropSchema;
 end;
 
-destructor TMSSQLSchemasRoot.Destroy;
+destructor TMSSQLSSchemasRoot.Destroy;
 begin
-  FreeAndNil(FSchemasList);
+  //FreeAndNil(FSchemasList);
   inherited Destroy;
 end;
 
@@ -1135,10 +1159,16 @@ end;
 
 procedure TMSSQLSSchema.RefreshGroup;
 begin
-  FTablesRoot.RefreshGroup;
+(*  FTablesRoot.RefreshGroup;
   FStorepProc.RefreshGroup;
-  FViews.RefreshGroup;
+  FViews.RefreshGroup; *)
 end;
+
+procedure TMSSQLSSchema.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
 (*
 function TMSSQLSSchema.GetGrpObj(AItem: integer): TDBRootObject;
 begin
@@ -1156,21 +1186,26 @@ constructor TMSSQLSSchema.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited;
-(*
-  FCaption:=ACaption;
+
+  if Assigned(ADBItem) then
+  begin
+    FSchemaId:=ADBItem.ObjId;
+    //FOwnerName:=ADBItem.ObjType;
+    //FACLListStr:=ADBItem.ObjACLList;
+  end;
+
+  //FACLList:=TPGACLList.Create(Self);
+  //FACLList.ObjectGrants:=[ogCreate, ogUsage, ogWGO];
+  //if FACLListStr<>'' then
+  //  TPGACLList(FACLList).ParseACLListStr(FACLListStr);
+
   FDBObjectKind:=okScheme;
-  FOwnerDB:=AMSSQLEngine;
 
-  FTablesRoot:=TMSSQLTablesRoot.Create(AMSSQLEngine);
-  FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
-  FViews:=TMSSQLViewsRoot.Create(AMSSQLEngine);
-  FTriggers:=TMSSQLTriggerRoot.Create(AMSSQLEngine);
+  FTablesRoot:=TMSSQLTablesRoot.Create(OwnerDB, TMSSQLTable, sTables, Self);
+  //FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
+  //FViews:=TMSSQLViewsRoot.Create(AMSSQLEngine);
+  //FTriggers:=TMSSQLTriggerRoot.Create(AMSSQLEngine);
 
-  FTablesRoot.FSchema:=Self;
-  FStorepProc.FSchema:=Self;
-  FViews.FSchema:=Self;
-  FTriggers.FSchema:=Self;
-*)
 end;
 
 destructor TMSSQLSSchema.Destroy;
