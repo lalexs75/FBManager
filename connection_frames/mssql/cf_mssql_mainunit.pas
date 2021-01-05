@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, {TDSCTDataBase, }fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
+  StdCtrls, fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
   mssql_engine, ZConnection, ZDataset;
 (*
 const
@@ -113,7 +113,6 @@ end;
 
 procedure Tcf_mssql_main_frame.edtDBNameDropDown(Sender: TObject);
 begin
-(*
   SetDataBaseProps(Test_DB);
   try
     Test_DB.Connected:=true;
@@ -123,7 +122,7 @@ begin
       quGetDBList.Open;
       while not quGetDBList.Eof do
       begin
-        edtDBName.Items.Add(quGetDBList.AsString[0]);
+        edtDBName.Items.Add(quGetDBList.Fields[0].AsString);
         quGetDBList.Next;
       end;
       quGetDBList.Close;
@@ -133,7 +132,6 @@ begin
       quGetDBList.Close;
     Test_DB.Connected:=false;
   end;
-*)
 end;
 
 procedure Tcf_mssql_main_frame.LoadConf;
@@ -151,12 +149,18 @@ var
   S: String;
 begin
   S:='/usr/lib64/libsybdb.so';
-  Test_DB.LibraryLocation:=S;
+  ADataBase.LibraryLocation:=S;
   //ADataBase.Database:=edtDBName.Text;
   //ADataBase.UserName:=edtUserName.Text;
   //ADataBase.Password:=edtPassword.Text;
   //ADataBase.ServerName:=cbServerName.Text;
-  //ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
+
+  ADataBase.HostName:=cbServerName.Text;
+  ADataBase.Database:=edtDBName.Text;
+  ADataBase.User:=edtUserName.Text;
+  ADataBase.Password:=edtPassword.Text;
+
+//  ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
 end;
 
 procedure Tcf_mssql_main_frame.Activate;
@@ -198,10 +202,6 @@ function Tcf_mssql_main_frame.TestConnection: boolean;
 begin
   Result:=false;
   SetDataBaseProps(Test_DB);
-  Test_DB.HostName:=cbServerName.Text;
-  Test_DB.Database:=edtDBName.Text;
-  Test_DB.User:=edtUserName.Text;
-  Test_DB.Password:=edtPassword.Text;
   //if edtPort.Value <> 0 then
   //  Test_DB.Port:=edtPort.Value;
 

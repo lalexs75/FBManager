@@ -254,6 +254,7 @@ type
 //    function GetRootObject(AIndex:integer): TDBRootObject; override;
 //    function GetConnected: boolean;override;
 //    procedure SetConnected(const AValue: boolean);override;
+    function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
@@ -285,7 +286,7 @@ type
     procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
     procedure RefreshObjectsEnd(const ASQLText:string);override;
 
-//    property MSSQLConnection: TTDSCTDataBase read FMSSQLConnection ;
+    property MSSQLConnection: TZConnection read FMSSQLConnection ;
 //    property ServerVersion:TCTServerVersion read FServerVersion write FServerVersion;
 //    property DomainsRoot:TDomainsRoot read FDomainsRoot;
 {    property TrigersRoot:TTrigersRoot read FTrigersRoot;
@@ -307,7 +308,7 @@ uses fdbm_cf_LogUnit, cf_mssql_mainUnit, fbmStrConstUnit, mssql_sql_lines_unit,
 procedure TMSSQLEngine.InternalInitMSSQLEngine;
 begin
   InitKeywords;
-  //FMSSQLConnection:=TTDSCTDataBase.Create(nil);
+  FMSSQLConnection:=TZConnection.Create(nil);
   //FMSSQLConnection.OnClientMsg:=@ClientMsg;
   //FMSSQLConnection.OnServerMsg:=@ServerMsg;
 
@@ -411,6 +412,34 @@ begin
   else
     Result:=20;
 end;
+
+function TMSSQLEngine.InternalSetConnected(const AValue: boolean): boolean;
+var
+  S: String;
+begin
+  if AValue then
+  begin
+    FMSSQLConnection.Properties.Clear;
+
+    S:='/usr/lib64/libsybdb.so';
+    FMSSQLConnection.LibraryLocation:=S;
+
+    FMSSQLConnection.Protocol:='FreeTDS_MsSQL>=2005';
+    FMSSQLConnection.Database:=DataBaseName;
+    FMSSQLConnection.User:=UserName;
+    FMSSQLConnection.Password:=Password;
+    //FMSSQLConnection.ServerVersion:=FServerVersion;
+    FMSSQLConnection.HostName:=ServerName;
+
+    FMSSQLConnection.Connected:=true;
+  end
+  else
+  begin
+    FMSSQLConnection.Connected:=false;
+  end;
+  Result:=FMSSQLConnection.Connected;
+end;
+
 (*
 function TMSSQLEngine.GetCountRootObjesct: integer;
 begin
@@ -429,28 +458,6 @@ begin
   end;
 end;
 
-function TMSSQLEngine.GetConnected: boolean;
-begin
-  Result:=FMSSQLConnection.Connected;
-end;
-
-procedure TMSSQLEngine.SetConnected(const AValue: boolean);
-begin
-  if AValue then
-  begin
-    FMSSQLConnection.Database:=DataBaseName;
-    FMSSQLConnection.UserName:=UserName;
-    FMSSQLConnection.Password:=Password;
-    FMSSQLConnection.ServerVersion:=FServerVersion;
-    FMSSQLConnection.ServerName:=ServerName;
-
-    FMSSQLConnection.Connected:=true;
-  end
-  else
-  begin
-    FMSSQLConnection.Connected:=false;
-  end;
-end;
 *)
 procedure TMSSQLEngine.InitGroupsObjects;
 begin
@@ -641,8 +648,8 @@ constructor TMSSQLTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited;
-  //FDataSet:=TTDSCTDataSet.Create(nil);
-  //FDataSet.DataBase:=TMSSQLEngine(FOwnerDB).FMSSQLConnection;
+  FDataSet:=TZQuery.Create(nil);
+  TZQuery(FDataSet).Connection:=TMSSQLEngine(OwnerDB).FMSSQLConnection;
 end;
 
 destructor TMSSQLTable.Destroy;
@@ -860,8 +867,8 @@ constructor TMSSQLView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited;
-  //FDataSet:=TTDSCTDataSet.Create(nil);
-  //FDataSet.DataBase:=TMSSQLEngine(FOwnerDB).FMSSQLConnection;
+  FDataSet:=TZQuery.Create(nil);
+  TZQuery(FDataSet).Connection:=TMSSQLEngine(OwnerDB).FMSSQLConnection;
 end;
 
 destructor TMSSQLView.Destroy;
