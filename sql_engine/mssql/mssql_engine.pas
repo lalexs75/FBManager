@@ -301,7 +301,7 @@ type
 
 implementation
 uses fdbm_cf_LogUnit, cf_mssql_mainUnit, fbmStrConstUnit, mssql_sql_lines_unit,
-  fbmToolsUnit;
+  fbmToolsUnit, fbmSqlParserUnit;
 
 { TMSSQLEngine }
 
@@ -1269,6 +1269,7 @@ begin
 end;
 *)
 initialization
-//  RegisterSQLEngine(TMSSQLEngine, sMSSQLServer);
+  //Register DML statments
+  RegisterSQLStatment(TMSSQLEngine, TSqlCommandSelect, 'SELECT'); //SELECT — получить строки из таблицы или представления
 end.
 
