@@ -96,6 +96,7 @@ type
   { TmssqlSQLTexts }
 
   TmssqlSQLTexts = class(TDataModule)
+    sTables: TRxTextHolder;
     sSystemObjects: TRxTextHolder;
     sSchemas: TRxTextHolder;
   private

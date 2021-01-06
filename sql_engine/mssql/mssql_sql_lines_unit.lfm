@@ -53,4 +53,24 @@ object mssqlSQLTexts: TmssqlSQLTexts
     Left = 40
     Top = 112
   end
+  object sTables: TRxTextHolder
+    Highlighter = rxSynNone
+    Items = <    
+      item
+        Caption = 'sTableCollumns'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  sys.columns'
+          'where'
+          '  object_id = :object_id'
+          'order by'
+          '  column_id'
+          ''
+        )
+      end>
+    Left = 40
+    Top = 184
+  end
 end

@@ -420,6 +420,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
   end;
 
   { TMSSQLAlterTable }
@@ -434,6 +435,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
   end;
 
   { TMSSQLDropTable }

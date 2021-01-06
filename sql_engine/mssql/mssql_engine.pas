@@ -25,7 +25,7 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, DB, SQLEngineInternalToolsUnit,
-  sqlObjects, ZDataset, ZConnection,
+  sqlObjects, ZDataset, ZConnection, fbmSqlParserUnit,
   mssql_ObjectsList, SQLEngineCommonTypesUnit;
 
 type
@@ -131,20 +131,23 @@ type
   TMSSQLTable = class(TDBTableObject)
   private
     FSchema:TMSSQLSSchema;
+    FOID: Integer;
   protected
-//    procedure InternalSetDescription;override;
-    procedure SetState(const AValue: TDBObjectState); override;
-//    procedure FieldListRefresh; override;
+    //procedure SetState(const AValue: TDBObjectState); override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+    procedure OnCloseEditorWindow; override; {???}
     procedure RefreshObject; override;
-//    function EditPage(AOwner:TComponent; AItem:integer):TEditorPage;override;
+    procedure RefreshFieldList; override;
 
     procedure Commit;override;
     procedure RollBack;override;
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
+    property Schema:TMSSQLSSchema read FSchema;
+    property OID: Integer read FOID;
   end;
 
   {  TMSSQLView  }
@@ -301,7 +304,7 @@ type
 
 implementation
 uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
-  fbmToolsUnit, fbmSqlParserUnit;
+  fbmToolsUnit;
 
 { TMSSQLRootObject }
 
@@ -633,21 +636,6 @@ end;
 
 { TMSSQLTable }
 (*
-procedure TMSSQLTable.InternalSetDescription;
-begin
-  //inherited InternalSetDescription;
-end;
-*)
-procedure TMSSQLTable.SetState(const AValue: TDBObjectState);
-begin
-  inherited SetState(AValue);
-//  FEditPageCount:=1;
-{  if AValue = sdboCreate then
-    FEditPageCount:=2
-  else
-    FEditPageCount:=9;}
-end;
-(*
 procedure TMSSQLTable.FieldListRefresh;
 begin
   if not Assigned(FFields) then
@@ -660,8 +648,56 @@ constructor TMSSQLTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited;
+
+
+//  FACLList:=TPGACLList.Create(Self);
+//  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+//    FACLListStr:=ADBItem.ObjACLList;
+(*
+    if ADBItem.ObjType = 'p' then
+      FDBObjectKind:=okPartitionTable; *)
+  end;
+(*
+
+  if FACLListStr<>'' then
+    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
+  FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
+  FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
+  FStorageParameters:=TStringList.Create;
+  FPartitionList:=TPGTablePartitionList.Create(Self);
+
+  UITableOptions:=[utReorderFields, utRenameTable,
+     utAddFields, utEditField, utDropFields,
+     utAddFK, utEditFK, utDropFK,
+     utAddUNQ, utDropUNQ,
+     utAlterAddFieldInitialValue,
+     utAlterAddFieldFK,
+     utSetFKName];
+*)
+  FSchema:=TMSSQLTablesRoot(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+(*  FSystemObject:=FSchema.SystemObject;
+  FInhTables:=TList.Create;
+  FRuleList:=TPGRuleList.Create(Self);
+  FCheckConstraints:=TList.Create;
+*)
+
   FDataSet:=TZQuery.Create(nil);
   TZQuery(FDataSet).Connection:=TMSSQLEngine(OwnerDB).FMSSQLConnection;
+(*  FDataSet.AfterOpen:=@DataSetAfterOpen;
+  ZUpdateSQL:=TZUpdateSQL.Create(nil);
+  TZQuery(FDataSet).UpdateObject:=ZUpdateSQL;
+
+  FTriggerList[0]:=TFPList.Create;  //before insert
+  FTriggerList[1]:=TFPList.Create;  //after insert
+  FTriggerList[2]:=TFPList.Create;  //before update
+  FTriggerList[3]:=TFPList.Create;  //after update
+  FTriggerList[4]:=TFPList.Create;  //before delete
+  FTriggerList[5]:=TFPList.Create;  //after delete
+*)
 end;
 
 destructor TMSSQLTable.Destroy;
@@ -674,20 +710,142 @@ begin
   Result:=sTable;
 end;
 
+function TMSSQLTable.CreateSQLObject: TSQLCommandDDL;
+begin
+  if State <> sdboCreate then
+  begin
+    Result:=TMSSQLAlterTable.Create(nil);
+    Result.Name:=Caption;
+    TMSSQLAlterTable(Result).SchemaName:=Schema.Caption;
+  end
+  else
+  begin
+    Result:=TMSSQLCreateTable.Create(nil);
+    TMSSQLCreateTable(Result).SchemaName:=Schema.Caption;
+//    TMSSQLCreateTable(Result).StorageParameters.Assign(FStorageParameters);
+  end;
+
+end;
+
+procedure TMSSQLTable.OnCloseEditorWindow;
+begin
+  inherited OnCloseEditorWindow;
+  if Assigned(FDataSet) and FDataSet.Active then
+    FDataSet.Close;
+end;
+
 procedure TMSSQLTable.RefreshObject;
 begin
-//  inherited Refresh;
-end;
-(*
-function TMSSQLTable.EditPage(AOwner: TComponent; AItem: integer): TEditorPage;
-begin
-  case AItem of
-    0:Result:=TfbmTableEditorDataFrame.CreatePage(AOwner, Self);
-  else
-    Result:=nil;
+  inherited RefreshObject;
+{  FACLListStr:='';
+  FPartitionedTypeName:='';
+  FPartitionedTable:=false;
+  FStorageParameters.Clear;
+  FAutovacuumOptions.Clear;
+  FToastAutovacuumOptions.Clear;
+  FPartitionedType:=ptNone;
+
+  FToastRelOID:=0; }
+  if State = sdboEdit then
+  begin
+(*    Q:=TMSSQLEngine(OwnerDB).GetSqlQuery(msSQLTexts.sTables['sTableCollumns']);
+    try
+      Q.ParamByName('object_id').AsInteger:=FOID;
+      Q.Open;
+      if Q.RecordCount>0 then
+      begin
+{        FDescription:=Q.FieldByName('description').AsString;
+        FOID:=Q.FieldByName('oid').AsInteger;
+        FOwnerID:=Q.FieldByName('relowner').AsInteger;
+        FTableSpaceID:=Q.FieldByName('reltablespace').AsInteger;
+        FTableTemp:=Q.FieldByName('relpersistence').AsString = 't';
+        FTableUnloged:=Q.FieldByName('relpersistence').AsString = 'u';
+
+        if TSQLEnginePostgre(OwnerDB).RealServerVersionMajor<12 then
+          FTableHasOIDS:=Q.FieldByName('relhasoids').AsBoolean;
+
+        FRelOptions:=Q.FieldByName('reloptions').AsString;
+        FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
+        FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
+        FACLListStr:=Q.FieldByName('relacl').AsString;
+
+        if TSQLEnginePostgre(OwnerDB).RealServerVersionMajor >= 10 then
+        begin
+          FPartitionedTable:=Q.FieldByName('relkind').AsString = 'p';
+          if FPartitionedTable then
+          begin
+            FPartitionedTypeName:=Trim(Q.FieldByName('partition_type').AsString);
+            if Copy(FPartitionedTypeName, 1, 5) = 'RANGE' then
+              FPartitionedType:=ptRange
+            else
+            if Copy(FPartitionedTypeName, 1, 4) = 'LIST' then
+              FPartitionedType:=ptList
+            else
+            if Copy(FPartitionedTypeName, 1, 4) = 'HASH' then
+              FPartitionedType:=ptHash
+            else
+              raise Exception.CreateFmt('Unknow partioton type - %s', [FPartitionedTypeName]);
+            //RANGE
+            //LIST (
+            //HASH
+          end;
+        end;
+      end;
+    finally
+      Q.Free;
+    end;
+
+    if FToastRelOptions<>'' then
+    begin
+      ParsePGArrayString(FToastRelOptions, FStorageParameters);
+      ToastAutovacuumOptions.LoadStorageParameters(FStorageParameters);
+      for i:=0 to FStorageParameters.Count-1 do
+        FStorageParameters[i]:='toast.' + FStorageParameters[i];
+    end;
+
+    if FRelOptions<>'' then
+    begin
+      ParsePGArrayString(FRelOptions, FStorageParameters);
+      AutovacuumOptions.LoadStorageParameters(FStorageParameters);
+    end;
+  *)
+    RefreshFieldList;
+{    RefreshInheritedTables;
+    FRuleList.RuleListRefresh;
+
+    if PartitionedTable then
+      RefreshPartitionals; }
   end;
 end;
+
+procedure TMSSQLTable.RefreshFieldList;
+var
+  FQuery: TZQuery;
+  R: TDBField;
+begin
+  if State <> sdboEdit then exit;
+  Fields.Clear;
+
+  FQuery:=TMSSQLEngine(OwnerDB).GetSqlQuery(msSQLTexts.sTables['sTableCollumns']);
+  try
+    FQuery.ParamByName('object_id').AsInteger:=FOID;
+    FQuery.Open;
+    while not FQuery.Eof do
+    begin
+      R:=Fields.Add('') {as TPGField};
+      R.FieldName:=FQuery.FieldByName('name').AsString;
+//      R.LoadfromDB(FQuery);
+      FQuery.Next;
+    end;
+  finally
+    FQuery.Free;
+  end;
+(*
+  RefreshConstraintPrimaryKey;
+  RefreshConstraintUnique;
 *)
+end;
+
 procedure TMSSQLTable.Commit;
 begin
 //  inherited Commit;
