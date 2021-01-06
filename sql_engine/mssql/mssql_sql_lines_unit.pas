@@ -60,7 +60,7 @@ const
                          '    sys.all_objects.schema_id = :schema_id '+
                          'order by '+
                          '  sys.all_objects.[name]';
-  sql_MSSQL_ObjListAll =
+{  sql_MSSQL_ObjListAll =
                          'select '+
                          '  sys.all_objects.object_id, '+
                          '  sys.all_objects.[name], '+
@@ -71,15 +71,7 @@ const
                          'order by '+
                          '  sys.all_objects.[name]';
 
-{  sql_MSSQL_Schemas = 'select '+
-                      '  sys.schemas.schema_id, '+
-                      '  sys.schemas.[name] '+
-                      'from '+
-                      '  sys.schemas '+
-                      'order by '+
-                      '  sys.schemas.[name]'; }
-
-
+}
 const
   CountKeyWords      = 28;
   CountKeyFunctions  = 79;
@@ -104,6 +96,7 @@ type
   { TmssqlSQLTexts }
 
   TmssqlSQLTexts = class(TDataModule)
+    sSystemObjects: TRxTextHolder;
     sSchemas: TRxTextHolder;
   private
 

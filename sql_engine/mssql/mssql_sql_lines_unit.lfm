@@ -31,4 +31,26 @@ object mssqlSQLTexts: TmssqlSQLTexts
     Left = 40
     Top = 24
   end
+  object sSystemObjects: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sObjListAll'
+        Lines.Strings = (
+          'select'
+          '  sys.all_objects.object_id,'
+          '  sys.all_objects.schema_id,'
+          '  sys.all_objects.name,'
+          '  sys.all_objects.type,'
+          '  null as acl_list,'
+          '  null as description'
+          'from'
+          '  sys.all_objects'
+          'order by'
+          '  sys.all_objects.name'
+        )
+      end>
+    Left = 40
+    Top = 112
+  end
 end

@@ -55,13 +55,35 @@ type
 
 implementation
 uses fbmStrConstUnit,
-  cf_mssql_mainUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit;
+  cf_mssql_mainUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
+  fbmTableEditorFieldsUnit,
+  fbmObjectEditorDescriptionUnit,
+  fbmTableEditorDataUnit,
+  fbmTableStatisticUnit,
+  fbmDDLPageUnit;
 
 { TMSSQLVisualTools }
 
 constructor TMSSQLVisualTools.Create(ASQLEngine: TSQLEngineAbstract);
 begin
   inherited Create(ASQLEngine);
+
+
+  RegisterObjEditor(TMSSQLTable,
+    [TfbmTableEditorFieldsFrame, TfbmObjectEditorDescriptionFrame],
+    [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame,
+     {TfdbmTableEditorPKListFrame,
+     TfdbmTableEditorForeignKeyFrame,
+     TfdbmTableEditorUniqueFrame,
+     TfbmpgTableCheckConstaintPage,
+     TfbmTableEditorIndexFrame,
+     TfbmTableEditorTriggersFrame,
+     TDependenciesFrame,
+     TfbmpgACLEditEditor,}
+     TfbmObjectEditorDescriptionFrame,
+     TfbmTableStatisticFrame,
+     TfbmDDLPage]);
+
 end;
 
 procedure TMSSQLVisualTools.InitSQLSyn(const ASynSQLSyn: TSynSQLSyn);
