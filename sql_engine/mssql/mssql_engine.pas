@@ -167,7 +167,7 @@ type
     FSchema:TMSSQLSSchema;
     FOID: Integer;
   protected
-    procedure SetState(const AValue: TDBObjectState); override;
+    function GetDDLAlter : string; override;
     function GetDBFieldClass: TDBFieldClass; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
@@ -175,6 +175,9 @@ type
     class function DBClassTitle:string;override;
     procedure RefreshObject; override;
     procedure RefreshFieldList; override;
+
+    function CreateSQLObject:TSQLCommandDDL; override;
+    function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean;override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -1032,9 +1035,9 @@ end;
 
 { TMSSQLView }
 
-procedure TMSSQLView.SetState(const AValue: TDBObjectState);
+function TMSSQLView.GetDDLAlter: string;
 begin
-  inherited SetState(AValue);
+  Result:=FSQLBody;
 end;
 
 function TMSSQLView.GetDBFieldClass: TDBFieldClass;
@@ -1066,6 +1069,22 @@ begin
   end;
 end;
 
+function TMSSQLView.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=TMSSQLCreateView.Create(nil);
+  TMSSQLCreateView(Result).SchemaName:=FSchema.Caption;
+  Result.Name:=Caption;
+end;
+
+function TMSSQLView.CompileSQLObject(ASqlObject: TSQLCommandDDL;
+  ASqlExecParam: TSqlExecParams): boolean;
+begin
+  if ASqlObject is TMSSQLCreateView then
+    TMSSQLCreateView(ASqlObject).SchemaName:=FSchema.Caption;
+
+  Result:=inherited CompileSQLObject(ASqlObject, ASqlExecParam);
+end;
+
 constructor TMSSQLView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -1081,7 +1100,7 @@ begin
   UITableOptions:=[];
 //  FStorageParameters:=TStringList.Create;
 
-  FSchema:=TMSSQLTablesRoot(AOwnerRoot).FSchema;
+  FSchema:=TMSSQLViewsRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
 
 //  FACLList:=TPGACLList.Create(Self);
@@ -1103,13 +1122,14 @@ end;
 
 class function TMSSQLView.DBClassTitle: string;
 begin
-  Result:=sView;
+  Result:='View';
 end;
 
 procedure TMSSQLView.RefreshObject;
 var
   Q: TZQuery;
 begin
+  inherited RefreshObject;
 //  FStorageParameters.Clear;
 //  FRelOptions:='';
 //  FToastRelOID:=0;
@@ -1378,7 +1398,7 @@ begin
   FDBObjectKind:=okScheme;
 
   FTablesRoot:=TMSSQLTablesRoot.Create(OwnerDB, TMSSQLTable, sTables, Self);
-  FViews:=TMSSQLViewsRoot.Create(OwnerDB, TMSSQLTable, sViews, Self);
+  FViews:=TMSSQLViewsRoot.Create(OwnerDB, TMSSQLView, sViews, Self);
   //FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
   //FTriggers:=TMSSQLTriggerRoot.Create(AMSSQLEngine);
 

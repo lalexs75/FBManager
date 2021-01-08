@@ -463,6 +463,7 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SQLCommandSelect:TSQLCommandAbstractSelect read FSQLCommandSelect;
+    property SchemaName;
   end;
 
   { TMSSQLAlterView }
