@@ -118,13 +118,24 @@ type
     procedure SetSchemaId(const AValue: integer);
   protected
   public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
+    destructor Destroy; override;
+
     function GetObjectType: string;override;
     procedure RefreshGroup; override;
     procedure RefreshObject; override;
-    //function GetGrpObj(AItem:integer):TDBRootObject;override;
-    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
-    destructor Destroy; override;
     property SchemaId:integer read FSchemaId write SetSchemaId;
+  end;
+
+  { TMSSQLField }
+
+  TMSSQLField = class(TDBField)
+  private
+    procedure LoadfromDB(DS:TDataSet);
+  protected
+    procedure SetFieldDescription(const AValue: string);override;
+  public
+    function DDLTypeStr:string; override;
   end;
 
   {  TMSSQLTable  }
@@ -133,7 +144,7 @@ type
     FSchema:TMSSQLSSchema;
     FOID: Integer;
   protected
-    //procedure SetState(const AValue: TDBObjectState); override;
+    function GetDBFieldClass: TDBFieldClass; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -151,19 +162,19 @@ type
   end;
 
   {  TMSSQLView  }
-  TMSSQLView = class(TDBTableObject)
+  TMSSQLView = class(TDBViewObject)
   private
     FSchema:TMSSQLSSchema;
+    FOID: Integer;
   protected
-//    procedure InternalSetDescription;override;
     procedure SetState(const AValue: TDBObjectState); override;
-//    procedure FieldListRefresh; override;
+    function GetDBFieldClass: TDBFieldClass; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
     procedure RefreshObject; override;
-//    function EditPage(AOwner:TComponent; AItem:integer):TEditorPage;override;
+    procedure RefreshFieldList; override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -213,9 +224,9 @@ type
 
   TMSSQLQueryControl = class(TSQLQueryControl)
   private
-    FQuery:TZQuery;
-    FParams:TParams;
-    procedure SetParamValues;
+    FSQLQuery:TZQuery;
+//    FParams:TParams;
+//    procedure SetParamValues;
   protected
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -227,6 +238,7 @@ type
   public
     constructor Create(AOwner:TSQLEngineAbstract);
     destructor Destroy; override;
+    function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean; override;
     procedure CommitTransaction;override;
     procedure RolbackTransaction;override;
     procedure FetchAll;override;
@@ -289,7 +301,7 @@ type
 
     procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
 
-    property MSSQLConnection: TZConnection read FMSSQLConnection ;
+    property MSSQLConnection: TZConnection read FMSSQLConnection;
 //    property ServerVersion:TCTServerVersion read FServerVersion write FServerVersion;
 //    property DomainsRoot:TDomainsRoot read FDomainsRoot;
 {    property TrigersRoot:TTrigersRoot read FTrigersRoot;
@@ -305,6 +317,23 @@ type
 implementation
 uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
   fbmToolsUnit;
+
+{ TMSSQLField }
+
+procedure TMSSQLField.LoadfromDB(DS: TDataSet);
+begin
+  //
+end;
+
+procedure TMSSQLField.SetFieldDescription(const AValue: string);
+begin
+  inherited SetFieldDescription(AValue);
+end;
+
+function TMSSQLField.DDLTypeStr: string;
+begin
+  Result:=inherited DDLTypeStr;
+end;
 
 { TMSSQLRootObject }
 
@@ -634,16 +663,13 @@ begin
 //  FDropCommandClass:=TPGSQLDropTable;
 end;
 
-{ TMSSQLTable }
-(*
-procedure TMSSQLTable.FieldListRefresh;
+function TMSSQLTable.GetDBFieldClass: TDBFieldClass;
 begin
-  if not Assigned(FFields) then
-    FFields:=TFieldItems.Create;
-  FFields.Clear;
-//  inherited FieldListRefresh;
+  Result:=TMSSQLField;
 end;
-  *)
+
+{ TMSSQLTable }
+
 constructor TMSSQLTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -821,7 +847,7 @@ end;
 procedure TMSSQLTable.RefreshFieldList;
 var
   FQuery: TZQuery;
-  R: TDBField;
+  R: TMSSQLField;
 begin
   if State <> sdboEdit then exit;
   Fields.Clear;
@@ -832,9 +858,9 @@ begin
     FQuery.Open;
     while not FQuery.Eof do
     begin
-      R:=Fields.Add('') {as TPGField};
+      R:=Fields.Add('') as TMSSQLField;
       R.FieldName:=FQuery.FieldByName('name').AsString;
-//      R.LoadfromDB(FQuery);
+      R.LoadfromDB(FQuery);
       FQuery.Next;
     end;
   finally
@@ -848,12 +874,16 @@ end;
 
 procedure TMSSQLTable.Commit;
 begin
-//  inherited Commit;
+  if TMSSQLEngine(OwnerDB).MSSQLConnection.InTransaction then
+    TMSSQLEngine(OwnerDB).MSSQLConnection.Commit;
+  inherited Commit;
 end;
 
 procedure TMSSQLTable.RollBack;
 begin
-//  inherited RollBack;
+  if TMSSQLEngine(OwnerDB).MSSQLConnection.InTransaction then
+    TMSSQLEngine(OwnerDB).MSSQLConnection.Rollback;
+  inherited RollBack;
 end;
 
 function TMSSQLTable.DataSet(ARecCountLimit: Integer): TDataSet;
@@ -1001,31 +1031,69 @@ begin
 end;
 
 { TMSSQLView }
-(*
-procedure TMSSQLView.InternalSetDescription;
-begin
-  //inherited InternalSetDescription;
-end;
-*)
+
 procedure TMSSQLView.SetState(const AValue: TDBObjectState);
 begin
   inherited SetState(AValue);
-//  FEditPageCount:=1;
 end;
-(*
-procedure TMSSQLView.FieldListRefresh;
+
+function TMSSQLView.GetDBFieldClass: TDBFieldClass;
 begin
-  if not Assigned(FFields) then
-    FFields:=TFieldItems.Create;
-  FFields.Clear;
+  Result:=TMSSQLField;
 end;
-*)
+
+procedure TMSSQLView.RefreshFieldList;
+var
+  FQuery: TZQuery;
+  R: TMSSQLField;
+begin
+  if State <> sdboEdit then exit;
+  Fields.Clear;
+
+  FQuery:=TMSSQLEngine(OwnerDB).GetSqlQuery(msSQLTexts.sTables['sTableCollumns']);
+  try
+    FQuery.ParamByName('object_id').AsInteger:=FOID;
+    FQuery.Open;
+    while not FQuery.Eof do
+    begin
+      R:=Fields.Add('') as TMSSQLField;
+      R.FieldName:=FQuery.FieldByName('name').AsString;
+      R.LoadfromDB(FQuery);
+      FQuery.Next;
+    end;
+  finally
+    FQuery.Free;
+  end;
+end;
+
 constructor TMSSQLView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited;
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+  end;
+
   FDataSet:=TZQuery.Create(nil);
   TZQuery(FDataSet).Connection:=TMSSQLEngine(OwnerDB).FMSSQLConnection;
+
+  UITableOptions:=[];
+//  FStorageParameters:=TStringList.Create;
+
+  FSchema:=TMSSQLTablesRoot(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+
+//  FACLList:=TPGACLList.Create(Self);
+//  FACLList.ObjectGrants:=[ogInsert, ogSelect, ogUpdate, ogDelete, ogReference, ogTrigger];
+//  if FACLListStr<>'' then
+//    TPGACLList(FACLList).ParseACLListStr(FACLListStr);
+
+//  FRuleList:=TPGRuleList.Create(Self);
+
+//  FSystemObject:=FSchema.SystemObject;
+//  FDataSet.AfterOpen:=@DataSetAfterOpen;
+
 end;
 
 destructor TMSSQLView.Destroy;
@@ -1039,27 +1107,56 @@ begin
 end;
 
 procedure TMSSQLView.RefreshObject;
+var
+  Q: TZQuery;
 begin
-  //inherited Refresh;
-end;
-(*
-function TMSSQLView.EditPage(AOwner: TComponent; AItem: integer): TEditorPage;
-begin
-  case AItem of
-    0:Result:=TfbmTableEditorDataFrame.CreatePage(AOwner, Self);
-  else
-    Result:=nil;
+//  FStorageParameters.Clear;
+//  FRelOptions:='';
+//  FToastRelOID:=0;
+//  FToastRelOptions:='';
+//  FACLListStr:='';
+
+  if State <> sdboEdit then exit;
+  Q:=TMSSQLEngine(OwnerDB).GetSqlQuery(msSQLTexts.sTables['sViewDefenition']);
+  try
+    Q.ParamByName('object_id').AsInteger:=FOID;
+//    Q.ParamByName('relnamespace').AsInteger:=FSchema.SchemaId;
+    //if Self is TPGMatView then
+    //  Q.ParamByName('relkind').AsString:='m'
+    //else
+    //  Q.ParamByName('relkind').AsString:='v';
+    Q.Open;
+    if Q.RecordCount>0 then
+    begin
+//      FDescription:=Q.FieldByName('description').AsString;
+      FOID:=Q.FieldByName('object_id').AsInteger;
+//      S:=Q.FieldByName('object_name').AsString;
+      FSQLBody:=Q.FieldByName('definition').AsString;
+//      FRelOptions:=Q.FieldByName('reloptions').AsString;
+//      FOwnerID:=Q.FieldByName('relowner').AsInteger;
+
+//      FToastRelOID:=Q.FieldByName('reltoastrelid').AsInteger;
+//      FToastRelOptions:=Q.FieldByName('tst_reloptions').AsString;
+//      FACLListStr:=Q.FieldByName('relacl').AsString;
+    end;
+  finally
+    Q.Free;
   end;
+  RefreshFieldList;
 end;
-*)
+
 procedure TMSSQLView.Commit;
 begin
-//  inherited Commit;
+  if TMSSQLEngine(OwnerDB).MSSQLConnection.InTransaction then
+    TMSSQLEngine(OwnerDB).MSSQLConnection.Rollback;
+  inherited Commit;
 end;
 
 procedure TMSSQLView.RollBack;
 begin
-//  inherited RollBack;
+  if TMSSQLEngine(OwnerDB).MSSQLConnection.InTransaction then
+    TMSSQLEngine(OwnerDB).MSSQLConnection.Rollback;
+  inherited RollBack;
 end;
 
 function TMSSQLView.DataSet(ARecCountLimit: Integer): TDataSet;
@@ -1082,7 +1179,7 @@ begin
 end;
 
 { TMSSQLQueryControl }
-
+(*
 procedure TMSSQLQueryControl.SetParamValues;
 var
   i:integer;
@@ -1098,10 +1195,10 @@ begin
     end;
   end;
 end;
-
+*)
 function TMSSQLQueryControl.GetDataSet: TDataSet;
 begin
-  Result:=FQuery;
+  Result:=FSQLQuery;
 end;
 
 function TMSSQLQueryControl.GetQueryPlan: string;
@@ -1113,60 +1210,67 @@ end;
 
 function TMSSQLQueryControl.GetQuerySQL: string;
 begin
-  Result:=FQuery.SQL.Text;
+  Result:=FSQLQuery.SQL.Text;
 end;
 
 procedure TMSSQLQueryControl.SetQuerySQL(const AValue: string);
-var
-  P:TParam;
-  I:integer;
 begin
-  FQuery.SQL.Text:=AValue;
-(*  FParams.Clear;
-  for i:=0 to FQuery.Params.Count - 1 do
-  begin
-    P:=TParam.Create(FParams);
-    case FQuery.Params[i].DataType of
-      cptInteger  : P.DataType:=ftInteger;
-      cptString   : P.DataType:=ftString;
-      cptFloat    : P.DataType:=ftFloat;
-      cptDateTime : P.DataType:=ftDateTime;
-      cptCurrency : P.DataType:=ftCurrency;
-    end;
-    P.Name:=FQuery.Params[i].Name;
-  end; *)
+  FSQLQuery.Active:=false;
+  FSQLQuery.SQL.Text:=AValue;
 end;
 
 function TMSSQLQueryControl.GetParam(AIndex: integer): TParam;
 begin
-  Result:=FParams[AIndex];
+  Result:=FSQLQuery.Params[AIndex];
 end;
 
 function TMSSQLQueryControl.GetParamCount: integer;
 begin
-  Result:=FParams.Count;
+  Result:=FSQLQuery.Params.Count;
 end;
 
 procedure TMSSQLQueryControl.SetActive(const AValue: boolean);
 begin
-  SetParamValues;
+//  SetParamValues;
+  if AValue then
+    FSQLQuery.SortedFields:='';
   inherited SetActive(AValue);
 end;
 
 constructor TMSSQLQueryControl.Create(AOwner: TSQLEngineAbstract);
 begin
   inherited Create(AOwner);
-  FQuery:=TZQuery.Create(nil);
-  FQuery.Connection:=TMSSQLEngine(Owner).FMSSQLConnection;
+  FSQLQuery:=TZQuery.Create(nil);
+  FSQLQuery.Connection:=TMSSQLEngine(Owner).FMSSQLConnection;
 //  FQuery.Transaction:=FFBTransaction;
-  FParams:=TParams.Create(nil);
+//  FParams:=TParams.Create(nil);
 end;
 
 destructor TMSSQLQueryControl.Destroy;
 begin
-  FreeAndNil(FParams);
-  FreeAndNil(FQuery);
+//  FreeAndNil(FParams);
+  FreeAndNil(FSQLQuery);
   inherited Destroy;
+end;
+
+function TMSSQLQueryControl.LoadStatistic(out StatRec: TQueryStatRecord;
+  const SQLCommand: TSQLCommandAbstract): boolean;
+begin
+  Result:=inherited LoadStatistic(StatRec, SQLCommand);
+  if SQLCommand is TSQLCommandUpdate then
+    StatRec.UpdatedRows:=FSQLQuery.RowsAffected
+  else
+  if SQLCommand is TSQLCommandInsert then
+    StatRec.InsertedRows:=FSQLQuery.RowsAffected
+  else
+  if SQLCommand is TSQLCommandDelete then
+    StatRec.DeletedRows:=FSQLQuery.RowsAffected
+  else
+  if (SQLCommand is TSQLCommandAbstractSelect) and (TSQLCommandAbstractSelect(SQLCommand).Selectable) and (FSQLQuery.Active) then
+    StatRec.SelectedRows:=FSQLQuery.RecordCount
+  else
+    Exit;
+  Result:=true;
 end;
 
 procedure TMSSQLQueryControl.CommitTransaction;
@@ -1180,27 +1284,18 @@ begin
 end;
 
 procedure TMSSQLQueryControl.FetchAll;
-var
-  P:TBookmark;
 begin
-  P:=FQuery.GetBookmark;
-  try
-    FQuery.Last;
-  finally
-    FQuery.GotoBookmark(P);
-    FQuery.FreeBookmark(P);
-  end;
+  FSQLQuery.FetchAll;
 end;
 
 procedure TMSSQLQueryControl.Prepare;
 begin
-  FQuery.Prepare;
+  FSQLQuery.Prepare;
 end;
 
 procedure TMSSQLQueryControl.ExecSQL;
 begin
-  SetParamValues;
-  FQuery.ExecSQL;
+  FSQLQuery.ExecSQL;
 end;
 
 { TMSSQLSSchemasRoot }
@@ -1263,19 +1358,6 @@ begin
   inherited RefreshObject;
 end;
 
-(*
-function TMSSQLSSchema.GetGrpObj(AItem: integer): TDBRootObject;
-begin
-  case AItem of
-    0:Result:=FTablesRoot;
-    1:Result:=FStorepProc;
-    2:Result:=FViews;
-    3:Result:=FTriggers;
-  else
-    Result:=nil;
-  end;
-end;
-*)
 constructor TMSSQLSSchema.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin

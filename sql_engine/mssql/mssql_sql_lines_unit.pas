@@ -28,51 +28,6 @@ uses
   Classes, SysUtils, SQLEngineCommonTypesUnit, RxTextHolder;
 
 const
-  sql_MSSQL_TablesList = 'select '+
-                         '  sys.tables.[name], '+
-                         '  sys.tables.schema_id '+
-                         'from '+
-                         '  sys.tables '+
-                         'order by '+
-                         '  sys.tables.[name]';
-
-  sql_MSSQL_ObjList =
-{                         'select '+
-                         '  sysobjects.id, '+
-                         '  sysobjects.name, '+
-                         '  sysobjects.uid '+
-                         'from '+
-                         '  sysobjects '+
-                         'where '+
-                         '  sysobjects.[type] = :ObjName '+
-                         'order by '+
-                         '  sysobjects.name';}
-
-    'select '+
-                         '  sys.all_objects.object_id, '+
-                         '  sys.all_objects.[name], '+
-                         '  sys.all_objects.schema_id '+
-                         'from '+
-                         '  sys.all_objects '+
-                         'where '+
-                         '    sys.all_objects.[type] = :ObjName '+
-                         '  and '+
-                         '    sys.all_objects.schema_id = :schema_id '+
-                         'order by '+
-                         '  sys.all_objects.[name]';
-{  sql_MSSQL_ObjListAll =
-                         'select '+
-                         '  sys.all_objects.object_id, '+
-                         '  sys.all_objects.[name], '+
-                         '  sys.all_objects.schema_id, '+
-                         '  sys.all_objects.[type] '+
-                         'from '+
-                         '  sys.all_objects '+
-                         'order by '+
-                         '  sys.all_objects.[name]';
-
-}
-const
   CountKeyWords      = 28;
   CountKeyFunctions  = 79;
 

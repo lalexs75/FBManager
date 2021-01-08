@@ -54,7 +54,7 @@ object mssqlSQLTexts: TmssqlSQLTexts
     Top = 112
   end
   object sTables: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'sTableCollumns'
@@ -67,6 +67,23 @@ object mssqlSQLTexts: TmssqlSQLTexts
           '  object_id = :object_id'
           'order by'
           '  column_id'
+          ''
+        )
+      end    
+      item
+        Caption = 'sViewDefenition'
+        Lines.Strings = (
+          'select'
+          '  sql_modules.object_id,'
+          '  object_name(sql_modules.object_id) as object_name,'
+          '  objects.type,'
+          '  objects.type_desc,'
+          '  sql_modules.definition'
+          'from'
+          '  sys.sql_modules'
+          '  join sys.objects  on sql_modules.object_id = objects.object_id'
+          'where'
+          '  sql_modules.object_id = :object_id'
           ''
         )
       end>
