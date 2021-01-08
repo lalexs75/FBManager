@@ -1322,8 +1322,8 @@ type
   TPGQueryControl = class(TSQLQueryControl)
   private
     FSQLQuery: TZQuery;
-    FParams:TParams;
-    procedure SetParamValues;
+//    FParams:TParams;
+//    procedure SetParamValues;
   protected
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -4628,12 +4628,12 @@ begin
 end;
 
 { TPGQueryControl }
-
+(*
 procedure TPGQueryControl.SetParamValues;
 begin
 
 end;
-
+*)
 function TPGQueryControl.GetDataSet: TDataSet;
 begin
   Result:=FSQLQuery;
@@ -4687,7 +4687,7 @@ end;
 
 procedure TPGQueryControl.SetActive(const AValue: boolean);
 begin
-  SetParamValues;
+//  SetParamValues;
   if AValue then
     FSQLQuery.SortedFields:='';
   inherited SetActive(AValue);
