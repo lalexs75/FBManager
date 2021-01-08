@@ -324,8 +324,106 @@ uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
 { TMSSQLField }
 
 procedure TMSSQLField.LoadfromDB(DS: TDataSet);
+var
+  S: String;
 begin
-  //
+(*
+  object_id,
+  name,
+  column_id,
+  system_type_id,
+  user_type_id,
+  max_length,
+  precision,
+  scale,
+  collation_name,
+  is_nullable,
+  is_ansi_padded,
+  is_rowguidcol,
+  is_identity,
+  is_computed,
+  is_filestream,
+  is_replicated,
+  is_non_sql_subscribed,
+  is_merge_published,
+  is_dts_replicated,
+  is_xml_document,
+  xml_collection_id,
+  default_object_id,
+  rule_object_id,
+  is_sparse,
+  is_column_set,
+  generated_always_type,
+  generated_always_type_desc,
+  encryption_type,
+  encryption_type_desc,
+  encryption_algorithm_name,
+  column_encryption_key_id,
+  column_encryption_key_database_name,
+  is_hidden,
+  is_masked,
+  graph_type,
+  graph_type_desc,
+  types_name,
+  max_length_1
+*)
+  FieldName:=DS.FieldByName('name').AsString;
+  FieldNum:=DS.FieldByName('column_id').AsInteger;
+(*
+  if DS.FieldByName('typtype').AsString = 'd' then
+  begin
+    FieldTypeDomain:=DS.FieldByName('typnamespace_name').AsString + '.' + DS.FieldByName('typname').AsString;
+    FieldTypeName:=DS.FieldByName('base_type').AsString;
+    FieldTypeShceme:=DS.FieldByName('typnamespace').AsInteger;
+    FDomainID:=DS.FieldByName('atttypid').AsInteger;     //!!check!
+    FieldNotNull:=false;
+  end
+  else
+  begin *)
+//    FDomainID:=-1;
+    { TODO : Пока не рализаеся тип char и "char" - надо исправить }
+    //FieldTypeName:=DS.FieldByName('typname').AsString;
+    S:=DS.FieldByName('types_name').AsString;
+(*    FIsArray:=false;
+    if (S<>'') and (S[1]='_') then
+    begin
+      FIsArray:=true;
+      S:=Copy(S, 2, Length(S));
+    end;
+
+    if S = 'bpchar' then
+      S:='char';
+
+    if FIsArray then
+      S:=S + '[]'; *)
+
+    FieldTypeName:=S;
+//    FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
+//  end;
+  FieldNotNull:=not DS.FieldByName('is_nullable').AsBoolean;
+(*
+  if DS.FieldByName('atttypmod').AsInteger<>-1 then
+  begin
+    if FieldTypeRecord.DBType = ftFloat then
+    begin
+      FieldSize:=(DS.FieldByName('atttypmod').AsInteger and $FFFF0000) shr 16;
+      FieldPrec:=(DS.FieldByName('atttypmod').AsInteger and $FFFF) - 4;
+    end
+    else
+      FieldSize:=(DS.FieldByName('atttypmod').AsInteger and $FFFF) - 4;
+  end;
+
+  if (DS.FieldByName('attcollation').AsInteger > 0) then
+    FieldCollateName:=DS.FieldByName('collation_nspn').AsString +  '.' + DS.FieldByName('collation_name').AsString;
+
+
+  FieldDefaultValue:=DS.FieldByName('adsrc').AsString;
+
+  FFieldDescription:=DS.FieldByName('description').AsString;
+
+  if not DS.FieldByName('attislocal').AsBoolean then
+    IOType:=spvtInput; //not local
+*)
 end;
 
 procedure TMSSQLField.SetFieldDescription(const AValue: string);

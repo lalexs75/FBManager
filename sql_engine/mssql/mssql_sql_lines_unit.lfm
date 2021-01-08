@@ -60,13 +60,17 @@ object mssqlSQLTexts: TmssqlSQLTexts
         Caption = 'sTableCollumns'
         Lines.Strings = (
           'select'
-          '  *'
+          '  all_columns.*,'
+          '  types.name as types_name,'
+          '  types.max_length'
           'from'
-          '  sys.columns'
+          '  sys.all_columns'
+          '  inner join sys.types on (all_columns.system_type_id = types.system_type_id)'
           'where'
-          '  object_id = :object_id'
+          '  object_id =  :object_id'
           'order by'
           '  column_id'
+          ''
           ''
         )
       end    
