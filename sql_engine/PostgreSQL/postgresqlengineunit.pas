@@ -8561,7 +8561,7 @@ begin
     FieldTypeName:=DS.FieldByName('base_type').AsString;
     FieldTypeShceme:=DS.FieldByName('typnamespace').AsInteger;
     FDomainID:=DS.FieldByName('atttypid').AsInteger;     //!!check!
-    FieldNotNull:=false;
+//    FieldNotNull:=false;
   end
   else
   begin
@@ -8583,7 +8583,7 @@ begin
       S:=S + '[]';
 
     FieldTypeName:=S;
-    FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
+//    FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
   end;
   FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
 
