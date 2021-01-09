@@ -145,6 +145,7 @@ type
     FOID: Integer;
   protected
     function GetDBFieldClass: TDBFieldClass; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -169,6 +170,7 @@ type
   protected
     function GetDDLAlter : string; override;
     function GetDBFieldClass: TDBFieldClass; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -769,6 +771,13 @@ begin
   Result:=TMSSQLField;
 end;
 
+procedure TMSSQLTable.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
+end;
+
 { TMSSQLTable }
 
 constructor TMSSQLTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
@@ -1141,6 +1150,13 @@ end;
 function TMSSQLView.GetDBFieldClass: TDBFieldClass;
 begin
   Result:=TMSSQLField;
+end;
+
+procedure TMSSQLView.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FOID));
+  Statistic.AddValue(sSchemaOID, IntToStr(FSchema.SchemaId));
 end;
 
 procedure TMSSQLView.RefreshFieldList;
