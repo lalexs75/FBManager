@@ -490,9 +490,121 @@ type
   public
     property SchemaName;
   end;
+
+  { TMSSQLExec }
+
+  TMSSQLExec = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLGO }
+
+  TMSSQLGO = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
 implementation
 
 uses SQLEngineCommonTypesUnit;
+
+{ TMSSQLGO }
+
+procedure TMSSQLGO.InitParserTree;
+begin
+  (*
+  GO [count]
+  *)
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'GO', [toFirstToken, toFindWordLast], 0);
+end;
+
+procedure TMSSQLGO.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLGO.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLGO.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TMSSQLGO.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLExec }
+
+procedure TMSSQLExec.InitParserTree;
+var
+  FSQLTokens1, FSQLTokens2: TSQLTokenRecord;
+begin
+  (*
+  -- In-Memory OLTP
+
+  Execute a natively compiled, scalar user-defined function
+  [ { EXEC | EXECUTE } ]
+      {
+        [ @return_status = ]
+        { module_name | @module_name_var }
+          [ [ @parameter = ] { value
+                             | @variable
+                             | [ DEFAULT ]
+                             }
+          ]
+        [ ,...n ]
+        [ WITH <execute_option> [ ,...n ] ]
+      }
+  <execute_option>::=
+  {
+      | { RESULT SETS UNDEFINED }
+      | { RESULT SETS NONE }
+      | { RESULT SETS ( <result_sets_definition> [,...n ] ) }
+  }
+  *)
+
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'EXEC', [toFirstToken, toFindWordLast], 0);
+  FSQLTokens2:=AddSQLTokens(stKeyword, nil, 'EXECUTE', [toFirstToken, toFindWordLast], 0);
+end;
+
+procedure TMSSQLExec.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLExec.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLExec.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TMSSQLExec.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropView }
 

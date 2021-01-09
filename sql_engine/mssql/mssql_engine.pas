@@ -1612,5 +1612,8 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateView, 'CREATE VIEW');             //CREATE VIEW — создать представление
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterView, 'ALTER VIEW');               //ALTER VIEW — изменить определение представления
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropView, 'DROP VIEW');                 //DROP VIEW — удалить представление
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO
 end.
 
