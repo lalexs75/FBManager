@@ -536,6 +536,8 @@ uses SQLEngineCommonTypesUnit;
 { TMSSQLCommentOn }
 
 procedure TMSSQLCommentOn.MakeSQL;
+var
+  S: String;
 begin
   case ObjectKind of
     okTable:
@@ -554,10 +556,17 @@ begin
       end;
     okColumn:
       begin
-        if Description = '' then
-          AddSQLCommandEx('EXEC sp_dropextendedproperty ''MS_Description'', N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [SchemaName, TableName, Name])
+        if ParentObjectKind = okTable then
+          S:='table'
         else
-          AddSQLCommandEx('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [QuotedStr(Description), SchemaName, TableName, Name]);
+        if ParentObjectKind = okView then
+          S:='view'
+        else
+          S:='';
+        if Description = '' then
+          AddSQLCommandEx('EXEC sp_dropextendedproperty ''MS_Description'', N''schema'', N''%s'', N''%s'', N''%s'', N''column'', N''%s''', [SchemaName, S, TableName, Name])
+        else
+          AddSQLCommandEx('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''%s'', N''%s'', N''column'', N''%s''', [QuotedStr(Description), SchemaName, S, TableName, Name]);
       end;
   end;
 end;

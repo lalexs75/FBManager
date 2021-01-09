@@ -425,11 +425,13 @@ begin
     if Owner is TMSSQLTable then
     begin
       C.SchemaName:=TMSSQLTable(Owner).FSchema.Caption;
+      C.ParentObjectKind:=okTable;
     end
     else
     if Owner is TMSSQLView then
     begin
       C.SchemaName:=TMSSQLView(Owner).FSchema.Caption;
+      C.ParentObjectKind:=okView;
     end;
 
     if FFieldDescription<>'' then

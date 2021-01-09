@@ -751,8 +751,11 @@ type
 
   TSQLCommentOn = class(TSQLCommandDDL)
   private
+    FParentObjectKind: TDBObjectKind;
   protected
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property ParentObjectKind:TDBObjectKind read FParentObjectKind write FParentObjectKind;
   end;
 
   { TSQLCommandGrant }
@@ -1029,6 +1032,17 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLCommentOn }
+
+procedure TSQLCommentOn.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCommentOn then
+  begin
+    FParentObjectKind:=TSQLCommentOn(ASource).ParentObjectKind;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLAlterTrigger }
