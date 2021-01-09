@@ -1268,8 +1268,6 @@ type
     function GetSQLSysQuery(ASql:string):TZQuery;
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
-    procedure FillCharSetList(const List: TStrings); override;
-    function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
     function ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;override;
     function ExecSysSQL(const Sql:string):boolean;
     function SQLPlan(aDataSet:TDataSet):string;override;
@@ -4378,17 +4376,6 @@ end;
 procedure TSQLEnginePostgre.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);
-end;
-
-procedure TSQLEnginePostgre.FillCharSetList(const List: TStrings);
-begin
-  inherited FillCharSetList(List);
-end;
-
-function TSQLEnginePostgre.OpenDataSet(Sql: string; AOwner: TComponent
-  ): TDataSet;
-begin
-  Result:=inherited OpenDataSet(Sql, AOwner);
 end;
 
 function TSQLEnginePostgre.ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;
