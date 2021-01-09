@@ -523,6 +523,8 @@ uses SQLEngineCommonTypesUnit;
 { TMSSQLGO }
 
 procedure TMSSQLGO.InitParserTree;
+var
+  FSQLTokens1: TSQLTokenRecord;
 begin
   (*
   GO [count]

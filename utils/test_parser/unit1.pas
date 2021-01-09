@@ -14,6 +14,7 @@ uses
   FBSQLEngineUnit,
   SQLite3EngineUnit,
   mysql_engine,
+  mssql_engine,
 
   fbmSqlParserUnit
   ;
@@ -32,8 +33,10 @@ type
     Panel4: TPanel;
     Splitter2: TSplitter;
     SynEdit5: TSynEdit;
+    SynEdit6: TSynEdit;
     SynSQLSyn4: TSynSQLSyn;
     TabSheet4: TTabSheet;
+    TabSheet7: TTabSheet;
     tAdd: TAction;
     tDel: TAction;
     chAdd: TAction;
@@ -121,6 +124,7 @@ type
     PG: TSQLEnginePostgre;
     SQ3: TSQLEngineSQLite3;
     MySQL:TSQLEngineMySQL;
+    MSSQL:TMSSQLEngine;
     procedure DoLoad(P: TSQLTokenRecord);
     procedure UpdateStatus(FSynEdit: TSynEdit);
     procedure LoadEditorStates;
@@ -211,6 +215,9 @@ begin
   else
   if PageControl1.ActivePage = TabSheet4 then
     DoCommand(MySQL, SynEdit5)
+  else
+  if PageControl1.ActivePage = TabSheet7 then
+    DoCommand(MSSQL, SynEdit6)
 end;
 
 procedure TForm1.chAddExecute(Sender: TObject);
@@ -292,6 +299,7 @@ begin
   PG.Free;
   SQ3.Free;
   MySQL.Free;
+  MSSQL.Free;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -303,6 +311,7 @@ begin
   PG:=TSQLEnginePostgre.Create;
   SQ3:=TSQLEngineSQLite3.Create;
   MySQL:=TSQLEngineMySQL.Create;
+  MSSQL:=TMSSQLEngine.Create;
 
   Memo1.Text:='';
 
