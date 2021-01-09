@@ -420,16 +420,39 @@ begin
 
 
   FieldDefaultValue:=DS.FieldByName('adsrc').AsString;
-
+*)
   FFieldDescription:=DS.FieldByName('description').AsString;
-
+(*
   if not DS.FieldByName('attislocal').AsBoolean then
     IOType:=spvtInput; //not local
 *)
 end;
 
 procedure TMSSQLField.SetFieldDescription(const AValue: string);
+var
+  C: TMSSQLCommentOn;
+  S: String;
 begin
+  if AValue <> FFieldDescription then
+  begin
+    C:=TMSSQLCommentOn.Create(nil);
+    C.ObjectKind:=okField;
+    C.TableName:=Owner.Caption;
+    C.Name:=FieldName;
+    C.Description:=AValue;
+    if Owner is TMSSQLTable then
+    begin
+      C.SchemaName:=TMSSQLTable(Owner).FSchema.SchemaName;
+    end
+    else
+    if Owner is TMSSQLView then
+    begin
+      C.SchemaName:=TMSSQLView(Owner).FSchema.SchemaName
+    end;
+    S:=C.AsSQL;
+    C.Free;
+
+  end;
   inherited SetFieldDescription(AValue);
 end;
 

@@ -516,9 +516,39 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
+
+  { TPGSQLCommentOn }
+
+  { TMSSQLCommentOn }
+
+  TMSSQLCommentOn = class(TSQLCommentOn)
+  protected
+    procedure MakeSQL;override;
+  public
+    property TableName;
+    property SchemaName;
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit;
+
+{ TMSSQLCommentOn }
+
+procedure TMSSQLCommentOn.MakeSQL;
+var
+  S: String;
+begin
+  case ObjectKind of
+    okTable,
+    okView:S:=Format('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s''', [QuotedStr(Description), SchemaName, TableName]);
+    okColumn:S:=Format('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [QuotedStr(Description), SchemaName, TableName, Name]);
+  else
+    S:='';
+  end;
+  AddSQLCommand(S);
+end;
+
 
 { TMSSQLGO }
 
