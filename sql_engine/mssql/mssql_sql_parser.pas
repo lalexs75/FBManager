@@ -536,17 +536,30 @@ uses SQLEngineCommonTypesUnit;
 { TMSSQLCommentOn }
 
 procedure TMSSQLCommentOn.MakeSQL;
-var
-  S: String;
 begin
   case ObjectKind of
-    okTable,
-    okView:S:=Format('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s''', [QuotedStr(Description), SchemaName, TableName]);
-    okColumn:S:=Format('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [QuotedStr(Description), SchemaName, TableName, Name]);
-  else
-    S:='';
+    okTable:
+      begin
+        if Description = '' then
+          AddSQLCommandEx('EXEC sp_dropextendedproperty ''MS_Description'', N''schema'', N''%s'', N''table'', N''%s''', [SchemaName, TableName])
+        else
+          AddSQLCommandEx('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s''', [QuotedStr(Description), SchemaName, TableName]);
+      end;
+    okView:
+      begin
+        if Description = '' then
+          AddSQLCommandEx('EXEC sp_dropextendedproperty ''MS_Description'', N''schema'', N''%s'', N''view'', N''%s''', [SchemaName, TableName])
+        else
+          AddSQLCommandEx('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''view'', N''%s''', [QuotedStr(Description), SchemaName, TableName]);
+      end;
+    okColumn:
+      begin
+        if Description = '' then
+          AddSQLCommandEx('EXEC sp_dropextendedproperty ''MS_Description'', N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [SchemaName, TableName, Name])
+        else
+          AddSQLCommandEx('EXEC sp_addextendedproperty ''MS_Description'', N%s, N''schema'', N''%s'', N''table'', N''%s'', N''column'', N''%s''', [QuotedStr(Description), SchemaName, TableName, Name]);
+      end;
   end;
-  AddSQLCommand(S);
 end;
 
 

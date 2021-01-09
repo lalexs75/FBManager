@@ -200,7 +200,6 @@ type
     destructor Destroy; override;
     class function DBClassTitle:string;override;
     procedure RefreshObject; override;
-//    function EditPage(AOwner:TComponent; AItem:integer):TEditorPage;override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -222,7 +221,6 @@ type
     destructor Destroy; override;
     class function DBClassTitle:string;override;
     procedure RefreshObject; override;
-//    function EditPage(AOwner:TComponent; AItem:integer):TEditorPage;override;
   end;
 
   { TMSSQLQueryControl }
@@ -230,8 +228,6 @@ type
   TMSSQLQueryControl = class(TSQLQueryControl)
   private
     FSQLQuery:TZQuery;
-//    FParams:TParams;
-//    procedure SetParamValues;
   protected
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -258,45 +254,31 @@ type
 {    FAuthenticationType: TAuthenticationType; }
     FMSSQLConnection: TZConnection;
 //    FServerVersion: TCTServerVersion;
-//    FMSSQLTransaction: TTDSCTTransaction;
     //
     FStorepProc:TMSSQLStoredProcRoot;
     FViews:TMSSQLViewsRoot;
     FSchemasRoot:TMSSQLSSchemasRoot;
-{    FOraUsers:TOraUsersRoot;}
-{    FOraSequences:TOraSequencesRoot;
-    FOraTriggers:TOraTriggersRoot;}
 
     procedure InternalInitMSSQLEngine;
-//    function ClientMsg(Connection:PCS_CONNECTION; ErrMsg:PCS_CLIENTMSG):CS_RETCODE;
-//    function ServerMsg(Connection:PCS_CONNECTION; SrvMsg:PCS_SERVERMSG):CS_RETCODE;
   private
     //
   protected
     function GetImageIndex: integer;override;
-//    function GetCountRootObjesct: integer; override;
-//    function GetRootObject(AIndex:integer): TDBRootObject; override;
-//    function GetConnected: boolean;override;
-//    procedure SetConnected(const AValue: boolean);override;
     function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
-    class function GetEngineName: string; override;
-//    class function GetCreateObject:TSQLEngineCreateDBAbstractClass; override;
     procedure SetUIShowSysObjects(const AValue: TUIShowSysObjects);override;
     function GetSqlQuery(ASql:string):TZQuery;
     procedure InitKeywords;
-//    class function GetDBVisualToolsClass: TDBVisualToolsClass; override;
   public
     constructor Create; override;
     destructor Destroy; override;
+    class function GetEngineName: string; override;
     procedure Load(const AData: TDataSet);override;
     procedure Store(const AData: TDataSet);override;
     procedure SetSqlAssistentData(const List: TStrings); override;
-{    procedure FillCharSetList(const List: TStrings); override;
-    function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
-    function ExecSQL(Sql:string):boolean;override;}
+    function ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;override;
     function SQLPlan(aDataSet:TDataSet):string;override;
     function GetQueryControl:TSQLQueryControl;override;
 
@@ -431,27 +413,40 @@ end;
 procedure TMSSQLField.SetFieldDescription(const AValue: string);
 var
   C: TMSSQLCommentOn;
-  S: String;
+  L:TStringList;
 begin
-  if AValue <> FFieldDescription then
+  if (AValue <> FFieldDescription) and (Owner.State <> sdboCreate) then
   begin
+    L:=TStringList.Create;
     C:=TMSSQLCommentOn.Create(nil);
-    C.ObjectKind:=okField;
+    C.ObjectKind:=okColumn;
     C.TableName:=Owner.Caption;
     C.Name:=FieldName;
-    C.Description:=AValue;
     if Owner is TMSSQLTable then
     begin
-      C.SchemaName:=TMSSQLTable(Owner).FSchema.SchemaName;
+      C.SchemaName:=TMSSQLTable(Owner).FSchema.Caption;
     end
     else
     if Owner is TMSSQLView then
     begin
-      C.SchemaName:=TMSSQLView(Owner).FSchema.SchemaName
+      C.SchemaName:=TMSSQLView(Owner).FSchema.Caption;
     end;
-    S:=C.AsSQL;
-    C.Free;
 
+    if FFieldDescription<>'' then
+    begin
+      C.Description:='';
+      L.Add(C.AsSQL);
+    end;
+
+    C.Clear;
+    C.Description:=TrimRight(AValue);
+    if C.Description<>'' then
+      L.Add(C.AsSQL);
+
+    C.Free;
+    if L.Count>0 then
+      ExecSQLScriptEx(L, sysConfirmCompileDescEx + [sepInTransaction], Owner.OwnerDB);
+    L.Free;
   end;
   inherited SetFieldDescription(AValue);
 end;
@@ -486,59 +481,9 @@ procedure TMSSQLEngine.InternalInitMSSQLEngine;
 begin
   InitKeywords;
   FMSSQLConnection:=TZConnection.Create(nil);
-  //FMSSQLConnection.OnClientMsg:=@ClientMsg;
-  //FMSSQLConnection.OnServerMsg:=@ServerMsg;
-
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 end;
-(*
-function TMSSQLEngine.ClientMsg(Connection: PCS_CONNECTION;
-  ErrMsg: PCS_CLIENTMSG): CS_RETCODE;
-begin
-  WriteLog('');
-  WriteLog('ClientMsg:');
-  WriteLog('msgstring = '+StrPas(@(ErrMsg^.msgstring[1])));
-  WriteLog('osstring = '+StrPas(@ErrMsg^.osstring[1]));
-{    severity:CS_INT;
-    msgnumber:CS_MSGNUM;
-    msgstring:array [1..CS_MAX_MSG] of CS_CHAR;
-    msgstringlen:CS_INT;
-    osnumber:CS_INT;
-    osstring:array [1..CS_MAX_MSG] of CS_CHAR;
-    osstringlen:CS_INT;
-    status:CS_INT;
-    sqlstate:array [1..CS_SQLSTATE_SIZE] of CS_BYTE ;
-    sqlstatelen:CS_INT;}
-//  WriteLog('
 
-
-
-
-end;
-
-function TMSSQLEngine.ServerMsg(Connection: PCS_CONNECTION;
-  SrvMsg: PCS_SERVERMSG): CS_RETCODE;
-begin
-  WriteLog('');
-  WriteLog('ServerMsg:');
-  WriteLog('Text = '+StrPas(@SrvMsg^.Text[1]));
-  WriteLog('SvrName = '+StrPas(@SrvMsg^.SvrName[1]));
-  WriteLog('Proc = '+StrPas(@SrvMsg^.Proc[1]));
-{    MsgNumber:CS_MSGNUM;
-    State:CS_INT;
-    SeverIty:CS_INT;
-    Text:array [1..CS_MAX_MSG] of CS_CHAR;
-    TextLen:CS_INT;
-    SvrName:array [1..CS_MAX_NAME] of CS_CHAR;
-    SvrNLen:CS_INT;
-    Proc:array [1..CS_MAX_NAME] of CS_CHAR;
-    ProcLen:CS_INT;
-    Line:CS_INT;
-    Status:CS_INT;
-    SqlState:array [1..CS_SQLSTATE_SIZE] of CS_BYTE;
-    SqlStateLen:CS_INT;}
-end;
-*)
 procedure TMSSQLEngine.RefreshObjectsBegin(const ASQLText: string;
   ASystemQuery: Boolean);
 var
@@ -592,12 +537,7 @@ begin
     FreeAndNil(FQuery);
   end;
 end;
-(*
-procedure TMSSQLEngine.RefreshObjectsEnd(const ASQLText:string);
-begin
-  FCashedItems.RelaseTypes('AllObjects');
-end;
-*)
+
 function TMSSQLEngine.GetImageIndex: integer;
 begin
   if GetConnected then
@@ -633,25 +573,6 @@ begin
   Result:=FMSSQLConnection.Connected;
 end;
 
-(*
-function TMSSQLEngine.GetCountRootObjesct: integer;
-begin
-  Result:=4;
-end;
-
-function TMSSQLEngine.GetRootObject(AIndex: integer): TDBRootObject;
-begin
-  case AIndex of
-    0:Result:=FTablesRoot;
-    1:Result:=FViews;
-    2:Result:=FStorepProc;
-    3:Result:=FSchemasRoot;
-  else
-    Result:=nil;
-  end;
-end;
-
-*)
 procedure TMSSQLEngine.InitGroupsObjects;
 begin
   AddObjectsGroup(FSchemasRoot, TMSSQLSSchemasRoot, TMSSQLSSchema, sSchemes);
@@ -671,12 +592,7 @@ class function TMSSQLEngine.GetEngineName: string;
 begin
   Result:='MS SQL Server';
 end;
-(*
-class function TMSSQLEngine.GetCreateObject: TSQLEngineCreateDBAbstractClass;
-begin
-  Result:=nil; //inherited GetCreateObject;
-end;
-*)
+
 procedure TMSSQLEngine.SetUIShowSysObjects(const AValue: TUIShowSysObjects);
 begin
   inherited SetUIShowSysObjects(AValue);
@@ -697,26 +613,14 @@ begin
 
 //  KeywordsList.Add(FKeyFunctions);
 end;
-(*
-class function TMSSQLEngine.GetDBVisualToolsClass: TDBVisualToolsClass;
-begin
-  Result:=TMSSQLVisualTools;
-end;
-*)
+
 constructor TMSSQLEngine.Create;
 begin
   inherited Create;
   FSQLEngileFeatures:=[feDescribeObject];
   InternalInitMSSQLEngine;
 end;
-(*
-constructor TMSSQLEngine.CreateFrom(CreateClass: TSQLEngineCreateDBAbstractClass
-  );
-begin
-  inherited CreateFrom(CreateClass);
-  InternalInitMSSQLEngine;
-end;
-*)
+
 destructor TMSSQLEngine.Destroy;
 begin
   FreeAndNil(FMSSQLConnection);
@@ -732,13 +636,31 @@ end;
 procedure TMSSQLEngine.Store(const AData: TDataSet);
 begin
   inherited;
-//  IniFile.WriteInteger(IniSection, 'Server version', Ord(FServerVersion));
 end;
 
 procedure TMSSQLEngine.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);
-  //List.Add('Server version     = '+CTServerVersionStr[FServerVersion]);
+end;
+
+function TMSSQLEngine.ExecSQL(const Sql: string;
+  const ExecParams: TSqlExecParams): boolean;
+begin
+  if sepSystemExec in ExecParams then
+//    Result:=ExecSysSQL(Sql)
+  else
+  begin
+    try
+      Result:=FMSSQLConnection.ExecuteDirect(SQL);
+    except
+      on E:Exception do
+      begin
+        { TODO : Необходимо передалать сообщение об ошибке компиляции - выводит дополнительную информацию }
+        InternalError(E.Message);
+        Result:=false;
+      end;
+    end;
+  end;
 end;
 
 function TMSSQLEngine.SQLPlan(aDataSet: TDataSet): string;
@@ -1115,13 +1037,7 @@ procedure TMSSQLStoredProcedure.RefreshObject;
 begin
 //  inherited Refresh;
 end;
-(*
-function TMSSQLStoredProcedure.EditPage(AOwner: TComponent; AItem: integer
-  ): TEditorPage;
-begin
-  Result:=nil;
-end;
-*)
+
 procedure TMSSQLStoredProcedure.Commit;
 begin
 //  inherited Commit;
@@ -1629,13 +1545,7 @@ procedure TMSSQLTriger.RefreshObject;
 begin
 //  inherited Refresh;
 end;
-(*
-function TMSSQLTriger.EditPage(AOwner: TComponent; AItem: integer
-  ): TEditorPage;
-begin
-  Result:=nil; //inherited EditPage(AOwner, AItem);
-end;
-*)
+
 initialization
   //Register DML statments
   RegisterSQLStatment(TMSSQLEngine, TSqlCommandSelect, 'SELECT'); //SELECT — получить строки из таблицы или представления
