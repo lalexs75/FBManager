@@ -221,7 +221,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="133"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -230,7 +230,24 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="124"/>
         <CursorPos Y="148"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="96"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="3456"/>
+        <CursorPos X="88" Y="3487"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value=""/>
@@ -536,126 +553,8 @@
         <CursorPos Y="772"/>
         <UsageCount Value="9"/>
       </Unit>
-      <Unit>
-        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
-        <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="516"/>
-        <CursorPos X="3" Y="531"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
-      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="1085" Column="34" TopLine="1078"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="400" Column="24" TopLine="380"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2840" Column="51" TopLine="2832"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="405" TopLine="385"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2862" Column="43" TopLine="2859"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="402" Column="15" TopLine="391"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2862" Column="20" TopLine="2837"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2861" Column="3" TopLine="2845"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2866" Column="35" TopLine="2850"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="389" Column="17" TopLine="366"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2894" Column="44" TopLine="2876"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2907" Column="15" TopLine="2884"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="390" Column="15" TopLine="376"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2910" Column="17" TopLine="2902"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="2897" Column="50" TopLine="2888"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <Caret Line="377" Column="23" TopLine="357"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="169" TopLine="142"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="170" TopLine="143"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="125" Column="11" TopLine="102"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="126" Column="23" TopLine="108"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="219" Column="15" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="220" Column="17" TopLine="195"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="109" TopLine="91"/>
-      </Position>
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="313" Column="3" TopLine="303"/>
@@ -669,8 +568,110 @@
         <Caret Line="302" Column="14" TopLine="294"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="207" Column="3" TopLine="244"/>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="529" TopLine="516"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1334" Column="3" TopLine="1319"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1353" TopLine="1337"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1388" TopLine="1369"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1424" TopLine="1411"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1637" Column="19" TopLine="1606"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1638" TopLine="1637"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="2477" Column="41" TopLine="2446"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="2777" TopLine="2747"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="2828" TopLine="2799"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="2871" Column="6" TopLine="2840"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="86" Column="11" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="101" Column="28" TopLine="74"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="180" Column="15" TopLine="153"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="224" Column="11" TopLine="197"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="241" Column="25" TopLine="214"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="379" Column="23" TopLine="350"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="394" Column="22" TopLine="363"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1250" Column="3" TopLine="1248"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="394" Column="15" TopLine="378"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="53" TopLine="27"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="85" TopLine="59"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="99" Column="15" TopLine="73"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="178" Column="15" TopLine="152"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="190" TopLine="164"/>
       </Position>
     </JumpHistory>
     <RunParams>

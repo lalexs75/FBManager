@@ -6,9 +6,10 @@
       <Unit>
         <Filename Value="UT_SqlParser.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos Y="15"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="22" Y="13"/>
         <UsageCount Value="144"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pgtestcase.pas"/>
@@ -51,14 +52,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="FBTestCase"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1432"/>
-        <CursorPos X="132" Y="1457"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="5"/>
+        <CursorPos X="15" Y="21"/>
         <UsageCount Value="144"/>
         <Bookmarks Count="2">
           <Item0 Y="379" ID="1"/>
           <Item1 X="3" Y="1156" ID="2"/>
         </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="mysqltestcase.pas"/>
@@ -67,7 +70,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="MySQLTestCase"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="860"/>
         <CursorPos X="3" Y="864"/>
@@ -82,10 +84,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="SQLite3TestCase"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="187"/>
-        <CursorPos X="58" Y="217"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="54" Y="9"/>
         <UsageCount Value="144"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pgcopycmdcase.pas"/>
@@ -104,8 +107,19 @@
         <UsageCount Value="38"/>
       </Unit>
       <Unit>
-        <Filename Value=""/>
-        <UsageCount Value="9"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MSSQLParserTestData"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <UnitName Value="MSSQLParserTestCase"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="49"/>
+        <CursorPos X="3" Y="69"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/fpcunit.pp"/>
@@ -196,9 +210,8 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <UnitName Value="fbmSqlParserUnit"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2841"/>
-        <CursorPos Y="2857"/>
-        <UsageCount Value="5"/>
+        <CursorPos X="22" Y="21"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
@@ -246,11 +259,10 @@
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
         <UnitName Value="RxTextHolder"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="105"/>
         <CursorPos Y="126"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/dcl_rxtools/rxtextholder_editor.pas"/>
@@ -318,127 +330,151 @@
         <CursorPos X="40" Y="90"/>
         <UsageCount Value="9"/>
       </Unit>
+      <Unit>
+        <Filename Value="sqlite3testcase.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="13"/>
+        <CursorPos X="15" Y="32"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="622" TopLine="614"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="85" Column="91" TopLine="73"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="207" Column="21" TopLine="195"/>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1446" Column="73" TopLine="1432"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="924" Column="3" TopLine="920"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="97" TopLine="79"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="208" Column="15" TopLine="195"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="21"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="929" Column="3" TopLine="925"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="393" TopLine="369"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="209" Column="15" TopLine="196"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="19" Column="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="934" Column="3" TopLine="930"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="21" TopLine="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="210" Column="15" TopLine="197"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="65" TopLine="34"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="939" Column="3" TopLine="935"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="395" TopLine="369"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="211" Column="15" TopLine="198"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="18" Column="15" TopLine="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="944" TopLine="939"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="43" TopLine="33"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="119" TopLine="105"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="41" Column="24" TopLine="33"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="120" TopLine="105"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="18"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="121" TopLine="105"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="49" Column="34" TopLine="39"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="122" TopLine="105"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="364" TopLine="360"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="123" TopLine="105"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="21" Column="15" TopLine="2"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="124" TopLine="105"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="381" TopLine="369"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="125" TopLine="105"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="22" TopLine="3"/>
       </Position>
       <Position>
-        <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxtextholder.pas"/>
-        <Caret Line="126" TopLine="105"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="20" TopLine="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="982" TopLine="968"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="56" Column="11" TopLine="49"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="983" TopLine="968"/>
+        <Filename Value="UT_SqlParser.lpr"/>
+        <Caret Line="13" Column="22"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="985" TopLine="968"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8" Column="68"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="989" TopLine="968"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="12" Column="107"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="990" TopLine="968"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="398" TopLine="354"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="991" TopLine="968"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="21" Column="43" TopLine="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="993" TopLine="970"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8" Column="86" TopLine="5"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="949" Column="3" TopLine="930"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="384" TopLine="353"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="205" Column="15" TopLine="200"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="133" Column="15" TopLine="103"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="932" Column="6" TopLine="915"/>
+        <Filename Value="sqlite3testcase.pas"/>
+        <Caret Line="9" Column="54"/>
       </Position>
       <Position>
-        <Filename Value="mysqltestcase.pas"/>
-        <Caret Line="188" Column="15" TopLine="186"/>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="34" Column="14" TopLine="28"/>
       </Position>
     </JumpHistory>
     <RunParams>

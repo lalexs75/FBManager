@@ -3,8 +3,14 @@ program UT_SqlParser;
 {$mode objfpc}{$H+}
 
 uses
-  Interfaces, Forms, GuiTestRunner, rxnew, rx, zeos_ex, uiblaz, PGTestCase,
-  FBTestCase, MySQLTestCase, SQLite3TestCase, PGCopyCmdCase, SSHConnectionUnit;
+  Interfaces, Forms, GuiTestRunner, rxnew, rx, zeos_ex, uiblaz,
+  PGTestCase,
+  FBTestCase,
+  MySQLTestCase,
+  SQLite3TestCase,
+  PGCopyCmdCase,
+  SSHConnectionUnit, mssql_engine,
+  MSSQLParserTestCase;
 
 {$R *.res}
 
