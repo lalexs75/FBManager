@@ -1,0 +1,7 @@
+object MSSQLParserTestData: TMSSQLParserTestData
+  OldCreateOrder = False
+  Height = 546
+  HorizontalOffset = 576
+  VerticalOffset = 243
+  Width = 625
+end
