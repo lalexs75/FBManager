@@ -17,7 +17,7 @@
   to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
   MA 02111-1307, USA.
 }
-
+//from https://docs.microsoft.com/ru-ru/sql/t-sql/statements/statements?view=sql-server-ver15
 unit mssql_sql_parser;
 
 {$I fbmanager_define.inc}
@@ -5328,142 +5328,998 @@ CREATE XML SCHEMA COLLECTION [ <relational_schema>. ]sql_identifier AS Expressio
 ----------------------------------------
 DROP AGGREGATE [ IF EXISTS ] [ schema_name . ] aggregate_name
 ----------------------------------------
+DROP APPLICATION ROLE rolename
 ----------------------------------------
+DROP ASSEMBLY [ IF EXISTS ] assembly_name [ ,...n ]
+[ WITH NO DEPENDENTS ]
+[ ; ]
 ----------------------------------------
+DROP ASYMMETRIC KEY key_name [ REMOVE PROVIDER KEY ]
 ----------------------------------------
+DROP AVAILABILITY GROUP group_name
+[ ; ]
 ----------------------------------------
+DROP BROKER PRIORITY ConversationPriorityName
+[;]
 ----------------------------------------
+DROP CERTIFICATE certificate_name
 ----------------------------------------
+DROP COLUMN ENCRYPTION KEY key_name [;]
 ----------------------------------------
+DROP COLUMN MASTER KEY key_name;
+
 ----------------------------------------
+DROP CONTRACT contract_name
+[ ; ]
 ----------------------------------------
+DROP CREDENTIAL credential_name
 ----------------------------------------
+DROP CRYPTOGRAPHIC PROVIDER provider_name
 ----------------------------------------
+-- SQL Server Syntax
+DROP DATABASE [ IF EXISTS ] { database_name | database_snapshot_name } [ ,...n ] [;]
 ----------------------------------------
+DROP DATABASE AUDIT SPECIFICATION audit_specification_name
+[ ; ]
 ----------------------------------------
+DROP DATABASE ENCRYPTION KEY
 ----------------------------------------
+DROP DEFAULT [ IF EXISTS ] { [ schema_name . ] default_name } [ ,...n ] [ ; ]
 
 
 ----------------------------------------
+DROP ENDPOINT endPointName
 ----------------------------------------
+-- Drop an external data source
+DROP EXTERNAL DATA SOURCE external_data_source_name
+[;]
 ----------------------------------------
+-- Drop an external file format
+DROP EXTERNAL FILE FORMAT external_file_format_name
+[;]
 ----------------------------------------
+DROP EXTERNAL LANGUAGE <language_name>
 ----------------------------------------
+DROP EXTERNAL LIBRARY library_name
+[ AUTHORIZATION owner_name ];
 ----------------------------------------
+DROP EXTERNAL RESOURCE POOL pool_name
 ----------------------------------------
+DROP EXTERNAL TABLE { database_name.schema_name.table_name | schema_name.table_name | table_name }
+[;]
 ----------------------------------------
+DROP EVENT NOTIFICATION notification_name [ ,...n ]
+ON { SERVER | DATABASE | QUEUE queue_name }
+[ ; ]
 ----------------------------------------
+DROP EVENT SESSION event_session_name
+ON SERVER
 ----------------------------------------
+DROP FULLTEXT CATALOG catalog_name
 ----------------------------------------
+DROP FULLTEXT INDEX ON table_name
 ----------------------------------------
+DROP FULLTEXT STOPLIST stoplist_name
+;
 ----------------------------------------
+-- SQL Server, Azure SQL Database
+
+DROP FUNCTION [ IF EXISTS ] { [ schema_name. ] function_name } [ ,...n ]
+[;]
 ----------------------------------------
+-- Syntax for SQL Server (All options except filegroup and filestream apply to Azure SQL Database.)
+
+DROP INDEX [ IF EXISTS ]
+{ <drop_relational_or_xml_or_spatial_index> [ ,...n ]
+| <drop_backward_compatible_index> [ ,...n ]
+}
+
+<drop_relational_or_xml_or_spatial_index> ::=
+    index_name ON <object>
+    [ WITH ( <drop_clustered_index_option> [ ,...n ] ) ]
+
+<drop_backward_compatible_index> ::=
+    [ owner_name. ] table_or_view_name.index_name
+
+<object> ::=
+{ database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
+
+<drop_clustered_index_option> ::=
+{
+    MAXDOP = max_degree_of_parallelism
+  | ONLINE = { ON | OFF }
+  | MOVE TO { partition_scheme_name ( column_name )
+            | filegroup_name
+            | "default"
+            }
+  [ FILESTREAM_ON { partition_scheme_name
+            | filestream_filegroup_name
+            | "default" } ]
+}
 ----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
+DROP INDEX index_name ON <object>
+    [ WITH ( <drop_index_option> [ ,...n ] ) ]
+
+<object> ::=
+{ database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
+
+<drop_index_option> ::=
+{
+    MAXDOP = max_degree_of_parallelism
+    | ONLINE = { ON | OFF }
+}
 
 
 ----------------------------------------
+DROP LOGIN login_name
 ----------------------------------------
+DROP MASTER KEY
 ----------------------------------------
+DROP MESSAGE TYPE message_type_name
+[ ; ]
 ----------------------------------------
+DROP PARTITION FUNCTION partition_function_name [ ; ]
 ----------------------------------------
+DROP PARTITION SCHEME partition_scheme_name [ ; ]
 ----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+DROP { PROC | PROCEDURE } [ IF EXISTS ] { [ schema_name. ] procedure } [ ,...n ]
 ----------------------------------------
+DROP QUEUE <object>
+[ ; ]
+
+<object> ::=
+{ database_name.schema_name.queue_name | schema_name.queue_name | queue_name }
 ----------------------------------------
+DROP REMOTE SERVICE BINDING binding_name
+[ ; ]
 ----------------------------------------
+DROP RESOURCE POOL pool_name
+[ ; ]
 ----------------------------------------
+-- Syntax for SQL Server
+
+DROP ROLE [ IF EXISTS ] role_name
 ----------------------------------------
+DROP ROUTE route_name
+[ ; ]
 ----------------------------------------
+DROP RULE [ IF EXISTS ] { [ schema_name . ] rule_name } [ ,...n ] [ ; ]
 ----------------------------------------
+DROP SEARCH PROPERTY LIST property_list_name
+;
 ----------------------------------------
+DROP SECURITY POLICY [ IF EXISTS ] [schema_name. ] security_policy_name
+[;]
 ----------------------------------------
+DROP SENSITIVITY CLASSIFICATION FROM
+    <object_name> [, ...n ]
+
+<object_name> ::=
+{
+    [schema_name.]table_name.column_name
+}
 ----------------------------------------
+DROP SEQUENCE [ IF EXISTS ] { database_name.schema_name.sequence_name | schema_name.sequence_name | sequence_name } [ ,...n ]
+ [ ; ]
 ----------------------------------------
+DROP SERVER AUDIT audit_name
+    [ ; ]
 ----------------------------------------
+DROP SERVER AUDIT SPECIFICATION audit_specification_name
+[ ; ]
 ----------------------------------------
+DROP SERVER ROLE role_name
 ----------------------------------------
+DROP SERVICE service_name
+[ ; ]
 ----------------------------------------
+DROP [ COUNTER ] SIGNATURE FROM module_name
+    BY <crypto_list> [ ,...n ]
+
+<crypto_list> ::=
+    CERTIFICATE cert_name
+    | ASYMMETRIC KEY Asym_key_name
 ----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+DROP STATISTICS table.statistics_name | view.statistics_name [ ,...n ]
 ----------------------------------------
+DROP SYMMETRIC KEY symmetric_key_name [REMOVE PROVIDER KEY]
 ----------------------------------------
+DROP SYNONYM [ IF EXISTS ] [ schema. ] synonym_name
 ----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+DROP TABLE [ IF EXISTS ] { database_name.schema_name.table_name | schema_name.table_name | table_name } [ ,...n ]
+[ ; ]
 ----------------------------------------
+-- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
+
+DROP TRIGGER [ IF EXISTS ] [schema_name.]trigger_name [ ,...n ] [ ; ]
+
+-- Trigger on a CREATE, ALTER, DROP, GRANT, DENY, REVOKE or UPDATE statement (DDL Trigger)
+
+DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
+ON { DATABASE | ALL SERVER }
+[ ; ]
+
+-- Trigger on a LOGON event (Logon Trigger)
+
+DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
+ON ALL SERVER
 ----------------------------------------
+DROP TYPE [ IF EXISTS ] [ schema_name. ] type_name [ ; ]
 ----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+DROP USER [ IF EXISTS ] user_name
 ----------------------------------------
+-- Syntax for SQL Server, Azure SQL Database, and Azure Synapse Analytics
+
+DROP VIEW [ IF EXISTS ] [ schema_name . ] view_name [ ...,n ] [ ; ]
 ----------------------------------------
+DROP WORKLOAD GROUP group_name
+[;]
 ----------------------------------------
+DROP XML SCHEMA COLLECTION [ relational_schema. ]sql_identifier
 ----------------------------------------
+ADD [ COUNTER ] SIGNATURE TO module_class::module_name
+    BY <crypto_list> [ ,...n ]
+
+<crypto_list> ::=
+    CERTIFICATE cert_name
+    | CERTIFICATE cert_name [ WITH PASSWORD = 'password' ]
+    | CERTIFICATE cert_name WITH SIGNATURE = signed_blob
+    | ASYMMETRIC KEY Asym_Key_Name
+    | ASYMMETRIC KEY Asym_Key_Name [ WITH PASSWORD = 'password'.]
+    | ASYMMETRIC KEY Asym_Key_Name WITH SIGNATURE = signed_blob
 ----------------------------------------
+CLOSE MASTER KEY
 ----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
-----------------------------------------
+CLOSE { SYMMETRIC KEY key_name | ALL SYMMETRIC KEYS }
 
 
 ----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+-- Simplified syntax for DENY
+DENY   { ALL [ PRIVILEGES ] }
+     | <permission>  [ ( column [ ,...n ] ) ] [ ,...n ]
+    [ ON [ <class> :: ] securable ]
+    TO principal [ ,...n ]
+    [ CASCADE] [ AS principal ]
+[;]
+
+<permission> ::=
+{ see the tables below }
+
+<class> ::=
+{ see the tables below }
 ----------------------------------------
+DENY { permission [ ,...n ] } ON ASSEMBLY :: assembly_name
+    TO database_principal [ ,...n ]
+        [ CASCADE ]
+        [ AS denying_principal ]
 ----------------------------------------
+DENY { permission  [ ,...n ] }
+    ON ASYMMETRIC KEY :: asymmetric_key_name
+        TO database_principal [ ,...n ]
+    [ CASCADE ]
+        [ AS denying_principal ]
 ----------------------------------------
+DENY permission  [ ,...n ] ON AVAILABILITY GROUP :: availability_group_name
+        TO < server_principal >  [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
 ----------------------------------------
+DENY permission  [ ,...n ]
+    ON CERTIFICATE :: certificate_name
+    TO principal [ ,...n ]
+    [ CASCADE ]
+    [ AS denying_principal ]
 ----------------------------------------
+DENY <permission> [ ,...n ]
+    TO <database_principal> [ ,...n ] [ CASCADE ]
+    [ AS <database_principal> ]
+
+<permission> ::=
+    permission | ALL [ PRIVILEGES ]
+
+<database_principal> ::=
+    Database_user
+  | Database_role
+  | Application_role
+  | Database_user_mapped_to_Windows_User
+  | Database_user_mapped_to_Windows_Group
+  | Database_user_mapped_to_certificate
+  | Database_user_mapped_to_asymmetric_key
+  | Database_user_with_no_login
 ----------------------------------------
+DENY permission [ ,...n ]
+    ON
+    {  [ USER :: database_user ]
+     | [ ROLE :: database_role ]
+     | [ APPLICATION ROLE :: application_role ]
+    }
+    TO <database_principal> [ ,...n ]
+      [ CASCADE ]
+      [ AS <database_principal> ]
+
+<database_principal> ::=
+    Database_user
+  | Database_role
+  | Application_role
+  | Database_user_mapped_to_Windows_User
+  | Database_user_mapped_to_Windows_Group
+  | Database_user_mapped_to_certificate
+  | Database_user_mapped_to_asymmetric_key
+  | Database_user_with_no_login
 ----------------------------------------
+DENY permission  [ ,...n ]
+    ON DATABASE SCOPED CREDENTIAL :: credential_name
+    TO principal [ ,...n ]
+    [ CASCADE ]
+    [ AS denying_principal ]
 ----------------------------------------
+DENY permission  [ ,...n ] ON ENDPOINT :: endpoint_name
+    TO < server_principal >  [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
 ----------------------------------------
+DENY permission [ ,...n ] ON
+    FULLTEXT
+        {
+           CATALOG :: full-text_catalog_name
+           |
+           STOPLIST :: full-text_stoplist_name
+        }
+    TO database_principal [ ,...n ] [ CASCADE ]
+        [ AS denying_principal ]
 ----------------------------------------
+DENY <permission> [ ,...n ] ON
+    [ OBJECT :: ][ schema_name ]. object_name [ ( column [ ,...n ] ) ]
+        TO <database_principal> [ ,...n ]
+    [ CASCADE ]
+        [ AS <database_principal> ]
+
+<permission> ::=
+    ALL [ PRIVILEGES ] | permission [ ( column [ ,...n ] ) ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
 ----------------------------------------
+DENY permission  [ ,...n ] } ON SCHEMA :: schema_name
+    TO database_principal [ ,...n ]
+    [ CASCADE ]
+        [ AS denying_principal ]
 ----------------------------------------
+DENY permission [ ,...n ] ON
+        SEARCH PROPERTY LIST :: search_property_list_name
+    TO database_principal [ ,...n ] [ CASCADE ]
+    [ AS denying_principal ]
 ----------------------------------------
+DENY permission [ ,...n ]
+    TO <grantee_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS <grantor_principal> ]
+
+<grantee_principal> ::= SQL_Server_login
+    | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
+
+<grantor_principal> ::= SQL_Server_login
+    | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
 ----------------------------------------
+DENY permission [ ,...n ] }
+    ON
+    { [ LOGIN :: SQL_Server_login ]
+      | [ SERVER ROLE :: server_role ] }
+    TO <server_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+    SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+    | server_role
 ----------------------------------------
+DENY permission  [ ,...n ] ON
+    {
+       [ CONTRACT :: contract_name ]
+       | [ MESSAGE TYPE :: message_type_name ]
+       | [ REMOTE SERVICE BINDING :: remote_binding_name ]
+       | [ ROUTE :: route_name ]
+       | [ SERVICE :: service_name ]
+        }
+    TO database_principal [ ,...n ]
+    [ CASCADE ]
+        [ AS denying_principal ]
 ----------------------------------------
+DENY permission [ ,...n ]
+    ON SYMMETRIC KEY :: symmetric_key_name
+        TO <database_principal> [ ,...n ] [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
 ----------------------------------------
+DENY { SELECT | EXECUTE } ON [ sys.]system_object TO principal
+----------------------------------------
+DENY permission  [ ,...n ] ON TYPE :: [ schema_name . ] type_name
+        TO <database_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+DENY permission  [ ,...n ] ON
+    XML SCHEMA COLLECTION :: [ schema_name . ]
+    XML_schema_collection_name
+    TO <database_principal> [ ,...n ]
+        [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+{ EXEC | EXECUTE } AS <context_specification>
+[;]
+
+<context_specification>::=
+{ LOGIN | USER } = 'name'
+    [ WITH { NO REVERT | COOKIE INTO @varbinary_variable } ]
+| CALLER
+----------------------------------------
+-- SQL Server Syntax
+Functions (except inline table-valued functions), Stored Procedures, and DML Triggers
+{ EXEC | EXECUTE } AS { CALLER | SELF | OWNER | 'user_name' }
+
+DDL Triggers with Database Scope
+{ EXEC | EXECUTE } AS { CALLER | SELF | 'user_name' }
+
+DDL Triggers with Server Scope and logon triggers
+{ EXEC | EXECUTE } AS { CALLER | SELF | 'login_name' }
+
+Queues
+{ EXEC | EXECUTE } AS { SELF | OWNER | 'user_name' }
+----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+-- Simplified syntax for GRANT
+GRANT { ALL [ PRIVILEGES ] }
+      | permission [ ( column [ ,...n ] ) ] [ ,...n ]
+      [ ON [ class :: ] securable ] TO principal [ ,...n ]
+      [ WITH GRANT OPTION ] [ AS principal ]
+----------------------------------------
+GRANT { permission [ ,...n ] } ON ASSEMBLY :: assembly_name
+    TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT { permission  [ ,...n ] }
+    ON ASYMMETRIC KEY :: asymmetric_key_name
+       TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT permission  [ ,...n ] ON AVAILABILITY GROUP :: availability_group_name
+        TO < server_principal >  [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+----------------------------------------
+GRANT permission  [ ,...n ]
+    ON CERTIFICATE :: certificate_name
+    TO principal [ ,...n ] [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT <permission> [ ,...n ]
+    TO <database_principal> [ ,...n ] [ WITH GRANT OPTION ]
+    [ AS <database_principal> ]
+
+<permission>::=
+permission | ALL [ PRIVILEGES ]
+
+<database_principal> ::=
+    Database_user
+  | Database_role
+  | Application_role
+  | Database_user_mapped_to_Windows_User
+  | Database_user_mapped_to_Windows_Group
+  | Database_user_mapped_to_certificate
+  | Database_user_mapped_to_asymmetric_key
+  | Database_user_with_no_login
+----------------------------------------
+GRANT permission [ ,...n ]
+    ON
+    {  [ USER :: database_user ]
+     | [ ROLE :: database_role ]
+     | [ APPLICATION ROLE :: application_role ]
+    }
+    TO <database_principal> [ ,...n ]
+       [ WITH GRANT OPTION ]
+       [ AS <database_principal> ]
+
+<database_principal> ::=
+    Database_user
+  | Database_role
+  | Application_role
+  | Database_user_mapped_to_Windows_User
+  | Database_user_mapped_to_Windows_Group
+  | Database_user_mapped_to_certificate
+  | Database_user_mapped_to_asymmetric_key
+  | Database_user_with_no_login
+----------------------------------------
+GRANT permission  [ ,...n ]
+    ON DATABASE SCOPED CREDENTIAL :: credential_name
+    TO principal [ ,...n ] [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT permission  [ ,...n ] ON ENDPOINT :: endpoint_name
+        TO < server_principal >  [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+----------------------------------------
+GRANT permission [ ,...n ] ON
+    FULLTEXT
+        {
+           CATALOG :: full-text_catalog_name
+           |
+           STOPLIST :: full-text_stoplist_name
+        }
+    TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT <permission> [ ,...n ] ON
+    [ OBJECT :: ][ schema_name ]. object_name [ ( column [ ,...n ] ) ]
+    TO <database_principal> [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS <database_principal> ]
+
+<permission> ::=
+    ALL [ PRIVILEGES ] | permission [ ( column [ ,...n ] ) ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+GRANT permission  [ ,...n ] ON SCHEMA :: schema_name
+    TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT permission [ ,...n ] ON
+    SEARCH PROPERTY LIST :: search_property_list_name
+    TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS granting_principal ]
+----------------------------------------
+GRANT permission [ ,...n ]
+    TO <grantee_principal> [ ,...n ] [ WITH GRANT OPTION ]
+    [ AS <grantor_principal> ]
+
+<grantee_principal> ::= SQL_Server_login
+    | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
+
+<grantor_principal> ::= SQL_Server_login
+    | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
+----------------------------------------
+GRANT permission [ ,...n ] }
+    ON
+    { [ LOGIN :: SQL_Server_login ]
+      | [ SERVER ROLE :: server_role ] }
+    TO <server_principal> [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+    SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+    | server_role
+----------------------------------------
+GRANT permission  [ ,...n ] ON
+    {
+              [ CONTRACT :: contract_name ]
+       | [ MESSAGE TYPE :: message_type_name ]
+       | [ REMOTE SERVICE BINDING :: remote_binding_name ]
+       | [ ROUTE :: route_name ]
+       | [ SERVICE :: service_name ]
+    }
+    TO database_principal [ ,...n ]
+    [ WITH GRANT OPTION ]
+        [ AS granting_principal ]
+
+----------------------------------------
+GRANT permission [ ,...n ]
+    ON SYMMETRIC KEY :: symmetric_key_name
+    TO <database_principal> [ ,...n ] [ WITH GRANT OPTION ]
+        [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+GRANT { SELECT | EXECUTE } ON [ sys.]system_object TO principal
+----------------------------------------
+GRANT permission  [ ,...n ] ON TYPE :: [ schema_name . ] type_name
+    TO <database_principal> [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+        | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+GRANT permission  [ ,...n ] ON
+    XML SCHEMA COLLECTION :: [ schema_name . ]
+    XML_schema_collection_name
+    TO <database_principal> [ ,...n ]
+    [ WITH GRANT OPTION ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+OPEN MASTER KEY DECRYPTION BY PASSWORD = 'password'
+----------------------------------------
+OPEN SYMMETRIC KEY Key_name DECRYPTION BY <decryption_mechanism>
+
+<decryption_mechanism> ::=
+    CERTIFICATE certificate_name [ WITH PASSWORD = 'password' ]
+    |
+    ASYMMETRIC KEY asym_key_name [ WITH PASSWORD = 'password' ]
+    |
+    SYMMETRIC KEY decrypting_Key_name
+    |
+    PASSWORD = 'decryption_password'
+----------------------------------------
+REVERT
+    [ WITH COOKIE = @varbinary_variable ]
+----------------------------------------
+-- Syntax for SQL Server and Azure SQL Database
+
+-- Simplified syntax for REVOKE
+REVOKE [ GRANT OPTION FOR ]
+      {
+        [ ALL [ PRIVILEGES ] ]
+        |
+                permission [ ( column [ ,...n ] ) ] [ ,...n ]
+      }
+      [ ON [ class :: ] securable ]
+      { TO | FROM } principal [ ,...n ]
+      [ CASCADE] [ AS principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ]
+    ON ASSEMBLY :: assembly_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] { permission  [ ,...n ] }
+    ON ASYMMETRIC KEY :: asymmetric_key_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission  [ ,...n ]
+    ON AVAILABILITY GROUP :: availability_group_name
+    { FROM | TO } < server_principal >  [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+
+
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission  [ ,...n ]
+    ON CERTIFICATE :: certificate_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] <permission> [ ,...n ]
+    { TO | FROM } <database_principal> [ ,...n ]
+        [ CASCADE ]
+    [ AS <database_principal> ]
+
+<permission> ::=
+permission | ALL [ PRIVILEGES ]
+
+<database_principal> ::=
+      Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ]
+    ON
+    {  [ USER :: database_user ]
+       | [ ROLE :: database_role ]
+       | [ APPLICATION ROLE :: application_role ]
+    }
+    { FROM | TO } <database_principal> [ ,...n ]
+        [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission  [ ,...n ]
+    ON DATABASE SCOPED CREDENTIAL :: credential_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ]
+    ON ENDPOINT :: endpoint_name
+    { FROM | TO } <server_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+        SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] ON
+    FULLTEXT
+        {
+           CATALOG :: full-text_catalog_name
+           |
+           STOPLIST :: full-text_stoplist_name
+        }
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] <permission> [ ,...n ] ON
+    [ OBJECT :: ][ schema_name ]. object_name [ ( column [ ,...n ] ) ]
+        { FROM | TO } <database_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS <database_principal> ]
+
+<permission> ::=
+    ALL [ PRIVILEGES ] | permission [ ( column [ ,...n ] ) ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission  [ ,...n ]
+    ON SCHEMA :: schema_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] ON
+        SEARCH PROPERTY LIST :: search_property_list_name
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission  [ ,...n ]
+    { TO | FROM } <grantee_principal> [ ,...n ]
+        [ CASCADE ]
+    [ AS <grantor_principal> ]
+
+<grantee_principal> ::= SQL_Server_login
+        | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
+
+<grantor_principal> ::= SQL_Server_login
+    | SQL_Server_login_mapped_to_Windows_login
+    | SQL_Server_login_mapped_to_Windows_group
+    | SQL_Server_login_mapped_to_certificate
+    | SQL_Server_login_mapped_to_asymmetric_key
+    | server_role
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] }
+    ON
+    { [ LOGIN :: SQL_Server_login ]
+      | [ SERVER ROLE :: server_role ] }
+    { FROM | TO } <server_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS SQL_Server_login ]
+
+<server_principal> ::=
+    SQL_Server_login
+    | SQL_Server_login_from_Windows_login
+    | SQL_Server_login_from_certificate
+    | SQL_Server_login_from_AsymKey
+    | server_role
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] ON
+    {
+       [ CONTRACT :: contract_name ]
+       | [ MESSAGE TYPE :: message_type_name ]
+       | [ REMOTE SERVICE BINDING :: remote_binding_name ]
+       | [ ROUTE :: route_name ]
+       | [ SERVICE :: service_name ]
+        }
+    { TO | FROM } database_principal [ ,...n ]
+    [ CASCADE ]
+    [ AS revoking_principal ]
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ]
+    ON SYMMETRIC KEY :: symmetric_key_name
+        { TO | FROM } <database_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+REVOKE { SELECT | EXECUTE } ON [sys.]system_object FROM principal
+
+
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ]
+    ON TYPE :: [ schema_name ]. type_name
+    { FROM | TO } <database_principal> [ ,...n ]
+    [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+      Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] ON
+    XML SCHEMA COLLECTION :: [ schema_name . ]
+    XML_schema_collection_name
+    { TO | FROM } <database_principal> [ ,...n ]
+        [ CASCADE ]
+    [ AS <database_principal> ]
+
+<database_principal> ::=
+        Database_user
+    | Database_role
+    | Application_role
+    | Database_user_mapped_to_Windows_User
+    | Database_user_mapped_to_Windows_Group
+    | Database_user_mapped_to_certificate
+    | Database_user_mapped_to_asymmetric_key
+    | Database_user_with_no_login
+----------------------------------------
+SETUSER [ 'username' [ WITH NORESET ] ]
+----------------------------------------
+SET
 ----------------------------------------
 ----------------------------------------
 ----------------------------------------

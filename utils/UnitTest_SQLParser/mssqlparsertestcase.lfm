@@ -4,4 +4,1628 @@ object MSSQLParserTestData: TMSSQLParserTestData
   HorizontalOffset = 576
   VerticalOffset = 243
   Width = 625
+  object sTriggers: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'DisableTrigger1'
+        Lines.Strings = (
+          'DISABLE TRIGGER Person.uAddress ON Person.Address;'
+        )
+      end    
+      item
+        Caption = 'DisableTrigger2'
+        Lines.Strings = (
+          'DISABLE TRIGGER safety ON DATABASE;'
+        )
+      end    
+      item
+        Caption = 'DisableTrigger3'
+        Lines.Strings = (
+          'DISABLE Trigger ALL ON ALL SERVER;'
+        )
+      end    
+      item
+        Caption = 'DisableTrigger4'
+        Lines.Strings = (
+          'DISABLE TRIGGER Person.uAddress ON Person.Address;'
+        )
+      end    
+      item
+        Caption = 'DisableTrigger5'
+        Lines.Strings = (
+          'DISABLE TRIGGER safety ON DATABASE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'EnableTrigger1'
+        Lines.Strings = (
+          'ENABLE Trigger Person.uAddress ON Person.Address;'
+        )
+      end    
+      item
+        Caption = 'EnableTrigger2'
+        Lines.Strings = (
+          'ENABLE TRIGGER safety ON DATABASE;'
+        )
+      end    
+      item
+        Caption = 'EnableTrigger3'
+        Lines.Strings = (
+          'ENABLE Trigger ALL ON ALL SERVER;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger1'
+        Lines.Strings = (
+          'DROP TRIGGER ProjectTask_HistoryTrigger;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger2'
+        Lines.Strings = (
+          'DROP TRIGGER safety ON DATABASE;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTrigger3'
+        Lines.Strings = (
+          'DROP TRIGGER ddl_trig_database ON ALL SERVER;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger4'
+        Lines.Strings = (
+          'DROP TRIGGER safety ON DATABASE;'
+        )
+      end>
+    Left = 48
+    Top = 38
+  end
+  object sDataBase: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'CreateDatabase1'
+        Lines.Strings = (
+          'CREATE DATABASE testdb'
+          'COLLATE SQL_Latin1_General_CP1_CI_AS ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase2'
+        Lines.Strings = (
+          'CREATE DATABASE [ columnstore ];'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase3'
+        Lines.Strings = (
+          'CREATE DATABASE SampleDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase4'
+        Lines.Strings = (
+          'CREATE DATABASE mytest;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase5'
+        Lines.Strings = (
+          'CREATE DATABASE Sales'
+          'ON'
+          '( NAME = Sales_dat,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\saledat.mdf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 5 )'
+          'LOG ON'
+          '( NAME = Sales_log,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\salelog.ldf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 25MB,'
+          '    FILEGROWTH = 5MB ) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase6'
+        Lines.Strings = (
+          'CREATE DATABASE Archive'
+          'ON'
+          'PRIMARY'
+          '    (NAME = Arch1,'
+          '    FILENAME = ''D:\SalesData\archdat1.mdf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 200,'
+          '    FILEGROWTH = 20),'
+          '    ( NAME = Arch2,'
+          '    FILENAME = ''D:\SalesData\archdat2.ndf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 200,'
+          '    FILEGROWTH = 20),'
+          '    ( NAME = Arch3,'
+          '    FILENAME = ''D:\SalesData\archdat3.ndf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 200,'
+          '    FILEGROWTH = 20)'
+          'LOG ON'
+          '  (NAME = Archlog1,'
+          '    FILENAME = ''D:\SalesData\archlog1.ldf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 200,'
+          '    FILEGROWTH = 20),'
+          '  (NAME = Archlog2,'
+          '    FILENAME = ''D:\SalesData\archlog2.ldf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 200,'
+          '    FILEGROWTH = 20) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase7'
+        Lines.Strings = (
+          'CREATE DATABASE Sales'
+          'ON PRIMARY'
+          '( NAME = SPri1_dat,'
+          '    FILENAME = ''D:\SalesData\SPri1dat.mdf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 15% ),'
+          '( NAME = SPri2_dat,'
+          '    FILENAME = ''D:\SalesData\SPri2dt.ndf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 15% ),'
+          'FILEGROUP SalesGroup1'
+          '( NAME = SGrp1Fi1_dat,'
+          '    FILENAME = ''D:\SalesData\SG1Fi1dt.ndf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 5 ),'
+          '( NAME = SGrp1Fi2_dat,'
+          '    FILENAME = ''D:\SalesData\SG1Fi2dt.ndf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 5 ),'
+          'FILEGROUP SalesGroup2'
+          '( NAME = SGrp2Fi1_dat,'
+          '    FILENAME = ''D:\SalesData\SG2Fi1dt.ndf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 5 ),'
+          '( NAME = SGrp2Fi2_dat,'
+          '    FILENAME = ''D:\SalesData\SG2Fi2dt.ndf'','
+          '    SIZE = 10,'
+          '    MAXSIZE = 50,'
+          '    FILEGROWTH = 5 )'
+          'LOG ON'
+          '( NAME = Sales_log,'
+          '    FILENAME = ''E:\SalesLog\salelog.ldf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 25MB,'
+          '    FILEGROWTH = 5MB ) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase8'
+        Lines.Strings = (
+          'CREATE DATABASE Archive'
+          '  ON (FILENAME = ''D:\SalesData\archdat1.mdf'')'
+          '  FOR ATTACH ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase9'
+        Lines.Strings = (
+          'CREATE DATABASE sales_snapshot0600 ON'
+          '    ( NAME = SPri1_dat, FILENAME = ''D:\SalesData\SPri1dat_0600.ss''),'
+          '    ( NAME = SPri2_dat, FILENAME = ''D:\SalesData\SPri2dt_0600.ss''),'
+          '    ( NAME = SGrp1Fi1_dat, FILENAME = ''D:\SalesData\SG1Fi1dt_0600.ss''),'
+          '    ( NAME = SGrp1Fi2_dat, FILENAME = ''D:\SalesData\SG1Fi2dt_0600.ss''),'
+          '    ( NAME = SGrp2Fi1_dat, FILENAME = ''D:\SalesData\SG2Fi1dt_0600.ss''),'
+          '    ( NAME = SGrp2Fi2_dat, FILENAME = ''D:\SalesData\SG2Fi2dt_0600.ss'')'
+          'AS SNAPSHOT OF Sales ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase10'
+        Lines.Strings = (
+          'CREATE DATABASE MyOptionsTest'
+          'COLLATE French_CI_AI'
+          'WITH TRUSTWORTHY ON, DB_CHAINING ON;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase11'
+        Lines.Strings = (
+          'CREATE DATABASE AdventureWorks2012 ON'
+          '    (FILENAME = ''c:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Data\AdventureWorks2012_data.mdf''),'
+          '    (FILENAME = ''c:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Data\AdventureWorks2012_log.ldf''),'
+          '    (FILENAME = ''c:\myFTCatalogs\AdvWksFtCat'')'
+          'FOR ATTACH;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase12'
+        Lines.Strings = (
+          'CREATE DATABASE [BlobStore1]'
+          'CONTAINMENT = NONE'
+          'ON PRIMARY'
+          '('
+          '    NAME = N''BlobStore1'','
+          '    FILENAME = N''C:\BlobStore\BlobStore1.mdf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = UNLIMITED,'
+          '    FILEGROWTH = 1MB'
+          '),'
+          'FILEGROUP [FS] CONTAINS FILESTREAM DEFAULT'
+          '('
+          '    NAME = N''FS1'','
+          '    FILENAME = N''C:\BlobStore\FS1'','
+          '    MAXSIZE = UNLIMITED'
+          '),'
+          '('
+          '    NAME = N''FS2'','
+          '    FILENAME = N''C:\BlobStore\FS2'','
+          '    MAXSIZE = 100MB'
+          ')'
+          'LOG ON'
+          '('
+          '    NAME = N''BlobStore1_log'','
+          '    FILENAME = N''C:\BlobStore\BlobStore1_log.ldf'','
+          '    SIZE = 100MB,'
+          '    MAXSIZE = 1GB,'
+          '    FILEGROWTH = 1MB'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase13'
+        Lines.Strings = (
+          'CREATE DATABASE AUDIT SPECIFICATION Audit_Pay_Tables'
+          'FOR SERVER AUDIT Payrole_Security_Audit'
+          'ADD (SELECT , INSERT'
+          '     ON HumanResources.EmployeePayHistory BY dbo )'
+          'WITH (STATE = ON) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase14'
+        Lines.Strings = (
+          'CREATE DATABASE AUDIT SPECIFICATION Audit_Data_Modification_On_All_Sales_Tables'
+          'FOR SERVER AUDIT DataModification_Security_Audit'
+          'ADD ( INSERT, UPDATE, DELETE'
+          '     ON Schema::Sales BY SalesUK )'
+          'WITH (STATE = ON) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase15'
+        Lines.Strings = (
+          'CREATE DATABASE ENCRYPTION KEY'
+          'WITH ALGORITHM = AES_256'
+          'ENCRYPTION BY SERVER CERTIFICATE MyServerCert;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase16'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL AppCred WITH IDENTITY = ''Mary5'','
+          '    SECRET = ''<EnterStrongPasswordHere>'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase17'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL MyCredentials'
+          'WITH IDENTITY = ''SHARED ACCESS SIGNATURE'','
+          'SECRET = ''QLYMgmSXMklt%2FI1U6DcVrQixnlU5Sgbtk1qDRakUBGs%3D'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase18'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL ADL_User'
+          'WITH'
+          '    IDENTITY = ''<client_id>@\<OAuth_2.0_Token_EndPoint>'','
+          '    SECRET = ''<key>'''
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase19'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL OracleProxyAccount'
+          'WITH'
+          '     IDENTITY = ''oracle_username'','
+          '     SECRET = ''oracle_password'' ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase20'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL HadoopUser1'
+          'WITH'
+          '     IDENTITY = ''<hadoop_user_name>'','
+          '     SECRET = ''<hadoop_password>'' ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase21'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential'
+          'WITH'
+          '  IDENTITY = ''<my_account>'' ,'
+          '  SECRET = ''<azure_storage_account_key>'' ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase22'
+        Lines.Strings = (
+          'CREATE DATABASE SCOPED CREDENTIAL AccessAzureInvoices'
+          'WITH'
+          '  IDENTITY = ''SHARED ACCESS SIGNATURE'','
+          '  -- Remove ? from the beginning of the SAS token'
+          '  SECRET = ''******srt=sco&sp=rwac&se=2017-02-01T00:55:34Z&st=2016-12-29T16:55:34Z***************'' ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase23'
+        Lines.Strings = (
+          '     CREATE DATABASE SCOPED CREDENTIAL SqlServerCredentials'
+          '     WITH IDENTITY = ''username'', Secret = ''password'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase24'
+        Lines.Strings = (
+          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          '   WITH IDENTITY = ''username'', Secret = ''password'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase25'
+        Lines.Strings = (
+          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          '   WITH IDENTITY = ''username'', Secret = ''password'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase26'
+        Lines.Strings = (
+          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          '   WITH IDENTITY = ''username'', Secret = ''password'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase27'
+        Lines.Strings = (
+          'CREATE DATABASE TestDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase28'
+        Lines.Strings = (
+          'CREATE DATABASE AUDIT SPECIFICATION [FilterForSensitiveData]'
+          'FOR SERVER AUDIT [AuditDataAccess]'
+          'ADD (SELECT ON SCHEMA::[DataSchema] BY [public])'
+          'WITH (STATE = ON);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase29'
+        Lines.Strings = (
+          'CREATE DATABASE SampleDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase30'
+        Lines.Strings = (
+          'CREATE DATABASE TestSignature ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateDatabase31'
+        Lines.Strings = (
+          'CREATE DATABASE testDB;'
+          ''
+          ''
+        )
+      end>
+    Left = 48
+    Top = 136
+  end
+  object sTable: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'CreateTable1'
+        Lines.Strings = (
+          'CREATE TABLE dbo.T1'
+          '('
+          '    column_1 AS ''Computed column '' + column_2,'
+          '    column_2 varchar(30)'
+          '        CONSTRAINT default_name DEFAULT (''my column default''),'
+          '    column_3 rowversion,'
+          '    column_4 varchar(40) NULL'
+          ');'
+        )
+      end    
+      item
+        Caption = 'CreateTable2'
+        Lines.Strings = (
+          'CREATE TABLE dbo.T1 ( column_1 int IDENTITY, column_2 VARCHAR(30));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable3'
+        Lines.Strings = (
+          'CREATE TABLE dbo.T1'
+          '('
+          '    column_1 int IDENTITY,'
+          '    column_2 uniqueidentifier,'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable4'
+        Lines.Strings = (
+          'CREATE TABLE dbo.EmployeeSales'
+          '( DataSource   varchar(20) NOT NULL,'
+          '  BusinessEntityID   varchar(11) NOT NULL,'
+          '  LastName     varchar(40) NOT NULL,'
+          '  SalesDollars money NOT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable5'
+        Lines.Strings = (
+          'CREATE TABLE HumanResources.NewEmployee'
+          '('
+          '    EmployeeID int NOT NULL,'
+          '    LastName nvarchar(50) NOT NULL,'
+          '    FirstName nvarchar(50) NOT NULL,'
+          '    PhoneNumber Phone NULL,'
+          '    AddressLine1 nvarchar(60) NOT NULL,'
+          '    City nvarchar(30) NOT NULL,'
+          '    State nchar(3) NOT NULL,'
+          '    PostalCode nvarchar(15) NOT NULL,'
+          '    CurrentFlag Flag'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable6'
+        Lines.Strings = (
+          'CREATE TABLE dbo.EmployeeSales'
+          '( EmployeeID   nvarchar(11) NOT NULL,'
+          '  LastName     nvarchar(20) NOT NULL,'
+          '  FirstName    nvarchar(20) NOT NULL,'
+          '  YearlySales  money NOT NULL'
+          ' );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable7'
+        Lines.Strings = (
+          'CREATE TABLE T1 ( column_1 int, column_2 varchar(30));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable8'
+        Lines.Strings = (
+          'CREATE TABLE Sales.SalesHistory('
+          '    SalesOrderID int NOT NULL,'
+          '    SalesOrderDetailID int NOT NULL,'
+          '    CarrierTrackingNumber nvarchar(25) NULL,'
+          '    OrderQty smallint NOT NULL,'
+          '    ProductID int NOT NULL,'
+          '    SpecialOfferID int NOT NULL,'
+          '    UnitPrice money NOT NULL,'
+          '    UnitPriceDiscount money NOT NULL,'
+          '    LineTotal money NOT NULL,'
+          '    rowguid uniqueidentifier ROWGUIDCOL  NOT NULL,'
+          '    ModifiedDate datetime NOT NULL );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable9'
+        Lines.Strings = (
+          'CREATE TABLE dbo.EmployeeSales'
+          '( EmployeeID   int IDENTITY (1,5)NOT NULL,'
+          '  LastName     nvarchar(20) NOT NULL,'
+          '  FirstName    nvarchar(20) NOT NULL,'
+          '  CurrentSales money NOT NULL,'
+          '  ProjectedSales AS CurrentSales * 1.10'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable10'
+        Lines.Strings = (
+          'CREATE TABLE Production.ZeroInventory (DeletedProductID int, RemovedOnDate DateTime);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable11'
+        Lines.Strings = (
+          'CREATE TABLE EmployeeTitles'
+          '( EmployeeKey   INT NOT NULL,'
+          '  LastName     varchar(40) NOT NULL,'
+          '  Title      varchar(50) NOT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable12'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Table1'
+          '    (ColA INT NOT NULL, ColB DECIMAL(10,3) NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable13'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Table2'
+          '    (ColA INT PRIMARY KEY NOT NULL, ColB DECIMAL(10,3) NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable14'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Table1'
+          '    (c1 INT PRIMARY KEY NOT NULL, c2 INT NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable15'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Table2'
+          '    (d1 INT PRIMARY KEY NOT NULL, d2 INT NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable16'
+        Lines.Strings = (
+          'CREATE TABLE #MyTempTable'
+          '    (ExistingCode nchar(3),'
+          '     ExistingName nvarchar(50),'
+          '     ExistingDate datetime,'
+          '     ActionTaken nvarchar(10),'
+          '     NewCode nchar(3),'
+          '     NewName nvarchar(50),'
+          '     NewDate datetime'
+          '    );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable17'
+        Lines.Strings = (
+          'CREATE TABLE Production.UpdatedInventory'
+          '    (ProductID INT NOT NULL, LocationID int, NewQty int, PreviousQty int,'
+          '     CONSTRAINT PK_Inventory PRIMARY KEY CLUSTERED (ProductID, LocationID));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable18'
+        Lines.Strings = (
+          'CREATE TABLE Person'
+          '    ('
+          '        ID INTEGER PRIMARY KEY,'
+          '        PersonName VARCHAR(100)'
+          '    )'
+          'AS NODE'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable19'
+        Lines.Strings = (
+          'CREATE TABLE City'
+          '    ('
+          '        ID INTEGER PRIMARY KEY,'
+          '        CityName VARCHAR(100),'
+          '        StateName VARCHAR(100)'
+          '    )'
+          'AS NODE'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable20'
+        Lines.Strings = (
+          'CREATE TABLE livesIn'
+          '    ('
+          '        StreetAddress VARCHAR(100)'
+          '    )'
+          'AS EDGE'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable21'
+        Lines.Strings = (
+          'CREATE TABLE #tmpdbs (id INT IDENTITY(1,1), [dbid] INT, [dbname] sysname, isdone BIT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable22'
+        Lines.Strings = (
+          'CREATE TABLE #tmpfgs (id INT IDENTITY(1,1), [dbid] INT, [dbname] sysname, fgname sysname, isdone BIT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable23'
+        Lines.Strings = (
+          'CREATE TABLE [ staging ] ('
+          '     AccountKey              int NOT NULL,'
+          '     AccountDescription      nvarchar (50),'
+          '     AccountType             nvarchar(50),'
+          '     AccountCodeAlternateKey     int'
+          '     )'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable24'
+        Lines.Strings = (
+          'CREATE TABLE cci_target ('
+          '     AccountKey              int NOT NULL,'
+          '     AccountDescription      nvarchar (50),'
+          '     AccountType             nvarchar(50),'
+          '     AccountCodeAlternateKey int'
+          '     )'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable25'
+        Lines.Strings = (
+          'CREATE TABLE dbo.FactInternetSales2 ('
+          '    ProductKey [int] NOT NULL,'
+          '    OrderDateKey [int] NOT NULL,'
+          '    DueDateKey [int] NOT NULL,'
+          '    ShipDateKey [int] NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable26'
+        Lines.Strings = (
+          'CREATE TABLE SimpleTable ('
+          '    ProductKey [int] NOT NULL,'
+          '    OrderDateKey [int] NOT NULL,'
+          '    DueDateKey [int] NOT NULL,'
+          '    ShipDateKey [int] NOT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable27'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exa (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable28'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exc (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable29'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exd (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable30'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exz (column_a INT, column_b INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable31'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exe (column_a INT CONSTRAINT column_a_un UNIQUE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable32'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exf (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable33'
+        Lines.Strings = (
+          'CREATE TABLE T1 ('
+          '  C1 INT PRIMARY KEY,'
+          '  C2 VARCHAR(50) SPARSE NULL,'
+          '  C3 INT SPARSE NULL,'
+          '  C4 INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable34'
+        Lines.Strings = (
+          'CREATE TABLE T2 ('
+          '  C1 INT PRIMARY KEY,'
+          '  C2 VARCHAR(50) NULL,'
+          '  C3 INT NULL,'
+          '  C4 INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable35'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exb ('
+          '     column_a INT,'
+          '     column_b VARCHAR(20) NULL,'
+          '     column_c DATETIME,'
+          '     column_d INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable36'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exc (column_a INT NOT NULL CONSTRAINT my_constraint UNIQUE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable37'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exc ( column_a INT'
+          '                          NOT NULL CONSTRAINT my_constraint UNIQUE'
+          '                          ,column_b INT'
+          '                          NOT NULL CONSTRAINT my_pk_constraint PRIMARY KEY) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable38'
+        Lines.Strings = (
+          'CREATE TABLE Person.ContactBackup'
+          '    (ContactID INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable39'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exy (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable40'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exy (col_a varchar(5) UNIQUE NOT NULL, col_b decimal (4,2)) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable41'
+        Lines.Strings = (
+          'CREATE TABLE T3 ('
+          '  C1 INT PRIMARY KEY,'
+          '  C2 VARCHAR(50) NULL,'
+          '  C3 INT NULL,'
+          '  C4 INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable42'
+        Lines.Strings = (
+          'CREATE TABLE T3 ('
+          '  C1 INT PRIMARY KEY,'
+          '  C2 VARCHAR(50) NULL,'
+          '  C3 INT NULL,'
+          '  C4 INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable43'
+        Lines.Strings = (
+          'CREATE TABLE PartitionTable (col1 INT, col2 CHAR(10))'
+          'ON myRangePS1 (col1) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable44'
+        Lines.Strings = (
+          'CREATE TABLE NonPartitionTable (col1 INT, col2 CHAR(10))'
+          'ON test2fg ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable45'
+        Lines.Strings = (
+          'CREATE TABLE dbo.cnst_example ('
+          '  id INT NOT NULL,'
+          '  name VARCHAR(10) NOT NULL,'
+          '  salary MONEY NOT NULL'
+          '  CONSTRAINT salary_cap CHECK (salary < 100000)) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable46'
+        Lines.Strings = (
+          'CREATE TABLE dbo.trig_example ('
+          '  id INT,'
+          '  name VARCHAR(12),'
+          '  salary MONEY) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable47'
+        Lines.Strings = (
+          'CREATE TABLE dbo.doc_exy (column_a INT) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable48'
+        Lines.Strings = (
+          'CREATE TABLE T ('
+          '        i int primary key,'
+          '        x xml (ManuInstructionsSchemaCollection));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable49'
+        Lines.Strings = (
+          'CREATE TABLE SimpleTable('
+          '    ProductKey [INT] NOT NULL,'
+          '    OrderDateKey [INT] NOT NULL,'
+          '    DueDateKey [INT] NOT NULL,'
+          '    ShipDateKey [INT] NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable50'
+        Lines.Strings = (
+          'CREATE TABLE SimpleTable ('
+          '    ProductKey [INT] NOT NULL,'
+          '    OrderDateKey [INT] NOT NULL,'
+          '    DueDateKey [INT] NOT NULL,'
+          '    ShipDateKey [INT] NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable51'
+        Lines.Strings = (
+          'CREATE TABLE SimpleTable ('
+          '    ProductKey [INT] NOT NULL,'
+          '    OrderDateKey [INT] NOT NULL,'
+          '    DueDateKey [INT] NOT NULL,'
+          '    ShipDateKey [INT] NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable52'
+        Lines.Strings = (
+          'CREATE TABLE MyFactTable ('
+          '    ProductKey [INT] NOT NULL,'
+          '    OrderDateKey [INT] NOT NULL,'
+          '     DueDateKey [INT] NOT NULL,'
+          '     ShipDateKey [INT] NOT NULL )'
+          ')'
+          'WITH ('
+          '    CLUSTERED INDEX ( ProductKey )'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable53'
+        Lines.Strings = (
+          'CREATE TABLE SimpleTable'
+          '(ProductKey [INT] NOT NULL,'
+          'OrderDateKey [INT] NOT NULL,'
+          'DueDateKey [INT] NOT NULL,'
+          'ShipDateKey [INT] NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable54'
+        Lines.Strings = (
+          'CREATE TABLE #Test (C1 NVARCHAR(10), C2 NVARCHAR(50), C3 DATETIME);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable55'
+        Lines.Strings = (
+          'CREATE TABLE #Test (C1 NVARCHAR(10), C2 NVARCHAR(50), C3 DATETIME);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable56'
+        Lines.Strings = (
+          'CREATE TABLE Tbl ( id INT PRIMARY KEY, xmlcol XML );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable57'
+        Lines.Strings = (
+          'CREATE TABLE DataSchema.GeneralData (ID int PRIMARY KEY, DataField varchar(50) NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable58'
+        Lines.Strings = (
+          'CREATE TABLE DataSchema.SensitiveData (ID int PRIMARY KEY, DataField varchar(50) NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable59'
+        Lines.Strings = (
+          'CREATE TABLE SpatialTable(id int primary key, geometry_col geometry);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable60'
+        Lines.Strings = (
+          'CREATE TABLE SpatialTable2(id int primary key, object GEOGRAPHY);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable61'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Employee ('
+          '    EmployeeID INT PRIMARY KEY CLUSTERED'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable62'
+        Lines.Strings = (
+          'CREATE TABLE dbo.PurchaseOrderDetail'
+          '('
+          '    PurchaseOrderID int NOT NULL'
+          '        REFERENCES Purchasing.PurchaseOrderHeader(PurchaseOrderID),'
+          '    LineNumber smallint NOT NULL,'
+          '    ProductID int NULL'
+          '        REFERENCES Production.Product(ProductID),'
+          '    UnitPrice money NULL,'
+          '    OrderQty smallint NULL,'
+          '    ReceivedQty float NULL,'
+          '    RejectedQty float NULL,'
+          '    DueDate datetime NULL,'
+          '    rowguid uniqueidentifier ROWGUIDCOL NOT NULL'
+          '        CONSTRAINT DF_PurchaseOrderDetail_rowguid DEFAULT (NEWID()),'
+          '    ModifiedDate datetime NOT NULL'
+          '        CONSTRAINT DF_PurchaseOrderDetail_ModifiedDate DEFAULT (GETDATE()),'
+          '    LineTotal AS ((UnitPrice*OrderQty)),'
+          '    StockedQty AS ((ReceivedQty-RejectedQty)),'
+          '    CONSTRAINT PK_PurchaseOrderDetail_PurchaseOrderID_LineNumber'
+          '               PRIMARY KEY CLUSTERED (PurchaseOrderID, LineNumber)'
+          '               WITH (IGNORE_DUP_KEY = OFF)'
+          ')'
+          'ON PRIMARY;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable63'
+        Lines.Strings = (
+          'CREATE TABLE HumanResources.EmployeeResumes'
+          '('
+          '    LName nvarchar(25),'
+          '    FName nvarchar(25),'
+          '    Resume xml(DOCUMENT HumanResources.HRResumeSchemaCollection)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable64'
+        Lines.Strings = (
+          'CREATE TABLE PartitionTable (col1 int, col2 char(10))'
+          '    ON myRangePS1 (col1);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable65'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Globally_Unique_Data'
+          '('
+          '    GUID UNIQUEIDENTIFIER'
+          '        CONSTRAINT Guid_Default DEFAULT'
+          '        NEWSEQUENTIALID() ROWGUIDCOL,'
+          '    Employee_Name VARCHAR(60)'
+          '    CONSTRAINT Guid_PK PRIMARY KEY (GUID)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable66'
+        Lines.Strings = (
+          'CREATE TABLE dbo.mytable'
+          '('
+          '    low INT,'
+          '    high INT,'
+          '    myavg AS (low + high)/2'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable67'
+        Lines.Strings = (
+          'CREATE TABLE UDTypeTable'
+          '('
+          '    u UTF8STRING,'
+          '    ustr AS u.ToString() PERSISTED'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable68'
+        Lines.Strings = (
+          'CREATE TABLE dbo.mylogintable'
+          '('
+          '    date_in DATETIME,'
+          '    user_id INT,'
+          '    myuser_name AS USER_NAME()'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable69'
+        Lines.Strings = (
+          'CREATE TABLE dbo.EmployeePhoto'
+          '('
+          '    EmployeeId INT NOT NULL PRIMARY KEY,'
+          '    Photo VARBINARY(MAX) FILESTREAM NULL,'
+          '    MyRowGuidColumn UNIQUEIDENTIFIER NOT NULL ROWGUIDCOL UNIQUE DEFAULT NEWID()'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable70'
+        Lines.Strings = (
+          'CREATE TABLE dbo.T1'
+          '('
+          '    c1 INT,'
+          '    c2 NVARCHAR(200)'
+          ')'
+          'WITH (DATA_COMPRESSION = ROW);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable71'
+        Lines.Strings = (
+          'CREATE TABLE dbo.T1'
+          '('
+          '    c1 INT PRIMARY KEY,'
+          '    c2 VARCHAR(50) SPARSE NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable72'
+        Lines.Strings = (
+          'CREATE TABLE T1'
+          '('
+          '    c1 INT PRIMARY KEY,'
+          '    c2 VARCHAR(50) SPARSE NULL,'
+          '    c3 INT SPARSE NULL,'
+          '    CSet XML COLUMN_SET FOR ALL_SPARSE_COLUMNS'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable73'
+        Lines.Strings = (
+          'CREATE TABLE T1'
+          '('
+          '    c1 INT PRIMARY KEY,'
+          '    c2 VARCHAR(50) SPARSE NULL,'
+          '    c3 INT SPARSE NULL,'
+          '    CSet XML COLUMN_SET FOR ALL_SPARSE_COLUMNS'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable74'
+        Lines.Strings = (
+          'CREATE TABLE Department'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL PRIMARY KEY CLUSTERED,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,'
+          '    SysEndTime DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,'
+          '    PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)'
+          ')'
+          'WITH (SYSTEM_VERSIONING = ON);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable75'
+        Lines.Strings = (
+          'CREATE TABLE Department_History'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 NOT NULL,'
+          '    SysEndTime DATETIME2 NOT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable76'
+        Lines.Strings = (
+          'CREATE TABLE Department'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL PRIMARY KEY CLUSTERED,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,'
+          '    SysEndTime DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,'
+          '    PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)'
+          ')'
+          'WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.Department_History, DATA_CONSISTENCY_CHECK = ON));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable77'
+        Lines.Strings = (
+          'CREATE TABLE dbo.Department'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL PRIMARY KEY NONCLUSTERED,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,'
+          '    SysEndTime DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,'
+          '    PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)'
+          ')'
+          'WITH'
+          '('
+          '    MEMORY_OPTIMIZED = ON,'
+          '    DURABILITY = SCHEMA_AND_DATA,'
+          '    SYSTEM_VERSIONING = ON (HISTORY_TABLE = History.DepartmentHistory)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable78'
+        Lines.Strings = (
+          'CREATE TABLE Department_History'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 NOT NULL,'
+          '    SysEndTime DATETIME2 NOT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable79'
+        Lines.Strings = (
+          'CREATE TABLE Department'
+          '('
+          '    DepartmentNumber CHAR(10) NOT NULL PRIMARY KEY CLUSTERED,'
+          '    DepartmentName VARCHAR(50) NOT NULL,'
+          '    ManagerID INT NULL,'
+          '    ParentDepartmentNumber CHAR(10) NULL,'
+          '    SysStartTime DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL,'
+          '    SysEndTime DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL,'
+          '    PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)'
+          ')'
+          'WITH'
+          '('
+          '    SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.Department_History, DATA_CONSISTENCY_CHECK = ON)'
+          ');'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable80'
+        Lines.Strings = (
+          'CREATE TABLE Customers ('
+          '    CustName NVARCHAR(60)'
+          '        ENCRYPTED WITH ('
+          '            COLUMN_ENCRYPTION_KEY = MyCEK,'
+          '            ENCRYPTION_TYPE = RANDOMIZED,'
+          '            ALGORITHM = ''AEAD_AES_256_CBC_HMAC_SHA_256'''
+          '        ),'
+          '    SSN VARCHAR(11) COLLATE Latin1_General_BIN2'
+          '        ENCRYPTED WITH ('
+          '            COLUMN_ENCRYPTION_KEY = MyCEK,'
+          '            ENCRYPTION_TYPE = DETERMINISTIC ,'
+          '            ALGORITHM = ''AEAD_AES_256_CBC_HMAC_SHA_256'''
+          '        ),'
+          '    Age INT NULL'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable81'
+        Lines.Strings = (
+          'CREATE TABLE t1'
+          '('
+          '    c1 INT,'
+          '    index IX1 (c1) WHERE c1 > 0'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable82'
+        Lines.Strings = (
+          'CREATE TABLE t1'
+          '('
+          '    c1 INT,'
+          '    INDEX ix_1 NONCLUSTERED (c1)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable83'
+        Lines.Strings = (
+          'CREATE TABLE t2'
+          '('
+          '    c1 INT,'
+          '    c2 INT INDEX ix_1 NONCLUSTERED'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable84'
+        Lines.Strings = (
+          'CREATE TABLE t3'
+          '('
+          '    c1 INT,'
+          '    c2 INT,'
+          '    INDEX ix_1 NONCLUSTERED (c1,c2)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable85'
+        Lines.Strings = (
+          'CREATE TABLE #tmp'
+          '('
+          '    c1 INT,'
+          '    c2 INT,'
+          '    PRIMARY KEY CLUSTERED ([c1], [c2])'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable86'
+        Lines.Strings = (
+          'CREATE TABLE new_employees'
+          '('
+          ' id_num int IDENTITY(1,1),'
+          ' fname varchar (20),'
+          ' minit char(1),'
+          ' lname varchar(30)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable87'
+        Lines.Strings = (
+          'CREATE TABLE img (id_num INT IDENTITY(1,1), company_name sysname);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable88'
+        Lines.Strings = (
+          'CREATE TABLE dbo.SUPPLY1 ('
+          'supplyID INT PRIMARY KEY CHECK (supplyID BETWEEN 1 and 150),'
+          'supplier CHAR(50)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable89'
+        Lines.Strings = (
+          'CREATE TABLE dbo.SUPPLY2 ('
+          'supplyID INT PRIMARY KEY CHECK (supplyID BETWEEN 151 and 300),'
+          'supplier CHAR(50)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable90'
+        Lines.Strings = (
+          'CREATE TABLE dbo.SUPPLY3 ('
+          'supplyID INT PRIMARY KEY CHECK (supplyID BETWEEN 301 and 450),'
+          'supplier CHAR(50)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable91'
+        Lines.Strings = (
+          'CREATE TABLE dbo.SUPPLY4 ('
+          'supplyID INT PRIMARY KEY CHECK (supplyID BETWEEN 451 and 600),'
+          'supplier CHAR(50)'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable92'
+        Lines.Strings = (
+          'CREATE TABLE T ('
+          '        i int primary key,'
+          '        x xml (ManuInstructionsSchemaCollection));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable93'
+        Lines.Strings = (
+          'CREATE TABLE T (Col1 xml (mySC));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable94'
+        Lines.Strings = (
+          'CREATE TABLE #temptable (col1 INT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable95'
+        Lines.Strings = (
+          'CREATE TABLE T1 (Col1 INT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTable96'
+        Lines.Strings = (
+          'CREATE TABLE T1 (c VARCHAR(11));'
+          ''
+          ''
+        )
+      end>
+    Left = 48
+    Top = 224
+  end
 end
