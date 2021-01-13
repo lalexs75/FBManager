@@ -163,11 +163,23 @@ type
     procedure CreateTable94;
     procedure CreateTable95;
     procedure CreateTable96;
+
+    procedure Select1;
+    procedure Select2;
+    procedure Select3;
+    procedure Select4;
+    procedure Select5;
+    procedure Select6;
+    procedure Select7;
+    procedure Select8;
+    procedure Select9;
+    procedure Select10;
   end;
 
   { TMSSQLParserTestData }
 
   TMSSQLParserTestData = class(TDataModule)
+    sDML: TRxTextHolder;
     sTable: TRxTextHolder;
     sDataBase: TRxTextHolder;
     sTriggers: TRxTextHolder;
@@ -833,6 +845,56 @@ end;
 procedure TMSSQLParserTest.CreateTable96;
 begin
   DoTestSQL(MSSQLParserTestData.sDataBase['CreateTable96']);
+end;
+
+procedure TMSSQLParserTest.Select1;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select1']);
+end;
+
+procedure TMSSQLParserTest.Select2;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select2']);
+end;
+
+procedure TMSSQLParserTest.Select3;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select3']);
+end;
+
+procedure TMSSQLParserTest.Select4;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select4']);
+end;
+
+procedure TMSSQLParserTest.Select5;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select5']);
+end;
+
+procedure TMSSQLParserTest.Select6;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select6']);
+end;
+
+procedure TMSSQLParserTest.Select7;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select7']);
+end;
+
+procedure TMSSQLParserTest.Select8;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select8']);
+end;
+
+procedure TMSSQLParserTest.Select9;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select9']);
+end;
+
+procedure TMSSQLParserTest.Select10;
+begin
+  DoTestSQL(MSSQLParserTestData.sDML['Select10']);
 end;
 
 procedure TMSSQLParserTest.SetUp;

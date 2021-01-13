@@ -1628,4 +1628,1511 @@ object MSSQLParserTestData: TMSSQLParserTestData
     Left = 48
     Top = 224
   end
+  object sDML: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'Select1'
+        Lines.Strings = (
+          'SELECT *'
+          'FROM DimEmployee'
+          'ORDER BY LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select2'
+        Lines.Strings = (
+          'SELECT e.*'
+          'FROM DimEmployee AS e'
+          'ORDER BY LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select3'
+        Lines.Strings = (
+          'SELECT FirstName, LastName, StartDate AS FirstDay'
+          'FROM DimEmployee'
+          'ORDER BY LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select4'
+        Lines.Strings = (
+          'SELECT FirstName, LastName, StartDate AS FirstDay'
+          'FROM DimEmployee'
+          'WHERE EndDate IS NOT NULL'
+          'AND MaritalStatus = ''M'''
+          'ORDER BY LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select5'
+        Lines.Strings = (
+          'SELECT FirstName, LastName, BaseRate, BaseRate * 40 AS GrossPay'
+          'FROM DimEmployee'
+          'ORDER BY LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select6'
+        Lines.Strings = (
+          'SELECT DISTINCT Title'
+          'FROM DimEmployee'
+          'ORDER BY Title;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select7'
+        Lines.Strings = (
+          'SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales'
+          'FROM FactInternetSales'
+          'GROUP BY OrderDateKey'
+          'ORDER BY OrderDateKey;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select8'
+        Lines.Strings = (
+          'SELECT OrderDateKey, PromotionKey, AVG(SalesAmount) AS AvgSales, SUM(SalesAmount) AS TotalSales'
+          'FROM FactInternetSales'
+          'GROUP BY OrderDateKey, PromotionKey'
+          'ORDER BY OrderDateKey;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select9'
+        Lines.Strings = (
+          'SELECT SUM(SalesAmount) AS TotalSales'
+          'FROM FactInternetSales'
+          'GROUP BY (OrderDateKey * 10);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select10'
+        Lines.Strings = (
+          'SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales'
+          'FROM FactInternetSales'
+          'GROUP BY OrderDateKey'
+          'ORDER BY OrderDateKey;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select11'
+        Lines.Strings = (
+          'SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales'
+          'FROM FactInternetSales'
+          'GROUP BY OrderDateKey'
+          'HAVING OrderDateKey > 20010000'
+          'ORDER BY OrderDateKey;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select12'
+        Lines.Strings = (
+          'SELECT COUNT(*) AS [Rows in Table]'
+          'FROM Sales.ShoppingCartItem'
+          'WHERE ShoppingCartID = 20621;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select13'
+        Lines.Strings = (
+          'SELECT ProductID, ProductName, ProductModelID, PhotoID'
+          'FROM @MyTableVar'
+          'ORDER BY ProductModelID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select14'
+        Lines.Strings = (
+          'SELECT column_1, column_2, column_3, column_4'
+          'FROM dbo.T1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select15'
+        Lines.Strings = (
+          'SELECT DataSource,BusinessEntityID,LastName,SalesDollars'
+          'FROM dbo.EmployeeSales;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select16'
+        Lines.Strings = (
+          'SELECT NewScrapReasonID, Name, ModifiedDate FROM @MyTableVar;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select17'
+        Lines.Strings = (
+          'SELECT ScrapReasonID, Name, ModifiedDate'
+          'FROM Production.ScrapReason;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select18'
+        Lines.Strings = (
+          'SELECT EmployeeID, LastName, FirstName, CurrentSales, ProjectedSales'
+          'FROM dbo.EmployeeSales;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select19'
+        Lines.Strings = (
+          'SELECT UnitMeasureCode, Name FROM Production.UnitMeasure'
+          'WHERE UnitMeasureCode = ''ABC'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select20'
+        Lines.Strings = (
+          'SELECT Change, COUNT(*) AS CountPerChange'
+          'FROM @SummaryOfChanges'
+          'GROUP BY Change;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select21'
+        Lines.Strings = (
+          'SELECT PersonName, CityName, StreetAddress'
+          'FROM Person , City , livesIn'
+          'WHERE MATCH(Person-(livesIn)->city)'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select22'
+        Lines.Strings = (
+          'SELECT name, physical_name'
+          'FROM sys.master_files'
+          'WHERE database_id = DB_ID(''tempdb'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select23'
+        Lines.Strings = (
+          'SELECT name, snapshot_isolation_state,'
+          '    snapshot_isolation_state_desc AS description'
+          'FROM sys.databases'
+          'WHERE name = N''[database_name]'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select24'
+        Lines.Strings = (
+          'SELECT * FROM sys.dm_xe_sessions;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select25'
+        Lines.Strings = (
+          'SELECT * FROM sys.dm_xe_session_events;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select26'
+        Lines.Strings = (
+          'SELECT FULLTEXTCATALOGPROPERTY(''ftCatalog'', ''accentsensitivity'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select27'
+        Lines.Strings = (
+          'SELECT TOP 300000 * FROM staging;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select28'
+        Lines.Strings = (
+          'SELECT *'
+          'FROM sys.dm_db_column_store_row_group_physical_stats'
+          'WHERE object_id  = object_id(''cci_target'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select29'
+        Lines.Strings = (
+          'SELECT *'
+          'FROM sys.dm_db_index_physical_stats (DB_ID(),OBJECT_ID(N''Production.TransactionHistory''), NULL , NULL, NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select30'
+        Lines.Strings = (
+          'SELECT sys.types.name, sys.types.schema_id, sys.schemas.name'
+          '    FROM sys.types JOIN sys.schemas'
+          '        ON sys.types.schema_id = sys.schemas.schema_id'
+          '    WHERE sys.types.name = ''TestType'' ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select31'
+        Lines.Strings = (
+          'SELECT NEXT VALUE FOR Test.CountBy1'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select32'
+        Lines.Strings = (
+          'SELECT NEXT VALUE FOR Test.CountBy1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select33'
+        Lines.Strings = (
+          'SELECT SRM.role_principal_id, SP.name AS Role_Name,'
+          'SRM.member_principal_id, SP2.name  AS Member_Name'
+          'FROM sys.server_role_members AS SRM'
+          'JOIN sys.server_principals AS SP'
+          '    ON SRM.Role_principal_id = SP.principal_id'
+          'JOIN sys.server_principals AS SP2'
+          '    ON SRM.member_principal_id = SP2.principal_id'
+          'ORDER BY  SP.name,  SP2.name'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select34'
+        Lines.Strings = (
+          'SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale'
+          'FROM sys.columns WHERE object_id = OBJECT_ID(N''dbo.doc_exy'') ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select35'
+        Lines.Strings = (
+          'SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale'
+          'FROM sys.columns WHERE object_id = OBJECT_ID(N''dbo.doc_exy'') ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select36'
+        Lines.Strings = (
+          'SELECT *'
+          'FROM sys.xml_schema_collections;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select37'
+        Lines.Strings = (
+          'SELECT name'
+          'FROM sys.xml_schema_namespaces;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select38'
+        Lines.Strings = (
+          'SELECT sys.xml_schema_collections.name'
+          'FROM   sys.xml_schema_collections'
+          'JOIN   sys.xml_schema_namespaces'
+          'ON     sys.xml_schema_collections.xml_collection_id ='
+          '       sys.xml_schema_namespaces.xml_collection_id'
+          'WHERE  sys.xml_schema_namespaces.name='''';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select39'
+        Lines.Strings = (
+          'SELECT query = a.text, start_time, percent_complete,'
+          '    eta = dateadd(second,estimated_completion_time/1000, getdate())'
+          'FROM sys.dm_exec_requests r'
+          '    CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) a'
+          'WHERE r.command LIKE ''BACKUP%'''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select40'
+        Lines.Strings = (
+          'SELECT i.name'
+          'FROM sys.indexes i'
+          'JOIN sys.tables t'
+          'ON ( i.type_desc = ''CLUSTERED'' ) WHERE t.name = ''MyFactTable'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select41'
+        Lines.Strings = (
+          'SELECT i.name'
+          'FROM sys.indexes i'
+          'JOIN sys.tables t'
+          'ON ( i.type_desc = ''CLUSTERED'' )'
+          'WHERE t.name = ''MyFactTable'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select42'
+        Lines.Strings = (
+          'SELECT i.object_id, i.name, t.object_id, t.name'
+          'FROM sys.indexes i'
+          'JOIN sys.tables t'
+          'ON (i.type_desc = ''CLUSTERED COLUMNSTORE'')'
+          'WHERE t.name = ''RowstoreDimTable'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select43'
+        Lines.Strings = (
+          'SELECT name, size, size*1.0/128 AS [Size in MBs]'
+          'FROM sys.master_files'
+          'WHERE name = N''mytest'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select44'
+        Lines.Strings = (
+          'SELECT name, collation_name, is_trustworthy_on, is_db_chaining_on'
+          'FROM sys.databases'
+          'WHERE name = N''MyOptionsTest'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select45'
+        Lines.Strings = (
+          'SELECT name'
+          '    FROM sys.all_objects'
+          '    WHERE'
+          '        (name LIKE ''database\_%'' { ESCAPE ''\ '' } OR'
+          '         name LIKE ''server\_%'' { ESCAPE ''\ '' })'
+          '        AND name LIKE ''%\_event%'' { ESCAPE ''\ '' }'
+          '        AND type = ''V'''
+          '    ORDER BY name;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select46'
+        Lines.Strings = (
+          'SELECT TOP 10 (url) FROM ClickStream WHERE user_ip = ''xxx.xxx.xxx.xxx'''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select47'
+        Lines.Strings = (
+          ''
+          'SELECT DISTINCT user.FirstName, user.LastName'
+          'INTO ms_user'
+          'FROM user INNER JOIN ('
+          '    SELECT * FROM ClickStream WHERE cs.url = ''www.microsoft.com'''
+          '    ) AS ms'
+          'ON user.user_ip = ms.user_ip'
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select48'
+        Lines.Strings = (
+          'SELECT dbo.ISOweek(CONVERT(DATETIME,''12/26/2004'',101)) AS ''ISO Week'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select49'
+        Lines.Strings = (
+          'SELECT @SamplesPath = REPLACE'
+          '    (  physical_name'
+          '     , ''Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\master.mdf'''
+          '     , ''Microsoft SQL Server\130\Samples\Engine\Programmability\CLR\ '''
+          '    )'
+          '  FROM master.sys.database_files'
+          '  WHERE name = ''master'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select50'
+        Lines.Strings = (
+          'SELECT definition, type'
+          'FROM sys.sql_modules AS m'
+          'JOIN sys.objects AS o ON m.object_id = o.object_id'
+          '    AND type IN (''FN'', ''IF'', ''TF'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select51'
+        Lines.Strings = (
+          'SELECT COUNT(*) AS [Number of rows] FROM #Test;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select52'
+        Lines.Strings = (
+          'SELECT COUNT(*) AS [Number of rows] FROM #Test;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select53'
+        Lines.Strings = (
+          'SELECT SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Rev,'
+          '  OrderDate, ProductID'
+          'FROM Sales.SalesOrderDetail AS od'
+          '  JOIN Sales.SalesOrderHeader AS o ON od.SalesOrderID = o.SalesOrderID'
+          '    AND ProductID BETWEEN 700 AND 800'
+          '    AND OrderDate >= CONVERT(DATETIME, ''05/01/2002'', 101)'
+          'GROUP BY OrderDate, ProductID'
+          'ORDER BY Rev DESC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select54'
+        Lines.Strings = (
+          'SELECT OrderDate, SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Rev'
+          'FROM Sales.SalesOrderDetail AS od'
+          '  JOIN Sales.SalesOrderHeader AS o ON od.SalesOrderID = o.SalesOrderID'
+          '    AND DATEPART(mm, OrderDate) = 3'
+          '  AND DATEPART(yy, OrderDate) = 2002'
+          'GROUP BY OrderDate'
+          'ORDER BY OrderDate ASC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select55'
+        Lines.Strings = (
+          'SELECT * FROM fn_get_audit_file(''C:\SQLAudit\AuditDataAccess_*.sqlaudit'',default,default);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select56'
+        Lines.Strings = (
+          'SELECT SUSER_NAME(), USER_NAME();'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select57'
+        Lines.Strings = (
+          'SELECT @cookie;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'BulkInsert1'
+        Lines.Strings = (
+          'BULK INSERT Sales.Orders'
+          'FROM ''\\SystemX\DiskZ\Sales\data\orders.dat'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'BulkInsert2'
+        Lines.Strings = (
+          'BULK INSERT Sales.Orders'
+          'FROM ''\\SystemX\DiskZ\Sales\data\orders.csv'''
+          'WITH ( FORMAT=''CSV'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'BulkInsert3'
+        Lines.Strings = (
+          'BULK INSERT bulktest..t_float'
+          'FROM ''C:\t_float-c.dat'' WITH (FORMATFILE=''C:\t_floatformat-c-xml.xml'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete1'
+        Lines.Strings = (
+          'DELETE FROM Sales.SalesPersonQuotaHistory;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete2'
+        Lines.Strings = (
+          'DELETE FROM Production.ProductCostHistory'
+          'WHERE StandardCost > 1000.00;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete3'
+        Lines.Strings = (
+          'DELETE Production.ProductCostHistory'
+          'WHERE StandardCost BETWEEN 12.00 AND 14.00'
+          '      AND EndDate IS NULL;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete4'
+        Lines.Strings = (
+          'DELETE FROM HumanResources.EmployeePayHistory'
+          'WHERE CURRENT OF complex_cursor;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete5'
+        Lines.Strings = (
+          'DELETE FROM Sales.SalesPersonQuotaHistory'
+          'WHERE BusinessEntityID IN'
+          '    (SELECT BusinessEntityID'
+          '     FROM Sales.SalesPerson'
+          '     WHERE SalesYTD > 2500000.00);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete6'
+        Lines.Strings = (
+          'DELETE FROM Sales.SalesPersonQuotaHistory'
+          'FROM Sales.SalesPersonQuotaHistory AS spqh'
+          'INNER JOIN Sales.SalesPerson AS sp'
+          'ON spqh.BusinessEntityID = sp.BusinessEntityID'
+          'WHERE sp.SalesYTD > 2500000.00;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete7'
+        Lines.Strings = (
+          ''
+          'DELETE spqh'
+          '  FROM'
+          '        Sales.SalesPersonQuotaHistory AS spqh'
+          '    INNER JOIN Sales.SalesPerson AS sp'
+          '        ON spqh.BusinessEntityID = sp.BusinessEntityID'
+          '  WHERE  sp.SalesYTD > 2500000.00;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete8'
+        Lines.Strings = (
+          'DELETE TOP (20)'
+          'FROM Purchasing.PurchaseOrderDetail'
+          'WHERE DueDate < ''20020701'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete9'
+        Lines.Strings = (
+          ''
+          ''
+          'DELETE FROM Purchasing.PurchaseOrderDetail'
+          'WHERE PurchaseOrderDetailID IN'
+          '   (SELECT TOP 10 PurchaseOrderDetailID'
+          '    FROM Purchasing.PurchaseOrderDetail'
+          '    ORDER BY DueDate ASC);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete10'
+        Lines.Strings = (
+          ''
+          'DELETE MyLinkServer.AdventureWorks2012.HumanResources.Department'
+          'WHERE DepartmentID > 16;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete11'
+        Lines.Strings = (
+          'DELETE FROM OPENDATASOURCE(''SQLNCLI'','
+          '    ''Data Source= <server_name>; Integrated Security=SSPI'')'
+          '    .AdventureWorks2012.HumanResources.Department'
+          'WHERE DepartmentID = 17;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete12'
+        Lines.Strings = (
+          'DELETE Sales.ShoppingCartItem'
+          'OUTPUT DELETED.*'
+          'WHERE ShoppingCartID = 20621;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete13'
+        Lines.Strings = (
+          'DELETE Production.ProductProductPhoto'
+          'OUTPUT DELETED.ProductID,'
+          '       p.Name,'
+          '       p.ProductModelID,'
+          '       DELETED.ProductPhotoID'
+          '    INTO @MyTableVar'
+          'FROM Production.ProductProductPhoto AS ph'
+          'JOIN Production.Product as p'
+          '    ON ph.ProductID = p.ProductID'
+          '    WHERE p.ProductModelID BETWEEN 120 and 130;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Delete14'
+        Lines.Strings = (
+          'DELETE FROM Production.UnitMeasure WHERE UnitMeasureCode IN (''ABC'',''XYZ'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert1'
+      end    
+      item
+        Caption = 'Insert2'
+        Lines.Strings = (
+          'INSERT INTO Cities (Location)'
+          'VALUES ( CONVERT(Point, ''12.3:46.2'') );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert3'
+        Lines.Strings = (
+          'INSERT INTO Cities (Location)'
+          'VALUES ( dbo.CreateNewPoint(x, y) );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert4'
+        Lines.Strings = (
+          'INSERT INTO Production.UnitMeasure'
+          'VALUES (N''FT'', N''Feet'', ''20080414'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert5'
+        Lines.Strings = (
+          'INSERT INTO Production.UnitMeasure'
+          'VALUES (N''FT2'', N''Square Feet '', ''20080923''), (N''Y'', N''Yards'', ''20080923'')'
+          '    , (N''Y3'', N''Cubic Yards'', ''20080923'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert6'
+        Lines.Strings = (
+          'INSERT INTO Production.UnitMeasure (Name, UnitMeasureCode,'
+          '    ModifiedDate)'
+          'VALUES (N''Square Yards'', N''Y2'', GETDATE());'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert7'
+        Lines.Strings = (
+          'INSERT INTO dbo.T1 (column_4)'
+          '    VALUES (''Explicit value'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert8'
+        Lines.Strings = (
+          'INSERT INTO dbo.T1 (column_2, column_4)'
+          '    VALUES (''Explicit value'', ''Explicit value'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert9'
+        Lines.Strings = (
+          'INSERT INTO dbo.T1 (column_2)'
+          '    VALUES (''Explicit value'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert10'
+        Lines.Strings = (
+          'INSERT INTO T1 DEFAULT VALUES;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert11'
+        Lines.Strings = (
+          'INSERT T1 VALUES (''Row #1'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert12'
+        Lines.Strings = (
+          'INSERT T1 (column_2) VALUES (''Row #2'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert13'
+        Lines.Strings = (
+          'INSERT INTO T1 (column_1,column_2)'
+          '    VALUES (-99, ''Explicit identity value'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert14'
+        Lines.Strings = (
+          'INSERT INTO dbo.T1 (column_2)'
+          '    VALUES (NEWID());'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert15'
+        Lines.Strings = (
+          'INSERT INTO T1 DEFAULT VALUES;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert16'
+        Lines.Strings = (
+          'INSERT INTO dbo.Points (PointValue) VALUES (CONVERT(Point, ''3,4''));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert17'
+        Lines.Strings = (
+          'INSERT INTO dbo.Points (PointValue) VALUES (CONVERT(Point, ''1,5''));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert18'
+        Lines.Strings = (
+          'INSERT INTO dbo.Points (PointValue) VALUES (CAST (''1,99'' AS Point));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert19'
+        Lines.Strings = (
+          'INSERT INTO dbo.EmployeeSales'
+          '    SELECT ''SELECT'', sp.BusinessEntityID, c.LastName, sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.BusinessEntityID LIKE ''2%'''
+          '    ORDER BY sp.BusinessEntityID, c.LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert20'
+        Lines.Strings = (
+          'INSERT INTO dbo.EmployeeSales'
+          'EXECUTE dbo.uspGetEmployeeSales;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert21'
+        Lines.Strings = (
+          'INSERT INTO dbo.EmployeeSales'
+          'EXECUTE'
+          '('''
+          'SELECT ''''EXEC STRING'''', sp.BusinessEntityID, c.LastName,'
+          '    sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.BusinessEntityID LIKE ''''2%'''''
+          '    ORDER BY sp.BusinessEntityID, c.LastName'
+          ''');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert22'
+        Lines.Strings = (
+          'WITH EmployeeTemp (EmpID, LastName, FirstName, Phone,'
+          '                   Address, City, StateProvince,'
+          '                   PostalCode, CurrentFlag)'
+          'AS (SELECT'
+          '       e.BusinessEntityID, c.LastName, c.FirstName, pp.PhoneNumber,'
+          '       a.AddressLine1, a.City, sp.StateProvinceCode,'
+          '       a.PostalCode, e.CurrentFlag'
+          '    FROM HumanResources.Employee e'
+          '        INNER JOIN Person.BusinessEntityAddress AS bea'
+          '        ON e.BusinessEntityID = bea.BusinessEntityID'
+          '        INNER JOIN Person.Address AS a'
+          '        ON bea.AddressID = a.AddressID'
+          '        INNER JOIN Person.PersonPhone AS pp'
+          '        ON e.BusinessEntityID = pp.BusinessEntityID'
+          '        INNER JOIN Person.StateProvince AS sp'
+          '        ON a.StateProvinceID = sp.StateProvinceID'
+          '        INNER JOIN Person.Person as c'
+          '        ON e.BusinessEntityID = c.BusinessEntityID'
+          '    )'
+          'INSERT INTO HumanResources.NewEmployee'
+          '    SELECT EmpID, LastName, FirstName, Phone,'
+          '           Address, City, StateProvince, PostalCode, CurrentFlag'
+          '    FROM EmployeeTemp;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert23'
+        Lines.Strings = (
+          'INSERT TOP(5)INTO dbo.EmployeeSales'
+          '    OUTPUT inserted.EmployeeID, inserted.FirstName,'
+          '        inserted.LastName, inserted.YearlySales'
+          '    SELECT sp.BusinessEntityID, c.LastName, c.FirstName, sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.SalesYTD > 250000.00'
+          '    ORDER BY sp.SalesYTD DESC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert24'
+        Lines.Strings = (
+          'INSERT INTO dbo.EmployeeSales'
+          '    OUTPUT inserted.EmployeeID, inserted.FirstName,'
+          '        inserted.LastName, inserted.YearlySales'
+          '    SELECT TOP (5) sp.BusinessEntityID, c.LastName, c.FirstName, sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.SalesYTD > 250000.00'
+          '    ORDER BY sp.SalesYTD DESC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert25'
+        Lines.Strings = (
+          'INSERT INTO V1'
+          '    VALUES (''Row 1'',1);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert26'
+        Lines.Strings = (
+          'INSERT INTO @MyTableVar (LocationID, CostRate, ModifiedDate)'
+          '    SELECT LocationID, CostRate, GETDATE()'
+          '    FROM Production.Location'
+          '    WHERE CostRate > 0;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert27'
+        Lines.Strings = (
+          'INSERT INTO MyLinkServer.AdventureWorks2012.HumanResources.Department (Name, GroupName)'
+          'VALUES (N''Public Relations'', N''Executive General and Administration'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert28'
+        Lines.Strings = (
+          'INSERT INTO OPENDATASOURCE(''SQLNCLI'','
+          '    ''Data Source= <server_name>; Integrated Security=SSPI'')'
+          '    .AdventureWorks2012.HumanResources.Department (Name, GroupName)'
+          '    VALUES (N''Standards and Methods'', ''Quality Assurance'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert29'
+        Lines.Strings = (
+          'INSERT INTO Sales.SalesHistory WITH (TABLOCK)'
+          '    (SalesOrderID,'
+          '     SalesOrderDetailID,'
+          '     CarrierTrackingNumber,'
+          '     OrderQty,'
+          '     ProductID,'
+          '     SpecialOfferID,'
+          '     UnitPrice,'
+          '     UnitPriceDiscount,'
+          '     LineTotal,'
+          '     rowguid,'
+          '     ModifiedDate)'
+          'SELECT * FROM Sales.SalesOrderDetail;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert30'
+        Lines.Strings = (
+          'INSERT INTO HumanResources.Department WITH (IGNORE_TRIGGERS) (Name, GroupName)'
+          'SELECT b.Name, b.GroupName'
+          'FROM OPENROWSET ('
+          '    BULK ''C:SQLFilesDepartmentData.txt'','
+          '    FORMATFILE = ''C:SQLFilesBulkloadFormatFile.xml'','
+          '    ROWS_PER_BATCH = 15000)AS b ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert31'
+        Lines.Strings = (
+          'INSERT INTO Production.Location WITH (XLOCK)'
+          '(Name, CostRate, Availability)'
+          'VALUES ( N''Final Inventory'', 15.00, 80.00);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert32'
+        Lines.Strings = (
+          'INSERT Production.ScrapReason'
+          '    OUTPUT INSERTED.ScrapReasonID, INSERTED.Name, INSERTED.ModifiedDate'
+          '        INTO @MyTableVar'
+          'VALUES (N''Operator error'', GETDATE());'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert33'
+        Lines.Strings = (
+          'INSERT INTO dbo.EmployeeSales (LastName, FirstName, CurrentSales)'
+          '  OUTPUT INSERTED.LastName,'
+          '         INSERTED.FirstName,'
+          '         INSERTED.CurrentSales'
+          '  INTO @MyTableVar'
+          '    SELECT c.LastName, c.FirstName, sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.BusinessEntityID LIKE ''2%'''
+          '    ORDER BY c.LastName, c.FirstName;'
+          ''
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert34'
+        Lines.Strings = (
+          'INSERT INTO Production.ZeroInventory (DeletedProductID, RemovedOnDate)'
+          'SELECT ProductID, GETDATE()'
+          'FROM'
+          '(   MERGE Production.ProductInventory AS pi'
+          '    USING (SELECT ProductID, SUM(OrderQty) FROM Sales.SalesOrderDetail AS sod'
+          '           JOIN Sales.SalesOrderHeader AS soh'
+          '           ON sod.SalesOrderID = soh.SalesOrderID'
+          '           AND soh.OrderDate = ''20070401'''
+          '           GROUP BY ProductID) AS src (ProductID, OrderQty)'
+          '    ON (pi.ProductID = src.ProductID)'
+          '    WHEN MATCHED AND pi.Quantity - src.OrderQty <= 0'
+          '        THEN DELETE'
+          '    WHEN MATCHED'
+          '        THEN UPDATE SET pi.Quantity = pi.Quantity - src.OrderQty'
+          '    OUTPUT $action, deleted.ProductID) AS Changes (Action, ProductID)'
+          'WHERE Action = ''DELETE'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert35'
+        Lines.Strings = (
+          'INSERT INTO EmployeeTitles'
+          '    SELECT EmployeeKey, LastName, Title'
+          '    FROM ssawPDW.dbo.DimEmployee'
+          '    WHERE EndDate IS NULL;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert36'
+        Lines.Strings = (
+          'INSERT INTO DimCurrency'
+          'VALUES (500, N''C1'', N''Currency1'')'
+          'OPTION ( LABEL = N''label1'' );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert37'
+        Lines.Strings = (
+          'INSERT INTO DimCustomer (CustomerKey, CustomerAlternateKey,'
+          '    FirstName, MiddleName, LastName )'
+          'SELECT ProspectiveBuyerKey, ProspectAlternateKey,'
+          '    FirstName, MiddleName, LastName'
+          'FROM ProspectiveBuyer p JOIN DimGeography g ON p.PostalCode = g.PostalCode'
+          'WHERE g.CountryRegionCode = ''FR'''
+          'OPTION ( LABEL = ''Add French Prospects'', HASH JOIN);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert38'
+        Lines.Strings = (
+          'INSERT INTO dbo.Table1 VALUES(1, 10.0), (1, 20.0);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert39'
+        Lines.Strings = (
+          'INSERT INTO dbo.Table2 VALUES(1, 0.0);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert40'
+        Lines.Strings = (
+          'INSERT @x VALUES (1, 10), (2, 20);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert41'
+        Lines.Strings = (
+          'INSERT @y VALUES (1, 100),(2, 200);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert42'
+        Lines.Strings = (
+          'INSERT INTO Person VALUES (1, ''Ron''), (2, ''David''), (3, ''Nancy'')'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert43'
+        Lines.Strings = (
+          'INSERT INTO City VALUES (1, ''Redmond'', ''Washington''), (2, ''Seattle'', ''Washington'')'
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert44'
+        Lines.Strings = (
+          'INSERT livesIn SELECT P.$node_id, C.$node_id, c'
+          'FROM Person P, City C, (values (1,1, ''123 Avenue''), (2,2,''Main Street'')) v(a,b,c)'
+          'WHERE P.id = a AND C.id = b'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert45'
+        Lines.Strings = (
+          'INSERT INTO #tmpdbs ([dbid], [dbname], [isdone])'
+          'SELECT database_id, name, 0 FROM master.sys.databases (NOLOCK) WHERE is_read_only = 0 AND state = 0;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert46'
+        Lines.Strings = (
+          'INSERT INTO cci_target WITH (TABLOCK)'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert47'
+        Lines.Strings = (
+          'INSERT INTO dbo.FactInternetSales2'
+          'SELECT ProductKey, OrderDateKey, DueDateKey, ShipDateKey'
+          'FROM dbo.FactInternetSales;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert48'
+        Lines.Strings = (
+          'INSERT INTO dbo.doc_exd VALUES (-1) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert49'
+        Lines.Strings = (
+          'INSERT INTO dbo.doc_exz (column_a) VALUES (10) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert50'
+        Lines.Strings = (
+          'INSERT INTO Production.UnitMeasure (UnitMeasureCode, Name, ModifiedDate)'
+          '  VALUES (''OC'', ''Ounces'', GETDATE());'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert51'
+        Lines.Strings = (
+          'INSERT INTO #Test VALUES (N''OC'', N''Ounces'', GETDATE());'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert52'
+        Lines.Strings = (
+          'INSERT INTO #Test SELECT * FROM Production.UnitMeasure;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert53'
+        Lines.Strings = (
+          'INSERT INTO @LocationTVP (LocationName, CostRate)'
+          '    SELECT [Name], 0.00'
+          '    FROM'
+          '    [AdventureWorks2012].[Person].[StateProvince];'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert54'
+        Lines.Strings = (
+          'INSERT new_employees'
+          '   (fname, minit, lname)'
+          'VALUES'
+          '   (''Karin'', ''F'', ''Josephs'');'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert55'
+        Lines.Strings = (
+          'INSERT new_employees'
+          '   (fname, minit, lname)'
+          'VALUES'
+          '   (''Pirkko'', ''O'', ''Koskitalo'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert56'
+        Lines.Strings = (
+          'INSERT INTO Purchasing.PurchaseOrderHeader (RevisionNumber, Status, EmployeeID,'
+          'VendorID, ShipMethodID, OrderDate, ShipDate, SubTotal, TaxAmt, Freight)'
+          'VALUES ('
+          '2'
+          ',3'
+          ',261'
+          ',1652'
+          ',4'
+          ',GETDATE()'
+          ',GETDATE()'
+          ',44594.55'
+          ',3567.564'
+          ',1114.8638 );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert57'
+        Lines.Strings = (
+          'INSERT dbo.all_supplier_view VALUES (''1'', ''CaliforniaCorp''), (''5'', ''BraziliaLtd'')'
+          ', (''231'', ''FarEast''), (''280'', ''NZ'')'
+          ', (''321'', ''EuroGroup''), (''442'', ''UKArchip'')'
+          ', (''475'', ''India''), (''521'', ''Afrique'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Insert58'
+        Lines.Strings = (
+          'INSERT INTO #temptable'
+          'VALUES (10);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update1'
+        Lines.Strings = (
+          'UPDATE dbo.Table2'
+          'SET dbo.Table2.ColB = dbo.Table2.ColB + dbo.Table1.ColB'
+          'FROM dbo.Table2'
+          '    INNER JOIN dbo.Table1'
+          '    ON (dbo.Table2.ColA = dbo.Table1.ColA);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update2'
+        Lines.Strings = (
+          'UPDATE dbo.Table1'
+          'SET c2 = c2 + d2'
+          'FROM dbo.Table2'
+          'WHERE CURRENT OF abc;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update3'
+        Lines.Strings = (
+          'UPDATE Cities'
+          'SET Location = CONVERT(Point, ''12.3:46.2'')'
+          'WHERE Name = ''Anchorage'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update4'
+        Lines.Strings = (
+          'UPDATE Cities'
+          'SET Location.SetXY(23.5, 23.5)'
+          'WHERE Name = ''Anchorage'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update5'
+        Lines.Strings = (
+          'UPDATE Cities'
+          'SET Location.X = 23.5'
+          'WHERE Name = ''Anchorage'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update6'
+        Lines.Strings = (
+          'WITH cte AS (SELECT * FROM @x)'
+          'UPDATE x -- cte is referenced by the alias.'
+          'SET Value = y.Value'
+          'FROM cte AS x  -- cte is assigned an alias.'
+          'INNER JOIN @y AS y ON y.ID = x.ID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update7'
+        Lines.Strings = (
+          'WITH cte AS (SELECT * FROM @x)'
+          'UPDATE cte   -- cte is not referenced by the alias.'
+          'SET Value = y.Value'
+          'FROM cte AS x  -- cte is assigned an alias.'
+          'INNER JOIN @y AS y ON y.ID = x.ID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update8'
+        Lines.Strings = (
+          'UPDATE STATISTICS Sales.SalesOrderDetail;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update9'
+        Lines.Strings = (
+          'UPDATE STATISTICS Sales.SalesOrderDetail AK_SalesOrderDetail_rowguid;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update10'
+        Lines.Strings = (
+          'UPDATE STATISTICS Production.Product(Products)'
+          '    WITH FULLSCAN, NORECOMPUTE;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Update11'
+        Lines.Strings = (
+          'UPDATE Production.Product'
+          '    SET ListPrice = ListPrice * 1.10'
+          '    WHERE ProductNumber LIKE ''BK-%'';'
+          ''
+          ''
+        )
+      end>
+    Left = 45
+    Top = 312
+  end
 end

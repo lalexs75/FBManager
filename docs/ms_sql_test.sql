@@ -1,59 +1,3 @@
-SELECT *  
-FROM DimEmployee  
-ORDER BY LastName;
-
-SELECT e.*  
-FROM DimEmployee AS e  
-ORDER BY LastName;
-
-SELECT FirstName, LastName, StartDate AS FirstDay  
-FROM DimEmployee   
-ORDER BY LastName;
-
-
-SELECT FirstName, LastName, StartDate AS FirstDay  
-FROM DimEmployee   
-WHERE EndDate IS NOT NULL   
-AND MaritalStatus = 'M'  
-ORDER BY LastName;
-
-
-SELECT FirstName, LastName, BaseRate, BaseRate * 40 AS GrossPay  
-FROM DimEmployee  
-ORDER BY LastName;
-
-
-SELECT DISTINCT Title  
-FROM DimEmployee  
-ORDER BY Title;
-
-SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales  
-FROM FactInternetSales  
-GROUP BY OrderDateKey  
-ORDER BY OrderDateKey;
-
-SELECT OrderDateKey, PromotionKey, AVG(SalesAmount) AS AvgSales, SUM(SalesAmount) AS TotalSales  
-FROM FactInternetSales  
-GROUP BY OrderDateKey, PromotionKey  
-ORDER BY OrderDateKey;
-
-SELECT SUM(SalesAmount) AS TotalSales  
-FROM FactInternetSales  
-GROUP BY (OrderDateKey * 10);
-
-
-SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales  
-FROM FactInternetSales  
-GROUP BY OrderDateKey  
-ORDER BY OrderDateKey;
-
-
-SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales  
-FROM FactInternetSales  
-GROUP BY OrderDateKey  
-HAVING OrderDateKey > 20010000  
-ORDER BY OrderDateKey;
-
 
 ADD SENSITIVITY CLASSIFICATION TO
     dbo.sales.price, dbo.sales.discount
@@ -64,29 +8,9 @@ ADD SENSITIVITY CLASSIFICATION TO
     dbo.customer.comments
     WITH ( LABEL='Confidential', LABEL_ID='643f7acd-776a-438d-890c-79c3f2a520d6' )
     
-BULK INSERT Sales.Orders
-FROM '\\SystemX\DiskZ\Sales\data\orders.dat';
 
 
-BULK INSERT Sales.Orders
-FROM '\\SystemX\DiskZ\Sales\data\orders.csv'
-WITH ( FORMAT='CSV');
 
-
-BULK INSERT bulktest..t_float
-FROM 'C:\t_float-c.dat' WITH (FORMATFILE='C:\t_floatformat-c-xml.xml');
-
-DELETE FROM Sales.SalesPersonQuotaHistory;  
-GO
-
-DELETE FROM Production.ProductCostHistory  
-WHERE StandardCost > 1000.00;  
-GO
-
-DELETE Production.ProductCostHistory  
-WHERE StandardCost BETWEEN 12.00 AND 14.00  
-      AND EndDate IS NULL;  
-PRINT 'Number of rows deleted is ' + CAST(@@ROWCOUNT as char(3));
 
 DECLARE complex_cursor CURSOR FOR  
     SELECT a.BusinessEntityID  
@@ -97,75 +21,8 @@ DECLARE complex_cursor CURSOR FOR
           WHERE a.BusinessEntityID = b.BusinessEntityID) ;  
 OPEN complex_cursor;  
 FETCH FROM complex_cursor;  
-DELETE FROM HumanResources.EmployeePayHistory  
-WHERE CURRENT OF complex_cursor;  
 CLOSE complex_cursor;  
 DEALLOCATE complex_cursor;  
-GO
-
--- SQL-2003 Standard subquery  
-  
-DELETE FROM Sales.SalesPersonQuotaHistory   
-WHERE BusinessEntityID IN   
-    (SELECT BusinessEntityID   
-     FROM Sales.SalesPerson   
-     WHERE SalesYTD > 2500000.00);  
-GO
-
--- Transact-SQL extension  
-  
-DELETE FROM Sales.SalesPersonQuotaHistory   
-FROM Sales.SalesPersonQuotaHistory AS spqh  
-INNER JOIN Sales.SalesPerson AS sp  
-ON spqh.BusinessEntityID = sp.BusinessEntityID  
-WHERE sp.SalesYTD > 2500000.00;  
-GO
-
--- No need to mention target table more than once.  
-  
-DELETE spqh  
-  FROM  
-        Sales.SalesPersonQuotaHistory AS spqh  
-    INNER JOIN Sales.SalesPerson AS sp  
-        ON spqh.BusinessEntityID = sp.BusinessEntityID  
-  WHERE  sp.SalesYTD > 2500000.00;
-  
-DELETE TOP (20)   
-FROM Purchasing.PurchaseOrderDetail  
-WHERE DueDate < '20020701';  
-GO
-
-
-DELETE FROM Purchasing.PurchaseOrderDetail  
-WHERE PurchaseOrderDetailID IN  
-   (SELECT TOP 10 PurchaseOrderDetailID   
-    FROM Purchasing.PurchaseOrderDetail   
-    ORDER BY DueDate ASC);  
-GO
-
-
--- Specify the remote data source using a four-part name   
--- in the form linked_server.catalog.schema.object.  
-  
-DELETE MyLinkServer.AdventureWorks2012.HumanResources.Department 
-WHERE DepartmentID > 16;  
-GO
-
-DELETE FROM OPENDATASOURCE('SQLNCLI',  
-    'Data Source= <server_name>; Integrated Security=SSPI')  
-    .AdventureWorks2012.HumanResources.Department   
-WHERE DepartmentID = 17;
-
-
-DELETE Sales.ShoppingCartItem  
-OUTPUT DELETED.*   
-WHERE ShoppingCartID = 20621;  
-  
---Verify the rows in the table matching the WHERE clause have been deleted.  
-SELECT COUNT(*) AS [Rows in Table] 
-FROM Sales.ShoppingCartItem 
-WHERE ShoppingCartID = 20621;  
-GO
 
 
 DECLARE @MyTableVar table (  
@@ -174,24 +31,6 @@ DECLARE @MyTableVar table (
     ProductModelID int NOT NULL,   
     PhotoID int NOT NULL);  
   
-DELETE Production.ProductProductPhoto  
-OUTPUT DELETED.ProductID,  
-       p.Name,  
-       p.ProductModelID,  
-       DELETED.ProductPhotoID  
-    INTO @MyTableVar  
-FROM Production.ProductProductPhoto AS ph  
-JOIN Production.Product as p   
-    ON ph.ProductID = p.ProductID   
-    WHERE p.ProductModelID BETWEEN 120 and 130;  
-  
---Display the results of the table variable.  
-SELECT ProductID, ProductName, ProductModelID, PhotoID   
-FROM @MyTableVar  
-ORDER BY ProductModelID;  
-GO
-
-
 
 CREATE TRIGGER safety   
 ON DATABASE   
@@ -207,63 +46,9 @@ AS
    PRINT 'You must disable Trigger "safety" to drop or alter tables!'   
    ROLLBACK;  
 
-
-INSERT INTO Cities (Location)  
-VALUES ( CONVERT(Point, '12.3:46.2') );
-
-INSERT INTO Cities (Location)  
-VALUES ( dbo.CreateNewPoint(x, y) );
-
-INSERT INTO Production.UnitMeasure  
-VALUES (N'FT', N'Feet', '20080414');
-
-INSERT INTO Production.UnitMeasure  
-VALUES (N'FT2', N'Square Feet ', '20080923'), (N'Y', N'Yards', '20080923')
-    , (N'Y3', N'Cubic Yards', '20080923');
-    
-INSERT INTO Production.UnitMeasure (Name, UnitMeasureCode,  
-    ModifiedDate)  
-VALUES (N'Square Yards', N'Y2', GETDATE());          
-
-
-GO  
-INSERT INTO dbo.T1 (column_4)   
-    VALUES ('Explicit value');  
-INSERT INTO dbo.T1 (column_2, column_4)   
-    VALUES ('Explicit value', 'Explicit value');  
-INSERT INTO dbo.T1 (column_2)   
-    VALUES ('Explicit value');  
-INSERT INTO T1 DEFAULT VALUES;   
-GO  
-SELECT column_1, column_2, column_3, column_4  
-FROM dbo.T1;  
-GO
-
-
-GO  
-INSERT T1 VALUES ('Row #1');  
-INSERT T1 (column_2) VALUES ('Row #2');  
 GO  
 SET IDENTITY_INSERT T1 ON;  
-GO  
-INSERT INTO T1 (column_1,column_2)   
-    VALUES (-99, 'Explicit identity value');  
-GO  
-SELECT column_1, column_2  
-FROM T1;  
-GO
 
-GO  
-INSERT INTO dbo.T1 (column_2)   
-    VALUES (NEWID());  
-INSERT INTO T1 DEFAULT VALUES;   
-GO  
-SELECT column_1, column_2  
-FROM dbo.T1;
-
-INSERT INTO dbo.Points (PointValue) VALUES (CONVERT(Point, '3,4'));  
-INSERT INTO dbo.Points (PointValue) VALUES (CONVERT(Point, '1,5'));  
-INSERT INTO dbo.Points (PointValue) VALUES (CAST ('1,99' AS Point));
 
 
 GO  
@@ -278,99 +63,22 @@ AS
     WHERE sp.BusinessEntityID LIKE '2%'  
     ORDER BY sp.BusinessEntityID, c.LastName;  
 GO  
---INSERT...SELECT example  
-INSERT INTO dbo.EmployeeSales  
-    SELECT 'SELECT', sp.BusinessEntityID, c.LastName, sp.SalesYTD   
-    FROM Sales.SalesPerson AS sp  
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.BusinessEntityID LIKE '2%'  
-    ORDER BY sp.BusinessEntityID, c.LastName;  
-GO  
---INSERT...EXECUTE procedure example  
-INSERT INTO dbo.EmployeeSales   
-EXECUTE dbo.uspGetEmployeeSales;  
-GO  
---INSERT...EXECUTE('string') example  
-INSERT INTO dbo.EmployeeSales   
-EXECUTE   
-('  
-SELECT ''EXEC STRING'', sp.BusinessEntityID, c.LastName,   
-    sp.SalesYTD   
-    FROM Sales.SalesPerson AS sp   
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.BusinessEntityID LIKE ''2%''  
-    ORDER BY sp.BusinessEntityID, c.LastName  
-');  
-GO  
 --Show results.  
-SELECT DataSource,BusinessEntityID,LastName,SalesDollars  
-FROM dbo.EmployeeSales;
 
 
 GO  
-WITH EmployeeTemp (EmpID, LastName, FirstName, Phone,   
-                   Address, City, StateProvince,   
-                   PostalCode, CurrentFlag)  
-AS (SELECT   
-       e.BusinessEntityID, c.LastName, c.FirstName, pp.PhoneNumber,  
-       a.AddressLine1, a.City, sp.StateProvinceCode,   
-       a.PostalCode, e.CurrentFlag  
-    FROM HumanResources.Employee e  
-        INNER JOIN Person.BusinessEntityAddress AS bea  
-        ON e.BusinessEntityID = bea.BusinessEntityID  
-        INNER JOIN Person.Address AS a  
-        ON bea.AddressID = a.AddressID  
-        INNER JOIN Person.PersonPhone AS pp  
-        ON e.BusinessEntityID = pp.BusinessEntityID  
-        INNER JOIN Person.StateProvince AS sp  
-        ON a.StateProvinceID = sp.StateProvinceID  
-        INNER JOIN Person.Person as c  
-        ON e.BusinessEntityID = c.BusinessEntityID  
-    )  
-INSERT INTO HumanResources.NewEmployee   
-    SELECT EmpID, LastName, FirstName, Phone,   
-           Address, City, StateProvince, PostalCode, CurrentFlag  
-    FROM EmployeeTemp;  
 GO
 
 
 GO  
-INSERT TOP(5)INTO dbo.EmployeeSales  
-    OUTPUT inserted.EmployeeID, inserted.FirstName, 
-        inserted.LastName, inserted.YearlySales  
-    SELECT sp.BusinessEntityID, c.LastName, c.FirstName, sp.SalesYTD   
-    FROM Sales.SalesPerson AS sp  
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.SalesYTD > 250000.00  
-    ORDER BY sp.SalesYTD DESC;
     
-INSERT INTO dbo.EmployeeSales  
-    OUTPUT inserted.EmployeeID, inserted.FirstName, 
-        inserted.LastName, inserted.YearlySales  
-    SELECT TOP (5) sp.BusinessEntityID, c.LastName, c.FirstName, sp.SalesYTD   
-    FROM Sales.SalesPerson AS sp  
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.SalesYTD > 250000.00  
-    ORDER BY sp.SalesYTD DESC;
     
 GO  
 CREATE VIEW V1 AS   
 SELECT column_2, column_1   
 FROM T1;  
 GO  
-INSERT INTO V1   
-    VALUES ('Row 1',1);  
 GO  
-SELECT column_1, column_2   
-FROM T1;  
-GO  
-SELECT column_1, column_2  
-FROM V1;  
-GO
 
 -- Create the table variable.  
 DECLARE @MyTableVar table(  
@@ -379,18 +87,6 @@ DECLARE @MyTableVar table(
     NewCostRate AS CostRate * 1.5,  
     ModifiedDate datetime);  
   
--- Insert values into the table variable.  
-INSERT INTO @MyTableVar (LocationID, CostRate, ModifiedDate)  
-    SELECT LocationID, CostRate, GETDATE() 
-    FROM Production.Location  
-    WHERE CostRate > 0;  
-  
--- View the table variable result set.  
-SELECT * FROM @MyTableVar;  
-GO
-
-USE master;  
-GO  
 -- Create a link to the remote data source.   
 -- Specify a valid server name for @datasrc as 'server_name' 
 -- or 'server_nameinstance_name'.  
@@ -406,18 +102,12 @@ GO
 -- Specify the remote data source in the FROM clause using a four-part name   
 -- in the form linked_server.catalog.schema.object.  
   
-INSERT INTO MyLinkServer.AdventureWorks2012.HumanResources.Department (Name, GroupName)  
-VALUES (N'Public Relations', N'Executive General and Administration');  
 GO
 
 -- Use the OPENDATASOURCE function to specify the remote data source.  
 -- Specify a valid server name for Data Source using the format 
 -- server_name or server_nameinstance_name.  
   
-INSERT INTO OPENDATASOURCE('SQLNCLI',  
-    'Data Source= <server_name>; Integrated Security=SSPI')  
-    .AdventureWorks2012.HumanResources.Department (Name, GroupName)  
-    VALUES (N'Standards and Methods', 'Quality Assurance');  
 GO
 
 -- Create an external table.   
@@ -438,10 +128,6 @@ WITH (
 -- Export data: Move old data to Hadoop while keeping 
 -- it query-able via external table.  
 
-INSERT INTO dbo.FastCustomer2009  
-SELECT T.* FROM Insured_Customers T1 JOIN CarSensor_Data T2  
-ON (T1.CustomerKey = T2.CustomerKey)  
-WHERE T2.YearMeasured = 2009 and T2.Speed > 40;
 
 -- Create the target heap.  
 GO  
@@ -450,49 +136,18 @@ ALTER DATABASE AdventureWorks2012
 SET RECOVERY BULK_LOGGED;  
 GO  
 -- Transfer data from Sales.SalesOrderDetail to Sales.SalesHistory  
-INSERT INTO Sales.SalesHistory WITH (TABLOCK)  
-    (SalesOrderID,   
-     SalesOrderDetailID,  
-     CarrierTrackingNumber,   
-     OrderQty,   
-     ProductID,   
-     SpecialOfferID,   
-     UnitPrice,   
-     UnitPriceDiscount,  
-     LineTotal,   
-     rowguid,   
-     ModifiedDate)  
-SELECT * FROM Sales.SalesOrderDetail;  
 GO  
 -- Reset the recovery model.  
 ALTER DATABASE AdventureWorks2012  
 SET RECOVERY FULL;  
 GO
 
-INSERT INTO HumanResources.Department WITH (IGNORE_TRIGGERS) (Name, GroupName)  
-SELECT b.Name, b.GroupName   
-FROM OPENROWSET (  
-    BULK 'C:SQLFilesDepartmentData.txt',  
-    FORMATFILE = 'C:SQLFilesBulkloadFormatFile.xml',  
-    ROWS_PER_BATCH = 15000)AS b ;
     
-INSERT INTO Production.Location WITH (XLOCK)  
-(Name, CostRate, Availability)  
-VALUES ( N'Final Inventory', 15.00, 80.00);
 
 DECLARE @MyTableVar table( NewScrapReasonID smallint,  
                            Name varchar(50),  
                            ModifiedDate datetime);  
-INSERT Production.ScrapReason  
-    OUTPUT INSERTED.ScrapReasonID, INSERTED.Name, INSERTED.ModifiedDate  
-        INTO @MyTableVar  
-VALUES (N'Operator error', GETDATE());  
   
---Display the result set of the table variable.  
-SELECT NewScrapReasonID, Name, ModifiedDate FROM @MyTableVar;  
---Display the result set of the table.  
-SELECT ScrapReasonID, Name, ModifiedDate   
-FROM Production.ScrapReason;
 
 
 GO  
@@ -502,71 +157,16 @@ DECLARE @MyTableVar table(
   CurrentSales money NOT NULL  
   );  
   
-INSERT INTO dbo.EmployeeSales (LastName, FirstName, CurrentSales)  
-  OUTPUT INSERTED.LastName,   
-         INSERTED.FirstName,   
-         INSERTED.CurrentSales  
-  INTO @MyTableVar  
-    SELECT c.LastName, c.FirstName, sp.SalesYTD  
-    FROM Sales.SalesPerson AS sp  
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.BusinessEntityID LIKE '2%'  
-    ORDER BY c.LastName, c.FirstName;  
-  
-SELECT LastName, FirstName, CurrentSales  
-FROM @MyTableVar;  
-GO  
-SELECT EmployeeID, LastName, FirstName, CurrentSales, ProjectedSales  
-FROM dbo.EmployeeSales;
-
 
 --Create ZeroInventory table.  
 GO  
   
-INSERT INTO Production.ZeroInventory (DeletedProductID, RemovedOnDate)  
-SELECT ProductID, GETDATE()  
-FROM  
-(   MERGE Production.ProductInventory AS pi  
-    USING (SELECT ProductID, SUM(OrderQty) FROM Sales.SalesOrderDetail AS sod  
-           JOIN Sales.SalesOrderHeader AS soh  
-           ON sod.SalesOrderID = soh.SalesOrderID  
-           AND soh.OrderDate = '20070401'  
-           GROUP BY ProductID) AS src (ProductID, OrderQty)  
-    ON (pi.ProductID = src.ProductID)  
-    WHEN MATCHED AND pi.Quantity - src.OrderQty <= 0  
-        THEN DELETE  
-    WHEN MATCHED  
-        THEN UPDATE SET pi.Quantity = pi.Quantity - src.OrderQty  
-    OUTPUT $action, deleted.ProductID) AS Changes (Action, ProductID)  
-WHERE Action = 'DELETE';  
 IF @@ROWCOUNT = 0  
 PRINT 'Warning: No rows were inserted';  
 GO  
 SELECT DeletedProductID, RemovedOnDate FROM Production.ZeroInventory;
 
 
-INSERT INTO EmployeeTitles  
-    SELECT EmployeeKey, LastName, Title   
-    FROM ssawPDW.dbo.DimEmployee  
-    WHERE EndDate IS NULL;
-    
--- Uses AdventureWorks  
-  
-INSERT INTO DimCurrency   
-VALUES (500, N'C1', N'Currency1')  
-OPTION ( LABEL = N'label1' );
-
--- Uses AdventureWorks  
-  
-INSERT INTO DimCustomer (CustomerKey, CustomerAlternateKey, 
-    FirstName, MiddleName, LastName )   
-SELECT ProspectiveBuyerKey, ProspectAlternateKey, 
-    FirstName, MiddleName, LastName  
-FROM ProspectiveBuyer p JOIN DimGeography g ON p.PostalCode = g.PostalCode  
-WHERE g.CountryRegionCode = 'FR'  
-OPTION ( LABEL = 'Add French Prospects', HASH JOIN);                
-
 
 USE AdventureWorks2012;  
 GO  
@@ -576,19 +176,6 @@ GO
 IF OBJECT_ID ('dbo.Table2', 'U') IS NOT NULL  
     DROP TABLE dbo.Table2;  
 GO  
-GO  
-GO  
-INSERT INTO dbo.Table1 VALUES(1, 10.0), (1, 20.0);  
-INSERT INTO dbo.Table2 VALUES(1, 0.0);  
-GO  
-UPDATE dbo.Table2   
-SET dbo.Table2.ColB = dbo.Table2.ColB + dbo.Table1.ColB  
-FROM dbo.Table2   
-    INNER JOIN dbo.Table1   
-    ON (dbo.Table2.ColA = dbo.Table1.ColA);  
-GO  
-SELECT ColA, ColB   
-FROM dbo.Table2;
 
 USE AdventureWorks2012;  
 GO  
@@ -598,70 +185,22 @@ GO
 IF OBJECT_ID ('dbo.Table2', 'U') IS NOT NULL  
     DROP TABLE dbo.Table2;  
 GO  
-GO  
-GO  
-INSERT INTO dbo.Table1 VALUES (1, 10);  
-INSERT INTO dbo.Table2 VALUES (1, 20), (2, 30);  
-GO  
+
 DECLARE abc CURSOR LOCAL FOR  
     SELECT c1, c2   
     FROM dbo.Table1;  
 OPEN abc;  
 FETCH abc;  
-UPDATE dbo.Table1   
-SET c2 = c2 + d2   
-FROM dbo.Table2   
-WHERE CURRENT OF abc;  
 GO  
 SELECT c1, c2 FROM dbo.Table1;  
 GO
 
 
-UPDATE Cities  
-SET Location = CONVERT(Point, '12.3:46.2')  
-WHERE Name = 'Anchorage';
-
-
-
-UPDATE Cities  
-SET Location.SetXY(23.5, 23.5)  
-WHERE Name = 'Anchorage';
-
-
-UPDATE Cities  
-SET Location.X = 23.5  
-WHERE Name = 'Anchorage';
-
-USE tempdb;  
-GO  
--- UPDATE statement with CTE references that are correctly matched.  
-DECLARE @x TABLE (ID INT, Value INT);  
-DECLARE @y TABLE (ID INT, Value INT);  
-INSERT @x VALUES (1, 10), (2, 20);  
-INSERT @y VALUES (1, 100),(2, 200);  
-  
-WITH cte AS (SELECT * FROM @x)  
-UPDATE x -- cte is referenced by the alias.  
-SET Value = y.Value  
-FROM cte AS x  -- cte is assigned an alias.  
-INNER JOIN @y AS y ON y.ID = x.ID;  
-SELECT * FROM @x;  
-GO
-
 USE tempdb;  
 GO  
 DECLARE @x TABLE (ID INT, Value INT);  
 DECLARE @y TABLE (ID INT, Value INT);  
-INSERT @x VALUES (1, 10), (2, 20);  
-INSERT @y VALUES (1, 100),(2, 200);  
   
-WITH cte AS (SELECT * FROM @x)  
-UPDATE cte   -- cte is not referenced by the alias.  
-SET Value = y.Value  
-FROM cte AS x  -- cte is assigned an alias.  
-INNER JOIN @y AS y ON y.ID = x.ID;   
-SELECT * FROM @x;   
-GO
 
 CREATE PROCEDURE dbo.InsertUnitMeasure  
     @UnitMeasureCode nchar(3),  
@@ -683,8 +222,6 @@ END;
 GO  
 -- Test the procedure and return the results.  
 EXEC InsertUnitMeasure @UnitMeasureCode = 'ABC', @Name = 'Test Value';  
-SELECT UnitMeasureCode, Name FROM Production.UnitMeasure  
-WHERE UnitMeasureCode = 'ABC';  
 GO  
   
 -- Rewrite the procedure to perform the same operations using the
@@ -717,7 +254,6 @@ EXEC InsertUnitMeasure @UnitMeasureCode = 'ABC', @Name = 'Another Test Value';
   
 SELECT * FROM #MyTempTable;  
 -- Cleanup
-DELETE FROM Production.UnitMeasure WHERE UnitMeasureCode IN ('ABC','XYZ');  
 DROP TABLE #MyTempTable;  
 GO
 
@@ -759,10 +295,6 @@ WHEN NOT MATCHED BY TARGET THEN
 INSERT (Name, ReasonType) VALUES (NewName, NewReasonType)  
 OUTPUT $action INTO @SummaryOfChanges;  
   
--- Query the results of the table variable.  
-SELECT Change, COUNT(*) AS CountPerChange  
-FROM @SummaryOfChanges  
-GROUP BY Change;
 
 GO  
 INSERT INTO Production.UpdatedInventory  
@@ -793,19 +325,6 @@ GO
 
 GO
 
--- INSERT some test data into node and edge tables
-INSERT INTO Person VALUES (1, 'Ron'), (2, 'David'), (3, 'Nancy')
-GO
-
-INSERT INTO City VALUES (1, 'Redmond', 'Washington'), (2, 'Seattle', 'Washington')
-GO
-
-INSERT livesIn SELECT P.$node_id, C.$node_id, c
-FROM Person P, City C, (values (1,1, '123 Avenue'), (2,2,'Main Street')) v(a,b,c)
-WHERE P.id = a AND C.id = b
-GO
-
--- Use MERGE to update/insert edge data
 CREATE OR ALTER PROCEDURE mergeEdge
     @PersonId integer,
     @CityId integer,
@@ -833,37 +352,22 @@ GO
 EXEC mergeEdge 1, 1, '321 Avenue'
 GO
 
--- Verify that all the address were added/updated correctly
-SELECT PersonName, CityName, StreetAddress
-FROM Person , City , livesIn
-WHERE MATCH(Person-(livesIn)->city)
-GO
-
 USE AdventureWorks2012;  
 GO  
-SELECT COUNT(*) AS BeforeTruncateCount   
-FROM HumanResources.JobCandidate;  
 GO  
 TRUNCATE TABLE HumanResources.JobCandidate;  
 GO  
-SELECT COUNT(*) AS AfterTruncateCount   
-FROM HumanResources.JobCandidate;  
 GO
 
 TRUNCATE TABLE PartitionTable1   
 WITH (PARTITIONS (2, 4, 6 TO 8));  
 GO
 
-USE AdventureWorks2012;  
-GO  
-UPDATE STATISTICS Sales.SalesOrderDetail;  
 GO
 
 
 
-USE AdventureWorks2012;  
 GO  
-UPDATE STATISTICS Sales.SalesOrderDetail AK_SalesOrderDetail_rowguid;  
 GO
 
 USE AdventureWorks2012;  
@@ -877,9 +381,6 @@ UPDATE STATISTICS Production.Product(Products)
     
 USE AdventureWorks2012;  
 GO  
-UPDATE STATISTICS Production.Product(Products)  
-    WITH FULLSCAN, NORECOMPUTE;  
-GO
 
 USE AdventureWorks2012;  
 CREATE APPLICATION ROLE weekly_receipts   
@@ -1163,9 +664,6 @@ MODIFY FILE
 );
 GO
 
-SELECT name, physical_name
-FROM sys.master_files
-WHERE database_id = DB_ID('tempdb');
 GO
 
 USE master;
@@ -1177,9 +675,6 @@ ALTER DATABASE tempdb
 MODIFY FILE (NAME = templog, FILENAME = 'E:\SQLData\templog.ldf');
 GO
 
-SELECT name, physical_name
-FROM sys.master_files
-WHERE database_id = DB_ID('tempdb');
 
 USE master;
 GO
@@ -1230,8 +725,6 @@ DROP TABLE IF EXISTS #tmpdbs
 
 DROP TABLE IF EXISTS #tmpfgs
 
-INSERT INTO #tmpdbs ([dbid], [dbname], [isdone])
-SELECT database_id, name, 0 FROM master.sys.databases (NOLOCK) WHERE is_read_only = 0 AND state = 0;
 
 DECLARE @dbid INT, @query VARCHAR(1000), @dbname sysname, @fgname sysname
 
@@ -1314,11 +807,6 @@ SET ALLOW_SNAPSHOT_ISOLATION ON;
 GO
 -- Check the state of the snapshot_isolation_framework
 -- in the database.
-SELECT name, snapshot_isolation_state,
-    snapshot_isolation_state_desc AS description
-FROM sys.databases
-WHERE name = N'[database_name]';
-GO
 
 ALTER DATABASE [database_name]
 SET CHANGE_TRACKING = ON
@@ -1379,10 +867,6 @@ ALTER EVENT SESSION test_session ON SERVER
 STATE = start;  
 GO  
 
--- Obtain live session statistics   
-SELECT * FROM sys.dm_xe_sessions;  
-SELECT * FROM sys.dm_xe_session_events;  
-GO  
   
 -- Add new events to the session  
 ALTER EVENT SESSION test_session ON SERVER  
@@ -1432,8 +916,6 @@ GO
 ALTER FULLTEXT CATALOG ftCatalog   
 REBUILD WITH ACCENT_SENSITIVITY=OFF;  
 GO  
--- Check Accentsensitivity  
-SELECT FULLTEXTCATALOGPROPERTY('ftCatalog', 'accentsensitivity');  
 GO  
 --Returned 0, which means the catalog is not accent sensitive.
 
@@ -1516,12 +998,7 @@ CREATE CLUSTERED COLUMNSTORE INDEX idxcci_cci_target ON cci_target;
 
 
 
-INSERT INTO cci_target WITH (TABLOCK) 
-SELECT TOP 300000 * FROM staging;
 
-SELECT *   
-FROM sys.dm_db_column_store_row_group_physical_stats   
-WHERE object_id  = object_id('cci_target');
 
 ALTER INDEX idxcci_cci_target ON cci_target REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);
 
@@ -1551,14 +1028,9 @@ ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;
 CREATE CLUSTERED COLUMNSTORE INDEX cci_FactInternetSales2  
 ON dbo.FactInternetSales2;  
   
-INSERT INTO dbo.FactInternetSales2  
-SELECT ProductKey, OrderDateKey, DueDateKey, ShipDateKey  
-FROM dbo.FactInternetSales;  
   
-SELECT * FROM sys.column_store_row_groups;
 
 ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REBUILD;  
-SELECT * FROM sys.column_store_row_groups;
 
 ALTER INDEX cci_fact3   
 ON fact3  
@@ -1629,8 +1101,6 @@ GO
 
 
 -- Verify the partitioned indexes.  
-SELECT *  
-FROM sys.dm_db_index_physical_stats (DB_ID(),OBJECT_ID(N'Production.TransactionHistory'), NULL , NULL, NULL);  
 GO  
 --Rebuild only partition 5.  
 ALTER INDEX IX_TransactionHistory_TransactionDate  
@@ -1927,10 +1397,6 @@ ALTER SCHEMA Person TRANSFER type::Production.TestType ;
 GO  
   
 -- Check the type owner.  
-SELECT sys.types.name, sys.types.schema_id, sys.schemas.name  
-    FROM sys.types JOIN sys.schemas   
-        ON sys.types.schema_id = sys.schemas.schema_id   
-    WHERE sys.types.name = 'TestType' ;  
 GO     
 
 ALTER SEARCH PROPERTY LIST DocumentPropertyList  
@@ -2000,11 +1466,9 @@ GO
 
 CREATE SEQUENCE Test.CountBy1 ;
 
-SELECT NEXT VALUE FOR Test.CountBy1
 
 ALTER SEQUENCE Test.CountBy1 RESTART WITH 1 ;
 
-SELECT NEXT VALUE FOR Test.CountBy1;
 
 ALTER SEQUENCE Test.CountBy1  
     CYCLE  
@@ -2152,15 +1616,6 @@ GO
 GRANT ALTER ON SERVER ROLE::Production TO Ted ;  
 GO
 
-SELECT SRM.role_principal_id, SP.name AS Role_Name,   
-SRM.member_principal_id, SP2.name  AS Member_Name  
-FROM sys.server_role_members AS SRM  
-JOIN sys.server_principals AS SP  
-    ON SRM.Role_principal_id = SP.principal_id  
-JOIN sys.server_principals AS SP2   
-    ON SRM.member_principal_id = SP2.principal_id  
-ORDER BY  SP.name,  SP2.name
-
 ALTER SERVER ROLE LargeRC ADD MEMBER Anna;
 
 ALTER SERVER ROLE LargeRC DROP MEMBER Anna;
@@ -2204,9 +1659,6 @@ EXEC sp_help doc_exc ;
 GO
 DROP TABLE dbo.doc_exc ;
 GO
-
-GO
-INSERT INTO dbo.doc_exd VALUES (-1) ;
 GO
 ALTER TABLE dbo.doc_exd WITH NOCHECK
 ADD CONSTRAINT exd_check CHECK (column_a > 1) ;
@@ -2217,15 +1669,11 @@ DROP TABLE dbo.doc_exd ;
 GO
 
 GO
-INSERT INTO dbo.doc_exz (column_a) VALUES (7) ;
-GO
 ALTER TABLE dbo.doc_exz
   ADD CONSTRAINT col_b_def
   DEFAULT 50 FOR column_b ;
 GO
-INSERT INTO dbo.doc_exz (column_a) VALUES (10) ;
 GO
-SELECT * FROM dbo.doc_exz ;
 GO
 DROP TABLE dbo.doc_exz ;
 GO
@@ -2262,7 +1710,6 @@ DROP TABLE dbo.doc_exe ;
 GO
 
 GO
-INSERT INTO dbo.doc_exf VALUES (1) ;
 GO
 ALTER TABLE dbo.doc_exf
 ADD AddDate smalldatetime NULL
@@ -2363,7 +1810,6 @@ GO
 DROP TABLE Person.ContactBackup ;
 
 GO
-INSERT INTO dbo.doc_exy (column_a) VALUES (10) ;
 GO
 ALTER TABLE dbo.doc_exy ALTER COLUMN column_a DECIMAL (5, 2) ;
 GO
@@ -2372,11 +1818,8 @@ GO
 
 -- Create a two-column table with a unique index on the varchar column.
 GO
-INSERT INTO dbo.doc_exy VALUES ('Test', 99.99) ;
 GO
 -- Verify the current column size.
-SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale
-FROM sys.columns WHERE object_id = OBJECT_ID(N'dbo.doc_exy') ;
 GO
 -- Increase the size of the varchar column.
 ALTER TABLE dbo.doc_exy ALTER COLUMN col_a varchar(25) ;
@@ -2384,12 +1827,8 @@ GO
 -- Increase the scale and precision of the decimal column.
 ALTER TABLE dbo.doc_exy ALTER COLUMN col_b decimal (10,4) ;
 GO
--- Insert a new row.
-INSERT INTO dbo.doc_exy VALUES ('MyNewColumnSize', 99999.9999) ;
 GO
 -- Verify the current column size.
-SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale
-FROM sys.columns WHERE object_id = OBJECT_ID(N'dbo.doc_exy') ;
 
 GO
 
@@ -2446,20 +1885,11 @@ ALTER TABLE Person.Person
 DISABLE CHANGE_TRACKING ;
 
 
--- Valid inserts
-INSERT INTO dbo.cnst_example VALUES (1,'Joe Brown',65000) ;
-INSERT INTO dbo.cnst_example VALUES (2,'Mary Smith',75000) ;
-
--- This insert violates the constraint.
-INSERT INTO dbo.cnst_example VALUES (3,'Pat Jones',105000) ;
-
 -- Disable the constraint and try again.
 ALTER TABLE dbo.cnst_example NOCHECK CONSTRAINT salary_cap;
-INSERT INTO dbo.cnst_example VALUES (3,'Pat Jones',105000) ;
 
 -- Re-enable the constraint and try another insert; this will fail.
 ALTER TABLE dbo.cnst_example CHECK CONSTRAINT salary_cap;
-INSERT INTO dbo.cnst_example VALUES (4,'Eric James',110000) ;
 
 GO
 -- Create the trigger.
@@ -2472,20 +1902,11 @@ BEGIN
     ROLLBACK TRANSACTION
 END ;
 GO
--- Try an insert that violates the trigger.
-INSERT INTO dbo.trig_example VALUES (1,'Pat Smith',100001) ;
-GO
 -- Disable the trigger.
 ALTER TABLE dbo.trig_example DISABLE TRIGGER trig1 ;
 GO
--- Try an insert that would typically violate the trigger.
-INSERT INTO dbo.trig_example VALUES (2,'Chuck Jones',100001) ;
-GO
 -- Re-enable the trigger.
 ALTER TABLE dbo.trig_example ENABLE TRIGGER trig1 ;
-GO
--- Try an insert that violates the trigger.
-INSERT INTO dbo.trig_example VALUES (3,'Mary Booth',100001) ;
 GO
 
 ALTER TABLE T1
@@ -2497,7 +1918,6 @@ REBUILD WITH
 ) ;
 
 GO
-INSERT INTO dbo.doc_exy (column_a) VALUES (10) ;
 GO
 ALTER TABLE dbo.doc_exy
     ALTER COLUMN column_a DECIMAL (5, 2) WITH (ONLINE = ON) ;
@@ -2685,11 +2105,7 @@ N'<?xml version="1.0" encoding="UTF-16"?>
 </xsd:schema>' ;  
 GO  
 -- Verify - list of collections in the database.  
-SELECT *  
-FROM sys.xml_schema_collections;  
 -- Verify - list of namespaces in the database.  
-SELECT name  
-FROM sys.xml_schema_namespaces;  
   
 -- Use it. Create a typed xml variable. Note the collection name   
 -- that is specified.  
@@ -2758,12 +2174,6 @@ CREATE XML SCHEMA COLLECTION MySampleCollection AS '
 GO  
 -- query will return the names of all the collections that   
 --contain a schema with no target namespace  
-SELECT sys.xml_schema_collections.name   
-FROM   sys.xml_schema_collections   
-JOIN   sys.xml_schema_namespaces   
-ON     sys.xml_schema_collections.xml_collection_id =   
-       sys.xml_schema_namespaces.xml_collection_id   
-WHERE  sys.xml_schema_namespaces.name='';
 
 
 BACKUP DATABASE AdventureWorks2012
@@ -2844,11 +2254,6 @@ BACKUP DATABASE Sales
 TO URL = 'https://mystorageaccount.blob.core.windows.net/myfirstcontainer/Sales_20160726.bak'
 WITH STATS = 5;
 
-SELECT query = a.text, start_time, percent_complete,
-    eta = dateadd(second,estimated_completion_time/1000, getdate())
-FROM sys.dm_exec_requests r
-    CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) a
-WHERE r.command LIKE 'BACKUP%'
 
 BACKUP CERTIFICATE sales05 TO FILE = 'c:\storedcerts\sales05cert';  
 GO
@@ -2938,9 +2343,6 @@ BEGIN TRANSACTION ListPriceUpdate
     WITH MARK 'UPDATE Product list prices';
 GO
 
-UPDATE Production.Product
-    SET ListPrice = ListPrice * 1.10
-    WHERE ProductNumber LIKE 'BK-%';
 GO
 
 COMMIT TRANSACTION ListPriceUpdate;
@@ -3283,10 +2685,6 @@ DROP INDEX my_index ON MyFactTable;
 --Process for dropping a clustered index.  
 --First, look up the name of the clustered rowstore index.  
 --Clustered rowstore indexes always use the DEFAULT name 'ClusteredIndex_<GUID>'.  
-SELECT i.name   
-FROM sys.indexes i   
-JOIN sys.tables t  
-ON ( i.type_desc = 'CLUSTERED' ) WHERE t.name = 'MyFactTable';  
 
 --Drop the clustered rowstore index.  
 DROP INDEX ClusteredIndex_d473567f7ea04d7aafcac5364c241e09 ON MyDimTable;
@@ -3297,11 +2695,6 @@ CREATE CLUSTERED COLUMNSTORE INDEX MyCCI ON MyFactTable;
 --Option 2: Convert to columnstore and use the rowstore clustered   
 --index name for the columnstore clustered index name.  
 --First, look up the name of the clustered rowstore index.  
-SELECT i.name   
-FROM sys.indexes i  
-JOIN sys.tables t   
-ON ( i.type_desc = 'CLUSTERED' )  
-WHERE t.name = 'MyFactTable';  
 
 --Second, create the clustered columnstore index and   
 --Replace ClusteredIndex_d473567f7ea04d7aafcac5364c241e09  
@@ -3319,11 +2712,6 @@ DROP INDEX MyCCI
 ON MyFactTable;
 
 --Determine the Clustered Columnstore Index name of MyDimTable.  
-SELECT i.object_id, i.name, t.object_id, t.name   
-FROM sys.indexes i   
-JOIN sys.tables t  
-ON (i.type_desc = 'CLUSTERED COLUMNSTORE')  
-WHERE t.name = 'RowstoreDimTable';  
   
 --Rebuild the entire index by using CREATE CLUSTERED INDEX.  
 CREATE CLUSTERED COLUMNSTORE INDEX my_CCI   
@@ -3364,7 +2752,7 @@ CREATE NONCLUSTERED COLUMNSTORE INDEX "FIBillOfMaterialsWithEndDate"
 
 
 ALTER INDEX mycolumnstoreindex ON mytable DISABLE;  
--- update mytable --  
+
 ALTER INDEX mycolumnstoreindex on mytable REBUILD                                             
 
 CREATE COLUMN ENCRYPTION KEY MyCEK   
@@ -3495,34 +2883,9 @@ GO
 IF DB_ID (N'mytest') IS NOT NULL
 DROP DATABASE mytest;
 GO
-GO
--- Verify the database files and sizes
-SELECT name, size, size*1.0/128 AS [Size in MBs]
-FROM sys.master_files
-WHERE name = N'mytest';
-GO
 
 IF DB_ID (N'MyOptionsTest') IS NOT NULL
 DROP DATABASE MyOptionsTest;
-GO
-GO
---Verifying collation and option settings.
-SELECT name, collation_name, is_trustworthy_on, is_db_chaining_on
-FROM sys.databases
-WHERE name = N'MyOptionsTest';
-GO
-
-USE master;
-GO
---Detach the AdventureWorks2012 database
-sp_detach_db AdventureWorks2012;
-GO
--- Physically move the full text catalog to the new location.
---Attach the AdventureWorks2012 database and specify the new location of the full-text catalog.
-GO
-
-USE master;
-GO
 -- Get the SQL Server data path.
 DECLARE @data_path nvarchar(256);
 SET @data_path = (SELECT SUBSTRING(physical_name, 1, CHARINDEX(N'master.mdf', LOWER(physical_name)) - 1)
@@ -3710,20 +3073,6 @@ ON DATABASE
 FOR ALTER_TABLE  
 TO SERVICE 'NotifyService',  
     '8140a771-3c4b-4479-8ac0-81008ab17984';    
-SELECT * FROM sys.server_event_notifications  
-WHERE name = 'log_ddl1';    
-
-SELECT * FROM sys.event_notifications  
-WHERE name = 'Notify_ALTER_T1';
-
-SELECT name
-    FROM sys.all_objects
-    WHERE
-        (name LIKE 'database\_%' { ESCAPE '\ ' } OR
-         name LIKE 'server\_%' { ESCAPE '\ ' })
-        AND name LIKE '%\_event%' { ESCAPE '\ ' }
-        AND type = 'V'
-    ORDER BY name;
     
 -- Create a database master key if one does not already exist, using your own password. This key is used to encrypt the credential secret in next step.
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '!MyC0mpl3xP@ssw0rd!' ;
@@ -3997,22 +3346,7 @@ WITH (
     )
 ;
 
-SELECT TOP 10 (url) FROM ClickStream WHERE user_ip = 'xxx.xxx.xxx.xxx'
-;
 
-SELECT url.description
-FROM ClickStream cs
-JOIN UrlDescription url ON cs.url = url.name
-WHERE cs.url = 'msdn.microsoft.com'
-;
-
-SELECT DISTINCT user.FirstName, user.LastName
-INTO ms_user
-FROM user INNER JOIN (
-    SELECT * FROM ClickStream WHERE cs.url = 'www.microsoft.com'
-    ) AS ms
-ON user.user_ip = ms.user_ip
-;
 
 CREATE EXTERNAL TABLE [dbo].[all_dm_exec_requests]([session_id] smallint NOT NULL,
   [request_id] int NOT NULL,
@@ -4270,7 +3604,6 @@ BEGIN
 END;
 GO
 SET DATEFIRST 1;
-SELECT dbo.ISOweek(CONVERT(DATETIME,'12/26/2004',101)) AS 'ISO Week';
 
 CREATE FUNCTION Sales.ufn_SalesByStore (@storeid int)
 RETURNS TABLE
@@ -4287,7 +3620,6 @@ RETURN
 );
 GO
 
-SELECT * FROM Sales.ufn_SalesByStore (602);
 
 CREATE FUNCTION dbo.ufn_FindReports (@InEmpID INTEGER)
 RETURNS @retFindReports TABLE
@@ -4327,21 +3659,12 @@ ON p.BusinessEntityID = e.BusinessEntityID
 END;
 GO
 -- Example invocation
-SELECT EmployeeID, FirstName, LastName, JobTitle, RecursionLevel
-FROM dbo.ufn_FindReports(1);
 
 GO
 
 DECLARE @SamplesPath nvarchar(1024);
 -- You may have to modify the value of this variable if you have
 -- installed the sample in a location other than the default location.
-SELECT @SamplesPath = REPLACE
-    (  physical_name
-     , 'Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\master.mdf'
-     , 'Microsoft SQL Server\130\Samples\Engine\Programmability\CLR\ '
-    )
-  FROM master.sys.database_files
-  WHERE name = 'master';
 
 CREATE ASSEMBLY [SurrogateStringFunction]
 FROM @SamplesPath + 'StringManipulate\CS\StringManipulate\bin\debug\SurrogateStringFunction.dll'
@@ -4353,10 +3676,6 @@ RETURNS bigint
 AS EXTERNAL NAME [SurrogateStringFunction].[Microsoft.Samples.SqlServer.SurrogateStringFunction].[LenS];
 GO
 
-SELECT definition, type
-FROM sys.sql_modules AS m
-JOIN sys.objects AS o ON m.object_id = o.object_id
-    AND type IN ('FN', 'IF', 'TF');
 GO                     
 
 -- Create a nonclustered index on a table or view
@@ -4389,43 +3708,19 @@ CREATE INDEX IX_FF ON dbo.FactFinance (FinanceKey, DateKey, OrganizationKey DESC
   ON Production.UnitMeasure(Name);
   
 -- Verify the existing value.
-SELECT Name FROM Production.UnitMeasure WHERE Name = N'Ounces';
-GO
 
-INSERT INTO Production.UnitMeasure (UnitMeasureCode, Name, ModifiedDate)
-  VALUES ('OC', 'Ounces', GETDATE());
-  
-GO
 
 CREATE UNIQUE INDEX AK_Index ON #Test (C2)
   WITH (IGNORE_DUP_KEY = ON);
-GO
-
-INSERT INTO #Test VALUES (N'OC', N'Ounces', GETDATE());
-INSERT INTO #Test SELECT * FROM Production.UnitMeasure;
-GO
-
-SELECT COUNT(*) AS [Number of rows] FROM #Test;
-GO
 
 DROP TABLE #Test;
-GO
 
-GO
 
 CREATE UNIQUE INDEX AK_Index ON #Test (C2)
   WITH (IGNORE_DUP_KEY = OFF);
-GO
 
-INSERT INTO #Test VALUES (N'OC', N'Ounces', GETDATE());
-INSERT INTO #Test SELECT * FROM Production.UnitMeasure;
-GO
 
-SELECT COUNT(*) AS [Number of rows] FROM #Test;
-GO
 
-DROP TABLE #Test;
-GO    
 
 CREATE NONCLUSTERED INDEX IX_WorkOrder_ProductID
   ON Production.WorkOrder(ProductID)
@@ -4462,24 +3757,9 @@ GO
 
 -- This query can use the indexed view even though the view is
 -- not specified in the FROM clause.
-SELECT SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Rev,
-  OrderDate, ProductID
-FROM Sales.SalesOrderDetail AS od
-  JOIN Sales.SalesOrderHeader AS o ON od.SalesOrderID = o.SalesOrderID
-    AND ProductID BETWEEN 700 AND 800
-    AND OrderDate >= CONVERT(DATETIME, '05/01/2002', 101)
-GROUP BY OrderDate, ProductID
-ORDER BY Rev DESC;
 GO
 
 -- This query can use the above indexed view
-SELECT OrderDate, SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Rev
-FROM Sales.SalesOrderDetail AS od
-  JOIN Sales.SalesOrderHeader AS o ON od.SalesOrderID = o.SalesOrderID
-    AND DATEPART(mm, OrderDate) = 3
-  AND DATEPART(yy, OrderDate) = 2002
-GROUP BY OrderDate
-ORDER BY OrderDate ASC;
 GO
 
 CREATE NONCLUSTERED INDEX IX_Address_PostalCode
@@ -4487,9 +3767,6 @@ CREATE NONCLUSTERED INDEX IX_Address_PostalCode
   INCLUDE (AddressLine1, AddressLine2, City, StateProvinceID);
 GO
 
-SELECT AddressLine1, AddressLine2, City, StateProvinceID, PostalCode
-FROM Person.Address
-WHERE PostalCode BETWEEN N'98000' and N'99999';
 GO
 
 CREATE NONCLUSTERED INDEX IX_TransactionHistory_ReferenceOrderID
@@ -4562,7 +3839,6 @@ CREATE LOGIN [<domainName>\<login_name>] FROM WINDOWS;
 GO
 
 CREATE LOGIN TestLogin WITH PASSWORD = 'SuperSecret52&&';
-SELECT name, sid FROM sys.sql_logins WHERE name = 'TestLogin';
 GO
 
 DROP LOGIN TestLogin;
@@ -4571,7 +3847,6 @@ GO
 CREATE LOGIN TestLogin
 WITH PASSWORD = 'SuperSecret52&&', SID = 0x241C11948AEEB749B0D22646DB1A19F2;
 
-SELECT * FROM sys.sql_logins WHERE name = 'TestLogin';
 GO
 
 CREATE LOGIN [MyUser]
@@ -4714,7 +3989,6 @@ AS
     FROM HumanResources.vEmployeeDepartment;
 GO
 
-SELECT * FROM HumanResources.vEmployeeDepartment;
 
 EXECUTE HumanResources.uspGetAllEmployees;
 GO
@@ -4852,10 +4126,6 @@ DECLARE @LocationTVP
 AS LocationTableType;
 
 /* Add data to the table variable. */
-INSERT INTO @LocationTVP (LocationName, CostRate)
-    SELECT [Name], 0.00
-    FROM
-    [AdventureWorks2012].[Person].[StateProvince];
 
 /* Pass the table variable data to a stored procedure. */
 EXEC usp_InsertProductionLocation @LocationTVP;
@@ -5260,17 +4530,6 @@ CREATE SERVER AUDIT AuditDataAccess
 GO  
 ALTER SERVER AUDIT AuditDataAccess WITH (STATE = ON);  
 GO  
--- Create the database audit specification in the TestDB database  
-USE TestDB;  
-GO  
-GO  
--- Trigger the audit event by selecting from tables  
-SELECT ID, DataField FROM DataSchema.GeneralData;  
-SELECT ID, DataField FROM DataSchema.SensitiveData;  
-GO  
--- Check the audit for the filtered content  
-SELECT * FROM fn_get_audit_file('C:\SQLAudit\AuditDataAccess_*.sqlaudit',default,default);  
-GO        
 
 
 
@@ -5398,10 +4657,6 @@ FOR AdventureWorks2012.Production.Product;
 GO  
   
 -- Query the Product table by using the synonym.  
-SELECT ProductID, Name   
-FROM MyProduct  
-WHERE ProductID < 5;  
-GO
 
 EXEC sp_addlinkedserver Server_Remote;  
 GO  
@@ -5449,21 +4704,6 @@ CREATE PARTITION SCHEME myRangePS1
     AS PARTITION myRangePF1
     TO (test1fg, test2fg, test3fg, test4fg);
 GO  
-  
-GO
-
-
-
-
-
-
-
-
-
-
-
--- Existing table
-
 -- Temporal table
 
 CREATE SCHEMA History;
@@ -5487,15 +4727,6 @@ IF OBJECT_ID ('dbo.new_employees', 'U') IS NOT NULL
    DROP TABLE new_employees;  
 GO  
   
-INSERT new_employees  
-   (fname, minit, lname)  
-VALUES  
-   ('Karin', 'F', 'Josephs');  
-  
-INSERT new_employees  
-   (fname, minit, lname)  
-VALUES  
-   ('Pirkko', 'O', 'Koskitalo');
    
 -- Here is the generic syntax for finding identity value gaps in data.  
 -- The illustrative example starts here.  
@@ -5528,8 +4759,6 @@ SET IDENTITY_INSERT tablename OFF;
 IF OBJECT_ID ('dbo.img', 'U') IS NOT NULL  
    DROP TABLE img;  
 GO  
-INSERT img(company_name) VALUES ('New Moon Books');  
-INSERT img(company_name) VALUES ('Lucerne Publishing');  
 -- SET IDENTITY_INSERT ON and use in img table.  
 SET IDENTITY_INSERT img ON;  
   
@@ -5588,24 +4817,6 @@ RETURN
 END;  
 GO  
   
--- This statement attempts to insert a row into the PurchaseOrderHeader table  
--- for a vendor that has a below average credit rating.  
--- The AFTER INSERT trigger is fired and the INSERT transaction is rolled back.  
-  
-INSERT INTO Purchasing.PurchaseOrderHeader (RevisionNumber, Status, EmployeeID,  
-VendorID, ShipMethodID, OrderDate, ShipDate, SubTotal, TaxAmt, Freight)  
-VALUES (  
-2  
-,3  
-,261  
-,1652  
-,4  
-,GETDATE()  
-,GETDATE()  
-,44594.55  
-,3567.564  
-,1114.8638 );  
-GO
 
 CREATE TRIGGER safety   
 ON DATABASE   
@@ -5776,8 +4987,6 @@ WHERE OrderDate > CONVERT(DATETIME,'20001231',101)
 GROUP BY SalesPersonID;  
 GO
 
---Create the tables and insert the values.  
-GO  
 --Create the view that combines all supplier tables.  
 CREATE VIEW dbo.all_supplier_view  
 WITH SCHEMABINDING  
@@ -5794,10 +5003,6 @@ UNION ALL
 SELECT supplyID, supplier  
   FROM dbo.SUPPLY4;  
 GO
-INSERT dbo.all_supplier_view VALUES ('1', 'CaliforniaCorp'), ('5', 'BraziliaLtd')    
-, ('231', 'FarEast'), ('280', 'NZ')  
-, ('321', 'EuroGroup'), ('442', 'UKArchip')  
-, ('475', 'India'), ('521', 'Afrique');  
 GO
 
 CREATE VIEW DimEmployeeBirthDates AS  
@@ -5891,12 +5096,6 @@ N'<?xml version="1.0" encoding="UTF-16"?>
     </xsd:element>  
 </xsd:schema>' ;  
 GO  
--- Verify - list of collections in the database.  
-SELECT *  
-FROM sys.xml_schema_collections;  
--- Verify - list of namespaces in the database.  
-SELECT name  
-FROM sys.xml_schema_namespaces;  
   
 -- Use it. Create a typed xml variable. Note collection name specified.  
 DECLARE @x xml (ManuInstructionsSchemaCollection);  
@@ -6033,12 +5232,6 @@ GO
 ALTER DATABASE AdventureWorks2012  
 SET ENCRYPTION OFF;  
 GO  
-/* Wait for decryption operation to complete, look for a   
-value of  1 in the query below. */  
-SELECT encryption_state  
-FROM sys.dm_database_encryption_keys;  
-GO  
-USE AdventureWorks2012;  
 GO  
 DROP DATABASE ENCRYPTION KEY;  
 GO
@@ -6335,16 +5528,11 @@ DROP TABLE ProductVendor1 ;
 DROP TABLE AdventureWorks2012.dbo.SalesPerson2 ;
 
 GO  
-INSERT INTO #temptable  
-VALUES (10);  
-GO  
 SELECT * FROM #temptable;  
 GO  
 IF OBJECT_ID(N'tempdb..#temptable', N'U') IS NOT NULL   
 DROP TABLE #temptable;  
 GO  
---Test the drop.  
-SELECT * FROM #temptable;
 
 GO  
 DROP TABLE IF EXISTS T1;  
@@ -6397,12 +5585,6 @@ ADD SIGNATURE TO [sp_signature_demo]
 GO  
 
 -- Get the signature binary BLOB for the sp_signature_demo procedure.  
-SELECT cp.crypt_property  
-    FROM sys.crypt_properties AS cp  
-    JOIN sys.certificates AS cer  
-        ON cp.thumbprint = cer.thumbprint  
-    WHERE cer.name = 'cert_signature_demo' ;  
-GO
 
 -- Drop the signature so that it can be signed again.  
 DROP SIGNATURE FROM [sp_signature_demo]   
@@ -6418,8 +5600,6 @@ GO
 -- Create tesT1 database  
 GO  
 USE testDB;  
-GO  
-INSERT INTO T1 VALUES ('This is T1.');  
   
 -- Create a TestUser user to own table T1  
 CREATE USER TestUser WITHOUT LOGIN;  
@@ -6605,24 +5785,15 @@ GO
 --so that user1 can successfully set the execution context to user2.  
 GRANT IMPERSONATE ON USER:: user2 TO user1;  
 GO  
---Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 -- Set the execution context to login1.   
 EXECUTE AS LOGIN = 'login1';  
---Verify the execution context is now login1.  
-SELECT SUSER_NAME(), USER_NAME();  
 --Login1 sets the execution context to login2.  
 EXECUTE AS USER = 'user2';  
 --Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 -- The execution context stack now has three principals: the originating caller, login1 and login2.  
 --The following REVERT statements will reset the execution context to the previous context.  
 REVERT;  
---Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 REVERT;  
---Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
   
 --Remove temporary principals.  
 DROP LOGIN login1;  
@@ -6635,18 +5806,13 @@ DECLARE @cookie VARBINARY(8000);
 EXECUTE AS USER = 'user1' WITH COOKIE INTO @cookie;  
 -- Store the cookie in a safe location in your application.  
 -- Verify the context switch.  
-SELECT SUSER_NAME(), USER_NAME();  
 --Display the cookie value.  
-SELECT @cookie;  
 GO  
 -- Use the cookie in the REVERT statement.  
 DECLARE @cookie VARBINARY(8000);  
 -- Set the cookie value to the one from the SELECT @cookie statement.  
 SET @cookie = <value from the SELECT @cookie statement>;  
 REVERT WITH COOKIE = @cookie;  
--- Verify the context switch reverted.  
-SELECT SUSER_NAME(), USER_NAME();  
-GO
 
 CREATE PROCEDURE HumanResources.uspEmployeesInDepartment   
 @DeptValue int  
@@ -6835,24 +6001,17 @@ GO
 -- so that user1 can successfully set the execution context to user2.  
 GRANT IMPERSONATE ON USER:: user2 TO user1;  
 GO  
--- Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 -- Set the execution context to login1.   
 EXECUTE AS LOGIN = 'login1';  
 -- Verify that the execution context is now login1.  
-SELECT SUSER_NAME(), USER_NAME();  
--- Login1 sets the execution context to login2.  
 EXECUTE AS USER = 'user2';  
 -- Display current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 -- The execution context stack now has three principals: the originating caller, login1, and login2.  
 -- The following REVERT statements will reset the execution context to the previous context.  
 REVERT;  
 -- Display the current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
 REVERT;  
 -- Display the current execution context.  
-SELECT SUSER_NAME(), USER_NAME();  
   
 -- Remove the temporary principals.  
 DROP LOGIN login1;  
@@ -6864,18 +6023,12 @@ GO
 DECLARE @cookie VARBINARY(100);  
 EXECUTE AS USER = 'user1' WITH COOKIE INTO @cookie;  
 -- Store the cookie somewhere safe in your application.  
--- Verify the context switch.  
-SELECT SUSER_NAME(), USER_NAME();  
---Display the cookie value.  
-SELECT @cookie;  
 GO  
 -- Use the cookie in the REVERT statement.  
 DECLARE @cookie VARBINARY(100);  
 -- Set the cookie value to the one from the SELECT @cookie statement.  
 SET @cookie = <value from the SELECT @cookie statement>;  
 REVERT WITH COOKIE = @cookie;  
--- Verify the context switch reverted.  
-SELECT SUSER_NAME(), USER_NAME();  
 GO
 
 USE master;  
