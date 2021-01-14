@@ -81,6 +81,179 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Lines.Strings = (
           'DROP TRIGGER safety ON DATABASE;'
         )
+      end    
+      item
+        Caption = 'CreateTrigger1'
+        Lines.Strings = (
+          'CREATE TRIGGER safety'
+          'ON DATABASE'
+          'FOR DROP_TABLE, ALTER_TABLE'
+          'AS'
+          '   PRINT ''You must disable Trigger "safety" to drop or alter tables!'''
+          '   ROLLBACK;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger2'
+        Lines.Strings = (
+          'CREATE TRIGGER safety'
+          'ON DATABASE'
+          'FOR DROP_TABLE, ALTER_TABLE'
+          'AS'
+          '   PRINT ''You must disable Trigger "safety" to drop or alter tables!'''
+          '   ROLLBACK;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger3'
+        Lines.Strings = (
+          'CREATE TRIGGER dbo.trig1 ON dbo.trig_example FOR INSERT'
+          'AS'
+          'IF (SELECT COUNT(*) FROM INSERTED'
+          'WHERE salary > 100000) > 0'
+          'BEGIN'
+          '    print ''TRIG1 Error: you attempted to insert a salary > $100,000'''
+          '    ROLLBACK TRANSACTION'
+          'END ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger4'
+        Lines.Strings = (
+          'CREATE TRIGGER Sales.bonus_reminder'
+          'ON Sales.SalesPersonQuotaHistory'
+          'WITH ENCRYPTION'
+          'AFTER INSERT, UPDATE'
+          'AS RAISERROR (''Notify Compensation'', 16, 10);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger5'
+        Lines.Strings = (
+          'CREATE TRIGGER reminder1'
+          'ON Sales.Customer'
+          'AFTER INSERT, UPDATE'
+          'AS RAISERROR (''Notify Customer Relations'', 16, 10);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger6'
+        Lines.Strings = (
+          'CREATE TRIGGER reminder2'
+          'ON Sales.Customer'
+          'AFTER INSERT, UPDATE, DELETE'
+          'AS'
+          '   EXEC msdb.dbo.sp_send_dbmail'
+          '        @profile_name = ''AdventureWorks2012 Administrator'','
+          '        @recipients = ''danw@Adventure-Works.com'','
+          '        @body = ''Don''''t forget to print a report for the sales force.'','
+          '        @subject = ''Reminder'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger7'
+        Lines.Strings = (
+          ''
+          'CREATE TRIGGER Purchasing.LowCredit ON Purchasing.PurchaseOrderHeader'
+          'AFTER INSERT'
+          'AS'
+          'IF (ROWCOUNT_BIG() = 0)'
+          'RETURN;'
+          'IF EXISTS (SELECT *'
+          '           FROM Purchasing.PurchaseOrderHeader AS p'
+          '           JOIN inserted AS i'
+          '           ON p.PurchaseOrderID = i.PurchaseOrderID'
+          '           JOIN Purchasing.Vendor AS v'
+          '           ON v.BusinessEntityID = p.VendorID'
+          '           WHERE v.CreditRating = 5'
+          '          )'
+          'BEGIN'
+          'RAISERROR (''A vendor''''s credit rating is too low to accept new'
+          'purchase orders.'', 16, 1);'
+          'ROLLBACK TRANSACTION;'
+          'RETURN'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger8'
+        Lines.Strings = (
+          ''
+          'CREATE TRIGGER safety'
+          'ON DATABASE'
+          'FOR DROP_SYNONYM'
+          'AS'
+          'IF (@@ROWCOUNT = 0)'
+          'RETURN;'
+          '   RAISERROR (''You must disable Trigger "safety" to remove synonyms!'', 10, 1)'
+          '   ROLLBACK'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger9'
+        Lines.Strings = (
+          'CREATE TRIGGER ddl_trig_database'
+          'ON ALL SERVER'
+          'FOR CREATE_DATABASE'
+          'AS'
+          '    PRINT ''Database Created.'''
+          '    SELECT EVENTDATA().value(''(/EVENT_INSTANCE/TSQLCommand/CommandText)[1]'',''nvarchar(max)'')'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateTrigger10'
+        Lines.Strings = (
+          'CREATE TRIGGER connection_limit_trigger'
+          'ON ALL SERVER WITH EXECUTE AS ''login_test'''
+          'FOR LOGON'
+          'AS'
+          'BEGIN'
+          'IF ORIGINAL_LOGIN()= ''login_test'' AND'
+          '    (SELECT COUNT(*) FROM sys.dm_exec_sessions'
+          '            WHERE is_user_process = 1 AND'
+          '                original_login_name = ''login_test'') > 3'
+          '    ROLLBACK;'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTrigger1'
+        Lines.Strings = (
+          'ALTER TRIGGER Sales.bonus_reminder'
+          'ON Sales.SalesPersonQuotaHistory'
+          'AFTER INSERT'
+          'AS RAISERROR (''Notify Compensation'', 16, 10);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTrigger5'
+        Lines.Strings = (
+          'DROP TRIGGER employee_insupd;'
+          ''
+          ''
+        )
       end>
     Left = 48
     Top = 38
@@ -491,6 +664,742 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'CreateDatabase31'
         Lines.Strings = (
           'CREATE DATABASE testDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase1'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'SET RECOVERY BULK_LOGGED;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase2'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'SET RECOVERY FULL;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase3'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'Modify Name = Northwind ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase4'
+        Lines.Strings = (
+          'ALTER DATABASE testDB'
+          'COLLATE French_CI_AI ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase5'
+        Lines.Strings = (
+          'ALTER DATABASE AUDIT SPECIFICATION HIPAA_Audit_DB_Specification'
+          'FOR SERVER AUDIT HIPAA_Audit'
+          '    ADD (SELECT'
+          '         ON OBJECT::dbo.Table1'
+          '         BY dbo)'
+          '    WITH (STATE = ON);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase6'
+        Lines.Strings = (
+          'ALTER DATABASE database_name'
+          'SET COMPATIBILITY_LEVEL = { 150 | 140 | 130 | 120 | 110 | 100 | 90 }'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase7'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'SET COMPATIBILITY_LEVEL = 110;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase8'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012 SET PARTNER FAILOVER;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase9'
+        Lines.Strings = (
+          'ALTER DATABASE ENCRYPTION KEY'
+          'REGENERATE WITH ALGORITHM = AES_256;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase10'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'ADD FILE'
+          '('
+          '    NAME = Test1dat2,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat2.ndf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 100MB,'
+          '    FILEGROWTH = 5MB'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase11'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'ADD FILEGROUP Test1FG1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase12'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'ADD FILE'
+          '('
+          '    NAME = test1dat3,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat3.ndf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 100MB,'
+          '    FILEGROWTH = 5MB'
+          '),'
+          '('
+          '    NAME = test1dat4,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat4.ndf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 100MB,'
+          '    FILEGROWTH = 5MB'
+          ')'
+          'TO FILEGROUP Test1FG1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase13'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'ADD LOG FILE'
+          '('
+          '    NAME = test1log2,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\test2log.ldf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 100MB,'
+          '    FILEGROWTH = 5MB'
+          '),'
+          '('
+          '    NAME = test1log3,'
+          '    FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\test3log.ldf'','
+          '    SIZE = 5MB,'
+          '    MAXSIZE = 100MB,'
+          '    FILEGROWTH = 5MB'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase14'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'REMOVE FILE test1dat4;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase15'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'MODIFY FILE'
+          '(NAME = test1dat3,'
+          'SIZE = 200MB);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase16'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'MODIFY FILE'
+          '(NAME = test1dat3,'
+          'SIZE = 200MB);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase17'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'MODIFY FILE'
+          '('
+          '    NAME = Test1dat2,'
+          '    FILENAME = N''c:\t1dat2.ndf'''
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase18'
+        Lines.Strings = (
+          'ALTER DATABASE tempdb'
+          'MODIFY FILE (NAME = tempdev, FILENAME = ''E:\SQLData\tempdb.mdf'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase19'
+        Lines.Strings = (
+          'ALTER DATABASE tempdb'
+          'MODIFY FILE (NAME = templog, FILENAME = ''E:\SQLData\templog.ldf'');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase20'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'MODIFY FILEGROUP Test1FG1 DEFAULT;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase21'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'MODIFY FILEGROUP [PRIMARY] DEFAULT;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase22'
+        Lines.Strings = (
+          'ALTER DATABASE FileStreamPhotoDB'
+          'ADD FILEGROUP TodaysPhotoShoot'
+          'CONTAINS FILESTREAM;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase23'
+        Lines.Strings = (
+          'ALTER DATABASE FileStreamPhotoDB'
+          'ADD FILE'
+          '('
+          '  NAME= ''PhotoShoot1'','
+          '  FILENAME = ''C:\Users\Administrator\Pictures\TodaysPhotoShoot.ndf'''
+          ')'
+          'TO FILEGROUP TodaysPhotoShoot;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase24'
+        Lines.Strings = (
+          'ALTER DATABASE xtp_db'
+          'ADD FILEGROUP xtp_fg'
+          'CONTAINS MEMORY_OPTIMIZED_DATA;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase25'
+        Lines.Strings = (
+          'ALTER DATABASE xtp_db'
+          'ADD FILE'
+          '('
+          '  NAME=''xtp_mod'','
+          '  FILENAME=''d:\data\xtp_mod'''
+          ')'
+          'TO FILEGROUP xtp_fg;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase26'
+        Lines.Strings = (
+          'ALTER DATABASE AccountsDb1 SET HADR AVAILABILITY GROUP = AccountsAG;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase27'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 1 ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase28'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = 4 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase29'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase30'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = ON ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase31'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase32'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = OFF ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase33'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = OFF ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase34'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase35'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = ON ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase36'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase37'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = OFF ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase38'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET OPTIMIZE_FOR_AD_HOC_WORKLOADS = ON;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase39'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET ELEVATE_ONLINE = FAIL_UNSUPPORTED ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase40'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION SET ELEVATE_RESUMABLE = WHEN_SUPPORTED ;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase41'
+        Lines.Strings = (
+          'ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE 0x06000500F443610F003B7CD12C02000001000000000000000000000000000000000000000000000000000000;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase42'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET PAUSED_RESUMABLE_INDEX_ABORT_DURATION_MINUTES = 60'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase43'
+      end    
+      item
+        Caption = 'AlterDatabase44'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET RECOVERY FULL PAGE_VERIFY CHECKSUM;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase45'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET SINGLE_USER'
+          'WITH ROLLBACK IMMEDIATE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase46'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET READ_ONLY'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase47'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET MULTI_USER;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase48'
+        Lines.Strings = (
+          'USE [database_name];'
+          'USE master;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase49'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET ALLOW_SNAPSHOT_ISOLATION ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase50'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET CHANGE_TRACKING = ON'
+          '(AUTO_CLEANUP = ON, CHANGE_RETENTION = 2 DAYS);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase51'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET CHANGE_TRACKING (CHANGE_RETENTION = 3 DAYS);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase52'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET CHANGE_TRACKING = OFF;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase53'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET QUERY_STORE = ON'
+          '    ('
+          '      OPERATION_MODE = READ_WRITE,'
+          '      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),'
+          '      DATA_FLUSH_INTERVAL_SECONDS = 900,'
+          '      QUERY_CAPTURE_MODE = AUTO,'
+          '      MAX_STORAGE_SIZE_MB = 1024,'
+          '      INTERVAL_LENGTH_MINUTES = 60'
+          '    );'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase54'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET QUERY_STORE = ON'
+          '    ('
+          '      OPERATION_MODE = READ_WRITE,'
+          '      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),'
+          '      DATA_FLUSH_INTERVAL_SECONDS = 900,'
+          '      MAX_STORAGE_SIZE_MB = 1024,'
+          '      INTERVAL_LENGTH_MINUTES = 60,'
+          '      SIZE_BASED_CLEANUP_MODE = AUTO,'
+          '      MAX_PLANS_PER_QUERY = 200,'
+          '      WAIT_STATS_CAPTURE_MODE = ON,'
+          '    );'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase55'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET QUERY_STORE = ON'
+          '    ('
+          '      OPERATION_MODE = READ_WRITE,'
+          '      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),'
+          '      DATA_FLUSH_INTERVAL_SECONDS = 900,'
+          '      MAX_STORAGE_SIZE_MB = 1024,'
+          '      INTERVAL_LENGTH_MINUTES = 60,'
+          '      SIZE_BASED_CLEANUP_MODE = AUTO,'
+          '      MAX_PLANS_PER_QUERY = 200,'
+          '      WAIT_STATS_CAPTURE_MODE = ON,'
+          '      QUERY_CAPTURE_MODE = CUSTOM,'
+          '      QUERY_CAPTURE_POLICY = ('
+          '        STALE_CAPTURE_POLICY_THRESHOLD = 24 HOURS,'
+          '        EXECUTION_COUNT = 30,'
+          '        TOTAL_COMPILE_CPU_TIME_MS = 1000,'
+          '        TOTAL_EXECUTION_CPU_TIME_MS = 100'
+          '      )'
+          '    );'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase56'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          '    SET RECOVERY FULL;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase57'
+        Lines.Strings = (
+          'ALTER DATABASE [BlobStore1]'
+          'ADD FILE'
+          '('
+          '    NAME = N''FS3'','
+          '    FILENAME = N''C:\BlobStore\FS3'','
+          '    MAXSIZE = 100MB'
+          ')'
+          'TO FILEGROUP [FS];'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase58'
+        Lines.Strings = (
+          'ALTER DATABASE AdventureWorks2012'
+          'SET ENCRYPTION OFF;'
+        )
+      end    
+      item
+        Caption = 'AlterDatabase59'
+        Lines.Strings = (
+          '    ALTER DATABASE AdventureWorks2012'
+          '        ADD FILEGROUP NewGroup;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterDatabase60'
+        Lines.Strings = (
+          '    ALTER DATABASE AdventureWorks2012'
+          '        ADD FILE (NAME = File1,'
+          '            FILENAME = ''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\File1.ndf'')'
+          '        TO FILEGROUP NewGroup;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase1'
+        Lines.Strings = (
+          'DROP DATABASE SampleDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase2'
+        Lines.Strings = (
+          'DROP DATABASE mytest;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase3'
+        Lines.Strings = (
+          'DROP DATABASE MyOptionsTest;'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase4'
+        Lines.Strings = (
+          'DROP DATABASE Sales;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase5'
+        Lines.Strings = (
+          'DROP DATABASE Sales, NewSales;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase6'
+        Lines.Strings = (
+          'DROP DATABASE sales_snapshot0600;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase7'
+        Lines.Strings = (
+          'DROP DATABASE AUDIT SPECIFICATION HIPAA_Audit_DB_Specification;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropDatabase8'
+        Lines.Strings = (
+          'DROP DATABASE ENCRYPTION KEY;'
+        )
+      end    
+      item
+        Caption = 'CreateShema1'
+        Lines.Strings = (
+          'CREATE SCHEMA Test;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema2'
+        Lines.Strings = (
+          '    CREATE SCHEMA sqlserver;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema3'
+        Lines.Strings = (
+          'CREATE SCHEMA Sprockets AUTHORIZATION Annik'
+          '    CREATE TABLE NineProngs (source int, cost int, partnumber int)'
+          '    GRANT SELECT ON SCHEMA::Sprockets TO Mandar'
+          '    DENY SELECT ON SCHEMA::Sprockets TO Prasanna;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema4'
+        Lines.Strings = (
+          'CREATE SCHEMA Test ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema5'
+        Lines.Strings = (
+          'CREATE SCHEMA DataSchema;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema6'
+        Lines.Strings = (
+          'CREATE SCHEMA History;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateShema7'
+        Lines.Strings = (
+          'CREATE SCHEMA Sprockets AUTHORIZATION Krishna'
+          '    CREATE TABLE NineProngs (source INT, cost INT, partnumber INT)'
+          '    GRANT SELECT TO Anibal'
+          '    DENY SELECT TO [Hung-Fu];'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterShema1'
+        Lines.Strings = (
+          'ALTER SCHEMA HumanResources TRANSFER Person.Address;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterShema2'
+        Lines.Strings = (
+          'ALTER SCHEMA Person TRANSFER type::Production.TestType ;'
+        )
+      end    
+      item
+        Caption = 'DropSchema1'
+        Lines.Strings = (
+          'DROP SCHEMA Sprockets;'
           ''
           ''
         )
@@ -1624,6 +2533,1943 @@ object MSSQLParserTestData: TMSSQLParserTestData
           ''
           ''
         )
+      end    
+      item
+        Caption = 'CreateExternalTable1'
+        Lines.Strings = (
+          'CREATE EXTERNAL TABLE [dbo].[FastCustomers2009] ('
+          '        [FirstName] char(25) NOT NULL,'
+          '        [LastName] char(25) NOT NULL,'
+          '        [YearlyIncome] float NULL,'
+          '        [MaritalStatus] char(1) NOT NULL'
+          ')'
+          'WITH ('
+          '        LOCATION=''/old_data/2009/customerdata.tbl'','
+          '        DATA_SOURCE = HadoopHDP2,'
+          '        FILE_FORMAT = TextFileFormat,'
+          '        REJECT_TYPE = VALUE,'
+          '        REJECT_VALUE = 0'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable2'
+        Lines.Strings = (
+          'CREATE EXTERNAL TABLE ClickStream ('
+          '    url varchar(50),'
+          '    event_date date,'
+          '    user_IP varchar(50)'
+          ')'
+          'WITH ('
+          '        LOCATION=''/webdata/employee.tbl'','
+          '        DATA_SOURCE = mydatasource,'
+          '        FILE_FORMAT = myfileformat'
+          '    )'
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable3'
+        Lines.Strings = (
+          'CREATE EXTERNAL TABLE ClickStream_rc ('
+          '    url varchar(50),'
+          '    event_date date,'
+          '    user_ip varchar(50)'
+          ')'
+          'WITH ('
+          '        LOCATION=''/webdata/employee_rc.tbl'','
+          '        DATA_SOURCE = mydatasource_rc,'
+          '        FILE_FORMAT = myfileformat_rc'
+          '    )'
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable4'
+        Lines.Strings = (
+          'CREATE EXTERNAL TABLE ClickStream_orc ('
+          '    url varchar(50),'
+          '    event_date date,'
+          '    user_ip varchar(50)'
+          ')'
+          'WITH ('
+          '        LOCATION=''/webdata/'','
+          '        DATA_SOURCE = mydatasource_orc,'
+          '        FILE_FORMAT = myfileformat_orc'
+          '    )'
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable5'
+        Lines.Strings = (
+          'CREATE EXTERNAL TABLE [dbo].[all_dm_exec_requests]([session_id] smallint NOT NULL,'
+          '  [request_id] int NOT NULL,'
+          '  [start_time] datetime NOT NULL,'
+          '  [status] nvarchar(30) NOT NULL,'
+          '  [command] nvarchar(32) NOT NULL,'
+          '  [sql_handle] varbinary(64),'
+          '  [statement_start_offset] int,'
+          '  [statement_end_offset] int,'
+          '  [cpu_time] int NOT NULL)'
+          'WITH'
+          '('
+          '  DATA_SOURCE = MyExtSrc,'
+          '  SCHEMA_NAME = ''sys'','
+          '  OBJECT_NAME = ''dm_exec_requests'','
+          '  DISTRIBUTION=ROUND_ROBIN'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable6'
+        Lines.Strings = (
+          '     CREATE EXTERNAL TABLE sqlserver.customer('
+          '     C_CUSTKEY INT NOT NULL,'
+          '     C_NAME VARCHAR(25) NOT NULL,'
+          '     C_ADDRESS VARCHAR(40) NOT NULL,'
+          '     C_NATIONKEY INT NOT NULL,'
+          '     C_PHONE CHAR(15) NOT NULL,'
+          '     C_ACCTBAL DECIMAL(15,2) NOT NULL,'
+          '     C_MKTSEGMENT CHAR(10) NOT NULL,'
+          '     C_COMMENT VARCHAR(117) NOT NULL'
+          '      )'
+          '      WITH ('
+          '      LOCATION=''tpch_10.dbo.customer'','
+          '      DATA_SOURCE=SqlServerInstance'
+          '     );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable7'
+        Lines.Strings = (
+          '   CREATE EXTERNAL TABLE customers('
+          '   [O_ORDERKEY] DECIMAL(38) NOT NULL,'
+          '   [O_CUSTKEY] DECIMAL(38) NOT NULL,'
+          '   [O_ORDERSTATUS] CHAR COLLATE Latin1_General_BIN NOT NULL,'
+          '   [O_TOTALPRICE] DECIMAL(15,2) NOT NULL,'
+          '   [O_ORDERDATE] DATETIME2(0) NOT NULL,'
+          '   [O_ORDERPRIORITY] CHAR(15) COLLATE Latin1_General_BIN NOT NULL,'
+          '   [O_CLERK] CHAR(15) COLLATE Latin1_General_BIN NOT NULL,'
+          '   [O_SHIPPRIORITY] DECIMAL(38) NOT NULL,'
+          '   [O_COMMENT] VARCHAR(79) COLLATE Latin1_General_BIN NOT NULL'
+          '   )'
+          '   WITH ('
+          '    LOCATION=''.mySchema.customer'','
+          '    DATA_SOURCE= external_data_source_name'
+          '   );'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable8'
+        Lines.Strings = (
+          '     CREATE EXTERNAL TABLE customer('
+          '      L_ORDERKEY INT NOT NULL,'
+          '      L_PARTKEY INT NOT NULL,'
+          '     L_SUPPKEY INT NOT NULL,'
+          '     L_LINENUMBER INT NOT NULL,'
+          '     L_QUANTITY DECIMAL(15,2) NOT NULL,'
+          '     L_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,'
+          '     L_DISCOUNT DECIMAL(15,2) NOT NULL,'
+          '     L_TAX DECIMAL(15,2) NOT NULL,'
+          '     L_RETURNFLAG CHAR NOT NULL,'
+          '     L_LINESTATUS CHAR NOT NULL,'
+          '     L_SHIPDATE DATE NOT NULL,'
+          '     L_COMMITDATE DATE NOT NULL,'
+          '     L_RECEIPTDATE DATE NOT NULL,'
+          '     L_SHIPINSTRUCT CHAR(25) NOT NULL,'
+          '     L_SHIPMODE CHAR(10) NOT NULL,'
+          '     L_COMMENT VARCHAR(44) NOT NULL'
+          '     )'
+          '     WITH ('
+          '     LOCATION=''customer'','
+          '     DATA_SOURCE= external_data_source_name'
+          '     );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateExternalTable9'
+        Lines.Strings = (
+          '     CREATE EXTERNAL TABLE customers('
+          '     [O_ORDERKEY] DECIMAL(38) NOT NULL,'
+          '     [O_CUSTKEY] DECIMAL(38) NOT NULL,'
+          '     [O_ORDERSTATUS] CHAR COLLATE Latin1_General_BIN NOT NULL,'
+          '     [O_TOTALPRICE] DECIMAL(15,2) NOT NULL,'
+          '     [O_ORDERDATE] DATETIME2(0) NOT NULL,'
+          '     [O_COMMENT] VARCHAR(79) COLLATE Latin1_General_BIN NOT NULL'
+          '     )'
+          '     WITH ('
+          '     LOCATION=''customer'','
+          '     DATA_SOURCE= external_data_source_name'
+          '     );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable1'
+        Lines.Strings = (
+          'ALTER TABLE HumanResources.EmployeeDepartmentHistory'
+          'CHECK CONSTRAINT FK_EmployeeDepartmentHistory_Department_DepartmentID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable2'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exa ADD column_b VARCHAR(20) NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable3'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exc ADD column_b VARCHAR(20) NULL'
+          '    CONSTRAINT exb_unique UNIQUE ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable4'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exd WITH NOCHECK'
+          'ADD CONSTRAINT exd_check CHECK (column_a > 1) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable5'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exz'
+          '  ADD CONSTRAINT col_b_def'
+          '  DEFAULT 50 FOR column_b ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable6'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exe ADD'
+          ''
+          '-- Add a PRIMARY KEY identity column.'
+          'column_b INT IDENTITY'
+          'CONSTRAINT column_b_pk PRIMARY KEY,'
+          ''
+          '-- Add a column that references another column in the same table.'
+          'column_c INT NULL'
+          'CONSTRAINT column_c_fk'
+          'REFERENCES doc_exe(column_a),'
+          ''
+          '-- Add a column with a constraint to enforce that'
+          '-- nonnull data is in a valid telephone number format.'
+          'column_d VARCHAR(16) NULL'
+          'CONSTRAINT column_d_chk'
+          'CHECK'
+          '(column_d LIKE ''[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'' OR'
+          'column_d LIKE'
+          '''([0-9][0-9][0-9]) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]''),'
+          ''
+          '-- Add a nonnull column with a default.'
+          'column_e DECIMAL(3,3)'
+          'CONSTRAINT column_e_default'
+          'DEFAULT .081 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable7'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exf'
+          'ADD AddDate smalldatetime NULL'
+          'CONSTRAINT AddDateDflt'
+          'DEFAULT GETDATE() WITH VALUES ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable8'
+        Lines.Strings = (
+          'ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK'
+          'ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)'
+          'WITH (FILLFACTOR = 75, ONLINE = ON, PAD_INDEX = ON);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable9'
+        Lines.Strings = (
+          'ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK'
+          'ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)'
+          'WITH (DATA_COMPRESSION = PAGE);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable10'
+        Lines.Strings = (
+          'ALTER TABLE T1'
+          'ADD C5 CHAR(100) SPARSE NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable11'
+        Lines.Strings = (
+          'ALTER TABLE T1'
+          'ALTER COLUMN C4 ADD SPARSE ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable12'
+        Lines.Strings = (
+          'ALTER TABLE T1'
+          'ALTER COLUMN C4 DROP SPARSE ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable13'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE T2'
+          'ADD CS XML COLUMN_SET FOR ALL_SPARSE_COLUMNS ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable14'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE T2'
+          'ALTER COLUMN C2 ADD SPARSE ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable15'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE T2'
+          'ALTER COLUMN C3 ADD SPARSE ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable16'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE Customers ADD'
+          '    PromotionCode nvarchar(100)'
+          '    ENCRYPTED WITH (COLUMN_ENCRYPTION_KEY = MyCEK,'
+          '    ENCRYPTION_TYPE = RANDOMIZED,'
+          '    ALGORITHM = ''AEAD_AES_256_CBC_HMAC_SHA_256'') ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable17'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exb DROP COLUMN column_b ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable18'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exb DROP COLUMN column_c, column_d;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable19'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exc DROP my_constraint ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable20'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exc'
+          'DROP CONSTRAINT my_constraint, my_pk_constraint, COLUMN column_b ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable21'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE Production.TransactionHistoryArchive'
+          'DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID'
+          'WITH (ONLINE = ON) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable22'
+        Lines.Strings = (
+          'ALTER TABLE Person.ContactBackup'
+          'ADD CONSTRAINT FK_ContactBackup_Contact FOREIGN KEY (ContactID)'
+          '    REFERENCES Person.Person (BusinessEntityID) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable23'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE Person.ContactBackup'
+          'DROP CONSTRAINT FK_ContactBackup_Contact ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable24'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exy ALTER COLUMN column_a DECIMAL (5, 2) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable25'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exy ALTER COLUMN col_a varchar(25) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable26'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exy ALTER COLUMN col_b decimal (10,4) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable27'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE T3'
+          'ALTER COLUMN C2 varchar(50) COLLATE Latin1_General_BIN ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable28'
+        Lines.Strings = (
+          'ALTER TABLE T3'
+          'ALTER COLUMN C2 VARCHAR(50) ENCRYPTED WITH (COLUMN_ENCRYPTION_KEY = [CEK1], ENCRYPTION_TYPE = Randomized, ALGORITHM = ''AEAD_AES_256_CBC_HMAC_SHA_256'') NULL;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable29'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE T1'
+          'REBUILD WITH (DATA_COMPRESSION = PAGE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable30'
+        Lines.Strings = (
+          'ALTER TABLE PartitionTable1'
+          'REBUILD PARTITION = 1 WITH (DATA_COMPRESSION =NONE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable31'
+        Lines.Strings = (
+          'ALTER TABLE PartitionTable1'
+          'REBUILD PARTITION = ALL'
+          'WITH (DATA_COMPRESSION = PAGE ON PARTITIONS(1)) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable32'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE PartitionTable1'
+          'REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable33'
+        Lines.Strings = (
+          'ALTER TABLE PartitionTable1'
+          'REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable34'
+        Lines.Strings = (
+          'ALTER TABLE PartitionTable SWITCH PARTITION 2 TO NonPartitionTable ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable35'
+        Lines.Strings = (
+          'ALTER TABLE dbo.T1 SET (LOCK_ESCALATION = AUTO) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable36'
+        Lines.Strings = (
+          'ALTER TABLE Person.Person'
+          'ENABLE CHANGE_TRACKING ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable37'
+        Lines.Strings = (
+          'ALTER TABLE Person.Person'
+          'ENABLE CHANGE_TRACKING'
+          'WITH (TRACK_COLUMNS_UPDATED = ON)'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable38'
+        Lines.Strings = (
+          'ALTER TABLE Person.Person'
+          'DISABLE CHANGE_TRACKING ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable39'
+        Lines.Strings = (
+          'ALTER TABLE dbo.cnst_example NOCHECK CONSTRAINT salary_cap;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable40'
+        Lines.Strings = (
+          'ALTER TABLE dbo.cnst_example CHECK CONSTRAINT salary_cap;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable41'
+        Lines.Strings = (
+          'ALTER TABLE dbo.trig_example DISABLE TRIGGER trig1 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable42'
+        Lines.Strings = (
+          'ALTER TABLE dbo.trig_example ENABLE TRIGGER trig1 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable43'
+        Lines.Strings = (
+          'ALTER TABLE T1'
+          'REBUILD WITH'
+          '('
+          '    PAD_INDEX = ON,'
+          '    ONLINE = ON ( WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 4 MINUTES,'
+          '                                         ABORT_AFTER_WAIT = BLOCKERS ) )'
+          ') ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable44'
+        Lines.Strings = (
+          'ALTER TABLE dbo.doc_exy'
+          '    ALTER COLUMN column_a DECIMAL (5, 2) WITH (ONLINE = ON) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable45'
+        Lines.Strings = (
+          'ALTER TABLE InsurancePolicy'
+          'ADD PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime),'
+          'SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL'
+          '    DEFAULT SYSUTCDATETIME(),'
+          'SysEndTime datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL'
+          '    DEFAULT CONVERT(DATETIME2, ''9999-12-31 23:59:59.99999999'') ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable46'
+        Lines.Strings = (
+          'ALTER TABLE InsurancePolicy'
+          'SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 1 YEAR)) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable47'
+        Lines.Strings = (
+          'ALTER TABLE ProjectTask ALTER COLUMN [Changed Date] datetime2 NOT NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable48'
+        Lines.Strings = (
+          'ALTER TABLE ProjectTask ALTER COLUMN [Revised Date] datetime2 NOT NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable49'
+        Lines.Strings = (
+          'ALTER TABLE ProjectTaskHistory ALTER COLUMN [Changed Date] datetime2 NOT NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable50'
+        Lines.Strings = (
+          'ALTER TABLE ProjectTaskHistory ALTER COLUMN [Revised Date] datetime2 NOT NULL ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable51'
+        Lines.Strings = (
+          'ALTER TABLE ProjectTask'
+          'ADD PERIOD FOR SYSTEM_TIME ([Changed Date], [Revised Date])'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable52'
+        Lines.Strings = (
+          ''
+          'ALTER TABLE ProjectTask'
+          'SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.ProjectTaskHistory, DATA_CONSISTENCY_CHECK = ON))'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable53'
+        Lines.Strings = (
+          'ALTER TABLE Department'
+          '    SET (SYSTEM_VERSIONING = OFF) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable54'
+        Lines.Strings = (
+          'ALTER TABLE Department'
+          '     ADD Col5 int NOT NULL DEFAULT 0 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable55'
+        Lines.Strings = (
+          'ALTER TABLE DepartmentHistory'
+          '    ADD Col5 int NOT NULL DEFAULT 0 ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable56'
+        Lines.Strings = (
+          'ALTER TABLE Department'
+          '    SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE=dbo.DepartmentHistory,'
+          '                                 DATA_CONSISTENCY_CHECK = OFF)) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable57'
+        Lines.Strings = (
+          'ALTER TABLE Department'
+          '    SET (SYSTEM_VERSIONING = OFF) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable58'
+        Lines.Strings = (
+          'ALTER TABLE Department'
+          'DROP PERIOD FOR SYSTEM_TIME ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterTable59'
+        Lines.Strings = (
+          'ALTER TABLE Production.TransactionHistoryArchive'
+          'DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID'
+          'WITH (ONLINE = ON);'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable1'
+        Lines.Strings = (
+          '    DROP TABLE dbo.Table1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable2'
+        Lines.Strings = (
+          'DROP TABLE #MyTempTable;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable3'
+        Lines.Strings = (
+          'DROP TABLE IF EXISTS #tmpdbs'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable4'
+        Lines.Strings = (
+          'DROP TABLE dbo.doc_exc ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable5'
+        Lines.Strings = (
+          'DROP TABLE dbo.doc_exz ;'
+        )
+      end    
+      item
+        Caption = 'DropTable6'
+        Lines.Strings = (
+          'DROP TABLE dbo.doc_exe ;'
+        )
+      end    
+      item
+        Caption = 'DropTable7'
+        Lines.Strings = (
+          'DROP TABLE dbo.doc_exf ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable8'
+        Lines.Strings = (
+          'DROP TABLE Person.ContactBackup ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable9'
+        Lines.Strings = (
+          'DROP TABLE dbo.doc_exy ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable10'
+        Lines.Strings = (
+          'DROP TABLE DepartmentHistory ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable11'
+        Lines.Strings = (
+          'DROP TABLE #Test;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable12'
+        Lines.Strings = (
+          'DROP TABLE ProductVendor1 ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable13'
+        Lines.Strings = (
+          'DROP TABLE AdventureWorks2012.dbo.SalesPerson2 ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable14'
+        Lines.Strings = (
+          'DROP TABLE #temptable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropTable15'
+        Lines.Strings = (
+          'DROP TABLE IF EXISTS T1;'
+        )
+      end    
+      item
+        Caption = 'TruncateTable1'
+        Lines.Strings = (
+          'TRUNCATE TABLE HumanResources.JobCandidate;'
+          ''
+        )
+      end    
+      item
+        Caption = 'TruncateTable2'
+        Lines.Strings = (
+          'TRUNCATE TABLE PartitionTable1'
+          'WITH (PARTITIONS (2, 4, 6 TO 8));'
+        )
+      end    
+      item
+        Caption = 'CreateIndex1'
+        Lines.Strings = (
+          'CREATE INDEX nc1_simple ON SimpleTable (OrderDateKey);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex2'
+        Lines.Strings = (
+          'CREATE INDEX nc2_simple ON SimpleTable (DueDateKey);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex3'
+        Lines.Strings = (
+          'CREATE INDEX my_index ON MyFactTable ( ProductKey, OrderDateKey );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex4'
+        Lines.Strings = (
+          'CREATE INDEX i1 ON t1 (col1);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex5'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX i1 ON d1.s1.t1 (col1);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex6'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX i1 ON t1 (col1 DESC, col2 ASC, col3 DESC);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex7'
+        Lines.Strings = (
+          'CREATE INDEX IX_VendorID ON ProductVendor (VendorID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex8'
+        Lines.Strings = (
+          'CREATE INDEX IX_VendorID ON dbo.ProductVendor (VendorID DESC, Name ASC, Address DESC);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex9'
+        Lines.Strings = (
+          'CREATE INDEX IX_VendorID ON Purchasing..ProductVendor (VendorID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex10'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX IX_SalesPerson_SalesQuota_SalesYTD ON Sales.SalesPerson (SalesQuota, SalesYTD);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex11'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX IX_ProductVendor_VendorID ON Purchasing..ProductVendor (VendorID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex12'
+        Lines.Strings = (
+          'CREATE INDEX IX_FF ON dbo.FactFinance (FinanceKey ASC, DateKey ASC);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex13'
+        Lines.Strings = (
+          'CREATE INDEX IX_FF ON dbo.FactFinance (FinanceKey, DateKey, OrganizationKey DESC)'
+          '  WITH (DROP_EXISTING = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex14'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX AK_UnitMeasure_Name'
+          '  ON Production.UnitMeasure(Name);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex15'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX AK_Index ON #Test (C2)'
+          '  WITH (IGNORE_DUP_KEY = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex16'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX AK_Index ON #Test (C2)'
+          '  WITH (IGNORE_DUP_KEY = OFF);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex17'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX IX_WorkOrder_ProductID'
+          '  ON Production.WorkOrder(ProductID)'
+          '    WITH (FILLFACTOR = 80,'
+          '      PAD_INDEX = ON,'
+          '      DROP_EXISTING = ON);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex18'
+        Lines.Strings = (
+          'CREATE UNIQUE CLUSTERED INDEX IDX_V1 ON Sales.vOrders (OrderDate, ProductID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex19'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX IX_Address_PostalCode'
+          '  ON Person.Address (PostalCode)'
+          '  INCLUDE (AddressLine1, AddressLine2, City, StateProvinceID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex20'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX IX_TransactionHistory_ReferenceOrderID'
+          '  ON Production.TransactionHistory (ReferenceOrderID)'
+          '  ON TransactionsPS1 (TransactionDate);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex21'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX "FIBillOfMaterialsWithEndDate"'
+          '  ON Production.BillOfMaterials (ComponentID, StartDate)'
+          '  WHERE EndDate IS NOT NULL;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex22'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED INDEX IX_INDEX_1'
+          '  ON T1 (C2)'
+          '  WITH (DATA_COMPRESSION = ROW);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex23'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX IX_PartTab2Col1'
+          '  ON PartitionTable1 (Col1)'
+          '  WITH (DATA_COMPRESSION = ROW);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex24'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX IX_PartTab2Col1'
+          '  ON PartitionTable1 (Col1)'
+          '  WITH ('
+          '    DATA_COMPRESSION = PAGE ON PARTITIONS(1),'
+          '    DATA_COMPRESSION = ROW ON PARTITIONS (2 TO 4)'
+          '  );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex25'
+        Lines.Strings = (
+          'CREATE INDEX test_idx1 ON test_table (col1) WITH (ONLINE = ON, MAXDOP = 1, RESUMABLE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex26'
+        Lines.Strings = (
+          'CREATE INDEX test_idx2 ON test_table (col2) WITH (ONLINE = ON, RESUMABLE = ON, MAX_DURATION = 240);'
+        )
+      end    
+      item
+        Caption = 'CreateIndex27'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON table_1 (column_name) KEY INDEX unique_key_index'
+          '   WITH SEARCH PROPERTY LIST=spl_1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex1'
+        Lines.Strings = (
+          'ALTER INDEX idxcci_cci_target ON cci_target REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex2'
+        Lines.Strings = (
+          'ALTER INDEX idxcci_cci_target ON cci_target REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex3'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex4'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE PARTITION = 0;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex5'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex6'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE PARTITION = 0 WITH (COMPRESS_ALL_ROW_GROUPS = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex7'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex8'
+        Lines.Strings = (
+          'ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REBUILD;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex9'
+        Lines.Strings = (
+          'ALTER INDEX cci_fact3'
+          'ON fact3'
+          'REBUILD PARTITION = 12;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex10'
+        Lines.Strings = (
+          'ALTER INDEX cci_SimpleTable ON SimpleTable'
+          'REBUILD'
+          'WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex11'
+        Lines.Strings = (
+          'ALTER INDEX cci_SimpleTable ON SimpleTable'
+          'REBUILD'
+          'WITH (DATA_COMPRESSION = COLUMNSTORE);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex12'
+        Lines.Strings = (
+          'ALTER INDEX PK_Employee_EmployeeID ON HumanResources.Employee REBUILD;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex13'
+        Lines.Strings = (
+          'ALTER INDEX ALL ON Production.Product'
+          'REBUILD WITH (FILLFACTOR = 80, SORT_IN_TEMPDB = ON, STATISTICS_NORECOMPUTE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex14'
+        Lines.Strings = (
+          'ALTER INDEX ALL ON Production.Product'
+          'REBUILD WITH'
+          '('
+          '    FILLFACTOR = 80,'
+          '    SORT_IN_TEMPDB = ON,'
+          '    STATISTICS_NORECOMPUTE = ON,'
+          '    ONLINE = ON ( WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 4 MINUTES, ABORT_AFTER_WAIT = BLOCKERS ) ),'
+          '    DATA_COMPRESSION = ROW'
+          ');'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex15'
+        Lines.Strings = (
+          'ALTER INDEX PK_ProductPhoto_ProductPhotoID ON Production.ProductPhoto REORGANIZE WITH (LOB_COMPACTION = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex16'
+        Lines.Strings = (
+          'ALTER INDEX AK_SalesOrderHeader_SalesOrderNumber ON'
+          '    Sales.SalesOrderHeader'
+          'SET ('
+          '    STATISTICS_NORECOMPUTE = ON,'
+          '    IGNORE_DUP_KEY = ON,'
+          '    ALLOW_PAGE_LOCKS = ON'
+          '    ) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex17'
+        Lines.Strings = (
+          'ALTER INDEX IX_Employee_ManagerID ON HumanResources.Employee DISABLE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex18'
+        Lines.Strings = (
+          'ALTER INDEX PK_Department_DepartmentID ON HumanResources.Department DISABLE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex19'
+        Lines.Strings = (
+          'ALTER INDEX PK_Department_DepartmentID ON HumanResources.Department REBUILD;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex20'
+        Lines.Strings = (
+          'ALTER INDEX IX_TransactionHistory_TransactionDate'
+          'ON Production.TransactionHistory'
+          'REBUILD Partition = 5'
+          '   WITH (ONLINE = ON (WAIT_AT_LOW_PRIORITY (MAX_DURATION = 10 minutes, ABORT_AFTER_WAIT = SELF)));'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex21'
+        Lines.Strings = (
+          'ALTER INDEX IX_INDEX1'
+          'ON T1'
+          'REBUILD'
+          'WITH (DATA_COMPRESSION = PAGE);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex22'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table REBUILD WITH (ONLINE=ON, MAXDOP=1, RESUMABLE=ON) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex23'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table REBUILD WITH (ONLINE=ON, RESUMABLE=ON, MAX_DURATION=240) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex24'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table PAUSE ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex25'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table RESUME WITH (MAXDOP=4) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex26'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table'
+          '      RESUME WITH (MAXDOP=2, MAX_DURATION= 240 MINUTES,'
+          '      WAIT_AT_LOW_PRIORITY (MAX_DURATION=10, ABORT_AFTER_WAIT=BLOCKERS)) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex27'
+        Lines.Strings = (
+          'ALTER INDEX test_idx on test_table ABORT ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex28'
+        Lines.Strings = (
+          'ALTER INDEX sxi_index'
+          'ON Tbl'
+          'FOR'
+          '('
+          '    ADD pathm = ''/a/b/m'' as XQUERY ''node()'' ,'
+          '    REMOVE pathabe'
+          ');'
+          ''
+          'ALTER INDEX sxi_index'
+          'ON Tbl'
+          'PAD_INDEX = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex29'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON table_1 (column_name) KEY INDEX unique_key_index'
+          '   WITH SEARCH PROPERTY LIST=spl_1,'
+          '   CHANGE_TRACKING OFF, NO POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex30'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON table_1 START FULL POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex31'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON table_1 SET SEARCH PROPERTY LIST spl_2;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex32'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON table_1'
+          '   SET SEARCH PROPERTY LIST OFF WITH NO POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex33'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON table_1 SET SEARCH PROPERTY LIST spl_1;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex34'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON HumanResources.JobCandidate'
+          '   SET CHANGE_TRACKING MANUAL;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex35'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON Production.Document'
+          '   SET SEARCH PROPERTY LIST DocumentPropertyList;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex36'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON Production.Document'
+          '   SET SEARCH PROPERTY LIST OFF WITH NO POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex37'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON HumanResources.JobCandidate'
+          '   START FULL POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex38'
+        Lines.Strings = (
+          'ALTER INDEX my_CCI'
+          'ON MyFactTable'
+          'REBUILD PARTITION = ALL'
+          'WITH ( DROP_EXISTING = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex28'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX idxcci_cci_target ON cci_target;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex29'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX cci_FactInternetSales2'
+          'ON dbo.FactInternetSales2;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex30'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX cci_SimpleTable ON SimpleTable (ProductKey);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex31'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX cci_SimpleTable'
+          'ON SimpleTable'
+          'WITH (DROP_EXISTING = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex32'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX cci_Simple ON SimpleTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex33'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX cl_simple ON SimpleTable (ProductKey);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex34'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX cl_simple ON SimpleTable'
+          'WITH (DROP_EXISTING = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex35'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX cci_simple ON SimpleTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex36'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX MyCCI ON MyFactTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex37'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX'
+          'ClusteredIndex_d473567f7ea04d7aafcac5364c241e09'
+          ' ON MyFactTable'
+          'WITH DROP_EXISTING = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex38'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX ci_MyTable'
+          'ON MyFactTable'
+          'WITH ( DROP EXISTING = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex39'
+        Lines.Strings = (
+          'CREATE CLUSTERED COLUMNSTORE INDEX my_CCI'
+          'ON MyFactTable'
+          'WITH ( DROP_EXISTING = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex40'
+        Lines.Strings = (
+          'CREATE CLUSTERED INDEX cl_simple ON SimpleTable (ProductKey);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex41'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED COLUMNSTORE INDEX csindx_simple'
+          'ON SimpleTable'
+          '(OrderDateKey, DueDateKey, ShipDateKey);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex42'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED COLUMNSTORE INDEX csindx_simple'
+          'ON SimpleTable'
+          '(OrderDateKey, DueDateKey, ShipDateKey)'
+          'WITH (DROP_EXISTING =  ON,'
+          '    MAXDOP = 2)'
+          'ON "default"'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex43'
+        Lines.Strings = (
+          'CREATE NONCLUSTERED COLUMNSTORE INDEX "FIBillOfMaterialsWithEndDate"'
+          '    ON Production.BillOfMaterials (ComponentID, StartDate)'
+          '    WHERE EndDate IS NOT NULL;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex44'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col1'
+          '   ON SpatialTable(geometry_col)'
+          '   WITH ( BOUNDING_BOX = ( 0, 0, 500, 200 ) );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex45'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col2'
+          '   ON SpatialTable(geometry_col)'
+          '   USING GEOMETRY_GRID'
+          '   WITH ('
+          '    BOUNDING_BOX = ( xmin=0, ymin=0, xmax=500, ymax=200 ),'
+          '    GRIDS = (LOW, LOW, MEDIUM, HIGH),'
+          '    CELLS_PER_OBJECT = 64,'
+          '    PAD_INDEX  = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex46'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col3'
+          '   ON SpatialTable(geometry_col)'
+          '   WITH ('
+          '    BOUNDING_BOX = ( 0, 0, 500, 200 ),'
+          '    GRIDS = ( LEVEL_4 = HIGH, LEVEL_3 = MEDIUM ) );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex47'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col3'
+          '   ON SpatialTable(geography_col)'
+          '   WITH ( BOUNDING_BOX = ( 0, 0, 500, 200 ),'
+          '        GRIDS = ( LEVEL_3 = LOW ),'
+          '        DROP_EXISTING = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex48'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col1'
+          '   ON SpatialTable2(object);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex49'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col2'
+          '   ON SpatialTable2(object)'
+          '   USING GEOGRAPHY_GRID'
+          '   WITH ('
+          '    GRIDS = (MEDIUM, LOW, MEDIUM, HIGH ),'
+          '    CELLS_PER_OBJECT = 64,'
+          '    PAD_INDEX  = ON );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex50'
+        Lines.Strings = (
+          'CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col3'
+          '   ON SpatialTable2(object)'
+          '   WITH ( GRIDS = ( LEVEL_3 = HIGH, LEVEL_2 = HIGH ) );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex51'
+        Lines.Strings = (
+          'CREATE PRIMARY XML INDEX PXML_ProductModel_CatalogDescription'
+          '    ON Production.ProductModel (CatalogDescription);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex52'
+        Lines.Strings = (
+          'CREATE XML INDEX IXML_ProductModel_CatalogDescription_Path'
+          '    ON Production.ProductModel (CatalogDescription)'
+          '    USING XML INDEX PXML_ProductModel_CatalogDescription FOR PATH ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex53'
+        Lines.Strings = (
+          'CREATE XML INDEX filt_sxi_index_c'
+          'ON Tbl(xmlcol)'
+          'USING XML INDEX sxi_index'
+          'FOR ( pathabc );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex54'
+        Lines.Strings = (
+          'CREATE UNIQUE CLUSTERED INDEX'
+          '    AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate'
+          '        ON Production.BillOfMaterials (ProductAssemblyID, ComponentID,'
+          '        StartDate)'
+          '    ON ''PRIMARY'';'
+        )
+      end    
+      item
+        Caption = 'AlterIndex39'
+        Lines.Strings = (
+          'ALTER INDEX mycolumnstoreindex ON mytable DISABLE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex40'
+        Lines.Strings = (
+          'ALTER INDEX mycolumnstoreindex on mytable REBUILD'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex41'
+        Lines.Strings = (
+          'ALTER INDEX test_idx1 ON test_table PAUSE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex42'
+        Lines.Strings = (
+          'ALTER INDEX test_idx2 ON test_table PAUSE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex43'
+        Lines.Strings = (
+          'ALTER INDEX test_idx1 ON test_table RESUME;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex44'
+        Lines.Strings = (
+          'ALTER INDEX test_idx2 ON test_table RESUME;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex45'
+        Lines.Strings = (
+          'ALTER INDEX test_idx1 ON test_table ABORT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex46'
+        Lines.Strings = (
+          'ALTER INDEX test_idx2 ON test_table ABORT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex47'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON Production.Document'
+          '   SET SEARCH PROPERTY LIST DocumentPropertyList'
+          '   WITH NO POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterIndex48'
+        Lines.Strings = (
+          'ALTER FULLTEXT INDEX ON HumanResources.JobCandidate'
+          '   SET SEARCH PROPERTY LIST JobCandidateProperties;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex55'
+        Lines.Strings = (
+          'CREATE SELECTIVE XML INDEX sxi_index'
+          'ON Tbl(xmlcol)'
+          'FOR('
+          '    pathab   = ''/a/b'' as XQUERY ''node()'','
+          '    pathabc  = ''/a/b/c'' as XQUERY ''xs:double'','
+          '    pathdtext = ''/a/b/d/text()'' as XQUERY ''xs:string'' MAXLENGTH(200) SINGLETON,'
+          '    pathabe = ''/a/b/e'' as SQL NVARCHAR(100)'
+          ');'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex56'
+        Lines.Strings = (
+          'CREATE SELECTIVE XML INDEX on T1(C1)'
+          'WITH XMLNAMESPACES (''https://www.tempuri.org/'' as myns)'
+          'FOR ( path1 = ''/myns:book/myns:author/text()'' );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex57'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON HumanResources.JobCandidate(Resume) KEY INDEX PK_JobCandidate_JobCandidateID;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex58'
+        Lines.Strings = (
+          'CREATE UNIQUE INDEX ui_ukJobCand ON HumanResources.JobCandidate(JobCandidateID);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex59'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON HumanResources.JobCandidate(Resume)'
+          '   KEY INDEX ui_ukJobCand'
+          '   WITH STOPLIST = SYSTEM;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex60'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON Production.ProductReview'
+          ' ('
+          '  ReviewerName'
+          '     Language 1033,'
+          '  EmailAddress'
+          '     Language 1033,'
+          '  Comments'
+          '     Language 1033'
+          ' )'
+          '  KEY INDEX PK_ProductReview_ProductReviewID'
+          '      ON production_catalog;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateIndex61'
+        Lines.Strings = (
+          'CREATE FULLTEXT INDEX ON Production.Document'
+          '  ('
+          '  Title'
+          '      Language 1033,'
+          '  DocumentSummary'
+          '      Language 1033,'
+          '  Document'
+          '      TYPE COLUMN FileExtension'
+          '      Language 1033'
+          '  )'
+          '  KEY INDEX PK_Document_DocumentID'
+          '          WITH STOPLIST = SYSTEM, SEARCH PROPERTY LIST = DocumentPropertyList, CHANGE_TRACKING OFF, NO POPULATION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex1'
+        Lines.Strings = (
+          'DROP INDEX SimpleTable.nc1_simple;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex2'
+        Lines.Strings = (
+          'DROP INDEX SimpleTable.nc2_simple;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex3'
+        Lines.Strings = (
+          'DROP INDEX my_index ON MyFactTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex4'
+        Lines.Strings = (
+          'DROP INDEX ClusteredIndex_d473567f7ea04d7aafcac5364c241e09 ON MyDimTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex5'
+        Lines.Strings = (
+          'DROP INDEX MyCCI ON MyFactTable;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex6'
+        Lines.Strings = (
+          'DROP INDEX FIBillOfMaterialsWithEndDate'
+          '    ON Production.BillOfMaterials;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex7'
+        Lines.Strings = (
+          '    DROP INDEX PXML_ProductModel_CatalogDescription'
+          '        ON Production.ProductModel;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex8'
+        Lines.Strings = (
+          '    DROP INDEX IXML_ProductModel_CatalogDescription_Path'
+          '        ON Production.ProductModel;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex9'
+        Lines.Strings = (
+          'DROP INDEX IX_ProductVendor_BusinessEntityID'
+          '    ON Purchasing.ProductVendor;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex10'
+        Lines.Strings = (
+          'DROP INDEX'
+          '    IX_PurchaseOrderHeader_EmployeeID ON Purchasing.PurchaseOrderHeader,'
+          '    IX_Address_StateProvinceID ON Person.Address;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex11'
+        Lines.Strings = (
+          'DROP INDEX AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate'
+          '    ON Production.BillOfMaterials WITH (ONLINE = ON, MAXDOP = 2);'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex12'
+        Lines.Strings = (
+          'DROP INDEX AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate'
+          '    ON Production.BillOfMaterials'
+          '    WITH (ONLINE = ON, MOVE TO NewGroup);'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex13'
+        Lines.Strings = (
+          'DROP INDEX PXML_ProductModel_CatalogDescription'
+          '    ON Production.ProductModel;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex14'
+        Lines.Strings = (
+          'DROP INDEX PK_MyClusteredIndex'
+          '    ON dbo.MyTable'
+          '    WITH (MOVE TO MyPartitionScheme,'
+          '          FILESTREAM_ON MyPartitionScheme);'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex15'
+        Lines.Strings = (
+          'DROP INDEX sxi_index ON tbl;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropIndex16'
+        Lines.Strings = (
+          'DROP FULLTEXT INDEX ON HumanResources.JobCandidate;'
+        )
       end>
     Left = 48
     Top = 224
@@ -2208,6 +5054,17 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'Select57'
         Lines.Strings = (
           'SELECT @cookie;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Select58'
+        Lines.Strings = (
+          'SELECT TE.*'
+          'FROM sys.trigger_events AS TE'
+          'JOIN sys.triggers AS T ON T.object_id = TE.object_id'
+          'WHERE T.parent_class = 0 AND T.name = ''safety'';'
           ''
           ''
         )
@@ -3021,6 +5878,32 @@ object MSSQLParserTestData: TMSSQLParserTestData
         )
       end    
       item
+        Caption = 'Insert59'
+        Lines.Strings = (
+          'INSERT INTO Production.UpdatedInventory'
+          'SELECT ProductID, LocationID, NewQty, PreviousQty'
+          'FROM'
+          '(    MERGE Production.ProductInventory AS pi'
+          '     USING (SELECT ProductID, SUM(OrderQty)'
+          '            FROM Sales.SalesOrderDetail AS sod'
+          '            JOIN Sales.SalesOrderHeader AS soh'
+          '            ON sod.SalesOrderID = soh.SalesOrderID'
+          '            AND soh.OrderDate BETWEEN ''20030701'' AND ''20030731'''
+          '            GROUP BY ProductID) AS src (ProductID, OrderQty)'
+          '     ON pi.ProductID = src.ProductID'
+          '    WHEN MATCHED AND pi.Quantity - src.OrderQty >= 0'
+          '        THEN UPDATE SET pi.Quantity = pi.Quantity - src.OrderQty'
+          '    WHEN MATCHED AND pi.Quantity - src.OrderQty <= 0'
+          '        THEN DELETE'
+          '    OUTPUT $action, Inserted.ProductID, Inserted.LocationID,'
+          '        Inserted.Quantity AS NewQty, Deleted.Quantity AS PreviousQty)'
+          ' AS Changes (Action, ProductID, LocationID, NewQty, PreviousQty)'
+          ' WHERE Action = ''UPDATE'';'
+          ''
+          ''
+        )
+      end    
+      item
         Caption = 'Update1'
         Lines.Strings = (
           'UPDATE dbo.Table2'
@@ -3131,8 +6014,3283 @@ object MSSQLParserTestData: TMSSQLParserTestData
           ''
           ''
         )
+      end    
+      item
+        Caption = 'Merge1'
+        Lines.Strings = (
+          'MERGE INTO Sales.SalesReason AS Target'
+          'USING (VALUES (''Recommendation'',''Other''), (''Review'', ''Marketing''),'
+          '              (''Internet'', ''Promotion''))'
+          '       AS Source (NewName, NewReasonType)'
+          'ON Target.Name = Source.NewName'
+          'WHEN MATCHED THEN'
+          'UPDATE SET ReasonType = Source.NewReasonType'
+          'WHEN NOT MATCHED BY TARGET THEN'
+          'INSERT (Name, ReasonType) VALUES (NewName, NewReasonType)'
+          'OUTPUT $action INTO @SummaryOfChanges;'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare1'
+        Lines.Strings = (
+          'DECLARE @MyTableVar table( NewScrapReasonID smallint,'
+          '                           Name varchar(50),'
+          '                           ModifiedDate datetime);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare2'
+        Lines.Strings = (
+          'DECLARE complex_cursor CURSOR FOR'
+          '    SELECT a.BusinessEntityID'
+          '    FROM HumanResources.EmployeePayHistory AS a'
+          '    WHERE RateChangeDate <>'
+          '         (SELECT MAX(RateChangeDate)'
+          '          FROM HumanResources.EmployeePayHistory AS b'
+          '          WHERE a.BusinessEntityID = b.BusinessEntityID) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare3'
+        Lines.Strings = (
+          'DECLARE @MyTableVar table ('
+          '    ProductID int NOT NULL,'
+          '    ProductName nvarchar(50)NOT NULL,'
+          '    ProductModelID int NOT NULL,'
+          '    PhotoID int NOT NULL);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare4'
+        Lines.Strings = (
+          'DECLARE @MyTableVar table('
+          '    LocationID int NOT NULL,'
+          '    CostRate smallmoney NOT NULL,'
+          '    NewCostRate AS CostRate * 1.5,'
+          '    ModifiedDate datetime);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare5'
+        Lines.Strings = (
+          'DECLARE @MyTableVar table('
+          '  LastName     nvarchar(20) NOT NULL,'
+          '  FirstName    nvarchar(20) NOT NULL,'
+          '  CurrentSales money NOT NULL'
+          '  );'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare6'
+        Lines.Strings = (
+          'DECLARE abc CURSOR LOCAL FOR'
+          '    SELECT c1, c2'
+          '    FROM dbo.Table1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare7'
+        Lines.Strings = (
+          'DECLARE @x TABLE (ID INT, Value INT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare8'
+        Lines.Strings = (
+          'DECLARE @y TABLE (ID INT, Value INT);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare9'
+        Lines.Strings = (
+          'DECLARE @SummaryOfChanges TABLE(Change VARCHAR(20));'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare10'
+        Lines.Strings = (
+          'DECLARE @dbid INT, @query VARCHAR(1000), @dbname sysname, @fgname sysname'
+          ''
+          'WHILE (SELECT COUNT(id) FROM #tmpdbs WHERE isdone = 0) > 0'
+          'BEGIN'
+          '  SELECT TOP 1 @dbname = [dbname], @dbid = [dbid] FROM #tmpdbs WHERE isdone = 0'
+          ''
+          '  SET @query = ''SELECT '' + CAST(@dbid AS NVARCHAR) + '', '''''' + @dbname + '''''', [name], 0 FROM ['' + @dbname + ''].sys.filegroups WHERE [type] = ''''FG'''' AND is_read_only = 0;'''
+          '  INSERT INTO #tmpfgs'
+          '  EXEC (@query)'
+          ''
+          '  UPDATE #tmpdbs'
+          '  SET isdone = 1'
+          '  WHERE [dbid] = @dbid'
+          'END;'
+          ''
+          'IF (SELECT COUNT(ID) FROM #tmpfgs) > 0'
+          'BEGIN'
+          '  WHILE (SELECT COUNT(id) FROM #tmpfgs WHERE isdone = 0) > 0'
+          '  BEGIN'
+          '    SELECT TOP 1 @dbname = [dbname], @dbid = [dbid], @fgname = fgname FROM #tmpfgs WHERE isdone = 0'
+          ''
+          '    SET @query = ''ALTER DATABASE ['' + @dbname + ''] MODIFY FILEGROUP ['' + @fgname + ''] AUTOGROW_ALL_FILES;'''
+          ''
+          '    PRINT @query'
+          ''
+          '    UPDATE #tmpfgs'
+          '    SET isdone = 1'
+          '    WHERE [dbid] = @dbid AND fgname = @fgname'
+          '  END'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare11'
+        Lines.Strings = (
+          'DECLARE @loop int'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare12'
+        Lines.Strings = (
+          'DECLARE @AccountDescription varchar(50)'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare13'
+        Lines.Strings = (
+          'DECLARE @AccountKey int'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare14'
+        Lines.Strings = (
+          'DECLARE @AccountType varchar(50)'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare15'
+        Lines.Strings = (
+          'DECLARE @AccountCode int'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare16'
+        Lines.Strings = (
+          'DECLARE @x xml (ManuInstructionsSchemaCollection);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare17'
+        Lines.Strings = (
+          'DECLARE @SamplesPath nvarchar(1024)'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare18'
+        Lines.Strings = (
+          'DECLARE @AuthClientId uniqueidentifier = ''EF5C8E09-4D2A-4A76-9998-D93440D8115D'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare19'
+        Lines.Strings = (
+          'DECLARE @AuthClientSecret varchar(200) = ''SECRET_DBEngine'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare20'
+        Lines.Strings = (
+          'DECLARE @pwd varchar(max) = REPLACE(CONVERT(varchar(36), @AuthClientId) , ''-'', '''') + @AuthClientSecret;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare21'
+        Lines.Strings = (
+          'DECLARE @data_path nvarchar(256);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare22'
+        Lines.Strings = (
+          'DECLARE @SamplesPath nvarchar(1024);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare23'
+        Lines.Strings = (
+          'DECLARE @IntegerPartitionFunction nvarchar(max) ='
+          '    N''CREATE PARTITION FUNCTION IntegerPartitionFunction (int)'
+          '    AS RANGE RIGHT FOR VALUES ('';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare24'
+        Lines.Strings = (
+          'DECLARE @i int = 1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare25'
+        Lines.Strings = (
+          'DECLARE @DatePartitionFunction nvarchar(max) ='
+          '    N''CREATE PARTITION FUNCTION DatePartitionFunction (datetime2)'
+          '    AS RANGE RIGHT FOR VALUES ('';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare26'
+        Lines.Strings = (
+          'DECLARE @i datetime2 = ''20070101'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare27'
+        Lines.Strings = (
+          'DECLARE @LocationTVP'
+          'AS LocationTableType;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare28'
+        Lines.Strings = (
+          ''
+          'DECLARE @MyCursor CURSOR;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare29'
+        Lines.Strings = (
+          'DECLARE @ComparePrice MONEY, @Cost MONEY;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare30'
+        Lines.Strings = (
+          'DECLARE @Rowcount INT'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare31'
+        Lines.Strings = (
+          'DECLARE @minidentval column_type;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare32'
+        Lines.Strings = (
+          'DECLARE @x xml (ManuInstructionsSchemaCollection);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Declare33'
+        Lines.Strings = (
+          'DECLARE @cookie VARBINARY(8000);'
+          ''
+          ''
+        )
       end>
-    Left = 45
-    Top = 312
+    Left = 208
+    Top = 368
+  end
+  object sFunctions: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'CreateProcedure1'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.uspGetEmployeeSales'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT ''PROCEDURE'', sp.BusinessEntityID, c.LastName,'
+          '        sp.SalesYTD'
+          '    FROM Sales.SalesPerson AS sp'
+          '    INNER JOIN Person.Person AS c'
+          '        ON sp.BusinessEntityID = c.BusinessEntityID'
+          '    WHERE sp.BusinessEntityID LIKE ''2%'''
+          '    ORDER BY sp.BusinessEntityID, c.LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure2'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.InsertUnitMeasure'
+          '    @UnitMeasureCode nchar(3),'
+          '    @Name nvarchar(25)'
+          'AS'
+          'BEGIN'
+          '    SET NOCOUNT ON;'
+          '-- Update the row if it exists.'
+          '    UPDATE Production.UnitMeasure'
+          'SET Name = @Name'
+          'WHERE UnitMeasureCode = @UnitMeasureCode'
+          '-- Insert the row if the UPDATE statement failed.'
+          'IF (@@ROWCOUNT = 0 )'
+          'BEGIN'
+          '    INSERT INTO Production.UnitMeasure (UnitMeasureCode, Name)'
+          '    VALUES (@UnitMeasureCode, @Name)'
+          'END'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure3'
+        Lines.Strings = (
+          'CREATE PROCEDURE Production.usp_UpdateInventory'
+          '    @OrderDate datetime'
+          'AS'
+          'MERGE Production.ProductInventory AS target'
+          'USING (SELECT ProductID, SUM(OrderQty) FROM Sales.SalesOrderDetail AS sod'
+          '    JOIN Sales.SalesOrderHeader AS soh'
+          '    ON sod.SalesOrderID = soh.SalesOrderID'
+          '    AND soh.OrderDate = @OrderDate'
+          '    GROUP BY ProductID) AS source (ProductID, OrderQty)'
+          'ON (target.ProductID = source.ProductID)'
+          'WHEN MATCHED AND target.Quantity - source.OrderQty <= 0'
+          '    THEN DELETE'
+          'WHEN MATCHED'
+          '    THEN UPDATE SET target.Quantity = target.Quantity - source.OrderQty,'
+          '                    target.ModifiedDate = GETDATE()'
+          'OUTPUT $action, Inserted.ProductID, Inserted.Quantity,'
+          '    Inserted.ModifiedDate, Deleted.ProductID,'
+          '    Deleted.Quantity, Deleted.ModifiedDate;'
+          'GO'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure4'
+        Lines.Strings = (
+          'CREATE PROCEDURE Purchasing.uspVendorAllInfo'
+          'WITH EXECUTE AS CALLER'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT v.Name AS Vendor, p.Name AS ''Product name'','
+          '      v.CreditRating AS ''Rating'','
+          '      v.ActiveFlag AS Availability'
+          '    FROM Purchasing.Vendor v'
+          '    INNER JOIN Purchasing.ProductVendor pv'
+          '      ON v.BusinessEntityID = pv.BusinessEntityID'
+          '    INNER JOIN Production.Product p'
+          '      ON pv.ProductID = p.ProductID'
+          '    ORDER BY v.Name ASC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure5'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.uspGetAllEmployees'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT LastName, FirstName, JobTitle, Department'
+          '    FROM HumanResources.vEmployeeDepartment;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure6'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.uspMultipleResults'
+          'AS'
+          'SELECT TOP(10) BusinessEntityID, Lastname, FirstName FROM Person.Person;'
+          'SELECT TOP(10) CustomerID, AccountNumber FROM Sales.Customer;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure7'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.GetPhotoFromDB'
+          '('
+          '    @ProductPhotoID INT'
+          '    , @CurrentDirectory NVARCHAR(1024)'
+          '    , @FileName NVARCHAR(1024)'
+          ')'
+          'AS EXTERNAL NAME HandlingLOBUsingCLR.LargeObjectBinary.GetPhotoFromDB;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure8'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.uspGetEmployees'
+          '    @LastName NVARCHAR(50),'
+          '    @FirstName NVARCHAR(50)'
+          'AS'
+          ''
+          '    SET NOCOUNT ON;'
+          '    SELECT FirstName, LastName, JobTitle, Department'
+          '    FROM HumanResources.vEmployeeDepartment'
+          '    WHERE FirstName = @FirstName AND LastName = @LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure9'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.uspGetEmployees2'
+          '    @LastName NVARCHAR(50) = N''D%'','
+          '    @FirstName NVARCHAR(50) = N''%'''
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT FirstName, LastName, JobTitle, Department'
+          '    FROM HumanResources.vEmployeeDepartment'
+          '    WHERE FirstName LIKE @FirstName AND LastName LIKE @LastName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure10'
+        Lines.Strings = (
+          'CREATE PROCEDURE Production.uspGetList @Product VARCHAR(40)'
+          '    , @MaxPrice MONEY'
+          '    , @ComparePrice MONEY OUTPUT'
+          '    , @ListPrice MONEY OUT'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT p.[Name] AS Product, p.ListPrice AS ''List Price'''
+          '    FROM Production.Product AS p'
+          '    JOIN Production.ProductSubcategory AS s'
+          '      ON p.ProductSubcategoryID = s.ProductSubcategoryID'
+          '    WHERE s.[Name] LIKE @Product AND p.ListPrice < @MaxPrice;'
+          '-- Populate the output variable @ListPprice.'
+          'SET @ListPrice = (SELECT MAX(p.ListPrice)'
+          '    FROM Production.Product AS p'
+          '    JOIN Production.ProductSubcategory AS s'
+          '      ON p.ProductSubcategoryID = s.ProductSubcategoryID'
+          '    WHERE s.[Name] LIKE @Product AND p.ListPrice < @MaxPrice);'
+          '-- Populate the output variable @compareprice.'
+          'SET @ComparePrice = @MaxPrice;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure11'
+        Lines.Strings = (
+          'CREATE PROCEDURE usp_InsertProductionLocation'
+          '    @TVP LocationTableType READONLY'
+          '    AS'
+          '    SET NOCOUNT ON'
+          '    INSERT INTO [AdventureWorks2012].[Production].[Location]'
+          '       ([Name]'
+          '       , [CostRate]'
+          '       , [Availability]'
+          '       , [ModifiedDate])'
+          '    SELECT *, 0, GETDATE()'
+          '    FROM @TVP;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure12'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.uspCurrencyCursor'
+          '    @CurrencyCursor CURSOR VARYING OUTPUT'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SET @CurrencyCursor = CURSOR'
+          '    FORWARD_ONLY STATIC FOR'
+          '      SELECT CurrencyCode, Name'
+          '      FROM Sales.Currency;'
+          '    OPEN @CurrencyCursor;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure13'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.Update_VacationHours'
+          '@NewHours SMALLINT, @Rowcount INT OUTPUT'
+          'AS'
+          'SET NOCOUNT ON;'
+          'UPDATE HumanResources.Employee'
+          'SET VacationHours ='
+          '    ( CASE'
+          '        WHEN SalariedFlag = 0 THEN VacationHours + @NewHours'
+          '        ELSE @NewHours'
+          '        END'
+          '    )'
+          'WHERE CurrentFlag = 1;'
+          'SET @Rowcount = @@rowcount;'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure14'
+        Lines.Strings = (
+          'CREATE PROCEDURE Production.uspDeleteWorkOrder ( @WorkOrderID INT )'
+          'AS'
+          'SET NOCOUNT ON;'
+          'BEGIN TRY'
+          '  BEGIN TRANSACTION'
+          '  -- Delete rows from the child table, WorkOrderRouting, for the specified work order.'
+          '    DELETE FROM Production.WorkOrderRouting'
+          '    WHERE WorkOrderID = @WorkOrderID;'
+          '  -- Delete the rows from the parent table, WorkOrder, for the specified work order.'
+          '    DELETE FROM Production.WorkOrder'
+          '    WHERE WorkOrderID = @WorkOrderID;'
+          '  COMMIT'
+          'END TRY'
+          ''
+          'BEGIN CATCH'
+          '  -- Determine if an error occurred.'
+          '  IF @@TRANCOUNT > 0'
+          '    ROLLBACK'
+          ''
+          '  -- Return the error information.'
+          '  DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT;'
+          '  SELECT @ErrorMessage = ERROR_MESSAGE(),@ErrorSeverity = ERROR_SEVERITY();'
+          '  RAISERROR(@ErrorMessage, @ErrorSeverity, 1);'
+          'END CATCH;'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure15'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.uspEncryptThis'
+          'WITH ENCRYPTION'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT BusinessEntityID, JobTitle, NationalIDNumber,'
+          '        VacationHours, SickLeaveHours'
+          '    FROM HumanResources.Employee;'
+          'GO'
+          ''
+          'IF OBJECT_ID ( ''dbo.uspProductByVendor'', ''P'' ) IS NOT NULL'
+          '    DROP PROCEDURE dbo.uspProductByVendor;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure16'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.uspProductByVendor @Name VARCHAR(30) = ''%'''
+          'WITH RECOMPILE'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT v.Name AS ''Vendor name'', p.Name AS ''Product name'''
+          '    FROM Purchasing.Vendor AS v'
+          '    JOIN Purchasing.ProductVendor AS pv'
+          '      ON v.BusinessEntityID = pv.BusinessEntityID'
+          '    JOIN Production.Product AS p'
+          '      ON pv.ProductID = p.ProductID'
+          '    WHERE v.Name LIKE @Name;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure17'
+        Lines.Strings = (
+          'CREATE PROCEDURE Purchasing.uspVendorAllInfo'
+          'WITH EXECUTE AS CALLER'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT v.Name AS Vendor, p.Name AS ''Product name'','
+          '      v.CreditRating AS ''Rating'','
+          '      v.ActiveFlag AS Availability'
+          '    FROM Purchasing.Vendor v'
+          '    INNER JOIN Purchasing.ProductVendor pv'
+          '      ON v.BusinessEntityID = pv.BusinessEntityID'
+          '    INNER JOIN Production.Product p'
+          '      ON pv.ProductID = p.ProductID'
+          '    ORDER BY v.Name ASC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure18'
+        Lines.Strings = (
+          'CREATE PROCEDURE dbo.TruncateMyTable'
+          'WITH EXECUTE AS SELF'
+          'AS TRUNCATE TABLE MyDB..MyTable;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure19'
+        Lines.Strings = (
+          'CREATE PROCEDURE Get10TopResellers'
+          'AS'
+          'BEGIN'
+          '    SELECT TOP (10) r.ResellerName, r.AnnualSales'
+          '    FROM DimReseller AS r'
+          '    ORDER BY AnnualSales DESC, ResellerName ASC;'
+          'END'
+          ';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure20'
+        Lines.Strings = (
+          'CREATE PROCEDURE procSelectT1 AS'
+          'BEGIN'
+          '    PRINT ''Now selecting from T1...'';'
+          '    SELECT * FROM T1;'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure21'
+        Lines.Strings = (
+          'CREATE PROCEDURE  procSelectT1ForAlice AS'
+          'BEGIN'
+          '   IF USER_ID() <> USER_ID(''Alice'')'
+          '    BEGIN'
+          '        PRINT ''Only Alice can use this.'';'
+          '        RETURN'
+          '    END'
+          '   EXEC procSelectT1;'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateProcedure22'
+        Lines.Strings = (
+          'CREATE PROCEDURE HumanResources.uspEmployeesInDepartment'
+          '@DeptValue int'
+          'WITH EXECUTE AS OWNER'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT e.BusinessEntityID, c.LastName, c.FirstName, e.JobTitle'
+          '    FROM Person.Person AS c'
+          '    INNER JOIN HumanResources.Employee AS e'
+          '        ON c.BusinessEntityID = e.BusinessEntityID'
+          '    INNER JOIN HumanResources.EmployeeDepartmentHistory AS edh'
+          '        ON e.BusinessEntityID = edh.BusinessEntityID'
+          '    WHERE edh.DepartmentID = @DeptValue'
+          '    ORDER BY c.LastName, c.FirstName;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure1'
+        Lines.Strings = (
+          'ALTER PROCEDURE dbo.InsertUnitMeasure'
+          '    @UnitMeasureCode nchar(3),'
+          '    @Name nvarchar(25)'
+          'AS'
+          'BEGIN'
+          '    SET NOCOUNT ON;'
+          ''
+          '    MERGE Production.UnitMeasure AS target'
+          '    USING (SELECT @UnitMeasureCode, @Name) AS source (UnitMeasureCode, Name)'
+          '    ON (target.UnitMeasureCode = source.UnitMeasureCode)'
+          '    WHEN MATCHED THEN'
+          '        UPDATE SET Name = source.Name'
+          '    WHEN NOT MATCHED THEN'
+          '        INSERT (UnitMeasureCode, Name)'
+          '        VALUES (source.UnitMeasureCode, source.Name)'
+          '    OUTPUT deleted.*, $action, inserted.* INTO #MyTempTable;'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure2'
+        Lines.Strings = (
+          'CREATE OR ALTER PROCEDURE mergeEdge'
+          '    @PersonId integer,'
+          '    @CityId integer,'
+          '    @StreetAddress varchar(100)'
+          'AS'
+          'BEGIN'
+          '    MERGE livesIn'
+          '        USING ((SELECT @PersonId, @CityId, @StreetAddress) AS T (PersonId, CityId, StreetAddress)'
+          '                JOIN Person ON T.PersonId = Person.ID'
+          '                JOIN City ON T.CityId = City.ID)'
+          '        ON MATCH (Person-(livesIn)->City)'
+          '    WHEN MATCHED THEN'
+          '        UPDATE SET StreetAddress = @StreetAddress'
+          '    WHEN NOT MATCHED THEN'
+          '        INSERT ($from_id, $to_id, StreetAddress)'
+          '        VALUES (Person.$node_id, City.$node_id, @StreetAddress) ;'
+          'END'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure3'
+        Lines.Strings = (
+          'ALTER PROCEDURE Purchasing.uspVendorAllInfo'
+          '    @Product VARCHAR(25)'
+          'AS'
+          '    SET NOCOUNT ON;'
+          '    SELECT LEFT(v.Name, 25) AS Vendor, LEFT(p.Name, 25) AS ''Product name'','
+          '    ''Rating'' = CASE v.CreditRating'
+          '        WHEN 1 THEN ''Superior'''
+          '        WHEN 2 THEN ''Excellent'''
+          '        WHEN 3 THEN ''Above average'''
+          '        WHEN 4 THEN ''Average'''
+          '        WHEN 5 THEN ''Below average'''
+          '        ELSE ''No rating'''
+          '        END'
+          '    , Availability = CASE v.ActiveFlag'
+          '        WHEN 1 THEN ''Yes'''
+          '        ELSE ''No'''
+          '        END'
+          '    FROM Purchasing.Vendor AS v'
+          '    INNER JOIN Purchasing.ProductVendor AS pv'
+          '      ON v.BusinessEntityID = pv.BusinessEntityID'
+          '    INNER JOIN Production.Product AS p'
+          '      ON pv.ProductID = p.ProductID'
+          '    WHERE p.Name LIKE @Product'
+          '    ORDER BY v.Name ASC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterProcedure4'
+        Lines.Strings = (
+          'ALTER PROCEDURE Production.uspDeleteWorkOrder ( @WorkOrderID INT )'
+          'AS'
+          ''
+          'BEGIN TRY'
+          '  BEGIN TRANSACTION'
+          '  -- Delete the rows from the parent table, WorkOrder, for the specified work order.'
+          '    DELETE FROM Production.WorkOrder'
+          '    WHERE WorkOrderID = @WorkOrderID;'
+          ''
+          '  -- Delete rows from the child table, WorkOrderRouting, for the specified work order.'
+          '    DELETE FROM Production.WorkOrderRouting'
+          '    WHERE WorkOrderID = @WorkOrderID;'
+          '  COMMIT TRANSACTION'
+          'END TRY'
+          ''
+          'BEGIN CATCH'
+          '  -- Determine if an error occurred.'
+          '  IF @@TRANCOUNT > 0'
+          '    ROLLBACK TRANSACTION'
+          ''
+          '  -- Return the error information.'
+          '  DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT;'
+          '  SELECT @ErrorMessage = ERROR_MESSAGE(),@ErrorSeverity = ERROR_SEVERITY();'
+          '  RAISERROR(@ErrorMessage, @ErrorSeverity, 1);'
+          'END CATCH;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure1'
+        Lines.Strings = (
+          '    DROP PROCEDURE Purchasing.uspVendorAllInfo;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure2'
+        Lines.Strings = (
+          '    DROP PROCEDURE HumanResources.uspGetEmployees;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure3'
+        Lines.Strings = (
+          '    DROP PROCEDURE HumanResources.uspGetEmployees2;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure4'
+        Lines.Strings = (
+          '    DROP PROCEDURE Production.uspGetList;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure5'
+        Lines.Strings = (
+          'DROP PROCEDURE Production.uspDeleteWorkOrder;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure6'
+        Lines.Strings = (
+          'DROP PROCEDURE dbo.uspMyProc;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropProcedure7'
+        Lines.Strings = (
+          'DROP PROCEDURE dbo.uspGetSalesbyMonth, dbo.uspUpdateSalesQuotes, dbo.uspGetSalesByYear;'
+        )
+      end    
+      item
+        Caption = 'DropProcedure8'
+        Lines.Strings = (
+          'DROP PROCEDURE IF EXISTS dbo.uspMyProc;'
+        )
+      end    
+      item
+        Caption = 'CreateFunction1'
+        Lines.Strings = (
+          'CREATE FUNCTION dbo.rgclassifier_v1() RETURNS sysname'
+          'WITH SCHEMABINDING'
+          'AS'
+          'BEGIN'
+          '-- Declare the variable to hold the value returned in sysname.'
+          '    DECLARE @grp_name AS sysname'
+          '-- If the user login is ''sa'', map the connection to the groupAdmin'
+          '-- workload group.'
+          '    IF (SUSER_NAME() = ''sa'')'
+          '        SET @grp_name = ''groupAdmin'''
+          '-- Use application information to map the connection to the groupAdhoc'
+          '-- workload group.'
+          '    ELSE IF (APP_NAME() LIKE ''%MANAGEMENT STUDIO%'')'
+          '        OR (APP_NAME() LIKE ''%QUERY ANALYZER%'')'
+          '            SET @grp_name = ''groupAdhoc'''
+          '-- If the application is for reporting, map the connection to'
+          '-- the groupReports workload group.'
+          '    ELSE IF (APP_NAME() LIKE ''%REPORT SERVER%'')'
+          '        SET @grp_name = ''groupReports'''
+          '-- If the connection does not map to any of the previous groups,'
+          '-- put the connection into the default workload group.'
+          '    ELSE'
+          '        SET @grp_name = ''default'''
+          '    RETURN @grp_name'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateFunction2'
+        Lines.Strings = (
+          'CREATE FUNCTION dbo.ISOweek (@DATE datetime)'
+          'RETURNS int'
+          'WITH EXECUTE AS CALLER'
+          'AS'
+          'BEGIN'
+          '    DECLARE @ISOweek int;'
+          '    SET @ISOweek= DATEPART(wk,@DATE)+1'
+          '        -DATEPART(wk,CAST(DATEPART(yy,@DATE) as CHAR(4))+''0104'');'
+          '--Special cases: Jan 1-3 may belong to the previous year'
+          '    IF (@ISOweek=0)'
+          '        SET @ISOweek=dbo.ISOweek(CAST(DATEPART(yy,@DATE)-1'
+          '            AS CHAR(4))+''12''+ CAST(24+DATEPART(DAY,@DATE) AS CHAR(2)))+1;'
+          '--Special case: Dec 29-31 may belong to the next year'
+          '    IF ((DATEPART(mm,@DATE)=12) AND'
+          '        ((DATEPART(dd,@DATE)-DATEPART(dw,@DATE))>= 28))'
+          '    SET @ISOweek=1;'
+          '    RETURN(@ISOweek);'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateFunction3'
+        Lines.Strings = (
+          'CREATE FUNCTION Sales.ufn_SalesByStore (@storeid int)'
+          'RETURNS TABLE'
+          'AS'
+          'RETURN'
+          '('
+          '    SELECT P.ProductID, P.Name, SUM(SD.LineTotal) AS ''Total'''
+          '    FROM Production.Product AS P'
+          '    JOIN Sales.SalesOrderDetail AS SD ON SD.ProductID = P.ProductID'
+          '    JOIN Sales.SalesOrderHeader AS SH ON SH.SalesOrderID = SD.SalesOrderID'
+          '    JOIN Sales.Customer AS C ON SH.CustomerID = C.CustomerID'
+          '    WHERE C.StoreID = @storeid'
+          '    GROUP BY P.ProductID, P.Name'
+          ');'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateFunction4'
+        Lines.Strings = (
+          'CREATE FUNCTION dbo.ufn_FindReports (@InEmpID INTEGER)'
+          'RETURNS @retFindReports TABLE'
+          '('
+          '    EmployeeID int primary key NOT NULL,'
+          '    FirstName nvarchar(255) NOT NULL,'
+          '    LastName nvarchar(255) NOT NULL,'
+          '    JobTitle nvarchar(50) NOT NULL,'
+          '    RecursionLevel int NOT NULL'
+          ')'
+          '--Returns a result set that lists all the employees who report to the'
+          '--specific employee directly or indirectly.*/'
+          'AS'
+          'BEGIN'
+          'WITH EMP_cte(EmployeeID, OrganizationNode, FirstName, LastName, JobTitle, RecursionLevel) -- CTE name and columns'
+          '    AS ('
+          '        -- Get the initial list of Employees for Manager n'
+          '        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, 0'
+          '        FROM HumanResources.Employee e'
+          'INNER JOIN Person.Person p'
+          'ON p.BusinessEntityID = e.BusinessEntityID'
+          '        WHERE e.BusinessEntityID = @InEmpID'
+          '        UNION ALL'
+          '        -- Join recursive member to anchor'
+          '        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, RecursionLevel + 1'
+          '        FROM HumanResources.Employee e'
+          '            INNER JOIN EMP_cte'
+          '            ON e.OrganizationNode.GetAncestor(1) = EMP_cte.OrganizationNode'
+          'INNER JOIN Person.Person p'
+          'ON p.BusinessEntityID = e.BusinessEntityID'
+          '        )'
+          '-- copy the required columns to the result of the function'
+          '    INSERT @retFindReports'
+          '    SELECT EmployeeID, FirstName, LastName, JobTitle, RecursionLevel'
+          '    FROM EMP_cte'
+          '    RETURN'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateFunction5'
+        Lines.Strings = (
+          'CREATE FUNCTION [dbo].[len_s] (@str nvarchar(4000))'
+          'RETURNS bigint'
+          'AS EXTERNAL NAME [SurrogateStringFunction].[Microsoft.Samples.SqlServer.SurrogateStringFunction].[LenS];'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateFunction6'
+        Lines.Strings = (
+          'CREATE FUNCTION dbo.OrderDozen (@OrderAmt INT)'
+          'RETURNS INT'
+          'WITH EXECUTE AS CALLER'
+          'AS'
+          'BEGIN'
+          'IF @OrderAmt % 12 <> 0'
+          'BEGIN'
+          '    SET @OrderAmt +=  12 - (@OrderAmt % 12)'
+          'END'
+          'RETURN(@OrderAmt);'
+          'END;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropFunction1'
+        Lines.Strings = (
+          'DROP FUNCTION Sales.fn_SalesByStore;'
+          ''
+          ''
+        )
+      end>
+    Left = 264
+    Top = 368
+  end
+  object sViews: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'CreateView1'
+        Lines.Strings = (
+          'CREATE VIEW V1 AS'
+          'SELECT column_2, column_1'
+          'FROM T1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView2'
+        Lines.Strings = (
+          'CREATE VIEW HumanResources.EmployeeHireDate'
+          'AS'
+          'SELECT p.FirstName, p.LastName, e.HireDate'
+          'FROM HumanResources.Employee AS e JOIN Person.Person AS  p'
+          'ON e.BusinessEntityID = p.BusinessEntityID ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView3'
+        Lines.Strings = (
+          'CREATE VIEW Sales.vOrders'
+          '  WITH SCHEMABINDING'
+          'AS'
+          '  SELECT SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Revenue,'
+          '    OrderDate, ProductID, COUNT_BIG(*) AS COUNT'
+          '  FROM Sales.SalesOrderDetail AS od, Sales.SalesOrderHeader AS o'
+          '  WHERE od.SalesOrderID = o.SalesOrderID'
+          '  GROUP BY OrderDate, ProductID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView4'
+        Lines.Strings = (
+          'CREATE VIEW hiredate_view'
+          'AS'
+          'SELECT p.FirstName, p.LastName, e.BusinessEntityID, e.HireDate'
+          'FROM HumanResources.Employee e'
+          'JOIN Person.Person AS p ON e.BusinessEntityID = p.BusinessEntityID ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView5'
+        Lines.Strings = (
+          ''
+          'CREATE VIEW Purchasing.PurchaseOrderReject'
+          'WITH ENCRYPTION'
+          'AS'
+          'SELECT PurchaseOrderID, ReceivedQty, RejectedQty,'
+          '    RejectedQty / ReceivedQty AS RejectRatio, DueDate'
+          'FROM Purchasing.PurchaseOrderDetail'
+          'WHERE RejectedQty / ReceivedQty > 0'
+          'AND DueDate > CONVERT(DATETIME,''20010630'',101) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView6'
+        Lines.Strings = (
+          ''
+          'CREATE VIEW dbo.SeattleOnly'
+          'AS'
+          'SELECT p.LastName, p.FirstName, e.JobTitle, a.City, sp.StateProvinceCode'
+          'FROM HumanResources.Employee e'
+          'INNER JOIN Person.Person p'
+          'ON p.BusinessEntityID = e.BusinessEntityID'
+          '    INNER JOIN Person.BusinessEntityAddress bea'
+          '    ON bea.BusinessEntityID = e.BusinessEntityID'
+          '    INNER JOIN Person.Address a'
+          '    ON a.AddressID = bea.AddressID'
+          '    INNER JOIN Person.StateProvince sp'
+          '    ON sp.StateProvinceID = a.StateProvinceID'
+          'WHERE a.City = ''Seattle'''
+          'WITH CHECK OPTION ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView7'
+        Lines.Strings = (
+          ''
+          'CREATE VIEW Sales.SalesPersonPerform'
+          'AS'
+          'SELECT TOP (100) SalesPersonID, SUM(TotalDue) AS TotalSales'
+          'FROM Sales.SalesOrderHeader'
+          'WHERE OrderDate > CONVERT(DATETIME,''20001231'',101)'
+          'GROUP BY SalesPersonID;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView8'
+        Lines.Strings = (
+          'CREATE VIEW dbo.all_supplier_view'
+          'WITH SCHEMABINDING'
+          'AS'
+          'SELECT supplyID, supplier'
+          '  FROM dbo.SUPPLY1'
+          'UNION ALL'
+          'SELECT supplyID, supplier'
+          '  FROM dbo.SUPPLY2'
+          'UNION ALL'
+          'SELECT supplyID, supplier'
+          '  FROM dbo.SUPPLY3'
+          'UNION ALL'
+          'SELECT supplyID, supplier'
+          '  FROM dbo.SUPPLY4;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView9'
+        Lines.Strings = (
+          'CREATE VIEW DimEmployeeBirthDates AS'
+          'SELECT FirstName, LastName, BirthDate'
+          'FROM DimEmployee;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateView10'
+        Lines.Strings = (
+          'CREATE VIEW view1'
+          'AS'
+          'SELECT fis.CustomerKey, fis.ProductKey, fis.OrderDateKey,'
+          '  fis.SalesTerritoryKey, dst.SalesTerritoryRegion'
+          'FROM FactInternetSales AS fis'
+          'LEFT OUTER JOIN DimSalesTerritory AS dst'
+          'ON (fis.SalesTerritoryKey=dst.SalesTerritoryKey);'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterView1'
+        Lines.Strings = (
+          'ALTER VIEW HumanResources.EmployeeHireDate'
+          'AS'
+          'SELECT p.FirstName, p.LastName, e.HireDate'
+          'FROM HumanResources.Employee AS e JOIN Person.Person AS p'
+          'ON e.BusinessEntityID = p.BusinessEntityID'
+          'WHERE HireDate < CONVERT(DATETIME,''20020101'',101) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropView1'
+        Lines.Strings = (
+          '  DROP VIEW Sales.vOrders;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropView2'
+        Lines.Strings = (
+          'DROP VIEW IF EXISTS dbo.Reorder ;'
+          ''
+          ''
+        )
+      end>
+    Left = 336
+    Top = 368
+  end
+  object sSystem: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'CreateServer1'
+        Lines.Strings = (
+          'CREATE SERVER ROLE Product ;'
+        )
+      end    
+      item
+        Caption = 'CreateServer2'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT Payrole_Security_Audit'
+          '    TO FILE ( FILEPATH ='
+          '''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA'' ) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer3'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT DataModification_Security_Audit'
+          '    TO FILE ( FILEPATH ='
+          '''C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA'' ) ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer4'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT HIPAA_Audit'
+          '    TO FILE ( FILEPATH =''\\SQLPROD_1\Audit\ '' );'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer5'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT HIPAA_Audit'
+          '    TO APPLICATION_LOG'
+          '    WITH ( QUEUE_DELAY = 1000,  ON_FAILURE = SHUTDOWN);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer6'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT AuditDataAccess'
+          '    TO FILE ( FILEPATH =''C:\SQLAudit\ '' )'
+          '    WHERE object_name = ''SensitiveData'' ;'
+        )
+      end    
+      item
+        Caption = 'CreateServer7'
+        Lines.Strings = (
+          'CREATE SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification'
+          'FOR SERVER AUDIT HIPAA_Audit'
+          '    ADD (FAILED_LOGIN_GROUP)'
+          '    WITH (STATE=ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer8'
+        Lines.Strings = (
+          'CREATE SERVER ROLE buyers AUTHORIZATION BenMiller;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer9'
+        Lines.Strings = (
+          'CREATE SERVER ROLE auditors AUTHORIZATION securityadmin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer10'
+        Lines.Strings = (
+          'CREATE SERVER ROLE ITDevAdmin ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateServer11'
+        Lines.Strings = (
+          'CREATE SERVER ROLE ITDevelopers ;'
+        )
+      end    
+      item
+        Caption = 'AlterServer1'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'WITH (STATE = OFF);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer2'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'MODIFY NAME = HIPAA_Audit_Old;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer3'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit_Old'
+          'WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer4'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'WITH (STATE = OFF);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer5'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'TO FILE (FILEPATH =''\\SQLPROD_1\Audit\ '','
+          '          MAXSIZE = 1000 MB,'
+          '          RESERVE_DISK_SPACE=OFF)'
+          'WITH (QUEUE_DELAY = 1000,'
+          '       ON_FAILURE = CONTINUE);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer6'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer7'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer8'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData]'
+          'WHERE user_defined_event_id = 27;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer9'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer10'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer11'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData]'
+          'WHERE user_defined_event_id = 27;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer12'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer13'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer14'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData]'
+          'REMOVE WHERE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer15'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer16'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer17'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [FilterForSensitiveData]'
+          'MODIFY NAME = AuditDataAccess;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer18'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT [AuditDataAccess] WITH (STATE = ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer19'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification'
+          'FOR SERVER AUDIT HIPAA_Audit'
+          '    DROP (FAILED_LOGIN_GROUP),'
+          '    ADD (DATABASE_OBJECT_ACCESS_GROUP)'
+          '    WITH (STATE=ON);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer20'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET PROCESS AFFINITY CPU=0 TO 63, 128 TO 191;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer21'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET PROCESS AFFINITY NUMANODE=0, 7;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer22'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET PROCESS AFFINITY CPU=60 TO 200;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer23'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET PROCESS AFFINITY CPU=0;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer24'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET PROCESS AFFINITY CPU=AUTO;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer25'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET DIAGNOSTICS LOG ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer26'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET DIAGNOSTICS LOG OFF;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer27'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET DIAGNOSTICS LOG PATH = ''C:\logs'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer28'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET DIAGNOSTICS LOG MAX_SIZE = 10 MB;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer29'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET FAILOVER CLUSTER PROPERTY HealthCheckTimeout = 15000;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer30'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET HADR CLUSTER CONTEXT = ''clus01.xyz.com'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer31'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET BUFFER POOL EXTENSION ON'
+          '    (FILENAME = ''F:\SSDCACHE\Example.BPE'', SIZE = 50 GB);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer32'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET BUFFER POOL EXTENSION OFF;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer33'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION'
+          'SET BUFFER POOL EXTENSION ON'
+          '    (FILENAME = ''F:\SSDCACHE\Example.BPE'', SIZE = 60 GB);'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer34'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer35'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED TEMPDB_METADATA = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer36'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED TEMPDB_METADATA = ON (RESOURCE_POOL = ''pool_name'');'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer37'
+        Lines.Strings = (
+          'ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED HYBRID_BUFFER_POOL = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer38'
+        Lines.Strings = (
+          'ALTER SERVER ROLE Product WITH NAME = Production ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer39'
+        Lines.Strings = (
+          'ALTER SERVER ROLE Production ADD MEMBER [adventure-works\roberto0] ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer40'
+        Lines.Strings = (
+          'ALTER SERVER ROLE diskadmin ADD MEMBER Ted ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer41'
+        Lines.Strings = (
+          'ALTER SERVER ROLE Production DROP MEMBER [adventure-works\roberto0] ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer42'
+        Lines.Strings = (
+          'ALTER SERVER ROLE Production DROP MEMBER Ted ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer43'
+        Lines.Strings = (
+          'ALTER SERVER ROLE LargeRC ADD MEMBER Anna;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer44'
+        Lines.Strings = (
+          'ALTER SERVER ROLE LargeRC DROP MEMBER Anna;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer45'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT Payrole_Security_Audit'
+          'WITH (STATE = ON) ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterServer46'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT DataModification_Security_Audit'
+          'WITH (STATE = ON) ;'
+        )
+      end    
+      item
+        Caption = 'AlterServer47'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT AuditDataAccess WITH (STATE = ON);'
+        )
+      end    
+      item
+        Caption = 'AlterServer48'
+        Lines.Strings = (
+          'ALTER SERVER AUDIT HIPAA_Audit'
+          'STATE = OFF;'
+        )
+      end    
+      item
+        Caption = 'DropServer1'
+        Lines.Strings = (
+          'DROP SERVER AUDIT HIPAA_Audit;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropServer2'
+        Lines.Strings = (
+          'DROP SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropServer3'
+        Lines.Strings = (
+          'DROP SERVER ROLE purchasing;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Open1'
+        Lines.Strings = (
+          'OPEN abc;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Open2'
+        Lines.Strings = (
+          'OPEN complex_cursor;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Fetch1'
+        Lines.Strings = (
+          'FETCH abc;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Fetch2'
+        Lines.Strings = (
+          'FETCH FROM complex_cursor;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Go1'
+        Lines.Strings = (
+          'GO'
+          ''
+        )
+      end    
+      item
+        Caption = 'Exec1'
+        Lines.Strings = (
+          'EXEC InsertUnitMeasure @UnitMeasureCode = ''ABC'', @Name = ''Test Value'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'Exec2'
+        Lines.Strings = (
+          'EXEC InsertUnitMeasure @UnitMeasureCode = ''ABC'', @Name = ''New Test Value'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'Exec3'
+        Lines.Strings = (
+          'EXECUTE Production.usp_UpdateInventory ''20030501'''
+          ''
+        )
+      end    
+      item
+        Caption = 'Deallocate1'
+        Lines.Strings = (
+          'DEALLOCATE complex_cursor;'
+          ''
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Close1'
+        Lines.Strings = (
+          'CLOSE complex_cursor;'
+        )
+      end    
+      item
+        Caption = 'CreateStatistic1'
+        Lines.Strings = (
+          'CREATE STATISTICS ContactMail1'
+          '    ON Person.Person (BusinessEntityID, EmailPromotion)'
+          '    WITH SAMPLE 5 PERCENT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic2'
+        Lines.Strings = (
+          'CREATE STATISTICS ContactMail1'
+          '    ON Person.Person (BusinessEntityID, EmailPromotion)'
+          '    WITH SAMPLE 5 PERCENT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic3'
+        Lines.Strings = (
+          'CREATE STATISTICS NamePurchase'
+          '    ON AdventureWorks2012.Person.Person (BusinessEntityID, EmailPromotion)'
+          '    WITH FULLSCAN, NORECOMPUTE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic4'
+        Lines.Strings = (
+          'CREATE STATISTICS ContactPromotion1'
+          '    ON Person.Person (BusinessEntityID, LastName, EmailPromotion)'
+          'WHERE EmailPromotion = 2'
+          'WITH SAMPLE 50 PERCENT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic5'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic6'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress) WITH FULLSCAN;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic7'
+        Lines.Strings = (
+          'CREATE STATISTICS NamePurchase'
+          '    ON AdventureWorks2012.Person.Person (BusinessEntityID, EmailPromotion)'
+          '    WITH FULLSCAN, PERSIST_SAMPLE_PERCENT = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic8'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress);'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic9'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerStatsSampleScan'
+          'ON DimCustomer (CustomerKey, EmailAddress) WITH SAMPLE 50 PERCENT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic10'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerStatsSampleScan'
+          'ON DimCustomer (CustomerKey, EmailAddress) WITH SAMPLE 50 PERCENT;'
+        )
+      end    
+      item
+        Caption = 'CreateStatistic11'
+        Lines.Strings = (
+          'CREATE STATISTICS Products'
+          '    ON Production.Product ([Name], ProductNumber)'
+          '    WITH SAMPLE 50 PERCENT'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic12'
+        Lines.Strings = (
+          'CREATE STATISTICS VendorCredit'
+          '    ON Purchasing.Vendor (Name, CreditRating)'
+          '    WITH SAMPLE 50 PERCENT'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateStatistic13'
+        Lines.Strings = (
+          'CREATE STATISTICS CustomerTotal'
+          '    ON Sales.SalesOrderHeader (CustomerID, TotalDue)'
+          '    WITH FULLSCAN;'
+        )
+      end    
+      item
+        Caption = 'UpdateStatistic1'
+        Lines.Strings = (
+          'UPDATE STATISTICS Production.Product(Products)'
+          '    WITH SAMPLE 50 PERCENT;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropStatistic1'
+        Lines.Strings = (
+          'DROP STATISTICS Purchasing.Vendor.VendorCredit, Sales.SalesOrderHeader.CustomerTotal;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAssembly1'
+        Lines.Strings = (
+          'CREATE ASSEMBLY StringUtilities FROM @SamplesPath + ''StringUtilities\CS\StringUtilities\bin\debug\StringUtilities.dll'''
+          'WITH PERMISSION_SET=SAFE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAssembly2'
+        Lines.Strings = (
+          'CREATE ASSEMBLY HelloWorld'
+          'FROM ''<system_drive>:\Program Files\Microsoft SQL Server\100\Samples\HelloWorld\CS\HelloWorld\bin\debug\HelloWorld.dll'''
+          'WITH PERMISSION_SET = SAFE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAssembly3'
+        Lines.Strings = (
+          'CREATE ASSEMBLY HelloWorld'
+          '    FROM 0x4D5A900000000000'
+          'WITH PERMISSION_SET = SAFE;'
+        )
+      end    
+      item
+        Caption = 'CreateAssembly4'
+        Lines.Strings = (
+          'CREATE ASSEMBLY Shipping19'
+          '    FROM '' c:\Shipping\Certs\Shipping19.dll'''
+          '    WITH PERMISSION_SET = SAFE;'
+        )
+      end    
+      item
+        Caption = 'CreateAssembly5'
+        Lines.Strings = (
+          'CREATE ASSEMBLY [SurrogateStringFunction]'
+          'FROM @SamplesPath + ''StringManipulate\CS\StringManipulate\bin\debug\SurrogateStringFunction.dll'''
+          'WITH PERMISSION_SET = EXTERNAL_ACCESS;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAssembly6'
+        Lines.Strings = (
+          'CREATE ASSEMBLY HandlingLOBUsingCLR'
+          'FROM ''\\MachineName\HandlingLOBUsingCLR\bin\Debug\HandlingLOBUsingCLR.dll'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAssembly7'
+        Lines.Strings = (
+          'CREATE ASSEMBLY utf8string'
+          'AUTHORIZATION [dbi]'
+          'FROM 0x4D... ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAssembly1'
+        Lines.Strings = (
+          'ALTER ASSEMBLY ComplexNumber'
+          'FROM ''C:\Program Files\Microsoft SQL Server\130\Tools\Samples\1033\Engine\Programmability\CLR\UserDefinedDataType\CS\ComplexNumber\obj\Debug\ComplexNumber.dll'''
+        )
+      end    
+      item
+        Caption = 'AlterAssembly2'
+        Lines.Strings = (
+          'ALTER ASSEMBLY MyClass'
+          'ADD FILE FROM ''C:\MyClassProject\Class1.cs'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAssembly3'
+        Lines.Strings = (
+          'ALTER ASSEMBLY ComplexNumber WITH PERMISSION_SET = EXTERNAL_ACCESS;'
+        )
+      end    
+      item
+        Caption = 'DropAssembly1'
+        Lines.Strings = (
+          'DROP ASSEMBLY Helloworld ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AddClassification1'
+        Lines.Strings = (
+          'ADD SENSITIVITY CLASSIFICATION TO'
+          '    dbo.sales.price, dbo.sales.discount'
+          '    WITH ( LABEL=''Highly Confidential'', INFORMATION_TYPE=''Financial'', RANK=CRITICAL )'
+        )
+      end    
+      item
+        Caption = 'AddClassification2'
+        Lines.Strings = (
+          'ADD SENSITIVITY CLASSIFICATION TO'
+          '    dbo.customer.comments'
+          '    WITH ( LABEL=''Confidential'', LABEL_ID=''643f7acd-776a-438d-890c-79c3f2a520d6'' )'
+        )
+      end    
+      item
+        Caption = 'DropClassification1'
+        Lines.Strings = (
+          'DROP SENSITIVITY CLASSIFICATION FROM'
+          '    dbo.sales.price'
+        )
+      end    
+      item
+        Caption = 'DropClassification2'
+        Lines.Strings = (
+          'DROP SENSITIVITY CLASSIFICATION FROM'
+          '    dbo.sales.price, dbo.sales.discount, SalesLT.Customer.Phone'
+        )
+      end    
+      item
+        Caption = 'CreateAsymmetricKey1'
+        Lines.Strings = (
+          'CREATE ASYMMETRIC KEY PacificSales09'
+          '    WITH ALGORITHM = RSA_2048'
+          '    ENCRYPTION BY PASSWORD = ''<enterStrongPasswordHere>'';'
+        )
+      end    
+      item
+        Caption = 'CreateAsymmetricKey2'
+        Lines.Strings = (
+          'CREATE ASYMMETRIC KEY PacificSales19'
+          '    AUTHORIZATION Christina'
+          '    FROM FILE = ''c:\PacSales\Managers\ChristinaCerts.tmp'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateAsymmetricKey3'
+        Lines.Strings = (
+          'CREATE ASYMMETRIC KEY EKM_askey1'
+          '    FROM PROVIDER EKM_Provider1'
+          '    WITH'
+          '        ALGORITHM = RSA_2048,'
+          '        CREATION_DISPOSITION = CREATE_NEW'
+          '        , PROVIDER_KEY_NAME  = ''key10_user1'' ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAsymmetricKey1'
+        Lines.Strings = (
+          'ALTER ASYMMETRIC KEY PacificSales09'
+          '    WITH PRIVATE KEY ('
+          '    DECRYPTION BY PASSWORD = ''<oldPassword>'','
+          '    ENCRYPTION BY PASSWORD = ''<enterStrongPasswordHere>'');'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAsymmetricKey2'
+        Lines.Strings = (
+          'ALTER ASYMMETRIC KEY PacificSales19 REMOVE PRIVATE KEY;'
+          'GO'
+          'OPEN MASTER KEY DECRYPTION BY PASSWORD = ''<database master key password>'';'
+          'ALTER ASYMMETRIC KEY PacificSales09 WITH PRIVATE KEY ('
+          '    DECRYPTION BY PASSWORD = ''<enterStrongPasswordHere>'' );'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropAsymmetricKey1'
+        Lines.Strings = (
+          'DROP ASYMMETRIC KEY MirandaXAsymKey6;'
+        )
+      end>
+    Left = 389
+    Top = 368
+  end
+  object sSecurity: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'Grant1'
+        Lines.Strings = (
+          'GRANT ALTER ANY DATABASE SCOPED CONFIGURATION to [Joe] ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant2'
+        Lines.Strings = (
+          'GRANT ALTER ON SERVER ROLE::Production TO Ted ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant3'
+        Lines.Strings = (
+          'GRANT CONNECT ON ENDPOINT::[TSQL Default TCP] TO public;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant4'
+        Lines.Strings = (
+          'GRANT CONNECT ON ENDPOINT::ipv4_endpoint_special TO login_name;'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant5'
+        Lines.Strings = (
+          'GRANT CONNECT ON ENDPOINT::[TSQL Default TCP] TO public;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant6'
+        Lines.Strings = (
+          'GRANT CONNECT ON ENDPOINT::ipv6_endpoint_special'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant7'
+        Lines.Strings = (
+          'GRANT EXECUTE EXTERNAL SCRIPT ON EXTERNAL LANGUAGE ::Java TO mylogin;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant8'
+        Lines.Strings = (
+          'GRANT VIEW SERVER STATE TO login_test;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant9'
+        Lines.Strings = (
+          'GRANT IMPERSONATE ON USER::CustomApp TO [adventure-works\tengiz0] ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant10'
+        Lines.Strings = (
+          'GRANT SELECT ON T1 TO ucsSelectT1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant11'
+        Lines.Strings = (
+          'GRANT EXECUTE ON procSelectT1 to public;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant12'
+        Lines.Strings = (
+          'GRANT EXECUTE ON procSelectT1ForAlice TO PUBLIC;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant13'
+        Lines.Strings = (
+          'GRANT IMPERSONATE ON USER:: user2 TO user1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant14'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON AVAILABILITY GROUP::MyAg TO ZArifin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant15'
+        Lines.Strings = (
+          'GRANT TAKE OWNERSHIP ON AVAILABILITY GROUP::MyAg TO PKomosinski WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant16'
+        Lines.Strings = (
+          'GRANT CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant17'
+        Lines.Strings = (
+          'GRANT CREATE TABLE TO MelanieK;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant18'
+        Lines.Strings = (
+          'GRANT SHOWPLAN TO AuditMonitor;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant19'
+        Lines.Strings = (
+          'GRANT CREATE VIEW TO CarmineEs WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant20'
+        Lines.Strings = (
+          'GRANT CONTROL ON DATABASE::AdventureWorks2012 TO Sarah;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant21'
+        Lines.Strings = (
+          'GRANT CONTROL ON USER::Wanida TO RolandX;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant22'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON ROLE::SammamishParking TO JinghaoLiu WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant23'
+        Lines.Strings = (
+          'GRANT IMPERSONATE ON USER::HamithaL TO AccountsPayable17;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant24'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON ENDPOINT::Mirror7 TO ZArifin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant25'
+        Lines.Strings = (
+          'GRANT TAKE OWNERSHIP ON ENDPOINT::Shipping83 TO PKomosinski'
+          '    WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant26'
+        Lines.Strings = (
+          'GRANT CONTROL'
+          '    ON FULLTEXT CATALOG :: ProductCatalog'
+          '    TO Ted ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant27'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION'
+          '    ON FULLTEXT STOPLIST :: ProductStoplist'
+          '    TO Mary ;'
+          ''
+          '    GRANT SELECT ON OBJECT::Person.Address TO RosaQdM;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant28'
+        Lines.Strings = (
+          'GRANT EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo'
+          '    TO Recruiting11;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant29'
+        Lines.Strings = (
+          'GRANT REFERENCES (BusinessEntityID) ON OBJECT::HumanResources.vEmployee'
+          '    TO Wanida WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant30'
+        Lines.Strings = (
+          'GRANT SELECT ON Person.Address TO RosaQdM;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant31'
+        Lines.Strings = (
+          'GRANT SELECT ON Person.Address TO [AdventureWorks2012\RosaQdM];'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant32'
+        Lines.Strings = (
+          'GRANT EXECUTE ON dbo.uspGetBillOfMaterials TO newrole ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant33'
+        Lines.Strings = (
+          'GRANT INSERT ON SCHEMA :: HumanResources TO guest;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant34'
+        Lines.Strings = (
+          'GRANT SELECT ON SCHEMA :: Person TO WilJo WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant35'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION'
+          '    ON SEARCH PROPERTY LIST :: DocumentTablePropertyList'
+          '    TO Mary ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant36'
+        Lines.Strings = (
+          'GRANT CONTROL SERVER TO TerryEminhizer;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant37'
+        Lines.Strings = (
+          'GRANT ALTER ANY EVENT NOTIFICATION TO JanethEsteves WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant38'
+        Lines.Strings = (
+          'GRANT ALTER ANY DATABASE TO ITDevAdmin WITH GRANT OPTION ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant39'
+        Lines.Strings = (
+          'GRANT ALTER ANY DATABASE TO ITDevelopers AS ITDevAdmin ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant40'
+        Lines.Strings = (
+          'GRANT IMPERSONATE ON LOGIN::WanidaBenshoof to [AdvWorks\YoonM];'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant41'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON LOGIN::EricKurjan TO RMeyyappan'
+          '    WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant42'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON SERVER ROLE::Sales TO Auditors ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant43'
+        Lines.Strings = (
+          'GRANT ALTER ON SYMMETRIC KEY::SamInventory42 TO HamidS;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant44'
+        Lines.Strings = (
+          'GRANT SELECT ON sys.sql_logins TO Sylvester1;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant45'
+        Lines.Strings = (
+          'GRANT VIEW SERVER STATE to Sylvester1;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant46'
+        Lines.Strings = (
+          'GRANT EXECUTE ON xp_readmail TO Sylvester1;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant47'
+        Lines.Strings = (
+          'GRANT VIEW DEFINITION ON TYPE::Telemarketing.PhoneNumber'
+          '    TO KhalidR WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant48'
+        Lines.Strings = (
+          'GRANT EXECUTE ON XML SCHEMA COLLECTION::Sales.Invoices4 TO Wanida;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant49'
+        Lines.Strings = (
+          'GRANT CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski'
+          '    WITH GRANT OPTION;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Grant50'
+        Lines.Strings = (
+          'GRANT SELECT ON computer_types TO joe;'
+        )
+      end    
+      item
+        Caption = 'Revoke1'
+        Lines.Strings = (
+          'REVOKE GRANT OPTION FOR CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski'
+          'CASCADE'
+          ''
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke2'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON AVAILABILITY GROUP::MyAg TO ZArifin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke3'
+        Lines.Strings = (
+          'REVOKE TAKE OWNERSHIP ON AVAILABILITY GROUP::MyAg TO PKomosinski'
+          '    CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke4'
+        Lines.Strings = (
+          'REVOKE CREATE CERTIFICATE FROM MelanieK;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke5'
+        Lines.Strings = (
+          'REVOKE REFERENCES FROM AuditMonitor;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke6'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION FROM CarmineEs CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke7'
+        Lines.Strings = (
+          'REVOKE CONTROL ON USER::Wanida FROM RolandX;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke8'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON ROLE::SammamishParking'
+          '    FROM JinghaoLiu CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke9'
+        Lines.Strings = (
+          'REVOKE IMPERSONATE ON USER::HamithaL FROM AccountsPayable17;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke10'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON ENDPOINT::Mirror7 FROM ZArifin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke11'
+        Lines.Strings = (
+          'REVOKE TAKE OWNERSHIP ON ENDPOINT::Shipping83 FROM PKomosinski'
+          '    CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke12'
+        Lines.Strings = (
+          'REVOKE SELECT ON OBJECT::Person.Address FROM RosaQdM;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke13'
+        Lines.Strings = (
+          'REVOKE EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo FROM Recruiting11;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke14'
+        Lines.Strings = (
+          'REVOKE REFERENCES (BusinessEntityID) ON OBJECT::HumanResources.vEmployee FROM Wanida CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke15'
+        Lines.Strings = (
+          'REVOKE VIEW SERVER STATE FROM WanidaBenshoof;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke16'
+        Lines.Strings = (
+          'REVOKE GRANT OPTION FOR CONNECT SQL FROM JanethEsteves;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke17'
+        Lines.Strings = (
+          'REVOKE IMPERSONATE ON LOGIN::WanidaBenshoof FROM [AdvWorks\YoonM];'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke18'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON LOGIN::EricKurjan FROM RMeyyappan CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke19'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON SERVER ROLE::Sales TO Auditors ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke20'
+        Lines.Strings = (
+          'REVOKE ALTER ON SYMMETRIC KEY::SamInventory42 TO HamidS CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke21'
+        Lines.Strings = (
+          'REVOKE VIEW DEFINITION ON TYPE::Telemarketing.PhoneNumber FROM KhalidR CASCADE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke22'
+        Lines.Strings = (
+          'REVOKE EXECUTE ON XML SCHEMA COLLECTION::Sales.Invoices4 FROM Wanida;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization1'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON OBJECT::Parts.Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization2'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON Parts.Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization3'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization4'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON OBJECT::Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization5'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON OBJECT::Production.ProductionView06 TO SCHEMA OWNER;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization6'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON SCHEMA::SeattleProduction11 TO SandraAlayo;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization7'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON ENDPOINT::CantabSalesServer1 TO JaePak;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization8'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization9'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON dbo.Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization10'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON OBJECT::Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization11'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON OBJECT::dbo.Sprockets TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization12'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON DATABASE::Parts TO MichikoOsada;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterAuthorization13'
+        Lines.Strings = (
+          'ALTER AUTHORIZATION ON database::targetDB TO [rachel@cqclinic.onmicrosoft.com];'
+        )
+      end    
+      item
+        Caption = 'CreateRole1'
+        Lines.Strings = (
+          'CREATE ROLE Sales;'
+        )
+      end    
+      item
+        Caption = 'CreateRole2'
+        Lines.Strings = (
+          'CREATE ROLE SalesUK'
+        )
+      end    
+      item
+        Caption = 'CreateRole3'
+        Lines.Strings = (
+          'CREATE ROLE buyers AUTHORIZATION BenMiller;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole4'
+        Lines.Strings = (
+          'CREATE ROLE auditors AUTHORIZATION db_securityadmin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole5'
+        Lines.Strings = (
+          'CREATE ROLE newrole ;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterRole1'
+        Lines.Strings = (
+          'ALTER ROLE buyers WITH NAME = purchasing;'
+        )
+      end    
+      item
+        Caption = 'AlterRole2'
+        Lines.Strings = (
+          'ALTER ROLE Sales DROP MEMBER Barry;'
+        )
+      end    
+      item
+        Caption = 'AlterRole3'
+        Lines.Strings = (
+          'ALTER ROLE Sales ADD MEMBER Barry;'
+        )
+      end    
+      item
+        Caption = 'DropRole1'
+        Lines.Strings = (
+          'DROP ROLE purchasing;'
+        )
+      end    
+      item
+        Caption = 'CreateRole6'
+        Lines.Strings = (
+          'CREATE APPLICATION ROLE weekly_receipts'
+          '    WITH PASSWORD = ''987Gbv8$76sPYY5m23'' ,'
+          '    DEFAULT_SCHEMA = Sales;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole7'
+        Lines.Strings = (
+          'ALTER APPLICATION ROLE weekly_receipts'
+          '    WITH NAME = receipts_ledger;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole8'
+        Lines.Strings = (
+          'USE AdventureWorks2012;'
+          'CREATE APPLICATION ROLE weekly_receipts'
+          '    WITH PASSWORD = ''987Gbv8$76sPYY5m23'' ,'
+          '    DEFAULT_SCHEMA = Sales;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole9'
+        Lines.Strings = (
+          'ALTER APPLICATION ROLE weekly_receipts'
+          '    WITH NAME = receipts_ledger;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole10'
+        Lines.Strings = (
+          'ALTER APPLICATION ROLE receipts_ledger'
+          '    WITH PASSWORD = ''897yUUbv867y$200nk2i'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole11'
+        Lines.Strings = (
+          'ALTER APPLICATION ROLE receipts_ledger'
+          '    WITH NAME = weekly_ledger,'
+          '    PASSWORD = ''897yUUbv77bsrEE00nk2i'','
+          '    DEFAULT_SCHEMA = Production;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateRole12'
+        Lines.Strings = (
+          'CREATE APPLICATION ROLE weekly_receipts'
+          '    WITH PASSWORD = ''987G^bv876sPY)Y5m23'''
+          '    , DEFAULT_SCHEMA = Sales;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropRole2'
+        Lines.Strings = (
+          'DROP APPLICATION ROLE weekly_ledger;'
+        )
+      end    
+      item
+        Caption = 'CreateLogin1'
+        Lines.Strings = (
+          'CREATE LOGIN <login_name> WITH PASSWORD = ''<enterStrongPasswordHere>'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin2'
+        Lines.Strings = (
+          'CREATE LOGIN <login_name> WITH PASSWORD = ''<enterStrongPasswordHere>'''
+          '    MUST_CHANGE, CHECK_EXPIRATION = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin3'
+        Lines.Strings = (
+          'CREATE LOGIN <login_name> WITH PASSWORD = ''<enterStrongPasswordHere>'','
+          '    CREDENTIAL = <credentialName>;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin4'
+        Lines.Strings = (
+          'CREATE LOGIN <login_name> FROM CERTIFICATE <certificateName>;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin5'
+        Lines.Strings = (
+          'CREATE LOGIN [<domainName>\<login_name>] FROM WINDOWS;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin6'
+        Lines.Strings = (
+          'CREATE LOGIN TestLogin WITH PASSWORD = ''SuperSecret52&&'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin7'
+        Lines.Strings = (
+          'CREATE LOGIN TestLogin'
+          'WITH PASSWORD = ''SuperSecret52&&'', SID = 0x241C11948AEEB749B0D22646DB1A19F2;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin8'
+        Lines.Strings = (
+          'CREATE LOGIN [MyUser]'
+          'WITH PASSWORD = ''MyPassword'','
+          'DEFAULT_DATABASE = MyDatabase,'
+          'CHECK_POLICY = OFF,'
+          'CHECK_EXPIRATION = OFF ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin9'
+        Lines.Strings = (
+          'CREATE LOGIN login_test WITH PASSWORD = ''3KHJ6dhx(0xVYsdf'' MUST_CHANGE,'
+          '    CHECK_EXPIRATION = ON;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin10'
+        Lines.Strings = (
+          'CREATE LOGIN AbolrousHazem'
+          '    WITH PASSWORD = ''340$Uuxwp7Mcxo7Khy'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin11'
+        Lines.Strings = (
+          'CREATE LOGIN WanidaBenshoof'
+          '    WITH PASSWORD = ''8fdKJl3$nlNv3049jsKK'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin12'
+        Lines.Strings = (
+          'CREATE LOGIN Alice WITH PASSWORD = ''SimplePwd01'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin13'
+        Lines.Strings = (
+          'CREATE LOGIN login1 WITH PASSWORD = ''J345#$)thb'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin14'
+        Lines.Strings = (
+          'CREATE LOGIN login2 WITH PASSWORD = ''Uor80$23b'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin15'
+        Lines.Strings = (
+          'CREATE LOGIN login1 WITH PASSWORD = ''J345#$)thb'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateLogin16'
+        Lines.Strings = (
+          'CREATE LOGIN login2 WITH PASSWORD = ''Uor80$23b'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin1'
+        Lines.Strings = (
+          'ALTER LOGIN Mary5 ENABLE;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin2'
+        Lines.Strings = (
+          'ALTER LOGIN Mary5 WITH PASSWORD = ''<enterStrongPasswordHere>'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin3'
+        Lines.Strings = (
+          'ALTER LOGIN Mary5 WITH PASSWORD = ''<enterStrongPasswordHere>'' OLD_PASSWORD = ''<oldWeakPasswordHere>'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin4'
+        Lines.Strings = (
+          'ALTER LOGIN Mary5 WITH NAME = John2;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin5'
+        Lines.Strings = (
+          'ALTER LOGIN John2 WITH CREDENTIAL = Custodian04;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin6'
+        Lines.Strings = (
+          'ALTER LOGIN Mary5'
+          'ADD CREDENTIAL EKMProvider1;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin7'
+        Lines.Strings = (
+          'ALTER LOGIN [Mary5] WITH PASSWORD = ''****'' UNLOCK ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin8'
+        Lines.Strings = (
+          'ALTER LOGIN [Mary5] WITH CHECK_POLICY = OFF;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin9'
+        Lines.Strings = (
+          'ALTER LOGIN [Mary5] WITH CHECK_POLICY = ON;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin10'
+        Lines.Strings = (
+          'ALTER LOGIN TestUser WITH PASSWORD = 0x01000CF35567C60BFB41EBDE4CF700A985A13D773D6B45B90900 HASHED ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterLogin11'
+        Lines.Strings = (
+          'ALTER LOGIN User1'
+          'ADD CREDENTIAL CredentialForEKM;'
+        )
+      end    
+      item
+        Caption = 'DropLogin1'
+        Lines.Strings = (
+          'DROP LOGIN TestLogin;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin2'
+        Lines.Strings = (
+          'DROP LOGIN WilliJo;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin3'
+        Lines.Strings = (
+          'DROP LOGIN Alice;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin4'
+        Lines.Strings = (
+          'DROP LOGIN login1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin5'
+        Lines.Strings = (
+          'DROP LOGIN login2;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin6'
+        Lines.Strings = (
+          'DROP LOGIN login1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropLogin7'
+        Lines.Strings = (
+          'DROP LOGIN login2;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser1'
+        Lines.Strings = (
+          'CREATE USER AbolrousHazem FOR LOGIN AbolrousHazem;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser2'
+        Lines.Strings = (
+          'CREATE USER Wanida FOR LOGIN WanidaBenshoof'
+          '    WITH DEFAULT_SCHEMA = Marketing;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser3'
+        Lines.Strings = (
+          'CREATE USER JinghaoLiu FOR CERTIFICATE CarnationProduction50;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser4'
+        Lines.Strings = (
+          'CREATE USER CustomApp WITHOUT LOGIN ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser5'
+        Lines.Strings = (
+          'CREATE USER Carlo'
+          'WITH PASSWORD=''RN92piTCh%$!~3K9844 Bl*'''
+          '    , DEFAULT_LANGUAGE=[Brazilian]'
+          '    , DEFAULT_SCHEMA=[dbo]'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser6'
+        Lines.Strings = (
+          'CREATE USER [Contoso\Fritz] ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser7'
+        Lines.Strings = (
+          'CREATE USER CarmenW WITH PASSWORD = ''a8ea v*(Rd##+'''
+          ', SID = 0x01050000000000090300000063FF0451A9E7664BA705B10E37DDC4B7;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser8'
+        Lines.Strings = (
+          'CREATE USER [Chin]'
+          'WITH'
+          '      DEFAULT_SCHEMA = dbo'
+          '    , ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = ON ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser9'
+        Lines.Strings = (
+          'CREATE USER TestUser WITHOUT LOGIN;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser10'
+        Lines.Strings = (
+          'CREATE USER ucsSelectT1 FROM CERTIFICATE csSelectT;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser11'
+        Lines.Strings = (
+          'CREATE USER Alice;'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser12'
+        Lines.Strings = (
+          'CREATE USER user1 FOR LOGIN login1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser13'
+        Lines.Strings = (
+          'CREATE USER user2 FOR LOGIN login2;'
+        )
+      end    
+      item
+        Caption = 'AlterUser1'
+        Lines.Strings = (
+          'ALTER USER Mary5 WITH NAME = Mary51;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterUser2'
+        Lines.Strings = (
+          'ALTER USER Mary51 WITH DEFAULT_SCHEMA = Purchasing;'
+          ''
+        )
+      end    
+      item
+        Caption = 'AlterUser3'
+        Lines.Strings = (
+          'ALTER USER Philip'
+          'WITH NAME = Philipe'
+          ', DEFAULT_SCHEMA = Development'
+          ', PASSWORD = ''W1r77TT98%ab@#'' OLD_PASSWORD = ''New Devel0per'''
+          ', DEFAULT_LANGUAGE= French ;'
+          ''
+        )
+      end    
+      item
+        Caption = 'DropUser1'
+        Lines.Strings = (
+          'DROP USER AbolrousHazem;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropUser2'
+        Lines.Strings = (
+          'DROP USER user2;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropUser3'
+        Lines.Strings = (
+          'DROP USER user1;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'DropUser4'
+        Lines.Strings = (
+          'DROP USER user2;'
+          ''
+          ''
+        )
+      end>
+    Left = 448
+    Top = 368
   end
 end

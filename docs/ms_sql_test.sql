@@ -1,463 +1,6 @@
-
-ADD SENSITIVITY CLASSIFICATION TO
-    dbo.sales.price, dbo.sales.discount
-    WITH ( LABEL='Highly Confidential', INFORMATION_TYPE='Financial', RANK=CRITICAL )
-    
-    
-ADD SENSITIVITY CLASSIFICATION TO
-    dbo.customer.comments
-    WITH ( LABEL='Confidential', LABEL_ID='643f7acd-776a-438d-890c-79c3f2a520d6' )
-    
-
-
-
-
-DECLARE complex_cursor CURSOR FOR  
-    SELECT a.BusinessEntityID  
-    FROM HumanResources.EmployeePayHistory AS a  
-    WHERE RateChangeDate <>   
-         (SELECT MAX(RateChangeDate)  
-          FROM HumanResources.EmployeePayHistory AS b  
-          WHERE a.BusinessEntityID = b.BusinessEntityID) ;  
-OPEN complex_cursor;  
-FETCH FROM complex_cursor;  
-CLOSE complex_cursor;  
-DEALLOCATE complex_cursor;  
-
-
-DECLARE @MyTableVar table (  
-    ProductID int NOT NULL,   
-    ProductName nvarchar(50)NOT NULL,  
-    ProductModelID int NOT NULL,   
-    PhotoID int NOT NULL);  
-  
-
-CREATE TRIGGER safety   
-ON DATABASE   
-FOR DROP_TABLE, ALTER_TABLE   
-AS   
-   PRINT 'You must disable Trigger "safety" to drop or alter tables!'   
-   ROLLBACK;  
-
-CREATE TRIGGER safety   
-ON DATABASE   
-FOR DROP_TABLE, ALTER_TABLE   
-AS   
-   PRINT 'You must disable Trigger "safety" to drop or alter tables!'   
-   ROLLBACK;  
-
-GO  
 SET IDENTITY_INSERT T1 ON;  
+   
 
-
-
-GO  
-CREATE PROCEDURE dbo.uspGetEmployeeSales   
-AS   
-    SET NOCOUNT ON;  
-    SELECT 'PROCEDURE', sp.BusinessEntityID, c.LastName,   
-        sp.SalesYTD   
-    FROM Sales.SalesPerson AS sp    
-    INNER JOIN Person.Person AS c  
-        ON sp.BusinessEntityID = c.BusinessEntityID  
-    WHERE sp.BusinessEntityID LIKE '2%'  
-    ORDER BY sp.BusinessEntityID, c.LastName;  
-GO  
---Show results.  
-
-
-GO  
-GO
-
-
-GO  
-    
-    
-GO  
-CREATE VIEW V1 AS   
-SELECT column_2, column_1   
-FROM T1;  
-GO  
-GO  
-
--- Create the table variable.  
-DECLARE @MyTableVar table(  
-    LocationID int NOT NULL,  
-    CostRate smallmoney NOT NULL,  
-    NewCostRate AS CostRate * 1.5,  
-    ModifiedDate datetime);  
-  
--- Create a link to the remote data source.   
--- Specify a valid server name for @datasrc as 'server_name' 
--- or 'server_nameinstance_name'.  
-  
-EXEC sp_addlinkedserver @server = N'MyLinkServer',  
-    @srvproduct = N' ',  
-    @provider = N'SQLNCLI',   
-    @datasrc = N'server_name',  
-    @catalog = N'AdventureWorks2012';  
-GO
-
-
--- Specify the remote data source in the FROM clause using a four-part name   
--- in the form linked_server.catalog.schema.object.  
-  
-GO
-
--- Use the OPENDATASOURCE function to specify the remote data source.  
--- Specify a valid server name for Data Source using the format 
--- server_name or server_nameinstance_name.  
-  
-GO
-
--- Create an external table.   
-CREATE EXTERNAL TABLE [dbo].[FastCustomers2009] (  
-        [FirstName] char(25) NOT NULL,   
-        [LastName] char(25) NOT NULL,   
-        [YearlyIncome] float NULL,   
-        [MaritalStatus] char(1) NOT NULL  
-)  
-WITH (  
-        LOCATION='/old_data/2009/customerdata.tbl',  
-        DATA_SOURCE = HadoopHDP2,  
-        FILE_FORMAT = TextFileFormat,  
-        REJECT_TYPE = VALUE,  
-        REJECT_VALUE = 0  
-);  
-  
--- Export data: Move old data to Hadoop while keeping 
--- it query-able via external table.  
-
-
--- Create the target heap.  
-GO  
--- Temporarily set the recovery model to BULK_LOGGED.  
-ALTER DATABASE AdventureWorks2012  
-SET RECOVERY BULK_LOGGED;  
-GO  
--- Transfer data from Sales.SalesOrderDetail to Sales.SalesHistory  
-GO  
--- Reset the recovery model.  
-ALTER DATABASE AdventureWorks2012  
-SET RECOVERY FULL;  
-GO
-
-    
-
-DECLARE @MyTableVar table( NewScrapReasonID smallint,  
-                           Name varchar(50),  
-                           ModifiedDate datetime);  
-  
-
-
-GO  
-DECLARE @MyTableVar table(  
-  LastName     nvarchar(20) NOT NULL,  
-  FirstName    nvarchar(20) NOT NULL,  
-  CurrentSales money NOT NULL  
-  );  
-  
-
---Create ZeroInventory table.  
-GO  
-  
-IF @@ROWCOUNT = 0  
-PRINT 'Warning: No rows were inserted';  
-GO  
-SELECT DeletedProductID, RemovedOnDate FROM Production.ZeroInventory;
-
-
-
-USE AdventureWorks2012;  
-GO  
-IF OBJECT_ID ('dbo.Table1', 'U') IS NOT NULL  
-    DROP TABLE dbo.Table1;  
-GO  
-IF OBJECT_ID ('dbo.Table2', 'U') IS NOT NULL  
-    DROP TABLE dbo.Table2;  
-GO  
-
-USE AdventureWorks2012;  
-GO  
-IF OBJECT_ID ('dbo.Table1', 'U') IS NOT NULL  
-    DROP TABLE dbo.Table1;  
-GO  
-IF OBJECT_ID ('dbo.Table2', 'U') IS NOT NULL  
-    DROP TABLE dbo.Table2;  
-GO  
-
-DECLARE abc CURSOR LOCAL FOR  
-    SELECT c1, c2   
-    FROM dbo.Table1;  
-OPEN abc;  
-FETCH abc;  
-GO  
-SELECT c1, c2 FROM dbo.Table1;  
-GO
-
-
-USE tempdb;  
-GO  
-DECLARE @x TABLE (ID INT, Value INT);  
-DECLARE @y TABLE (ID INT, Value INT);  
-  
-
-CREATE PROCEDURE dbo.InsertUnitMeasure  
-    @UnitMeasureCode nchar(3),  
-    @Name nvarchar(25)  
-AS
-BEGIN  
-    SET NOCOUNT ON;  
--- Update the row if it exists.
-    UPDATE Production.UnitMeasure  
-SET Name = @Name  
-WHERE UnitMeasureCode = @UnitMeasureCode  
--- Insert the row if the UPDATE statement failed.  
-IF (@@ROWCOUNT = 0 )  
-BEGIN  
-    INSERT INTO Production.UnitMeasure (UnitMeasureCode, Name)  
-    VALUES (@UnitMeasureCode, @Name)  
-END  
-END;  
-GO  
--- Test the procedure and return the results.  
-EXEC InsertUnitMeasure @UnitMeasureCode = 'ABC', @Name = 'Test Value';  
-GO  
-  
--- Rewrite the procedure to perform the same operations using the
--- MERGE statement.  
--- Create a temporary table to hold the updated or inserted values
--- from the OUTPUT clause.  
-GO  
-ALTER PROCEDURE dbo.InsertUnitMeasure  
-    @UnitMeasureCode nchar(3),  
-    @Name nvarchar(25)  
-AS
-BEGIN  
-    SET NOCOUNT ON;  
-  
-    MERGE Production.UnitMeasure AS target  
-    USING (SELECT @UnitMeasureCode, @Name) AS source (UnitMeasureCode, Name)  
-    ON (target.UnitMeasureCode = source.UnitMeasureCode)  
-    WHEN MATCHED THEN
-        UPDATE SET Name = source.Name  
-    WHEN NOT MATCHED THEN  
-        INSERT (UnitMeasureCode, Name)  
-        VALUES (source.UnitMeasureCode, source.Name)  
-    OUTPUT deleted.*, $action, inserted.* INTO #MyTempTable;  
-END;  
-GO  
--- Test the procedure and return the results.  
-EXEC InsertUnitMeasure @UnitMeasureCode = 'ABC', @Name = 'New Test Value';  
-EXEC InsertUnitMeasure @UnitMeasureCode = 'XYZ', @Name = 'Test Value';  
-EXEC InsertUnitMeasure @UnitMeasureCode = 'ABC', @Name = 'Another Test Value';  
-  
-SELECT * FROM #MyTempTable;  
--- Cleanup
-DROP TABLE #MyTempTable;  
-GO
-
-CREATE PROCEDURE Production.usp_UpdateInventory  
-    @OrderDate datetime  
-AS  
-MERGE Production.ProductInventory AS target  
-USING (SELECT ProductID, SUM(OrderQty) FROM Sales.SalesOrderDetail AS sod  
-    JOIN Sales.SalesOrderHeader AS soh  
-    ON sod.SalesOrderID = soh.SalesOrderID  
-    AND soh.OrderDate = @OrderDate  
-    GROUP BY ProductID) AS source (ProductID, OrderQty)  
-ON (target.ProductID = source.ProductID)  
-WHEN MATCHED AND target.Quantity - source.OrderQty <= 0  
-    THEN DELETE  
-WHEN MATCHED
-    THEN UPDATE SET target.Quantity = target.Quantity - source.OrderQty,
-                    target.ModifiedDate = GETDATE()  
-OUTPUT $action, Inserted.ProductID, Inserted.Quantity,
-    Inserted.ModifiedDate, Deleted.ProductID,  
-    Deleted.Quantity, Deleted.ModifiedDate;  
-GO  
-  
-EXECUTE Production.usp_UpdateInventory '20030501'
-
-
-
--- Create a temporary table variable to hold the output actions.  
-DECLARE @SummaryOfChanges TABLE(Change VARCHAR(20));  
-  
-MERGE INTO Sales.SalesReason AS Target  
-USING (VALUES ('Recommendation','Other'), ('Review', 'Marketing'),
-              ('Internet', 'Promotion'))  
-       AS Source (NewName, NewReasonType)  
-ON Target.Name = Source.NewName  
-WHEN MATCHED THEN  
-UPDATE SET ReasonType = Source.NewReasonType  
-WHEN NOT MATCHED BY TARGET THEN  
-INSERT (Name, ReasonType) VALUES (NewName, NewReasonType)  
-OUTPUT $action INTO @SummaryOfChanges;  
-  
-
-GO  
-INSERT INTO Production.UpdatedInventory  
-SELECT ProductID, LocationID, NewQty, PreviousQty
-FROM  
-(    MERGE Production.ProductInventory AS pi  
-     USING (SELECT ProductID, SUM(OrderQty)
-            FROM Sales.SalesOrderDetail AS sod  
-            JOIN Sales.SalesOrderHeader AS soh  
-            ON sod.SalesOrderID = soh.SalesOrderID  
-            AND soh.OrderDate BETWEEN '20030701' AND '20030731'  
-            GROUP BY ProductID) AS src (ProductID, OrderQty)  
-     ON pi.ProductID = src.ProductID  
-    WHEN MATCHED AND pi.Quantity - src.OrderQty >= 0
-        THEN UPDATE SET pi.Quantity = pi.Quantity - src.OrderQty  
-    WHEN MATCHED AND pi.Quantity - src.OrderQty <= 0
-        THEN DELETE  
-    OUTPUT $action, Inserted.ProductID, Inserted.LocationID,
-        Inserted.Quantity AS NewQty, Deleted.Quantity AS PreviousQty)  
- AS Changes (Action, ProductID, LocationID, NewQty, PreviousQty)
- WHERE Action = 'UPDATE';  
-GO
-
--- CREATE node and edge tables
-GO
-
-GO
-
-GO
-
-CREATE OR ALTER PROCEDURE mergeEdge
-    @PersonId integer,
-    @CityId integer,
-    @StreetAddress varchar(100)
-AS
-BEGIN
-    MERGE livesIn
-        USING ((SELECT @PersonId, @CityId, @StreetAddress) AS T (PersonId, CityId, StreetAddress)
-                JOIN Person ON T.PersonId = Person.ID
-                JOIN City ON T.CityId = City.ID)
-        ON MATCH (Person-(livesIn)->City)
-    WHEN MATCHED THEN
-        UPDATE SET StreetAddress = @StreetAddress
-    WHEN NOT MATCHED THEN
-        INSERT ($from_id, $to_id, StreetAddress)
-        VALUES (Person.$node_id, City.$node_id, @StreetAddress) ;
-END
-GO
-
--- Following will insert a new edge in the livesIn edge table
-EXEC mergeEdge 3, 2, '4444th Avenue'
-GO
-
--- Following will update the StreetAddress on the edge that connects Ron to Redmond
-EXEC mergeEdge 1, 1, '321 Avenue'
-GO
-
-USE AdventureWorks2012;  
-GO  
-GO  
-TRUNCATE TABLE HumanResources.JobCandidate;  
-GO  
-GO
-
-TRUNCATE TABLE PartitionTable1   
-WITH (PARTITIONS (2, 4, 6 TO 8));  
-GO
-
-GO
-
-
-
-GO  
-GO
-
-USE AdventureWorks2012;  
-GO  
-CREATE STATISTICS Products  
-    ON Production.Product ([Name], ProductNumber)  
-    WITH SAMPLE 50 PERCENT  
--- Time passes. The UPDATE STATISTICS statement is then executed.  
-UPDATE STATISTICS Production.Product(Products)   
-    WITH SAMPLE 50 PERCENT;
-    
-USE AdventureWorks2012;  
-GO  
-
-USE AdventureWorks2012;  
-CREATE APPLICATION ROLE weekly_receipts   
-    WITH PASSWORD = '987Gbv8$76sPYY5m23' ,   
-    DEFAULT_SCHEMA = Sales;  
-GO  
-ALTER APPLICATION ROLE weekly_receipts   
-    WITH NAME = receipts_ledger;  
-GO
-
-USE AdventureWorks2012;  
-CREATE APPLICATION ROLE weekly_receipts   
-    WITH PASSWORD = '987Gbv8$76sPYY5m23' ,   
-    DEFAULT_SCHEMA = Sales;  
-GO  
-ALTER APPLICATION ROLE weekly_receipts   
-    WITH NAME = receipts_ledger;  
-GO
-
-ALTER APPLICATION ROLE receipts_ledger   
-    WITH PASSWORD = '897yUUbv867y$200nk2i';  
-GO
-
-ALTER APPLICATION ROLE receipts_ledger   
-    WITH NAME = weekly_ledger,   
-    PASSWORD = '897yUUbv77bsrEE00nk2i',   
-    DEFAULT_SCHEMA = Production;  
-GO
-
-ALTER ASSEMBLY ComplexNumber 
-FROM 'C:\Program Files\Microsoft SQL Server\130\Tools\Samples\1033\Engine\Programmability\CLR\UserDefinedDataType\CS\ComplexNumber\obj\Debug\ComplexNumber.dll'
-
-
-ALTER ASSEMBLY MyClass   
-ADD FILE FROM 'C:\MyClassProject\Class1.cs';
-
-ALTER ASSEMBLY ComplexNumber WITH PERMISSION_SET = EXTERNAL_ACCESS;
-
-ALTER ASYMMETRIC KEY PacificSales09   
-    WITH PRIVATE KEY (  
-    DECRYPTION BY PASSWORD = '<oldPassword>',  
-    ENCRYPTION BY PASSWORD = '<enterStrongPasswordHere>');  
-GO
-
-ALTER ASYMMETRIC KEY PacificSales19 REMOVE PRIVATE KEY;  
-GO
-OPEN MASTER KEY DECRYPTION BY PASSWORD = '<database master key password>';  
-ALTER ASYMMETRIC KEY PacificSales09 WITH PRIVATE KEY (  
-    DECRYPTION BY PASSWORD = '<enterStrongPasswordHere>' );  
-GO
-
-ALTER AUTHORIZATION ON OBJECT::Parts.Sprockets TO MichikoOsada;    
-GO
-
-ALTER AUTHORIZATION ON Parts.Sprockets TO MichikoOsada;    
-GO
-
-ALTER AUTHORIZATION ON Sprockets TO MichikoOsada;    
-ALTER AUTHORIZATION ON OBJECT::Sprockets TO MichikoOsada;
-
-ALTER AUTHORIZATION ON OBJECT::Production.ProductionView06 TO SCHEMA OWNER;    
-GO
-
-ALTER AUTHORIZATION ON SCHEMA::SeattleProduction11 TO SandraAlayo;    
-GO
-
-ALTER AUTHORIZATION ON ENDPOINT::CantabSalesServer1 TO JaePak;    
-GO
-
-ALTER AUTHORIZATION ON Sprockets TO MichikoOsada;    
-ALTER AUTHORIZATION ON dbo.Sprockets TO MichikoOsada;    
-ALTER AUTHORIZATION ON OBJECT::Sprockets TO MichikoOsada;    
-ALTER AUTHORIZATION ON OBJECT::dbo.Sprockets TO MichikoOsada;
-
-ALTER AUTHORIZATION ON DATABASE::Parts TO MichikoOsada;
-
-ALTER AUTHORIZATION ON database::targetDB TO [rachel@cqclinic.onmicrosoft.com];
 
 ALTER AVAILABILITY GROUP AccountsAG JOIN;  
 GO
@@ -528,339 +71,11 @@ ENABLE;
 GO
 
 
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-Modify Name = Northwind ;
-GO
-
-USE master;
-GO
-
-GO
-
-ALTER DATABASE testDB
-COLLATE French_CI_AI ;
-GO
-
-ALTER DATABASE AUDIT SPECIFICATION HIPAA_Audit_DB_Specification  
-FOR SERVER AUDIT HIPAA_Audit  
-    ADD (SELECT  
-         ON OBJECT::dbo.Table1  
-         BY dbo)  
-    WITH (STATE = ON);  
-GO
-
-ALTER DATABASE database_name
-SET COMPATIBILITY_LEVEL = { 150 | 140 | 130 | 120 | 110 | 100 | 90 }             
-
-ALTER DATABASE AdventureWorks2012
-SET COMPATIBILITY_LEVEL = 110;
-GO
-
-ALTER DATABASE AdventureWorks2012 SET PARTNER FAILOVER;
-GO
-
-
--- Uses AdventureWorks  
-  
-ALTER DATABASE ENCRYPTION KEY  
-REGENERATE WITH ALGORITHM = AES_256;  
-GO
-
-
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-ADD FILE
-(
-    NAME = Test1dat2,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat2.ndf',
-    SIZE = 5MB,
-    MAXSIZE = 100MB,
-    FILEGROWTH = 5MB
-);
-GO
-
-USE master
-GO
-ALTER DATABASE AdventureWorks2012
-ADD FILEGROUP Test1FG1;
-GO
-ALTER DATABASE AdventureWorks2012
-ADD FILE
-(
-    NAME = test1dat3,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat3.ndf',
-    SIZE = 5MB,
-    MAXSIZE = 100MB,
-    FILEGROWTH = 5MB
-),  
-(  
-    NAME = test1dat4,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\t1dat4.ndf',
-    SIZE = 5MB,
-    MAXSIZE = 100MB,
-    FILEGROWTH = 5MB
-)  
-TO FILEGROUP Test1FG1;
-GO
-
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-ADD LOG FILE
-(
-    NAME = test1log2,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\test2log.ldf',
-    SIZE = 5MB,
-    MAXSIZE = 100MB,
-    FILEGROWTH = 5MB
-),
-(
-    NAME = test1log3,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\test3log.ldf',
-    SIZE = 5MB,
-    MAXSIZE = 100MB,
-    FILEGROWTH = 5MB
-);
-GO
-
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-REMOVE FILE test1dat4;
-GO
-USE master;
-GO
-
-ALTER DATABASE AdventureWorks2012
-MODIFY FILE
-(NAME = test1dat3,
-SIZE = 200MB);
-GO
-
-USE AdventureWorks2012;
-GO
-
 DBCC SHRINKFILE (AdventureWorks2012_data, 100);
-GO
-
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-MODIFY FILE
-(NAME = test1dat3,
-SIZE = 200MB);
-GO
-
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-MODIFY FILE
-(
-    NAME = Test1dat2,
-    FILENAME = N'c:\t1dat2.ndf'
-);
-GO
-
-GO
-
-USE master;
-GO
-ALTER DATABASE tempdb
-MODIFY FILE (NAME = tempdev, FILENAME = 'E:\SQLData\tempdb.mdf');
-GO
-ALTER DATABASE tempdb
-MODIFY FILE (NAME = templog, FILENAME = 'E:\SQLData\templog.ldf');
-GO
 
 
-USE master;
-GO
-ALTER DATABASE AdventureWorks2012
-MODIFY FILEGROUP Test1FG1 DEFAULT;
-GO
-ALTER DATABASE AdventureWorks2012
-MODIFY FILEGROUP [PRIMARY] DEFAULT;
-GO
-
---Create and add a FILEGROUP that CONTAINS the FILESTREAM clause.
-ALTER DATABASE FileStreamPhotoDB
-ADD FILEGROUP TodaysPhotoShoot
-CONTAINS FILESTREAM;
-GO
-
---Add a file for storing database photos to FILEGROUP
-ALTER DATABASE FileStreamPhotoDB
-ADD FILE
-(
-  NAME= 'PhotoShoot1',
-  FILENAME = 'C:\Users\Administrator\Pictures\TodaysPhotoShoot.ndf'
-)
-TO FILEGROUP TodaysPhotoShoot;
-GO
-
---Create and add a FILEGROUP that CONTAINS the MEMORY_OPTIMIZED_DATA clause.
-ALTER DATABASE xtp_db
-ADD FILEGROUP xtp_fg
-CONTAINS MEMORY_OPTIMIZED_DATA;
-GO
-
---Add a file for storing memory optimized data to FILEGROUP
-ALTER DATABASE xtp_db
-ADD FILE
-(
-  NAME='xtp_mod',
-  FILENAME='d:\data\xtp_mod'
-)
-TO FILEGROUP xtp_fg;
-GO
-
---Generate ALTER DATABASE ... MODIFY FILEGROUP statements
---so that all read-write filegroups grow at the same time.
 SET NOCOUNT ON;
 
-DROP TABLE IF EXISTS #tmpdbs
-
-DROP TABLE IF EXISTS #tmpfgs
-
-
-DECLARE @dbid INT, @query VARCHAR(1000), @dbname sysname, @fgname sysname
-
-WHILE (SELECT COUNT(id) FROM #tmpdbs WHERE isdone = 0) > 0
-BEGIN
-  SELECT TOP 1 @dbname = [dbname], @dbid = [dbid] FROM #tmpdbs WHERE isdone = 0
-
-  SET @query = 'SELECT ' + CAST(@dbid AS NVARCHAR) + ', ''' + @dbname + ''', [name], 0 FROM [' + @dbname + '].sys.filegroups WHERE [type] = ''FG'' AND is_read_only = 0;'
-  INSERT INTO #tmpfgs
-  EXEC (@query)
-
-  UPDATE #tmpdbs
-  SET isdone = 1
-  WHERE [dbid] = @dbid
-END;
-
-IF (SELECT COUNT(ID) FROM #tmpfgs) > 0
-BEGIN
-  WHILE (SELECT COUNT(id) FROM #tmpfgs WHERE isdone = 0) > 0
-  BEGIN
-    SELECT TOP 1 @dbname = [dbname], @dbid = [dbid], @fgname = fgname FROM #tmpfgs WHERE isdone = 0
-
-    SET @query = 'ALTER DATABASE [' + @dbname + '] MODIFY FILEGROUP [' + @fgname + '] AUTOGROW_ALL_FILES;'
-
-    PRINT @query
-
-    UPDATE #tmpfgs
-    SET isdone = 1
-    WHERE [dbid] = @dbid AND fgname = @fgname
-  END
-END;
-GO
-
-ALTER DATABASE AccountsDb1 SET HADR AVAILABILITY GROUP = AccountsAG;
-
-GRANT ALTER ANY DATABASE SCOPED CONFIGURATION to [Joe] ;
-
-ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 1 ;
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = 4 ;
-
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY ;
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = ON ;
-
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY ;
-ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = OFF ;
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = OFF ;
-ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY ;
-ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = ON ;
-ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE;
-ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = OFF ;
-ALTER DATABASE SCOPED CONFIGURATION SET OPTIMIZE_FOR_AD_HOC_WORKLOADS = ON;
-ALTER DATABASE SCOPED CONFIGURATION SET ELEVATE_ONLINE = FAIL_UNSUPPORTED ;
-ALTER DATABASE SCOPED CONFIGURATION SET ELEVATE_RESUMABLE = WHEN_SUPPORTED ;
-ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE 0x06000500F443610F003B7CD12C02000001000000000000000000000000000000000000000000000000000000;
-ALTER DATABASE SCOPED CONFIGURATION
-SET PAUSED_RESUMABLE_INDEX_ABORT_DURATION_MINUTES = 60
-
-USE master;
-GO
-ALTER DATABASE [database_name]
-SET RECOVERY FULL PAGE_VERIFY CHECKSUM;
-GO
-USE master;
-GO
-ALTER DATABASE [database_name]
-SET SINGLE_USER
-WITH ROLLBACK IMMEDIATE;
-GO
-ALTER DATABASE [database_name]
-SET READ_ONLY
-GO
-ALTER DATABASE [database_name]
-SET MULTI_USER;
-GO
-USE [database_name];
-USE master;
-GO
-ALTER DATABASE [database_name]
-SET ALLOW_SNAPSHOT_ISOLATION ON;
-GO
--- Check the state of the snapshot_isolation_framework
--- in the database.
-
-ALTER DATABASE [database_name]
-SET CHANGE_TRACKING = ON
-(AUTO_CLEANUP = ON, CHANGE_RETENTION = 2 DAYS);
-
-ALTER DATABASE [database_name]
-SET CHANGE_TRACKING (CHANGE_RETENTION = 3 DAYS);
-
-ALTER DATABASE [database_name]
-SET CHANGE_TRACKING = OFF;
-
-ALTER DATABASE [database_name]
-SET QUERY_STORE = ON
-    (
-      OPERATION_MODE = READ_WRITE,
-      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),
-      DATA_FLUSH_INTERVAL_SECONDS = 900,
-      QUERY_CAPTURE_MODE = AUTO,
-      MAX_STORAGE_SIZE_MB = 1024,
-      INTERVAL_LENGTH_MINUTES = 60
-    );
-    
-    ALTER DATABASE [database_name]
-SET QUERY_STORE = ON
-    (
-      OPERATION_MODE = READ_WRITE,
-      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),
-      DATA_FLUSH_INTERVAL_SECONDS = 900,
-      MAX_STORAGE_SIZE_MB = 1024,
-      INTERVAL_LENGTH_MINUTES = 60,
-      SIZE_BASED_CLEANUP_MODE = AUTO,
-      MAX_PLANS_PER_QUERY = 200,
-      WAIT_STATS_CAPTURE_MODE = ON,
-    );
-    
-ALTER DATABASE [database_name]
-SET QUERY_STORE = ON
-    (
-      OPERATION_MODE = READ_WRITE,
-      CLEANUP_POLICY = ( STALE_QUERY_THRESHOLD_DAYS = 90 ),
-      DATA_FLUSH_INTERVAL_SECONDS = 900,
-      MAX_STORAGE_SIZE_MB = 1024,
-      INTERVAL_LENGTH_MINUTES = 60,
-      SIZE_BASED_CLEANUP_MODE = AUTO,
-      MAX_PLANS_PER_QUERY = 200,
-      WAIT_STATS_CAPTURE_MODE = ON,
-      QUERY_CAPTURE_MODE = CUSTOM,
-      QUERY_CAPTURE_POLICY = (
-        STALE_CAPTURE_POLICY_THRESHOLD = 24 HOURS,
-        EXECUTION_COUNT = 30,
-        TOTAL_COMPILE_CPU_TIME_MS = 1000,
-        TOTAL_EXECUTION_CPU_TIME_MS = 100
-      )
-    );
     
 -- Start the event session  
 ALTER EVENT SESSION test_session ON SERVER  
@@ -919,45 +134,6 @@ GO
 GO  
 --Returned 0, which means the catalog is not accent sensitive.
 
-CREATE FULLTEXT INDEX ON table_1 (column_name) KEY INDEX unique_key_index   
-   WITH SEARCH PROPERTY LIST=spl_1,   
-   CHANGE_TRACKING OFF, NO POPULATION;
-   
-ALTER FULLTEXT INDEX ON table_1 START FULL POPULATION;
-
-ALTER FULLTEXT INDEX ON table_1 SET SEARCH PROPERTY LIST spl_2;   
-
-CREATE FULLTEXT INDEX ON table_1 (column_name) KEY INDEX unique_key_index   
-   WITH SEARCH PROPERTY LIST=spl_1;
-   
-ALTER FULLTEXT INDEX ON table_1   
-   SET SEARCH PROPERTY LIST OFF WITH NO POPULATION;   
-
-ALTER FULLTEXT INDEX ON table_1 SET SEARCH PROPERTY LIST spl_1;
-
-USE AdventureWorks2012;  
-GO  
-ALTER FULLTEXT INDEX ON HumanResources.JobCandidate  
-   SET CHANGE_TRACKING MANUAL;  
-GO
-
-USE AdventureWorks2012;  
-GO  
-ALTER FULLTEXT INDEX ON Production.Document   
-   SET SEARCH PROPERTY LIST DocumentPropertyList;   
-GO
-
-
-USE AdventureWorks2012;  
-GO  
-ALTER FULLTEXT INDEX ON Production.Document   
-   SET SEARCH PROPERTY LIST OFF WITH NO POPULATION;   
-GO
-
-USE AdventureWorks2012;  
-GO  
-ALTER FULLTEXT INDEX ON HumanResources.JobCandidate   
-   START FULL POPULATION;  
 GO
 
 ALTER FULLTEXT STOPLIST CombinedFunctionWordList ADD 'en' LANGUAGE 'Spanish';  
@@ -969,11 +145,6 @@ ALTER FULLTEXT STOPLIST CombinedFunctionWordList ADD 'en' LANGUAGE 'French';
 -- Create a rowstore staging table  
   
 -- Insert 10 million rows into the staging table.   
-DECLARE @loop int  
-DECLARE @AccountDescription varchar(50)  
-DECLARE @AccountKey int  
-DECLARE @AccountType varchar(50)  
-DECLARE @AccountCode int  
   
 SELECT @loop = 0  
 BEGIN TRAN  
@@ -990,178 +161,9 @@ BEGIN TRAN
     END  
 COMMIT  
   
--- Create a table for the clustered columnstore index  
-  
-  
--- Convert the table to a clustered columnstore index named inxcci_cci_target;  
-CREATE CLUSTERED COLUMNSTORE INDEX idxcci_cci_target ON cci_target;
-
-
-
-
-
-ALTER INDEX idxcci_cci_target ON cci_target REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);
-
-ALTER INDEX idxcci_cci_target ON cci_target REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);
-
--- Uses AdventureWorksDW  
--- REORGANIZE all partitions  
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;  
-  
--- REORGANIZE a specific partition  
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE PARTITION = 0;
-
--- Uses AdventureWorksDW2016  
--- Move all OPEN and CLOSED delta rowgroups into the columnstore.  
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE WITH (COMPRESS_ALL_ROW_GROUPS = ON);  
-  
--- For a specific partition, move all OPEN AND CLOSED delta rowgroups into the columnstore  
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE PARTITION = 0 WITH (COMPRESS_ALL_ROW_GROUPS = ON);
-
--- Uses AdventureWorks  
--- Defragment by physically removing rows that have been logically deleted from the table, and merging rowgroups.  
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;
-
--- Uses AdventureWorksDW  
-  
-  
-CREATE CLUSTERED COLUMNSTORE INDEX cci_FactInternetSales2  
-ON dbo.FactInternetSales2;  
-  
   
 
-ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REBUILD;  
 
-ALTER INDEX cci_fact3   
-ON fact3  
-REBUILD PARTITION = 12;
-
-
---Prepare the example by creating a table with a clustered columnstore index.  
-  
-CREATE CLUSTERED INDEX cci_SimpleTable ON SimpleTable (ProductKey);  
-  
-CREATE CLUSTERED COLUMNSTORE INDEX cci_SimpleTable  
-ON SimpleTable  
-WITH (DROP_EXISTING = ON);  
-  
---Compress the table further by using archival compression.  
-ALTER INDEX cci_SimpleTable ON SimpleTable  
-REBUILD  
-WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE);  
-  
---Remove the archive compression and only use columnstore compression.  
-ALTER INDEX cci_SimpleTable ON SimpleTable  
-REBUILD  
-WITH (DATA_COMPRESSION = COLUMNSTORE);  
-GO
-
-ALTER INDEX PK_Employee_EmployeeID ON HumanResources.Employee REBUILD;
-
-
-ALTER INDEX ALL ON Production.Product  
-REBUILD WITH (FILLFACTOR = 80, SORT_IN_TEMPDB = ON, STATISTICS_NORECOMPUTE = ON);
-
-ALTER INDEX ALL ON Production.Product  
-REBUILD WITH   
-(  
-    FILLFACTOR = 80,   
-    SORT_IN_TEMPDB = ON,  
-    STATISTICS_NORECOMPUTE = ON,  
-    ONLINE = ON ( WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 4 MINUTES, ABORT_AFTER_WAIT = BLOCKERS ) ),   
-    DATA_COMPRESSION = ROW  
-);
-
-ALTER INDEX PK_ProductPhoto_ProductPhotoID ON Production.ProductPhoto REORGANIZE WITH (LOB_COMPACTION = ON);
-
-
-ALTER INDEX AK_SalesOrderHeader_SalesOrderNumber ON  
-    Sales.SalesOrderHeader  
-SET (  
-    STATISTICS_NORECOMPUTE = ON,  
-    IGNORE_DUP_KEY = ON,  
-    ALLOW_PAGE_LOCKS = ON  
-    ) ;  
-GO
-
-
-ALTER INDEX IX_Employee_ManagerID ON HumanResources.Employee DISABLE;
-
-ALTER INDEX PK_Department_DepartmentID ON HumanResources.Department DISABLE;
-
-Warning: Foreign key 'FK_EmployeeDepartmentHistory_Department_DepartmentID'  
-on table 'EmployeeDepartmentHistory' referencing table 'Department'  
-was disabled as a result of disabling the index 'PK_Department_DepartmentID'.
-
-ALTER INDEX PK_Department_DepartmentID ON HumanResources.Department REBUILD;
-
-ALTER TABLE HumanResources.EmployeeDepartmentHistory  
-CHECK CONSTRAINT FK_EmployeeDepartmentHistory_Department_DepartmentID;  
-GO
-
-
--- Verify the partitioned indexes.  
-GO  
---Rebuild only partition 5.  
-ALTER INDEX IX_TransactionHistory_TransactionDate  
-ON Production.TransactionHistory  
-REBUILD Partition = 5   
-   WITH (ONLINE = ON (WAIT_AT_LOW_PRIORITY (MAX_DURATION = 10 minutes, ABORT_AFTER_WAIT = SELF)));  
-GO
-
-ALTER INDEX IX_INDEX1   
-ON T1  
-REBUILD   
-WITH (DATA_COMPRESSION = PAGE);  
-GO
-
-ALTER INDEX test_idx on test_table REBUILD WITH (ONLINE=ON, MAXDOP=1, RESUMABLE=ON) ;
-
-
-ALTER INDEX test_idx on test_table REBUILD WITH (ONLINE=ON, RESUMABLE=ON, MAX_DURATION=240) ;
-
-
-ALTER INDEX test_idx on test_table PAUSE ;
-
-ALTER INDEX test_idx on test_table RESUME WITH (MAXDOP=4) ;
-
-ALTER INDEX test_idx on test_table  
-      RESUME WITH (MAXDOP=2, MAX_DURATION= 240 MINUTES, 
-      WAIT_AT_LOW_PRIORITY (MAX_DURATION=10, ABORT_AFTER_WAIT=BLOCKERS)) ;
-      
-      
-      
-ALTER INDEX test_idx on test_table ABORT ;      
-
-ALTER INDEX sxi_index  
-ON Tbl  
-FOR   
-(  
-    ADD pathm = '/a/b/m' as XQUERY 'node()' ,  
-    REMOVE pathabe  
-);
-
-ALTER INDEX sxi_index  
-ON Tbl  
-PAD_INDEX = ON;
-
-ALTER LOGIN Mary5 ENABLE;
-ALTER LOGIN Mary5 WITH PASSWORD = '<enterStrongPasswordHere>';
-ALTER LOGIN Mary5 WITH PASSWORD = '<enterStrongPasswordHere>' OLD_PASSWORD = '<oldWeakPasswordHere>';
-ALTER LOGIN Mary5 WITH NAME = John2;
-ALTER LOGIN John2 WITH CREDENTIAL = Custodian04;
-ALTER LOGIN Mary5
-ADD CREDENTIAL EKMProvider1;
-GO
-ALTER LOGIN [Mary5] WITH PASSWORD = '****' UNLOCK ;
-
-GO
-ALTER LOGIN [Mary5] WITH CHECK_POLICY = OFF;
-ALTER LOGIN [Mary5] WITH CHECK_POLICY = ON;
-GO
-ALTER LOGIN TestUser WITH
-PASSWORD = 0x01000CF35567C60BFB41EBDE4CF700A985A13D773D6B45B90900 HASHED ;
-GO
 
 USE AdventureWorks2012;
 ALTER MASTER KEY REGENERATE WITH ENCRYPTION BY PASSWORD = 'dsjdkflJ435907NnmM#sX003';
@@ -1200,53 +202,6 @@ MERGE RANGE (100);
 ALTER PARTITION SCHEME MyRangePS1  
 NEXT USED test5fg;
 
-IF OBJECT_ID ( 'Purchasing.uspVendorAllInfo', 'P' ) IS NOT NULL   
-    DROP PROCEDURE Purchasing.uspVendorAllInfo;  
-GO  
-CREATE PROCEDURE Purchasing.uspVendorAllInfo  
-WITH EXECUTE AS CALLER  
-AS  
-    SET NOCOUNT ON;  
-    SELECT v.Name AS Vendor, p.Name AS 'Product name',   
-      v.CreditRating AS 'Rating',   
-      v.ActiveFlag AS Availability  
-    FROM Purchasing.Vendor v   
-    INNER JOIN Purchasing.ProductVendor pv  
-      ON v.BusinessEntityID = pv.BusinessEntityID   
-    INNER JOIN Production.Product p  
-      ON pv.ProductID = p.ProductID   
-    ORDER BY v.Name ASC;  
-GO
-
-
-
-USE AdventureWorks2012;  
-GO  
-ALTER PROCEDURE Purchasing.uspVendorAllInfo  
-    @Product VARCHAR(25)   
-AS  
-    SET NOCOUNT ON;  
-    SELECT LEFT(v.Name, 25) AS Vendor, LEFT(p.Name, 25) AS 'Product name',   
-    'Rating' = CASE v.CreditRating   
-        WHEN 1 THEN 'Superior'  
-        WHEN 2 THEN 'Excellent'  
-        WHEN 3 THEN 'Above average'  
-        WHEN 4 THEN 'Average'  
-        WHEN 5 THEN 'Below average'  
-        ELSE 'No rating'  
-        END  
-    , Availability = CASE v.ActiveFlag  
-        WHEN 1 THEN 'Yes'  
-        ELSE 'No'  
-        END  
-    FROM Purchasing.Vendor AS v   
-    INNER JOIN Purchasing.ProductVendor AS pv  
-      ON v.BusinessEntityID = pv.BusinessEntityID   
-    INNER JOIN Production.Product AS p   
-      ON pv.ProductID = p.ProductID   
-    WHERE p.Name LIKE @Product  
-    ORDER BY v.Name ASC;  
-GO
 
 ALTER QUEUE ExpenseQueue WITH STATUS = OFF ;
 
@@ -1289,31 +244,6 @@ SET ANSI_NULLS ON;
 GO  
 SET QUOTED_IDENTIFIER ON;  
 GO  
-CREATE FUNCTION dbo.rgclassifier_v1() RETURNS sysname   
-WITH SCHEMABINDING  
-AS  
-BEGIN  
--- Declare the variable to hold the value returned in sysname.  
-    DECLARE @grp_name AS sysname  
--- If the user login is 'sa', map the connection to the groupAdmin  
--- workload group.   
-    IF (SUSER_NAME() = 'sa')  
-        SET @grp_name = 'groupAdmin'  
--- Use application information to map the connection to the groupAdhoc  
--- workload group.  
-    ELSE IF (APP_NAME() LIKE '%MANAGEMENT STUDIO%')  
-        OR (APP_NAME() LIKE '%QUERY ANALYZER%')  
-            SET @grp_name = 'groupAdhoc'  
--- If the application is for reporting, map the connection to  
--- the groupReports workload group.  
-    ELSE IF (APP_NAME() LIKE '%REPORT SERVER%')  
-        SET @grp_name = 'groupReports'  
--- If the connection does not map to any of the previous groups,  
--- put the connection into the default workload group.  
-    ELSE  
-        SET @grp_name = 'default'  
-    RETURN @grp_name  
-END;  
 GO  
 -- Register the classifier user-defined function and update the   
 -- the in-memory configuration.  
@@ -1351,11 +281,6 @@ ALTER RESOURCE GOVERNOR RECONFIGURE;
 GO
 
 
-ALTER ROLE buyers WITH NAME = purchasing;
-
-CREATE ROLE Sales;  
-ALTER ROLE Sales ADD MEMBER Barry;  
-ALTER ROLE Sales DROP MEMBER Barry;
 
 ALTER ROUTE ExpenseRoute  
    WITH   
@@ -1376,7 +301,6 @@ ALTER ROUTE ExpenseRoute
      
 USE AdventureWorks2012;  
 GO  
-ALTER SCHEMA HumanResources TRANSFER Person.Address;  
 GO
 
 USE AdventureWorks2012;  
@@ -1393,7 +317,6 @@ SELECT sys.types.name, sys.types.schema_id, sys.schemas.name
 GO  
   
 -- Change the type to the Person schema.  
-ALTER SCHEMA Person TRANSFER type::Production.TestType ;  
 GO  
   
 -- Check the type owner.  
@@ -1440,7 +363,6 @@ ALTER SECURITY POLICY rls.SecPol
     ALTER BLOCK PREDICATE rls.tenantAccessPredicate_v2(TenantId) 
     ON dbo.Sales AFTER INSERT;
     
-CREATE SCHEMA Test ;  
 GO  
   
 CREATE SEQUENCE Test.TestSeq  
@@ -1474,151 +396,10 @@ ALTER SEQUENCE Test.CountBy1
     CYCLE  
     CACHE 20 ;
     
-USE master  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit  
-WITH (STATE = OFF);  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit  
-MODIFY NAME = HIPAA_Audit_Old;  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit_Old  
-WITH (STATE = ON);  
-GO
-
-USE master  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit  
-WITH (STATE = OFF);  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit  
-TO FILE (FILEPATH ='\\SQLPROD_1\Audit\ ',  
-          MAXSIZE = 1000 MB,  
-          RESERVE_DISK_SPACE=OFF)  
-WITH (QUEUE_DELAY = 1000,  
-       ON_FAILURE = CONTINUE);  
-GO  
-ALTER SERVER AUDIT HIPAA_Audit  
-WITH (STATE = ON);  
-GO
-
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData]  
-WHERE user_defined_event_id = 27;  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);  
-GO                                  
-
-
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData]  
-WHERE user_defined_event_id = 27;  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);  
-GO
-
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData]  
-REMOVE WHERE;  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = ON);  
-GO
-
-ALTER SERVER AUDIT [FilterForSensitiveData] WITH (STATE = OFF)  
-GO  
-ALTER SERVER AUDIT [FilterForSensitiveData]  
-MODIFY NAME = AuditDataAccess;  
-GO  
-ALTER SERVER AUDIT [AuditDataAccess] WITH (STATE = ON);  
-GO
-
-ALTER SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification  
-FOR SERVER AUDIT HIPAA_Audit  
-    DROP (FAILED_LOGIN_GROUP),  
-    ADD (DATABASE_OBJECT_ACCESS_GROUP)  
-    WITH (STATE=ON);  
-GO
-
-ALTER SERVER CONFIGURATION   
-SET PROCESS AFFINITY CPU=0 TO 63, 128 TO 191;
-
-ALTER SERVER CONFIGURATION   
-SET PROCESS AFFINITY NUMANODE=0, 7;
-
-ALTER SERVER CONFIGURATION   
-SET PROCESS AFFINITY CPU=60 TO 200;
-
-ALTER SERVER CONFIGURATION SET PROCESS AFFINITY CPU=0;
-
-ALTER SERVER CONFIGURATION  
-SET PROCESS AFFINITY CPU=AUTO;
-
-ALTER SERVER CONFIGURATION SET DIAGNOSTICS LOG ON;
-
-ALTER SERVER CONFIGURATION SET DIAGNOSTICS LOG OFF;
-
-ALTER SERVER CONFIGURATION  
-SET DIAGNOSTICS LOG PATH = 'C:\logs';
-
-ALTER SERVER CONFIGURATION   
-SET DIAGNOSTICS LOG MAX_SIZE = 10 MB;
-
-ALTER SERVER CONFIGURATION   
-SET FAILOVER CLUSTER PROPERTY HealthCheckTimeout = 15000;
-
-ALTER SERVER CONFIGURATION SET HADR CLUSTER CONTEXT = 'clus01.xyz.com';
-
-ALTER SERVER CONFIGURATION   
-SET BUFFER POOL EXTENSION ON  
-    (FILENAME = 'F:\SSDCACHE\Example.BPE', SIZE = 50 GB);
-    
-    ALTER SERVER CONFIGURATION   
-SET BUFFER POOL EXTENSION OFF;  
-GO  
 EXEC sp_configure 'max server memory (MB)', 12000;  
 GO  
 RECONFIGURE;  
 GO  
-ALTER SERVER CONFIGURATION  
-SET BUFFER POOL EXTENSION ON  
-    (FILENAME = 'F:\SSDCACHE\Example.BPE', SIZE = 60 GB);  
-GO
-
-ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED ON;
-GO
-
-ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED TEMPDB_METADATA = ON;
-GO
-
-ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED TEMPDB_METADATA = ON (RESOURCE_POOL = 'pool_name');
-GO
-
-ALTER SERVER CONFIGURATION SET MEMORY_OPTIMIZED HYBRID_BUFFER_POOL = ON;
-GO
-
-CREATE SERVER ROLE Product ;  
-ALTER SERVER ROLE Product WITH NAME = Production ;  
-GO
-
-ALTER SERVER ROLE Production ADD MEMBER [adventure-works\roberto0] ;
-
-ALTER SERVER ROLE diskadmin ADD MEMBER Ted ;  
-GO
-
-ALTER SERVER ROLE Production DROP MEMBER [adventure-works\roberto0] ;
-
-ALTER SERVER ROLE Production DROP MEMBER Ted ;  
-GO
-
-GRANT ALTER ON SERVER ROLE::Production TO Ted ;  
-GO
-
-ALTER SERVER ROLE LargeRC ADD MEMBER Anna;
-
-ALTER SERVER ROLE LargeRC DROP MEMBER Anna;
 
 ALTER SERVICE [//Adventure-Works.com/Expenses]  
     ON QUEUE NewQueue ;
@@ -1647,334 +428,6 @@ ALTER SYMMETRIC KEY JanainaKey043
 CLOSE SYMMETRIC KEY JanainaKey043;             
 
 
-GO
-ALTER TABLE dbo.doc_exa ADD column_b VARCHAR(20) NULL ;
-GO
-
-	GO
-ALTER TABLE dbo.doc_exc ADD column_b VARCHAR(20) NULL
-    CONSTRAINT exb_unique UNIQUE ;
-GO
-EXEC sp_help doc_exc ;
-GO
-DROP TABLE dbo.doc_exc ;
-GO
-GO
-ALTER TABLE dbo.doc_exd WITH NOCHECK
-ADD CONSTRAINT exd_check CHECK (column_a > 1) ;
-GO
-EXEC sp_help doc_exd ;
-GO
-DROP TABLE dbo.doc_exd ;
-GO
-
-GO
-ALTER TABLE dbo.doc_exz
-  ADD CONSTRAINT col_b_def
-  DEFAULT 50 FOR column_b ;
-GO
-GO
-GO
-DROP TABLE dbo.doc_exz ;
-GO
-
-GO
-ALTER TABLE dbo.doc_exe ADD
-
--- Add a PRIMARY KEY identity column.
-column_b INT IDENTITY
-CONSTRAINT column_b_pk PRIMARY KEY,
-
--- Add a column that references another column in the same table.
-column_c INT NULL
-CONSTRAINT column_c_fk
-REFERENCES doc_exe(column_a),
-
--- Add a column with a constraint to enforce that
--- nonnull data is in a valid telephone number format.
-column_d VARCHAR(16) NULL
-CONSTRAINT column_d_chk
-CHECK
-(column_d LIKE '[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]' OR
-column_d LIKE
-'([0-9][0-9][0-9]) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'),
-
--- Add a nonnull column with a default.
-column_e DECIMAL(3,3)
-CONSTRAINT column_e_default
-DEFAULT .081 ;
-GO
-EXEC sp_help doc_exe ;
-GO
-DROP TABLE dbo.doc_exe ;
-GO
-
-GO
-GO
-ALTER TABLE dbo.doc_exf
-ADD AddDate smalldatetime NULL
-CONSTRAINT AddDateDflt
-DEFAULT GETDATE() WITH VALUES ;
-GO
-DROP TABLE dbo.doc_exf ;
-GO
-
-USE AdventureWorks;
-GO
-ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK
-ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)
-WITH (FILLFACTOR = 75, ONLINE = ON, PAD_INDEX = ON);
-GO
-
-USE AdventureWorks;
-GO
-ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK
-ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)
-WITH (DATA_COMPRESSION = PAGE);
-GO
-
-GO
-
-ALTER TABLE T1
-ADD C5 CHAR(100) SPARSE NULL ;
-GO
-
-ALTER TABLE T1
-ALTER COLUMN C4 ADD SPARSE ;
-GO
-
-ALTER TABLE T1
-ALTER COLUMN C4 DROP SPARSE ;
-GO
-
-GO
-
-ALTER TABLE T2
-ADD CS XML COLUMN_SET FOR ALL_SPARSE_COLUMNS ;
-GO
-
-ALTER TABLE T2
-ALTER COLUMN C2 ADD SPARSE ;
-GO
-
-ALTER TABLE T2
-ALTER COLUMN C3 ADD SPARSE ;
-GO
-
-ALTER TABLE Customers ADD
-    PromotionCode nvarchar(100)
-    ENCRYPTED WITH (COLUMN_ENCRYPTION_KEY = MyCEK,
-    ENCRYPTION_TYPE = RANDOMIZED,
-    ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256') ;
-    
-GO  
--- Remove a single column.
-ALTER TABLE dbo.doc_exb DROP COLUMN column_b ;
-GO
--- Remove multiple columns.
-ALTER TABLE dbo.doc_exb DROP COLUMN column_c, column_d;
-
-GO
-
--- Example 1. Remove a single constraint.
-ALTER TABLE dbo.doc_exc DROP my_constraint ;
-GO
-
-DROP TABLE dbo.doc_exc;
-GO
-
-GO
-
--- Example 2. Remove two constraints and one column
--- The keyword CONSTRAINT is optional. The keyword COLUMN is required.
-ALTER TABLE dbo.doc_exc
-DROP CONSTRAINT my_constraint, my_pk_constraint, COLUMN column_b ;
-GO
-
-ALTER TABLE Production.TransactionHistoryArchive
-DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID
-WITH (ONLINE = ON) ;
-GO
-
-GO
-
-ALTER TABLE Person.ContactBackup
-ADD CONSTRAINT FK_ContactBackup_Contact FOREIGN KEY (ContactID)
-    REFERENCES Person.Person (BusinessEntityID) ;
-GO
-
-ALTER TABLE Person.ContactBackup
-DROP CONSTRAINT FK_ContactBackup_Contact ;
-GO
-
-DROP TABLE Person.ContactBackup ;
-
-GO
-GO
-ALTER TABLE dbo.doc_exy ALTER COLUMN column_a DECIMAL (5, 2) ;
-GO
-DROP TABLE dbo.doc_exy ;
-GO
-
--- Create a two-column table with a unique index on the varchar column.
-GO
-GO
--- Verify the current column size.
-GO
--- Increase the size of the varchar column.
-ALTER TABLE dbo.doc_exy ALTER COLUMN col_a varchar(25) ;
-GO
--- Increase the scale and precision of the decimal column.
-ALTER TABLE dbo.doc_exy ALTER COLUMN col_b decimal (10,4) ;
-GO
-GO
--- Verify the current column size.
-
-GO
-
-ALTER TABLE T3
-ALTER COLUMN C2 varchar(50) COLLATE Latin1_General_BIN ;
-GO
-
-GO
-ALTER TABLE T3
-ALTER COLUMN C2 VARCHAR(50) ENCRYPTED WITH (COLUMN_ENCRYPTION_KEY = [CEK1], ENCRYPTION_TYPE = Randomized, ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256') NULL;
-GO
-
-ALTER TABLE T1
-REBUILD WITH (DATA_COMPRESSION = PAGE) ;
-
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION =NONE) ;
-GO
-
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = ALL
-WITH (DATA_COMPRESSION = PAGE ON PARTITIONS(1)) ;
-
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE) ;
-GO
-
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE) ;
-GO
-
-GO
-GO
-ALTER TABLE PartitionTable SWITCH PARTITION 2 TO NonPartitionTable ;
-GO
-
-ALTER TABLE dbo.T1 SET (LOCK_ESCALATION = AUTO) ;
-GO
-
-USE AdventureWorks;
-ALTER TABLE Person.Person
-ENABLE CHANGE_TRACKING ;
-
-USE AdventureWorks;
-GO
-ALTER TABLE Person.Person
-ENABLE CHANGE_TRACKING
-WITH (TRACK_COLUMNS_UPDATED = ON)
-
-
-USE AdventureWorks;
-GO
-ALTER TABLE Person.Person
-DISABLE CHANGE_TRACKING ;
-
-
--- Disable the constraint and try again.
-ALTER TABLE dbo.cnst_example NOCHECK CONSTRAINT salary_cap;
-
--- Re-enable the constraint and try another insert; this will fail.
-ALTER TABLE dbo.cnst_example CHECK CONSTRAINT salary_cap;
-
-GO
--- Create the trigger.
-CREATE TRIGGER dbo.trig1 ON dbo.trig_example FOR INSERT
-AS
-IF (SELECT COUNT(*) FROM INSERTED
-WHERE salary > 100000) > 0
-BEGIN
-    print 'TRIG1 Error: you attempted to insert a salary > $100,000'
-    ROLLBACK TRANSACTION
-END ;
-GO
--- Disable the trigger.
-ALTER TABLE dbo.trig_example DISABLE TRIGGER trig1 ;
-GO
--- Re-enable the trigger.
-ALTER TABLE dbo.trig_example ENABLE TRIGGER trig1 ;
-GO
-
-ALTER TABLE T1
-REBUILD WITH
-(
-    PAD_INDEX = ON,
-    ONLINE = ON ( WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 4 MINUTES,
-                                         ABORT_AFTER_WAIT = BLOCKERS ) )
-) ;
-
-GO
-GO
-ALTER TABLE dbo.doc_exy
-    ALTER COLUMN column_a DECIMAL (5, 2) WITH (ONLINE = ON) ;
-GO
-sp_help doc_exy;
-DROP TABLE dbo.doc_exy ;
-GO
-
---Alter non-temporal table to define periods for system versioning
-ALTER TABLE InsurancePolicy
-ADD PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime),
-SysStartTime datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
-    DEFAULT SYSUTCDATETIME(),
-SysEndTime datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL
-    DEFAULT CONVERT(DATETIME2, '9999-12-31 23:59:59.99999999') ;
-
---Enable system versioning with 1 year retention for historical data
-ALTER TABLE InsurancePolicy
-SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 1 YEAR)) ;
-
--- Adjust the schema for current and history table
--- Change data types for existing period columns
-ALTER TABLE ProjectTask ALTER COLUMN [Changed Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTask ALTER COLUMN [Revised Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTaskHistory ALTER COLUMN [Changed Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTaskHistory ALTER COLUMN [Revised Date] datetime2 NOT NULL ;
-
--- Add SYSTEM_TIME period and set system versioning with linking two existing tables
--- (a certain set of data checks happen in the background)
-ALTER TABLE ProjectTask
-ADD PERIOD FOR SYSTEM_TIME ([Changed Date], [Revised Date])
-
-ALTER TABLE ProjectTask
-SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.ProjectTaskHistory, DATA_CONSISTENCY_CHECK = ON))
-
-BEGIN TRAN
-/* Takes schema lock on both tables */
-ALTER TABLE Department
-    SET (SYSTEM_VERSIONING = OFF) ;
-/* expand table schema for temporal table */
-ALTER TABLE Department  
-     ADD Col5 int NOT NULL DEFAULT 0 ;
-/* Expand table schema for history table */
-ALTER TABLE DepartmentHistory
-    ADD Col5 int NOT NULL DEFAULT 0 ;
-/* Re-establish versioning again*/
-ALTER TABLE Department
-    SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE=dbo.DepartmentHistory,
-                                 DATA_CONSISTENCY_CHECK = OFF)) ;
-COMMIT
-
-ALTER TABLE Department
-    SET (SYSTEM_VERSIONING = OFF) ;
-ALTER TABLE Department
-DROP PERIOD FOR SYSTEM_TIME ;
-DROP TABLE DepartmentHistory ;
-
 --For rowstore tables  
 REBUILD WITH   
 (  
@@ -1991,53 +444,6 @@ DATA_COMPRESSION = COLUMNSTORE_ARCHIVE ON PARTITIONS (2, 4, 6 TO 8)
 )
 
 
-CREATE TRIGGER Sales.bonus_reminder  
-ON Sales.SalesPersonQuotaHistory  
-WITH ENCRYPTION  
-AFTER INSERT, UPDATE   
-AS RAISERROR ('Notify Compensation', 16, 10);  
-GO  
-
--- Now, change the trigger.  
-ALTER TRIGGER Sales.bonus_reminder  
-ON Sales.SalesPersonQuotaHistory  
-AFTER INSERT  
-AS RAISERROR ('Notify Compensation', 16, 10);  
-GO
-
-ALTER USER Mary5 WITH NAME = Mary51;
-GO
-
-
-
-ALTER USER Mary51 WITH DEFAULT_SCHEMA = Purchasing;
-GO
-
-
-
-ALTER USER Philip
-WITH NAME = Philipe
-, DEFAULT_SCHEMA = Development
-, PASSWORD = 'W1r77TT98%ab@#' OLD_PASSWORD = 'New Devel0per'
-, DEFAULT_LANGUAGE= French ;
-GO
-
-USE AdventureWorks2012 ;  
-GO  
-CREATE VIEW HumanResources.EmployeeHireDate  
-AS  
-SELECT p.FirstName, p.LastName, e.HireDate  
-FROM HumanResources.Employee AS e JOIN Person.Person AS  p  
-ON e.BusinessEntityID = p.BusinessEntityID ;  
-GO
-
-ALTER VIEW HumanResources.EmployeeHireDate  
-AS  
-SELECT p.FirstName, p.LastName, e.HireDate  
-FROM HumanResources.Employee AS e JOIN Person.Person AS p  
-ON e.BusinessEntityID = p.BusinessEntityID  
-WHERE HireDate < CONVERT(DATETIME,'20020101',101) ;  
-GO    
 
 ALTER WORKLOAD GROUP "default"  
 WITH (IMPORTANCE = LOW);  
@@ -2109,18 +515,8 @@ GO
   
 -- Use it. Create a typed xml variable. Note the collection name   
 -- that is specified.  
-DECLARE @x xml (ManuInstructionsSchemaCollection);  
-GO  
---Or create a typed xml column.  
-GO  
--- Clean up.  
-DROP TABLE T;  
-GO  
+
 DROP XML SCHEMA COLLECTION ManuInstructionsSchemaCollection;  
-Go  
-USE master;  
-GO  
-DROP DATABASE SampleDB;
 
 
 
@@ -2185,8 +581,6 @@ GO
 -- to use the full recovery model.
 USE master;
 GO
-ALTER DATABASE AdventureWorks2012
-    SET RECOVERY FULL;
 GO
 -- Create AdvWorksData and AdvWorksLog logical backup devices.
 USE master
@@ -2422,7 +816,6 @@ GO
 
 USE AdventureWorks2012;  
 GO  
-DECLARE @SamplesPath nvarchar(1024)  
 -- You may have to modify the value of the this variable if you have  
 --installed the sample some location other than the default location.  
   
@@ -2430,8 +823,6 @@ SELECT @SamplesPath = REPLACE(physical_name, 'Microsoft SQL Server\MSSQL13.MSSQL
      FROM master.sys.database_files   
      WHERE name = 'master';  
   
-CREATE ASSEMBLY StringUtilities FROM @SamplesPath + 'StringUtilities\CS\StringUtilities\bin\debug\StringUtilities.dll'  
-WITH PERMISSION_SET=SAFE;  
 GO  
   
 CREATE AGGREGATE Concatenate(@input nvarchar(4000))  
@@ -2439,36 +830,6 @@ RETURNS nvarchar(4000)
 EXTERNAL NAME [StringUtilities].[Microsoft.Samples.SqlServer.Concatenate];  
 GO
 
-CREATE APPLICATION ROLE weekly_receipts   
-    WITH PASSWORD = '987G^bv876sPY)Y5m23'   
-    , DEFAULT_SCHEMA = Sales;  
-GO
-
-CREATE ASSEMBLY HelloWorld   
-FROM '<system_drive>:\Program Files\Microsoft SQL Server\100\Samples\HelloWorld\CS\HelloWorld\bin\debug\HelloWorld.dll'  
-WITH PERMISSION_SET = SAFE;
-
-CREATE ASSEMBLY HelloWorld  
-    FROM 0x4D5A900000000000  
-WITH PERMISSION_SET = SAFE;
-
-CREATE ASYMMETRIC KEY PacificSales09   
-    WITH ALGORITHM = RSA_2048   
-    ENCRYPTION BY PASSWORD = '<enterStrongPasswordHere>';   
-GO
-
-CREATE ASYMMETRIC KEY PacificSales19  
-    AUTHORIZATION Christina  
-    FROM FILE = 'c:\PacSales\Managers\ChristinaCerts.tmp';  
-GO
-
-CREATE ASYMMETRIC KEY EKM_askey1   
-    FROM PROVIDER EKM_Provider1  
-    WITH   
-        ALGORITHM = RSA_2048,   
-        CREATION_DISPOSITION = CREATE_NEW  
-        , PROVIDER_KEY_NAME  = 'key10_user1' ;  
-GO
 
 CREATE AVAILABILITY GROUP MyAg   
    WITH (  
@@ -2634,126 +995,12 @@ CREATE CERTIFICATE Shipping19
     FROM EXECUTABLE FILE = 'c:\Shipping\Certs\Shipping19.dll';  
 GO
 
-CREATE ASSEMBLY Shipping19   
-    FROM ' c:\Shipping\Certs\Shipping19.dll'   
-    WITH PERMISSION_SET = SAFE;  
 GO  
 CREATE CERTIFICATE Shipping19 FROM ASSEMBLY Shipping19;  
 GO
 
 CREATE CERTIFICATE Shipping04   
    WITH SUBJECT = 'Sammamish Shipping Records';  
-GO
-
-GO  
-CREATE CLUSTERED COLUMNSTORE INDEX cci_Simple ON SimpleTable;  
-GO
-
-GO  
-CREATE CLUSTERED INDEX cl_simple ON SimpleTable (ProductKey);  
-GO  
-CREATE CLUSTERED COLUMNSTORE INDEX cl_simple ON SimpleTable  
-WITH (DROP_EXISTING = ON);  
-GO
-
---Create the table for use with this example.  
-GO  
-  
---Create two nonclustered indexes for use with this example  
-CREATE INDEX nc1_simple ON SimpleTable (OrderDateKey);  
-CREATE INDEX nc2_simple ON SimpleTable (DueDateKey);   
-GO  
-  
---SQL Server 2012 and SQL Server 2014: you need to drop the nonclustered indexes  
---in order to create the columnstore index.   
-  
-DROP INDEX SimpleTable.nc1_simple;  
-DROP INDEX SimpleTable.nc2_simple;  
-  
---Convert the rowstore table to a columnstore index.  
-CREATE CLUSTERED COLUMNSTORE INDEX cci_simple ON SimpleTable;   
-GO
-
---Create a rowstore table with a clustered index and a nonclustered index.  
-
---Add a nonclustered index.  
-CREATE INDEX my_index ON MyFactTable ( ProductKey, OrderDateKey );
-
---Drop all nonclustered indexes  
-DROP INDEX my_index ON MyFactTable;
-
---Process for dropping a clustered index.  
---First, look up the name of the clustered rowstore index.  
---Clustered rowstore indexes always use the DEFAULT name 'ClusteredIndex_<GUID>'.  
-
---Drop the clustered rowstore index.  
-DROP INDEX ClusteredIndex_d473567f7ea04d7aafcac5364c241e09 ON MyDimTable;
-
---Option 1: Convert to columnstore and name the new clustered columnstore index MyCCI.  
-CREATE CLUSTERED COLUMNSTORE INDEX MyCCI ON MyFactTable;  
-
---Option 2: Convert to columnstore and use the rowstore clustered   
---index name for the columnstore clustered index name.  
---First, look up the name of the clustered rowstore index.  
-
---Second, create the clustered columnstore index and   
---Replace ClusteredIndex_d473567f7ea04d7aafcac5364c241e09  
---with the name of your clustered index.  
-CREATE CLUSTERED COLUMNSTORE INDEX   
-ClusteredIndex_d473567f7ea04d7aafcac5364c241e09  
- ON MyFactTable  
-WITH DROP_EXISTING = ON;
-
-CREATE CLUSTERED INDEX ci_MyTable   
-ON MyFactTable  
-WITH ( DROP EXISTING = ON );
-
-DROP INDEX MyCCI   
-ON MyFactTable;
-
---Determine the Clustered Columnstore Index name of MyDimTable.  
-  
---Rebuild the entire index by using CREATE CLUSTERED INDEX.  
-CREATE CLUSTERED COLUMNSTORE INDEX my_CCI   
-ON MyFactTable  
-WITH ( DROP_EXISTING = ON );  
-  
---Rebuild the entire index by using ALTER INDEX and the REBUILD option.  
-ALTER INDEX my_CCI  
-ON MyFactTable  
-REBUILD PARTITION = ALL  
-WITH ( DROP_EXISTING = ON );
-
-GO  
-CREATE CLUSTERED INDEX cl_simple ON SimpleTable (ProductKey);  
-GO  
-CREATE NONCLUSTERED COLUMNSTORE INDEX csindx_simple  
-ON SimpleTable  
-(OrderDateKey, DueDateKey, ShipDateKey);  
-GO
-
-CREATE NONCLUSTERED COLUMNSTORE INDEX csindx_simple  
-ON SimpleTable  
-(OrderDateKey, DueDateKey, ShipDateKey)  
-WITH (DROP_EXISTING =  ON,   
-    MAXDOP = 2)  
-ON "default"  
-GO
-IF EXISTS (SELECT name FROM sys.indexes  
-    WHERE name = N'FIBillOfMaterialsWithEndDate'   
-    AND object_id = OBJECT_ID(N'Production.BillOfMaterials'))  
-DROP INDEX FIBillOfMaterialsWithEndDate  
-    ON Production.BillOfMaterials;  
-GO  
-CREATE NONCLUSTERED COLUMNSTORE INDEX "FIBillOfMaterialsWithEndDate"  
-    ON Production.BillOfMaterials (ComponentID, StartDate)  
-    WHERE EndDate IS NOT NULL;
-    
-
-
-ALTER INDEX mycolumnstoreindex ON mytable DISABLE;  
-
-ALTER INDEX mycolumnstoreindex on mytable REBUILD                                             
 
 CREATE COLUMN ENCRYPTION KEY MyCEK   
 WITH VALUES  
@@ -2844,9 +1091,6 @@ CREATE CREDENTIAL CredentialForEKM
     FOR CRYPTOGRAPHIC PROVIDER MyEKMProvider;
 GO
 
-/* Modify the login to assign the cryptographic provider credential */
-ALTER LOGIN User1
-ADD CREDENTIAL CredentialForEKM;
 
 USE master;
 CREATE CREDENTIAL Azure_EKM_TDE_cred
@@ -2854,9 +1098,6 @@ CREATE CREDENTIAL Azure_EKM_TDE_cred
     SECRET = 'EF5C8E094D2A4A769998D93440D8115DSECRET_DBEngine'
     FOR CRYPTOGRAPHIC PROVIDER AzureKeyVault_EKM_Prov ;
     
-DECLARE @AuthClientId uniqueidentifier = 'EF5C8E09-4D2A-4A76-9998-D93440D8115D';
-DECLARE @AuthClientSecret varchar(200) = 'SECRET_DBEngine';
-DECLARE @pwd varchar(max) = REPLACE(CONVERT(varchar(36), @AuthClientId) , '-', '') + @AuthClientSecret;
 
 EXEC ('CREATE CREDENTIAL Azure_EKM_TDE_cred
     WITH IDENTITY = 'ContosoKeyVault', SECRET = ''' + @PWD + '''
@@ -2880,14 +1121,7 @@ CREATE CRYPTOGRAPHIC PROVIDER SecurityProvider
     
     USE master;
 GO
-IF DB_ID (N'mytest') IS NOT NULL
-DROP DATABASE mytest;
-GO
-
-IF DB_ID (N'MyOptionsTest') IS NOT NULL
-DROP DATABASE MyOptionsTest;
 -- Get the SQL Server data path.
-DECLARE @data_path nvarchar(256);
 SET @data_path = (SELECT SUBSTRING(physical_name, 1, CHARINDEX(N'master.mdf', LOWER(physical_name)) - 1)
       FROM master.sys.master_files
       WHERE database_id = 1 AND file_id = 1);
@@ -2931,61 +1165,7 @@ LOG ON
 );
 GO
 
-USE master;
-GO
-
-GO
-
-ALTER DATABASE [BlobStore1]
-ADD FILE
-(
-    NAME = N'FS3',
-    FILENAME = N'C:\BlobStore\FS3',
-    MAXSIZE = 100MB
-)
-TO FILEGROUP [FS];
-GO
-
-USE master ;  
-GO  
--- Create the server audit.  
-CREATE SERVER AUDIT Payrole_Security_Audit  
-    TO FILE ( FILEPATH =   
-'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA' ) ;  
-GO  
--- Enable the server audit.  
-ALTER SERVER AUDIT Payrole_Security_Audit   
-WITH (STATE = ON) ;  
-GO  
 -- Move to the target database.  
-USE AdventureWorks2012 ;  
-GO  
--- Create the database audit specification.  
-GO
-
-USE master ;  
-GO  
--- Create the server audit.
--- Change the path to a path that the SQLServer Service has access to. 
-CREATE SERVER AUDIT DataModification_Security_Audit  
-    TO FILE ( FILEPATH = 
-'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA' ) ; 
-GO  
--- Enable the server audit.  
-ALTER SERVER AUDIT DataModification_Security_Audit   
-WITH (STATE = ON) ;  
-GO  
--- Move to the target database.  
-USE AdventureWorks2012 ;  
-GO  
-CREATE ROLE SalesUK
-GO
--- Create the database audit specification.  
-GO
-
-USE AdventureWorks2012;  
-GO  
-GO
 
 -- Create a db master key if one does not already exist, using your own password.
 CREATE MASTER KEY ENCRYPTION BY PASSWORD='<EnterStrongPasswordHere>';
@@ -3027,9 +1207,6 @@ AS TCP (
 )
 FOR TSQL ();
 
-GRANT CONNECT ON ENDPOINT::[TSQL Default TCP] TO public; -- Keep existing public permission on default endpoint for demo purpose
-GRANT CONNECT ON ENDPOINT::ipv4_endpoint_special
-TO login_name;
 
 CREATE ENDPOINT ipv6_endpoint_special
 STATE = STARTED
@@ -3038,8 +1215,6 @@ AS TCP (
 )
 FOR TSQL ();
 
-GRANT CONNECT ON ENDPOINT::[TSQL Default TCP] TO public;
-GRANT CONNECT ON ENDPOINT::ipv6_endpoint_special
 
 
 --Create a queue to receive messages.  
@@ -3168,8 +1343,6 @@ FROM
 (CONTENT = N'<path-to-tar.gz>', FILE_NAME = 'javaextension.so', PLATFORM = LINUX);
 GO
 
-  GRANT EXECUTE EXTERNAL SCRIPT ON EXTERNAL LANGUAGE ::Java 
-TO mylogin;
 
 CREATE EXTERNAL LIBRARY customPackage
 FROM (CONTENT = 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\customPackage.zip') WITH (LANGUAGE = 'R');
@@ -3283,17 +1456,6 @@ WITH (
     FORMAT_OPTIONS (FIELD_TERMINATOR ='|')
 );
 
-CREATE EXTERNAL TABLE ClickStream (
-    url varchar(50),
-    event_date date,
-    user_IP varchar(50)
-)
-WITH (
-        LOCATION='/webdata/employee.tbl',
-        DATA_SOURCE = mydatasource,
-        FILE_FORMAT = myfileformat
-    )
-;
 
 CREATE EXTERNAL DATA SOURCE mydatasource_rc
 WITH (
@@ -3308,17 +1470,6 @@ WITH (
 )
 ;
 
-CREATE EXTERNAL TABLE ClickStream_rc (
-    url varchar(50),
-    event_date date,
-    user_ip varchar(50)
-)
-WITH (
-        LOCATION='/webdata/employee_rc.tbl',
-        DATA_SOURCE = mydatasource_rc,
-        FILE_FORMAT = myfileformat_rc
-    )
-;
 
 
 CREATE EXTERNAL DATA SOURCE mydatasource_orc
@@ -3333,37 +1484,6 @@ WITH (
     COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
 )
 ;
-
-CREATE EXTERNAL TABLE ClickStream_orc (
-    url varchar(50),
-    event_date date,
-    user_ip varchar(50)
-)
-WITH (
-        LOCATION='/webdata/',
-        DATA_SOURCE = mydatasource_orc,
-        FILE_FORMAT = myfileformat_orc
-    )
-;
-
-
-
-CREATE EXTERNAL TABLE [dbo].[all_dm_exec_requests]([session_id] smallint NOT NULL,
-  [request_id] int NOT NULL,
-  [start_time] datetime NOT NULL,
-  [status] nvarchar(30) NOT NULL,
-  [command] nvarchar(32) NOT NULL,
-  [sql_handle] varbinary(64),
-  [statement_start_offset] int,
-  [statement_end_offset] int,
-  [cpu_time] int NOT NULL)
-WITH
-(
-  DATA_SOURCE = MyExtSrc,
-  SCHEMA_NAME = 'sys',
-  OBJECT_NAME = 'dm_exec_requests',
-  DISTRIBUTION=ROUND_ROBIN
-);
 
 -- Create a Master Key
       CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo';
@@ -3386,26 +1506,11 @@ WITH
     );
     GO
 
-    CREATE SCHEMA sqlserver;
     GO
 
      /* LOCATION: sql server table/view in 'database_name.schema_name.object_name' format
      * DATA_SOURCE: the external data source, created above.
      */
-     CREATE EXTERNAL TABLE sqlserver.customer(
-     C_CUSTKEY INT NOT NULL,
-     C_NAME VARCHAR(25) NOT NULL,
-     C_ADDRESS VARCHAR(40) NOT NULL,
-     C_NATIONKEY INT NOT NULL,
-     C_PHONE CHAR(15) NOT NULL,
-     C_ACCTBAL DECIMAL(15,2) NOT NULL,
-     C_MKTSEGMENT CHAR(10) NOT NULL,
-     C_COMMENT VARCHAR(117) NOT NULL
-      )
-      WITH (
-      LOCATION='tpch_10.dbo.customer',
-      DATA_SOURCE=SqlServerInstance
-     );
      
 -- Create a Master Key
    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
@@ -3431,22 +1536,6 @@ WITH
    * LOCATION: Oracle table/view in '.<schema_name>.<object_name>' format
    * DATA_SOURCE: the external data source, created above.
    */
-   CREATE EXTERNAL TABLE customers(
-   [O_ORDERKEY] DECIMAL(38) NOT NULL,
-   [O_CUSTKEY] DECIMAL(38) NOT NULL,
-   [O_ORDERSTATUS] CHAR COLLATE Latin1_General_BIN NOT NULL,
-   [O_TOTALPRICE] DECIMAL(15,2) NOT NULL,
-   [O_ORDERDATE] DATETIME2(0) NOT NULL,
-   [O_ORDERPRIORITY] CHAR(15) COLLATE Latin1_General_BIN NOT NULL,
-   [O_CLERK] CHAR(15) COLLATE Latin1_General_BIN NOT NULL,
-   [O_SHIPPRIORITY] DECIMAL(38) NOT NULL,
-   [O_COMMENT] VARCHAR(79) COLLATE Latin1_General_BIN NOT NULL
-   )
-   WITH (
-    LOCATION='.mySchema.customer',
-    DATA_SOURCE= external_data_source_name
-   );
-   
 -- Create a Master Key
    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
 
@@ -3472,28 +1561,6 @@ WITH
      /* LOCATION: Teradata table/view in '<database_name>.<object_name>' format
       * DATA_SOURCE: the external data source, created above.
       */
-     CREATE EXTERNAL TABLE customer(
-      L_ORDERKEY INT NOT NULL,
-      L_PARTKEY INT NOT NULL,
-     L_SUPPKEY INT NOT NULL,
-     L_LINENUMBER INT NOT NULL,
-     L_QUANTITY DECIMAL(15,2) NOT NULL,
-     L_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,
-     L_DISCOUNT DECIMAL(15,2) NOT NULL,
-     L_TAX DECIMAL(15,2) NOT NULL,
-     L_RETURNFLAG CHAR NOT NULL,
-     L_LINESTATUS CHAR NOT NULL,
-     L_SHIPDATE DATE NOT NULL,
-     L_COMMITDATE DATE NOT NULL,
-     L_RECEIPTDATE DATE NOT NULL,
-     L_SHIPINSTRUCT CHAR(25) NOT NULL,
-     L_SHIPMODE CHAR(10) NOT NULL,
-     L_COMMENT VARCHAR(44) NOT NULL
-     )
-     WITH (
-     LOCATION='customer',
-     DATA_SOURCE= external_data_source_name
-     );
      
 -- Create a Master Key
    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
@@ -3519,61 +1586,14 @@ WITH
      /* LOCATION: MongoDB table/view in '<database_name>.<schema_name>.<object_name>' format
      * DATA_SOURCE: the external data source, created above.
      */
-     CREATE EXTERNAL TABLE customers(
-     [O_ORDERKEY] DECIMAL(38) NOT NULL,
-     [O_CUSTKEY] DECIMAL(38) NOT NULL,
-     [O_ORDERSTATUS] CHAR COLLATE Latin1_General_BIN NOT NULL,
-     [O_TOTALPRICE] DECIMAL(15,2) NOT NULL,
-     [O_ORDERDATE] DATETIME2(0) NOT NULL,
-     [O_COMMENT] VARCHAR(79) COLLATE Latin1_General_BIN NOT NULL
-     )
-     WITH (
-     LOCATION='customer',
-     DATA_SOURCE= external_data_source_name
-     );
      
 USE AdventureWorks2012;  
 GO  
 CREATE FULLTEXT CATALOG ftCatalog AS DEFAULT;  
 GO  
-CREATE FULLTEXT INDEX ON HumanResources.JobCandidate(Resume) KEY INDEX PK_JobCandidate_JobCandidateID;  
-GO
-
-CREATE UNIQUE INDEX ui_ukJobCand ON HumanResources.JobCandidate(JobCandidateID);  
 CREATE FULLTEXT CATALOG ft AS DEFAULT;  
-CREATE FULLTEXT INDEX ON HumanResources.JobCandidate(Resume)   
-   KEY INDEX ui_ukJobCand   
-   WITH STOPLIST = SYSTEM;  
-GO
 
 CREATE FULLTEXT CATALOG production_catalog;  
-GO  
-CREATE FULLTEXT INDEX ON Production.ProductReview  
- (   
-  ReviewerName  
-     Language 1033,  
-  EmailAddress  
-     Language 1033,  
-  Comments   
-     Language 1033       
- )   
-  KEY INDEX PK_ProductReview_ProductReviewID   
-      ON production_catalog;   
-GO
-
-CREATE FULLTEXT INDEX ON Production.Document  
-  (   
-  Title  
-      Language 1033,   
-  DocumentSummary  
-      Language 1033,   
-  Document   
-      TYPE COLUMN FileExtension  
-      Language 1033   
-  )  
-  KEY INDEX PK_Document_DocumentID  
-          WITH STOPLIST = SYSTEM, SEARCH PROPERTY LIST = DocumentPropertyList, CHANGE_TRACKING OFF, NO POPULATION;  
-   GO
    
 CREATE FULLTEXT STOPLIST myStoplist;  
 GO
@@ -3584,276 +1604,22 @@ GO
 CREATE FULLTEXT STOPLIST myStoplist3 FROM SYSTEM STOPLIST;  
 GO
 
-CREATE FUNCTION dbo.ISOweek (@DATE datetime)
-RETURNS int
-WITH EXECUTE AS CALLER
-AS
-BEGIN
-    DECLARE @ISOweek int;
-    SET @ISOweek= DATEPART(wk,@DATE)+1
-        -DATEPART(wk,CAST(DATEPART(yy,@DATE) as CHAR(4))+'0104');
---Special cases: Jan 1-3 may belong to the previous year
-    IF (@ISOweek=0)
-        SET @ISOweek=dbo.ISOweek(CAST(DATEPART(yy,@DATE)-1
-            AS CHAR(4))+'12'+ CAST(24+DATEPART(DAY,@DATE) AS CHAR(2)))+1;
---Special case: Dec 29-31 may belong to the next year
-    IF ((DATEPART(mm,@DATE)=12) AND
-        ((DATEPART(dd,@DATE)-DATEPART(dw,@DATE))>= 28))
-    SET @ISOweek=1;
-    RETURN(@ISOweek);
-END;
 GO
 SET DATEFIRST 1;
 
-CREATE FUNCTION Sales.ufn_SalesByStore (@storeid int)
-RETURNS TABLE
-AS
-RETURN
-(
-    SELECT P.ProductID, P.Name, SUM(SD.LineTotal) AS 'Total'
-    FROM Production.Product AS P
-    JOIN Sales.SalesOrderDetail AS SD ON SD.ProductID = P.ProductID
-    JOIN Sales.SalesOrderHeader AS SH ON SH.SalesOrderID = SD.SalesOrderID
-    JOIN Sales.Customer AS C ON SH.CustomerID = C.CustomerID
-    WHERE C.StoreID = @storeid
-    GROUP BY P.ProductID, P.Name
-);
-GO
-
-
-CREATE FUNCTION dbo.ufn_FindReports (@InEmpID INTEGER)
-RETURNS @retFindReports TABLE
-(
-    EmployeeID int primary key NOT NULL,
-    FirstName nvarchar(255) NOT NULL,
-    LastName nvarchar(255) NOT NULL,
-    JobTitle nvarchar(50) NOT NULL,
-    RecursionLevel int NOT NULL
-)
---Returns a result set that lists all the employees who report to the
---specific employee directly or indirectly.*/
-AS
-BEGIN
-WITH EMP_cte(EmployeeID, OrganizationNode, FirstName, LastName, JobTitle, RecursionLevel) -- CTE name and columns
-    AS (
-        -- Get the initial list of Employees for Manager n
-        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, 0
-        FROM HumanResources.Employee e
-INNER JOIN Person.Person p
-ON p.BusinessEntityID = e.BusinessEntityID
-        WHERE e.BusinessEntityID = @InEmpID
-        UNION ALL
-        -- Join recursive member to anchor
-        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, RecursionLevel + 1
-        FROM HumanResources.Employee e
-            INNER JOIN EMP_cte
-            ON e.OrganizationNode.GetAncestor(1) = EMP_cte.OrganizationNode
-INNER JOIN Person.Person p
-ON p.BusinessEntityID = e.BusinessEntityID
-        )
--- copy the required columns to the result of the function
-    INSERT @retFindReports
-    SELECT EmployeeID, FirstName, LastName, JobTitle, RecursionLevel
-    FROM EMP_cte
-    RETURN
-END;
-GO
--- Example invocation
-
-GO
-
-DECLARE @SamplesPath nvarchar(1024);
--- You may have to modify the value of this variable if you have
--- installed the sample in a location other than the default location.
-
-CREATE ASSEMBLY [SurrogateStringFunction]
-FROM @SamplesPath + 'StringManipulate\CS\StringManipulate\bin\debug\SurrogateStringFunction.dll'
-WITH PERMISSION_SET = EXTERNAL_ACCESS;
-GO
-
-CREATE FUNCTION [dbo].[len_s] (@str nvarchar(4000))
-RETURNS bigint
-AS EXTERNAL NAME [SurrogateStringFunction].[Microsoft.Samples.SqlServer.SurrogateStringFunction].[LenS];
-GO
-
-GO                     
-
--- Create a nonclustered index on a table or view
-CREATE INDEX i1 ON t1 (col1);
-
--- Create a clustered index on a table and use a 3-part name for the table
-CREATE CLUSTERED INDEX i1 ON d1.s1.t1 (col1);
-
--- Syntax for SQL Server and Azure SQL Database
--- Create a nonclustered index with a unique constraint
--- on 3 columns and specify the sort order for each column
-CREATE UNIQUE INDEX i1 ON t1 (col1 DESC, col2 ASC, col3 DESC);
-
-CREATE INDEX IX_VendorID ON ProductVendor (VendorID);
-CREATE INDEX IX_VendorID ON dbo.ProductVendor (VendorID DESC, Name ASC, Address DESC);
-CREATE INDEX IX_VendorID ON Purchasing..ProductVendor (VendorID);
-
-CREATE NONCLUSTERED INDEX IX_SalesPerson_SalesQuota_SalesYTD ON Sales.SalesPerson (SalesQuota, SalesYTD);
-
-CREATE CLUSTERED INDEX IX_ProductVendor_VendorID ON Purchasing..ProductVendor (VendorID);
-
-
-CREATE INDEX IX_FF ON dbo.FactFinance (FinanceKey ASC, DateKey ASC);
-
--- Rebuild and add the OrganizationKey
-CREATE INDEX IX_FF ON dbo.FactFinance (FinanceKey, DateKey, OrganizationKey DESC)
-  WITH (DROP_EXISTING = ON);
-  
-  CREATE UNIQUE INDEX AK_UnitMeasure_Name
-  ON Production.UnitMeasure(Name);
-  
--- Verify the existing value.
-
-
-CREATE UNIQUE INDEX AK_Index ON #Test (C2)
-  WITH (IGNORE_DUP_KEY = ON);
-
-DROP TABLE #Test;
-
-
-CREATE UNIQUE INDEX AK_Index ON #Test (C2)
-  WITH (IGNORE_DUP_KEY = OFF);
 
 
 
 
-CREATE NONCLUSTERED INDEX IX_WorkOrder_ProductID
-  ON Production.WorkOrder(ProductID)
-    WITH (FILLFACTOR = 80,
-      PAD_INDEX = ON,
-      DROP_EXISTING = ON);
-GO
 
--- Set the options to support indexed views
 SET NUMERIC_ROUNDABORT OFF;
 SET ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT,
   QUOTED_IDENTIFIER, ANSI_NULLS ON;
-GO
-
--- Create view with schemabinding
-IF OBJECT_ID ('Sales.vOrders', 'view') IS NOT NULL
-  DROP VIEW Sales.vOrders;
-GO
-
-CREATE VIEW Sales.vOrders
-  WITH SCHEMABINDING
-AS
-  SELECT SUM(UnitPrice * OrderQty * (1.00 - UnitPriceDiscount)) AS Revenue,
-    OrderDate, ProductID, COUNT_BIG(*) AS COUNT
-  FROM Sales.SalesOrderDetail AS od, Sales.SalesOrderHeader AS o
-  WHERE od.SalesOrderID = o.SalesOrderID
-  GROUP BY OrderDate, ProductID;
-GO
-
--- Create an index on the view
-CREATE UNIQUE CLUSTERED INDEX IDX_V1
-  ON Sales.vOrders (OrderDate, ProductID);
-GO
-
--- This query can use the indexed view even though the view is
--- not specified in the FROM clause.
-GO
-
--- This query can use the above indexed view
-GO
-
-CREATE NONCLUSTERED INDEX IX_Address_PostalCode
-  ON Person.Address (PostalCode)
-  INCLUDE (AddressLine1, AddressLine2, City, StateProvinceID);
-GO
-
-GO
-
-CREATE NONCLUSTERED INDEX IX_TransactionHistory_ReferenceOrderID
-  ON Production.TransactionHistory (ReferenceOrderID)
-  ON TransactionsPS1 (TransactionDate);
-GO
-
-CREATE NONCLUSTERED INDEX "FIBillOfMaterialsWithEndDate"
-  ON Production.BillOfMaterials (ComponentID, StartDate)
-  WHERE EndDate IS NOT NULL;
-  
-CREATE NONCLUSTERED INDEX IX_INDEX_1
-  ON T1 (C2)
-  WITH (DATA_COMPRESSION = ROW);
-GO
-
-CREATE CLUSTERED INDEX IX_PartTab2Col1
-  ON PartitionTable1 (Col1)
-  WITH (DATA_COMPRESSION = ROW);
-GO
-
-CREATE CLUSTERED INDEX IX_PartTab2Col1
-  ON PartitionTable1 (Col1)
-  WITH (
-    DATA_COMPRESSION = PAGE ON PARTITIONS(1),
-    DATA_COMPRESSION = ROW ON PARTITIONS (2 TO 4)
-  );
-GO
-
--- Execute a resumable online index create statement with MAXDOP=1
-CREATE INDEX test_idx1 ON test_table (col1) WITH (ONLINE = ON, MAXDOP = 1, RESUMABLE = ON);
-
--- Executing the same command again (see above) after an index operation was paused, resumes automatically the index create operation.
-
--- Execute a resumable online index creates operation with MAX_DURATION set to 240 minutes. After the time expires, the resumable index create operation is paused.
-CREATE INDEX test_idx2 ON test_table (col2) WITH (ONLINE = ON, RESUMABLE = ON, MAX_DURATION = 240);
-
--- Pause a running resumable online index creation
-ALTER INDEX test_idx1 ON test_table PAUSE;
-ALTER INDEX test_idx2 ON test_table PAUSE;
-
--- Resume a paused online index creation
-ALTER INDEX test_idx1 ON test_table RESUME;
-ALTER INDEX test_idx2 ON test_table RESUME;
-
--- Abort resumable index create operation which is running or paused
-ALTER INDEX test_idx1 ON test_table ABORT;
-ALTER INDEX test_idx2 ON test_table ABORT;  
-
-CREATE LOGIN <login_name> WITH PASSWORD = '<enterStrongPasswordHere>';
-GO
-
-CREATE LOGIN <login_name> WITH PASSWORD = '<enterStrongPasswordHere>'
-    MUST_CHANGE, CHECK_EXPIRATION = ON;
-GO
-
-CREATE LOGIN <login_name> WITH PASSWORD = '<enterStrongPasswordHere>',
-    CREDENTIAL = <credentialName>;
-GO
 
 USE MASTER;
 CREATE CERTIFICATE <certificateName>
     WITH SUBJECT = '<login_name> certificate in master database',
     EXPIRY_DATE = '12/05/2025';
-GO
-CREATE LOGIN <login_name> FROM CERTIFICATE <certificateName>;
-GO
-
-CREATE LOGIN [<domainName>\<login_name>] FROM WINDOWS;
-GO
-
-CREATE LOGIN TestLogin WITH PASSWORD = 'SuperSecret52&&';
-GO
-
-DROP LOGIN TestLogin;
-GO
-
-CREATE LOGIN TestLogin
-WITH PASSWORD = 'SuperSecret52&&', SID = 0x241C11948AEEB749B0D22646DB1A19F2;
-
-GO
-
-CREATE LOGIN [MyUser]
-WITH PASSWORD = 'MyPassword',
-DEFAULT_DATABASE = MyDatabase,
-CHECK_POLICY = OFF,
-CHECK_EXPIRATION = OFF ;
 
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '23987hxJ#KL95234nl0zBe';
 GO
@@ -3918,11 +1684,6 @@ AS RANGE RIGHT FOR VALUES ('20030201', '20030301', '20030401',
 CREATE PARTITION FUNCTION myRangePF3 (char(20))  
 AS RANGE RIGHT FOR VALUES ('EX', 'RXE', 'XR');              
 
---Create integer partition function for 15,000 partitions.  
-DECLARE @IntegerPartitionFunction nvarchar(max) = 
-    N'CREATE PARTITION FUNCTION IntegerPartitionFunction (int) 
-    AS RANGE RIGHT FOR VALUES (';  
-DECLARE @i int = 1;  
 WHILE @i < 14999  
 BEGIN  
 SET @IntegerPartitionFunction += CAST(@i as nvarchar(10)) + N', ';  
@@ -3933,10 +1694,6 @@ EXEC sp_executesql @IntegerPartitionFunction;
 GO
 
 --Create date partition function with increment by month.  
-DECLARE @DatePartitionFunction nvarchar(max) = 
-    N'CREATE PARTITION FUNCTION DatePartitionFunction (datetime2) 
-    AS RANGE RIGHT FOR VALUES (';  
-DECLARE @i datetime2 = '20070101';  
 WHILE @i < '20110101'  
 BEGIN  
 SET @DatePartitionFunction += '''' + CAST(@i as nvarchar(10)) + '''' + N', ';  
@@ -3982,124 +1739,6 @@ CREATE PARTITION SCHEME myRangePS1
 AS PARTITION myRangePF1  
 ALL TO ( [PRIMARY] );
 
-CREATE PROCEDURE HumanResources.uspGetAllEmployees
-AS
-    SET NOCOUNT ON;
-    SELECT LastName, FirstName, JobTitle, Department
-    FROM HumanResources.vEmployeeDepartment;
-GO
-
-
-EXECUTE HumanResources.uspGetAllEmployees;
-GO
--- Or
-EXEC HumanResources.uspGetAllEmployees;
-GO
--- Or, if this procedure is the first statement within a batch:
-HumanResources.uspGetAllEmployees;
-
-CREATE PROCEDURE dbo.uspMultipleResults
-AS
-SELECT TOP(10) BusinessEntityID, Lastname, FirstName FROM Person.Person;
-SELECT TOP(10) CustomerID, AccountNumber FROM Sales.Customer;
-GO
-
-CREATE ASSEMBLY HandlingLOBUsingCLR
-FROM '\\MachineName\HandlingLOBUsingCLR\bin\Debug\HandlingLOBUsingCLR.dll';
-GO
-CREATE PROCEDURE dbo.GetPhotoFromDB
-(
-    @ProductPhotoID INT
-    , @CurrentDirectory NVARCHAR(1024)
-    , @FileName NVARCHAR(1024)
-)
-AS EXTERNAL NAME HandlingLOBUsingCLR.LargeObjectBinary.GetPhotoFromDB;
-GO
-
-IF OBJECT_ID ( 'HumanResources.uspGetEmployees', 'P' ) IS NOT NULL
-    DROP PROCEDURE HumanResources.uspGetEmployees;
-GO
-CREATE PROCEDURE HumanResources.uspGetEmployees
-    @LastName NVARCHAR(50),
-    @FirstName NVARCHAR(50)
-AS
-
-    SET NOCOUNT ON;
-    SELECT FirstName, LastName, JobTitle, Department
-    FROM HumanResources.vEmployeeDepartment
-    WHERE FirstName = @FirstName AND LastName = @LastName;
-GO
-
-EXECUTE HumanResources.uspGetEmployees N'Ackerman', N'Pilar';
--- Or
-EXEC HumanResources.uspGetEmployees @LastName = N'Ackerman', @FirstName = N'Pilar';
-GO
--- Or
-EXECUTE HumanResources.uspGetEmployees @FirstName = N'Pilar', @LastName = N'Ackerman';
-GO
--- Or, if this procedure is the first statement within a batch:
-HumanResources.uspGetEmployees N'Ackerman', N'Pilar';
-
-IF OBJECT_ID ( 'HumanResources.uspGetEmployees2', 'P' ) IS NOT NULL
-    DROP PROCEDURE HumanResources.uspGetEmployees2;
-GO
-CREATE PROCEDURE HumanResources.uspGetEmployees2
-    @LastName NVARCHAR(50) = N'D%',
-    @FirstName NVARCHAR(50) = N'%'
-AS
-    SET NOCOUNT ON;
-    SELECT FirstName, LastName, JobTitle, Department
-    FROM HumanResources.vEmployeeDepartment
-    WHERE FirstName LIKE @FirstName AND LastName LIKE @LastName;
-    
-EXECUTE HumanResources.uspGetEmployees2;
--- Or
-EXECUTE HumanResources.uspGetEmployees2 N'Wi%';
--- Or
-EXECUTE HumanResources.uspGetEmployees2 @FirstName = N'%';
--- Or
-EXECUTE HumanResources.uspGetEmployees2 N'[CK]ars[OE]n';
--- Or
-EXECUTE HumanResources.uspGetEmployees2 N'Hesse', N'Stefen';
--- Or
-EXECUTE HumanResources.uspGetEmployees2 N'H%', N'S%';
-
-IF OBJECT_ID ( 'Production.uspGetList', 'P' ) IS NOT NULL
-    DROP PROCEDURE Production.uspGetList;
-GO  
-CREATE PROCEDURE Production.uspGetList @Product VARCHAR(40)
-    , @MaxPrice MONEY
-    , @ComparePrice MONEY OUTPUT
-    , @ListPrice MONEY OUT
-AS  
-    SET NOCOUNT ON;
-    SELECT p.[Name] AS Product, p.ListPrice AS 'List Price'
-    FROM Production.Product AS p
-    JOIN Production.ProductSubcategory AS s
-      ON p.ProductSubcategoryID = s.ProductSubcategoryID
-    WHERE s.[Name] LIKE @Product AND p.ListPrice < @MaxPrice;
--- Populate the output variable @ListPprice.
-SET @ListPrice = (SELECT MAX(p.ListPrice)
-    FROM Production.Product AS p
-    JOIN Production.ProductSubcategory AS s
-      ON p.ProductSubcategoryID = s.ProductSubcategoryID
-    WHERE s.[Name] LIKE @Product AND p.ListPrice < @MaxPrice);
--- Populate the output variable @compareprice.
-SET @ComparePrice = @MaxPrice;
-GO
-
-DECLARE @ComparePrice MONEY, @Cost MONEY;
-EXECUTE Production.uspGetList '%Bikes%', 700,
-    @ComparePrice OUT,
-    @Cost OUTPUT
-IF @Cost <= @ComparePrice
-BEGIN
-    PRINT 'These products can be purchased for less than
-    $'+RTRIM(CAST(@ComparePrice AS VARCHAR(20)))+'.'
-END
-ELSE
-    PRINT 'The prices for all products in this category exceed
-    $'+ RTRIM(CAST(@ComparePrice AS VARCHAR(20)))+'.';
     
 /* Create a table type. */
 CREATE TYPE LocationTableType AS TABLE
@@ -4107,42 +1746,7 @@ CREATE TYPE LocationTableType AS TABLE
 , CostRate INT );
 GO
 
-/* Create a procedure to receive data for the table-valued parameter. */
-CREATE PROCEDURE usp_InsertProductionLocation
-    @TVP LocationTableType READONLY
-    AS
-    SET NOCOUNT ON
-    INSERT INTO [AdventureWorks2012].[Production].[Location]
-       ([Name]
-       , [CostRate]
-       , [Availability]
-       , [ModifiedDate])
-    SELECT *, 0, GETDATE()
-    FROM @TVP;
-GO
 
-/* Declare a variable that references the type. */
-DECLARE @LocationTVP
-AS LocationTableType;
-
-/* Add data to the table variable. */
-
-/* Pass the table variable data to a stored procedure. */
-EXEC usp_InsertProductionLocation @LocationTVP;
-GO
-
-CREATE PROCEDURE dbo.uspCurrencyCursor
-    @CurrencyCursor CURSOR VARYING OUTPUT
-AS
-    SET NOCOUNT ON;
-    SET @CurrencyCursor = CURSOR
-    FORWARD_ONLY STATIC FOR
-      SELECT CurrencyCode, Name
-      FROM Sales.Currency;
-    OPEN @CurrencyCursor;
-GO
-
-DECLARE @MyCursor CURSOR;
 EXEC dbo.uspCurrencyCursor @CurrencyCursor = @MyCursor OUTPUT;
 WHILE (@@FETCH_STATUS = 0)
 BEGIN;
@@ -4152,49 +1756,9 @@ CLOSE @MyCursor;
 DEALLOCATE @MyCursor;
 GO
 
-CREATE PROCEDURE HumanResources.Update_VacationHours
-@NewHours SMALLINT, @Rowcount INT OUTPUT
-AS
-SET NOCOUNT ON;
-UPDATE HumanResources.Employee
-SET VacationHours =
-    ( CASE
-        WHEN SalariedFlag = 0 THEN VacationHours + @NewHours
-        ELSE @NewHours
-        END
-    )
-WHERE CurrentFlag = 1;
-SET @Rowcount = @@rowcount;
-
 GO
-DECLARE @Rowcount INT
 EXEC HumanResources.Update_VacationHours 40, @Rowcount OUTPUT
 PRINT @Rowcount;
-
-CREATE PROCEDURE Production.uspDeleteWorkOrder ( @WorkOrderID INT )
-AS
-SET NOCOUNT ON;
-BEGIN TRY
-  BEGIN TRANSACTION
-  -- Delete rows from the child table, WorkOrderRouting, for the specified work order.
-    DELETE FROM Production.WorkOrderRouting
-    WHERE WorkOrderID = @WorkOrderID;
-  -- Delete the rows from the parent table, WorkOrder, for the specified work order.
-    DELETE FROM Production.WorkOrder
-    WHERE WorkOrderID = @WorkOrderID;
-  COMMIT
-END TRY
-
-BEGIN CATCH
-  -- Determine if an error occurred.
-  IF @@TRANCOUNT > 0
-    ROLLBACK
-
-  -- Return the error information.
-  DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT;
-  SELECT @ErrorMessage = ERROR_MESSAGE(),@ErrorSeverity = ERROR_SEVERITY();
-  RAISERROR(@ErrorMessage, @ErrorSeverity, 1);
-END CATCH;
 
 GO
 EXEC Production.uspDeleteWorkOrder 13;
@@ -4204,92 +1768,11 @@ EXEC Production.uspDeleteWorkOrder 13;
    cause an error when the procedure definition is altered, but produces
    an error when the procedure is executed.
 */
-ALTER PROCEDURE Production.uspDeleteWorkOrder ( @WorkOrderID INT )
-AS
-
-BEGIN TRY
-  BEGIN TRANSACTION
-  -- Delete the rows from the parent table, WorkOrder, for the specified work order.
-    DELETE FROM Production.WorkOrder
-    WHERE WorkOrderID = @WorkOrderID;
-
-  -- Delete rows from the child table, WorkOrderRouting, for the specified work order.
-    DELETE FROM Production.WorkOrderRouting
-    WHERE WorkOrderID = @WorkOrderID;
-  COMMIT TRANSACTION
-END TRY
-
-BEGIN CATCH
-  -- Determine if an error occurred.
-  IF @@TRANCOUNT > 0
-    ROLLBACK TRANSACTION
-
-  -- Return the error information.
-  DECLARE @ErrorMessage NVARCHAR(4000), @ErrorSeverity INT;
-  SELECT @ErrorMessage = ERROR_MESSAGE(),@ErrorSeverity = ERROR_SEVERITY();
-  RAISERROR(@ErrorMessage, @ErrorSeverity, 1);
-END CATCH;
-GO
 -- Execute the altered procedure.
 EXEC Production.uspDeleteWorkOrder 15;
 
-DROP PROCEDURE Production.uspDeleteWorkOrder;
 
-CREATE PROCEDURE HumanResources.uspEncryptThis
-WITH ENCRYPTION
-AS
-    SET NOCOUNT ON;
-    SELECT BusinessEntityID, JobTitle, NationalIDNumber,
-        VacationHours, SickLeaveHours
-    FROM HumanResources.Employee;
-GO
-
-IF OBJECT_ID ( 'dbo.uspProductByVendor', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.uspProductByVendor;
-GO
-CREATE PROCEDURE dbo.uspProductByVendor @Name VARCHAR(30) = '%'
-WITH RECOMPILE
-AS
-    SET NOCOUNT ON;
-    SELECT v.Name AS 'Vendor name', p.Name AS 'Product name'
-    FROM Purchasing.Vendor AS v
-    JOIN Purchasing.ProductVendor AS pv
-      ON v.BusinessEntityID = pv.BusinessEntityID
-    JOIN Production.Product AS p
-      ON pv.ProductID = p.ProductID
-    WHERE v.Name LIKE @Name;
     
-CREATE PROCEDURE Purchasing.uspVendorAllInfo
-WITH EXECUTE AS CALLER
-AS
-    SET NOCOUNT ON;
-    SELECT v.Name AS Vendor, p.Name AS 'Product name',
-      v.CreditRating AS 'Rating',
-      v.ActiveFlag AS Availability
-    FROM Purchasing.Vendor v
-    INNER JOIN Purchasing.ProductVendor pv
-      ON v.BusinessEntityID = pv.BusinessEntityID
-    INNER JOIN Production.Product p
-      ON pv.ProductID = p.ProductID
-    ORDER BY v.Name ASC;
-GO
-
-CREATE PROCEDURE dbo.TruncateMyTable
-WITH EXECUTE AS SELF
-AS TRUNCATE TABLE MyDB..MyTable;
-
--- Uses AdventureWorksDW database
-
---Run CREATE PROCEDURE as the first statement in a batch.
-CREATE PROCEDURE Get10TopResellers
-AS
-BEGIN
-    SELECT TOP (10) r.ResellerName, r.AnnualSales
-    FROM DimReseller AS r
-    ORDER BY AnnualSales DESC, ResellerName ASC;
-END
-;
-GO
 
 --Show 10 Top Resellers
 EXEC Get10TopResellers;
@@ -4347,11 +1830,6 @@ WITH (
     MAX_IOPS_PER_VOLUME = 100  
       );      
       
-CREATE ROLE buyers AUTHORIZATION BenMiller;  
-GO
-
-CREATE ROLE auditors AUTHORIZATION db_securityadmin;  
-GO
 
 CREATE ROUTE ExpenseRoute  
     WITH  
@@ -4408,27 +1886,16 @@ CREATE RULE pattern_rule
 AS  
 @value LIKE '__-%[0-9]'    
 
-USE AdventureWorks2012;  
-GO  
-CREATE SCHEMA Sprockets AUTHORIZATION Annik  
-    CREATE TABLE NineProngs (source int, cost int, partnumber int)  
-    GRANT SELECT ON SCHEMA::Sprockets TO Mandar  
-    DENY SELECT ON SCHEMA::Sprockets TO Prasanna;  
-GO
 
 CREATE SEARCH PROPERTY LIST DocumentPropertyList;  
 GO  
 USE AdventureWorks2012;  
-ALTER FULLTEXT INDEX ON Production.Document   
-   SET SEARCH PROPERTY LIST DocumentPropertyList  
-   WITH NO POPULATION;   
-GO
+
+
 
 CREATE SEARCH PROPERTY LIST JobCandidateProperties 
 FROM AdventureWorks2012.DocumentPropertyList;  
 GO  
-ALTER FULLTEXT INDEX ON HumanResources.JobCandidate   
-   SET SEARCH PROPERTY LIST JobCandidateProperties;  
 GO
 CREATE SECURITY POLICY [FederatedSecurityPolicy]   
 ADD FILTER PREDICATE [rls].[fn_securitypredicate]([CustomerId])   
@@ -4448,20 +1915,6 @@ CREATE SECURITY POLICY rls.SecPol
     ADD BLOCK PREDICATE rls.tenantAccessPredicate(TenantId) ON dbo.Sales AFTER INSERT;
     
 GO  
-CREATE SELECTIVE XML INDEX sxi_index  
-ON Tbl(xmlcol)  
-FOR(  
-    pathab   = '/a/b' as XQUERY 'node()',  
-    pathabc  = '/a/b/c' as XQUERY 'xs:double',   
-    pathdtext = '/a/b/d/text()' as XQUERY 'xs:string' MAXLENGTH(200) SINGLETON,  
-    pathabe = '/a/b/e' as SQL NVARCHAR(100)  
-);
-
-CREATE SELECTIVE XML INDEX on T1(C1)  
-WITH XMLNAMESPACES ('https://www.tempuri.org/' as myns)  
-FOR ( path1 = '/myns:book/myns:author/text()' );    
-
-CREATE SCHEMA Test ;  
 GO
 
 CREATE SEQUENCE Test.CountBy1  
@@ -4501,51 +1954,8 @@ CREATE SEQUENCE Test.DecSeq
     CACHE 3  
 ;
 
-SELECT NEXT VALUE FOR Test.DecSeq;
-
-SELECT cache_size, current_value   
-FROM sys.sequences  
-WHERE name = 'DecSeq' ;
-
-CREATE SERVER AUDIT HIPAA_Audit  
-    TO FILE ( FILEPATH ='\\SQLPROD_1\Audit\ ' );    
-
-CREATE SERVER AUDIT HIPAA_Audit  
-    TO APPLICATION_LOG  
-    WITH ( QUEUE_DELAY = 1000,  ON_FAILURE = SHUTDOWN);
-    
-GO  
-USE TestDB;  
-GO  
-CREATE SCHEMA DataSchema;  
-GO  
-GO  
-GO  
--- Create the server audit in the master database  
-USE master;  
-GO  
-CREATE SERVER AUDIT AuditDataAccess  
-    TO FILE ( FILEPATH ='C:\SQLAudit\ ' )  
-    WHERE object_name = 'SensitiveData' ;  
-GO  
-ALTER SERVER AUDIT AuditDataAccess WITH (STATE = ON);  
-GO  
 
 
-
-CREATE SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification  
-FOR SERVER AUDIT HIPAA_Audit  
-    ADD (FAILED_LOGIN_GROUP)  
-    WITH (STATE=ON);  
-GO
-
-USE master;  
-CREATE SERVER ROLE buyers AUTHORIZATION BenMiller;  
-GO
-
-USE master;  
-CREATE SERVER ROLE auditors AUTHORIZATION securityadmin;  
-GO
 
 CREATE SERVICE [//Adventure-Works.com/Expenses]  
     ON QUEUE [dbo].[ExpenseQueue]  
@@ -4557,78 +1967,7 @@ CREATE SERVICE [//Adventure-Works.com/Expenses] ON QUEUE ExpenseQueue
      
 CREATE SERVICE [//Adventure-Works.com/Expenses] ON QUEUE ExpenseQueue ;
 
-CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col1
-   ON SpatialTable(geometry_col)  
-   WITH ( BOUNDING_BOX = ( 0, 0, 500, 200 ) );
    
-CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col2  
-   ON SpatialTable(geometry_col)  
-   USING GEOMETRY_GRID  
-   WITH (  
-    BOUNDING_BOX = ( xmin=0, ymin=0, xmax=500, ymax=200 ),  
-    GRIDS = (LOW, LOW, MEDIUM, HIGH),  
-    CELLS_PER_OBJECT = 64,  
-    PAD_INDEX  = ON );
-    
-CREATE SPATIAL INDEX SIndx_SpatialTable_geometry_col3  
-   ON SpatialTable(geometry_col)  
-   WITH (  
-    BOUNDING_BOX = ( 0, 0, 500, 200 ),  
-    GRIDS = ( LEVEL_4 = HIGH, LEVEL_3 = MEDIUM ) );
-    
-CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col3  
-   ON SpatialTable(geography_col)  
-   WITH ( BOUNDING_BOX = ( 0, 0, 500, 200 ),  
-        GRIDS = ( LEVEL_3 = LOW ),  
-        DROP_EXISTING = ON );
-        
-CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col1
-   ON SpatialTable2(object);
-   
-CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col2  
-   ON SpatialTable2(object)  
-   USING GEOGRAPHY_GRID  
-   WITH (  
-    GRIDS = (MEDIUM, LOW, MEDIUM, HIGH ),  
-    CELLS_PER_OBJECT = 64,  
-    PAD_INDEX  = ON );
-    
-CREATE SPATIAL INDEX SIndx_SpatialTable_geography_col3  
-   ON SpatialTable2(object)  
-   WITH ( GRIDS = ( LEVEL_3 = HIGH, LEVEL_2 = HIGH ) );
-   
-CREATE STATISTICS ContactMail1  
-    ON Person.Person (BusinessEntityID, EmailPromotion)  
-    WITH SAMPLE 5 PERCENT;
-    
-CREATE STATISTICS ContactMail1  
-    ON Person.Person (BusinessEntityID, EmailPromotion)  
-    WITH SAMPLE 5 PERCENT;
-CREATE STATISTICS NamePurchase  
-    ON AdventureWorks2012.Person.Person (BusinessEntityID, EmailPromotion)  
-    WITH FULLSCAN, NORECOMPUTE;
-    
-CREATE STATISTICS ContactPromotion1  
-    ON Person.Person (BusinessEntityID, LastName, EmailPromotion)  
-WHERE EmailPromotion = 2  
-WITH SAMPLE 50 PERCENT;  
-GO
-
---Create statistics on an external table and use default sampling.  
-CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress);  
-  
---Create statistics on an external table and scan all the rows  
-CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress) WITH FULLSCAN;
-
-CREATE STATISTICS NamePurchase  
-    ON AdventureWorks2012.Person.Person (BusinessEntityID, EmailPromotion)  
-    WITH FULLSCAN, PERSIST_SAMPLE_PERCENT = ON;
-CREATE STATISTICS CustomerStats1 ON DimCustomer (CustomerKey, EmailAddress);
-
-CREATE STATISTICS CustomerStatsSampleScan 
-ON DimCustomer (CustomerKey, EmailAddress) WITH SAMPLE 50 PERCENT;
-CREATE STATISTICS CustomerStatsSampleScan 
-ON DimCustomer (CustomerKey, EmailAddress) WITH SAMPLE 50 PERCENT;
 
 CREATE SYMMETRIC KEY JanainaKey09   
 WITH ALGORITHM = AES_256  
@@ -4665,22 +2004,8 @@ GO
 CREATE SYNONYM MyEmployee FOR Server_Remote.AdventureWorks2012.HumanResources.Employee;  
 GO
 
--- Creating the dbo.OrderDozen function  
-CREATE FUNCTION dbo.OrderDozen (@OrderAmt INT)  
-RETURNS INT  
-WITH EXECUTE AS CALLER  
-AS  
-BEGIN  
-IF @OrderAmt % 12 <> 0  
-BEGIN  
-    SET @OrderAmt +=  12 - (@OrderAmt % 12)  
-END  
-RETURN(@OrderAmt);  
-END;  
-GO  
   
 -- Using the dbo.OrderDozen function  
-DECLARE @Amt INT;  
 SET @Amt = 15;  
 SELECT @Amt AS OriginalOrder, dbo.OrderDozen(@Amt) AS ModifiedOrder;  
   
@@ -4690,7 +2015,6 @@ FOR dbo.OrderDozen;
 GO  
   
 -- Using the dbo.CorrectOrder synonym.  
-DECLARE @Amt INT;  
 SET @Amt = 15;  
 SELECT @Amt AS OriginalOrder, dbo.CorrectOrder(@Amt) AS ModifiedOrder;
 
@@ -4703,37 +2027,13 @@ GO
 CREATE PARTITION SCHEME myRangePS1
     AS PARTITION myRangePF1
     TO (test1fg, test2fg, test3fg, test4fg);
-GO  
--- Temporal table
 
-CREATE SCHEMA History;
-GO
-
-
-
--- Existing table
-
--- Temporal table
-
-
-
-
-
-GO
-
-USE AdventureWorks2012;  
   
-IF OBJECT_ID ('dbo.new_employees', 'U') IS NOT NULL  
-   DROP TABLE new_employees;  
-GO  
   
    
 -- Here is the generic syntax for finding identity value gaps in data.  
 -- The illustrative example starts here.  
 SET IDENTITY_INSERT tablename ON;  
-DECLARE @minidentval column_type;  
-DECLARE @maxidentval column_type;  
-DECLARE @nextidentval column_type;  
 SELECT @minidentval = MIN($IDENTITY), @maxidentval = MAX($IDENTITY)  
     FROM tablename  
 IF @minidentval = IDENT_SEED('tablename')  
@@ -4756,14 +2056,9 @@ SET IDENTITY_INSERT tablename OFF;
 -- Create the img table.  
 -- If the img table already exists, drop it.  
 -- Create the img table.  
-IF OBJECT_ID ('dbo.img', 'U') IS NOT NULL  
-   DROP TABLE img;  
-GO  
 -- SET IDENTITY_INSERT ON and use in img table.  
 SET IDENTITY_INSERT img ON;  
   
-DECLARE @minidentval SMALLINT;  
-DECLARE @nextidentval SMALLINT;  
 SELECT @minidentval = MIN($IDENTITY) FROM img  
  IF @minidentval = IDENT_SEED('img')  
     SELECT @nextidentval = MIN($IDENTITY) + IDENT_INCR('img')  
@@ -4776,96 +2071,9 @@ SELECT @minidentval = MIN($IDENTITY) FROM img
 SET IDENTITY_INSERT img OFF;                                                         
 
 
-CREATE TRIGGER reminder1  
-ON Sales.Customer  
-AFTER INSERT, UPDATE   
-AS RAISERROR ('Notify Customer Relations', 16, 10);  
-GO
-
-CREATE TRIGGER reminder2  
-ON Sales.Customer  
-AFTER INSERT, UPDATE, DELETE   
-AS  
-   EXEC msdb.dbo.sp_send_dbmail  
-        @profile_name = 'AdventureWorks2012 Administrator',  
-        @recipients = 'danw@Adventure-Works.com',  
-        @body = 'Don''t forget to print a report for the sales force.',  
-        @subject = 'Reminder';  
-GO
-
--- This trigger prevents a row from being inserted in the Purchasing.PurchaseOrderHeader 
--- table when the credit rating of the specified vendor is set to 5 (below average).  
-  
-CREATE TRIGGER Purchasing.LowCredit ON Purchasing.PurchaseOrderHeader  
-AFTER INSERT  
-AS  
-IF (ROWCOUNT_BIG() = 0)
-RETURN;
-IF EXISTS (SELECT *  
-           FROM Purchasing.PurchaseOrderHeader AS p   
-           JOIN inserted AS i   
-           ON p.PurchaseOrderID = i.PurchaseOrderID   
-           JOIN Purchasing.Vendor AS v   
-           ON v.BusinessEntityID = p.VendorID  
-           WHERE v.CreditRating = 5  
-          )  
-BEGIN  
-RAISERROR ('A vendor''s credit rating is too low to accept new  
-purchase orders.', 16, 1);  
-ROLLBACK TRANSACTION;  
-RETURN   
-END;  
-GO  
-  
-
-CREATE TRIGGER safety   
-ON DATABASE   
-FOR DROP_SYNONYM  
-AS   
-IF (@@ROWCOUNT = 0)
-RETURN;
-   RAISERROR ('You must disable Trigger "safety" to remove synonyms!', 10, 1)  
-   ROLLBACK  
-GO  
-
-CREATE TRIGGER ddl_trig_database   
-ON ALL SERVER   
-FOR CREATE_DATABASE   
-AS   
-    PRINT 'Database Created.'  
-    SELECT EVENTDATA().value('(/EVENT_INSTANCE/TSQLCommand/CommandText)[1]','nvarchar(max)')  
-
-USE master;  
-GO  
-CREATE LOGIN login_test WITH PASSWORD = '3KHJ6dhx(0xVYsdf' MUST_CHANGE,  
-    CHECK_EXPIRATION = ON;  
-GO  
-GRANT VIEW SERVER STATE TO login_test;  
-GO  
-CREATE TRIGGER connection_limit_trigger  
-ON ALL SERVER WITH EXECUTE AS 'login_test'  
-FOR LOGON  
-AS  
-BEGIN  
-IF ORIGINAL_LOGIN()= 'login_test' AND  
-    (SELECT COUNT(*) FROM sys.dm_exec_sessions  
-            WHERE is_user_process = 1 AND  
-                original_login_name = 'login_test') > 3  
-    ROLLBACK;  
-END;
-
-SELECT TE.*  
-FROM sys.trigger_events AS TE  
-JOIN sys.triggers AS T ON T.object_id = TE.object_id  
-WHERE T.parent_class = 0 AND T.name = 'safety';  
-GO
-
 CREATE TYPE SSN  
 FROM varchar(11) NOT NULL ;
 
-CREATE ASSEMBLY utf8string  
-AUTHORIZATION [dbi]   
-FROM 0x4D... ;  
 GO  
 CREATE TYPE Utf8String   
 EXTERNAL NAME utf8string.[Microsoft.Samples.SqlServer.utf8string] ;  
@@ -4890,31 +2098,13 @@ CREATE TYPE InventoryItem AS TABLE
 )
 GO
 
-CREATE LOGIN AbolrousHazem   
-    WITH PASSWORD = '340$Uuxwp7Mcxo7Khy';
-    
-    CREATE USER AbolrousHazem FOR LOGIN AbolrousHazem;  
-GO
 
-CREATE LOGIN WanidaBenshoof   
-    WITH PASSWORD = '8fdKJl3$nlNv3049jsKK';  
-USE AdventureWorks2012;  
-CREATE USER Wanida FOR LOGIN WanidaBenshoof   
-    WITH DEFAULT_SCHEMA = Marketing;  
-GO
 
 USE AdventureWorks2012;  
 CREATE CERTIFICATE CarnationProduction50  
     WITH SUBJECT = 'Carnation Production Facility Supervisors',  
     EXPIRY_DATE = '11/11/2011';  
 GO  
-CREATE USER JinghaoLiu FOR CERTIFICATE CarnationProduction50;  
-GO
-
-USE AdventureWorks2012 ;  
-CREATE USER CustomApp WITHOUT LOGIN ;  
-GRANT IMPERSONATE ON USER::CustomApp TO [adventure-works\tengiz0] ;  
-GO
 
 EXECUTE AS USER = 'CustomApp' ;  
 GO
@@ -4924,98 +2114,7 @@ GO
 
 USE AdventureWorks2012 ;  
 GO  
-CREATE USER Carlo  
-WITH PASSWORD='RN92piTCh%$!~3K9844 Bl*'  
-    , DEFAULT_LANGUAGE=[Brazilian]  
-    , DEFAULT_SCHEMA=[dbo]  
-GO
-
-USE AdventureWorks2012 ;  
-GO  
-CREATE USER [Contoso\Fritz] ;  
-GO
-
-USE AdventureWorks2012 ;  
-GO  
-CREATE USER CarmenW WITH PASSWORD = 'a8ea v*(Rd##+'  
-, SID = 0x01050000000000090300000063FF0451A9E7664BA705B10E37DDC4B7;
-
-CREATE USER [Chin]   
-WITH   
-      DEFAULT_SCHEMA = dbo  
-    , ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = ON ;
     
-    
-CREATE VIEW hiredate_view  
-AS   
-SELECT p.FirstName, p.LastName, e.BusinessEntityID, e.HireDate  
-FROM HumanResources.Employee e   
-JOIN Person.Person AS p ON e.BusinessEntityID = p.BusinessEntityID ;  
-GO
-
-CREATE VIEW Purchasing.PurchaseOrderReject  
-WITH ENCRYPTION  
-AS  
-SELECT PurchaseOrderID, ReceivedQty, RejectedQty,   
-    RejectedQty / ReceivedQty AS RejectRatio, DueDate  
-FROM Purchasing.PurchaseOrderDetail  
-WHERE RejectedQty / ReceivedQty > 0  
-AND DueDate > CONVERT(DATETIME,'20010630',101) ;  
-GO
-
-CREATE VIEW dbo.SeattleOnly  
-AS  
-SELECT p.LastName, p.FirstName, e.JobTitle, a.City, sp.StateProvinceCode  
-FROM HumanResources.Employee e  
-INNER JOIN Person.Person p  
-ON p.BusinessEntityID = e.BusinessEntityID  
-    INNER JOIN Person.BusinessEntityAddress bea   
-    ON bea.BusinessEntityID = e.BusinessEntityID   
-    INNER JOIN Person.Address a   
-    ON a.AddressID = bea.AddressID  
-    INNER JOIN Person.StateProvince sp   
-    ON sp.StateProvinceID = a.StateProvinceID  
-WHERE a.City = 'Seattle'  
-WITH CHECK OPTION ;  
-GO
-
-CREATE VIEW Sales.SalesPersonPerform  
-AS  
-SELECT TOP (100) SalesPersonID, SUM(TotalDue) AS TotalSales  
-FROM Sales.SalesOrderHeader  
-WHERE OrderDate > CONVERT(DATETIME,'20001231',101)  
-GROUP BY SalesPersonID;  
-GO
-
---Create the view that combines all supplier tables.  
-CREATE VIEW dbo.all_supplier_view  
-WITH SCHEMABINDING  
-AS  
-SELECT supplyID, supplier  
-  FROM dbo.SUPPLY1  
-UNION ALL  
-SELECT supplyID, supplier  
-  FROM dbo.SUPPLY2  
-UNION ALL  
-SELECT supplyID, supplier  
-  FROM dbo.SUPPLY3  
-UNION ALL  
-SELECT supplyID, supplier  
-  FROM dbo.SUPPLY4;  
-GO
-GO
-
-CREATE VIEW DimEmployeeBirthDates AS  
-SELECT FirstName, LastName, BirthDate   
-FROM DimEmployee;
-
-CREATE VIEW view1  
-AS 
-SELECT fis.CustomerKey, fis.ProductKey, fis.OrderDateKey, 
-  fis.SalesTerritoryKey, dst.SalesTerritoryRegion  
-FROM FactInternetSales AS fis   
-LEFT OUTER JOIN DimSalesTerritory AS dst   
-ON (fis.SalesTerritoryKey=dst.SalesTerritoryKey);
 
 CREATE WORKLOAD GROUP newReports
 WITH
@@ -5025,33 +2124,7 @@ WITH
 USING "default" ;
 GO
 
-USE AdventureWorks2012;  
-GO  
-IF EXISTS (SELECT * FROM sys.indexes  
-            WHERE name = N'PXML_ProductModel_CatalogDescription')  
-    DROP INDEX PXML_ProductModel_CatalogDescription   
-        ON Production.ProductModel;  
-GO  
-CREATE PRIMARY XML INDEX PXML_ProductModel_CatalogDescription  
-    ON Production.ProductModel (CatalogDescription);  
-GO
 
-USE AdventureWorks2012;  
-GO  
-IF EXISTS (SELECT name FROM sys.indexes  
-            WHERE name = N'IXML_ProductModel_CatalogDescription_Path')  
-    DROP INDEX IXML_ProductModel_CatalogDescription_Path  
-        ON Production.ProductModel;  
-GO  
-CREATE XML INDEX IXML_ProductModel_CatalogDescription_Path   
-    ON Production.ProductModel (CatalogDescription)  
-    USING XML INDEX PXML_ProductModel_CatalogDescription FOR PATH ;  
-GO
-
-CREATE XML INDEX filt_sxi_index_c  
-ON Tbl(xmlcol)  
-USING XML INDEX sxi_index  
-FOR ( pathabc );    
 
 
 -- Create a sample database in which to load the XML schema collection.  
@@ -5098,18 +2171,8 @@ N'<?xml version="1.0" encoding="UTF-16"?>
 GO  
   
 -- Use it. Create a typed xml variable. Note collection name specified.  
-DECLARE @x xml (ManuInstructionsSchemaCollection);  
-GO  
---Or create a typed xml column.  
-GO  
--- Clean up  
-DROP TABLE T;  
 GO  
 DROP XML SCHEMA COLLECTION ManuInstructionsSchemaCollection;  
-Go  
-USE master;  
-GO  
-DROP DATABASE SampleDB;
 
 
 
@@ -5180,15 +2243,6 @@ GO
 DROP AGGREGATE dbo.Concatenate;
 
 
-DROP APPLICATION ROLE weekly_ledger;  
-GO
-
-DROP ASSEMBLY Helloworld ;
-
-USE AdventureWorks2012;  
-
-DROP ASYMMETRIC KEY MirandaXAsymKey6;
-
 DROP BROKER PRIORITY InitiatorAToTargetPriority;
 
 
@@ -5220,21 +2274,6 @@ GO
 DROP CRYPTOGRAPHIC PROVIDER SecurityProvider;  
 GO
 
-DROP DATABASE Sales;
-
-DROP DATABASE Sales, NewSales;
-
-DROP DATABASE sales_snapshot0600;
-
-DROP DATABASE AUDIT SPECIFICATION HIPAA_Audit_DB_Specification;  
-GO
-
-ALTER DATABASE AdventureWorks2012  
-SET ENCRYPTION OFF;  
-GO  
-GO  
-DROP DATABASE ENCRYPTION KEY;  
-GO
 
 USE AdventureWorks2012;  
 GO  
@@ -5304,91 +2343,12 @@ GO
 
 DROP FULLTEXT CATALOG catalog_name
 
-USE AdventureWorks2012;  
-GO  
-DROP FULLTEXT INDEX ON HumanResources.JobCandidate;  
-GO
 
 DROP FULLTEXT STOPLIST myStoplist;
 
-DROP FUNCTION Sales.fn_SalesByStore;
 
-DROP INDEX IX_ProductVendor_BusinessEntityID   
-    ON Purchasing.ProductVendor;  
-GO
 
-DROP INDEX  
-    IX_PurchaseOrderHeader_EmployeeID ON Purchasing.PurchaseOrderHeader,  
-    IX_Address_StateProvinceID ON Person.Address;  
-GO
 
-DROP INDEX AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate   
-    ON Production.BillOfMaterials WITH (ONLINE = ON, MAXDOP = 2);  
-GO
-
---Create a clustered index on the PRIMARY filegroup if the index does not exist.  
-CREATE UNIQUE CLUSTERED INDEX  
-    AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate   
-        ON Production.BillOfMaterials (ProductAssemblyID, ComponentID,   
-        StartDate)  
-    ON 'PRIMARY';  
-GO  
--- Verify filegroup location of the clustered index.  
-SELECT t.name AS [Table Name], i.name AS [Index Name], i.type_desc,  
-    i.data_space_id, f.name AS [Filegroup Name]  
-FROM sys.indexes AS i  
-    JOIN sys.filegroups AS f ON i.data_space_id = f.data_space_id  
-    JOIN sys.tables as t ON i.object_id = t.object_id  
-        AND i.object_id = OBJECT_ID(N'Production.BillOfMaterials','U')  
-GO  
---Create filegroup NewGroup if it does not exist.  
-IF NOT EXISTS (SELECT name FROM sys.filegroups  
-                WHERE name = N'NewGroup')  
-    BEGIN  
-    ALTER DATABASE AdventureWorks2012  
-        ADD FILEGROUP NewGroup;  
-    ALTER DATABASE AdventureWorks2012  
-        ADD FILE (NAME = File1,  
-            FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\File1.ndf')  
-        TO FILEGROUP NewGroup;  
-    END  
-GO  
---Verify new filegroup  
-SELECT * from sys.filegroups;  
-GO  
--- Drop the clustered index and move the BillOfMaterials table to  
--- the Newgroup filegroup.  
--- Set ONLINE = OFF to execute this example on editions other than Enterprise Edition.  
-DROP INDEX AK_BillOfMaterials_ProductAssemblyID_ComponentID_StartDate   
-    ON Production.BillOfMaterials   
-    WITH (ONLINE = ON, MOVE TO NewGroup);  
-GO  
--- Verify filegroup location of the moved table.  
-SELECT t.name AS [Table Name], i.name AS [Index Name], i.type_desc,  
-    i.data_space_id, f.name AS [Filegroup Name]  
-FROM sys.indexes AS i  
-    JOIN sys.filegroups AS f ON i.data_space_id = f.data_space_id  
-    JOIN sys.tables as t ON i.object_id = t.object_id  
-        AND i.object_id = OBJECT_ID(N'Production.BillOfMaterials','U');  
-GO
-
--- Set ONLINE = OFF to execute this example on editions other than Enterprise Edition.  
-ALTER TABLE Production.TransactionHistoryArchive  
-DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID  
-WITH (ONLINE = ON);
-
-DROP INDEX PXML_ProductModel_CatalogDescription   
-    ON Production.ProductModel;
-    
-DROP INDEX PK_MyClusteredIndex   
-    ON dbo.MyTable   
-    WITH (MOVE TO MyPartitionScheme,  
-          FILESTREAM_ON MyPartitionScheme);  
-GO
-
-DROP INDEX sxi_index ON tbl;    
-
-DROP LOGIN WilliJo;  
 GO
 
 USE AdventureWorks2012;  
@@ -5405,13 +2365,6 @@ DROP PARTITION FUNCTION myRangePF;
 
 DROP PARTITION SCHEME myRangePS1;
 
-DROP PROCEDURE dbo.uspMyProc;  
-GO
-
-DROP PROCEDURE dbo.uspGetSalesbyMonth, dbo.uspUpdateSalesQuotes, dbo.uspGetSalesByYear;
-
-DROP PROCEDURE IF EXISTS dbo.uspMyProc;  
-GO
 
 DROP QUEUE ExpenseQueue ;
 
@@ -5420,72 +2373,20 @@ DROP REMOTE SERVICE BINDING APBinding ;
 DROP RESOURCE POOL big_pool;  
 GO  
 ALTER RESOURCE GOVERNOR RECONFIGURE;  
-GO
 
-DROP ROLE purchasing;  
-GO
 
 DROP ROUTE ExpenseRoute ;
 
 sp_unbindrule 'Production.ProductVendor.VendorID'  
 DROP RULE VendorID_rule  
-GO
 
-CREATE SCHEMA Sprockets AUTHORIZATION Krishna   
-    CREATE TABLE NineProngs (source INT, cost INT, partnumber INT)  
-    GRANT SELECT TO Anibal   
-    DENY SELECT TO [Hung-Fu];  
-GO
 
-DROP TABLE Sprockets.NineProngs;  
-DROP SCHEMA Sprockets;  
-GO
 
 DROP SEARCH PROPERTY LIST JobCandidateProperties;  
 GO
 
 DROP SECURITY POLICY secPolicy;
 
-DROP SENSITIVITY CLASSIFICATION FROM
-    dbo.sales.price
-    
-
-DROP SENSITIVITY CLASSIFICATION FROM
-    dbo.sales.price, dbo.sales.discount, SalesLT.Customer.Phone
-    
-
-SELECT sch.name + '.' + seq.name AS [Sequence schema and name]   
-    FROM sys.sequences AS seq  
-    JOIN sys.schemas AS sch  
-        ON seq.schema_id = sch.schema_id ;  
-GO
-
-ALTER SERVER AUDIT HIPAA_Audit  
-STATE = OFF;  
-GO  
-DROP SERVER AUDIT HIPAA_Audit;  
-GO
-
-DROP SERVER AUDIT SPECIFICATION HIPAA_Audit_Specification;  
-GO
-
-DROP SERVER ROLE purchasing;  
-GO
-
-SELECT SRM.role_principal_id, SP.name AS Role_Name,   
-SRM.member_principal_id, SP2.name  AS Member_Name  
-FROM sys.server_role_members AS SRM  
-JOIN sys.server_principals AS SP  
-    ON SRM.Role_principal_id = SP.principal_id  
-JOIN sys.server_principals AS SP2   
-    ON SRM.member_principal_id = SP2.principal_id  
-ORDER BY  SP.name,  SP2.name
-
-SELECT SP1.name AS RoleOwner, SP2.name AS Server_Role  
-FROM sys.server_principals AS SP1  
-JOIN sys.server_principals AS SP2  
-    ON SP1.principal_id = SP2.owning_principal_id   
-ORDER BY SP1.name ;
 
 DROP SERVICE [//Adventure-Works.com/Expenses] ;
 
@@ -5495,17 +2396,7 @@ DROP SIGNATURE FROM HumanResources.uspUpdateEmployeeLogin
     BY CERTIFICATE HumanResourcesDP;  
 GO
 
--- Create the statistics groups.  
-USE AdventureWorks2012;  
 GO  
-CREATE STATISTICS VendorCredit  
-    ON Purchasing.Vendor (Name, CreditRating)  
-    WITH SAMPLE 50 PERCENT  
-CREATE STATISTICS CustomerTotal  
-    ON Sales.SalesOrderHeader (CustomerID, TotalDue)  
-    WITH FULLSCAN;  
-GO  
-DROP STATISTICS Purchasing.Vendor.VendorCredit, Sales.SalesOrderHeader.CustomerTotal;        
 
 CLOSE SYMMETRIC KEY GailSammamishKey6;  
 DROP SYMMETRIC KEY GailSammamishKey6;  
@@ -5523,32 +2414,12 @@ GO
 DROP SYNONYM MyProduct;  
 GO
 
-DROP TABLE ProductVendor1 ;
-
-DROP TABLE AdventureWorks2012.dbo.SalesPerson2 ;
-
-GO  
-SELECT * FROM #temptable;  
-GO  
-IF OBJECT_ID(N'tempdb..#temptable', N'U') IS NOT NULL   
-DROP TABLE #temptable;  
-GO  
-
-GO  
-DROP TABLE IF EXISTS T1;  
-GO  
-DROP TABLE IF EXISTS T1;
-
-IF OBJECT_ID ('employee_insupd', 'TR') IS NOT NULL  
-   DROP TRIGGER employee_insupd;
    
 
 DROP TYPE ssn ;
 
-DROP USER AbolrousHazem;  
 GO
 
-DROP VIEW IF EXISTS dbo.Reorder ;  
 GO
 
 DROP WORKLOAD GROUP adhoc;
@@ -5602,19 +2473,12 @@ GO
 USE testDB;  
   
 -- Create a TestUser user to own table T1  
-CREATE USER TestUser WITHOUT LOGIN;  
 ALTER AUTHORIZATION ON T1 TO TestUser;  
   
 -- Create a certificate for signing  
 CREATE CERTIFICATE csSelectT  
   ENCRYPTION BY PASSWORD = 'SimplePwd01'  
   WITH SUBJECT = 'Certificate used to grant SELECT on T1';  
-CREATE USER ucsSelectT1 FROM CERTIFICATE csSelectT;  
-GRANT SELECT ON T1 TO ucsSelectT1;  
-  
--- Create a principal with low privileges  
-CREATE LOGIN Alice WITH PASSWORD = 'SimplePwd01';  
-CREATE USER Alice;  
   
 -- Verify Alice cannoT1 access T1;  
 EXECUTE AS LOGIN = 'Alice';  
@@ -5622,26 +2486,10 @@ EXECUTE AS LOGIN = 'Alice';
 REVERT;  
   
 -- Create a procedure that directly accesses T1  
-CREATE PROCEDURE procSelectT1 AS  
-BEGIN  
-    PRINT 'Now selecting from T1...';  
-    SELECT * FROM T1;  
-END;  
 GO  
-GRANT EXECUTE ON procSelectT1 to public;  
   
 -- Create special procedure for accessing T1  
-CREATE PROCEDURE  procSelectT1ForAlice AS  
-BEGIN  
-   IF USER_ID() <> USER_ID('Alice')  
-    BEGIN  
-        PRINT 'Only Alice can use this.';  
-        RETURN  
-    END  
-   EXEC procSelectT1;  
-END;  
 GO;  
-GRANT EXECUTE ON procSelectT1ForAlice TO PUBLIC;  
   
 -- Verify procedure works for a sysadmin user  
 EXEC procSelectT1ForAlice;  
@@ -5669,8 +2517,6 @@ REVERT;
 -- Cleanup  
 USE master;  
 GO  
-DROP DATABASE testDB;  
-DROP LOGIN Alice;
 
 USE AdventureWorks2012;  
 CLOSE MASTER KEY;  
@@ -5775,15 +2621,10 @@ GO
 USE AdventureWorks2012;  
 GO  
 --Create two temporary principals  
-CREATE LOGIN login1 WITH PASSWORD = 'J345#$)thb';  
-CREATE LOGIN login2 WITH PASSWORD = 'Uor80$23b';  
 GO  
-CREATE USER user1 FOR LOGIN login1;  
-CREATE USER user2 FOR LOGIN login2;  
 GO  
 --Give IMPERSONATE permissions on user2 to user1  
 --so that user1 can successfully set the execution context to user2.  
-GRANT IMPERSONATE ON USER:: user2 TO user1;  
 GO  
 -- Set the execution context to login1.   
 EXECUTE AS LOGIN = 'login1';  
@@ -5796,177 +2637,23 @@ REVERT;
 REVERT;  
   
 --Remove temporary principals.  
-DROP LOGIN login1;  
-DROP LOGIN login2;  
-DROP USER user1;  
-DROP USER user2;  
 GO
 
-DECLARE @cookie VARBINARY(8000);  
 EXECUTE AS USER = 'user1' WITH COOKIE INTO @cookie;  
 -- Store the cookie in a safe location in your application.  
 -- Verify the context switch.  
 --Display the cookie value.  
 GO  
 -- Use the cookie in the REVERT statement.  
-DECLARE @cookie VARBINARY(8000);  
 -- Set the cookie value to the one from the SELECT @cookie statement.  
 SET @cookie = <value from the SELECT @cookie statement>;  
 REVERT WITH COOKIE = @cookie;  
 
-CREATE PROCEDURE HumanResources.uspEmployeesInDepartment   
-@DeptValue int  
-WITH EXECUTE AS OWNER  
-AS  
-    SET NOCOUNT ON;  
-    SELECT e.BusinessEntityID, c.LastName, c.FirstName, e.JobTitle  
-    FROM Person.Person AS c   
-    INNER JOIN HumanResources.Employee AS e  
-        ON c.BusinessEntityID = e.BusinessEntityID  
-    INNER JOIN HumanResources.EmployeeDepartmentHistory AS edh  
-        ON e.BusinessEntityID = edh.BusinessEntityID  
-    WHERE edh.DepartmentID = @DeptValue  
-    ORDER BY c.LastName, c.FirstName;  
 GO  
   
 -- Execute the stored procedure by specifying department 5.  
 EXECUTE HumanResources.uspEmployeesInDepartment 5;  
-GO
 
-
-
-USE master;  
-GRANT VIEW DEFINITION ON AVAILABILITY GROUP::MyAg TO ZArifin;  
-GO
-
-USE master;  
-GRANT TAKE OWNERSHIP ON AVAILABILITY GROUP::MyAg TO PKomosinski   
-    WITH GRANT OPTION;  
-GO
-
-USE master;  
-GRANT CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski;  
-GO
-
-USE AdventureWorks;
-GRANT CREATE TABLE TO MelanieK;
-GO
-
-USE AdventureWorks2012;
-GRANT SHOWPLAN TO AuditMonitor;
-GO
-
-USE AdventureWorks2012;
-GRANT CREATE VIEW TO CarmineEs WITH GRANT OPTION;
-GO
-
-USE AdventureWorks2012;
-GRANT CONTROL ON DATABASE::AdventureWorks2012 TO Sarah;
-GO
-
-GRANT CONTROL ON USER::Wanida TO RolandX;  
-GO
-
-GRANT VIEW DEFINITION ON ROLE::SammamishParking   
-    TO JinghaoLiu WITH GRANT OPTION;  
-GO
-
-GRANT IMPERSONATE ON USER::HamithaL TO AccountsPayable17;  
-GO
-
-USE master;  
-GRANT VIEW DEFINITION ON ENDPOINT::Mirror7 TO ZArifin;  
-GO
-
-USE master;  
-GRANT TAKE OWNERSHIP ON ENDPOINT::Shipping83 TO PKomosinski   
-    WITH GRANT OPTION;  
-GO
-
-GRANT CONTROL  
-    ON FULLTEXT CATALOG :: ProductCatalog  
-    TO Ted ;
-    
-GRANT VIEW DEFINITION  
-    ON FULLTEXT STOPLIST :: ProductStoplist  
-    TO Mary ;
-    
-    GRANT SELECT ON OBJECT::Person.Address TO RosaQdM;  
-GO
-    USE AdventureWorks2012;   
-GRANT EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo  
-    TO Recruiting11;  
-GO
-
-GRANT REFERENCES (BusinessEntityID) ON OBJECT::HumanResources.vEmployee   
-    TO Wanida WITH GRANT OPTION;  
-GO
-
-GRANT SELECT ON Person.Address TO RosaQdM;  
-GO
-
-GRANT SELECT ON Person.Address TO [AdventureWorks2012\RosaQdM];  
-GO
-
-CREATE ROLE newrole ;  
-GRANT EXECUTE ON dbo.uspGetBillOfMaterials TO newrole ;  
-GO
-
-GRANT INSERT ON SCHEMA :: HumanResources TO guest;
-
-GRANT SELECT ON SCHEMA :: Person TO WilJo WITH GRANT OPTION;
-
-GRANT VIEW DEFINITION  
-    ON SEARCH PROPERTY LIST :: DocumentTablePropertyList  
-    TO Mary ;
-    
-USE master;  
-GRANT CONTROL SERVER TO TerryEminhizer;  
-GO
-
-USE master;  
-GRANT ALTER ANY EVENT NOTIFICATION TO JanethEsteves WITH GRANT OPTION;  
-GO
-
-USE master;  
-CREATE SERVER ROLE ITDevAdmin ;  
-CREATE SERVER ROLE ITDevelopers ;  
-GRANT ALTER ANY DATABASE TO ITDevAdmin WITH GRANT OPTION ;  
-GRANT ALTER ANY DATABASE TO ITDevelopers AS ITDevAdmin ;  
-GO
-
-USE master;  
-GRANT IMPERSONATE ON LOGIN::WanidaBenshoof to [AdvWorks\YoonM];  
-GO
-
-USE master;  
-GRANT VIEW DEFINITION ON LOGIN::EricKurjan TO RMeyyappan   
-    WITH GRANT OPTION;  
-GO
-
-USE master;  
-GRANT VIEW DEFINITION ON SERVER ROLE::Sales TO Auditors ;  
-GO
-
-USE AdventureWorks2012;  
-GRANT ALTER ON SYMMETRIC KEY::SamInventory42 TO HamidS;  
-GO    
-
-USE AdventureWorks2012;  
-GRANT SELECT ON sys.sql_logins TO Sylvester1;  
-GRANT VIEW SERVER STATE to Sylvester1;  
-GO
-
-GRANT EXECUTE ON xp_readmail TO Sylvester1;  
-GO
-
-GRANT VIEW DEFINITION ON TYPE::Telemarketing.PhoneNumber   
-    TO KhalidR WITH GRANT OPTION;  
-GO
-
-USE AdventureWorks2012;  
-GRANT EXECUTE ON XML SCHEMA COLLECTION::Sales.Invoices4 TO Wanida;  
-GO
 
 USE master;  
 OPEN MASTER KEY DECRYPTION BY PASSWORD = '43987hkhj4325tsku7';  
@@ -5991,11 +2678,7 @@ GO
 USE AdventureWorks2012;  
 GO  
 -- Create two temporary principals.  
-CREATE LOGIN login1 WITH PASSWORD = 'J345#$)thb';  
-CREATE LOGIN login2 WITH PASSWORD = 'Uor80$23b';  
 GO  
-CREATE USER user1 FOR LOGIN login1;  
-CREATE USER user2 FOR LOGIN login2;  
 GO  
 -- Give IMPERSONATE permissions on user2 to user1  
 -- so that user1 can successfully set the execution context to user2.  
@@ -6014,126 +2697,17 @@ REVERT;
 -- Display the current execution context.  
   
 -- Remove the temporary principals.  
-DROP LOGIN login1;  
-DROP LOGIN login2;  
-DROP USER user1;  
-DROP USER user2;  
 GO
 
-DECLARE @cookie VARBINARY(100);  
 EXECUTE AS USER = 'user1' WITH COOKIE INTO @cookie;  
 -- Store the cookie somewhere safe in your application.  
 GO  
 -- Use the cookie in the REVERT statement.  
-DECLARE @cookie VARBINARY(100);  
 -- Set the cookie value to the one from the SELECT @cookie statement.  
 SET @cookie = <value from the SELECT @cookie statement>;  
 REVERT WITH COOKIE = @cookie;  
 GO
 
-USE master;  
-REVOKE VIEW DEFINITION ON AVAILABILITY GROUP::MyAg TO ZArifin;  
-GO
-
-USE master;  
-REVOKE TAKE OWNERSHIP ON AVAILABILITY GROUP::MyAg TO PKomosinski   
-    CASCADE;  
-GO
-
-USE master;  
-GRANT CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski   
-    WITH GRANT OPTION;  
-GO  
-REVOKE GRANT OPTION FOR CONTROL ON AVAILABILITY GROUP::MyAg TO PKomosinski  
-CASCADE  
-GO
-USE AdventureWorks2012;  
-REVOKE CREATE CERTIFICATE FROM MelanieK;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE REFERENCES FROM AuditMonitor;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE VIEW DEFINITION FROM CarmineEs CASCADE;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE CONTROL ON USER::Wanida FROM RolandX;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE VIEW DEFINITION ON ROLE::SammamishParking   
-    FROM JinghaoLiu CASCADE;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE IMPERSONATE ON USER::HamithaL FROM AccountsPayable17;  
-GO
-
-USE master;  
-REVOKE VIEW DEFINITION ON ENDPOINT::Mirror7 FROM ZArifin;  
-GO
-
-USE master;  
-REVOKE TAKE OWNERSHIP ON ENDPOINT::Shipping83 FROM PKomosinski   
-    CASCADE;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE SELECT ON OBJECT::Person.Address FROM RosaQdM;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo  
-    FROM Recruiting11;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE REFERENCES (BusinessEntityID) ON OBJECT::HumanResources.vEmployee   
-    FROM Wanida CASCADE;  
-GO
-
-USE master;  
-REVOKE VIEW SERVER STATE FROM WanidaBenshoof;  
-GO
-
-USE master;  
-REVOKE GRANT OPTION FOR CONNECT SQL FROM JanethEsteves;  
-GO
-
-USE master;  
-REVOKE IMPERSONATE ON LOGIN::WanidaBenshoof FROM [AdvWorks\YoonM];  
-GO
-
-USE master;  
-REVOKE VIEW DEFINITION ON LOGIN::EricKurjan FROM RMeyyappan   
-    CASCADE;  
-GO
-
-USE master;  
-REVOKE VIEW DEFINITION ON SERVER ROLE::Sales TO Auditors ;  
-GO
-
-USE AdventureWorks2012;  
-REVOKE ALTER ON SYMMETRIC KEY::SamInventory42 TO HamidS CASCADE;  
-GO
-
-
-
-REVOKE VIEW DEFINITION ON TYPE::Telemarketing.PhoneNumber   
-    FROM KhalidR CASCADE;  
-GO
-
-
-USE AdventureWorks2012;  
-REVOKE EXECUTE ON XML SCHEMA COLLECTION::Sales.Invoices4 FROM Wanida;  
-GO
 
 SETUSER 'mary';  
-GO  
-GRANT SELECT ON computer_types TO joe;  
-GO  
---To revert to the original user  
-SETUSER;
+

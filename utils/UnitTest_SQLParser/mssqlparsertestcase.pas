@@ -34,6 +34,7 @@ type
     procedure DropTrigger2;
     procedure DropTrigger3;
     procedure DropTrigger4;
+    procedure DropTrigger5;
 
     procedure CreateDatabase1;
     procedure CreateDatabase2;
@@ -179,6 +180,10 @@ type
   { TMSSQLParserTestData }
 
   TMSSQLParserTestData = class(TDataModule)
+    sSecurity: TRxTextHolder;
+    sSystem: TRxTextHolder;
+    sViews: TRxTextHolder;
+    sFunctions: TRxTextHolder;
     sDML: TRxTextHolder;
     sTable: TRxTextHolder;
     sDataBase: TRxTextHolder;
@@ -210,6 +215,11 @@ end;
 procedure TMSSQLParserTest.DropTrigger4;
 begin
   DoTestSQL(MSSQLParserTestData.sTriggers['DropTrigger4']);
+end;
+
+procedure TMSSQLParserTest.DropTrigger5;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['DropTrigger5']);
 end;
 
 procedure TMSSQLParserTest.CreateDatabase1;
@@ -977,4 +987,7 @@ end;
 initialization
   RegisterTest(TMSSQLParserTest);
 end.
+
+
+
 
