@@ -1564,6 +1564,9 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterView, 'ALTER VIEW');               //ALTER VIEW — изменить определение представления
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropView, 'DROP VIEW');                 //DROP VIEW — удалить представление
 
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateDatabase, 'CREATE DATABASE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropDatabase, 'DROP DATABASE');
+
   RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
   RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO
 end.

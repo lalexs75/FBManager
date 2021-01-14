@@ -264,6 +264,22 @@ type
     property CreateMode:TCreateMode read FCreateMode write FCreateMode;
   end;
 
+
+  { TSQLCreateSchema }
+
+  TSQLCreateSchema = class(TSQLCreateCommandAbstract)
+  private
+    FChildCmd: string;
+    FOwnerUserName: string;
+  protected
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract); override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property OwnerUserName:string read FOwnerUserName write FOwnerUserName;
+    property ChildCmd:string read FChildCmd write FChildCmd;
+  end;
+
   TTriggerState = (trsNone, trsActive, trsInactive);
 
   { TSQLCreateTrigger }
@@ -1032,6 +1048,29 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLCreateSchema }
+
+procedure TSQLCreateSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+constructor TSQLCreateSchema.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TSQLCreateSchema.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCreateSchema then
+  begin
+    OwnerUserName:=TSQLCreateSchema(ASource).OwnerUserName;
+    ChildCmd:=TSQLCreateSchema(ASource).ChildCmd;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLCommentOn }

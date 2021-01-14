@@ -525,9 +525,144 @@ type
     property SchemaName;
   end;
 
+  { TMSSQLCreateDatabase }
+
+  TMSSQLCreateDatabase = class(TSQLCreateDatabase)
+  private
+    FCurParam: TSQLParserField;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLDropDatabase }
+
+  TMSSQLDropDatabase = class(TSQLDropCommandAbstract)
+  private
+    FDatabaseName: string;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property DatabaseName:string read FDatabaseName write FDatabaseName;
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit;
+
+{ TMSSQLDropDatabase }
+
+procedure TMSSQLDropDatabase.InitParserTree;
+begin
+  (*
+  DROP DATABASE [ IF EXISTS ] { database_name | database_snapshot_name } [ ,...n ] [;]
+  *)
+end;
+
+procedure TMSSQLDropDatabase.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropDatabase.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLDropDatabase.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateDatabase }
+
+procedure TMSSQLCreateDatabase.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+  CREATE DATABASE database_name
+  [ CONTAINMENT = { NONE | PARTIAL } ]
+  [ ON
+        [ PRIMARY ] <filespec> [ ,...n ]
+        [ , <filegroup> [ ,...n ] ]
+        [ LOG ON <filespec> [ ,...n ] ]
+  ]
+  [ COLLATE collation_name ]
+  [ WITH <option> [,...n ] ]
+  [;]
+
+  <option> ::=
+  {
+        FILESTREAM ( <filestream_option> [,...n ] )
+      | DEFAULT_FULLTEXT_LANGUAGE = { lcid | language_name | language_alias }
+      | DEFAULT_LANGUAGE = { lcid | language_name | language_alias }
+      | NESTED_TRIGGERS = { OFF | ON }
+      | TRANSFORM_NOISE_WORDS = { OFF | ON}
+      | TWO_DIGIT_YEAR_CUTOFF = <two_digit_year_cutoff>
+      | DB_CHAINING { OFF | ON }
+      | TRUSTWORTHY { OFF | ON }
+      | PERSISTENT_LOG_BUFFER=ON ( DIRECTORY_NAME='<Filepath to folder on DAX formatted volume>' )
+  }
+
+  <filestream_option> ::=
+  {
+        NON_TRANSACTED_ACCESS = { OFF | READ_ONLY | FULL }
+      | DIRECTORY_NAME = 'directory_name'
+  }
+
+  <filespec> ::=
+  {
+  (
+      NAME = logical_file_name ,
+      FILENAME = { 'os_file_name' | 'filestream_path' }
+      [ , SIZE = size [ KB | MB | GB | TB ] ]
+      [ , MAXSIZE = { max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
+      [ , FILEGROWTH = growth_increment [ KB | MB | GB | TB | % ] ]
+  )
+  }
+
+  <filegroup> ::=
+  {
+  FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY_OPTIMIZED_DATA ]
+      <filespec> [ ,...n ]
+  }
+
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 0);
+  T:=AddSQLTokens(stIdentificator, T, 'DATABASE', [], 1);
+end;
+
+procedure TMSSQLCreateDatabase.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+procedure TMSSQLCreateDatabase.MakeSQL;
+var
+  S: String;
+begin
+  S:='CREATE DATABASE ' + Name;
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLCreateDatabase.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLCommentOn }
 
@@ -4144,52 +4279,6 @@ WITH IDENTITY = 'identity_name'
 CREATE CRYPTOGRAPHIC PROVIDER provider_name
     FROM FILE = path_of_DLL
 ----------------------------------------
-CREATE DATABASE database_name
-[ CONTAINMENT = { NONE | PARTIAL } ]
-[ ON
-      [ PRIMARY ] <filespec> [ ,...n ]
-      [ , <filegroup> [ ,...n ] ]
-      [ LOG ON <filespec> [ ,...n ] ]
-]
-[ COLLATE collation_name ]
-[ WITH <option> [,...n ] ]
-[;]
-
-<option> ::=
-{
-      FILESTREAM ( <filestream_option> [,...n ] )
-    | DEFAULT_FULLTEXT_LANGUAGE = { lcid | language_name | language_alias }
-    | DEFAULT_LANGUAGE = { lcid | language_name | language_alias }
-    | NESTED_TRIGGERS = { OFF | ON }
-    | TRANSFORM_NOISE_WORDS = { OFF | ON}
-    | TWO_DIGIT_YEAR_CUTOFF = <two_digit_year_cutoff>
-    | DB_CHAINING { OFF | ON }
-    | TRUSTWORTHY { OFF | ON }
-    | PERSISTENT_LOG_BUFFER=ON ( DIRECTORY_NAME='<Filepath to folder on DAX formatted volume>' )
-}
-
-<filestream_option> ::=
-{
-      NON_TRANSACTED_ACCESS = { OFF | READ_ONLY | FULL }
-    | DIRECTORY_NAME = 'directory_name'
-}
-
-<filespec> ::=
-{
-(
-    NAME = logical_file_name ,
-    FILENAME = { 'os_file_name' | 'filestream_path' }
-    [ , SIZE = size [ KB | MB | GB | TB ] ]
-    [ , MAXSIZE = { max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
-    [ , FILEGROWTH = growth_increment [ KB | MB | GB | TB | % ] ]
-)
-}
-
-<filegroup> ::=
-{
-FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY_OPTIMIZED_DATA ]
-    <filespec> [ ,...n ]
-}
 ----------------------------------------
 CREATE DATABASE AUDIT SPECIFICATION audit_specification_name
 {
@@ -5355,9 +5444,6 @@ DROP CONTRACT contract_name
 DROP CREDENTIAL credential_name
 ----------------------------------------
 DROP CRYPTOGRAPHIC PROVIDER provider_name
-----------------------------------------
--- SQL Server Syntax
-DROP DATABASE [ IF EXISTS ] { database_name | database_snapshot_name } [ ,...n ] [;]
 ----------------------------------------
 DROP DATABASE AUDIT SPECIFICATION audit_specification_name
 [ ; ]

@@ -180,6 +180,7 @@ type
   { TMSSQLParserTestData }
 
   TMSSQLParserTestData = class(TDataModule)
+    sSequence: TRxTextHolder;
     sSecurity: TRxTextHolder;
     sSystem: TRxTextHolder;
     sViews: TRxTextHolder;

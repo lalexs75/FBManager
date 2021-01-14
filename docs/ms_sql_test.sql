@@ -18,22 +18,6 @@ ALTER BROKER PRIORITY SimpleContractPriority
          REMOTE_SERVICE_NAME = N'InitiatorServiceB',  
          PRIORITY_LEVEL = 8);
          
-ALTER CERTIFICATE Shipping04   
-    REMOVE PRIVATE KEY;  
-GO
-
-ALTER CERTIFICATE Shipping11   
-    WITH PRIVATE KEY (DECRYPTION BY PASSWORD = '95hkjdskghFDGGG4%',  
-    ENCRYPTION BY PASSWORD = '34958tosdgfkh##38');  
-GO
-
-ALTER CERTIFICATE Shipping13   
-    WITH PRIVATE KEY (FILE = 'c:\importedkeys\Shipping13',  
-    DECRYPTION BY PASSWORD = 'GDFLKl8^^GGG4000%');  
-GO
-
-ALTER CERTIFICATE Shipping15   
-    WITH PRIVATE KEY (DECRYPTION BY PASSWORD = '95hk000eEnvjkjy#F%');  
 GO
 
 ALTER COLUMN ENCRYPTION KEY MyCEK  
@@ -89,19 +73,6 @@ ADD EVENT sqlserver.database_transaction_begin,
 ADD EVENT sqlserver.database_transaction_end;  
 GO        
 
-ALTER EXTERNAL DATA SOURCE hadoop_eds SET
-     LOCATION = 'hdfs://10.10.10.10:8020',
-     RESOURCE_MANAGER_LOCATION = '10.10.10.10:8032'
-    ;
-    
-ALTER EXTERNAL DATA SOURCE hadoop_eds SET
-   CREDENTIAL = new_hadoop_user
-    ;
-
-ALTER EXTERNAL DATA SOURCE AzureStorage_west SET
-   LOCATION = 'wasbs://loadingdemodataset@updatedproductioncontainer.blob.core.windows.net',
-   CREDENTIAL = AzureStorageCredential
-   
    
    
 ALTER EXTERNAL LANGUAGE Java 
@@ -139,29 +110,6 @@ GO
 ALTER FULLTEXT STOPLIST CombinedFunctionWordList ADD 'en' LANGUAGE 'Spanish';  
 ALTER FULLTEXT STOPLIST CombinedFunctionWordList ADD 'en' LANGUAGE 'French';   
 
-
--- Create a database   
-  
--- Create a rowstore staging table  
-  
--- Insert 10 million rows into the staging table.   
-  
-SELECT @loop = 0  
-BEGIN TRAN  
-    WHILE (@loop < 300000)   
-      BEGIN  
-        SELECT @AccountKey = CAST (RAND()*10000000 as int);  
-        SELECT @AccountDescription = 'accountdesc ' + CONVERT(varchar(20), @AccountKey);  
-        SELECT @AccountType = 'AccountType ' + CONVERT(varchar(20), @AccountKey);  
-        SELECT @AccountCode =  CAST (RAND()*10000000 as int);  
-  
-        INSERT INTO  staging VALUES (@AccountKey, @AccountDescription, @AccountType, @AccountCode);  
-  
-        SELECT @loop = @loop + 1;  
-    END  
-COMMIT  
-  
-  
 
 
 
@@ -467,110 +415,6 @@ ALTER WORKLOAD GROUP adHoc
 USING [default];  
 GO  
 ALTER RESOURCE GOVERNOR RECONFIGURE;  
-GO
-
-
--- Create a sample database in which to load the XML schema collection.  
-GO  
-CREATE XML SCHEMA COLLECTION ManuInstructionsSchemaCollection AS  
-N'<?xml version="1.0" encoding="UTF-16"?>  
-<xsd:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions"   
-   xmlns          ="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions"   
-   elementFormDefault="qualified"   
-   attributeFormDefault="unqualified"  
-   xmlns:xsd="http://www.w3.org/2001/XMLSchema" >  
-  
-    <xsd:complexType name="StepType" mixed="true" >  
-        <xsd:choice  minOccurs="0" maxOccurs="unbounded" >   
-            <xsd:element name="tool" type="xsd:string" />  
-            <xsd:element name="material" type="xsd:string" />  
-            <xsd:element name="blueprint" type="xsd:string" />  
-            <xsd:element name="specs" type="xsd:string" />  
-            <xsd:element name="diag" type="xsd:string" />  
-        </xsd:choice>   
-    </xsd:complexType>  
-  
-    <xsd:element  name="root">  
-        <xsd:complexType mixed="true">  
-            <xsd:sequence>  
-                <xsd:element name="Location" minOccurs="1" maxOccurs="unbounded">  
-                    <xsd:complexType mixed="true">  
-                        <xsd:sequence>  
-                            <xsd:element name="step" type="StepType" minOccurs="1" maxOccurs="unbounded" />  
-                        </xsd:sequence>  
-                        <xsd:attribute name="LocationID" type="xsd:integer" use="required"/>  
-                        <xsd:attribute name="SetupHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="MachineHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="LaborHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="LotSize" type="xsd:decimal" use="optional"/>  
-                    </xsd:complexType>  
-                </xsd:element>  
-            </xsd:sequence>  
-        </xsd:complexType>  
-    </xsd:element>  
-</xsd:schema>' ;  
-GO  
--- Verify - list of collections in the database.  
--- Verify - list of namespaces in the database.  
-  
--- Use it. Create a typed xml variable. Note the collection name   
--- that is specified.  
-
-DROP XML SCHEMA COLLECTION ManuInstructionsSchemaCollection;  
-
-
-
-CREATE XML SCHEMA COLLECTION ProductDescriptionSchemaCollection AS   
-'<xsd:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain"  
-    xmlns="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain"   
-    elementFormDefault="qualified"   
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" >  
-    <xsd:element name="Warranty"  >  
-        <xsd:complexType>  
-            <xsd:sequence>  
-                <xsd:element name="WarrantyPeriod" type="xsd:string"  />  
-                <xsd:element name="Description" type="xsd:string"  />  
-            </xsd:sequence>  
-        </xsd:complexType>  
-    </xsd:element>  
-</xsd:schema>  
- <xs:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelDescription"   
-    xmlns="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelDescription"   
-    elementFormDefault="qualified"   
-    xmlns:mstns="https://tempuri.org/XMLSchema.xsd"   
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"  
-    xmlns:wm="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain" >  
-    <xs:import   
-namespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain" />  
-    <xs:element name="ProductDescription" type="ProductDescription" />  
-        <xs:complexType name="ProductDescription">  
-            <xs:sequence>  
-                <xs:element name="Summary" type="Summary" minOccurs="0" />  
-            </xs:sequence>  
-            <xs:attribute name="ProductModelID" type="xs:string" />  
-            <xs:attribute name="ProductModelName" type="xs:string" />  
-        </xs:complexType>  
-        <xs:complexType name="Summary" mixed="true" >  
-            <xs:sequence>  
-                <xs:any processContents="skip" namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded" />  
-            </xs:sequence>  
-        </xs:complexType>  
-</xs:schema>'  
-;  
-GO   
--- Clean up  
-DROP XML SCHEMA COLLECTION ProductDescriptionSchemaCollection;  
-GO
-
--- Create a collection that contains a schema with no target namespace.  
-CREATE XML SCHEMA COLLECTION MySampleCollection AS '  
-<schema xmlns="http://www.w3.org/2001/XMLSchema"  xmlns:ns="http://ns">  
-<element name="e" type="dateTime"/>  
-</schema>';  
-GO  
--- query will return the names of all the collections that   
---contain a schema with no target namespace  
-
 
 BACKUP DATABASE AdventureWorks2012
  TO DISK = 'Z:\SQLServerBackups\AdvWorksData.bak'
@@ -979,28 +823,6 @@ CREATE BROKER PRIORITY BronzePriority
          REMOTE_SERVICE_NAME = ANY,  
          PRIORITY_LEVEL = 2);
          
-CREATE CERTIFICATE Shipping04   
-   ENCRYPTION BY PASSWORD = 'pGFD4bb925DGvbd2439587y'  
-   WITH SUBJECT = 'Sammamish Shipping Records',   
-   EXPIRY_DATE = '20201031';  
-GO
-
-CREATE CERTIFICATE Shipping11   
-    FROM FILE = 'c:\Shipping\Certs\Shipping11.cer'   
-    WITH PRIVATE KEY (FILE = 'c:\Shipping\Certs\Shipping11.pvk',   
-    DECRYPTION BY PASSWORD = 'sldkflk34et6gs%53#v00');  
-GO
-
-CREATE CERTIFICATE Shipping19   
-    FROM EXECUTABLE FILE = 'c:\Shipping\Certs\Shipping19.dll';  
-GO
-
-GO  
-CREATE CERTIFICATE Shipping19 FROM ASSEMBLY Shipping19;  
-GO
-
-CREATE CERTIFICATE Shipping04   
-   WITH SUBJECT = 'Sammamish Shipping Records';  
 
 CREATE COLUMN ENCRYPTION KEY MyCEK   
 WITH VALUES  
@@ -1254,25 +1076,6 @@ CREATE MASTER KEY ENCRYPTION BY PASSWORD = '!MyC0mpl3xP@ssw0rd!' ;
 
 -- Create a database scoped credential with Azure storage account key as the secret.
 
-CREATE EXTERNAL DATA SOURCE MyOracleServer
-WITH
-  ( LOCATION = 'oracle://145.145.145.145:1521',
-    CREDENTIAL = OracleProxyAccount,
-    PUSHDOWN = ON
-  ) ;
-  
-CREATE EXTERNAL DATA SOURCE MyHadoopCluster
-WITH
-  ( LOCATION = 'hdfs://10.10.10.10:8050' ,
-    TYPE = HADOOP
-  ) ;
-  
-CREATE EXTERNAL DATA SOURCE MyHadoopCluster
-WITH
-  ( LOCATION = 'hdfs://10.10.10.10:8020' ,
-    TYPE = HADOOP ,
-    RESOURCE_MANAGER_LOCATION = '10.10.10.10:8050'
-  ) ;
   
 -- Create a database master key if one does not already exist, using your own password. This key is used to encrypt the credential secret in next step.
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo' ;
@@ -1280,13 +1083,6 @@ CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo' ;
 -- Create a database scoped credential with Kerberos user name and password.
 
 -- Create an external data source with CREDENTIAL option.
-CREATE EXTERNAL DATA SOURCE MyHadoopCluster
-WITH
-  ( LOCATION = 'hdfs://10.10.10.10:8050' ,
-    CREDENTIAL = HadoopUser1 ,
-    TYPE = HADOOP ,
-    RESOURCE_MANAGER_LOCATION = '10.10.10.10:8050'
-  );
   
 -- Create a database master key if one does not already exist, using your own password. This key is used to encrypt the credential secret in next step.
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo' ;
@@ -1294,45 +1090,8 @@ CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo' ;
 -- Create a database scoped credential with Azure storage account key as the secret.
 
 -- Create an external data source with CREDENTIAL option.
-CREATE EXTERNAL DATA SOURCE MyAzureStorage
-WITH
-  ( LOCATION = 'wasbs://daily@logs.blob.core.windows.net/' ,
-    CREDENTIAL = AzureStorageCredential ,
-    TYPE = HADOOP
-  ) ;
-  
-CREATE EXTERNAL DATA SOURCE SQLServerInstance2
-WITH (
-  LOCATION = 'sqlserver://WINSQL2019' ,
-  CONNECTION_OPTIONS = 'Server=%s\SQL2019' ,
-  CREDENTIAL = SQLServerCredentials
-) ;
-
-CREATE EXTERNAL DATA SOURCE SQLServerInstance2
-WITH (
-  LOCATION = 'sqlserver://WINSQL2019:58137' ,
-  CREDENTIAL = SQLServerCredentials
-) ;
-
--- Create an External Data Source for Kafka
-CREATE EXTERNAL DATA SOURCE MyKafkaServer WITH (
-    LOCATION = 'kafka://xxx.xxx.xxx.xxx:1900'
-)
-go
-
--- Create an External Data Source for Kafka
-CREATE EXTERNAL DATA SOURCE MyEdgeHub WITH (
-    LOCATION = 'edgehub://'
-)
-go
 
 
-CREATE EXTERNAL DATA SOURCE MyAzureInvoices
-WITH
-  ( LOCATION = 'https://newinvoices.blob.core.windows.net/week3' ,
-    CREDENTIAL = AccessAzureInvoices ,
-    TYPE = BLOB_STORAGE
-  ) ;              
 CREATE EXTERNAL LANGUAGE Java 
 FROM (CONTENT = N'<path-to-zip>', FILE_NAME = 'javaextension.dll');
 GO
@@ -1392,48 +1151,6 @@ EXECUTE sp_execute_external_script
     @LANGUAGE = N'R',
     @SCRIPT = N'library(packageA)'
     
-CREATE EXTERNAL FILE FORMAT textdelimited1  
-WITH (  
-    FORMAT_TYPE = DELIMITEDTEXT,  
-    FORMAT_OPTIONS (  
-        FIELD_TERMINATOR = '|',  
-        DATE_FORMAT = 'MM/dd/yyyy' ),  
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.GzipCodec'
-);
-
-CREATE EXTERNAL FILE FORMAT rcfile1  
-WITH (  
-    FORMAT_TYPE = RCFILE,  
-    SERDE_METHOD = 'org.apache.hadoop.hive.serde2.columnar.LazyBinaryColumnarSerDe',  
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.DefaultCodec'  
-);
-
-CREATE EXTERNAL FILE FORMAT orcfile1  
-WITH (  
-    FORMAT_TYPE = ORC,  
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'  
-);
-
-CREATE EXTERNAL FILE FORMAT parquetfile1  
-WITH (  
-    FORMAT_TYPE = PARQUET,  
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'  
-);
-
-CREATE EXTERNAL FILE FORMAT skipHeader_CSV
-WITH (FORMAT_TYPE = DELIMITEDTEXT,
-      FORMAT_OPTIONS(
-          FIELD_TERMINATOR = ',',
-          STRING_DELIMITER = '"',
-          FIRST_ROW = 2, 
-          USE_TYPE_DEFAULT = True)
-)
-
-CREATE EXTERNAL FILE FORMAT jsonFileFormat  
-WITH (  
-    FORMAT_TYPE = JSON,  
-    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'  
-);    
 
 CREATE EXTERNAL RESOURCE POOL ep_1
 WITH (  
@@ -1444,74 +1161,10 @@ GO
 ALTER RESOURCE GOVERNOR RECONFIGURE;
 GO
 
-CREATE EXTERNAL DATA SOURCE mydatasource
-WITH (
-    TYPE = HADOOP,
-    LOCATION = 'hdfs://xxx.xxx.xxx.xxx:8020'
-)
 
-CREATE EXTERNAL FILE FORMAT myfileformat
-WITH (
-    FORMAT_TYPE = DELIMITEDTEXT,
-    FORMAT_OPTIONS (FIELD_TERMINATOR ='|')
-);
-
-
-CREATE EXTERNAL DATA SOURCE mydatasource_rc
-WITH (
-    TYPE = HADOOP,
-    LOCATION = 'hdfs://xxx.xxx.xxx.xxx:8020'
-)
-
-CREATE EXTERNAL FILE FORMAT myfileformat_rc
-WITH (
-    FORMAT_TYPE = RCFILE,
-    SERDE_METHOD = 'org.apache.hadoop.hive.serde2.columnar.LazyBinaryColumnarSerDe'
-)
-;
-
-
-
-CREATE EXTERNAL DATA SOURCE mydatasource_orc
-WITH (
-    TYPE = HADOOP,
-    LOCATION = 'hdfs://xxx.xxx.xxx.xxx:8020'
-)
-
-CREATE EXTERNAL FILE FORMAT myfileformat_orc
-WITH (
-    FORMAT = ORC,
-    COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'
-)
-;
 
 -- Create a Master Key
       CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'S0me!nfo';
-    GO
-     /*  specify credentials to external data source
-     *  IDENTITY: user name for external source.
-     *  SECRET: password for external source.
-     */
-    GO
-
-    /* LOCATION: Location string should be of format '<vendor>://<server>[:<port>]'.
-    * PUSHDOWN: specify whether computation should be pushed down to the source. ON by default.
-    * CREDENTIAL: the database scoped credential, created above.
-    */
-    CREATE EXTERNAL DATA SOURCE SQLServerInstance
-    WITH (
-    LOCATION = 'sqlserver://SqlServer',
-    -- PUSHDOWN = ON | OFF,
-      CREDENTIAL = SQLServerCredentials
-    );
-    GO
-
-    GO
-
-     /* LOCATION: sql server table/view in 'database_name.schema_name.object_name' format
-     * DATA_SOURCE: the external data source, created above.
-     */
-     
 -- Create a Master Key
    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
    /*
@@ -1525,12 +1178,6 @@ WITH (
    * PUSHDOWN: specify whether computation should be pushed down to the source. ON by default.
    * CONNECTION_OPTIONS: Specify driver location
    * CREDENTIAL: the database scoped credential, created above.
-   */
-   CREATE EXTERNAL DATA SOURCE external_data_source_name
-   WITH (
-     LOCATION = 'oracle://<server address>[:<port>]',
-     -- PUSHDOWN = ON | OFF,
-     CREDENTIAL = credential_name)
 
    /*
    * LOCATION: Oracle table/view in '.<schema_name>.<object_name>' format
@@ -1550,12 +1197,6 @@ WITH (
     * CONNECTION_OPTIONS: Specify driver location
     * CREDENTIAL: the database scoped credential, created above.
     */
-    CREATE EXTERNAL DATA SOURCE external_data_source_name
-    WITH (
-    LOCATION = teradata://<server address>[:<port>],
-   -- PUSHDOWN = ON | OFF,
-    CREDENTIAL =credential_name
-    );
 
 
      /* LOCATION: Teradata table/view in '<database_name>.<object_name>' format
@@ -1565,27 +1206,6 @@ WITH (
 -- Create a Master Key
    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
 
-   /*
-   * Specify credentials to external data source
-   * IDENTITY: user name for external source.
-   * SECRET: password for external source.
-   */
-
-     /* LOCATION: Location string should be of format '<type>://<server>[:<port>]'.
-    * PUSHDOWN: specify whether computation should be pushed down to the source. ON by default.
-    * CONNECTION_OPTIONS: Specify driver location
-    * CREDENTIAL: the database scoped credential, created above.
-    */
-    CREATE EXTERNAL DATA SOURCE external_data_source_name
-    WITH (
-    LOCATION = mongodb://<server>[:<port>],
-    -- PUSHDOWN = ON | OFF,
-      CREDENTIAL = credential_name
-    );
-
-     /* LOCATION: MongoDB table/view in '<database_name>.<schema_name>.<object_name>' format
-     * DATA_SOURCE: the external data source, created above.
-     */
      
 USE AdventureWorks2012;  
 GO  
@@ -1617,9 +1237,6 @@ SET ANSI_PADDING, ANSI_WARNINGS, CONCAT_NULL_YIELDS_NULL, ARITHABORT,
   QUOTED_IDENTIFIER, ANSI_NULLS ON;
 
 USE MASTER;
-CREATE CERTIFICATE <certificateName>
-    WITH SUBJECT = '<login_name> certificate in master database',
-    EXPIRY_DATE = '12/05/2025';
 
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '23987hxJ#KL95234nl0zBe';
 GO
@@ -1628,35 +1245,6 @@ CREATE MESSAGE TYPE
   [//Adventure-Works.com/Expenses/SubmitExpense]  
   VALIDATION = WELL_FORMED_XML ;
   
-CREATE XML SCHEMA COLLECTION ExpenseReportSchema AS  
-N'<?xml version="1.0" encoding="UTF-16" ?>  
-  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  
-     targetNamespace="https://Adventure-Works.com/schemas/expenseReport"  
-     xmlns:expense="https://Adventure-Works.com/schemas/expenseReport"  
-     elementFormDefault="qualified"  
-   >   
-    <xsd:complexType name="expenseReportType">  
-       <xsd:sequence>  
-         <xsd:element name="EmployeeName" type="xsd:string"/>  
-         <xsd:element name="EmployeeID" type="xsd:string"/>  
-         <xsd:element name="ItemDetail"  
-           type="expense:ItemDetailType" maxOccurs="unbounded"/>  
-      </xsd:sequence>  
-    </xsd:complexType>  
-  
-    <xsd:complexType name="ItemDetailType">  
-      <xsd:sequence>  
-        <xsd:element name="Date" type="xsd:date"/>  
-        <xsd:element name="CostCenter" type="xsd:string"/>  
-        <xsd:element name="Total" type="xsd:decimal"/>  
-        <xsd:element name="Currency" type="xsd:string"/>  
-        <xsd:element name="Description" type="xsd:string"/>  
-      </xsd:sequence>  
-    </xsd:complexType>  
-  
-    <xsd:element name="ExpenseReport" type="expense:expenseReportType"/>  
-  
-  </xsd:schema>' ;  
   
   CREATE MESSAGE TYPE  
     [//Adventure-Works.com/Expenses/SubmitExpense]  
@@ -2101,9 +1689,6 @@ GO
 
 
 USE AdventureWorks2012;  
-CREATE CERTIFICATE CarnationProduction50  
-    WITH SUBJECT = 'Carnation Production Facility Supervisors',  
-    EXPIRY_DATE = '11/11/2011';  
 GO  
 
 EXECUTE AS USER = 'CustomApp' ;  
@@ -2125,103 +1710,6 @@ USING "default" ;
 GO
 
 
-
-
--- Create a sample database in which to load the XML schema collection.  
-GO  
-USE SampleDB;  
-GO  
-CREATE XML SCHEMA COLLECTION ManuInstructionsSchemaCollection AS  
-N'<?xml version="1.0" encoding="UTF-16"?>  
-<xsd:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions"   
-   xmlns          ="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelManuInstructions"   
-   elementFormDefault="qualified"   
-   attributeFormDefault="unqualified"  
-   xmlns:xsd="http://www.w3.org/2001/XMLSchema" >  
-  
-    <xsd:complexType name="StepType" mixed="true" >  
-        <xsd:choice  minOccurs="0" maxOccurs="unbounded" >   
-            <xsd:element name="tool" type="xsd:string" />  
-            <xsd:element name="material" type="xsd:string" />  
-            <xsd:element name="blueprint" type="xsd:string" />  
-            <xsd:element name="specs" type="xsd:string" />  
-            <xsd:element name="diag" type="xsd:string" />  
-        </xsd:choice>   
-    </xsd:complexType>  
-  
-    <xsd:element  name="root">  
-        <xsd:complexType mixed="true">  
-            <xsd:sequence>  
-                <xsd:element name="Location" minOccurs="1" maxOccurs="unbounded">  
-                    <xsd:complexType mixed="true">  
-                        <xsd:sequence>  
-                            <xsd:element name="step" type="StepType" minOccurs="1" maxOccurs="unbounded" />  
-                        </xsd:sequence>  
-                        <xsd:attribute name="LocationID" type="xsd:integer" use="required"/>  
-                        <xsd:attribute name="SetupHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="MachineHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="LaborHours" type="xsd:decimal" use="optional"/>  
-                        <xsd:attribute name="LotSize" type="xsd:decimal" use="optional"/>  
-                    </xsd:complexType>  
-                </xsd:element>  
-            </xsd:sequence>  
-        </xsd:complexType>  
-    </xsd:element>  
-</xsd:schema>' ;  
-GO  
-  
--- Use it. Create a typed xml variable. Note collection name specified.  
-GO  
-DROP XML SCHEMA COLLECTION ManuInstructionsSchemaCollection;  
-
-
-
-CREATE XML SCHEMA COLLECTION ProductDescriptionSchemaCollection AS   
-'<xsd:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain"  
-    xmlns="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain"   
-    elementFormDefault="qualified"   
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" >  
-    <xsd:element name="Warranty"  >  
-        <xsd:complexType>  
-            <xsd:sequence>  
-                <xsd:element name="WarrantyPeriod" type="xsd:string"  />  
-                <xsd:element name="Description" type="xsd:string"  />  
-            </xsd:sequence>  
-        </xsd:complexType>  
-    </xsd:element>  
-</xsd:schema>  
- <xs:schema targetNamespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelDescription"   
-    xmlns="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelDescription"   
-    elementFormDefault="qualified"   
-    xmlns:mstns="https://tempuri.org/XMLSchema.xsd"   
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"  
-    xmlns:wm="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain" >  
-    <xs:import   
-namespace="https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelWarrAndMain" />  
-    <xs:element name="ProductDescription" type="ProductDescription" />  
-        <xs:complexType name="ProductDescription">  
-            <xs:sequence>  
-                <xs:element name="Summary" type="Summary" minOccurs="0" />  
-            </xs:sequence>  
-            <xs:attribute name="ProductModelID" type="xs:string" />  
-            <xs:attribute name="ProductModelName" type="xs:string" />  
-        </xs:complexType>  
-        <xs:complexType name="Summary" mixed="true" >  
-            <xs:sequence>  
-                <xs:any processContents="skip" namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded" />  
-            </xs:sequence>  
-        </xs:complexType>  
-</xs:schema>'  
-;  
-GO -- Clean up  
-DROP XML SCHEMA COLLECTION ProductDescriptionSchemaCollection;  
-GO
-
--- Create a collection that contains a schema with no target namespace.  
-CREATE XML SCHEMA COLLECTION MySampleCollection AS '  
-<schema xmlns="http://www.w3.org/2001/XMLSchema"  xmlns:ns="http://ns">  
-<element name="e" type="dateTime"/>  
-</schema>';  
 go  
 -- Query will return the names of all the collections that   
 --contain a schema with no target namespace.  
@@ -2232,11 +1720,6 @@ ON     sys.xml_schema_collections.xml_collection_id =
        sys.xml_schema_namespaces.xml_collection_id   
 WHERE  sys.xml_schema_namespaces.name='';
 
-CREATE XML SCHEMA COLLECTION mySC AS '  
-<schema xmlns="http://www.w3.org/2001/XMLSchema">  
-      <element name="root" type="string"/>  
-</schema>  
-';  
 GO  
 GO
 
@@ -2247,12 +1730,6 @@ DROP BROKER PRIORITY InitiatorAToTargetPriority;
 
 
 USE AdventureWorks2012;  
-DROP CERTIFICATE Shipping04;
-
-
-
-USE master;  
-DROP CERTIFICATE Shipping04;
 
 DROP COLUMN ENCRYPTION KEY MyCEK;  
 GO
@@ -2296,9 +1773,7 @@ GO
 
 DROP ENDPOINT sql_endpoint;
 
-DROP EXTERNAL DATA SOURCE mydatasource;
 
-DROP EXTERNAL FILE FORMAT myfileformat;
 
 
 CREATE EXTERNAL LANGUAGE Java 
@@ -2319,16 +1794,6 @@ GO
 ALTER RESOURCE GOVERNOR RECONFIGURE;  
 GO
 
-DROP EXTERNAL TABLE SalesPerson;  
-DROP EXTERNAL TABLE dbo.SalesPerson;  
-DROP EXTERNAL TABLE EasternDivision.dbo.SalesPerson;
-
-DROP EXTERNAL TABLE ProductVendor1;
-
-DROP EXTERNAL TABLE EasternDivision.dbo.SalesPerson;
-
-USE AdventureWorks2012;  
-GO  
 CREATE EVENT NOTIFICATION NotifyALTER_T1  
 ON DATABASE  
 FOR ALTER_TABLE  
@@ -2346,10 +1811,6 @@ DROP FULLTEXT CATALOG catalog_name
 
 DROP FULLTEXT STOPLIST myStoplist;
 
-
-
-
-GO
 
 USE AdventureWorks2012;  
 DROP MASTER KEY;  
@@ -2427,9 +1888,6 @@ GO
 ALTER RESOURCE GOVERNOR RECONFIGURE;
 GO
 
-DROP XML SCHEMA COLLECTION ManuInstructionsSchemaCollection;  
-GO
-
 USE AdventureWorks2012;  
 ADD SIGNATURE TO HumanResources.uspUpdateEmployeeLogin   
     BY CERTIFICATE HumanResourcesDP;  
@@ -2439,9 +1897,6 @@ GO
 USE TestSignature ;  
 GO  
 -- Create a CERTIFICATE to sign the procedure.  
-CREATE CERTIFICATE cert_signature_demo   
-    ENCRYPTION BY PASSWORD = 'pGFD4bb925DGvbd2439587y'  
-    WITH SUBJECT = 'ADD SIGNATURE demo';  
 GO  
 
 -- Create a simple procedure.  
@@ -2476,9 +1931,6 @@ USE testDB;
 ALTER AUTHORIZATION ON T1 TO TestUser;  
   
 -- Create a certificate for signing  
-CREATE CERTIFICATE csSelectT  
-  ENCRYPTION BY PASSWORD = 'SimplePwd01'  
-  WITH SUBJECT = 'Certificate used to grant SELECT on T1';  
   
 -- Verify Alice cannoT1 access T1;  
 EXECUTE AS LOGIN = 'Alice';  
@@ -2528,97 +1980,6 @@ GO
 CLOSE ALL SYMMETRIC KEYS;  
 GO
 
-USE master;  
-DENY VIEW DEFINITION ON AVAILABILITY GROUP::MyAg TO ZArifin;  
-GO
-
-USE master;  
-DENY TAKE OWNERSHIP ON AVAILABILITY GROUP::MyAg TO PKomosinski   
-    CASCADE;  
-GO
-
-USE AdventureWorks2012;
-DENY CREATE CERTIFICATE TO MelanieK;
-GO
-
-USE AdventureWorks2012;
-DENY REFERENCES TO AuditMonitor;
-GO
-
-USE AdventureWorks2012;
-DENY VIEW DEFINITION TO CarmineEs CASCADE;
-GO
-
-USE AdventureWorks2012;  
-DENY CONTROL ON USER::Wanida TO RolandX;  
-GO
-
-USE AdventureWorks2012;  
-DENY VIEW DEFINITION ON ROLE::SammamishParking   
-    TO JinghaoLiu CASCADE;  
-GO
-
-USE AdventureWorks2012;  
-DENY IMPERSONATE ON USER::HamithaL TO AccountsPayable17;  
-GO
-
-USE master;  
-DENY VIEW DEFINITION ON ENDPOINT::Mirror7 TO ZArifin;  
-GO
-
-USE master;  
-DENY TAKE OWNERSHIP ON ENDPOINT::Shipping83 TO PKomosinski   
-    CASCADE;  
-GO
-
-DENY SELECT ON OBJECT::Person.Address TO RosaQdM;  
-GO
-
-DENY EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo  
-    TO Recruiting11;  
-GO
-
-DENY REFERENCES (BusinessEntityID) ON OBJECT::HumanResources.vEmployee   
-    TO Wanida CASCADE;  
-GO
-
-USE master;  
-DENY CONNECT SQL TO Annika CASCADE;  
-GO
-
-USE master;  
-DENY CREATE ENDPOINT TO ArifS AS MandarP;  
-GO
-
-USE master;  
-DENY IMPERSONATE ON LOGIN::WanidaBenshoof TO [AdvWorks\YoonM];  
-GO
-
-USE master;  
-DENY VIEW DEFINITION ON LOGIN::EricKurjan TO RMeyyappan   
-    CASCADE;  
-GO
-
-USE master;  
-DENY VIEW DEFINITION ON SERVER ROLE::Sales TO Auditors ;  
-GO
-
-USE AdventureWorks2012;  
-DENY ALTER ON SYMMETRIC KEY::SamInventory42 TO HamidS;  
-GO
-
-DENY EXECUTE ON sys.xp_cmdshell TO public;  
-GO
-
-DENY VIEW DEFINITION ON TYPE::Telemarketing.PhoneNumber   
-    TO KhalidR CASCADE;  
-GO
-
-USE AdventureWorks2012;  
-DENY EXECUTE ON XML SCHEMA COLLECTION::Sales.Invoices4 TO Wanida;  
-GO
-
-USE AdventureWorks2012;  
 GO  
 --Create two temporary principals  
 GO  
@@ -2673,17 +2034,6 @@ OPEN SYMMETRIC KEY HarnpadoungsatayaSE3
 -- Use the key that is already open to decrypt MarketingKey11.  
 OPEN SYMMETRIC KEY MarketingKey11   
     DECRYPTION BY SYMMETRIC KEY HarnpadoungsatayaSE3;  
-GO
-
-USE AdventureWorks2012;  
-GO  
--- Create two temporary principals.  
-GO  
-GO  
--- Give IMPERSONATE permissions on user2 to user1  
--- so that user1 can successfully set the execution context to user2.  
-GRANT IMPERSONATE ON USER:: user2 TO user1;  
-GO  
 -- Set the execution context to login1.   
 EXECUTE AS LOGIN = 'login1';  
 -- Verify that the execution context is now login1.  

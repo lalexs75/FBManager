@@ -615,10 +615,8 @@ type
 
   { TPGSQLCreateSchema }
 
-  TPGSQLCreateSchema = class(TSQLCreateCommandAbstract)
+  TPGSQLCreateSchema = class(TSQLCreateSchema)
   private
-    FChildCmd: string;
-    FOwnerUserName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -626,8 +624,6 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property OwnerUserName:string read FOwnerUserName write FOwnerUserName;
-    property ChildCmd:string read FChildCmd write FChildCmd;
   end;
 
   { TPGSQLAlterSchema }
@@ -18878,10 +18874,10 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
-    2:FOwnerUserName:=AWord;
+    2:OwnerUserName:=AWord;
     3:begin
         ASQLParser.Position:=ASQLParser.WordPosition;
-        FChildCmd:=ASQLParser.GetToCommandDelemiter;
+        ChildCmd:=ASQLParser.GetToCommandDelemiter;
       end;
   end;
 end;
@@ -18894,13 +18890,13 @@ begin
   if ooIfNotExists in Options then S:=S + ' IF NOT EXISTS';
   if Name <> '' then S:=S + ' ' + DoFormatName(Name);
 
-  if FOwnerUserName <> '' then
-    S:=S + ' AUTHORIZATION ' +DoFormatName(FOwnerUserName);
+  if OwnerUserName <> '' then
+    S:=S + ' AUTHORIZATION ' +DoFormatName(OwnerUserName);
 
-  if FChildCmd<>'' then
+  if ChildCmd<>'' then
   begin
-    if FChildCmd[1]>' ' then S:=S + LineEnding;
-    S:=S + FChildCmd;
+    if ChildCmd[1]>' ' then S:=S + LineEnding;
+    S:=S + ChildCmd;
   end;
 
   AddSQLCommand(S);
