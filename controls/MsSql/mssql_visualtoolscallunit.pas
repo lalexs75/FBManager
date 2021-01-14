@@ -61,19 +61,20 @@ uses fbmStrConstUnit,
   fbmTableEditorDataUnit,
   fbmTableStatisticUnit,
   fbmDDLPageUnit,
-  fbmViewEditorMainUnit;
+  fbmViewEditorMainUnit,
+  fdbm_SchemeEditorUnit;
 
 { TMSSQLVisualTools }
 
 constructor TMSSQLVisualTools.Create(ASQLEngine: TSQLEngineAbstract);
 begin
   inherited Create(ASQLEngine);
-(*
+
   RegisterObjEditor(TMSSQLSSchema,
     [Tfdbm_SchemeEditorForm, TfbmObjectEditorDescriptionFrame],
-    [Tfdbm_SchemeEditorForm, TDependenciesFrame, TfbmpgACLEditEditor, TfbmObjectEditorDescriptionFrame,
+    [Tfdbm_SchemeEditorForm, {TDependenciesFrame, TfbmpgACLEditEditor, }TfbmObjectEditorDescriptionFrame,
      TfbmTableStatisticFrame, TfbmDDLPage]);
-*)
+
   RegisterObjEditor(TMSSQLTable,
     [TfbmTableEditorFieldsFrame, TfbmObjectEditorDescriptionFrame],
     [TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame,

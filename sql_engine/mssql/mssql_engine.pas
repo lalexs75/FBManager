@@ -121,6 +121,7 @@ type
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject); override;
     destructor Destroy; override;
 
+    function CreateSQLObject:TSQLCommandDDL;override;
     function GetObjectType: string;override;
     procedure RefreshGroup; override;
     procedure RefreshObject; override;
@@ -1466,6 +1467,18 @@ begin
   FreeAndNil(FViews);
   FreeAndNil(FTriggers);
   inherited Destroy;
+end;
+
+function TMSSQLSSchema.CreateSQLObject: TSQLCommandDDL;
+begin
+  if State = sdboCreate then
+    Result:=TMSSQLCreateSchema.Create(nil)
+  else
+  begin
+    Result:=TMSSQLAlterSchema.Create(nil);
+    Result.Name:=Caption;
+    TMSSQLAlterSchema(Result).OldDescription:=Description;
+  end;
 end;
 
 { TMSSQLTriggerRoot }

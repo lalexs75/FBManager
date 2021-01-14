@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   sqlObjects, SQLEngineCommonTypesUnit, fdmAbstractEditorUnit,
-  SQLEngineAbstractUnit, fbmSqlParserUnit, PostgreSQLEngineUnit;
+  SQLEngineAbstractUnit, fbmSqlParserUnit;
 
 type
 
@@ -56,7 +56,7 @@ var
   fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm;
 
 implementation
-uses fbmStrConstUnit, pg_SqlParserUnit;
+uses fbmStrConstUnit;
 
 {$R *.lfm}
 
@@ -83,16 +83,16 @@ function Tfdbm_SchemeEditorForm.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 begin
   Result:=true;
-  if ASQLObject is TPGSQLCreateSchema then
+  if ASQLObject is TSQLCreateSchema then
   begin
-    TPGSQLCreateSchema(ASQLObject).Name:=edtSchemeName.Text;
-    TPGSQLCreateSchema(ASQLObject).OwnerUserName:=edtOwnerName.Text;
+    TSQLCreateSchema(ASQLObject).Name:=edtSchemeName.Text;
+    TSQLCreateSchema(ASQLObject).OwnerUserName:=edtOwnerName.Text;
   end
   else
-  if ASQLObject is TPGSQLAlterSchema then
+  if ASQLObject is TSQLAlterSchema then
   begin
-    TPGSQLAlterSchema(ASQLObject).SchemaNewName:=edtSchemeName.Text;
-    TPGSQLAlterSchema(ASQLObject).SchemaNewOwner:=edtOwnerName.Text;
+    TSQLAlterSchema(ASQLObject).SchemaNewName:=edtSchemeName.Text;
+    TSQLAlterSchema(ASQLObject).SchemaNewOwner:=edtOwnerName.Text;
   end
   else
   begin
@@ -139,7 +139,7 @@ begin
   UserListRefresh;
 
   edtSchemeName.Text:=DBObject.Caption;
-  edtOwnerName.Text:=TPGSchema(DBObject).OwnerName;
+//  edtOwnerName.Text:=TPGSchema(DBObject).OwnerName;
 end;
 
 procedure Tfdbm_SchemeEditorForm.Localize;

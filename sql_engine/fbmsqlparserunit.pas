@@ -280,6 +280,23 @@ type
     property ChildCmd:string read FChildCmd write FChildCmd;
   end;
 
+  { TSQLAlterSchema }
+
+  TSQLAlterSchema = class(TSQLCommandDDL)
+  private
+    FOldDescription: string;
+    FSchemaNewName: string;
+    FSchemaNewOwner: string;
+  protected
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaNewName:string read FSchemaNewName write FSchemaNewName;
+    property SchemaNewOwner:string read FSchemaNewOwner write FSchemaNewOwner;
+    property OldDescription:string read FOldDescription write FOldDescription;
+  end;
+
   TTriggerState = (trsNone, trsActive, trsInactive);
 
   { TSQLCreateTrigger }
@@ -1048,6 +1065,30 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLAlterSchema }
+
+procedure TSQLAlterSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+constructor TSQLAlterSchema.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TSQLAlterSchema.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLAlterSchema then
+  begin
+    SchemaNewName:=TSQLAlterSchema(ASource).SchemaNewName;
+    SchemaNewOwner:=TSQLAlterSchema(ASource).SchemaNewOwner;
+    OldDescription:=TSQLAlterSchema(ASource).OldDescription;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLCreateSchema }

@@ -9,9 +9,9 @@ inherited fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
+    Height = 17
     Top = 11
-    Width = 91
+    Width = 84
     BorderSpacing.Around = 6
     Caption = 'Scheme name'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm
     AnchorSideTop.Control = edtSchemeName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 80
-    Width = 90
+    Height = 17
+    Top = 73
+    Width = 82
     BorderSpacing.Around = 6
     Caption = 'Sheme owner'
     ParentColor = False
@@ -35,8 +35,8 @@ inherited fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 37
+    Height = 33
+    Top = 34
     Width = 533
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -50,8 +50,8 @@ inherited fdbm_SchemeEditorForm: Tfdbm_SchemeEditorForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 36
-    Top = 106
+    Height = 32
+    Top = 96
     Width = 533
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6

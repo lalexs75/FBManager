@@ -628,11 +628,8 @@ type
 
   { TPGSQLAlterSchema }
 
-  TPGSQLAlterSchema = class(TSQLCommandDDL)
+  TPGSQLAlterSchema = class(TSQLAlterSchema)
   private
-    FOldDescription: string;
-    FSchemaNewName: string;
-    FSchemaNewOwner: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -640,9 +637,6 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
-    property SchemaNewName:string read FSchemaNewName write FSchemaNewName;
-    property SchemaNewOwner:string read FSchemaNewOwner write FSchemaNewOwner;
-    property OldDescription:string read FOldDescription write FOldDescription;
   end;
 
   { TPGSQLDropSchema }
@@ -9027,20 +9021,20 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
-    3:FSchemaNewName:=AWord;
-    5:FSchemaNewOwner:=AWord;
+    3:SchemaNewName:=AWord;
+    5:SchemaNewOwner:=AWord;
   end;
 end;
 
 procedure TPGSQLAlterSchema.MakeSQL;
 begin
-  if (FSchemaNewName <> '') and (FSchemaNewName <> Name) then
-    AddSQLCommandEx('ALTER SCHEMA %s RENAME TO %s', [DoFormatName(Name), DoFormatName(FSchemaNewName)]);
+  if (SchemaNewName <> '') and (SchemaNewName <> Name) then
+    AddSQLCommandEx('ALTER SCHEMA %s RENAME TO %s', [DoFormatName(Name), DoFormatName(SchemaNewName)]);
 
-  if FSchemaNewOwner <> '' then
-    AddSQLCommandEx('ALTER SCHEMA %s OWNER TO %s', [DoFormatName(Name), DoFormatName(FSchemaNewOwner)]);
+  if SchemaNewOwner <> '' then
+    AddSQLCommandEx('ALTER SCHEMA %s OWNER TO %s', [DoFormatName(Name), DoFormatName(SchemaNewOwner)]);
 
-  if Description <> FOldDescription then
+  if Description <> OldDescription then
     AddSQLCommandEx('COMMENT ON SCHEMA %s IS %s', [DoFormatName(Name), QuotedStr(Description)]);
 end;
 
@@ -9053,12 +9047,6 @@ end;
 
 procedure TPGSQLAlterSchema.Assign(ASource: TSQLObjectAbstract);
 begin
-  if ASource is TPGSQLAlterSchema then
-  begin
-    SchemaNewName:=TPGSQLAlterSchema(ASource).SchemaNewName;
-    SchemaNewOwner:=TPGSQLAlterSchema(ASource).SchemaNewOwner;
-    OldDescription:=TPGSQLAlterSchema(ASource).OldDescription;
-  end;
   inherited Assign(ASource);
 end;
 

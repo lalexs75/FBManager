@@ -373,7 +373,7 @@ type
 
   { TMSSQLCreateSchema }
 
-  TMSSQLCreateSchema = class(TSQLCreateCommandAbstract)
+  TMSSQLCreateSchema = class(TSQLCreateSchema)
   private
   protected
     procedure InitParserTree;override;
@@ -386,7 +386,7 @@ type
 
   { TMSSQLAlterSchema }
 
-  TMSSQLAlterSchema = class(TSQLCommandDDL)
+  TMSSQLAlterSchema = class(TSQLAlterSchema)
   private
   protected
     procedure InitParserTree;override;
@@ -555,7 +555,7 @@ type
 
 implementation
 
-uses SQLEngineCommonTypesUnit;
+uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
 
 { TMSSQLDropDatabase }
 
@@ -1419,6 +1419,8 @@ end;
 { TMSSQLCreateSchema }
 
 procedure TMSSQLCreateSchema.InitParserTree;
+var
+  FSQLTokens, TName: TSQLTokenRecord;
 begin
   (*
   -- Syntax for SQL Server and Azure SQL Database
@@ -1438,17 +1440,32 @@ begin
           revoke_statement | deny_statement
       }
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okScheme);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SCHEMA', [toFindWordLast]);
+  TName:=AddSQLTokens(stIdentificator, [FSQLTokens{, T1}], '', [], 1);
 end;
 
 procedure TMSSQLCreateSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:OwnerUserName:=AWord;
+    3:begin
+        ASQLParser.Position:=ASQLParser.WordPosition;
+        ChildCmd:=ASQLParser.GetToCommandDelemiter;
+      end;
+  end;
 end;
 
 procedure TMSSQLCreateSchema.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='CREATE SCHEMA';
+  if Name <> '' then S:=S + ' ' + DoFormatName(Name);
+  AddSQLCommand(S);
 end;
 
 constructor TMSSQLCreateSchema.Create(AParent: TSQLCommandAbstract);
