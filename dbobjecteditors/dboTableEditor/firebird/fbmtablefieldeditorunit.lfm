@@ -50,10 +50,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     Height = 498
     Top = 113
     Width = 804
-    ActivePage = TabComputedSource
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentFont = False
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 4
     object TabSheet1: TTabSheet
       Caption = 'Field type'
@@ -68,7 +68,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         Left = 6
         Height = 17
         Top = 156
-        Width = 24
+        Width = 23
         Anchors = [akLeft, akBottom]
         Caption = 'Size'
         ParentColor = False
@@ -79,10 +79,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideBottom.Control = edtScale
         AnchorSideBottom.Side = asrBottom
-        Left = 126
+        Left = 125
         Height = 17
         Top = 156
-        Width = 32
+        Width = 31
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 12
         Caption = 'Scale'
@@ -96,7 +96,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = CB_CharSet
         AnchorSideBottom.Side = asrBottom
-        Left = 253
+        Left = 251
         Height = 17
         Top = 156
         Width = 50
@@ -111,7 +111,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideBottom.Control = cbCollations
         AnchorSideBottom.Side = asrBottom
-        Left = 500
+        Left = 498
         Height = 17
         Top = 156
         Width = 44
@@ -126,7 +126,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         Left = 6
         Height = 23
         Top = 6
-        Width = 74
+        Width = 73
         BorderSpacing.Around = 6
         Caption = 'Domain'
         Checked = True
@@ -157,7 +157,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         Left = 12
         Height = 32
         Top = 35
-        Width = 676
+        Width = 677
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -171,10 +171,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
-        Left = 694
+        Left = 695
         Height = 33
         Top = 35
-        Width = 94
+        Width = 93
         Anchors = [akTop, akRight]
         AutoSize = True
         BorderSpacing.Right = 6
@@ -207,7 +207,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = cbFieldType
         AnchorSideTop.Side = asrBottom
-        Left = 36
+        Left = 35
         Height = 33
         Top = 140
         Width = 78
@@ -222,7 +222,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
-        Left = 164
+        Left = 162
         Height = 33
         Top = 140
         Width = 83
@@ -236,7 +236,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Control = cbFieldType
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
-        Left = 309
+        Left = 307
         Height = 33
         Top = 140
         Width = 185
@@ -253,10 +253,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
-        Left = 550
+        Left = 548
         Height = 33
         Top = 140
-        Width = 238
+        Width = 240
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         ItemHeight = 0
@@ -723,6 +723,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
+        ScrollOnEditLeftOptions.ScrollExtraPercent = 20
+        ScrollOnEditLeftOptions.ScrollExtraMax = 10
+        ScrollOnEditRightOptions.ScrollExtraPercent = 30
+        ScrollOnEditRightOptions.ScrollExtraMax = 25
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
@@ -821,7 +825,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         Left = 6
         Height = 17
         Top = 318
-        Width = 69
+        Width = 68
         BorderSpacing.Around = 6
         Caption = 'Description'
         ParentColor = False
@@ -1355,6 +1359,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
+        ScrollOnEditLeftOptions.ScrollExtraPercent = 20
+        ScrollOnEditLeftOptions.ScrollExtraMax = 10
+        ScrollOnEditRightOptions.ScrollExtraPercent = 30
+        ScrollOnEditRightOptions.ScrollExtraMax = 25
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
@@ -1886,6 +1894,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
+        ScrollOnEditLeftOptions.ScrollExtraPercent = 20
+        ScrollOnEditLeftOptions.ScrollExtraMax = 10
+        ScrollOnEditRightOptions.ScrollExtraPercent = 30
+        ScrollOnEditRightOptions.ScrollExtraMax = 25
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
@@ -1985,8 +1997,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
       ParentFont = False
       inline edtComputedSource: TSynEdit
         Left = 0
-        Height = 397
-        Top = 70
+        Height = 401
+        Top = 66
         Width = 794
         Align = alClient
         Font.Height = -16
@@ -2417,6 +2429,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         SelectedColor.ItalicPriority = 50
         SelectedColor.UnderlinePriority = 50
         SelectedColor.StrikeOutPriority = 50
+        ScrollOnEditLeftOptions.ScrollExtraPercent = 20
+        ScrollOnEditLeftOptions.ScrollExtraMax = 10
+        ScrollOnEditRightOptions.ScrollExtraPercent = 30
+        ScrollOnEditRightOptions.ScrollExtraMax = 25
         BracketHighlightStyle = sbhsBoth
         BracketMatchColor.Background = clNone
         BracketMatchColor.Foreground = clNone
@@ -2510,12 +2526,12 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
       end
       object Panel1: TPanel
         Left = 0
-        Height = 70
+        Height = 66
         Top = 0
         Width = 794
         Align = alTop
         AutoSize = True
-        ClientHeight = 70
+        ClientHeight = 66
         ClientWidth = 794
         TabOrder = 1
         object Label18: TLabel
@@ -2524,7 +2540,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           Left = 7
           Height = 17
           Top = 7
-          Width = 62
+          Width = 61
           BorderSpacing.Around = 6
           Caption = 'Store type'
           ParentColor = False
@@ -2535,7 +2551,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Control = Label19
           Left = 13
-          Height = 33
+          Height = 29
           Top = 30
           Width = 378
           Anchors = [akTop, akLeft, akRight]
@@ -3318,7 +3334,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     Left = 188
     Height = 23
     Top = 84
-    Width = 73
+    Width = 72
     BorderSpacing.Around = 6
     Caption = 'AutoInc'
     ParentFont = False
@@ -3329,10 +3345,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = edtFieldName
     AnchorSideTop.Side = asrBottom
-    Left = 267
+    Left = 266
     Height = 23
     Top = 84
-    Width = 109
+    Width = 108
     BorderSpacing.Around = 6
     Caption = 'References to'
     OnChange = cbForignKeyChange

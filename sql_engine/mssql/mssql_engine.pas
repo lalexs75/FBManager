@@ -483,6 +483,7 @@ end;
 procedure TMSSQLEngine.InternalInitMSSQLEngine;
 begin
   InitKeywords;
+  MsSQLFillFieldTypes(FTypeList);
   FMSSQLConnection:=TZConnection.Create(nil);
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 end;
@@ -752,15 +753,23 @@ begin
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(true);
   FStorageParameters:=TStringList.Create;
   FPartitionList:=TPGTablePartitionList.Create(Self);
-
-  UITableOptions:=[utReorderFields, utRenameTable,
-     utAddFields, utEditField, utDropFields,
-     utAddFK, utEditFK, utDropFK,
-     utAddUNQ, utDropUNQ,
+*)
+  UITableOptions:=[
+//     utReorderFields,
+     utRenameTable,
+     utAddFields,
+     utEditField,
+     utDropFields,
+     utAddFK,
+     utEditFK,
+     utDropFK,
+     utAddUNQ,
+     utDropUNQ,
      utAlterAddFieldInitialValue,
      utAlterAddFieldFK,
-     utSetFKName];
-*)
+     utSetFKName
+     ];
+
   FSchema:=TMSSQLTablesRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
 (*  FSystemObject:=FSchema.SystemObject;

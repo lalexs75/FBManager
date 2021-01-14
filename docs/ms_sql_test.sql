@@ -247,14 +247,7 @@ ALTER ROUTE ExpenseRoute
      BROKER_INSTANCE = 'D8D4D268-00A3-4C62-8F91-634B89B1E317',  
      ADDRESS = 'TCP://www.Adventure-Works.com:1234';                           
      
-USE AdventureWorks2012;  
-GO  
-GO
-
-USE AdventureWorks2012;  
-GO  
   
-CREATE TYPE Production.TestType FROM [VARCHAR](10) NOT NULL ;  
 GO  
   
 -- Check the type owner.  
@@ -313,36 +306,8 @@ ALTER SECURITY POLICY rls.SecPol
     
 GO  
   
-CREATE SEQUENCE Test.TestSeq  
-    AS int   
-    START WITH 125  
-    INCREMENT BY 25  
-    MINVALUE 100  
-    MAXVALUE 200  
-    CYCLE  
-    CACHE 3  
-;  
 GO
 
-ALTER SEQUENCE Test. TestSeq  
-    RESTART WITH 100  
-    INCREMENT BY 50  
-    MINVALUE 50  
-    MAXVALUE 200  
-    NO CYCLE  
-    NO CACHE  
-;  
-GO
-
-CREATE SEQUENCE Test.CountBy1 ;
-
-
-ALTER SEQUENCE Test.CountBy1 RESTART WITH 1 ;
-
-
-ALTER SEQUENCE Test.CountBy1  
-    CYCLE  
-    CACHE 20 ;
     
 EXEC sp_configure 'max server memory (MB)', 12000;  
 GO  
@@ -1329,9 +1294,6 @@ ALL TO ( [PRIMARY] );
 
     
 /* Create a table type. */
-CREATE TYPE LocationTableType AS TABLE
-( LocationName VARCHAR(50)
-, CostRate INT );
 GO
 
 
@@ -1505,44 +1467,6 @@ CREATE SECURITY POLICY rls.SecPol
 GO  
 GO
 
-CREATE SEQUENCE Test.CountBy1  
-    START WITH 1  
-    INCREMENT BY 1 ;  
-GO
-
-CREATE SEQUENCE Test.CountByNeg1  
-    START WITH 0  
-    INCREMENT BY -1 ;  
-GO
-
-CREATE SEQUENCE Test.CountBy1  
-    START WITH 5  
-    INCREMENT BY 5 ;  
-GO
-
-CREATE SEQUENCE Test.ID_Seq  
-    START WITH 24329  
-    INCREMENT BY 1 ;  
-GO
-
-CREATE SEQUENCE Test.TestSequence ;
-
-SELECT * FROM sys.sequences WHERE name = 'TestSequence' ;
-
-CREATE SEQUENCE SmallSeq 
-    AS smallint ;
-    
-CREATE SEQUENCE Test.DecSeq  
-    AS decimal(3,0)   
-    START WITH 125  
-    INCREMENT BY 25  
-    MINVALUE 100  
-    MAXVALUE 200  
-    CYCLE  
-    CACHE 3  
-;
-
-
 
 
 CREATE SERVICE [//Adventure-Works.com/Expenses]  
@@ -1659,47 +1583,6 @@ SELECT @minidentval = MIN($IDENTITY) FROM img
 SET IDENTITY_INSERT img OFF;                                                         
 
 
-CREATE TYPE SSN  
-FROM varchar(11) NOT NULL ;
-
-GO  
-CREATE TYPE Utf8String   
-EXTERNAL NAME utf8string.[Microsoft.Samples.SqlServer.utf8string] ;  
-GO
-
-CREATE TYPE LocationTableType AS TABLE   
-    ( LocationName VARCHAR(50)  
-    , CostRate INT );  
-GO
-
-CREATE TYPE InventoryItem AS TABLE
-(
-    [Name] NVARCHAR(50) NOT NULL,
-    SupplierId BIGINT NOT NULL,
-    Price DECIMAL (18, 4) NULL,
-    PRIMARY KEY (
-        Name
-    ),
-    INDEX IX_InventoryItem_Price (
-        Price
-    )
-)
-GO
-
-
-
-USE AdventureWorks2012;  
-GO  
-
-EXECUTE AS USER = 'CustomApp' ;  
-GO
-
-REVERT ;  
-GO
-
-USE AdventureWorks2012 ;  
-GO  
-    
 
 CREATE WORKLOAD GROUP newReports
 WITH
@@ -1873,14 +1756,6 @@ GO
 USE tempdb;  
 GO  
 DROP SYNONYM MyProduct;  
-GO
-
-   
-
-DROP TYPE ssn ;
-
-GO
-
 GO
 
 DROP WORKLOAD GROUP adhoc;
