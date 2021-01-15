@@ -1,8 +1,8 @@
 object MSSQLParserTestData: TMSSQLParserTestData
   OldCreateOrder = False
   Height = 546
-  HorizontalOffset = 576
-  VerticalOffset = 243
+  HorizontalOffset = 709
+  VerticalOffset = 224
   Width = 625
   object sTriggers: TRxTextHolder
     Highlighter = rxSynSQL
@@ -80,6 +80,14 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'DropTrigger4'
         Lines.Strings = (
           'DROP TRIGGER safety ON DATABASE;'
+        )
+      end    
+      item
+        Caption = 'DropTrigger5'
+        Lines.Strings = (
+          'DROP TRIGGER employee_insupd;'
+          ''
+          ''
         )
       end    
       item
@@ -243,14 +251,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'ON Sales.SalesPersonQuotaHistory'
           'AFTER INSERT'
           'AS RAISERROR (''Notify Compensation'', 16, 10);'
-          ''
-          ''
-        )
-      end    
-      item
-        Caption = 'DropTrigger5'
-        Lines.Strings = (
-          'DROP TRIGGER employee_insupd;'
           ''
           ''
         )

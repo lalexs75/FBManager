@@ -35,6 +35,17 @@ type
     procedure DropTrigger3;
     procedure DropTrigger4;
     procedure DropTrigger5;
+    procedure CreateTrigger1;
+    procedure CreateTrigger2;
+    procedure CreateTrigger3;
+    procedure CreateTrigger4;
+    procedure CreateTrigger5;
+    procedure CreateTrigger6;
+    procedure CreateTrigger7;
+    procedure CreateTrigger8;
+    procedure CreateTrigger9;
+    procedure CreateTrigger10;
+    procedure AlterTrigger1;
 
     procedure CreateDatabase1;
     procedure CreateDatabase2;
@@ -67,6 +78,68 @@ type
     procedure CreateDatabase29;
     procedure CreateDatabase30;
     procedure CreateDatabase31;
+
+    procedure AlterDatabase1;
+    procedure AlterDatabase2;
+    procedure AlterDatabase3;
+    procedure AlterDatabase4;
+    procedure AlterDatabase5;
+    procedure AlterDatabase6;
+    procedure AlterDatabase7;
+    procedure AlterDatabase8;
+    procedure AlterDatabase9;
+    procedure AlterDatabase10;
+    procedure AlterDatabase11;
+    procedure AlterDatabase12;
+    procedure AlterDatabase13;
+    procedure AlterDatabase14;
+    procedure AlterDatabase15;
+    procedure AlterDatabase16;
+    procedure AlterDatabase17;
+    procedure AlterDatabase18;
+    procedure AlterDatabase19;
+    procedure AlterDatabase20;
+    procedure AlterDatabase21;
+    procedure AlterDatabase22;
+    procedure AlterDatabase23;
+    procedure AlterDatabase24;
+    procedure AlterDatabase25;
+    procedure AlterDatabase26;
+    procedure AlterDatabase27;
+    procedure AlterDatabase28;
+    procedure AlterDatabase29;
+    procedure AlterDatabase30;
+    procedure AlterDatabase31;
+    procedure AlterDatabase32;
+    procedure AlterDatabase33;
+    procedure AlterDatabase34;
+    procedure AlterDatabase35;
+    procedure AlterDatabase36;
+    procedure AlterDatabase37;
+    procedure AlterDatabase38;
+    procedure AlterDatabase39;
+    procedure AlterDatabase40;
+    procedure AlterDatabase41;
+    procedure AlterDatabase42;
+    procedure AlterDatabase43;
+    procedure AlterDatabase44;
+    procedure AlterDatabase45;
+    procedure AlterDatabase46;
+    procedure AlterDatabase47;
+    procedure AlterDatabase48;
+    procedure AlterDatabase49;
+    procedure AlterDatabase50;
+    procedure AlterDatabase51;
+    procedure AlterDatabase52;
+    procedure AlterDatabase53;
+    procedure AlterDatabase54;
+    procedure AlterDatabase55;
+    procedure AlterDatabase56;
+    procedure AlterDatabase57;
+    procedure AlterDatabase58;
+    procedure AlterDatabase59;
+    procedure AlterDatabase60;
+    procedure DropDatabase1;
 
     procedure CreateTable1;
     procedure CreateTable2;
@@ -223,6 +296,61 @@ begin
   DoTestSQL(MSSQLParserTestData.sTriggers['DropTrigger5']);
 end;
 
+procedure TMSSQLParserTest.CreateTrigger1;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger1']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger2;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger2']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger3;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger3']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger4;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger4']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger5;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger5']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger6;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger6']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger7;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger7']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger8;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger8']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger9;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger9']);
+end;
+
+procedure TMSSQLParserTest.CreateTrigger10;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['CreateTrigger10']);
+end;
+
+procedure TMSSQLParserTest.AlterTrigger1;
+begin
+  DoTestSQL(MSSQLParserTestData.sTriggers['AlterTrigger1']);
+end;
+
 procedure TMSSQLParserTest.CreateDatabase1;
 begin
   DoTestSQL(MSSQLParserTestData.sDataBase['CreateDatabase1']);
@@ -376,6 +504,311 @@ end;
 procedure TMSSQLParserTest.CreateDatabase31;
 begin
   DoTestSQL(MSSQLParserTestData.sDataBase['CreateDatabase31']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase1;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase1']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase2;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase2']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase3;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase3']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase4;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase4']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase5;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase5']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase6;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase6']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase7;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase7']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase8;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase8']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase9;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase9']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase10;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase10']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase11;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase11']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase12;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase12']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase13;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase13']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase14;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase14']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase15;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase15']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase16;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase16']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase17;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase17']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase18;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase18']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase19;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase19']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase20;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase20']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase21;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase21']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase22;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase22']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase23;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase23']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase24;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase24']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase25;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase25']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase26;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase26']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase27;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase27']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase28;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase28']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase29;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase29']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase30;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase30']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase31;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase31']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase32;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase32']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase33;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase33']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase34;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase34']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase35;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase35']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase36;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase36']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase37;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase37']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase38;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase38']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase39;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase39']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase40;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase40']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase41;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase41']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase42;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase42']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase43;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase43']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase44;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase44']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase45;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase45']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase46;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase46']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase47;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase47']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase48;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase48']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase49;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase49']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase50;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase50']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase51;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase51']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase52;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase52']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase53;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase53']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase54;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase54']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase55;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase55']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase56;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase56']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase57;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase57']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase58;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase58']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase59;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase59']);
+end;
+
+procedure TMSSQLParserTest.AlterDatabase60;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['AlterDatabase60']);
+end;
+
+procedure TMSSQLParserTest.DropDatabase1;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['DropDatabase1']);
 end;
 
 procedure TMSSQLParserTest.CreateTable1;
