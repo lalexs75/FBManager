@@ -425,6 +425,7 @@ type
 
   TMSSQLAlterTable = class(TSQLAlterTable)
   private
+    procedure AddCollumn(OP:TAlterTableOperator);
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -930,7 +931,72 @@ end;
 
 { TMSSQLAlterTable }
 
+procedure TMSSQLAlterTable.AddCollumn(OP: TAlterTableOperator);
+begin
+(*
+  S:='';
+  if ooIfNotExists in OP.Options then
+    S1:='IF NOT EXISTS '
+  else
+    S1:='';
+
+  if OP.InitialValue <> '' then
+  begin
+
+    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.DBMSTypeName]);
+    AddSQLCommandEx('UPDATE %s SET %s  = %s', [FullName, DoFormatName(OP.Field.Caption), OP.InitialValue]);
+    S:=OP.Field.FullTypeName;
+    if OP.Field.Collate <> '' then S:=S + ' COLLATE '+OP.Field.Collate;
+    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, DoFormatName(OP.Field.Caption), S]);
+
+    if OP.Field.DefaultValue <> '' then
+      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.DefaultValue]);
+    if fpNotNull in OP.Field.Params then
+      AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET NOT NULL', [FullName, DoFormatName(OP.Field.Caption)]);
+//      ALTER TABLE public.aaaa ADD CONSTRAINT aaaa_aa_check CHECK ((aa <> 0));
+  end
+  else
+  begin
+    for C in OP.Constraints do
+    begin
+      if C.ConstraintName <> '' then
+        S:=' CONSTRAINT '+C.ConstraintName;
+      case C.ConstraintType of
+        ctPrimaryKey:if not OP.Field.PrimaryKey then S:=S + ' PRIMARY KEY';
+        ctForeignKey:begin
+                       S:=S + ' REFERENCES ' + C.ForeignTable;
+                       if C.ForeignFields.Count > 0 then
+                         S:=S+'('+C.ForeignFields.AsString+')';
+                       if C.ForeignKeyRuleOnUpdate<>fkrNone then S:=S+' ON UPDATE ' + ForeignKeyRuleNames[C.ForeignKeyRuleOnUpdate];
+                       if C.ForeignKeyRuleOnDelete<>fkrNone then S:=S+' ON DELETE ' + ForeignKeyRuleNames[C.ForeignKeyRuleOnDelete];
+                     end;
+        ctUnique:S:=S + ' UNIQUE';
+      end;
+
+      if C.IndexName <> '' then
+      begin
+        CI:=TPGSQLCreateIndex.Create(Self);
+        AddChild(CI);
+        //CI.IndexMethod:=C.IndexSortOrder;
+        CI.Name:=C.IndexName;
+        CI.TableName:=FullName;
+        CI.Fields.AddParam(OP.Field);
+      end;
+    end;
+    if OP.Field.PrimaryKey then S:=S + ' PRIMARY KEY';
+    if OP.Field.CheckExpr <> '' then S:=S + ' CHECK(' + OP.Field.CheckExpr + ')';
+    if OP.Field.DefaultValue <> '' then S:=S + ' DEFAULT '+OP.Field.DefaultValue;
+
+    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s%s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName, S]);
+  end;
+*)
+  if OP.Field.Description<>'' then
+    DescribeObjectEx(okColumn, OP.Field.Caption, FullName, OP.Field.Description);
+end;
+
 procedure TMSSQLAlterTable.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
 begin
   (*
   ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | table_name }
@@ -961,7 +1027,7 @@ begin
         | <table_constraint>
         | <column_set_definition>
       } [ ,...n ]
-        | [ system_start_time_column_name datetime2 GENERATED ALWAYS AS ROW START
+      | [ system_start_time_column_name datetime2 GENERATED ALWAYS AS ROW START
                   [ HIDDEN ] [ NOT NULL ] [ CONSTRAINT constraint_name ]
               DEFAULT constant_expression [WITH VALUES] ,
                   system_end_time_column_name datetime2 GENERATED ALWAYS AS ROW END
@@ -1095,6 +1161,8 @@ begin
           ABORT_AFTER_WAIT = { NONE | SELF | BLOCKERS } )
   }
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okTable);    //CREATE TABLE
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast], 0);
 end;
 
 procedure TMSSQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -1104,8 +1172,38 @@ begin
 end;
 
 procedure TMSSQLAlterTable.MakeSQL;
+var
+  OP: TAlterTableOperator;
 begin
-  inherited MakeSQL;
+  for OP in FOperators do
+  begin
+    case OP.AlterAction of
+      ataAddColumn : AddCollumn(OP);
+(*      ataRenameColumn : AddSQLCommandEx('ALTER TABLE %s RENAME COLUMN %s TO %s', [FullName, DoFormatName(OP.OldField.Caption), DoFormatName(OP.Field.Caption)]);
+      ataAlterColumnSetDataType : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DATA TYPE %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName]);
+      ataAlterColumnDropDefault : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s DROP DEFAULT', [FullName, DoFormatName(OP.Field.Caption)]);
+      ataAlterColumnSetDefaultExp : AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.DefaultValue]);
+      ataAlterColumnSetNotNull,
+      ataAlterColumnDropNotNull:AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s %s NOT NULL', [ FullName, DoFormatName(OP.Field.Caption), IfThen(OP.AlterAction = ataAlterColumnSetNotNull, 'SET', 'DROP')]);
+      ataAlterColumnDescription : DescribeObjectEx(okColumn, DoFormatName(OP.Field.Caption), FullName, OP.Field.Description);
+      ataAddTableConstraint:DoAddConstrint(OP);
+      ataDropColumn:DoDropCollumn(OP);
+      ataDropConstraint:DoDropConstraint(OP);
+      ataEnableTrigger:AddSQLCommandEx('ALTER TABLE %s ENABLE TRIGGER %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataDisableTrigger:AddSQLCommandEx('ALTER TABLE %s DISABLE TRIGGER %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataOwnerTo:AddSQLCommandEx('ALTER TABLE %s OWNER TO %s', [FullName, (OP.ParamValue)]);*)
+      ataRenameTable:AddSQLCommandEx('exec sp_rename ''%s'', ''%s''', [FullName, DoFormatName(OP.ParamValue)]);
+(*      ataSetParams:DoSetParams(OP);
+      ataReSetParams:DoReSetParams(OP);
+      ataSetSchema:AddSQLCommandEx('ALTER TABLE %s SET SCHEMA %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataSetTablespace:AddSQLCommandEx('ALTER TABLE %s SET TABLESPACE %s', [FullName, DoFormatName(OP.ParamValue)]);
+      ataDetachPartition:AddSQLCommandEx('ALTER TABLE %s DETACH PARTITION %s', [FullName, OP.Name]); //ALTER TABLE [ IF EXISTS ] имя DETACH PARTITION имя_секции
+      ataAttachPartition:AttachPartition(OP);
+*)
+    else
+      raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
+    end;
+  end;
 end;
 
 constructor TMSSQLAlterTable.Create(AParent: TSQLCommandAbstract);

@@ -144,17 +144,21 @@ type
   private
     FSchema:TMSSQLSSchema;
     FOID: Integer;
+    procedure InternalCreateDLL(var SQLLines: TStringList; const ATableName: string);
   protected
     function GetDBFieldClass: TDBFieldClass; override;
     procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function InternalGetDDLCreate: string;override;
     class function DBClassTitle:string;override;
     function CreateSQLObject:TSQLCommandDDL; override;
     procedure OnCloseEditorWindow; override; {???}
+    function RenameObject(ANewName:string):Boolean;override;
     procedure RefreshObject; override;
     procedure RefreshFieldList; override;
+    procedure IndexListRefresh; override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -715,6 +719,128 @@ begin
 //  FDropCommandClass:=TPGSQLDropTable;
 end;
 
+procedure TMSSQLTable.InternalCreateDLL(var SQLLines: TStringList;
+  const ATableName: string);
+
+procedure   DoMakeIndexList;
+begin
+(*  S:='';
+  for i:=0 to FIndexItems.Count - 1 do
+  begin
+    Pr:=TPGIndexItem(FIndexItems[i]);
+    P:=TPGIndex(Schema.Indexs.ObjByName(Pr.IndexName));
+    if Assigned(P) and not Pr.IsPrimary then
+    begin
+      S:=P.InternalGetDDLCreate;
+      SQLLines.Add(S);
+    end;
+  end; *)
+end;
+
+var
+  FCmd: TMSSQLCreateTable;
+  CntPK, i: Integer;
+  P: TPrimaryKeyRecord;
+  C: TSQLConstraintItem;
+  FkRec: TForeignKeyRecord;
+begin
+  if (State <> sdboCreate) and not Assigned(Fields) then
+    RefreshObject;
+  FCmd:=TMSSQLCreateTable.Create(nil);
+  FCmd.Name:=Caption;
+  FCmd.Description:=Description;
+  FCmd.SchemaName:=SchemaName;
+(*
+  if FOwnerID<>0 then
+  begin
+    UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID));
+    if not Assigned(UG) then
+      UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindGroupByID(FOwnerID));
+    if Assigned(UG) then
+      FCmd.Owner:=UG.Caption;
+  end;
+*)
+  Fields.SaveToSQLFields(FCmd.Fields);
+
+
+  IndexListRefresh;
+  RefreshConstraintPrimaryKey;
+  RefreshConstraintForeignKey;
+
+  CntPK:=0;
+  for i:=0 to FConstraintList.Count - 1 do
+  begin
+    P:=TPrimaryKeyRecord(FConstraintList[i]);
+    if (TPrimaryKeyRecord(FConstraintList[i]).ConstraintType = ctPrimaryKey) and (CntPK = 0) then
+    begin
+      C:=FCmd.SQLConstraints.Add(ctPrimaryKey, P.Name);
+      C.ConstraintFields.CopyFrom(P.FieldListArr);
+      Inc(CntPK);
+      C.Description:=P.Description;
+    end
+    else
+    if TPrimaryKeyRecord(FConstraintList[i]).ConstraintType = ctForeignKey then
+    begin
+      FkRec:=TForeignKeyRecord(FConstraintList[i]);
+      C:=FCmd.SQLConstraints.Add(ctForeignKey, FkRec.Name);
+      C.ConstraintFields.CopyFrom(FkRec.FieldListArr);
+      C.ForeignTable:=FkRec.FKTableName;
+      C.ForeignKeyRuleOnUpdate:=FkRec.OnUpdateRule;
+      C.ForeignKeyRuleOnDelete:=FkRec.OnDeleteRule;
+      C.ForeignFields.AsString:=FkRec.FKFieldName;
+      C.Description:=P.Description;
+    end;
+  end;
+(*
+  if FAutovacuumOptions.Enabled then
+    AutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+  if FToastAutovacuumOptions.Enabled then
+    FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
+
+  if PartitionedTable then
+  begin
+    FCmd.TablePartition.PartitionType:=FPartitionedType;
+    S:=FPartitionedTypeName;
+    Copy2SymbDel(S, '(');
+    if (S<>'') and (S[Length(S)] = ')') then
+      Delete(S, Length(S), 1);
+    FCmd.TablePartition.Params.AddParam(S);
+
+    for PT in PartitionList do
+    begin
+      FCmdPart:=TPGSQLCreateTable.Create(nil);
+      FCmd.AddChild(FCmdPart);
+      FCmdPart.Name:=PT.Name;
+      FCmdPart.SchemaName:=PT.SchemaName;
+      FCmdPart.PartitionOfData.PartitionTableName:=CaptionFullPatch;
+      if PT.DataType = podtDefault then
+        FCmdPart.PartitionOfData.PartType:=podtDefault
+      else
+      case FPartitionedType of
+        ptRange:
+          begin
+            FCmdPart.PartitionOfData.PartType:=podtFromTo;
+            FCmdPart.PartitionOfData.Params.AddParam(PT.FromExp);
+            FCmdPart.PartitionOfData.Params.AddParam(PT.ToExp);
+          end;
+        ptList:
+          begin
+            FCmdPart.PartitionOfData.PartType:=podtIn;
+            FCmdPart.PartitionOfData.Params.AddParam(PT.InExp);
+          end;
+        ptHash:FCmdPart.PartitionOfData.PartType:=podtWith;
+      end;
+    end;
+  end;
+
+*)
+  SQLLines.Add(FCmd.AsSQL);
+
+  FCmd.Free;
+
+  DoMakeIndexList;
+end;
+
 function TMSSQLTable.GetDBFieldClass: TDBFieldClass;
 begin
   Result:=TMSSQLField;
@@ -798,6 +924,45 @@ begin
   inherited Destroy;
 end;
 
+function TMSSQLTable.InternalGetDDLCreate: string;
+var
+  SQLLines: TStringList;
+  i: Integer;
+  S: String;
+begin
+  SQLLines:=TStringList.Create;
+  try
+    InternalCreateDLL(SQLLines, CaptionFullPatch);
+
+    for i:=0 to SQLLines.Count - 1 do
+    begin
+      S:=TrimRight(SQLLines[i]);
+      if (S<>'') and (S[Length(S)] <> ';') then
+      begin
+        SQLLines[i]:=S + ';' + LineEnding;
+      end
+      else
+        SQLLines[i]:=SQLLines[i]+LineEnding;
+    end;
+
+    SQLLines.Add(MakeRemarkBlock(sTriggersList));
+(*
+    for i:=0 to FSchema.FTriggers.CountObject - 1 do
+    begin
+      Trig:=TPGTrigger(FSchema.FTriggers.Items[i]);
+      if (Trig.TriggerTable = Self) and (Trig.State = sdboEdit) then
+        SQLLines.Add(Trig.DDLCreate);
+    end;
+
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, SQLLines, true);
+*)
+    Result:=SQLLines.Text;
+  finally
+    SQLLines.Free;
+  end
+end;
+
 class function TMSSQLTable.DBClassTitle: string;
 begin
   Result:=sTable;
@@ -825,6 +990,33 @@ begin
   inherited OnCloseEditorWindow;
   if Assigned(FDataSet) and FDataSet.Active then
     FDataSet.Close;
+end;
+
+function TMSSQLTable.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TMSSQLAlterTable;
+  Op: TAlterTableOperator;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TMSSQLAlterTable.Create(nil);
+    FCmd.Name:=Caption;
+    FCmd.SchemaName:=SchemaName;
+    Op:=FCmd.AddOperator(ataRenameTable);
+    Op.ParamValue:=ANewName;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
 end;
 
 procedure TMSSQLTable.RefreshObject;
@@ -937,6 +1129,25 @@ begin
   RefreshConstraintPrimaryKey;
   RefreshConstraintUnique;
 *)
+end;
+
+procedure TMSSQLTable.IndexListRefresh;
+begin
+  IndexArrayClear;
+(*  FQuery:=TSQLEnginePostgre(OwnerDB).GetSQLQuery( pgSqlTextModule.sPGIndex['sqlIndexTable']);
+  try
+    FQuery.ParamByName('indrelid').AsInteger:=FOID;
+    FQuery.Open;
+    while not FQuery.Eof do
+    begin
+      Rec:=FIndexItems.Add('') as TPGIndexItem;
+      Rec.CreateFromDB(Self, FQuery);
+      FQuery.Next;
+    end;
+  finally
+    FQuery.Free;
+  end; *)
+  FIndexListLoaded:=true;
 end;
 
 procedure TMSSQLTable.Commit;
