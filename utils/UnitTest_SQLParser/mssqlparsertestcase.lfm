@@ -1082,6 +1082,12 @@ object MSSQLParserTestData: TMSSQLParserTestData
       end    
       item
         Caption = 'AlterDatabase43'
+        Lines.Strings = (
+          'ALTER DATABASE [database_name]'
+          'SET RECOVERY FULL PAGE_VERIFY CHECKSUM;'
+          ''
+          ''
+        )
       end    
       item
         Caption = 'AlterDatabase44'
@@ -6019,6 +6025,13 @@ object MSSQLParserTestData: TMSSQLParserTestData
       end    
       item
         Caption = 'Insert1'
+        Lines.Strings = (
+          'INSERT INTO Cities (Location)'
+          'VALUES ( CONVERT(Point, ''12.3:46.2'') );'
+          ''
+          ''
+          ''
+        )
       end    
       item
         Caption = 'Insert2'
@@ -7117,8 +7130,8 @@ object MSSQLParserTestData: TMSSQLParserTestData
           ''
         )
       end>
-    Left = 208
-    Top = 368
+    Left = 144
+    Top = 38
   end
   object sFunctions: TRxTextHolder
     Highlighter = rxSynSQL
@@ -8016,8 +8029,8 @@ object MSSQLParserTestData: TMSSQLParserTestData
           ''
         )
       end>
-    Left = 264
-    Top = 368
+    Left = 144
+    Top = 136
   end
   object sViews: TRxTextHolder
     Highlighter = rxSynSQL
@@ -8197,8 +8210,8 @@ object MSSQLParserTestData: TMSSQLParserTestData
           ''
         )
       end>
-    Left = 336
-    Top = 368
+    Left = 144
+    Top = 224
   end
   object sSystem: TRxTextHolder
     Highlighter = rxSynSQL
@@ -11605,7 +11618,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
         )
       end    
       item
-        Caption = 'Reconfigure'
+        Caption = 'Reconfigure1'
         Lines.Strings = (
           'RECONFIGURE;'
           ''
@@ -11889,7 +11902,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
         )
       end    
       item
-        Caption = 'MessageType1'
+        Caption = 'MessageType9'
         Lines.Strings = (
           'DROP MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] ;'
           ''
@@ -11908,8 +11921,8 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'DROP SECURITY POLICY secPolicy;'
         )
       end>
-    Left = 389
-    Top = 368
+    Left = 48
+    Top = 432
   end
   object sSecurity: TRxTextHolder
     Highlighter = rxSynSQL
@@ -13243,15 +13256,15 @@ object MSSQLParserTestData: TMSSQLParserTestData
         )
       end    
       item
-        Caption = 'Authorization '
+        Caption = 'Authorization1'
         Lines.Strings = (
           'ALTER AUTHORIZATION ON T1 TO TestUser;'
           ''
           ''
         )
       end>
-    Left = 448
-    Top = 368
+    Left = 144
+    Top = 312
   end
   object sSequence: TRxTextHolder
     Highlighter = rxSynSQL
@@ -13375,7 +13388,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           '    CACHE 20 ;'
         )
       end>
-    Left = 496
-    Top = 368
+    Left = 48
+    Top = 312
   end
 end
