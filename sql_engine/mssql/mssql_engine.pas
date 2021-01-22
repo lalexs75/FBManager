@@ -83,27 +83,36 @@ type
   { TMSSQLStoredProcRoot }
 
   TMSSQLStoredProcRoot = class(TDBRootObject)
-  private
-    FSchemaId: integer;
-    FSchema:TMSSQLSSchema;
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
   public
     function GetObjectType: string;override;
-    procedure RefreshGroup; override;
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
-    property SchemaId:integer read FSchemaId;
   end;
 
   { TMSSQLTriggerRoot }
 
-  TMSSQLTriggerRoot = class(TDBRootObject)
+  TMSSQLTriggerRoot = class(TMSSQLRootObject)
   private
-    FSchemaId: integer;
-    FSchema:TMSSQLSSchema;
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
   public
     function GetObjectType: string;override;
-    procedure RefreshGroup; override;
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
-    property SchemaId:integer read FSchemaId;
+  end;
+
+  { TMSSQLSequenceRoot }
+
+  TMSSQLSequenceRoot = class(TMSSQLRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
   { TMSSQLSSchema }
@@ -115,6 +124,7 @@ type
     FStorepProc:TMSSQLStoredProcRoot;
     FViews:TMSSQLViewsRoot;
     FTriggers:TMSSQLTriggerRoot;
+    FSequences:TMSSQLSequenceRoot;
     procedure SetSchemaId(const AValue: integer);
   protected
   public
@@ -228,6 +238,26 @@ type
     procedure RefreshObject; override;
   end;
 
+  TMSSQLSequence = class(TDBObject)
+  protected
+    FSchema: TMSSQLSSchema;
+  protected
+    function GetCaptionFullPatch:string; override;
+    function GetEnableRename: boolean; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    class function DBClassTitle:string;override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
+    function InternalGetDDLCreate: string; override;
+
+    function CreateSQLObject:TSQLCommandDDL; override;
+
+    procedure RefreshObject;override;
+    procedure RefreshDependencies; override;
+    procedure RefreshDependenciesField(Rec:TDependRecord); override;
+    function RenameObject(ANewName:string):Boolean;override;
+  end;
+
   { TMSSQLQueryControl }
 
   TMSSQLQueryControl = class(TSQLQueryControl)
@@ -309,6 +339,106 @@ type
 implementation
 uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
   fbmToolsUnit;
+
+{ TMSSQLSequence }
+
+function TMSSQLSequence.GetCaptionFullPatch: string;
+begin
+  Result:=inherited GetCaptionFullPatch;
+  //Result:=FmtObjName(FSchema, Self);
+end;
+
+function TMSSQLSequence.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
+constructor TMSSQLSequence.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+(*
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+    FACLListStr:=ADBItem.ObjACLList;
+  end;
+
+  FACLList:=TPGACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogSelect, ogUpdate, ogUsage];
+*)
+  FSchema:=TMSSQLSequenceRoot(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+  //FIncByValue:=1;
+  //FMaxValue:=High(int64);
+  //FCasheValue:=1;
+end;
+
+class function TMSSQLSequence.DBClassTitle: string;
+begin
+  Result:='Sequence';
+end;
+
+procedure TMSSQLSequence.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+end;
+
+function TMSSQLSequence.InternalGetDDLCreate: string;
+begin
+  Result:=inherited InternalGetDDLCreate;
+end;
+
+function TMSSQLSequence.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=inherited CreateSQLObject;
+end;
+
+procedure TMSSQLSequence.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
+procedure TMSSQLSequence.RefreshDependencies;
+begin
+  inherited RefreshDependencies;
+end;
+
+procedure TMSSQLSequence.RefreshDependenciesField(Rec: TDependRecord);
+begin
+  inherited RefreshDependenciesField(Rec);
+end;
+
+function TMSSQLSequence.RenameObject(ANewName: string): Boolean;
+begin
+  Result:=inherited RenameObject(ANewName);
+end;
+
+{ TMSSQLSequenceRoot }
+
+function TMSSQLSequenceRoot.DBMSObjectsList: string;
+begin
+  Result:=msSQLTexts.sSystemObjects['sObjListAll'];
+end;
+
+function TMSSQLSequenceRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=(AItem.ObjType = 'SO') and (AItem.SchemeID = SchemaId);
+end;
+
+function TMSSQLSequenceRoot.GetObjectType: string;
+begin
+  Result:='Sequence';
+end;
+
+constructor TMSSQLSequenceRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okSequence;
+  FDropCommandClass:=TMSSQLDropSequence;
+end;
 
 { TMSSQLField }
 
@@ -1185,11 +1315,21 @@ end;
 
 { TMSSQLStoredProcRoot }
 
+function TMSSQLStoredProcRoot.DBMSObjectsList: string;
+begin
+  Result:=inherited DBMSObjectsList;
+end;
+
+function TMSSQLStoredProcRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=inherited DBMSValidObject(AItem);
+end;
+
 function TMSSQLStoredProcRoot.GetObjectType: string;
 begin
   Result:='Stored procedure';
 end;
-
+(*
 procedure TMSSQLStoredProcRoot.RefreshGroup;
 //var
 //  P:PDBSQLObject;
@@ -1210,7 +1350,7 @@ begin
   FOwnerDB.RefreshObjectsEnd('');
   *)
 end;
-
+*)
 constructor TMSSQLStoredProcRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
@@ -1677,6 +1817,7 @@ begin
   FViews:=TMSSQLViewsRoot.Create(OwnerDB, TMSSQLView, sViews, Self);
   //FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
   //FTriggers:=TMSSQLTriggerRoot.Create(AMSSQLEngine);
+  FSequences:=TMSSQLSequenceRoot.Create(OwnerDB, TMSSQLSequence, sSequences, Self);
 
 end;
 
@@ -1703,11 +1844,21 @@ end;
 
 { TMSSQLTriggerRoot }
 
+function TMSSQLTriggerRoot.DBMSObjectsList: string;
+begin
+  Result:=inherited DBMSObjectsList;
+end;
+
+function TMSSQLTriggerRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=inherited DBMSValidObject(AItem);
+end;
+
 function TMSSQLTriggerRoot.GetObjectType: string;
 begin
   Result:='Trigger';
 end;
-
+(*
 procedure TMSSQLTriggerRoot.RefreshGroup;
 //var
 //  P:PDBSQLObject;
@@ -1727,7 +1878,7 @@ begin
   end;
   FOwnerDB.RefreshObjectsEnd(''); *)
 end;
-
+*)
 constructor TMSSQLTriggerRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
@@ -1799,6 +1950,10 @@ initialization
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateDatabase, 'CREATE DATABASE');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropDatabase, 'DROP DATABASE');
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateSequence, 'CREATE SEQUENCE');     //CREATE SEQUENCE — создать генератор последовательности
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSequence, 'ALTER SEQUENCE');       //ALTER SEQUENCE — изменить определение генератора последовательности
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSequence, 'DROP SEQUENCE');         //DROP SEQUENCE — удалить последовательность
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
   RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO

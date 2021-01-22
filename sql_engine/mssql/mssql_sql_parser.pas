@@ -554,9 +554,173 @@ type
     property DatabaseName:string read FDatabaseName write FDatabaseName;
   end;
 
+
+  { TMSSQLCreateSequence }
+
+  TMSSQLCreateSequence = class(TSQLCreateSequence)
+  private
+(*    FCache: Int64;
+    FIncrementBy: Int64;
+    FIsWith: Boolean;
+    FNoCycle: boolean;
+    FNoMaxValue: boolean;
+    FNoMinValue: boolean;
+    FOwnedBy: string;
+    FRestart: Int64;
+    FStart: Int64;*)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+(*    property IsWith:Boolean read FIsWith write FIsWith;
+    property OwnedBy:string read FOwnedBy write FOwnedBy;
+    property NoMinValue:boolean read FNoMinValue write FNoMinValue;
+    property NoMaxValue:boolean read FNoMaxValue write FNoMaxValue;
+    property Start:Int64 read FStart write FStart;
+    property Restart:Int64 read FRestart write FRestart;
+    property Cache:Int64 read FCache write FCache;
+    property NoCycle:boolean read FNoCycle write FNoCycle;*)
+    property SchemaName;
+  end;
+
+
+  { TMSSQLAlterSequence }
+
+  TMSSQLAlterSequence = class(TMSSQLCreateSequence)
+  private
+(*    FOldValue: Int64;
+    FSequenceNewName: string;
+    FSequenceOldOwner: string;
+    FSequenceOldSchema: string; *)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+(*    property SequenceOldOwner:string read FSequenceOldOwner write FSequenceOldOwner ;
+    property SequenceNewName:string read FSequenceNewName write FSequenceNewName;
+    property SequenceOldSchema:string read FSequenceOldSchema write FSequenceOldSchema;
+    property OldValue:Int64 read FOldValue write FOldValue; *)
+  end;
+
+  { TMSSQLDropSequence }
+
+  TMSSQLDropSequence = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    property SchemaName;
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLCreateSequence }
+
+procedure TMSSQLCreateSequence.InitParserTree;
+var
+  FSQLTokens, T, FTSequenceShema, FTSequenceName: TSQLTokenRecord;
+begin
+  (*
+  CREATE SEQUENCE [schema_name . ] sequence_name
+      [ AS [ built_in_integer_type | user-defined_integer_type ] ]
+      [ START WITH <constant> ]
+      [ INCREMENT BY <constant> ]
+      [ { MINVALUE [ <constant> ] } | { NO MINVALUE } ]
+      [ { MAXVALUE [ <constant> ] } | { NO MAXVALUE } ]
+      [ CYCLE | { NO CYCLE } ]
+      [ { CACHE [ <constant> ] } | { NO CACHE } ]
+      [ ; ]
+  *)
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okSequence);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'SEQUENCE', [toFindWordLast]);          //SEQUENCE
+  FTSequenceShema:=AddSQLTokens(stIdentificator, T, '', [], 100);
+    T:=AddSQLTokens(stSymbol, FTSequenceShema, '.', []);
+  FTSequenceName:=AddSQLTokens(stIdentificator, T, '', [], 101);
+end;
+
+procedure TMSSQLCreateSequence.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateSequence.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLCreateSequence.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TMSSQLCreateSequence.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLAlterSequence }
+
+procedure TMSSQLAlterSequence.InitParserTree;
+begin
+  (*
+  ALTER SEQUENCE [schema_name. ] sequence_name
+      [ RESTART [ WITH <constant> ] ]
+      [ INCREMENT BY <constant> ]
+      [ { MINVALUE <constant> } | { NO MINVALUE } ]
+      [ { MAXVALUE <constant> } | { NO MAXVALUE } ]
+      [ CYCLE | { NO CYCLE } ]
+      [ { CACHE [ <constant> ] } | { NO CACHE } ]
+      [ ; ]
+  *)
+end;
+
+procedure TMSSQLAlterSequence.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterSequence.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLAlterSequence.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLDropSequence }
+
+procedure TMSSQLDropSequence.InitParserTree;
+begin
+  (*
+  DROP SEQUENCE [ IF EXISTS ] { database_name.schema_name.sequence_name | schema_name.sequence_name | sequence_name } [ ,...n ]
+   [ ; ]
+  *)
+end;
+
+procedure TMSSQLDropSequence.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropSequence.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
 
 { TMSSQLDropDatabase }
 
@@ -3445,14 +3609,6 @@ ALTER SECURITY POLICY schema_name.security_policy_name
     [ { AFTER { INSERT | UPDATE } }
     | { BEFORE { UPDATE | DELETE } } ]
 ----------------------------------------
-ALTER SEQUENCE [schema_name. ] sequence_name
-    [ RESTART [ WITH <constant> ] ]
-    [ INCREMENT BY <constant> ]
-    [ { MINVALUE <constant> } | { NO MINVALUE } ]
-    [ { MAXVALUE <constant> } | { NO MAXVALUE } ]
-    [ CYCLE | { NO CYCLE } ]
-    [ { CACHE [ <constant> ] } | { NO CACHE } ]
-    [ ; ]
 ----------------------------------------
 ALTER SERVER AUDIT audit_name
 {
@@ -5344,15 +5500,6 @@ identifier
   | MAXDOP = max_degree_of_parallelism
 )
 ----------------------------------------
-CREATE SEQUENCE [schema_name . ] sequence_name
-    [ AS [ built_in_integer_type | user-defined_integer_type ] ]
-    [ START WITH <constant> ]
-    [ INCREMENT BY <constant> ]
-    [ { MINVALUE [ <constant> ] } | { NO MINVALUE } ]
-    [ { MAXVALUE [ <constant> ] } | { NO MAXVALUE } ]
-    [ CYCLE | { NO CYCLE } ]
-    [ { CACHE [ <constant> ] } | { NO CACHE } ]
-    [ ; ]
 ----------------------------------------
 
 CREATE SERVER AUDIT audit_name
@@ -5998,8 +6145,6 @@ DROP SENSITIVITY CLASSIFICATION FROM
     [schema_name.]table_name.column_name
 }
 ----------------------------------------
-DROP SEQUENCE [ IF EXISTS ] { database_name.schema_name.sequence_name | schema_name.sequence_name | sequence_name } [ ,...n ]
- [ ; ]
 ----------------------------------------
 DROP SERVER AUDIT audit_name
     [ ; ]
