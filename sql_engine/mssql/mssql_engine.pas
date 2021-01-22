@@ -1388,10 +1388,13 @@ begin
 end;
 
 function TMSSQLTable.DataSet(ARecCountLimit: Integer): TDataSet;
+var
+  S: String;
 begin
   if not FDataSet.Active then
   begin
     TZQuery(FDataSet).SQL.Text:='select * from '+FSchema.Caption+'.'+Caption;//MakeSQLSelect(Caption, FBDataSet.DataBase);
+    S:=TZQuery(FDataSet).SQL.Text;
 {    FDataSet.SQLEdit.Text:=MakeSQLEdit(Caption, FBDataSet.DataBase);
     FDataSet.SQLInsert.Text:=MakeSQLInsert(Caption, FBDataSet.DataBase);
     FDataSet.SQLDelete.Text:=MakeSQLDelete(Caption, FBDataSet.DataBase);

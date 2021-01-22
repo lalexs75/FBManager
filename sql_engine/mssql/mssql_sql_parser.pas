@@ -1348,7 +1348,7 @@ end;
 
 procedure TMSSQLCreateView.InitParserTree;
 var
-  FSQLTokens, T: TSQLTokenRecord;
+  FSQLTokens, T, T1: TSQLTokenRecord;
 begin
   (*
   -- Syntax for SQL Server and Azure SQL Database
@@ -1367,7 +1367,9 @@ begin
   }
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okView);    //CREATE VIEW
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'VIEW', [toFindWordLast], 0);
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', [], 0);
+    T1:=AddSQLTokens(stKeyword, T1, 'ALTER', [], 0);
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'VIEW', [toFindWordLast], 0);
 end;
 
 procedure TMSSQLCreateView.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -1422,15 +1424,17 @@ end;
 { TMSSQLAlterTable }
 
 procedure TMSSQLAlterTable.AddCollumn(OP: TAlterTableOperator);
+var
+  S, S1: String;
 begin
-(*
+
   S:='';
-  if ooIfNotExists in OP.Options then
+(*  if ooIfNotExists in OP.Options then
     S1:='IF NOT EXISTS '
-  else
+  else *)
     S1:='';
 
-  if OP.InitialValue <> '' then
+(*  if OP.InitialValue <> '' then
   begin
 
     AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.DBMSTypeName]);
@@ -1445,9 +1449,9 @@ begin
       AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET NOT NULL', [FullName, DoFormatName(OP.Field.Caption)]);
 //      ALTER TABLE public.aaaa ADD CONSTRAINT aaaa_aa_check CHECK ((aa <> 0));
   end
-  else
+  else *)
   begin
-    for C in OP.Constraints do
+(*    for C in OP.Constraints do
     begin
       if C.ConstraintName <> '' then
         S:=' CONSTRAINT '+C.ConstraintName;
@@ -1472,14 +1476,14 @@ begin
         CI.TableName:=FullName;
         CI.Fields.AddParam(OP.Field);
       end;
-    end;
+    end; *)
     if OP.Field.PrimaryKey then S:=S + ' PRIMARY KEY';
-    if OP.Field.CheckExpr <> '' then S:=S + ' CHECK(' + OP.Field.CheckExpr + ')';
-    if OP.Field.DefaultValue <> '' then S:=S + ' DEFAULT '+OP.Field.DefaultValue;
+//    if OP.Field.CheckExpr <> '' then S:=S + ' CHECK(' + OP.Field.CheckExpr + ')';
+//    if OP.Field.DefaultValue <> '' then S:=S + ' DEFAULT '+OP.Field.DefaultValue;
 
-    AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s%s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName, S]);
+    AddSQLCommandEx('ALTER TABLE %s ADD %s%s %s%s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName, S]);
   end;
-*)
+//  AddSQLCommandEx('ALTER TABLE %s ADD COLUMN %s%s %s%s', [FullName, S1, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName, S]);
   if OP.Field.Description<>'' then
     DescribeObjectEx(okColumn, OP.Field.Caption, FullName, OP.Field.Description);
 end;
