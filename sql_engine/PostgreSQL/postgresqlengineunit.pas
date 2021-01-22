@@ -6628,7 +6628,7 @@ begin
   FACLList:=TPGACLList.Create(Self);
   FACLList.ObjectGrants:=[ogSelect, ogUpdate, ogUsage];
 
-  FSchema:=TPGTablesRoot(AOwnerRoot).FSchema;
+  FSchema:=TPGSequencesRoot(AOwnerRoot).FSchema;
   SchemaName:=FSchema.Caption;
   FIncByValue:=1;
   FMaxValue:=High(int64);
