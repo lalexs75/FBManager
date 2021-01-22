@@ -619,9 +619,335 @@ type
     property SchemaName;
   end;
 
+
+  { TMSSQLCreateFunction }
+
+  TMSSQLCreateFunction = class(TSQLCommandCreateProcedure)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string); override;
+    procedure MakeSQL; override;
+    procedure SetBody(AValue: string); override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+  end;
+
+  { TMSSQLAlterFunction }
+
+  TMSSQLAlterFunction = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL; override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+  end;
+
+  { TMSSQLDropFunction }
+
+  TMSSQLDropFunction = class(TSQLDropCommandAbstract)
+  private
+//    FBracketExists: boolean;
+//    FCurParam: TSQLParserField;
+//    FCurName: TTableItem;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+//    property BracketExists:boolean read FBracketExists write FBracketExists;
+  end;
+
+  { TMSSQLCreateProcedure }
+
+  TMSSQLCreateProcedure = class(TSQLCommandCreateProcedure)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL; override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+  end;
+
+
+  { TMSSQLAlterProcedure }
+
+  TMSSQLAlterProcedure = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL; override;
+  public
+  end;
+
+  { TMSSQLDropProcedure }
+
+  TMSSQLDropProcedure = class(TSQLDropCommandAbstract)
+  private
+    //FCurName: TTableItem;
+    //FCurParam: TSQLParserField;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropProcedure }
+
+procedure TMSSQLDropProcedure.InitParserTree;
+begin
+  (*
+  -- Syntax for SQL Server and Azure SQL Database
+
+DROP { PROC | PROCEDURE } [ IF EXISTS ] { [ schema_name. ] procedure } [ ,...n ]
+  *)
+end;
+
+procedure TMSSQLDropProcedure.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropProcedure.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterProcedure }
+
+procedure TMSSQLAlterProcedure.InitParserTree;
+begin
+  (*
+  -- Syntax for SQL Server and Azure SQL Database
+
+  ALTER { PROC | PROCEDURE } [schema_name.] procedure_name [ ; number ]
+      [ { @parameter [ type_schema_name. ] data_type }
+          [ VARYING ] [ = default ] [ OUT | OUTPUT ] [READONLY]
+      ] [ ,...n ]
+  [ WITH <procedure_option> [ ,...n ] ]
+  [ FOR REPLICATION ]
+  AS { [ BEGIN ] sql_statement [;] [ ...n ] [ END ] }
+  [;]
+
+  <procedure_option> ::=
+      [ ENCRYPTION ]
+      [ RECOMPILE ]
+      [ EXECUTE AS Clause ]  *)
+end;
+
+procedure TMSSQLAlterProcedure.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterProcedure.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLCreateProcedure }
+
+procedure TMSSQLCreateProcedure.InitParserTree;
+begin
+  (*
+  CREATE [ OR ALTER ] { PROC | PROCEDURE }
+      [schema_name.] procedure_name [ ; number ]
+      [ { @parameter [ type_schema_name. ] data_type }
+          [ VARYING ] [ = default ] [ OUT | OUTPUT | [READONLY]
+      ] [ ,...n ]
+  [ WITH <procedure_option> [ ,...n ] ]
+  [ FOR REPLICATION ]
+  AS { [ BEGIN ] sql_statement [;] [ ...n ] [ END ] }
+  [;]
+
+  <procedure_option> ::=
+      [ ENCRYPTION ]
+      [ RECOMPILE ]
+      [ EXECUTE AS Clause ]  *)
+end;
+
+procedure TMSSQLCreateProcedure.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateProcedure.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLCreateProcedure.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TMSSQLCreateProcedure.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMSSQLCreateProcedure.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLDropFunction }
+
+procedure TMSSQLDropFunction.InitParserTree;
+begin
+  (*
+  DROP FUNCTION [ IF EXISTS ] { [ schema_name. ] function_name } [ ,...n ]
+  [;]
+  *)
+end;
+
+procedure TMSSQLDropFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropFunction.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLDropFunction.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLAlterFunction }
+
+procedure TMSSQLAlterFunction.InitParserTree;
+begin
+  (*
+  ALTER FUNCTION [ schema_name. ] function_name
+  ( [ { @parameter_name [ AS ][ type_schema_name. ] parameter_data_type
+      [ = default ] }
+      [ ,...n ]
+    ]
+  )
+  RETURNS return_data_type
+      [ WITH <function_option> [ ,...n ] ]
+      [ AS ]
+      BEGIN
+          function_body
+          RETURN scalar_expression
+      END
+  *)
+end;
+
+procedure TMSSQLAlterFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterFunction.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLAlterFunction.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TMSSQLAlterFunction.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMSSQLAlterFunction.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateFunction }
+
+procedure TMSSQLCreateFunction.InitParserTree;
+var
+  FSQLTokens, Par1, Par2: TSQLTokenRecord;
+begin
+  (*
+  -- Transact-SQL Scalar Function Syntax
+  CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
+  ( [ { @parameter_name [ AS ][ type_schema_name. ] parameter_data_type
+   [ = default ] [ READONLY ] }
+      [ ,...n ]
+    ]
+  )
+  RETURNS return_data_type
+      [ WITH <function_option> [ ,...n ] ]
+      [ AS ]
+      BEGIN
+          function_body
+          RETURN scalar_expression
+      END
+  [ ; ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
+      Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
+      Par1:=AddSQLTokens(stKeyword, Par1, 'ALTER', [], -2);
+  Par1:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'FUNCTION', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, Par1, '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
+
+end;
+
+procedure TMSSQLCreateFunction.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateFunction.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLCreateFunction.SetBody(AValue: string);
+begin
+  inherited SetBody(AValue);
+end;
+
+constructor TMSSQLCreateFunction.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TMSSQLCreateFunction.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMSSQLCreateFunction.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLCreateSequence }
 
@@ -1373,6 +1699,7 @@ end;
 constructor TMSSQLAlterTable.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
+  FSQLCommentOnClass:=TMSSQLCommentOn;
 end;
 
 destructor TMSSQLAlterTable.Destroy;
@@ -3230,19 +3557,6 @@ ALTER FULLTEXT STOPLIST stoplist_name
 
 ----------------------------------------
 -- Transact-SQL Scalar Function Syntax
-ALTER FUNCTION [ schema_name. ] function_name
-( [ { @parameter_name [ AS ][ type_schema_name. ] parameter_data_type
-    [ = default ] }
-    [ ,...n ]
-  ]
-)
-RETURNS return_data_type
-    [ WITH <function_option> [ ,...n ] ]
-    [ AS ]
-    BEGIN
-        function_body
-        RETURN scalar_expression
-    END
 [ ; ]
 ----------------------------------------
 
@@ -6048,8 +6362,6 @@ DROP FULLTEXT STOPLIST stoplist_name
 ----------------------------------------
 -- SQL Server, Azure SQL Database
 
-DROP FUNCTION [ IF EXISTS ] { [ schema_name. ] function_name } [ ,...n ]
-[;]
 ----------------------------------------
 -- Syntax for SQL Server (All options except filegroup and filestream apply to Azure SQL Database.)
 
