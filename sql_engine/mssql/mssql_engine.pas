@@ -2160,6 +2160,9 @@ end;
 initialization
   //Register DML statments
   RegisterSQLStatment(TMSSQLEngine, TSqlCommandSelect, 'SELECT'); //SELECT — получить строки из таблицы или представления
+  RegisterSQLStatment(TMSSQLEngine, TSQLCommandInsert, 'INSERT INTO');
+  RegisterSQLStatment(TMSSQLEngine, TSQLCommandUpdate, 'UPDATE');   //UPDATE — изменить строки таблицы
+  RegisterSQLStatment(TMSSQLEngine, TSQLCommandDelete, 'DELETE FROM'); //DELETE — удалить записи таблицы
   //Register DDL statments
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateSchema, 'CREATE SCHEMA');         //CREATE SCHEMA — создать схему
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSchema, 'ALTER SCHEMA');           //ALTER SCHEMA — изменить определение схемы
