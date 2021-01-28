@@ -991,10 +991,9 @@ type
 
   { TPGSQLCreateRole }
 
-  TPGSQLCreateRole = class(TSQLCreateCommandAbstract)
+  TPGSQLCreateRole = class(TSQLCreateLogin)
   private
     FConnectionLimit: Integer;
-    FPassword: string;
     FPasswordEncripted: boolean;
     //FReplication: boolean;
     FServerVersion: TPGServerVersion;
@@ -1009,7 +1008,6 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
 
-    property Password:string read FPassword write FPassword;
     property ValidUntil:String read FValidUntil write FValidUntil;
     //property Replication:boolean read FReplication write FReplication;
 {  | in role role_name [, ...]
@@ -17878,7 +17876,7 @@ begin
     52:FUserOptions:=FUserOptions - [puoByPassRLS];
     16:FPasswordEncripted:=true;
     17:FPasswordEncripted:=false;
-    18:FPassword:=ExtractQuotedString(AWord, '''');
+    18:Password:=ExtractQuotedString(AWord, '''');
     19:FValidUntil:=ExtractQuotedString(AWord, '''');
     20:FSysId:=AWord;
     21:FConnectionLimit:=StrToInt(AWord);
@@ -17925,14 +17923,14 @@ begin
   end;
 
 
-  if FPassword <> '' then
+  if Password <> '' then
   begin
     if FPasswordEncripted then
       S:=S+ ' ENCRYPTED' {
     else
       S:=S+ ' UNENCRYPTED'};
 
-    S:=S+ ' PASSWORD '+QuotedString(FPassword, '''');
+    S:=S+ ' PASSWORD '+QuotedString(Password, '''');
   end;
 
   if FValidUntil<>'' then

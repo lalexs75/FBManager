@@ -793,9 +793,44 @@ type
     property SchemaName;
   end;
 
+  { TMSSQLCreateLogin }
+
+  TMSSQLCreateLogin = class(TSQLCreateLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLCreateLogin }
+
+procedure TMSSQLCreateLogin.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLCreateLogin.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateLogin.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLCreateLogin.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropTrigger }
 

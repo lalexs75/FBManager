@@ -607,6 +607,17 @@ type
   public
   end;
 
+  { TSQLCreateLogin }
+
+  TSQLCreateLogin = class(TSQLCreateCommandAbstract)
+  private
+    FPassword: string;
+  protected
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Password:string read FPassword write FPassword;
+  end;
+
   { TSQLCommandSelectCTE }
   TCTEMaterializedFlag = (ctemfDefault, ctemfMaterialized, ctemfNotMaterialized);
 
@@ -1065,6 +1076,17 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLCreateLogin }
+
+procedure TSQLCreateLogin.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TSQLCreateLogin then
+  begin
+    Password:=TSQLCreateLogin(ASource).Password;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TSQLAlterSchema }

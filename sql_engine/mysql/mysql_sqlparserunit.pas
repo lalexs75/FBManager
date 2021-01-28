@@ -544,7 +544,7 @@ type
     msuoCreateUserPriv, msuoEventPriv, msuoTriggerPriv, msuoCreateTablespacePriv);
   TMySQLUserOptions = set of TMySQLUserOption;
 
-  TMySQLCreateUser = class(TSQLCreateCommandAbstract)
+  TMySQLCreateUser = class(TSQLCreateLogin)
   private
     FAuthenticationPlugin: string;
     FHostName: string;
@@ -553,7 +553,6 @@ type
     FMaxQueriesPerHour: integer;
     FMaxUpdatePerHour: integer;
     FMaxUserConnections: integer;
-    FPassword: string;
     FUserOptions: TMySQLUserOptions;
   protected
     procedure InitParserTree;override;
@@ -563,7 +562,6 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property IdentType:TMySQLIdentType read FIdentType write FIdentType;
     property HostName:string read FHostName write FHostName;
-    property Password:string read FPassword write FPassword;
     property AuthenticationPlugin:string read FAuthenticationPlugin write FAuthenticationPlugin;
 
     property UserOptions:TMySQLUserOptions read FUserOptions write FUserOptions;
@@ -2315,7 +2313,6 @@ begin
   begin
     IdentType:=TMySQLCreateUser(ASource).IdentType;
     HostName:=TMySQLCreateUser(ASource).HostName;
-    Password:=TMySQLCreateUser(ASource).Password;
     AuthenticationPlugin:=TMySQLCreateUser(ASource).AuthenticationPlugin;
     UserOptions:=TMySQLCreateUser(ASource).UserOptions;
     MaxQueriesPerHour:=TMySQLCreateUser(ASource).MaxQueriesPerHour;
