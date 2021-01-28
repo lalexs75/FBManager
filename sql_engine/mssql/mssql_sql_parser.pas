@@ -747,9 +747,251 @@ type
   public
   end;
 
+
+  { TMSSQLCreateTrigger }
+
+  TMSSQLCreateTrigger = class(TSQLCreateTrigger)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property SchemaName;
+    property TableName;
+  end;
+
+  { TMSSQLAlterTrigger }
+
+  TMSSQLAlterTrigger = class(TSQLAlterTrigger)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property TableName;
+    property SchemaName;
+  end;
+
+
+  { TMSSQLDropTrigger }
+
+  TMSSQLDropTrigger = class(TSQLDropTrigger)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    property SchemaName;
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropTrigger }
+
+procedure TMSSQLDropTrigger.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  (*
+  -- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
+
+  DROP TRIGGER [ IF EXISTS ] [schema_name.]trigger_name [ ,...n ] [ ; ]
+
+  -- Trigger on a CREATE, ALTER, DROP, GRANT, DENY, REVOKE or UPDATE statement (DDL Trigger)
+
+  DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
+  ON { DATABASE | ALL SERVER }
+  [ ; ]
+
+  -- Trigger on a LOGON event (Logon Trigger)
+
+  DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
+  ON ALL SERVER
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [toFindWordLast]);
+    T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
+    T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+end;
+
+procedure TMSSQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropTrigger.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterTrigger }
+
+procedure TMSSQLAlterTrigger.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+  ALTER TRIGGER schema_name.trigger_name
+  ON  ( table | view )
+  [ WITH <dml_trigger_option> [ ,...n ] ]
+   ( FOR | AFTER | INSTEAD OF )
+  { [ DELETE ] [ , ] [ INSERT ] [ , ] [ UPDATE ] }
+  [ NOT FOR REPLICATION ]
+  AS { sql_statement [ ; ] [ ...n ] | EXTERNAL NAME <method specifier>
+  [ ; ] }
+
+  <dml_trigger_option> ::=
+      [ ENCRYPTION ]
+      [ <EXECUTE AS Clause> ]
+
+  <method_specifier> ::=
+      assembly_name.class_name.method_name
+
+  -- Trigger on an INSERT, UPDATE, or DELETE statement to a table
+  -- (DML Trigger on memory-optimized tables)
+
+  ALTER TRIGGER schema_name.trigger_name
+  ON  ( table  )
+  [ WITH <dml_trigger_option> [ ,...n ] ]
+   ( FOR | AFTER )
+  { [ DELETE ] [ , ] [ INSERT ] [ , ] [ UPDATE ] }
+  AS { sql_statement [ ; ] [ ...n ] }
+
+  <dml_trigger_option> ::=
+      [ NATIVE_COMPILATION ]
+      [ SCHEMABINDING ]
+      [ <EXECUTE AS Clause> ]
+
+  -- Trigger on a CREATE, ALTER, DROP, GRANT, DENY, REVOKE,
+  -- or UPDATE statement (DDL Trigger)
+
+  ALTER TRIGGER trigger_name
+  ON { DATABASE | ALL SERVER }
+  [ WITH <ddl_trigger_option> [ ,...n ] ]
+  { FOR | AFTER } { event_type [ ,...n ] | event_group }
+  AS { sql_statement [ ; ] | EXTERNAL NAME <method specifier>
+  [ ; ] }
+  }
+
+  <ddl_trigger_option> ::=
+      [ ENCRYPTION ]
+      [ <EXECUTE AS Clause> ]
+
+  <method_specifier> ::=
+      assembly_name.class_name.method_name
+
+  -- Trigger on a LOGON event (Logon Trigger)
+
+  ALTER TRIGGER trigger_name
+  ON ALL SERVER
+  [ WITH <logon_trigger_option> [ ,...n ] ]
+  { FOR| AFTER } LOGON
+  AS { sql_statement  [ ; ] [ ,...n ] | EXTERNAL NAME < method specifier >
+    [ ; ] }
+
+  <logon_trigger_option> ::=
+      [ ENCRYPTION ]
+      [ EXECUTE AS Clause ]
+
+  <method_specifier> ::=
+      assembly_name.class_name.method_name
+
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okTrigger);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [toFindWordLast]);                   //TRIGGER
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);                      //name
+end;
+
+procedure TMSSQLAlterTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterTrigger.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLAlterTrigger.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TMSSQLAlterTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateTrigger }
+
+procedure TMSSQLCreateTrigger.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+  -- SQL Server Syntax
+  -- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
+
+  CREATE [ OR ALTER ] TRIGGER [ schema_name . ]trigger_name
+  ON { table | view }
+  [ WITH <dml_trigger_option> [ ,...n ] ]
+  { FOR | AFTER | INSTEAD OF }
+  { [ INSERT ] [ , ] [ UPDATE ] [ , ] [ DELETE ] }
+  [ WITH APPEND ]
+  [ NOT FOR REPLICATION ]
+  AS { sql_statement  [ ; ] [ ,...n ] | EXTERNAL NAME <method specifier [ ; ] > }
+
+  <dml_trigger_option> ::=
+      [ ENCRYPTION ]
+      [ EXECUTE AS Clause ]
+
+  <method_specifier> ::=
+      assembly_name.class_name.method_name
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okTrigger);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [toFindWordLast]);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+end;
+
+procedure TMSSQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateTrigger.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLCreateTrigger.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TMSSQLCreateTrigger.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMSSQLCreateTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropIndex }
 
@@ -4636,73 +4878,6 @@ column_name AS computed_column_expression
     | CHECK [ NOT FOR REPLICATION ] ( logical_expression )
 }
 ----------------------------------------
--- SQL Server Syntax
--- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
-
-ALTER TRIGGER schema_name.trigger_name
-ON  ( table | view )
-[ WITH <dml_trigger_option> [ ,...n ] ]
- ( FOR | AFTER | INSTEAD OF )
-{ [ DELETE ] [ , ] [ INSERT ] [ , ] [ UPDATE ] }
-[ NOT FOR REPLICATION ]
-AS { sql_statement [ ; ] [ ...n ] | EXTERNAL NAME <method specifier>
-[ ; ] }
-
-<dml_trigger_option> ::=
-    [ ENCRYPTION ]
-    [ <EXECUTE AS Clause> ]
-
-<method_specifier> ::=
-    assembly_name.class_name.method_name
-
--- Trigger on an INSERT, UPDATE, or DELETE statement to a table
--- (DML Trigger on memory-optimized tables)
-
-ALTER TRIGGER schema_name.trigger_name
-ON  ( table  )
-[ WITH <dml_trigger_option> [ ,...n ] ]
- ( FOR | AFTER )
-{ [ DELETE ] [ , ] [ INSERT ] [ , ] [ UPDATE ] }
-AS { sql_statement [ ; ] [ ...n ] }
-
-<dml_trigger_option> ::=
-    [ NATIVE_COMPILATION ]
-    [ SCHEMABINDING ]
-    [ <EXECUTE AS Clause> ]
-
--- Trigger on a CREATE, ALTER, DROP, GRANT, DENY, REVOKE,
--- or UPDATE statement (DDL Trigger)
-
-ALTER TRIGGER trigger_name
-ON { DATABASE | ALL SERVER }
-[ WITH <ddl_trigger_option> [ ,...n ] ]
-{ FOR | AFTER } { event_type [ ,...n ] | event_group }
-AS { sql_statement [ ; ] | EXTERNAL NAME <method specifier>
-[ ; ] }
-}
-
-<ddl_trigger_option> ::=
-    [ ENCRYPTION ]
-    [ <EXECUTE AS Clause> ]
-
-<method_specifier> ::=
-    assembly_name.class_name.method_name
-
--- Trigger on a LOGON event (Logon Trigger)
-
-ALTER TRIGGER trigger_name
-ON ALL SERVER
-[ WITH <logon_trigger_option> [ ,...n ] ]
-{ FOR| AFTER } LOGON
-AS { sql_statement  [ ; ] [ ,...n ] | EXTERNAL NAME < method specifier >
-  [ ; ] }
-
-<logon_trigger_option> ::=
-    [ ENCRYPTION ]
-    [ EXECUTE AS Clause ]
-
-<method_specifier> ::=
-    assembly_name.class_name.method_name
 ----------------------------------------
 
 -- Syntax for SQL Server
@@ -6242,24 +6417,6 @@ CREATE SYNONYM [ schema_name_1. ] synonym_name FOR <object>
   | database_name . [ schema_name_2 ].| schema_name_2. ] object_name
 }
 ----------------------------------------
--- SQL Server Syntax
--- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
-
-CREATE [ OR ALTER ] TRIGGER [ schema_name . ]trigger_name
-ON { table | view }
-[ WITH <dml_trigger_option> [ ,...n ] ]
-{ FOR | AFTER | INSTEAD OF }
-{ [ INSERT ] [ , ] [ UPDATE ] [ , ] [ DELETE ] }
-[ WITH APPEND ]
-[ NOT FOR REPLICATION ]
-AS { sql_statement  [ ; ] [ ,...n ] | EXTERNAL NAME <method specifier [ ; ] > }
-
-<dml_trigger_option> ::=
-    [ ENCRYPTION ]
-    [ EXECUTE AS Clause ]
-
-<method_specifier> ::=
-    assembly_name.class_name.method_name
 ----------------------------------------
 
 -- User-defined Data Type Syntax
@@ -6666,20 +6823,6 @@ DROP SYNONYM [ IF EXISTS ] [ schema. ] synonym_name
 DROP TABLE [ IF EXISTS ] { database_name.schema_name.table_name | schema_name.table_name | table_name } [ ,...n ]
 [ ; ]
 ----------------------------------------
--- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
-
-DROP TRIGGER [ IF EXISTS ] [schema_name.]trigger_name [ ,...n ] [ ; ]
-
--- Trigger on a CREATE, ALTER, DROP, GRANT, DENY, REVOKE or UPDATE statement (DDL Trigger)
-
-DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
-ON { DATABASE | ALL SERVER }
-[ ; ]
-
--- Trigger on a LOGON event (Logon Trigger)
-
-DROP TRIGGER [ IF EXISTS ] trigger_name [ ,...n ]
-ON ALL SERVER
 ----------------------------------------
 DROP TYPE [ IF EXISTS ] [ schema_name. ] type_name [ ; ]
 ----------------------------------------
