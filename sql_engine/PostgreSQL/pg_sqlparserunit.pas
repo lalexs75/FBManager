@@ -1023,7 +1023,7 @@ type
 
   { TPGSQLAlterGroup }
 
-  TPGSQLAlterGroup = class(TSQLCommandDDL)
+  TPGSQLAlterGroup = class(TSQLAlterLogin)
   private
     FGroupName: string;
     FGroupOperator: TAlterGroupOperator;
@@ -1041,7 +1041,7 @@ type
 
   { TPGSQLDropGroup }
 
-  TPGSQLDropGroup = class(TSQLDropCommandAbstract)
+  TPGSQLDropGroup = class(TSQLDropLogin)
   private
     FServerName: string;
     FUserMapping: boolean;

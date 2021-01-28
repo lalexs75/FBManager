@@ -805,9 +805,73 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
   end;
 
+  { TMSSQLAlterLogin }
+
+  TMSSQLAlterLogin = class(TSQLAlterLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLDropLogin }
+
+  TMSSQLDropLogin = class(TSQLDropLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropLogin }
+
+procedure TMSSQLDropLogin.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLDropLogin.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropLogin.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterLogin }
+
+procedure TMSSQLAlterLogin.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLAlterLogin.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterLogin.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLAlterLogin.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLCreateLogin }
 

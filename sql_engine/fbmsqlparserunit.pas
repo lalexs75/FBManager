@@ -618,6 +618,24 @@ type
     property Password:string read FPassword write FPassword;
   end;
 
+  { TSQLAlterLogin }
+
+  TSQLAlterLogin = class(TSQLCreateCommandAbstract)
+  private
+  protected
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TSQLDropLogin }
+
+  TSQLDropLogin = class(TSQLDropCommandAbstract)
+  private
+  protected
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
   { TSQLCommandSelectCTE }
   TCTEMaterializedFlag = (ctemfDefault, ctemfMaterialized, ctemfNotMaterialized);
 
@@ -1076,6 +1094,20 @@ begin
     if P.SQLEngineClass = ASQLEngineClass then
       if P.FItem is ACmd then
         Result:=P.Cmd;
+end;
+
+{ TSQLDropLogin }
+
+procedure TSQLDropLogin.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TSQLAlterLogin }
+
+procedure TSQLAlterLogin.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
 end;
 
 { TSQLCreateLogin }

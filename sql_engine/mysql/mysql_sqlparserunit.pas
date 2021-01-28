@@ -575,7 +575,7 @@ type
 
   { TMySQLAlterUser }
 
-  TMySQLAlterUser = class(TSQLCommandDDL)
+  TMySQLAlterUser = class(TSQLAlterLogin)
   private
   protected
     procedure InitParserTree;override;
@@ -586,7 +586,7 @@ type
 
   { TMySQLDropUser }
 
-  TMySQLDropUser = class(TSQLDropCommandAbstract)
+  TMySQLDropUser = class(TSQLDropLogin)
   private
     FCurItem: TSQLParserField;
   protected
