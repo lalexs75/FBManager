@@ -56,6 +56,22 @@ object mssqlSQLTexts: TmssqlSQLTexts
           'order by'
           '  sys.all_objects.name'
         )
+      end    
+      item
+        Caption = 'sIndexList'
+        Lines.Strings = (
+          'select'
+          '  indexes.object_id,'
+          '  all_objects.schema_id,'
+          '  indexes.name,'
+          '  indexes.type,'
+          '  null as acl_list'
+          'from'
+          '  sys.indexes'
+          '  inner join sys.all_objects on (indexes.object_id = all_objects.object_id)'
+          'order by'
+          '  indexes.name'
+        )
       end>
     Left = 40
     Top = 112

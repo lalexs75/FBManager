@@ -82,7 +82,7 @@ type
 
   { TMSSQLStoredProcRoot }
 
-  TMSSQLStoredProcRoot = class(TDBRootObject)
+  TMSSQLStoredProcRoot = class(TMSSQLRootObject)
   protected
     function DBMSObjectsList:string; override;
     function DBMSValidObject(AItem:TDBItem):boolean; override;
@@ -127,6 +127,18 @@ type
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
+  { TMSSQLIndexRoot }
+
+  TMSSQLIndexRoot = class(TMSSQLRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+  end;
+
   { TMSSQLSSchema }
 
   TMSSQLSSchema = class(TDBRootObject)
@@ -138,6 +150,8 @@ type
     FTriggers:TMSSQLTriggerRoot;
     FSequences:TMSSQLSequenceRoot;
     FFunctions:TMSSQLFunctionRoot;
+    FStoredProc:TMSSQLStoredProcRoot;
+    FIndexs:TMSSQLIndexRoot;
     procedure SetSchemaId(const AValue: integer);
   protected
   public
@@ -228,6 +242,7 @@ type
     destructor Destroy; override;
     class function DBClassTitle:string;override;
     procedure RefreshObject; override;
+    function CreateSQLObject:TSQLCommandDDL; override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -297,6 +312,24 @@ type
 //    function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean;override;
 //    function CreateSQLObject:TSQLCommandDDL; override;
   end;
+
+  TMSSQLIndex = class(TDBIndex)
+  private
+    FSchema: TMSSQLSSchema;
+  protected
+    function GetCaptionFullPatch:string; override;
+    procedure InternalRefreshStatistic; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
+    class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
+    procedure RefreshObject;override;
+    procedure RefreshDependencies; override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+  end;
+
   { TMSSQLQueryControl }
 
   TMSSQLQueryControl = class(TSQLQueryControl)
@@ -378,6 +411,124 @@ type
 implementation
 uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
   fbmToolsUnit;
+
+function FmtObjName(const ASch:TMSSQLSSchema; const AObj:TDBObject):string;
+begin
+  if Assigned(ASch) then
+    Result:=ASch.Caption + '.'+AObj.Caption
+  else
+    Result:=AObj.Caption;
+end;
+
+{ TMSSQLIndex }
+
+function TMSSQLIndex.GetCaptionFullPatch: string;
+begin
+  Result:=FmtObjName(FSchema, Self);
+end;
+
+procedure TMSSQLIndex.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+end;
+
+constructor TMSSQLIndex.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
+  );
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+{  if Assigned(ADBItem) then
+    FOID:=ADBItem.ObjId;
+
+}  FSchema:=TMSSQLRootObject(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
+  FSystemObject:=FSchema.SystemObject;
+//  FIncludeFields:=TStringList.Create;
+end;
+
+destructor TMSSQLIndex.Destroy;
+begin
+  //FreeAndNil(FIncludeFields);
+  inherited Destroy;
+end;
+
+class function TMSSQLIndex.DBClassTitle: string;
+begin
+  Result:='Index';
+end;
+
+function TMSSQLIndex.InternalGetDDLCreate: string;
+var
+  FCmd: TMSSQLCreateIndex;
+begin
+  if not Assigned(Table) then
+    RefreshObject;
+  FCmd:=TMSSQLCreateIndex.Create(nil);
+  FCmd.Name:=Caption;
+(*  FCmd.SchemaName:=SchemaName;
+  FCmd.TableName:=Table.Caption;
+  FCmd.Unique:=IndexUnique;
+  FCmd.IndexMethod:=FAccessMetod;
+  for I in IndexFields do
+  begin
+    PI1:=FCmd.Fields.AddParam(I.FieldName);
+    if I.SortOrder = indDescending then
+      PI1.IndexOptions.SortOrder:=I.SortOrder;
+    PI1.IndexOptions.IndexNullPos:=I.NullPos;
+    PI1.Collate:=I.CollateName;
+  end;
+  FCmd.WhereCondition:=FWhereExpression;
+  FCmd.Description:=Description;
+  for S in FIncludeFields do
+    FCmd.IncludeFields.AddParam(S);*)
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
+end;
+
+procedure TMSSQLIndex.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+end;
+
+procedure TMSSQLIndex.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
+procedure TMSSQLIndex.RefreshDependencies;
+begin
+  inherited RefreshDependencies;
+end;
+
+function TMSSQLIndex.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=TMSSQLCreateIndex.Create(nil);
+end;
+
+{ TMSSQLIndexRoot }
+
+function TMSSQLIndexRoot.DBMSObjectsList: string;
+begin
+  Result:=msSQLTexts.sSystemObjects['sIndexList'];
+end;
+
+function TMSSQLIndexRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:=(AItem.ObjType > '0') and (AItem.SchemeID = SchemaId);
+end;
+
+function TMSSQLIndexRoot.GetObjectType: string;
+begin
+  Result:='Index';
+end;
+
+constructor TMSSQLIndexRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okIndex;
+  FDropCommandClass:=TMSSQLDropIndex;
+end;
 
 { TMSSQLFunction }
 
@@ -1413,48 +1564,26 @@ end;
 
 function TMSSQLStoredProcRoot.DBMSObjectsList: string;
 begin
-  Result:=inherited DBMSObjectsList;
+  Result:=msSQLTexts.sSystemObjects['sObjListAll'];
 end;
 
 function TMSSQLStoredProcRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=inherited DBMSValidObject(AItem);
+  Result:=(AItem.ObjType = 'P') and (AItem.SchemeID = SchemaId);
 end;
 
 function TMSSQLStoredProcRoot.GetObjectType: string;
 begin
   Result:='Stored procedure';
 end;
-(*
-procedure TMSSQLStoredProcRoot.RefreshGroup;
-//var
-//  P:PDBSQLObject;
-//  U:TMSSQLStoredProcedure;
-begin
-  (*FObjects.Clear;
-  FOwnerDB.RefreshObjectsBegin('');
-  P:=TMSSQLEngine(FOwnerDB).CashedItems['AllObjects'];
-  while Assigned(P) do
-  begin
-    if (P^.ObjType = 'P') and (P^.SchemeID = FSchemaId) then
-    begin
-      U:=TMSSQLStoredProcedure.Create(P^.ObjName, Self);
-      U.FSchema:=FSchema;
-    end;
-    P:=P^.NextObj;
-  end;
-  FOwnerDB.RefreshObjectsEnd('');
-  *)
-end;
-*)
+
 constructor TMSSQLStoredProcRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
 begin
-  inherited;
-  //FCaption:=sStoredProcedures;
-  //FDBObjectKind:=okStoredProc;
-  //FOwnerDB:=AMSSQLEngine;
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okStoredProc;
+  FDropCommandClass:=TMSSQLDropProcedure;
 end;
 
 { TMSSQLStoredProcedure }
@@ -1495,6 +1624,16 @@ end;
 procedure TMSSQLStoredProcedure.RefreshObject;
 begin
 //  inherited Refresh;
+end;
+
+function TMSSQLStoredProcedure.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=TMSSQLCreateProcedure.Create(nil);
+  TMSSQLCreateProcedure(Result).SchemaName:=SchemaName;
+  if State = sdboEdit then
+  begin
+    Result.Name:=Caption;
+  end;
 end;
 
 procedure TMSSQLStoredProcedure.Commit;
@@ -1914,7 +2053,9 @@ begin
   //FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
   //FTriggers:=TMSSQLTriggerRoot.Create(AMSSQLEngine);
   FSequences:=TMSSQLSequenceRoot.Create(OwnerDB, TMSSQLSequence, sSequences, Self);
-  FFunctions:=TMSSQLFunctionRoot.Create(OwnerDB, TMSSQLFunction, sFunction, Self);
+  FFunctions:=TMSSQLFunctionRoot.Create(OwnerDB, TMSSQLFunction, sFunctions, Self);
+  FStoredProc:=TMSSQLStoredProcRoot.Create(OwnerDB, TMSSQLStoredProcedure, sProcedures, Self);
+  FIndexs:=TMSSQLIndexRoot.Create(OwnerDB, TMSSQLIndex, sIndexs, Self);
 
 end;
 
@@ -1924,6 +2065,8 @@ begin
   FreeAndNil(FStorepProc);
   FreeAndNil(FViews);
   FreeAndNil(FTriggers);
+  FreeAndNil(FFunctions);
+  FreeAndNil(FStoredProc);
   inherited Destroy;
 end;
 
@@ -2059,6 +2202,11 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateProcedure, 'CREATE PROCEDURE');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterProcedure, 'ALTER PROCEDURE');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropProcedure, 'DROP PROCEDURE');
+
+  //INDEX
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterIndex, 'ALTER INDEX');             //ALTER INDEX — изменить определение индекса
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropIndex, 'DROP INDEX');               //DROP INDEX — удалить индекс
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
   RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO
