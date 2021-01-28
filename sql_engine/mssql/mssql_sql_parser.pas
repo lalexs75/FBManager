@@ -706,19 +706,298 @@ type
     procedure MakeSQL;override;
   public
   end;
+
+
+  { TMSSQLCreateIndex }
+
+  TMSSQLCreateIndex = class(TSQLCreateIndex)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+
+  { TMSSQLAlterIndex }
+
+  TMSSQLAlterIndex = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLDropIndex }
+
+  TMSSQLDropIndex = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
 
+{ TMSSQLDropIndex }
+
+procedure TMSSQLDropIndex.InitParserTree;
+begin
+  (*
+  DROP INDEX index_name ON <object>
+      [ WITH ( <drop_index_option> [ ,...n ] ) ]
+
+  <object> ::=
+  { database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
+
+  <drop_index_option> ::=
+  {
+      MAXDOP = max_degree_of_parallelism
+      | ONLINE = { ON | OFF }
+  }
+
+
+  *)
+end;
+
+procedure TMSSQLDropIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropIndex.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterIndex }
+
+procedure TMSSQLAlterIndex.InitParserTree;
+begin
+  (*
+  ALTER INDEX index_name
+      ON <table_object>
+      [WITH XMLNAMESPACES ( <xmlnamespace_list> )]
+      FOR ( <promoted_node_path_action_list> )
+      [WITH ( <index_options> )]
+
+  <table_object> ::=
+  { database_name.schema_name.table_name | schema_name.table_name | table_name }
+  <promoted_node_path_action_list> ::=
+  <promoted_node_path_action_item> [, <promoted_node_path_action_list>]
+
+  <promoted_node_path_action_item>::=
+  <add_node_path_item_action> | <remove_node_path_item_action>
+
+  <add_node_path_item_action> ::=
+  ADD <path_name> = <promoted_node_path_item>
+
+  <promoted_node_path_item>::=
+  <xquery_node_path_item> | <sql_values_node_path_item>
+
+  <remove_node_path_item_action> ::= REMOVE <path_name>
+
+  <path_name_or_typed_node_path>::=
+  <path_name> | <typed_node_path>
+
+  <typed_node_path> ::=
+  <node_path> [[AS XQUERY <xsd_type_ext>] | [AS SQL <sql_type>]]
+
+  <xquery_node_path_item> ::=
+  <node_path> [AS XQUERY <xsd_type_or_node_hint>] [SINGLETON]
+
+  <xsd_type_or_node_hint> ::=
+  [<xsd_type>] [MAXLENGTH(x)] | 'node()'
+
+  <sql_values_node_path_item> ::=
+  <node_path> AS SQL <sql_type> [SINGLETON]
+
+  <node_path> ::=
+  character_string_literal
+
+  <xsd_type_ext> ::=
+  character_string_literal
+
+  <sql_type> ::=
+  identifier
+
+  <path_name> ::=
+  identifier
+
+  <xmlnamespace_list> ::=
+  <xmlnamespace_item> [, <xmlnamespace_list>]
+
+  <xmlnamespace_item> ::=
+  <xmlnamespace_uri> AS <xmlnamespace_prefix>
+
+  <xml_namespace_uri> ::= character_string_literal
+  <xml_namespace_prefix> ::= identifier
+
+  <index_options> ::=
+  (
+    | PAD_INDEX  = { ON | OFF }
+    | FILLFACTOR = fillfactor
+    | SORT_IN_TEMPDB = { ON | OFF }
+    | IGNORE_DUP_KEY =OFF
+    | DROP_EXISTING = { ON | OFF }
+    | ONLINE =OFF
+    | ALLOW_ROW_LOCKS = { ON | OFF }
+    | ALLOW_PAGE_LOCKS = { ON | OFF }
+    | MAXDOP = max_degree_of_parallelism
+  )
+  *)
+end;
+
+procedure TMSSQLAlterIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterIndex.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLAlterIndex.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TMSSQLAlterIndex.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateIndex }
+
+procedure TMSSQLCreateIndex.InitParserTree;
+var
+  FSQLTokens, T1, T2_1, T2_2, T: TSQLTokenRecord;
+begin
+  (*
+  CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name
+      ON <object> ( column [ ASC | DESC ] [ ,...n ] )
+      [ INCLUDE ( column_name [ ,...n ] ) ]
+      [ WHERE <filter_predicate> ]
+      [ WITH ( <relational_index_option> [ ,...n ] ) ]
+      [ ON { partition_scheme_name ( column_name )
+           | filegroup_name
+           | default
+           }
+      ]
+      [ FILESTREAM_ON { filestream_filegroup_name | partition_scheme_name | "NULL" } ]
+
+  [ ; ]
+
+  <object> ::=
+  { database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
+
+  <relational_index_option> ::=
+  {
+      PAD_INDEX = { ON | OFF }
+    | FILLFACTOR = fillfactor
+    | SORT_IN_TEMPDB = { ON | OFF }
+    | IGNORE_DUP_KEY = { ON | OFF }
+    | STATISTICS_NORECOMPUTE = { ON | OFF }
+    | STATISTICS_INCREMENTAL = { ON | OFF }
+    | DROP_EXISTING = { ON | OFF }
+    | ONLINE = { ON | OFF }
+    | RESUMABLE = { ON | OFF }
+    | MAX_DURATION = <time> [MINUTES]
+    | ALLOW_ROW_LOCKS = { ON | OFF }
+    | ALLOW_PAGE_LOCKS = { ON | OFF }
+    | OPTIMIZE_FOR_SEQUENTIAL_KEY = { ON | OFF }
+    | MAXDOP = max_degree_of_parallelism
+    | DATA_COMPRESSION = { NONE | ROW | PAGE }
+       [ ON PARTITIONS ( { <partition_number_expression> | <range> }
+       [ , ...n ] ) ]
+  }
+
+  <filter_predicate> ::=
+      <conjunct> [ AND <conjunct> ]
+
+  <conjunct> ::=
+      <disjunct> | <comparison>
+
+  <disjunct> ::=
+          column_name IN (constant ,...n)
+
+  <comparison> ::=
+          column_name <comparison_op> constant
+
+  <comparison_op> ::=
+      { IS | IS NOT | = | <> | != | > | >= | !> | < | <= | !< }
+
+  <range> ::=
+  <partition_number_expression> TO <partition_number_expression>
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okIndex); // CREATE [ UNIQUE ] INDEX
+    T1:=AddSQLTokens(stKeyword, FSQLTokens, 'UNIQUE', [], 1);      //[ UNIQUE ]
+
+    T2_1:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'CLUSTERED', [], 2);      //[ UNIQUE ]
+    T2_2:=AddSQLTokens(stKeyword, [FSQLTokens, T1], 'NONCLUSTERED', [], 2);      //[ UNIQUE ]
+
+  T:=AddSQLTokens(stKeyword, [FSQLTokens, T1, T2_1, T2_2], 'INDEX', [toFindWordLast]);                       // INDEX
+//    CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name
+end;
+
+procedure TMSSQLCreateIndex.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateIndex.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TMSSQLCreateIndex.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+destructor TMSSQLCreateIndex.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMSSQLCreateIndex.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
 { TMSSQLDropProcedure }
 
 procedure TMSSQLDropProcedure.InitParserTree;
+var
+  FSQLTokens, Par1, Par2: TSQLTokenRecord;
 begin
   (*
   -- Syntax for SQL Server and Azure SQL Database
 
 DROP { PROC | PROCEDURE } [ IF EXISTS ] { [ schema_name. ] procedure } [ ,...n ]
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okStoredProc);
+  Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROC', [toFindWordLast]);
+  Par2:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURE', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, [Par1, Par2], '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
 end;
 
 procedure TMSSQLDropProcedure.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -735,6 +1014,8 @@ end;
 { TMSSQLAlterProcedure }
 
 procedure TMSSQLAlterProcedure.InitParserTree;
+var
+  FSQLTokens, Par2, Par1: TSQLTokenRecord;
 begin
   (*
   -- Syntax for SQL Server and Azure SQL Database
@@ -752,6 +1033,12 @@ begin
       [ ENCRYPTION ]
       [ RECOMPILE ]
       [ EXECUTE AS Clause ]  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okStoredProc);
+  Par2:=AddSQLTokens(stKeyword, FSQLTokens, 'PROC', [toFindWordLast]);
+  Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'PROCEDURE', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, [Par1, Par2], '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
 end;
 
 procedure TMSSQLAlterProcedure.InternalProcessChildToken(
@@ -768,6 +1055,8 @@ end;
 { TMSSQLCreateProcedure }
 
 procedure TMSSQLCreateProcedure.InitParserTree;
+var
+  FSQLTokens, Par1, Par2: TSQLTokenRecord;
 begin
   (*
   CREATE [ OR ALTER ] { PROC | PROCEDURE }
@@ -784,6 +1073,14 @@ begin
       [ ENCRYPTION ]
       [ RECOMPILE ]
       [ EXECUTE AS Clause ]  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okStoredProc);
+      Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', []);
+      Par1:=AddSQLTokens(stKeyword, Par1, 'ALTER', [], -2);
+  Par2:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'PROC', [toFindWordLast]);
+  Par1:=AddSQLTokens(stKeyword, [FSQLTokens, Par1], 'PROCEDURE', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, [Par1, Par2], '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
 end;
 
 procedure TMSSQLCreateProcedure.InternalProcessChildToken(
@@ -815,11 +1112,18 @@ end;
 { TMSSQLDropFunction }
 
 procedure TMSSQLDropFunction.InitParserTree;
+var
+  FSQLTokens, Par1, Par2: TSQLTokenRecord;
 begin
   (*
   DROP FUNCTION [ IF EXISTS ] { [ schema_name. ] function_name } [ ,...n ]
   [;]
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okStoredProc);
+  Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, Par1, '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
 end;
 
 procedure TMSSQLDropFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -841,6 +1145,8 @@ end;
 { TMSSQLAlterFunction }
 
 procedure TMSSQLAlterFunction.InitParserTree;
+var
+  FSQLTokens, Par1, Par2: TSQLTokenRecord;
 begin
   (*
   ALTER FUNCTION [ schema_name. ] function_name
@@ -857,6 +1163,11 @@ begin
           RETURN scalar_expression
       END
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okStoredProc);
+  Par1:=AddSQLTokens(stKeyword, FSQLTokens, 'FUNCTION', [toFindWordLast]);
+    Par1:=AddSQLTokens(stIdentificator, Par1, '', [], 7);
+    Par2:=AddSQLTokens(stSymbol, Par1, '.', []);
+    Par2:=AddSQLTokens(stIdentificator, Par2, '', [], 8);
 end;
 
 procedure TMSSQLAlterFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -3648,76 +3959,6 @@ ALTER INDEX { index_name | ALL } ON <object>
 
 ----------------------------------------
 
-ALTER INDEX index_name
-    ON <table_object>
-    [WITH XMLNAMESPACES ( <xmlnamespace_list> )]
-    FOR ( <promoted_node_path_action_list> )
-    [WITH ( <index_options> )]
-
-<table_object> ::=
-{ database_name.schema_name.table_name | schema_name.table_name | table_name }
-<promoted_node_path_action_list> ::=
-<promoted_node_path_action_item> [, <promoted_node_path_action_list>]
-
-<promoted_node_path_action_item>::=
-<add_node_path_item_action> | <remove_node_path_item_action>
-
-<add_node_path_item_action> ::=
-ADD <path_name> = <promoted_node_path_item>
-
-<promoted_node_path_item>::=
-<xquery_node_path_item> | <sql_values_node_path_item>
-
-<remove_node_path_item_action> ::= REMOVE <path_name>
-
-<path_name_or_typed_node_path>::=
-<path_name> | <typed_node_path>
-
-<typed_node_path> ::=
-<node_path> [[AS XQUERY <xsd_type_ext>] | [AS SQL <sql_type>]]
-
-<xquery_node_path_item> ::=
-<node_path> [AS XQUERY <xsd_type_or_node_hint>] [SINGLETON]
-
-<xsd_type_or_node_hint> ::=
-[<xsd_type>] [MAXLENGTH(x)] | 'node()'
-
-<sql_values_node_path_item> ::=
-<node_path> AS SQL <sql_type> [SINGLETON]
-
-<node_path> ::=
-character_string_literal
-
-<xsd_type_ext> ::=
-character_string_literal
-
-<sql_type> ::=
-identifier
-
-<path_name> ::=
-identifier
-
-<xmlnamespace_list> ::=
-<xmlnamespace_item> [, <xmlnamespace_list>]
-
-<xmlnamespace_item> ::=
-<xmlnamespace_uri> AS <xmlnamespace_prefix>
-
-<xml_namespace_uri> ::= character_string_literal
-<xml_namespace_prefix> ::= identifier
-
-<index_options> ::=
-(
-  | PAD_INDEX  = { ON | OFF }
-  | FILLFACTOR = fillfactor
-  | SORT_IN_TEMPDB = { ON | OFF }
-  | IGNORE_DUP_KEY =OFF
-  | DROP_EXISTING = { ON | OFF }
-  | ONLINE =OFF
-  | ALLOW_ROW_LOCKS = { ON | OFF }
-  | ALLOW_PAGE_LOCKS = { ON | OFF }
-  | MAXDOP = max_degree_of_parallelism
-)
 ----------------------------------------
 -- Syntax for SQL Server
 
@@ -5546,61 +5787,6 @@ RETURNS @return_variable TABLE <table_type_definition>
     END
 [ ; ]
 ----------------------------------------
-CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name
-    ON <object> ( column [ ASC | DESC ] [ ,...n ] )
-    [ INCLUDE ( column_name [ ,...n ] ) ]
-    [ WHERE <filter_predicate> ]
-    [ WITH ( <relational_index_option> [ ,...n ] ) ]
-    [ ON { partition_scheme_name ( column_name )
-         | filegroup_name
-         | default
-         }
-    ]
-    [ FILESTREAM_ON { filestream_filegroup_name | partition_scheme_name | "NULL" } ]
-
-[ ; ]
-
-<object> ::=
-{ database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
-
-<relational_index_option> ::=
-{
-    PAD_INDEX = { ON | OFF }
-  | FILLFACTOR = fillfactor
-  | SORT_IN_TEMPDB = { ON | OFF }
-  | IGNORE_DUP_KEY = { ON | OFF }
-  | STATISTICS_NORECOMPUTE = { ON | OFF }
-  | STATISTICS_INCREMENTAL = { ON | OFF }
-  | DROP_EXISTING = { ON | OFF }
-  | ONLINE = { ON | OFF }
-  | RESUMABLE = { ON | OFF }
-  | MAX_DURATION = <time> [MINUTES]
-  | ALLOW_ROW_LOCKS = { ON | OFF }
-  | ALLOW_PAGE_LOCKS = { ON | OFF }
-  | OPTIMIZE_FOR_SEQUENTIAL_KEY = { ON | OFF }
-  | MAXDOP = max_degree_of_parallelism
-  | DATA_COMPRESSION = { NONE | ROW | PAGE }
-     [ ON PARTITIONS ( { <partition_number_expression> | <range> }
-     [ , ...n ] ) ]
-}
-
-<filter_predicate> ::=
-    <conjunct> [ AND <conjunct> ]
-
-<conjunct> ::=
-    <disjunct> | <comparison>
-
-<disjunct> ::=
-        column_name IN (constant ,...n)
-
-<comparison> ::=
-        column_name <comparison_op> constant
-
-<comparison_op> ::=
-    { IS | IS NOT | = | <> | != | > | >= | !> | < | <= | !< }
-
-<range> ::=
-<partition_number_expression> TO <partition_number_expression>
 ----------------------------------------
 -- Syntax for SQL Server
 CREATE LOGIN login_name { WITH <option_list1> | FROM <sources> }
@@ -6397,19 +6583,6 @@ DROP INDEX [ IF EXISTS ]
             | "default" } ]
 }
 ----------------------------------------
-DROP INDEX index_name ON <object>
-    [ WITH ( <drop_index_option> [ ,...n ] ) ]
-
-<object> ::=
-{ database_name.schema_name.table_or_view_name | schema_name.table_or_view_name | table_or_view_name }
-
-<drop_index_option> ::=
-{
-    MAXDOP = max_degree_of_parallelism
-    | ONLINE = { ON | OFF }
-}
-
-
 ----------------------------------------
 DROP LOGIN login_name
 ----------------------------------------
