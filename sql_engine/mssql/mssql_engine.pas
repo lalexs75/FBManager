@@ -249,11 +249,12 @@ type
     function DataSet(ARecCountLimit:Integer):TDataSet;override;
   end;
 
-  { TMSSQLTriger }
+  { TMSSQLTrigger }
 
-  TMSSQLTriger = class(TDBTriggerObject)
+  TMSSQLTrigger = class(TDBTriggerObject)
   private
     FSchema:TMSSQLSSchema;
+    FOID:integer;
   protected
 //    procedure InternalSetDescription;override;
     procedure SetState(const AValue: TDBObjectState); override;
@@ -2056,7 +2057,7 @@ begin
   FFunctions:=TMSSQLFunctionRoot.Create(OwnerDB, TMSSQLFunction, sFunctions, Self);
   FStoredProc:=TMSSQLStoredProcRoot.Create(OwnerDB, TMSSQLStoredProcedure, sProcedures, Self);
   FIndexs:=TMSSQLIndexRoot.Create(OwnerDB, TMSSQLIndex, sIndexs, Self);
-
+  FTriggers:=TMSSQLTriggerRoot.Create(OwnerDB, TMSSQLTrigger, sTriggers, Self);
 end;
 
 destructor TMSSQLSSchema.Destroy;
@@ -2067,6 +2068,7 @@ begin
   FreeAndNil(FTriggers);
   FreeAndNil(FFunctions);
   FreeAndNil(FStoredProc);
+  FreeAndNil(FIndexs);
   inherited Destroy;
 end;
 
@@ -2086,88 +2088,71 @@ end;
 
 function TMSSQLTriggerRoot.DBMSObjectsList: string;
 begin
-  Result:=inherited DBMSObjectsList;
+  Result:=msSQLTexts.sSystemObjects['sObjListAll'];
 end;
 
 function TMSSQLTriggerRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  Result:=inherited DBMSValidObject(AItem);
+  Result:=(AItem.ObjType = 'TR') and (AItem.SchemeID = SchemaId);
 end;
 
 function TMSSQLTriggerRoot.GetObjectType: string;
 begin
   Result:='Trigger';
 end;
-(*
-procedure TMSSQLTriggerRoot.RefreshGroup;
-//var
-//  P:PDBSQLObject;
-//  T:TMSSQLTriger;
-begin
-  FObjects.Clear;
-(*  FOwnerDB.RefreshObjectsBegin('');
-  P:=TMSSQLEngine(FOwnerDB).CashedItems['AllObjects'];
-  while Assigned(P) do
-  begin
-    if (P^.ObjType = 'TR') and (P^.SchemeID = FSchemaId) then
-    begin
-      T:=TMSSQLTriger.Create(P^.ObjName, Self);
-      T.FSchema:=FSchema;
-    end;
-    P:=P^.NextObj;
-  end;
-  FOwnerDB.RefreshObjectsEnd(''); *)
-end;
-*)
+
 constructor TMSSQLTriggerRoot.Create(AOwnerDB: TSQLEngineAbstract;
   ADBObjectClass: TDBObjectClass; const ACaption: string;
   AOwnerRoot: TDBRootObject);
 begin
   inherited;
-  //FCaption:=sTriggers;
-  //FDBObjectKind:=okTrigger;
-  //FOwnerDB:=AMSSQLEngine;
+  FDBObjectKind:=okTrigger;
+  FDropCommandClass:=TMSSQLDropTrigger;
 end;
 
-{ TMSSQLTriger }
-(*
-procedure TMSSQLTriger.InternalSetDescription;
-begin
-//  inherited InternalSetDescription;
-end;
-*)
-procedure TMSSQLTriger.SetState(const AValue: TDBObjectState);
+{ TMSSQLTrigger }
+
+procedure TMSSQLTrigger.SetState(const AValue: TDBObjectState);
 begin
   inherited SetState(AValue);
 end;
 
-procedure TMSSQLTriger.SetActive(const AValue: boolean);
+procedure TMSSQLTrigger.SetActive(const AValue: boolean);
 begin
 //  inherited SetActive(AValue);
 end;
 
-function TMSSQLTriger.GetTriggerBody: string;
+function TMSSQLTrigger.GetTriggerBody: string;
 begin
   Result:='';//inherited GetTriggerBody;
 end;
 
-constructor TMSSQLTriger.Create(const ADBItem: TDBItem;
+constructor TMSSQLTrigger.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
-  inherited;
+  inherited Create(ADBItem, AOwnerRoot);
+  if Assigned(ADBItem) then
+  begin
+    FOID:=ADBItem.ObjId;
+//    FTriggerFunctionOID:=ADBItem.ObjOwnData;
+  end;
+
+//  FUpdateFieldsWhere:=TStringList.Create;
+  FSchema:=TMSSQLTriggerRoot(AOwnerRoot).FSchema;
+  SchemaName:=FSchema.Caption;
 end;
 
-destructor TMSSQLTriger.Destroy;
+destructor TMSSQLTrigger.Destroy;
 begin
   inherited Destroy;
 end;
 
-class function TMSSQLTriger.DBClassTitle: string;
+class function TMSSQLTrigger.DBClassTitle: string;
 begin
   Result:=sTrigger;
 end;
 
-procedure TMSSQLTriger.RefreshObject;
+procedure TMSSQLTrigger.RefreshObject;
 begin
 //  inherited Refresh;
 end;
@@ -2202,6 +2187,10 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateProcedure, 'CREATE PROCEDURE');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterProcedure, 'ALTER PROCEDURE');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropProcedure, 'DROP PROCEDURE');
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateTrigger, 'CREATE TRIGGER');       //CREATE TRIGGER — создать триггер
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterTrigger, 'ALTER TRIGGER');         //ALTER TRIGGER — изменить определение триггера
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropTrigger, 'DROP TRIGGER');           //DROP TRIGGER — удалить триггер
 
   //INDEX
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
