@@ -244,8 +244,8 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="3456"/>
-        <CursorPos X="88" Y="3487"/>
+        <TopLine Value="1093"/>
+        <CursorPos X="3" Y="1111"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit>
@@ -556,65 +556,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="313" Column="3" TopLine="303"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="108" Column="15" TopLine="96"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="302" Column="14" TopLine="294"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="529" TopLine="516"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1334" Column="3" TopLine="1319"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1353" TopLine="1337"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1388" TopLine="1369"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1424" TopLine="1411"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1637" Column="19" TopLine="1606"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1638" TopLine="1637"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2477" Column="41" TopLine="2446"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2777" TopLine="2747"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2828" TopLine="2799"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2871" Column="6" TopLine="2840"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-      </Position>
-      <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <Caret Line="86" Column="11" TopLine="59"/>
       </Position>
@@ -672,6 +613,66 @@
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <Caret Line="190" TopLine="164"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="3467" Column="14" TopLine="3456"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="3320" Column="4" TopLine="3307"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="836" Column="11" TopLine="808"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1086" Column="51" TopLine="1081"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="842" Column="63" TopLine="820"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="841" Column="62" TopLine="820"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1115" Column="51" TopLine="1111"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="839" Column="15" TopLine="825"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1108" Column="3" TopLine="1106"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="838" Column="15" TopLine="823"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1104" Column="18" TopLine="1097"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="837" Column="15" TopLine="822"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1089" TopLine="1083"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="839" Column="15" TopLine="821"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1112" Column="18" TopLine="1107"/>
       </Position>
     </JumpHistory>
     <RunParams>

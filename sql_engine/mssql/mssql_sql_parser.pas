@@ -832,12 +832,14 @@ type
 
   TMSSQLCreateRole = class(TSQLCreateLogin)
   private
+    FOwnerName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property OwnerName:string read FOwnerName write FOwnerName;
   end;
 
   { TMSSQLAlterRole }
@@ -1087,21 +1089,37 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  T:=AddSQLTokens(stKeyword, T, 'AUTHORIZATION', [toOptional]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
 end;
 
 procedure TMSSQLCreateRole.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:OwnerName:=AWord;
+  end;
 end;
 
 procedure TMSSQLCreateRole.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='CREATE ROLE '+Name;
+  if OwnerName<>'' then
+    S:=S +' AUTHORIZATION '+OwnerName;
+  AddSQLCommand(S);
 end;
 
 procedure TMSSQLCreateRole.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TMSSQLCreateRole then
+  begin
+    OwnerName:=TMSSQLCreateRole(ASource).OwnerName;
+  end;
   inherited Assign(ASource);
 end;
 

@@ -109,7 +109,7 @@
         <UnitName Value="MSSQLParserTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="6947"/>
+        <TopLine Value="8300"/>
         <CursorPos X="3" Y="6949"/>
         <UsageCount Value="56"/>
         <Loaded Value="True"/>
@@ -363,7 +363,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="5726" Column="53" TopLine="5706"/>
@@ -477,10 +477,6 @@
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="6949" Column="66" TopLine="6922"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1148" Column="15" TopLine="1264"/>
       </Position>
     </JumpHistory>
     <RunParams>
