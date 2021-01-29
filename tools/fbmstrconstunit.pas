@@ -424,6 +424,8 @@ resourcestring
   sSecurity                         = 'Security';
   sUsers                            = 'Users';
   sGroups                           = 'Groups';
+  sLogin                            = 'Login';
+  sLogins                           = 'Logins';
   sSequences                        = 'Sequences';
   sSequence                         = 'Sequence';
   sDependencies                     = 'Dependencies';

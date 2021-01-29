@@ -2969,8 +2969,16 @@ msgstr ""
 msgid "Log files"
 msgstr ""
 
+#: fbmstrconstunit.slogin
+msgid "Login"
+msgstr ""
+
 #: fbmstrconstunit.sloginform
 msgid "Login form"
+msgstr ""
+
+#: fbmstrconstunit.slogins
+msgid "Logins"
 msgstr ""
 
 #: fbmstrconstunit.slogs

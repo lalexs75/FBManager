@@ -366,6 +366,7 @@ type
     FStorepProc:TMSSQLStoredProcRoot;
     FViews:TMSSQLViewsRoot;
     FSchemasRoot:TMSSQLSSchemasRoot;
+    FSecurityRoot:TDBRootObject;
 
     procedure InternalInitMSSQLEngine;
   private
@@ -410,7 +411,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser,
+uses fbmStrConstUnit, mssql_sql_lines_unit, mssql_sql_parser, mssql_EngineSecurityUnit,
   fbmToolsUnit;
 
 function FmtObjName(const ASch:TMSSQLSSchema; const AObj:TDBObject):string;
@@ -959,6 +960,8 @@ end;
 procedure TMSSQLEngine.InitGroupsObjects;
 begin
   AddObjectsGroup(FSchemasRoot, TMSSQLSSchemasRoot, TMSSQLSSchema, sSchemes);
+  AddObjectsGroup(FSecurityRoot, TMSSQLSecurityRoot, nil, sSecurity);
+
   //AddObjectsGroup(FTablesRoot, TMSSQLTablesRoot, );
   //AddObjectsGroup(FStorepProc, TMSSQLStoredProcRoot.Create(Self);
   //AddObjectsGroup(FViews, TMSSQLViewsRoot.Create(Self);
@@ -969,6 +972,7 @@ begin
   FStorepProc:=nil;
   FViews:=nil;
   FSchemasRoot:=nil;
+  FSecurityRoot:=nil;
 end;
 
 class function TMSSQLEngine.GetEngineName: string;
@@ -1060,12 +1064,16 @@ procedure TMSSQLEngine.RefreshObjectsBeginFull;
 begin
   RefreshObjectsBegin(msSQLTexts.sSchemas['ShemasAll'], false);
   RefreshObjectsBegin(msSQLTexts.sSystemObjects['sObjListAll'], false);
+  RefreshObjectsBegin(msSQLTexts.sSystemObjects['sLogins'], false);
+  RefreshObjectsBegin(msSQLTexts.sSystemObjects['sUsers'], false);
 end;
 
 procedure TMSSQLEngine.RefreshObjectsEndFull;
 begin
   RefreshObjectsEnd(msSQLTexts.sSchemas['ShemasAll']);
   RefreshObjectsEnd(msSQLTexts.sSystemObjects['sObjListAll']);
+  RefreshObjectsEnd(msSQLTexts.sSystemObjects['sLogins']);
+  RefreshObjectsEnd(msSQLTexts.sSystemObjects['sUsers']);
 end;
 
 { TMSSQLTablesRoot }
@@ -2199,6 +2207,18 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterIndex, 'ALTER INDEX');             //ALTER INDEX — изменить определение индекса
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropIndex, 'DROP INDEX');               //DROP INDEX — удалить индекс
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateLogin, 'CREATE LOGIN');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterLogin, 'ALTER LOGIN');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropLogin, 'DROP LOGIN');
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateRole, 'CREATE ROLE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterRole, 'ALTER ROLE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropRole, 'DROP ROLE');
+
+   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateUser, 'CREATE USER');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterUser, 'ALTER USER');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropUser, 'DROP USER');
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
   RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO

@@ -1929,6 +1929,11 @@
         <Filename Value="sql_engine/mssql/mssql_sql_parser.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="sql_engine/mssql/mssql_enginesecurityunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mssql_EngineSecurityUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

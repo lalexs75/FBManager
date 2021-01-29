@@ -72,6 +72,46 @@ object mssqlSQLTexts: TmssqlSQLTexts
           'order by'
           '  indexes.name'
         )
+      end    
+      item
+        Caption = 'sLogins'
+        Lines.Strings = (
+          'select'
+          '  0,'
+          '  0,'
+          '  syslogins.name,'
+          '  (case when syslogins.isntname = 1 then ''N'' else '' '' end) +'
+          '  (case when syslogins.isntgroup = 1 then ''G'' else '' '' end) +'
+          '  (case when syslogins.isntuser = 1 then ''U'' else '' '' end),'
+          '  null as acl_list'
+          'from'
+          '  sys.syslogins'
+          'order by'
+          '  syslogins.name'
+        )
+      end    
+      item
+        Caption = 'sUsers'
+        Lines.Strings = (
+          'select'
+          '  sysusers.uid,'
+          '  sysusers.uid,'
+          '  sysusers.name,'
+          '  (case when sysusers.islogin = 1 then ''L'' else ''.'' end) +'
+          '  (case when sysusers.issqlrole = 1 then ''R'' else ''.'' end) +'
+          '  (case when sysusers.issqluser = 1 then ''U'' else ''.'' end)'
+          '/*  sysusers.isntname,'
+          '  sysusers.isntgroup,'
+          '  sysusers.issqluser,'
+          '  sysusers.isaliased */'
+          '  ,'
+          '  null as acl_list'
+          'from'
+          '  sys.sysusers'
+          'order by'
+          '  sysusers.name'
+          ''
+        )
       end>
     Left = 40
     Top = 112

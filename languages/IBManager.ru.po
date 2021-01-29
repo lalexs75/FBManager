@@ -3073,9 +3073,17 @@ msgctxt "fbmstrconstunit.slogfiles"
 msgid "Log files"
 msgstr "Файлы протокола"
 
+#: fbmstrconstunit.slogin
+msgid "Login"
+msgstr ""
+
 #: fbmstrconstunit.sloginform
 msgid "Login form"
 msgstr "Введите регистрационные данные"
+
+#: fbmstrconstunit.slogins
+msgid "Logins"
+msgstr ""
 
 #: fbmstrconstunit.slogs
 msgid "Logs"
