@@ -29,7 +29,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="13"/>
       <RevisionNr Value="3"/>
-      <BuildNr Value="5660"/>
+      <BuildNr Value="5664"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.13"/>
@@ -1933,6 +1933,14 @@
         <Filename Value="sql_engine/mssql/mssql_enginesecurityunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="mssql_EngineSecurityUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboRole/mssqlroleeditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="mssqlRoleEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="mssqlRoleEditorUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>

@@ -92,15 +92,20 @@ type
 
   TMSSQLRole = class(TDBObject)
   private
+    FOwnerName: string;
+    FRoleID: Integer;
   protected
-    function InternalGetDDLCreate: string; override;
+    procedure InternalRefreshStatistic; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
     procedure SetSqlAssistentData(const List: TStrings);override;
     function CreateSQLObject:TSQLCommandDDL; override;
+    property OwnerName:string read FOwnerName;
+    property RoleID: Integer read FRoleID;
   end;
 
   { TMSSQLUser }
@@ -139,18 +144,29 @@ uses fbmStrConstUnit, sqlObjects, mssql_sql_parser, mssql_sql_lines_unit;
 { TMSSQLRole }
 
 function TMSSQLRole.InternalGetDDLCreate: string;
+var
+  FCmd: TMSSQLCreateRole;
 begin
-  Result:=inherited InternalGetDDLCreate;
+  FCmd:=TMSSQLCreateRole.Create(nil);
+  FCmd.Name:=Caption;
+  //FCmd.OwnerName:=Caption;
+  Result:=FCmd.AsSQL;
+  FCmd.Free;
+end;
+
+procedure TMSSQLRole.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+  Statistic.AddValue(sOID, IntToStr(FRoleID));
+  Statistic.AddValue(sOwner, FOwnerName);
 end;
 
 constructor TMSSQLRole.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited Create(ADBItem, AOwnerRoot);
-//  if Assigned(ADBItem) then
-//    FUserID:=ADBItem.ObjId;
-//  FUserOptions:=[puoInheritedRight, puoNeverExpired, puoLoginEnabled];
-//  FConnectionsLimit:=-1;
+  if Assigned(ADBItem) then
+    FRoleID:=ADBItem.ObjId;
 end;
 
 destructor TMSSQLRole.Destroy;

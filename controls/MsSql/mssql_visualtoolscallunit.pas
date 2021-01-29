@@ -60,9 +60,10 @@ uses fbmStrConstUnit,
   fbmObjectEditorDescriptionUnit,
   fbmTableEditorDataUnit,
   fbmTableStatisticUnit,
-  fbmDDLPageUnit,
+  fbmDDLPageUnit, mssqlRoleEditorUnit,
   fbmViewEditorMainUnit,
-  fdbm_SchemeEditorUnit;
+  fdbm_SchemeEditorUnit,
+  mssql_EngineSecurityUnit;
 
 { TMSSQLVisualTools }
 
@@ -95,6 +96,11 @@ begin
     [TfbmViewEditorMainFrame, TfbmTableEditorFieldsFrame, TfbmTableEditorDataFrame,
      {TfbmTableEditorTriggersFrame, TDependenciesFrame, TfbmpgACLEditEditor, }TfbmObjectEditorDescriptionFrame,
      TfbmTableStatisticFrame, TfbmDDLPage]);
+
+  RegisterObjEditor(TMSSQLRole,
+    [TmssqlRoleEditorFrame, TfbmObjectEditorDescriptionFrame],
+    [TmssqlRoleEditorFrame, TfbmObjectEditorDescriptionFrame, TfbmTableStatisticFrame, TfbmDDLPage]);
+
 end;
 
 procedure TMSSQLVisualTools.InitSQLSyn(const ASynSQLSyn: TSynSQLSyn);

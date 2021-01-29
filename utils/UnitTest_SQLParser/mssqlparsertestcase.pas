@@ -6951,532 +6951,532 @@ end;
 
 procedure TMSSQLParserTest.CreateCredential1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential1']);
 end;
 
 procedure TMSSQLParserTest.CreateCredential2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential2']);
 end;
 
 procedure TMSSQLParserTest.CreateCredential3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential3']);
 end;
 
 procedure TMSSQLParserTest.CreateCredential4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential4']);
 end;
 
 procedure TMSSQLParserTest.CreateCredential5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential5']);
 end;
 
 procedure TMSSQLParserTest.CreateCredential6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCredential6']);
 end;
 
 procedure TMSSQLParserTest.AlterCredential1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterCredential1']);
 end;
 
 procedure TMSSQLParserTest.DropCredential1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropCredential1']);
 end;
 
 procedure TMSSQLParserTest.CreateCryptographicProvider1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateCryptographicProvider1']);
 end;
 
 procedure TMSSQLParserTest.AlterCryptographicProvider1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterCryptographicProvider1']);
 end;
 
 procedure TMSSQLParserTest.AlterCryptographicProvider2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterCryptographicProvider2']);
 end;
 
 procedure TMSSQLParserTest.AlterCryptographicProvider3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterCryptographicProvider3']);
 end;
 
 procedure TMSSQLParserTest.AlterCryptographicProvider4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterCryptographicProvider4']);
 end;
 
 procedure TMSSQLParserTest.DropCryptographicProvider1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropCryptographicProvider1']);
 end;
 
 procedure TMSSQLParserTest.AlterEventSession1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterEventSession1']);
 end;
 
 procedure TMSSQLParserTest.AlterEventSession2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterEventSession2']);
 end;
 
 procedure TMSSQLParserTest.DropEventSession1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropEventSession1']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLanguage1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLanguage1']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLanguage2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLanguage2']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLanguage3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLanguage3']);
 end;
 
 procedure TMSSQLParserTest.AlterExternalLanguage1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterExternalLanguage1']);
 end;
 
 procedure TMSSQLParserTest.DropExternalLanguage1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropExternalLanguage1']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary1']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary2']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary3']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary4']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary5']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary6']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary7;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary7']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalLibrary8;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalLibrary8']);
 end;
 
 procedure TMSSQLParserTest.AlterExternalLibrary1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterExternalLibrary1']);
 end;
 
 procedure TMSSQLParserTest.AlterExternalLibrary2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterExternalLibrary2']);
 end;
 
 procedure TMSSQLParserTest.DropExternalLibrary1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropExternalLibrary1']);
 end;
 
 procedure TMSSQLParserTest.CreateExternalResource1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateExternalResource1']);
 end;
 
 procedure TMSSQLParserTest.AlterExternalResource1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterExternalResource1']);
 end;
 
 procedure TMSSQLParserTest.DropExternalResource1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropExternalResource1']);
 end;
 
 procedure TMSSQLParserTest.CreateFulltextCatalog1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateFulltextCatalog1']);
 end;
 
 procedure TMSSQLParserTest.CreateFulltextCatalog2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateFulltextCatalog2']);
 end;
 
 procedure TMSSQLParserTest.CreateFulltextCatalog3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['CreateFulltextCatalog3']);
 end;
 
 procedure TMSSQLParserTest.AlterFulltextCatalog1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['AlterFulltextCatalog1']);
 end;
 
 procedure TMSSQLParserTest.DropFulltextCatalog1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['DropFulltextCatalog1']);
 end;
 
 procedure TMSSQLParserTest.MasterKey1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey1']);
 end;
 
 procedure TMSSQLParserTest.MasterKey2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey2']);
 end;
 
 procedure TMSSQLParserTest.MasterKey3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey3']);
 end;
 
 procedure TMSSQLParserTest.MasterKey4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey4']);
 end;
 
 procedure TMSSQLParserTest.MasterKey5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey5']);
 end;
 
 procedure TMSSQLParserTest.MasterKey6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey6']);
 end;
 
 procedure TMSSQLParserTest.MasterKey7;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey7']);
 end;
 
 procedure TMSSQLParserTest.MasterKey8;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey8']);
 end;
 
 procedure TMSSQLParserTest.MasterKey9;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey9']);
 end;
 
 procedure TMSSQLParserTest.MasterKey10;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey10']);
 end;
 
 procedure TMSSQLParserTest.MasterKey11;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey11']);
 end;
 
 procedure TMSSQLParserTest.MasterKey12;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey12']);
 end;
 
 procedure TMSSQLParserTest.MasterKey13;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey13']);
 end;
 
 procedure TMSSQLParserTest.MasterKey14;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey14']);
 end;
 
 procedure TMSSQLParserTest.MasterKey15;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey15']);
 end;
 
 procedure TMSSQLParserTest.MasterKey16;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey16']);
 end;
 
 procedure TMSSQLParserTest.MasterKey17;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey17']);
 end;
 
 procedure TMSSQLParserTest.MasterKey18;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey18']);
 end;
 
 procedure TMSSQLParserTest.MasterKey19;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey19']);
 end;
 
 procedure TMSSQLParserTest.MasterKey20;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey20']);
 end;
 
 procedure TMSSQLParserTest.MasterKey21;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey21']);
 end;
 
 procedure TMSSQLParserTest.MasterKey22;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey22']);
 end;
 
 procedure TMSSQLParserTest.MasterKey23;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey23']);
 end;
 
 procedure TMSSQLParserTest.MasterKey24;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey24']);
 end;
 
 procedure TMSSQLParserTest.MasterKey25;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey25']);
 end;
 
 procedure TMSSQLParserTest.MasterKey26;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey26']);
 end;
 
 procedure TMSSQLParserTest.MasterKey27;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey27']);
 end;
 
 procedure TMSSQLParserTest.MasterKey28;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey28']);
 end;
 
 procedure TMSSQLParserTest.MasterKey29;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['MasterKey29']);
 end;
 
 procedure TMSSQLParserTest.Route1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route1']);
 end;
 
 procedure TMSSQLParserTest.Route2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route2']);
 end;
 
 procedure TMSSQLParserTest.Route3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route3']);
 end;
 
 procedure TMSSQLParserTest.Route4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route4']);
 end;
 
 procedure TMSSQLParserTest.Route5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route5']);
 end;
 
 procedure TMSSQLParserTest.Route6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route6']);
 end;
 
 procedure TMSSQLParserTest.Route7;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route7']);
 end;
 
 procedure TMSSQLParserTest.Route8;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route8']);
 end;
 
 procedure TMSSQLParserTest.Route9;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route9']);
 end;
 
 procedure TMSSQLParserTest.Route10;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route10']);
 end;
 
 procedure TMSSQLParserTest.Route11;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route11']);
 end;
 
 procedure TMSSQLParserTest.Route12;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route12']);
 end;
 
 procedure TMSSQLParserTest.Route13;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route13']);
 end;
 
 procedure TMSSQLParserTest.Route14;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Route14']);
 end;
 
 procedure TMSSQLParserTest.StopList1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList1']);
 end;
 
 procedure TMSSQLParserTest.StopList2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList2']);
 end;
 
 procedure TMSSQLParserTest.StopList3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList3']);
 end;
 
 procedure TMSSQLParserTest.StopList4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList4']);
 end;
 
 procedure TMSSQLParserTest.StopList5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList5']);
 end;
 
 procedure TMSSQLParserTest.StopList6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['StopList6']);
 end;
 
 procedure TMSSQLParserTest.Queue1;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue1']);
 end;
 
 procedure TMSSQLParserTest.Queue2;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue2']);
 end;
 
 procedure TMSSQLParserTest.Queue3;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue3']);
 end;
 
 procedure TMSSQLParserTest.Queue4;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue4']);
 end;
 
 procedure TMSSQLParserTest.Queue5;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue5']);
 end;
 
 procedure TMSSQLParserTest.Queue6;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue6']);
 end;
 
 procedure TMSSQLParserTest.Queue7;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue7']);
 end;
 
 procedure TMSSQLParserTest.Queue8;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue8']);
 end;
 
 procedure TMSSQLParserTest.Queue9;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue9']);
 end;
 
 procedure TMSSQLParserTest.Queue10;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue10']);
 end;
 
 procedure TMSSQLParserTest.Queue11;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue11']);
 end;
 
 procedure TMSSQLParserTest.Queue12;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue12']);
 end;
 
 procedure TMSSQLParserTest.Queue13;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue13']);
 end;
 
 procedure TMSSQLParserTest.Queue14;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue14']);
 end;
 
 procedure TMSSQLParserTest.Queue15;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue15']);
 end;
 
 procedure TMSSQLParserTest.Queue16;
 begin
-
+  DoTestSQL(MSSQLParserTestData.sSystem['Queue16']);
 end;
 
 procedure TMSSQLParserTest.Resource1;

@@ -77,9 +77,10 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="229"/>
-        <CursorPos X="15" Y="245"/>
+        <TopLine Value="4283"/>
+        <CursorPos Y="4300"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -242,7 +243,6 @@
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="1093"/>
         <CursorPos X="3" Y="1111"/>
@@ -557,10 +557,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="86" Column="11" TopLine="59"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <Caret Line="101" Column="28" TopLine="74"/>
       </Position>
       <Position>
@@ -674,6 +670,10 @@
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <Caret Line="1112" Column="18" TopLine="1107"/>
       </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="1111" Column="3" TopLine="1093"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -682,13 +682,6 @@
   </ProjectSession>
   <Debugging>
     <BreakPoints>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Line Value="4300"/>
-      </Item>
       <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
