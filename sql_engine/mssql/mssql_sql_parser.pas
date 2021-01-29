@@ -828,9 +828,282 @@ type
   public
   end;
 
+  { TMSSQLCreateRole }
+
+  TMSSQLCreateRole = class(TSQLCreateLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLAlterRole }
+
+  TMSSQLAlterRole = class(TSQLAlterLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLDropRole }
+
+  TMSSQLDropRole = class(TSQLDropLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TMSSQLCreateUser }
+
+  TMSSQLCreateUser = class(TSQLCreateLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLAlterUser }
+
+  TMSSQLAlterUser = class(TSQLAlterLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
+  { TMSSQLDropUser }
+
+  TMSSQLDropUser = class(TSQLDropLogin)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropUser }
+
+procedure TMSSQLDropUser.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLDropUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropUser.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterUser }
+
+procedure TMSSQLAlterUser.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLAlterUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterUser.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLAlterUser.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateUser }
+
+procedure TMSSQLCreateUser.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+
+  -- Syntax for SQL Server, Azure SQL Database, and Azure SQL Managed Instance
+
+  -- Syntax Users based on logins in master
+  CREATE USER user_name
+      [
+          { FOR | FROM } LOGIN login_name
+      ]
+      [ WITH <limited_options_list> [ ,... ] ]
+  [ ; ]
+
+  -- Users that authenticate at the database
+  CREATE USER
+      {
+        windows_principal [ WITH <options_list> [ ,... ] ]
+
+      | user_name WITH PASSWORD = 'password' [ , <options_list> [ ,... ]
+      | Azure_Active_Directory_principal FROM EXTERNAL PROVIDER
+      }
+
+   [ ; ]
+
+  -- Users based on Windows principals that connect through Windows group logins
+  CREATE USER
+      {
+            windows_principal [ { FOR | FROM } LOGIN windows_principal ]
+          | user_name { FOR | FROM } LOGIN windows_principal
+  }
+      [ WITH <limited_options_list> [ ,... ] ]
+  [ ; ]
+
+  -- Users that cannot authenticate
+  CREATE USER user_name
+      {
+           WITHOUT LOGIN [ WITH <limited_options_list> [ ,... ] ]
+         | { FOR | FROM } CERTIFICATE cert_name
+         | { FOR | FROM } ASYMMETRIC KEY asym_key_name
+      }
+   [ ; ]
+
+  <options_list> ::=
+        DEFAULT_SCHEMA = schema_name
+      | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }
+      | SID = sid
+      | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
+
+  <limited_options_list> ::=
+        DEFAULT_SCHEMA = schema_name ]
+      | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
+
+  -- SQL Database syntax when connected to a federation member
+  CREATE USER user_name
+  [;]
+
+  -- Syntax for users based on Azure AD logins for Azure SQL Managed Instance
+  CREATE USER user_name
+      [   { FOR | FROM } LOGIN login_name  ]
+      | FROM EXTERNAL PROVIDER
+      [ WITH <limited_options_list> [ ,... ] ]
+  [ ; ]
+
+  <limited_options_list> ::=
+        DEFAULT_SCHEMA = schema_name
+      | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }
+      | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
+end;
+
+procedure TMSSQLCreateUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateUser.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLCreateUser.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLDropRole }
+
+procedure TMSSQLDropRole.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLDropRole.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropRole.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterRole }
+
+procedure TMSSQLAlterRole.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TMSSQLAlterRole.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterRole.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLAlterRole.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateRole }
+
+procedure TMSSQLCreateRole.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+  CREATE ROLE role_name [ AUTHORIZATION owner_name ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
+end;
+
+procedure TMSSQLCreateRole.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateRole.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TMSSQLCreateRole.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropLogin }
 
@@ -876,8 +1149,36 @@ end;
 { TMSSQLCreateLogin }
 
 procedure TMSSQLCreateLogin.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
+  (*
+  -- Syntax for SQL Server
+  CREATE LOGIN login_name { WITH <option_list1> | FROM <sources> }
+
+  <option_list1> ::=
+      PASSWORD = { 'password' | hashed_password HASHED } [ MUST_CHANGE ]
+      [ , <option_list2> [ ,... ] ]
+
+  <option_list2> ::=
+      SID = sid
+      | DEFAULT_DATABASE = database
+      | DEFAULT_LANGUAGE = language
+      | CHECK_EXPIRATION = { ON | OFF}
+      | CHECK_POLICY = { ON | OFF}
+      | CREDENTIAL = credential_name
+
+  <sources> ::=
+      WINDOWS [ WITH <windows_options>[ ,... ] ]
+      | CERTIFICATE certname
+      | ASYMMETRIC KEY asym_key_name
+
+  <windows_options> ::=
+      DEFAULT_DATABASE = database
+      | DEFAULT_LANGUAGE = language
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'LOGIN', [toFindWordLast]);
 end;
 
 procedure TMSSQLCreateLogin.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -6062,29 +6363,6 @@ RETURNS @return_variable TABLE <table_type_definition>
 [ ; ]
 ----------------------------------------
 ----------------------------------------
--- Syntax for SQL Server
-CREATE LOGIN login_name { WITH <option_list1> | FROM <sources> }
-
-<option_list1> ::=
-    PASSWORD = { 'password' | hashed_password HASHED } [ MUST_CHANGE ]
-    [ , <option_list2> [ ,... ] ]
-
-<option_list2> ::=
-    SID = sid
-    | DEFAULT_DATABASE = database
-    | DEFAULT_LANGUAGE = language
-    | CHECK_EXPIRATION = { ON | OFF}
-    | CHECK_POLICY = { ON | OFF}
-    | CREDENTIAL = credential_name
-
-<sources> ::=
-    WINDOWS [ WITH <windows_options>[ ,... ] ]
-    | CERTIFICATE certname
-    | ASYMMETRIC KEY asym_key_name
-
-<windows_options> ::=
-    DEFAULT_DATABASE = database
-    | DEFAULT_LANGUAGE = language
 ----------------------------------------
 CREATE MASTER KEY [ ENCRYPTION BY PASSWORD ='password' ]
 [ ; ]
@@ -6180,7 +6458,6 @@ CREATE RESOURCE POOL pool_name
 <NUMA_node_range_spec> ::=
 { NUMA_node_ID | NUMA_node_ID TO NUMA_node_ID }[,...n]
 ----------------------------------------
-CREATE ROLE role_name [ AUTHORIZATION owner_name ]
 ----------------------------------------
 CREATE ROUTE route_name
 [ AUTHORIZATION owner_name ]
@@ -6589,72 +6866,6 @@ column_name AS computed_column_expression
 < table_index > ::=
   INDEX constraint_name
      [ CLUSTERED | NONCLUSTERED ]   (column [ ASC | DESC ] [ ,... n ] )} }
-----------------------------------------
-
--- Syntax for SQL Server, Azure SQL Database, and Azure SQL Managed Instance
-
--- Syntax Users based on logins in master
-CREATE USER user_name
-    [
-        { FOR | FROM } LOGIN login_name
-    ]
-    [ WITH <limited_options_list> [ ,... ] ]
-[ ; ]
-
--- Users that authenticate at the database
-CREATE USER
-    {
-      windows_principal [ WITH <options_list> [ ,... ] ]
-
-    | user_name WITH PASSWORD = 'password' [ , <options_list> [ ,... ]
-    | Azure_Active_Directory_principal FROM EXTERNAL PROVIDER
-    }
-
- [ ; ]
-
--- Users based on Windows principals that connect through Windows group logins
-CREATE USER
-    {
-          windows_principal [ { FOR | FROM } LOGIN windows_principal ]
-        | user_name { FOR | FROM } LOGIN windows_principal
-}
-    [ WITH <limited_options_list> [ ,... ] ]
-[ ; ]
-
--- Users that cannot authenticate
-CREATE USER user_name
-    {
-         WITHOUT LOGIN [ WITH <limited_options_list> [ ,... ] ]
-       | { FOR | FROM } CERTIFICATE cert_name
-       | { FOR | FROM } ASYMMETRIC KEY asym_key_name
-    }
- [ ; ]
-
-<options_list> ::=
-      DEFAULT_SCHEMA = schema_name
-    | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }
-    | SID = sid
-    | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
-
-<limited_options_list> ::=
-      DEFAULT_SCHEMA = schema_name ]
-    | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
-
--- SQL Database syntax when connected to a federation member
-CREATE USER user_name
-[;]
-
--- Syntax for users based on Azure AD logins for Azure SQL Managed Instance
-CREATE USER user_name
-    [   { FOR | FROM } LOGIN login_name  ]
-    | FROM EXTERNAL PROVIDER
-    [ WITH <limited_options_list> [ ,... ] ]
-[ ; ]
-
-<limited_options_list> ::=
-      DEFAULT_SCHEMA = schema_name
-    | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }
-    | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
 ----------------------------------------
 
 CREATE WORKLOAD GROUP group_name

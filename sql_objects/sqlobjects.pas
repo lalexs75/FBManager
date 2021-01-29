@@ -33,7 +33,7 @@ type
   TDBObjectKind = (okNone,
                    okDomain, okTable, okView, okTrigger, okStoredProc,
                    okSequence, okException, okUDF, okRole,
-                   okUser, okScheme,
+                   okUser, okLogin, okScheme,
                    okGroup, okIndex, okTableSpace, okLanguage, okCheckConstraint,
                    okForeignKey, okPrimaryKey, okUniqueConstraint, okField,
                    okRule, okOther, okTasks,

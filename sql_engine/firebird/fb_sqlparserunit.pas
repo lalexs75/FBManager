@@ -43,6 +43,7 @@ const
      'UDF',         //okUDF
      'ROLE',        //okRole
      'USER',        //okUser
+     '',            //okLogin
      '',            //okScheme,
      '',            //okGroup
      'INDEX',       //okIndex,

@@ -128,6 +128,7 @@ const
       sUDF,                   //okUDF
       sRole,                  //okRole
       sUser,                  //okUser
+      sLogin,                 //okLogin
       sScheme,                //okScheme
       sGroup,                 //okGroup
       sIndex,                 //okIndex
@@ -192,6 +193,7 @@ const
        9, //okUDF
        49, //okRole
        48, //okUser
+       48, //okLogin
        12, //okScheme
        13, //okGroup
        14, //okIndex
@@ -256,6 +258,7 @@ const
        9, //okUDF,
        49, //okRole,
        50, ///okUser,
+       50, //okLogin
        21, //okScheme,
        49, //okGroup,
        14, //okIndex,

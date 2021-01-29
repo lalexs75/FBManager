@@ -41,6 +41,7 @@ const
      'UDF',                          //okUDF,
      'ROLE',                         //okRole,
      'USER',                         //okUser,
+     '',                             //okLogin
      'SCHEMA',                       //okScheme,
      'GROUP',                        //okGroup,
      'INDEX',                        //okIndex,
