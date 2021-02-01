@@ -177,11 +177,13 @@ end;
 procedure TMSSQLRole.RefreshObject;
 begin
   inherited RefreshObject;
+  if State <> sdboEdit then exit;
+
 end;
 
 class function TMSSQLRole.DBClassTitle: string;
 begin
-  Result:=inherited DBClassTitle;
+  Result:='Role';
 end;
 
 procedure TMSSQLRole.SetSqlAssistentData(const List: TStrings);
@@ -191,7 +193,13 @@ end;
 
 function TMSSQLRole.CreateSQLObject: TSQLCommandDDL;
 begin
-  Result:=inherited CreateSQLObject;
+  if State = sdboCreate then
+    Result:=TMSSQLCreateRole.Create(nil)
+  else
+  begin
+    Result:=TMSSQLAlterRole.Create(nil);
+    Result.Name:=Caption;
+  end;
 end;
 
 { TMSSQLUser }

@@ -1040,26 +1040,55 @@ end;
 { TMSSQLDropRole }
 
 procedure TMSSQLDropRole.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
 begin
-  inherited InitParserTree;
+  (*
+  DROP ROLE [ IF EXISTS ] role_name
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
+  T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
+  T:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
 end;
 
 procedure TMSSQLDropRole.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
 end;
 
 procedure TMSSQLDropRole.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='DROP ROLE ';
+  if ooIfExists in Options then
+    S:=S +'IF EXISTS ';
+  S:=S + Name;
+  AddSQLCommand(S);
 end;
 
 { TMSSQLAlterRole }
 
 procedure TMSSQLAlterRole.InitParserTree;
 begin
-  inherited InitParserTree;
+  (*
+  -- Syntax for SQL Server (starting with 2012) and Azure SQL Database
+
+  ALTER ROLE  role_name
+  {
+         ADD MEMBER database_principal
+      |  DROP MEMBER database_principal
+      |  WITH NAME = new_name
+  }
+  [;]
+
+  *)
 end;
 
 procedure TMSSQLAlterRole.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -4775,18 +4804,6 @@ ALTER RESOURCE POOL { pool_name | "default" }
 
 
 ----------------------------------------
-
--- Syntax for SQL Server (starting with 2012) and Azure SQL Database
-
-ALTER ROLE  role_name
-{
-       ADD MEMBER database_principal
-    |  DROP MEMBER database_principal
-    |  WITH NAME = new_name
-}
-[;]
-
-
 ----------------------------------------
 ALTER ROUTE route_name
 WITH
@@ -7096,9 +7113,6 @@ DROP REMOTE SERVICE BINDING binding_name
 DROP RESOURCE POOL pool_name
 [ ; ]
 ----------------------------------------
--- Syntax for SQL Server
-
-DROP ROLE [ IF EXISTS ] role_name
 ----------------------------------------
 DROP ROUTE route_name
 [ ; ]
