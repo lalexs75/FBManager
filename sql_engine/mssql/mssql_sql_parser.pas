@@ -899,9 +899,208 @@ type
     procedure MakeSQL;override;
   public
   end;
+
+  { TMSSQLSetUser }
+
+  TMSSQLSetUser = class(TSQLCreateCommandAbstract)
+  private
+    FWithNoreset: boolean;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property WithNoreset:boolean read FWithNoreset write FWithNoreset;
+  end;
+
+  { TMSSQLCreateSecurityPolicy }
+
+  TMSSQLCreateSecurityPolicy = class(TSQLCreateCommandAbstract)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TMSSQLAlterSecurityPolicy }
+
+  TMSSQLAlterSecurityPolicy = class(TSQLCreateCommandAbstract)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TMSSQLDropSecurityPolicy }
+
+  TMSSQLDropSecurityPolicy = class(TSQLDropCommandAbstract)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropSecurityPolicy }
+
+procedure TMSSQLDropSecurityPolicy.InitParserTree;
+var
+  FSQLTokens, T1, T: TSQLTokenRecord;
+begin
+  (*
+  DROP SECURITY POLICY [ IF EXISTS ] [schema_name. ] security_policy_name
+  [;]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'SECURITY', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'POLICY', [toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [], -1);
+  T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
+  T:=AddSQLTokens(stIdentificator, [T1, FSQLTokens], '', [], 1);
+  T:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
+  T:=AddSQLTokens(stIdentificator, T, '.', [], 2);
+end;
+
+procedure TMSSQLDropSecurityPolicy.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+  end;
+end;
+
+procedure TMSSQLDropSecurityPolicy.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP SECURITY POLICY ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+  if SchemaName<>'' then
+    S:=S + SchemaName+'.';
+  S:=S + Name;
+  AddSQLCommand(S);
+end;
+
+{ TMSSQLCreateSecurityPolicy }
+
+procedure TMSSQLCreateSecurityPolicy.InitParserTree;
+begin
+  (*
+  CREATE SECURITY POLICY [schema_name. ] security_policy_name
+      { ADD [ FILTER | BLOCK ] } PREDICATE tvf_schema_name.security_predicate_function_name
+        ( { column_name | expression } [ , ...n] ) ON table_schema_name. table_name
+        [ <block_dml_operation> ] , [ , ...n]
+      [ WITH ( STATE = { ON | OFF }  [,] [ SCHEMABINDING = { ON | OFF } ] ) ]
+      [ NOT FOR REPLICATION ]
+  [;]
+
+  <block_dml_operation>
+      [ { AFTER { INSERT | UPDATE } }
+      | { BEFORE { UPDATE | DELETE } } ]
+  *)
+end;
+
+procedure TMSSQLCreateSecurityPolicy.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateSecurityPolicy.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLAlterSecurityPolicy }
+
+procedure TMSSQLAlterSecurityPolicy.InitParserTree;
+begin
+  (*
+  ALTER SECURITY POLICY schema_name.security_policy_name
+      (
+          { ADD { FILTER | BLOCK } PREDICATE tvf_schema_name.security_predicate_function_name
+             ( { column_name | arguments } [ , ...n ] ) ON table_schema_name.table_name
+             [ <block_dml_operation> ]  }
+          | { ALTER { FILTER | BLOCK } PREDICATE tvf_schema_name.new_security_predicate_function_name
+               ( { column_name | arguments } [ , ...n ] ) ON table_schema_name.table_name
+             [ <block_dml_operation> ] }
+          | { DROP { FILTER | BLOCK } PREDICATE ON table_schema_name.table_name }
+          | [ <additional_add_alter_drop_predicate_statements> [ , ...n ] ]
+      )    [ WITH ( STATE = { ON | OFF } ) ]
+      [ NOT FOR REPLICATION ]
+  [;]
+
+  <block_dml_operation>
+      [ { AFTER { INSERT | UPDATE } }
+      | { BEFORE { UPDATE | DELETE } } ]
+  *)
+end;
+
+procedure TMSSQLAlterSecurityPolicy.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLAlterSecurityPolicy.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLSetUser }
+
+procedure TMSSQLSetUser.InitParserTree;
+var
+  FSQLTokens, T1, T2, T: TSQLTokenRecord;
+begin
+  //SETUSER [ 'username' [ WITH NORESET ] ]
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SETUSER', [toFirstToken, toFindWordLast]);
+  T1:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T2:=AddSQLTokens(stString, FSQLTokens, '', [], 1);
+  T:=AddSQLTokens(stKeyword, [T1, T2], 'WITH', [toOptional], 2);
+  T:=AddSQLTokens(stKeyword, T, 'NORESET', [toOptional]);
+end;
+
+procedure TMSSQLSetUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+procedure TMSSQLSetUser.MakeSQL;
+var
+  S: String;
+begin
+  S:='SETUSER';
+  if Name <> '' then
+    S:=S + ' ' + Name;
+  if WithNoreset then
+    S:=S + ' WITH NORESET';
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLSetUser.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMSSQLSetUser then
+    WithNoreset:=TMSSQLSetUser(ASource).WithNoreset;
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropUser }
 
@@ -4827,23 +5026,6 @@ ALTER SEARCH PROPERTY LIST list_name
 }
 ;
 ----------------------------------------
-ALTER SECURITY POLICY schema_name.security_policy_name
-    (
-        { ADD { FILTER | BLOCK } PREDICATE tvf_schema_name.security_predicate_function_name
-           ( { column_name | arguments } [ , ...n ] ) ON table_schema_name.table_name
-           [ <block_dml_operation> ]  }
-        | { ALTER { FILTER | BLOCK } PREDICATE tvf_schema_name.new_security_predicate_function_name
-             ( { column_name | arguments } [ , ...n ] ) ON table_schema_name.table_name
-           [ <block_dml_operation> ] }
-        | { DROP { FILTER | BLOCK } PREDICATE ON table_schema_name.table_name }
-        | [ <additional_add_alter_drop_predicate_statements> [ , ...n ] ]
-    )    [ WITH ( STATE = { ON | OFF } ) ]
-    [ NOT FOR REPLICATION ]
-[;]
-
-<block_dml_operation>
-    [ { AFTER { INSERT | UPDATE } }
-    | { BEFORE { UPDATE | DELETE } } ]
 ----------------------------------------
 ----------------------------------------
 ALTER SERVER AUDIT audit_name
@@ -6514,17 +6696,6 @@ CREATE SEARCH PROPERTY LIST new_list_name
 ;
 ----------------------------------------
 
-CREATE SECURITY POLICY [schema_name. ] security_policy_name
-    { ADD [ FILTER | BLOCK ] } PREDICATE tvf_schema_name.security_predicate_function_name
-      ( { column_name | expression } [ , ...n] ) ON table_schema_name. table_name
-      [ <block_dml_operation> ] , [ , ...n]
-    [ WITH ( STATE = { ON | OFF }  [,] [ SCHEMABINDING = { ON | OFF } ] ) ]
-    [ NOT FOR REPLICATION ]
-[;]
-
-<block_dml_operation>
-    [ { AFTER { INSERT | UPDATE } }
-    | { BEFORE { UPDATE | DELETE } } ]
 ----------------------------------------
 CREATE SELECTIVE XML INDEX index_name
     ON <table_object> (xml_column_name)
@@ -7122,8 +7293,6 @@ DROP RULE [ IF EXISTS ] { [ schema_name . ] rule_name } [ ,...n ] [ ; ]
 DROP SEARCH PROPERTY LIST property_list_name
 ;
 ----------------------------------------
-DROP SECURITY POLICY [ IF EXISTS ] [schema_name. ] security_policy_name
-[;]
 ----------------------------------------
 DROP SENSITIVITY CLASSIFICATION FROM
     <object_name> [, ...n ]
@@ -7932,8 +8101,6 @@ REVOKE [ GRANT OPTION FOR ] permission [ ,...n ] ON
     | Database_user_mapped_to_certificate
     | Database_user_mapped_to_asymmetric_key
     | Database_user_with_no_login
-----------------------------------------
-SETUSER [ 'username' [ WITH NORESET ] ]
 ----------------------------------------
 SET
 ----------------------------------------

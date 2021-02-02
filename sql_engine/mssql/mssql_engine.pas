@@ -2222,5 +2222,9 @@ initialization
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLExec, 'EXEC'); //EXEC
   RegisterSQLStatment(TMSSQLEngine, TMSSQLGO, 'GO'); //GO
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLSetUser, 'SETUSER');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateSecurityPolicy, 'CREATE SECURITY POLICY');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSecurityPolicy, 'ALTER SECURITY POLICY');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSecurityPolicy, 'DROP SECURITY POLICY');
 end.
 
