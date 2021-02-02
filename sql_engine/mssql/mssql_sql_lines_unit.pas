@@ -51,6 +51,7 @@ type
   { TmssqlSQLTexts }
 
   TmssqlSQLTexts = class(TDataModule)
+    sTypes: TRxTextHolder;
     sTables: TRxTextHolder;
     sSystemObjects: TRxTextHolder;
     sSchemas: TRxTextHolder;

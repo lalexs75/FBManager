@@ -391,6 +391,7 @@ resourcestring
 
   //for object grops
   sDomains                          = 'Domains';
+  sTypes                            = 'Types';
   sTables                           = 'Tables';
   sViews                            = 'Views';
   sIndexs                           = 'Indexs';

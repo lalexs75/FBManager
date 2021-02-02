@@ -944,9 +944,154 @@ type
   public
   end;
 
+  { TMSSQLCreateType }
+
+  TMSSQLCreateType = class(TSQLCreateDomain)
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+(*
+  TMSSQLAlterType = class(TSQLAlterDomain)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;        *)
+
+  { TMSSQLDropType }
+
+  TMSSQLDropType = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDropType }
+
+procedure TMSSQLDropType.InitParserTree;
+begin
+  (*
+  DROP TYPE [ IF EXISTS ] [ schema_name. ] type_name [ ; ]
+  *)
+end;
+
+procedure TMSSQLDropType.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDropType.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLCreateType }
+
+procedure TMSSQLCreateType.InitParserTree;
+var
+  FSQLTokens: TSQLTokenRecord;
+begin
+  (*
+
+  -- User-defined Data Type Syntax
+  CREATE TYPE [ schema_name. ] type_name
+  {
+      [
+        FROM base_type
+        [ ( precision [ , scale ] ) ]
+        [ NULL | NOT NULL ]
+      ]
+      | EXTERNAL NAME assembly_name [ .class_name ]
+      | AS TABLE ( { <column_definition> | <computed_column_definition> [ ,... n ] }
+        [ <table_constraint> ] [ ,... n ]
+        [ <table_index> ] [ ,... n ] } )
+
+  } [ ; ]
+
+  <column_definition> ::=
+  column_name <data_type>
+      [ COLLATE collation_name ]
+      [ NULL | NOT NULL ]
+      [
+          DEFAULT constant_expression ]
+        | [ IDENTITY [ ( seed ,increment ) ]
+      ]
+      [ ROWGUIDCOL ] [ <column_constraint> [ ...n ] ]
+
+  <data type> ::=
+  [ type_schema_name . ] type_name
+      [ ( precision [ , scale ] | max |
+                  [ { CONTENT | DOCUMENT } ] xml_schema_collection ) ]
+
+  <column_constraint> ::=
+  {     { PRIMARY KEY | UNIQUE }
+          [ CLUSTERED | NONCLUSTERED ]
+          [
+              WITH ( <index_option> [ ,...n ] )
+          ]
+    | CHECK ( logical_expression )
+  }
+
+  <computed_column_definition> ::=
+
+  column_name AS computed_column_expression
+  [ PERSISTED [ NOT NULL ] ]
+  [
+      { PRIMARY KEY | UNIQUE }
+          [ CLUSTERED | NONCLUSTERED ]
+          [
+              WITH ( <index_option> [ ,...n ] )
+          ]
+      | CHECK ( logical_expression )
+  ]
+
+  <table_constraint> ::=
+  {
+      { PRIMARY KEY | UNIQUE }
+          [ CLUSTERED | NONCLUSTERED ]
+      ( column [ ASC | DESC ] [ ,...n ] )
+          [
+      WITH ( <index_option> [ ,...n ] )
+          ]
+      | CHECK ( logical_expression )
+  }
+
+  <index_option> ::=
+  {
+      IGNORE_DUP_KEY = { ON | OFF }
+  }
+
+  < table_index > ::=
+    INDEX constraint_name
+       [ CLUSTERED | NONCLUSTERED ]   (column [ ASC | DESC ] [ ,... n ] )} }
+  *)
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+end;
+
+procedure TMSSQLCreateType.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLCreateType.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
 
 { TMSSQLDropSecurityPolicy }
 
@@ -7000,78 +7145,6 @@ CREATE SYNONYM [ schema_name_1. ] synonym_name FOR <object>
 }
 ----------------------------------------
 ----------------------------------------
-
--- User-defined Data Type Syntax
-CREATE TYPE [ schema_name. ] type_name
-{
-    [
-      FROM base_type
-      [ ( precision [ , scale ] ) ]
-      [ NULL | NOT NULL ]
-    ]
-    | EXTERNAL NAME assembly_name [ .class_name ]
-    | AS TABLE ( { <column_definition> | <computed_column_definition> [ ,... n ] }
-      [ <table_constraint> ] [ ,... n ]
-      [ <table_index> ] [ ,... n ] } )
-
-} [ ; ]
-
-<column_definition> ::=
-column_name <data_type>
-    [ COLLATE collation_name ]
-    [ NULL | NOT NULL ]
-    [
-        DEFAULT constant_expression ]
-      | [ IDENTITY [ ( seed ,increment ) ]
-    ]
-    [ ROWGUIDCOL ] [ <column_constraint> [ ...n ] ]
-
-<data type> ::=
-[ type_schema_name . ] type_name
-    [ ( precision [ , scale ] | max |
-                [ { CONTENT | DOCUMENT } ] xml_schema_collection ) ]
-
-<column_constraint> ::=
-{     { PRIMARY KEY | UNIQUE }
-        [ CLUSTERED | NONCLUSTERED ]
-        [
-            WITH ( <index_option> [ ,...n ] )
-        ]
-  | CHECK ( logical_expression )
-}
-
-<computed_column_definition> ::=
-
-column_name AS computed_column_expression
-[ PERSISTED [ NOT NULL ] ]
-[
-    { PRIMARY KEY | UNIQUE }
-        [ CLUSTERED | NONCLUSTERED ]
-        [
-            WITH ( <index_option> [ ,...n ] )
-        ]
-    | CHECK ( logical_expression )
-]
-
-<table_constraint> ::=
-{
-    { PRIMARY KEY | UNIQUE }
-        [ CLUSTERED | NONCLUSTERED ]
-    ( column [ ASC | DESC ] [ ,...n ] )
-        [
-    WITH ( <index_option> [ ,...n ] )
-        ]
-    | CHECK ( logical_expression )
-}
-
-<index_option> ::=
-{
-    IGNORE_DUP_KEY = { ON | OFF }
-}
-
-< table_index > ::=
-  INDEX constraint_name
-     [ CLUSTERED | NONCLUSTERED ]   (column [ ASC | DESC ] [ ,... n ] )} }
 ----------------------------------------
 
 CREATE WORKLOAD GROUP group_name
@@ -7335,7 +7408,6 @@ DROP TABLE [ IF EXISTS ] { database_name.schema_name.table_name | schema_name.ta
 [ ; ]
 ----------------------------------------
 ----------------------------------------
-DROP TYPE [ IF EXISTS ] [ schema_name. ] type_name [ ; ]
 ----------------------------------------
 -- Syntax for SQL Server and Azure SQL Database
 

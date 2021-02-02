@@ -56,6 +56,18 @@ type
     property SchemaId:integer read GetSchemaId;
   end;
 
+  { TMSSQLTypesRoot }
+
+  TMSSQLTypesRoot = class(TMSSQLRootObject)
+  private
+  protected
+    function DBMSObjectsList:string; override;
+    function DBMSValidObject(AItem:TDBItem):boolean; override;
+  public
+    function GetObjectType: string;override;
+    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
+  end;
+
   { TMSSQLTablesRoot }
 
   TMSSQLTablesRoot = class(TMSSQLRootObject)
@@ -144,6 +156,7 @@ type
   TMSSQLSSchema = class(TDBRootObject)
   private
     FSchemaId: integer;
+    FTypesRoot:TMSSQLTypesRoot;
     FTablesRoot:TMSSQLTablesRoot;
     FStorepProc:TMSSQLStoredProcRoot;
     FViews:TMSSQLViewsRoot;
@@ -163,6 +176,26 @@ type
     procedure RefreshGroup; override;
     procedure RefreshObject; override;
     property SchemaId:integer read FSchemaId write SetSchemaId;
+  end;
+
+  TMSSQLType = class(TDBDomain)
+  private
+    FSchema: TMSSQLSSchema;
+  protected
+    function GetCaptionFullPatch:string; override;
+    procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
+    destructor Destroy; override;
+    function InternalGetDDLCreate: string; override;
+    class function DBClassTitle:string;override;
+    procedure RefreshDependencies; override;
+    function RenameObject(ANewName:string):Boolean;override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+    procedure RefreshObject; override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
+    property Schema:TMSSQLSSchema read FSchema;
   end;
 
   { TMSSQLField }
@@ -370,13 +403,15 @@ type
 
     procedure InternalInitMSSQLEngine;
   private
-    //
+    procedure FillFieldTypeCodes;
   protected
     function GetImageIndex: integer;override;
     function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
 
+    function GetCharSet: string;override;
+    procedure SetCharSet(const AValue: string);override;
     procedure SetUIShowSysObjects(const AValue: TUIShowSysObjects);override;
     function GetSqlQuery(ASql:string):TZQuery;
     procedure InitKeywords;
@@ -420,6 +455,95 @@ begin
     Result:=ASch.Caption + '.'+AObj.Caption
   else
     Result:=AObj.Caption;
+end;
+
+{ TMSSQLType }
+
+function TMSSQLType.GetCaptionFullPatch: string;
+begin
+  Result:=inherited GetCaptionFullPatch;
+end;
+
+procedure TMSSQLType.InternalRefreshStatistic;
+begin
+  inherited InternalRefreshStatistic;
+end;
+
+function TMSSQLType.GetEnableRename: boolean;
+begin
+  Result:=inherited GetEnableRename;
+end;
+
+constructor TMSSQLType.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
+  );
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+end;
+
+destructor TMSSQLType.Destroy;
+begin
+  inherited Destroy;
+end;
+
+function TMSSQLType.InternalGetDDLCreate: string;
+begin
+  Result:=inherited InternalGetDDLCreate;
+end;
+
+class function TMSSQLType.DBClassTitle: string;
+begin
+  Result:=inherited DBClassTitle;
+end;
+
+procedure TMSSQLType.RefreshDependencies;
+begin
+  inherited RefreshDependencies;
+end;
+
+function TMSSQLType.RenameObject(ANewName: string): Boolean;
+begin
+  Result:=inherited RenameObject(ANewName);
+end;
+
+function TMSSQLType.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=inherited CreateSQLObject;
+end;
+
+procedure TMSSQLType.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
+procedure TMSSQLType.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+end;
+
+{ TMSSQLTypesRoot }
+
+function TMSSQLTypesRoot.DBMSObjectsList: string;
+begin
+  Result:=msSQLTexts.sTypes['sTypesList'];
+end;
+
+function TMSSQLTypesRoot.DBMSValidObject(AItem: TDBItem): boolean;
+begin
+  Result:={(AItem.ObjType = 'U') and} (AItem.SchemeID = SchemaId);
+end;
+
+function TMSSQLTypesRoot.GetObjectType: string;
+begin
+  Result:='Type';
+end;
+
+constructor TMSSQLTypesRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okDomain;
+  FDropCommandClass:=TMSSQLDropType;
 end;
 
 { TMSSQLIndex }
@@ -766,6 +890,8 @@ begin
 //    FieldNotNull:=DS.FieldByName('attnotnull').AsBoolean;
 //  end;
   FieldNotNull:=not DS.FieldByName('is_nullable').AsBoolean;
+
+//  max_length
 (*
   if DS.FieldByName('atttypmod').AsInteger<>-1 then
   begin
@@ -868,6 +994,23 @@ begin
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 end;
 
+procedure TMSSQLEngine.FillFieldTypeCodes;
+var
+  Q: TZQuery;
+begin
+  exit;
+  Q:=GetSqlQuery(msSQLTexts.sTypes['sTypesList']);
+  try
+    Q.Open;
+    while not Q.EOF do
+    begin
+      Q.Next;
+    end;
+  finally
+    Q.Free;
+  end;
+end;
+
 procedure TMSSQLEngine.RefreshObjectsBegin(const ASQLText: string;
   ASystemQuery: Boolean);
 var
@@ -949,6 +1092,8 @@ begin
     FMSSQLConnection.HostName:=ServerName;
 
     FMSSQLConnection.Connected:=true;
+
+    FillFieldTypeCodes;
   end
   else
   begin
@@ -973,6 +1118,16 @@ begin
   FViews:=nil;
   FSchemasRoot:=nil;
   FSecurityRoot:=nil;
+end;
+
+function TMSSQLEngine.GetCharSet: string;
+begin
+  Result:='';
+end;
+
+procedure TMSSQLEngine.SetCharSet(const AValue: string);
+begin
+  //
 end;
 
 class function TMSSQLEngine.GetEngineName: string;
@@ -1066,6 +1221,7 @@ begin
   RefreshObjectsBegin(msSQLTexts.sSystemObjects['sObjListAll'], false);
   RefreshObjectsBegin(msSQLTexts.sSystemObjects['sLogins'], false);
   RefreshObjectsBegin(msSQLTexts.sSystemObjects['sUsers'], false);
+  RefreshObjectsBegin(msSQLTexts.sTypes['sTypesList'], false);
 end;
 
 procedure TMSSQLEngine.RefreshObjectsEndFull;
@@ -1074,6 +1230,7 @@ begin
   RefreshObjectsEnd(msSQLTexts.sSystemObjects['sObjListAll']);
   RefreshObjectsEnd(msSQLTexts.sSystemObjects['sLogins']);
   RefreshObjectsEnd(msSQLTexts.sSystemObjects['sUsers']);
+  RefreshObjectsEnd(msSQLTexts.sTypes['sTypesList']);
 end;
 
 { TMSSQLTablesRoot }
@@ -1099,7 +1256,7 @@ constructor TMSSQLTablesRoot.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited;
   FDBObjectKind:=okTable;
-//  FDropCommandClass:=TPGSQLDropTable;
+  FDropCommandClass:=TMSSQLDropTable;
 end;
 
 procedure TMSSQLTable.InternalCreateDLL(var SQLLines: TStringList;
@@ -2057,6 +2214,7 @@ begin
 
   FDBObjectKind:=okScheme;
 
+  FTypesRoot:=TMSSQLTypesRoot.Create(OwnerDB, TMSSQLType, sTypes, Self);
   FTablesRoot:=TMSSQLTablesRoot.Create(OwnerDB, TMSSQLTable, sTables, Self);
   FViews:=TMSSQLViewsRoot.Create(OwnerDB, TMSSQLView, sViews, Self);
   //FStorepProc:=TMSSQLStoredProcRoot.Create(AMSSQLEngine);
@@ -2176,6 +2334,8 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSchema, 'ALTER SCHEMA');           //ALTER SCHEMA — изменить определение схемы
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSchema, 'DROP SCHEMA');             //DROP SCHEMA — удалить схему
 
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateType, 'CREATE TYPE');
+
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateTable, 'CREATE TABLE');           //CREATE TABLE — создать таблицу
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterTable, 'ALTER TABLE');             //ALTER TABLE — изменить определение таблицы
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropTable, 'DROP TABLE');               //DROP TABLE — удалить таблицу
@@ -2226,5 +2386,6 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateSecurityPolicy, 'CREATE SECURITY POLICY');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSecurityPolicy, 'ALTER SECURITY POLICY');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSecurityPolicy, 'DROP SECURITY POLICY');
+
 end.
 

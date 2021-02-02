@@ -5847,6 +5847,10 @@ msgctxt "fbmstrconstunit.stypereturns3"
 msgid "Table"
 msgstr ""
 
+#: fbmstrconstunit.stypes
+msgid "Types"
+msgstr ""
+
 #: fbmstrconstunit.sudf
 msgid "UDF"
 msgstr ""

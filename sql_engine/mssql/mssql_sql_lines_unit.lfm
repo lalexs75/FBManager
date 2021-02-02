@@ -161,4 +161,27 @@ object mssqlSQLTexts: TmssqlSQLTexts
     Left = 40
     Top = 184
   end
+  object sTypes: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sTypesList'
+        Lines.Strings = (
+          'select'
+          '  types.user_type_id,'
+          '  types.schema_id,'
+          '  types.name,'
+          '  types.system_type_id,'
+          '  types.is_user_defined as data,'
+          '  null as acl_list,'
+          '  '''' as description'
+          'from'
+          '  sys.types'
+          'order by'
+          '  types.name'
+        )
+      end>
+    Left = 136
+    Top = 24
+  end
 end
