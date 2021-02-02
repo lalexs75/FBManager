@@ -8,7 +8,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="22" Y="13"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
       </Unit>
       <Unit>
         <Filename Value="pgtestcase.pas"/>
@@ -19,7 +19,7 @@
         <UnitName Value="PGTestCase"/>
         <TopLine Value="812"/>
         <CursorPos X="49" Y="816"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
         <Bookmarks Count="1">
           <Item0 Y="592" ID="3"/>
         </Bookmarks>
@@ -33,7 +33,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="31" Y="31"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
       </Unit>
       <Unit>
         <Filename Value="fbmanager_define.inc"/>
@@ -42,7 +42,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
       </Unit>
       <Unit>
         <Filename Value="fbtestcase.pas"/>
@@ -54,7 +54,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="15" Y="21"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
         <Bookmarks Count="2">
           <Item0 Y="379" ID="1"/>
           <Item1 X="3" Y="1156" ID="2"/>
@@ -70,7 +70,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="860"/>
         <CursorPos X="3" Y="864"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
       </Unit>
       <Unit>
         <Filename Value="sqlite3testcase.pas"/>
@@ -82,7 +82,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="121"/>
         <CursorPos Y="133"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="182"/>
       </Unit>
       <Unit>
         <Filename Value="pgcopycmdcase.pas"/>
@@ -91,14 +91,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="362"/>
         <CursorPos X="3" Y="418"/>
-        <UsageCount Value="178"/>
+        <UsageCount Value="180"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SSHConnectionUnit"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="74"/>
+        <UsageCount Value="76"/>
       </Unit>
       <Unit>
         <Filename Value="mssqlparsertestcase.pas"/>
@@ -109,9 +109,9 @@
         <UnitName Value="MSSQLParserTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="7466"/>
-        <CursorPos Y="7480"/>
-        <UsageCount Value="56"/>
+        <TopLine Value="8248"/>
+        <CursorPos X="61" Y="8255"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -122,7 +122,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="58"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
@@ -130,7 +130,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos X="15" Y="32"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="58"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/fpcunit.pp"/>
@@ -362,24 +362,16 @@
         <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
+      <Unit>
+        <Filename Value="../../sql_engine/mssql/mssql_enginesecurityunit.pas"/>
+        <UnitName Value="mssql_EngineSecurityUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="390"/>
+        <CursorPos Y="421"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="5726" Column="53" TopLine="5706"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="900" Column="15" TopLine="883"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="5667" Column="58" TopLine="5650"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="946" Column="15" TopLine="932"/>
-      </Position>
+    <JumpHistory HistoryIndex="27">
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="5557" Column="8" TopLine="5529"/>
@@ -477,6 +469,18 @@
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="6949" Column="66" TopLine="6922"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8254" TopLine="8223"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8262" Column="30" TopLine="8241"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1409" Column="2" TopLine="1397"/>
       </Position>
     </JumpHistory>
     <RunParams>

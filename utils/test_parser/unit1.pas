@@ -490,6 +490,7 @@ begin
   SynEdit3.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'PostgreSQL', ''));
   SynEdit4.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'SQLite3', ''));
   SynEdit5.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'MySQL', ''));
+  SynEdit6.Text:=DecodeStringBase64(Ini.ReadString('Editors', 'MSSQL', ''));
   Ini.Free;
 end;
 
@@ -502,6 +503,7 @@ begin
   Ini.WriteString('Editors', 'PostgreSQL', EncodeStringBase64(SynEdit3.Text));
   Ini.WriteString('Editors', 'SQLite3', EncodeStringBase64(SynEdit4.Text));
   Ini.WriteString('Editors', 'MySQL', EncodeStringBase64(SynEdit5.Text));
+  Ini.WriteString('Editors', 'MSSQL', EncodeStringBase64(SynEdit6.Text));
   Ini.Free;
 end;
 

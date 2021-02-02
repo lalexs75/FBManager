@@ -1,0 +1,57 @@
+inherited mssqlRoleEditorFrame: TmssqlRoleEditorFrame
+  object Label1: TLabel[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 17
+    Top = 6
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'Role name'
+    FocusControl = Edit1
+    ParentColor = False
+  end
+  object Label2: TLabel[1]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 17
+    Top = 68
+    Width = 139
+    BorderSpacing.Around = 6
+    Caption = 'Authorization by owner'
+    FocusControl = ComboBox1
+    ParentColor = False
+  end
+  object Edit1: TEdit[2]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 29
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    TabOrder = 0
+    Text = 'Edit1'
+  end
+  object ComboBox1: TComboBox[3]
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 12
+    Height = 33
+    Top = 91
+    Width = 302
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 1
+  end
+end

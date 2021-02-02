@@ -26,7 +26,8 @@ interface
 
 uses
   Classes, SysUtils, contnrs, SQLEngineAbstractUnit, mssql_engine,
-  SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit;
+  SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit,
+  ZDataset;
 
 type
   TMSSQLRolesRoot = class;
@@ -175,10 +176,13 @@ begin
 end;
 
 procedure TMSSQLRole.RefreshObject;
+var
+  Q: TZQuery;
 begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
-
+//  Q:=TMSSQLEngine(OwnerDB).GetSqlQuery(msSQLTexts.sTables['sTableCollumns']);
+//  Q.Free;
 end;
 
 class function TMSSQLRole.DBClassTitle: string;
