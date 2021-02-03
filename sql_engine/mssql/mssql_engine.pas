@@ -378,7 +378,7 @@ type
     function GetParamCount: integer;override;
     procedure SetActive(const AValue: boolean);override;
   public
-    constructor Create(AOwner:TSQLEngineAbstract);
+    constructor Create(AOwner:TSQLEngineAbstract);override;
     destructor Destroy; override;
     function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean; override;
     procedure CommitTransaction;override;

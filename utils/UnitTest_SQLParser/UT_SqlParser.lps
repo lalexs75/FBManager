@@ -108,7 +108,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="MSSQLParserTestCase"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="8245"/>
         <CursorPos X="36" Y="8261"/>
         <UsageCount Value="59"/>
@@ -130,7 +130,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="365"/>
-        <CursorPos X="48" Y="381"/>
+        <CursorPos X="60" Y="381"/>
         <UsageCount Value="59"/>
         <Loaded Value="True"/>
       </Unit>
@@ -167,9 +167,9 @@
       <Unit>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="883"/>
-        <CursorPos Y="897"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="745"/>
+        <CursorPos X="52" Y="766"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
@@ -198,9 +198,9 @@
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
         <UnitName Value="FBSQLEngineUnit"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="665"/>
-        <CursorPos X="15" Y="680"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="604"/>
+        <CursorPos X="15" Y="602"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>
@@ -380,10 +380,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6160" TopLine="6129"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="990" Column="15" TopLine="976"/>
       </Position>
       <Position>
@@ -497,6 +493,10 @@
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
         <Caret Line="987" Column="5" TopLine="979"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
+        <Caret Line="381" Column="48" TopLine="365"/>
       </Position>
     </JumpHistory>
     <RunParams>
