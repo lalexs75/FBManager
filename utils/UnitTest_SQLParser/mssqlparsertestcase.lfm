@@ -22,7 +22,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'DisableTrigger3'
         Lines.Strings = (
-          'DISABLE Trigger ALL ON ALL SERVER;'
+          'DISABLE TRIGGER ALL ON ALL SERVER;'
         )
       end    
       item
@@ -41,7 +41,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'EnableTrigger1'
         Lines.Strings = (
-          'ENABLE Trigger Person.uAddress ON Person.Address;'
+          'ENABLE TRIGGER Person.uAddress ON Person.Address;'
         )
       end    
       item
@@ -53,7 +53,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'EnableTrigger3'
         Lines.Strings = (
-          'ENABLE Trigger ALL ON ALL SERVER;'
+          'ENABLE TRIGGER ALL ON ALL SERVER;'
         )
       end    
       item
@@ -262,8 +262,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'CreateDatabase1'
         Lines.Strings = (
-          'CREATE DATABASE testdb'
-          'COLLATE SQL_Latin1_General_CP1_CI_AS ;'
+          'CREATE DATABASE testdb COLLATE SQL_Latin1_General_CP1_CI_AS;'
           ''
           ''
         )
@@ -272,24 +271,18 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'CreateDatabase2'
         Lines.Strings = (
           'CREATE DATABASE [ columnstore ];'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase3'
         Lines.Strings = (
           'CREATE DATABASE SampleDB;'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase4'
         Lines.Strings = (
           'CREATE DATABASE mytest;'
-          ''
-          ''
         )
       end    
       item
@@ -414,7 +407,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           '    ( NAME = SGrp1Fi2_dat, FILENAME = ''D:\SalesData\SG1Fi2dt_0600.ss''),'
           '    ( NAME = SGrp2Fi1_dat, FILENAME = ''D:\SalesData\SG2Fi1dt_0600.ss''),'
           '    ( NAME = SGrp2Fi2_dat, FILENAME = ''D:\SalesData\SG2Fi2dt_0600.ss'')'
-          'AS SNAPSHOT OF Sales ;'
+          'AS SNAPSHOT OF Sales;'
           ''
           ''
         )
@@ -485,8 +478,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'ADD (SELECT , INSERT'
           '     ON HumanResources.EmployeePayHistory BY dbo )'
           'WITH (STATE = ON) ;'
-          ''
-          ''
         )
       end    
       item
@@ -497,8 +488,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'ADD ( INSERT, UPDATE, DELETE'
           '     ON Schema::Sales BY SalesUK )'
           'WITH (STATE = ON) ;'
-          ''
-          ''
         )
       end    
       item
@@ -507,8 +496,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE ENCRYPTION KEY'
           'WITH ALGORITHM = AES_256'
           'ENCRYPTION BY SERVER CERTIFICATE MyServerCert;'
-          ''
-          ''
         )
       end    
       item
@@ -516,8 +503,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Lines.Strings = (
           'CREATE DATABASE SCOPED CREDENTIAL AppCred WITH IDENTITY = ''Mary5'','
           '    SECRET = ''<EnterStrongPasswordHere>'';'
-          ''
-          ''
         )
       end    
       item
@@ -526,8 +511,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE SCOPED CREDENTIAL MyCredentials'
           'WITH IDENTITY = ''SHARED ACCESS SIGNATURE'','
           'SECRET = ''QLYMgmSXMklt%2FI1U6DcVrQixnlU5Sgbtk1qDRakUBGs%3D'';'
-          ''
-          ''
         )
       end    
       item
@@ -536,10 +519,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE SCOPED CREDENTIAL ADL_User'
           'WITH'
           '    IDENTITY = ''<client_id>@\<OAuth_2.0_Token_EndPoint>'','
-          '    SECRET = ''<key>'''
-          ';'
-          ''
-          ''
+          '    SECRET = ''<key>'';'
         )
       end    
       item
@@ -548,9 +528,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE SCOPED CREDENTIAL OracleProxyAccount'
           'WITH'
           '     IDENTITY = ''oracle_username'','
-          '     SECRET = ''oracle_password'' ;'
-          ''
-          ''
+          '     SECRET = ''oracle_password'';'
         )
       end    
       item
@@ -559,9 +537,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE SCOPED CREDENTIAL HadoopUser1'
           'WITH'
           '     IDENTITY = ''<hadoop_user_name>'','
-          '     SECRET = ''<hadoop_password>'' ;'
-          ''
-          ''
+          '     SECRET = ''<hadoop_password>'';'
         )
       end    
       item
@@ -570,9 +546,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'CREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential'
           'WITH'
           '  IDENTITY = ''<my_account>'' ,'
-          '  SECRET = ''<azure_storage_account_key>'' ;'
-          ''
-          ''
+          '  SECRET = ''<azure_storage_account_key>'';'
         )
       end    
       item
@@ -583,52 +557,40 @@ object MSSQLParserTestData: TMSSQLParserTestData
           '  IDENTITY = ''SHARED ACCESS SIGNATURE'','
           '  -- Remove ? from the beginning of the SAS token'
           '  SECRET = ''******srt=sco&sp=rwac&se=2017-02-01T00:55:34Z&st=2016-12-29T16:55:34Z***************'' ;'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase23'
         Lines.Strings = (
-          '     CREATE DATABASE SCOPED CREDENTIAL SqlServerCredentials'
+          'CREATE DATABASE SCOPED CREDENTIAL SqlServerCredentials'
           '     WITH IDENTITY = ''username'', Secret = ''password'';'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase24'
         Lines.Strings = (
-          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          'CREATE DATABASE SCOPED CREDENTIAL credential_name'
           '   WITH IDENTITY = ''username'', Secret = ''password'';'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase25'
         Lines.Strings = (
-          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          'CREATE DATABASE SCOPED CREDENTIAL credential_name'
           '   WITH IDENTITY = ''username'', Secret = ''password'';'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase26'
         Lines.Strings = (
-          '   CREATE DATABASE SCOPED CREDENTIAL credential_name'
+          'CREATE DATABASE SCOPED CREDENTIAL credential_name'
           '   WITH IDENTITY = ''username'', Secret = ''password'';'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase27'
         Lines.Strings = (
           'CREATE DATABASE TestDB;'
-          ''
-          ''
         )
       end    
       item
@@ -638,32 +600,24 @@ object MSSQLParserTestData: TMSSQLParserTestData
           'FOR SERVER AUDIT [AuditDataAccess]'
           'ADD (SELECT ON SCHEMA::[DataSchema] BY [public])'
           'WITH (STATE = ON);'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase29'
         Lines.Strings = (
           'CREATE DATABASE SampleDB;'
-          ''
-          ''
         )
       end    
       item
         Caption = 'CreateDatabase30'
         Lines.Strings = (
-          'CREATE DATABASE TestSignature ;'
-          ''
-          ''
+          'CREATE DATABASE TestSignature;'
         )
       end    
       item
         Caption = 'CreateDatabase31'
         Lines.Strings = (
           'CREATE DATABASE testDB;'
-          ''
-          ''
         )
       end    
       item

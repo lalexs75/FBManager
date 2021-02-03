@@ -796,22 +796,16 @@ type
 
   TMSSQLEnableTrigger  = class(TSQLCommandDDL)
   private
+    FCurParam: TSQLParserField;
+    FIsDisable: Boolean;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
-  end;
-
-  { TMSSQLDisableTrigger }
-
-  TMSSQLDisableTrigger  = class(TSQLCommandDDL)
-  private
-  protected
-    procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
-    procedure MakeSQL;override;
-  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaName;
+    property IsDisable:Boolean read FIsDisable write FIsDisable;
   end;
 
   { TMSSQLCreateLogin }
@@ -1074,47 +1068,87 @@ implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
 
-{ TMSSQLDisableTrigger }
-
-procedure TMSSQLDisableTrigger.InitParserTree;
-begin
-  (*
-  DISABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
-  ON { object_name | DATABASE | ALL SERVER } [ ; ]
-  ----------------------------------------
-  *)
-end;
-
-procedure TMSSQLDisableTrigger.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
-begin
-  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
-end;
-
-procedure TMSSQLDisableTrigger.MakeSQL;
-begin
-  inherited MakeSQL;
-end;
-
 { TMSSQLEnableTrigger }
 
 procedure TMSSQLEnableTrigger.InitParserTree;
+var
+  FSQLTokens, T1, T2, T, T2_1, FSQLTokens1: TSQLTokenRecord;
 begin
   (*
   ENABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
   ON { object_name | DATABASE | ALL SERVER } [ ; ]
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ENABLE', [toFirstToken]);
+  FSQLTokens1:=AddSQLTokens(stKeyword, nil, 'DISABLE', [toFirstToken], 10);
+  FSQLTokens:=AddSQLTokens(stKeyword, [FSQLTokens, FSQLTokens1], 'TRIGGER', [toFindWordLast]);
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'ALL', [], 1);
+  T2:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+    T:=AddSQLTokens(stSymbol, T2, '.', []);
+    T2_1:=AddSQLTokens(stIdentificator, T, '', [], 2);
+    T:=AddSQLTokens(stSymbol, [T2, T2_1], ',', []);
+    T.AddChildToken(T2);
+
+  T:=AddSQLTokens(stKeyword, [T1, T2, T2_1], 'ON', []);
+  T1:=AddSQLTokens(stKeyword, T, 'DATABASE', [], 3);
+  T1:=AddSQLTokens(stKeyword, T, 'ALL', []);
+  T1:=AddSQLTokens(stKeyword, T1, 'SERVER', [], 4);
+  T1:=AddSQLTokens(stIdentificator, T, '', [], 3);
+  T:=AddSQLTokens(stSymbol, T1, '.', [toOptional]);
+  T1:=AddSQLTokens(stIdentificator, T, '', [], 5);
 end;
 
 procedure TMSSQLEnableTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FCurParam:=Params.AddParamEx(AWord, '');
+    2:if Assigned(FCurParam) then
+      begin
+        FCurParam.TableName:=FCurParam.Caption;
+        FCurParam.Caption:=AWord;
+      end;
+    3:TableName:=AWord;
+    4:TableName:='ALL SERVER';
+    5:begin
+        SchemaName:=TableName;
+        TableName:=AWord;
+      end;
+    10:IsDisable:=true;
+  end;
 end;
 
 procedure TMSSQLEnableTrigger.MakeSQL;
+var
+  S, S1: String;
+  P: TSQLParserField;
 begin
-  inherited MakeSQL;
+  if IsDisable then
+    S:='DISABLE TRIGGER '
+  else
+    S:='ENABLE TRIGGER ';
+  S1:='';
+  for P in Params do
+  begin
+    if S1<>'' then S1:=S1 + ', ';
+    if P.TableName <>'' then S1:=S1 + P.TableName + '.';
+    S1:=S1 + P.Caption;
+  end;
+  S:=S + S1 + ' ON ';
+
+  if SchemaName <> '' then S:=S + SchemaName + '.';
+  S:=S + TableName;
+
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLEnableTrigger.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMSSQLEnableTrigger then
+  begin
+    IsDisable:=TMSSQLEnableTrigger(ASource).IsDisable;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TMSSQLDropMessageType }
@@ -2072,7 +2106,7 @@ end;
 
 procedure TMSSQLDropTrigger.InitParserTree;
 var
-  FSQLTokens, T, T1: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2: TSQLTokenRecord;
 begin
   (*
   -- Trigger on an INSERT, UPDATE, or DELETE statement to a table or view (DML Trigger)
@@ -2094,7 +2128,11 @@ begin
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [toFindWordLast]);
     T1:=AddSQLTokens(stKeyword, T, 'IF', [], -1);
     T1:=AddSQLTokens(stKeyword, T1, 'EXISTS', []);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  T1:=AddSQLTokens(stIdentificator, [T, T1], '', [], 1);
+    T:=AddSQLTokens(stSymbol, T1, '.', [toOptional]);
+  T2:=AddSQLTokens(stIdentificator, T, '', [], 2);
+    T:=AddSQLTokens(stSymbol, [T1, T2], ',', [toOptional]);
+    T.AddChildToken(T1);
 end;
 
 procedure TMSSQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -2104,8 +2142,14 @@ begin
 end;
 
 procedure TMSSQLDropTrigger.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='DROP TRIGGER ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+
+  AddSQLCommand(S);
 end;
 
 { TMSSQLAlterTrigger }

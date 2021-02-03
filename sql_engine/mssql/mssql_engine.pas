@@ -2365,7 +2365,6 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterTrigger, 'ALTER TRIGGER');         //ALTER TRIGGER — изменить определение триггера
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropTrigger, 'DROP TRIGGER');           //DROP TRIGGER — удалить триггер
   RegisterSQLStatment(TMSSQLEngine, TMSSQLEnableTrigger, 'ENABLE TRIGGER');
-  RegisterSQLStatment(TMSSQLEngine, TMSSQLDisableTrigger, 'DISABLE TRIGGER');
 
   //INDEX
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
