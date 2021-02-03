@@ -207,6 +207,10 @@ type
     procedure CreateType5;
     procedure CreateType6;
     procedure DropType1;
+    procedure DropType2;
+    procedure DropType3;
+    procedure DropType4;
+    procedure DropType5;
     procedure PartitionScheme1;
     procedure PartitionScheme2;
     procedure PartitionScheme3;
@@ -2308,6 +2312,26 @@ end;
 procedure TMSSQLParserTest.DropType1;
 begin
   DoTestSQL(MSSQLParserTestData.sDataBase['DropType1']);
+end;
+
+procedure TMSSQLParserTest.DropType2;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['DropType2']);
+end;
+
+procedure TMSSQLParserTest.DropType3;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['DropType3']);
+end;
+
+procedure TMSSQLParserTest.DropType4;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['DropType4']);
+end;
+
+procedure TMSSQLParserTest.DropType5;
+begin
+  DoTestSQL(MSSQLParserTestData.sDataBase['DropType5']);
 end;
 
 procedure TMSSQLParserTest.PartitionScheme1;

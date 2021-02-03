@@ -973,28 +973,185 @@ type
     procedure MakeSQL;override;
   public
   end;
+
+
+  { TMSSQLCreateDefault }
+
+  TMSSQLCreateDefault = class(TSQLCreateCommandAbstract)
+  private
+    FExpression: string;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property Expression:string read FExpression write FExpression;
+  end;
+
+  { TMSSQLDropDefault }
+
+  TMSSQLDropDefault = class(TSQLDropCommandAbstract)
+  private
+    FCurParam: TSQLParserField;
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
 
+{ TMSSQLDropDefault }
+
+procedure TMSSQLDropDefault.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  (*
+  DROP DEFAULT [ IF EXISTS ] { [ schema_name . ] default_name } [ ,...n ] [ ; ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [], -1);
+  T:=AddSQLTokens(stKeyword, T, 'EXISTS', []);
+
+  T1:=AddSQLTokens(stIdentificator, [FSQLTokens, T], '', [], 1);
+  T:=AddSQLTokens(stSymbol, T1, '.', [toOptional]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+  T:=AddSQLTokens(stSymbol, [T, T1], ',', [toOptional]);
+    T.AddChildToken(T1);
+end;
+
+procedure TMSSQLDropDefault.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FCurParam:=Params.AddParamEx(AWord, '');
+    2:if Assigned(FCurParam) then
+      begin
+        FCurParam.TypeName:=FCurParam.Caption;
+        FCurParam.Caption:=AWord;
+      end;
+  end;
+end;
+
+procedure TMSSQLDropDefault.MakeSQL;
+var
+  S, S1: String;
+  P: TSQLParserField;
+begin
+  S:='DROP DEFAULT ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+  S1:='';
+  for P in Params do
+  begin
+    if S1<>'' then S1:=S1 + ', ';
+    if P.TypeName<>'' then S1:=S1 + DoFormatName(P.TypeName) + '.';
+    S1:=S1 + DoFormatName(P.Caption);
+  end;
+  if S1<>'' then S:=S + S1;
+  AddSQLCommand(S);
+end;
+
+{ TMSSQLCreateDefault }
+
+procedure TMSSQLCreateDefault.InitParserTree;
+var
+  FSQLTokens, T, T1: TSQLTokenRecord;
+begin
+  (*
+  CREATE DEFAULT [ schema_name . ] default_name
+  AS constant_expression [ ; ]
+  *)
+
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DEFAULT', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T1:=AddSQLTokens(stSymbol, T, '.', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+  T:=AddSQLTokens(stKeyword, [T1, T], 'AS', [], 3);
+end;
+
+procedure TMSSQLCreateDefault.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+    3:Expression:=ASQLParser.GetToCommandDelemiter;
+  end;
+end;
+
+procedure TMSSQLCreateDefault.MakeSQL;
+var
+  S: String;
+begin
+  S:='CREATE DEFAULT ';
+  if SchemaName <> '' then S:=S + SchemaName + '.';
+  S:=S + Name + ' AS';
+  if (Expression<>'') and (Expression[1]<>' ') then S:=S + ' ';
+  S:=S +  Expression;
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLCreateDefault.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMSSQLCreateDefault then
+    Expression:=TMSSQLCreateDefault(ASource).Expression;
+  inherited Assign(ASource);
+end;
+
 { TMSSQLDropType }
 
 procedure TMSSQLDropType.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
 begin
   (*
   DROP TYPE [ IF EXISTS ] [ schema_name. ] type_name [ ; ]
   *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'IF', [], -1);
+  T:=AddSQLTokens(stKeyword, T, 'EXISTS', []);
+  T:=AddSQLTokens(stIdentificator, [FSQLTokens, T], '', [], 1);
+  T:=AddSQLTokens(stSymbol, T, '.', [toOptional]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 2);
 end;
 
 procedure TMSSQLDropType.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
+  end;
 end;
 
 procedure TMSSQLDropType.MakeSQL;
+var
+  S: String;
 begin
-  inherited MakeSQL;
+  S:='DROP TYPE ';
+  if ooIfExists in Options then
+    S:=S + 'IF EXISTS ';
+  if SchemaName<>'' then S:=S + SchemaName+'.';
+  S:=S + Name;
+  AddSQLCommand(S);
 end;
 
 { TMSSQLCreateType }
@@ -6374,8 +6531,6 @@ WITH IDENTITY = 'identity_name'
 
 ----------------------------------------
 
-CREATE DEFAULT [ schema_name . ] default_name
-AS constant_expression [ ; ]
 ----------------------------------------
 CREATE ENDPOINT endPointName [ AUTHORIZATION login ]
 [ STATE = { STARTED | STOPPED | DISABLED } ]
@@ -7258,9 +7413,6 @@ DROP DATABASE AUDIT SPECIFICATION audit_specification_name
 ----------------------------------------
 DROP DATABASE ENCRYPTION KEY
 ----------------------------------------
-DROP DEFAULT [ IF EXISTS ] { [ schema_name . ] default_name } [ ,...n ] [ ; ]
-
-
 ----------------------------------------
 DROP ENDPOINT endPointName
 ----------------------------------------

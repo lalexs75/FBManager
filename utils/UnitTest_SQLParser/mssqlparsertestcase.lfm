@@ -2096,7 +2096,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'DropType1'
         Lines.Strings = (
-          'DROP TYPE ssn ;'
+          'DROP TYPE ssn;'
           ''
         )
       end    
@@ -2139,6 +2139,30 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Lines.Strings = (
           'DROP PARTITION SCHEME myRangePS1;'
           ''
+        )
+      end    
+      item
+        Caption = 'DropType2'
+        Lines.Strings = (
+          'DROP TYPE type_name;'
+        )
+      end    
+      item
+        Caption = 'DropType3'
+        Lines.Strings = (
+          'DROP TYPE schema_name.type_name;'
+        )
+      end    
+      item
+        Caption = 'DropType4'
+        Lines.Strings = (
+          'DROP TYPE IF EXISTS schema_name;'
+        )
+      end    
+      item
+        Caption = 'DropType5'
+        Lines.Strings = (
+          'DROP TYPE IF EXISTS schema_name.type_name;'
         )
       end>
     Left = 48
@@ -11771,8 +11795,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'Default4'
         Lines.Strings = (
-          'DROP DEFAULT phonedflt'
-          ''
+          'DROP DEFAULT phonedflt;'
         )
       end    
       item

@@ -2335,6 +2335,7 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSchema, 'DROP SCHEMA');             //DROP SCHEMA — удалить схему
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateType, 'CREATE TYPE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropType, 'DROP TYPE');
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateTable, 'CREATE TABLE');           //CREATE TABLE — создать таблицу
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterTable, 'ALTER TABLE');             //ALTER TABLE — изменить определение таблицы
@@ -2386,6 +2387,9 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateSecurityPolicy, 'CREATE SECURITY POLICY');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterSecurityPolicy, 'ALTER SECURITY POLICY');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropSecurityPolicy, 'DROP SECURITY POLICY');
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateDefault, 'CREATE DEFAULT');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropDefault, 'DROP DEFAULT');
 
 end.
 

@@ -108,8 +108,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="MSSQLParserTestCase"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="8245"/>
+        <TopLine Value="8230"/>
         <CursorPos X="36" Y="8261"/>
         <UsageCount Value="59"/>
         <Loaded Value="True"/>
@@ -127,7 +128,6 @@
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <TopLine Value="365"/>
         <CursorPos X="60" Y="381"/>
