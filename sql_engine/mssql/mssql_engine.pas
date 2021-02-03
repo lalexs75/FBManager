@@ -1159,6 +1159,7 @@ end;
 constructor TMSSQLEngine.Create;
 begin
   inherited Create;
+  FParserSintax:=siMSSQL;
   FSQLEngileFeatures:=[feDescribeObject];
   InternalInitMSSQLEngine;
 end;
@@ -2363,6 +2364,8 @@ initialization
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateTrigger, 'CREATE TRIGGER');       //CREATE TRIGGER — создать триггер
   RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterTrigger, 'ALTER TRIGGER');         //ALTER TRIGGER — изменить определение триггера
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropTrigger, 'DROP TRIGGER');           //DROP TRIGGER — удалить триггер
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLEnableTrigger, 'ENABLE TRIGGER');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDisableTrigger, 'DISABLE TRIGGER');
 
   //INDEX
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateIndex, 'CREATE INDEX');           //CREATE INDEX — создать индекс
@@ -2390,6 +2393,11 @@ initialization
 
   RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateDefault, 'CREATE DEFAULT');
   RegisterSQLStatment(TMSSQLEngine, TMSSQLDropDefault, 'DROP DEFAULT');
+
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLCreateMessageType, 'CREATE MESSAGE TYPE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLAlterMessageType, 'ALTER MESSAGE TYPE');
+  RegisterSQLStatment(TMSSQLEngine, TMSSQLDropMessageType, 'DROP MESSAGE TYPE');
+
 
 end.
 

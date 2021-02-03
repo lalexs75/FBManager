@@ -110,8 +110,8 @@
         <UnitName Value="MSSQLParserTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="8230"/>
-        <CursorPos X="36" Y="8261"/>
+        <TopLine Value="6434"/>
+        <CursorPos X="47" Y="6444"/>
         <UsageCount Value="59"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -380,54 +380,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="990" Column="15" TopLine="976"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6146" Column="56" TopLine="6146"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6490" TopLine="6459"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1056" Column="15" TopLine="1042"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6640" Column="61" TopLine="6618"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6649" Column="60" TopLine="6619"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1088" Column="15" TopLine="1074"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6819" TopLine="6803"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1122" Column="15" TopLine="1108"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6949" Column="66" TopLine="6922"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="8254" TopLine="8223"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="8262" Column="30" TopLine="8241"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
         <Caret Line="1409" Column="2" TopLine="1397"/>
       </Position>
       <Position>
@@ -497,6 +449,51 @@
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
         <Caret Line="381" Column="48" TopLine="365"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8261" Column="36" TopLine="8230"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1383" Column="26" TopLine="1359"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="8142" Column="10" TopLine="8125"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1087" Column="35" TopLine="1063"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1090" Column="34" TopLine="1066"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="6675" Column="21" TopLine="6660"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1046" Column="20" TopLine="1022"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="6444" Column="3" TopLine="6440"/>
+      </Position>
+      <Position>
+        <Filename Value="mssqlparsertestcase.pas"/>
+        <Caret Line="1046" Column="15" TopLine="1032"/>
       </Position>
     </JumpHistory>
     <RunParams>

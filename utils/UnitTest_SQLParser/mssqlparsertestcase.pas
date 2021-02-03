@@ -6441,7 +6441,7 @@ end;
 
 procedure TMSSQLParserTest.Open2;
 begin
-  DoTestSQL(MSSQLParserTestData.sSystem['Open3']);
+  DoTestSQL(MSSQLParserTestData.sSystem['Open2']);
 end;
 
 procedure TMSSQLParserTest.Fetch1;

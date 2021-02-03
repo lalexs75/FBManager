@@ -1,9 +1,9 @@
 object MSSQLParserTestData: TMSSQLParserTestData
   OldCreateOrder = False
   Height = 546
-  HorizontalOffset = 709
+  HorizontalOffset = 667
   VerticalOffset = 224
-  Width = 625
+  Width = 1203
   object sTriggers: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
@@ -86,8 +86,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'DropTrigger5'
         Lines.Strings = (
           'DROP TRIGGER employee_insupd;'
-          ''
-          ''
         )
       end    
       item
@@ -9077,10 +9075,6 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'AlterAsymmetricKey2'
         Lines.Strings = (
           'ALTER ASYMMETRIC KEY PacificSales19 REMOVE PRIVATE KEY;'
-          'GO'
-          'OPEN MASTER KEY DECRYPTION BY PASSWORD = ''<database master key password>'';'
-          'ALTER ASYMMETRIC KEY PacificSales09 WITH PRIVATE KEY ('
-          '    DECRYPTION BY PASSWORD = ''<enterStrongPasswordHere>'' );'
           ''
         )
       end    
@@ -11674,72 +11668,56 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'MessageType1'
         Lines.Strings = (
-          'ALTER MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/SubmitExpense]'
-          '    VALIDATION = WELL_FORMED_XML ;'
+          'ALTER MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] VALIDATION = WELL_FORMED_XML;'
           ''
         )
       end    
       item
         Caption = 'MessageType2'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/SubmitExpense]'
-          '    VALIDATION = WELL_FORMED_XML ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] VALIDATION = WELL_FORMED_XML;'
           ''
         )
       end    
       item
         Caption = 'MessageType3'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/ExpenseApprovedOrDenied]'
-          '    VALIDATION = WELL_FORMED_XML ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/ExpenseApprovedOrDenied] VALIDATION = WELL_FORMED_XML;'
           ''
         )
       end    
       item
         Caption = 'MessageType4'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/ExpenseReimbursed]'
-          '    VALIDATION= WELL_FORMED_XML ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/ExpenseReimbursed] VALIDATION= WELL_FORMED_XML;'
           ''
         )
       end    
       item
         Caption = 'MessageType5'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '  [//Adventure-Works.com/Expenses/SubmitExpense]'
-          '  VALIDATION = WELL_FORMED_XML ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] VALIDATION = WELL_FORMED_XML;'
           ''
         )
       end    
       item
         Caption = 'MessageType6'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/SubmitExpense]'
-          '    VALIDATION = VALID_XML WITH SCHEMA COLLECTION ExpenseReportSchema ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] VALIDATION = VALID_XML WITH SCHEMA COLLECTION ExpenseReportSchema;'
           ''
         )
       end    
       item
         Caption = 'MessageType7'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/SubmitExpense]'
-          '    VALIDATION = EMPTY ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] VALIDATION = EMPTY;'
           ''
         )
       end    
       item
         Caption = 'MessageType8'
         Lines.Strings = (
-          'CREATE MESSAGE TYPE'
-          '    [//Adventure-Works.com/Expenses/ReceiptImage]'
-          '    VALIDATION = NONE ;'
+          'CREATE MESSAGE TYPE [//Adventure-Works.com/Expenses/ReceiptImage] VALIDATION = NONE;'
           ''
         )
       end    
@@ -11927,7 +11905,7 @@ object MSSQLParserTestData: TMSSQLParserTestData
       item
         Caption = 'MessageType9'
         Lines.Strings = (
-          'DROP MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense] ;'
+          'DROP MESSAGE TYPE [//Adventure-Works.com/Expenses/SubmitExpense];'
           ''
         )
       end    
@@ -11942,6 +11920,15 @@ object MSSQLParserTestData: TMSSQLParserTestData
         Caption = 'DropSecurityPolicy1'
         Lines.Strings = (
           'DROP SECURITY POLICY secPolicy;'
+        )
+      end    
+      item
+        Caption = 'AlterAsymmetricKey3'
+        Lines.Strings = (
+          'ALTER ASYMMETRIC KEY PacificSales09 WITH PRIVATE KEY ('
+          '    DECRYPTION BY PASSWORD = ''<enterStrongPasswordHere>'' );'
+          ''
+          ''
         )
       end>
     Left = 48

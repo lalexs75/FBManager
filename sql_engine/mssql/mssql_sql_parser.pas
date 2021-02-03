@@ -31,7 +31,6 @@ uses
 Общее
     BULK INSERT
     DELETE
-    DISABLE TRIGGER
     ENABLE TRIGGER
     INSERT
     INSERT (граф SQL)
@@ -793,6 +792,28 @@ type
     property SchemaName;
   end;
 
+  { TMSSQLEnableTrigger }
+
+  TMSSQLEnableTrigger  = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
+  { TMSSQLDisableTrigger }
+
+  TMSSQLDisableTrigger  = class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
+
   { TMSSQLCreateLogin }
 
   TMSSQLCreateLogin = class(TSQLCreateLogin)
@@ -1001,9 +1022,311 @@ type
   public
   end;
 
+
+  { TMSSQLCreateMessageType }
+  TTMSSQLMessageTypeValidation = (mtvNULL, mtvNONE, mtvEMPTY, mtvWELL_FORMED_XML, mtvVALID_XML);
+
+  TMSSQLCreateMessageType = class(TSQLCreateCommandAbstract)
+  private
+    FMessageTypeValidation: TTMSSQLMessageTypeValidation;
+    FOwnerName: string;
+    FSchemaCollectionName: string;
+  protected
+    procedure SetName(AValue: string); override;
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property OwnerName:string read FOwnerName write FOwnerName;
+    property SchemaCollectionName:string read FSchemaCollectionName write FSchemaCollectionName;
+    property MessageTypeValidation:TTMSSQLMessageTypeValidation read FMessageTypeValidation write FMessageTypeValidation;
+  end;
+
+  { TMSSQLAlterMessageType }
+
+  TMSSQLAlterMessageType = class(TSQLCreateCommandAbstract)
+  private
+    FMessageTypeValidation: TTMSSQLMessageTypeValidation;
+    FSchemaCollectionName: string;
+  protected
+    procedure SetName(AValue: string); override;
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property SchemaCollectionName:string read FSchemaCollectionName write FSchemaCollectionName;
+    property MessageTypeValidation:TTMSSQLMessageTypeValidation read FMessageTypeValidation write FMessageTypeValidation;
+  end;
+
+  { TMSSQLDropMessageType }
+
+  TMSSQLDropMessageType = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure MakeSQL;override;
+  public
+  end;
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLDisableTrigger }
+
+procedure TMSSQLDisableTrigger.InitParserTree;
+begin
+  (*
+  DISABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
+  ON { object_name | DATABASE | ALL SERVER } [ ; ]
+  ----------------------------------------
+  *)
+end;
+
+procedure TMSSQLDisableTrigger.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLDisableTrigger.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLEnableTrigger }
+
+procedure TMSSQLEnableTrigger.InitParserTree;
+begin
+  (*
+  ENABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
+  ON { object_name | DATABASE | ALL SERVER } [ ; ]
+  *)
+end;
+
+procedure TMSSQLEnableTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TMSSQLEnableTrigger.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+{ TMSSQLDropMessageType }
+
+procedure TMSSQLDropMessageType.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  (*
+    DROP MESSAGE TYPE message_type_name
+   [ ; ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'MESSAGE', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+end;
+
+procedure TMSSQLDropMessageType.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord ;
+  end;
+end;
+
+procedure TMSSQLDropMessageType.MakeSQL;
+var
+  S: String;
+begin
+  S:='DROP MESSAGE TYPE '+Name;
+  AddSQLCommand(S);
+end;
+
+{ TMSSQLAlterMessageType }
+
+procedure TMSSQLAlterMessageType.SetName(AValue: string);
+begin
+  FName:=AValue;
+end;
+
+procedure TMSSQLAlterMessageType.InitParserTree;
+var
+  FSQLTokens, T, T2, T2_1, T2_2: TSQLTokenRecord;
+begin
+  (*
+  ALTER MESSAGE TYPE message_type_name
+     VALIDATION =
+      {  NONE
+       | EMPTY
+       | WELL_FORMED_XML
+       | VALID_XML WITH SCHEMA COLLECTION schema_collection_name }
+  [ ; ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'MESSAGE', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T2:=AddSQLTokens(stKeyword, T, 'VALIDATION', []);
+    T2:=AddSQLTokens(stSymbol, T2, '=', []);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'NONE', [], 3);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'EMPTY', [], 4);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'WELL_FORMED_XML', [], 5);
+    T2_2:=AddSQLTokens(stKeyword, T2, 'VALID_XML', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'WITH', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'SCHEMA', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'COLLECTION', []);
+    T2_2:=AddSQLTokens(stIdentificator, T2_2, '', [], 6);
+end;
+
+procedure TMSSQLAlterMessageType.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    3:FMessageTypeValidation:=mtvNONE;
+    4:FMessageTypeValidation:=mtvEMPTY;
+    5:FMessageTypeValidation:=mtvWELL_FORMED_XML;
+    6:begin
+        FMessageTypeValidation:=mtvVALID_XML;
+        FSchemaCollectionName:=AWord;
+      end;
+  end;
+end;
+
+procedure TMSSQLAlterMessageType.MakeSQL;
+var
+  S: String;
+begin
+  S:='ALTER MESSAGE TYPE ' + Name;
+(*      [ VALIDATION = {  NONE
+                      | EMPTY
+                      | WELL_FORMED_XML
+                      | VALID_XML WITH SCHEMA COLLECTION schema_collection_name
+                     } ]
+  [ ; ]
+  *)
+  case FMessageTypeValidation of
+    mtvNONE:S:=S + ' VALIDATION = NONE';
+    mtvEMPTY:S:=S + ' VALIDATION = EMPTY';
+    mtvWELL_FORMED_XML:S:=S + ' VALIDATION = WELL_FORMED_XML';
+    mtvVALID_XML:S:=S + ' VALIDATION = VALID_XML WITH SCHEMA COLLECTION '+FSchemaCollectionName;
+  end;
+
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLAlterMessageType.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMSSQLAlterMessageType then
+  begin
+    SchemaCollectionName:=TMSSQLAlterMessageType(ASource).SchemaCollectionName;
+    MessageTypeValidation:=TMSSQLAlterMessageType(ASource).MessageTypeValidation;
+  end;
+  inherited Assign(ASource);
+end;
+
+{ TMSSQLCreateMessageType }
+
+procedure TMSSQLCreateMessageType.SetName(AValue: string);
+begin
+  if FName = AValue then Exit;
+  FName:=AValue;
+end;
+
+procedure TMSSQLCreateMessageType.InitParserTree;
+var
+  FSQLTokens, T, T1_1, T1, T2, T2_1, T2_2: TSQLTokenRecord;
+begin
+  (*
+  CREATE MESSAGE TYPE message_type_name
+      [ AUTHORIZATION owner_name ]
+      [ VALIDATION = {  NONE
+                      | EMPTY
+                      | WELL_FORMED_XML
+                      | VALID_XML WITH SCHEMA COLLECTION schema_collection_name
+                     } ]
+  [ ; ]
+  *)
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken]);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'MESSAGE', []);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'TYPE', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+  T1:=AddSQLTokens(stKeyword, T, 'AUTHORIZATION', [toOptional]);
+  T1_1:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+
+  T2:=AddSQLTokens(stKeyword, [T, T1_1], 'VALIDATION', [toOptional]);
+    T2:=AddSQLTokens(stSymbol, T2, '=', []);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'NONE', [], 3);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'EMPTY', [], 4);
+    T2_1:=AddSQLTokens(stKeyword, T2, 'WELL_FORMED_XML', [], 5);
+    T2_2:=AddSQLTokens(stKeyword, T2, 'VALID_XML', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'WITH', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'SCHEMA', []);
+    T2_2:=AddSQLTokens(stKeyword, T2_2, 'COLLECTION', []);
+    T2_2:=AddSQLTokens(stIdentificator, T2_2, '', [], 6);
+end;
+
+
+procedure TMSSQLCreateMessageType.InternalProcessChildToken(
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:OwnerName:=AWord;
+    3:FMessageTypeValidation:=mtvNONE;
+    4:FMessageTypeValidation:=mtvEMPTY;
+    5:FMessageTypeValidation:=mtvWELL_FORMED_XML;
+    6:begin
+        FMessageTypeValidation:=mtvVALID_XML;
+        FSchemaCollectionName:=AWord;
+      end;
+  end;
+end;
+
+procedure TMSSQLCreateMessageType.MakeSQL;
+var
+  S: String;
+begin
+  S:='CREATE MESSAGE TYPE ' + Name;
+  if OwnerName <> '' then
+    S:=S + ' AUTHORIZATION '+OwnerName;
+(*      [ VALIDATION = {  NONE
+                      | EMPTY
+                      | WELL_FORMED_XML
+                      | VALID_XML WITH SCHEMA COLLECTION schema_collection_name
+                     } ]
+  [ ; ]
+  *)
+  case FMessageTypeValidation of
+    mtvNONE:S:=S + ' VALIDATION = NONE';
+    mtvEMPTY:S:=S + ' VALIDATION = EMPTY';
+    mtvWELL_FORMED_XML:S:=S + ' VALIDATION = WELL_FORMED_XML';
+    mtvVALID_XML:S:=S + ' VALIDATION = VALID_XML WITH SCHEMA COLLECTION '+FSchemaCollectionName;
+  end;
+
+  AddSQLCommand(S);
+end;
+
+procedure TMSSQLCreateMessageType.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TMSSQLCreateMessageType then
+  begin
+    OwnerName:=TMSSQLCreateMessageType(ASource).OwnerName;
+    SchemaCollectionName:=TMSSQLCreateMessageType(ASource).SchemaCollectionName;
+    MessageTypeValidation:=TMSSQLCreateMessageType(ASource).MessageTypeValidation;
+  end;
+  inherited Assign(ASource);
+end;
 
 { TMSSQLDropDefault }
 
@@ -3961,11 +4284,6 @@ DELETE
 }
 
 ----------------------------------------
-DISABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
-ON { object_name | DATABASE | ALL SERVER } [ ; ]
-----------------------------------------
-ENABLE TRIGGER { [ schema_name . ] trigger_name [ ,...n ] | ALL }
-ON { object_name | DATABASE | ALL SERVER } [ ; ]
 ----------------------------------------
 
 -- Syntax for SQL Server and Azure SQL Database
@@ -5199,13 +5517,6 @@ ALTER MASTER KEY <alter_option>
     |
     DROP ENCRYPTION BY { SERVICE MASTER KEY | PASSWORD = 'password' }
 ----------------------------------------
-ALTER MESSAGE TYPE message_type_name
-   VALIDATION =
-    {  NONE
-     | EMPTY
-     | WELL_FORMED_XML
-     | VALID_XML WITH SCHEMA COLLECTION schema_collection_name }
-[ ; ]
 ----------------------------------------
 ALTER PARTITION FUNCTION partition_function_name()
 {
@@ -6884,14 +7195,6 @@ RETURNS @return_variable TABLE <table_type_definition>
 CREATE MASTER KEY [ ENCRYPTION BY PASSWORD ='password' ]
 [ ; ]
 ----------------------------------------
-CREATE MESSAGE TYPE message_type_name
-    [ AUTHORIZATION owner_name ]
-    [ VALIDATION = {  NONE
-                    | EMPTY
-                    | WELL_FORMED_XML
-                    | VALID_XML WITH SCHEMA COLLECTION schema_collection_name
-                   } ]
-[ ; ]
 ----------------------------------------
 CREATE PARTITION FUNCTION partition_function_name ( input_parameter_type )
 AS RANGE [ LEFT | RIGHT ]
@@ -7486,8 +7789,6 @@ DROP LOGIN login_name
 ----------------------------------------
 DROP MASTER KEY
 ----------------------------------------
-DROP MESSAGE TYPE message_type_name
-[ ; ]
 ----------------------------------------
 DROP PARTITION FUNCTION partition_function_name [ ; ]
 ----------------------------------------

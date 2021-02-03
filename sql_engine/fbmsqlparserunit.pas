@@ -31,7 +31,7 @@ const
   CharDelimiters = [',',':','}','{',';', '(', ')', '.', '[', ']', '=', '@'];
 
 type
-  TSQLParserSintax = (siGlobal, siPostgreSQL, siFirebird);
+  TSQLParserSintax = (siGlobal, siPostgreSQL, siFirebird, siMSSQL);
   TCreateMode = (cmCreate, cmAlter, {cmCreateOrAlter, }cmRecreate, cmDropAndCreate);
 
   TVisibleType = (vtNone, vtGlobal, vtLocal);
@@ -973,7 +973,7 @@ var
   SQLValidChars : set of char = ['a'..'z','A'..'Z','0'..'9', '_', '$'];
 
 implementation
-uses StrUtils, rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit;
+uses StrUtils, rxstrutils, sqlParserConsts, fbmStrConstUnit, LazUTF8, typinfo, SQLEngineInternalToolsUnit, SQLEngineAbstractUnit;
 
 
 
@@ -3464,6 +3464,19 @@ begin
     if Result='/*' then
       SkipComment2
     else
+    if (Result = '[') and (FParserSintax = siMSSQL) then
+    begin
+      FC:=Position;
+      while not Eof do
+      begin
+        if GetNextWord1([']']) = ']' then
+          break;
+      end;
+//      S1:=Copy(FSql, FC.Position, Position.Position - FC.Position);
+      Result:=Copy(FSql, WordPosition.Position, Position.Position - WordPosition.Position);
+      Stop:=true;
+    end
+    else
     if WordType(nil, Result, nil) = stTerminator then
     begin
       FC:=Position;
@@ -3652,6 +3665,8 @@ begin
   FStatementList:=TFPList.Create;
   FCommandDelemiter:=';';
   FCurrentStringDelemiter:='';
+  if Owner is TSQLEngineAbstract then
+    FParserSintax:=TSQLEngineAbstract(Owner).ParserSintax;
   SetSQL(ASql);
 end;
 
@@ -3867,6 +3882,9 @@ begin
       end;
     Result:=stIdentificator
   end
+  else
+  if {(ParserSintax = siMSSQL) and} (Length(AWord)>2) and (AWord[1]='[') and (AWord[Length(AWord)]=']') then
+    Result:=stIdentificator
   else
   if ((Length(AWord) = 1) and (AWord[1] in (CharDelimiters + ['=', '<', '>', '+', '-', '^', '[', ']', ':', '\', '*', '@']))) then
     Result:=stSymbol

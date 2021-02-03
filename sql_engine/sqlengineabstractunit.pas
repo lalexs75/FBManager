@@ -881,6 +881,7 @@ type
     FKeyTypes: TKeywordList;
     FKeyWords: TKeywordList;
     FCashedItems:TDBObjectsItems;
+    FParserSintax: TSQLParserSintax;
     procedure InternalInitEngine;
     function GetImageIndex: integer;virtual;
     procedure SetDataBaseName(const AValue: string);virtual;
@@ -980,6 +981,7 @@ type
     property SQLEngileFeatures:TSQLEngileFeatures read FSQLEngileFeatures;
     property ConnectionPlugins:TSQLEngineConnectionPlugins read FConnectionPlugins;
     property Properties:TStrings read FProperties;
+    property ParserSintax:TSQLParserSintax read FParserSintax;
     //
     property OnNewObjectByKind:TObjectByKind read FOnNewObjectByKind write FOnNewObjectByKind;
     property OnEditObject:TDBObjectEvent read FOnEditObject write FOnEditObject;
