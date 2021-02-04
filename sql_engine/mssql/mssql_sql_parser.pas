@@ -2974,17 +2974,15 @@ end;
 
 procedure TMSSQLCreateDatabase.InitParserTree;
 var
-  FSQLTokens, T: TSQLTokenRecord;
+  FSQLTokens, T, TName, T1, T1_1, T1_2, T2, T2_1: TSQLTokenRecord;
 begin
   (*
   CREATE DATABASE database_name
-  [ CONTAINMENT = { NONE | PARTIAL } ]
   [ ON
         [ PRIMARY ] <filespec> [ ,...n ]
         [ , <filegroup> [ ,...n ] ]
         [ LOG ON <filespec> [ ,...n ] ]
   ]
-  [ COLLATE collation_name ]
   [ WITH <option> [,...n ] ]
   [;]
 
@@ -3027,7 +3025,15 @@ begin
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 0);
-  T:=AddSQLTokens(stIdentificator, T, 'DATABASE', [], 1);
+  TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, TName, 'CONTAINMENT', []);
+    T:=AddSQLTokens(stSymbol, T1, '=', []);
+  T1_1:=AddSQLTokens(stKeyword, T, 'NONE', [], 2);
+  T1_2:=AddSQLTokens(stKeyword, T, 'PARTIAL', [], 2);
+
+  T2:=AddSQLTokens(stKeyword, [TName, T1_1, T1_2], 'COLLATE', []);
+  T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 3);
 end;
 
 procedure TMSSQLCreateDatabase.InternalProcessChildToken(
@@ -3036,14 +3042,28 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
+    2:Params.AddParamEx('CONTAINMENT', AWord);
+    3:Params.AddParamWithType('COLLATE', AWord);
   end;
 end;
 
 procedure TMSSQLCreateDatabase.MakeSQL;
 var
-  S: String;
+  S, S1: String;
+  P: TSQLParserField;
 begin
   S:='CREATE DATABASE ' + Name;
+  for P in Params do
+  begin
+    S1:='';
+    if P.TypeName <> '' then
+      S1:=P.Caption + ' ' + P.TypeName
+    else
+    if P.ParamValue <> '' then
+      S1:=P.Caption + ' = ' + P.ParamValue
+    ;
+    S:=S + LineEnding + '  ' + S1;
+  end;
   AddSQLCommand(S);
 end;
 
