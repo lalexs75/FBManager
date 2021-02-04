@@ -56,8 +56,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="333"/>
-        <CursorPos X="14" Y="347"/>
+        <TopLine Value="296"/>
+        <CursorPos X="3" Y="249"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="2">
           <Item0 Y="572" ID="9"/>
@@ -220,7 +220,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="152"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -229,7 +229,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="81"/>
         <CursorPos X="10" Y="99"/>
-        <UsageCount Value="105"/>
+        <UsageCount Value="115"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -238,7 +238,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="2352"/>
         <CursorPos Y="2368"/>
-        <UsageCount Value="36"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -246,17 +246,17 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="3037"/>
-        <CursorPos X="6" Y="3064"/>
-        <UsageCount Value="36"/>
+        <TopLine Value="6921"/>
+        <CursorPos X="25" Y="6947"/>
+        <UsageCount Value="46"/>
         <Bookmarks Count="1">
-          <Item0 X="3" Y="1284" ID="1"/>
+          <Item0 X="3" Y="2974" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value=""/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -264,55 +264,55 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="776"/>
         <CursorPos X="14" Y="793"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/classes/stringl.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="462"/>
         <CursorPos Y="482"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/classes/lists.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="114"/>
         <CursorPos Y="130"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-xml/src/xmlconf.pp"/>
         <UnitName Value="XMLConf"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="76"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="10" Y="110"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1936"/>
         <CursorPos X="3" Y="1937"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/shared/disk3/lazarus/components/rxnew/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="152"/>
         <CursorPos X="10" Y="166"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="fbmanager_define.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="15"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/unix/classes.pp"/>
@@ -320,45 +320,45 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="3" Y="28"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/types.pp"/>
         <UnitName Value="Types"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/unix/sysutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="59"/>
         <CursorPos X="11" Y="56"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/sysutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="130"/>
         <CursorPos X="7" Y="22"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/sysinth.inc"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/osutilsh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="28"/>
         <CursorPos X="10" Y="47"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/rtl-objpas/src/inc/strutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="139"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../tools/ibmsqlutilsunit.pas"/>
@@ -366,7 +366,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="332"/>
         <CursorPos X="27" Y="351"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/synedit/synedit.pp"/>
@@ -374,7 +374,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="2710"/>
         <CursorPos Y="2730"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgkeywordsunit.pas"/>
@@ -382,28 +382,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos X="38" Y="113"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/onlinepackagemanager/opkman_downloader.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="259"/>
         <CursorPos X="24" Y="269"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/sysutils/osutil.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="98"/>
         <CursorPos X="3" Y="101"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fb_utils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="14" Y="21"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/interfaces/gtk2/gtk2themes.pas"/>
@@ -411,14 +411,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="662"/>
         <CursorPos Y="684"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/include/bitbtn.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="141"/>
         <CursorPos Y="161"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/buttonpanel.pas"/>
@@ -426,28 +426,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="526"/>
         <CursorPos Y="547"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/include/control.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3504"/>
         <CursorPos Y="3521"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/inc/astrings.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="124"/>
         <CursorPos Y="150"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/include/radiogroup.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="363"/>
         <CursorPos Y="381"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../lazarus/lcl/pairsplitter.pas"/>
@@ -455,7 +455,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="336"/>
         <CursorPos X="3" Y="338"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../lazarus/lcl/widgetset/wspairsplitter.pp"/>
@@ -463,14 +463,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="180"/>
         <CursorPos X="3" Y="213"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="3"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxtools/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="635"/>
         <CursorPos Y="657"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/forms.pp"/>
@@ -478,34 +478,34 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="606"/>
         <CursorPos X="17" Y="621"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/include/customform.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2045"/>
         <CursorPos X="3" Y="2053"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/inc/objpash.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="201"/>
         <CursorPos X="26" Y="216"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/inc/objpas.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="320"/>
         <CursorPos Y="336"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgtypes.pas"/>
         <UnitName Value="pgTypes"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="18"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqlenginesecurityunit.pas"/>
@@ -513,7 +513,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="344"/>
         <CursorPos X="11" Y="356"/>
-        <UsageCount Value="40"/>
+        <UsageCount Value="39"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqlenginefdw.pas"/>
@@ -521,21 +521,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="133"/>
         <CursorPos X="37" Y="150"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/linux/x86_64/syscall.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="194"/>
         <CursorPos Y="219"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/inc/except.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="141"/>
         <CursorPos Y="158"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxcontrols/rxapputils.pas"/>
@@ -543,142 +543,137 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="65"/>
         <CursorPos X="28" Y="80"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-base/src/base64.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="74"/>
         <CursorPos X="28" Y="90"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/x86_64/x86_64.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="758"/>
         <CursorPos Y="772"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="27">
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="788" Column="15" TopLine="771"/>
+        <Caret Line="5330" Column="35" TopLine="5304"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2131" Column="3" TopLine="2107"/>
+        <Caret Line="5337" Column="35" TopLine="5311"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="802" Column="15" TopLine="772"/>
+        <Caret Line="5570" Column="32" TopLine="5544"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="1090" TopLine="1073"/>
+        <Caret Line="5590" Column="17" TopLine="5562"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="788" Column="15" TopLine="770"/>
+        <Caret Line="5594" Column="26" TopLine="5568"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2136" TopLine="2109"/>
+        <Caret Line="5595" Column="30" TopLine="5569"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2134" TopLine="2117"/>
+        <Caret Line="5596" Column="31" TopLine="5570"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2150" Column="18" TopLine="2121"/>
+        <Caret Line="6308" Column="14" TopLine="6281"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2140" TopLine="2114"/>
+        <Caret Line="6456" Column="32" TopLine="6429"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2147" Column="19" TopLine="2118"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2158" TopLine="2131"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2144" TopLine="2131"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2151" TopLine="2144"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2158" TopLine="2143"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2159" TopLine="2143"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2162" TopLine="2143"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2169" Column="13" TopLine="2143"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2147" TopLine="2138"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="2158" Column="36" TopLine="2153"/>
+        <Caret Line="6898" Column="18" TopLine="6872"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="534" Column="25" TopLine="510"/>
+        <Caret Line="50" Column="15" TopLine="24"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3028" Column="3" TopLine="3008"/>
+        <Caret Line="126" Column="15" TopLine="100"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3057" Column="10" TopLine="3028"/>
+        <Caret Line="131" Column="31" TopLine="105"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3067" Column="20" TopLine="3041"/>
+        <Caret Line="189" Column="15" TopLine="163"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3030" Column="3" TopLine="3015"/>
+        <Caret Line="2076" Column="19" TopLine="2049"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3035" Column="67" TopLine="3020"/>
+        <Caret Line="4770" Column="17" TopLine="4744"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3036" Column="3" TopLine="3020"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <Caret Line="3046" Column="42" TopLine="3037"/>
+        <Caret Line="130" Column="15" TopLine="104"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="132" Column="13" TopLine="105"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="192" Column="13" TopLine="165"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="194" Column="13" TopLine="167"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="534" Column="25" TopLine="504"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="3063" Column="3" TopLine="3032"/>
       </Position>
       <Position>
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
-        <Caret Line="347" Column="14" TopLine="332"/>
+        <Caret Line="346" Column="14" TopLine="330"/>
       </Position>
       <Position>
-        <Filename Value="../../sql_objects/sqlobjects.pas"/>
-        <Caret Line="1916" Column="3" TopLine="1913"/>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="3063" Column="3" TopLine="2987"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="2974" Column="3" TopLine="2972"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="4785" Column="25" TopLine="4759"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
+        <Caret Line="6914" Column="25" TopLine="6888"/>
       </Position>
     </JumpHistory>
     <RunParams>

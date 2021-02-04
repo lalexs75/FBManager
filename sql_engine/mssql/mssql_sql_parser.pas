@@ -3027,13 +3027,27 @@ begin
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 0);
   TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
 
-  T1:=AddSQLTokens(stKeyword, TName, 'CONTAINMENT', []);
+  T1:=AddSQLTokens(stKeyword, TName, 'CONTAINMENT', [toOptional]);
     T:=AddSQLTokens(stSymbol, T1, '=', []);
   T1_1:=AddSQLTokens(stKeyword, T, 'NONE', [], 2);
   T1_2:=AddSQLTokens(stKeyword, T, 'PARTIAL', [], 2);
 
-  T2:=AddSQLTokens(stKeyword, [TName, T1_1, T1_2], 'COLLATE', []);
+  T2:=AddSQLTokens(stKeyword, [TName, T1_1, T1_2], 'COLLATE', [toOptional]);
   T2_1:=AddSQLTokens(stIdentificator, T2, '', [], 3);
+    T2_1.AddChildToken([T1]);
+
+  T3:=AddSQLTokens(stKeyword, [TName, T1_1, T1_2, T2_1], 'WITH', [toOptional]);
+(*
+  FILESTREAM ( <filestream_option> [,...n ] )
+| DEFAULT_FULLTEXT_LANGUAGE = { lcid | language_name | language_alias }
+| DEFAULT_LANGUAGE = { lcid | language_name | language_alias }
+| NESTED_TRIGGERS = { OFF | ON }
+| TRANSFORM_NOISE_WORDS = { OFF | ON}
+| TWO_DIGIT_YEAR_CUTOFF = <two_digit_year_cutoff>
+| DB_CHAINING { OFF | ON }
+| TRUSTWORTHY { OFF | ON }
+| PERSISTENT_LOG_BUFFER=ON ( DIRECTORY_NAME='<Filepath to folder on DAX formatted volume>' )
+*)
 end;
 
 procedure TMSSQLCreateDatabase.InternalProcessChildToken(
