@@ -784,6 +784,7 @@ type
 
   TMSSQLDropTrigger = class(TSQLDropTrigger)
   private
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
@@ -2133,22 +2134,50 @@ begin
   T2:=AddSQLTokens(stIdentificator, T, '', [], 2);
     T:=AddSQLTokens(stSymbol, [T1, T2], ',', [toOptional]);
     T.AddChildToken(T1);
+
+  T:=AddSQLTokens(stKeyword, T1, 'ON', [toOptional]);
+    T1:=AddSQLTokens(stKeyword, T, 'DATABASE', [], 3);
+
+    T1:=AddSQLTokens(stKeyword, T, 'ALL', []);
+    T1:=AddSQLTokens(stKeyword, T1, 'SERVER', [], 4);
 end;
 
 procedure TMSSQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:FCurParam:=Params.AddParamEx(AWord, '');
+    2:if Assigned(FCurParam) then
+      begin
+        FCurParam.ParamValue:=FCurParam.Caption;
+        FCurParam.Caption:=AWord;
+      end;
+    3:TableName:='DATABASE';
+    4:TableName:='ALL SERVER';
+  end;
 end;
 
 procedure TMSSQLDropTrigger.MakeSQL;
 var
-  S: String;
+  S, S1: String;
+  P: TSQLParserField;
 begin
   S:='DROP TRIGGER ';
   if ooIfExists in Options then
     S:=S + 'IF EXISTS ';
 
+  S1:='';
+  for P in Params do
+  begin
+    if S1<>'' then S1:=', ';
+    if P.ParamValue <> '' then S1:=S1 + P.ParamValue + '.';
+    S1:=S1 + P.Caption;
+  end;
+  S:=S + S1;
+
+  if TableName <> '' then
+    S:=S + ' ON '+TableName;
   AddSQLCommand(S);
 end;
 
