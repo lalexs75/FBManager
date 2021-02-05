@@ -70,7 +70,7 @@
   cf_mssql_mainUnit,
   mssql_sql_lines_unit,
   mssql_ObjectsList,
-  mssql_FreeTDSConfig_Unit,
+  //mssql_FreeTDSConfig_Unit,
 {$ENDIF}
 
 {$IFDEF PostgreSQL}

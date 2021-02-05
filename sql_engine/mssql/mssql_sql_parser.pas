@@ -525,17 +525,31 @@ type
     property SchemaName;
   end;
 
+
+  TMSSQLCreateDatabaseAction = (cdaDatabase, cdaScopedCredential,
+    cdaEncryptionKeyByCertificate, cdaEncryptionKeyByAsymmetricKey);
+
   { TMSSQLCreateDatabase }
 
   TMSSQLCreateDatabase = class(TSQLCreateDatabase)
   private
+    FCreateDatabaseAction: TMSSQLCreateDatabaseAction;
     FCurParam: TSQLParserField;
+    FEncryptionAlgorithm: string;
+    FEncryptionType: string;
+    FIdentityName: string;
+    FPassword: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property CreateDatabaseAction:TMSSQLCreateDatabaseAction read FCreateDatabaseAction write FCreateDatabaseAction;
+    property IdentityName:string read FIdentityName write FIdentityName;
+    property Password:string read FPassword write FPassword;
+    property EncryptionAlgorithm:string read FEncryptionAlgorithm write FEncryptionAlgorithm;
+    property EncryptionType:string read FEncryptionType write FEncryptionType;
   end;
 
   { TMSSQLDropDatabase }
@@ -2974,7 +2988,10 @@ end;
 
 procedure TMSSQLCreateDatabase.InitParserTree;
 var
-  FSQLTokens, T, TName, T1, T1_1, T1_2, T2, T2_1: TSQLTokenRecord;
+  FSQLTokens, T, TName, T1, T1_1, T1_2, T2, T2_1, T3, T5, T5_1,
+    T5_2, T5_3, T5_4, T3_1, T3_2, T3_2_1, T3_3, T3_3_1, T3_4,
+    T3_4_1, T3_5, T3_5_1, T3_6, T3_6_1, T3_7, T3_7_1, T3_8,
+    T3_8_1, T3_9, T3_9_1, T3_4_2, T3_5_2, T3_7_2, T3_8_2: TSQLTokenRecord;
 begin
   (*
   CREATE DATABASE database_name
@@ -3021,11 +3038,10 @@ begin
   FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY_OPTIMIZED_DATA ]
       <filespec> [ ,...n ]
   }
-
   *)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0);
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 0);
-  TName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 0);
+  TName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
 
   T1:=AddSQLTokens(stKeyword, TName, 'CONTAINMENT', [toOptional]);
     T:=AddSQLTokens(stSymbol, T1, '=', []);
@@ -3037,6 +3053,48 @@ begin
     T2_1.AddChildToken([T1]);
 
   T3:=AddSQLTokens(stKeyword, [TName, T1_1, T1_2, T2_1], 'WITH', [toOptional]);
+    T3_1:=AddSQLTokens(stKeyword, T3, 'FILESTREAM', []);
+    T3_2:=AddSQLTokens(stKeyword, T3, 'DEFAULT_FULLTEXT_LANGUAGE', []);
+      T:=AddSQLTokens(stSymbol, T3_2, '=', []);
+    T3_2_1:=AddSQLTokens(stIdentificator, T, '', [], 4);
+
+    T3_3:=AddSQLTokens(stKeyword, T3, 'DEFAULT_LANGUAGE', []);
+      T:=AddSQLTokens(stSymbol, T3_3, '=', []);
+    T3_3_1:=AddSQLTokens(stIdentificator, T, '', [], 5);
+
+    T3_4:=AddSQLTokens(stKeyword, T3, 'NESTED_TRIGGERS', []);
+      T:=AddSQLTokens(stSymbol, T3_4, '=', []);
+    T3_4_1:=AddSQLTokens(stKeyword, T, 'ON', [], 6);
+    T3_4_2:=AddSQLTokens(stKeyword, T, 'OFF', [], 6);
+
+    T3_5:=AddSQLTokens(stKeyword, T3, 'TRANSFORM_NOISE_WORDS', []);
+      T:=AddSQLTokens(stSymbol, T3_5, '=', []);
+    T3_5_1:=AddSQLTokens(stKeyword, T, 'ON', [], 7);
+    T3_5_2:=AddSQLTokens(stKeyword, T, 'OFF', [], 7);
+
+    T3_6:=AddSQLTokens(stKeyword, T3, 'TWO_DIGIT_YEAR_CUTOFF', []);
+      T:=AddSQLTokens(stSymbol, T3_6, '=', []);
+    T3_6_1:=AddSQLTokens(stIdentificator, T, '', [], 8);
+
+    T3_7:=AddSQLTokens(stKeyword, T3, 'DB_CHAINING', []);
+    T3_7_1:=AddSQLTokens(stKeyword, T3_7, 'ON', [], 9);
+    T3_7_2:=AddSQLTokens(stKeyword, T3_7, 'OFF', [], 9);
+
+    T3_8:=AddSQLTokens(stKeyword, T3, 'TRUSTWORTHY', []);
+    T3_8_1:=AddSQLTokens(stKeyword, T3_8, 'ON', [], 30);
+    T3_8_2:=AddSQLTokens(stKeyword, T3_8, 'OFF', [], 30);
+
+    T3_9:=AddSQLTokens(stKeyword, T3, 'PERSISTENT_LOG_BUFFER', []);
+      T:=AddSQLTokens(stSymbol, T3_9, '=', []);
+    T3_9_1:=AddSQLTokens(stKeyword, T, 'ON', []);
+    T3_9_1:=AddSQLTokens(stSymbol, T3_9_1, '(', []);
+    T3_9_1:=AddSQLTokens(stKeyword, T3_9_1, 'DIRECTORY_NAME', []);
+    T3_9_1:=AddSQLTokens(stSymbol, T3_9_1, '=', []);
+    T3_9_1:=AddSQLTokens(stString, T3_9_1, '', [], 31);
+    T3_9_1:=AddSQLTokens(stSymbol, T3_9_1, ')', []);
+
+    T:=AddSQLTokens(stSymbol, [T3_2_1, T3_3_1, T3_4_1, T3_4_2, T3_5_1, T3_5_2, T3_6_1, T3_7_1, T3_7_2, T3_8_1, T3_8_2, T3_9_1], ',', [toOptional]);
+      T.AddChildToken([T3_2, T3_3, T3_4, T3_5, T3_6, T3_7, T3_8, T3_9]);
 (*
   FILESTREAM ( <filestream_option> [,...n ] )
 | DEFAULT_FULLTEXT_LANGUAGE = { lcid | language_name | language_alias }
@@ -3048,6 +3106,70 @@ begin
 | TRUSTWORTHY { OFF | ON }
 | PERSISTENT_LOG_BUFFER=ON ( DIRECTORY_NAME='<Filepath to folder on DAX formatted volume>' )
 *)
+
+(*
+CREATE DATABASE SCOPED CREDENTIAL credential_name
+WITH IDENTITY = 'identity_name'
+    [ , SECRET = 'secret' ]
+*)
+  T5:=AddSQLTokens(stKeyword, FSQLTokens, 'SCOPED', [], 10);
+  T5:=AddSQLTokens(stKeyword, T5, 'CREDENTIAL', []);
+    TName:=AddSQLTokens(stIdentificator, T5, '', [], 11);
+    T:=AddSQLTokens(stKeyword, TName, 'WITH', []);
+    T:=AddSQLTokens(stKeyword, T, 'IDENTITY', []);
+    T:=AddSQLTokens(stSymbol, T, '=', []);
+    T:=AddSQLTokens(stString, T, '', [], 12);
+    T:=AddSQLTokens(stSymbol, T, ',', [toOptional]);
+    T:=AddSQLTokens(stKeyword, T, 'SECRET', []);
+    T:=AddSQLTokens(stSymbol, T, '=', []);
+    T:=AddSQLTokens(stString, T, '', [], 13);
+
+    (*
+    ---
+    CREATE DATABASE ENCRYPTION KEY
+           WITH ALGORITHM = { AES_128 | AES_192 | AES_256 | TRIPLE_DES_3KEY }
+       ENCRYPTION BY SERVER
+        {
+            CERTIFICATE Encryptor_Name |
+            ASYMMETRIC KEY Encryptor_Name
+        }
+    [ ; ]
+
+    *)
+  T5:=AddSQLTokens(stKeyword, FSQLTokens, 'ENCRYPTION', []);
+  T5:=AddSQLTokens(stKeyword, T5, 'KEY', []);
+  T5:=AddSQLTokens(stKeyword, T5, 'WITH', []);
+  T5:=AddSQLTokens(stKeyword, T5, 'ALGORITHM', []);
+  T5:=AddSQLTokens(stSymbol, T5, '=', []);
+    T5_1:=AddSQLTokens(stKeyword, T5, 'AES_128', [], 21);
+    T5_2:=AddSQLTokens(stKeyword, T5, 'AES_192', [], 21);
+    T5_3:=AddSQLTokens(stKeyword, T5, 'AES_256', [], 21);
+    T5_4:=AddSQLTokens(stKeyword, T5, 'TRIPLE_DES_3KEY', [], 21);
+  T5:=AddSQLTokens(stKeyword, [T5_1, T5_2, T5_3, T5_4], 'ENCRYPTION', []);
+  T5:=AddSQLTokens(stKeyword, T5, 'BY', []);
+  T5:=AddSQLTokens(stKeyword, T5, 'SERVER', []);
+    T5_1:=AddSQLTokens(stKeyword, T5, 'CERTIFICATE', []);
+    T5_1:=AddSQLTokens(stIdentificator, T5_1, '', [], 22);
+    T5_2:=AddSQLTokens(stKeyword, T5, 'ASYMMETRIC', []);
+    T5_2:=AddSQLTokens(stKeyword, T5_2, 'KEY', []);
+    T5_2:=AddSQLTokens(stIdentificator, T5_2, '', [], 23);
+
+(*
+---
+  CREATE DATABASE AUDIT SPECIFICATION audit_specification_name
+  {
+      FOR SERVER AUDIT audit_name
+          [ { ADD ( { <audit_action_specification> | audit_action_group_name } )
+        } [, ...n] ]
+      [ WITH ( STATE = { ON | OFF } ) ]
+  }
+  [ ; ]
+  <audit_action_specification>::=
+  {
+        action [ ,...n ]ON [ class :: ] securable BY principal [ ,...n ]
+  }
+---
+*)
 end;
 
 procedure TMSSQLCreateDatabase.InternalProcessChildToken(
@@ -3055,34 +3177,124 @@ procedure TMSSQLCreateDatabase.InternalProcessChildToken(
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
-    1:Name:=AWord;
+    1:begin
+        Name:=AWord;
+        CreateDatabaseAction:=cdaDatabase; //, cdaScopedCredential
+      end;
     2:Params.AddParamEx('CONTAINMENT', AWord);
-    3:Params.AddParamWithType('COLLATE', AWord);
+    3:Params.AddParamEx('COLLATE', AWord);
+    4:FCurParam:=Params.AddParamEx('DEFAULT_FULLTEXT_LANGUAGE', AWord);
+    5:FCurParam:=Params.AddParamEx('DEFAULT_LANGUAGE', AWord);
+    6:FCurParam:=Params.AddParamEx('NESTED_TRIGGERS', AWord);
+    7:FCurParam:=Params.AddParamEx('TRANSFORM_NOISE_WORDS', AWord);
+    8:FCurParam:=Params.AddParamEx('TWO_DIGIT_YEAR_CUTOFF', AWord);
+    9:FCurParam:=Params.AddParamEx('DB_CHAINING', AWord);
+    30:FCurParam:=Params.AddParamEx('TRUSTWORTHY', AWord);
+    31:FCurParam:=Params.AddParamEx('PERSISTENT_LOG_BUFFER', AWord);
+
+    10:CreateDatabaseAction:=cdaScopedCredential;
+    11:Name:=AWord;
+    12:IdentityName:=AWord;
+    13:Password:=AWord;
+    21:EncryptionAlgorithm:=AWord;
+    22:begin
+         CreateDatabaseAction:=cdaEncryptionKeyByCertificate;
+         EncryptionType:=AWord;
+       end;
+    23:begin
+         CreateDatabaseAction:=cdaEncryptionKeyByAsymmetricKey;
+         EncryptionType:=AWord;
+       end;
   end;
 end;
 
 procedure TMSSQLCreateDatabase.MakeSQL;
 var
-  S, S1: String;
+  S, S1, S2: String;
   P: TSQLParserField;
 begin
-  S:='CREATE DATABASE ' + Name;
-  for P in Params do
+  S:='CREATE DATABASE ';
+  if CreateDatabaseAction = cdaDatabase then
   begin
+    S:=S + Name;
     S1:='';
-    if P.TypeName <> '' then
-      S1:=P.Caption + ' ' + P.TypeName
+    S2:='';
+    for P in Params do
+    begin
+      if (P.Caption = 'FILESTREAM') then
+      begin
+
+      end
+      else
+      if (P.Caption = 'DEFAULT_FULLTEXT_LANGUAGE') or
+         (P.Caption = 'DEFAULT_LANGUAGE') or
+         (P.Caption = 'NESTED_TRIGGERS') or
+         (P.Caption = 'TRANSFORM_NOISE_WORDS') or
+         (P.Caption = 'TWO_DIGIT_YEAR_CUTOFF') then
+      begin
+        if S1<>'' then S1:=S1 + ',' + LineEnding;
+        S1:=S1 + '  ' + P.Caption + ' = ' + P.ParamValue;
+      end
+      else
+      if (P.Caption = 'DB_CHAINING') or
+         (P.Caption = 'TRUSTWORTHY') then
+      begin
+        if S1<>'' then S1:=S1 + ',' + LineEnding;
+        S1:=S1 + '  ' + P.Caption + ' ' + P.ParamValue;
+      end
+      else
+      if (P.Caption = 'PERSISTENT_LOG_BUFFER') then
+      begin
+        if S1<>'' then S1:=S1 + ',' + LineEnding;
+        S1:=S1 + '  PERSISTENT_LOG_BUFFER=ON (DIRECTORY_NAME='+P.ParamValue + ')'
+      end
+      else
+        S2:=S2 + '  ' + P.Caption + ' ' + P.ParamValue
+    end;
+    if S2<>'' then S:=S + LineEnding + S2;
+    if S1<>'' then S:=S + LineEnding + 'WITH' + LineEnding + S1;
+  end
+  else
+  if CreateDatabaseAction = cdaScopedCredential then
+  begin
+    S:=S + 'SCOPED CREDENTIAL ' + Name + LineEnding + 'WITH' + LineEnding + '  IDENTITY = '+IdentityName;
+    if Password<>'' then S:=S + ',' + LineEnding +  '  SECRET = '+Password;
+  end
+  else
+  if CreateDatabaseAction in [cdaEncryptionKeyByCertificate, cdaEncryptionKeyByAsymmetricKey] then
+  begin
+    S:=S + 'ENCRYPTION KEY' + LineEnding + 'WITH'+LineEnding +
+      '  ALGORITHM = ' + EncryptionAlgorithm + LineEnding + '  ENCRYPTION BY SERVER ';
+
+    if CreateDatabaseAction = cdaEncryptionKeyByCertificate then
+      S:=S + 'CERTIFICATE ' + EncryptionType
     else
-    if P.ParamValue <> '' then
-      S1:=P.Caption + ' = ' + P.ParamValue
-    ;
-    S:=S + LineEnding + '  ' + S1;
+      S:=S + 'ASYMMETRIC KEY ' + EncryptionType
+
+(*
+    { AES_128 | AES_192 | AES_256 | TRIPLE_DES_3KEY }
+       ENCRYPTION BY SERVER
+        {
+            CERTIFICATE Encryptor_Name |
+            ASYMMETRIC KEY Encryptor_Name
+        }
+    ; *)
+
+
   end;
   AddSQLCommand(S);
 end;
 
 procedure TMSSQLCreateDatabase.Assign(ASource: TSQLObjectAbstract);
 begin
+  if ASource is TMSSQLCreateDatabase then
+  begin
+    CreateDatabaseAction:=TMSSQLCreateDatabase(ASource).CreateDatabaseAction;
+    IdentityName:=TMSSQLCreateDatabase(ASource).IdentityName;
+    Password:=TMSSQLCreateDatabase(ASource).Password;
+    EncryptionAlgorithm:=TMSSQLCreateDatabase(ASource).EncryptionAlgorithm;
+    EncryptionType:=TMSSQLCreateDatabase(ASource).EncryptionType;
+  end;
   inherited Assign(ASource);
 end;
 
@@ -6918,33 +7130,10 @@ CREATE CRYPTOGRAPHIC PROVIDER provider_name
     FROM FILE = path_of_DLL
 ----------------------------------------
 ----------------------------------------
-CREATE DATABASE AUDIT SPECIFICATION audit_specification_name
-{
-    FOR SERVER AUDIT audit_name
-        [ { ADD ( { <audit_action_specification> | audit_action_group_name } )
-      } [, ...n] ]
-    [ WITH ( STATE = { ON | OFF } ) ]
-}
-[ ; ]
-<audit_action_specification>::=
-{
-      action [ ,...n ]ON [ class :: ] securable BY principal [ ,...n ]
-}
 ----------------------------------------
 -- Syntax for SQL Server
 
-CREATE DATABASE ENCRYPTION KEY
-       WITH ALGORITHM = { AES_128 | AES_192 | AES_256 | TRIPLE_DES_3KEY }
-   ENCRYPTION BY SERVER
-    {
-        CERTIFICATE Encryptor_Name |
-        ASYMMETRIC KEY Encryptor_Name
-    }
-[ ; ]
 ----------------------------------------
-CREATE DATABASE SCOPED CREDENTIAL credential_name
-WITH IDENTITY = 'identity_name'
-    [ , SECRET = 'secret' ]
 
 
 ----------------------------------------
