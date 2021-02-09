@@ -3,7 +3,7 @@ inherited pgDBObjectsSizeTools: TpgDBObjectsSizeTools
   Width = 834
   ClientHeight = 323
   ClientWidth = 834
-  DesignLeft = 688
+  DesignLeft = 598
   DesignTop = 372
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
@@ -58,6 +58,8 @@ inherited pgDBObjectsSizeTools: TpgDBObjectsSizeTools
         Filter.AllValue = '(Все значения)'
         Filter.EmptyFont.Style = [fsItalic]
         Filter.ItemIndex = -1
+        Footer.DisplayFormat = 'Count: %d'
+        Footer.ValueType = fvtCount
         Footers = <>
       end    
       item
@@ -375,7 +377,6 @@ inherited pgDBObjectsSizeTools: TpgDBObjectsSizeTools
       'codepage='
       'controls_cp=CP_UTF8'
     )
-    Connected = True
     DesignConnection = True
     HostName = '127.0.0.1'
     Port = 0
