@@ -296,7 +296,7 @@ begin
     rxLocalVars.First;
     while not rxLocalVars.EOF do
     begin
-      if (KeyStartWord = '') or (UpperCase(Copy(rxLocalVarsVAR_NAME.AsString, 1, Length(KeyStartWord))) = KeyStartWord) then
+      if (KeyStartWord = '') or (CompareText(rxLocalVarsVAR_NAME.AsString, KeyStartWord) = 0) then
       begin
         R:=AItems.Add(scotParam, rxLocalVarsVAR_NAME.AsString, rxLocalVarsVAR_TYPE.AsString, rxLocalVarsVAR_DESC.AsString);
         R.IOTypeName:='Local';

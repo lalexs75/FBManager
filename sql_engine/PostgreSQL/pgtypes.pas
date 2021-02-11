@@ -111,9 +111,9 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
-    function Add(AParamName:string):TPGSettingParam;
+    function Add(const AParamName:string):TPGSettingParam;
     function GetEnumerator: TPGSettingParamsEnumerator;
-    function FindParam(AParamName:string):TPGSettingParam;
+    function FindParam(const AParamName:string):TPGSettingParam;
     property Items[AIndex:integer]:TPGSettingParam read GetItems; default;
     property Count:integer read GetCount;
   end;
@@ -251,7 +251,7 @@ begin
   FList.Clear;
 end;
 
-function TPGSettingParams.Add(AParamName: string): TPGSettingParam;
+function TPGSettingParams.Add(const AParamName: string): TPGSettingParam;
 begin
   Result:=TPGSettingParam.Create;
   Result.ParamName:=AParamName;
@@ -263,14 +263,13 @@ begin
   Result:=TPGSettingParamsEnumerator.Create(Self);
 end;
 
-function TPGSettingParams.FindParam(AParamName: string): TPGSettingParam;
+function TPGSettingParams.FindParam(const AParamName: string): TPGSettingParam;
 var
   i: Integer;
 begin
-  AParamName:=UpperCase(AParamName);
   Result:=nil;
   for i:=0 to FList.Count-1 do
-    if UpperCase(TPGSettingParam(FList[i]).ParamName) = AParamName then
+    if CompareText(TPGSettingParam(FList[i]).ParamName, AParamName)=0 then
       Exit(TPGSettingParam(FList[i]));
 end;
 

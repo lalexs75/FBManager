@@ -502,7 +502,7 @@ begin
     rxParamList.First;
     while not rxParamList.EOF do
     begin
-      if (KeyStartWord = '') or (UpperCase(Copy(rxParamListParName.AsString, 1, Length(KeyStartWord))) = KeyStartWord) then
+      if (KeyStartWord = '') or (CompareText(rxParamListParName.AsString, KeyStartWord) = 0) then
       begin
         R:=Items.Add(scotParam, rxParamListParName.AsString, rxParamListType.AsString, rxParamListDesc.AsString);
         R.IOTypeName:=rxParamListInOut.DisplayText;
@@ -522,7 +522,7 @@ begin
     try
       LVP.ParseString(EditorFrame.EditorText);
       for P in LVP.Params do
-        if (KeyStartWord = '') or (UpperCase(Copy(P.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
+        if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord)=0) then
           Items.Add(P);
     finally
       LVP.Free;
@@ -575,7 +575,7 @@ begin
     if Assigned(FSt) and Assigned(FSt.SQLCommand) and (FSt.SQLCommand is TSQLCommandAbstractSelect) then
     begin
       for T in TSQLCommandAbstractSelect(FSt.SQLCommand).Tables do
-        if UpperCase(T.TableAlias) = UpperCase(DBObjName) then
+        if CompareText(T.TableAlias, DBObjName) = 0 then
           Items.FillFieldList(DBObject.OwnerDB.DBObjectByName(T.Name));
     end;
   end;
@@ -604,7 +604,7 @@ begin
     begin
       for T in TSQLCommandAbstractSelect(FSt.SQLCommand).Tables do
       begin
-        if UpperCase(T.TableAlias) = UpperCase(ATableAlias) then
+        if CompareText(T.TableAlias, ATableAlias)=0 then
         begin
           Result:=TPGFunction(DBObject).OwnerDB.DBObjectByName(T.Name);
           if Assigned(Result) then

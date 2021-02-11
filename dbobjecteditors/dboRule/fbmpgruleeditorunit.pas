@@ -115,7 +115,7 @@ procedure TPGRuleEditorPage.OnGetFieldsList(Sender: Tfdbm_SynEditorFrame;
 var
   T:TDBDataSetObject;
 begin
-  if (UpperCase(DBObjName) = 'OLD') or (UpperCase(DBObjName) = 'NEW') then
+  if (CompareText(DBObjName, 'OLD')=0) or (CompareText(DBObjName, 'NEW')=0) then
   begin
     if (cbTables.ItemIndex>-1) and (cbTables.ItemIndex<cbTables.Items.Count) then
     begin

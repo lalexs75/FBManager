@@ -1714,7 +1714,7 @@ begin
   end;
 end;
 
-procedure DoFillTableList(ATableName:string);
+procedure DoFillTableList{(ATableName:string)};
 
 procedure DoFill2(D:TDBRootObject);
 var
@@ -1820,7 +1820,7 @@ begin
 
     MakeAliasList(nil);
 
-    DoFillTableList(UpperCase(CurStr));
+    DoFillTableList{(UpperCase(CurStr))};
 
 
     if Assigned(FOnGetObjAliasList) then

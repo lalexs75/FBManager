@@ -79,7 +79,7 @@ type
     FImageIndex:integer;
     FRecordType: TDBInspectorRecordType;
     function GetCaptionFullPatch: string;
-    function GetItem(AName: string): TDBInspectorRecord;
+    function GetItem(const AName: string): TDBInspectorRecord;
     function GetObjectCount: integer;virtual;
     function GetObjectName(I: integer): string;virtual;
   protected
@@ -1148,13 +1148,12 @@ begin
     Result:=FCaption;
 end;
 
-function TDBInspectorRecord.GetItem(AName: string): TDBInspectorRecord;
+function TDBInspectorRecord.GetItem(const AName: string): TDBInspectorRecord;
 var
   i:integer;
 begin
-  AName:=UpperCase(AName);
   for i:=0 to FObjectList.Count-1 do
-    if UpperCase(TDBInspectorRecord(FObjectList[i]).Caption) = AName then
+    if CompareText(TDBInspectorRecord(FObjectList[i]).Caption, AName)=0 then
     begin
       Result:=TDBInspectorRecord(FObjectList[i]);
       exit;

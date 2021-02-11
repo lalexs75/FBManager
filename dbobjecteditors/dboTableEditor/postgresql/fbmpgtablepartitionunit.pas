@@ -561,25 +561,24 @@ begin
 end;
 
 function TfbmPGTablePartitionPage.GenerateSectionName: string;
-function DoFind(AName:string):boolean;
+function DoFind(const AName:string):boolean;
 var
   i: Integer;
   P: TPGTablePartition;
   T: TDBObject;
 begin
-  AName:=UpperCase(AName);
   Result:=rxSection.Locate('NAME', AName, [loCaseInsensitive]);
   if not Result then
   begin
     for i:=0 to DBObject.OwnerRoot.CountObject-1 do
     begin
       T:=DBObject.OwnerRoot[i];
-      Result:=AName = UpperCase(T.Caption);
+      Result:=CompareText(AName, T.Caption)=0;
       if Result then Exit;
 
       for P in TPGTable(T).PartitionList do
       begin
-        if AName = UpperCase(P.Name) then
+        if CompareText(AName, P.Name)=0 then
           Exit(true);
       end;
     end;

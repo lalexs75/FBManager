@@ -7533,7 +7533,7 @@ begin
     //DefPos:=0;
     DefPos:=Pos(':=',VarType);
     if DefPos = 0 then
-      DefPos:=Pos('=', UpperCase(VarType));
+      DefPos:=Pos('=', VarType);
     if DefPos = 0 then
       DefPos:=Pos('DEFAULT', UpperCase(VarType));
 
@@ -7719,16 +7719,16 @@ begin
     1:FExceptionLevel:=elDEBUG;
     2:FExceptionLevel:=elEXCEPTION;
     3:begin
-        if UpperCase(AWord) = 'LOG' then
+        if CompareText(AWord, 'LOG')=0 then
           FExceptionLevel:=elLOG
         else
-        if UpperCase(AWord) = 'INFO' then
+        if CompareText(AWord, 'INFO')=0 then
           FExceptionLevel:=elINFO
         else
-        if UpperCase(AWord) = 'NOTICE' then
+        if CompareText(AWord, 'NOTICE')=0 then
           FExceptionLevel:=elNOTICE
         else
-        if UpperCase(AWord) = 'WARNING' then
+        if CompareText(AWord, 'WARNING')=0 then
           FExceptionLevel:=elWARNING
         else
           ;

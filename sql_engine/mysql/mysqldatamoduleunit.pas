@@ -85,7 +85,7 @@ var
   R: TMySQLServerVersion;
 begin
   for R in TMySQLServerVersion do
-    if UpperCase(MySQLServerVersionNames[R]) = UpperCase(AStr) then
+    if CompareText(MySQLServerVersionNames[R], AStr)=0 then
       exit(R);
   Result:=myUnknow;
 end;

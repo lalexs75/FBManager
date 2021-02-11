@@ -3962,7 +3962,8 @@ begin
     S:=ASQLParser.GetNextWord;
     if S = '(' then Result:=Result + ' ' + S + ASQLParser.GetToBracket(')') + ')'
     else
-    if (S = ',') or (S = ';') or (UpperCase(S) = 'INNER') or (UpperCase(S) = 'LEFT') or (UpperCase(S) = 'RIGHT') or (UpperCase(S) = 'FULL') or (UpperCase(S) = 'WHERE') then
+    if (S = ',') or (S = ';') or (CompareText(S,'INNER')=0) or (CompareText(S, 'LEFT')=0) or (CompareText(S, 'RIGHT')=0)
+      or (CompareText(S, 'FULL')=0) or (CompareText(S, 'WHERE')=0) then
     begin
       Stop:=true;
       ASQLParser.Position:=P;
@@ -8130,7 +8131,7 @@ var
   B: Integer;
 begin
   AValue:=TrimLeft(AValue);
-  if UpperCase(Copy(AValue, 1, 2)) = 'AS' then
+  if CompareText(Copy(AValue, 1, 2), 'AS')=0 then
     AValue:=TrimLeft(Copy(AValue, 3, Length(AValue)));
 
   L:=TFBLocalVariableParser.Create(nil);

@@ -240,7 +240,7 @@ begin
       end
       else
       begin
-        if UpperCase(ExtractFileExt(Rec.Name)) = '.LRF' then
+        if CompareText(ExtractFileExt(Rec.Name), '.LRF')=0 then
         begin
           Node:=TreeView1.Items.AddChild(AOwner,  MenuItemStr(SysToUTF8(Rec.Name))); //Copy(Rec.Name, 1, Length(Rec.Name)+4));
           Node.ImageIndex:=8;
