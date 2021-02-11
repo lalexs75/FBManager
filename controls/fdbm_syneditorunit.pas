@@ -1985,10 +1985,10 @@ end;
 procedure Tfdbm_SynEditorFrame.ceCharUpperCaseExecute(Sender: TObject);
 begin
   case TComponent(Sender).Tag of
-    0:TextEditor.CommandProcessor(ecUpperCaseBlock, '', nil); //TextEditor.Text:=UTF8UpperCase(TextEditor.Text);
-    1:TextEditor.CommandProcessor(ecLowerCaseBlock, '', nil); //TextEditor.Text:=UTF8LowerCase(TextEditor.Text);
-    2:TextEditor.CommandProcessor(ecTitleCase, '', nil); //SynEdit1.Text:=UTF8UpperCase(SynEdit1.Text); //Name case
-    3:TextEditor.CommandProcessor(ecToggleCaseBlock, '', nil); //SynEdit1.Text:=UpperCase(SynEdit1.Text);}  //Invert case
+    0:TextEditor.CommandProcessor(ecUpperCaseBlock, '', nil);
+    1:TextEditor.CommandProcessor(ecLowerCaseBlock, '', nil);
+    2:TextEditor.CommandProcessor(ecTitleCase, '', nil);
+    3:TextEditor.CommandProcessor(ecToggleCaseBlock, '', nil);
   else
   end;
 end;

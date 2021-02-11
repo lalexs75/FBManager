@@ -2285,7 +2285,7 @@ begin
       Rec:=Fields.Add(Trim(QFields.Fields.ByNameAsString['rdb$field_name'])) as TFirebirdField;
 
       S:=Trim(QFields.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
-      if LowerCase(copy(S,1, 4))<>'rdb$' then
+      if CompareText(copy(S,1, 4), 'rdb$')<>0 then
         Rec.FieldTypeDomain:=S;
 
       S:=QFields.Fields.ByNameAsString['RDB$DEFAULT_SOURCE'];

@@ -154,7 +154,7 @@ begin
     edtTrgName.Text:=DBObject.Caption;
     edtOrder.Value:=TFireBirdTriger(DBObject).Sequence;
     S:=TrimLeft(TFireBirdTriger(DBObject).TriggerBody);
-    if UpperCAse(Copy(S, 1, 2)) = 'AS' then
+    if CompareText(Copy(S, 1, 2), 'AS')=0 then
       S:=TrimLeft(Copy(S, 3, Length(S)));
 
     if tabLocalVar.TabVisible then
@@ -192,7 +192,7 @@ procedure TfbTriggerHeaderEditFrame.OnGetFieldsList(
 var
   DBTable:TDBDataSetObject;
 begin
-  if (UpperCase(DBObjName) = 'OLD') or (UpperCase(DBObjName) = 'NEW') then
+  if (CompareText(DBObjName, 'OLD')=0) or (CompareText(DBObjName, 'NEW')=0) then
   begin
     if Assigned(DBObject.OwnerDB) then
     begin
@@ -306,20 +306,8 @@ begin
     try
       LVP.ParseLocalVarsEx(EditorFrame.EditorText);
       for F in LVP.Params do
-        if (KeyStartWord = '') or (UpperCase(Copy(F.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
+        if (KeyStartWord = '') or (CompareText(F.Caption, KeyStartWord)= 0) then
           Items.Add(F);
-
-
-{      for i:=0 to LVP.Params.Count-1 do
-      begin
-        if (KeyStartWord = '') or
-           (UpperCase(Copy(LVP.Params[i].Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
-        begin
-          P:=TLocalVariable.CreateFrom(LVP.Params[i]);
-          Items.Add(P.VarName);
-          Items.Objects[Items.Count-1]:=P;
-        end;
-      end;}
     finally
       LVP.Free;
     end;

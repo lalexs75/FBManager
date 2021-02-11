@@ -739,7 +739,7 @@ begin
   begin
     for i:=0 to TSQLCommandAbstractSelect(FSt.SQLCommand).Tables.Count - 1 do
     begin
-      if UpperCase(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].TableAlias) = UpperCase(DBObjName) then
+      if CompareText(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].TableAlias, DBObjName) = 0 then
       begin
         DBObj:=FCurDB.GetDBObject(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].Name);
         if Assigned(DBObj) and (DBObj.DBObjectKind in [okPartitionTable, okTable, okView, okStoredProc]) then
@@ -821,7 +821,7 @@ begin
   begin
     for i:=0 to TSQLCommandAbstractSelect(FSt.SQLCommand).Tables.Count - 1 do
     begin
-      if UpperCase(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].TableAlias) = UpperCase(ATableAlias) then
+      if CompareText(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].TableAlias, ATableAlias)=0 then
       begin
         Result:=FCurDB.GetDBObject(TSQLCommandAbstractSelect(FSt.SQLCommand).Tables[i].Name);
         if Assigned(Result) then

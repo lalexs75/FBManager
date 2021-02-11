@@ -87,7 +87,7 @@ type
 
 
 function FB_SqlTypesToString(FBSqlType, FBSqlSubType:integer):string;
-function StrToFBServersVersion(S: string):TFBServerVersion;
+function StrToFBServersVersion(const S: string):TFBServerVersion;
 procedure FillStrServersVer(const S: TStrings);
 
 procedure FillFieldTypes(Items:TDBMSFieldTypeList);
@@ -98,7 +98,7 @@ function IndexToTransaction(AIndex:integer):TTransParams;
 function MakeRestoreOpt(ACheckGroup:TCheckGroup):TRestoreOptions;
 procedure SetRestoreOptToCheckGroup(RestOpt:TRestoreOptions; ACheckGroup:TCheckGroup);
 function UIBProtocolToStr(AUIBProtocol:TUIBProtocol):string; inline;
-function StrToUIBProtocol(AUIBProtocolStr:string):TUIBProtocol;
+function StrToUIBProtocol(const AUIBProtocolStr:string):TUIBProtocol;
 
 const
   UdfReturnTypes : array [TUdfRetyrnType] of string = ('By Value', 'By Reference', 'By Descriptor');
@@ -115,13 +115,13 @@ function GetDefaultFB3Lib:string;
 implementation
 uses uibase, fbmStrConstUnit, db, rxlogging;
 
-function StrToFBServersVersion(S: string): TFBServerVersion;
+function StrToFBServersVersion(const S: string): TFBServerVersion;
 var
   i: TFBServerVersion;
 begin
   Result:=gds_verUnknown;
   for i:=Low(TFBServerVersion) to High(TFBServerVersion) do
-    if UpperCase(S) = UpperCase(StrServersVer[i]) then
+    if CompareText(S, StrServersVer[i])=0 then
       Exit(I);
 end;
 
@@ -193,12 +193,12 @@ begin
   Result:=UIBProtocolStr[AUIBProtocol];
 end;
 
-function StrToUIBProtocol(AUIBProtocolStr: string): TUIBProtocol;
+function StrToUIBProtocol(const AUIBProtocolStr: string): TUIBProtocol;
 var
   P: TUIBProtocol;
 begin
   for P in TUIBProtocol do
-    if UpperCase(UIBProtocolStr[P]) = UpperCase(AUIBProtocolStr) then
+    if CompareText(UIBProtocolStr[P], AUIBProtocolStr)=0 then
       Exit(P);
   P:=proTCPIP;
 end;

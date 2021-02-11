@@ -77,7 +77,7 @@ begin
   Result:=false;
   FTextLen:=Length(AText);
   while (FTextLen>0) and ((AText[FTextLen] < #32) or (AText[FTextLen] = ';')) do Dec(FTextLen);
-  if (FTextLen < 3) or (LowerCase(Copy(AText, FTextLen - 2, 3)) <> 'end') then exit;
+  if (FTextLen < 3) or (CompareText(Copy(AText, FTextLen - 2, 3),'end')<>0) then exit;
 
   P:=TSQLParser.Create(Copy(AText, 1, FTextLen - 3), nil);
   try
@@ -126,7 +126,7 @@ begin
     begin
       L:=P.Position.Position - 2;
       S3:=Copy(P.SQL, L, Length(S));
-      if UpperCase(S3) = UpperCase(S) then
+      if CompareText(S3, S)=0 then
       begin
         P.IncPos(-Length(S2));
         if P.SQL[P.Position.Position-1] = ' ' then

@@ -1336,7 +1336,7 @@ begin
           Break;
         end
         else
-        if UpperCase(T.TableAlias) = UpperCase(DBObjName) then
+        if CompareText(T.TableAlias, DBObjName) = 0  then
         begin
           DBObj:=FOwnerRec.GetDBObject(T.Name);
           if Assigned(DBObj) then
@@ -1374,7 +1374,7 @@ begin
       begin
         for C in TSQLCommandSelect(SQLCommand).CTE do
         begin
-          if Copy(UpperCase(C.Name), 1, Length(KeyStartWord)) = KeyStartWord then
+          if CompareText(C.Name, KeyStartWord) = 0 then
             Items.Add(scotDBObject, C.Name, '', 'CTE');
         end;
         //for
@@ -1390,7 +1390,7 @@ begin
             if Assigned(DBObj) then
               if (DBObj.DBObjectKind in [okTable, okView, okMaterializedView]) and (DBObj is TDBDataSetObject) then
                 for F in TDBDataSetObject(DBObj).Fields do
-                  if Copy(UpperCase(F.FieldName), 1, Length(KeyStartWord)) = KeyStartWord then
+                  if CompareText(F.FieldName, KeyStartWord) = 0 then
                     Items.Add(F);
           end;
 
@@ -1428,7 +1428,7 @@ begin
     begin
       for i:=0 to TSQLCommandAbstractSelect(SQLCommand).Tables.Count - 1 do
       begin
-        if UpperCase(TSQLCommandAbstractSelect(SQLCommand).Tables[i].TableAlias) = UpperCase(ATableAlias) then
+        if CompareText(TSQLCommandAbstractSelect(SQLCommand).Tables[i].TableAlias, ATableAlias) = 0 then
         begin
           Result:=FOwnerRec.GetDBObject(TSQLCommandAbstractSelect(SQLCommand).Tables[i].Name);
           if Assigned(Result) then

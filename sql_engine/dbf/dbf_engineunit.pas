@@ -169,7 +169,6 @@ var
   DBObj: TDBItems;
   Rec: TRawByteSearchRec;
   Code: LongInt;
-  Ext: String;
   P: TDBItem;
 begin
   DBObj:=FCashedItems.AddTypes(ASQLText);
@@ -180,8 +179,7 @@ begin
     begin
       if Rec.Attr and faDirectory = 0 then
       begin
-        Ext:=UpperCase(ExtractFileExt(Rec.Name));
-        if Ext = '.DBF' then
+        if CompareText(ExtractFileExt(Rec.Name), '.DBF')=0 then
         begin
           P:=DBObj.Add(ExtractFileName(Rec.Name));
           P.ObjDesc:=Rec.Name;

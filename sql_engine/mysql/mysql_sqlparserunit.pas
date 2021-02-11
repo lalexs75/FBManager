@@ -170,7 +170,7 @@ type
     FCollationName: string;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -188,7 +188,7 @@ type
     FUpgradeDataDirectory: boolean;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -204,7 +204,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -223,7 +223,7 @@ type
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
@@ -247,7 +247,7 @@ type
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
   end;
@@ -259,7 +259,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -277,7 +277,7 @@ type
     FViewAlgorithm: TViewAlgorithm;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -294,7 +294,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -311,7 +311,7 @@ type
     procedure OnProcessComment(Sender:TSQLParser; AComment:string);
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -328,7 +328,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -345,7 +345,7 @@ type
     FSqlAccess: TProcSqlAccess;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -364,7 +364,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -375,7 +375,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -388,7 +388,7 @@ type
     FCurTable: TSQLParserField;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -400,7 +400,7 @@ type
     FIsTable: boolean;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -413,7 +413,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -424,7 +424,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -440,7 +440,7 @@ type
     FWhere:string;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -458,7 +458,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -469,7 +469,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -481,7 +481,7 @@ type
     FEngine: string;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     property Engine:string read FEngine write FEngine;
@@ -494,7 +494,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -505,7 +505,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -516,7 +516,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -557,7 +557,7 @@ type
     FUserOptions: TMySQLUserOptions;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -580,7 +580,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -593,7 +593,7 @@ type
   protected
     procedure SetName(AValue: string); override;
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -609,7 +609,7 @@ type
     FSQLTokens: TSQLTokenRecord;
     TTo: TSQLTokenRecord;
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -628,7 +628,7 @@ type
   private
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
   end;
@@ -651,7 +651,7 @@ type
     FCurItem: TSQLParserField;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -1104,7 +1104,7 @@ begin
 end;
 
 procedure TMySQLRepairTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -1142,7 +1142,7 @@ begin
 end;
 
 procedure TMySQLRename.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -1390,7 +1390,7 @@ begin
 end;
 
 procedure TMySQLGrant.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -1568,7 +1568,7 @@ begin
 end;
 
 procedure TMySQLFlush.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -1837,7 +1837,7 @@ begin
 end;
 
 procedure TMySQLSHOW.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 var
   S: String;
 begin
@@ -2018,7 +2018,7 @@ begin
 end;
 
 procedure TMySQLDropUser.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -2088,7 +2088,7 @@ begin
 end;
 
 procedure TMySQLAlterUser.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -2201,7 +2201,7 @@ begin
 end;
 
 procedure TMySQLCreateUser.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -2341,7 +2341,7 @@ begin
 end;
 
 procedure TMySQLDropServer.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -2371,7 +2371,7 @@ begin
 end;
 
 procedure TMySQLAlterServer.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -2402,7 +2402,7 @@ begin
 end;
 
 procedure TMySQLCreateServer.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -2442,7 +2442,7 @@ begin
 end;
 
 procedure TMySQLCreateTablespace.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -2467,7 +2467,7 @@ begin
 end;
 
 procedure TMySQLAlterTablespace.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -2496,7 +2496,7 @@ begin
 end;
 
 procedure TMySQLDropTablespace.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:Name:=AWord;
@@ -2516,7 +2516,7 @@ end;
 
 { TMySQLSET }
 
-procedure TMySQLSet.InitParserTree;
+procedure TMySQLSET.InitParserTree;
 var
   FSQLTokens: TSQLTokenRecord;
 begin
@@ -2559,13 +2559,13 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'SET', [toFirstToken, toFindWordLast]);
 end;
 
-procedure TMySQLSet.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+procedure TMySQLSET.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
 
-procedure TMySQLSet.MakeSQL;
+procedure TMySQLSET.MakeSQL;
 var
   S: String;
 begin
@@ -2630,7 +2630,7 @@ trigger_order: { FOLLOWS | PRECEDES } other_trigger_name
 end;
 
 procedure TMySQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 
 function GetTriggerBody:string;
 var
@@ -2805,7 +2805,7 @@ begin
 end;
 
 procedure TMySQLDropTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -2843,9 +2843,9 @@ begin
 end;
 
 procedure TMySQLTruncateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
-  inherited;
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
     2:FIsTable:=true;
@@ -2898,7 +2898,7 @@ begin
 end;
 
 procedure TMySQLRenameTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:FCurTable:=Params.AddParam(AWord);
@@ -2949,7 +2949,7 @@ begin
 end;
 
 procedure TMySQLDropView.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -3010,7 +3010,7 @@ begin
 end;
 
 procedure TMySQLDropTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -3454,7 +3454,7 @@ begin
 end;
 
 procedure TMySQLAlterTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     //1:CreateMode:=cmCreateOrAlter;
@@ -3701,7 +3701,7 @@ begin
 end;
 
 procedure TMySQLDropFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -3758,7 +3758,7 @@ begin
 end;
 
 procedure TMySQLAlterFunction.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -3891,7 +3891,7 @@ COMMENT 'string'
 end;
 
 procedure TMySQLCreateFunction.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 
 function GetProcBody:string;
 var
@@ -4105,7 +4105,7 @@ begin
 end;
 
 procedure TMySQLDropDatabase.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -4173,7 +4173,7 @@ begin
 end;
 
 procedure TMySQLAlterDatabase.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -4258,7 +4258,7 @@ begin
 end;
 
 procedure TMySQLCreateDatabase.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:ObjectKind:=okDatabase;
@@ -4365,7 +4365,7 @@ begin
 end;
 
 procedure TMySQLCreateView.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 var
   CP: TParserPosition;
 begin
@@ -4875,7 +4875,7 @@ begin
 end;
 
 procedure TMySQLCreateTable.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:Options:=Options + [ooTemporary];

@@ -383,7 +383,7 @@ type
     procedure RefreshGroup; override;
     procedure RefreshObject; override;
 
-    function ObjByName(AName:string; ARefreshObject:boolean = true):TDBObject;override;
+    function ObjByName(const AName:string; ARefreshObject:boolean = true):TDBObject;override;
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
     property SchemaId:integer read FSchemaId write SetSchemaId;
@@ -1281,7 +1281,7 @@ type
     function FindGroupByID(OID:integer):TDBObject;
     function FindOwnerByID(OID:integer):TDBObject;
     function FindIndexByID(OID:integer):TPGIndex;
-    function DBObjectByName(AName:string; ARefreshObject:boolean = true):TDBObject;override;
+    function DBObjectByName(const AName:string; ARefreshObject:boolean = true):TDBObject;override;
 
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
@@ -4546,12 +4546,12 @@ begin
   end;
 end;
 
-function TSQLEnginePostgre.DBObjectByName(AName: string; ARefreshObject:boolean = true): TDBObject;
+function TSQLEnginePostgre.DBObjectByName(const AName: string;
+  ARefreshObject: boolean): TDBObject;
 var
   S:string;
   Sc:TPGSchema;
 begin
-  AName:=UpperCase(AName);
   if Pos('.', AName)>0 then
     Result:=FSchemasRoot.ObjByName(AName, ARefreshObject)
   else
@@ -4905,18 +4905,20 @@ begin
   //
 end;
 
-function TPGSchema.ObjByName(AName: string; ARefreshObject:boolean = true): TDBObject;
+function TPGSchema.ObjByName(const AName: string; ARefreshObject: boolean
+  ): TDBObject;
 var
-  S:string;
+  S, S1:string;
 begin
   if Pos('.', AName)>0 then
   begin
     Result:=nil;
-    S:=strutils.Copy2SymbDel(AName, '.');
+    S1:=AName;
+    S:=strutils.Copy2SymbDel(S1, '.');
     S:=ExtractQuotedString(S, '"');
     if CompareText(S, Caption)=0 then
     begin
-      Result:=inherited ObjByName(AName, ARefreshObject);
+      Result:=inherited ObjByName(S1, ARefreshObject);
     end;
   end
   else

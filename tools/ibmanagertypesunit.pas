@@ -205,7 +205,7 @@ type
     function ObjectGroup(AObj:TDBInspectorRecord):TDBInspectorRecord;
     function FindDBObject(ADBObject:TDBObject):TDBInspectorRecord;
     function ExecSQLEditor(const Line, Plan:string; AExecTime:TDateTime; ASQLCommand:TSQLCommandAbstract; AEdtPageName:string):boolean;
-    function GetDBObject(AObjName:string):TDBObject;
+    function GetDBObject(const AObjName:string):TDBObject;
   public
     property Connected:boolean read GetConnected write SetConnected;
     property SQLEditorForm:TForm read FSQLEditorForm;
@@ -1094,12 +1094,11 @@ begin
   end;
 end;
 
-function TDataBaseRecord.GetDBObject(AObjName: string): TDBObject;
+function TDataBaseRecord.GetDBObject(const AObjName: string): TDBObject;
 var
   i:integer;
 begin
   Result:=nil;
-  AObjName:=UpperCase(AObjName);
   for i:=0 to FSQLEngine.Groups.Count - 1 do
   begin
     Result:=TDBRootObject(FSQLEngine.Groups[i]).ObjByName(AObjName);

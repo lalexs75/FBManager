@@ -246,7 +246,7 @@ begin
     try
       LVP.ParseLocalVarsEx(EditorFrame.EditorText);
       for P in LVP.Params do
-        if (KeyStartWord = '') or (UpperCase(Copy(P.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
+        if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord) = 0) then
           Items.Add(P);
     finally
       LVP.Free;

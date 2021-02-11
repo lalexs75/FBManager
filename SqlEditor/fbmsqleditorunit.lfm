@@ -956,7 +956,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           Left = 0
           Height = 109
           Top = 0
-          Width = 606
+          Width = 607
           Anchors = [akTop, akLeft, akRight, akBottom]
           TabOrder = 0
         end
@@ -964,10 +964,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideTop.Control = tabQueryFields
           AnchorSideRight.Control = tabQueryFields
           AnchorSideRight.Side = asrBottom
-          Left = 612
+          Left = 613
           Height = 23
           Top = 6
-          Width = 115
+          Width = 114
           Anchors = [akTop, akRight]
           BorderSpacing.Around = 6
           Caption = 'With data type'
@@ -978,10 +978,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideLeft.Control = CheckBox3
           AnchorSideTop.Control = CheckBox3
           AnchorSideTop.Side = asrBottom
-          Left = 612
+          Left = 613
           Height = 17
           Top = 35
-          Width = 60
+          Width = 59
           Caption = 'Separator'
           FocusControl = Edit1
           ParentColor = False
@@ -992,10 +992,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Control = tabQueryFields
           AnchorSideRight.Side = asrBottom
-          Left = 618
-          Height = 34
+          Left = 619
+          Height = 33
           Top = 58
-          Width = 109
+          Width = 108
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 6
           OnChange = Edit1Change
@@ -1033,7 +1033,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       TabOrder = 0
       object ComboBox1: TComboBox
         Left = 1
-        Height = 33
+        Height = 32
         Top = 1
         Width = 166
         Align = alTop
@@ -1044,8 +1044,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       end
       object TreeView2: TTreeView
         Left = 1
-        Height = 127
-        Top = 34
+        Height = 128
+        Top = 33
         Width = 166
         Align = alClient
         DragMode = dmAutomatic

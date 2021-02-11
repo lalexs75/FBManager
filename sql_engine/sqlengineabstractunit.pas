@@ -395,7 +395,7 @@ type
     procedure FillListForNames(Items:TStrings; AFullNames: Boolean);
     function NewDBObject:TDBObject;virtual;
     function DropObject(AItem:TDBObject):boolean;virtual;
-    function ObjByName(AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
+    function ObjByName(const AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
 
     property CountObject:integer read GetCountObject;
     property Items[AIndex:integer]:TDBObject read GetItems; default;
@@ -497,7 +497,7 @@ type
   public
     constructor Create(AOwner:TDBObject; AFieldClass:TDBFieldClass);
     destructor Destroy; override;
-    function FieldByName(AName:string):TDBField;
+    function FieldByName(const AName:string):TDBField;
     function Add(AFieldName:string):TDBField;
     procedure Clear;
     procedure DeleteField(const AName:string);
@@ -568,7 +568,7 @@ type
     function IndexNew:string;virtual; abstract;
     function IndexEdit(const IndexName:string):boolean;virtual; abstract;
     function IndexDelete(const IndexName:string):boolean;virtual; abstract;
-    function IndexFind(IndexName:string):TIndexItem;
+    function IndexFind(const IndexName:string):TIndexItem;
     procedure IndexListRefresh; virtual; abstract;
     property IndexCount:integer read GetIndexCount;
     property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
@@ -628,7 +628,7 @@ type
     procedure SetFieldsOrder(AFieldsList:TStrings);virtual; abstract;
 
 
-    function ConstraintFind(ConstraintName:string):TPrimaryKeyRecord;
+    function ConstraintFind(const ConstraintName:string):TPrimaryKeyRecord;
     procedure MakeSQLStatementsList(AList:TStrings); override;
 
     procedure RefreshConstraintPrimaryKey; virtual;
@@ -925,7 +925,7 @@ type
     function ExecSQL(const Sql:string;const ExecParams:TSqlExecParams):boolean;virtual;
     function SQLPlan(aDataSet:TDataSet):string;virtual;
     function GetQueryControl:TSQLQueryControl;virtual; abstract;
-    function DBObjectByName(AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
+    function DBObjectByName(const AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
     procedure FillListForNames(Items:TStrings; ObjectKinds:TDBObjectKinds);
     procedure InternalError(AErrorMessage:string);
     procedure InternalErrorEx(AErrorMessage:string; AParams : array of const);
@@ -2064,13 +2064,14 @@ begin
   Result:='';
 end;
 
-function TSQLEngineAbstract.DBObjectByName(AName: string; ARefreshObject:boolean = true): TDBObject;
+function TSQLEngineAbstract.DBObjectByName(const AName: string;
+  ARefreshObject: boolean): TDBObject;
 var
   P: TDBObject;
 begin
   Result:=nil;
   if AName = '' then exit;
-  AName := UpperCase(AName);
+//  AName := UpperCase(AName);
   for P in Groups do
   begin
     Result:=TDBRootObject(P).ObjByName(AName, ARefreshObject);
@@ -2367,24 +2368,18 @@ begin
   end;
 end;
 
-function TDBRootObject.ObjByName(AName: string; ARefreshObject:boolean = true): TDBObject;
+function TDBRootObject.ObjByName(const AName: string; ARefreshObject: boolean
+  ): TDBObject;
 var
-  i, P:integer;
-  S1, S2:string;
+  i:integer;
 begin
   Result:=nil;
-  AName:=UpperCase(AName);
-
-  S2:=AName;
-  if UpperCase(Caption) = S2 then
-  begin
-    Result:=Self;
-    exit;
-  end;
+  if CompareText(Caption, AName)=0 then
+    Exit(Self);
 
   for i:=0 to CountGroups - 1 do
   begin
-    Result:=Groups[i].ObjByName(S2, ARefreshObject);
+    Result:=Groups[i].ObjByName(AName, ARefreshObject);
     if Assigned(Result) then
       break;
   end;
@@ -2392,7 +2387,7 @@ begin
   if not Assigned(Result) then
     for i:=0 to FObjects.Count-1 do
     begin
-      if UpperCase(TDBObject(FObjects.Items[i]).Caption) = S2 then
+      if CompareText(TDBObject(FObjects.Items[i]).Caption, AName)=0 then
       begin
         Result:=TDBObject(FObjects.Items[i]);
         break;
@@ -2910,7 +2905,8 @@ begin
     FDataSet.Active:=false;
 end;
 
-function TDBTableObject.ConstraintFind(ConstraintName: string): TPrimaryKeyRecord;
+function TDBTableObject.ConstraintFind(const ConstraintName: string
+  ): TPrimaryKeyRecord;
 var
   i:integer;
 begin
@@ -2924,16 +2920,12 @@ begin
       RefreshConstraintUnique;
   end;
 
-  ConstraintName:=UpperCase(ConstraintName);
-  Result:=nil;
   for i:=0 to FConstraintList.Count-1 do
   begin
-    if UpperCase(TPrimaryKeyRecord(FConstraintList[i]).Name) = ConstraintName then
-    begin
-      Result:=TPrimaryKeyRecord(FConstraintList[i]);
-      exit;
-    end;
+    if CompareText(TPrimaryKeyRecord(FConstraintList[i]).Name, ConstraintName)=0 then
+      Exit(TPrimaryKeyRecord(FConstraintList[i]));
   end;
+  Result:=nil;
 end;
 
 procedure TDBTableObject.MakeSQLStatementsList(AList: TStrings);
@@ -3222,24 +3214,17 @@ begin
   Result:=false;
 end;
 
-function TDBDataSetObject.IndexFind(IndexName: string): TIndexItem;
+function TDBDataSetObject.IndexFind(const IndexName: string): TIndexItem;
 var
   i:integer;
 begin
   if not FIndexListLoaded then
     IndexListRefresh;
 
-  IndexName:=UpperCase(IndexName);
-
+  for Result in IndexItems do
+    if CompareText(Result.IndexName, IndexName) = 0 then
+      Exit;
   Result:=nil;
-  for i:=0 to IndexCount-1 do
-  begin
-    if UpperCase(TIndexItem(FIndexItems[i]).IndexName) = IndexName then
-    begin
-      Result:=IndexItem[i];
-      exit;
-    end;
-  end;
 end;
 
 { TDBViewObject }
@@ -3326,20 +3311,11 @@ begin
   inherited Destroy;
 end;
 
-function TDBFields.FieldByName(AName: string): TDBField;
-var
-  i:integer;
+function TDBFields.FieldByName(const AName: string): TDBField;
 begin
-  AName:=UpperCase(AName);
+  for Result in Self do
+    if CompareText(Result.FieldName, AName) = 0 then Exit;
   Result:=nil;
-  for i:=0 to FList.Count - 1 do
-  begin
-    if UpperCase(Items[i].FieldName) = AName then
-    begin
-      Result:=Items[i];
-      exit;
-    end;
-  end;
 end;
 
 function TDBFields.Add(AFieldName: string): TDBField;

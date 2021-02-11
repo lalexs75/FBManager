@@ -758,23 +758,22 @@ const
         ftFixedWideChar, ftWideMemo];
   DDLRemarkLineLength     = 80;
 
-function StrToForeignKeyRule(RuleName:string):TForeignKeyRule;
+function StrToForeignKeyRule(const RuleName:string):TForeignKeyRule;
 function ObjectGrantToStr(AGrant:TObjectGrants; AllPrivilegesShortForm:boolean):string;
 
 procedure FillObjKindToImagesIndex(List:TStrings);
 function ObjectKindToStr(ADBObjectKind:TDBObjectKind):string; inline;
 function ParamTypeFuncToStr(AType:TSPVarType):string;
 
-function ObjectGrantNameToValue(AValue:string):TObjectGrant;
+function ObjectGrantNameToValue(const AValue:string):TObjectGrant;
 implementation
 uses
   math, strutils;
 
-function StrToForeignKeyRule(RuleName: string): TForeignKeyRule;
+function StrToForeignKeyRule(const RuleName: string): TForeignKeyRule;
 begin
-  RuleName:=UpperCase(RuleName);
   for Result in TForeignKeyRule do
-    if UpperCase(RuleName) = ForeignKeyRuleNames[Result] then
+    if CompareText(RuleName, ForeignKeyRuleNames[Result])=0 then
       exit;
   Result:=fkrNone;
 end;
@@ -856,13 +855,12 @@ begin
   end;
 end;
 
-function ObjectGrantNameToValue(AValue: string): TObjectGrant;
+function ObjectGrantNameToValue(const AValue: string): TObjectGrant;
 var
   G: TObjectGrant;
 begin
-  AValue:=UpperCase(AValue);
   for G in TObjectGrant do
-    if UpperCase(ObjectGrantNamesReal[G]) = AValue then
+    if CompareText(ObjectGrantNamesReal[G], AValue)=0 then
       Exit(G);
   raise Exception.CreateFmt('Not found grant type "%s".', [AValue]);
 end;
@@ -1334,7 +1332,7 @@ var
   T: TDBMSFieldTypeRecord;
 begin
   for T in Self do
-    if (UpperCase(T.TypeName) = UpperCase(ATypeName)) or (T.AltNames.IndexOf(ATypeName)>-1) then
+    if (CompareText(T.TypeName, ATypeName)=0) or (T.AltNames.IndexOf(ATypeName)>-1) then
       Exit(T);
   Result:=nil;
 end;

@@ -144,7 +144,7 @@ type
   public
     constructor Create;
     destructor Destroy;override;
-    procedure ParseString(ASqlLine:string); virtual;
+    procedure ParseString(const ASqlLine:string); virtual;
     procedure ParseDeclare(ASQLParser: TSQLParser); virtual;
     property Params:TSQLFields read FParams;
     property CurPos:integer read FCurPos;
@@ -168,7 +168,7 @@ type
     procedure SetState(const AValue: TCMDState);
     function DoCheckCommand(FSQLTokens:TSQLTokenRecord; ASQLParser:TSQLParser):boolean;
     function CheckCommand(ASQLParser:TSQLParser):boolean;
-    function FindKeyWord(AWord:string):boolean;
+    function FindKeyWord(const AWord:string):boolean;
   protected
     function GetParams: TSQLFields;virtual;
     procedure SetError(ASQLParser:TSQLParser;const AErrorMessage:string);
@@ -176,7 +176,7 @@ type
     function InternalProcessError(ASQLParser: TSQLParser; var AChild: TSQLTokenRecord):boolean; virtual;
 
     procedure InitParserTree;virtual;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);virtual;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; const AWord:string);virtual;
   public
     constructor Create(AParent:TSQLCommandAbstract);virtual;
     destructor Destroy;override;
@@ -242,7 +242,7 @@ type
   private
     FDropRule: TDropRule;
   protected
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     procedure Clear;override;
@@ -257,7 +257,7 @@ type
   private
     FCreateMode: TCreateMode;
   protected
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -272,7 +272,7 @@ type
     FChildCmd: string;
     FOwnerUserName: string;
   protected
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -288,7 +288,7 @@ type
     FSchemaNewName: string;
     FSchemaNewOwner: string;
   protected
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -308,7 +308,7 @@ type
     FBody: string;
   protected
     procedure SetBody(AValue: string); virtual;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property Body:string read FBody write SetBody;
@@ -670,7 +670,7 @@ type
     procedure Clear;
     procedure Assign(ASource:TSQLCommandSelectCTEList);
     function GetEnumerator: TSQLCommandSelectCTEListEnumerator;
-    function FindItem(AName:string):TSQLCommandSelectCTE;
+    function FindItem(const AName:string):TSQLCommandSelectCTE;
     property Item[AIndex:integer]:TSQLCommandSelectCTE read GetItem; default;
     property Count:integer read GetCount;
     property Recursive:Boolean read FRecursive write FRecursive;
@@ -729,7 +729,7 @@ type
     function InternalProcessError(ASQLParser: TSQLParser; var AChild: TSQLTokenRecord):boolean; override;
 
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL; override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
@@ -763,7 +763,7 @@ type
     function GetWhereExpression(ASQLParser:TSQLParser):string;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     function AllowFieldAlias:boolean;virtual;
     procedure MakeSQL;override;
   public
@@ -778,7 +778,7 @@ type
     FWhereStr: string;
   protected
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -798,7 +798,7 @@ type
     function GetParams: TSQLFields; override;
 
     procedure InitParserTree;override;
-    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord; AWord:string);override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     destructor Destroy;override;
@@ -879,21 +879,21 @@ type
   public
     constructor Create(const ASql:string; const AOwner:TObject);
     destructor Destroy;override;
-    procedure SetSQL(ASQL:string);
+    procedure SetSQL(const ASQL:string);
     function GetNextWord2:string;
     function GetNextWord1(AExcludeChar:TSysCharSet):string;
     property SQL:string read FSQL;
    public
     //global functions
     function Eof:boolean;
-    class function WordType(Sender:TSQLTokenRecord; AWord:string; ACmd:TSQLCommandAbstract):TSQLToken;
+    class function WordType(Sender:TSQLTokenRecord;const AWord:string; ACmd:TSQLCommandAbstract):TSQLToken;
 
     function GetNextWord:string;
     procedure SkipSpace;
-    function WaitWord(AWord:string):boolean;
-    function GetToWord(AWord:string):string;
+    function WaitWord(const AWord:string):boolean;
+    function GetToWord(const AWord:string):string;
     function GetToCommandDelemiter:string;
-    function GetToBracket(Bracket:string):string;
+    function GetToBracket(const Bracket:string):string;
     procedure InsertText(AText:string);
     procedure DeleteText(ATextLen:integer);
 
@@ -1024,16 +1024,19 @@ begin
   FCntBeg:=0;
   while not (ASQLParser.Eof or FStop) do
   begin
-    S:=UpperCase(ASQLParser.GetNextWord);
+    //S:=UpperCase(ASQLParser.GetNextWord);
+    S:=ASQLParser.GetNextWord;
 
-    if (S = 'END') then
+    //if (S = 'END') then
+    if CompareText(S, 'END')=0 then
     begin
       Dec(FCntBeg);
       if FCntBeg = 0 then
         FStop:=true
     end
     else
-    if S = 'BEGIN' then
+    //if S = 'BEGIN' then
+    if CompareText(S, 'BEGIN')=0 then
       Inc(FCntBeg)
     else
     if S = '(' then
@@ -1124,7 +1127,7 @@ end;
 { TSQLAlterSchema }
 
 procedure TSQLAlterSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -1148,7 +1151,7 @@ end;
 { TSQLCreateSchema }
 
 procedure TSQLCreateSchema.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
 end;
@@ -1213,7 +1216,7 @@ begin
 end;
 
 procedure TSQLCreateTrigger.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
@@ -1364,21 +1367,21 @@ begin
   Result:=TSQLCommandSelectCTEListEnumerator.Create(Self);
 end;
 
-function TSQLCommandSelectCTEList.FindItem(AName: string): TSQLCommandSelectCTE;
+function TSQLCommandSelectCTEList.FindItem(const AName: string
+  ): TSQLCommandSelectCTE;
 var
   I: Integer;
 begin
   Result:=nil;
-  AName:=UpperCase(AName);
   for I:=0 to FList.Count-1 do
-    if UpperCase(TSQLCommandSelectCTE(FList[I]).FName) = AName then
+    if CompareText(TSQLCommandSelectCTE(FList[I]).FName, AName)=0 then
       Exit(TSQLCommandSelectCTE(FList[I]));
 end;
 
 { TSQLCreateCommandAbstract }
 
 procedure TSQLCreateCommandAbstract.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   //-1 - if not exists
   //-2 - Or Replase
@@ -1726,7 +1729,7 @@ end;
 { TSQLDropCommandAbstract }
 
 procedure TSQLDropCommandAbstract.InternalProcessChildToken(
-  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; AWord: string);
+  ASQLParser: TSQLParser; AChild: TSQLTokenRecord; const AWord: string);
 begin
   { В дереве разбора значения общих тегов:}
   { [ IF EXISTS ] = -1                    }
@@ -2093,7 +2096,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TSQLDeclareLocalVarParser.ParseString(ASqlLine: string);
+procedure TSQLDeclareLocalVarParser.ParseString(const ASqlLine: string);
 begin
 
 end;
@@ -2457,7 +2460,7 @@ TABLE [ ONLY ] имя_таблицы [ * ]
 end;
 
 procedure TSQLCommandSelect.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 var
   S: String;
 begin
@@ -2781,7 +2784,7 @@ begin
     if S = ')' then
       SetError(ASQLParser, sSqlParserErrorBracket)
     else
-    if (S = ',') or (UpperCase(S) = 'WHERE') then
+    if (S = ',') or (CompareText(S, 'WHERE')=0) then
     begin
       ASQLParser.Position:=C;
       break;
@@ -2803,7 +2806,7 @@ begin
     if S = '(' then
       ASQLParser.GetToBracket(')')
     else
-    if (S = ';') or (UpperCase(S) = 'RETURNING') or (UpperCase(S) = 'INTO') then
+    if (S = ';') or (CompareText(S, 'RETURNING')=0) or (CompareText(S, 'INTO')=0) then
     begin
       ASQLParser.Position:=C;
       break;
@@ -2858,7 +2861,7 @@ UPDATE [ ONLY ] table [ [ AS ] alias ]
 end;
 
 procedure TSQLCommandUpdate.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:begin
@@ -3100,7 +3103,7 @@ end;
 
 
 procedure TSQLCommandAbstract.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
 
 end;
@@ -3120,7 +3123,7 @@ begin
   end;
 end;
 
-function TSQLCommandAbstract.FindKeyWord(AWord: string): boolean;
+function TSQLCommandAbstract.FindKeyWord(const AWord: string): boolean;
 
 procedure DoFillKeyWords;
 var
@@ -3129,11 +3132,15 @@ var
 begin
   FKeyWordList:=TStringList.Create;
   FKeyWordList.Sorted:=true;
+  FKeyWordList.CaseSensitive:=false;
+  FKeyWordList.BeginUpdate;
 
   for T in FSQLTokensList do
     if T.FToken = stKeyword then
       if not FKeyWordList.Find(T.SQLCommand, i) then
-        FKeyWordList.Add(UpperCase(T.SQLCommand));
+        FKeyWordList.Add(T.SQLCommand);
+
+  FKeyWordList.EndUpdate;
 end;
 
 var
@@ -3514,22 +3521,21 @@ begin
   end;
 end;
 
-function TSQLParser.WaitWord(AWord: string): boolean;
+function TSQLParser.WaitWord(const AWord: string): boolean;
 var
   S:string;
 begin
   Result:=false;
-  AWord:=LowerCase(AWord);
   while not Eof do
   begin
     SkipSpace;
     S:=GetNextWord2; //GetNextWord1([]);
-    if LowerCase(S) = AWord then
+    if CompareText(S, AWord)=0 then
       Exit(true);
   end;
 end;
 
-function TSQLParser.GetToWord(AWord: string): string;
+function TSQLParser.GetToWord(const AWord: string): string;
 var
   S: String;
   P: TParserPosition;
@@ -3540,7 +3546,7 @@ begin
   begin
     SkipSpace;
     S:=GetNextWord;
-    if LowerCase(S)=LowerCase(AWord) then
+    if CompareText(S, AWord)=0 then
     begin
       Result:=Copy(SQL, P.Position, Position.Position - P.Position);
       Exit;
@@ -3558,7 +3564,7 @@ begin
     Result:=Copy(FSql, CP, Length(FSql))
 end;
 
-function TSQLParser.GetToBracket(Bracket: string): string;
+function TSQLParser.GetToBracket(const Bracket: string): string;
 var
   S:string;
   L:integer;
@@ -3677,7 +3683,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TSQLParser.SetSQL(ASQL: string);
+procedure TSQLParser.SetSQL(const ASQL: string);
 begin
   FSql:=ASql;
   FPosition.Position:=1;
@@ -3838,8 +3844,8 @@ begin
   Delete(FSql, FPosition.Position, ATextLen);
 end;
 
-class function TSQLParser.WordType(Sender: TSQLTokenRecord; AWord: string;
-  ACmd: TSQLCommandAbstract): TSQLToken;
+class function TSQLParser.WordType(Sender: TSQLTokenRecord;
+  const AWord: string; ACmd: TSQLCommandAbstract): TSQLToken;
 
 function IsValidIdent1(S:string):boolean;
 var
@@ -3865,15 +3871,10 @@ begin
   if IsValidIdent1(AWord) then
   begin
     if Assigned(Sender) then
-      for i:=0 to Sender.Child.Count-1 do
-      begin
-        P:=TSQLTokenRecord(Sender.Child[i]);
-        if P.SQLCommand = UpperCase(AWord) then
-        begin
-          Result:=P.Token;
-          exit;
-        end;
-      end;
+      for P in Sender.Child do
+        if CompareText(P.SQLCommand, AWord)=0 then
+          Exit(P.Token);
+
     if Assigned(ACmd) then
       if ACmd.FindKeyWord(UpperCase(AWord)) then
       begin
@@ -4057,7 +4058,7 @@ INSERT INTO table [ ( column [, ...] ) ]
 end;
 
 procedure TSQLCommandInsert.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   case AChild.Tag of
     1:begin
@@ -4192,7 +4193,7 @@ begin
 end;
 
 procedure TSQLCommandDelete.InternalProcessChildToken(ASQLParser: TSQLParser;
-  AChild: TSQLTokenRecord; AWord: string);
+  AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
