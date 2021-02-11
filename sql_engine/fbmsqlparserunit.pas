@@ -3413,6 +3413,15 @@ begin
     else
     if FSql[FPosition.Position] in CharDelimiters then IncPos
     else
+    if FSql[FPosition.Position] in DigitChars then
+    begin
+      repeat
+        DoTestLineEnd;
+        IncPos;
+      until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in (DigitChars + ['.'])));
+
+    end
+    else
     begin
       repeat
         DoTestLineEnd;

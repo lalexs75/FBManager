@@ -533,8 +533,10 @@ type
 
   TMSSQLCreateDatabase = class(TSQLCreateDatabase)
   private
-    FCreateDatabaseAction: TMSSQLCreateDatabaseAction;
     FCurParam: TSQLParserField;
+    FCurFile: TSQLParserField;
+
+    FCreateDatabaseAction: TMSSQLCreateDatabaseAction;
     FEncryptionAlgorithm: string;
     FEncryptionType: string;
     FIdentityName: string;
@@ -2991,7 +2993,9 @@ var
   FSQLTokens, T, TName, T1, T1_1, T1_2, T2, T2_1, T3, T5, T5_1,
     T5_2, T5_3, T5_4, T3_1, T3_2, T3_2_1, T3_3, T3_3_1, T3_4,
     T3_4_1, T3_5, T3_5_1, T3_6, T3_6_1, T3_7, T3_7_1, T3_8,
-    T3_8_1, T3_9, T3_9_1, T3_4_2, T3_5_2, T3_7_2, T3_8_2: TSQLTokenRecord;
+    T3_8_1, T3_9, T3_9_1, T3_4_2, T3_5_2, T3_7_2, T3_8_2, TON,
+    TON_1, TON_1_1, TON_1_1_1, TON_1_2, TON_1_2_1, TON_1_3,
+    TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5: TSQLTokenRecord;
 begin
   (*
   CREATE DATABASE database_name
@@ -3114,8 +3118,8 @@ WITH IDENTITY = 'identity_name'
 *)
   T5:=AddSQLTokens(stKeyword, FSQLTokens, 'SCOPED', [], 10);
   T5:=AddSQLTokens(stKeyword, T5, 'CREDENTIAL', []);
-    TName:=AddSQLTokens(stIdentificator, T5, '', [], 11);
-    T:=AddSQLTokens(stKeyword, TName, 'WITH', []);
+    T5_1:=AddSQLTokens(stIdentificator, T5, '', [], 11);
+    T:=AddSQLTokens(stKeyword, T5_1, 'WITH', []);
     T:=AddSQLTokens(stKeyword, T, 'IDENTITY', []);
     T:=AddSQLTokens(stSymbol, T, '=', []);
     T:=AddSQLTokens(stString, T, '', [], 12);
@@ -3153,6 +3157,58 @@ WITH IDENTITY = 'identity_name'
     T5_2:=AddSQLTokens(stKeyword, T5, 'ASYMMETRIC', []);
     T5_2:=AddSQLTokens(stKeyword, T5_2, 'KEY', []);
     T5_2:=AddSQLTokens(stIdentificator, T5_2, '', [], 23);
+
+
+
+(*
+[ ON
+      [ PRIMARY ] <filespec> [ ,...n ]
+      [ , <filegroup> [ ,...n ] ]
+      [ LOG ON <filespec> [ ,...n ] ]
+]
+
+<filespec> ::=
+{
+(
+    NAME = logical_file_name ,
+    FILENAME = { 'os_file_name' | 'filestream_path' }
+    [ , SIZE = size [ KB | MB | GB | TB ] ]
+    [ , MAXSIZE = { max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
+    [ , FILEGROWTH = growth_increment [ KB | MB | GB | TB | % ] ]
+)
+}
+
+<filegroup> ::=
+{
+FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY_OPTIMIZED_DATA ]
+    <filespec> [ ,...n ]
+}
+
+*)
+  TON:=AddSQLTokens(stKeyword, TName, 'ON', [toOptional], 40);
+    TON_1:=AddSQLTokens(stKeyword, TON, 'PRIMARY', [], 41);
+    TON_1:=AddSQLTokens(stSymbol, [TON, TON_1], '(', [], 42);
+    TON_1_1:=AddSQLTokens(stKeyword, TON_1, 'NAME', [], 43);
+      T:=AddSQLTokens(stSymbol, TON_1_1, '=', []);
+      TON_1_1_1:=AddSQLTokens(stIdentificator, T, '', [], 44);
+    TON_1_2:=AddSQLTokens(stKeyword, TON_1, 'FILENAME', [], 45);
+      T:=AddSQLTokens(stSymbol, TON_1_2, '=', []);
+      TON_1_2_1:=AddSQLTokens(stString, T, '', [], 45);
+    TON_1_3:=AddSQLTokens(stKeyword, TON_1, 'SIZE', [], 46);
+      T:=AddSQLTokens(stSymbol, TON_1_3, '=', []);
+      TON_1_3_1:=AddSQLTokens(stInteger, T, '', [], 47);
+      TON_1_3_2:=AddSQLTokens(stKeyword, TON_1_3_1, 'KB', [], 48);
+      TON_1_3_3:=AddSQLTokens(stKeyword, TON_1_3_1, 'MB', [], 48);
+      TON_1_3_4:=AddSQLTokens(stKeyword, TON_1_3_1, 'GB', [], 48);
+      TON_1_3_5:=AddSQLTokens(stKeyword, TON_1_3_1, 'TB', [], 48);
+
+//      [ , MAXSIZE = { max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
+//      [ , FILEGROWTH = growth_increment [ KB | MB | GB | TB | % ] ]
+
+    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5], ',', []);
+      T.AddChildToken([TON_1_1, TON_1_2, TON_1_3]);
+    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5], ')', []);
+
 
 (*
 ---
@@ -3204,6 +3260,18 @@ begin
     23:begin
          CreateDatabaseAction:=cdaEncryptionKeyByAsymmetricKey;
          EncryptionType:=AWord;
+       end;
+    40:FCurFile:=Fields.AddParamEx(AWord, '');
+    41:if Assigned(FCurFile) then FCurFile.TypeName:=AWord;
+//    43:if Assigned(FCurFile) then FCurFile.Params.:=.
+    45:begin
+         FCurParam:=Params.AddParam(AWord)
+       end;
+    46:begin
+         FCurParam:=Params.AddParam(AWord)
+       end;
+    47:begin
+         FCurParam:=Params.AddParam(AWord)
        end;
   end;
 end;
