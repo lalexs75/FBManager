@@ -468,7 +468,6 @@ begin
   if Assigned(SQLCommand) then
   begin
     for P in SQLCommand.Params do
-      //if (KeyStartWord = '') or (UTF8UpperCase(UTF8Copy(P.Caption, 1, UTF8Length(KeyStartWord))) = KeyStartWord) then
       if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord)= 0) then
         Items.Add(P);
     SQLCommand.Free;
@@ -482,7 +481,6 @@ begin
     try
       LVP.ParseString(EditorFrame.EditorText);
       for P in LVP.Params do
-        //if (KeyStartWord = '') or (UpperCase(Copy(P.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
         if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord)=0) then
            Items.Add(P);
     finally
@@ -491,7 +489,6 @@ begin
   end;
 
   for PGTV in PGTriggerVars do
-    //if (KeyStartWord = '') or (UpperCase(Copy(PGTV.VarName, 1, Length(KeyStartWord))) = KeyStartWord) then
     if (KeyStartWord = '') or (CompareText(PGTV.VarName, KeyStartWord) = 0) then
       Items.Add(scotKeyword, PGTV.VarName, PGTV.VarType, PGTV.VarDesc);
 end;

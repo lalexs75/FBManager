@@ -2715,7 +2715,7 @@ begin
          S:=ASQLParser.GetNextWord;
          ASQLParser.Position:=CP;
          ASQLParser.OnProcessComment:=@OnProcessComment;
-         if (UpperCase(S) <> 'FOLLOWS') and (UpperCase(S) <> 'PRECEDES') then
+         if (CompareText(S, 'FOLLOWS')<>0) and (CompareText(S, 'PRECEDES')<>0) then
            Body:=Trim(GetTriggerBody)
        end;
   end;

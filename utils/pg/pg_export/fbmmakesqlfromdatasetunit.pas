@@ -126,7 +126,7 @@ begin
   Result:='';
   for F in ADataSet.Fields do
   begin
-    if UpperCase(F.FieldName) <> UpperCase(APKFields) then
+    if CompareText(F.FieldName, APKFields)<>0 then
     begin
       if Result<>'' then
         Result:=Result + ',' + LineEnding;

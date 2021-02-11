@@ -73,8 +73,8 @@ type
   public
     constructor Create;
     destructor Destroy;override;
-    function Equal(S:string):boolean;
-    function ChildByName(S:string):TSQLTokenRecord;
+    function Equal(const S:string):boolean; inline;
+    function ChildByName(const S:string):TSQLTokenRecord;
     function ChildByType(AToken:TSQLToken; AWord:string = ''):TSQLTokenRecord;
     procedure AddChildToken(AToken:TSQLTokenRecord);
     procedure AddChildToken(ATokens:array of TSQLTokenRecord);overload;
@@ -4248,23 +4248,19 @@ begin
   inherited Destroy;
 end;
 
-function TSQLTokenRecord.Equal(S: string): boolean;
+function TSQLTokenRecord.Equal(const S: string): boolean;
 begin
-  Result:=UpperCase(S) = SQLCommand;
+  Result:=CompareText(S, SQLCommand) = 0;
 end;
 
-function TSQLTokenRecord.ChildByName(S: string): TSQLTokenRecord;
+function TSQLTokenRecord.ChildByName(const S: string): TSQLTokenRecord;
 var
-  i:integer;
+  C: TSQLTokenRecord;
 begin
-  S:=UpperCase(S);
+  for C in Child do
+    if C.Equal(S) then
+      Exit(C);
   Result:=nil;
-  for i:=0 to Child.Count - 1 do
-    if Child[i].SQLCommand = S then
-    begin
-      Result:=Child[i];
-      exit;
-    end;
 end;
 
 function TSQLTokenRecord.ChildByType(AToken: TSQLToken; AWord: string = ''): TSQLTokenRecord;
@@ -4277,11 +4273,8 @@ begin
     if (P.Token = AToken) then
     begin
       if not Assigned(Result) and (AToken <> stKeyword) then Result:=P;
-      if (AWord <> '') and (P.SQLCommand = UpperCase(AWord)) then
-      begin
-        Result:=P;
-        exit;
-      end;
+      if (AWord <> '') and (CompareText(P.SQLCommand, AWord)=0) then
+        Exit(P);
     end
   end;
 end;

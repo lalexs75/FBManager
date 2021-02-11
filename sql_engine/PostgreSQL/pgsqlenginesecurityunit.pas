@@ -535,21 +535,8 @@ end;
 
 function TPGGroup.SetGrantUsers(AUserName: string; AGrant, WithGrantOpt: boolean): boolean;
 var
-//  S:string;
   R: TSQLCommandGrant;
 begin
-(*  if AGrant then
-  begin
-    if WithGrantOpt then
-      S:=Format(ssqlRoleGranrToUserWGR, [UpperCase(Caption), UpperCase(AUserName)])
-    else
-      S:=Format(ssqlRoleGranrToUser, [UpperCase(Caption), UpperCase(AUserName)])
-  end
-  else
-    S:=Format(ssqlRoleGranrFromUser, [UpperCase(Caption), UpperCase(AUserName)]);
-
-  Result:=SQLScriptsExec(S, []);*)
-
   if AGrant then
     R:=TPGSQLGrant.Create(nil)
   else

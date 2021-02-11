@@ -174,7 +174,7 @@ begin
   if Assigned(SQLCommand) then
   begin
     for P in SQLCommand.Params do
-      if (KeyStartWord = '') or (UTF8UpperCase(UTF8Copy(P.Caption, 1, UTF8Length(KeyStartWord))) = KeyStartWord) then
+      if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord) = 0) then
         Items.Add(P);
     SQLCommand.Free;
   end;
@@ -187,7 +187,7 @@ begin
     try
       LVP.ParseString(EditorFrame.EditorText);
       for P in LVP.Params do
-        if (KeyStartWord = '') or (UpperCase(Copy(P.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
+        if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord) = 0) then
            Items.Add(P);
     finally
       LVP.Free;
@@ -195,7 +195,7 @@ begin
   end;
 
   for PGTV in PGEventTriggerVars do
-    if (KeyStartWord = '') or (UpperCase(Copy(PGTV.VarName, 1, Length(KeyStartWord))) = KeyStartWord) then
+    if (KeyStartWord = '') or (CompareText(PGTV.VarName, KeyStartWord) = 0) then
       Items.Add(scotParam, PGTV.VarName, PGTV.VarType, PGTV.VarDesc);
 end;
 
@@ -228,7 +228,7 @@ begin
   begin
     L:=TSQLEnginePostgre(DBObject.OwnerDB).LanguageRoot.Items[i] as TPGLanguage;
     J:=cbLang.Items.AddObject(L.Caption, L);
-    if UpperCase(L.Caption) = 'PLPGSQL' then
+    if CompareText(L.Caption, 'PLPGSQL')=0 then
       cbLang.ItemIndex:=j;
   end;
 

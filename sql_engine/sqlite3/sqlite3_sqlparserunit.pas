@@ -1942,7 +1942,7 @@ begin
     54:if Assigned(FCurFiled) then
        FCurFiled.Params:=FCurFiled.Params + [fpVirtual];
 
-    66:FWithoutRowID:=UpperCase(AWord) = 'ROWID';
+    66:FWithoutRowID:=CompareText(AWord, 'ROWID')=0;
   end;
 end;
 

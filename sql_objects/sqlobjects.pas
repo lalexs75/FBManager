@@ -347,7 +347,7 @@ type
     function AddParamWithType(AName, ATypeName: string): TSQLParserField;
     procedure CopyFrom(Src:TSQLFields; AParTypes:TSPVarTypes = []);
     function GetEnumerator: TSQLFieldsEnumerator;
-    function FindParam(AName:string):TSQLParserField;
+    function FindParam(const AName:string):TSQLParserField;
     property Fields[AIndex:integer]:TSQLParserField read GetFields; default;
     property Count:integer read GetCount;
     property AsString:string read GetAsString write SetAsString;
@@ -521,7 +521,7 @@ type
     function Add(AConstraintType:TConstraintType):TSQLConstraintItem;overload;
     function Add(AConstraintType:TConstraintType;AConstraintName:string):TSQLConstraintItem;overload;
     function Find(AConstraintType:TConstraintType; AutoCreate:Boolean = true):TSQLConstraintItem;
-    function FindConstraint(AConstraintName:string):TSQLConstraintItem;
+    function FindConstraint(const AConstraintName:string):TSQLConstraintItem;
     procedure Clear;
     procedure CopyFrom(ASource:TSQLConstraints);
     property Constraint[AIndex:integer]:TSQLConstraintItem read GetConstraint; default;
@@ -1292,15 +1292,14 @@ begin
     Result:=Add(AConstraintType);
 end;
 
-function TSQLConstraints.FindConstraint(AConstraintName: string
+function TSQLConstraints.FindConstraint(const AConstraintName: string
   ): TSQLConstraintItem;
 var
   C: TSQLConstraintItem;
 begin
-  AConstraintName:=UpperCase(AConstraintName);
   Result:=nil;
   for C in Self do
-    if UpperCase(C.ConstraintName) = AConstraintName then
+    if CompareText(C.ConstraintName, AConstraintName)=0 then
     begin
       Result:=C;
       exit;
@@ -1324,23 +1323,6 @@ begin
   end;
 end;
 
-{
-function TSQLConstraints.FindByFieldName(AFieldName: string
-  ): TSQLConstraintItem;
-var
-  i: Integer;
-begin
-  Result:=nil;
-  for i:=0 to FList.Count-1 do
-  begin
-    if UpperCase(AFieldName) = UpperCase(TSQLConstraintItem(FList[i]).ConstraintExpression) then
-    begin
-      Result:=TSQLConstraintItem(FList[i]);
-      exit;
-    end;
-  end;
-end;
-}
 { TAlterTableOperatorsEnumerator }
 
 constructor TAlterTableOperatorsEnumerator.Create(AList: TAlterTableOperators);
@@ -1931,13 +1913,13 @@ begin
   Result := TSQLFieldsEnumerator.Create(Self);
 end;
 
-function TSQLFields.FindParam(AName: string): TSQLParserField;
+function TSQLFields.FindParam(const AName: string): TSQLParserField;
 var
   F: TSQLParserField;
 begin
   Result:=nil;
   for F in Self do
-    if UpperCase(AName) = UpperCase(F.Caption) then Exit(F)
+    if CompareText(AName, F.Caption)=0 then Exit(F)
 end;
 
 end.

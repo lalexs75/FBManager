@@ -132,13 +132,7 @@ begin
   begin
     edtTrgName.Text:=DBObject.Caption;
     S:=TrimLeft(TMySQLTriger(DBObject).TriggerBody);
-{    if UpperCAse(Copy(S, 1, 2)) = 'AS' then
-      S:=TrimLeft(Copy(S, 3, Length(S)));
-
-    if TabSheet2.TabVisible then
-      EditorFrame.EditorText:=ParseLocalVariable(S)
-    else}
-      EditorFrame.EditorText:=Trim(S);
+    EditorFrame.EditorText:=Trim(S);
   end
   else
   begin
@@ -200,7 +194,7 @@ procedure TMySQLTriggerHeaderEditor.OnGetFieldsList(
 var
   DBTable:TDBDataSetObject;
 begin
-  if (UpperCase(DBObjName) = 'OLD') or (UpperCase(DBObjName) = 'NEW') then
+  if (CompareText(DBObjName, 'OLD')=0) or (CompareText(DBObjName, 'NEW')=0) then
   begin
     if Assigned(DBObject.OwnerDB) then
     begin

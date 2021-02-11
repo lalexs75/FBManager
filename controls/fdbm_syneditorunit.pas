@@ -1453,7 +1453,7 @@ begin
         begin
           FPos:=P.Position;
           S1:=P.GetNextWord;
-          if UpperCase(S1) = 'AS' then
+          if CompareText(S1, 'AS')=0 then
             S1:=P.GetNextWord;
 
           if (P.WordType(nil, S1, nil) = stIdentificator) and ((TextEditor.Highlighter as TSynSQLSyn).TableNames.IndexOf(S1) < 0) then
@@ -1820,7 +1820,7 @@ begin
 
     MakeAliasList(nil);
 
-    DoFillTableList{(UpperCase(CurStr))};
+    DoFillTableList;
 
 
     if Assigned(FOnGetObjAliasList) then

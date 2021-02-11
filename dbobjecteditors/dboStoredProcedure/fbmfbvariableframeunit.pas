@@ -385,7 +385,7 @@ begin
     rxLocalVars.First;
     while not rxLocalVars.EOF do
     begin
-      if (KeyStartWord = '') or (KeyStartWord = ':') or (UpperCase(Copy(rxLocalVarsParName.AsString, 1, Length(KeyStartWord))) = KeyStartWord) then
+      if (KeyStartWord = '') or (KeyStartWord = ':') or (CompareText(rxLocalVarsParName.AsString, KeyStartWord) = 0) then
         Items.Add(scotParam, rxLocalVarsParName.AsString, rxLocalVarsParType.AsString, rxLocalVarsParDesc.AsString);
       rxLocalVars.Next;
     end;

@@ -20032,16 +20032,6 @@ end;
 
 procedure TPGSQLCreateTrigger.ParseWhen(SQLParser: TSQLParser);
 begin
-{  S:=Copy(SQLParser.SQL, SQLParser.CurPos, Length(SQLParser.SQL));
-  i:=Pos('EXECUTE', UpperCase(S))-1;
-  if i>0 then
-  begin
-    { TODO : Необходим нормальный парсер выражений }
-    FTriggerWhen:=Trim(Copy(S, 1, i));
-    SQLParser.CurPos:=SQLParser.CurPos + i;
-    if (FTriggerWhen<>'') and (FTriggerWhen[1]='(') and (FTriggerWhen[Length(FTriggerWhen)]=')') then
-      FTriggerWhen:=Copy(FTriggerWhen, 2, Length(FTriggerWhen)-2);
-  end;}
   FTriggerWhen:=SQLParser.GetToBracket(')');
 end;
 

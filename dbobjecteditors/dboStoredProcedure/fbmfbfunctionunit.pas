@@ -265,7 +265,7 @@ begin
     try
       LVP.ParseLocalVarsEx(EditorFrame.EditorText);
       for P in LVP.Params do
-        if (KeyStartWord = '') or (UpperCase(Copy(P.Caption, 1, Length(KeyStartWord))) = KeyStartWord) then
+        if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord) = 0) then
           Items.Add(P);
     finally
       LVP.Free;
@@ -283,7 +283,7 @@ begin
         rxSubRout.First;
         while not rxSubRout.EOF do
         begin
-          if (KeyStartWord = '') or (UpperCase(Copy(rxSubRoutSR_NAME.AsString, 1, Length(KeyStartWord))) = KeyStartWord) then
+          if (KeyStartWord = '') or (CompareText(rxSubRoutSR_NAME.AsString, KeyStartWord) = 0) then
             Items.Add(scotParam, rxSubRoutSR_NAME.AsString, '', '');
           rxSubRout.Next;
         end;

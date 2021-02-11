@@ -4914,7 +4914,7 @@ begin
     Result:=nil;
     S:=strutils.Copy2SymbDel(AName, '.');
     S:=ExtractQuotedString(S, '"');
-    if UpperCase(S) = UpperCase(Caption) then
+    if CompareText(S, Caption)=0 then
     begin
       Result:=inherited ObjByName(AName, ARefreshObject);
     end;

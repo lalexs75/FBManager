@@ -212,14 +212,12 @@ procedure TSQLite3TriggerHeaderEditFrame.OnGetFieldsList(
 var
   DBTable:TDBDataSetObject;
 begin
-  if (UpperCase(DBObjName) = 'OLD') or (UpperCase(DBObjName) = 'NEW') then
+  if (CompareText(DBObjName, 'OLD') = 0) or (CompareText(DBObjName, 'NEW')=0) then
   begin
     if Assigned(DBObject.OwnerDB) then
     begin
       DBTable:=DBObject.OwnerDB.DBObjectByName(edtTableName.Text) as TDBDataSetObject;
       Items.FillFieldList(DBTable);
-{      if Assigned(DBTable) then
-        DBTable.FillFieldList(Items, ACharCase, False);}
     end;
   end;
 end;
