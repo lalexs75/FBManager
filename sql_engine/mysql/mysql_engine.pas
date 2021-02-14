@@ -364,8 +364,8 @@ type
   TMySQLQueryControl = class(TSQLQueryControl)
   private
     FSQLQuery: TZQuery;
-    procedure SetParamValues;
   protected
+    procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;
@@ -2199,8 +2199,14 @@ end;
 { TMySQLQueryControl }
 
 procedure TMySQLQueryControl.SetParamValues;
+var
+  i: Integer;
 begin
-
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+  for i:=0 to FParams.Count-1 do
+    FSQLQuery.ParamByName(FParams[i].Name).Assign(FParams[i]);
+  {$ENDIF}
 end;
 
 function TMySQLQueryControl.GetDataSet: TDataSet;

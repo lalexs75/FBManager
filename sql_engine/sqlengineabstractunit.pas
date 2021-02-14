@@ -755,12 +755,14 @@ type
     FOwner:TSQLEngineAbstract;
     function GetActive: boolean;
   protected
+    FParams:TParams;
+    procedure SetParamValues;virtual;
     procedure SetActive(const AValue: boolean);virtual;
     function GetDataSet: TDataSet;virtual; abstract;
     function GetQueryPlan: string;virtual; abstract;
     function GetQuerySQL: string;virtual; abstract;
     procedure SetQuerySQL(const AValue: string);virtual; abstract;
-    function GetParam(AIndex: integer): TParam;virtual; abstract;
+    function GetParam(AIndex: integer): TParam;virtual;
     function GetParamCount: integer;virtual; abstract;
   public
     constructor Create(AOwner:TSQLEngineAbstract); virtual;
@@ -2979,17 +2981,31 @@ begin
   Result:=DataSet.Active;
 end;
 
+procedure TSQLQueryControl.SetParamValues;
+begin
+
+end;
+
 procedure TSQLQueryControl.SetActive(const AValue: boolean);
 begin
   if AValue then
     StartTransaction;
+
+  SetParamValues;
+
   DataSet.Active:=AValue;
   FBDataSetAfterOpen(DataSet);
+end;
+
+function TSQLQueryControl.GetParam(AIndex: integer): TParam;
+begin
+  Result:=FParams[AIndex];
 end;
 
 constructor TSQLQueryControl.Create(AOwner: TSQLEngineAbstract);
 begin
   inherited Create;
+  FParams:=TParams.Create(nil);
   FOwner:=AOwner;
   FOwner.FQueryControlList.Add(Self);
 end;
@@ -2997,6 +3013,7 @@ end;
 destructor TSQLQueryControl.Destroy;
 begin
   FOwner.FQueryControlList.Remove(Self);
+  FreeAndNil(FParams);
   inherited Destroy;
 end;
 

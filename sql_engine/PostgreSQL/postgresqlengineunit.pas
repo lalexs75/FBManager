@@ -1321,9 +1321,8 @@ type
   TPGQueryControl = class(TSQLQueryControl)
   private
     FSQLQuery: TZQuery;
-//    FParams:TParams;
-//    procedure SetParamValues;
   protected
+    procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;
@@ -4620,12 +4619,18 @@ begin
 end;
 
 { TPGQueryControl }
-(*
-procedure TPGQueryControl.SetParamValues;
-begin
 
+procedure TPGQueryControl.SetParamValues;
+var
+  i: Integer;
+begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+  for i:=0 to FParams.Count-1 do
+    FSQLQuery.ParamByName(FParams[i].Name).Assign(FParams[i]);
+  {$ENDIF}
 end;
-*)
+
 function TPGQueryControl.GetDataSet: TDataSet;
 begin
   Result:=FSQLQuery;
@@ -4662,9 +4667,35 @@ begin
 end;
 
 procedure TPGQueryControl.SetQuerySQL(const AValue: string);
+var
+  i: Integer;
+  S: String;
+  P: TParam;
 begin
   FSQLQuery.Active:=false;
   FSQLQuery.SQL.Text:=AValue;
+
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+  FParams.Clear;
+  for i:=0 to FSQLQuery.Params.Count-1 do
+  begin
+    S:=FSQLQuery.Params[i].Name;
+    if not Assigned(FParams.FindParam(S)) then
+    begin
+      P:=TParam.Create(FParams);
+      P.Name:=S;
+      P.Value:=FSQLQuery.Params[i].Value;
+      P.DataType:=FSQLQuery.Params[i].DataType;
+(*      case FSQLQuery.Params[i].ParamType of
+        uftQuad, uftFloat, uftDoublePrecision, uftNumeric : P.DataType:=ftFloat;
+        uftSmallint, uftInteger, uftInt64 : P.DataType:=ftInteger;
+        uftChar, uftVarchar, uftCstring : P.DataType:=ftString;
+        uftTimestamp, uftDate, uftTime : P.DataType:=ftDateTime;
+      end;*)
+    end;
+  end;
+  {$ENDIF}
 end;
 
 function TPGQueryControl.GetParam(AIndex: integer): TParam;
@@ -4672,7 +4703,7 @@ begin
   {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   Result:=FSQLQuery.Params[AIndex];
   {$ELSE}
-  Result:=nil;
+  Result:=FParams[AIndex];
   {$ENDIF}
 end;
 

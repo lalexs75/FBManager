@@ -607,9 +607,8 @@ type
   private
     FBQuery:TFBDataSet;
     FFBTransaction: TUIBTransaction;
-    FParams:TParams;
-    procedure SetParamValues;
   protected
+    procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;
@@ -3587,7 +3586,6 @@ end;
 
 procedure TFBQueryControl.SetActive(const AValue: boolean);
 begin
-  SetParamValues;
   inherited SetActive(AValue);
 end;
 
@@ -3602,12 +3600,10 @@ begin
   FBQuery.DataBase:=TSQLEngineFireBird(Owner).FBDatabase;
   FBQuery.Transaction:=FFBTransaction;
 
-  FParams:=TParams.Create(nil);
 end;
 
 destructor TFBQueryControl.Destroy;
 begin
-  FreeAndNil(FParams);
   FreeAndNil(FFBTransaction);
   FreeAndNil(FBQuery);
   inherited Destroy;

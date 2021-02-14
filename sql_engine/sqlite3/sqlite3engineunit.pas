@@ -240,9 +240,8 @@ type
 
   TSQLite3QueryControl = class(TSQLQueryControl)
     FSQLQuery: TZQuery;
-    FParams:TParams;
-    procedure SetParamValues;
   protected
+    procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;

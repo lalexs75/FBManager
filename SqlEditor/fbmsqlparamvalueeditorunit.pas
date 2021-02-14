@@ -160,6 +160,7 @@ end;
 }
 procedure TfbmSQLParamValueEditorFrame.SetParam(AParam: TParam);
 begin
+  if not Assigned(AParam) then Exit;
   SpinEdit1.MinValue:= - MaxInt;
   SpinEdit1.MaxValue:=MaxInt;
   FloatSpinEdit1.MaxValue:=9999999999999;
@@ -216,6 +217,7 @@ procedure TfbmSQLParamValueEditorFrame.GetParam(AParam: TParam);
 var
   S: String;
 begin
+  if not Assigned(AParam) then Exit;
   S:=AParam.Name;
   if CheckBox2.Checked then
     AParam.Clear
