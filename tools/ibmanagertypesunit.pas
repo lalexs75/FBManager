@@ -663,7 +663,7 @@ begin
     UserDBModule.quRecentItems.Open;
     while not UserDBModule.quRecentItems.EOF do
     begin
-      ObjectShowEditor(UserDBModule.quRecentItemsdb_recent_objects_name.AsString);
+      ObjectShowEditor(UserDBModule.quRecentItems.FieldByName('db_recent_objects_name').AsString);
       UserDBModule.quRecentItems.Next;
     end;
   finally
@@ -746,8 +746,8 @@ begin
     UserDBModule.quDBOptions.First;
     while not UserDBModule.quDBOptions.EOF do
     begin
-      if UserDBModule.quDBOptionsdb_database_id.AsInteger = ADB.FieldByName('db_database_id').AsInteger then
-        FSQLEngine.Properties.Values[UserDBModule.quDBOptionsdb_connection_options_name.AsString]:=UserDBModule.quDBOptionsdb_connection_options_value.AsString;
+      if UserDBModule.quDBOptions.FieldByName('db_database_id').AsInteger = ADB.FieldByName('db_database_id').AsInteger then
+        FSQLEngine.Properties.Values[UserDBModule.quDBOptions.FieldByName('db_connection_options_name').AsString]:=UserDBModule.quDBOptions.FieldByName('db_connection_options_value').AsString;
       UserDBModule.quDBOptions.Next;
     end;
 
@@ -797,14 +797,14 @@ begin
     UserDBModule.quDatabasesItem.Edit
   else
     UserDBModule.quDatabasesItem.Append;
-  UserDBModule.quDatabasesItemdb_database_sql_engine.AsString:=FSQLEngine.ClassName;
+  UserDBModule.quDatabasesItem.FieldByName('db_database_sql_engine').AsString:=FSQLEngine.ClassName;
   FSQLEngine.Store(UserDBModule.quDatabasesItem);
 
   if Assigned(OIFolder) then
-    UserDBModule.quDatabasesItemdb_folders_id.AsInteger:=OIFolder.FolderID
+    UserDBModule.quDatabasesItem.FieldByName('db_folders_id').AsInteger:=OIFolder.FolderID
   else
-    UserDBModule.quDatabasesItemdb_folders_id.Clear;
-  UserDBModule.quDatabasesItemdb_database_sort_order.AsInteger:=FSortOrder;
+    UserDBModule.quDatabasesItem.FieldByName('db_folders_id').Clear;
+  UserDBModule.quDatabasesItem.FieldByName('db_database_sort_order').AsInteger:=FSortOrder;
   UserDBModule.quDatabasesItem.Post;
 
   if SQLEngine.DatabaseID <= 0 then

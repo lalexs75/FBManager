@@ -283,16 +283,16 @@ end;
 
 procedure TSqlEditorPage.Load;
 begin
-  FID:=UserDBModule.quSQLPagessql_editors_id.AsInteger;
-  FName:=UserDBModule.quSQLPagessql_editors_caption.AsString;
-  FCarretPos.X:=Max(UserDBModule.quSQLPagessql_editors_carret_pos_x.AsInteger, 1);
-  FCarretPos.Y:=Max(UserDBModule.quSQLPagessql_editors_carret_pos_y.AsInteger, 1);
-  SelStart:=Max(UserDBModule.quSQLPagessql_editors_sel_start.AsInteger, 1);
-  SelEnd:=Max(UserDBModule.quSQLPagessql_editors_sel_end.AsInteger, 1);
-  FText:=UserDBModule.quSQLPagessql_editors_body.AsString;
+  FID:=UserDBModule.quSQLPages.FieldByName('sql_editors_id').AsInteger;
+  FName:=UserDBModule.quSQLPages.FieldByName('sql_editors_caption').AsString;
+  FCarretPos.X:=Max(UserDBModule.quSQLPages.FieldByName('sql_editors_carret_pos_x').AsInteger, 1);
+  FCarretPos.Y:=Max(UserDBModule.quSQLPages.FieldByName('sql_editors_carret_pos_y').AsInteger, 1);
+  SelStart:=Max(UserDBModule.quSQLPages.FieldByName('sql_editors_sel_start').AsInteger, 1);
+  SelEnd:=Max(UserDBModule.quSQLPages.FieldByName('sql_editors_sel_end').AsInteger, 1);
+  FText:=UserDBModule.quSQLPages.FieldByName('sql_editors_body').AsString;
   if Assigned(FOwner) then
-    FFolder:=FOwner.FolderByID(UserDBModule.quSQLPagessql_editor_folders_id.AsInteger);
-  FSortOrder:=UserDBModule.quSQLPagessql_editors_sort_order.AsInteger;
+    FFolder:=FOwner.FolderByID(UserDBModule.quSQLPages.FieldByName('sql_editor_folders_id').AsInteger);
+  FSortOrder:=UserDBModule.quSQLPages.FieldByName('sql_editors_sort_order').AsInteger;
 end;
 
 
@@ -460,10 +460,10 @@ begin
   UserDBModule.quSQLFolders.Open;
   while not UserDBModule.quSQLFolders.EOF do
   begin
-    F:=AddFolder(UserDBModule.quSQLFolderssql_editor_folders_name.AsString);
-    F.FFolderID:=UserDBModule.quSQLFolderssql_editor_folders_id.AsInteger;
-    F.FFolderDesc:=UserDBModule.quSQLFolderssql_editor_folders_desc.AsString;
-    F.FFolderSort:=UserDBModule.quSQLFolderssql_editor_folders_code.AsInteger;
+    F:=AddFolder(UserDBModule.quSQLFolders.FieldByName('sql_editor_folders_name').AsString);
+    F.FFolderID:=UserDBModule.quSQLFolders.FieldByName('sql_editor_folders_id').AsInteger;
+    F.FFolderDesc:=UserDBModule.quSQLFolders.FieldByName('sql_editor_folders_desc').AsString;
+    F.FFolderSort:=UserDBModule.quSQLFolders.FieldByName('sql_editor_folders_code').AsInteger;
     UserDBModule.quSQLFolders.Next;
   end;
   UserDBModule.quSQLFolders.Close;
@@ -472,7 +472,7 @@ begin
   UserDBModule.quSQLPages.Open;
   while not UserDBModule.quSQLPages.EOF do
   begin
-    P:=Add(UserDBModule.quSQLPagessql_editors_caption.AsString, '');
+    P:=Add(UserDBModule.quSQLPages.FieldByName('sql_editors_caption').AsString, '');
     P.Load;
     UserDBModule.quSQLPages.Next;
   end;
@@ -567,7 +567,7 @@ begin
   UserDBModule.quRecentItems.Open;
   while not UserDBModule.quRecentItems.EOF do
   begin
-    FItems.AddObject(UserDBModule.quRecentItemsdb_recent_objects_name.AsString,  TObject( Pointer(UserDBModule.quRecentItemsdb_recent_objects_id.AsInteger)));
+    FItems.AddObject(UserDBModule.quRecentItems.FieldByName('db_recent_objects_name').AsString,  TObject( Pointer(UserDBModule.quRecentItems.FieldByName('db_recent_objects_id').AsInteger)));
     UserDBModule.quRecentItems.Next;
   end;
   UserDBModule.quRecentItems.Close;
@@ -583,7 +583,7 @@ begin
   if UserDBModule.quRecentItems.Locate('db_recent_objects_name', AFileName, []) then
   begin
     UserDBModule.quRecentItems.Edit;
-    UserDBModule.quRecentItemsdb_recent_objects_date.AsDateTime:=Now;
+    UserDBModule.quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Now;
     UserDBModule.quRecentItems.Post;
     i:=FItems.IndexOf(AFileName);
 
@@ -597,10 +597,10 @@ begin
     while (UserDBModule.quRecentItems.RecordCount > 0) and (UserDBModule.quRecentItems.RecordCount > FMaxFiles) do
       UserDBModule.quRecentItems.Delete;
     UserDBModule.quRecentItems.Append;
-    UserDBModule.quRecentItemsdb_recent_objects_date.AsDateTime:=Now;
-    UserDBModule.quRecentItemsdb_recent_objects_name.AsString:=AFileName;
-    UserDBModule.quRecentItemsdb_database_id.AsInteger:=FSQLEngine.DatabaseID;
-    UserDBModule.quRecentItemsdb_recent_objects_type.AsInteger:=FRecentType;
+    UserDBModule.quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Now;
+    UserDBModule.quRecentItems.FieldByName('db_recent_objects_name').AsString:=AFileName;
+    UserDBModule.quRecentItems.FieldByName('db_database_id').AsInteger:=FSQLEngine.DatabaseID;
+    UserDBModule.quRecentItems.FieldByName('db_recent_objects_type').AsInteger:=FRecentType;
     UserDBModule.quRecentItems.Post;
     FItems.Insert(0, AFileName);
   end;

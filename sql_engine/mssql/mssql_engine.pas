@@ -2059,7 +2059,11 @@ end;
 
 function TMSSQLQueryControl.GetParam(AIndex: integer): TParam;
 begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   Result:=FSQLQuery.Params[AIndex];
+  {$ELSE}
+  Result:=nil;
+  {$ENDIF}
 end;
 
 function TMSSQLQueryControl.GetParamCount: integer;

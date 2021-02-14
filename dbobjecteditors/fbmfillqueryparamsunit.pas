@@ -158,11 +158,11 @@ begin
       S:=Cntr.Hint;
       if UserDBModule.quParamsHistory.Locate('sql_editors_history_param_name', S, []) then
       begin
-        Cntr.DataType:=UserDBModule.quParamsHistorysql_editors_history_param_type.AsInteger;
-        if UserDBModule.quParamsHistorysql_editors_history_param_value.IsNull then
+        Cntr.DataType:=UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_type').AsInteger;
+        if UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_value').IsNull then
           Cntr.CheckBox2.Checked:=true
         else
-          Cntr.TextValue:=UserDBModule.quParamsHistorysql_editors_history_param_value.AsString;
+          Cntr.TextValue:=UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_value').AsString;
       end;
     end;
   end;
@@ -188,14 +188,14 @@ begin
       else
       begin
         UserDBModule.quParamsHistory.Append;
-        UserDBModule.quParamsHistorydb_database_id.AsInteger:=FSQLQuery.Owner.DatabaseID;
-        UserDBModule.quParamsHistorysql_editors_history_param_name.AsString:=S;
+        UserDBModule.quParamsHistory.FieldByName('db_database_id').AsInteger:=FSQLQuery.Owner.DatabaseID;
+        UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_name').AsString:=S;
       end;
-      UserDBModule.quParamsHistorysql_editors_history_param_type.AsInteger:=Cntr.DataType;
+      UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_type').AsInteger:=Cntr.DataType;
       if Cntr.CheckBox2.Checked then
-        UserDBModule.quParamsHistorysql_editors_history_param_value.Clear
+        UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_value').Clear
       else
-        UserDBModule.quParamsHistorysql_editors_history_param_value.AsString:=Cntr.TextValue;
+        UserDBModule.quParamsHistory.FieldByName('sql_editors_history_param_value').AsString:=Cntr.TextValue;
       UserDBModule.quParamsHistory.Post;
     end;
   end;

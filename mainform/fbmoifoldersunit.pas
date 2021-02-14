@@ -233,10 +233,10 @@ begin
     UserDBModule.quFoldersItem.Edit
   else
     UserDBModule.quFoldersItem.Append;
-  UserDBModule.quFoldersItemdb_folders_code.AsInteger:=FSortOrder;
-  UserDBModule.quFoldersItemdb_folders_name.AsString:=Name;
-  UserDBModule.quFoldersItemdb_folders_desc.AsString:=FDescription;
-  UserDBModule.quFoldersItemdb_folders_expanded.AsBoolean:=FOwner.Expanded;
+  UserDBModule.quFoldersItem.FieldByName('db_folders_code').AsInteger:=FSortOrder;
+  UserDBModule.quFoldersItem.FieldByName('db_folders_name').AsString:=Name;
+  UserDBModule.quFoldersItem.FieldByName('db_folders_desc').AsString:=FDescription;
+  UserDBModule.quFoldersItem.FieldByName('db_folders_expanded').AsBoolean:=FOwner.Expanded;
   UserDBModule.quFoldersItem.Post;
   if FFolderID < 0 then
     FFolderID:=UserDBModule.GetLastID;
@@ -245,11 +245,11 @@ end;
 
 procedure TOIFolder.Load;
 begin
-  FFolderID:=UserDBModule.quFoldersdb_folders_id.AsInteger;
-  FSortOrder:=UserDBModule.quFoldersdb_folders_code.AsInteger;
-  Name:=UserDBModule.quFoldersdb_folders_name.AsString;
-  Description:=UserDBModule.quFoldersdb_folders_desc.AsString;
-  FExpanded:=UserDBModule.quFoldersdb_folders_expanded.AsBoolean;
+  FFolderID:=UserDBModule.quFolders.FieldByName('db_folders_id').AsInteger;
+  FSortOrder:=UserDBModule.quFolders.FieldByName('db_folders_code').AsInteger;
+  Name:=UserDBModule.quFolders.FieldByName('db_folders_name').AsString;
+  Description:=UserDBModule.quFolders.FieldByName('db_folders_desc').AsString;
+  FExpanded:=UserDBModule.quFolders.FieldByName('db_folders_expanded').AsBoolean;
 end;
 
 function TOIFolder.Edit: boolean;

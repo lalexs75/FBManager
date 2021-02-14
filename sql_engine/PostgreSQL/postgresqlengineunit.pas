@@ -27,8 +27,9 @@ interface
 uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects, ZClasses,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
-  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, ZCompatibility, pgTypes,
-  pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV, SSHConnectionUnit;
+  ZSqlProcessor, ZDatasetParam, ZDbcCachedResultSet, ZDbcCache, ZCompatibility,
+  pgTypes, pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV,
+  SSHConnectionUnit;
 
 
 const
@@ -1831,7 +1832,11 @@ var
   S, S1, S2: String;
   F: TField;
   FD: TDBField;
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   P: TParam;
+  {$ELSE}
+  P: TZParam;
+  {$ENDIF}
 begin
   RA:=nil;
 
@@ -4664,7 +4669,11 @@ end;
 
 function TPGQueryControl.GetParam(AIndex: integer): TParam;
 begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   Result:=FSQLQuery.Params[AIndex];
+  {$ELSE}
+  Result:=nil;
+  {$ENDIF}
 end;
 
 function TPGQueryControl.GetParamCount: integer;
@@ -5299,7 +5308,11 @@ var
   RA: TZRowAccessor;
   quIns: TZQuery;
   S, S1, S2: String;
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   P: TParam;
+  {$ELSE}
+  P: TZParam;
+  {$ENDIF}
   FD: TDBField;
   F: TField;
 begin

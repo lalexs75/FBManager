@@ -317,7 +317,8 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit, ZDbcCachedResultSet;
+uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit, ZDatasetParam,
+  ZDbcCachedResultSet;
 
 type
   THackZQuery = class(TZQuery);
@@ -1026,7 +1027,11 @@ var
   FD: TDBField;
   F: TField;
   quIns: TZQuery;
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   P: TParam;
+  {$ELSE}
+  P: TZParam;
+  {$ENDIF}
 begin
   RA:=nil;
 
@@ -1634,7 +1639,11 @@ begin
   InitKeywords;
 
   FConnection:=TZConnection.Create(nil);
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   FConnection.Protocol:='sqlite-3';
+  {$ELSE}
+  FConnection.Protocol:='sqlite';
+  {$ENDIF}
 
   FUIParams:=[upSqlEditor, upLocal];
   FSQLEngineCapability:=[
@@ -1936,7 +1945,11 @@ end;
 
 function TSQLite3QueryControl.GetParam(AIndex: integer): TParam;
 begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   Result:=FSQLQuery.Params[AIndex];
+  {$ELSE}
+  Result:=nil;
+  {$ENDIF}
 end;
 
 function TSQLite3QueryControl.GetParamCount: integer;

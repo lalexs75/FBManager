@@ -38,142 +38,24 @@ type
   { TUserDBModule }
 
   TUserDBModule = class(TDataModule)
-    quConnectionPluginsdb_connection_plugin_data_class_type: TStringField;
-    quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField;
-    quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField;
-    quConnectionPluginsdb_database_id: TLargeintField;
-    quDatabasesdb_database_log_script_exec_filename: TStringField;
-    quDatabasesdb_database_use_log_script_exec: TBooleanField;
-    quDatabasesItemdb_database_log_script_exec_filename: TStringField;
-    quDatabasesItemdb_database_use_log_script_exec: TBooleanField;
-    quDatabasesItemshow_child_objects: TBooleanField;
-    quDatabasesshow_child_objects: TBooleanField;
     quDBOptionsItems: TZQuery;
-    quDBOptionsdb_connection_options_name: TStringField;
-    quDBOptionsdb_connection_options_value: TStringField;
-    quDBOptionsdb_database_id: TLargeintField;
     quDBOptionsItemsdb_connection_options_name: TStringField;
     quDBOptionsItemsdb_connection_options_value: TStringField;
     quDBOptionsItemsdb_database_id: TLargeintField;
     UpdDB2: TZSQLProcessor;
     quOldDatabases: TZQuery;
     quDatabasesItem: TZQuery;
-    quDatabasesdb_database_authentication_type: TStringField;
-    quDatabasesdb_database_auto_grant: TBooleanField;
-    quDatabasesdb_database_caption: TStringField;
-    quDatabasesdb_database_connected_charset: TStringField;
-    quDatabasesdb_database_database_name: TStringField;
-    quDatabasesdb_database_description: TMemoField;
-    quDatabasesdb_database_id: TLargeintField;
-    quDatabasesdb_database_library_name: TStringField;
-    quDatabasesdb_database_log_editor_filename: TStringField;
-    quDatabasesdb_database_log_meta_custom_charset: TStringField;
-    quDatabasesdb_database_log_meta_filename: TStringField;
-    quDatabasesdb_database_password: TStringField;
-    quDatabasesdb_database_remote_port: TLargeintField;
-    quDatabasesdb_database_server_name: TStringField;
-    quDatabasesdb_database_server_version: TStringField;
-    quDatabasesdb_database_shedule: TBooleanField;
-    quDatabasesdb_database_sort_order: TLargeintField;
-    quDatabasesdb_database_sql_engine: TStringField;
-    quDatabasesdb_database_username: TStringField;
-    quDatabasesdb_database_user_role: TStringField;
-    quDatabasesdb_database_use_log_editor: TBooleanField;
-    quDatabasesdb_database_use_log_meta: TBooleanField;
-    quDatabasesdb_database_use_log_meta_custom_charset: TBooleanField;
-    quDatabasesdb_database_use_log_write_timestamp: TBooleanField;
-    quDatabasesdb_folders_id: TLargeintField;
-    quDatabasesItemdb_database_authentication_type: TStringField;
-    quDatabasesItemdb_database_auto_grant: TBooleanField;
-    quDatabasesItemdb_database_caption: TStringField;
-    quDatabasesItemdb_database_connected_charset: TStringField;
-    quDatabasesItemdb_database_database_name: TStringField;
-    quDatabasesItemdb_database_description: TMemoField;
-    quDatabasesItemdb_database_id: TLargeintField;
-    quDatabasesItemdb_database_library_name: TStringField;
-    quDatabasesItemdb_database_log_editor_filename: TStringField;
-    quDatabasesItemdb_database_log_meta_custom_charset: TStringField;
-    quDatabasesItemdb_database_log_meta_filename: TStringField;
-    quDatabasesItemdb_database_password: TStringField;
-    quDatabasesItemdb_database_remote_port: TLargeintField;
-    quDatabasesItemdb_database_server_name: TStringField;
-    quDatabasesItemdb_database_server_version: TStringField;
-    quDatabasesItemdb_database_shedule: TBooleanField;
-    quDatabasesItemdb_database_sort_order: TLargeintField;
-    quDatabasesItemdb_database_sql_engine: TStringField;
-    quDatabasesItemdb_database_username: TStringField;
-    quDatabasesItemdb_database_user_role: TStringField;
-    quDatabasesItemdb_database_use_log_editor: TBooleanField;
-    quDatabasesItemdb_database_use_log_meta: TBooleanField;
-    quDatabasesItemdb_database_use_log_meta_custom_charset: TBooleanField;
-    quDatabasesItemdb_database_use_log_write_timestamp: TBooleanField;
-    quDatabasesItemdb_folders_id: TLargeintField;
-    quDatabasesItemreport_manager_folder: TStringField;
-    quDatabasesItemshow_system_domains: TBooleanField;
-    quDatabasesItemshow_system_tables: TBooleanField;
-    quDatabasesItemshow_system_views: TBooleanField;
-    quDatabasesItemsp_editor_lazzy_mode: TBooleanField;
-    quDatabasesItemtrg_editor_lazzy_mode: TBooleanField;
-    quDatabasesreport_manager_folder: TStringField;
-    quDatabasesshow_system_domains: TBooleanField;
-    quDatabasesshow_system_tables: TBooleanField;
-    quDatabasesshow_system_views: TBooleanField;
-    quDatabasessp_editor_lazzy_mode: TBooleanField;
-    quDatabasestrg_editor_lazzy_mode: TBooleanField;
     quFoldersItem: TZQuery;
-    quFoldersdb_folders_code: TLargeintField;
-    quFoldersdb_folders_desc: TMemoField;
-    quFoldersdb_folders_expanded: TBooleanField;
-    quFoldersdb_folders_id: TLargeintField;
-    quFoldersdb_folders_name: TStringField;
     quFoldersDel: TZQuery;
-    quFoldersItemdb_folders_code: TLargeintField;
-    quFoldersItemdb_folders_desc: TMemoField;
-    quFoldersItemdb_folders_expanded: TBooleanField;
-    quFoldersItemdb_folders_id: TLargeintField;
-    quFoldersItemdb_folders_name: TStringField;
     quOldFolders: TZQuery;
-    quParamsHistorydb_database_id: TLargeintField;
-    quParamsHistorysql_editors_history_param_id: TLargeintField;
-    quParamsHistorysql_editors_history_param_name: TStringField;
-    quParamsHistorysql_editors_history_param_type: TLargeintField;
-    quParamsHistorysql_editors_history_param_value: TStringField;
-    quRecentItemsdb_database_id: TLargeintField;
-    quRecentItemsdb_recent_objects_date: TDateTimeField;
-    quRecentItemsdb_recent_objects_id: TLargeintField;
-    quRecentItemsdb_recent_objects_name: TStringField;
-    quRecentItemsdb_recent_objects_type: TLargeintField;
     quSQLFoldersAll: TZQuery;
     quSQLFoldersAlldb_database_id: TLargeintField;
     quSQLFoldersAllsql_editor_folders_code: TLargeintField;
     quSQLFoldersAllsql_editor_folders_desc: TMemoField;
     quSQLFoldersAllsql_editor_folders_id: TLargeintField;
     quSQLFoldersAllsql_editor_folders_name: TStringField;
-    quSQLFoldersdb_database_id: TLargeintField;
     quSQLFoldersIns: TZReadOnlyQuery;
-    quSQLFolderssql_editor_folders_code: TLargeintField;
-    quSQLFolderssql_editor_folders_desc: TMemoField;
-    quSQLFolderssql_editor_folders_id: TLargeintField;
-    quSQLFolderssql_editor_folders_name: TStringField;
-    quSQLHistorydb_database_id: TLargeintField;
-    quSQLHistorysql_editors_history_date: TDateTimeField;
-    quSQLHistorysql_editors_history_exec_time: TTimeField;
-    quSQLHistorysql_editors_history_id: TLargeintField;
-    quSQLHistorysql_editors_history_sql_page_name: TStringField;
-    quSQLHistorysql_editors_history_sql_plan: TMemoField;
-    quSQLHistorysql_editors_history_sql_text: TMemoField;
-    quSQLHistorysql_editors_history_sql_type: TLargeintField;
-    quSQLPagesdb_database_id: TLargeintField;
     quSQLPagesIns: TZReadOnlyQuery;
-    quSQLPagessql_editors_body: TMemoField;
-    quSQLPagessql_editors_caption: TStringField;
-    quSQLPagessql_editors_carret_pos_x: TLargeintField;
-    quSQLPagessql_editors_carret_pos_y: TLargeintField;
-    quSQLPagessql_editors_id: TLargeintField;
-    quSQLPagessql_editors_sel_end: TLargeintField;
-    quSQLPagessql_editors_sel_start: TLargeintField;
-    quSQLPagessql_editors_sort_order: TLargeintField;
-    quSQLPagessql_editor_folders_id: TLargeintField;
     quSQLPagesDel: TZReadOnlyQuery;
     quSysConst: TZQuery;
     quSysConst1: TZReadOnlyQuery;
@@ -181,9 +63,6 @@ type
     quSysConst1sys_const_name: TStringField;
     quSysConst1sys_const_value: TStringField;
     quOldSysConst: TZQuery;
-    quSysConstsys_consts_value_type: TLargeintField;
-    quSysConstsys_const_name: TStringField;
-    quSysConstsys_const_value: TStringField;
     UpdDB3: TZSQLProcessor;
     UpdDB4: TZSQLProcessor;
     UpdDB5: TZSQLProcessor;
@@ -278,13 +157,13 @@ begin
   if UserDBModule.quSysConst.RecordCount<1 then
   begin
     UserDBModule.quSysConst.Append;
-    UserDBModule.quSysConstsys_const_name.AsString:=ConstName;
+    UserDBModule.quSysConst.FieldByName('sys_const_name').AsString:=ConstName;
   end
   else
     UserDBModule.quSysConst.Edit;
-  UserDBModule.quSysConstsys_const_value.AsString:=Value;
-  if UserDBModule.quSysConstsys_consts_value_type.IsNull then
-    UserDBModule.quSysConstsys_consts_value_type.AsInteger:=ValueType;
+  UserDBModule.quSysConst.FieldByName('sys_const_value').AsString:=Value;
+  if UserDBModule.quSysConst.FieldByName('sys_consts_value_type').IsNull then
+    UserDBModule.quSysConst.FieldByName('sys_consts_value_type').AsInteger:=ValueType;
   UserDBModule.quSysConst.Post;
   UserDBModule.quSysConst.Close;
 end;
@@ -332,10 +211,10 @@ end;
 procedure TUserDBModule.DataModuleCreate(Sender: TObject);
 begin
   DoIntLRObjects;
-  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
-  UserDB.Protocol:='sqlite';
-  {$ELSE}
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   UserDB.Protocol:='sqlite-3';
+  {$ELSE}
+  UserDB.Protocol:='sqlite';
   {$ENDIF}
 end;
 
@@ -449,9 +328,9 @@ begin
   while not quOldSysConst.EOF do
   begin
     quSysConst.Append;
-    quSysConstsys_const_name.Assign(quOldSysConst.FieldByName('sys_const_name'));
-    quSysConstsys_const_value.Assign(quOldSysConst.FieldByName('sys_const_value'));
-    quSysConstsys_consts_value_type.Assign(quOldSysConst.FieldByName('sys_consts_value_type'));
+    quSysConst.FieldByName('sys_const_name').Assign(quOldSysConst.FieldByName('sys_const_name'));
+    quSysConst.FieldByName('sys_const_value').Assign(quOldSysConst.FieldByName('sys_const_value'));
+    quSysConst.FieldByName('sys_consts_value_type').Assign(quOldSysConst.FieldByName('sys_consts_value_type'));
     quSysConst.Post;
     quOldSysConst.Next;
   end;
@@ -466,10 +345,10 @@ begin
   while not quOldFolders.EOF do
   begin
     quFolders.Append;
-    quFoldersdb_folders_id.Assign(quOldFolders.FieldByName('db_folders_id'));
-    quFoldersdb_folders_code.Assign(quOldFolders.FieldByName('db_folders_code'));
-    quFoldersdb_folders_name.Assign(quOldFolders.FieldByName('db_folders_name'));
-    quFoldersdb_folders_desc.Assign(quOldFolders.FieldByName('db_folders_desc'));
+    quFolders.FieldByName('db_folders_id').Assign(quOldFolders.FieldByName('db_folders_id'));
+    quFolders.FieldByName('db_folders_code').Assign(quOldFolders.FieldByName('db_folders_code'));
+    quFolders.FieldByName('db_folders_name').Assign(quOldFolders.FieldByName('db_folders_name'));
+    quFolders.FieldByName('db_folders_desc').Assign(quOldFolders.FieldByName('db_folders_desc'));
     quFolders.Post;
     quOldFolders.Next;
   end;
@@ -495,6 +374,7 @@ begin
   FOldFileName:= LocalCfgFolder + OldUserDBFileName;
   if FileExistsUTF8(FOldFileName) then DeleteFileUTF8(FOldFileName);
   RenameFileUTF8(UserDB.Database, FOldFileName);
+  OldUserDB.Protocol:=UserDB.Protocol;
   OldUserDB.Database:=FOldFileName;
   OldUserDB.Connect;
   UserDB.Connect;
@@ -567,10 +447,10 @@ begin
     for i:=0 to Par.Count-1 do
     begin
       quParamsHistory.Append;
-      quParamsHistorydb_database_id.AsInteger:=ID;
-      quParamsHistorysql_editors_history_param_name.AsString:=Par.Names[i];
-      quParamsHistorysql_editors_history_param_value.AsString:=Par.ValueFromIndex[i];
-      quParamsHistorysql_editors_history_param_type.AsInteger:=2;
+      quParamsHistory.FieldByName('db_database_id').AsInteger:=ID;
+      quParamsHistory.FieldByName('sql_editors_history_param_name').AsString:=Par.Names[i];
+      quParamsHistory.FieldByName('sql_editors_history_param_value').AsString:=Par.ValueFromIndex[i];
+      quParamsHistory.FieldByName('sql_editors_history_param_type').AsInteger:=2;
       quParamsHistory.Post;
     end;
     Par.Free;
@@ -596,10 +476,10 @@ begin
   for i:=0 to C-1 do
   begin
     quFolders.Append;
-    quFoldersdb_folders_code.AsInteger:=i;
-    quFoldersdb_folders_name.AsString:=DBListStream.ReadString('Folders/Item'+IntToStr(i), 'Name', '');
-    quFoldersdb_folders_desc.AsString:=DBListStream.ReadString('Folders/Item'+IntToStr(i), 'Description', '');
-    quFoldersdb_folders_expanded.AsBoolean:=DBListStream.ReadBool('Folders/Item'+IntToStr(i), 'Expandex', false);
+    quFolders.FieldByName('db_folders_code').AsInteger:=i;
+    quFolders.FieldByName('db_folders_name').AsString:=DBListStream.ReadString('Folders/Item'+IntToStr(i), 'Name', '');
+    quFolders.FieldByName('db_folders_desc').AsString:=DBListStream.ReadString('Folders/Item'+IntToStr(i), 'Description', '');
+    quFolders.FieldByName('db_folders_expanded').AsBoolean:=DBListStream.ReadBool('Folders/Item'+IntToStr(i), 'Expandex', false);
     quFolders.Post;
   end;
   quFolders.Refresh;
@@ -610,48 +490,48 @@ begin
     AItemName:='Item_'+IntToStr(i);
     quDatabases.Append;
     //quDatabasesdb_database_id: TLargeintField;
-    quDatabasesdb_database_sql_engine.AsString:=DBListStream.ReadString(aItemName, 'SQLEngine', '');
-    if quDatabasesdb_database_sql_engine.AsString = 'TMySQLEngine' then
-      quDatabasesdb_database_sql_engine.AsString:='TSQLEngineMySQL';
-    quDatabasesdb_database_sort_order.AsInteger:=i;
-    quDatabasesdb_database_description.AsString:='';
+    quDatabases.FieldByName('db_database_sql_engine').AsString:=DBListStream.ReadString(aItemName, 'SQLEngine', '');
+    if quDatabases.FieldByName('db_database_sql_engine').AsString = 'TMySQLEngine' then
+      quDatabases.FieldByName('db_database_sql_engine').AsString:='TSQLEngineMySQL';
+    quDatabases.FieldByName('db_database_sort_order').AsInteger:=i;
+    quDatabases.FieldByName('db_database_description').AsString:='';
 
-    quDatabasesdb_database_database_name.AsString:=DBListStream.ReadString(aItemName, 'DataBaseName', '');
-    quDatabasesdb_database_username.AsString:=DBListStream.ReadString(aItemName, 'UserName', '');;
-    quDatabasesdb_database_password.AsString:=DBListStream.ReadString(aItemName, 'Password', '');
-    quDatabasesdb_database_caption.AsString:=DBListStream.ReadString(aItemName, 'AliasName', '');
-    quDatabasesdb_database_server_name.AsString:=DBListStream.ReadString(aItemName, 'ServerName', '');
-    quDatabasesdb_database_remote_port.AsInteger:=DBListStream.ReadInteger(aItemName, 'RemotePort', 0);
-    quDatabasesdb_database_server_version.AsString:=DBListStream.ReadString(aItemName, 'ServerVersion', '');
-    quDatabasesdb_database_connected_charset.AsString:=DBListStream.ReadString(aItemName, TargetOS+'-CharSet', '');
+    quDatabases.FieldByName('db_database_database_name').AsString:=DBListStream.ReadString(aItemName, 'DataBaseName', '');
+    quDatabases.FieldByName('db_database_username').AsString:=DBListStream.ReadString(aItemName, 'UserName', '');;
+    quDatabases.FieldByName('db_database_password').AsString:=DBListStream.ReadString(aItemName, 'Password', '');
+    quDatabases.FieldByName('db_database_caption').AsString:=DBListStream.ReadString(aItemName, 'AliasName', '');
+    quDatabases.FieldByName('db_database_server_name').AsString:=DBListStream.ReadString(aItemName, 'ServerName', '');
+    quDatabases.FieldByName('db_database_remote_port').AsInteger:=DBListStream.ReadInteger(aItemName, 'RemotePort', 0);
+    quDatabases.FieldByName('db_database_server_version').AsString:=DBListStream.ReadString(aItemName, 'ServerVersion', '');
+    quDatabases.FieldByName('db_database_connected_charset').AsString:=DBListStream.ReadString(aItemName, TargetOS+'-CharSet', '');
 
     if DBListStream.ReadString(aItemName, 'RoleName ', '') <> '' then
-      quDatabasesdb_database_user_role.AsString:=DBListStream.ReadString(aItemName, 'RoleName ', '')
+      quDatabases.FieldByName('db_database_user_role').AsString:=DBListStream.ReadString(aItemName, 'RoleName ', '')
     else
     if DBListStream.ReadString(aItemName, 'UserRole ', '') <> '' then
-      quDatabasesdb_database_user_role.AsString:=DBListStream.ReadString(aItemName, 'UserRole ', '');
+      quDatabases.FieldByName('db_database_user_role').AsString:=DBListStream.ReadString(aItemName, 'UserRole ', '');
 
-    quDatabasesreport_manager_folder.AsString:=DBListStream.ReadString(aItemName, 'ReportManagerFolder', '');
-    quDatabasesshow_system_tables.AsBoolean:=DBListStream.ReadBool(aItemName, 'ShowSystemTables', false);
-    quDatabasessp_editor_lazzy_mode.AsBoolean:=DBListStream.ReadBool(aItemName, 'SPEditLazzyMode', false);
-    quDatabasestrg_editor_lazzy_mode.AsBoolean:=DBListStream.ReadBool(aItemName, 'TriggerEditLazzyMode', false);
-    quDatabasesdb_database_shedule.AsBoolean:=DBListStream.ReadBool(aItemName, 'UsePGShedule', false);
-    quDatabasesdb_database_library_name.AsString:=DBListStream.ReadString(aItemName, 'ClientLibraryName', '');
-    quDatabasesdb_database_authentication_type.AsString:=DBListStream.ReadString(aItemName, 'AuthenticationType', '');
-    quDatabasesdb_database_auto_grant.AsBoolean:=DBListStream.ReadBool(AItemName, 'AutoGrantObject', false);
-    quDatabasesdb_database_use_log_meta.AsBoolean:=DBListStream.ReadBool(aItemName, 'LogMetadata', false);
-    quDatabasesdb_database_use_log_editor.AsBoolean:=DBListStream.ReadBool(aItemName, 'LogSQLEditor', false);
-    quDatabasesdb_database_log_meta_filename.AsString:=DBListStream.ReadString(aItemName, 'LogFileMetadata', '');
-    quDatabasesdb_database_log_editor_filename.AsString:=DBListStream.ReadString(aItemName, 'LogFileSQLEditor', '');
-    quDatabasesdb_database_use_log_meta_custom_charset.AsBoolean:=DBListStream.ReadString(aItemName, 'LogFileCodePage', '') <> '';
-    quDatabasesdb_database_log_meta_custom_charset.AsString:=DBListStream.ReadString(aItemName, 'LogFileCodePage', '');
-    quDatabasesdb_database_use_log_write_timestamp.AsBoolean:=DBListStream.ReadBool(aItemName, 'LogTimestamp', false);
+    quDatabases.FieldByName('report_manager_folder').AsString:=DBListStream.ReadString(aItemName, 'ReportManagerFolder', '');
+    quDatabases.FieldByName('show_system_tables').AsBoolean:=DBListStream.ReadBool(aItemName, 'ShowSystemTables', false);
+    quDatabases.FieldByName('sp_editor_lazzy_mode').AsBoolean:=DBListStream.ReadBool(aItemName, 'SPEditLazzyMode', false);
+    quDatabases.FieldByName('trg_editor_lazzy_mode').AsBoolean:=DBListStream.ReadBool(aItemName, 'TriggerEditLazzyMode', false);
+    quDatabases.FieldByName('db_database_shedule').AsBoolean:=DBListStream.ReadBool(aItemName, 'UsePGShedule', false);
+    quDatabases.FieldByName('db_database_library_name').AsString:=DBListStream.ReadString(aItemName, 'ClientLibraryName', '');
+    quDatabases.FieldByName('db_database_authentication_type').AsString:=DBListStream.ReadString(aItemName, 'AuthenticationType', '');
+    quDatabases.FieldByName('db_database_auto_grant').AsBoolean:=DBListStream.ReadBool(AItemName, 'AutoGrantObject', false);
+    quDatabases.FieldByName('db_database_use_log_meta').AsBoolean:=DBListStream.ReadBool(aItemName, 'LogMetadata', false);
+    quDatabases.FieldByName('db_database_use_log_editor').AsBoolean:=DBListStream.ReadBool(aItemName, 'LogSQLEditor', false);
+    quDatabases.FieldByName('db_database_log_meta_filename').AsString:=DBListStream.ReadString(aItemName, 'LogFileMetadata', '');
+    quDatabases.FieldByName('db_database_log_editor_filename').AsString:=DBListStream.ReadString(aItemName, 'LogFileSQLEditor', '');
+    quDatabases.FieldByName('db_database_use_log_meta_custom_charset').AsBoolean:=DBListStream.ReadString(aItemName, 'LogFileCodePage', '') <> '';
+    quDatabases.FieldByName('db_database_log_meta_custom_charset').AsString:=DBListStream.ReadString(aItemName, 'LogFileCodePage', '');
+    quDatabases.FieldByName('db_database_use_log_write_timestamp').AsBoolean:=DBListStream.ReadBool(aItemName, 'LogTimestamp', false);
 
 
     S:=DBListStream.ReadString(aItemName, 'OIFolder', '');
     if S <> '' then
       if quFolders.Locate('db_folders_name', S, []) then
-        quDatabasesdb_folders_id.AsInteger:=quFoldersdb_folders_id.AsInteger;
+        quDatabases.FieldByName('db_folders_id').AsInteger:=quFolders.FieldByName('db_folders_id').AsInteger;
 
     quDatabases.Post;
   end;
@@ -662,7 +542,7 @@ begin
   while not quDatabases.EOF do
   begin
     SO:=0;
-    AItemName:='Item_'+IntToStr(quDatabasesdb_database_sort_order.AsInteger);
+    AItemName:='Item_'+IntToStr(quDatabases.FieldByName('db_database_sort_order').AsInteger);
     C:=DBListStream.ReadInteger(aItemName, 'SqlPageCount', 0);
     for i:=0 to C-1 do
     begin
@@ -670,10 +550,10 @@ begin
       if (S<>'') and (DBListStream.ReadString(aItemName, 'SqlGroup_'+S, '') <> '') then
       begin
         S1:=DBListStream.ReadString(aItemName, 'SqlGroup_'+S, '');
-        if not quSQLFoldersAll.Locate('db_database_id;sql_editor_folders_name', VarArrayOf([quDatabasesdb_database_id.AsInteger, S1]), []) then
+        if not quSQLFoldersAll.Locate('db_database_id;sql_editor_folders_name', VarArrayOf([quDatabases.FieldByName('db_database_id').AsInteger, S1]), []) then
         begin
           quSQLFoldersAll.Append;
-          quSQLFoldersAlldb_database_id.AsInteger:=quDatabasesdb_database_id.AsInteger;
+          quSQLFoldersAlldb_database_id.AsInteger:=quDatabases.FieldByName('db_database_id').AsInteger;
           quSQLFoldersAllsql_editor_folders_code.AsInteger:=SO;
           quSQLFoldersAllsql_editor_folders_name.AsString:=S1;
           quSQLFoldersAll.Post;
@@ -689,14 +569,14 @@ begin
   quDatabases.First;
   while not quDatabases.EOF do
   begin
-    AItemName:='Item_'+IntToStr(quDatabasesdb_database_sort_order.AsInteger);
+    AItemName:='Item_'+IntToStr(quDatabases.FieldByName('db_database_sort_order').AsInteger);
     SDataFolder:=DBListStream.ReadString(aItemName, 'SavedFolder', '');
-    DoLoadHistory(quDatabasesdb_database_id.AsInteger, quDatabasesdb_database_sort_order.AsInteger);
+    DoLoadHistory(quDatabases.FieldByName('db_database_id').AsInteger, quDatabases.FieldByName('db_database_sort_order').AsInteger);
 
     if SDataFolder <> '' then
     begin
-      ImportLoadRecentObjects(quDatabasesdb_database_id.AsInteger, SDataFolder);
-      ImportLoadSQLPages(DBListStream, AItemName, quDatabasesdb_database_id.AsInteger, SDataFolder);
+      ImportLoadRecentObjects(quDatabases.FieldByName('db_database_id').AsInteger, SDataFolder);
+      ImportLoadSQLPages(DBListStream, AItemName, quDatabases.FieldByName('db_database_id').AsInteger, SDataFolder);
 
       DeleteDirectory(LocalCfgFolder + SDataFolder, false);
     end;
@@ -739,10 +619,10 @@ begin
     if Ini.ReadString('Windows', S, '') <> '' then
     begin
       quRecentItems.Append;
-      quRecentItemsdb_database_id.AsInteger:=DataBaseID;
-      quRecentItemsdb_recent_objects_date.AsDateTime:=Now;
-      quRecentItemsdb_recent_objects_type.AsInteger:=0;
-      quRecentItemsdb_recent_objects_name.AsString:=Ini.ReadString('Windows', S, '');
+      quRecentItems.FieldByName('db_database_id').AsInteger:=DataBaseID;
+      quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Now;
+      quRecentItems.FieldByName('db_recent_objects_type').AsInteger:=0;
+      quRecentItems.FieldByName('db_recent_objects_name').AsString:=Ini.ReadString('Windows', S, '');
       quRecentItems.Post;
     end;
   end;
@@ -750,10 +630,10 @@ begin
   if Ini.ReadInteger('SQLEditor', 'Present', 0) = 1 then
   begin
     quRecentItems.Append;
-    quRecentItemsdb_database_id.AsInteger:=DataBaseID;
-    quRecentItemsdb_recent_objects_date.AsDateTime:=Now;
-    quRecentItemsdb_recent_objects_type.AsInteger:=5;
-    quRecentItemsdb_recent_objects_name.AsString:='FBM SQL EDITOR';
+    quRecentItems.FieldByName('db_database_id').AsInteger:=DataBaseID;
+    quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Now;
+    quRecentItems.FieldByName('db_recent_objects_type').AsInteger:=5;
+    quRecentItems.FieldByName('db_recent_objects_name').AsString:='FBM SQL EDITOR';
     quRecentItems.Post;
   end;
 
@@ -764,10 +644,10 @@ begin
     if Ini.ReadString('SQLSctip_Recent', S+'_FileName', '') <> '' then
     begin
       quRecentItems.Append;
-      quRecentItemsdb_database_id.AsInteger:=DataBaseID;
-      quRecentItemsdb_recent_objects_date.AsDateTime:=Ini.ReadDateTime('SQLSctip_Recent', S+'_FileDate', Now);
-      quRecentItemsdb_recent_objects_type.AsInteger:=4;
-      quRecentItemsdb_recent_objects_name.AsString:=Ini.ReadString('SQLSctip_Recent', S+'_FileName', '');
+      quRecentItems.FieldByName('db_database_id').AsInteger:=DataBaseID;
+      quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Ini.ReadDateTime('SQLSctip_Recent', S+'_FileDate', Now);
+      quRecentItems.FieldByName('db_recent_objects_type').AsInteger:=4;
+      quRecentItems.FieldByName('db_recent_objects_name').AsString:=Ini.ReadString('SQLSctip_Recent', S+'_FileName', '');
       quRecentItems.Post;
     end;
   end;
@@ -780,10 +660,10 @@ begin
     if Ini.ReadString('DBItems_Recent', S+'_FileName', '') <> '' then
     begin
       quRecentItems.Append;
-      quRecentItemsdb_database_id.AsInteger:=DataBaseID;
-      quRecentItemsdb_recent_objects_date.AsDateTime:=Ini.ReadDateTime('SQLSctip_Recent', S+'_FileDate', Now);
-      quRecentItemsdb_recent_objects_type.AsInteger:=2;
-      quRecentItemsdb_recent_objects_name.AsString:=Ini.ReadString('SQLSctip_Recent', S+'_FileName', '');
+      quRecentItems.FieldByName('db_database_id').AsInteger:=DataBaseID;
+      quRecentItems.FieldByName('db_recent_objects_date').AsDateTime:=Ini.ReadDateTime('SQLSctip_Recent', S+'_FileDate', Now);
+      quRecentItems.FieldByName('db_recent_objects_type').AsInteger:=2;
+      quRecentItems.FieldByName('db_recent_objects_name').AsString:=Ini.ReadString('SQLSctip_Recent', S+'_FileName', '');
       quRecentItems.Post;
     end;
   end;
@@ -803,23 +683,23 @@ begin
   begin
     SPage:=Ini.ReadString(aItemName, 'SQLEdit_Page_'+IntToStr(i), '');
     quSQLPages.Append;
-    quSQLPagesdb_database_id.AsInteger:=DataBaseID;
-    quSQLPagessql_editors_caption.AsString:=Ini.ReadString(aItemName, 'SqlName_'+SPage, '');
-    quSQLPagessql_editors_carret_pos_x.AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_CaretX', 0);
-    quSQLPagessql_editors_carret_pos_y.AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_CaretY', 0);
-    quSQLPagessql_editors_sel_start.AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_SelStart', 0);
-    quSQLPagessql_editors_sel_end.AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_SelEnd', 0);
-    quSQLPagessql_editors_sort_order.AsInteger:=i;
+    quSQLPages.FieldByName('db_database_id').AsInteger:=DataBaseID;
+    quSQLPages.FieldByName('sql_editors_caption').AsString:=Ini.ReadString(aItemName, 'SqlName_'+SPage, '');
+    quSQLPages.FieldByName('sql_editors_carret_pos_x').AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_CaretX', 0);
+    quSQLPages.FieldByName('sql_editors_carret_pos_y').AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_CaretY', 0);
+    quSQLPages.FieldByName('sql_editors_sel_start').AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_SelStart', 0);
+    quSQLPages.FieldByName('sql_editors_sel_end').AsInteger:=Ini.ReadInteger(aItemName, 'SQLEdit_'+SPage+'_SelEnd', 0);
+    quSQLPages.FieldByName('sql_editors_sort_order').AsInteger:=i;
     S:=Ini.ReadString(aItemName, 'SQLEdit_'+SPage+'_FileName', '');
     S:=AppendPathDelim(LocalCfgFolder + ADataFolder) + S;
     S1:=LoadFormTextFile(S);
-    quSQLPagessql_editors_body.AsString:=S1;
+    quSQLPages.FieldByName('sql_editors_body').AsString:=S1;
 
     S1:=Ini.ReadString(aItemName, 'SqlGroup_'+SPage, '');
     if (S1<>'') then
     begin
       if quSQLFoldersAll.Locate('db_database_id;sql_editor_folders_name', VarArrayOf([DataBaseID, S1]), []) then
-        quSQLPagessql_editor_folders_id.AsInteger:=quSQLFoldersAllsql_editor_folders_id.AsInteger;
+        quSQLPages.FieldByName('sql_editor_folders_id').AsInteger:=quSQLFoldersAllsql_editor_folders_id.AsInteger;
     end;
 
     quSQLPages.Post;

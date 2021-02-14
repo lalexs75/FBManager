@@ -2,23 +2,24 @@ object UserDBModule: TUserDBModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
-  Height = 608
-  HorizontalOffset = 318
-  VerticalOffset = 129
-  Width = 906
+  Height = 595
+  HorizontalOffset = 311
+  VerticalOffset = 126
+  Width = 887
+  PPI = 94
   object UserDB: TZConnection
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
       'codepage=UTF-8'
+      'RawStringEncoding=DB_CP'
     )
     DesignConnection = True
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 40
+    Left = 39
     Top = 14
   end
   object InitDB: TZSQLProcessor
@@ -176,12 +177,13 @@ object UserDBModule: TUserDBModule
     Connection = UserDB
     Delimiter = ';'
     Left = 128
-    Top = 16
+    Top = 8
   end
   object ZReadOnlyQuery1: TZReadOnlyQuery
     Params = <>
-    Left = 48
-    Top = 256
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 47
+    Top = 251
   end
   object quSysConst1: TZReadOnlyQuery
     Connection = UserDB
@@ -196,7 +198,8 @@ object UserDBModule: TUserDBModule
       '  sys_const.sys_const_name'
     )
     Params = <>
-    Left = 276
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 270
     Top = 14
     object quSysConst1sys_consts_value_type: TLongintField
       DisplayWidth = 10
@@ -250,28 +253,20 @@ object UserDBModule: TUserDBModule
       '  (sys_const.sys_const_name = :sys_const_name)'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
+    Left = 227
     Top = 14
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sys_const_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sys_const_value'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sys_consts_value_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_sys_const_name'
-        ParamType = ptUnknown
       end>
   end
   object quSysConst: TZQuery
@@ -291,51 +286,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'sys_const_name'
-        ParamType = ptUnknown
       end>
-    Left = 192
+    Left = 188
     Top = 14
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sys_const_name'
-        ParamType = ptUnknown
       end>
-    object quSysConstsys_const_name: TStringField
-      FieldKind = fkData
-      FieldName = 'sys_const_name'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quSysConstsys_const_value: TStringField
-      FieldKind = fkData
-      FieldName = 'sys_const_value'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quSysConstsys_consts_value_type: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sys_consts_value_type'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
   end
   object OldUserDB: TZConnection
     ControlsCodePage = cCP_UTF8
-    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
@@ -345,7 +306,7 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 592
+    Left = 580
     Top = 8
   end
   object quOldSysConst: TZQuery
@@ -358,7 +319,7 @@ object UserDBModule: TUserDBModule
       '  sys_const'
     )
     Params = <>
-    Left = 640
+    Left = 627
     Top = 8
   end
   object usFolders: TZUpdateSQL
@@ -385,38 +346,26 @@ object UserDBModule: TUserDBModule
       '  ((db_folders.db_folders_id IS NULL AND :OLD_db_folders_id IS NULL) OR (db_folders.db_folders_id = :OLD_db_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 78
+    Left = 227
+    Top = 76
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_folders_expanded'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_folders_id'
-        ParamType = ptUnknown
       end>
   end
   object quFolders: TZQuery
@@ -435,57 +384,8 @@ object UserDBModule: TUserDBModule
       '  db_folders.db_folders_code'
     )
     Params = <>
-    Left = 192
-    Top = 78
-    object quFoldersdb_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quFoldersdb_folders_code: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_code'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quFoldersdb_folders_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_folders_name'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quFoldersdb_folders_desc: TMemoField
-      FieldKind = fkData
-      FieldName = 'db_folders_desc'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quFoldersdb_folders_expanded: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_folders_expanded'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
+    Left = 188
+    Top = 76
   end
   object usDatabases: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -559,183 +459,113 @@ object UserDBModule: TUserDBModule
       '  ((db_database.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_database.db_database_id = :OLD_db_database_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 136
+    Left = 227
+    Top = 133
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_sql_engine'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_server_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_database_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_username'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_password'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_user_role'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_connected_charset'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_server_version'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_remote_port'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_description'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'report_manager_folder'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sp_editor_lazzy_mode'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'trg_editor_lazzy_mode'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'show_system_domains'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'show_system_tables'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'show_system_views'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_shedule'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_library_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_authentication_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_auto_grant'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_use_log_meta'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_use_log_editor'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_log_meta_filename'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_log_editor_filename'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_use_log_meta_custom_charset'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_use_log_write_timestamp'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_log_meta_custom_charset'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'show_child_objects'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_log_script_exec_filename'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_use_log_script_exec'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_database_id'
-        ParamType = ptUnknown
       end>
   end
   object quDatabases: TZQuery
@@ -784,345 +614,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 192
-    Top = 136
-    object quDatabasesdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesdb_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesdb_database_caption: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_caption'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 1000
-    end
-    object quDatabasesdb_database_sql_engine: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_sql_engine'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 400
-    end
-    object quDatabasesdb_database_server_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_server_name'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_database_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_database_name'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 1000
-    end
-    object quDatabasesdb_database_username: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_username'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesdb_database_password: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_password'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesdb_database_user_role: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_user_role'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesdb_database_connected_charset: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_connected_charset'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quDatabasesdb_database_server_version: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_server_version'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quDatabasesdb_database_remote_port: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_remote_port'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesdb_database_description: TMemoField
-      FieldKind = fkData
-      FieldName = 'db_database_description'
-      Index = 12
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quDatabasesdb_database_sort_order: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_sort_order'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesreport_manager_folder: TStringField
-      FieldKind = fkData
-      FieldName = 'report_manager_folder'
-      Index = 14
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasessp_editor_lazzy_mode: TBooleanField
-      FieldKind = fkData
-      FieldName = 'sp_editor_lazzy_mode'
-      Index = 15
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasestrg_editor_lazzy_mode: TBooleanField
-      FieldKind = fkData
-      FieldName = 'trg_editor_lazzy_mode'
-      Index = 16
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesshow_system_domains: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_domains'
-      Index = 17
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesshow_system_tables: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_tables'
-      Index = 18
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesshow_system_views: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_views'
-      Index = 19
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_shedule: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_shedule'
-      Index = 20
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_library_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_library_name'
-      Index = 21
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_authentication_type: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_authentication_type'
-      Index = 22
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_auto_grant: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_auto_grant'
-      Index = 23
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_use_log_meta: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_meta'
-      Index = 24
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_use_log_editor: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_editor'
-      Index = 25
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_log_meta_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_meta_filename'
-      Index = 26
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_log_editor_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_editor_filename'
-      Index = 27
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_use_log_meta_custom_charset: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_meta_custom_charset'
-      Index = 28
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_use_log_write_timestamp: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_write_timestamp'
-      Index = 29
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_log_meta_custom_charset: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_meta_custom_charset'
-      Index = 30
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 600
-    end
-    object quDatabasesshow_child_objects: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_child_objects'
-      Index = 31
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesdb_database_log_script_exec_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_script_exec_filename'
-      Index = 32
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesdb_database_use_log_script_exec: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_script_exec'
-      Index = 33
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
+    Left = 188
+    Top = 133
   end
   object quOldFolders: TZQuery
     Connection = OldUserDB
@@ -1134,8 +627,8 @@ object UserDBModule: TUserDBModule
       '  db_folders'
     )
     Params = <>
-    Left = 640
-    Top = 66
+    Left = 627
+    Top = 65
   end
   object usParamsHistory: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1162,38 +655,26 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history_param.sql_editors_history_param_id IS NULL AND :OLD_sql_editors_history_param_id IS NULL) OR (sql_editors_history_param.sql_editors_history_param_id = :OLD_sql_editors_history_param_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 192
+    Left = 227
+    Top = 188
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_param_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_param_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_param_value'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_param_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_sql_editors_history_param_id'
-        ParamType = ptUnknown
       end>
   end
   object quParamsHistory: TZQuery
@@ -1213,77 +694,26 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 192
+    Left = 188
+    Top = 188
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quParamsHistorysql_editors_history_param_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_param_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quParamsHistorydb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
-    object quParamsHistorysql_editors_history_param_name: TStringField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_param_name'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 1000
-    end
-    object quParamsHistorysql_editors_history_param_value: TStringField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_param_value'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quParamsHistorysql_editors_history_param_type: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_param_type'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
   end
   object ZUpdateSQL4: TZUpdateSQL
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 536
+    Left = 227
+    Top = 525
   end
   object ZQuery4: TZQuery
     Connection = UserDB
     UpdateObject = ZUpdateSQL4
     Params = <>
-    Left = 192
-    Top = 536
+    Left = 188
+    Top = 525
   end
   object usRecentItems: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1310,38 +740,26 @@ object UserDBModule: TUserDBModule
       '  ((db_recent_objects.db_recent_objects_id IS NULL AND :OLD_db_recent_objects_id IS NULL) OR (db_recent_objects.db_recent_objects_id = :OLD_db_recent_objects_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 248
+    Left = 227
+    Top = 243
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_date'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_recent_objects_id'
-        ParamType = ptUnknown
       end>
   end
   object quRecentItems: TZQuery
@@ -1365,74 +783,20 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_type'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 248
+    Left = 188
+    Top = 243
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_type'
-        ParamType = ptUnknown
       end>
-    object quRecentItemsdb_recent_objects_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_recent_objects_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quRecentItemsdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
-    object quRecentItemsdb_recent_objects_type: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_recent_objects_type'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
-    object quRecentItemsdb_recent_objects_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_recent_objects_name'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quRecentItemsdb_recent_objects_date: TDateTimeField
-      FieldKind = fkData
-      FieldName = 'db_recent_objects_date'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
   end
   object usSQLHistory: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1464,53 +828,35 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history.sql_editors_history_id IS NULL AND :OLD_sql_editors_history_id IS NULL) OR (sql_editors_history.sql_editors_history_id = :OLD_sql_editors_history_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 296
+    Left = 227
+    Top = 290
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_date'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_sql_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_exec_time'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_sql_page_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_sql_text'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_history_sql_plan'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_sql_editors_history_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLHistory: TZQuery
@@ -1535,95 +881,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 296
+    Left = 188
+    Top = 290
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quSQLHistorysql_editors_history_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLHistorydb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
-    object quSQLHistorysql_editors_history_date: TDateTimeField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_date'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLHistorysql_editors_history_sql_type: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_sql_type'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLHistorysql_editors_history_exec_time: TTimeField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_exec_time'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLHistorysql_editors_history_sql_page_name: TStringField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_sql_page_name'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quSQLHistorysql_editors_history_sql_text: TMemoField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_sql_text'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quSQLHistorysql_editors_history_sql_plan: TMemoField
-      FieldKind = fkData
-      FieldName = 'sql_editors_history_sql_plan'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
   end
   object usSQLFolders: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1650,38 +915,26 @@ object UserDBModule: TUserDBModule
       '  ((sql_editor_folders.sql_editor_folders_id IS NULL AND :OLD_sql_editor_folders_id IS NULL) OR (sql_editor_folders.sql_editor_folders_id = :OLD_sql_editor_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 352
+    Left = 227
+    Top = 345
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_sql_editor_folders_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLFolders: TZQuery
@@ -1703,66 +956,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 352
+    Left = 188
+    Top = 345
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quSQLFolderssql_editor_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editor_folders_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLFolderssql_editor_folders_name: TStringField
-      FieldKind = fkData
-      FieldName = 'sql_editor_folders_name'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quSQLFolderssql_editor_folders_code: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editor_folders_code'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLFolderssql_editor_folders_desc: TMemoField
-      FieldKind = fkData
-      FieldName = 'sql_editor_folders_desc'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quSQLFoldersdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
   end
   object usSQLPages: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1796,63 +997,41 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors.sql_editors_id IS NULL AND :OLD_sql_editors_id IS NULL) OR (sql_editors.sql_editors_id = :OLD_sql_editors_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 408
+    Left = 227
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_body'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_sql_editors_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLPages: TZQuery
@@ -1880,111 +1059,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 408
+    Left = 188
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quSQLPagessql_editors_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagesdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editor_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editor_folders_id'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_caption: TStringField
-      FieldKind = fkData
-      FieldName = 'sql_editors_caption'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quSQLPagessql_editors_sort_order: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_sort_order'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_carret_pos_x: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_carret_pos_x'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_carret_pos_y: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_carret_pos_y'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_sel_start: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_sel_start'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_sel_end: TLargeintField
-      FieldKind = fkData
-      FieldName = 'sql_editors_sel_end'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quSQLPagessql_editors_body: TMemoField
-      FieldKind = fkData
-      FieldName = 'sql_editors_body'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
   end
   object quSQLFoldersUpd: TZReadOnlyQuery
     Connection = UserDB
@@ -2007,57 +1089,38 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 289
-    Top = 352
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 283
+    Top = 345
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLPagesUpd: TZReadOnlyQuery
@@ -2080,107 +1143,68 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_body'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
-    Left = 289
-    Top = 408
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 283
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_body'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLFoldersAll: TZQuery
@@ -2199,8 +1223,8 @@ object UserDBModule: TUserDBModule
       '  sql_editor_folders.sql_editor_folders_code'
     )
     Params = <>
-    Left = 120
-    Top = 352
+    Left = 118
+    Top = 345
     object quSQLFoldersAllsql_editor_folders_id: TLargeintField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_id'
@@ -2260,47 +1284,32 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 344
-    Top = 352
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 337
+    Top = 345
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLPagesIns: TZReadOnlyQuery
@@ -2318,97 +1327,62 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_body'
-        ParamType = ptUnknown
       end>
-    Left = 344
-    Top = 408
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 337
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_caption'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_body'
-        ParamType = ptUnknown
       end>
   end
   object quLastID: TZReadOnlyQuery
@@ -2417,8 +1391,9 @@ object UserDBModule: TUserDBModule
       'SELECT last_insert_rowid()'
     )
     Params = <>
-    Left = 40
-    Top = 64
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 39
+    Top = 63
   end
   object quRecentClear: TZReadOnlyQuery
     Connection = UserDB
@@ -2433,17 +1408,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 272
-    Top = 248
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 266
+    Top = 243
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
   end
   object quInsRecent: TZReadOnlyQuery
@@ -2458,47 +1430,32 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_date'
-        ParamType = ptUnknown
       end>
-    Left = 320
-    Top = 248
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 313
+    Top = 243
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_recent_objects_date'
-        ParamType = ptUnknown
       end>
   end
   object quDatabasesItem: TZQuery
@@ -2550,355 +1507,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 272
-    Top = 136
+    Left = 266
+    Top = 133
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quDatabasesItemdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesItemdb_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_id'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesItemdb_database_caption: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_caption'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_sql_engine: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_sql_engine'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 400
-    end
-    object quDatabasesItemdb_database_server_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_server_name'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_database_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_database_name'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_username: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_username'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesItemdb_database_password: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_password'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesItemdb_database_user_role: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_user_role'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 800
-    end
-    object quDatabasesItemdb_database_connected_charset: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_connected_charset'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quDatabasesItemdb_database_server_version: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_server_version'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quDatabasesItemdb_database_remote_port: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_remote_port'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesItemdb_database_description: TMemoField
-      FieldKind = fkData
-      FieldName = 'db_database_description'
-      Index = 12
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quDatabasesItemdb_database_sort_order: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_sort_order'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDatabasesItemreport_manager_folder: TStringField
-      FieldKind = fkData
-      FieldName = 'report_manager_folder'
-      Index = 14
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemsp_editor_lazzy_mode: TBooleanField
-      FieldKind = fkData
-      FieldName = 'sp_editor_lazzy_mode'
-      Index = 15
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemtrg_editor_lazzy_mode: TBooleanField
-      FieldKind = fkData
-      FieldName = 'trg_editor_lazzy_mode'
-      Index = 16
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemshow_system_domains: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_domains'
-      Index = 17
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemshow_system_tables: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_tables'
-      Index = 18
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemshow_system_views: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_system_views'
-      Index = 19
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_shedule: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_shedule'
-      Index = 20
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_library_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_library_name'
-      Index = 21
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_authentication_type: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_authentication_type'
-      Index = 22
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_auto_grant: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_auto_grant'
-      Index = 23
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_use_log_meta: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_meta'
-      Index = 24
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_use_log_editor: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_editor'
-      Index = 25
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_log_meta_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_meta_filename'
-      Index = 26
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_log_editor_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_editor_filename'
-      Index = 27
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_use_log_meta_custom_charset: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_meta_custom_charset'
-      Index = 28
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_use_log_write_timestamp: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_write_timestamp'
-      Index = 29
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_log_meta_custom_charset: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_meta_custom_charset'
-      Index = 30
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 600
-    end
-    object quDatabasesItemshow_child_objects: TBooleanField
-      FieldKind = fkData
-      FieldName = 'show_child_objects'
-      Index = 31
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
-    object quDatabasesItemdb_database_log_script_exec_filename: TStringField
-      FieldKind = fkData
-      FieldName = 'db_database_log_script_exec_filename'
-      Index = 32
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object quDatabasesItemdb_database_use_log_script_exec: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_database_use_log_script_exec'
-      Index = 33
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
   end
   object quFoldersItem: TZQuery
     Connection = UserDB
@@ -2917,67 +1533,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end>
-    Left = 272
-    Top = 78
+    Left = 266
+    Top = 76
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end>
-    object quFoldersItemdb_folders_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quFoldersItemdb_folders_code: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_folders_code'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quFoldersItemdb_folders_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_folders_name'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quFoldersItemdb_folders_desc: TMemoField
-      FieldKind = fkData
-      FieldName = 'db_folders_desc'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object quFoldersItemdb_folders_expanded: TBooleanField
-      FieldKind = fkData
-      FieldName = 'db_folders_expanded'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      DisplayValues = 'True;False'
-    end
   end
   object quFoldersDel: TZQuery
     Connection = UserDB
@@ -2989,17 +1552,13 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end>
-    Left = 312
-    Top = 78
+    Left = 306
+    Top = 76
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_folders_id'
-        ParamType = ptUnknown
       end>
   end
   object quOldDatabases: TZQuery
@@ -3045,8 +1604,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 640
-    Top = 130
+    Left = 627
+    Top = 127
   end
   object quSQLPagesUpdSO: TZQuery
     Connection = UserDB
@@ -3062,37 +1621,25 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
-    Left = 392
-    Top = 408
+    Left = 384
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
   end
   object quSQLPagesDel: TZReadOnlyQuery
@@ -3106,17 +1653,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
-    Left = 432
-    Top = 408
+    Options = [doCalcDefaults, doPreferPrepared]
+    Left = 423
+    Top = 400
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'sql_editors_id'
-        ParamType = ptUnknown
       end>
   end
   object UpdDB2: TZSQLProcessor
@@ -3137,7 +1681,7 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 744
+    Left = 729
     Top = 8
   end
   object usConnectionPlugins: TZUpdateSQL
@@ -3168,43 +1712,29 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_plugin_data.db_connection_plugin_data_variable_name IS NULL AND :OLD_db_connection_plugin_data_variable_name IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_variable_name = :OLD_db_connection_plugin_data_variable_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 464
+    Left = 227
+    Top = 454
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_connection_plugin_data_class_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_connection_plugin_data_variable_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_connection_plugin_data_variable_value'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_connection_plugin_data_class_type'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_connection_plugin_data_variable_name'
-        ParamType = ptUnknown
       end>
   end
   object quConnectionPlugins: TZQuery
@@ -3223,57 +1753,14 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 464
+    Left = 188
+    Top = 454
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    object quConnectionPluginsdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quConnectionPluginsdb_connection_plugin_data_class_type: TStringField
-      FieldKind = fkData
-      FieldName = 'db_connection_plugin_data_class_type'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1020
-    end
-    object quConnectionPluginsdb_connection_plugin_data_variable_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_connection_plugin_data_variable_name'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 600
-    end
-    object quConnectionPluginsdb_connection_plugin_data_variable_value: TStringField
-      FieldKind = fkData
-      FieldName = 'db_connection_plugin_data_variable_value'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1020
-    end
   end
   object UpdDB3: TZSQLProcessor
     Params = <>
@@ -3293,8 +1780,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 744
-    Top = 66
+    Left = 729
+    Top = 65
   end
   object quDBOptions: TZQuery
     Connection = UserDB
@@ -3308,37 +1795,8 @@ object UserDBModule: TUserDBModule
       '  db_connection_options'
     )
     Params = <>
-    Left = 392
-    Top = 136
-    object quDBOptionsdb_database_id: TLargeintField
-      FieldKind = fkData
-      FieldName = 'db_database_id'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object quDBOptionsdb_connection_options_name: TStringField
-      FieldKind = fkData
-      FieldName = 'db_connection_options_name'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 400
-    end
-    object quDBOptionsdb_connection_options_value: TStringField
-      FieldKind = fkData
-      FieldName = 'db_connection_options_value'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 2000
-    end
+    Left = 384
+    Top = 133
   end
   object usDBOptions: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -3363,33 +1821,23 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_options.db_connection_options_name IS NULL AND :OLD_db_connection_options_name IS NULL) OR (db_connection_options.db_connection_options_name = :OLD_db_connection_options_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 432
-    Top = 136
+    Left = 423
+    Top = 133
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_connection_options_name'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'db_connection_options_value'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_database_id'
-        ParamType = ptUnknown
       end    
       item
-        DataType = ftUnknown
         Name = 'OLD_db_connection_options_name'
-        ParamType = ptUnknown
       end>
   end
   object quDBOptionsItems: TZQuery
@@ -3407,17 +1855,13 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 136
+    Left = 462
+    Top = 133
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'db_database_id'
-        ParamType = ptUnknown
       end>
     object quDBOptionsItemsdb_database_id: TLargeintField
       FieldKind = fkData
@@ -3461,8 +1905,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 744
-    Top = 144
+    Left = 729
+    Top = 141
   end
   object UpdDB5: TZSQLProcessor
     Params = <>
@@ -3478,13 +1922,13 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 744
-    Top = 200
+    Left = 729
+    Top = 196
   end
   object ZSQLMonitor1: TZSQLMonitor
     Active = True
     MaxTraceCount = 50
-    Left = 40
-    Top = 128
+    Left = 39
+    Top = 125
   end
 end

@@ -198,7 +198,8 @@ procedure FillZParams(AFields: TDBFields; RA: TZRowAccessor; quIns: TZQuery);
 var
   FD: TDBField;
   F: TField;
-  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
   ZT: TZTime;
   ZTS: TZTimeStamp;
   ZD: TZDate;
@@ -219,31 +220,31 @@ begin
         else
         if F.DataType = ftTime then
         begin
-          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          {$IF (ZEOS_MAJOR_VERSION = 7) and (ZEOS_MINOR_VERSION < 3)}
+          RA.SetTime(F.Index+1, F.AsDateTime)
+          {$ELSE}
           DecodeDateTimeToTime(F.AsDateTime, ZT);
           RA.SetTime(F.Index+1, ZT)
-          {$ELSE}
-          RA.SetTime(F.Index+1, F.AsDateTime)
           {$ENDIF}
         end
         else
         if F.DataType in [ftDateTime, ftTimeStamp] then
         begin
-          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+          RA.SetTimestamp(F.Index+1, F.AsDateTime)
+          {$ELSE}
           DecodeDateTimeToTimeStamp(F.AsDateTime, ZTS);
           RA.SetTimestamp(F.Index+1, ZTS)
-          {$ELSE}
-          RA.SetTimestamp(F.Index+1, F.AsDateTime)
           {$ENDIF}
         end
         else
         if F.DataType = ftDate then
         begin
-          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION > 2)}
+          {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+          RA.SetDate(F.Index+1, F.AsDateTime)
+          {$ELSE}
           DecodeDateTimeToDate(F.AsDateTime, ZD);
           RA.SetDate(F.Index+1, ZD)
-          {$ELSE}
-          RA.SetDate(F.Index+1, F.AsDateTime)
           {$ENDIF}
         end
         else

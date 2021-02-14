@@ -2226,7 +2226,11 @@ end;
 
 function TMySQLQueryControl.GetParam(AIndex: integer): TParam;
 begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   Result:=FSQLQuery.Params[AIndex];
+  {$ELSE}
+  Result:=nil;
+  {$ENDIF}
 end;
 
 function TMySQLQueryControl.GetParamCount: integer;
@@ -2283,7 +2287,11 @@ end;
 procedure TSQLEngineMySQL.InternalInitSQLEngineMySQL;
 begin
   FConnection:=TZConnection.Create(nil);
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   FConnection.Protocol:='mysql-5';
+  {$ELSE}
+  FConnection.Protocol:='mysql';
+  {$ENDIF}
   FConnection.ClientCodepage:='utf8';
 
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
