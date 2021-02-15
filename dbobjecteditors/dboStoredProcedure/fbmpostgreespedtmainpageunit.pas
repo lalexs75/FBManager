@@ -502,7 +502,7 @@ begin
     rxParamList.First;
     while not rxParamList.EOF do
     begin
-      if (KeyStartWord = '') or (CompareText(rxParamListParName.AsString, KeyStartWord) = 0) then
+      if (KeyStartWord = '') or (CompareText(Copy(rxParamListParName.AsString, 1, Length(KeyStartWord)), KeyStartWord) = 0) then
       begin
         R:=Items.Add(scotParam, rxParamListParName.AsString, rxParamListType.AsString, rxParamListDesc.AsString);
         R.IOTypeName:=rxParamListInOut.DisplayText;
@@ -522,7 +522,7 @@ begin
     try
       LVP.ParseString(EditorFrame.EditorText);
       for P in LVP.Params do
-        if (KeyStartWord = '') or (CompareText(P.Caption, KeyStartWord)=0) then
+        if (KeyStartWord = '') or (CompareText(Copy(P.Caption, 1, Length(KeyStartWord)), KeyStartWord)=0) then
           Items.Add(P);
     finally
       LVP.Free;
