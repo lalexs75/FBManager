@@ -316,8 +316,13 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit, ZDatasetParam,
-  ZDbcCachedResultSet;
+uses fbmStrConstUnit, sqlite3_keywords, sqlite3_SQLTextUnit,
+  ZDbcCachedResultSet
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+  , ZDatasetParam
+  {$ENDIF}
+  ;
 
 type
   THackZQuery = class(TZQuery);

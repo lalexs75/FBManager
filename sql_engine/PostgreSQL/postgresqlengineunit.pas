@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects, ZClasses,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
-  ZSqlProcessor, ZDatasetParam, ZDbcCachedResultSet, ZDbcCache, ZCompatibility,
+  ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, ZCompatibility,
   pgTypes, pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV,
   SSHConnectionUnit;
 
@@ -1350,6 +1350,11 @@ uses
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   pg_tasks, pgSQLEngineFTS
+
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+  , ZDatasetParam
+  {$ENDIF}
   ;
 
 type
