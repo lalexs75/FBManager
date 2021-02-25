@@ -28,12 +28,7 @@ uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   StdCtrls, fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
   mssql_engine, ZConnection, ZDataset;
-(*
-const
-  ServerNames : array [TCTServerVersion] of string =
-    ('MS SQL 6.0', 'MS SQL 6.5', 'MS SQL 7.0', 'MS SQL 2000',
-     'MS SQL 2005', 'MS SQL 2008', 'Sybase SQL 10', 'Sybase SQL 9');
-*)
+
 type
 
   { Tcf_mssql_main_frame }
@@ -56,7 +51,7 @@ type
     Label7: TLabel;
     CLabel: TLabel;
     quGetDBList: TZQuery;
-    Test_DB: TZConnection;
+    ZConnection1: TZConnection;
     procedure Button2Click(Sender: TObject);
     procedure edtDBNameChange(Sender: TObject);
     procedure edtDBNameDropDown(Sender: TObject);
@@ -66,6 +61,7 @@ type
     procedure LoadConf;
     procedure SetDataBaseProps(ADataBase:TZConnection);
   public
+    constructor Create(TheOwner: TComponent); override;
     procedure Activate;override;
     procedure LoadParams(ASQLEngine:TSQLEngineAbstract);override;
     procedure SaveParams;override;
@@ -113,10 +109,10 @@ end;
 
 procedure Tcf_mssql_main_frame.edtDBNameDropDown(Sender: TObject);
 begin
-  SetDataBaseProps(Test_DB);
+  SetDataBaseProps(FDataBase);
   try
-    Test_DB.Connected:=true;
-    if Test_DB.Connected then
+    FDataBase.Connected:=true;
+    if FDataBase.Connected then
     begin
       edtDBName.Items.Clear;
       quGetDBList.Open;
@@ -130,7 +126,7 @@ begin
   finally
     if quGetDBList.Active then
       quGetDBList.Close;
-    Test_DB.Connected:=false;
+    FDataBase.Connected:=false;
   end;
 end;
 
@@ -148,6 +144,11 @@ procedure Tcf_mssql_main_frame.SetDataBaseProps(ADataBase: TZConnection);
 var
   S: String;
 begin
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  ADataBase.Protocol:='FreeTDS_MsSQL>=2005';
+  {$ELSE}
+  ADataBase.Protocol:='mssql';
+  {$ENDIF}
   S:='/usr/lib64/libsybdb.so';
   ADataBase.LibraryLocation:=S;
   //ADataBase.Database:=edtDBName.Text;
@@ -161,6 +162,13 @@ begin
   ADataBase.Password:=edtPassword.Text;
 
 //  ADataBase.ServerVersion:=TCTServerVersion(edtSvrVersion.ItemIndex);
+end;
+
+constructor Tcf_mssql_main_frame.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+  FDataBase:=TZConnection.Create(Self);
+  quGetDBList.Connection:=FDataBase;
 end;
 
 procedure Tcf_mssql_main_frame.Activate;
@@ -201,18 +209,15 @@ end;
 function Tcf_mssql_main_frame.TestConnection: boolean;
 begin
   Result:=false;
-  SetDataBaseProps(Test_DB);
-  //if edtPort.Value <> 0 then
-  //  Test_DB.Port:=edtPort.Value;
-
+  SetDataBaseProps(FDataBase);
   try
-    Test_DB.Connected:=true;
-    Result:=Test_DB.Connected;
+    FDataBase.Connected:=true;
+    Result:=FDataBase.Connected;
   except
     on E:Exception do
       ErrorBoxExcpt(E);
   end;
-  Test_DB.Connected:=false;
+  FDataBase.Connected:=false;
 end;
 
 constructor Tcf_mssql_main_frame.Create(ASQLEngineAbstract: TSQLEngineAbstract;
