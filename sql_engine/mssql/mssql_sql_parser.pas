@@ -369,7 +369,7 @@ DROP
     READTEXT (Transact-SQL)
 }
 type
-
+  TMSSQLFilesEnumerator = class;
   { TMSSQLCreateSchema }
 
   TMSSQLCreateSchema = class(TSQLCreateSchema)
@@ -526,6 +526,59 @@ type
   end;
 
 
+  TMSSQLFileType = (mssqlftDefault, mssqlftPrimary, mssqlftLogOn);
+  { TMSSQLFile }
+
+  TMSSQLFile = class
+  private
+    FFileGrowth: string;
+    FFileName: string;
+    FFileType: TMSSQLFileType;
+    FMaxSize: string;
+    FName: string;
+    FSize: string;
+  public
+    procedure Assign(ASource:TMSSQLFile);
+    property FileType:TMSSQLFileType read FFileType write FFileType;
+    property Name:string read FName write FName;
+    property FileName:string read FFileName write FFileName;
+    property Size:string read FSize write FSize; //size [ KB | MB | GB | TB ] ]
+    property MaxSize:string read FMaxSize write FMaxSize; //{ max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
+    property FileGrowth:string read FFileGrowth write FFileGrowth; //growth_increment [ KB | MB | GB | TB | % ] ]
+  end;
+
+  { TMSSQLFiles }
+
+  TMSSQLFiles = class
+  private
+    FList:TFPList;
+    function GetCount: integer;
+    function GetItems(AIndex: Integer): TMSSQLFile;
+  public
+    constructor Create;
+    destructor Destroy;override;
+    procedure Clear;
+    procedure Assign(ASource:TMSSQLFiles);
+    property Items[AIndex:Integer]:TMSSQLFile read GetItems; default;
+    function Add(AName:string):TMSSQLFile;
+    function GetEnumerator: TMSSQLFilesEnumerator;
+    property Count:integer read GetCount;
+  end;
+
+  { TMSSQLFilesEnumerator }
+
+  TMSSQLFilesEnumerator = class
+  private
+    FList: TMSSQLFiles;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TMSSQLFiles);
+    function GetCurrent: TMSSQLFile;
+    function MoveNext: Boolean;
+    property Current: TMSSQLFile read GetCurrent;
+  end;
+
+
   TMSSQLCreateDatabaseAction = (cdaDatabase, cdaScopedCredential,
     cdaEncryptionKeyByCertificate, cdaEncryptionKeyByAsymmetricKey);
 
@@ -534,11 +587,12 @@ type
   TMSSQLCreateDatabase = class(TSQLCreateDatabase)
   private
     FCurParam: TSQLParserField;
-    FCurFile: TSQLParserField;
+    FCurFile: TMSSQLFile;
 
     FCreateDatabaseAction: TMSSQLCreateDatabaseAction;
     FEncryptionAlgorithm: string;
     FEncryptionType: string;
+    FFiles: TMSSQLFiles;
     FIdentityName: string;
     FPassword: string;
   protected
@@ -546,12 +600,15 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    destructor Destroy;override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property CreateDatabaseAction:TMSSQLCreateDatabaseAction read FCreateDatabaseAction write FCreateDatabaseAction;
     property IdentityName:string read FIdentityName write FIdentityName;
     property Password:string read FPassword write FPassword;
     property EncryptionAlgorithm:string read FEncryptionAlgorithm write FEncryptionAlgorithm;
     property EncryptionType:string read FEncryptionType write FEncryptionType;
+    property Files:TMSSQLFiles read FFiles;
   end;
 
   { TMSSQLDropDatabase }
@@ -1084,6 +1141,97 @@ type
 implementation
 
 uses SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit;
+
+{ TMSSQLFilesEnumerator }
+
+constructor TMSSQLFilesEnumerator.Create(AList: TMSSQLFiles);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TMSSQLFilesEnumerator.GetCurrent: TMSSQLFile;
+begin
+  Result := FList[FPosition];
+end;
+
+function TMSSQLFilesEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+{ TMSSQLFiles }
+
+function TMSSQLFiles.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TMSSQLFiles.GetItems(AIndex: Integer): TMSSQLFile;
+begin
+  Result:=TMSSQLFile(FList[AIndex]);
+end;
+
+constructor TMSSQLFiles.Create;
+begin
+  inherited Create;
+  FList:=TFPList.Create;
+end;
+
+destructor TMSSQLFiles.Destroy;
+begin
+  Clear;
+  FreeAndNil(FList);
+  inherited Destroy;
+end;
+
+procedure TMSSQLFiles.Clear;
+var
+  i: Integer;
+begin
+  for i:=0 to FList.Count-1 do
+    TMSSQLFile(FList[i]).Free;
+  FList.Clear;
+end;
+
+procedure TMSSQLFiles.Assign(ASource: TMSSQLFiles);
+var
+  F, F1: TMSSQLFile;
+begin
+  if not Assigned(ASource) then Exit;
+  Clear;
+  for F in ASource do
+  begin
+    F1:=Add(F.Name);
+    F1.Assign(F);
+  end;
+end;
+
+function TMSSQLFiles.Add(AName: string): TMSSQLFile;
+begin
+  Result:=TMSSQLFile.Create;
+  Result.Name:=AName;
+  FList.Add(Result);
+end;
+
+function TMSSQLFiles.GetEnumerator: TMSSQLFilesEnumerator;
+begin
+  Result:=TMSSQLFilesEnumerator.Create(Self);
+end;
+
+{ TMSSQLFile }
+
+procedure TMSSQLFile.Assign(ASource: TMSSQLFile);
+begin
+  if not Assigned(ASource) then Exit;
+  Name:=ASource.Name;
+  FileName:=ASource.FileName;
+  Size:=ASource.Size;
+  MaxSize:=ASource.MaxSize;
+  FileGrowth:=ASource.FileGrowth;
+  FileType:=ASource.FileType;
+end;
 
 { TMSSQLEnableTrigger }
 
@@ -2995,7 +3143,9 @@ var
     T3_4_1, T3_5, T3_5_1, T3_6, T3_6_1, T3_7, T3_7_1, T3_8,
     T3_8_1, T3_9, T3_9_1, T3_4_2, T3_5_2, T3_7_2, T3_8_2, TON,
     TON_1, TON_1_1, TON_1_1_1, TON_1_2, TON_1_2_1, TON_1_3,
-    TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5: TSQLTokenRecord;
+    TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5,
+    TON_1_4, TON_1_4_1, TON_1_4_2, TON_1_4_3, TON_1_4_4,
+    TON_1_4_5: TSQLTokenRecord;
 begin
   (*
   CREATE DATABASE database_name
@@ -3185,16 +3335,16 @@ FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY
 }
 
 *)
-  TON:=AddSQLTokens(stKeyword, TName, 'ON', [toOptional], 40);
+  TON:=AddSQLTokens(stKeyword, TName, 'ON', [toOptional]);
     TON_1:=AddSQLTokens(stKeyword, TON, 'PRIMARY', [], 41);
-    TON_1:=AddSQLTokens(stSymbol, [TON, TON_1], '(', [], 42);
-    TON_1_1:=AddSQLTokens(stKeyword, TON_1, 'NAME', [], 43);
+    TON_1:=AddSQLTokens(stSymbol, [TON, TON_1], '(', []);
+    TON_1_1:=AddSQLTokens(stKeyword, TON_1, 'NAME', []);
       T:=AddSQLTokens(stSymbol, TON_1_1, '=', []);
       TON_1_1_1:=AddSQLTokens(stIdentificator, T, '', [], 44);
-    TON_1_2:=AddSQLTokens(stKeyword, TON_1, 'FILENAME', [], 45);
+    TON_1_2:=AddSQLTokens(stKeyword, TON_1, 'FILENAME', []);
       T:=AddSQLTokens(stSymbol, TON_1_2, '=', []);
       TON_1_2_1:=AddSQLTokens(stString, T, '', [], 45);
-    TON_1_3:=AddSQLTokens(stKeyword, TON_1, 'SIZE', [], 46);
+    TON_1_3:=AddSQLTokens(stKeyword, TON_1, 'SIZE', []);
       T:=AddSQLTokens(stSymbol, TON_1_3, '=', []);
       TON_1_3_1:=AddSQLTokens(stInteger, T, '', [], 47);
       TON_1_3_2:=AddSQLTokens(stKeyword, TON_1_3_1, 'KB', [], 48);
@@ -3202,12 +3352,20 @@ FILEGROUP filegroup name [ [ CONTAINS FILESTREAM ] [ DEFAULT ] | CONTAINS MEMORY
       TON_1_3_4:=AddSQLTokens(stKeyword, TON_1_3_1, 'GB', [], 48);
       TON_1_3_5:=AddSQLTokens(stKeyword, TON_1_3_1, 'TB', [], 48);
 
+    TON_1_4:=AddSQLTokens(stKeyword, TON_1, 'MAXSIZE', []);
+      T:=AddSQLTokens(stSymbol, TON_1_3, '=', []);
+      TON_1_4_1:=AddSQLTokens(stInteger, T, '', [], 42);
+      TON_1_4_2:=AddSQLTokens(stKeyword, TON_1_3_1, 'KB', [], 43);
+      TON_1_4_3:=AddSQLTokens(stKeyword, TON_1_3_1, 'MB', [], 43);
+      TON_1_4_4:=AddSQLTokens(stKeyword, TON_1_3_1, 'GB', [], 43);
+      TON_1_4_5:=AddSQLTokens(stKeyword, TON_1_3_1, 'TB', [], 43);
+
 //      [ , MAXSIZE = { max_size [ KB | MB | GB | TB ] | UNLIMITED } ]
 //      [ , FILEGROWTH = growth_increment [ KB | MB | GB | TB | % ] ]
 
-    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5], ',', []);
-      T.AddChildToken([TON_1_1, TON_1_2, TON_1_3]);
-    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5], ')', []);
+    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5, TON_1_4_1, TON_1_4_2, TON_1_4_3, TON_1_4_4, TON_1_4_5], ',', []);
+      T.AddChildToken([TON_1_1, TON_1_2, TON_1_3, TON_1_4]);
+    T:=AddSQLTokens(stSymbol, [TON_1_1_1, TON_1_2_1, TON_1_3_1, TON_1_3_2, TON_1_3_3, TON_1_3_4, TON_1_3_5, TON_1_4_1, TON_1_4_2, TON_1_4_3, TON_1_4_4, TON_1_4_5], ')', []);
 
 
 (*
@@ -3261,18 +3419,15 @@ begin
          CreateDatabaseAction:=cdaEncryptionKeyByAsymmetricKey;
          EncryptionType:=AWord;
        end;
-    40:FCurFile:=Fields.AddParamEx(AWord, '');
-    41:if Assigned(FCurFile) then FCurFile.TypeName:=AWord;
-//    43:if Assigned(FCurFile) then FCurFile.Params.:=.
-    45:begin
-         FCurParam:=Params.AddParam(AWord)
-       end;
-    46:begin
-         FCurParam:=Params.AddParam(AWord)
-       end;
-    47:begin
-         FCurParam:=Params.AddParam(AWord)
-       end;
+    40:FCurFile:=Files.Add('');
+    41:if Assigned(FCurFile) then FCurFile.FileType:=mssqlftPrimary;
+    44:if Assigned(FCurFile) then FCurFile.Name:=AWord;
+    45:if Assigned(FCurFile) then FCurFile.FileName:=AWord;
+    47:if Assigned(FCurFile) then FCurFile.Size:=AWord;
+    48:if Assigned(FCurFile) then FCurFile.Size:=FCurFile.Size + AWord;
+    42:if Assigned(FCurFile) then FCurFile.MaxSize:=AWord;
+    43:if Assigned(FCurFile) then FCurFile.MaxSize:=FCurFile.MaxSize + AWord;
+
   end;
 end;
 
@@ -3280,6 +3435,7 @@ procedure TMSSQLCreateDatabase.MakeSQL;
 var
   S, S1, S2: String;
   P: TSQLParserField;
+  F: TMSSQLFile;
 begin
   S:='CREATE DATABASE ';
   if CreateDatabaseAction = cdaDatabase then
@@ -3350,7 +3506,41 @@ begin
 
 
   end;
+
+  if Files.Count > 0 then
+  begin
+    S:=S + ' ON ';
+    for F in Files do
+    begin
+      S1:='';
+      if F.FileType = mssqlftPrimary then S1:=S1 + 'PRIMARY';
+      S1:=S1 + '(' + LineEnding;
+      if F.Name <> '' then S1:=S1 + ' NAME = ' + F.Name + ',' + LineEnding;
+      if F.FileName <> '' then S1:=S1 + ' FILENAME = ' + F.FileName + ',' + LineEnding;
+      if F.Size <> '' then S1:=S1 + ' SIZE = ' + F.Size + ',' + LineEnding;
+      if F.MaxSize <> '' then S1:=S1 + ' MAXSIZE = ' + F.MaxSize + ',' + LineEnding;
+      if F.FileGrowth <> '' then S1:=S1 + ' FILEGROWTH = ' + F.FileGrowth + ',' + LineEnding;
+      S1:=S1 + ')';
+
+      S:=S + LineEnding  + S1;
+    end;
+          //[ PRIMARY ] <filespec> [ ,...n ]
+          //[ , <filegroup> [ ,...n ] ]
+          //[ LOG ON <filespec> [ ,...n ] ]
+  end;
   AddSQLCommand(S);
+end;
+
+constructor TMSSQLCreateDatabase.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  FFiles:=TMSSQLFiles.Create;
+end;
+
+destructor TMSSQLCreateDatabase.Destroy;
+begin
+  FreeAndNil(FFiles);
+  inherited Destroy;
 end;
 
 procedure TMSSQLCreateDatabase.Assign(ASource: TSQLObjectAbstract);

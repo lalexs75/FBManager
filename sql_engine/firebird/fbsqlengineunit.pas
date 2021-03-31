@@ -1966,7 +1966,8 @@ begin
 
     if (S1='') or (S2='') then Abort;
 
-    TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + DoFormatName(Caption) + '('+S1+') values (' + S2+ ') RETURNING ('+S3+')';
+    if S3<>'' then S3:=' RETURNING ('+S3+')';
+    TFBDataSet(FDataSet).QueryInsert.SQL.Text:='insert into ' + DoFormatName(Caption) + '('+S1+') values (' + S2+ ')' + S3;
 
     for F in Fields do
     begin
