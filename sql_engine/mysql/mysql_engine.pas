@@ -2292,6 +2292,7 @@ end;
 
 procedure TSQLEngineMySQL.InternalInitSQLEngineMySQL;
 begin
+  FQuteIdentificatorChar:='`';
   FConnection:=TZConnection.Create(nil);
   {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
   FConnection.Protocol:='mysql-5';

@@ -680,7 +680,10 @@ procedure Tfdbm_SynEditorFrame.SynCompletion1CodeCompletion(var Value: string;
   SourceValue: string; var SourceStart, SourceEnd: TPoint; KeyChar: TUTF8Char;
   Shift: TShiftState);
 begin
-  Value:=DoFormatName(Value);
+  if Assigned(SQLEngine) then
+    Value:=DoFormatName(Value, false, SQLEngine.QuteIdentificatorChar)
+  else
+    Value:=DoFormatName(Value);
 end;
 
 procedure Tfdbm_SynEditorFrame.SynCompletion1Execute(Sender: TObject);

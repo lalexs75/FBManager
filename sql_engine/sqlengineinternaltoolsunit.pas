@@ -96,7 +96,7 @@ type
   end;
 
 
-function DoFormatName(const AName:string; aQute:boolean = false):string;
+function DoFormatName(const AName:string; aQute:boolean = false; AQuteChar:char = '"'):string;
 function DoFormatName2(const AName:string; aQute:boolean = false):string;
 function sysConfirmCompileDescEx:TSqlExecParams;
 function sysConfirmCompileGrantsEx:TSqlExecParams;
@@ -107,7 +107,7 @@ function DBIsValidIdent(const Ident: string): Boolean;
 implementation
 uses StrUtils, LazUTF8, fbmToolsUnit;
 
-function DoFormatName(const AName:string; aQute:boolean = false):string;
+function DoFormatName(const AName:string; aQute:boolean = false; AQuteChar:char = '"'):string;
 var
   FLoCase, FHiCase: Boolean;
   i: Integer;
@@ -120,7 +120,7 @@ begin
     if (AName[i] = '"') then
     begin
       Inc(i);
-      while ((i<Length(AName)) and (AName[i]<>'"')) do Inc(i);
+      while ((i<Length(AName)) and (AName[i]<>AQuteChar)) do Inc(i);
       aQute:=i<>Length(AName);
     end
     else
@@ -142,7 +142,7 @@ begin
     aQute:=true;
 
   if aQute then
-    Result:=AnsiQuotedStr(AName, '"')
+    Result:=AnsiQuotedStr(AName, AQuteChar)
   else
     Result:=AName;
 end;

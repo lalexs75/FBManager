@@ -884,6 +884,7 @@ type
     FKeyWords: TKeywordList;
     FCashedItems:TDBObjectsItems;
     FParserSintax: TSQLParserSintax;
+    FQuteIdentificatorChar:Char;
     procedure InternalInitEngine;
     function GetImageIndex: integer;virtual;
     procedure SetDataBaseName(const AValue: string);virtual;
@@ -984,6 +985,7 @@ type
     property ConnectionPlugins:TSQLEngineConnectionPlugins read FConnectionPlugins;
     property Properties:TStrings read FProperties;
     property ParserSintax:TSQLParserSintax read FParserSintax;
+    property QuteIdentificatorChar:Char read FQuteIdentificatorChar;
     //
     property OnNewObjectByKind:TObjectByKind read FOnNewObjectByKind write FOnNewObjectByKind;
     property OnEditObject:TDBObjectEvent read FOnEditObject write FOnEditObject;
@@ -1840,6 +1842,7 @@ end;
 
 procedure TSQLEngineAbstract.InternalInitEngine;
 begin
+  FQuteIdentificatorChar:='"';
   MiscOptions.VarPrefix:=':';
   MiscOptions.ObjectNamesCharCase:=ccoNoneCase;
   FKeywordsList:=TObjectList.Create;
