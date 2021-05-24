@@ -245,6 +245,7 @@ type
     procedure ModifyCollumn(OP: TAlterTableOperator);
     procedure AddConstrint(STbl:string; AOper:TAlterTableOperator);
   protected
+    procedure InternalFormatsInit; override;
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
@@ -3199,6 +3200,12 @@ begin
       AddSQLCommand(S);
   end;
 
+end;
+
+procedure TMySQLAlterTable.InternalFormatsInit;
+begin
+  inherited InternalFormatsInit;
+  FQuteIdentificatorChar:='`';
 end;
 
 procedure TMySQLAlterTable.InitParserTree;

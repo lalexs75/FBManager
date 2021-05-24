@@ -215,12 +215,14 @@ type
   protected
     FObjectKind:TDBObjectKind;
     FSQLCommentOnClass:TSQLCommentOnClass;
+    FQuteIdentificatorChar: Char;
     procedure DescribeObjectEx(AObjectKind:TDBObjectKind; AName, ATableName:string; ADescription:string);
     procedure DescribeObject;
     function GetFullName: string; override;
     property SchemaName:string read FSchemaName write FSchemaName;
     property TableName:string read FTableName write FTableName;
     procedure SetName(AValue: string); override;
+    procedure InternalFormatsInit; virtual;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     destructor Destroy;override;
@@ -1952,10 +1954,17 @@ begin
   inherited SetName(AValue);
 end;
 
+procedure TSQLCommandDDL.InternalFormatsInit;
+begin
+  //
+end;
+
 constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FFields:=TSQLFields.Create('"');
+  FQuteIdentificatorChar:='"';
+  InternalFormatsInit;
+  FFields:=TSQLFields.Create(FQuteIdentificatorChar);
   FTables:=TSQLTables.Create;
 end;
 

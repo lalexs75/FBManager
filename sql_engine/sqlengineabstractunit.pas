@@ -3253,9 +3253,9 @@ begin
   for F in Fields do
   begin
     if AFullNames then
-      K:=List.Add(FormatStringCase(CaptionFullPatch + '.' + DoFormatName(F.FieldName), ACharCase))
+      K:=List.Add(FormatStringCase(CaptionFullPatch + '.' + DoFormatName(F.FieldName, false, OwnerDB.QuteIdentificatorChar), ACharCase))
     else
-      K:=List.Add(FormatStringCase(DoFormatName(F.FieldName), ACharCase));
+      K:=List.Add(FormatStringCase(DoFormatName(F.FieldName, false, OwnerDB.QuteIdentificatorChar), ACharCase));
     List.Objects[K]:=F;
   end;
 end;
