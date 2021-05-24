@@ -323,7 +323,7 @@ var
 begin
   Result:='';
   for i:=0 to ListBox2.Items.Count-1 do
-    Result:=Result+', '+ DoFormatName(ListBox2.Items[i]);
+    Result:=Result+', '+ ListBox2.Items[i]; //DoFormatName(ListBox2.Items[i]);
   Result:=Copy(Result, 3, Length(Result))
 end;
 
@@ -338,7 +338,7 @@ var
 begin
   Result:='';
   for i:=0 to ListBox4.Items.Count - 1 do
-    Result:=Result + ', ' + DoFormatName(ListBox4.Items[i]);
+    Result:=Result + ', ' + ListBox4.Items[i] {DoFormatName(ListBox4.Items[i], false, DBTable.OwnerDB.QuteIdentificatorChar)};
   Result:=Copy(Result, 3, Length(Result))
 end;
 

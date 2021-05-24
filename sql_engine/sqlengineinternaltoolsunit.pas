@@ -117,7 +117,7 @@ begin
   I:=1;
   while i < Length(AName) do
   begin
-    if (AName[i] = '"') then
+    if (AName[i] = AQuteChar) then
     begin
       Inc(i);
       while ((i<Length(AName)) and (AName[i]<>AQuteChar)) do Inc(i);

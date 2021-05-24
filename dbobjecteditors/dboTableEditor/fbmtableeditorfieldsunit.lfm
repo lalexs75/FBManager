@@ -17,13 +17,13 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'Description'
-      ClientHeight = 88
-      ClientWidth = 1060
+      ClientHeight = 86
+      ClientWidth = 1064
       object DBMemo1: TDBMemo
         Left = 0
-        Height = 88
+        Height = 86
         Top = 0
-        Width = 1060
+        Width = 1064
         Align = alClient
         DataField = 'FIELD_DESCRIPTION'
         DataSource = dsFieldList
@@ -32,8 +32,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     end
     object tabFieldDependencies: TTabSheet
       Caption = 'Field Dependencies'
-      ClientHeight = 88
-      ClientWidth = 1060
+      ClientHeight = 86
+      ClientWidth = 1064
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 85
@@ -184,8 +184,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object FieldListGrid: TRxDBGrid[1]
     Left = 0
-    Height = 275
-    Top = 70
+    Height = 286
+    Top = 59
     Width = 1070
     ColumnDefValues.BlobText = '(примечание)'
     TitleButtons = True
@@ -531,21 +531,21 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object Panel1: TPanel[3]
     Left = 0
-    Height = 70
+    Height = 59
     Top = 0
     Width = 1070
     Align = alTop
     AutoSize = True
-    ClientHeight = 70
+    ClientHeight = 59
     ClientWidth = 1070
     TabOrder = 3
     object Label1: TLabel
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
       Left = 7
-      Height = 17
+      Height = 15
       Top = 7
-      Width = 71
+      Width = 68
       BorderSpacing.Around = 6
       Caption = 'Table name'
       ParentColor = False
@@ -557,8 +557,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 33
-      Top = 30
+      Height = 24
+      Top = 28
       Width = 1050
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6

@@ -135,11 +135,13 @@ begin
         if not (P is TSQLAlterTable) then raise Exception.Create('TfdbmTableEditorForeignKeyFrame.NewFK; - TSQLAlterTable');
         OP:=TSQLAlterTable(P).AddOperator(ataAddTableConstraint);
         C:=OP.Constraints.Add(ctForeignKey, fbmManagerTableEditorFKForm.edtFKName.Text);
-        C.ConstraintFields.AddParam(fbmManagerTableEditorFKForm.FKFields);
+        //C.ConstraintFields.AddParam(fbmManagerTableEditorFKForm.FKFields);
+        C.ConstraintFields.AsString:=fbmManagerTableEditorFKForm.FKFields;
         C.ForeignKeyRuleOnUpdate:=fbmManagerTableEditorFKForm.ForeignKeyRuleOnUpdate;
         C.ForeignKeyRuleOnDelete:=fbmManagerTableEditorFKForm.ForeignKeyRuleOnDelete;
         C.ForeignTable:=fbmManagerTableEditorFKForm.RefTable;
-        C.ForeignFields.AddParam(fbmManagerTableEditorFKForm.RefFields);
+        //C.ForeignFields.AddParam(fbmManagerTableEditorFKForm.RefFields);
+        C.ForeignFields.AsString:=fbmManagerTableEditorFKForm.RefFields;
         C.IndexName:=fbmManagerTableEditorFKForm.FKIndexName;
         C.Description:=TrimRight(fbmManagerTableEditorFKForm.Memo1.Text);
         if DBObject.CompileSQLObject(P, [sepShowCompForm]) then

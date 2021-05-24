@@ -25,7 +25,7 @@ unit fbmSqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineCommonTypesUnit, sqlObjects;
+  Classes, SysUtils, Contnrs, SQLEngineCommonTypesUnit, sqlObjects;
 
 const
   CharDelimiters = [',',':','}','{',';', '(', ')', '.', '[', ']', '=', '@'];
@@ -59,6 +59,9 @@ type
   TSQLCommentOn = class;
   TSQLCommentOnClass = class of TSQLCommentOn;
   TSQLCreateTable = class;
+  TAlterTableOperators = class;
+  TSQLAlterTable = class;
+  TAlterTableOperatorsEnumerator = class;
   { TSQLTokenRecord }
 
   TSQLTokenRecord = class
@@ -215,14 +218,12 @@ type
   protected
     FObjectKind:TDBObjectKind;
     FSQLCommentOnClass:TSQLCommentOnClass;
-    FQuteIdentificatorChar: Char;
     procedure DescribeObjectEx(AObjectKind:TDBObjectKind; AName, ATableName:string; ADescription:string);
     procedure DescribeObject;
     function GetFullName: string; override;
     property SchemaName:string read FSchemaName write FSchemaName;
     property TableName:string read FTableName write FTableName;
     procedure SetName(AValue: string); override;
-    procedure InternalFormatsInit; virtual;
   public
     constructor Create(AParent:TSQLCommandAbstract); override;
     destructor Destroy;override;
@@ -466,6 +467,78 @@ type
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property SQLConstraints:TSQLConstraints read FSQLConstraints;
     function GetAutoIncObject:TAutoIncObject; virtual;
+  end;
+
+  { TAlterTableOperator }
+
+  TAlterTableOperator = class
+  private
+    FAlterAction: TAlterTableAction;
+    FConstraints: TSQLConstraints;
+    FDBMSTypeName: string;
+    FDropRule: TDropRule;
+    FField: TSQLParserField;
+    FInitialValue: string;
+    FName: string;
+    FOldField: TSQLParserField;
+    FOldName: string;
+    FOptions: TSQLObjectOptions;
+    FParams: TSQLFields;
+    FParamValue: string;
+    FPosition: integer;
+    FOwner:TAlterTableOperators;
+  public
+    constructor Create(AOwner:TAlterTableOperators);
+    destructor Destroy;override;
+    procedure Assign(Source: TAlterTableOperator);
+    property AlterAction:TAlterTableAction read FAlterAction write FAlterAction;
+    property Field:TSQLParserField read FField;
+    property OldField:TSQLParserField read FOldField;
+    property Constraints:TSQLConstraints read FConstraints;
+    property OldName:string read FOldName write FOldName;
+    property Name:string read FName write FName;
+    property Params:TSQLFields read FParams;
+    property InitialValue:string read FInitialValue write FInitialValue;
+    property DBMSTypeName:string read FDBMSTypeName write FDBMSTypeName;
+    property ParamValue:string read FParamValue write FParamValue;
+    property DropRule:TDropRule read FDropRule write FDropRule;
+    property Options:TSQLObjectOptions read FOptions write FOptions;
+    property Position:integer read FPosition write FPosition;
+  end;
+
+
+  { TAlterTableOperators }
+
+  TAlterTableOperators = class
+  private
+    FList:TObjectList;
+    FOwner:TSQLAlterTable;
+    function GetCount: integer;
+    function GetItems(Index: integer): TAlterTableOperator;
+  public
+    constructor Create(AOwner:TSQLAlterTable);
+    destructor Destroy;override;
+    function GetEnumerator: TAlterTableOperatorsEnumerator;
+    procedure Clear;
+    procedure Assign(ASource:TAlterTableOperators);
+    function AddItem(AlterAction:TAlterTableAction):TAlterTableOperator;
+    function AddItem(AlterAction:TAlterTableAction; AParamValue:string):TAlterTableOperator; overload;
+
+    property Count:integer read GetCount;
+    property Items[Index:integer]:TAlterTableOperator read GetItems;default;
+  end;
+
+  { TAlterTableOperatorsEnumerator }
+
+  TAlterTableOperatorsEnumerator = class
+  private
+    FList: TAlterTableOperators;
+    FPosition: Integer;
+  public
+    constructor Create(AList: TAlterTableOperators);
+    function GetCurrent: TAlterTableOperator;
+    function MoveNext: Boolean;
+    property Current: TAlterTableOperator read GetCurrent;
   end;
 
   { TSQLAlterTable }
@@ -1805,7 +1878,7 @@ constructor TSQLCreateTable.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FObjectKind:=okTable;
-  FSQLConstraints:=TSQLConstraints.Create;
+  FSQLConstraints:=TSQLConstraints.Create(Self);
   FAutoIncObjects:=TAutoIncObjects.Create(Self);
 end;
 
@@ -1853,7 +1926,7 @@ end;
 constructor TSQLAlterTable.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FOperators:=TAlterTableOperators.Create;
+  FOperators:=TAlterTableOperators.Create(Self);
   FObjectKind:=okTable;
 end;
 
@@ -1939,9 +2012,9 @@ end;
 function TSQLCommandDDL.GetFullName: string;
 begin
   if FSchemaName <> '' then
-    Result:=DoFormatName(FSchemaName) +'.'+DoFormatName(Name)
+    Result:=DoFormatName(FSchemaName, false, FQuteIdentificatorChar) +'.'+DoFormatName(Name, false, FQuteIdentificatorChar)
   else
-    Result:=DoFormatName(Name);
+    Result:=DoFormatName(Name, false, FQuteIdentificatorChar);
 end;
 
 procedure TSQLCommandDDL.SetName(AValue: string);
@@ -1954,16 +2027,9 @@ begin
   inherited SetName(AValue);
 end;
 
-procedure TSQLCommandDDL.InternalFormatsInit;
-begin
-  //
-end;
-
 constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FQuteIdentificatorChar:='"';
-  InternalFormatsInit;
   FFields:=TSQLFields.Create(FQuteIdentificatorChar);
   FTables:=TSQLTables.Create;
 end;
@@ -3173,7 +3239,7 @@ begin
   FStartTokens:=TSQLTokenList.Create;
 
   FPlanEnabled:=false;
-  FParams:=TSQLFields.Create('"');
+  FParams:=TSQLFields.Create(FQuteIdentificatorChar);
   InitParserTree;
 end;
 
@@ -4334,6 +4400,129 @@ var
 begin
   for T in ATokens do
     AddChildToken(T);
+end;
+
+{ TAlterTableOperatorsEnumerator }
+
+constructor TAlterTableOperatorsEnumerator.Create(AList: TAlterTableOperators);
+begin
+  FList := AList;
+  FPosition := -1;
+end;
+
+function TAlterTableOperatorsEnumerator.GetCurrent: TAlterTableOperator;
+begin
+  Result := FList[FPosition];
+end;
+
+function TAlterTableOperatorsEnumerator.MoveNext: Boolean;
+begin
+  Inc(FPosition);
+  Result := FPosition < FList.Count;
+end;
+
+function TAlterTableOperators.GetCount: integer;
+begin
+  Result:=FList.Count;
+end;
+
+function TAlterTableOperators.GetItems(Index: integer): TAlterTableOperator;
+begin
+  Result:=TAlterTableOperator(FList[Index]);
+end;
+
+constructor TAlterTableOperators.Create(AOwner: TSQLAlterTable);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+  FList:=TObjectList.Create;
+end;
+
+destructor TAlterTableOperators.Destroy;
+begin
+  Clear;
+  FList.Free;
+  inherited Destroy;
+end;
+
+function TAlterTableOperators.GetEnumerator: TAlterTableOperatorsEnumerator;
+begin
+  Result := TAlterTableOperatorsEnumerator.Create(Self);
+end;
+
+procedure TAlterTableOperators.Clear;
+begin
+  FList.Clear;
+end;
+
+procedure TAlterTableOperators.Assign(ASource: TAlterTableOperators);
+var
+  R, R1: TAlterTableOperator;
+begin
+  if not Assigned(ASource) then Exit;
+
+  for R in ASource do
+  begin
+    R1:=AddItem(R.AlterAction);
+    R1.Assign(R);
+  end;
+end;
+
+function TAlterTableOperators.AddItem(AlterAction: TAlterTableAction
+  ): TAlterTableOperator;
+begin
+  Result:=AddItem(AlterAction, '');
+end;
+
+function TAlterTableOperators.AddItem(AlterAction: TAlterTableAction;
+  AParamValue: string): TAlterTableOperator;
+begin
+  Result:=TAlterTableOperator.Create(Self);
+  FList.Add(Result);
+  Result.AlterAction:=AlterAction;
+  Result.ParamValue:=AParamValue;
+end;
+
+{ TAlterTableOperator }
+
+constructor TAlterTableOperator.Create(AOwner: TAlterTableOperators);
+begin
+  inherited Create;
+  FOwner:=AOwner;
+  FField:=TSQLParserField.Create;
+  FOldField:=TSQLParserField.Create;
+  FConstraints:=TSQLConstraints.Create(FOwner.FOwner);
+  FParams:=TSQLFields.Create(FOwner.FOwner.FQuteIdentificatorChar);
+end;
+
+destructor TAlterTableOperator.Destroy;
+begin
+  FreeAndNil(FConstraints);
+  FreeAndNil(FField);
+  FreeAndNil(FOldField);
+  FreeAndNil(FParams);
+  inherited Destroy;
+end;
+
+procedure TAlterTableOperator.Assign(Source: TAlterTableOperator);
+begin
+  if Source is TAlterTableOperator then
+  begin
+    AlterAction:=TAlterTableOperator(Source).AlterAction;
+    DBMSTypeName:=TAlterTableOperator(Source).DBMSTypeName;
+    DropRule:=TAlterTableOperator(Source).DropRule;
+    InitialValue:=TAlterTableOperator(Source).InitialValue;
+    Name:=TAlterTableOperator(Source).Name;
+    OldName:=TAlterTableOperator(Source).OldName;
+    Options:=TAlterTableOperator(Source).Options;
+    ParamValue:=TAlterTableOperator(Source).ParamValue;
+    Position:=TAlterTableOperator(Source).Position;
+
+    Field.Assign(TAlterTableOperator(Source).Field);
+    OldField.Assign(TAlterTableOperator(Source).OldField);
+    Params.Assign(TAlterTableOperator(Source).Params);
+    Constraints.CopyFrom(TAlterTableOperator(Source).Constraints);
+  end;
 end;
 
 initialization

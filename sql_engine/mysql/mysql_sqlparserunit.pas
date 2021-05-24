@@ -224,6 +224,7 @@ type
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
+    procedure InternalFormatsInit; override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     destructor Destroy;override;
@@ -259,6 +260,7 @@ type
   TMySQLDropTable = class(TSQLDropCommandAbstract)
   private
   protected
+    procedure InternalFormatsInit; override;
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
@@ -2989,6 +2991,12 @@ end;
 
 { TMySQLDropTable }
 
+procedure TMySQLDropTable.InternalFormatsInit;
+begin
+  inherited InternalFormatsInit;
+  FQuteIdentificatorChar:='`';
+end;
+
 procedure TMySQLDropTable.InitParserTree;
 var
   FSQLTokens, T, T2, TName: TSQLTokenRecord;
@@ -5006,6 +5014,11 @@ begin
     137:FCurFK:=1;
     138:FCurFK:=2;
   end;
+end;
+
+procedure TMySQLCreateTable.InternalFormatsInit;
+begin
+  FQuteIdentificatorChar:='`';
 end;
 
 procedure TMySQLCreateTable.MakeSQL;

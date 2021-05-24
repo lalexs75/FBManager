@@ -797,6 +797,7 @@ procedure TfbmTableEditorFieldsFrame.CompileEditFormData(ASqlObj: TSQLAlterTable
 var
   OP: TAlterTableOperator;
   C: TSQLConstraintItem;
+  P1: TSQLParserField;
 begin
   OP:=ASqlObj.AddOperator(ataAddColumn);
   fbmTableFieldEditorForm.FillSQLField(OP.Field);
@@ -816,7 +817,8 @@ begin
     C:=OP.Constraints.Add(ctForeignKey, fbmTableFieldEditorForm.edtFKName.Text);
     C.ConstraintFields.AddParam(fbmTableFieldEditorForm.edtFieldName.Text);
     C.ForeignTable:=fbmTableFieldEditorForm.FKTableName;
-    C.ForeignFields.AddParam(fbmTableFieldEditorForm.FKFieldsName);
+    //C.ForeignFields.AddParam(fbmTableFieldEditorForm.FKFieldsName);
+    C.ForeignFields.AsString:=fbmTableFieldEditorForm.FKFieldsName;
     C.ForeignKeyRuleOnUpdate:=fbmTableFieldEditorForm.ForeignKeyRuleOnUpdate;
     C.ForeignKeyRuleOnDelete:=fbmTableFieldEditorForm.ForeignKeyRuleOnDelete;
     if fbmTableFieldEditorForm.cbCreateFKIndex.Checked then
