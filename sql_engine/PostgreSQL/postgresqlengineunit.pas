@@ -5799,7 +5799,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TPrimaryKeyRecord.Create;
+      Rec:=TPrimaryKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
       Rec.FieldList:=ConvertFieldList(Q.FieldByName('conkey').AsString, Self);
@@ -5839,7 +5839,7 @@ begin
     while not Q.Eof do
     begin
       { TODO : Необходимо читать описание ограничения }
-      Rec:=TPGForeignKeyRecord.Create;
+      Rec:=TPGForeignKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
       Rec.IndexOID:=Q.FieldByName('conindid').AsInteger;
@@ -5893,7 +5893,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TUniqueRecord.Create;
+      Rec:=TUniqueRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
       Rec.FieldList:=ConvertFieldList(Q.FieldByName('conkey').AsString, Self);
@@ -5926,7 +5926,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TTableCheckConstraintRecord.Create;
+      Rec:=TTableCheckConstraintRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
       Rec.SQLBody:=Q.FieldByName('consrc').AsString;

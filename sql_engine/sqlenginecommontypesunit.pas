@@ -474,49 +474,6 @@ type
     property Current: TIndexField read GetCurrent;
   end;
 
-  { TPrimaryKeyRecord }
-
-  TPrimaryKeyRecord = class
-  private
-    FFieldList: string;
-    FFieldListArr: TSQLFields;
-    procedure SetFieldList(AValue: string);
-  public
-    Name:string;
-    IndexName:string;
-    Index:TIndexItem;
-    ConstraintType:TConstraintType;
-    Description:string;
-    constructor Create;
-    destructor Destroy; override;
-    function CountFields:integer;
-    function FieldByNum(ANum:integer):string;
-    property FieldList:string read FFieldList write SetFieldList;
-    property FieldListArr: TSQLFields read FFieldListArr;
-  end;
-
-  { TForeignKeyRecord }
-
-  TForeignKeyRecord = class(TPrimaryKeyRecord)
-    FKTableName:string;
-    FKFieldName:string;
-    OnUpdateRule:TForeignKeyRule;
-    OnDeleteRule:TForeignKeyRule;
-    constructor Create;
-  end;
-
-  { TUniqueRecord }
-
-  TUniqueRecord = class(TPrimaryKeyRecord)
-    constructor Create;
-  end;
-
-  { TTableCheckConstraintRecord }
-
-  TTableCheckConstraintRecord = class(TPrimaryKeyRecord)
-    SQLBody:string;
-    constructor Create;
-  end;
 
 type
   //Элемент зависимости
@@ -1040,13 +997,6 @@ begin
 end;
 
 
-{ TTableCheckConstraintRecord }
-
-constructor TTableCheckConstraintRecord.Create;
-begin
-  inherited Create;
-  ConstraintType:=ctTableCheck;
-end;
 
 { TLocalVariable }
 
@@ -1130,64 +1080,6 @@ begin
   LogFileSQLScript:=AData.FieldByName('db_database_log_script_exec_filename').AsString;
 end;
 
-{ TPrimaryKeyRecord }
-
-procedure TPrimaryKeyRecord.SetFieldList(AValue: string);
-var
-  C:integer;
-begin
-  FFieldList:=AValue;
-  FFieldListArr.Clear;
-  if Pos(',', AValue) > 0 then
-  begin
-    C:=Pos(',', AValue);
-    while C>0 do
-    begin
-      FFieldListArr.AddParam(Copy2SymbDel(AValue, ','));
-      C:=Pos(',', AValue);
-    end;
-  end;
-  if AValue <> '' then
-    FFieldListArr.AddParam(AValue);
-end;
-
-constructor TPrimaryKeyRecord.Create;
-begin
-  inherited Create;
-  ConstraintType:=ctPrimaryKey;
-  //FFieldListArr:=TStringList.Create;
-  FFieldListArr:=TSQLFields.Create;
-end;
-
-destructor TPrimaryKeyRecord.Destroy;
-begin
-  FreeAndNil(FFieldListArr);
-  inherited Destroy;
-end;
-
-function TPrimaryKeyRecord.CountFields: integer;
-begin
-  Result:=Max(1, FFieldListArr.Count);
-end;
-
-function TPrimaryKeyRecord.FieldByNum(ANum: integer): string;
-begin
-  if ANum > CountFields - 1 then
-    raise Exception.CreateFmt('Ошибка поиска поля по номеру %d', [ANum])
-  else
-  if FFieldListArr.Count = 0 then
-    Result:=FFieldList
-  else
-    Result:=FFieldListArr[ANum].Caption;
-end;
-
-{ TForeignKeyRecord }
-
-constructor TForeignKeyRecord.Create;
-begin
-  inherited Create;
-  ConstraintType:=ctForeignKey;
-end;
 
 { TDependRecord }
 
@@ -1410,14 +1302,6 @@ begin
     Result:=Format('%s(%d)', [TypeName, ALen])
   else
     Result:=TypeName;
-end;
-
-{ TUniqueRecord }
-
-constructor TUniqueRecord.Create;
-begin
-  inherited Create;
-  ConstraintType:=ctUnique;
 end;
 
 end.

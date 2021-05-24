@@ -509,6 +509,28 @@ type
     property AsString:string read GetAsString;
   end;
 
+  { TPrimaryKeyRecord }
+
+  TPrimaryKeyRecord = class
+  private
+    FFieldList: string;
+    FFieldListArr: TSQLFields;
+    FSQLEngine:TSQLEngineAbstract;
+    procedure SetFieldList(AValue: string);
+  public
+    Name:string;
+    IndexName:string;
+    Index:TIndexItem;
+    ConstraintType:TConstraintType;
+    Description:string;
+    constructor Create(const ASQLEngine:TSQLEngineAbstract);
+    destructor Destroy; override;
+    function CountFields:integer;
+    function FieldByNum(ANum:integer):string;
+    property FieldList:string read FFieldList write SetFieldList;
+    property FieldListArr: TSQLFields read FFieldListArr;
+  end;
+
   { TDBFieldsEnumerator }
 
   TDBFieldsEnumerator = class
@@ -831,6 +853,29 @@ type
     property Item[AIndex:Integer]:TSQLEngineConnectionPlugin read GetItem; default;
   end;
 
+  { TForeignKeyRecord }
+
+  TForeignKeyRecord = class(TPrimaryKeyRecord)
+    FKTableName:string;
+    FKFieldName:string;
+    OnUpdateRule:TForeignKeyRule;
+    OnDeleteRule:TForeignKeyRule;
+    constructor Create(const ASQLEngine:TSQLEngineAbstract);
+  end;
+
+  { TUniqueRecord }
+
+  TUniqueRecord = class(TPrimaryKeyRecord)
+    constructor Create(const ASQLEngine:TSQLEngineAbstract);
+  end;
+
+  { TTableCheckConstraintRecord }
+
+  TTableCheckConstraintRecord = class(TPrimaryKeyRecord)
+    SQLBody:string;
+    constructor Create(const ASQLEngine:TSQLEngineAbstract);
+  end;
+
   { TSQLEngineAbstract }
 
   TSQLEngineAbstract = class
@@ -1008,7 +1053,7 @@ var
 function ExecSQLScript(Line:string; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 function ExecSQLScriptEx(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;
 implementation
-uses fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging, rxmemds, Variants;
+uses Math, fbmStrConstUnit, fbmToolsUnit, strutils, LazUTF8, rxAppUtils, rxlogging, rxmemds, Variants;
 
 
 function ExecSQLScript(Line: string; const ExecParams: TSqlExecParams;
@@ -3686,6 +3731,85 @@ procedure TDBStoredProcObject.RefreshParams;
 begin
   FFieldsIN.Clear;
   FFieldsOut.Clear;
+end;
+
+{ TTableCheckConstraintRecord }
+
+constructor TTableCheckConstraintRecord.Create(const ASQLEngine:TSQLEngineAbstract);
+begin
+  inherited Create(ASQLEngine);
+  ConstraintType:=ctTableCheck;
+end;
+
+{ TPrimaryKeyRecord }
+
+procedure TPrimaryKeyRecord.SetFieldList(AValue: string);
+var
+  C:integer;
+begin
+  FFieldList:=AValue;
+  FFieldListArr.Clear;
+  if Pos(',', AValue) > 0 then
+  begin
+    C:=Pos(',', AValue);
+    while C>0 do
+    begin
+      FFieldListArr.AddParam(Copy2SymbDel(AValue, ','));
+      C:=Pos(',', AValue);
+    end;
+  end;
+  if AValue <> '' then
+    FFieldListArr.AddParam(AValue);
+end;
+
+constructor TPrimaryKeyRecord.Create(const ASQLEngine:TSQLEngineAbstract);
+begin
+  inherited Create;
+  ConstraintType:=ctPrimaryKey;
+  //FFieldListArr:=TStringList.Create;
+  FSQLEngine:=ASQLEngine;
+  if Assigned(FSQLEngine) then
+    FFieldListArr:=TSQLFields.Create(FSQLEngine.QuteIdentificatorChar)
+  else
+    FFieldListArr:=TSQLFields.Create('"');
+end;
+
+destructor TPrimaryKeyRecord.Destroy;
+begin
+  FreeAndNil(FFieldListArr);
+  inherited Destroy;
+end;
+
+function TPrimaryKeyRecord.CountFields: integer;
+begin
+  Result:=Max(1, FFieldListArr.Count);
+end;
+
+function TPrimaryKeyRecord.FieldByNum(ANum: integer): string;
+begin
+  if ANum > CountFields - 1 then
+    raise Exception.CreateFmt('Ошибка поиска поля по номеру %d', [ANum])
+  else
+  if FFieldListArr.Count = 0 then
+    Result:=FFieldList
+  else
+    Result:=FFieldListArr[ANum].Caption;
+end;
+
+{ TForeignKeyRecord }
+
+constructor TForeignKeyRecord.Create(const ASQLEngine:TSQLEngineAbstract);
+begin
+  inherited Create(ASQLEngine);
+  ConstraintType:=ctForeignKey;
+end;
+
+{ TUniqueRecord }
+
+constructor TUniqueRecord.Create(const ASQLEngine:TSQLEngineAbstract);
+begin
+  inherited Create(ASQLEngine);
+  ConstraintType:=ctUnique;
 end;
 
 end.

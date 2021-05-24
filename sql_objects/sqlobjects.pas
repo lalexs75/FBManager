@@ -330,6 +330,7 @@ type
   TSQLFields = class
   private
     FList:TObjectList;
+    FQuteIdentificatorChar: Char;
     function GetAsList: string;
     function GetAsString: string;
     function GetAsText: string;
@@ -337,7 +338,7 @@ type
     function GetFields(AIndex: integer): TSQLParserField;
     procedure SetAsString(AValue: string);
   public
-    constructor Create;
+    constructor Create(AQuteIdentificatorChar: Char);
     destructor Destroy;override;
     procedure Clear;
     procedure Assign(ASource:TSQLFields);
@@ -621,6 +622,7 @@ type
     FIfExists: boolean;
     FParams: TSQLFields;
     FParamValue: string;
+    FQuteIdentificatorChar: Char;
   public
     constructor Create(AAlterAction:TAlterDomainAction);
     destructor Destroy;override;
@@ -927,7 +929,8 @@ end;
 constructor TAlterDomainOperator.Create(AAlterAction: TAlterDomainAction);
 begin
   inherited Create;
-  FParams:=TSQLFields.Create;
+  FQuteIdentificatorChar:='"';
+  FParams:=TSQLFields.Create(FQuteIdentificatorChar);
   FAlterAction:=AAlterAction;
 end;
 
@@ -1055,7 +1058,7 @@ end;
 constructor TTableItem.Create;
 begin
   inherited Create;
-  FFields:=TSQLFields.Create;
+  FFields:=TSQLFields.Create('"');
   FTableType:=stitTable;
 end;
 
@@ -1179,9 +1182,9 @@ end;
 constructor TSQLConstraintItem.Create;
 begin
   inherited Create;
-  FForeignFields:=TSQLFields.Create;
-  FConstraintFields:=TSQLFields.Create;
-  FParams:=TSQLFields.Create;
+  FForeignFields:=TSQLFields.Create('"');
+  FConstraintFields:=TSQLFields.Create('"');
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TSQLConstraintItem.Destroy;
@@ -1413,7 +1416,7 @@ begin
   FField:=TSQLParserField.Create;
   FOldField:=TSQLParserField.Create;
   FConstraints:=TSQLConstraints.Create;
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TAlterTableOperator.Destroy;
@@ -1816,10 +1819,11 @@ begin
     AddParam(AValue);
 end;
 
-constructor TSQLFields.Create;
+constructor TSQLFields.Create(AQuteIdentificatorChar: Char);
 begin
   inherited Create;
   FList:=TObjectList.Create;
+  FQuteIdentificatorChar:=AQuteIdentificatorChar;
 end;
 
 destructor TSQLFields.Destroy;
@@ -1849,7 +1853,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result +  DoFormatName(F.Caption) + ', ';
+    Result:=Result +  DoFormatName(F.Caption, false, FQuteIdentificatorChar) + ', ';
   Result:=Copy(Result, 1, Length(Result)-2);
 end;
 
@@ -1859,7 +1863,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result + DoFormatName(F.Caption) + LineEnding;
+    Result:=Result + DoFormatName(F.Caption, false, FQuteIdentificatorChar) + LineEnding;
 end;
 
 function TSQLFields.GetAsList: string;
@@ -1868,7 +1872,7 @@ var
 begin
   Result:='';
   for F in Self do
-    Result:=Result + '  ' + DoFormatName(F.Caption) + ','+LineEnding;
+    Result:=Result + '  ' + DoFormatName(F.Caption, false, FQuteIdentificatorChar) + ','+LineEnding;
   Result:=Copy(Result, 1, Length(Result)-Length(','+LineEnding));
 end;
 

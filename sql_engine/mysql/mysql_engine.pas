@@ -1979,7 +1979,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TPrimaryKeyRecord.Create;
+      Rec:=TPrimaryKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('CONSTRAINT_NAME').AsString;
 
@@ -2062,7 +2062,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TForeignKeyRecord.Create;
+      Rec:=TForeignKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('CONSTRAINT_NAME').AsString;
       Rec.FieldList:=Q.FieldByName('COLUMN_NAME').AsString;

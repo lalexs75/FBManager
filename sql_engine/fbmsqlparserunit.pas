@@ -1291,7 +1291,7 @@ end;
 constructor TSQLCommandSelectCTE.Create;
 begin
   inherited Create;
-  FFields:=TSQLFields.Create;
+  FFields:=TSQLFields.Create('"');
 end;
 
 destructor TSQLCommandSelectCTE.Destroy;
@@ -1955,7 +1955,7 @@ end;
 constructor TSQLCommandDDL.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FFields:=TSQLFields.Create;
+  FFields:=TSQLFields.Create('"');
   FTables:=TSQLTables.Create;
 end;
 
@@ -2087,7 +2087,7 @@ end;
 constructor TSQLDeclareLocalVarParser.Create;
 begin
   inherited Create;
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TSQLDeclareLocalVarParser.Destroy;
@@ -2739,8 +2739,8 @@ constructor TSQLCommandAbstractSelect.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FTables:=TSQLTables.Create;
-  FFields:=TSQLFields.Create;
-  FOrderByFields:=TSQLFields.Create;
+  FFields:=TSQLFields.Create('"');
+  FOrderByFields:=TSQLFields.Create('"');
   FPlanEnabled:=true;
   FCTE:=TSQLCommandSelectCTEList.Create;
 end;
@@ -3164,7 +3164,7 @@ begin
   FStartTokens:=TSQLTokenList.Create;
 
   FPlanEnabled:=false;
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
   InitParserTree;
 end;
 
@@ -4013,8 +4013,8 @@ var
 begin
   inherited InitParserTree;
   FPlanEnabled:=false;
-  FFields:=TSQLFields.Create;
-  FParams:=TSQLFields.Create;
+  FFields:=TSQLFields.Create('"');
+  FParams:=TSQLFields.Create('"');
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'insert', [toFirstToken]);
     TN:=AddSQLTokens(stKeyword, FSQLTokens, 'into', [toFindWordLast]); //

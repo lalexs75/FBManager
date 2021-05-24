@@ -2793,7 +2793,7 @@ begin
     QPKList.Open;
     while not QPKList.Eof do
     begin
-      Rec:=TPrimaryKeyRecord.Create;
+      Rec:=TPrimaryKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Trim(QPKList.Fields.ByNameAsString['rdb$constraint_name']);
       Rec.IndexName:=Trim(QPKList.Fields.ByNameAsString['rdb$index_name']);
@@ -2828,7 +2828,7 @@ begin
     QFKList.Open;
     while not QFKList.Eof do
     begin
-      Rec:=TForeignKeyRecord.Create;
+      Rec:=TForeignKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Trim(QFKList.Fields.ByNameAsString['rdb$constraint_name']);
       Rec.IndexName:=Trim(QFKList.Fields.ByNameAsString['rdb$index_name']);
@@ -2858,7 +2858,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TUniqueRecord.Create;
+      Rec:=TUniqueRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Trim(Q.Fields.ByNameAsString['rdb$constraint_name']);
       Rec.IndexName:=Trim(Q.Fields.ByNameAsString['rdb$index_name']);
@@ -2884,7 +2884,7 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      Rec:=TTableCheckConstraintRecord.Create;
+      Rec:=TTableCheckConstraintRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=Trim(Q.Fields.ByNameAsString['RDB$CONSTRAINT_NAME']);
       S:=Q.Fields.ByNameAsString['RDB$TRIGGER_SOURCE'];

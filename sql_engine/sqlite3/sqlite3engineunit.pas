@@ -1420,7 +1420,7 @@ begin
   for C in FCmdCreateTable.SQLConstraints do
     if C.ConstraintType = ctForeignKey then
     begin
-      Rec:=TForeignKeyRecord.Create;
+      Rec:=TForeignKeyRecord.Create(OwnerDB);
       FConstraintList.Add(Rec);
       Rec.Name:=C.ConstraintName;
       Rec.FieldList:=C.ConstraintFields.AsString;
@@ -1442,7 +1442,7 @@ begin
     for C in FCmdCreateTable.SQLConstraints do
       if C.ConstraintType = ctUnique then
       begin
-        Rec:=TUniqueRecord.Create;
+        Rec:=TUniqueRecord.Create(OwnerDB);
         FConstraintList.Add(Rec);
         Rec.Name:=C.ConstraintName;
         Rec.FieldList:=C.ConstraintFields.AsString;
@@ -1460,7 +1460,7 @@ begin
     for C in FCmdCreateTable.SQLConstraints do
       if C.ConstraintType = ctTableCheck then
       begin
-        Rec:=TTableCheckConstraintRecord.Create;
+        Rec:=TTableCheckConstraintRecord.Create(OwnerDB);
         FConstraintList.Add(Rec);
         Rec.Name:=C.ConstraintName;
         Rec.SQLBody:=C.ConstraintExpression;

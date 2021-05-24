@@ -4417,7 +4417,7 @@ end;
 constructor TPGSQLPartitionOfData.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLPartitionOfData.Destroy;
@@ -4757,7 +4757,7 @@ end;
 constructor TPGSQLAlterMaterializedCmd.Create;
 begin
   inherited Create;
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLAlterMaterializedCmd.Destroy;
@@ -5147,7 +5147,7 @@ end;
 constructor TPGSQLCreateTablePartition.Create;
 begin
   inherited Create;
-  FParams:=TSQLFields.Create;
+  FParams:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLCreateTablePartition.Destroy;
@@ -7286,7 +7286,7 @@ constructor TPGSQLCreateIndex.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   FSQLCommentOnClass:=TPGSQLCommentOn;
-  FIncludeFields:=TSQLFields.Create;
+  FIncludeFields:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLCreateIndex.Destroy;
@@ -10608,7 +10608,7 @@ end;
 constructor TPGSQLAlterDefaultPrivileges.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FSchemas:=TSQLFields.Create;
+  FSchemas:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLAlterDefaultPrivileges.Destroy;
@@ -12537,7 +12537,7 @@ end;
 constructor TPGSQLCreateAggregate.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FParamsOrder:=TSQLFields.Create;
+  FParamsOrder:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLCreateAggregate.Destroy;
@@ -15355,8 +15355,8 @@ end;
 constructor TPGSQLCopy.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
-  FQuoteColumns:=TSQLFields.Create;
-  FNotNullColumn:=TSQLFields.Create;
+  FQuoteColumns:=TSQLFields.Create('"');
+  FNotNullColumn:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLCopy.Destroy;
@@ -18383,7 +18383,7 @@ begin
   inherited Create(AParent);
   ObjectKind:=okStoredProc;
   FSQLCommentOnClass:=TPGSQLCommentOn;
-  FConfigParams:=TSQLFields.Create;
+  FConfigParams:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLAlterFunction.Destroy;
@@ -20828,7 +20828,7 @@ begin
   inherited Create(AParent);
   ObjectKind:=okStoredProc;
   FSQLCommentOnClass:=TPGSQLCommentOn;
-  FOutput:=TSQLFields.Create;
+  FOutput:=TSQLFields.Create('"');
 end;
 
 destructor TPGSQLCreateFunction.Destroy;
