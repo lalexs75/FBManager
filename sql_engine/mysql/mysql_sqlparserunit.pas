@@ -136,8 +136,9 @@ type
 //    SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
     myShowProfiles,
     myShowStatus,
+    myShowTableStatus, //SHOW TABLE STATUS [FROM db_name] [like_or_where]
 (*
-    SHOW TABLE STATUS [FROM db_name] [like_or_where]
+
     SHOW TABLES [FROM db_name] [like_or_where]
     SHOW TRIGGERS [FROM db_name] [like_or_where]
 *)
@@ -1748,7 +1749,6 @@ begin
 
 (*    SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
     SHOW PROFILES
-    SHOW TABLE STATUS [FROM db_name] [like_or_where]
     SHOW TABLES [FROM db_name] [like_or_where]
     SHOW TRIGGERS [FROM db_name] [like_or_where]
     SHOW WARNINGS [LIMIT [offset,] row_count]
@@ -1767,6 +1767,10 @@ begin
     T1:=AddSQLTokens(stKeyword, [FSQLTokens, TG, TS], 'VARIABLES', [toFindWordLast], 25); //SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
 
 
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]); //SHOW TABLE STATUS [FROM db_name] [like_or_where]
+  T1:=AddSQLTokens(stKeyword, T1, 'STATUS', [], 26);
+  T1:=AddSQLTokens(stKeyword, T1, 'WHERE', [toOptional], 27);
+
 (*
     SHOW COLUMNS
     SHOW DATABASES
@@ -1775,7 +1779,6 @@ begin
     SHOW OPEN TABLES
     SHOW PROCEDURE STATUS
     SHOW STATUS
-    SHOW TABLE STATUS
     SHOW TABLES
     SHOW TRIGGERS
     SHOW VARIABLES
@@ -1890,6 +1893,8 @@ begin
          if S<>'' then
            Params.AddParam(S);
        end;
+    26:FShowCommand:=myShowTableStatus;
+    27:FWhere:=TrimLeft(ASQLParser.GetToCommandDelemiter);
   end;
 end;
 
@@ -1949,6 +1954,7 @@ begin
         S:=S + 'VARIABLES';
         if Params.Count>0 then S:=S + Params[0].Caption
       end;
+    myShowTableStatus:S:='SHOW TABLE STATUS' + DoLikeOrWhere; // [FROM db_name] [like_or_where]';
   end;
   if S<>'' then
     AddSQLCommand(S);
@@ -1969,7 +1975,7 @@ begin
 
       SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
       SHOW PROFILES
-      SHOW TABLE STATUS [FROM db_name] [like_or_where]
+
       SHOW TABLES [FROM db_name] [like_or_where]
       SHOW TRIGGERS [FROM db_name] [like_or_where]
       SHOW WARNINGS [LIMIT [offset,] row_count]
