@@ -901,6 +901,19 @@ begin
 end;
 
 procedure TfbmTableEditorFieldsFrame.fldEditExecute(Sender: TObject);
+function SameType(AInd:integer; AType:string):Boolean;
+var
+  P: TDBMSFieldTypeRecord;
+begin
+  Result:=false;
+  if (AInd<0) or (AInd>=DBObject.OwnerDB.TypeList.Count) then
+    exit;
+  P:=DBObject.OwnerDB.TypeList[AInd];
+  Result:=UpperCase(AType) = UpperCase(P.TypeName);
+  if not Result then
+    Result:=P.AltNames.IndexOf(AType)>-1;
+end;
+
 var
   FSqlObj: TSQLAlterTable;
   OP: TAlterTableOperator;
@@ -959,7 +972,8 @@ begin
 
           (fbmTableFieldEditorForm.cbCustomTypeCheck.Checked and
             (
-             (fbmTableFieldEditorForm.cbFieldType.Text <> rxFieldListFIELD_TYPE.AsString) or
+//             (fbmTableFieldEditorForm.cbFieldType.Text <> rxFieldListFIELD_TYPE.AsString) or
+             (not SameType(fbmTableFieldEditorForm.cbFieldType.ItemIndex,rxFieldListFIELD_TYPE.AsString)) or
              (fbmTableFieldEditorForm.edtSize.Value <> rxFieldListFIELD_SIZE.AsInteger) or
              (fbmTableFieldEditorForm.edtScale.Value <> rxFieldListFIELD_PREC.AsInteger)
             )
