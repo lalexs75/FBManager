@@ -1268,6 +1268,8 @@ begin
   s_extra:=DS.FieldByName('EXTRA').AsString;
 
   FieldAutoInc:=Pos('auto_increment', s_extra)>0;
+  FieldDefaultValue:=DS.FieldByName('COLUMN_DEFAULT').AsString;
+
 
   {
   //    FieldUNIC:boolean;

@@ -3692,6 +3692,7 @@ begin
       ataAlterColumnSetNotNull,
       ataAlterColumnSetDataType,
       ataAlterColumnDropDefault,
+      ataAlterColumnSetDefaultExp,
       ataAlterColumnDescription : ModifyCollumn(OP);
       ataAddTableConstraint:AddConstrint(S, OP);
       ataDropConstraint:DropConstraint(S, OP);
