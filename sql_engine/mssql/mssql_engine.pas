@@ -1026,41 +1026,45 @@ begin
       FQuery:=GetSQLSysQuery(ASQLText)
     else}
       FQuery:=GetSQLQuery(ASQLText);
-    FQuery.Open;
+    try
+      FQuery.Open;
 
-    FDesc:=FQuery.FindField('description');
-    if not Assigned(FDesc) then
-      if FQuery.Fields.Count > 4 then
-        FDesc:=FQuery.Fields[4];
-    FOwnData:=FQuery.FindField('own_data');
-    FObjData:=FQuery.FindField('data');
-    FAclList:=FQuery.FindField('acl_list');
-    FKind2:=FQuery.FindField('kind_2');
+      FDesc:=FQuery.FindField('description');
+      if not Assigned(FDesc) then
+        if FQuery.Fields.Count > 4 then
+          FDesc:=FQuery.Fields[4];
+      FOwnData:=FQuery.FindField('own_data');
+      FObjData:=FQuery.FindField('data');
+      FAclList:=FQuery.FindField('acl_list');
+      FKind2:=FQuery.FindField('kind_2');
 
-    while not FQuery.Eof do
-    begin
-      P:=DBObj.Add(FQuery.Fields[2].AsString);
-      P.ObjId:=FQuery.Fields[0].AsInteger;    //sys.all_objects.object_id
-      P.SchemeID:=FQuery.Fields[1].AsInteger; // sys.all_objects.schema_id
-      P.ObjType:=Trim(FQuery.Fields[3].AsString);   //sys.all_objects.[type]
+      while not FQuery.Eof do
+      begin
+        P:=DBObj.Add(FQuery.Fields[2].AsString);
+        P.ObjId:=FQuery.Fields[0].AsInteger;    //sys.all_objects.object_id
+        P.SchemeID:=FQuery.Fields[1].AsInteger; // sys.all_objects.schema_id
+        P.ObjType:=Trim(FQuery.Fields[3].AsString);   //sys.all_objects.[type]
 
-      if Assigned(FDesc) then
-        P.ObjDesc:=Trim(FDesc.AsString);
-      if Assigned(FOwnData) then
-        P.ObjOwnData:=FOwnData.AsInteger;
+        if Assigned(FDesc) then
+          P.ObjDesc:=Trim(FDesc.AsString);
+        if Assigned(FOwnData) then
+          P.ObjOwnData:=FOwnData.AsInteger;
 
-      if Assigned(FObjData) then
-        P.ObjData:=FObjData.AsString;
+        if Assigned(FObjData) then
+          P.ObjData:=FObjData.AsString;
 
-      if Assigned(FKind2) then
-        P.Kind2:=FKind2.AsString;
+        if Assigned(FKind2) then
+          P.Kind2:=FKind2.AsString;
 
-      if Assigned(FAclList) then
-        P.ObjACLList:=FAclList.AsString;
+        if Assigned(FAclList) then
+          P.ObjACLList:=FAclList.AsString;
 
-      FQuery.Next;
+        FQuery.Next;
+      end;
+      FQuery.Close;
+
+    except
     end;
-    FQuery.Close;
     FreeAndNil(FQuery);
   end;
 end;

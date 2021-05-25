@@ -325,7 +325,6 @@ type
     //
   protected
     function GetImageIndex: integer;override;
-    //procedure SetConnected(const AValue: boolean);override;
     function InternalSetConnected(const AValue: boolean):boolean; override;
     procedure InitGroupsObjects;override;
     procedure DoneGroupsObjects;override;
@@ -2548,20 +2547,23 @@ begin
   if DBObj.CountUse = 1 then
   begin
     FQuery:=GetSqlQuery(ASQLText);
-    FQuery.Open;
-    while not FQuery.Eof do
-    begin
-      P:=DBObj.Add(FQuery.FieldByName('name').AsString);
-      if Assigned(FQuery.FindField('description')) then
-        P.ObjDesc:=Trim(FQuery.FieldByName('description').AsString);
-      if Assigned(FQuery.FindField('table_name')) then
-        P.ObjRelName:=Trim(FQuery.FieldByName('table_name').AsString);
+    try
+      FQuery.Open;
+      while not FQuery.Eof do
+      begin
+        P:=DBObj.Add(FQuery.FieldByName('name').AsString);
+        if Assigned(FQuery.FindField('description')) then
+          P.ObjDesc:=Trim(FQuery.FieldByName('description').AsString);
+        if Assigned(FQuery.FindField('table_name')) then
+          P.ObjRelName:=Trim(FQuery.FieldByName('table_name').AsString);
 
-      if Assigned(FQuery.FindField('obj_type')) then
-        P.ObjType:=FQuery.FieldByName('obj_type').AsString;
-      FQuery.Next;
+        if Assigned(FQuery.FindField('obj_type')) then
+          P.ObjType:=FQuery.FieldByName('obj_type').AsString;
+        FQuery.Next;
+      end;
+      FQuery.Close;
+    except
     end;
-    FQuery.Close;
     FreeAndNil(FQuery);
   end;
 end;

@@ -1681,29 +1681,32 @@ begin
   if DBObj.CountUse = 1 then
   begin
     FQuery:=GetUIBQuery(ASQLText);
-    FQuery.Open;
-    while not FQuery.Eof do
-    begin
-      P:=DBObj.Add(Trim(FQuery.Fields.AsString[0]));
+    try
+      FQuery.Open;
+      while not FQuery.Eof do
+      begin
+        P:=DBObj.Add(Trim(FQuery.Fields.AsString[0]));
 
-      if FQuery.Fields.FieldCount > 1 then
-        P.ObjDesc:=TrimRight(FQuery.Fields.AsString[1]);
+        if FQuery.Fields.FieldCount > 1 then
+          P.ObjDesc:=TrimRight(FQuery.Fields.AsString[1]);
 
-      if FQuery.Fields.TryGetFieldIndex('relation_name', i) then
-        P.ObjRelName:=Trim(FQuery.Fields.AsString[i]);
-      if FQuery.Fields.TryGetFieldIndex('data', i) then
-        P.ObjData:=Trim(FQuery.Fields.AsString[i]);
-      if FQuery.Fields.TryGetFieldIndex('SYSTEM_FLAG', i) then
-        P.ObjType2:=FQuery.Fields.AsInteger[i]
-      else
-      if FQuery.Fields.TryGetFieldIndex('type', i) then
-        P.ObjType2:=FQuery.Fields.AsInteger[i]
-      else
-      if FQuery.Fields.TryGetFieldIndex('object_id', i) then
-        P.ObjId:=FQuery.Fields.AsInteger[i];
-      FQuery.Next;
+        if FQuery.Fields.TryGetFieldIndex('relation_name', i) then
+          P.ObjRelName:=Trim(FQuery.Fields.AsString[i]);
+        if FQuery.Fields.TryGetFieldIndex('data', i) then
+          P.ObjData:=Trim(FQuery.Fields.AsString[i]);
+        if FQuery.Fields.TryGetFieldIndex('SYSTEM_FLAG', i) then
+          P.ObjType2:=FQuery.Fields.AsInteger[i]
+        else
+        if FQuery.Fields.TryGetFieldIndex('type', i) then
+          P.ObjType2:=FQuery.Fields.AsInteger[i]
+        else
+        if FQuery.Fields.TryGetFieldIndex('object_id', i) then
+          P.ObjId:=FQuery.Fields.AsInteger[i];
+        FQuery.Next;
+      end;
+      FQuery.Close;
+    except
     end;
-    FQuery.Close;
     FreeAndNil(FQuery);
   end;
 end;

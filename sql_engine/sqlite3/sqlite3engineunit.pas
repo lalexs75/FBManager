@@ -1810,17 +1810,20 @@ begin
   if DBObj.CountUse = 1 then
   begin
     FQuery:=OpenDataSet(ASQLText, nil);
-    FQuery.Open;
-    while not FQuery.Eof do
-    begin
-      P:=DBObj.Add(FQuery.FieldByName('name').AsString);
-      P.ObjType:=LowerCase(FQuery.FieldByName('type').AsString);
-      P.ObjRelName:=FQuery.FieldByName('tbl_name').AsString;
-      P.ObjData:=FQuery.FieldByName('sql').AsString;
-      P.ObjType2:=FQuery.FieldByName('system_type').AsInteger;
-      FQuery.Next;
+    try
+      FQuery.Open;
+      while not FQuery.Eof do
+      begin
+        P:=DBObj.Add(FQuery.FieldByName('name').AsString);
+        P.ObjType:=LowerCase(FQuery.FieldByName('type').AsString);
+        P.ObjRelName:=FQuery.FieldByName('tbl_name').AsString;
+        P.ObjData:=FQuery.FieldByName('sql').AsString;
+        P.ObjType2:=FQuery.FieldByName('system_type').AsInteger;
+        FQuery.Next;
+      end;
+      FQuery.Close;
+    except
     end;
-    FQuery.Close;
     FreeAndNil(FQuery);
   end;
 end;
