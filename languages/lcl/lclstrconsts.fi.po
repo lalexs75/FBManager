@@ -729,6 +729,10 @@ msgstr "Limetti"
 msgid "List index exceeds bounds (%d)"
 msgstr "Luettelon osoitin ylittää rajat (%d)"
 
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr ""
+
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
@@ -945,6 +949,10 @@ msgstr "Ominaisuutta %s ei ole"
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
 msgstr "Purppura"
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1236,11 +1244,6 @@ msgstr "Kelvoton toiminnon rekisteröinti"
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
 msgstr "Kelvoton toiminnon rekisteröinnin purku"
-
-#: lclstrconsts.sinvalidcharset
-#, object-pascal-format
-msgid "The char set in mask \"%s\" is not valid!"
-msgstr "Maskin \"%s\" merkkijoukko on kelvoton!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"

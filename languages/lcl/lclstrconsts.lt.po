@@ -734,6 +734,10 @@ msgstr "Gelsvai žalsva"
 msgid "List index exceeds bounds (%d)"
 msgstr "Sąrašo indeksas peržengė ribas (%d)"
 
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr ""
+
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
@@ -950,6 +954,10 @@ msgstr "Savybė %s neegzistuoja"
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
 msgstr "Purpurinė"
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1241,11 +1249,6 @@ msgstr "Netinkamas veiksmo registravimas"
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
 msgstr "Netinakamas veiksmo išregistravimas"
-
-#: lclstrconsts.sinvalidcharset
-#, object-pascal-format
-msgid "The char set in mask \"%s\" is not valid!"
-msgstr "Netinkama kaukės „%s“ koduotė!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"

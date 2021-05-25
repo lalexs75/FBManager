@@ -733,6 +733,10 @@ msgstr "Citrusová"
 msgid "List index exceeds bounds (%d)"
 msgstr "Index seznamu překročil meze (%d)"
 
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr ""
+
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
@@ -949,6 +953,10 @@ msgstr "Vlastnost %s neexistuje"
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
 msgstr "Fialová"
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1240,11 +1248,6 @@ msgstr "Neplatná registrační akce"
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
 msgstr "Neplatná odregistrační akce"
-
-#: lclstrconsts.sinvalidcharset
-#, object-pascal-format
-msgid "The char set in mask \"%s\" is not valid!"
-msgstr "Znaková sada v masce \"%s\" není platná!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"

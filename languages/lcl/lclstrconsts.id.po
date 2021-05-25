@@ -762,6 +762,10 @@ msgstr ""
 msgid "List index exceeds bounds (%d)"
 msgstr "Indeks List melebihi jangkauan (%d)"
 
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr ""
+
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
@@ -977,6 +981,10 @@ msgstr "Properti %s tidak ada"
 
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
+msgstr ""
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
 msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
@@ -1269,11 +1277,6 @@ msgstr "Registrasi action tidak benar"
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
 msgstr "Pembatalan registrasi action tidak benar"
-
-#: lclstrconsts.sinvalidcharset
-#, object-pascal-format
-msgid "The char set in mask \"%s\" is not valid!"
-msgstr "set karakter dalam mask \"%s\" tidak benar!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"

@@ -732,6 +732,10 @@ msgstr "Lima"
 msgid "List index exceeds bounds (%d)"
 msgstr "El índice de lista excede los límites (%d)"
 
+#: lclstrconsts.rsmacosfileformat
+msgid "File Format:"
+msgstr ""
+
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
 msgid "Hide %s"
@@ -948,6 +952,10 @@ msgstr "La propiedad %s no existe"
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
 msgstr "Púrpura"
+
+#: lclstrconsts.rsqtoptiondisableaccurateframe
+msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
+msgstr ""
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1239,11 +1247,6 @@ msgstr "Registro de una acción inválida"
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
 msgstr "Anulación del registro de una acción inválida"
-
-#: lclstrconsts.sinvalidcharset
-#, object-pascal-format
-msgid "The char set in mask \"%s\" is not valid!"
-msgstr "¡La máscara \"%s\" del conjunto de caracteres no es válida!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"
