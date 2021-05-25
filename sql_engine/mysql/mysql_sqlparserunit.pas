@@ -125,8 +125,8 @@ type
     SHOW FUNCTION STATUS [like_or_where]
 *)
       myShowGrantsForUser,
-(*    SHOW INDEX FROM tbl_name [FROM db_name]
-    SHOW INNODB STATUS
+    myShowIndex,
+    (*    SHOW INNODB STATUS
     SHOW OPEN TABLES [FROM db_name] [like_or_where] *)
     myShowPlugins,
 (*    SHOW PROCEDURE CODE proc_name
@@ -137,11 +137,9 @@ type
     myShowProfiles,
     myShowStatus,
     myShowTableStatus, //SHOW TABLE STATUS [FROM db_name] [like_or_where]
-(*
 
-    SHOW TABLES [FROM db_name] [like_or_where]
-    SHOW TRIGGERS [FROM db_name] [like_or_where]
-*)
+//    SHOW TABLES [FROM db_name] [like_or_where]
+    myShowTriggers,
     myShowVariables,
 (*
     SHOW WARNINGS [LIMIT [offset,] row_count]
@@ -1737,7 +1735,6 @@ begin
         AddSQLTokens(stIdentificator, T3, '', [], 19);
         AddSQLTokens(stString, T3, '', [], 19);
 (*
-    SHOW INDEX FROM tbl_name [FROM db_name]
     SHOW INNODB STATUS
     SHOW OPEN TABLES [FROM db_name] [like_or_where]
     SHOW PROCEDURE CODE proc_name
@@ -1749,8 +1746,6 @@ begin
 
 (*    SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
     SHOW PROFILES
-    SHOW TABLES [FROM db_name] [like_or_where]
-    SHOW TRIGGERS [FROM db_name] [like_or_where]
     SHOW WARNINGS [LIMIT [offset,] row_count]
 *)
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'CHARACTER', []);
@@ -1770,6 +1765,18 @@ begin
   T1:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]); //SHOW TABLE STATUS [FROM db_name] [like_or_where]
   T1:=AddSQLTokens(stKeyword, T1, 'STATUS', [], 26);
   T1:=AddSQLTokens(stKeyword, T1, 'WHERE', [toOptional], 27);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'INDEX', [toFindWordLast]); //SHOW INDEX FROM tbl_name [FROM db_name]
+  T1:=AddSQLTokens(stKeyword, T1, 'FROM', []);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 28);
+  T1:=AddSQLTokens(stKeyword, T1, 'FROM', [toOptional]);
+  T1:=AddSQLTokens(stIdentificator, T1, '', [], 29);
+
+  T1:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGERS', [toFindWordLast], 30); //SHOW TRIGGERS [FROM db_name] [like_or_where]
+    T2:=AddSQLTokens(stKeyword, T1, 'FROM', [toOptional]);
+    T2:=AddSQLTokens(stIdentificator, T2, '', [], 29);
+
+    T3:=AddSQLTokens(stKeyword, [T1, T2], 'WHERE', [toOptional], 27);
 
 (*
     SHOW COLUMNS
@@ -1808,7 +1815,6 @@ begin
           SHOW FUNCTION CODE func_name
           SHOW FUNCTION STATUS [like_or_where]
           SHOW GRANTS FOR user
-          SHOW INDEX FROM tbl_name [FROM db_name]
           SHOW INNODB STATUS
           SHOW OPEN TABLES [FROM db_name] [like_or_where]
           SHOW PLUGINS
@@ -1819,9 +1825,7 @@ begin
           SHOW PROFILE [types] [FOR QUERY n] [OFFSET n] [LIMIT n]
           SHOW PROFILES
           SHOW [GLOBAL | SESSION] STATUS [like_or_where]
-          SHOW TABLE STATUS [FROM db_name] [like_or_where]
           SHOW TABLES [FROM db_name] [like_or_where]
-          SHOW TRIGGERS [FROM db_name] [like_or_where]
           SHOW [GLOBAL | SESSION] VARIABLES [like_or_where]
           SHOW WARNINGS [LIMIT [offset,] row_count]
 
@@ -1834,9 +1838,7 @@ begin
           SHOW OPEN TABLES
           SHOW PROCEDURE STATUS
           SHOW STATUS
-          SHOW TABLE STATUS
           SHOW TABLES
-          SHOW TRIGGERS
           SHOW VARIABLES
 
     *)
@@ -1895,6 +1897,12 @@ begin
        end;
     26:FShowCommand:=myShowTableStatus;
     27:FWhere:=TrimLeft(ASQLParser.GetToCommandDelemiter);
+    28:begin
+         FShowCommand:=myShowIndex;
+         TableName:=AWord;
+       end;
+    29:SchemaName:=AWord;
+    30:FShowCommand:=myShowTriggers;
   end;
 end;
 
@@ -1955,6 +1963,15 @@ begin
         if Params.Count>0 then S:=S + Params[0].Caption
       end;
     myShowTableStatus:S:='SHOW TABLE STATUS' + DoLikeOrWhere; // [FROM db_name] [like_or_where]';
+    myShowIndex:begin
+        S:='SHOW INDEX FROM '+TableName;
+        if SchemaName <> '' then S:=S + ' FROM '+SchemaName;
+      end;
+    myShowTriggers:begin
+        S:='SHOW TRIGGERS';
+        if SchemaName <> '' then S:=S + ' FROM '+SchemaName;
+        S:=S + DoLikeOrWhere;
+      end;
   end;
   if S<>'' then
     AddSQLCommand(S);
@@ -1966,7 +1983,6 @@ begin
       SHOW FUNCTION CODE func_name
       SHOW FUNCTION STATUS [like_or_where]
       SHOW GRANTS FOR user
-      SHOW INDEX FROM tbl_name [FROM db_name]
       SHOW INNODB STATUS
       SHOW OPEN TABLES [FROM db_name] [like_or_where]
       SHOW PROCEDURE CODE proc_name
@@ -1977,20 +1993,18 @@ begin
       SHOW PROFILES
 
       SHOW TABLES [FROM db_name] [like_or_where]
-      SHOW TRIGGERS [FROM db_name] [like_or_where]
       SHOW WARNINGS [LIMIT [offset,] row_count]
 
 
       SHOW COLUMNS
       SHOW DATABASES
       SHOW FUNCTION STATUS
-      SHOW INDEX
+
       SHOW OPEN TABLES
       SHOW PROCEDURE STATUS
       SHOW STATUS
       SHOW TABLE STATUS
       SHOW TABLES
-      SHOW TRIGGERS
       SHOW VARIABLES
       *)
 end;
