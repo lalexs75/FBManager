@@ -130,7 +130,8 @@ type
      ataSetParams,
      ataReSetParams,
      ataDetachPartition,
-     ataAttachPartition
+     ataAttachPartition,
+     ataCommentTable
     );
 
 
@@ -651,7 +652,8 @@ const
     'ataSetParams',
     'ataReSetParams',
     'ataDetachPartition',
-    'ataAttachPartition'
+    'ataAttachPartition',
+    'ataCommentTable'
     );
 
   AlterDomainActionStr : array [TAlterDomainAction] of string =
@@ -1450,7 +1452,8 @@ begin
       begin
         if C.FSQLText.Count = 0 then
           C.DoMakeSQL;
-        FSQLText.Add('');
+        if FSQLText.Count <> 0 then
+          FSQLText.Add('');
         for S in C.FSQLText do
           FSQLText.Add(S);
       end;

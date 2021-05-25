@@ -1686,7 +1686,7 @@ begin
     I:=Length(S);
     if (S<>'') then
     begin
-      if (S[i] in ['A'..'z','"', '0'..'9','.','$'])  then
+      if ((S[i] in ['A'..'z','"', '0'..'9','.','$']) or (Assigned(FSQLEngine) and (S[i] = FSQLEngine.QuteIdentificatorChar))) then
       begin
         while (i>0) and (S[i] in ['A'..'z','"', '0'..'9','$']) do Dec(I);
         aCurStr:=Copy(S, i+1, Length(S));
@@ -1700,6 +1700,14 @@ begin
             Dec(i);
             Dec(j);
             while (j>0) and (S[j] <>'"') do Dec(j);
+            if J = 0 then Exit;
+          end
+          else
+          if Assigned(FSQLEngine) and (S[j] = FSQLEngine.QuteIdentificatorChar) then
+          begin
+            Dec(i);
+            Dec(j);
+            while (j>0) and (S[j] <> FSQLEngine.QuteIdentificatorChar) do Dec(j);
             if J = 0 then Exit;
           end
           else

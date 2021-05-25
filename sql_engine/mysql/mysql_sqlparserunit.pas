@@ -3227,7 +3227,7 @@ var
     TDropConstraint, TChange, TChangeCol, TChangeON, TChangeNN,
     TRef2, TAddFKRef, TAddFKRefTblName, TRef2_1, TRef2_2,
     TRef2_3, TRef3, TRef3_1, TRef3_2, TRef3_3, TRef3_4,
-    TRef3_5, TRef3_6: TSQLTokenRecord;
+    TRef3_5, TRef3_6, TCommentCmd, TCommentCmd1: TSQLTokenRecord;
 begin
   (*
   ALTER [ONLINE] [IGNORE] TABLE tbl_name
@@ -3429,6 +3429,12 @@ begin
   TDropConstraint:=AddSQLTokens(stKeyword, TDropCmd, 'CONSTRAINT', []);     //DROP PRIMARY KEY
     TDropConstraint:=AddSQLTokens(stIdentificator, TDropConstraint, '', [], 28);
     TDropConstraint.AddChildToken(TSymbEnd);
+
+  TCommentCmd:=AddSQLTokens(stKeyword, [TName, TSymbEnd], 'COMMENT', []);
+      TCommentCmd1:=AddSQLTokens(stSymbol, TCommentCmd, '=', []);
+      TCommentCmd1:=AddSQLTokens(stString, [TCommentCmd, TCommentCmd1], '', [], 43);
+      TCommentCmd1.AddChildToken(TSymbEnd);
+
 (*
 | ADD [CONSTRAINT [symbol]] PRIMARY KEY [index_type] (index_col_name,...) [index_option] ...
 | ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY] [index_name] [index_type] (index_col_name,...) [index_option] ...
@@ -3558,6 +3564,10 @@ begin
          FCurField:=FCurOper.Field;
          FCurField.Caption:=AWord;
        end;
+    43:begin
+         FCurOper:=AddOperator(ataCommentTable);
+         FCurOper.Name:=ExtractQuotedString(AWord, '''');
+       end;
 
     102:if Assigned(FCurField) then FCurField.TypeName:=AWord;
     103:if Assigned(FCurField) then FCurField.TypeName:=FCurField.TypeName + ' ' + AWord;
@@ -3681,10 +3691,15 @@ begin
       ataAlterColumnDropNotNull,
       ataAlterColumnSetNotNull,
       ataAlterColumnSetDataType,
-      ataAlterColumnDropDefault:ModifyCollumn(OP);
+      ataAlterColumnDropDefault,
+      ataAlterColumnDescription : ModifyCollumn(OP);
       ataAddTableConstraint:AddConstrint(S, OP);
       ataDropConstraint:DropConstraint(S, OP);
       ataDropIndex:AddSQLCommandEx(S + ' DROP INDEX %s', [OP.Name]);
+      ataCommentTable:begin
+          Description:=OP.Name;
+          DescribeObject;
+        end
     else
       raise Exception.CreateFmt('Unknow operator "%s"', [AlterTableActionStr[OP.AlterAction]]);
     end;
@@ -4467,8 +4482,8 @@ var
   S: String;
 begin
   case ObjectKind of
-    okTable:S:=Format('ALTER TABLE %s COMMENT = ''%s'';', [Name, QuotedString(TrimRight(Description), '''')]);
-    okStoredProc:S:=Format('ALTER PROCEDURE %s COMMENT = ''%s'';', [Name, QuotedString(TrimRight(Description), '''')]);
+    okTable:S:=Format('ALTER TABLE %s COMMENT = %s;', [Name, QuotedString(TrimRight(Description), '''')]);
+    okStoredProc:S:=Format('ALTER PROCEDURE %s COMMENT = %s;', [Name, QuotedString(TrimRight(Description), '''')]);
   else
     S:='';
   end;
