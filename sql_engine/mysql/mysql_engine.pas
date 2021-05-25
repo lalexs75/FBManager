@@ -1268,7 +1268,9 @@ begin
   s_extra:=DS.FieldByName('EXTRA').AsString;
 
   FieldAutoInc:=Pos('auto_increment', s_extra)>0;
-  FieldDefaultValue:=DS.FieldByName('COLUMN_DEFAULT').AsString;
+
+  if DS.FieldByName('COLUMN_DEFAULT').AsString<>'NULL' then
+    FieldDefaultValue:=DS.FieldByName('COLUMN_DEFAULT').AsString;
 
 
   {
@@ -1676,143 +1678,6 @@ begin
   Result:=sTable;
 end;
 
-(*
-function TMySQLTable.CreateTable(ATableName: string): boolean;
-begin
-  if State = sdboCreate then
-    FCaption:=ATableName;
-  Result:=true;
-end;
-
-procedure TMySQLTable.FieldEdit(const FieldName: string);
-var
-  Rec:TMySQLField;
-begin
-  Rec:=FFields.FieldByName(FieldName) as TMySQLField;
-  fbmTableFieldEditorForm:=TfbmTableFieldEditorForm.CreateFieldEditor(Self);
-
-  fbmTableFieldEditorForm.edtFieldName.Text := Rec.FieldName;
-  fbmTableFieldEditorForm.cbNotNull.Checked := Rec.FieldNotNull;
-
-{  if Rec.FieldTypeDomain<>'' then
-    fbmTableFieldEditorForm.cbDomains.Text:=Rec.FieldTypeDomain
-  else
-  begin}
-    fbmTableFieldEditorForm.edtSize.Value         := Rec.FieldSize;
-    fbmTableFieldEditorForm.edtScale.Value        := Rec.FieldPrec;
-    //fbmTableFieldEditorForm.cbFieldType.ItemIndex := ord(Rec.FieldType)-1;
-{  end;}
-
-  fbmTableFieldEditorForm.edtDescription1.Text   := Rec.FFieldDescription;
-  fbmTableFieldEditorForm.cbPrimaryKey.Checked  := Rec.FieldPK;
-
-  fbmTableFieldEditorForm.cbDomainCheck.Checked:=Rec.FieldTypeDomain<>'';
-  fbmTableFieldEditorForm.cbCustomTypeCheck.Checked:=Rec.FieldTypeDomain='';
-  fbmTableFieldEditorForm.cbAutoIncField.Checked:=Rec.FieldAutoInc;
-
-  if fbmTableFieldEditorForm.ShowModal = mrOk then
-  begin
-(*    if State = sdboEdit then
-    begin
-      S:='';
-      if Rec.FieldName <> fbmTableFieldEditorForm.edtFieldName.Text then
-      begin
-        S:=Format('ALTER TABLE %s ALTER %s TO %s', [CaptionFullPatch, Rec.FieldName, fbmTableFieldEditorForm.edtFieldName.Text]);
-      end;
-      if S<>'' then
-        FOwnerDB.ExecSQL(S, [sepShowCompForm]);
-
-
-{      S:=fbmTableFieldEditorForm.sqlFieldAdd;
-      if TDataBaseRecord(FOwnerDB.InspectorRecord).ExecSQLScript(S) then
-        FieldListRefresh;}
-    end
-    else
-    begin*)
-      Rec.FieldName:=fbmTableFieldEditorForm.edtFieldName.Text;
-      Rec.FieldNotNull:=fbmTableFieldEditorForm.cbNotNull.Checked;
-{      if fbmTableFieldEditorForm.cbDomainCheck.Checked then
-        Rec.FieldTypeDomain:=fbmTableFieldEditorForm.cbDomains.Text
-      else
-      begin}
-        Rec.FieldTypeName:=fbmTableFieldEditorForm.cbFieldType.Text;
-        Rec.FieldSQLTypeInt:=fbmTableFieldEditorForm.cbFieldType.ItemIndex;
-        Rec.FieldSize:=fbmTableFieldEditorForm.edtSize.Value;
-        Rec.FieldPrec:=fbmTableFieldEditorForm.edtScale.Value;
-//      end;
-      Rec.FFieldDescription:=fbmTableFieldEditorForm.edtDescription1.Text;
-      Rec.FieldPK:=fbmTableFieldEditorForm.cbPrimaryKey.Checked;
-      Rec.FieldAutoInc:=fbmTableFieldEditorForm.cbAutoIncField.Checked;
-      //Rec.FieldType:=TdbmsFieldType(fbmTableFieldEditorForm.cbFieldType.ItemIndex+1);
-{    end;}
-    if State = sdboEdit then
-    begin
-      SQLScriptsBegin;
-      SQLScriptsExec(Rec.GenDDL(dmAlter), []);
-      SQLScriptsApply;
-      SQLScriptsEnd;
-      FieldListRefresh;
-    end;
-  end;
-  fbmTableFieldEditorForm.Free;
-end;
-
-function TMySQLTable.FieldNew: string;
-var
-  Rec:TMySQLField;
-begin
-  fbmTableFieldEditorForm:=TfbmTableFieldEditorForm.CreateFieldEditor(Self);
-  if fbmTableFieldEditorForm.ShowModal = mrOk then
-  begin
-    Rec:=TMySQLField.Create(Self);
-    FFields.Add(Rec);
-    Rec.FieldName:=fbmTableFieldEditorForm.edtFieldName.Text;
-    Rec.FieldNotNull:=fbmTableFieldEditorForm.cbNotNull.Checked;
-    if fbmTableFieldEditorForm.cbDomainCheck.Checked then
-      Rec.FieldTypeDomain:=fbmTableFieldEditorForm.cbDomains.Text
-    else
-    begin
-      Rec.FieldTypeName:=fbmTableFieldEditorForm.cbFieldType.Text;
-      Rec.FieldSQLTypeInt:=fbmTableFieldEditorForm.cbFieldType.ItemIndex;
-      Rec.FieldSize:=fbmTableFieldEditorForm.edtSize.Value;
-      Rec.FieldPrec:=fbmTableFieldEditorForm.edtScale.Value;
-    end;
-    Rec.FFieldDescription:=fbmTableFieldEditorForm.edtDescription1.Text;
-    Rec.FieldAutoInc:=fbmTableFieldEditorForm.cbAutoIncField.Checked;
-    Rec.SystemField:=false;
-    Rec.FieldPK:=fbmTableFieldEditorForm.cbPrimaryKey.Checked;
-
-    //  FieldUNIC:boolean;
-    Result:=Rec.FieldName;
-    if State = sdboEdit then
-    begin
-      SQLScriptsBegin;
-      SQLScriptsExec(Rec.AlterAddDDL, []);
-      SQLScriptsApply;
-      SQLScriptsEnd;
-      FieldListRefresh;
-    end;
-  end;
-  fbmTableFieldEditorForm.Free;
-end;
-
-procedure TMySQLTable.FieldDelete(const FieldName: string);
-var
-  Rec:TMySQLField;
-begin
-  if State = sdboEdit then
-  begin
-    Rec:=FFields.FieldByName(FieldName) as TMySQLField;
-    if Assigned(Rec) then
-      ExecSQLScript(
-        Rec.GenDDL(dmDrop), [sepInTransaction, sepShowCompForm], OwnerDB);
-    IndexListRefresh;
-  end
-  else
-    FFields.DeleteField(FieldName);
-end;
-*)
-
 procedure TMySQLTable.RefreshFieldList;
 var
   QFields:TZQuery;
@@ -2010,44 +1875,7 @@ begin
     Q1.Free;
   end;
 end;
-(*
-function TMySQLTable.FKNew(const Name, FieldsList, RefTable, RefFields,
-  IndexName: string; const OnUpdateRule, OnDeleteRule: TForeignKeyRule;
-  const IndexSortOrder: TIndexSortOrder): boolean;
-var
-  S:string;
-begin
-  //ALTER TABLE `tb_client_acc` ADD CONSTRAINT `tb_client_acc_fk1` FOREIGN KEY (`tb_client_id`) REFERENCES `tb_client` (`tb_client_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  S:=Format(ssql_My_FKNew, [Caption, Name, FieldsList, RefTable, RefFields]);
 
-
-  if OnUpdateRule<>fkrNone then
-    S:=S+' on update '+ForeignKeyRuleNames[OnUpdateRule];
-
-  if OnDeleteRule<>fkrNone then
-    S:=S+' on delete '+ForeignKeyRuleNames[OnDeleteRule];
-
-{  if IndexName<>'' then
-    S:=S + ' using index ' + IndexName;}
-
-  Result:=ExecSQLScript(S, [sepInTransaction, sepShowCompForm], OwnerDB);
-  if Result then
-  begin
-    IndexArrayClear;
-    FKListRefresh;
-  end;
-end;
-
-function TMySQLTable.FKDrop(const FKName: string): boolean;
-begin
-  Result:=ExecSQLScript(Format(ssql_My_FKDrop, [Caption, FKName]), [sepInTransaction, sepShowCompForm], OwnerDB);
-  if Result then
-  begin
-    IndexArrayClear;
-    FKListRefresh;
-  end;
-end;
-*)
 procedure TMySQLTable.RefreshConstraintForeignKey;
 var
   Q:TZQuery;
