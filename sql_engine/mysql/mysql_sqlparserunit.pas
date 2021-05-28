@@ -558,6 +558,7 @@ type
     FMaxUserConnections: integer;
     FUserOptions: TMySQLUserOptions;
   protected
+    procedure InternalFormatsInit; override;
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
@@ -2123,6 +2124,12 @@ end;
 
 { TMySQLCreateUser }
 
+procedure TMySQLCreateUser.InternalFormatsInit;
+begin
+  inherited InternalFormatsInit;
+  FQuteIdentificatorChar:='`';
+end;
+
 procedure TMySQLCreateUser.InitParserTree;
 var
   FSQLTokens, T, TUser1, TUser2, THost2, THost1, TIdent,
@@ -2291,10 +2298,9 @@ begin
   S:='CREATE ';
   if ooOrReplase in Options then
     S:=S + 'OR REPLACE ';
-  S:=S + 'USER ' + Name;
-
+  S:=S + 'USER ' +  AnsiQuotedStr(Name, FQuteIdentificatorChar);
   if FHostName <>'' then
-    S:=S + '@'+HostName;
+    S:=S + '@'+AnsiQuotedStr(HostName, FQuteIdentificatorChar);
 
   S:=S + ' ';
 
@@ -2302,8 +2308,8 @@ begin
     S:=S + 'IF NOT EXISTS ';
 
   case IdentType of
-    msitIdentifiedByAuthString:S:=S + 'IDENTIFIED BY '+QuotedString(Password, '''');
-    msitIdentifiedByPwd:S:=S + 'IDENTIFIED BY PASSWORD ' + QuotedString(Password, '''');
+    msitIdentifiedByAuthString:S:=S + 'IDENTIFIED BY '+AnsiQuotedStr(Password, '''');
+    msitIdentifiedByPwd:S:=S + 'IDENTIFIED BY PASSWORD ' + AnsiQuotedStr(Password, '''');
     msitIdentifiedViaAuthPlugin:S:=S + 'IDENTIFIED VIA ' + AuthenticationPlugin;
     msitIdentifiedWithAuthPlugin:S:=S + 'IDENTIFIED WITH ' + AuthenticationPlugin;
     msitIdentifiedViaAuthPluginByStr:S:=S + 'IDENTIFIED VIA ' +AuthenticationPlugin + ' BY '+QuotedString(Password, '''');

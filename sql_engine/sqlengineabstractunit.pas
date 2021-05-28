@@ -2313,7 +2313,8 @@ var
   D: TObject;
 begin
   FOldObject:=TStringList.Create;
-  FOldObject.Sorted:=true;
+  FOldObject.UseLocale:=false;
+//  FOldObject.Sorted:=true;
   try
     FillListForNames(FOldObject, false);
 

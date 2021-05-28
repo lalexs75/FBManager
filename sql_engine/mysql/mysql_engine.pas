@@ -335,6 +335,7 @@ type
     procedure SetUIShowSysObjects(const AValue: TUIShowSysObjects);override;
     function GetSqlQuery(ASql:string):TZQuery;
     procedure InitKeywords;
+    function GetServerInfoVersion : string; override;
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -671,6 +672,17 @@ begin
   inherited Destroy;
 end;
 
+function VToB(F:TField):Boolean;
+var
+  S: String;
+begin
+  Result:=false;
+  if not Assigned(F) then Exit;
+  S:=F.AsString;
+  if (S<>'') then
+    Result:=S[1] in ['1', 'Y', 'T', 'y', 't'];
+end;
+
 procedure TMySQLUser.RefreshObject;
 var
   Q: TZQuery;
@@ -698,7 +710,9 @@ begin
     Q.Open;
     if Q.RecordCount > 0 then
     begin
-      FAuthenticationPlugin:=Q.FieldByName('plugin').AsString;
+      if Assigned(Q.FindField('plugin')) then
+        FAuthenticationPlugin:=Q.FieldByName('plugin').AsString;
+
       FPassword:=TrimRight(Q.FieldByName('Password').AsString);
 
       FMaxConnectionsPerHour:=Q.FieldByName('max_connections').AsInteger;
@@ -706,61 +720,61 @@ begin
       FMaxUpdatePerHour:=Q.FieldByName('max_updates').AsInteger;
       FMaxUserConnections:=Q.FieldByName('max_user_connections').AsInteger;
 
-      if Q.FieldByName('Select_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Select_priv')) then
         FUserOptions:=FUserOptions + [msuoSelectPriv];
-      if Q.FieldByName('Insert_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Insert_priv')) then
         FUserOptions:=FUserOptions + [msuoInsertPriv];
-      if Q.FieldByName('Update_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Update_priv')) then
         FUserOptions:=FUserOptions + [msuoUpdatePriv];
-      if Q.FieldByName('Delete_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Delete_priv')) then
         FUserOptions:=FUserOptions + [msuoDeletePriv];
-      if Q.FieldByName('Create_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_priv')) then
         FUserOptions:=FUserOptions + [msuoCreatePriv];
-      if Q.FieldByName('Drop_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Drop_priv')) then
         FUserOptions:=FUserOptions + [msuoDropPriv];
-      if Q.FieldByName('Reload_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Reload_priv')) then
         FUserOptions:=FUserOptions + [msuoReloadPriv];
-      if Q.FieldByName('Shutdown_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Shutdown_priv')) then
         FUserOptions:=FUserOptions + [msuoShutdownPriv];
-      if Q.FieldByName('Process_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Process_priv')) then
         FUserOptions:=FUserOptions + [msuoProcessPriv];
-      if Q.FieldByName('File_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('File_priv')) then
         FUserOptions:=FUserOptions + [msuoFilePriv];
-      if Q.FieldByName('Grant_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Grant_priv')) then
         FUserOptions:=FUserOptions + [msuoGrantPriv];
-      if Q.FieldByName('References_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('References_priv')) then
         FUserOptions:=FUserOptions + [msuoReferencesPriv];
-      if Q.FieldByName('Index_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Index_priv')) then
         FUserOptions:=FUserOptions + [msuoIndexPriv];
-      if Q.FieldByName('Alter_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Alter_priv')) then
         FUserOptions:=FUserOptions + [msuoAlterPriv];
-      if Q.FieldByName('Super_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Super_priv')) then
         FUserOptions:=FUserOptions + [msuoSuperPriv];
-      if Q.FieldByName('Create_tmp_table_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_tmp_table_priv')) then
         FUserOptions:=FUserOptions + [msuoCreateTmpTablePriv];
-      if Q.FieldByName('Lock_tables_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Lock_tables_priv')) then
         FUserOptions:=FUserOptions + [msuoLockTablesPriv];
-      if Q.FieldByName('Execute_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Execute_priv')) then
         FUserOptions:=FUserOptions + [msuoExecutePriv];
-      if Q.FieldByName('Repl_slave_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Repl_slave_priv')) then
         FUserOptions:=FUserOptions + [msuoReplSlavePriv];
-      if Q.FieldByName('Repl_client_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Repl_client_priv')) then
         FUserOptions:=FUserOptions + [msuoReplClientPriv];
-      if Q.FieldByName('Create_view_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_view_priv')) then
         FUserOptions:=FUserOptions + [msuoCreateViewPriv];
-      if Q.FieldByName('Show_view_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Show_view_priv')) then
         FUserOptions:=FUserOptions + [msuoShowViewPriv];
-      if Q.FieldByName('Create_routine_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_routine_priv')) then
         FUserOptions:=FUserOptions + [msuoCreateRoutinePriv];
-      if Q.FieldByName('Alter_routine_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Alter_routine_priv')) then
         FUserOptions:=FUserOptions + [msuoAlterRoutinePriv];
-      if Q.FieldByName('Create_user_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_user_priv')) then
         FUserOptions:=FUserOptions + [msuoCreateUserPriv];
-      if Q.FieldByName('Event_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Event_priv')) then
         FUserOptions:=FUserOptions + [msuoEventPriv];
-      if Q.FieldByName('Trigger_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Trigger_priv')) then
         FUserOptions:=FUserOptions + [msuoTriggerPriv];
-      if Q.FieldByName('Create_tablespace_priv').AsInteger <> 0 then
+      if VToB(Q.FindField('Create_tablespace_priv')) then
         FUserOptions:=FUserOptions + [msuoCreateTablespacePriv];
 
       (*
@@ -2150,7 +2164,8 @@ end;
 
 function TSQLEngineMySQL.InternalSetConnected(const AValue: boolean): boolean;
 var
-  HostName: String;
+  HostName, S1: String;
+  S: Integer;
 begin
   //inherited SetConnected(AValue);
   if AValue then
@@ -2164,6 +2179,9 @@ begin
       FConnection.Port:=RemotePort;
 
     FConnection.Connected:=true;
+    S:=FConnection.ServerVersion;
+    S1:=FConnection.ServerVersionStr;
+    //DecodeSQLVersioning(FConnection.ServerVersion,  FRealServerVersionMajor, FRealServerVersionMinor, FSubVersion);
 
     InitKeywords;
   end
@@ -2235,6 +2253,14 @@ begin
   KeywordsList.Add(FKeywords);
   KeywordsList.Add(FKeyFunctions);
   KeywordsList.Add(FKeyTypes);
+end;
+
+function TSQLEngineMySQL.GetServerInfoVersion: string;
+begin
+  if FConnection.Connected then
+    Result:=FConnection.ServerVersionStr
+  else
+    Result:='';
 end;
 
 procedure TSQLEngineMySQL.ZSQLProcessorAfterExecute(Processor: TZSQLProcessor;
