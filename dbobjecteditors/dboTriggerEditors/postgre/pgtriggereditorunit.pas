@@ -367,13 +367,15 @@ begin
   cbOnEvent.Checked[1]:= ttUpdate in TPGTrigger(DBObject).TriggerType;
   cbOnEvent.Checked[2]:= ttDelete in TPGTrigger(DBObject).TriggerType;
 
+  edtCaption.Enabled:=DBObject.State <> sdboEdit;
   if DBObject.State <> sdboEdit then
   begin
-    edtCaption.Enabled:=DBObject.State <> sdboEdit;
     cbOnEventClick(nil);
   end
   else
+  begin
     edtCaption.Text:=DBObject.Caption;
+  end;
 
 
 
