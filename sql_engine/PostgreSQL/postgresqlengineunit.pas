@@ -913,6 +913,7 @@ type
     function GetTableName: string;override;
     procedure SetActive(const AValue: boolean); override;
     procedure InternalRefreshStatistic; override;
+    function GetEnableRename: boolean; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -922,6 +923,7 @@ type
     procedure RefreshObject; override;
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
+    function RenameObject(ANewName:string):Boolean;override;
 
     function CreateSQLObject:TSQLCommandDDL; override;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams = [sepShowCompForm]):boolean; override;
@@ -1346,15 +1348,15 @@ type
 function FmtObjName(const ASch:TPGSchema; const AObj:TDBObject):string;
 implementation
 uses
+  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
+  {$ELSE}
+//  ZDatasetParam,
+  {$ENDIF}
   rxlogging, rxdbutils, ibmSqlUtilsUnit, pg_definitions, rxstrutils, ZDbcIntfs,
   fbmStrConstUnit, pg_sql_lines_unit, LazUTF8, fbmSQLTextCommonUnit, pgSQLEngineFDW,
   PGKeywordsUnit, pgSqlEngineSecurityUnit, pg_utils, strutils, pgSqlTextUnit, ZSysUtils,
   pg_tasks, pgSQLEngineFTS
 
-  {$IF (ZEOS_MAJOR_VERSION = 7) and  (ZEOS_MINOR_VERSION < 3)}
-  {$ELSE}
-  , ZDatasetParam
-  {$ENDIF}
   ;
 
 type
@@ -7383,6 +7385,11 @@ begin
     Statistic.AddValue(sTableName, FTriggerTable.CaptionFullPatch);
 end;
 
+function TPGTrigger.GetEnableRename: boolean;
+begin
+  Result:=true;
+end;
+
 constructor TPGTrigger.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
@@ -7497,6 +7504,32 @@ begin
   //inherited RefreshDependenciesField(Rec);
 end;
 
+function TPGTrigger.RenameObject(ANewName: string): Boolean;
+var
+  FCmd: TPGSQLAlterTrigger;
+begin
+  if (State = sdboCreate) then
+  begin
+    Caption:=ANewName;
+    Result:=true;
+  end
+  else
+  begin
+    FCmd:=TPGSQLAlterTrigger.Create(nil);
+    FCmd.TriggerNewName:=ANewName;
+    FCmd.Name:=Caption;
+    FCmd.SchemaName:=SchemaName;
+    FCmd.TableName:=TableName;
+    Result:=CompileSQLObject(FCmd, [sepInTransaction, sepShowCompForm, sepNotRefresh]);
+    FCmd.Free;
+    if Result then
+    begin
+      Caption:=ANewName;
+      RefreshObject;
+    end;
+  end;
+end;
+
 function TPGTrigger.CreateSQLObject: TSQLCommandDDL;
 begin
   Result:=TPGSQLCreateTrigger.Create(nil);
@@ -7522,10 +7555,21 @@ begin
     FTriggerTable.RefreshEditor;
   end
   else
-  if (FOldState = sdboEdit) and Assigned((ASqlObject as TPGSQLCreateTrigger).TriggerFunction) then
+  if (FOldState = sdboEdit) then
   begin
-    FTriggerFunction.RefreshObject;
-    FTriggerTable.RefreshEditor;
+    if ASqlObject is TPGSQLCreateTrigger then
+    begin
+      if Assigned((ASqlObject as TPGSQLCreateTrigger).TriggerFunction) then
+      begin
+        FTriggerFunction.RefreshObject;
+        FTriggerTable.RefreshEditor;
+      end;
+    end
+    else
+    if ASqlObject is TPGSQLAlterTrigger then
+    begin
+
+    end;
   end;
 end;
 

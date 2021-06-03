@@ -19834,8 +19834,21 @@ end;
 
 procedure TPGSQLAlterTrigger.MakeSQL;
 var
-  s: String;
+  S: String;
 begin
+  S:='ALTER TRIGGER '+DoFormatName(Name)+' ON ';
+  if SchemaName<>'' then
+    S:=S + DoFormatName(SchemaName) +'.' + DoFormatName(TableName)
+  else
+    S:=S + DoFormatName(TableName);
+
+  if TriggerNewName <> '' then
+    S:=S + ' RENAME TO '+DoFormatName(TriggerNewName)
+  else
+  if DependsName <> '' then
+    S:=S + ' DEPENDS ON EXTENSION ' + DoFormatName(DependsName);
+
+  (*
   s:='ALTER TRIGGER '+Name+' ON ';
   if SchemaName<>'' then
     S:=S + SchemaName +'.';
@@ -19845,6 +19858,7 @@ begin
   else
   if DependsName <> '' then
     S:=S + ' DEPENDS ON EXTENSION ' + DependsName;
+*)
   AddSQLCommand(S);
 end;
 
