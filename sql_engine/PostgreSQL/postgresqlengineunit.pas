@@ -5807,7 +5807,8 @@ begin
       FConstraintList.Add(Rec);
       Rec.Name:=Q.FieldByName('conname').AsString;
       Rec.FieldList:=ConvertFieldList(Q.FieldByName('conkey').AsString, Self);
-      Rec.Description:=ConvertFieldList(Q.FieldByName('description').AsString, Self);
+      //Rec.Description:=ConvertFieldList(Q.FieldByName('description').AsString, Self);
+      Rec.Description:=Q.FieldByName('description').AsString;
       { TODO : Необходимо написать процедуру создания списка полей в PK }
       for i:=0 to Rec.CountFields-1 do
       begin
