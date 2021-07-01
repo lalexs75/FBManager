@@ -1,8 +1,8 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
   Height = 850
-  HorizontalOffset = 343
-  VerticalOffset = 73
+  HorizontalOffset = 479
+  VerticalOffset = 84
   Width = 1113
   object sView: TRxTextHolder
     Highlighter = rxSynSQL
@@ -414,13 +414,13 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterTable2'
         Lines.Strings = (
-          'ALTER TABLE COUNTRY ADD CAPITAL VARCHAR(25) UNIQUE, DROP CURRENCY;'
+          'ALTER TABLE COUNTRY ADD CAPITAL VARCHAR(25);'
         )
       end    
       item
         Caption = 'AlterTable3'
         Lines.Strings = (
-          'ALTER TABLE OBJECTS ADD QUANTITY INT DEFAULT 1 NOT NULL;'
+          'ALTER TABLE TEST1 ALTER COLUMN TEST1_CODE SET DEFAULT 1;'
         )
       end    
       item

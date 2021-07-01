@@ -6656,7 +6656,8 @@ var
     TAddOpConstrFK, TAddOpConstrFK_U, TAddOpConstrFK_D,
     TConstRef6, TConstRef7, TConstRef8, TConstRef9,
     TAlterOpColRename, TDropField, TAlterOpColAlterType, T1,
-    FGenAlways1, FGenAlways1_1, FGenAlways2, FGenAlways3: TSQLTokenRecord;
+    FGenAlways1, FGenAlways1_1, FGenAlways2, FGenAlways3,
+    FDefCol3, TAddOpConstrCheck, TAddOpConstrCheck1: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okException);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]);
@@ -6670,6 +6671,7 @@ begin
     FDefCol:=AddSQLTokens(stKeyword, T, 'DEFAULT', []);
       FDefCol1:=AddSQLTokens(stKeyword, FDefCol, 'null', [], 4);
       FDefCol2:=AddSQLTokens(stString, FDefCol, '', [], 4);
+      FDefCol3:=AddSQLTokens(stInteger, FDefCol, '', [], 4);
 
     FDefColDrop:=AddSQLTokens(stKeyword, FColName, 'DROP', []);  //DROP
       FDefColDrop:=AddSQLTokens(stKeyword, FDefColDrop, 'DEFAULT', [], 6);
@@ -6729,6 +6731,9 @@ begin
       TConstRef9.AddChildToken(TAddOpConstrFK);
       TConstRef8.AddChildToken(TAddOpConstrFK);
 
+  TAddOpConstrCheck:=AddSQLTokens(stKeyword, [TAddOp, TAddOpConstr], 'CHECK', [], 34); //CHECK (<check_condition>) }
+    TAddOpConstrCheck1:=AddSQLTokens(stKeyword, TAddOpConstrCheck, '(', [], 35);
+
 
   //{COMPUTED [BY] | GENERATED ALWAYS AS} (<expression>)
   FGenAlways1:=AddSQLTokens(stKeyword, FColName, 'COMPUTED', [], 30);
@@ -6753,8 +6758,8 @@ begin
             [ON UPDATE {NO ACTION | CASCADE | SET DEFAULT | SET NULL}]
         | CHECK (<check_condition>) }
 *)
-  T:=AddSQLTokens(stSymbol, [FDefCol1, FDefCol2, FDefColDrop, FDefColPos, TDropOpConst, TAddOpConstrFL_PK,
-     TConstRef6, TConstRef7, TConstRef9, TConstRef8, TAlterOpColRename, TDropField, FGenAlways3], ',', [toOptional], 5);
+  T:=AddSQLTokens(stSymbol, [FDefCol1, FDefCol2, FDefCol3, FDefColDrop, FDefColPos, TDropOpConst, TAddOpConstrFL_PK,
+     TConstRef6, TConstRef7, TConstRef9, TConstRef8, TAlterOpColRename, TDropField, FGenAlways3, TAddOpConstrCheck1], ',', [toOptional], 5);
     T.AddChildToken([TAlterOp, TDropOp, TAddOp]);
 
     MakeTypeDefTree(Self,  [TAddOpField], [T], tdfTableColDef, 100);
@@ -6991,6 +6996,20 @@ begin
         FCurOperator.AlterAction:=ataAlterColumnSetComputedBy;
     33:if Assigned(FCurOperator) then
        FCurOperator.Field.ComputedSource:=ASQLParser.GetToBracket(')');
+    34:begin
+        if Assigned(FCurOperator) then
+        begin
+          FCurOperator.AlterAction:=ataAddTableConstraint;
+        //FCurOperator:=Operators.AddItem(ataAddTableConstraint);
+          //FCurConstr:=FCurOperator.Constraints.Add(ctTableCheck);
+          FCurConstr.ConstraintType:=ctTableCheck;
+        end;
+      end;
+    35:if Assigned(FCurConstr) then
+      begin
+        FCurConstr.ConstraintExpression:=ASQLParser.GetToBracket(')');
+        FCurConstr:=nil;
+      end;
 
     102:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=AWord;
     103:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + ' ' + AWord;
