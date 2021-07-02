@@ -426,18 +426,13 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterTable4'
         Lines.Strings = (
-          'ALTER TABLE JOB ADD CONSTRAINT CHK_SALARY CHECK (MIN_SALARY < MAX_SALARY), ADD FOREIGN KEY (JOB_COUNTRY) REFERENCES COUNTRY (COUNTRY);'
+          'ALTER TABLE JOB ADD CONSTRAINT CHK_SALARY CHECK (MIN_SALARY < MAX_SALARY);'
         )
       end    
       item
         Caption = 'AlterTable5'
         Lines.Strings = (
-          'ALTER TABLE STOCK'
-          '  ALTER COLUMN MODEL SET DEFAULT 1,'
-          '  ALTER COLUMN ITEMID TYPE BIGINT,'
-          '  ALTER COLUMN ITEMID DROP NOT NULL,'
-          '  ALTER COLUMN PROPID SET NOT NULL,'
-          '  ALTER COLUMN MODELNAME TO NAME;'
+          'ALTER TABLE STOCK ALTER COLUMN PROPID SET NOT NULL;'
         )
       end    
       item

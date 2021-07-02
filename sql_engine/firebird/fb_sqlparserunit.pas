@@ -6657,7 +6657,8 @@ var
     TConstRef6, TConstRef7, TConstRef8, TConstRef9,
     TAlterOpColRename, TDropField, TAlterOpColAlterType, T1,
     FGenAlways1, FGenAlways1_1, FGenAlways2, FGenAlways3,
-    FDefCol3, TAddOpConstrCheck, TAddOpConstrCheck1: TSQLTokenRecord;
+    FDefCol3, TAddOpConstrCheck, TAddOpConstrCheck1, FNotNull,
+    FDefColDropNull: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okException);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast]);
@@ -6672,8 +6673,12 @@ begin
       FDefCol1:=AddSQLTokens(stKeyword, FDefCol, 'null', [], 4);
       FDefCol2:=AddSQLTokens(stString, FDefCol, '', [], 4);
       FDefCol3:=AddSQLTokens(stInteger, FDefCol, '', [], 4);
+    FNotNull:=AddSQLTokens(stKeyword, T, 'NOT', []);
+    FNotNull:=AddSQLTokens(stKeyword, FNotNull, 'NULL', [], 36);
 
     FDefColDrop:=AddSQLTokens(stKeyword, FColName, 'DROP', []);  //DROP
+      FDefColDropNull:=AddSQLTokens(stKeyword, FDefColDrop, 'NOT', []);
+      FDefColDropNull:=AddSQLTokens(stKeyword, FDefColDropNull, 'NULL', [], 37);
       FDefColDrop:=AddSQLTokens(stKeyword, FDefColDrop, 'DEFAULT', [], 6);
 
     FDefColPos:=AddSQLTokens(stKeyword, FColName, 'POSITION', []);
@@ -6758,7 +6763,7 @@ begin
             [ON UPDATE {NO ACTION | CASCADE | SET DEFAULT | SET NULL}]
         | CHECK (<check_condition>) }
 *)
-  T:=AddSQLTokens(stSymbol, [FDefCol1, FDefCol2, FDefCol3, FDefColDrop, FDefColPos, TDropOpConst, TAddOpConstrFL_PK,
+  T:=AddSQLTokens(stSymbol, [FNotNull, FDefColDropNull, FDefCol1, FDefCol2, FDefCol3, FDefColDrop, FDefColPos, TDropOpConst, TAddOpConstrFL_PK,
      TConstRef6, TConstRef7, TConstRef9, TConstRef8, TAlterOpColRename, TDropField, FGenAlways3, TAddOpConstrCheck1], ',', [toOptional], 5);
     T.AddChildToken([TAlterOp, TDropOp, TAddOp]);
 
@@ -7010,6 +7015,16 @@ begin
         FCurConstr.ConstraintExpression:=ASQLParser.GetToBracket(')');
         FCurConstr:=nil;
       end;
+    36:if Assigned(FCurOperator) then
+       begin
+         FCurOperator.AlterAction:=ataAlterColumnSetNotNull;
+         FCurOperator.Field.Params:=FCurOperator.Field.Params + [fpNotNull];
+       end;
+    37:if Assigned(FCurOperator) then
+       begin
+          FCurOperator.AlterAction:=ataAlterColumnDropNotNull;
+          FCurOperator.Field.Params:=FCurOperator.Field.Params - [fpNotNull];
+       end;
 
     102:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=AWord;
     103:if Assigned(FCurOperator) then FCurOperator.Field.TypeName:=FCurOperator.Field.TypeName + ' ' + AWord;
@@ -7113,7 +7128,7 @@ begin
   begin
     case OP.AlterAction of
       ataAddColumn : AddCollumn(OP);
-      ataRenameColumn :AddSQLCommandEx('ALTER TABLE %s ALTER %s TO %s', [FullName, DoFormatName(OP.OldField.Caption), DoFormatName(OP.Field.Caption)]);
+      ataRenameColumn :AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s TO %s', [FullName, DoFormatName(OP.OldField.Caption), DoFormatName(OP.Field.Caption)]);
 
       ataAlterColumnSetDataType : DoChangeType(OP);
 
