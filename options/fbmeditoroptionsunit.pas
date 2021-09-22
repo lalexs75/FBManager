@@ -41,6 +41,7 @@ type
     CheckBox11: TCheckBox;
     CheckBox12: TCheckBox;
     CheckBox13: TCheckBox;
+    CheckBox14: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
@@ -50,6 +51,7 @@ type
     CheckBox8: TCheckBox;
     CheckBox9: TCheckBox;
     ColorButton1: TColorButton;
+    ColorButton10: TColorButton;
     ColorButton2: TColorButton;
     ColorButton3: TColorButton;
     ColorButton4: TColorButton;
@@ -57,6 +59,7 @@ type
     ColorButton6: TColorButton;
     ColorButton7: TColorButton;
     ColorButton8: TColorButton;
+    ColorButton9: TColorButton;
     Edit1: TEdit;
     FontDialog1: TFontDialog;
     Label1: TLabel;
@@ -66,6 +69,7 @@ type
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
+    Label16: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;

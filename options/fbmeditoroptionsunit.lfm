@@ -11,16 +11,16 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   OnCreate = ibmEditorOptionsFormCreate
   Position = poScreenCenter
   SessionProperties = 'Width;Top;Left;Height;PageControl1.Height'
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 333
     Top = 0
     Width = 687
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alTop
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Global'
@@ -87,7 +87,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Top = 6
         Width = 72
         Caption = 'Display font'
-        ParentColor = False
       end
       object Label2: TLabel
         AnchorSideLeft.Control = Label1
@@ -100,7 +99,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         HelpKeyword = 'SpinEdit1'
         Caption = 'Font size'
         FocusControl = SpinEdit1
-        ParentColor = False
       end
       object Label7: TLabel
         AnchorSideLeft.Control = CheckBox6
@@ -114,7 +112,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Show only line number'
-        ParentColor = False
       end
       object Label8: TLabel
         AnchorSideLeft.Control = CheckBox7
@@ -127,7 +124,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Right margin position'
-        ParentColor = False
       end
       object Edit1: TEdit
         AnchorSideLeft.Control = Label1
@@ -279,7 +275,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         BorderSpacing.Left = 6
         BorderSpacing.Right = 40
         Caption = 'Tables'
-        ParentColor = False
       end
       object Label5: TLabel
         AnchorSideLeft.Control = Label3
@@ -291,7 +286,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Width = 72
         BorderSpacing.Around = 6
         Caption = 'Background'
-        ParentColor = False
       end
       object Label6: TLabel
         AnchorSideLeft.Control = ColorButton1
@@ -303,7 +297,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Width = 72
         BorderSpacing.Around = 6
         Caption = 'Foreground'
-        ParentColor = False
       end
       object ColorButton2: TColorButton
         AnchorSideLeft.Control = ColorButton1
@@ -347,7 +340,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Strings'
-        ParentColor = False
       end
       object ColorButton4: TColorButton
         AnchorSideLeft.Control = ColorButton1
@@ -406,7 +398,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Comment'
-        ParentColor = False
       end
       object ColorButton5: TColorButton
         AnchorSideLeft.Control = Label3
@@ -465,7 +456,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akLeft, akBottom]
         BorderSpacing.Left = 6
         Caption = 'Numbers'
-        ParentColor = False
       end
       object ColorButton7: TColorButton
         AnchorSideLeft.Control = Label3
@@ -512,6 +502,64 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         OnChange = CheckBox1Change
         TabOrder = 3
       end
+      object Label16: TLabel
+        AnchorSideLeft.Control = TabSheet3
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = ColorButton9
+        AnchorSideBottom.Side = asrBottom
+        Left = 6
+        Height = 17
+        Top = 161
+        Width = 67
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 6
+        Caption = 'Simple text'
+      end
+      object ColorButton9: TColorButton
+        AnchorSideLeft.Control = Label3
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ColorButton7
+        AnchorSideTop.Side = asrBottom
+        Left = 86
+        Height = 25
+        Top = 153
+        Width = 75
+        BorderSpacing.Around = 6
+        BorderWidth = 2
+        ButtonColorSize = 16
+        ButtonColor = clBlack
+        OnColorChanged = CheckBox1Change
+      end
+      object ColorButton10: TColorButton
+        AnchorSideLeft.Control = ColorButton1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = ColorButton8
+        AnchorSideTop.Side = asrBottom
+        Left = 207
+        Height = 25
+        Top = 153
+        Width = 75
+        BorderSpacing.Around = 6
+        BorderWidth = 2
+        ButtonColorSize = 16
+        ButtonColor = clBlack
+        OnColorChanged = CheckBox1Change
+      end
+      object CheckBox14: TCheckBox
+        AnchorSideLeft.Control = ColorButton10
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = ColorButton10
+        AnchorSideBottom.Side = asrBottom
+        Left = 288
+        Height = 23
+        Top = 155
+        Width = 85
+        Anchors = [akLeft, akBottom]
+        Caption = 'Underline'
+        OnChange = CheckBox1Change
+        TabOrder = 4
+      end
     end
     object TabSheet4: TTabSheet
       Caption = 'Codetools and auto code completion'
@@ -528,7 +576,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         BorderSpacing.Top = 6
         BorderSpacing.Right = 42
         Caption = 'Keyword  char case'
-        ParentColor = False
       end
       object Label10: TLabel
         AnchorSideLeft.Control = Label13
@@ -539,7 +586,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Width = 119
         BorderSpacing.Around = 6
         Caption = 'Identifiers char case'
-        ParentColor = False
       end
       object rgCharCaseKeyword: TRadioGroup
         AnchorSideLeft.Control = TabSheet4
@@ -647,7 +693,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akRight, akBottom]
         BorderSpacing.Right = 6
         Caption = '(delay 1000 ms)'
-        ParentColor = False
       end
       object CheckBox9: TCheckBox
         AnchorSideLeft.Control = TabSheet4
@@ -689,7 +734,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Anchors = [akRight, akBottom]
         BorderSpacing.Right = 6
         Caption = '(delay 1000 ms)'
-        ParentColor = False
       end
       object Label13: TLabel
         AnchorSideLeft.Control = TabSheet4
@@ -699,7 +743,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
         Height = 1
         Top = 0
         Width = 1
-        ParentColor = False
       end
     end
   end
@@ -710,6 +753,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     Top = 339
     Width = 687
     Align = alClient
+    Color = clWindow
     Font.Height = -13
     Font.Name = 'DejaVu Sans Mono'
     Font.Pitch = fpFixed
@@ -1144,10 +1188,6 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     SelectedColor.ItalicPriority = 50
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
-    ScrollOnEditLeftOptions.ScrollExtraPercent = 20
-    ScrollOnEditLeftOptions.ScrollExtraMax = 10
-    ScrollOnEditRightOptions.ScrollExtraPercent = 30
-    ScrollOnEditRightOptions.ScrollExtraMax = 25
     BracketHighlightStyle = sbhsBoth
     BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
@@ -1273,118 +1313,13 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   object SynSQLSyn1: TSynSQLSyn
     DefaultFilter = 'Ôàéëû SQL (*.sql)|*.sql'
     Enabled = False
-    CommentAttri.BackPriority = 0
-    CommentAttri.ForePriority = 0
-    CommentAttri.FramePriority = 0
-    CommentAttri.BoldPriority = 0
-    CommentAttri.ItalicPriority = 0
-    CommentAttri.UnderlinePriority = 0
-    CommentAttri.StrikeOutPriority = 0
-    DataTypeAttri.BackPriority = 0
-    DataTypeAttri.ForePriority = 0
-    DataTypeAttri.FramePriority = 0
-    DataTypeAttri.BoldPriority = 0
-    DataTypeAttri.ItalicPriority = 0
-    DataTypeAttri.UnderlinePriority = 0
-    DataTypeAttri.StrikeOutPriority = 0
-    DefaultPackageAttri.BackPriority = 0
-    DefaultPackageAttri.ForePriority = 0
-    DefaultPackageAttri.FramePriority = 0
-    DefaultPackageAttri.BoldPriority = 0
-    DefaultPackageAttri.ItalicPriority = 0
-    DefaultPackageAttri.UnderlinePriority = 0
-    DefaultPackageAttri.StrikeOutPriority = 0
-    ExceptionAttri.BackPriority = 0
-    ExceptionAttri.ForePriority = 0
-    ExceptionAttri.FramePriority = 0
-    ExceptionAttri.BoldPriority = 0
-    ExceptionAttri.ItalicPriority = 0
-    ExceptionAttri.UnderlinePriority = 0
-    ExceptionAttri.StrikeOutPriority = 0
-    FunctionAttri.BackPriority = 0
-    FunctionAttri.ForePriority = 0
-    FunctionAttri.FramePriority = 0
-    FunctionAttri.BoldPriority = 0
-    FunctionAttri.ItalicPriority = 0
-    FunctionAttri.UnderlinePriority = 0
-    FunctionAttri.StrikeOutPriority = 0
-    IdentifierAttri.BackPriority = 0
-    IdentifierAttri.ForePriority = 0
-    IdentifierAttri.FramePriority = 0
-    IdentifierAttri.BoldPriority = 0
-    IdentifierAttri.ItalicPriority = 0
-    IdentifierAttri.UnderlinePriority = 0
-    IdentifierAttri.StrikeOutPriority = 0
-    KeyAttri.BackPriority = 0
-    KeyAttri.ForePriority = 0
-    KeyAttri.FramePriority = 0
-    KeyAttri.BoldPriority = 0
-    KeyAttri.ItalicPriority = 0
-    KeyAttri.UnderlinePriority = 0
-    KeyAttri.StrikeOutPriority = 0
-    NumberAttri.BackPriority = 0
-    NumberAttri.ForePriority = 0
-    NumberAttri.FramePriority = 0
-    NumberAttri.BoldPriority = 0
-    NumberAttri.ItalicPriority = 0
-    NumberAttri.UnderlinePriority = 0
-    NumberAttri.StrikeOutPriority = 0
-    PLSQLAttri.BackPriority = 0
-    PLSQLAttri.ForePriority = 0
-    PLSQLAttri.FramePriority = 0
-    PLSQLAttri.BoldPriority = 0
-    PLSQLAttri.ItalicPriority = 0
-    PLSQLAttri.UnderlinePriority = 0
-    PLSQLAttri.StrikeOutPriority = 0
-    SpaceAttri.BackPriority = 0
-    SpaceAttri.ForePriority = 0
-    SpaceAttri.FramePriority = 0
-    SpaceAttri.BoldPriority = 0
-    SpaceAttri.ItalicPriority = 0
-    SpaceAttri.UnderlinePriority = 0
-    SpaceAttri.StrikeOutPriority = 0
-    SQLPlusAttri.BackPriority = 0
-    SQLPlusAttri.ForePriority = 0
-    SQLPlusAttri.FramePriority = 0
-    SQLPlusAttri.BoldPriority = 0
-    SQLPlusAttri.ItalicPriority = 0
-    SQLPlusAttri.UnderlinePriority = 0
-    SQLPlusAttri.StrikeOutPriority = 0
     StringAttri.Foreground = clAqua
-    StringAttri.BackPriority = 0
-    StringAttri.ForePriority = 0
-    StringAttri.FramePriority = 0
-    StringAttri.BoldPriority = 0
-    StringAttri.ItalicPriority = 0
-    StringAttri.UnderlinePriority = 0
-    StringAttri.StrikeOutPriority = 0
-    SymbolAttri.BackPriority = 0
-    SymbolAttri.ForePriority = 0
-    SymbolAttri.FramePriority = 0
-    SymbolAttri.BoldPriority = 0
-    SymbolAttri.ItalicPriority = 0
-    SymbolAttri.UnderlinePriority = 0
-    SymbolAttri.StrikeOutPriority = 0
     TableNameAttri.Background = clWhite
     TableNameAttri.Foreground = clGreen
     TableNameAttri.Style = [fsUnderline]
-    TableNameAttri.BackPriority = 0
-    TableNameAttri.ForePriority = 0
-    TableNameAttri.FramePriority = 0
-    TableNameAttri.BoldPriority = 0
-    TableNameAttri.ItalicPriority = 0
-    TableNameAttri.UnderlinePriority = 0
-    TableNameAttri.StrikeOutPriority = 0
     TableNames.Strings = (
       'user_data'
     )
-    VariableAttri.BackPriority = 0
-    VariableAttri.ForePriority = 0
-    VariableAttri.FramePriority = 0
-    VariableAttri.BoldPriority = 0
-    VariableAttri.ItalicPriority = 0
-    VariableAttri.UnderlinePriority = 0
-    VariableAttri.StrikeOutPriority = 0
     SQLDialect = sqlInterbase6
     Left = 152
     Top = 352

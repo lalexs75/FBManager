@@ -15,6 +15,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     Top = 0
     Width = 433
     Align = alClient
+    Color = clWindow
     Font.Height = 12
     Font.Name = 'courier'
     Font.Pitch = fpFixed
