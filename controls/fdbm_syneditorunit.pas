@@ -111,6 +111,7 @@ type
   TOnGetKeyWordList = procedure(Sender:Tfdbm_SynEditorFrame; const KeyStartWord:string; const Items:TSynCompletionObjList;
     ACharCase:TCharCaseOptions) of object;
   TOnLoadFileEdit = procedure(Sender:Tfdbm_SynEditorFrame; const TextEditor: TSynEdit; const AFileName:string) of object;
+  TOnBeforeSaveFileEdit = procedure(Sender:Tfdbm_SynEditorFrame; const TextEditor: TSynEdit;var AFileName:string) of object;
   TOnGetHintData = function(Sender:Tfdbm_SynEditorFrame; const S1, S2:string; out HintText:string):Boolean of object;
 
   { Tfdbm_SynEditorFrame }
@@ -262,6 +263,7 @@ type
     procedure TextEditorShowHint(Sender: TObject; HintInfo: PHintInfo);
   protected
     procedure SetEnabled(Value: Boolean); override;
+    procedure SaveAsToFile;virtual;
   private
     //SynCompletion procedures
     FSynCompletionObjList:TSynCompletionObjList;
@@ -275,6 +277,7 @@ type
     procedure ProcessForHint;
     function GetPreviousToken: string;
   private
+    FOnBeforeSaveFile: TOnBeforeSaveFileEdit;
     FOnEditorChangeStatus: TNotifyEvent;
     FOnGetHintData: TOnGetHintData;
     FSynCompletionTimerEnabled: Boolean;
@@ -335,6 +338,7 @@ type
     property FileName:string read FFileName write FFileName;
     property OnLoadFileEdit:TOnLoadFileEdit read FOnLoadFileEdit write FOnLoadFileEdit;
     property OnSaveFileEdit:TOnLoadFileEdit read FOnSaveFileEdit write FOnSaveFileEdit;
+    property OnBeforeSaveFile:TOnBeforeSaveFileEdit read FOnBeforeSaveFile write FOnBeforeSaveFile;
     property ReadOnly:boolean read GetReadOnly write SetReadOnly;
     property OnPopUpMenu:TNotifyEvent read FOnPopUpMenu write FOnPopUpMenu;
     property OnEditorChangeStatus:TNotifyEvent read FOnEditorChangeStatus write FOnEditorChangeStatus;
@@ -631,15 +635,7 @@ end;
 
 procedure Tfdbm_SynEditorFrame.edtSaveAsExecute(Sender: TObject);
 begin
-  SaveDialog1.FileName:=FFileName;
-  if SaveDialog1.Execute then
-  begin
-    FFileName:=SaveDialog1.FileName;
-    TextEditor.Lines.SaveToFile(FFileName);
-    TextEditor.Modified:=false;
-    if Assigned(FOnSaveFileEdit) then
-      FOnSaveFileEdit(Self, TextEditor, FFileName);
-  end;
+  SaveAsToFile;
 end;
 
 procedure Tfdbm_SynEditorFrame.edtSaveExecute(Sender: TObject);
@@ -1144,6 +1140,22 @@ begin
     ActionList1.State:=asNormal
   else
     ActionList1.State:=asSuspended;}
+end;
+
+procedure Tfdbm_SynEditorFrame.SaveAsToFile;
+begin
+  if Assigned(FOnBeforeSaveFile) then
+    FOnBeforeSaveFile(Self, TextEditor, FFileName);
+
+  SaveDialog1.FileName:=FFileName;
+  if SaveDialog1.Execute then
+  begin
+    FFileName:=SaveDialog1.FileName;
+    TextEditor.Lines.SaveToFile(FFileName);
+    TextEditor.Modified:=false;
+    if Assigned(FOnSaveFileEdit) then
+      FOnSaveFileEdit(Self, TextEditor, FFileName);
+  end;
 end;
 
 procedure Tfdbm_SynEditorFrame.ChangeVisualParams;

@@ -328,6 +328,7 @@ type
     procedure DoStartExecQuery;
     procedure DoStopExecQuery;
     procedure OnEditorChangeStatus(Sender: TObject);
+    procedure OnBeforeSaveFileEdit(Sender:Tfdbm_SynEditorFrame; const TextEditor: TSynEdit;var AFileName:string);
   public
     constructor CreateSqlEditor(AOwnerRec:TDataBaseRecord);
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
@@ -337,7 +338,7 @@ type
 { TODO -cдоработка : Необходимо создать инструмент создания представления по текущему запросу }
 { TODO -oalexs : Необходимо сохранять положение сплитера между список запросов и редактором текста запроса }
 implementation
-uses IBManDataInspectorUnit, Clipbrd, rxdconst,
+uses IBManDataInspectorUnit, Clipbrd, rxdconst, rxFileUtils,
   SynEditSearch, fbmSQLEditor_ShowMemoUnit, LCLProc, LazUTF8,
   fbmfillqueryparamsunit, SQLEngineInternalToolsUnit,
   fbmStrConstUnit, fbmMakeSQLFromDataSetUnit, fbKeywordsUnit;
@@ -1643,6 +1644,13 @@ begin
   edtRedo.Enabled:=EditorFrame.edtRedo.Enabled;
 end;
 
+procedure TfbmSQLEditorForm.OnBeforeSaveFileEdit(Sender: Tfdbm_SynEditorFrame;
+  const TextEditor: TSynEdit; var AFileName: string);
+begin
+  if (AFileName <> '') or (not Assigned(FSqlEditorTextCur)) then Exit;
+  AFileName:=NormalizeFileName(FSqlEditorTextCur.Name);
+end;
+
 procedure TfbmSQLEditorForm.SaveSQLEdiorsDesktop;
 begin
 //  FOwnerRec.SaveSQLEditor(nil);
@@ -1790,6 +1798,7 @@ begin
   EditorFrame.OnGetDBObjectByAlias:=@EditorFrameOnGetDBObjectByAlias;
   EditorFrame.TextEditor.OnChange:=@TextEditorChange;
   EditorFrame.OnEditorChangeStatus:=@OnEditorChangeStatus;
+  EditorFrame.OnBeforeSaveFile:=@OnBeforeSaveFileEdit;
 
   FFindResultText:=Tfdbm_SynEditorFrame.Create(Self);
   FFindResultText.Name:='FFindResultText';
