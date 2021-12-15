@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, Buttons, ActnList, Menus, DB,
-  rxdbgrid, rxmemds;
+  rxdbgrid, rxmemds, DBGrids;
 
 type
   TfbmCompillerMessagesFrame = class;
@@ -69,6 +69,7 @@ type
     StaticText1: TStaticText;
     procedure lvClearExecute(Sender: TObject);
     procedure lvRemoveVarExecute(Sender: TObject);
+    procedure RxDBGrid1CellClick(Column: TColumn);
     procedure RxDBGrid1DblClick(Sender: TObject);
     procedure rxMsgListAfterScroll(DataSet: TDataSet);
     procedure rxMsgListMsgTypeGetText(Sender: TField; var aText: string;
@@ -140,7 +141,7 @@ procedure TfbmCompillerMessagesFrame.RxDBGrid1DblClick(Sender: TObject);
 var
   RecInfo: TppMsgRec;
 begin
-  if (rxMsgList.Active) and (rxMsgList.RecordCount>0) and Assigned(FOnMsgListDblClick) then
+  {if (rxMsgList.Active) and (rxMsgList.RecordCount>0) and Assigned(FOnMsgListDblClick) then
   begin
     RecInfo.MsgType:=TppMsgType(rxMsgListMsgType.AsInteger);
     RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
@@ -148,7 +149,7 @@ begin
     RecInfo.Info2:=rxMsgListInfo2.AsInteger;
     RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
     FOnMsgListDblClick(Self, RecInfo)
-  end;
+  end;}
 end;
 
 procedure TfbmCompillerMessagesFrame.rxMsgListAfterScroll(DataSet: TDataSet);
@@ -175,6 +176,21 @@ begin
     RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
     if FOnMsgListRemoveNotUsedVar(Self, RecInfo) then
       rxMsgList.Delete;
+  end;
+end;
+
+procedure TfbmCompillerMessagesFrame.RxDBGrid1CellClick(Column: TColumn);
+var
+  RecInfo: TppMsgRec;
+begin
+  if (rxMsgList.Active) and (rxMsgList.RecordCount>0) and Assigned(FOnMsgListDblClick) then
+  begin
+    RecInfo.MsgType:=TppMsgType(rxMsgListMsgType.AsInteger);
+    RecInfo.InfoMsg:=rxMsgListInfoMsg.AsString;
+    RecInfo.Info1:=rxMsgListInfo1.AsInteger;
+    RecInfo.Info2:=rxMsgListInfo2.AsInteger;
+    RecInfo.OwnerPageName:=rxMsgListMsgOwner.AsString;
+    FOnMsgListDblClick(Self, RecInfo)
   end;
 end;
 

@@ -1,11 +1,11 @@
 object fbManagerMainForm: TfbManagerMainForm
   Left = 141
-  Height = 799
+  Height = 800
   Top = 35
   Width = 1239
   ActiveControl = ToolPanel1
   Caption = 'Free Database Manager'
-  ClientHeight = 774
+  ClientHeight = 777
   ClientWidth = 1239
   Constraints.MinHeight = 120
   Menu = MainMenu1
@@ -13,11 +13,11 @@ object fbManagerMainForm: TfbManagerMainForm
   OnCreate = IBManagerMainFormCreate
   SessionProperties = 'InspectorPanel.Width'
   ShowHint = True
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '2.3.0.0'
   object StatusBar1: TStatusBar
     Left = 0
     Height = 18
-    Top = 756
+    Top = 759
     Width = 1239
     Panels = <    
       item
@@ -154,11 +154,11 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object InspectorPanel: TPanel
     Left = 0
-    Height = 697
+    Height = 700
     Top = 34
     Width = 219
     Align = alLeft
-    ClientHeight = 697
+    ClientHeight = 700
     ClientWidth = 219
     ParentFont = False
     TabOrder = 2
@@ -233,21 +233,20 @@ object fbManagerMainForm: TfbManagerMainForm
         Alignment = taCenter
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Object inspector'
-        ParentColor = False
         ParentFont = False
       end
     end
   end
   object Splitter1: TSplitter
     Left = 219
-    Height = 697
+    Height = 700
     Top = 34
     Width = 5
   end
   object RxMDITasks1: TRxMDITasks
     Left = 0
     Height = 25
-    Top = 731
+    Top = 734
     Width = 1239
     Align = alBottom
     FlatButton = False
@@ -255,7 +254,7 @@ object fbManagerMainForm: TfbManagerMainForm
   end
   object RxMDIPanel1: TRxMDIPanel
     Left = 224
-    Height = 697
+    Height = 700
     Top = 34
     Width = 1015
     CloseButton = RxMDICloseButton1

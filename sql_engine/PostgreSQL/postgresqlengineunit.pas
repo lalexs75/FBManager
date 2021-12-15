@@ -796,6 +796,7 @@ type
     function GetTriggersCategoriesType(AItem: integer): TTriggerTypes;override;
     function GetTriggersCategoriesCount: integer; override;
     function GetTriggersCount(AItem: integer): integer; override;
+    function GetRecordCount: integer; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
@@ -7007,6 +7008,23 @@ begin
     Result:=FTriggerList[AItem].Count
   else
     Result:=0;
+end;
+
+function TPGView.GetRecordCount: integer;
+var
+  Q: TZQuery;
+begin
+  Q:=TSQLEnginePostgre(OwnerDB).GetSqlQuery('select count(*) from '+CaptionFullPatch);
+  try
+    Q.Open;
+    if Q.RecordCount>0 then
+      Result:=Q.Fields[0].AsInteger
+    else
+      Result:=0;
+    Q.Close;
+  finally
+    Q.Free;
+  end;
 end;
 
 constructor TPGView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);

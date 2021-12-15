@@ -15,7 +15,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 22
+    Height = 19
     Top = 0
     Width = 1105
     Anchors = [akTop, akLeft, akRight]
@@ -49,8 +49,8 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 231
-    Top = 22
+    Height = 234
+    Top = 19
     Width = 1125
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = False
@@ -98,7 +98,7 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Text'
-        Width = 917
+        Width = 922
         FieldName = 'Text'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -175,13 +175,13 @@ object fbmCompillerMessagesFrame: TfbmCompillerMessagesFrame
     DrawFullLine = False
     FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsMsgList
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgRowLines, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     PopupMenu = PopupMenu1
     ReadOnly = True
     TabOrder = 1
     TitleStyle = tsNative
+    OnCellClick = RxDBGrid1CellClick
     OnDblClick = RxDBGrid1DblClick
   end
   object rxMsgList: TRxMemoryData

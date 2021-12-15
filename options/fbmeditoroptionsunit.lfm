@@ -1,11 +1,11 @@
 object fbmEditorOptionsForm: TfbmEditorOptionsForm
   Left = 476
-  Height = 556
+  Height = 557
   Top = 239
   Width = 687
   ActiveControl = PageControl1
   Caption = 'Editor options'
-  ClientHeight = 556
+  ClientHeight = 557
   ClientWidth = 687
   OnClose = ibmEditorOptionsFormClose
   OnCreate = ibmEditorOptionsFormCreate
@@ -14,7 +14,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   LCLVersion = '2.3.0.0'
   object PageControl1: TPageControl
     Left = 0
-    Height = 333
+    Height = 334
     Top = 0
     Width = 687
     ActivePage = TabSheet3
@@ -24,7 +24,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Global'
-      ClientHeight = 302
+      ClientHeight = 303
       ClientWidth = 677
       object CheckBox1: TCheckBox
         AnchorSideLeft.Control = TabSheet1
@@ -79,7 +79,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Display'
-      ClientHeight = 302
+      ClientHeight = 303
       ClientWidth = 677
       object Label1: TLabel
         Left = 6
@@ -244,7 +244,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Color'
-      ClientHeight = 302
+      ClientHeight = 303
       ClientWidth = 677
       object ColorButton1: TColorButton
         AnchorSideLeft.Control = Label3
@@ -563,7 +563,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     end
     object TabSheet4: TTabSheet
       Caption = 'Codetools and auto code completion'
-      ClientHeight = 302
+      ClientHeight = 303
       ClientWidth = 677
       object Label9: TLabel
         AnchorSideLeft.Control = TabSheet4
@@ -749,8 +749,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   inline SynEdit1: TSynEdit
     Cursor = crDefault
     Left = 0
-    Height = 159
-    Top = 339
+    Height = 163
+    Top = 340
     Width = 687
     Align = alClient
     Color = clWindow
@@ -1281,8 +1281,8 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 504
+    Height = 42
+    Top = 509
     Width = 675
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -1299,7 +1299,7 @@ object fbmEditorOptionsForm: TfbmEditorOptionsForm
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 333
+    Top = 334
     Width = 687
     Align = alTop
     ResizeAnchor = akTop

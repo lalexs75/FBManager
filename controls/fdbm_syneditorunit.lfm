@@ -1,9 +1,9 @@
 object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   Left = 0
-  Height = 388
+  Height = 389
   Top = 0
   Width = 433
-  ClientHeight = 388
+  ClientHeight = 389
   ClientWidth = 433
   ParentFont = False
   TabOrder = 0
@@ -11,7 +11,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   DesignTop = 418
   inline TextEditor: TSynEdit
     Left = 0
-    Height = 388
+    Height = 389
     Top = 0
     Width = 433
     Align = alClient
