@@ -73,6 +73,8 @@ uses process, fbmToolsUnit, fbmStrConstUnit, rxlogging;
 
 const //Dont translate - standart messages from SSH
   sMsgOk1    = 'debug1: Authentication succeeded';
+  sMsgOk2    = 'Authenticated to ';
+  sMsgOk3    = 'debug1: Local connections to ';
   sMsgError1 = 'Permission denied, please try again.';
 
 { TSSHConnectionPlugin }
@@ -149,9 +151,8 @@ begin
             S1:=Trim(Copy(SLine, KStart, j - KStart));
             if S1<>'' then
             begin
-              if Copy(S1, 1, Length(sMsgOk1)) = sMsgOk1 then
+              if (Copy(S1, 1, Length(sMsgOk1)) = sMsgOk1) or (Copy(S1, 1, Length(sMsgOk2)) = sMsgOk2) or (Copy(S1, 1, Length(sMsgOk3)) = sMsgOk3) then
               begin
-                //SAuthMethod:=Trim(Copy(S1, Length(sMsgOk1)+1, Length(S1)));
                 FStop:=true;
                 Tick:=1000;
               end
