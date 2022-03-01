@@ -2527,13 +2527,37 @@ begin
 end;
 
 function TPGMatView.InternalGetDDLCreate: string;
+
+procedure DoMakeIndexList(const SQLLines:TStringList);
+var
+  i: integer;
+  Pr:TPGIndexItem;
+  P:TPGIndex;
+  S: string;
+begin
+  S:='';
+  for i:=0 to FIndexItems.Count - 1 do
+  begin
+    Pr:=TPGIndexItem(FIndexItems[i]);
+    P:=TPGIndex(Schema.Indexs.ObjByName(Pr.IndexName));
+    if Assigned(P) and not Pr.IsPrimary then
+    begin
+      S:=P.InternalGetDDLCreate;
+      SQLLines.Add(S);
+    end;
+  end;
+end;
+
 var
   FCmd: TPGSQLCreateMaterializedView;
   F: TDBField;
   R: TSQLParserField;
   ACL: TStringList;
+  SQLLines:TStringList;
+  UG: TDBObject;
 begin
   if Fields.Count = 0 then RefreshFieldList;
+  SQLLines:=TStringList.Create;
   FCmd:=TPGSQLCreateMaterializedView.Create(nil);
   FCmd.Name:=Caption;
   FCmd.SchemaName:=FSchema.Caption;
@@ -2551,9 +2575,28 @@ begin
   if FToastAutovacuumOptions.Enabled then
     FToastAutovacuumOptions.SaveStorageParameters(FCmd.StorageParameters);
 
-  Result:=FCmd.AsSQL;
+  if FOwnerID<>0 then
+  begin
+    UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindUserByID(FOwnerID));
+    if not Assigned(UG) then
+      UG:=TDBObject(TSQLEnginePostgre(OwnerDB).FindGroupByID(FOwnerID));
+    if Assigned(UG) then
+      FCmd.Owner:=UG.Caption;
+  end;
+
+  IndexListRefresh;
+
+  SQLLines.Text:=FCmd.AsSQL;
+
+  DoMakeIndexList(SQLLines);
+  //RefreshConstraintPrimaryKey;
+  //RefreshConstraintForeignKey;
+
+  //Result:=FCmd.AsSQL;
 
   FCmd.Free;
+
+  Result:=SQLLines.Text;
 
   ACL:=TStringList.Create;
   try
@@ -2563,6 +2606,7 @@ begin
   finally
     ACL.Free;
   end;
+  SQLLines.Free;
 end;
 
 procedure TPGMatView.IndexArrayCreate;

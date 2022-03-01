@@ -282,6 +282,7 @@ type
 
   TPGSQLCreateMaterializedView = class(TSQLCreateView)
   private
+    FOwner: string;
     FSQLCommandSelect: TSQLCommandAbstractSelect;
     FStorageParameters: TStrings;
     FCurParam: TSQLParserField;
@@ -297,6 +298,7 @@ type
     property SQLCommandSelect:TSQLCommandAbstractSelect read FSQLCommandSelect;
     property StorageParameters:TStrings read FStorageParameters;
     property TableSpace:string read FTableSpace write FTableSpace;
+    property Owner:string read FOwner write FOwner;
     property SchemaName;
     property SQLSelect;
   end;
@@ -6048,6 +6050,7 @@ begin
       amvAlterWOCluster:S1:=S1 + 'SET WITHOUT CLUSTER';
       amvAlterSetParamStor:DoSetParam(A);
       amvAlterReSetParamStor:DoReSetParam(A);
+      amvAlterOwnerTo:S1:=S1 + 'OWNER TO '+A.Params.AsText;
     end;
   end;
 
@@ -6205,6 +6208,8 @@ procedure TPGSQLCreateMaterializedView.MakeSQL;
 var
   S, S1, S2: String;
   F, P: TSQLParserField;
+  FCmdAlter: TPGSQLAlterMaterializedView;
+  OP: TPGSQLAlterMaterializedCmd;
 begin
   S:='CREATE MATERIALIZED VIEW ';
 
@@ -6238,6 +6243,17 @@ begin
   S:=S + SQLSelect;
 
   AddSQLCommand(S);
+
+  if Owner <> '' then
+  begin
+    FCmdAlter:=TPGSQLAlterMaterializedView.Create(nil);
+    FCmdAlter.SchemaName:=SchemaName;
+    FCmdAlter.Name:=Name;
+    OP:=FCmdAlter.Actions.Add(amvAlterOwnerTo);
+    OP.Params.AsString:=Owner;
+    AddSQLCommand(FCmdAlter.AsSQL);
+    FCmdAlter.Free;
+  end;
 
   if Description <> '' then
     DescribeObject;
