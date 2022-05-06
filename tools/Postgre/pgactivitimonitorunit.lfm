@@ -9,35 +9,26 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
   OnClose = FormClose
   OnCreate = FormCreate
   inherited Panel1: TPanel
-    Height = 46
     Width = 1271
-    ClientHeight = 46
     ClientWidth = 1271
     TabOrder = 1
-    inherited Label1: TLabel
-      Height = 17
-      Top = 22
-      Width = 57
-    end
     inherited ComboBox1: TComboBox
-      Left = 70
-      Height = 32
-      Width = 1194
+      Width = 1195
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
-    Height = 602
-    Top = 46
+    Height = 605
+    Top = 43
     Width = 1271
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 0
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
-      ClientHeight = 571
+      ClientHeight = 574
       ClientWidth = 1261
       object Chart1: TChart
         AnchorSideLeft.Control = tabDashboard
@@ -45,7 +36,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Control = Label2
         AnchorSideBottom.Control = Splitter2
         Left = 0
-        Height = 316
+        Height = 319
         Top = 0
         Width = 630
         AxisList = <        
@@ -103,7 +94,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideTop.Side = asrCenter
         Left = 630
         Height = 1
-        Top = 285
+        Top = 287
         Width = 1
         ParentColor = False
       end
@@ -115,7 +106,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
         Left = 631
-        Height = 316
+        Height = 319
         Top = 0
         Width = 630
         AxisList = <        
@@ -166,7 +157,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       object Panel3: TPanel
         Left = 0
         Height = 250
-        Top = 321
+        Top = 324
         Width = 1261
         Align = alBottom
         ClientHeight = 250
@@ -186,7 +177,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 1
           Height = 23
           Top = 1
-          Width = 157
+          Width = 156
           Caption = 'Refresh active session'
           Checked = True
           State = cbChecked
@@ -207,6 +198,21 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           TitleButtons = True
           AutoSort = True
           Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'pid'
+              Width = 80
+              FieldName = 'pid'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Пусто)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
             item
               Title.Alignment = taCenter
               Title.Orientation = toHorizontal
@@ -416,7 +422,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           DrawFullLine = True
           FocusColor = clRed
           SelectedColor = clHighlight
-          GridLineStyle = psSolid
           DataSource = dsActiveSessions
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
           ReadOnly = True
@@ -428,7 +433,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 316
+        Top = 319
         Width = 1261
         Align = alBottom
         ResizeAnchor = akBottom
@@ -436,11 +441,11 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet1: TTabSheet
       Caption = 'Connections'
-      ClientHeight = 571
+      ClientHeight = 574
       ClientWidth = 1261
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 521
+        Height = 524
         Top = 50
         Width = 1256
         ColumnDefValues.BlobText = '(данные)'
@@ -685,7 +690,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         DrawFullLine = True
         FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsConnections
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
         PopupMenu = PopupMenu1
@@ -707,10 +711,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
           AnchorSideTop.Side = asrCenter
-          Left = 331
+          Left = 329
           Height = 23
           Top = 14
-          Width = 73
+          Width = 72
           BorderSpacing.Left = 6
           Caption = 'Refresh'
           OnChange = SpinEdit1Change
@@ -721,10 +725,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit1
           AnchorSideBottom.Side = asrBottom
-          Left = 64
+          Left = 63
           Height = 17
-          Top = 23
-          Width = 169
+          Top = 19
+          Width = 168
           Anchors = [akLeft, akBottom]
           Caption = 'Refresh interval (in seconds)'
           ParentColor = False
@@ -733,8 +737,8 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Label3
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
-          Left = 239
-          Height = 33
+          Left = 237
+          Height = 29
           Top = 7
           Width = 86
           BorderSpacing.Around = 6
@@ -751,7 +755,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 7
           Height = 36
           Top = 7
-          Width = 51
+          Width = 50
           Action = tlsRefreshConnectionsList
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
@@ -761,7 +765,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object Splitter3: TSplitter
         Left = 1256
-        Height = 521
+        Height = 524
         Top = 50
         Width = 5
         Align = alRight
@@ -770,7 +774,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'PG locks'
-      ClientHeight = 571
+      ClientHeight = 574
       ClientWidth = 1261
       object Panel4: TPanel
         Left = 0
@@ -786,10 +790,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel4
           AnchorSideTop.Side = asrCenter
-          Left = 351
+          Left = 349
           Height = 23
           Top = 14
-          Width = 73
+          Width = 72
           BorderSpacing.Left = 6
           Caption = 'Refresh'
           OnChange = SpinEdit2Change
@@ -800,10 +804,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit2
           AnchorSideBottom.Side = asrBottom
-          Left = 84
+          Left = 83
           Height = 17
-          Top = 23
-          Width = 169
+          Top = 19
+          Width = 168
           Anchors = [akLeft, akBottom]
           Caption = 'Refresh interval (in seconds)'
           ParentColor = False
@@ -812,8 +816,8 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Label4
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel4
-          Left = 259
-          Height = 33
+          Left = 257
+          Height = 29
           Top = 7
           Width = 86
           BorderSpacing.Around = 6
@@ -830,7 +834,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 7
           Height = 36
           Top = 7
-          Width = 71
+          Width = 70
           Action = tlsRefreskPGLocks
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
@@ -876,7 +880,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object RxDBGrid4: TRxDBGrid
         Left = 0
-        Height = 521
+        Height = 524
         Top = 50
         Width = 924
         ColumnDefValues.BlobText = '(данные)'
@@ -1015,14 +1019,13 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         DrawFullLine = True
         FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsPGLocks
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
       end
       object Splitter4: TSplitter
         Left = 924
-        Height = 521
+        Height = 524
         Top = 50
         Width = 5
         Align = alRight
@@ -1030,18 +1033,18 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object Panel5: TPanel
         Left = 929
-        Height = 521
+        Height = 524
         Top = 50
         Width = 332
         Align = alRight
-        ClientHeight = 521
+        ClientHeight = 524
         ClientWidth = 332
         TabOrder = 3
         object Splitter5: TSplitter
           Cursor = crVSplit
           Left = 1
           Height = 5
-          Top = 515
+          Top = 518
           Width = 330
           Align = alBottom
           ResizeAnchor = akBottom
@@ -1067,13 +1070,13 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Statistic'
-      ClientHeight = 571
+      ClientHeight = 574
       ClientWidth = 1261
       object RxDBGrid3: TRxDBGrid
         Left = 0
-        Height = 571
+        Height = 574
         Top = 0
-        Width = 1171
+        Width = 1261
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -1082,7 +1085,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 577
+            Width = 621
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1097,7 +1100,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 578
+            Width = 621
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1174,7 +1177,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         DrawFullLine = False
         FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsStatInfo
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
         ReadOnly = True
@@ -1229,14 +1231,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       '  pg_stat_activity.client_port,'
       '  pg_stat_activity.backend_start,'
       '  pg_stat_activity.query_start,'
-      '  pg_stat_activity.query'
+      '  pg_stat_activity.query,'
+      '  pg_stat_activity.pid'
       'from'
       '  pg_stat_activity'
       'where'
       '  pg_stat_activity.state = ''active'''
       'order by'
       '  pg_stat_activity.datid,'
-      '  pg_stat_activity.usename  '
+      '  pg_stat_activity.usename'
     )
     Params = <>
     Left = 192
@@ -1348,6 +1351,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       Required = False
       BlobType = ftMemo
       Transliterate = False
+    end
+    object quActiveSessionspid: TLongintField
+      FieldKind = fkData
+      FieldName = 'pid'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object quActivConect: TZReadOnlyQuery[6]

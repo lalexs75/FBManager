@@ -46,6 +46,7 @@ type
     procedure ConnectToDB(ASQLEngine: TSQLEngineAbstract); virtual;
     procedure Localize; virtual;
     procedure StatTimeTick; virtual;
+    procedure DisableTimer;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure DoFillDatabaseList(ASQLEngineClass: TSQLEngineAbstractClass);
@@ -99,6 +100,11 @@ end;
 procedure TfdbmMonitorAbstractForm.StatTimeTick;
 begin
   Inc(FTimeID);
+end;
+
+procedure TfdbmMonitorAbstractForm.DisableTimer;
+begin
+  MainTimer.Enabled:=false;
 end;
 
 constructor TfdbmMonitorAbstractForm.Create(TheOwner: TComponent);

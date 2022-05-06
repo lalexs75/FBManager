@@ -40,6 +40,7 @@ type
     dsPGLocks: TDataSource;
     Panel5: TPanel;
     PopupMenu2: TPopupMenu;
+    quActiveSessionspid: TLongintField;
     quPGLocksblocked_pid: TLongintField;
     quPGLocksblocked_statement: TMemoField;
     quPGLocksblocked_user: TStringField;
@@ -192,7 +193,7 @@ procedure ShowpgActivitiMonitorForm;
 implementation
 
 uses IBManMainUnit, fbmStrConstUnit, fbmToolsUnit, IBManDataInspectorUnit,
-  rxstrutils;
+  rxAppUtils, rxstrutils;
 
 {$R *.lfm}
 
@@ -322,7 +323,12 @@ procedure TpgActivitiMonitorForm.Timer2Timer(Sender: TObject);
 begin
   if pgStatDB.Connected and CheckBox2.Checked then
   begin
-    RefreshConnections;
+    try
+      RefreshConnections;
+    except
+      CheckBox2.Checked:=false;
+      Timer2.Enabled:=false;
+    end;
   end;
 end;
 
@@ -457,7 +463,12 @@ begin
   inherited StatTimeTick;
   if pgStatDB.Connected then
   begin
-    RefreshInfoCharts;
+    try
+      RefreshInfoCharts;
+    except
+      DisableTimer;
+      ErrorBox('Ошибка');
+    end;
   end;
 end;
 

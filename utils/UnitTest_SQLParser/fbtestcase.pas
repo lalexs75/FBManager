@@ -109,6 +109,7 @@ type
     procedure AlterTable5;
     procedure AlterTable6;
     procedure AlterTable7;
+    procedure AlterTable8;
     procedure DropTable1;
     procedure RecreateTable;
 
@@ -704,6 +705,11 @@ end;
 procedure TFBSQLParserTest.AlterTable7;
 begin
   DoTestSQL(FBTestSQLData.sTable['AlterTable7']);
+end;
+
+procedure TFBSQLParserTest.AlterTable8;
+begin
+  DoTestSQL(FBTestSQLData.sTable['AlterTable8']);
 end;
 
 procedure TFBSQLParserTest.DropTable1;

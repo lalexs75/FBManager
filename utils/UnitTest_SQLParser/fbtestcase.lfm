@@ -438,13 +438,13 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'AlterTable6'
         Lines.Strings = (
-          'ALTER TABLE objects ALTER ID RESTART WITH 100;'
+          'ALTER TABLE objects ALTER COLUMN ID RESTART WITH 100;'
         )
       end    
       item
         Caption = 'AlterTable7'
         Lines.Strings = (
-          'ALTER TABLE SALARY_HISTORY ALTER NEW_SALARY GENERATED ALWAYS  AS (OLD_SALARY + OLD_SALARY * PERCENT_CHANGE / 100), ALTER SALARY_CHANGE COMPUTED BY (OLD_SALARY * PERCENT_CHANGE / 100);'
+          'ALTER TABLE SALARY_HISTORY ALTER COLUMN NEW_SALARY COMPUTED BY (OLD_SALARY + OLD_SALARY * PERCENT_CHANGE / 100);'
         )
       end    
       item
@@ -456,7 +456,7 @@ object FBTestSQLData: TFBTestSQLData
       item
         Caption = 'RecreateTable1'
         Lines.Strings = (
-          'RECREATE TABLE COUNTRY ('
+          'RECREATE TABLE COUNTRY('
           '  COUNTRY COUNTRYNAME NOT NULL PRIMARY KEY,'
           '  CURRENCY VARCHAR(10) NOT NULL'
           ');'
@@ -514,6 +514,12 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'SetStatisticsIndex1'
         Lines.Strings = (
           'SET STATISTICS INDEX indexname;'
+        )
+      end    
+      item
+        Caption = 'AlterTable8'
+        Lines.Strings = (
+          'ALTER TABLE SALARY_HISTORY ALTER COLUMN SALARY_CHANGE COMPUTED BY (OLD_SALARY * PERCENT_CHANGE / 100);'
         )
       end>
     Left = 32
