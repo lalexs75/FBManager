@@ -713,7 +713,11 @@ procedure TUserDBModule.InitData;
 var
   DBFileName: String;
 begin
-  DBFileName:=LocalCfgFolder + UserDBFileName;
+  if LocalDBConfigFileName<>'' then
+    DBFileName:=LocalDBConfigFileName
+  else
+    DBFileName:=LocalCfgFolder + UserDBFileName;
+
   UserDB.Database:=DBFileName;
   if FileExistsUTF8(DBFileName) then
   begin

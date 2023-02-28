@@ -143,6 +143,8 @@ begin
   Application.Title:='Free Database Manager';
   Application.Initialize;
 
+  ParseCMDLine;
+
   InitDataModule;
   InitSysOptions;
 

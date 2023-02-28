@@ -71,6 +71,7 @@ var
   DocsFolder         : string = '';
   ReportsFolder      : string = '';
   DebugLevel         : integer = 0;
+  LocalDBConfigFileName : string = '';
 
 var
   ShowDesigner       : boolean = false;
@@ -117,6 +118,7 @@ const
 {$ENDIF}
 
 function TestForRussianChar(S:string):Boolean;
+procedure ParseCMDLine;
 implementation
 uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging, gettext,
   Translations, LResources, strutils, rxstrutils, SynEditTypes,
@@ -452,6 +454,38 @@ begin
   for i:=1 to UTF8Length(sRC) do
     if UTF8Pos(UTF8Copy(sRC, i, 1), S) > 0 then
       Exit(true);
+end;
+
+const
+  sHelpCmdMsg ='Поддерживаются следующие параметры:'#13+
+    '--help            h     Отобразить данную справочную информацию'#13+
+    '--local_database  l     Путь к файлу конфигурации';
+
+procedure ShowCMDHelp(AErrorMsg:string);
+begin
+  if AErrorMsg <> '' then
+    ErrorBox(AErrorMsg+#13+sHelpCmdMsg)
+  else
+    InfoBox(sHelpCmdMsg)
+end;
+
+procedure ParseCMDLine;
+var
+  S: String;
+  FShowHelp: Boolean;
+begin
+  FShowHelp:=false;
+  S:=Application.CheckOptions('l:h', ['local_database:', 'help']);
+  if S = '' then //В случае, если все параметры верны
+  begin
+    LocalDBConfigFileName:=Application.GetOptionValue('l', 'local_database');
+    FShowHelp:=Application.HasOption('h', 'help');
+  end
+  else
+    ShowCMDHelp(S);
+
+  if FShowHelp then
+    ShowCMDHelp('');
 end;
 
 

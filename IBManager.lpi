@@ -45,6 +45,7 @@
       <Modes>
         <Mode Name="default">
           <local>
+            <CommandLineParams Value="-l /home/alexs/1/23/aa.db --help"/>
             <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T &apos;Lazarus Run Output&apos; -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
           </local>
         </Mode>

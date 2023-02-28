@@ -2,13 +2,13 @@ object UserDBModule: TUserDBModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
-  Height = 595
-  HorizontalOffset = 311
-  VerticalOffset = 126
-  Width = 887
-  PPI = 94
+  Height = 608
+  HorizontalOffset = 318
+  VerticalOffset = 129
+  Width = 906
   object UserDB: TZConnection
     ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
@@ -19,7 +19,7 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 39
+    Left = 40
     Top = 14
   end
   object InitDB: TZSQLProcessor
@@ -176,14 +176,14 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 128
+    Left = 131
     Top = 8
   end
   object ZReadOnlyQuery1: TZReadOnlyQuery
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 47
-    Top = 251
+    Left = 48
+    Top = 256
   end
   object quSysConst1: TZReadOnlyQuery
     Connection = UserDB
@@ -199,7 +199,7 @@ object UserDBModule: TUserDBModule
     )
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 270
+    Left = 276
     Top = 14
     object quSysConst1sys_consts_value_type: TLongintField
       DisplayWidth = 10
@@ -253,20 +253,28 @@ object UserDBModule: TUserDBModule
       '  (sys_const.sys_const_name = :sys_const_name)'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
+    Left = 232
     Top = 14
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sys_const_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sys_const_value'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sys_consts_value_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_sys_const_name'
+        ParamType = ptUnknown
       end>
   end
   object quSysConst: TZQuery
@@ -286,17 +294,22 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'sys_const_name'
+        ParamType = ptUnknown
       end>
-    Left = 188
+    Left = 192
     Top = 14
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sys_const_name'
+        ParamType = ptUnknown
       end>
   end
   object OldUserDB: TZConnection
     ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = False
     ClientCodepage = 'UTF-8'
     Properties.Strings = (
       'AutoEncodeStrings='
@@ -306,7 +319,7 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 580
+    Left = 592
     Top = 8
   end
   object quOldSysConst: TZQuery
@@ -319,7 +332,7 @@ object UserDBModule: TUserDBModule
       '  sys_const'
     )
     Params = <>
-    Left = 627
+    Left = 640
     Top = 8
   end
   object usFolders: TZUpdateSQL
@@ -346,26 +359,38 @@ object UserDBModule: TUserDBModule
       '  ((db_folders.db_folders_id IS NULL AND :OLD_db_folders_id IS NULL) OR (db_folders.db_folders_id = :OLD_db_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 76
+    Left = 232
+    Top = 78
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_folders_expanded'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_folders_id'
+        ParamType = ptUnknown
       end>
   end
   object quFolders: TZQuery
@@ -384,8 +409,8 @@ object UserDBModule: TUserDBModule
       '  db_folders.db_folders_code'
     )
     Params = <>
-    Left = 188
-    Top = 76
+    Left = 192
+    Top = 78
   end
   object usDatabases: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -459,113 +484,183 @@ object UserDBModule: TUserDBModule
       '  ((db_database.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_database.db_database_id = :OLD_db_database_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 133
+    Left = 232
+    Top = 136
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_sql_engine'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_server_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_database_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_username'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_password'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_user_role'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_connected_charset'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_server_version'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_remote_port'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_description'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'report_manager_folder'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sp_editor_lazzy_mode'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'trg_editor_lazzy_mode'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'show_system_domains'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'show_system_tables'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'show_system_views'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_shedule'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_library_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_authentication_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_auto_grant'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_use_log_meta'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_use_log_editor'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_log_meta_filename'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_log_editor_filename'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_use_log_meta_custom_charset'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_use_log_write_timestamp'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_log_meta_custom_charset'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'show_child_objects'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_log_script_exec_filename'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_use_log_script_exec'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quDatabases: TZQuery
@@ -614,8 +709,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 188
-    Top = 133
+    Left = 192
+    Top = 136
   end
   object quOldFolders: TZQuery
     Connection = OldUserDB
@@ -627,8 +722,8 @@ object UserDBModule: TUserDBModule
       '  db_folders'
     )
     Params = <>
-    Left = 627
-    Top = 65
+    Left = 640
+    Top = 66
   end
   object usParamsHistory: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -655,26 +750,38 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history_param.sql_editors_history_param_id IS NULL AND :OLD_sql_editors_history_param_id IS NULL) OR (sql_editors_history_param.sql_editors_history_param_id = :OLD_sql_editors_history_param_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 188
+    Left = 232
+    Top = 192
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_param_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_param_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_param_value'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_param_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_sql_editors_history_param_id'
+        ParamType = ptUnknown
       end>
   end
   object quParamsHistory: TZQuery
@@ -694,26 +801,30 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 188
+    Left = 192
+    Top = 192
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object ZUpdateSQL4: TZUpdateSQL
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 525
+    Left = 232
+    Top = 536
   end
   object ZQuery4: TZQuery
     Connection = UserDB
     UpdateObject = ZUpdateSQL4
     Params = <>
-    Left = 188
-    Top = 525
+    Left = 192
+    Top = 536
   end
   object usRecentItems: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -740,26 +851,38 @@ object UserDBModule: TUserDBModule
       '  ((db_recent_objects.db_recent_objects_id IS NULL AND :OLD_db_recent_objects_id IS NULL) OR (db_recent_objects.db_recent_objects_id = :OLD_db_recent_objects_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 243
+    Left = 232
+    Top = 248
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_date'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_recent_objects_id'
+        ParamType = ptUnknown
       end>
   end
   object quRecentItems: TZQuery
@@ -783,19 +906,27 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_type'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 243
+    Left = 192
+    Top = 248
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_type'
+        ParamType = ptUnknown
       end>
   end
   object usSQLHistory: TZUpdateSQL
@@ -828,35 +959,53 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history.sql_editors_history_id IS NULL AND :OLD_sql_editors_history_id IS NULL) OR (sql_editors_history.sql_editors_history_id = :OLD_sql_editors_history_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 290
+    Left = 232
+    Top = 296
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_date'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_sql_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_exec_time'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_sql_page_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_sql_text'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_history_sql_plan'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_sql_editors_history_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLHistory: TZQuery
@@ -881,13 +1030,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 290
+    Left = 192
+    Top = 296
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object usSQLFolders: TZUpdateSQL
@@ -915,26 +1068,38 @@ object UserDBModule: TUserDBModule
       '  ((sql_editor_folders.sql_editor_folders_id IS NULL AND :OLD_sql_editor_folders_id IS NULL) OR (sql_editor_folders.sql_editor_folders_id = :OLD_sql_editor_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 345
+    Left = 232
+    Top = 352
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_sql_editor_folders_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLFolders: TZQuery
@@ -956,13 +1121,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 345
+    Left = 192
+    Top = 352
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object usSQLPages: TZUpdateSQL
@@ -997,41 +1166,63 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors.sql_editors_id IS NULL AND :OLD_sql_editors_id IS NULL) OR (sql_editors.sql_editors_id = :OLD_sql_editors_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 400
+    Left = 232
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_body'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_sql_editors_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLPages: TZQuery
@@ -1059,13 +1250,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 400
+    Left = 192
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLFoldersUpd: TZReadOnlyQuery
@@ -1089,38 +1284,58 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 283
-    Top = 345
+    Left = 289
+    Top = 352
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLPagesUpd: TZReadOnlyQuery
@@ -1143,68 +1358,108 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_body'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 283
-    Top = 400
+    Left = 289
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_body'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLFoldersAll: TZQuery
@@ -1223,8 +1478,8 @@ object UserDBModule: TUserDBModule
       '  sql_editor_folders.sql_editor_folders_code'
     )
     Params = <>
-    Left = 118
-    Top = 345
+    Left = 121
+    Top = 352
     object quSQLFoldersAllsql_editor_folders_id: TLargeintField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_id'
@@ -1284,32 +1539,48 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 337
-    Top = 345
+    Left = 344
+    Top = 352
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_code'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_desc'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLPagesIns: TZReadOnlyQuery
@@ -1327,62 +1598,98 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_body'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 337
-    Top = 400
+    Left = 344
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_caption'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_x'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_carret_pos_y'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_start'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sel_end'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_body'
+        ParamType = ptUnknown
       end>
   end
   object quLastID: TZReadOnlyQuery
@@ -1392,8 +1699,8 @@ object UserDBModule: TUserDBModule
     )
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 39
-    Top = 63
+    Left = 40
+    Top = 64
   end
   object quRecentClear: TZReadOnlyQuery
     Connection = UserDB
@@ -1408,14 +1715,18 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 266
-    Top = 243
+    Left = 272
+    Top = 248
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quInsRecent: TZReadOnlyQuery
@@ -1430,32 +1741,48 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_date'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 313
-    Top = 243
+    Left = 320
+    Top = 248
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_recent_objects_date'
+        ParamType = ptUnknown
       end>
   end
   object quDatabasesItem: TZQuery
@@ -1507,13 +1834,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 266
-    Top = 133
+    Left = 272
+    Top = 136
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object quFoldersItem: TZQuery
@@ -1533,13 +1864,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end>
-    Left = 266
-    Top = 76
+    Left = 272
+    Top = 78
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end>
   end
   object quFoldersDel: TZQuery
@@ -1552,13 +1887,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end>
-    Left = 306
-    Top = 76
+    Left = 313
+    Top = 78
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_folders_id'
+        ParamType = ptUnknown
       end>
   end
   object quOldDatabases: TZQuery
@@ -1604,8 +1943,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 627
-    Top = 127
+    Left = 640
+    Top = 130
   end
   object quSQLPagesUpdSO: TZQuery
     Connection = UserDB
@@ -1621,25 +1960,37 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
-    Left = 384
-    Top = 400
+    Left = 392
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editor_folders_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_sort_order'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
   end
   object quSQLPagesDel: TZReadOnlyQuery
@@ -1653,14 +2004,18 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 423
-    Top = 400
+    Left = 432
+    Top = 409
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'sql_editors_id'
+        ParamType = ptUnknown
       end>
   end
   object UpdDB2: TZSQLProcessor
@@ -1681,7 +2036,7 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 729
+    Left = 745
     Top = 8
   end
   object usConnectionPlugins: TZUpdateSQL
@@ -1712,29 +2067,43 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_plugin_data.db_connection_plugin_data_variable_name IS NULL AND :OLD_db_connection_plugin_data_variable_name IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_variable_name = :OLD_db_connection_plugin_data_variable_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 227
-    Top = 454
+    Left = 232
+    Top = 464
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_connection_plugin_data_class_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_connection_plugin_data_variable_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_connection_plugin_data_variable_value'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_connection_plugin_data_class_type'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_connection_plugin_data_variable_name'
+        ParamType = ptUnknown
       end>
   end
   object quConnectionPlugins: TZQuery
@@ -1753,13 +2122,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 188
-    Top = 454
+    Left = 192
+    Top = 464
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
   end
   object UpdDB3: TZSQLProcessor
@@ -1780,8 +2153,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 729
-    Top = 65
+    Left = 745
+    Top = 66
   end
   object quDBOptions: TZQuery
     Connection = UserDB
@@ -1795,8 +2168,8 @@ object UserDBModule: TUserDBModule
       '  db_connection_options'
     )
     Params = <>
-    Left = 384
-    Top = 133
+    Left = 392
+    Top = 136
   end
   object usDBOptions: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -1821,23 +2194,33 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_options.db_connection_options_name IS NULL AND :OLD_db_connection_options_name IS NULL) OR (db_connection_options.db_connection_options_name = :OLD_db_connection_options_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 423
-    Top = 133
+    Left = 432
+    Top = 136
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_connection_options_name'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'db_connection_options_value'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_database_id'
+        ParamType = ptUnknown
       end    
       item
+        DataType = ftUnknown
         Name = 'OLD_db_connection_options_name'
+        ParamType = ptUnknown
       end>
   end
   object quDBOptionsItems: TZQuery
@@ -1855,13 +2238,17 @@ object UserDBModule: TUserDBModule
     )
     Params = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
-    Left = 462
-    Top = 133
+    Left = 472
+    Top = 136
     ParamData = <    
       item
+        DataType = ftUnknown
         Name = 'db_database_id'
+        ParamType = ptUnknown
       end>
     object quDBOptionsItemsdb_database_id: TLargeintField
       FieldKind = fkData
@@ -1905,8 +2292,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 729
-    Top = 141
+    Left = 745
+    Top = 144
   end
   object UpdDB5: TZSQLProcessor
     Params = <>
@@ -1922,13 +2309,13 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 729
-    Top = 196
+    Left = 745
+    Top = 200
   end
   object ZSQLMonitor1: TZSQLMonitor
     Active = True
     MaxTraceCount = 50
-    Left = 39
-    Top = 125
+    Left = 40
+    Top = 128
   end
 end
