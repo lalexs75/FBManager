@@ -4444,7 +4444,7 @@ end;
 
 procedure TPGSQLCommandDelete.InitParserTree;
 var
-  FSQLTokens, T, TName1, TName2, T1, T2, T3, T3_1: TSQLTokenRecord;
+  FSQLTokens, T, TName1, TName2, T1, T2, T3, T3_1, TWh, TR: TSQLTokenRecord;
 begin
   (*
   [ WITH [ RECURSIVE ] запрос_WITH [, ...] ]
@@ -4463,6 +4463,10 @@ begin
   T2:=AddSQLTokens(stSymbol, [TName1, TName2], '*', [toOptional], 4);
   T3:=AddSQLTokens(stKeyword, [TName1, TName2, T2], 'AS', [toOptional], 5);
     T3_1:=AddSQLTokens(stKeyword, T3, 'AS', [toOptional], 6);
+
+  TWh:=AddSQLTokens(stKeyword, [TName1, TName2], 'WHERE', [toOptional]);
+  TR:=AddSQLTokens(stKeyword, [TName1, TName2, TWh], 'RETURNING', [toOptional]);
+  TWh.AddChildToken([TR]);
 end;
 
 procedure TPGSQLCommandDelete.InternalProcessChildToken(ASQLParser: TSQLParser;
