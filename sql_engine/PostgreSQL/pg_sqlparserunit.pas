@@ -4466,7 +4466,7 @@ begin
 
   TWh:=AddSQLTokens(stKeyword, [TName1, TName2], 'WHERE', [toOptional]);
   TR:=AddSQLTokens(stKeyword, [TName1, TName2, TWh], 'RETURNING', [toOptional]);
-  TWh.AddChildToken([TR]);
+  //TWh.AddChildToken([TR]);
 end;
 
 procedure TPGSQLCommandDelete.InternalProcessChildToken(ASQLParser: TSQLParser;

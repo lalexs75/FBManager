@@ -7728,7 +7728,10 @@ begin
   for P in Params do
   begin
     if FDescType = fbldDescription then
-      AddSQLCommand(Format('COMMENT ON PARAMETER %s.%s IS %s;' + LineEnding, [DoFormatName2(FOwnerName), DoFormatName(P.Caption),  QuotedStr(P.Description)]))
+    begin
+      if P.Description<>'' then
+        AddSQLCommand(Format('COMMENT ON PARAMETER %s.%s IS %s;' + LineEnding, [DoFormatName2(FOwnerName), DoFormatName(P.Caption),  QuotedStr(P.Description)]))
+    end
     else
     begin
       if S <> '' then S:=S + LineEnding;
