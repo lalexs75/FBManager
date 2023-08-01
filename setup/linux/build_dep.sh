@@ -2,6 +2,10 @@ mkdir -p ./package/DEBIAN
 mkdir -p ./package/usr/bin
 mkdir -p ./package/usr/share/applications
 mkdir -p ./package/usr/share/pixmaps
+mkdir -p ./package/usr/share/fbmanager/languages
+mkdir -p ./package/usr/share/fbmanager/docs
+mkdir -p ./package/usr/share/fbmanager/reports
+
 
 cd ../../
 ./make_fbm.sh gtk2
@@ -9,7 +13,10 @@ cd setup/linux
 
 cp ../../IBManager ./package/usr/bin
 cp ./FBManager.desktop ./package/usr/share/applications
-cp ../../Images/icons/MainIcon.png ./package/usr/share/pixmaps
+cp ../../Images/icons/MainIcon.png ./package/usr/share/pixmaps/FBManager.png
+cp -a ../../languages/* ./package/usr/share/fbmanager/languages
+cp -a ../../reports/* ./package/usr/share/fbmanager/reports
+cp -a ../../docs/* ./package/usr/share/fbmanager/docs
 
 echo 'Package: fbmanager
 Version: 0.1
@@ -32,4 +39,4 @@ fi' > package/DEBIAN/postinst
 chmod 0755 package/DEBIAN/postinst
 fakeroot dpkg-deb --build ./package
 rm -r ./package
-mv package.deb fbmanager.deb
+mv package.deb fbmanager-0.1.deb
