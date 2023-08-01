@@ -844,7 +844,7 @@ msgstr "Šioje vietoje būtinas „to“"
 msgid "Error"
 msgstr "Klaida"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Skaičiuojant įvyko klaida"
 
@@ -1666,6 +1666,10 @@ msgstr "Įterpti išraišką"
 msgid "Insert DB fields"
 msgstr "Įterpti DB laukus"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "Esamos duomenų &aibės"
@@ -1754,10 +1758,6 @@ msgstr "mm"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Naujas šablonas"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Ne"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2832,8 +2832,4 @@ msgstr "Žodžių skirtukas"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Laužyti tekstą"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Taip"
 

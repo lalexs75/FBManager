@@ -841,7 +841,7 @@ msgstr "\"to\" necessário aqui"
 msgid "Error"
 msgstr "Erro"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Ocorreu um erro durante o cálculo"
 
@@ -1663,6 +1663,10 @@ msgstr "Inserir Expressão"
 msgid "Insert DB fields"
 msgstr "Inserir campos BD"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr "Banco de dados sem campos"
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "Datasets &disponíveis"
@@ -1751,10 +1755,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Novo modelo"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Não"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2829,8 +2829,4 @@ msgstr "Interrompe palavra"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Quebra palavra"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Sim"
 

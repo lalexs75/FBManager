@@ -135,7 +135,9 @@ msgid "Backward"
 msgstr "Bakover"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "Bilder (bmp)"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -201,11 +203,6 @@ msgstr ""
 msgid "Control '%s' has no parent form or frame"
 msgstr ""
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr ""
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -216,11 +213,21 @@ msgid "Cream"
 msgstr ""
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+msgid "Cursor Files"
 msgstr ""
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
+msgstr ""
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
 msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
@@ -417,7 +424,7 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug flags  Slå av spesifikke GDK trace/debug meldinger."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr ""
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -649,11 +656,13 @@ msgid "Hot Light"
 msgstr ""
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr ""
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "Ikon"
 
 #: lclstrconsts.rsiconimageempty
@@ -746,7 +755,7 @@ msgid "%s is already associated with %s"
 msgstr "%s er allerede assosiert med %s"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr ""
 
 #: lclstrconsts.rslastrecordhint
@@ -939,23 +948,19 @@ msgid "Select a date"
 msgstr "Velg en dato"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "Pixmap"
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr ""
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr ""
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "Portable Network Graphic (PNG)"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr ""
 
 #: lclstrconsts.rspostrecordhint
@@ -1151,12 +1156,16 @@ msgstr ""
 msgid "Text"
 msgstr "Tekst"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr ""
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr ""
 
 #: lclstrconsts.rstpanelaccessibilitydescription

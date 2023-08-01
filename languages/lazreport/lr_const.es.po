@@ -844,7 +844,7 @@ msgstr ""
 msgid "Error"
 msgstr "Error"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Ocurrió un error durante el cálculo"
 
@@ -1666,6 +1666,10 @@ msgstr "Insertar Expresión"
 msgid "Insert DB fields"
 msgstr "Insertar campos DB"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "Bases de datos &Disponibles"
@@ -1754,10 +1758,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Nueva plantilla"
-
-#: lr_const.sno
-msgid "No"
-msgstr "No"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2834,8 +2834,4 @@ msgstr "Dividir palabras"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Replegar palabras"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Si"
 

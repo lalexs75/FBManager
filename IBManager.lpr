@@ -148,6 +148,8 @@ begin
   InitDataModule;
   InitSysOptions;
 
+  WriteLogInitConfig;
+
   Application.CreateForm(TfbManagerMainForm, fbManagerMainForm);
   fbManagerMainForm.Show;
   fbManagerMainForm.ShowDataInspector;

@@ -133,7 +133,9 @@ msgid "Backward"
 msgstr "Nazpět"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "Bitové mapy"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -199,11 +201,6 @@ msgstr "Prvek třídy '%s' nemůže mít prvek třídy '%s' jako dítě"
 msgid "Control '%s' has no parent form or frame"
 msgstr "Prvek '%s' nemá rodičovský formulář nebo rámec"
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr "Prvek '%s' nemá rodičovské okno"
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -214,12 +211,24 @@ msgid "Cream"
 msgstr "Krémová"
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+#, fuzzy
+#| msgid "Cursor"
+msgid "Cursor Files"
 msgstr "Ukazatel"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
 msgstr "Vlastní..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -411,7 +420,9 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug flags  Vypnout specifické ladící/sledovací zprávy GDK."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+#, fuzzy
+#| msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr "Graphics Interchange Format"
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -621,11 +632,15 @@ msgid "Hot Light"
 msgstr "Hot Light"
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+#, fuzzy
+#| msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr "Zdroj ikony OS X"
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "Ikona"
 
 #: lclstrconsts.rsiconimageempty
@@ -717,7 +732,9 @@ msgid "%s is already associated with %s"
 msgstr "%s již je přidružen k %s"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr "Joint Picture Expert Group"
 
 #: lclstrconsts.rslastrecordhint
@@ -908,23 +925,21 @@ msgid "Select a date"
 msgstr "Vybrat datum"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "Pixmapa"
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr "Přenosná BitMapa"
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr "Přenositelná MapaŠedi"
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "Portable Network Graphic"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+#, fuzzy
+#| msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr "Přenositelná PixMapa"
 
 #: lclstrconsts.rspostrecordhint
@@ -1120,12 +1135,18 @@ msgstr "Hluboká zelenomodrá"
 msgid "Text"
 msgstr "Text"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr "Vestavěné URL je pouze pro čtení. Místo toho změnte BaseURL."
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+#, fuzzy
+#| msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr "Označkovaný obrazový formát souboru"
 
 #: lclstrconsts.rstpanelaccessibilitydescription

@@ -62,6 +62,8 @@ resourcestring
   sMenuDisconnectDBHint             = 'Disconect from database';
   sMenuRefresh                      = 'Refresh';
   sMenuRefreshHint                  = 'Refresh current opbject';
+  sMenuDuplicateObject              = 'Duplicate object';
+  sMenuDuplicateObjectHint          = 'Duplicate object';
 
   sMenuTools                        = 'Tools';
   sMenuDBInspector                  = 'DB Inspector';
@@ -874,8 +876,10 @@ resourcestring
   sFpcVersion                       = 'FPC version : ';
   sTargetCPU                        = 'Target CPU : ';
   sTargetOS                         = 'Target OS : ';
-  sSVNRevision                      = 'SVN revision : ';
+  sSrcRevision                      = 'GIT revision : ';
   sWidget                           = 'Widget : ';
+  sExecutableFile                   = 'Executable file : ';
+
 //  sGTKWidgetSet                     = 'GTK widget set';
 //  sGTK2WidgetSet                    = 'GTK 2 widget set';
 //  sWin32_64WidgetSet                = 'Win32/Win64 widget set';
@@ -1325,6 +1329,7 @@ resourcestring
   sAutoFillCollumnWidthHint         = 'Automatically fill column width by actual data width';
   sCreateFieldFKAskFillFieldName    = 'On create new field with FK ask to fill field name and type from FK field';
   sEnableEditDataWOPK               = 'Enable edit data in tables without primary key';
+  sEnableMultilineGridTitle         = 'Enable multiline grid title';
 
   sFilterInTable                    = 'Filter in table';
   sFilterInTableHint                = 'Show filter in table';

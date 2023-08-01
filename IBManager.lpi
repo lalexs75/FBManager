@@ -29,7 +29,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="13"/>
       <RevisionNr Value="3"/>
-      <BuildNr Value="5705"/>
+      <BuildNr Value="5716"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.13"/>
@@ -1966,12 +1966,6 @@
     <Exceptions>
       <Item>
         <Name Value="EZSQLException"/>
-      </Item>
-      <Item>
-        <Name Value="Exception"/>
-      </Item>
-      <Item>
-        <Name Value="EZDatabaseError"/>
       </Item>
     </Exceptions>
   </Debugging>

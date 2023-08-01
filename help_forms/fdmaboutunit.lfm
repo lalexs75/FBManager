@@ -9,11 +9,11 @@ object fdmAboutForm: TfdmAboutForm
   ClientWidth = 600
   OnCreate = ibmanagerAboutFormCreate
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '3.99.0.0'
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 34
-    Top = 523
+    Height = 42
+    Top = 515
     Width = 588
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -28,7 +28,7 @@ object fdmAboutForm: TfdmAboutForm
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 517
+    Height = 509
     Top = 0
     Width = 600
     ActivePage = TabSheet1
@@ -37,13 +37,13 @@ object fdmAboutForm: TfdmAboutForm
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'General'
-      ClientHeight = 491
-      ClientWidth = 592
+      ClientHeight = 478
+      ClientWidth = 590
       object Label1: TLabel
         Left = 0
-        Height = 13
+        Height = 17
         Top = 0
-        Width = 592
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Free Database Manager'
@@ -52,9 +52,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object Label2: TLabel
         Left = 0
-        Height = 13
-        Top = 26
-        Width = 592
+        Height = 17
+        Top = 34
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = '(c) alexs, 2004-2019'
@@ -62,9 +62,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblVersion: TLabel
         Left = 0
-        Height = 13
-        Top = 39
-        Width = 592
+        Height = 17
+        Top = 51
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Version : '
@@ -72,9 +72,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblTargCPU: TLabel
         Left = 0
-        Height = 13
-        Top = 91
-        Width = 592
+        Height = 17
+        Top = 119
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Target CPU :'
@@ -82,9 +82,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblBuildDate: TLabel
         Left = 0
-        Height = 13
-        Top = 52
-        Width = 592
+        Height = 17
+        Top = 68
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Build date :'
@@ -92,9 +92,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object Label16: TLabel
         Left = 0
-        Height = 13
-        Top = 13
-        Width = 592
+        Height = 17
+        Top = 17
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Easy and free control you database'
@@ -102,9 +102,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblFPCVersion: TLabel
         Left = 0
-        Height = 13
-        Top = 78
-        Width = 592
+        Height = 17
+        Top = 102
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'FPC Version :'
@@ -112,9 +112,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblLCLVersion: TLabel
         Left = 0
-        Height = 13
-        Top = 65
-        Width = 592
+        Height = 17
+        Top = 85
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'LCL Version :'
@@ -122,9 +122,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblWidgetName: TLabel
         Left = 0
-        Height = 13
-        Top = 117
-        Width = 592
+        Height = 17
+        Top = 153
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Widget Name'
@@ -132,9 +132,9 @@ object fdmAboutForm: TfdmAboutForm
       end
       object lblTargetOS: TLabel
         Left = 0
-        Height = 13
-        Top = 104
-        Width = 592
+        Height = 17
+        Top = 136
+        Width = 590
         Align = alTop
         Alignment = taCenter
         Caption = 'Target OS :'
@@ -142,42 +142,53 @@ object fdmAboutForm: TfdmAboutForm
       end
       object ListBox1: TListBox
         AnchorSideLeft.Control = TabSheet1
-        AnchorSideTop.Control = lblSVNRevision
+        AnchorSideTop.Control = lblExecutableFile
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 336
-        Top = 149
-        Width = 580
+        Height = 262
+        Top = 210
+        Width = 578
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Around = 6
         ItemHeight = 0
         ScrollWidth = 576
         TabOrder = 0
+        TopIndex = -1
       end
       object lblSVNRevision: TLabel
         Left = 0
-        Height = 13
-        Top = 130
-        Width = 592
+        Height = 17
+        Top = 170
+        Width = 590
         Align = alTop
         Alignment = taCenter
-        Caption = 'SVN revision :'
+        Caption = 'GIT revision :'
+        ParentColor = False
+      end
+      object lblExecutableFile: TLabel
+        Left = 0
+        Height = 17
+        Top = 187
+        Width = 590
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Executable file :'
         ParentColor = False
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'License'
-      ClientHeight = 491
-      ClientWidth = 592
+      ClientHeight = 478
+      ClientWidth = 590
       object Memo1: TMemo
         Left = 0
-        Height = 491
+        Height = 478
         Top = 0
-        Width = 592
+        Width = 590
         Align = alClient
         Lines.Strings = (
           'Memo1'

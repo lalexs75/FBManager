@@ -849,7 +849,7 @@ msgstr ""
 msgid "Error"
 msgstr "Błąd"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Wystąpił błąd podczas kalkulacji"
 
@@ -1395,7 +1395,7 @@ msgid "C&ut"
 msgstr "W&ytnij"
 
 #: lr_const.sfrdesignerform_datainsp
-#, fuzzy, badformat
+#, fuzzy
 msgid "&Data inspector"
 msgstr "Inspektor %danych"
 
@@ -1672,6 +1672,10 @@ msgstr "Dodaj wyrażenie"
 msgid "Insert DB fields"
 msgstr "Wstaw pole z tabeli"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "&Dostępne bazy danych"
@@ -1760,10 +1764,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Nowy szablon"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Nie"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2838,8 +2838,4 @@ msgstr "Dzielenie wyrazów"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Zawijanie tekstu"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Tak"
 

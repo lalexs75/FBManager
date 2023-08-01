@@ -841,7 +841,7 @@ msgstr "Ide \"to\" kell"
 msgid "Error"
 msgstr "Hiba"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Hiba keletkezett a számolás közben"
 
@@ -1663,6 +1663,10 @@ msgstr "Kifejezés beszúrása"
 msgid "Insert DB fields"
 msgstr "Adatbázismezők beszúrása"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "Elérhető adatkészletek"
@@ -1751,10 +1755,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Új sablon"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Nem"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2829,8 +2829,4 @@ msgstr "Szavak tördelése"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Sortörés"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Igen"
 

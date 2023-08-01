@@ -76,6 +76,8 @@ type
   { TfbManDataInpectorForm }
 
   TfbManDataInpectorForm = class(TForm)
+    MenuItem38: TMenuItem;
+    objDuplicate: TAction;
     MenuItem37: TMenuItem;
     objRename: TAction;
     fldCollapseAll: TAction;
@@ -153,6 +155,7 @@ type
     MenuItem8: TMenuItem;
     Pagecontrol1: TPAGECONTROL;
     PopupMenu1: TPopupMenu;
+    Separator1: TMenuItem;
     Splitter1: TSplitter;
     Tabsheet1: TTABSHEET;
     Tabsheet2: TTABSHEET;
@@ -166,6 +169,7 @@ type
     procedure ListBox1DblClick(Sender: TObject);
     procedure listWindowsClick(Sender: TObject);
     procedure miCreateDBClick(Sender: TObject);
+    procedure objDuplicateExecute(Sender: TObject);
     procedure objRenameExecute(Sender: TObject);
     procedure saCopyAllLinesExecute(Sender: TObject);
     procedure saCopyLineExecute(Sender: TObject);
@@ -507,6 +511,11 @@ begin
   fbManagerMainForm.dbCreate.Execute;
 end;
 
+procedure TfbManDataInpectorForm.objDuplicateExecute(Sender: TObject);
+begin
+  NotImplemented;//
+end;
+
 procedure TfbManDataInpectorForm.objRenameExecute(Sender: TObject);
 var
   S: String;
@@ -746,6 +755,7 @@ begin
 
     objDelete.Enabled:=Rec.EnableDropped;
     objRename.Enabled:=Rec.EnableRename;
+    objDuplicate.Enabled:=Rec.EnableDropped;
 
     if objDelete.Enabled then
       objDelete.Caption:=sDrop + Rec.ObjectType;
@@ -758,6 +768,7 @@ begin
     objNew.Enabled:=false;
     objDelete.Enabled:=false;
     objRename.Enabled:=false;
+    objDuplicate.Enabled:=false;
   end;
 
   if not objNew.Enabled then
@@ -1032,6 +1043,8 @@ begin
   dbDisconect.Hint:=sMenuDisconnectDBHint;
   objRefresh.Caption:=sMenuRefresh;
   objRefresh.Hint:=sMenuRefreshHint;
+  objDuplicate.Caption:=sMenuDuplicateObject;
+  objDuplicate.Hint:=sMenuDuplicateObjectHint;
 
   dbRegisterFromCopy.Caption:=sOICopyRegistration;
   dbRegisterFromCopy.Hint:=sOICopyRegistrationHint;

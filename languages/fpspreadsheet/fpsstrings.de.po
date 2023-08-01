@@ -503,7 +503,7 @@ msgid "Worksheet not found."
 msgstr "Arbeitsblatt nicht gefunden."
 
 #: fpsstrings.rswriteerror_worksheetnametoolong
-#, object-pascal-format
+#, object-pascal-format, fuzzy, badformat
 msgid "File cannot be written because the name of worksheet \"%0:s\" is too long (max %1:d characters)."
 msgstr "Die Datei kann nicht geschrieben werden, weil der Name des Arbeitsblattes \"%0s:s\" zu lang ist (höchstens %1:d Zeichen)."
 

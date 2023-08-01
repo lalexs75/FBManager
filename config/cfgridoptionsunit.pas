@@ -39,6 +39,7 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
     ColorBox1: TColorBox;
     Edit1: TEdit;
     Edit4: TEdit;
@@ -115,6 +116,7 @@ begin
 
   CheckBox5.Checked:=ConfigValues.ByNameAsBoolean('Fields editro/Ask to fill name from FK', true);
   CheckBox6.Checked:=ConfigValues.ByNameAsBoolean('Grid/Enable edit data in tables without primary key', true);
+  CheckBox7.Checked:=ConfigValues.ByNameAsBoolean('Grid/Enable multiline grid title', false);
 end;
 
 procedure TcfGridOptionsFrame.SaveData;
@@ -145,6 +147,7 @@ begin
   ConfigValues.SetByNameAsInteger('Grid/Alternate color', ColorBox1.Selected);
   ConfigValues.SetByNameAsBoolean('Fields editro/Ask to fill name from FK', CheckBox5.Checked);
   ConfigValues.SetByNameAsBoolean('Grid/Enable edit data in tables without primary key', CheckBox6.Checked);
+  ConfigValues.SetByNameAsBoolean('Grid/Enable multiline grid title', CheckBox7.Checked);
 end;
 
 procedure TcfGridOptionsFrame.Localize;
@@ -180,6 +183,7 @@ begin
   RadioGroup2.Items[3]:=sBoth;
 
   Label2.Caption:=sRecordForFetch;
+  CheckBox7.Caption:=sEnableMultilineGridTitle;
 end;
 
 end.

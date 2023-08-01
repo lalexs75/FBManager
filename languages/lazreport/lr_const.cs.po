@@ -850,7 +850,7 @@ msgstr ""
 msgid "Error"
 msgstr "Error"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Během počítání výsledků nastala chyba"
 
@@ -1673,6 +1673,10 @@ msgstr "Vložit výraz"
 msgid "Insert DB fields"
 msgstr "Vložit DB pole"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "Dostupné datasety"
@@ -1764,10 +1768,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Nová šablona"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Ne"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2849,8 +2849,4 @@ msgstr "Zalamování slov"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Zalamování řádků"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Ano"
 

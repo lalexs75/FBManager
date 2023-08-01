@@ -35,6 +35,7 @@ type
     ButtonPanel1: TButtonPanel;
     Label1: TLabel;
     Label2: TLabel;
+    lblExecutableFile: TLabel;
     lblWidgetName: TLabel;
     lblTargetOS: TLabel;
     lblFPCVersion: TLabel;
@@ -95,7 +96,8 @@ begin
   lblTargCPU.Caption:=sTargetCPU + TargetCPU;
   lblTargetOS.Caption:=sTargetOS + TargetOS;
   lblWidgetName.Caption:=LCLVersionStr;
-  lblSVNRevision.Caption:=sSVNRevision + RevisionStr;
+  lblSVNRevision.Caption:=sSrcRevision + RevisionStr;
+  lblExecutableFile.Caption:=sExecutableFile + Application.ExeName;
 
   LoadGPLFile;
 

@@ -1698,6 +1698,10 @@ msgstr ""
 msgid "Enable loggin SQL editor"
 msgstr ""
 
+#: fbmstrconstunit.senablemultilinegridtitle
+msgid "Enable multiline grid title"
+msgstr ""
+
 #: fbmstrconstunit.senablesetwgofrompopup
 msgid "Enable set \"With Grant Options\" from popup menu"
 msgstr ""
@@ -1813,6 +1817,10 @@ msgstr ""
 
 #: fbmstrconstunit.sexectime
 msgid "Exec time :"
+msgstr ""
+
+#: fbmstrconstunit.sexecutablefile
+msgid "Executable file : "
 msgstr ""
 
 #: fbmstrconstunit.sexecute
@@ -3159,6 +3167,16 @@ msgstr ""
 
 #: fbmstrconstunit.smenudisconnectdbhint
 msgid "Disconect from database"
+msgstr ""
+
+#: fbmstrconstunit.smenuduplicateobject
+msgctxt "fbmstrconstunit.smenuduplicateobject"
+msgid "Duplicate object"
+msgstr ""
+
+#: fbmstrconstunit.smenuduplicateobjecthint
+msgctxt "fbmstrconstunit.smenuduplicateobjecthint"
+msgid "Duplicate object"
 msgstr ""
 
 #: fbmstrconstunit.smenuextractmetadata
@@ -5164,6 +5182,11 @@ msgstr ""
 msgid "Source page name"
 msgstr ""
 
+#: fbmstrconstunit.ssrcrevision
+msgctxt "fbmstrconstunit.ssrcrevision"
+msgid "GIT revision : "
+msgstr ""
+
 #: fbmstrconstunit.ssshconnectionloginfiled
 msgid "SSH connection login filed"
 msgstr ""
@@ -5348,10 +5371,6 @@ msgstr ""
 
 #: fbmstrconstunit.ssuper
 msgid "Super"
-msgstr ""
-
-#: fbmstrconstunit.ssvnrevision
-msgid "SVN revision : "
 msgstr ""
 
 #: fbmstrconstunit.ssweepinterval

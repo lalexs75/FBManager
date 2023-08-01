@@ -53,26 +53,26 @@ show_help(){
 make_win32(){
   /usr/local/share/lazarus/tools/svn2revisioninc .
 #$lazbuild IBManager.lpi --operating-system=win32 --widgetset=win32
-#  env WINEPREFIX="/home/alexs/.wine_delphi" wine "C:\\lazarus\\svn2revisioninc" .
+  env WINEPREFIX="/home/alexs/.wine_delphi" wine "C:\\lazarus\\svn2revisioninc" .
   env WINEPREFIX="/home/alexs/.wine_delphi" wine "C:\\lazarus\\lazbuild.exe" "IBManager.lpi"
 #  $lazbuild IBManager.lpi --operating-system=win32 --widgetset=win32 --cpu=i386
   strip IBManager.exe
 }
 
 make_win64(){
-#  /usr/local/share/lazarus/tools/svn2revisioninc .
+  /usr/local/share/lazarus/tools/svn2revisioninc .
   $lazbuild IBManager.lpi --operating-system=win64 --widgetset=win32 --cpu=x86_64
   strip IBManager.exe
 }
 
 make_gtk2(){
-#  /usr/local/share/lazarus/tools/svn2revisioninc .
+  /usr/local/share/lazarus/tools/svn2revisioninc .
   $lazbuild ./IBManager.lpi
   strip IBManager
 }
 
 make_qt(){
-#  /usr/local/share/lazarus/tools/svn2revisioninc .
+  /usr/local/share/lazarus/tools/svn2revisioninc .
   $lazbuild IBManager.lpi --widgetset=qt
   strip IBManager
 }

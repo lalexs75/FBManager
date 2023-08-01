@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Last-Translator: Vasseur Gilles <gillesvasseur58@gmail.com>\n"
 "Language-Team: http://lazarus.developpez.com/\n"
-"PO-Revision-Date: 2020-01-04 15:59+0100\n"
+"PO-Revision-Date: 2021-11-25 13:55+0100\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "MIME-Version: 1.0\n"
 "POT-Creation-Date: \n"
 "Project-Id-Version: \n"
 "Language: fr\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 3.0\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 #, object-pascal-format
@@ -131,7 +131,9 @@ msgid "Backward"
 msgstr "En arrière"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "Images"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -197,11 +199,6 @@ msgstr "Le contrôle de la classe \"%s\" ne peut pas contenir un contrôle de la
 msgid "Control '%s' has no parent form or frame"
 msgstr "Le contrôle \"%s\" n'a pas de fenêtre  ou de cadre parent"
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr "Le contrôle \"%s\" n'a pas de fenêtre parent"
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -212,12 +209,24 @@ msgid "Cream"
 msgstr "Crème"
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+#, fuzzy
+#| msgid "Cursor"
+msgid "Cursor Files"
 msgstr "Curseur"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
 msgstr "Personnalisé..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -409,7 +418,9 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug flags  Arrêter les messages spécifiques GDK+ trace/débogage."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+#, fuzzy
+#| msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr "Format d'échange graphique (GIF)"
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -619,11 +630,15 @@ msgid "Hot Light"
 msgstr "Spot"
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+#, fuzzy
+#| msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr "Ressource d'icône OSX"
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "Icône"
 
 #: lclstrconsts.rsiconimageempty
@@ -715,7 +730,9 @@ msgid "%s is already associated with %s"
 msgstr "%s est déjà associé à %s"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr "Joint Picture Expert Group"
 
 #: lclstrconsts.rslastrecordhint
@@ -733,7 +750,7 @@ msgstr "Index de liste hors limites (%d)"
 
 #: lclstrconsts.rsmacosfileformat
 msgid "File Format:"
-msgstr ""
+msgstr "Format de fichier :"
 
 #: lclstrconsts.rsmacosmenuhide
 #, object-pascal-format
@@ -906,23 +923,21 @@ msgid "Select a date"
 msgstr "Choisir une date"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "Pixmap"
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr "Portable BitMap"
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr "Portable GrayMap"
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "Portable Network Graphic"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+#, fuzzy
+#| msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr "Portable PixMap"
 
 #: lclstrconsts.rspostrecordhint
@@ -954,7 +969,7 @@ msgstr "Violet"
 
 #: lclstrconsts.rsqtoptiondisableaccurateframe
 msgid "-disableaccurateframe, disables fully accurate window frame under X11. This feature is implemented for Qt, Qt5 and Gtk2 interfaces and used mostly by GetWindowRect()."
-msgstr ""
+msgstr "-disableaccurateframe, désactive le cadre de fenêtre précis sous X11. Cette fonctionnalité est implémentée pour les interfaces Qt, Qt5 et Gtk2 et utilisée principalement par GetWindowRect()."
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1118,12 +1133,18 @@ msgstr "Sarcelle"
 msgid "Text"
 msgstr "Texte"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr "L'URL intégrée est en lecture seule. Changez BaseURL à la place."
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+#, fuzzy
+#| msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr "Tagged Image File Format"
 
 #: lclstrconsts.rstpanelaccessibilitydescription

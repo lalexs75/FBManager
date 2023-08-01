@@ -2,11 +2,11 @@ msgid ""
 msgstr ""
 "Last-Translator: Vasseur Gilles <gillesvasseur58@gmail.com>\n"
 "Language-Team: http://lazarus.developpez.com/\n"
-"PO-Revision-Date: 2018-05-02 08:38+0200\n"
+"PO-Revision-Date: 2021-11-25 15:16+0100\n"
 "Project-Id-Version: lazreport\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0\n"
 "MIME-Version: 1.0\n"
 "Project-Id-Version: lazreport\n"
 "POT-Creation-Date: \n"
@@ -842,7 +842,7 @@ msgstr "\"to\" nécessaire ici"
 msgid "Error"
 msgstr "Erreur"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr "Une erreur s'est produite pendant le calcul"
 
@@ -1664,6 +1664,10 @@ msgstr "Insérer un expression"
 msgid "Insert DB fields"
 msgstr "Insérer des champs BDD"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr "Base de données sans champs"
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "&Ensembles de données disponibles"
@@ -1752,10 +1756,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "Nouveau modèle"
-
-#: lr_const.sno
-msgid "No"
-msgstr "Non"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2316,7 +2316,7 @@ msgstr "&Hauteur, mm"
 
 #: lr_const.spgoptforminvalidcustompapersize
 msgid "Invalid custom paper size."
-msgstr ""
+msgstr "Format de papier personnalisé non valide."
 
 #: lr_const.spgoptformland
 msgid "&Landscape"
@@ -2830,8 +2830,4 @@ msgstr "Coupure de mot"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Retour automatique à la ligne"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Oui"
 

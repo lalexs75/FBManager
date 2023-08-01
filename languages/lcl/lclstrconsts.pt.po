@@ -129,7 +129,9 @@ msgid "Backward"
 msgstr "Atrás"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "Bitmaps"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -195,11 +197,6 @@ msgstr "Controle de classe '%s' não pode ter controle de classe '%s' como filho
 msgid "Control '%s' has no parent form or frame"
 msgstr ""
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr "Controle '%s' não possui janela pai"
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -210,12 +207,24 @@ msgid "Cream"
 msgstr "Creme"
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+#, fuzzy
+#| msgid "Cursor"
+msgid "Cursor Files"
 msgstr "Cursor"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
 msgstr "Personalizado ..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -411,7 +420,9 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug flags  Desativa mensagens GDK específicas rastreamento/depuração."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+#, fuzzy
+#| msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr "Graphics Interchange Format"
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -631,11 +642,15 @@ msgid "Hot Light"
 msgstr "Luz Quente"
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+#, fuzzy
+#| msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr "Ícone Mac OS X"
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "Ícone"
 
 #: lclstrconsts.rsiconimageempty
@@ -727,7 +742,9 @@ msgid "%s is already associated with %s"
 msgstr "%s já está associado com %s"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr "\"Joint Picture Expert Group\""
 
 #: lclstrconsts.rslastrecordhint
@@ -918,23 +935,21 @@ msgid "Select a date"
 msgstr "Selecionar uma data"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "\"Pixmap\""
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr "\"BitMap\" portátil"
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr "\"GrayMap\" portátil"
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "Gráfico Rede Portátil (PNG)"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+#, fuzzy
+#| msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr "\"PixMap\" portátil"
 
 #: lclstrconsts.rspostrecordhint
@@ -1130,12 +1145,18 @@ msgstr "Verde Musgo"
 msgid "Text"
 msgstr "Texto"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr ""
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+#, fuzzy
+#| msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr "Formato Arquivo Imagem \"Tagged\""
 
 #: lclstrconsts.rstpanelaccessibilitydescription

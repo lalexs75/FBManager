@@ -842,7 +842,7 @@ msgstr "需要\"to\"在这里"
 msgid "Error"
 msgstr "错误"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 msgid "An error occurred during calculation"
 msgstr ""
 
@@ -1664,6 +1664,10 @@ msgstr "插入表达式"
 msgid "Insert DB fields"
 msgstr "插入DB字段"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr ""
@@ -1752,10 +1756,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr "新建模板"
-
-#: lr_const.sno
-msgid "No"
-msgstr "否"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2830,8 +2830,4 @@ msgstr ""
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr ""
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "是"
 

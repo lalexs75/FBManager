@@ -132,7 +132,9 @@ msgid "Backward"
 msgstr "后退"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "位图"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -198,11 +200,6 @@ msgstr ""
 msgid "Control '%s' has no parent form or frame"
 msgstr ""
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr ""
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -213,12 +210,24 @@ msgid "Cream"
 msgstr ""
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+#, fuzzy
+#| msgid "Cursor"
+msgid "Cursor Files"
 msgstr "光标"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
 msgstr "自定义..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -410,7 +419,9 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug flags  关闭GDK跟踪/调试信息."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+#, fuzzy
+#| msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr "图形交换格式"
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -621,11 +632,15 @@ msgid "Hot Light"
 msgstr ""
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+#, fuzzy
+#| msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr "Mac OS X 图标"
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "图标"
 
 #: lclstrconsts.rsiconimageempty
@@ -717,7 +732,9 @@ msgid "%s is already associated with %s"
 msgstr "%s已经与%s相关联"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr "JPEG(联合图片专家组)"
 
 #: lclstrconsts.rslastrecordhint
@@ -908,23 +925,21 @@ msgid "Select a date"
 msgstr "Select a date"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "像素图"
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr "便携式位图"
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr "便携式灰度位图"
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "便携式网络图形(PNG)"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+#, fuzzy
+#| msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr "便携式像素图"
 
 #: lclstrconsts.rspostrecordhint
@@ -1120,12 +1135,18 @@ msgstr "蓝绿色"
 msgid "Text"
 msgstr "文本"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr ""
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+#, fuzzy
+#| msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr "标记图像文件格式"
 
 #: lclstrconsts.rstpanelaccessibilitydescription

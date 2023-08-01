@@ -64,6 +64,9 @@ procedure NotImplemented;
 
 var
   LocalCfgFolder     : string = '';
+  GlobalCfgFolder    : string = '';
+  AppDir             : string = '';
+  AppResDir          : string = '';
   AliasFileName      : string = '';
   ConfigFileName     : string = '';
   ConfigFileNameNew  : string = '';
@@ -72,6 +75,7 @@ var
   ReportsFolder      : string = '';
   DebugLevel         : integer = 0;
   LocalDBConfigFileName : string = '';
+  VerboseLog         : Boolean = False;
 
 var
   ShowDesigner       : boolean = false;
@@ -119,6 +123,7 @@ const
 
 function TestForRussianChar(S:string):Boolean;
 procedure ParseCMDLine;
+procedure WriteLogInitConfig;
 implementation
 uses fbmStrConstUnit, SynHighlighterSQL, rxAppUtils, rxlogging, gettext,
   Translations, LResources, strutils, rxstrutils, SynEditTypes,
@@ -368,6 +373,11 @@ begin
   if Grid.Columns.Count>0 then
     for R in Grid.Columns do
       R.Filter.Style:=TRxFilterStyle(ConfigValues.ByNameAsInteger('Grid filter style', 0));
+
+  if ConfigValues.ByNameAsBoolean('Grid/Enable multiline grid title', false) then
+    Grid.OptionsRx:=Grid.OptionsRx + [rdgMultiTitleLines]
+  else
+    Grid.OptionsRx:=Grid.OptionsRx - [rdgMultiTitleLines];
 end;
 
 function StrToDateDef(const S: string; const Default: TDateTime): TDateTime;
@@ -459,7 +469,8 @@ end;
 const
   sHelpCmdMsg ='Поддерживаются следующие параметры:'#13+
     '--help            h     Отобразить данную справочную информацию'#13+
-    '--local_database  l     Путь к файлу конфигурации';
+    '--local_database  l     Путь к файлу конфигурации'#13+
+    '--verbose         v     Подробный лог';
 
 procedure ShowCMDHelp(AErrorMsg:string);
 begin
@@ -480,12 +491,28 @@ begin
   begin
     LocalDBConfigFileName:=Application.GetOptionValue('l', 'local_database');
     FShowHelp:=Application.HasOption('h', 'help');
+    VerboseLog:=Application.HasOption('v', 'verbose');
   end
   else
     ShowCMDHelp(S);
 
   if FShowHelp then
     ShowCMDHelp('');
+end;
+
+procedure WriteLogInitConfig;
+begin
+  if not VerboseLog then Exit;
+  RxWriteLog(etDebug, 'AppDir = %s', [AppDir]);
+  RxWriteLog(etDebug, 'GlobalCfgFolder = %s', [GlobalCfgFolder]);
+  RxWriteLog(etDebug, 'LocalCfgFolder = %s', [LocalCfgFolder]);
+  RxWriteLog(etDebug, 'AliasFileName = %s', [AliasFileName]);
+  RxWriteLog(etDebug, 'ConfigFileName = %s', [ConfigFileName]);
+  RxWriteLog(etDebug, 'AppResDir = %s', [AppResDir]);
+  RxWriteLog(etDebug, 'LngFolder = %s', [LngFolder]);
+  RxWriteLog(etDebug, 'DocsFolder = %s', [DocsFolder]);
+  RxWriteLog(etDebug, 'ReportsFolder = %s', [ReportsFolder]);
+  RxWriteLog(etDebug, 'ConfigFileNameNew = %s', [ConfigFileNameNew]);
 end;
 
 
@@ -598,14 +625,13 @@ end;
 {$IFDEF LINUX}
 const
   sEtcFolder = '/etc/';
+  sBinFolder = '/usr/bin/';
   sEtcCfgFolder = '/usr/share/fbmanager/';
 {$ENDIF}
 
 procedure InitFolders;
-var
-  GlobalCfgFolder, FAppDir, FAppResDir: String;
 begin
-  FAppDir:=AppendPathDelim(ExtractFileDir(ParamStr(0)));
+  AppDir:=AppendPathDelim(ExtractFileDir(ParamStr(0)));
   GlobalCfgFolder:=SysToUTF8(RxGetAppConfigDir(true));
   LocalCfgFolder:=SysToUTF8(RxGetAppConfigDir(false));
   ForceDirectoriesUTF8(LocalCfgFolder);
@@ -614,15 +640,15 @@ begin
   ConfigFileName:=LocalCfgFolder+sConfigFileNameOld;
 
   {$IFDEF LINUX}
-  if Copy(FAppDir, 1, Length(sEtcFolder)) = sEtcFolder then
-    FAppResDir := sEtcCfgFolder
+  if Copy(AppDir, 1, Length(sBinFolder)) = sBinFolder then
+    AppResDir := sEtcCfgFolder
   else
   {$ENDIF}
-    FAppResDir := FAppDir;
+    AppResDir := AppDir;
 
-  LngFolder:=AppendPathDelim(FAppResDir + 'languages');
-  DocsFolder:=AppendPathDelim(FAppResDir+'docs');
-  ReportsFolder:=AppendPathDelim(FAppResDir+'reports');
+  LngFolder:=AppendPathDelim(AppResDir + 'languages');
+  DocsFolder:=AppendPathDelim(AppResDir+'docs');
+  ReportsFolder:=AppendPathDelim(AppResDir+'reports');
 
   ConfigFileNameNew:=LocalCfgFolder+sConfigFileNameNew;
 end;

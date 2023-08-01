@@ -131,7 +131,9 @@ msgid "Backward"
 msgstr "Vissza"
 
 #: lclstrconsts.rsbitmaps
-msgid "Bitmaps"
+#, fuzzy
+#| msgid "Bitmaps"
+msgid "Bitmap Files"
 msgstr "Bitképek"
 
 #: lclstrconsts.rsblackcolorcaption
@@ -197,11 +199,6 @@ msgstr "'%s' osztályú vezérlőnek nem lehet gyermeke egy '%s' osztályú vez�
 msgid "Control '%s' has no parent form or frame"
 msgstr "A(z) '%s' vezérlőnek nincs szülő kerete vagy form-ja"
 
-#: lclstrconsts.rscontrolhasnoparentwindow
-#, object-pascal-format
-msgid "Control '%s' has no parent window"
-msgstr "A(z) '%s' vezérlőnek nincs szülő ablaka"
-
 #: lclstrconsts.rscontrolisnotaparent
 #, object-pascal-format
 msgid "'%s' is not a parent of '%s'"
@@ -212,12 +209,24 @@ msgid "Cream"
 msgstr "Krém"
 
 #: lclstrconsts.rscursor
-msgid "Cursor"
+#, fuzzy
+#| msgid "Cursor"
+msgid "Cursor Files"
 msgstr "Kurzor"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
 msgstr "Egyéni ..."
+
+#: lclstrconsts.rsdatetoolarge
+#, object-pascal-format
+msgid "Date cannot be past %s"
+msgstr ""
+
+#: lclstrconsts.rsdatetoosmall
+#, object-pascal-format
+msgid "Date cannot be before %s"
+msgstr ""
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -409,7 +418,9 @@ msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
 msgstr "--gdk-no-debug jelzők     Kikapcsolja a megadott GDK nyomkövetési/hibakeresési üzeneteket."
 
 #: lclstrconsts.rsgif
-msgid "Graphics Interchange Format"
+#, fuzzy
+#| msgid "Graphics Interchange Format"
+msgid "Graphics Interchange Format Files"
 msgstr "Graphics Interchange Format"
 
 #: lclstrconsts.rsgoptionfatalwarnings
@@ -619,11 +630,15 @@ msgid "Hot Light"
 msgstr "Meleg Fény"
 
 #: lclstrconsts.rsicns
-msgid "Mac OS X Icon"
+#, fuzzy
+#| msgid "Mac OS X Icon"
+msgid "macOS Icon Files"
 msgstr "Mac OS X ikon"
 
 #: lclstrconsts.rsicon
-msgid "Icon"
+#, fuzzy
+#| msgid "Icon"
+msgid "Icon Files"
 msgstr "Ikon"
 
 #: lclstrconsts.rsiconimageempty
@@ -715,7 +730,9 @@ msgid "%s is already associated with %s"
 msgstr "%s már hozzá van rendelve ehhez: %s"
 
 #: lclstrconsts.rsjpeg
-msgid "Joint Picture Expert Group"
+#, fuzzy
+#| msgid "Joint Picture Expert Group"
+msgid "JPEG Files"
 msgstr "Joint Picture Expert Group"
 
 #: lclstrconsts.rslastrecordhint
@@ -906,23 +923,21 @@ msgid "Select a date"
 msgstr "Dátum kiválasztása"
 
 #: lclstrconsts.rspixmap
-msgid "Pixmap"
+#, fuzzy
+#| msgid "Pixmap"
+msgid "Pixmap Files"
 msgstr "Pixmap"
 
-#: lclstrconsts.rsportablebitmap
-msgid "Portable BitMap"
-msgstr "Portable BitMap"
-
-#: lclstrconsts.rsportablegraymap
-msgid "Portable GrayMap"
-msgstr "Portable GrayMap"
-
 #: lclstrconsts.rsportablenetworkgraphic
-msgid "Portable Network Graphic"
+#, fuzzy
+#| msgid "Portable Network Graphic"
+msgid "PNG Files"
 msgstr "Portable Network Graphic"
 
 #: lclstrconsts.rsportablepixmap
-msgid "Portable PixMap"
+#, fuzzy
+#| msgid "Portable PixMap"
+msgid "Portable Pixmap Files"
 msgstr "Portable PixMap"
 
 #: lclstrconsts.rspostrecordhint
@@ -1118,12 +1133,18 @@ msgstr "Kékeszöld"
 msgid "Text"
 msgstr "Szöveg"
 
+#: lclstrconsts.rstga
+msgid "TGA Image Files"
+msgstr ""
+
 #: lclstrconsts.rsthebuiltinurlisreadonlychangethebaseurlinstead
 msgid "The built-in URL is read only. Change the BaseURL instead."
 msgstr "A beépített URL csak olvasható. Változtassa meg inkább a BaseURL értékét."
 
 #: lclstrconsts.rstiff
-msgid "Tagged Image File Format"
+#, fuzzy
+#| msgid "Tagged Image File Format"
+msgid "Tagged Image File Format Files"
 msgstr "Tagged Image File Format"
 
 #: lclstrconsts.rstpanelaccessibilitydescription

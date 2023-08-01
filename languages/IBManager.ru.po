@@ -1772,6 +1772,10 @@ msgstr "Разрешить протоколирование редактора �
 msgid "Enable loggin SQL editor"
 msgstr "Разрешить протоколирование редактора SQL"
 
+#: fbmstrconstunit.senablemultilinegridtitle
+msgid "Enable multiline grid title"
+msgstr ""
+
 #: fbmstrconstunit.senablesetwgofrompopup
 msgid "Enable set \"With Grant Options\" from popup menu"
 msgstr "Разрешить установку права \"С ПРАВАМИ АДМИНИСТРАТОРА\" из всплывающего меню"
@@ -1890,6 +1894,10 @@ msgstr "Выполнение завершено."
 #: fbmstrconstunit.sexectime
 msgid "Exec time :"
 msgstr "Время выполнения :"
+
+#: fbmstrconstunit.sexecutablefile
+msgid "Executable file : "
+msgstr ""
 
 #: fbmstrconstunit.sexecute
 msgid "Execute"
@@ -3268,6 +3276,16 @@ msgstr "Отключиться"
 #: fbmstrconstunit.smenudisconnectdbhint
 msgid "Disconect from database"
 msgstr "Отключиться от указанной базы данных"
+
+#: fbmstrconstunit.smenuduplicateobject
+msgctxt "fbmstrconstunit.smenuduplicateobject"
+msgid "Duplicate object"
+msgstr ""
+
+#: fbmstrconstunit.smenuduplicateobjecthint
+msgctxt "fbmstrconstunit.smenuduplicateobjecthint"
+msgid "Duplicate object"
+msgstr ""
 
 #: fbmstrconstunit.smenuextractmetadata
 msgctxt "fbmstrconstunit.smenuextractmetadata"
@@ -5327,6 +5345,10 @@ msgstr "Защита SQL"
 msgid "Source page name"
 msgstr "Имя исходной страницы"
 
+#: fbmstrconstunit.ssrcrevision
+msgid "GIT revision : "
+msgstr "Ревизия GIT : "
+
 #: fbmstrconstunit.ssshconnectionloginfiled
 msgid "SSH connection login filed"
 msgstr "Ошибка подключения через SSH"
@@ -5518,10 +5540,6 @@ msgstr "Отобразить итоговую строку"
 #: fbmstrconstunit.ssuper
 msgid "Super"
 msgstr "Администратор"
-
-#: fbmstrconstunit.ssvnrevision
-msgid "SVN revision : "
-msgstr "Ревизия SVN : "
 
 #: fbmstrconstunit.ssweepinterval
 msgid "Sweep interval"

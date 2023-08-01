@@ -858,7 +858,7 @@ msgstr ""
 msgid "Error"
 msgstr "Salah"
 
-#: lr_const.serroroccured
+#: lr_const.serroroccurred
 #, fuzzy
 #| msgid "An error occured during calculating"
 msgid "An error occurred during calculation"
@@ -1724,6 +1724,10 @@ msgstr ""
 msgid "Insert DB fields"
 msgstr "Sisipkan field DB"
 
+#: lr_const.sinsertfieldsdbnofields
+msgid "Database without fields"
+msgstr ""
+
 #: lr_const.sinsertfieldsformaviabledset
 msgid "&Available datasets"
 msgstr "D&ataset tersedia"
@@ -1814,10 +1818,6 @@ msgstr "MM"
 #: lr_const.snewtemplate
 msgid "New template"
 msgstr ""
-
-#: lr_const.sno
-msgid "No"
-msgstr "Tidak"
 
 #: lr_const.snotassigned
 msgctxt "lr_const.snotassigned"
@@ -2902,8 +2902,4 @@ msgstr "Pisah kata"
 #: lr_const.swordwrap
 msgid "Word wrap"
 msgstr "Gulung kata"
-
-#: lr_const.syes
-msgid "Yes"
-msgstr "Ya"
 
