@@ -2407,7 +2407,7 @@ begin
       FQuery.Open;
       while not FQuery.Eof do
       begin
-        P:=DBObj.Add(FQuery.FieldByName('name').AsString);
+        P:=DBObj.Add(TrimRight( FQuery.FieldByName('name').AsString));
         if Assigned(FQuery.FindField('description')) then
           P.ObjDesc:=Trim(FQuery.FieldByName('description').AsString);
         if Assigned(FQuery.FindField('table_name')) then
