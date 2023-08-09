@@ -370,6 +370,8 @@ type
   private
     FSQLQuery:TZQuery;
   protected
+    procedure SetReadOnly(AValue: Boolean); override;
+    function GetReadOnly: Boolean; override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;
@@ -2018,6 +2020,16 @@ begin
   end;
 //  FDataSet.Active:=true;
   Result:=FDataSet;
+end;
+
+procedure TMSSQLQueryControl.SetReadOnly(AValue: Boolean);
+begin
+  FSQLQuery.ReadOnly:=AValue;
+end;
+
+function TMSSQLQueryControl.GetReadOnly: Boolean;
+begin
+  Result:=FSQLQuery.ReadOnly;
 end;
 
 { TMSSQLQueryControl }

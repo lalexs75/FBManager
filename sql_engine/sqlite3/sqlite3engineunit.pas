@@ -241,6 +241,8 @@ type
   TSQLite3QueryControl = class(TSQLQueryControl)
     FSQLQuery: TZQuery;
   protected
+    procedure SetReadOnly(AValue: Boolean); override;
+    function GetReadOnly: Boolean; override;
     procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -1923,6 +1925,16 @@ begin
 end;
 
 { TSQLite3QueryControl }
+
+procedure TSQLite3QueryControl.SetReadOnly(AValue: Boolean);
+begin
+  FSQLQuery.ReadOnly:=AValue;
+end;
+
+function TSQLite3QueryControl.GetReadOnly: Boolean;
+begin
+  Result:=FSQLQuery.ReadOnly;
+end;
 
 procedure TSQLite3QueryControl.SetParamValues;
 begin

@@ -365,6 +365,8 @@ type
   private
     FSQLQuery: TZQuery;
   protected
+    procedure SetReadOnly(AValue: Boolean); override;
+    function GetReadOnly: Boolean; override;
     procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -2040,6 +2042,16 @@ begin
 end;
 
 { TMySQLQueryControl }
+
+procedure TMySQLQueryControl.SetReadOnly(AValue: Boolean);
+begin
+  FSQLQuery.ReadOnly:=AValue;
+end;
+
+function TMySQLQueryControl.GetReadOnly: Boolean;
+begin
+  Result:=FSQLQuery.ReadOnly;
+end;
 
 procedure TMySQLQueryControl.SetParamValues;
 var

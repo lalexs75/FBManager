@@ -730,6 +730,7 @@ var
   SQLCommand:TSQLCommandAbstract;
   S,S1, ErrMsg:string;
   i, ErrX, ErrY:integer;
+  T: TTableItem;
 
 begin
   SaveCurrent;
@@ -766,6 +767,29 @@ begin
         if (not (SQLCommand is TSQLCommandDDL)) and (SQLCommand is TSQLCommandAbstractSelect) and TSQLCommandAbstractSelect(SQLCommand).Selectable then
         begin;
           QueryControl.Active:=true;
+          { #todo -oalexs : Переработать - вынести в QueryControl }
+          if TSQLCommandAbstractSelect(SQLCommand).Tables.Count = 1 then
+          begin
+            T:=TSQLCommandAbstractSelect(SQLCommand).Tables[0];
+            if T.TableType = stitTable then
+            begin
+              QueryControl.ReadOnly:=false;
+              dbGrid1.Options:=dbGrid1.Options + [dgEditing];
+              dbGrid1.ReadOnly:=false;
+            end
+            else
+            begin
+              QueryControl.ReadOnly:=true;
+              dbGrid1.Options:=dbGrid1.Options - [dgEditing];
+              dbGrid1.ReadOnly:=true;
+            end;
+          end
+          else
+          begin
+            QueryControl.ReadOnly:=true;
+            dbGrid1.Options:=dbGrid1.Options - [dgEditing];
+            dbGrid1.ReadOnly:=true;
+          end;
 
           LoadStatistic(SQLCommand);
           if SQLCommand.PlanEnabled and ConfigValues.ByNameAsBoolean('SQLEditor/Show query plan', true) then

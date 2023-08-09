@@ -51,7 +51,7 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
   Position = poDefault
   SessionProperties = 'RxDBGridExportSpreadSheet1.FileName;RxDBGridExportSpreadSheet1.OpenAfterExport;RxDBGridExportSpreadSheet1.Options;RxDBGridExportSpreadSheet1.PageName;Panel3.Width;Panel4.Height'
   ShowHint = True
-  LCLVersion = '2.3.0.0'
+  LCLVersion = '3.99.0.0'
   object ToolPanel2: TToolPanel
     Left = 0
     Height = 34
@@ -1100,7 +1100,6 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
         ParentFont = False
         PopupMenu = PopupMenu1
         ReadOnly = True
-        ShowSeparators = False
         TabOrder = 1
         OnClick = TreeView1Click
         OnDragDrop = TreeView1DragDrop
@@ -1129,7 +1128,6 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       ParentFont = False
       PopupMenu = PopupMenu1
       ReadOnly = True
-      ShowSeparators = False
       TabOrder = 2
       OnClick = TreeView1Click
       OnDragDrop = TreeView1DragDrop

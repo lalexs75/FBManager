@@ -172,6 +172,8 @@ type
     FSQLQuery: TSQLQuery;
 //    FSQLTransaction: TSQLTransaction;
   protected
+    procedure SetReadOnly(AValue: Boolean); override;
+    function GetReadOnly: Boolean; override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
     function GetQuerySQL: string;override;
@@ -438,6 +440,16 @@ end;
 
 
 { TOracleQueryControl }
+
+procedure TOracleQueryControl.SetReadOnly(AValue: Boolean);
+begin
+  FSQLQuery.ReadOnly:=AValue;
+end;
+
+function TOracleQueryControl.GetReadOnly: Boolean;
+begin
+  Result:=FSQLQuery.ReadOnly;
+end;
 
 function TOracleQueryControl.GetDataSet: TDataSet;
 begin

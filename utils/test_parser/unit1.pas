@@ -16,7 +16,7 @@ uses
   mysql_engine,
   mssql_engine,
 
-  fbmSqlParserUnit
+  fbmSqlParserUnit, sqlObjects
   ;
 
 type
@@ -159,7 +159,9 @@ procedure DoCommand(ASQLEngine:TSQLEngineAbstract; AMemo:TSynEdit);
 var
   V: TSQLCommandAbstract;
   V1: TObject;
+  VS:TSQLCommandSelect;
   S1: String;
+  T: TTableItem;
 begin
   Memo1.Text:='';
   V:=GetNextSQLCommand(AMemo.Text, ASQLEngine, CheckBox1.Checked);
@@ -194,6 +196,16 @@ begin
       V1.Free;
     end;
     Memo1.Lines.Add('Type: ' + V.ClassName);
+
+    if V is TSQLCommandSelect then
+    begin
+      VS:=TSQLCommandSelect(V);
+      Memo1.Lines.Add('Tables: %d', [VS.Tables.Count]);
+      for T in VS.Tables do
+      begin
+        Memo1.Lines.Add('Table: %s; Alias: %s; IsVirtual: %s', [T.FullName, T.TableAlias, BoolToStr(T.TableType = stitVirtualTable, true)]);
+      end;
+    end;
     V.Free;
   end
   else

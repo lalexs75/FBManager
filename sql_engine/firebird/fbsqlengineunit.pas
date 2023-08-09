@@ -608,6 +608,8 @@ type
     FBQuery:TFBDataSet;
     FFBTransaction: TUIBTransaction;
   protected
+    procedure SetReadOnly(AValue: Boolean); override;
+    function GetReadOnly: Boolean; override;
     procedure SetParamValues;override;
     function GetDataSet: TDataSet;override;
     function GetQueryPlan: string;override;
@@ -3525,6 +3527,17 @@ begin
 end;
 
 { TFBQueryControl }
+
+procedure TFBQueryControl.SetReadOnly(AValue: Boolean);
+begin
+ { #todo -oalexs : Доработаем после доработки датасета }
+end;
+
+function TFBQueryControl.GetReadOnly: Boolean;
+begin
+  { #todo -oalexs : Упираемся в сам датасет }
+  Result:=true; //FBQuery.;
+end;
 
 procedure TFBQueryControl.SetParamValues;
 var

@@ -775,11 +775,14 @@ type
   TSQLQueryControl = class
   private
     FOwner:TSQLEngineAbstract;
+    FReadOnly: Boolean;
     function GetActive: boolean;
   protected
     FParams:TParams;
     procedure SetParamValues;virtual;
     procedure SetActive(const AValue: boolean);virtual;
+    procedure SetReadOnly(AValue: Boolean); virtual; abstract;
+    function GetReadOnly: Boolean; virtual; abstract;
     function GetDataSet: TDataSet;virtual; abstract;
     function GetQueryPlan: string;virtual; abstract;
     function GetQuerySQL: string;virtual; abstract;
@@ -802,6 +805,7 @@ type
     property DataSet:TDataSet read GetDataSet;
     property Owner:TSQLEngineAbstract read FOwner;
     property Active:boolean read GetActive write SetActive;
+    property ReadOnly:Boolean read GetReadOnly write SetReadOnly;
     property QueryPlan:string read GetQueryPlan;
     property QuerySQL:string read GetQuerySQL write SetQuerySQL;
     property ParamCount:integer read GetParamCount;
