@@ -801,6 +801,7 @@ type
     procedure ExecSQL;virtual; abstract;
     function ParseException(E:Exception; out X, Y:integer; out AMsg:string):boolean;virtual;
     function LoadStatistic(out StatRec:TQueryStatRecord; const SQLCommand:TSQLCommandAbstract):boolean;virtual;
+    procedure CheckQueryEditability(ASQLCommand:TSQLCommandAbstractSelect);
 
     property DataSet:TDataSet read GetDataSet;
     property Owner:TSQLEngineAbstract read FOwner;
@@ -3091,6 +3092,40 @@ function TSQLQueryControl.LoadStatistic(out StatRec: TQueryStatRecord;
 begin
   Result:=false;
   FillChar(StatRec, SizeOf(TQueryStatRecord), 0);
+end;
+
+procedure TSQLQueryControl.CheckQueryEditability(
+  ASQLCommand: TSQLCommandAbstractSelect);
+var
+  R: Boolean;
+  T: TTableItem;
+  D: TDBObject;
+  DT: TDBTableObject;
+begin
+  R:=false;
+  if not Assigned(ASQLCommand) then Exit;
+  if ASQLCommand.Tables.Count = 1 then
+  begin
+    T:=ASQLCommand.Tables[0];
+    if T.TableType = stitTable then
+    begin
+      D:=FOwner.DBObjectByName(T.FullName);
+      if Assigned(D) and (D is TDBTableObject) then
+      begin
+        DT:=TDBTableObject(D);
+        DT.RefreshFieldList;
+        DT.RefreshConstraintPrimaryKey;
+        //for
+        if Assigned(T.Fields.FindParam('*')) then
+          R:=true
+        else
+        begin
+{          if DT.co
+          DT.Constraint[];}
+        end;
+      end;
+    end
+  end
 end;
 
 { TDBDataSetObject }
