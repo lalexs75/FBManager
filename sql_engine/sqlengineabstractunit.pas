@@ -630,6 +630,7 @@ type
     function GetExistsPrimaryKey: Boolean;
     function GetIsLoadedFK: Boolean; inline;
     function GetIsLoadedPK: Boolean;
+    function GetPrimaryKeyConstraint: TPrimaryKeyRecord;
   protected
     FFKListLoaded:boolean;
     FPKListLoaded:boolean;
@@ -665,6 +666,7 @@ type
     property IsLoadedFK:Boolean read GetIsLoadedFK;
     property IsLoadedPK:Boolean read GetIsLoadedPK;
     property ExistsPrimaryKey:Boolean read GetExistsPrimaryKey;
+    property PrimaryKeyConstraint:TPrimaryKeyRecord read GetPrimaryKeyConstraint;
   end;
 
   { TDBTriggerObject }
@@ -2865,6 +2867,19 @@ begin
   Result:=csfLoadedPK in FCashedState;
 end;
 
+function TDBTableObject.GetPrimaryKeyConstraint: TPrimaryKeyRecord;
+var
+  i: Integer;
+begin
+  Result:=nil;
+  if not IsLoadedPK then
+    RefreshConstraintPrimaryKey;
+
+  for i:=0 to FConstraintList.Count-1 do
+    if TPrimaryKeyRecord(FConstraintList[i]).ConstraintType = ctPrimaryKey then
+      Exit(TPrimaryKeyRecord(FConstraintList[i]));
+end;
+
 procedure TDBTableObject.ClearConstraintList(AConstraintType: TConstraintType);
 var
   I:integer;
@@ -3101,6 +3116,8 @@ var
   T: TTableItem;
   D: TDBObject;
   DT: TDBTableObject;
+  PK: TPrimaryKeyRecord;
+  F: TSQLParserField;
 begin
   R:=false;
   if not Assigned(ASQLCommand) then Exit;
@@ -3120,8 +3137,19 @@ begin
           R:=true
         else
         begin
-{          if DT.co
-          DT.Constraint[];}
+          PK:=DT.PrimaryKeyConstraint;
+          if Assigned(PK) then
+          begin
+            R:=true;
+            for F in PK.FieldListArr do
+            begin
+              if not Assigned(T.Fields.FindParam(F.Caption)) then
+              begin
+                R:=false;
+                Break;
+              end;
+            end;
+          end;
         end;
       end;
     end
