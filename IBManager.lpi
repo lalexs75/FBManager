@@ -1962,11 +1962,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EZSQLException"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
