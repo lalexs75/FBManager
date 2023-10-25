@@ -17,7 +17,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <TopLine Value="191"/>
         <CursorPos X="137" Y="206"/>
         <UsageCount Value="200"/>
@@ -55,7 +54,7 @@
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="154"/>
         <CursorPos X="35" Y="171"/>
         <UsageCount Value="200"/>
@@ -78,9 +77,9 @@
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="759"/>
-        <CursorPos X="3" Y="769"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="1466"/>
+        <CursorPos X="9" Y="1493"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -98,10 +97,11 @@
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FBSQLEngineUnit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4540"/>
-        <CursorPos X="70" Y="4560"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="4600"/>
+        <CursorPos X="59" Y="4632"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_objects/sqlparserconsts.pas"/>
@@ -115,10 +115,11 @@
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4444"/>
-        <CursorPos X="33" Y="4466"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="986"/>
+        <CursorPos X="44" Y="997"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbkeywordsunit.pas"/>
@@ -133,14 +134,15 @@
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fb_SqlParserUnit"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="7879"/>
-        <CursorPos Y="7896"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="5496"/>
+        <CursorPos Y="5505"/>
         <UsageCount Value="200"/>
         <Bookmarks Count="3">
-          <Item0 X="3" Y="6415" ID="3"/>
-          <Item1 X="8" Y="6966" ID="2"/>
-          <Item2 X="6" Y="7122" ID="1"/>
+          <Item0 X="3" Y="6477" ID="3"/>
+          <Item1 X="8" Y="7028" ID="2"/>
+          <Item2 X="6" Y="7184" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
       </Unit>
@@ -561,123 +563,123 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7734" Column="8" TopLine="7716"/>
+        <Caret Line="5502" Column="3" TopLine="5498"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7951" TopLine="7934"/>
+        <Caret Line="685" Column="15" TopLine="669"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7993" Column="22" TopLine="7980"/>
+        <Caret Line="5502" Column="3" TopLine="5498"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="279" Column="15" TopLine="262"/>
+        <Caret Line="697" Column="15" TopLine="669"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7947" Column="3" TopLine="7941"/>
+        <Caret Line="722" Column="16" TopLine="704"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="278" Column="15" TopLine="262"/>
+        <Caret Line="5502" Column="3" TopLine="5498"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7896" Column="3" TopLine="7891"/>
+        <Caret Line="720" Column="19" TopLine="704"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="278" Column="15" TopLine="261"/>
+        <Caret Line="724" Column="15" TopLine="706"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7896" TopLine="7890"/>
+        <Caret Line="5484" Column="18" TopLine="5484"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7897" TopLine="7890"/>
+        <Caret Line="685" Column="15" TopLine="674"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7932" TopLine="7916"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3281" TopLine="3265"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3356" TopLine="3340"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="1074" TopLine="1058"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="187" Column="15" TopLine="171"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3348" Column="3" TopLine="3328"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3263" Column="40" TopLine="3246"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="958" Column="32" TopLine="941"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3782" Column="3" TopLine="3777"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="1001" Column="14" TopLine="968"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="1074" TopLine="1058"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="187" Column="15" TopLine="171"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="3348" Column="3" TopLine="3328"/>
+        <Caret Line="5545" TopLine="5538"/>
       </Position>
       <Position>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Caret Line="7896" TopLine="7879"/>
+        <Caret Line="724" Column="15" TopLine="701"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="158" Column="21" TopLine="126"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5504" Column="47" TopLine="5500"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="207" Column="3" TopLine="190"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="715" Column="15" TopLine="708"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="201" Column="32" TopLine="177"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5490" TopLine="5483"/>
       </Position>
       <Position>
-        <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <Caret Line="790" Column="3" TopLine="786"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="725" Column="15" TopLine="699"/>
       </Position>
       <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="206" Column="62" TopLine="191"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5536" TopLine="5518"/>
       </Position>
       <Position>
-        <Filename Value="../../sql_objects/sqlobjects.pas"/>
-        <Caret Line="400" Column="14" TopLine="386"/>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="728" Column="15" TopLine="710"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5540" Column="3" TopLine="5538"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="717" Column="17" TopLine="713"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5496" TopLine="5491"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="728" Column="17" TopLine="701"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5541" Column="21" TopLine="5538"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5448" TopLine="5440"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="687" Column="15" TopLine="674"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5572" TopLine="5567"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="726" Column="15" TopLine="703"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="5535" Column="3" TopLine="5532"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
+        <Caret Line="725" Column="15" TopLine="710"/>
+      </Position>
+      <Position>
+        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
+        <Caret Line="4632" Column="59" TopLine="4600"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -706,14 +708,14 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Line Value="7677"/>
+        <Line Value="7739"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <Line Value="7643"/>
+        <Line Value="7705"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>

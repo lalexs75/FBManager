@@ -717,6 +717,17 @@ type
     constructor Create(AParent:TSQLCommandAbstract);override;
   end;
 
+  { TFBSQLCreateUser }
+
+  TFBSQLCreateUser = class(TSQLCreateLogin)
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+  end;
+
   { TFBSQLCommentOn }
 
   TFBSQLCommentOn = class(TSQLCommentOn)
@@ -5482,6 +5493,57 @@ constructor TFBSQLDropRole.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   ObjectKind:=okRole;
+end;
+
+{ TFBSQLCreateUser }
+
+procedure TFBSQLCreateUser.InitParserTree;
+var
+  FSQLTokens, T: TSQLTokenRecord;
+begin
+  inherited InitParserTree;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okUser);
+  T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
+  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  {
+  CREATE USER username
+  <user_option> [<user_option> ...]
+  [TAGS (<user_var> [, <user_var> ...]]
+  <user_option> ::=
+  PASSWORD 'password'
+  | FIRSTNAME 'firstname'
+  | MIDDLENAME 'middlename'
+  | LASTNAME 'lastname'
+  | {GRANT | REVOKE} ADMIN ROLE
+  | {ACTIVE | INACTIVE}
+  | USING PLUGIN plugin_name
+  <user_var> ::=
+  tag_name = 'tag_value'
+  | DROP tag_name  }
+end;
+
+procedure TFBSQLCreateUser.MakeSQL;
+begin
+  inherited MakeSQL;
+  AddSQLCommandEx('CREATE USER %s', [FullName]);
+  if Description <> '' then
+    DescribeObject;
+end;
+
+procedure TFBSQLCreateUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; const AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+  end;
+end;
+
+constructor TFBSQLCreateUser.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+  ObjectKind:=okUser;
 end;
 
 { TFBSQLCreateRole }

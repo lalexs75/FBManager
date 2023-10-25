@@ -4628,6 +4628,8 @@ FILTER
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateRole, 'CREATE ROLE');           //CREATE ROLE
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLAlterRole, 'ALTER ROLE');
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLDropRole, 'DROP ROLE');               //DROP ROLE
+  //USER
+  RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateUser, 'CREATE USER');           //CREATE USER
 
   //EXTERNAL FUNCTION
   RegisterSQLStatment(TSQLEngineFireBird, TFBSQLCreateUDF, 'DECLARE EXTERNAL FUNCTION');   //DECLARE EXTERNAL FUNCTION
