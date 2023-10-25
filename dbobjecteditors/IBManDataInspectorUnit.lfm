@@ -1,23 +1,24 @@
 object fbManDataInpectorForm: TfbManDataInpectorForm
-  Left = 334
-  Height = 842
-  Top = 21
-  Width = 287
+  Left = 331
+  Height = 886
+  Top = 73
+  Width = 430
   ActiveControl = Pagecontrol1
   Caption = 'DB Inspector'
-  ClientHeight = 842
-  ClientWidth = 287
-  OnClose = IBManDataInpectorFormClose
-  OnCreate = IBManDataInpectorFormCreate
-  OnDestroy = IBManDataInpectorFormDestroy
+  ClientHeight = 886
+  ClientWidth = 430
+  DesignTimePPI = 144
   SessionProperties = 'Top;Width;Left;Height'
   ShowHint = True
   LCLVersion = '3.99.0.0'
+  OnClose = IBManDataInpectorFormClose
+  OnCreate = IBManDataInpectorFormCreate
+  OnDestroy = IBManDataInpectorFormDestroy
   object Pagecontrol1: TPageControl
     Left = 0
-    Height = 842
+    Height = 886
     Top = 0
-    Width = 287
+    Width = 430
     ActivePage = Tabsheet1
     Align = alClient
     ParentFont = False
@@ -25,14 +26,14 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     TabOrder = 0
     object Tabsheet1: TTabSheet
       Caption = 'Databases'
-      ClientHeight = 811
-      ClientWidth = 277
+      ClientHeight = 852
+      ClientWidth = 422
       ParentFont = False
       object TreeView1: TTreeView
         Left = 0
-        Height = 651
-        Top = 43
-        Width = 277
+        Height = 627
+        Top = 49
+        Width = 422
         Align = alClient
         DragMode = dmAutomatic
         ExpandSignType = tvestPlusMinus
@@ -44,15 +45,6 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         ReadOnly = True
         RightClickSelect = True
         TabOrder = 0
-        OnChange = TreeView1Change
-        OnClick = TreeView1Click
-        OnCustomDrawItem = TreeView1CustomDrawItem
-        OnDblClick = objShowExecute
-        OnDragDrop = TreeView1DragDrop
-        OnDragOver = TreeView1DragOver
-        OnExpanding = TreeView1Expanding
-        OnMouseMove = TreeView1MouseMove
-        OnSelectionChanged = TreeView1SelectionChanged
         Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
         Items.Data = {
           F9FFFFFF020002000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF020000000000
@@ -65,12 +57,21 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           B5D0BDD18232
         }
         TreeLinePenStyle = psSolid
+        OnChange = TreeView1Change
+        OnClick = TreeView1Click
+        OnCustomDrawItem = TreeView1CustomDrawItem
+        OnDblClick = objShowExecute
+        OnDragDrop = TreeView1DragDrop
+        OnDragOver = TreeView1DragOver
+        OnExpanding = TreeView1Expanding
+        OnMouseMove = TreeView1MouseMove
+        OnSelectionChanged = TreeView1SelectionChanged
       end
       object LB_SQLAssistent: TListBox
         Left = 0
-        Height = 112
-        Top = 699
-        Width = 277
+        Height = 168
+        Top = 684
+        Width = 422
         Align = alBottom
         ClickOnSelChange = False
         DragMode = dmAutomatic
@@ -80,27 +81,26 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         PopupMenu = PopupMenu2
         ScrollWidth = 273
         TabOrder = 1
-        TopIndex = -1
       end
       object Splitter1: TSplitter
         Cursor = crVSplit
         Left = 0
-        Height = 5
-        Top = 694
-        Width = 277
+        Height = 8
+        Top = 676
+        Width = 422
         Align = alBottom
         Anchors = [akLeft, akBottom]
         ResizeAnchor = akBottom
       end
       object Panel1: TPanel
         Left = 0
-        Height = 43
+        Height = 49
         Top = 0
-        Width = 277
+        Width = 422
         Align = alTop
         AutoSize = True
-        ClientHeight = 43
-        ClientWidth = 277
+        ClientHeight = 49
+        ClientWidth = 422
         ParentFont = False
         TabOrder = 3
         object TreeFilterEdit1: TTreeFilterEdit
@@ -109,13 +109,13 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideTop.Control = Panel1
           AnchorSideRight.Control = Panel1
           AnchorSideRight.Side = asrBottom
-          Left = 40
+          Left = 52
           Height = 29
-          Top = 7
-          Width = 230
-          ButtonWidth = 23
+          Top = 10
+          Width = 360
+          ButtonWidth = 34
           Anchors = [akTop, akLeft, akRight]
-          BorderSpacing.Around = 6
+          BorderSpacing.Around = 9
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
@@ -128,12 +128,12 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideLeft.Control = Panel1
           AnchorSideBottom.Control = TreeFilterEdit1
           AnchorSideBottom.Side = asrBottom
-          Left = 7
-          Height = 17
-          Top = 19
-          Width = 27
+          Left = 10
+          Height = 21
+          Top = 18
+          Width = 33
           Anchors = [akLeft, akBottom]
-          BorderSpacing.Left = 6
+          BorderSpacing.Left = 9
           Caption = 'Find'
           ParentColor = False
           ParentFont = False
@@ -142,47 +142,45 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     end
     object Tabsheet2: TTabSheet
       Caption = 'Windows'
-      ClientHeight = 811
-      ClientWidth = 277
+      ClientHeight = 852
+      ClientWidth = 422
       ParentFont = False
       object listWindows: TListBox
         Left = 0
-        Height = 811
+        Height = 852
         Top = 0
-        Width = 277
+        Width = 422
         Align = alClient
         ItemHeight = 0
-        OnClick = listWindowsClick
         ParentFont = False
         ScrollWidth = 266
         TabOrder = 0
-        TopIndex = -1
+        OnClick = listWindowsClick
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Recent'
-      ClientHeight = 811
-      ClientWidth = 277
+      ClientHeight = 852
+      ClientWidth = 422
       ParentFont = False
       object ListBox1: TListBox
         Left = 0
-        Height = 811
+        Height = 852
         Top = 0
-        Width = 277
+        Width = 422
         Align = alClient
         ItemHeight = 0
-        OnDblClick = ListBox1DblClick
         ParentFont = False
         ScrollWidth = 266
         TabOrder = 0
-        TopIndex = -1
+        OnDblClick = ListBox1DblClick
       end
     end
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
-    Left = 169
-    Top = 128
+    Left = 254
+    Top = 192
     object dbRegister: TAction
       Category = 'Database'
       Caption = 'Register DB'
@@ -243,8 +241,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     object miskShowAssitent: TAction
       Category = 'Misk'
       Caption = 'Show SQL assistent'
-      OnExecute = miskShowAssitentExecute
       ShortCut = 16449
+      OnExecute = miskShowAssitentExecute
     end
     object objGoDomains: TAction
       Category = 'Objects'
@@ -332,8 +330,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 121
-    Top = 128
+    Left = 182
+    Top = 192
     object MenuItem10: TMenuItem
       Action = objShow
       OnClick = objShowExecute
@@ -467,8 +465,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   end
   object PopupMenu2: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 81
-    Top = 742
+    Left = 122
+    Top = 1113
     object MenuItem30: TMenuItem
       Action = saCopyLine
       OnClick = saCopyLineExecute
@@ -488,7 +486,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   object RxIniPropStorage1: TRxIniPropStorage
     StoredValues = <>
     SeparateFiles = True
-    Left = 112
-    Top = 320
+    Left = 168
+    Top = 480
   end
 end

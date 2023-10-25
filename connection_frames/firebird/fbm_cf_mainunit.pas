@@ -83,7 +83,7 @@ type
   end;
 
 implementation
-uses rxAppUtils, rxlogging, fbmStrConstUnit, IBManDataInspectorUnit,
+uses rxAppUtils, rxlogging, StrUtils, fbmStrConstUnit, IBManDataInspectorUnit,
   ibmanagertypesunit, SQLEngineCommonTypesUnit, fbmToolsUnit, Clipbrd, fb_utils;
 
 {$R *.lfm}
@@ -91,7 +91,23 @@ uses rxAppUtils, rxlogging, fbmStrConstUnit, IBManDataInspectorUnit,
 { TfbmCFMainFrame }
 
 procedure TfbmCFMainFrame.edtDBNameExit(Sender: TObject);
+var
+  S, sServName: string;
+  L: Integer;
 begin
+  S:=edtDBName.Text;
+  L:=Pos(':', S);
+  if L>0 then
+  begin
+    sServName:=Copy2SymbDel(S, ':');
+    if sServName<>'' then
+    begin
+      edtDBName.Text:=S;
+      cbServerName.Text:=sServName;
+      cbProtocol.ItemIndex:=1;
+      cbProtocolChange(nil);
+    end;
+  end;
   if edtAliasName.Text = '' then
     edtAliasName.Text:=Format(sAliasOfDB, [edtDBName.Text]);
 end;
