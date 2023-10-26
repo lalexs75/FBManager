@@ -669,6 +669,7 @@ type
     procedure LoadDBParams;
     procedure OnUIBSqlParse(Sender: TObject; NodeType: TSQLStatement; const Statement: string);
     //procedure SetLibraryName(AValue: TFileName);
+    procedure FillFieldTypeCodes;
   protected
     function GetImageIndex: integer;override;
 
@@ -858,7 +859,8 @@ begin
       Item.FieldTypeDomain:=Trim(IBQ.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
       Item.FieldSQLTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_TYPE'];
       Item.FieldSQLSubTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_SUB_TYPE'];
-      Item.FieldTypeName:=FB_SqlTypesToString(Item.FieldSQLTypeInt,  Item.FieldSQLSubTypeInt);
+      OwnerDB.TypeList.FindTypeByID(Item.FieldSQLTypeInt);//,  Item.FieldSQLSubTypeInt);
+      //Item.FieldTypeName:=FB_SqlTypesToString(Item.FieldSQLTypeInt,  Item.FieldSQLSubTypeInt);
       Item.FieldSize:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_PRECISION'];
       Item.FieldPrec:= - IBQ.Fields.ByNameAsInteger['RDB$FIELD_SCALE'];
 
@@ -1436,6 +1438,36 @@ begin
       abort;
 end;
 
+procedure TSQLEngineFireBird.FillFieldTypeCodes;
+var
+  Q: TUIBQuery;
+  S, S1: String;
+  P:TDBMSFieldTypeRecord;
+begin
+  Q:=GetUIBQuery(fbSqlModule.sDomainsSQL['sqlTypesList']);
+  Q.Open;
+  while not Q.Eof do
+  begin
+    S:=Q.Fields.ByNameAsString['RDB$TYPE_NAME'];
+    S1:=LowerCase(S);
+    P:=FTypeList.FindType(S1);
+    if not Assigned(P) then
+    begin
+      P:=FTypeList.Add(
+        S,
+        Q.Fields.ByNameAsInteger['RDB$TYPE'],
+        false,
+        false,
+        ftUnknown,
+        '',
+        '',
+        tgUserDefinedTypes);
+    end;
+    Q.Next;
+  end;
+  Q.Free;
+end;
+
 (*
 procedure TSQLEngineFireBird.SetLibraryName(AValue: TFileName);
 begin
@@ -1475,9 +1507,8 @@ begin
     FBDatabase.Connected:=true;
     FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
     FBTransaction.StartTransaction;
-//    FCharSetList:=BuildCharSetList(GetUIBQuery(''));
     LoadDBParams;
-    //InitKeywords;
+    FillFieldTypeCodes;
   end;
 
   //inherited SetConnected(AValue);
@@ -1653,7 +1684,7 @@ end;
 
 procedure TSQLEngineFireBird.RefreshObjectsBeginFull;
 begin
-  RefreshObjectsBegin(fbSqlModule.sqlDomains.Strings.Text, false);
+  RefreshObjectsBegin(fbSqlModule.sDomainsSQL['sqlDomains'], false);
   RefreshObjectsBegin(fbSqlModule.ssqlSelectTables.Strings.Text, false);
   if ServerVersion in [gds_verFirebird3_0] then
   begin
@@ -1663,7 +1694,7 @@ end;
 
 procedure TSQLEngineFireBird.RefreshObjectsEndFull;
 begin
-  RefreshObjectsEnd(fbSqlModule.sqlDomains.Strings.Text);
+  RefreshObjectsEnd(fbSqlModule.sDomainsSQL['sqlDomains']);
   RefreshObjectsEnd(fbSqlModule.ssqlSelectTables.Strings.Text);
   if ServerVersion in [gds_verFirebird3_0] then
   begin
@@ -1916,7 +1947,7 @@ end;
 
 function TDomainsRoot.DBMSObjectsList: string;
 begin
-  Result:=fbSqlModule.sqlDomains.Strings.Text;
+  Result:=fbSqlModule.sDomainsSQL['sqlDomains'];
 end;
 
 function TDomainsRoot.DBMSValidObject(AItem: TDBItem): boolean;
@@ -2276,6 +2307,7 @@ var
   I:integer;
   Rec:TFirebirdField;
   S:string;
+  P:TDBMSFieldTypeRecord;
 begin
   if State <> sdboEdit then exit;
   Fields.Clear;
@@ -2300,7 +2332,10 @@ begin
 
       Rec.FieldSQLTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_type'];
       Rec.FieldSQLSubTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_sub_type'];
-      Rec.FieldTypeName:=FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
+      //Rec.FieldTypeName:= FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
+      P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt);
+      if Assigned(P) then
+        Rec.FieldTypeName:=P.TypeName; // FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
       Rec.FieldNotNull:=QFields.Fields.ByNameAsInteger['RDB$NULL_FLAG'] = 1;
 
       if not Assigned(Rec.FieldTypeRecord) then
@@ -3344,6 +3379,7 @@ procedure TFireBirdView.RefreshFieldList;
 var
   QFields:TUIBQuery;
   Rec:TFirebirdField;
+  P:TDBMSFieldTypeRecord;
 begin
   if State <> sdboEdit then exit;
   Fields.Clear;
@@ -3367,7 +3403,10 @@ begin
 
       Rec.SystemField:=Copy(Rec.FieldName, 1, 4) = 'RDB$';
 
-      Rec.FieldTypeName:=FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
+      //Rec.FieldTypeName:=FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
+      P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt);
+      if Assigned(P) then
+        Rec.FieldTypeName:=P.TypeName;
 //    FieldTypeDB:TFieldType;
 //    FieldUNIC:boolean;
 //    FieldPK:boolean;
@@ -3786,6 +3825,7 @@ var
   ServerVersion:TFBServerVersion;
   S:string;
   Item: TDBField;
+  P:TDBMSFieldTypeRecord;
 begin
   inherited RefreshParams;
   ServerVersion:=TSQLEngineFireBird(OwnerDB).FServerVersion;
@@ -3820,7 +3860,10 @@ begin
       Item.FieldSQLTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_TYPE'];
       Item.FieldSQLSubTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_SUB_TYPE'];
 
-      Item.FieldTypeName:=FB_SqlTypesToString(Item.FieldSQLTypeInt,  Item.FieldSQLSubTypeInt);
+      //Item.FieldTypeName:=FB_SqlTypesToString(Item.FieldSQLTypeInt,  Item.FieldSQLSubTypeInt);
+      P:=OwnerDB.TypeList.FindTypeByID(Item.FieldSQLTypeInt);
+      if Assigned(P) then
+        Item.FieldTypeName:=P.TypeName;
 
       Item.FieldSize:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_PRECISION'];
       Item.FieldPrec:= - IBQ.Fields.ByNameAsInteger['RDB$FIELD_SCALE'];

@@ -27,6 +27,65 @@ interface
 uses
   Classes, SysUtils, ExtCtrls, uib, SQLEngineCommonTypesUnit, uiblib;
 
+const
+  //#define dtype_unknown	0
+  dtype_unknown = 0;
+  //#define dtype_text		1
+  dtype_text = 1;
+  //#define dtype_cstring	2
+  dtype_cstring = 2;
+  //#define dtype_varying	3
+  dtype_varying = 3;
+  //
+  //#define dtype_packed	6
+  dtype_packed = 6;
+  //#define dtype_byte		7
+  dtype_byte = 7;
+  //#define dtype_short		8
+  dtype_short = 8;
+  //#define dtype_long		9
+  dtype_long = 9;
+  //#define dtype_quad		10
+  dtype_quad = 10;
+  //#define dtype_real		11
+  dtype_real = 11;
+  //#define dtype_double	12
+  dtype_double = 12;
+  //#define dtype_d_float	13
+  dtype_d_float = 13;
+  //#define dtype_sql_date	14
+  dtype_sql_date = 14;
+  //#define dtype_sql_time	15
+  dtype_sql_time = 15;
+  //#define dtype_timestamp	16
+  dtype_timestamp = 16;
+  //#define dtype_blob		17
+  dtype_blob = 17;
+  //#define dtype_array		18
+  dtype_array = 18;
+  //#define dtype_int64		19
+  dtype_int64 = 19;
+  //#define dtype_dbkey		20
+  dtype_dbkey = 20;
+  //#define dtype_boolean	21
+  dtype_boolean = 21;
+  //#define dtype_dec64		22
+  dtype_dec64 = 22;
+  //#define dtype_dec128	23
+  dtype_dec128 = 23;
+  //#define dtype_int128	24
+  dtype_int128 = 24;
+  //#define dtype_sql_time_tz	25
+  dtype_sql_time_tz = 25;
+  //#define dtype_timestamp_tz	26
+  dtype_timestamp_tz = 26;
+  //#define dtype_ex_time_tz	27
+  dtype_ex_time_tz = 27;
+  //#define dtype_ex_timestamp_tz	28
+  dtype_ex_timestamp_tz = 28;
+  //#define DTYPE_TYPE_MAX	29
+  DTYPE_TYPE_MAX = 29;
+
 type
 
   TUdfRetyrnType = ( urtByValue, urtByReference, urtByDescriptor);
@@ -86,7 +145,7 @@ type
 
 
 
-function FB_SqlTypesToString(FBSqlType, FBSqlSubType:integer):string;
+//function FB_SqlTypesToString(FBSqlType, FBSqlSubType:integer):string;
 function StrToFBServersVersion(const S: string):TFBServerVersion;
 procedure FillStrServersVer(const S: TStrings);
 
@@ -113,7 +172,7 @@ const
 procedure SetTranStrings(const AItems:TStrings);
 function GetDefaultFB3Lib:string;
 implementation
-uses uibase, fbmStrConstUnit, db, rxlogging;
+uses uibase, fbmStrConstUnit, db;
 
 function StrToFBServersVersion(const S: string): TFBServerVersion;
 var
@@ -235,29 +294,6 @@ begin
   {$ENDIF}
 end;
 
-{
-function CreateFieldTypeStr(ATypeID: TdbmsFieldType; ASize, APrec: integer
-  ): string;
-begin
-  if ATypeID = fftNumeric then
-    Result:=Format('%s(%d,%d)', [FBFieldTypes[ATypeID], ASize, APrec])
-  else
-  if ATypeID in dbmsFieldTypesCharacter then
-    Result:=Format('%s(%d)', [FBFieldTypes[ATypeID],ASize])
-  else
-    Result:=FBFieldTypes[ATypeID];
-end;
-
-procedure FillFieldTypeStr(const S: TStrings);
-var
-  i:TdbmsFieldType;
-begin
-  S.Clear;
-  for i:= succ(Low(TdbmsFieldType)) to High(TdbmsFieldType) do
-    S.Add(FBFieldTypes[i]);
-end;
-}
-
 resourcestring
   sDescBIGINT = '8-byte integer type';
   sDescVARCHAR = 'Variable-length data with a maximum of 32,765 characters.';
@@ -276,6 +312,7 @@ resourcestring
   sDescBLOBID = '';
   sDescARRAY = '';
   sDescBOOLEAN = '';
+
 
 procedure FillFieldTypes(Items: TDBMSFieldTypeList);
 begin
@@ -297,7 +334,7 @@ begin
   Items.Add('ARRAY',              0, false, false, ftUnknown,  '', sDescARRAY, tgArrays);
   Items.Add('BOOLEAN',          023, false, false, ftBoolean,  '', sDescBOOLEAN, tgBooleanTypes);
 end;
-
+{
 type
   TdbmsFieldType = (fftUnKnown, fftNumeric, fftChar, fftVarchar, fftCstring, fftSmallint,
     fftInteger, fftQuad, fftFloat, fftDoublePrecision, fftTimestamp, fftBlob, fftBlobId,
@@ -326,6 +363,7 @@ begin
     261:Result:=fftBlob;
   else
     Result:=fftUnKnown;
+    raise Exception.CreateFmt('Unknow data type %d %d', [FBSqlType, FBSqlSubType]);
   end;
 end;
 
@@ -339,6 +377,7 @@ function FB_SqlTypesToString(FBSqlType, FBSqlSubType: integer): string;
 begin
   Result:=FBFieldTypes[FB_SqlTypeToFBType(FBSqlType, FBSqlSubType)];
 end;
+}
 
 procedure FillUdfReturnStr(const S: TStrings);
 var

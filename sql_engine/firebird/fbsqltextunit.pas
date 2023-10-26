@@ -37,6 +37,7 @@ type
     fbtPackageBody: TStrHolder;
     fbtPackageLazy: TStrHolder;
     fbtPackageBodyLazy: TStrHolder;
+    sDomainsSQL: TRxTextHolder;
     sGenerators: TRxTextHolder;
     sFBStatistic: TRxTextHolder;
     sFBIndexSegs: TStrHolder;
@@ -65,7 +66,6 @@ type
     sFBRoles: TStrHolder;
     sPackages: TStrHolder;
     sFunctions: TStrHolder;
-    sqlDomains: TStrHolder;
     sFunctionArgs: TStrHolder;
     fbtFunction: TStrHolder;
     ssqlDependOnField: TStrHolder;

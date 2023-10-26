@@ -1961,10 +1961,15 @@
         </Win32>
       </Options>
     </Linking>
-    <Other>
-      <ConfigFile>
-        <WriteConfigFilePath Value="$(ProjOutDir)/fpclaz.cfg"/>
-      </ConfigFile>
-    </Other>
   </CompilerOptions>
+  <Debugging>
+    <Exceptions>
+      <Item>
+        <Name Value="Exception"/>
+      </Item>
+      <Item>
+        <Name Value="EUIBError"/>
+      </Item>
+    </Exceptions>
+  </Debugging>
 </CONFIG>

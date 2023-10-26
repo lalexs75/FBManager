@@ -30,14 +30,10 @@ uses
 const
   CountKeyWords      = 266;
   CountKeyFunctions  = 82;
-  CountKeyTypes      = 13;
+  CountKeyTypes      = 14;
 
 
 type
-{  TKeywordRecord = record
-    Key:string;
-  end;}
-
   TKeywordRecords = array [0..CountKeyWords-1] of TKeyWordRecord;
   TKeyFunctionRecords = array [0..CountKeyFunctions-1] of TKeywordRecord;
   TKeyTypesRecords = array [0..CountKeyTypes-1] of TKeywordRecord;
@@ -62,7 +58,8 @@ const
      (Key:'smallint'; SQLToken:stNone),
      (Key:'time'; SQLToken:stNone),
      (Key:'timestamp'; SQLToken:stNone),
-     (Key:'varchar'; SQLToken:stNone)
+     (Key:'varchar'; SQLToken:stNone),
+     (Key:'boolean'; SQLToken:stNone)
     );
 
 const

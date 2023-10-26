@@ -490,25 +490,6 @@ object fbSqlTextData: TfbSqlTextData
       '202020205244422446554e4354494f4e532e5244422446554e4354494f4e5f4e414d45203d203a46554e4354494f4e5f4e414d45'
     )
   end
-  object sqlDomains: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 123
-    Top = 88
-    StrData = (
-      ''
-      '73656c656374'
-      '2020524442244649454c44532e524442244649454c445f4e414d452c'
-      '2020524442244649454c44532e524442244445534352495054494f4e2c'
-      '2020524442244649454c44532e5244422453595354454d5f464c41472061732053595354454d5f464c4147'
-      '66726f6d'
-      '2020524442244649454c4453'
-      '7768657265'
-      '2020524442244649454c44532e524442244649454c445f4e414d45206e6f74206c696b652027524442242527'
-      '6f72646572206279'
-      '2020524442244649454c44532e524442244649454c445f4e414d45'
-    )
-  end
   object sFunctionArgs: TStrHolder
     Capacity = 64
     Macros = <>
@@ -726,5 +707,44 @@ object fbSqlTextData: TfbSqlTextData
       end>
     Left = 40
     Top = 144
+  end
+  object sDomainsSQL: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sqlDomains'
+        Lines.Strings = (
+          'select'
+          '  RDB$FIELDS.RDB$FIELD_NAME,'
+          '  RDB$FIELDS.RDB$DESCRIPTION,'
+          '  RDB$FIELDS.RDB$SYSTEM_FLAG as SYSTEM_FLAG'
+          'from'
+          '  RDB$FIELDS'
+          'where'
+          '  RDB$FIELDS.RDB$FIELD_NAME not like ''RDB$%'''
+          'order by'
+          '  RDB$FIELDS.RDB$FIELD_NAME'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'sqlTypesList'
+        Lines.Strings = (
+          'select'
+          '  RDB$TYPES.RDB$FIELD_NAME,'
+          '  RDB$TYPES.RDB$TYPE,'
+          '  RDB$TYPES.RDB$TYPE_NAME'
+          'from'
+          '  RDB$TYPES'
+          'where'
+          '    RDB$TYPES.RDB$FIELD_NAME = ''RDB$FIELD_TYPE'''
+          '  and'
+          '    RDB$TYPES.RDB$SYSTEM_FLAG = 1'
+          ''
+        )
+      end>
+    Left = 120
+    Top = 88
   end
 end
