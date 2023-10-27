@@ -226,17 +226,6 @@ type
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
-  { TRoleRoot }
-
-  TRoleRoot = class(TDBRootObject)
-  private
-  protected
-    function DBMSObjectsList:string; override;
-  public
-    function GetObjectType: string;override;
-    constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
-  end;
-
   { TPackagesRoot }
 
   TPackagesRoot = class(TDBRootObject)
@@ -531,27 +520,6 @@ type
     property UDFParams[AItem:integer]:TUDFParamsRecord read GetUDFParams;
   end;
 
-  { TFireBirdRole }
-
-  TFireBirdRole = class(TDBUsersGroup)
-  private
-    FOwnerUser: string;
-  protected
-    function InternalGetDDLCreate: string; override;
-  public
-    constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
-    class function DBClassTitle:string;override;
-    procedure RefreshObject; override;
-    procedure RefreshDependencies;override;
-    function SetGrantUsers(AUserName:string; AGrant, WithGrantOpt:boolean):boolean;override;
-    function SetGrantObjects(AObjectName:string; AddGrants, RemoveGrants:TObjectGrants):boolean;override;
-    procedure GetUserList(const UserList:TStrings);override;
-    procedure GetUserRight(GrantedList:TObjectList);override;
-
-    function CreateSQLObject:TSQLCommandDDL;override;
-    property OwnerUser:string read FOwnerUser write FOwnerUser;
-  end;
-
   { TFireBirdPackage }
 
   TFireBirdPackage = class(TDBObject)
@@ -651,7 +619,8 @@ type
     FGeneratorsRoot:TGeneratorsRoot;
     FStoredProcRoot:TStoredProcRoot;
     FExceptionRoot:TExceptionRoot;
-    FRoleRoot:TRoleRoot;
+    //FRoleRoot:TRoleRoot;
+    FFBSecurityRoot:TDBRootObject;
 
     FSystemCatalog:TFBSystemCatalog;
     //FB 3.0
@@ -728,14 +697,14 @@ type
     property StoredProcRoot:TStoredProcRoot read FStoredProcRoot;
     property ExceptionRoot:TExceptionRoot read FExceptionRoot;
 
-    property RoleRoot:TRoleRoot read FRoleRoot;
+    //property RoleRoot:TRoleRoot read FRoleRoot;
     property ViewsRoot:TViewsRoot read FViewsRoot;
     property IndexRoot:TFireBirdIndexRoot read FIndexRoot;
   end;
   
 implementation
 uses ibmsqltextsunit, ibmSqlUtilsUnit, uiblib, rxdbutils, Controls, fbmStrConstUnit, LazUTF8, strutils,
-  fbSqlTextUnit,
+  fbSqlTextUnit, FBSQLEngineSecurityUnit,
   fbmSQLTextCommonUnit         //Общие запросы для всех SQL серверов
   ;
 
@@ -3941,143 +3910,6 @@ end;
 procedure TFireBirdStoredProc.RefreshDependencies;
 begin
   TSQLEngineFireBird(OwnerDB).RefreshDependencies(Self);
-end;
-
-{ TFireBirdRole }
-
-function TFireBirdRole.InternalGetDDLCreate: string;
-var
-  FCmd: TFBSQLCreateRole;
-begin
-  FCmd:=TFBSQLCreateRole.Create(nil);
-  FCmd.Name:=Caption;
-  FCmd.Description:=Description;
-  Result:=FCmd.AsSQL;
-  FCmd.Free;
-end;
-
-constructor TFireBirdRole.Create(const ADBItem: TDBItem;
-  AOwnerRoot: TDBRootObject);
-begin
-  inherited Create(ADBItem, AOwnerRoot);
-  if Assigned(ADBItem) then
-    FOwnerUser:=ADBItem.ObjData;
-end;
-
-procedure TFireBirdRole.RefreshObject;
-var
-  IBQ:TUIBQuery;
-begin
-  inherited RefreshObject;
-  if State <> sdboEdit then exit;
-
-  IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlRoleRefresh);
-  IBQ.Params.ByNameAsString['role_name']:=Caption;
-  try
-    IBQ.Open;
-    FDescription:=TSQLEngineFireBird(OwnerDB).ConvertString20(IBQ.Fields.ByNameAsString['rdb$description'], true);
-  finally
-    IBQ.Free;
-  end;
-end;
-
-procedure TFireBirdRole.RefreshDependencies;
-begin
-  TSQLEngineFireBird(OwnerDB).RefreshDependencies(Self);
-end;
-
-function TFireBirdRole.SetGrantUsers(AUserName:string; AGrant, WithGrantOpt:boolean):boolean;
-var
-  S:string;
-begin
-  if AGrant then
-  begin
-    if WithGrantOpt then
-      S:=Format(ssqlRoleGranrToUserWGR, [UpperCase(Caption), UpperCase(AUserName)])
-    else
-      S:=Format(ssqlRoleGranrToUser, [UpperCase(Caption), UpperCase(AUserName)])
-  end
-  else
-    S:=Format(ssqlRoleGranrFromUser, [UpperCase(Caption), UpperCase(AUserName)]);
-
-  Result:=SQLScriptsExec(S, []);
-end;
-
-function TFireBirdRole.SetGrantObjects(AObjectName: string; AddGrants,
-  RemoveGrants: TObjectGrants): boolean;
-begin
-  Result:=true;
-  { TODO : Заменить на вызов объекта }
-  if (RemoveGrants <> []) then
-  begin
-    if ogExecute in RemoveGrants then
-      Result:=SQLScriptsExec(Format(ssqlRoleGrantFromObjectProc,
-           [ObjectGrantToStr(RemoveGrants, true), AObjectName, Caption]), [])
-    else
-      Result:=SQLScriptsExec(Format(ssqlRoleGrantFromObject,
-           [ObjectGrantToStr(RemoveGrants, true), AObjectName, Caption]), []);
-  end;
-
-  if Result and (AddGrants<>[]) then
-  begin
-    if ogExecute in AddGrants then
-      Result:=SQLScriptsExec(Format(ssqlRoleGrantToObjectProc,
-           [ObjectGrantToStr(AddGrants, true), AObjectName, Caption]), [])
-    else
-      Result:=SQLScriptsExec(Format(ssqlRoleGrantToObject,
-           [ObjectGrantToStr(AddGrants, true), AObjectName, Caption]), []);
-  end;
-end;
-
-procedure TFireBirdRole.GetUserList(const UserList: TStrings);
-var
-  i:integer;
-  UIBSecurity1:TUIBSecurity;
-begin
-  UIBSecurity1:=TUIBSecurity.Create(nil);
-  UIBSecurity1.LibraryName:=TSQLEngineFireBird(OwnerDB).FBDatabase.LibraryName;
-  UIBSecurity1.UserName:=OwnerDB.UserName;
-  UIBSecurity1.PassWord:=OwnerDB.Password;
-  UIBSecurity1.Host:=OwnerDB.ServerName;
-  UIBSecurity1.Protocol:=TSQLEngineFireBird(OwnerDB).Protocol;
-  UserList.Clear;
-  try
-    UIBSecurity1.DisplayUsers;
-    for i:=0 to UIBSecurity1.UserInfoCount -1 do
-      UserList.Add(UIBSecurity1.UserInfo[i].UserName);
-  finally
-    UIBSecurity1.Free;
-  end;
-end;
-
-procedure TFireBirdRole.GetUserRight(GrantedList:TObjectList);
-var
-  Q:TUIBQuery;
-  R:TUserRoleGrant;
-begin
-  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery( fbSqlModule.sSqlGrantForObj.ExpandMacros);
-  Q.Params.ByNameAsString['obj_name']:=Caption;
-  Q.Open;
-  while not Q.Eof do
-  begin
-    R:=TUserRoleGrant.Create;
-    GrantedList.Add(R);
-    R.UserName:=Trim(Q.Fields.ByNameAsString['RDB$USER']);
-    R.WithAdmOpt:=Q.Fields.ByNameAsInteger['RDB$GRANT_OPTION'] <> 0;
-    Q.Next;
-  end;
-  Q.Free;
-end;
-
-function TFireBirdRole.CreateSQLObject: TSQLCommandDDL;
-begin
-  Result:=TFBSQLCreateRole.Create(nil);
-  Result.Name:=Caption;
-end;
-
-class function TFireBirdRole.DBClassTitle: string;
-begin
-  Result:='ROLE';
 end;
 
 { TFireBirdUDF }
