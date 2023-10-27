@@ -1185,7 +1185,7 @@ object FBTestSQLData: TFBTestSQLData
     Top = 232
   end
   object sUsers: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'Revoke1'
@@ -1233,6 +1233,66 @@ object FBTestSQLData: TFBTestSQLData
         Caption = 'DropRole1'
         Lines.Strings = (
           'DROP ROLE SELLERS;'
+        )
+      end    
+      item
+        Caption = 'CreateUser1'
+        Lines.Strings = (
+          'CREATE USER "Alex" PASSWORD ''bz23ds'';'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser2'
+        Lines.Strings = (
+          'CREATE USER "ALEX" PASSWORD ''bz23ds'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser3'
+        Lines.Strings = (
+          'CREATE USER Alex PASSWORD ''bz23ds'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser4'
+        Lines.Strings = (
+          'CREATE USER ALEX PASSWORD ''bz23ds'';'
+        )
+      end    
+      item
+        Caption = 'CreateUser5'
+        Lines.Strings = (
+          'CREATE USER bigshot PASSWORD ''buckshot'';'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser6'
+        Lines.Strings = (
+          'CREATE USER godzilla PASSWORD ''robot'' USING PLUGIN Legacy_UserManager;'
+        )
+      end    
+      item
+        Caption = 'CreateUser7'
+        Lines.Strings = (
+          'CREATE USER john PASSWORD ''fYe_3Ksw'' FIRSTNAME ''John'' LASTNAME ''Doe'' TAGS (BIRTHYEAR=''1970'', CITY=''New York'');'
+          ''
+        )
+      end    
+      item
+        Caption = 'CreateUser8'
+        Lines.Strings = (
+          'CREATE USER john PASSWORD ''fYe_3Ksw'' INACTIVE;'
+        )
+      end    
+      item
+        Caption = 'CreateUser9'
+        Lines.Strings = (
+          'CREATE USER superuser PASSWORD ''kMn8Kjh'' GRANT ADMIN ROLE;'
         )
       end>
     Left = 32

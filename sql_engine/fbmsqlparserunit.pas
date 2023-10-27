@@ -37,6 +37,7 @@ type
   TVisibleType = (vtNone, vtGlobal, vtLocal);
 
   TCMDState = (cmsNormal, cmsError, cmsEndOfCmd);
+  TGrantOptions = (goNone, goGrant, goRevoke);
 
   TSQLTokenOption = (toFindWordLast,    //Элемент используется для идентификации SQL запроса в спискедоступных
                      toFirstToken,       //Корень дерева разбора

@@ -53,12 +53,12 @@
         <UnitName Value="FBTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="903"/>
-        <CursorPos X="3" Y="907"/>
+        <TopLine Value="1190"/>
+        <CursorPos X="33" Y="1204"/>
         <UsageCount Value="193"/>
         <Bookmarks Count="2">
-          <Item0 Y="380" ID="1"/>
-          <Item1 X="3" Y="1162" ID="2"/>
+          <Item0 Y="389" ID="1"/>
+          <Item1 X="3" Y="1171" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -110,12 +110,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="MSSQLParserTestCase"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="6434"/>
         <CursorPos X="59" Y="6441"/>
         <UsageCount Value="69"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
@@ -129,11 +127,10 @@
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="365"/>
         <CursorPos X="60" Y="381"/>
         <UsageCount Value="69"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/packages/fcl-fpcunit/src/fpcunit.pp"/>
@@ -168,11 +165,10 @@
       <Unit>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="745"/>
         <CursorPos X="52" Y="766"/>
         <UsageCount Value="15"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -199,11 +195,10 @@
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
         <UnitName Value="FBSQLEngineUnit"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="604"/>
         <CursorPos X="15" Y="602"/>
         <UsageCount Value="15"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fb_charsetutils.pas"/>
@@ -378,72 +373,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <Caret Line="1542" Column="3" TopLine="1539"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <Caret Line="680" Column="15" TopLine="665"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
-        <Caret Line="380" Column="51" TopLine="363"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
-        <Caret Line="987" Column="5" TopLine="979"/>
-      </Position>
-      <Position>
-        <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
-        <Caret Line="381" Column="48" TopLine="365"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="8261" Column="36" TopLine="8230"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1383" Column="26" TopLine="1359"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="8142" Column="10" TopLine="8125"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1087" Column="35" TopLine="1063"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1090" Column="34" TopLine="1066"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6675" Column="21" TopLine="6660"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1046" Column="20" TopLine="1022"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="6444" Column="3" TopLine="6440"/>
-      </Position>
-      <Position>
-        <Filename Value="mssqlparsertestcase.pas"/>
-        <Caret Line="1046" Column="15" TopLine="1032"/>
-      </Position>
+    <JumpHistory HistoryIndex="21">
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="1423" Column="14" TopLine="1419"/>
@@ -494,6 +424,42 @@
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="174" Column="25" TopLine="148"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="916" Column="24" TopLine="903"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1172" Column="33" TopLine="1145"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="264" Column="15" TopLine="245"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1187" Column="3" TopLine="1183"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="268" Column="26" TopLine="250"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1196" Column="3" TopLine="1192"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="264" TopLine="251"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1206" Column="46" TopLine="1187"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="273" Column="26" TopLine="253"/>
       </Position>
     </JumpHistory>
     <RunParams>

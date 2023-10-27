@@ -262,6 +262,15 @@ type
     procedure AlterRole1;
     procedure AlterRole2;
     procedure DropRole;
+    procedure CreateUser1;
+    procedure CreateUser2;
+    procedure CreateUser3;
+    procedure CreateUser4;
+    procedure CreateUser5;
+    procedure CreateUser6;
+    procedure CreateUser7;
+    procedure CreateUser8;
+    procedure CreateUser9;
 
     //DECLARE FILTER
     //DROP FILTER
@@ -1185,6 +1194,51 @@ end;
 procedure TFBSQLParserTest.DropRole;
 begin
   DoTestSQL(FBTestSQLData.sUsers['DropRole1']);
+end;
+
+procedure TFBSQLParserTest.CreateUser1;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser1']);
+end;
+
+procedure TFBSQLParserTest.CreateUser2;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser1']);
+end;
+
+procedure TFBSQLParserTest.CreateUser3;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser4']);
+end;
+
+procedure TFBSQLParserTest.CreateUser4;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser4']);
+end;
+
+procedure TFBSQLParserTest.CreateUser5;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser5']);
+end;
+
+procedure TFBSQLParserTest.CreateUser6;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser6']);
+end;
+
+procedure TFBSQLParserTest.CreateUser7;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser7']);
+end;
+
+procedure TFBSQLParserTest.CreateUser8;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser8']);
+end;
+
+procedure TFBSQLParserTest.CreateUser9;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser9']);
 end;
 
 procedure TFBSQLParserTest.DeclareFilter1;

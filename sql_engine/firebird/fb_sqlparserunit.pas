@@ -720,12 +720,28 @@ type
   { TFBSQLCreateUser }
 
   TFBSQLCreateUser = class(TSQLCreateLogin)
+  private
+    FFirstName: string;
+    FGrantOptions: TGrantOptions;
+    FLastName: string;
+    FMiddleName: string;
+    FPluginName: string;
+    FCurPar: TSQLParserField;
+    FState: TTriggerState;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+
+    property PluginName:string read FPluginName write FPluginName;
+    property FirstName:string read FFirstName write FFirstName;
+    property MiddleName:string read FMiddleName write FMiddleName;
+    property LastName:string read FLastName write FLastName;
+    property State:TTriggerState read FState write FState;
+    property GrantOptions:TGrantOptions read FGrantOptions write FGrantOptions;
   end;
 
   { TFBSQLCommentOn }
@@ -5499,17 +5515,56 @@ end;
 
 procedure TFBSQLCreateUser.InitParserTree;
 var
-  FSQLTokens, T: TSQLTokenRecord;
+  FSQLTokens, T, TPass, TUsrName, TUsing, TUsing1, TUsing2,
+    TFName, TFName1, TMName, TMName1, TLName, TLName1, TTags,
+    T1, T2, TTags1, TAct1, TAct2, TGrant1, TGrant2, TGrant3: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okUser);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
-  T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+  TUsrName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+  TPass:=AddSQLTokens(stKeyword, TUsrName, 'PASSWORD', [toOptional]);
+  TPass:=AddSQLTokens(stString, TPass, '', [], 2);
+
+  TUsing:=AddSQLTokens(stKeyword, [TUsrName, TPass], 'USING', [toOptional]);
+  TUsing:=AddSQLTokens(stKeyword, TUsing, 'PLUGIN', []);
+  TUsing1:=AddSQLTokens(stString, TUsing, '', [], 3);
+  TUsing2:=AddSQLTokens(stIdentificator, TUsing, '', [], 3);
+
+  TFName:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2], 'FIRSTNAME', [toOptional]);
+    TFName1:=AddSQLTokens(stString, TFName, '', [], 4);
+
+  TMName:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TFName1], 'MIDDLENAME', [toOptional]);
+    TMName1:=AddSQLTokens(stString, TMName, '', [], 5);
+
+  TLName:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1], 'LASTNAME', [toOptional]);
+    TLName1:=AddSQLTokens(stString, TLName, '', [], 6);
+
+  TTags:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1, TLName1], 'TAGS', [toOptional]);
+    T:=AddSQLTokens(stSymbol, TTags, '(', []);
+    T1:=AddSQLTokens(stIdentificator, T, '', [], 7);
+    T:=AddSQLTokens(stSymbol, T1, '=', []);
+    T2:=AddSQLTokens(stString, T, '', [], 8);
+    T:=AddSQLTokens(stSymbol, T2, ',', []);
+    T.AddChildToken([T1]);
+    TTags1:=AddSQLTokens(stSymbol, T2, ')', []);
+
+  TAct1:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1, TLName1, TTags1], 'ACTIVE', [toOptional], 9);
+  TAct2:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1, TLName1, TTags1], 'INACTIVE', [toOptional], 10);
+
+  TGrant1:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1, TLName1, TTags1], 'GRANT', [toOptional], 11);
+  TGrant2:=AddSQLTokens(stKeyword, [TUsrName, TPass, TUsing1, TUsing2, TMName1, TFName1, TLName1, TTags1], 'REVOKE', [toOptional], 12);
+    T:=AddSQLTokens(stKeyword, [TGrant1, TGrant2], 'ADMIN', []);
+    TGrant3:=AddSQLTokens(stKeyword, T, 'ROLE', []);
+
 
   {
   CREATE USER username
   <user_option> [<user_option> ...]
+
   [TAGS (<user_var> [, <user_var> ...]]
+
   <user_option> ::=
   PASSWORD 'password'
   | FIRSTNAME 'firstname'
@@ -5524,9 +5579,51 @@ begin
 end;
 
 procedure TFBSQLCreateUser.MakeSQL;
+var
+  S, S1: String;
+  TP: TSQLParserField;
 begin
   inherited MakeSQL;
-  AddSQLCommandEx('CREATE USER %s', [FullName]);
+  S:=Format('CREATE USER %s', [FullName]);
+  if Password <> '' then
+    S:=S + ' PASSWORD ' + Password;
+  if PluginName <> '' then
+    S:=S + ' USING PLUGIN ' + PluginName;
+
+  if FirstName <> '' then
+    S:=S + ' FIRSTNAME ' + FirstName;
+
+  if MiddleName <> '' then
+    S:=S + ' MIDDLENAME ' + MiddleName;
+
+  if LastName <> '' then
+    S:=S + ' LASTNAME ' + LastName;
+
+
+  if Params.Count>0 then
+  begin
+    S1:='';
+    for TP in Params do
+    begin
+      if S1<>'' then S1:=S1 + ', ';
+      S1:=S1 + TP.Caption + '=' + tp.ParamValue;
+    end;
+    S:=S + ' TAGS ('+S1+ ')';
+  end;
+
+  if State = trsActive then
+    S:=S + ' ACTIVE'
+  else
+  if State = trsInactive then
+    S:=S + ' INACTIVE';
+
+  if GrantOptions = goGrant then
+    S:=S + ' GRANT ADMIN ROLE'
+  else
+  if GrantOptions = goRevoke then
+    S:=S + ' REVOKE ADMIN ROLE';
+
+  AddSQLCommand(S);
   if Description <> '' then
     DescribeObject;
 end;
@@ -5537,6 +5634,18 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
+    2:Password:=AWord;
+    3:PluginName:=AWord;
+    4:FirstName:=AWord;
+    5:MiddleName:=AWord;
+    6:LastName:=AWord;
+    7:FCurPar:=Params.AddParam(AWord);
+    8:if Assigned(FCurPar) then
+      FCurPar.ParamValue:=AWord;
+    9:State:=trsActive;
+    10:State:=trsInactive;
+    11:GrantOptions:=goGrant;
+    12:GrantOptions:=goRevoke;
   end;
 end;
 
@@ -5544,6 +5653,20 @@ constructor TFBSQLCreateUser.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   ObjectKind:=okUser;
+end;
+
+procedure TFBSQLCreateUser.Assign(ASource: TSQLObjectAbstract);
+begin
+  if ASource is TFBSQLCreateUser then
+  begin
+    PluginName:=TFBSQLCreateUser(ASource).PluginName;
+    FirstName:=TFBSQLCreateUser(ASource).FirstName;
+    MiddleName:=TFBSQLCreateUser(ASource).MiddleName;
+    LastName:=TFBSQLCreateUser(ASource).LastName;
+    State:=TFBSQLCreateUser(ASource).State;
+    GrantOptions:=TFBSQLCreateUser(ASource).GrantOptions;
+  end;
+  inherited Assign(ASource);
 end;
 
 { TFBSQLCreateRole }
