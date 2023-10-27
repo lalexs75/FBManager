@@ -1939,6 +1939,11 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="mssqlRoleEditorUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="sql_engine/firebird/fbsqlenginesecurityunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FBSQLEngineSecurityUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
