@@ -423,8 +423,9 @@ begin
           RevokeRole:=RevokeRole + [ogReference];
       end;
     end;
-
+(*
     TFireBirdRole(DBObject).SetGrantObjects(rxGrantsTableDBObjectName.AsString, GrantRole, RevokeRole);
+*)
     rxGrantsTable.Next;
   end;
   Result:=DBObject.SQLScriptsApply;

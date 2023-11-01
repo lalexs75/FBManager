@@ -379,12 +379,13 @@ begin
   begin
     FDataBaseCaption:=FCurRec.AliasName;
     rxRolesList.CloseOpen;
+(*
     for i:=0 to FCurRec.RoleRoot.CountObject-1 do
     begin
       rxRolesList.Append;
       rxRolesList.FieldByName('ROLE_NAME').AsString:=FCurRec.RoleRoot.Items[i].Caption;
       rxRolesList.Post;
-    end;
+    end; *)
   end;
 end;
 

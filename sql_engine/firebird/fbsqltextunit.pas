@@ -37,6 +37,7 @@ type
     fbtPackageBody: TStrHolder;
     fbtPackageLazy: TStrHolder;
     fbtPackageBodyLazy: TStrHolder;
+    sUsers: TRxTextHolder;
     sDomainsSQL: TRxTextHolder;
     sGenerators: TRxTextHolder;
     sFBStatistic: TRxTextHolder;
@@ -63,7 +64,6 @@ type
     sFBStoredProc: TStrHolder;
     sFBExceptions: TStrHolder;
     sFBUDF: TStrHolder;
-    sFBRoles: TStrHolder;
     sPackages: TStrHolder;
     sFunctions: TStrHolder;
     sFunctionArgs: TStrHolder;

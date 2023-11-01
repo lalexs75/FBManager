@@ -348,23 +348,6 @@ object fbSqlTextData: TfbSqlTextData
       '202031'
     )
   end
-  object sFBRoles: TStrHolder
-    Capacity = 16
-    Macros = <>
-    Left = 696
-    Top = 112
-    StrData = (
-      ''
-      '73656c65637420'
-      '202052444224524f4c45532e52444224524f4c455f4e414d452c20'
-      '202052444224524f4c45532e524442244445534352495054494f4e2c20'
-      '52444224524f4c45532e524442244f574e45525f4e414d45206173206461746120'
-      '66726f6d20'
-      '202052444224524f4c455320'
-      '6f7264657220627920'
-      '202052444224524f4c45532e52444224524f4c455f4e414d45'
-    )
-  end
   object sFBIndexs: TStrHolder
     Capacity = 16
     Macros = <>
@@ -746,5 +729,39 @@ object fbSqlTextData: TfbSqlTextData
       end>
     Left = 120
     Top = 88
+  end
+  object sUsers: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'FBRoles'
+        Lines.Strings = (
+          'select'
+          '  RDB$ROLES.RDB$ROLE_NAME,'
+          '  RDB$ROLES.RDB$DESCRIPTION,'
+          '  RDB$ROLES.RDB$OWNER_NAME as data'
+          'from'
+          '  RDB$ROLES'
+          'order by'
+          '  RDB$ROLES.RDB$ROLE_NAME'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'FBUsers'
+        Lines.Strings = (
+          'select'
+          '  SEC$USERS.SEC$USER_NAME,'
+          '  SEC$USERS.SEC$DESCRIPTION'
+          'from'
+          '  SEC$USERS'
+          'order by'
+          '  SEC$USERS.SEC$USER_NAME'
+          ''
+        )
+      end>
+    Left = 40
+    Top = 205
   end
 end

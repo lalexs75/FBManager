@@ -744,6 +744,18 @@ type
     property GrantOptions:TGrantOptions read FGrantOptions write FGrantOptions;
   end;
 
+  { TFBSQLDropUser }
+
+  TFBSQLDropUser = class(TSQLDropCommandAbstract)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure MakeSQL;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+  end;
+
   { TFBSQLCommentOn }
 
   TFBSQLCommentOn = class(TSQLCommentOn)
@@ -5667,6 +5679,29 @@ begin
     GrantOptions:=TFBSQLCreateUser(ASource).GrantOptions;
   end;
   inherited Assign(ASource);
+end;
+
+{ TFBSQLDropUser }
+
+procedure TFBSQLDropUser.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TFBSQLDropUser.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+procedure TFBSQLDropUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; const AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+constructor TFBSQLDropUser.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
 end;
 
 { TFBSQLCreateRole }

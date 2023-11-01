@@ -650,7 +650,6 @@ type
     function GetCharSet: string;override;
     procedure SetCharSet(const AValue: string);override;
     class function GetEngineName: string; override;
-    procedure RefreshDependencies(const ADBObject:TDBObject);
     procedure InitKeywords;
   public
     constructor Create; override;
@@ -661,6 +660,7 @@ type
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
     procedure RefreshObjectsBegin(const ASQLText:string; ASystemQuery:Boolean);override;
+    procedure RefreshDependencies(const ADBObject:TDBObject);
 
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
@@ -710,6 +710,7 @@ uses ibmsqltextsunit, ibmSqlUtilsUnit, uiblib, rxdbutils, Controls, fbmStrConstU
 
 function FBTrigTypeToTriggerType(AFBType:word):TTriggerTypes;
 begin
+
   if (AFBType and $01) = 1 then Result:=[ttBefore]
   else Result := [ttAfter];
 
@@ -1247,6 +1248,8 @@ var
   UIBSec:TUIBSecurity;
   P: TACLItem;
 begin
+  { #todo -oalexs : Переделать }
+(*
   //Fill roles list
   for i:=0 to  TSQLEngineFireBird(SQLEngine).RoleRoot.CountObject - 1 do
   begin
@@ -1272,6 +1275,7 @@ begin
   finally
     UIBSec.Free;
   end;
+*)
 end;
 
 procedure TFBACLList.RefreshList;
@@ -1503,14 +1507,17 @@ begin
   AddObjectsGroup(FStoredProcRoot, TStoredProcRoot, TFireBirdStoredProc, sStoredProcedures);
   AddObjectsGroup(FExceptionRoot, TExceptionRoot, TFireBirdException, sExceptions);
   AddObjectsGroup(G, TUDFRoot, TFireBirdUDF, sUDFs);
-  AddObjectsGroup(FRoleRoot, TRoleRoot, TFireBirdRole, sRoles);
   AddObjectsGroup(FIndexRoot, TFireBirdIndexRoot, TFireBirdIndex, sIndexs);
 
-  if FServerVersion in [gds_verFirebird3_0] then
+  if FServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
   begin
     AddObjectsGroup(FPackagesRoot, TPackagesRoot, TFireBirdPackage, sPackages);
     AddObjectsGroup(FFunctionsRoot, TFunctionsRoot, TFireBirdFunction, sFunctions);
-  end;
+    AddObjectsGroup(G, TFBSecurityRoot, nil, sSecurity);
+  end
+  else
+    AddObjectsGroup(G, TFBRoleRoot, TFireBirdRole, sRoles);
+    //AddObjectsGroup(FRoleRoot, TRoleRoot, TFireBirdRole, sRoles);
 
   if ussSystemTable in UIShowSysObjects then
     AddObjectsGroup(FSystemCatalog, TFBSystemCatalog, nil, sSystemCatalog);
@@ -1519,7 +1526,7 @@ end;
 procedure TSQLEngineFireBird.DoneGroupsObjects;
 begin
   FViewsRoot:=nil;
-  FRoleRoot:=nil;
+//  FRoleRoot:=nil;
   FExceptionRoot:=nil;
   FStoredProcRoot:=nil;
   FGeneratorsRoot:=nil;
@@ -3021,27 +3028,6 @@ begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
   FDBObjectKind:=okUDF;
   FDropCommandClass:=TFBSQLDropUDF;
-end;
-
-{ TRoleRoot }
-
-function TRoleRoot.DBMSObjectsList: string;
-begin
-  Result:=fbSqlModule.sFBRoles.Strings.Text;
-end;
-
-function TRoleRoot.GetObjectType: string;
-begin
-  Result:='Role';
-end;
-
-constructor TRoleRoot.Create(AOwnerDB: TSQLEngineAbstract;
-  ADBObjectClass: TDBObjectClass; const ACaption: string;
-  AOwnerRoot: TDBRootObject);
-begin
-  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
-  FDBObjectKind:=okRole;
-  FDropCommandClass:=TFBSQLDropRole;
 end;
 
 { TViewsRoot }

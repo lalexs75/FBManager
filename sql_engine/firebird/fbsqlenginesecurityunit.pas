@@ -60,6 +60,8 @@ type
     constructor Create(AOwnerDB : TSQLEngineAbstract; ADBObjectClass:TDBObjectClass; const ACaption:string; AOwnerRoot:TDBRootObject); override;
   end;
 
+  { TFBRoleRoot }
+
   TFBRoleRoot = class(TDBRootObject)
   private
   protected
@@ -90,8 +92,24 @@ type
     property OwnerUser:string read FOwnerUser write FOwnerUser;
   end;
 
+  { TFireBirUser }
+
+  TFireBirUser = class(TDBObject)
+  private
+  protected
+    function InternalGetDDLCreate: string; override;
+  public
+    constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
+    destructor Destroy; override;
+    procedure RefreshObject; override;
+    class function DBClassTitle:string;override;
+    procedure SetSqlAssistentData(const List: TStrings);override;
+    function CreateSQLObject:TSQLCommandDDL; override;
+  end;
+
 implementation
-uses fb_SqlParserUnit, uib;
+uses fb_SqlParserUnit, fbSqlTextUnit, uib, ibmsqltextsunit,
+  fbmSQLTextCommonUnit, fbmStrConstUnit, sqlObjects;
 
 { TFBSecurityRoot }
 
@@ -110,28 +128,34 @@ constructor TFBSecurityRoot.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okUser;
+  FFBRolesRoot:=TFBRoleRoot.Create(AOwnerDB, TFireBirdRole, sRoles, Self);
+  FFBUsersRoot:=TFBUsersRoot.Create(AOwnerDB, TFireBirUser, sUsers, Self);
 end;
 
 destructor TFBSecurityRoot.Destroy;
 begin
+  FreeAndNil(FFBRolesRoot);
+  FreeAndNil(FFBUsersRoot);
   inherited Destroy;
 end;
 
 procedure TFBSecurityRoot.Clear;
 begin
-  inherited Clear;
+  FBRolesRoot.Clear;
+  FBUsersRoot.Clear;
 end;
 
 { TFBUsersRoot }
 
 function TFBUsersRoot.DBMSObjectsList: string;
 begin
-  Result:=inherited DBMSObjectsList;
+  Result:=fbSqlModule.sUsers['FBUsers'];
 end;
 
 function TFBUsersRoot.GetObjectType: string;
 begin
-
+  Result:='User';
 end;
 
 constructor TFBUsersRoot.Create(AOwnerDB: TSQLEngineAbstract;
@@ -139,6 +163,29 @@ constructor TFBUsersRoot.Create(AOwnerDB: TSQLEngineAbstract;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okUser;
+  FDropCommandClass:=TFBSQLDropUser;
+end;
+
+{ TFBRoleRoot }
+
+function TFBRoleRoot.DBMSObjectsList: string;
+begin
+  Result:=fbSqlModule.sUsers['FBRoles'];
+end;
+
+function TFBRoleRoot.GetObjectType: string;
+begin
+  Result:='Role';
+end;
+
+constructor TFBRoleRoot.Create(AOwnerDB: TSQLEngineAbstract;
+  ADBObjectClass: TDBObjectClass; const ACaption: string;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(AOwnerDB, ADBObjectClass, ACaption, AOwnerRoot);
+  FDBObjectKind:=okRole;
+  FDropCommandClass:=TFBSQLDropRole;
 end;
 
 { TFireBirdRole }
@@ -277,5 +324,44 @@ class function TFireBirdRole.DBClassTitle: string;
 begin
   Result:='ROLE';
 end;
+
+{ TFireBirUser }
+
+function TFireBirUser.InternalGetDDLCreate: string;
+begin
+  Result:=inherited InternalGetDDLCreate;
+end;
+
+constructor TFireBirUser.Create(const ADBItem: TDBItem;
+  AOwnerRoot: TDBRootObject);
+begin
+  inherited Create(ADBItem, AOwnerRoot);
+end;
+
+destructor TFireBirUser.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TFireBirUser.RefreshObject;
+begin
+  inherited RefreshObject;
+end;
+
+class function TFireBirUser.DBClassTitle: string;
+begin
+  Result:=inherited DBClassTitle;
+end;
+
+procedure TFireBirUser.SetSqlAssistentData(const List: TStrings);
+begin
+  inherited SetSqlAssistentData(List);
+end;
+
+function TFireBirUser.CreateSQLObject: TSQLCommandDDL;
+begin
+  Result:=inherited CreateSQLObject;
+end;
+
 end.
 
