@@ -1,0 +1,147 @@
+inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
+  Height = 413
+  Width = 362
+  ClientHeight = 413
+  ClientWidth = 362
+  object Label1: TLabel[0]
+    Left = 14
+    Height = 17
+    Top = 13
+    Width = 39
+    Caption = 'Label1'
+  end
+  object Edit1: TEdit[1]
+    Left = 16
+    Height = 29
+    Top = 32
+    Width = 80
+    TabOrder = 0
+    Text = 'Edit1'
+  end
+  object Label2: TLabel[2]
+    Left = 13
+    Height = 17
+    Top = 74
+    Width = 58
+    Caption = 'Password'
+  end
+  object Edit2: TEdit[3]
+    Left = 24
+    Height = 29
+    Top = 88
+    Width = 80
+    TabOrder = 1
+    Text = 'Edit2'
+  end
+  object Label3: TLabel[4]
+    Left = 128
+    Height = 17
+    Top = 80
+    Width = 99
+    Caption = 'retype password'
+  end
+  object Edit3: TEdit[5]
+    Left = 139
+    Height = 29
+    Top = 94
+    Width = 80
+    TabOrder = 2
+    Text = 'Edit3'
+  end
+  object Label4: TLabel[6]
+    Left = 14
+    Height = 17
+    Top = 120
+    Width = 72
+    Caption = 'FIRSTNAME'
+  end
+  object Label5: TLabel[7]
+    Left = 115
+    Height = 17
+    Top = 126
+    Width = 85
+    Caption = 'MIDDLENAME'
+  end
+  object Label6: TLabel[8]
+    Left = 16
+    Height = 17
+    Top = 176
+    Width = 67
+    Caption = 'LASTNAME'
+  end
+  object CheckBox1: TCheckBox[9]
+    Left = 256
+    Height = 23
+    Top = 56
+    Width = 92
+    Caption = 'Admin role'
+    TabOrder = 3
+  end
+  object CheckBox2: TCheckBox[10]
+    Left = 248
+    Height = 23
+    Top = 16
+    Width = 61
+    Caption = 'Active'
+    TabOrder = 4
+  end
+  object Label7: TLabel[11]
+    Left = 23
+    Height = 17
+    Top = 224
+    Width = 38
+    Caption = 'Plugin'
+  end
+  object Edit4: TEdit[12]
+    Left = 24
+    Height = 29
+    Top = 240
+    Width = 80
+    TabOrder = 5
+    Text = 'Edit4'
+  end
+  object Edit5: TEdit[13]
+    Left = 28
+    Height = 29
+    Top = 140
+    Width = 80
+    TabOrder = 6
+    Text = 'Edit5'
+  end
+  object Edit6: TEdit[14]
+    Left = 147
+    Height = 29
+    Top = 144
+    Width = 80
+    TabOrder = 7
+    Text = 'Edit6'
+  end
+  object Edit7: TEdit[15]
+    Left = 32
+    Height = 29
+    Top = 192
+    Width = 80
+    TabOrder = 8
+    Text = 'Edit7'
+  end
+  object Label8: TLabel[16]
+    Left = 8
+    Height = 17
+    Top = 280
+    Width = 54
+    Caption = 'Atributes'
+  end
+  object ValueListEditor1: TValueListEditor[17]
+    Left = 24
+    Height = 100
+    Top = 304
+    Width = 320
+    FixedCols = 0
+    RowCount = 2
+    TabOrder = 9
+    ColWidths = (
+      64
+      254
+    )
+  end
+end

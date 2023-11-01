@@ -129,7 +129,7 @@ uses
   pgDBObjectsSizeUnit, pgObjectAnalysisAndWarningsUnit,
   fbmCompillerMessagesUnit, fbmPgObjectEditorsUtils, mssql_VisualToolsCallUnit,
   mssql_sql_parser, mssql_EngineSecurityUnit, mssqlRoleEditorUnit, 
-FBSQLEngineSecurityUnit;
+FBSQLEngineSecurityUnit, fbmFBUserMainEditorUnit;
 
 {$R IBManager.res}
 

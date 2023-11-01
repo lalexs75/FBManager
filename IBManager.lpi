@@ -1944,6 +1944,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="FBSQLEngineSecurityUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="dbobjecteditors/dboRole/fbmfbusermaineditorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFBUserMainEditorFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmFBUserMainEditorUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

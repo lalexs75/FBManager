@@ -94,7 +94,7 @@ uses fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
 
   fbmRoleMainEditorUnit,       //Главная страница редактора роли
   fbmRoleGrantUsersUnit,       //Редактор роли - раздача прав для операторов
-  fbmRolesDBObjectsGrantUnit,  //Редактор роли - раздача прав на объекты
+  fbmRolesDBObjectsGrantUnit, fbmFBUserMainEditorUnit,  //Редактор роли - раздача прав на объекты
 
   fbmExceptionMainEditorUnit,  //Главная страница редактора исключения
   fbmGeneratorMainEditorUnit,  //Главная страница редактора генератора
@@ -290,8 +290,8 @@ begin
      TDependenciesFrame, TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   RegisterObjEditor(TFireBirUser,
-    [{TfbmRoleMainEditorFrame, }TfbmObjectEditorDescriptionFrame],
-    [{TfbmRoleMainEditorFrame, TfbmRoleGrantUsersFrame, TfbmRolesDBObjectsGrantForm,
+    [ TfbmFBUserMainEditorFrame, TfbmObjectEditorDescriptionFrame],
+    [ TfbmFBUserMainEditorFrame, {TfbmRoleGrantUsersFrame, TfbmRolesDBObjectsGrantForm,
    TDependenciesFrame, }TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
 
