@@ -760,6 +760,31 @@ object fbSqlTextData: TfbSqlTextData
           '  SEC$USERS.SEC$USER_NAME'
           ''
         )
+      end    
+      item
+        Caption = 'FBUserDetails'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  SEC$USERS'
+          'where'
+          '  SEC$USERS.SEC$USER_NAME = :USER_NAME'
+          ''
+        )
+      end    
+      item
+        Caption = 'FBUserDetailAtribs'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  SEC$USER_ATTRIBUTES'
+          'where'
+          '    SEC$USER_ATTRIBUTES.SEC$USER_NAME = :USER_NAME'
+          '  and'
+          '    SEC$USER_ATTRIBUTES.SEC$PLUGIN = :PLUGIN'
+        )
       end>
     Left = 40
     Top = 205

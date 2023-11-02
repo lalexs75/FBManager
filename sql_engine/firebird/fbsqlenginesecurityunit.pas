@@ -77,7 +77,6 @@ type
   private
     FOwnerUser: string;
   protected
-    function InternalGetDDLCreate: string; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     class function DBClassTitle:string;override;
@@ -88,6 +87,7 @@ type
     procedure GetUserList(const UserList:TStrings);override;
     procedure GetUserRight(GrantedList:TObjectList);override;
 
+    function InternalGetDDLCreate: string; override;
     function CreateSQLObject:TSQLCommandDDL;override;
     property OwnerUser:string read FOwnerUser write FOwnerUser;
   end;
@@ -96,15 +96,30 @@ type
 
   TFireBirUser = class(TDBObject)
   private
+    FActive: Boolean;
+    FFirstName: string;
+    FIsAdmin: Boolean;
+    FLastName: string;
+    FMiddleName: string;
+    FParams: TStringList;
+    FPlugin: string;
   protected
-    function InternalGetDDLCreate: string; override;
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot: TDBRootObject);override;
     destructor Destroy; override;
     procedure RefreshObject; override;
     class function DBClassTitle:string;override;
     procedure SetSqlAssistentData(const List: TStrings);override;
+    function InternalGetDDLCreate: string; override;
     function CreateSQLObject:TSQLCommandDDL; override;
+
+    property FirstName:string read FFirstName write FFirstName;
+    property MiddleName:string read FMiddleName write FMiddleName;
+    property LastName:string read FLastName write FLastName;
+    property Active:Boolean read FActive write FActive;
+    property IsAdmin:Boolean read FIsAdmin write FIsAdmin;
+    property Plugin:string read FPlugin write FPlugin;
+    property Params:TStringList read FParams;
   end;
 
 implementation
@@ -328,29 +343,86 @@ end;
 { TFireBirUser }
 
 function TFireBirUser.InternalGetDDLCreate: string;
+var
+  FCmd: TFBSQLCreateUser;
+  i: Integer;
 begin
-  Result:=inherited InternalGetDDLCreate;
+  FCmd:=TFBSQLCreateUser.Create(nil);
+  FCmd.Name:=Caption;
+  FCmd.FirstName:=FFirstName;
+  FCmd.MiddleName:=FMiddleName;
+  FCmd.LastName:=FLastName;
+  if Active then
+    FCmd.State:=trsActive
+  else
+    FCmd.State:=trsInactive;
+  FCmd.PluginName:=FPlugin;
+  if IsAdmin then
+    FCmd.GrantOptions:=goGrant;
+  FCmd.Description:=Description;
+
+  for i:=0 to FParams.Count-1 do
+    FCmd.Params.AddParamEx(FParams.Names[i], FParams.ValueFromIndex[i]);
+  Result:=FCmd.AsSQL;
+  FreeAndNil(FCmd);
 end;
 
 constructor TFireBirUser.Create(const ADBItem: TDBItem;
   AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  FParams:=TStringList.Create;
 end;
 
 destructor TFireBirUser.Destroy;
 begin
+  FreeAndNil(FParams);
   inherited Destroy;
 end;
 
 procedure TFireBirUser.RefreshObject;
+var
+  IBQ, IBQ1: TUIBQuery;
 begin
   inherited RefreshObject;
+  if State <> sdboEdit then exit;
+  FParams.Clear;
+
+  IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sUsers['FBUserDetails']);
+  IBQ.Params.ByNameAsString['USER_NAME']:=Caption;
+
+  IBQ1:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sUsers['FBUserDetailAtribs']);
+  try
+    IBQ.Open;
+    FActive:=IBQ.Fields.ByNameAsBoolean['SEC$ACTIVE'];
+    FFirstName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$FIRST_NAME']);
+    FIsAdmin:=IBQ.Fields.ByNameAsBoolean['SEC$ADMIN'];
+    FLastName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$LAST_NAME']);
+    FMiddleName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$MIDDLE_NAME']);
+    FPlugin:=TrimRight(IBQ.Fields.ByNameAsString['SEC$PLUGIN']);
+    FDescription:=TSQLEngineFireBird(OwnerDB).ConvertString20(TrimRight(IBQ.Fields.ByNameAsString['SEC$DESCRIPTION']), true);
+
+    IBQ1.Params.ByNameAsString['USER_NAME']:=Caption;
+    IBQ1.Params.ByNameAsString['PLUGIN']:=FPlugin;
+    IBQ1.Open;
+    while not IBQ1.Fields.Eof do
+    begin
+      FParams.AddPair(TrimRight(IBQ1.Fields.ByNameAsString['SEC$KEY']), TrimRight(IBQ1.Fields.ByNameAsString['SEC$VALUE']));
+      //SEC$USER_NAME,
+      //SEC$PLUGIN
+      IBQ1.Next;
+    end;
+    IBQ1.Close;
+
+  finally
+    IBQ1.Free;
+    IBQ.Free;
+  end;
 end;
 
 class function TFireBirUser.DBClassTitle: string;
 begin
-  Result:=inherited DBClassTitle;
+  Result:='User';
 end;
 
 procedure TFireBirUser.SetSqlAssistentData(const List: TStrings);
@@ -360,7 +432,11 @@ end;
 
 function TFireBirUser.CreateSQLObject: TSQLCommandDDL;
 begin
-  Result:=inherited CreateSQLObject;
+  if State = sdboCreate then
+    Result:=TFBSQLCreateUser.Create(nil)
+  else
+    Result:=TFBSQLAlterUser.Create(nil);
+  Result.Name:=Caption;
 end;
 
 end.

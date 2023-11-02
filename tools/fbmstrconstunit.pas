@@ -370,6 +370,8 @@ resourcestring
   sOldActive                        = 'Old active';
   sOldest                           = 'Oldest';
   sOldSnapshot                      = 'Old snapshot';
+  sPlugin                           = 'Plugin';
+  sAdminRole                        = 'Admin role';
 
   //Object names
   sDomain                           = 'Domain';

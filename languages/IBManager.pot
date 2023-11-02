@@ -102,6 +102,10 @@ msgstr ""
 msgid "Add user to server user list"
 msgstr ""
 
+#: fbmstrconstunit.sadminrole
+msgid "Admin role"
+msgstr ""
+
 #: fbmstrconstunit.safter
 msgid "After"
 msgstr ""
@@ -4201,6 +4205,10 @@ msgstr ""
 
 #: fbmstrconstunit.spkname
 msgid "Primary key name"
+msgstr ""
+
+#: fbmstrconstunit.splugin
+msgid "Plugin"
 msgstr ""
 
 #: fbmstrconstunit.spolicy

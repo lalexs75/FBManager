@@ -1,147 +1,254 @@
 inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
-  Height = 413
-  Width = 362
-  ClientHeight = 413
-  ClientWidth = 362
+  Height = 400
+  Width = 652
+  ClientHeight = 400
+  ClientWidth = 652
   object Label1: TLabel[0]
-    Left = 14
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
     Height = 17
-    Top = 13
-    Width = 39
-    Caption = 'Label1'
+    Top = 6
+    Width = 64
+    BorderSpacing.Around = 6
+    Caption = 'User name'
   end
   object Edit1: TEdit[1]
-    Left = 16
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Panel1
+    Left = 12
     Height = 29
-    Top = 32
-    Width = 80
+    Top = 29
+    Width = 522
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 0
-    Text = 'Edit1'
   end
   object Label2: TLabel[2]
-    Left = 13
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 17
-    Top = 74
+    Top = 64
     Width = 58
+    BorderSpacing.Around = 6
     Caption = 'Password'
   end
   object Edit2: TEdit[3]
-    Left = 24
+    AnchorSideLeft.Control = Label2
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = CLabel
+    Left = 12
     Height = 29
-    Top = 88
-    Width = 80
+    Top = 87
+    Width = 308
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 1
-    Text = 'Edit2'
   end
   object Label3: TLabel[4]
-    Left = 128
+    AnchorSideLeft.Control = CLabel
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    Left = 332
     Height = 17
-    Top = 80
+    Top = 64
     Width = 99
+    BorderSpacing.Around = 6
     Caption = 'retype password'
   end
   object Edit3: TEdit[5]
-    Left = 139
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Panel1
+    Left = 338
     Height = 29
-    Top = 94
-    Width = 80
+    Top = 87
+    Width = 196
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 2
-    Text = 'Edit3'
   end
   object Label4: TLabel[6]
-    Left = 14
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 17
-    Top = 120
+    Top = 122
     Width = 72
+    BorderSpacing.Around = 6
     Caption = 'FIRSTNAME'
   end
   object Label5: TLabel[7]
-    Left = 115
+    AnchorSideLeft.Control = Edit4
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 166
     Height = 17
-    Top = 126
+    Top = 122
     Width = 85
+    BorderSpacing.Around = 6
     Caption = 'MIDDLENAME'
   end
   object Label6: TLabel[8]
-    Left = 16
+    AnchorSideLeft.Control = Edit5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 330
     Height = 17
-    Top = 176
+    Top = 122
     Width = 67
+    BorderSpacing.Around = 6
     Caption = 'LASTNAME'
   end
-  object CheckBox1: TCheckBox[9]
-    Left = 256
-    Height = 23
-    Top = 56
-    Width = 92
-    Caption = 'Admin role'
-    TabOrder = 3
-  end
-  object CheckBox2: TCheckBox[10]
-    Left = 248
-    Height = 23
-    Top = 16
-    Width = 61
-    Caption = 'Active'
-    TabOrder = 4
-  end
-  object Label7: TLabel[11]
-    Left = 23
+  object Label7: TLabel[9]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit4
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 17
-    Top = 224
+    Top = 180
     Width = 38
+    BorderSpacing.Around = 6
     Caption = 'Plugin'
   end
-  object Edit4: TEdit[12]
-    Left = 24
+  object Edit4: TEdit[10]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 12
     Height = 29
-    Top = 240
-    Width = 80
+    Top = 145
+    Width = 148
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object Edit5: TEdit[11]
+    AnchorSideLeft.Control = Label5
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 172
+    Height = 29
+    Top = 145
+    Width = 152
+    BorderSpacing.Around = 6
+    TabOrder = 4
+  end
+  object Edit6: TEdit[12]
+    AnchorSideLeft.Control = Label6
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Panel1
+    Left = 336
+    Height = 29
+    Top = 145
+    Width = 198
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 5
-    Text = 'Edit4'
   end
-  object Edit5: TEdit[13]
-    Left = 28
+  object Edit7: TEdit[13]
+    AnchorSideLeft.Control = Label7
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Panel1
+    Left = 12
     Height = 29
-    Top = 140
-    Width = 80
+    Top = 203
+    Width = 522
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 6
     TabOrder = 6
-    Text = 'Edit5'
   end
-  object Edit6: TEdit[14]
-    Left = 147
-    Height = 29
-    Top = 144
-    Width = 80
-    TabOrder = 7
-    Text = 'Edit6'
-  end
-  object Edit7: TEdit[15]
-    Left = 32
-    Height = 29
-    Top = 192
-    Width = 80
-    TabOrder = 8
-    Text = 'Edit7'
-  end
-  object Label8: TLabel[16]
-    Left = 8
+  object Label8: TLabel[14]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit7
+    AnchorSideTop.Side = asrBottom
+    Left = 6
     Height = 17
-    Top = 280
+    Top = 238
     Width = 54
+    BorderSpacing.Around = 6
     Caption = 'Atributes'
   end
-  object ValueListEditor1: TValueListEditor[17]
-    Left = 24
-    Height = 100
-    Top = 304
-    Width = 320
+  object ValueListEditor1: TValueListEditor[15]
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 12
+    Height = 133
+    Top = 261
+    Width = 634
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 6
+    DefaultColWidth = 250
     FixedCols = 0
     RowCount = 2
-    TabOrder = 9
+    TabOrder = 7
+    TitleStyle = tsNative
+    KeyOptions = [keyUnique]
     ColWidths = (
-      64
-      254
+      250
+      382
     )
+  end
+  object Panel1: TPanel[16]
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 540
+    Height = 66
+    Top = 6
+    Width = 106
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    ClientHeight = 66
+    ClientWidth = 106
+    TabOrder = 8
+    object CheckBox1: TCheckBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = CheckBox2
+      AnchorSideTop.Side = asrBottom
+      Left = 7
+      Height = 23
+      Top = 36
+      Width = 92
+      BorderSpacing.Around = 6
+      Caption = 'Admin role'
+      TabOrder = 0
+    end
+    object CheckBox2: TCheckBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 7
+      Height = 23
+      Top = 7
+      Width = 61
+      BorderSpacing.Around = 6
+      Caption = 'Active'
+      TabOrder = 1
+    end
+  end
+  object CLabel: TLabel[17]
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 326
+    Height = 1
+    Top = 0
+    Width = 1
   end
 end

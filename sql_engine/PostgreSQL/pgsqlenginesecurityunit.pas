@@ -324,31 +324,8 @@ procedure TPGUser.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);
 end;
-(*
-function TPGUser.CompileUser(const AUserName, AUserPwd: string;
-  const AUserOptions: TPGUserOptions; const ExpDate: TDateTime;
-  const AConnectionsLimit: integer): boolean;
-var
-  SL:TStringList;
-begin
-  Result:=false;
-  SL:=TStringList.Create;
-  if (State = sdboCreate) then
-    SL.Add(GenGroupSQL(AUserName, AUserPwd, AUserOptions, ExpDate, AConnectionsLimit, '', dmCreate))
-  else
-    SL.Add(GenGroupSQL(AUserName, AUserPwd, AUserOptions, ExpDate, AConnectionsLimit, '', dmAlter));
 
-  Result:=ExecSQLScriptEx(SL, [sepShowCompForm], OwnerDB);
 
-  if Result and (State = sdboCreate) then
-  begin
-    Caption:=AUserName;
-    State := sdboEdit;
-  end;
-  SL.Free;
-  RefreshObject;
-end;
-*)
 function TPGUser.CreateSQLObject: TSQLCommandDDL;
 begin
   if State = sdboCreate then

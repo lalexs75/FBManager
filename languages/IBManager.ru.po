@@ -117,6 +117,10 @@ msgstr "Добавить шаблон"
 msgid "Add user to server user list"
 msgstr "Добавить пользователя в список пользователей сервера"
 
+#: fbmstrconstunit.sadminrole
+msgid "Admin role"
+msgstr ""
+
 #: fbmstrconstunit.safter
 msgid "After"
 msgstr "После"
@@ -4339,6 +4343,10 @@ msgstr "Не определено поле первичного ключа дл�
 #: fbmstrconstunit.spkname
 msgid "Primary key name"
 msgstr "Имя первичного ключа"
+
+#: fbmstrconstunit.splugin
+msgid "Plugin"
+msgstr ""
 
 #: fbmstrconstunit.spolicy
 msgid "Policy"

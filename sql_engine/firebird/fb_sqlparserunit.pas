@@ -744,6 +744,19 @@ type
     property GrantOptions:TGrantOptions read FGrantOptions write FGrantOptions;
   end;
 
+  { TFBSQLAlterUser }
+
+  TFBSQLAlterUser= class(TSQLCommandDDL)
+  private
+  protected
+    procedure InitParserTree;override;
+    procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
+    procedure MakeSQL;override;
+  public
+    constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+  end;
+
   { TFBSQLDropUser }
 
   TFBSQLDropUser = class(TSQLDropCommandAbstract)
@@ -760,12 +773,14 @@ type
 
   TFBSQLCommentOn = class(TSQLCommentOn)
   private
+    FPluginName: string;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
     property TableName;
+    property PluginName:string read FPluginName write FPluginName;
   end;
 
   { TFBSQLCreateUDF }
@@ -5346,32 +5361,36 @@ procedure TFBSQLCommentOn.InitParserTree;
 var
   FSQLTokens, T, T10, T11, T13, T15, T15_1, T14, T16, T17, T18,
     T25, T24, T23, T22, T21, T20, T19, T25_1, TS, T26, T26_1,
-    TName, T11_1, T12, T26_2, T27, TName1, T28: TSQLTokenRecord;
+    TName, T11_1, T12, T26_2, T27, TName1, T28, T29, TUName,
+    TUName1: TSQLTokenRecord;
 begin
   (*
   COMMENT ON <object> IS {'sometext' | NULL}
-
   <object> ::=
-      DATABASE
-    | <basic-type> objectname
-    | COLUMN relationname.fieldname
-    | PARAMETER procname.paramname
+  {DATABASE | SCHEMA}
+  | <basic-type> objectname
+  | USER username [USING PLUGIN pluginname]
+  | COLUMN relationname.fieldname
+  | [{PROCEDURE | FUNCTION}] PARAMETER
+  [packagename.]routinename.paramname
+  | {PROCEDURE | [EXTERNAL] FUNCTION}
+  [package_name.]routinename
 
   <basic-type> ::=
-    CHARACTER SET |
-    COLLATION |
-    DOMAIN |
-    EXCEPTION |
-    EXTERNAL FUNCTION |
-    FILTER |
-    GENERATOR |
-    INDEX |
-    PROCEDURE |
-    ROLE |
-    SEQUENCE |
-    TABLE |
-    TRIGGER |
-    VIEW
+  CHARACTER SET
+  | COLLATION
+  | DOMAIN
+  | EXCEPTION
+  | FILTER
+  | GENERATOR
+  | INDEX
+  | PACKAGE
+  | ROLE
+  | SEQUENCE
+  | TABLE
+  | TRIGGER
+  | VIEW
+
   *)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'COMMENT', [toFirstToken]);
@@ -5414,7 +5433,13 @@ begin
     TS:=AddSQLTokens(stSymbol, T26_1, '.', []);
     T26_2:=AddSQLTokens(stIdentificator, TS, '', [], 263);
 
-  T:=AddSQLTokens(stKeyword, [T10, TName, TName1, T25_1, T26_1, T26_2], 'IS', []);
+  T29:=AddSQLTokens(stKeyword, T, 'USER', [], 29);
+    TUName:=AddSQLTokens(stIdentificator, [T29], '', [], 1);
+    TUName1:=AddSQLTokens(stKeyword, [TUName], 'USING', []);
+    TUName1:=AddSQLTokens(stKeyword, [TUName1], 'PLUGIN', []);
+    TUName1:=AddSQLTokens(stIdentificator, [TUName1], 'PLUGIN', [], 264);
+
+  T:=AddSQLTokens(stKeyword, [T10, TName, TName1, T25_1, T26_1, T26_2, TUName, TUName1], 'IS', []);
      AddSQLTokens(stString, T, '', [], 2);
      AddSQLTokens(stKeyword, T, 'NULL', [], 2);
 end;
@@ -5448,6 +5473,7 @@ begin
     25:ObjectKind:=okColumn;
     27:ObjectKind:=okPackage;
     28:ObjectKind:=okFunction;
+    29:ObjectKind:=okUser;
     251:TableName:=AWord;
     252:Name:=AWord;
     26:begin
@@ -5466,6 +5492,7 @@ begin
           TableName:=Name;
           Name:=AWord;
         end;
+    264:FPluginName:=AWord;
   end;
 end;
 
@@ -5476,7 +5503,7 @@ begin
   S:='COMMENT ON ' + FBObjectNames[ObjectKind];
   if ObjectKind in [okCharSet, okCollation, okDomain, okException,
     okUDF, okFilter, okSequence, okIndex, okStoredProc, okRole,
-    okTable, okTrigger, okView, okFunction, okPackage] then
+    okTable, okTrigger, okView, okFunction, okPackage, okUser] then
     S:=S + ' ' + FullName
   else
   if ObjectKind in [okColumn, okParameter, okProcedureParametr, okFunctionParametr] then
@@ -5485,6 +5512,9 @@ begin
     else S1:='' ;
     S:=S + ' ' + S1 + DoFormatName(TableName) + '.' + DoFormatName(Name)
   end;
+
+  if (ObjectKind = okUser) and (FPluginName <> '') then
+    S:=S + ' USING PLUGIN ' + FPluginName;
 
 
   S:=S + ' IS ' + QuotedString(TrimRight(Description), '''');
@@ -5598,18 +5628,19 @@ begin
   inherited MakeSQL;
   S:=Format('CREATE USER %s', [FullName]);
   if Password <> '' then
-    S:=S + ' PASSWORD ' + Password;
+    S:=S + ' PASSWORD ' + QuotedString(TrimRight(Password), '''');
+
   if PluginName <> '' then
     S:=S + ' USING PLUGIN ' + PluginName;
 
   if FirstName <> '' then
-    S:=S + ' FIRSTNAME ' + FirstName;
+    S:=S + ' FIRSTNAME ' + QuotedString(TrimRight(FirstName), '''');
 
   if MiddleName <> '' then
-    S:=S + ' MIDDLENAME ' + MiddleName;
+    S:=S + ' MIDDLENAME ' + QuotedString(TrimRight(MiddleName), '''');
 
   if LastName <> '' then
-    S:=S + ' LASTNAME ' + LastName;
+    S:=S + ' LASTNAME ' + QuotedString(TrimRight(LastName), '''');
 
 
   if Params.Count>0 then
@@ -5618,7 +5649,7 @@ begin
     for TP in Params do
     begin
       if S1<>'' then S1:=S1 + ', ';
-      S1:=S1 + TP.Caption + '=' + tp.ParamValue;
+      S1:=S1 + TP.Caption + '=' + QuotedString(TrimRight(tp.ParamValue), '''') ;
     end;
     S:=S + ' TAGS ('+S1+ ')';
   end;
@@ -5646,14 +5677,14 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
-    2:Password:=AWord;
+    2:Password:=ExtractQuotedString(AWord, '''');
     3:PluginName:=AWord;
-    4:FirstName:=AWord;
-    5:MiddleName:=AWord;
-    6:LastName:=AWord;
+    4:FirstName:=ExtractQuotedString(AWord, '''');
+    5:MiddleName:=ExtractQuotedString(AWord, '''');
+    6:LastName:=ExtractQuotedString(AWord, '''');
     7:FCurPar:=Params.AddParam(AWord);
     8:if Assigned(FCurPar) then
-      FCurPar.ParamValue:=AWord;
+      FCurPar.ParamValue:=ExtractQuotedString(AWord, '''');
     9:State:=trsActive;
     10:State:=trsInactive;
     11:GrantOptions:=goGrant;
@@ -5665,6 +5696,7 @@ constructor TFBSQLCreateUser.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
   ObjectKind:=okUser;
+  FSQLCommentOnClass:=TFBSQLCommentOn;
 end;
 
 procedure TFBSQLCreateUser.Assign(ASource: TSQLObjectAbstract);
@@ -5678,6 +5710,34 @@ begin
     State:=TFBSQLCreateUser(ASource).State;
     GrantOptions:=TFBSQLCreateUser(ASource).GrantOptions;
   end;
+  inherited Assign(ASource);
+end;
+
+{ TFBSQLAlterUser }
+
+procedure TFBSQLAlterUser.InitParserTree;
+begin
+  inherited InitParserTree;
+end;
+
+procedure TFBSQLAlterUser.InternalProcessChildToken(ASQLParser: TSQLParser;
+  AChild: TSQLTokenRecord; const AWord: string);
+begin
+  inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+end;
+
+procedure TFBSQLAlterUser.MakeSQL;
+begin
+  inherited MakeSQL;
+end;
+
+constructor TFBSQLAlterUser.Create(AParent: TSQLCommandAbstract);
+begin
+  inherited Create(AParent);
+end;
+
+procedure TFBSQLAlterUser.Assign(ASource: TSQLObjectAbstract);
+begin
   inherited Assign(ASource);
 end;
 
@@ -6647,7 +6707,7 @@ begin
       S1:=S1 + ' COMPUTED BY (' + F.ComputedSource + ')'
     else
     begin
-      if ServerVersion in [gds_verFirebird3_0] then
+      if ServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
       begin
         if fpAutoInc in F.Params then
         begin
@@ -7284,7 +7344,7 @@ end;
 
 procedure DoChangeType(OP: TAlterTableOperator);
 begin
-  if ServerVersion = gds_verFirebird3_0 then
+  if ServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
     AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s TYPE %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName])
   else
     AddSQLCommandEx('update RDB$RELATION_FIELDS set RDB$FIELD_SOURCE = ''%s'' where (RDB$FIELD_NAME = ''%s'') and (RDB$RELATION_NAME = ''%s'')',
@@ -7310,7 +7370,7 @@ begin
       ataAlterColumnSetNotNull,
       ataAlterColumnDropNotNull:
         begin
-          if ServerVersion in [gds_verFirebird3_0] then
+          if ServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
           begin
             if fpNotNull in OP.Field.Params then
               S:='SET'
