@@ -748,6 +748,12 @@ type
 
   TFBSQLAlterUser= class(TSQLCommandDDL)
   private
+    FFirstName: string;
+    FGrantOptions: TGrantOptions;
+    FLastName: string;
+    FMiddleName: string;
+    FPluginName: string;
+    FState: TTriggerState;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
@@ -755,6 +761,12 @@ type
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
+    property PluginName:string read FPluginName write FPluginName;
+    property FirstName:string read FFirstName write FFirstName;
+    property MiddleName:string read FMiddleName write FMiddleName;
+    property LastName:string read FLastName write FLastName;
+    property State:TTriggerState read FState write FState;
+    property GrantOptions:TGrantOptions read FGrantOptions write FGrantOptions;
   end;
 
   { TFBSQLDropUser }
@@ -5716,28 +5728,79 @@ end;
 { TFBSQLAlterUser }
 
 procedure TFBSQLAlterUser.InitParserTree;
+var
+  FSQLTokens, T, TUsrName, TUsrName1: TSQLTokenRecord;
 begin
   inherited InitParserTree;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okUser);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
+  TUsrName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+    T:=AddSQLTokens(stKeyword,FSQLTokens, 'CURRENT', [], 0);
+  TUsrName1:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast], 2);
+//  TSet
+
+
+(*
+  ALTER {USER username | CURRENT USER}
+  [SET] [<user_option> [<user_option> ...]]
+  [TAGS (<user_var> [, <user_var> ...]]
+
+  <user_option> ::=
+  PASSWORD 'password'
+  | FIRSTNAME 'firstname'
+  | MIDDLENAME 'middlename'
+  | LASTNAME 'lastname'
+  | {GRANT | REVOKE} ADMIN ROLE
+  | {ACTIVE | INACTIVE}
+  | USING PLUGIN plugin_name
+
+  <user_var> ::=
+  tag_name = 'tag_va
+*)
 end;
 
 procedure TFBSQLAlterUser.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:Name:='CURRENT USER';
+  end;
 end;
 
 procedure TFBSQLAlterUser.MakeSQL;
+var
+  S: String;
 begin
   inherited MakeSQL;
+  S:='ALTER';
+  if Name <> 'CURRENT USER' then
+    S:=S + ' USER ' + Name
+  else
+    S:=S + Name;
+
+  AddSQLCommand(S);
 end;
 
 constructor TFBSQLAlterUser.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
+  ObjectKind:=okUser;
 end;
 
 procedure TFBSQLAlterUser.Assign(ASource: TSQLObjectAbstract);
 begin
+  inherited Assign(ASource);
+  if ASource is TFBSQLAlterUser then
+  begin
+    PluginName:=TFBSQLCreateUser(ASource).PluginName;
+    FirstName:=TFBSQLCreateUser(ASource).FirstName;
+    MiddleName:=TFBSQLCreateUser(ASource).MiddleName;
+    LastName:=TFBSQLCreateUser(ASource).LastName;
+    State:=TFBSQLCreateUser(ASource).State;
+    GrantOptions:=TFBSQLCreateUser(ASource).GrantOptions;
+  end;
   inherited Assign(ASource);
 end;
 
