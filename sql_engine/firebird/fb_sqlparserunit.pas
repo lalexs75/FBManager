@@ -746,14 +746,16 @@ type
 
   { TFBSQLAlterUser }
 
-  TFBSQLAlterUser= class(TSQLCommandDDL)
+  TFBSQLAlterUser= class(TSQLCreateLogin)
   private
     FFirstName: string;
     FGrantOptions: TGrantOptions;
+    FIsSet: Boolean;
     FLastName: string;
     FMiddleName: string;
     FPluginName: string;
     FState: TTriggerState;
+    FCurParam: TSQLParserField;
   protected
     procedure InitParserTree;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
@@ -767,6 +769,7 @@ type
     property LastName:string read FLastName write FLastName;
     property State:TTriggerState read FState write FState;
     property GrantOptions:TGrantOptions read FGrantOptions write FGrantOptions;
+    property IsSet:Boolean read FIsSet write FIsSet;
   end;
 
   { TFBSQLDropUser }
@@ -5729,7 +5732,11 @@ end;
 
 procedure TFBSQLAlterUser.InitParserTree;
 var
-  FSQLTokens, T, TUsrName, TUsrName1: TSQLTokenRecord;
+  FSQLTokens, T, TUsrName, TUsrName1, TPass, TPass1, TGrantAR1,
+    TGrantAR2, TGrantAR3, TSet, TFirst, TFirst1, TMidl, TMidl1,
+    TLastN, TLastN1, TActive, TInActive, TUsePlug, TUsePlug1,
+    TUsePlug2, TUsePlug3, TTags, TTagDrop, TTagName, T1,
+    TTags1, TTagValue: TSQLTokenRecord;
 begin
   inherited InitParserTree;
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okUser);
@@ -5737,8 +5744,45 @@ begin
   TUsrName:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T:=AddSQLTokens(stKeyword,FSQLTokens, 'CURRENT', [], 0);
   TUsrName1:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast], 2);
-//  TSet
 
+  TSet:=AddSQLTokens(stKeyword, [TUsrName, TUsrName1], 'SET', [], 6);
+
+  TPass:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'PASSWORD', [toOptional]);
+    TPass1:=AddSQLTokens(stString, TPass, '', [], 3);
+
+  TGrantAR1:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'GRANT', [toOptional], 4);
+  TGrantAR2:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'REVOKE', [toOptional], 5);
+  TGrantAR3:=AddSQLTokens(stKeyword, [TGrantAR1, TGrantAR2], 'ADMIN', []);
+  TGrantAR3:=AddSQLTokens(stKeyword, TGrantAR3, 'ROLE', []);
+
+  TFirst:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'FIRSTNAME', [toOptional]);
+  TFirst1:=AddSQLTokens(stString, TFirst, '', [], 7);
+
+  TMidl:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'MIDDLENAME', [toOptional]);
+  TMidl1:=AddSQLTokens(stString, TMidl, '', [], 8);
+
+  TLastN:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'LASTNAME', [toOptional]);
+  TLastN1:=AddSQLTokens(stString, TLastN, '', [], 9);
+
+  TActive:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'ACTIVE', [toOptional], 10);
+  TInActive:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'INACTIVE', [toOptional], 11);
+
+  TUsePlug:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'USING', [toOptional]);
+  TUsePlug1:=AddSQLTokens(stKeyword, TUsePlug, 'PLUGIN', []);
+  TUsePlug2:=AddSQLTokens(stString, TUsePlug1, '', [], 12);
+  TUsePlug3:=AddSQLTokens(stIdentificator, TUsePlug1, '', [], 12);
+
+  TTags:=AddSQLTokens(stKeyword, [TSet, TUsrName, TUsrName1], 'TAGS', [toOptional]);
+    T:=AddSQLTokens(stSymbol, TTags, '(', []);
+    TTagDrop:=AddSQLTokens(stKeyword, T, 'DROP', []);
+    TTagName:=AddSQLTokens(stIdentificator, TTagDrop, '', [], 13);
+    TTags1:=AddSQLTokens(stSymbol, TTagName, ')', []);
+    T1:=AddSQLTokens(stSymbol, TTagName, ',', []);
+    TTagName:=AddSQLTokens(stIdentificator, [T, T1], '', [], 14);
+    T:=AddSQLTokens(stSymbol, TTagName, '=', []);
+    TTagValue:=AddSQLTokens(stString, T, '', [], 15);
+    TTagValue.AddChildToken([T1]);
+    T1.AddChildToken([TTagDrop]);
 
 (*
   ALTER {USER username | CURRENT USER}
@@ -5757,21 +5801,53 @@ begin
   <user_var> ::=
   tag_name = 'tag_va
 *)
+  TGrantAR3.AddChildToken([TPass, TFirst, TMidl, TLastN, TActive, TInActive, TUsePlug, TTags]);
+  TPass1.AddChildToken([TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, TActive, TInActive, TUsePlug, TTags]);
+  TFirst1.AddChildToken([TPass, TGrantAR1, TGrantAR2, {TFirst,} TMidl, TLastN, TActive, TInActive, TUsePlug, TTags]);
+  TMidl1.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, {TMidl,} TLastN, TActive, TInActive, TUsePlug, TTags]);
+  TLastN1.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, {TLastN,} TActive, TInActive, TUsePlug, TTags]);
+
+  TActive.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, {TActive,} TInActive,  TUsePlug, TTags]);
+  TInActive.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, TActive, {TInActive, } TUsePlug, TTags]);
+
+  TUsePlug2.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, TActive, TInActive{, TUsePlug}, TTags]);
+  TUsePlug3.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, TActive, TInActive{, TUsePlug}, TTags]);
+  TTags1.AddChildToken([TPass, TGrantAR1, TGrantAR2, TFirst, TMidl, TLastN, TActive, TInActive, TUsePlug{, TTags}]);
 end;
 
 procedure TFBSQLAlterUser.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; const AWord: string);
+var
+  C: TSQLParserField;
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
     2:Name:='CURRENT USER';
+    3:Password:=ExtractQuotedString(AWord, '''');
+    4:GrantOptions:=goGrant;
+    5:GrantOptions:=goRevoke;
+    6:IsSet:=true;
+    7:FirstName:=ExtractQuotedString(AWord, '''');
+    8:MiddleName:=ExtractQuotedString(AWord, '''');
+    9:LastName:=ExtractQuotedString(AWord, '''');
+    10:State:=trsActive;
+    11:State:=trsInactive;
+    12:PluginName:=ExtractQuotedString(AWord, '''');
+    13:Params.AddParamEx(AWord, '');
+    14:FCurParam:=Params.AddParamEx(AWord, '');
+    15:if Assigned(FCurParam) then
+       begin
+         FCurParam.ParamValue:=ExtractQuotedString(AWord, '''');
+         FCurParam:=nil;
+       end;
   end;
 end;
 
 procedure TFBSQLAlterUser.MakeSQL;
 var
-  S: String;
+  S, S1: String;
+  P: TSQLParserField;
 begin
   inherited MakeSQL;
   S:='ALTER';
@@ -5780,6 +5856,46 @@ begin
   else
     S:=S + Name;
 
+  if IsSet then S:=S + ' SET';
+
+  if Password <> '' then
+    S:=S + ' PASSWORD ' + QuotedString(TrimRight(Password), '''');
+
+  if FirstName <> '' then
+    S:=S + ' FIRSTNAME ' + QuotedString(TrimRight(FirstName), '''');
+
+  if MiddleName <> '' then
+    S:=S + ' MIDDLENAME ' + QuotedString(TrimRight(MiddleName), '''');
+
+  if LastName <> '' then
+    S:=S + ' LASTNAME ' + QuotedString(TrimRight(LastName), '''');
+
+
+  if GrantOptions = goGrant then
+    S:=S + ' GRANT ADMIN ROLE'
+  else
+  if GrantOptions = goRevoke then
+    S:=S + ' REVOKE ADMIN ROLE';
+
+  if State = trsActive then
+    S:=S + ' ACTIVE'
+  else
+  if State = trsInactive then
+    S:=S + ' INACTIVE';
+
+  if PluginName <> '' then
+    S:=S + ' USING PLUGIN ' + PluginName;
+
+  S1:='';
+  for P in Params do
+  begin
+    if S1<>'' then S1:=S1+', ';
+    if P.ParamValue = '' then
+      S1:=S1 + 'DROP ' + P.Caption
+    else
+      S1:=S1 + P.Caption + ' = ' + QuotedString(TrimRight(P.ParamValue), '''');
+  end;
+  if S1<>'' then S:=S + ' TAGS ('+S1+')';
   AddSQLCommand(S);
 end;
 
@@ -5791,15 +5907,15 @@ end;
 
 procedure TFBSQLAlterUser.Assign(ASource: TSQLObjectAbstract);
 begin
-  inherited Assign(ASource);
   if ASource is TFBSQLAlterUser then
   begin
-    PluginName:=TFBSQLCreateUser(ASource).PluginName;
-    FirstName:=TFBSQLCreateUser(ASource).FirstName;
-    MiddleName:=TFBSQLCreateUser(ASource).MiddleName;
-    LastName:=TFBSQLCreateUser(ASource).LastName;
-    State:=TFBSQLCreateUser(ASource).State;
-    GrantOptions:=TFBSQLCreateUser(ASource).GrantOptions;
+    PluginName:=TFBSQLAlterUser(ASource).PluginName;
+    FirstName:=TFBSQLAlterUser(ASource).FirstName;
+    MiddleName:=TFBSQLAlterUser(ASource).MiddleName;
+    LastName:=TFBSQLAlterUser(ASource).LastName;
+    State:=TFBSQLAlterUser(ASource).State;
+    GrantOptions:=TFBSQLAlterUser(ASource).GrantOptions;
+    IsSet:=TFBSQLAlterUser(ASource).IsSet;
   end;
   inherited Assign(ASource);
 end;

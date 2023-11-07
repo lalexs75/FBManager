@@ -1358,7 +1358,7 @@ begin
 {$ENDIF}
   FFBTransaction:=TUIBTransaction.Create(nil);
   FFBTransaction.DataBase:=FBDatabase;
-  FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
+  //FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
 
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 

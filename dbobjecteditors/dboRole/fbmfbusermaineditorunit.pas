@@ -79,16 +79,21 @@ begin
   Result:=true;
   case PageAction of
     epaPrint:PrintPage;
+    epaRefresh:
+      begin
+        DBObject.RefreshObject;
+        LoadUserData;
+      end;
   end;
 end;
 
 function TfbmFBUserMainEditorFrame.ActionEnabled(PageAction: TEditorPageAction
   ): boolean;
 begin
-{  if DBObject.State = sdboCreate then }
+  if DBObject.State = sdboCreate then
     Result:=PageAction in [epaPrint, epaCompile]
-{  else
-    Result:=PageAction in [epaPrint]; }
+  else
+    Result:=PageAction in [epaPrint, epaCompile, epaRefresh];
 end;
 
 procedure TfbmFBUserMainEditorFrame.PrintPage;
@@ -117,6 +122,7 @@ begin
   CheckBox2.Checked:=F.Active;
   CheckBox1.Checked:=F.IsAdmin;
 
+  ValueListEditor1.Clear;
   for i:=0 to F.Params.Count-1 do
     ValueListEditor1.InsertRow(F.Params.Names[i], F.Params.ValueFromIndex[i], true);
 end;
