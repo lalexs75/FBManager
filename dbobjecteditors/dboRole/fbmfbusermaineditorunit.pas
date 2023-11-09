@@ -26,8 +26,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit,
-  ExtCtrls, fdmAbstractEditorUnit, SQLEngineAbstractUnit, fbmSqlParserUnit,
-  FBSQLEngineUnit, FBSQLEngineSecurityUnit;
+  ExtCtrls, Menus, DB, RxDBGrid, rxmemds, fdmAbstractEditorUnit,
+  SQLEngineAbstractUnit, fbmSqlParserUnit, FBSQLEngineUnit,
+  FBSQLEngineSecurityUnit;
 
 type
 
@@ -36,6 +37,7 @@ type
   TfbmFBUserMainEditorFrame = class(TEditorPage)
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    dsUserAtribs: TDataSource;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
@@ -53,7 +55,16 @@ type
     Label8: TLabel;
     CLabel: TLabel;
     Panel1: TPanel;
-    ValueListEditor1: TValueListEditor;
+    PopupMenu1: TPopupMenu;
+    RxDBGrid1: TRxDBGrid;
+    rxUserAtribs: TRxMemoryData;
+    rxUserAtribsATTRIB_KEY: TStringField;
+    rxUserAtribsATTRIB_VALUE: TStringField;
+    rxUserAtribsIS_DELETED: TBooleanField;
+    rxUserAtribsIS_EXISTS: TBooleanField;
+    rxUserAtribsOLD_ATTRIB_VALUE: TStringField;
+    procedure rxUserAtribsAfterInsert(DataSet: TDataSet);
+    procedure rxUserAtribsFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
@@ -72,6 +83,18 @@ uses fbmStrConstUnit, fb_SqlParserUnit;
 {$R *.lfm}
 
 { TfbmFBUserMainEditorFrame }
+
+procedure TfbmFBUserMainEditorFrame.rxUserAtribsAfterInsert(DataSet: TDataSet);
+begin
+  rxUserAtribsIS_EXISTS.AsBoolean:=false;
+  rxUserAtribsIS_DELETED.AsBoolean:=false;
+end;
+
+procedure TfbmFBUserMainEditorFrame.rxUserAtribsFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  Accept:=not rxUserAtribsIS_DELETED.AsBoolean;
+end;
 
 function TfbmFBUserMainEditorFrame.DoMetod(PageAction: TEditorPageAction
   ): boolean;
@@ -108,9 +131,10 @@ var
   F: TFireBirUser;
   i: Integer;
 begin
-
   Edit2.Text:='';
   Edit3.Text:='';
+  rxUserAtribs.CloseOpen;
+  rxUserAtribs.Filtered:=true;
   if DBObject.State = sdboCreate then Exit;
 
   Edit1.Text:=DBObject.Caption;
@@ -122,9 +146,16 @@ begin
   CheckBox2.Checked:=F.Active;
   CheckBox1.Checked:=F.IsAdmin;
 
-  ValueListEditor1.Clear;
   for i:=0 to F.Params.Count-1 do
-    ValueListEditor1.InsertRow(F.Params.Names[i], F.Params.ValueFromIndex[i], true);
+  begin
+    rxUserAtribs.Append;
+    rxUserAtribsATTRIB_KEY.AsString:=F.Params.Names[i];
+    rxUserAtribsATTRIB_VALUE.AsString:=F.Params.ValueFromIndex[i];
+    rxUserAtribsOLD_ATTRIB_VALUE.AsString:=F.Params.ValueFromIndex[i];
+    rxUserAtribsIS_EXISTS.AsBoolean:=true;
+    rxUserAtribs.Post;
+  end;
+  rxUserAtribs.First;
 end;
 
 procedure TfbmFBUserMainEditorFrame.Localize;
@@ -184,9 +215,15 @@ begin
     else
       FC.State:=trsInactive;
 
-    for i:=0 to ValueListEditor1.RowCount-1 do
-      FC.Params.AddParamEx(ValueListEditor1.Cells[0, i], ValueListEditor1.Cells[1, i]);
-
+    rxUserAtribs.Filtered:=false;
+    rxUserAtribs.First;
+    while not rxUserAtribs.EOF do
+    begin
+      FC.Params.AddParamEx(rxUserAtribsATTRIB_KEY.AsString, rxUserAtribsATTRIB_VALUE.AsString);
+      rxUserAtribs.Next;
+    end;
+    rxUserAtribs.First;
+    rxUserAtribs.Filtered:=true;
     Result:=true;
   end
   else

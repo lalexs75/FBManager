@@ -179,32 +179,7 @@ inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
     BorderSpacing.Around = 6
     Caption = 'Atributes'
   end
-  object ValueListEditor1: TValueListEditor[15]
-    AnchorSideLeft.Control = Label8
-    AnchorSideTop.Control = Label8
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = Owner
-    AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 133
-    Top = 261
-    Width = 634
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Around = 6
-    DefaultColWidth = 250
-    FixedCols = 0
-    RowCount = 2
-    TabOrder = 7
-    TitleStyle = tsNative
-    KeyOptions = [keyUnique]
-    ColWidths = (
-      250
-      382
-    )
-  end
-  object Panel1: TPanel[16]
+  object Panel1: TPanel[15]
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
@@ -217,7 +192,7 @@ inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
     BorderSpacing.Around = 6
     ClientHeight = 66
     ClientWidth = 106
-    TabOrder = 8
+    TabOrder = 7
     object CheckBox1: TCheckBox
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = CheckBox2
@@ -242,7 +217,7 @@ inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
       TabOrder = 1
     end
   end
-  object CLabel: TLabel[17]
+  object CLabel: TLabel[16]
     AnchorSideLeft.Control = Owner
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Control = Owner
@@ -250,5 +225,214 @@ inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
     Height = 1
     Top = 0
     Width = 1
+  end
+  object RxDBGrid1: TRxDBGrid[17]
+    AnchorSideLeft.Control = Label8
+    AnchorSideTop.Control = Label8
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 139
+    Top = 261
+    Width = 646
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        SizePriority = 0
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ATTRIB_KEY'
+        Width = 250
+        FieldName = 'ATTRIB_KEY'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ATTRIB_VALUE'
+        Width = 369
+        FieldName = 'ATTRIB_VALUE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoFillColumns = True
+    Color = clWindow
+    DrawFullLine = False
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    DataSource = dsUserAtribs
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 8
+    TitleStyle = tsNative
+  end
+  object rxUserAtribs: TRxMemoryData[18]
+    FieldDefs = <    
+      item
+        Name = 'ATTRIB_KEY'
+        DataType = ftString
+        Size = 150
+      end    
+      item
+        Name = 'ATTRIB_VALUE'
+        DataType = ftString
+        Size = 600
+      end    
+      item
+        Name = 'OLD_ATTRIB_VALUE'
+        DataType = ftString
+        Size = 600
+      end    
+      item
+        Name = 'IS_EXISTS'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'IS_DELETED'
+        DataType = ftBoolean
+      end>
+    AfterInsert = rxUserAtribsAfterInsert
+    OnFilterRecord = rxUserAtribsFilterRecord
+    PacketRecords = 0
+    Left = 391
+    Top = 312
+    object rxUserAtribsATTRIB_KEY: TStringField
+      FieldKind = fkData
+      FieldName = 'ATTRIB_KEY'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 150
+    end
+    object rxUserAtribsATTRIB_VALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'ATTRIB_VALUE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 600
+    end
+    object rxUserAtribsOLD_ATTRIB_VALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'OLD_ATTRIB_VALUE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 600
+    end
+    object rxUserAtribsIS_EXISTS: TBooleanField
+      FieldKind = fkData
+      FieldName = 'IS_EXISTS'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUserAtribsIS_DELETED: TBooleanField
+      FieldKind = fkData
+      FieldName = 'IS_DELETED'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+  end
+  object dsUserAtribs: TDataSource[19]
+    DataSet = rxUserAtribs
+    Left = 352
+    Top = 312
+  end
+  object PopupMenu1: TPopupMenu[20]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 312
+    Top = 312
   end
 end
