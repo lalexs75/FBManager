@@ -637,7 +637,6 @@ type
     function GetLiBraryName: TFileName;
     procedure LoadDBParams;
     procedure OnUIBSqlParse(Sender: TObject; NodeType: TSQLStatement; const Statement: string);
-    //procedure SetLibraryName(AValue: TFileName);
     procedure FillFieldTypeCodes;
   protected
     function GetImageIndex: integer;override;
@@ -1342,6 +1341,8 @@ begin
   Result.Database:=FBDatabase;
   Result.Transaction:=FBTransaction;
   Result.Sql.Text:=aSQL;
+  if not FBTransaction.InTransaction then
+    FBTransaction.StartTransaction;
 end;
 
 procedure TSQLEngineFireBird.DoInitFBSqlEngine;
@@ -1358,7 +1359,6 @@ begin
 {$ENDIF}
   FFBTransaction:=TUIBTransaction.Create(nil);
   FFBTransaction.DataBase:=FBDatabase;
-  //FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
 
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 
@@ -1845,6 +1845,8 @@ begin
   end;
   Qry.Free;
   MetaTransaction.Free;
+  if FBTransaction.InTransaction then
+    FBTransaction.Commit;
 end;
 
 procedure TSQLEngineFireBird.AssignDataBase(Query: TUIBQuery);
