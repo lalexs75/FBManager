@@ -776,12 +776,15 @@ type
 
   TFBSQLDropUser = class(TSQLDropCommandAbstract)
   private
+    FPluginName: string;
   protected
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
+    procedure Assign(ASource:TSQLObjectAbstract); override;
+    property PluginName:string read FPluginName write FPluginName;
   end;
 
   { TFBSQLCommentOn }
@@ -5739,7 +5742,9 @@ var
     TTags1, TTagValue: TSQLTokenRecord;
 begin
   inherited InitParserTree;
-  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken], 0, okUser);
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], -2, okUser);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'OR', [], 0, okUser);
+  FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'ALTER', [toFirstToken], 0, okUser);
     T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
   TUsrName:=AddSQLTokens(stIdentificator, T, '', [], 1);
     T:=AddSQLTokens(stKeyword,FSQLTokens, 'CURRENT', [], 0);
@@ -5850,7 +5855,10 @@ var
   P: TSQLParserField;
 begin
   inherited MakeSQL;
-  S:='ALTER';
+  if ooOrReplase in Options then
+    S:='CREATE OR ALTER'
+  else
+    S:='ALTER';
   if Name <> 'CURRENT USER' then
     S:=S + ' USER ' + Name
   else
@@ -5923,24 +5931,57 @@ end;
 { TFBSQLDropUser }
 
 procedure TFBSQLDropUser.InitParserTree;
+var
+  FSQLTokens, T, TUsrName: TSQLTokenRecord;
 begin
   inherited InitParserTree;
+  FSQLTokens:=AddSQLTokens(stKeyword, nil, 'DROP', [toFirstToken], 0, okUser);
+    T:=AddSQLTokens(stKeyword, FSQLTokens, 'USER', [toFindWordLast]);
+  TUsrName:=AddSQLTokens(stIdentificator, T, '', [], 1);
+    T:=AddSQLTokens(stKeyword, TUsrName, 'USING', [toOptional]);
+    T:=AddSQLTokens(stKeyword, T, 'PLUGIN', []);
+    T:=AddSQLTokens(stIdentificator, T, '', [], 2);
+
+{
+  DROP USER username
+    [USING PLUGIN plugin_name]
+}
 end;
 
 procedure TFBSQLDropUser.MakeSQL;
+var
+  S: String;
 begin
   inherited MakeSQL;
+  S:='DROP USER '+Name;
+  if PluginName<>'' then
+    S:=S + ' USING PLUGIN '+PluginName;
+  AddSQLCommand(S);
 end;
 
 procedure TFBSQLDropUser.InternalProcessChildToken(ASQLParser: TSQLParser;
   AChild: TSQLTokenRecord; const AWord: string);
 begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
+  case AChild.Tag of
+    1:Name:=AWord;
+    2:PluginName:=AWord;
+  end;
 end;
 
 constructor TFBSQLDropUser.Create(AParent: TSQLCommandAbstract);
 begin
   inherited Create(AParent);
+  ObjectKind:=okUser;
+end;
+
+procedure TFBSQLDropUser.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+  if ASource is TFBSQLDropUser then
+  begin
+    PluginName:=TFBSQLDropUser(ASource).PluginName;
+  end;
 end;
 
 { TFBSQLCreateRole }
@@ -5952,6 +5993,30 @@ begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okRole);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
+
+{
+  CREATE ROLE rolename
+  [SET SYSTEM PRIVILEGES TO <sys_privileges>]
+  <sys_privileges> ::=
+  <sys_privilege> [, <sys_privilege> ...]
+  <sys_privilege> ::=
+  USER_MANAGEMENT | READ_RAW_PAGES
+  | CREATE_USER_TYPES | USE_NBACKUP_UTILITY
+  | CHANGE_SHUTDOWN_MODE | TRACE_ANY_ATTACHMENT
+  | MONITOR_ANY_ATTACHMENT | ACCESS_SHUTDOWN_DATABASE
+  | CREATE_DATABASE | DROP_DATABASE
+  | USE_GBAK_UTILITY | USE_GSTAT_UTILITY
+  | USE_GFIX_UTILITY | IGNORE_DB_TRIGGERS
+  | CHANGE_HEADER_SETTINGS
+  | SELECT_ANY_OBJECT_IN_DATABASE
+  | ACCESS_ANY_OBJECT_IN_DATABASE
+  | MODIFY_ANY_OBJECT_IN_DATABASE
+  | CHANGE_MAPPING_RULES | USE_GRANTED_BY_CLAUSE
+  | GRANT_REVOKE_ON_ANY_OBJECT
+  | GRANT_REVOKE_ANY_DDL_RIGHT
+  | CREATE_PRIVILEGED_ROLES | GET_DBCRYPT_INFO
+  | MODIFY_EXT_CONN_POOL | REPLICATE_INTO_DATABASE
+}
 end;
 
 procedure TFBSQLCreateRole.InternalProcessChildToken(ASQLParser: TSQLParser;
