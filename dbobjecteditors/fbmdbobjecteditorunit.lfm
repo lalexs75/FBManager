@@ -6,11 +6,11 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   Caption = 'Edit ...'
   ClientHeight = 569
   ClientWidth = 912
-  OnClose = FormClose
   Position = poScreenCenter
   SessionProperties = 'ListBox1.Width'
   ShowHint = True
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '3.99.0.0'
+  OnClose = FormClose
   object Panel2: TPanel
     Left = 216
     Height = 440
@@ -128,31 +128,31 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
   end
   object ListBox1: TListBox
     Left = 0
-    Height = 524
-    Top = 45
+    Height = 528
+    Top = 41
     Width = 100
     Align = alLeft
     ItemHeight = 0
-    OnClick = ListBox1Click
     ScrollWidth = 98
     TabOrder = 1
     TopIndex = -1
+    OnClick = ListBox1Click
   end
   object Splitter1: TSplitter
     Left = 100
-    Height = 524
-    Top = 45
+    Height = 528
+    Top = 41
     Width = 5
   end
   object Panel1: TPanel
     Left = 0
-    Height = 45
+    Height = 41
     Top = 0
     Width = 912
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    ClientHeight = 45
+    ClientHeight = 41
     ClientWidth = 912
     TabOrder = 3
     object Label1: TLabel
@@ -161,7 +161,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideBottom.Side = asrBottom
       Left = 6
       Height = 17
-      Top = 22
+      Top = 18
       Width = 76
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
@@ -175,7 +175,7 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 88
-      Height = 33
+      Height = 29
       Top = 6
       Width = 818
       Anchors = [akTop, akLeft, akRight]
@@ -194,8 +194,8 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       Caption = 'Compile'
       Hint = 'Compile'
       ImageIndex = 61
-      OnExecute = edtCompileExecute
       ShortCut = 16504
+      OnExecute = edtCompileExecute
     end
     object dtExport: TAction
       Category = 'Data'

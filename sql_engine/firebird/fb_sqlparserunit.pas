@@ -690,7 +690,7 @@ type
   end;
 
   { TFBSQLAlterRole }
-  TFBSQLAlterRoleAction = (araSet, araDrop);
+  TFBSQLAlterRoleAction = (araNone, araSet, araDrop, araDropSysPriv);
 
   TFBSQLAlterRole = class(TSQLCommandDDL)
   private
@@ -797,6 +797,7 @@ type
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
     procedure MakeSQL;override;
   public
+    procedure Assign(ASource:TSQLObjectAbstract); override;
     property TableName;
     property PluginName:string read FPluginName write FPluginName;
   end;
@@ -1884,18 +1885,59 @@ end;
 
 procedure TFBSQLAlterRole.InitParserTree;
 var
-  FSQLTokens, T, T1, T2: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2, TRoleName, TDropSysPriv, TSetSysPriv: TSQLTokenRecord;
 begin
   //ALTER ROLE RDB$ADMIN SET AUTO ADMIN MAPPING -- включение
   //ALTER ROLE RDB$ADMIN DROP AUTO ADMIN MAPPING -- выключение
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'ALTER', [toFirstToken]);
   FSQLTokens:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
-  T:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
-  T1:=AddSQLTokens(stKeyword, T, 'SET', [], 2);
-  T2:=AddSQLTokens(stKeyword, T, 'DROP', [], 3);
+  TRoleName:=AddSQLTokens(stIdentificator, FSQLTokens, '', [], 1);
+
+  T1:=AddSQLTokens(stKeyword, TRoleName, 'SET', [], 2);
+  T2:=AddSQLTokens(stKeyword, TRoleName, 'DROP', [], 3);
   T:=AddSQLTokens(stIdentificator, [T1, T2], 'AUTO', []);
   T:=AddSQLTokens(stIdentificator, T, 'ADMIN', []);
   T:=AddSQLTokens(stIdentificator, T, 'MAPPING', []);
+
+  //TDropSysPriv:=AddSQLTokens(stKeyword, TRoleName, 'DROP', [], 4);
+    TDropSysPriv:=AddSQLTokens(stKeyword, T2, 'SYSTEM', [], 4);
+    TDropSysPriv:=AddSQLTokens(stKeyword, TDropSysPriv, 'PRIVILEGES', []);
+
+  //TSetSysPriv:=AddSQLTokens(stKeyword, TRoleName, 'SET', []);
+  TSetSysPriv:=AddSQLTokens(stKeyword, T1, 'SYSTEM', []);
+  TSetSysPriv:=AddSQLTokens(stKeyword, TSetSysPriv, 'PRIVILEGES', []);
+  TSetSysPriv:=AddSQLTokens(stKeyword, TSetSysPriv, 'TO', []);
+    TSetSysPriv:=AddSQLTokens(stIdentificator, TSetSysPriv, '', [], 5);
+    T:=AddSQLTokens(stSymbol, TSetSysPriv, ',', [toOptional]);
+    T.AddChildToken(TSetSysPriv);
+(*
+  ALTER ROLE rolename
+  { SET SYSTEM PRIVILEGES TO <sys_privileges>
+  | DROP SYSTEM PRIVILEGES
+  | {SET | DROP} AUTO ADMIN MAPPING }
+
+  <sys_privilege> ::=
+  USER_MANAGEMENT | READ_RAW_PAGES
+  | CREATE_USER_TYPES | USE_NBACKUP_UTILITY
+  | CHANGE_SHUTDOWN_MODE | TRACE_ANY_ATTACHMENT
+  | MONITOR_ANY_ATTACHMENT | ACCESS_SHUTDOWN_DATABASE
+  | CREATE_DATABASE | DROP_DATABASE
+  | USE_GBAK_UTILITY | USE_GSTAT_UTILITY
+  | USE_GFIX_UTILITY | IGNORE_DB_TRIGGERS
+  | CHANGE_HEADER_SETTINGS
+  | SELECT_ANY_OBJECT_IN_DATABASE
+  | ACCESS_ANY_OBJECT_IN_DATABASE
+  | MODIFY_ANY_OBJECT_IN_DATABASE
+  | CHANGE_MAPPING_RULES | USE_GRANTED_BY_CLAUSE
+  | GRANT_REVOKE_ON_ANY_OBJECT
+  | GRANT_REVOKE_ANY_DDL_RIGHT
+  | CREATE_PRIVILEGED_ROLES | GET_DBCRYPT_INFO
+  | MODIFY_EXT_CONN_POOL | REPLICATE_INTO_DATABASE
+  | PROFILE_ANY_ATTACHMENT
+
+*)
+
+
 end;
 
 procedure TFBSQLAlterRole.InternalProcessChildToken(ASQLParser: TSQLParser;
@@ -1906,6 +1948,11 @@ begin
     1:Name:=AWord;
     2:FAlterRoleAction:=araSet;
     3:FAlterRoleAction:=araDrop;
+    4:FAlterRoleAction:=araDropSysPriv;
+    5:begin
+        FAlterRoleAction:=araNone;
+        Params.AddParam(AWord);
+      end;
   end;
 end;
 
@@ -1917,10 +1964,13 @@ begin
   //ALTER ROLE RDB$ADMIN DROP AUTO ADMIN MAPPING -- выключение
   S:='ALTER ROLE '+Name;
   case FAlterRoleAction of
-    araSet:S:=S + ' SET';
-    araDrop:S:=S + ' DROP';
+    araSet:S:=S + ' SET AUTO ADMIN MAPPING';
+    araDrop:S:=S + ' DROP AUTO ADMIN MAPPING';
+    araDropSysPriv:S:=S +  ' DROP SYSTEM PRIVILEGES';
+  else
+    if Params.Count > 0 then
+      S:=S + ' SET SYSTEM PRIVILEGES TO '+Params.AsString;
   end;
-  S:=S +' AUTO ADMIN MAPPING';
   AddSQLCommand(S);
 end;
 
@@ -5539,6 +5589,15 @@ begin
   AddSQLCommand(S);
 end;
 
+procedure TFBSQLCommentOn.Assign(ASource: TSQLObjectAbstract);
+begin
+  inherited Assign(ASource);
+  if ASource is TFBSQLCommentOn then
+  begin
+    PluginName:=TFBSQLCommentOn(ASource).PluginName;
+  end;
+end;
+
 { TFBSQLDropRole }
 
 procedure TFBSQLDropRole.InitParserTree;
@@ -5988,34 +6047,80 @@ end;
 
 procedure TFBSQLCreateRole.InitParserTree;
 var
-  FSQLTokens, T: TSQLTokenRecord;
+  FSQLTokens, T, T1, T2: TSQLTokenRecord;
 begin
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'CREATE', [toFirstToken], 0, okRole);
   T:=AddSQLTokens(stKeyword, FSQLTokens, 'ROLE', [toFindWordLast]);
   T:=AddSQLTokens(stIdentificator, T, '', [], 1);
 
+  T:=AddSQLTokens(stKeyword, T, 'SET', [toOptional]);
+  T:=AddSQLTokens(stKeyword, T, 'SYSTEM', []);
+  T:=AddSQLTokens(stKeyword, T, 'PRIVILEGES', []);
+  T1:=AddSQLTokens(stKeyword, T, 'TO', []);
+    T2:=AddSQLTokens(stIdentificator, T1, '', [], 2);
+    T:=AddSQLTokens(stSymbol, T2, ',', [toOptional]);
+      T.AddChildToken(T2);
+
+{      AddSQLTokens(stIdentificator, [T1, T], 'READ_RAW_PAGES', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CREATE_USER_TYPES', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CREATE_USER_TYPES', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'USE_NBACKUP_UTILITY', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CHANGE_SHUTDOWN_MODE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'TRACE_ANY_ATTACHMENT', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'MONITOR_ANY_ATTACHMENT', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'ACCESS_SHUTDOWN_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CREATE_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'DROP_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'USE_GBAK_UTILITY', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'USE_GSTAT_UTILITY', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'USE_GFIX_UTILITY', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'IGNORE_DB_TRIGGERS', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CHANGE_HEADER_SETTINGS', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'SELECT_ANY_OBJECT_IN_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'ACCESS_ANY_OBJECT_IN_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'MODIFY_ANY_OBJECT_IN_DATABASE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CHANGE_MAPPING_RULES', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'USE_GRANTED_BY_CLAUSE', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'GRANT_REVOKE_ON_ANY_OBJECT', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'GRANT_REVOKE_ANY_DDL_RIGHT', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'CREATE_PRIVILEGED_ROLES', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'GET_DBCRYPT_INFO', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'MODIFY_EXT_CONN_POOL', [], 2).AddChildToken(T);
+      AddSQLTokens(stIdentificator, [T1, T], 'REPLICATE', [], 2).AddChildToken(T);}
+
 {
-  CREATE ROLE rolename
-  [SET SYSTEM PRIVILEGES TO <sys_privileges>]
-  <sys_privileges> ::=
-  <sys_privilege> [, <sys_privilege> ...]
-  <sys_privilege> ::=
-  USER_MANAGEMENT | READ_RAW_PAGES
-  | CREATE_USER_TYPES | USE_NBACKUP_UTILITY
-  | CHANGE_SHUTDOWN_MODE | TRACE_ANY_ATTACHMENT
-  | MONITOR_ANY_ATTACHMENT | ACCESS_SHUTDOWN_DATABASE
-  | CREATE_DATABASE | DROP_DATABASE
-  | USE_GBAK_UTILITY | USE_GSTAT_UTILITY
-  | USE_GFIX_UTILITY | IGNORE_DB_TRIGGERS
-  | CHANGE_HEADER_SETTINGS
-  | SELECT_ANY_OBJECT_IN_DATABASE
-  | ACCESS_ANY_OBJECT_IN_DATABASE
-  | MODIFY_ANY_OBJECT_IN_DATABASE
-  | CHANGE_MAPPING_RULES | USE_GRANTED_BY_CLAUSE
-  | GRANT_REVOKE_ON_ANY_OBJECT
-  | GRANT_REVOKE_ANY_DDL_RIGHT
-  | CREATE_PRIVILEGED_ROLES | GET_DBCRYPT_INFO
-  | MODIFY_EXT_CONN_POOL | REPLICATE_INTO_DATABASE
+CREATE ROLE rolename
+[SET SYSTEM PRIVILEGES TO <sys_privileges>]
+<sys_privileges> ::=
+<sys_privilege> [, <sys_privilege> ...]
+<sys_privilege> ::=
+
+USER_MANAGEMENT |
+READ_RAW_PAGES |
+CREATE_USER_TYPES |
+USE_NBACKUP_UTILITY |
+CHANGE_SHUTDOWN_MODE |
+TRACE_ANY_ATTACHMENT |
+MONITOR_ANY_ATTACHMENT |
+ACCESS_SHUTDOWN_DATABASE |
+CREATE_DATABASE |
+DROP_DATABASE |
+USE_GBAK_UTILITY |
+USE_GSTAT_UTILITY |
+USE_GFIX_UTILITY |
+IGNORE_DB_TRIGGERS |
+CHANGE_HEADER_SETTINGS |
+SELECT_ANY_OBJECT_IN_DATABASE |
+ACCESS_ANY_OBJECT_IN_DATABASE |
+MODIFY_ANY_OBJECT_IN_DATABASE |
+CHANGE_MAPPING_RULES |
+USE_GRANTED_BY_CLAUSE |
+GRANT_REVOKE_ON_ANY_OBJECT |
+GRANT_REVOKE_ANY_DDL_RIGHT |
+CREATE_PRIVILEGED_ROLES |
+GET_DBCRYPT_INFO |
+MODIFY_EXT_CONN_POOL |
+REPLICATE
 }
 end;
 
@@ -6025,12 +6130,19 @@ begin
   inherited InternalProcessChildToken(ASQLParser, AChild, AWord);
   case AChild.Tag of
     1:Name:=AWord;
+    2:Params.AddParam(AWord);
   end;
 end;
 
 procedure TFBSQLCreateRole.MakeSQL;
+var
+  S: String;
 begin
-  AddSQLCommandEx('CREATE ROLE %s', [FullName]);
+  S:=Format('CREATE ROLE %s', [FullName]);
+  if Params.Count > 0 then
+    S:=S + ' SET SYSTEM PRIVILEGES TO ' + Params.AsString;
+
+  AddSQLCommand(S);
   if Description <> '' then
     DescribeObject;
 end;

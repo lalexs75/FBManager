@@ -25,7 +25,7 @@ unit FBSQLEngineSecurityUnit;
 interface
 
 uses
-  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, FBSQLEngineUnit,
+  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, FBSQLEngineUnit, fb_utils,
   SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit;
 
 type
@@ -76,6 +76,7 @@ type
   TFireBirdRole = class(TDBUsersGroup)
   private
     FOwnerUser: string;
+    FSystemPrivileges: TFBSystemPrivilegesSet;
   protected
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
@@ -90,6 +91,7 @@ type
     function InternalGetDDLCreate: string; override;
     function CreateSQLObject:TSQLCommandDDL;override;
     property OwnerUser:string read FOwnerUser write FOwnerUser;
+    property SystemPrivileges:TFBSystemPrivilegesSet read FSystemPrivileges write FSystemPrivileges;
   end;
 
   { TFireBirUser }
@@ -130,7 +132,7 @@ uses fb_SqlParserUnit, fbSqlTextUnit, uib, ibmsqltextsunit,
 
 function TFBSecurityRoot.GetObjectType: string;
 begin
-
+  Result:='';
 end;
 
 procedure TFBSecurityRoot.RefreshGroup;
@@ -227,15 +229,21 @@ end;
 procedure TFireBirdRole.RefreshObject;
 var
   IBQ:TUIBQuery;
+  iSysPRiv: Word;
+  S: String;
 begin
   inherited RefreshObject;
   if State <> sdboEdit then exit;
 
-  IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(ssqlRoleRefresh);
+  IBQ:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sUsers['ssqlRoleRefresh']);
   IBQ.Params.ByNameAsString['role_name']:=Caption;
   try
     IBQ.Open;
     FDescription:=TSQLEngineFireBird(OwnerDB).ConvertString20(IBQ.Fields.ByNameAsString['rdb$description'], true);
+    if IBQ.Fields.TryGetFieldIndex('RDB$SYSTEM_PRIVILEGES', iSysPRiv) then
+    begin
+      S:=IBQ.Fields.AsRawByteString[iSysPRiv];
+    end;
   finally
     IBQ.Free;
   end;

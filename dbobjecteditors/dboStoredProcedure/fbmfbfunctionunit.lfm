@@ -24,7 +24,7 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         Left = 6
         Height = 17
         Top = 6
-        Width = 85
+        Width = 90
         BorderSpacing.Around = 6
         Caption = 'Function name'
         ParentColor = False
@@ -35,9 +35,9 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = CheckBox1
         Left = 12
-        Height = 34
+        Height = 29
         Top = 29
-        Width = 571
+        Width = 569
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
         TabOrder = 0
@@ -47,10 +47,10 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tabHeader
         AnchorSideRight.Side = asrBottom
-        Left = 589
+        Left = 587
         Height = 23
-        Top = 35
-        Width = 103
+        Top = 32
+        Width = 105
         Anchors = [akTop, akRight]
         BorderSpacing.Right = 6
         Caption = 'Deterministic'
@@ -62,8 +62,8 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideTop.Side = asrBottom
         Left = 6
         Height = 17
-        Top = 69
-        Width = 68
+        Top = 64
+        Width = 69
         BorderSpacing.Around = 6
         Caption = 'Return type'
         ParentColor = False
@@ -74,8 +74,8 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideTop.Side = asrBottom
         Left = 355
         Height = 17
-        Top = 69
-        Width = 40
+        Top = 64
+        Width = 44
         BorderSpacing.Around = 6
         Caption = 'Collate'
         ParentColor = False
@@ -87,8 +87,8 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideRight.Control = tabHeader
         AnchorSideRight.Side = asrBottom
         Left = 361
-        Height = 34
-        Top = 92
+        Height = 29
+        Top = 87
         Width = 331
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -101,8 +101,8 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = Label4
         Left = 12
-        Height = 34
-        Top = 92
+        Height = 29
+        Top = 87
         Width = 331
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Around = 6
@@ -190,7 +190,7 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
                 Title.Alignment = taCenter
                 Title.Orientation = toHorizontal
                 Title.Caption = 'SR_NAME'
-                Width = 109
+                Width = 117
                 FieldName = 'SR_NAME'
                 EditButtons = <>
                 Filter.DropDownRows = 0
@@ -267,7 +267,6 @@ inherited fbmFBFunctionEditor: TfbmFBFunctionEditor
             DrawFullLine = False
             FocusColor = clRed
             SelectedColor = clHighlight
-            GridLineStyle = psSolid
             DataSource = dsSubRout
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             PopupMenu = PopupMenu1

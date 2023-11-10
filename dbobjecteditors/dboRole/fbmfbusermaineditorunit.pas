@@ -25,7 +25,7 @@ unit fbmFBUserMainEditorUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit, fbmCompillerMessagesUnit,
   ExtCtrls, Menus, DB, RxDBGrid, rxmemds, fdmAbstractEditorUnit,
   SQLEngineAbstractUnit, fbmSqlParserUnit, FBSQLEngineUnit,
   FBSQLEngineSecurityUnit;
@@ -70,6 +70,8 @@ type
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;
     procedure PrintPage;
     procedure LoadUserData;
+    function ValidateData:Boolean;
+    function ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean; override;
   public
     procedure Localize;override;
     function PageName:string;override;
@@ -78,7 +80,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fb_SqlParserUnit;
+uses LR_Class, fbmStrConstUnit, IBManMainUnit, fb_SqlParserUnit;
 
 {$R *.lfm}
 
@@ -121,9 +123,9 @@ end;
 
 procedure TfbmFBUserMainEditorFrame.PrintPage;
 begin
-  //frVariables['DBClassTitle']:=DBObject.DBClassTitle;
-  //frVariables['ObjectName']:=edtRoleName.Text;
-  //fbManagerMainForm.LazReportPrint('DBObject_User');
+  frVariables['DBClassTitle']:=DBObject.DBClassTitle;
+  frVariables['ObjectName']:=Edit1.Text;
+  fbManagerMainForm.LazReportPrint('DBObject_User');
 end;
 
 procedure TfbmFBUserMainEditorFrame.LoadUserData;
@@ -158,12 +160,69 @@ begin
   rxUserAtribs.First;
 end;
 
+function TfbmFBUserMainEditorFrame.ValidateData: Boolean;
+begin
+  Result:=true;
+  if DBObject.State = sdboCreate then
+  begin
+    Result:=IsValidIdent(Edit1.Text);
+    if not Result then
+      ShowMsg(ppNone, sErrorDefineUserName, 1, 0);
+    if (Trim(Edit2.Text) = '') or (Edit2.Text<>Edit3.Text) then
+    begin
+      Result:=false;
+      ShowMsg(ppNone, sErrorDefineUserPassword, 4, 0);
+    end;
+  end
+  else
+  begin;
+    if (Trim(Edit2.Text) <> '') and (Edit2.Text<>Edit3.Text) then
+    begin
+      Result:=false;
+      ShowMsg(ppNone, sErrorDefineUserPassword, 4, 0);
+    end;
+  end;
+
+  if (Edit7.Text<>'') and not IsValidIdent(Edit7.Text) then
+  begin
+    Result:=false;
+    ShowMsg(ppNone, sErrorDefineAuthPluginName, 2, 0);
+  end;
+
+  rxUserAtribs.First;
+  while not rxUserAtribs.EOF do
+  begin
+    if not IsValidIdent(rxUserAtribsATTRIB_KEY.AsString) then
+    begin
+      Result:=false;
+      ShowMsg(ppNone, Format(sErrorDefineAttributeName, [rxUserAtribsATTRIB_KEY.AsString]), 3, rxUserAtribs.RecNo);
+    end;
+    rxUserAtribs.Next;
+  end;
+  rxUserAtribs.First;
+end;
+
+function TfbmFBUserMainEditorFrame.ppMsgListDblClick(
+  Sender: TfbmCompillerMessagesFrame; AInfo: TppMsgRec): Boolean;
+begin
+  case AInfo.Info1 of
+    1:Edit1.SetFocus;
+    2:Edit7.SetFocus;
+    3:begin
+        RxDBGrid1.SetFocus;
+        RxDBGrid1.SelectedField:=rxUserAtribsATTRIB_KEY;
+        rxUserAtribs.RecNo:=AInfo.Info2;
+      end;
+    4:Edit2.SetFocus;
+  end;
+end;
+
 procedure TfbmFBUserMainEditorFrame.Localize;
 begin
   inherited Localize;
   Label1.Caption:=sUserName1;
   Label2.Caption:=sPassword;
-  Label3.Caption:=sPassword; //!!
+  Label3.Caption:=sConfirmPassword; //!!
 
   Label4.Caption:=sFirstName;
   Label5.Caption:=sMiddleName;
@@ -174,6 +233,8 @@ begin
 
   CheckBox1.Caption:=sAdminRole;
   CheckBox2.Caption:=sActive;
+  RxDBGrid1.ColumnByFieldName('ATTRIB_KEY').Title.Caption:=sAttributeName;
+  RxDBGrid1.ColumnByFieldName('ATTRIB_VALUE').Title.Caption:=sAttributeValue;
 
 end;
 
@@ -197,6 +258,8 @@ var
   FA: TFBSQLAlterUser;
 begin
   Result:=false;
+  if not ValidateData then Exit;
+
   if ASQLObject is TFBSQLCreateUser then
   begin
     FC:=TFBSQLCreateUser(ASQLObject);
@@ -230,6 +293,8 @@ begin
   if ASQLObject is TFBSQLAlterUser then
   begin
     FA:=ASQLObject as TFBSQLAlterUser;
+    if Edit2.Text<>'' then
+      FA.Password:=Edit2.Text;
   end;
 end;
 

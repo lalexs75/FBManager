@@ -134,13 +134,6 @@ const
   //Roles
   ssqlRoleCreate =
                   'CREATE ROLE %s';
-  ssqlRoleRefresh =
-                ' select '+
-                '   rdb$roles.rdb$description '+
-                ' from '+
-                '   rdb$roles '+
-                ' where '+
-                '   rdb$roles.rdb$role_name = :role_name';
 
   ssqlRoleGrantDBObjects =
                 ' select '+

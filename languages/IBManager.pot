@@ -251,6 +251,14 @@ msgstr ""
 msgid "Attachment ID"
 msgstr ""
 
+#: fbmstrconstunit.sattributename
+msgid "Attribute name"
+msgstr ""
+
+#: fbmstrconstunit.sattributevalue
+msgid "Attribute value"
+msgstr ""
+
 #: fbmstrconstunit.sautofillcollumnwidth
 msgid "Auto fill collumn width"
 msgstr ""
@@ -1756,6 +1764,23 @@ msgstr ""
 
 #: fbmstrconstunit.serror
 msgid "Error"
+msgstr ""
+
+#: fbmstrconstunit.serrordefineattributename
+#, object-pascal-format
+msgid "Error define attribute name \"%s\""
+msgstr ""
+
+#: fbmstrconstunit.serrordefineauthpluginname
+msgid "Error define authentication plugin name"
+msgstr ""
+
+#: fbmstrconstunit.serrordefineusername
+msgid "Error define user name"
+msgstr ""
+
+#: fbmstrconstunit.serrordefineuserpassword
+msgid "Error define user password"
 msgstr ""
 
 #: fbmstrconstunit.serrorinparamname

@@ -279,6 +279,8 @@ resourcestring
   sMinDate                          = 'Min. date';
   sMaxDate                          = 'Max. date';
   sIncludeTime                      = 'Include time';
+  sAttributeName                    = 'Attribute name';
+  sAttributeValue                   = 'Attribute value';
 
   sNewIndex                         = 'New index';
   sEditIndex                        = 'Edit index';
@@ -1641,6 +1643,10 @@ resourcestring
   sErrorVariableDefenition                     = 'Error in variable defenition';
   sFillValuesForNotNullCollumn                 = 'Fill values for not null collumn';
   sErrorInParamName                            = 'Error in param name';
+  sErrorDefineUserName                         = 'Error define user name';
+  sErrorDefineUserPassword                     = 'Error define user password';
+  sErrorDefineAuthPluginName                   = 'Error define authentication plugin name';
+  sErrorDefineAttributeName                    = 'Error define attribute name "%s"';
 
   sPostgreSQLHelpURLLabel                      = 'PostgreSQL help site URL';
   sPostgreSQLHelpURL                           = 'https://www.postgresql.org/docs/$VERSION/';

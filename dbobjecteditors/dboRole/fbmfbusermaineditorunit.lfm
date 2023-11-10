@@ -214,6 +214,8 @@ inherited fbmFBUserMainEditorFrame: TfbmFBUserMainEditorFrame
       Width = 61
       BorderSpacing.Around = 6
       Caption = 'Active'
+      Checked = True
+      State = cbChecked
       TabOrder = 1
     end
   end

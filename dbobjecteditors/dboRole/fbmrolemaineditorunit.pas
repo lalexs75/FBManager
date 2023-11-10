@@ -25,7 +25,7 @@ unit fbmRoleMainEditorUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, StdCtrls,
+  Classes, SysUtils, FileUtil, LResources, Forms, StdCtrls, CheckLst,
   fdmAbstractEditorUnit, SQLEngineAbstractUnit, fbmSqlParserUnit,
   FBSQLEngineUnit;
 
@@ -34,8 +34,11 @@ type
   { TfbmRoleMainEditorFrame }
 
   TfbmRoleMainEditorFrame = class(TEditorPage)
+    CheckListBox1: TCheckListBox;
     edtRoleName: TEdit;
     Label1: TLabel;
+    Label2: TLabel;
+    CLabel: TLabel;
   private
     function DoMetod(PageAction:TEditorPageAction):boolean;override;
     function ActionEnabled(PageAction:TEditorPageAction):boolean;override;

@@ -110,6 +110,54 @@ type
     gds_verYaffil1_0
   );
 
+type
+  TFBSystemPrivileges =
+    (unused = 0,
+     USER_MANAGEMENT = 1,
+     READ_RAW_PAGES = 2,
+     CREATE_USER_TYPES = 3,
+     USE_NBACKUP_UTILITY = 4,
+     CHANGE_SHUTDOWN_MODE = 5,
+     TRACE_ANY_ATTACHMENT = 6,
+     MONITOR_ANY_ATTACHMENT = 7,
+     ACCESS_SHUTDOWN_DATABASE = 8,
+     CREATE_DATABASE = 9,
+     DROP_DATABASE = 10,
+     USE_GBAK_UTILITY = 11,
+     USE_GSTAT_UTILITY = 12,
+     USE_GFIX_UTILITY = 13,
+     IGNORE_DB_TRIGGERS = 14,
+     CHANGE_HEADER_SETTINGS = 15,
+     SELECT_ANY_OBJECT_IN_DATABASE = 16,
+     ACCESS_ANY_OBJECT_IN_DATABASE = 17,
+     MODIFY_ANY_OBJECT_IN_DATABASE = 18,
+     CHANGE_MAPPING_RULES = 19,
+     USE_GRANTED_BY_CLAUSE = 20,
+     GRANT_REVOKE_ON_ANY_OBJECT = 21,
+     GRANT_REVOKE_ANY_DDL_RIGHT = 22,
+     CREATE_PRIVILEGED_ROLES = 23,
+     GET_DBCRYPT_INFO = 24,
+     MODIFY_EXT_CONN_POOL = 25,
+     REPLICATE_INTO_DATABASE = 26,
+     PROFILE_ANY_ATTACHMENT = 27
+     );
+  TFBSystemPrivilegesSet = set of TFBSystemPrivileges;
+
+type
+  TUDFParamsRecord = record
+    ArgPosition:integer;
+    Mechanism:integer;
+    FieldType:integer;
+    FieldScale:integer;
+    FieldLength:integer;
+    FieldSubType:integer;
+    CharSetId:integer;
+    Precision:integer;
+    CharSetLength:integer;
+  end;
+  TUDFParamsArray = array [0..0] of TUDFParamsRecord;
+  PUDFParamsArray = ^TUDFParamsArray;
+
 const
   UIBProtocolStr:array[TUIBProtocol] of string = ('proLocalHost', 'proTCPIP', 'proNetBEUI');
 
@@ -132,21 +180,37 @@ const
    'Yaffil 1.0'
    );
 
-type
-  TUDFParamsRecord = record
-    ArgPosition:integer;
-    Mechanism:integer;
-    FieldType:integer;
-    FieldScale:integer;
-    FieldLength:integer;
-    FieldSubType:integer;
-    CharSetId:integer;
-    Precision:integer;
-    CharSetLength:integer;
-  end;
-  TUDFParamsArray = array [0..0] of TUDFParamsRecord;
-  PUDFParamsArray = ^TUDFParamsArray;
-
+const
+  FBSystemPrivilegesStr : array [TFBSystemPrivileges] of string = (
+    'unused',
+    'USER_MANAGEMENT',
+    'READ_RAW_PAGES',
+    'CREATE_USER_TYPES',
+    'USE_NBACKUP_UTILITY',
+    'CHANGE_SHUTDOWN_MODE',
+    'TRACE_ANY_ATTACHMENT',
+    'MONITOR_ANY_ATTACHMENT',
+    'ACCESS_SHUTDOWN_DATABASE',
+    'CREATE_DATABASE',
+    'DROP_DATABASE',
+    'USE_GBAK_UTILITY',
+    'USE_GSTAT_UTILITY',
+    'USE_GFIX_UTILITY',
+    'IGNORE_DB_TRIGGERS',
+    'CHANGE_HEADER_SETTINGS',
+    'SELECT_ANY_OBJECT_IN_DATABASE',
+    'ACCESS_ANY_OBJECT_IN_DATABASE',
+    'MODIFY_ANY_OBJECT_IN_DATABASE',
+    'CHANGE_MAPPING_RULES',
+    'USE_GRANTED_BY_CLAUSE',
+    'GRANT_REVOKE_ON_ANY_OBJECT',
+    'GRANT_REVOKE_ANY_DDL_RIGHT',
+    'CREATE_PRIVILEGED_ROLES',
+    'GET_DBCRYPT_INFO',
+    'MODIFY_EXT_CONN_POOL',
+    'REPLICATE_INTO_DATABASE',
+    'PROFILE_ANY_ATTACHMENT'
+);
 
 
 //function FB_SqlTypesToString(FBSqlType, FBSqlSubType:integer):string;

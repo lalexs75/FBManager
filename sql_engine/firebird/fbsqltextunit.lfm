@@ -785,6 +785,19 @@ object fbSqlTextData: TfbSqlTextData
           '  and'
           '    SEC$USER_ATTRIBUTES.SEC$PLUGIN = :PLUGIN'
         )
+      end    
+      item
+        Caption = 'ssqlRoleRefresh'
+        Lines.Strings = (
+          'select'
+          '  *'
+          'from'
+          '  rdb$roles'
+          'where'
+          '  rdb$roles.rdb$role_name = :role_name'
+          ''
+          ''
+        )
       end>
     Left = 40
     Top = 205
