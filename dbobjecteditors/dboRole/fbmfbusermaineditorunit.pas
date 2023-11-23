@@ -170,23 +170,23 @@ begin
       ShowMsg(ppNone, sErrorDefineUserName, 1, 0);
     if (Trim(Edit2.Text) = '') or (Edit2.Text<>Edit3.Text) then
     begin
-      Result:=false;
       ShowMsg(ppNone, sErrorDefineUserPassword, 4, 0);
+      Exit(false);
     end;
   end
   else
   begin;
     if (Trim(Edit2.Text) <> '') and (Edit2.Text<>Edit3.Text) then
     begin
-      Result:=false;
       ShowMsg(ppNone, sErrorDefineUserPassword, 4, 0);
+      Exit(false);
     end;
   end;
 
   if (Edit7.Text<>'') and not IsValidIdent(Edit7.Text) then
   begin
-    Result:=false;
     ShowMsg(ppNone, sErrorDefineAuthPluginName, 2, 0);
+    Exit(false);
   end;
 
   rxUserAtribs.First;
@@ -194,8 +194,9 @@ begin
   begin
     if not IsValidIdent(rxUserAtribsATTRIB_KEY.AsString) then
     begin
-      Result:=false;
       ShowMsg(ppNone, Format(sErrorDefineAttributeName, [rxUserAtribsATTRIB_KEY.AsString]), 3, rxUserAtribs.RecNo);
+      RxDBGrid1.SelectedField:=rxUserAtribsATTRIB_KEY;
+      Exit(false);
     end;
     rxUserAtribs.Next;
   end;
@@ -254,8 +255,9 @@ function TfbmFBUserMainEditorFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
   ): boolean;
 var
   FC: TFBSQLCreateUser;
-  i: Integer;
   FA: TFBSQLAlterUser;
+  i: Integer;
+  FO: TFireBirUser;
 begin
   Result:=false;
   if not ValidateData then Exit;
@@ -293,8 +295,56 @@ begin
   if ASQLObject is TFBSQLAlterUser then
   begin
     FA:=ASQLObject as TFBSQLAlterUser;
+    FO:=TFireBirUser(DBObject);
+
+
     if Edit2.Text<>'' then
+    begin
       FA.Password:=Edit2.Text;
+      Result:=true;
+    end;
+
+    if Edit4.Text<>FO.FirstName then
+    begin
+      FA.FirstName:=Edit4.Text;
+      Result:=true;
+    end;
+
+    if Edit5.Text<>FO.MiddleName then
+    begin
+      FA.MiddleName:=Edit5.Text;
+      Result:=true;
+    end;
+
+    if Edit6.Text<>FO.LastName then
+    begin
+      FA.LastName:=Edit6.Text;
+      Result:=true;
+    end;
+
+    if CheckBox2.Checked <> FO.Active then
+    begin
+      Result:=true;
+      if CheckBox2.Checked then
+        FA.State := trsActive
+      else
+        FA.State := trsInactive;
+    end;
+
+    if CheckBox1.Checked <> FO.IsAdmin then
+    begin
+      Result:=true;
+      if CheckBox1.Checked then
+        FA.GrantOptions := goGrant
+      else
+        FA.GrantOptions := goRevoke;
+    end;
+
+    if Edit7.Text<>FO.Plugin then
+    begin
+      FA.PluginName:=Edit7.Text;
+      Result:=true;
+    end;
   end;
 end;
 
