@@ -211,9 +211,9 @@ constructor TOIFolder.Create(AOwner: TTreeNode);
 begin
   inherited Create;
   FOwner:=AOwner;
-  FOwner.ImageIndex:=27;
-  FOwner.StateIndex:=27;
-  FOwner.SelectedIndex:=27;
+  FOwner.ImageIndex:=89;
+  FOwner.StateIndex:=90;
+  FOwner.SelectedIndex:=90;
   FOwner.Data:=Self;
   FFolderID:=-1;
 end;
