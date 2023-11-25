@@ -1303,13 +1303,8 @@ begin
       Result:='';
   end;
 end;
-(*
-procedure TDBInspectorRecord.SetDescription(const AValue: string);
-begin
-  DBObject.Description:=AValue;
-  UpdateCaption;
-end;
-*)
+
+
 function TDBInspectorRecord.GetImageIndex: integer;
 begin
   if RecordType = rtDBObject then

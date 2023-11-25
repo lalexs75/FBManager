@@ -1975,17 +1975,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="Exception"/>
-      </Item>
-      <Item>
-        <Name Value="EUIBError"/>
-      </Item>
-      <Item>
-        <Name Value="EZSQLException"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
