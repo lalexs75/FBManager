@@ -10,9 +10,9 @@ inherited fbmGeneratorMainEditorFrame: TfbmGeneratorMainEditorFrame
     AnchorSideTop.Control = edtGeneratorName
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 20
-    Top = 75
-    Width = 102
+    Height = 17
+    Top = 64
+    Width = 96
     BorderSpacing.Around = 6
     Caption = 'Generator value'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited fbmGeneratorMainEditorFrame: TfbmGeneratorMainEditorFrame
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 20
+    Height = 17
     Top = 6
-    Width = 103
+    Width = 99
     BorderSpacing.Around = 6
     Caption = 'Generator name'
     ParentColor = False
@@ -35,8 +35,8 @@ inherited fbmGeneratorMainEditorFrame: TfbmGeneratorMainEditorFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 32
+    Height = 29
+    Top = 29
     Width = 572
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -47,8 +47,8 @@ inherited fbmGeneratorMainEditorFrame: TfbmGeneratorMainEditorFrame
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 101
+    Height = 29
+    Top = 87
     Width = 202
     BorderSpacing.Around = 6
     TabOrder = 1

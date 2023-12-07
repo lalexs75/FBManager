@@ -100,6 +100,14 @@ function TfbmGeneratorMainEditorFrame.SetupSQLObject(ASQLObject: TSQLCommandDDL
 begin
   Result:=false;
   ASqlObject.Name:=edtGeneratorName.Text;
+  if (ASqlObject is TFBSQLAlterGenerator) then
+  begin
+    TFBSQLAlterGenerator(ASqlObject).CurrentValue:=edtGeneratorValue.Value;
+    TFBSQLAlterGenerator(ASqlObject).Command:=fbagAlter;
+    TFBSQLAlterGenerator(ASqlObject).CommandParams:=[fbagRestartWith] + TFBSQLAlterGenerator(ASqlObject).CommandParams;
+    Result:=true;
+  end
+  else
   if (ASqlObject is TFBSQLCreateGenerator) then
   begin
     TFBSQLCreateGenerator(ASqlObject).CurrentValue:=edtGeneratorValue.Value;
