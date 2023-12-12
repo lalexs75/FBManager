@@ -3004,7 +3004,7 @@ end;
 
 function TUDFRoot.DBMSObjectsList: string;
 begin
-  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird3_0] then
+  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
     Result:=fbSqlModule.sFunctions.Strings.Text
   else
     Result:=fbSqlModule.sFBUDF.Strings.Text;
@@ -3012,7 +3012,7 @@ end;
 
 function TUDFRoot.DBMSValidObject(AItem: TDBItem): boolean;
 begin
-  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird3_0] then
+  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
     Result:=Assigned(AItem) and (AItem.ObjType2 = 1)
   else
     Result:=true;
