@@ -802,6 +802,7 @@ procedure TFireBirdFunction.RefreshParams;
 var
   IBQ: TUIBQuery;
   Item: TDBField;
+  P:TDBMSFieldTypeRecord;
 begin
   inherited RefreshParams;
   FFieldsIN.Clear;
@@ -828,10 +829,14 @@ begin
       Item.FieldTypeDomain:=Trim(IBQ.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
       Item.FieldSQLTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_TYPE'];
       Item.FieldSQLSubTypeInt:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_SUB_TYPE'];
-      OwnerDB.TypeList.FindTypeByID(Item.FieldSQLTypeInt);//,  Item.FieldSQLSubTypeInt);
-      //Item.FieldTypeName:=FB_SqlTypesToString(Item.FieldSQLTypeInt,  Item.FieldSQLSubTypeInt);
+
+      P:=OwnerDB.TypeList.FindTypeByID(Item.FieldSQLTypeInt);
+      Item.FieldTypeName:=P.TypeName;
+
       Item.FieldSize:=IBQ.Fields.ByNameAsInteger['RDB$FIELD_PRECISION'];
       Item.FieldPrec:= - IBQ.Fields.ByNameAsInteger['RDB$FIELD_SCALE'];
+
+      //Item.FieldTypeRecord:=OwnerDB.TypeList.FindTypeByID(Item.FieldSQLTypeInt);//,  Item.FieldSQLSubTypeInt);
 
       if Item.FieldTypeRecord.VarLen and (IBQ.Fields.ByNameAsInteger['RDB$CHARACTER_LENGTH'] > 1) then
         Item.FieldSize:=IBQ.Fields.ByNameAsInteger['RDB$CHARACTER_LENGTH'];
