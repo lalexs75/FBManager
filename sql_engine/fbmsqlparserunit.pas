@@ -3502,7 +3502,13 @@ begin
       repeat
         DoTestLineEnd;
         IncPos;
-      until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in ({['a'..'z','A'..'Z','0'..'9', '_', '$']} SQLValidChars - AExcludeChar)));
+      until (FPosition.Position >= Length(FSql)) or (FSql[FPosition.Position] < #33) or (not (FSql[FPosition.Position] in (SQLValidChars - AExcludeChar)));
+
+      if FPosition.Position = Length(FSql) then
+      begin
+        if FSql[FPosition.Position] in (SQLValidChars - AExcludeChar) then
+          Inc(FPosition.Position);
+      end;
 
       if (FPosition.Position < Length(FSql)) and (FSql[FPosition.Position] = '.') then
       begin
