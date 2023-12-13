@@ -327,6 +327,8 @@ type
     procedure TextInsert(X,Y:integer; AText:string);
     procedure CompletionListClear;
     function CreateCTMenuItem(const ACaption:string; AEventHandler:TNotifyEvent; ATag:Integer = 0):TMenuItem;
+    function DoTestValidIdentList(S:string):Boolean;
+    function DoFillIdentListFromSQL(S:string):TStrings;
 
     property EditorText:string read GetEditorText write SetEditorText;
     property SQLEngine:TSQLEngineAbstract read FSQLEngine write SetSQLEngine;
@@ -1671,6 +1673,54 @@ begin
   Result.OnClick:=AEventHandler;
   Result.Tag:=ATag;
   MenuItem37.Add(Result);
+end;
+
+function Tfdbm_SynEditorFrame.DoTestValidIdentList(S: string): Boolean;
+var
+  P: TSQLParser;
+  F: Boolean;
+  W: String;
+begin
+  F:=true;
+  Result:=true;
+  P:=TSQLParser.Create(S, nil);
+  while (not P.Eof) and F do
+  begin
+    W:=P.GetNextWord;
+    if W <> ',' then
+    begin
+      if P.WordType(nil, W, nil) <> stIdentificator then
+      begin
+        F:=false;
+        Break;
+      end;
+    end;
+  end;
+  if F then
+    Result:=true;
+  P.Free;
+end;
+
+function Tfdbm_SynEditorFrame.DoFillIdentListFromSQL(S: string): TStrings;
+var
+  P: TSQLParser;
+  W: String;
+begin
+  if S = '' then Exit;
+  Result:=TStringList.Create;
+  P:=TSQLParser.Create(S, nil);
+  while (not P.Eof) do
+  begin
+    W:=P.GetNextWord;
+    if W <> ',' then
+    begin
+      if P.WordType(nil, W, nil) = stIdentificator then
+        Result.Add(W)
+      else
+        Break;
+    end;
+  end;
+  P.Free;
 end;
 
 procedure Tfdbm_SynEditorFrame.CloseCompletion(Sender: TObject);

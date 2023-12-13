@@ -732,18 +732,13 @@ end;
 procedure TfbmPostGreeFunctionEdtMainPage.DoTextEditorDefineVariable(Sender: TObject);
 var
   S: String;
-  St: TStringList;
+  St: TStrings;
 begin
   S:=Trim(EditorFrame.TextEditor.SelText);
   if TabSheet3.TabVisible and (S<>'') then
   begin
-    if S[Length(S)] = ';' then Delete(S, Length(S), 1);
-    St:=TStringList.Create;
-    if Pos(',', S)>0 then
-      StrToStrings(S, St, ',')
-    else
-      St.Add(S);
-
+    St:=EditorFrame.DoFillIdentListFromSQL(S);
+    if not Assigned(St) then Exit;
     for S in St do
     begin
       if IsValidIdent(Trim(S)) then
@@ -774,27 +769,15 @@ procedure TfbmPostGreeFunctionEdtMainPage.TextEditorPopUpMenu(Sender: TObject);
 var
   S: String;
   F: Boolean;
-  St: TStringList;
 begin
-  F:=TabSheet3.TabVisible;
-  if F then
+  if TabSheet3.TabVisible then
   begin
-    St:=TStringList.Create;
     S:=Trim(EditorFrame.TextEditor.SelText);
-    if Pos(',', S)>0 then
-      StrToStrings(S, St, ',')
-    else
-      St.Add(S);
-    for S in St do
-    begin
-      if (S='') or (not IsValidIdent(Trim(S))) then
-      begin
-        F:=false;
-        Break;
-      end;
-    end;
-    St.Free;
-  end;
+    F:=(S<>'') and EditorFrame.DoTestValidIdentList(S);
+  end
+  else
+    F:=false;
+
   FMenuDefineVariable.Enabled:=F;
   FMenuDefineInParam.Enabled:=F;
   FMenuDefineOutParam.Enabled:=F;

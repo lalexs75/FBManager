@@ -10,9 +10,9 @@ inherited fbmSPEdtMainPageFrame: TfbmSPEdtMainPageFrame
     Height = 200
     Top = 0
     Width = 1038
-    ActivePage = tabHeader
+    ActivePage = tabLocalVars
     Align = alTop
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 0
     object tabHeader: TTabSheet
       Caption = 'tabHeader'
@@ -36,7 +36,7 @@ inherited fbmSPEdtMainPageFrame: TfbmSPEdtMainPageFrame
         AnchorSideRight.Control = tabHeader
         AnchorSideRight.Side = asrBottom
         Left = 12
-        Height = 34
+        Height = 29
         Top = 29
         Width = 1010
         Anchors = [akTop, akLeft, akRight]

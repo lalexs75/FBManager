@@ -290,37 +290,51 @@ end;
 procedure TfbmSPEdtMainPageFrame.DoTextEditorDefineVariable(Sender: TObject);
 var
   S: String;
+  St: TStrings;
+
 begin
-  S:=Trim(EditorFrame.TextEditor.SelText);
-  if (S<>'') and IsValidIdent(S) then
-  if (Sender as TComponent).Tag = 1 then
+  St:=EditorFrame.DoFillIdentListFromSQL(Trim(EditorFrame.TextEditor.SelText));
+  if not Assigned(St) then Exit;
+  for S in St do
   begin
-    if tabLocalVars.TabVisible then
+    if (Sender as TComponent).Tag = 1 then
     begin
-      VariableFrame.AddVariable(S);
-      PageControl1.ActivePage:=tabLocalVars;
+      if tabLocalVars.TabVisible then
+      begin
+        VariableFrame.AddVariable(S);
+        PageControl1.ActivePage:=tabLocalVars;
+      end;
+    end
+    else
+    if (Sender as TComponent).Tag = 2 then
+    begin
+      InputParFrame.AddVariable(S);
+      PageControl1.ActivePage:=tabInputParams;
+    end
+    else
+    if (Sender as TComponent).Tag = 3 then
+    begin
+      OutputParFrame.AddVariable(S);
+      PageControl1.ActivePage:=tabReturnParams;
     end;
-  end
-  else
-  if (Sender as TComponent).Tag = 2 then
-  begin
-    InputParFrame.AddVariable(S);
-    PageControl1.ActivePage:=tabInputParams;
-  end
-  else
-  if (Sender as TComponent).Tag = 3 then
-  begin
-    OutputParFrame.AddVariable(S);
-    PageControl1.ActivePage:=tabReturnParams;
   end;
+  St.Free;
 end;
 
 procedure TfbmSPEdtMainPageFrame.TextEditorPopUpMenu(Sender: TObject);
 var
   S: String;
+  F: Boolean;
 begin
-  S:=Trim(EditorFrame.TextEditor.SelText);
-  FMenuDefineVariable.Enabled:=tabLocalVars.TabVisible and (S<>'') and IsValidIdent(S);
+  if tabLocalVars.TabVisible then
+  begin
+    S:=Trim(EditorFrame.TextEditor.SelText);
+    F:=(S<>'') and EditorFrame.DoTestValidIdentList(S);
+  end
+  else
+    F:=false;
+
+  FMenuDefineVariable.Enabled:=tabLocalVars.TabVisible and F;
   FMenuDefineInParam.Enabled:=FMenuDefineVariable.Enabled;
   FMenuDefineOutParam.Enabled:=FMenuDefineVariable.Enabled;
 end;
