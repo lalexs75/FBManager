@@ -776,6 +776,9 @@ begin
 
 
   SetEditorOptions(edtDescription);
+  SetEditorOptions(edtDefaultValue);
+  SetEditorOptions(edtCheck);
+  SetEditorOptions(edtComputedSource);
 
 
   if okDomain in ATable.OwnerDB.SQLEngineCapability then
