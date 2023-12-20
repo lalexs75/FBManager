@@ -1,5 +1,5 @@
 object fbmCompileQestForm: TfbmCompileQestForm
-  Left = 523
+  Left = 581
   Height = 423
   Top = 264
   Width = 573
@@ -7,15 +7,15 @@ object fbmCompileQestForm: TfbmCompileQestForm
   Caption = 'Apply script'
   ClientHeight = 423
   ClientWidth = 573
-  OnCreate = ibmCompileQestFormCreate
   Position = poScreenCenter
   SessionProperties = 'Height;Left;Top;Width;CheckListBox1.Height'
   ShowHint = True
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '3.99.0.0'
+  OnCreate = ibmCompileQestFormCreate
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 34
-    Top = 383
+    Height = 42
+    Top = 375
     Width = 561
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -31,9 +31,9 @@ object fbmCompileQestForm: TfbmCompileQestForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Left = 6
-      Height = 22
+      Height = 30
       Top = 9
-      Width = 118
+      Width = 97
       Action = actCopyToBuf
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
@@ -43,7 +43,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
   end
   inline SynEdit1: TSynEdit
     Left = 0
-    Height = 242
+    Height = 234
     Top = 135
     Width = 573
     Align = alClient
@@ -54,7 +54,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
     ParentColor = False
     ParentFont = False
     TabOrder = 2
-    Gutter.Width = 57
+    Gutter.Width = 61
     Gutter.MouseActions = <    
       item
         ClickCount = ccAny
@@ -495,7 +495,7 @@ object fbmCompileQestForm: TfbmCompileQestForm
         MouseActions = <>
       end
       object TSynGutterLineNumber
-        Width = 17
+        Width = 21
         MouseActions = <>
         MarkupInfo.Background = clBtnFace
         MarkupInfo.Foreground = clNone
@@ -580,10 +580,10 @@ object fbmCompileQestForm: TfbmCompileQestForm
       'Item2'
       'Item3'
     )
-    ItemHeight = 15
+    ItemHeight = 23
     ItemIndex = 0
-    OnClick = CheckListBox1Click
     TabOrder = 1
+    OnClick = CheckListBox1Click
     Data = {
       03000000000000
     }

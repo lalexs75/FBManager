@@ -774,6 +774,10 @@ begin
   EditorFrameDesc.Parent:=TabSheet7;
   EditorFrameDesc.ChangeVisualParams;
 
+
+  SetEditorOptions(edtDescription);
+
+
   if okDomain in ATable.OwnerDB.SQLEngineCapability then
   begin
     FillDomainList;
