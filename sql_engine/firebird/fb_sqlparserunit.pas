@@ -7216,11 +7216,11 @@ end;
 
 procedure TFBSQLAlterTable.AddCollumn(OP: TAlterTableOperator);
 var
-  S, S_CONSTR: String;
+  S, S_CONSTR, S1: String;
   C: TSQLConstraintItem;
 begin
   S:='';
-
+  S1:='';
   if OP.Field.CharSetName <> '' then
     S:=S + ' CHARACTER SET ' + OP.Field.CharSetName;
 
@@ -7228,7 +7228,7 @@ begin
     S:=S + ' COLLATE ' + OP.Field.Collate;
 
   if fpNotNull in OP.Field.Params then
-    S:=S + ' NOT NULL';
+    S1:=S1 + ' NOT NULL';
 
 
   S_CONSTR:='';
@@ -7269,15 +7269,22 @@ begin
     end;
   end;
 
-  if S_CONSTR <> '' then S:=S + ' ' + S_CONSTR;
+  if S_CONSTR <> '' then S1:=S1 + ' ' + S_CONSTR;
 
-  AddSQLCommandEx('ALTER TABLE %s ADD %s %s', [Name, OP.Field.Caption, OP.Field.FullTypeName + S]);
+  if OP.InitialValue <> '' then
+  begin
+    AddSQLCommandEx('ALTER TABLE %s ADD %s %s', [FullName, DoFormatName(OP.Field.Caption), OP.DBMSTypeName]);
+    AddSQLCommandEx('UPDATE %s SET %s = %s', [Name, OP.Field.Caption, OP.InitialValue]);
+    AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s TYPE %s', [FullName, DoFormatName(OP.Field.Caption), OP.Field.FullTypeName + S]);
+    if S1<>'' then
+      AddSQLCommandEx('ALTER TABLE %s ALTER %s SET %s', [FullName, DoFormatName(OP.Field.Caption), S1]);
+  end
+  else
+    AddSQLCommandEx('ALTER TABLE %s ADD %s %s', [Name, OP.Field.Caption, OP.Field.FullTypeName + S]);
 
   if OP.Field.DefaultValue <> '' then
     AddSQLCommandEx('ALTER TABLE %s ALTER COLUMN %s SET DEFAULT %s', [Name, OP.Field.Caption, OP.Field.DefaultValue]);
 
-  if OP.InitialValue <> '' then
-    AddSQLCommandEx('UPDATE %s SET %s = %s', [Name, OP.Field.Caption, OP.InitialValue]);
 
   if OP.Field.Description<>'' then
     DescribeObjectEx(okColumn, OP.Field.Caption, Name, OP.Field.Description);
