@@ -1061,7 +1061,7 @@ end;
 procedure TfbmSQLEditorForm.resPrintExecute(Sender: TObject);
 begin
   if Assigned(FSqlEditorTextCur) then
-    RxDBGridPrint1.Caption:=FSqlEditorTextCur.Name;
+    RxDBGridPrint1.ReportTitle:=FSqlEditorTextCur.Name;
   RxDBGridPrint1.PreviewReport;
 end;
 
