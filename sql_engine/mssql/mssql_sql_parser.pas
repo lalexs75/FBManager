@@ -25,7 +25,7 @@ unit mssql_sql_parser;
 interface
 
 uses
-  Classes, SysUtils, fbmSqlParserUnit, sqlObjects;
+  Classes, SysUtils, fbmSqlParserUnit, sqlEngineTypes, sqlObjects;
 
 {
 Общее

@@ -25,7 +25,7 @@ unit fbmUserObjectsGrantUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList, sqlEngineTypes,
   DBGrids, ExtCtrls, StdCtrls, rxmemds, rxdbgrid, RxDBGridPrintGrid, rxtoolbar,
   DB, sqlObjects, fdmAbstractEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
   fbmToolsUnit;

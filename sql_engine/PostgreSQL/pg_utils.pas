@@ -27,7 +27,7 @@ unit pg_utils;
 interface
 
 uses
-  Classes, SysUtils, contnrs, SQLEngineCommonTypesUnit, DB, PostgreSQLEngineUnit,
+  Classes, SysUtils, contnrs, sqlEngineTypes, SQLEngineCommonTypesUnit, DB, PostgreSQLEngineUnit,
   SQLEngineAbstractUnit, sqlObjects, pgTypes;
 
 type

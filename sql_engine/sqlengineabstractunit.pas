@@ -25,7 +25,7 @@ unit SQLEngineAbstractUnit;
 interface
 
 uses
-  Classes, SysUtils, DB, SQLEngineCommonTypesUnit, contnrs,
+  Classes, SysUtils, DB, SQLEngineCommonTypesUnit, contnrs, sqlEngineTypes,
   SQLEngineInternalToolsUnit, sqlObjects, fbmSqlParserUnit;
 
 type

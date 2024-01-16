@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, Buttons,
   ExtCtrls, StdCtrls, CheckLst, SynEdit, SynCompletion, RxIniPropStorage,
-  ButtonPanel, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit, sqlObjects,
+  ButtonPanel, sqlEngineTypes, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit, sqlObjects,
   ibmanagertypesunit, Menus;
 
 type

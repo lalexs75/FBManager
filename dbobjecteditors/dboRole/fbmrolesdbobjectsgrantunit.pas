@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, db, FileUtil, LResources, Forms, Controls, Graphics, uib,
   Dialogs, ExtCtrls, StdCtrls, Menus, rxdbgrid, rxmemds, rxtoolbar,
-  RxDBGridPrintGrid, LR_PGrid, DBGrids, ActnList, ComCtrls,
+  sqlEngineTypes, RxDBGridPrintGrid, LR_PGrid, DBGrids, ActnList, ComCtrls,
   fdmAbstractEditorUnit, SQLEngineAbstractUnit, SQLEngineCommonTypesUnit,
   FBSQLEngineUnit, IniFiles;
 

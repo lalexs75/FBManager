@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Menus, ActnList, Dialogs,
   SynEdit, fbmToolsUnit, LMessages, Controls, SynCompletion, SynHighlighterSQL,
-  ibmanagertypesunit, SQLEngineAbstractUnit, ComCtrls, LCLType, Graphics,
+  ibmanagertypesunit, SQLEngineAbstractUnit, ComCtrls, LCLType, Graphics, sqlEngineTypes,
   SQLEngineCommonTypesUnit, StdCtrls, ExtCtrls, StdActns, SynEditKeyCmds, types,
   SynEditMarkupHighAll, SynEditMiscClasses, fbmSqlParserUnit, sqlObjects;
 

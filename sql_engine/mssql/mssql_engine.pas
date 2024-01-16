@@ -24,7 +24,7 @@ unit mssql_engine;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, DB, SQLEngineInternalToolsUnit,
+  Classes, SysUtils, SQLEngineAbstractUnit, DB, SQLEngineInternalToolsUnit, sqlEngineTypes,
   sqlObjects, ZDataset, ZConnection, fbmSqlParserUnit,
   mssql_ObjectsList, SQLEngineCommonTypesUnit;
 

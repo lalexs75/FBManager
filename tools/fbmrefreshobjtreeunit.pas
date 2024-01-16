@@ -25,7 +25,7 @@ unit fbmRefreshObjTreeUnit;
 interface
 
 uses
-  Classes, SysUtils, fbmSqlParserUnit, ibmanagertypesunit, sqlObjects;
+  Classes, SysUtils, sqlEngineTypes, fbmSqlParserUnit, ibmanagertypesunit, sqlObjects;
 
 type
   TObjRec = class

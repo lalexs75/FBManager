@@ -25,7 +25,7 @@ unit ibmanagertypesunit;
 interface
 
 uses
-  Classes, SysUtils, ComCtrls, Forms, Contnrs, SynHighlighterSQL, ZDataset, ZSqlUpdate,
+  Classes, SysUtils, ComCtrls, Forms, Contnrs, SynHighlighterSQL, ZDataset, ZSqlUpdate, sqlEngineTypes,
   Graphics, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit, fbmSqlParserUnit,
   DB, rxmemds, fbmSQLEditorClassesUnit, fbmToolsUnit, fbmOIFoldersUnit,
   fbm_VisualEditorsAbstractUnit, fdmAbstractEditorUnit, sqlObjects;

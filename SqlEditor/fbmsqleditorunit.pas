@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ComCtrls,
   fbmSQLEditorClassesUnit, LMessages, ActnList, StdCtrls, DB, LCLType, SynEdit,
   SynHighlighterSQL, DBGrids, IBManagerTypesUnit, SynCompletion, LR_PGrid,
-  Menus, fdbm_SynEditorUnit, ExtCtrls, Buttons, DBCtrls, RxDBGrid, rxtoolbar,
+  Menus, sqlEngineTypes, fdbm_SynEditorUnit, ExtCtrls, Buttons, DBCtrls, RxDBGrid, rxtoolbar,
   RxIniPropStorage, RxDBGridExportSpreadSheet, RxDBGridPrintGrid, sqlObjects,
   SQLEngineCommonTypesUnit, RxDBGridFooterTools, RxDBGridExportPdf,
   rxdbverticalgrid, LCLIntf, EditBtn, fpdataexporter, ZMacroQuery,
@@ -1060,6 +1060,8 @@ end;
 
 procedure TfbmSQLEditorForm.resPrintExecute(Sender: TObject);
 begin
+  if Assigned(FSqlEditorTextCur) then
+    RxDBGridPrint1.Caption:=FSqlEditorTextCur.Name;
   RxDBGridPrint1.PreviewReport;
 end;
 

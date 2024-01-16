@@ -25,9 +25,10 @@ unit SQLEngineCommonTypesUnit;
 interface
 
 uses
-  Classes, SysUtils, db, contnrs, fbmStrConstUnit, sqlObjects;
+  Classes, SysUtils, db, contnrs, fbmStrConstUnit, sqlObjects, sqlEngineTypes;
 
 type
+
   TTransactionIsolationLevel = (tilNone, tilReadUncommitted, tilReadCommitted, tilSerializable, tilRepeatableRead);
   TTransactionParam = (tilReadWrite, tilReadOnly, tilWait, tilNoWait, tilRecVersion, tilNoRecVersion, tilRestartRequests);
   TTransactionParams = set of TTransactionParam;

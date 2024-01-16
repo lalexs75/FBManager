@@ -59,7 +59,7 @@
         <PackageName Value="zcomponent"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="fbm_export.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -80,6 +80,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmMakeSQLFromDataSetUnit"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="../../../sql_engine/sqlenginetypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlEngineTypes"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -89,8 +94,14 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);../../.."/>
+      <OtherUnitFiles Value="../../../sql_engine"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf3"/>
+      </Debugging>
+    </Linking>
   </CompilerOptions>
   <Debugging>
     <Exceptions Count="3">

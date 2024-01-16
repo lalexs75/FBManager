@@ -25,7 +25,7 @@ unit FBSQLEngineSecurityUnit;
 interface
 
 uses
-  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, FBSQLEngineUnit, fb_utils,
+  Classes, SysUtils, contnrs, sqlEngineTypes, SQLEngineAbstractUnit, FBSQLEngineUnit, fb_utils,
   SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit;
 
 type

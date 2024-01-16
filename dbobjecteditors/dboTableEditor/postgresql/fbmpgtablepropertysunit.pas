@@ -25,7 +25,7 @@ unit fbmpgtablepropertysunit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, StdCtrls, ExtCtrls, Spin,
+  Classes, SysUtils, FileUtil, Forms, Controls, StdCtrls, ExtCtrls, Spin, sqlEngineTypes,
   Buttons, fdmAbstractEditorUnit, PostgreSQLEngineUnit, SQLEngineAbstractUnit,
   sqlObjects, fbmSqlParserUnit;
 

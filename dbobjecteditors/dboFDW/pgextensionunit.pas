@@ -25,7 +25,7 @@ unit pgExtensionUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, PostgreSQLEngineUnit,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, PostgreSQLEngineUnit, sqlEngineTypes,
   fdmAbstractEditorUnit, SQLEngineAbstractUnit, fbmSqlParserUnit, ZDataset, sqlObjects;
 
 type

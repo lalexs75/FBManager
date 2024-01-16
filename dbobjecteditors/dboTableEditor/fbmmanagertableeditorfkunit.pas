@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ButtonPanel, SQLEngineAbstractUnit, ExtCtrls, ComCtrls, sqlObjects;
+  sqlEngineTypes, Buttons, ButtonPanel, SQLEngineAbstractUnit, ExtCtrls, ComCtrls, sqlObjects;
 
 
 type

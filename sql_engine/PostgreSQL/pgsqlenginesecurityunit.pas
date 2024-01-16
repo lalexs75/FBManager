@@ -25,7 +25,7 @@ unit pgSqlEngineSecurityUnit;
 interface
 
 uses
-  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, PostgreSQLEngineUnit,
+  Classes, SysUtils, contnrs, sqlEngineTypes, SQLEngineAbstractUnit, PostgreSQLEngineUnit,
   SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit,
   pgTypes;
 

@@ -25,52 +25,11 @@ unit sqlObjects;
 interface
 
 uses
-  Classes, SysUtils, contnrs;
+  Classes, SysUtils, contnrs, sqlEngineTypes;
 
 type
   TDDLCommandType = (ddlctCrate, ddlctAlter, ddlctDrop);
 
-  TDBObjectKind = (okNone,
-                   okDomain, okTable, okView, okTrigger, okStoredProc,
-                   okSequence, okException, okUDF, okRole,
-                   okUser, okLogin, okScheme,
-                   okGroup, okIndex, okTableSpace, okLanguage, okCheckConstraint,
-                   okForeignKey, okPrimaryKey, okUniqueConstraint, okField,
-                   okRule, okOther, okTasks,
-
-                   okConversion, okDatabase, okType, okServer, okColumn,
-                   okCharSet, okCollation, okFilter, okParameter,
-                   okAccessMethod, okAggregate, okMaterializedView,
-                   okCast,
-                   okConstraint,
-                   okExtension,
-
-                   okForeignTable,
-                   okForeignDataWrapper,
-                   okForeignServer,
-
-                   okLargeObject,
-                   okPolicy,
-                   okFunction, okEventTrigger,
-
-                   okAutoIncFields, //-????
-                   okFTSConfig,
-                   okFTSDictionary,
-                   okFTSParser,
-                   okFTSTemplate,
-
-                   okPackage,
-                   okPackageBody,
-                   okTransform,
-                   okOperator,
-                   okOperatorClass,
-                   okOperatorFamily,
-                   okUserMapping,
-                   okPartitionTable,
-                   okProcedureParametr,
-                   okFunctionParametr
-
-                   );
   TDBObjectKinds = set of TDBObjectKind;
 
   TOnConflictEvent = (ceNone, ceRollback, ceAbort, ceFail, ceIgnore, ceReplace);

@@ -15,7 +15,8 @@ uses
   strutils,
   db,
   pg_export_dm_unit,
-  fbmMakeSQLFromDataSetUnit;
+  fbmMakeSQLFromDataSetUnit,
+  sqlEngineTypes;
 
 type
 

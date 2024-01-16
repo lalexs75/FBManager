@@ -25,7 +25,7 @@ unit pgObjectAnalysisAndWarningsUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls, sqlEngineTypes,
   ExtCtrls, ActnList, Menus, PostgreSQLEngineUnit, SQLEngineAbstractUnit,
   fbmAbstractSQLEngineToolsUnit, fdbm_SynEditorUnit, fbmToolsUnit, LMessages;
 

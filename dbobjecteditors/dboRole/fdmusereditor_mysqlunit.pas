@@ -25,7 +25,7 @@ unit fdmUserEditor_MySQLUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, sqlEngineTypes,
   IniFiles, fbmSqlParserUnit, fdmAbstractEditorUnit, SQLEngineAbstractUnit,
   mysql_engine, sqlObjects, SQLEngineCommonTypesUnit;
 

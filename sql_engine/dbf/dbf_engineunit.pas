@@ -25,7 +25,7 @@ unit dbf_engineunit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, dbf, db, Forms, fdmAbstractEditorUnit,
+  Classes, SysUtils, SQLEngineAbstractUnit, dbf, db, Forms, fdmAbstractEditorUnit, sqlEngineTypes,
   SQLEngineCommonTypesUnit, fdbm_PagedDialogPageUnit, sqlObjects, SQLEngineInternalToolsUnit;
 
 

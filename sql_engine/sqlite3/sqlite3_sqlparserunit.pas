@@ -25,7 +25,7 @@ unit sqlite3_SqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlObjects;
+  Classes, SysUtils, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlEngineTypes, sqlObjects;
 
 type
   //PRAGMA

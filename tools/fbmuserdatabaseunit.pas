@@ -134,7 +134,7 @@ var
 procedure InitDataModule;
 implementation
 uses fbmToolsUnit, FileUtil, LazFileUtils, LazUTF8, rxConfigValues, fb_ConstUnit,
-  variants, pg_utils, ZClasses;
+  variants, pg_utils;
 
 {$R *.lfm}
 

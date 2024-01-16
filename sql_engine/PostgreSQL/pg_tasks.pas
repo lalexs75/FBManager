@@ -25,7 +25,7 @@ unit pg_tasks;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, PostgreSQLEngineUnit, ZDataset,
+  Classes, SysUtils, sqlEngineTypes, SQLEngineAbstractUnit, PostgreSQLEngineUnit, ZDataset,
   sqlObjects, contnrs, SQLEngineInternalToolsUnit, fbmSqlParserUnit,
   SQLEngineCommonTypesUnit;
 

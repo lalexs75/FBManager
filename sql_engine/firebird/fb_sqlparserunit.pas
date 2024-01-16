@@ -28,7 +28,7 @@ unit fb_SqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlObjects, fb_utils;
+  Classes, SysUtils, sqlEngineTypes, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlObjects, fb_utils;
 
 const
   FBObjectNames : array [TDBObjectKind] of string =

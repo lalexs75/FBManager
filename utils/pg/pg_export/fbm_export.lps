@@ -3,12 +3,12 @@
   <ProjectSession>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="23">
+    <Units Count="28">
       <Unit0>
         <Filename Value="fbm_export.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <UsageCount Value="38"/>
+        <CursorPos X="3" Y="19"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,10 +17,10 @@
         <ComponentName Value="ExportDM"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="38"/>
-        <CursorPos Y="68"/>
-        <UsageCount Value="38"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="10"/>
+        <CursorPos X="69" Y="31"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -28,17 +28,19 @@
         <Filename Value="../../../fbmanager_define.inc"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="8"/>
         <CursorPos X="84" Y="29"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="45"/>
       </Unit2>
       <Unit3>
         <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="fbmMakeSQLFromDataSetUnit"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="13"/>
-        <CursorPos X="33" Y="21"/>
-        <UsageCount Value="29"/>
+        <TopLine Value="33"/>
+        <CursorPos Y="52"/>
+        <UsageCount Value="44"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -46,95 +48,95 @@
         <UnitName Value="CustApp"/>
         <TopLine Value="38"/>
         <CursorPos X="16" Y="63"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
       </Unit4>
       <Unit5>
         <Filename Value="../../../../../sss.sql"/>
         <TopLine Value="70"/>
         <CursorPos Y="113"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <DefaultSyntaxHighlighter Value="SQL"/>
       </Unit5>
       <Unit6>
         <Filename Value="../../../../../install/fpcsrc/rtl/objpas/strutils.pp"/>
         <TopLine Value="132"/>
         <CursorPos Y="173"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit6>
       <Unit7>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/rxstrutils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="616"/>
         <CursorPos X="23" Y="619"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit7>
       <Unit8>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcPostgreSqlUtils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="787"/>
         <CursorPos Y="810"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit8>
       <Unit9>
         <Filename Value="../../../../../install/source/fpcsrc/packages/fcl-db/src/base/db.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="84"/>
         <CursorPos X="51" Y="107"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit9>
       <Unit10>
         <Filename Value="../../../IBManager.lpr"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit10>
       <Unit11>
         <Filename Value="../../../../../lazarus/components/zeos/src/dbc/ZDbcInterbase6Utils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="832"/>
         <CursorPos Y="847"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit11>
       <Unit12>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/component/ZConnection.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="48"/>
         <CursorPos X="14" Y="78"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit12>
       <Unit13>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="202"/>
         <CursorPos X="3" Y="207"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit13>
       <Unit14>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/plain/ZPlainFirebirdDriver.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="961"/>
         <CursorPos Y="980"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit14>
       <Unit15>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6Utils.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="951"/>
         <CursorPos Y="970"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit15>
       <Unit16>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6ResultSet.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1867"/>
         <CursorPos Y="1887"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit16>
       <Unit17>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcCachedResultSet.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2427"/>
         <CursorPos Y="2447"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit17>
       <Unit18>
         <Filename Value="/usr/local/share/lazarus/lcl/dbgrids.pas"/>
@@ -142,28 +144,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="164"/>
         <CursorPos X="3" Y="164"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit18>
       <Unit19>
         <Filename Value="D:/lazarus/components/scancode_fpc/scancode_user_api.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="36"/>
         <CursorPos X="31" Y="48"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit19>
       <Unit20>
         <Filename Value="D:/lazarus/components/protobuf-fpc/xmlobject/xmlobject.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="64" Y="38"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit20>
       <Unit21>
         <Filename Value="D:/lazarus/components/scancode_fpc/scancode_stock_api.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="28"/>
         <CursorPos X="31" Y="48"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit21>
       <Unit22>
         <Filename Value="D:/lazarus/components/scancode_fpc/scancodemt.pas"/>
@@ -171,117 +173,184 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="379"/>
         <CursorPos X="3" Y="390"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="../../../sql_engine/sqlengineabstractunit.pas"/>
+        <UnitName Value="SQLEngineAbstractUnit"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <UsageCount Value="9"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <UnitName Value="SQLEngineCommonTypesUnit"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="10"/>
+        <CursorPos X="6" Y="21"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="../../../tools/fbmstrconstunit.pas"/>
+        <UnitName Value="fbmStrConstUnit"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="1497"/>
+        <UsageCount Value="27"/>
+        <Loaded Value="True"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="../../../sql_objects/sqlobjects.pas"/>
+        <UnitName Value="sqlObjects"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="2"/>
+        <CursorPos X="45" Y="28"/>
+        <UsageCount Value="9"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="../../../sql_engine/sqlenginetypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="sqlEngineTypes"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="13"/>
+        <CursorPos X="16" Y="31"/>
+        <UsageCount Value="34"/>
+        <Loaded Value="True"/>
+      </Unit27>
     </Units>
-    <JumpHistory Count="26" HistoryIndex="25">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="92" TopLine="65"/>
+        <Caret Line="180" Column="37" TopLine="165"/>
       </Position1>
       <Position2>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="93" TopLine="65"/>
       </Position2>
       <Position3>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="94" TopLine="65"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="29" Column="24" TopLine="16"/>
       </Position3>
       <Position4>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="96" TopLine="72"/>
+        <Filename Value="pg_export_dm_unit.pas"/>
+        <Caret Line="68" TopLine="38"/>
       </Position4>
       <Position5>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="198" TopLine="180"/>
       </Position5>
       <Position6>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="100" TopLine="81"/>
+        <Caret Line="226" Column="60" TopLine="204"/>
       </Position6>
       <Position7>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="101" TopLine="81"/>
+        <Caret Line="37" Column="15" TopLine="30"/>
       </Position7>
       <Position8>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="102" TopLine="81"/>
+        <Caret Line="119" Column="3" TopLine="115"/>
       </Position8>
       <Position9>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="105" TopLine="81"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="31" Column="10" TopLine="13"/>
       </Position9>
       <Position10>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="200" TopLine="182"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="92" Column="3" TopLine="65"/>
       </Position10>
       <Position11>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="201" TopLine="182"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="32" Column="10" TopLine="13"/>
       </Position11>
       <Position12>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="132" TopLine="113"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="154" Column="3" TopLine="126"/>
       </Position12>
       <Position13>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="133" TopLine="113"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="33" Column="29" TopLine="14"/>
       </Position13>
       <Position14>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="134" TopLine="113"/>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="177" Column="3" TopLine="162"/>
       </Position14>
       <Position15>
         <Filename Value="fbm_export.lpr"/>
-        <Caret Line="135" TopLine="113"/>
+        <Caret Line="119" Column="3" TopLine="55"/>
       </Position15>
       <Position16>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="203" TopLine="185"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="221" Column="99" TopLine="202"/>
       </Position16>
       <Position17>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="118" TopLine="105"/>
+        <Filename Value="pg_export_dm_unit.pas"/>
+        <Caret Line="28" Column="79" TopLine="19"/>
       </Position17>
       <Position18>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="119" TopLine="105"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="21" Column="30" TopLine="19"/>
       </Position18>
       <Position19>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="120" TopLine="105"/>
+        <Filename Value="../../../tools/fbmstrconstunit.pas"/>
+        <Caret TopLine="1497"/>
       </Position19>
       <Position20>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="127" TopLine="105"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="28" Column="51" TopLine="22"/>
       </Position20>
       <Position21>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="128" TopLine="105"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="120" Column="38" TopLine="91"/>
       </Position21>
       <Position22>
-        <Filename Value="fbm_export.lpr"/>
-        <Caret Line="180" Column="37" TopLine="165"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="85" Column="48" TopLine="73"/>
       </Position22>
       <Position23>
         <Filename Value="fbm_export.lpr"/>
+        <Caret Line="119" Column="3" TopLine="84"/>
       </Position23>
       <Position24>
-        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
-        <Caret Line="29" Column="24" TopLine="16"/>
+        <Filename Value="fbm_export.lpr"/>
+        <Caret Line="19" Column="3"/>
       </Position24>
       <Position25>
-        <Filename Value="pg_export_dm_unit.pas"/>
-        <Caret Line="68" TopLine="38"/>
+        <Filename Value="../../../sql_engine/sqlenginecommontypesunit.pas"/>
+        <Caret Line="28" Column="52" TopLine="10"/>
       </Position25>
       <Position26>
-        <Filename Value="fbm_export.lpr"/>
+        <Filename Value="pg_export_dm_unit.pas"/>
+        <Caret Line="31" Column="69" TopLine="10"/>
       </Position26>
+      <Position27>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="33" Column="117" TopLine="15"/>
+      </Position27>
+      <Position28>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="178" Column="3" TopLine="163"/>
+      </Position28>
+      <Position29>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="31" Column="10" TopLine="15"/>
+      </Position29>
+      <Position30>
+        <Filename Value="fbmmakesqlfromdatasetunit.pas"/>
+        <Caret Line="87" Column="3" TopLine="73"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>
     </RunParams>
+    <HistoryLists Count="3">
+      <List0 Name="WorkingDirectory" Type="File" Count="1"/>
+      <List1 Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
+      </List1>
+      <List2 Name="CommandLineParameters" Count="1">
+        <Item1 Value="-d big:pm -u sysdba -p masterkey -o Meta_SQL.sql -t SYS_LOGS_EVENT -e FB3 --delete"/>
+      </List2>
+    </HistoryLists>
   </ProjectSession>
   <Debugging>
     <BreakPoints>
@@ -290,7 +359,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="fbm_export.lpr"/>
-        <Line Value="190"/>
+        <Line Value="191"/>
       </Item>
     </BreakPoints>
   </Debugging>

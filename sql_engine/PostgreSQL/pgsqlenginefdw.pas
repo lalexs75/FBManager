@@ -25,7 +25,7 @@ unit pgSQLEngineFDW;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, sqlObjects, PostgreSQLEngineUnit,
+  Classes, SysUtils, sqlEngineTypes, SQLEngineAbstractUnit, sqlObjects, PostgreSQLEngineUnit,
   fbmSqlParserUnit, SQLEngineInternalToolsUnit, ZDataset;
 
 type

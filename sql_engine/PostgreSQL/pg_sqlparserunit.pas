@@ -25,7 +25,7 @@ unit pg_SqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, sqlObjects, fbmSqlParserUnit, SQLEngineCommonTypesUnit,
+  Classes, SysUtils, sqlEngineTypes, sqlObjects, fbmSqlParserUnit, SQLEngineCommonTypesUnit,
   pgTypes;
 
 const

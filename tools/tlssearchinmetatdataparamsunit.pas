@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, RxIniPropStorage, Forms, Controls, Graphics,
-  Dialogs, StdCtrls, ButtonPanel, SQLEngineAbstractUnit, sqlObjects;
+  Dialogs, StdCtrls, ButtonPanel, sqlEngineTypes, SQLEngineAbstractUnit, sqlObjects;
 
 type
 

@@ -25,7 +25,7 @@ unit fbmSqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, Contnrs, SQLEngineCommonTypesUnit, sqlObjects;
+  Classes, SysUtils, Contnrs, SQLEngineCommonTypesUnit, sqlObjects, sqlEngineTypes;
 
 const
   CharDelimiters = [',',':','}','{',';', '(', ')', '.', '[', ']', '=', '@'];

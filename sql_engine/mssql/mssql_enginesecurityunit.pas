@@ -25,7 +25,7 @@ unit mssql_EngineSecurityUnit;
 interface
 
 uses
-  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, mssql_engine,
+  Classes, SysUtils, contnrs, SQLEngineAbstractUnit, mssql_engine, sqlEngineTypes,
   SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, fbmSqlParserUnit,
   ZDataset;
 

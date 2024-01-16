@@ -29,7 +29,7 @@ unit mysql_SqlParserUnit;
 interface
 
 uses
-  Classes, SysUtils, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlObjects;
+  Classes, SysUtils, sqlEngineTypes, fbmSqlParserUnit, SQLEngineCommonTypesUnit, sqlObjects;
 
 const
   MySQLObjectNames : array [TDBObjectKind] of string =

@@ -27,7 +27,7 @@ interface
 
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, mysql_types, ZConnection, ZDataset,
-  DB, contnrs, SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, ZSqlProcessor,
+  sqlEngineTypes, DB, contnrs, SQLEngineCommonTypesUnit, SQLEngineInternalToolsUnit, ZSqlProcessor,
   fbmSqlParserUnit, sqlObjects, mysql_SqlParserUnit;
 
 const

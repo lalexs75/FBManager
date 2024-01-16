@@ -25,11 +25,9 @@ unit pg_export_dm_unit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, ZConnection, ZDataset;
+  Classes, SysUtils, FileUtil, ZConnection, ZDataset, sqlEngineTypes;
 
 type
-  TExportEngine = (eePostgre, eeFireBird, eeFireBird3, eeSqlLite3, eeMySQL);
-
   { TExportDM }
 
   TExportDM = class(TDataModule)

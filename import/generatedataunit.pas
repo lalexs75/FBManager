@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ButtonPanel, ExtCtrls,
   StdCtrls, Spin, ActnList, Menus, DBCtrls, ComCtrls, DB, rxmemds, rxdbgrid,
-  rxtooledit, RxTimeEdit, SQLEngineAbstractUnit, fbmsqlscript, fbmSqlParserUnit,
+  rxtooledit, RxTimeEdit, sqlEngineTypes, SQLEngineAbstractUnit, fbmsqlscript, fbmSqlParserUnit,
   sqlObjects;
 
 type

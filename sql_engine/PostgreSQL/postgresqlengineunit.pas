@@ -25,7 +25,7 @@ unit PostgreSQLEngineUnit;
 interface
 
 uses
-  Classes, SysUtils, DB, SQLEngineAbstractUnit, contnrs, sqlObjects, ZClasses,
+  Classes, SysUtils, DB, contnrs, ZClasses, sqlObjects, sqlEngineTypes, SQLEngineAbstractUnit,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, ZConnection, ZDataset, ZSqlUpdate,
   ZSqlProcessor, ZDbcCachedResultSet, ZDbcCache, ZCompatibility,
   pgTypes, pg_SqlParserUnit, SQLEngineInternalToolsUnit, fbmToolsNV,

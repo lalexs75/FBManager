@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, StdCtrls,
   ExtCtrls, PairSplitter, ActnList, Buttons, Menus, db, rxmemds, rxdbgrid,
-  SQLEngineCommonTypesUnit, sqlObjects, fdmAbstractEditorUnit, fb_SqlParserUnit,
+  sqlEngineTypes, SQLEngineCommonTypesUnit, sqlObjects, fdmAbstractEditorUnit, fb_SqlParserUnit,
   SQLEngineAbstractUnit, fbmSqlParserUnit, fdbm_SynEditorUnit, FBSQLEngineUnit,
   fbmFBVariableFrameUnit;
 

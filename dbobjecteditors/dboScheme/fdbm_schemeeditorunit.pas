@@ -25,7 +25,7 @@ unit fdbm_SchemeEditorUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, sqlEngineTypes,
   sqlObjects, SQLEngineCommonTypesUnit, fdmAbstractEditorUnit,
   SQLEngineAbstractUnit, fbmSqlParserUnit;
 

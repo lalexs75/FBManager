@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ComCtrls, Buttons, SynEdit, SynHighlighterSQL, DB, DBGrids, rxmemds, Spin,
-  sqlObjects, ibmanagertypesunit, ButtonPanel, ExtCtrls, SQLEngineAbstractUnit,
+  sqlEngineTypes, sqlObjects, ibmanagertypesunit, ButtonPanel, ExtCtrls, SQLEngineAbstractUnit,
   fdbm_SynEditorUnit;
 
 type

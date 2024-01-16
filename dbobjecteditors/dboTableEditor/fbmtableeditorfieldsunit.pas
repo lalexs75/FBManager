@@ -28,7 +28,7 @@ uses
   Classes, SysUtils, FileUtil, LResources, Forms, fdmAbstractEditorUnit,
   ComCtrls, rxdbgrid, rxmemds, RxDBGridExportSpreadSheet, RxDBGridPrintGrid,
   RxDBGridExportPdf, RxDBGridFooterTools, db, DbCtrls, ExtCtrls,
-  SQLEngineAbstractUnit, DBGrids, Menus, LR_PGrid, ActnList,
+  sqlEngineTypes, SQLEngineAbstractUnit, DBGrids, Menus, LR_PGrid, ActnList,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, sqlObjects, ibmanagertypesunit,
   Controls, StdCtrls, IniFiles, LR_Class;
 

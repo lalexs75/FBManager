@@ -25,7 +25,7 @@ unit SQLite3EngineUnit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, DB, ZConnection, ZDataset,
+  Classes, SysUtils, SQLEngineAbstractUnit, DB, ZConnection, ZDataset, sqlEngineTypes,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, sqlObjects, ZSqlUpdate,
   sqlite3_SqlParserUnit, ZSqlProcessor, ZDbcCache, contnrs,
   SQLEngineInternalToolsUnit;

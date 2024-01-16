@@ -25,7 +25,7 @@ unit fbmFTSConfigUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, fbmSqlParserUnit,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, fbmSqlParserUnit, sqlEngineTypes,
   fdmAbstractEditorUnit, SQLEngineAbstractUnit, PostgreSQLEngineUnit, sqlObjects;
 
 type

@@ -25,7 +25,7 @@ unit FBSQLEngineUnit;
 interface
 
 uses
-  Classes, SysUtils, SQLEngineAbstractUnit, db, uib, FBCustomDataSet, SQLEngineInternalToolsUnit,
+  Classes, SysUtils, db, uib, sqlEngineTypes, SQLEngineAbstractUnit, FBCustomDataSet, SQLEngineInternalToolsUnit,
   contnrs, fb_utils, SQLEngineCommonTypesUnit, fbmisc,
   fb_SqlParserUnit, uibsqlparser, fbKeywordsUnit, fbmSqlParserUnit,
   sqlObjects;

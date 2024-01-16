@@ -30,7 +30,7 @@ uses
   ComCtrls, ActnList, DbCtrls, SynCompletion, SynEdit, SynHighlighterSQL,
   rxtoolbar, rxdbgrid, rxmemds, RxDBGridFooterTools, RxDBGridExportPdf,
   RxIniPropStorage, RxDBGridExportSpreadSheet, RxDBGridPrintGrid,
-  fdbm_SynEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
+  sqlEngineTypes, fdbm_SynEditorUnit, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit,
   LMessages, sqlObjects, fbmToolsUnit, ibmanagertypesunit;
 
 type

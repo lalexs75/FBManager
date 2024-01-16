@@ -46,12 +46,12 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
     0000
   }
   KeyPreview = True
-  OnClose = IBManagerSQLFormClose
-  OnKeyDown = FormKeyDown
   Position = poDefault
   SessionProperties = 'RxDBGridExportSpreadSheet1.FileName;RxDBGridExportSpreadSheet1.OpenAfterExport;RxDBGridExportSpreadSheet1.Options;RxDBGridExportSpreadSheet1.PageName;Panel3.Width;Panel4.Height'
   ShowHint = True
   LCLVersion = '3.99.0.0'
+  OnClose = IBManagerSQLFormClose
+  OnKeyDown = FormKeyDown
   object ToolPanel2: TToolPanel
     Left = 0
     Height = 34
@@ -726,11 +726,11 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           }
           MaxLength = 0
           NumGlyphs = 1
-          OnButtonClick = fsFindQueryExecute
           ParentFont = False
           PasswordChar = #0
           Spacing = 0
           TabOrder = 0
+          OnButtonClick = fsFindQueryExecute
         end
         object RxDBGrid2: TRxDBGrid
           AnchorSideLeft.Control = EditButton1
@@ -1012,9 +1012,9 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           Anchors = [akTop, akRight]
           BorderSpacing.Around = 6
           Caption = 'With data type'
-          OnClick = CheckBox3Click
           ParentFont = False
           TabOrder = 1
+          OnClick = CheckBox3Click
         end
         object Label3: TLabel
           AnchorSideLeft.Control = CheckBox3
@@ -1040,10 +1040,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
           Width = 108
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 6
-          OnChange = Edit1Change
           ParentFont = False
           TabOrder = 2
           Text = ','
+          OnChange = Edit1Change
         end
       end
     end
@@ -1083,10 +1083,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
         Width = 166
         Align = alTop
         ItemHeight = 0
-        OnChange = ComboBox1Change
         ParentFont = False
         Style = csDropDownList
         TabOrder = 0
+        OnChange = ComboBox1Change
       end
       object TreeView2: TTreeView
         Left = 1
@@ -1101,10 +1101,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
         PopupMenu = PopupMenu1
         ReadOnly = True
         TabOrder = 1
+        Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
         OnClick = TreeView1Click
         OnDragDrop = TreeView1DragDrop
         OnDragOver = TreeView1DragOver
-        Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       end
     end
     object Splitter4: TSplitter
@@ -1129,10 +1129,10 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       PopupMenu = PopupMenu1
       ReadOnly = True
       TabOrder = 2
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       OnClick = TreeView1Click
       OnDragDrop = TreeView1DragDrop
       OnDragOver = TreeView1DragOver
-      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
     end
   end
   object Datasource1: TDataSource
@@ -1249,16 +1249,16 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Caption = 'Commit'
       Hint = 'Commit transaction'
       ImageIndex = 15
-      OnExecute = resCloseQueryExecute
       ShortCut = 49219
+      OnExecute = resCloseQueryExecute
     end
     object resRolback: TAction
       Category = 'Result'
       Caption = 'Rolback'
       Hint = 'Rolback transaction'
       ImageIndex = 46
-      OnExecute = resCloseQueryExecute
       ShortCut = 49234
+      OnExecute = resCloseQueryExecute
     end
     object resPrint: TAction
       Category = 'Result'
@@ -1285,52 +1285,52 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Caption = 'New query'
       Hint = 'New query'
       ImageIndex = 9
-      OnExecute = edtNewPageExecute
       ShortCut = 24654
+      OnExecute = edtNewPageExecute
     end
     object edtDelete: TAction
       Category = 'Editor tabs'
       Caption = 'Delete'
       Hint = 'Delete query'
-      OnExecute = edtDeleteExecute
       ShortCut = 16452
+      OnExecute = edtDeleteExecute
     end
     object edtDeleteAll: TAction
       Category = 'Editor tabs'
       Caption = 'Delete all'
       Hint = 'Clear all query'
       ImageIndex = 45
-      OnExecute = edtDeleteAllExecute
       ShortCut = 24644
+      OnExecute = edtDeleteAllExecute
     end
     object edtRenameTab: TAction
       Category = 'Editor tabs'
       Caption = 'Rename tab'
       Hint = 'Rename edit tab'
-      OnExecute = edtRenameTabExecute
       ShortCut = 16497
+      OnExecute = edtRenameTabExecute
     end
     object editExecQury: TAction
       Category = 'Editor'
       Caption = 'Run query'
       ImageIndex = 16
-      OnExecute = editExecQuryExecute
       ShortCut = 120
+      OnExecute = editExecQuryExecute
     end
     object editExecQueryFetchAll: TAction
       Category = 'Editor'
       Caption = 'Run query and fetch all'
       Hint = 'Execute query and fetch all'
       ImageIndex = 16
-      OnExecute = editExecQueryFetchAllExecute
       ShortCut = 8312
+      OnExecute = editExecQueryFetchAllExecute
     end
     object editShowPlan: TAction
       Category = 'Editor'
       Caption = 'Show query plan'
       ImageIndex = 48
-      OnExecute = editShowPlanExecute
       ShortCut = 16504
+      OnExecute = editShowPlanExecute
     end
     object edtOpen: TAction
       Category = 'File'
@@ -1351,16 +1351,16 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Caption = 'Find'
       Hint = 'Find text in editor'
       ImageIndex = 22
-      OnExecute = edtFindExecute
       ShortCut = 16454
+      OnExecute = edtFindExecute
     end
     object edtFindNext: TAction
       Category = 'Edit'
       Caption = 'Find next...'
       Hint = 'Find next mathes of text'
       ImageIndex = 23
-      OnExecute = edtFindNextExecute
       ShortCut = 114
+      OnExecute = edtFindNextExecute
     end
     object edtReplace: TAction
       Category = 'Edit'
@@ -1467,8 +1467,8 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Caption = 'Redo'
       Hint = 'Redo last operation'
       ImageIndex = 19
-      OnExecute = edtRedoExecute
       ShortCut = 24666
+      OnExecute = edtRedoExecute
     end
     object rgExportAsInsert: TAction
       Category = 'Result grid'
@@ -1480,32 +1480,32 @@ object fbmSQLEditorForm: TfbmSQLEditorForm
       Caption = 'edtUndo'
       Hint = 'Undo last operation'
       ImageIndex = 20
-      OnExecute = edtUndoExecute
       ShortCut = 16474
+      OnExecute = edtUndoExecute
     end
     object edtCut: TAction
       Category = 'Edit'
       Caption = 'edtCut'
       Hint = 'Cut text to clipboard'
       ImageIndex = 21
-      OnExecute = edtCutExecute
       ShortCut = 16472
+      OnExecute = edtCutExecute
     end
     object edtCopy: TAction
       Category = 'Edit'
       Caption = 'edtCopy'
       Hint = 'Copy text to clipboard'
       ImageIndex = 25
-      OnExecute = edtCopyExecute
       ShortCut = 16451
+      OnExecute = edtCopyExecute
     end
     object edtPaste: TAction
       Category = 'Edit'
       Caption = 'edtPaste'
       Hint = 'Paste text from clipboard'
       ImageIndex = 24
-      OnExecute = edtPasteExecute
       ShortCut = 16470
+      OnExecute = edtPasteExecute
     end
     object resAutoFillCollumnWidth: TAction
       Category = 'Result'

@@ -26,10 +26,11 @@ unit fbmMakeSQLFromDataSetUnit;
 interface
 
 uses
-  Classes, SysUtils, DB, DBGrids;
+  Classes, SysUtils, DB, DBGrids, sqlEngineTypes;
 
 function MakeSQLInsert(ADataSet:TDataSet;const ATableName:string; ASelectedRows: TBookmarkList):string;
 function MakeSQLUpdate(ADataSet:TDataSet;const ATableName, APKFields:string; ASelectedRows: TBookmarkList):string;
+function MakeSQLUpdateOrInsert(ADataSet:TDataSet;const ATableName, APKFields:string; ASelectedRows: TBookmarkList; AExportEngine:TExportEngine):string;
 
 function MakeRowInsert(ADataSet:TDataSet; const ATableName:string):string;
 implementation
@@ -168,6 +169,24 @@ begin
   end;
   ADataSet.Bookmark:=B;
   ADataSet.EnableControls;
+end;
+
+function MakeSQLUpdateOrInsert(ADataSet: TDataSet; const ATableName,
+  APKFields: string; ASelectedRows: TBookmarkList; AExportEngine: TExportEngine
+  ): string;
+begin
+
+{
+insert into system.sys_client(sys_client_id, sys_client_src, sys_client_code, sys_client_name, sys_client_inn, sys_client_org_type, sys_client_adress, sys_client_closed, sys_client_phone, sys_client_email_for_check)
+values (-2, -1, 0, 'Юридические лица согласно реестра', '', 2, null, null, null, null)
+ON CONFLICT (sys_client_id) DO
+UPDATE
+SET
+ sys_client_name = 'Юридические лица согласно реестра'
+WHERE sys_client.sys_client_id  = -2;
+
+
+}
 end;
 
 function MakeRowInsert(ADataSet: TDataSet; const ATableName: string): string;

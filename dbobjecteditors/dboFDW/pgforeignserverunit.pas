@@ -25,7 +25,7 @@ unit pgForeignServerUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit, DB,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ValEdit, DB, sqlEngineTypes,
   rxdbgrid, rxmemds, fdmAbstractEditorUnit, fbmSqlParserUnit, pg_SqlParserUnit,
   SQLEngineAbstractUnit, pgSQLEngineFDW, PostgreSQLEngineUnit;
 

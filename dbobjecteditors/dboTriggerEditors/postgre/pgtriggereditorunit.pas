@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   ExtCtrls, ComCtrls, Buttons, Menus, DB, fdmAbstractEditorUnit, sqlObjects,
-  PostgreSQLEngineUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit,
+  PostgreSQLEngineUnit, fdbm_SynEditorUnit, SQLEngineAbstractUnit, sqlEngineTypes,
   SQLEngineCommonTypesUnit, fbmSqlParserUnit, fbmToolsUnit, fbmCompillerMessagesUnit,
   fbmPGLocalVarsEditorFrameUnit;
 

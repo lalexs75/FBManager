@@ -25,7 +25,7 @@ unit pgDBObjectsSizeUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZMacroQuery,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ZMacroQuery, sqlEngineTypes,
   ZConnection, rxdbgrid, rxmemds, DB, fbmAbstractSQLEngineToolsUnit,
   ibmanagertypesunit, SQLEngineCommonTypesUnit, sqlObjects,
   SQLEngineAbstractUnit;
