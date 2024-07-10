@@ -35,7 +35,7 @@ function MakeSQLUpdateOrInsert(ADataSet:TDataSet;const ATableName, APKFields:str
 function MakeRowInsert(ADataSet:TDataSet; const ATableName:string):string;
 implementation
 uses
-  strutils, rxstrutils;
+  strutils, rxstrutils, fbmToolsNV;
 
 function FieldValueStr(F: TField):string;
 begin
@@ -44,6 +44,9 @@ begin
   else
   if F.DataType in [ftString, ftTime, ftDate, ftDateTime, ftMemo] then
     Result:=QuotedString(F.AsString, '''')
+  else
+  if F.DataType in [ftFloat, ftExtended, ftSingle, ftFMTBcd, ftCurrency, ftBCD] then
+   Result:=FloatToStrEx(F.AsFloat)
   else
     Result:=F.AsString;
 end;
