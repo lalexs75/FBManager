@@ -1426,7 +1426,7 @@ begin
   Q.Open;
   while not Q.Eof do
   begin
-    S:=Q.Fields.ByNameAsString['RDB$TYPE_NAME'];
+    S:=TrimRight(Q.Fields.ByNameAsString['RDB$TYPE_NAME']);
     S1:=LowerCase(S);
     P:=FTypeList.FindType(S1);
     if not Assigned(P) then
@@ -2072,7 +2072,11 @@ begin
   if ExternalFile <> '' then
     FCmd.FileName:=ExternalFile
   else
+  begin
+    if TempTableAction<>oncNone then
+      FCmd.Options:=FCmd.Options + [ooTemporary];
     FCmd.OnCommit:=TempTableAction;
+  end;
 
   { TODO : Необходимо список ограничений формировать }
   RefreshConstraintForeignKey;

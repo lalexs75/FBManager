@@ -50,10 +50,10 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
     Height = 510
     Top = 105
     Width = 804
-    ActivePage = tabArray
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 4
     object TabSheet1: TTabSheet
       Caption = 'Field type'
@@ -738,6 +738,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           object TSynGutterMarks
             Width = 24
             MouseActions = <>
+            MaxExtraMarksColums = 0
+            Options = [sgmoDeDuplicateMarksOnOverflow]
           end
           object TSynGutterLineNumber
             Width = 21
@@ -1370,6 +1372,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           object TSynGutterMarks
             Width = 24
             MouseActions = <>
+            MaxExtraMarksColums = 0
+            Options = [sgmoDeDuplicateMarksOnOverflow]
           end
           object TSynGutterLineNumber
             Width = 21
@@ -1901,6 +1905,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           object TSynGutterMarks
             Width = 24
             MouseActions = <>
+            MaxExtraMarksColums = 0
+            Options = [sgmoDeDuplicateMarksOnOverflow]
           end
           object TSynGutterLineNumber
             Width = 21
@@ -2432,6 +2438,8 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
           object TSynGutterMarks
             Width = 24
             MouseActions = <>
+            MaxExtraMarksColums = 0
+            Options = [sgmoDeDuplicateMarksOnOverflow]
           end
           object TSynGutterLineNumber
             Width = 21
@@ -2970,7 +2978,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         TabOrder = 5
         object TabSheet8: TTabSheet
           Caption = 'FKRule'
-          ClientHeight = 262
+          ClientHeight = 259
           ClientWidth = 784
           ParentFont = False
           object cbFKDeleteRule: TComboBox
@@ -2982,7 +2990,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideBottom.Side = asrBottom
             Left = 475
             Height = 25
-            Top = 231
+            Top = 228
             Width = 303
             Anchors = [akLeft, akRight, akBottom]
             BorderSpacing.Around = 6
@@ -3005,7 +3013,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideBottom.Side = asrBottom
             Left = 410
             Height = 17
-            Top = 239
+            Top = 236
             Width = 59
             Anchors = [akLeft, akBottom]
             Caption = 'On delete'
@@ -3022,7 +3030,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideBottom.Side = asrBottom
             Left = 71
             Height = 25
-            Top = 231
+            Top = 228
             Width = 304
             Anchors = [akLeft, akRight, akBottom]
             BorderSpacing.Left = 6
@@ -3047,7 +3055,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideBottom.Side = asrBottom
             Left = 0
             Height = 17
-            Top = 239
+            Top = 236
             Width = 65
             Anchors = [akLeft, akBottom]
             Caption = 'On Update'
@@ -3061,7 +3069,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Control = SpeedButton4
             AnchorSideBottom.Control = cbFKUpdateRule
             Left = 6
-            Height = 219
+            Height = 216
             Top = 6
             Width = 369
             Anchors = [akTop, akLeft, akRight, akBottom]
@@ -3082,7 +3090,7 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
             AnchorSideRight.Side = asrBottom
             AnchorSideBottom.Control = cbFKDeleteRule
             Left = 410
-            Height = 219
+            Height = 216
             Top = 6
             Width = 368
             Anchors = [akTop, akLeft, akRight, akBottom]
@@ -3214,12 +3222,12 @@ object fbmTableFieldEditorForm: TfbmTableFieldEditorForm
         end
         object TabSheet9: TTabSheet
           Caption = 'Description'
-          ClientHeight = 262
+          ClientHeight = 259
           ClientWidth = 784
           ParentFont = False
           object Memo1: TMemo
             Left = 0
-            Height = 262
+            Height = 259
             Top = 0
             Width = 784
             Align = alClient

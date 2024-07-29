@@ -366,6 +366,7 @@ resourcestring
   sDescBIGINT = '8-byte integer type';
   sDescVARCHAR = 'Variable-length data with a maximum of 32,765 characters.';
   sDescINTEGER = 'Integer (whole number) data from -231 (-2,147,483,648) through 231 - 1 (2,147,483,647).';
+  sDescINT64 = 'Signed 64-bit integer.';
   sDescSMALLINT = 'Integer data from -215 (-32,768) through 215 - 1 (32,767).';
   sDescTIMESTAMP = 'Date and time data from January 1, 1900, through June 6, 2079, with an accuracy of one minute. Firebird''s has greater range and accuracy.';
   sDescTIME = 'The TIME data type stores the time of day within the range from 00:00:00.0000 to 23:59:59.9999.';
@@ -383,6 +384,8 @@ resourcestring
 
 
 procedure FillFieldTypes(Items: TDBMSFieldTypeList);
+var
+  P: TDBMSFieldTypeRecord;
 begin
   Items.Add('NUMERIC',          016,  true,  true,  ftFloat,   '', sDescNUMERIC, tgNumericTypes);
   Items.Add('CHAR',             014,  true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes);
@@ -401,6 +404,9 @@ begin
   Items.Add('BIGINT',             0, false, false, ftLargeint, '', sDescBIGINT, tgNumericTypes);
   Items.Add('ARRAY',              0, false, false, ftUnknown,  '', sDescARRAY, tgArrays);
   Items.Add('BOOLEAN',          023, false, false, ftBoolean,  '', sDescBOOLEAN, tgBooleanTypes);
+  P:=Items.Add('BIGINT',           016, false, false, ftLargeint,   '', sDescINTEGER, tgNumericTypes);
+//  P.DBType:=;
+//  009
 end;
 {
 type

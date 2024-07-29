@@ -1280,6 +1280,8 @@ var
   PP:TDataBaseRecord;
   F: TOIFolder;
 begin
+  TreeFilterEdit1.FilteredTreeview:=nil;
+  TreeView1.BeginUpdate;
   //Read folders
   UserDBModule.quFolders.Open;
   while not UserDBModule.quFolders.EOF do
@@ -1305,9 +1307,13 @@ begin
   UserDBModule.quDBOptions.Close;
   UserDBModule.quDatabases.Close;
 
-  for F in Folders do F.AfterLoad;
 
   TreeView1Click(nil);
+
+  for F in Folders do F.AfterLoad;
+  TreeView1.EndUpdate;
+  TreeFilterEdit1.FilteredTreeview:=TreeView1;
+  TreeFilterEdit1.IdleConnected:=false;
 end;
 
 function TfbManDataInpectorForm.CurrentDB: TDataBaseRecord;

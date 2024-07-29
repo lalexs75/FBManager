@@ -6198,6 +6198,10 @@ msgstr ""
 msgid "The DATE data type stores the date. From 01.01.0001 AD to 31.12.9999. Date only, no time element"
 msgstr ""
 
+#: fb_utils.sdescint64
+msgid "Signed 64-bit integer."
+msgstr ""
+
 #: fb_utils.sdescinteger
 msgid "Integer (whole number) data from -231 (-2,147,483,648) through 231 - 1 (2,147,483,647)."
 msgstr ""
