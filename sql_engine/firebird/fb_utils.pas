@@ -375,12 +375,14 @@ resourcestring
   sDescNUMERIC = '';
   sDescCSTRING = '';
   sDescQUAD = '';
-  sDescFLOAT = '';
+  sDescFLOAT = 'Single-precision, IEEE-754 binary32, ~7 digits';
+  sDescFLOAT16 = 'Decimal floating-point type, IEEE-754 decimal64.';
+  sDescFLOAT34 = 'Decimal floating-point type, IEEE-754 decimal128.';
   sDescDOUBLE_PRECISION = '';
-  sDescBLOB = '';
+  sDescBLOB = 'A data type of variable size for storing large amounts of data';
   sDescBLOBID = '';
   sDescARRAY = '';
-  sDescBOOLEAN = '';
+  sDescBOOLEAN = 'Boolean data type';
 
 
 procedure FillFieldTypes(Items: TDBMSFieldTypeList);
@@ -395,15 +397,18 @@ begin
   Items.Add('FLOAT',            010, false, false, ftFloat,    '', sDescFLOAT, tgNumericTypes);    //RDB$FIELD_TYPE	10	FLOAT		1
   Items.Add('DATE',             012, false, false, ftDate,     '', sDescDATE, tgDateTimeTypes);    //RDB$FIELD_TYPE	12	DATE		1
   Items.Add('TIME',             013, false, false, ftTime,     '', sDescTIME, tgDateTimeTypes);    //RDB$FIELD_TYPE	13	TIME		1
-  Items.Add('CHAR',             014,  true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes); //RDB$FIELD_TYPE	14	TEXT		1
+  Items.Add('CHAR',             014, true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes); //RDB$FIELD_TYPE	14	TEXT		1
   Items.Add('BIGINT',           016, false, false, ftLargeint,   '', sDescBIGINT, tgNumericTypes);       //RDB$FIELD_TYPE	16	INT64		1
   Items.Add('BOOLEAN',          023, false, false, ftBoolean,  '', sDescBOOLEAN, tgBooleanTypes);         //RDB$FIELD_TYPE	23	BOOLEAN		1
-  //  RDB$FIELD_TYPE	24	DECFLOAT(16)		1
-  //  RDB$FIELD_TYPE	25	DECFLOAT(34)		1
+  Items.Add('DECFLOAT(16)',     024, false, false, ftFloat,    '', sDescFLOAT16, tgNumericTypes);    //RDB$FIELD_TYPE	24	DECFLOAT(16)		1
+  Items.Add('DECFLOAT(34)',     025, false, false, ftFloat,    '', sDescFLOAT34, tgNumericTypes);    //RDB$FIELD_TYPE	25	DECFLOAT(34)		1
+
   Items.Add('INT128',           026, false, false, ftLargeint, '', sDescBIGINT, tgNumericTypes); //  RDB$FIELD_TYPE	26	INT128		1
   Items.Add('DOUBLE PRECISION', 027, false, false, ftFloat,    '', sDescDOUBLE_PRECISION, tgNumericTypes);//RDB$FIELD_TYPE	27	DOUBLE		1
-  //RDB$FIELD_TYPE	28	TIME WITH TIME ZONE		1
-  //RDB$FIELD_TYPE	29	TIMESTAMP WITH TIME ZONE		1
+
+  Items.Add('TIME WITH TIME ZONE', 028, false, false, ftTime, '', sDescTIME, tgDateTimeTypes);    //RDB$FIELD_TYPE	28	TIME WITH TIME ZONE		1
+  Items.Add('TIMESTAMP WITH TIME ZONE', 029, false, false, ftTime, '', sDescTIME, tgDateTimeTypes);    //RDB$FIELD_TYPE	29	TIMESTAMP WITH TIME ZONE		1
+
   Items.Add('TIMESTAMP',        035, false, false, ftTimeStamp,'', sDescTIMESTAMP, tgDateTimeTypes); //RDB$FIELD_TYPE	35	TIMESTAMP		1
 
   Items.Add('VARCHAR',          037,  true, false, ftString,   'CHAR VARYING'+LineEnding+'CHARACTER VARYING', sDescVARCHAR, tgCharacterTypes);//RDB$FIELD_TYPE	37	VARYING		1

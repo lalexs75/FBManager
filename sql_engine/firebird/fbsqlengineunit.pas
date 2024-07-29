@@ -1367,7 +1367,6 @@ begin
 
   FUIParams:=[upSqlEditor, upUserName, upPassword, upLocal, upRemote];
 
-  FillFieldTypes(FTypeList);
   FSQLEngineCapability:=[okDomain, okTable, okView, okTrigger, okStoredProc,
                    okSequence, okException, okUDF, okUser, okRole, okIndex,
                    okCheckConstraint, okForeignKey, okPrimaryKey,
@@ -1486,6 +1485,8 @@ begin
     FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
     FBTransaction.StartTransaction;
     LoadDBParams;
+    FTypeList.Clear;
+    FillFieldTypes(FTypeList);
 //    FillFieldTypeCodes;
   end;
 
@@ -2320,7 +2321,11 @@ begin
       Rec.FieldSQLTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_type'];
       Rec.FieldSQLSubTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_sub_type'];
       //Rec.FieldTypeName:= FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
-      P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt, Rec.FieldSQLSubTypeInt);
+      if Rec.FieldSQLTypeInt = 16 then
+        P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt, Rec.FieldSQLSubTypeInt)
+      else
+        P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt);
+
       if Assigned(P) then
         Rec.FieldTypeName:=P.TypeName; // FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
       Rec.FieldNotNull:=QFields.Fields.ByNameAsInteger['RDB$NULL_FLAG'] = 1;

@@ -6390,6 +6390,14 @@ msgstr "Да"
 msgid "8-byte integer type"
 msgstr "8-ми битное целое число"
 
+#: fb_utils.sdescblob
+msgid "A data type of variable size for storing large amounts of data"
+msgstr ""
+
+#: fb_utils.sdescboolean
+msgid "Boolean data type"
+msgstr ""
+
 #: fb_utils.sdescchar
 msgid "Size in bytes depends on the encoding, the number of bytes in a character. from 1 to 32,767 bytes. A fixed-length character data type. When its data is displayed, trailing spaces are added to the string up to the specified length. Trailing spaces are not stored in the database but are restored to match the defined length when the column is displayed on the client side. Network traffic is reduced by not sending spaces over the LAN. If the number of characters is not specified, 1 is used by default."
 msgstr "Строка фиксированной длинны. Размер в байтах, зависит от кодировки. Допустимый размер в диапазона от 1 до 32,767 байта. Завершающие пробелы в БД не хранятся. Добавляются только в момент отображения данных на стороне клиента. Если длинна не указана - используется 1 по умолчанию."
@@ -6397,6 +6405,18 @@ msgstr "Строка фиксированной длинны. Размер в б
 #: fb_utils.sdescdate
 msgid "The DATE data type stores the date. From 01.01.0001 AD to 31.12.9999. Date only, no time element"
 msgstr "Тип DATE хранит дату в диапазоне 01.01.0001 нашей эры по 31.12.9999. Только дата, без времени."
+
+#: fb_utils.sdescfloat
+msgid "Single-precision, IEEE-754 binary32, ~7 digits"
+msgstr ""
+
+#: fb_utils.sdescfloat16
+msgid "Decimal floating-point type, IEEE-754 decimal64."
+msgstr ""
+
+#: fb_utils.sdescfloat34
+msgid "Decimal floating-point type, IEEE-754 decimal128."
+msgstr ""
 
 #: fb_utils.sdescint64
 msgid "Signed 64-bit integer."
