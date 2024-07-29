@@ -7,27 +7,28 @@ inherited fbmFirebirdTablePropsPage: TfbmFirebirdTablePropsPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 24
+    Height = 23
     Top = 6
-    Width = 113
+    Width = 110
     BorderSpacing.Around = 6
     Caption = 'Normal mode'
     Checked = True
-    OnChange = RadioButton1Change
     TabOrder = 0
+    TabStop = True
+    OnChange = RadioButton1Change
   end
   object RadioButton2: TRadioButton[1]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = RadioGroup1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 122
-    Width = 102
+    Height = 23
+    Top = 118
+    Width = 98
     BorderSpacing.Around = 6
     Caption = 'External file'
-    OnChange = RadioButton1Change
     TabOrder = 1
+    OnChange = RadioButton1Change
   end
   object FileNameEdit1: TFileNameEdit[2]
     AnchorSideLeft.Control = RadioButton2
@@ -36,8 +37,8 @@ inherited fbmFirebirdTablePropsPage: TfbmFirebirdTablePropsPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 37
-    Top = 152
+    Height = 29
+    Top = 147
     Width = 430
     FilterIndex = 0
     HideDirectories = False
@@ -54,22 +55,22 @@ inherited fbmFirebirdTablePropsPage: TfbmFirebirdTablePropsPage
     AnchorSideTop.Control = RadioButton1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 24
-    Top = 36
-    Width = 178
+    Height = 23
+    Top = 35
+    Width = 173
     BorderSpacing.Around = 6
     Caption = 'Global Temporary Table'
-    OnChange = RadioButton1Change
     TabOrder = 3
+    OnChange = RadioButton1Change
   end
   object RadioGroup1: TRadioGroup[4]
     AnchorSideLeft.Control = RadioButton1
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 50
-    Top = 66
-    Width = 241
+    Height = 48
+    Top = 64
+    Width = 223
     AutoFill = True
     AutoSize = True
     BorderSpacing.Around = 6
@@ -80,8 +81,8 @@ inherited fbmFirebirdTablePropsPage: TfbmFirebirdTablePropsPage
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 48
-    ClientWidth = 239
+    ClientHeight = 46
+    ClientWidth = 221
     ItemIndex = 0
     Items.Strings = (
       'ON COMMIT DELETE ROWS'

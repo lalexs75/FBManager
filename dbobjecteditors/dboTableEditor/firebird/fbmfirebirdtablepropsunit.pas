@@ -50,7 +50,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fb_SqlParserUnit, FBSQLEngineUnit;
+uses fbmStrConstUnit, sqlObjects, fb_SqlParserUnit, FBSQLEngineUnit;
 
 {$R *.lfm}
 
@@ -124,6 +124,8 @@ begin
   begin
     if CheckBox1.Checked then
     begin
+      TFBSQLCreateTable(ASQLObject).Options:=TFBSQLCreateTable(ASQLObject).Options + [ooTemporary];
+
       if RadioGroup1.ItemIndex = 0 then
         TFBSQLCreateTable(ASQLObject).OnCommit:=oncDelete
       else
