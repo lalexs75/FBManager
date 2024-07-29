@@ -387,7 +387,8 @@ procedure FillFieldTypes(Items: TDBMSFieldTypeList);
 var
   P: TDBMSFieldTypeRecord;
 begin
-  Items.Add('NUMERIC',          016,  true,  true,  ftFloat,   '', sDescNUMERIC, tgNumericTypes);
+  P:=Items.Add('NUMERIC',          016,  true,  true,  ftFloat,   '', sDescNUMERIC, tgNumericTypes);
+  P.SubTypeId:=1;
   Items.Add('CHAR',             014,  true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes);
   Items.Add('VARCHAR',          037,  true, false, ftString,   'CHAR VARYING'+LineEnding+'CHARACTER VARYING', sDescVARCHAR, tgCharacterTypes);
   Items.Add('CSTRING',          040,  true, false, ftString,   '', sDescCSTRING, tgCharacterTypes);

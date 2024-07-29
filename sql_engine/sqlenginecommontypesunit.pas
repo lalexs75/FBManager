@@ -544,6 +544,7 @@ type
   public
     TypeName:string;
     TypeId:integer;
+    SubTypeId:integer;
     VarLen:boolean;
     VarDec:boolean;
     DBType:TFieldType;
@@ -572,6 +573,7 @@ type
     procedure Clear;
     function FindType(const ATypeName:string):TDBMSFieldTypeRecord;
     function FindTypeByID(const ATypeID:integer):TDBMSFieldTypeRecord;
+    function FindTypeByID(const ATypeID, ASubTypeID:integer):TDBMSFieldTypeRecord;
     procedure FillForTypes(const AItems:TStrings; const ClearItems:boolean);
     function GetEnumerator: TDBMSFieldTypeListEnumerator;
     function Add(const ATypeName:string; ATypeId:integer; AVarLen, AVarDec:boolean; ADBType:TFieldType; const AAltNames, ADesc:string; ATypesGroup:TDBMSTypesGroup):TDBMSFieldTypeRecord;
@@ -1237,6 +1239,17 @@ var
 begin
   for T in Self do
     if (T.TypeId = ATypeID) then
+      Exit(T);
+  Result:=nil;
+end;
+
+function TDBMSFieldTypeList.FindTypeByID(const ATypeID, ASubTypeID: integer
+  ): TDBMSFieldTypeRecord;
+var
+  T: TDBMSFieldTypeRecord;
+begin
+  for T in Self do
+    if (T.TypeId = ATypeID) and (T.SubTypeId = ASubTypeID) then
       Exit(T);
   Result:=nil;
 end;

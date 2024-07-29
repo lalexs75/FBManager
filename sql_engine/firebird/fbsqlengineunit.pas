@@ -2320,7 +2320,7 @@ begin
       Rec.FieldSQLTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_type'];
       Rec.FieldSQLSubTypeInt:=QFields.Fields.ByNameAsInteger['rdb$field_sub_type'];
       //Rec.FieldTypeName:= FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
-      P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt);
+      P:=OwnerDB.TypeList.FindTypeByID(Rec.FieldSQLTypeInt, Rec.FieldSQLSubTypeInt);
       if Assigned(P) then
         Rec.FieldTypeName:=P.TypeName; // FB_SqlTypesToString(Rec.FieldSQLTypeInt,  Rec.FieldSQLSubTypeInt);
       Rec.FieldNotNull:=QFields.Fields.ByNameAsInteger['RDB$NULL_FLAG'] = 1;
