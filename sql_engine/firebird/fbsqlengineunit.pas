@@ -1486,7 +1486,7 @@ begin
     FBTransaction.Options:=IndexToTransaction(FTranParamMetaData);
     FBTransaction.StartTransaction;
     LoadDBParams;
-    FillFieldTypeCodes;
+//    FillFieldTypeCodes;
   end;
 
   //inherited SetConnected(AValue);

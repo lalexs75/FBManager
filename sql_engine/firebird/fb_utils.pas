@@ -389,25 +389,29 @@ var
 begin
   P:=Items.Add('NUMERIC',          016,  true,  true,  ftFloat,   '', sDescNUMERIC, tgNumericTypes);
   P.SubTypeId:=1;
-  Items.Add('CHAR',             014,  true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes);
-  Items.Add('VARCHAR',          037,  true, false, ftString,   'CHAR VARYING'+LineEnding+'CHARACTER VARYING', sDescVARCHAR, tgCharacterTypes);
-  Items.Add('CSTRING',          040,  true, false, ftString,   '', sDescCSTRING, tgCharacterTypes);
-  Items.Add('SMALLINT',         007, false, false, ftSmallint, '', sDescSMALLINT, tgNumericTypes);
-  Items.Add('INTEGER',          008, false, false, ftInteger,  '', sDescINTEGER, tgNumericTypes);
-  Items.Add('QUAD',             009, false, false, ftLargeint, '', sDescQUAD, tgNumericTypes);
-  Items.Add('FLOAT',            010, false, false, ftFloat,    '', sDescFLOAT, tgNumericTypes);
-  Items.Add('DOUBLE PRECISION', 027, false, false, ftFloat,    '', sDescDOUBLE_PRECISION, tgNumericTypes);
-  Items.Add('TIMESTAMP',        035, false, false, ftTimeStamp,'', sDescTIMESTAMP, tgDateTimeTypes);
-  Items.Add('BLOB',             261, false, false, ftBlob,     '', sDescBLOB, tgBinaryDataTypes);
-  Items.Add('BLOBID',           045, false, false, ftUnknown,  '', sDescBLOBID, tgBinaryDataTypes);
-  Items.Add('DATE',             012, false, false, ftDate,     '', sDescDATE, tgDateTimeTypes);
-  Items.Add('TIME',             013, false, false, ftTime,     '', sDescTIME, tgDateTimeTypes);
-  Items.Add('BIGINT',             0, false, false, ftLargeint, '', sDescBIGINT, tgNumericTypes);
+  Items.Add('SMALLINT',         007, false, false, ftSmallint, '', sDescSMALLINT, tgNumericTypes); //RDB$FIELD_TYPE	7	SHORT		1
+  Items.Add('INTEGER',          008, false, false, ftInteger,  '', sDescINTEGER, tgNumericTypes);  //RDB$FIELD_TYPE	8	LONG		1
+  Items.Add('QUAD',             009, false, false, ftLargeint, '', sDescQUAD, tgNumericTypes);     //RDB$FIELD_TYPE	9	QUAD		1
+  Items.Add('FLOAT',            010, false, false, ftFloat,    '', sDescFLOAT, tgNumericTypes);    //RDB$FIELD_TYPE	10	FLOAT		1
+  Items.Add('DATE',             012, false, false, ftDate,     '', sDescDATE, tgDateTimeTypes);    //RDB$FIELD_TYPE	12	DATE		1
+  Items.Add('TIME',             013, false, false, ftTime,     '', sDescTIME, tgDateTimeTypes);    //RDB$FIELD_TYPE	13	TIME		1
+  Items.Add('CHAR',             014,  true, false, ftString,   'CHARACTER', sDescCHAR, tgCharacterTypes); //RDB$FIELD_TYPE	14	TEXT		1
+  Items.Add('BIGINT',           016, false, false, ftLargeint,   '', sDescBIGINT, tgNumericTypes);       //RDB$FIELD_TYPE	16	INT64		1
+  Items.Add('BOOLEAN',          023, false, false, ftBoolean,  '', sDescBOOLEAN, tgBooleanTypes);         //RDB$FIELD_TYPE	23	BOOLEAN		1
+  //  RDB$FIELD_TYPE	24	DECFLOAT(16)		1
+  //  RDB$FIELD_TYPE	25	DECFLOAT(34)		1
+  Items.Add('INT128',           026, false, false, ftLargeint, '', sDescBIGINT, tgNumericTypes); //  RDB$FIELD_TYPE	26	INT128		1
+  Items.Add('DOUBLE PRECISION', 027, false, false, ftFloat,    '', sDescDOUBLE_PRECISION, tgNumericTypes);//RDB$FIELD_TYPE	27	DOUBLE		1
+  //RDB$FIELD_TYPE	28	TIME WITH TIME ZONE		1
+  //RDB$FIELD_TYPE	29	TIMESTAMP WITH TIME ZONE		1
+  Items.Add('TIMESTAMP',        035, false, false, ftTimeStamp,'', sDescTIMESTAMP, tgDateTimeTypes); //RDB$FIELD_TYPE	35	TIMESTAMP		1
+
+  Items.Add('VARCHAR',          037,  true, false, ftString,   'CHAR VARYING'+LineEnding+'CHARACTER VARYING', sDescVARCHAR, tgCharacterTypes);//RDB$FIELD_TYPE	37	VARYING		1
+  Items.Add('CSTRING',          040,  true, false, ftString,   '', sDescCSTRING, tgCharacterTypes); //RDB$FIELD_TYPE	40	CSTRING		1
+  Items.Add('BLOBID',           045, false, false, ftUnknown,  '', sDescBLOBID, tgBinaryDataTypes); //RDB$FIELD_TYPE	45	BLOB_ID		1
+  Items.Add('BLOB',             261, false, false, ftBlob,     '', sDescBLOB, tgBinaryDataTypes);   //RDB$FIELD_TYPE	261	BLOB		1
   Items.Add('ARRAY',              0, false, false, ftUnknown,  '', sDescARRAY, tgArrays);
-  Items.Add('BOOLEAN',          023, false, false, ftBoolean,  '', sDescBOOLEAN, tgBooleanTypes);
-  P:=Items.Add('BIGINT',           016, false, false, ftLargeint,   '', sDescINTEGER, tgNumericTypes);
-//  P.DBType:=;
-//  009
+
 end;
 {
 type
