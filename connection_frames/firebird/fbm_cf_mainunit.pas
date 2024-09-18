@@ -97,7 +97,7 @@ var
 begin
   S:=edtDBName.Text;
   L:=Pos(':', S);
-  if L>0 then
+  if L>2 then
   begin
     sServName:=Copy2SymbDel(S, ':');
     if sServName<>'' then
