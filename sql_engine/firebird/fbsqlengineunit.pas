@@ -78,6 +78,10 @@ type
   { TFBACLList }
 
   TFBACLList = class(TACLListAbstract)
+  private
+    procedure LoadRoleList;
+    procedure LoadUserList2;
+    procedure LoadUserList3;
   protected
     function InternalCreateACLItem: TACLItem; override;
     function InternalCreateGrantObject: TSQLCommandGrant; override;
@@ -611,6 +615,9 @@ type
     FDomainsRoot:TDomainsRoot;
     FIndexRoot: TFireBirdIndexRoot;
     FProtocol: TUIBProtocol;
+    FRealServerVersion: string;
+    FRealServerVersionMajor: Integer;
+    FRealServerVersionMinor: Integer;
     FRoleName: string;
     FRestoreOptions: TFireBirdRestoreOptions;
     FServerVersion: TFBServerVersion;
@@ -673,6 +680,7 @@ type
     function GetQueryControl:TSQLQueryControl;override;
     function ConvertString20(AStr:string; ToLcl:boolean):string;
 
+
     //Работа с типами полей и с доменами
     procedure FillDomainsList(const Items:TStrings; const ClearItems:boolean);override;
 
@@ -687,6 +695,10 @@ type
     property TranParamMetaData:integer read FTranParamMetaData write FTranParamMetaData;
     property AutoGrantObject:boolean read FAutoGrantObject write FAutoGrantObject;
     property LibraryName: TFileName read GetLiBraryName{ write SetLibraryName};
+    //info
+    property RealServerVersion:string read FRealServerVersion;
+    property RealServerVersionMajor:Integer read FRealServerVersionMajor;
+    property RealServerVersionMinor:Integer read FRealServerVersionMinor;
 
     property FBDatabase:TUIBDataBase read FFBDatabase;
     property FBTransaction: TUIBTransaction read FFBTransaction;
@@ -1231,37 +1243,30 @@ end;
 
 { TFBACLList }
 
-function TFBACLList.InternalCreateACLItem: TACLItem;
+procedure TFBACLList.LoadRoleList;
+var
+  Q: TUIBQuery;
+  P: TACLItem;
 begin
-  Result:=TFBACLItem.Create(DBObject, Self);
+  Q:=TSQLEngineFireBird(SQLEngine).GetUIBQuery(fbSqlModule.sUsers['FBRoles']);
+  Q.Open;
+  while not Q.Eof do
+  begin
+    P:=Add;
+    P.UserType:=2;
+    P.UserName:=Trim(Q.Fields.ByNameAsString['RDB$ROLE_NAME']);
+    Q.Next;
+  end;
+  Q.Close;
 end;
 
-function TFBACLList.InternalCreateGrantObject: TSQLCommandGrant;
-begin
-  Result:=TFBSQLGrant.Create(nil);
-end;
-
-function TFBACLList.InternalCreateRevokeObject: TSQLCommandGrant;
-begin
-  Result:=TFBSQLRevoke.Create(nil);
-end;
-
-procedure TFBACLList.LoadUserAndGroups;
+procedure TFBACLList.LoadUserList2;
 var
   i:integer;
   UIBSec:TUIBSecurity;
   P: TACLItem;
+  Q: TUIBQuery;
 begin
-  { #todo -oalexs : Переделать }
-(*
-  //Fill roles list
-  for i:=0 to  TSQLEngineFireBird(SQLEngine).RoleRoot.CountObject - 1 do
-  begin
-    P:=Add;
-    P.UserType:=2;
-    P.UserName:=TSQLEngineFireBird(SQLEngine).RoleRoot.Items[i].Caption;
-  end;
-
   //Fill users list
   UIBSec:=TUIBSecurity.Create(nil);
   try
@@ -1279,7 +1284,48 @@ begin
   finally
     UIBSec.Free;
   end;
-*)
+end;
+
+procedure TFBACLList.LoadUserList3;
+var
+  Q: TUIBQuery;
+  P: TACLItem;
+begin
+  Q:=TSQLEngineFireBird(SQLEngine).GetUIBQuery(fbSqlModule.sUsers['FBUsers']);
+  Q.Open;
+  while not Q.Eof do
+  begin
+    P:=Add;
+    P.UserType:=1;
+    P.UserName:=Trim(Q.Fields.ByNameAsString['SEC$USER_NAME']);
+
+    Q.Next;
+  end;
+  Q.Close;
+end;
+
+function TFBACLList.InternalCreateACLItem: TACLItem;
+begin
+  Result:=TFBACLItem.Create(DBObject, Self);
+end;
+
+function TFBACLList.InternalCreateGrantObject: TSQLCommandGrant;
+begin
+  Result:=TFBSQLGrant.Create(nil);
+end;
+
+function TFBACLList.InternalCreateRevokeObject: TSQLCommandGrant;
+begin
+  Result:=TFBSQLRevoke.Create(nil);
+end;
+
+procedure TFBACLList.LoadUserAndGroups;
+begin
+  LoadRoleList;
+  if TSQLEngineFireBird(SQLEngine).FRealServerVersionMajor < 3 then
+    LoadUserList2
+  else
+    LoadUserList3
 end;
 
 procedure TFBACLList.RefreshList;
@@ -1462,6 +1508,27 @@ end;
 
 function TSQLEngineFireBird.InternalSetConnected(const AValue: boolean
   ): boolean;
+
+procedure GetServerInfo;
+var
+  Q: TUIBQuery;
+  S: String;
+begin
+  FRealServerVersionMajor:=0;
+  FRealServerVersionMinor:=0;
+  Q:=GetUIBQuery(fbSqlModule.sServerInfo['sServerVersion']);
+  Q.Open();
+  Q.First;
+  FRealServerVersion:=Q.Fields.ByNameAsString['version'];
+  if FRealServerVersion<>'' then
+  begin
+    S:=FRealServerVersion;
+    FRealServerVersionMajor:=StrToIntDef(Copy2SymbDel(S, '.'), -1);
+    FRealServerVersionMinor:=StrToIntDef(Copy2SymbDel(S, '.'), -1);
+  end;
+  Q.Free;
+end;
+
 var
   S: String;
 begin
@@ -1488,6 +1555,7 @@ begin
     FTypeList.Clear;
     FillFieldTypes(FTypeList);
 //    FillFieldTypeCodes;
+    GetServerInfo;
   end;
 
   //inherited SetConnected(AValue);
@@ -1515,15 +1583,23 @@ begin
   AddObjectsGroup(G, TUDFRoot, TFireBirdUDF, sUDFs);
   AddObjectsGroup(FIndexRoot, TFireBirdIndexRoot, TFireBirdIndex, sIndexs);
 
-  if FServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
+  if FRealServerVersionMajor<3 then
+    AddObjectsGroup(G, TFBRoleRoot, TFireBirdRole, sRoles)
+  else
+  begin
+    AddObjectsGroup(FPackagesRoot, TPackagesRoot, TFireBirdPackage, sPackages);
+    AddObjectsGroup(FFunctionsRoot, TFunctionsRoot, TFireBirdFunction, sFunctions);
+    AddObjectsGroup(G, TFBSecurityRoot, nil, sSecurity);
+  end;
+(*  if FServerVersion in [gds_verFirebird3_0, gds_verFirebird4_0, gds_verFirebird5_0] then
   begin
     AddObjectsGroup(FPackagesRoot, TPackagesRoot, TFireBirdPackage, sPackages);
     AddObjectsGroup(FFunctionsRoot, TFunctionsRoot, TFireBirdFunction, sFunctions);
     AddObjectsGroup(G, TFBSecurityRoot, nil, sSecurity);
   end
   else
-    AddObjectsGroup(G, TFBRoleRoot, TFireBirdRole, sRoles);
     //AddObjectsGroup(FRoleRoot, TRoleRoot, TFireBirdRole, sRoles);
+*)
 
   if ussSystemTable in UIShowSysObjects then
     AddObjectsGroup(FSystemCatalog, TFBSystemCatalog, nil, sSystemCatalog);

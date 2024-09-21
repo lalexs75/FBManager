@@ -1,14 +1,15 @@
 object fbSqlTextData: TfbSqlTextData
   OldCreateOrder = False
-  Height = 554
-  HorizontalOffset = 519
-  VerticalOffset = 345
-  Width = 871
+  Height = 693
+  HorizontalOffset = 685
+  VerticalOffset = 326
+  Width = 1089
+  PPI = 120
   object ssqlSelectFKList: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 40
-    Top = 16
+    Left = 50
+    Top = 20
     StrData = (
       ''
       '73656c656374'
@@ -52,8 +53,8 @@ object fbSqlTextData: TfbSqlTextData
   object sSqlGrantForObj: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 40
-    Top = 88
+    Left = 50
+    Top = 110
     StrData = (
       ''
       '73656c656374'
@@ -70,8 +71,8 @@ object fbSqlTextData: TfbSqlTextData
   object sqlSPParams: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 123
-    Top = 16
+    Left = 154
+    Top = 20
     StrData = (
       ''
       '73656c656374'
@@ -87,8 +88,8 @@ object fbSqlTextData: TfbSqlTextData
   object sqlRefreshDomain: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 123
-    Top = 144
+    Left = 154
+    Top = 180
     StrData = (
       ''
       '73656c656374'
@@ -104,8 +105,8 @@ object fbSqlTextData: TfbSqlTextData
   object sqlSelectAllFields: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 40
-    Top = 256
+    Left = 50
+    Top = 320
     StrData = (
       ''
       '73656c656374'
@@ -132,8 +133,8 @@ object fbSqlTextData: TfbSqlTextData
   object sqlSelectIndexFields: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 40
-    Top = 328
+    Left = 50
+    Top = 410
     StrData = (
       ''
       '73656c656374'
@@ -152,8 +153,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlSelectTables: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 200
-    Top = 88
+    Left = 250
+    Top = 110
     StrData = (
       ''
       '73656c656374'
@@ -171,8 +172,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlCharSetList: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 123
-    Top = 256
+    Left = 154
+    Top = 320
     StrData = (
       ''
       '73656c656374'
@@ -186,8 +187,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlCollationsList: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 200
-    Top = 256
+    Left = 250
+    Top = 320
     StrData = (
       ''
       '73656c656374'
@@ -202,8 +203,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlStoredProcParams: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 123
-    Top = 328
+    Left = 154
+    Top = 410
     StrData = (
       ''
       '73656c656374'
@@ -220,8 +221,8 @@ object fbSqlTextData: TfbSqlTextData
   object ttt: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 328
-    Top = 368
+    Left = 410
+    Top = 460
     StrData = (
       ''
       '73656c656374'
@@ -239,8 +240,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlSelectViews: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 280
-    Top = 112
+    Left = 350
+    Top = 140
     StrData = (
       ''
       '73656c656374'
@@ -259,8 +260,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFbTriggers: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 360
-    Top = 72
+    Left = 450
+    Top = 90
     StrData = (
       ''
       '73656c656374'
@@ -284,8 +285,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBGenerators: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 424
-    Top = 112
+    Left = 530
+    Top = 140
     StrData = (
       ''
       '73656c656374'
@@ -302,8 +303,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBStoredProc: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 496
-    Top = 72
+    Left = 620
+    Top = 90
     StrData = (
       ''
       '73656c656374'
@@ -318,8 +319,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBExceptions: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 568
-    Top = 112
+    Left = 710
+    Top = 140
     StrData = (
       ''
       '73656c656374'
@@ -335,8 +336,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBUDF: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 632
-    Top = 72
+    Left = 790
+    Top = 90
     StrData = (
       ''
       '73656c656374'
@@ -351,8 +352,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBIndexs: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 768
-    Top = 72
+    Left = 960
+    Top = 90
     StrData = (
       ''
       '73656c656374'
@@ -370,8 +371,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBIndex: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 768
-    Top = 168
+    Left = 960
+    Top = 210
     StrData = (
       ''
       '73656c65637420'
@@ -385,8 +386,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFBIndexSegs: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 768
-    Top = 232
+    Left = 960
+    Top = 290
     StrData = (
       ''
       '73656c656374'
@@ -402,8 +403,8 @@ object fbSqlTextData: TfbSqlTextData
   object sPackages: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 320
-    Top = 256
+    Left = 400
+    Top = 320
     StrData = (
       ''
       '73656c656374'
@@ -419,8 +420,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFunctions: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 408
-    Top = 256
+    Left = 510
+    Top = 320
     StrData = (
       ''
       '73656c656374'
@@ -444,8 +445,8 @@ object fbSqlTextData: TfbSqlTextData
   object sPackage: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 320
-    Top = 320
+    Left = 400
+    Top = 400
     StrData = (
       ''
       '73656c656374'
@@ -459,8 +460,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFunction: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 408
-    Top = 320
+    Left = 510
+    Top = 400
     StrData = (
       ''
       '73656c656374'
@@ -476,8 +477,8 @@ object fbSqlTextData: TfbSqlTextData
   object sFunctionArgs: TStrHolder
     Capacity = 64
     Macros = <>
-    Left = 408
-    Top = 384
+    Left = 510
+    Top = 480
     StrData = (
       ''
       '73656c656374'
@@ -508,8 +509,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtFunction: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 672
-    Top = 320
+    Left = 840
+    Top = 400
     StrData = (
       ''
       '637265617465206f7220616c7465722066756e6374696f6e204e45575f46554e4354494f4e'
@@ -524,8 +525,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtFunctionLazy: TStrHolder
     Capacity = 4
     Macros = <>
-    Left = 672
-    Top = 384
+    Left = 840
+    Top = 480
     StrData = (
       ''
       '626567696e'
@@ -537,8 +538,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtPackage: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 744
-    Top = 320
+    Left = 930
+    Top = 400
     StrData = (
       ''
       '637265617465207061636b616765206e65775f7061636b616765'
@@ -551,8 +552,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtPackageLazy: TStrHolder
     Capacity = 4
     Macros = <>
-    Left = 744
-    Top = 384
+    Left = 930
+    Top = 480
     StrData = (
       ''
       '626567696e'
@@ -563,8 +564,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtPackageBody: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 800
-    Top = 320
+    Left = 1000
+    Top = 400
     StrData = (
       ''
       '637265617465207061636b61676520626f6479206e65775f7061636b616765'
@@ -577,8 +578,8 @@ object fbSqlTextData: TfbSqlTextData
   object fbtPackageBodyLazy: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 800
-    Top = 384
+    Left = 1000
+    Top = 480
     StrData = (
       ''
       '637265617465207061636b61676520626f6479206e65775f7061636b616765'
@@ -591,8 +592,8 @@ object fbSqlTextData: TfbSqlTextData
   object ssqlDependOnField: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 200
-    Top = 160
+    Left = 250
+    Top = 200
     StrData = (
       ''
       '73656c656374'
@@ -615,8 +616,8 @@ object fbSqlTextData: TfbSqlTextData
   object sTabcleCheck: TStrHolder
     Capacity = 16
     Macros = <>
-    Left = 40
-    Top = 432
+    Left = 50
+    Top = 540
     StrData = (
       ''
       '73656c656374'
@@ -650,8 +651,8 @@ object fbSqlTextData: TfbSqlTextData
           ''
         )
       end>
-    Left = 768
-    Top = 8
+    Left = 960
+    Top = 10
   end
   object sGenerators: TRxTextHolder
     Highlighter = rxSynSQL
@@ -688,8 +689,8 @@ object fbSqlTextData: TfbSqlTextData
           ''
         )
       end>
-    Left = 40
-    Top = 144
+    Left = 50
+    Top = 180
   end
   object sDomainsSQL: TRxTextHolder
     Highlighter = rxSynSQL
@@ -727,8 +728,8 @@ object fbSqlTextData: TfbSqlTextData
           ''
         )
       end>
-    Left = 120
-    Top = 88
+    Left = 150
+    Top = 110
   end
   object sUsers: TRxTextHolder
     Highlighter = rxSynSQL
@@ -799,7 +800,24 @@ object fbSqlTextData: TfbSqlTextData
           ''
         )
       end>
-    Left = 40
-    Top = 205
+    Left = 50
+    Top = 256
+  end
+  object sServerInfo: TRxTextHolder
+    Highlighter = rxSynSQL
+    Items = <    
+      item
+        Caption = 'sServerVersion'
+        Lines.Strings = (
+          'SELECT'
+          '  rdb$get_context(''SYSTEM'', ''ENGINE_VERSION'') as version'
+          'from'
+          '  rdb$database;'
+          ''
+          ''
+        )
+      end>
+    Left = 248
+    Top = 20
   end
 end

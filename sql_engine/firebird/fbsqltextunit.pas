@@ -37,6 +37,7 @@ type
     fbtPackageBody: TStrHolder;
     fbtPackageLazy: TStrHolder;
     fbtPackageBodyLazy: TStrHolder;
+    sServerInfo: TRxTextHolder;
     sUsers: TRxTextHolder;
     sDomainsSQL: TRxTextHolder;
     sGenerators: TRxTextHolder;
