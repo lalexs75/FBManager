@@ -4890,7 +4890,10 @@ begin
       S:=S + ' TABLE'
     else
     if ObjectKind=okStoredProc then
-      S:=S + ' PROCEDURE';
+      S:=S + ' PROCEDURE'
+    else
+    if ObjectKind = okSequence then
+      S:=S + ' SEQUENCE';
   end;
 
   S:=S + ' ' +DoFormatName2(FCurTable.Name) + ' TO '+SG;

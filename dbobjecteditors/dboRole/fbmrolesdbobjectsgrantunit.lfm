@@ -3,15 +3,15 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
   Width = 913
   ClientHeight = 598
   ClientWidth = 913
-  DesignLeft = 429
-  DesignTop = 108
+  DesignLeft = 829
+  DesignTop = 215
   object Label2: TLabel[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
+    Height = 23
     Top = 44
-    Width = 45
+    Width = 64
     BorderSpacing.Around = 6
     Caption = 'Objects'
     FocusControl = ComboBox1
@@ -24,8 +24,8 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 496
-    Top = 102
+    Height = 484
+    Top = 114
     Width = 913
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -230,9 +230,7 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsGrantsTable
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
     PopupMenu = PopupMenu1
@@ -246,8 +244,8 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 29
-    Top = 67
+    Height = 35
+    Top = 73
     Width = 895
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -259,14 +257,14 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
       'Views'
       'Stored procedure'
     )
-    OnChange = ComboBox1Change
     Style = csDropDownList
     TabOrder = 1
     Text = 'All objects'
+    OnChange = ComboBox1Change
   end
   object ToolPanel1: TToolPanel[3]
     Left = 0
-    Height = 25
+    Height = 29
     Top = 0
     Width = 913
     Items = <    
@@ -331,7 +329,7 @@ inherited fbmRolesDBObjectsGrantForm: TfbmRolesDBObjectsGrantForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 25
+    ClientHeight = 29
     ClientWidth = 913
     TabOrder = 2
   end

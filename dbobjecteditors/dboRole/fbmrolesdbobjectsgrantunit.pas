@@ -113,6 +113,8 @@ uses fbmStrConstUnit, ibmsqltextsunit, fbmToolsUnit, sqlObjects;
 
 {$R *.lfm}
 
+//const
+
 { TfbmRolesDBObjectsGrantForm }
 
 procedure TfbmRolesDBObjectsGrantForm.rxGrantsTableAfterInsert(DataSet: TDataSet
@@ -219,7 +221,7 @@ begin
   //SQLEngine.FillListForNames();
   for P in SQLEngine.Groups do
     DoFill(P as TDBRootObject);
-
+{
   for i:=0 to SQLEngine.TablesRoot.CountObject-1 do
   begin
     rxGrantsTable.Append;
@@ -245,6 +247,7 @@ begin
     rxGrantsTableDescription.AsString:=SQLEngine.StoredProcRoot.Items[i].Description;
     rxGrantsTable.Post;
   end;
+}
 //  RxDBGrid1.OptimizeColumnsWidth('Object');
 
   Qu:=SQLEngine.GetUIBQuery(ssqlRoleGrantDBObjects);
