@@ -269,8 +269,8 @@ begin
   //Exceptions
   RegisterObjEditor(TFireBirdException,
     [TfbmExceptionMainEditorFrame, TfbmObjectEditorDescriptionFrame],
-    [TfbmExceptionMainEditorFrame, TDependenciesFrame, TfbmObjectEditorDescriptionFrame,
-     TfbmDDLPage]);
+    [TfbmExceptionMainEditorFrame, TDependenciesFrame, TfbmpgACLEditEditor,
+    TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   //Index
   RegisterObjEditor(TFireBirdIndex,
@@ -299,13 +299,14 @@ begin
   RegisterObjEditor(TFireBirdPackage,
     [TfbmFirebirdPackageEditor, TfbmObjectEditorDescriptionFrame],
     [TfbmFirebirdPackageEditor, TDependenciesFrame,
-    TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+     TfbmpgACLEditEditor,
+     TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
   //Functions
   RegisterObjEditor(TFireBirdFunction,
     [TfbmFBFunctionEditor, TfbmObjectEditorDescriptionFrame],
     [TfbmFBFunctionEditor, TDependenciesFrame, TfbmpgACLEditEditor,
-      TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
+     TfbmObjectEditorDescriptionFrame, TfbmDDLPage]);
 
 end;
 

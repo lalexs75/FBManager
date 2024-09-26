@@ -20,10 +20,16 @@ type
     function GetNextSQLCmd(ASql: string): TSQLCommandAbstract;
     procedure DoTestSQL(ASql: string);
   published
-    procedure Revoke;
+    procedure Revoke1;
+    procedure Revoke2;
+    procedure Revoke3;
+    procedure Revoke4;
     procedure Grant1;
     procedure Grant2;
     procedure Grant3;
+    procedure Grant4;
+    procedure Grant5;
+    procedure Grant6;
 
     procedure SequenceAlter;
     procedure SequenceDrop1;
@@ -355,9 +361,24 @@ uses fb_SqlParserUnit, fb_utils;
 
 {$R *.lfm}
 
-procedure TFBSQLParserTest.Revoke;
+procedure TFBSQLParserTest.Revoke1;
 begin
   DoTestSQL(FBTestSQLData.sUsers['Revoke1']);
+end;
+
+procedure TFBSQLParserTest.Revoke2;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Revoke2']);
+end;
+
+procedure TFBSQLParserTest.Revoke3;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Revoke3']);
+end;
+
+procedure TFBSQLParserTest.Revoke4;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Revoke4']);
 end;
 
 procedure TFBSQLParserTest.Grant1;
@@ -373,6 +394,21 @@ end;
 procedure TFBSQLParserTest.Grant3;
 begin
   DoTestSQL(FBTestSQLData.sUsers['Graint3']);
+end;
+
+procedure TFBSQLParserTest.Grant4;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Graint4']);
+end;
+
+procedure TFBSQLParserTest.Grant5;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Graint5']);
+end;
+
+procedure TFBSQLParserTest.Grant6;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['Graint6']);
 end;
 
 procedure TFBSQLParserTest.SequenceAlter;

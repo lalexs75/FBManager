@@ -1294,6 +1294,47 @@ object FBTestSQLData: TFBTestSQLData
         Lines.Strings = (
           'CREATE USER superuser PASSWORD ''kMn8Kjh'' GRANT ADMIN ROLE;'
         )
+      end    
+      item
+        Caption = 'Graint4'
+        Lines.Strings = (
+          'GRANT EXECUTE ON PACKAGE pkg_test1 TO alexs;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Graint5'
+        Lines.Strings = (
+          'GRANT EXECUTE ON PACKAGE pkg_test1 TO tux, zak, boss;'
+          ''
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke2'
+        Lines.Strings = (
+          'REVOKE EXECUTE ON PACKAGE pkg_test1 FROM alexs;'
+        )
+      end    
+      item
+        Caption = 'Revoke3'
+        Lines.Strings = (
+          'REVOKE EXECUTE ON PACKAGE pkg_test1 FROM alexs, bob;'
+        )
+      end    
+      item
+        Caption = 'Graint6'
+        Lines.Strings = (
+          'GRANT USAGE ON EXCEPTION EX_TEST1 TO alexs;'
+          ''
+        )
+      end    
+      item
+        Caption = 'Revoke4'
+        Lines.Strings = (
+          'REVOKE USAGE ON EXCEPTION EX_TEST1 FROM alexs, boss;'
+          ''
+        )
       end>
     Left = 32
     Top = 319

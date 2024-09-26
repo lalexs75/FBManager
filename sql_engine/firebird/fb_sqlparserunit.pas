@@ -4423,7 +4423,8 @@ end;
 procedure TFBSQLRevoke.InitParserTree;
 var
   FSQLTokens, T, TWGO, TPriv1, TPriv2, TPriv3, TPriv4, TPriv5,
-    TSymb, TSymb1, TOn, TName, TFrom: TSQLTokenRecord;
+    TSymb, TSymb1, TOn, TName, TFrom, TExec, TExecOn, TProc,
+    TFucn, TPkg, TUsage, TUsageOn, TExcept: TSQLTokenRecord;
 begin
   (*
   REVOKE [GRANT OPTION FOR] {
@@ -4485,9 +4486,22 @@ begin
   T:=AddSQLTokens(stSymbol, [TPriv1, TPriv2, TPriv3, TPriv4, TPriv5, TSymb1, TSymb], ',', []);
     T.AddChildToken([TPriv1, TPriv2, TPriv3, TPriv4, TPriv5]);
 
+
   TOn:=AddSQLTokens(stKeyword, [TPriv1, TPriv2, TPriv3, TPriv4, TPriv5, TSymb, TSymb1], 'ON', []);
     T:=AddSQLTokens(stKeyword, TOn, 'TABLE', [], 11);
-  TName:=AddSQLTokens(stIdentificator, [TOn, T], '', [], 12);
+
+  TExec:=AddSQLTokens(stKeyword, [FSQLTokens, TWGO], 'EXECUTE', []);
+    TExecOn:=AddSQLTokens(stKeyword, TExec, 'ON', []);
+    TProc:=AddSQLTokens(stKeyword, TExecOn, 'PROCEDURE', [], 14);
+    TFucn:=AddSQLTokens(stKeyword, TExecOn, 'FUNCTION', [], 15);
+    TPkg:=AddSQLTokens(stKeyword, TExecOn, 'PACKAGE', [], 16);
+
+  TUsage:=AddSQLTokens(stKeyword, FSQLTokens, 'USAGE', []);
+    TUsageOn:=AddSQLTokens(stKeyword, TUsage, 'ON', []);
+    TExcept:=AddSQLTokens(stKeyword, TUsageOn, 'EXCEPTION', [], 17);
+
+
+  TName:=AddSQLTokens(stIdentificator, [TOn, T, TProc, TFucn, TPkg, TExcept], '', [], 12);
   TFrom:=AddSQLTokens(stKeyword, TName, 'FROM', []);
   TFrom:=AddSQLTokens(stIdentificator, TFrom, '', [], 13);
     T:=AddSQLTokens(stIdentificator, TFrom, ',', [toOptional]);
@@ -4525,7 +4539,7 @@ begin
     11:begin
         if not Assigned(FCurTable) then
           FCurTable:=Tables.Add('');
-        FCurTable.ObjectKind:=okTable;
+        ObjectKind:=okTable;
        end;
     12:begin
         if not Assigned(FCurTable) then
@@ -4534,6 +4548,22 @@ begin
           FCurTable.Name:=AWord;
        end;
     13:Params.AddParam(AWord);
+    14:begin
+         GrantTypes:=[ogExecute];
+         ObjectKind:=okStoredProc;
+       end;
+    15:begin
+         GrantTypes:=[ogExecute];
+         ObjectKind:=okFunction;
+       end;
+    16:begin
+         GrantTypes:=[ogExecute];
+         ObjectKind:=okPackage;
+       end;
+    17:begin
+         GrantTypes:=[ogUsage];
+         ObjectKind:=okException;
+       end;
   end;
 end;
 
@@ -4566,13 +4596,10 @@ begin
       SR:=SR + DoFormatName(F.Caption);
     end
   end;
-{  if ((GrantTypes * [ogSelect, ogInsert, ogUpdate, ogDelete, ogReference]) = [ogSelect, ogInsert, ogUpdate, ogDelete, ogReference]) and (FCurTable.Fields.Count = 0) then
-    S:=S + 'ALL PRIVILEGES'
-  else
-  begin}
-    S1:='';
-    for G in GrantTypes do
-    begin
+
+  S1:='';
+  for G in GrantTypes do
+  begin
       if G <> ogWGO then
       begin
         if S1<>'' then S1:=S1 + ', ';
@@ -4581,20 +4608,19 @@ begin
         else
         if (G = ogReference) and (SR <> '') then S1:=S1+'('+SR + ')';
       end;
-    end;
-    S:=S + S1;
-//  end;
-
-  if not (FCurTable.ObjectKind in [okStoredProc, okFunction]) then
-  begin
-    S:=S + ' ON ';
-    if FCurTable.ObjectKind = okTable then
-      S:=S + 'TABLE ';
-    S:=S+ DoFormatName2(FCurTable.Name) + ' FROM ' + Params.AsString
-  end
-  else
-  begin
   end;
+  S:=S + S1;
+
+
+  S:=S + ' ON ';
+
+  if ObjectKind in [okTable, okException, okSequence, okStoredProc, okFunction, okPackage] then
+      S:=S + FBObjectNames[ObjectKind] + ' '
+  else
+  if ObjectKind <> okNone then
+    raise Exception.CreateFmt('Unknow grant object kind %d', [Ord(ObjectKind)]);
+
+  S:=S+ DoFormatName2(FCurTable.Name) + ' FROM ' + Params.AsString;
 
   AddSQLCommand(S);
 end;
@@ -4615,43 +4641,95 @@ var
   FSQLTokens, TA, TS, TD, TI, TU, TR, T, TAP, TON, TSymb, T1,
     TProc, TSymb1, TTO, TTU, TTR, TTG, TTG1, TTP, TTU1, TTP1,
     TTT, TTT1, TTV, TTV1, TTPUB, TSymb2, TWAO, GB, TRole,
-    TSymb3, TWAO1, TAS: TSQLTokenRecord;
+    TSymb3, TWAO1, TAS, TExec, TExecOn, TFucn, TPkg, TUsage,
+    TUsageOn, TExcept: TSQLTokenRecord;
 begin
-  (*
-  GRANT {
-    <privileges> ON [TABLE] {tablename | viewname}
-    | EXECUTE ON PROCEDURE procname
-        }
-  TO <grantee_list>
-    [WITH GRANT OPTION]} | [{GRANTED BY | AS} [USER] grantor];
+(*
+  GRANT <privileges>
+    TO <grantee_list>
+    [WITH GRANT OPTION]
+    [{GRANTED BY | AS} [USER] grantor]
 
-  GRANT <role_granted>
-  TO <role_grantee_list> [WITH ADMIN OPTION]
-  [{GRANTED BY | AS} [USER] grantor]
+  <privileges> ::=
+    <table_privileges> | <execute_privilege>
+    | <usage_privilege> | <ddl_privileges>
+    | <db_ddl_privilege>
 
-  <privileges> ::= ALL [PRIVILEGES] | <privilege_list>
+  <table_privileges> ::=
+    {ALL [PRIVILEGES] | <table_privilege_list> }
+    ON [TABLE] {table_name | view_name}
 
-  <privilege_list> ::= {<privilege> [, <privilege> [, … ] ] }
+  <table_privilege_list> ::=
+    <table_privilege> [, <tableprivilege> ...]
 
-  <privilege> ::=
-    SELECT |
-    DELETE |
-    INSERT |
-    UPDATE [(col [, col [, …] ] ) ] |
-    REFERENCES (col [, …])
+  <table_privilege> ::=
+    SELECT | DELETE | INSERT
+    | UPDATE [(col [, col ...])]
+    | REFERENCES [(col [, col ...)]
 
-  <grantee_list> ::= {<grantee> [, <grantee> [, …] ]}
+  <execute_privilege> ::= EXECUTE ON
+    { PROCEDURE proc_name | FUNCTION func_name
+    | PACKAGE package_name }
 
-  <grantee>  ::=
-    [USER] username | [ROLE] rolename |  GROUP Unix_group
-    | PROCEDURE procname | TRIGGER trigname | VIEW viewname | PUBLIC
+  <usage_privilege> ::= USAGE ON
+    { EXCEPTION exception_name
+    | {GENERATOR | SEQUENCE} sequence_name }
 
-  <role_granted> ::= rolename [, rolename …]
+  <ddl_privileges> ::=
+    {ALL [PRIVILEGES] | <ddl_privilege_list>} <object_type>
 
-  <role_grantee_list> ::= [USER] <role_grantee> [,[USER] <role_grantee> [, …]]
+  <ddl_privilege_list> ::=
+    <ddl_privilege> [, <ddl_privilege> ...]
 
-  <role_grantee> ::= {username | PUBLIC }
-  *)
+  <ddl_privilege> ::= CREATE | ALTER ANY | DROP ANY
+
+  <object_type> ::=
+    CHARACTER SET | COLLATION | DOMAIN | EXCEPTION
+    | FILTER | FUNCTION | GENERATOR | PACKAGE
+    | PROCEDURE | ROLE | SEQUENCE | TABLE | VIEW
+
+  <db_ddl_privileges> ::=
+    {ALL [PRIVILEGES] | <db_ddl_privilege_list>} {DATABASE | SCHEMA}
+
+  <db_ddl_privilege_list> ::=
+    <db_ddl_privilege> [, <db_ddl_privilege> ...]
+
+  <db_ddl_privilege> ::= CREATE | ALTER | DROP
+    <grantee_list> ::= <grantee> [, <grantee> ...]
+
+  <grantee> ::=
+    PROCEDURE proc_name | FUNCTION func_name
+    | PACKAGE package_name | TRIGGER trig_name
+    | VIEW view_name
+    | ROLE role_name
+    | [USER] username
+    | GROUP Unix_group
+    | SYSTEM PRIVILEGE <sys_privilege>
+
+  <sys_privilege> ::=
+    !! See CREATE ROLE !!
+
+
+  Syntax (granting roles)
+  GRANT <role_granted_list>
+    TO <role_grantee_list>
+    [WITH ADMIN OPTION]
+    [{GRANTED BY | AS} [USER] grantor]
+
+  <role_granted_list> ::=
+    <role_granted> [, <role_granted ...]
+
+  <role_granted> ::= [DEFAULT] role_name
+
+  <role_grantee_list> ::=
+    <role_grantee> [, <role_grantee> ...]
+
+  <role_grantee> ::=
+    user_or_role_name
+    | USER username
+    | ROLE role_name
+
+*)
 
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'GRANT', [toFirstToken, toFindWordLast]);
     TA:=AddSQLTokens(stKeyword, FSQLTokens, 'ALL', [], 1);
@@ -4679,13 +4757,22 @@ begin
       TSymb1.AddChildToken(T);
 
 
-  T:=AddSQLTokens(stKeyword, FSQLTokens, 'EXECUTE', [], 9);
-  T:=AddSQLTokens(stKeyword, T, 'ON', []);
-  TProc:=AddSQLTokens(stKeyword, T, 'PROCEDURE', []);
+  TExec:=AddSQLTokens(stKeyword, FSQLTokens, 'EXECUTE', []);
+  TExecOn:=AddSQLTokens(stKeyword, TExec, 'ON', []);
+  TProc:=AddSQLTokens(stKeyword, TExecOn, 'PROCEDURE', [], 9);
+  TFucn:=AddSQLTokens(stKeyword, TExecOn, 'FUNCTION', [], 12);
+  TPkg:=AddSQLTokens(stKeyword, TExecOn, 'PACKAGE', [], 13);
+
 
   TON:=AddSQLTokens(stKeyword, [TA, TAP, TS, TD, TI, TU, TR, TSymb, TSymb1] , 'ON', []);
     T:=AddSQLTokens(stKeyword, TON, 'TABLE', [], 10);
-  T:=AddSQLTokens(stIdentificator, [TON, T, TProc] , '', [], 11);
+
+  TUsage:=AddSQLTokens(stKeyword, FSQLTokens, 'USAGE', []);
+    TUsageOn:=AddSQLTokens(stKeyword, TUsage, 'ON', []);
+    TExcept:=AddSQLTokens(stKeyword, TUsageOn, 'EXCEPTION', [], 14);
+
+
+  T:=AddSQLTokens(stIdentificator, [TON, T, TProc, TFucn, TPkg, TExcept] , '', [], 11);
 
   TTO:=AddSQLTokens(stKeyword, T, 'TO', [], 19);
     TTU:=AddSQLTokens(stKeyword, TTO, 'USER', [], 21);
@@ -4761,6 +4848,18 @@ begin
          FCurTable.Name:=AWord
        else
          FCurTable:=Tables.Add(AWord);
+    12:begin
+        GrantTypes:=GrantTypes + [ogExecute];
+        ObjectKind:=okFunction;
+      end;
+    13:begin
+        GrantTypes:=GrantTypes + [ogExecute];
+        ObjectKind:=okPackage;
+      end;
+    14:begin
+        GrantTypes:=GrantTypes + [ogUsage];
+        ObjectKind:=okException;
+      end;
     19:begin
          //FCurParam:=nil;
          FCurGrantor:=nil;
@@ -4830,7 +4929,7 @@ var
   G: TObjectGrant;
   P, G1: TSQLParserField;
 begin
-  if Tables.Count < 0 then Exit;
+  if Tables.Count < 1 then Exit;
   FCurTable:=Tables[0];
   S:='GRANT ';
 
@@ -4886,14 +4985,11 @@ begin
       S:=S + S1;
     end;
     S:=S + ' ON';
-    if ObjectKind=okTable then
-      S:=S + ' TABLE'
+    if ObjectKind in [okTable, okStoredProc, okFunction, okPackage, okException, okSequence] then
+      S:=S + ' ' + FBObjectNames[ObjectKind]
     else
-    if ObjectKind=okStoredProc then
-      S:=S + ' PROCEDURE'
-    else
-    if ObjectKind = okSequence then
-      S:=S + ' SEQUENCE';
+    if ObjectKind <> okNone then
+      raise Exception.CreateFmt('Unknow grant object kind %d', [Ord(ObjectKind)])
   end;
 
   S:=S + ' ' +DoFormatName2(FCurTable.Name) + ' TO '+SG;

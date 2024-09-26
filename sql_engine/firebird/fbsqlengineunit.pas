@@ -934,6 +934,7 @@ end;
 function TFireBirdPackage.InternalGetDDLCreate: string;
 var
   FCmd, FCmd1: TFBSQLCreatePackage;
+  ACL: TStringList;
 begin
   FCmd:=TFBSQLCreatePackage.Create(nil);
   FCmd.Options:=FCmd.Options + [ooOrReplase];
@@ -948,6 +949,15 @@ begin
   FCmd1.PackageText:=PackageBody;
   Result:=FCmd.AsSQL;
   FCmd.Free;
+
+  ACL:=TStringList.Create;
+  try
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, ACL, true);
+    Result:=Result + LineEnding + LineEnding + ACL.Text;
+  finally
+    ACL.Free;
+  end;
 end;
 
 constructor TFireBirdPackage.Create(const ADBItem: TDBItem;
@@ -4134,6 +4144,7 @@ end;
 function TFireBirdException.InternalGetDDLCreate: string;
 var
   R: TFBSQLCreateException;
+  ACL: TStringList;
 begin
   R:=TFBSQLCreateException.Create(nil);
   R.Name:=Caption;
@@ -4141,6 +4152,15 @@ begin
   R.Description:=Description;
   Result:=R.AsSQL;
   R.Free;
+
+  ACL:=TStringList.Create;
+  try
+    FACLList.RefreshList;
+    FACLList.MakeACLListSQL(nil, ACL, true);
+    Result:=Result + LineEnding + LineEnding + ACL.Text;
+  finally
+    ACL.Free;
+  end;
 end;
 
 constructor TFireBirdException.Create(const ADBItem: TDBItem;
@@ -4151,6 +4171,9 @@ begin
   begin
     FExceptionMsg:=ADBItem.ObjData;
   end;
+
+  FACLList:=TFBACLList.Create(Self);
+  FACLList.ObjectGrants:=[ogUsage];
 end;
 
 procedure TFireBirdException.RefreshObject;
