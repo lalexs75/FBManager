@@ -6,10 +6,10 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
   Caption = 'Memo value'
   ClientHeight = 343
   ClientWidth = 529
+  Position = poScreenCenter
+  LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
   object PageControl1: TPageControl
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = DBNavigator1
@@ -18,23 +18,23 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 0
-    Height = 260
+    Height = 269
     Top = 25
     Width = 529
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = 'As text'
-      ClientHeight = 229
-      ClientWidth = 519
+      ClientHeight = 238
+      ClientWidth = 525
       object DBMemo1: TDBMemo
         Left = 0
-        Height = 229
+        Height = 238
         Top = 0
-        Width = 519
+        Width = 525
         Align = alClient
         DataSource = Datasource1
         TabOrder = 0
@@ -42,13 +42,13 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     end
     object TabSheet2: TTabSheet
       Caption = 'As image'
-      ClientHeight = 229
-      ClientWidth = 519
+      ClientHeight = 238
+      ClientWidth = 525
       object DBImage1: TDBImage
         Left = 0
-        Height = 229
+        Height = 238
         Top = 0
-        Width = 519
+        Width = 525
         Align = alClient
         AutoDisplay = False
         DataSource = Datasource1
@@ -56,13 +56,13 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     end
     object TabSheet3: TTabSheet
       Caption = 'As HTML'
-      ClientHeight = 229
-      ClientWidth = 519
+      ClientHeight = 238
+      ClientWidth = 525
       object IpHtmlPanel1: TIpHtmlPanel
         Left = 0
-        Height = 229
+        Height = 238
         Top = 0
-        Width = 519
+        Width = 525
         Align = alClient
         FixedTypeface = 'Courier New'
         DefaultTypeFace = 'default'
@@ -83,8 +83,8 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 291
+    Height = 37
+    Top = 300
     Width = 517
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -104,7 +104,7 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     Left = 0
     Height = 25
     Top = 0
-    Width = 471
+    Width = 491
     Anchors = [akTop, akLeft, akRight]
     BeforeAction = DBNavigator1BeforeAction
     BevelOuter = bvNone
@@ -115,7 +115,7 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 100
     ClientHeight = 25
-    ClientWidth = 471
+    ClientWidth = 491
     DataSource = Datasource1
     Options = []
     TabOrder = 2
@@ -125,10 +125,10 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     AnchorSideRight.Control = SpeedButton2
     AnchorSideBottom.Control = DBNavigator1
     AnchorSideBottom.Side = asrBottom
-    Left = 477
+    Left = 497
     Height = 25
     Top = 0
-    Width = 20
+    Width = 10
     Action = actOpen
     Anchors = [akTop, akRight, akBottom]
     AutoSize = True
@@ -143,10 +143,10 @@ object fbmSQLEditor_ShowMemoForm: TfbmSQLEditor_ShowMemoForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = DBNavigator1
     AnchorSideBottom.Side = asrBottom
-    Left = 503
+    Left = 513
     Height = 25
     Top = 0
-    Width = 20
+    Width = 10
     Action = actSave
     Anchors = [akTop, akRight, akBottom]
     AutoSize = True

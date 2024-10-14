@@ -6,8 +6,8 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
   DesignLeft = 470
   object RxDBGrid1: TRxDBGrid[0]
     Left = 0
-    Height = 444
-    Top = 73
+    Height = 449
+    Top = 68
     Width = 966
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -676,9 +676,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsUGList
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook, dgDisableDelete, dgDisableInsert]
     PopupMenu = PopupMenu1
@@ -740,26 +738,26 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
   end
   object Panel1: TPanel[2]
     Left = 0
-    Height = 48
+    Height = 43
     Top = 25
     Width = 966
     Align = alTop
     AutoSize = True
-    ClientHeight = 48
+    ClientHeight = 43
     ClientWidth = 966
     TabOrder = 2
     object ComboBox1: TComboBox
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
       Left = 7
-      Height = 33
+      Height = 27
       Top = 7
       Width = 229
       BorderSpacing.Around = 6
       ItemHeight = 0
-      OnChange = Edit1Change
       Style = csDropDownList
       TabOrder = 0
+      OnChange = Edit1Change
     end
     object Label2: TLabel
       AnchorSideLeft.Control = ComboBox2
@@ -768,7 +766,7 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       AnchorSideBottom.Side = asrBottom
       Left = 438
       Height = 17
-      Top = 24
+      Top = 19
       Width = 32
       Anchors = [akLeft, akBottom]
       Caption = 'Filter'
@@ -782,27 +780,27 @@ inherited fbmUserObjectsGrantFrame: TfbmUserObjectsGrantFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 476
-      Height = 34
+      Height = 29
       Top = 7
       Width = 483
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 6
-      OnChange = Edit1Change
       TabOrder = 1
+      OnChange = Edit1Change
     end
     object ComboBox2: TComboBox
       AnchorSideLeft.Control = ComboBox1
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel1
       Left = 242
-      Height = 33
+      Height = 27
       Top = 7
       Width = 190
       BorderSpacing.Around = 6
       ItemHeight = 0
-      OnChange = Edit1Change
       Style = csDropDownList
       TabOrder = 2
+      OnChange = Edit1Change
     end
   end
   object dsUGList: TDataSource[3]
