@@ -44,7 +44,11 @@ type
                       pgVersion10_0,
                       pgVersion11_0,
                       pgVersion12_0,
-                      pgVersion13_0
+                      pgVersion13_0,
+                      pgVersion14_0,
+                      pgVersion15_0,
+                      pgVersion16_0,
+                      pgVersion17_0
                       );
 
 
@@ -177,7 +181,11 @@ const
      'Postgre SQL version 10.0',
      'Postgre SQL version 11.0',
      'Postgre SQL version 12.0',
-     'Postgre SQL version 13.0'
+     'Postgre SQL version 13.0',
+     'Postgre SQL version 14.0',
+     'Postgre SQL version 15.0',
+     'Postgre SQL version 16.0',
+     'Postgre SQL version 17.0'
      );
 (*
   pgZeosServerVersionProtoStr :array [TPGServerVersion] of string =
