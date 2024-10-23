@@ -12902,7 +12902,7 @@ var
     TSymb2, TTblCol, TTblAll1, TOp10, TSeqSchema, TSeqName,
     TSeqAll, TObjSchema, TOp11, TFuncName, TOpExec, TOnF,
     TFuncSchema, TSymb1, TOpt1, TRole, TTableSpace,
-    TForeignServer, TForeignServer1, TForeignDW: TSQLTokenRecord;
+    TForeignServer, TForeignServer1, TForeignDW, TOp25: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для REVOKE }
   (*
@@ -12997,8 +12997,9 @@ begin
   TOp8:=AddSQLTokens(stKeyword, [FSQLTokens, TOpt], 'TRIGGER', [], 8);
   TOp10:=AddSQLTokens(stKeyword, [FSQLTokens, TOpt], 'USAGE', [], 19);
   TOp11:=AddSQLTokens(stKeyword, [FSQLTokens, TOpt], 'CREATE', [], 23);
+  TOp25:=AddSQLTokens(stKeyword, [FSQLTokens, TOpt], 'MAINTAIN', [], 25);
 
-    TSymb:=AddSQLTokens(stSymbol, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp10, TOp11], ',', []);
+    TSymb:=AddSQLTokens(stSymbol, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp10, TOp11, TOp25], ',', []);
     TSymb.AddChildToken([TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp10, TOp11]);
 
   TOp9:=AddSQLTokens(stKeyword, [FSQLTokens, TOpt], 'ALL', [], 9);
@@ -13011,7 +13012,7 @@ begin
   TSymb2:=AddSQLTokens(stSymbol, TTblCol, ')', []);
     TSymb2.AddChildToken(TSymb);
 
-  TOn:=AddSQLTokens(stKeyword, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp9, TOp91, TSymb2, TOp11], 'ON', []);
+  TOn:=AddSQLTokens(stKeyword, [TOp2, TOp3, TOp4, TOp5, TOp6, TOp7, TOp8, TOp9, TOp91, TSymb2, TOp11, TOp25], 'ON', []);
     TObjKind:=AddSQLTokens(stKeyword, TOn, 'TABLE', [], 10);
       TTblSchema:=AddSQLTokens(stIdentificator, [TOn, TObjKind, TOpt], '', [], 11);
       TSymb:=AddSQLTokens(stSymbol, TTblSchema, '.', []);
@@ -13177,6 +13178,10 @@ begin
     23:begin
         GrantTypes:=GrantTypes + [ogCreate];
         FCurOpt:=ogCreate;
+      end;
+    25:begin
+        GrantTypes:=GrantTypes + [ogMaintain];
+        FCurOpt:=ogMaintain;
       end;
     30:begin
         GrantTypes:=GrantTypes + [ogExecute];
@@ -13499,7 +13504,7 @@ var
   FSQLTokens, T1, T, T2, T3, T4, T5, T6, T7, T9, T10, T11,
     T13, T12, T14, TTo, TToInd, TToGrp, T20, T21, TSymb, TAll,
     TAllPriv, T9_1, TS1, TSeq, T40, T40_On, T41, T42, T43,
-    TSymb2: TSQLTokenRecord;
+    TSymb2, T22: TSQLTokenRecord;
 begin
   { TODO : Необходимо реализовать дерево парсера для GRANT }
   (*
@@ -13547,9 +13552,10 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
     T6:=AddSQLTokens(stKeyword, FSQLTokens, 'REFERENCES', [], 6);
     T7:=AddSQLTokens(stKeyword, FSQLTokens, 'TRIGGER', [], 7);
     T21:=AddSQLTokens(stKeyword, FSQLTokens, 'USAGE', [], 21);
+    T22:=AddSQLTokens(stKeyword, FSQLTokens, 'MAINTAIN', [], 22);
 
     T:=AddSQLTokens(stSymbol, T1, ',', []);
-      T.AddChildToken([T1, T2, T3, T4, T5, T6, T7, T21]);
+      T.AddChildToken([T1, T2, T3, T4, T5, T6, T7, T21, T22]);
     T2.AddChildToken(T);
     T3.AddChildToken(T);
     T4.AddChildToken(T);
@@ -13557,10 +13563,11 @@ GRANT { CREATE | ALL [ PRIVILEGES ] }
     T6.AddChildToken(T);
     T7.AddChildToken(T);
     T21.AddChildToken(T);
+    T22.AddChildToken(T);
 
     TAll:=AddSQLTokens(stKeyword, FSQLTokens, 'ALL', [], 8);
     TAllPriv:=AddSQLTokens(stKeyword, TAll, 'PRIVILEGES', [], 18);
-    T9:=AddSQLTokens(stKeyword, [T1, T2, T3, T4, T5, T6, T7, TAll, TAllPriv], 'ON', []);
+    T9:=AddSQLTokens(stKeyword, [T1, T2, T3, T4, T5, T6, T7, TAll, TAllPriv, T22], 'ON', []);
 
     T10:=AddSQLTokens(stKeyword, T9, 'TABLE', [], 10);
     TSeq:=AddSQLTokens(stKeyword, T9, 'SEQUENCE', [], 30);
@@ -13685,6 +13692,7 @@ begin
     18:AllPrivilegesShortForm:=false;
     20:GrantTypes:=GrantTypes + [ogCreate];
     21:GrantTypes:=GrantTypes + [ogUsage];
+    22:GrantTypes:=GrantTypes + [ogMaintain];
     40:GrantTypes:=GrantTypes + [ogExecute];
     10:begin
          ObjectKind:=okTable;
