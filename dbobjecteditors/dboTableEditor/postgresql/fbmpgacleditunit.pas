@@ -76,6 +76,7 @@ type
     rxUGListogIndex: TBooleanField;
     rxUGListogInsert: TBooleanField;
     rxUGListogLockTables: TBooleanField;
+    rxUGListogMaintain: TBooleanField;
     rxUGListogMembership: TBooleanField;
     rxUGListogProcess: TBooleanField;
     rxUGListogProxy: TBooleanField;
@@ -487,6 +488,7 @@ begin
   RxDBGrid1.ColumnByFieldName('ogShutdown').Title.Caption:=sShutdown;
   RxDBGrid1.ColumnByFieldName('ogSuper').Title.Caption:=sSuper;
   RxDBGrid1.ColumnByFieldName('ogMembership').Title.Caption:=sMembership;
+  RxDBGrid1.ColumnByFieldName('ogMaintain').Title.Caption:=sMaintain;
 end;
 
 end.

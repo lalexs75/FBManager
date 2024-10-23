@@ -3050,6 +3050,10 @@ msgstr ""
 msgid "Easy and free control you database"
 msgstr ""
 
+#: fbmstrconstunit.smaintain
+msgid "Maintain"
+msgstr ""
+
 #: fbmstrconstunit.smakedefsqltext
 msgid "Make SQL text"
 msgstr ""

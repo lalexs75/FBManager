@@ -521,6 +521,7 @@ resourcestring
   sShowDB                           = 'Show databses';
   sSuper                            = 'Super';
   sMembership                       = 'Membership';
+  sMaintain                         = 'Maintain';
   sCreateTmpTable                   = 'Create temp. tables';
   sLockTables                       = 'Lock tables';
   sExecute                          = 'Execute';

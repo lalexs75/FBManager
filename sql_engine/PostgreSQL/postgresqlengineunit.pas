@@ -3303,6 +3303,7 @@ begin
         'c':P.Grants:=P.Grants + [ogConnect];     //c -- CONNECT
         'T':P.Grants:=P.Grants + [ogTemporary];   //T -- TEMPORARY
         '*':P.Grants:=P.Grants + [ogWGO];         //* -- право передачи заданного права
+        'm':P.Grants:=P.Grants + [ogMaintain];
       else
         raise Exception.Create('PG:uknow grant type: "' + GR[j] + '"');
       end;
@@ -6004,7 +6005,7 @@ constructor TPGTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FACLList:=TPGACLList.Create(Self);
-  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogMaintain, ogWGO];
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;

@@ -58,8 +58,8 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
   end
   object RxDBGrid1: TRxDBGrid[1]
     Left = 0
-    Height = 519
-    Top = 91
+    Height = 525
+    Top = 85
     Width = 1261
     ColumnDefValues.BlobText = '(данные)'
     TitleButtons = True
@@ -633,7 +633,23 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'ogCreateTablespace'
+        Width = 90
         FieldName = 'ogCreateTablespace'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ogMaintain'
+        Width = 90
+        FieldName = 'ogMaintain'
         EditButtons = <>
         Filter.DropDownRows = 0
         Filter.EmptyValue = '(Пусто)'
@@ -727,9 +743,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsUGList
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook]
     PopupMenu = PopupMenu1
@@ -738,12 +752,12 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
   end
   object Panel1: TPanel[2]
     Left = 0
-    Height = 66
+    Height = 60
     Top = 25
     Width = 1261
     Align = alTop
     AutoSize = True
-    ClientHeight = 66
+    ClientHeight = 60
     ClientWidth = 1261
     TabOrder = 2
     object Label1: TLabel
@@ -764,7 +778,7 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 29
+      Height = 23
       Top = 30
       Width = 1241
       Anchors = [akTop, akLeft, akRight]
@@ -776,10 +790,10 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
         'Only users'
         'Only groups'
       )
-      OnChange = ComboBox1Change
       Style = csDropDownList
       TabOrder = 0
       Text = 'Users and Groups'
+      OnChange = ComboBox1Change
     end
   end
   object ActionList1: TActionList[3]
@@ -992,6 +1006,10 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       end    
       item
         Name = 'ogCreateTablespace'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'ogMaintain'
         DataType = ftBoolean
       end>
     AfterPost = rxUGListAfterPost
@@ -1374,6 +1392,16 @@ inherited fbmpgACLEditEditor: TfbmpgACLEditEditor
       FieldKind = fkData
       FieldName = 'ogWGO'
       Index = 37
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      DisplayValues = 'True;False'
+    end
+    object rxUGListogMaintain: TBooleanField
+      FieldKind = fkData
+      FieldName = 'ogMaintain'
+      Index = 38
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

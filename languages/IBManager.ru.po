@@ -3157,6 +3157,10 @@ msgctxt "fbmstrconstunit.smainslogan"
 msgid "Easy and free control you database"
 msgstr "Легко и просто управляйте своими БД"
 
+#: fbmstrconstunit.smaintain
+msgid "Maintain"
+msgstr ""
+
 #: fbmstrconstunit.smakedefsqltext
 msgid "Make SQL text"
 msgstr "Создать текст SQL"

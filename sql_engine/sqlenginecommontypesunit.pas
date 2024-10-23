@@ -83,7 +83,8 @@ type
                    ogShowView,
                    ogShutdown,
                    ogSuper,
-                   ogMembership
+                   ogMembership,
+                   ogMaintain
                    );
 
   TObjectGrants = set of TObjectGrant;
@@ -660,7 +661,8 @@ const
     '',                //ogShowView
     '',                //ogShutdown
     '',                //ogSuper
-    ''                 //ogMembership
+    '',                //ogMembership
+    'MAINTAIN'         //ogMaintain
     );
 
   ObjectGrantAll = [ogSelect, ogInsert, ogUpdate, ogDelete, ogReference];
@@ -701,7 +703,8 @@ const
     'ogShowView',
     'ogShutdown',
     'ogSuper',
-    'ogMembership'
+    'ogMembership',
+    'ogMaintain'
     );
 const
 

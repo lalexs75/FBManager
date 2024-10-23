@@ -701,7 +701,8 @@ const
     'SHOW VIEW',              //ogShowView           --Enable use of SHOW CREATE VIEW. Levels: Global, database, table.
     'SHUTDOWN',               //ogShutdown           --Enable use of mysqladmin shutdown. Level: Global.
     'SUPER',                  //ogSuper              --Enable use of other administrative operations such as CHANGE MASTER TO, KILL, PURGE BINARY LOGS, SET GLOBAL, and mysqladmin debug command. Level: Global.
-    ''                        //ogMembership
+    '',                       //ogMembership
+    ''                        //ogMaintain
     );
 
 type
