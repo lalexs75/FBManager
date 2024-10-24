@@ -2620,6 +2620,9 @@ constructor TPGMatView.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject
   );
 begin
   inherited Create(ADBItem, AOwnerRoot);
+  if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion17_0 then
+    FACLList.ObjectGrants:=FACLList.ObjectGrants + [ogMaintain];
+
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   FToastAutovacuumOptions:=TPGAutovacuumOptions.Create(false);
   UITableOptions:=[];
@@ -6005,7 +6008,11 @@ constructor TPGTable.Create(const ADBItem: TDBItem; AOwnerRoot: TDBRootObject);
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FACLList:=TPGACLList.Create(Self);
-  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogMaintain, ogWGO];
+  FACLList.ObjectGrants:=[ogSelect, ogInsert, ogUpdate, ogDelete, ogReference, ogTruncate, ogTrigger, ogWGO];
+
+  if TSQLEnginePostgre(OwnerDB).ServerVersion >= pgVersion17_0 then
+    FACLList.ObjectGrants:=FACLList.ObjectGrants + [ogMaintain];
+
   if Assigned(ADBItem) then
   begin
     FOID:=ADBItem.ObjId;
