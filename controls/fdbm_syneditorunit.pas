@@ -1712,7 +1712,7 @@ begin
   while (not P.Eof) do
   begin
     W:=P.GetNextWord;
-    if W <> ',' then
+    if (W <> ',') and ((FSQLEngine.MiscOptions.VarPrefix='') or (FSQLEngine.MiscOptions.VarPrefix <> W)) then
     begin
       if P.WordType(nil, W, nil) = stIdentificator then
         Result.Add(W)

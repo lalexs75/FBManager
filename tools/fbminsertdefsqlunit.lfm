@@ -10,15 +10,15 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
   ClientWidth = 652
   Position = poScreenCenter
   SessionProperties = 'Height;Left;Top;Width;GroupBox1.Height'
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '4.99.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 117
+    Height = 107
     Top = 0
     Width = 652
     Align = alTop
     AutoSize = True
-    ClientHeight = 117
+    ClientHeight = 107
     ClientWidth = 652
     TabOrder = 0
     object Label1: TLabel
@@ -27,7 +27,7 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideBottom.Side = asrBottom
       Left = 7
       Height = 17
-      Top = 24
+      Top = 19
       Width = 39
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
@@ -41,8 +41,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideTop.Side = asrBottom
       Left = 7
       Height = 17
-      Top = 47
-      Width = 64
+      Top = 42
+      Width = 63
       Caption = 'Statament'
       ParentColor = False
     end
@@ -53,8 +53,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideTop.Side = asrBottom
       Left = 261
       Height = 17
-      Top = 47
-      Width = 29
+      Top = 42
+      Width = 28
       BorderSpacing.Left = 12
       Caption = 'Alias'
       ParentColor = False
@@ -66,8 +66,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideTop.Side = asrBottom
       Left = 519
       Height = 17
-      Top = 47
-      Width = 58
+      Top = 42
+      Width = 57
       Caption = 'Var prefix'
       ParentColor = False
     end
@@ -78,7 +78,7 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 52
-      Height = 34
+      Height = 29
       Top = 7
       Width = 593
       Anchors = [akTop, akLeft, akRight]
@@ -95,8 +95,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideBottom.Control = Edit2
       AnchorSideBottom.Side = asrBottom
       Left = 13
-      Height = 29
-      Top = 70
+      Height = 23
+      Top = 65
       Width = 236
       BorderSpacing.Around = 6
       ItemHeight = 0
@@ -112,21 +112,21 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
         'Name + Type'
         'DDL'
       )
-      OnChange = ComboBox1Change
       Style = csDropDownList
       TabOrder = 1
+      OnChange = ComboBox1Change
     end
     object Edit2: TEdit
       AnchorSideLeft.Control = Label3
       AnchorSideTop.Control = Edit3
       AnchorSideRight.Control = Edit3
       Left = 261
-      Height = 34
-      Top = 70
+      Height = 29
+      Top = 65
       Width = 252
       Anchors = [akTop, akLeft, akRight]
-      OnChange = ComboBox1Change
       TabOrder = 2
+      OnChange = ComboBox1Change
     end
     object Edit3: TEdit
       AnchorSideLeft.Control = Label4
@@ -135,24 +135,24 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 519
-      Height = 34
-      Top = 70
+      Height = 29
+      Top = 65
       Width = 126
       Anchors = [akTop, akRight]
       BorderSpacing.Bottom = 6
       BorderSpacing.Around = 6
-      OnChange = ComboBox1Change
       TabOrder = 3
       Text = 'F_'
+      OnChange = ComboBox1Change
     end
   end
   object Panel2: TPanel
     Left = 0
-    Height = 417
-    Top = 117
+    Height = 436
+    Top = 107
     Width = 652
     Align = alClient
-    ClientHeight = 417
+    ClientHeight = 436
     ClientWidth = 652
     TabOrder = 1
     object GroupBox1: TGroupBox
@@ -162,25 +162,25 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
       Width = 650
       Align = alTop
       Caption = 'Fields/Parameters list'
-      ClientHeight = 149
-      ClientWidth = 648
+      ClientHeight = 148
+      ClientWidth = 646
       TabOrder = 0
       object CheckListBox1: TCheckListBox
         Left = 0
-        Height = 149
+        Height = 148
         Top = 0
-        Width = 648
+        Width = 646
         Align = alClient
         ItemHeight = 0
-        OnClickCheck = ComboBox1Change
-        OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
         TopIndex = -1
+        OnClickCheck = ComboBox1Change
+        OnMouseUp = CheckListBox1MouseUp
       end
     end
     inline SynEdit1: TSynEdit
       Left = 1
-      Height = 243
+      Height = 262
       Top = 173
       Width = 650
       Align = alClient
@@ -627,6 +627,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
         object TSynGutterMarks
           Width = 24
           MouseActions = <>
+          MaxExtraMarksColums = 0
+          Options = [sgmoDeDuplicateMarksOnOverflow]
         end
         object TSynGutterLineNumber
           Width = 21
@@ -715,8 +717,8 @@ object fbmInsertDefSqlForm: TfbmInsertDefSqlForm
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
-    Height = 46
-    Top = 540
+    Height = 37
+    Top = 549
     Width = 640
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True

@@ -576,6 +576,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       object TSynGutterMarks
         Width = 24
         MouseActions = <>
+        MaxExtraMarksColums = 0
+        Options = [sgmoDeDuplicateMarksOnOverflow]
       end
       object TSynGutterLineNumber
         Width = 15
@@ -979,8 +981,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Category = 'Edit'
       Caption = 'Redo'
       ImageIndex = 19
-      OnExecute = edtRedoExecute
       ShortCut = 24666
+      OnExecute = edtRedoExecute
     end
     object edtOpen: TAction
       Category = 'File'
@@ -998,22 +1000,22 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Category = 'Find'
       Caption = 'Find'
       ImageIndex = 22
-      OnExecute = edtFindExecute
       ShortCut = 16454
+      OnExecute = edtFindExecute
     end
     object edtFindNext: TAction
       Category = 'Find'
       Caption = 'Find next'
       ImageIndex = 23
-      OnExecute = edtFindNextExecute
       ShortCut = 114
+      OnExecute = edtFindNextExecute
     end
     object edtReplace: TAction
       Category = 'Find'
       Caption = 'Replace'
       ImageIndex = 47
-      OnExecute = edtReplaceExecute
       ShortCut = 16466
+      OnExecute = edtReplaceExecute
     end
     object ceCharUpperCase: TAction
       Category = 'Code exploer'
@@ -1051,8 +1053,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Category = 'Code exploer'
       Caption = 'Comment code'
       ImageIndex = 28
-      OnExecute = ceCommentCodeExecute
       ShortCut = 24662
+      OnExecute = ceCommentCodeExecute
     end
     object ceUncommentCode: TAction
       Category = 'Code exploer'
@@ -1064,29 +1066,29 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       Category = 'Edit'
       Caption = 'edtUndo'
       ImageIndex = 20
-      OnExecute = edtUndoExecute
       ShortCut = 16474
+      OnExecute = edtUndoExecute
     end
     object edtPaste: TAction
       Category = 'Edit'
       Caption = 'edtPaste'
       ImageIndex = 25
-      OnExecute = edtPasteExecute
       ShortCut = 16474
+      OnExecute = edtPasteExecute
     end
     object edtCut: TAction
       Category = 'Edit'
       Caption = 'edtCut'
       ImageIndex = 21
-      OnExecute = edtCutExecute
       ShortCut = 16472
+      OnExecute = edtCutExecute
     end
     object edtCopy: TAction
       Category = 'Edit'
       Caption = 'edtCopy'
       ImageIndex = 24
-      OnExecute = edtCopyExecute
       ShortCut = 16451
+      OnExecute = edtCopyExecute
     end
     object edtSelectAll: TAction
       Category = 'Edit'
@@ -1129,7 +1131,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
     OnPaintItem = SynCompletion1PaintItem
-    Position = 0
+    Position = -1
     LinesInWindow = 6
     OnSearchPosition = SynCompletion1SearchPosition
     OnKeyNextChar = SynCompletion1KeyNextChar
