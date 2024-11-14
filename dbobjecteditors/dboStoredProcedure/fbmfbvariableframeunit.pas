@@ -85,6 +85,7 @@ type
     FPrecCol:TRxColumn;
     FTypeOfCol:TRxColumn;
     FVarType: TSPVarType;
+    procedure DoUpdateVarTypeState;
     procedure Localize;
     procedure UpdateCtrlState;
   public
@@ -99,7 +100,7 @@ type
   end;
 
 implementation
-uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit, SQLEngineInternalToolsUnit, rxdbutils;
+uses rxAppUtils, fbmToolsUnit, fbmStrConstUnit, SQLEngineInternalToolsUnit, rxdbutils, LazUTF8;
 
 {$R *.lfm}
 type
@@ -222,23 +223,8 @@ begin
 end;
 
 procedure TfbmFBVariableFrame.rxLocalVarsAfterScroll(DataSet: TDataSet);
-var
-  P: TDBMSFieldTypeRecord;
 begin
-  P:=FDBObject.OwnerDB.TypeList.FindType(rxLocalVarsParType.AsString);
-
-  if Assigned(P) then
-  begin
-    FTypeOfCol.ReadOnly:=true;
-    FSizeCol.ReadOnly:=not P.VarLen;
-    FPrecCol.ReadOnly:=not P.VarDec;
-  end
-  else
-  begin
-    FSizeCol.ReadOnly:=true;
-    FPrecCol.ReadOnly:=true;
-    FTypeOfCol.ReadOnly:=not Assigned(TSQLEngineFireBird(FDBObject.OwnerDB).DomainsRoot.ObjByName(rxLocalVarsParType.AsString));
-  end;
+  DoUpdateVarTypeState;
   UpdateCtrlState;
 end;
 
@@ -251,15 +237,13 @@ begin
 end;
 
 procedure TfbmFBVariableFrame.rxLocalVarsParTypeChange(Sender: TField);
-var
-  P: TDBMSFieldTypeRecord;
 begin
-  P:=FDBObject.OwnerDB.TypeList.FindType(rxLocalVarsParType.AsString);
-  if Assigned(P) then
-  begin
-    FTypeOfCol.ReadOnly:=true;
-    rxLocalVarsParTypeOf.AsBoolean:=false;
-  end;
+  DoUpdateVarTypeState;
+
+  if FSizeCol.ReadOnly then
+    rxLocalVarsParSize.Clear;
+  if FPrecCol.ReadOnly then
+    rxLocalVarsParPrec.Clear;
 end;
 
 constructor TfbmFBVariableFrame.Create(TheOwner: TComponent;
@@ -304,6 +288,27 @@ begin
   RxDBGrid1.ColumnByFieldName('ParSubType').Title.Caption:=sSubType;
   RxDBGrid1.ColumnByFieldName('ParCodePage').Title.Caption:=sCodepage;
   RxDBGrid1.ColumnByFieldName('ParDesc').Title.Caption:=sDescription;
+end;
+
+procedure TfbmFBVariableFrame.DoUpdateVarTypeState;
+var
+  P: TDBMSFieldTypeRecord;
+begin
+  P:=FDBObject.OwnerDB.TypeList.FindType(rxLocalVarsParType.AsString);
+
+  if Assigned(P) then
+  begin
+    FTypeOfCol.ReadOnly:=true;
+    FSizeCol.ReadOnly:=not P.VarLen;
+    FPrecCol.ReadOnly:=not P.VarDec;
+  end
+  else
+  begin
+    FSizeCol.ReadOnly:=true;
+    FPrecCol.ReadOnly:=true;
+    FTypeOfCol.ReadOnly:=not Assigned(TSQLEngineFireBird(FDBObject.OwnerDB
+      ).DomainsRoot.ObjByName(rxLocalVarsParType.AsString));
+  end;
 end;
 
 procedure TfbmFBVariableFrame.UpdateCtrlState;
@@ -376,16 +381,21 @@ procedure TfbmFBVariableFrame.FillSynGetKeyWordList(const KeyStartWord: string;
   const Items: TSynCompletionObjList);
 var
   B: TBookMark;
+  L: PtrInt;
+  S: String;
 begin
   if not rxLocalVars.Active then exit;
-
+  L:=UTF8Length(KeyStartWord);
   B:=rxLocalVars.Bookmark;
   rxLocalVars.DisableControls;
   try
     rxLocalVars.First;
     while not rxLocalVars.EOF do
     begin
-      if (KeyStartWord = '') or (KeyStartWord = ':') or (CompareText(rxLocalVarsParName.AsString, KeyStartWord) = 0) then
+
+      S:=UTF8Copy(rxLocalVarsParName.AsString, 1, L);
+//      if (KeyStartWord = '') or (KeyStartWord = ':') or (CompareText( rxLocalVarsParName.AsString, KeyStartWord) = 0) then
+      if (KeyStartWord = '') or (KeyStartWord = ':') or (UTF8CompareText(S, KeyStartWord) = 0) then
         Items.Add(scotParam, rxLocalVarsParName.AsString, rxLocalVarsParType.AsString, rxLocalVarsParDesc.AsString);
       rxLocalVars.Next;
     end;

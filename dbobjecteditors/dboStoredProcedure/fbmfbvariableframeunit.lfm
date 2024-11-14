@@ -221,9 +221,7 @@ object fbmFBVariableFrame: TfbmFBVariableFrame
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsLocalVars
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     PopupMenu = PopupMenu4
