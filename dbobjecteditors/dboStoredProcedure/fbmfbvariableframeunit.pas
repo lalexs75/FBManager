@@ -407,7 +407,8 @@ end;
 
 procedure TfbmFBVariableFrame.AddParam(Param: TDBField);
 begin
-  rxLocalVars.BeforePost:=nil;
+
+ rxLocalVars.BeforePost:=nil;
   rxLocalVars.Append;
   rxLocalVarsParName.AsString:=Param.FieldName;
   rxLocalVarsParDesc.AsString:=Param.FieldDescription;
@@ -419,10 +420,20 @@ begin
     rxLocalVarsParTypeOf.AsBoolean:=Param.FieldIsLocal;
   end
   else
+  begin
     rxLocalVarsParType.AsString:=Param.FieldTypeName;
+    rxLocalVarsParTypeOf.AsBoolean:=false;
+  end;
 
-  rxLocalVarsParSize.AsInteger:=Param.FieldSize;
-  rxLocalVarsParPrec.AsInteger:=Param.FieldPrec;
+  if Param.FieldTypeRecord.VarLen then
+    rxLocalVarsParSize.AsInteger:=Param.FieldSize
+  else
+    rxLocalVarsParSize.Clear;
+
+  if Param.FieldTypeRecord.VarDec then
+    rxLocalVarsParPrec.AsInteger:=Param.FieldPrec
+  else
+    rxLocalVarsParPrec.Clear;
   rxLocalVars.Post;
   rxLocalVars.BeforePost:=@rxLocalVarsBeforePost;
 end;
