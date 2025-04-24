@@ -289,6 +289,8 @@ uses SQLEngineInternalToolsUnit;
   29 - COLLATE
   30 - DEFAULT VALUE
   31 - FK Table
+  37 - type 'SIGNED'
+  38 - type 'UNSIGNED'
 }
 procedure CreateColDef(Sender: TSQLCommandDDL; AStart:TSQLTokenRecord;
   AEnds:array of TSQLTokenRecord; AForCreate:boolean);
@@ -316,6 +318,8 @@ var
     TC_COLL1, TC_CHK1, TF2, TD_MS, TD_MU, TD_MSmallInt,
     TCFK_TBL, TCFK_TBLs, TGenAs1, TGenAs1_1, TGenAs2, TGenAs3,
     TGenAs4_1, TGenAs4_2: TSQLTokenRecord;
+  TD_MS1 : TSQLTokenRecord;
+  TD_MU1 : TSQLTokenRecord;
 begin
   with Sender do
   begin
@@ -350,6 +354,10 @@ begin
     TD17:=AddSQLTokens(stIdentificator, [TF, TF2, TD_MS, TD_MU], 'INT4', [toOptional], 11);
     TD18:=AddSQLTokens(stIdentificator, [TF, TF2, TD_MS, TD_MU], 'INT8', [toOptional], 11);
 
+    TD_MS1:=AddSQLTokens(stIdentificator, [TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18], 'SIGNED', [], 37);       //signed data
+    TD_MU1:=AddSQLTokens(stIdentificator, [TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18], 'UNSIGNED', [], 38);       //unsigned data
+
+
     TD19:=AddSQLTokens(stIdentificator, [TF, TF2], 'NUMERIC', [toOptional], 11);   //NUMERIC()
     TD20:=AddSQLTokens(stIdentificator, [TF, TF2], 'DECIMAL', [toOptional], 11);   //DECIMAL()
     TD21:=AddSQLTokens(stIdentificator, [TF, TF2], 'REAL', [toOptional], 11);
@@ -381,7 +389,7 @@ begin
     TC:=AddSQLTokens(stKeyword, [TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                          TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                          TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'CONSTRAINT', [toOptional]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'CONSTRAINT', [toOptional]);
     TC:=AddSQLTokens(stIdentificator, TC, '', [], 17);
 
     //PRIMARY KEY - only for CREATE TABLE
@@ -390,7 +398,7 @@ begin
       TC_PK:=AddSQLTokens(stKeyword, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                      TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                      TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'PRIMARY', [], 16);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'PRIMARY', [], 16);
       TC_PK1:=AddSQLTokens(stIdentificator, TC_PK, 'KEY', []);
         T1:=AddSQLTokens(stKeyword, TC_PK1, 'ASC', [], 18);
         T2:=AddSQLTokens(stKeyword, TC_PK1, 'DESC', [], 19);
@@ -414,7 +422,7 @@ begin
     TC_NN:=AddSQLTokens(stKeyword, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'NOT', [toOptional], 26);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'NOT', [toOptional], 26);
     TC_NN1:=AddSQLTokens(stKeyword, TC_NN, 'NULL', []);
       T:=AddSQLTokens(stKeyword, TC_NN1, 'ON', []);
       T:=AddSQLTokens(stKeyword, T, 'CONFLICT', []);
@@ -430,7 +438,7 @@ begin
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1,  TD23, TD24, TD25, TD26, TD27, TD28, TD29,
         TCofR, TCofA, TCofF, TCofI, TCofRe, TC_NN1,
-        TD_MS, TD_MU], 'UNIQUE', [toOptional], 27);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'UNIQUE', [toOptional], 27);
       TC_UN.AddChildToken(TC_NN);
       T:=AddSQLTokens(stKeyword, TC_UN, 'ON', []);
       T:=AddSQLTokens(stKeyword, T, 'CONFLICT', []);
@@ -452,7 +460,7 @@ begin
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1,  TD23, TD24, TD25, TD26, TD27, TD28, TD29,
         TCofR1, TCofA1, TCofF1, TCofI1, TCofRe1,
-        TD_MS, TD_MU], 'CHECK', [toOptional]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'CHECK', [toOptional]);
     TC_CHK1:=AddSQLTokens(stSymbol, TC_CHK, '(', [], 28);
     DoFillEndTags([TC_CHK1]);
 
@@ -460,7 +468,7 @@ begin
     TC_COLL:=AddSQLTokens(stKeyword, [TC, TC_NN1, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'COLLATE', [toOptional ]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'COLLATE', [toOptional ]);
     TC_COLL1:=AddSQLTokens(stIdentificator, TC_COLL, '', [], 29);
     TC_COLL1.AddChildToken([TC_UN, TC_NN1]);
     DoFillEndTags([TC_COLL1]);
@@ -468,7 +476,7 @@ begin
     TC_Def:=AddSQLTokens(stKeyword, [TC, TC_NN1, TSymb3, TC_COLL1, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'DEFAULT', [toOptional]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'DEFAULT', [toOptional]);
 
     T1:=AddSQLTokens(stInteger, TC_Def, '', [], 30);
     T2:=AddSQLTokens(stIdentificator, TC_Def, '', [], 30);
@@ -487,7 +495,7 @@ begin
                                      TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                      TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                      TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'NULL', [toOptional]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'NULL', [toOptional]);
     DoFillEndTags([TERN]);
 
     TCFK:=AddSQLTokens(stKeyword, [TC, TC_NN1, TSymb3, TC_COLL1, TC_UN, TC_CHK1,
@@ -495,7 +503,7 @@ begin
                                        TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                        TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
                                        T1, T2, T3, T4,
-        TD_MS, TD_MU], 'REFERENCES', [toOptional]);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'REFERENCES', [toOptional]);
     TCFK_TBL:=AddSQLTokens(stIdentificator, TCFK, '', [], 31);
     TCFK_TBLs:=AddSQLTokens(stString, TCFK, '', [], 31);
     T:=AddSQLTokens(stSymbol, [TCFK_TBL, TCFK_TBLs], '(', []);
@@ -546,12 +554,12 @@ begin
       TGenAs1:=AddSQLTokens(stIdentificator, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                      TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                      TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-        TD_MS, TD_MU], 'GENERATED', []);
+        TD_MS, TD_MU, TD_MS1, TD_MU1], 'GENERATED', []);
         TGenAs1_1:=AddSQLTokens(stIdentificator, TGenAs1, 'ALWAYS', []);
         TGenAs2:=AddSQLTokens(stIdentificator, [TC, TSymb3, TF, TF2, TD1, TD2, TD3, TD4, TD5, TD6, TD7, TD8, TD9, TD10,
                                      TD11, TD12, TD13, TD14, TD15, TD16, TD17, TD18, TD19, TD20,
                                      TD21, TD22, TD22_1, TD23, TD24, TD25, TD26, TD27, TD28, TD29,
-          TD_MS, TD_MU, TGenAs1_1], 'AS', []);
+          TD_MS, TD_MU, TD_MS1, TD_MU1, TGenAs1_1], 'AS', []);
         TGenAs3:=AddSQLTokens(stSymbol, TGenAs2, '(', [], 52);
           TGenAs4_1:=AddSQLTokens(stSymbol, TGenAs3, 'STORED', [], 53);
           TGenAs4_2:=AddSQLTokens(stSymbol, TGenAs3, 'VIRTUAL', [], 54);
@@ -1903,6 +1911,8 @@ begin
     34:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnUpdate:=fkrSetDefault;
     35:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnUpdate:=fkrCascade;
     36:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnUpdate:=fkrNone;
+    37:if Assigned(FCurFiled) then FCurFiled.Params:=FCurFiled.Params + [fpSigned];
+    38:if Assigned(FCurFiled) then FCurFiled.Params:=FCurFiled.Params + [fpUnsigned];
     80:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnDelete:=fkrSetNull;
     81:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnDelete:=fkrSetDefault;
     82:if Assigned(FCurConstraint) then FCurConstraint.ForeignKeyRuleOnDelete:=fkrCascade;
@@ -1985,6 +1995,12 @@ begin
     S1:=S1 + '  ' + DoFormatName(F.Caption);
     if F.TypeName <> '' then
        S1:=S1 + ' ' + F.FullTypeName;
+
+    if fpSigned in F.Params then
+       S1:=S1 + ' SIGNED'
+    else
+    if fpUnsigned in F.Params then
+       S1:=S1 + ' UNSIGNED';
 
     if fpNotNull in F.Params then
     begin

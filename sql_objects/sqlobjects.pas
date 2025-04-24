@@ -109,7 +109,7 @@ type
   TIndexNullPos   = (inpDefault, inpFirst, inpLast);   //Положение null-значений (первые/последние)
 
   TFieldParam = (fpBinary, fpUnsigned, fpZeroFill, fpNotNull, fpNull, fpAutoInc, fpPrimaryKey, fpVirtual, fpStored, fpLocal,
-    fpUnique);
+    fpUnique, fpSigned);
   TFieldParams = set of TFieldParam;
 
   TFieldFormat = (ffDefault, ffFixed, ffDynamic);
