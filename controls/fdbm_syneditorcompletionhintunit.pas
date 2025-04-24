@@ -25,7 +25,7 @@ unit fdbm_SynEditorCompletionHintUnit;
 interface
 
 uses
-  LCLIntf, Classes, SysUtils, Forms, ExtCtrls, LCLType, Controls, SynMemo, Buttons,
+  LCLIntf, Types, Classes, SysUtils, Forms, ExtCtrls, LCLType, Controls, SynMemo, Buttons,
   SynEdit, SynEditKeyCmds, Themes, Graphics, fdbm_SynEditorUnit, BasicCodeTools, LMessages,
   SQLEngineAbstractUnit;
 

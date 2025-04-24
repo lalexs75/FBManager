@@ -465,7 +465,7 @@ end;
 procedure TfbManagerMainForm.IBManagerMainFormCreate(Sender: TObject);
 begin
   Localize;
-  WindowState:=wsMaximized;
+//  WindowState:=wsMaximized;
   fbManagerMainForm:=Self;
 
   DoLoadPrefs;

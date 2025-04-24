@@ -20,6 +20,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     Font.Name = 'courier'
     Font.Pitch = fpFixed
     Font.Quality = fqNonAntialiased
+    Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False
     PopupMenu = PopupMenu1
@@ -550,24 +551,25 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       'TextEditor'
     )
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
-    SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
+    SelectedColor.BackPriority = 50
     SelectedColor.FramePriority = 50
-    SelectedColor.BoldPriority = 50
-    SelectedColor.ItalicPriority = 50
-    SelectedColor.UnderlinePriority = 50
-    SelectedColor.StrikeOutPriority = 50
+    SelectedColor.BoldPriority = 0
+    SelectedColor.ItalicPriority = 0
+    SelectedColor.UnderlinePriority = 0
+    SelectedColor.StrikeOutPriority = 0
+    SelectedColor.Features = [lafPastEOL]
     BracketHighlightStyle = sbhsBoth
-    BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
+    BracketMatchColor.Background = clNone
     BracketMatchColor.Style = [fsBold]
-    FoldedCodeColor.Background = clNone
     FoldedCodeColor.Foreground = clGray
+    FoldedCodeColor.Background = clNone
     FoldedCodeColor.FrameColor = clGray
-    MouseLinkColor.Background = clNone
     MouseLinkColor.Foreground = clBlue
-    LineHighlightColor.Background = clNone
+    MouseLinkColor.Background = clNone
     LineHighlightColor.Foreground = clNone
+    LineHighlightColor.Background = clNone
     OnCommandProcessed = TextEditorCommandProcessed
     OnProcessCommand = TextEditorProcessUserCommand
     OnProcessUserCommand = TextEditorProcessUserCommand
@@ -582,8 +584,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       object TSynGutterLineNumber
         Width = 15
         MouseActions = <>
-        MarkupInfo.Background = clBtnFace
         MarkupInfo.Foreground = clNone
+        MarkupInfo.Background = clBtnFace
         DigitCount = 2
         ShowOnlyLineNumbersMultiplesOf = 1
         ZeroStart = False
@@ -598,8 +600,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
       object TSynGutterSeparator
         Width = 2
         MouseActions = <>
-        MarkupInfo.Background = clWhite
         MarkupInfo.Foreground = clGray
+        MarkupInfo.Background = clWhite
       end
       object TSynGutterCodeFolding
         MouseActions = <        
@@ -628,8 +630,8 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
             ClickDir = cdDown
             Command = emcNone
           end>
-        MarkupInfo.Background = clNone
         MarkupInfo.Foreground = clGray
+        MarkupInfo.Background = clNone
         MouseActionsExpanded = <        
           item
             ClickCount = ccAny
@@ -1131,7 +1133,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
     OnPaintItem = SynCompletion1PaintItem
-    Position = -1
+    Position = 0
     LinesInWindow = 6
     OnSearchPosition = SynCompletion1SearchPosition
     OnKeyNextChar = SynCompletion1KeyNextChar

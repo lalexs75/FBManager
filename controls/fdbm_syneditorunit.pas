@@ -1549,7 +1549,7 @@ begin
   HideCodeContext;
   SetHandlers(false);
   CompletionListClear;
-  FreeThenNil(FSQLParser);
+  FreeAndNil(FSQLParser);
   FreeAndNil(FSynCompletionObjList);
   inherited Destroy;
 end;
