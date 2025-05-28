@@ -113,13 +113,14 @@ type
 
   TDBObjectsList = class
   private
+    FSorted:Boolean;
     FList:TFPList;
     FFreeObjects:boolean;
     function GetCount: integer;
     function GetItems(AIndex: integer): TDBObject;
     function DoSortFind(S:String;out RIndex:Integer):Boolean;
   public
-    constructor Create(AFreeObjects:boolean);
+    constructor Create(AFreeObjects:boolean; ASorted:Boolean);
     destructor Destroy; override;
     procedure Clear;
     procedure Add(AObject:TDBObject);
@@ -1416,11 +1417,12 @@ begin
   RIndex:=L;
 end;
 
-constructor TDBObjectsList.Create(AFreeObjects: boolean);
+constructor TDBObjectsList.Create(AFreeObjects : boolean; ASorted : Boolean);
 begin
   inherited Create;
   FFreeObjects:=AFreeObjects;
   FList:=TFPList.Create;
+  FSorted :=ASorted;
 end;
 
 destructor TDBObjectsList.Destroy;
@@ -1439,10 +1441,18 @@ begin
   if FList.Count = 0 then
      FList.Add(AObject)
   else
-  if (FList.IndexOf(AObject) < 0) then
+  if FSorted then
   begin
-    DoSortFind(AObject.Caption, i);
-    FList.Insert(I, AObject);
+    if not DoSortFind(AObject.Caption, i) then
+    begin
+      DoSortFind(AObject.Caption, i);
+      FList.Insert(I, AObject);
+    end
+  end
+  else
+  begin
+    if (FList.IndexOf(AObject) < 0) then
+      FList.Add(AObject);
   end;
 end;
 
@@ -1450,10 +1460,20 @@ function TDBObjectsList.Find(AName : string) : TDBObject;
 var
   i : Integer;
 begin
-  if DoSortFind(AName, i) then
-    Result:=TDBObject(FList.Items[i])
+  Result:=nil;
+  if FSorted then
+  begin;
+    if DoSortFind(AName, i) then
+      Result:=TDBObject(FList.Items[i])
+  end
   else
-    Result:=nil;
+  begin
+    for i:=0 to FList.Count-1 do
+    begin
+      if CompareText(AName, TDBObject(FList.Items[i]).Caption) = 0 then
+        Exit(TDBObject(FList.Items[i]));
+    end;
+  end;
 end;
 
 function TDBObjectsList.GetEnumerator: TDBObjectsListEnumerator;
@@ -1487,13 +1507,19 @@ function TDBObjectsList.IndexOf(AObject: TDBObject): integer;
 var
   i : Integer;
 begin
-  if FList.Count < 100 then
+  Result:=-1;
+  if FSorted then
+  begin
+    if FList.Count < 100 then
+      Result:=FList.IndexOf(AObject)
+    else
+    if DoSortFind(AObject.Caption, i) then
+      Result:=i
+  end
+  else
+  begin
     Result:=FList.IndexOf(AObject)
-  else
-  if DoSortFind(AObject.Caption, i) then
-    Result:=i
-  else
-    Result:=-1;
+  end;
 end;
 
 { TDBIndex }
@@ -2037,7 +2063,7 @@ constructor TSQLEngineAbstract.Create;
 begin
   inherited Create;
   FProperties:=TStringList.Create;
-  FGroups:=TDBObjectsList.Create(true);
+  FGroups:=TDBObjectsList.Create(true, false);
   FConnectionPlugins:=TSQLEngineConnectionPlugins.Create;
   InternalInitEngine;
 end;
@@ -2337,8 +2363,8 @@ constructor TDBRootObject.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited Create(nil, AOwnerRoot);
   FDropModeParams:=[sepInTransaction, sepShowCompForm];
-  FObjects:=TDBObjectsList.Create(true);
-  FGroupObjects:=TDBObjectsList.Create(true);
+  FObjects:=TDBObjectsList.Create(true, false);
+  FGroupObjects:=TDBObjectsList.Create(true, false);
   FCaption:=ACaption;
   FOwnerDB:=AOwnerDB;
   FDBObjectClass:=ADBObjectClass;
@@ -2351,8 +2377,8 @@ constructor TDBRootObject.Create(const ADBItem: TDBItem;
 begin
   inherited Create(ADBItem, AOwnerRoot);
   FDropModeParams:=[sepInTransaction, sepShowCompForm];
-  FObjects:=TDBObjectsList.Create(true);
-  FGroupObjects:=TDBObjectsList.Create(true);
+  FObjects:=TDBObjectsList.Create(true, false);
+  FGroupObjects:=TDBObjectsList.Create(true, false);
   FOwnerDB:=AOwnerRoot.OwnerDB;
   FDBObjectClass:=AOwnerRoot.DBObjectClass;
   FObjectEditable:=true;
