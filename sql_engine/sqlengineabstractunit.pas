@@ -2363,7 +2363,7 @@ constructor TDBRootObject.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited Create(nil, AOwnerRoot);
   FDropModeParams:=[sepInTransaction, sepShowCompForm];
-  FObjects:=TDBObjectsList.Create(true, false);
+  FObjects:=TDBObjectsList.Create(true, True); //!!
   FGroupObjects:=TDBObjectsList.Create(true, false);
   FCaption:=ACaption;
   FOwnerDB:=AOwnerDB;
@@ -2383,6 +2383,7 @@ begin
   FDBObjectClass:=AOwnerRoot.DBObjectClass;
   FObjectEditable:=true;
   State:=sdboEdit;
+//  AOwnerRoot.DBObjectKind;
 end;
 
 destructor TDBRootObject.Destroy;
