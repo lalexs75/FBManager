@@ -136,12 +136,12 @@ FBSQLEngineSecurityUnit, fbmFBUserMainEditorUnit;
 begin
   InitRxLogs;
 
-  Application.Scaled:=True;
+  Application.Scaled :=True;
 
   InitStdAutoCompletions;
   RegisterStdFormats;
 
-  Application.Title:='Free Database Manager';
+  Application.Title :='Free Database Manager';
   Application.Initialize;
 
   ParseCMDLine;

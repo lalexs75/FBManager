@@ -1418,6 +1418,7 @@ begin
     A:=FOwner.Expanded;
     FList:=TStringList.Create;
     FNewList:=TStringList.Create;
+    FNewList.Sorted :=true;
     FOwner.TreeView.BeginUpdate;
 
     for i:=0 to FObjectList.Count - 1 do

@@ -117,11 +117,13 @@ type
     FFreeObjects:boolean;
     function GetCount: integer;
     function GetItems(AIndex: integer): TDBObject;
+    function DoSortFind(S:String;out RIndex:Integer):Boolean;
   public
     constructor Create(AFreeObjects:boolean);
     destructor Destroy; override;
     procedure Clear;
     procedure Add(AObject:TDBObject);
+    function Find(AName : string) : TDBObject;
     function GetEnumerator: TDBObjectsListEnumerator;
     procedure Delete(AObject:TDBObject); overload;
     procedure Delete(AIndex:integer); overload;
@@ -1374,12 +1376,44 @@ begin
     if FFreeObjects then
       P.Free;
   end;
+{  if FFreeObjects then
+    for i:=FList.Count-1 downto 0 do
+       TDBObject(FList[i]).Free;}
   FList.Clear;
 end;
 
 function TDBObjectsList.GetItems(AIndex: integer): TDBObject;
 begin
   Result:=TDBObject(FList[AIndex]);
+end;
+
+function TDBObjectsList.DoSortFind(S : String; out RIndex : Integer) : Boolean;
+var
+  L : Integer;
+  R : Integer;
+  P : TDBObject;
+  C : Integer;
+begin
+  Result:=false;
+  RIndex :=-1;
+  L:=0;
+  R:=FList.Count-1;
+  while (L<=R) do
+  begin
+    RIndex := (R + L) div 2;
+    P := TDBObject(FList[RIndex]);
+    C:=CompareText(S, P.Caption);
+    if C>0 then L:=RIndex+1
+    else
+    begin
+      R:=RIndex-1;
+      if C = 0 then
+      begin
+        Result:=true;
+      end;
+    end;
+  end;
+  RIndex:=L;
 end;
 
 constructor TDBObjectsList.Create(AFreeObjects: boolean);
@@ -1397,9 +1431,29 @@ begin
 end;
 
 procedure TDBObjectsList.Add(AObject: TDBObject);
+var
+  i : Integer;
 begin
-  if Assigned(AObject) and (FList.IndexOf(AObject) < 0) then
-    FList.Add(AObject);
+  if not Assigned(AObject) then Exit;
+
+  if FList.Count = 0 then
+     FList.Add(AObject)
+  else
+  if (FList.IndexOf(AObject) < 0) then
+  begin
+    DoSortFind(AObject.Caption, i);
+    FList.Insert(I, AObject);
+  end;
+end;
+
+function TDBObjectsList.Find(AName : string) : TDBObject;
+var
+  i : Integer;
+begin
+  if DoSortFind(AName, i) then
+    Result:=TDBObject(FList.Items[i])
+  else
+    Result:=nil;
 end;
 
 function TDBObjectsList.GetEnumerator: TDBObjectsListEnumerator;
@@ -1430,8 +1484,16 @@ begin
 end;
 
 function TDBObjectsList.IndexOf(AObject: TDBObject): integer;
+var
+  i : Integer;
 begin
-  Result:=FList.IndexOf(AObject);
+  if FList.Count < 100 then
+    Result:=FList.IndexOf(AObject)
+  else
+  if DoSortFind(AObject.Caption, i) then
+    Result:=i
+  else
+    Result:=-1;
 end;
 
 { TDBIndex }
@@ -2324,6 +2386,7 @@ begin
 //  FOldObject.Sorted:=true;
   try
     FillListForNames(FOldObject, false);
+    FOldObject.Sorted:=true;
 
     S:=DBMSObjectsList;
     if S<>'' then
@@ -2441,7 +2504,7 @@ begin
     if Assigned(Result) then
       break;
   end;
-
+{
   if not Assigned(Result) then
     for i:=0 to FObjects.Count-1 do
     begin
@@ -2451,6 +2514,9 @@ begin
         break;
       end;
     end;
+}
+  if not Assigned(Result) then
+    Result:=FObjects.Find(AName);
 
   if ARefreshObject and Assigned(Result) and not Result.Loaded then
     Result.RefreshObject;
