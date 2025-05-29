@@ -1445,7 +1445,7 @@ begin
   begin
     if not DoSortFind(AObject.Caption, i) then
     begin
-      DoSortFind(AObject.Caption, i);
+//      DoSortFind(AObject.Caption, i);
       FList.Insert(I, AObject);
     end
   end
@@ -2363,7 +2363,7 @@ constructor TDBRootObject.Create(AOwnerDB: TSQLEngineAbstract;
 begin
   inherited Create(nil, AOwnerRoot);
   FDropModeParams:=[sepInTransaction, sepShowCompForm];
-  FObjects:=TDBObjectsList.Create(true, True); //!!
+  FObjects:=TDBObjectsList.Create(true, true); //!!
   FGroupObjects:=TDBObjectsList.Create(true, false);
   FCaption:=ACaption;
   FOwnerDB:=AOwnerDB;
@@ -2724,18 +2724,19 @@ begin
   inherited Create;
   FStatistic:=TDBTableStatistic.Create(Self);
   FLoaded:=false;
+
+  if Assigned(ADBItem) then
+  begin
+    FCaption:=ADBItem.ObjName;
+    FDescription:=ADBItem.ObjDesc;
+  end;
+
   OwnerRoot:=AOwnerRoot;
 
   if Assigned(FOwnerRoot) then
   begin
     FOwnerDB:=FOwnerRoot.FOwnerDB;
     FDBObjectKind:=FOwnerRoot.FDBObjectKind;
-  end;
-
-  if Assigned(ADBItem) then
-  begin
-    FCaption:=ADBItem.ObjName;
-    FDescription:=ADBItem.ObjDesc;
   end;
 
   State:=sdboEdit;

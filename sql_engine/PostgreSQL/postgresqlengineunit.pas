@@ -3728,6 +3728,7 @@ var
   FTypeCat, FTypeOID, FTypeTypName, FTypeTyp: TField;
   S1: String;
 begin
+  {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'TSQLEnginePostgre.FillFieldTypeCodes - begin');{$ENDIF}
   FIDTypeTrigger:=-1;
   FIDTypeEventTrigger:=-1;
   FIDTypeFDWHandler:=-1;
@@ -3743,7 +3744,8 @@ begin
     while not Q.EOF do
     begin
       S1:=LowerCase(FTypeTypName.AsString);
-      P:=FTypeList.FindType(S1);
+      //P:=FTypeList.FindType(S1);
+      P:=FTypeList.QuicFindType(S1);
       if Assigned(P) then
       begin
         P.TypeId:=FTypeOID.AsInteger;
@@ -3795,6 +3797,7 @@ begin
   finally
     Q.Free;
   end;
+  {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'TSQLEnginePostgre.FillFieldTypeCodes - end');{$ENDIF}
 end;
 
 procedure TSQLEnginePostgre.ClearUserTypes;

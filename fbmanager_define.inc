@@ -21,7 +21,7 @@
 {module: fbmanager_define -  compiler defines }
 
 {.$DEFINE DEBUG}
-
+{$DEFINE DEBUG_LOG}
 //Compiler defines
 
 {$mode objfpc}{$H+}

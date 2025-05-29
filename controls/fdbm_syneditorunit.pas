@@ -358,7 +358,9 @@ var
   sReplaceTextHistory, sSearchTextHistory:String;
 
 implementation
-uses IBManMainUnit, SynEditTypes, fEditSearch, IBManDataInspectorUnit, LCLIntf,
+uses
+  {$IFDEF DEBUG_LOG} rxlogging, {$ENDIF DEBUG}
+  IBManMainUnit, SynEditTypes, fEditSearch, IBManDataInspectorUnit, LCLIntf,
   fbmInsertDefSqlUnit, LCLProc, LazFileUtils, strutils, rxAppUtils,
   fbmStrConstUnit, fdbm_SynEditorCompletionHintUnit,
   fdbmSynAutoCompletionsLists, SQLEngineInternalToolsUnit, LazUTF8;
@@ -1876,14 +1878,13 @@ var
   CurStr:string;
   L:TStringList;
 begin
+  {$IFDEF DEBUG_LOG} RxWriteLog(etDebug, 'MakeCompletionList - begin'); {$ENDIF DEBUG}
   CompletionListClear;
 
 
   if DoTestField(TableName, CurStr) then
   begin
-    {$IFDEF DEBUG}
-    WriteLog('DoFillFieldList(TableName) : "'+CurStr+'"');
-    {$ENDIF DEBUG}
+    {$IFDEF DEBUG_LOG} RxWriteLog(etDebug, 'DoFillFieldList(TableName) : "$s"', [CurStr]); {$ENDIF DEBUG}
     DoFillFieldList(TableName)
   end
   else
@@ -1900,6 +1901,7 @@ begin
       FOnGetObjAliasList(Self, UpperCase(CurStr), FSynCompletionObjList, ccoNoneCase);
     FillKeywords;
   end;
+  {$IFDEF DEBUG_LOG} RxWriteLog(etDebug, 'MakeCompletionList - end'); {$ENDIF DEBUG}
 end;
 
 procedure Tfdbm_SynEditorFrame.OnSynCompletionKeyDown(Sender: TObject;

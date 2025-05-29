@@ -554,10 +554,6 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     SelectedColor.ForePriority = 50
     SelectedColor.BackPriority = 50
     SelectedColor.FramePriority = 50
-    SelectedColor.BoldPriority = 0
-    SelectedColor.ItalicPriority = 0
-    SelectedColor.UnderlinePriority = 0
-    SelectedColor.StrikeOutPriority = 0
     SelectedColor.Features = [lafPastEOL]
     BracketHighlightStyle = sbhsBoth
     BracketMatchColor.Foreground = clNone
@@ -1133,7 +1129,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
     OnPaintItem = SynCompletion1PaintItem
-    Position = 0
+    Position = -1
     LinesInWindow = 6
     OnSearchPosition = SynCompletion1SearchPosition
     OnKeyNextChar = SynCompletion1KeyNextChar
