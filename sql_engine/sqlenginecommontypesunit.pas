@@ -568,12 +568,12 @@ type
     FList:TFPList;
     function GetCount: integer;
     function GetItems(AItem: integer): TDBMSFieldTypeRecord;
-    function DoSortFind(S:String;out RIndex:Integer):Boolean;
+//    function DoSortFind(S:String; ATypeID:integer; out RIndex:Integer):Boolean;
   public
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
-    function QuicFindType(const ATypeName:string):TDBMSFieldTypeRecord;
+//    function QuicFindType(const ATypeName:string):TDBMSFieldTypeRecord;
     function FindType(const ATypeName:string):TDBMSFieldTypeRecord;
     function FindTypeByID(const ATypeID:integer):TDBMSFieldTypeRecord;
     function FindTypeByID(const ATypeID, ASubTypeID:integer):TDBMSFieldTypeRecord;
@@ -1199,8 +1199,8 @@ function TDBMSFieldTypeList.GetItems(AItem: integer): TDBMSFieldTypeRecord;
 begin
   Result:=TDBMSFieldTypeRecord(FList[AItem]);
 end;
-
-function TDBMSFieldTypeList.DoSortFind(S : String; out RIndex : Integer) : Boolean;
+(*
+function TDBMSFieldTypeList.DoSortFind(S : String; ATypeID : integer; out RIndex : Integer) : Boolean;
 var
   L : Integer;
   R : Integer;
@@ -1220,15 +1220,23 @@ begin
     else
     begin
       R:=RIndex-1;
-      if C = 0 then
+      if ATypeID = -999 then
+        Result:=true
+      else
+      if (C = 0) then
       begin
-        Result:=true;
+        if P.TypeId > ATypeID then
+          L:=RIndex+1
+        else
+          R:=RIndex-1;
+        if P.TypeId = ATypeID then
+          Result:=true;
       end;
     end;
   end;
   RIndex:=L;
 end;
-
+*)
 constructor TDBMSFieldTypeList.Create;
 begin
   inherited Create;
@@ -1249,19 +1257,19 @@ begin
   for P in Self do P.Free;
   FList.Clear;
 end;
-
+(*
 function TDBMSFieldTypeList.QuicFindType(const ATypeName : string) : TDBMSFieldTypeRecord;
 var
   i : Integer;
 begin
-  if DoSortFind(ATypeName, i) then
+  if DoSortFind(ATypeName,  -999, i) then
     Exit(TDBMSFieldTypeRecord(FList));
 {  for T in Self do
     if (CompareText(T.TypeName, ATypeName)=0) or (T.AltNames.IndexOf(ATypeName)>-1) then
       Exit(T);}
   Result:=nil;
 end;
-
+*)
 function TDBMSFieldTypeList.GetCount: integer;
 begin
   Result:=FList.Count;
@@ -1322,7 +1330,14 @@ function TDBMSFieldTypeList.Add(const ATypeName: string; ATypeId: integer;
 var
   i : Integer;
 begin
-  if (FList.Count = 0) or (not DoSortFind(ATypeName, i)) then
+  Result:=FindType(ATypeName);
+  If not Assigned(Result) then
+  begin
+    Result:=TDBMSFieldTypeRecord.Create(ATypeName, ATypeId, AVarLen, AVarDec, ADBType, AAltNames, ADesc, ATypesGroup);
+    FList.Add(Result)
+  end;
+(*
+  if (FList.Count = 0) or (not DoSortFind(ATypeName, ATypeId, i)) then
   begin
     Result:=TDBMSFieldTypeRecord.Create(ATypeName, ATypeId, AVarLen, AVarDec, ADBType, AAltNames, ADesc, ATypesGroup);
     if FList.Count = 0 then
@@ -1330,6 +1345,7 @@ begin
     else
       FList.Insert(I, Result);
   end;
+*)
 end;
 
 procedure TDBMSFieldTypeList.Remove(AItem: TDBMSFieldTypeRecord);

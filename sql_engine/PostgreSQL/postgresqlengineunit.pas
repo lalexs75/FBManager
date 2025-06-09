@@ -3743,9 +3743,13 @@ begin
 
     while not Q.EOF do
     begin
+      if FTypeOID.AsInteger = 2249 then
+      begin
+        S1:='111';
+      end;
       S1:=LowerCase(FTypeTypName.AsString);
-      //P:=FTypeList.FindType(S1);
-      P:=FTypeList.QuicFindType(S1);
+      P:=FTypeList.FindType(S1);
+(*      P:=FTypeList.QuicFindType(S1); *)
       if Assigned(P) then
       begin
         P.TypeId:=FTypeOID.AsInteger;
