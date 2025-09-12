@@ -212,7 +212,6 @@ type
     SynAutoComplete1: TSynAutoComplete;
     SynCompletion1: TSynCompletion;
     SynSQLSyn1: TSynSQLSyn;
-    TextEditor: TSynEdit;
     SynCompletionTimer: TTimer;
     procedure ceCharUpperCaseExecute(Sender: TObject);
     procedure ceCommentCodeExecute(Sender: TObject);
@@ -318,6 +317,7 @@ type
     MemoLog:TMemo;
     procedure writeLog(const S:string);
     {$ENDIF}
+    TextEditor: TSynEdit;
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
     procedure ChangeVisualParams;
@@ -1527,11 +1527,21 @@ begin
   MemoLog.Parent:=Self;
   MemoLog.Align:=alBottom;
   {$ENDIF}
+  TextEditor:=TSynEdit.Create(Self);
+  TextEditor.Parent:=Self;
+  TextEditor.Align :=alClient;
+  TextEditor.PopupMenu:=PopupMenu1;
+  TextEditor.Highlighter:=SynSQLSyn1;
+//  TextEditor.
+
   FSynCompletionObjList:=TSynCompletionObjList.Create;
   SetHandlers(true);
   SynCompletion1.OnKeyDown:=@OnSynCompletionKeyDown;
   SynCompletion1.OnCancel:=@CloseCompletion;
+  SynCompletion1.Editor:=TextEditor;
   FSynMarkup:=TSynEditMarkupHighlightAllCaret(TextEditor.MarkupByClass[TSynEditMarkupHighlightAllCaret]);
+
+  SynAutoComplete1.Editor:=TextEditor;
 
 
   TextEditor.Text:='';
