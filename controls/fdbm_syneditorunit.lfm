@@ -484,7 +484,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
     OnPaintItem = SynCompletion1PaintItem
-    Position = -1
+    Position = 0
     LinesInWindow = 6
     OnSearchPosition = SynCompletion1SearchPosition
     OnKeyNextChar = SynCompletion1KeyNextChar

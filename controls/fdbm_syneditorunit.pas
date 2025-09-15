@@ -1527,12 +1527,25 @@ begin
   MemoLog.Parent:=Self;
   MemoLog.Align:=alBottom;
   {$ENDIF}
+
   TextEditor:=TSynEdit.Create(Self);
   TextEditor.Parent:=Self;
   TextEditor.Align :=alClient;
   TextEditor.PopupMenu:=PopupMenu1;
   TextEditor.Highlighter:=SynSQLSyn1;
-//  TextEditor.
+  TextEditor.OnClick :=@TextEditorClick;
+  TextEditor.OnCommandProcessed :=@TextEditorCommandProcessed;
+  TextEditor.OnDblClick :=@TextEditorDblClick;
+  TextEditor.OnDragDrop:=@TextEditorDragDrop;
+  TextEditor.OnDragOver:=@TextEditorDragOver;
+  TextEditor.OnEnter:=@TextEditorEnter;
+  TextEditor.OnExit:=@TextEditorExit;
+  TextEditor.OnKeyDown:=@TextEditorKeyDown;
+  TextEditor.OnKeyPress:=@TextEditorKeyPress;
+  TextEditor.OnMouseMove:=@TextEditorMouseMove;
+  TextEditor.OnProcessUserCommand :=@TextEditorProcessUserCommand;
+  TextEditor.OnShowHint :=@TextEditorShowHint;
+
 
   FSynCompletionObjList:=TSynCompletionObjList.Create;
   SetHandlers(true);
