@@ -66,7 +66,7 @@ type
 procedure ShowSearchInMetatDataParamsForm;
 implementation
 
-uses IBManDataInspectorUnit, ibmanagertypesunit, tlsSearchInMetatDataResultUnit,
+uses rxAppUtils, IBManDataInspectorUnit, ibmanagertypesunit, rxlogging, tlsSearchInMetatDataResultUnit,
   tlsProgressOperationUnit, SQLEngineCommonTypesUnit, fbmStrConstUnit,
   fbmToolsUnit, fdbm_SynEditorUnit;
 
@@ -181,10 +181,16 @@ begin
     begin
       try
         if not Obj.Loaded then
+        begin
+{$IFDEF LINUX}
+          RxWriteLog(etDebug, 'RefreshObject %s', [Obj.CaptionFullPatch]);
+{$ENDIF}
           Obj.RefreshObject;
+
+        end;
       except
         on E:Exception do
-          ErrorBoxExcpt(E);
+          ErrorBox('Error Refresh Object %s : %s', [Obj.CaptionFullPatch, E.Message]);
       end;
       S:=Obj.InternalGetDDLCreate;
       if (S<>'') and (Pos(edtFind.Text, S)>0) then
