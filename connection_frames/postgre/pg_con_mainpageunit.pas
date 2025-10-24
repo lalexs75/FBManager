@@ -141,6 +141,7 @@ begin
   if (LockCount>0) or (cbServerName.Text = '') or (edtUserName.Text = '') or
     ((pgTest.HostName = cbServerName.Text) and (pgTest.User = edtUserName.Text) and (pgTest.Password = edtPassword.Text)) then exit;
 
+  pgTest.Connected:=false;
   pgTest.HostName:=cbServerName.Text;
   pgTest.Database:='postgres';
   pgTest.User:=edtUserName.Text;
@@ -159,6 +160,7 @@ begin
       quDBList.Close;
     end;
   except
+    pgTest.HostName:='';
   end;
   pgTest.Connected:=false;
 end;
@@ -241,7 +243,10 @@ begin
     Result:=pgTest.Connected;
   except
     on E:Exception do
+    begin
+      pgTest.HostName:='';
       ErrorBoxExcpt(E);
+    end;
   end;
   pgTest.Connected:=false;
 end;
