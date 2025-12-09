@@ -9,7 +9,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   ClientWidth = 287
   SessionProperties = 'Top;Width;Left;Height'
   ShowHint = True
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnClose = IBManDataInpectorFormClose
   OnCreate = IBManDataInpectorFormCreate
   OnDestroy = IBManDataInpectorFormDestroy
@@ -26,13 +26,13 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     object Tabsheet1: TTabSheet
       Caption = 'Databases'
       ClientHeight = 560
-      ClientWidth = 277
+      ClientWidth = 283
       ParentFont = False
       object TreeView1: TTreeView
         Left = 0
         Height = 400
         Top = 43
-        Width = 277
+        Width = 283
         Align = alClient
         DragMode = dmAutomatic
         ExpandSignType = tvestPlusMinus
@@ -47,9 +47,9 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         Options = [tvoAllowMultiselect, tvoAutoItemHeight, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
         Items.Data = {
           F9FFFFFF020002000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF020000000000
-          0000000F000000D0ADD0BBD0B5D0BCD0B5D0BDD18230FFFFFFFFFFFFFFFFFFFF
+          0000010F000000D0ADD0BBD0B5D0BCD0B5D0BDD18230FFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFF0000000000000000000F000000D0ADD0BBD0B5D0BCD0B5D0BDD1
-          8231FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000000F000000D0
+          8231FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010F000000D0
           ADD0BBD0B5D0BCD0B5D0BDD18233FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
           000000000000000F000000D0ADD0BBD0B5D0BCD0B5D0BDD18234FFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF0000000000000000000F000000D0ADD0BBD0B5D0BCD0
@@ -70,7 +70,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         Left = 0
         Height = 112
         Top = 448
-        Width = 277
+        Width = 283
         Align = alBottom
         ClickOnSelChange = False
         DragMode = dmAutomatic
@@ -87,7 +87,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         Left = 0
         Height = 5
         Top = 443
-        Width = 277
+        Width = 283
         Align = alBottom
         Anchors = [akLeft, akBottom]
         ResizeAnchor = akBottom
@@ -96,11 +96,11 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
         Left = 0
         Height = 43
         Top = 0
-        Width = 277
+        Width = 283
         Align = alTop
         AutoSize = True
         ClientHeight = 43
-        ClientWidth = 277
+        ClientWidth = 283
         ParentFont = False
         TabOrder = 3
         object TreeFilterEdit1: TTreeFilterEdit
@@ -112,7 +112,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           Left = 40
           Height = 29
           Top = 7
-          Width = 230
+          Width = 236
           ButtonWidth = 23
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 6
@@ -143,13 +143,13 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     object Tabsheet2: TTabSheet
       Caption = 'Windows'
       ClientHeight = 560
-      ClientWidth = 277
+      ClientWidth = 283
       ParentFont = False
       object listWindows: TListBox
         Left = 0
         Height = 560
         Top = 0
-        Width = 277
+        Width = 283
         Align = alClient
         ItemHeight = 0
         ParentFont = False
@@ -162,13 +162,13 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     object TabSheet3: TTabSheet
       Caption = 'Recent'
       ClientHeight = 560
-      ClientWidth = 277
+      ClientWidth = 283
       ParentFont = False
       object ListBox1: TListBox
         Left = 0
         Height = 560
         Top = 0
-        Width = 277
+        Width = 283
         Align = alClient
         ItemHeight = 0
         ParentFont = False

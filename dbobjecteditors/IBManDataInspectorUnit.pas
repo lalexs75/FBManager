@@ -231,6 +231,7 @@ type
     procedure SelectObject(DBObject:TDBObject);
     procedure UpdateRecentObjects;
     function OIFolderByName(AFolderName:string):TOIFolder;
+    procedure PingConnectedDB;
   public
     property DBList:TFBMDataBaseList read FDBList;
     property Folders:TOIFolderList read FFolders;
@@ -1272,6 +1273,11 @@ begin
       Result:=TOIFolder(FFolders[i]);
       exit;
     end;
+end;
+
+procedure TfbManDataInpectorForm.PingConnectedDB;
+begin
+//
 end;
 
 procedure TfbManDataInpectorForm.ReadAlialList;

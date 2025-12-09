@@ -25,7 +25,7 @@ unit fbmTransactionMonitorUnit;
 interface
 
 uses
-  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ActnList,
+  Classes, SynEdit, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ActnList,
   rxtoolbar, rxmemds, rxdbgrid, TAGraph, TASeries, TAStyles, TADbSource,
   fbcustomdataset, Menus, uib, ExtCtrls, StdCtrls, LMessages, fbmToolsUnit,
   EditBtn, Buttons, ComCtrls, Spin, db, SQLEngineAbstractUnit,
@@ -50,7 +50,7 @@ type
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
-    ComboBox2: TComboBox;
+    CheckBox5 : TCheckBox;
     csNEXT_TRANS: TDbChartSource;
     csOLD_ACTIVE: TDbChartSource;
     csOLD: TDbChartSource;
@@ -63,21 +63,18 @@ type
     Label11: TLabel;
     Memo1: TMemo;
     Panel5: TPanel;
+    Panel6 : TPanel;
     quUsers: TFBDataSet;
     GroupBox1: TGroupBox;
     ImageList1: TImageList;
-    Label10: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
+    CLabel: TLabel;
     PageControl1: TPageControl;
-    Panel2: TPanel;
-    Panel3: TPanel;
     Panel4: TPanel;
     RxDBGrid1: TRxDBGrid;
     rxTransInfo: TRxMemoryData;
@@ -86,10 +83,12 @@ type
     rxTransInfoOLD_ACTIVE: TLongintField;
     rxTransInfoOLD_ALL: TLongintField;
     rxTransInfoOLD_SNAPSHOT: TLongintField;
-    SpinEdit1: TSpinEdit;
     SpinEdit2: TSpinEdit;
     SpinEdit3: TSpinEdit;
     SpinEdit4: TSpinEdit;
+    Splitter1 : TSplitter;
+    Splitter2 : TSplitter;
+    SynEdit1 : TSynEdit;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -181,8 +180,6 @@ begin
 
   Label1.Caption:=sDatabase;
   TabSheet2.Caption:=sGeneral;
-  Label9.Caption:=sGeneral;
-  Label10.Caption:=sActiveUsers;
 
   Label2.Caption:=sPageSize1;
   Label3.Caption:=sSQLDialect;

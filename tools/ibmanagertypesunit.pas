@@ -216,6 +216,7 @@ type
     property DBVisualTools:TDBVisualTools read FDBVisualTools;
     property SqlEditors:TSQLEditorPages read FSqlEditors;
     property SortOrder:integer read FSortOrder write FSortOrder;
+
   end;
 
 function ExecSQLScript(List:TStrings; const ExecParams:TSqlExecParams; const ASQLEngine:TSQLEngineAbstract):boolean;

@@ -689,6 +689,7 @@ type
   private
     FPassword: string;
   protected
+    procedure SetName(AValue: string); override;
   public
     procedure Assign(ASource:TSQLObjectAbstract); override;
     property Password:string read FPassword write FPassword;
@@ -1190,6 +1191,12 @@ begin
 end;
 
 { TSQLCreateLogin }
+
+procedure TSQLCreateLogin.SetName(AValue : string);
+begin
+  if FName=AValue then Exit;
+  FName:=AValue;
+end;
 
 procedure TSQLCreateLogin.Assign(ASource: TSQLObjectAbstract);
 begin

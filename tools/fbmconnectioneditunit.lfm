@@ -6,21 +6,22 @@ inherited fbmConnectionEditForm: TfbmConnectionEditForm
   Caption = 'Registration params'
   ClientHeight = 607
   ClientWidth = 793
+  ShowHint = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = nil
-  ShowHint = True
   inherited ButtonPanel1: TButtonPanel
-    Top = 555
+    Height = 37
+    Top = 564
     Width = 781
     object BitBtn1: TBitBtn[0]
       AnchorSideLeft.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Left = 6
-      Height = 35
+      Height = 30
       Hint = 'Test connection'
       Top = 0
-      Width = 64
+      Width = 58
       Anchors = [akTop, akLeft, akBottom]
       AutoSize = True
       BorderSpacing.Left = 6
@@ -38,19 +39,19 @@ inherited fbmConnectionEditForm: TfbmConnectionEditForm
         0000EEEEEE7FBFFBF78EEE000000EEEEEE777777777EEE000000EEEEEEEEEEEE
         EEEEEE000000EEEEEEEEEEEEEEEEEE000000
       }
-      OnClick = BitBtn1Click
       TabOrder = 4
+      OnClick = BitBtn1Click
     end
   end
   inherited ListBox1: TListBox
-    Height = 549
+    Height = 558
     OnClick = ListBox1Click
   end
   inherited Splitter1: TSplitter
-    Height = 549
+    Height = 558
   end
   inherited Panel1: TPanel
-    Height = 549
+    Height = 558
     Width = 656
   end
 end

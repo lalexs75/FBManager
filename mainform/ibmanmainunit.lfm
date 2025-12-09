@@ -13661,4 +13661,9 @@ object fbManagerMainForm: TfbManagerMainForm
       B7215CFBAFCF7F009338D78E
     }
   end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 579
+    Top = 296
+  end
 end

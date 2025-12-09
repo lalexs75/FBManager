@@ -1,7 +1,7 @@
 inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
-  Left = 393
+  Left = 376
   Height = 826
-  Top = 128
+  Top = 142
   Width = 1236
   Caption = 'Transaction monitor'
   ClientHeight = 826
@@ -28,306 +28,25 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       Caption = 'General'
       ClientHeight = 713
       ClientWidth = 1232
-      object Panel2: TPanel
-        AnchorSideTop.Side = asrBottom
-        Left = 6
-        Height = 1
-        Top = 26
-        Width = 1
-        AutoSize = True
-        BevelOuter = bvLowered
-        Caption = 'Panel2'
-        TabOrder = 0
-      end
-      object ComboBox2: TComboBox
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = Panel2
-        AnchorSideRight.Side = asrBottom
-        Left = 6
-        Height = 27
-        Top = 47
-        Width = 1
-        Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
-        TabOrder = 1
-        Text = 'ComboBox2'
-      end
-      object SpinEdit1: TSpinEdit
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = Panel2
-        AnchorSideRight.Side = asrBottom
-        Left = 6
-        Height = 27
-        Top = 104
-        Width = 1
-        Anchors = [akTop, akLeft, akRight]
-        TabOrder = 2
-      end
-      object Panel3: TPanel
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = Panel2
-        AnchorSideRight.Side = asrBottom
-        Left = 6
-        Height = 1
-        Top = 161
-        Width = 1
-        Anchors = [akTop, akLeft, akRight]
-        AutoSize = True
-        BevelOuter = bvLowered
-        Caption = 'Panel2'
-        TabOrder = 3
-      end
-      object RxDBGrid1: TRxDBGrid
-        AnchorSideLeft.Control = TabSheet2
-        AnchorSideTop.Control = Label8
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = TabSheet2
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = TabSheet2
-        AnchorSideBottom.Side = asrBottom
-        Left = 6
-        Height = 344
-        Top = 363
-        Width = 1220
-        ColumnDefValues.BlobText = '(данные)'
-        TitleButtons = False
-        AutoSort = False
-        Columns = <        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Attachment ID'
-            Width = 90
-            FieldName = 'MON$ATTACHMENT_ID'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Attachment DB'
-            Width = 250
-            FieldName = 'MON$ATTACHMENT_NAME'
-            EditButtons = <>
-            Filter.Font.Style = [fsItalic]
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Нет)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(Все значения)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Start'
-            Width = 110
-            FieldName = 'MON$TIMESTAMP'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'User name'
-            Width = 100
-            FieldName = 'MON$USER'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'User role'
-            Width = 100
-            FieldName = 'MON$ROLE'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Remote address'
-            Width = 120
-            FieldName = 'MON$REMOTE_ADDRESS'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Remote protocol'
-            Width = 100
-            FieldName = 'MON$REMOTE_PROTOCOL'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end        
-          item
-            Title.Alignment = taCenter
-            Title.Orientation = toHorizontal
-            Title.Caption = 'Remote process'
-            Width = 200
-            FieldName = 'MON$REMOTE_PROCESS'
-            EditButtons = <>
-            Filter.DropDownRows = 0
-            Filter.EmptyValue = '(Empty)'
-            Filter.NotEmptyValue = '(Не пусто)'
-            Filter.AllValue = '(All values)'
-            Filter.EmptyFont.Style = [fsItalic]
-            Filter.ItemIndex = -1
-            Footers = <>
-          end>
-        KeyStrokes = <        
-          item
-            Command = rxgcShowFindDlg
-            ShortCut = 16454
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowColumnsDlg
-            ShortCut = 16471
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowFilterDlg
-            ShortCut = 16468
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowSortDlg
-            ShortCut = 16467
-            Enabled = True
-          end        
-          item
-            Command = rxgcShowQuickFilter
-            ShortCut = 16465
-            Enabled = True
-          end        
-          item
-            Command = rxgcHideQuickFilter
-            ShortCut = 16456
-            Enabled = True
-          end        
-          item
-            Command = rxgcSelectAll
-            ShortCut = 16449
-            Enabled = True
-          end        
-          item
-            Command = rxgcDeSelectAll
-            ShortCut = 16429
-            Enabled = True
-          end        
-          item
-            Command = rxgcInvertSelection
-            ShortCut = 16426
-            Enabled = True
-          end        
-          item
-            Command = rxgcOptimizeColumnsWidth
-            ShortCut = 16427
-            Enabled = True
-          end        
-          item
-            Command = rxgcCopyCellValue
-            ShortCut = 16451
-            Enabled = True
-          end>
-        FooterOptions.Color = clYellow
-        FooterOptions.DrawFullLine = False
-        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
-        SearchOptions.FromStart = False
-        OptionsRx = []
-        FooterColor = clYellow
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Around = 6
-        Color = clWindow
-        DrawFullLine = False
-        SelectedColor = clHighlight
-        DataSource = dsUsers
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-        ReadOnly = True
-        TabOrder = 4
-        TitleStyle = tsNative
-      end
-      object Label8: TLabel
+      object CLabel: TLabel
         AnchorSideLeft.Control = TabSheet2
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = TabSheet2
-        AnchorSideTop.Side = asrCenter
         Left = 616
         Height = 1
-        Top = 356
+        Top = 60
         Width = 1
-        ParentColor = False
-      end
-      object Label9: TLabel
-        AnchorSideLeft.Control = TabSheet2
-        AnchorSideTop.Control = TabSheet2
-        Left = 6
-        Height = 17
-        Top = 6
-        Width = 48
-        BorderSpacing.Around = 6
-        Caption = 'General'
-        ParentColor = False
-      end
-      object Label10: TLabel
-        AnchorSideLeft.Control = Label8
-        AnchorSideTop.Control = TabSheet2
-        Left = 622
-        Height = 17
-        Top = 6
-        Width = 69
-        BorderSpacing.Around = 6
-        Caption = 'Active users'
+        Anchors = [akLeft]
         ParentColor = False
       end
       object Chart1: TChart
         AnchorSideLeft.Control = TabSheet2
         AnchorSideTop.Control = TabSheet2
-        AnchorSideRight.Control = Label8
-        AnchorSideBottom.Control = Label8
+        AnchorSideRight.Control = CLabel
+        AnchorSideBottom.Control = Splitter2
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 345
+        Height = 499
         Top = 6
         Width = 604
         AxisList = <        
@@ -375,13 +94,13 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         end
       end
       object Chart2: TChart
-        AnchorSideLeft.Control = Label8
+        AnchorSideLeft.Control = CLabel
         AnchorSideTop.Control = TabSheet2
         AnchorSideRight.Control = TabSheet2
         AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = Label8
+        AnchorSideBottom.Control = Splitter2
         Left = 622
-        Height = 344
+        Height = 494
         Top = 6
         Width = 604
         AxisList = <        
@@ -428,18 +147,778 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           LinePen.Width = 2
         end
       end
+      object Panel6: TPanel
+        Left = 0
+        Height = 202
+        Top = 511
+        Width = 1232
+        Align = alBottom
+        ClientHeight = 202
+        ClientWidth = 1232
+        TabOrder = 2
+        inline SynEdit1: TSynEdit
+          Left = 1031
+          Height = 200
+          Top = 1
+          Width = 200
+          Align = alRight
+          Font.Height = 13
+          Font.Name = 'DejaVu Sans Mono'
+          Font.Pitch = fpFixed
+          Font.Quality = fqNonAntialiased
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+          Gutter.Width = 57
+          Gutter.MouseActions = <>
+          RightGutter.Width = 0
+          RightGutter.MouseActions = <>
+          Keystrokes = <          
+            item
+              Command = ecUp
+              ShortCut = 38
+            end          
+            item
+              Command = ecSelUp
+              ShortCut = 8230
+            end          
+            item
+              Command = ecScrollUp
+              ShortCut = 16422
+            end          
+            item
+              Command = ecDown
+              ShortCut = 40
+            end          
+            item
+              Command = ecSelDown
+              ShortCut = 8232
+            end          
+            item
+              Command = ecScrollDown
+              ShortCut = 16424
+            end          
+            item
+              Command = ecLeft
+              ShortCut = 37
+            end          
+            item
+              Command = ecSelLeft
+              ShortCut = 8229
+            end          
+            item
+              Command = ecWordLeft
+              ShortCut = 16421
+            end          
+            item
+              Command = ecSelWordLeft
+              ShortCut = 24613
+            end          
+            item
+              Command = ecRight
+              ShortCut = 39
+            end          
+            item
+              Command = ecSelRight
+              ShortCut = 8231
+            end          
+            item
+              Command = ecWordRight
+              ShortCut = 16423
+            end          
+            item
+              Command = ecSelWordRight
+              ShortCut = 24615
+            end          
+            item
+              Command = ecPageDown
+              ShortCut = 34
+            end          
+            item
+              Command = ecSelPageDown
+              ShortCut = 8226
+            end          
+            item
+              Command = ecPageBottom
+              ShortCut = 16418
+            end          
+            item
+              Command = ecSelPageBottom
+              ShortCut = 24610
+            end          
+            item
+              Command = ecPageUp
+              ShortCut = 33
+            end          
+            item
+              Command = ecSelPageUp
+              ShortCut = 8225
+            end          
+            item
+              Command = ecPageTop
+              ShortCut = 16417
+            end          
+            item
+              Command = ecSelPageTop
+              ShortCut = 24609
+            end          
+            item
+              Command = ecLineStart
+              ShortCut = 36
+            end          
+            item
+              Command = ecSelLineStart
+              ShortCut = 8228
+            end          
+            item
+              Command = ecEditorTop
+              ShortCut = 16420
+            end          
+            item
+              Command = ecSelEditorTop
+              ShortCut = 24612
+            end          
+            item
+              Command = ecLineEnd
+              ShortCut = 35
+            end          
+            item
+              Command = ecSelLineEnd
+              ShortCut = 8227
+            end          
+            item
+              Command = ecEditorBottom
+              ShortCut = 16419
+            end          
+            item
+              Command = ecSelEditorBottom
+              ShortCut = 24611
+            end          
+            item
+              Command = ecToggleMode
+              ShortCut = 45
+            end          
+            item
+              Command = ecCopy
+              ShortCut = 16429
+            end          
+            item
+              Command = ecPaste
+              ShortCut = 8237
+            end          
+            item
+              Command = ecDeleteChar
+              ShortCut = 46
+            end          
+            item
+              Command = ecCut
+              ShortCut = 8238
+            end          
+            item
+              Command = ecDeleteLastChar
+              ShortCut = 8
+            end          
+            item
+              Command = ecDeleteLastChar
+              ShortCut = 8200
+            end          
+            item
+              Command = ecDeleteLastWord
+              ShortCut = 16392
+            end          
+            item
+              Command = ecUndo
+              ShortCut = 32776
+            end          
+            item
+              Command = ecRedo
+              ShortCut = 40968
+            end          
+            item
+              Command = ecLineBreak
+              ShortCut = 13
+            end          
+            item
+              Command = ecSelectAll
+              ShortCut = 16449
+            end          
+            item
+              Command = ecCopy
+              ShortCut = 16451
+            end          
+            item
+              Command = ecBlockIndent
+              ShortCut = 16457
+            end          
+            item
+              Command = ecLineBreak
+              ShortCut = 16461
+            end          
+            item
+              Command = ecInsertLine
+              ShortCut = 16462
+            end          
+            item
+              Command = ecDeleteWord
+              ShortCut = 16468
+            end          
+            item
+              Command = ecBlockUnindent
+              ShortCut = 16469
+            end          
+            item
+              Command = ecPaste
+              ShortCut = 16470
+            end          
+            item
+              Command = ecCut
+              ShortCut = 16472
+            end          
+            item
+              Command = ecDeleteLine
+              ShortCut = 16473
+            end          
+            item
+              Command = ecDeleteEOL
+              ShortCut = 24665
+            end          
+            item
+              Command = ecUndo
+              ShortCut = 16474
+            end          
+            item
+              Command = ecRedo
+              ShortCut = 24666
+            end          
+            item
+              Command = ecGotoMarker0
+              ShortCut = 16432
+            end          
+            item
+              Command = ecGotoMarker1
+              ShortCut = 16433
+            end          
+            item
+              Command = ecGotoMarker2
+              ShortCut = 16434
+            end          
+            item
+              Command = ecGotoMarker3
+              ShortCut = 16435
+            end          
+            item
+              Command = ecGotoMarker4
+              ShortCut = 16436
+            end          
+            item
+              Command = ecGotoMarker5
+              ShortCut = 16437
+            end          
+            item
+              Command = ecGotoMarker6
+              ShortCut = 16438
+            end          
+            item
+              Command = ecGotoMarker7
+              ShortCut = 16439
+            end          
+            item
+              Command = ecGotoMarker8
+              ShortCut = 16440
+            end          
+            item
+              Command = ecGotoMarker9
+              ShortCut = 16441
+            end          
+            item
+              Command = ecSetMarker0
+              ShortCut = 24624
+            end          
+            item
+              Command = ecSetMarker1
+              ShortCut = 24625
+            end          
+            item
+              Command = ecSetMarker2
+              ShortCut = 24626
+            end          
+            item
+              Command = ecSetMarker3
+              ShortCut = 24627
+            end          
+            item
+              Command = ecSetMarker4
+              ShortCut = 24628
+            end          
+            item
+              Command = ecSetMarker5
+              ShortCut = 24629
+            end          
+            item
+              Command = ecSetMarker6
+              ShortCut = 24630
+            end          
+            item
+              Command = ecSetMarker7
+              ShortCut = 24631
+            end          
+            item
+              Command = ecSetMarker8
+              ShortCut = 24632
+            end          
+            item
+              Command = ecSetMarker9
+              ShortCut = 24633
+            end          
+            item
+              Command = EcFoldLevel1
+              ShortCut = 41009
+            end          
+            item
+              Command = EcFoldLevel2
+              ShortCut = 41010
+            end          
+            item
+              Command = EcFoldLevel3
+              ShortCut = 41011
+            end          
+            item
+              Command = EcFoldLevel4
+              ShortCut = 41012
+            end          
+            item
+              Command = EcFoldLevel5
+              ShortCut = 41013
+            end          
+            item
+              Command = EcFoldLevel6
+              ShortCut = 41014
+            end          
+            item
+              Command = EcFoldLevel7
+              ShortCut = 41015
+            end          
+            item
+              Command = EcFoldLevel8
+              ShortCut = 41016
+            end          
+            item
+              Command = EcFoldLevel9
+              ShortCut = 41017
+            end          
+            item
+              Command = EcFoldLevel0
+              ShortCut = 41008
+            end          
+            item
+              Command = EcFoldCurrent
+              ShortCut = 41005
+            end          
+            item
+              Command = EcUnFoldCurrent
+              ShortCut = 41003
+            end          
+            item
+              Command = EcToggleMarkupWord
+              ShortCut = 32845
+            end          
+            item
+              Command = ecNormalSelect
+              ShortCut = 24654
+            end          
+            item
+              Command = ecColumnSelect
+              ShortCut = 24643
+            end          
+            item
+              Command = ecLineSelect
+              ShortCut = 24652
+            end          
+            item
+              Command = ecTab
+              ShortCut = 9
+            end          
+            item
+              Command = ecShiftTab
+              ShortCut = 8201
+            end          
+            item
+              Command = ecMatchBracket
+              ShortCut = 24642
+            end          
+            item
+              Command = ecColSelUp
+              ShortCut = 40998
+            end          
+            item
+              Command = ecColSelDown
+              ShortCut = 41000
+            end          
+            item
+              Command = ecColSelLeft
+              ShortCut = 40997
+            end          
+            item
+              Command = ecColSelRight
+              ShortCut = 40999
+            end          
+            item
+              Command = ecColSelPageDown
+              ShortCut = 40994
+            end          
+            item
+              Command = ecColSelPageBottom
+              ShortCut = 57378
+            end          
+            item
+              Command = ecColSelPageUp
+              ShortCut = 40993
+            end          
+            item
+              Command = ecColSelPageTop
+              ShortCut = 57377
+            end          
+            item
+              Command = ecColSelLineStart
+              ShortCut = 40996
+            end          
+            item
+              Command = ecColSelLineEnd
+              ShortCut = 40995
+            end          
+            item
+              Command = ecColSelEditorTop
+              ShortCut = 57380
+            end          
+            item
+              Command = ecColSelEditorBottom
+              ShortCut = 57379
+            end>
+          MouseActions = <>
+          MouseTextActions = <>
+          MouseSelActions = <>
+          Lines.Strings = (
+            'SynEdit1'
+          )
+          VisibleSpecialChars = [vscSpace, vscTabAtLast]
+          SelectedColor.ForePriority = 50
+          SelectedColor.BackPriority = 50
+          SelectedColor.FramePriority = 50
+          SelectedColor.BoldPriority = 0
+          SelectedColor.ItalicPriority = 0
+          SelectedColor.UnderlinePriority = 0
+          SelectedColor.StrikeOutPriority = 0
+          SelectedColor.ExtendPastEol = True
+          IncrementColor.ExtendPastEol = False
+          BracketHighlightStyle = sbhsBoth
+          BracketMatchColor.Foreground = clNone
+          BracketMatchColor.Background = clNone
+          BracketMatchColor.Style = [fsBold]
+          FoldedCodeColor.Foreground = clGray
+          FoldedCodeColor.Background = clNone
+          FoldedCodeColor.FrameColor = clGray
+          MouseLinkColor.Foreground = clBlue
+          MouseLinkColor.Background = clNone
+          LineHighlightColor.Foreground = clNone
+          LineHighlightColor.Background = clNone
+          inline SynLeftGutterPartList1: TSynGutterPartList
+            object SynGutterMarks1: TSynGutterMarks
+              Width = 24
+              MouseActions = <>
+              MaxExtraMarksColums = 0
+              Options = [sgmoDeDuplicateMarksOnOverflow]
+              MarkupInfo.Background = clBtnFace
+              MarkupInfoCurrentLine.Foreground = clNone
+              MarkupInfoCurrentLine.Background = clNone
+            end
+            object SynGutterLineNumber1: TSynGutterLineNumber
+              Width = 17
+              MouseActions = <>
+              MarkupInfo.Background = clBtnFace
+              MarkupInfoCurrentLine.Foreground = clNone
+              MarkupInfoCurrentLine.Background = clNone
+              DigitCount = 2
+              ShowOnlyLineNumbersMultiplesOf = 1
+              ZeroStart = False
+              LeadingZeros = False
+            end
+            object SynGutterChanges1: TSynGutterChanges
+              Width = 4
+              MouseActions = <>
+              ModifiedColor = 59900
+              SavedColor = clGreen
+              MarkupInfo.Foreground = clGreen
+              MarkupInfo.FrameColor = 59900
+              MarkupInfoCurrentLine.Foreground = clNone
+              MarkupInfoCurrentLine.Background = clNone
+            end
+            object SynGutterSeparator1: TSynGutterSeparator
+              Width = 2
+              MouseActions = <>
+              MarkupInfo.Foreground = clGray
+              MarkupInfo.Background = clWhite
+              MarkupInfoCurrentLine.Foreground = clNone
+              MarkupInfoCurrentLine.Background = clNone
+            end
+            object SynGutterCodeFolding1: TSynGutterCodeFolding
+              MouseActions = <>
+              MarkupInfo.Foreground = clGray
+              MarkupInfoCurrentLine.Foreground = clNone
+              MarkupInfoCurrentLine.Background = clNone
+              MouseActionsExpanded = <>
+              MouseActionsCollapsed = <>
+            end
+          end
+        end
+        object Splitter1: TSplitter
+          Left = 1026
+          Height = 200
+          Top = 1
+          Width = 5
+          Align = alRight
+          ResizeAnchor = akRight
+        end
+        object RxDBGrid1: TRxDBGrid
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = CheckBox5
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Splitter1
+          AnchorSideBottom.Control = Panel6
+          AnchorSideBottom.Side = asrBottom
+          Left = 7
+          Height = 164
+          Top = 31
+          Width = 1013
+          ColumnDefValues.BlobText = '(данные)'
+          TitleButtons = False
+          AutoSort = False
+          Columns = <          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Attachment ID'
+              Width = 90
+              FieldName = 'MON$ATTACHMENT_ID'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Attachment DB'
+              Width = 250
+              FieldName = 'MON$ATTACHMENT_NAME'
+              EditButtons = <>
+              Filter.Font.Style = [fsItalic]
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Нет)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(Все значения)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Start'
+              Width = 110
+              FieldName = 'MON$TIMESTAMP'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'User name'
+              Width = 100
+              FieldName = 'MON$USER'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'User role'
+              Width = 100
+              FieldName = 'MON$ROLE'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Remote address'
+              Width = 120
+              FieldName = 'MON$REMOTE_ADDRESS'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Remote protocol'
+              Width = 100
+              FieldName = 'MON$REMOTE_PROTOCOL'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end          
+            item
+              Title.Alignment = taCenter
+              Title.Orientation = toHorizontal
+              Title.Caption = 'Remote process'
+              Width = 200
+              FieldName = 'MON$REMOTE_PROCESS'
+              EditButtons = <>
+              Filter.DropDownRows = 0
+              Filter.EmptyValue = '(Empty)'
+              Filter.NotEmptyValue = '(Не пусто)'
+              Filter.AllValue = '(All values)'
+              Filter.EmptyFont.Style = [fsItalic]
+              Filter.ItemIndex = -1
+              Footers = <>
+            end>
+          KeyStrokes = <          
+            item
+              Command = rxgcShowFindDlg
+              ShortCut = 16454
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowColumnsDlg
+              ShortCut = 16471
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowFilterDlg
+              ShortCut = 16468
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowSortDlg
+              ShortCut = 16467
+              Enabled = True
+            end          
+            item
+              Command = rxgcShowQuickFilter
+              ShortCut = 16465
+              Enabled = True
+            end          
+            item
+              Command = rxgcHideQuickFilter
+              ShortCut = 16456
+              Enabled = True
+            end          
+            item
+              Command = rxgcSelectAll
+              ShortCut = 16449
+              Enabled = True
+            end          
+            item
+              Command = rxgcDeSelectAll
+              ShortCut = 16429
+              Enabled = True
+            end          
+            item
+              Command = rxgcInvertSelection
+              ShortCut = 16426
+              Enabled = True
+            end          
+            item
+              Command = rxgcOptimizeColumnsWidth
+              ShortCut = 16427
+              Enabled = True
+            end          
+            item
+              Command = rxgcCopyCellValue
+              ShortCut = 16451
+              Enabled = True
+            end>
+          FooterOptions.Color = clYellow
+          FooterOptions.DrawFullLine = False
+          SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+          SearchOptions.FromStart = False
+          OptionsRx = []
+          FooterColor = clYellow
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          BorderSpacing.Around = 6
+          Color = clWindow
+          DrawFullLine = False
+          SelectedColor = clHighlight
+          DataSource = dsUsers
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ReadOnly = True
+          TabOrder = 2
+          TitleStyle = tsNative
+        end
+        object CheckBox5: TCheckBox
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Panel6
+          Left = 1
+          Height = 24
+          Top = 1
+          Width = 92
+          Caption = 'CheckBox5'
+          TabOrder = 3
+        end
+      end
+      object Splitter2: TSplitter
+        Cursor = crVSplit
+        Left = 0
+        Height = 5
+        Top = 506
+        Width = 1232
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
     end
     object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
+      Caption = 'Atachments'
       ClientHeight = 713
       ClientWidth = 1232
       object Panel4: TPanel
         AnchorSideLeft.Control = TabSheet2
-        AnchorSideTop.Control = Label9
         AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = Label8
+        AnchorSideRight.Control = CLabel
         AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = Label8
+        AnchorSideBottom.Control = CLabel
         Left = 6
         Height = 296
         Top = 32
@@ -476,7 +955,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Control = Panel4
           AnchorSideRight.Side = asrBottom
-          AnchorSideBottom.Control = SpinEdit1
           AnchorSideBottom.Side = asrBottom
           Left = 1
           Height = 81
@@ -548,7 +1026,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Width = 55
           Anchors = [akLeft, akBottom]
           Caption = 'Page size'
-          FocusControl = Panel2
           ParentColor = False
         end
         object Label3: TLabel
@@ -563,7 +1040,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Width = 68
           Anchors = [akLeft, akBottom]
           Caption = 'SQL Dialect'
-          FocusControl = ComboBox2
           ParentColor = False
         end
         object Label4: TLabel
@@ -578,7 +1054,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Width = 87
           Anchors = [akLeft, akBottom]
           Caption = 'Sweep interval'
-          FocusControl = SpinEdit1
           ParentColor = False
         end
         object Label5: TLabel
@@ -593,7 +1068,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Width = 72
           Anchors = [akLeft, akBottom]
           Caption = 'ODS version'
-          FocusControl = Panel2
           ParentColor = False
         end
         object Edit1: TEdit
@@ -741,6 +1215,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     PassWord = 'masterkey'
     StoreInDFM = False
     AfterConnect = UIBDataBase1AfterConnect
+    Connected = True
     AllowStreamedConnected = False
     DefTransactionRead = UIBTransaction1
     Left = 496
@@ -833,13 +1308,13 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       'order by'
       '  mon$attachments.MON$ATTACHMENT_ID'
     )
-    Left = 264
-    Top = 688
+    Left = 256
+    Top = 720
   end
   object dsUsers: TDataSource[11]
     DataSet = quUsers
-    Left = 224
-    Top = 688
+    Left = 216
+    Top = 720
   end
   object rxTransInfo: TRxMemoryData[12]
     FieldDefs = <    

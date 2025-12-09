@@ -42,6 +42,7 @@ type
     hlpDownloadNewVersion: TAction;
     MenuItem17: TMenuItem;
     MenuItem36: TMenuItem;
+    Timer1 : TTimer;
     tlsDataBaseComparer: TAction;
     BookmarkImages: TImageList;
     ilDBObjects: TImageList;
@@ -170,6 +171,7 @@ type
     procedure optEditorsExecute(Sender: TObject);
     procedure optEnironmentExecute(Sender: TObject);
     procedure sysExitExecute(Sender: TObject);
+    procedure Timer1Timer(Sender : TObject);
     procedure tlsDataBaseComparerExecute(Sender: TObject);
     procedure tlsDBInspectorExecute(Sender: TObject);
     procedure tlsExtractMetadataExecute(Sender: TObject);
@@ -273,6 +275,11 @@ end;
 procedure TfbManagerMainForm.sysExitExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfbManagerMainForm.Timer1Timer(Sender : TObject);
+begin
+  fbManDataInpectorForm.PingConnectedDB;
 end;
 
 procedure TfbManagerMainForm.tlsDataBaseComparerExecute(Sender: TObject);
