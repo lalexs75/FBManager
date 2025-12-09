@@ -227,8 +227,8 @@ begin
     begin
       for i:=0 to P.CountObject - 1 do
       begin
-        ComboBox1.Items.AddObject(P.Items[i].CaptionFullPatch, P.Items[i]);
-        //ComboBox1.Items.Objects[k]:=P.Items[i];
+        if not P.Items[i].SystemObject then
+          ComboBox1.Items.AddObject(P.Items[i].CaptionFullPatch, P.Items[i]);
       end;
     end;
 

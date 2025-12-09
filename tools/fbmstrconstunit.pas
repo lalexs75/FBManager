@@ -291,6 +291,7 @@ resourcestring
   sIndexExpression                  = 'Index expression';
   sOnFields                         = 'On fields';
   sActive                           = 'Active';
+  sInactive                         = 'Inactive';
   sUserPassword                     = 'User password';
   sCreateParams                     = 'Create params';
   sConnectionParams                 = 'Connection params';

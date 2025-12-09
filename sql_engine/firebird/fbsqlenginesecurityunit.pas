@@ -402,9 +402,10 @@ begin
   IBQ1:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sUsers['FBUserDetailAtribs']);
   try
     IBQ.Open;
-    FActive:=IBQ.Fields.ByNameAsBoolean['SEC$ACTIVE'];
+//    FActive:=IBQ.Fields.ByNameAsBoolean['SEC$ACTIVE'];
+    FActive:=StrToBool( TrimRight(IBQ.Fields.ByNameAsString['SEC$ACTIVE']));
     FFirstName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$FIRST_NAME']);
-    FIsAdmin:=IBQ.Fields.ByNameAsBoolean['SEC$ADMIN'];
+    FIsAdmin:=StrToBool( TrimRight(IBQ.Fields.ByNameAsString['SEC$ADMIN']));
     FLastName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$LAST_NAME']);
     FMiddleName:=TrimRight(IBQ.Fields.ByNameAsString['SEC$MIDDLE_NAME']);
     FPlugin:=TrimRight(IBQ.Fields.ByNameAsString['SEC$PLUGIN']);
@@ -436,6 +437,24 @@ end;
 procedure TFireBirUser.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);
+  List.Add(sActive + ' : ' + BoolToStr(FActive, sActive, sInactive));
+  if IsAdmin then
+    List.Add(sAdminRole);
+
+  if FirstName<>'' then
+    List.Add(sFirstName + ' : ' + FirstName);
+  if LastName<>'' then
+    List.Add(sLastName + ' : ' + LastName);
+  if MiddleName<>'' then
+    List.Add(sMiddleName + ' : ' + MiddleName);
+  if Plugin <> '' then
+    List.Add(sPlugin + ' : ' + Plugin);
+
+  if FDescription <> '' then
+  begin
+    List.Add(sDescription + ':');
+    List.Add(FDescription);
+  end;
 end;
 
 function TFireBirUser.CreateSQLObject: TSQLCommandDDL;

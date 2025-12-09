@@ -2759,6 +2759,10 @@ msgstr "Импорт из файла \"%s\""
 msgid "In"
 msgstr "Диапазон"
 
+#: fbmstrconstunit.sinactive
+msgid "Inactive"
+msgstr ""
+
 #: fbmstrconstunit.sincludeallfrom
 #, object-pascal-format
 msgctxt "fbmstrconstunit.sincludeallfrom"
