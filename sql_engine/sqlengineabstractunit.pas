@@ -395,7 +395,7 @@ type
     procedure Clear;virtual;
     procedure RefreshGroup;virtual;
     function GetObjectType: string;virtual; abstract; //метод возвращает наименование объекта для построения меню в инспекторе объектов
-    procedure FillListForNames(Items:TStrings; AFullNames: Boolean);
+    procedure FillListForNames(Items:TStrings; AFullNames: Boolean; AIncludeSysObj:boolean = true);
     function NewDBObject:TDBObject;virtual;
     function DropObject(AItem:TDBObject):boolean;virtual;
     function ObjByName(const AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
@@ -984,7 +984,7 @@ type
     function SQLPlan(aDataSet:TDataSet):string;virtual;
     function GetQueryControl:TSQLQueryControl;virtual; abstract;
     function DBObjectByName(const AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
-    procedure FillListForNames(Items:TStrings; ObjectKinds:TDBObjectKinds);
+    procedure FillListForNames(Items:TStrings; ObjectKinds:TDBObjectKinds; AIncludeSysObj:boolean = true);
     procedure InternalError(AErrorMessage:string);
     procedure InternalErrorEx(AErrorMessage:string; AParams : array of const);
 
@@ -2226,7 +2226,7 @@ begin
 end;
 
 procedure TSQLEngineAbstract.FillListForNames(Items: TStrings;
-  ObjectKinds: TDBObjectKinds);
+  ObjectKinds: TDBObjectKinds; AIncludeSysObj:boolean = true);
 
 procedure DoFill(AItem:TDBRootObject);
 var
@@ -2238,7 +2238,7 @@ begin
       DoFill(TDBRootObject(G));
 
     if AItem.DBObjectKind in ObjectKinds then
-      AItem.FillListForNames(Items, true);
+      AItem.FillListForNames(Items, true, AIncludeSysObj);
   end;
 end;
 
@@ -2452,7 +2452,7 @@ begin
   end;
 end;
 
-procedure TDBRootObject.FillListForNames(Items: TStrings; AFullNames: Boolean);
+procedure TDBRootObject.FillListForNames(Items: TStrings; AFullNames: Boolean; AIncludeSysObj:boolean = true);
 var
   P: TDBObject;
 begin
@@ -2469,7 +2469,7 @@ begin
 
   for P in FObjects do
   begin
-    if P.State = sdboEdit then
+    if (P.State = sdboEdit) and ((not P.SystemObject) or (AIncludeSysObj)) then
     begin
       if AFullNames then
         Items.AddObject(P.CaptionFullPatch, P)

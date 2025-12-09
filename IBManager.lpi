@@ -1983,6 +1983,9 @@
       <Item>
         <Name Value="EZSQLException"/>
       </Item>
+      <Item>
+        <Name Value="EConvertError"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

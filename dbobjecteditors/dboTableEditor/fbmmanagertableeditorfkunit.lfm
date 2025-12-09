@@ -1,25 +1,26 @@
 object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
   Left = 418
-  Height = 658
+  Height = 822
   Top = 110
-  Width = 905
+  Width = 1131
   Caption = 'Foreign key...'
-  ClientHeight = 658
-  ClientWidth = 905
-  OnCloseQuery = FormCloseQuery
+  ClientHeight = 822
+  ClientWidth = 1131
+  DesignTimePPI = 120
   Position = poScreenCenter
-  LCLVersion = '2.1.0.0'
+  LCLVersion = '4.99.0.0'
+  OnCloseQuery = FormCloseQuery
   object Label1: TLabel
     AnchorSideLeft.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Control = edtIndexName
     AnchorSideBottom.Side = asrBottom
-    Left = 12
-    Height = 17
-    Top = 178
-    Width = 70
+    Left = 16
+    Height = 23
+    Top = 218
+    Width = 100
     Anchors = [akLeft, akBottom]
-    BorderSpacing.Left = 6
+    BorderSpacing.Left = 8
     Caption = 'Index name'
     ParentColor = False
   end
@@ -28,11 +29,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = edtTableName
     AnchorSideTop.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 6
-    Height = 17
-    Top = 69
-    Width = 53
-    BorderSpacing.Around = 6
+    Left = 8
+    Height = 23
+    Top = 87
+    Width = 76
+    BorderSpacing.Around = 8
     Caption = 'FK name'
     ParentColor = False
   end
@@ -40,11 +41,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 6
-    Height = 17
-    Top = 6
-    Width = 73
-    BorderSpacing.Around = 6
+    Left = 8
+    Height = 23
+    Top = 8
+    Width = 103
+    BorderSpacing.Around = 8
     Caption = 'Table Name'
     ParentColor = False
   end
@@ -54,12 +55,12 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = RadioGroup1
-    Left = 88
-    Height = 34
-    Top = 161
-    Width = 694
+    Left = 124
+    Height = 40
+    Top = 201
+    Width = 848
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 6
+    BorderSpacing.Around = 8
     TabOrder = 0
   end
   object edtFKName: TEdit
@@ -67,12 +68,12 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Control = Label2
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = RadioGroup1
-    Left = 12
-    Height = 34
-    Top = 92
-    Width = 770
+    Left = 16
+    Height = 40
+    Top = 118
+    Width = 956
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 6
+    BorderSpacing.Around = 8
     TabOrder = 1
   end
   object edtTableName: TEdit
@@ -81,12 +82,12 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 12
-    Height = 34
-    Top = 29
-    Width = 887
+    Left = 16
+    Height = 40
+    Top = 39
+    Width = 1107
     Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Around = 6
+    BorderSpacing.Around = 8
     Color = clMoneyGreen
     Enabled = False
     ReadOnly = True
@@ -94,10 +95,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     Text = 'EditTableName'
   end
   object ButtonPanel1: TButtonPanel
-    Left = 6
-    Height = 46
-    Top = 606
-    Width = 893
+    Left = 8
+    Height = 47
+    Top = 767
+    Width = 1115
+    BorderSpacing.Around = 8
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
     HelpButton.Name = 'HelpButton'
@@ -117,14 +119,14 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = edtIndexName
     AnchorSideBottom.Side = asrBottom
-    Left = 788
-    Height = 76
-    Top = 119
-    Width = 111
+    Left = 980
+    Height = 90
+    Top = 151
+    Width = 143
     Anchors = [akRight, akBottom]
     AutoFill = True
     AutoSize = True
-    BorderSpacing.Right = 6
+    BorderSpacing.Right = 8
     Caption = 'Sort order'
     ChildSizing.LeftRightSpacing = 6
     ChildSizing.TopBottomSpacing = 6
@@ -134,8 +136,8 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 58
-    ClientWidth = 109
+    ClientHeight = 66
+    ClientWidth = 141
     ItemIndex = 0
     Items.Strings = (
       'Ascending'
@@ -147,14 +149,14 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = edtFKName
     AnchorSideTop.Side = asrBottom
-    Left = 6
-    Height = 23
-    Top = 132
-    Width = 101
-    BorderSpacing.Around = 6
+    Left = 8
+    Height = 27
+    Top = 166
+    Width = 135
+    BorderSpacing.Around = 8
     Caption = 'Create index'
-    OnChange = CheckBox1Change
     TabOrder = 5
+    OnChange = CheckBox1Change
   end
   object PageControl1: TPageControl
     AnchorSideLeft.Control = Owner
@@ -164,44 +166,44 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = ButtonPanel1
     Left = 0
-    Height = 399
-    Top = 201
-    Width = 905
+    Height = 510
+    Top = 249
+    Width = 1131
     ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akRight, akBottom]
     TabIndex = 0
     TabOrder = 6
     object TabSheet1: TTabSheet
       Caption = 'FKRule'
-      ClientHeight = 368
-      ClientWidth = 895
+      ClientHeight = 473
+      ClientWidth = 1121
       object ListBox1: TListBox
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = TabSheet1
         AnchorSideRight.Control = SpeedButton2
-        Left = 6
-        Height = 141
-        Top = 6
-        Width = 424
+        Left = 8
+        Height = 176
+        Top = 8
+        Width = 530
         Anchors = [akTop, akLeft, akRight]
-        BorderSpacing.Left = 6
-        BorderSpacing.Top = 6
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
         ItemHeight = 0
-        OnDblClick = ListBox1DblClick
         ScrollWidth = 422
         TabOrder = 0
         TopIndex = -1
+        OnDblClick = ListBox1DblClick
       end
       object SpeedButton2: TSpeedButton
         Tag = 1
         AnchorSideLeft.Control = TabSheet1
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = TabSheet1
-        Left = 436
-        Height = 26
-        Top = 6
-        Width = 23
-        BorderSpacing.Around = 6
+        Left = 546
+        Height = 32
+        Top = 8
+        Width = 29
+        BorderSpacing.Around = 8
         Glyph.Data = {
           46050000424D4605000000000000360000002800000012000000120000000100
           2000000000001005000064000000640000000000000000000000000000000000
@@ -255,11 +257,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = SpeedButton2
         AnchorSideTop.Side = asrBottom
-        Left = 436
-        Height = 25
-        Top = 38
-        Width = 23
-        BorderSpacing.Around = 6
+        Left = 546
+        Height = 31
+        Top = 48
+        Width = 29
+        BorderSpacing.Around = 8
         Glyph.Data = {
           46050000424D4605000000000000360000002800000012000000120000000100
           2000000000001005000064000000640000000000000000000000000000000000
@@ -313,27 +315,27 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Control = TabSheet1
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
-        Left = 465
-        Height = 141
-        Top = 6
-        Width = 424
+        Left = 583
+        Height = 176
+        Top = 8
+        Width = 530
         Anchors = [akTop, akLeft, akRight]
-        BorderSpacing.Around = 6
+        BorderSpacing.Around = 8
         ItemHeight = 0
-        OnDblClick = ListBox2DblClick
         ScrollWidth = 422
         TabOrder = 1
         TopIndex = -1
+        OnDblClick = ListBox2DblClick
       end
       object Label4: TLabel
         AnchorSideLeft.Control = TabSheet1
         AnchorSideTop.Control = ListBox1
         AnchorSideTop.Side = asrBottom
-        Left = 6
-        Height = 17
-        Top = 153
-        Width = 55
-        BorderSpacing.Around = 6
+        Left = 8
+        Height = 23
+        Top = 192
+        Width = 77
+        BorderSpacing.Around = 8
         Caption = 'On Table'
         FocusControl = ComboBox1
         ParentColor = False
@@ -344,16 +346,16 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
-        Left = 12
-        Height = 33
-        Top = 176
-        Width = 877
+        Left = 16
+        Height = 39
+        Top = 223
+        Width = 1097
         Anchors = [akTop, akLeft, akRight]
-        BorderSpacing.Around = 6
+        BorderSpacing.Around = 8
         ItemHeight = 0
-        OnChange = ComboBox1Change
         Style = csDropDownList
         TabOrder = 2
+        OnChange = ComboBox1Change
       end
       object ListBox3: TListBox
         AnchorSideLeft.Control = TabSheet1
@@ -361,26 +363,26 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = SpeedButton4
         AnchorSideBottom.Control = ComboBox2
-        Left = 6
-        Height = 112
-        Top = 215
-        Width = 423
+        Left = 8
+        Height = 152
+        Top = 270
+        Width = 529
         Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Left = 6
-        BorderSpacing.Top = 6
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
         ItemHeight = 0
-        OnDblClick = ListBox3DblClick
         ScrollWidth = 421
         TabOrder = 3
         TopIndex = -1
+        OnDblClick = ListBox3DblClick
       end
       object Label5: TLabel
         AnchorSideBottom.Control = ComboBox2
         AnchorSideBottom.Side = asrBottom
-        Left = 3
-        Height = 17
-        Top = 345
-        Width = 65
+        Left = 4
+        Height = 23
+        Top = 442
+        Width = 93
         Anchors = [akLeft, akBottom]
         Caption = 'On Update'
         FocusControl = ComboBox2
@@ -393,14 +395,14 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
-        Left = 74
-        Height = 29
-        Top = 333
-        Width = 355
+        Left = 105
+        Height = 35
+        Top = 430
+        Width = 432
         Anchors = [akLeft, akRight, akBottom]
-        BorderSpacing.Left = 6
-        BorderSpacing.Top = 6
-        BorderSpacing.Bottom = 6
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
         ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
@@ -418,11 +420,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideLeft.Control = TabSheet1
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = ListBox3
-        Left = 435
-        Height = 26
-        Top = 221
-        Width = 24
-        BorderSpacing.Around = 6
+        Left = 545
+        Height = 33
+        Top = 278
+        Width = 30
+        BorderSpacing.Around = 8
         Glyph.Data = {
           46050000424D4605000000000000360000002800000012000000120000000100
           2000000000001005000064000000640000000000000000000000000000000000
@@ -476,11 +478,11 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = SpeedButton4
         AnchorSideTop.Side = asrBottom
-        Left = 435
-        Height = 26
-        Top = 253
-        Width = 24
-        BorderSpacing.Around = 6
+        Left = 545
+        Height = 33
+        Top = 319
+        Width = 30
+        BorderSpacing.Around = 8
         Glyph.Data = {
           46050000424D4605000000000000360000002800000012000000120000000100
           2000000000001005000064000000640000000000000000000000000000000000
@@ -536,26 +538,26 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Control = TabSheet1
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = ComboBox3
-        Left = 465
-        Height = 112
-        Top = 215
-        Width = 424
+        Left = 583
+        Height = 152
+        Top = 270
+        Width = 530
         Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Around = 6
+        BorderSpacing.Around = 8
         ItemHeight = 0
-        OnDblClick = ListBox4DblClick
         ScrollWidth = 422
         TabOrder = 5
         TopIndex = -1
+        OnDblClick = ListBox4DblClick
       end
       object Label6: TLabel
         AnchorSideLeft.Control = ListBox4
         AnchorSideBottom.Control = ComboBox3
         AnchorSideBottom.Side = asrBottom
-        Left = 465
-        Height = 17
-        Top = 345
-        Width = 59
+        Left = 583
+        Height = 23
+        Top = 442
+        Width = 85
         Anchors = [akLeft, akBottom]
         Caption = 'On delete'
         FocusControl = ComboBox3
@@ -568,12 +570,12 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = TabSheet1
         AnchorSideBottom.Side = asrBottom
-        Left = 530
-        Height = 29
-        Top = 333
-        Width = 359
+        Left = 676
+        Height = 35
+        Top = 430
+        Width = 437
         Anchors = [akLeft, akRight, akBottom]
-        BorderSpacing.Around = 6
+        BorderSpacing.Around = 8
         ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
@@ -589,13 +591,13 @@ object fbmManagerTableEditorFKForm: TfbmManagerTableEditorFKForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Description'
-      ClientHeight = 368
-      ClientWidth = 895
+      ClientHeight = 473
+      ClientWidth = 1121
       object Memo1: TMemo
         Left = 0
-        Height = 349
+        Height = 473
         Top = 0
-        Width = 895
+        Width = 1121
         Align = alClient
         TabOrder = 0
       end

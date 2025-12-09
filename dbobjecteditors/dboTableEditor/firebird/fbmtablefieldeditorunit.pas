@@ -479,7 +479,7 @@ end;
 procedure TfbmTableFieldEditorForm.FillTablesList;
 begin
   cbFKTableName.Items.Clear;
-  FTable.OwnerDB.FillListForNames(cbFKTableName.Items, [okPartitionTable, okTable]);
+  FTable.OwnerDB.FillListForNames(cbFKTableName.Items, [okPartitionTable, okTable], false);
 
   if cbFKTableName.Items.Count>0 then
   begin

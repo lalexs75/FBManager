@@ -2670,6 +2670,10 @@ msgstr ""
 msgid "In"
 msgstr ""
 
+#: fbmstrconstunit.sinactive
+msgid "Inactive"
+msgstr ""
+
 #: fbmstrconstunit.sincludeallfrom
 #, object-pascal-format
 msgctxt "fbmstrconstunit.sincludeallfrom"
