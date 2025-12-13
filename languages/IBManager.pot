@@ -259,6 +259,10 @@ msgstr ""
 msgid "Attribute value"
 msgstr ""
 
+#: fbmstrconstunit.sautoboth
+msgid "Auto both"
+msgstr ""
+
 #: fbmstrconstunit.sautofillcollumnwidth
 msgid "Auto fill collumn width"
 msgstr ""
@@ -269,6 +273,10 @@ msgstr ""
 
 #: fbmstrconstunit.sautograntoncompileobject
 msgid "Auto grant on compile object"
+msgstr ""
+
+#: fbmstrconstunit.sautohorizontal
+msgid "Auto horizontal"
 msgstr ""
 
 #: fbmstrconstunit.sautoincfield
@@ -290,6 +298,10 @@ msgstr ""
 #: fbmstrconstunit.sautovacuumenabled
 msgctxt "fbmstrconstunit.sautovacuumenabled"
 msgid "Autovacuum enabled"
+msgstr ""
+
+#: fbmstrconstunit.sautovertical
+msgid "Auto vertical"
 msgstr ""
 
 #: fbmstrconstunit.savallabletags
@@ -2597,6 +2609,10 @@ msgstr ""
 msgid "History"
 msgstr ""
 
+#: fbmstrconstunit.shorizontal
+msgid "Horizontal"
+msgstr ""
+
 #: fbmstrconstunit.shostname
 msgid "Host name"
 msgstr ""
@@ -4868,6 +4884,10 @@ msgstr ""
 msgid "Script modified. Save?"
 msgstr ""
 
+#: fbmstrconstunit.sscrollbarstyle
+msgid "Scroll bar style"
+msgstr ""
+
 #: fbmstrconstunit.ssearchcaption
 msgid "Search"
 msgstr ""
@@ -6158,12 +6178,30 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: fbmstrconstunit.svertical
+msgid "Vertical"
+msgstr ""
+
 #: fbmstrconstunit.sview
 msgid "View"
 msgstr ""
 
 #: fbmstrconstunit.sviews
 msgid "Views"
+msgstr ""
+
+#: fbmstrconstunit.svisualoptions
+msgctxt "fbmstrconstunit.svisualoptions"
+msgid "Visual options"
+msgstr ""
+
+#: fbmstrconstunit.svisualoptions1
+msgid "Visual options..."
+msgstr ""
+
+#: fbmstrconstunit.svisualoptions1hint
+msgctxt "fbmstrconstunit.svisualoptions1hint"
+msgid "Visual options"
 msgstr ""
 
 #: fbmstrconstunit.swarning

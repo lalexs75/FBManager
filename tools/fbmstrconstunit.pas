@@ -173,6 +173,15 @@ resourcestring
   sTypeOf                           = 'TypeOf';
   sDatabaseUser                     = 'Database user';
   sConnectionNameNotSpecified       = 'Connection name (Alis) not specified';
+  sVisualOptions                    = 'Visual options';
+  sVisualOptions1                   = 'Visual options...';
+  sVisualOptions1Hint               = 'Visual options';
+  sScrollBarStyle                   = 'Scroll bar style';
+  sHorizontal                       = 'Horizontal';
+  sVertical                         = 'Vertical';
+  sAutoHorizontal                   = 'Auto horizontal';
+  sAutoVertical                     = 'Auto vertical';
+  sAutoBoth                         = 'Auto both';
 
   sExtractMetaForm                  = 'Extract metadata from DB';
   sDatabase                         = 'Database';

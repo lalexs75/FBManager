@@ -275,6 +275,10 @@ msgstr ""
 msgid "Attribute value"
 msgstr ""
 
+#: fbmstrconstunit.sautoboth
+msgid "Auto both"
+msgstr ""
+
 #: fbmstrconstunit.sautofillcollumnwidth
 msgid "Auto fill collumn width"
 msgstr "Подбор ширины колонок"
@@ -286,6 +290,10 @@ msgstr "Автоматический подбор ширины колонок п
 #: fbmstrconstunit.sautograntoncompileobject
 msgid "Auto grant on compile object"
 msgstr "Автоматическая выдача привелегий при компиляции объектов"
+
+#: fbmstrconstunit.sautohorizontal
+msgid "Auto horizontal"
+msgstr ""
 
 #: fbmstrconstunit.sautoincfield
 msgid "Auto increment field"
@@ -307,6 +315,10 @@ msgstr "Авто очистка"
 msgctxt "fbmstrconstunit.sautovacuumenabled"
 msgid "Autovacuum enabled"
 msgstr "Индивидуальные настройки AUTOVACUUM"
+
+#: fbmstrconstunit.sautovertical
+msgid "Auto vertical"
+msgstr ""
 
 #: fbmstrconstunit.savallabletags
 msgid "Avallable tags:"
@@ -2683,6 +2695,10 @@ msgstr "Цвет оперативных подсказок"
 msgid "History"
 msgstr "История"
 
+#: fbmstrconstunit.shorizontal
+msgid "Horizontal"
+msgstr ""
+
 #: fbmstrconstunit.shostname
 msgctxt "fbmstrconstunit.shostname"
 msgid "Host name"
@@ -5025,6 +5041,10 @@ msgstr "Схемы"
 msgid "Script modified. Save?"
 msgstr "Текст SQL скрипта изменён. Сохранить его?"
 
+#: fbmstrconstunit.sscrollbarstyle
+msgid "Scroll bar style"
+msgstr ""
+
 #: fbmstrconstunit.ssearchcaption
 msgctxt "fbmstrconstunit.ssearchcaption"
 msgid "Search"
@@ -6355,6 +6375,10 @@ msgstr "Тип переменной"
 msgid "Version"
 msgstr "Версия"
 
+#: fbmstrconstunit.svertical
+msgid "Vertical"
+msgstr ""
+
 #: fbmstrconstunit.sview
 msgctxt "fbmstrconstunit.sview"
 msgid "View"
@@ -6364,6 +6388,20 @@ msgstr "Представление"
 msgctxt "fbmstrconstunit.sviews"
 msgid "Views"
 msgstr "Представления"
+
+#: fbmstrconstunit.svisualoptions
+msgctxt "fbmstrconstunit.svisualoptions"
+msgid "Visual options"
+msgstr ""
+
+#: fbmstrconstunit.svisualoptions1
+msgid "Visual options..."
+msgstr ""
+
+#: fbmstrconstunit.svisualoptions1hint
+msgctxt "fbmstrconstunit.svisualoptions1hint"
+msgid "Visual options"
+msgstr ""
 
 #: fbmstrconstunit.swarning
 msgid "Warning"

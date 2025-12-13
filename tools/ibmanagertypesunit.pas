@@ -739,6 +739,7 @@ begin
   inherited CreateObject(aOwner, Self, nil);
   InitInternalObjects;
   SQLEngineName:=ADB.FieldByName('db_database_sql_engine').AsString;
+//  if SQLEngineName = 'TOIFolderList' then SQLEngineName:='TSQLEnginePostgre';
   InitSQLEngine(CreateSQLEngine(SQLEngineName));
 
   if Assigned(FSQLEngine) then
@@ -760,6 +761,7 @@ begin
     FSortOrder:=ADB.FieldByName('db_database_sort_order').AsInteger;
   end
   else
+//    ErrorBox('Unknow SQL engine - %s',[SQLEngineName]);
     raise Exception.CreateFmt('Unknow SQL engine - %s',[SQLEngineName]);
 
   MakeSQLHistoryTable;

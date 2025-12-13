@@ -39,6 +39,8 @@ type
   { TfbManagerMainForm }
 
   TfbManagerMainForm = class(TForm)
+    MenuItem37: TMenuItem;
+    optVisualOptions: TAction;
     hlpDownloadNewVersion: TAction;
     MenuItem17: TMenuItem;
     MenuItem36: TMenuItem;
@@ -163,6 +165,7 @@ type
     procedure InspectorCloseButtonClick(Sender: TObject);
     procedure optKeyboardTemplatesExecute(Sender: TObject);
     procedure optObjectTemplatesExecute(Sender: TObject);
+    procedure optVisualOptionsExecute(Sender: TObject);
     procedure Speedbutton4Click(Sender: TObject);
     procedure dbRegisterExecute(Sender: TObject);
     procedure dbUnregisterExecute(Sender: TObject);
@@ -199,10 +202,9 @@ var
 implementation
 uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
   fbmEditorOptionsUnit, fbmStrConstUnit, fbmUserDataBaseUnit, fbmsqlscript,
-  fbmCreateConnectionUnit, fbmObjectTemplatesunit,
+  fbmCreateConnectionUnit, fbmObjectTemplatesunit, fdbmVisualOptionsUnit,
   LCLIntf, LCLType, rxAppUtils, fdbm_SynEditorCompletionHintUnit,
   fbm_VisualEditorsAbstractUnit, fdbm_PagedDialogUnit, LCLVersion,
-
   {$IFDEF USE_SHAMANGRAD}
   fbmShowNewUnit,
   fbmErrorSubmitUnit,
@@ -409,6 +411,8 @@ begin
   optKeyboardTemplates.Hint:=sMenuKeyboardTemplatesHint;
   optObjectTemplates.Caption:=sMenuObjectTemplates;
   optObjectTemplates.Hint:=sMenuObjectTemplatesHint;
+  optVisualOptions.Caption:=sVisualOptions1;
+  optVisualOptions.Hint:=sVisualOptions1Hint;
 
   WindowItems.Caption:=sMenuWindows;
   wndReOrder.Caption:=sMenuReOrder;
@@ -596,6 +600,20 @@ begin
     //StoreParams;
   end;
   fbmObjectTemplatesForm.Free;
+end;
+
+procedure TfbManagerMainForm.optVisualOptionsExecute(Sender: TObject);
+begin
+  fdbmVisualOptionsForm:=TfdbmVisualOptionsForm.Create(Application);
+  try
+    if fdbmVisualOptionsForm.ShowModal = mrOk then
+    begin
+      UserDBModule.SaveConfig;
+      LM_SendToAll(LM_EDITOR_CHANGE_PARMAS);
+    end;
+  finally
+    fdbmVisualOptionsForm.Free;
+  end;
 end;
 
 procedure TfbManagerMainForm.ShowDataInspector;

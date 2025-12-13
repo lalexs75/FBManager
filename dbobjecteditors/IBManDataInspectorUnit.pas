@@ -916,6 +916,7 @@ begin
     Constraints.MinWidth:=0;
   end;
   TreeView1.HotTrack:=ConfigValues.ByNameAsBoolean('oiHotTrack', false);
+  TreeView1.ScrollBars:=TScrollStyle(ConfigValues.ByNameAsInteger('VO/OI/ScrollBars', Ord(ssAutoBoth)));
 end;
 
 
