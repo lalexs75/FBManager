@@ -277,7 +277,7 @@ msgstr ""
 
 #: fbmstrconstunit.sautoboth
 msgid "Auto both"
-msgstr ""
+msgstr "Автоматически и то и другое"
 
 #: fbmstrconstunit.sautofillcollumnwidth
 msgid "Auto fill collumn width"
@@ -293,7 +293,7 @@ msgstr "Автоматическая выдача привелегий при к
 
 #: fbmstrconstunit.sautohorizontal
 msgid "Auto horizontal"
-msgstr ""
+msgstr "Автоматически горизонтально"
 
 #: fbmstrconstunit.sautoincfield
 msgid "Auto increment field"
@@ -318,7 +318,7 @@ msgstr "Индивидуальные настройки AUTOVACUUM"
 
 #: fbmstrconstunit.sautovertical
 msgid "Auto vertical"
-msgstr ""
+msgstr "Автоматически вертикально"
 
 #: fbmstrconstunit.savallabletags
 msgid "Avallable tags:"
@@ -2697,7 +2697,7 @@ msgstr "История"
 
 #: fbmstrconstunit.shorizontal
 msgid "Horizontal"
-msgstr ""
+msgstr "Горизонтально"
 
 #: fbmstrconstunit.shostname
 msgctxt "fbmstrconstunit.shostname"
@@ -6377,7 +6377,7 @@ msgstr "Версия"
 
 #: fbmstrconstunit.svertical
 msgid "Vertical"
-msgstr ""
+msgstr "Вертикально"
 
 #: fbmstrconstunit.sview
 msgctxt "fbmstrconstunit.sview"
@@ -6392,16 +6392,16 @@ msgstr "Представления"
 #: fbmstrconstunit.svisualoptions
 msgctxt "fbmstrconstunit.svisualoptions"
 msgid "Visual options"
-msgstr ""
+msgstr "Визуальные параметры"
 
 #: fbmstrconstunit.svisualoptions1
 msgid "Visual options..."
-msgstr ""
+msgstr "Визуальные параметры..."
 
 #: fbmstrconstunit.svisualoptions1hint
 msgctxt "fbmstrconstunit.svisualoptions1hint"
 msgid "Visual options"
-msgstr ""
+msgstr "Визуальные параметры"
 
 #: fbmstrconstunit.swarning
 msgid "Warning"
