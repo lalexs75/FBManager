@@ -1,0 +1,4 @@
+inherited fdbmVisualOptionsForm: TfdbmVisualOptionsForm
+  Caption = 'Visual options'
+  OnClose = FormClose
+end
