@@ -1,0 +1,164 @@
+object assistMainFrame: TassistMainFrame
+  Left = 0
+  Height = 427
+  Top = 0
+  Width = 536
+  ClientHeight = 427
+  ClientWidth = 536
+  DesignTimePPI = 120
+  LCLVersion = '4.99.0.0'
+  ParentFont = False
+  TabOrder = 0
+  DesignLeft = 713
+  DesignTop = 271
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 427
+    Top = 0
+    Width = 536
+    ActivePage = TabSheet3
+    Align = alClient
+    TabIndex = 2
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Fields'
+      ClientHeight = 390
+      ClientWidth = 526
+      object RxDBGrid1: TRxDBGrid
+        Left = 0
+        Height = 390
+        Top = 0
+        Width = 526
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+        Align = alClient
+        Color = clWindow
+        DrawFullLine = False
+        SelectedColor = clHighlight
+        DataSource = dsFields
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Propertys'
+      ClientHeight = 390
+      ClientWidth = 526
+      object RxDBVerticalGrid1: TRxDBVerticalGrid
+        Left = 0
+        Height = 390
+        Top = 0
+        Width = 526
+        Align = alClient
+        Color = clWindow
+        SelectedColor = clHighlight
+        GridDefValues.BlobText = '(данные)'
+        DataCoumn.Title.Caption = 'Title'
+        DataSource = dsProps
+        LabelCoumn.ReadOnly = True
+        LabelCoumn.Title.Caption = 'Title'
+        Options = []
+        Rows = <>
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Description'
+      ClientHeight = 390
+      ClientWidth = 526
+      object Memo1: TMemo
+        Left = 0
+        Height = 390
+        Top = 0
+        Width = 526
+        Align = alClient
+        Lines.Strings = (
+          'Memo1'
+        )
+        TabOrder = 0
+      end
+    end
+  end
+  object rxFields: TRxMemoryData
+    FieldDefs = <>
+    PacketRecords = 0
+    Left = 248
+    Top = 176
+  end
+  object dsFields: TDataSource
+    DataSet = rxFields
+    Left = 209
+    Top = 176
+  end
+  object rxProps: TRxMemoryData
+    FieldDefs = <>
+    PacketRecords = 0
+    Left = 251
+    Top = 280
+  end
+  object dsProps: TDataSource
+    DataSet = rxProps
+    Left = 208
+    Top = 280
+  end
+end
