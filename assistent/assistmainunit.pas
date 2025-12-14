@@ -25,8 +25,8 @@ unit assistMainUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, ComCtrls, StdCtrls, DB, RxDBGrid, rxmemds, ibmanagertypesunit,
-  rxdbverticalgrid;
+  Classes, SysUtils, Forms, Controls, ComCtrls, StdCtrls, DB, RxDBGrid, rxmemds, assistTypesUnit,
+  ibmanagertypesunit, fbmOIFoldersUnit,  rxdbverticalgrid;
 
 type
 
@@ -38,20 +38,27 @@ type
     Memo1: TMemo;
     PageControl1: TPageControl;
     RxDBGrid1: TRxDBGrid;
-    RxDBVerticalGrid1: TRxDBVerticalGrid;
+    RxDBGrid2: TRxDBGrid;
     rxFields: TRxMemoryData;
     rxProps: TRxMemoryData;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
+    rxPropsPROP_NAME: TStringField;
+    rxPropsPROP_VALUE: TStringField;
+    tabFields: TTabSheet;
+    tabProperty: TTabSheet;
+    tabDescription: TTabSheet;
   private
+    FItems:TAssistentItems;
     procedure ClearAssistData;
   public
-    procedure UpdateAssistent(ARec:TDBInspectorRecord);
+    constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
+    function UpdateAssistent(ARec:TDBInspectorRecord):Boolean;
+    procedure UpdateAssistentFolder(ARec:TOIFolder);
+    procedure Localize;
   end;
 
 implementation
-uses assistTypesUnit;
+uses fbmStrConstUnit;
 
 {$R *.lfm}
 
@@ -62,14 +69,72 @@ begin
   rxFields.CloseOpen;
   rxProps.CloseOpen;
   Memo1.Clear;
+  FItems.Clear;
 end;
 
-procedure TassistMainFrame.UpdateAssistent(ARec: TDBInspectorRecord);
+constructor TassistMainFrame.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+  FItems:=TAssistentItems.Create;
+end;
+
+destructor TassistMainFrame.Destroy;
+begin
+  FreeAndNil(FItems);
+  inherited Destroy;
+end;
+
+function TassistMainFrame.UpdateAssistent(ARec: TDBInspectorRecord): Boolean;
+var
+  R: TAssistentItem;
 begin
   ClearAssistData;
-  if not Assigned(ARec) then Exit;
-  ARec.
+  if not Assigned(ARec) then Exit(false);
+  Result:=ARec.SetSqlAssistentData(FItems);
+  Memo1.Text:=FItems.Description;
+  RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=FItems.ColName;
+  RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=FItems.ColValue;
+  for R in FItems do
+  begin
+    rxProps.Append;
+    rxPropsPROP_NAME.AsString:=R.Name;
+    rxPropsPROP_VALUE.AsString:=R.Value;
+    rxProps.Post;
+  end;
+  rxProps.First;
+end;
 
+procedure TassistMainFrame.UpdateAssistentFolder(ARec: TOIFolder);
+var
+  R: TAssistentItem;
+begin
+  ClearAssistData;
+  tabFields.TabVisible:=false;
+  tabProperty.TabVisible:=true;
+  tabDescription.TabVisible:=true;
+  if not Assigned(ARec) then Exit;
+  ARec.SetSqlAssistentData(FItems);
+  Memo1.Text:=FItems.Description;
+  RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=FItems.ColName;
+  RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=FItems.ColValue;
+  for R in FItems do
+  begin
+    rxProps.Append;
+    rxPropsPROP_NAME.AsString:=R.Name;
+    rxPropsPROP_VALUE.AsString:=R.Value;
+    rxProps.Post;
+  end;
+  rxProps.First;
+end;
+
+procedure TassistMainFrame.Localize;
+begin
+  tabFields.Caption:=sField;
+  tabProperty.Caption:=sProperty;
+  tabDescription.Caption:=sDescription;
+
+  RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=sObjects;
+  RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=sDescription;
 end;
 
 end.

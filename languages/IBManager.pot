@@ -521,7 +521,7 @@ msgid "Client hostname"
 msgstr ""
 
 #: fbmstrconstunit.sclientlib
-msgid "Client lib     = "
+msgid "Client lib"
 msgstr ""
 
 #: fbmstrconstunit.sclientlibraryname
@@ -1138,7 +1138,7 @@ msgid "Days"
 msgstr ""
 
 #: fbmstrconstunit.sdbcharset
-msgid "DB Char Set    = "
+msgid "DB Char Set"
 msgstr ""
 
 #: fbmstrconstunit.sdbffilesfolder
@@ -1146,11 +1146,11 @@ msgid "Dbf files folder"
 msgstr ""
 
 #: fbmstrconstunit.sdbfilesize
-msgid "DB file size   = "
+msgid "DB file size"
 msgstr ""
 
 #: fbmstrconstunit.sdbname
-msgid "Data base name = "
+msgid "Data base name"
 msgstr ""
 
 #: fbmstrconstunit.sdbnavhintcancel
@@ -1522,7 +1522,7 @@ msgid "Deterministic"
 msgstr ""
 
 #: fbmstrconstunit.sdialect
-msgid "Dialect        = "
+msgid "Dialect"
 msgstr ""
 
 #: fbmstrconstunit.sdialog
@@ -3704,7 +3704,7 @@ msgid "Object type's"
 msgstr ""
 
 #: fbmstrconstunit.sodsversion
-msgid "ODS version    = "
+msgid "ODS version"
 msgstr ""
 
 #: fbmstrconstunit.soicopyalllines
@@ -4027,7 +4027,7 @@ msgid "Page "
 msgstr ""
 
 #: fbmstrconstunit.spagecount
-msgid "Page count     = "
+msgid "Page count"
 msgstr ""
 
 #: fbmstrconstunit.spages
@@ -4039,10 +4039,7 @@ msgid "Pages count"
 msgstr ""
 
 #: fbmstrconstunit.spagesize
-msgid "Page size      = "
-msgstr ""
-
-#: fbmstrconstunit.spagesize1
+msgctxt "fbmstrconstunit.spagesize"
 msgid "Page size"
 msgstr ""
 
@@ -4747,6 +4744,7 @@ msgid "Rolback transaction"
 msgstr ""
 
 #: fbmstrconstunit.srole
+msgctxt "fbmstrconstunit.srole"
 msgid "Role"
 msgstr ""
 
@@ -4759,7 +4757,8 @@ msgid "Grant for user"
 msgstr ""
 
 #: fbmstrconstunit.srolename
-msgid "Role           = "
+msgctxt "fbmstrconstunit.srolename"
+msgid "Role"
 msgstr ""
 
 #: fbmstrconstunit.srolename1
@@ -5004,10 +5003,12 @@ msgid "Server"
 msgstr ""
 
 #: fbmstrconstunit.sservername
-msgid "Server name    = "
+msgctxt "fbmstrconstunit.sservername"
+msgid "Server name"
 msgstr ""
 
 #: fbmstrconstunit.sservername1
+msgctxt "fbmstrconstunit.sservername1"
 msgid "Server name"
 msgstr ""
 
@@ -5020,10 +5021,12 @@ msgid "Server type"
 msgstr ""
 
 #: fbmstrconstunit.sserverversion
-msgid "Server version = "
+msgctxt "fbmstrconstunit.sserverversion"
+msgid "Server version"
 msgstr ""
 
 #: fbmstrconstunit.sserverversion1
+msgctxt "fbmstrconstunit.sserverversion1"
 msgid "Server version"
 msgstr ""
 
@@ -6070,7 +6073,8 @@ msgid "UserMapping"
 msgstr ""
 
 #: fbmstrconstunit.susername
-msgid "UserName       = "
+msgctxt "fbmstrconstunit.susername"
+msgid "User name"
 msgstr ""
 
 #: fbmstrconstunit.susername1

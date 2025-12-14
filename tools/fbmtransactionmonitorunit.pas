@@ -181,7 +181,7 @@ begin
   Label1.Caption:=sDatabase;
   TabSheet2.Caption:=sGeneral;
 
-  Label2.Caption:=sPageSize1;
+  Label2.Caption:=sPageSize;
   Label3.Caption:=sSQLDialect;
   Label4.Caption:=sSweepInterval;
   Label5.Caption:=sODSVersion;

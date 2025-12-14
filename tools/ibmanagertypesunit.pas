@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, ComCtrls, Forms, Contnrs, SynHighlighterSQL, ZDataset, ZSqlUpdate, sqlEngineTypes,
-  Graphics, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit, fbmSqlParserUnit,
+  Graphics, SQLEngineCommonTypesUnit, SQLEngineAbstractUnit, fbmSqlParserUnit, assistTypesUnit,
   DB, rxmemds, fbmSQLEditorClassesUnit, fbmToolsUnit, fbmOIFoldersUnit,
   fbm_VisualEditorsAbstractUnit, fdmAbstractEditorUnit, sqlObjects;
 
@@ -110,6 +110,7 @@ type
     procedure UpdateCaption1;
     procedure ShowSQLEditor;virtual;
     procedure SetSqlAssistentData(List:TStrings);virtual;
+    function SetSqlAssistentData(List: TAssistentItems):Boolean; virtual;
     procedure ObjectEditorSave;
     procedure ObjectEditorRestore;
     procedure SetFocus;
@@ -188,6 +189,7 @@ type
     function Edit:boolean;override;
     procedure ShowObject;override;
     procedure SetSqlAssistentData(List:TStrings);override;
+    function SetSqlAssistentData(List: TAssistentItems):Boolean; override;
     procedure ShowSQLEditor;override;
     procedure Refresh;override;
     function NewObject:TDBObject;override;
@@ -865,6 +867,13 @@ begin
   SQLEngine.SetSqlAssistentData(List);
 end;
 
+function TDataBaseRecord.SetSqlAssistentData(List: TAssistentItems): Boolean;
+begin
+  SQLEngine.SetSqlAssistentData(List);
+  List.ColName:=sProperty;
+  List.ColValue:=sValue;
+end;
+
 procedure TDataBaseRecord.ShowSQLEditor;
 begin
   if Connected and (upSqlEditor in SQLEngine.UIParams) then
@@ -1535,15 +1544,23 @@ procedure TDBInspectorRecord.SetSqlAssistentData(List: TStrings);
 var
   i:integer;
 begin
-  if RecordType = rtDBGroup then
+{  if RecordType = rtDBGroup then
   begin
     List.Clear;
     for i:=0 to ObjectCount-1 do
       List.Add(ObjectName[i]);
   end
-  else
+  else }
   if Assigned(DBObject) then
     DBObject.SetSqlAssistentData(List);
+end;
+
+function TDBInspectorRecord.SetSqlAssistentData(List: TAssistentItems): Boolean;
+begin
+  if Assigned(DBObject) then
+    Result:=DBObject.SetSqlAssistentDataItems(List)
+  else
+    Result:=false;
 end;
 
 procedure TDBInspectorRecord.ObjectEditorSave;

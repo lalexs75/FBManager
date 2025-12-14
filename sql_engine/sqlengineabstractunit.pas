@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, DB, SQLEngineCommonTypesUnit, contnrs, sqlEngineTypes,
-  SQLEngineInternalToolsUnit, sqlObjects, fbmSqlParserUnit;
+  SQLEngineInternalToolsUnit, sqlObjects, fbmSqlParserUnit, assistTypesUnit;
 
 type
   ESQLEngineException = class(Exception);
@@ -324,6 +324,8 @@ type
     procedure Edit;
     procedure RefreshEditor;
     procedure OnCloseEditorWindow;virtual;
+    function SetSqlAssistentDataItems(const List: TAssistentItems):boolean; virtual;
+    procedure SetSqlAssistentData(const List: TStrings); virtual;
     function CreateSQLObject:TSQLCommandDDL;virtual; deprecated;
     function GetDDLSQLObject(ACommandType:TDDLCommandType):TSQLCommandDDL;virtual;
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean;virtual;
@@ -341,7 +343,6 @@ type
     function AfterCreateObject:boolean;virtual;
 
     procedure FillFieldList(List:TStrings; ACharCase:TCharCaseOptions; AFullNames:Boolean);virtual;
-    procedure SetSqlAssistentData(const List: TStrings); virtual;
     procedure RefreshObject;virtual;
     procedure RefreshDependencies;virtual;
     procedure RefreshDependenciesField(Rec:TDependRecord);virtual;
@@ -396,6 +397,8 @@ type
     procedure RefreshGroup;virtual;
     function GetObjectType: string;virtual; abstract; //метод возвращает наименование объекта для построения меню в инспекторе объектов
     procedure FillListForNames(Items:TStrings; AFullNames: Boolean; AIncludeSysObj:boolean = true);
+    function SetSqlAssistentDataItems(const List: TAssistentItems):boolean; override;
+//
     function NewDBObject:TDBObject;virtual;
     function DropObject(AItem:TDBObject):boolean;virtual;
     function ObjByName(const AName:string; ARefreshObject:boolean = true):TDBObject;virtual;
@@ -970,6 +973,7 @@ type
     procedure Store(const AData: TDataSet); virtual;
 
     procedure SetSqlAssistentData(const List: TStrings); virtual;
+    procedure SetSqlAssistentData(const List: TAssistentItems); virtual;
     procedure FillCharSetList(const List: TStrings); virtual;
     procedure FillCollationList(const ACharSet:string; const List: TStrings); virtual;
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):boolean; virtual;
@@ -2153,6 +2157,23 @@ begin
     List.Add(sUserName + UserName);
 end;
 
+procedure TSQLEngineAbstract.SetSqlAssistentData(const List: TAssistentItems);
+var
+  S: String;
+begin
+  List.Description:=FDescription;
+  List.Add(ClassName, AliasName);
+  if upRemote in UIParams then
+    List.Add(sServerName, ServerName);
+  List.Add(sDatabaseName, DataBaseName);
+  if upUserName in UIParams then
+    List.Add(sUserName, UserName);
+
+  S:=GetServerInfoVersion;
+  if S <> '' then
+    List.Add(sServerVersion, S);
+end;
+
 procedure TSQLEngineAbstract.FillCharSetList(const List: TStrings);
 begin
 
@@ -2479,6 +2500,17 @@ begin
   end;
 end;
 
+function TDBRootObject.SetSqlAssistentDataItems(const List: TAssistentItems): boolean;
+var
+  P: TDBObject;
+begin
+  Result:=true;
+  for P in  FObjects do
+    List.Add(P.Caption, P.Description);
+  for P in FGroupObjects do
+    List.Add(P.Caption, P.Description);
+end;
+
 function TDBRootObject.NewDBObject: TDBObject;
 begin
   if Assigned(FDBObjectClass) then
@@ -2769,6 +2801,11 @@ end;
 procedure TDBObject.OnCloseEditorWindow;
 begin
   //Событие возникает при закрытии окна редактора
+end;
+
+function TDBObject.SetSqlAssistentDataItems(const List: TAssistentItems): boolean;
+begin
+  Result:=false;
 end;
 
 function TDBObject.CreateSQLObject: TSQLCommandDDL;

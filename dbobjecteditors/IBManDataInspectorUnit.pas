@@ -98,6 +98,7 @@ type
     MenuItem36: TMenuItem;
     MenuItem5: TMenuItem;
     Panel1: TPanel;
+    Panel2: TPanel;
     PopupMenu2: TPopupMenu;
     RxIniPropStorage1: TRxIniPropStorage;
     saHideSQLAssistent: TAction;
@@ -209,6 +210,7 @@ type
   private
     FDBList:TFBMDataBaseList;
     FFolders:TOIFolderList;
+    FSQLAssist:TFrame;
     procedure DoChangePrefParams;
     function DBNewRegistration(ASQLEngine, CopyFrom:TSQLEngineAbstract):TDataBaseRecord;
     procedure UpdateSQLAssitant(ARec:TDBInspectorRecord);
@@ -242,7 +244,7 @@ var
 
 procedure ShowFBManDataInpectorForm(AMainForm:TForm);
 implementation
-uses IBManMainUnit, fbmStrConstUnit, fbmConnectionEditUnit,
+uses IBManMainUnit, fbmStrConstUnit, fbmConnectionEditUnit, assistMainUnit,
   fbmUserDataBaseUnit, LazUTF8, fbm_VisualEditorsAbstractUnit, Clipbrd,
   SQLEngineCommonTypesUnit, Dialogs, fbmDBObjectEditorUnit;
 
@@ -286,7 +288,14 @@ var
   b:integer;
 begin
   TreeView1.Items.Clear;
+  FSQLAssist:=TassistMainFrame.Create(Self);
+  FSQLAssist.Parent:=Panel2;
+  FSQLAssist.Align:=alClient;
+  TassistMainFrame(FSQLAssist).UpdateAssistentFolder(nil);
+  //
   Localize;
+
+
   Pagecontrol1.ActivePageIndex:=0;
   b:=30;
   Left:=0;
@@ -942,8 +951,15 @@ end;
 procedure TfbManDataInpectorForm.UpdateSQLAssitant(ARec:TDBInspectorRecord);
 begin
   LB_SQLAssistent.Items.Clear;
-  if Assigned(ARec) then
-    ARec.SetSqlAssistentData(LB_SQLAssistent.Items);
+  if TassistMainFrame(FSQLAssist).UpdateAssistent(ARec) then
+    LB_SQLAssistent.Visible:=false
+  else
+  begin
+    LB_SQLAssistent.Visible:=true;
+    if Assigned(ARec) then
+      ARec.SetSqlAssistentData(LB_SQLAssistent.Items);
+
+  end;
 end;
 
 procedure TfbManDataInpectorForm.DoCreateRegisterMenu;
@@ -1082,6 +1098,8 @@ begin
   Label1.Caption:=sFind;
   fldExpandAll.Caption:=sExpandAll;
   fldCollapseAll.Caption:=sCollapseAll;
+
+  TassistMainFrame(FSQLAssist).Localize;
 end;
 
 procedure TfbManDataInpectorForm.UpdateDBManagerState;
@@ -1107,8 +1125,10 @@ begin
     if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) and
        (TObject(TreeView1.Selected.Data) is TOIFolder) then
     begin
-      LB_SQLAssistent.Items.Clear;
-      LB_SQLAssistent.Items.Text:=TOIFolder(TreeView1.Selected.Data).Description;
+{      LB_SQLAssistent.Items.Clear;
+      LB_SQLAssistent.Items.Text:=TOIFolder(TreeView1.Selected.Data).Description;}
+      LB_SQLAssistent.Visible:=false;
+      TassistMainFrame(FSQLAssist).UpdateAssistentFolder(TOIFolder(TreeView1.Selected.Data));
     end
     else
       UpdateSQLAssitant(nil);

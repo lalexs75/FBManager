@@ -82,7 +82,7 @@ begin
   CheckGroup2.Items[5]:=sCreateNewDB;
   CheckGroup2.Items[6]:=sUseAllSpace;
   CheckGroup2.Items[7]:=sValidate;
-  Label13.Caption:=sPageSize1;
+  Label13.Caption:=sPageSize;
   CheckBox7.Caption:=sLogToFile;
   CheckBox4.Caption:=sLogToScreen;
 end;

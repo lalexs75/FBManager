@@ -25,7 +25,7 @@ unit fbmOIFoldersUnit;
 interface
 
 uses
-  Classes, SysUtils, ComCtrls, DB;
+  Classes, SysUtils, ComCtrls, DB, assistTypesUnit;
 
 type
   TOIFolderListEnumerator = class;
@@ -51,6 +51,7 @@ type
     function Edit:boolean;
     procedure Delete;
     procedure AfterLoad;
+    function SetSqlAssistentData(List: TAssistentItems):Boolean;
 
     property Owner:TTreeNode read FOwner;
     property Name:string read GetName write SetName;
@@ -95,7 +96,7 @@ type
 
 implementation
 
-uses Forms, Controls, LazUTF8, fbmOIFolder_EditUnit, fbmUserDataBaseUnit,
+uses Forms, Controls, LazUTF8, fbmStrConstUnit, fbmOIFolder_EditUnit, fbmUserDataBaseUnit, ibmanagertypesunit,
   IBManDataInspectorUnit;
 
 { TOIFolderListEnumerator }
@@ -288,6 +289,21 @@ end;
 procedure TOIFolder.AfterLoad;
 begin
   FOwner.Expanded:=FExpanded;
+end;
+
+function TOIFolder.SetSqlAssistentData(List: TAssistentItems): Boolean;
+var
+  D: TDataBaseRecord;
+begin
+  Result:=true;
+  List.Description:=FDescription;
+  List.ColName:=sObjectName;
+  List.ColValue:=sDescription;
+  for D in fbManDataInpectorForm.DBList do
+  begin
+    if D.OIFolder = Self then
+      List.Add(D.SQLEngine.AliasName, D.Description);
+  end;
 end;
 
 end.

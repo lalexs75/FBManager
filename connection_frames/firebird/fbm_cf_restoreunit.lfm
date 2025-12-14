@@ -12,7 +12,7 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
     Width = 569
     Align = alClient
     Caption = 'Options'
-    ClientHeight = 286
+    ClientHeight = 283
     ClientWidth = 567
     TabOrder = 0
     object Label13: TLabel
@@ -20,9 +20,9 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideBottom.Control = edtRoPageSize
       AnchorSideBottom.Side = asrBottom
       Left = 6
-      Height = 20
-      Top = 153
-      Width = 60
+      Height = 23
+      Top = 168
+      Width = 84
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Page size'
@@ -33,7 +33,7 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideTop.Control = GroupBox2
       AnchorSideRight.Control = GroupBox2
       Left = 6
-      Height = 129
+      Height = 144
       Top = 6
       Width = 555
       Align = alTop
@@ -49,7 +49,7 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 108
+      ClientHeight = 120
       ClientWidth = 553
       Columns = 2
       Items.Strings = (
@@ -72,10 +72,10 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = edtRoPageSize
       AnchorSideTop.Side = asrBottom
-      Left = 138
-      Height = 24
-      Top = 179
-      Width = 113
+      Left = 160
+      Height = 27
+      Top = 197
+      Width = 145
       BorderSpacing.Left = 36
       BorderSpacing.Around = 6
       Caption = 'Log to screen'
@@ -86,9 +86,9 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideTop.Control = edtRoPageSize
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 24
-      Top = 179
-      Width = 90
+      Height = 27
+      Top = 197
+      Width = 112
       BorderSpacing.Around = 6
       Caption = 'Log to file'
       TabOrder = 2
@@ -100,8 +100,8 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideRight.Control = GroupBox2
       AnchorSideRight.Side = asrBottom
       Left = 12
-      Height = 37
-      Top = 209
+      Height = 40
+      Top = 230
       Width = 549
       DialogOptions = []
       FilterIndex = 0
@@ -118,9 +118,9 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = CheckGroup2
       AnchorSideTop.Side = asrBottom
-      Left = 72
-      Height = 32
-      Top = 141
+      Left = 96
+      Height = 35
+      Top = 156
       Width = 100
       BorderSpacing.Left = 6
       BorderSpacing.Top = 6
@@ -145,7 +145,7 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
     Width = 569
     Align = alTop
     Caption = 'Restore'
-    ClientHeight = 214
+    ClientHeight = 211
     ClientWidth = 567
     TabOrder = 1
     object RadioButton3: TRadioButton
@@ -153,9 +153,9 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideTop.Control = edtRoSingleFileName
       AnchorSideTop.Side = asrBottom
       Left = 6
-      Height = 24
-      Top = 79
-      Width = 123
+      Height = 27
+      Top = 85
+      Width = 158
       BorderSpacing.Around = 6
       Caption = 'Separeted files'
       TabOrder = 0
@@ -164,9 +164,9 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideLeft.Control = GroupBox4
       AnchorSideTop.Control = GroupBox4
       Left = 6
-      Height = 24
+      Height = 27
       Top = 6
-      Width = 140
+      Width = 180
       BorderSpacing.Around = 6
       Caption = 'Single file restore'
       Checked = True
@@ -180,8 +180,8 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideRight.Control = GroupBox4
       AnchorSideRight.Side = asrBottom
       Left = 12
-      Height = 37
-      Top = 36
+      Height = 40
+      Top = 39
       Width = 549
       DialogOptions = []
       FilterIndex = 0
@@ -202,8 +202,8 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       AnchorSideBottom.Control = GroupBox4
       AnchorSideBottom.Side = asrBottom
       Left = 12
-      Height = 99
-      Top = 109
+      Height = 87
+      Top = 118
       Width = 549
       ColumnDefValues.BlobText = '(данные)'
       TitleButtons = False
@@ -274,9 +274,7 @@ inherited fbmCFRestoreFrame: TfbmCFRestoreFrame
       BorderSpacing.Around = 6
       Color = clWindow
       DrawFullLine = False
-      FocusColor = clRed
       SelectedColor = clHighlight
-      GridLineStyle = psSolid
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       Scrollbars = ssAutoBoth
       TabOrder = 3

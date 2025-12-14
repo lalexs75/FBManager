@@ -871,19 +871,18 @@ resourcestring
   sToastFreezeTableAge              = 'Toast - freeze table age';
 
 
-  sServerName                       = 'Server name    = ';
-  sDBName                           = 'Data base name = ';
-  sUserName                         = 'UserName       = ';
-  sClientLib                        = 'Client lib     = ';
-  sRoleName                         = 'Role           = ';
-  sDialect                          = 'Dialect        = ';
-  sServerVersion                    = 'Server version = ';
-  sODSVersion                       = 'ODS version    = ';
-  sPageSize                         = 'Page size      = ';
-  sPageSize1                        = 'Page size';
-  sPageCount                        = 'Page count     = ';
-  sDBFileSize                       = 'DB file size   = ';
-  sDBCharset                        = 'DB Char Set    = ';
+  sServerName                       = 'Server name';
+  sDBName                           = 'Data base name';
+  sUserName                         = 'User name';
+  sClientLib                        = 'Client lib';
+  sRoleName                         = 'Role';
+  sDialect                          = 'Dialect';
+  sServerVersion                    = 'Server version';
+  sODSVersion                       = 'ODS version';
+  sPageSize                         = 'Page size';
+  sPageCount                        = 'Page count';
+  sDBFileSize                       = 'DB file size';
+  sDBCharset                        = 'DB Char Set';
 
   sAppVersion                       = 'Version : ';
   sLCLVersion                       = 'LCL Version: ';

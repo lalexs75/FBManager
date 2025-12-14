@@ -104,7 +104,7 @@ begin
   rxStatInfo.AppendRecord([sDataVersion, QueryValue('PRAGMA data_version')]);
 
   rxStatInfo.AppendRecord([sDefaultCacheSize, QueryValue('PRAGMA default_cache_size')]);
-  rxStatInfo.AppendRecord([sPageSize1, QueryValue('PRAGMA page_size')]);
+  rxStatInfo.AppendRecord([sPageSize, QueryValue('PRAGMA page_size')]);
   rxStatInfo.AppendRecord([sCacheSize, QueryValue('PRAGMA cache_size')]);
   rxStatInfo.AppendRecord([sPageCount, QueryValue('PRAGMA page_count')]);
   rxStatInfo.AppendRecord([sMaxPageCount, QueryValue('PRAGMA max_page_count')]);

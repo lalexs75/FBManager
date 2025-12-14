@@ -8,6 +8,8 @@ object assistMainFrame: TassistMainFrame
   DesignTimePPI = 120
   LCLVersion = '4.99.0.0'
   ParentFont = False
+  ParentShowHint = False
+  ShowHint = True
   TabOrder = 0
   DesignLeft = 713
   DesignTop = 271
@@ -16,11 +18,12 @@ object assistMainFrame: TassistMainFrame
     Height = 427
     Top = 0
     Width = 536
-    ActivePage = TabSheet3
+    ActivePage = tabProperty
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 0
-    object TabSheet1: TTabSheet
+    TabPosition = tpBottom
+    object tabFields: TTabSheet
       Caption = 'Fields'
       ClientHeight = 390
       ClientWidth = 526
@@ -101,28 +104,123 @@ object assistMainFrame: TassistMainFrame
         TabOrder = 0
       end
     end
-    object TabSheet2: TTabSheet
+    object tabProperty: TTabSheet
       Caption = 'Propertys'
       ClientHeight = 390
       ClientWidth = 526
-      object RxDBVerticalGrid1: TRxDBVerticalGrid
+      object RxDBGrid2: TRxDBGrid
         Left = 0
         Height = 390
         Top = 0
         Width = 526
+        ColumnDefValues.BlobText = '(данные)'
+        TitleButtons = False
+        AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'PROP_NAME'
+            Width = 262
+            FieldName = 'PROP_NAME'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'PROP_VALUE'
+            Width = 262
+            FieldName = 'PROP_VALUE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.DrawFullLine = False
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
         Align = alClient
+        AutoFillColumns = True
         Color = clWindow
+        DrawFullLine = False
         SelectedColor = clHighlight
-        GridDefValues.BlobText = '(данные)'
-        DataCoumn.Title.Caption = 'Title'
         DataSource = dsProps
-        LabelCoumn.ReadOnly = True
-        LabelCoumn.Title.Caption = 'Title'
-        Options = []
-        Rows = <>
+        FixedCols = 0
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgCellHints, dgTruncCellHints]
+        ReadOnly = True
+        Scrollbars = ssNone
+        TabOrder = 0
       end
     end
-    object TabSheet3: TTabSheet
+    object tabDescription: TTabSheet
       Caption = 'Description'
       ClientHeight = 390
       ClientWidth = 526
@@ -135,6 +233,7 @@ object assistMainFrame: TassistMainFrame
         Lines.Strings = (
           'Memo1'
         )
+        ReadOnly = True
         TabOrder = 0
       end
     end
@@ -151,10 +250,34 @@ object assistMainFrame: TassistMainFrame
     Top = 176
   end
   object rxProps: TRxMemoryData
-    FieldDefs = <>
+    FieldDefs = <    
+      item
+        Name = 'PROP_NAME'
+        DataType = ftString
+        Size = 250
+      end    
+      item
+        Name = 'PROP_VALUE'
+        DataType = ftString
+        Size = 1024
+      end>
     PacketRecords = 0
     Left = 251
     Top = 280
+    object rxPropsPROP_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'PROP_NAME'
+      Index = 0
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 250
+    end
+    object rxPropsPROP_VALUE: TStringField
+      FieldKind = fkData
+      FieldName = 'PROP_VALUE'
+      Index = 1
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1024
+    end
   end
   object dsProps: TDataSource
     DataSet = rxProps
