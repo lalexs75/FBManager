@@ -25,8 +25,9 @@ unit assistMainUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, ComCtrls, StdCtrls, DB, RxDBGrid, rxmemds, assistTypesUnit,
-  ibmanagertypesunit, fbmOIFoldersUnit,  rxdbverticalgrid;
+  Classes, SysUtils, Forms, Controls, ComCtrls, StdCtrls, DB, RxDBGrid, rxmemds,
+  assistTypesUnit, ibmanagertypesunit, fbmOIFoldersUnit, SQLEngineAbstractUnit,
+  rxdbverticalgrid;
 
 type
 
@@ -40,6 +41,13 @@ type
     RxDBGrid1: TRxDBGrid;
     RxDBGrid2: TRxDBGrid;
     rxFields: TRxMemoryData;
+    rxFieldsFIELD_DESCRIPTION: TStringField;
+    rxFieldsFIELD_DOMAIN: TStringField;
+    rxFieldsFIELD_NAME: TStringField;
+    rxFieldsFIELD_NO: TLongintField;
+    rxFieldsFIELD_NOT_NULL: TBooleanField;
+    rxFieldsFIELD_PK: TBooleanField;
+    rxFieldsFIELD_TYPE: TStringField;
     rxProps: TRxMemoryData;
     rxPropsPROP_NAME: TStringField;
     rxPropsPROP_VALUE: TStringField;
@@ -87,21 +95,52 @@ end;
 function TassistMainFrame.UpdateAssistent(ARec: TDBInspectorRecord): Boolean;
 var
   R: TAssistentItem;
+  P: TDBObject;
+  FVT: Boolean;
+  F: TDBField;
 begin
   ClearAssistData;
-  if not Assigned(ARec) then Exit(false);
-  Result:=ARec.SetSqlAssistentData(FItems);
-  Memo1.Text:=FItems.Description;
-  RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=FItems.ColName;
-  RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=FItems.ColValue;
-  for R in FItems do
+  FVT:=false;
+  if Assigned(ARec) then
   begin
-    rxProps.Append;
-    rxPropsPROP_NAME.AsString:=R.Name;
-    rxPropsPROP_VALUE.AsString:=R.Value;
-    rxProps.Post;
+    Result:=ARec.SetSqlAssistentData(FItems);
+    Memo1.Text:=FItems.Description;
+    RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=FItems.ColName;
+    RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=FItems.ColValue;
+    for R in FItems do
+    begin
+      rxProps.Append;
+      rxPropsPROP_NAME.AsString:=R.Name;
+      rxPropsPROP_VALUE.AsString:=R.Value;
+      rxProps.Post;
+    end;
+    rxProps.First;
+
+    P:=ARec.DBObject;
+    if Assigned(P) then
+    begin
+      if P is TDBDataSetObject then
+      begin
+        FVT:=True;
+        if not P.Loaded then
+          P.RefreshObject;
+        for F in TDBDataSetObject(P).Fields do
+        begin
+          rxFields.Append;
+          rxFieldsFIELD_NO.AsInteger:=F.FieldNum;
+          rxFieldsFIELD_NAME.AsString:=F.FieldName;
+          rxFieldsFIELD_PK.AsBoolean:=F.FieldPK;
+          rxFieldsFIELD_NOT_NULL.AsBoolean:=F.FieldNotNull;
+          rxFieldsFIELD_TYPE.AsString:=F.FieldTypeName;
+          rxFieldsFIELD_DOMAIN.AsString:=F.FieldTypeDomain;
+          rxFieldsFIELD_DESCRIPTION.AsString:=F.FieldDescription;
+          rxFields.Post;
+        end;
+        rxFields.First;
+      end;
+    end
   end;
-  rxProps.First;
+  tabFields.TabVisible:=FVT;
 end;
 
 procedure TassistMainFrame.UpdateAssistentFolder(ARec: TOIFolder);
@@ -109,6 +148,8 @@ var
   R: TAssistentItem;
 begin
   ClearAssistData;
+  if PageControl1.ActivePage = tabFields then
+    PageControl1.ActivePage:=tabProperty;
   tabFields.TabVisible:=false;
   tabProperty.TabVisible:=true;
   tabDescription.TabVisible:=true;
@@ -135,6 +176,23 @@ begin
 
   RxDBGrid2.ColumnByFieldName('PROP_NAME').Title.Caption:=sObjects;
   RxDBGrid2.ColumnByFieldName('PROP_VALUE').Title.Caption:=sDescription;
+
+
+  RxDBGrid1.ColumnByFieldName('FIELD_PK').Title.Caption:=sPK;
+//  RxDBGrid1.ColumnByFieldName('FIELD_UNQ').Title.Caption:=sUNQ;
+  RxDBGrid1.ColumnByFieldName('FIELD_NAME').Title.Caption:=sFieldName;
+  RxDBGrid1.ColumnByFieldName('FIELD_TYPE').Title.Caption:=sFieldType;
+  RxDBGrid1.ColumnByFieldName('FIELD_DOMAIN').Title.Caption:=sDomain;
+//  RxDBGrid1.ColumnByFieldName('FIELD_AUTOINC').Title.Caption:=sAutoincremet;
+  RxDBGrid1.ColumnByFieldName('FIELD_NOT_NULL').Title.Caption:=sNotNull;
+  RxDBGrid1.ColumnByFieldName('FIELD_DESCRIPTION').Title.Caption:=sDescription;
+//  RxDBGrid1.ColumnByFieldName('FIELD_SIZE').Title.Caption:=sSize;
+//  RxDBGrid1.ColumnByFieldName('FIELD_PREC').Title.Caption:=sPrec;
+//  RxDBGrid1.ColumnByFieldName('FIELD_IS_LOCAL').Title.Caption:=sIsLocal;
+//  RxDBGrid1.ColumnByFieldName('FIELD_DESC_EX').Title.Caption:=sDescription;
+//  RxDBGrid1.ColumnByFieldName('FIELD_COLLATE').Title.Caption:=sCollate;
+//  RxDBGrid1.ColumnByFieldName('FIELD_CHARSET').Title.Caption:=sCharSet;
+//  RxDBGrid1.ColumnByFieldName('FIELD_DEF_VALUE').Title.Caption:=sDefaultValue;
 end;
 
 end.

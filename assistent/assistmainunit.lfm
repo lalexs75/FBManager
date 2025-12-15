@@ -1,40 +1,152 @@
 object assistMainFrame: TassistMainFrame
   Left = 0
-  Height = 427
+  Height = 455
   Top = 0
-  Width = 536
-  ClientHeight = 427
-  ClientWidth = 536
+  Width = 1011
+  ClientHeight = 455
+  ClientWidth = 1011
   DesignTimePPI = 120
   LCLVersion = '4.99.0.0'
   ParentFont = False
   ParentShowHint = False
   ShowHint = True
   TabOrder = 0
-  DesignLeft = 713
-  DesignTop = 271
+  DesignLeft = 947
+  DesignTop = 326
   object PageControl1: TPageControl
     Left = 0
-    Height = 427
+    Height = 455
     Top = 0
-    Width = 536
-    ActivePage = tabProperty
+    Width = 1011
+    ActivePage = tabFields
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     TabPosition = tpBottom
     object tabFields: TTabSheet
       Caption = 'Fields'
-      ClientHeight = 390
-      ClientWidth = 526
+      ClientHeight = 418
+      ClientWidth = 1001
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 390
+        Height = 418
         Top = 0
-        Width = 526
+        Width = 1001
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
+        Columns = <        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = '##'
+            Width = 40
+            FieldName = 'FIELD_NO'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Primary key'
+            Title.Caption = 'PK'
+            Width = 50
+            FieldName = 'FIELD_PK'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Field name'
+            Title.Caption = 'Field name'
+            Width = 200
+            FieldName = 'FIELD_NAME'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Field type'
+            Title.Caption = 'Type'
+            Width = 120
+            FieldName = 'FIELD_TYPE'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Field domain'
+            Title.Caption = 'Domain'
+            Width = 150
+            FieldName = 'FIELD_DOMAIN'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Field fescription'
+            Title.Caption = 'Description'
+            Width = 160
+            FieldName = 'FIELD_DESCRIPTION'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Hint = 'Not null'
+            Title.Caption = 'NN'
+            Width = 50
+            FieldName = 'FIELD_NOT_NULL'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Пусто)'
+            Filter.NotEmptyValue = '(Не пусто)'
+            Filter.AllValue = '(Все значения)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
         KeyStrokes = <        
           item
             Command = rxgcShowFindDlg
@@ -106,13 +218,13 @@ object assistMainFrame: TassistMainFrame
     end
     object tabProperty: TTabSheet
       Caption = 'Propertys'
-      ClientHeight = 390
-      ClientWidth = 526
+      ClientHeight = 418
+      ClientWidth = 1001
       object RxDBGrid2: TRxDBGrid
         Left = 0
-        Height = 390
+        Height = 418
         Top = 0
-        Width = 526
+        Width = 1001
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -121,7 +233,7 @@ object assistMainFrame: TassistMainFrame
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PROP_NAME'
-            Width = 262
+            Width = 499
             FieldName = 'PROP_NAME'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -136,7 +248,7 @@ object assistMainFrame: TassistMainFrame
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PROP_VALUE'
-            Width = 262
+            Width = 498
             FieldName = 'PROP_VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -222,13 +334,13 @@ object assistMainFrame: TassistMainFrame
     end
     object tabDescription: TTabSheet
       Caption = 'Description'
-      ClientHeight = 390
-      ClientWidth = 526
+      ClientHeight = 418
+      ClientWidth = 1001
       object Memo1: TMemo
         Left = 0
-        Height = 390
+        Height = 418
         Top = 0
-        Width = 526
+        Width = 1001
         Align = alClient
         Lines.Strings = (
           'Memo1'
@@ -239,10 +351,90 @@ object assistMainFrame: TassistMainFrame
     end
   end
   object rxFields: TRxMemoryData
-    FieldDefs = <>
+    FieldDefs = <    
+      item
+        Name = 'FIELD_NO'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'FIELD_PK'
+        DataType = ftBoolean
+      end    
+      item
+        Name = 'FIELD_NAME'
+        DataType = ftString
+        Size = 60
+      end    
+      item
+        Name = 'FIELD_TYPE'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'FIELD_DOMAIN'
+        DataType = ftString
+        Size = 100
+      end    
+      item
+        Name = 'FIELD_DESCRIPTION'
+        DataType = ftString
+        Size = 500
+      end    
+      item
+        Name = 'FIELD_NOT_NULL'
+        DataType = ftBoolean
+      end>
     PacketRecords = 0
     Left = 248
     Top = 176
+    object rxFieldsFIELD_NO: TLongintField
+      FieldKind = fkData
+      FieldName = 'FIELD_NO'
+      Index = 0
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object rxFieldsFIELD_PK: TBooleanField
+      FieldKind = fkData
+      FieldName = 'FIELD_PK'
+      Index = 1
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      DisplayValues = 'True;False'
+    end
+    object rxFieldsFIELD_NAME: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_NAME'
+      Index = 2
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 60
+    end
+    object rxFieldsFIELD_TYPE: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_TYPE'
+      Index = 3
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 100
+    end
+    object rxFieldsFIELD_DOMAIN: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_DOMAIN'
+      Index = 4
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 100
+    end
+    object rxFieldsFIELD_DESCRIPTION: TStringField
+      FieldKind = fkData
+      FieldName = 'FIELD_DESCRIPTION'
+      Index = 5
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 500
+    end
+    object rxFieldsFIELD_NOT_NULL: TBooleanField
+      FieldKind = fkData
+      FieldName = 'FIELD_NOT_NULL'
+      Index = 6
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      DisplayValues = 'True;False'
+    end
   end
   object dsFields: TDataSource
     DataSet = rxFields

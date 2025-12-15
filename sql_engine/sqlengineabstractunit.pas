@@ -585,6 +585,7 @@ type
     procedure SetSqlAssistentData(const List: TStrings); override;
     function MakeChildList:TStrings; override;
     procedure RefreshFieldList; virtual; abstract;
+    function SetSqlAssistentDataItems(const List: TAssistentItems):boolean; override;
 
     procedure TriggersListRefresh; virtual; abstract;
     procedure RecompileTriggers;virtual;
@@ -652,6 +653,8 @@ type
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    function SetSqlAssistentDataItems(const List: TAssistentItems):boolean; override;
+
     function CompileSQLObject(ASqlObject:TSQLCommandDDL; ASqlExecParam:TSqlExecParams):boolean; override;
 
     procedure SetFieldsOrder(AFieldsList:TStrings);virtual; abstract;
@@ -2509,6 +2512,9 @@ begin
     List.Add(P.Caption, P.Description);
   for P in FGroupObjects do
     List.Add(P.Caption, P.Description);
+  List.ColName:=sObjects;
+  List.ColValue:=sDescription;
+  List.Description:=Description;
 end;
 
 function TDBRootObject.NewDBObject: TDBObject;
@@ -3068,6 +3074,11 @@ begin
   inherited Destroy;
 end;
 
+function TDBTableObject.SetSqlAssistentDataItems(const List: TAssistentItems): boolean;
+begin
+  Result:=true;
+end;
+
 function TDBTableObject.CompileSQLObject(ASqlObject: TSQLCommandDDL;
   ASqlExecParam: TSqlExecParams): boolean;
 var
@@ -3430,6 +3441,11 @@ begin
     for F in Fields do
       Result.AddObject(F.FieldName, TObject(Pointer(IntPtr(66))));
   end;
+end;
+
+function TDBDataSetObject.SetSqlAssistentDataItems(const List: TAssistentItems): boolean;
+begin
+  Result:=true;
 end;
 
 procedure TDBDataSetObject.RecompileTriggers;
