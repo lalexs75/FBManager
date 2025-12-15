@@ -140,6 +140,8 @@ begin
       end;
     end
   end;
+  if FVT and not tabFields.TabVisible then
+    PageControl1.ActivePage:=tabFields;
   tabFields.TabVisible:=FVT;
 end;
 
