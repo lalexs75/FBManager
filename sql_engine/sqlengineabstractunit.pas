@@ -2509,9 +2509,12 @@ var
 begin
   Result:=true;
   for P in  FObjects do
-    List.Add(P.Caption, P.Description);
+    if P.State <> sdboCreate then
+      List.Add(P.Caption, P.Description);
   for P in FGroupObjects do
-    List.Add(P.Caption, P.Description);
+    if P.State <> sdboCreate then
+      List.Add(P.Caption, P.Description);
+
   List.ColName:=sObjects;
   List.ColValue:=sDescription;
   List.Description:=Description;
