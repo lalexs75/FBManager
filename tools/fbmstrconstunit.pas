@@ -721,7 +721,8 @@ resourcestring
   sDropShadow                       = 'Drop shadow?';
   sFilesFilterSQL                   = 'Sql files (*.sql)|*.sql|All files (*)|*';
   sPrecompileError                  = 'Precompiler error.';
-  sRecordCount                      = '%d records in table';
+  sRecordCountInTable               = '%d records in table';
+  sRecordCount                      = 'Record count';
   sRecordCountGet                   = 'Get record count';
   sFileNotFound                     = 'File %s not found.';
   sFieldNameReq                     = 'Requared field name.';

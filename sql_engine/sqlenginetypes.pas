@@ -72,6 +72,12 @@ type
 
                    );
 
+type
+  TTableStatisticRecord = record
+    sFormat:string;
+    RecordCount:Int64;
+  end;
+
 implementation
 
 end.

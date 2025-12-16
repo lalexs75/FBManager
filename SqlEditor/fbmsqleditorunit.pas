@@ -1108,7 +1108,7 @@ begin
     Cnt:=QueryControl.DataSet.RecordCount
   else
     Cnt:=0;
-  SetRecordCountCaption(Format(sRecordCount, [Cnt]));
+  SetRecordCountCaption(Format(sRecordCountInTable, [Cnt]));
 end;
 
 procedure TfbmSQLEditorForm.TreeView1Click(Sender: TObject);

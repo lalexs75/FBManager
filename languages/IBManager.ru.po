@@ -4601,14 +4601,19 @@ msgid "Recompile all triggers"
 msgstr "Перекомпилировать все триггеры"
 
 #: fbmstrconstunit.srecordcount
-#, object-pascal-format
-msgid "%d records in table"
-msgstr "%d запись(ей) в таблице"
+msgid "Record count"
+msgstr ""
 
 #: fbmstrconstunit.srecordcountget
 msgctxt "fbmstrconstunit.srecordcountget"
 msgid "Get record count"
 msgstr "Кол-во записей"
+
+#: fbmstrconstunit.srecordcountintable
+#, object-pascal-format, fuzzy
+msgctxt "fbmstrconstunit.srecordcountintable"
+msgid "%d records in table"
+msgstr "%d запись(ей) в таблице"
 
 #: fbmstrconstunit.srecordfetched
 #, object-pascal-format
@@ -6692,3 +6697,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

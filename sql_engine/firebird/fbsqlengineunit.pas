@@ -299,6 +299,7 @@ type
     FTransaction:TUIBTransaction;
     FTriggerList:TTriggersLists;
     procedure DSUpdateRecord(ADataSet: TDataSet; AUpdateKind: DB.TUpdateKind; var AUpdateAction: fbmisc.TUpdateAction);
+    function InternalTableStatistic(ARec:TTableStatisticRecord):Boolean;
   protected
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
     function InternalGetDDLCreate: string; override;
@@ -325,6 +326,7 @@ type
     procedure RefreshDependenciesField(Rec:TDependRecord);override;
     function CreateSQLObject:TSQLCommandDDL; override;
     function GetDDLSQLObject(ACommandType:TDDLCommandType):TSQLCommandDDL; override;
+    function SetSqlAssistentDataItems(const List: TAssistentItems):boolean; override;
 
     //function RenameObject(ANewName:string):Boolean;override;
     procedure RefreshFieldList; override;
@@ -715,9 +717,8 @@ type
   end;
   
 implementation
-uses ibmsqltextsunit, ibmSqlUtilsUnit, uiblib, rxdbutils, Controls, fbmStrConstUnit, LazUTF8, strutils,
-  fbSqlTextUnit, FBSQLEngineSecurityUnit,
-  fbmSQLTextCommonUnit         //Общие запросы для всех SQL серверов
+uses rxlogging, ibmsqltextsunit, uiblib, rxdbutils, Controls, fbmStrConstUnit, LazUTF8, strutils,
+  fbSqlTextUnit, FBSQLEngineSecurityUnit
   ;
 
 function FBTrigTypeToTriggerType(AFBType:word):TTriggerTypes;
@@ -2152,6 +2153,24 @@ begin
   end;
 end;
 
+function TFireBirdTable.InternalTableStatistic(ARec : TTableStatisticRecord) : Boolean;
+var
+  Q : TUIBQuery;
+begin
+  Result:=false;
+  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sFBStatistic['Stat1Format']);
+  Q.Params.ByNameAsString['RELATION_NAME']:=Caption;
+  Q.Open;
+  if Q.Fields.RecordCount>0 then
+  begin
+    Statistic.AddValue(sChangeCount, IntToStr(256 - Q.Fields.ByNameAsInteger['RDB$FORMAT']));
+    Statistic.AddValue(sRecordCount, IntToStr(Q.Fields.ByNameAsInt64['RECORD_COUNT']));
+    Result:=true;
+  end;
+  Q.Close;
+  Q.Free;
+end;
+
 procedure TFireBirdTable.InternalSetDescription(ACommentOn: TSQLCommentOn);
 begin
   ACommentOn.Description:=TSQLEngineFireBird(OwnerDB).ConvertString20(FDescription, false);
@@ -2332,15 +2351,15 @@ end;
 procedure TFireBirdTable.InternalRefreshStatistic;
 var
   Q: TUIBQuery;
+  Rec : TTableStatisticRecord;
 begin
   inherited InternalRefreshStatistic;
 
-  Q:=TSQLEngineFireBird(OwnerDB).GetUIBQuery(fbSqlModule.sFBStatistic['Stat1Format']);
-  Q.Params.ByNameAsString['RELATION_NAME']:=Caption;
-  Q.Open;
-  Statistic.AddValue(sChangeCount, IntToStr(256 - Q.Fields.ByNameAsInteger['RDB$FORMAT']));
-  Q.Close;
-  Q.Free;
+  if InternalTableStatistic(Rec) then
+  begin
+    Statistic.AddValue(sChangeCount, Rec.sFormat);
+    Statistic.AddValue(sRecordCount, IntToStr(Rec.RecordCount));
+  end;
 end;
 
 procedure TFireBirdTable.IndexListRefresh;
@@ -2416,7 +2435,7 @@ begin
     while not QFields.Eof do
     begin
       Rec:=Fields.Add(Trim(QFields.Fields.ByNameAsString['rdb$field_name'])) as TFirebirdField;
-
+      RxWriteLog(etDebug, Rec.FieldName);
       S:=Trim(QFields.Fields.ByNameAsString['RDB$FIELD_SOURCE']);
       if CompareText(copy(S,1, 4), 'rdb$')<>0 then
         Rec.FieldTypeDomain:=S;
@@ -2880,6 +2899,19 @@ begin
       end;
   end;
 end;
+
+function TFireBirdTable.SetSqlAssistentDataItems(const List : TAssistentItems) : boolean;
+var
+  Rec : TTableStatisticRecord;
+begin
+  Result :=inherited SetSqlAssistentDataItems(List);
+  if InternalTableStatistic(Rec) then
+  begin
+    List.Add(sVersion, Rec.sFormat);
+    List.Add(sRecordCount, IntToStr(Rec.RecordCount));
+  end;
+end;
+
 (*
 function TFireBirdTable.RenameObject(ANewName: string): Boolean;
 var

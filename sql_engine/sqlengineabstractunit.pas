@@ -3080,6 +3080,9 @@ end;
 function TDBTableObject.SetSqlAssistentDataItems(const List: TAssistentItems): boolean;
 begin
   Result:=true;
+  List.Description :=Description;
+  List.ColName :=sParameter;
+  List.ColValue :=sValue;
 end;
 
 function TDBTableObject.CompileSQLObject(ASqlObject: TSQLCommandDDL;

@@ -396,7 +396,7 @@ begin
     Cnt:=TDBDataSetObject(DBObject).RecordCount
   else
     Cnt:=0;
-  SetRecordCountCaption(Format(sRecordCount, [Cnt]));
+  SetRecordCountCaption(Format(sRecordCountInTable, [Cnt]));
 end;
 
 procedure TfbmTableEditorDataFrame.Commit;

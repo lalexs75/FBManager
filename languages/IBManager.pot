@@ -4460,12 +4460,17 @@ msgid "Recompile all triggers"
 msgstr ""
 
 #: fbmstrconstunit.srecordcount
-#, object-pascal-format
-msgid "%d records in table"
+msgid "Record count"
 msgstr ""
 
 #: fbmstrconstunit.srecordcountget
 msgid "Get record count"
+msgstr ""
+
+#: fbmstrconstunit.srecordcountintable
+#, object-pascal-format
+msgctxt "fbmstrconstunit.srecordcountintable"
+msgid "%d records in table"
 msgstr ""
 
 #: fbmstrconstunit.srecordfetched
