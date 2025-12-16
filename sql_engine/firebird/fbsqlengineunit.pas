@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, db, uib, sqlEngineTypes, SQLEngineAbstractUnit, FBCustomDataSet, SQLEngineInternalToolsUnit,
-  contnrs, fb_utils, SQLEngineCommonTypesUnit, fbmisc,
+  contnrs, fb_utils, SQLEngineCommonTypesUnit, fbmisc, assistTypesUnit,
   fb_SqlParserUnit, uibsqlparser, fbKeywordsUnit, fbmSqlParserUnit,
   sqlObjects;
 
@@ -670,6 +670,7 @@ type
 
     function ExecuteSQLScript(const ASQL: string; OnExecuteSqlScriptProcessEvent:TExecuteSqlScriptProcessEvent):Boolean; override;
     procedure SetSqlAssistentData(const List: TStrings); override;
+    procedure SetSqlAssistentData(const List: TAssistentItems); override;
     procedure FillCharSetList(const List: TStrings); override;
     procedure FillCollationList(const ACharSet:string; const List: TStrings); override;
     function OpenDataSet(Sql:string; AOwner:TComponent):TDataSet;override;
@@ -1864,6 +1865,27 @@ begin
       List.Add(sPageSize + IntToStr(FBDatabase.InfoPageSize));
       List.Add(sPageCount + IntToStr(FBDatabase.InfoDbSizeInPages));
       List.Add(sDBFileSize);
+    finally
+    end;
+  end
+end;
+
+procedure TSQLEngineFireBird.SetSqlAssistentData(const List : TAssistentItems);
+begin
+  inherited SetSqlAssistentData(List);
+  List.Add(sClientLib, FBDatabase.LibraryName);
+  List.Add(sRoleName, FRoleName);
+  if Connected then
+  begin
+    try
+      List.Add(sDialect, IntToStr(FBDatabase.SQLDialect));
+      List.Add(sServerVersion,FBDatabase.InfoVersion);
+      List.Add(sDBCharset, FDBCharSet);
+      List.Add(sODSVersion, IntToStr(FBDatabase.InfoOdsVersion)+'.'+IntToStr(FBDatabase.InfoOdsMinorVersion));
+
+      List.Add(sPageSize, IntToStr(FBDatabase.InfoPageSize));
+      List.Add(sPageCount, IntToStr(FBDatabase.InfoDbSizeInPages));
+      List.Add(sDBFileSize, IntToStr(FBDatabase.InfoDBFileSize));
     finally
     end;
   end

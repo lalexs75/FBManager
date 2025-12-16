@@ -2097,7 +2097,7 @@ object pgSqlTextModule: TpgSqlTextModule
           '  pg_type'
           '  inner join pg_namespace on (pg_type.typnamespace = pg_namespace.oid)'
           '  inner join pg_user on (pg_user.usesysid = pg_type.typowner)'
-          '  left join pg_constraint on (pg_constraint.contypid = pg_type.oid)'
+          '  left join pg_constraint on (pg_constraint.contypid = pg_type.oid) and (pg_constraint.contype = ''c'')'
           'where'
           '    cast(pg_type.typtype as varchar(3)) = ''d'''
           '  and'
