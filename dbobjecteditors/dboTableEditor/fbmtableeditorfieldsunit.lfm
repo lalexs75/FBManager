@@ -18,12 +18,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     object TabSheet1: TTabSheet
       Caption = 'Description'
       ClientHeight = 88
-      ClientWidth = 1060
+      ClientWidth = 1066
       object DBMemo1: TDBMemo
         Left = 0
         Height = 88
         Top = 0
-        Width = 1060
+        Width = 1066
         Align = alClient
         DataField = 'FIELD_DESCRIPTION'
         DataSource = dsFieldList
@@ -33,12 +33,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     object tabFieldDependencies: TTabSheet
       Caption = 'Field Dependencies'
       ClientHeight = 88
-      ClientWidth = 1060
+      ClientWidth = 1066
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 85
+        Height = 88
         Top = 0
-        Width = 1060
+        Width = 1066
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -47,7 +47,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'OBJECT_NAME'
-            Width = 522
+            Width = 525
             FieldName = 'OBJECT_NAME'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -62,7 +62,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'OBJECT_TYPE'
-            Width = 522
+            Width = 525
             FieldName = 'OBJECT_TYPE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -171,9 +171,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
         AutoFillColumns = True
         Color = clWindow
         DrawFullLine = False
-        FocusColor = clRed
         SelectedColor = clHighlight
-        GridLineStyle = psSolid
         DataSource = dsFieldDeps
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert]
         ReadOnly = True
@@ -184,8 +182,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object FieldListGrid: TRxDBGrid[1]
     Left = 0
-    Height = 275
-    Top = 70
+    Height = 279
+    Top = 66
     Width = 1070
     ColumnDefValues.BlobText = '(примечание)'
     TitleButtons = True
@@ -507,9 +505,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsFieldList
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook, dgAnyButtonCanSelect]
     PopupMenu = PopupMenu1
@@ -531,12 +527,12 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   end
   object Panel1: TPanel[3]
     Left = 0
-    Height = 70
+    Height = 66
     Top = 0
     Width = 1070
     Align = alTop
     AutoSize = True
-    ClientHeight = 70
+    ClientHeight = 66
     ClientWidth = 1070
     TabOrder = 3
     object Label1: TLabel
@@ -557,7 +553,7 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
       Left = 13
-      Height = 33
+      Height = 29
       Top = 30
       Width = 1050
       Anchors = [akTop, akLeft, akRight]
@@ -1402,22 +1398,22 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       Category = 'Editor'
       Caption = 'New field'
       ImageIndex = 12
-      OnExecute = fldNewExecute
       ShortCut = 45
+      OnExecute = fldNewExecute
     end
     object fldEdit: TAction
       Category = 'Editor'
       Caption = 'Edit field'
       ImageIndex = 62
-      OnExecute = fldEditExecute
       ShortCut = 16453
+      OnExecute = fldEditExecute
     end
     object fldDelete: TAction
       Category = 'Editor'
       Caption = 'Drop field'
       ImageIndex = 13
-      OnExecute = fldDeleteExecute
       ShortCut = 24622
+      OnExecute = fldDeleteExecute
     end
     object fldPrint: TAction
       Category = 'Editor'
@@ -1429,8 +1425,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
       Category = 'Editor'
       Caption = 'Refresh field list'
       ImageIndex = 10
-      OnExecute = fldRefreshExecute
       ShortCut = 116
+      OnExecute = fldRefreshExecute
     end
     object fldOrder: TAction
       Category = 'Editor'
@@ -1448,8 +1444,8 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
     object fldCopy: TAction
       Category = 'Editor'
       Caption = 'fldCopy'
-      OnExecute = fldCopyExecute
       ShortCut = 24643
+      OnExecute = fldCopyExecute
     end
     object fldGotoForeignTable: TAction
       Category = 'Service'
@@ -1461,8 +1457,10 @@ inherited fbmTableEditorFieldsFrame: TfbmTableEditorFieldsFrame
   object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[8]
     RxDBGrid = FieldListGrid
     Caption = 'Export to speadsheet'
+    ShowSetupForm = True
     OnBeforeExecute = RxDBGridExportSpreadSheet1BeforeExecute
     Options = [ressExportTitle, ressExportColors, ressExportFooter, ressOverwriteExisting]
+    OpenAfterExport = True
     Left = 168
     Top = 176
   end
