@@ -1297,8 +1297,14 @@ begin
 end;
 
 procedure TfbManDataInpectorForm.PingConnectedDB;
+var
+  P : TDataBaseRecord;
 begin
-//
+  for P in DBList do
+    if P.Connected then
+    begin
+
+    end;//
 end;
 
 procedure TfbManDataInpectorForm.ReadAlialList;
