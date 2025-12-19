@@ -202,14 +202,12 @@ inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
     FooterOptions.DrawFullLine = False
     SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
     SearchOptions.FromStart = False
-    OptionsRx = []
+    OptionsRx = [rdgAllowQuickSearch, rdgAllowToolMenu]
     FooterColor = clYellow
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsFKList
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisplayMemoText]
     PopupMenu = PopupMenu1
@@ -448,6 +446,26 @@ inherited fdbmTableEditorForeignKeyFrame: TfdbmTableEditorForeignKeyFrame
     Caption = 'Print grid'
     Options = [rxpoShowTitle, rxpoShowFooter, rxpoShowGridColor, rxpoShowFooterColor, rxpoShowReportTitle]
     Left = 95
+    Top = 256
+  end
+  object RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet[8]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Экспорт в электронную таблицу'
+    ShowSetupForm = True
+    OnBeforeExecute = RxDBGridExportSpreadSheet1BeforeExecute
+    Options = [ressExportTitle, ressExportColors, ressExportFooter, ressExportFormula, ressHideZeroValues, ressColSpanning]
+    OpenAfterExport = True
+    Left = 144
+    Top = 256
+  end
+  object RxDBGridExportPDF1: TRxDBGridExportPDF[9]
+    RxDBGrid = RxDBGrid1
+    Caption = 'Экспорт в PDF файл'
+    ShowSetupForm = True
+    Options = []
+    PdfOptions.Options = []
+    OpenAfterExport = True
+    Left = 192
     Top = 256
   end
 end

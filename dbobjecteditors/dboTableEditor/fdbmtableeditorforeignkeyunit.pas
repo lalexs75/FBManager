@@ -25,7 +25,7 @@ unit fdbmTableEditorForeignKeyUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, SQLEngineAbstractUnit,
+  Classes, RxDBGridExportPdf, RxDBGridExportSpreadSheet, SysUtils, FileUtil, LResources, Forms, SQLEngineAbstractUnit,
   fbmSqlParserUnit, fdmAbstractEditorUnit, rxdbgrid, ActnList, rxmemds,
   RxDBGridPrintGrid, db, LR_PGrid, Menus, DBGrids, Controls, ExtCtrls, DBCtrls,
   IniFiles, sqlObjects;
@@ -49,6 +49,8 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
+    RxDBGridExportPDF1 : TRxDBGridExportPDF;
+    RxDBGridExportSpreadSheet1 : TRxDBGridExportSpreadSheet;
     RxDBGridPrint1: TRxDBGridPrint;
     rxFKList: TRxMemoryData;
     PopupMenu1: TPopupMenu;
@@ -67,6 +69,7 @@ type
     procedure actNewFKExecute(Sender: TObject);
     procedure actPrintListExecute(Sender: TObject);
     procedure actRefreshExecute(Sender: TObject);
+    procedure RxDBGridExportSpreadSheet1BeforeExecute(Sender : TObject);
     procedure rxFKListAfterPost(DataSet: TDataSet);
   private
     procedure NewFK;
@@ -106,6 +109,12 @@ end;
 procedure TfdbmTableEditorForeignKeyFrame.actRefreshExecute(Sender: TObject);
 begin
   RefreshFKList;
+end;
+
+procedure TfdbmTableEditorForeignKeyFrame.RxDBGridExportSpreadSheet1BeforeExecute(Sender : TObject);
+begin
+  RxDBGridExportSpreadSheet1.PageName:=DBObject.Caption;
+  RxDBGridExportSpreadSheet1.FileName:=DBObject.Caption+'FK.ods';
 end;
 
 procedure TfdbmTableEditorForeignKeyFrame.rxFKListAfterPost(DataSet: TDataSet);
