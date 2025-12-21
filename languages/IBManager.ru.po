@@ -4998,7 +4998,7 @@ msgstr "Сохранить в файл..."
 
 #: fbmstrconstunit.ssavedesktopondisconectfromdb
 msgid "Save desktop on disconect from DB"
-msgstr "Сохранть окружение при отключении от базы данных"
+msgstr "Сохранять окружение при отключении от базы данных"
 
 #: fbmstrconstunit.ssavefile
 msgctxt "fbmstrconstunit.ssavefile"
