@@ -9,9 +9,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
   object Label1: TLabel[0]
     AnchorSideLeft.Control = Owner
     Left = 6
-    Height = 17
+    Height = 23
     Top = 6
-    Width = 113
+    Width = 162
     BorderSpacing.Around = 6
     Caption = 'Interface language'
     ParentColor = False
@@ -21,9 +21,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = ComboBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 17
-    Top = 68
-    Width = 60
+    Height = 23
+    Top = 80
+    Width = 84
     BorderSpacing.Around = 6
     Caption = 'Hint color'
     ParentColor = False
@@ -35,8 +35,8 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 33
-    Top = 29
+    Height = 39
+    Top = 35
     Width = 510
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Around = 6
@@ -51,8 +51,8 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 33
-    Top = 91
+    Height = 35
+    Top = 109
     Width = 510
     Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames, cbCustomColors]
     Anchors = [akTop, akLeft, akRight]
@@ -65,22 +65,22 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = ColorBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 130
-    Width = 240
+    Height = 27
+    Top = 150
+    Width = 336
     BorderSpacing.Around = 6
     Caption = 'Save desktop on disconect from DB'
     TabOrder = 2
   end
   object rgShowBitBtnGlyph: TRadioGroup[5]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Control = CheckBox7
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 6
-    Height = 53
-    Top = 159
+    Height = 63
+    Top = 216
     Width = 516
     Anchors = [akTop, akLeft, akRight]
     AutoFill = True
@@ -95,7 +95,7 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 35
+    ClientHeight = 39
     ClientWidth = 514
     Columns = 3
     Items.Strings = (
@@ -110,9 +110,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = rgShowBitBtnGlyph
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 218
-    Width = 263
+    Height = 27
+    Top = 285
+    Width = 364
     BorderSpacing.Around = 6
     Caption = 'Show object name in object editor form'
     TabOrder = 4
@@ -122,9 +122,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 247
-    Width = 165
+    Height = 27
+    Top = 318
+    Width = 223
     BorderSpacing.Around = 6
     Caption = 'Flat buttons in task bar'
     TabOrder = 5
@@ -134,9 +134,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox3
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 276
-    Width = 146
+    Height = 27
+    Top = 351
+    Width = 202
     BorderSpacing.Around = 6
     Caption = 'Close window by F4'
     TabOrder = 6
@@ -146,9 +146,9 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox4
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 305
-    Width = 191
+    Height = 27
+    Top = 384
+    Width = 260
     BorderSpacing.Around = 6
     Caption = 'Switch window by Ctrl+Tab'
     TabOrder = 7
@@ -158,11 +158,23 @@ inherited cfGeneralOptionsFrame: TcfGeneralOptionsFrame
     AnchorSideTop.Control = CheckBox5
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 23
-    Top = 334
-    Width = 199
+    Height = 27
+    Top = 417
+    Width = 280
     BorderSpacing.Around = 6
     Caption = 'Ask before close all windows'
     TabOrder = 8
+  end
+  object CheckBox7: TCheckBox[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 27
+    Top = 183
+    Width = 319
+    BorderSpacing.Around = 6
+    Caption = 'Maximize main window on startup'
+    TabOrder = 9
   end
 end

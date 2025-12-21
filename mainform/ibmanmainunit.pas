@@ -476,7 +476,6 @@ end;
 procedure TfbManagerMainForm.IBManagerMainFormCreate(Sender: TObject);
 begin
   Localize;
-//  WindowState:=wsMaximized;
   fbManagerMainForm:=Self;
 
   DoLoadPrefs;
@@ -491,6 +490,9 @@ begin
   {$IFDEF WINDOWS}
   tlsDataBaseComparer.Enabled:=false;
   {$ENDIF}
+
+  if ConfigValues.ByNameAsBoolean('StartUp/Maximize main window on startup', true) then
+     WindowState:=wsMaximized;
 end;
 
 procedure TfbManagerMainForm.hlpNewsExecute(Sender: TObject);

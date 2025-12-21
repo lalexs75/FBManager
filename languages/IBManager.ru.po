@@ -3205,6 +3205,10 @@ msgstr "Максим. число подключений в час"
 msgid "Max. date"
 msgstr "Макс. дата"
 
+#: fbmstrconstunit.smaximizemainwindowonstartup
+msgid "Maximize main window on startup"
+msgstr ""
+
 #: fbmstrconstunit.smaxlength
 msgid "Max. length"
 msgstr "Макс. длинна"

@@ -1250,6 +1250,7 @@ resourcestring
   sMDICloseByF4                     = 'Close child window by Ctrl+F4';
   sMDISwitchByTab                   = 'Switch child windows by Ctrl+Tab';
   sAskBeforeCloseAllWindows         = 'Ask before close all windows';
+  sMaximizeMainWindowOnStartup      = 'Maximize main window on startup';
 
   sConfirmExit                      = 'Confirm exit';
   sConfirmCompileObjectsDescription = 'Confirm compile objects description';

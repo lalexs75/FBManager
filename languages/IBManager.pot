@@ -3098,6 +3098,10 @@ msgstr ""
 msgid "Max. date"
 msgstr ""
 
+#: fbmstrconstunit.smaximizemainwindowonstartup
+msgid "Maximize main window on startup"
+msgstr ""
+
 #: fbmstrconstunit.smaxlength
 msgid "Max. length"
 msgstr ""
