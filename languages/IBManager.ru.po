@@ -3207,7 +3207,7 @@ msgstr "Макс. дата"
 
 #: fbmstrconstunit.smaximizemainwindowonstartup
 msgid "Maximize main window on startup"
-msgstr ""
+msgstr "Распахнуть главное окно при старте"
 
 #: fbmstrconstunit.smaxlength
 msgid "Max. length"
