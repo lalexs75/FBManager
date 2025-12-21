@@ -185,14 +185,15 @@ begin
 
   if Assigned(SynEdit.Highlighter) and (SynEdit.Highlighter is TSynSQLSyn) then
   begin
-    TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgTables', clWindow);
-    TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgTables', clGreen);
-    TSynSQLSyn(SynEdit.Highlighter).StringAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgString', clAqua);
-    TSynSQLSyn(SynEdit.Highlighter).StringAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgString', clBlack);
-    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgComment', clWindow);
-    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgComment', clBlue);
-    TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgNumber', clNavy);
+    TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgTables', clWindow);
+    TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgTables', clGreen);
+    TSynSQLSyn(SynEdit.Highlighter).StringAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgString', clAqua);
+    TSynSQLSyn(SynEdit.Highlighter).StringAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgString', clBlack);
+    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgComment', clWindow);
+    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgComment', clBlack);
     TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgNumber',clWindow);
+    TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgNumber', clNavy);
+
 
     if ConfigValues.ByNameAsBoolean('esqlFontUnderlineTables', false) then
       TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Style + [fsUnderline]
