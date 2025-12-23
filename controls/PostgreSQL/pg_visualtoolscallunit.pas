@@ -68,9 +68,8 @@ uses pgActivitiMonitorUnit, pgDataBaseStatUnit, fbmStrConstUnit,
   //Конфигурация
      cfPostgreeConfigMiskUnit, otPostgreTableTemplateUnit, cfAutoIncFieldUnit,
   //Connection pages
-     pg_con_MainPageUnit,
-     fdbm_cf_LogUnit,
-     fdbm_ShowObjectsUnit, fdbm_DescriptionUnit, fdbm_ssh_ParamsUnit,
+     pg_con_MainPageUnit, fdbm_cf_LogUnit, fdbm_ShowObjectsUnit,
+     fdbm_DescriptionUnit, fdbm_ssh_ParamsUnit, fbmCFColorMarksPageUnit,
   //Object Editors
      fbmTableEditorDataUnit,
      fbmTableEditorFieldsUnit,
@@ -312,7 +311,7 @@ end;
 
 class function TPostgreVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=6;
+  Result:=7;
 end;
 
 class function TPostgreVisualTools.ConnectionDlgPage(
@@ -325,7 +324,8 @@ begin
     2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
     3:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
     4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
-    5:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine as TSQLEnginePostgre, AOwner);
+    5:Result:=TfbmCFColorMarksPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
+    6:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine as TSQLEnginePostgre, AOwner);
   else
     Result:=nil;
   end;

@@ -1136,6 +1136,7 @@ resourcestring
   sSuccess                          = 'Success';
   sIgnore                           = 'Ignore';
   sPressADDtoAddNewShedule          = 'Press ADD to add new shedule';
+  sColorMark                        = 'Color Mark';
 
   sSteps                            = 'Steps';
   sStep                             = 'Step';

@@ -7,35 +7,37 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 24
+    Height = 27
     Top = 6
-    Width = 300
+    Width = 420
     BorderSpacing.Around = 6
     Caption = 'Allow color marking of the database windows'
     TabOrder = 0
   end
   object Label1: TLabel[1]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = CheckBox1
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
-    Left = 312
-    Height = 17
-    Top = 36
-    Width = 89
-    BorderSpacing.Around = 6
+    AnchorSideBottom.Control = ColorBox1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 179
+    Width = 129
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
     Caption = 'Mark line color'
   end
   object Label2: TLabel[2]
-    AnchorSideLeft.Control = CheckBox1
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = ColorBox1
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Side = asrBottom
-    Left = 312
-    Height = 17
-    Top = 88
-    Width = 154
-    BorderSpacing.Around = 6
+    AnchorSideBottom.Control = SpinEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 6
+    Height = 23
+    Top = 225
+    Width = 229
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
     Caption = 'Mark line thickness, pixels'
   end
   object CheckGroup1: TCheckGroup[3]
@@ -43,9 +45,9 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 112
-    Top = 36
-    Width = 175
+    Height = 122
+    Top = 39
+    Width = 226
     AutoFill = True
     AutoSize = True
     BorderSpacing.Around = 6
@@ -57,8 +59,8 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 108
-    ClientWidth = 171
+    ClientHeight = 120
+    ClientWidth = 224
     Items.Strings = (
       'On top of window'
       'On left of window'
@@ -71,36 +73,38 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     }
   end
   object ColorBox1: TColorBox[4]
-    AnchorSideLeft.Control = Label1
-    AnchorSideTop.Control = Label1
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckGroup1
     AnchorSideTop.Side = asrBottom
-    Left = 318
-    Height = 23
-    Top = 59
+    Left = 241
+    Height = 35
+    Top = 167
     Width = 154
     BorderSpacing.Around = 6
     ItemHeight = 0
     TabOrder = 2
   end
   object SpinEdit1: TSpinEdit[5]
-    AnchorSideLeft.Control = Label1
-    AnchorSideTop.Control = Label2
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox1
     AnchorSideTop.Side = asrBottom
-    Left = 318
-    Height = 27
-    Top = 111
+    Left = 241
+    Height = 40
+    Top = 208
     Width = 154
     BorderSpacing.Around = 6
     TabOrder = 3
   end
   object CheckBox2: TCheckBox[6]
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = CheckGroup1
+    AnchorSideTop.Control = DividerBevel1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 24
-    Top = 154
-    Width = 297
+    Height = 27
+    Top = 289
+    Width = 415
     BorderSpacing.Around = 6
     Caption = 'Allow color marking in the Database Explorer'
     TabOrder = 4
@@ -110,9 +114,9 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 12
-    Height = 17
-    Top = 184
-    Width = 98
+    Height = 23
+    Top = 322
+    Width = 142
     BorderSpacing.Around = 6
     Caption = 'Backgroud color'
   end
@@ -122,9 +126,9 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 178
-    Height = 17
-    Top = 184
-    Width = 63
+    Height = 23
+    Top = 322
+    Width = 87
     BorderSpacing.Around = 6
     Caption = 'Font color'
   end
@@ -133,8 +137,8 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideTop.Control = Label3
     AnchorSideTop.Side = asrBottom
     Left = 18
-    Height = 23
-    Top = 207
+    Height = 35
+    Top = 351
     Width = 154
     BorderSpacing.Around = 6
     ItemHeight = 0
@@ -145,11 +149,27 @@ inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
     AnchorSideTop.Control = Label4
     AnchorSideTop.Side = asrBottom
     Left = 184
-    Height = 23
-    Top = 207
+    Height = 35
+    Top = 351
     Width = 154
     BorderSpacing.Around = 6
     ItemHeight = 0
     TabOrder = 6
+  end
+  object DividerBevel1: TDividerBevel[11]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = SpinEdit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 23
+    Top = 260
+    Width = 825
+    Caption = 'Database Explorer'
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 12
+    Font.Style = [fsBold]
+    ParentFont = False
   end
 end

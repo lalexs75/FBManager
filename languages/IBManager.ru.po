@@ -612,6 +612,10 @@ msgstr "Столбцы"
 msgid "Color"
 msgstr "Цвет"
 
+#: fbmstrconstunit.scolormark
+msgid "Color Mark"
+msgstr ""
+
 #: fbmstrconstunit.scolumn
 msgid "Column"
 msgstr "Колонка"

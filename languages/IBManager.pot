@@ -586,6 +586,10 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
+#: fbmstrconstunit.scolormark
+msgid "Color Mark"
+msgstr ""
+
 #: fbmstrconstunit.scolumn
 msgid "Column"
 msgstr ""
