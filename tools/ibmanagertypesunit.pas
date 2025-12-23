@@ -872,6 +872,7 @@ begin
   SQLEngine.SetSqlAssistentData(List);
   List.ColName:=sProperty;
   List.ColValue:=sValue;
+  Result:=true;
 end;
 
 procedure TDataBaseRecord.ShowSQLEditor;
