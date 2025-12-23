@@ -27,7 +27,7 @@ interface
 uses
   Classes, ColorBox, ExtCtrls, Spin, StdCtrls, SysUtils, Forms, Controls,
   Graphics, Dialogs, DividerBevel, SQLEngineAbstractUnit,
-  fdbm_ConnectionAbstractUnit;
+  fdbm_ConnectionAbstractUnit, ibmanagertypesunit;
 
 type
 
@@ -47,7 +47,7 @@ type
     Label4 : TLabel;
     SpinEdit1 : TSpinEdit;
   private
-
+    FDBRec: TDataBaseRecord;
   public
     procedure Localize;override;
     procedure Activate;override;
@@ -76,12 +76,31 @@ end;
 
 procedure TfbmCFColorMarksPage.LoadParams(ASQLEngine : TSQLEngineAbstract);
 begin
+  CheckBox1.Checked:=FDBRec.FcmAllowColorsMarking;
+  CheckGroup1.Checked[0]:=FDBRec.FcmWindowTop;
+  CheckGroup1.Checked[1]:=FDBRec.FcmWindowLeft;
+  CheckGroup1.Checked[2]:=FDBRec.FcmWindowBottom;
+  CheckGroup1.Checked[3]:=FDBRec.FcmWindowRight;
+  ColorBox1.Selected:=FDBRec.FcmLineColor;
+  SpinEdit1.Value:=FDBRec.FcmLineWidth;
 
+  CheckBox2.Checked:=FDBRec.FcmAllowColorsMarkingDBExploer;
+  ColorBox2.Selected:=FDBRec.FcmDBExploerBGColor;
+  ColorBox3.Selected:=FDBRec.FcmDBExploerFontColor;
 end;
 
 procedure TfbmCFColorMarksPage.SaveParams;
 begin
-
+  FDBRec.FcmAllowColorsMarking          := CheckBox1.Checked;
+  FDBRec.FcmWindowTop                   := CheckGroup1.Checked[0];
+  FDBRec.FcmWindowLeft                  := CheckGroup1.Checked[1];
+  FDBRec.FcmWindowBottom                := CheckGroup1.Checked[2];
+  FDBRec.FcmWindowRight                 := CheckGroup1.Checked[3];
+  FDBRec.FcmLineColor                   := ColorBox1.Selected;
+  FDBRec.FcmLineWidth                   := SpinEdit1.Value;
+  FDBRec.FcmAllowColorsMarkingDBExploer := CheckBox2.Checked;
+  FDBRec.FcmDBExploerBGColor            := ColorBox2.Selected;
+  FDBRec.FcmDBExploerFontColor          := ColorBox3.Selected;
 end;
 
 function TfbmCFColorMarksPage.PageName : string;
@@ -97,7 +116,7 @@ end;
 constructor TfbmCFColorMarksPage.Create(ASQLEngineAbstract : TSQLEngineAbstract; AOwner : TForm);
 begin
   inherited Create(AOwner);
-//  FSQLEngineAbstract:=ASQLEngineAbstract;
+  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngineAbstract);
 end;
 
 end.

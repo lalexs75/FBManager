@@ -1,12 +1,13 @@
 object fbManDataInpectorForm: TfbManDataInpectorForm
   Left = 487
-  Height = 591
+  Height = 739
   Top = 80
-  Width = 287
+  Width = 359
   ActiveControl = Pagecontrol1
   Caption = 'Database Explorer'
-  ClientHeight = 591
-  ClientWidth = 287
+  ClientHeight = 739
+  ClientWidth = 359
+  DesignTimePPI = 120
   SessionProperties = 'Top;Width;Left;Height'
   ShowHint = True
   LCLVersion = '4.99.0.0'
@@ -15,9 +16,9 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   OnDestroy = IBManDataInpectorFormDestroy
   object Pagecontrol1: TPageControl
     Left = 0
-    Height = 591
+    Height = 739
     Top = 0
-    Width = 287
+    Width = 359
     ActivePage = Tabsheet1
     Align = alClient
     ParentFont = False
@@ -25,14 +26,14 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     TabOrder = 0
     object Tabsheet1: TTabSheet
       Caption = 'Databases'
-      ClientHeight = 560
-      ClientWidth = 283
+      ClientHeight = 702
+      ClientWidth = 349
       ParentFont = False
       object TreeView1: TTreeView
         Left = 0
-        Height = 354
-        Top = 43
-        Width = 283
+        Height = 441
+        Top = 58
+        Width = 349
         Align = alClient
         DragMode = dmAutomatic
         ExpandSignType = tvestPlusMinus
@@ -56,6 +57,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           B5D0BDD18232
         }
         TreeLinePenStyle = psSolid
+        OnAdvancedCustomDrawItem = TreeView1AdvancedCustomDrawItem
         OnChange = TreeView1Change
         OnClick = TreeView1Click
         OnCustomDrawItem = TreeView1CustomDrawItem
@@ -69,22 +71,22 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
       object Splitter1: TSplitter
         Cursor = crVSplit
         Left = 0
-        Height = 5
-        Top = 397
-        Width = 283
+        Height = 6
+        Top = 499
+        Width = 349
         Align = alBottom
         Anchors = [akLeft, akBottom]
         ResizeAnchor = akBottom
       end
       object Panel1: TPanel
         Left = 0
-        Height = 43
+        Height = 58
         Top = 0
-        Width = 283
+        Width = 349
         Align = alTop
         AutoSize = True
-        ClientHeight = 43
-        ClientWidth = 283
+        ClientHeight = 58
+        ClientWidth = 349
         ParentFont = False
         TabOrder = 2
         object TreeFilterEdit1: TTreeFilterEdit
@@ -93,13 +95,13 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideTop.Control = Panel1
           AnchorSideRight.Control = Panel1
           AnchorSideRight.Side = asrBottom
-          Left = 40
-          Height = 29
-          Top = 7
-          Width = 236
-          ButtonWidth = 24
+          Left = 54
+          Height = 40
+          Top = 9
+          Width = 286
+          ButtonWidth = 30
           Anchors = [akTop, akLeft, akRight]
-          BorderSpacing.Around = 6
+          BorderSpacing.Around = 8
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
@@ -112,12 +114,12 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
           AnchorSideLeft.Control = Panel1
           AnchorSideBottom.Control = TreeFilterEdit1
           AnchorSideBottom.Side = asrBottom
-          Left = 7
-          Height = 17
-          Top = 19
-          Width = 27
+          Left = 9
+          Height = 23
+          Top = 26
+          Width = 37
           Anchors = [akLeft, akBottom]
-          BorderSpacing.Left = 6
+          BorderSpacing.Left = 8
           Caption = 'Find'
           ParentColor = False
           ParentFont = False
@@ -125,18 +127,18 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
       end
       object Panel2: TPanel
         Left = 0
-        Height = 158
-        Top = 402
-        Width = 283
+        Height = 197
+        Top = 505
+        Width = 349
         Align = alBottom
-        ClientHeight = 158
-        ClientWidth = 283
+        ClientHeight = 197
+        ClientWidth = 349
         TabOrder = 3
         object LB_SQLAssistent: TListBox
           Left = 1
-          Height = 156
+          Height = 195
           Top = 1
-          Width = 281
+          Width = 347
           Align = alClient
           ClickOnSelChange = False
           DragMode = dmAutomatic
@@ -152,14 +154,14 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     end
     object Tabsheet2: TTabSheet
       Caption = 'Windows'
-      ClientHeight = 560
-      ClientWidth = 283
+      ClientHeight = 702
+      ClientWidth = 349
       ParentFont = False
       object listWindows: TListBox
         Left = 0
-        Height = 560
+        Height = 702
         Top = 0
-        Width = 283
+        Width = 349
         Align = alClient
         ItemHeight = 0
         ParentFont = False
@@ -171,14 +173,14 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'Recent'
-      ClientHeight = 560
-      ClientWidth = 283
+      ClientHeight = 702
+      ClientWidth = 349
       ParentFont = False
       object ListBox1: TListBox
         Left = 0
-        Height = 560
+        Height = 702
         Top = 0
-        Width = 283
+        Width = 349
         Align = alClient
         ItemHeight = 0
         ParentFont = False
@@ -191,8 +193,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain
-    Left = 169
-    Top = 128
+    Left = 211
+    Top = 160
     object dbRegister: TAction
       Category = 'Database'
       Caption = 'Register DB'
@@ -342,8 +344,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   end
   object PopupMenu1: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 121
-    Top = 128
+    Left = 151
+    Top = 160
     object MenuItem10: TMenuItem
       Action = objShow
       OnClick = objShowExecute
@@ -477,8 +479,8 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   end
   object PopupMenu2: TPopupMenu
     Images = fbManagerMainForm.ImageListMain
-    Left = 81
-    Top = 742
+    Left = 101
+    Top = 928
     object MenuItem30: TMenuItem
       Action = saCopyLine
       OnClick = saCopyLineExecute
@@ -498,7 +500,7 @@ object fbManDataInpectorForm: TfbManDataInpectorForm
   object RxIniPropStorage1: TRxIniPropStorage
     StoredValues = <>
     SeparateFiles = True
-    Left = 112
-    Top = 320
+    Left = 140
+    Top = 400
   end
 end

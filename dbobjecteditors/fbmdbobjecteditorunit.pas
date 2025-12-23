@@ -39,6 +39,7 @@ type
     edtComment: TAction;
     edtUncomment: TAction;
     edtRun: TAction;
+    Panel3: TPanel;
     RxIniPropStorage1: TRxIniPropStorage;
     dtRefresh: TAction;
     edtAdd: TAction;
@@ -583,18 +584,6 @@ begin
     shlLeft.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
     shlRight.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
     shlBottom.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
-
-    shlTop.Height :=FInspectorRecord.OwnerDB.FcmLineWidth;
-    shlBottom.Height :=FInspectorRecord.OwnerDB.FcmLineWidth;
-    shlRight.Width :=FInspectorRecord.OwnerDB.FcmLineWidth;
-    shlLeft.Width :=FInspectorRecord.OwnerDB.FcmLineWidth;
-
-    Panel1.AnchorSideTop.Control:=shlLeft;
-    Panel1.AnchorSideTop.Side:=asrBottom;
-    Panel1.AnchorSideLeft.Control:=shlLeft;
-    Panel1.AnchorSideLeft.Side:=asrLeft;
-    Panel1.AnchorSideRight.Control:=shlRight;
-    Panel1.AnchorSideRight.Side:=asrRight;
   end
   else
   begin
@@ -602,30 +591,7 @@ begin
     shlLeft.Visible :=false;
     shlRight.Visible :=false;
     shlBottom.Visible :=false;
-
-    Panel1.AnchorSideTop.Control:=Self;
-    Panel1.AnchorSideTop.Side:=asrTop;
-    Panel1.AnchorSideLeft.Control:=Self;
-    Panel1.AnchorSideLeft.Side:=asrTop;
-    Panel1.AnchorSideRight.Control:=Self;
-    Panel1.AnchorSideRight.Side:=asrTop;
   end;
-{
-  StaticText1.Visible :=true;
-  StaticText1.Height :=3;
-  StaticText2.Visible :=true;
-  StaticText2.Width :=3;
-  StaticText3.Visible :=true;
-  StaticText3.Width :=3;
-  StaticText4.Visible :=true;
-  StaticText3.Height :=3;
-
-  StaticText1.Color :=clRed;
-  StaticText2.Color :=clRed;
-  StaticText3.Color :=clRed;
-  StaticText4.Color :=clRed;
-}
-
 end;
 
 constructor TfbmDBObjectEditorForm.CreateObjectEditor(

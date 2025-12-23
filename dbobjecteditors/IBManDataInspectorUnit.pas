@@ -177,6 +177,7 @@ type
     procedure saHideSQLAssistentExecute(Sender: TObject);
     function TreeFilterEdit1FilterNode(ItemNode: TTreeNode; out Done: Boolean
       ): Boolean;
+    procedure TreeView1AdvancedCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState; Stage: TCustomDrawStage; var PaintImages, DefaultDraw: Boolean);
     procedure TreeView1CustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode;
       State: TCustomDrawState; var DefaultDraw: Boolean);
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
@@ -415,7 +416,17 @@ procedure TfbManDataInpectorForm.TreeView1CustomDrawItem(
 begin
   DefaultDraw:=true;
   if Assigned(Node) and Assigned(Node.Data) and (TObject(Node.Data) is TDBInspectorRecord) then
-    TreeView1.Font.Color:=TDBInspectorRecord(Node.Data).CaptionColor
+  begin
+    if TDBInspectorRecord(Node.Data).OwnerDB.FcmAllowColorsMarkingDBExploer then
+    begin
+      if (cdsSelected in State) then
+        Sender.Canvas.Brush.Color:=TreeView1.SelectionColor
+      else
+        Sender.Canvas.Brush.Color:=TDBInspectorRecord(Node.Data).OwnerDB.FcmDBExploerBGColor;
+    end
+    else
+      TreeView1.Font.Color:=TDBInspectorRecord(Node.Data).CaptionColor
+  end
   else
     TreeView1.Font.Color:=clWindowText;
 end;
@@ -584,6 +595,33 @@ begin
     S2:=UTF8UpperCase(ItemNode.Parent.Text);
     Result:=Pos(S1, S2)>0;
     Done:=true;
+  end;
+end;
+
+procedure TfbManDataInpectorForm.TreeView1AdvancedCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState; Stage: TCustomDrawStage; var PaintImages, DefaultDraw: Boolean);
+var
+  R: TRect;
+begin
+  DefaultDraw:=true;
+  if Assigned(Node) and Assigned(Node.Data) and (TObject(Node.Data) is TDBInspectorRecord) then
+  begin
+    if TDBInspectorRecord(Node.Data).OwnerDB.FcmAllowColorsMarkingDBExploer then
+    begin
+      if Stage = cdPreErase then
+      begin
+        if (cdsSelected in State) then
+          Sender.Canvas.Brush.Color:=TreeView1.SelectionColor
+        else
+          Sender.Canvas.Brush.Color:=TDBInspectorRecord(Node.Data).OwnerDB.FcmDBExploerBGColor;
+{
+        R:=Node.DisplayRect(False);
+        if (cdsSelected in State) then
+          Sender.Canvas.Brush.Color:=TreeView1.SelectionColor
+        else
+          Sender.Canvas.Brush.Color:=TreeView1.BackgroundColor;}
+//        Sender.Canvas.FillRect(R);
+      end;
+    end;
   end;
 end;
 

@@ -192,7 +192,7 @@ type
 
     FcmAllowColorsMarkingDBExploer:boolean;
     FcmDBExploerBGColor:TColor;
-    FcmDBExploerFGColor:TColor;
+    FcmDBExploerFontColor:TColor;
 
 
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);

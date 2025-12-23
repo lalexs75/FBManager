@@ -44,6 +44,7 @@ type
   { TfbmSQLEditorForm }
 
   TfbmSQLEditorForm = class(TForm)
+    Panel6: TPanel;
     resAutoFillCollumnWidth: TAction;
     edtCopy: TAction;
     edtUndo: TAction;
@@ -57,6 +58,10 @@ type
     PageControl2: TPageControl;
     InfoPageControl: TPageControl;
     RxDBVerticalGrid1: TRxDBVerticalGrid;
+    shlBottom: TShape;
+    shlLeft: TShape;
+    shlRight: TShape;
+    shlTop: TShape;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
@@ -329,6 +334,7 @@ type
     procedure DoStopExecQuery;
     procedure OnEditorChangeStatus(Sender: TObject);
     procedure OnBeforeSaveFileEdit(Sender:Tfdbm_SynEditorFrame; const TextEditor: TSynEdit;var AFileName:string);
+    procedure UpdateColorDBMarking;
   public
     constructor CreateSqlEditor(AOwnerRec:TDataBaseRecord);
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
@@ -1677,6 +1683,28 @@ begin
   AFileName:=NormalizeFileName(FSqlEditorTextCur.Name);
 end;
 
+procedure TfbmSQLEditorForm.UpdateColorDBMarking;
+begin
+  if Assigned(FOwnerRec) and (FOwnerRec.FcmAllowColorsMarking) then
+  begin
+    shlTop.Visible :=FOwnerRec.FcmWindowTop;
+    shlLeft.Visible :=FOwnerRec.FcmWindowLeft;
+    shlRight.Visible :=FOwnerRec.FcmWindowRight;
+    shlBottom.Visible :=FOwnerRec.FcmWindowBottom;
+    shlTop.Color :=FOwnerRec.FcmLineColor;
+    shlLeft.Color :=FOwnerRec.FcmLineColor;
+    shlRight.Color :=FOwnerRec.FcmLineColor;
+    shlBottom.Color :=FOwnerRec.FcmLineColor;
+  end
+  else
+  begin
+    shlTop.Visible :=false;
+    shlLeft.Visible :=false;
+    shlRight.Visible :=false;
+    shlBottom.Visible :=false;
+  end;
+end;
+
 procedure TfbmSQLEditorForm.SaveSQLEdiorsDesktop;
 begin
 //  FOwnerRec.SaveSQLEditor(nil);
@@ -1855,6 +1883,7 @@ begin
   else
     DBNavigator1.VisibleButtons:=[nbFirst, nbPrior, nbNext, nbLast];
 
+  UpdateColorDBMarking;
   FillCommonDBList;
 end;
 
