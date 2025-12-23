@@ -130,7 +130,7 @@ uses
   fbmCompillerMessagesUnit, fbmPgObjectEditorsUtils, mssql_VisualToolsCallUnit,
   mssql_sql_parser, mssql_EngineSecurityUnit, mssqlRoleEditorUnit,
   FBSQLEngineSecurityUnit, fbmFBUserMainEditorUnit, fdbmVisualOptionsUnit,
-  fdbmIOConfigPageUnit, assistTypesUnit, assistMainUnit;
+  fdbmIOConfigPageUnit, assistTypesUnit, assistMainUnit, fbmCFColorMarksPageUnit;
 
 {$R IBManager.res}
 

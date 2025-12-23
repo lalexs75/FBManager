@@ -1,0 +1,155 @@
+inherited fbmCFColorMarksPage: TfbmCFColorMarksPage
+  Height = 480
+  Width = 825
+  ClientHeight = 480
+  ClientWidth = 825
+  object CheckBox1: TCheckBox[0]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 6
+    Height = 24
+    Top = 6
+    Width = 300
+    BorderSpacing.Around = 6
+    Caption = 'Allow color marking of the database windows'
+    TabOrder = 0
+  end
+  object Label1: TLabel[1]
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 312
+    Height = 17
+    Top = 36
+    Width = 89
+    BorderSpacing.Around = 6
+    Caption = 'Mark line color'
+  end
+  object Label2: TLabel[2]
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ColorBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 312
+    Height = 17
+    Top = 88
+    Width = 154
+    BorderSpacing.Around = 6
+    Caption = 'Mark line thickness, pixels'
+  end
+  object CheckGroup1: TCheckGroup[3]
+    AnchorSideLeft.Control = CheckBox1
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 112
+    Top = 36
+    Width = 175
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Around = 6
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 108
+    ClientWidth = 171
+    Items.Strings = (
+      'On top of window'
+      'On left of window'
+      'On bottom of window'
+      'On right of window'
+    )
+    TabOrder = 1
+    Data = {
+      0400000002020202
+    }
+  end
+  object ColorBox1: TColorBox[4]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 318
+    Height = 23
+    Top = 59
+    Width = 154
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 2
+  end
+  object SpinEdit1: TSpinEdit[5]
+    AnchorSideLeft.Control = Label1
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    Left = 318
+    Height = 27
+    Top = 111
+    Width = 154
+    BorderSpacing.Around = 6
+    TabOrder = 3
+  end
+  object CheckBox2: TCheckBox[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckGroup1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 154
+    Width = 297
+    BorderSpacing.Around = 6
+    Caption = 'Allow color marking in the Database Explorer'
+    TabOrder = 4
+  end
+  object Label3: TLabel[7]
+    AnchorSideLeft.Control = CheckBox2
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 12
+    Height = 17
+    Top = 184
+    Width = 98
+    BorderSpacing.Around = 6
+    Caption = 'Backgroud color'
+  end
+  object Label4: TLabel[8]
+    AnchorSideLeft.Control = ColorBox2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 178
+    Height = 17
+    Top = 184
+    Width = 63
+    BorderSpacing.Around = 6
+    Caption = 'Font color'
+  end
+  object ColorBox2: TColorBox[9]
+    AnchorSideLeft.Control = Label3
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    Left = 18
+    Height = 23
+    Top = 207
+    Width = 154
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 5
+  end
+  object ColorBox3: TColorBox[10]
+    AnchorSideLeft.Control = Label4
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    Left = 184
+    Height = 23
+    Top = 207
+    Width = 154
+    BorderSpacing.Around = 6
+    ItemHeight = 0
+    TabOrder = 6
+  end
+end

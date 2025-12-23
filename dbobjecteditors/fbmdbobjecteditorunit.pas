@@ -60,6 +60,10 @@ type
     Panel1: TPanel;
     PopupMenu2: TPopupMenu;
     PopupMenu3: TPopupMenu;
+    shlTop : TShape;
+    shlLeft : TShape;
+    shlRight : TShape;
+    shlBottom : TShape;
     ToolPanel1: TToolPanel;
     dtExport: TAction;
     edtCompile: TAction;
@@ -105,6 +109,7 @@ type
     procedure SetObjectCaption(AModified:boolean);
     function ppMsgListDblClick(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean;
     function ppMsgListRemoveVar(Sender:TfbmCompillerMessagesFrame;  AInfo:TppMsgRec):Boolean;
+    procedure UpdateColorDBMarking;
   public
     OnCreateNewDBObject:TOnCreateNewDBObject;
     constructor CreateObjectEditor(ADataBaseRecord: TDBInspectorRecord);
@@ -566,6 +571,63 @@ begin
   end;
 end;
 
+procedure TfbmDBObjectEditorForm.UpdateColorDBMarking;
+begin
+  if Assigned(FInspectorRecord) and (FInspectorRecord.OwnerDB.FcmAllowColorsMarking) then
+  begin
+    shlTop.Visible :=FInspectorRecord.OwnerDB.FcmWindowTop;
+    shlLeft.Visible :=FInspectorRecord.OwnerDB.FcmWindowLeft;
+    shlRight.Visible :=FInspectorRecord.OwnerDB.FcmWindowRight;
+    shlBottom.Visible :=FInspectorRecord.OwnerDB.FcmWindowBottom;
+    shlTop.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
+    shlLeft.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
+    shlRight.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
+    shlBottom.Color :=FInspectorRecord.OwnerDB.FcmLineColor;
+
+    shlTop.Height :=FInspectorRecord.OwnerDB.FcmLineWidth;
+    shlBottom.Height :=FInspectorRecord.OwnerDB.FcmLineWidth;
+    shlRight.Width :=FInspectorRecord.OwnerDB.FcmLineWidth;
+    shlLeft.Width :=FInspectorRecord.OwnerDB.FcmLineWidth;
+
+    Panel1.AnchorSideTop.Control:=shlLeft;
+    Panel1.AnchorSideTop.Side:=asrBottom;
+    Panel1.AnchorSideLeft.Control:=shlLeft;
+    Panel1.AnchorSideLeft.Side:=asrLeft;
+    Panel1.AnchorSideRight.Control:=shlRight;
+    Panel1.AnchorSideRight.Side:=asrRight;
+  end
+  else
+  begin
+    shlTop.Visible :=false;
+    shlLeft.Visible :=false;
+    shlRight.Visible :=false;
+    shlBottom.Visible :=false;
+
+    Panel1.AnchorSideTop.Control:=Self;
+    Panel1.AnchorSideTop.Side:=asrTop;
+    Panel1.AnchorSideLeft.Control:=Self;
+    Panel1.AnchorSideLeft.Side:=asrTop;
+    Panel1.AnchorSideRight.Control:=Self;
+    Panel1.AnchorSideRight.Side:=asrTop;
+  end;
+{
+  StaticText1.Visible :=true;
+  StaticText1.Height :=3;
+  StaticText2.Visible :=true;
+  StaticText2.Width :=3;
+  StaticText3.Visible :=true;
+  StaticText3.Width :=3;
+  StaticText4.Visible :=true;
+  StaticText3.Height :=3;
+
+  StaticText1.Color :=clRed;
+  StaticText2.Color :=clRed;
+  StaticText3.Color :=clRed;
+  StaticText4.Color :=clRed;
+}
+
+end;
+
 constructor TfbmDBObjectEditorForm.CreateObjectEditor(
   ADataBaseRecord: TDBInspectorRecord);
 begin
@@ -575,7 +637,7 @@ begin
 
   Label1.Caption:=ObjectKindToStr(FInspectorRecord.DBObject.DBObjectKind);
 
-  Panel2.Align:=alClient;
+//  Panel2.Align:=alClient;
 
   RecreatePages;
 
@@ -585,6 +647,8 @@ begin
   Panel1.Visible:=ConfigValues.ByNameAsBoolean('defShowObjCaption', true);
 
   MakeWindowIcon;
+
+  UpdateColorDBMarking;
 end;
 
 procedure TfbmDBObjectEditorForm.SetPageNum(APageNum: integer);

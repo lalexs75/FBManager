@@ -1037,6 +1037,7 @@ end;
 
 procedure TfbManDataInpectorForm.Localize;
 begin
+  Caption :=sDatabaseExplorer;
   Tabsheet1.Caption:=sOIDatabases;
   Tabsheet2.Caption:=sOIWindows;
   Tabsheet3.Caption:=sOIRecent;

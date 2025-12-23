@@ -100,6 +100,7 @@ resourcestring
   sMenuCloseAll                     = 'Close all';
   sMenuCloseAllHint                 = 'Close all window';
 
+  sDatabaseExplorer                 = 'Database Explorer';
   sMenuHelp                         = 'Help';
   sMenuAbout                        = 'About...';
   sMenuAboutHint                    = 'About of application';

@@ -1,29 +1,35 @@
 object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
-  Left = 520
-  Height = 569
-  Top = 225
-  Width = 912
+  Left = 630
+  Height = 593
+  Top = 244
+  Width = 918
   Caption = 'Edit ...'
-  ClientHeight = 569
-  ClientWidth = 912
+  ClientHeight = 593
+  ClientWidth = 918
   Position = poScreenCenter
   SessionProperties = 'ListBox1.Width'
   ShowHint = True
-  LCLVersion = '3.99.0.0'
+  LCLVersion = '4.99.0.0'
   OnClose = FormClose
   object Panel2: TPanel
-    Left = 216
-    Height = 440
-    Top = 64
-    Width = 680
-    ClientHeight = 440
-    ClientWidth = 680
+    AnchorSideLeft.Control = Splitter1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Panel1
+    AnchorSideRight.Control = shlRight
+    AnchorSideBottom.Control = shlBottom
+    Left = 108
+    Height = 587
+    Top = 3
+    Width = 807
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ClientHeight = 587
+    ClientWidth = 807
     TabOrder = 0
     object ToolPanel1: TToolPanel
       Left = 1
-      Height = 34
+      Height = 36
       Top = 1
-      Width = 678
+      Width = 805
       Items = <      
         item
           Action = edtCompile
@@ -121,17 +127,21 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       CustomizeShortCut = False
       Align = alTop
       BorderWidth = 4
-      ClientHeight = 34
-      ClientWidth = 678
+      ClientHeight = 36
+      ClientWidth = 805
       TabOrder = 0
     end
   end
   object ListBox1: TListBox
-    Left = 0
-    Height = 528
-    Top = 41
+    AnchorSideLeft.Control = shlLeft
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Panel1
+    AnchorSideBottom.Control = shlBottom
+    Left = 3
+    Height = 587
+    Top = 3
     Width = 100
-    Align = alLeft
+    Anchors = [akTop, akLeft, akBottom]
     ItemHeight = 0
     ScrollWidth = 98
     TabOrder = 1
@@ -139,17 +149,28 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
     OnClick = ListBox1Click
   end
   object Splitter1: TSplitter
-    Left = 100
-    Height = 528
-    Top = 41
+    AnchorSideLeft.Control = ListBox1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Panel1
+    AnchorSideBottom.Control = shlBottom
+    Left = 103
+    Height = 587
+    Top = 3
     Width = 5
+    Align = alNone
+    Anchors = [akTop, akLeft, akBottom]
   end
   object Panel1: TPanel
-    Left = 0
+    AnchorSideLeft.Control = shlLeft
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = shlTop
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = shlRight
+    Left = 3
     Height = 41
-    Top = 0
+    Top = 3
     Width = 912
-    Align = alTop
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 41
@@ -184,6 +205,42 @@ object fbmDBObjectEditorForm: TfbmDBObjectEditorForm
       ReadOnly = True
       TabOrder = 0
     end
+  end
+  object shlTop: TShape
+    Left = 0
+    Height = 3
+    Top = 0
+    Width = 918
+    Align = alTop
+    Brush.Color = clRed
+    Pen.Color = clRed
+  end
+  object shlLeft: TShape
+    Left = 0
+    Height = 587
+    Top = 3
+    Width = 3
+    Align = alLeft
+    Brush.Color = clRed
+    Pen.Color = clRed
+  end
+  object shlRight: TShape
+    Left = 915
+    Height = 587
+    Top = 3
+    Width = 3
+    Align = alRight
+    Brush.Color = clRed
+    Pen.Color = clRed
+  end
+  object shlBottom: TShape
+    Left = 0
+    Height = 3
+    Top = 590
+    Width = 918
+    Align = alBottom
+    Brush.Color = clRed
+    Pen.Color = clRed
   end
   object ActionList1: TActionList
     Images = fbManagerMainForm.ImageListMain

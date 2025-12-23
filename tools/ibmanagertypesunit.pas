@@ -181,6 +181,20 @@ type
     RecentDBItems:TRecentFiles;
     RecentSQLScrip:TRecentFiles;
 
+    //Color marking
+    FcmAllowColorsMarking:boolean;
+    FcmWindowTop:boolean;
+    FcmWindowBottom:boolean;
+    FcmWindowLeft:boolean;
+    FcmWindowRight:boolean;
+    FcmLineWidth:integer;
+    FcmLineColor:TColor;
+
+    FcmAllowColorsMarkingDBExploer:boolean;
+    FcmDBExploerBGColor:TColor;
+    FcmDBExploerFGColor:TColor;
+
+
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
     constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);
     destructor Destroy; override;

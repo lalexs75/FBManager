@@ -1028,6 +1028,10 @@ msgstr ""
 msgid "Database dialect"
 msgstr ""
 
+#: fbmstrconstunit.sdatabaseexplorer
+msgid "Database Explorer"
+msgstr ""
+
 #: fbmstrconstunit.sdatabasefile
 msgid "Database file"
 msgstr ""

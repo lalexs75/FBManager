@@ -32,7 +32,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="13"/>
       <RevisionNr Value="3"/>
-      <BuildNr Value="5770"/>
+      <BuildNr Value="5773"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.13"/>
@@ -1983,6 +1983,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="assistMainUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="connection_frames/fbmcfcolormarkspageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmCFColorMarksPage"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmCFColorMarksPageUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>

@@ -1062,6 +1062,10 @@ msgstr "Сравнение БД"
 msgid "Database dialect"
 msgstr "Диалект базы данных"
 
+#: fbmstrconstunit.sdatabaseexplorer
+msgid "Database Explorer"
+msgstr ""
+
 #: fbmstrconstunit.sdatabasefile
 msgid "Database file"
 msgstr "Файл базы данных"
