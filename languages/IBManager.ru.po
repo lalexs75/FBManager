@@ -163,11 +163,11 @@ msgstr "Все объекты"
 
 #: fbmstrconstunit.sallowcolormarkingdatabasewindows
 msgid "Allow color marking of the database windows"
-msgstr ""
+msgstr "Разрешить цветовую индикацию окон базы данных"
 
 #: fbmstrconstunit.sallowcolormarkingindbexplorer
 msgid "Allow color marking in the Database Explorer"
-msgstr ""
+msgstr "Разрешить цветовую индикацию базы данных в инспекторе"
 
 #: fbmstrconstunit.sallowmultiselect
 msgid "Allow multiselect"
@@ -352,7 +352,7 @@ msgstr "Время запуска клиента"
 
 #: fbmstrconstunit.sbackgroudcolor
 msgid "Backgroud color"
-msgstr ""
+msgstr "Цвет фона"
 
 #: fbmstrconstunit.sbackground
 msgid "Background"
@@ -589,19 +589,19 @@ msgstr "Закрыть"
 
 #: fbmstrconstunit.scmonbottomofwindow
 msgid "On bottom of window"
-msgstr ""
+msgstr "В нижней части окна"
 
 #: fbmstrconstunit.scmonleftofwindow
 msgid "On left of window"
-msgstr ""
+msgstr "Слева от окна"
 
 #: fbmstrconstunit.scmonrightofwindow
 msgid "On right of window"
-msgstr ""
+msgstr "Справа от окна"
 
 #: fbmstrconstunit.scmontopofwindow
 msgid "On top of window"
-msgstr ""
+msgstr "На верхней части окна"
 
 #: fbmstrconstunit.scodeexploer
 msgctxt "fbmstrconstunit.scodeexploer"
@@ -642,7 +642,7 @@ msgstr "Цвет"
 
 #: fbmstrconstunit.scolormark
 msgid "Color Mark"
-msgstr ""
+msgstr "Цветовая метка"
 
 #: fbmstrconstunit.scolumn
 msgid "Column"
@@ -1096,7 +1096,7 @@ msgstr "Диалект базы данных"
 
 #: fbmstrconstunit.sdatabaseexplorer
 msgid "Database Explorer"
-msgstr ""
+msgstr "Инспектор БД"
 
 #: fbmstrconstunit.sdatabasefile
 msgid "Database file"
@@ -1838,7 +1838,7 @@ msgstr ""
 
 #: fbmstrconstunit.senablepingtimer
 msgid "Enable ping timer"
-msgstr ""
+msgstr "Разрешить ping таймер"
 
 #: fbmstrconstunit.senablesetwgofrompopup
 msgid "Enable set \"With Grant Options\" from popup menu"
@@ -1897,7 +1897,7 @@ msgstr "Ошибка"
 #: fbmstrconstunit.serrordefineattributename
 #, object-pascal-format
 msgid "Error define attribute name \"%s\""
-msgstr ""
+msgstr "Ошибка определения атрибута \"%s\""
 
 #: fbmstrconstunit.serrordefineauthpluginname
 msgid "Error define authentication plugin name"
@@ -2394,7 +2394,7 @@ msgstr "Плавающие кнопки в панели задач"
 
 #: fbmstrconstunit.sfontcolor
 msgid "Font color"
-msgstr ""
+msgstr "Свет шрифта"
 
 #: fbmstrconstunit.sfontsize
 msgid "Font size"
@@ -3235,11 +3235,11 @@ msgstr "Ручной ввод"
 
 #: fbmstrconstunit.smarklinecolor
 msgid "Mark line color"
-msgstr ""
+msgstr "Цвет линии отметки"
 
 #: fbmstrconstunit.smarklinethicknesspixels
 msgid "Mark line thickness, pixels"
-msgstr ""
+msgstr "Отметьте толщину линии в пикселях"
 
 #: fbmstrconstunit.smaterializedview
 msgid "MaterializedView"
@@ -3389,12 +3389,12 @@ msgstr "Отключиться от указанной базы данных"
 #: fbmstrconstunit.smenuduplicateobject
 msgctxt "fbmstrconstunit.smenuduplicateobject"
 msgid "Duplicate object"
-msgstr ""
+msgstr "Дубликат объекта"
 
 #: fbmstrconstunit.smenuduplicateobjecthint
 msgctxt "fbmstrconstunit.smenuduplicateobjecthint"
 msgid "Duplicate object"
-msgstr ""
+msgstr "Дубликат объекта"
 
 #: fbmstrconstunit.smenuextractmetadata
 msgctxt "fbmstrconstunit.smenuextractmetadata"
@@ -4436,7 +4436,7 @@ msgstr "Действительна до"
 
 #: fbmstrconstunit.spinginterval
 msgid "Ping interval (minutes)"
-msgstr ""
+msgstr "Интервал пинга (минуты)"
 
 #: fbmstrconstunit.spk
 msgid "PK"
@@ -4662,7 +4662,7 @@ msgstr "Перекомпилировать все триггеры"
 
 #: fbmstrconstunit.srecordcount
 msgid "Record count"
-msgstr ""
+msgstr "Количество записей"
 
 #: fbmstrconstunit.srecordcountget
 msgctxt "fbmstrconstunit.srecordcountget"
@@ -4670,7 +4670,7 @@ msgid "Get record count"
 msgstr "Кол-во записей"
 
 #: fbmstrconstunit.srecordcountintable
-#, object-pascal-format, fuzzy
+#, object-pascal-format
 msgctxt "fbmstrconstunit.srecordcountintable"
 msgid "%d records in table"
 msgstr "%d запись(ей) в таблице"
@@ -6209,11 +6209,11 @@ msgstr "Подчёркнуто"
 
 #: fbmstrconstunit.sunderline1
 msgid "Under line"
-msgstr ""
+msgstr "Нижняя линия"
 
 #: fbmstrconstunit.sunderupperlines
 msgid "Under + upper lines"
-msgstr ""
+msgstr "Верхняя и нижняя линия"
 
 #: fbmstrconstunit.sundo
 msgid "Undo"
@@ -6290,7 +6290,7 @@ msgstr "ВЕРХНИЙ РЕГИСТР"
 
 #: fbmstrconstunit.supperline
 msgid "Upper line"
-msgstr ""
+msgstr "Верхняя линия"
 
 #: fbmstrconstunit.susage
 msgid "Usage"
@@ -6493,11 +6493,11 @@ msgstr "Widget : "
 
 #: fbmstrconstunit.swindownavigation
 msgid "Window navigation"
-msgstr ""
+msgstr "Оконная навигация"
 
 #: fbmstrconstunit.swindowsbarmarkstyle
 msgid "Windows bar mark style"
-msgstr ""
+msgstr "Стиль в полосе окон"
 
 #: fbmstrconstunit.swithdatatype
 msgid "With data type"
@@ -6731,15 +6731,15 @@ msgstr "Время (без чесового пояса)"
 
 #: pg_utils.s_pg_timestamp
 msgid "date and time (no time zone)"
-msgstr "Дата и время (без часового пояса)"
+msgstr "дата и время (без часового пояса)"
 
 #: pg_utils.s_pg_timestamp_wtz
 msgid "date and time, including time zone"
-msgstr "Дата и время (включая часовой пояс)"
+msgstr "дата и время (включая часовой пояс)"
 
 #: pg_utils.s_pg_time_wtz
 msgid "time of day, including time zone"
-msgstr "Время (включая часовой пояс)"
+msgstr "время (включая часовой пояс)"
 
 #: pg_utils.s_pg_trigger
 msgid "A trigger function is declared to return trigger."
@@ -6747,11 +6747,11 @@ msgstr "Описывается триггерная фунция для возв
 
 #: pg_utils.s_pg_tsquery
 msgid "text search query"
-msgstr "Запрос поиска текста"
+msgstr "запрос поиска текста"
 
 #: pg_utils.s_pg_tsvector
 msgid "text search document"
-msgstr "Текстовый поиск"
+msgstr "текстовый поиск"
 
 #: pg_utils.s_pg_txid_snapshot
 msgid "user-level transaction ID snapshot"
@@ -6763,12 +6763,12 @@ msgstr "Неизвестные данные"
 
 #: pg_utils.s_pg_uuid
 msgid "universally unique identifier"
-msgstr "Уникальный универсальный идентификатор (GUID)"
+msgstr "уникальный универсальный идентификатор (GUID)"
 
 #: pg_utils.s_pg_varchar
 msgctxt "pg_utils.s_pg_varchar"
 msgid "variable-length character string"
-msgstr "Строка переменной длинны"
+msgstr "строка переменной длинны"
 
 #: pg_utils.s_pg_void
 msgid "Indicates that a function returns no value."
@@ -6777,4 +6777,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
