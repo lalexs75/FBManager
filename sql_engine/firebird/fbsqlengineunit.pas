@@ -1852,19 +1852,19 @@ end;
 procedure TSQLEngineFireBird.SetSqlAssistentData(const List: TStrings);
 begin
   inherited SetSqlAssistentData(List);
-  List.Add(sClientLib + FBDatabase.LibraryName);
-  List.Add(sRoleName + FRoleName);
+  List.Add('%s : %s', [sClientLib, FBDatabase.LibraryName]);
+  List.Add('%s : %s', [sRoleName, FRoleName]);
   if Connected then
   begin
     try
       List.Add('-------------------------');
-      List.Add(sDialect + IntToStr(FBDatabase.SQLDialect));
-      List.Add(sServerVersion + FBDatabase.InfoVersion);
-      List.Add(sDBCharset     + FDBCharSet);
-      List.Add(sODSVersion + IntToStr(FBDatabase.InfoOdsVersion)+'.'+IntToStr(FBDatabase.InfoOdsMinorVersion));
+      List.Add('%s : %d', [sDialect, FBDatabase.SQLDialect]);
+      List.Add('%s : %s', [sServerVersion, FBDatabase.InfoVersion]);
+      List.Add('%s : %s', [sDBCharset, FDBCharSet]);
+      List.Add('%s : %d.%d', [sODSVersion, FBDatabase.InfoOdsVersion, FBDatabase.InfoOdsMinorVersion]);
 
-      List.Add(sPageSize + IntToStr(FBDatabase.InfoPageSize));
-      List.Add(sPageCount + IntToStr(FBDatabase.InfoDbSizeInPages));
+      List.Add('%s : %d', [sPageSize, FBDatabase.InfoPageSize]);
+      List.Add('%s : %d', [sPageCount, FBDatabase.InfoDbSizeInPages]);
       List.Add(sDBFileSize);
     finally
     end;

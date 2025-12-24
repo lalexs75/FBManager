@@ -2150,16 +2150,16 @@ procedure TSQLEngineAbstract.SetSqlAssistentData(const List: TStrings);
 var
   S: String;
 begin
-  List.Add(ClassName + ' : ' + AliasName);
+  List.Add('%s : %s', [ClassName, AliasName]);
   S:=GetServerInfoVersion;
   if S <> '' then
-    List.Add(sServerVersion + S);
+    List.Add('%s : %s', [sServerVersion, S]);
 
   if upRemote in UIParams then
-    List.Add(sServerName + ServerName);
-  List.Add(sDatabaseName + DataBaseName);
+    List.Add('%s : %s', [sServerName, ServerName]);
+  List.Add('%s : %s', [sDatabaseName, DataBaseName]);
   if upUserName in UIParams then
-    List.Add(sUserName + UserName);
+    List.Add('%s : %s', [sUserName, UserName]);
 end;
 
 procedure TSQLEngineAbstract.SetSqlAssistentData(const List: TAssistentItems);
