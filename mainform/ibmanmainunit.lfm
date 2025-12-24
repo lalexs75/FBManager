@@ -266,6 +266,7 @@ object fbManagerMainForm: TfbManagerMainForm
     BevelOuter = bvLowered
     Options = [rxpoCloseF4, rxpoSwithByTab]
     HideCloseButton = False
+    OnChangeCurrentChild = RxMDIPanel1ChangeCurrentChild
     WindowMenu = WindowItems
   end
   object ActionList1: TActionList

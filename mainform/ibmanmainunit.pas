@@ -166,6 +166,7 @@ type
     procedure optKeyboardTemplatesExecute(Sender: TObject);
     procedure optObjectTemplatesExecute(Sender: TObject);
     procedure optVisualOptionsExecute(Sender: TObject);
+    procedure RxMDIPanel1ChangeCurrentChild(Sender: TRxMDIPanel; AForm: TForm);
     procedure Speedbutton4Click(Sender: TObject);
     procedure dbRegisterExecute(Sender: TObject);
     procedure dbUnregisterExecute(Sender: TObject);
@@ -646,6 +647,14 @@ begin
   finally
     fdbmVisualOptionsForm.Free;
   end;
+end;
+
+procedure TfbManagerMainForm.RxMDIPanel1ChangeCurrentChild(Sender: TRxMDIPanel; AForm: TForm);
+begin
+  if Assigned(AForm) and (AForm is TfbmDBObjectEditorForm) then
+  begin
+    fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
+  end
 end;
 
 procedure TfbManagerMainForm.ShowDataInspector;
