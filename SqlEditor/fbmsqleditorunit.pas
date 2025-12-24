@@ -339,6 +339,7 @@ type
     constructor CreateSqlEditor(AOwnerRec:TDataBaseRecord);
     procedure SaveState(const ObjName:string; const Ini:TIniFile);
     procedure RestoreState(const ObjName:string; const Ini:TIniFile);
+    property OwnerRec:TDataBaseRecord read FOwnerRec;
   end;
 
 { TODO -cдоработка : Необходимо создать инструмент создания представления по текущему запросу }

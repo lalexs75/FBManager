@@ -25,7 +25,7 @@ unit IBManMainUnit;
 interface
 
 uses
-  Classes, SysUtils, LResources, Forms, Controls, Dialogs, ComCtrls, ExtCtrls,
+  Classes, ibmanagertypesunit, SysUtils, LResources, Forms, Controls, Dialogs, ComCtrls, ExtCtrls,
   ActnList, Menus, fbmToolsUnit, fbmExtractUnit, fbmReportManagerUnit,
   rxtoolbar, RxSortFBDataSet, RxSortZeos, RxMDI, RxIniPropStorage, fpsexport,
   fpdataexporter, LR_Class, LR_E_TXT, LR_E_HTM, LR_Desgn, LR_BarC, LR_RRect,
@@ -188,6 +188,7 @@ type
     procedure MakeToolsMenu;
     procedure Localize;
     procedure DoLoadPrefs;
+    procedure MDIPaintButton(Sender:TRxMDIButton; AForm:TForm); //Может вынести в другой модуль?
   public
     procedure TabsActiveFormChange(Sender: TObject);
     procedure ShowDataInspector;
@@ -200,7 +201,7 @@ var
   fbManagerMainForm: TfbManagerMainForm;
 
 implementation
-uses IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
+uses fbmDBObjectEditorUnit, fbmSQLEditorUnit, IBManDataInspectorUnit, fdmAboutUnit, fbmEnvironmentOptionsUnit, rxlogging,
   fbmEditorOptionsUnit, fbmStrConstUnit, fbmUserDataBaseUnit, fbmsqlscript,
   fbmCreateConnectionUnit, fbmObjectTemplatesunit, fdbmVisualOptionsUnit,
   LCLIntf, LCLType, rxAppUtils, fdbm_SynEditorCompletionHintUnit,
@@ -473,6 +474,31 @@ begin
   RxMDITasks1.Options:=FT1;
 end;
 
+procedure TfbManagerMainForm.MDIPaintButton(Sender : TRxMDIButton; AForm : TForm);
+var
+  P : TDataBaseRecord;
+begin
+  if not Assigned(AForm) then Exit;
+  if AForm is TfbmDBObjectEditorForm then
+    P:=TfbmDBObjectEditorForm(AForm).InspectorRecord.OwnerDB
+  else
+  if AForm is TfbmSQLEditorForm then
+    P:=TfbmSQLEditorForm(AForm).OwnerRec
+  else
+    Exit;
+
+  if Assigned(P) and (P.FcmMDIButtonStyle<>0) then
+  begin
+    Sender.Canvas.Pen.Color :=P.FcmMDIButtonColor;
+    Sender.Canvas.Pen.Width :=2;
+    case P.FcmMDIButtonStyle of
+      1:Sender.Canvas.Line(1, Sender.Height-2, Sender.Width - 2, Sender.Height-2);
+      2:Sender.Canvas.Line(1, 1, Sender.Width - 2, 1);
+//      3
+    end;
+  end;
+end;
+
 procedure TfbManagerMainForm.IBManagerMainFormCreate(Sender: TObject);
 begin
   Localize;
@@ -490,6 +516,7 @@ begin
   {$IFDEF WINDOWS}
   tlsDataBaseComparer.Enabled:=false;
   {$ENDIF}
+  RxMDITasks1.OnPaintButton :=@MDIPaintButton;
 
   if ConfigValues.ByNameAsBoolean('StartUp/Maximize main window on startup', true) then
      WindowState:=wsMaximized;

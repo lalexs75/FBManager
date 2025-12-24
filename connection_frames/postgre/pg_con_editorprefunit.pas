@@ -25,7 +25,7 @@ unit pg_con_EditorPrefUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, Spin, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   EditBtn, fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
   PostgreSQLEngineUnit;
 
@@ -38,8 +38,11 @@ type
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    CheckBox5 : TCheckBox;
     DirectoryEdit1: TDirectoryEdit;
     Label1: TLabel;
+    Label2 : TLabel;
+    SpinEdit1 : TSpinEdit;
   private
     FSQLEngine:TSQLEngineAbstract;
     procedure InitFrame;
@@ -119,12 +122,29 @@ end;
 
 constructor Tpg_con_EditorPrefPage.Create(ASQLEngine: TSQLEngineAbstract;
   AOwner: TForm);
+var
+  P:TControl;
 begin
   inherited Create(AOwner);
   FSQLEngine:=ASQLEngine;
 
   CheckBox3.Visible:=feSheduller in ASQLEngine.SQLEngileFeatures;
   CheckBox4.Visible:=ASQLEngine is TSQLEnginePostgre;
+  CheckBox5.Visible :=feDBPing in ASQLEngine.SQLEngileFeatures;
+  Label2.Visible :=CheckBox5.Visible;
+  SpinEdit1.Visible :=CheckBox5.Visible;
+  if CheckBox5.Visible then
+  begin
+    if CheckBox4.Visible then
+      P:=CheckBox4
+    else
+    if CheckBox3.Visible then
+      P:=CheckBox3
+    else
+      P:=DirectoryEdit1;
+    CheckBox5.AnchorSideTop.Control:=P;
+  end;
+
 end;
 
 end.

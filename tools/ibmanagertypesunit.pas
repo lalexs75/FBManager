@@ -194,6 +194,8 @@ type
     FcmDBExploerBGColor:TColor;
     FcmDBExploerFontColor:TColor;
 
+    FcmMDIButtonStyle:Integer;
+    FcmMDIButtonColor:TColor;
 
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
     constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);

@@ -4384,7 +4384,7 @@ var
   FSSHConnectionPlugin: TSSHConnectionPlugin;
 begin
   inherited Create;
-  FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint, feSheduller];
+  FSQLEngileFeatures:=[feDescribeObject, feInheritedTables, feDescribeTableConstraint, feSheduller, feDBPing];
   FSQLCommentOnClass:=TPGSQLCommentOn;
   FSSHConnectionPlugin:=TSSHConnectionPlugin.Create(Self);
   FAutovacuumOptions:=TPGAutovacuumOptions.Create(false);

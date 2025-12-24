@@ -9,9 +9,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
-    Height = 22
+    Height = 24
     Top = 6
-    Width = 217
+    Width = 216
     BorderSpacing.Around = 6
     Caption = 'Lazzy mode local variables in SP'
     TabOrder = 0
@@ -21,9 +21,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = CheckBox1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 22
-    Top = 34
-    Width = 249
+    Height = 24
+    Top = 36
+    Width = 248
     BorderSpacing.Around = 6
     Caption = 'Lazzy mode local variables in triggers'
     TabOrder = 1
@@ -33,9 +33,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = CheckBox2
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 15
-    Top = 62
-    Width = 78
+    Height = 17
+    Top = 66
+    Width = 81
     BorderSpacing.Around = 6
     Caption = 'Report folder'
     ParentColor = False
@@ -47,8 +47,8 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 12
-    Height = 24
-    Top = 83
+    Height = 29
+    Top = 89
     Width = 392
     ShowHidden = False
     ButtonWidth = 23
@@ -64,9 +64,9 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = DirectoryEdit1
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 22
-    Top = 113
-    Width = 192
+    Height = 24
+    Top = 124
+    Width = 190
     BorderSpacing.Around = 6
     Caption = 'Use pgShedule (if avaliable)'
     TabOrder = 3
@@ -76,11 +76,50 @@ inherited pg_con_EditorPrefPage: Tpg_con_EditorPrefPage
     AnchorSideTop.Control = CheckBox3
     AnchorSideTop.Side = asrBottom
     Left = 6
-    Height = 22
-    Top = 141
-    Width = 184
+    Height = 24
+    Top = 154
+    Width = 183
     BorderSpacing.Around = 6
     Caption = 'Connecting via pgBouncer'
     TabOrder = 4
+  end
+  object CheckBox5: TCheckBox[6]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox4
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 184
+    Width = 133
+    BorderSpacing.Around = 6
+    Caption = 'Enable ping timer'
+    TabOrder = 5
+  end
+  object Label2: TLabel[7]
+    AnchorSideLeft.Control = CheckBox5
+    AnchorSideBottom.Control = SpinEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 12
+    Height = 17
+    Top = 224
+    Width = 134
+    Anchors = [akLeft, akBottom]
+    BorderSpacing.Left = 6
+    Caption = 'Ping interval (minutes)'
+  end
+  object SpinEdit1: TSpinEdit[8]
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = CheckBox5
+    AnchorSideTop.Side = asrBottom
+    Left = 152
+    Height = 27
+    Top = 214
+    Width = 114
+    BorderSpacing.Around = 6
+    MaxValue = 180
+    MinValue = 5
+    TabOrder = 6
+    Value = 5
   end
 end

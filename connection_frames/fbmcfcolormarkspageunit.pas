@@ -40,11 +40,16 @@ type
     ColorBox1 : TColorBox;
     ColorBox2 : TColorBox;
     ColorBox3 : TColorBox;
+    ColorBox4 : TColorBox;
+    ComboBox1 : TComboBox;
     DividerBevel1: TDividerBevel;
+    DividerBevel2 : TDividerBevel;
     Label1 : TLabel;
     Label2 : TLabel;
     Label3 : TLabel;
     Label4 : TLabel;
+    Label5 : TLabel;
+    Label6 : TLabel;
     SpinEdit1 : TSpinEdit;
   private
     FDBRec: TDataBaseRecord;
@@ -87,6 +92,9 @@ begin
   CheckBox2.Checked:=FDBRec.FcmAllowColorsMarkingDBExploer;
   ColorBox2.Selected:=FDBRec.FcmDBExploerBGColor;
   ColorBox3.Selected:=FDBRec.FcmDBExploerFontColor;
+
+  ComboBox1.ItemIndex :=FDBRec.FcmMDIButtonStyle;
+  ColorBox4.ItemIndex :=FDBRec.FcmMDIButtonColor;
 end;
 
 procedure TfbmCFColorMarksPage.SaveParams;
@@ -101,6 +109,9 @@ begin
   FDBRec.FcmAllowColorsMarkingDBExploer := CheckBox2.Checked;
   FDBRec.FcmDBExploerBGColor            := ColorBox2.Selected;
   FDBRec.FcmDBExploerFontColor          := ColorBox3.Selected;
+
+  FDBRec.FcmMDIButtonStyle:=ComboBox1.ItemIndex;
+  FDBRec.FcmMDIButtonColor:=ColorBox4.Color;
 end;
 
 function TfbmCFColorMarksPage.PageName : string;

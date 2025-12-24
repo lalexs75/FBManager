@@ -76,7 +76,9 @@ type
     feDescribeTableConstraint,
     feArrayFields,
     feArrayDomain,
-    feSheduller);
+    feSheduller,
+    feDBPing
+    );
 
   TSQLEngileFeatures = set of TSQLEngileFeature;
 
