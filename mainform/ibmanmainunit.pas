@@ -494,7 +494,10 @@ begin
     case P.FcmMDIButtonStyle of
       1:Sender.Canvas.Line(1, Sender.Height-2, Sender.Width - 2, Sender.Height-2);
       2:Sender.Canvas.Line(1, 1, Sender.Width - 2, 1);
-//      3
+      3:begin
+          Sender.Canvas.Line(1, Sender.Height-2, Sender.Width - 2, Sender.Height-2);
+          Sender.Canvas.Line(1, 1, Sender.Width - 2, 1);
+        end;
     end;
   end;
 end;

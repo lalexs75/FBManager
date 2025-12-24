@@ -56,7 +56,6 @@ const
   defEditorFontName = 'Courier New';
   defEditorFontSize = 10;
 
-procedure ErrorBoxExt(ErrorStr:string; Args:array of const);
 procedure ErrorBoxExcpt(E:Exception);
 function QuestionBox(QuestionMessage:string):boolean;
 function QuestionBoxFmt(QuestionMessage:string; Args:array of const):boolean;
@@ -225,11 +224,6 @@ begin
     SynEdit.Options:=SynEdit.Options + [eoHideRightMargin];
   { TODO : Доработать настроку на вид выделения текста }
   SynEdit.SelectionMode:=smNormal;
-end;
-
-procedure ErrorBoxExt(ErrorStr: string; Args: array of const);
-begin
-  ErrorBox(Format(ErrorStr, Args));
 end;
 
 procedure ErrorBoxExcpt(E: Exception);

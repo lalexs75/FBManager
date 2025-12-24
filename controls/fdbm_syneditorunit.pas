@@ -1184,7 +1184,7 @@ begin
       FOnLoadFileEdit(Self, TextEditor, AFileName);
   end
   else
-    ErrorBoxExt(sFileNotFound, [AFileName]);
+    ErrorBox(sFileNotFound, [AFileName]);
 end;
 
 procedure Tfdbm_SynEditorFrame.Localize;

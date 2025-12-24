@@ -1141,7 +1141,7 @@ begin
           F.TypeName:=D.CaptionFullPatch
         else
         begin
-          ErrorBoxExt('Result type not defined for param %s', [P.FieldName]);
+          ErrorBox('Result type not defined for param %s', [P.FieldName]);
           F.TypeName:='';
           Result:=false;
         end;
