@@ -753,7 +753,7 @@ begin
   FcmWindowBottom:=false;
   FcmWindowLeft:=false;
   FcmWindowRight:=false;
-  FcmLineWidth:=3;
+  FcmLineWidth:=1;
   FcmLineColor:=clRed;
 
   FcmAllowColorsMarkingDBExploer:=false;
@@ -784,6 +784,7 @@ var
   i: Integer;
 begin
   inherited CreateObject(aOwner, Self, nil);
+  FillInitValues;
   InitInternalObjects;
   SQLEngineName:=ADB.FieldByName('db_database_sql_engine').AsString;
 //  if SQLEngineName = 'TOIFolderList' then SQLEngineName:='TSQLEnginePostgre';

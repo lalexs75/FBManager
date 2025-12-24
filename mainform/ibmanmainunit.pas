@@ -490,7 +490,7 @@ begin
   if Assigned(P) and (P.FcmMDIButtonStyle<>0) then
   begin
     Sender.Canvas.Pen.Color :=P.FcmMDIButtonColor;
-    Sender.Canvas.Pen.Width :=2;
+    Sender.Canvas.Pen.Width :=P.FcmLineWidth;
     case P.FcmMDIButtonStyle of
       1:Sender.Canvas.Line(1, Sender.Height-2, Sender.Width - 2, Sender.Height-2);
       2:Sender.Canvas.Line(1, 1, Sender.Width - 2, 1);
