@@ -613,13 +613,6 @@ begin
           Sender.Canvas.Brush.Color:=TreeView1.SelectionColor
         else
           Sender.Canvas.Brush.Color:=TDBInspectorRecord(Node.Data).OwnerDB.FcmDBExploerBGColor;
-{
-        R:=Node.DisplayRect(False);
-        if (cdsSelected in State) then
-          Sender.Canvas.Brush.Color:=TreeView1.SelectionColor
-        else
-          Sender.Canvas.Brush.Color:=TreeView1.BackgroundColor;}
-//        Sender.Canvas.FillRect(R);
       end;
     end;
   end;
