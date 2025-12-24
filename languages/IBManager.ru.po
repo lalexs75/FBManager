@@ -161,6 +161,14 @@ msgstr "Алис к %s"
 msgid "All objects"
 msgstr "Все объекты"
 
+#: fbmstrconstunit.sallowcolormarkingdatabasewindows
+msgid "Allow color marking of the database windows"
+msgstr ""
+
+#: fbmstrconstunit.sallowcolormarkingindbexplorer
+msgid "Allow color marking in the Database Explorer"
+msgstr ""
+
 #: fbmstrconstunit.sallowmultiselect
 msgid "Allow multiselect"
 msgstr "Множественное выделение"
@@ -341,6 +349,10 @@ msgstr "Среднее: время"
 #: fbmstrconstunit.sbackendstart
 msgid "Backend start"
 msgstr "Время запуска клиента"
+
+#: fbmstrconstunit.sbackgroudcolor
+msgid "Backgroud color"
+msgstr ""
 
 #: fbmstrconstunit.sbackground
 msgid "Background"
@@ -574,6 +586,22 @@ msgstr "Закрыть всё"
 msgctxt "fbmstrconstunit.sclosewindows"
 msgid "Close"
 msgstr "Закрыть"
+
+#: fbmstrconstunit.scmonbottomofwindow
+msgid "On bottom of window"
+msgstr ""
+
+#: fbmstrconstunit.scmonleftofwindow
+msgid "On left of window"
+msgstr ""
+
+#: fbmstrconstunit.scmonrightofwindow
+msgid "On right of window"
+msgstr ""
+
+#: fbmstrconstunit.scmontopofwindow
+msgid "On top of window"
+msgstr ""
 
 #: fbmstrconstunit.scodeexploer
 msgctxt "fbmstrconstunit.scodeexploer"
@@ -1808,6 +1836,10 @@ msgstr "Разрешить протоколирование редактора S
 msgid "Enable multiline grid title"
 msgstr ""
 
+#: fbmstrconstunit.senablepingtimer
+msgid "Enable ping timer"
+msgstr ""
+
 #: fbmstrconstunit.senablesetwgofrompopup
 msgid "Enable set \"With Grant Options\" from popup menu"
 msgstr "Разрешить установку права \"С ПРАВАМИ АДМИНИСТРАТОРА\" из всплывающего меню"
@@ -2359,6 +2391,10 @@ msgstr "Имя внешнего ключа"
 #: fbmstrconstunit.sflatbuttonsintaskbar
 msgid "Flat buttons in task bar"
 msgstr "Плавающие кнопки в панели задач"
+
+#: fbmstrconstunit.sfontcolor
+msgid "Font color"
+msgstr ""
 
 #: fbmstrconstunit.sfontsize
 msgid "Font size"
@@ -3196,6 +3232,14 @@ msgstr "Создать текст SQL"
 #: fbmstrconstunit.smanualedit
 msgid "Manual edit"
 msgstr "Ручной ввод"
+
+#: fbmstrconstunit.smarklinecolor
+msgid "Mark line color"
+msgstr ""
+
+#: fbmstrconstunit.smarklinethicknesspixels
+msgid "Mark line thickness, pixels"
+msgstr ""
 
 #: fbmstrconstunit.smaterializedview
 msgid "MaterializedView"
@@ -4389,6 +4433,10 @@ msgstr "Имя оператора"
 msgctxt "fbmstrconstunit.spgvaliduntil"
 msgid "Valid until"
 msgstr "Действительна до"
+
+#: fbmstrconstunit.spinginterval
+msgid "Ping interval (minutes)"
+msgstr ""
 
 #: fbmstrconstunit.spk
 msgid "PK"
@@ -6159,6 +6207,14 @@ msgstr "Раскоментировать выбранное"
 msgid "Underline"
 msgstr "Подчёркнуто"
 
+#: fbmstrconstunit.sunderline1
+msgid "Under line"
+msgstr ""
+
+#: fbmstrconstunit.sunderupperlines
+msgid "Under + upper lines"
+msgstr ""
+
 #: fbmstrconstunit.sundo
 msgid "Undo"
 msgstr "Отмена"
@@ -6231,6 +6287,10 @@ msgstr "Верхнее"
 msgctxt "fbmstrconstunit.suppercase"
 msgid "Upper case"
 msgstr "ВЕРХНИЙ РЕГИСТР"
+
+#: fbmstrconstunit.supperline
+msgid "Upper line"
+msgstr ""
 
 #: fbmstrconstunit.susage
 msgid "Usage"
@@ -6430,6 +6490,14 @@ msgstr "Предупреждение"
 #: fbmstrconstunit.swidget
 msgid "Widget : "
 msgstr "Widget : "
+
+#: fbmstrconstunit.swindownavigation
+msgid "Window navigation"
+msgstr ""
+
+#: fbmstrconstunit.swindowsbarmarkstyle
+msgid "Windows bar mark style"
+msgstr ""
 
 #: fbmstrconstunit.swithdatatype
 msgid "With data type"

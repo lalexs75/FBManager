@@ -72,6 +72,24 @@ uses fbmStrConstUnit, IBManDataInspectorUnit;
 procedure TfbmCFColorMarksPage.Localize;
 begin
   inherited Localize;
+  CheckBox1.Caption:=sAllowColorMarkingDatabaseWindows;
+  CheckGroup1.Items[0]:=sCmOnTopOfWindow;
+  CheckGroup1.Items[1]:=sCmOnLeftOfWindow;
+  CheckGroup1.Items[2]:=sCmOnBottomOfWindow;
+  CheckGroup1.Items[3]:=sCmOnRightOfWindow;
+  Label1.Caption:=sMarkLineColor;
+  Label2.Caption:=sMarkLineThicknessPixels;
+  DividerBevel1.Caption:=sDatabaseExplorer;
+  CheckBox2.Caption:=sAllowColorMarkingInDBExplorer;
+  Label3.Caption:=sBackgroudColor;
+  Label4.Caption:=sFontColor;
+  DividerBevel2.Caption:=sWindowNavigation;
+  Label5.Caption:=sWindowsBarMarkStyle;
+  ComboBox1.Items[0]:=sNone;
+  ComboBox1.Items[1]:=sUnderline1;
+  ComboBox1.Items[2]:=sUpperLine;
+  ComboBox1.Items[3]:=sUnderUpperLines;
+  Label6.Caption:=sColor;
 end;
 
 procedure TfbmCFColorMarksPage.Activate;

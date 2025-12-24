@@ -1137,6 +1137,24 @@ resourcestring
   sIgnore                           = 'Ignore';
   sPressADDtoAddNewShedule          = 'Press ADD to add new shedule';
   sColorMark                        = 'Color Mark';
+  sAllowColorMarkingDatabaseWindows = 'Allow color marking of the database windows';
+  sCmOnTopOfWindow                  = 'On top of window';
+  sCmOnLeftOfWindow                 = 'On left of window';
+  sCmOnBottomOfWindow               = 'On bottom of window';
+  sCmOnRightOfWindow                = 'On right of window';
+  sMarkLineColor                    = 'Mark line color';
+  sMarkLineThicknessPixels          = 'Mark line thickness, pixels';
+  sAllowColorMarkingInDBExplorer    = 'Allow color marking in the Database Explorer';
+  sBackgroudColor                   = 'Backgroud color';
+  sFontColor                        = 'Font color';
+  sWindowNavigation                 = 'Window navigation';
+  sWindowsBarMarkStyle              = 'Windows bar mark style';
+  sUnderLine1                       = 'Under line';
+  sUpperLine                        = 'Upper line';
+  sUnderUpperLines                  = 'Under + upper lines';
+  sEnablePingTimer                  = 'Enable ping timer';
+  sPingInterval                     = 'Ping interval (minutes)';
+
 
   sSteps                            = 'Steps';
   sStep                             = 'Step';

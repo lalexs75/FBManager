@@ -76,6 +76,9 @@ begin
   Label1.Caption:=sReportFolder;
   CheckBox3.Caption:=sUsePGShedule;
   CheckBox4.Caption:=sUsePGBouncer;
+  CheckBox5.Caption:=sEnablePingTimer;
+  CheckBox5.Caption:=sEnablePingTimer;
+  Label2.Caption:=sPingInterval;
 end;
 
 procedure Tpg_con_EditorPrefPage.LoadParams(ASQLEngine: TSQLEngineAbstract);

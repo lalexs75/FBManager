@@ -146,6 +146,14 @@ msgstr ""
 msgid "All objects"
 msgstr ""
 
+#: fbmstrconstunit.sallowcolormarkingdatabasewindows
+msgid "Allow color marking of the database windows"
+msgstr ""
+
+#: fbmstrconstunit.sallowcolormarkingindbexplorer
+msgid "Allow color marking in the Database Explorer"
+msgstr ""
+
 #: fbmstrconstunit.sallowmultiselect
 msgid "Allow multiselect"
 msgstr ""
@@ -322,6 +330,10 @@ msgstr ""
 
 #: fbmstrconstunit.sbackendstart
 msgid "Backend start"
+msgstr ""
+
+#: fbmstrconstunit.sbackgroudcolor
+msgid "Backgroud color"
 msgstr ""
 
 #: fbmstrconstunit.sbackground
@@ -548,6 +560,22 @@ msgstr ""
 #: fbmstrconstunit.sclosewindows
 msgctxt "fbmstrconstunit.sclosewindows"
 msgid "Close"
+msgstr ""
+
+#: fbmstrconstunit.scmonbottomofwindow
+msgid "On bottom of window"
+msgstr ""
+
+#: fbmstrconstunit.scmonleftofwindow
+msgid "On left of window"
+msgstr ""
+
+#: fbmstrconstunit.scmonrightofwindow
+msgid "On right of window"
+msgstr ""
+
+#: fbmstrconstunit.scmontopofwindow
+msgid "On top of window"
 msgstr ""
 
 #: fbmstrconstunit.scodeexploer
@@ -1734,6 +1762,10 @@ msgstr ""
 msgid "Enable multiline grid title"
 msgstr ""
 
+#: fbmstrconstunit.senablepingtimer
+msgid "Enable ping timer"
+msgstr ""
+
 #: fbmstrconstunit.senablesetwgofrompopup
 msgid "Enable set \"With Grant Options\" from popup menu"
 msgstr ""
@@ -2276,6 +2308,10 @@ msgstr ""
 
 #: fbmstrconstunit.sflatbuttonsintaskbar
 msgid "Flat buttons in task bar"
+msgstr ""
+
+#: fbmstrconstunit.sfontcolor
+msgid "Font color"
 msgstr ""
 
 #: fbmstrconstunit.sfontsize
@@ -3088,6 +3124,14 @@ msgstr ""
 
 #: fbmstrconstunit.smanualedit
 msgid "Manual edit"
+msgstr ""
+
+#: fbmstrconstunit.smarklinecolor
+msgid "Mark line color"
+msgstr ""
+
+#: fbmstrconstunit.smarklinethicknesspixels
+msgid "Mark line thickness, pixels"
 msgstr ""
 
 #: fbmstrconstunit.smaterializedview
@@ -4251,6 +4295,10 @@ msgstr ""
 
 #: fbmstrconstunit.spgvaliduntil
 msgid "Valid until"
+msgstr ""
+
+#: fbmstrconstunit.spinginterval
+msgid "Ping interval (minutes)"
 msgstr ""
 
 #: fbmstrconstunit.spk
@@ -5967,6 +6015,14 @@ msgstr ""
 msgid "Underline"
 msgstr ""
 
+#: fbmstrconstunit.sunderline1
+msgid "Under line"
+msgstr ""
+
+#: fbmstrconstunit.sunderupperlines
+msgid "Under + upper lines"
+msgstr ""
+
 #: fbmstrconstunit.sundo
 msgid "Undo"
 msgstr ""
@@ -6035,6 +6091,10 @@ msgstr ""
 
 #: fbmstrconstunit.suppercase
 msgid "Upper case"
+msgstr ""
+
+#: fbmstrconstunit.supperline
+msgid "Upper line"
 msgstr ""
 
 #: fbmstrconstunit.susage
@@ -6231,6 +6291,14 @@ msgstr ""
 
 #: fbmstrconstunit.swidget
 msgid "Widget : "
+msgstr ""
+
+#: fbmstrconstunit.swindownavigation
+msgid "Window navigation"
+msgstr ""
+
+#: fbmstrconstunit.swindowsbarmarkstyle
+msgid "Windows bar mark style"
 msgstr ""
 
 #: fbmstrconstunit.swithdatatype
