@@ -36,7 +36,8 @@ const
   LM_NOTIFY_OBJECT_DELETE      = LM_OBJECT_TEMPLATE_CHANGE + 1;    //Сообщение об удалении объекта БД
   LM_NOTIFY_DISCONNECT_ENGINE  = LM_NOTIFY_OBJECT_DELETE + 1;      //After disconnect engine
   LM_NOTIFY_CONNECT_ENGINE     = LM_NOTIFY_DISCONNECT_ENGINE + 1;  //After connect engine
-  ConfDBVers                 = 5;
+
+  ConfDBVers              = 6;
 
 
   sFBMConfDirName         = '.fbm';
@@ -49,9 +50,9 @@ const
 
 
   //this name of project on http://shamangrad.net service, don't chage it
-  netProgectName    = 'FBManager';
+(*  netProgectName    = 'FBManager';
   netProgectURL     = 'http://shamangrad.net/project.php?act=view&prj=FBManager';
-  netProgectRSS     = 'http://shamangrad.net/news.php?act=rss&prj=FBManager';
+  netProgectRSS     = 'http://shamangrad.net/news.php?act=rss&prj=FBManager'; *)
   defEditorFontName = 'Courier New';
   defEditorFontSize = 10;
 

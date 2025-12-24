@@ -25,7 +25,7 @@ unit pg_con_EditorPrefUnit;
 interface
 
 uses
-  Classes, Spin, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  Classes, ibmanagertypesunit, Spin, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
   EditBtn, fdbm_ConnectionAbstractUnit, SQLEngineAbstractUnit,
   PostgreSQLEngineUnit;
 
@@ -57,7 +57,7 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit;
+uses fbmStrConstUnit, IBManDataInspectorUnit;
 
 {$R *.lfm}
 
@@ -79,8 +79,12 @@ begin
 end;
 
 procedure Tpg_con_EditorPrefPage.LoadParams(ASQLEngine: TSQLEngineAbstract);
+var
+  FDBRec : TDataBaseRecord;
 begin
   InitFrame;
+  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngine);
+
   CheckBox1.Checked := ASQLEngine.SPEditLazzyMode;
   CheckBox2.Checked := ASQLEngine.TriggerEditLazzyMode;
   DirectoryEdit1.Text:=ASQLEngine.ReportManagerFolder;
@@ -90,10 +94,16 @@ begin
   begin
     CheckBox4.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGBouncer;
   end;
+
+  CheckBox4.Checked:=FDBRec.FPingTimerEnabled;
+  SpinEdit1.Value:=FDBRec.FPingTimerInterval;
 end;
 
 procedure Tpg_con_EditorPrefPage.SaveParams;
+var
+  FDBRec : TDataBaseRecord;
 begin
+  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(FSQLEngine);
   FSQLEngine.SPEditLazzyMode:=CheckBox1.Checked;
   FSQLEngine.TriggerEditLazzyMode:=CheckBox2.Checked;
   FSQLEngine.ReportManagerFolder:=DirectoryEdit1.Text;
@@ -103,6 +113,9 @@ begin
   begin
     TSQLEnginePostgre(FSQLEngine).UsePGBouncer:=CheckBox4.Checked;
   end;
+
+  FDBRec.FPingTimerEnabled:=CheckBox4.Checked;
+  FDBRec.FPingTimerInterval:=SpinEdit1.Value;
 end;
 
 function Tpg_con_EditorPrefPage.PageName: string;

@@ -66,6 +66,7 @@ type
     UpdDB3: TZSQLProcessor;
     UpdDB4: TZSQLProcessor;
     UpdDB5: TZSQLProcessor;
+    UpdDB6 : TZSQLProcessor;
     UserDB: TZConnection;
     InitDB: TZSQLProcessor;
     OldUserDB: TZConnection;
@@ -113,6 +114,7 @@ type
     procedure InternalUpdate3;
     procedure InternalUpdate4;
     procedure InternalUpdate5;
+    procedure InternalUpdate6;
 
     procedure ImportDataBaseList;
     procedure ImportLoadRecentObjects(DataBaseID:integer; ADataFolder:string);
@@ -313,6 +315,9 @@ begin
     if CVer < 5 then
       InternalUpdate5;
 
+    if CVer < 6 then
+      InternalUpdate6;
+
     UserDB.Connect;
     SystemVariablesLoad;
     ConfigValues.SetByNameAsInteger('GLOBAL/ConfigDBVersion', ConfDBVers);
@@ -421,6 +426,16 @@ begin
   UserDB.Connect;
   try
     UpdDB5.Execute;
+  finally
+    UserDB.Disconnect;
+  end;
+end;
+
+procedure TUserDBModule.InternalUpdate6;
+begin
+  UserDB.Connect;
+  try
+    UpdDB6.Execute;
   finally
     UserDB.Disconnect;
   end;

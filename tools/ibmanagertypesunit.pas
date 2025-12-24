@@ -197,6 +197,10 @@ type
     FcmMDIButtonStyle:Integer;
     FcmMDIButtonColor:TColor;
 
+    //DB ping
+    FPingTimerEnabled:Boolean;
+    FPingTimerInterval:Integer;
+
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
     constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);
     destructor Destroy; override;
