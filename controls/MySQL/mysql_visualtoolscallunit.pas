@@ -55,7 +55,8 @@ type
 
 implementation
 uses   fbmStrConstUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
-  fdbm_ssh_ParamsUnit, fdbm_ShowObjectsUnit, pg_con_EditorPrefUnit,
+  fdbm_ssh_ParamsUnit, fdbm_ShowObjectsUnit, fbmCFColorMarksPageUnit,
+  pg_con_EditorPrefUnit,
 
   fbmpgACLEditUnit,
   fbmTableEditorDataUnit, fbmObjectEditorDescriptionUnit,
@@ -150,7 +151,7 @@ end;
 
 class function TMySQLVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=6;
+  Result:=7;
 end;
 
 class function TMySQLVisualTools.ConnectionDlgPage(
@@ -163,7 +164,8 @@ begin
     2:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine , AOwner);
     3:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
     4:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
-    5:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+    5:Result:=TfbmCFColorMarksPage.Create(ASQLEngine, AOwner);
+    6:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

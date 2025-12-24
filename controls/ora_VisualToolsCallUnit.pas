@@ -106,7 +106,7 @@ end;
 
 class function TOracleVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=2;
+  Result:=4;
 end;
 
 class function TOracleVisualTools.ConnectionDlgPage(
@@ -116,6 +116,8 @@ begin
   case APageNum of
     0:Result:=TfdbmOraConnectionMainFrame.Create(ASQLEngine, AOwner);
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine, AOwner);
+    2:Result:=TfbmCFColorMarksPage.Create(ASQLEngine, AOwner);
+    3:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

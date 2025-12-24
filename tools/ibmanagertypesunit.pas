@@ -174,6 +174,7 @@ type
 
     procedure InitSQLEngine(ASQLEngine:TSQLEngineAbstract);
     function GetDescription: string; override;
+    procedure FillInitValues;
   public
     ProgectID:integer;
 
@@ -744,6 +745,29 @@ begin
   Result:=FSQLEngine.Description;
 end;
 
+procedure TDataBaseRecord.FillInitValues;
+begin
+  //Color marking
+  FcmAllowColorsMarking:=false;
+  FcmWindowTop:=false;
+  FcmWindowBottom:=false;
+  FcmWindowLeft:=false;
+  FcmWindowRight:=false;
+  FcmLineWidth:=3;
+  FcmLineColor:=clRed;
+
+  FcmAllowColorsMarkingDBExploer:=false;
+  FcmDBExploerBGColor:=clSkyBlue;
+  FcmDBExploerFontColor:=clBlack;
+
+  FcmMDIButtonStyle:=0;
+  FcmMDIButtonColor:=clRed;
+
+  //DB ping
+  FPingTimerEnabled:=false;
+  FPingTimerInterval:=30;
+end;
+
 constructor TDataBaseRecord.Create(aOwner: TTreeNode; ASQLEngine:TSQLEngineAbstract);
 begin
   inherited CreateObject(aOwner, Self, nil);
@@ -751,6 +775,7 @@ begin
   InitInternalObjects;
   InitSQLEngine(ASQLEngine);
   MakeSQLHistoryTable;
+  FillInitValues;
 end;
 
 constructor TDataBaseRecord.Load(aOwner: TTreeNode; ADB, ADBPlugins: TDataSet);
@@ -789,6 +814,26 @@ begin
   MakeSQLHistoryTable;
 
   OIFolder:=fbManDataInpectorForm.Folders.ByID(ADB.FieldByName('db_folders_id').AsInteger);
+{
+  FcmAllowColorsMarking:=false;
+  FcmWindowTop:=false;
+  FcmWindowBottom:=false;
+  FcmWindowLeft:=false;
+  FcmWindowRight:=false;
+  FcmLineWidth:=3;
+  FcmLineColor:=clRed;
+
+  FcmAllowColorsMarkingDBExploer:=false;
+  FcmDBExploerBGColor:=clSkyBlue;
+  FcmDBExploerFontColor:=clBlack;
+
+  FcmMDIButtonStyle:=0;
+  FcmMDIButtonColor:=clRed;
+
+  //DB ping
+  FPingTimerEnabled:=false;
+  FPingTimerInterval:=30;
+}
   FSqlEditors.Load;
 end;
 

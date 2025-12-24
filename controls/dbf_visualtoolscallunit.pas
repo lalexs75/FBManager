@@ -50,8 +50,9 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmTableEditorFieldsUnit, fbmTableEditorDataUnit, fbmTableEditorIndexUnit,
-  fdbm_cf_DbfMainUnit, fdbm_cf_LogUnit, fdbm_ShowObjectsUnit;
+uses fbmStrConstUnit, fbmTableEditorFieldsUnit, fbmTableEditorDataUnit,
+  fbmTableEditorIndexUnit, fdbm_cf_DbfMainUnit, fdbm_cf_LogUnit,
+  fdbm_ShowObjectsUnit, fbmCFColorMarksPageUnit, fdbm_DescriptionUnit;
 
 { TDBFVisualTools }
 
@@ -72,7 +73,7 @@ end;
 
 class function TDBFVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=3;
+  Result:=5;
 end;
 
 class function TDBFVisualTools.ConnectionDlgPage(
@@ -83,6 +84,8 @@ begin
     0:Result:=TfdbmCFDbfMainFrame.Create(ASQLEngine as TDBFEngine, AOwner);
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine, AOwner);
     2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
+    3:Result:=TfbmCFColorMarksPage.Create(ASQLEngine, AOwner);
+    4:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

@@ -54,8 +54,8 @@ type
 
 implementation
 uses fbmStrConstUnit, sqlite3_cf_mainunit, fdbm_cf_LogUnit,
-  fdbm_DescriptionUnit, fdbm_ShowObjectsUnit, sqlite3_CreateDatabaseUnit,
-  fbmTableEditorFieldsUnit, fbmTableEditorDataUnit,
+  fdbm_DescriptionUnit, fdbm_ShowObjectsUnit, fbmCFColorMarksPageUnit,
+  sqlite3_CreateDatabaseUnit, fbmTableEditorFieldsUnit, fbmTableEditorDataUnit,
   fdbmTableEditorForeignKeyUnit, fdbmTableEditorUniqueUnit, fbmDDLPageUnit,
   sqlite3IndexEditorFrameUnit, SQLite3TriggerHeaderEditUnit,
   fbmTableEditorTriggersUnit, fbmViewEditorMainUnit,
@@ -107,7 +107,7 @@ end;
 
 class function TSQLite3VisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=4;
+  Result:=5;
 end;
 
 class function TSQLite3VisualTools.ConnectionDlgPage(
@@ -118,7 +118,8 @@ begin
     0:Result:=TConnectionSQLite3MainPage.Create(ASQLEngine as TSQLEngineSQLite3, AOwner);
     1:Result:=TfdbmCFLogFrame.Create(ASQLEngine, AOwner);
     2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
-    3:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+    3:Result:=TfbmCFColorMarksPage.Create(ASQLEngine, AOwner);
+    4:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;

@@ -35,7 +35,7 @@ type
   TMSSQLVisualTools = class(TDBVisualTools)
   private
     //procedure tlsShowTdsCfgManagerExecute(Sender: TObject);
-  protected
+  public
     constructor Create(ASQLEngine:TSQLEngineAbstract);override;
     procedure InitSQLSyn(const ASynSQLSyn: TSynSQLSyn);override;
 
@@ -54,16 +54,11 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit,
-  cf_mssql_mainUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
-  fbmTableEditorFieldsUnit,
-  fbmObjectEditorDescriptionUnit,
-  fbmTableEditorDataUnit,
-  fbmTableStatisticUnit,
-  fbmDDLPageUnit, mssqlRoleEditorUnit,
-  fbmViewEditorMainUnit,
-  fdbm_SchemeEditorUnit,
-  mssql_EngineSecurityUnit;
+uses fbmStrConstUnit, cf_mssql_mainUnit, fdbm_cf_LogUnit, fdbm_DescriptionUnit,
+  fbmCFColorMarksPageUnit, fbmTableEditorFieldsUnit,
+  fbmObjectEditorDescriptionUnit, fbmTableEditorDataUnit, fbmTableStatisticUnit,
+  fbmDDLPageUnit, mssqlRoleEditorUnit, fbmViewEditorMainUnit,
+  fdbm_SchemeEditorUnit, mssql_EngineSecurityUnit;
 
 { TMSSQLVisualTools }
 
@@ -110,7 +105,7 @@ end;
 
 class function TMSSQLVisualTools.ConnectionDlgPageCount: integer;
 begin
-  Result:=3;
+  Result:=4;
 end;
 
 class function TMSSQLVisualTools.ConnectionDlgPage(
@@ -123,7 +118,8 @@ begin
 //    2:Result:=Tfdbm_ShowObjectsPage.Create(ASQLEngine, AOwner);
 //    3:Result:=Tpg_con_EditorPrefPage.Create(ASQLEngine as TSQLEnginePostgre, AOwner);
 //    4:Result:=Tfdbm_ssh_ParamsPage.Create(ASQLEngine, AOwner);
-    2:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
+    2:Result:=TfbmCFColorMarksPage.Create(ASQLEngine, AOwner);
+    3:Result:=Tfdbm_DescriptionConnectionDlgPage.CreateDescriptionPage(ASQLEngine, AOwner);
   else
     Result:=nil;
   end;
