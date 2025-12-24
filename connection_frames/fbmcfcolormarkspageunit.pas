@@ -94,7 +94,7 @@ begin
   ColorBox3.Selected:=FDBRec.FcmDBExploerFontColor;
 
   ComboBox1.ItemIndex :=FDBRec.FcmMDIButtonStyle;
-  ColorBox4.ItemIndex :=FDBRec.FcmMDIButtonColor;
+  ColorBox4.Selected :=FDBRec.FcmMDIButtonColor;
 end;
 
 procedure TfbmCFColorMarksPage.SaveParams;
@@ -111,7 +111,7 @@ begin
   FDBRec.FcmDBExploerFontColor          := ColorBox3.Selected;
 
   FDBRec.FcmMDIButtonStyle:=ComboBox1.ItemIndex;
-  FDBRec.FcmMDIButtonColor:=ColorBox4.Color;
+  FDBRec.FcmMDIButtonColor:=ColorBox4.Selected;
 end;
 
 function TfbmCFColorMarksPage.PageName : string;

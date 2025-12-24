@@ -2,10 +2,11 @@ object UserDBModule: TUserDBModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
-  Height = 608
-  HorizontalOffset = 318
-  VerticalOffset = 129
-  Width = 906
+  Height = 760
+  HorizontalOffset = 398
+  VerticalOffset = 161
+  Width = 1133
+  PPI = 120
   object UserDB: TZConnection
     ControlsCodePage = cCP_UTF8
     AutoEncodeStrings = False
@@ -19,8 +20,8 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 40
-    Top = 14
+    Left = 50
+    Top = 18
   end
   object InitDB: TZSQLProcessor
     Params = <>
@@ -191,14 +192,14 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 131
-    Top = 14
+    Left = 164
+    Top = 18
   end
   object ZReadOnlyQuery1: TZReadOnlyQuery
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 48
-    Top = 256
+    Left = 60
+    Top = 320
   end
   object quSysConst1: TZReadOnlyQuery
     Connection = UserDB
@@ -214,25 +215,20 @@ object UserDBModule: TUserDBModule
     )
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 276
-    Top = 14
+    Left = 345
+    Top = 18
     object quSysConst1sys_consts_value_type: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'sys_consts_value_type'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quSysConst1sys_const_name: TStringField
       FieldKind = fkData
       FieldName = 'sys_const_name'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
       Required = True
       Size = 1000
     end
@@ -240,10 +236,7 @@ object UserDBModule: TUserDBModule
       FieldKind = fkData
       FieldName = 'sys_const_value'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 1000
     end
   end
@@ -268,8 +261,8 @@ object UserDBModule: TUserDBModule
       '  (sys_const.sys_const_name = :sys_const_name)'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 14
+    Left = 290
+    Top = 18
     ParamData = <    
       item
         DataType = ftUnknown
@@ -313,8 +306,8 @@ object UserDBModule: TUserDBModule
         Name = 'sys_const_name'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 14
+    Left = 240
+    Top = 18
     ParamData = <    
       item
         DataType = ftUnknown
@@ -334,8 +327,8 @@ object UserDBModule: TUserDBModule
     Port = 0
     Database = '/home/work/FBManager/sql/fbm_meta_base.db'
     Protocol = 'sqlite-3'
-    Left = 592
-    Top = 8
+    Left = 740
+    Top = 10
   end
   object quOldSysConst: TZQuery
     Connection = OldUserDB
@@ -347,8 +340,8 @@ object UserDBModule: TUserDBModule
       '  sys_const'
     )
     Params = <>
-    Left = 640
-    Top = 8
+    Left = 800
+    Top = 10
   end
   object usFolders: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -374,8 +367,8 @@ object UserDBModule: TUserDBModule
       '  ((db_folders.db_folders_id IS NULL AND :OLD_db_folders_id IS NULL) OR (db_folders.db_folders_id = :OLD_db_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 78
+    Left = 290
+    Top = 98
     ParamData = <    
       item
         DataType = ftUnknown
@@ -424,8 +417,8 @@ object UserDBModule: TUserDBModule
       '  db_folders.db_folders_code'
     )
     Params = <>
-    Left = 192
-    Top = 78
+    Left = 240
+    Top = 98
   end
   object usDatabases: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -434,33 +427,15 @@ object UserDBModule: TUserDBModule
       '  ((db_database.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_database.db_database_id = :OLD_db_database_id))'
     )
     InsertSQL.Strings = (
-      'INSERT INTO db_database'
-      '  (db_database_id, db_folders_id, db_database_caption, db_database_sql_engine, '
-      '   db_database_server_name, db_database_database_name, db_database_username, '
-      '   db_database_password, db_database_user_role, db_database_connected_charset, '
-      '   db_database_server_version, db_database_remote_port, db_database_description, '
-      '   db_database_sort_order, report_manager_folder, sp_editor_lazzy_mode, '
-      '   trg_editor_lazzy_mode, show_system_domains, show_system_tables, show_system_views, '
-      '   db_database_shedule, db_database_library_name, db_database_authentication_type, '
-      '   db_database_auto_grant, db_database_use_log_meta, db_database_use_log_editor, '
-      '   db_database_log_meta_filename, db_database_log_editor_filename, db_database_use_log_meta_custom_charset, '
-      '   db_database_use_log_write_timestamp, db_database_log_meta_custom_charset, show_child_objects, db_database_log_script_exec_filename,'
-      '   db_database_use_log_script_exec)'
-      'VALUES'
-      '  (:db_database_id, :db_folders_id, :db_database_caption, :db_database_sql_engine, '
-      '   :db_database_server_name, :db_database_database_name, :db_database_username, '
-      '   :db_database_password, :db_database_user_role, :db_database_connected_charset, '
-      '   :db_database_server_version, :db_database_remote_port, :db_database_description, '
-      '   :db_database_sort_order, :report_manager_folder, :sp_editor_lazzy_mode, '
-      '   :trg_editor_lazzy_mode, :show_system_domains, :show_system_tables, :show_system_views, '
-      '   :db_database_shedule, :db_database_library_name, :db_database_authentication_type, '
-      '   :db_database_auto_grant, :db_database_use_log_meta, :db_database_use_log_editor, '
-      '   :db_database_log_meta_filename, :db_database_log_editor_filename, :db_database_use_log_meta_custom_charset, '
-      '   :db_database_use_log_write_timestamp, :db_database_log_meta_custom_charset, :show_child_objects, :db_database_log_script_exec_filename,'
-      '   :db_database_use_log_script_exec)'
+      'insert into db_database'
+      '  (db_database_id, db_folders_id, db_database_caption, db_database_sql_engine, db_database_server_name, db_database_database_name, db_database_username, db_database_password, db_database_user_role, db_database_connected_charset, db_database_server_version, db_database_remote_port, db_database_description, db_database_sort_order, report_manager_folder, sp_editor_lazzy_mode, trg_editor_lazzy_mode, show_system_domains, show_system_tables, show_system_views, db_database_shedule, db_database_library_name, db_database_authentication_type, db_database_auto_grant, db_database_use_log_meta, db_database_use_log_editor, db_database_log_meta_filename, db_database_log_editor_filename, db_database_use_log_meta_custom_charset, db_database_log_meta_custom_charset, db_database_use_log_write_timestamp, show_child_objects, db_database_log_script_exec_filename, db_database_use_log_script_exec, db_database_cm_allow_color_mark, "db_database_cm_windowTop", "db_database_cm_windowBottom", "db_database_cm_windowLeft", "db_database_cm_wndowRight", "db_database_cm_lineWidth", "db_database_cm_lineColor", db_database_cm_allow_cm_dbe, db_database_cm_dbe_bgcolor, db_database_cm_dbe_font_color, db_database_cm_mdibtn_style, db_database_cm_mdibtn_color, db_database_ping_enabled, db_database_ping_interval)'
+      'values'
+      '  (:db_database_id, :db_folders_id, :db_database_caption, :db_database_sql_engine, :db_database_server_name, :db_database_database_name, :db_database_username, :db_database_password, :db_database_user_role, :db_database_connected_charset, :db_database_server_version, :db_database_remote_port, :db_database_description, :db_database_sort_order, :report_manager_folder, :sp_editor_lazzy_mode, :trg_editor_lazzy_mode, :show_system_domains, :show_system_tables, :show_system_views, :db_database_shedule, :db_database_library_name, :db_database_authentication_type, :db_database_auto_grant, :db_database_use_log_meta, :db_database_use_log_editor, :db_database_log_meta_filename, :db_database_log_editor_filename, :db_database_use_log_meta_custom_charset, :db_database_log_meta_custom_charset, :db_database_use_log_write_timestamp, :show_child_objects, :db_database_log_script_exec_filename, :db_database_use_log_script_exec, :db_database_cm_allow_color_mark, :"db_database_cm_windowTop", :"db_database_cm_windowBottom", :"db_database_cm_windowLeft", :"db_database_cm_wndowRight", :"db_database_cm_lineWidth", :"db_database_cm_lineColor", :db_database_cm_allow_cm_dbe, :db_database_cm_dbe_bgcolor, :db_database_cm_dbe_font_color, :db_database_cm_mdibtn_style, :db_database_cm_mdibtn_color, :db_database_ping_enabled, :db_database_ping_interval)'
     )
     ModifySQL.Strings = (
-      'UPDATE db_database SET'
+      'update'
+      '  db_database'
+      'set'
       '  db_database_id = :db_database_id,'
       '  db_folders_id = :db_folders_id,'
       '  db_database_caption = :db_database_caption,'
@@ -490,17 +465,31 @@ object UserDBModule: TUserDBModule
       '  db_database_log_meta_filename = :db_database_log_meta_filename,'
       '  db_database_log_editor_filename = :db_database_log_editor_filename,'
       '  db_database_use_log_meta_custom_charset = :db_database_use_log_meta_custom_charset,'
-      '  db_database_use_log_write_timestamp = :db_database_use_log_write_timestamp,'
       '  db_database_log_meta_custom_charset = :db_database_log_meta_custom_charset,'
+      '  db_database_use_log_write_timestamp = :db_database_use_log_write_timestamp,'
       '  show_child_objects = :show_child_objects,'
       '  db_database_log_script_exec_filename = :db_database_log_script_exec_filename,'
-      '  db_database_use_log_script_exec = :db_database_use_log_script_exec'
+      '  db_database_use_log_script_exec = :db_database_use_log_script_exec,'
+      '  db_database_cm_allow_color_mark = :db_database_cm_allow_color_mark,'
+      '  "db_database_cm_windowTop" = :"db_database_cm_windowTop",'
+      '  "db_database_cm_windowBottom" = :"db_database_cm_windowBottom",'
+      '  "db_database_cm_windowLeft" = :"db_database_cm_windowLeft",'
+      '  "db_database_cm_wndowRight" = :"db_database_cm_wndowRight",'
+      '  "db_database_cm_lineWidth" = :"db_database_cm_lineWidth",'
+      '  "db_database_cm_lineColor" = :"db_database_cm_lineColor",'
+      '  db_database_cm_allow_cm_dbe = :db_database_cm_allow_cm_dbe,'
+      '  db_database_cm_dbe_bgcolor = :db_database_cm_dbe_bgcolor,'
+      '  db_database_cm_dbe_font_color = :db_database_cm_dbe_font_color,'
+      '  db_database_cm_mdibtn_style = :db_database_cm_mdibtn_style,'
+      '  db_database_cm_mdibtn_color = :db_database_cm_mdibtn_color,'
+      '  db_database_ping_enabled = :db_database_ping_enabled,'
+      '  db_database_ping_interval = :db_database_ping_interval'
       'WHERE'
       '  ((db_database.db_database_id IS NULL AND :OLD_db_database_id IS NULL) OR (db_database.db_database_id = :OLD_db_database_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 136
+    Left = 290
+    Top = 170
     ParamData = <    
       item
         DataType = ftUnknown
@@ -649,12 +638,12 @@ object UserDBModule: TUserDBModule
       end    
       item
         DataType = ftUnknown
-        Name = 'db_database_use_log_write_timestamp'
+        Name = 'db_database_log_meta_custom_charset'
         ParamType = ptUnknown
       end    
       item
         DataType = ftUnknown
-        Name = 'db_database_log_meta_custom_charset'
+        Name = 'db_database_use_log_write_timestamp'
         ParamType = ptUnknown
       end    
       item
@@ -674,6 +663,76 @@ object UserDBModule: TUserDBModule
       end    
       item
         DataType = ftUnknown
+        Name = 'db_database_cm_allow_color_mark'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_windowTop'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_windowBottom'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_windowLeft'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_wndowRight'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_lineWidth'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_lineColor'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_allow_cm_dbe'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_dbe_bgcolor'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_dbe_font_color'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_mdibtn_style'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_cm_mdibtn_color'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_ping_enabled'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'db_database_ping_interval'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
         Name = 'OLD_db_database_id'
         ParamType = ptUnknown
       end>
@@ -683,7 +742,7 @@ object UserDBModule: TUserDBModule
     UpdateObject = usDatabases
     SQL.Strings = (
       'select'
-      '  db_database.db_database_id,'
+      '/*  db_database.db_database_id,'
       '  db_database.db_folders_id,'
       '  db_database.db_database_caption,'
       '  db_database.db_database_sql_engine,'
@@ -716,7 +775,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_log_meta_custom_charset,'
       '  db_database.show_child_objects,'
       '  db_database.db_database_log_script_exec_filename,'
-      '  db_database.db_database_use_log_script_exec'
+      '  db_database.db_database_use_log_script_exec */'
+      '  *'
       'from'
       '  db_database'
       'order by'
@@ -724,8 +784,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 192
-    Top = 136
+    Left = 240
+    Top = 170
   end
   object quOldFolders: TZQuery
     Connection = OldUserDB
@@ -737,8 +797,8 @@ object UserDBModule: TUserDBModule
       '  db_folders'
     )
     Params = <>
-    Left = 640
-    Top = 66
+    Left = 800
+    Top = 83
   end
   object usParamsHistory: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -765,8 +825,8 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history_param.sql_editors_history_param_id IS NULL AND :OLD_sql_editors_history_param_id IS NULL) OR (sql_editors_history_param.sql_editors_history_param_id = :OLD_sql_editors_history_param_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 192
+    Left = 290
+    Top = 240
     ParamData = <    
       item
         DataType = ftUnknown
@@ -820,8 +880,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 192
+    Left = 240
+    Top = 240
     ParamData = <    
       item
         DataType = ftUnknown
@@ -831,15 +891,15 @@ object UserDBModule: TUserDBModule
   end
   object ZUpdateSQL4: TZUpdateSQL
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 536
+    Left = 290
+    Top = 670
   end
   object ZQuery4: TZQuery
     Connection = UserDB
     UpdateObject = ZUpdateSQL4
     Params = <>
-    Left = 192
-    Top = 536
+    Left = 240
+    Top = 670
   end
   object usRecentItems: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -866,8 +926,8 @@ object UserDBModule: TUserDBModule
       '  ((db_recent_objects.db_recent_objects_id IS NULL AND :OLD_db_recent_objects_id IS NULL) OR (db_recent_objects.db_recent_objects_id = :OLD_db_recent_objects_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 248
+    Left = 290
+    Top = 310
     ParamData = <    
       item
         DataType = ftUnknown
@@ -930,8 +990,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_recent_objects_type'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 248
+    Left = 240
+    Top = 310
     ParamData = <    
       item
         DataType = ftUnknown
@@ -974,8 +1034,8 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors_history.sql_editors_history_id IS NULL AND :OLD_sql_editors_history_id IS NULL) OR (sql_editors_history.sql_editors_history_id = :OLD_sql_editors_history_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 296
+    Left = 290
+    Top = 370
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1049,8 +1109,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 296
+    Left = 240
+    Top = 370
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1083,8 +1143,8 @@ object UserDBModule: TUserDBModule
       '  ((sql_editor_folders.sql_editor_folders_id IS NULL AND :OLD_sql_editor_folders_id IS NULL) OR (sql_editor_folders.sql_editor_folders_id = :OLD_sql_editor_folders_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 352
+    Left = 290
+    Top = 440
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1140,8 +1200,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 352
+    Left = 240
+    Top = 440
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1181,8 +1241,8 @@ object UserDBModule: TUserDBModule
       '  ((sql_editors.sql_editors_id IS NULL AND :OLD_sql_editors_id IS NULL) OR (sql_editors.sql_editors_id = :OLD_sql_editors_id))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 409
+    Left = 290
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1269,8 +1329,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 409
+    Left = 240
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1324,8 +1384,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 289
-    Top = 352
+    Left = 361
+    Top = 440
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1423,8 +1483,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 289
-    Top = 409
+    Left = 361
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1493,44 +1553,32 @@ object UserDBModule: TUserDBModule
       '  sql_editor_folders.sql_editor_folders_code'
     )
     Params = <>
-    Left = 121
-    Top = 352
+    Left = 151
+    Top = 440
     object quSQLFoldersAllsql_editor_folders_id: TLargeintField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_id'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quSQLFoldersAllsql_editor_folders_name: TStringField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_name'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 400
     end
     object quSQLFoldersAllsql_editor_folders_code: TLargeintField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_code'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quSQLFoldersAllsql_editor_folders_desc: TMemoField
       FieldKind = fkData
       FieldName = 'sql_editor_folders_desc'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end
@@ -1538,10 +1586,7 @@ object UserDBModule: TUserDBModule
       FieldKind = fkData
       FieldName = 'db_database_id'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
   end
   object quSQLFoldersIns: TZReadOnlyQuery
@@ -1574,8 +1619,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 344
-    Top = 352
+    Left = 430
+    Top = 440
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1658,8 +1703,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 344
-    Top = 409
+    Left = 430
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1714,8 +1759,8 @@ object UserDBModule: TUserDBModule
     )
     Params = <>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 40
-    Top = 64
+    Left = 50
+    Top = 80
   end
   object quRecentClear: TZReadOnlyQuery
     Connection = UserDB
@@ -1735,8 +1780,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 272
-    Top = 248
+    Left = 340
+    Top = 310
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1776,8 +1821,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 320
-    Top = 248
+    Left = 400
+    Top = 310
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1805,40 +1850,7 @@ object UserDBModule: TUserDBModule
     UpdateObject = usDatabases
     SQL.Strings = (
       'select'
-      '  db_database.db_database_id,'
-      '  db_database.db_folders_id,'
-      '  db_database.db_database_caption,'
-      '  db_database.db_database_sql_engine,'
-      '  db_database.db_database_server_name,'
-      '  db_database.db_database_database_name,'
-      '  db_database.db_database_username,'
-      '  db_database.db_database_password,'
-      '  db_database.db_database_user_role,'
-      '  db_database.db_database_connected_charset,'
-      '  db_database.db_database_server_version,'
-      '  db_database.db_database_remote_port,'
-      '  db_database.db_database_description,'
-      '  db_database.db_database_sort_order,'
-      '  db_database.report_manager_folder,'
-      '  db_database.sp_editor_lazzy_mode,'
-      '  db_database.trg_editor_lazzy_mode,'
-      '  db_database.show_system_domains,'
-      '  db_database.show_system_tables,'
-      '  db_database.show_system_views,'
-      '  db_database.db_database_shedule,'
-      '  db_database.db_database_library_name,'
-      '  db_database.db_database_authentication_type,'
-      '  db_database.db_database_auto_grant,'
-      '  db_database.db_database_use_log_meta,'
-      '  db_database.db_database_use_log_editor,'
-      '  db_database.db_database_log_meta_filename,'
-      '  db_database.db_database_log_editor_filename,'
-      '  db_database.db_database_use_log_meta_custom_charset,'
-      '  db_database.db_database_use_log_write_timestamp,'
-      '  db_database.db_database_log_meta_custom_charset,'
-      '  db_database.show_child_objects,'
-      '  db_database.db_database_log_script_exec_filename,'
-      '  db_database.db_database_use_log_script_exec'
+      '  *'
       'from'
       '  db_database'
       'where'
@@ -1853,8 +1865,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 272
-    Top = 136
+    Left = 340
+    Top = 170
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1883,8 +1895,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_folders_id'
         ParamType = ptUnknown
       end>
-    Left = 272
-    Top = 78
+    Left = 340
+    Top = 98
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1906,8 +1918,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_folders_id'
         ParamType = ptUnknown
       end>
-    Left = 313
-    Top = 78
+    Left = 391
+    Top = 98
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1958,8 +1970,8 @@ object UserDBModule: TUserDBModule
       '  db_database.db_database_sort_order'
     )
     Params = <>
-    Left = 640
-    Top = 130
+    Left = 800
+    Top = 163
   end
   object quSQLPagesUpdSO: TZQuery
     Connection = UserDB
@@ -1989,8 +2001,8 @@ object UserDBModule: TUserDBModule
         Name = 'sql_editors_id'
         ParamType = ptUnknown
       end>
-    Left = 392
-    Top = 409
+    Left = 490
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2024,8 +2036,8 @@ object UserDBModule: TUserDBModule
         ParamType = ptUnknown
       end>
     Options = [doCalcDefaults, doPreferPrepared]
-    Left = 432
-    Top = 409
+    Left = 540
+    Top = 511
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2051,8 +2063,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 745
-    Top = 8
+    Left = 931
+    Top = 10
   end
   object usConnectionPlugins: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -2082,8 +2094,8 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_plugin_data.db_connection_plugin_data_variable_name IS NULL AND :OLD_db_connection_plugin_data_variable_name IS NULL) OR (db_connection_plugin_data.db_connection_plugin_data_variable_name = :OLD_db_connection_plugin_data_variable_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 232
-    Top = 464
+    Left = 290
+    Top = 580
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2141,8 +2153,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 192
-    Top = 464
+    Left = 240
+    Top = 580
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2168,8 +2180,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 745
-    Top = 66
+    Left = 931
+    Top = 83
   end
   object quDBOptions: TZQuery
     Connection = UserDB
@@ -2183,8 +2195,8 @@ object UserDBModule: TUserDBModule
       '  db_connection_options'
     )
     Params = <>
-    Left = 392
-    Top = 136
+    Left = 490
+    Top = 170
   end
   object usDBOptions: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -2209,8 +2221,8 @@ object UserDBModule: TUserDBModule
       '  ((db_connection_options.db_connection_options_name IS NULL AND :OLD_db_connection_options_name IS NULL) OR (db_connection_options.db_connection_options_name = :OLD_db_connection_options_name))'
     )
     UseSequenceFieldForRefreshSQL = False
-    Left = 432
-    Top = 136
+    Left = 540
+    Top = 170
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2257,8 +2269,8 @@ object UserDBModule: TUserDBModule
         Name = 'db_database_id'
         ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 136
+    Left = 590
+    Top = 170
     ParamData = <    
       item
         DataType = ftUnknown
@@ -2269,29 +2281,20 @@ object UserDBModule: TUserDBModule
       FieldKind = fkData
       FieldName = 'db_database_id'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quDBOptionsItemsdb_connection_options_name: TStringField
       FieldKind = fkData
       FieldName = 'db_connection_options_name'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 400
     end
     object quDBOptionsItemsdb_connection_options_value: TStringField
       FieldKind = fkData
       FieldName = 'db_connection_options_value'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 2000
     end
   end
@@ -2307,8 +2310,8 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 745
-    Top = 144
+    Left = 931
+    Top = 180
   end
   object UpdDB5: TZSQLProcessor
     Params = <>
@@ -2324,14 +2327,14 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 745
-    Top = 200
+    Left = 931
+    Top = 250
   end
   object ZSQLMonitor1: TZSQLMonitor
     Active = True
     MaxTraceCount = 50
-    Left = 40
-    Top = 128
+    Left = 50
+    Top = 160
   end
   object UpdDB6: TZSQLProcessor
     Params = <>
@@ -2373,7 +2376,7 @@ object UserDBModule: TUserDBModule
     )
     Connection = UserDB
     Delimiter = ';'
-    Left = 745
-    Top = 264
+    Left = 931
+    Top = 330
   end
 end

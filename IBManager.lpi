@@ -2029,6 +2029,9 @@
       <Item>
         <Name Value="EUIBError"/>
       </Item>
+      <Item>
+        <Name Value="Exception"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

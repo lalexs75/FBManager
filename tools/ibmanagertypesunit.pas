@@ -814,26 +814,25 @@ begin
   MakeSQLHistoryTable;
 
   OIFolder:=fbManDataInpectorForm.Folders.ByID(ADB.FieldByName('db_folders_id').AsInteger);
-{
-  FcmAllowColorsMarking:=false;
-  FcmWindowTop:=false;
-  FcmWindowBottom:=false;
-  FcmWindowLeft:=false;
-  FcmWindowRight:=false;
-  FcmLineWidth:=3;
-  FcmLineColor:=clRed;
 
-  FcmAllowColorsMarkingDBExploer:=false;
-  FcmDBExploerBGColor:=clSkyBlue;
-  FcmDBExploerFontColor:=clBlack;
+  if not ADB.FieldByName('db_database_cm_allow_color_mark').IsNull then
+  begin
+    FcmAllowColorsMarking:=ADB.FieldByName('db_database_cm_allow_color_mark').AsBoolean; //использовать цветовую индикацию окон БД
+    FcmWindowTop:=ADB.FieldByName('db_database_cm_windowTop').AsBoolean; //Цвет верха окна
+    FcmWindowBottom:=ADB.FieldByName('db_database_cm_windowBottom').AsBoolean; //Цвет низа окна
+    FcmWindowLeft:=ADB.FieldByName('db_database_cm_windowLeft').AsBoolean; //Цвет слева окна
+    FcmWindowRight:=ADB.FieldByName('db_database_cm_wndowRight').AsBoolean; //Цвет справа окна
+    FcmLineWidth:=ADB.FieldByName('db_database_cm_lineWidth').AsInteger; //Ширина цветового выделения
+    FcmLineColor:=ADB.FieldByName('db_database_cm_lineColor').AsInteger; //Цвет индикации окон
 
-  FcmMDIButtonStyle:=0;
-  FcmMDIButtonColor:=clRed;
-
-  //DB ping
-  FPingTimerEnabled:=false;
-  FPingTimerInterval:=30;
-}
+    FcmAllowColorsMarkingDBExploer:=ADB.FieldByName('db_database_cm_allow_cm_dbe').AsBoolean; //Использовать цвет для объектов в инспекторе БД
+    FcmDBExploerBGColor:=ADB.FieldByName('db_database_cm_dbe_bgcolor').AsInteger; //Цвет фона объектов в инспекторе БД
+    FcmDBExploerFontColor:=ADB.FieldByName('db_database_cm_dbe_font_color').AsInteger; //Цвет шрифта объектов в инспекторе БД
+    FcmMDIButtonStyle:=ADB.FieldByName('db_database_cm_mdibtn_style').AsInteger; //Стиль выделения кнопки окна в панеле окон
+    FcmMDIButtonColor:=ADB.FieldByName('db_database_cm_mdibtn_color').AsInteger; //Цвет кнопки окна в панеле окон
+    FPingTimerEnabled:=ADB.FieldByName('db_database_ping_enabled').AsBoolean; //Выполнять переодические пинги БД для проверки доступности
+    FPingTimerInterval:=ADB.FieldByName('db_database_ping_interval').AsInteger; //Переодичность ыполнения пингов
+  end;
   FSqlEditors.Load;
 end;
 
@@ -875,6 +874,22 @@ begin
   else
     UserDBModule.quDatabasesItem.FieldByName('db_folders_id').Clear;
   UserDBModule.quDatabasesItem.FieldByName('db_database_sort_order').AsInteger:=FSortOrder;
+
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_allow_color_mark').AsBoolean := FcmAllowColorsMarking; //использовать цветовую индикацию окон БД
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_windowTop').AsBoolean        := FcmWindowTop; //Цвет верха окна
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_windowBottom').AsBoolean     := FcmWindowBottom; //Цвет низа окна
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_windowLeft').AsBoolean       := FcmWindowLeft; //Цвет слева окна
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_wndowRight').AsBoolean       := FcmWindowRight; //Цвет справа окна
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_lineWidth').AsInteger        := FcmLineWidth; //Ширина цветового выделения
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_lineColor').AsInteger        := FcmLineColor; //Цвет индикации окон
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_allow_cm_dbe').AsBoolean     := FcmAllowColorsMarkingDBExploer; //Использовать цвет для объектов в инспекторе БД
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_dbe_bgcolor').AsInteger      := FcmDBExploerBGColor; //Цвет фона объектов в инспекторе БД
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_dbe_font_color').AsInteger   := FcmDBExploerFontColor; //Цвет шрифта объектов в инспекторе БД
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_mdibtn_style').AsInteger     := FcmMDIButtonStyle; //Стиль выделения кнопки окна в панеле окон
+  UserDBModule.quDatabasesItem.FieldByName('db_database_cm_mdibtn_color').AsInteger     := FcmMDIButtonColor; //Цвет кнопки окна в панеле окон
+  UserDBModule.quDatabasesItem.FieldByName('db_database_ping_enabled').AsBoolean        := FPingTimerEnabled; //Выполнять переодические пинги БД для проверки доступности
+  UserDBModule.quDatabasesItem.FieldByName('db_database_ping_interval').AsInteger       := FPingTimerInterval; //Переодичность ыполнения пингов
+
   UserDBModule.quDatabasesItem.Post;
 
   if SQLEngine.DatabaseID <= 0 then
