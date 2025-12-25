@@ -650,10 +650,14 @@ begin
 end;
 
 procedure TfbManagerMainForm.RxMDIPanel1ChangeCurrentChild(Sender: TRxMDIPanel; AForm: TForm);
+var
+  F : TfbmDBObjectEditorForm;
 begin
   if Assigned(AForm) and (AForm is TfbmDBObjectEditorForm) then
   begin
-    fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
+    F:=TfbmDBObjectEditorForm(AForm);
+    if Assigned(F.InspectorRecord) and Assigned(F.InspectorRecord.FOwner) then;
+      fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
   end
 end;
 
