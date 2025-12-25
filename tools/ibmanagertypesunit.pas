@@ -450,10 +450,16 @@ begin
 end;
 
 procedure TDataBaseRecord.SetConnected(const AValue: boolean);
+var
+  FOldCursor : TCursor;
 begin
   if FSQLEngine.Connected = AValue then exit;
   if not AValue then
     SaveDesktop; //Сохранять рабочий стол надо пока её всё живо
+
+  FOldCursor:=Screen.Cursor;
+  Screen.Cursor:=crHourGlass;
+  Application.ProcessMessages;
 
   FSQLEngine.Connected:=AValue;
   if FSQLEngine.Connected then
@@ -488,6 +494,7 @@ begin
       FSQLEditorForm.Close;
     DeleteObjectTree;
   end;
+  Screen.Cursor:=FOldCursor;
   UpdateCaption;
 end;
 
