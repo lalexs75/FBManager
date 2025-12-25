@@ -656,8 +656,9 @@ begin
   if Assigned(AForm) and (AForm is TfbmDBObjectEditorForm) then
   begin
     F:=TfbmDBObjectEditorForm(AForm);
-    if Assigned(F.InspectorRecord) and Assigned(F.InspectorRecord.FOwner) then;
-      fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
+    if Assigned(F.InspectorRecord) and Assigned(F.InspectorRecord.FOwner) then
+      if not TfbmDBObjectEditorForm(AForm).InspectorRecord.OwnerDB.FLocked then
+        fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
   end
 end;
 

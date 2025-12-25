@@ -664,6 +664,7 @@ type
     destructor Destroy; override;
     procedure Load(const AData: TDataSet);override;
     procedure Store(const AData: TDataSet);override;
+    procedure PingDB;override;
 
     procedure RefreshObjectsBeginFull;override;
     procedure RefreshObjectsEndFull;override;
@@ -1750,6 +1751,20 @@ begin
   AData.FieldByName('db_database_auto_grant').AsBoolean:=FAutoGrantObject;
   //AData.FieldByName('db_database_library_name').AsString:=LibraryName;
   AData.FieldByName('db_database_authentication_type').AsString:=UIBProtocolToStr(FProtocol);
+end;
+
+procedure TSQLEngineFireBird.PingDB;
+var
+  IBQ: TUIBQuery;
+begin
+  if not FBDatabase.Connected then exit;
+  IBQ:=GetUIBQuery(fbSqlModule.sFBStatistic['PingDBSql']);
+  try
+    IBQ.Open;
+    IBQ.Close;
+  finally
+  end;
+  IBQ.Free;
 end;
 
 procedure TSQLEngineFireBird.RefreshObjectsBeginFull;

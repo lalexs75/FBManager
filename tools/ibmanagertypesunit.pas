@@ -177,6 +177,7 @@ type
     procedure FillInitValues;
   public
     ProgectID:integer;
+    FLocked:Boolean;
 
     FSQLEditorForm: TForm;
     RecentDBItems:TRecentFiles;
@@ -201,10 +202,12 @@ type
     //DB ping
     FPingTimerEnabled:Boolean;
     FPingTimerInterval:Integer;
+    FNextPingTime:TDateTime;
 
     constructor Create(aOwner:TTreeNode; ASQLEngine:TSQLEngineAbstract);
     constructor Load(aOwner:TTreeNode; ADB, ADBPlugins:TDataSet);
     destructor Destroy; override;
+    procedure PingDB;
     procedure WriteSQLFile(FileName, LogString:string);
     procedure Save;
     function Edit:boolean;override;
@@ -454,6 +457,7 @@ var
   FOldCursor : TCursor;
 begin
   if FSQLEngine.Connected = AValue then exit;
+  FLocked:=true;
   if not AValue then
     SaveDesktop; //Сохранять рабочий стол надо пока её всё живо
 
@@ -486,6 +490,10 @@ begin
     FSQLEditorHistory1.Open;
     FSQLEditorHistory1.FieldByName('sql_editors_history_sql_text').OnGetText:=@SQLBodyGetTextEvent;
     {$IFDEF DEBUG_LOG}RxWriteLog(etDebug, 'Connected=true');{$ENDIF}
+
+    //set next ping time
+    if FPingTimerEnabled then
+      FNextPingTime:=Now + FPingTimerInterval / (24 * 60);
   end
   else
   begin
@@ -496,6 +504,7 @@ begin
   end;
   Screen.Cursor:=FOldCursor;
   UpdateCaption;
+  FLocked:=false;
 end;
 
 procedure TDataBaseRecord.MakeObjectTree;
@@ -857,6 +866,12 @@ begin
   inherited Destroy;
   { TODO : Не верно работает очистка ресурсов }
   //FreeAndNil(FSQLEngine);
+end;
+
+procedure TDataBaseRecord.PingDB;
+begin
+  if feDBPing in SQLEngine.SQLEngileFeatures then
+    SQLEngine.PingDB;
 end;
 
 procedure TDataBaseRecord.Save;

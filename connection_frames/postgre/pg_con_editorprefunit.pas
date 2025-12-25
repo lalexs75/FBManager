@@ -98,7 +98,7 @@ begin
     CheckBox4.Checked:=TSQLEnginePostgre(ASQLEngine).UsePGBouncer;
   end;
 
-  CheckBox4.Checked:=FDBRec.FPingTimerEnabled;
+  CheckBox5.Checked:=FDBRec.FPingTimerEnabled;
   SpinEdit1.Value:=FDBRec.FPingTimerInterval;
 end;
 
@@ -117,7 +117,7 @@ begin
     TSQLEnginePostgre(FSQLEngine).UsePGBouncer:=CheckBox4.Checked;
   end;
 
-  FDBRec.FPingTimerEnabled:=CheckBox4.Checked;
+  FDBRec.FPingTimerEnabled:=CheckBox5.Checked;
   FDBRec.FPingTimerInterval:=SpinEdit1.Value;
 end;
 

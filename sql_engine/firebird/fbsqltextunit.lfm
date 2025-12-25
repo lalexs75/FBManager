@@ -1,9 +1,9 @@
 object fbSqlTextData: TfbSqlTextData
   OldCreateOrder = False
-  Height = 554
+  Height = 590
   HorizontalOffset = 548
   VerticalOffset = 261
-  Width = 871
+  Width = 909
   object ssqlSelectFKList: TStrHolder
     Capacity = 64
     Macros = <>
@@ -635,7 +635,7 @@ object fbSqlTextData: TfbSqlTextData
     )
   end
   object sFBStatistic: TRxTextHolder
-    Highlighter = rxSynNone
+    Highlighter = rxSynSQL
     Items = <    
       item
         Caption = 'Stat1Format'
@@ -654,6 +654,16 @@ object fbSqlTextData: TfbSqlTextData
           '  inner join RDB$FORMATS on (RDB$RELATIONS.RDB$RELATION_ID = RDB$FORMATS.RDB$RELATION_ID)'
           'where'
           '  RDB$RELATIONS.RDB$RELATION_NAME = :RELATION_NAME'
+          ''
+        )
+      end    
+      item
+        Caption = 'PingDBSql'
+        Lines.Strings = (
+          'select'
+          '  CURRENT_TIMESTAMP'
+          'from'
+          '  rdb$database'
           ''
         )
       end>

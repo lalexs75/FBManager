@@ -1276,6 +1276,7 @@ type
     function ExecSysSQL(const Sql:string):boolean;
     function SQLPlan(aDataSet:TDataSet):string;override;
     function GetQueryControl:TSQLQueryControl;override;
+    procedure PingDB; override;
 
     //Работа с типами полей и с доменами
     procedure FillDomainsList(const Items:TStrings; const ClearItems:boolean);override;
@@ -4490,6 +4491,19 @@ end;
 function TSQLEnginePostgre.GetQueryControl: TSQLQueryControl;
 begin
   Result:=TPGQueryControl.Create(Self);
+end;
+
+procedure TSQLEnginePostgre.PingDB;
+var
+  Q : TZQuery;
+begin
+  Q:=GetSQLQuery('select CURRENT_TIMESTAMP');
+  try
+    Q.Open;
+    Q.Close;
+  finally
+  end;
+  Q.Free;
 end;
 
 procedure TSQLEnginePostgre.FillDomainsList(const Items: TStrings; const ClearItems:boolean);

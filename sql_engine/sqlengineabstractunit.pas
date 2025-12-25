@@ -996,6 +996,7 @@ type
     procedure FillListForNames(Items:TStrings; ObjectKinds:TDBObjectKinds; AIncludeSysObj:boolean = true);
     procedure InternalError(AErrorMessage:string);
     procedure InternalErrorEx(AErrorMessage:string; AParams : array of const);
+    procedure PingDB; virtual;
 
     //Работа с типами полей и с доменами
     procedure FillDomainsList(const Items:TStrings; const ClearItems:boolean);virtual;
@@ -2285,6 +2286,11 @@ procedure TSQLEngineAbstract.InternalErrorEx(AErrorMessage: string;
   AParams: array of const);
 begin
   InternalError(Format(AErrorMessage, AParams));
+end;
+
+procedure TSQLEngineAbstract.PingDB;
+begin
+  //
 end;
 
 procedure TSQLEngineAbstract.FillDomainsList(const Items: TStrings; const ClearItems:boolean);

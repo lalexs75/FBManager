@@ -1331,11 +1331,14 @@ end;
 procedure TfbManDataInpectorForm.PingConnectedDB;
 var
   P : TDataBaseRecord;
+  TN : TDateTime;
 begin
+  TN:=Now;
   for P in DBList do
-    if P.Connected then
+    if P.Connected and P.FPingTimerEnabled and (P.FNextPingTime < TN) then
     begin
-
+      P.FNextPingTime:=TN + (P.FPingTimerInterval / (24 * 60)) ;
+      P.PingDB;
     end;//
 end;
 
