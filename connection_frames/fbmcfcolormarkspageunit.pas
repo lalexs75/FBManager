@@ -99,6 +99,7 @@ end;
 
 procedure TfbmCFColorMarksPage.LoadParams(ASQLEngine : TSQLEngineAbstract);
 begin
+  if not Assigned(FDBRec) then Exit;
   CheckBox1.Checked:=FDBRec.FcmAllowColorsMarking;
   CheckGroup1.Checked[0]:=FDBRec.FcmWindowTop;
   CheckGroup1.Checked[1]:=FDBRec.FcmWindowLeft;
@@ -117,6 +118,7 @@ end;
 
 procedure TfbmCFColorMarksPage.SaveParams;
 begin
+  if not Assigned(FDBRec) then Exit;
   FDBRec.FcmAllowColorsMarking          := CheckBox1.Checked;
   FDBRec.FcmWindowTop                   := CheckGroup1.Checked[0];
   FDBRec.FcmWindowLeft                  := CheckGroup1.Checked[1];
