@@ -1,11 +1,10 @@
 object assistMainFrame: TassistMainFrame
   Left = 0
-  Height = 455
+  Height = 364
   Top = 0
-  Width = 1011
-  ClientHeight = 455
-  ClientWidth = 1011
-  DesignTimePPI = 120
+  Width = 809
+  ClientHeight = 364
+  ClientWidth = 809
   LCLVersion = '4.99.0.0'
   ParentFont = False
   ParentShowHint = False
@@ -15,32 +14,32 @@ object assistMainFrame: TassistMainFrame
   DesignTop = 326
   object PageControl1: TPageControl
     Left = 0
-    Height = 455
+    Height = 364
     Top = 0
-    Width = 1011
-    ActivePage = tabProperty
+    Width = 809
+    ActivePage = tabFields
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     TabPosition = tpBottom
     object tabFields: TTabSheet
       Caption = 'Fields'
-      ClientHeight = 418
-      ClientWidth = 1001
+      ClientHeight = 333
+      ClientWidth = 805
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 418
+        Height = 333
         Top = 0
-        Width = 1001
+        Width = 805
         ColumnDefValues.BlobText = '(данные)'
-        TitleButtons = False
+        TitleButtons = True
         AutoSort = True
         Columns = <        
           item
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = '##'
-            Width = 40
+            Width = 32
             FieldName = 'FIELD_NO'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -56,7 +55,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Primary key'
             Title.Caption = 'PK'
-            Width = 50
+            Width = 40
             FieldName = 'FIELD_PK'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -72,7 +71,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Field name'
             Title.Caption = 'Field name'
-            Width = 200
+            Width = 160
             FieldName = 'FIELD_NAME'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -88,7 +87,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Field type'
             Title.Caption = 'Type'
-            Width = 120
+            Width = 96
             FieldName = 'FIELD_TYPE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -104,7 +103,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Field domain'
             Title.Caption = 'Domain'
-            Width = 150
+            Width = 120
             FieldName = 'FIELD_DOMAIN'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -120,7 +119,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Field fescription'
             Title.Caption = 'Description'
-            Width = 160
+            Width = 128
             FieldName = 'FIELD_DESCRIPTION'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -136,7 +135,7 @@ object assistMainFrame: TassistMainFrame
             Title.Orientation = toHorizontal
             Title.Hint = 'Not null'
             Title.Caption = 'NN'
-            Width = 50
+            Width = 40
             FieldName = 'FIELD_NOT_NULL'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -212,28 +211,30 @@ object assistMainFrame: TassistMainFrame
         DrawFullLine = False
         SelectedColor = clHighlight
         DataSource = dsFields
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        DragMode = dmAutomatic
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook, dgPersistentMultiSelect, dgDisableDelete, dgDisableInsert]
+        ReadOnly = True
         TabOrder = 0
       end
     end
     object tabProperty: TTabSheet
       Caption = 'Propertys'
-      ClientHeight = 418
-      ClientWidth = 1001
+      ClientHeight = 333
+      ClientWidth = 805
       object RxDBGrid2: TRxDBGrid
         Left = 0
-        Height = 418
+        Height = 333
         Top = 0
-        Width = 1001
+        Width = 805
         ColumnDefValues.BlobText = '(данные)'
-        TitleButtons = False
+        TitleButtons = True
         AutoSort = True
         Columns = <        
           item
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PROP_NAME'
-            Width = 500
+            Width = 402
             FieldName = 'PROP_NAME'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -248,7 +249,7 @@ object assistMainFrame: TassistMainFrame
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PROP_VALUE'
-            Width = 499
+            Width = 401
             FieldName = 'PROP_VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -326,7 +327,7 @@ object assistMainFrame: TassistMainFrame
         SelectedColor = clHighlight
         DataSource = dsProps
         FixedCols = 0
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgCellHints, dgTruncCellHints]
+        Options = [dgTitles, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiselect, dgHeaderPushedLook, dgDisableDelete, dgDisableInsert, dgCellHints, dgTruncCellHints]
         ReadOnly = True
         Scrollbars = ssAutoVertical
         TabOrder = 0
@@ -334,13 +335,13 @@ object assistMainFrame: TassistMainFrame
     end
     object tabDescription: TTabSheet
       Caption = 'Description'
-      ClientHeight = 418
-      ClientWidth = 1001
+      ClientHeight = 333
+      ClientWidth = 805
       object Memo1: TMemo
         Left = 0
-        Height = 418
+        Height = 333
         Top = 0
-        Width = 1001
+        Width = 805
         Align = alClient
         Lines.Strings = (
           'Memo1'
@@ -385,61 +386,82 @@ object assistMainFrame: TassistMainFrame
         DataType = ftBoolean
       end>
     PacketRecords = 0
-    Left = 248
-    Top = 176
+    Left = 198
+    Top = 141
     object rxFieldsFIELD_NO: TLongintField
       FieldKind = fkData
       FieldName = 'FIELD_NO'
       Index = 0
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxFieldsFIELD_PK: TBooleanField
       FieldKind = fkData
       FieldName = 'FIELD_PK'
       Index = 1
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       DisplayValues = 'True;False'
     end
     object rxFieldsFIELD_NAME: TStringField
       FieldKind = fkData
       FieldName = 'FIELD_NAME'
       Index = 2
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 60
     end
     object rxFieldsFIELD_TYPE: TStringField
       FieldKind = fkData
       FieldName = 'FIELD_TYPE'
       Index = 3
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 100
     end
     object rxFieldsFIELD_DOMAIN: TStringField
       FieldKind = fkData
       FieldName = 'FIELD_DOMAIN'
       Index = 4
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 100
     end
     object rxFieldsFIELD_DESCRIPTION: TStringField
       FieldKind = fkData
       FieldName = 'FIELD_DESCRIPTION'
       Index = 5
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 500
     end
     object rxFieldsFIELD_NOT_NULL: TBooleanField
       FieldKind = fkData
       FieldName = 'FIELD_NOT_NULL'
       Index = 6
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       DisplayValues = 'True;False'
     end
   end
   object dsFields: TDataSource
     DataSet = rxFields
-    Left = 209
-    Top = 176
+    Left = 167
+    Top = 141
   end
   object rxProps: TRxMemoryData
     FieldDefs = <    
@@ -454,26 +476,32 @@ object assistMainFrame: TassistMainFrame
         Size = 1024
       end>
     PacketRecords = 0
-    Left = 251
-    Top = 280
+    Left = 201
+    Top = 224
     object rxPropsPROP_NAME: TStringField
       FieldKind = fkData
       FieldName = 'PROP_NAME'
       Index = 0
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 250
     end
     object rxPropsPROP_VALUE: TStringField
       FieldKind = fkData
       FieldName = 'PROP_VALUE'
       Index = 1
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 1024
     end
   end
   object dsProps: TDataSource
     DataSet = rxProps
-    Left = 208
-    Top = 280
+    Left = 166
+    Top = 224
   end
 end

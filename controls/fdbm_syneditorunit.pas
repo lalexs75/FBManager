@@ -359,7 +359,7 @@ var
 
 implementation
 uses
-  {$IFDEF DEBUG_LOG} rxlogging, {$ENDIF DEBUG}
+  {$IFDEF DEBUG_LOG} assistMainUnit, rxlogging, {$ENDIF DEBUG}
   IBManMainUnit, SynEditTypes, fEditSearch, IBManDataInspectorUnit, LCLIntf,
   fbmInsertDefSqlUnit, LCLProc, LazFileUtils, strutils, rxAppUtils,
   fbmStrConstUnit, fdbm_SynEditorCompletionHintUnit,
@@ -953,6 +953,13 @@ begin
        S:=S + Rec.Caption + '.' + fbManDataInpectorForm.LB_SQLAssistent.Items[i] + LineEnding;
 
     TextEditor.SelText:=S;
+  end
+  else
+  if (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1) and Assigned(Rec)  then
+  begin
+    FGrid:=TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1;
+
+//    TassistMainFrame(SQLAssist).rx
   end;
   TextEditor.SetFocus;
 end;
@@ -963,7 +970,11 @@ var
   Control :TControl;
 begin
   Control:=SynEditAcceptDrag(Source);
-  Accept:= (Control = fbManDataInpectorForm.TreeView1) or (Control = fbManDataInpectorForm.LB_SQLAssistent);
+  Accept:= (Control = fbManDataInpectorForm.TreeView1) or
+           (Control = fbManDataInpectorForm.LB_SQLAssistent) or
+           (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1) or
+           (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid2)
+           ;
 end;
 
 procedure Tfdbm_SynEditorFrame.TextEditorEnter(Sender: TObject);

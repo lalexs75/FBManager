@@ -238,6 +238,7 @@ type
   public
     property DBList:TFBMDataBaseList read FDBList;
     property Folders:TOIFolderList read FFolders;
+    property SQLAssist:TFrame read FSQLAssist;
   end;
 
 var
