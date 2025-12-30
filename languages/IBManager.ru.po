@@ -5679,7 +5679,7 @@ msgstr "Синхронный"
 
 #: fbmstrconstunit.ssyncobjtree
 msgid "Synchronous display of an object in a tree"
-msgstr ""
+msgstr "Синхронный показ объекта в дереве"
 
 #: fbmstrconstunit.ssyncomdescreatedomain
 msgid "Create domain"
@@ -6534,7 +6534,7 @@ msgstr ""
 
 #: fb_utils.sdescboolean
 msgid "Boolean data type"
-msgstr ""
+msgstr "Логический тип данных"
 
 #: fb_utils.sdescchar
 msgid "Size in bytes depends on the encoding, the number of bytes in a character. from 1 to 32,767 bytes. A fixed-length character data type. When its data is displayed, trailing spaces are added to the string up to the specified length. Trailing spaces are not stored in the database but are restored to match the defined length when the column is displayed on the client side. Network traffic is reduced by not sending spaces over the LAN. If the number of characters is not specified, 1 is used by default."
@@ -6731,7 +6731,7 @@ msgstr "Текст произвольной длинны"
 
 #: pg_utils.s_pg_time
 msgid "time of day (no time zone)"
-msgstr "Время (без чесового пояса)"
+msgstr "Время (без часового пояса)"
 
 #: pg_utils.s_pg_timestamp
 msgid "date and time (no time zone)"
@@ -6781,4 +6781,3 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
-
