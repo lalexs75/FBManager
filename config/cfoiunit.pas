@@ -35,6 +35,7 @@ type
 
   TcfOIFrame = class(TFBMConfigPageAbstract)
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     io_cbDisableResize: TCheckBox;
     io_cbShowOIHint: TCheckBox;
   private
@@ -59,6 +60,7 @@ begin
   io_cbShowOIHint.Caption:=sShowObjectDescriptionsAsHint;
   io_cbDisableResize.Caption:=sDisableResize;
   CheckBox1.Caption:=sHotTrack;
+  CheckBox2.Caption:=sSyncObjTree;
 end;
 
 function TcfOIFrame.PageName: string;
@@ -72,6 +74,7 @@ begin
   io_cbDisableResize.Checked:=ConfigValues.ByNameAsBoolean('oiDisableResize', false);
   io_cbShowOIHint.Checked:=ConfigValues.ByNameAsBoolean('oiShowObjDescAsHint', true);
   CheckBox1.Checked:=ConfigValues.ByNameAsBoolean('oiHotTrack', false);
+  CheckBox2.Checked:=ConfigValues.ByNameAsBoolean('oiSyncObjTree', true);
 end;
 
 procedure TcfOIFrame.SaveData;
@@ -79,6 +82,7 @@ begin
   ConfigValues.SetByNameAsBoolean('oiDisableResize', io_cbDisableResize.Checked);
   ConfigValues.SetByNameAsBoolean('oiShowObjDescAsHint', io_cbShowOIHint.Checked);
   ConfigValues.SetByNameAsBoolean('oiHotTrack', CheckBox1.Checked);
+  ConfigValues.SetByNameAsBoolean('oiSyncObjTree', CheckBox2.Checked);
 end;
 
 end.

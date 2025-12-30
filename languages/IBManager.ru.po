@@ -5677,6 +5677,10 @@ msgstr "Интревал сборки мусора"
 msgid "Synchronous"
 msgstr "Синхронный"
 
+#: fbmstrconstunit.ssyncobjtree
+msgid "Synchronous display of an object in a tree"
+msgstr ""
+
 #: fbmstrconstunit.ssyncomdescreatedomain
 msgid "Create domain"
 msgstr "Создать домен"
@@ -6777,3 +6781,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

@@ -653,7 +653,7 @@ procedure TfbManagerMainForm.RxMDIPanel1ChangeCurrentChild(Sender: TRxMDIPanel; 
 var
   F : TfbmDBObjectEditorForm;
 begin
-  if Assigned(AForm) and (AForm is TfbmDBObjectEditorForm) then
+  if ConfigValues.ByNameAsBoolean('oiSyncObjTree', true) and Assigned(AForm) and (AForm is TfbmDBObjectEditorForm) then
   begin
     F:=TfbmDBObjectEditorForm(AForm);
     if Assigned(F.InspectorRecord) and Assigned(F.InspectorRecord.FOwner) then

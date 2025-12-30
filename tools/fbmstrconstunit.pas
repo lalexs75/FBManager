@@ -1344,6 +1344,7 @@ resourcestring
   sOnlyShowUsers                    = 'Only show users';
   sOnlyShowGroups                   = 'Only show groups';
   sHotTrack                         = 'Hot track mouse cursor';
+  sSyncObjTree                      = 'Synchronous display of an object in a tree';
   sDisplayMemoValuesAsText          = 'Display memo values as text';
   sFilterStyle                      = 'Filter style';
   sSimple                           = 'Simple';

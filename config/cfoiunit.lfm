@@ -3,15 +3,15 @@ inherited cfOIFrame: TcfOIFrame
   Width = 400
   ClientHeight = 300
   ClientWidth = 400
-  DesignLeft = 487
-  DesignTop = 213
+  DesignLeft = 542
+  DesignTop = 219
   object io_cbShowOIHint: TCheckBox[0]
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 6
     Height = 24
     Top = 6
-    Width = 232
+    Width = 218
     BorderSpacing.Around = 6
     Caption = 'Show object descriptions as hint'
     TabOrder = 0
@@ -23,7 +23,7 @@ inherited cfOIFrame: TcfOIFrame
     Left = 6
     Height = 24
     Top = 36
-    Width = 115
+    Width = 107
     BorderSpacing.Around = 6
     Caption = 'Disable resize'
     TabOrder = 1
@@ -35,9 +35,21 @@ inherited cfOIFrame: TcfOIFrame
     Left = 6
     Height = 24
     Top = 66
-    Width = 85
+    Width = 82
     BorderSpacing.Around = 6
     Caption = 'Hot track'
     TabOrder = 2
+  end
+  object CheckBox2: TCheckBox[3]
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = CheckBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 6
+    Height = 24
+    Top = 96
+    Width = 273
+    BorderSpacing.Around = 6
+    Caption = 'Synchronous display of an object in a tree'
+    TabOrder = 3
   end
 end

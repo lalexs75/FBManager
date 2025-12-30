@@ -25,11 +25,12 @@ unit fdbm_SynEditorUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Menus, ActnList, Dialogs,
+  Classes, SysUtils, FileUtil, LResources, Forms, Menus, ActnList, Dialogs, DB,
   SynEdit, fbmToolsUnit, LMessages, Controls, SynCompletion, SynHighlighterSQL,
-  ibmanagertypesunit, SQLEngineAbstractUnit, ComCtrls, LCLType, Graphics, sqlEngineTypes,
-  SQLEngineCommonTypesUnit, StdCtrls, ExtCtrls, StdActns, SynEditKeyCmds, types,
-  SynEditMarkupHighAll, SynEditMiscClasses, fbmSqlParserUnit, sqlObjects;
+  ibmanagertypesunit, SQLEngineAbstractUnit, ComCtrls, LCLType, Graphics,
+  sqlEngineTypes, SQLEngineCommonTypesUnit, StdCtrls, ExtCtrls, StdActns,
+  SynEditKeyCmds, types, SynEditMarkupHighAll, SynEditMiscClasses, RxDBGrid,
+  fbmSqlParserUnit, sqlObjects;
 
 type
   TSynCompletionObjItemType = (scotDBObject, scotKeyword, scotParam, scotField);
@@ -913,6 +914,8 @@ var
   S:string;
 
   DBObject:TDBObject;
+  FGrid: TRxDBGrid;
+  P: TBookMark;
 begin
   DBObject:=nil;
 
@@ -958,8 +961,19 @@ begin
   if (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1) and Assigned(Rec)  then
   begin
     FGrid:=TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1;
+    if FGrid.SelectedRows.Count>0 then
+    begin
+      S:='';
+      for P in FGrid.SelectedRows do
+      begin
+        TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFields.Bookmark:=P;
+        S:=S + Rec.Caption + '.' + TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
+      end;
+    end
+    else
+      S:=Rec.Caption + '.' + TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
 
-//    TassistMainFrame(SQLAssist).rx
+    TextEditor.SelText:=S;
   end;
   TextEditor.SetFocus;
 end;

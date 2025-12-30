@@ -5510,6 +5510,10 @@ msgstr ""
 msgid "Synchronous"
 msgstr ""
 
+#: fbmstrconstunit.ssyncobjtree
+msgid "Synchronous display of an object in a tree"
+msgstr ""
+
 #: fbmstrconstunit.ssyncomdescreatedomain
 msgid "Create domain"
 msgstr ""
