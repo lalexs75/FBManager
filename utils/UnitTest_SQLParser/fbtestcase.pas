@@ -277,6 +277,8 @@ type
     procedure CreateUser7;
     procedure CreateUser8;
     procedure CreateUser9;
+    procedure CreateUser10;
+    procedure DropUser1;
 
     //DECLARE FILTER
     //DROP FILTER
@@ -1275,6 +1277,16 @@ end;
 procedure TFBSQLParserTest.CreateUser9;
 begin
   DoTestSQL(FBTestSQLData.sUsers['CreateUser9']);
+end;
+
+procedure TFBSQLParserTest.CreateUser10;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['CreateUser10']);
+end;
+
+procedure TFBSQLParserTest.DropUser1;
+begin
+  DoTestSQL(FBTestSQLData.sUsers['DropUser1']);
 end;
 
 procedure TFBSQLParserTest.DeclareFilter1;

@@ -781,6 +781,7 @@ type
     procedure InitParserTree;override;
     procedure MakeSQL;override;
     procedure InternalProcessChildToken(ASQLParser:TSQLParser; AChild:TSQLTokenRecord;const AWord:string);override;
+    procedure SetName(AValue: string); override;
   public
     constructor Create(AParent:TSQLCommandAbstract);override;
     procedure Assign(ASource:TSQLObjectAbstract); override;
@@ -6125,6 +6126,12 @@ begin
     1:Name:=AWord;
     2:PluginName:=AWord;
   end;
+end;
+
+procedure TFBSQLDropUser.SetName(AValue: string);
+begin
+  if FName=AValue then Exit;
+  FName:=AValue;
 end;
 
 constructor TFBSQLDropUser.Create(AParent: TSQLCommandAbstract);

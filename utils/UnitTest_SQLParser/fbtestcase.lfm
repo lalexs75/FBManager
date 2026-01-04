@@ -1,9 +1,10 @@
 object FBTestSQLData: TFBTestSQLData
   OldCreateOrder = False
-  Height = 850
-  HorizontalOffset = 479
-  VerticalOffset = 84
-  Width = 1113
+  Height = 1063
+  HorizontalOffset = 599
+  VerticalOffset = 105
+  Width = 1391
+  PPI = 120
   object sView: TRxTextHolder
     Highlighter = rxSynSQL
     Items = <    
@@ -138,8 +139,8 @@ object FBTestSQLData: TFBTestSQLData
           '  LEFT JOIN sp_get_balance(goods.code_goods) b ON 1 = 1;'
         )
       end>
-    Left = 32
-    Top = 16
+    Left = 40
+    Top = 20
   end
   object sDomain: TRxTextHolder
     Highlighter = rxSynSQL
@@ -291,8 +292,8 @@ object FBTestSQLData: TFBTestSQLData
           'DROP DOMAIN a123;'
         )
       end>
-    Left = 32
-    Top = 88
+    Left = 40
+    Top = 110
   end
   object sTable: TRxTextHolder
     Highlighter = rxSynSQL
@@ -522,8 +523,8 @@ object FBTestSQLData: TFBTestSQLData
           'ALTER TABLE SALARY_HISTORY ALTER COLUMN SALARY_CHANGE COMPUTED BY (OLD_SALARY * PERCENT_CHANGE / 100);'
         )
       end>
-    Left = 32
-    Top = 159
+    Left = 40
+    Top = 199
   end
   object sProcedure: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1181,8 +1182,8 @@ object FBTestSQLData: TFBTestSQLData
           'DROP EXTERNAL FUNCTION funcname;'
         )
       end>
-    Left = 32
-    Top = 232
+    Left = 40
+    Top = 290
   end
   object sUsers: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1296,6 +1297,19 @@ object FBTestSQLData: TFBTestSQLData
         )
       end    
       item
+        Caption = 'CreateUser10'
+        Lines.Strings = (
+          'CREATE USER "KSP.71" PASSWORD ''123'';'
+        )
+      end    
+      item
+        Caption = 'DropUser1'
+        Lines.Strings = (
+          'DROP USER "KSP.71";'
+          ''
+        )
+      end    
+      item
         Caption = 'Graint4'
         Lines.Strings = (
           'GRANT EXECUTE ON PACKAGE pkg_test1 TO alexs;'
@@ -1336,8 +1350,8 @@ object FBTestSQLData: TFBTestSQLData
           ''
         )
       end>
-    Left = 32
-    Top = 319
+    Left = 40
+    Top = 399
   end
   object sGenerator: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1426,8 +1440,8 @@ object FBTestSQLData: TFBTestSQLData
           'DROP SEQUENCE GNID_SYS_CLIENT;'
         )
       end>
-    Left = 128
-    Top = 16
+    Left = 160
+    Top = 20
   end
   object sDataBase: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1691,8 +1705,8 @@ object FBTestSQLData: TFBTestSQLData
           'DROP SHADOW 1 PRESERVE FILE;'
         )
       end>
-    Left = 32
-    Top = 400
+    Left = 40
+    Top = 500
   end
   object sException: TRxTextHolder
     Highlighter = rxSynNone
@@ -1757,8 +1771,8 @@ object FBTestSQLData: TFBTestSQLData
           'DROP EXCEPTION exception_name;'
         )
       end>
-    Left = 32
-    Top = 472
+    Left = 40
+    Top = 590
   end
   object sComment: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1817,8 +1831,8 @@ object FBTestSQLData: TFBTestSQLData
           'COMMENT ON FUNCTION PARAMETER APP_VAR.SET_DATERANGE.ADATEBEGIN IS ''Дата начала'';'
         )
       end>
-    Left = 32
-    Top = 539
+    Left = 40
+    Top = 674
   end
   object sTransaction: TRxTextHolder
     Highlighter = rxSynSQL
@@ -1992,7 +2006,7 @@ object FBTestSQLData: TFBTestSQLData
           'SET TRANSACTION READ COMMITTED RESTART REQUESTS;'
         )
       end>
-    Left = 32
-    Top = 611
+    Left = 40
+    Top = 764
   end
 end

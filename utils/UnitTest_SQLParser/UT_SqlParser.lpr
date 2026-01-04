@@ -10,7 +10,7 @@ uses
   SQLite3TestCase,
   PGCopyCmdCase,
   SSHConnectionUnit, mssql_engine,
-  MSSQLParserTestCase;
+  MSSQLParserTestCase, assistTypesUnit;
 
 {$R *.res}
 

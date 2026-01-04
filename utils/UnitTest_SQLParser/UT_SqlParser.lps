@@ -53,12 +53,12 @@
         <UnitName Value="FBTestCase"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="399"/>
-        <CursorPos X="42" Y="405"/>
+        <TopLine Value="1274"/>
+        <CursorPos X="44" Y="1289"/>
         <UsageCount Value="202"/>
         <Bookmarks Count="2">
-          <Item0 Y="419" ID="1"/>
-          <Item1 X="3" Y="1201" ID="2"/>
+          <Item0 Y="421" ID="1"/>
+          <Item1 X="3" Y="1203" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -165,10 +165,11 @@
       <Unit>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="745"/>
-        <CursorPos X="52" Y="766"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="11"/>
+        <CursorPos X="30" Y="33"/>
         <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
@@ -259,7 +260,6 @@
         <EditorIndex Value="-1"/>
         <CursorPos X="4" Y="7"/>
         <UsageCount Value="1"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/lcl/forms.pp"/>
@@ -309,7 +309,6 @@
         <TopLine Value="2460"/>
         <CursorPos X="36" Y="2484"/>
         <UsageCount Value="3"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6Statement.pas"/>
@@ -317,7 +316,6 @@
         <TopLine Value="201"/>
         <CursorPos X="42" Y="265"/>
         <UsageCount Value="6"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/zeos/src/dbc/ZDbcInterbase6.pas"/>
@@ -325,7 +323,6 @@
         <TopLine Value="72"/>
         <CursorPos X="14" Y="88"/>
         <UsageCount Value="6"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
         <Filename Value="../../../../install/source/fpcsrc/rtl/objpas/math.pp"/>
@@ -347,7 +344,6 @@
         <Filename Value="sqlite3testcase.lfm"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="7"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/local/share/lazarus/components/rxnew/registerrxdb.pas"/>
@@ -362,7 +358,6 @@
         <TopLine Value="9951"/>
         <CursorPos Y="9980"/>
         <UsageCount Value="9"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_enginesecurityunit.pas"/>
@@ -372,28 +367,18 @@
         <CursorPos Y="421"/>
         <UsageCount Value="9"/>
       </Unit>
+      <Unit>
+        <Filename Value="../../assistent/assisttypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="assistTypesUnit"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="18" Column="15" TopLine="4"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="107" Column="26" TopLine="85"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="686" Column="35" TopLine="682"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="277" Column="19" TopLine="273"/>
-      </Position>
-      <Position>
-        <Filename Value="fbtestcase.pas"/>
-        <Caret Line="706" Column="36" TopLine="686"/>
-      </Position>
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="112" Column="26" TopLine="96"/>
@@ -492,6 +477,25 @@
       <Position>
         <Filename Value="fbtestcase.pas"/>
         <Caret Line="31" Column="21" TopLine="10"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="419" Column="16" TopLine="399"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="217" Column="15" TopLine="184"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="281" Column="24" TopLine="260"/>
+      </Position>
+      <Position>
+        <Filename Value="fbtestcase.pas"/>
+        <Caret Line="1289" Column="44" TopLine="1274"/>
       </Position>
     </JumpHistory>
     <RunParams>

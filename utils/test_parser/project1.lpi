@@ -189,6 +189,11 @@
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="../../assistent/assisttypesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="assistTypesUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -198,7 +203,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql;../../sql_engine/plugins;../../sql_engine/mssql"/>
+      <OtherUnitFiles Value="../../sql_engine;../../sql_engine/PostgreSQL;../../sql_objects;../../tools;../../sql_engine/firebird;../../sql_engine/sqlite3;../../sql_engine/mysql;../../sql_engine/plugins;../../sql_engine/mssql;../../assistent"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

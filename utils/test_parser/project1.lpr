@@ -13,7 +13,7 @@ uses
   mysql_SqlParserUnit, mysql_types, SQLite3EngineUnit, sqlite3_keywords,
   sqlite3_SqlParserUnit, FBSQLEngineUnit, fb_SqlParserUnit, fbKeywordsUnit,
   sqlObjects, fbmStrConstUnit, zcomponent, PostgreSQLEngineUnit, pgSqlTextUnit,
-  pg_SqlParserUnit, sqlParserConsts, TreeAddChildTokenUnit
+  pg_SqlParserUnit, sqlParserConsts, assistTypesUnit, TreeAddChildTokenUnit
   { you can add units after this };
 
 {$R *.res}
