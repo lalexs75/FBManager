@@ -63,9 +63,9 @@ begin
   EditorFrame.ChangeVisualParams;
   EditorFrame.TextEditor.Highlighter:=SynSQLSyn1;
   if FLazyMode then
-    Name:=Name + 'Lazy'
+    Name:=Name + 'LazyPG'
   else
-    Name:=Name + 'Full'
+    Name:=Name + 'FullPG'
     ;
 end;
 

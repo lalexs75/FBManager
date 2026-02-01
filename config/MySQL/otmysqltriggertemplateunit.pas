@@ -67,9 +67,9 @@ begin
   EditorFrame.ChangeVisualParams;
   EditorFrame.TextEditor.Highlighter:=SynSQLSyn1;
   if FLazyMode then
-    Name:=Name + 'Lazy'
+    Name:=Name + 'LazyMySQL'
   else
-    Name:=Name + 'Full';
+    Name:=Name + 'FullMySQL';
 end;
 
 function TotMySQLTriggerTemplateFrame.PageName: string;

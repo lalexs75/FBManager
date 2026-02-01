@@ -74,9 +74,9 @@ begin
   EditorFrameBody.Name:='EditorFrameBody';
 
   if FLazyMode then
-    Name:=Name + 'Lazy'
+    Name:=Name + 'LazyFBPkg'
   else
-    Name:=Name + 'Full';
+    Name:=Name + 'FullFBPkg';
 end;
 
 function TotFirebirdPackageTemplatePage.PageName: string;

@@ -62,9 +62,9 @@ begin
   EditorFrame.ChangeVisualParams;
   EditorFrame.TextEditor.Highlighter:=SynSQLSyn1;
   if FLazyMode then
-    Name:=Name + 'Lazy'
+    Name:=Name + 'LazyFB'
   else
-    Name:=Name + 'Full';
+    Name:=Name + 'FullFB';
 end;
 
 function TotFirebirdFunctionTemplatePage.PageName: string;

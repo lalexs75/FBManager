@@ -2,7 +2,6 @@ inherited otFirebirdFunctionTemplatePage: TotFirebirdFunctionTemplatePage
   DesignLeft = 689
   DesignTop = 363
   object SynSQLSyn1: TSynSQLSyn[0]
-    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
     Enabled = False
     SQLDialect = sqlInterbase6
     Left = 244
