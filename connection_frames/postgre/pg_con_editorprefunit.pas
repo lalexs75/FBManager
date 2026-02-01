@@ -129,7 +129,7 @@ end;
 
 function Tpg_con_EditorPrefPage.PageName: string;
 begin
-  Result:=sMisk;
+  Result:=sMisc;
 end;
 
 function Tpg_con_EditorPrefPage.Validate: boolean;

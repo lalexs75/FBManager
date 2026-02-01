@@ -3606,8 +3606,9 @@ msgctxt "fbmstrconstunit.sminvalue"
 msgid "Min value"
 msgstr "Мин. значение"
 
-#: fbmstrconstunit.smisk
-msgid "Misk"
+#: fbmstrconstunit.smisc
+msgctxt "fbmstrconstunit.smisc"
+msgid "Misc"
 msgstr "Разное"
 
 #: fbmstrconstunit.smodified

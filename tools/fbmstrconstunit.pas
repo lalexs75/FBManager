@@ -1484,7 +1484,7 @@ resourcestring
   sHtmlFilesFilter                = 'Html files (*.html)|*.html|Html files (*.htm)|*.htm|All files (*.*)|*.*';
   sImagesFilesFilter              = 'All (*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png)|*.gif;*.jpeg;*.jpg;*.bmp;*.ico;*.png|CompuServe GIF image (*.gif)|*.gif|JPEG image file (*.jpeg)|*.jpeg|JPEG image file (*.jpg)|*.jpg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|PNG image (*.png)|*.png|All files (*.*)|*.*';
 
-  sMisk                           = 'Misk';
+  sMisc                           = 'Misc';
   sLazzyModeLocalVariablesSP      = 'Lazzy mode local variables in SP';
   sLazzyModeLocalVariablesTrigger = 'Lazzy mode local variables in triggers';
   sReportFolder                   = 'Report folder';
