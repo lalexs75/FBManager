@@ -920,15 +920,15 @@ begin
   DBObject:=nil;
 
   Control:=SynEditAcceptDrag(Source);
-  Rec:=fbManDataInpectorForm.CurrentObject;
+  Rec:=fbManDataInspectorForm.CurrentObject;
   if Assigned(Rec) then
     DBObject:=Rec.DBObject;
 
-  if (Control = fbManDataInpectorForm.TreeView1) and Assigned(DBObject) then
+  if (Control = fbManDataInspectorForm.TreeView1) and Assigned(DBObject) then
   begin
-    if (fbManDataInpectorForm.TreeView1.GetFirstMultiSelected <> nil) or (ssCtrl in GetKeyShiftState) then
+    if (fbManDataInspectorForm.TreeView1.GetFirstMultiSelected <> nil) or (ssCtrl in GetKeyShiftState) then
     begin
-      N:=fbManDataInpectorForm.TreeView1.GetFirstMultiSelected;
+      N:=fbManDataInspectorForm.TreeView1.GetFirstMultiSelected;
       if N<>nil then
       begin
         if (not Assigned(N.GetNextMultiSelected)) and not (ssCtrl in GetKeyShiftState) then
@@ -947,31 +947,31 @@ begin
       ShowInsertDefSqlForm(DBObject, '', TextEditor.LogicalCaretXY.X)
   end
   else
-  if (Control = fbManDataInpectorForm.LB_SQLAssistent) and Assigned(Rec)  then
+  if (Control = fbManDataInspectorForm.LB_SQLAssistent) and Assigned(Rec)  then
   begin
     S:='';
-    for i:= 0 to fbManDataInpectorForm.LB_SQLAssistent.Items.Count-1 do
-      if fbManDataInpectorForm.LB_SQLAssistent.Selected[i] then
+    for i:= 0 to fbManDataInspectorForm.LB_SQLAssistent.Items.Count-1 do
+      if fbManDataInspectorForm.LB_SQLAssistent.Selected[i] then
 
-       S:=S + Rec.Caption + '.' + fbManDataInpectorForm.LB_SQLAssistent.Items[i] + LineEnding;
+       S:=S + Rec.Caption + '.' + fbManDataInspectorForm.LB_SQLAssistent.Items[i] + LineEnding;
 
     TextEditor.SelText:=S;
   end
   else
-  if (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1) and Assigned(Rec)  then
+  if (Control = TassistMainFrame(fbManDataInspectorForm.SQLAssist).RxDBGrid1) and Assigned(Rec)  then
   begin
-    FGrid:=TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1;
+    FGrid:=TassistMainFrame(fbManDataInspectorForm.SQLAssist).RxDBGrid1;
     if FGrid.SelectedRows.Count>0 then
     begin
       S:='';
       for P in FGrid.SelectedRows do
       begin
-        TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFields.Bookmark:=P;
-        S:=S + Rec.Caption + '.' + TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
+        TassistMainFrame(fbManDataInspectorForm.SQLAssist).rxFields.Bookmark:=P;
+        S:=S + Rec.Caption + '.' + TassistMainFrame(fbManDataInspectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
       end;
     end
     else
-      S:=Rec.Caption + '.' + TassistMainFrame(fbManDataInpectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
+      S:=Rec.Caption + '.' + TassistMainFrame(fbManDataInspectorForm.SQLAssist).rxFieldsFIELD_NAME.AsString + LineEnding;
 
     TextEditor.SelText:=S;
   end;
@@ -984,10 +984,10 @@ var
   Control :TControl;
 begin
   Control:=SynEditAcceptDrag(Source);
-  Accept:= (Control = fbManDataInpectorForm.TreeView1) or
-           (Control = fbManDataInpectorForm.LB_SQLAssistent) or
-           (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid1) or
-           (Control = TassistMainFrame(fbManDataInpectorForm.SQLAssist).RxDBGrid2)
+  Accept:= (Control = fbManDataInspectorForm.TreeView1) or
+           (Control = fbManDataInspectorForm.LB_SQLAssistent) or
+           (Control = TassistMainFrame(fbManDataInspectorForm.SQLAssist).RxDBGrid1) or
+           (Control = TassistMainFrame(fbManDataInspectorForm.SQLAssist).RxDBGrid2)
            ;
 end;
 
@@ -1035,7 +1035,7 @@ begin
     if Assigned(P) then
     begin
       if (ssShift in Shift) then
-        fbManDataInpectorForm.SelectObject(P)
+        fbManDataInspectorForm.SelectObject(P)
       else
       if (ssAlt in Shift) then
         ShowInsertDefSqlForm(P, FTableAlias, X)
@@ -1331,7 +1331,7 @@ begin
   FSQLEngine:=AValue;
   if Assigned(FSQLEngine) then
   begin
-    DBRecord:=fbManDataInpectorForm.DBBySQLEngine(FSQLEngine);
+    DBRecord:=fbManDataInspectorForm.DBBySQLEngine(FSQLEngine);
     TextEditor.Highlighter:=DBRecord.SynSQLSyn;
   end
   else

@@ -89,7 +89,7 @@ begin
   UIBRestore1.LibraryName:='';
   DoLocalize;
 
-  ComboBox1.ItemIndex:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
+  ComboBox1.ItemIndex:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
   if ComboBox1.ItemIndex > -1 then
     ComboBox1Change(nil);
 end;
@@ -188,7 +188,7 @@ begin
     Rec.RestoreOptions.roPageSize:=StrToIntDef(ComboBox2.Text, 4096);
     Rec.RestoreOptions.roRestoreOption:=MakeRestoreOpt(CheckGroup1);
 
-//    fbManDataInpectorForm.SaveAliasList;
+//    fbManDataInspectorForm.SaveAliasList;
   end;
 end;
 

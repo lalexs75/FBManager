@@ -195,7 +195,7 @@ begin
   rxFields.Open;
   rxWhere.Open;
 
-  I:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox1.Items);
+  I:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox1.Items);
   if i>-1 then
   begin
     ComboBox1.ItemIndex:=i;
@@ -251,7 +251,7 @@ begin
   SaveState;
 
   SQLE:=TSQLEngineAbstract(ComboBox1.Items.Objects[ComboBox1.ItemIndex]);
-  FOwnerRec:=fbManDataInpectorForm.DBBySQLEngine(SQLE);
+  FOwnerRec:=fbManDataInspectorForm.DBBySQLEngine(SQLE);
   if Assigned(SQLE) then
   begin
     ListBox3.Items.Clear;

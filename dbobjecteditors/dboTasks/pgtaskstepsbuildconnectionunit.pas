@@ -138,14 +138,14 @@ var
   R: TTreeNode;
 begin
   TreeView1.Items.Clear;
-  if Assigned(fbManDataInpectorForm) then
+  if Assigned(fbManDataInspectorForm) then
   begin
-    for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
-    if fbManDataInpectorForm.DBList[i].SQLEngine is TSQLEnginePostgre then
+    for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
+    if fbManDataInspectorForm.DBList[i].SQLEngine is TSQLEnginePostgre then
     begin
-      R:=TreeView1.Items.Add(nil, fbManDataInpectorForm.DBList[i].Caption);
-      R.Data:=fbManDataInpectorForm.DBList[i];
-      if fbManDataInpectorForm.DBList[i].Connected then
+      R:=TreeView1.Items.Add(nil, fbManDataInspectorForm.DBList[i].Caption);
+      R.Data:=fbManDataInspectorForm.DBList[i];
+      if fbManDataInspectorForm.DBList[i].Connected then
         R.ImageIndex:=23
       else
         R.ImageIndex:=24;
@@ -162,12 +162,12 @@ var
 begin
   ComboBox1.Items.Clear;
   ComboBox2.Items.Clear;
-  if Assigned(fbManDataInpectorForm) then
+  if Assigned(fbManDataInspectorForm) then
   begin
-    for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
-    if fbManDataInpectorForm.DBList[i].SQLEngine is TSQLEnginePostgre then
+    for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
+    if fbManDataInspectorForm.DBList[i].SQLEngine is TSQLEnginePostgre then
     begin
-      D:=fbManDataInpectorForm.DBList[i].SQLEngine;
+      D:=fbManDataInspectorForm.DBList[i].SQLEngine;
       if Assigned(D) then
       begin
         if ComboBox1.Items.IndexOf(D.ServerName) < 0 then

@@ -118,7 +118,7 @@ procedure TfdbmMonitorAbstractForm.DoFillDatabaseList(
 var
   FCurDBID: Integer;
 begin
-  FCurDBID:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox1.Items, ASQLEngineClass);
+  FCurDBID:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox1.Items, ASQLEngineClass);
   if ComboBox1.Items.Count > 0 then
   begin
     ComboBox1.ItemIndex:=FCurDBID;

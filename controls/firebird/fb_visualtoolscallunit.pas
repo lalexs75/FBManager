@@ -145,7 +145,7 @@ var
   D: TDataBaseRecord;
   E: TSQLEngineAbstract;
 begin
-  D:=fbManDataInpectorForm.CurrentDB;
+  D:=fbManDataInspectorForm.CurrentDB;
   E:=nil;
   if Assigned(D) then
     E:=D.SQLEngine;

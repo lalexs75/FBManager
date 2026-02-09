@@ -154,7 +154,7 @@ end;
 
 procedure TfbmShadowManagerForm.FormCreate(Sender: TObject);
 begin
-  ComboBox1.ItemIndex:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
+  ComboBox1.ItemIndex:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
   if ComboBox1.ItemIndex>-1 then
     ComboBox1Change(nil);
 end;

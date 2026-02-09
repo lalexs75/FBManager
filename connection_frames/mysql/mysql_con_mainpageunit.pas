@@ -222,7 +222,7 @@ begin
     CB_ServerVersion.Items.Add(MySQLServerVersionNames[R]);
   FSQLEngine:=ASQLEngine;
 
-  fbManDataInpectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineMySQL);
+  fbManDataInspectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineMySQL);
 end;
 
 end.

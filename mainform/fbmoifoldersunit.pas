@@ -272,14 +272,14 @@ procedure TOIFolder.Delete;
 var
   i: Integer;
 begin
-  fbManDataInpectorForm.TreeView1.BeginUpdate;
+  fbManDataInspectorForm.TreeView1.BeginUpdate;
   try
-    for i:=0 to fbManDataInpectorForm.DBList.Count-1 do
-      if fbManDataInpectorForm.DBList[i].OIFolder = Self then
-        fbManDataInpectorForm.DBList[i].OIFolder:= nil;
+    for i:=0 to fbManDataInspectorForm.DBList.Count-1 do
+      if fbManDataInspectorForm.DBList[i].OIFolder = Self then
+        fbManDataInspectorForm.DBList[i].OIFolder:= nil;
     FOwner.Free;
   finally
-    fbManDataInpectorForm.TreeView1.EndUpdate;
+    fbManDataInspectorForm.TreeView1.EndUpdate;
   end;
 
   UserDBModule.quFoldersDel.ParamByName('db_folders_id').AsInteger:=FFolderID;
@@ -299,7 +299,7 @@ begin
   List.Description:=FDescription;
   List.ColName:=sObjectName;
   List.ColValue:=sDescription;
-  for D in fbManDataInpectorForm.DBList do
+  for D in fbManDataInspectorForm.DBList do
   begin
     if D.OIFolder = Self then
       List.Add(D.SQLEngine.AliasName, D.Description);

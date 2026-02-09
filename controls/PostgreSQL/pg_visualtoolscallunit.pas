@@ -117,19 +117,19 @@ procedure TPostgreVisualTools.tlsCreateProcedureExecute(Sender: TObject);
 var
   fbmCreateProcTableForm: TfbmCreateProcTableForm;
 begin
-  if Assigned(fbManDataInpectorForm) and Assigned(fbManDataInpectorForm.CurrentObject)
-    and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
-    and (fbManDataInpectorForm.CurrentObject.DBObject is TPGTable) then
+  if Assigned(fbManDataInspectorForm) and Assigned(fbManDataInspectorForm.CurrentObject)
+    and Assigned(fbManDataInspectorForm.CurrentObject.DBObject)
+    and (fbManDataInspectorForm.CurrentObject.DBObject is TPGTable) then
   begin
-    fbmCreateProcTableForm:=TfbmCreateProcTableForm.CreateEditForm(fbManDataInpectorForm.CurrentObject.DBObject as TPGTable);
+    fbmCreateProcTableForm:=TfbmCreateProcTableForm.CreateEditForm(fbManDataInspectorForm.CurrentObject.DBObject as TPGTable);
     fbManagerMainForm.RxMDIPanel1.ChildWindowsAdd(fbmCreateProcTableForm);
   end;
 end;
 
 procedure TPostgreVisualTools.tlsPGDBAnalizExecute(Sender: TObject);
 begin
-  if Assigned(fbManDataInpectorForm) and Assigned(fbManDataInpectorForm.CurrentDB) and (fbManDataInpectorForm.CurrentDB.SQLEngine is TSQLEnginePostgre) then
-    ShowDataBaseStatForm(fbManDataInpectorForm.CurrentDB.SQLEngine as TSQLEnginePostgre);
+  if Assigned(fbManDataInspectorForm) and Assigned(fbManDataInspectorForm.CurrentDB) and (fbManDataInspectorForm.CurrentDB.SQLEngine is TSQLEnginePostgre) then
+    ShowDataBaseStatForm(fbManDataInspectorForm.CurrentDB.SQLEngine as TSQLEnginePostgre);
 end;
 
 class function TPostgreVisualTools.GetObjTemplatePagesCount: integer;

@@ -240,7 +240,7 @@ begin
   if rxFieldDeps.Active and (rxFieldDeps.RecordCount>0) then
   begin
     D:=DBObject.OwnerDB.DBObjectByName(rxFieldDepsOBJECT_NAME.AsString, false);
-    E:=fbManDataInpectorForm.DBBySQLEngine(DBObject.OwnerDB);
+    E:=fbManDataInspectorForm.DBBySQLEngine(DBObject.OwnerDB);
     if Assigned(E) then
     begin
       DI:=E.FindDBObject(D);
@@ -1141,11 +1141,11 @@ var
 begin
   Control:=DoAcceptDrag(Source);
   Accept:=(DBObject.State = sdboCreate)
-    and (Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentObject)
-    and Assigned(fbManDataInpectorForm.CurrentDB)
-    //and (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
-    and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
-    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView]);
+    and (Control = fbManDataInspectorForm.TreeView1) and Assigned(fbManDataInspectorForm.CurrentObject)
+    and Assigned(fbManDataInspectorForm.CurrentDB)
+    //and (fbManDataInspectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB)
+    and Assigned(fbManDataInspectorForm.CurrentObject.DBObject)
+    and (fbManDataInspectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView]);
 end;
 
 procedure TfbmTableEditorFieldsFrame.FieldListGridDragDrop(Sender,
@@ -1156,14 +1156,14 @@ var
   F: TDBField;
 begin
   Control:=DoAcceptDrag(Source);
-  if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
-    or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
-    //or (not (fbManDataInpectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
-    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView])) then Exit;
+  if (Control <> fbManDataInspectorForm.TreeView1) or (not Assigned(fbManDataInspectorForm.CurrentObject))
+    or (not Assigned(fbManDataInspectorForm.CurrentObject.DBObject))
+    //or (not (fbManDataInspectorForm.CurrentDB.SQLEngine = DBObject.OwnerDB))
+    or (not (fbManDataInspectorForm.CurrentObject.DBObject.DBObjectKind in [okPartitionTable, okTable, okView, okMaterializedView])) then Exit;
 
   if not QuestionBox(sCopyFields) then Exit;
 
-  FDBTable:=fbManDataInpectorForm.CurrentObject.DBObject as TDBDataSetObject;
+  FDBTable:=fbManDataInspectorForm.CurrentObject.DBObject as TDBDataSetObject;
   for F in FDBTable.Fields do
   begin
     if not (rxFieldList.Locate('FIELD_NAME', F.FieldName, []) or F.SystemField) then

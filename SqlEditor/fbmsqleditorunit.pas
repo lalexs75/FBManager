@@ -1602,8 +1602,8 @@ begin
   ComboBox1.Items.Clear;
   ComboBox1.Items.Add(sCommonQuery);
 
-  if Assigned(fbManDataInpectorForm) then
-    for D in fbManDataInpectorForm.DBList do
+  if Assigned(fbManDataInspectorForm) then
+    for D in fbManDataInspectorForm.DBList do
       ComboBox1.Items.AddObject(D.Caption, D);
 
   ComboBox1.ItemIndex:=0

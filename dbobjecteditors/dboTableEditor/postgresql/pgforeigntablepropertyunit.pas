@@ -166,14 +166,14 @@ var
   i: Integer;
 begin
   Control:=DoAcceptDrag(Source);
-  if (Control <> fbManDataInpectorForm.TreeView1) or (not Assigned(fbManDataInpectorForm.CurrentObject))
-    or (not Assigned(fbManDataInpectorForm.CurrentObject.DBObject))
-    or (not (fbManDataInpectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB))
-    or (not (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable])) then Exit;
+  if (Control <> fbManDataInspectorForm.TreeView1) or (not Assigned(fbManDataInspectorForm.CurrentObject))
+    or (not Assigned(fbManDataInspectorForm.CurrentObject.DBObject))
+    or (not (fbManDataInspectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB))
+    or (not (fbManDataInspectorForm.CurrentObject.DBObject.DBObjectKind in [okTable])) then Exit;
 
   if not QuestionBox(sCopyFields) then Exit;
 
-  FDBTable:=fbManDataInpectorForm.CurrentObject.DBObject as TDBDataSetObject;
+  FDBTable:=fbManDataInspectorForm.CurrentObject.DBObject as TDBDataSetObject;
 
   rxData.AppendRecord(['schema_name', FDBTable.SchemaName]);
   rxData.AppendRecord(['table_name', FDBTable.Caption]);
@@ -194,11 +194,11 @@ var
 begin
   Control:=DoAcceptDrag(Source);
   Accept:=(DBObject.State = sdboCreate)
-    and (Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentObject)
-    and Assigned(fbManDataInpectorForm.CurrentDB)
-    and (fbManDataInpectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB)
-    and Assigned(fbManDataInpectorForm.CurrentObject.DBObject)
-    and (fbManDataInpectorForm.CurrentObject.DBObject.DBObjectKind in [okTable]);
+    and (Control = fbManDataInspectorForm.TreeView1) and Assigned(fbManDataInspectorForm.CurrentObject)
+    and Assigned(fbManDataInspectorForm.CurrentDB)
+    and (fbManDataInspectorForm.CurrentDB.SQLEngine <> DBObject.OwnerDB)
+    and Assigned(fbManDataInspectorForm.CurrentObject.DBObject)
+    and (fbManDataInspectorForm.CurrentObject.DBObject.DBObjectKind in [okTable]);
 end;
 
 procedure TpgForeignTablePropertyFrame.SpeedButton2Click(Sender: TObject);

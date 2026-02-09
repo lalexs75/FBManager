@@ -122,7 +122,7 @@ begin
   EditorFrame:=Tfdbm_SynEditorFrame.Create(Self);
   EditorFrame.Parent:=TabSheet2;
   EditorFrame.TextEditor.ReadOnly:=true;
-  fbManDataInpectorForm.DBList.FillServerList(cbServName.Items, TSQLEngineMySQL);
+  fbManDataInspectorForm.DBList.FillServerList(cbServName.Items, TSQLEngineMySQL);
   edtPort.Value:=defMySQLPort;
 end;
 

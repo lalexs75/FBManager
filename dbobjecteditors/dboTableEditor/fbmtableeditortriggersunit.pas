@@ -283,7 +283,7 @@ var
 begin
   Trigger:=CurrentTrigger;
   if Assigned(Trigger) then
-    fbManDataInpectorForm.EditObject(Trigger);
+    fbManDataInspectorForm.EditObject(Trigger);
 end;
 
 procedure TfbmTableEditorTriggersFrame.trgDeActivateExecute(Sender: TObject);

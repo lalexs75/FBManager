@@ -211,7 +211,7 @@ var
 begin
   FRule:=CurrentRule;
   if Assigned(FRule) then
-    fbManDataInpectorForm.EditObject(FRule);
+    fbManDataInspectorForm.EditObject(FRule);
 end;
 
 procedure TPGRuleListPage.RefreshRulesTree;

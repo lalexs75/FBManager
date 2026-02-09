@@ -87,7 +87,7 @@ var
 begin
   if rxData.Active and (rxData.RecordCount > 0) then
   begin
-    D:=fbManDataInpectorForm.DBBySQLEngine(SQLEngine);
+    D:=fbManDataInspectorForm.DBBySQLEngine(SQLEngine);
     if Assigned(D) and D.Connected then
       D.ObjectShowEditor(rxDatarelname.AsString);
   end;

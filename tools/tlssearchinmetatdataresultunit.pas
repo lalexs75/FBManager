@@ -159,7 +159,7 @@ end;
 procedure TtlsSearchInMetatDataResultForm.TreeView1DblClick(Sender: TObject);
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    fbManDataInpectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
+    fbManDataInspectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
 end;
 
 procedure TtlsSearchInMetatDataResultForm.Localize;

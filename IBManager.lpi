@@ -58,9 +58,6 @@
         <PackageName Value="LazControlDsgn"/>
       </Item>
       <Item>
-        <PackageName Value="AnchorDocking"/>
-      </Item>
-      <Item>
         <PackageName Value="rxtools"/>
       </Item>
       <Item>
@@ -426,7 +423,7 @@
         <Filename Value="dbobjecteditors/IBManDataInspectorUnit.pas"/>
         <IsPartOfProject Value="True"/>
         <DisableI18NForLFM Value="True"/>
-        <ComponentName Value="fbManDataInpectorForm"/>
+        <ComponentName Value="fbManDataInspectorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>

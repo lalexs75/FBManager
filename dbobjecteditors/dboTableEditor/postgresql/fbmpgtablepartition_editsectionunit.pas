@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ButtonPanel,
-  sqlEngineTypes, ExtCtrls, AnchorDockPanel, PostgreSQLEngineUnit, pg_SqlParserUnit;
+  sqlEngineTypes, ExtCtrls, PostgreSQLEngineUnit, pg_SqlParserUnit;
 
 type
 

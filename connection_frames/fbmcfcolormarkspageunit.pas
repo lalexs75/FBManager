@@ -147,7 +147,7 @@ end;
 constructor TfbmCFColorMarksPage.Create(ASQLEngineAbstract : TSQLEngineAbstract; AOwner : TForm);
 begin
   inherited Create(AOwner);
-  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngineAbstract);
+  FDBRec:=fbManDataInspectorForm.DBBySQLEngine(ASQLEngineAbstract);
 end;
 
 end.

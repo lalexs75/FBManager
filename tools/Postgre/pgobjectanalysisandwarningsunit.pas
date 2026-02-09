@@ -92,7 +92,7 @@ procedure TpgObjectAnalysisAndWarningsTools.actEditObjectExecute(Sender: TObject
   );
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    fbManDataInpectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
+    fbManDataInspectorForm.EditObject(TDBObject(TreeView1.Selected.Data));
 
 end;
 
@@ -100,7 +100,7 @@ procedure TpgObjectAnalysisAndWarningsTools.actShowObjectInTreeExecute(
   Sender: TObject);
 begin
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    fbManDataInpectorForm.SelectObject(TDBObject(TreeView1.Selected.Data));
+    fbManDataInspectorForm.SelectObject(TDBObject(TreeView1.Selected.Data));
 end;
 
 procedure TpgObjectAnalysisAndWarningsTools.TreeView1Click(Sender: TObject);

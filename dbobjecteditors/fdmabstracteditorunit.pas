@@ -168,7 +168,7 @@ begin
   if Assigned(ADetailDBObject) then
   begin
     ADetailDBObject.RefreshObject;
-    D:=fbManDataInpectorForm.DBBySQLEngine(ADetailDBObject.OwnerDB);
+    D:=fbManDataInspectorForm.DBBySQLEngine(ADetailDBObject.OwnerDB);
     if Assigned(D) then
     begin
       FDetailPage:=TEditorPage(D.DBVisualTools.EditPage(ADetailDBObject, Owner, 0));

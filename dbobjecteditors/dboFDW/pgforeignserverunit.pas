@@ -81,8 +81,8 @@ var
   Control: TControl;
 begin
   Control:=DoAcceptDrag(Source);
-  Accept:=(Control = fbManDataInpectorForm.TreeView1) and Assigned(fbManDataInpectorForm.CurrentDB)
-    and (fbManDataInpectorForm.CurrentDB.SQLEngine.ClassName = DBObject.OwnerDB.ClassName);
+  Accept:=(Control = fbManDataInspectorForm.TreeView1) and Assigned(fbManDataInspectorForm.CurrentDB)
+    and (fbManDataInspectorForm.CurrentDB.SQLEngine.ClassName = DBObject.OwnerDB.ClassName);
 end;
 
 procedure TpgForeignServerPage.RxDBGrid1DragDrop(Sender, Source: TObject; X,
@@ -90,9 +90,9 @@ procedure TpgForeignServerPage.RxDBGrid1DragDrop(Sender, Source: TObject; X,
 var
   E: TSQLEngineAbstract;
 begin
-  if not Assigned(fbManDataInpectorForm.CurrentDB) then Exit;
+  if not Assigned(fbManDataInspectorForm.CurrentDB) then Exit;
 
-  E:=fbManDataInpectorForm.CurrentDB.SQLEngine;
+  E:=fbManDataInspectorForm.CurrentDB.SQLEngine;
   rxData.CloseOpen;
   rxData.AppendRecord(['host', E.ServerName]);
   if E.RemotePort>0 then

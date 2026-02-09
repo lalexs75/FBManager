@@ -120,9 +120,9 @@ var
 begin
   cbServerName.Items.Clear;
   edtUserName.Items.Clear;
-  for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
+  for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
   begin
-    SqlEng:=TDataBaseRecord(fbManDataInpectorForm.DBList[i]).SQLEngine;
+    SqlEng:=TDataBaseRecord(fbManDataInspectorForm.DBList[i]).SQLEngine;
     if SqlEng is TSQLEnginePostgre then
     begin
       S:=SqlEng.ServerName;

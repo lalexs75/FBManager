@@ -141,7 +141,7 @@ begin
     ComboBox3.Items.Add(CharacterSetStr[cs]);
   ComboBox3.ItemIndex:=0;
 
-  fbManDataInpectorForm.DBList.FillServerList(cbServName.Items, TSQLEngineFireBird);
+  fbManDataInspectorForm.DBList.FillServerList(cbServName.Items, TSQLEngineFireBird);
   cbProtocol.Items.Clear;
   cbProtocol.Items.Add(sProtokol1);
   cbProtocol.Items.Add(sProtokol2);

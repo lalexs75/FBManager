@@ -578,7 +578,7 @@ procedure TFBMSqlScripForm.DBMenuClick(Sender: TObject);
 begin
   dbConnection.Caption:=(Sender as TMenuItem).Caption;
   dbConnection.Tag:=(Sender as TMenuItem).Tag;
-  FCurDB:=TDataBaseRecord(fbManDataInpectorForm.DBList[dbConnection.Tag]);
+  FCurDB:=TDataBaseRecord(fbManDataInspectorForm.DBList[dbConnection.Tag]);
   EditorFrame.SQLEngine:=FCurDB.SQLEngine;
   UpdateRecentMenu(true);
 end;
@@ -589,13 +589,13 @@ var
   M:TMenuItem;
 begin
   PopupMenu1.Items.Clear;
-  for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
+  for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
   begin
     M:=TMenuItem.Create(Self);
-    M.Caption:=TDBInspectorRecord(fbManDataInpectorForm.DBList[i]).Caption;
+    M.Caption:=TDBInspectorRecord(fbManDataInspectorForm.DBList[i]).Caption;
     M.OnClick:=@DBMenuClick;
     M.Tag:=i;
-    M.ImageIndex:=1 + ord(not TDataBaseRecord(fbManDataInpectorForm.DBList[i]).Connected);
+    M.ImageIndex:=1 + ord(not TDataBaseRecord(fbManDataInspectorForm.DBList[i]).Connected);
     PopupMenu1.Items.Add(M);
   end;
 end;
@@ -605,8 +605,8 @@ var
   i:integer;
   M:TMenuItem;
 begin
-  for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
-    if fbManDataInpectorForm.DBList[i] = fbManDataInpectorForm.CurrentDB then
+  for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
+    if fbManDataInspectorForm.DBList[i] = fbManDataInspectorForm.CurrentDB then
     begin
       M:=PopupMenu1.Items[i];
       if Assigned(M) then

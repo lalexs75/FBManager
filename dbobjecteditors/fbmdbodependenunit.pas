@@ -98,7 +98,7 @@ var
 begin
   S:=Grid.DataSource.DataSet.FieldByName('OBJECT_NAME').AsString;
   D:=DBObject.OwnerDB.DBObjectByName(S, false);
-  E:=fbManDataInpectorForm.DBBySQLEngine(DBObject.OwnerDB);
+  E:=fbManDataInspectorForm.DBBySQLEngine(DBObject.OwnerDB);
   if Assigned(E) then
   begin
     DI:=E.FindDBObject(D);

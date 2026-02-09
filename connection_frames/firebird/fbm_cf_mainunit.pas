@@ -137,7 +137,7 @@ end;
 
 procedure TfbmCFMainFrame.InitFrame;
 begin
-  fbManDataInpectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineFireBird);
+  fbManDataInspectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineFireBird);
   cbProtocol.Items.Clear;
   cbProtocol.Items.Add(sProtokol1);
   cbProtocol.Items.Add(sProtokol2);
@@ -267,7 +267,7 @@ constructor TfbmCFMainFrame.Create(ASQLEngineFireBird: TSQLEngineFireBird; AOwne
 begin
   inherited Create(AOwner);
   FSQLEngineFireBird:=ASQLEngineFireBird;
-  fbManDataInpectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineFireBird);
+  fbManDataInspectorForm.DBList.FillServerList(cbServerName.Items, TSQLEngineFireBird);
   FillStrServersVer(CB_ServerVersion.Items);
   cbProtocolChange(nil);
 end;

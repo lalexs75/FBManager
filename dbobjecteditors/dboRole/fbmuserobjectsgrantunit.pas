@@ -266,7 +266,7 @@ begin
   if rxUGList.Active and (rxUGList.RecordCount > 0) then
   begin
     if RxDBGrid1.SelectedColumn = FrxCol_UG_NAME then
-      fbManDataInpectorForm.EditObject(DBObject.OwnerDB.DBObjectByName(rxUGListUG_NAME.AsString));
+      fbManDataInspectorForm.EditObject(DBObject.OwnerDB.DBObjectByName(rxUGListUG_NAME.AsString));
   end;
 end;
 

@@ -283,7 +283,7 @@ end;
 
 procedure TfbManagerMainForm.Timer1Timer(Sender : TObject);
 begin
-  fbManDataInpectorForm.PingConnectedDB;
+  fbManDataInspectorForm.PingConnectedDB;
 end;
 
 procedure TfbManagerMainForm.tlsDataBaseComparerExecute(Sender: TObject);
@@ -320,8 +320,8 @@ end;
 
 procedure TfbManagerMainForm.tlsSQLEditorExecute(Sender: TObject);
 begin
-  if Assigned(fbManDataInpectorForm) then
-    fbManDataInpectorForm.editSQL.Execute;
+  if Assigned(fbManDataInspectorForm) then
+    fbManDataInspectorForm.editSQL.Execute;
 end;
 
 procedure TfbManagerMainForm.tlsSqlScriptExecute(Sender: TObject);
@@ -336,8 +336,8 @@ end;
 
 procedure TfbManagerMainForm.TabsActiveFormChange(Sender: TObject);
 begin
-  if Assigned(fbManDataInpectorForm) then
-    fbManDataInpectorForm.UpdateRecentObjects;
+  if Assigned(fbManDataInspectorForm) then
+    fbManDataInspectorForm.UpdateRecentObjects;
 
 //  HideCodeContext;
 end;
@@ -555,9 +555,9 @@ begin
       exit;
   end;
 
-  if Assigned(fbManDataInpectorForm) then
+  if Assigned(fbManDataInspectorForm) then
   begin
-    fbManDataInpectorForm.CloseAllDB;
+    fbManDataInspectorForm.CloseAllDB;
     Screen.OnActiveFormChange:=nil;
   end;
 end;
@@ -571,18 +571,18 @@ procedure TfbManagerMainForm.dbCreateExecute(Sender: TObject);
 begin
   fbmCreateConnectionForm:=TfbmCreateConnectionForm.Create(Application);
   if fbmCreateConnectionForm.ShowModal = mrOk then
-    fbManDataInpectorForm.CreateNewDB(fbmCreateConnectionForm.SQLEngineName);
+    fbManDataInspectorForm.CreateNewDB(fbmCreateConnectionForm.SQLEngineName);
   fbmCreateConnectionForm.Free;
 end;
 
 procedure TfbManagerMainForm.dbDisconnectExecute(Sender: TObject);
 begin
-  fbManDataInpectorForm.dbDisconect.Execute;
+  fbManDataInspectorForm.dbDisconect.Execute;
 end;
 
 procedure TfbManagerMainForm.dbRefreshExecute(Sender: TObject);
 begin
-  fbManDataInpectorForm.objRefresh.Execute;
+  fbManDataInspectorForm.objRefresh.Execute;
 end;
 
 procedure TfbManagerMainForm.ApplicationProperties1Exception(Sender: TObject;
@@ -602,7 +602,7 @@ end;
 
 procedure TfbManagerMainForm.dbConnectExecute(Sender: TObject);
 begin
-  fbManDataInpectorForm.dbConnect.Execute;
+  fbManDataInspectorForm.dbConnect.Execute;
 end;
 
 procedure TfbManagerMainForm.InspectorCloseButtonClick(Sender: TObject);
@@ -658,16 +658,16 @@ begin
     F:=TfbmDBObjectEditorForm(AForm);
     if Assigned(F.InspectorRecord) and Assigned(F.InspectorRecord.FOwner) then
       if not TfbmDBObjectEditorForm(AForm).InspectorRecord.OwnerDB.FLocked then
-        fbManDataInpectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
+        fbManDataInspectorForm.TreeView1.Select(TfbmDBObjectEditorForm(AForm).InspectorRecord.FOwner, []);
   end
 end;
 
 procedure TfbManagerMainForm.ShowDataInspector;
 begin
   InspectorPanel.Visible:=true;
-  ShowfbManDataInpectorForm(Self);
+  ShowFBManDataInpectorForm(Self);
 
-  fbManDataInpectorForm.UpdateDBManagerState;
+  fbManDataInspectorForm.UpdateDBManagerState;
 end;
 
 procedure TfbManagerMainForm.LazReportPrint(ReportName: string);
@@ -714,11 +714,11 @@ end;
 
 procedure TfbManagerMainForm.UpdateActionsToolbar;
 begin
-  if not Assigned(fbManDataInpectorForm) then Exit;
-  dbConnect.Enabled:=fbManDataInpectorForm.dbConnect.Enabled;
-  dbDisconnect.Enabled:=fbManDataInpectorForm.dbDisconect.Enabled;
-  dbRefresh.Enabled:=fbManDataInpectorForm.objRefresh.Enabled;
-  tlsSQLEditor.Enabled:=fbManDataInpectorForm.editSQL.Enabled;
+  if not Assigned(fbManDataInspectorForm) then Exit;
+  dbConnect.Enabled:=fbManDataInspectorForm.dbConnect.Enabled;
+  dbDisconnect.Enabled:=fbManDataInspectorForm.dbDisconect.Enabled;
+  dbRefresh.Enabled:=fbManDataInspectorForm.objRefresh.Enabled;
+  tlsSQLEditor.Enabled:=fbManDataInspectorForm.editSQL.Enabled;
 
 end;
 

@@ -115,7 +115,7 @@ begin
   EditorFrame.Parent:=TabSheet2;
   EditorFrame.TextEditor.ReadOnly:=true;
   edtPort.Value:=PostgreSQLDefTCPPort;
-  fbManDataInpectorForm.DBList.FillServerList(cbServName.Items, TSQLEnginePostgre);
+  fbManDataInspectorForm.DBList.FillServerList(cbServName.Items, TSQLEnginePostgre);
 end;
 
 procedure TpgCreateDatabaseForm.edtUserNameChange(Sender: TObject);

@@ -124,7 +124,7 @@ end;
 
 procedure TfbmBackupForm.FormCreate(Sender: TObject);
 begin
-  ComboBox1.ItemIndex:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
+  ComboBox1.ItemIndex:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox1.Items, TSQLEngineFireBird);
   if ComboBox1.ItemIndex > -1 then
     ComboBox1Change(nil);
 end;
@@ -166,7 +166,7 @@ begin
     Rec.BackupOptions.bkVerboseToFile:=CheckBox2.Checked;
     Rec.BackupOptions.bkVerboseToScreen:=CheckBox1.Checked;
     Rec.BackupOptions.bkVerboseFileName:=FileNameEdit2.Text;
-//    fbManDataInpectorForm.SaveAliasList;
+//    fbManDataInspectorForm.SaveAliasList;
   end;
 end;
 

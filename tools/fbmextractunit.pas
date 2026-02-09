@@ -218,11 +218,11 @@ var
   i: Integer;
 begin
   ComboBox1.Items.Clear;
-  for i:=0 to fbManDataInpectorForm.DBList.Count-1 do
-    if fbManDataInpectorForm.DBList[i].Connected then
+  for i:=0 to fbManDataInspectorForm.DBList.Count-1 do
+    if fbManDataInspectorForm.DBList[i].Connected then
     begin
-      ComboBox1.Items.Add(fbManDataInpectorForm.DBList[i].Caption);
-      ComboBox1.Items.Objects[ComboBox1.Items.Count-1]:=fbManDataInpectorForm.DBList[i];
+      ComboBox1.Items.Add(fbManDataInspectorForm.DBList[i].Caption);
+      ComboBox1.Items.Objects[ComboBox1.Items.Count-1]:=fbManDataInspectorForm.DBList[i];
     end;
   if ComboBox1.Items.Count>0 then
     ComboBox1.ItemIndex:=0;

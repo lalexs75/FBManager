@@ -86,7 +86,7 @@ var
   FDBRec : TDataBaseRecord;
 begin
   InitFrame;
-  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngine);
+  FDBRec:=fbManDataInspectorForm.DBBySQLEngine(ASQLEngine);
 
   CheckBox1.Checked := ASQLEngine.SPEditLazzyMode;
   CheckBox2.Checked := ASQLEngine.TriggerEditLazzyMode;
@@ -109,7 +109,7 @@ procedure Tpg_con_EditorPrefPage.SaveParams;
 var
   FDBRec : TDataBaseRecord;
 begin
-  FDBRec:=fbManDataInpectorForm.DBBySQLEngine(FSQLEngine);
+  FDBRec:=fbManDataInspectorForm.DBBySQLEngine(FSQLEngine);
   FSQLEngine.SPEditLazzyMode:=CheckBox1.Checked;
   FSQLEngine.TriggerEditLazzyMode:=CheckBox2.Checked;
   FSQLEngine.ReportManagerFolder:=DirectoryEdit1.Text;

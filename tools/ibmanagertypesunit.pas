@@ -269,7 +269,7 @@ var
   Stm: TSQLTextStatement;
 begin
   Result:=false;
-  R:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngine);
+  R:=fbManDataInspectorForm.DBBySQLEngine(ASQLEngine);
   if not Assigned(R) then exit;
 
   ObjRefresh:=TObjTreeRefresh.Create(R);
@@ -616,7 +616,7 @@ var
   R, G: TDBInspectorRecord;
 begin
   LM_SendToAll(LM_NOTIFY_OBJECT_DELETE, ADBObject);
-//  fbManDataInpectorForm.NotifyDestroyObject(ADBObject);
+//  fbManDataInspectorForm.NotifyDestroyObject(ADBObject);
   R:=FindDBObject(ADBObject);
   if Assigned(R) then
   begin
@@ -648,7 +648,7 @@ function TDataBaseRecord.AliasFileItemName: string;
 var
   i:integer;
 begin
-  i:=fbManDataInpectorForm.DBList.IndexOf(Self);
+  i:=fbManDataInspectorForm.DBList.IndexOf(Self);
   Result:='Item_'+IntToStr(i);
 end;
 
@@ -830,7 +830,7 @@ begin
 
   MakeSQLHistoryTable;
 
-  OIFolder:=fbManDataInpectorForm.Folders.ByID(ADB.FieldByName('db_folders_id').AsInteger);
+  OIFolder:=fbManDataInspectorForm.Folders.ByID(ADB.FieldByName('db_folders_id').AsInteger);
 
   if not ADB.FieldByName('db_database_cm_allow_color_mark').IsNull then
   begin
@@ -1681,10 +1681,10 @@ end;
 
 procedure TDBInspectorRecord.SetFocus;
 begin
-  if Assigned(fbManDataInpectorForm) then
+  if Assigned(fbManDataInspectorForm) then
   begin
-    fbManDataInpectorForm.TreeView1.Items.ClearMultiSelection(true);
-    fbManDataInpectorForm.TreeView1.Selected:=FOwner;
+    fbManDataInspectorForm.TreeView1.Items.ClearMultiSelection(true);
+    fbManDataInspectorForm.TreeView1.Selected:=FOwner;
   end;
 end;
 

@@ -400,7 +400,7 @@ begin
 
   Localize;
   //SynEdit1.Highlighter:=TDataBaseRecord(ASQLEngine.InspectorRecord).SynSQLSyn;
-  SynEdit1.Highlighter:=fbManDataInpectorForm.DBBySQLEngine(ASQLEngine).SynSQLSyn;
+  SynEdit1.Highlighter:=fbManDataInspectorForm.DBBySQLEngine(ASQLEngine).SynSQLSyn;
 
   Edit1.Text:=DBObject.CaptionFullPatch;// AObjectName;
   FSQLEngine:=ASQLEngine;

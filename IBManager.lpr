@@ -29,7 +29,7 @@ uses
   rxsortmemds,
   lazcontrols,
   zeos_ex,
-  tachartlazaruspkg, anchordockpkg,
+  tachartlazaruspkg,
   zcomponent,
   lr_add_function,
   lrcairoexport,
@@ -156,7 +156,7 @@ begin
   Application.CreateForm(TfbManagerMainForm, fbManagerMainForm);
   fbManagerMainForm.Show;
   fbManagerMainForm.ShowDataInspector;
-  fbManDataInpectorForm.ReadAlialList;
+  fbManDataInspectorForm.ReadAlialList;
   Application.Run;
 end.
 

@@ -100,17 +100,17 @@ var
   Edt:TfbmReportManagerForm;
   i: Integer;
 begin
-  if not Assigned(fbManDataInpectorForm.CurrentDB) or not Assigned(fbManDataInpectorForm.CurrentDB.SQLEngine) then exit;
+  if not Assigned(fbManDataInspectorForm.CurrentDB) or not Assigned(fbManDataInspectorForm.CurrentDB.SQLEngine) then exit;
   Edt:=nil;
   for i:=0 to RMList.Count - 1 do
   begin
-    if TfbmReportManagerForm(RMList[i]).FSQLEngine = fbManDataInpectorForm.CurrentDB.SQLEngine then
+    if TfbmReportManagerForm(RMList[i]).FSQLEngine = fbManDataInspectorForm.CurrentDB.SQLEngine then
     begin
       exit;
     end;
   end;
   fbManagerMainForm.RxMDIPanel1.ChildWindowsCreate(Edt, TfbmReportManagerForm);
-  Edt.SQLEngine:=fbManDataInpectorForm.CurrentDB.SQLEngine;
+  Edt.SQLEngine:=fbManDataInspectorForm.CurrentDB.SQLEngine;
   Edt.Show;
 end;
 

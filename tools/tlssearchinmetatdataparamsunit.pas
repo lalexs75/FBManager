@@ -96,13 +96,13 @@ var
   P:TDataBaseRecord;
 begin
   dbComboBox.Items.Clear;
-  if not Assigned(fbManDataInpectorForm) then exit;
-  for i:=0 to fbManDataInpectorForm.DBList.Count - 1 do
+  if not Assigned(fbManDataInspectorForm) then exit;
+  for i:=0 to fbManDataInspectorForm.DBList.Count - 1 do
   begin
-    P:=TDataBaseRecord(fbManDataInpectorForm.DBList[i]);
+    P:=TDataBaseRecord(fbManDataInspectorForm.DBList[i]);
     j:=dbComboBox.Items.Add(P.Caption);
     dbComboBox.Items.Objects[j]:=P;
-    if fbManDataInpectorForm.CurrentDB = P then
+    if fbManDataInspectorForm.CurrentDB = P then
       dbComboBox.ItemIndex:=dbComboBox.Items.Count -1;
   end;
 end;

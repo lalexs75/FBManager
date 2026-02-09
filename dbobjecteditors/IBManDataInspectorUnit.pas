@@ -30,7 +30,7 @@ uses
   TreeFilterEdit, RxIniPropStorage, fbmToolsUnit, SQLEngineAbstractUnit, fbmOIFoldersUnit;
 
 type
-  TfbManDataInpectorForm = class;
+  TfbManDataInspectorForm = class;
   TFBMDataBaseListEnumerator = class;
 
   { TFBMDataBaseList }
@@ -38,11 +38,11 @@ type
   TFBMDataBaseList = class
   private
     FList:TFPList;
-    FOwner:TfbManDataInpectorForm;
+    FOwner:TfbManDataInspectorForm;
     function GetCount: integer;
     function GetDBItem(AIndex: integer): TDataBaseRecord;
   public
-    constructor Create(AOwner:TfbManDataInpectorForm);
+    constructor Create(AOwner:TfbManDataInspectorForm);
     destructor Destroy; override;
     procedure Clear;
     procedure Add(AObject:TDataBaseRecord);
@@ -73,9 +73,9 @@ type
     property Current: TDataBaseRecord read GetCurrent;
   end;
 
-  { TfbManDataInpectorForm }
+  { TfbManDataInspectorForm }
 
-  TfbManDataInpectorForm = class(TForm)
+  TfbManDataInspectorForm = class(TForm)
     MenuItem38: TMenuItem;
     objDuplicate: TAction;
     MenuItem37: TMenuItem;
@@ -242,7 +242,7 @@ type
   end;
 
 var
-  fbManDataInpectorForm: TfbManDataInpectorForm;
+  fbManDataInspectorForm: TfbManDataInspectorForm;
 
 procedure ShowFBManDataInpectorForm(AMainForm:TForm);
 implementation
@@ -254,13 +254,13 @@ uses IBManMainUnit, fbmStrConstUnit, fbmConnectionEditUnit, assistMainUnit,
 
 procedure ShowFBManDataInpectorForm(AMainForm:TForm);
 begin
-  if not Assigned(fbManDataInpectorForm) then
+  if not Assigned(fbManDataInspectorForm) then
   begin
-    fbManDataInpectorForm:=TfbManDataInpectorForm.Create(fbManagerMainForm.InspectorPanel);
-    fbManDataInpectorForm.BorderStyle:=bsNone;
-    fbManDataInpectorForm.Align:=alClient;
-    fbManDataInpectorForm.Parent:=fbManagerMainForm.InspectorPanel;
-    fbManDataInpectorForm.Visible:=true;
+    fbManDataInspectorForm:=TfbManDataInspectorForm.Create(fbManagerMainForm.InspectorPanel);
+    fbManDataInspectorForm.BorderStyle:=bsNone;
+    fbManDataInspectorForm.Align:=alClient;
+    fbManDataInspectorForm.Parent:=fbManagerMainForm.InspectorPanel;
+    fbManDataInspectorForm.Visible:=true;
   end
 end;
 
@@ -283,9 +283,9 @@ begin
   Result := FPosition < FList.Count;
 end;
 
-{ TfbManDataInpectorForm }
+{ TfbManDataInspectorForm }
 
-procedure TfbManDataInpectorForm.IBManDataInpectorFormCreate(Sender: TObject);
+procedure TfbManDataInspectorForm.IBManDataInpectorFormCreate(Sender: TObject);
 var
   b:integer;
 begin
@@ -311,21 +311,21 @@ begin
   DoCreateRegisterMenu;
 end;
 
-procedure TfbManDataInpectorForm.IBManDataInpectorFormDestroy(Sender: TObject);
+procedure TfbManDataInspectorForm.IBManDataInpectorFormDestroy(Sender: TObject);
 begin
-  fbManDataInpectorForm:=nil;
+  fbManDataInspectorForm:=nil;
   FreeAndNil(FFolders);
   FreeAndNil(FDBList);
 end;
 
-procedure TfbManDataInpectorForm.IBManDataInpectorFormClose(Sender: TObject;
+procedure TfbManDataInspectorForm.IBManDataInpectorFormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   CloseAction:=caHide;
   fbManagerMainForm.BringToFront;
 end;
 
-procedure TfbManDataInpectorForm.dbUnregisterExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbUnregisterExecute(Sender: TObject);
 var
   R:TDataBaseRecord;
   Itm:TTreeNode;
@@ -347,7 +347,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.dbDisconectExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbDisconectExecute(Sender: TObject);
 var
   Rec:TDataBaseRecord;
 begin
@@ -360,7 +360,7 @@ begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1MouseMove(Sender: TObject;
+procedure TfbManDataInspectorForm.TreeView1MouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 var
   Rec:TDBInspectorRecord;
@@ -411,7 +411,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1CustomDrawItem(
+procedure TfbManDataInspectorForm.TreeView1CustomDrawItem(
   Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState;
   var DefaultDraw: Boolean);
 begin
@@ -432,7 +432,7 @@ begin
     TreeView1.Font.Color:=clWindowText;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1DragDrop(Sender, Source: TObject; X,
+procedure TfbManDataInspectorForm.TreeView1DragDrop(Sender, Source: TObject; X,
   Y: Integer);
 var
   ANode, N, FSelected: TTreeNode;
@@ -521,24 +521,24 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.listWindowsClick(Sender: TObject);
+procedure TfbManDataInspectorForm.listWindowsClick(Sender: TObject);
 begin
 {  if Assigned(WindowTabs) then
     if (listWindows.Items.Count>0) and (listWindows.ItemIndex>=0) and (listWindows.ItemIndex < listWindows.Items.Count) then
       WindowTabs.SelectWindow(listWindows.Items[listWindows.ItemIndex], listWindows);}
 end;
 
-procedure TfbManDataInpectorForm.miCreateDBClick(Sender: TObject);
+procedure TfbManDataInspectorForm.miCreateDBClick(Sender: TObject);
 begin
   fbManagerMainForm.dbCreate.Execute;
 end;
 
-procedure TfbManDataInpectorForm.objDuplicateExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objDuplicateExecute(Sender: TObject);
 begin
   NotImplemented;//
 end;
 
-procedure TfbManDataInpectorForm.objRenameExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objRenameExecute(Sender: TObject);
 var
   S: String;
 begin
@@ -547,7 +547,7 @@ begin
     CurrentObject.RenameTo(S);
 end;
 
-procedure TfbManDataInpectorForm.saCopyAllLinesExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.saCopyAllLinesExecute(Sender: TObject);
 var
   S:string;
   i:integer;
@@ -563,7 +563,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.saCopyLineExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.saCopyLineExecute(Sender: TObject);
 begin
   if (LB_SQLAssistent.Items.Count>0) and (LB_SQLAssistent.ItemIndex>=0) and (LB_SQLAssistent.Items.Count>LB_SQLAssistent.ItemIndex) then
   begin
@@ -573,12 +573,12 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.saHideSQLAssistentExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.saHideSQLAssistentExecute(Sender: TObject);
 begin
   ShowSqlAssitent(false);
 end;
 
-function TfbManDataInpectorForm.TreeFilterEdit1FilterNode(ItemNode: TTreeNode;
+function TfbManDataInspectorForm.TreeFilterEdit1FilterNode(ItemNode: TTreeNode;
   out Done: Boolean): Boolean;
 var
   S1, S2: String;
@@ -599,7 +599,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1AdvancedCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState; Stage: TCustomDrawStage; var PaintImages, DefaultDraw: Boolean);
+procedure TfbManDataInspectorForm.TreeView1AdvancedCustomDrawItem(Sender: TCustomTreeView; Node: TTreeNode; State: TCustomDrawState; Stage: TCustomDrawStage; var PaintImages, DefaultDraw: Boolean);
 var
   R: TRect;
 begin
@@ -619,7 +619,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.ListBox1DblClick(Sender: TObject);
+procedure TfbManDataInspectorForm.ListBox1DblClick(Sender: TObject);
 var
   R:TDataBaseRecord;
   S:string;
@@ -634,7 +634,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.fldNewExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.fldNewExecute(Sender: TObject);
 var
   S: String;
 begin
@@ -645,7 +645,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.fldRemoveExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.fldRemoveExecute(Sender: TObject);
 var
   F: TOIFolder;
 begin
@@ -657,7 +657,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.fldEditExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.fldEditExecute(Sender: TObject);
 var
   F: TOIFolder;
 begin
@@ -667,7 +667,7 @@ begin
       F.Save;
 end;
 
-procedure TfbManDataInpectorForm.fldExpandAllExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.fldExpandAllExecute(Sender: TObject);
 procedure DoExpand(ARoot:TTreeNode);
 var
   N: TTreeNode;
@@ -689,7 +689,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1DragOver(Sender, Source: TObject; X,
+procedure TfbManDataInspectorForm.TreeView1DragOver(Sender, Source: TObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 var
   Rec:TDataBaseRecord;
@@ -723,13 +723,13 @@ begin
   end
 end;
 
-procedure TfbManDataInpectorForm.TreeView1Expanding(Sender: TObject;
+procedure TfbManDataInspectorForm.TreeView1Expanding(Sender: TObject;
   Node: TTreeNode; var AllowExpansion: Boolean);
 begin
   //
 end;
 
-procedure TfbManDataInpectorForm.dbRegisterFromCopyExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbRegisterFromCopyExecute(Sender: TObject);
 var
   Rec:TDataBaseRecord;
 begin
@@ -738,12 +738,12 @@ begin
     DBNewRegistration(CreateSQLEngine(Rec.SQLEngine.ClassName), Rec.SQLEngine);
 end;
 
-procedure TfbManDataInpectorForm.miskShowAssitentExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.miskShowAssitentExecute(Sender: TObject);
 begin
   ShowSqlAssitent(not miskShowAssitent.Checked);
 end;
 
-procedure TfbManDataInpectorForm.objRefreshExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objRefreshExecute(Sender: TObject);
 var
   FC: TDBInspectorRecord;
 begin
@@ -753,7 +753,7 @@ begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1Change(Sender: TObject;
+procedure TfbManDataInspectorForm.TreeView1Change(Sender: TObject;
   Node: TTreeNode);
 var
   Rec:TDBInspectorRecord;
@@ -782,7 +782,7 @@ begin
 }
 end;
 
-procedure TfbManDataInpectorForm.TreeView1Click(Sender: TObject);
+procedure TfbManDataInspectorForm.TreeView1Click(Sender: TObject);
 var
   Rec: TDBInspectorRecord;
 begin
@@ -825,7 +825,7 @@ begin
   fbManagerMainForm.UpdateActionsToolbar;
 end;
 
-procedure TfbManDataInpectorForm.dbConnectExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbConnectExecute(Sender: TObject);
 var
   Item:TDBInspectorRecord;
 begin
@@ -844,25 +844,25 @@ begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.dbCreateDatabaseExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbCreateDatabaseExecute(Sender: TObject);
 begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.dbRegisterExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbRegisterExecute(Sender: TObject);
 begin
   DBNewRegistration(SQLEngineAbstractClassArray[(Sender as TComponent).Tag].SQLEngineClass.Create, nil);
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.dbRegitrationEditExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.dbRegitrationEditExecute(Sender: TObject);
 begin
   if Assigned(CurrentDB) then
     if CurrentDB.Edit then
       UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.editSQLExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.editSQLExecute(Sender: TObject);
 var
   Item:TDBInspectorRecord;
 begin
@@ -874,7 +874,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.objDeleteExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objDeleteExecute(Sender: TObject);
 var
   Rec:TDBInspectorRecord;
   Grp:TDBInspectorRecord;
@@ -892,7 +892,7 @@ begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.objNewExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objNewExecute(Sender: TObject);
 var
   Rec:TDBInspectorRecord;
 begin
@@ -902,7 +902,7 @@ begin
   UpdateDBManagerState;
 end;
 
-procedure TfbManDataInpectorForm.objShowExecute(Sender: TObject);
+procedure TfbManDataInspectorForm.objShowExecute(Sender: TObject);
 var
   Item:TDBInspectorRecord;
   F: TOIFolder;
@@ -928,19 +928,19 @@ begin
 end;
 
 
-procedure TfbManDataInpectorForm.LMChangeParams(var message: TLMNoParams);
+procedure TfbManDataInspectorForm.LMChangeParams(var message: TLMNoParams);
 begin
   inherited;
   DoChangePrefParams;
 end;
 
-procedure TfbManDataInpectorForm.TreeView1SelectionChanged(Sender: TObject);
+procedure TfbManDataInspectorForm.TreeView1SelectionChanged(Sender: TObject);
 begin
 //  UpdateDBManagerState;
   TreeView1Click(Sender);
 end;
 
-procedure TfbManDataInpectorForm.DoChangePrefParams;
+procedure TfbManDataInspectorForm.DoChangePrefParams;
 begin
   if ConfigValues.ByNameAsBoolean('oiDisableResize', false) then
   begin
@@ -961,7 +961,7 @@ begin
 end;
 
 
-function TfbManDataInpectorForm.DBNewRegistration(ASQLEngine, CopyFrom:TSQLEngineAbstract):TDataBaseRecord;
+function TfbManDataInspectorForm.DBNewRegistration(ASQLEngine, CopyFrom:TSQLEngineAbstract):TDataBaseRecord;
 var
   aNode:TTreeNode;
 begin
@@ -980,7 +980,7 @@ begin
   fbmConnectionEditForm.Free;
 end;
 
-procedure TfbManDataInpectorForm.UpdateSQLAssitant(ARec:TDBInspectorRecord);
+procedure TfbManDataInspectorForm.UpdateSQLAssitant(ARec:TDBInspectorRecord);
 begin
   LB_SQLAssistent.Items.Clear;
   if TassistMainFrame(FSQLAssist).UpdateAssistent(ARec) then
@@ -994,7 +994,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.DoCreateRegisterMenu;
+procedure TfbManDataInspectorForm.DoCreateRegisterMenu;
 var
   i:integer;
 
@@ -1023,7 +1023,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.MakeContextMenu;
+procedure TfbManDataInspectorForm.MakeContextMenu;
 
 procedure DoMakeConextMenu(ADBVisualTools:TDBVisualToolsClass);
 var
@@ -1059,7 +1059,7 @@ begin
   end
 end;
 
-procedure TfbManDataInpectorForm.ShowSqlAssitent(AShow: boolean);
+procedure TfbManDataInspectorForm.ShowSqlAssitent(AShow: boolean);
 begin
   miskShowAssitent.Checked:=AShow;
   LB_SQLAssistent.Visible:=AShow;
@@ -1067,7 +1067,7 @@ begin
     Splitter1.Top:=LB_SQLAssistent.Top - Splitter1.Height;
 end;
 
-procedure TfbManDataInpectorForm.Localize;
+procedure TfbManDataInspectorForm.Localize;
 begin
   Caption :=sDatabaseExplorer;
   Tabsheet1.Caption:=sOIDatabases;
@@ -1135,7 +1135,7 @@ begin
   TassistMainFrame(FSQLAssist).Localize;
 end;
 
-procedure TfbManDataInpectorForm.UpdateDBManagerState;
+procedure TfbManDataInspectorForm.UpdateDBManagerState;
 var
   Rec:TDBInspectorRecord;
   F: TOIFolder;
@@ -1175,7 +1175,7 @@ begin
     fbManagerMainForm.UpdateActionsToolbar;
 end;
 
-procedure TfbManDataInpectorForm.CloseAllDB;
+procedure TfbManDataInspectorForm.CloseAllDB;
 var
   i:integer;
 begin
@@ -1186,7 +1186,7 @@ begin
   FFolders.SaveAll;
 end;
 
-function TfbManDataInpectorForm.RegisterNewDB(ASQLEngine: TSQLEngineAbstract):TDataBaseRecord;
+function TfbManDataInspectorForm.RegisterNewDB(ASQLEngine: TSQLEngineAbstract):TDataBaseRecord;
 begin
   Result:=DBNewRegistration(ASQLEngine, nil);
   if Assigned(Result) then
@@ -1196,7 +1196,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.CreateNewDB(ASqlEngineName: string);
+procedure TfbManDataInspectorForm.CreateNewDB(ASqlEngineName: string);
 var
   i:integer;
   P:TSQLEngineCreateDBAbstractClass;
@@ -1215,7 +1215,7 @@ begin
           SQLEngine:=P.CreateSQLEngine;
           if Assigned(SQLEngine) then
           begin
-            DB:=fbManDataInpectorForm.RegisterNewDB(SQLEngine);
+            DB:=fbManDataInspectorForm.RegisterNewDB(SQLEngine);
             if Assigned(DB) and P.LogMetadata and (P.CreateSQL<>'') then
               DB.WriteSQLFile(P.LogFileMetadata, P.CreateSQL);
           end;
@@ -1229,7 +1229,7 @@ begin
   end;
 end;
 {
-procedure TfbManDataInpectorForm.FillServerList(const AList: TStrings);
+procedure TfbManDataInspectorForm.FillServerList(const AList: TStrings);
 var
   i:integer;
 begin
@@ -1239,7 +1239,7 @@ begin
       AList.Add(DBList[i].SQLEngine.ServerName);
 end;
 
-function TfbManDataInpectorForm.FillServerListType(const AList: TStrings;
+function TfbManDataInspectorForm.FillServerListType(const AList: TStrings;
   AClass: TSQLEngineAbstractClass): integer;
 var
   ACurrentDB, D:TDataBaseRecord;
@@ -1259,7 +1259,7 @@ begin
   end;
 end;
 }
-procedure TfbManDataInpectorForm.EditObject(DBObject: TDBObject);
+procedure TfbManDataInspectorForm.EditObject(DBObject: TDBObject);
 var
   R:TDBInspectorRecord;
   D: TDataBaseRecord;
@@ -1276,7 +1276,7 @@ begin
   end
 end;
 
-procedure TfbManDataInpectorForm.SelectObject(DBObject: TDBObject);
+procedure TfbManDataInspectorForm.SelectObject(DBObject: TDBObject);
 var
   i:integer;
   P:TDBInspectorRecord;
@@ -1293,7 +1293,7 @@ begin
   end;
 end;
 
-procedure TfbManDataInpectorForm.UpdateRecentObjects;
+procedure TfbManDataInspectorForm.UpdateRecentObjects;
 var
   i,j, k:integer;
   R:TDataBaseRecord;
@@ -1316,7 +1316,7 @@ begin
   ListBox1.Items.EndUpdate;
 end;
 
-function TfbManDataInpectorForm.OIFolderByName(AFolderName: string): TOIFolder;
+function TfbManDataInspectorForm.OIFolderByName(AFolderName: string): TOIFolder;
 var
   i: Integer;
 begin
@@ -1329,7 +1329,7 @@ begin
     end;
 end;
 
-procedure TfbManDataInpectorForm.PingConnectedDB;
+procedure TfbManDataInspectorForm.PingConnectedDB;
 var
   P : TDataBaseRecord;
   TN : TDateTime;
@@ -1343,7 +1343,7 @@ begin
     end;//
 end;
 
-procedure TfbManDataInpectorForm.ReadAlialList;
+procedure TfbManDataInspectorForm.ReadAlialList;
 var
   aNode:TTreeNode;
   PP:TDataBaseRecord;
@@ -1385,7 +1385,7 @@ begin
   TreeFilterEdit1.IdleConnected:=false;
 end;
 
-function TfbManDataInpectorForm.CurrentDB: TDataBaseRecord;
+function TfbManDataInspectorForm.CurrentDB: TDataBaseRecord;
 var
   Item:TDBInspectorRecord;
 begin
@@ -1398,7 +1398,7 @@ begin
   end;
 end;
 
-function TfbManDataInpectorForm.DBByName(ANameDB: string): TDataBaseRecord;
+function TfbManDataInspectorForm.DBByName(ANameDB: string): TDataBaseRecord;
 var
   i:integer;
 begin
@@ -1411,7 +1411,7 @@ begin
     end;
 end;
 
-function TfbManDataInpectorForm.DBBySQLEngine(SQLEngine: TSQLEngineAbstract
+function TfbManDataInspectorForm.DBBySQLEngine(SQLEngine: TSQLEngineAbstract
   ): TDataBaseRecord;
 var
   i:integer;
@@ -1425,14 +1425,14 @@ begin
     end;
 end;
 
-function TfbManDataInpectorForm.CurrentObject: TDBInspectorRecord;
+function TfbManDataInspectorForm.CurrentObject: TDBInspectorRecord;
 begin
   Result:=nil;
   if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) and (TObject(TreeView1.Selected.Data) is TDBInspectorRecord) then
     Result:=TDBInspectorRecord(TreeView1.Selected.Data);
 end;
 
-function TfbManDataInpectorForm.CurrentFolder: TOIFolder;
+function TfbManDataInspectorForm.CurrentFolder: TOIFolder;
 begin
   Result:=nil;
 
@@ -1445,7 +1445,7 @@ begin
   Result:=TDataBaseRecord(FList[AIndex]);
 end;
 
-constructor TFBMDataBaseList.Create(AOwner: TfbManDataInpectorForm);
+constructor TFBMDataBaseList.Create(AOwner: TfbManDataInspectorForm);
 begin
   inherited Create;
   FList:=TFPList.Create;
@@ -1550,6 +1550,6 @@ begin
 end;
 
 initialization
-  fbManDataInpectorForm:=nil;
+  fbManDataInspectorForm:=nil;
 end.
 

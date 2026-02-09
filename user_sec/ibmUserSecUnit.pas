@@ -161,8 +161,8 @@ begin
   
   UIBSecurity1.LibraryName:=GDS32DLL;
 
-  ComboBox2.ItemIndex:=fbManDataInpectorForm.DBList.FillDataBaseList(ComboBox2.Items, TSQLEngineFireBird);
-  fbManDataInpectorForm.DBList.FillServerList(ComboBox1.Items, TSQLEngineFireBird);
+  ComboBox2.ItemIndex:=fbManDataInspectorForm.DBList.FillDataBaseList(ComboBox2.Items, TSQLEngineFireBird);
+  fbManDataInspectorForm.DBList.FillServerList(ComboBox1.Items, TSQLEngineFireBird);
 
   if ComboBox2.ItemIndex>-1 then
     ComboBox2Change(nil);
