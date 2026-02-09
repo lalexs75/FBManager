@@ -344,6 +344,7 @@ const
                     '    (RDB$DEPENDENCIES.RDB$DEPENDENT_NAME = :DEPENDENT_NAME)';
 
 
+  sfbsqlRecompileIndexStat = 'set statistics index "%s"';
 implementation
 
 end.

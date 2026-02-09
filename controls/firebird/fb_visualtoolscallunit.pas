@@ -149,7 +149,7 @@ begin
   E:=nil;
   if Assigned(D) then
     E:=D.SQLEngine;
-  if E is TSQLEngineFireBird then
+  if (E is TSQLEngineFireBird) and E.Connected then
     ShowRecompileFBIndexForm(E as TSQLEngineFireBird);
 end;
 
