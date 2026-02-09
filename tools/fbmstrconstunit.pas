@@ -1230,6 +1230,9 @@ resourcestring
   sFireBiredDBShadMan               = 'Firebird DB Shadow manager';
   sFireBiredDBTransMon              = 'Firebird Tranaction monitor';
   sFireBiredUserManag               = 'Firebird user manager';
+  sFireBiredRecompileIndexStat      = 'Recompile index statistic';
+  sFireBiredRecompileIndexStatQ     = 'Selectivity of database indexes will be recompiled.Continue?';
+
 
   sFBTranParamsSnapshot             = 'Snapshot';
   sFBTranParamsReadCommited         = 'Read commited';

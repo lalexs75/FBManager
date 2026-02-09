@@ -1,0 +1,76 @@
+object fbmFBRecompileIndexForm: TfbmFBRecompileIndexForm
+  Left = 858
+  Height = 394
+  Top = 390
+  Width = 566
+  Caption = 'Recompile firebird indexs'
+  ClientHeight = 394
+  ClientWidth = 566
+  DesignTimePPI = 120
+  LCLVersion = '4.99.0.0'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  object CheckListBox1: TCheckListBox
+    Left = 0
+    Height = 290
+    Top = 35
+    Width = 566
+    Align = alClient
+    ItemHeight = 0
+    TabOrder = 0
+    TopIndex = -1
+  end
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 35
+    Top = 0
+    Width = 566
+    Items = <    
+      item
+        Action = actExecute
+        Visible = True
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 35
+    ClientWidth = 566
+    TabOrder = 1
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 6
+    Top = 325
+    Width = 566
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 63
+    Top = 331
+    Width = 566
+    Align = alBottom
+    Caption = 'Panel1'
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 200
+    Top = 160
+    object actExecute: TAction
+      Caption = 'actExecute'
+      ImageIndex = 16
+      OnExecute = actExecuteExecute
+    end
+  end
+  object UIBQuery1: TUIBQuery
+    Left = 336
+    Top = 160
+  end
+end

@@ -1995,6 +1995,13 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fbmCFColorMarksPageUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/fbmfbrecompileindexunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmFBRecompileIndexForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fbmFBRecompileIndexUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

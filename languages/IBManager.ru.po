@@ -2364,6 +2364,14 @@ msgstr "Firebird - Статистика БД"
 msgid "Firebird Tranaction monitor"
 msgstr "Firebird - Монитор транзакций"
 
+#: fbmstrconstunit.sfirebiredrecompileindexstat
+msgid "Recompile index statistic"
+msgstr ""
+
+#: fbmstrconstunit.sfirebiredrecompileindexstatq
+msgid "Selectivity of database indexes will be recompiled.Continue?"
+msgstr ""
+
 #: fbmstrconstunit.sfirebiredusermanag
 msgid "Firebird user manager"
 msgstr "Firebird - Управление пользователями"
@@ -6782,3 +6790,4 @@ msgstr "Показывает, что функция не возвращает з
 #: pg_utils.s_pg_xmldata
 msgid "XML data"
 msgstr "данные XML"
+

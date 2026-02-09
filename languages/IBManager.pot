@@ -2282,6 +2282,14 @@ msgstr ""
 msgid "Firebird Tranaction monitor"
 msgstr ""
 
+#: fbmstrconstunit.sfirebiredrecompileindexstat
+msgid "Recompile index statistic"
+msgstr ""
+
+#: fbmstrconstunit.sfirebiredrecompileindexstatq
+msgid "Selectivity of database indexes will be recompiled.Continue?"
+msgstr ""
+
 #: fbmstrconstunit.sfirebiredusermanag
 msgid "Firebird user manager"
 msgstr ""

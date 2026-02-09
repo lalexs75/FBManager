@@ -27,7 +27,7 @@ interface
 uses
   Classes, SysUtils, SQLEngineAbstractUnit, FBSQLEngineUnit, Forms,
   fbm_VisualEditorsAbstractUnit, fdbm_PagedDialogPageUnit, SynHighlighterSQL,
-  cfAbstractConfigFrameUnit;
+  cfAbstractConfigFrameUnit, ibmanagertypesunit;
 
 type
 
@@ -40,6 +40,7 @@ type
     procedure tlsDBShadowManagerExecute(Sender: TObject);
     procedure tlsTranMonitorExecute(Sender: TObject);
     procedure tlsShowUserManagerExecute(Sender: TObject);
+    procedure tlsRecompileIndexStat(Sender: TObject);
   protected
   public
     constructor Create(ASQLEngine:TSQLEngineAbstract);override;
@@ -59,9 +60,10 @@ type
   end;
 
 implementation
-uses fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
+uses fbmToolsUnit, fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
   FBSQLEngineSecurityUnit, ibmUserSecUnit, fbmshadowmanagerunit, fbmrestoreunit,
-  fbmbuckupunit, fbmCreateDataBaseUnit, pg_con_EditorPrefUnit, fbm_cf_mainunit,           //Модуль содержит 1-ю страницу окна подключения к БД (имя БД и рег. инфа)
+  fbmbuckupunit, fbmFBRecompileIndexUnit, fbmCreateDataBaseUnit,
+  pg_con_EditorPrefUnit, fbm_cf_mainunit,           //Модуль содержит 1-ю страницу окна подключения к БД (имя БД и рег. инфа)
   fdbm_cf_LogUnit,           //Модуль содержит 2-ю страницу окна подключения к БД (протоколирование операций с БД)
   fbm_cf_BuckupUnit,         //Модуль содержит 3-ю страницу окна подключения к БД (параметры архивации БД)
   fbm_cf_RestoreUnit,        //Модуль содержит 4-ю страницу окна подключения к БД (параметры востановления БД)
@@ -104,7 +106,7 @@ uses fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
   fdbmTableEditorPKListUnit,   //Страница редактора первичного ключа
   fdbmTableEditorForeignKeyUnit,//Страница редактора внешнего ключа
   fbmUDFMainEditorUnit,        //Главная страница редактора UDF
-  fbmDDLPageUnit, fbmFirebirdPackageUnit,              //Страница DDL
+  fbmDDLPageUnit, IBManDataInspectorUnit, fbmFirebirdPackageUnit,              //Страница DDL
   fbmTableStatisticUnit,
   fbmpgACLEditUnit,
   fdbmTableEditorUniqueUnit,
@@ -136,6 +138,19 @@ end;
 procedure TFireBirdVisualTools.tlsShowUserManagerExecute(Sender: TObject);
 begin
   ShowFBUserManager;
+end;
+
+procedure TFireBirdVisualTools.tlsRecompileIndexStat(Sender: TObject);
+var
+  D: TDataBaseRecord;
+  E: TSQLEngineAbstract;
+begin
+  D:=fbManDataInpectorForm.CurrentDB;
+  E:=nil;
+  if Assigned(D) then
+    E:=D.SQLEngine;
+  if E is TSQLEngineFireBird then
+    ShowRecompileFBIndexForm(E as TSQLEngineFireBird);
 end;
 
 class function TFireBirdVisualTools.GetCreateObject: TSQLEngineCreateDBAbstractClass;
@@ -198,12 +213,17 @@ begin
         Result.OnClick:=@tlsShowUserManagerExecute;
         Result.ImageIndex:=3;
       end;
+    5:begin
+        Result.ItemName:=sFireBiredRecompileIndexStat;
+        Result.OnClick:=@tlsRecompileIndexStat;
+//        Result.ImageIndex:=-1;
+      end;
   end;
 end;
 
 class function TFireBirdVisualTools.GetMenuItemCount: integer;
 begin
-  Result:=5;
+  Result:=6;
 end;
 
 class function TFireBirdVisualTools.ConfigDlgPageCount: integer;
