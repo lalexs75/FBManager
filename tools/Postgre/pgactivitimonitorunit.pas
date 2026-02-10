@@ -558,6 +558,7 @@ begin
     rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(quDBStat.FieldByName('database_size').AsLargeInt)]);  //Объём, который занимает на диске база данных с заданным OID
   end;
   quDBStat.Close;
+  rxStatInfo.First;
 end;
 
 procedure TpgActivitiMonitorForm.ClearInfoCharts;

@@ -13,22 +13,22 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     ClientWidth = 1271
     TabOrder = 1
     inherited ComboBox1: TComboBox
-      Width = 1195
+      Width = 1164
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
-    Height = 605
-    Top = 43
+    Height = 591
+    Top = 57
     Width = 1271
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
-    TabIndex = 1
+    TabIndex = 3
     TabOrder = 0
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
-      ClientHeight = 574
+      ClientHeight = 554
       ClientWidth = 1261
       object Chart1: TChart
         AnchorSideLeft.Control = tabDashboard
@@ -36,7 +36,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Control = Label2
         AnchorSideBottom.Control = Splitter2
         Left = 0
-        Height = 319
+        Height = 299
         Top = 0
         Width = 630
         AxisList = <        
@@ -94,7 +94,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideTop.Side = asrCenter
         Left = 630
         Height = 1
-        Top = 287
+        Top = 277
         Width = 1
         ParentColor = False
       end
@@ -106,7 +106,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
         Left = 631
-        Height = 319
+        Height = 299
         Top = 0
         Width = 630
         AxisList = <        
@@ -157,7 +157,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       object Panel3: TPanel
         Left = 0
         Height = 250
-        Top = 324
+        Top = 304
         Width = 1261
         Align = alBottom
         ClientHeight = 250
@@ -175,9 +175,9 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Panel3
           AnchorSideTop.Control = Panel3
           Left = 1
-          Height = 23
+          Height = 27
           Top = 1
-          Width = 156
+          Width = 223
           Caption = 'Refresh active session'
           Checked = True
           State = cbChecked
@@ -191,8 +191,8 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideBottom.Control = Panel3
           AnchorSideBottom.Side = asrBottom
           Left = 1
-          Height = 225
-          Top = 24
+          Height = 221
+          Top = 28
           Width = 1254
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = True
@@ -420,7 +420,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Anchors = [akTop, akLeft, akRight, akBottom]
           Color = clWindow
           DrawFullLine = True
-          FocusColor = clRed
           SelectedColor = clHighlight
           DataSource = dsActiveSessions
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
@@ -433,7 +432,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 319
+        Top = 299
         Width = 1261
         Align = alBottom
         ResizeAnchor = akBottom
@@ -441,11 +440,11 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet1: TTabSheet
       Caption = 'Connections'
-      ClientHeight = 574
+      ClientHeight = 554
       ClientWidth = 1261
       object RxDBGrid1: TRxDBGrid
         Left = 0
-        Height = 524
+        Height = 504
         Top = 50
         Width = 1256
         ColumnDefValues.BlobText = '(данные)'
@@ -688,7 +687,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Align = alClient
         Color = clWindow
         DrawFullLine = True
-        FocusColor = clRed
         SelectedColor = clHighlight
         DataSource = dsConnections
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
@@ -711,24 +709,24 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
           AnchorSideTop.Side = asrCenter
-          Left = 329
-          Height = 23
-          Top = 14
-          Width = 72
+          Left = 441
+          Height = 27
+          Top = 12
+          Width = 95
           BorderSpacing.Left = 6
           Caption = 'Refresh'
-          OnChange = SpinEdit1Change
           TabOrder = 0
+          OnChange = SpinEdit1Change
         end
         object Label3: TLabel
           AnchorSideLeft.Control = SpeedButton1
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit1
           AnchorSideBottom.Side = asrBottom
-          Left = 63
-          Height = 17
-          Top = 19
-          Width = 168
+          Left = 92
+          Height = 23
+          Top = 24
+          Width = 251
           Anchors = [akLeft, akBottom]
           Caption = 'Refresh interval (in seconds)'
           ParentColor = False
@@ -737,15 +735,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Label3
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel2
-          Left = 237
-          Height = 29
+          Left = 349
+          Height = 40
           Top = 7
           Width = 86
           BorderSpacing.Around = 6
           MaxValue = 10000
-          OnChange = SpinEdit1Change
           TabOrder = 1
           Value = 10
+          OnChange = SpinEdit1Change
         end
         object SpeedButton1: TSpeedButton
           AnchorSideLeft.Control = Panel2
@@ -755,7 +753,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 7
           Height = 36
           Top = 7
-          Width = 50
+          Width = 79
           Action = tlsRefreshConnectionsList
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
@@ -765,7 +763,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object Splitter3: TSplitter
         Left = 1256
-        Height = 524
+        Height = 504
         Top = 50
         Width = 5
         Align = alRight
@@ -774,7 +772,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet3: TTabSheet
       Caption = 'PG locks'
-      ClientHeight = 574
+      ClientHeight = 554
       ClientWidth = 1261
       object Panel4: TPanel
         Left = 0
@@ -790,24 +788,24 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel4
           AnchorSideTop.Side = asrCenter
-          Left = 349
-          Height = 23
-          Top = 14
-          Width = 72
+          Left = 461
+          Height = 27
+          Top = 12
+          Width = 95
           BorderSpacing.Left = 6
           Caption = 'Refresh'
-          OnChange = SpinEdit2Change
           TabOrder = 0
+          OnChange = SpinEdit2Change
         end
         object Label4: TLabel
           AnchorSideLeft.Control = SpeedButton2
           AnchorSideLeft.Side = asrBottom
           AnchorSideBottom.Control = SpinEdit2
           AnchorSideBottom.Side = asrBottom
-          Left = 83
-          Height = 17
-          Top = 19
-          Width = 168
+          Left = 112
+          Height = 23
+          Top = 24
+          Width = 251
           Anchors = [akLeft, akBottom]
           Caption = 'Refresh interval (in seconds)'
           ParentColor = False
@@ -816,15 +814,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           AnchorSideLeft.Control = Label4
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel4
-          Left = 257
-          Height = 29
+          Left = 369
+          Height = 40
           Top = 7
           Width = 86
           BorderSpacing.Around = 6
           MaxValue = 10000
-          OnChange = SpinEdit2Change
           TabOrder = 1
           Value = 10
+          OnChange = SpinEdit2Change
         end
         object SpeedButton2: TSpeedButton
           AnchorSideLeft.Control = Panel4
@@ -834,7 +832,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 7
           Height = 36
           Top = 7
-          Width = 70
+          Width = 99
           Action = tlsRefreskPGLocks
           Anchors = [akTop, akLeft, akBottom]
           AutoSize = True
@@ -880,7 +878,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object RxDBGrid4: TRxDBGrid
         Left = 0
-        Height = 524
+        Height = 504
         Top = 50
         Width = 924
         ColumnDefValues.BlobText = '(данные)'
@@ -1017,7 +1015,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Align = alClient
         Color = clWindow
         DrawFullLine = True
-        FocusColor = clRed
         SelectedColor = clHighlight
         DataSource = dsPGLocks
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
@@ -1025,7 +1022,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object Splitter4: TSplitter
         Left = 924
-        Height = 524
+        Height = 504
         Top = 50
         Width = 5
         Align = alRight
@@ -1033,18 +1030,18 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       end
       object Panel5: TPanel
         Left = 929
-        Height = 524
+        Height = 504
         Top = 50
         Width = 332
         Align = alRight
-        ClientHeight = 524
+        ClientHeight = 504
         ClientWidth = 332
         TabOrder = 3
         object Splitter5: TSplitter
           Cursor = crVSplit
           Left = 1
           Height = 5
-          Top = 518
+          Top = 498
           Width = 330
           Align = alBottom
           ResizeAnchor = akBottom
@@ -1070,11 +1067,11 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     end
     object TabSheet2: TTabSheet
       Caption = 'Statistic'
-      ClientHeight = 574
+      ClientHeight = 554
       ClientWidth = 1261
       object RxDBGrid3: TRxDBGrid
         Left = 0
-        Height = 574
+        Height = 554
         Top = 0
         Width = 1261
         ColumnDefValues.BlobText = '(данные)'
@@ -1085,7 +1082,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 621
+            Width = 616
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1100,7 +1097,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 621
+            Width = 615
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1175,7 +1172,6 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AutoFillColumns = True
         Color = clWindow
         DrawFullLine = False
-        FocusColor = clRed
         SelectedColor = clHighlight
         DataSource = dsStatInfo
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgHeaderPushedLook]
@@ -1248,96 +1244,68 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'datid'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quActiveSessionsdatname: TStringField
       FieldKind = fkData
       FieldName = 'datname'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quActiveSessionsusename: TStringField
       FieldKind = fkData
       FieldName = 'usename'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quActiveSessionsapplication_name: TStringField
       FieldKind = fkData
       FieldName = 'application_name'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
       Size = 1000
     end
     object quActiveSessionsclient_addr: TStringField
       FieldKind = fkData
       FieldName = 'client_addr'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 400
     end
     object quActiveSessionsclient_hostname: TStringField
       FieldKind = fkData
       FieldName = 'client_hostname'
       Index = 5
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
       Size = 1000
     end
     object quActiveSessionsclient_port: TLongintField
       FieldKind = fkData
       FieldName = 'client_port'
       Index = 6
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quActiveSessionsbackend_start: TDateTimeField
       FieldKind = fkData
       FieldName = 'backend_start'
       Index = 7
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quActiveSessionsquery_start: TDateTimeField
       FieldKind = fkData
       FieldName = 'query_start'
       Index = 8
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quActiveSessionsquery: TMemoField
       FieldKind = fkData
       FieldName = 'query'
       Index = 9
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end
@@ -1345,10 +1313,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'state'
       Index = 10
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end
@@ -1356,10 +1321,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'pid'
       Index = 11
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
   end
   object quActivConect: TZReadOnlyQuery[6]
@@ -1382,46 +1344,36 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'c_all'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
     end
     object quActivConectc_idle: TLargeintField
       FieldKind = fkData
       FieldName = 'c_idle'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
     end
     object quActivConectc_idle_in_tran: TLargeintField
       FieldKind = fkData
       FieldName = 'c_idle_in_tran'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
     end
     object quActivConectc_idle_in_rollback: TLargeintField
       FieldKind = fkData
       FieldName = 'c_idle_in_rollback'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
     end
     object quActivConectc_active_tran: TLargeintField
       FieldKind = fkData
       FieldName = 'c_active_tran'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
     end
   end
   object pgStatDB: TZConnection[7]
@@ -1472,96 +1424,68 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'datid'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quConnectionsdatname: TStringField
       FieldKind = fkData
       FieldName = 'datname'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quConnectionsusename: TStringField
       FieldKind = fkData
       FieldName = 'usename'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quConnectionsapplication_name: TStringField
       FieldKind = fkData
       FieldName = 'application_name'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
       Size = 1000
     end
     object quConnectionsclient_addr: TStringField
       FieldKind = fkData
       FieldName = 'client_addr'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 400
     end
     object quConnectionsclient_hostname: TStringField
       FieldKind = fkData
       FieldName = 'client_hostname'
       Index = 5
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
       Size = 1000
     end
     object quConnectionsclient_port: TLongintField
       FieldKind = fkData
       FieldName = 'client_port'
       Index = 6
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quConnectionsbackend_start: TDateTimeField
       FieldKind = fkData
       FieldName = 'backend_start'
       Index = 7
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quConnectionsquery_start: TDateTimeField
       FieldKind = fkData
       FieldName = 'query_start'
       Index = 8
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quConnectionsquery: TMemoField
       FieldKind = fkData
       FieldName = 'query'
       Index = 9
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end
@@ -1569,20 +1493,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'state'
       Index = 10
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
-      Required = False
       Size = 1000
     end
     object quConnectionspid: TLongintField
       FieldKind = fkData
       FieldName = 'pid'
       Index = 11
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
   end
   object csActAll: TDbChartSource[9]
@@ -1635,64 +1554,43 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'ACTIVE'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataIDLE: TLongintField
       FieldKind = fkData
       FieldName = 'IDLE'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataALL: TLongintField
       FieldKind = fkData
       FieldName = 'ALL'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataIN_TRANS_ACTIVE: TLongintField
       FieldKind = fkData
       FieldName = 'IN_TRANS_ACTIVE'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataIN_TRANS_IDLE: TLongintField
       FieldKind = fkData
       FieldName = 'IN_TRANS_IDLE'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataIN_TRANS_ROLBACK: TLongintField
       FieldKind = fkData
       FieldName = 'IN_TRANS_ROLBACK'
       Index = 5
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object rxActivitiDataID: TDateTimeField
       FieldKind = fkData
       FieldName = 'ID'
       Index = 6
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       DisplayFormat = 'hh:MM:ss'
     end
   end
@@ -1802,20 +1700,14 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'PARAM'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 250
     end
     object rxStatInfoVALUE: TStringField
       FieldKind = fkData
       FieldName = 'VALUE'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 250
     end
   end
@@ -1939,48 +1831,33 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'blocked_pid'
       Index = 0
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quPGLocksblocked_user: TStringField
       FieldKind = fkData
       FieldName = 'blocked_user'
       Index = 1
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quPGLocksblocking_pid: TLongintField
       FieldKind = fkData
       FieldName = 'blocking_pid'
       Index = 2
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
     end
     object quPGLocksblocking_user: TStringField
       FieldKind = fkData
       FieldName = 'blocking_user'
       Index = 3
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       Size = 256
     end
     object quPGLocksblocked_statement: TMemoField
       FieldKind = fkData
       FieldName = 'blocked_statement'
       Index = 4
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end
@@ -1988,10 +1865,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
       FieldKind = fkData
       FieldName = 'current_statement_in_blocking_process'
       Index = 5
-      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
       BlobType = ftMemo
       Transliterate = False
     end

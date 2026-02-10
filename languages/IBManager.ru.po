@@ -1041,6 +1041,10 @@ msgstr "Создать представление"
 msgid "Create new view from current select"
 msgstr "Создать представление из текущего запроса"
 
+#: fbmstrconstunit.screationdate
+msgid "Creation date"
+msgstr ""
+
 #: fbmstrconstunit.scriteria
 msgid "Criteria"
 msgstr "Критерий"
@@ -1132,6 +1136,10 @@ msgstr "Шаблоны объектов базы данных"
 msgctxt "fbmstrconstunit.sdatabaseoncurrentserver"
 msgid "Database on current server"
 msgstr "БД на текущем сервере"
+
+#: fbmstrconstunit.sdatabaseowner
+msgid "Database owner"
+msgstr ""
 
 #: fbmstrconstunit.sdatabasepagesize
 msgid "Database page size"
@@ -5578,7 +5586,9 @@ msgid "Stats date"
 msgstr "Последнее время сброса этих статистических данных"
 
 #: fbmstrconstunit.sstatsdbsize
-msgid "Database zise"
+#, fuzzy
+#| msgid "Database zise"
+msgid "Database size"
 msgstr "Объём базы данных на диске"
 
 #: fbmstrconstunit.sstatsfulltime

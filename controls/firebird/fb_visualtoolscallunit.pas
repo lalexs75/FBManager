@@ -191,22 +191,22 @@ begin
   Result.ImageIndex:=-1;
   case Index of
     0:begin
+        Result.ItemName:=sFireBiredDBStat;
+        Result.OnClick:=@tlsTranMonitorExecute;
+      end;
+    1:begin
         Result.ItemName:=sFireBiredDBBackup;
         Result.OnClick:=@tlsBackupExecute;
         Result.ImageIndex:=14;
       end;
-    1:begin
+    2:begin
         Result.ItemName:=sFireBiredDBRestore;
         Result.OnClick:=@tlsRestoreExecute;
         Result.ImageIndex:=15;
       end;
-    2:begin
+    3:begin
         Result.ItemName:=sFireBiredDBShadMan;
         Result.OnClick:=@tlsDBShadowManagerExecute;
-      end;
-    3:begin
-        Result.ItemName:=sFireBiredDBStat;
-        Result.OnClick:=@tlsTranMonitorExecute;
       end;
     4:begin
         Result.ItemName:=sFireBiredUserManag;

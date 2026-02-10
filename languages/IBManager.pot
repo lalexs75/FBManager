@@ -1008,6 +1008,10 @@ msgstr ""
 msgid "Create new view from current select"
 msgstr ""
 
+#: fbmstrconstunit.screationdate
+msgid "Creation date"
+msgstr ""
+
 #: fbmstrconstunit.scriteria
 msgid "Criteria"
 msgstr ""
@@ -1095,6 +1099,10 @@ msgstr ""
 
 #: fbmstrconstunit.sdatabaseoncurrentserver
 msgid "Database on current server"
+msgstr ""
+
+#: fbmstrconstunit.sdatabaseowner
+msgid "Database owner"
 msgstr ""
 
 #: fbmstrconstunit.sdatabasepagesize
@@ -5415,7 +5423,7 @@ msgid "Stats date"
 msgstr ""
 
 #: fbmstrconstunit.sstatsdbsize
-msgid "Database zise"
+msgid "Database size"
 msgstr ""
 
 #: fbmstrconstunit.sstatsfulltime

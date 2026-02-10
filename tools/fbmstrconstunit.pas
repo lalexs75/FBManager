@@ -308,6 +308,7 @@ resourcestring
   sDatabaseProperty                 = 'Database property';
   sFBManagerOptions                 = 'FBManager options';
   sOwner                            = 'Owner';
+  sDatabaseOwner                    = 'Database owner';
   sOwnerID                          = 'Owner ID';
   sCodepage                         = 'Codepage';
   sConnectionLimit                  = 'Connection limit';
@@ -760,7 +761,7 @@ resourcestring
   sCreateNewDB                      = 'Create New DB';
   sUseAllSpace                      = 'Use All Space';
   sValidate                         = 'Validate';
-
+  sCreationDate                     = 'Creation date';
 
   sSQLDialect                       = 'SQL Dialect';
   sSweepInterval                    = 'Sweep interval';
@@ -1633,7 +1634,7 @@ resourcestring
   sStatsDateTime                    = 'Stats date';
   sRowCountUpdated                  = 'Rows count updated';
   sRowCountDeleted                  = 'Rows count deleted';
-  sStatsDBSize                      = 'Database zise';
+  sStatsDBSize                      = 'Database size';
   sStatsCallCount                   = 'Call count';
   sStatsFullTime                    = 'Full time';
   sStatsFunctionTime                = 'Function time';

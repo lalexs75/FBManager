@@ -55,13 +55,14 @@ type
     csOLD_ACTIVE: TDbChartSource;
     csOLD: TDbChartSource;
     csOLD_SNAPSHOT: TDbChartSource;
+    dsStatInfo: TDataSource;
     dsUsers: TDataSource;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
+    quStatInfo: TFBDataSet;
     Label11: TLabel;
-    Memo1: TMemo;
     Panel5: TPanel;
     Panel6 : TPanel;
     quUsers: TFBDataSet;
@@ -77,6 +78,10 @@ type
     PageControl1: TPageControl;
     Panel4: TPanel;
     RxDBGrid1: TRxDBGrid;
+    RxDBGrid3: TRxDBGrid;
+    rxStatInfo: TRxMemoryData;
+    rxStatInfoPARAM: TStringField;
+    rxStatInfoVALUE: TStringField;
     rxTransInfo: TRxMemoryData;
     rxTransInfoID: TLongintField;
     rxTransInfoNEXT_TRANS: TLongintField;
@@ -98,11 +103,12 @@ type
     procedure CheckBox3Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure SpinEdit4Change(Sender: TObject);
     procedure UIBDataBase1AfterConnect(Sender: TObject);
-    procedure UIBServerInfo1InfoDbName(Sender: TObject; Value: string);
   private
     procedure ShowUsers;
+    procedure LoadDBStat;
   protected
     procedure Localize; override;
     procedure ConnectToDB(ASQLEngine: TSQLEngineAbstract); override;
@@ -113,8 +119,8 @@ type
 
 procedure ShowTransMonitor;
 implementation
-uses uibase, IBManMainUnit, IBManDataInspectorUnit, ibmanagertypesunit, fbmStrConstUnit,
-  FBSQLEngineUnit;
+uses uibase, rxstrutils, IBManMainUnit, IBManDataInspectorUnit, StrUtils,
+  ibmanagertypesunit, fbmStrConstUnit, FBSQLEngineUnit;
 
 {$R *.lfm}
 
@@ -142,6 +148,7 @@ end;
 
 procedure TfbmTransactionMonitorForm.FormCreate(Sender: TObject);
 begin
+  PageControl1.ActivePageIndex:=0;
   DoFillDatabaseList(TSQLEngineFireBird);
 
   {  BarChart1.Bars.Clear;
@@ -149,6 +156,12 @@ begin
   BOldestTras:=BarChart1.AddBar(sFBTranOldestTran, 0, clMaroon);
   BOldestSnapshot:=BarChart1.AddBar(sFBTranOldestSnaps, 0, clBlack);
   BNextTran:=BarChart1.AddBar(sFBTranNextTrans, 0, clBlue);}
+end;
+
+procedure TfbmTransactionMonitorForm.PageControl1Change(Sender: TObject);
+begin
+  if PageControl1.ActivePage = TabSheet3 then
+    LoadDBStat;
 end;
 
 procedure TfbmTransactionMonitorForm.SpinEdit4Change(Sender: TObject);
@@ -163,15 +176,56 @@ begin
   UIBTransaction1.StartTransaction;
 end;
 
-procedure TfbmTransactionMonitorForm.UIBServerInfo1InfoDbName(Sender: TObject;
-  Value: string);
-begin
-  Memo1.Lines.Add(Value);
-end;
-
 procedure TfbmTransactionMonitorForm.ShowUsers;
 begin
   quUsers.CloseOpen(true);
+end;
+
+procedure TfbmTransactionMonitorForm.LoadDBStat;
+
+procedure ParseVersionStr(S:string;out AMj, AMi, AMr:Integer);
+begin
+  AMj:=0;
+  AMi:=0;
+  AMr:=0;
+  if S = '' then Exit;
+  AMj:=StrToIntDef(Copy2SymbDel(S, '.'), 0);
+  if (AMj = 0) or (S = '') then Exit;
+  AMi:=StrToIntDef(Copy2SymbDel(S, '.'), 0);
+  if (AMi = 0) or (S = '') then Exit;
+  AMr:=StrToIntDef(S, 0);
+end;
+
+var
+  R: Int64;
+  V1, V2, V3: Integer;
+begin
+  rxStatInfo.CloseOpen;
+  try
+    quStatInfo.Open;
+    ParseVersionStr(quStatInfo.FieldByName('FB_ENGINE_VERSION').AsString, V1, V2, V3);
+
+    rxStatInfo.AppendRecord([sServerVersion, UIBDataBase1.InfoVersion]);
+    rxStatInfo.AppendRecord([sDatabaseName, quStatInfo.FieldByName('MON$DATABASE_NAME').DisplayText]);
+    rxStatInfo.AppendRecord([sSQLDialect, quStatInfo.FieldByName('MON$SQL_DIALECT').DisplayText]);
+    rxStatInfo.AppendRecord([sCreationDate, quStatInfo.FieldByName('MON$CREATION_DATE').DisplayText]);
+
+    if V1>2 then
+      rxStatInfo.AppendRecord([sDatabaseOwner, quStatInfo.FieldByName('MON$OWNER').DisplayText]);
+
+    rxStatInfo.AppendRecord([sReadOnly, quStatInfo.FieldByName('MON$READ_ONLY').DisplayText]);
+
+    rxStatInfo.AppendRecord([sPageSize, quStatInfo.FieldByName('MON$PAGE_SIZE').DisplayText]);
+    rxStatInfo.AppendRecord([sPages, quStatInfo.FieldByName('MON$PAGES').DisplayText]);
+
+
+    R:=quStatInfo.FieldByName('MON$PAGES').AsLongWord * quStatInfo.FieldByName('MON$PAGE_SIZE').AsLongWord;
+    rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(R)]); //Объём, который занимает на диске база данных с заданным OID
+
+    quStatInfo.Close;
+  finally
+  end;
+  rxStatInfo.First;
 end;
 
 procedure TfbmTransactionMonitorForm.Localize;
@@ -180,6 +234,8 @@ begin
 
   Label1.Caption:=sDatabase;
   TabSheet2.Caption:=sGeneral;
+  TabSheet1.Caption:=sConnections;
+  TabSheet3.Caption:=sStatistic;
 
   Label2.Caption:=sPageSize;
   Label3.Caption:=sSQLDialect;
@@ -212,6 +268,9 @@ begin
   Chart1LineSeries6.Title:=sOldActive;
   Chart1LineSeries7.Title:=sOldest;
   Chart1LineSeries8.Title:=sOldSnapshot;
+
+  RxDBGrid3.ColumnByFieldName('PARAM').Title.Caption:=sParamName;
+  RxDBGrid3.ColumnByFieldName('VALUE').Title.Caption:=sParamValue;
 end;
 
 procedure TfbmTransactionMonitorForm.ConnectToDB(ASQLEngine: TSQLEngineAbstract
@@ -267,7 +326,6 @@ end;
 
 procedure TfbmTransactionMonitorForm.ShowStatInfo;
 begin
-  Memo1.Lines.Clear;
   if UIBDataBase1.Connected then
   begin
     Edit1.Text:=IntToStr(UIBDataBase1.InfoPageSize);
