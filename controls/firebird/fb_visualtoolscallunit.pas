@@ -62,8 +62,8 @@ type
 implementation
 uses fbmToolsUnit, fbmStrConstUnit, fbmTransactionMonitorUnit, fb_ConstUnit,
   FBSQLEngineSecurityUnit, ibmUserSecUnit, fbmshadowmanagerunit, fbmrestoreunit,
-  fbmbuckupunit, fbmFBRecompileIndexUnit, fbmCreateDataBaseUnit,
-  pg_con_EditorPrefUnit, fbm_cf_mainunit,           //Модуль содержит 1-ю страницу окна подключения к БД (имя БД и рег. инфа)
+  fbmbuckupunit, fbmFBRecompileIndexUnit,
+  fbmCreateDataBaseUnit, pg_con_EditorPrefUnit, fbm_cf_mainunit,           //Модуль содержит 1-ю страницу окна подключения к БД (имя БД и рег. инфа)
   fdbm_cf_LogUnit,           //Модуль содержит 2-ю страницу окна подключения к БД (протоколирование операций с БД)
   fbm_cf_BuckupUnit,         //Модуль содержит 3-ю страницу окна подключения к БД (параметры архивации БД)
   fbm_cf_RestoreUnit,        //Модуль содержит 4-ю страницу окна подключения к БД (параметры востановления БД)
@@ -133,6 +133,7 @@ end;
 procedure TFireBirdVisualTools.tlsTranMonitorExecute(Sender: TObject);
 begin
   ShowTransMonitor;
+//  ShowTransMonitorNew;
 end;
 
 procedure TFireBirdVisualTools.tlsShowUserManagerExecute(Sender: TObject);

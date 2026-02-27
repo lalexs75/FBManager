@@ -2,34 +2,34 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
   Left = 385
   Height = 648
   Top = 169
-  Width = 1271
+  Width = 1473
   Caption = 'Activiti monitor'
   ClientHeight = 648
-  ClientWidth = 1271
+  ClientWidth = 1473
   OnClose = FormClose
   OnCreate = FormCreate
   inherited Panel1: TPanel
-    Width = 1271
-    ClientWidth = 1271
+    Width = 1473
+    ClientWidth = 1473
     TabOrder = 1
     inherited ComboBox1: TComboBox
-      Width = 1164
+      Width = 1366
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
     Height = 591
     Top = 57
-    Width = 1271
-    ActivePage = TabSheet2
+    Width = 1473
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 3
+    TabIndex = 1
     TabOrder = 0
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
       ClientHeight = 554
-      ClientWidth = 1261
+      ClientWidth = 1463
       object Chart1: TChart
         AnchorSideLeft.Control = tabDashboard
         AnchorSideTop.Control = tabDashboard
@@ -38,7 +38,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 299
         Top = 0
-        Width = 630
+        Width = 731
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -92,7 +92,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = tabDashboard
         AnchorSideTop.Side = asrCenter
-        Left = 630
+        Left = 731
         Height = 1
         Top = 277
         Width = 1
@@ -105,10 +105,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         AnchorSideRight.Control = tabDashboard
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
-        Left = 631
+        Left = 732
         Height = 299
         Top = 0
-        Width = 630
+        Width = 731
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -158,13 +158,13 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 250
         Top = 304
-        Width = 1261
+        Width = 1463
         Align = alBottom
         ClientHeight = 250
-        ClientWidth = 1261
+        ClientWidth = 1463
         TabOrder = 2
         object Splitter1: TSplitter
-          Left = 1255
+          Left = 1457
           Height = 248
           Top = 1
           Width = 5
@@ -193,7 +193,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
           Left = 1
           Height = 221
           Top = 28
-          Width = 1254
+          Width = 1456
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = True
           AutoSort = True
@@ -433,7 +433,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 5
         Top = 299
-        Width = 1261
+        Width = 1463
         Align = alBottom
         ResizeAnchor = akBottom
       end
@@ -441,12 +441,12 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     object TabSheet1: TTabSheet
       Caption = 'Connections'
       ClientHeight = 554
-      ClientWidth = 1261
+      ClientWidth = 1463
       object RxDBGrid1: TRxDBGrid
         Left = 0
         Height = 504
         Top = 50
-        Width = 1256
+        Width = 1458
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -699,10 +699,10 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 50
         Top = 0
-        Width = 1261
+        Width = 1463
         Align = alTop
         ClientHeight = 50
-        ClientWidth = 1261
+        ClientWidth = 1463
         TabOrder = 1
         object CheckBox2: TCheckBox
           AnchorSideLeft.Control = SpinEdit1
@@ -762,7 +762,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         end
       end
       object Splitter3: TSplitter
-        Left = 1256
+        Left = 1458
         Height = 504
         Top = 50
         Width = 5
@@ -773,15 +773,15 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     object TabSheet3: TTabSheet
       Caption = 'PG locks'
       ClientHeight = 554
-      ClientWidth = 1261
+      ClientWidth = 1463
       object Panel4: TPanel
         Left = 0
         Height = 50
         Top = 0
-        Width = 1261
+        Width = 1463
         Align = alTop
         ClientHeight = 50
-        ClientWidth = 1261
+        ClientWidth = 1463
         TabOrder = 0
         object CheckBox3: TCheckBox
           AnchorSideLeft.Control = SpinEdit2
@@ -880,7 +880,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         Left = 0
         Height = 504
         Top = 50
-        Width = 924
+        Width = 1126
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = False
         AutoSort = True
@@ -1021,7 +1021,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         TabOrder = 1
       end
       object Splitter4: TSplitter
-        Left = 924
+        Left = 1126
         Height = 504
         Top = 50
         Width = 5
@@ -1029,7 +1029,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
         ResizeAnchor = akRight
       end
       object Panel5: TPanel
-        Left = 929
+        Left = 1131
         Height = 504
         Top = 50
         Width = 332
@@ -1068,12 +1068,12 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
     object TabSheet2: TTabSheet
       Caption = 'Statistic'
       ClientHeight = 554
-      ClientWidth = 1261
+      ClientWidth = 1463
       object RxDBGrid3: TRxDBGrid
         Left = 0
         Height = 554
         Top = 0
-        Width = 1261
+        Width = 1463
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -1082,7 +1082,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 616
+            Width = 721
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1097,7 +1097,7 @@ inherited pgActivitiMonitorForm: TpgActivitiMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 615
+            Width = 720
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0

@@ -10,22 +10,22 @@ object fdbmMonitorAbstractForm: TfdbmMonitorAbstractForm
   LCLVersion = '4.99.0.0'
   object Panel1: TPanel
     Left = 0
-    Height = 41
+    Height = 57
     Top = 0
-    Width = 398
+    Width = 498
     Align = alTop
     AutoSize = True
-    ClientHeight = 41
-    ClientWidth = 398
+    ClientHeight = 57
+    ClientWidth = 498
     TabOrder = 0
     object Label1: TLabel
       AnchorSideLeft.Control = Panel1
       AnchorSideBottom.Control = ComboBox1
       AnchorSideBottom.Side = asrBottom
       Left = 9
-      Height = 17
-      Top = 21
-      Width = 56
+      Height = 23
+      Top = 25
+      Width = 81
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 8
       Caption = 'Database'
@@ -37,10 +37,10 @@ object fdbmMonitorAbstractForm: TfdbmMonitorAbstractForm
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
-      Left = 86
-      Height = 27
+      Left = 98
+      Height = 39
       Top = 9
-      Width = 403
+      Width = 391
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 8
       ItemHeight = 0

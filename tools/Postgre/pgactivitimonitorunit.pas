@@ -386,7 +386,9 @@ begin
   tlsRefreshConnectionsList.Caption:=sRefreshDataHint;
   tlsRefreskPGLocks.Caption:=sRefreshDataHint;
   tlsCancelQuery.Caption:=sCancelQuery;
+  tlsCancelQuery.Hint:=sCancelQueryHint;
   tlsDisconectConnection.Caption:=sDisconectConnection;
+  tlsDisconectConnection.Hint:=sDisconectConnectionHint;
   StaticText1.Caption:=sBlockedStatement;
   StaticText2.Caption:=sCurrentStatementInBlockingProcess;
 

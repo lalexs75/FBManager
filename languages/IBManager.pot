@@ -449,6 +449,12 @@ msgid "Calculated"
 msgstr ""
 
 #: fbmstrconstunit.scancelquery
+msgctxt "fbmstrconstunit.scancelquery"
+msgid "Cancel query"
+msgstr ""
+
+#: fbmstrconstunit.scancelqueryhint
+msgctxt "fbmstrconstunit.scancelqueryhint"
 msgid "Cancel query"
 msgstr ""
 
@@ -542,6 +548,10 @@ msgstr ""
 
 #: fbmstrconstunit.sclientport
 msgid "Client port"
+msgstr ""
+
+#: fbmstrconstunit.sclientversion
+msgid "Client version"
 msgstr ""
 
 #: fbmstrconstunit.sclipboard
@@ -1586,6 +1596,12 @@ msgid "Disable resize"
 msgstr ""
 
 #: fbmstrconstunit.sdisconectconnection
+msgctxt "fbmstrconstunit.sdisconectconnection"
+msgid "Disconect connection"
+msgstr ""
+
+#: fbmstrconstunit.sdisconectconnectionhint
+msgctxt "fbmstrconstunit.sdisconectconnectionhint"
 msgid "Disconect connection"
 msgstr ""
 
@@ -4658,6 +4674,10 @@ msgstr ""
 msgid "Remote address"
 msgstr ""
 
+#: fbmstrconstunit.sremotepid
+msgid "Remote PID"
+msgstr ""
+
 #: fbmstrconstunit.sremoteprocess
 msgid "Remote process"
 msgstr ""
@@ -5098,6 +5118,10 @@ msgstr ""
 msgid "Server OID"
 msgstr ""
 
+#: fbmstrconstunit.sserverpid
+msgid "Server PID"
+msgstr ""
+
 #: fbmstrconstunit.sservertype
 msgid "Server type"
 msgstr ""
@@ -5210,6 +5234,10 @@ msgstr ""
 
 #: fbmstrconstunit.sshowsystemobjects
 msgid "Show system objects"
+msgstr ""
+
+#: fbmstrconstunit.sshowsystemprocess
+msgid "Show system process"
 msgstr ""
 
 #: fbmstrconstunit.sshowttablepartitions

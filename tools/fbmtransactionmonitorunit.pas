@@ -26,9 +26,9 @@ interface
 
 uses
   Classes, SynEdit, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ActnList,
-  rxtoolbar, rxmemds, rxdbgrid, TAGraph, TASeries, TAStyles, TADbSource,
+  rxtoolbar, rxmemds, rxdbgrid, TAGraph, TASeries, TAStyles, TADbSource, fbmTransactionMonitor_ConnectionsUnit,
   fbcustomdataset, Menus, uib, ExtCtrls, StdCtrls, LMessages, fbmToolsUnit,
-  EditBtn, Buttons, ComCtrls, Spin, db, SQLEngineAbstractUnit,
+  Buttons, ComCtrls, Spin, db, SQLEngineAbstractUnit,
   fdbm_monitorabstractunit;
 
 type
@@ -36,6 +36,8 @@ type
   { TfbmTransactionMonitorForm }
 
   TfbmTransactionMonitorForm = class(TfdbmMonitorAbstractForm)
+    actRefresh: TAction;
+    ActionList1: TActionList;
     Chart1: TChart;
     Chart1LineSeries1: TLineSeries;
     Chart1LineSeries2: TLineSeries;
@@ -46,8 +48,6 @@ type
     Chart1LineSeries7: TLineSeries;
     Chart1LineSeries8: TLineSeries;
     Chart2: TChart;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5 : TCheckBox;
@@ -57,26 +57,14 @@ type
     csOLD_SNAPSHOT: TDbChartSource;
     dsStatInfo: TDataSource;
     dsUsers: TDataSource;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
     quStatInfo: TFBDataSet;
     Label11: TLabel;
     Panel5: TPanel;
     Panel6 : TPanel;
     quUsers: TFBDataSet;
-    GroupBox1: TGroupBox;
     ImageList1: TImageList;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
     CLabel: TLabel;
     PageControl1: TPageControl;
-    Panel4: TPanel;
     RxDBGrid1: TRxDBGrid;
     RxDBGrid3: TRxDBGrid;
     rxStatInfo: TRxMemoryData;
@@ -88,28 +76,28 @@ type
     rxTransInfoOLD_ACTIVE: TLongintField;
     rxTransInfoOLD_ALL: TLongintField;
     rxTransInfoOLD_SNAPSHOT: TLongintField;
-    SpinEdit2: TSpinEdit;
-    SpinEdit3: TSpinEdit;
     SpinEdit4: TSpinEdit;
     Splitter1 : TSplitter;
     Splitter2 : TSplitter;
     SynEdit1 : TSynEdit;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
+    tabConnections: TTabSheet;
+    tabGraph: TTabSheet;
+    tabServerInfo: TTabSheet;
     UIBDataBase1: TUIBDataBase;
     UIBServerInfo1: TUIBServerInfo;
     UIBTransaction1: TUIBTransaction;
     procedure CheckBox3Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormCreate(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure SpinEdit4Change(Sender: TObject);
     procedure UIBDataBase1AfterConnect(Sender: TObject);
   private
+    FConnectionsFrame:TfbmTransactionMonitor_ConnectionsFrame;
     procedure ShowUsers;
     procedure LoadDBStat;
   protected
+    procedure InternalSetEnvOptions; override;
+    procedure InternalInitConrols; override;
     procedure Localize; override;
     procedure ConnectToDB(ASQLEngine: TSQLEngineAbstract); override;
     procedure StatTimeTick; override;
@@ -119,7 +107,7 @@ type
 
 procedure ShowTransMonitor;
 implementation
-uses uibase, rxstrutils, IBManMainUnit, IBManDataInspectorUnit, StrUtils,
+uses rxstrutils, IBManMainUnit, IBManDataInspectorUnit, StrUtils,
   ibmanagertypesunit, fbmStrConstUnit, FBSQLEngineUnit;
 
 {$R *.lfm}
@@ -146,21 +134,12 @@ begin
   MainTimer.Enabled:=CheckBox3.Checked;
 end;
 
-procedure TfbmTransactionMonitorForm.FormCreate(Sender: TObject);
-begin
-  PageControl1.ActivePageIndex:=0;
-  DoFillDatabaseList(TSQLEngineFireBird);
-
-  {  BarChart1.Bars.Clear;
-  BOldestActive:=BarChart1.AddBar(sFBTranOldestActive, 0, clRed);
-  BOldestTras:=BarChart1.AddBar(sFBTranOldestTran, 0, clMaroon);
-  BOldestSnapshot:=BarChart1.AddBar(sFBTranOldestSnaps, 0, clBlack);
-  BNextTran:=BarChart1.AddBar(sFBTranNextTrans, 0, clBlue);}
-end;
-
 procedure TfbmTransactionMonitorForm.PageControl1Change(Sender: TObject);
 begin
-  if PageControl1.ActivePage = TabSheet3 then
+  if PageControl1.ActivePage = tabConnections then
+    FConnectionsFrame.UpdateList
+  else
+  if PageControl1.ActivePage = tabServerInfo then
     LoadDBStat;
 end;
 
@@ -178,7 +157,8 @@ end;
 
 procedure TfbmTransactionMonitorForm.ShowUsers;
 begin
-  quUsers.CloseOpen(true);
+//  quUsers.CloseOpen(true);
+  FConnectionsFrame.UpdateList;
 end;
 
 procedure TfbmTransactionMonitorForm.LoadDBStat;
@@ -228,16 +208,46 @@ begin
   rxStatInfo.First;
 end;
 
+procedure TfbmTransactionMonitorForm.InternalSetEnvOptions;
+begin
+  inherited InternalSetEnvOptions;
+  FConnectionsFrame.InternalSetEnvOptions;
+end;
+
+procedure TfbmTransactionMonitorForm.InternalInitConrols;
+begin
+  inherited InternalInitConrols;
+
+  FConnectionsFrame:=TfbmTransactionMonitor_ConnectionsFrame.Create(Self);
+  FConnectionsFrame.Parent:=tabConnections;
+  FConnectionsFrame.Align:=alClient;
+  PageControl1.ActivePageIndex:=0;
+  DoFillDatabaseList(TSQLEngineFireBird);
+
+  {  BarChart1.Bars.Clear;
+  BOldestActive:=BarChart1.AddBar(sFBTranOldestActive, 0, clRed);
+  BOldestTras:=BarChart1.AddBar(sFBTranOldestTran, 0, clMaroon);
+  BOldestSnapshot:=BarChart1.AddBar(sFBTranOldestSnaps, 0, clBlack);
+  BNextTran:=BarChart1.AddBar(sFBTranNextTrans, 0, clBlue);}
+
+  FConnectionsFrame.quConnections.DataBase:=UIBDataBase1;
+  FConnectionsFrame.quConnections.Transaction:=UIBTransaction1;
+
+  SpinEdit4Change(nil);
+end;
+
 procedure TfbmTransactionMonitorForm.Localize;
 begin
   inherited Localize;
+  FConnectionsFrame.Localize;
+
 
   Label1.Caption:=sDatabase;
-  TabSheet2.Caption:=sGeneral;
-  TabSheet1.Caption:=sConnections;
-  TabSheet3.Caption:=sStatistic;
+  tabGraph.Caption:=sGeneral;
+  tabConnections.Caption:=sConnections;
+  tabServerInfo.Caption:=sStatistic;
 
-  Label2.Caption:=sPageSize;
+{  Label2.Caption:=sPageSize;
   Label3.Caption:=sSQLDialect;
   Label4.Caption:=sSweepInterval;
   Label5.Caption:=sODSVersion;
@@ -245,7 +255,7 @@ begin
   Label7.Caption:=sKB;
   GroupBox1.Caption:=sBuffers;
   CheckBox1.Caption:=sForcedWrite;
-  CheckBox2.Caption:=sReadOnly;
+  CheckBox2.Caption:=sReadOnly;}
   Label11.Caption:=sRefreshInterval;
   CheckBox3.Caption:=sRefreshDataHint;
   CheckBox4.Caption:=sCommitTransactionOnRefresh;
@@ -271,6 +281,9 @@ begin
 
   RxDBGrid3.ColumnByFieldName('PARAM').Title.Caption:=sParamName;
   RxDBGrid3.ColumnByFieldName('VALUE').Title.Caption:=sParamValue;
+
+  actRefresh.Caption:=sRefresh;
+  actRefresh.Hint:=sRefreshHint;
 end;
 
 procedure TfbmTransactionMonitorForm.ConnectToDB(ASQLEngine: TSQLEngineAbstract
@@ -285,15 +298,15 @@ begin
     S:=SQLEngine.DataBaseName;
     if SQLEngine.ServerName<>'' then
       S:=SQLEngine.ServerName+':'+S;
-    UIBDataBase1.LibraryName:=TSQLEngineFireBird(SQLEngine).LibraryName;
+//    UIBDataBase1.LibraryName:=TSQLEngineFireBird(SQLEngine).LibraryName;
     UIBDataBase1.UserName:=SQLEngine.UserName;
     UIBDataBase1.PassWord:=SQLEngine.Password;
     UIBDataBase1.DatabaseName:=S;
     UIBDataBase1.Connected:=true;
 
-    UIBServerInfo1.LibraryName:=TSQLEngineFireBird(SQLEngine).LibraryName;
-    ShowUsers;
-    ShowStatInfo;
+//    UIBServerInfo1.LibraryName:=TSQLEngineFireBird(SQLEngine).LibraryName;
+//    ShowUsers;
+//    ShowStatInfo;
   finally
   end;
 end;
@@ -305,10 +318,18 @@ begin
 
   if CheckBox4.Checked then
   begin
+    FConnectionsFrame.CloseList;
     UIBTransaction1.Commit;
     UIBTransaction1.StartTransaction;
   end;
-  ShowUsers;
+
+  if PageControl1.ActivePage = tabGraph then
+  else
+  if PageControl1.ActivePage = tabConnections then
+    FConnectionsFrame.UpdateList;
+
+{
+//  ShowUsers;
 
   if rxTransInfo.RecordCount > 100 then
   begin
@@ -322,11 +343,12 @@ begin
   rxTransInfoOLD_SNAPSHOT.AsInteger:=UIBDataBase1.InfoOldestSnapshot;
   rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;*)
   rxTransInfo.Post;
+}
 end;
 
 procedure TfbmTransactionMonitorForm.ShowStatInfo;
 begin
-  if UIBDataBase1.Connected then
+{  if UIBDataBase1.Connected then
   begin
     Edit1.Text:=IntToStr(UIBDataBase1.InfoPageSize);
     Edit2.Text:=IntToStr(UIBDataBase1.InfoDbSqlDialect);
@@ -359,8 +381,9 @@ begin
     Edit4.Text:='';
     CheckBox1.Checked:=false;
     CheckBox2.Checked:=false;
-  end;
+  end;    }
 end;
 
 end.
+
 

@@ -32,7 +32,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="13"/>
       <RevisionNr Value="3"/>
-      <BuildNr Value="5786"/>
+      <BuildNr Value="5789"/>
       <Language Value="0419"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="Tools for manage you databases" LegalCopyright="Lagunov A.A." ProductVersion="0.13"/>
@@ -2000,6 +2000,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="fbmFBRecompileIndexUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="tools/fbmtransactionmonitor_connectionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fbmTransactionMonitor_ConnectionsFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fbmTransactionMonitor_ConnectionsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -2033,12 +2041,15 @@
       </Item>
       <Item>
         <Name Value="EUIBError"/>
+        <Enabled Value="False"/>
       </Item>
       <Item>
         <Name Value="Exception"/>
+        <Enabled Value="False"/>
       </Item>
       <Item>
         <Name Value="EUIBConvertError"/>
+        <Enabled Value="False"/>
       </Item>
     </Exceptions>
   </Debugging>

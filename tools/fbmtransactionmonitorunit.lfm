@@ -1,13 +1,12 @@
 inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
-  Left = 446
+  Left = 645
   Height = 826
-  Top = 151
+  Top = 202
   Width = 1236
   Caption = 'Transaction monitor'
   ClientHeight = 826
   ClientWidth = 1236
   OnClose = FormClose
-  OnCreate = FormCreate
   inherited Panel1: TPanel
     Width = 1236
     ClientWidth = 1236
@@ -20,19 +19,19 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Height = 715
     Top = 111
     Width = 1236
-    ActivePage = TabSheet1
+    ActivePage = tabGraph
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
-    object TabSheet2: TTabSheet
+    object tabGraph: TTabSheet
       Caption = 'General'
       ClientHeight = 678
       ClientWidth = 1226
       object CLabel: TLabel
-        AnchorSideLeft.Control = TabSheet2
+        AnchorSideLeft.Control = tabGraph
         AnchorSideLeft.Side = asrCenter
-        AnchorSideTop.Control = TabSheet2
+        AnchorSideTop.Control = tabGraph
         Left = 613
         Height = 1
         Top = 57
@@ -41,8 +40,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         ParentColor = False
       end
       object Chart1: TChart
-        AnchorSideLeft.Control = TabSheet2
-        AnchorSideTop.Control = TabSheet2
+        AnchorSideLeft.Control = tabGraph
+        AnchorSideTop.Control = tabGraph
         AnchorSideRight.Control = CLabel
         AnchorSideBottom.Control = Splitter2
         AnchorSideBottom.Side = asrBottom
@@ -96,8 +95,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       end
       object Chart2: TChart
         AnchorSideLeft.Control = CLabel
-        AnchorSideTop.Control = TabSheet2
-        AnchorSideRight.Control = TabSheet2
+        AnchorSideTop.Control = tabGraph
+        AnchorSideRight.Control = tabGraph
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
         Left = 619
@@ -911,212 +910,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         ResizeAnchor = akBottom
       end
     end
-    object TabSheet1: TTabSheet
+    object tabConnections: TTabSheet
       Caption = 'Atachments'
-      ClientHeight = 678
-      ClientWidth = 1226
-      object Panel4: TPanel
-        AnchorSideLeft.Control = TabSheet2
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = CLabel
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = CLabel
-        Left = 6
-        Height = 261
-        Top = 32
-        Width = 524
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        BorderSpacing.Around = 6
-        ClientHeight = 261
-        ClientWidth = 524
-        TabOrder = 0
-        object CheckBox1: TCheckBox
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = Panel4
-          Left = 1
-          Height = 27
-          Top = 1
-          Width = 134
-          Caption = 'Forced write'
-          TabOrder = 0
-        end
-        object CheckBox2: TCheckBox
-          AnchorSideLeft.Control = CheckBox1
-          AnchorSideTop.Control = CheckBox1
-          AnchorSideTop.Side = asrBottom
-          Left = 1
-          Height = 27
-          Top = 28
-          Width = 112
-          Caption = 'Read only'
-          TabOrder = 1
-        end
-        object GroupBox1: TGroupBox
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = CheckBox2
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = Panel4
-          AnchorSideRight.Side = asrBottom
-          AnchorSideBottom.Side = asrBottom
-          Left = 1
-          Height = 105
-          Top = 55
-          Width = 522
-          Anchors = [akTop, akLeft, akRight]
-          AutoSize = True
-          Caption = 'Buffers'
-          ClientHeight = 81
-          ClientWidth = 520
-          TabOrder = 2
-          object Label6: TLabel
-            AnchorSideLeft.Control = GroupBox1
-            AnchorSideTop.Control = GroupBox1
-            Left = 6
-            Height = 23
-            Top = 6
-            Width = 54
-            BorderSpacing.Around = 6
-            Caption = 'Pages'
-            FocusControl = SpinEdit2
-            ParentColor = False
-          end
-          object Label7: TLabel
-            AnchorSideLeft.Control = SpinEdit2
-            AnchorSideLeft.Side = asrBottom
-            AnchorSideTop.Control = GroupBox1
-            Left = 108
-            Height = 23
-            Top = 6
-            Width = 24
-            BorderSpacing.Around = 6
-            Caption = 'KB'
-            FocusControl = SpinEdit3
-            ParentColor = False
-          end
-          object SpinEdit2: TSpinEdit
-            AnchorSideLeft.Control = Label6
-            AnchorSideTop.Control = Label6
-            AnchorSideTop.Side = asrBottom
-            Left = 12
-            Height = 40
-            Top = 35
-            Width = 90
-            BorderSpacing.Around = 6
-            TabOrder = 0
-          end
-          object SpinEdit3: TSpinEdit
-            AnchorSideLeft.Control = Label7
-            AnchorSideTop.Control = Label6
-            AnchorSideTop.Side = asrBottom
-            Left = 114
-            Height = 40
-            Top = 35
-            Width = 90
-            BorderSpacing.Around = 6
-            TabOrder = 1
-          end
-        end
-        object Label2: TLabel
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = GroupBox1
-          AnchorSideTop.Side = asrBottom
-          AnchorSideBottom.Control = Edit1
-          AnchorSideBottom.Side = asrBottom
-          Left = 1
-          Height = 23
-          Top = 177
-          Width = 84
-          Anchors = [akLeft, akBottom]
-          Caption = 'Page size'
-          ParentColor = False
-        end
-        object Label3: TLabel
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = Label2
-          AnchorSideTop.Side = asrBottom
-          AnchorSideBottom.Control = Edit2
-          AnchorSideBottom.Side = asrBottom
-          Left = 1
-          Height = 23
-          Top = 217
-          Width = 100
-          Anchors = [akLeft, akBottom]
-          Caption = 'SQL Dialect'
-          ParentColor = False
-        end
-        object Label4: TLabel
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = Label3
-          AnchorSideTop.Side = asrBottom
-          AnchorSideBottom.Control = Edit3
-          AnchorSideBottom.Side = asrBottom
-          Left = 1
-          Height = 23
-          Top = 257
-          Width = 129
-          Anchors = [akLeft, akBottom]
-          Caption = 'Sweep interval'
-          ParentColor = False
-        end
-        object Label5: TLabel
-          AnchorSideLeft.Control = Panel4
-          AnchorSideTop.Control = Label4
-          AnchorSideTop.Side = asrBottom
-          AnchorSideBottom.Control = Edit4
-          AnchorSideBottom.Side = asrBottom
-          Left = 1
-          Height = 23
-          Top = 297
-          Width = 108
-          Anchors = [akLeft, akBottom]
-          Caption = 'ODS version'
-          ParentColor = False
-        end
-        object Edit1: TEdit
-          AnchorSideLeft.Control = Label4
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Control = GroupBox1
-          AnchorSideTop.Side = asrBottom
-          Left = 130
-          Height = 40
-          Top = 160
-          Width = 80
-          TabOrder = 3
-          Text = 'Edit1'
-        end
-        object Edit2: TEdit
-          AnchorSideTop.Control = Edit1
-          AnchorSideTop.Side = asrBottom
-          Left = 96
-          Height = 40
-          Top = 200
-          Width = 80
-          TabOrder = 4
-          Text = 'Edit2'
-        end
-        object Edit3: TEdit
-          AnchorSideTop.Control = Edit2
-          AnchorSideTop.Side = asrBottom
-          Left = 96
-          Height = 40
-          Top = 240
-          Width = 80
-          TabOrder = 5
-          Text = 'Edit3'
-        end
-        object Edit4: TEdit
-          AnchorSideTop.Control = Edit3
-          AnchorSideTop.Side = asrBottom
-          Left = 96
-          Height = 40
-          Top = 280
-          Width = 80
-          TabOrder = 6
-          Text = 'Edit4'
-        end
-      end
     end
-    object TabSheet3: TTabSheet
+    object tabServerInfo: TTabSheet
       Caption = 'Server info'
       ClientHeight = 678
       ClientWidth = 1226
@@ -1133,7 +930,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 598
+            Width = 602
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1148,7 +945,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 598
+            Width = 602
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -1309,12 +1106,12 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   object UIBDataBase1: TUIBDataBase[4]
     Params.Strings = (
       'sql_dialect=3'
-      'lc_ctype=NONE'
+      'lc_ctype=UTF8'
       'user_name=sysdba'
       'password=masterkey'
     )
     DatabaseName = '127.0.0.1/3050:employee'
-    CharacterSet = csNONE
+    CharacterSet = csUTF8
     UserName = 'sysdba'
     PassWord = 'masterkey'
     StoreInDFM = False
@@ -1328,8 +1125,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   object ImageList1: TImageList[5]
     Height = 18
     Width = 18
-    Left = 760
-    Top = 304
+    Left = 992
+    Top = 208
     Bitmap = {
       4C7A010000001200000012000000450200000000000078DABDD25B48137014C7
       F1FF431451A154181441AF1552043DA4D0431189565EE675E25CE9D69A78C935
@@ -1548,5 +1345,14 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     )
     Left = 496
     Top = 280
+  end
+  object ActionList1: TActionList[18]
+    Images = fbManagerMainForm.ImageListMain
+    Left = 216
+    Top = 184
+    object actRefresh: TAction
+      Caption = 'actRefresh'
+      ImageIndex = 10
+    end
   end
 end

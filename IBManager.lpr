@@ -131,19 +131,20 @@ uses
   mssql_sql_parser, mssql_EngineSecurityUnit, mssqlRoleEditorUnit,
   FBSQLEngineSecurityUnit, fbmFBUserMainEditorUnit, fdbmVisualOptionsUnit,
   fdbmIOConfigPageUnit, assistTypesUnit, assistMainUnit,
-  fbmCFColorMarksPageUnit, fbmFBRecompileIndexUnit;
+  fbmCFColorMarksPageUnit, fbmFBRecompileIndexUnit,
+  fbmTransactionMonitor_ConnectionsUnit;
 
 {$R IBManager.res}
 
 begin
   InitRxLogs;
 
-  Application.Scaled :=True;
+  Application.Scaled:=True;
 
   InitStdAutoCompletions;
   RegisterStdFormats;
 
-  Application.Title :='Free Database Manager';
+  Application.Title:='Free Database Manager';
   Application.Initialize;
 
   ParseCMDLine;

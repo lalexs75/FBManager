@@ -474,6 +474,12 @@ msgctxt "fbmstrconstunit.scancelquery"
 msgid "Cancel query"
 msgstr "Отменить запрос"
 
+#: fbmstrconstunit.scancelqueryhint
+#, fuzzy
+msgctxt "fbmstrconstunit.scancelqueryhint"
+msgid "Cancel query"
+msgstr "Отменить запрос"
+
 #: fbmstrconstunit.scancelqueryquestion
 msgctxt "fbmstrconstunit.scancelqueryquestion"
 msgid "Cancel a running query?"
@@ -567,6 +573,10 @@ msgstr "Путь к клиентской библиотеке"
 #: fbmstrconstunit.sclientport
 msgid "Client port"
 msgstr "Порт клиента"
+
+#: fbmstrconstunit.sclientversion
+msgid "Client version"
+msgstr ""
 
 #: fbmstrconstunit.sclipboard
 msgid "Clipboard"
@@ -1652,6 +1662,13 @@ msgid "Disable resize"
 msgstr "Запретить изменение размера"
 
 #: fbmstrconstunit.sdisconectconnection
+msgctxt "fbmstrconstunit.sdisconectconnection"
+msgid "Disconect connection"
+msgstr "Отключить клиента"
+
+#: fbmstrconstunit.sdisconectconnectionhint
+#, fuzzy
+msgctxt "fbmstrconstunit.sdisconectconnectionhint"
 msgid "Disconect connection"
 msgstr "Отключить клиента"
 
@@ -4802,6 +4819,10 @@ msgstr "Перегрузить"
 msgid "Remote address"
 msgstr "Удалённый адрес"
 
+#: fbmstrconstunit.sremotepid
+msgid "Remote PID"
+msgstr ""
+
 #: fbmstrconstunit.sremoteprocess
 msgid "Remote process"
 msgstr "Удалённый процесс"
@@ -5257,6 +5278,10 @@ msgstr "Имя сервера"
 msgid "Server OID"
 msgstr "OID сервера"
 
+#: fbmstrconstunit.sserverpid
+msgid "Server PID"
+msgstr ""
+
 #: fbmstrconstunit.sservertype
 msgid "Server type"
 msgstr "Тип сервера"
@@ -5370,6 +5395,10 @@ msgstr "Отображать правую границу"
 #: fbmstrconstunit.sshowsystemobjects
 msgid "Show system objects"
 msgstr "Отображать системные объекты"
+
+#: fbmstrconstunit.sshowsystemprocess
+msgid "Show system process"
+msgstr ""
 
 #: fbmstrconstunit.sshowttablepartitions
 msgid "Show table's partitions"

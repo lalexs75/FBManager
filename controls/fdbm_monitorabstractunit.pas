@@ -25,7 +25,7 @@ unit fdbm_monitorabstractunit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls, LMessages, fbmToolsUnit,
   StdCtrls, SQLEngineAbstractUnit;
 
 type
@@ -42,11 +42,14 @@ type
   private
     FTimeID: integer;
     FSQLEngine: TSQLEngineAbstract;
+    procedure LMEditorChangeParams(var message: TLMNoParams); message LM_EDITOR_CHANGE_PARMAS;
   protected
     procedure ConnectToDB(ASQLEngine: TSQLEngineAbstract); virtual;
     procedure Localize; virtual;
     procedure StatTimeTick; virtual;
     procedure DisableTimer;
+    procedure InternalInitConrols; virtual;
+    procedure InternalSetEnvOptions; virtual;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure DoFillDatabaseList(ASQLEngineClass: TSQLEngineAbstractClass);
@@ -107,10 +110,27 @@ begin
   MainTimer.Enabled:=false;
 end;
 
+procedure TfdbmMonitorAbstractForm.InternalInitConrols;
+begin
+  //
+end;
+
+procedure TfdbmMonitorAbstractForm.InternalSetEnvOptions;
+begin
+
+end;
+
+procedure TfdbmMonitorAbstractForm.LMEditorChangeParams(var message: TLMNoParams);
+begin
+
+end;
+
 constructor TfdbmMonitorAbstractForm.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
+  InternalInitConrols;
   Localize;
+  InternalSetEnvOptions;
 end;
 
 procedure TfdbmMonitorAbstractForm.DoFillDatabaseList(

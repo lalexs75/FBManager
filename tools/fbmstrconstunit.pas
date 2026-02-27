@@ -375,6 +375,7 @@ resourcestring
   sRemoteProcess                    = 'Remote process';
   sRemoteProtocol                   = 'Remote protocol';
   sRemoteAddress                    = 'Remote address';
+  sRemotePID                        = 'Remote PID';
   sUserRole                         = 'User role';
   sStart1                           = 'Start';
   sAttachmentDB                     = 'Attachment DB';
@@ -878,6 +879,7 @@ resourcestring
   sDBName                           = 'Data base name';
   sUserName                         = 'User name';
   sClientLib                        = 'Client lib';
+  sClientVersion                    = 'Client version';
   sRoleName                         = 'Role';
   sDialect                          = 'Dialect';
   sServerVersion                    = 'Server version';
@@ -1626,6 +1628,7 @@ resourcestring
 
   sObjectKindNotDefined             = 'ObjectKind not defined for class %s. Object : %';
 
+  sServerPID                        = 'Server PID';
   sDatabaseID                       = 'Database ID';
   sDatabaseNumBackends              = 'Database backends';
   sTransactionsCommit               = 'Transactions commit';
@@ -1670,7 +1673,10 @@ resourcestring
   sCancelQueryQuestion                         = 'Cancel a running query?';
   sTerminateQueryQuestion                      = 'Terminate a running query?';
   sCancelQuery                                 = 'Cancel query';
+  sCancelQueryHint                             = 'Cancel query';
   sDisconectConnection                         = 'Disconect connection';
+  sDisconectConnectionHint                     = 'Disconect connection';
+  sShowSystemProcess                           = 'Show system process';
 
   sTransactionPropertyForData                  = 'Transaction property for data';
   sTransactionPropertyForMetadata              = 'Transaction property for metadata';
