@@ -59,7 +59,11 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           end        
           item
             Alignment = calBottom
+            Marks.Format = '%2:s'
             Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Source = DateTimeIntervalChartSource1
+            Marks.Style = smsLegend
             Minors = <>
             Title.LabelBrush.Style = bsClear
           end>
@@ -117,7 +121,11 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           end        
           item
             Alignment = calBottom
+            Marks.Format = '%2:s'
             Marks.LabelBrush.Style = bsClear
+            Marks.OverlapPolicy = opHideNeighbour
+            Marks.Source = DateTimeIntervalChartSource1
+            Marks.Style = smsLegend
             Minors = <>
             Title.LabelBrush.Style = bsClear
           end>
@@ -132,24 +140,22 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderSpacing.Around = 6
         object Chart1LineSeries5: TLineSeries
-          Title = 'Next'
+          Title = 'All'
           LinePen.Color = clMaroon
           LinePen.Width = 2
+          Source = csActAll
         end
         object Chart1LineSeries6: TLineSeries
-          Title = 'Old active'
+          Title = 'Active'
           LinePen.Color = clGreen
           LinePen.Width = 2
+          Source = csActActive
         end
         object Chart1LineSeries7: TLineSeries
-          Title = 'Oldest'
+          Title = 'Idle'
           LinePen.Color = clNavy
           LinePen.Width = 2
-        end
-        object Chart1LineSeries8: TLineSeries
-          Title = 'Old snapshot'
-          LinePen.Color = clRed
-          LinePen.Width = 2
+          Source = csActIdle
         end
       end
       object Panel6: TPanel
@@ -623,6 +629,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'NEXT_TRANS'
+    Options = [dcsoDateTimeX]
     Left = 80
     Top = 408
   end
@@ -630,6 +637,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_ACTIVE'
+    Options = [dcsoDateTimeX]
     Left = 128
     Top = 408
   end
@@ -637,6 +645,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_ALL'
+    Options = [dcsoDateTimeX]
     Left = 176
     Top = 408
   end
@@ -644,6 +653,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_SNAPSHOT'
+    Options = [dcsoDateTimeX]
     Left = 224
     Top = 408
   end
@@ -790,7 +800,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     FieldDefs = <    
       item
         Name = 'ID'
-        DataType = ftInteger
+        DataType = ftDateTime
       end    
       item
         Name = 'NEXT_TRANS'
@@ -807,38 +817,68 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       item
         Name = 'OLD_ALL'
         DataType = ftInteger
+      end    
+      item
+        Name = 'ALL'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Active'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'Idle'
+        DataType = ftInteger
       end>
     PacketRecords = 0
     Left = 136
     Top = 296
-    object rxTransInfoID: TLongintField
-      FieldKind = fkData
-      FieldName = 'ID'
-      Index = 0
-      ProviderFlags = [pfInUpdate, pfInWhere]
-    end
     object rxTransInfoNEXT_TRANS: TLongintField
       FieldKind = fkData
       FieldName = 'NEXT_TRANS'
-      Index = 1
+      Index = 0
       ProviderFlags = [pfInUpdate, pfInWhere]
     end
     object rxTransInfoOLD_ACTIVE: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_ACTIVE'
-      Index = 2
+      Index = 1
       ProviderFlags = [pfInUpdate, pfInWhere]
     end
     object rxTransInfoOLD_SNAPSHOT: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_SNAPSHOT'
-      Index = 3
+      Index = 2
       ProviderFlags = [pfInUpdate, pfInWhere]
     end
     object rxTransInfoOLD_ALL: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_ALL'
+      Index = 3
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object rxTransInfoALL: TLongintField
+      FieldKind = fkData
+      FieldName = 'ALL'
       Index = 4
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object rxTransInfoActive: TLongintField
+      FieldKind = fkData
+      FieldName = 'Active'
+      Index = 5
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object rxTransInfoIdle: TLongintField
+      FieldKind = fkData
+      FieldName = 'Idle'
+      Index = 6
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object rxTransInfoID: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 7
       ProviderFlags = [pfInUpdate, pfInWhere]
     end
   end
@@ -931,15 +971,55 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Top = 720
   end
   object csActAll: TDbChartSource[20]
+    DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'ALL'
     Options = [dcsoDateTimeX]
-    Left = 712
-    Top = 576
+    Left = 688
+    Top = 408
   end
   object dsTransInfo: TDataSource[21]
     DataSet = rxTransInfo
     Left = 80
     Top = 296
+  end
+  object csActActive: TDbChartSource[22]
+    DataSource = dsTransInfo
+    FieldX = 'ID'
+    FieldY = 'Active'
+    Options = [dcsoDateTimeX]
+    Left = 744
+    Top = 408
+  end
+  object csActIdle: TDbChartSource[23]
+    DataSource = dsTransInfo
+    FieldX = 'ID'
+    FieldY = 'Idle'
+    Options = [dcsoDateTimeX]
+    Left = 800
+    Top = 408
+  end
+  object DateTimeIntervalChartSource1: TDateTimeIntervalChartSource[24]
+    Params.Count = 25
+    DateTimeStepFormat.SecondFormat = 'h:nn:ss'
+    Steps = [dtsSecond]
+    SuppressPrevUnit = False
+    Left = 448
+    Top = 416
+  end
+  object quReadStatInfo: TUIBQuery[25]
+    SQL.Strings = (
+      'select'
+      '  MON$ATTACHMENTS.MON$STATE as state,'
+      '  count(*) as cnt'
+      'from'
+      '  MON$ATTACHMENTS'
+      'group by'
+      '  1'
+    )
+    Transaction = UIBTransaction1
+    DataBase = UIBDataBase1
+    Left = 343
+    Top = 408
   end
 end

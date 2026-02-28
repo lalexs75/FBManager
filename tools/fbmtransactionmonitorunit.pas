@@ -27,9 +27,10 @@ interface
 uses
   Classes, SynEdit, SysUtils, LResources, Forms, Controls, Graphics, Dialogs,
   ActnList, rxtoolbar, RxIniPropStorage, rxmemds, rxdbgrid, TAGraph, TASeries,
-  TAStyles, TADbSource, fbmTransactionMonitor_ConnectionsUnit, fbcustomdataset,
-  Menus, uib, ExtCtrls, StdCtrls, LMessages, fbmToolsUnit, Buttons, ComCtrls,
-  Spin, db, SQLEngineAbstractUnit, fdbm_monitorabstractunit, fdbm_SynEditorUnit;
+  TAStyles, TADbSource, TAIntervalSources,
+  fbmTransactionMonitor_ConnectionsUnit, fbcustomdataset, Menus, uib, ExtCtrls,
+  StdCtrls, LMessages, fbmToolsUnit, Buttons, ComCtrls, Spin, db,
+  SQLEngineAbstractUnit, fdbm_monitorabstractunit, fdbm_SynEditorUnit;
 
 type
 
@@ -46,15 +47,17 @@ type
     Chart1LineSeries5: TLineSeries;
     Chart1LineSeries6: TLineSeries;
     Chart1LineSeries7: TLineSeries;
-    Chart1LineSeries8: TLineSeries;
     Chart2: TChart;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     csActAll: TDbChartSource;
+    csActActive: TDbChartSource;
+    csActIdle: TDbChartSource;
     csNEXT_TRANS: TDbChartSource;
     csOLD_ACTIVE: TDbChartSource;
     csOLD: TDbChartSource;
     csOLD_SNAPSHOT: TDbChartSource;
+    DateTimeIntervalChartSource1: TDateTimeIntervalChartSource;
     dsTransInfo: TDataSource;
     dsStatInfo: TDataSource;
     dsActiveConnections: TDataSource;
@@ -86,7 +89,10 @@ type
     rxStatInfoPARAM: TStringField;
     rxStatInfoVALUE: TStringField;
     rxTransInfo: TRxMemoryData;
-    rxTransInfoID: TLongintField;
+    rxTransInfoActive: TLongintField;
+    rxTransInfoALL: TLongintField;
+    rxTransInfoID: TDateTimeField;
+    rxTransInfoIdle: TLongintField;
     rxTransInfoNEXT_TRANS: TLongintField;
     rxTransInfoOLD_ACTIVE: TLongintField;
     rxTransInfoOLD_ALL: TLongintField;
@@ -98,6 +104,7 @@ type
     tabDashboard: TTabSheet;
     tabServerInfo: TTabSheet;
     UIBDataBase1: TUIBDataBase;
+    quReadStatInfo: TUIBQuery;
     UIBServerInfo1: TUIBServerInfo;
     UIBTransaction1: TUIBTransaction;
     procedure CheckBox3Change(Sender: TObject);
@@ -113,6 +120,7 @@ type
     procedure LoadDBStat;
     procedure DoCommitTransaction;
     procedure UpdateTransactionInfo;
+    procedure ClearInfoCharts;
   protected
     procedure InternalSetEnvOptions; override;
     procedure InternalInitConrols; override;
@@ -262,15 +270,51 @@ begin
     rxTransInfo.First;
     rxTransInfo.Delete;
   end;
-
+  rxTransInfo.DisableControls;
   rxTransInfo.Append;
-  rxTransInfoID.AsInteger:=TimeID;
+//  rxTransInfoID.AsInteger:=TimeID;
+  rxTransInfoID.AsDateTime:=Now;
   rxTransInfoNEXT_TRANS.AsInteger:=UIBDataBase1.InfoNextTransaction;
   rxTransInfoOLD_ACTIVE.AsInteger:=UIBDataBase1.InfoOldestActive;
   rxTransInfoOLD_SNAPSHOT.AsInteger:=UIBDataBase1.InfoOldestSnapshot;
   rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;
-  rxTransInfo.Post;
 
+  quReadStatInfo.Open;
+  while not quReadStatInfo.Fields.Eof do
+  begin
+    if quReadStatInfo.Fields.ByNameAsInteger['state'] = 0 then
+      rxTransInfoIdle.AsInteger:=quReadStatInfo.Fields.ByNameAsInteger['cnt']
+    else
+    if quReadStatInfo.Fields.ByNameAsInteger['state'] = 1 then
+      rxTransInfoActive.AsInteger:=quReadStatInfo.Fields.ByNameAsInteger['cnt']
+    else
+      ;
+    quReadStatInfo.Next;
+  end;
+  quReadStatInfo.Close;
+
+  rxTransInfoALL.AsInteger:=rxTransInfoIdle.AsInteger + rxTransInfoActive.AsInteger;
+
+  rxTransInfo.Post;
+  rxTransInfo.EnableControls;
+end;
+
+procedure TfbmTransactionMonitorForm.ClearInfoCharts;
+var
+  i: Integer;
+  D: TDateTime;
+begin
+
+  rxTransInfo.Active:=false;
+  rxTransInfo.Open;
+  D:=Now - 1 / SecsPerDay * 100;
+  for i:=0 to 99 do
+  begin
+    rxTransInfo.Append;
+    rxTransInfoID.AsDateTime:=D ;
+    D:=D + 1 / SecsPerDay;
+    rxTransInfo.Post;
+  end;
 end;
 
 procedure TfbmTransactionMonitorForm.InternalSetEnvOptions;
@@ -286,6 +330,7 @@ end;
 procedure TfbmTransactionMonitorForm.InternalInitConrols;
 begin
   inherited InternalInitConrols;
+  ClearInfoCharts;
   FActiveQueryText:=Tfdbm_SynEditorFrame.Create(Self);
   FActiveQueryText.Parent:=Panel6;
   FActiveQueryText.Align:=alRight;
@@ -349,10 +394,9 @@ begin
   Chart1LineSeries3.Title:=sOldest;
   Chart1LineSeries4.Title:=sOldSnapshot;
 
-  Chart1LineSeries5.Title:=sNext;
-  Chart1LineSeries6.Title:=sOldActive;
-  Chart1LineSeries7.Title:=sOldest;
-  Chart1LineSeries8.Title:=sOldSnapshot;
+  Chart1LineSeries5.Title:=sTotal;
+  Chart1LineSeries6.Title:=sActive;
+  Chart1LineSeries7.Title:=sIdle;
 
   RxDBGrid3.ColumnByFieldName('PARAM').Title.Caption:=sParamName;
   RxDBGrid3.ColumnByFieldName('VALUE').Title.Caption:=sParamValue;
@@ -368,6 +412,7 @@ var
 begin
   inherited ConnectToDB(ASQLEngine);
   UIBDataBase1.Connected:=false;
+  ClearInfoCharts;
   rxTransInfo.CloseOpen;
   try
     S:=SQLEngine.DataBaseName;
