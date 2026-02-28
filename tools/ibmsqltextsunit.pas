@@ -345,6 +345,11 @@ const
 
 
   sfbsqlRecompileIndexStat = 'set statistics index "%s"';
+
+  sfbsqlCancelQuery = 'delete from MON$STATEMENTS where MON$STATEMENTS.MON$STATEMENT_ID = %d';
+
+  sfbsqlDisconectAttch = 'delete from MON$ATTACHMENTS where MON$ATTACHMENTS.MON$ATTACHMENT_ID = %d';
+
 implementation
 
 end.

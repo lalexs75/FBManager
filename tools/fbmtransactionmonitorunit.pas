@@ -95,6 +95,7 @@ type
     FConnectionsFrame:TfbmTransactionMonitor_ConnectionsFrame;
     procedure ShowUsers;
     procedure LoadDBStat;
+    procedure DoCommitTransaction;
   protected
     procedure InternalSetEnvOptions; override;
     procedure InternalInitConrols; override;
@@ -208,6 +209,16 @@ begin
   rxStatInfo.First;
 end;
 
+procedure TfbmTransactionMonitorForm.DoCommitTransaction;
+begin
+  if CheckBox4.Checked then
+  begin
+    FConnectionsFrame.CloseList;
+    UIBTransaction1.Commit;
+    UIBTransaction1.StartTransaction;
+  end;
+end;
+
 procedure TfbmTransactionMonitorForm.InternalSetEnvOptions;
 begin
   inherited InternalSetEnvOptions;
@@ -221,6 +232,7 @@ begin
   FConnectionsFrame:=TfbmTransactionMonitor_ConnectionsFrame.Create(Self);
   FConnectionsFrame.Parent:=tabConnections;
   FConnectionsFrame.Align:=alClient;
+  FConnectionsFrame.SetDataBase(UIBDataBase1);
   PageControl1.ActivePageIndex:=0;
   DoFillDatabaseList(TSQLEngineFireBird);
 
@@ -307,6 +319,7 @@ begin
 //    UIBServerInfo1.LibraryName:=TSQLEngineFireBird(SQLEngine).LibraryName;
 //    ShowUsers;
 //    ShowStatInfo;
+    StatTimeTick;
   finally
   end;
 end;
@@ -316,17 +329,20 @@ begin
   inherited StatTimeTick;
   if not UIBDataBase1.Connected then exit;
 
-  if CheckBox4.Checked then
-  begin
-    FConnectionsFrame.CloseList;
-    UIBTransaction1.Commit;
-    UIBTransaction1.StartTransaction;
-  end;
-
   if PageControl1.ActivePage = tabGraph then
+    DoCommitTransaction
   else
   if PageControl1.ActivePage = tabConnections then
-    FConnectionsFrame.UpdateList;
+  begin
+    if not FConnectionsFrame.PopupMenuActive then
+    begin
+      DoCommitTransaction;
+      FConnectionsFrame.UpdateList;
+    end;
+  end
+  else
+    DoCommitTransaction;
+  ;
 
 {
 //  ShowUsers;
