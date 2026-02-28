@@ -25,11 +25,11 @@ unit fbmTransactionMonitorUnit;
 interface
 
 uses
-  Classes, SynEdit, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ActnList,
-  rxtoolbar, rxmemds, rxdbgrid, TAGraph, TASeries, TAStyles, TADbSource, fbmTransactionMonitor_ConnectionsUnit,
-  fbcustomdataset, Menus, uib, ExtCtrls, StdCtrls, LMessages, fbmToolsUnit,
-  Buttons, ComCtrls, Spin, db, SQLEngineAbstractUnit,
-  fdbm_monitorabstractunit;
+  Classes, SynEdit, SysUtils, LResources, Forms, Controls, Graphics, Dialogs,
+  ActnList, rxtoolbar, RxIniPropStorage, rxmemds, rxdbgrid, TAGraph, TASeries,
+  TAStyles, TADbSource, fbmTransactionMonitor_ConnectionsUnit, fbcustomdataset,
+  Menus, uib, ExtCtrls, StdCtrls, LMessages, fbmToolsUnit, Buttons, ComCtrls,
+  Spin, db, SQLEngineAbstractUnit, fdbm_monitorabstractunit, fdbm_SynEditorUnit;
 
 type
 
@@ -50,23 +50,36 @@ type
     Chart2: TChart;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
-    CheckBox5 : TCheckBox;
     csNEXT_TRANS: TDbChartSource;
     csOLD_ACTIVE: TDbChartSource;
     csOLD: TDbChartSource;
     csOLD_SNAPSHOT: TDbChartSource;
     dsStatInfo: TDataSource;
-    dsUsers: TDataSource;
+    dsActiveConnections: TDataSource;
+    quActiveConnectionsATTACHMENT_ID: TFBLargeintField;
+    quActiveConnectionsATTACHMENT_NAME: TFBAnsiField;
+    quActiveConnectionsATTACHMENT_REMOTE_ADDRESS: TFBAnsiField;
+    quActiveConnectionsATTACHMENT_REMOTE_PROCESS: TFBAnsiField;
+    quActiveConnectionsATTACHMENT_REMOTE_PROTOCOL: TFBAnsiField;
+    quActiveConnectionsATTACHMENT_ROLE: TFBAnsiField;
+    quActiveConnectionsATTACHMENT_USER: TFBAnsiField;
+    quActiveConnectionsATTACH_START_TIME: TDateTimeField;
+    quActiveConnectionsCHARACTER_SET_NAME: TFBAnsiField;
+    quActiveConnectionsSTATE: TSmallintField;
+    quActiveConnectionsSTATEMENT_ID: TFBLargeintField;
+    quActiveConnectionsSTATEMENT_SQL_TEXT: TFBAnsiMemoField;
+    quActiveConnectionsSTATEMENT_START_TIME: TDateTimeField;
     quStatInfo: TFBDataSet;
     Label11: TLabel;
     Panel5: TPanel;
     Panel6 : TPanel;
-    quUsers: TFBDataSet;
+    quActiveConnections: TFBDataSet;
     ImageList1: TImageList;
     CLabel: TLabel;
     PageControl1: TPageControl;
     RxDBGrid1: TRxDBGrid;
     RxDBGrid3: TRxDBGrid;
+    RxIniPropStorage1: TRxIniPropStorage;
     rxStatInfo: TRxMemoryData;
     rxStatInfoPARAM: TStringField;
     rxStatInfoVALUE: TStringField;
@@ -79,7 +92,6 @@ type
     SpinEdit4: TSpinEdit;
     Splitter1 : TSplitter;
     Splitter2 : TSplitter;
-    SynEdit1 : TSynEdit;
     tabConnections: TTabSheet;
     tabGraph: TTabSheet;
     tabServerInfo: TTabSheet;
@@ -89,11 +101,13 @@ type
     procedure CheckBox3Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure PageControl1Change(Sender: TObject);
+    procedure quActiveConnectionsAfterScroll(DataSet: TDataSet);
     procedure SpinEdit4Change(Sender: TObject);
     procedure UIBDataBase1AfterConnect(Sender: TObject);
   private
+    FActiveQueryText:Tfdbm_SynEditorFrame;
     FConnectionsFrame:TfbmTransactionMonitor_ConnectionsFrame;
-    procedure ShowUsers;
+    procedure ShowActiveConnections;
     procedure LoadDBStat;
     procedure DoCommitTransaction;
   protected
@@ -144,6 +158,19 @@ begin
     LoadDBStat;
 end;
 
+procedure TfbmTransactionMonitorForm.quActiveConnectionsAfterScroll(DataSet: TDataSet);
+begin
+  if quActiveConnections.Active and (quActiveConnections.RecordCount>0) then
+  begin
+    if not quActiveConnectionsSTATEMENT_SQL_TEXT.IsNull then
+      FActiveQueryText.EditorText:=quActiveConnectionsSTATEMENT_SQL_TEXT.AsString
+    else
+      FActiveQueryText.EditorText:='';
+  end
+  else
+    FActiveQueryText.EditorText:='';
+end;
+
 procedure TfbmTransactionMonitorForm.SpinEdit4Change(Sender: TObject);
 begin
   MainTimer.Enabled:=false;
@@ -156,10 +183,10 @@ begin
   UIBTransaction1.StartTransaction;
 end;
 
-procedure TfbmTransactionMonitorForm.ShowUsers;
+procedure TfbmTransactionMonitorForm.ShowActiveConnections;
 begin
-//  quUsers.CloseOpen(true);
-  FConnectionsFrame.UpdateList;
+  quActiveConnections.Close;
+  quActiveConnections.Open;
 end;
 
 procedure TfbmTransactionMonitorForm.LoadDBStat;
@@ -223,11 +250,19 @@ procedure TfbmTransactionMonitorForm.InternalSetEnvOptions;
 begin
   inherited InternalSetEnvOptions;
   FConnectionsFrame.InternalSetEnvOptions;
+
+  FActiveQueryText.ChangeVisualParams;
+  SetRxDBGridOptions(RxDBGrid1);
+
 end;
 
 procedure TfbmTransactionMonitorForm.InternalInitConrols;
 begin
   inherited InternalInitConrols;
+  FActiveQueryText:=Tfdbm_SynEditorFrame.Create(Self);
+  FActiveQueryText.Parent:=Panel6;
+  FActiveQueryText.Align:=alRight;
+  Splitter1.Left:=FActiveQueryText.Left - Splitter1.Width;
 
   FConnectionsFrame:=TfbmTransactionMonitor_ConnectionsFrame.Create(Self);
   FConnectionsFrame.Parent:=tabConnections;
@@ -236,15 +271,14 @@ begin
   PageControl1.ActivePageIndex:=0;
   DoFillDatabaseList(TSQLEngineFireBird);
 
-  {  BarChart1.Bars.Clear;
+{
+  //prepare charts
+  BarChart1.Bars.Clear;
   BOldestActive:=BarChart1.AddBar(sFBTranOldestActive, 0, clRed);
   BOldestTras:=BarChart1.AddBar(sFBTranOldestTran, 0, clMaroon);
   BOldestSnapshot:=BarChart1.AddBar(sFBTranOldestSnaps, 0, clBlack);
-  BNextTran:=BarChart1.AddBar(sFBTranNextTrans, 0, clBlue);}
-
-  FConnectionsFrame.quConnections.DataBase:=UIBDataBase1;
-  FConnectionsFrame.quConnections.Transaction:=UIBTransaction1;
-
+  BNextTran:=BarChart1.AddBar(sFBTranNextTrans, 0, clBlue);
+}
   SpinEdit4Change(nil);
 end;
 
@@ -272,14 +306,15 @@ begin
   CheckBox3.Caption:=sRefreshDataHint;
   CheckBox4.Caption:=sCommitTransactionOnRefresh;
 
-  RxDBGrid1.ColumnByFieldName('MON$ATTACHMENT_ID').Title.Caption:=sAttachmentID;
-  RxDBGrid1.ColumnByFieldName('MON$ATTACHMENT_NAME').Title.Caption:=sAttachmentDB;
-  RxDBGrid1.ColumnByFieldName('MON$TIMESTAMP').Title.Caption:=sStart1;
-  RxDBGrid1.ColumnByFieldName('MON$USER').Title.Caption:=sUserName1;
-  RxDBGrid1.ColumnByFieldName('MON$ROLE').Title.Caption:=sUserRole;
-  RxDBGrid1.ColumnByFieldName('MON$REMOTE_ADDRESS').Title.Caption:=sRemoteAddress;
-  RxDBGrid1.ColumnByFieldName('MON$REMOTE_PROTOCOL').Title.Caption:=sRemoteProtocol;
-  RxDBGrid1.ColumnByFieldName('MON$REMOTE_PROCESS').Title.Caption:=sRemoteProcess;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_ID').Title.Caption:=sAttachmentID;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_NAME').Title.Caption:=sAttachmentDB;
+  RxDBGrid1.ColumnByFieldName('ATTACH_START_TIME').Title.Caption:=sStart1;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_USER').Title.Caption:=sUserName1;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_ROLE').Title.Caption:=sUserRole;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_REMOTE_ADDRESS').Title.Caption:=sRemoteAddress;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_REMOTE_PROTOCOL').Title.Caption:=sRemoteProtocol;
+  RxDBGrid1.ColumnByFieldName('ATTACHMENT_REMOTE_PROCESS').Title.Caption:=sRemoteProcess;
+
 
   Chart1LineSeries1.Title:=sNext;
   Chart1LineSeries2.Title:=sOldActive;
@@ -330,7 +365,10 @@ begin
   if not UIBDataBase1.Connected then exit;
 
   if PageControl1.ActivePage = tabGraph then
-    DoCommitTransaction
+  begin
+    DoCommitTransaction;
+    ShowActiveConnections;
+  end
   else
   if PageControl1.ActivePage = tabConnections then
   begin

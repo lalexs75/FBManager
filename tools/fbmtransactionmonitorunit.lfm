@@ -1,11 +1,12 @@
 inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   Left = 645
   Height = 826
-  Top = 202
+  Top = 293
   Width = 1236
   Caption = 'Transaction monitor'
   ClientHeight = 826
   ClientWidth = 1236
+  SessionProperties = 'Panel6.Height'
   OnClose = FormClose
   inherited Panel1: TPanel
     Width = 1236
@@ -156,524 +157,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         ClientHeight = 202
         ClientWidth = 1226
         TabOrder = 2
-        inline SynEdit1: TSynEdit
-          Left = 1025
-          Height = 200
-          Top = 1
-          Width = 200
-          Align = alRight
-          Font.Height = 13
-          Font.Name = 'DejaVu Sans Mono'
-          Font.Pitch = fpFixed
-          Font.Quality = fqNonAntialiased
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          TabOrder = 0
-          Gutter.Width = 68
-          Gutter.MouseActions = <>
-          RightGutter.Width = 0
-          RightGutter.MouseActions = <>
-          Keystrokes = <          
-            item
-              Command = ecUp
-              ShortCut = 38
-            end          
-            item
-              Command = ecSelUp
-              ShortCut = 8230
-            end          
-            item
-              Command = ecScrollUp
-              ShortCut = 16422
-            end          
-            item
-              Command = ecDown
-              ShortCut = 40
-            end          
-            item
-              Command = ecSelDown
-              ShortCut = 8232
-            end          
-            item
-              Command = ecScrollDown
-              ShortCut = 16424
-            end          
-            item
-              Command = ecLeft
-              ShortCut = 37
-            end          
-            item
-              Command = ecSelLeft
-              ShortCut = 8229
-            end          
-            item
-              Command = ecWordLeft
-              ShortCut = 16421
-            end          
-            item
-              Command = ecSelWordLeft
-              ShortCut = 24613
-            end          
-            item
-              Command = ecRight
-              ShortCut = 39
-            end          
-            item
-              Command = ecSelRight
-              ShortCut = 8231
-            end          
-            item
-              Command = ecWordRight
-              ShortCut = 16423
-            end          
-            item
-              Command = ecSelWordRight
-              ShortCut = 24615
-            end          
-            item
-              Command = ecPageDown
-              ShortCut = 34
-            end          
-            item
-              Command = ecSelPageDown
-              ShortCut = 8226
-            end          
-            item
-              Command = ecPageBottom
-              ShortCut = 16418
-            end          
-            item
-              Command = ecSelPageBottom
-              ShortCut = 24610
-            end          
-            item
-              Command = ecPageUp
-              ShortCut = 33
-            end          
-            item
-              Command = ecSelPageUp
-              ShortCut = 8225
-            end          
-            item
-              Command = ecPageTop
-              ShortCut = 16417
-            end          
-            item
-              Command = ecSelPageTop
-              ShortCut = 24609
-            end          
-            item
-              Command = ecLineStart
-              ShortCut = 36
-            end          
-            item
-              Command = ecSelLineStart
-              ShortCut = 8228
-            end          
-            item
-              Command = ecEditorTop
-              ShortCut = 16420
-            end          
-            item
-              Command = ecSelEditorTop
-              ShortCut = 24612
-            end          
-            item
-              Command = ecLineEnd
-              ShortCut = 35
-            end          
-            item
-              Command = ecSelLineEnd
-              ShortCut = 8227
-            end          
-            item
-              Command = ecEditorBottom
-              ShortCut = 16419
-            end          
-            item
-              Command = ecSelEditorBottom
-              ShortCut = 24611
-            end          
-            item
-              Command = ecToggleMode
-              ShortCut = 45
-            end          
-            item
-              Command = ecCopy
-              ShortCut = 16429
-            end          
-            item
-              Command = ecPaste
-              ShortCut = 8237
-            end          
-            item
-              Command = ecDeleteChar
-              ShortCut = 46
-            end          
-            item
-              Command = ecCut
-              ShortCut = 8238
-            end          
-            item
-              Command = ecDeleteLastChar
-              ShortCut = 8
-            end          
-            item
-              Command = ecDeleteLastChar
-              ShortCut = 8200
-            end          
-            item
-              Command = ecDeleteLastWord
-              ShortCut = 16392
-            end          
-            item
-              Command = ecUndo
-              ShortCut = 32776
-            end          
-            item
-              Command = ecRedo
-              ShortCut = 40968
-            end          
-            item
-              Command = ecLineBreak
-              ShortCut = 13
-            end          
-            item
-              Command = ecSelectAll
-              ShortCut = 16449
-            end          
-            item
-              Command = ecCopy
-              ShortCut = 16451
-            end          
-            item
-              Command = ecBlockIndent
-              ShortCut = 16457
-            end          
-            item
-              Command = ecLineBreak
-              ShortCut = 16461
-            end          
-            item
-              Command = ecInsertLine
-              ShortCut = 16462
-            end          
-            item
-              Command = ecDeleteWord
-              ShortCut = 16468
-            end          
-            item
-              Command = ecBlockUnindent
-              ShortCut = 16469
-            end          
-            item
-              Command = ecPaste
-              ShortCut = 16470
-            end          
-            item
-              Command = ecCut
-              ShortCut = 16472
-            end          
-            item
-              Command = ecDeleteLine
-              ShortCut = 16473
-            end          
-            item
-              Command = ecDeleteEOL
-              ShortCut = 24665
-            end          
-            item
-              Command = ecUndo
-              ShortCut = 16474
-            end          
-            item
-              Command = ecRedo
-              ShortCut = 24666
-            end          
-            item
-              Command = ecGotoMarker0
-              ShortCut = 16432
-            end          
-            item
-              Command = ecGotoMarker1
-              ShortCut = 16433
-            end          
-            item
-              Command = ecGotoMarker2
-              ShortCut = 16434
-            end          
-            item
-              Command = ecGotoMarker3
-              ShortCut = 16435
-            end          
-            item
-              Command = ecGotoMarker4
-              ShortCut = 16436
-            end          
-            item
-              Command = ecGotoMarker5
-              ShortCut = 16437
-            end          
-            item
-              Command = ecGotoMarker6
-              ShortCut = 16438
-            end          
-            item
-              Command = ecGotoMarker7
-              ShortCut = 16439
-            end          
-            item
-              Command = ecGotoMarker8
-              ShortCut = 16440
-            end          
-            item
-              Command = ecGotoMarker9
-              ShortCut = 16441
-            end          
-            item
-              Command = ecSetMarker0
-              ShortCut = 24624
-            end          
-            item
-              Command = ecSetMarker1
-              ShortCut = 24625
-            end          
-            item
-              Command = ecSetMarker2
-              ShortCut = 24626
-            end          
-            item
-              Command = ecSetMarker3
-              ShortCut = 24627
-            end          
-            item
-              Command = ecSetMarker4
-              ShortCut = 24628
-            end          
-            item
-              Command = ecSetMarker5
-              ShortCut = 24629
-            end          
-            item
-              Command = ecSetMarker6
-              ShortCut = 24630
-            end          
-            item
-              Command = ecSetMarker7
-              ShortCut = 24631
-            end          
-            item
-              Command = ecSetMarker8
-              ShortCut = 24632
-            end          
-            item
-              Command = ecSetMarker9
-              ShortCut = 24633
-            end          
-            item
-              Command = EcFoldLevel1
-              ShortCut = 41009
-            end          
-            item
-              Command = EcFoldLevel2
-              ShortCut = 41010
-            end          
-            item
-              Command = EcFoldLevel3
-              ShortCut = 41011
-            end          
-            item
-              Command = EcFoldLevel4
-              ShortCut = 41012
-            end          
-            item
-              Command = EcFoldLevel5
-              ShortCut = 41013
-            end          
-            item
-              Command = EcFoldLevel6
-              ShortCut = 41014
-            end          
-            item
-              Command = EcFoldLevel7
-              ShortCut = 41015
-            end          
-            item
-              Command = EcFoldLevel8
-              ShortCut = 41016
-            end          
-            item
-              Command = EcFoldLevel9
-              ShortCut = 41017
-            end          
-            item
-              Command = EcFoldLevel0
-              ShortCut = 41008
-            end          
-            item
-              Command = EcFoldCurrent
-              ShortCut = 41005
-            end          
-            item
-              Command = EcUnFoldCurrent
-              ShortCut = 41003
-            end          
-            item
-              Command = EcToggleMarkupWord
-              ShortCut = 32845
-            end          
-            item
-              Command = ecNormalSelect
-              ShortCut = 24654
-            end          
-            item
-              Command = ecColumnSelect
-              ShortCut = 24643
-            end          
-            item
-              Command = ecLineSelect
-              ShortCut = 24652
-            end          
-            item
-              Command = ecTab
-              ShortCut = 9
-            end          
-            item
-              Command = ecShiftTab
-              ShortCut = 8201
-            end          
-            item
-              Command = ecMatchBracket
-              ShortCut = 24642
-            end          
-            item
-              Command = ecColSelUp
-              ShortCut = 40998
-            end          
-            item
-              Command = ecColSelDown
-              ShortCut = 41000
-            end          
-            item
-              Command = ecColSelLeft
-              ShortCut = 40997
-            end          
-            item
-              Command = ecColSelRight
-              ShortCut = 40999
-            end          
-            item
-              Command = ecColSelPageDown
-              ShortCut = 40994
-            end          
-            item
-              Command = ecColSelPageBottom
-              ShortCut = 57378
-            end          
-            item
-              Command = ecColSelPageUp
-              ShortCut = 40993
-            end          
-            item
-              Command = ecColSelPageTop
-              ShortCut = 57377
-            end          
-            item
-              Command = ecColSelLineStart
-              ShortCut = 40996
-            end          
-            item
-              Command = ecColSelLineEnd
-              ShortCut = 40995
-            end          
-            item
-              Command = ecColSelEditorTop
-              ShortCut = 57380
-            end          
-            item
-              Command = ecColSelEditorBottom
-              ShortCut = 57379
-            end>
-          MouseActions = <>
-          MouseTextActions = <>
-          MouseSelActions = <>
-          Lines.Strings = (
-            'SynEdit1'
-          )
-          VisibleSpecialChars = [vscSpace, vscTabAtLast]
-          SelectedColor.ForePriority = 50
-          SelectedColor.BackPriority = 50
-          SelectedColor.FramePriority = 50
-          SelectedColor.BoldPriority = 50
-          SelectedColor.ItalicPriority = 50
-          SelectedColor.UnderlinePriority = 50
-          SelectedColor.StrikeOutPriority = 50
-          SelectedColor.ExtendPastEol = True
-          IncrementColor.ExtendPastEol = False
-          BracketHighlightStyle = sbhsBoth
-          BracketMatchColor.Foreground = clNone
-          BracketMatchColor.Background = clNone
-          BracketMatchColor.Style = [fsBold]
-          FoldedCodeColor.Foreground = clGray
-          FoldedCodeColor.Background = clNone
-          FoldedCodeColor.FrameColor = clGray
-          MouseLinkColor.Foreground = clBlue
-          MouseLinkColor.Background = clNone
-          LineHighlightColor.Foreground = clNone
-          LineHighlightColor.Background = clNone
-          inline SynLeftGutterPartList1: TSynGutterPartList
-            object SynGutterMarks1: TSynGutterMarks
-              Width = 30
-              MouseActions = <>
-              MaxExtraMarksColums = 0
-              Options = [sgmoDeDuplicateMarksOnOverflow]
-              MarkupInfo.Background = clBtnFace
-              MarkupInfoCurrentLine.Foreground = clNone
-              MarkupInfoCurrentLine.Background = clNone
-            end
-            object SynGutterLineNumber1: TSynGutterLineNumber
-              Width = 17
-              MouseActions = <>
-              MarkupInfo.Background = clBtnFace
-              MarkupInfoCurrentLine.Foreground = clNone
-              MarkupInfoCurrentLine.Background = clNone
-              DigitCount = 2
-              ShowOnlyLineNumbersMultiplesOf = 1
-              ZeroStart = False
-              LeadingZeros = False
-            end
-            object SynGutterChanges1: TSynGutterChanges
-              Width = 5
-              MouseActions = <>
-              ModifiedColor = 59900
-              SavedColor = clGreen
-              MarkupInfo.Foreground = clGreen
-              MarkupInfo.FrameColor = 59900
-              MarkupInfoCurrentLine.Foreground = clNone
-              MarkupInfoCurrentLine.Background = clNone
-            end
-            object SynGutterSeparator1: TSynGutterSeparator
-              Width = 3
-              MouseActions = <>
-              MarkupInfo.Foreground = clGray
-              MarkupInfo.Background = clWhite
-              MarkupInfoCurrentLine.Foreground = clNone
-              MarkupInfoCurrentLine.Background = clNone
-            end
-            object SynGutterCodeFolding1: TSynGutterCodeFolding
-              Width = 13
-              MouseActions = <>
-              MarkupInfo.Foreground = clGray
-              MarkupInfoCurrentLine.Foreground = clNone
-              MarkupInfoCurrentLine.Background = clNone
-              MouseActionsExpanded = <>
-              MouseActionsCollapsed = <>
-            end
-          end
-        end
         object Splitter1: TSplitter
-          Left = 1020
+          Left = 1220
           Height = 200
           Top = 1
           Width = 5
@@ -681,16 +166,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           ResizeAnchor = akRight
         end
         object RxDBGrid1: TRxDBGrid
-          AnchorSideLeft.Control = Panel6
-          AnchorSideTop.Control = CheckBox5
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = Splitter1
-          AnchorSideBottom.Control = Panel6
-          AnchorSideBottom.Side = asrBottom
-          Left = 7
-          Height = 161
-          Top = 34
-          Width = 1007
+          Left = 1
+          Height = 200
+          Top = 1
+          Width = 1219
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = False
           AutoSort = False
@@ -700,7 +179,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Attachment ID'
               Width = 90
-              FieldName = 'MON$ATTACHMENT_ID'
+              FieldName = 'ATTACHMENT_ID'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -715,7 +194,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Attachment DB'
               Width = 250
-              FieldName = 'MON$ATTACHMENT_NAME'
+              FieldName = 'ATTACHMENT_NAME'
               EditButtons = <>
               Filter.Font.Style = [fsItalic]
               Filter.DropDownRows = 0
@@ -731,7 +210,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Start'
               Width = 110
-              FieldName = 'MON$TIMESTAMP'
+              FieldName = 'ATTACH_START_TIME'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -746,7 +225,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'User name'
               Width = 100
-              FieldName = 'MON$USER'
+              FieldName = 'ATTACHMENT_USER'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -761,7 +240,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'User role'
               Width = 100
-              FieldName = 'MON$ROLE'
+              FieldName = 'ATTACHMENT_ROLE'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -776,7 +255,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Remote address'
               Width = 120
-              FieldName = 'MON$REMOTE_ADDRESS'
+              FieldName = 'ATTACHMENT_REMOTE_ADDRESS'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -791,7 +270,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Remote protocol'
               Width = 100
-              FieldName = 'MON$REMOTE_PROTOCOL'
+              FieldName = 'ATTACHMENT_REMOTE_PROTOCOL'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -806,7 +285,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
               Title.Orientation = toHorizontal
               Title.Caption = 'Remote process'
               Width = 200
-              FieldName = 'MON$REMOTE_PROCESS'
+              FieldName = 'ATTACHMENT_REMOTE_PROCESS'
               EditButtons = <>
               Filter.DropDownRows = 0
               Filter.EmptyValue = '(Empty)'
@@ -876,28 +355,18 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           FooterOptions.DrawFullLine = False
           SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
           SearchOptions.FromStart = False
+          PropertyStorage = RxIniPropStorage1
           OptionsRx = []
           FooterColor = clYellow
-          Anchors = [akTop, akLeft, akRight, akBottom]
-          BorderSpacing.Around = 6
+          Align = alClient
           Color = clWindow
           DrawFullLine = False
           SelectedColor = clHighlight
-          DataSource = dsUsers
+          DataSource = dsActiveConnections
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
-          TabOrder = 2
+          TabOrder = 1
           TitleStyle = tsNative
-        end
-        object CheckBox5: TCheckBox
-          AnchorSideLeft.Control = Panel6
-          AnchorSideTop.Control = Panel6
-          Left = 1
-          Height = 27
-          Top = 1
-          Width = 125
-          Caption = 'CheckBox5'
-          TabOrder = 3
         end
       end
       object Splitter2: TSplitter
@@ -1116,7 +585,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     PassWord = 'masterkey'
     StoreInDFM = False
     AfterConnect = UIBDataBase1AfterConnect
-    Connected = True
     AllowStreamedConnected = False
     DefTransactionRead = UIBTransaction1
     Left = 496
@@ -1173,7 +641,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Left = 496
     Top = 592
   end
-  object quUsers: TFBDataSet[10]
+  object quActiveConnections: TFBDataSet[10]
+    AfterOpen = quActiveConnectionsAfterScroll
+    AfterClose = quActiveConnectionsAfterScroll
+    AfterScroll = quActiveConnectionsAfterScroll
     AutoUpdateOptions.WhenGetGenID = wgNever
     AutoUpdateOptions.IncrementBy = 1
     DefaultFormats.DisplayFormatNumeric = '#,##0.0'
@@ -1189,31 +660,123 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     UpdateRecordTypes = [cusUnmodified, cusModified, cusInserted]
     SQLSelect.Strings = (
       'SELECT'
-      '  mon$attachments.MON$ATTACHMENT_ID,'
-      '  mon$attachments.MON$STATE,'
-      '  mon$attachments.MON$ATTACHMENT_NAME,'
-      '  mon$attachments.MON$USER,'
-      '  mon$attachments.MON$ROLE,'
-      '  mon$attachments.MON$REMOTE_PROTOCOL,'
-      '  mon$attachments.MON$REMOTE_ADDRESS,'
-      '  mon$attachments.MON$REMOTE_PROCESS,'
-      '  mon$attachments.MON$TIMESTAMP,'
-      '  rdb$character_sets.RDB$CHARACTER_SET_NAME,'
-      '  mon$record_stats.*,'
-      '  mon$io_stats.*'
+      '  mon$attachments.MON$ATTACHMENT_ID as ATTACHMENT_ID,'
+      '  mon$attachments.MON$STATE as STATE,'
+      '  mon$attachments.MON$ATTACHMENT_NAME as ATTACHMENT_NAME,'
+      '  MON$ATTACHMENTS.MON$USER  as ATTACHMENT_USER,'
+      '  MON$ATTACHMENTS.MON$ROLE as ATTACHMENT_ROLE,'
+      '  mon$attachments.MON$REMOTE_PROTOCOL as ATTACHMENT_REMOTE_PROTOCOL,'
+      '  mon$attachments.MON$REMOTE_ADDRESS as ATTACHMENT_REMOTE_ADDRESS,'
+      '  mon$attachments.MON$REMOTE_PROCESS as ATTACHMENT_REMOTE_PROCESS,'
+      '  MON$ATTACHMENTS.MON$TIMESTAMP as ATTACH_START_TIME,'
+      '  rdb$character_sets.RDB$CHARACTER_SET_NAME as CHARACTER_SET_NAME,'
+      ''
+      '  MON$STATEMENTS.MON$STATEMENT_ID as STATEMENT_ID,'
+      '  MON$STATEMENTS.MON$TIMESTAMP as STATEMENT_START_TIME,'
+      '  MON$STATEMENTS.MON$SQL_TEXT  as STATEMENT_SQL_TEXT'
       'from'
       '  mon$attachments'
       '  inner join rdb$character_sets on (mon$attachments.mon$character_set_id = rdb$character_sets.rdb$character_set_id)'
-      '  left join mon$record_stats on (mon$attachments.mon$stat_id = mon$record_stats.mon$stat_id)'
-      '  left join mon$io_stats on (mon$attachments.mon$stat_id = mon$io_stats.mon$stat_id)'
+      '  left join MON$STATEMENTS on'
+      '    ((MON$STATEMENTS.MON$ATTACHMENT_ID = MON$ATTACHMENTS.MON$ATTACHMENT_ID) and (MON$STATEMENTS.MON$STATE in (1)))'
+      'where'
+      '  mon$attachments.MON$STATE > 0'
       'order by'
       '  mon$attachments.MON$ATTACHMENT_ID'
     )
     Left = 256
     Top = 720
+    object quActiveConnectionsATTACHMENT_ID: TFBLargeintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_ID'
+      Index = 0
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quActiveConnectionsSTATE: TSmallintField
+      FieldKind = fkData
+      FieldName = 'STATE'
+      Index = 1
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quActiveConnectionsATTACHMENT_NAME: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_NAME'
+      Index = 2
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quActiveConnectionsATTACHMENT_USER: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_USER'
+      Index = 3
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quActiveConnectionsATTACHMENT_ROLE: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_ROLE'
+      Index = 4
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quActiveConnectionsATTACHMENT_REMOTE_PROTOCOL: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_PROTOCOL'
+      Index = 5
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 40
+    end
+    object quActiveConnectionsATTACHMENT_REMOTE_ADDRESS: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_ADDRESS'
+      Index = 6
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quActiveConnectionsATTACHMENT_REMOTE_PROCESS: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_PROCESS'
+      Index = 7
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quActiveConnectionsATTACH_START_TIME: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'ATTACH_START_TIME'
+      Index = 8
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quActiveConnectionsCHARACTER_SET_NAME: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'CHARACTER_SET_NAME'
+      Index = 9
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quActiveConnectionsSTATEMENT_ID: TFBLargeintField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_ID'
+      Index = 10
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quActiveConnectionsSTATEMENT_START_TIME: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_START_TIME'
+      Index = 11
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quActiveConnectionsSTATEMENT_SQL_TEXT: TFBAnsiMemoField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_SQL_TEXT'
+      Index = 12
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      BlobType = ftMemo
+      Size = 12
+      Transliterate = False
+    end
   end
-  object dsUsers: TDataSource[11]
-    DataSet = quUsers
+  object dsActiveConnections: TDataSource[11]
+    DataSet = quActiveConnections
     Left = 216
     Top = 720
   end
@@ -1354,5 +917,11 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       Caption = 'actRefresh'
       ImageIndex = 10
     end
+  end
+  object RxIniPropStorage1: TRxIniPropStorage[19]
+    StoredValues = <>
+    SeparateFiles = True
+    Left = 160
+    Top = 720
   end
 end
