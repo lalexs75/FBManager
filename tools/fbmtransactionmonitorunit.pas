@@ -50,10 +50,12 @@ type
     Chart2: TChart;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    csActAll: TDbChartSource;
     csNEXT_TRANS: TDbChartSource;
     csOLD_ACTIVE: TDbChartSource;
     csOLD: TDbChartSource;
     csOLD_SNAPSHOT: TDbChartSource;
+    dsTransInfo: TDataSource;
     dsStatInfo: TDataSource;
     dsActiveConnections: TDataSource;
     quActiveConnectionsATTACHMENT_ID: TFBLargeintField;
@@ -93,7 +95,7 @@ type
     Splitter1 : TSplitter;
     Splitter2 : TSplitter;
     tabConnections: TTabSheet;
-    tabGraph: TTabSheet;
+    tabDashboard: TTabSheet;
     tabServerInfo: TTabSheet;
     UIBDataBase1: TUIBDataBase;
     UIBServerInfo1: TUIBServerInfo;
@@ -110,6 +112,7 @@ type
     procedure ShowActiveConnections;
     procedure LoadDBStat;
     procedure DoCommitTransaction;
+    procedure UpdateTransactionInfo;
   protected
     procedure InternalSetEnvOptions; override;
     procedure InternalInitConrols; override;
@@ -151,6 +154,9 @@ end;
 
 procedure TfbmTransactionMonitorForm.PageControl1Change(Sender: TObject);
 begin
+  if PageControl1.ActivePage = tabDashboard then
+    ShowActiveConnections
+  else
   if PageControl1.ActivePage = tabConnections then
     FConnectionsFrame.UpdateList
   else
@@ -240,10 +246,31 @@ procedure TfbmTransactionMonitorForm.DoCommitTransaction;
 begin
   if CheckBox4.Checked then
   begin
-    FConnectionsFrame.CloseList;
+//    FConnectionsFrame.CloseList;
+//    UIBTransaction1.CommitRetaining;
     UIBTransaction1.Commit;
     UIBTransaction1.StartTransaction;
   end;
+end;
+
+procedure TfbmTransactionMonitorForm.UpdateTransactionInfo;
+begin
+  if not rxTransInfo.Active then rxTransInfo.Open;
+
+  while (rxTransInfo.RecordCount > 100) do
+  begin
+    rxTransInfo.First;
+    rxTransInfo.Delete;
+  end;
+
+  rxTransInfo.Append;
+  rxTransInfoID.AsInteger:=TimeID;
+  rxTransInfoNEXT_TRANS.AsInteger:=UIBDataBase1.InfoNextTransaction;
+  rxTransInfoOLD_ACTIVE.AsInteger:=UIBDataBase1.InfoOldestActive;
+  rxTransInfoOLD_SNAPSHOT.AsInteger:=UIBDataBase1.InfoOldestSnapshot;
+  rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;
+  rxTransInfo.Post;
+
 end;
 
 procedure TfbmTransactionMonitorForm.InternalSetEnvOptions;
@@ -267,7 +294,8 @@ begin
   FConnectionsFrame:=TfbmTransactionMonitor_ConnectionsFrame.Create(Self);
   FConnectionsFrame.Parent:=tabConnections;
   FConnectionsFrame.Align:=alClient;
-  FConnectionsFrame.SetDataBase(UIBDataBase1);
+  FConnectionsFrame.SetDataBase(UIBDataBase1, UIBTransaction1);
+  FConnectionsFrame.RxDBGrid1.PropertyStorage:=RxIniPropStorage1;
   PageControl1.ActivePageIndex:=0;
   DoFillDatabaseList(TSQLEngineFireBird);
 
@@ -289,7 +317,7 @@ begin
 
 
   Label1.Caption:=sDatabase;
-  tabGraph.Caption:=sGeneral;
+  tabDashboard.Caption:=sDashboard;
   tabConnections.Caption:=sConnections;
   tabServerInfo.Caption:=sStatistic;
 
@@ -364,7 +392,11 @@ begin
   inherited StatTimeTick;
   if not UIBDataBase1.Connected then exit;
 
-  if PageControl1.ActivePage = tabGraph then
+  quActiveConnections.Close;
+  if not FConnectionsFrame.PopupMenuActive then
+    FConnectionsFrame.CloseList;
+
+  if PageControl1.ActivePage = tabDashboard then
   begin
     DoCommitTransaction;
     ShowActiveConnections;
@@ -382,22 +414,7 @@ begin
     DoCommitTransaction;
   ;
 
-{
-//  ShowUsers;
-
-  if rxTransInfo.RecordCount > 100 then
-  begin
-    rxTransInfo.First;
-    rxTransInfo.Delete;
-  end;
-  rxTransInfo.Append;
-  rxTransInfoID.AsInteger:=TimeID;
-(*  rxTransInfoNEXT_TRANS.AsInteger:=UIBDataBase1.InfoNextTransaction;
-  rxTransInfoOLD_ACTIVE.AsInteger:=UIBDataBase1.InfoOldestActive;
-  rxTransInfoOLD_SNAPSHOT.AsInteger:=UIBDataBase1.InfoOldestSnapshot;
-  rxTransInfoOLD_ALL.AsInteger:=UIBDataBase1.InfoOldestTransaction;*)
-  rxTransInfo.Post;
-}
+  UpdateTransactionInfo;
 end;
 
 procedure TfbmTransactionMonitorForm.ShowStatInfo;

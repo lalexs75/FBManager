@@ -20,19 +20,19 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Height = 715
     Top = 111
     Width = 1236
-    ActivePage = tabGraph
+    ActivePage = tabDashboard
     Align = alClient
     TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
-    object tabGraph: TTabSheet
-      Caption = 'General'
+    object tabDashboard: TTabSheet
+      Caption = 'Dashboard'
       ClientHeight = 678
       ClientWidth = 1226
       object CLabel: TLabel
-        AnchorSideLeft.Control = tabGraph
+        AnchorSideLeft.Control = tabDashboard
         AnchorSideLeft.Side = asrCenter
-        AnchorSideTop.Control = tabGraph
+        AnchorSideTop.Control = tabDashboard
         Left = 613
         Height = 1
         Top = 57
@@ -41,8 +41,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         ParentColor = False
       end
       object Chart1: TChart
-        AnchorSideLeft.Control = tabGraph
-        AnchorSideTop.Control = tabGraph
+        AnchorSideLeft.Control = tabDashboard
+        AnchorSideTop.Control = tabDashboard
         AnchorSideRight.Control = CLabel
         AnchorSideBottom.Control = Splitter2
         AnchorSideBottom.Side = asrBottom
@@ -77,27 +77,31 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Title = 'Next'
           LinePen.Color = clMaroon
           LinePen.Width = 2
+          Source = csNEXT_TRANS
         end
         object Chart1LineSeries2: TLineSeries
           Title = 'Old active'
           LinePen.Color = clGreen
           LinePen.Width = 2
+          Source = csOLD_ACTIVE
         end
         object Chart1LineSeries3: TLineSeries
           Title = 'Oldest'
           LinePen.Color = clNavy
           LinePen.Width = 2
+          Source = csOLD
         end
         object Chart1LineSeries4: TLineSeries
           Title = 'Old snapshot'
           LinePen.Color = clRed
           LinePen.Width = 2
+          Source = csOLD_SNAPSHOT
         end
       end
       object Chart2: TChart
         AnchorSideLeft.Control = CLabel
-        AnchorSideTop.Control = tabGraph
-        AnchorSideRight.Control = tabGraph
+        AnchorSideTop.Control = tabDashboard
+        AnchorSideRight.Control = tabDashboard
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
         Left = 619
@@ -563,8 +567,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       Width = 289
       BorderSpacing.Left = 6
       Caption = 'Commit transaction on refresh'
-      Checked = True
-      State = cbChecked
       TabOrder = 2
     end
   end
@@ -618,28 +620,32 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     }
   end
   object csNEXT_TRANS: TDbChartSource[6]
+    DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'NEXT_TRANS'
-    Left = 408
-    Top = 592
+    Left = 80
+    Top = 408
   end
   object csOLD_ACTIVE: TDbChartSource[7]
+    DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_ACTIVE'
-    Left = 436
-    Top = 592
+    Left = 128
+    Top = 408
   end
   object csOLD: TDbChartSource[8]
+    DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_ALL'
-    Left = 464
-    Top = 592
+    Left = 176
+    Top = 408
   end
   object csOLD_SNAPSHOT: TDbChartSource[9]
+    DataSource = dsTransInfo
     FieldX = 'ID'
     FieldY = 'OLD_SNAPSHOT'
-    Left = 496
-    Top = 592
+    Left = 224
+    Top = 408
   end
   object quActiveConnections: TFBDataSet[10]
     AfterOpen = quActiveConnectionsAfterScroll
@@ -838,7 +844,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   end
   object UIBTransaction1: TUIBTransaction[13]
     DataBase = UIBDataBase1
-    Options = [tpNowait, tpRead, tpReadCommitted, tpRecVersion]
+    Options = [tpNowait, tpReadCommitted, tpRecVersion]
     Left = 536
     Top = 104
   end
@@ -923,5 +929,17 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     SeparateFiles = True
     Left = 160
     Top = 720
+  end
+  object csActAll: TDbChartSource[20]
+    FieldX = 'ID'
+    FieldY = 'ALL'
+    Options = [dcsoDateTimeX]
+    Left = 712
+    Top = 576
+  end
+  object dsTransInfo: TDataSource[21]
+    DataSet = rxTransInfo
+    Left = 80
+    Top = 296
   end
 end
