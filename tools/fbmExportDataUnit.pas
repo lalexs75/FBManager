@@ -130,8 +130,8 @@ begin
   MemDataset1.CreateTable;
   MemDataset1.Open;
   
-  EditFormatDate.Text:=ShortDateFormat;
-  EditFormatDateTime.Text:=ShortDateFormat + ' '+ShortTimeFormat;
+  EditFormatDate.Text:=DefaultFormatSettings.ShortDateFormat;
+  EditFormatDateTime.Text:=DefaultFormatSettings.ShortDateFormat + ' '+DefaultFormatSettings.ShortTimeFormat;
 end;
 
 procedure TfbmExportDataForm.LoadStru(DataSet:TDataSet);

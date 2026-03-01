@@ -26,8 +26,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList, DB,
-  rxdbgrid, RxDBGridExportPdf, RxDBGridExportSpreadSheet, RxDBGridPrintGrid,
-  fdmAbstractEditorUnit, SQLEngineAbstractUnit, IniFiles;
+  rxdbgrid, RxDBGridExportPdf, rxmemds, RxDBGridExportSpreadSheet,
+  RxDBGridPrintGrid, fdmAbstractEditorUnit, SQLEngineAbstractUnit, IniFiles;
 
 type
 
@@ -46,6 +46,9 @@ type
     RxDBGridExportPDF1: TRxDBGridExportPDF;
     RxDBGridExportSpreadSheet1: TRxDBGridExportSpreadSheet;
     RxDBGridPrint1: TRxDBGridPrint;
+    rxStat: TRxMemoryData;
+    rxStatCaption: TStringField;
+    rxStatValue: TStringField;
     procedure actPrintExecute(Sender: TObject);
     procedure actRefreshExecute(Sender: TObject);
   private
@@ -87,7 +90,11 @@ end;
 
 procedure TfbmTableStatisticFrame.RefreshData;
 begin
+  rxStat.CloseOpen;
   TDBTableObject(DBObject).Statistic.Refresh;
+
+  if DBObject.Statistic.StatData.Active and (DBObject.Statistic.StatData.RecordCount>0) then
+    rxStat.LoadFromDataSet(DBObject.Statistic.StatData, -1, lmAppend);
 end;
 
 function TfbmTableStatisticFrame.PageName: string;
@@ -98,9 +105,7 @@ end;
 procedure TfbmTableStatisticFrame.Activate;
 begin
   inherited Activate;
-  dsStat.DataSet:=TDBTableObject(DBObject).Statistic.StatData;
-  if dsStat.DataSet.RecordCount = 0 then
-    TDBTableObject(DBObject).Statistic.Refresh;
+  RefreshData;
 end;
 
 function TfbmTableStatisticFrame.DoMetod(PageAction: TEditorPageAction

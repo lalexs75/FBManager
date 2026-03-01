@@ -16,7 +16,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Caption'
-        Width = 204
+        Width = 203
         FieldName = 'Caption'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -31,7 +31,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
         Title.Alignment = taCenter
         Title.Orientation = toHorizontal
         Title.Caption = 'Value'
-        Width = 204
+        Width = 202
         FieldName = 'Value'
         EditButtons = <>
         Filter.DropDownRows = 0
@@ -106,9 +106,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     AutoFillColumns = True
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsStat
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     PopupMenu = PopupMenu1
@@ -117,6 +115,7 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     TitleStyle = tsNative
   end
   object dsStat: TDataSource[1]
+    DataSet = rxStat
     Left = 112
     Top = 50
   end
@@ -177,5 +176,35 @@ inherited fbmTableStatisticFrame: TfbmTableStatisticFrame
     OpenAfterExport = True
     Left = 192
     Top = 184
+  end
+  object rxStat: TRxMemoryData[7]
+    FieldDefs = <    
+      item
+        Name = 'Caption'
+        DataType = ftString
+        Size = 500
+      end    
+      item
+        Name = 'Value'
+        DataType = ftString
+        Size = 500
+      end>
+    PacketRecords = 0
+    Left = 163
+    Top = 50
+    object rxStatCaption: TStringField
+      FieldKind = fkData
+      FieldName = 'Caption'
+      Index = 0
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 500
+    end
+    object rxStatValue: TStringField
+      FieldKind = fkData
+      FieldName = 'Value'
+      Index = 1
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 500
+    end
   end
 end

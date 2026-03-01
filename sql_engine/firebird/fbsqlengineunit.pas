@@ -299,7 +299,7 @@ type
     FTransaction:TUIBTransaction;
     FTriggerList:TTriggersLists;
     procedure DSUpdateRecord(ADataSet: TDataSet; AUpdateKind: DB.TUpdateKind; var AUpdateAction: fbmisc.TUpdateAction);
-    function InternalTableStatistic(ARec:TTableStatisticRecord):Boolean;
+    function InternalTableStatistic(var ARec:TTableStatisticRecord):Boolean;
   protected
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
     function InternalGetDDLCreate: string; override;
@@ -2168,7 +2168,7 @@ begin
   end;
 end;
 
-function TFireBirdTable.InternalTableStatistic(ARec : TTableStatisticRecord) : Boolean;
+function TFireBirdTable.InternalTableStatistic(var ARec : TTableStatisticRecord) : Boolean;
 var
   Q : TUIBQuery;
 begin
@@ -2178,8 +2178,10 @@ begin
   Q.Open;
   if Q.Fields.RecordCount>0 then
   begin
-    Statistic.AddValue(sChangeCount, IntToStr(256 - Q.Fields.ByNameAsInteger['RDB$FORMAT']));
-    Statistic.AddValue(sRecordCount, IntToStr(Q.Fields.ByNameAsInt64['RECORD_COUNT']));
+    ARec.RecordCount:=Q.Fields.ByNameAsInt64['RECORD_COUNT'];
+    ARec.sFormat:=IntToStr(256 - Q.Fields.ByNameAsInteger['RDB$FORMAT']);
+{    Statistic.AddValue(sChangeCount, );
+    Statistic.AddValue(sRecordCount, );}
     Result:=true;
   end;
   Q.Close;
@@ -2373,7 +2375,8 @@ begin
   if InternalTableStatistic(Rec) then
   begin
     Statistic.AddValue(sChangeCount, Rec.sFormat);
-    Statistic.AddValue(sRecordCount, IntToStr(Rec.RecordCount));
+    //Statistic.AddValue(sRecordCount, IntToStr(Rec.RecordCount));
+    Statistic.AddValue(sRecordCount, FormatFloat('#,##0', Rec.RecordCount));
   end;
 end;
 
@@ -2923,7 +2926,8 @@ begin
   if InternalTableStatistic(Rec) then
   begin
     List.Add(sVersion, Rec.sFormat);
-    List.Add(sRecordCount, IntToStr(Rec.RecordCount));
+    List.Add(sRecordCount, FormatFloat('#,##0', Rec.RecordCount));
+//    List.Add(sRecordCount, IntToStr(Rec.RecordCount));
   end;
 end;
 
