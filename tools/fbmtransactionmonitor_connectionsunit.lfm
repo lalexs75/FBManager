@@ -1,0 +1,640 @@
+object fbmTransactionMonitor_ConnectionsFrame: TfbmTransactionMonitor_ConnectionsFrame
+  Left = 0
+  Height = 492
+  Top = 0
+  Width = 1218
+  ClientHeight = 492
+  ClientWidth = 1218
+  DesignTimePPI = 120
+  LCLVersion = '4.99.0.0'
+  ParentFont = False
+  TabOrder = 0
+  DesignLeft = 659
+  DesignTop = 283
+  object ToolPanel1: TToolPanel
+    Left = 0
+    Height = 43
+    Top = 0
+    Width = 1218
+    Items = <    
+      item
+        Action = actRefresh
+        Visible = True
+        ShowCaption = True
+      end    
+      item
+        Action = tlsCancelQuery
+        Visible = True
+        ShowCaption = True
+      end>
+    ImageList = fbManagerMainForm.ImageListMain
+    ToolBarStyle = tbsWindowsXP
+    Options = [tpFlatBtns]
+    CustomizeShortCut = False
+    Align = alTop
+    BorderWidth = 4
+    ClientHeight = 43
+    ClientWidth = 1218
+    TabOrder = 0
+    object CheckBox1: TCheckBox
+      AnchorSideTop.Control = ToolPanel1
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ToolPanel1
+      AnchorSideRight.Side = asrBottom
+      Left = 987
+      Height = 27
+      Top = 8
+      Width = 218
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Show system process'
+      Checked = True
+      State = cbChecked
+      TabOrder = 0
+      OnChange = CheckBox1Change
+    end
+  end
+  object Panel2: TPanel
+    Left = 942
+    Height = 449
+    Top = 43
+    Width = 276
+    Align = alRight
+    TabOrder = 1
+  end
+  object Splitter3: TSplitter
+    Left = 930
+    Height = 449
+    Top = 43
+    Width = 6
+    Align = alRight
+    ResizeAnchor = akRight
+  end
+  object RxDBGrid1: TRxDBGrid
+    Left = 0
+    Height = 449
+    Top = 43
+    Width = 930
+    ColumnDefValues.BlobText = '(данные)'
+    TitleButtons = False
+    AutoSort = True
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Attachment ID'
+        Width = 110
+        FieldName = 'ATTACHMENT_ID'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        PickList.Strings = (
+          'Idle'
+          'Active'
+          'Stalled'
+        )
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'State'
+        Width = 85
+        FieldName = 'ATTACHMENT_STATE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+        KeyList.Strings = (
+          '0'
+          '1'
+          '2'
+        )
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'ATTACHMENT_NAME'
+        Width = 200
+        FieldName = 'ATTACHMENT_NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'User'
+        Width = 200
+        FieldName = 'ATTACHMENT_USER'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Role'
+        Width = 150
+        FieldName = 'ATTACHMENT_ROLE'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Protocol'
+        Width = 100
+        FieldName = 'ATTACHMENT_REMOTE_PROTOCOL'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Remote address'
+        Width = 200
+        FieldName = 'ATTACHMENT_REMOTE_ADDRESS'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Remote PID'
+        FieldName = 'ATTACHMENT_REMOTE_PID'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Backend start'
+        Width = 180
+        FieldName = 'ATTACH_START_TIME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'App name'
+        Width = 150
+        FieldName = 'ATTACHMENT_REMOTE_PROCESS'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Client version'
+        Width = 150
+        FieldName = 'ATTACHMENT_CLIENT_VERSION'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Client hostname'
+        Width = 200
+        FieldName = 'ATTACHMENT_REMOTE_HOST'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Char set'
+        Width = 150
+        FieldName = 'CHARACTER_SET_NAME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Orientation = toHorizontal
+        Title.Caption = 'Query start'
+        Width = 190
+        FieldName = 'STATEMENT_START_TIME'
+        EditButtons = <>
+        Filter.DropDownRows = 0
+        Filter.EmptyValue = '(Пусто)'
+        Filter.NotEmptyValue = '(Не пусто)'
+        Filter.AllValue = '(Все значения)'
+        Filter.EmptyFont.Style = [fsItalic]
+        Filter.ItemIndex = -1
+        Footers = <>
+      end>
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.DrawFullLine = False
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = False
+    OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgAllowQuickFilter]
+    Align = alClient
+    Color = clWindow
+    DrawFullLine = False
+    SelectedColor = clHighlight
+    DataSource = dsConnections
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 3
+    TitleStyle = tsNative
+  end
+  object Splitter1: TSplitter
+    Left = 936
+    Height = 449
+    Top = 43
+    Width = 6
+    Align = alRight
+    ResizeAnchor = akRight
+  end
+  object ActionList1: TActionList
+    Images = fbManagerMainForm.ImageListMain
+    Left = 200
+    Top = 64
+    object actRefresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 10
+      OnExecute = actRefreshExecute
+    end
+    object tlsCancelQuery: TAction
+      Tag = 1
+      Caption = 'Cancel query'
+      ImageIndex = 110
+      OnExecute = tlsCancelQueryExecute
+    end
+    object tlsDisconect: TAction
+      Tag = 2
+      Caption = 'Disconect'
+      ImageIndex = 2
+      OnExecute = tlsCancelQueryExecute
+    end
+  end
+  object dsConnections: TDataSource
+    DataSet = quConnections
+    Left = 312
+    Top = 208
+  end
+  object quConnections: TFBDataSet
+    BeforeOpen = quConnectionsBeforeOpen
+    AfterOpen = quConnectionsAfterOpen
+    AfterClose = quConnectionsAfterOpen
+    AfterScroll = quConnectionsAfterScroll
+    AutoUpdateOptions.WhenGetGenID = wgNever
+    AutoUpdateOptions.IncrementBy = 1
+    DefaultFormats.DisplayFormatNumeric = '#,##0.0'
+    DefaultFormats.DisplayFormatInteger = '#,##0'
+    DefaultFormats.EditFormatNumeric = '#0.0'
+    DefaultFormats.EditFormatInteger = '#0'
+    DetailConditions = []
+    DataBase = fbmTransactionMonitorForm.UIBDataBase1
+    Macros = <>
+    Option = [poTrimCharFields, poRefreshAfterPost]
+    Transaction = fbmTransactionMonitorForm.UIBTransaction1
+    UpdateTransaction = fbmTransactionMonitorForm.UIBTransaction1
+    UpdateRecordTypes = [cusUnmodified, cusModified, cusInserted]
+    SQLSelect.Strings = (
+      'select'
+      '  MON$ATTACHMENTS.MON$ATTACHMENT_ID as ATTACHMENT_ID,'
+      '  MON$ATTACHMENTS.MON$SERVER_PID as ATTACHMENT_SERVER_PID,'
+      '  MON$ATTACHMENTS.MON$STATE as ATTACHMENT_STATE ,'
+      '  MON$ATTACHMENTS.MON$ATTACHMENT_NAME as ATTACHMENT_NAME,'
+      '  MON$ATTACHMENTS.MON$USER  as ATTACHMENT_USER,'
+      '  MON$ATTACHMENTS.MON$ROLE as ATTACHMENT_ROLE,'
+      '  MON$ATTACHMENTS.MON$REMOTE_PROTOCOL  as ATTACHMENT_REMOTE_PROTOCOL,'
+      '  MON$ATTACHMENTS.MON$REMOTE_ADDRESS  as ATTACHMENT_REMOTE_ADDRESS,'
+      '  MON$ATTACHMENTS.MON$REMOTE_PID  as ATTACHMENT_REMOTE_PID,'
+      '  MON$ATTACHMENTS.MON$TIMESTAMP as ATTACH_START_TIME,'
+      '  MON$ATTACHMENTS.MON$REMOTE_PROCESS  as ATTACHMENT_REMOTE_PROCESS,'
+      '  MON$ATTACHMENTS.MON$STAT_ID  as ATTACHMENT_STAT_ID,'
+      '  MON$ATTACHMENTS.MON$CLIENT_VERSION  as ATTACHMENT_CLIENT_VERSION,'
+      '  MON$ATTACHMENTS.MON$REMOTE_VERSION  as ATTACHMENT_REMOTE_VERSION,'
+      '  MON$ATTACHMENTS.MON$REMOTE_HOST  as ATTACHMENT_REMOTE_HOST,'
+      '  MON$ATTACHMENTS.MON$REMOTE_OS_USER  as ATTACHMENT_REMOTE_OS_USER,'
+      '  MON$ATTACHMENTS.MON$SYSTEM_FLAG  as ATTACHMENT_SYSTEM_FLAG,'
+      ''
+      '  RDB$CHARACTER_SETS.RDB$CHARACTER_SET_NAME as CHARACTER_SET_NAME,'
+      ''
+      '  MON$STATEMENTS.MON$STATEMENT_ID as STATEMENT_ID,'
+      '  MON$STATEMENTS.MON$TIMESTAMP as STATEMENT_START_TIME,'
+      '  MON$STATEMENTS.MON$SQL_TEXT as STATEMENT_SQL_TEXT'
+      'from'
+      '  MON$ATTACHMENTS'
+      '  inner join RDB$CHARACTER_SETS on (MON$ATTACHMENTS.MON$CHARACTER_SET_ID = RDB$CHARACTER_SETS.RDB$CHARACTER_SET_ID)'
+      '  left join MON$STATEMENTS on'
+      '    ((MON$STATEMENTS.MON$ATTACHMENT_ID = MON$ATTACHMENTS.MON$ATTACHMENT_ID) and (MON$STATEMENTS.MON$STATE in (1)))'
+      'where'
+      '  ('
+      '    (MON$ATTACHMENTS.MON$SYSTEM_FLAG = 0)'
+      '   or'
+      '    (:SYSTEM_FLAG = 0)'
+      '  )'
+      'order by'
+      '  MON$ATTACHMENTS.MON$ATTACHMENT_ID'
+      ''
+    )
+    Left = 312
+    Top = 128
+    object quConnectionsATTACHMENT_ID: TFBLargeintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_ID'
+      Index = 0
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACHMENT_SERVER_PID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_SERVER_PID'
+      Index = 1
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACHMENT_STATE: TSmallintField
+      Alignment = taLeftJustify
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_STATE'
+      Index = 2
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACHMENT_NAME: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_NAME'
+      Index = 3
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_USER: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_USER'
+      Index = 4
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quConnectionsATTACHMENT_ROLE: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_ROLE'
+      Index = 5
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quConnectionsATTACHMENT_REMOTE_PROTOCOL: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_PROTOCOL'
+      Index = 6
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 40
+    end
+    object quConnectionsATTACHMENT_REMOTE_ADDRESS: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_ADDRESS'
+      Index = 7
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_REMOTE_PID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_PID'
+      Index = 8
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACH_START_TIME: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'ATTACH_START_TIME'
+      Index = 9
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACHMENT_REMOTE_PROCESS: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_PROCESS'
+      Index = 10
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_STAT_ID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_STAT_ID'
+      Index = 11
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsATTACHMENT_CLIENT_VERSION: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_CLIENT_VERSION'
+      Index = 12
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_REMOTE_VERSION: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_VERSION'
+      Index = 13
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_REMOTE_HOST: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_HOST'
+      Index = 14
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_REMOTE_OS_USER: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_REMOTE_OS_USER'
+      Index = 15
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 1020
+    end
+    object quConnectionsATTACHMENT_SYSTEM_FLAG: TSmallintField
+      FieldKind = fkData
+      FieldName = 'ATTACHMENT_SYSTEM_FLAG'
+      Index = 16
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Required = True
+    end
+    object quConnectionsCHARACTER_SET_NAME: TFBAnsiField
+      FieldKind = fkData
+      FieldName = 'CHARACTER_SET_NAME'
+      Index = 17
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      Size = 252
+    end
+    object quConnectionsSTATEMENT_ID: TFBLargeintField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_ID'
+      Index = 18
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsSTATEMENT_START_TIME: TDateTimeField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_START_TIME'
+      Index = 19
+      ProviderFlags = [pfInUpdate, pfInWhere]
+    end
+    object quConnectionsSTATEMENT_SQL_TEXT: TFBAnsiMemoField
+      FieldKind = fkData
+      FieldName = 'STATEMENT_SQL_TEXT'
+      Index = 20
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      BlobType = ftMemo
+      Size = 12
+      Transliterate = False
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    OnClose = PopupMenu1Close
+    Left = 200
+    Top = 208
+    object MenuItem1: TMenuItem
+      Action = actRefresh
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem2: TMenuItem
+      Action = tlsCancelQuery
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = tlsDisconect
+    end
+  end
+  object trConnections: TUIBTransaction
+    Left = 400
+    Top = 128
+  end
+  object quExecutor: TUIBQuery
+    Transaction = trConnections
+    Left = 312
+    Top = 312
+  end
+end
