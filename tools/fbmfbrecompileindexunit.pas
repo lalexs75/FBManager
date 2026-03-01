@@ -147,7 +147,8 @@ begin
     Q.Open;
     while not Q.Eof do
     begin
-      CheckListBox1.Items.Add(Trim(Q.Fields.ByNameAsString['rdb$index_name']));
+      if Q.Fields.ByNameAsInteger['SYSTEM_FLAG'] = 0 then
+        CheckListBox1.Items.Add(Trim(Q.Fields.ByNameAsString['rdb$index_name']));
       Q.Next;
     end;
   finally

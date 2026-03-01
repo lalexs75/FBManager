@@ -12,8 +12,8 @@ object fbmFBRecompileIndexForm: TfbmFBRecompileIndexForm
   OnCreate = FormCreate
   object CheckListBox1: TCheckListBox
     Left = 0
-    Height = 235
-    Top = 65
+    Height = 233
+    Top = 67
     Width = 566
     Align = alClient
     ItemHeight = 0
@@ -23,7 +23,7 @@ object fbmFBRecompileIndexForm: TfbmFBRecompileIndexForm
   end
   object ToolPanel1: TToolPanel
     Left = 0
-    Height = 40
+    Height = 42
     Top = 0
     Width = 566
     Items = <    
@@ -48,7 +48,7 @@ object fbmFBRecompileIndexForm: TfbmFBRecompileIndexForm
     CustomizeShortCut = False
     Align = alTop
     BorderWidth = 4
-    ClientHeight = 40
+    ClientHeight = 42
     ClientWidth = 566
     TabOrder = 1
   end
@@ -72,7 +72,7 @@ object fbmFBRecompileIndexForm: TfbmFBRecompileIndexForm
   object ProgressBar1: TProgressBar
     Left = 0
     Height = 25
-    Top = 40
+    Top = 42
     Width = 566
     Align = alTop
     Smooth = True
