@@ -302,7 +302,6 @@ type
     function InternalTableStatistic(var ARec:TTableStatisticRecord):Boolean;
   protected
     procedure InternalSetDescription(ACommentOn: TSQLCommentOn); override;
-    function InternalGetDDLCreate: string; override;
 
     function GetTrigger(ACat:integer; AItem: integer): TDBTriggerObject; override;
     function GetTriggersCategories(AItem: integer): string; override;
@@ -317,6 +316,7 @@ type
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
     class function DBClassTitle:string;override;
+    function InternalGetDDLCreate: string; override;
 
     procedure Commit;override;
     procedure RollBack;override;
@@ -2734,7 +2734,9 @@ var
   S, S1: String;
   F: TDBField;
 begin
-  if TSQLEngineFireBird(OwnerDB).ServerVersion in [gds_verFirebird2_5, gds_verFirebird3_0] then
+  if (TSQLEngineFireBird(OwnerDB).ServerVersion > gds_verFirebird2_5)
+    and
+     (TSQLEngineFireBird(OwnerDB).ServerVersion <> gds_verInterBase5_x) then
   begin
     TFBDataSet(FDataSet).OnUpdateRecord:=@DSUpdateRecord;
     Result:='1'

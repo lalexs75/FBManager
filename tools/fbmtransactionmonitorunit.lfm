@@ -20,9 +20,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Height = 715
     Top = 111
     Width = 1236
-    ActivePage = tabDashboard
+    ActivePage = tabServerInfo
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
@@ -409,7 +409,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 602
+            Width = 598
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -424,7 +424,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 602
+            Width = 598
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0

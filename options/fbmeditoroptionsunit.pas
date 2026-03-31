@@ -270,16 +270,16 @@ begin
   SynSQLSyn1.StringAttri.Background:=ColorButton3.ButtonColor;
   SynSQLSyn1.StringAttri.Foreground:=ColorButton4.ButtonColor;
   if CheckBox3.Checked then
-    SynSQLSyn1.StringAttribute.Style:=SynSQLSyn1.NumberAttri.Style + [fsUnderline]
+    SynSQLSyn1.StringAttri.Style:=SynSQLSyn1.NumberAttri.Style + [fsUnderline]
   else
-    SynSQLSyn1.StringAttribute.Style:=SynSQLSyn1.NumberAttri.Style - [fsUnderline];
+    SynSQLSyn1.StringAttri.Style:=SynSQLSyn1.NumberAttri.Style - [fsUnderline];
 
-  SynSQLSyn1.CommentAttribute.Background:=ColorButton5.ButtonColor;
-  SynSQLSyn1.CommentAttribute.Foreground:=ColorButton6.ButtonColor;
+  SynSQLSyn1.CommentAttri.Background:=ColorButton5.ButtonColor;
+  SynSQLSyn1.CommentAttri.Foreground:=ColorButton6.ButtonColor;
   if CheckBox11.Checked then
-    SynSQLSyn1.CommentAttribute.Style:=SynSQLSyn1.NumberAttri.Style + [fsUnderline]
+    SynSQLSyn1.CommentAttri.Style:=SynSQLSyn1.NumberAttri.Style + [fsUnderline]
   else
-    SynSQLSyn1.CommentAttribute.Style:=SynSQLSyn1.NumberAttri.Style - [fsUnderline];
+    SynSQLSyn1.CommentAttri.Style:=SynSQLSyn1.NumberAttri.Style - [fsUnderline];
 
   SynSQLSyn1.NumberAttri.Background:=ColorButton7.ButtonColor;
   SynSQLSyn1.NumberAttri.Foreground:=ColorButton8.ButtonColor;

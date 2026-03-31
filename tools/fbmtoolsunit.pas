@@ -189,8 +189,8 @@ begin
     TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgTables', clGreen);
     TSynSQLSyn(SynEdit.Highlighter).StringAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgString', clAqua);
     TSynSQLSyn(SynEdit.Highlighter).StringAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgString', clBlack);
-    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgComment', clWindow);
-    TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgComment', clBlack);
+    TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgComment', clWindow);
+    TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgComment', clBlack);
     TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Background:=ConfigValues.ByNameAsInteger('esqlColorBkgNumber',clWindow);
     TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Foreground:=ConfigValues.ByNameAsInteger('esqlColorFrgNumber', clNavy);
 
@@ -201,14 +201,14 @@ begin
       TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).TableNameAttri.Style - [fsUnderline];
 
     if ConfigValues.ByNameAsBoolean('esqlFontUnderlineString', false) then
-      TSynSQLSyn(SynEdit.Highlighter).StringAttribute.Style:=TSynSQLSyn(SynEdit.Highlighter).StringAttribute.Style + [fsUnderline]
+      TSynSQLSyn(SynEdit.Highlighter).StringAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).StringAttri.Style + [fsUnderline]
     else
-      TSynSQLSyn(SynEdit.Highlighter).StringAttribute.Style:=TSynSQLSyn(SynEdit.Highlighter).StringAttribute.Style - [fsUnderline];
+      TSynSQLSyn(SynEdit.Highlighter).StringAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).StringAttri.Style - [fsUnderline];
 
     if ConfigValues.ByNameAsBoolean('esqlFontUnderlineComment', false) then
-      TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Style:=TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Style + [fsUnderline]
+      TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Style + [fsUnderline]
     else
-      TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Style:=TSynSQLSyn(SynEdit.Highlighter).CommentAttribute.Style - [fsUnderline];
+      TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).CommentAttri.Style - [fsUnderline];
 
     if ConfigValues.ByNameAsBoolean('esqlFontUnderlineNumbers', false) then
       TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Style:=TSynSQLSyn(SynEdit.Highlighter).NumberAttri.Style + [fsUnderline]
