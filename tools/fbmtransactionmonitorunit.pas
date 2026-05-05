@@ -240,6 +240,8 @@ begin
     rxStatInfo.AppendRecord([sPageSize, quStatInfo.FieldByName('MON$PAGE_SIZE').DisplayText]);
     rxStatInfo.AppendRecord([sPages, quStatInfo.FieldByName('MON$PAGES').DisplayText]);
 
+    rxStatInfo.AppendRecord([sSweepInterval, quStatInfo.FieldByName('MON$SWEEP_INTERVAL').DisplayText]);
+
 
     R:=quStatInfo.FieldByName('MON$PAGES').AsLongWord * quStatInfo.FieldByName('MON$PAGE_SIZE').AsLongWord;
     rxStatInfo.AppendRecord([sStatsDBSize, RxPrettySizeName(R)]); //Объём, который занимает на диске база данных с заданным OID
