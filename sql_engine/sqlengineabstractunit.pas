@@ -601,6 +601,7 @@ type
     function IndexDelete(const IndexName:string):boolean;virtual; abstract;
     function IndexFind(const IndexName:string):TIndexItem;
     procedure IndexListRefresh; virtual; abstract;
+    procedure ReIndex(const IndexName:string); virtual;
     property IndexCount:integer read GetIndexCount;
     property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
 
@@ -3519,6 +3520,11 @@ begin
     if CompareText(Result.IndexName, IndexName) = 0 then
       Exit;
   Result:=nil;
+end;
+
+procedure TDBDataSetObject.ReIndex;
+begin
+  NotImplemented;
 end;
 
 { TDBViewObject }

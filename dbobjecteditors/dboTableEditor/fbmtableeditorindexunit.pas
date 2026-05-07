@@ -34,6 +34,8 @@ type
   { TfbmTableEditorIndexFrame }
 
   TfbmTableEditorIndexFrame = class(TEditorPage)
+    indReindexAll: TAction;
+    indReindex: TAction;
     indRefresh: TAction;
     indNew: TAction;
     indEdit: TAction;
@@ -64,6 +66,7 @@ type
     procedure indNewExecute(Sender: TObject);
     procedure indPrintExecute(Sender: TObject);
     procedure indRefreshExecute(Sender: TObject);
+    procedure indReindexExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
   private
     procedure NewIndex;
@@ -112,6 +115,12 @@ end;
 procedure TfbmTableEditorIndexFrame.indRefreshExecute(Sender: TObject);
 begin
   RefreshIndexList
+end;
+
+procedure TfbmTableEditorIndexFrame.indReindexExecute(Sender: TObject);
+begin
+  if QuestionBox(sReindex) then
+    TDBDataSetObject(DBObject).ReIndex(rxIndexListCAPTION.AsString);
 end;
 
 procedure TfbmTableEditorIndexFrame.RxDBGrid1DblClick(Sender: TObject);
@@ -166,6 +175,8 @@ begin
 
     rxIndexList.Post;
   end;
+  indReindex.Enabled:=rxIndexList.Active and (rxIndexList.RecordCount>0);
+  indReindexAll.Enabled:=indReindex.Enabled;
 end;
 
 procedure TfbmTableEditorIndexFrame.RefreshIndexRow;
@@ -181,6 +192,8 @@ begin
   indDelete.Caption:=sDeleteIndex;
   indPrint.Caption:=sPrintIndexList;
   indRefresh.Caption:=sRefreshIndexList;
+  indReindex.Caption:=sReindex;
+  indReindexAll.Caption:=sReindexAll;
 
   RxDBGrid1.ColumnByFieldName('CAPTION').Title.Caption:=sIndexCaption;
   RxDBGrid1.ColumnByFieldName('EXPRESSION').Title.Caption:=sIndexExpression;

@@ -193,9 +193,7 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
     Align = alClient
     Color = clWindow
     DrawFullLine = False
-    FocusColor = clRed
     SelectedColor = clHighlight
-    GridLineStyle = psSolid
     DataSource = dsIndexList
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     PopupMenu = PopupMenu1
@@ -389,6 +387,14 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       Caption = 'Refresh index list'
       ImageIndex = 10
       OnExecute = indRefreshExecute
+    end
+    object indReindex: TAction
+      Caption = 'indReindex'
+      ImageIndex = 61
+      OnExecute = indReindexExecute
+    end
+    object indReindexAll: TAction
+      Caption = 'indReindexAll'
     end
   end
   object RxDBGridPrint1: TRxDBGridPrint[5]

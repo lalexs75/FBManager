@@ -297,6 +297,9 @@ resourcestring
   sDeleteIndex                      = 'Delete index';
   sPrintIndexList                   = 'Print index list';
   sRefreshIndexList                 = 'Refresh index list';
+  sReindex                          = 'Reindex';
+  sReindexAll                       = 'Reindex all';
+
   sIndexCaption                     = 'Index caption';
   sIndexExpression                  = 'Index expression';
   sOnFields                         = 'On fields';
