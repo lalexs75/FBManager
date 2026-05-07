@@ -50,6 +50,8 @@ type
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
     PopupMenu1: TPopupMenu;
     RxDBGrid1: TRxDBGrid;
     RxDBGridPrint1: TRxDBGridPrint;
@@ -61,11 +63,13 @@ type
     rxIndexListIndex_Num: TLongintField;
     rxIndexListSortOrder: TStringField;
     rxIndexListUnique: TBooleanField;
+    Separator1: TMenuItem;
     procedure indDeleteExecute(Sender: TObject);
     procedure indEditExecute(Sender: TObject);
     procedure indNewExecute(Sender: TObject);
     procedure indPrintExecute(Sender: TObject);
     procedure indRefreshExecute(Sender: TObject);
+    procedure indReindexAllExecute(Sender: TObject);
     procedure indReindexExecute(Sender: TObject);
     procedure RxDBGrid1DblClick(Sender: TObject);
   private
@@ -115,6 +119,14 @@ end;
 procedure TfbmTableEditorIndexFrame.indRefreshExecute(Sender: TObject);
 begin
   RefreshIndexList
+end;
+
+procedure TfbmTableEditorIndexFrame.indReindexAllExecute(Sender: TObject);
+begin
+  if QuestionBox(sReindexAll) then
+  begin
+    TDBDataSetObject(DBObject).ReIndex(rxIndexListCAPTION.AsString);
+  end;
 end;
 
 procedure TfbmTableEditorIndexFrame.indReindexExecute(Sender: TObject);

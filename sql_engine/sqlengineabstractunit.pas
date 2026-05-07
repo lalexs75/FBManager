@@ -602,6 +602,7 @@ type
     function IndexFind(const IndexName:string):TIndexItem;
     procedure IndexListRefresh; virtual; abstract;
     procedure ReIndex(const IndexName:string); virtual;
+    procedure ReIndexAll; virtual;
     property IndexCount:integer read GetIndexCount;
     property IndexItem[AItem:integer]:TIndexItem read GetIndexItem;
 
@@ -3522,7 +3523,12 @@ begin
   Result:=nil;
 end;
 
-procedure TDBDataSetObject.ReIndex;
+procedure TDBDataSetObject.ReIndex(const IndexName: string);
+begin
+  NotImplemented;
+end;
+
+procedure TDBDataSetObject.ReIndexAll;
 begin
   NotImplemented;
 end;

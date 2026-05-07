@@ -344,6 +344,15 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       Action = indDelete
       OnClick = indDeleteExecute
     end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem8: TMenuItem
+      Action = indReindex
+    end
+    object MenuItem9: TMenuItem
+      Action = indReindexAll
+    end
     object MenuItem4: TMenuItem
       Caption = '-'
     end
@@ -389,12 +398,13 @@ inherited fbmTableEditorIndexFrame: TfbmTableEditorIndexFrame
       OnExecute = indRefreshExecute
     end
     object indReindex: TAction
-      Caption = 'indReindex'
+      Caption = 'Reindex'
       ImageIndex = 61
       OnExecute = indReindexExecute
     end
     object indReindexAll: TAction
-      Caption = 'indReindexAll'
+      Caption = 'Reindex all'
+      OnExecute = indReindexAllExecute
     end
   end
   object RxDBGridPrint1: TRxDBGridPrint[5]
