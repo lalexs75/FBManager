@@ -848,6 +848,9 @@ type
     function IndexEdit(const IndexName:string):boolean; override;
     function IndexDelete(const IndexName:string):boolean; override;
     procedure IndexListRefresh; override;
+    procedure ReIndex(const IndexName:string); override;
+    procedure ReIndexAll; override;
+
     property AutovacuumOptions:TPGAutovacuumOptions read FAutovacuumOptions;
     property ToastAutovacuumOptions:TPGAutovacuumOptions read FToastAutovacuumOptions;
     property ToastRelOID;
@@ -2744,6 +2747,27 @@ begin
     FQuery.Free;
   end;
   FIndexListLoaded:=true;
+end;
+
+procedure TPGMatView.ReIndex(const IndexName: string);
+var
+  P: TPGIndex;
+begin
+  P:=TPGIndex(Schema.Indexs.ObjByName(IndexName));
+  if not Assigned(P) then
+    raise Exception.CreateFmt('Index not found %s', [IndexName]);
+  P.Reindex;
+end;
+
+procedure TPGMatView.ReIndexAll;
+var
+  IndSQL: TPGSQLReindex;
+begin
+  IndSQL:=TPGSQLReindex.Create(nil);
+  IndSQL.Name:=CaptionFullPatch;
+  IndSQL.ObjectKind:=okTable;
+  ExecSQLScriptEx(IndSQL.SQLText, [sepInTransaction, sepShowCompForm], OwnerDB);
+  IndSQL.Free;
 end;
 
 { TPGMatViewsRoot }
@@ -5788,7 +5812,6 @@ end;
 procedure TPGTable.ReIndex(const IndexName: string);
 var
   P: TPGIndex;
-
 begin
   P:=TPGIndex(Schema.Indexs.ObjByName(IndexName));
   if not Assigned(P) then
