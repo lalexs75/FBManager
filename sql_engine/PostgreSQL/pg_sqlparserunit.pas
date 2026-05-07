@@ -1529,6 +1529,7 @@ type
 
   TPGSQLReindex = class(TSQLCommandDDL)
   private
+    FConcurrently: Boolean;
     FForce: boolean;
     //FObjName: string;
     //FReindexType: TReindexType;
@@ -1542,6 +1543,8 @@ type
     //property ObjName:string read FObjName write FObjName;
     //property ReindexType:TReindexType read FReindexType write FReindexType;
     property Force:boolean read FForce write FForce;
+    property Concurrently:Boolean read FConcurrently write FConcurrently;
+    property SchemaName;
   end;
 
   { TPGSQLUnlisten }
@@ -14919,15 +14922,27 @@ end;
 
 procedure TPGSQLReindex.InitParserTree;
 var
-  T1, T2, T3, T4, T, FSQLTokens: TSQLTokenRecord;
+  T1, T2, T3, T4, T, FSQLTokens, T5, TC1, TSchema, TName, TC2: TSQLTokenRecord;
 begin
   (* REINDEX { INDEX | TABLE | DATABASE | SYSTEM } name [ FORCE ] *)
+(*
+  REINDEX [ ( параметр [, ...] ) ] { INDEX | TABLE | SCHEMA } [ CONCURRENTLY ] имя
+  REINDEX [ ( параметр [, ...] ) ] { DATABASE | SYSTEM } [ CONCURRENTLY ] [ имя ]
+*)
   FSQLTokens:=AddSQLTokens(stKeyword, nil, 'REINDEX', [toFirstToken]);
     T1:=AddSQLTokens(stKeyword, FSQLTokens, 'INDEX', [toFindWordLast], 1);
     T2:=AddSQLTokens(stKeyword, FSQLTokens, 'TABLE', [toFindWordLast], 2);
-    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 3);
-    T4:=AddSQLTokens(stKeyword, FSQLTokens, 'SYSTEM', [toFindWordLast], 4);
-  T:=AddSQLTokens(stIdentificator, [T1,T2, T3, T4], '', [], 5);
+    T3:=AddSQLTokens(stKeyword, FSQLTokens, 'SCHEMA', [toFindWordLast], 9);
+    TC1:=AddSQLTokens(stKeyword, [T1,T2, T3], 'CONCURRENTLY', [], 7);
+
+    T4:=AddSQLTokens(stKeyword, FSQLTokens, 'DATABASE', [toFindWordLast], 3);
+    T5:=AddSQLTokens(stKeyword, FSQLTokens, 'SYSTEM', [toFindWordLast], 4);
+    TC2:=AddSQLTokens(stKeyword, [T4, T5], 'CONCURRENTLY', [], 7);
+
+  TSchema:=AddSQLTokens(stIdentificator, [T1,T2, T3, TC1], '', [], 5);
+  T:=AddSQLTokens(stSymbol, TSchema, '.', [toOptional]);
+  TName:=AddSQLTokens(stIdentificator, [T, T4, T5, TC2], '', [], 8);
+
   T:=AddSQLTokens(stKeyword, T, 'FORCE', [toOptional], 6);
 end;
 
@@ -14940,8 +14955,14 @@ begin
     2:ObjectKind:=okTable;
     3:ObjectKind:=okDatabase;
     4:ObjectKind:=okServer;
+    9:ObjectKind:=okScheme;
     5:Name:=AWord;
+    8:begin
+        SchemaName:=Name;
+        Name:=AWord;
+      end;
     6:Force:=true;
+    7:Concurrently:=true;
   end;
 end;
 
@@ -14955,8 +14976,12 @@ begin
     okTable:Result:=Result + 'TABLE ';
     okDatabase:Result:=Result + 'DATABASE ';
     okServer:Result:=Result + 'SYSTEM ';
+    okScheme:Result:=Result + 'SCHEMA ';
   end;
-  Result:=Result + Name;
+
+  if Concurrently then
+    Result:=Result + 'CONCURRENTLY ';
+  Result:=Result + FullName;
 
   if FForce then
     Result:=Result + ' FORCE';
@@ -14968,6 +14993,7 @@ begin
   if ASource is TPGSQLReindex then
   begin
     Force:=TPGSQLReindex(ASource).Force;
+    Concurrently:=TPGSQLReindex(ASource).Concurrently;
   end;
   inherited Assign(ASource);
 end;
