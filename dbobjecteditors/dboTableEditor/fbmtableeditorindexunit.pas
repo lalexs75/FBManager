@@ -123,16 +123,12 @@ end;
 
 procedure TfbmTableEditorIndexFrame.indReindexAllExecute(Sender: TObject);
 begin
-  if QuestionBox(sReindexAll) then
-  begin
-    TDBDataSetObject(DBObject).ReIndex(rxIndexListCAPTION.AsString);
-  end;
+  TDBDataSetObject(DBObject).ReIndexAll;
 end;
 
 procedure TfbmTableEditorIndexFrame.indReindexExecute(Sender: TObject);
 begin
-  if QuestionBox(sReindex) then
-    TDBDataSetObject(DBObject).ReIndex(rxIndexListCAPTION.AsString);
+  TDBDataSetObject(DBObject).ReIndex(rxIndexListCAPTION.AsString);
 end;
 
 procedure TfbmTableEditorIndexFrame.RxDBGrid1DblClick(Sender: TObject);

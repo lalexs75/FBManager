@@ -1,7 +1,7 @@
 inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   Left = 645
   Height = 826
-  Top = 293
+  Top = 184
   Width = 1236
   Caption = 'Transaction monitor'
   ClientHeight = 826
@@ -9,16 +9,25 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   SessionProperties = 'Panel6.Height'
   OnClose = FormClose
   inherited Panel1: TPanel
+    Height = 41
     Width = 1236
+    ClientHeight = 41
     ClientWidth = 1236
+    inherited Label1: TLabel
+      Height = 17
+      Top = 17
+      Width = 56
+    end
     inherited ComboBox1: TComboBox
-      Width = 1129
+      Left = 69
+      Height = 27
+      Width = 1160
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
-    Height = 715
-    Top = 111
+    Height = 744
+    Top = 82
     Width = 1236
     ActivePage = tabServerInfo
     Align = alClient
@@ -27,15 +36,15 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
-      ClientHeight = 678
-      ClientWidth = 1226
+      ClientHeight = 713
+      ClientWidth = 1232
       object CLabel: TLabel
         AnchorSideLeft.Control = tabDashboard
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = tabDashboard
-        Left = 613
+        Left = 616
         Height = 1
-        Top = 57
+        Top = 60
         Width = 1
         Anchors = [akLeft]
         ParentColor = False
@@ -47,9 +56,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideBottom.Control = Splitter2
         AnchorSideBottom.Side = asrBottom
         Left = 6
-        Height = 464
+        Height = 499
         Top = 6
-        Width = 601
+        Width = 604
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -108,10 +117,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideRight.Control = tabDashboard
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
-        Left = 619
-        Height = 459
+        Left = 622
+        Height = 494
         Top = 6
-        Width = 601
+        Width = 604
         AxisList = <        
           item
             Marks.LabelBrush.Style = bsClear
@@ -161,14 +170,14 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       object Panel6: TPanel
         Left = 0
         Height = 202
-        Top = 476
-        Width = 1226
+        Top = 511
+        Width = 1232
         Align = alBottom
         ClientHeight = 202
-        ClientWidth = 1226
+        ClientWidth = 1232
         TabOrder = 2
         object Splitter1: TSplitter
-          Left = 1220
+          Left = 1226
           Height = 200
           Top = 1
           Width = 5
@@ -179,7 +188,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Left = 1
           Height = 200
           Top = 1
-          Width = 1219
+          Width = 1225
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = False
           AutoSort = False
@@ -383,8 +392,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         Cursor = crVSplit
         Left = 0
         Height = 5
-        Top = 471
-        Width = 1226
+        Top = 506
+        Width = 1232
         Align = alBottom
         ResizeAnchor = akBottom
       end
@@ -394,13 +403,13 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     end
     object tabServerInfo: TTabSheet
       Caption = 'Server info'
-      ClientHeight = 678
-      ClientWidth = 1226
+      ClientHeight = 713
+      ClientWidth = 1232
       object RxDBGrid3: TRxDBGrid
         Left = 0
-        Height = 678
+        Height = 713
         Top = 0
-        Width = 1226
+        Width = 1232
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -409,7 +418,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 598
+            Width = 601
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -424,7 +433,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 598
+            Width = 600
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -510,12 +519,12 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
   end
   object Panel5: TPanel[2]
     Left = 0
-    Height = 54
-    Top = 57
+    Height = 41
+    Top = 41
     Width = 1236
     Align = alTop
     AutoSize = True
-    ClientHeight = 54
+    ClientHeight = 41
     ClientWidth = 1236
     TabOrder = 2
     object CheckBox3: TCheckBox
@@ -523,10 +532,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = SpinEdit4
       AnchorSideTop.Side = asrCenter
-      Left = 239
-      Height = 27
-      Top = 14
-      Width = 137
+      Left = 195
+      Height = 24
+      Top = 8
+      Width = 102
       BorderSpacing.Left = 6
       Caption = 'Refresh data'
       Checked = True
@@ -539,9 +548,9 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideBottom.Control = SpinEdit4
       AnchorSideBottom.Side = asrBottom
       Left = 7
-      Height = 23
-      Top = 24
-      Width = 138
+      Height = 17
+      Top = 17
+      Width = 94
       Anchors = [akLeft, akBottom]
       BorderSpacing.Left = 6
       Caption = 'Refresh interval'
@@ -551,8 +560,8 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Control = Label11
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel5
-      Left = 151
-      Height = 40
+      Left = 107
+      Height = 27
       Top = 7
       Width = 82
       BorderSpacing.Around = 6
@@ -567,10 +576,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = SpinEdit4
       AnchorSideTop.Side = asrCenter
-      Left = 382
-      Height = 27
-      Top = 14
-      Width = 289
+      Left = 303
+      Height = 24
+      Top = 8
+      Width = 211
       BorderSpacing.Left = 6
       Caption = 'Commit transaction on refresh'
       TabOrder = 2
@@ -593,6 +602,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     PassWord = 'masterkey'
     StoreInDFM = False
     AfterConnect = UIBDataBase1AfterConnect
+    Connected = True
     AllowStreamedConnected = False
     DefTransactionRead = UIBTransaction1
     Left = 496
@@ -706,86 +716,125 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       FieldKind = fkData
       FieldName = 'ATTACHMENT_ID'
       Index = 0
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object quActiveConnectionsSTATE: TSmallintField
       FieldKind = fkData
       FieldName = 'STATE'
       Index = 1
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object quActiveConnectionsATTACHMENT_NAME: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_NAME'
       Index = 2
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 1020
     end
     object quActiveConnectionsATTACHMENT_USER: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_USER'
       Index = 3
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 252
     end
     object quActiveConnectionsATTACHMENT_ROLE: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_ROLE'
       Index = 4
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 252
     end
     object quActiveConnectionsATTACHMENT_REMOTE_PROTOCOL: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_REMOTE_PROTOCOL'
       Index = 5
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 40
     end
     object quActiveConnectionsATTACHMENT_REMOTE_ADDRESS: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_REMOTE_ADDRESS'
       Index = 6
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 1020
     end
     object quActiveConnectionsATTACHMENT_REMOTE_PROCESS: TFBAnsiField
       FieldKind = fkData
       FieldName = 'ATTACHMENT_REMOTE_PROCESS'
       Index = 7
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 1020
     end
     object quActiveConnectionsATTACH_START_TIME: TDateTimeField
       FieldKind = fkData
       FieldName = 'ATTACH_START_TIME'
       Index = 8
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object quActiveConnectionsCHARACTER_SET_NAME: TFBAnsiField
       FieldKind = fkData
       FieldName = 'CHARACTER_SET_NAME'
       Index = 9
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 252
     end
     object quActiveConnectionsSTATEMENT_ID: TFBLargeintField
       FieldKind = fkData
       FieldName = 'STATEMENT_ID'
       Index = 10
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object quActiveConnectionsSTATEMENT_START_TIME: TDateTimeField
       FieldKind = fkData
       FieldName = 'STATEMENT_START_TIME'
       Index = 11
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object quActiveConnectionsSTATEMENT_SQL_TEXT: TFBAnsiMemoField
       FieldKind = fkData
       FieldName = 'STATEMENT_SQL_TEXT'
       Index = 12
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       BlobType = ftMemo
       Size = 12
       Transliterate = False
@@ -837,49 +886,73 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       FieldKind = fkData
       FieldName = 'NEXT_TRANS'
       Index = 0
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoOLD_ACTIVE: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_ACTIVE'
       Index = 1
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoOLD_SNAPSHOT: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_SNAPSHOT'
       Index = 2
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoOLD_ALL: TLongintField
       FieldKind = fkData
       FieldName = 'OLD_ALL'
       Index = 3
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoALL: TLongintField
       FieldKind = fkData
       FieldName = 'ALL'
       Index = 4
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoActive: TLongintField
       FieldKind = fkData
       FieldName = 'Active'
       Index = 5
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoIdle: TLongintField
       FieldKind = fkData
       FieldName = 'Idle'
       Index = 6
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object rxTransInfoID: TDateTimeField
       FieldKind = fkData
       FieldName = 'ID'
       Index = 7
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object UIBTransaction1: TUIBTransaction[13]
@@ -918,14 +991,20 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
       FieldKind = fkData
       FieldName = 'PARAM'
       Index = 0
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 250
     end
     object rxStatInfoVALUE: TStringField
       FieldKind = fkData
       FieldName = 'VALUE'
       Index = 1
+      LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 250
     end
   end

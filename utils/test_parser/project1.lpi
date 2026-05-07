@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="12"/>
+    <Version Value="13"/>
     <General>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="SQL parser test"/>
@@ -61,11 +61,9 @@
     <Units>
       <Unit>
         <Filename Value="project1.lpr"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unit1.pas"/>
-        <IsPartOfProject Value="True"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -73,82 +71,66 @@
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineabstractunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineAbstractUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/postgresqlengineunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="PostgreSQLEngineUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlenginecommontypesunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineCommonTypesUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_objects/sqlobjects.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="sqlObjects"/>
       </Unit>
       <Unit>
         <Filename Value="../../tools/fbmstrconstunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="fbmStrConstUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/fbmsqlparserunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="fbmSqlParserUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pgsqltextunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
         <UnitName Value="pgSqlTextUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbsqlengineunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="FBSQLEngineUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_objects/sqlparserconsts.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="sqlParserConsts"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/PostgreSQL/pg_sqlparserunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="pg_SqlParserUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fbkeywordsunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="fbKeywordsUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/firebird/fb_sqlparserunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="fb_SqlParserUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3engineunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SQLite3EngineUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_keywords.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlite3/sqlite3_sqlparserunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="sqlite3_SqlParserUnit"/>
       </Unit>
       <Unit>
         <Filename Value="treeaddchildtokenunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <ComponentName Value="TreeAddChildTokenForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
@@ -156,42 +138,33 @@
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_engine.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysqlkeywords.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="MySQLKeywords"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_sqlparserunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="mysql_SqlParserUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mysql/mysql_types.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/plugins/sshconnectionunit.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/sqlengineinternaltoolsunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SQLEngineInternalToolsUnit"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_engine.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../sql_engine/mssql/mssql_sql_parser.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../assistent/assisttypesunit.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="assistTypesUnit"/>
       </Unit>
     </Units>

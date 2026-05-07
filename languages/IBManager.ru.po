@@ -4803,6 +4803,14 @@ msgstr "Параметры регистрации"
 msgid "Registred database"
 msgstr "Зарегистрированная БД"
 
+#: fbmstrconstunit.sreindex
+msgid "Reindex"
+msgstr ""
+
+#: fbmstrconstunit.sreindexall
+msgid "Reindex all"
+msgstr ""
+
 #: fbmstrconstunit.srelationname
 msgid "Relation name"
 msgstr "Имя таблицы"

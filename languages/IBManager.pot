@@ -4658,6 +4658,14 @@ msgstr ""
 msgid "Registred database"
 msgstr ""
 
+#: fbmstrconstunit.sreindex
+msgid "Reindex"
+msgstr ""
+
+#: fbmstrconstunit.sreindexall
+msgid "Reindex all"
+msgstr ""
+
 #: fbmstrconstunit.srelationname
 msgid "Relation name"
 msgstr ""

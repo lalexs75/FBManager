@@ -628,6 +628,7 @@ type
   public
     constructor Create(const ADBItem:TDBItem; AOwnerRoot:TDBRootObject);override;
     destructor Destroy; override;
+    procedure Reindex; virtual;
     property IndexFields:TIndexFields read FIndexFields;
     property Table:TDBDataSetObject read FTable write FTable;
   end;
@@ -1546,6 +1547,11 @@ destructor TDBIndex.Destroy;
 begin
   FreeAndNil(FIndexFields);
   inherited Destroy;
+end;
+
+procedure TDBIndex.Reindex;
+begin
+  //
 end;
 
 { TDBFieldsEnumerator }

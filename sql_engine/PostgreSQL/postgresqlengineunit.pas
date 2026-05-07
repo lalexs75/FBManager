@@ -687,6 +687,8 @@ type
     function IndexEdit(const IndexName:string):boolean; override;
     function IndexDelete(const IndexName:string):boolean; override;
     procedure IndexListRefresh; override;
+    procedure ReIndex(const IndexName:string); override;
+    procedure ReIndexAll; override;
 
     procedure TriggersListRefresh; override;
     procedure RecompileTriggers; override;
@@ -1099,6 +1101,7 @@ type
     procedure RefreshDependencies; override;
     procedure RefreshDependenciesField(Rec:TDependRecord); override;
     function CreateSQLObject:TSQLCommandDDL; override;
+    procedure Reindex; override;
 
     property Schema:TPGSchema read FSchema;
     property PGTableID:integer read FPGTableID;
@@ -5782,6 +5785,28 @@ begin
   FIndexListLoaded:=true;
 end;
 
+procedure TPGTable.ReIndex(const IndexName: string);
+var
+  P: TPGIndex;
+
+begin
+  P:=TPGIndex(Schema.Indexs.ObjByName(IndexName));
+  if not Assigned(P) then
+    raise Exception.CreateFmt('Index not found %s', [IndexName]);
+  P.Reindex;
+end;
+
+procedure TPGTable.ReIndexAll;
+var
+  IndSQL: TPGSQLReindex;
+begin
+  IndSQL:=TPGSQLReindex.Create(nil);
+  IndSQL.Name:=CaptionFullPatch;
+  IndSQL.ObjectKind:=okTable;
+  ExecSQLScriptEx(IndSQL.SQLText, [sepInTransaction, sepShowCompForm], OwnerDB);
+  IndSQL.Free;
+end;
+
 procedure TPGTable.TriggersListRefresh;
 var
   i:integer;
@@ -8012,6 +8037,18 @@ end;
 function TPGIndex.CreateSQLObject: TSQLCommandDDL;
 begin
   Result:=TPGSQLCreateIndex.Create(nil);
+end;
+
+procedure TPGIndex.Reindex;
+var
+  IndSQL: TPGSQLReindex;
+begin
+  IndSQL:=TPGSQLReindex.Create(nil);
+  IndSQL.Name:=Caption;
+  IndSQL.SchemaName:=SchemaName;
+  IndSQL.ObjectKind:=okIndex;
+  ExecSQLScriptEx(IndSQL.SQLText, [sepInTransaction, sepShowCompForm], OwnerDB);
+  IndSQL.Free;
 end;
 
 
