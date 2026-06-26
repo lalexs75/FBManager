@@ -2106,14 +2106,19 @@ begin
 end;
 
 procedure Tfdbm_SynEditorFrame.ceCharUpperCaseExecute(Sender: TObject);
+var
+  S: String;
 begin
+  S:=TextEditor.SelText;
   case TComponent(Sender).Tag of
-    0:TextEditor.CommandProcessor(ecUpperCaseBlock, '', nil);
-    1:TextEditor.CommandProcessor(ecLowerCaseBlock, '', nil);
-    2:TextEditor.CommandProcessor(ecTitleCase, '', nil);
-    3:TextEditor.CommandProcessor(ecToggleCaseBlock, '', nil);
+    0:S:=AnsiUpperCase(S);//TextEditor.CommandProcessor(ecUpperCaseBlock, '', nil);
+    1:S:=AnsiLowerCase(S); //TextEditor.CommandProcessor(ecLowerCaseBlock, '', nil);
+//    2:S:=titlecAnsiUpperCase(S);TextEditor.CommandProcessor(ecTitleCase, '', nil);
+//    3:S:=AnsiUpperCase(S);TextEditor.CommandProcessor(ecToggleCaseBlock, '', nil);
   else
+    Exit;
   end;
+  TextEditor.SelText:=S;
 end;
 
 procedure Tfdbm_SynEditorFrame.ceCommentCodeExecute(Sender: TObject);

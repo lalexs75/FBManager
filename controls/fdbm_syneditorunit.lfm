@@ -484,7 +484,7 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
   object SynCompletion1: TSynCompletion
     OnExecute = SynCompletion1Execute
     OnPaintItem = SynCompletion1PaintItem
-    Position = 0
+    Position = -1
     LinesInWindow = 6
     OnSearchPosition = SynCompletion1SearchPosition
     OnKeyNextChar = SynCompletion1KeyNextChar
@@ -510,8 +510,6 @@ object fdbm_SynEditorFrame: Tfdbm_SynEditorFrame
     Top = 248
   end
   object SynSQLSyn1: TSynSQLSyn
-    DefaultFilter = 'Файлы SQL (*.sql)|*.sql'
-    Enabled = False
     SQLDialect = sqlSybase
     Left = 50
     Top = 34
