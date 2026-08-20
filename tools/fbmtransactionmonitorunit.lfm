@@ -1,18 +1,18 @@
 inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
-  Left = 645
+  Left = 526
   Height = 826
-  Top = 184
-  Width = 1236
+  Top = 152
+  Width = 1250
   Caption = 'Transaction monitor'
   ClientHeight = 826
-  ClientWidth = 1236
+  ClientWidth = 1250
   SessionProperties = 'Panel6.Height'
   OnClose = FormClose
   inherited Panel1: TPanel
     Height = 41
-    Width = 1236
+    Width = 1250
     ClientHeight = 41
-    ClientWidth = 1236
+    ClientWidth = 1250
     inherited Label1: TLabel
       Height = 17
       Top = 17
@@ -21,28 +21,28 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     inherited ComboBox1: TComboBox
       Left = 69
       Height = 27
-      Width = 1160
+      Width = 1174
     end
   end
   object PageControl1: TPageControl[1]
     Left = 0
     Height = 744
     Top = 82
-    Width = 1236
-    ActivePage = tabServerInfo
+    Width = 1250
+    ActivePage = tabDashboard
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
     object tabDashboard: TTabSheet
       Caption = 'Dashboard'
       ClientHeight = 713
-      ClientWidth = 1232
+      ClientWidth = 1246
       object CLabel: TLabel
         AnchorSideLeft.Control = tabDashboard
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = tabDashboard
-        Left = 616
+        Left = 623
         Height = 1
         Top = 60
         Width = 1
@@ -58,9 +58,10 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         Left = 6
         Height = 499
         Top = 6
-        Width = 604
+        Width = 611
         AxisList = <        
           item
+            Intervals.Options = [aipUseMaxLength, aipUseMinLength, aipUseNiceSteps, aipInteger]
             Marks.LabelBrush.Style = bsClear
             Minors = <>
             Title.LabelFont.Orientation = 900
@@ -117,12 +118,13 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         AnchorSideRight.Control = tabDashboard
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = Splitter2
-        Left = 622
+        Left = 629
         Height = 494
         Top = 6
-        Width = 604
+        Width = 611
         AxisList = <        
           item
+            Intervals.Options = [aipUseMaxLength, aipUseMinLength, aipUseNiceSteps, aipInteger]
             Marks.LabelBrush.Style = bsClear
             Minors = <>
             Title.LabelFont.Orientation = 900
@@ -171,13 +173,13 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         Left = 0
         Height = 202
         Top = 511
-        Width = 1232
+        Width = 1246
         Align = alBottom
         ClientHeight = 202
-        ClientWidth = 1232
+        ClientWidth = 1246
         TabOrder = 2
         object Splitter1: TSplitter
-          Left = 1226
+          Left = 1240
           Height = 200
           Top = 1
           Width = 5
@@ -188,7 +190,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
           Left = 1
           Height = 200
           Top = 1
-          Width = 1225
+          Width = 1239
           ColumnDefValues.BlobText = '(данные)'
           TitleButtons = False
           AutoSort = False
@@ -393,7 +395,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
         Left = 0
         Height = 5
         Top = 506
-        Width = 1232
+        Width = 1246
         Align = alBottom
         ResizeAnchor = akBottom
       end
@@ -404,12 +406,12 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     object tabServerInfo: TTabSheet
       Caption = 'Server info'
       ClientHeight = 713
-      ClientWidth = 1232
+      ClientWidth = 1246
       object RxDBGrid3: TRxDBGrid
         Left = 0
         Height = 713
         Top = 0
-        Width = 1232
+        Width = 1246
         ColumnDefValues.BlobText = '(данные)'
         TitleButtons = True
         AutoSort = True
@@ -418,7 +420,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'PARAM'
-            Width = 601
+            Width = 614
             FieldName = 'PARAM'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -433,7 +435,7 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
             Title.Alignment = taCenter
             Title.Orientation = toHorizontal
             Title.Caption = 'VALUE'
-            Width = 600
+            Width = 613
             FieldName = 'VALUE'
             EditButtons = <>
             Filter.DropDownRows = 0
@@ -521,11 +523,11 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     Left = 0
     Height = 41
     Top = 41
-    Width = 1236
+    Width = 1250
     Align = alTop
     AutoSize = True
     ClientHeight = 41
-    ClientWidth = 1236
+    ClientWidth = 1250
     TabOrder = 2
     object CheckBox3: TCheckBox
       AnchorSideLeft.Control = SpinEdit4
@@ -602,7 +604,6 @@ inherited fbmTransactionMonitorForm: TfbmTransactionMonitorForm
     PassWord = 'masterkey'
     StoreInDFM = False
     AfterConnect = UIBDataBase1AfterConnect
-    Connected = True
     AllowStreamedConnected = False
     DefTransactionRead = UIBTransaction1
     Left = 496
